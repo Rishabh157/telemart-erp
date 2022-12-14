@@ -2,7 +2,7 @@ import { MdSpaceDashboard } from 'react-icons/md'
 import { RiShoppingBag3Fill } from 'react-icons/ri'
 import { BsFillPeopleFill } from 'react-icons/bs'
 import { FaWarehouse } from 'react-icons/fa'
-import { MdPlace, MdInventory } from 'react-icons/md'
+import {  MdInventory } from 'react-icons/md'
 import { FcDataConfiguration } from 'react-icons/fc'
 
 import { IconType } from 'react-icons'
@@ -61,21 +61,10 @@ export const navigation: NavItemType[] = [
     icon: MdInventory,
   },
   {
-    label: "Configurations",
-    path: "",
+    label: "Configuration",
+    path: "/configuration/companies",
     icon: FcDataConfiguration,
-    children: [
-      {
-        label: "Districts",
-        path: "/districts",
-        icon: MdPlace
-      },
-      {
-        label: "Districts",
-        path: "/districts",
-        icon: MdPlace
-      },
-    ]
+   
   },
   {
     label: "Test",

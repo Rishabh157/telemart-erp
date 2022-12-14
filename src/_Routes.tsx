@@ -1,5 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import AddCompanyWrapper from './pages/configuration/screens/companies/add/AddCompanyWrapper'
+import CompaniesListingWrapper from './pages/configuration/screens/companies/list/CompaniesListingWrapper'
+import Locations from './pages/configuration/screens/locations/Locations'
+import OrganisationHierarchyWrapper from './pages/configuration/screens/organisationHierarchy/list/OrganisationHierarchyWrapper'
 import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
 import DealersListingWrapper from './pages/dealers/list/DealersListingWrapper'
 import ViewDealer from './pages/dealers/view'
@@ -38,6 +42,11 @@ const _Routes = () => {
           </Route>
           <Route path='users' element={<UsersListingWrapper />} />
           <Route path='test' element={<Test />} />
+          <Route path='configuration/companies' element={<CompaniesListingWrapper />} />
+          <Route path='configuration/companies/add-company' element={<AddCompanyWrapper />} />
+          <Route path='configuration/organizations-hierarchy' element={<OrganisationHierarchyWrapper />} />
+          <Route path='configuration/locations' element={<Locations />} />
+
 
         </Routes>
       </BrowserRouter>
