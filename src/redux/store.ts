@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { dealerApi, userApi, vendorApi } from "src/services";
-import { dealerSlice, userSlice, vendorSlice } from "./slices";
+import { companyApi, dealerApi, userApi, vendorApi } from "src/services";
+import { companySlice, dealerSlice, userSlice, vendorSlice } from "./slices";
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -17,9 +17,11 @@ const store = configureStore({
         dealer: dealerSlice,
         vendor: vendorSlice,
         user: userSlice,
+        company: companySlice,
         [dealerApi.reducerPath]: dealerApi.reducer,
         [vendorApi.reducerPath]: vendorApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
+        [companyApi.reducerPath]: companyApi.reducer,
 
 
     },
@@ -32,6 +34,7 @@ const store = configureStore({
                 dealerApi.middleware,
                 vendorApi.middleware,
                 userApi.middleware,
+                companyApi.middleware,
             ]),
 })
 
