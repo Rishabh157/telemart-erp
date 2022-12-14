@@ -85,11 +85,11 @@ const ATMTable = <T extends {}>({
 
                         rows.length ?
                             (
-                                rows.map((row: any) => (
+                                rows.map((row: any, rowIndex) => (
 
                                     <div
                                         onClick={() => onRowClick && onRowClick(row)}
-                                        key={row[idKey]}
+                                        key={row[idKey] || rowIndex}
                                         className={`flex items-center rounded  py-3 px-2  hover:shadow-lg bg-white shadow-md ${onRowClick && 'cursor-pointer'} ${rowExtraClasses && rowExtraClasses(row)} `} >
 
                                         {/* Checkbox */}
