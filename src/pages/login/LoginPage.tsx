@@ -1,7 +1,7 @@
 import React from 'react'
 import ATMInputAdormant from '../../components/UI/atoms/ATMInputAdormant/ATMInputAdormant'
 import ATMTextField from '../../components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import loginImg from '/home/himanshu/Desktop/telemart-erp/src/assets/images/login.jpeg'
+import loginImg from 'src/assets/images/login.jpeg'
 import { BiShow, BiHide } from 'react-icons/bi'
 import { RiGoogleFill } from 'react-icons/ri'
 import { useState } from 'react'
