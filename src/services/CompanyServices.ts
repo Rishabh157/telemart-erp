@@ -77,9 +77,22 @@ export const companyApi = createApi({
                 method: "GET",
                 // body,
             })
+        }),
+
+        // **** Delete
+        deleteCompany: builder.mutation({
+            invalidatesTags: ['company'],
+            query: (id) => ({
+                url: `/${id}`,
+                headers: {
+                    'x-access-token': authToken
+                },
+
+                method: "DELETE",
+            })
         })
 
 
     })
 })
-export const { useGetCompaniesQuery, useAddCompanyMutation, useUpdateCompanyMutation, useGetCompanyByIdQuery, useExportCompanyDataMutation } = companyApi
+export const { useGetCompaniesQuery, useAddCompanyMutation, useUpdateCompanyMutation, useGetCompanyByIdQuery, useExportCompanyDataMutation, useDeleteCompanyMutation } = companyApi

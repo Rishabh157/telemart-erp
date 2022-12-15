@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { HiDotsHorizontal } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { DealersListResponse } from 'src/models'
@@ -8,29 +7,30 @@ import DelaersListing from './DealersListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setIsTableLoading, setItems, setTotalItems } from 'src/redux/slices/dealerSlice'
+import ATMMenu from 'src/components/UI/atoms/ATMMenu/ATMMenu'
 
 const columns: columnTypes[] = [
     {
         field: "dealerName",
         headerName: "Name",
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: any) => (
-            <span className='text-primary-main ' > {row.dealerName} </span>
+        renderCell: (row: DealersListResponse) => (
+            <span className='text-primary-main ' > {`${row.firstName} ${row.lastName}`} </span>
         )
     },
     {
         field: "dealerCode",
         headerName: "Dealer Code",
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: any) => <span>  {row.dealerCode} </span>
+        renderCell: (row: DealersListResponse) => <span>  {row.dealerCode} </span>
     },
     {
-        field: "district",
-        headerName: "District",
+        field: "address",
+        headerName: "Address",
         flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: any) => {
+        renderCell: (row: DealersListResponse) => {
             return (
-                <span  className='text-primary-main ' > {row.district} </span>
+                <span className='text-primary-main ' > {row.registeredAddress} </span>
             )
         }
     },
@@ -43,8 +43,15 @@ const columns: columnTypes[] = [
         field: "actions",
         headerName: "Actions",
         flex: 'flex-[0.5_0.5_0%]',
-        renderCell: (row: any) => (
-            <button onClick={(e) => e.stopPropagation()} className='text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full' > <HiDotsHorizontal className='text-xl text-slate-600 font-bold ' /> </button>
+        renderCell: (row: DealersListResponse) => (
+            <ATMMenu
+                options={[
+                    {
+                        label: "Delete",
+                        onClick: () => { alert("Delete") }
+                    }
+                ]}
+            />
         ),
         align: 'end'
     },
@@ -102,7 +109,7 @@ const DealersListingWrapper = () => {
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching ,data])
+    }, [isLoading, isFetching, data])
 
     return (
         <>

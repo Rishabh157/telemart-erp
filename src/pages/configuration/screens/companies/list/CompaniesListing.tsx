@@ -112,7 +112,7 @@ const CompaniesListing = ({
                             page={page}
                             onPageChange={(newPage) => dispatch(setPage(newPage))}
                             rowsPerPage={rowsPerPage}
-                            rowCount={2}
+                            rowCount={6}
                             rows={rows}
                             onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
 

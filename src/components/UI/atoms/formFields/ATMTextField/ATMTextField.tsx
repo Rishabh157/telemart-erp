@@ -3,7 +3,7 @@ import React from 'react'
 
 export type ATMTextFieldPropTypes = {
     name: string;
-    value: string;
+    value: string | string[];
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     label?: string;
 } & React.ComponentProps<'input'>
@@ -15,6 +15,7 @@ const ATMTextField = ({
     onChange,
     label,
     required,
+    
     ...rest
 }: ATMTextFieldPropTypes
 ) => {
@@ -30,6 +31,7 @@ const ATMTextField = ({
                 onChange={(e) => { onChange(e) }}
                 className={`h-[40px] w-full p-1 text-slate-700 border border-slate-400 outline-blue-400 rounded ${label && 'mt-1'}  ${className}`}
                 {...rest}
+                type='textarea'
 
             />
             {
