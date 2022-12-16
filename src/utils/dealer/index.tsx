@@ -27,19 +27,30 @@ const formFields: FormFieldType[] = [
         className: "",
         children: [
             {
-                name: "lastName",
-                label: "Last Name",
-                placeholder: "enter last name",
+                name: "firstName",
+                label: "First Name",
+                placeholder: "Enter first name",
                 required: false,
+                // extraClasses: "lg:col-span-6"
 
             },
             {
-                name: "dealerCode",
-                label: "Dealer Code",
-                placeholder: "Enter dealer code",
+                name: "lastName",
+                label: "Last Name",
+                placeholder: "Enter last name",
+                required: false,
+                // extraClasses: "lg:col-span-6"
+
+
+            },
+            {
+                name: "email",
+                label: "Email",
+                placeholder: "Enter email",
                 required: false,
 
             },
+
             {
                 name: "contactNo",
                 label: "Contact No",
@@ -50,21 +61,36 @@ const formFields: FormFieldType[] = [
             {
                 name: "mobile",
                 label: "Mobile",
-                placeholder: "enter mobile number",
+                placeholder: "Enter mobile number",
+                required: false,
+
+            },
+
+            {
+                name: "dealerCode",
+                label: "Dealer Code",
+                placeholder: "Enter dealer code",
                 required: false,
 
             },
             {
-                name: "email",
-                label: "Email",
-                placeholder: "Enter email",
+                name: "pan",
+                label: "Pan No",
+                placeholder: "Enter PAN number",
+                required: false,
+
+            },
+            {
+                name: "aadharNo",
+                label: "Aadhar No",
+                placeholder: "Enter aadhar number",
                 required: false,
 
             },
         ]
     },
     {
-        groupName: "Address",
+        groupName: "Firm Details",
         className: "",
         children: [
             {
@@ -72,15 +98,18 @@ const formFields: FormFieldType[] = [
                 label: "Firm Name",
                 placeholder: "Enter firm name",
                 required: false,
+                // extraClasses: "lg:col-span-6"
 
             },
             {
-                name: "registeredAddress",
-                label: "Regd. Address",
-                placeholder: "Enter registered address",
+                name: "gstNo",
+                label: "GST No",
+                placeholder: "Enter GSt number",
                 required: false,
+                // extraClasses: "lg:col-span-6"
 
             },
+
 
             {
                 name: "state",
@@ -104,12 +133,16 @@ const formFields: FormFieldType[] = [
 
             },
             {
-                name: "shippingAddresses",
-                label: "Shipping Address",
-                placeholder: "Enter shipping address",
+                name: "registeredAddress",
+                label: "Regd. Address",
+                placeholder: "Enter registered address",
                 required: false,
+                extraClasses: "lg:col-span-12"
+
 
             },
+
+
         ]
     },
     {
@@ -117,23 +150,9 @@ const formFields: FormFieldType[] = [
         className: "",
         children: [
             {
-                name: "gstNo",
-                label: "GST No",
-                placeholder: "Enter GSt number",
-                required: false,
-
-            },
-            {
-                name: "pan",
-                label: "Pan No",
-                placeholder: "Enter PAN number",
-                required: false,
-
-            },
-            {
-                name: "aadharNo",
-                label: "Aadhar No",
-                placeholder: "Enter aadhar number",
+                name: "shippingAddresses",
+                label: "Shipping Address",
+                placeholder: "Enter shipping address",
                 required: false,
 
             },
@@ -153,7 +172,7 @@ export const renderFormFields = (values: AddDealerFormValues, setFieldValue: (fi
                     <div className="py-6" >
                         <Divider className="text-primary-main" >{groupName}</Divider>
                     </div>
-                    <div className="grid grid-cols-12 gap-3" >
+                    <div className="grid grid-cols-12 gap-6 " >
 
                         {
                             children.map((childField, childFieldIndex) => {
@@ -172,23 +191,49 @@ export const renderFormFields = (values: AddDealerFormValues, setFieldValue: (fi
 
                                                                 {
                                                                     values.shippingAddresses.map((ele, index) => (
-                                                                        <ATMTextField
-                                                                            name={`shippingAddresses[${index}]`}
-                                                                            value={values.shippingAddresses[index]}
-                                                                            onChange={(e) => setFieldValue(`shippingAddresses[${index}]`, e.target.value)}
-                                                                            label={label}
-                                                                            placeholder={placeholder}
-                                                                            required={required}
-                                                                            
-                                                                        />
+                                                                        <div className="grid grid-cols-2 gap-3 border p-3 rounded" >
+                                                                            <div>
+                                                                                <ATMTextField
+                                                                                    name={`shippingAddresses[${index}]`}
+                                                                                    value={values.shippingAddresses[index]}
+                                                                                    onChange={(e) => setFieldValue(`shippingAddresses[${index}]`, e.target.value)}
+                                                                                    label='District'
+                                                                                    placeholder={placeholder}
+                                                                                    required={required}
+                                                                                />
+
+                                                                            </div>
+                                                                            <div>
+                                                                                <ATMTextField
+                                                                                    name={`shippingAddresses[${index}]`}
+                                                                                    value={values.shippingAddresses[index]}
+                                                                                    onChange={(e) => setFieldValue(`shippingAddresses[${index}]`, e.target.value)}
+                                                                                    label="State"
+                                                                                    placeholder={placeholder}
+                                                                                    required={required}
+                                                                                />
+
+                                                                            </div>
+                                                                            <div className="col-span-2" >
+                                                                                <ATMTextField
+                                                                                    name={`shippingAddresses[${index}]`}
+                                                                                    value={values.shippingAddresses[index]}
+                                                                                    onChange={(e) => setFieldValue(`shippingAddresses[${index}]`, e.target.value)}
+                                                                                    label="Address"
+                                                                                    placeholder={placeholder}
+                                                                                    required={required}
+                                                                                />
+
+                                                                            </div>
+                                                                        </div>
 
                                                                     ))
                                                                 }
 
                                                             </div>
 
-                                                            <div>
-                                                                <button> Add </button>
+                                                            <div className="mt-2 flex justify-end" >
+                                                                <button className="text-white bg-primary-main py-1 px-3 rounded" > Add </button>
                                                             </div>
 
                                                         </div>

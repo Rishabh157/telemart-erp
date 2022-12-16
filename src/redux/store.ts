@@ -6,7 +6,7 @@ import { companySlice, dealerSlice, userSlice, vendorSlice } from "./slices";
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
 //     if (action.type.includes("rejected") && action.payload.status === 401) {
-//         localStorage.clear()
+//         localStorage.clear(
 //         window.location.href = "/"
 //     }
 //     return next(action)
