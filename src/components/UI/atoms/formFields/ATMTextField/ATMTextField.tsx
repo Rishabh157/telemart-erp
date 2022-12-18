@@ -29,7 +29,7 @@ const ATMTextField = ({
                 name={name}
                 value={value}
                 onChange={(e) => { onChange(e) }}
-                className={`h-[40px] w-full p-1 text-slate-700 border border-slate-400 outline-blue-400 rounded ${label && 'mt-1'}  ${className}`}
+                className={`h-[40px] w-full px-2 text-slate-700 border border-slate-400 outline-blue-400  ${label && 'mt-1'}  ${className}`}
                 {...rest}
                 type='textarea'
 

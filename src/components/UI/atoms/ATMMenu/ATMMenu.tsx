@@ -2,7 +2,7 @@ import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { HiDotsHorizontal } from 'react-icons/hi';
+import { HiDotsHorizontal , HiDotsVertical } from 'react-icons/hi';
 
 const ITEM_HEIGHT = 48;
 
@@ -13,10 +13,13 @@ type OptionType = {
 
 type Props = {
     options: OptionType[],
+    orientation?: 'vertical' | 'horizontal'
+
 }
 
 const ATMMenu = ({
     options,
+    orientation= 'horizontal'
 }: Props
 ) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -39,8 +42,16 @@ const ATMMenu = ({
                 aria-expanded={open ? 'true' : undefined}
                 aria-haspopup="true"
                 onClick={handleClick}
-            >
-                <HiDotsHorizontal />
+            >  
+            {
+                orientation === 'vertical' ? 
+                ( <HiDotsVertical/> )
+                :
+                (
+                    <HiDotsHorizontal />
+                )
+                
+            }
             </IconButton>
             <Menu
                 id="long-menu"

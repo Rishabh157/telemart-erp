@@ -172,7 +172,7 @@ export const renderFormFields = (values: AddDealerFormValues, setFieldValue: (fi
                     <div className="py-6" >
                         <Divider className="text-primary-main" >{groupName}</Divider>
                     </div>
-                    <div className="grid grid-cols-12 gap-6 " >
+                    <div className="grid grid-cols-12 gap-6 py-3 " >
 
                         {
                             children.map((childField, childFieldIndex) => {
@@ -198,7 +198,7 @@ export const renderFormFields = (values: AddDealerFormValues, setFieldValue: (fi
                                                                                     value={values.shippingAddresses[index]}
                                                                                     onChange={(e) => setFieldValue(`shippingAddresses[${index}]`, e.target.value)}
                                                                                     label='District'
-                                                                                    placeholder={placeholder}
+                                                                                    placeholder="Enter district"
                                                                                     required={required}
                                                                                 />
 
@@ -209,7 +209,7 @@ export const renderFormFields = (values: AddDealerFormValues, setFieldValue: (fi
                                                                                     value={values.shippingAddresses[index]}
                                                                                     onChange={(e) => setFieldValue(`shippingAddresses[${index}]`, e.target.value)}
                                                                                     label="State"
-                                                                                    placeholder={placeholder}
+                                                                                    placeholder="Enter state"
                                                                                     required={required}
                                                                                 />
 
@@ -220,7 +220,7 @@ export const renderFormFields = (values: AddDealerFormValues, setFieldValue: (fi
                                                                                     value={values.shippingAddresses[index]}
                                                                                     onChange={(e) => setFieldValue(`shippingAddresses[${index}]`, e.target.value)}
                                                                                     label="Address"
-                                                                                    placeholder={placeholder}
+                                                                                    placeholder="Enter Address"
                                                                                     required={required}
                                                                                 />
 
