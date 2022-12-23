@@ -15,6 +15,18 @@ const policiesList= [
     {
         label: "Dealers"
     },
+    {
+        label: "Dealers"
+    },
+    {
+        label: "Dealers"
+    },
+    {
+        label: "Dealers"
+    },
+    {
+        label: "Dealers"
+    },
 ]
 
 const PolicyListingWrapper = () => {

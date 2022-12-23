@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { setPage, setRowsPerPage } from 'src/redux/slices/userSlice'
-import { UsersListResponse } from 'src/models/Users.model '
+import { useDispatch, useSelector } from 'react-redux'
+import { setPage, setRowsPerPage } from 'src/redux/slices/warehouseSlice'
+import { WarehousesListResponse } from 'src/models'
 
 export type Props = {
     columns: columnTypes[];
-    rows: UsersListResponse[] | [];
-    onRowClick: (row: UsersListResponse) => void;
-    rowExtraClasses?: (row: UsersListResponse) => void;
+    rows: WarehousesListResponse[] | [];
+    onRowClick: (row: WarehousesListResponse) => void;
+    rowExtraClasses?: (row: WarehousesListResponse) => void;
     isTableLoading: boolean
 }
 
-const UsersListing = ({
+const WarehousesListing = ({
     columns,
     rows,
     onRowClick,
@@ -27,13 +27,13 @@ const UsersListing = ({
 }: Props
 ) => {
 
-    const dealerState: any = useSelector((state: RootState) => state.dealer)
+    const warehouseState: any = useSelector((state: RootState) => state.warehouse)
 
     const {
         page,
         rowsPerPage,
         totalItems,
-    } = dealerState
+    } = warehouseState
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -45,13 +45,10 @@ const UsersListing = ({
 
     return (
         <SideNavLayout>
-
             <div className='w-full h-full py-2 ' >
-
                 <div className='h-[100px] ' >
-
                     <div className='mb-5 text-2xl text-slate-700 font-bold ' >
-                        Users
+                        Warehouses
                     </div>
                     <div className='flex justify-between' >
 
@@ -84,9 +81,9 @@ const UsersListing = ({
                             <button
                                 type='button'
                                 className='flex items-center gap-2 bg-primary-main text-white text-sm h-[33px] px-4 rounded font-bold'
-                                onClick={() => { navigate('add-order') }}
+                                onClick={() => { navigate('add-warehouse') }}
                             >
-                                <span className='text-xl' > + </span>   Add User
+                                <span className='text-xl' > + </span>   Add Warehouse
                             </button>
                         </div>
                     </div>
@@ -125,5 +122,4 @@ const UsersListing = ({
     )
 }
 
-export default UsersListing
-
+export default WarehousesListing

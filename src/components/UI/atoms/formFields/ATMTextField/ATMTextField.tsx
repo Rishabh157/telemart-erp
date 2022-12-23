@@ -15,12 +15,11 @@ const ATMTextField = ({
     onChange,
     label,
     required,
-    
     ...rest
 }: ATMTextFieldPropTypes
 ) => {
     return (
-        <div className='relative' >
+        <div className='relative ' >
             {
                 label &&
                 <label className='text-slate-500' > {label} {required && <span className='text-red-500'> * </span>} </label>

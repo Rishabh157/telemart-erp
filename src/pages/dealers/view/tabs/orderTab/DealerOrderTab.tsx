@@ -4,7 +4,7 @@ import { HiDotsHorizontal } from 'react-icons/hi'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { renderorderStatus } from 'src/utils/renderOrderStatus'
-import ATMInputAdormant from 'src/components/UI/atoms/ATMInputAdormant/ATMInputAdormant'
+import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 
 const columns: columnTypes[] = [

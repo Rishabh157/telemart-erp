@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 
 type BreadcrumbsList = {
     label: string;
-    onClick: () => void
+    onClick?: () => void
 }
 
 type Props = {
@@ -34,7 +34,7 @@ const ATMPageHeader = ({
                                 <div
                                     key={listItemIndex}
                                     className={twMerge(`text-sm ${listItemIndex === (breadcrumbsList.length - 1) ? "text-primary-main" : "hover:border-b border-slate-400 cursor-pointer"}`)}
-                                    onClick={() => { listItemIndex !== (breadcrumbsList.length - 1) && onClick() }}
+                                    onClick={() => { listItemIndex !== (breadcrumbsList.length - 1) && onClick && onClick() }}
                                 >
                                     {label}
                                 </div>

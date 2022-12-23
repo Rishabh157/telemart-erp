@@ -1,6 +1,6 @@
 import React from 'react'
 import { BiSearchAlt2 } from 'react-icons/bi';
-import ATMInputAdormant from 'src/components/UI/atoms/ATMInputAdormant/ATMInputAdormant';
+import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant';
 
 type Props = {
     listHeading: string,

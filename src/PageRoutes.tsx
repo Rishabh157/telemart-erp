@@ -4,6 +4,7 @@ import AddCompanyWrapper from './pages/configuration/screens/companies/add/AddCo
 import CompaniesListingWrapper from './pages/configuration/screens/companies/list/CompaniesListingWrapper'
 import Locations from './pages/configuration/screens/locations/Locations'
 import OrganisationHierarchyWrapper from './pages/configuration/screens/organisationHierarchy/list/OrganisationHierarchyWrapper'
+import AddPolicyWrapper from './pages/configuration/screens/policies/add/AddPolicyWrapper'
 import PolicyListingWrapper from './pages/configuration/screens/policies/list/PolicyListingWrapper'
 import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
 import DealersListingWrapper from './pages/dealers/list/DealersListingWrapper'
@@ -16,6 +17,8 @@ import Test from './pages/test/Test'
 import UsersListingWrapper from './pages/users/list/UsersListingWrapper'
 import VendorsListingWrapper from './pages/vendors/list/VendorsListingWrapper'
 import ViewVendor from './pages/vendors/view'
+import AddWarehouseWrapper from './pages/warehouses/add/AddWarehouseWrapper'
+import WarehousesListingWrapper from './pages/warehouses/list/WarehousesListingWrapper'
 
 const PageRoutes = () => {
   return (
@@ -35,6 +38,10 @@ const PageRoutes = () => {
             <Route path='delivery-boys' element={"Delivery Boys"} />
 
           </Route>
+
+          <Route path='/warehouse' element={<WarehousesListingWrapper />} />
+          <Route path='/warehouse/add-warehouse' element={<AddWarehouseWrapper />} />
+
           <Route path='/dealers/:dealerId' element={<ViewDealer />} >
             <Route path='orders' element={<DealerOrderTab />} />
             <Route path='activities' element={"Activities"} />
@@ -48,6 +55,7 @@ const PageRoutes = () => {
           <Route path='configuration/organizations-hierarchy' element={<OrganisationHierarchyWrapper />} />
           <Route path='configuration/locations' element={<Locations />} />
           <Route path='configuration/policies' element={<PolicyListingWrapper />} />
+          <Route path='configuration/policies/add-policy' element={<AddPolicyWrapper />} />
 
 
 

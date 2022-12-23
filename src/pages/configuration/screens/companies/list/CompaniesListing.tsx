@@ -3,7 +3,7 @@ import { BiSearchAlt2 } from 'react-icons/bi'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import ATMExportButton from 'src/components/UI/atoms/ATMExportButton/ATMExportButton'
-import ATMInputAdormant from 'src/components/UI/atoms/ATMInputAdormant/ATMInputAdormant'
+import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
@@ -100,9 +100,7 @@ const CompaniesListing = ({
                 <ATMTable
                     columns={columns}
                     rows={rows}
-                    // isCheckbox={true}
                     isLoading={isTableLoading}
-
                     extraClasses='max-h-[calc(100%-150px)] overflow-auto'
                 />
 
