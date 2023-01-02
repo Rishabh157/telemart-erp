@@ -1,118 +1,69 @@
-import React, { ChangeEvent, ReactNode, useState } from 'react'
-import { twMerge } from 'tailwind-merge';
-import { MdArrowDropDown } from 'react-icons/md'
-import { ClickAwayListener } from '@mui/material';
+import { ThemeContext } from "@emotion/react";
+import React, { useEffect, useState } from "react";
+import Select, { Options } from "react-select";
 
 type Props = {
-    value: any;
-    renderValue: (value: any) => string | number | React.ReactNode
-    onSelect: (newValue: any) => void;
-    options: { label: string | ReactNode, value: any }[],
-    label?: string;
-    required?: boolean;
-    placeholder?: string;
-    extraClasses?: string;
-    noOptionText?: string;
-    isSearchBox?: false;
-    searchValue?: string;
-    onSearchChange?: (e: ChangeEvent<HTMLInputElement>, newValue: string) => void;
-    maxHeight?: string;
-}
-
-const ATMSelect = ({
-    value,
-    renderValue,
-    onSelect,
-    required = false,
-    isSearchBox,
-    searchValue,
-    onSearchChange,
-    label,
-    noOptionText = "No Option",
-    extraClasses = '',
-    options,
-    placeholder,
-    maxHeight
-}: Props
-) => {
-
-    const [toggleOpenSelect, setToggleOpenSelect] = useState(false);
-    console.log(window.screen.height)
+  options: any[];
+  value: any;
+  onChange: (value: any) => void;
+  label?: string;
+  required?: boolean;
 
 
-    return (
-        <div >
-            {
-                label ?
-                    <label className='text-slate-700 mb-1 block ' > {label}  {required && <span className='text-red-400' > * </span>} </label>
-                    :
-                    null
+};
+
+const ATMSelect = ({ 
+  options, 
+  label,
+  required= false, 
+  value,
+  onChange,
+}: Props) => {
+  const [isClearable, setIsClearable] = useState(true);
+  const [isSearchable, setIsSearchable] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  return (
+    <>
+      <div className="relative flex flex-col">
+        {label && (
+          <label className="text-slate-500">
+            {label} {required && <span className="text-red-500"> * </span>}
+          </label>
+        )}
+        <Select
+          name="color"
+          
+          className={`basic-single  ${label && 'mt-1'}`}
+          theme= {(theme)=> {
+            return {
+              ...theme,
+              borderRadius: 0,
+              spacing: {
+                ...theme.spacing,
+                controlHeight: 40
+              }
             }
-
-            <div className='relative' >
-
-                {
-                    toggleOpenSelect &&
-                    <ClickAwayListener
-                        onClickAway={() => setToggleOpenSelect(false)}
-                    >
-
-                        <div className='shadow absolute w-full  text-slate-600 pt-1 rounded bg-white max-h-[80px] overflow-auto bottom-0' >
-                            <ul className='h-full' >
-                                {
-                                    options.map((option, optionIndex) => {
-                                        return (
-                                            <li key={optionIndex} onClick={() => { onSelect(option); setToggleOpenSelect(false) }} className={twMerge(`py-1 px-2 cursor-pointer hover:bg-slate-100 ${value === option && "bg-slate-100"}`)} >
-                                                {
-                                                    option.label
-                                                }
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-
-                        </div>
-                    </ClickAwayListener>
-                }
-
-                <button onClick={(e) => { console.log(e.screenY); setToggleOpenSelect(prev => !prev) }} className={twMerge(`w-full h-[35px] px-2 border text-slate-600 rounded flex items-center bg-white`)} >
-                    {
-                        renderValue(value)
-                    }
-                    <span className='absolute right-2' >
-                        <MdArrowDropDown className='text-2xl text-slate-600' />
-                    </span>
-                </button>
-
-                {
-                    toggleOpenSelect &&
-                    <ClickAwayListener
-                        onClickAway={() => setToggleOpenSelect(false)}
-                    >
-
-                        <div className='shadow absolute w-full  text-slate-600 pt-1 rounded bg-white max-h-[80px] overflow-auto' >
-                            <ul className='h-full' >
-                                {
-                                    options.map((option, optionIndex) => {
-                                        return (
-                                            <li key={optionIndex} onClick={() => { onSelect(option); setToggleOpenSelect(false) }} className={twMerge(`py-1 px-2 cursor-pointer hover:bg-slate-100 ${value === option && "bg-slate-100"}`)} >
-                                                {
-                                                    option.label
-                                                }
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-
-                        </div>
-                    </ClickAwayListener>
-                }
-
-            </div>
-        </div >
-    )
-}
-
-export default ATMSelect
+          }}
+          // classNamePrefix="select"
+          value={value}
+          onChange={(newValue) => onChange(newValue)}
+          isDisabled={isDisabled}
+          isLoading={isLoading}
+          isClearable={isClearable}
+          isSearchable={isSearchable}
+          options={options}
+          isOptionSelected={(option, selectValue) => {
+            console.log(option, selectValue);
+            return option.value === selectValue[0].value;
+          }}
+          formatOptionLabel={(data) => {
+            return <div style={{ color: data.color }}> {data.label} </div>;
+          }}
+        />
+      </div>
+    </>
+  );
+};
+export default ATMSelect;

@@ -1,5 +1,5 @@
 import React from 'react'
-import ATMInputAdormant from '../../components/UI/atoms/ATMInputAdormant/ATMInputAdormant'
+import ATMInputAdormant from '../../components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMTextField from '../../components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import loginImg from 'src/assets/images/login.jpeg'
 import { BiShow, BiHide } from 'react-icons/bi'

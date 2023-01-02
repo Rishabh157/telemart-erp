@@ -5,6 +5,8 @@ import { TbHierarchy } from 'react-icons/tb'
 import { SlLocationPin } from 'react-icons/sl'
 import { IconType } from 'react-icons'
 import { MdSpaceDashboard } from 'react-icons/md'
+import { CgList } from 'react-icons/cg'
+
 
 type ListType = {
     label: string,
@@ -32,6 +34,11 @@ const configurationList: ListType[] = [
         label: "Locations",
         path: "/configuration/locations",
         icon: SlLocationPin
+    },
+    {
+        label: "Policies",
+        path: "/configuration/policies",
+        icon: CgList
     }
 ]
 

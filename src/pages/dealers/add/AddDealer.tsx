@@ -1,90 +1,67 @@
+import { FormikProps } from 'formik'
 import React from 'react'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { useNavigate } from 'react-router-dom'
+import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import ATMPageHeader from 'src/components/UI/atoms/ATMPageHeader/ATMPageHeader'
+import { renderFormFields } from 'src/utils/dealer/formFields'
+import { AddDealerFormValues } from './AddDealerWrapper'
 
 type Props = {
-    values: any,
-    setFieldValue: (fieldName: string, value: any) => void
+    formikProps: FormikProps<AddDealerFormValues>
 }
 
 const AddDealer = ({
-    values,
-    setFieldValue,
+    formikProps,
 }: Props
 ) => {
 
+    const { values, setFieldValue, isSubmitting } = formikProps
+    const navigate = useNavigate()
+
+    // Constants
+    const breadcrumbsList = [
+        {
+            label: "Dealer",
+            onClick: () => { alert("Dealer") }
+        },
+        {
+            label: "Add Dealer",
+            onClick: () => { alert("Add Dealer") }
+        },
+
+    ]
+
     return (
         <>
+            <ATMPageHeader
+                pageTitle="Add Dealer"
+                breadcrumbsList={breadcrumbsList}
+            />
+            <div className='w-full h-[calc(100%-70px)]  flex justify-center' >
+                <div className='w-[100%]  px-12 max-h-full overflow-auto bg-white  shadow-lg rounded-lg relative '>
 
-            <div className='w-full p-2  rounded overflow-auto  grid grid-cols-12 gap-7' >
-                <div className='col-span-12 text-center text-xl text-slate-600 ' >  Add Dealer </div>
-                <div className='lg:col-span-4 md:col-span-6 col-span-12  h-fit' >
-                    <ATMTextField
-                        name='name'
-                        value={values.name}
-                        onChange={(e) => setFieldValue('name', e.target.value)}
-                        label='Name'
-                        placeholder='Enter dealer name'
-                        required
-                    />
-                </div>
+                    <div className='col-span-12 flex justify-end gap-3 sticky top-0 bg-white z-50 py-5'>
+                        <button type='button' onClick={() => navigate("/dealers")} className='border w-[100px] border-primary-main text-primary-main rounded p-2' > Cancel </button>
 
-                <div className='lg:col-span-4 md:col-span-6 col-span-12  h-fit' >
-                    <ATMTextField
-                        name='mobile'
-                        value={values.mobile}
-                        onChange={(e) => setFieldValue('mobile', e.target.value)}
-                        label='Mobile'
-                        placeholder='Enter mobile no.'
-                        required
-                    />
-                </div>
+                        <div className='w-[150px]' >
 
-                <div className='lg:col-span-4 md:col-span-6 col-span-12  h-fit' >
-                    <ATMTextField
-                        name='dealer_code'
-                        value={values.dealer_code}
-                        onChange={(e) => setFieldValue('dealer_code', e.target.value)}
-                        label='Dealer Code'
-                        placeholder='Enter dealer code'
-                        required
-                    />
-                </div>
+                            <ATMLoadingButton
+                                type='submit'
+                                isLoading={isSubmitting}
+                                disabled={isSubmitting}
 
-                <div className='lg:col-span-4 md:col-span-6 col-span-12  h-fit' >
-                    <ATMTextField
-                        name='district'
-                        value={values.district}
-                        onChange={(e) => setFieldValue('district', e.target.value)}
-                        label='District'
-                        placeholder='Enter district'
-                        required
-                    />
-                </div>
+                            >
+                                Submit
+                            </ATMLoadingButton>
+                        </div>
+                    </div>
 
-                <div className='lg:col-span-4 md:col-span-6 col-span-12  h-fit' >
-                    <ATMTextField
-                        name='password'
-                        value={values.password}
-                        onChange={(e) => setFieldValue('password', e.target.value)}
-                        label='Password'
-                        placeholder='Enter password'
-                        required
-                    />
-                </div>
+                    <div className='w-full  rounded   grid grid-cols-12 gap-7' >
+                        {
+                            renderFormFields(values, setFieldValue)
+                        }
 
-                <div className='lg:col-span-4 md:col-span-6 col-span-12  h-fit' >
-                    <ATMTextField
-                        name='confirm_password'
-                        value={values.confirm_password}
-                        onChange={(e) => setFieldValue('confirm_password', e.target.value)}
-                        label='Confirm Password'
-                        placeholder='Enter confirm password'
-                        required
-                    />
-                </div>
-
-                <div className='col-span-12 flex justify-end'  >
-                    <button type='submit' className='border w-[100px] bg-primary-main text-white rounded p-2' > Submit </button>
+                    </div>
                 </div>
             </div>
         </>

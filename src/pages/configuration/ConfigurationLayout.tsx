@@ -21,13 +21,13 @@ const ConfigurationLayout = ({
                 <Header setIsShowSideNav={(newValue) => setIsShowSideNav(newValue)} isShowSideNav={isShowSideNav} />
             </div>
 
-            <div className='h-[calc(100vh-70px)] w-screen flex'>
+            <div className='h-[calc(100%-70px)] w-screen flex'>
 
                 <div className={`transition-all duration-[600ms] h-full ${isShowSideNav ? 'w-[270px]' : 'w-[60px] '} `} >
                     <ConfigurationSideBar isShowSideNav={isShowSideNav} />
                 </div>
 
-                <div className={`h-[calc(100vh-70px)] bg-slate-50 px-4  transition-all duration-[600ms] ${isShowSideNav ? "w-[calc(100vw-270px)]" : "w-[calc(100vw-60px)]"} `}>
+                <div className={`h-full bg-slate-50 px-4  transition-all duration-[600ms] ${isShowSideNav ? "w-[calc(100vw-270px)]" : "w-[calc(100vw-60px)]"} `}>
                     {children}
                 </div>
             </div>

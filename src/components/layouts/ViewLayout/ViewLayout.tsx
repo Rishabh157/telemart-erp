@@ -2,7 +2,7 @@ import React from 'react'
 import SideNavLayout from '../SideNavLayout/SideNavLayout'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import ATMInputAdormant from 'src/components/UI/atoms/ATMInputAdormant/ATMInputAdormant'
+import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import { IconType } from 'react-icons'
 
 type ViewLayoutPropTypes = {

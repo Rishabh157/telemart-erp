@@ -1,15 +1,13 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, ReactNode, useState } from 'react'
 import { twMerge } from 'tailwind-merge';
 import { MdArrowDropDown } from 'react-icons/md'
-import { BiSearchAlt2 } from 'react-icons/bi';
 import { ClickAwayListener } from '@mui/material';
 
 type Props = {
-    value: string;
+    value: any;
+    renderValue: (value: any) => string | number | React.ReactNode
     onSelect: (newValue: any) => void;
-    options: any[],
-    renderOption?: (option: any) => string | React.ReactNode,
-    renderValue?: (option: any) => string | React.ReactNode
+    options: { label: string | ReactNode, value: any }[],
     label?: string;
     required?: boolean;
     placeholder?: string;
@@ -18,11 +16,12 @@ type Props = {
     isSearchBox?: false;
     searchValue?: string;
     onSearchChange?: (e: ChangeEvent<HTMLInputElement>, newValue: string) => void;
-    isOptionEqualToValue?: (option: any, value: any) => boolean
+    maxHeight?: string;
 }
 
 const ATMSelect = ({
     value,
+    renderValue,
     onSelect,
     required = false,
     isSearchBox,
@@ -33,16 +32,16 @@ const ATMSelect = ({
     extraClasses = '',
     options,
     placeholder,
-    renderOption,
-    renderValue,
-    isOptionEqualToValue,
+    maxHeight
 }: Props
 ) => {
 
     const [toggleOpenSelect, setToggleOpenSelect] = useState(false);
+    console.log(window.screen.height)
+
 
     return (
-        <div>
+        <div >
             {
                 label ?
                     <label className='text-slate-700 mb-1 block ' > {label}  {required && <span className='text-red-400' > * </span>} </label>
@@ -50,10 +49,36 @@ const ATMSelect = ({
                     null
             }
 
-            <div className='relative'>
-                <button onClick={() => { setToggleOpenSelect(prev => !prev) }} className={twMerge(`w-full h-[35px] px-2 border text-slate-600 rounded flex items-center bg-white`)} >
+            <div className='relative' >
+
+                {
+                    toggleOpenSelect &&
+                    <ClickAwayListener
+                        onClickAway={() => setToggleOpenSelect(false)}
+                    >
+
+                        <div className='shadow absolute w-full  text-slate-600 pt-1 rounded bg-white max-h-[80px] overflow-auto bottom-0' >
+                            <ul className='h-full' >
+                                {
+                                    options.map((option, optionIndex) => {
+                                        return (
+                                            <li key={optionIndex} onClick={() => { onSelect(option); setToggleOpenSelect(false) }} className={twMerge(`py-1 px-2 cursor-pointer hover:bg-slate-100 ${value === option && "bg-slate-100"}`)} >
+                                                {
+                                                    option.label
+                                                }
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+
+                        </div>
+                    </ClickAwayListener>
+                }
+
+                <button onClick={(e) => { console.log(e.screenY); setToggleOpenSelect(prev => !prev) }} className={twMerge(`w-full h-[35px] px-2 border text-slate-600 rounded flex items-center bg-white`)} >
                     {
-                        renderValue ? renderValue(options.find((option) => isOptionEqualToValue && isOptionEqualToValue(option, value))) : value
+                        renderValue(value)
                     }
                     <span className='absolute right-2' >
                         <MdArrowDropDown className='text-2xl text-slate-600' />
@@ -62,22 +87,27 @@ const ATMSelect = ({
 
                 {
                     toggleOpenSelect &&
-                    <div className='shadow absolute w-full  text-slate-600 pt-1 rounded bg-white ' >
-                        <ul>
-                            {
-                                options.map((option) => {
-                                    return (
-                                        <li onClick={() => { onSelect(option); setToggleOpenSelect(false) }} className={twMerge(`py-1 px-2 cursor-pointer hover:bg-slate-100 ${value === option && "bg-slate-100"}`)} >
-                                            {
-                                                renderOption ? renderOption(option) : option
-                                            }
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
+                    <ClickAwayListener
+                        onClickAway={() => setToggleOpenSelect(false)}
+                    >
 
-                    </div>
+                        <div className='shadow absolute w-full  text-slate-600 pt-1 rounded bg-white max-h-[80px] overflow-auto' >
+                            <ul className='h-full' >
+                                {
+                                    options.map((option, optionIndex) => {
+                                        return (
+                                            <li key={optionIndex} onClick={() => { onSelect(option); setToggleOpenSelect(false) }} className={twMerge(`py-1 px-2 cursor-pointer hover:bg-slate-100 ${value === option && "bg-slate-100"}`)} >
+                                                {
+                                                    option.label
+                                                }
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+
+                        </div>
+                    </ClickAwayListener>
                 }
 
             </div>

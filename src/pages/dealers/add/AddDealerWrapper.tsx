@@ -4,19 +4,46 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { object, string } from 'yup'
 import AddDealer from './AddDealer'
 
+export type AddDealerFormValues = {
+    firstName: string;
+    lastName: string;
+    dealerCode: string;
+    firmName: string;
+    registeredAddress: string;
+    pincode: string;
+    state: string;
+    district: string;
+    contactNo: string;
+    mobile: string;
+    email: string;
+    gstNo: string;
+    pan: string;
+    aadharNo: string;
+    shippingAddresses: string[];
+}
+
 const AddDealerWrapper = () => {
 
     const initialValues = {
-        name: "",
-        mobile: "",
-        dealer_code: "",
+        firstName: "",
+        lastName: "",
+        dealerCode: "",
+        firmName: "",
+        registeredAddress: "",
+        pincode: "",
+        state: "",
         district: "",
-        password: "",
-        confirm_password: "",
+        contactNo: "",
+        mobile: "",
+        email: "",
+        gstNo: "",
+        pan: "",
+        aadharNo: "",
+        shippingAddresses: ["" , ""],
     }
 
     const validationSchema = object({
-        name: string().required('Please enter a name')
+        firstName: string().required('Please enter first name')
     })
 
     const onSubmitHandler = (values: any) => {
@@ -34,12 +61,11 @@ const AddDealerWrapper = () => {
 
                     >
                         {
-                            ({ values, setFieldValue }) => {
+                            (formikProps) => {
                                 return (
                                     <Form className='h-full' autoComplete='off' >
                                         <AddDealer
-                                            values
-                                            setFieldValue={setFieldValue}
+                                            formikProps={formikProps}
                                         />
                                     </Form>
                                 )

@@ -1,12 +1,24 @@
-import { Form, Formik } from 'formik'
+import { Form, Formik, FormikHelpers } from 'formik'
 import React from 'react'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+import { useAddCompanyMutation } from 'src/services/CompanyServices'
 import { object, string } from 'yup'
 import AddCompany from './AddCompany'
 
+export type FormValues = {
+    company_name: string,
+    logo: string,
+    website_url: string,
+    address: string,
+    gst_no: string,
+    phone_no: string,
+}
+
 const AddCompanyWrapper = () => {
 
-    const initialValues = {
+    const [addCompany] = useAddCompanyMutation()
+
+    const initialValues: FormValues = {
         company_name: "",
         logo: "",
         website_url: "",
@@ -19,8 +31,25 @@ const AddCompanyWrapper = () => {
         company_name: string().required('Please enter a name')
     })
 
-    const onSubmitHandler = (values: any) => {
-        // console.log("🚀 ~ file: AddDealer.tsx:13 ~ onSubmitHandler ~ values", values)
+    const onSubmitHandler = (values: FormValues, formikHelpers: FormikHelpers<FormValues>) => {
+        const { setSubmitting, resetForm } = formikHelpers
+        setSubmitting(true)
+
+        addCompany(values).then((res: any) => {
+            if (res?.error) {
+                setSubmitting(false)
+            } else {
+                if (res?.data?.status) {
+                    setSubmitting(false)
+                    resetForm()
+                } else {
+                    setSubmitting(false)
+                    resetForm()
+
+                }
+            }
+
+        }).catch((error: any) => { });
     }
 
     return (
@@ -34,12 +63,11 @@ const AddCompanyWrapper = () => {
 
                     >
                         {
-                            ({ values, setFieldValue }) => {
+                            (formikProps) => {
                                 return (
                                     <Form className='h-full' autoComplete='off' >
                                         <AddCompany
-                                            values
-                                            setFieldValue={setFieldValue}
+                                            formikProps={formikProps}
                                         />
                                     </Form>
                                 )
