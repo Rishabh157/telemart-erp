@@ -1,12 +1,15 @@
 import { ErrorMessage } from 'formik';
 import React from 'react'
+import { getInputHeight } from 'src/utils/formUtils/getInputHeight';
 
 export type ATMTextFieldPropTypes = {
     name: string;
     value: string | string[];
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     label?: string;
-} & React.ComponentProps<'input'>
+    size?: 'small' | 'medium' | 'large';
+
+} & Omit<React.ComponentProps<'input'> , "size"> 
 
 const ATMTextField = ({
     name,
@@ -15,11 +18,15 @@ const ATMTextField = ({
     onChange,
     label,
     required,
+    size='small',
     ...rest
 }: ATMTextFieldPropTypes
 ) => {
+
+   
+
     return (
-        <div className='relative ' >
+        <div className='relative' >
             {
                 label &&
                 <label className='text-slate-500' > {label} {required && <span className='text-red-500'> * </span>} </label>
@@ -28,7 +35,7 @@ const ATMTextField = ({
                 name={name}
                 value={value}
                 onChange={(e) => { onChange(e) }}
-                className={`h-[40px] w-full px-2 text-slate-700 border border-slate-400 outline-blue-400  ${label && 'mt-1'}  ${className}`}
+                className={`${getInputHeight(size)} w-full px-2 text-slate-700 border border-slate-400 outline-blue-400  ${label && 'mt-1'}  ${className}`}
                 {...rest}
                 type='textarea'
 

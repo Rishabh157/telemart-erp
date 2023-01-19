@@ -6,6 +6,7 @@ import Locations from './pages/configuration/screens/locations/Locations'
 import OrganisationHierarchyWrapper from './pages/configuration/screens/organisationHierarchy/list/OrganisationHierarchyWrapper'
 import AddPolicyWrapper from './pages/configuration/screens/policies/add/AddPolicyWrapper'
 import PolicyListingWrapper from './pages/configuration/screens/policies/list/PolicyListingWrapper'
+import DashboardWrappper from './pages/Dashboard/DashboardWrappper'
 import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
 import DealersListingWrapper from './pages/dealers/list/DealersListingWrapper'
 import ViewDealer from './pages/dealers/view'
@@ -26,7 +27,7 @@ const PageRoutes = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LoginPage />} />
-          <Route path='/dashboard' element={<OrderListing />} />
+          <Route path='/dashboard' element={<DashboardWrappper />} />
           <Route path='/orders' element={<OrderListing />} />
           <Route path='/orders/add-order' element={<AddOrder />} />
           <Route path='/dealers' element={<DealersListingWrapper />} />

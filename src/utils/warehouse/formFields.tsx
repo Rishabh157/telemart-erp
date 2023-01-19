@@ -56,7 +56,6 @@ const formFields: FormFieldType[] = [
         required: false,
         fieldType: "text",
       },
-
       {
         name: "pincode",
         label: "Pincode",
@@ -78,7 +77,6 @@ const formFields: FormFieldType[] = [
         required: false,
         fieldType: "select",
       },
-
       {
         name: "gst_no",
         label: "GST No",

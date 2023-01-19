@@ -1,5 +1,7 @@
+import { ErrorMessage } from 'formik';
 import React, { useState } from 'react'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { getInputHeight } from 'src/utils/formUtils/getInputHeight';
 import { twMerge } from 'tailwind-merge';
 
 type Props = {
@@ -11,8 +13,10 @@ type Props = {
     },
     iconProps?: {
         extraClasses?: string;
-    }
-} & React.ComponentProps<'input'>
+    };
+    size?: 'small' | 'medium' | 'large';
+
+} & Omit<React.ComponentProps<'input'> , "size">
 
 const ATMPassword = ({
     name,
@@ -20,6 +24,7 @@ const ATMPassword = ({
     label,
     inputProps,
     iconProps,
+    size='small',
     ...rest
 }: Props) => {
 
@@ -27,7 +32,7 @@ const ATMPassword = ({
     const [isFocussed, setIsFocussed] = useState(false);
 
     return (
-        <div>
+        <div  className='relative'>
             {
                 label ?
                     <label className='text-slate-700 block mb-1' > {label}  {rest.required && <span className='text-red-400' > * </span>} </label>
@@ -35,7 +40,7 @@ const ATMPassword = ({
                     null
             }
 
-            <div className={twMerge(`flex items-center border border-slate-400 px-2 rounded h-[35px] ${extraClasses} ${isFocussed && 'border-2 border-primary-main'}`)} >
+            <div className={twMerge(`${getInputHeight(size)} flex items-center border border-slate-400 px-2 rounded ${extraClasses} ${isFocussed && 'border-2 border-primary-main'}`)} >
                 <input
                     name={name}
                     type={isShowPassword ? 'text' : 'password'}
@@ -55,6 +60,17 @@ const ATMPassword = ({
 
                 </div>
             </div >
+
+            {
+                name &&
+                <ErrorMessage name={name} >
+                    {
+                        (errMsg) => (
+                            <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500"> {errMsg} </p>
+                        )
+                    }
+                </ErrorMessage>
+            }
 
 
         </div>

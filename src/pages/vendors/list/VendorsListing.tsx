@@ -1,128 +1,72 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { BiSearchAlt2 } from 'react-icons/bi'
-import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
-import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
-import { VendorsListResponse } from 'src/models'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { setPage, setRowsPerPage } from 'src/redux/slices/vendorSlice'
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
+import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
+import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
+import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
+import { setRowsPerPage, setPage } from "src/redux/slices/vendorSlice";
+import { AppDispatch, RootState } from "src/redux/store";
+import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
-export type VendorsListingPropTypes = {
-    columns: columnTypes[];
-    rows: VendorsListResponse[] | [];
-    onRowClick: (row: VendorsListResponse) => void;
-    rowExtraClasses?: (row: VendorsListResponse) => void;
-    isTableLoading: boolean
-}
+type Props = {
+  columns: any[];
+  rows: any[];
+};
 
-const VendorsListing = ({
-    columns,
-    rows,
-    onRowClick,
-    rowExtraClasses,
-    isTableLoading,
-}: VendorsListingPropTypes
-) => {
+const VendorsListing = ({ columns, rows }: Props) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const vendorState: any = useSelector((state: RootState) => state.vendor);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-    const vendorState: any = useSelector((state: RootState) => state.vendor)
+  const { page, rowsPerPage } = vendorState;
 
-    const {
-        page,
-        rowsPerPage,
-        totalItems,
-    } = vendorState
+  return (
+    <div className="px-4 h-full  ">
+      {/* Page Header */}
+      <div className="flex justify-between items-center h-[55px]">
+        <ATMPageHeading> Vendors </ATMPageHeading>
+        <button className="bg-primary-main text-white rounded py-1 px-3">
+          {" "}
+          + Add Vendor{" "}
+        </button>
+      </div>
 
-    const dispatch = useDispatch<AppDispatch>()
+      <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+        {/*Table Header */}
+        <ATMTableHeader
+          page={page}
+          rowCount={rows.length}
+          rowsPerPage={rowsPerPage}
+          rows={rows}
+          onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
+          isFilter
+          onFilterClick={() => setIsFilterOpen(true)}
+        />
 
-    // Hooks
-    const navigate = useNavigate()
+        {/* Table */}
+        <div className="grow overflow-auto  ">
+          <ATMTable columns={columns} rows={rows} />
+        </div>
 
-    // States 
-    const [selectedRows, setSelectedRows] = useState([]);
+        {/* Pagination */}
+        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+          <ATMPagination
+            page={page}
+            rowCount={rows.length}
+            rows={rows}
+            rowsPerPage={rowsPerPage}
+            onPageChange={(newPage) => dispatch(setPage(newPage))}
+          />
+        </div>
+      </div>
 
-    return (
-        <SideNavLayout>
+      {isFilterOpen && (
+       <FilterDialogWarpper
+       onClose={()=> setIsFilterOpen(false)}
+       />
+      )}
+    </div>
+  );
+};
 
-            <div className='w-full h-full py-2 ' >
-
-                <div className='h-[100px] ' >
-
-                    <div className='mb-5 text-2xl text-slate-700 font-bold ' >
-                        Vendors
-                    </div>
-                    <div className='flex justify-between' >
-
-                        <div className='flex gap-2' >
-                            <ATMInputAdormant
-                                name=''
-                                value=''
-                                onChange={() => { }}
-                                placeholder="Search"
-                                adormant={<BiSearchAlt2 className='text-slate-400' />}
-                                adormantProps={{
-                                    position: 'end',
-                                    extraClasses: 'bg-white border-none'
-
-                                }}
-                                className="h-[33px]"
-                            />
-                            {
-                                selectedRows.length ?
-                                    <div  >
-                                        <button className='bg-primary-main text-white p-2 rounded animate-[fade_0.3s_ease-in-out]' > Actions </button>
-                                    </div>
-                                    :
-                                    null
-                            }
-                        </div>
-
-                        <div>
-                            <button
-                                type='button'
-                                className='flex items-center gap-2 bg-primary-main text-white text-sm h-[33px] px-4 rounded font-bold'
-                                onClick={() => { navigate('add-order') }}
-                            >
-                                <span className='text-xl' > + </span>   Add Vendor
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-
-                <ATMTable
-                    columns={columns}
-                    rows={rows}
-                    selectedRows={selectedRows}
-                    onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-                    extraClasses='max-h-[calc(100%-150px)] overflow-auto'
-                    onRowClick={(row) => onRowClick(row)}
-                    rowExtraClasses={rowExtraClasses}
-                    isLoading={isTableLoading}
-                />
-
-                <div className=' border-t  h-[50px] flex items-center ' >
-                    {rows.length ?
-                        <div className='w-full' >
-                            <ATMPagination
-                                page={page}
-                                onPageChange={(newPage) => dispatch(setPage(newPage))}
-                                rowsPerPage={rowsPerPage}
-                                onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
-                                rowCount={totalItems || 4}
-                                rows={rows}
-
-                            />
-                        </div>
-                        : null
-                    }
-                </div>
-            </div>
-
-        </SideNavLayout>
-    )
-}
-
-export default VendorsListing
+export default VendorsListing;

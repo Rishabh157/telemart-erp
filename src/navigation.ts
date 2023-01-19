@@ -1,76 +1,73 @@
-import { MdSpaceDashboard } from 'react-icons/md'
-import { RiShoppingBag3Fill } from 'react-icons/ri'
-import { BsFillPeopleFill } from 'react-icons/bs'
-import { FaWarehouse } from 'react-icons/fa'
-import {  MdInventory } from 'react-icons/md'
-import { FcDataConfiguration } from 'react-icons/fc'
-
+import { RxDashboard } from "react-icons/rx";
+import { FiUsers } from "react-icons/fi";
+import { RiShoppingCartLine } from "react-icons/ri";
+import { TbBuildingWarehouse } from "react-icons/tb";
+import { HiOutlineTruck } from "react-icons/hi";
+import { FaRegHandshake } from "react-icons/fa";
+import { CiBoxes } from "react-icons/ci";
+import { CgNotes } from "react-icons/cg";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { AiOutlineSetting } from "react-icons/ai";
 import { IconType } from 'react-icons'
 
 type NavItemType = {
   label: string,
   path: string,
   icon: IconType,
-  children?: {
-    label: string,
-    path: string,
-    icon: IconType,
-    children?: {
-      label: string,
-      path: string,
-      icon: IconType,
-    }[]
-  }[]
 }
 
-export const navigation: NavItemType[] = [
+export const navigation:NavItemType[] = [
   {
     label: "Dashboard",
-    path: "/dashboard",
-    icon: MdSpaceDashboard,
+    icon: RxDashboard,
+    path: '/dashboard',
   },
+
+  {
+    label: "Vendors",
+    icon: HiOutlineTruck,
+    path: '/vendors',
+  },
+  
   {
     label: "Orders",
-    path: "/orders",
-    icon: RiShoppingBag3Fill,
+    icon: RiShoppingCartLine,
+    path: '/orders',
   },
   {
     label: "Dealers",
-    path: "/dealers",
-    icon: BsFillPeopleFill,
+    icon: FaRegHandshake,
+    path: '/dealers',
   },
   {
     label: "Users",
-    path: "/users",
-    icon: BsFillPeopleFill,
-
+    icon: FiUsers,
+    path: '/users',
   },
   {
-    label: "Vendors",
-    path: "/vendors",
-    icon: BsFillPeopleFill,
-  },
-  {
-    label: "Warehouses",
-    path: "/warehouse",
-    icon: FaWarehouse,
+    label: "Warehouse",
+    icon: TbBuildingWarehouse,
+    path: '/warehouse',
   },
   {
     label: "Inventories",
-    path: "/inventories",
-    icon: MdInventory,
+    icon: CiBoxes,
+    path: '/inventories',
   },
   {
-    label: "Configuration",
-    path: "/configuration/companies",
-    icon: FcDataConfiguration,
-   
+    label: "Sale Order",
+    icon: CgNotes,
+    path: '/sale-order',
   },
   {
-    label: "Test",
-    path: "/test",
-    icon: BsFillPeopleFill,
+    label: "Outward Request",
+    icon: IoDocumentTextOutline,
+    path: '/outward-request',
+  },
+  {
+    label: "Configurations",
+    icon: AiOutlineSetting,
+    path: '/configurations',
   },
 
-
-]
+];

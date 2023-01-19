@@ -1,6 +1,8 @@
 import { ThemeContext } from "@emotion/react";
+import { ErrorMessage } from "formik";
 import React, { useEffect, useState } from "react";
 import Select, { Options } from "react-select";
+import { getInputHeight } from "src/utils/formUtils/getInputHeight";
 
 type Props = {
   options: any[];
@@ -8,16 +10,18 @@ type Props = {
   onChange: (value: any) => void;
   label?: string;
   required?: boolean;
-
-
+  size?: "small" | "medium" | "large";
+  name?: string;
 };
 
-const ATMSelect = ({ 
-  options, 
+const ATMSelect = ({
+  options,
   label,
-  required= false, 
+  required = false,
   value,
   onChange,
+  size = "small",
+  name,
 }: Props) => {
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(false);
@@ -26,7 +30,7 @@ const ATMSelect = ({
 
   return (
     <>
-      <div className="relative flex flex-col">
+      <div className="relative ">
         {label && (
           <label className="text-slate-500">
             {label} {required && <span className="text-red-500"> * </span>}
@@ -34,19 +38,17 @@ const ATMSelect = ({
         )}
         <Select
           name="color"
-          
-          className={`basic-single  ${label && 'mt-1'}`}
-          theme= {(theme)=> {
+          className={`basic-single  ${label && "mt-1"}`}
+          theme={(theme) => {
             return {
               ...theme,
               borderRadius: 0,
               spacing: {
                 ...theme.spacing,
-                controlHeight: 40
-              }
-            }
+                controlHeight: parseInt(`${getInputHeight(size, true)}`),
+              },
+            };
           }}
-          // classNamePrefix="select"
           value={value}
           onChange={(newValue) => onChange(newValue)}
           isDisabled={isDisabled}
@@ -55,13 +57,22 @@ const ATMSelect = ({
           isSearchable={isSearchable}
           options={options}
           isOptionSelected={(option, selectValue) => {
-            console.log(option, selectValue);
             return option.value === selectValue[0].value;
           }}
           formatOptionLabel={(data) => {
             return <div style={{ color: data.color }}> {data.label} </div>;
           }}
         />
+
+        {name && (
+          <ErrorMessage name={name}>
+            {(errMsg) => (
+              <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                {errMsg}
+              </p>
+            )}
+          </ErrorMessage>
+        )}
       </div>
     </>
   );

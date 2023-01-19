@@ -39,7 +39,7 @@ const NotificationCard = ({
     return (
         <ClickAwayListener onClickAway={onClickAway} >
 
-            <div className='absolute top-[70px] right-[200px] w-[350px] max-h-[400px] overflow-auto shadow-xl rounded animate-[fade_0.3s_ease-in-out] z-50' >
+            <div className='absolute top-[50px] right-[70px] w-[350px] max-h-[400px] overflow-auto shadow-xl rounded animate-[fade_0.3s_ease-in-out] z-50' >
                 <div className=' flex flex-col gap-3 bg-white ' >
                     <div className='border-b flex items-center px-2 h-[40px] sticky top-0 bg-white ' >
                         <div className='text-slate-700 ' >
