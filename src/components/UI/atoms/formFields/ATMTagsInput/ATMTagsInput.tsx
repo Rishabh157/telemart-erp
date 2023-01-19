@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { getInputHeight } from 'src/utils/formUtils/getInputHeight';
 
 export interface ATMTagsInputPropTypes {
     tags: any[]
@@ -9,6 +10,8 @@ export interface ATMTagsInputPropTypes {
     required?: boolean;
     disabled?: boolean;
     readonly?: boolean;
+    size?: 'small' | 'medium' | 'large';
+
 }
 
 const ATMTagsInput = ({
@@ -19,7 +22,8 @@ const ATMTagsInput = ({
     label,
     required = false,
     disabled = false,
-    readonly = false
+    readonly = false,
+    size ='small',
 }: ATMTagsInputPropTypes
 ) => {
 
@@ -51,7 +55,7 @@ const ATMTagsInput = ({
                 label &&
                 <label className='text-slate-500' > {label} {required && <span className='text-red-500'> * </span>} </label>
             }
-            <div className={`flex gap-2 border border-slate-400 rounded p-1 h-[40px] overflow-auto w-full ${label && 'mt-1'} ${disabled && 'opacity-60'} `} >
+            <div className={`${getInputHeight(size)} flex gap-2 border border-slate-400 rounded p-1 overflow-auto w-full ${label && 'mt-1'} ${disabled && 'opacity-60'} `} >
                 {
                     tags.map((tag, index) => (
                         <React.Fragment key={index} >

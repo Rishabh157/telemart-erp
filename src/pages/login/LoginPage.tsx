@@ -69,43 +69,9 @@ const LoginPage = () => {
                             </button>
                         </div>
 
-                        <div className="relative flex  items-center">
-                            <div className="flex-grow border-t border-gray-400"></div>
-                            <span className="flex-shrink mx-4 text-gray-400">OR</span>
-                            <div className="flex-grow border-t border-gray-400"></div>
-                        </div>
+                     
 
-                        <div className='flex flex-col gap-3' >
 
-                            <div className=''>
-                                <button
-                                    type='button'
-                                    className='w-full text-sm bg-slate-100 text-black hover:bg-green-700 hover:text-white h-[50px] rounded-lg flex justify-center items-center gap-2'
-                                >
-                                    <RiGoogleFill className='text-xl' />  Login with google
-                                </button>
-                            </div>
-
-                            {/* <div className=''>
-                                <button
-                                    type='button'
-                                    className='w-full bg-primary-main text-white h-[50px] rounded-lg'
-                                >
-                                    Login
-                                </button>
-                            </div> */}
-
-                        </div>
-
-                        <div className='text-primary-main flex flex-col text-sm  gap-2' >
-                            <div>
-                                Forgot your password?
-                            </div>
-
-                            <div>
-                                Create account
-                            </div>
-                        </div>
                     </div>
                 </div>
 

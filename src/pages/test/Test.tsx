@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
+import ATMTagsInput from "src/components/UI/atoms/formFields/ATMTagsInput/ATMTagsInput";
 
 const options = [
   {
@@ -28,10 +29,20 @@ const options = [
 
 const Test = () => {
   const [selectValue, setSelectValue] = useState("");
+  const [tags, setTags]= useState<any[]>([])
+
+  //  Find the area of triangle
+  const triangleArea = (a:number, b:number , c:number) => {
+  const halfOfPerimeter = (a+b+c)/2
+  const area = Math.sqrt(halfOfPerimeter* (halfOfPerimeter-a)*(halfOfPerimeter-b)*(halfOfPerimeter-c))
+        return area
+  }
+
+  console.log(triangleArea(3,4,5))
 
   return (
     <SideNavLayout>
-      <div className="h-full flex  w-full">
+      <div className="h-full flex w-full">
         <div className="w-full">
           {/* <ATMSelect
             options={[
@@ -50,8 +61,22 @@ const Test = () => {
             // renderValue={(selected) => selected.value?.name}
             // options={[{name: ""}]}
           /> */}
+        
+
         </div>
+
+        <ATMTagsInput
+          tags={tags}
+          setTags={(value)=> setTags(value)}
+        />
       </div>
+
+      <div>
+            <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
+            <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required/>
+        </div>
+
+
         
     </SideNavLayout>
   );

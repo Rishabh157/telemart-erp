@@ -7,6 +7,7 @@ export interface columnTypes {
     flex?: string;
     renderCell?: (row: any) => string | React.ReactNode;
     align?: 'start' | 'center' | 'end';
+    extraClasses?: string;
 
 }
 
@@ -38,15 +39,15 @@ const ATMTable = <T extends {}>({
 ) => {
 
     return (
-        <div className={twMerge(`w-full relative flex flex-col gap-2  ${extraClasses}`)} >
+        <div className={twMerge(`min-w-fit relative flex flex-col   ${extraClasses}`)} >
 
             {/* Columns */}
-            <div className='flex items-center rounded bg-white py-3 px-2 shadow-md sticky top-0' >
+            <div className='flex items-center py-2 px-2 border-b sticky top-0 border-slate-300 bg-slate-50 ' >
 
                 {/* Checkbox */}
                 {
                     rows.length && isCheckbox ?
-                        <div className={` w-[20px]`} >
+                        <div className={`w-[20px]`} >
                             <input
                                 type='checkbox'
                                 className='w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 '
@@ -63,7 +64,7 @@ const ATMTable = <T extends {}>({
                     columns.map((column, index) => {
 
                         return (
-                            <div key={column.field} className={`${column.flex} text-sm text-slate-400 px-2 flex justify-${column.align || 'start'}`} >
+                            <div key={column.field} className={`${column.flex} text-sm text-slate-500 font-semibold px-2 flex justify-${column.align || 'start'}  ${column.extraClasses}`} >
                                 {column.headerName}
                             </div>
                         )
@@ -76,7 +77,7 @@ const ATMTable = <T extends {}>({
                     (
                         Array(10).fill(0).map((_, index) => {
                             return (
-                                <div key={index} className='animate-pulse bg-slate-200 h-[50px] rounded' ></div>
+                                <div key={index} className='animate-pulse bg-slate-200 h-[50px]' ></div>
                             )
                         })
                     )
@@ -90,7 +91,7 @@ const ATMTable = <T extends {}>({
                                     <div
                                         onClick={() => onRowClick && onRowClick(row)}
                                         key={row[idKey] || rowIndex}
-                                        className={`flex items-center rounded  py-3 px-2  hover:shadow-lg bg-white shadow-md ${onRowClick && 'cursor-pointer'} ${rowExtraClasses && rowExtraClasses(row)} `} >
+                                        className={`flex items-center px-2 bg-white  ${onRowClick && 'cursor-pointer'} ${rowExtraClasses && rowExtraClasses(row)} ${rowIndex !== rows.length-1 && "border-b" } `} >
 
                                         {/* Checkbox */}
                                         {
@@ -111,7 +112,7 @@ const ATMTable = <T extends {}>({
                                             columns.map((column, index) => {
 
                                                 return (
-                                                    <div key={column.field} className={`${column.flex} text-sm text-slate-400 px-2 flex justify-${column.align || 'start'}`} >
+                                                    <div key={column.field} className={`${column.flex} text-sm text-slate-600 px-2 flex justify-${column.align || 'start'} ${column.extraClasses}`} >
                                                         {
 
                                                             column.renderCell ? column.renderCell(row)

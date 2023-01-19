@@ -11,14 +11,13 @@ const ConfigurationLayout = ({
 }: Props
 ) => {
 
-    const [isShowSideNav, setIsShowSideNav] = useState(true);
 
 
     return (
         <div className='w-screen h-screen' >
             {/* Header */}
-            <div className='h-[70px] ' >
-                <Header setIsShowSideNav={(newValue) => setIsShowSideNav(newValue)} isShowSideNav={isShowSideNav} />
+            {/* <div className='h-[70px] ' >
+                <Header />
             </div>
 
             <div className='h-[calc(100%-70px)] w-screen flex'>
@@ -38,7 +37,7 @@ const ConfigurationLayout = ({
                     type="color"
                     className='w-[100px] border border-slate-200 rounded '
                 />
-            </div>
+            </div> */}
         </div>
     )
 }

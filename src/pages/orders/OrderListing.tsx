@@ -13,9 +13,9 @@ const columns: columnTypes[] = [
         field: "order_no",
         headerName: "Order",
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: any) => (
-            <span className='text-primary-main ' > # {row.order_no} </span>
-        )
+        // renderCell: (row: any) => (
+        //     <span className='text-primary-main ' > # {row.order_no} </span>
+        // )
     },
     {
         field: "date",

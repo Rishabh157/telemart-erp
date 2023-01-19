@@ -17,8 +17,9 @@ const ATMTextArea = ({
     onChange ,
     className,
     placeholder,
-    minRows = 1,
+    minRows = 2,
 }: Props) => {
+  
   return (
     <div className="relative flex flex-col">
       {label && (
@@ -34,7 +35,6 @@ const ATMTextArea = ({
       rows={minRows}
       className={`w-full p-2 text-slate-700 border border-slate-400 outline-blue-400  ${label && 'mt-1'}  ${className}`}
       placeholder={placeholder}
-      
       />
     </div>
   );
