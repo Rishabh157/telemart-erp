@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AttributesListingWrapper from './pages/configuration/Configuration Screens/attributes/list/AttributesListingWrapper'
 import AttributesGroupListingWrapper from './pages/configuration/Configuration Screens/attributesGroup/list/AttributesGroupListingWrapper'
 import ProductCategoryListingWrapper from './pages/configuration/Configuration Screens/productCategory/list/ProductCategoryListingWrapper'
+import ProductSubCategoryListingWrapper from './pages/configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper'
 import ConfigurationLayout from './pages/configuration/ConfigurationLayout'
 import DashboardWrappper from './pages/Dashboard/DashboardWrappper'
 import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
@@ -55,10 +56,11 @@ const PageRoutes = () => {
           </Route>
           <Route path='users' element={<UsersListingWrapper />} />
           <Route path='test' element={<Test />} />
-          <Route path='configurations' element={<ConfigurationLayout />} />
-          <Route path='configurations/attributes' element={<AttributesListingWrapper />} />
-          <Route path='configurations/attributes-group' element={<AttributesGroupListingWrapper />} />
-          <Route path='configurations/product-category' element={<ProductCategoryListingWrapper />} />
+          <Route path='/configurations' element={<ConfigurationLayout />} />
+          <Route path='/configurations/attributes' element={<AttributesListingWrapper />} />
+          <Route path='/configurations/attributes-group' element={<AttributesGroupListingWrapper />} />
+          <Route path='/configurations/product-category' element={<ProductCategoryListingWrapper />} />
+          <Route path='/configurations/product-sub-category' element={<ProductSubCategoryListingWrapper />} />
 
           </Routes>
       </BrowserRouter>

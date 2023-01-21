@@ -18,7 +18,7 @@ const configurationNavigation : NavItemType[]= [
 {
     label : "Product Category",
     icon : AiOutlineSetting,
-    path : 'configurations/product-category'
+    path : '/configurations/product-category'
 },
 {
     label : "Product Sub Category",
