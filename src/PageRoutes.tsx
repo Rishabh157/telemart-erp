@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import AttributesListingWrapper from './pages/configuration/Configuration Screens/attributes/list/AttributesListingWrapper'
 import ConfigurationLayout from './pages/configuration/ConfigurationLayout'
 import DashboardWrappper from './pages/Dashboard/DashboardWrappper'
 import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
@@ -53,6 +54,7 @@ const PageRoutes = () => {
           <Route path='users' element={<UsersListingWrapper />} />
           <Route path='test' element={<Test />} />
           <Route path='configurations' element={<ConfigurationLayout />} />
+          <Route path='configurations/attributes' element={<AttributesListingWrapper />} />
 
           </Routes>
       </BrowserRouter>

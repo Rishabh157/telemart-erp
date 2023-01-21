@@ -8,87 +8,87 @@ const configurationNavigation : NavItemType[]= [
 {
     label : "Attributes",
     icon : AiOutlineSetting,
-    path : "/configuratons/attributes"
+    path : "/configurations/attributes"
 },
 {
     label : "Attributes Group",
     icon : AiOutlineSetting,
-    path : "/configuratons/attributes-group"
+    path : "/configurations/attributes-group"
 },
 {
     label : "Product Category",
     icon : AiOutlineSetting,
-    path : "/configuratons/product-category"
+    path : "/configurations/product-category"
 },
 {
     label : "Product Sub Category",
     icon : AiOutlineSetting,
-    path : "/configuratons/product-sub-category"
+    path : "/configurations/product-sub-category"
 },
 {
     label : "Item",
     icon : AiOutlineSetting,
-    path : "/configuratons/item"
+    path : "/configurations/item"
 },
 {
     label : "Products",
     icon : AiOutlineSetting,
-    path : "/configuratons/products"
+    path : "/configurations/products"
 },
 {
     label : "Carton Box",
     icon : AiOutlineSetting,
-    path : "/configuratons/carton-box"
+    path : "/configurations/carton-box"
 },
 {
     label : "Scheme",
     icon : AiOutlineSetting,
-    path : "/configuratons/scheme"
+    path : "/configurations/scheme"
 },
 {
     label : "Taxes",
     icon : AiOutlineSetting,
-    path : "/configuratons/taxes"
+    path : "/configurations/taxes"
 },
 {
     label : "PO",
     icon : AiOutlineSetting,
-    path : "/configuratons/po"
+    path : "/configurations/po"
 },
 {
     label : "GRN",
     icon : AiOutlineSetting,
-    path : "/configuratons/grn"
+    path : "/configurations/grn"
 },
 {
     label : "Company",
     icon : AiOutlineSetting,
-    path : "/configuratons/company"
+    path : "/configurations/company"
 },
 {
     label : "ASR",
     icon : AiOutlineSetting,
-    path : "/configuratons/asr"
+    path : "/configurations/asr"
 },
 {
     label : "Barcode",
     icon : AiOutlineSetting,
-    path : "/configuratons/barcode"
+    path : "/configurations/barcode"
 },
 {
     label : "Location",
     icon : AiOutlineSetting,
-    path : "/configuratons/location"
+    path : "/configurations/location"
 },
 {
     label : "Language",
     icon : AiOutlineSetting,
-    path : "/configuratons/language"
+    path : "/configurations/language"
 },
 {
     label : "Dealers Category",
     icon : AiOutlineSetting,
-    path : "/configuratons/dealers-category"
+    path : "/configurations/dealers-category"
 },
 ]
 
