@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AttributesListingWrapper from './pages/configuration/Configuration Screens/attributes/list/AttributesListingWrapper'
 import AttributesGroupListingWrapper from './pages/configuration/Configuration Screens/attributesGroup/list/AttributesGroupListingWrapper'
+import ItemListingWrapper from './pages/configuration/Configuration Screens/item/list/ItemListingWrapper'
 import ProductCategoryListingWrapper from './pages/configuration/Configuration Screens/productCategory/list/ProductCategoryListingWrapper'
 import ProductSubCategoryListingWrapper from './pages/configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper'
 import ConfigurationLayout from './pages/configuration/ConfigurationLayout'
@@ -61,6 +62,7 @@ const PageRoutes = () => {
           <Route path='/configurations/attributes-group' element={<AttributesGroupListingWrapper />} />
           <Route path='/configurations/product-category' element={<ProductCategoryListingWrapper />} />
           <Route path='/configurations/product-sub-category' element={<ProductSubCategoryListingWrapper />} />
+          <Route path='/configurations/item' element={<ItemListingWrapper />} />
 
           </Routes>
       </BrowserRouter>

@@ -5,6 +5,7 @@ import { companySlice, dealerSlice, userSlice, vendorSlice } from "./slices";
 import attributesGroupSlice from "./slices/attributesGroupSlice";
 import attributesSlice from "./slices/attributesSlice";
 import inventorySlice from "./slices/inventorySlice";
+import itemSlice from "./slices/itemSlice";
 import outwardRequestSlice from "./slices/outwardRequestSlice";
 import productCategorySlice from "./slices/productCategorySlice";
 import productSubCategorySlice from "./slices/productSubCategorySlice";
@@ -34,6 +35,7 @@ const store = configureStore({
         productCategory : productCategorySlice,
         productSubCategory : productSubCategorySlice,
         attributes : attributesSlice,
+        item : itemSlice,
         [dealerApi.reducerPath]: dealerApi.reducer,
         [vendorApi.reducerPath]: vendorApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
