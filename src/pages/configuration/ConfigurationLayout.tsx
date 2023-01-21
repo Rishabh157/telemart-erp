@@ -1,6 +1,96 @@
 import React, { useState } from 'react'
-import Header from 'src/components/UI/Header/Header'
-import ConfigurationSideBar from './configurationSideBar/ConfigurationSideBar';
+import Header from 'src/components/UI/Header/Header';
+import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar';
+import { NavItemType } from 'src/navigation';
+import { AiOutlineSetting } from "react-icons/ai";
+
+const configurationNavigation : NavItemType[]= [
+{
+    label : "Attributes",
+    icon : AiOutlineSetting,
+    path : "/configuratons/attributes"
+},
+{
+    label : "Attributes Group",
+    icon : AiOutlineSetting,
+    path : "/configuratons/attributes-group"
+},
+{
+    label : "Product Category",
+    icon : AiOutlineSetting,
+    path : "/configuratons/product-category"
+},
+{
+    label : "Product Sub Category",
+    icon : AiOutlineSetting,
+    path : "/configuratons/product-sub-category"
+},
+{
+    label : "Item",
+    icon : AiOutlineSetting,
+    path : "/configuratons/item"
+},
+{
+    label : "Products",
+    icon : AiOutlineSetting,
+    path : "/configuratons/products"
+},
+{
+    label : "Carton Box",
+    icon : AiOutlineSetting,
+    path : "/configuratons/carton-box"
+},
+{
+    label : "Scheme",
+    icon : AiOutlineSetting,
+    path : "/configuratons/scheme"
+},
+{
+    label : "Taxes",
+    icon : AiOutlineSetting,
+    path : "/configuratons/taxes"
+},
+{
+    label : "PO",
+    icon : AiOutlineSetting,
+    path : "/configuratons/po"
+},
+{
+    label : "GRN",
+    icon : AiOutlineSetting,
+    path : "/configuratons/grn"
+},
+{
+    label : "Company",
+    icon : AiOutlineSetting,
+    path : "/configuratons/company"
+},
+{
+    label : "ASR",
+    icon : AiOutlineSetting,
+    path : "/configuratons/asr"
+},
+{
+    label : "Barcode",
+    icon : AiOutlineSetting,
+    path : "/configuratons/barcode"
+},
+{
+    label : "Location",
+    icon : AiOutlineSetting,
+    path : "/configuratons/location"
+},
+{
+    label : "Language",
+    icon : AiOutlineSetting,
+    path : "/configuratons/language"
+},
+{
+    label : "Dealers Category",
+    icon : AiOutlineSetting,
+    path : "/configuratons/dealers-category"
+},
+]
 
 type Props = {
     children?: React.ReactNode | string;
@@ -11,34 +101,31 @@ const ConfigurationLayout = ({
 }: Props
 ) => {
 
-
+    const [isCollapsed , setIsCollapsed] = useState(false)
+    const toggleCollapse = ()=> {
+        setIsCollapsed(prev=> !prev)
+    }
 
     return (
-        <div className='w-screen h-screen' >
-            {/* Header */}
-            {/* <div className='h-[70px] ' >
-                <Header />
-            </div>
+        <div className='flex h-screen w-screen' >
 
-            <div className='h-[calc(100%-70px)] w-screen flex'>
+        {/* Side Navigation Bar */}
+    <div className={`border-r border-slate-300 h-full transition-all duration-500   ${isCollapsed ? "w-[50px]" : "w-[250px]"}`} >
+        <VerticalNavBar toggleCollapse = {toggleCollapse} isCollapsed= {isCollapsed} navigation={configurationNavigation} />
+    </div>
 
-                <div className={`transition-all duration-[600ms] h-full ${isShowSideNav ? 'w-[270px]' : 'w-[60px] '} `} >
-                    <ConfigurationSideBar isShowSideNav={isShowSideNav} />
-                </div>
+    <div className='h-full grow ' >
 
-                <div className={`h-full bg-slate-50 px-4  transition-all duration-[600ms] ${isShowSideNav ? "w-[calc(100vw-270px)]" : "w-[calc(100vw-60px)]"} `}>
-                    {children}
-                </div>
-            </div>
+        {/* Header */}
+        <div className='h-[55px] border-b border-slate-300  ' >
+            <Header/>
+         </div>
 
-            <div className='absolute bottom-0 left-0'>
-                <input
-                    onChange={(e) => document.documentElement.style.setProperty('--primary-main', e.target.value)}
-                    type="color"
-                    className='w-[100px] border border-slate-200 rounded '
-                />
-            </div> */}
-        </div>
+         <div className='h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50 ' >
+               {children}
+         </div>
+    </div>
+  </div>
     )
 }
 

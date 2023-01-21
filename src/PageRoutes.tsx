@@ -1,11 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import AddCompanyWrapper from './pages/configuration/screens/companies/add/AddCompanyWrapper'
-import CompaniesListingWrapper from './pages/configuration/screens/companies/list/CompaniesListingWrapper'
-import Locations from './pages/configuration/screens/locations/Locations'
-import OrganisationHierarchyWrapper from './pages/configuration/screens/organisationHierarchy/list/OrganisationHierarchyWrapper'
-import AddPolicyWrapper from './pages/configuration/screens/policies/add/AddPolicyWrapper'
-import PolicyListingWrapper from './pages/configuration/screens/policies/list/PolicyListingWrapper'
+import ConfigurationLayout from './pages/configuration/ConfigurationLayout'
 import DashboardWrappper from './pages/Dashboard/DashboardWrappper'
 import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
 import DealersListingWrapper from './pages/dealers/list/DealersListingWrapper'
@@ -57,16 +52,9 @@ const PageRoutes = () => {
           </Route>
           <Route path='users' element={<UsersListingWrapper />} />
           <Route path='test' element={<Test />} />
-          <Route path='configuration/companies' element={<CompaniesListingWrapper />} />
-          <Route path='configuration/companies/add-company' element={<AddCompanyWrapper />} />
-          <Route path='configuration/organizations-hierarchy' element={<OrganisationHierarchyWrapper />} />
-          <Route path='configuration/locations' element={<Locations />} />
-          <Route path='configuration/policies' element={<PolicyListingWrapper />} />
-          <Route path='configuration/policies/add-policy' element={<AddPolicyWrapper />} />
+          <Route path='configurations' element={<ConfigurationLayout />} />
 
-
-
-        </Routes>
+          </Routes>
       </BrowserRouter>
     </>
   )

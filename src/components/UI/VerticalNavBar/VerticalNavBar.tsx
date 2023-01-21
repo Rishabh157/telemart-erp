@@ -1,15 +1,17 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { navigation } from '../../../navigation'
+import { NavItemType } from 'src/navigation';
 
 type Props = {
     toggleCollapse: ()=>void;
-    isCollapsed: boolean
+    isCollapsed: boolean,
+    navigation : NavItemType[]
 }
 
 const VerticalNavBar = ({
     toggleCollapse,
-    isCollapsed
+    isCollapsed,
+    navigation
 }: Props
 ) => {
 
