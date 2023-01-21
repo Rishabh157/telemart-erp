@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { companyApi, dealerApi, userApi, vendorApi } from "src/services";
 import { companySlice, dealerSlice, userSlice, vendorSlice } from "./slices";
+import attributesGroupSlice from "./slices/attributesGroupSlice";
 import attributesSlice from "./slices/attributesSlice";
 import inventorySlice from "./slices/inventorySlice";
 import outwardRequestSlice from "./slices/outwardRequestSlice";
@@ -27,6 +28,7 @@ const store = configureStore({
         inventory : inventorySlice,
         outwardRequest : outwardRequestSlice,
         saleOrder : saleOrderSlice,
+        attributesGroup : attributesGroupSlice,
         attributes : attributesSlice,
         [dealerApi.reducerPath]: dealerApi.reducer,
         [vendorApi.reducerPath]: vendorApi.reducer,

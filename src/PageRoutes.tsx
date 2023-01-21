@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AttributesListingWrapper from './pages/configuration/Configuration Screens/attributes/list/AttributesListingWrapper'
+import AttributesGroupListingWrapper from './pages/configuration/Configuration Screens/attributesGroup/list/AttributesGroupListingWrapper'
 import ConfigurationLayout from './pages/configuration/ConfigurationLayout'
 import DashboardWrappper from './pages/Dashboard/DashboardWrappper'
 import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
@@ -55,6 +56,7 @@ const PageRoutes = () => {
           <Route path='test' element={<Test />} />
           <Route path='configurations' element={<ConfigurationLayout />} />
           <Route path='configurations/attributes' element={<AttributesListingWrapper />} />
+          <Route path='configurations/attributes-group' element={<AttributesGroupListingWrapper />} />
 
           </Routes>
       </BrowserRouter>
