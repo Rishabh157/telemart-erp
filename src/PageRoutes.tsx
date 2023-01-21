@@ -4,6 +4,7 @@ import AttributesListingWrapper from './pages/configuration/Configuration Screen
 import AttributesGroupListingWrapper from './pages/configuration/Configuration Screens/attributesGroup/list/AttributesGroupListingWrapper'
 import ItemListingWrapper from './pages/configuration/Configuration Screens/item/list/ItemListingWrapper'
 import ProductCategoryListingWrapper from './pages/configuration/Configuration Screens/productCategory/list/ProductCategoryListingWrapper'
+import ProductsListingWrapper from './pages/configuration/Configuration Screens/products/list/ProductWrapper'
 import ProductSubCategoryListingWrapper from './pages/configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper'
 import ConfigurationLayout from './pages/configuration/ConfigurationLayout'
 import DashboardWrappper from './pages/Dashboard/DashboardWrappper'
@@ -63,6 +64,7 @@ const PageRoutes = () => {
           <Route path='/configurations/product-category' element={<ProductCategoryListingWrapper />} />
           <Route path='/configurations/product-sub-category' element={<ProductSubCategoryListingWrapper />} />
           <Route path='/configurations/item' element={<ItemListingWrapper />} />
+          <Route path='/configurations/products' element={<ProductsListingWrapper />} />
 
           </Routes>
       </BrowserRouter>
