@@ -11,6 +11,7 @@ import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
 import DealersListingWrapper from './pages/dealers/list/DealersListingWrapper'
 import ViewDealer from './pages/dealers/view'
 import DealerOrderTab from './pages/dealers/view/tabs/orderTab/DealerOrderTab'
+import InventoryListingWrapper from './pages/inventories/list/InventoryListingWrapper'
 import LoginPage from './pages/login/LoginPage'
 import AddOrder from './pages/orders/add/AddOrder'
 import OrderListing from './pages/orders/OrderListing'
@@ -42,6 +43,7 @@ const PageRoutes = () => {
 
           <Route path='/warehouse' element={<WarehousesListingWrapper />} />
           <Route path='/warehouse/add-warehouse' element={<AddWarehouseWrapper />} />
+          <Route path='/inventories' element={<InventoryListingWrapper />} />
 
           <Route path='/dealers/:dealerId' element={<ViewDealer />} >
             <Route path='orders' element={<DealerOrderTab />} />
