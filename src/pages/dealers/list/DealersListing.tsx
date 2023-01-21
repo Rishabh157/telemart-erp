@@ -27,7 +27,7 @@ const DealersListing = ({ columns, rows }: Props) => {
         <ATMPageHeading> Dealers </ATMPageHeading>
         <button className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
-          + Add Dealer{" "}
+          + Add Dealers{" "}
         </button>
       </div>
 

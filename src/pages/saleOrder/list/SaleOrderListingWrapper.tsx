@@ -17,7 +17,7 @@ import SaleOrderListing from "./SaleOrderListing";
 const columns: columnTypes[] = [
   {
     field: "soNumber",
-    headerName: "SO Number",
+    headerName: "So Number",
     flex: "flex-[1_1_0%]",
     renderCell: (row: SaleOrderListResponse) => (
       <span className="text-primary-main "> {row.soNumber} </span>

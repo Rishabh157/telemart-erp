@@ -2,6 +2,7 @@ export type VendorsListResponse = {
     vendorName: string;
     vendorCode: string;
     email: string;
+    state : string;
     mobile: string;
     district: string;
     is_active: boolean;
@@ -18,6 +19,7 @@ export type AddVendor = {
     vendorCode: string;
     email: string;
     mobile: string;
+    state : string;
     district: string;
     password: string;
     confirm_password: string;
@@ -28,6 +30,7 @@ export type UpdateVendor = {
         vendorName: string;
         vendorCode: string;
         email: string;
+        state : string;
         mobile: string;
         district: string;
         password: string;

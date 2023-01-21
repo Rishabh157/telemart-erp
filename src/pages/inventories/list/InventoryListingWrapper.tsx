@@ -16,7 +16,7 @@ import InventoryListing from "./InventoryListing";
 const columns: columnTypes[] = [
   {
     field: "productName",
-    headerName: "Name",
+    headerName: "Product Name",
     flex: "flex-[1_1_0%]",
     renderCell: (row: InventoryListResponse) => (
       <span className="text-primary-main "> {row.productName} </span>
@@ -24,7 +24,7 @@ const columns: columnTypes[] = [
   },
   {
     field: "quantity",
-    headerName: "Vendor Code",
+    headerName: "Quantity",
     flex: "flex-[1_1_0%]",
     renderCell: (row: InventoryListResponse) => <span> {row.quantity} </span>,
   },

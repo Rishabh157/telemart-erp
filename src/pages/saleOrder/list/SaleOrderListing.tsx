@@ -27,7 +27,7 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
         <ATMPageHeading> Sale Orders </ATMPageHeading>
         <button className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
-          + Add Sale Orders{" "}
+          + Add Sale Order{" "}
         </button>
       </div>
 
