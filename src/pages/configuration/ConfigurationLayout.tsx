@@ -53,7 +53,7 @@ const configurationNavigation : NavItemType[]= [
 {
     label : "PO",
     icon : AiOutlineSetting,
-    path : "/configurations/po"
+    path : "/configurations/purchase-order"
 },
 {
     label : "GRN",

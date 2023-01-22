@@ -11,6 +11,7 @@ import outwardRequestSlice from "./slices/outwardRequestSlice";
 import productCategorySlice from "./slices/productCategorySlice";
 import productSlice from "./slices/productSlice";
 import productSubCategorySlice from "./slices/productSubCategorySlice";
+import PurchaseOrderSlice from "./slices/PurchaseOrderSlice";
 import saleOrderSlice from "./slices/saleOrderSlice";
 import schemeSlice from "./slices/schemeSlice";
 import warehouseSlice from "./slices/warehouseSlice";
@@ -38,6 +39,7 @@ const store = configureStore({
         productCategory : productCategorySlice,
         cartonBox : cartonBoxSlice,
         scheme : schemeSlice,
+        purchaseOrder : PurchaseOrderSlice,
         productSubCategory : productSubCategorySlice,
         attributes : attributesSlice,
         item : itemSlice,
