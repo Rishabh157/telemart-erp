@@ -5,6 +5,7 @@ import { companySlice, dealerSlice, userSlice, vendorSlice } from "./slices";
 import attributesGroupSlice from "./slices/attributesGroupSlice";
 import attributesSlice from "./slices/attributesSlice";
 import cartonBoxSlice from "./slices/cartonBoxSlice";
+import GRNSlice from "./slices/GRNSlice";
 import inventorySlice from "./slices/inventorySlice";
 import itemSlice from "./slices/itemSlice";
 import outwardRequestSlice from "./slices/outwardRequestSlice";
@@ -40,6 +41,7 @@ const store = configureStore({
         cartonBox : cartonBoxSlice,
         scheme : schemeSlice,
         purchaseOrder : PurchaseOrderSlice,
+        grn : GRNSlice,
         productSubCategory : productSubCategorySlice,
         attributes : attributesSlice,
         item : itemSlice,
