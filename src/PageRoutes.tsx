@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AttributesListingWrapper from './pages/configuration/Configuration Screens/attributes/list/AttributesListingWrapper'
 import AttributesGroupListingWrapper from './pages/configuration/Configuration Screens/attributesGroup/list/AttributesGroupListingWrapper'
+import CartonBoxListingWrapper from './pages/configuration/Configuration Screens/cartonBox/list/CartonBoxListingWrapper'
 import ItemListingWrapper from './pages/configuration/Configuration Screens/item/list/ItemListingWrapper'
 import ProductCategoryListingWrapper from './pages/configuration/Configuration Screens/productCategory/list/ProductCategoryListingWrapper'
 import ProductsListingWrapper from './pages/configuration/Configuration Screens/products/list/ProductWrapper'
@@ -65,6 +66,7 @@ const PageRoutes = () => {
           <Route path='/configurations/product-sub-category' element={<ProductSubCategoryListingWrapper />} />
           <Route path='/configurations/item' element={<ItemListingWrapper />} />
           <Route path='/configurations/products' element={<ProductsListingWrapper />} />
+          <Route path='/configurations/carton-box' element={<CartonBoxListingWrapper />} />
 
           </Routes>
       </BrowserRouter>

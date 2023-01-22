@@ -4,6 +4,7 @@ import { companyApi, dealerApi, userApi, vendorApi } from "src/services";
 import { companySlice, dealerSlice, userSlice, vendorSlice } from "./slices";
 import attributesGroupSlice from "./slices/attributesGroupSlice";
 import attributesSlice from "./slices/attributesSlice";
+import cartonBoxSlice from "./slices/cartonBoxSlice";
 import inventorySlice from "./slices/inventorySlice";
 import itemSlice from "./slices/itemSlice";
 import outwardRequestSlice from "./slices/outwardRequestSlice";
@@ -34,6 +35,7 @@ const store = configureStore({
         saleOrder : saleOrderSlice,
         attributesGroup : attributesGroupSlice,
         productCategory : productCategorySlice,
+        cartonBox : cartonBoxSlice,
         productSubCategory : productSubCategorySlice,
         attributes : attributesSlice,
         item : itemSlice,
