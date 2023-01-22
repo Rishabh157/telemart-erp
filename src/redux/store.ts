@@ -12,6 +12,7 @@ import productCategorySlice from "./slices/productCategorySlice";
 import productSlice from "./slices/productSlice";
 import productSubCategorySlice from "./slices/productSubCategorySlice";
 import saleOrderSlice from "./slices/saleOrderSlice";
+import schemeSlice from "./slices/schemeSlice";
 import warehouseSlice from "./slices/warehouseSlice";
 
 // Middleware for handling 401 Error
@@ -36,6 +37,7 @@ const store = configureStore({
         attributesGroup : attributesGroupSlice,
         productCategory : productCategorySlice,
         cartonBox : cartonBoxSlice,
+        scheme : schemeSlice,
         productSubCategory : productSubCategorySlice,
         attributes : attributesSlice,
         item : itemSlice,

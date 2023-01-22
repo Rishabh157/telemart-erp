@@ -7,6 +7,7 @@ import ItemListingWrapper from './pages/configuration/Configuration Screens/item
 import ProductCategoryListingWrapper from './pages/configuration/Configuration Screens/productCategory/list/ProductCategoryListingWrapper'
 import ProductsListingWrapper from './pages/configuration/Configuration Screens/products/list/ProductWrapper'
 import ProductSubCategoryListingWrapper from './pages/configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper'
+import SchemeListingWrapper from './pages/configuration/Configuration Screens/scheme/list/SchemeListingWrapper'
 import ConfigurationLayout from './pages/configuration/ConfigurationLayout'
 import DashboardWrappper from './pages/Dashboard/DashboardWrappper'
 import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
@@ -67,6 +68,7 @@ const PageRoutes = () => {
           <Route path='/configurations/item' element={<ItemListingWrapper />} />
           <Route path='/configurations/products' element={<ProductsListingWrapper />} />
           <Route path='/configurations/carton-box' element={<CartonBoxListingWrapper />} />
+          <Route path='/configurations/scheme' element={<SchemeListingWrapper />} />
 
           </Routes>
       </BrowserRouter>
