@@ -7,9 +7,11 @@ import attributesGroupSlice from "./slices/attributesGroupSlice";
 import attributesSlice from "./slices/attributesSlice";
 import cartonBoxSlice from "./slices/cartonBoxSlice";
 import configurationCompanySlice from "./slices/configurationCompanySlice";
+import dealersCategorySlice from "./slices/dealersCategorySlice";
 import GRNSlice from "./slices/GRNSlice";
 import inventorySlice from "./slices/inventorySlice";
 import itemSlice from "./slices/itemSlice";
+import languageSlice from "./slices/languageSlice";
 import outwardRequestSlice from "./slices/outwardRequestSlice";
 import productCategorySlice from "./slices/productCategorySlice";
 import productSlice from "./slices/productSlice";
@@ -47,6 +49,8 @@ const store = configureStore({
         productSubCategory : productSubCategorySlice,
         attributes : attributesSlice,
         item : itemSlice,
+        language : languageSlice,
+        dealersCategory : dealersCategorySlice,
         products : productSlice,
         asr : ASRSlice,
         configurationCompany : configurationCompanySlice,
