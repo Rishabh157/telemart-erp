@@ -8,6 +8,7 @@ import ProductCategoryListingWrapper from './pages/configuration/Configuration S
 import ProductsListingWrapper from './pages/configuration/Configuration Screens/products/list/ProductWrapper'
 import ProductSubCategoryListingWrapper from './pages/configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper'
 import SchemeListingWrapper from './pages/configuration/Configuration Screens/scheme/list/SchemeListingWrapper'
+import TaxesListingWrapper from './pages/configuration/Configuration Screens/taxes/list/TaxesListingWrapper'
 import ConfigurationLayout from './pages/configuration/ConfigurationLayout'
 import DashboardWrappper from './pages/Dashboard/DashboardWrappper'
 import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
@@ -69,6 +70,7 @@ const PageRoutes = () => {
           <Route path='/configurations/products' element={<ProductsListingWrapper />} />
           <Route path='/configurations/carton-box' element={<CartonBoxListingWrapper />} />
           <Route path='/configurations/scheme' element={<SchemeListingWrapper />} />
+          <Route path='/configurations/taxes' element={<TaxesListingWrapper />} />
 
           </Routes>
       </BrowserRouter>
