@@ -21,7 +21,6 @@ const FilterDialogWarpper = ({ onClose, onApply }: Props) => {
 
   // Form Submit Handler
   const onSubmitHandler = (values: FormInitalValues)=> {
-    console.log("onSubmit" , values);
   }
 
   return (
