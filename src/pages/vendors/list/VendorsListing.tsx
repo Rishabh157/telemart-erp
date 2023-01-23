@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -17,6 +18,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const vendorState: any = useSelector((state: RootState) => state.vendor);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const navigate = useNavigate();
 
   const { page, rowsPerPage } = vendorState;
 
@@ -25,7 +27,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Vendors </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button onClick={()=> {navigate('add-vendor')}} className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
           + Add Vendor{" "}
         </button>
