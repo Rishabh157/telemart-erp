@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from 'react'
+import { useLocation } from 'react-router-dom';
 import { navigation } from 'src/navigation';
 import Header from '../../UI/Header/Header';
 import VerticalNavBar from '../../UI/VerticalNavBar/VerticalNavBar'
@@ -16,12 +17,18 @@ const SideNavLayout = ({
         setIsCollapsed(prev=> !prev)
     }
 
+    const location= useLocation()
+
+    const currentPath = `/${location.pathname?.split("/")[1]}`
+
   return (
     <div className='flex h-screen w-screen' >
 
         {/* Side Navigation Bar */}
     <div className={`border-r border-slate-300 h-full transition-all duration-500   ${isCollapsed ? "w-[50px]" : "w-[250px]"}`} >
-        <VerticalNavBar toggleCollapse = {toggleCollapse} isCollapsed= {isCollapsed} navigation={navigation} />
+        <VerticalNavBar toggleCollapse = {toggleCollapse} isCollapsed= {isCollapsed} navigation={navigation} 
+        isPathEqualtoNavItem= {(navItem:any)=> navItem.path === currentPath}
+        />
     </div>
 
     <div className='h-full grow ' >

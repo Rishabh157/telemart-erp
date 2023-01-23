@@ -24,10 +24,10 @@ const SchemeListing = ({ columns, rows }: Props) => {
     <div className="px-4 h-full  ">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
-        <ATMPageHeading> Outer Packaging Boxes </ATMPageHeading>
+        <ATMPageHeading> Schemes</ATMPageHeading>
         <button className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
-          + Add Box{" "}
+          + Add Scheme{" "}
         </button>
       </div>
 

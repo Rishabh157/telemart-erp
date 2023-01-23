@@ -24,10 +24,10 @@ const CartonBoxListing = ({ columns, rows }: Props) => {
     <div className="px-4 h-full  ">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
-        <ATMPageHeading> Outer Packaging Boxes </ATMPageHeading>
+        <ATMPageHeading> Taxes </ATMPageHeading>
         <button className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
-          + Add Box{" "}
+          + Add Tax{" "}
         </button>
       </div>
 

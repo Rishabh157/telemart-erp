@@ -4,7 +4,7 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/productCategorySlice";
+import { setRowsPerPage, setPage } from "src/redux/slices/dealersCategorySlice";
 import { AppDispatch, RootState } from "src/redux/store";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -13,21 +13,21 @@ type Props = {
   rows: any[];
 };
 
-const ProductCategoryListing = ({ columns, rows }: Props) => {
+const DealerCategoryListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const productCategoryState: any = useSelector((state: RootState) => state.productCategory);
+  const dealerCategoryState: any = useSelector((state: RootState) => state.dealersCategory);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const { page, rowsPerPage } = productCategoryState;
+  const { page, rowsPerPage } = dealerCategoryState;
 
   return (
     <div className="px-4 h-full  ">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
-        <ATMPageHeading> Product Categories </ATMPageHeading>
+        <ATMPageHeading> Dealer Categories </ATMPageHeading>
         <button className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
-          + Add Product Category{" "}
+          + Add Dealer Category{" "}
         </button>
       </div>
 
@@ -69,4 +69,4 @@ const ProductCategoryListing = ({ columns, rows }: Props) => {
   );
 };
 
-export default ProductCategoryListing;
+export default DealerCategoryListing;

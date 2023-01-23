@@ -24,10 +24,10 @@ const ProductsListing = ({ columns, rows }: Props) => {
     <div className="px-4 h-full  ">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
-        <ATMPageHeading> Product Categories </ATMPageHeading>
+        <ATMPageHeading> Products  </ATMPageHeading>
         <button className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
-          + Add Product Category{" "}
+          + Add Products {" "}
         </button>
       </div>
 

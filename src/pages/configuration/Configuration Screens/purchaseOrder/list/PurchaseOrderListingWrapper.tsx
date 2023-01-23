@@ -1,6 +1,6 @@
 import React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-// import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-456001ux";
 // import { useNavigate } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { PurchaseOrderListResponse } from "src/models/PurchaseOrder.model";
@@ -10,20 +10,20 @@ import PurchaseOrderListing from "./PurchaseOrderListing";
 //     setIsTableLoading,
 //     setItems,
 //     setTotalItems,
-// } from "src/redux/slices/vendorSlice";
-// import { AppDispatch, RootestimateDeliveryDate } from "src/redux/store";
+// } from "src/456001ux/slices/vendorSlice";
+// import { AppDispatch, RootestimateDeliveryDate } from "src/456001ux/store";
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 
 const columns: columnTypes[] = [
     {
         field: "poCode",
-        headerName: "Attribute Name",
+        headerName: "PO Code",
         flex: "flex-[1_1_0%]",
         renderCell: (row: PurchaseOrderListResponse) => <span> {row.poCode} </span>,
     },
     {
         field: "itemName",
-        headerName: "Attribute Type",
+        headerName: "Item Name",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: PurchaseOrderListResponse) => {
             return <span className="text-primary-main "> {row.itemName} </span>;
@@ -31,7 +31,7 @@ const columns: columnTypes[] = [
     },
     {
         field: "quantity",
-        headerName: "Attribute Type",
+        headerName: "Qnty.",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: PurchaseOrderListResponse) => {
             return <span className="text-primary-main "> {row.quantity} </span>;
@@ -39,7 +39,7 @@ const columns: columnTypes[] = [
     },
     {
         field: "price",
-        headerName: "Attribute Type",  
+        headerName: "Price",  
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: PurchaseOrderListResponse) => {
             return <span className="text-primary-main "> {row.price} </span>;
@@ -47,7 +47,7 @@ const columns: columnTypes[] = [
     },
     {
         field: "vendor",
-        headerName: "Attribute Type",
+        headerName: "Vendor",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: PurchaseOrderListResponse) => {
             return <span className="text-primary-main "> {row.vendor} </span>;
@@ -55,7 +55,7 @@ const columns: columnTypes[] = [
     },
     {
         field: "estimateDeliveryDate",
-        headerName: "Attribute Type",
+        headerName: "Est. Delivery Date",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: PurchaseOrderListResponse) => {
             return <span className="text-primary-main "> {row.estimateDeliveryDate} </span>;
@@ -77,193 +77,193 @@ const columns: columnTypes[] = [
 
 const rows = [
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
 
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
 
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
 
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
 
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
 
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
 
     {
-        quantity: "Himanshu",
-        poCode: "red",
-        itemName: "Color",
-        price : "Item Box",
-        vendor: "Mandsaur",
-        estimateDeliveryDate: "M.P.",
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
+        barcode: "8574859685",
+    },
+    {
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
+        barcode: "8574859685",
+    },
+
+    {
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
+        barcode: "8574859685",
+    },
+    {
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
+        barcode: "8574859685",
+    },
+
+    {
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
+        barcode: "8574859685",
+    },
+    {
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
+        barcode: "8574859685",
+    },
+
+    {
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
+        barcode: "8574859685",
+    },
+    {
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
+        barcode: "8574859685",
+    },
+
+    {
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
 
@@ -294,7 +294,7 @@ const PurchaseOrderListingWrapper = () => {
     //     },
     //     orderBy: "createdAt",
     //     orderByValue: -1,
-    //     isPaginationRequired: true,
+    //     isPaginationRequi456001: true,
     // });
 
     // useEffect(() => {

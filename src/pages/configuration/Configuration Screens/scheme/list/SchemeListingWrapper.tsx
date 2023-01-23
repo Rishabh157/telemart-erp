@@ -1,6 +1,6 @@
 import React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-// import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-Offerux";
 // import { useNavigate } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { SchemeListResponse } from "src/models/scheme.model";
@@ -10,47 +10,50 @@ import SchemeListing from "./SchemeListing";
 //     setIsTableLoading,
 //     setItems,
 //     setTotalItems,
-// } from "src/redux/slices/vendorSlice";
-// import { AppDispatch, Rootweight } from "src/redux/store";
+// } from "src/Offerux/slices/vendorSlice";
+// import { AppDispatch, Rootweight } from "src/Offerux/store";
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 
 const columns: columnTypes[] = [
-    {
-        field: "schemeName",
-        headerName: "Attribute Name",
-        flex: "flex-[1_1_0%]",
-        renderCell: (row: SchemeListResponse) => <span> {row.schemeName} </span>,
-    },
+    
     {
         field: "schemeCode",
-        headerName: "Attribute Type",
+        headerName: "Scheme Code",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: SchemeListResponse) => {
             return <span className="text-primary-main "> {row.schemeCode} </span>;
         },
     },
     {
+        field: "schemeName",
+        headerName: "Scheme Name",
+        flex: "flex-[1_1_0%]",
+        renderCell: (row: SchemeListResponse) => <span> {row.schemeName} </span>,
+    },
+    
+    {
         field: "category",
-        headerName: "Attribute Type",
+        headerName: "Category",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: SchemeListResponse) => {
             return <span className="text-primary-main "> {row.category} </span>;
         },
     },
-    {
-        field: "price",
-        headerName: "Attribute Type",  
-        flex: "flex-[1.5_1.5_0%]",
-        renderCell: (row: SchemeListResponse) => {
-            return <span className="text-primary-main "> {row.price} </span>;
-        },
-    },
+
     {
         field: "subCategory",
-        headerName: "Attribute Type",
+        headerName: "Sub Category",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: SchemeListResponse) => {
             return <span className="text-primary-main "> {row.subCategory} </span>;
+        },
+    },
+    {
+        field: "price",
+        headerName: "Price",  
+        flex: "flex-[1.5_1.5_0%]",
+        renderCell: (row: SchemeListResponse) => {
+            return <span className="text-primary-main "> {row.price} </span>;
         },
     },
     {
@@ -69,192 +72,192 @@ const columns: columnTypes[] = [
 
 const rows = [
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
 
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
 
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
 
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
 
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
 
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
 
     {
-        category: "Himanshu",
-        schemeName: "red",
-        schemeCode: "Color",
-        price : "Item Box",
-        subCategory: "Mandsaur",
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+
+    {
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+
+    {
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+
+    {
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+
+    {
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
@@ -286,7 +289,7 @@ const SchemeListingWrapper = () => {
     //     },
     //     orderBy: "createdAt",
     //     orderByValue: -1,
-    //     isPaginationRequired: true,
+    //     isPaginationRequiOffer: true,
     // });
 
     // useEffect(() => {

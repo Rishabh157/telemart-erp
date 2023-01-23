@@ -1,6 +1,6 @@
 import React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-// import { useDispatch, useSelector } from "react-123456ux";
+// import { useDispatch, useSelector } from "react--ux";
 // import { useNavigate } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { ConfigurationCompanyListResponse } from "src/models/ConfigurationCompany.model";
@@ -9,21 +9,21 @@ import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 //     setIsTableLoading,
 //     setItems,
 //     setTotalItems,
-// } from "src/123456ux/slices/vendorSlice";
-// import { AppDispatch, Rootaddress } from "src/123456ux/store";
+// } from "src/-ux/slices/vendorSlice";
+// import { AppDispatch, Rootaddress } from "src/-ux/store";
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 import ConfigurationCompanyListing from "./ConfigurationCompanyListing";
 
 const columns: columnTypes[] = [
     {
         field: "logo",
-        headerName: "Category Code",
+        headerName: "Company Logo",
         flex: "flex-[1_1_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => <span> {row.logo} </span>,
     },
     {
         field: "company_name",
-        headerName: "Category Name ",
+        headerName: "Company Name ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => {
             return <span className="text-primary-main "> {row.company_name} </span>;
@@ -31,7 +31,7 @@ const columns: columnTypes[] = [
     },
     {
         field: "website_url",
-        headerName: "Category Name ",
+        headerName: "Website URL ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => {
             return <span className="text-primary-main "> {row.website_url} </span>;
@@ -39,7 +39,7 @@ const columns: columnTypes[] = [
     },
     {
         field: "address",
-        headerName: "Category Name ",
+        headerName: "Address ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => {
             return <span className="text-primary-main "> {row.address} </span>;
@@ -47,7 +47,7 @@ const columns: columnTypes[] = [
     },
     {
         field: "gst_no",
-        headerName: "Category Name ",
+        headerName: "GST no.",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => {
             return <span className="text-primary-main "> {row.gst_no} </span>;
@@ -55,7 +55,7 @@ const columns: columnTypes[] = [
     },
     {
         field: "phone_no",
-        headerName: "Phone Number",
+        headerName: "Phone no.",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => {
             return <span className="text-primary-main "> {row.phone_no} </span>;
@@ -77,192 +77,192 @@ const columns: columnTypes[] = [
 
 const rows = [
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
 
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
 
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
 
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
 
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
 
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
 
     {
-        phone_no: "Himanshu",
-        logo: "123456",
-        company_name: "Chips",
-        website_url: "Jain",
-        gst_no: "Mandsaur",
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
+        address: "M.P.",
+        mobile: "8574859685",
+    },
+    {
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
+        address: "M.P.",
+        mobile: "8574859685",
+    },
+
+    {
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
+        address: "M.P.",
+        mobile: "8574859685",
+    },
+    {
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
+        address: "M.P.",
+        mobile: "8574859685",
+    },
+
+    {
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
+        address: "M.P.",
+        mobile: "8574859685",
+    },
+    {
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
+        address: "M.P.",
+        mobile: "8574859685",
+    },
+
+    {
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
+        address: "M.P.",
+        mobile: "8574859685",
+    },
+    {
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
+        address: "M.P.",
+        mobile: "8574859685",
+    },
+
+    {
+        phone_no: "9302085050",
+        logo: "-",
+        company_name: "Something",
+        website_url: "Jain.com",
+        gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
     },
@@ -294,7 +294,7 @@ const ConfigurationCompanyListingWrapper = () => {
     //     },
     //     orderBy: "createdAt",
     //     orderByValue: -1,
-    //     isPaginationRequi123456: true,
+    //     isPaginationRequi-: true,
     // });
 
     // useEffect(() => {

@@ -3,6 +3,7 @@ import Header from 'src/components/UI/Header/Header';
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar';
 import { NavItemType } from 'src/navigation';
 import { AiOutlineSetting } from "react-icons/ai";
+import { useLocation } from 'react-router-dom';
 
 const configurationNavigation : NavItemType[]= [
 {
@@ -106,12 +107,16 @@ const ConfigurationLayout = ({
         setIsCollapsed(prev=> !prev)
     }
 
+    const location= useLocation()
+
+    const currentPath = `/configurations/${location.pathname?.split("/")[2]}`
+
     return (
         <div className='flex h-screen w-screen' >
 
         {/* Side Navigation Bar */}
     <div className={`border-r border-slate-300 h-full transition-all duration-500   ${isCollapsed ? "w-[50px]" : "w-[250px]"}`} >
-        <VerticalNavBar toggleCollapse = {toggleCollapse} isCollapsed= {isCollapsed} navigation={configurationNavigation} />
+        <VerticalNavBar toggleCollapse = {toggleCollapse} isCollapsed= {isCollapsed} navigation={configurationNavigation} isPathEqualtoNavItem={(navItem:any)=> navItem.path === currentPath } />
     </div>
 
     <div className='h-full grow ' >

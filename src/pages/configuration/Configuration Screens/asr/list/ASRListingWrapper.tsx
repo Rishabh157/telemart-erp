@@ -1,6 +1,6 @@
 import React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-// import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-Alcobanux";
 // import { useNavigate } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { ASRListResponse } from "src/models/ASR.model";
@@ -10,20 +10,20 @@ import ASRListing from "./ASRListing";
 //     setIsTableLoading,
 //     setItems,
 //     setTotalItems,
-// } from "src/redux/slices/vendorSlice";
-// import { AppDispatch, Rootweight } from "src/redux/store";
+// } from "src/Alcobanux/slices/vendorSlice";
+// import { AppDispatch, Rootweight } from "src/Alcobanux/store";
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 
 const columns: columnTypes[] = [
     {
         field: "itemName",
-        headerName: "Attribute Name",
+        headerName: "Item Name",
         flex: "flex-[1_1_0%]",
         renderCell: (row: ASRListResponse) => <span> {row.itemName} </span>,
     },
     {
         field: "quantity",
-        headerName: "Attribute Type",
+        headerName: "Quantity",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ASRListResponse) => {
             return <span className="text-primary-main "> {row.quantity} </span>;
@@ -46,8 +46,8 @@ const columns: columnTypes[] = [
 const rows = [
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -56,8 +56,8 @@ const rows = [
 
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -65,27 +65,8 @@ const rows = [
     },
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -94,8 +75,8 @@ const rows = [
 
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -103,27 +84,8 @@ const rows = [
     },
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -132,8 +94,8 @@ const rows = [
 
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -141,27 +103,8 @@ const rows = [
     },
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -170,8 +113,8 @@ const rows = [
 
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -179,27 +122,8 @@ const rows = [
     },
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -208,8 +132,8 @@ const rows = [
 
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -217,8 +141,8 @@ const rows = [
     },
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -227,8 +151,84 @@ const rows = [
 
     {
         boxWeight: "Himanshu",
-        itemName: "red",
-        quantity: "Color",
+        itemName: "Alcoban",
+        quantity: "12",
+        boxName : "Item Box",
+        subCategory: "Mandsaur",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        boxWeight: "Himanshu",
+        itemName: "Alcoban",
+        quantity: "12",
+        boxName : "Item Box",
+        subCategory: "Mandsaur",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+
+    {
+        boxWeight: "Himanshu",
+        itemName: "Alcoban",
+        quantity: "12",
+        boxName : "Item Box",
+        subCategory: "Mandsaur",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        boxWeight: "Himanshu",
+        itemName: "Alcoban",
+        quantity: "12",
+        boxName : "Item Box",
+        subCategory: "Mandsaur",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+
+    {
+        boxWeight: "Himanshu",
+        itemName: "Alcoban",
+        quantity: "12",
+        boxName : "Item Box",
+        subCategory: "Mandsaur",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        boxWeight: "Himanshu",
+        itemName: "Alcoban",
+        quantity: "12",
+        boxName : "Item Box",
+        subCategory: "Mandsaur",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+
+    {
+        boxWeight: "Himanshu",
+        itemName: "Alcoban",
+        quantity: "12",
+        boxName : "Item Box",
+        subCategory: "Mandsaur",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        boxWeight: "Himanshu",
+        itemName: "Alcoban",
+        quantity: "12",
+        boxName : "Item Box",
+        subCategory: "Mandsaur",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+
+    {
+        boxWeight: "Himanshu",
+        itemName: "Alcoban",
+        quantity: "12",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
@@ -262,7 +262,7 @@ const ASRListingWrapper = () => {
     //     },
     //     orderBy: "createdAt",
     //     orderByValue: -1,
-    //     isPaginationRequired: true,
+    //     isPaginationRequiAlcoban: true,
     // });
 
     // useEffect(() => {

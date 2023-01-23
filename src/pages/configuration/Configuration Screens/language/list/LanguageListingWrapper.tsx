@@ -1,6 +1,6 @@
 import React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-// import { useDispatch, useSelector } from "react-123456ux";
+// import { useDispatch, useSelector } from "react-Hindiux";
 // import { useNavigate } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { LanguageListResponse } from "src/models/Language.model";
@@ -9,15 +9,15 @@ import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 //     setIsTableLoading,
 //     setItems,
 //     setTotalItems,
-// } from "src/123456ux/slices/vendorSlice";
-// import { AppDispatch, RootState } from "src/123456ux/store";
+// } from "src/Hindiux/slices/vendorSlice";
+// import { AppDispatch, RootState } from "src/Hindiux/store";
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 import LanguageListing from "./LanguageListing";
 
 const columns: columnTypes[] = [
     {
         field: "languageName",
-        headerName: "Category Code",
+        headerName: "Language",
         flex: "flex-[1_1_0%]",
         renderCell: (row: LanguageListResponse) => <span> {row.languageName} </span>,
     },
@@ -38,7 +38,7 @@ const columns: columnTypes[] = [
 const rows = [
     {
         firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -48,7 +48,7 @@ const rows = [
 
     {
         firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -57,26 +57,7 @@ const rows = [
     },
     {
         firstName: "Himanshu",
-        languageName: "123456",
-        categoryName: "Chips",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        languageName: "123456",
-        categoryName: "Chips",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -86,7 +67,7 @@ const rows = [
 
     {
         firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -95,26 +76,7 @@ const rows = [
     },
     {
         firstName: "Himanshu",
-        languageName: "123456",
-        categoryName: "Chips",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        languageName: "123456",
-        categoryName: "Chips",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -124,7 +86,7 @@ const rows = [
 
     {
         firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -133,26 +95,7 @@ const rows = [
     },
     {
         firstName: "Himanshu",
-        languageName: "123456",
-        categoryName: "Chips",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        languageName: "123456",
-        categoryName: "Chips",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -162,7 +105,7 @@ const rows = [
 
     {
         firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -171,26 +114,7 @@ const rows = [
     },
     {
         firstName: "Himanshu",
-        languageName: "123456",
-        categoryName: "Chips",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        languageName: "123456",
-        categoryName: "Chips",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -200,7 +124,7 @@ const rows = [
 
     {
         firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -209,7 +133,7 @@ const rows = [
     },
     {
         firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -219,7 +143,83 @@ const rows = [
 
     {
         firstName: "Himanshu",
-        languageName: "123456",
+        languageName: "Hindi",
+        categoryName: "Chips",
+        lastName: "Jain",
+        district: "Mandsaur",
+        state: "M.P.",
+        mobile: "8574859685",
+    },
+    {
+        firstName: "Himanshu",
+        languageName: "Hindi",
+        categoryName: "Chips",
+        lastName: "Jain",
+        district: "Mandsaur",
+        state: "M.P.",
+        mobile: "8574859685",
+    },
+
+    {
+        firstName: "Himanshu",
+        languageName: "Hindi",
+        categoryName: "Chips",
+        lastName: "Jain",
+        district: "Mandsaur",
+        state: "M.P.",
+        mobile: "8574859685",
+    },
+    {
+        firstName: "Himanshu",
+        languageName: "Hindi",
+        categoryName: "Chips",
+        lastName: "Jain",
+        district: "Mandsaur",
+        state: "M.P.",
+        mobile: "8574859685",
+    },
+
+    {
+        firstName: "Himanshu",
+        languageName: "Hindi",
+        categoryName: "Chips",
+        lastName: "Jain",
+        district: "Mandsaur",
+        state: "M.P.",
+        mobile: "8574859685",
+    },
+    {
+        firstName: "Himanshu",
+        languageName: "Hindi",
+        categoryName: "Chips",
+        lastName: "Jain",
+        district: "Mandsaur",
+        state: "M.P.",
+        mobile: "8574859685",
+    },
+
+    {
+        firstName: "Himanshu",
+        languageName: "Hindi",
+        categoryName: "Chips",
+        lastName: "Jain",
+        district: "Mandsaur",
+        state: "M.P.",
+        mobile: "8574859685",
+    },
+    {
+        firstName: "Himanshu",
+        languageName: "Hindi",
+        categoryName: "Chips",
+        lastName: "Jain",
+        district: "Mandsaur",
+        state: "M.P.",
+        mobile: "8574859685",
+    },
+
+    {
+        firstName: "Himanshu",
+        languageName: "Hindi",
         categoryName: "Chips",
         lastName: "Jain",
         district: "Mandsaur",
@@ -254,7 +254,7 @@ const LanguageListingWrapper = () => {
     //     },
     //     orderBy: "createdAt",
     //     orderByValue: -1,
-    //     isPaginationRequi123456: true,
+    //     isPaginationRequiHindi: true,
     // });
 
     // useEffect(() => {
