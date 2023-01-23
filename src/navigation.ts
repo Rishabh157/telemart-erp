@@ -10,7 +10,7 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { AiOutlineSetting } from "react-icons/ai";
 import { IconType } from 'react-icons'
 
-type NavItemType = {
+export type NavItemType = {
   label: string,
   path: string,
   icon: IconType,

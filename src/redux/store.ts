@@ -2,6 +2,23 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { companyApi, dealerApi, userApi, vendorApi } from "src/services";
 import { companySlice, dealerSlice, userSlice, vendorSlice } from "./slices";
+import ASRSlice from "./slices/ASRSlice";
+import attributesGroupSlice from "./slices/attributesGroupSlice";
+import attributesSlice from "./slices/attributesSlice";
+import cartonBoxSlice from "./slices/cartonBoxSlice";
+import configurationCompanySlice from "./slices/configurationCompanySlice";
+import dealersCategorySlice from "./slices/dealersCategorySlice";
+import GRNSlice from "./slices/GRNSlice";
+import inventorySlice from "./slices/inventorySlice";
+import itemSlice from "./slices/itemSlice";
+import languageSlice from "./slices/languageSlice";
+import outwardRequestSlice from "./slices/outwardRequestSlice";
+import productCategorySlice from "./slices/productCategorySlice";
+import productSlice from "./slices/productSlice";
+import productSubCategorySlice from "./slices/productSubCategorySlice";
+import PurchaseOrderSlice from "./slices/PurchaseOrderSlice";
+import saleOrderSlice from "./slices/saleOrderSlice";
+import schemeSlice from "./slices/schemeSlice";
 import warehouseSlice from "./slices/warehouseSlice";
 
 // Middleware for handling 401 Error
@@ -20,10 +37,28 @@ const store = configureStore({
         user: userSlice,
         company: companySlice,
         warehouse: warehouseSlice,
+        inventory : inventorySlice,
+        outwardRequest : outwardRequestSlice,
+        saleOrder : saleOrderSlice,
+        attributesGroup : attributesGroupSlice,
+        productCategory : productCategorySlice,
+        cartonBox : cartonBoxSlice,
+        scheme : schemeSlice,
+        purchaseOrder : PurchaseOrderSlice,
+        grn : GRNSlice,
+        productSubCategory : productSubCategorySlice,
+        attributes : attributesSlice,
+        item : itemSlice,
+        language : languageSlice,
+        dealersCategory : dealersCategorySlice,
+        products : productSlice,
+        asr : ASRSlice,
+        configurationCompany : configurationCompanySlice,
         [dealerApi.reducerPath]: dealerApi.reducer,
         [vendorApi.reducerPath]: vendorApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
         [companyApi.reducerPath]: companyApi.reducer,
+
 
 
     },

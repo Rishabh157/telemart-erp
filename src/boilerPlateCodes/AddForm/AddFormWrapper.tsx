@@ -25,7 +25,6 @@ const AddFormWrapper = () => {
     const onSubmitHandler = (values: any) => {
 
         // Write your submit handler here
-        console.log("🚀 ~ file: AddDealer.tsx:13 ~ onSubmitHandler ~ values", values)
     }
 
     return (

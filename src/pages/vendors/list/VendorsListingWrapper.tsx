@@ -16,31 +16,31 @@ import VendorsListing from "./VendorsListing";
 
 const columns: columnTypes[] = [
   {
-    field: "vendorName",
-    headerName: "Name",
-    flex: "flex-[1_1_0%]",
-    renderCell: (row: VendorsListResponse) => (
-      <span className="text-primary-main "> {row.vendorName} </span>
-    ),
-  },
-  {
     field: "vendorCode",
     headerName: "Vendor Code",
     flex: "flex-[1_1_0%]",
     renderCell: (row: VendorsListResponse) => <span> {row.vendorCode} </span>,
   },
   {
-    field: "email",
-    headerName: "Email",
-    flex: "flex-[1.5_1.5_0%]",
-    renderCell: (row: VendorsListResponse) => {
-      return <span className="text-primary-main "> {row.email} </span>;
-    },
+    field: "mobile",
+    headerName: "Phone",
+    flex: "flex-[1_1_0%]",
   },
   {
-    field: "mobile",
-    headerName: "Mobile no.",
+    field: "district",
+    headerName: "District",
     flex: "flex-[1_1_0%]",
+    renderCell: (row: VendorsListResponse) => (
+      <span className="text-primary-main "> {row.district} </span>
+    ),
+  },
+  {
+    field: "state",
+    headerName: "State",
+    flex: "flex-[1_1_0%]",
+    renderCell: (row: VendorsListResponse) => (
+      <span className="text-primary-main "> {row.state} </span>
+    ),
   },
   {
     field: "actions",
@@ -58,142 +58,182 @@ const columns: columnTypes[] = [
 
 const rows = [
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
 
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
 
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
 
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
 
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
 
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
 
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
 
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
 
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
 
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
 
   {
-    vendorName: "Himanshu",
-    vendorCode: "HJ108",
-    email: "him@gmail.com",
-    mobile: "8574859685",
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore"
+
   },
-  
+
 ];
 
 const VendorsListingWrapper = () => {
   const vendorState: any = useSelector((state: RootState) => state.vendor);
 
-  const {  page, rowsPerPage } = vendorState;
+  const { page, rowsPerPage } = vendorState;
 
   const dispatch = useDispatch<AppDispatch>();
   // const navigate = useNavigate();

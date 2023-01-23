@@ -37,9 +37,6 @@ const Test = () => {
   const area = Math.sqrt(halfOfPerimeter* (halfOfPerimeter-a)*(halfOfPerimeter-b)*(halfOfPerimeter-c))
         return area
   }
-
-  console.log(triangleArea(3,4,5))
-
   return (
     <SideNavLayout>
       <div className="h-full flex w-full">
