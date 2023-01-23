@@ -65,7 +65,6 @@ const AddWarehouseWrapper = () => {
 
         const {setSubmitting , resetForm} = formikHelpers;
         setTimeout(()=> {
-            console.log("🚀 ~ file: AddDealer.tsx:13 ~ onSubmitHandler ~ values", values)
             setSubmitting(false)
             resetForm()
         }, 800)

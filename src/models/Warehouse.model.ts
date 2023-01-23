@@ -1,9 +1,10 @@
 export type WarehousesListResponse = {
-  name: string;
-  address: string;
-  pincode: string;
+  warehouseCode: string;
+  warehouseName: string;
+  country: string;
   state: string;
   district: string;
+  pincode: string;
   contactNo: string;
   mobile: string;
   gst_no: string;

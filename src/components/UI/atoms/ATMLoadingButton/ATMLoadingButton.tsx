@@ -14,6 +14,7 @@ const ATMLoadingButton = ({
     isLoading = false,
     loadingText = 'Submitting...',
     type = 'button',
+    disabled,
     ...rest
 }: Props
 ) => {
@@ -21,7 +22,8 @@ const ATMLoadingButton = ({
         <>
             <button
                 type={type}
-                className={twMerge(`border w-full bg-primary-main text-white rounded p-2 flex h-[42px] flex gap-2 justify-center items-center ${className} ${rest.disabled ? "opacity-[.60]" : ""}`)}
+                disabled= {isLoading}
+                className={twMerge(`border w-full bg-primary-main text-white rounded p-2  h-[42px] flex gap-2 justify-center items-center ${className} ${disabled || isLoading ? "opacity-[.60]" : ""}`)}
                 {...rest}
             >
                 {

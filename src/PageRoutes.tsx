@@ -1,19 +1,32 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import AddCompanyWrapper from './pages/configuration/screens/companies/add/AddCompanyWrapper'
-import CompaniesListingWrapper from './pages/configuration/screens/companies/list/CompaniesListingWrapper'
-import Locations from './pages/configuration/screens/locations/Locations'
-import OrganisationHierarchyWrapper from './pages/configuration/screens/organisationHierarchy/list/OrganisationHierarchyWrapper'
-import AddPolicyWrapper from './pages/configuration/screens/policies/add/AddPolicyWrapper'
-import PolicyListingWrapper from './pages/configuration/screens/policies/list/PolicyListingWrapper'
+import ASRListingWrapper from './pages/configuration/Configuration Screens/asr/list/ASRListingWrapper'
+import AttributesListingWrapper from './pages/configuration/Configuration Screens/attributes/list/AttributesListingWrapper'
+import AttributesGroupListingWrapper from './pages/configuration/Configuration Screens/attributesGroup/list/AttributesGroupListingWrapper'
+import CartonBoxListingWrapper from './pages/configuration/Configuration Screens/cartonBox/list/CartonBoxListingWrapper'
+import ConfigurationCompanyListingWrapper from './pages/configuration/Configuration Screens/configurationCompany/list/ConfigurationCompanyListingWrapper'
+import DealersCategoryListingWrapper from './pages/configuration/Configuration Screens/dealersCategory/list/DealersCategoryListingWrapper'
+import GRNListingWrapper from './pages/configuration/Configuration Screens/grn/list/GRNListingWrapper'
+import ItemListingWrapper from './pages/configuration/Configuration Screens/item/list/ItemListingWrapper'
+import LanguageListingWrapper from './pages/configuration/Configuration Screens/language/list/LanguageListingWrapper'
+import ProductCategoryListingWrapper from './pages/configuration/Configuration Screens/productCategory/list/ProductCategoryListingWrapper'
+import ProductsListingWrapper from './pages/configuration/Configuration Screens/products/list/ProductWrapper'
+import ProductSubCategoryListingWrapper from './pages/configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper'
+import PurchaseOrderListingWrapper from './pages/configuration/Configuration Screens/purchaseOrder/list/PurchaseOrderListingWrapper'
+import SchemeListingWrapper from './pages/configuration/Configuration Screens/scheme/list/SchemeListingWrapper'
+import TaxesListingWrapper from './pages/configuration/Configuration Screens/taxes/list/TaxesListingWrapper'
+import ConfigurationLayout from './pages/configuration/ConfigurationLayout'
 import DashboardWrappper from './pages/Dashboard/DashboardWrappper'
 import AddDealerWrapper from './pages/dealers/add/AddDealerWrapper'
 import DealersListingWrapper from './pages/dealers/list/DealersListingWrapper'
 import ViewDealer from './pages/dealers/view'
 import DealerOrderTab from './pages/dealers/view/tabs/orderTab/DealerOrderTab'
+import InventoryListingWrapper from './pages/inventories/list/InventoryListingWrapper'
 import LoginPage from './pages/login/LoginPage'
 import AddOrder from './pages/orders/add/AddOrder'
 import OrderListing from './pages/orders/OrderListing'
+import OutwardRequestListingWrapper from './pages/outwardRequest/list/OutwardRequestListingWrapper'
+import SaleOrderListingWrapper from './pages/saleOrder/list/SaleOrderListingWrapper'
 import Test from './pages/test/Test'
 import UsersListingWrapper from './pages/users/list/UsersListingWrapper'
 import AddVendorWrapper from './pages/vendors/add/AddVendorWrapper'
@@ -44,6 +57,9 @@ const PageRoutes = () => {
 
           <Route path='/warehouse' element={<WarehousesListingWrapper />} />
           <Route path='/warehouse/add-warehouse' element={<AddWarehouseWrapper />} />
+          <Route path='/inventories' element={<InventoryListingWrapper />} />
+          <Route path='/sale-order' element={<SaleOrderListingWrapper />} />
+          <Route path='/outward-request' element={<OutwardRequestListingWrapper />} />
 
           <Route path='/dealers/:dealerId' element={<ViewDealer />} >
             <Route path='orders' element={<DealerOrderTab />} />
@@ -53,16 +69,24 @@ const PageRoutes = () => {
           </Route>
           <Route path='users' element={<UsersListingWrapper />} />
           <Route path='test' element={<Test />} />
-          <Route path='configuration/companies' element={<CompaniesListingWrapper />} />
-          <Route path='configuration/companies/add-company' element={<AddCompanyWrapper />} />
-          <Route path='configuration/organizations-hierarchy' element={<OrganisationHierarchyWrapper />} />
-          <Route path='configuration/locations' element={<Locations />} />
-          <Route path='configuration/policies' element={<PolicyListingWrapper />} />
-          <Route path='configuration/policies/add-policy' element={<AddPolicyWrapper />} />
+          <Route path='/configurations' element={<ConfigurationLayout />} />
+          <Route path='/configurations/attributes' element={<AttributesListingWrapper />} />
+          <Route path='/configurations/attributes-group' element={<AttributesGroupListingWrapper />} />
+          <Route path='/configurations/product-category' element={<ProductCategoryListingWrapper />} />
+          <Route path='/configurations/product-sub-category' element={<ProductSubCategoryListingWrapper />} />
+          <Route path='/configurations/item' element={<ItemListingWrapper />} />
+          <Route path='/configurations/products' element={<ProductsListingWrapper />} />
+          <Route path='/configurations/carton-box' element={<CartonBoxListingWrapper />} />
+          <Route path='/configurations/scheme' element={<SchemeListingWrapper />} />
+          <Route path='/configurations/taxes' element={<TaxesListingWrapper />} />
+          <Route path='/configurations/purchase-order' element={<PurchaseOrderListingWrapper />} />
+          <Route path='/configurations/grn' element={<GRNListingWrapper />} />
+          <Route path='/configurations/company' element={<ConfigurationCompanyListingWrapper />} />
+          <Route path='/configurations/asr' element={<ASRListingWrapper />} />
+          <Route path='/configurations/dealers-category' element={<DealersCategoryListingWrapper />} />
+          <Route path='/configurations/language' element={<LanguageListingWrapper />} />
 
-
-
-        </Routes>
+          </Routes>
       </BrowserRouter>
     </>
   )

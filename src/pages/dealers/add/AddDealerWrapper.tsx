@@ -47,7 +47,6 @@ const AddDealerWrapper = () => {
     })
 
     const onSubmitHandler = (values: any) => {
-        console.log("🚀 ~ file: AddDealer.tsx:13 ~ onSubmitHandler ~ values", values)
     }
 
     return (

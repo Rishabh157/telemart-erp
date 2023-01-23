@@ -37,9 +37,6 @@ const ATMSelect = ({
 ) => {
 
     const [toggleOpenSelect, setToggleOpenSelect] = useState(false);
-    console.log(window.screen.height)
-
-
     return (
         <div >
             {

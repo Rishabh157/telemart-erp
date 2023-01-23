@@ -1,4 +1,4 @@
-import { Formik, Form, FormikProps } from "formik";
+import { Formik, Form, FormikProps, FormikHelpers } from "formik";
 import React from "react";
 import FilterDialog from "./FilterDialog";
 
@@ -19,8 +19,15 @@ const FilterDialogWarpper = ({ onClose }: Props) => {
   };
 
   // Form Submit Handler
-  const onSubmitHandler = (values: FormInitalValues) => {
-    console.log("onSubmit", values);
+  const onSubmitHandler = (
+    values: FormInitalValues,
+    { setSubmitting }: FormikHelpers<FormInitalValues>
+  ) => {
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      onClose()
+    }, 1000);
   };
 
   return (

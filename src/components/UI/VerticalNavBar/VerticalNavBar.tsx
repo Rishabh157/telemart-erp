@@ -1,22 +1,23 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { navigation } from '../../../navigation'
+import { NavItemType } from 'src/navigation';
 
 type Props = {
     toggleCollapse: ()=>void;
-    isCollapsed: boolean
+    isCollapsed: boolean,
+    navigation : NavItemType[],
+    isPathEqualtoNavItem? : (navItem : any) => boolean, 
 }
 
 const VerticalNavBar = ({
     toggleCollapse,
-    isCollapsed
+    isCollapsed,
+    navigation,
+    isPathEqualtoNavItem = (navItem) => false
 }: Props
 ) => {
 
     const navigate = useNavigate()
-    const location = useLocation()
-    const currentPath = `/${location.pathname.split('/')[1]}`
-
     return (
         <div className="h-full py-3 overflow-auto bg-white">
 
@@ -62,7 +63,7 @@ const VerticalNavBar = ({
                 transition-all
                 duration-500
                 ${isCollapsed && "justify-center"} 
-                ${currentPath === navItem.path ? "bg-sky-50 text-sky-500 font-semibold" : "text-slate-500" } 
+                ${isPathEqualtoNavItem(navItem) ? "bg-sky-50 text-sky-500 font-semibold" : "text-slate-500" } 
                 `}
                 >
                 <div className="py-1" > <navItem.icon/> </div>

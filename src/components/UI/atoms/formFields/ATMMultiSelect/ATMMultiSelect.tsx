@@ -42,10 +42,6 @@ const ATMMultiSelect = ({
 ) => {
 
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-
-
-    console.log("value", value)
-
     return (
         <div>
             {
