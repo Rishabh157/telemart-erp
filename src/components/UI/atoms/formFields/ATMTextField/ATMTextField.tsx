@@ -29,13 +29,13 @@ const ATMTextField = ({
         <div className='relative' >
             {
                 label &&
-                <label className='text-slate-500' > {label} {required && <span className='text-red-500'> * </span>} </label>
+                <label className='text-slate-700 font-medium' > {label} {required && <span className='text-red-500'> * </span>} </label>
             }
             <input
                 name={name}
                 value={value}
                 onChange={(e) => { onChange(e) }}
-                className={`${getInputHeight(size)} w-full px-2 text-slate-700 border border-slate-400 outline-blue-400  ${label && 'mt-1'}  ${className}`}
+                className={`${getInputHeight(size)} w-full px-2 text-slate-700 border border-slate-400 outline-blue-400  ${label && 'mt-2'}  ${className}`}
                 {...rest}
                 type='textarea'
 

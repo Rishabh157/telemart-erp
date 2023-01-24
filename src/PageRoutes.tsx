@@ -29,6 +29,7 @@ import OutwardRequestListingWrapper from './pages/outwardRequest/list/OutwardReq
 import SaleOrderListingWrapper from './pages/saleOrder/list/SaleOrderListingWrapper'
 import Test from './pages/test/Test'
 import UsersListingWrapper from './pages/users/list/UsersListingWrapper'
+import AddVendorWrapper from './pages/vendors/add/AddVendorWrapper'
 import VendorsListingWrapper from './pages/vendors/list/VendorsListingWrapper'
 import ViewVendor from './pages/vendors/view'
 import AddWarehouseWrapper from './pages/warehouses/add/AddWarehouseWrapper'
@@ -46,6 +47,7 @@ const PageRoutes = () => {
           <Route path='/dealers' element={<DealersListingWrapper />} />
           <Route path='/dealers/add-dealer' element={<AddDealerWrapper />} />
           <Route path='/vendors' element={<VendorsListingWrapper />} />
+          <Route path='/vendors/add-vendor' element={<AddVendorWrapper />} />
           <Route path='/vendors/:vendorId' element={<ViewVendor />} >
             <Route path='orders' element={"Orders"} />
             <Route path='activities' element={"Activities"} />

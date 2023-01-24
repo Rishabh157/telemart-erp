@@ -25,20 +25,20 @@ const SideNavLayout = ({
     <div className='flex h-screen w-screen' >
 
         {/* Side Navigation Bar */}
-    <div className={`border-r border-slate-300 h-full transition-all duration-500   ${isCollapsed ? "w-[50px]" : "w-[250px]"}`} >
+    <div className={`border-r border-slate-300 h-full transition-all duration-500   ${isCollapsed ? "w-[50px]" : "min-w-[250px]"}`} >
         <VerticalNavBar toggleCollapse = {toggleCollapse} isCollapsed= {isCollapsed} navigation={navigation} 
         isPathEqualtoNavItem= {(navItem:any)=> navItem.path === currentPath}
         />
     </div>
 
-    <div className='h-full grow ' >
+    <div className='h-full grow' >
 
         {/* Header */}
         <div className='h-[55px] border-b border-slate-300  ' >
             <Header/>
          </div>
 
-         <div className='h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50 ' >
+         <div className='max-h-[calc(100%-55px)] w-full overflow-auto bg-slate-50 ' >
                {children}
          </div>
     </div>

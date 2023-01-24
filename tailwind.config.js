@@ -9,6 +9,9 @@ module.exports = {
           main: "var(--primary-main)"
         }
       },
+      backgroundImage: {
+        'form-bg': "url('src/assets/images/FormbgImg.png')",
+      },
       keyframes: {
         fade: {
           '0%': { opacity: 0 },

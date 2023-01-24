@@ -2,20 +2,20 @@ import React from "react";
 import { Form, Formik, FormikProps } from "formik";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { array, mixed, object, string } from "yup";
-import AddDealer from "./AddDealer";
-import StepAddCompanyDetailsWrapper from "./FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper";
+import AddVendor from "./AddVendor";
 import StepAddAddressWrapper from "./FormSteps/StepAddAddress/StepAddAddressWrapper";
+import StepAddBankDetailsWrapper from "./FormSteps/StepAddBankDetails/StepAddBankDetailsWrapper";
+import StepAddCompanyDetailsWrapper from "./FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper";
 import StepAddContactWrapper from "./FormSteps/StepAddContact/StepAddContactWrapper";
 import StepAddDocumentsWrapper from "./FormSteps/StepAddDocuments/StepAddDocumentsWrapper";
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
-  dealer_code: string;
-  dealer_category: string;
-  firm_name: string;
-  first_name: string;
-  last_name: string;
-  email: string;
+  company_name: string;
+  company_type: string;
+  ownership_type: string;
+  website_address: string;
+  vendor_code: string;
   regd_address: {
     phone: string;
     address: string;
@@ -42,12 +42,16 @@ export type FormInitialValues = {
   }[];
   gst_no: string;
   gst_certificate: string;
-  aadhar_no: string;
-  aadhar_certificate: string;
-  other_documents: {
-      document_name: string;
-      document_file: string;
-    }[]
+  declaration_form: string;
+  bank_informations: {
+    bank_name: string;
+    branch: string;
+    account_holder_name: string;
+    account_number: string;
+    ifsc_no: string;
+    account_type: string;
+    cancelled_cheque: string;
+  }[];
 };
 
 // Form Steps
@@ -110,20 +114,38 @@ const steps = [
       declaration_form: mixed().required("Declaration form is required"),
     }),
   },
+  {
+    label: "Bank Details",
+    component: StepAddBankDetailsWrapper,
+    validationSchema: object({
+      bank_informations: array().of(
+        object().shape({
+          bank_name: string().required("Bank name is required"),
+          branch: string().required("Branch name is required"),
+          account_holder_name: string().required("Account holder name is required"),
+          account_number: string().required("Account number is required"),
+          ifsc_no: string().required("IFS code is required"),
+          account_type: string().required("Please select account type"),
+          cancelled_cheque: mixed().required("Cancelled cheque is required"),
+        })
+      )
+     
+    }),
+  },
 ];
 
-const AddDealerWrapper = () => {
+const AddVendorWrapper = () => {
+
   // States
   const [activeStep, setActiveStep] = React.useState(0);
 
   // From Initial Values
   const initialValues: FormInitialValues = {
-    dealer_code: "",
-    dealer_category: "",
-    firm_name: "",
-    first_name: "",
-    last_name: "",
-    email: "",
+    company_name: "",
+    company_type: "",
+    ownership_type: "",
+    website_address: "",
+    vendor_code: "",
     regd_address: {
       phone: "",
       address: "",
@@ -159,21 +181,24 @@ const AddDealerWrapper = () => {
       },
     ],
     gst_no: "",
-    gst_certificate: "",
-    aadhar_no: "",
-    aadhar_certificate: "",
-    other_documents: [
+    gst_certificate: "https://source.unsplash.com/user/c_v_r/1900x800",
+    declaration_form: "",
+    bank_informations: [
       {
-        document_name: "",
-        document_file: "",
+        bank_name: "",
+        branch: "",
+        account_holder_name: "",
+        account_number: "",
+        ifsc_no: "",
+        account_type: "",
+        cancelled_cheque: "",
       },
     ],
   };
 
   // Form validation schema based on the active step
   const getValidationSchema = (activeStep: number) => {
-    return steps.find((_, stepIndex) => stepIndex === activeStep)
-      ?.validationSchema;
+    return steps.find((_ , stepIndex)=> stepIndex === activeStep)?.validationSchema
   };
 
   // On Submit Handler
@@ -192,12 +217,12 @@ const AddDealerWrapper = () => {
     <SideNavLayout>
       <Formik
         initialValues={initialValues}
-        // validationSchema={getValidationSchema(activeStep)}
+        validationSchema={getValidationSchema(activeStep)}
         onSubmit={onSubmitHandler}
       >
         {(formikProps: FormikProps<FormInitialValues>) => (
           <Form className="">
-            <AddDealer
+            <AddVendor
               formikProps={formikProps}
               steps={steps}
               activeStep={activeStep}
@@ -210,4 +235,4 @@ const AddDealerWrapper = () => {
   );
 };
 
-export default AddDealerWrapper;
+export default AddVendorWrapper;

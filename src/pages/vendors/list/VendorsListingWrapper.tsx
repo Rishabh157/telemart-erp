@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { VendorsListResponse } from "src/models";
@@ -236,7 +235,7 @@ const VendorsListingWrapper = () => {
   const { page, rowsPerPage } = vendorState;
 
   const dispatch = useDispatch<AppDispatch>();
-  // const navigate = useNavigate();
+  
   const { data, isFetching, isLoading } = useGetVendorsQuery({
     limit: rowsPerPage,
     searchValue: "",
@@ -271,11 +270,9 @@ const VendorsListingWrapper = () => {
   }, [isLoading, isFetching, data]);
 
   return (
-    <>
       <SideNavLayout>
         <VendorsListing columns={columns} rows={rows} />
       </SideNavLayout>
-    </>
   );
 };
 

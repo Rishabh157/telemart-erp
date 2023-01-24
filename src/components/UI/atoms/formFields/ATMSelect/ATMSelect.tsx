@@ -38,7 +38,7 @@ const ATMSelect = ({
         )}
         <Select
           name="color"
-          className={`basic-single  ${label && "mt-1"}`}
+          className={`basic-single rounded  ${label && "mt-2"}`}
           theme={(theme) => {
             return {
               ...theme,
