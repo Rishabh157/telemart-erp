@@ -127,6 +127,7 @@ const StepAddBankDetails = ({ formikProps , formFields , dropdownOptions }: Prop
                                   case "file-picker":
                                     return (
                                       <ATMFilePickerWrapper
+                                        name={name}
                                         key={name}
                                         label={label}
                                         placeholder={placeholder}

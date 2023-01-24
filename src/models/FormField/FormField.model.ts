@@ -4,6 +4,7 @@ export type TextFieldType = {
     placeholder: string;
     type?: "text";
     optionAccessKey?: never;
+    offset?: number
   };
   
  export type SelectFieldType<OptionAccessKey> = {
@@ -12,6 +13,8 @@ export type TextFieldType = {
     placeholder: string;
     type?: "select";
     optionAccessKey: OptionAccessKey;
+    offset?: number
+
   };
 
   export type FilePickerFieldType = {
@@ -20,9 +23,11 @@ export type TextFieldType = {
     placeholder: string;
     type?: "file-picker";
     optionAccessKey?: never;
+    offset?: number
   };
+
   
-export type Field<OptionAccessKey> = TextFieldType | SelectFieldType<OptionAccessKey> | FilePickerFieldType;
+export type Field<OptionAccessKey> = TextFieldType | SelectFieldType<OptionAccessKey> | FilePickerFieldType ;
 
 export type SelectOption= {
   label: string,

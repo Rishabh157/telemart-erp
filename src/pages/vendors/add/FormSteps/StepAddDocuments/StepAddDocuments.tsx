@@ -49,6 +49,7 @@ const StepAddDocuments = ({ formikProps , formFields }: Props) => {
                   case "file-picker":
                     return (
                       <ATMFilePickerWrapper
+                        name={name}
                         key={name}
                         label={label}
                         placeholder={placeholder}

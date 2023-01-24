@@ -26,12 +26,29 @@ const AddVendor = ({
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const breadcrumbs= [
+    {
+      label: "Vendors",
+      onClick: () => {
+        console.log("Vendors");
+      },
+      path: "/vendors"
+    },
+    {
+      label: "Add Vendor",
+      onClick: () => {
+        console.log("add-Vendors");
+      },
+    
+    },
+  ];
+
   return (
    <div className="" >
      <div className="p-4 flex flex-col gap-2  ">
       {/* Breadcrumbs */}
       <div className="" >
-        <ATMBreadCrumbs />
+        <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
       </div>
 
       {/* Page Heading */}

@@ -3,26 +3,13 @@ import { Breadcrumbs, Link } from "@mui/material";
 import {FiChevronRight} from 'react-icons/fi'
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
+type Props = {
+  breadcrumbs: {label: string , onClick: () =>void; path?: string}[]
+};
 
-const breadcrumbs = [
-  {
-    label: "Vendors",
-    onClick: () => {
-      console.log("Vendors");
-    },
-    path: "/vendors"
-  },
-  {
-    label: "Add Vendor",
-    onClick: () => {
-      console.log("add-Vendors");
-    },
-  
-  },
-];
-
-const ATMBreadCrumbs = (props: Props) => {
+const ATMBreadCrumbs = ({
+  breadcrumbs,
+}: Props) => {
 
     const navigate = useNavigate()
 

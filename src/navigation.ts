@@ -67,7 +67,7 @@ export const navigation:NavItemType[] = [
   {
     label: "Configurations",
     icon: AiOutlineSetting,
-    path: '/configurations',
+    path: '/configurations/attributes',
   },
 
 ];

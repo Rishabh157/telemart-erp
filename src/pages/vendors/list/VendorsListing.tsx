@@ -22,12 +22,21 @@ const VendorsListing = ({ columns, rows }: Props) => {
 
   const { page, rowsPerPage } = vendorState;
 
+  const tableMaxHeight =  `max-h-[calc(100% - ${(document.getElementById("bottom-pagination")?.offsetHeight || 0)  + (document.getElementById("table-header")?.offsetHeight || 0) }px)]`;
+  
+  console.log(tableMaxHeight)
+
   return (
-    <div className="px-4 h-full  ">
+    <div className="px-4 h-[calc(100vh-55px)]">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Vendors </ATMPageHeading>
-        <button onClick={()=> {navigate('add-vendor')}} className="bg-primary-main text-white rounded py-1 px-3">
+        <button
+          onClick={() => {
+            navigate("add-vendor");
+          }}
+          className="bg-primary-main text-white rounded py-1 px-3"
+        >
           {" "}
           + Add Vendor{" "}
         </button>
@@ -35,23 +44,30 @@ const VendorsListing = ({ columns, rows }: Props) => {
 
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
         {/*Table Header */}
-        <ATMTableHeader
-          page={page}
-          rowCount={rows.length}
-          rowsPerPage={rowsPerPage}
-          rows={rows}
-          onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
-          isFilter
-          onFilterClick={() => setIsFilterOpen(true)}
-        />
+        <div id="table-header" >
+          <ATMTableHeader
+            page={page}
+            rowCount={rows.length}
+            rowsPerPage={rowsPerPage}
+            rows={rows}
+            onRowsPerPageChange={(newValue) =>
+              dispatch(setRowsPerPage(newValue))
+            }
+            isFilter
+            onFilterClick={() => setIsFilterOpen(true)}
+          />
+        </div>
 
         {/* Table */}
-        <div className="grow overflow-auto  ">
+        <div className={`overflow-auto `}>
           <ATMTable columns={columns} rows={rows} />
         </div>
 
         {/* Pagination */}
-        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+        <div
+          id="bottom-pagination"
+          className="h-[90px] flex items-center justify-end border-t border-slate-300"
+        >
           <ATMPagination
             page={page}
             rowCount={rows.length}
@@ -63,9 +79,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
       </div>
 
       {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
+        <FilterDialogWarpper onClose={() => setIsFilterOpen(false)} />
       )}
     </div>
   );

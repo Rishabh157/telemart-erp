@@ -71,4 +71,6 @@ export const {
     setIsTableLoading,
     setSelectedId
 } = vendorSlice.actions
+
+console.log(vendorSlice)
 export default vendorSlice.reducer

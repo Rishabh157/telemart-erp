@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
 import { setRowsPerPage, setPage } from "src/redux/slices/dealerSlice";
 import { AppDispatch, RootState } from "src/redux/store";
+import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
@@ -14,6 +16,8 @@ type Props = {
 };
 
 const DealersListing = ({ columns, rows }: Props) => {
+
+  const navigate= useNavigate()
   const dispatch = useDispatch<AppDispatch>();
   const dealerState: any = useSelector((state: RootState) => state.dealer);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -21,17 +25,20 @@ const DealersListing = ({ columns, rows }: Props) => {
   const { page, rowsPerPage } = dealerState;
 
   return (
-    <div className="px-4 h-full  ">
+    <div className="px-4 h-[calc(100vh-55px)]  ">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Dealers </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
-          {" "}
-          + Add Dealers{" "}
+        <button 
+        onClick={()=> {navigate("add-dealer")}}
+        className="bg-primary-main text-white rounded py-1 px-3"
+        >
+          + Add Dealers
         </button>
       </div>
 
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+
         {/*Table Header */}
         <ATMTableHeader
           page={page}
@@ -60,11 +67,11 @@ const DealersListing = ({ columns, rows }: Props) => {
         </div>
       </div>
 
-      {/* {isFilterOpen && (
+      {isFilterOpen && (
        <FilterDialogWarpper
        onClose={()=> setIsFilterOpen(false)}
        />
-      )} */}
+      )}
     </div>
   );
 };

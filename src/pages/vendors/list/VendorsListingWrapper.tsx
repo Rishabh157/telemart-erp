@@ -270,11 +270,9 @@ const VendorsListingWrapper = () => {
   }, [isLoading, isFetching, data]);
 
   return (
-    <>
       <SideNavLayout>
         <VendorsListing columns={columns} rows={rows} />
       </SideNavLayout>
-    </>
   );
 };
 
