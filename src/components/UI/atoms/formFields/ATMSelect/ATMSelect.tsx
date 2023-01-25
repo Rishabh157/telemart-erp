@@ -1,8 +1,6 @@
-import { ThemeContext } from "@emotion/react";
+import React from "react";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import { ErrorMessage } from "formik";
-import React, { useEffect, useState } from "react";
-import Select, { Options } from "react-select";
-import { getInputHeight } from "src/utils/formUtils/getInputHeight";
 
 type Props = {
   options: any[];
@@ -10,8 +8,8 @@ type Props = {
   onChange: (value: any) => void;
   label?: string;
   required?: boolean;
-  size?: "small" | "medium" | "large";
-  name?: string;
+  size?: "small" | "medium";
+  name: string;
 };
 
 const ATMSelect = ({
@@ -23,46 +21,33 @@ const ATMSelect = ({
   size = "small",
   name,
 }: Props) => {
-  const [isClearable, setIsClearable] = useState(true);
-  const [isSearchable, setIsSearchable] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
   return (
     <>
       <div className="relative ">
         {label && (
-          <label className="text-slate-500">
+          <label className="text-slate-700 font-medium">
             {label} {required && <span className="text-red-500"> * </span>}
           </label>
         )}
-        <Select
-          name="color"
-          className={`basic-single rounded  ${label && "mt-2"}`}
-          theme={(theme) => {
-            return {
-              ...theme,
-              borderRadius: 0,
-              spacing: {
-                ...theme.spacing,
-                controlHeight: parseInt(`${getInputHeight(size, true)}`),
-              },
-            };
-          }}
-          value={value}
-          onChange={(newValue) => onChange(newValue)}
-          isDisabled={isDisabled}
-          isLoading={isLoading}
-          isClearable={isClearable}
-          isSearchable={isSearchable}
-          options={options}
-          isOptionSelected={(option, selectValue) => {
-            return option.value === selectValue[0].value;
-          }}
-          formatOptionLabel={(data) => {
-            return <div style={{ color: data.color }}> {data.label} </div>;
-          }}
-        />
+        <FormControl fullWidth>
+          <Select
+            name={name}
+            value={value}
+            onChange={onChange}
+            size={size}
+            className="shadow mt-2"
+            displayEmpty
+          >
+            <MenuItem value="">
+              <span className="text-slate-400">Select {label}</span>
+            </MenuItem>
+            {options?.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
         {name && (
           <ErrorMessage name={name}>

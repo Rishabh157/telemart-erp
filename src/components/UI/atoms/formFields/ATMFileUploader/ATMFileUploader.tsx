@@ -47,16 +47,16 @@ const ATMFileUploader = ({
       </button>
 
       {selectedFile && (
-        <div className="w-full h-[150px] mt-1 border rounded shadow" >
-            <img
-              src={
-                typeof selectedFile === "string"
-                  ? selectedFile
-                  : URL.createObjectURL(selectedFile)
-              }
-              alt=""
-              className="w-full h-full rounded"
-            />
+        <div className="w-full h-[150px] mt-1 border rounded shadow">
+          <img
+            src={
+              typeof selectedFile === "string"
+                ? selectedFile
+                : URL.createObjectURL(selectedFile)
+            }
+            alt=""
+            className="w-full h-full rounded"
+          />
         </div>
       )}
 

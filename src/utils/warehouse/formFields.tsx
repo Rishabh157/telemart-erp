@@ -237,6 +237,7 @@ export const renderFormFields = (
                     )}
                   >
                     <ATMSelect
+                      name=""
                       value={values[name as keyof typeof values]}
                       onChange={(newValue) => setFieldValue(name, newValue)}
                       options={[]}
