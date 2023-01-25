@@ -21,7 +21,7 @@ const StepAddComapnyDetails = ({
 
   return (
     <div className="py-6 px-7">
-      <div className="grid grid-cols-3 gap-4 gap-y-6">
+      <div className="grid grid-cols-3 gap-4 gap-y-5">
         {formFields?.map((field: FieldType) => {
           const { type = "text", name, label, placeholder }  = field;
 
