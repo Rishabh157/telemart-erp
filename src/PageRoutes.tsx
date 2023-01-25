@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ASRListingWrapper from './pages/configuration/Configuration Screens/asr/list/ASRListingWrapper'
+import AddAttributeWrapper from './pages/configuration/Configuration Screens/attributes/add/AddAttributeWrapper'
 import AttributesListingWrapper from './pages/configuration/Configuration Screens/attributes/list/AttributesListingWrapper'
 import AttributesGroupListingWrapper from './pages/configuration/Configuration Screens/attributesGroup/list/AttributesGroupListingWrapper'
 import CartonBoxListingWrapper from './pages/configuration/Configuration Screens/cartonBox/list/CartonBoxListingWrapper'
@@ -71,6 +72,9 @@ const PageRoutes = () => {
           <Route path='test' element={<Test />} />
           <Route path='/configurations' element={<ConfigurationLayout />} />
           <Route path='/configurations/attributes' element={<AttributesListingWrapper />} />
+          
+          <Route path='/configurations/attributes/add' element={<AddAttributeWrapper />} />
+
           <Route path='/configurations/attributes-group' element={<AttributesGroupListingWrapper />} />
           <Route path='/configurations/product-category' element={<ProductCategoryListingWrapper />} />
           <Route path='/configurations/product-sub-category' element={<ProductSubCategoryListingWrapper />} />

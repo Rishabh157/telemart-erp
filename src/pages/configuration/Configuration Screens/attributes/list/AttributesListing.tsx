@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -14,18 +15,17 @@ type Props = {
 };
 
 const AttributesListing = ({ columns, rows }: Props) => {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>();
   const attributesState: any = useSelector((state: RootState) => state.attributes);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-
   const { page, rowsPerPage } = attributesState;
-
   return (
     <div className="px-4 h-full  ">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Attributes </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button onClick={() => navigate("/configurations/attributes/add")} className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
           + Add Attribute{" "}
         </button>
