@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddAttributeWrapper";
+import { FormInitialValues } from "./AddDealersCategoryWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -14,15 +14,15 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
-    label: "Attributes",
-    path: "/configurations/attributes",
+    label: "List Page",
+    path: "/list-page",
   },
   {
-    label: "Add Attribute",
+    label: "Add Form",
   },
 ];
 
-const AddAttribute = ({ formikProps }: Props) => {
+const AddDealersCategory = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -35,13 +35,13 @@ const AddAttribute = ({ formikProps }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Attribute </ATMPageHeading>
+          <ATMPageHeading> Add New Form </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
           <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
             {/* Form Heading */}
-            <div className="text-xl font-medium"> Attribute Details</div>
+            <div className="text-xl font-medium"> Form Heading </div>
 
             {/* BUTTON - Add Button */}
             <div>
@@ -50,7 +50,7 @@ const AddAttribute = ({ formikProps }: Props) => {
                 onClick={() => formikProps.handleSubmit()}
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add Attribute
+                Add Button
               </button>
             </div>
           </div>
@@ -58,22 +58,39 @@ const AddAttribute = ({ formikProps }: Props) => {
           {/* Form */}
           <div className="grow py-8 px-3 ">
             <div className="grid grid-cols-3 gap-4">
-              {/* Field1 */}
+              {/* dealersCategory */}
               <ATMTextField
-                name="attributeType"
-                value={values.attributeType}
-                label="Attribute Type"
-                placeholder="Attribute Type"
-                onChange={(e) => setFieldValue("attributeType", e.target.value)}
+                name="dealersCategory"
+                value={values.dealersCategory}
+                label="Dealers Category"
+                placeholder="Dealers Category"
+                onChange={(e) => setFieldValue("dealersCategory", e.target.value)}
               />
 
-              {/* Field 3 */}
+              {/* Invest Amount */}
               <ATMTextField
-                name="attributeName"
-                value={values.attributeName}
-                label="Attribute Name"
-                placeholder="Attribute Name"
-                onChange={(e) => setFieldValue("attributeName", e.target.value)}
+                name="investAmount"
+                value={values.investAmount}
+                label="Invest Amount"
+                placeholder="Invest Amount"
+                onChange={(e) => setFieldValue("investAmount", e.target.value)}
+              />
+
+               {/* Number of Orders */}
+              <ATMTextField
+                name="noOfOrders"
+                value={values.noOfOrders}
+                label="Number Of Orders"
+                placeholder="Number Of Orders"
+                onChange={(e) => setFieldValue("noOfOrders", e.target.value)}
+              />
+               {/* Delivery Percentage */}
+              <ATMTextField
+                name="deliveryPercantage"
+                value={values.deliveryPercantage}
+                label="Delivery Percentage"
+                placeholder="Delivery Percentage"
+                onChange={(e) => setFieldValue("deliveryPercantage", e.target.value)}
               />
             </div>
           </div>
@@ -83,6 +100,4 @@ const AddAttribute = ({ formikProps }: Props) => {
   );
 };
 
-export default AddAttribute;
-
-
+export default AddDealersCategory;

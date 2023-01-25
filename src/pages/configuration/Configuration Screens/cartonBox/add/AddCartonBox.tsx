@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddAttributeWrapper";
+import { FormInitialValues } from "./AddCartonBoxWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -14,15 +14,15 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
-    label: "Attributes",
-    path: "/configurations/attributes",
+    label: "Outer Pack Box",
+    path: "/configurations/carton-box/add",
   },
   {
-    label: "Add Attribute",
+    label: "Add Outer Pack Box",
   },
 ];
 
-const AddAttribute = ({ formikProps }: Props) => {
+const AddCartonBox = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -35,13 +35,13 @@ const AddAttribute = ({ formikProps }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Attribute </ATMPageHeading>
+          <ATMPageHeading> Add New Outer Packaging Box </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
           <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
             {/* Form Heading */}
-            <div className="text-xl font-medium"> Attribute Details</div>
+            <div className="text-xl font-medium"> Outer Pack Box Details </div>
 
             {/* BUTTON - Add Button */}
             <div>
@@ -50,7 +50,7 @@ const AddAttribute = ({ formikProps }: Props) => {
                 onClick={() => formikProps.handleSubmit()}
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add Attribute
+                Add Box
               </button>
             </div>
           </div>
@@ -58,22 +58,31 @@ const AddAttribute = ({ formikProps }: Props) => {
           {/* Form */}
           <div className="grow py-8 px-3 ">
             <div className="grid grid-cols-3 gap-4">
-              {/* Field1 */}
+              {/* boxName */}
               <ATMTextField
-                name="attributeType"
-                value={values.attributeType}
-                label="Attribute Type"
-                placeholder="Attribute Type"
-                onChange={(e) => setFieldValue("attributeType", e.target.value)}
+                name="boxName"
+                value={values.boxName}
+                label="Box Name"
+                placeholder="Box Name"
+                onChange={(e) => setFieldValue("boxName", e.target.value)}
               />
 
-              {/* Field 3 */}
+              {/* Inner Items Count */}
               <ATMTextField
-                name="attributeName"
-                value={values.attributeName}
-                label="Attribute Name"
-                placeholder="Attribute Name"
-                onChange={(e) => setFieldValue("attributeName", e.target.value)}
+                name="innerItemsCount"
+                value={values.innerItemsCount}
+                label="Inner Items Count"
+                placeholder="Inner Items Count"
+                onChange={(e) => setFieldValue("innerItemsCount", e.target.value)}
+              />
+
+              {/* Box Weight */}
+              <ATMTextField
+                name="boxWeight"
+                value={values.boxWeight}
+                label="Box Weight"
+                placeholder="Box Weight"
+                onChange={(e) => setFieldValue("boxWeight", e.target.value)}
               />
             </div>
           </div>
@@ -83,6 +92,4 @@ const AddAttribute = ({ formikProps }: Props) => {
   );
 };
 
-export default AddAttribute;
-
-
+export default AddCartonBox;

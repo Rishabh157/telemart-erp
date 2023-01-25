@@ -1,46 +1,45 @@
 import React from "react";
 import { Formik } from "formik";
 import {  object, string } from "yup";
-import AddAttribute from "./AddAttribute";
-import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
+import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
+import AddTaxes from "./AddTaxes";
 
 type Props = {};
-
+ 
 export type FormInitialValues = {
-  attributeType: string;
-  attributeName: string;
+  taxName: string;
 };
 
-const AddAttributeWrapper = (props: Props) => {
+const AddTaxesWrapper = (props: Props) => {
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    attributeType: "",
-    attributeName: "",
+    taxName: "",
   };
 
   // Form Validation Schema
   const validationSchema = object({
-    attributeType: string().required("Attribute Type is required"),
-    attributeName: string().required("Attribute Name is required"),
+    taxName: string().required("taxName is required"),
   });
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
     console.log("onSubmitHandler", values);
   };
+
+
   return (
-    <ConfigurationLayout>
+    <SideNavLayout>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <AddAttribute formikProps={formikProps}  />;
+          return <AddTaxes formikProps={formikProps} />;
         }}
       </Formik>
-    </ConfigurationLayout>
+    </SideNavLayout>
   );
 };
 
-export default AddAttributeWrapper;
+export default AddTaxesWrapper;

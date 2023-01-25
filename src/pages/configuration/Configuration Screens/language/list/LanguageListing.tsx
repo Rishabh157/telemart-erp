@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -17,6 +18,7 @@ const LanguageListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const languageState: any = useSelector((state: RootState) => state.language);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const navigate = useNavigate()
 
   const { page, rowsPerPage } = languageState;
 
@@ -25,7 +27,7 @@ const LanguageListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Languages </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button onClick={() => navigate("/configurations/language/add")} className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
           + Add Language{" "}
         </button>

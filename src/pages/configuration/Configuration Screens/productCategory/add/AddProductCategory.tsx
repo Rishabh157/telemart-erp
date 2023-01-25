@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddAttributeWrapper";
+import { FormInitialValues } from "./AddProductCategoryWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -22,7 +22,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddAttribute = ({ formikProps }: Props) => {
+const AddProductCategory = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -35,13 +35,13 @@ const AddAttribute = ({ formikProps }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Attribute </ATMPageHeading>
+          <ATMPageHeading> Add New Product Category </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
           <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
             {/* Form Heading */}
-            <div className="text-xl font-medium"> Attribute Details</div>
+            <div className="text-xl font-medium"> Product Details</div>
 
             {/* BUTTON - Add Button */}
             <div>
@@ -50,7 +50,7 @@ const AddAttribute = ({ formikProps }: Props) => {
                 onClick={() => formikProps.handleSubmit()}
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add Attribute
+                Add Product
               </button>
             </div>
           </div>
@@ -60,20 +60,20 @@ const AddAttribute = ({ formikProps }: Props) => {
             <div className="grid grid-cols-3 gap-4">
               {/* Field1 */}
               <ATMTextField
-                name="attributeType"
-                value={values.attributeType}
+                name="categoryCode"
+                value={values.categoryCode}
                 label="Attribute Type"
                 placeholder="Attribute Type"
-                onChange={(e) => setFieldValue("attributeType", e.target.value)}
+                onChange={(e) => setFieldValue("categoryCode", e.target.value)}
               />
 
               {/* Field 3 */}
               <ATMTextField
-                name="attributeName"
-                value={values.attributeName}
+                name="categoryName"
+                value={values.categoryName}
                 label="Attribute Name"
                 placeholder="Attribute Name"
-                onChange={(e) => setFieldValue("attributeName", e.target.value)}
+                onChange={(e) => setFieldValue("categoryName", e.target.value)}
               />
             </div>
           </div>
@@ -83,6 +83,4 @@ const AddAttribute = ({ formikProps }: Props) => {
   );
 };
 
-export default AddAttribute;
-
-
+export default AddProductCategory;

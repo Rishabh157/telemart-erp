@@ -1,46 +1,42 @@
 import React from "react";
 import { Formik } from "formik";
-import {  object, string } from "yup";
-import AddAttribute from "./AddAttribute";
-import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
+import { array, object, string } from "yup";
+import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
+import AddLanguage from "./AddLanguage";
 
 type Props = {};
 
 export type FormInitialValues = {
-  attributeType: string;
-  attributeName: string;
+  languageName: string;
 };
 
-const AddAttributeWrapper = (props: Props) => {
+const AddLanguageWrapper = (props: Props) => {
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    attributeType: "",
-    attributeName: "",
+    languageName: "",
   };
 
   // Form Validation Schema
   const validationSchema = object({
-    attributeType: string().required("Attribute Type is required"),
-    attributeName: string().required("Attribute Name is required"),
+    languageName: string().required("Language Name is required"),
   });
-
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
     console.log("onSubmitHandler", values);
   };
   return (
-    <ConfigurationLayout>
+    <SideNavLayout>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <AddAttribute formikProps={formikProps}  />;
+          return <AddLanguage formikProps={formikProps} />;
         }}
       </Formik>
-    </ConfigurationLayout>
+    </SideNavLayout>
   );
 };
 
-export default AddAttributeWrapper;
+export default AddLanguageWrapper;

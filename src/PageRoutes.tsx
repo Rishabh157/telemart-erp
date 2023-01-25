@@ -4,17 +4,24 @@ import ASRListingWrapper from './pages/configuration/Configuration Screens/asr/l
 import AddAttributeWrapper from './pages/configuration/Configuration Screens/attributes/add/AddAttributeWrapper'
 import AttributesListingWrapper from './pages/configuration/Configuration Screens/attributes/list/AttributesListingWrapper'
 import AttributesGroupListingWrapper from './pages/configuration/Configuration Screens/attributesGroup/list/AttributesGroupListingWrapper'
+import AddCartonBoxWrapper from './pages/configuration/Configuration Screens/cartonBox/add/AddCartonBoxWrapper'
 import CartonBoxListingWrapper from './pages/configuration/Configuration Screens/cartonBox/list/CartonBoxListingWrapper'
 import ConfigurationCompanyListingWrapper from './pages/configuration/Configuration Screens/configurationCompany/list/ConfigurationCompanyListingWrapper'
+import AddDealersCategoryWrapper from './pages/configuration/Configuration Screens/dealersCategory/add/AddDealersCategoryWrapper'
 import DealersCategoryListingWrapper from './pages/configuration/Configuration Screens/dealersCategory/list/DealersCategoryListingWrapper'
 import GRNListingWrapper from './pages/configuration/Configuration Screens/grn/list/GRNListingWrapper'
+import AddItemWrapper from './pages/configuration/Configuration Screens/item/add/AddItemWrapper'
 import ItemListingWrapper from './pages/configuration/Configuration Screens/item/list/ItemListingWrapper'
+import AddLanguageWrapper from './pages/configuration/Configuration Screens/language/add/AddLanguageWrapper'
 import LanguageListingWrapper from './pages/configuration/Configuration Screens/language/list/LanguageListingWrapper'
+import AddProductCategoryWrapper from './pages/configuration/Configuration Screens/productCategory/add/AddProductCategoryWrapper'
 import ProductCategoryListingWrapper from './pages/configuration/Configuration Screens/productCategory/list/ProductCategoryListingWrapper'
 import ProductsListingWrapper from './pages/configuration/Configuration Screens/products/list/ProductWrapper'
+import AddProductSubCategoryWrapper from './pages/configuration/Configuration Screens/productSubCategory/add/AddProductSubCategoryWrapper'
 import ProductSubCategoryListingWrapper from './pages/configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper'
 import PurchaseOrderListingWrapper from './pages/configuration/Configuration Screens/purchaseOrder/list/PurchaseOrderListingWrapper'
 import SchemeListingWrapper from './pages/configuration/Configuration Screens/scheme/list/SchemeListingWrapper'
+import AddTaxesWrapper from './pages/configuration/Configuration Screens/taxes/add/AddTaxesWrapper'
 import TaxesListingWrapper from './pages/configuration/Configuration Screens/taxes/list/TaxesListingWrapper'
 import ConfigurationLayout from './pages/configuration/ConfigurationLayout'
 import DashboardWrappper from './pages/Dashboard/DashboardWrappper'
@@ -79,18 +86,31 @@ const PageRoutes = () => {
 
           <Route path='/configurations/attributes-group' element={<AttributesGroupListingWrapper />} />
           <Route path='/configurations/product-category' element={<ProductCategoryListingWrapper />} />
+          <Route path='/configurations/product-category/add' element={<AddProductCategoryWrapper />} />
+
           <Route path='/configurations/product-sub-category' element={<ProductSubCategoryListingWrapper />} />
+          <Route path='/configurations/product-sub-category/add' element={<AddProductSubCategoryWrapper />} />
+
           <Route path='/configurations/item' element={<ItemListingWrapper />} />
+          <Route path='/configurations/item/add' element={<AddItemWrapper />} />
+
           <Route path='/configurations/products' element={<ProductsListingWrapper />} />
           <Route path='/configurations/carton-box' element={<CartonBoxListingWrapper />} />
+          <Route path='/configurations/carton-box/add' element={<AddCartonBoxWrapper />} />
+
           <Route path='/configurations/scheme' element={<SchemeListingWrapper />} />
           <Route path='/configurations/taxes' element={<TaxesListingWrapper />} />
+          <Route path='/configurations/taxes/add' element={<AddTaxesWrapper />} />
+
           <Route path='/configurations/purchase-order' element={<PurchaseOrderListingWrapper />} />
           <Route path='/configurations/grn' element={<GRNListingWrapper />} />
           <Route path='/configurations/company' element={<ConfigurationCompanyListingWrapper />} />
           <Route path='/configurations/asr' element={<ASRListingWrapper />} />
           <Route path='/configurations/dealers-category' element={<DealersCategoryListingWrapper />} />
+          <Route path='/configurations/dealers-category/add' element={<AddDealersCategoryWrapper />} />
+
           <Route path='/configurations/language' element={<LanguageListingWrapper />} />
+          <Route path='/configurations/language/add' element={<AddLanguageWrapper />} />
 
           </Routes>
       </BrowserRouter>
