@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -14,9 +15,11 @@ type Props = {
 };
 
 const SaleOrderListing = ({ columns, rows }: Props) => {
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const saleOrderState: any = useSelector((state: RootState) => state.saleOrder);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const navigate = useNavigate()
 
   const { page, rowsPerPage } = saleOrderState;
 
@@ -25,7 +28,7 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Sale Orders </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button onClick={()=> navigate('add-sale-order')} className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
           + Add Sale Order{" "}
         </button>

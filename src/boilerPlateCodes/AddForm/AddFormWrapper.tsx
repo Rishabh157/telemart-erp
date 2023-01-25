@@ -1,60 +1,73 @@
-import { Form, Formik } from 'formik'
-import React from 'react'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { object, string } from 'yup'
-import AddForm from './AddForm'
+import React from "react";
+import { Formik } from "formik";
+import { array, object, string } from "yup";
+import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
+import AddForm from "./AddForm";
 
-export type AddFormValues = {
-    firstName: string;
-    lastName: string;
-}
+type Props = {};
 
-const AddFormWrapper = () => {
+export type FormInitialValues = {
+  field1: string;
+  field2: string;
+  field3: string;
+  field4: {
+    field4a: string;
+    field4b: string;
+    field4c: string;
+  }[];
+};
 
-    // Form Initial Values
-    const initialValues = {
-        firstName: "",
-        lastName: "",
-    }
+const AddFormWrapper = (props: Props) => {
+  // Form Initial Values
+  const initialValues: FormInitialValues = {
+    field1: "",
+    field2: "",
+    field3: "",
+    field4: [
+      {
+        field4a: "",
+        field4b: "",
+        field4c: "",
+      },
+    ],
+  };
 
-    // Form Validation Schema
-    const validationSchema = object({
-        firstName: string().required('Please enter first name')
-    })
+  // Form Validation Schema
+  const validationSchema = object({
+    field1: string().required("Field1 is required"),
+    field2: string().required("Please select a Field2"),
+    field3: string().required("Field3 is required"),
+    field4: array().of(
+      object().shape({
+        field4a: string().required("field4a is required"),
+        field4b: string().required("field4b is required"),
+        field4c: string().required("field4c is required"),
+      })
+    ),
+  });
 
-    const onSubmitHandler = (values: any) => {
+  //    Form Submit Handler
+  const onSubmitHandler = (values: FormInitialValues) => {
+    console.log("onSubmitHandler", values);
+  };
 
-        // Write your submit handler here
-    }
+  const dropdownOptions = {
+    field2Options: [{ label: "dealer", value: "dealer" }],
+  }
 
-    return (
-        <SideNavLayout>
-            <div className='flex justify-center w-full py-2 h-full' >
-                <div className='w-full h-full' >
-                    <Formik
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={onSubmitHandler}
+  return (
+    <SideNavLayout>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmitHandler}
+      >
+        {(formikProps) => {
+          return <AddForm formikProps={formikProps} dropdownOptions= {dropdownOptions} />;
+        }}
+      </Formik>
+    </SideNavLayout>
+  );
+};
 
-                    >
-                        {
-                            (formikProps) => {
-                                return (
-                                    <Form className='h-full' autoComplete='off' >
-                                        <AddForm
-                                            formikProps={formikProps}
-                                        />
-                                    </Form>
-                                )
-                            }
-                        }
-
-
-                    </Formik>
-                </div>
-            </div>
-        </SideNavLayout>
-    )
-}
-
-export default AddFormWrapper
+export default AddFormWrapper;

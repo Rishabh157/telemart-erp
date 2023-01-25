@@ -1,18 +1,20 @@
-import { FormControl, MenuItem, Select } from "@mui/material";
-import { FormikProps } from "formik";
 import React from "react";
+import { FormikProps } from "formik";
+import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
 import { FormInitialValues } from "../../AddVendorWrapper";
 
 type DropdownOptions = {
-  counrtyOptions: SelectOption[],
-  stateOptions: SelectOption[],
-  districtOptions: SelectOption[],
-  pincodeOptions: SelectOption[],
-}
+  counrtyOptions: SelectOption[];
+  stateOptions: SelectOption[];
+  districtOptions: SelectOption[];
+  pincodeOptions: SelectOption[];
+};
 
-type FieldType=  Field<"counrtyOptions" | "stateOptions" | "districtOptions" | "pincodeOptions">
+type FieldType = Field<
+  "counrtyOptions" | "stateOptions" | "districtOptions" | "pincodeOptions"
+>;
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -20,10 +22,14 @@ type Props = {
     sectionName: string;
     fields: FieldType[];
   }[];
-  dropdownOptions:DropdownOptions
+  dropdownOptions: DropdownOptions;
 };
 
-const StepAddAddress = ({ formikProps , formFields , dropdownOptions }: Props) => {
+const StepAddAddress = ({
+  formikProps,
+  formFields,
+  dropdownOptions,
+}: Props) => {
   const { values, setFieldValue }: { values: any; setFieldValue: any } =
     formikProps;
 
@@ -42,19 +48,35 @@ const StepAddAddress = ({ formikProps , formFields , dropdownOptions }: Props) =
               {sectionName}
             </div>
 
-            <div className="grid grid-cols-4 gap-4 gap-y-4">
-              {fields?.map(
-                (
-                  field: FieldType
-                ) => {
-                  const { type = "text", name, label, placeholder } = field;
+            <div className="grid grid-cols-4 gap-4 gap-y-5">
+              {fields?.map((field: FieldType) => {
+                const { type = "text", name, label, placeholder } = field;
 
-                  switch (type) {
-                    
-                    case "text":
-                      return (
-                        <ATMTextField
-                          key={name}
+                switch (type) {
+                  case "text":
+                    return (
+                      <ATMTextField
+                        key={name}
+                        name={name}
+                        value={
+                          name.includes(".")
+                            ? values[name.split(".")[0]][name.split(".")[1]]
+                            : values[name]
+                        }
+                        onChange={(e) => {
+                          setFieldValue(name, e.target.value);
+                        }}
+                        label={label}
+                        placeholder={placeholder}
+                        className="shadow bg-white rounded"
+                      />
+                    );
+
+                  case "select":
+                    return (
+                      <div key={name}>
+                        <ATMSelect
+                          label={label}
                           name={name}
                           value={
                             name.includes(".")
@@ -64,62 +86,19 @@ const StepAddAddress = ({ formikProps , formFields , dropdownOptions }: Props) =
                           onChange={(e) => {
                             setFieldValue(name, e.target.value);
                           }}
-                          label={label}
-                          placeholder={placeholder}
-                          className="shadow bg-white rounded"
+                          options={
+                            dropdownOptions[
+                              field.optionAccessKey || "counrtyOptions"
+                            ]
+                          }
                         />
-                      );
+                      </div>
+                    );
 
-                    case "select":
-                      return (
-                        <div key={name}>
-                          <label className=" text-slate-700 font-medium">
-                            {" "}
-                            {label}{" "}
-                          </label>
-                          <FormControl fullWidth>
-                            <Select
-                              name={name}
-                              value={
-                                name.includes(".")
-                                  ? values[name.split(".")[0]][
-                                      name.split(".")[1]
-                                    ]
-                                  : values[name]
-                              }
-                              onChange={(e) => {
-                                setFieldValue(name, e.target.value);
-                              }}
-                              size="small"
-                              className="shadow mt-2"
-                              displayEmpty
-                            >
-                              <MenuItem value="">
-                                <span className="text-slate-400">
-                                  Select {label}
-                                </span>
-                              </MenuItem>
-                              {dropdownOptions[
-                                field.optionAccessKey || "counrtyOptions"
-                              ]?.map((option) => (
-                                <MenuItem
-                                  key={option.value}
-                                  value={option.value}
-                                >
-                                  {" "}
-                                  {option.label}{" "}
-                                </MenuItem>
-                              ))}
-                            </Select>
-                          </FormControl>
-                        </div>
-                      );
-
-                    default:
-                      return null;
-                  }
+                  default:
+                    return null;
                 }
-              )}
+              })}
             </div>
           </div>
         );
