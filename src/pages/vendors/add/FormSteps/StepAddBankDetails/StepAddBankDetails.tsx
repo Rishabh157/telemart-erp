@@ -3,19 +3,23 @@ import { FieldArray, FormikProps } from "formik";
 import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "../../AddVendorWrapper";
-import { FormControl, MenuItem, Select } from "@mui/material";
 import { MdDeleteOutline } from "react-icons/md";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
+import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 
-type FieldType = Field<'accountTypeOptions'>;
+type FieldType = Field<"accountTypeOptions">;
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   formFields: { sectionName: string; fields: FieldType[] }[];
-  dropdownOptions: {accountTypeOptions:SelectOption[]}
+  dropdownOptions: { accountTypeOptions: SelectOption[] };
 };
 
-const StepAddBankDetails = ({ formikProps , formFields , dropdownOptions }: Props) => {
+const StepAddBankDetails = ({
+  formikProps,
+  formFields,
+  dropdownOptions,
+}: Props) => {
   const { values, setFieldValue }: { values: any; setFieldValue: any } =
     formikProps;
 
@@ -39,7 +43,6 @@ const StepAddBankDetails = ({ formikProps , formFields , dropdownOptions }: Prop
                           <div key={index} className={`py-6 px-7`}>
                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center">
                               {sectionName} #{bankInformationIndex + 1}
-
                               {/* Delete Button */}
                               {values.bank_informations?.length > 1 && (
                                 <button
@@ -52,7 +55,7 @@ const StepAddBankDetails = ({ formikProps , formFields , dropdownOptions }: Prop
                               )}
                             </div>
 
-                            <div className="grid grid-cols-3 gap-4 gap-y-4">
+                            <div className="grid grid-cols-3 gap-4 gap-y-5">
                               {fields?.map((field: FieldType) => {
                                 const {
                                   type = "text",
@@ -62,7 +65,6 @@ const StepAddBankDetails = ({ formikProps , formFields , dropdownOptions }: Prop
                                 } = field;
 
                                 switch (type) {
-
                                   case "text":
                                     return (
                                       <ATMTextField
@@ -83,51 +85,29 @@ const StepAddBankDetails = ({ formikProps , formFields , dropdownOptions }: Prop
 
                                   case "select":
                                     return (
-                                      <div key={name}>
-                                        <label className=" text-slate-700 font-medium">
-                                          {" "}
-                                          {label}{" "}
-                                        </label>
-                                        <FormControl fullWidth>
-                                          <Select
-                                            name={`bank_informations[${bankInformationIndex}].${name}`}
-                                            value={bankInformation[name]}
-                                            onChange={(e) => {
-                                              setFieldValue(
-                                                `bank_informations[${bankInformationIndex}].${name}`,
-                                                e.target.value
-                                              );
-                                            }}
-                                            size="small"
-                                            className="shadow mt-2"
-                                            displayEmpty
-                                          >
-                                            <MenuItem value="">
-                                              <span className="text-slate-400">
-                                                Select {label}
-                                              </span>
-                                            </MenuItem>
-                                            {dropdownOptions[
-                                              field.optionAccessKey ||
-                                                "accountTypeOptions"
-                                            ]?.map((option) => (
-                                              <MenuItem
-                                                key={option.value}
-                                                value={option.value}
-                                              >
-                                                {" "}
-                                                {option.label}{" "}
-                                              </MenuItem>
-                                            ))}
-                                          </Select>
-                                        </FormControl>
-                                      </div>
+                                      <ATMSelect
+                                        name={`bank_informations[${bankInformationIndex}].${name}`}
+                                        value={bankInformation[name]}
+                                        onChange={(e) => {
+                                          setFieldValue(
+                                            `bank_informations[${bankInformationIndex}].${name}`,
+                                            e.target.value
+                                          );
+                                        }}
+                                        options={
+                                          dropdownOptions[
+                                            field.optionAccessKey ||
+                                              "accountTypeOptions"
+                                          ]
+                                        }
+                                        label={label}
+                                      />
                                     );
 
                                   case "file-picker":
                                     return (
                                       <ATMFilePickerWrapper
-                                        name={name}
+                                        name={`bank_informations[${bankInformationIndex}].${name}`}
                                         key={name}
                                         label={label}
                                         placeholder={placeholder}

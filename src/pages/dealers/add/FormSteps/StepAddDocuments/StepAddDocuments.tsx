@@ -107,7 +107,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                         )}
                       </div>
 
-                      <div className="grid grid-cols-3 gap-4 gap-y-4">
+                      <div className="grid grid-cols-3 gap-4 gap-y-5">
                         <ATMTextField
                           name={`other_documents[${otherDocumentIndex}].document_name`}
                           value={otherDocument.document_name}

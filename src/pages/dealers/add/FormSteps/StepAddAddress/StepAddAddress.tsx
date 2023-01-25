@@ -37,7 +37,7 @@ const StepAddAddress = ({
               {sectionName}
             </div>
 
-            <div className="grid grid-cols-4 gap-4 gap-y-4">
+            <div className="grid grid-cols-4 gap-4 gap-y-5">
               {fields?.map((field: FieldType) => {
                 const { type = "text", name, label, placeholder } = field;
 
