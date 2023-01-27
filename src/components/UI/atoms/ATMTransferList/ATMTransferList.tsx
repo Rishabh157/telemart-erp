@@ -6,6 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Checkbox from "@mui/material/Checkbox";
 import Divider from "@mui/material/Divider";
+import { ErrorMessage } from "formik";
 
 function not(
   a: { label: string; value: string }[],
@@ -20,14 +21,16 @@ function intersection(
   a: { label: string; value: string }[],
   b: { label: string; value: string }[]
 ) {
-  return a.filter((eleOfA) => b.findIndex((eleOfB) => eleOfA.value === eleOfB.value) !== -1);
+  return a.filter(
+    (eleOfA) => b.findIndex((eleOfB) => eleOfA.value === eleOfB.value) !== -1
+  );
 }
 
 type Props = {
+  name: string;
   leftSideTitle: string;
   rightSideTitle: string;
-  left: { label: string; value: string }[];
-  setLeft: (newValue: { label: string; value: string }[]) => void;
+  options: { label: string; value: string }[];
   right: { label: string; value: string }[];
   setRight: (newValue: { label: string; value: string }[]) => void;
 };
@@ -35,19 +38,20 @@ type Props = {
 const ATMTransferList = ({
   leftSideTitle,
   rightSideTitle,
-  left,
-  setLeft,
+  options,
+  name,
   right,
   setRight,
 }: Props) => {
   const [checked, setChecked] = React.useState<
-    { label: string; value: string }[]
+    { label: string; value: string }[] | []
   >([]);
+  const [left, setLeft] = React.useState(options);
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
 
   const handleToggle = (value: { label: string; value: string }) => () => {
-    const currentIndex = checked.findIndex(ele =>  ele.value === value.value);
+    const currentIndex = checked.findIndex((ele) => ele.value === value.value);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
@@ -95,6 +99,7 @@ const ATMTransferList = ({
                 setLeft(left.concat(right));
                 setRight([]);
               }
+              setChecked([]);
             }}
             className="bg-primary-main py-1 px-3 rounded text-white"
           >
@@ -145,37 +150,50 @@ const ATMTransferList = ({
   );
 
   return (
-    <div className="flex gap-5 h-screen items-center">
-      <div className="flex-1 h-full">
-        {customList(leftSideTitle, left, "left")}
-      </div>
-      <div>
-        <div className="flex flex-col gap-2">
-          <button
-            onClick={handleCheckedRight}
-            disabled={leftChecked.length === 0}
-            className={`${
-              leftChecked?.length > 0 && "bg-primary-main text-white"
-            } py-1 px-6 rounded border text-slate-300 border-slate-300`}
-            aria-label="move selected right"
-          >
-            &gt;
-          </button>
-          <button
-            onClick={handleCheckedLeft}
-            disabled={rightChecked.length === 0}
-            className={`${
-              rightChecked?.length > 0 && "bg-primary-main text-white"
-            } py-1 px-6 rounded border text-slate-300 border-slate-300`}
-            aria-label="move selected left"
-          >
-            &lt;
-          </button>
+    <div className="relative h-full">
+      <div className="flex gap-5 h-full items-center ">
+        <div className="flex-1 h-full">
+          {customList(leftSideTitle, left, "left")}
+        </div>
+        <div>
+          <div className="flex flex-col gap-2">
+            <button
+              onClick={handleCheckedRight}
+              disabled={leftChecked.length === 0}
+              className={`${
+                leftChecked?.length > 0 && "bg-primary-main text-white"
+              } py-1 px-6 rounded border text-slate-300 border-slate-300`}
+              aria-label="move selected right"
+            >
+              &gt;
+            </button>
+            <button
+              onClick={handleCheckedLeft}
+              disabled={rightChecked.length === 0}
+              className={`${
+                rightChecked?.length > 0 && "bg-primary-main text-white"
+              } py-1 px-6 rounded border text-slate-300 border-slate-300`}
+              aria-label="move selected left"
+            >
+              &lt;
+            </button>
+          </div>
+        </div>
+        <div className="flex-1 h-full">
+          {customList(rightSideTitle, right, "right")}
         </div>
       </div>
-      <div className="flex-1 h-full">
-        {customList(rightSideTitle, right, "right")}
-      </div>
+
+      {name && (
+        <ErrorMessage name={name}>
+          {(errMsg) => (
+            <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500  ">
+              {" "}
+              {errMsg}{" "}
+            </p>
+          )}
+        </ErrorMessage>
+      )}
     </div>
   );
 };
