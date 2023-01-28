@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
@@ -17,7 +17,7 @@ type Props = {
 const AttributesGroupListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const attributesGroupState: any = useSelector((state: RootState) => state.attributesGroup);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const navigate = useNavigate()
 
   const { page, rowsPerPage } = attributesGroupState;
@@ -42,7 +42,7 @@ const AttributesGroupListing = ({ columns, rows }: Props) => {
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
-          onFilterClick={() => setIsFilterOpen(true)}
+          // onFilterClick={() => setIsFilterOpen(true)}
         />
 
         {/* Table */}

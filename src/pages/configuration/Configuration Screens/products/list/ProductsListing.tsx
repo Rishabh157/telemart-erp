@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -14,9 +15,11 @@ type Props = {
 };
 
 const ProductsListing = ({ columns, rows }: Props) => {
+
   const dispatch = useDispatch<AppDispatch>();
   const productsState: any = useSelector((state: RootState) => state.products);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+  const navigate = useNavigate()
 
   const { page, rowsPerPage } = productsState;
 
@@ -25,13 +28,17 @@ const ProductsListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Products  </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button
+        onClick={()=> navigate('/configurations/products/add')} 
+         className="bg-primary-main text-white rounded py-1 px-3"
+         >
           {" "}
           + Add Products {" "}
         </button>
       </div>
 
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+
         {/*Table Header */}
         <ATMTableHeader
           page={page}
@@ -40,7 +47,7 @@ const ProductsListing = ({ columns, rows }: Props) => {
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
-          onFilterClick={() => setIsFilterOpen(true)}
+          // onFilterClick={() => setIsFilterOpen(true)}
         />
 
         {/* Table */}

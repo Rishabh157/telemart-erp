@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
@@ -16,7 +16,7 @@ type Props = {
 
 const SaleOrderListing = ({ columns, rows }: Props) => {
 
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const saleOrderState: any = useSelector((state: RootState) => state.saleOrder);
   const navigate = useNavigate()
@@ -43,11 +43,11 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
-          onFilterClick={() => setIsFilterOpen(true)}
+          // onFilterClick={() => setIsFilterOpen(true)}
         />
 
         {/* Table */}
-        <div className="grow overflow-auto  ">
+        <div className="grow overflow-auto">
           <ATMTable columns={columns} rows={rows} />
         </div>
 

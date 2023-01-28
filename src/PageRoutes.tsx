@@ -11,6 +11,7 @@ import GRNListingWrapper from "./pages/configuration/Configuration Screens/grn/l
 import ItemListingWrapper from "./pages/configuration/Configuration Screens/item/list/ItemListingWrapper";
 import LanguageListingWrapper from "./pages/configuration/Configuration Screens/language/list/LanguageListingWrapper";
 import ProductCategoryListingWrapper from "./pages/configuration/Configuration Screens/productCategory/list/ProductCategoryListingWrapper";
+import AddProductWrapper from "./pages/configuration/Configuration Screens/products/add/AddProductWrapper";
 import ProductsListingWrapper from "./pages/configuration/Configuration Screens/products/list/ProductWrapper";
 import ProductSubCategoryListingWrapper from "./pages/configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper";
 import PurchaseOrderListingWrapper from "./pages/configuration/Configuration Screens/purchaseOrder/list/PurchaseOrderListingWrapper";
@@ -106,6 +107,12 @@ const PageRoutes = () => {
             path="/configurations/products"
             element={<ProductsListingWrapper />}
           />
+
+          <Route
+            path="/configurations/products/add"
+            element={<AddProductWrapper />}
+          />
+
           <Route
             path="/configurations/carton-box"
             element={<CartonBoxListingWrapper />}
