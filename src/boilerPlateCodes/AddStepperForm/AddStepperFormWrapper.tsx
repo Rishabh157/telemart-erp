@@ -1,21 +1,17 @@
 import React from "react";
 import { Form, Formik, FormikProps } from "formik";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
-import { array, mixed, object, string } from "yup";
-import AddDealer from "./AddDealer";
-import StepAddCompanyDetailsWrapper from "./FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper";
-import StepAddAddressWrapper from "./FormSteps/StepAddAddress/StepAddAddressWrapper";
-import StepAddContactWrapper from "./FormSteps/StepAddContact/StepAddContactWrapper";
-import StepAddDocumentsWrapper from "./FormSteps/StepAddDocuments/StepAddDocumentsWrapper";
+import { object, string } from "yup";
+import AddStepperForm from "./AddStepperForm";
+import AddStep1Wrapper from "./FormSteps/AddStep1/AddStep1Wrapper";
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
-  dealer_code: string;
-  dealer_category: string;
-  firm_name: string;
-  first_name: string;
-  last_name: string;
-  email: string;
+  company_name: string;
+  company_type: string;
+  ownership_type: string;
+  website_address: string;
+  vendor_code: string;
   regd_address: {
     phone: string;
     address: string;
@@ -32,29 +28,14 @@ export type FormInitialValues = {
     district: string;
     pincode: string;
   };
-  contact_informations: {
-    name: string;
-    department: string;
-    designation: string;
-    email: string;
-    mobile_number: string;
-    landline: string;
-  }[];
-  gst_no: string;
-  gst_certificate: string;
-  aadhar_no: string;
-  aadhar_certificate: string;
-  other_documents: {
-      document_name: string;
-      document_file: string;
-    }[]
+
 };
 
 // Form Steps
 const steps = [
   {
-    label: "Company Details",
-    component: StepAddCompanyDetailsWrapper,
+    label: "Step 1",
+    component: AddStep1Wrapper,
     validationSchema: object({
       company_name: string().required("company name is required"),
       company_type: string().required("Please select company type"),
@@ -64,8 +45,8 @@ const steps = [
     }),
   },
   {
-    label: "Regd./Billing address",
-    component: StepAddAddressWrapper,
+    label: "Step 2",
+    component: AddStep1Wrapper,
     validationSchema: object({
       regd_address: object().shape({
         phone: string().required("Phone number is required"),
@@ -85,45 +66,41 @@ const steps = [
       }),
     }),
   },
-  {
-    label: "Contact",
-    component: StepAddContactWrapper,
-    validationSchema: object({
-      contact_informations: array().of(
-        object().shape({
-          name: string().required("Name is required"),
-          department: string().required("Department is required"),
-          designation: string().required("Designation is required"),
-          email: string().required("Email is required"),
-          mobile_number: string().required("Mobile number is required"),
-          landline: string().required("Landline is required"),
-        })
-      ),
-    }),
-  },
-  {
-    label: "Document",
-    component: StepAddDocumentsWrapper,
-    validationSchema: object({
-      gst_no: string().required("GST number is required"),
-      gst_certificate: mixed().required("GST certificate is required"),
-      declaration_form: mixed().required("Declaration form is required"),
-    }),
-  },
 ];
 
-const AddDealerWrapper = () => {
+// Page Heading
+const pageHeading = "Add New Vendor"
+
+const AddStepperFormWrapper = () => {
+
+  // Breadcrumbs
+  const breadcrumbs= [
+    {
+      label: "Vendors",
+      onClick: () => {
+        console.log("Vendors");
+      },
+      path: "/vendors"
+    },
+    {
+      label: "Add Vendor",
+      onClick: () => {
+        console.log("add-Vendors");
+      },
+    
+    },
+  ];
+
   // States
   const [activeStep, setActiveStep] = React.useState(0);
 
   // From Initial Values
   const initialValues: FormInitialValues = {
-    dealer_code: "",
-    dealer_category: "",
-    firm_name: "",
-    first_name: "",
-    last_name: "",
-    email: "",
+    company_name: "",
+    company_type: "",
+    ownership_type: "",
+    website_address: "",
+    vendor_code: "",
     regd_address: {
       phone: "",
       address: "",
@@ -140,40 +117,11 @@ const AddDealerWrapper = () => {
       district: "",
       pincode: "",
     },
-    contact_informations: [
-      {
-        name: "",
-        department: "",
-        designation: "",
-        email: "",
-        mobile_number: "",
-        landline: "",
-      },
-      {
-        name: "",
-        department: "",
-        designation: "",
-        email: "",
-        mobile_number: "",
-        landline: "",
-      },
-    ],
-    gst_no: "",
-    gst_certificate: "",
-    aadhar_no: "",
-    aadhar_certificate: "",
-    other_documents: [
-      {
-        document_name: "",
-        document_file: "",
-      },
-    ],
   };
 
   // Form validation schema based on the active step
   const getValidationSchema = (activeStep: number) => {
-    return steps.find((_, stepIndex) => stepIndex === activeStep)
-      ?.validationSchema;
+    return steps.find((_ , stepIndex)=> stepIndex === activeStep)?.validationSchema
   };
 
   // On Submit Handler
@@ -197,11 +145,13 @@ const AddDealerWrapper = () => {
       >
         {(formikProps: FormikProps<FormInitialValues>) => (
           <Form className="">
-            <AddDealer
+            <AddStepperForm
               formikProps={formikProps}
               steps={steps}
               activeStep={activeStep}
               setActiveStep={setActiveStep}
+              breadcrumbs={breadcrumbs}
+              pageHeading={pageHeading}
             />
           </Form>
         )}
@@ -210,4 +160,4 @@ const AddDealerWrapper = () => {
   );
 };
 
-export default AddDealerWrapper;
+export default AddStepperFormWrapper;

@@ -1,4 +1,5 @@
 import React from "react";
+import { ErrorMessage } from "formik";
 
 type Props = {
   label?: string;
@@ -7,35 +8,47 @@ type Props = {
   onChange: (value: string) => void;
   className?: string;
   placeholder?: string;
-  minRows?:number
+  minRows?: number;
+  name?: string;
 };
 
-const ATMTextArea = ({ 
-    label, 
-    required = false, 
-    value, 
-    onChange ,
-    className,
-    placeholder,
-    minRows = 2,
+const ATMTextArea = ({
+  label,
+  required = false,
+  value,
+  onChange,
+  className,
+  placeholder,
+  minRows = 2,
+  name = "",
 }: Props) => {
-  
   return (
-    <div className="relative flex flex-col">
+    <div className="relative ">
       {label && (
-        <label 
-        className="text-slate-500"
-        >
+        <label className="text-slate-700 font-medium">
           {label} {required && <span className="text-red-500"> * </span>}
         </label>
       )}
-      <textarea 
-      value={value} 
-      onChange={(e) => onChange(e.target.value)} 
-      rows={minRows}
-      className={`w-full p-2 text-slate-700 border border-slate-400 outline-blue-400  ${label && 'mt-1'}  ${className}`}
-      placeholder={placeholder}
+      <textarea
+        name={name}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        rows={minRows}
+        className={`w-full p-2 bg-white text-slate-700 border border-slate-400 outline-blue-400  ${
+          label && "mt-2"
+        }  ${className}`}
+        placeholder={placeholder}
       />
+
+      {name && (
+        <ErrorMessage name={name}>
+          {(errMsg) => (
+            <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+              {errMsg}
+            </p>
+          )}
+        </ErrorMessage>
+      )}
     </div>
   );
 };

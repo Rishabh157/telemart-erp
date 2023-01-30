@@ -1,42 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
-import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTagsInput from "src/components/UI/atoms/formFields/ATMTagsInput/ATMTagsInput";
 
-const options = [
-  {
-    label: <div className="text-primary-main"> Option1 </div>,
-    value: {
-      name: "Option1",
-      age: 24,
-    },
-  },
-  {
-    label: "Option 2",
-    value: {
-      name: "Option 2",
-      age: 23,
-    },
-  },
-  {
-    label: "Option 3",
-    value: {
-      name: "Option 3",
-      age: 22,
-    },
-  },
-];
 
 const Test = () => {
-  const [selectValue, setSelectValue] = useState("");
   const [tags, setTags]= useState<any[]>([])
 
-  //  Find the area of triangle
-  const triangleArea = (a:number, b:number , c:number) => {
-  const halfOfPerimeter = (a+b+c)/2
-  const area = Math.sqrt(halfOfPerimeter* (halfOfPerimeter-a)*(halfOfPerimeter-b)*(halfOfPerimeter-c))
-        return area
-  }
   return (
     <SideNavLayout>
       <div className="h-full flex w-full">

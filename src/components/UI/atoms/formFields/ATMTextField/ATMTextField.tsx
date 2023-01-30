@@ -37,6 +37,7 @@ const ATMTextField = ({
                 onChange={(e) => { onChange(e) }}
                 className={`${getInputHeight(size)} w-full px-2 text-slate-700 border border-slate-400 outline-blue-400  ${label && 'mt-2'}  ${className}`}
                 {...rest}
+                
             />
             {
                 name &&

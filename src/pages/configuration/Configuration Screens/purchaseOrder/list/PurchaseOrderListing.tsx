@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
@@ -16,7 +16,7 @@ type Props = {
 const PurchaseOrderListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const purchaseOrderState: any = useSelector((state: RootState) => state.purchaseOrder);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
   const { page, rowsPerPage } = purchaseOrderState;
 
@@ -40,7 +40,7 @@ const PurchaseOrderListing = ({ columns, rows }: Props) => {
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
-          onFilterClick={() => setIsFilterOpen(true)}
+          // onFilterClick={() => setIsFilterOpen(true)}
         />
 
         {/* Table */}

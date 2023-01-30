@@ -9,7 +9,7 @@ type Props = {
   required?: boolean;
   placeholder?: string;
   onSelect: (file: File) => void;
-  selectedFile: File;
+  selectedFile: any;
   name: string;
 };
 
