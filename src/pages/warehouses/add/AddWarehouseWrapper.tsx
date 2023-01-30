@@ -1,7 +1,7 @@
 import { Form, Formik, FormikHelpers } from 'formik'
 import React from 'react'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { boolean, number, object, string } from 'yup'
+import { boolean , object, string } from 'yup'
 import AddWarehouse from './AddWarehouse'
 
 export type AddWarehouseFormValues = {

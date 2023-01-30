@@ -1,16 +1,15 @@
 import React from "react";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { Field, SelectOption } from "src/models/FormField/FormField.model";
+import { SelectOption } from "src/models/FormField/FormField.model";
 import { FormInitialValues } from "../../AddStepperFormWrapper";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
+import { FieldType } from "./AddStep1Wrapper";
 
 type DropdownOptions = {
   companyTypeOptions: SelectOption[];
   ownershipTypeOptions: SelectOption[];
 };
-
-type FieldType = Field<"companyTypeOptions" | "ownershipTypeOptions">;
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;

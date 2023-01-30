@@ -3,7 +3,6 @@ import ATMInputAdormant from '../../components/UI/atoms/formFields/ATMInputAdorm
 import ATMTextField from '../../components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import loginImg from 'src/assets/images/login.jpeg'
 import { BiShow, BiHide } from 'react-icons/bi'
-import { RiGoogleFill } from 'react-icons/ri'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

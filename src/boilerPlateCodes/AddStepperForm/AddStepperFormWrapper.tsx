@@ -3,7 +3,6 @@ import { Form, Formik, FormikProps } from "formik";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { object, string } from "yup";
 import AddStepperForm from "./AddStepperForm";
-import AddStep2Wrapper from "./FormSteps/AddStep2/AddStep2Wrapper";
 import AddStep1Wrapper from "./FormSteps/AddStep1/AddStep1Wrapper";
 
 // TYPE-  Form Intial Values
@@ -47,7 +46,7 @@ const steps = [
   },
   {
     label: "Step 2",
-    component: AddStep2Wrapper,
+    component: AddStep1Wrapper,
     validationSchema: object({
       regd_address: object().shape({
         phone: string().required("Phone number is required"),

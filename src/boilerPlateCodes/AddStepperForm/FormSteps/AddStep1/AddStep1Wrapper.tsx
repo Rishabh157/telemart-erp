@@ -8,10 +8,12 @@ type Props = {
   formikProps: FormikProps<FormInitialValues>;
 };
 
+export type FieldType = Field<"companyTypeOptions" | "ownershipTypeOptions">;
+
 const companyTypeOptions = [{ label: "Public", value: "public" }];
 const ownershipTypeOptions = [{ label: "Partnership", value: "partnership" }];
 
-const formFields: Field<"companyTypeOptions" | "ownershipTypeOptions">[] = [
+const formFields: FieldType[] = [
   {
     name: "company_name",
     label: "Company Name",

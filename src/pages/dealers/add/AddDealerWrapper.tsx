@@ -192,7 +192,7 @@ const AddDealerWrapper = () => {
     <SideNavLayout>
       <Formik
         initialValues={initialValues}
-        // validationSchema={getValidationSchema(activeStep)}
+        validationSchema={getValidationSchema(activeStep)}
         onSubmit={onSubmitHandler}
       >
         {(formikProps: FormikProps<FormInitialValues>) => (

@@ -8,50 +8,23 @@ type Props = {
   formikProps: FormikProps<FormInitialValues>;
 };
 
-const companyTypeOptions = [{ label: "Public", value: "public" }];
-const ownershipTypeOptions = [{ label: "Partnership", value: "partnership" }];
+export type FieldType = Field<"productSubCategoryOPtions" | "productCategoryOPtions">;
 
-const formFields: Field<"companyTypeOptions" | "ownershipTypeOptions">[] = [
-  {
-    name: "company_name",
-    label: "Company Name",
-    placeholder: "Company Name",
-  },
-  {
-    name: "company_type",
-    label: "Company Type",
-    placeholder: "Company Type",
-    type: "select",
-    optionAccessKey: "companyTypeOptions",
-  },
-  {
-    name: "ownership_type",
-    label: "Ownership Type",
-    placeholder: "Ownership Type",
-    type: "select",
-    optionAccessKey: "ownershipTypeOptions",
-  },
-  {
-    name: "website_address",
-    label: "Website Address",
-    placeholder: "Website Address",
-  },
-  {
-    name: "vendor_code",
-    label: "Vendor Code",
-    placeholder: "Vendor Code",
-  },
-];
+const productSubCategoryOPtions = [{ label: "Public", value: "public" }];
+const productCategoryOPtions = [{ label: "Category 1", value: "cat1" }];
 
 const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
   const dropdownOptions = {
-    companyTypeOptions,
-    ownershipTypeOptions,
+    productSubCategoryOPtions,
+    productCategoryOPtions,
   };
 
   return (
     <>
-      <StepAddProductDetails formikProps={formikProps} dropdownOptions= {dropdownOptions} formFields={formFields} />
+      <StepAddProductDetails
+        formikProps={formikProps}
+        dropdownOptions={dropdownOptions}
+      />
     </>
   );
 };

@@ -1,76 +1,138 @@
 import React from "react";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { Field, SelectOption } from "src/models/FormField/FormField.model";
+import { SelectOption } from "src/models/FormField/FormField.model";
 import { FormInitialValues } from "../../AddProductWrapper";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
+import ATMTextArea from "src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea";
+import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 
 type DropdownOptions = {
-  companyTypeOptions: SelectOption[];
-  ownershipTypeOptions: SelectOption[];
+  productSubCategoryOPtions: SelectOption[];
+  productCategoryOPtions: SelectOption[];
 };
-
-type FieldType = Field<"companyTypeOptions" | "ownershipTypeOptions">;
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   dropdownOptions: DropdownOptions;
-  formFields: FieldType[];
 };
 
-const StepAddProductDetails = ({
-  formikProps,
-  dropdownOptions,
-  formFields,
-}: Props) => {
-  const { values, setFieldValue }: { values: any; setFieldValue: any } =
-    formikProps;
+const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
+  const { values, setFieldValue } = formikProps;
 
   return (
-    <div className="py-6 px-7">
-      <div className="grid grid-cols-4 gap-4 gap-y-5">
-        {formFields?.map((field: FieldType) => {
-          const { type = "text", name, label, placeholder } = field;
+    <div className="py-6 px-7 flex flex-col gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4 gap-y-5">
+        {/* Product Code */}
+        <ATMTextField
+          name="product_code"
+          value={values.product_code}
+          onChange={(e) => setFieldValue("product_code", e.target.value)}
+          label="Product Code"
+          placeholder="Product Code"
+          className="shadow bg-white rounded"
+        />
 
-          switch (type) {
-            case "text":
-              return (
-                <ATMTextField
-                  key={name}
-                  name={name}
-                  value={values[name]}
-                  onChange={(e) => {
-                    setFieldValue(name, e.target.value);
-                  }}
-                  label={label}
-                  placeholder={placeholder}
-                  className="shadow bg-white rounded"
-                />
-              );
+        {/* Product Name */}
+        <ATMTextField
+          name="product_name"
+          value={values.product_name}
+          onChange={(e) => setFieldValue("product_name", e.target.value)}
+          label="Product Name"
+          placeholder="Product Name"
+          className="shadow bg-white rounded"
+        />
 
-            case "select":
-              return (
-                <ATMSelect
-                  key={name}
-                  name={name}
-                  value={values[name]}
-                  onChange={(e) => {
-                    setFieldValue(name, e.target.value);
-                  }}
-                  size="small"
-                  label={label}
-                  options={
-                    dropdownOptions[
-                      field.optionAccessKey || "companyTypeOptions"
-                    ]
-                  }
-                />
-              );
+        {/* Product Category */}
+        <ATMSelect
+          name="product_category"
+          value={values.product_category}
+          onChange={(e) => setFieldValue("product_category", e.target.value)}
+          label="Product Category"
+          options={dropdownOptions.productCategoryOPtions}
+        />
 
-            default:
-              return null;
+        {/* Product Sub Category */}
+        <ATMSelect
+          name="product_sub_category"
+          value={values.product_sub_category}
+          onChange={(e) =>
+            setFieldValue("product_sub_category", e.target.value)
           }
-        })}
+          label="Product Sub Category"
+          options={dropdownOptions.productSubCategoryOPtions}
+        />
+
+        {/* Product Weight */}
+        <ATMTextField
+          name="product_weight"
+          value={values.product_weight}
+          onChange={(e) => setFieldValue("product_weight", e.target.value)}
+          label="Product Weight (in gms)"
+          placeholder="Product Weight"
+          className="shadow bg-white rounded"
+        />
+
+        {/* Dimensions */}
+        <div>
+          <label className="text-slate-700 font-medium"> Dimensions </label>
+          <div className="flex gap-2 mt-2">
+            {/* Height */}
+            <ATMTextField
+              name="dimensions.height"
+              value={values.dimensions.height}
+              onChange={(e) =>
+                setFieldValue("dimensions.height", e.target.value)
+              }
+              placeholder="H"
+              className="shadow bg-white rounded"
+            />
+
+            {/* Weight */}
+            <ATMTextField
+              name="dimensions.width"
+              value={values.dimensions.width}
+              onChange={(e) =>
+                setFieldValue("dimensions.width", e.target.value)
+              }
+              placeholder="W"
+              className="shadow bg-white rounded"
+            />
+
+            {/* Depth */}
+            <ATMTextField
+              name="dimensions.depth"
+              value={values.dimensions.depth}
+              onChange={(e) =>
+                setFieldValue("dimensions.depth", e.target.value)
+              }
+              placeholder="D"
+              className="shadow bg-white rounded"
+            />
+          </div>
+        </div>
+
+        {/* Product Image */}
+        <ATMFilePickerWrapper
+          name="product_image"
+          label="Product Image"
+          placeholder="Select Image"
+          onSelect={(newFile) => setFieldValue('product_image', newFile)}
+          selectedFile={values.product_image}
+        />
+      </div>
+
+      {/* Description */}
+      <div>
+        <ATMTextArea
+          name="description"
+          value={values.description}
+          onChange={(newValue) => setFieldValue("description", newValue)}
+          label="Description"
+          placeholder="Description"
+          className="shadow bg-white rounded"
+          minRows={3}
+        />
       </div>
     </div>
   );
