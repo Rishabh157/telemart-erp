@@ -1,6 +1,9 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { navigation } from 'src/navigation';
+import { setIsCollapsed } from 'src/redux/slices/SideNavLayout';
+import { AppDispatch, RootState } from 'src/redux/store';
 import Header from '../../UI/Header/Header';
 import VerticalNavBar from '../../UI/VerticalNavBar/VerticalNavBar'
 
@@ -12,9 +15,13 @@ const SideNavLayout = ({
     children
 }: Props) => {
 
-    const [isCollapsed , setIsCollapsed] = useState(false)
+    const dispatch = useDispatch<AppDispatch>()
+    const sideNavLayoutState:any = useSelector((state: RootState)=> state.sideNavLayout)
+
+    const {isCollapsed} = sideNavLayoutState
+
     const toggleCollapse = ()=> {
-        setIsCollapsed(prev=> !prev)
+        dispatch(setIsCollapsed(!isCollapsed))
     }
 
     const location= useLocation()

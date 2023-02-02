@@ -1,36 +1,76 @@
-import React from 'react'
-import { GoPrimitiveDot } from 'react-icons/go'
+import { Avatar } from "@mui/material";
+import React from "react";
+import { IconType } from "react-icons";
+import { GoPrimitiveDot } from "react-icons/go";
 
 type Props = {
-    vendorData: any
-}
+  vendorData: any;
+  actionIcons?: {
+    icon: IconType;
+    onClick: () => void;
+    label: string;
+  }[];
+};
 
-const VendorInfoCard = ({
-    vendorData
-}: Props
-) => {
+const VendorInfoCard = ({ vendorData, actionIcons }: Props) => {
+  return (
+    <div className="py-2 flex flex-col gap-1">
+      {/* Image */}
+      <div className="flex justify-center">
+        <Avatar src="" alt="" />
+      </div>
 
+      {/* Firm Name */}
+      <div className="flex justify-center">Firm Name</div>
 
-    return (
-        <div className='flex flex-col  gap-2 items-center py-[10px] px-2 h-full w-full' >
-            <div className='w-full flex justify-end h-[10px] ' >
-                <span
-                    className={`px-2 py-3 rounded-full text-[12px] inline-flex gap-2 items-center ${vendorData?.is_active ? 'bg-green-100 text-green-500' : 'bg-red-100 text-red-500'} `}
-                >
-                    <GoPrimitiveDot className=' text-[17px] ' />
-                    {vendorData?.is_active ? 'Active' : 'Inactive'}
-                </span>
+      {/* Chips */}
+      <div className="flex gap-2 justify-center">
+        <span className="rounded-full px-3 py-[2px] bg-slate-100 text-[10px]">
+          {" "}
+          Dealer{" "}
+        </span>
+        <span
+          className={`rounded-full px-3 py-[2px] text-[10px] font-medium flex items-center gap-1 ${
+            vendorData.isActive
+              ? "bg-green-100 text-green-500"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {" "}
+          <GoPrimitiveDot className="text-lg" />{" "}
+          {vendorData.isActive ? "Active" : "Deactive"}{" "}
+        </span>
+      </div>
+
+      <div className="text-center text-slate-500">
+        {/* Vendor Name */}
+        <div className="text-[15px]" > Vendor Name </div>
+
+        {/* Mobile */}
+        <div className="text-center text-slate-400 text-[13px]">8574859685</div>
+      </div>
+
+      {/* Action Icon */}
+      <div className="flex gap-4 border-b justify-center items-center pt-1">
+        {actionIcons?.map((icon, index) => {
+          return (
+            <div
+              key={index}
+              onClick={() => {
+                icon.onClick();
+              }}
+              className="text-lg text-slate-500 cursor-pointer flex justify-center flex-col"
+            >
+              <div className="flex justify-center">
+                <icon.icon />
+              </div>
+              <div className="text-[11px]"> {icon.label} </div>
             </div>
-            <div className='h-[40px] w-[40px] flex justify-center items-center font-bold bg-primary-main text-white text-sm  rounded-full' >
-                {vendorData?.vendorName[0]}
-            </div>
-            <div className='flex flex-col justify-center items-center h-[70px]' >
-                <div className='border bg-slate-100 text-slate-400  px-2  rounded-full text-[13px]' > VENDOR </div>
-                <div className='text-md text-slate-700' > {vendorData?.vendorName} </div>
-                <div className='text-[13px] text-slate-500' > {vendorData?.mobile} </div>
-            </div>
-        </div>
-    )
-}
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
-export default VendorInfoCard
+export default VendorInfoCard;
