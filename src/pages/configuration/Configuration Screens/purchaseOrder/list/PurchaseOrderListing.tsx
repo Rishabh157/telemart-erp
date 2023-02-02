@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -15,23 +17,42 @@ type Props = {
 
 const PurchaseOrderListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const purchaseOrderState: any = useSelector((state: RootState) => state.purchaseOrder);
+  const purchaseOrderState: any = useSelector(
+    (state: RootState) => state.purchaseOrder
+  );
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+  const navigate = useNavigate()
 
   const { page, rowsPerPage } = purchaseOrderState;
 
+  const breadcrumbs: BreadcrumbType[] = [
+    {
+      label: "Home Page",
+      path: "/dashboard",
+    },
+    {
+      label: "Purchase Order",
+    },
+  ];
+
   return (
-    <div className="px-4 h-full  ">
+    <div className="px-4 h-full pt-3  ">
+      {/* Breadcrumbs */}
+      <div className="h-[30px]">
+        <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
       {/* Page Header */}
-      <div className="flex justify-between items-center h-[55px]">
+      <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> Purchase Order </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
-          {" "}
+        <button
+          onClick={() => navigate("/configurations/purchase-order/add")}
+          className="bg-primary-main text-white rounded py-1 px-3"
+        >
           + Add PO{" "}
         </button>
       </div>
 
-      <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+      <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
           page={page}

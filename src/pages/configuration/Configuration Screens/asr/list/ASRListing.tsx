@@ -1,5 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import ATMBreadCrumbs, {
+  BreadcrumbType,
+} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -18,20 +22,39 @@ const ASRListing = ({ columns, rows }: Props) => {
   const asrState: any = useSelector((state: RootState) => state.asr);
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
+  const navigate = useNavigate();
+
   const { page, rowsPerPage } = asrState;
 
+  const breadcrumbs: BreadcrumbType[] = [
+    {
+      label: "Home Page",
+      path: "/dashboard",
+    },
+    {
+      label: "ASR",
+    },
+  ];
+
   return (
-    <div className="px-4 h-full  ">
+    <div className="px-4 h-full pt-3  ">
+      {/* Breadcrumbs */}
+      <div className="h-[30px]">
+        <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
       {/* Page Header */}
-      <div className="flex justify-between items-center h-[55px]">
+      <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> ASR </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button
+          onClick={() => navigate("/configurations/asr/add")}
+          className="bg-primary-main text-white rounded py-1 px-3"
+        >
           {" "}
           + Add ASR{" "}
         </button>
       </div>
 
-      <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+      <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
           page={page}
