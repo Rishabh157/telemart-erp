@@ -12,7 +12,7 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 
 type ViewLayoutPropTypes = {
-  infoCard: React.ReactNode;
+  infoCard?: React.ReactNode;
   actionIcons?: {
     icon: IconType;
     onClick: () => void;
@@ -79,7 +79,7 @@ const ViewLayout = ({
               </div>
 
               {/* List */}
-              <div className="h-[calc(100%-225px)] overflow-auto ">
+              <div className="grow overflow-auto ">
                 {listData?.map((item) => {
                   return renderListItem(item);
                 })}

@@ -54,7 +54,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const listData = Array(10)
+const listData = Array(12)
   .fill("Vendor")
   .map((ele, index) => {
     return {
