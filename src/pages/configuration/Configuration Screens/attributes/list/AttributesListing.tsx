@@ -1,5 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ATMBreadCrumbs, {
+  BreadcrumbType,
+} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -15,15 +18,32 @@ type Props = {
 
 const AttributesListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const attributesState: any = useSelector((state: RootState) => state.attributes);
+  const attributesState: any = useSelector(
+    (state: RootState) => state.attributes
+  );
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
   const { page, rowsPerPage } = attributesState;
 
+  const breadcrumbs: BreadcrumbType[] = [
+    {
+      label: "Home Page",
+      path: "/dashboard",
+    },
+    {
+      label: "Attributes",
+    },
+  ];
+
   return (
-    <div className="px-4 h-full  ">
+    <div className="px-4 h-full pt-3">
+      {/* Breadcrumbs */}
+      <div className="h-[30px]">
+        <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
+
       {/* Page Header */}
-      <div className="flex justify-between items-center h-[55px]">
+      <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> Attributes </ATMPageHeading>
         <button className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
@@ -31,7 +51,7 @@ const AttributesListing = ({ columns, rows }: Props) => {
         </button>
       </div>
 
-      <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+      <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
           page={page}
@@ -44,7 +64,7 @@ const AttributesListing = ({ columns, rows }: Props) => {
         />
 
         {/* Table */}
-        <div className="grow overflow-auto  ">
+        <div className="grow overflow-auto">
           <ATMTable columns={columns} rows={rows} />
         </div>
 

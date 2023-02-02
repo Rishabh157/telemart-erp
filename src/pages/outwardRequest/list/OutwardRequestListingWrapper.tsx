@@ -1,5 +1,7 @@
 import React from "react";
+import { IconType } from "react-icons";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { MdOutbond } from "react-icons/md";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
@@ -13,6 +15,12 @@ import { OutwardRequestListResponse } from "src/models/OutwardRequest.model";
 // import { AppDispatch, RootState } from "src/redux/store";
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 import OutwardRequestListing from "./OutwardRequestListing";
+
+export type Tabs = {
+  label: string;
+  icon: IconType;
+  active?: boolean;
+}
 
 const columns: columnTypes[] = [
   {
@@ -65,6 +73,7 @@ const rows = [
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
   },
+
   {
     productName: "Slim24",
     quantity: "1000",
@@ -78,6 +87,7 @@ const rows = [
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
   },
+
   {
     productName: "Slim24",
     quantity: "1000",
@@ -91,6 +101,7 @@ const rows = [
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
   },
+
   {
     productName: "Slim24",
     quantity: "1000",
@@ -104,6 +115,7 @@ const rows = [
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
   },
+
   {
     productName: "Slim24",
     quantity: "1000",
@@ -117,6 +129,7 @@ const rows = [
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
   },
+
   {
     productName: "Slim24",
     quantity: "1000",
@@ -130,6 +143,7 @@ const rows = [
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
   },
+
   {
     productName: "Slim24",
     quantity: "1000",
@@ -143,6 +157,7 @@ const rows = [
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
   },
+
   {
     productName: "Slim24",
     quantity: "1000",
@@ -156,6 +171,7 @@ const rows = [
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
   },
+
   {
     productName: "Slim24",
     quantity: "1000",
@@ -169,6 +185,7 @@ const rows = [
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
   },
+
   {
     productName: "Slim24",
     quantity: "1000",
@@ -184,6 +201,39 @@ const rows = [
   },
   
 ];
+
+const tabs : Tabs[] = [
+  {
+    label: "Dealer",
+    icon: MdOutbond,
+  },
+  {
+    label: "Customer",
+    icon: MdOutbond,
+  },
+  {
+    label: "RTV",
+    icon: MdOutbond,
+  },
+  {
+    label: "Warehouse",
+    icon: MdOutbond,
+  },
+  {
+    label: "Sample",
+    icon: MdOutbond,
+  },
+  {
+    label: "E-comm",
+    icon: MdOutbond,
+  },
+  {
+    label: "Replacements/Repackaging",
+    icon: MdOutbond,
+  },
+  
+
+]
 
 const OutwardRequestListingWrapper = () => {
   // const vendorState: any = useSelector((state: RootState) => state.vendor);
@@ -228,7 +278,7 @@ const OutwardRequestListingWrapper = () => {
   return (
     <>
       <SideNavLayout>
-        <OutwardRequestListing columns={columns} rows={rows} />
+        <OutwardRequestListing columns={columns} rows={rows} tabs={tabs} />
       </SideNavLayout>
     </>
   );
