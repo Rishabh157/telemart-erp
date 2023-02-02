@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import DealerInfoCard from '../components/dealerInfoCard/DealerInfoCard'
 import ListItemCard from '../components/listItemCard/ListItemCard'
+import { BreadcrumbType } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 
 const tabsData = [
     {
@@ -43,6 +44,17 @@ const actionIcons = [
     }
 ]
 
+const breadcrumbs: BreadcrumbType[] = [
+    {
+        label: "Vendors",
+        path: "/vendors",
+
+    },
+    {
+        label: "Current Vendor"
+    }
+]
+
 const ViewDealer = () => {
 
     const dealerState: any = useSelector((state: RootState) => state.dealer)
@@ -61,6 +73,7 @@ const ViewDealer = () => {
             actionIcons={actionIcons}
             searchValue={searchValue}
             onSearch={(value) => setSearchValue(value)}
+            breadcrumbs={breadcrumbs}
         />
     )
 }
