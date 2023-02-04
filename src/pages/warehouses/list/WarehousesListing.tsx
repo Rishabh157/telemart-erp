@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
@@ -16,12 +16,12 @@ type Props = {
 const WarehouseListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const warehouseState: any = useSelector((state: RootState) => state.warehouse);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  // const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const { page, rowsPerPage } = warehouseState;
 
   return (
-    <div className="px-4 h-full  ">
+    <div className="h-full">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Warehouse </ATMPageHeading>
@@ -40,7 +40,7 @@ const WarehouseListing = ({ columns, rows }: Props) => {
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
-          onFilterClick={() => setIsFilterOpen(true)}
+          // onFilterClick={() => setIsFilterOpen(true)}
         />
 
         {/* Table */}

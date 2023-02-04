@@ -38,6 +38,7 @@ const ATMPagination = (
                                 showFirstButton={true}
                                 showLastButton={true}
                                 color='primary'
+                                size='small'
                             />
                         </div>
                     </div>
