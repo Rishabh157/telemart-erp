@@ -57,7 +57,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className={`overflow-auto `}>
-          <ATMTable columns={columns} rows={rows} onRowClick={(row: VendorsListResponse) => navigate(row._id)} /> ̰
+          <ATMTable columns={columns} rows={rows} onRowClick={(row: VendorsListResponse) => navigate(`${row._id}/general-information`)} /> ̰
         </div>
 
         {/* Pagination */}
