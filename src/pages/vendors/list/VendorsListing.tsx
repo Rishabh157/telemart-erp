@@ -5,6 +5,7 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
+import { VendorsListResponse } from "src/models";
 import { setRowsPerPage, setPage } from "src/redux/slices/vendorSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
@@ -22,10 +23,6 @@ const VendorsListing = ({ columns, rows }: Props) => {
   const [selectedRows, setSelectedRows] = useState([]);
 
   const { page, rowsPerPage } = vendorState;
-
-  const tableMaxHeight = `max-h-[calc(100% - ${(document.getElementById("bottom-pagination")?.offsetHeight || 0) + (document.getElementById("table-header")?.offsetHeight || 0)}px)]`;
-
-  console.log(tableMaxHeight)
 
   return (
     <div className="px-4 h-[calc(100vh-55px)]">
@@ -65,7 +62,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
+            extraClasses='max-h-[calc(100%-150px)] overflow-auto' onRowClick={(row: VendorsListResponse) => navigate(`${row._id}/general-information`)} /> ̰
         </div>
 
         {/* Pagination */}

@@ -15,7 +15,7 @@ const ListItemCard = ({
     return (
         <div
             id={item._id}
-            onClick={() => { navigate(`/vendors/${item._id}/orders`) }}
+            onClick={() => { navigate(`/vendors/${item._id}/general-information`) }}
             key={item._id}
             className='flex gap-4 border-b items-center  px-3 py-1 cursor-pointer' >
             <div>

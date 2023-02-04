@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React ,{useState}from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
@@ -22,7 +22,7 @@ const WarehouseListing = ({ columns, rows }: Props) => {
   const { page, rowsPerPage } = warehouseState;
 
   return (
-    <div className="px-4 h-full  ">
+    <div className="h-full">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Warehouse </ATMPageHeading>

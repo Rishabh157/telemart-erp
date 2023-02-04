@@ -6,9 +6,9 @@ import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { WarehousesListResponse } from "src/models/Warehouse.model";
 import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
+  setIsTableLoading,
+  setItems,
+  setTotalItems,
 } from "src/redux/slices/vendorSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 import { useGetVendorsQuery } from "src/services/VendorServices";
@@ -167,52 +167,54 @@ const rows = [
 ];
 
 const DealersListingWrapper = () => {
-    const vendorState: any = useSelector((state: RootState) => state.vendor);
+  const vendorState: any = useSelector((state: RootState) => state.vendor);
 
-    const { page, rowsPerPage } = vendorState;
+  const { page, rowsPerPage } = vendorState;
 
-    const dispatch = useDispatch<AppDispatch>();
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetVendorsQuery({
-        limit: rowsPerPage,
-        searchValue: "",
-        params: ["dealerName", "dealerCode", "mobile"],
-        page: page,
-        filterBy: [
-            {
-                fieldName: "",
-                value: [],
-            },
-        ],
-        dateFilter: {
-            start_date: "",
-            end_date: "",
-            dateFilterKey: "",
-        },
-        orderBy: "createdAt",
-        orderByValue: -1,
-        isPaginationRequired: true,
-    });
+  const dispatch = useDispatch<AppDispatch>();
+  // const navigate = useNavigate();
+  const { data, isFetching, isLoading } = useGetVendorsQuery({
+    limit: rowsPerPage,
+    searchValue: "",
+    params: ["dealerName", "dealerCode", "mobile"],
+    page: page,
+    filterBy: [
+      {
+        fieldName: "",
+        value: [],
+      },
+    ],
+    dateFilter: {
+      start_date: "",
+      end_date: "",
+      dateFilterKey: "",
+    },
+    orderBy: "createdAt",
+    orderByValue: -1,
+    isPaginationRequired: true,
+  });
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false));
-            dispatch(setItems(data || []));
-            dispatch(setTotalItems(data?.totalItems || 4));
-        } else {
-            dispatch(setIsTableLoading(true));
-        }
+  useEffect(() => {
+    if (!isFetching && !isLoading) {
+      dispatch(setIsTableLoading(false));
+      dispatch(setItems(data || []));
+      dispatch(setTotalItems(data?.totalItems || 4));
+    } else {
+      dispatch(setIsTableLoading(true));
+    }
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isFetching, data]);
 
-    return (
-        <>
-            <SideNavLayout>
-                <WarehouseListing columns={columns} rows={rows} />
-            </SideNavLayout>
-        </>
-    );
+  return (
+    <>
+      <SideNavLayout>
+        <div className="px-4 h-[calc(100vh-55px)]">
+          <WarehouseListing columns={columns} rows={rows} />
+        </div>
+      </SideNavLayout>
+    </>
+  );
 };
 
 export default DealersListingWrapper;

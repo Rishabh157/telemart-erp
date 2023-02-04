@@ -48,6 +48,9 @@ import UsersListingWrapper from "./pages/users/list/UsersListingWrapper";
 import AddVendorWrapper from "./pages/vendors/add/AddVendorWrapper";
 import VendorsListingWrapper from "./pages/vendors/list/VendorsListingWrapper";
 import ViewVendor from "./pages/vendors/view";
+import VendorActivityTabWrapper from "./pages/vendors/view/tabs/VendorActivityTab/VendorActivityTabWrapper";
+import VendorGeneralInformationTabWrapper from "./pages/vendors/view/tabs/VendorGeneralInformationTab/VendorGeneralInformationTabWrapper";
+import VendorWarehouseTabWrapper from "./pages/vendors/view/tabs/VendorWarehouseTab/VendorWarehouseTabWrapper";
 import AddWarehouseWrapper from "./pages/warehouses/add/AddWarehouseWrapper";
 import WarehousesListingWrapper from "./pages/warehouses/list/WarehousesListingWrapper";
 
@@ -65,9 +68,15 @@ const PageRoutes = () => {
           <Route path="/vendors" element={<VendorsListingWrapper />} />
           <Route path="/vendors/add-vendor" element={<AddVendorWrapper />} />
           <Route path="/vendors/:vendorId" element={<ViewVendor />}>
-            <Route path="orders" element={"Orders"} />
-            <Route path="activities" element={"Activities"} />
-            <Route path="delivery-boys" element={"Delivery Boys"} />
+            <Route
+              path="general-information"
+              element={<VendorGeneralInformationTabWrapper />}
+            />
+            <Route path="purchase-order" element={"Purchase Order"} />
+            <Route path="warehouse" element={<VendorWarehouseTabWrapper />} />
+            <Route path="return-to-vendor" element={"Return To Vendor"} />
+            <Route path="ledger" element={"Ledger"} />
+            <Route path="activities" element={<VendorActivityTabWrapper />} />
           </Route>
 
           <Route path="/warehouse" element={<WarehousesListingWrapper />} />

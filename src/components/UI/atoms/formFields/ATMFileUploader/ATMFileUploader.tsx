@@ -9,6 +9,7 @@ type Props = {
   onSelect: (file: File) => void;
   selectedFile: any;
   accept: string;
+  disabled?:boolean
 };
 
 const ATMFileUploader = ({
@@ -19,6 +20,7 @@ const ATMFileUploader = ({
   onSelect,
   selectedFile,
   accept,
+  disabled= false
 }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -68,6 +70,7 @@ const ATMFileUploader = ({
         onChange={(e: any) => onSelect(e.target.files[0])}
         className="hidden"
         accept={accept}
+        disabled={disabled}
       />
     </div>
   );

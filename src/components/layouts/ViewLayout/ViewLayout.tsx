@@ -120,7 +120,7 @@ const ViewLayout = ({
 
               {/* Children */}
               <div className="h-[calc(100%-85px)] pt-4 ">
-                <div className="h-full overflow-auto border shadow rounded ">
+                <div className="h-full overflow-auto">
                   <Outlet />
                  
                 </div>
