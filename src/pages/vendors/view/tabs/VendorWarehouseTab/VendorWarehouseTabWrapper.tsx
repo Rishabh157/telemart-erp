@@ -234,7 +234,7 @@ type Props = {};
 
 const VendorWarehouseTabWrapper = (props: Props) => {
   return (
-    <div className="px-2 h-full" >
+    <div className="px-2 h-full shadow rounded border " >
       <WarehouseListing columns={columns} rows={rows} />
     </div>
   );
