@@ -11,19 +11,34 @@ import { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadC
 
 const tabsData = [
   {
-    label: "Orders",
+    label: "General Information",
     icon: BsArrowRepeat,
-    path: "orders",
+    path: "general-information",
   },
   {
-    label: "Activities",
+    label: "PO",
     icon: AiOutlineRise,
-    path: "activities",
+    path: "purchase-order",
   },
   {
-    label: "Delivery Boys",
+    label: "Warehouse",
     icon: MdOutlinePeopleAlt,
-    path: "delivery-boys",
+    path: "warehouse",
+  },
+  {
+    label: "RTV's",
+    icon: MdOutlinePeopleAlt,
+    path: "return-to-vendor",
+  },
+  {
+    label: "Ledger",
+    icon: MdOutlinePeopleAlt,
+    path: "ledger",
+  },
+  {
+    label: "Activity",
+    icon: MdOutlinePeopleAlt,
+    path: "activities",
   },
 ];
 
