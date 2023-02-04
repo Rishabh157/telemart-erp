@@ -73,7 +73,7 @@ const ATMSelect = ({
                     </ClickAwayListener>
                 }
 
-                <button onClick={(e) => { console.log(e.screenY); setToggleOpenSelect(prev => !prev) }} className={twMerge(`w-full h-[35px] px-2 border text-slate-600 rounded flex items-center bg-white`)} >
+                <button onClick={(e) => {setToggleOpenSelect(prev => !prev) }} className={twMerge(`w-full h-[35px] px-2 border text-slate-600 rounded flex items-center bg-white`)} >
                     {
                         renderValue(value)
                     }

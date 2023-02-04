@@ -12,7 +12,6 @@ type Props = {
 };
 
 const uploadImageCallBack = (file: any) => {
-    console.log("inside upload")
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest(); // eslint-disable-line no-undef
     xhr.open("POST", "https://api.imgur.com/3/image");
@@ -41,7 +40,6 @@ const ATMHTMLEditor = ({ name, value, onChange }: Props) => {
     }
   };
 
-  console.log(name)
   return (
     <div className="relative">
       <Editor

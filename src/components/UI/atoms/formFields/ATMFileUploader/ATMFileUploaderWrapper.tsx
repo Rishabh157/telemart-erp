@@ -11,7 +11,8 @@ type Props = {
   onSelect: (file: File) => void;
   selectedFile: any;
   name: string;
-  accept?:string
+  accept?:string;
+  disabled?: boolean;
 };
 
 const ATMFilePickerWrapper = ({
@@ -22,7 +23,8 @@ const ATMFilePickerWrapper = ({
   placeholder = "",
   onSelect,
   selectedFile,
-  accept= "image/*"
+  accept= "image/*",
+  disabled,
 }: Props) => {
   return (
     <div className="relative">
@@ -34,6 +36,7 @@ const ATMFilePickerWrapper = ({
         onSelect={onSelect}
         selectedFile={selectedFile}
         accept={accept}
+        disabled={disabled}
       />
 
       {name && (
