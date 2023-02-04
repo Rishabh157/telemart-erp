@@ -12,6 +12,7 @@ import AddCompanyWrapper from "./pages/configuration/Configuration Screens/confi
 import ConfigurationCompanyListingWrapper from "./pages/configuration/Configuration Screens/configurationCompany/list/ConfigurationCompanyListingWrapper";
 import AddDealersCategoryWrapper from './pages/configuration/Configuration Screens/dealersCategory/add/AddDealersCategoryWrapper'
 import DealersCategoryListingWrapper from "./pages/configuration/Configuration Screens/dealersCategory/list/DealersCategoryListingWrapper";
+import AddGRNWrapper from "./pages/configuration/Configuration Screens/grn/add/AddGRNWrapper";
 import GRNListingWrapper from "./pages/configuration/Configuration Screens/grn/list/GRNListingWrapper";
 import AddItemWrapper from './pages/configuration/Configuration Screens/item/add/AddItemWrapper'
 import ItemListingWrapper from "./pages/configuration/Configuration Screens/item/list/ItemListingWrapper";
@@ -166,6 +167,8 @@ const PageRoutes = () => {
           />
 
           <Route path="/configurations/grn" element={<GRNListingWrapper />} />
+          <Route path='/configurations/grn/add' element={<AddGRNWrapper />} />
+
           <Route
             path="/configurations/company"
             element={<ConfigurationCompanyListingWrapper />}

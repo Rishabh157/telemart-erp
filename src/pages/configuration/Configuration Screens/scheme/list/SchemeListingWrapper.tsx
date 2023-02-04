@@ -21,7 +21,7 @@ const columns: columnTypes[] = [
         headerName: "Scheme Code",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: SchemeListResponse) => {
-            return <span className="text-primary-main "> {row.schemeCode} </span>;
+            return <span > {row.schemeCode} </span>;
         },
     },
     {
@@ -36,7 +36,7 @@ const columns: columnTypes[] = [
         headerName: "Category",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: SchemeListResponse) => {
-            return <span className="text-primary-main "> {row.category} </span>;
+            return <span > {row.category} </span>;
         },
     },
 
@@ -45,7 +45,7 @@ const columns: columnTypes[] = [
         headerName: "Sub Category",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: SchemeListResponse) => {
-            return <span className="text-primary-main "> {row.subCategory} </span>;
+            return <span > {row.subCategory} </span>;
         },
     },
     {
@@ -53,7 +53,7 @@ const columns: columnTypes[] = [
         headerName: "Price",  
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: SchemeListResponse) => {
-            return <span className="text-primary-main "> {row.price} </span>;
+            return <span > {row.price} </span>;
         },
     },
     {
@@ -79,6 +79,7 @@ const rows = [
         subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
+        _id : 1
     },
 
     {
@@ -88,6 +89,7 @@ const rows = [
         price : "200",
         subCategory: "Biscuits",
         weight: "M.P.",
+        _id : 2,
         barcode: "8574859685",
     },
     {
@@ -98,11 +100,13 @@ const rows = [
         subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
+        _id : 3
     },
 
     {
         category: "Chocolate",
         schemeName: "Offer",
+        _id : 4,
         schemeCode: "off20",
         price : "200",
         subCategory: "Biscuits",
@@ -111,26 +115,8 @@ const rows = [
     },
     {
         category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
+        _id : 5,
+       schemeName: "Offer",
         schemeCode: "off20",
         price : "200",
         subCategory: "Biscuits",
@@ -144,6 +130,28 @@ const rows = [
         schemeCode: "off20",
         price : "200",
         subCategory: "Biscuits",
+        _id : 6,
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        _id : 7,
+        price : "200",
+        subCategory: "Biscuits",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+
+    {
+        category: "Chocolate",
+        schemeName: "Offer",
+        schemeCode: "off20",
+        _id : 8,
+        price : "200",
+        subCategory: "Biscuits",
         weight: "M.P.",
         barcode: "8574859685",
     },
@@ -153,6 +161,7 @@ const rows = [
         schemeCode: "off20",
         price : "200",
         subCategory: "Biscuits",
+        _id : 9,
         weight: "M.P.",
         barcode: "8574859685",
     },
@@ -164,105 +173,9 @@ const rows = [
         price : "200",
         subCategory: "Biscuits",
         weight: "M.P.",
+        _id : 10,
         barcode: "8574859685",
-    },
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        category: "Chocolate",
-        schemeName: "Offer",
-        schemeCode: "off20",
-        price : "200",
-        subCategory: "Biscuits",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-];
+    },];
 
 const SchemeListingWrapper = () => {
     // const vendorweight: any = useSelector((weight: Rootweight) => weight.vendor);

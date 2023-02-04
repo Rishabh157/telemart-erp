@@ -26,7 +26,7 @@ const columns: columnTypes[] = [
         headerName: "Attribute ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: AttributesGroupListResponse) => {
-            return <span className="text-primary-main "> {row.attribute} </span>;
+            return <span > {row.attribute} </span>;
         },
     },
     {
@@ -52,6 +52,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 1
     },
 
     {
@@ -62,6 +63,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 2
     },
     {
         firstName: "Himanshu",
@@ -71,6 +73,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 3
     },
 
     {
@@ -81,6 +84,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 4
     },
     {
         firstName: "Himanshu",
@@ -88,6 +92,7 @@ const rows = [
         attribute: "Color",
         lastName: "Jain",
         district: "Mandsaur",
+         _id : 5,
         state: "M.P.",
         mobile: "8574859685",
     },
@@ -98,6 +103,7 @@ const rows = [
         attribute: "Color",
         lastName: "Jain",
         district: "Mandsaur",
+        _id : 6,
         state: "M.P.",
         mobile: "8574859685",
     },
@@ -107,25 +113,7 @@ const rows = [
         attribute: "Color",
         lastName: "Jain",
         district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        groupName: "red",
-        attribute: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        groupName: "red",
-        attribute: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
+        _id : 7,
         state: "M.P.",
         mobile: "8574859685",
     },
@@ -138,11 +126,13 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 8,
     },
     {
         firstName: "Himanshu",
         groupName: "red",
         attribute: "Color",
+         _id : 9,
         lastName: "Jain",
         district: "Mandsaur",
         state: "M.P.",
@@ -157,84 +147,8 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 10,
     },
-    {
-        firstName: "Himanshu",
-        groupName: "red",
-        attribute: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        groupName: "red",
-        attribute: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        groupName: "red",
-        attribute: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        groupName: "red",
-        attribute: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        groupName: "red",
-        attribute: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        groupName: "red",
-        attribute: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        groupName: "red",
-        attribute: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        groupName: "red",
-        attribute: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
 ];
 
 const AttributesGroupListingWrapper = () => {

@@ -4,18 +4,18 @@ import ATMBreadCrumbs, {
   BreadcrumbType,
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
-// import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
+import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-// import { SelectOption } from "src/models/FormField/FormField.model";
+import { SelectOption } from "src/models/FormField/FormField.model";
 import { FormInitialValues } from "./AddProductSubCategoryWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
-  // dropdownOptions: {
-  //   applicableTaxes: SelectOption[];
-  //   parentCategory: SelectOption[];
-  //   subCategoryName: SelectOption[];
-  // };
+  dropdownOptions: {
+    subCategoryNameOptions: SelectOption[];
+    parentCategoryOptions: SelectOption[];
+    applicableTaxesOptions: SelectOption[];
+  };
 };
 
 // Breadcrumbs
@@ -29,7 +29,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddProductSubCategory = ({ formikProps }: Props) => {
+const AddProductSubCategory = ({ formikProps ,dropdownOptions}: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -75,11 +75,11 @@ const AddProductSubCategory = ({ formikProps }: Props) => {
               />
 
               {/* Field 2 */}
-              {/* <ATMSelect
+              <ATMSelect
                 name="subCategoryName"
                 value={values.subCategoryName}
                 onChange={(e) => setFieldValue("subCategoryName", e.target.value)}
-                options={dropdownOptions.subCategoryName}
+                options={dropdownOptions.subCategoryNameOptions}
                 label="Sub Category Name"
               />
 
@@ -87,7 +87,7 @@ const AddProductSubCategory = ({ formikProps }: Props) => {
                 name="parentCategory"
                 value={values.parentCategory}
                 onChange={(e) => setFieldValue("parentCategory", e.target.value)}
-                options={dropdownOptions.parentCategory}
+                options={dropdownOptions.parentCategoryOptions}
                 label="Parent Category"
               />
 
@@ -95,9 +95,9 @@ const AddProductSubCategory = ({ formikProps }: Props) => {
                 name="applicableTaxes"
                 value={values.applicableTaxes}
                 onChange={(e) => setFieldValue("applicableTaxes", e.target.value)}
-                options={dropdownOptions.applicableTaxes}
+                options={dropdownOptions.applicableTaxesOptions}
                 label="Applicable Taxes"
-              /> */}
+              />
 
               {/* Field 3 */}
               <ATMTextField

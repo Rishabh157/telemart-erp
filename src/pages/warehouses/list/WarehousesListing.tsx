@@ -16,7 +16,8 @@ type Props = {
 const WarehouseListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const warehouseState: any = useSelector((state: RootState) => state.warehouse);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  // const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const { page, rowsPerPage } = warehouseState;
 
@@ -40,12 +41,16 @@ const WarehouseListing = ({ columns, rows }: Props) => {
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
-          onFilterClick={() => setIsFilterOpen(true)}
+          // onFilterClick={() => setIsFilterOpen(true)}
         />
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows} />
+          <ATMTable columns={columns} rows={rows}
+            isCheckbox={true}
+            selectedRows={selectedRows}
+            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}

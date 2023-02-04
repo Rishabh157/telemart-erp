@@ -11,6 +11,7 @@ export type FormInitialValues = {
   itemName: string;
   itemWeight: string;
   itemCategory: string;
+  itemImage : string;
   itemSubCategory: string;
 };
 
@@ -20,6 +21,7 @@ const AddItemWrapper = (props: Props) => {
     itemCode: "",
     itemName: "",
     itemWeight: "",
+    itemImage : "",
     itemCategory: "",
     itemSubCategory: "",
   };

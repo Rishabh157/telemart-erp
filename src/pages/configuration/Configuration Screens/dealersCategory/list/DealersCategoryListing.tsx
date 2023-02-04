@@ -27,7 +27,7 @@ const DealerCategoryListing = ({ columns, rows }: Props) => {
 
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Home Page",
+      label: "Configuration",
       path: "/dashboard",
     },
     {

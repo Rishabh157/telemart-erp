@@ -20,7 +20,7 @@ const columns: columnTypes[] = [
     headerName: "So Number",
     flex: "flex-[1_1_0%]",
     renderCell: (row: SaleOrderListResponse) => (
-      <span className="text-primary-main "> {row.soNumber} </span>
+      <span> {row.soNumber} </span>
     ),
   },
   {
@@ -34,7 +34,7 @@ const columns: columnTypes[] = [
     headerName: "Warehouse",
     flex: "flex-[1.5_1.5_0%]",
     renderCell: (row: SaleOrderListResponse) => {
-      return <span className="text-primary-main "> {row.warehouse} </span>;
+      return <span> {row.warehouse} </span>;
     },
   },
   {
@@ -57,6 +57,7 @@ const rows = [
     dealer: "Anuj joshi",
     warehouse: "Joshi's Warehouse",
     mobile: "8574859685",
+    _id : 1
   },
 
   {
@@ -64,25 +65,14 @@ const rows = [
     dealer: "Anuj joshi",
     warehouse: "Joshi's Warehouse",
     mobile: "8574859685",
+    _id : 2
   },
   {
     soNumber: "54864864",
     dealer: "Anuj joshi",
     warehouse: "Joshi's Warehouse",
     mobile: "8574859685",
-  },
-
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-  },
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
+    _id : 3
   },
 
   {
@@ -90,25 +80,14 @@ const rows = [
     dealer: "Anuj joshi",
     warehouse: "Joshi's Warehouse",
     mobile: "8574859685",
+    _id : 4
   },
   {
     soNumber: "54864864",
     dealer: "Anuj joshi",
     warehouse: "Joshi's Warehouse",
     mobile: "8574859685",
-  },
-
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-  },
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
+    _id : 5
   },
 
   {
@@ -116,25 +95,14 @@ const rows = [
     dealer: "Anuj joshi",
     warehouse: "Joshi's Warehouse",
     mobile: "8574859685",
+    _id : 6
   },
   {
     soNumber: "54864864",
     dealer: "Anuj joshi",
     warehouse: "Joshi's Warehouse",
     mobile: "8574859685",
-  },
-
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-  },
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
+    _id : 7
   },
 
   {
@@ -142,25 +110,14 @@ const rows = [
     dealer: "Anuj joshi",
     warehouse: "Joshi's Warehouse",
     mobile: "8574859685",
+    _id : 8
   },
   {
     soNumber: "54864864",
     dealer: "Anuj joshi",
     warehouse: "Joshi's Warehouse",
     mobile: "8574859685",
-  },
-
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-  },
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
+    _id : 9
   },
 
   {
@@ -168,19 +125,7 @@ const rows = [
     dealer: "Anuj joshi",
     warehouse: "Joshi's Warehouse",
     mobile: "8574859685",
-  },
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-  },
-
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
+    _id : 10
   },
   
 ];

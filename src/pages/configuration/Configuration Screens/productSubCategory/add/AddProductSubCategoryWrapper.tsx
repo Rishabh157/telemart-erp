@@ -40,11 +40,11 @@ const AddProductSubCategoryWrapper = (props: Props) => {
     console.log("onSubmitHandler", values);
   };
 
-  // const dropdownOptions = {
-  //   subCategoryNameOptions: [{ label: "dealer", value: "dealer" }],
-  //   parentCategory: [{ label: "dealer", value: "dealer" }],
-  //   applicableTaxes: [{ label: "dealer", value: "dealer" }],
-  // }
+  const dropdownOptions = {
+    subCategoryNameOptions: [{ label: "dealer", value: "dealer" }],
+    parentCategoryOptions: [{ label: "dealer", value: "dealer" }],
+    applicableTaxesOptions: [{ label: "dealer", value: "dealer" }],
+  }
 
   return (
     <ConfigurationLayout>
@@ -54,7 +54,7 @@ const AddProductSubCategoryWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <AddProductSubCategory formikProps={formikProps}  />;
+          return <AddProductSubCategory formikProps={formikProps}  dropdownOptions={dropdownOptions} />;
         }}
       </Formik>
     </ConfigurationLayout>

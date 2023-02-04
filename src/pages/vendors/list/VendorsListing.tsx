@@ -19,11 +19,12 @@ const VendorsListing = ({ columns, rows }: Props) => {
   const vendorState: any = useSelector((state: RootState) => state.vendor);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const navigate = useNavigate();
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const { page, rowsPerPage } = vendorState;
 
-  const tableMaxHeight =  `max-h-[calc(100% - ${(document.getElementById("bottom-pagination")?.offsetHeight || 0)  + (document.getElementById("table-header")?.offsetHeight || 0) }px)]`;
-  
+  const tableMaxHeight = `max-h-[calc(100% - ${(document.getElementById("bottom-pagination")?.offsetHeight || 0) + (document.getElementById("table-header")?.offsetHeight || 0)}px)]`;
+
   console.log(tableMaxHeight)
 
   return (
@@ -60,7 +61,11 @@ const VendorsListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className={`overflow-auto `}>
-          <ATMTable columns={columns} rows={rows} />
+          <ATMTable columns={columns} rows={rows}
+            isCheckbox={true}
+            selectedRows={selectedRows}
+            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}
@@ -72,6 +77,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
             page={page}
             rowCount={rows.length}
             rows={rows}
+            onRowsPerPageChange={(newValue) => alert(newValue)}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
           />

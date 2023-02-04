@@ -18,7 +18,7 @@ const AddTaxesWrapper = (props: Props) => {
 
   // Form Validation Schema
   const validationSchema = object({
-    taxName: string().required("taxName is required"),
+    taxName: string().required("Tax Name is required"),
   });
 
   //    Form Submit Handler

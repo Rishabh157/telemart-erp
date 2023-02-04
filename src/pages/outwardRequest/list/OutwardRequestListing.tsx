@@ -20,6 +20,7 @@ const OutwardRequestListing = ({ columns, rows, tabs }: Props) => {
   const outwardRequestState: any = useSelector(
     (state: RootState) => state.outwardRequest
   );
+  const [selectedRows, setSelectedRows] = useState([])
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
   const [activeTab , setActiveTab] = useState('Dealer')
@@ -68,7 +69,11 @@ const OutwardRequestListing = ({ columns, rows, tabs }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows} />
+          <ATMTable columns={columns} rows={rows}
+           isCheckbox={true}
+           selectedRows={selectedRows}
+           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}

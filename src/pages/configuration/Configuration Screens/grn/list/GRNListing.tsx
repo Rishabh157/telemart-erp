@@ -1,5 +1,6 @@
-import React from "react";
+import React,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ATMBreadCrumbs, {
   BreadcrumbType,
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
@@ -17,6 +18,9 @@ type Props = {
 };
 
 const GRNListing = ({ columns, rows }: Props) => {
+  const [selectedRows, setSelectedRows] = useState([])
+  const navigate = useNavigate()
+
   const dispatch = useDispatch<AppDispatch>();
   const grnState: any = useSelector((state: RootState) => state.grn);
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
@@ -25,7 +29,7 @@ const GRNListing = ({ columns, rows }: Props) => {
 
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Home Page",
+      label: "Configuration",
       path: "/dashboard",
     },
     {
@@ -42,7 +46,7 @@ const GRNListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> GRN </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button onClick={() => navigate("/configurations/grn/add")} className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
           + Add GRN{" "}
         </button>
@@ -62,7 +66,11 @@ const GRNListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows} />
+        <ATMTable columns={columns} rows={rows}
+           isCheckbox={true}
+           selectedRows={selectedRows}
+           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}

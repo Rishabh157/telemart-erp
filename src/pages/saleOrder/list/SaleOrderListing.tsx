@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState}from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
@@ -20,6 +20,7 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const saleOrderState: any = useSelector((state: RootState) => state.saleOrder);
   const navigate = useNavigate()
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const { page, rowsPerPage } = saleOrderState;
 
@@ -48,7 +49,11 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto">
-          <ATMTable columns={columns} rows={rows} />
+        <ATMTable columns={columns} rows={rows} 
+            isCheckbox={true}
+            selectedRows={selectedRows}
+            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}

@@ -27,7 +27,7 @@ const columns: columnTypes[] = [
         headerName: "Product Code ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ProductsListResponse) => {
-            return <span className="text-primary-main "> {row.productCode} </span>;
+            return <span > {row.productCode} </span>;
         },
     },
     {
@@ -35,7 +35,7 @@ const columns: columnTypes[] = [
         headerName: "Product Name ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ProductsListResponse) => {
-            return <span className="text-primary-main "> {row.productName} </span>;
+            return <span > {row.productName} </span>;
         },
     },
     {
@@ -43,7 +43,7 @@ const columns: columnTypes[] = [
         headerName: "Category  ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ProductsListResponse) => {
-            return <span className="text-primary-main "> {row.category} </span>;
+            return <span > {row.category} </span>;
         },
     },
     {
@@ -51,15 +51,15 @@ const columns: columnTypes[] = [
         headerName: "Sub Category  ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ProductsListResponse) => {
-            return <span className="text-primary-main "> {row.subCategory} </span>;
+            return <span > {row.subCategory} </span>;
         },
     },
     {
-        field: "weight",
-        headerName: "Weight ",
+        field: "weight ",
+        headerName: "Weight (in gms) ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ProductsListResponse) => {
-            return <span className="text-primary-main "> {row.weight} </span>;
+            return <span > {row.weight} </span>;
         },
     },
     {
@@ -85,6 +85,7 @@ const rows = [
         category: "Something",
         subCategory: "Something",
         weight: "100",
+        _id : 1
     },
 
     {
@@ -95,6 +96,7 @@ const rows = [
         category: "Something",
         subCategory: "Something",
         weight: "100",
+        _id : 2
     },
     {
         firstName: "Himanshu",
@@ -104,6 +106,7 @@ const rows = [
         category: "Something",
         subCategory: "Something",
         weight: "100",
+        _id : 3
     },
 
     {
@@ -114,6 +117,7 @@ const rows = [
         category: "Something",
         subCategory: "Something",
         weight: "100",
+        _id : 4
     },
     {
         firstName: "Himanshu",
@@ -123,6 +127,7 @@ const rows = [
         category: "Something",
         subCategory: "Something",
         weight: "100",
+        _id : 5
     },
 
     {
@@ -133,6 +138,7 @@ const rows = [
         category: "Something",
         subCategory: "Something",
         weight: "100",
+        _id : 6
     },
     {
         firstName: "Himanshu",
@@ -142,6 +148,7 @@ const rows = [
         category: "Something",
         subCategory: "Something",
         weight: "100",
+        _id : 7
     },
 
     {
@@ -152,6 +159,7 @@ const rows = [
         category: "Something",
         subCategory: "Something",
         weight: "100",
+        _id : 8
     },
     {
         firstName: "Himanshu",
@@ -161,6 +169,7 @@ const rows = [
         category: "Something",
         subCategory: "Something",
         weight: "100",
+        _id : 9
     },
 
     {
@@ -171,103 +180,9 @@ const rows = [
         category: "Something",
         subCategory: "Something",
         weight: "100",
+        _id : 10
     },
-    {
-        firstName: "Himanshu",
-        productImage: "-",
-        productName: "DrinkStop",
-        productCode: "123",
-        category: "Something",
-        subCategory: "Something",
-        weight: "100",
-    },
-
-    {
-        firstName: "Himanshu",
-        productImage: "-",
-        productName: "DrinkStop",
-        productCode: "123",
-        category: "Something",
-        subCategory: "Something",
-        weight: "100",
-    },
-    {
-        firstName: "Himanshu",
-        productImage: "-",
-        productName: "DrinkStop",
-        productCode: "123",
-        category: "Something",
-        subCategory: "Something",
-        weight: "100",
-    },
-
-    {
-        firstName: "Himanshu",
-        productImage: "-",
-        productName: "DrinkStop",
-        productCode: "123",
-        category: "Something",
-        subCategory: "Something",
-        weight: "100",
-    },
-    {
-        firstName: "Himanshu",
-        productImage: "-",
-        productName: "DrinkStop",
-        productCode: "123",
-        category: "Something",
-        subCategory: "Something",
-        weight: "100",
-    },
-
-    {
-        firstName: "Himanshu",
-        productImage: "-",
-        productName: "DrinkStop",
-        productCode: "123",
-        category: "Something",
-        subCategory: "Something",
-        weight: "100",
-    },
-    {
-        firstName: "Himanshu",
-        productImage: "-",
-        productName: "DrinkStop",
-        productCode: "123",
-        category: "Something",
-        subCategory: "Something",
-        weight: "100",
-    },
-
-    {
-        firstName: "Himanshu",
-        productImage: "-",
-        productName: "DrinkStop",
-        productCode: "123",
-        category: "Something",
-        subCategory: "Something",
-        weight: "100",
-    },
-    {
-        firstName: "Himanshu",
-        productImage: "-",
-        productName: "DrinkStop",
-        productCode: "123",
-        category: "Something",
-        subCategory: "Something",
-        weight: "100",
-    },
-
-    {
-        firstName: "Himanshu",
-        productImage: "-",
-        productName: "DrinkStop",
-        productCode: "123",
-        category: "Something",
-        subCategory: "Something",
-        weight: "100",
-    },
-
+  
 ];
 
 const ProductsListingWrapper = () => {

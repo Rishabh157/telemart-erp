@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ATMBreadCrumbs, {
   BreadcrumbType,
@@ -21,6 +21,7 @@ const AttributesListing = ({ columns, rows }: Props) => {
   // const [isFilterOpen, setIsFilterOpen] = useState(false);
 const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>();
+  const [selectedRows, setSelectedRows] = useState([])
   const attributesState: any = useSelector(
     (state: RootState) => state.attributes
   );
@@ -30,7 +31,7 @@ const navigate = useNavigate()
 
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Home Page",
+      label: "Configuration",
       path: "/dashboard",
     },
     {
@@ -68,7 +69,11 @@ const navigate = useNavigate()
 
         {/* Table */}
         <div className="grow overflow-auto">
-          <ATMTable columns={columns} rows={rows} />
+        <ATMTable columns={columns} rows={rows}
+           isCheckbox={true}
+           selectedRows={selectedRows}
+           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}

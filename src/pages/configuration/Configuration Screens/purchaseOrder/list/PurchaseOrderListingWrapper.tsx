@@ -26,7 +26,7 @@ const columns: columnTypes[] = [
         headerName: "Item Name",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: PurchaseOrderListResponse) => {
-            return <span className="text-primary-main "> {row.itemName} </span>;
+            return <span> {row.itemName} </span>;
         },
     },
     {
@@ -34,7 +34,7 @@ const columns: columnTypes[] = [
         headerName: "Qnty.",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: PurchaseOrderListResponse) => {
-            return <span className="text-primary-main "> {row.quantity} </span>;
+            return <span> {row.quantity} </span>;
         },
     },
     {
@@ -42,7 +42,7 @@ const columns: columnTypes[] = [
         headerName: "Price",  
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: PurchaseOrderListResponse) => {
-            return <span className="text-primary-main "> {row.price} </span>;
+            return <span> {row.price} </span>;
         },
     },
     {
@@ -50,7 +50,7 @@ const columns: columnTypes[] = [
         headerName: "Vendor",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: PurchaseOrderListResponse) => {
-            return <span className="text-primary-main "> {row.vendor} </span>;
+            return <span> {row.vendor} </span>;
         },
     },
     {
@@ -58,7 +58,7 @@ const columns: columnTypes[] = [
         headerName: "Est. Delivery Date",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: PurchaseOrderListResponse) => {
-            return <span className="text-primary-main "> {row.estimateDeliveryDate} </span>;
+            return <span> {row.estimateDeliveryDate} </span>;
         },
     },
     {
@@ -83,7 +83,29 @@ const rows = [
         price : "1200",
         vendor: "Himanshu",
         estimateDeliveryDate: "12 Dec 23",
+        _id : 1, 
         barcode: "8574859685",
+    },
+
+    {
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        _id : 2,
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
+        barcode: "8574859685",
+    },
+    {
+        quantity: "12",
+        poCode: "456001",
+        itemName: "Alcoban",
+        price : "1200",
+        vendor: "Himanshu",
+        estimateDeliveryDate: "12 Dec 23",
+        barcode: "8574859685",
+        _id : 3,
     },
 
     {
@@ -94,6 +116,7 @@ const rows = [
         vendor: "Himanshu",
         estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
+        _id : 4,
     },
     {
         quantity: "12",
@@ -101,44 +124,7 @@ const rows = [
         itemName: "Alcoban",
         price : "1200",
         vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
+        _id : 5,
         estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
     },
@@ -151,6 +137,7 @@ const rows = [
         vendor: "Himanshu",
         estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
+        _id : 6
     },
     {
         quantity: "12",
@@ -160,6 +147,7 @@ const rows = [
         vendor: "Himanshu",
         estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
+        _id : 7
     },
 
     {
@@ -170,6 +158,7 @@ const rows = [
         vendor: "Himanshu",
         estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
+        _id : 8
     },
     {
         quantity: "12",
@@ -179,6 +168,7 @@ const rows = [
         vendor: "Himanshu",
         estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
+        _id : 9
     },
 
     {
@@ -189,84 +179,8 @@ const rows = [
         vendor: "Himanshu",
         estimateDeliveryDate: "12 Dec 23",
         barcode: "8574859685",
+        _id : 10
     },
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-
-    {
-        quantity: "12",
-        poCode: "456001",
-        itemName: "Alcoban",
-        price : "1200",
-        vendor: "Himanshu",
-        estimateDeliveryDate: "12 Dec 23",
-        barcode: "8574859685",
-    },
-
 ];
 
 const PurchaseOrderListingWrapper = () => {

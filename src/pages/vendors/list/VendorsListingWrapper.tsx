@@ -21,6 +21,11 @@ const columns: columnTypes[] = [
     renderCell: (row: VendorsListResponse) => <span> {row.vendorCode} </span>,
   },
   {
+    field: "vendorName",
+    headerName: "Vendor Name",
+    flex: "flex-[1_1_0%]",
+  },
+  {
     field: "mobile",
     headerName: "Phone",
     flex: "flex-[1_1_0%]",
@@ -30,7 +35,7 @@ const columns: columnTypes[] = [
     headerName: "District",
     flex: "flex-[1_1_0%]",
     renderCell: (row: VendorsListResponse) => (
-      <span className="text-primary-main "> {row.district} </span>
+      <span > {row.district} </span>
     ),
   },
   {
@@ -38,7 +43,7 @@ const columns: columnTypes[] = [
     headerName: "State",
     flex: "flex-[1_1_0%]",
     renderCell: (row: VendorsListResponse) => (
-      <span className="text-primary-main "> {row.state} </span>
+      <span > {row.state} </span>
     ),
   },
   {
@@ -61,7 +66,44 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
+    district: "Indore",
+    _id: 1
+  },
+
+  {
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore",
+    _id: 2
+
+  },
+  {
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore",
+    _id: 3
+
+  },
+  {
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore",
+    _id:4
+
+  },
+  {
+    vendorName: "Drink Stop",
+    vendorCode: "54864864",
+    state: "M.P.",
+    mobile: "1234456",
+    district: "Indore",
+    _id: 5
 
   },
 
@@ -70,32 +112,16 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
-
+    district: "Indore",
+    _id: 6,
   },
   {
     vendorName: "Drink Stop",
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
-
-  },
-
-  {
-    vendorName: "Drink Stop",
-    vendorCode: "54864864",
-    state: "M.P.",
-    mobile: "1234456",
-    district: "Indore"
-
-  },
-  {
-    vendorName: "Drink Stop",
-    vendorCode: "54864864",
-    state: "M.P.",
-    mobile: "1234456",
-    district: "Indore"
+    district: "Indore",
+    _id: 7
 
   },
 
@@ -104,7 +130,8 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
+    district: "Indore",
+     _id: 8
 
   },
   {
@@ -112,24 +139,8 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
-
-  },
-
-  {
-    vendorName: "Drink Stop",
-    vendorCode: "54864864",
-    state: "M.P.",
-    mobile: "1234456",
-    district: "Indore"
-
-  },
-  {
-    vendorName: "Drink Stop",
-    vendorCode: "54864864",
-    state: "M.P.",
-    mobile: "1234456",
-    district: "Indore"
+    district: "Indore",
+     _id: 9
 
   },
 
@@ -138,7 +149,8 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
+    district: "Indore",
+     _id: 10
 
   },
   {
@@ -146,24 +158,8 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
-
-  },
-
-  {
-    vendorName: "Drink Stop",
-    vendorCode: "54864864",
-    state: "M.P.",
-    mobile: "1234456",
-    district: "Indore"
-
-  },
-  {
-    vendorName: "Drink Stop",
-    vendorCode: "54864864",
-    state: "M.P.",
-    mobile: "1234456",
-    district: "Indore"
+    district: "Indore",
+     _id: 11
 
   },
 
@@ -172,7 +168,8 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
+    district: "Indore",
+     _id: 12
 
   },
   {
@@ -180,24 +177,8 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
-
-  },
-
-  {
-    vendorName: "Drink Stop",
-    vendorCode: "54864864",
-    state: "M.P.",
-    mobile: "1234456",
-    district: "Indore"
-
-  },
-  {
-    vendorName: "Drink Stop",
-    vendorCode: "54864864",
-    state: "M.P.",
-    mobile: "1234456",
-    district: "Indore"
+    district: "Indore",
+     _id: 13
 
   },
 
@@ -206,7 +187,8 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
+    district: "Indore",
+     _id: 14
 
   },
   {
@@ -214,7 +196,8 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
+    district: "Indore",
+    _id: 15
 
   },
 
@@ -223,10 +206,9 @@ const rows = [
     vendorCode: "54864864",
     state: "M.P.",
     mobile: "1234456",
-    district: "Indore"
-
+    district: "Indore",
+    _id: 16
   },
-
 ];
 
 const VendorsListingWrapper = () => {

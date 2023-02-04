@@ -54,15 +54,17 @@ export type FormInitialValues = {
   }[];
 };
 
+export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/);
+
 // Form Steps
 const steps = [
   {
     label: "Company Details",
     component: StepAddCompanyDetailsWrapper,
     validationSchema: object({
-      company_name: string().required("company name is required"),
+      company_name: string().required("Company name is required"),
       company_type: string().required("Please select company type"),
-      ownership_type: string().required("please select ownership type"),
+      ownership_type: string().required("Please select ownership type"),
       website_address: string().required("Website address is required"),
       vendor_code: string().required("Vendor code is required"),
     }),
@@ -72,7 +74,7 @@ const steps = [
     component: StepAddAddressWrapper,
     validationSchema: object({
       regd_address: object().shape({
-        phone: string().required("Phone number is required"),
+        phone: string().trim().matches(regIndiaPhone, "Invalid Mobile Number").required("Required!"),
         address: string().required("Address is required"),
         country: string().required("Please choose a country"),
         state: string().required("Please choose a state"),
@@ -80,7 +82,7 @@ const steps = [
         pincode: string().required("Please choose a pincode"),
       }),
       billing_address: object().shape({
-        phone: string().required("Phone number is required"),
+        phone: string().trim().matches(regIndiaPhone, "Invalid Mobile Number").required("Required!"),
         address: string().required("Address is required"),
         country: string().required("Please choose a country"),
         state: string().required("Please choose a state"),
@@ -98,8 +100,8 @@ const steps = [
           name: string().required("Name is required"),
           department: string().required("Department is required"),
           designation: string().required("Designation is required"),
-          email: string().required("Email is required"),
-          mobile_number: string().required("Mobile number is required"),
+          email:string().required("Required!").email("Invalid  Email"),
+          mobile_number: string().trim().matches(regIndiaPhone, "Invalid Mobile Number").required("Required!"),
           landline: string().required("Landline is required"),
         })
       ),
@@ -124,12 +126,11 @@ const steps = [
           branch: string().required("Branch name is required"),
           account_holder_name: string().required("Account holder name is required"),
           account_number: string().required("Account number is required"),
-          ifsc_no: string().required("IFS code is required"),
+          ifsc_no: string().required("IFSC code is required"),
           account_type: string().required("Please select account type"),
           cancelled_cheque: mixed().required("Cancelled cheque is required"),
         })
-      )
-     
+      )  
     }),
   },
 ];
@@ -181,7 +182,7 @@ const AddVendorWrapper = () => {
       },
     ],
     gst_no: "",
-    gst_certificate: "https://source.unsplash.com/user/c_v_r/1900x800",
+    gst_certificate: "",
     declaration_form: "",
     bank_informations: [
       {

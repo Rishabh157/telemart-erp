@@ -14,11 +14,11 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
-    label: "List Page",
-    path: "/list-page",
+    label: "Dealer Categories",
+    path: "/configurations/dealers-category",
   },
   {
-    label: "Add Form",
+    label: "Add Dealer Category",
   },
 ];
 
@@ -35,13 +35,13 @@ const AddDealersCategory = ({ formikProps }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Form </ATMPageHeading>
+          <ATMPageHeading> Dealer Categories </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
           <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
             {/* Form Heading */}
-            <div className="text-xl font-medium"> Form Heading </div>
+            <div className="text-xl font-medium"> Dealer Category Details </div>
 
             {/* BUTTON - Add Button */}
             <div>
@@ -50,7 +50,7 @@ const AddDealersCategory = ({ formikProps }: Props) => {
                 onClick={() => formikProps.handleSubmit()}
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add Button
+                Add Dealer Category
               </button>
             </div>
           </div>

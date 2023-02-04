@@ -14,11 +14,11 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
-    label: "Attributes",
-    path: "/configurations/attributes",
+    label: "Product Category",
+    path: "/configurations/product-category",
   },
   {
-    label: "Add Attribute",
+    label: "Add Product Category",
   },
 ];
 
@@ -62,8 +62,8 @@ const AddProductCategory = ({ formikProps }: Props) => {
               <ATMTextField
                 name="categoryCode"
                 value={values.categoryCode}
-                label="Attribute Type"
-                placeholder="Attribute Type"
+                label="Category Code"
+                placeholder="Category Code"
                 onChange={(e) => setFieldValue("categoryCode", e.target.value)}
               />
 
@@ -71,8 +71,8 @@ const AddProductCategory = ({ formikProps }: Props) => {
               <ATMTextField
                 name="categoryName"
                 value={values.categoryName}
-                label="Attribute Name"
-                placeholder="Attribute Name"
+                label="Category Name"
+                placeholder="Category Name"
                 onChange={(e) => setFieldValue("categoryName", e.target.value)}
               />
             </div>

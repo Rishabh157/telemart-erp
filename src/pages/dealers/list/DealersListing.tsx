@@ -21,6 +21,7 @@ const DealersListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const dealerState: any = useSelector((state: RootState) => state.dealer);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const { page, rowsPerPage } = dealerState;
 
@@ -52,8 +53,11 @@ const DealersListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows} />
-        </div>
+        <ATMTable columns={columns} rows={rows}
+            isCheckbox={true}
+            selectedRows={selectedRows}
+            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            extraClasses='max-h-[calc(100%-150px)] overflow-auto' />        </div>
 
         {/* Pagination */}
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">

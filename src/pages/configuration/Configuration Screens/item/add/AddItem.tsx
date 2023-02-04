@@ -6,6 +6,7 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "./AddItemWrapper";
+import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -14,11 +15,11 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
-    label: "List Page",
-    path: "/list-page",
+    label: "Items",
+    path: "/configurations/items",
   },
   {
-    label: "Add Form",
+    label: "Add Item",
   },
 ];
 
@@ -35,13 +36,13 @@ const AddItem = ({ formikProps }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Form </ATMPageHeading>
+          <ATMPageHeading> Add New Item </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
           <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
             {/* Form Heading */}
-            <div className="text-xl font-medium"> Form Heading </div>
+            <div className="text-xl font-medium"> Item Details </div>
 
             {/* BUTTON - Add Button */}
             <div>
@@ -50,7 +51,7 @@ const AddItem = ({ formikProps }: Props) => {
                 onClick={() => formikProps.handleSubmit()}
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add Button
+                Add Item
               </button>
             </div>
           </div>
@@ -78,7 +79,7 @@ const AddItem = ({ formikProps }: Props) => {
               <ATMTextField
                 name="itemWeight"
                 value={values.itemWeight}
-                label="Item Weight"
+                label="Item Weight (in gms)"
                 placeholder="Item Weight"
                 onChange={(e) => setFieldValue("itemWeight", e.target.value)}
               />
@@ -100,10 +101,19 @@ const AddItem = ({ formikProps }: Props) => {
                 placeholder="Item Sub Category"
                 onChange={(e) => setFieldValue("itemSubCategory", e.target.value)}
               />
+              {/* Item Image */}
+
+              <ATMFilePickerWrapper
+                name="itemImage"
+                label="Item Image"
+                placeholder="Item Image"
+                onSelect={(newFile) => setFieldValue("itemImage", newFile)}
+                selectedFile={values.itemImage}
+              />
             </div>
           </div>
 
-         
+
         </div>
       </div>
     </div>

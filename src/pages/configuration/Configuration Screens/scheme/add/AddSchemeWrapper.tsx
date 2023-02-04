@@ -48,7 +48,7 @@ const steps = [
       category: string().required("Category is required"),
       sub_category: string().required("Sub category is required"),
       scheme_name: string().required("Scheme Name is required"),
-      scheme_price: string().required("Scheme Price is required"),
+      scheme_price:number().typeError("Please enter number").integer("Price must be positive").positive("Please enter positive digit").required("Required!"),
       dimensions: object().shape({
         height: number().typeError("must be number").required("Height is required"),
         width: number().typeError("must be number").required("Width is required"),
@@ -89,7 +89,7 @@ const steps = [
   },
 
   {
-    label: "FAQ",
+    label: "FAQ's",
     component: StepAddFAQ,
     validationSchema: object({
       FAQs: array().of(

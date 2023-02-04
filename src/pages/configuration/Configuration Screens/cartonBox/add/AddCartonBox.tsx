@@ -75,12 +75,49 @@ const AddCartonBox = ({ formikProps }: Props) => {
                 placeholder="Inner Items Count"
                 onChange={(e) => setFieldValue("innerItemsCount", e.target.value)}
               />
+              <div>
+                <label className="text-slate-700 font-medium"> Dimensions </label>
+                <div className="flex gap-2 mt-2">
+                  {/* Height */}
+                  <ATMTextField
+                    name="dimensions.height"
+                    value={values.dimensions.height}
+                    onChange={(e) =>
+                      setFieldValue("dimensions.height", e.target.value)
+                    }
+                    placeholder="H"
+                    className="shadow bg-white rounded"
+                  />
+
+                  {/* Weight */}
+                  <ATMTextField
+                    name="dimensions.width"
+                    value={values.dimensions.width}
+                    onChange={(e) =>
+                      setFieldValue("dimensions.width", e.target.value)
+                    }
+                    placeholder="W"
+                    className="shadow bg-white rounded"
+                  />
+
+                  {/* Depth */}
+                  <ATMTextField
+                    name="dimensions.depth"
+                    value={values.dimensions.depth}
+                    onChange={(e) =>
+                      setFieldValue("dimensions.depth", e.target.value)
+                    }
+                    placeholder="D"
+                    className="shadow bg-white rounded"
+                  />
+                </div>
+              </div>
 
               {/* Box Weight */}
               <ATMTextField
                 name="boxWeight"
                 value={values.boxWeight}
-                label="Box Weight"
+                label="Box Weight (in gms)"
                 placeholder="Box Weight"
                 onChange={(e) => setFieldValue("boxWeight", e.target.value)}
               />

@@ -41,7 +41,7 @@ const AddLanguage = ({ formikProps }: Props) => {
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
           <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
             {/* Form Heading */}
-            <div className="text-xl font-medium"> Form Heading </div>
+            <div className="text-xl font-medium"> Language Details </div>
 
             {/* BUTTON - Add Button */}
             <div>
@@ -50,7 +50,7 @@ const AddLanguage = ({ formikProps }: Props) => {
                 onClick={() => formikProps.handleSubmit()}
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add Button
+                Add Language
               </button>
             </div>
           </div>

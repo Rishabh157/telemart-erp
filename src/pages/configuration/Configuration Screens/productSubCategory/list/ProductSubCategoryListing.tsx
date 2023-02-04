@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import { useNavigate } from "react-router-dom";
@@ -20,11 +20,13 @@ const ProductSubCategoryListing = ({ columns, rows }: Props) => {
   const productCategoryState: any = useSelector((state: RootState) => state.productCategory);
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const navigate = useNavigate()
+  const [selectedRows, setSelectedRows] = useState([])
+
 
   const { page, rowsPerPage } = productCategoryState;
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Home Page",
+      label: "Configuration",
       path: "/dashboard",
     },
     {
@@ -61,7 +63,11 @@ const ProductSubCategoryListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows} />
+        <ATMTable columns={columns} rows={rows}
+           isCheckbox={true}
+           selectedRows={selectedRows}
+           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}

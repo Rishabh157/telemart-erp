@@ -66,7 +66,7 @@ const AddAttributeGroup = ({ formikProps }: Props) => {
                 onClick={() => formikProps.handleSubmit()}
                 className={`bg-primary-main border text-white rounded py-1 px-5  border-primary-main `}
               >
-                Add Button
+                Add Group
               </button>
             </div>
           </div>
