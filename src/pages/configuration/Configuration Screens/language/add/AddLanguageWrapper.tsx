@@ -1,8 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
-import { array, object, string } from "yup";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
+import { object, string } from "yup";
 import AddLanguage from "./AddLanguage";
+import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 
 type Props = {};
 
@@ -25,7 +25,7 @@ const AddLanguageWrapper = (props: Props) => {
     console.log("onSubmitHandler", values);
   };
   return (
-    <SideNavLayout>
+    <ConfigurationLayout>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -35,7 +35,7 @@ const AddLanguageWrapper = (props: Props) => {
           return <AddLanguage formikProps={formikProps} />;
         }}
       </Formik>
-    </SideNavLayout>
+    </ConfigurationLayout>
   );
 };
 

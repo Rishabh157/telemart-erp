@@ -8,6 +8,7 @@ type Props = {
   placeholder?: string;
   onSelect: (file: File) => void;
   selectedFile: any;
+  accept: string;
 };
 
 const ATMFileUploader = ({
@@ -17,6 +18,7 @@ const ATMFileUploader = ({
   placeholder = "Select Image",
   onSelect,
   selectedFile,
+  accept,
 }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -32,14 +34,13 @@ const ATMFileUploader = ({
         onClick={() => {
           inputRef?.current?.click();
         }}
-        className={`flex items-center px-2 w-full border-[2.5px] border-slate-400 border-dashed rounded  ${getInputHeight(
+        className={`flex items-center px-2 w-full border-[2.5px] border-slate-400 border-dashed rounded bg-white ${getInputHeight(
           size
         )} ${label && "mt-2"} text-slate-400`}
       >
         {selectedFile ? (
           <div className="overflow-x-auto py-2 text-slate-900 font-medium ">
-            {" "}
-            {selectedFile.name || "ABC"}{" "}
+            {selectedFile.name || "ABC"}
           </div>
         ) : (
           placeholder
@@ -66,6 +67,7 @@ const ATMFileUploader = ({
         ref={inputRef}
         onChange={(e: any) => onSelect(e.target.files[0])}
         className="hidden"
+        accept={accept}
       />
     </div>
   );

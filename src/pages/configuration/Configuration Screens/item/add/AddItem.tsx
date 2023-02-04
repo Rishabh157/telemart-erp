@@ -4,9 +4,7 @@ import ATMBreadCrumbs, {
   BreadcrumbType,
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
-import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { SelectOption } from "src/models/FormField/FormField.model";
 import { FormInitialValues } from "./AddItemWrapper";
 
 type Props = {

@@ -1,8 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import AddProductSubCategory from "./AddProductSubCategory";
+import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 
 type Props = {};
 
@@ -47,7 +47,7 @@ const AddProductSubCategoryWrapper = (props: Props) => {
   // }
 
   return (
-    <SideNavLayout>
+    <ConfigurationLayout>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -57,7 +57,7 @@ const AddProductSubCategoryWrapper = (props: Props) => {
           return <AddProductSubCategory formikProps={formikProps}  />;
         }}
       </Formik>
-    </SideNavLayout>
+    </ConfigurationLayout>
   );
 };
 

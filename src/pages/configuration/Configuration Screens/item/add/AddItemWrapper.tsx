@@ -1,8 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
-import { array, object, string } from "yup";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
+import { object, string } from "yup";
 import AddItem from "./AddItem";
+import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 
 type Props = {};
 
@@ -39,7 +39,7 @@ const AddItemWrapper = (props: Props) => {
   };
 
   return (
-    <SideNavLayout>
+    <ConfigurationLayout>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -49,7 +49,7 @@ const AddItemWrapper = (props: Props) => {
           return <AddItem formikProps={formikProps} />;
         }}
       </Formik>
-    </SideNavLayout>
+    </ConfigurationLayout>
   );
 };
 

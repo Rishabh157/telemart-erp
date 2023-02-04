@@ -1,8 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
 import {  object, string } from "yup";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import AddCartonBox from "./AddCartonBox";
+import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 
 type Props = {};
 
@@ -32,7 +32,7 @@ const AddCartonBoxWrapper = (props: Props) => {
     console.log("onSubmitHandler", values);
   };
   return (
-    <SideNavLayout>
+    <ConfigurationLayout>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -42,7 +42,7 @@ const AddCartonBoxWrapper = (props: Props) => {
           return <AddCartonBox formikProps={formikProps}/>;
         }}
       </Formik>
-    </SideNavLayout>
+    </ConfigurationLayout>
   );
 };
 

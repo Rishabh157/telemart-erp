@@ -57,7 +57,7 @@ const AddProductSubCategory = ({ formikProps }: Props) => {
                 onClick={() => formikProps.handleSubmit()}
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add SubCategory
+                Add Subcategory
               </button>
             </div>
           </div>

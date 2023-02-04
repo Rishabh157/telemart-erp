@@ -1,8 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
 import {  object, string } from "yup";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import AddTaxes from "./AddTaxes";
+import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 
 type Props = {};
  
@@ -28,7 +28,7 @@ const AddTaxesWrapper = (props: Props) => {
 
 
   return (
-    <SideNavLayout>
+    <ConfigurationLayout>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -38,7 +38,7 @@ const AddTaxesWrapper = (props: Props) => {
           return <AddTaxes formikProps={formikProps} />;
         }}
       </Formik>
-    </SideNavLayout>
+    </ConfigurationLayout>
   );
 };
 
