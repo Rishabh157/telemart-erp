@@ -19,7 +19,7 @@ const columns: columnTypes[] = [
     headerName: "Product Name",
     flex: "flex-[1_1_0%]",
     renderCell: (row: InventoryListResponse) => (
-      <span className="text-primary-main "> {row.productName} </span>
+      <span> {row.productName} </span>
     ),
   },
   {
@@ -48,6 +48,7 @@ const rows = [
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
+    _id : 1
   },
 
   {
@@ -55,12 +56,14 @@ const rows = [
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
+    _id : 2
   },
   {
     productName: "Alcoban",
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
+    _id : 3
   },
 
   {
@@ -68,12 +71,14 @@ const rows = [
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
+    _id : 4
   },
   {
     productName: "Alcoban",
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
+    _id : 5
   },
 
   {
@@ -81,12 +86,14 @@ const rows = [
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
+    _id : 6
   },
   {
     productName: "Alcoban",
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
+    _id : 6
   },
 
   {
@@ -94,12 +101,14 @@ const rows = [
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
+    _id : 7
   },
   {
     productName: "Alcoban",
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
+    _id : 8
   },
 
   {
@@ -107,73 +116,15 @@ const rows = [
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
+    _id : 9
   },
   {
     productName: "Alcoban",
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-  },
-  
+    _id : 10
+  }, 
 ];
 
 const InventoryListingWrapper = () => {

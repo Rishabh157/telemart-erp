@@ -20,7 +20,7 @@ const columns: columnTypes[] = [
         headerName: "Box Name",  
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: CartonBoxListResponse) => {
-            return <span className="text-primary-main "> {row.boxName} </span>;
+            return <span > {row.boxName} </span>;
         },
     },
      {
@@ -34,7 +34,7 @@ const columns: columnTypes[] = [
         headerName: "Dimensions",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: CartonBoxListResponse) => {
-            return <span className="text-primary-main "> {row.dimensions} </span>;
+            return <span > {row.dimensions} </span>;
         },
     },
     {
@@ -42,7 +42,7 @@ const columns: columnTypes[] = [
         headerName: "Box Weight (in gm's)",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: CartonBoxListResponse) => {
-            return <span className="text-primary-main "> {row.boxWeight} </span>;
+            return <span > {row.boxWeight} </span>;
         },
     },
 
@@ -69,6 +69,7 @@ const rows = [
         subCategory: "Mandsaur",
         weight: "100",
         barcode: "8574859685",
+        _id :1
     },
 
     {
@@ -79,6 +80,7 @@ const rows = [
         subCategory: "Mandsaur",
         weight: "100",
         barcode: "8574859685",
+        _id :2
     },
     {
         boxWeight: "100",
@@ -86,6 +88,28 @@ const rows = [
         dimensions: "10 * 10 * 10",
         boxName : "Item Box",
         subCategory: "Mandsaur",
+        weight: "100",
+        barcode: "8574859685",
+        _id :3
+    },
+
+    {
+        boxWeight: "100",
+        innerItemCount: "4454",
+        dimensions: "10 * 10 * 10",
+        boxName : "Item Box",
+        subCategory: "Mandsaur",
+        weight: "100",
+        _id :4,
+        barcode: "8574859685",
+    },
+    {
+        boxWeight: "100",
+        innerItemCount: "4454",
+        dimensions: "10 * 10 * 10",
+        boxName : "Item Box",
+        subCategory: "Mandsaur",
+        _id :5,
         weight: "100",
         barcode: "8574859685",
     },
@@ -96,6 +120,7 @@ const rows = [
         dimensions: "10 * 10 * 10",
         boxName : "Item Box",
         subCategory: "Mandsaur",
+        _id :6,
         weight: "100",
         barcode: "8574859685",
     },
@@ -107,11 +132,13 @@ const rows = [
         subCategory: "Mandsaur",
         weight: "100",
         barcode: "8574859685",
+        _id :7
     },
 
     {
         boxWeight: "100",
         innerItemCount: "4454",
+        _id :8,
         dimensions: "10 * 10 * 10",
         boxName : "Item Box",
         subCategory: "Mandsaur",
@@ -121,44 +148,7 @@ const rows = [
     {
         boxWeight: "100",
         innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
+        _id :9,
         dimensions: "10 * 10 * 10",
         boxName : "Item Box",
         subCategory: "Mandsaur",
@@ -170,82 +160,7 @@ const rows = [
         boxWeight: "100",
         innerItemCount: "4454",
         dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "100",
-        barcode: "8574859685",
-    },
-
-    {
-        boxWeight: "100",
-        innerItemCount: "4454",
-        dimensions: "10 * 10 * 10",
+        _id :10,
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "100",

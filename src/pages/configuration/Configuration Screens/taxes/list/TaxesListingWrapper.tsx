@@ -20,7 +20,7 @@ const columns: columnTypes[] = [
         headerName: "Tax",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: TaxesListResponse) => {
-            return <span className="text-primary-main "> {row.tax} </span>;
+            return <span > {row.tax} </span>;
         },
     },
     {
@@ -46,6 +46,7 @@ const rows = [
         subCategory: "Mandsaur",
         weight: "M.P.",
         barcode: "8574859685",
+        _id:1
     },
 
     {
@@ -56,12 +57,14 @@ const rows = [
         subCategory: "Mandsaur",
         weight: "M.P.",
         barcode: "8574859685",
+        _id:2
     },
     {
         tax: "GST",
         innerItemCount: "red",
         dimensions: "Color",
         boxName : "Item Box",
+        _id:3,
         subCategory: "Mandsaur",
         weight: "M.P.",
         barcode: "8574859685",
@@ -71,31 +74,14 @@ const rows = [
         tax: "GST",
         innerItemCount: "red",
         dimensions: "Color",
+        _id:4,
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
         barcode: "8574859685",
     },
     {
-        tax: "GST",
-        innerItemCount: "red",
-        dimensions: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        tax: "GST",
-        innerItemCount: "red",
-        dimensions: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
+        _id:5,
         tax: "GST",
         innerItemCount: "red",
         dimensions: "Color",
@@ -108,6 +94,7 @@ const rows = [
     {
         tax: "GST",
         innerItemCount: "red",
+        _id:6,
         dimensions: "Color",
         boxName : "Item Box",
         subCategory: "Mandsaur",
@@ -116,6 +103,7 @@ const rows = [
     },
     {
         tax: "GST",
+        _id:7,
         innerItemCount: "red",
         dimensions: "Color",
         boxName : "Item Box",
@@ -129,6 +117,7 @@ const rows = [
         innerItemCount: "red",
         dimensions: "Color",
         boxName : "Item Box",
+        _id:8,
         subCategory: "Mandsaur",
         weight: "M.P.",
         barcode: "8574859685",
@@ -141,94 +130,19 @@ const rows = [
         subCategory: "Mandsaur",
         weight: "M.P.",
         barcode: "8574859685",
+        _id:9,
     },
 
     {
         tax: "GST",
         innerItemCount: "red",
+        _id:10,
         dimensions: "Color",
         boxName : "Item Box",
         subCategory: "Mandsaur",
         weight: "M.P.",
         barcode: "8574859685",
     },
-    {
-        tax: "GST",
-        innerItemCount: "red",
-        dimensions: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        tax: "GST",
-        innerItemCount: "red",
-        dimensions: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        tax: "GST",
-        innerItemCount: "red",
-        dimensions: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        tax: "GST",
-        innerItemCount: "red",
-        dimensions: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        tax: "GST",
-        innerItemCount: "red",
-        dimensions: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        tax: "GST",
-        innerItemCount: "red",
-        dimensions: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        tax: "GST",
-        innerItemCount: "red",
-        dimensions: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        tax: "GST",
-        innerItemCount: "red",
-        dimensions: "Color",
-        boxName : "Item Box",
-        subCategory: "Mandsaur",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
 ];
 
 const TaxesListingWrapper = () => {

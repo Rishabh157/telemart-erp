@@ -26,7 +26,7 @@ const columns: columnTypes[] = [
         headerName: "Item Name",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: GRNListResponse) => {
-            return <span className="text-primary-main "> {row.itemName} </span>;
+            return <span > {row.itemName} </span>;
         },
     },
     {
@@ -34,7 +34,7 @@ const columns: columnTypes[] = [
         headerName: "Recieving Qnty.",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: GRNListResponse) => {
-            return <span className="text-primary-main "> {row.receivingQuantity} </span>;
+            return <span > {row.receivingQuantity} </span>;
         },
     },
     {
@@ -42,7 +42,7 @@ const columns: columnTypes[] = [
         headerName: "Good Qnty.",  
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: GRNListResponse) => {
-            return <span className="text-primary-main "> {row.goodQuantity} </span>;
+            return <span > {row.goodQuantity} </span>;
         },
     },
     {
@@ -50,7 +50,7 @@ const columns: columnTypes[] = [
         headerName: "Defective Qnty.",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: GRNListResponse) => {
-            return <span className="text-primary-main "> {row.defectiveQuantity} </span>;
+            return <span > {row.defectiveQuantity} </span>;
         },
     },
     {
@@ -75,6 +75,7 @@ const rows = [
         goodQuantity : "10000",
         defectiveQuantity: "0",
         weight: "M.P.",
+        _id : 1,
         barcode: "8574859685",
     },
 
@@ -86,12 +87,56 @@ const rows = [
         defectiveQuantity: "0",
         weight: "M.P.",
         barcode: "8574859685",
+        _id : 2,
     },
     {
         receivingQuantity: "100",
         poCode: "515",
         itemName: "Something",
         goodQuantity : "10000",
+        defectiveQuantity: "0",
+        weight: "M.P.",
+        barcode: "8574859685",
+        _id : 3,
+    },
+
+    {
+        receivingQuantity: "100",
+        poCode: "515",
+        itemName: "Something",
+        goodQuantity : "10000",
+        defectiveQuantity: "0",
+        _id : 4,
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        receivingQuantity: "100",
+        poCode: "515",
+        itemName: "Something",
+        _id : 5,
+        goodQuantity : "10000",
+        defectiveQuantity: "0",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+
+    {
+        receivingQuantity: "100",
+        poCode: "515",
+        _id : 6,
+        itemName: "Something",
+        goodQuantity : "10000",
+        defectiveQuantity: "0",
+        weight: "M.P.",
+        barcode: "8574859685",
+    },
+    {
+        receivingQuantity: "100",
+        poCode: "515",
+        itemName: "Something",
+        goodQuantity : "10000",
+        _id : 7,
         defectiveQuantity: "0",
         weight: "M.P.",
         barcode: "8574859685",
@@ -103,6 +148,7 @@ const rows = [
         itemName: "Something",
         goodQuantity : "10000",
         defectiveQuantity: "0",
+        _id : 8,
         weight: "M.P.",
         barcode: "8574859685",
     },
@@ -113,6 +159,7 @@ const rows = [
         goodQuantity : "10000",
         defectiveQuantity: "0",
         weight: "M.P.",
+        _id : 9,
         barcode: "8574859685",
     },
 
@@ -124,141 +171,8 @@ const rows = [
         defectiveQuantity: "0",
         weight: "M.P.",
         barcode: "8574859685",
+        _id : 10,
     },
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
-    {
-        receivingQuantity: "100",
-        poCode: "515",
-        itemName: "Something",
-        goodQuantity : "10000",
-        defectiveQuantity: "0",
-        weight: "M.P.",
-        barcode: "8574859685",
-    },
-
 ];
 
 const GRNListingWrapper = () => {

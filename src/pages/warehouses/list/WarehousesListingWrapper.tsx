@@ -15,229 +15,155 @@ import { useGetVendorsQuery } from "src/services/VendorServices";
 import WarehouseListing from "./WarehousesListing";
 
 const columns: columnTypes[] = [
-  {
-    field: "warehouseCode",
-    headerName: "Warehouse Code",
-    flex: "flex-[1_1_0%]",
-    renderCell: (row: WarehousesListResponse) => (
-      <span> {row.warehouseCode} </span>
-    ),
-  },
-  {
-    field: "warehouseName",
-    headerName: "Warehouse Name",
-    flex: "flex-[1.5_1.5_0%]",
-    renderCell: (row: WarehousesListResponse) => {
-      return <span className="text-primary-main "> {row.warehouseName} </span>;
+    {
+        field: "warehouseCode",
+        headerName: "Warehouse Code",
+        flex: "flex-[1_1_0%]",
+        renderCell: (row: WarehousesListResponse) => <span> {row.warehouseCode} </span>,
     },
-  },
-  {
-    field: "country",
-    headerName: "Country",
-    flex: "flex-[1_1_0%]",
-    renderCell: (row: WarehousesListResponse) => (
-      <span className="text-primary-main "> {row.country} </span>
-    ),
-  },
-  {
-    field: "state",
-    headerName: "State",
-    flex: "flex-[1.5_1.5_0%]",
-    renderCell: (row: WarehousesListResponse) => {
-      return <span className="text-primary-main "> {row.state} </span>;
+    {
+        field: "warehouseName",
+        headerName: "Warehouse Name",
+        flex: "flex-[1.5_1.5_0%]",
+        renderCell: (row: WarehousesListResponse) => {
+            return <span> {row.warehouseName} </span>;
+        },
     },
-  },
-  {
-    field: "district",
-    headerName: "District",
-    flex: "flex-[1.5_1.5_0%]",
-    renderCell: (row: WarehousesListResponse) => {
-      return <span className="text-primary-main "> {row.district} </span>;
+    {
+        field: "country",
+        headerName: "Country",
+        flex: "flex-[1_1_0%]",
+        renderCell: (row: WarehousesListResponse) => (
+            <span> {row.country} </span>
+        ),
     },
-  },
-  {
-    field: "pincode",
-    headerName: "Pincode",
-    flex: "flex-[1.5_1.5_0%]",
-    renderCell: (row: WarehousesListResponse) => {
-      return <span className="text-primary-main "> {row.pincode} </span>;
+    {
+        field: "state",
+        headerName: "State",
+        flex: "flex-[1.5_1.5_0%]",
+        renderCell: (row: WarehousesListResponse) => {
+            return <span> {row.state} </span>;
+        },
     },
-  },
-  {
-    field: "actions",
-    headerName: "Actions",
-    flex: "flex-[0.5_0.5_0%]",
-    renderCell: (row: any) => (
-      <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-        {" "}
-        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{" "}
-      </button>
-    ),
-    align: "end",
-  },
+    {
+        field: "district",
+        headerName: "District",
+        flex: "flex-[1.5_1.5_0%]",
+        renderCell: (row: WarehousesListResponse) => {
+            return <span> {row.district} </span>;
+        },
+    },
+    {
+        field: "pincode",
+        headerName: "Pincode",
+        flex: "flex-[1.5_1.5_0%]",
+        renderCell: (row: WarehousesListResponse) => {
+            return <span> {row.pincode} </span>;
+        },
+    },
+    {
+        field: "actions",
+        headerName: "Actions",
+        flex: "flex-[0.5_0.5_0%]",
+        renderCell: (row: any) => (
+            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
+                {" "}
+                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{" "}
+            </button>
+        ),
+        align: "end",
+    },
 ];
 
 const rows = [
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
-  {
-    warehouseName: "Drink Stop",
-    warehouseCode: "54864864",
-    country: "India",
-    district: "Indore",
-    state: "MP",
-    pincode: "452001",
-  },
+    {
+        warehouseName: "Drink Stop",
+        warehouseCode: "54864864",
+        country: "India",
+        district: "Indore",
+        state: "MP",
+        pincode: "452001",
+        _id : 1
+    },
+    {
+        warehouseName: "Drink Stop",
+        warehouseCode: "54864864",
+        country: "India",
+        district: "Indore",
+        state: "MP",
+        pincode: "452001",
+        _id : 2
+    }, {
+        warehouseName: "Drink Stop",
+        warehouseCode: "54864864",
+        country: "India",
+        district: "Indore",
+        state: "MP",
+        pincode: "452001",
+        _id : 3
+    },
+    {
+        warehouseName: "Drink Stop",
+        warehouseCode: "54864864",
+        country: "India",
+        district: "Indore",
+        state: "MP",
+        pincode: "452001",
+        _id : 4
+    }, {
+        warehouseName: "Drink Stop",
+        warehouseCode: "54864864",
+        country: "India",
+        district: "Indore",
+        state: "MP",
+        pincode: "452001",
+        _id : 5
+    },
+    {
+        warehouseName: "Drink Stop",
+        warehouseCode: "54864864",
+        country: "India",
+        district: "Indore",
+        state: "MP",
+        pincode: "452001",
+        _id : 6
+    }, {
+        warehouseName: "Drink Stop",
+        warehouseCode: "54864864",
+        country: "India",
+        district: "Indore",
+        state: "MP",
+        pincode: "452001",
+        _id : 7
+
+    },
+    {
+        warehouseName: "Drink Stop",
+        warehouseCode: "54864864",
+        country: "India",
+        district: "Indore",
+        state: "MP",
+        pincode: "452001",
+        _id : 8
+    }, {
+        warehouseName: "Drink Stop",
+        warehouseCode: "54864864",
+        country: "India",
+        district: "Indore",
+        state: "MP",
+        pincode: "452001",
+        _id : 9
+    },
+    {
+        warehouseName: "Drink Stop",
+        warehouseCode: "54864864",
+        country: "India",
+        district: "Indore",
+        state: "MP",
+        pincode: "452001",
+        _id : 10
+
+    }, 
 ];
 
 const DealersListingWrapper = () => {

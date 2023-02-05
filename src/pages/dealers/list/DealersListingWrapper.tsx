@@ -26,7 +26,7 @@ const columns: columnTypes[] = [
         headerName: "Firm Name",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: DealersListResponse) => {
-            return <span className="text-primary-main "> {row.firmName} </span>;
+            return <span > {row.firmName} </span>;
         },
     },
     {
@@ -34,7 +34,7 @@ const columns: columnTypes[] = [
         headerName: "First Name",
         flex: "flex-[1_1_0%]",
         renderCell: (row: DealersListResponse) => (
-            <span className="text-primary-main "> {row.firstName} </span>
+            <span > {row.firstName} </span>
         ),
     },
     {
@@ -42,7 +42,7 @@ const columns: columnTypes[] = [
         headerName: "Last Name",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: DealersListResponse) => {
-            return <span className="text-primary-main "> {row.lastName} </span>;
+            return <span > {row.lastName} </span>;
         },
     },
     {
@@ -55,7 +55,7 @@ const columns: columnTypes[] = [
         headerName: "District",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: DealersListResponse) => {
-            return <span className="text-primary-main "> {row.district} </span>;
+            return <span > {row.district} </span>;
         },
     },
     {
@@ -63,7 +63,7 @@ const columns: columnTypes[] = [
         headerName: "State",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: DealersListResponse) => {
-            return <span className="text-primary-main "> {row.state} </span>;
+            return <span > {row.state} </span>;
         },
     },
     {
@@ -89,6 +89,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 1
     },
 
     {
@@ -99,6 +100,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 2
     },
     {
         firstName: "Himanshu",
@@ -108,6 +110,8 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 3
+
     },
 
     {
@@ -118,6 +122,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 4
     },
     {
         firstName: "Himanshu",
@@ -127,6 +132,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 5
     },
 
     {
@@ -137,6 +143,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 6
     },
     {
         firstName: "Himanshu",
@@ -146,6 +153,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 7
     },
 
     {
@@ -156,6 +164,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 8
     },
     {
         firstName: "Himanshu",
@@ -165,6 +174,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 9
     },
 
     {
@@ -175,103 +185,8 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 10
     },
-    {
-        firstName: "Himanshu",
-        dealerCode: "HJ108",
-        firmName: "Codiotic",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        dealerCode: "HJ108",
-        firmName: "Codiotic",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        dealerCode: "HJ108",
-        firmName: "Codiotic",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        dealerCode: "HJ108",
-        firmName: "Codiotic",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        dealerCode: "HJ108",
-        firmName: "Codiotic",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        dealerCode: "HJ108",
-        firmName: "Codiotic",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        dealerCode: "HJ108",
-        firmName: "Codiotic",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        dealerCode: "HJ108",
-        firmName: "Codiotic",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        dealerCode: "HJ108",
-        firmName: "Codiotic",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        dealerCode: "HJ108",
-        firmName: "Codiotic",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
 ];
 
 const DealersListingWrapper = () => {

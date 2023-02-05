@@ -15,7 +15,7 @@ const formFields: {
   >[];
 }[] = [
   {
-    sectionName: "Regd Address",
+    sectionName: "Registration  Address",
     fields: [
       {
         name: "regd_address.phone",

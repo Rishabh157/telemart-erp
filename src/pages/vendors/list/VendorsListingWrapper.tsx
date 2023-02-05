@@ -21,6 +21,11 @@ const columns: columnTypes[] = [
     renderCell: (row: VendorsListResponse) => <span> {row.vendorCode} </span>,
   },
   {
+    field: "vendorName",
+    headerName: "Vendor Name",
+    flex: "flex-[1_1_0%]",
+  },
+  {
     field: "mobile",
     headerName: "Phone",
     flex: "flex-[1_1_0%]",
@@ -30,7 +35,7 @@ const columns: columnTypes[] = [
     headerName: "District",
     flex: "flex-[1_1_0%]",
     renderCell: (row: VendorsListResponse) => (
-      <span className="text-primary-main "> {row.district} </span>
+      <span > {row.district} </span>
     ),
   },
   {
@@ -38,7 +43,7 @@ const columns: columnTypes[] = [
     headerName: "State",
     flex: "flex-[1_1_0%]",
     renderCell: (row: VendorsListResponse) => (
-      <span className="text-primary-main "> {row.state} </span>
+      <span > {row.state} </span>
     ),
   },
   {
@@ -198,7 +203,6 @@ const rows = [
     _id: "15"
 
   },
-
 ];
 
 const VendorsListingWrapper = () => {

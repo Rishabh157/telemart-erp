@@ -1,6 +1,7 @@
-import React from "react";
+import React,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -18,11 +19,14 @@ const ProductSubCategoryListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const productCategoryState: any = useSelector((state: RootState) => state.productCategory);
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+  const navigate = useNavigate()
+  const [selectedRows, setSelectedRows] = useState([])
+
 
   const { page, rowsPerPage } = productCategoryState;
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Home Page",
+      label: "Configuration",
       path: "/dashboard",
     },
     {
@@ -39,7 +43,7 @@ const ProductSubCategoryListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> Product Sub Categories </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button onClick={() => navigate("/configurations/product-sub-category/add")} className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
           + Add  Sub Category{" "}
         </button>
@@ -59,7 +63,11 @@ const ProductSubCategoryListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows} />
+        <ATMTable columns={columns} rows={rows}
+           isCheckbox={true}
+           selectedRows={selectedRows}
+           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}

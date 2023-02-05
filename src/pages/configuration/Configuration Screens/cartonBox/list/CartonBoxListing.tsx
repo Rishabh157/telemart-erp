@@ -1,8 +1,9 @@
-import React from "react";
+import React,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ATMBreadCrumbs, {
   BreadcrumbType,
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -21,13 +22,15 @@ const CartonBoxListing = ({ columns, rows }: Props) => {
   const cartonBoxState: any = useSelector(
     (state: RootState) => state.cartonBox
   );
-  // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+  const [selectedRows, setSelectedRows] = useState([])
 
+  // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+  const navigate = useNavigate()
   const { page, rowsPerPage } = cartonBoxState;
 
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Home Page",
+      label: "Configuration",
       path: "/dashboard",
     },
     {
@@ -44,7 +47,7 @@ const CartonBoxListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> Outer Packaging Boxes </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button onClick={() => navigate("/configurations/carton-box/add")} className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
           + Add Box{" "}
         </button>
@@ -64,7 +67,11 @@ const CartonBoxListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows} />
+        <ATMTable columns={columns} rows={rows}
+           isCheckbox={true}
+           selectedRows={selectedRows}
+           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}

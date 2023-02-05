@@ -26,7 +26,7 @@ const columns: columnTypes[] = [
         headerName: "Company Name ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => {
-            return <span className="text-primary-main "> {row.company_name} </span>;
+            return <span > {row.company_name} </span>;
         },
     },
     {
@@ -34,7 +34,7 @@ const columns: columnTypes[] = [
         headerName: "Website URL ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => {
-            return <span className="text-primary-main "> {row.website_url} </span>;
+            return <span > {row.website_url} </span>;
         },
     },
     {
@@ -42,7 +42,7 @@ const columns: columnTypes[] = [
         headerName: "Address ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => {
-            return <span className="text-primary-main "> {row.address} </span>;
+            return <span > {row.address} </span>;
         },
     },
     {
@@ -50,7 +50,7 @@ const columns: columnTypes[] = [
         headerName: "GST no.",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => {
-            return <span className="text-primary-main "> {row.gst_no} </span>;
+            return <span > {row.gst_no} </span>;
         },
     },
     {
@@ -58,7 +58,7 @@ const columns: columnTypes[] = [
         headerName: "Phone no.",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ConfigurationCompanyListResponse) => {
-            return <span className="text-primary-main "> {row.phone_no} </span>;
+            return <span > {row.phone_no} </span>;
         },
     },
     {
@@ -84,6 +84,7 @@ const rows = [
         gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
+        _id : 1
     },
 
     {
@@ -92,6 +93,7 @@ const rows = [
         company_name: "Something",
         website_url: "Jain.com",
         gst_no: "123",
+        _id : 2,
         address: "M.P.",
         mobile: "8574859685",
     },
@@ -103,6 +105,7 @@ const rows = [
         gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
+        _id : 3,
     },
 
     {
@@ -111,6 +114,7 @@ const rows = [
         company_name: "Something",
         website_url: "Jain.com",
         gst_no: "123",
+        _id : 4,
         address: "M.P.",
         mobile: "8574859685",
     },
@@ -120,6 +124,7 @@ const rows = [
         company_name: "Something",
         website_url: "Jain.com",
         gst_no: "123",
+        _id : 5,
         address: "M.P.",
         mobile: "8574859685",
     },
@@ -127,6 +132,7 @@ const rows = [
     {
         phone_no: "9302085050",
         logo: "-",
+        _id : 6,
         company_name: "Something",
         website_url: "Jain.com",
         gst_no: "123",
@@ -135,25 +141,7 @@ const rows = [
     },
     {
         phone_no: "9302085050",
-        logo: "-",
-        company_name: "Something",
-        website_url: "Jain.com",
-        gst_no: "123",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        phone_no: "9302085050",
-        logo: "-",
-        company_name: "Something",
-        website_url: "Jain.com",
-        gst_no: "123",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        phone_no: "9302085050",
+        _id : 7,
         logo: "-",
         company_name: "Something",
         website_url: "Jain.com",
@@ -165,6 +153,7 @@ const rows = [
     {
         phone_no: "9302085050",
         logo: "-",
+        _id : 8,
         company_name: "Something",
         website_url: "Jain.com",
         gst_no: "123",
@@ -173,6 +162,7 @@ const rows = [
     },
     {
         phone_no: "9302085050",
+        _id : 9,
         logo: "-",
         company_name: "Something",
         website_url: "Jain.com",
@@ -185,89 +175,12 @@ const rows = [
         phone_no: "9302085050",
         logo: "-",
         company_name: "Something",
+        _id : 10,
         website_url: "Jain.com",
         gst_no: "123",
         address: "M.P.",
         mobile: "8574859685",
-    },
-    {
-        phone_no: "9302085050",
-        logo: "-",
-        company_name: "Something",
-        website_url: "Jain.com",
-        gst_no: "123",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        phone_no: "9302085050",
-        logo: "-",
-        company_name: "Something",
-        website_url: "Jain.com",
-        gst_no: "123",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        phone_no: "9302085050",
-        logo: "-",
-        company_name: "Something",
-        website_url: "Jain.com",
-        gst_no: "123",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        phone_no: "9302085050",
-        logo: "-",
-        company_name: "Something",
-        website_url: "Jain.com",
-        gst_no: "123",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        phone_no: "9302085050",
-        logo: "-",
-        company_name: "Something",
-        website_url: "Jain.com",
-        gst_no: "123",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        phone_no: "9302085050",
-        logo: "-",
-        company_name: "Something",
-        website_url: "Jain.com",
-        gst_no: "123",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        phone_no: "9302085050",
-        logo: "-",
-        company_name: "Something",
-        website_url: "Jain.com",
-        gst_no: "123",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        phone_no: "9302085050",
-        logo: "-",
-        company_name: "Something",
-        website_url: "Jain.com",
-        gst_no: "123",
-        address: "M.P.",
-        mobile: "8574859685",
-    },
-
-];
+    },];
 
 const ConfigurationCompanyListingWrapper = () => {
     // const vendoraddress: any = useSelector((address: Rootaddress) => address.vendor);

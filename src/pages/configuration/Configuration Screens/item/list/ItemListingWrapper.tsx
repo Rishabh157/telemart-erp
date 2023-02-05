@@ -26,7 +26,7 @@ const columns: columnTypes[] = [
         headerName: "Item Code",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ItemListResponse) => {
-            return <span className="text-primary-main "> {row.itemCode} </span>;
+            return <span > {row.itemCode} </span>;
         },
     },
     {
@@ -34,7 +34,7 @@ const columns: columnTypes[] = [
         headerName: "Item Name",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ItemListResponse) => {
-            return <span className="text-primary-main "> {row.itemName} </span>;
+            return <span > {row.itemName} </span>;
         },
     },
     {
@@ -42,7 +42,7 @@ const columns: columnTypes[] = [
         headerName: "Category",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ItemListResponse) => {
-            return <span className="text-primary-main "> {row.category} </span>;
+            return <span > {row.category} </span>;
         },
     },
     {
@@ -50,7 +50,7 @@ const columns: columnTypes[] = [
         headerName: "Sub Category",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ItemListResponse) => {
-            return <span className="text-primary-main "> {row.subCategory} </span>;
+            return <span > {row.subCategory} </span>;
         },
     },
     {
@@ -58,7 +58,7 @@ const columns: columnTypes[] = [
         headerName: "Weightv (in gms.)",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ItemListResponse) => {
-            return <span className="text-primary-main "> {row.weight} </span>;
+            return <span > {row.weight} </span>;
         },
     },
     {
@@ -66,7 +66,7 @@ const columns: columnTypes[] = [
         headerName: "Barcode",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ItemListResponse) => {
-            return <span className="text-primary-main "> {row.barcode} </span>;
+            return <span > {row.barcode} </span>;
         },
     },
     {
@@ -92,6 +92,7 @@ const rows = [
         subCategory: "Drink stop",
         weight: "100",
         barcode: "yes",
+        _id : 1
     },
 
     {
@@ -102,6 +103,7 @@ const rows = [
         subCategory: "Drink stop",
         weight: "100",
         barcode: "yes",
+        _id : 2
     },
     {
         itemName: "Himanshu",
@@ -111,6 +113,7 @@ const rows = [
         subCategory: "Drink stop",
         weight: "100",
         barcode: "yes",
+         _id : 3
     },
 
     {
@@ -121,6 +124,7 @@ const rows = [
         subCategory: "Drink stop",
         weight: "100",
         barcode: "yes",
+        _id : 4
     },
     {
         itemName: "Himanshu",
@@ -130,6 +134,7 @@ const rows = [
         subCategory: "Drink stop",
         weight: "100",
         barcode: "yes",
+        _id : 5
     },
 
     {
@@ -140,6 +145,7 @@ const rows = [
         subCategory: "Drink stop",
         weight: "100",
         barcode: "yes",
+        _id : 6
     },
     {
         itemName: "Himanshu",
@@ -149,6 +155,7 @@ const rows = [
         subCategory: "Drink stop",
         weight: "100",
         barcode: "yes",
+        _id : 7
     },
 
     {
@@ -159,6 +166,7 @@ const rows = [
         subCategory: "Drink stop",
         weight: "100",
         barcode: "yes",
+        _id : 8
     },
     {
         itemName: "Himanshu",
@@ -168,6 +176,7 @@ const rows = [
         subCategory: "Drink stop",
         weight: "100",
         barcode: "yes",
+        _id : 9
     },
 
     {
@@ -178,104 +187,9 @@ const rows = [
         subCategory: "Drink stop",
         weight: "100",
         barcode: "yes",
+        _id : 10
     },
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-    },
-
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-    },
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-    },
-
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-    },
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-    },
-
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-    },
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-    },
-
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-    },
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-    },
-
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-    },
-
-];
+    ];
 
 const ItemListingWrapper = () => {
     // const vendorweight: any = useSelector((weight: Rootweight) => weight.vendor);

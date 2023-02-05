@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ATMBreadCrumbs, {
   BreadcrumbType,
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -17,7 +18,10 @@ type Props = {
 };
 
 const AttributesListing = ({ columns, rows }: Props) => {
+  // const [isFilterOpen, setIsFilterOpen] = useState(false);
+const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>();
+  const [selectedRows, setSelectedRows] = useState([])
   const attributesState: any = useSelector(
     (state: RootState) => state.attributes
   );
@@ -27,7 +31,7 @@ const AttributesListing = ({ columns, rows }: Props) => {
 
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Home Page",
+      label: "Configuration",
       path: "/dashboard",
     },
     {
@@ -45,7 +49,7 @@ const AttributesListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> Attributes </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button onClick={() => navigate("/configurations/attributes/add")} className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
           + Add Attribute{" "}
         </button>
@@ -65,7 +69,11 @@ const AttributesListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto">
-          <ATMTable columns={columns} rows={rows} />
+        <ATMTable columns={columns} rows={rows}
+           isCheckbox={true}
+           selectedRows={selectedRows}
+           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}

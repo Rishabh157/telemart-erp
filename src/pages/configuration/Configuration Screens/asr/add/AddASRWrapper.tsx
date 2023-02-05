@@ -1,8 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
 import { array, object, string } from "yup";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import AddASR from "./AddASR";
+import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 
 type Props = {};
 
@@ -41,7 +41,7 @@ const AddASRWrapper = (props: Props) => {
   };
 
   return (
-    <SideNavLayout>
+    <ConfigurationLayout>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -51,7 +51,7 @@ const AddASRWrapper = (props: Props) => {
           return <AddASR formikProps={formikProps} />;
         }}
       </Formik>
-    </SideNavLayout>
+    </ConfigurationLayout>
   );
 };
 

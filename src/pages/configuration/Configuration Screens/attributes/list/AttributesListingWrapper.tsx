@@ -1,17 +1,8 @@
 import React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { AttributesListResponse } from "src/models/Attrbutes.model";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-// import {
-//     setIsTableLoading,
-//     setItems,
-//     setTotalItems,
-// } from "src/redux/slices/vendorSlice";
-// import { AppDispatch, RootState } from "src/redux/store";
-// import { useGetVendorsQuery } from "src/services/VendorServices";
 import AttributesListing from "./AttributesListing";
 
 const columns: columnTypes[] = [
@@ -26,7 +17,7 @@ const columns: columnTypes[] = [
         headerName: "Attribute Type",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: AttributesListResponse) => {
-            return <span className="text-primary-main "> {row.attributeType} </span>;
+            return <span > {row.attributeType} </span>;
         },
     },
     {
@@ -52,6 +43,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 1
     },
 
     {
@@ -62,6 +54,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 2
     },
     {
         firstName: "Himanshu",
@@ -71,6 +64,28 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 3
+    },
+
+    {
+        firstName: "Himanshu",
+        attributeName: "red",
+        attributeType: "Color",
+        lastName: "Jain",
+        district: "Mandsaur",
+        state: "M.P.",
+        _id : 3,
+        mobile: "8574859685",
+    },
+    {
+        firstName: "Himanshu",
+        attributeName: "red",
+        attributeType: "Color",
+        lastName: "Jain",
+        district: "Mandsaur",
+        state: "M.P.",
+        mobile: "8574859685",
+        _id : 4
     },
 
     {
@@ -81,6 +96,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 5
     },
     {
         firstName: "Himanshu",
@@ -90,6 +106,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 6
     },
 
     {
@@ -100,6 +117,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 7
     },
     {
         firstName: "Himanshu",
@@ -109,6 +127,7 @@ const rows = [
         district: "Mandsaur",
         state: "M.P.",
         mobile: "8574859685",
+        _id : 8
     },
 
     {
@@ -118,6 +137,7 @@ const rows = [
         lastName: "Jain",
         district: "Mandsaur",
         state: "M.P.",
+        _id : 9,
         mobile: "8574859685",
     },
     {
@@ -126,115 +146,10 @@ const rows = [
         attributeType: "Color",
         lastName: "Jain",
         district: "Mandsaur",
+        _id : 10,
         state: "M.P.",
         mobile: "8574859685",
     },
-
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        firstName: "Himanshu",
-        attributeName: "red",
-        attributeType: "Color",
-        lastName: "Jain",
-        district: "Mandsaur",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
 ];
 
 const AttributesListingWrapper = () => {

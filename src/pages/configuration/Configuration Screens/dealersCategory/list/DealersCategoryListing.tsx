@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -20,12 +21,13 @@ const DealerCategoryListing = ({ columns, rows }: Props) => {
     (state: RootState) => state.dealersCategory
   );
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+  const navigate = useNavigate()
 
   const { page, rowsPerPage } = dealerCategoryState;
 
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Home Page",
+      label: "Configuration",
       path: "/dashboard",
     },
     {
@@ -42,7 +44,7 @@ const DealerCategoryListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> Dealer Categories </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button  onClick={() => navigate("/configurations/dealers-category/add")} className="bg-primary-main text-white rounded py-1 px-3">
           {" "}
           + Add Dealer Category{" "}
         </button>

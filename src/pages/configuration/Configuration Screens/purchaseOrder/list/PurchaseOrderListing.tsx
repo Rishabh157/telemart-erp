@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState}from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
@@ -17,6 +17,8 @@ type Props = {
 
 const PurchaseOrderListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
+  const [selectedRows, setSelectedRows] = useState([])
+
   const purchaseOrderState: any = useSelector(
     (state: RootState) => state.purchaseOrder
   );
@@ -27,7 +29,7 @@ const PurchaseOrderListing = ({ columns, rows }: Props) => {
 
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Home Page",
+      label: "Configuration",
       path: "/dashboard",
     },
     {
@@ -66,9 +68,12 @@ const PurchaseOrderListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows} />
+        <ATMTable columns={columns} rows={rows}
+           isCheckbox={true}
+           selectedRows={selectedRows}
+           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
-
         {/* Pagination */}
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination

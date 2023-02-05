@@ -28,7 +28,7 @@ const columns: columnTypes[] = [
     headerName: "Product Name",
     flex: "flex-[1_1_0%]",
     renderCell: (row: OutwardRequestListResponse) => (
-      <span className="text-primary-main "> {row.productName} </span>
+      <span> {row.productName} </span>
     ),
   },
   {
@@ -42,7 +42,7 @@ const columns: columnTypes[] = [
     headerName: "Address",
     flex: "flex-[1.5_1.5_0%]",
     renderCell: (row: OutwardRequestListResponse) => {
-      return <span className="text-primary-main "> {row.address} </span>;
+      return <span> {row.address} </span>;
     },
   },
   {
@@ -65,6 +65,7 @@ const rows = [
     quantity: "1000",
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
+    _id : 1
   },
 
   {
@@ -72,6 +73,7 @@ const rows = [
     quantity: "1000",
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
+    _id : 2
   },
 
   {
@@ -79,6 +81,7 @@ const rows = [
     quantity: "1000",
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
+    _id : 3
   },
 
   {
@@ -86,6 +89,14 @@ const rows = [
     quantity: "1000",
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
+    _id : 4
+  },
+  {
+    productName: "Slim24",
+    quantity: "1000",
+    address: "123 Warehouse, Indore",
+    mobile: "8574859685",
+    _id : 5
   },
 
   {
@@ -93,6 +104,7 @@ const rows = [
     quantity: "1000",
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
+    _id : 6
   },
 
   {
@@ -100,6 +112,7 @@ const rows = [
     quantity: "1000",
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
+    _id : 7
   },
 
   {
@@ -107,6 +120,7 @@ const rows = [
     quantity: "1000",
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
+    _id : 8
   },
 
   {
@@ -114,6 +128,7 @@ const rows = [
     quantity: "1000",
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
+    _id : 9
   },
 
   {
@@ -121,85 +136,8 @@ const rows = [
     quantity: "1000",
     address: "123 Warehouse, Indore",
     mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-
-  {
-    productName: "Slim24",
-    quantity: "1000",
-    address: "123 Warehouse, Indore",
-    mobile: "8574859685",
-  },
-  
+    _id : 10
+  },  
 ];
 
 const tabs : Tabs[] = [

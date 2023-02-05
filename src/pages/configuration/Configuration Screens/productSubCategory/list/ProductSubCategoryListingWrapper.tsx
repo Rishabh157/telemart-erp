@@ -26,7 +26,7 @@ const columns: columnTypes[] = [
         headerName: "Parent Category ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ProductSubCategoryListResponse) => {
-            return <span className="text-primary-main "> {row.parentCategory} </span>;
+            return <span> {row.parentCategory} </span>;
         },
     },
     {
@@ -34,7 +34,7 @@ const columns: columnTypes[] = [
         headerName: "Sub Category Name ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ProductSubCategoryListResponse) => {
-            return <span className="text-primary-main "> {row.subCategoryName} </span>;
+            return <span> {row.subCategoryName} </span>;
         },
     },
     {
@@ -42,7 +42,7 @@ const columns: columnTypes[] = [
         headerName: "Applicable Taxes ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ProductSubCategoryListResponse) => {
-            return <span className="text-primary-main "> {row.applicableTaxes} </span>;
+            return <span> {row.applicableTaxes} </span>;
         },
     },
     {
@@ -50,7 +50,7 @@ const columns: columnTypes[] = [
         headerName: "HSN Code ",
         flex: "flex-[1.5_1.5_0%]",
         renderCell: (row: ProductSubCategoryListResponse) => {
-            return <span className="text-primary-main "> {row.hsnCode} </span>;
+            return <span> {row.hsnCode} </span>;
         },
     },
     {
@@ -76,6 +76,7 @@ const rows = [
         hsnCode: "1234",
         state: "M.P.",
         mobile: "8574859685",
+        _id :1
     },
 
     {
@@ -86,6 +87,7 @@ const rows = [
         hsnCode: "1234",
         state: "M.P.",
         mobile: "8574859685",
+        _id :2
     },
     {
         subCategoryName: "Something",
@@ -95,25 +97,7 @@ const rows = [
         hsnCode: "1234",
         state: "M.P.",
         mobile: "8574859685",
-    },
-
-    {
-        subCategoryName: "Something",
-        subCategoryCode: "123456",
-        parentCategory: "Drink Stop",
-        applicableTaxes: "GST",
-        hsnCode: "1234",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        subCategoryName: "Something",
-        subCategoryCode: "123456",
-        parentCategory: "Drink Stop",
-        applicableTaxes: "GST",
-        hsnCode: "1234",
-        state: "M.P.",
-        mobile: "8574859685",
+        _id :3
     },
 
     {
@@ -124,6 +108,7 @@ const rows = [
         hsnCode: "1234",
         state: "M.P.",
         mobile: "8574859685",
+        _id :4
     },
     {
         subCategoryName: "Something",
@@ -133,25 +118,7 @@ const rows = [
         hsnCode: "1234",
         state: "M.P.",
         mobile: "8574859685",
-    },
-
-    {
-        subCategoryName: "Something",
-        subCategoryCode: "123456",
-        parentCategory: "Drink Stop",
-        applicableTaxes: "GST",
-        hsnCode: "1234",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        subCategoryName: "Something",
-        subCategoryCode: "123456",
-        parentCategory: "Drink Stop",
-        applicableTaxes: "GST",
-        hsnCode: "1234",
-        state: "M.P.",
-        mobile: "8574859685",
+        _id :5
     },
 
     {
@@ -162,6 +129,7 @@ const rows = [
         hsnCode: "1234",
         state: "M.P.",
         mobile: "8574859685",
+        _id :6
     },
     {
         subCategoryName: "Something",
@@ -171,25 +139,7 @@ const rows = [
         hsnCode: "1234",
         state: "M.P.",
         mobile: "8574859685",
-    },
-
-    {
-        subCategoryName: "Something",
-        subCategoryCode: "123456",
-        parentCategory: "Drink Stop",
-        applicableTaxes: "GST",
-        hsnCode: "1234",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        subCategoryName: "Something",
-        subCategoryCode: "123456",
-        parentCategory: "Drink Stop",
-        applicableTaxes: "GST",
-        hsnCode: "1234",
-        state: "M.P.",
-        mobile: "8574859685",
+        _id :7
     },
 
     {
@@ -200,6 +150,7 @@ const rows = [
         hsnCode: "1234",
         state: "M.P.",
         mobile: "8574859685",
+        _id :8
     },
     {
         subCategoryName: "Something",
@@ -209,25 +160,7 @@ const rows = [
         hsnCode: "1234",
         state: "M.P.",
         mobile: "8574859685",
-    },
-
-    {
-        subCategoryName: "Something",
-        subCategoryCode: "123456",
-        parentCategory: "Drink Stop",
-        applicableTaxes: "GST",
-        hsnCode: "1234",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-    {
-        subCategoryName: "Something",
-        subCategoryCode: "123456",
-        parentCategory: "Drink Stop",
-        applicableTaxes: "GST",
-        hsnCode: "1234",
-        state: "M.P.",
-        mobile: "8574859685",
+        _id :9
     },
 
     {
@@ -238,25 +171,7 @@ const rows = [
         hsnCode: "1234",
         state: "M.P.",
         mobile: "8574859685",
-    },
-    {
-        subCategoryName: "Something",
-        subCategoryCode: "123456",
-        parentCategory: "Drink Stop",
-        applicableTaxes: "GST",
-        hsnCode: "1234",
-        state: "M.P.",
-        mobile: "8574859685",
-    },
-
-    {
-        subCategoryName: "Something",
-        subCategoryCode: "123456",
-        parentCategory: "Drink Stop",
-        applicableTaxes: "GST",
-        hsnCode: "1234",
-        state: "M.P.",
-        mobile: "8574859685",
+        _id :10
     },
 
 ];
