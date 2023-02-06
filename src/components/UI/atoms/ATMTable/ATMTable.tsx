@@ -96,12 +96,13 @@ const ATMTable = <T extends {}>({
                                         {/* Checkbox */}
                                         {
                                             isCheckbox ?
-                                                <div className={`w-[20px]`} >
+                                                <div className={`w-[20px]`} onClick={(e)=> e.stopPropagation()} >
                                                     <input
                                                         type='checkbox'
                                                         checked={selectedRows.findIndex((ele: any) => ele._id === row._id) !== -1}
                                                         onChange={(e) => { e.stopPropagation(); onRowSelect && onRowSelect((selectedRows: any) => selectedRows.findIndex((ele: any) => ele._id === row._id) === -1 ? [...selectedRows, row] : selectedRows.filter((selectedRow: any) => selectedRow._id !== row._id)) }}
                                                         className=' w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300'
+                                                        onClick={(e)=> e.stopPropagation()}
                                                     />
                                                 </div>
                                                 :

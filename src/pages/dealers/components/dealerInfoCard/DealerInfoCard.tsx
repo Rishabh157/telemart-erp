@@ -1,73 +1,76 @@
-import React, { useEffect } from 'react'
-import { GoPrimitiveDot } from 'react-icons/go'
-import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { setItems } from 'src/redux/slices/dealerSlice'
-import { AppDispatch } from 'src/redux/store'
-import { useGetDealerByIdQuery, useGetDealersQuery } from 'src/services/DealerServices'
+import { Avatar } from "@mui/material";
+import React from "react";
+import { IconType } from "react-icons";
+import { GoPrimitiveDot } from "react-icons/go";
 
-const DealerInfoCard = () => {
+type Props = {
+  dealerData: any;
+  actionIcons?: {
+    icon: IconType;
+    onClick: () => void;
+    label: string;
+  }[];
+};
 
-    const { dealerId } = useParams()
-    const dispatch = useDispatch<AppDispatch>()
+const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
+  return (
+    <div className="py-2 flex flex-col gap-1">
+      {/* Image */}
+      <div className="flex justify-center">
+        <Avatar src="" alt="" />
+      </div>
 
-    const { data, isFetching, isLoading } = useGetDealersQuery(
-        {
-            "limit": 10,
-            "searchValue": "",
-            "params": [
-                "dealerName",
-                "dealerCode",
-                "mobile"
-            ],
-            "page": 1,
-            "filterBy": [
-                {
-                    "fieldName": "",
-                    "value": []
-                }
-            ],
-            "dateFilter": {
-                "start_date": "",
-                "end_date": "",
-                "dateFilterKey": ""
-            },
-            "orderBy": "createdAt",
-            "orderByValue": -1,
-            "isPaginationRequired": true
+      {/* Firm Name */}
+      <div className="flex justify-center">Firm Name</div>
 
-        }
-    )
+      {/* Chips */}
+      <div className="flex gap-2 justify-center">
+        <span className="rounded-full px-3 py-[2px] bg-slate-100 text-[10px]">
+          {" "}
+          Dealer{" "}
+        </span>
+        <span
+          className={`rounded-full px-3 py-[2px] text-[10px] font-medium flex items-center gap-1 ${
+            dealerData.isActive
+              ? "bg-green-100 text-green-500"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {" "}
+          <GoPrimitiveDot className="text-lg" />{" "}
+          {dealerData.isActive ? "Active" : "Deactive"}{" "}
+        </span>
+      </div>
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setItems(data || []))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching])
+      <div className="text-center text-slate-500">
+        {/* Dealer Name */}
+        <div className="text-[15px]" > Dealer Name </div>
 
-    const { data: dealerData } = useGetDealerByIdQuery(dealerId)
+        {/* Mobile */}
+        <div className="text-center text-slate-400 text-[13px]">8574859685</div>
+      </div>
 
-    return (
-        <div className='flex flex-col  gap-2 items-center py-[10px] px-2 h-full w-full' >
-            <div className='w-full flex justify-end h-[10px] ' >
-                <span
-                    className={`px-2 py-3 rounded-full text-[12px] inline-flex gap-2 items-center ${dealerData?.is_active ? 'bg-green-100 text-green-500' : 'bg-red-100 text-red-500'} `}
-                >
-                    <GoPrimitiveDot className=' text-[17px] ' />
-                    {dealerData?.is_active ? 'Active' : 'Inactive'}
-                </span>
+      {/* Action Icon */}
+      <div className="flex gap-4 border-b justify-center items-center pt-1">
+        {actionIcons?.map((icon, index) => {
+          return (
+            <div
+              key={index}
+              onClick={() => {
+                icon.onClick();
+              }}
+              className="text-lg text-slate-500 cursor-pointer flex justify-center flex-col"
+            >
+              <div className="flex justify-center">
+                <icon.icon />
+              </div>
+              <div className="text-[11px]"> {icon.label} </div>
             </div>
-            <div className='h-[40px] w-[40px] flex justify-center items-center font-bold bg-primary-main text-white text-sm  rounded-full' >
-                {dealerData?.dealerName[0]}
-            </div>
-            <div className='flex flex-col justify-center items-center h-[70px]' >
-                <div className='border bg-slate-100 text-slate-400  px-2  rounded-full text-[13px]' > DEALER </div>
-                <div className='text-md text-slate-700' > {dealerData?.dealerName} </div>
-                <div className='text-[13px] text-slate-500' > {dealerData?.mobile} </div>
-            </div>
-        </div>
-    )
-}
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
-export default DealerInfoCard
+export default DealerInfoCard;

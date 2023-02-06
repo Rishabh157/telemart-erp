@@ -34,7 +34,6 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                   placeholder,
                   offset,
                 } = field;
-                console.log(offset);
                 switch (type) {
                   case "text":
                     return (

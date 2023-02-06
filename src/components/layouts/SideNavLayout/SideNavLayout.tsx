@@ -45,7 +45,7 @@ const SideNavLayout = ({
             <Header/>
          </div>
 
-         <div className='max-h-[calc(100%-55px)] w-full overflow-auto bg-slate-50 ' >
+         <div className='h-[calc(100%-55px)] w-full overflow-auto bg-slate-50 ' >
                {children}
          </div>
     </div>

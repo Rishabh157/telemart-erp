@@ -1,6 +1,5 @@
 import { RxDashboard } from "react-icons/rx";
 import { FiUsers } from "react-icons/fi";
-import { RiShoppingCartLine } from "react-icons/ri";
 import { TbBuildingWarehouse } from "react-icons/tb";
 import { HiOutlineTruck } from "react-icons/hi";
 import { FaRegHandshake } from "react-icons/fa";
@@ -8,66 +7,59 @@ import { CiBoxes } from "react-icons/ci";
 import { CgNotes } from "react-icons/cg";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { AiOutlineSetting } from "react-icons/ai";
-import { IconType } from 'react-icons'
+import { IconType } from "react-icons";
 
 export type NavItemType = {
-  label: string,
-  path: string,
-  icon: IconType,
-}
+  label: string;
+  path: string;
+  icon: IconType;
+};
 
-export const navigation:NavItemType[] = [
+export const navigation: NavItemType[] = [
   {
     label: "Dashboard",
     icon: RxDashboard,
-    path: '/dashboard',
+    path: "/dashboard",
   },
 
   {
     label: "Vendors",
     icon: HiOutlineTruck,
-    path: '/vendors',
-  },
-  
-  {
-    label: "Orders",
-    icon: RiShoppingCartLine,
-    path: '/orders',
+    path: "/vendors",
   },
   {
     label: "Dealers",
     icon: FaRegHandshake,
-    path: '/dealers',
+    path: "/dealers",
   },
   {
     label: "Users",
     icon: FiUsers,
-    path: '/users',
+    path: "/users",
   },
   {
     label: "Warehouse",
     icon: TbBuildingWarehouse,
-    path: '/warehouse',
+    path: "/warehouse",
   },
   {
     label: "Inventories",
     icon: CiBoxes,
-    path: '/inventories',
+    path: "/inventories",
   },
   {
     label: "Sale Order",
     icon: CgNotes,
-    path: '/sale-order',
+    path: "/sale-order",
   },
   {
     label: "Outward Request",
     icon: IoDocumentTextOutline,
-    path: '/outward-request',
+    path: "/outward-request",
   },
   {
     label: "Configurations",
     icon: AiOutlineSetting,
-    path: '/configurations/attributes',
+    path: "/configurations/attributes",
   },
-
 ];

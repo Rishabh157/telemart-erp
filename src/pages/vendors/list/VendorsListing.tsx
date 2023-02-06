@@ -42,7 +42,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
 
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
         {/*Table Header */}
-        <div id="table-header" >
+        <div id="table-header">
           <ATMTableHeader
             page={page}
             rowCount={rows.length}
@@ -57,19 +57,21 @@ const VendorsListing = ({ columns, rows }: Props) => {
         </div>
 
         {/* Table */}
-        <div className={`overflow-auto `}>
-          <ATMTable columns={columns} rows={rows}
+        <div className={`grow overflow-auto `}>
+          <ATMTable
+            columns={columns}
+            rows={rows}
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            extraClasses='max-h-[calc(100%-150px)] overflow-auto' onRowClick={(row: VendorsListResponse) => navigate(`${row._id}/general-information`)} /> ̰
+            onRowClick={(row: VendorsListResponse) =>
+              navigate(`${row._id}/general-information`)
+            }
+          />
         </div>
 
         {/* Pagination */}
-        <div
-          id="bottom-pagination"
-          className="h-[90px] flex items-center justify-end border-t border-slate-300"
-        >
+        <div className="border-t border-slate-300">
           <ATMPagination
             page={page}
             rowCount={rows.length}
