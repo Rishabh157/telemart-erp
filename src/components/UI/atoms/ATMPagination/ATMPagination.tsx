@@ -27,7 +27,7 @@ const ATMPagination = (
             {
                 rows.length ?
 
-                    <div className='flex justify-between items-center' >
+                    <div className='flex items-center h-[50px]  justify-end ' >
 
                         {/* Out of */}
                         <div>

@@ -27,7 +27,7 @@ const VendorInfoCard = ({ vendorData, actionIcons }: Props) => {
       <div className="flex gap-2 justify-center">
         <span className="rounded-full px-3 py-[2px] bg-slate-100 text-[10px]">
           {" "}
-          Dealer{" "}
+          Vendor{" "}
         </span>
         <span
           className={`rounded-full px-3 py-[2px] text-[10px] font-medium flex items-center gap-1 ${

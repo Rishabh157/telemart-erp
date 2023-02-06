@@ -1,5 +1,6 @@
-import React ,{useState}from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// import { useNavigate } from "react-router";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -14,8 +15,11 @@ type Props = {
 };
 
 const WarehouseListing = ({ columns, rows }: Props) => {
+  // const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const warehouseState: any = useSelector((state: RootState) => state.warehouse);
+  const warehouseState: any = useSelector(
+    (state: RootState) => state.warehouse
+  );
   // const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -26,7 +30,10 @@ const WarehouseListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Warehouse </ATMPageHeading>
-        <button className="bg-primary-main text-white rounded py-1 px-3">
+        <button
+          // onClick={() => navigate("/warehouse/add-warehouse")}
+          className="bg-primary-main text-white rounded py-1 px-3"
+        >
           {" "}
           + Add Warehouse{" "}
         </button>
@@ -46,15 +53,17 @@ const WarehouseListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows}
+          <ATMTable
+            columns={columns}
+            rows={rows}
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
+          />
         </div>
 
         {/* Pagination */}
-        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+        <div className="border-t border-slate-300">
           <ATMPagination
             page={page}
             rowCount={rows.length}

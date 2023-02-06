@@ -5,28 +5,31 @@ import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import { timelineItemClasses } from "@mui/lab";
 
 type Props = {
   timeLineItems: {
-    leftSideContent: React.ReactNode;
-    rightSideContent: React.ReactNode;
+    content: React.ReactNode;
   }[];
 };
 
 const ATMTimeLine = ({ timeLineItems }: Props) => {
   return (
-    <Timeline position="alternate">
+    <Timeline
+      sx={{
+        [`& .${timelineItemClasses.root}:before`]: {
+          flex: 0,
+          padding: 0,
+        },
+      }}
+    >
       {timeLineItems?.map((item, itemIndex) => (
         <TimelineItem key={itemIndex}>
-          <TimelineOppositeContent color="text.secondary">
-            {item.leftSideContent}
-          </TimelineOppositeContent>
           <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
+            <TimelineDot sx={{backgroundColor: 'var(--primary-main)'}} />
+            <TimelineConnector sx={{backgroundColor: 'var(--primary-main)'}} />
           </TimelineSeparator>
-          <TimelineContent> {item.rightSideContent} </TimelineContent>
+          <TimelineContent> {item.content} </TimelineContent>
         </TimelineItem>
       ))}
     </Timeline>

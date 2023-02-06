@@ -1,13 +1,13 @@
 import React from "react";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { MdExpandMore } from "react-icons/md";
-import { AccordianType } from "./VendorGeneralInformationTabWrapper";
+import { AccordianType } from "./DealerGeneralInformationTabWrapper";
 
 type Props = {
   accordians: AccordianType[];
 };
 
-const VendorGeneralInformationTab = ({ accordians }: Props) => {
+const DealerGeneralInformationTab = ({ accordians }: Props) => {
   // States
   const [expanded, setExpanded] = React.useState<number | false>(false);
   const handleChange =
@@ -22,6 +22,7 @@ const VendorGeneralInformationTab = ({ accordians }: Props) => {
           className="shadow-lg border "
           expanded={expanded === accordianIndex}
           onChange={handleChange(accordianIndex)}
+          key={accordianIndex}
         >
           <AccordionSummary
             expandIcon={<MdExpandMore />}
@@ -42,4 +43,4 @@ const VendorGeneralInformationTab = ({ accordians }: Props) => {
   );
 };
 
-export default VendorGeneralInformationTab;
+export default DealerGeneralInformationTab;
