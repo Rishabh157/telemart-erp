@@ -8,9 +8,9 @@ type Props = {};
 
 export type FormInitialValues = {
   items: {
-    recievedQuantity: number | null;
-    goodQuantity: number | null;
-    defectiveQuantity: number | null;
+    recievedQuantity: string ;
+    goodQuantity: string ;
+    defectiveQuantity: string ;
   }[];
 };
 
@@ -19,9 +19,9 @@ const AddGRNWrapper = (props: Props) => {
   const initialValues: FormInitialValues = {
     items: [
       {
-        recievedQuantity: null,
-        goodQuantity: null,
-        defectiveQuantity: null
+        recievedQuantity: "",
+        goodQuantity: "",
+        defectiveQuantity: "",
       },
     ],
   };
@@ -30,9 +30,18 @@ const AddGRNWrapper = (props: Props) => {
   const validationSchema = object({
     items: array().of(
       object().shape({
-        recievedQuantity: number().min(0 , 'Recieved Quantity must be greater than 0').required("Please enter Recieved Quantity").nullable(),
-        goodQuantity: number().min(0 , 'Good Quantity must be greater than 0').required("Please enter Good Quantity").nullable(),
-        defectiveQuantity:number().min(0 , 'Defective Quantity must be greater than 0').required("Please enter Defective Quantity").nullable(),
+        recievedQuantity: number()
+          .min(0, "Recieved Quantity must be greater than 0")
+          .required("Please enter Recieved Quantity")
+          .nullable(),
+        goodQuantity: number()
+          .min(0, "Good Quantity must be greater than 0")
+          .required("Please enter Good Quantity")
+          .nullable(),
+        defectiveQuantity: number()
+          .min(0, "Defective Quantity must be greater than 0")
+          .required("Please enter Defective Quantity")
+          .nullable(),
       })
     ),
   });

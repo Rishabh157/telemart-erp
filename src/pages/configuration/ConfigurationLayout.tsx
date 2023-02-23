@@ -28,6 +28,11 @@ const configurationNavigation: NavItemType[] = [
     path: "/configurations/product-sub-category",
   },
   {
+    label: "Product Group",
+    icon: AiOutlineSetting,
+    path: "/configurations/product-group",
+  },
+  {
     label: "Item",
     icon: AiOutlineSetting,
     path: "/configurations/item",

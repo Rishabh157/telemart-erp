@@ -68,7 +68,7 @@ const BarcodeListing = ({
         <ATMPageHeading> Barcode </ATMPageHeading>
         <button
           onClick={() => {
-            navigate("add-dealer");
+            navigate("add");
           }}
           className="bg-primary-main text-white rounded py-1 px-3"
         >

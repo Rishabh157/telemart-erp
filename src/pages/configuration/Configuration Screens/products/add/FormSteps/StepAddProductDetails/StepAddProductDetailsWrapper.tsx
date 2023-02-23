@@ -8,15 +8,22 @@ type Props = {
   formikProps: FormikProps<FormInitialValues>;
 };
 
-export type FieldType = Field<"productSubCategoryOPtions" | "productCategoryOPtions">;
+export type FieldType = Field<
+  "productSubCategoryOPtions" | "productCategoryOPtions"
+>;
 
 const productSubCategoryOPtions = [{ label: "Public", value: "public" }];
 const productCategoryOPtions = [{ label: "Category 1", value: "cat1" }];
+const productGroupOPtions = [
+  { label: "Group 1", value: "grp1" },
+  { label: "Group 2", value: "grp2" },
+];
 
 const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
   const dropdownOptions = {
     productSubCategoryOPtions,
     productCategoryOPtions,
+    productGroupOPtions,
   };
 
   return (

@@ -10,6 +10,7 @@ import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUplo
 type DropdownOptions = {
   productSubCategoryOPtions: SelectOption[];
   productCategoryOPtions: SelectOption[];
+  productGroupOPtions: SelectOption[];
 };
 
 type Props = {
@@ -61,6 +62,15 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
           }
           label="Product Sub Category"
           options={dropdownOptions.productSubCategoryOPtions}
+        />
+
+        {/* Product Sub Category */}
+        <ATMSelect
+          name="productGroup"
+          value={values.productGroup}
+          onChange={(e) => setFieldValue("productGroup", e.target.value)}
+          label="Product Group"
+          options={dropdownOptions.productGroupOPtions}
         />
 
         {/* Product Weight */}
@@ -117,7 +127,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
           name="product_image"
           label="Product Image"
           placeholder="Select Image"
-          onSelect={(newFile) => setFieldValue('product_image', newFile)}
+          onSelect={(newFile) => setFieldValue("product_image", newFile)}
           selectedFile={values.product_image}
         />
       </div>

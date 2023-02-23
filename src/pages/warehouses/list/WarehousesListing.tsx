@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const WarehouseListing = ({ columns, rows }: Props) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const warehouseState: any = useSelector(
     (state: RootState) => state.warehouse
@@ -31,7 +31,7 @@ const WarehouseListing = ({ columns, rows }: Props) => {
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Warehouse </ATMPageHeading>
         <button
-          // onClick={() => navigate("/warehouse/add-warehouse")}
+          onClick={() => navigate("/warehouse/add-warehouse")}
           className="bg-primary-main text-white rounded py-1 px-3"
         >
           {" "}

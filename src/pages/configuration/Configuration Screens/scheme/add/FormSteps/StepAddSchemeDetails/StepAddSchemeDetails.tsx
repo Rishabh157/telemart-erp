@@ -6,6 +6,7 @@ import { DropdownOptions } from "./StepAddSchemeDetailsWrapper";
 import ATMTextArea from "src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea";
 import ATMSwitchButton from "src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton";
 import ATMDatePicker from "src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker";
+import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -31,27 +32,35 @@ const StepAddSchemeDetails = ({ formikProps, dropdownOptions }: Props) => {
         />
 
         {/* Category */}
-        <ATMTextField
+        <ATMSelect
           name={"category"}
           value={values.category}
           onChange={(e) => {
             setFieldValue("category", e.target.value);
           }}
           label="Category"
-          placeholder="Category"
-          className="shadow bg-white rounded"
+          options={[
+            {
+              label: "Category 1 ",
+              value: "Cat1",
+            },
+          ]}
         />
 
         {/* Sub Category */}
-        <ATMTextField
+        <ATMSelect
           name={"sub_category"}
           value={values.sub_category}
           onChange={(e) => {
             setFieldValue("sub_category", e.target.value);
           }}
           label="Sub Category"
-          placeholder="Sub Category"
-          className="shadow bg-white rounded"
+          options={[
+            {
+              label: "Sub-Category 1 ",
+              value: "Cat1",
+            },
+          ]}
         />
 
         {/* Scheme Name */}

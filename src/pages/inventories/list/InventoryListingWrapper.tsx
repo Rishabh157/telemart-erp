@@ -16,7 +16,7 @@ import InventoryListing from "./InventoryListing";
 const columns: columnTypes[] = [
   {
     field: "productName",
-    headerName: "Product Name",
+    headerName: "Product Group Name",
     flex: "flex-[1_1_0%]",
     renderCell: (row: InventoryListResponse) => (
       <span> {row.productName} </span>
@@ -48,7 +48,7 @@ const rows = [
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
-    _id : 1
+    _id: 1,
   },
 
   {
@@ -56,29 +56,14 @@ const rows = [
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
-    _id : 2
+    _id: 2,
   },
   {
     productName: "Alcoban",
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
-    _id : 3
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id : 4
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id : 5
+    _id: 3,
   },
 
   {
@@ -86,29 +71,14 @@ const rows = [
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
-    _id : 6
+    _id: 4,
   },
   {
     productName: "Alcoban",
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
-    _id : 6
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id : 7
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id : 8
+    _id: 5,
   },
 
   {
@@ -116,15 +86,45 @@ const rows = [
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
-    _id : 9
+    _id: 6,
   },
   {
     productName: "Alcoban",
     quantity: "1000",
     email: "him@gmail.com",
     mobile: "8574859685",
-    _id : 10
-  }, 
+    _id: 6,
+  },
+
+  {
+    productName: "Alcoban",
+    quantity: "1000",
+    email: "him@gmail.com",
+    mobile: "8574859685",
+    _id: 7,
+  },
+  {
+    productName: "Alcoban",
+    quantity: "1000",
+    email: "him@gmail.com",
+    mobile: "8574859685",
+    _id: 8,
+  },
+
+  {
+    productName: "Alcoban",
+    quantity: "1000",
+    email: "him@gmail.com",
+    mobile: "8574859685",
+    _id: 9,
+  },
+  {
+    productName: "Alcoban",
+    quantity: "1000",
+    email: "him@gmail.com",
+    mobile: "8574859685",
+    _id: 10,
+  },
 ];
 
 const InventoryListingWrapper = () => {
@@ -170,7 +170,9 @@ const InventoryListingWrapper = () => {
   return (
     <>
       <SideNavLayout>
-        <InventoryListing columns={columns} rows={rows} />
+        <div className="h-full">
+          <InventoryListing columns={columns} rows={rows} />
+        </div>
       </SideNavLayout>
     </>
   );
