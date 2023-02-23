@@ -171,10 +171,10 @@ const AddDealerWrapper = () => {
   };
 
   // Form validation schema based on the active step
-  const getValidationSchema = (activeStep: number) => {
-    return steps.find((_, stepIndex) => stepIndex === activeStep)
-      ?.validationSchema;
-  };
+  // const getValidationSchema = (activeStep: number) => {
+  //   return steps.find((_, stepIndex) => stepIndex === activeStep)
+  //     ?.validationSchema;
+  // };
 
   // On Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
