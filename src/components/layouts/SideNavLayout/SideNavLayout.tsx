@@ -31,8 +31,8 @@ const SideNavLayout = ({ children }: Props) => {
     <div className="flex h-screen w-screen">
       {/* Side Navigation Bar */}
       <div
-        className={`border-r border-slate-300 h-full transition-all duration-500   ${
-          isCollapsed ? "min-w-[50px]" : "min-w-[250px]"
+        className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   ${
+          isCollapsed ? "min-w-[50px] w-[50px]" : "min-w-[250px] w-[250px]"
         }`}
       >
         <VerticalNavBar
