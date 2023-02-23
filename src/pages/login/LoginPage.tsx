@@ -60,7 +60,7 @@ const LoginPage = () => {
 
                         <div className=''>
                             <button
-                            onClick={()=> {navigate('orders')}}
+                            onClick={()=> {navigate('/dashboard')}}
                                 type='button'
                                 className='w-full bg-primary-main text-white h-[50px] rounded-lg'
                             >
