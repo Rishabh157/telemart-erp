@@ -1,6 +1,5 @@
 import React,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import ATMBreadCrumbs, {
   BreadcrumbType,
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
@@ -10,7 +9,6 @@ import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
 import { setRowsPerPage, setPage } from "src/redux/slices/GRNSlice";
 import { AppDispatch, RootState } from "src/redux/store";
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
   columns: any[];
@@ -19,7 +17,6 @@ type Props = {
 
 const GRNListing = ({ columns, rows }: Props) => {
   const [selectedRows, setSelectedRows] = useState([])
-  const navigate = useNavigate()
 
   const dispatch = useDispatch<AppDispatch>();
   const grnState: any = useSelector((state: RootState) => state.grn);
@@ -46,10 +43,6 @@ const GRNListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> GRN </ATMPageHeading>
-        <button onClick={() => navigate("/configurations/grn/add")} className="bg-primary-main text-white rounded py-1 px-3">
-          {" "}
-          + Add GRN{" "}
-        </button>
       </div>
 
       <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

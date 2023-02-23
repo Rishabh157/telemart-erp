@@ -21,7 +21,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
         {({ push, remove }) => (
           <div className="">
             {values.products?.map((product, productIndex) => {
-              const { product_name, quantity, mrp, offer_price } = product;
+              const { productGroup, quantity, mrp, offer_price } = product;
 
               return (
                 <div
@@ -47,19 +47,19 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                   </div>
 
                   <div className="grid grid-cols-5 gap-4 gap-y-5">
-                    {/* Product Name */}
+                    {/* Product Group */}
                     <div className="col-span-2">
                       <ATMSelect
-                        name={`products[${productIndex}].product_name`}
-                        value={product_name}
+                        name={`products[${productIndex}].productGroup`}
+                        value={productGroup}
                         onChange={(e) => {
                           setFieldValue(
-                            `products[${productIndex}].product_name`,
+                            `products[${productIndex}].productGroup`,
                             e.target.value
                           );
                         }}
-                        label="Product Name"
-                        options={dropdownOptions.productOptions}
+                        label="Product Group"
+                        options={dropdownOptions.productGroupOptions}
                       />
                     </div>
 
@@ -117,7 +117,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                 type="button"
                 onClick={() =>
                   push({
-                    product_name: "",
+                    productGroup: "",
                     quantity: "",
                     mrp: 0,
                     offer_price: 0,

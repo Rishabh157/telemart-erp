@@ -17,6 +17,7 @@ export type FormInitialValues = {
   product_name: string;
   product_category: string;
   product_sub_category: string;
+  productGroup: string;
   product_weight: string;
   dimensions: {
     height: string;
@@ -91,11 +92,15 @@ const steps = [
     validationSchema: object({
       taxes: array().of(
         object().shape({
-          taxDetail: object().shape({
-            tax_name: string().required(),
-            id: string().required()
-          }).required("Please select item name"),
-          tax_rate: number().typeError("Tax rate should be a number").required("Please enter tax rate"),
+          taxDetail: object()
+            .shape({
+              tax_name: string().required(),
+              id: string().required(),
+            })
+            .required("Please select item name"),
+          tax_rate: number()
+            .typeError("Tax rate should be a number")
+            .required("Please enter tax rate"),
         })
       ),
     }),
@@ -172,6 +177,7 @@ const AddProductWrapper = () => {
     product_name: "",
     product_category: "",
     product_sub_category: "",
+    productGroup: "",
     product_weight: "",
     product_image: "",
     dimensions: {

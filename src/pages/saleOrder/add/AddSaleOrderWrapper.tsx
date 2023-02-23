@@ -54,7 +54,7 @@ const AddSaleOrderWrapper = (props: Props) => {
   const dropdownOptions = {
     dealerOptions: [{ label: "dealer", value: "dealer" }],
     warehouseOptions: [{ label: "warehouse", value: "warehouse" }],
-    productOptions: [{ label: "Product 1", value: "p1" } , { label: "Product 2", value: "p2" } ]
+    productOptions: [{ label: "Group 1", value: "p1" } , { label: "Group 2", value: "p2" } ]
   }
 
   return (

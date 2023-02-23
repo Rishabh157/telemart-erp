@@ -27,7 +27,7 @@ export type FormInitialValues = {
   end_date: string | null;
   scheme_description: string;
   products: {
-    product_name: string;
+    productGroup: string;
     quantity: string;
     mrp: number;
     offer_price: number;
@@ -73,7 +73,7 @@ const steps = [
     validationSchema: object({
       products: array().of(
         object().shape({
-          product_name: string().required("Please select a product"),
+          productGroup: string().required("Please select a product"),
           quantity: number().typeError("Quantity must be a number")
             .min(1, "Please enter quantity")
             .required("Quantity is required"),
@@ -146,7 +146,7 @@ const AddSchemeWrapper = () => {
     scheme_description: "",
     products: [
       {
-        product_name: "",
+        productGroup: "",
         quantity: "",
         mrp: 0,
         offer_price: 0,

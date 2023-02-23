@@ -1,68 +1,109 @@
-import { FormikProps } from 'formik'
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import ATMPageHeader from 'src/components/UI/atoms/ATMPageHeader/ATMPageHeader'
-import { renderFormFields } from 'src/utils/warehouse/formFields'
-import { AddWarehouseFormValues } from './AddWarehouseWrapper'
+import { Step, StepLabel, Stepper } from "@mui/material";
+import { FormikProps } from "formik";
+import React from "react";
+import ATMBreadCrumbs from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
+import { FormInitialValues } from "./AddWarehouseWrapper";
 
 type Props = {
-    formikProps: FormikProps<AddWarehouseFormValues>
-}
+  formikProps: FormikProps<FormInitialValues>;
+  activeStep: number;
+  setActiveStep: React.Dispatch<React.SetStateAction<number>>;
+  steps: any[];
+};
 
 const AddWarehouse = ({
-    formikProps,
-}: Props
-) => {
+  formikProps,
+  activeStep,
+  setActiveStep,
+  steps,
+}: Props) => {
+  // Handle Previous
+  const handlePrevious = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
-    const { values, setFieldValue, isSubmitting } = formikProps
-    const navigate = useNavigate()
+  const breadcrumbs = [
+    {
+      label: "Warehouse",
+      onClick: () => {
+        console.log("Dealers");
+      },
+      path: "/warehouse",
+    },
+    {
+      label: "Add Warehouse",
+    },
+  ];
 
-    // Constants
-    const breadcrumbsList = [
-        {
-            label: "Warehouses",
-            onClick: () => { navigate("/warehouse") }
-        },
-        {
-            label: "Add Warehouse",
-        },
+  return (
+    <div className="">
+      <div className="p-4 flex flex-col gap-2  ">
+        {/* Breadcrumbs */}
+        <div className="">
+          <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+        </div>
 
-    ]
+        {/* Page Heading */}
+        <div className="pt-1">
+          <ATMPageHeading> Add New Dealer </ATMPageHeading>
+        </div>
 
-    return (
-        <>
-            <ATMPageHeader
-                pageTitle="Add Warehouse"
-                breadcrumbsList={breadcrumbsList}
-            />
-            <div className='w-full h-[calc(100%-70px)]  flex justify-center' >
-                <div className='w-[100%]  px-12 max-h-full overflow-auto bg-white  shadow-lg rounded-lg relative '>
-
-                    <div className='col-span-12 flex justify-end gap-3 sticky top-0 bg-white z-50 py-5'>
-                        <button type='button' onClick={() => navigate("/warehouse")} className='border w-[100px] border-primary-main text-primary-main rounded p-2' > Cancel </button>
-
-                        <div className='w-[150px]' >
-
-                            <ATMLoadingButton
-                                type='submit'
-                                isLoading={isSubmitting}
-                                disabled={isSubmitting}
-
-                            >
-                                Submit
-                            </ATMLoadingButton>
-                        </div>
-                    </div>
-
-                    <div className='w-full  rounded   grid grid-cols-12 gap-7' >
-                            {renderFormFields(values , setFieldValue)}
-
-                    </div>
-                </div>
+        <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+          <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
+            {/* Form Step Label */}
+            <div className="text-xl font-medium">
+              {" "}
+              {steps[activeStep]?.label}{" "}
             </div>
-        </>
-    )
-}
 
-export default AddWarehouse
+            {/* Buttons - Previous / Next */}
+            <div className="flex gap-1">
+              {activeStep > 0 && (
+                <button
+                  type="button"
+                  onClick={handlePrevious}
+                  className="text-primary-main font-semibold py-1 px-5 hover:border border-primary-main rounded"
+                >
+                  Previous
+                </button>
+              )}
+
+              <button
+                type="button"
+                onClick={() => formikProps.handleSubmit()}
+                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+              >
+                {activeStep === steps.length - 1 ? "Submit" : "Next"}
+              </button>
+            </div>
+          </div>
+
+          <div className="py-5 px-16 border-b border-slate-300">
+            {/* Steps */}
+            <Stepper activeStep={activeStep}>
+              {steps.map((step, index) => {
+                const stepProps: { completed?: boolean } = {};
+                const labelProps: {
+                  optional?: React.ReactNode;
+                } = {};
+                return (
+                  <Step key={step.label} {...stepProps}>
+                    <StepLabel {...labelProps}>{step.label}</StepLabel>
+                  </Step>
+                );
+              })}
+            </Stepper>
+          </div>
+
+          {/* Form */}
+          <div className="grow">
+            {steps[activeStep]?.component({ formikProps })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AddWarehouse;

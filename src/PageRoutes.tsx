@@ -6,6 +6,7 @@ import AddAttributeWrapper from "./pages/configuration/Configuration Screens/att
 import AttributesListingWrapper from "./pages/configuration/Configuration Screens/attributes/list/AttributesListingWrapper";
 import AddAttributeGroupWrapper from "./pages/configuration/Configuration Screens/attributesGroup/add/AddAttributeGroupWrapper";
 import AttributesGroupListingWrapper from "./pages/configuration/Configuration Screens/attributesGroup/list/AttributesGroupListingWrapper";
+import AddBarcodeWrapper from "./pages/configuration/Configuration Screens/barcode/add/AddBarcodeWrapper";
 import BarcodeListingWrapper from "./pages/configuration/Configuration Screens/barcode/list/BarcodeListingWrapper";
 import ViewBarcodeWrapper from "./pages/configuration/Configuration Screens/barcode/view/ViewBarcodeWrapper";
 import AddCartonBoxWrapper from "./pages/configuration/Configuration Screens/cartonBox/add/AddCartonBoxWrapper";
@@ -20,8 +21,11 @@ import AddItemWrapper from "./pages/configuration/Configuration Screens/item/add
 import ItemListingWrapper from "./pages/configuration/Configuration Screens/item/list/ItemListingWrapper";
 import AddLanguageWrapper from "./pages/configuration/Configuration Screens/language/add/AddLanguageWrapper";
 import LanguageListingWrapper from "./pages/configuration/Configuration Screens/language/list/LanguageListingWrapper";
+import Locations from "./pages/configuration/Configuration Screens/locations/Location";
 import AddProductCategoryWrapper from "./pages/configuration/Configuration Screens/productCategory/add/AddProductCategoryWrapper";
 import ProductCategoryListingWrapper from "./pages/configuration/Configuration Screens/productCategory/list/ProductCategoryListingWrapper";
+import AddProductGroupWrapper from "./pages/configuration/Configuration Screens/productGroup/add/AddProductGroupWrapper";
+import ProductGroupListingWrapper from "./pages/configuration/Configuration Screens/productGroup/list/ProductGroupListingWrapper";
 import AddProductWrapper from "./pages/configuration/Configuration Screens/products/add/AddProductWrapper";
 import ProductsListingWrapper from "./pages/configuration/Configuration Screens/products/list/ProductWrapper";
 import AddProductSubCategoryWrapper from "./pages/configuration/Configuration Screens/productSubCategory/add/AddProductSubCategoryWrapper";
@@ -40,6 +44,7 @@ import ViewDealer from "./pages/dealers/view";
 import DealerActivityTabWrapper from "./pages/dealers/view/tabs/DealerActivityTab/DealerActivityTabWrapper";
 import DealerGeneralInformationTabWrapper from "./pages/dealers/view/tabs/DealerGeneralInformationTab/DealerGeneralInformationTabWrapper";
 import DealerWarehouseTabWrapper from "./pages/dealers/view/tabs/DealerWarehouseTab/DealerWarehouseTabWrapper";
+import InwardInventoryWrapper from "./pages/inventories/inward-inventory/InwardInventoryWrapper";
 import InventoryListingWrapper from "./pages/inventories/list/InventoryListingWrapper";
 import LoginPage from "./pages/login/LoginPage";
 import AddOrder from "./pages/orders/add/AddOrder";
@@ -89,6 +94,10 @@ const PageRoutes = () => {
             element={<AddWarehouseWrapper />}
           />
           <Route path="/inventories" element={<InventoryListingWrapper />} />
+          <Route
+            path="/inventories/inward-inventory"
+            element={<InwardInventoryWrapper />}
+          />
           <Route path="/sale-order" element={<SaleOrderListingWrapper />} />
           <Route
             path="/sale-order/add-sale-order"
@@ -120,6 +129,16 @@ const PageRoutes = () => {
           <Route
             path="/configurations/attributes/add"
             element={<AddAttributeWrapper />}
+          />
+
+          <Route
+            path="/configurations/product-group"
+            element={<ProductGroupListingWrapper />}
+          />
+
+          <Route
+            path="/configurations/product-group/add"
+            element={<AddProductGroupWrapper />}
           />
 
           <Route
@@ -196,6 +215,11 @@ const PageRoutes = () => {
           />
 
           <Route
+            path="/configurations/barcode/add"
+            element={<AddBarcodeWrapper />}
+          />
+
+          <Route
             path="/configurations/barcode/:barcodeId"
             element={<ViewBarcodeWrapper />}
           />
@@ -229,6 +253,8 @@ const PageRoutes = () => {
             path="/configurations/language/add"
             element={<AddLanguageWrapper />}
           />
+
+          <Route path="/configurations/location" element={<Locations />} />
 
           <Route path="/configurations/asr" element={<ASRListingWrapper />} />
           <Route path="/configurations/asr/add" element={<AddASRWrapper />} />

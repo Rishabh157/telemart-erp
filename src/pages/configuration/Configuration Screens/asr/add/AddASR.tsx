@@ -7,6 +7,7 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "./AddASRWrapper";
+import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -87,34 +88,43 @@ const AddASR = ({ formikProps }: Props) => {
                           <div className="grid grid-cols-3 gap-4 gap-y-5">
                             {/* Product Name */}
                             {/* <div className="flex-1"> */}
-                              <ATMTextField
-                                name={`asr_details[${asrIndex}].product_name`}
-                                value={product_name}
-                                label="Product Name"
-                                placeholder="Product Name"
-                                onChange={(e) =>
-                                  setFieldValue(
-                                    `asr_details[${asrIndex}].product_name`,
-                                    e.target.value
-                                  )
-                                }
-                              />
+                            <ATMSelect
+                              name={`asr_details[${asrIndex}].product_name`}
+                              value={product_name}
+                              label="Product Name"
+                              options={[
+                                {
+                                  label: "Group 1",
+                                  value: "grp1",
+                                },
+                                {
+                                  label: "Group 2",
+                                  value: "grp2",
+                                },
+                              ]}
+                              onChange={(e) =>
+                                setFieldValue(
+                                  `asr_details[${asrIndex}].product_name`,
+                                  e.target.value
+                                )
+                              }
+                            />
                             {/* </div> */}
 
                             {/* Quantity */}
                             {/* <div className="flex-1"> */}
-                              <ATMTextField
-                                name={`asr_details[${asrIndex}].quantity`}
-                                value={quantity}
-                                label="Quantity"
-                                placeholder="Quantity"
-                                onChange={(e) =>
-                                  setFieldValue(
-                                    `asr_details[${asrIndex}].quantity`,
-                                    e.target.value
-                                  )
-                                }
-                              />
+                            <ATMTextField
+                              name={`asr_details[${asrIndex}].quantity`}
+                              value={quantity}
+                              label="Quantity"
+                              placeholder="Quantity"
+                              onChange={(e) =>
+                                setFieldValue(
+                                  `asr_details[${asrIndex}].quantity`,
+                                  e.target.value
+                                )
+                              }
+                            />
                             {/* </div> */}
                           </div>
                         </div>
@@ -128,8 +138,8 @@ const AddASR = ({ formikProps }: Props) => {
                       type="button"
                       onClick={() =>
                         push({
-                            product_name: "",
-                            quantity: "",
+                          product_name: "",
+                          quantity: "",
                         })
                       }
                       className="bg-primary-main px-3 py-1 text-white rounded"

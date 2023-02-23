@@ -126,7 +126,7 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
                                   )
                                 }
                                 options={dropdownOptions.productOptions}
-                                label="Product Name"
+                                label="Product Group"
                               />
                             </div>
 

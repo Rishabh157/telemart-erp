@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 // import {  useSelector } from "react-redux";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { BarcodeListResponse } from "src/models";
+import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 // import {
 //   setIsTableLoading,
 //   setItems,
@@ -66,14 +66,14 @@ const BarcodeListingWrapper = () => {
 
   return (
     <>
-      <SideNavLayout>
+      <ConfigurationLayout>
         <BarcodeListing
           rows={rows}
           selectedBarcodes={selectedBarcodes}
           onBarcodeSelect={onBarcodeSelect}
           onBarcodeClick={(barcode:BarcodeListResponse) => navigate(`${barcode._id}`)}
         />
-      </SideNavLayout>
+      </ConfigurationLayout>
     </>
   );
 };
