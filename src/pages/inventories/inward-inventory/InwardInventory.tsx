@@ -5,6 +5,7 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
+import MoveToCartonDrawer from "./MoveToCartonDrawer/MoveToCartonDrawer";
 
 type Props = {};
 
@@ -32,6 +33,9 @@ const packagingOptions = [
 const InwardInventory = (props: Props) => {
   const [packaging, setPackaging] = React.useState("");
   const [barcode, setBarcode] = React.useState("");
+  const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] =
+    React.useState(false);
+
   return (
     <div className="p-2">
       <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -41,7 +45,9 @@ const InwardInventory = (props: Props) => {
         <ATMPageHeading> Inventories </ATMPageHeading>
         <button
           type="button"
-          onClick={() => {}}
+          onClick={() => {
+            setIsOpenMoveToCartonDrawer(true);
+          }}
           className="bg-primary-main text-white rounded py-1 px-3"
         >
           + Move to Carton
@@ -86,7 +92,6 @@ const InwardInventory = (props: Props) => {
                       </div>
                       <div> 123456789 </div>
                     </div>
-                   
                   </div>
 
                   <div className="text-primary-main font-medium grow flex items-end">
@@ -97,6 +102,12 @@ const InwardInventory = (props: Props) => {
             })}
         </div>
       </div>
+
+      {isOpenMoveToCartonDrawer && (
+        <MoveToCartonDrawer
+          onClose={() => setIsOpenMoveToCartonDrawer(false)}
+        />
+      )}
     </div>
   );
 };
