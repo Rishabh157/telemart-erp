@@ -4,15 +4,18 @@ import { IoNotifications } from "react-icons/io5";
 import UserProfileCard from "../UserProfileCard/UserProfileCard";
 import NotificationCard from "./NotificationCard/NotificationCard";
 import { useGetAllCompaniesQuery } from "src/services/CompanyServices";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 
 interface Props {}
 
 const Header = (props: Props) => {
   const [isShowProfileCard, setIsShowProfileCard] = useState(false);
   const [isShowNotification, setIsShowNotification] = useState(false);
+  const { userData } = useSelector((state: RootState) => state?.auth);
   const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
     useState(true);
-  const [company, setCompany] = useState("10");
+  const [company, setCompany] = useState(userData?.companyId);
   const { data } = useGetAllCompaniesQuery("");
 
   return (
@@ -34,7 +37,7 @@ const Header = (props: Props) => {
               <em>Select Company</em>
             </MenuItem>
             {data?.data?.map((ele: any) => {
-              return <MenuItem value={"10"}>{ele?.companyName}</MenuItem>;
+              return <MenuItem value={ele?._id}>{ele?.companyName}</MenuItem>;
             })}
           </Select>
         </FormControl>

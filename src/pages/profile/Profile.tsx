@@ -3,20 +3,16 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { Tabs } from "../outwardRequest/list/OutwardRequestListingWrapper";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { useChangePasswordMutation } from "src/services/UserServices";
-import { useDispatch, useSelector } from "react-redux";
-import { setAccessToken, setRefreshToken } from "src/redux/slices/authSlice";
+import { useSelector } from "react-redux";
 
 const Profile = ({ tabs }: { tabs: Tabs[] }) => {
-  const dispatch = useDispatch;
   const { userData } = useSelector((state: any) => state.authSlice);
-  console.log(userData);
   const [activeTab, setActiveTab] = useState("My Profile");
   const [currentPass, setCurrentPass] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [errorInitiate, setErrorInitiate] = useState(false);
   const [apiError, setApiError] = useState("");
   const [changePassWord, changePasswordInfo] = useChangePasswordMutation();
-  console.log(userData);
   const handleClick = () => {
     if (currentPass && newPassword) {
       changePassWord({
@@ -25,20 +21,15 @@ const Profile = ({ tabs }: { tabs: Tabs[] }) => {
         userId: userData.userId,
       })
         .then((res) => {
-          console.log("data" in res);
           if ("data" in res) {
             if (res?.data?.status) {
-              console.log(res);
-
               localStorage.setItem("authToken", res?.data?.token);
               localStorage.setItem("refreshToken", res?.data?.refreshToken);
               setApiError("");
             } else {
-              console.log("error is", res?.data?.message);
               setApiError(res?.data?.message);
             }
           } else {
-            console.log(res.error, "error");
             setApiError("Something went wrong");
           }
         })

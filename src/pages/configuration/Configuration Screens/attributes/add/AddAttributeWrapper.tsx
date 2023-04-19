@@ -1,32 +1,54 @@
 import React from "react";
 import { Formik } from "formik";
-import {  object, string } from "yup";
+import { object, string } from "yup";
 import AddAttribute from "./AddAttribute";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
+import { useAddAttributesMutation } from "src/services/AttributeService";
+import { showToast } from "src/utils";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 
 type Props = {};
 
 export type FormInitialValues = {
-  attributeType: string;
   attributeName: string;
 };
 
 const AddAttributeWrapper = (props: Props) => {
   // Form Initial Values
+  const navigate = useNavigate();
+  const [addAttribute] = useAddAttributesMutation();
+  const { userData } = useSelector((state: RootState) => state?.auth);
+
   const initialValues: FormInitialValues = {
-    attributeType: "",
     attributeName: "",
   };
 
   // Form Validation Schema
   const validationSchema = object({
-    attributeType: string().required("Attribute Type is required"),
     attributeName: string().required("Attribute Name is required"),
   });
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    console.log("onSubmitHandler", values);
+    setTimeout(() => {
+      addAttribute({
+        attributeName: values.attributeName,
+        companyId: userData?.companyId || "",
+      }).then((res) => {
+        if ("data" in res) {
+          if (res?.data?.status) {
+            showToast("success", "Attribute added successfully!");
+            navigate("/configurations/attributes");
+          } else {
+            showToast("error", res?.data?.message);
+          }
+        } else {
+          showToast("error", "Something went wrong");
+        }
+      });
+    }, 1000);
   };
   return (
     <ConfigurationLayout>
@@ -36,7 +58,7 @@ const AddAttributeWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <AddAttribute formikProps={formikProps}  />;
+          return <AddAttribute formikProps={formikProps} />;
         }}
       </Formik>
     </ConfigurationLayout>

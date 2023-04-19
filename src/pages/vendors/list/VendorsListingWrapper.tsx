@@ -10,7 +10,10 @@ import {
   setTotalItems,
 } from "src/redux/slices/vendorSlice";
 import { AppDispatch, RootState } from "src/redux/store";
-import { useGetVendorsQuery } from "src/services/VendorServices";
+import {
+  useGetPaginationVendorsQuery,
+  useGetVendorsQuery,
+} from "src/services/VendorServices";
 import VendorsListing from "./VendorsListing";
 
 const columns: columnTypes[] = [
@@ -34,17 +37,13 @@ const columns: columnTypes[] = [
     field: "district",
     headerName: "District",
     flex: "flex-[1_1_0%]",
-    renderCell: (row: VendorsListResponse) => (
-      <span > {row.district} </span>
-    ),
+    renderCell: (row: VendorsListResponse) => <span> {row.district} </span>,
   },
   {
     field: "state",
     headerName: "State",
     flex: "flex-[1_1_0%]",
-    renderCell: (row: VendorsListResponse) => (
-      <span > {row.state} </span>
-    ),
+    renderCell: (row: VendorsListResponse) => <span> {row.state} </span>,
   },
   {
     field: "actions",
@@ -67,8 +66,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "1"
-
+    _id: "1",
   },
 
   {
@@ -77,8 +75,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "2"
-
+    _id: "2",
   },
   {
     vendorName: "Drink Stop",
@@ -86,8 +83,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "3"
-
+    _id: "3",
   },
 
   {
@@ -96,8 +92,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "4"
-
+    _id: "4",
   },
 
   {
@@ -106,8 +101,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "5"
-
+    _id: "5",
   },
   {
     vendorName: "Drink Stop",
@@ -115,8 +109,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "6"
-
+    _id: "6",
   },
   {
     vendorName: "Drink Stop",
@@ -124,8 +117,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "7"
-
+    _id: "7",
   },
 
   {
@@ -134,8 +126,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "8"
-
+    _id: "8",
   },
   {
     vendorName: "Drink Stop",
@@ -143,8 +134,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "9"
-
+    _id: "9",
   },
 
   {
@@ -153,8 +143,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "10"
-
+    _id: "10",
   },
   {
     vendorName: "Drink Stop",
@@ -162,8 +151,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "11"
-
+    _id: "11",
   },
 
   {
@@ -172,8 +160,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "12"
-
+    _id: "12",
   },
   {
     vendorName: "Drink Stop",
@@ -181,8 +168,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "13"
-
+    _id: "13",
   },
 
   {
@@ -191,8 +177,7 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "14"
-
+    _id: "14",
   },
   {
     vendorName: "Drink Stop",
@@ -200,21 +185,19 @@ const rows = [
     state: "M.P.",
     mobile: "1234456",
     district: "Indore",
-    _id: "15"
-
+    _id: "15",
   },
 ];
 
 const VendorsListingWrapper = () => {
   const vendorState: any = useSelector((state: RootState) => state.vendor);
-
-  const { page, rowsPerPage } = vendorState;
+  const { page, rowsPerPage, searchValue } = vendorState;
 
   const dispatch = useDispatch<AppDispatch>();
-  
-  const { data, isFetching, isLoading } = useGetVendorsQuery({
+
+  const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
     limit: rowsPerPage,
-    searchValue: "",
+    searchValue: searchValue,
     params: ["dealerName", "dealerCode", "mobile"],
     page: page,
     filterBy: [
@@ -246,9 +229,9 @@ const VendorsListingWrapper = () => {
   }, [isLoading, isFetching, data]);
 
   return (
-      <SideNavLayout>
-        <VendorsListing columns={columns} rows={rows} />
-      </SideNavLayout>
+    <SideNavLayout>
+      <VendorsListing columns={columns} rows={rows} />
+    </SideNavLayout>
   );
 };
 
