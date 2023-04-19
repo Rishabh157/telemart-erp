@@ -1,14 +1,17 @@
-import React from 'react'
+import React from "react";
 import { FormikProps } from "formik";
 import { FormInitialValues } from "../../AddVendorWrapper";
-import StepAddBankDetails from './StepAddBankDetails';
-import { Field } from 'src/models/FormField/FormField.model';
+import StepAddBankDetails from "./StepAddBankDetails";
+import { Field } from "src/models/FormField/FormField.model";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
 };
 
-const formFields: { sectionName: string; fields: Field<"accountTypeOptions">[] }[] = [
+const formFields: {
+  sectionName: string;
+  fields: Field<"accountTypeOptions">[];
+}[] = [
   {
     sectionName: "Bank Information",
     fields: [
@@ -54,22 +57,25 @@ const formFields: { sectionName: string; fields: Field<"accountTypeOptions">[] }
   },
 ];
 
-const accountTypeOptions=   [
-  { label: "Savings", value: "SAVINGS" },
+const accountTypeOptions = [
+  { label: "Saving", value: "SAVING" },
   { label: "Current", value: "CURRENT" },
-]
+];
 
 const StepAddBankDetailsWrapper = ({ formikProps }: Props) => {
-  
   const dropdownOptions = {
     accountTypeOptions,
   };
 
   return (
     <>
-    <StepAddBankDetails formikProps={formikProps} formFields= {formFields} dropdownOptions={dropdownOptions}/>
+      <StepAddBankDetails
+        formikProps={formikProps}
+        formFields={formFields}
+        dropdownOptions={dropdownOptions}
+      />
     </>
-  )
-}
+  );
+};
 
-export default StepAddBankDetailsWrapper
+export default StepAddBankDetailsWrapper;

@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Formik, FormikProps } from "formik";
 import { array, object, string, number } from "yup";
-import AddCompany from "./AddCompany";
+import EditCompany from "./EditCompany";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-import StepAddCompanyDetailsWrapper from "./FormSteps/StepAddCompanyDetails/StepAddCompanyDetailsWrapper";
-import StepAddBankDetailsWrapper from "./FormSteps/StepAddBankDetails/StepAddBankDetailsWrapper";
-import { useAddCompanyMutation } from "src/services/CompanyServices";
-import { useNavigate } from "react-router-dom";
+import StepEditCompanyDetailsWrapper from "./FormSteps/StepEditCompanyDetails/StepEditCompanyDetailsWrapper";
+import StepEditBankDetailsWrapper from "./FormSteps/StepEditBankDetails/StepEditBankDetailsWrapper";
+// import { useEditCompanyMutation } from "src/services/CompanyServices";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useGetCompanyByIdQuery,
+  useUpdateCompanyMutation,
+} from "src/services/CompanyServices";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedCompany } from "src/redux/slices/companySlice";
+import { RootState } from "src/redux/store";
 import { showToast } from "src/utils";
 
 // TYPE-  Form Intial Values
@@ -23,6 +30,7 @@ export type FormInitialValues = {
     accountNumber: number;
     ifscNumber: string;
     accountType: string;
+    _id: string;
   }[];
 };
 
@@ -30,7 +38,7 @@ export type FormInitialValues = {
 const steps = [
   {
     label: "Company Details",
-    component: StepAddCompanyDetailsWrapper,
+    component: StepEditCompanyDetailsWrapper,
     validationSchema: object({
       companyName: string().required("Company name is required"),
       websiteUrl: string().required("Website url is required"),
@@ -41,7 +49,7 @@ const steps = [
   },
   {
     label: "Bank Details",
-    component: StepAddBankDetailsWrapper,
+    component: StepEditBankDetailsWrapper,
     validationSchema: object({
       bankDetails: array().of(
         object().shape({
@@ -60,10 +68,18 @@ const steps = [
 ];
 
 // Page Heading
-const pageHeading = "Add New Company";
+const pageHeading = "Edit Company";
 
-const AddCompanyWrapper = () => {
+const EditCompanyWrapper = () => {
+  const params = useParams();
+  const Id = params.id;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { selectedCompany }: any = useSelector(
+    (state: RootState) => state.company
+  );
+  const { data, isLoading } = useGetCompanyByIdQuery(params.id);
+  const [update] = useUpdateCompanyMutation();
   // Breadcrumbs
   const breadcrumbs = [
     {
@@ -74,34 +90,24 @@ const AddCompanyWrapper = () => {
       path: "/configurations/company",
     },
     {
-      label: "Add Company",
+      label: "Edit Company",
       onClick: () => {
-        console.log("add-company");
+        console.log("edit-company");
       },
     },
   ];
 
   // States
-  const [company] = useAddCompanyMutation();
+  // const [company, companyInfo] = useEditCompanyMutation();
   const [activeStep, setActiveStep] = React.useState(0);
-
   // From Initial Values
   const initialValues: FormInitialValues = {
-    companyName: "",
-    websiteUrl: "",
-    gstNo: "",
-    address: "",
-    phoneNo: "",
-    bankDetails: [
-      {
-        bankName: "",
-        branchName: "",
-        accountHolderName: "",
-        accountNumber: 0,
-        ifscNumber: "",
-        accountType: "",
-      },
-    ],
+    companyName: selectedCompany?.companyName,
+    websiteUrl: selectedCompany?.websiteUrl,
+    gstNo: selectedCompany?.gstNo,
+    address: selectedCompany?.address,
+    phoneNo: selectedCompany?.phoneNo,
+    bankDetails: selectedCompany?.bankDetails,
   };
 
   // Form validation schema based on the active step
@@ -114,17 +120,24 @@ const AddCompanyWrapper = () => {
   const onSubmitHandler = (values: FormInitialValues) => {
     if (activeStep === steps.length - 1) {
       setTimeout(() => {
-        company({
-          companyName: values.companyName,
-          websiteUrl: values.websiteUrl,
-          gstNo: values.gstNo,
-          address: values.address,
-          phoneNo: values.phoneNo,
-          bankDetails: values.bankDetails,
+        const bankDetail = values.bankDetails.map((ele) => {
+          const { _id, ...rest } = ele; // use object destructuring to remove the _id property
+          return rest; // return the new object without the _id property
+        });
+        update({
+          id: Id || "",
+          body: {
+            companyName: values.companyName,
+            websiteUrl: values.websiteUrl,
+            gstNo: values.gstNo,
+            address: values.address,
+            phoneNo: values.phoneNo,
+            bankDetails: bankDetail,
+          },
         }).then((res) => {
           if ("data" in res) {
             if (res?.data?.status) {
-              showToast("success", "Company added successfully!");
+              showToast("success", "Company updated successfully!");
             } else {
               showToast("error", res?.data?.message);
             }
@@ -139,16 +152,21 @@ const AddCompanyWrapper = () => {
     }
   };
 
+  useEffect(() => {
+    dispatch(setSelectedCompany(data?.data));
+  }, [dispatch, data, isLoading]);
+
   return (
     <ConfigurationLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={getValidationSchema(activeStep)}
         onSubmit={onSubmitHandler}
       >
         {(formikProps: FormikProps<FormInitialValues>) => (
           <Form className="">
-            <AddCompany
+            <EditCompany
               formikProps={formikProps}
               steps={steps}
               activeStep={activeStep}
@@ -163,4 +181,4 @@ const AddCompanyWrapper = () => {
   );
 };
 
-export default AddCompanyWrapper;
+export default EditCompanyWrapper;

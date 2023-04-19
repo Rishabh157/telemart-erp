@@ -1,98 +1,99 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AddCompany, UpdateCompany } from 'src/models';
-import { PaginationType } from 'src/models/common/paginationType';
-import { BASE_URL } from "src/utils/constants/index";
+import { AddCompany, UpdateCompany } from "src/models";
+import { PaginationType } from "src/models/common/paginationType";
+import apiSlice from "./ApiSlice";
 
-const authToken = localStorage.getItem('authToken') || ""
-export const companyApi = createApi({
-    reducerPath: "companyApi",
-    tagTypes: ['company'],
-    baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/company` }),
-    endpoints: (builder) => ({
+export const companyApi = apiSlice.injectEndpoints({
+  endpoints: (builder) => ({
+    //***** GET *****/
+    getCompanies: builder.query({
+      providesTags: ["company"],
+      query: (body: PaginationType) => ({
+        url: "/company",
 
-        //***** GET *****/
-        getCompanies: builder.query({
-            providesTags: ['company'],
-            query: (body: PaginationType) => ({
-                url: "",
-                headers: {
-                    'x-access-token': authToken
-                },
-                params: {
-                    _page: body.page,
-                    _limit: body.limit
-                },
-                method: "GET",
-                // body,
-            })
-        }),
+        // params: {
+        //   page: body.page,
+        //   limit: body.limit,
+        //   search: body.searchValue,
+        // },
+        method: "POST",
+        body,
+      }),
+    }),
 
-        //***** ADD *****/
-        addCompany: builder.mutation({
-            invalidatesTags: ['company'],
-            query: (body: AddCompany) => ({
-                url: "",
-                method: "POST",
-                headers: { 'x-access-token': authToken },
-                body,
-            })
-        }),
+    //***** GET *****/
+    getAllCompanies: builder.query({
+      providesTags: ["company"],
+      query: () => ({
+        url: "/company",
 
-        //***** Update *****/
-        updateCompany: builder.mutation({
-            invalidatesTags: ['company'],
-            query: ({ body, id }: UpdateCompany) => ({
-                url: `/${id}`,
-                headers: {
-                    "x-access-token": authToken,
-                },
-                method: "PUT",
-                body,
-            }),
-        }),
+        method: "GET",
+        // body,
+      }),
+    }),
 
-        // **** GET BY ID
-        getCompanyById: builder.query({
-            providesTags: ['company'],
-            query: (id) => ({
-                url: `/${id}`,
-                headers: {
-                    "x-access-token": authToken,
-                },
-                method: "GET",
-            }),
-        }),
+    //***** ADD *****/
+    addCompany: builder.mutation({
+      invalidatesTags: ["company"],
+      query: (body: AddCompany) => ({
+        url: "/company/add",
+        method: "POST",
 
-        //**** Export
-        exportCompanyData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: "",
-                headers: {
-                    'x-access-token': authToken
-                },
-                params: {
-                    _page: body.page,
-                    _limit: body.limit
-                },
-                method: "GET",
-                // body,
-            })
-        }),
+        body,
+      }),
+    }),
 
-        // **** Delete
-        deleteCompany: builder.mutation({
-            invalidatesTags: ['company'],
-            query: (id) => ({
-                url: `/${id}`,
-                headers: {
-                    'x-access-token': authToken
-                },
+    //***** Update *****/
+    updateCompany: builder.mutation({
+      invalidatesTags: ["company"],
+      query: ({ body, id }: UpdateCompany) => ({
+        url: `/company/${id}`,
 
-                method: "DELETE",
-            })
-        })
+        method: "PUT",
+        body,
+      }),
+    }),
 
+    // **** GET BY ID
+    getCompanyById: builder.query({
+      providesTags: ["company"],
+      query: (id) => ({
+        url: `/company/${id}`,
 
-    })
-})
-export const { useGetCompaniesQuery, useAddCompanyMutation, useUpdateCompanyMutation, useGetCompanyByIdQuery, useExportCompanyDataMutation, useDeleteCompanyMutation } = companyApi
+        method: "GET",
+      }),
+    }),
+
+    //**** Export
+    exportCompanyData: builder.mutation({
+      query: (body: PaginationType) => ({
+        url: "",
+
+        params: {
+          _page: body.page,
+          _limit: body.limit,
+        },
+        method: "GET",
+        // body,
+      }),
+    }),
+
+    // **** Delete
+    deleteCompany: builder.mutation({
+      invalidatesTags: ["company"],
+      query: (id) => ({
+        url: `/company/${id}`,
+
+        method: "DELETE",
+      }),
+    }),
+  }),
+});
+export const {
+  useGetCompaniesQuery,
+  useAddCompanyMutation,
+  useUpdateCompanyMutation,
+  useGetCompanyByIdQuery,
+  useExportCompanyDataMutation,
+  useDeleteCompanyMutation,
+  useGetAllCompaniesQuery,
+} = companyApi;

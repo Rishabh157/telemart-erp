@@ -1,12 +1,15 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import ATMBreadCrumbs, {
+  BreadcrumbType,
+} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/configurationCompanySlice";
+import { setSearchValue } from "src/redux/slices/companySlice";
+import { setRowsPerPage, setPage } from "src/redux/slices/companySlice";
 import { AppDispatch, RootState } from "src/redux/store";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -17,13 +20,13 @@ type Props = {
 
 const ConfigurationCompanyListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const ConfigurationCompanyState: any = useSelector((state: RootState) => state.configurationCompany);
+  const company: any = useSelector((state: RootState) => state.company);
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-  const [selectedRows, setSelectedRows] = useState([])
+  const [selectedRows, setSelectedRows] = useState([]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { page, rowsPerPage } = ConfigurationCompanyState;
+  const { page, rowsPerPage, searchValue } = company;
 
   const breadcrumbs: BreadcrumbType[] = [
     {
@@ -44,9 +47,10 @@ const ConfigurationCompanyListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> Company </ATMPageHeading>
-        <button 
-        onClick={()=> navigate('/configurations/company/add')}
-        className="bg-primary-main text-white rounded py-1 px-3">
+        <button
+          onClick={() => navigate("/configurations/company/add")}
+          className="bg-primary-main text-white rounded py-1 px-3"
+        >
           {" "}
           + Add Company{" "}
         </button>
@@ -55,22 +59,32 @@ const ConfigurationCompanyListing = ({ columns, rows }: Props) => {
       <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
+          searchValue={searchValue}
           page={page}
           rowCount={rows.length}
           rowsPerPage={rowsPerPage}
           rows={rows}
-          onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
+          onRowsPerPageChange={(newValue) => {
+            dispatch(setRowsPerPage(newValue));
+          }}
+          onSearch={(newValue) => {
+            console.log(newValue, "hhhhh");
+            dispatch(setSearchValue(newValue));
+          }}
           isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
         />
 
         {/* Table */}
-        <div className="grow overflow-auto  ">
-        <ATMTable columns={columns} rows={rows}
-           isCheckbox={true}
-           selectedRows={selectedRows}
-           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
+        <div className="grow overflow-auto h-full ">
+          <ATMTable
+            columns={columns}
+            rows={rows}
+            isCheckbox={true}
+            selectedRows={selectedRows}
+            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            extraClasses="h-full overflow-auto"
+          />
         </div>
 
         {/* Pagination */}
