@@ -72,6 +72,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import ProfileWrappper from "./pages/profile/ProfileWrapper";
 import EditCompanyWrapper from "./pages/configuration/Configuration Screens/configurationCompany/edit/EditCompanyWrapper";
+import EditAttributeWrapper from "./pages/configuration/Configuration Screens/attributes/edit/EditAttributeWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -157,6 +158,10 @@ const PageRoutes = () => {
           <Route
             path="/configurations/attributes/add"
             element={<AddAttributeWrapper />}
+          />
+          <Route
+            path="/configurations/attributes/:id"
+            element={<EditAttributeWrapper />}
           />
 
           <Route

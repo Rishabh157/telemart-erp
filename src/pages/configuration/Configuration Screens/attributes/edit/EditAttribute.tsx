@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddAttributeWrapper";
+import { FormInitialValues } from "./EditAttributeWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -18,11 +18,11 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/configurations/attributes",
   },
   {
-    label: "Add Attribute",
+    label: "Edit Attribute",
   },
 ];
 
-const AddAttribute = ({ formikProps }: Props) => {
+const EditAttribute = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -35,7 +35,7 @@ const AddAttribute = ({ formikProps }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Attribute </ATMPageHeading>
+          <ATMPageHeading> Edit Attribute </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -43,14 +43,14 @@ const AddAttribute = ({ formikProps }: Props) => {
             {/* Form Heading */}
             <div className="text-xl font-medium"> Attribute Details</div>
 
-            {/* BUTTON - Add Button */}
+            {/* BUTTON - Edit Button */}
             <div>
               <button
                 type="button"
                 onClick={() => formikProps.handleSubmit()}
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add Attribute
+                Update
               </button>
             </div>
           </div>
@@ -76,4 +76,4 @@ const AddAttribute = ({ formikProps }: Props) => {
   );
 };
 
-export default AddAttribute;
+export default EditAttribute;

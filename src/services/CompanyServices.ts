@@ -9,12 +9,6 @@ export const companyApi = apiSlice.injectEndpoints({
       providesTags: ["company"],
       query: (body: PaginationType) => ({
         url: "/company",
-
-        // params: {
-        //   page: body.page,
-        //   limit: body.limit,
-        //   search: body.searchValue,
-        // },
         method: "POST",
         body,
       }),
@@ -25,7 +19,6 @@ export const companyApi = apiSlice.injectEndpoints({
       providesTags: ["company"],
       query: () => ({
         url: "/company",
-
         method: "GET",
         // body,
       }),

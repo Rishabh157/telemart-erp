@@ -38,6 +38,7 @@ const LoginPage = () => {
                 email: res?.data?.data?.email,
                 mobile: res?.data?.data?.mobile,
                 userName: res?.data?.data?.userName,
+                companyId: res?.data?.data?.companyId,
               };
               dispatch(setAccessToken(res?.data?.data?.token));
               dispatch(setRefreshToken(res?.data?.data?.refreshToken));

@@ -15,6 +15,16 @@ export const vendorApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    //***** GET PAGINATION DATA *****/
+    getPaginationVendors: builder.query({
+      providesTags: ["vendor"],
+      query: (body: PaginationType) => ({
+        url: "/vendor",
+        method: "POST",
+        body,
+      }),
+    }),
+
     //***** ADD *****/
     addVendor: builder.mutation({
       invalidatesTags: ["vendor"],
@@ -53,4 +63,5 @@ export const {
   useAddVendorMutation,
   useUpdateVendorMutation,
   useGetVendorByIdQuery,
+  useGetPaginationVendorsQuery,
 } = vendorApi;
