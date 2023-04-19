@@ -3,37 +3,41 @@ import { FormControl, MenuItem, Select } from "@mui/material";
 import { IoNotifications } from "react-icons/io5";
 import UserProfileCard from "../UserProfileCard/UserProfileCard";
 import NotificationCard from "./NotificationCard/NotificationCard";
+import { useGetAllCompaniesQuery } from "src/services/CompanyServices";
 
 interface Props {}
 
 const Header = (props: Props) => {
   const [isShowProfileCard, setIsShowProfileCard] = useState(false);
   const [isShowNotification, setIsShowNotification] = useState(false);
-  const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] = useState(true);
-  const [company , setCompany] = useState("10");
+  const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
+    useState(true);
+  const [company, setCompany] = useState("10");
+  const { data } = useGetAllCompaniesQuery("");
 
   return (
     <div className="grid grid-cols-2 w-full h-full shadow-lg border ">
       {/* Right Section */}
       <div className="flex gap-4 col-start-2 justify-end items-center px-4 ">
-
         {/*  */}
-      <FormControl sx={{ width: 150 }}>
-        <Select
-          value={company}
-          onChange={(e)=>{setCompany(e.target.value)}}
-          displayEmpty
-          inputProps={{ 'aria-label': 'Without label' }}
-          size='small'
-        >
-          <MenuItem value="">
-            <em>Select Company</em>
-          </MenuItem>
-          <MenuItem value={"10"}>Comapany 1</MenuItem>
-          <MenuItem value={"20"}>Comapany 2</MenuItem>
-          <MenuItem value={"30"}>Comapany 3</MenuItem>
-        </Select>
-      </FormControl>
+        <FormControl sx={{ width: 150 }}>
+          <Select
+            value={company}
+            onChange={(e) => {
+              setCompany(e.target.value);
+            }}
+            displayEmpty
+            inputProps={{ "aria-label": "Without label" }}
+            size="small"
+          >
+            <MenuItem value="">
+              <em>Select Company</em>
+            </MenuItem>
+            {data?.data?.map((ele: any) => {
+              return <MenuItem value={"10"}>{ele?.companyName}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
 
         <button
           onClick={() => {

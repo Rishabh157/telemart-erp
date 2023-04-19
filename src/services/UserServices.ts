@@ -1,68 +1,110 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AddUser, UpdateUser } from 'src/models';
-import { PaginationType } from 'src/models/common/paginationType';
-import { BASE_URL } from "src/utils/constants/index";
+import { AddUser, UpdateUser } from "src/models";
+import { PaginationType } from "src/models/common/paginationType";
+import apiSlice from "./ApiSlice";
 
-const authToken = localStorage.getItem('authToken') || ""
-export const userApi = createApi({
-    reducerPath: "userApi",
-    tagTypes: ['user'],
-    baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/user` }),
-    endpoints: (builder) => ({
+export const userApi = apiSlice.injectEndpoints({
+  endpoints: (builder) => ({
+    //***** GET *****/
+    getUsers: builder.query({
+      providesTags: ["user"],
+      query: (body: PaginationType) => ({
+        url: "",
+        params: {
+          _page: body.page,
+          _limit: body.limit,
+        },
+        method: "GET",
+        body,
+      }),
+    }),
+    //***** LOGIN *****/
+    changePassword: builder.mutation({
+      invalidatesTags: ["user"],
+      query: (body: {
+        currentPassword: string;
+        newPassword: string;
+        userId: string;
+      }) => ({
+        url: "/admin/change-password",
+        method: "PUT",
+        body,
+      }),
+    }),
+    //***** LOGIN *****/
+    login: builder.mutation({
+      invalidatesTags: ["user"],
+      query: (body: { userName: string; password: string }) => ({
+        url: "/admin/login",
+        method: "POST",
+        body,
+      }),
+    }),
+    //***** LOG OUT *****/
+    refreshToken: builder.mutation({
+      invalidatesTags: ["user"],
+      query: (body: { refreshToken: string }) => ({
+        url: "/admin/refresh",
+        method: "POST",
+        body,
+      }),
+    }),
 
-        //***** GET *****/
-        getUsers: builder.query({
-            providesTags: ['user'],
-            query: (body: PaginationType) => ({
-                url: "",
-                headers: {
-                    'x-access-token': authToken
-                },
-                params: {
-                    _page: body.page,
-                    _limit: body.limit
-                },
-                method: "GET",
-                // body,
-            })
-        }),
+    //***** LOG OUT *****/
+    logout: builder.mutation({
+      invalidatesTags: ["user"],
+      query: () => ({
+        url: "/admin/logout",
+        method: "POST",
+      }),
+    }),
 
-        //***** ADD *****/
-        addUser: builder.mutation({
-            invalidatesTags: ['user'],
-            query: (body: AddUser) => ({
-                url: "/register",
-                method: "POST",
-                headers: { 'x-access-token': authToken },
-                body,
-            })
-        }),
+    //***** LOG OUT FROM ALL DEVICES *****/
+    logoutFromAll: builder.mutation({
+      invalidatesTags: ["user"],
+      query: () => ({
+        url: "/admin/logout",
+        method: "POST",
+      }),
+    }),
 
-        //***** Update *****/
-        updateUser: builder.mutation({
-            invalidatesTags: ['user'],
-            query: ({ body, id }: UpdateUser) => ({
-                url: `/${id}`,
-                headers: {
-                    "x-access-token": authToken,
-                },
-                method: "PUT",
-                body,
-            }),
-        }),
+    //***** ADD *****/
+    addUser: builder.mutation({
+      invalidatesTags: ["user"],
+      query: (body: AddUser) => ({
+        url: "/register",
+        method: "POST",
+        body,
+      }),
+    }),
 
-        // **** GET BY ID
-        getUserById: builder.query({
-            providesTags: ['user'],
-            query: (id) => ({
-                url: `/${id}`,
-                headers: {
-                    "x-access-token": authToken,
-                },
-                method: "GET",
-            }),
-        }),
+    //***** Update *****/
+    updateUser: builder.mutation({
+      invalidatesTags: ["user"],
+      query: ({ body, id }: UpdateUser) => ({
+        url: `/${id}`,
+        method: "PUT",
+        body,
+      }),
+    }),
 
-    })
-})
-export const { useGetUsersQuery, useAddUserMutation, useUpdateUserMutation, useGetUserByIdQuery, } = userApi
+    // **** GET BY ID
+    getUserById: builder.query({
+      providesTags: ["user"],
+      query: (id) => ({
+        url: `/${id}`,
+        method: "GET",
+      }),
+    }),
+  }),
+});
+export const {
+  useGetUsersQuery,
+  useAddUserMutation,
+  useUpdateUserMutation,
+  useGetUserByIdQuery,
+  useLoginMutation,
+  useLogoutMutation,
+  useLogoutFromAllMutation,
+  useChangePasswordMutation,
+  useRefreshTokenMutation,
+} = userApi;

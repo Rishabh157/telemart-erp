@@ -2,7 +2,7 @@ import React from "react";
 import { FieldArray, FormikProps } from "formik";
 import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddCompanyWrapper";
+import { FormInitialValues } from "../../EditCompanyWrapper";
 import { MdDeleteOutline } from "react-icons/md";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
@@ -15,7 +15,7 @@ type Props = {
   dropdownOptions: { accountTypeOptions: SelectOption[] };
 };
 
-const StepAddBankDetails = ({
+const StepEditBankDetails = ({
   formikProps,
   formFields,
   dropdownOptions,
@@ -134,7 +134,7 @@ const StepAddBankDetails = ({
                 }
               )}
 
-              {/*BUTTON - Add New */}
+              {/*BUTTON - Edit New */}
               <div className="flex justify-end p-5">
                 <button
                   type="button"
@@ -161,4 +161,4 @@ const StepAddBankDetails = ({
   );
 };
 
-export default StepAddBankDetails;
+export default StepEditBankDetails;

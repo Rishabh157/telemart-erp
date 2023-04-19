@@ -1,7 +1,7 @@
 import React from "react";
 import { FormikProps } from "formik";
-import { FormInitialValues } from "../../AddCompanyWrapper";
-import StepAddBankDetails from "./StepAddBankDetails";
+import { FormInitialValues } from "../../EditCompanyWrapper";
+import StepEditBankDetails from "./StepEditBankDetails";
 import { Field } from "src/models/FormField/FormField.model";
 
 type Props = {
@@ -56,14 +56,14 @@ const accountTypeOptions = [
   { label: "Current", value: "CURRENT" },
 ];
 
-const StepAddBankDetailsWrapper = ({ formikProps }: Props) => {
+const StepEditBankDetailsWrapper = ({ formikProps }: Props) => {
   const dropdownOptions = {
     accountTypeOptions,
   };
 
   return (
     <>
-      <StepAddBankDetails
+      <StepEditBankDetails
         formikProps={formikProps}
         formFields={formFields}
         dropdownOptions={dropdownOptions}
@@ -72,4 +72,4 @@ const StepAddBankDetailsWrapper = ({ formikProps }: Props) => {
   );
 };
 
-export default StepAddBankDetailsWrapper;
+export default StepEditBankDetailsWrapper;

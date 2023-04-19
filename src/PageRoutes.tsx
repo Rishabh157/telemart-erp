@@ -62,14 +62,42 @@ import VendorGeneralInformationTabWrapper from "./pages/vendors/view/tabs/Vendor
 import VendorWarehouseTabWrapper from "./pages/vendors/view/tabs/VendorWarehouseTab/VendorWarehouseTabWrapper";
 import AddWarehouseWrapper from "./pages/warehouses/add/AddWarehouseWrapper";
 import WarehousesListingWrapper from "./pages/warehouses/list/WarehousesListingWrapper";
+import { useDispatch } from "react-redux";
+import {
+  setAccessToken,
+  setDeviceId,
+  setRefreshToken,
+  setUserData,
+} from "./redux/slices/authSlice";
+import { v4 as uuidv4 } from "uuid";
+import ProfileWrappper from "./pages/profile/ProfileWrapper";
+import EditCompanyWrapper from "./pages/configuration/Configuration Screens/configurationCompany/edit/EditCompanyWrapper";
 
 const PageRoutes = () => {
+  const deviceId = localStorage.getItem("device-id") || "";
+  if (deviceId === "") {
+    const uniqueId = uuidv4();
+    localStorage.setItem("device-id", uniqueId);
+  }
+
+  const dispatch = useDispatch();
+  const accessToken = localStorage.getItem("authToken");
+  const refreshToken = localStorage.getItem("refreshToken");
+  const userDataLs = localStorage.getItem("userData") || "{}";
+  const userData = JSON.parse(userDataLs);
+
+  dispatch(setAccessToken(accessToken));
+  dispatch(setRefreshToken(refreshToken));
+  dispatch(setDeviceId(deviceId));
+  dispatch(setUserData(userData));
+
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/dashboard" element={<DashboardWrappper />} />
+          <Route path="/profile" element={<ProfileWrappper />} />
           <Route path="/orders" element={<OrderListing />} />
           <Route path="/orders/add-order" element={<AddOrder />} />
           <Route path="/dealers" element={<DealersListingWrapper />} />
@@ -248,6 +276,10 @@ const PageRoutes = () => {
           <Route
             path="/configurations/company/add"
             element={<AddCompanyWrapper />}
+          />
+          <Route
+            path="/configurations/company/:id"
+            element={<EditCompanyWrapper />}
           />
           <Route
             path="/configurations/language/add"

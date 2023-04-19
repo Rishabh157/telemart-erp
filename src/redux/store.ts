@@ -1,7 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { companyApi, dealerApi, userApi, vendorApi } from "src/services";
-import { barcodeSlice, companySlice, dealerSlice, sideNavLayoutSlice, userSlice, vendorSlice } from "./slices";
+import { apiSlice } from "src/services";
+import {
+  barcodeSlice,
+  companySlice,
+  dealerSlice,
+  sideNavLayoutSlice,
+  userSlice,
+  vendorSlice,
+} from "./slices";
 import ASRSlice from "./slices/ASRSlice";
 import attributesGroupSlice from "./slices/attributesGroupSlice";
 import attributesSlice from "./slices/attributesSlice";
@@ -20,6 +27,8 @@ import PurchaseOrderSlice from "./slices/PurchaseOrderSlice";
 import saleOrderSlice from "./slices/saleOrderSlice";
 import schemeSlice from "./slices/schemeSlice";
 import warehouseSlice from "./slices/warehouseSlice";
+import authSlice from "./slices/authSlice";
+import { authMiddleware } from "src/utils";
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -31,53 +40,41 @@ import warehouseSlice from "./slices/warehouseSlice";
 // }
 
 const store = configureStore({
-    reducer: {
-        sideNavLayout: sideNavLayoutSlice,
-        dealer: dealerSlice,
-        vendor: vendorSlice,
-        user: userSlice,
-        company: companySlice,
-        warehouse: warehouseSlice,
-        inventory : inventorySlice,
-        outwardRequest : outwardRequestSlice,
-        saleOrder : saleOrderSlice,
-        attributesGroup : attributesGroupSlice,
-        productCategory : productCategorySlice,
-        cartonBox : cartonBoxSlice,
-        scheme : schemeSlice,
-        purchaseOrder : PurchaseOrderSlice,
-        grn : GRNSlice,
-        productSubCategory : productSubCategorySlice,
-        attributes : attributesSlice,
-        item : itemSlice,
-        language : languageSlice,
-        dealersCategory : dealersCategorySlice,
-        products : productSlice,
-        asr : ASRSlice,
-        configurationCompany : configurationCompanySlice,
-        barcode : barcodeSlice,
-        [dealerApi.reducerPath]: dealerApi.reducer,
-        [vendorApi.reducerPath]: vendorApi.reducer,
-        [userApi.reducerPath]: userApi.reducer,
-        [companyApi.reducerPath]: companyApi.reducer,
+  reducer: {
+    auth: authSlice,
+    sideNavLayout: sideNavLayoutSlice,
+    dealer: dealerSlice,
+    vendor: vendorSlice,
+    user: userSlice,
+    company: companySlice,
+    warehouse: warehouseSlice,
+    inventory: inventorySlice,
+    outwardRequest: outwardRequestSlice,
+    saleOrder: saleOrderSlice,
+    attributesGroup: attributesGroupSlice,
+    productCategory: productCategorySlice,
+    cartonBox: cartonBoxSlice,
+    scheme: schemeSlice,
+    purchaseOrder: PurchaseOrderSlice,
+    grn: GRNSlice,
+    productSubCategory: productSubCategorySlice,
+    attributes: attributesSlice,
+    item: itemSlice,
+    language: languageSlice,
+    dealersCategory: dealersCategorySlice,
+    products: productSlice,
+    asr: ASRSlice,
+    configurationCompany: configurationCompanySlice,
+    barcode: barcodeSlice,
+    [apiSlice.reducerPath]: apiSlice.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat([authMiddleware, apiSlice.middleware]),
+});
 
-
-
-    },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: false,
-        })
-            .concat([
-                // authMiddelware,
-                dealerApi.middleware,
-                vendorApi.middleware,
-                userApi.middleware,
-                companyApi.middleware,
-            ]),
-})
-
-setupListeners(store.dispatch)
+setupListeners(store.dispatch);
 export default store;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

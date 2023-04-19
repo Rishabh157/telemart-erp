@@ -1,35 +1,42 @@
 export type ConfigurationCompanyListResponse = {
-    company_name: string;
-    logo: string;
-    website_url: string;
-    address: string;
-    gst_no: string;
-    phone_no: string;
-    is_active: boolean;
-    is_deleted: boolean;
-    createdAt: string;
-    updatedAt: string;
-    _id: string;
-    __v: number;
-}
+  companyName: string;
+  websiteUrl: string;
+  address: string;
+  gstNo: string;
+  phoneNo: string;
+  isActive: boolean;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  __v: number;
+};
 
 export type AddConfigurationCompany = {
-    company_name: string;
-    logo: string;
-    website_url: string;
-    address: string;
-    gst_no: string;
-    phone_no: string;
-}
+  companyName: string;
+  websiteUrl: string;
+  gstNo: string;
+  address: string;
+  phoneNo: string;
+  bankDetails: [
+    {
+      bankName: string;
+      branchName: string;
+      accountHolderName: string;
+      accountNumber: number;
+      ifscNumber: string;
+      accountType: string;
+    }
+  ];
+};
 
 export type UpdateConfigurationCompany = {
-    body: {
-        company_name: string;
-        logo: string;
-        website_url: string;
-        address: string;
-        gst_no: string;
-        phone_no: string;
-    },
-    id: string;
-}
+  body: {
+    companyName: string;
+    websiteUrl: string;
+    address: string;
+    gstNo: string;
+    phoneNo: string;
+  };
+  id: string;
+};

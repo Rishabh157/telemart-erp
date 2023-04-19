@@ -1,14 +1,14 @@
 import React from "react";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddCompanyWrapper";
+import { FormInitialValues } from "../../EditCompanyWrapper";
 // import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
 };
 
-const StepAddCompanyDetails = ({ formikProps }: Props) => {
+const StepEditCompanyDetails = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -78,4 +78,4 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
   );
 };
 
-export default StepAddCompanyDetails;
+export default StepEditCompanyDetails;
