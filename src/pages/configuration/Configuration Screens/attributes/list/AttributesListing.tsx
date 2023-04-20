@@ -31,8 +31,7 @@ const AttributesListing = ({ columns, rows }: Props) => {
   );
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-  const { page, rowsPerPage, searchValue } = attributesState;
-
+  const { page, rowsPerPage, searchValue, totalItems } = attributesState;
   const breadcrumbs: BreadcrumbType[] = [
     {
       label: "Configuration",
@@ -92,7 +91,7 @@ const AttributesListing = ({ columns, rows }: Props) => {
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}

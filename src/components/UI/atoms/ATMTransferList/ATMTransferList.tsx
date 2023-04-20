@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import List from "@mui/material/List";
 import Card from "@mui/material/Card";
 import ListItem from "@mui/material/ListItem";
@@ -49,6 +49,10 @@ const ATMTransferList = ({
   const [left, setLeft] = React.useState(options);
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
+
+  useEffect(() => {
+    setLeft(options);
+  }, [options]);
 
   const handleToggle = (value: { label: string; value: string }) => () => {
     const currentIndex = checked.findIndex((ele) => ele.value === value.value);
