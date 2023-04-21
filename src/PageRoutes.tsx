@@ -74,6 +74,7 @@ import ProfileWrappper from "./pages/profile/ProfileWrapper";
 import EditCompanyWrapper from "./pages/configuration/Configuration Screens/configurationCompany/edit/EditCompanyWrapper";
 import EditAttributeWrapper from "./pages/configuration/Configuration Screens/attributes/edit/EditAttributeWrapper";
 import EditProductCategoryWrapper from "./pages/configuration/Configuration Screens/productCategory/edit/EditProductCategoryWrapper";
+import EditAttributeGroupWrapper from "./pages/configuration/Configuration Screens/attributesGroup/edit/EditAttributeGroupWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -183,6 +184,10 @@ const PageRoutes = () => {
           <Route
             path="/configurations/attributes-group/add"
             element={<AddAttributeGroupWrapper />}
+          />
+          <Route
+            path="/configurations/attributes-group/:id"
+            element={<EditAttributeGroupWrapper />}
           />
           <Route
             path="/configurations/product-category"

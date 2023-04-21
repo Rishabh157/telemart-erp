@@ -1,8 +1,8 @@
 export type AttributesListResponse = {
   attributeName: string;
   companyId: string;
-  is_active: boolean;
-  is_deleted: boolean;
+  isActive: boolean;
+  isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
   _id: string;

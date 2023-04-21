@@ -1,13 +1,18 @@
 import React, { useEffect } from "react";
 import { Formik } from "formik";
 import { array, object, string } from "yup";
-import AddAttributeGroup from "./AddAttributeGroup";
+import EditAttributeGroup from "./EditAttributeGroup";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-import { useAddAttributeGroupMutation } from "src/services/AttributeGroup";
+// import { useEditAttributeGroupMutation } from "src/services/AttributeGroup";
 import { showToast } from "src/utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
+import {
+  useGetattributeGroupByIdQuery,
+  useUpdateattributeGroupMutation,
+} from "src/services/AttributeGroup";
+import { setSelectedAttGroup } from "src/redux/slices/attributesGroupSlice";
 import { useGetAllAttributesQuery } from "src/services/AttributeService";
 import { setAllItems } from "src/redux/slices/attributesSlice";
 
@@ -18,17 +23,33 @@ export type FormInitialValues = {
   attributes: { label: string; value: string }[];
 };
 
-const AddAttributeGroupWrapper = (props: Props) => {
+const EditAttributeGroupWrapper = (props: Props) => {
+  const params = useParams();
+  const Id = params.id;
   const navigate = useNavigate();
-  // Form Initial Values
   const dispatch = useDispatch();
+  // Form Initial Values
+  const { selectedAttributeGroup }: any = useSelector(
+    (state: RootState) => state.attributesGroup
+  );
+  const { allItems }: any = useSelector((state: RootState) => state.attributes);
+  const { data, isLoading, isFetching } = useGetattributeGroupByIdQuery(Id);
+  const {
+    data: attributeData,
+    isLoading: attrLoading,
+    isFetching: attrIsFetching,
+  } = useGetAllAttributesQuery("");
+
   const { userData } = useSelector((state: RootState) => state?.auth);
-  const { allItems } = useSelector((state: RootState) => state?.attributes);
-  const { data, isLoading, isFetching } = useGetAllAttributesQuery("");
-  const [AddAttributeGroups] = useAddAttributeGroupMutation();
+  const [EditAttributeGroups] = useUpdateattributeGroupMutation();
+  const attributeOptions = selectedAttributeGroup?.attributes?.map(
+    (ele: any) => {
+      return { label: ele.label, value: ele.value };
+    }
+  );
   const initialValues: FormInitialValues = {
-    group_name: "",
-    attributes: [],
+    group_name: selectedAttributeGroup?.groupName,
+    attributes: attributeOptions || [],
   };
 
   // Form Validation Schema
@@ -47,14 +68,17 @@ const AddAttributeGroupWrapper = (props: Props) => {
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
     setTimeout(() => {
-      AddAttributeGroups({
-        groupName: values.group_name,
-        attributes: values.attributes,
-        companyId: userData?.companyId || "",
+      EditAttributeGroups({
+        body: {
+          groupName: values.group_name,
+          attributes: values.attributes,
+          companyId: userData?.companyId || "",
+        },
+        id: Id || "",
       }).then((res) => {
         if ("data" in res) {
           if (res?.data?.status) {
-            showToast("success", "Attribute group added successfully!");
+            showToast("success", "Updated successfully!");
             navigate("/configurations/attributes-group");
           } else {
             showToast("error", res?.data?.message);
@@ -67,18 +91,23 @@ const AddAttributeGroupWrapper = (props: Props) => {
   };
 
   useEffect(() => {
-    dispatch(setAllItems(data?.data));
+    dispatch(setSelectedAttGroup(data?.data));
   }, [dispatch, data, isLoading, isFetching]);
+
+  useEffect(() => {
+    dispatch(setAllItems(attributeData?.data));
+  }, [dispatch, attributeData, attrLoading, attrIsFetching]);
   return (
     <ConfigurationLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
           return (
-            <AddAttributeGroup formikProps={formikProps} allItems={allItems} />
+            <EditAttributeGroup formikProps={formikProps} allItems={allItems} />
           );
         }}
       </Formik>
@@ -86,4 +115,4 @@ const AddAttributeGroupWrapper = (props: Props) => {
   );
 };
 
-export default AddAttributeGroupWrapper;
+export default EditAttributeGroupWrapper;

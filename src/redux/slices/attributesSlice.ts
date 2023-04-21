@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { Slice, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { AttributesListResponse } from "src/models/Attrbutes.model";
 
 export interface AttributesSliceStateType {
   items: AttributesListResponse[] | [];
   selectedAttribute: AttributesListResponse | null;
+  allItems: AttributesListResponse[] | [];
   totalItems: number;
   isTableLoading: boolean;
   page: number;
@@ -16,6 +17,7 @@ export interface AttributesSliceStateType {
 
 const initialState: AttributesSliceStateType = {
   items: [],
+  allItems: [],
   selectedAttribute: null,
   totalItems: 0,
   isTableLoading: false,
@@ -26,7 +28,7 @@ const initialState: AttributesSliceStateType = {
   selectedId: "",
 };
 
-const attributesSlice: any = createSlice({
+const attributesSlice: Slice<AttributesSliceStateType> = createSlice({
   name: "attributes",
   initialState,
   reducers: {
@@ -62,6 +64,12 @@ const attributesSlice: any = createSlice({
     setSelectedId: (state, action: PayloadAction<string>) => {
       state.selectedId = action.payload;
     },
+    setAllItems: (
+      state,
+      action: PayloadAction<AttributesListResponse[] | []>
+    ) => {
+      state.allItems = action.payload;
+    },
     setSelectedAttribute: (
       state,
       action: PayloadAction<AttributesListResponse | null>
@@ -81,5 +89,6 @@ export const {
   setIsTableLoading,
   setSelectedId,
   setSelectedAttribute,
+  setAllItems,
 } = attributesSlice.actions;
 export default attributesSlice.reducer;
