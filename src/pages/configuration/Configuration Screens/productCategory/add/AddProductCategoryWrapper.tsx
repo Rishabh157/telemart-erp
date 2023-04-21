@@ -1,10 +1,10 @@
-import React from "react";
+import React,{useState} from "react";
 import {useNavigate} from "react-router-dom"
 import { Formik } from "formik";
 import { object, string } from "yup";
 import AddProductCategory from "./AddProductCategory";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-import { useAddProductCategoryMutation } from "src/services/ProductCategory";
+import { useAddProductCategoryMutation } from "src/services/ProductCategoryServices";
 import { showToast } from "src/utils";
 import { RootState } from "src/redux/store";
 import { useSelector } from "react-redux";
@@ -18,6 +18,7 @@ export type FormInitialValues = {
 
 const AddProductCategoryWrapper = (props: Props) => {
   const navigate = useNavigate();
+  const [apiStatus, setApiStatus] = useState<boolean>(false);
 
   const [addProductCategory] = useAddProductCategoryMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
@@ -36,7 +37,7 @@ const AddProductCategoryWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    console.log("onSubmitHandler", values);
+    setApiStatus(true)
     setTimeout(() => {
       addProductCategory({
         categoryCode: values.categoryCode,
@@ -54,6 +55,8 @@ const AddProductCategoryWrapper = (props: Props) => {
         } else {
           showToast("error", "Something went wrong");
         }
+        setApiStatus(false)
+
       });
     }, 1000);
   };
@@ -65,7 +68,7 @@ const AddProductCategoryWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <AddProductCategory formikProps={formikProps} />;
+          return <AddProductCategory apiStatus={apiStatus} formikProps={formikProps} />;
         }}
       </Formik>
     </ConfigurationLayout>

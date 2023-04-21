@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
 import EditAttribute from "./EditAttribute";
@@ -30,6 +30,8 @@ const EditAttributeWrapper = (props: Props) => {
     (state: RootState) => state.attributes
   );
   const { userData } = useSelector((state: RootState) => state?.auth);
+  const [apiStatus, setApiStatus] = useState<boolean>(false);
+
 
   const [EditAttributes] = useUpdateattributesMutation();
   const { data, isLoading } = useGetattributesByIdQuery(Id);
@@ -44,6 +46,7 @@ const EditAttributeWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
+    setApiStatus(true)
     setTimeout(() => {
       EditAttributes({
         body: {
@@ -62,6 +65,7 @@ const EditAttributeWrapper = (props: Props) => {
         } else {
           showToast("error", "Something went wrong");
         }
+        setApiStatus(false)
       });
     }, 1000);
   };
@@ -78,7 +82,7 @@ const EditAttributeWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <EditAttribute formikProps={formikProps} />;
+          return <EditAttribute apiStatus={apiStatus} formikProps={formikProps} />;
         }}
       </Formik>
     </ConfigurationLayout>

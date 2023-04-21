@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
 import AddAttribute from "./AddAttribute";
@@ -18,6 +18,7 @@ export type FormInitialValues = {
 const AddAttributeWrapper = (props: Props) => {
   // Form Initial Values
   const navigate = useNavigate();
+  const [apiStatus, setApiStatus] = useState<boolean>(false);
   const [addAttribute] = useAddAttributesMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
 
@@ -32,6 +33,7 @@ const AddAttributeWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
+    setApiStatus(true)
     setTimeout(() => {
       addAttribute({
         attributeName: values.attributeName,
@@ -47,6 +49,7 @@ const AddAttributeWrapper = (props: Props) => {
         } else {
           showToast("error", "Something went wrong");
         }
+        setApiStatus(false)
       });
     }, 1000);
   };
@@ -58,7 +61,7 @@ const AddAttributeWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <AddAttribute formikProps={formikProps} />;
+          return <AddAttribute apiStatus={apiStatus} formikProps={formikProps} />;
         }}
       </Formik>
     </ConfigurationLayout>
