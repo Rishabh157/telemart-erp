@@ -19,7 +19,6 @@ const ATMPagination = ({
   onPageChange,
   rowsPerPage,
 }: ATMPaginationPropTypes) => {
-  console.log(rowCount, rowsPerPage);
   return (
     <>
       {rows.length ? (

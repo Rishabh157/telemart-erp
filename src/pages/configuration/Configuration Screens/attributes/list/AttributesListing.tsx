@@ -66,7 +66,7 @@ const AttributesListing = ({ columns, rows }: Props) => {
         <ATMTableHeader
           searchValue={searchValue}
           page={page}
-          rowCount={rows.length}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}

@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import { Form, Formik, FormikProps } from "formik";
 import { array, object, string, number } from "yup";
 import AddCompany from "./AddCompany";
@@ -64,6 +64,7 @@ const pageHeading = "Add New Company";
 
 const AddCompanyWrapper = () => {
   const navigate = useNavigate();
+
   // Breadcrumbs
   const breadcrumbs = [
     {
