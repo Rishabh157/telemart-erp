@@ -29,6 +29,7 @@ import schemeSlice from "./slices/schemeSlice";
 import warehouseSlice from "./slices/warehouseSlice";
 import authSlice from "./slices/authSlice";
 import { authMiddleware } from "src/utils";
+import TaxesSlice from "./slices/TaxesSlice";
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -59,6 +60,7 @@ const store = configureStore({
     grn: GRNSlice,
     productSubCategory: productSubCategorySlice,
     attributes: attributesSlice,
+    taxes:TaxesSlice,
     item: itemSlice,
     language: languageSlice,
     dealersCategory: dealersCategorySlice,
