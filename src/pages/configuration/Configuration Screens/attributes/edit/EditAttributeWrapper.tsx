@@ -59,7 +59,6 @@ const EditAttributeWrapper = (props: Props) => {
           if (res?.data?.status) {
             showToast("success", "attributes updated successfully!");
             navigate("/configurations/attributes");
-
           } else {
             showToast("error", res?.data?.message);
           }

@@ -72,7 +72,7 @@ export const attributesApi = apiSlice.injectEndpoints({
 
     // **** Delete
     deleteattributes: builder.mutation({
-      invalidatesTags: ["attributes"],
+      invalidatesTags: ["attributes", "attributeGroup"],
       query: (id) => ({
         url: `/attribute/${id}`,
 

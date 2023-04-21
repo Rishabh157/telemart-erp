@@ -35,3 +35,5 @@ export type {
   AddAttributesGroup,
   UpdateAttributesGroup,
 } from "./AttrbutesGroup.model";
+
+export type { ItemListResponse, AddItem, UpdateItem } from "./Item.model";
