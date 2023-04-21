@@ -73,6 +73,7 @@ import { v4 as uuidv4 } from "uuid";
 import ProfileWrappper from "./pages/profile/ProfileWrapper";
 import EditCompanyWrapper from "./pages/configuration/Configuration Screens/configurationCompany/edit/EditCompanyWrapper";
 import EditAttributeWrapper from "./pages/configuration/Configuration Screens/attributes/edit/EditAttributeWrapper";
+import EditProductCategoryWrapper from "./pages/configuration/Configuration Screens/productCategory/edit/EditProductCategoryWrapper";
 import EditAttributeGroupWrapper from "./pages/configuration/Configuration Screens/attributesGroup/edit/EditAttributeGroupWrapper";
 
 const PageRoutes = () => {
@@ -195,6 +196,10 @@ const PageRoutes = () => {
           <Route
             path="/configurations/product-category/add"
             element={<AddProductCategoryWrapper />}
+          />
+          <Route
+            path="/configurations/product-category/:id"
+            element={<EditProductCategoryWrapper />}
           />
 
           <Route

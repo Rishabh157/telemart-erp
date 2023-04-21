@@ -12,7 +12,7 @@ import {
 import { AppDispatch, RootState } from "src/redux/store";
 import {
   useGetPaginationVendorsQuery,
-  useGetVendorsQuery,
+ // useGetVendorsQuery,
 } from "src/services/VendorServices";
 import VendorsListing from "./VendorsListing";
 

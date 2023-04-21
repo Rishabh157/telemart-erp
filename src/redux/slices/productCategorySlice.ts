@@ -4,6 +4,7 @@ import { ProductCategoryListResponse } from "src/models/ProductCategory.model";
 
 export interface ProductCategorySliceStateType {
     items: ProductCategoryListResponse[] | [],
+    selectedProductCategory: ProductCategoryListResponse | null,
     totalItems: number,
     isTableLoading: boolean,
     page: number;
@@ -15,6 +16,7 @@ export interface ProductCategorySliceStateType {
 
 const initialState: ProductCategorySliceStateType = {
     items: [],
+    selectedProductCategory: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -56,7 +58,14 @@ const productCategorySlice: any = createSlice({
         },
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
-        }
+        },
+        setSelectedProductCategory: 
+        (
+        state,
+        action: PayloadAction<ProductCategoryListResponse | null>
+      ) => {
+        state.selectedProductCategory = action.payload;
+      },
 
     }
 })
@@ -69,6 +78,7 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectedId
+    setSelectedId,
+    setSelectedProductCategory
 } = productCategorySlice.actions
 export default productCategorySlice.reducer
