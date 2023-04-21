@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddItemWrapper";
+import { FormInitialValues } from "./EditItemWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -18,11 +18,11 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/configurations/items",
   },
   {
-    label: "Add Item",
+    label: "Edit Item",
   },
 ];
 
-const AddItem = ({ formikProps }: Props) => {
+const EditItem = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -35,7 +35,7 @@ const AddItem = ({ formikProps }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Item </ATMPageHeading>
+          <ATMPageHeading> Update Item </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -50,7 +50,7 @@ const AddItem = ({ formikProps }: Props) => {
                 onClick={() => formikProps.handleSubmit()}
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add Item
+                Update
               </button>
             </div>
           </div>
@@ -99,4 +99,4 @@ const AddItem = ({ formikProps }: Props) => {
   );
 };
 
-export default AddItem;
+export default EditItem;
