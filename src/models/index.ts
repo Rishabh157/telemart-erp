@@ -29,3 +29,9 @@ export type {
   AddAttributes,
   UpdateAttributes,
 } from "./Attrbutes.model";
+
+export type {
+  AttributesGroupListResponse,
+  AddAttributesGroup,
+  UpdateAttributesGroup,
+} from "./AttrbutesGroup.model";
