@@ -6,7 +6,6 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "./AddItemWrapper";
-import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -84,36 +83,16 @@ const AddItem = ({ formikProps }: Props) => {
                 onChange={(e) => setFieldValue("itemWeight", e.target.value)}
               />
 
-              {/* Item Category*/}
-              <ATMTextField
-                name="itemCategory"
-                value={values.itemCategory}
-                label="Item Category"
-                placeholder="Item Category"
-                onChange={(e) => setFieldValue("itemCategory", e.target.value)}
-              />
-
-              {/* Item Sub Category*/}
-              <ATMTextField
-                name="itemSubCategory"
-                value={values.itemSubCategory}
-                label="Item Sub Category"
-                placeholder="Item Sub Category"
-                onChange={(e) => setFieldValue("itemSubCategory", e.target.value)}
-              />
               {/* Item Image */}
-
-              <ATMFilePickerWrapper
-                name="itemImage"
+              <ATMTextField
+                name="itemWeight"
+                value={values.itemImage}
                 label="Item Image"
                 placeholder="Item Image"
-                onSelect={(newFile) => setFieldValue("itemImage", newFile)}
-                selectedFile={values.itemImage}
+                onChange={(e) => setFieldValue("itemImage", e.target.value)}
               />
             </div>
           </div>
-
-
         </div>
       </div>
     </div>

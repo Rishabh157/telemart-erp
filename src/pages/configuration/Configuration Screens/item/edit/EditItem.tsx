@@ -5,26 +5,24 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddProductCategoryWrapper";
+import { FormInitialValues } from "./EditItemWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
-  apiStatus:boolean
-
 };
 
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
-    label: "Product Category",
-    path: "/configurations/product-category",
+    label: "Items",
+    path: "/configurations/items",
   },
   {
-    label: "Add Product Category",
+    label: "Edit Item",
   },
 ];
 
-const AddProductCategory = ({ formikProps, apiStatus }: Props) => {
+const EditItem = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -37,24 +35,22 @@ const AddProductCategory = ({ formikProps, apiStatus }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Product Category </ATMPageHeading>
+          <ATMPageHeading> Update Item </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
           <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
             {/* Form Heading */}
-            <div className="text-xl font-medium"> Product Details</div>
+            <div className="text-xl font-medium"> Item Details </div>
 
             {/* BUTTON - Add Button */}
             <div>
               <button
                 type="button"
-                disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true?"disabled:opacity-25":""}`}
-
+                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add Product
+                Update
               </button>
             </div>
           </div>
@@ -62,22 +58,38 @@ const AddProductCategory = ({ formikProps, apiStatus }: Props) => {
           {/* Form */}
           <div className="grow py-8 px-3 ">
             <div className="grid grid-cols-3 gap-4">
-              {/* Field1 */}
+              {/* itemCode */}
               <ATMTextField
-                name="categoryCode"
-                value={values.categoryCode}
-                label="Category Code"
-                placeholder="Category Code"
-                onChange={(e) => setFieldValue("categoryCode", e.target.value)}
+                name="itemCode"
+                value={values.itemCode}
+                label="Item Code"
+                placeholder="Item Code"
+                onChange={(e) => setFieldValue("itemCode", e.target.value)}
+              />
+              {/* itemName */}
+              <ATMTextField
+                name="itemName"
+                value={values.itemName}
+                label="Item Name"
+                placeholder="Item Name"
+                onChange={(e) => setFieldValue("itemName", e.target.value)}
+              />
+              {/* itemWeight */}
+              <ATMTextField
+                name="itemWeight"
+                value={values.itemWeight}
+                label="Item Weight (in gms)"
+                placeholder="Item Weight"
+                onChange={(e) => setFieldValue("itemWeight", e.target.value)}
               />
 
-              {/* Field 3 */}
+              {/* Item Image */}
               <ATMTextField
-                name="categoryName"
-                value={values.categoryName}
-                label="Category Name"
-                placeholder="Category Name"
-                onChange={(e) => setFieldValue("categoryName", e.target.value)}
+                name="itemWeight"
+                value={values.itemImage}
+                label="Item Image"
+                placeholder="Item Image"
+                onChange={(e) => setFieldValue("itemImage", e.target.value)}
               />
             </div>
           </div>
@@ -87,4 +99,4 @@ const AddProductCategory = ({ formikProps, apiStatus }: Props) => {
   );
 };
 
-export default AddProductCategory;
+export default EditItem;

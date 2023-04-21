@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import { Formik } from "formik";
 import { array, object, string } from "yup";
 import AddAttributeGroup from "./AddAttributeGroup";
@@ -25,6 +25,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
   const { userData } = useSelector((state: RootState) => state?.auth);
   const { allItems } = useSelector((state: RootState) => state?.attributes);
   const { data, isLoading, isFetching } = useGetAllAttributesQuery("");
+  const [apiStatus, setApiStatus] = useState<boolean>(false);
   const [AddAttributeGroups] = useAddAttributeGroupMutation();
   const initialValues: FormInitialValues = {
     group_name: "",
@@ -46,6 +47,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
+    setApiStatus(true)
     setTimeout(() => {
       AddAttributeGroups({
         groupName: values.group_name,
@@ -62,6 +64,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
         } else {
           showToast("error", "Something went wrong");
         }
+        setApiStatus(false)
       });
     }, 1000);
   };
@@ -78,7 +81,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
       >
         {(formikProps) => {
           return (
-            <AddAttributeGroup formikProps={formikProps} allItems={allItems} />
+            <AddAttributeGroup apiStatus={apiStatus} formikProps={formikProps} allItems={allItems} />
           );
         }}
       </Formik>

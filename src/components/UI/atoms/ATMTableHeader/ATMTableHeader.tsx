@@ -36,7 +36,6 @@ const ATMTableHeader = ({
             className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
             value={searchValue}
             onChange={(e) => {
-              console.log(e.currentTarget.value);
               onSearch(e.currentTarget.value);
             }}
             placeholder="Search..."

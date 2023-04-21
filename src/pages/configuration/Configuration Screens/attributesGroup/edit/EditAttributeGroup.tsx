@@ -12,6 +12,7 @@ import ATMTransferList from "src/components/UI/atoms/ATMTransferList/ATMTransfer
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   allItems: any;
+  apiStatus:boolean
 };
 
 // Breadcrumbs
@@ -25,7 +26,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const EditAttributeGroup = ({ formikProps, allItems }: Props) => {
+const EditAttributeGroup = ({ formikProps, allItems,apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
   const [flag, setFlag] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState<
@@ -80,8 +81,10 @@ const EditAttributeGroup = ({ formikProps, allItems }: Props) => {
             <div>
               <button
                 type="button"
+                disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className={`bg-primary-main border text-white rounded py-1 px-5  border-primary-main `}
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true?"disabled:opacity-25":""}`}
+
               >
                 Update
               </button>
