@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddCartonBoxWrapper";
+import { FormInitialValues } from "./EditCartonBoxWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -18,11 +18,11 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/configurations/carton-box",
   },
   {
-    label: "Add Outer Pack Box",
+    label: "Edit Outer Pack Box",
   },
 ];
 
-const AddCartonBox = ({ formikProps }: Props) => {
+const EditCartonBox = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -35,7 +35,7 @@ const AddCartonBox = ({ formikProps }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Outer Packaging Box </ATMPageHeading>
+          <ATMPageHeading> Update Outer Packaging Box </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -50,7 +50,7 @@ const AddCartonBox = ({ formikProps }: Props) => {
                 onClick={() => formikProps.handleSubmit()}
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
-                Add Box
+                Update
               </button>
             </div>
           </div>
@@ -134,4 +134,4 @@ const AddCartonBox = ({ formikProps }: Props) => {
   );
 };
 
-export default AddCartonBox;
+export default EditCartonBox;

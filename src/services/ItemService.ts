@@ -2,7 +2,7 @@ import { AddItem, UpdateItem } from "src/models";
 import { PaginationType } from "src/models/common/paginationType";
 import apiSlice from "./ApiSlice";
 
-export const ItemsApi = apiSlice.injectEndpoints({
+export const itemsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //***** GET *****/
     getItems: builder.query({
@@ -88,4 +88,4 @@ export const {
   useExportItemsDataMutation,
   useDeleteItemsMutation,
   useGetAllItemsQuery,
-} = ItemsApi;
+} = itemsApi;

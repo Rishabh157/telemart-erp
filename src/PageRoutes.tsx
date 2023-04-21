@@ -77,6 +77,7 @@ import EditProductCategoryWrapper from "./pages/configuration/Configuration Scre
 import EditAttributeGroupWrapper from "./pages/configuration/Configuration Screens/attributesGroup/edit/EditAttributeGroupWrapper";
 import EditProductGroupWrapper from "./pages/configuration/Configuration Screens/productGroup/edit/EditProductGroupWrapper";
 import EditItemWrapper from "./pages/configuration/Configuration Screens/item/edit/EditItemWrapper";
+import EditCartonBoxWrapper from "./pages/configuration/Configuration Screens/cartonBox/edit/EditCartonBoxWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -241,6 +242,10 @@ const PageRoutes = () => {
           <Route
             path="/configurations/carton-box/add"
             element={<AddCartonBoxWrapper />}
+          />
+          <Route
+            path="/configurations/carton-box/:id"
+            element={<EditCartonBoxWrapper />}
           />
 
           <Route
