@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import { number, object, string } from "yup";
-import AddCartonBox from "./AddCartonBox";
+import EditCartonBox from "./EditCartonBox";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-import { useAddCartonBoxMutation } from "src/services/CartonBoxService";
 import { showToast } from "src/utils";
 import { RootState } from "src/redux/store";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useGetCartonBoxByIdQuery,
+  useUpdateCartonBoxMutation,
+} from "src/services/CartonBoxService";
+import { setSelectedItem } from "src/redux/slices/cartonBoxSlice";
 
 type Props = {};
 
@@ -22,20 +26,27 @@ export type FormInitialValues = {
   };
 };
 
-const AddCartonBoxWrapper = (props: Props) => {
+const EditCartonBoxWrapper = (props: Props) => {
   const navigate = useNavigate();
-  const [addCartonBox] = useAddCartonBoxMutation();
+  const dispatch = useDispatch();
+  const params = useParams();
+  const Id = params.id;
+  const [EditSelectedCartonBox] = useUpdateCartonBoxMutation();
+  const { data, isLoading, isFetching } = useGetCartonBoxByIdQuery(Id);
   const { userData } = useSelector((state: RootState) => state?.auth);
+  const { selectedItem }: any = useSelector(
+    (state: RootState) => state?.cartonBox
+  );
 
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    boxName: "",
-    innerItemsCount: 0,
-    boxWeight: 0,
+    boxName: selectedItem?.boxName,
+    innerItemsCount: selectedItem?.innerItemCount,
+    boxWeight: selectedItem?.boxWeight,
     dimensions: {
-      height: 0,
-      width: 0,
-      depth: 0,
+      height: selectedItem?.dimension?.height,
+      width: selectedItem?.dimension?.width,
+      depth: selectedItem?.dimension?.depth,
     },
   };
 
@@ -53,16 +64,19 @@ const AddCartonBoxWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    addCartonBox({
-      boxName: values.boxName,
-      innerItemCount: values.innerItemsCount,
-      dimension: values.dimensions,
-      boxWeight: values.boxWeight,
-      companyId: userData?.companyId || "",
+    EditSelectedCartonBox({
+      body: {
+        boxName: values.boxName,
+        innerItemCount: values.innerItemsCount,
+        dimension: values.dimensions,
+        boxWeight: values.boxWeight,
+        companyId: userData?.companyId || "",
+      },
+      id: Id || "",
     }).then((res) => {
       if ("data" in res) {
         if (res?.data?.status) {
-          showToast("success", "Carton box added successfully!");
+          showToast("success", "Updated successfully!");
           navigate("/configurations/carton-box");
         } else {
           showToast("error", res?.data?.message);
@@ -72,19 +86,24 @@ const AddCartonBoxWrapper = (props: Props) => {
       }
     });
   };
+
+  useEffect(() => {
+    dispatch(setSelectedItem(data?.data));
+  }, [dispatch, data, isLoading, isFetching]);
   return (
     <ConfigurationLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <AddCartonBox formikProps={formikProps} />;
+          return <EditCartonBox formikProps={formikProps} />;
         }}
       </Formik>
     </ConfigurationLayout>
   );
 };
 
-export default AddCartonBoxWrapper;
+export default EditCartonBoxWrapper;

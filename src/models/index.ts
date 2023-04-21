@@ -37,3 +37,8 @@ export type {
 } from "./AttrbutesGroup.model";
 
 export type { ItemListResponse, AddItem, UpdateItem } from "./Item.model";
+export type {
+  CartonBoxListResponse,
+  AddCartonBox,
+  UpdateCartonBox,
+} from "./CartonBox.model";
