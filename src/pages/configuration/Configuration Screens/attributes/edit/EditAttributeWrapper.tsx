@@ -54,7 +54,7 @@ const EditAttributeWrapper = (props: Props) => {
       }).then((res) => {
         if ("data" in res) {
           if (res?.data?.status) {
-            showToast("success", "Attribute updated successfully!");
+            showToast("success", "attributes updated successfully!");
           } else {
             showToast("error", res?.data?.message);
           }

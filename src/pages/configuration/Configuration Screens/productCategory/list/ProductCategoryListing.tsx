@@ -6,7 +6,7 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/productCategorySlice";
+import { setRowsPerPage, setPage, setSearchValue } from "src/redux/slices/productCategorySlice";
 import { AppDispatch, RootState } from "src/redux/store";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -20,8 +20,9 @@ const ProductCategoryListing = ({ columns, rows }: Props) => {
   const productCategoryState: any = useSelector((state: RootState) => state.productCategory);
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const navigate = useNavigate()
-  const { page, rowsPerPage } = productCategoryState;
+  const { page, rowsPerPage,searchValue ,totalItems} = productCategoryState;
   const [selectedRows, setSelectedRows] = useState([])
+  
   const breadcrumbs: BreadcrumbType[] = [
     {
       label: "Configuration",
@@ -47,14 +48,16 @@ const ProductCategoryListing = ({ columns, rows }: Props) => {
         </button>
       </div>
 
-      <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+      <div className="border flex flex-col  rounded bg-white">
         {/*Table Header */}
-        <ATMTableHeader
+        <ATMTableHeader 
+          searchValue={searchValue}
           page={page}
           rowCount={rows.length}
           rowsPerPage={rowsPerPage}
           rows={rows}
-          onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
+          onRowsPerPageChange={(newValue) =>dispatch(setRowsPerPage(newValue))}
+          onSearch={(newValue)=>dispatch(setSearchValue(newValue))}
           isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
         />
@@ -72,14 +75,14 @@ const ProductCategoryListing = ({ columns, rows }: Props) => {
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
           />
+          
         </div>
       </div>
-
       {/* {isFilterOpen && (
        <FilterDialogWarpper
        onClose={()=> setIsFilterOpen(false)}

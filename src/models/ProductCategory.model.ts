@@ -1,8 +1,8 @@
+import { companyApi } from './../services/CompanyServices';
 export type ProductCategoryListResponse = {
     categoryCode: string;
     categoryName: string;
-    address: string;
-    mobile: string;
+    companyId:string;
     district: string;
     is_active: boolean;
     is_deleted: boolean;
@@ -16,22 +16,15 @@ export type ProductCategoryListResponse = {
 export type AddProductCategory = {
     categoryCode: string;
     categoryName: string;
-    address: string;
-    mobile: string;
-    district: string;
-    password: string;
-    confirm_password: string;
+    companyId:string;
+
 }
 
 export type UpdateProductCategory = {
     body: {
         categoryCode: string;
-    categoryName: string;
-        address: string;
-        mobile: string;
-        district: string;
-        password: string;
-        confirm_password: string;
+        categoryName: string;
+        companyId:string
     },
     id: string;
 }
