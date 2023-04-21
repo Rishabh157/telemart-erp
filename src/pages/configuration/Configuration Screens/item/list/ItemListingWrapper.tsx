@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
@@ -13,231 +13,174 @@ import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 // import { AppDispatch, Rootweight } from "src/redux/store";
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 import ItemListing from "./ItemListing";
-
-const columns: columnTypes[] = [
-    {
-        field: "itemImage",
-        headerName: "Item Image",
-        flex: "flex-[1_1_0%]",
-        renderCell: (row: ItemListResponse) => <span> {row.itemImage} </span>,
-    },
-    {
-        field: "itemCode",
-        headerName: "Item Code",
-        flex: "flex-[1.5_1.5_0%]",
-        renderCell: (row: ItemListResponse) => {
-            return <span > {row.itemCode} </span>;
-        },
-    },
-    {
-        field: "itemName",
-        headerName: "Item Name",
-        flex: "flex-[1.5_1.5_0%]",
-        renderCell: (row: ItemListResponse) => {
-            return <span > {row.itemName} </span>;
-        },
-    },
-    {
-        field: "category",
-        headerName: "Category",
-        flex: "flex-[1.5_1.5_0%]",
-        renderCell: (row: ItemListResponse) => {
-            return <span > {row.category} </span>;
-        },
-    },
-    {
-        field: "subCategory",
-        headerName: "Sub Category",
-        flex: "flex-[1.5_1.5_0%]",
-        renderCell: (row: ItemListResponse) => {
-            return <span > {row.subCategory} </span>;
-        },
-    },
-    {
-        field: "weight",
-        headerName: "Weightv (in gms.)",
-        flex: "flex-[1.5_1.5_0%]",
-        renderCell: (row: ItemListResponse) => {
-            return <span > {row.weight} </span>;
-        },
-    },
-    {
-        field: "barcode",
-        headerName: "Barcode",
-        flex: "flex-[1.5_1.5_0%]",
-        renderCell: (row: ItemListResponse) => {
-            return <span > {row.barcode} </span>;
-        },
-    },
-    {
-        field: "actions",
-        headerName: "Actions",
-        flex: "flex-[0.5_0.5_0%]",
-        renderCell: (row: any) => (
-            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-                {" "}
-                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{" "}
-            </button>
-        ),
-        align: "end",
-    },
-];
-
-const rows = [
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-        _id : 1
-    },
-
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-        _id : 2
-    },
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-         _id : 3
-    },
-
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-        _id : 4
-    },
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-        _id : 5
-    },
-
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-        _id : 6
-    },
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-        _id : 7
-    },
-
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-        _id : 8
-    },
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-        _id : 9
-    },
-
-    {
-        itemName: "Himanshu",
-        itemImage: "-",
-        itemCode: "123",
-        category: "Drink stop",
-        subCategory: "Drink stop",
-        weight: "100",
-        barcode: "yes",
-        _id : 10
-    },
-    ];
+import {
+  useDeleteItemsMutation,
+  useGetItemsQuery,
+} from "src/services/ItemService";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
+import {
+  setIsTableLoading,
+  setItems,
+  setTotalItems,
+} from "src/redux/slices/itemSlice";
+import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
+import { useNavigate } from "react-router-dom";
+import { showToast } from "src/utils";
 
 const ItemListingWrapper = () => {
-    // const vendorweight: any = useSelector((weight: Rootweight) => weight.vendor);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const itemState: any = useSelector((state: RootState) => state.item);
+  const { page, rowsPerPage, searchValue, items } = itemState;
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [currentId, setCurrentId] = useState("");
+  const [deleteItem] = useDeleteItemsMutation();
 
-    // const { page, rowsPerPage } = vendorweight;
+  const columns: columnTypes[] = [
+    {
+      field: "itemImage",
+      headerName: "Item Image",
+      flex: "flex-[1_1_0%]",
+      renderCell: (row: ItemListResponse) => (
+        <span>
+          {" "}
+          <img
+            style={{ height: 40 }}
+            src={row.itemImage}
+            alt="uploaded img"
+          ></img>{" "}
+        </span>
+      ),
+    },
+    {
+      field: "itemCode",
+      headerName: "Item Code",
+      flex: "flex-[1.5_1.5_0%]",
+      renderCell: (row: ItemListResponse) => {
+        return <span> {row.itemCode} </span>;
+      },
+    },
+    {
+      field: "itemName",
+      headerName: "Item Name",
+      flex: "flex-[1.5_1.5_0%]",
+      renderCell: (row: ItemListResponse) => {
+        return <span> {row.itemName} </span>;
+      },
+    },
 
-    // const dispatch = useDispatch<AppDispatch>();
-    // // const navigate = useNavigate();
-    // const { data, isFetching, isLoading } = useGetVendorsQuery({
-    //     limit: rowsPerPage,
-    //     searchValue: "",
-    //     params: ["dealerName", "itemImage", "barcode"],
-    //     page: page,
-    //     filterBy: [
-    //         {
-    //             fieldName: "",
-    //             value: [],
-    //         },
-    //     ],
-    //     dateFilter: {
-    //         start_date: "",
-    //         end_date: "",
-    //         dateFilterKey: "",
-    //     },
-    //     orderBy: "createdAt",
-    //     orderByValue: -1,
-    //     isPaginationRequired: true,
-    // });
+    {
+      field: "weight",
+      headerName: "Weight (in gms.)",
+      flex: "flex-[1.5_1.5_0%]",
+      renderCell: (row: ItemListResponse) => {
+        return <span> {row.itemWeight} </span>;
+      },
+    },
 
-    // useEffect(() => {
-    //     if (!isFetching && !isLoading) {
-    //         dispatch(setIsTableLoading(false));
-    //         dispatch(setItems(data || []));
-    //         dispatch(setTotalItems(data?.totalItems || 4));
-    //     } else {
-    //         dispatch(setIsTableLoading(true));
-    //     }
+    {
+      field: "actions",
+      headerName: "Actions",
+      flex: "flex-[0.5_0.5_0%]",
+      renderCell: (row: any) => (
+        <div className="relative">
+          <button
+            onClick={() => {
+              setShowDropdown(!showDropdown);
+              setCurrentId(row?._id);
+            }}
+            className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+          >
+            {" "}
+            <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{" "}
+          </button>
+          {showDropdown && currentId === row?._id && (
+            <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+              <button
+                onClick={() => {
+                  navigate(`/configurations/item/${currentId}`);
+                }}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => {
+                  showConfirmationDialog({
+                    title: "Delete Attribute",
+                    text: "Do you want to delete",
+                    showCancelButton: true,
+                    next: (res) => {
+                      return res.isConfirmed
+                        ? handleDelete()
+                        : setShowDropdown(false);
+                    },
+                  });
+                }}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              >
+                Delete
+              </button>
+            </div>
+          )}
+        </div>
+      ),
+      align: "end",
+    },
+  ];
+  // const dispatch = useDispatch<AppDispatch>();
+  // // const navigate = useNavigate();
+  const { data, isFetching, isLoading } = useGetItemsQuery({
+    limit: rowsPerPage,
+    searchValue: searchValue,
+    params: ["itemName", "itemWeight", "itemCode"],
+    page: page,
+    filterBy: [
+      {
+        fieldName: "",
+        value: [],
+      },
+    ],
+    dateFilter: {},
+    orderBy: "createdAt",
+    orderByValue: -1,
+    isPaginationRequired: true,
+  });
 
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [isLoading, isFetching, data]);
+  useEffect(() => {
+    if (!isFetching && !isLoading) {
+      dispatch(setIsTableLoading(false));
+      dispatch(setItems(data?.data || []));
+      dispatch(setTotalItems(data?.totalItem || 4));
+    } else {
+      dispatch(setIsTableLoading(true));
+    }
 
-    return (
-        <>
-            <ConfigurationLayout>
-                <ItemListing columns={columns} rows={rows} />
-            </ConfigurationLayout>
-        </>
-    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isFetching, data]);
+
+  const handleDelete = () => {
+    setShowDropdown(false);
+    deleteItem(currentId).then((res) => {
+      if ("data" in res) {
+        if (res?.data?.status) {
+          showToast("success", "Item deleted successfully!");
+        } else {
+          showToast("error", res?.data?.message);
+        }
+      } else {
+        showToast("error", "Something went wrong, Please try again later");
+      }
+    });
+  };
+  return (
+    <>
+      <ConfigurationLayout>
+        <ItemListing columns={columns} rows={items} />
+      </ConfigurationLayout>
+    </>
+  );
 };
 
 export default ItemListingWrapper;
