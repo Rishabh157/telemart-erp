@@ -18,6 +18,7 @@ type Props = {
     onClick?: ()=> void;
     path?: string
   }[]
+
 };
 
 const AddCompany = ({
@@ -26,7 +27,8 @@ const AddCompany = ({
   setActiveStep,
   steps,
   pageHeading,
-  breadcrumbs
+  breadcrumbs, 
+
 }: Props) => {
 
   // Handle Previous
@@ -68,7 +70,10 @@ const AddCompany = ({
             <button
               type="button"
               onClick={()=> formikProps.handleSubmit()}
-              className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+              className= "bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                
+              
+
             >
               {activeStep === steps.length - 1 ? "Submit" : "Next"}
             </button>

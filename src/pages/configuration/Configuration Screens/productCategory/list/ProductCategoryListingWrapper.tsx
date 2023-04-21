@@ -15,7 +15,7 @@ import ProductCategoryListing from "./ProductCategoryListing";
 import {
   useDeleteProductCategoryMutation,
   useGetProductCategoryQuery,
-} from "src/services/ProductCategory";
+} from "src/services/ProductCategoryServices";
 import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
 import { showToast } from "src/utils";
 

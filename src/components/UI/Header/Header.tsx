@@ -37,7 +37,7 @@ const Header = (props: Props) => {
               <em>Select Company</em>
             </MenuItem>
             {data?.data?.map((ele: any) => {
-              return <MenuItem value={ele?._id}>{ele?.companyName}</MenuItem>;
+              return <MenuItem key={ele._id} value={ele?._id}>{ele?.companyName}</MenuItem>;
             })}
           </Select>
         </FormControl>

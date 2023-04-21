@@ -8,7 +8,7 @@ export const productCategoryApi = apiSlice.injectEndpoints({
     getProductCategory: builder.query({
       providesTags: ["productCategory"],
       query: (body: PaginationType) => ({
-        url: "/product-code",
+        url: "/product-category",
         method: "POST",
         body,
       }),
@@ -18,7 +18,7 @@ export const productCategoryApi = apiSlice.injectEndpoints({
     getAllProductCategory: builder.query({
       providesTags: ["productCategory"],
       query: () => ({
-        url: "/product-code",
+        url: "/product-category",
         method: "GET",
         // body,
       }),
@@ -28,7 +28,7 @@ export const productCategoryApi = apiSlice.injectEndpoints({
     addProductCategory: builder.mutation({
       invalidatesTags: ["productCategory"],
       query: (body: AddProductCategory) => ({
-        url: "/product-code/add",
+        url: "/product-category/add",
         method: "POST",
 
         body,
@@ -39,7 +39,7 @@ export const productCategoryApi = apiSlice.injectEndpoints({
     updateProductCategory: builder.mutation({
       invalidatesTags: ["productCategory"],
       query: ({ body, id }: UpdateProductCategory) => ({
-        url: `/product-code/${id}`,
+        url: `/product-category/${id}`,
 
         method: "PUT",
         body,
@@ -50,7 +50,7 @@ export const productCategoryApi = apiSlice.injectEndpoints({
     getProductCategoryById: builder.query({
       providesTags: ["productCategory"],
       query: (id) => ({
-        url: `/product-code/${id}`,
+        url: `/product-category/${id}`,
 
         method: "GET",
       }),
@@ -74,7 +74,7 @@ export const productCategoryApi = apiSlice.injectEndpoints({
     deleteProductCategory: builder.mutation({
       invalidatesTags: ["productCategory"],
       query: (id) => ({
-        url: `/product-code/${id}`,
+        url: `/product-category/${id}`,
         method: "DELETE",
       }),
     }),

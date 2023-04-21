@@ -8,7 +8,7 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/productCategorySlice";
+import { setRowsPerPage, setPage,setSearchValue } from "src/redux/slices/productGroupSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -19,12 +19,12 @@ type Props = {
 
 const ProductGroupListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const productCategoryState: any = useSelector(
-    (state: RootState) => state.productCategory
+  const productGroupState: any = useSelector(
+    (state: RootState) => state.productGroup
   );
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const navigate = useNavigate();
-  const { page, rowsPerPage } = productCategoryState;
+  const { page, rowsPerPage ,searchValue,totalItems} = productGroupState;
   const [selectedRows, setSelectedRows] = useState([]);
   const breadcrumbs: BreadcrumbType[] = [
     {
@@ -58,11 +58,14 @@ const ProductGroupListing = ({ columns, rows }: Props) => {
         {/*Table Header */}
         <ATMTableHeader
           page={page}
-          rowCount={rows.length}
+          searchValue={searchValue}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
-          isFilter
+          onSearch={(newValue)=>dispatch(setSearchValue(newValue))}
+
+          //isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
         />
 
@@ -73,7 +76,7 @@ const ProductGroupListing = ({ columns, rows }: Props) => {
             rows={rows}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+            extraClasses=" overflow-auto"
           />
         </div>
 
@@ -81,7 +84,7 @@ const ProductGroupListing = ({ columns, rows }: Props) => {
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}

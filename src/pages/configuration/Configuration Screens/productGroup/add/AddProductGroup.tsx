@@ -9,6 +9,7 @@ import { FormInitialValues } from "./AddProductGroupWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
+  apiStatus: boolean;
 };
 
 // Breadcrumbs
@@ -22,7 +23,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddProductGroup = ({ formikProps }: Props) => {
+const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -47,8 +48,11 @@ const AddProductGroup = ({ formikProps }: Props) => {
             <div>
               <button
                 type="button"
+                disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  true ? "disabled:opacity-25" : ""
+                }`}
               >
                 Add Product Group
               </button>
@@ -60,13 +64,11 @@ const AddProductGroup = ({ formikProps }: Props) => {
             <div className="grid grid-cols-3 gap-4">
               {/* Product Group Name  */}
               <ATMTextField
-                name="productGroupName"
-                value={values.productGroupName}
+                name="groupName"
+                value={values.groupName}
                 label="Group Name"
                 placeholder="Group Name"
-                onChange={(e) =>
-                  setFieldValue("productGroupName", e.target.value)
-                }
+                onChange={(e) => setFieldValue("groupName", e.target.value)}
               />
             </div>
           </div>
@@ -75,5 +77,4 @@ const AddProductGroup = ({ formikProps }: Props) => {
     </div>
   );
 };
-
 export default AddProductGroup;
