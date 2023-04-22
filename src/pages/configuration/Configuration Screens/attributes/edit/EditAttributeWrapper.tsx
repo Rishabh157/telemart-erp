@@ -3,7 +3,6 @@ import { Formik } from "formik";
 import { object, string } from "yup";
 import EditAttribute from "./EditAttribute";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-// import { useEditAttributesMutation } from "src/services/AttributeService";
 import { showToast } from "src/utils";
 import { useNavigate, useParams } from "react-router-dom";
 import {

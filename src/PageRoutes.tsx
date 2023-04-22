@@ -78,6 +78,7 @@ import EditAttributeGroupWrapper from "./pages/configuration/Configuration Scree
 import EditProductGroupWrapper from "./pages/configuration/Configuration Screens/productGroup/edit/EditProductGroupWrapper";
 import EditItemWrapper from "./pages/configuration/Configuration Screens/item/edit/EditItemWrapper";
 import EditCartonBoxWrapper from "./pages/configuration/Configuration Screens/cartonBox/edit/EditCartonBoxWrapper";
+import EditTaxesWrapper from "./pages/configuration/Configuration Screens/taxes/edit/EditTaxesWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -265,6 +266,11 @@ const PageRoutes = () => {
           <Route
             path="/configurations/taxes"
             element={<TaxesListingWrapper />}
+          />
+          
+          <Route
+            path="/configurations/taxes/:id"
+            element={<EditTaxesWrapper />}
           />
 
           <Route
