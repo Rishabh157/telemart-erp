@@ -62,7 +62,7 @@ const store = configureStore({
     productSubCategory: productSubCategorySlice,
     productGroup:productGroupSlice,
     attributes: attributesSlice,
-    taxes:TaxesSlice,
+    tax:TaxesSlice,
     item: itemSlice,
     language: languageSlice,
     dealersCategory: dealersCategorySlice,

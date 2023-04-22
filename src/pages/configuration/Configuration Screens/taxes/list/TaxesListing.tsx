@@ -15,14 +15,14 @@ type Props = {
   rows: any[];
 };
 
-const CartonBoxListing = ({ columns, rows }: Props) => {
+const TaxesListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const cartonBoxState: any = useSelector((state: RootState) => state.cartonBox);
+  const taxState: any = useSelector((state: RootState) => state.tax);
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const [selectedRows, setSelectedRows] = useState([])
   const navigate = useNavigate()
 
-  const { page, rowsPerPage } = cartonBoxState;
+  const { page, rowsPerPage } = taxState;
 
   const breadcrumbs: BreadcrumbType[] = [
     {
@@ -62,7 +62,7 @@ const CartonBoxListing = ({ columns, rows }: Props) => {
         />
 
         {/* Table */}
-        <div className="grow overflow-auto  ">
+        <div className="grow overflow-auto ">
         <ATMTable columns={columns} rows={rows}
            isCheckbox={true}
            selectedRows={selectedRows}
@@ -91,4 +91,4 @@ const CartonBoxListing = ({ columns, rows }: Props) => {
   );
 };
 
-export default CartonBoxListing;
+export default TaxesListing;

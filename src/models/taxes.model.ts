@@ -1,7 +1,7 @@
 export type TaxesListResponse = {
-    tax: string;
-    is_active: boolean;
-    is_deleted: boolean;
+    taxName: string;
+    isActive: boolean;
+    isDeleted: boolean;
     createdAt: string;
     updatedAt: string;
     _id: string;
@@ -9,12 +9,12 @@ export type TaxesListResponse = {
 }
 
 export type AddTaxes = {
-    tax:string
+    taxName:string
 }
 
 export type UpdateTaxes = {
     body: {
-        tax:string
+        taxName:string
     },
     id: string;
 }

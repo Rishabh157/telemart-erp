@@ -16,16 +16,16 @@ import {
 
 
 const TaxesListingWrapper = () => {
-     const taxesState: any = useSelector((state: RootState) => state.taxes);
+     const taxState: any = useSelector((state: RootState) => state.tax);
 
-    const { page, rowsPerPage ,items} = taxesState;
+    const { page, rowsPerPage ,items} = taxState;
 
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetTaxesQuery({
         limit: rowsPerPage,
         searchValue: "",
-        params: ["taxes"],
+        params: ["tax"],
         page: page,
         filterBy: [
             {
@@ -33,17 +33,13 @@ const TaxesListingWrapper = () => {
                 value: [],
             },
         ],
-        dateFilter: {
-            start_date: "",
-            end_date: "",
-            dateFilterKey: "",
-        },
+        dateFilter: {},
         orderBy: "createdAt",
         orderByValue: -1,
         isPaginationRequired: true,
     });
 
-    useEffect(() => {
+    useEffect(() => {   
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false));
             dispatch(setItems(data || []));
