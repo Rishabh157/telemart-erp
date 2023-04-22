@@ -15,6 +15,7 @@ import {
 import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "src/utils";
+import { Chip, Stack } from "@mui/material";
 
 const ASRListingWrapper = () => {
   const navigate = useNavigate();
@@ -29,14 +30,33 @@ const ASRListingWrapper = () => {
       flex: "flex-[1_1_0%]",
       renderCell: (row: ASRListResponse) => (
         <span>
-          {row.asrDetails?.map((ele) => {
-            return (
-              <>
-                <span>{ele?.productName}</span>
-                {", "}
-              </>
-            );
-          })}
+          {" "}
+          <Stack direction="row" spacing={1}>
+            {row?.asrDetails.map((ele, index) => {
+              if (index < 4) {
+                return (
+                  <Chip
+                    label={ele?.productName}
+                    color="primary"
+                    variant="outlined"
+                    size="small"
+                  />
+                );
+              }
+              if (index === 5) {
+                return (
+                  <Chip
+                    label={"..."}
+                    color="primary"
+                    variant="outlined"
+                    size="small"
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </Stack>{" "}
         </span>
       ),
     },
@@ -44,23 +64,37 @@ const ASRListingWrapper = () => {
       field: "quantity",
       headerName: "Quantity",
       flex: "flex-[1.5_1.5_0%]",
-      renderCell: (row: ASRListResponse) => {
-        return (
-          <>
-            {" "}
-            <span>
-              {row.asrDetails?.map((ele) => {
+      renderCell: (row: ASRListResponse) => (
+        <span>
+          {" "}
+          <Stack direction="row" spacing={1}>
+            {row?.asrDetails.map((ele, index) => {
+              if (index < 4) {
                 return (
-                  <>
-                    <span>{ele?.quantity}</span>
-                    {", "}
-                  </>
+                  <Chip
+                    label={ele?.quantity}
+                    color="primary"
+                    variant="outlined"
+                    size="small"
+                  />
                 );
-              })}
-            </span>
-          </>
-        );
-      },
+              }
+              if (index === 5) {
+                return (
+                  <Chip
+                    label={"..."}
+                    color="primary"
+                    variant="outlined"
+                    size="small"
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </Stack>{" "}
+        </span>
+      ),
     },
     {
       field: "actions",

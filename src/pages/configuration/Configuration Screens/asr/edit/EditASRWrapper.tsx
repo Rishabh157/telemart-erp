@@ -12,6 +12,8 @@ import {
   useUpdateAsrMutation,
 } from "src/services/AsrService";
 import { setSelectedItem } from "src/redux/slices/ASRSlice";
+import { useGetAllProductGroupQuery } from "src/services/ProductGroupService";
+import { setItems } from "src/redux/slices/productGroupSlice";
 
 type Props = {};
 
@@ -32,6 +34,12 @@ const EditASRWrapper = (props: Props) => {
 
   const [editAsr] = useUpdateAsrMutation();
   const { data, isLoading, isFetching } = useGetAsrByIdQuery(Id);
+  const {
+    data: productGroupData,
+    isLoading: pgIsLoading,
+    isFetching: pgIsFetching,
+  } = useGetAllProductGroupQuery("");
+
   const { userData } = useSelector((state: RootState) => state?.auth);
   const { selectedItem }: any = useSelector((state: RootState) => state?.asr);
 
@@ -81,6 +89,11 @@ const EditASRWrapper = (props: Props) => {
   useEffect(() => {
     dispatch(setSelectedItem(data?.data));
   }, [dispatch, data, isLoading, isFetching]);
+
+  useEffect(() => {
+    dispatch(setItems(productGroupData?.data));
+  }, [dispatch, productGroupData, pgIsLoading, pgIsFetching]);
+
   return (
     <ConfigurationLayout>
       <Formik
