@@ -5,26 +5,25 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./EditProductCategoryWrapper";
+import { FormInitialValues } from "./EditTaxesWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   apiStatus:boolean
-
 };
 
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
     label: "Product Category",
-    path: "/configurations/product-category",
+    path: "/configurations/product-group",
   },
   {
-    label: "Edit Product Category",
+    label: "Edit Taxes",
   },
 ];
 
-const EditProductCategoryListing = ({ formikProps,apiStatus }: Props) => {
+const EditTaxesListing = ({ formikProps, apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -37,13 +36,13 @@ const EditProductCategoryListing = ({ formikProps,apiStatus }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Edit Product Category </ATMPageHeading>
+          <ATMPageHeading> Edit Taxes </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
           <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
             {/* Form Heading */}
-            <div className="text-xl font-medium"> Product category Details</div>
+            <div className="text-xl font-medium"> Taxes Details</div>
 
             {/* BUTTON - Add Button */}
             <div>
@@ -64,21 +63,12 @@ const EditProductCategoryListing = ({ formikProps,apiStatus }: Props) => {
             <div className="grid grid-cols-3 gap-4">
               {/* Field1 */}
               <ATMTextField
-                name="categoryCode"
-                value={values.categoryCode}
-                label="Category Code"
-                placeholder="Category Code"
-                onChange={(e) => setFieldValue("categoryCode", e.target.value)}
-              />
-
-              {/* Field 3 */}
-              <ATMTextField
-                name="categoryName"
-                value={values.categoryName}
-                label="Category Name"
-                placeholder="Category Name"
-                onChange={(e) => setFieldValue("categoryName", e.target.value)}
-              />
+                name="taxName"
+                value={values.taxName}
+                label="Taxes Name"
+                placeholder="Taxes Name"
+                onChange={(e) => setFieldValue("taxName", e.target.value)}
+              />       
             </div>
           </div>
         </div>
@@ -86,5 +76,4 @@ const EditProductCategoryListing = ({ formikProps,apiStatus }: Props) => {
     </div>
   );
 };
-
-export default EditProductCategoryListing;
+export default EditTaxesListing;

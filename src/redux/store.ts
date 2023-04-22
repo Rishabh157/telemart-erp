@@ -30,6 +30,7 @@ import warehouseSlice from "./slices/warehouseSlice";
 import authSlice from "./slices/authSlice";
 import { authMiddleware } from "src/utils";
 import productGroupSlice from "./slices/productGroupSlice";
+import TaxesSlice from "./slices/TaxesSlice";
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -61,6 +62,7 @@ const store = configureStore({
     productSubCategory: productSubCategorySlice,
     productGroup:productGroupSlice,
     attributes: attributesSlice,
+    tax:TaxesSlice,
     item: itemSlice,
     language: languageSlice,
     dealersCategory: dealersCategorySlice,
