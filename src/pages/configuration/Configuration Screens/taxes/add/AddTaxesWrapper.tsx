@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
-import {  object, string } from "yup";
+import { object, string } from "yup";
 import AddTaxes from "./AddTaxes";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
+import { useNavigate } from "react-router-dom";
+import { showToast } from "src/utils";
+import { useAddTaxesMutation } from "src/services/TaxesService";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 
 type Props = {};
- 
+
 export type FormInitialValues = {
   taxName: string;
 };
 
 const AddTaxesWrapper = (props: Props) => {
   // Form Initial Values
+  const [apiStatus, setApiStatus] = useState<boolean>(false);
+  const [addTaxes] = useAddTaxesMutation();
+  const { userData } = useSelector((state: RootState) => state?.auth);
+  const navigate = useNavigate();
+
   const initialValues: FormInitialValues = {
     taxName: "",
   };
@@ -23,9 +33,26 @@ const AddTaxesWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    console.log("onSubmitHandler", values);
+    setApiStatus(true);
+    setTimeout(() => {
+      addTaxes({
+        taxName: values.taxName,
+        companyId: userData?.companyId || "",
+      }).then((res) => {
+        if ("data" in res) {
+          if (res?.data?.status) {
+            showToast("success", "Taxes added successfully!");
+            navigate("/configurations/taxes");
+          } else {
+            showToast("error", res?.data?.message);
+          }
+        } else {
+          showToast("error", "Something went wrong");
+        }
+        setApiStatus(false);
+      });
+    }, 1000);
   };
-
 
   return (
     <ConfigurationLayout>
@@ -35,7 +62,7 @@ const AddTaxesWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <AddTaxes formikProps={formikProps} />;
+          return <AddTaxes apiStatus={apiStatus} formikProps={formikProps} />;
         }}
       </Formik>
     </ConfigurationLayout>

@@ -4,6 +4,7 @@ import { TaxesListResponse } from "src/models/taxes.model";
 
 export type InitialStateType = {
     items: TaxesListResponse[] | [],
+    selectedTaxes:TaxesListResponse | null,
     totalItems: number,
     isTableLoading: boolean,
     page: number;
@@ -15,6 +16,7 @@ export type InitialStateType = {
 
 const initialState: InitialStateType = {
     items: [],
+    selectedTaxes:null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -56,7 +58,13 @@ const taxesSlice: any = createSlice({
         },
         setSelectedDealerId: (state, action: PayloadAction<string>) => {
             state.selectedDealerId = action.payload
-        }
+        },
+        setSelectedTaxes: (
+            state,
+            action: PayloadAction<TaxesListResponse | null>
+          ) => {
+            state.selectedTaxes = action.payload;
+          },
 
     }
 })
@@ -69,6 +77,7 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectedDealerId
+    setSelectedDealerId,
+    setSelectedTaxes
 } = taxesSlice.actions
 export default taxesSlice.reducer
