@@ -42,3 +42,5 @@ export type {
   AddCartonBox,
   UpdateCartonBox,
 } from "./CartonBox.model";
+
+export type { ASRListResponse, AddASR, UpdateASR } from "./ASR.model";

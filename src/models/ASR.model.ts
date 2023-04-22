@@ -1,37 +1,27 @@
 export type ASRListResponse = {
-    itemName: string;
-    quantity: string;
-    address: string;
-    mobile: string;
-    district: string;
-    is_active: boolean;
-    is_deleted: boolean;
-    createdAt: string;
-    updatedAt: string;
-    _id: string;
-    __v: number;
-
-}
-
+  asrDetails: AsrDetailsType[];
+  companyId: string;
+  isActive: boolean;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  __v: number;
+};
+export type AsrDetailsType = {
+  productName: string;
+  productId: string;
+  quantity: number;
+};
 export type AddASR = {
-    itemName: string;
-    quantity: string;
-    address: string;
-    mobile: string;
-    district: string;
-    password: string;
-    confirm_password: string;
-}
+  asrDetails: AsrDetailsType[];
+  companyId: string;
+};
 
 export type UpdateASR = {
-    body: {
-        quantity: string;
-    itemName: string;
-        address: string;
-        mobile: string;
-        district: string;
-        password: string;
-        confirm_password: string;
-    },
-    id: string;
-}
+  body: {
+    asrDetails: AsrDetailsType[];
+    companyId: string;
+  };
+  id: string;
+};
