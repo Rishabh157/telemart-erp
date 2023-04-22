@@ -6,7 +6,7 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddASRWrapper";
+import { FormInitialValues } from "./EditASRWrapper";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 
 type Props = {
@@ -21,11 +21,11 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/configurations/asr",
   },
   {
-    label: "Add ASR",
+    label: "Update ASR",
   },
 ];
 
-const AddASR = ({ formikProps, apiStatus }: Props) => {
+const EditASR = ({ formikProps, apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
   const options = [
     {
@@ -49,7 +49,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New ASR </ATMPageHeading>
+          <ATMPageHeading> Update ASR </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -63,11 +63,11 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                 type="button"
                 disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main  ${
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                   apiStatus ? "opacity-50" : ""
                 }`}
               >
-                Add ASR
+                Update
               </button>
             </div>
           </div>
@@ -168,4 +168,4 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
   );
 };
 
-export default AddASR;
+export default EditASR;

@@ -78,6 +78,7 @@ import EditAttributeGroupWrapper from "./pages/configuration/Configuration Scree
 import EditProductGroupWrapper from "./pages/configuration/Configuration Screens/productGroup/edit/EditProductGroupWrapper";
 import EditItemWrapper from "./pages/configuration/Configuration Screens/item/edit/EditItemWrapper";
 import EditCartonBoxWrapper from "./pages/configuration/Configuration Screens/cartonBox/edit/EditCartonBoxWrapper";
+import EditASRWrapper from "./pages/configuration/Configuration Screens/asr/edit/EditASRWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -178,7 +179,7 @@ const PageRoutes = () => {
             path="/configurations/product-group/add"
             element={<AddProductGroupWrapper />}
           />
-          
+
           <Route
             path="/configurations/product-group/:id"
             element={<EditProductGroupWrapper />}
@@ -320,6 +321,7 @@ const PageRoutes = () => {
 
           <Route path="/configurations/asr" element={<ASRListingWrapper />} />
           <Route path="/configurations/asr/add" element={<AddASRWrapper />} />
+          <Route path="/configurations/asr/:id" element={<EditASRWrapper />} />
           <Route
             path="/configurations/dealers-category"
             element={<DealersCategoryListingWrapper />}
