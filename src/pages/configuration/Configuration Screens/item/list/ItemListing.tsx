@@ -8,7 +8,11 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/itemSlice";
+import {
+  setRowsPerPage,
+  setPage,
+  setSearchValue,
+} from "src/redux/slices/itemSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -23,7 +27,7 @@ const ItemListing = ({ columns, rows }: Props) => {
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const navigate = useNavigate();
   const [selectedRows, setSelectedRows] = useState([]);
-  const { page, rowsPerPage, totalItems } = itemState;
+  const { page, rowsPerPage, totalItems, searchValue } = itemState;
 
   const breadcrumbs: BreadcrumbType[] = [
     {
@@ -56,12 +60,14 @@ const ItemListing = ({ columns, rows }: Props) => {
       <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
+          searchValue={searchValue}
           page={page}
           rowCount={rows.length}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
+          onSearch={(newValue) => dispatch(setSearchValue(newValue))}
           // onFilterClick={() => setIsFilterOpen(true)}
         />
 

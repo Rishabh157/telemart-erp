@@ -1,38 +1,44 @@
 export type CartonBoxListResponse = {
-    innerItemCount: string;
-    dimensions: string;
-    boxWeight: string;
-    boxName: string;
-    subCategory: string;
-    weight: string;
-    barcode: boolean;
-    is_active: boolean;
-    is_deleted: boolean;
-    createdAt: string;
-    updatedAt: string;
-    _id: string;
-    __v: number;
-}
+  boxName: string;
+  innerItemCount: number;
+  dimension: {
+    height: number;
+    width: number;
+    depth: number;
+  };
+  boxWeight: number;
+  companyId: string;
+  isActive: boolean;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  __v: number;
+};
 
 export type AddCartonBox = {
-    itemImage: string;
-    itemCode: string;
-    itemName: string;
-    barcode: boolean;
-    category: string;
-    subCategory: string;
-    weight: string;
-}
+  boxName: string;
+  innerItemCount: number;
+  dimension: {
+    height: number;
+    width: number;
+    depth: number;
+  };
+  boxWeight: number;
+  companyId: string;
+};
 
 export type UpdateCartonBox = {
-    body: {
-        itemImage: string;
-        itemCode: string;
-        barcode: boolean;
-        itemName: string;
-        category: string;
-        subCategory: string;
-        weight: string;
-    },
-    id: string;
-}
+  body: {
+    boxName: string;
+    innerItemCount: number;
+    dimension: {
+      height: number;
+      width: number;
+      depth: number;
+    };
+    boxWeight: number;
+    companyId: string;
+  };
+  id: string;
+};
