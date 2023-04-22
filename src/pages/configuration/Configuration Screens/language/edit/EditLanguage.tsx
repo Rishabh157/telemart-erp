@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddLanguageWrapper";
+import { FormInitialValues } from "./EditLanguageWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -16,14 +16,14 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
   {
     label: "Languages",
-    path: "/list-page",
+    path: "/configurations/language",
   },
   {
-    label: "Add Language",
+    label: "Update Language",
   },
 ];
 
-const AddLanguage = ({ formikProps, apiStatus }: Props) => {
+const EditLanguage = ({ formikProps, apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -36,7 +36,7 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add Language </ATMPageHeading>
+          <ATMPageHeading> Update Language </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -54,7 +54,7 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
                   apiStatus ? "opacity-50" : ""
                 }`}
               >
-                Add Language
+                Update
               </button>
             </div>
           </div>
@@ -78,4 +78,4 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
   );
 };
 
-export default AddLanguage;
+export default EditLanguage;
