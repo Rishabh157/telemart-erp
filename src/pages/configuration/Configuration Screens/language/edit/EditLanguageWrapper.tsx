@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
-import AddLanguage from "./AddLanguage";
+import EditLanguage from "./EditLanguage";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-import { useAddLanguageMutation } from "src/services/LanguageService";
+// import { useEditLanguageMutation } from "src/services/LanguageService";
 import { showToast } from "src/utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useGetLanguageByIdQuery,
+  useUpdateLanguageMutation,
+} from "src/services/LanguageService";
+import { setSelectedItem } from "src/redux/slices/languageSlice";
 
 type Props = {};
 
@@ -15,14 +20,23 @@ export type FormInitialValues = {
   languageName: string;
 };
 
-const AddLanguageWrapper = (props: Props) => {
+const EditLanguageWrapper = (props: Props) => {
+  const params = useParams();
+  const Id = params.id;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [editLanguage] = useUpdateLanguageMutation();
   const [apiStatus, setApiStatus] = useState<boolean>(false);
   const { userData } = useSelector((state: RootState) => state?.auth);
-  const [addLanguage] = useAddLanguageMutation();
+  const { selectedItem }: any = useSelector(
+    (state: RootState) => state?.language
+  );
+
+  const { data, isLoading, isFetching } = useGetLanguageByIdQuery(Id);
+  // const [EditLanguage] = useEditLanguageMutation();
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    languageName: "",
+    languageName: selectedItem?.languageName,
   };
 
   // Form Validation Schema
@@ -33,13 +47,16 @@ const AddLanguageWrapper = (props: Props) => {
   const onSubmitHandler = (values: FormInitialValues) => {
     console.log("onSubmitHandler", values);
     setApiStatus(true);
-    addLanguage({
-      languageName: values.languageName,
-      companyId: userData?.companyId || "",
+    editLanguage({
+      body: {
+        languageName: values.languageName,
+        companyId: userData?.companyId || "",
+      },
+      id: Id || "",
     }).then((res) => {
       if ("data" in res) {
         if (res?.data?.status) {
-          showToast("success", "Langugae added successfully!");
+          showToast("success", "Updated successfully!");
           navigate("/configurations/language");
         } else {
           showToast("error", res?.data?.message);
@@ -50,16 +67,20 @@ const AddLanguageWrapper = (props: Props) => {
       setApiStatus(false);
     });
   };
+  useEffect(() => {
+    dispatch(setSelectedItem(data?.data));
+  }, [dispatch, data, isLoading, isFetching]);
   return (
     <ConfigurationLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
           return (
-            <AddLanguage apiStatus={apiStatus} formikProps={formikProps} />
+            <EditLanguage apiStatus={apiStatus} formikProps={formikProps} />
           );
         }}
       </Formik>
@@ -67,4 +88,4 @@ const AddLanguageWrapper = (props: Props) => {
   );
 };
 
-export default AddLanguageWrapper;
+export default EditLanguageWrapper;
