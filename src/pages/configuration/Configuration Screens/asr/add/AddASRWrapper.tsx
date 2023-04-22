@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { array, object, string } from "yup";
 import AddASR from "./AddASR";
@@ -6,8 +6,10 @@ import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 import { useAddAsrMutation } from "src/services/AsrService";
 import { showToast } from "src/utils";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
+import { useGetAllProductGroupQuery } from "src/services/ProductGroupService";
+import { setItems } from "src/redux/slices/productGroupSlice";
 
 type Props = {};
 
@@ -21,9 +23,10 @@ export type FormInitialValues = {
 
 const AddASRWrapper = (props: Props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [addAsr] = useAddAsrMutation();
   const [apiStatus, setApiStatus] = useState<boolean>(false);
-
+  const { data, isLoading, isFetching } = useGetAllProductGroupQuery("");
   const { userData } = useSelector((state: RootState) => state?.auth);
 
   // Form Initial Values
@@ -67,6 +70,10 @@ const AddASRWrapper = (props: Props) => {
       setApiStatus(false);
     });
   };
+
+  useEffect(() => {
+    dispatch(setItems(data?.data));
+  }, [dispatch, data, isLoading, isFetching]);
 
   return (
     <ConfigurationLayout>

@@ -8,6 +8,8 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "./AddASRWrapper";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -27,18 +29,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddASR = ({ formikProps, apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
-  const options = [
-    {
-      id: "642d5d58b75d03a4b8fa5183",
-      label: "Group 1",
-      value: "grp1",
-    },
-    {
-      id: "642d5d58b75d03a4b8fa5183",
-      label: "Group 2",
-      value: "grp2",
-    },
-  ];
+  const { items }: any = useSelector((state: RootState) => state?.productGroup);
+
+  const options = items?.map((ele: any) => {
+    return { id: ele?._id, label: ele?.groupName, value: ele?.groupName };
+  });
   return (
     <div className="">
       <div className="p-4 flex flex-col gap-2  ">
@@ -106,7 +101,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                             <ATMSelect
                               name={`asrDetails[${asrIndex}].productName`}
                               value={productName}
-                              label="Product Name"
+                              label="Product group"
                               options={options}
                               onChange={(e) => {
                                 setFieldValue(
@@ -115,7 +110,9 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                 );
                                 setFieldValue(
                                   `asrDetails[${asrIndex}].productId`,
-                                  options[asrIndex]?.id
+                                  options.find(
+                                    (obj: any) => obj.label === e.target.value
+                                  ).id
                                 );
                               }}
                             />

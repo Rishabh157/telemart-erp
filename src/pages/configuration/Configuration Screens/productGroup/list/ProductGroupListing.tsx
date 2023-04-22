@@ -8,7 +8,11 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage,setSearchValue } from "src/redux/slices/productGroupSlice";
+import {
+  setRowsPerPage,
+  setPage,
+  setSearchValue,
+} from "src/redux/slices/productGroupSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -24,7 +28,7 @@ const ProductGroupListing = ({ columns, rows }: Props) => {
   );
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const navigate = useNavigate();
-  const { page, rowsPerPage ,searchValue,totalItems} = productGroupState;
+  const { page, rowsPerPage, searchValue, totalItems } = productGroupState;
   const [selectedRows, setSelectedRows] = useState([]);
   const breadcrumbs: BreadcrumbType[] = [
     {
@@ -63,7 +67,7 @@ const ProductGroupListing = ({ columns, rows }: Props) => {
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
-          onSearch={(newValue)=>dispatch(setSearchValue(newValue))}
+          onSearch={(newValue) => dispatch(setSearchValue(newValue))}
 
           //isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
@@ -76,7 +80,7 @@ const ProductGroupListing = ({ columns, rows }: Props) => {
             rows={rows}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            extraClasses=" overflow-auto"
+            extraClasses="h-full overflow-auto"
           />
         </div>
 
