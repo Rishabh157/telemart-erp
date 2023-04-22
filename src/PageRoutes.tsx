@@ -80,6 +80,7 @@ import EditItemWrapper from "./pages/configuration/Configuration Screens/item/ed
 import EditCartonBoxWrapper from "./pages/configuration/Configuration Screens/cartonBox/edit/EditCartonBoxWrapper";
 import EditASRWrapper from "./pages/configuration/Configuration Screens/asr/edit/EditASRWrapper";
 import EditTaxesWrapper from "./pages/configuration/Configuration Screens/taxes/edit/EditTaxesWrapper";
+import EditLanguageWrapper from "./pages/configuration/Configuration Screens/language/edit/EditLanguageWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -321,6 +322,10 @@ const PageRoutes = () => {
           <Route
             path="/configurations/language/add"
             element={<AddLanguageWrapper />}
+          />
+          <Route
+            path="/configurations/language/:id"
+            element={<EditLanguageWrapper />}
           />
 
           <Route path="/configurations/location" element={<Locations />} />

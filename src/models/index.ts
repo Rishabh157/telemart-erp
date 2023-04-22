@@ -44,3 +44,8 @@ export type {
 } from "./CartonBox.model";
 
 export type { ASRListResponse, AddASR, UpdateASR } from "./ASR.model";
+export type {
+  LanguageListResponse,
+  AddLanguage,
+  UpdateLanguage,
+} from "./Language.model";
