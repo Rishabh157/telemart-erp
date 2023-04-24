@@ -81,6 +81,7 @@ import EditCartonBoxWrapper from "./pages/configuration/Configuration Screens/ca
 import EditASRWrapper from "./pages/configuration/Configuration Screens/asr/edit/EditASRWrapper";
 import EditTaxesWrapper from "./pages/configuration/Configuration Screens/taxes/edit/EditTaxesWrapper";
 import EditLanguageWrapper from "./pages/configuration/Configuration Screens/language/edit/EditLanguageWrapper";
+import EditDealersCategoryWrapper from "./pages/configuration/Configuration Screens/dealersCategory/edit/EditDealersCategoryWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -309,6 +310,10 @@ const PageRoutes = () => {
           <Route
             path="/configurations/dealers-category/add"
             element={<AddDealersCategoryWrapper />}
+          />
+          <Route
+            path="/configurations/dealers-category/:id"
+            element={<EditDealersCategoryWrapper />}
           />
 
           <Route

@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { number, object, string } from "yup";
-import AddDealersCategory from "./AddDealersCategory";
+import EditDealersCategory from "./EditDealersCategory";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-import { useAddDealerCategoryMutation } from "src/services/DealerCategoryService";
-import { useSelector } from "react-redux";
+// import { useAddDealerCategoryMutation } from "src/services/DealerCategoryService";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 import { showToast } from "src/utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useGetDealerCategoryByIdQuery,
+  useUpdateDealerCategoryMutation,
+} from "src/services/DealerCategoryService";
+import { setSelectedItem } from "src/redux/slices/dealersCategorySlice";
 
 type Props = {};
 
@@ -18,19 +23,25 @@ export type FormInitialValues = {
   deliveryPercentage: number;
 };
 
-const AddDealersCategoryWrapper = (props: Props) => {
+const EditDealersCategoryWrapper = (props: Props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const params = useParams();
+  const Id = params.id;
   const [apiStatus, setApiStatus] = useState(false);
-
-  const [addDealerscategory] = useAddDealerCategoryMutation();
+  const { data, isLoading, isFetching } = useGetDealerCategoryByIdQuery(Id);
+  const [editDealerscategory] = useUpdateDealerCategoryMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
+  const { selectedItem }: any = useSelector(
+    (state: RootState) => state?.dealersCategory
+  );
 
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    dealersCategory: "",
-    investAmount: 0,
-    numberOfOrders: 0,
-    deliveryPercentage: 0,
+    dealersCategory: selectedItem?.dealersCategory,
+    investAmount: selectedItem?.investAmount,
+    numberOfOrders: selectedItem?.numberOfOrders,
+    deliveryPercentage: selectedItem?.deliveryPercentage,
   };
 
   // Form Validation Schema
@@ -44,16 +55,19 @@ const AddDealersCategoryWrapper = (props: Props) => {
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
     setApiStatus(true);
-    addDealerscategory({
-      dealersCategory: values.dealersCategory,
-      investAmount: values.investAmount,
-      numberOfOrders: values.numberOfOrders,
-      deliveryPercentage: values.deliveryPercentage,
-      companyId: userData?.companyId || "",
+    editDealerscategory({
+      body: {
+        dealersCategory: values.dealersCategory,
+        investAmount: values.investAmount,
+        numberOfOrders: values.numberOfOrders,
+        deliveryPercentage: values.deliveryPercentage,
+        companyId: userData?.companyId || "",
+      },
+      id: Id || "",
     }).then((res) => {
       if ("data" in res) {
         if (res?.data?.status) {
-          showToast("success", "Dealers category added successfully!");
+          showToast("success", "Updated added successfully!");
           navigate("/configurations/dealers-category");
         } else {
           showToast("error", res?.data?.message);
@@ -65,16 +79,20 @@ const AddDealersCategoryWrapper = (props: Props) => {
     });
   };
 
+  useEffect(() => {
+    dispatch(setSelectedItem(data?.data));
+  }, [dispatch, data, isLoading, isFetching]);
   return (
     <ConfigurationLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
           return (
-            <AddDealersCategory
+            <EditDealersCategory
               formikProps={formikProps}
               apiStatus={apiStatus}
             />
@@ -85,4 +103,4 @@ const AddDealersCategoryWrapper = (props: Props) => {
   );
 };
 
-export default AddDealersCategoryWrapper;
+export default EditDealersCategoryWrapper;
