@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddDealersCategoryWrapper";
+import { FormInitialValues } from "./EditDealersCategoryWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -19,11 +19,11 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/configurations/dealers-category",
   },
   {
-    label: "Add Dealer Category",
+    label: "Update Dealer Category",
   },
 ];
 
-const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
+const EditDealersCategory = ({ formikProps, apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -54,7 +54,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                   apiStatus ? "opacity-50" : ""
                 }`}
               >
-                Add Dealer Category
+                Update
               </button>
             </div>
           </div>
@@ -110,4 +110,4 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
   );
 };
 
-export default AddDealersCategory;
+export default EditDealersCategory;

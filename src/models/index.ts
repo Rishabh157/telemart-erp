@@ -49,3 +49,8 @@ export type {
   AddLanguage,
   UpdateLanguage,
 } from "./Language.model";
+export type {
+  DealersCategoryListResponse,
+  AddDealersCategory,
+  UpdateDealersCategory,
+} from "./DealersCategory.model";
