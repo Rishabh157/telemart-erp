@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
-import AddProductSubCategory from "./AddProductSubCategory";
+import EditProductSubCategory from "./EditProductSubCategory";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-import { useAddProductSubCategoryMutation } from "src/services/ProductSubCategoryService";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 import { showToast } from "src/utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetAllProductCategoryQuery } from "src/services/ProductCategoryServices";
 import { selAllproductCategory } from "src/redux/slices/productCategorySlice";
 import { useGetAllTaxesQuery } from "src/services/TaxesService";
 import { setAllTaxes } from "src/redux/slices/TaxesSlice";
+import {
+  useGetProductSubCategoryByIdQuery,
+  useUpdateProductSubCategoryMutation,
+} from "src/services/ProductSubCategoryService";
+import { setSelectedItem } from "src/redux/slices/productSubCategorySlice";
 
 type Props = {};
 
@@ -23,35 +27,48 @@ export type FormInitialValues = {
   hsnCode: string;
 };
 
-const AddProductSubCategoryWrapper = (props: Props) => {
+const EditProductSubCategoryWrapper = (props: Props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const params = useParams();
+  const Id = params.id;
   const [apiStatus, setApiStatus] = useState(false);
+  // Product sub category single view data (PS)
+  const {
+    data: psData,
+    isLoading: psIsLoading,
+    isFetching: psIsFetching,
+  } = useGetProductSubCategoryByIdQuery(Id);
   const { userData } = useSelector((state: RootState) => state?.auth);
   const { allProductCategory }: any = useSelector(
     (state: RootState) => state?.productCategory
   );
   const { allTaxes }: any = useSelector((state: RootState) => state?.tax);
+  const { selectedItem }: any = useSelector(
+    (state: RootState) => state?.productSubCategory
+  );
 
+  // Product category all data (pc)
   const {
     data: pcData,
     isLoading: pcIsLoading,
     isFetching: pcIsFetching,
   } = useGetAllProductCategoryQuery("");
 
+  // Taxes all data (t)
   const {
     data: tData,
     isLoading: tIsLoading,
     isFetching: tIsFetching,
   } = useGetAllTaxesQuery("");
-  const [addProductSubCategory] = useAddProductSubCategoryMutation();
+  const [editProductSubCategory] = useUpdateProductSubCategoryMutation();
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    subCategoryCode: "",
-    subCategoryName: "",
-    parentCategory: "",
-    applicableTaxes: "",
-    hsnCode: "",
+    subCategoryCode: selectedItem?.subCategoryCode || "",
+    subCategoryName: selectedItem?.subCategoryName || "",
+    parentCategory: selectedItem?.parentCategory || "",
+    applicableTaxes: selectedItem?.applicableTaxes || "",
+    hsnCode: selectedItem?.hsnCode || "",
   };
 
   // Form Validation Schema
@@ -66,18 +83,20 @@ const AddProductSubCategoryWrapper = (props: Props) => {
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
     setApiStatus(true);
-    addProductSubCategory({
-      subCategoryCode: values.subCategoryCode,
-      subCategoryName: values.subCategoryName,
-      parentCategory: values.parentCategory,
-      applicableTaxes: values.applicableTaxes,
-      hsnCode: values.hsnCode,
-
-      companyId: userData?.companyId || "",
+    editProductSubCategory({
+      body: {
+        subCategoryCode: values.subCategoryCode,
+        subCategoryName: values.subCategoryName,
+        parentCategory: values.parentCategory,
+        applicableTaxes: values.applicableTaxes,
+        hsnCode: values.hsnCode,
+        companyId: userData?.companyId || "",
+      },
+      id: Id || "",
     }).then((res) => {
       if ("data" in res) {
         if (res?.data?.status) {
-          showToast("success", "Product sub category added successfully!");
+          showToast("success", "Updated successfully!");
           navigate("/configurations/product-sub-category");
         } else {
           showToast("error", res?.data?.message);
@@ -88,6 +107,10 @@ const AddProductSubCategoryWrapper = (props: Props) => {
       setApiStatus(false);
     });
   };
+
+  useEffect(() => {
+    dispatch(setSelectedItem(psData?.data));
+  }, [dispatch, psData, psIsFetching, psIsLoading]);
 
   useEffect(() => {
     dispatch(selAllproductCategory(pcData?.data));
@@ -111,13 +134,14 @@ const AddProductSubCategoryWrapper = (props: Props) => {
   return (
     <ConfigurationLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
           return (
-            <AddProductSubCategory
+            <EditProductSubCategory
               formikProps={formikProps}
               dropdownOptions={dropdownOptions}
               apiStatus={apiStatus}
@@ -129,4 +153,4 @@ const AddProductSubCategoryWrapper = (props: Props) => {
   );
 };
 
-export default AddProductSubCategoryWrapper;
+export default EditProductSubCategoryWrapper;

@@ -7,7 +7,7 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { SelectOption } from "src/models/FormField/FormField.model";
-import { FormInitialValues } from "./AddProductSubCategoryWrapper";
+import { FormInitialValues } from "./EditProductSubCategoryWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -22,20 +22,19 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
   {
     label: "Product Sub Category",
-    path: "/configurations/product-sub-category/add",
+    path: "/configurations/product-sub-category",
   },
   {
-    label: "Add Product Sub Category",
+    label: "Update Product Sub Category",
   },
 ];
 
-const AddProductSubCategory = ({
+const EditProductSubCategory = ({
   formikProps,
   dropdownOptions,
   apiStatus,
 }: Props) => {
   const { values, setFieldValue } = formikProps;
-
   return (
     <div className="">
       <div className="p-4 flex flex-col gap-2  ">
@@ -46,7 +45,7 @@ const AddProductSubCategory = ({
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Product Sub Category </ATMPageHeading>
+          <ATMPageHeading> Update Product Sub Category </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -60,14 +59,14 @@ const AddProductSubCategory = ({
             {/* BUTTON - Add Button */}
             <div>
               <button
-                disabled={apiStatus}
                 type="button"
+                disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                   apiStatus ? "opacity-50" : ""
                 }`}
               >
-                Add Subcategory
+                Update
               </button>
             </div>
           </div>
@@ -98,7 +97,7 @@ const AddProductSubCategory = ({
 
               <ATMSelect
                 name="parentCategory"
-                value={values.parentCategory}
+                value={values?.parentCategory}
                 onChange={(e) => {
                   setFieldValue("parentCategory", e.target.value);
                 }}
@@ -108,7 +107,7 @@ const AddProductSubCategory = ({
 
               <ATMSelect
                 name="applicableTaxes"
-                value={values.applicableTaxes}
+                value={values?.applicableTaxes}
                 onChange={(e) => {
                   setFieldValue("applicableTaxes", e.target.value);
                 }}
@@ -132,4 +131,4 @@ const AddProductSubCategory = ({
   );
 };
 
-export default AddProductSubCategory;
+export default EditProductSubCategory;

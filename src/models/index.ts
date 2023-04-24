@@ -54,3 +54,9 @@ export type {
   AddDealersCategory,
   UpdateDealersCategory,
 } from "./DealersCategory.model";
+
+export type {
+  ProductSubCategoryListResponse,
+  AddProductSubCategory,
+  UpdateProductSubCategory,
+} from "./ProductSubCategory.model";
