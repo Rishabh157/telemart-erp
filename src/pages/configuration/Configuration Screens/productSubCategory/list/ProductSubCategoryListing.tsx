@@ -1,6 +1,8 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import ATMBreadCrumbs, {
+  BreadcrumbType,
+} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
@@ -8,6 +10,7 @@ import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
 import { setRowsPerPage, setPage } from "src/redux/slices/attributesGroupSlice";
 import { AppDispatch, RootState } from "src/redux/store";
+import { setSearchValue } from "src/redux/slices/productSubCategorySlice";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
@@ -17,13 +20,14 @@ type Props = {
 
 const ProductSubCategoryListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const productCategoryState: any = useSelector((state: RootState) => state.productCategory);
+  const productSubCategoryState: any = useSelector(
+    (state: RootState) => state.productSubCategory
+  );
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-  const navigate = useNavigate()
-  const [selectedRows, setSelectedRows] = useState([])
+  const navigate = useNavigate();
+  const [selectedRows, setSelectedRows] = useState([]);
 
-
-  const { page, rowsPerPage } = productCategoryState;
+  const { page, rowsPerPage, searchValue } = productSubCategoryState;
   const breadcrumbs: BreadcrumbType[] = [
     {
       label: "Configuration",
@@ -43,31 +47,39 @@ const ProductSubCategoryListing = ({ columns, rows }: Props) => {
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
         <ATMPageHeading> Product Sub Categories </ATMPageHeading>
-        <button onClick={() => navigate("/configurations/product-sub-category/add")} className="bg-primary-main text-white rounded py-1 px-3">
+        <button
+          onClick={() => navigate("/configurations/product-sub-category/add")}
+          className="bg-primary-main text-white rounded py-1 px-3"
+        >
           {" "}
-          + Add  Sub Category{" "}
+          + Add Sub Category{" "}
         </button>
       </div>
 
       <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
+          searchValue={searchValue}
           page={page}
           rowCount={rows.length}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
+          onSearch={(newValue) => dispatch(setSearchValue(newValue))}
           isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
         />
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-        <ATMTable columns={columns} rows={rows}
-           isCheckbox={true}
-           selectedRows={selectedRows}
-           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
+          <ATMTable
+            columns={columns}
+            rows={rows}
+            isCheckbox={true}
+            selectedRows={selectedRows}
+            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            extraClasses="h-full overflow-auto"
+          />
         </div>
 
         {/* Pagination */}
