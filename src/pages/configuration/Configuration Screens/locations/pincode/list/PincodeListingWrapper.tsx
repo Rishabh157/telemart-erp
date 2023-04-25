@@ -1,15 +1,51 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import PincodeListing from './PincodeListing'
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "src/redux/store";
+import { useGetPincodeQuery } from "src/services/PinCodeService";
+import { setItems, setTotalItems } from "src/redux/slices/pincodeSlice";
 
-const pincodes = [
-  '452001',
-  '452002 ',
-  '452003',
-  '452004',
-  '452005',
-]
 
 const PincodeListingWrapper = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const {items}: any = useSelector(
+    (state: RootState) => state.pincode
+  );
+
+  const { searchValue ,filterValue}: any = useSelector(
+  (state: RootState) => state.pincode
+  );
+
+  const pincodes=items?.map((ele:any)=>{
+  return { label:ele.pincode,
+    value:ele._id
+  }
+  })
+  
+  const {data, isLoading, isFetching}=useGetPincodeQuery
+  ({
+    limit: 100,
+    searchValue:searchValue || filterValue,
+    params: ["pincode","tehsilId"],
+    page: 0,
+    filterBy: [
+      {
+        fieldName: "tehsilId",
+        value:filterValue ? [filterValue]: [],
+      },
+    ],
+    dateFilter: {},
+    orderBy: "createdAt",
+    orderByValue: -1,
+  });
+  
+  useEffect(()=>{
+    dispatch(setItems(data?.data))
+  
+  
+  },[data, isLoading, isFetching])
+  
   return (
     <PincodeListing
       pincodes={pincodes}

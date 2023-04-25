@@ -38,7 +38,6 @@ const Locations = () => {
                     <AreaListingWrapper />
                 </div>
 
-
             </div>
         </ConfigurationLayout>
     )

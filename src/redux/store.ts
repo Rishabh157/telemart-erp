@@ -31,6 +31,12 @@ import authSlice from "./slices/authSlice";
 import { authMiddleware } from "src/utils";
 import productGroupSlice from "./slices/productGroupSlice";
 import TaxesSlice from "./slices/TaxesSlice";
+import areaSlice from "./slices/areaSlice";
+import countrySlice from "./slices/countrySlice";
+import statesSlice from "./slices/statesSlice";
+import districtSlice from "./slices/districtSlice";
+import tehsilSlice from "./slices/tehsilSlice";
+import pincodeSlice from "./slices/pincodeSlice";
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -64,10 +70,16 @@ const store = configureStore({
     attributes: attributesSlice,
     tax:TaxesSlice,
     item: itemSlice,
+    states:statesSlice,
+    district:districtSlice,
+    areas:areaSlice,
     language: languageSlice,
     dealersCategory: dealersCategorySlice,
     products: productSlice,
+    tehsils:tehsilSlice,
+    pincode:pincodeSlice,
     asr: ASRSlice,
+    country:countrySlice,
     configurationCompany: configurationCompanySlice,
     barcode: barcodeSlice,
     [apiSlice.reducerPath]: apiSlice.reducer,
