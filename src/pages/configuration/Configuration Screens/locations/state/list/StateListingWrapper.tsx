@@ -1,46 +1,54 @@
-import React from 'react'
+import React,{useEffect}from 'react'
 import StateListing from './StateListing'
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from 'src/redux/store';
+import { setItems } from 'src/redux/slices/statesSlice';
+import { useGetStateQuery } from 'src/services/StateService';
 
-const states = [
-  "Andhra Pradesh",
-  "Arunachal Pradesh",
-  "Assam",
-  "Bihar",
-  "Chhattisgarh",
-  "Goa",
-  "Gujarat",
-  "Haryana",
-  "Himachal Pradesh",
-  "Jammu and Kashmir",
-  "Jharkhand",
-  "Karnataka",
-  "Kerala",
-  "Madhya Pradesh",
-  "Maharashtra",
-  "Manipur",
-  "Meghalaya",
-  "Mizoram",
-  "Nagaland",
-  "Odisha",
-  "Punjab",
-  "Rajasthan",
-  "Sikkim",
-  "Tamil Nadu",
-  "Telangana",
-  "Tripura",
-  "Uttarakhand",
-  "Uttar Pradesh",
-  "West Bengal",
-  "Andaman and Nicobar Islands",
-  "Chandigarh",
-  "Dadra and Nagar Haveli",
-  "Daman and Diu",
-  "Delhi",
-  "Lakshadweep",
-  "Puducherry"
-]
+
+
 
 const StateListingWrapper = () => {
+  
+  const dispatch = useDispatch<AppDispatch>();
+  const {items}: any = useSelector(
+    (state: RootState) => state.states
+  );
+  
+  
+  const { searchValue: searchValueState ,filterValue}: any = useSelector(
+  (state: RootState) => state.states
+  );
+
+  const states=items?.map((ele:any)=>{
+  return { label:ele.stateName,
+    value:ele._id
+  }
+  })
+  
+  const {data, isLoading, isFetching}=useGetStateQuery
+  ({
+    limit: 100,
+    searchValue:searchValueState || filterValue,
+    params: ["stateName","countryId"],
+    page: 0,
+    filterBy: [
+      {
+        fieldName: "countryId",
+        value:filterValue ? [filterValue]: [],
+      },
+    ],
+    dateFilter: {},
+    orderBy: "createdAt",
+    orderByValue: -1,
+  });
+  
+  useEffect(()=>{
+    dispatch(setItems(data?.data))
+  
+  
+  },[data, isLoading, isFetching])
+  
   return (
     <StateListing
       states={states}

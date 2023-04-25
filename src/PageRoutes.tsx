@@ -338,7 +338,7 @@ const PageRoutes = () => {
             element={<EditLanguageWrapper />}
           />
 
-          <Route path="/configurations/location" element={<Locations />} />
+          <Route path="/configurations/location" element={<Locations/>} />
 
           <Route path="/configurations/asr" element={<ASRListingWrapper />} />
           <Route path="/configurations/asr/add" element={<AddASRWrapper />} />
