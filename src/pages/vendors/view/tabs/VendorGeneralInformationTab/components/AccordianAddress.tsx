@@ -1,9 +1,7 @@
 import React from "react";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 
-type Props = {};
-
-const AccordianAddress = (props: Props) => {
+const AccordianAddress = (data: any) => {
   return (
     <div>
       {/* Regd. Address */}
@@ -14,7 +12,7 @@ const AccordianAddress = (props: Props) => {
         <div className="grid grid-cols-3 gap-4 gap-y-5">
           <ATMTextField
             name=""
-            value={"Phone"}
+            value={data?.data?.registrationAddress?.phone}
             onChange={(e) => {}}
             label={"Phone"}
             placeholder={"Phone"}
@@ -24,7 +22,7 @@ const AccordianAddress = (props: Props) => {
 
           <ATMTextField
             name=""
-            value={"Address"}
+            value={data?.data?.registrationAddress?.address}
             onChange={(e) => {}}
             label={"Address"}
             placeholder={"Address"}
@@ -34,7 +32,7 @@ const AccordianAddress = (props: Props) => {
 
           <ATMTextField
             name=""
-            value={"Country"}
+            value={data?.data?.registrationCountryName}
             onChange={(e) => {}}
             label={"Country"}
             placeholder={"Country"}
@@ -44,7 +42,7 @@ const AccordianAddress = (props: Props) => {
 
           <ATMTextField
             name=""
-            value={"State"}
+            value={data?.data?.registrationStateName}
             onChange={(e) => {}}
             label={"State"}
             placeholder={"State"}
@@ -53,7 +51,7 @@ const AccordianAddress = (props: Props) => {
           />
           <ATMTextField
             name=""
-            value={"District"}
+            value={data?.data?.registrationDistrictName}
             onChange={(e) => {}}
             label={"District"}
             placeholder={"District"}
@@ -63,7 +61,7 @@ const AccordianAddress = (props: Props) => {
 
           <ATMTextField
             name=""
-            value={"Pincode"}
+            value={data?.data?.registrationPincodeName}
             onChange={(e) => {}}
             label={"Pincode"}
             placeholder={"Pincode"}
@@ -81,7 +79,7 @@ const AccordianAddress = (props: Props) => {
         <div className="grid grid-cols-3 gap-4 gap-y-5">
           <ATMTextField
             name=""
-            value={"Phone"}
+            value={data?.data?.billingAddress?.phone}
             onChange={(e) => {}}
             label={"Phone"}
             placeholder={"Phone"}
@@ -91,7 +89,7 @@ const AccordianAddress = (props: Props) => {
 
           <ATMTextField
             name=""
-            value={"Address"}
+            value={data?.data?.billingAddress?.address}
             onChange={(e) => {}}
             label={"Address"}
             placeholder={"Address"}
@@ -101,7 +99,7 @@ const AccordianAddress = (props: Props) => {
 
           <ATMTextField
             name=""
-            value={"Country"}
+            value={data?.data?.billingAddressCountryName}
             onChange={(e) => {}}
             label={"Country"}
             placeholder={"Country"}
@@ -111,7 +109,7 @@ const AccordianAddress = (props: Props) => {
 
           <ATMTextField
             name=""
-            value={"State"}
+            value={data?.data?.billingAddressStateName}
             onChange={(e) => {}}
             label={"State"}
             placeholder={"State"}
@@ -120,7 +118,7 @@ const AccordianAddress = (props: Props) => {
           />
           <ATMTextField
             name=""
-            value={"District"}
+            value={data?.data?.billingAddressDistrictName}
             onChange={(e) => {}}
             label={"District"}
             placeholder={"District"}
@@ -130,7 +128,7 @@ const AccordianAddress = (props: Props) => {
 
           <ATMTextField
             name=""
-            value={"Pincode"}
+            value={data?.data?.billingAddressPincodeName}
             onChange={(e) => {}}
             label={"Pincode"}
             placeholder={"Pincode"}

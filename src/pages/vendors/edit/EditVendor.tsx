@@ -5,7 +5,7 @@ import StepLabel from "@mui/material/StepLabel";
 import ATMBreadCrumbs from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import { FormikProps } from "formik";
-import { FormInitialValues } from "./AddVendorWrapper";
+import { FormInitialValues } from "./EditVendorWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -15,7 +15,7 @@ type Props = {
   apiStatus: boolean;
 };
 
-const AddVendor = ({
+const EditVendor = ({
   formikProps,
   activeStep,
   setActiveStep,
@@ -36,7 +36,7 @@ const AddVendor = ({
       path: "/vendors",
     },
     {
-      label: "Add Vendor",
+      label: "Update vendor",
       onClick: () => {
         console.log("add-Vendors");
       },
@@ -53,7 +53,7 @@ const AddVendor = ({
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Vendor </ATMPageHeading>
+          <ATMPageHeading> Update Vendor </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -84,7 +84,7 @@ const AddVendor = ({
                   apiStatus ? "opacity-50" : ""
                 }`}
               >
-                {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                {activeStep === steps.length - 1 ? "Update" : "Next"}
               </button>
             </div>
           </div>
@@ -116,4 +116,4 @@ const AddVendor = ({
   );
 };
 
-export default AddVendor;
+export default EditVendor;

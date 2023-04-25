@@ -1,7 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import ATMBreadCrumbs, {
+  BreadcrumbType,
+} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -16,12 +18,11 @@ type Props = {
 };
 
 const ProductsListing = ({ columns, rows }: Props) => {
-
   const dispatch = useDispatch<AppDispatch>();
   const productsState: any = useSelector((state: RootState) => state.products);
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-  const navigate = useNavigate()
-  const [selectedRows, setSelectedRows] = useState([])
+  const navigate = useNavigate();
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const { page, rowsPerPage } = productsState;
 
@@ -43,18 +44,17 @@ const ProductsListing = ({ columns, rows }: Props) => {
       </div>
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
-        <ATMPageHeading> Products  </ATMPageHeading>
+        <ATMPageHeading> Products </ATMPageHeading>
         <button
-        onClick={()=> navigate('/configurations/products/add')} 
-         className="bg-primary-main text-white rounded py-1 px-3"
-         >
+          onClick={() => navigate("/configurations/products/add")}
+          className="bg-primary-main text-white rounded py-1 px-3"
+        >
           {" "}
-          + Add Products {" "}
+          + Add Products{" "}
         </button>
       </div>
 
       <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
-
         {/*Table Header */}
         <ATMTableHeader
           page={page}
@@ -68,11 +68,14 @@ const ProductsListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-        <ATMTable columns={columns} rows={rows}
-           isCheckbox={true}
-           selectedRows={selectedRows}
-           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
+          <ATMTable
+            columns={columns}
+            rows={rows}
+            isCheckbox={true}
+            selectedRows={selectedRows}
+            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            extraClasses="h-full overflow-auto"
+          />
         </div>
 
         {/* Pagination */}

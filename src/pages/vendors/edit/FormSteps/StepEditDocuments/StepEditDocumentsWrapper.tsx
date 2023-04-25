@@ -1,7 +1,7 @@
 import React from "react";
 import { FormikProps } from "formik";
-import { FormInitialValues } from "../../AddVendorWrapper";
-import StepAddDocuments from "./StepAddDocuments";
+import { FormInitialValues } from "../../EditVendorWrapper";
+import StepEditDocuments from "./StepEditDocuments";
 import { Field } from "src/models/FormField/FormField.model";
 
 type Props = {
@@ -33,12 +33,12 @@ const formFields: { sectionName: string; fields: Field<"">[] }[] = [
   },
 ];
 
-const StepAddDocumentsWrapper = ({ formikProps }: Props) => {
+const StepEditDocumentsWrapper = ({ formikProps }: Props) => {
   return (
     <>
-      <StepAddDocuments formikProps={formikProps} formFields={formFields} />
+      <StepEditDocuments formikProps={formikProps} formFields={formFields} />
     </>
   );
 };
 
-export default StepAddDocumentsWrapper;
+export default StepEditDocumentsWrapper;

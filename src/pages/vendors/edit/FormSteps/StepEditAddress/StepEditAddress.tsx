@@ -3,7 +3,7 @@ import { FormikProps } from "formik";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
-import { FormInitialValues } from "../../AddVendorWrapper";
+import { FormInitialValues } from "../../EditVendorWrapper";
 
 type DropdownOptions = {
   counrtyOptions: SelectOption[];

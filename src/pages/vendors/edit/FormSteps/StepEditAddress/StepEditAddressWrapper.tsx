@@ -1,7 +1,7 @@
 import React from "react";
 import { FormikProps } from "formik";
-import { FormInitialValues } from "../../AddVendorWrapper";
-import StepAddAddress from "./StepAddAddress";
+import { FormInitialValues } from "../../EditVendorWrapper";
+import StepEditAddress from "./StepEditAddress";
 import { Field } from "src/models/FormField/FormField.model";
 
 type Props = {
@@ -131,7 +131,7 @@ const billingPincodeOptions = [
   { label: "452001", value: "642e5b56217227fdefabb1f6" },
 ];
 
-const StepAddAddressWrapper = ({ formikProps }: Props) => {
+const StepEditAddressWrapper = ({ formikProps }: Props) => {
   const dropdownOptions = {
     counrtyOptions,
     stateOptions,
@@ -145,7 +145,7 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
 
   return (
     <>
-      <StepAddAddress
+      <StepEditAddress
         formikProps={formikProps}
         formFields={formFields}
         dropdownOptions={dropdownOptions}
@@ -154,4 +154,4 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
   );
 };
 
-export default StepAddAddressWrapper;
+export default StepEditAddressWrapper;

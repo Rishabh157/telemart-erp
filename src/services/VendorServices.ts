@@ -7,11 +7,11 @@ export const vendorApi = apiSlice.injectEndpoints({
     //***** GET *****/
     getVendors: builder.query({
       providesTags: ["vendor"],
-      query: (body: PaginationType) => ({
-        url: "",
+      query: () => ({
+        url: "/vendor",
 
         method: "GET",
-        body,
+        // body,
       }),
     }),
 
@@ -29,7 +29,7 @@ export const vendorApi = apiSlice.injectEndpoints({
     addVendor: builder.mutation({
       invalidatesTags: ["vendor"],
       query: (body: AddVendor) => ({
-        url: "/register",
+        url: "/vendor/add",
         method: "POST",
 
         body,
@@ -40,10 +40,19 @@ export const vendorApi = apiSlice.injectEndpoints({
     updateVendor: builder.mutation({
       invalidatesTags: ["vendor"],
       query: ({ body, id }: UpdateVendor) => ({
-        url: `/${id}`,
+        url: `/vendor/${id}`,
 
         method: "PUT",
         body,
+      }),
+    }),
+    //***** Delete *****/
+    deleteVendor: builder.mutation({
+      invalidatesTags: ["vendor"],
+      query: (id) => ({
+        url: `/vendor/${id}`,
+
+        method: "DELETE",
       }),
     }),
 
@@ -51,7 +60,7 @@ export const vendorApi = apiSlice.injectEndpoints({
     getVendorById: builder.query({
       providesTags: ["vendor"],
       query: (id) => ({
-        url: `/${id}`,
+        url: `/vendor/${id}`,
 
         method: "GET",
       }),
@@ -64,4 +73,5 @@ export const {
   useUpdateVendorMutation,
   useGetVendorByIdQuery,
   useGetPaginationVendorsQuery,
+  useDeleteVendorMutation,
 } = vendorApi;

@@ -2,17 +2,15 @@ import React from "react";
 import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 
-type Props = {};
-
-const bankDetailInfoList = Array(3).fill(null);
-
-const AccordianBankDetail = (props: Props) => {
+const AccordianBankDetail = (data: any) => {
+  const bankDetail = data?.data?.bankInformation;
   return (
     <div>
-      {bankDetailInfoList?.map((bank, bankIndex) => (
+      {bankDetail?.map((bank: any, bankIndex: number) => (
         <div
+          key={bankIndex}
           className={`${
-            bankIndex !== bankDetailInfoList.length - 1 && "border-b pb-4"
+            bankIndex !== bankDetail.length - 1 && "border-b pb-4"
           } ${bankIndex === 0 ? "pb-4" : "pt-4"}  border-slate-300 `}
         >
           <div className="text-primary-main text-lg pb-2 font-medium">
@@ -21,7 +19,7 @@ const AccordianBankDetail = (props: Props) => {
           <div className="grid grid-cols-3 gap-4 gap-y-5">
             <ATMTextField
               name=""
-              value={"Bank Name"}
+              value={bank?.bankName}
               onChange={(e) => {}}
               label={"Bank Name"}
               placeholder={"Bank Name"}
@@ -31,7 +29,7 @@ const AccordianBankDetail = (props: Props) => {
 
             <ATMTextField
               name=""
-              value={"Branch Name"}
+              value={bank?.bankBranchName}
               onChange={(e) => {}}
               label={"Branch Name"}
               placeholder={"Branch Name"}
@@ -41,7 +39,7 @@ const AccordianBankDetail = (props: Props) => {
 
             <ATMTextField
               name=""
-              value={"Account Holder Name"}
+              value={bank?.accountHolderName}
               onChange={(e) => {}}
               label={"Account Holder Name"}
               placeholder={"Account Holder Name"}
@@ -51,7 +49,7 @@ const AccordianBankDetail = (props: Props) => {
 
             <ATMTextField
               name=""
-              value={"Account Number"}
+              value={bank?.accountNumber}
               onChange={(e) => {}}
               label={"Account Number"}
               placeholder={"Account Number"}
@@ -60,7 +58,7 @@ const AccordianBankDetail = (props: Props) => {
             />
             <ATMTextField
               name=""
-              value={"IFSC No."}
+              value={bank?.ifscNumber}
               onChange={(e) => {}}
               label={"IFSC No."}
               placeholder={"IFSC No."}
@@ -70,7 +68,7 @@ const AccordianBankDetail = (props: Props) => {
 
             <ATMTextField
               name=""
-              value={"Account Type"}
+              value={bank?.accountType}
               onChange={(e) => {}}
               label={"Account Type"}
               placeholder={"Account Type"}
@@ -83,7 +81,7 @@ const AccordianBankDetail = (props: Props) => {
               label="Cancelled Check"
               placeholder="Cancelled Check"
               onSelect={() => {}}
-              selectedFile={"https://picsum.photos/200/300"}
+              selectedFile={bank?.cancelledCheque}
               disabled={true}
             />
           </div>

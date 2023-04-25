@@ -83,6 +83,7 @@ import EditTaxesWrapper from "./pages/configuration/Configuration Screens/taxes/
 import EditLanguageWrapper from "./pages/configuration/Configuration Screens/language/edit/EditLanguageWrapper";
 import EditDealersCategoryWrapper from "./pages/configuration/Configuration Screens/dealersCategory/edit/EditDealersCategoryWrapper";
 import EditProductSubCategoryWrapper from "./pages/configuration/Configuration Screens/productSubCategory/edit/EditProductSubCategoryWrapper";
+import EditVendorWrapper from "./pages/vendors/edit/EditVendorWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -115,6 +116,11 @@ const PageRoutes = () => {
           <Route path="/dealers/add-dealer" element={<AddDealerWrapper />} />
           <Route path="/vendors" element={<VendorsListingWrapper />} />
           <Route path="/vendors/add-vendor" element={<AddVendorWrapper />} />
+          <Route
+            path="/vendors/edit-vendor/:id"
+            element={<EditVendorWrapper />}
+          />
+
           <Route path="/vendors/:vendorId" element={<ViewVendor />}>
             <Route
               path="general-information"
