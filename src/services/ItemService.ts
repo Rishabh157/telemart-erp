@@ -71,7 +71,7 @@ export const itemsApi = apiSlice.injectEndpoints({
 
     // **** Delete
     deleteItems: builder.mutation({
-      invalidatesTags: ["Items", "attributeGroup"],
+      invalidatesTags: ["Items"],
       query: (id) => ({
         url: `/item/${id}`,
 

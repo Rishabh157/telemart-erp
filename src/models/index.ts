@@ -42,3 +42,21 @@ export type {
   AddCartonBox,
   UpdateCartonBox,
 } from "./CartonBox.model";
+
+export type { ASRListResponse, AddASR, UpdateASR } from "./ASR.model";
+export type {
+  LanguageListResponse,
+  AddLanguage,
+  UpdateLanguage,
+} from "./Language.model";
+export type {
+  DealersCategoryListResponse,
+  AddDealersCategory,
+  UpdateDealersCategory,
+} from "./DealersCategory.model";
+
+export type {
+  ProductSubCategoryListResponse,
+  AddProductSubCategory,
+  UpdateProductSubCategory,
+} from "./ProductSubCategory.model";

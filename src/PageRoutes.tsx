@@ -78,7 +78,11 @@ import EditAttributeGroupWrapper from "./pages/configuration/Configuration Scree
 import EditProductGroupWrapper from "./pages/configuration/Configuration Screens/productGroup/edit/EditProductGroupWrapper";
 import EditItemWrapper from "./pages/configuration/Configuration Screens/item/edit/EditItemWrapper";
 import EditCartonBoxWrapper from "./pages/configuration/Configuration Screens/cartonBox/edit/EditCartonBoxWrapper";
+import EditASRWrapper from "./pages/configuration/Configuration Screens/asr/edit/EditASRWrapper";
 import EditTaxesWrapper from "./pages/configuration/Configuration Screens/taxes/edit/EditTaxesWrapper";
+import EditLanguageWrapper from "./pages/configuration/Configuration Screens/language/edit/EditLanguageWrapper";
+import EditDealersCategoryWrapper from "./pages/configuration/Configuration Screens/dealersCategory/edit/EditDealersCategoryWrapper";
+import EditProductSubCategoryWrapper from "./pages/configuration/Configuration Screens/productSubCategory/edit/EditProductSubCategoryWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -179,7 +183,7 @@ const PageRoutes = () => {
             path="/configurations/product-group/add"
             element={<AddProductGroupWrapper />}
           />
-          
+
           <Route
             path="/configurations/product-group/:id"
             element={<EditProductGroupWrapper />}
@@ -217,6 +221,10 @@ const PageRoutes = () => {
           <Route
             path="/configurations/product-sub-category/add"
             element={<AddProductSubCategoryWrapper />}
+          />
+          <Route
+            path="/configurations/product-sub-category/:id"
+            element={<EditProductSubCategoryWrapper />}
           />
 
           <Route path="/configurations/item" element={<ItemListingWrapper />} />
@@ -267,7 +275,7 @@ const PageRoutes = () => {
             path="/configurations/taxes"
             element={<TaxesListingWrapper />}
           />
-          
+
           <Route
             path="/configurations/taxes/:id"
             element={<EditTaxesWrapper />}
@@ -308,6 +316,10 @@ const PageRoutes = () => {
             path="/configurations/dealers-category/add"
             element={<AddDealersCategoryWrapper />}
           />
+          <Route
+            path="/configurations/dealers-category/:id"
+            element={<EditDealersCategoryWrapper />}
+          />
 
           <Route
             path="/configurations/company/add"
@@ -321,11 +333,16 @@ const PageRoutes = () => {
             path="/configurations/language/add"
             element={<AddLanguageWrapper />}
           />
+          <Route
+            path="/configurations/language/:id"
+            element={<EditLanguageWrapper />}
+          />
 
           <Route path="/configurations/location" element={<Locations/>} />
 
           <Route path="/configurations/asr" element={<ASRListingWrapper />} />
           <Route path="/configurations/asr/add" element={<AddASRWrapper />} />
+          <Route path="/configurations/asr/:id" element={<EditASRWrapper />} />
           <Route
             path="/configurations/dealers-category"
             element={<DealersCategoryListingWrapper />}
