@@ -1,19 +1,79 @@
-import React from 'react'
-import AddStateDialog from './AddStateDialog'
+import React,{useState} from "react";
+import AddStateDialog from "./AddStateDialog";
+import { useAddStateMutation } from "src/services/StateService";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
+import { showToast } from "src/utils";
+import { object, string } from "yup";
+import { Formik } from "formik";
+
 
 type Props = {
-    onClose: () => void
-}
+  onClose: () => void;
+};
 
-const AddStateWrapper = ({
-    onClose
-}: Props
-) => {
-    return (
-        <>
-            <AddStateDialog onClose={onClose} />
-        </>
-    )
-}
+export type FormInitialValues = {
+  stateName: string;
+};
 
-export default AddStateWrapper
+const AddStateWrapper = ({ onClose }: Props) => {
+  const navigate = useNavigate();
+  const [AddState ]=useAddStateMutation()
+  const { userData } = useSelector((state: RootState) => state?.auth);
+  const {selectedLocationCountries}:any=useSelector((state: RootState)=>state?.country)
+  console.log(selectedLocationCountries, "heello")
+  const [apiStatus, setApiStatus] = useState(false);
+  const initialValues: FormInitialValues = {
+    stateName: "",
+  };
+  const validationSchema = object({
+    stateName: string().required("State Name is required"),
+  });
+  const onSubmitHandler = (values: FormInitialValues) => {
+    setApiStatus(true);
+    setTimeout(() => {
+      AddState({
+        stateName: values.stateName,
+        countryId: selectedLocationCountries?.value || "",
+        companyId: userData?.companyId || "",
+      }).then((res: any) => {
+        if ("data" in res) {
+          if (res?.data?.status) {
+            showToast("success", "State added successfully!");
+            onClose()
+          } else {
+            showToast("error", res?.data?.message);
+          }
+        } else {
+          showToast("error", "Something went wrong");
+        }
+        setApiStatus(false);
+      });
+    }, 1000);
+  };
+
+  return (
+    <>
+
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmitHandler}
+        >
+          {(formikProps) => {
+            return (
+              <AddStateDialog
+                onClose={onClose}
+                apiStatus={apiStatus}
+                formikProps={formikProps}
+              />
+            );
+          }}
+        </Formik>
+
+    </>
+  );
+};
+
+export default AddStateWrapper;

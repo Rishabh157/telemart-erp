@@ -1,49 +1,64 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
-import React from 'react'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import React, { useState } from "react";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
+import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
+import { FormInitialValues } from "./AddStateWrapper";
+import { FormikProps } from "formik";
+
+
 
 type Props = {
-    onClose: () => void
-}
+  onClose: () => void;
+  formikProps: FormikProps<FormInitialValues>;
+  apiStatus: boolean;
+};
 
-const AddStateDialog = ({
-    onClose,
-}: Props
-) => {
-    return (
-        <>
-            <Dialog
-                open={true}
-                onClose={onClose}
-                fullWidth
-            >
-                <DialogTitle className='text-primary-main' > Add State </DialogTitle>
-                <DialogContent>
-                    <div>
-                        <div>
-                            <ATMTextField
-                                name=""
-                                value=""
-                                onChange={() => { }}
-                                placeholder="Enter a state name"
-                                label='State Name'
-                            />
-                        </div>
-                    </div>
-                </DialogContent>
+const AddStateDialog = ({ onClose,formikProps ,apiStatus }: Props) => {
+    const { values, setFieldValue } = formikProps;
 
-                <DialogActions>
-                    <button
-                        type='button'
-                        onClick={() => onClose()}
-                        className='border border-primary-main text-primary-main px-3 py-2 rounded'
-                    > Cancel
-                    </button>
-                    <button type='button' className='bg-primary-main text-white px-3 py-2 rounded' > Submit </button>
-                </DialogActions>
-            </Dialog>
-        </>
-    )
-}
+  return (
+    <>
+      <Dialog open={true} onClose={onClose} fullWidth>
+        <DialogTitle className="text-primary-main"> Add State </DialogTitle>
+        <DialogContent>
+          <div>
+            <div>
+              <ATMTextField
+                name="stateName"
+                value={values.stateName}
+                onChange={(e) => {setFieldValue("stateName" ,e.target.value)}}
+                placeholder="Enter a state name"
+                label="State Name"
+              />
+            </div>
+          </div>
+        </DialogContent>
 
-export default AddStateDialog
+        <DialogActions>
+          <button
+            type="button"
+            onClick={() => onClose()}
+          >
+            {" "}
+            Cancel
+          </button>
+          <button
+            type="button"
+            className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true?"disabled:opacity-25":""}`}
+            onClick={() => formikProps.handleSubmit()}
+
+          >
+            {" "}
+            Submit{" "}
+          </button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+};
+
+export default AddStateDialog;
