@@ -10,7 +10,7 @@ const columns: columnTypes[] = [
     headerName: "Warehouse Code",
     flex: "flex-[1_1_0%]",
     renderCell: (row: WarehousesListResponse) => (
-      <span> {row.warehouseCode} </span>
+      <span> {row.wareHouseCode} </span>
     ),
   },
   {
@@ -18,7 +18,7 @@ const columns: columnTypes[] = [
     headerName: "Warehouse Name",
     flex: "flex-[1.5_1.5_0%]",
     renderCell: (row: WarehousesListResponse) => {
-      return <span className="text-primary-main "> {row.warehouseName} </span>;
+      return <span className="text-primary-main "> {row.wareHouseName} </span>;
     },
   },
   {
@@ -26,7 +26,7 @@ const columns: columnTypes[] = [
     headerName: "Country",
     flex: "flex-[1_1_0%]",
     renderCell: (row: WarehousesListResponse) => (
-      <span className="text-primary-main "> {row.country} </span>
+      <span className="text-primary-main "> {row.wareHouseCountryName} </span>
     ),
   },
   {
@@ -34,7 +34,12 @@ const columns: columnTypes[] = [
     headerName: "State",
     flex: "flex-[1.5_1.5_0%]",
     renderCell: (row: WarehousesListResponse) => {
-      return <span className="text-primary-main "> {row.state} </span>;
+      return (
+        <span className="text-primary-main ">
+          {" "}
+          {row.registrationCountryName}{" "}
+        </span>
+      );
     },
   },
   {
@@ -42,7 +47,12 @@ const columns: columnTypes[] = [
     headerName: "District",
     flex: "flex-[1.5_1.5_0%]",
     renderCell: (row: WarehousesListResponse) => {
-      return <span className="text-primary-main "> {row.district} </span>;
+      return (
+        <span className="text-primary-main ">
+          {" "}
+          {row.registrationDistrictName}{" "}
+        </span>
+      );
     },
   },
   {
@@ -50,7 +60,12 @@ const columns: columnTypes[] = [
     headerName: "Pincode",
     flex: "flex-[1.5_1.5_0%]",
     renderCell: (row: WarehousesListResponse) => {
-      return <span className="text-primary-main "> {row.pincode} </span>;
+      return (
+        <span className="text-primary-main ">
+          {" "}
+          {row.registrationPincodeName}{" "}
+        </span>
+      );
     },
   },
   {
@@ -234,7 +249,7 @@ type Props = {};
 
 const DealerWarehouseTabWrapper = (props: Props) => {
   return (
-    <div className="px-2 h-full shadow rounded border " >
+    <div className="px-2 h-full shadow rounded border ">
       <WarehouseListing columns={columns} rows={rows} />
     </div>
   );

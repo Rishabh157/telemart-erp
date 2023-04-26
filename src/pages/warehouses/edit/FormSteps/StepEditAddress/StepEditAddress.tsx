@@ -2,7 +2,7 @@ import { FormControl, MenuItem, Select } from "@mui/material";
 import { FormikProps } from "formik";
 import React from "react";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddWarehouseWrapper";
+import { FormInitialValues } from "../../EditWarehouseWrapper";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
 
 type DropdownOptions = {
@@ -34,7 +34,7 @@ type Props = {
   dropdownOptions: DropdownOptions;
 };
 
-const StepAddAddress = ({
+const StepEditAddress = ({
   formikProps,
   formFields,
   dropdownOptions,
@@ -98,6 +98,34 @@ const StepAddAddress = ({
                             }
                             onChange={(e) => {
                               setFieldValue(name, e.target.value);
+                              if (name === "regd_address.country") {
+                                formikProps.setFieldValue(
+                                  "regd_address.district",
+                                  ""
+                                );
+                                formikProps.setFieldValue(
+                                  "regd_address.state",
+                                  ""
+                                );
+                                formikProps.setFieldValue(
+                                  "regd_address.pincode",
+                                  ""
+                                );
+                              }
+                              if (name === "billing_address.country") {
+                                formikProps.setFieldValue(
+                                  "billing_address.district",
+                                  ""
+                                );
+                                formikProps.setFieldValue(
+                                  "billing_address.state",
+                                  ""
+                                );
+                                formikProps.setFieldValue(
+                                  "billing_address.pincode",
+                                  ""
+                                );
+                              }
                             }}
                             size="small"
                             className="shadow mt-2"
@@ -133,4 +161,4 @@ const StepAddAddress = ({
   );
 };
 
-export default StepAddAddress;
+export default StepEditAddress;

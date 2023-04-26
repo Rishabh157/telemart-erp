@@ -96,6 +96,34 @@ const StepAddAddress = ({
                           }
                           onChange={(e) => {
                             setFieldValue(name, e.target.value);
+                            if (name === "regd_address.country") {
+                              formikProps.setFieldValue(
+                                "regd_address.district",
+                                ""
+                              );
+                              formikProps.setFieldValue(
+                                "regd_address.state",
+                                ""
+                              );
+                              formikProps.setFieldValue(
+                                "regd_address.pincode",
+                                ""
+                              );
+                            }
+                            if (name === "billing_address.country") {
+                              formikProps.setFieldValue(
+                                "billing_address.district",
+                                ""
+                              );
+                              formikProps.setFieldValue(
+                                "billing_address.state",
+                                ""
+                              );
+                              formikProps.setFieldValue(
+                                "billing_address.pincode",
+                                ""
+                              );
+                            }
                           }}
                           options={
                             dropdownOptions[

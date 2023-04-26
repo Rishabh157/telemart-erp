@@ -1,17 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Formik, FormikProps } from "formik";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { array, object, string } from "yup";
-import StepAddCompanyDetailsWrapper from "./FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper";
-import StepAddAddressWrapper from "./FormSteps/StepAddAddress/StepAddAddressWrapper";
-import StepAddContactWrapper from "./FormSteps/StepAddContact/StepAddContactWrapper";
-import AddWarehouse from "./AddWarehouse";
-import { useAddWareHouseMutation } from "src/services/WareHoouseService";
+import StepEditCompanyDetailsWrapper from "./FormSteps/StepEditComapnyDetails/StepEditCompanyDetailsWrapper";
+import StepEditAddressWrapper from "./FormSteps/StepEditAddress/StepEditAddressWrapper";
+import StepEditContactWrapper from "./FormSteps/StepEditContact/StepEditContactWrapper";
+import EditWarehouse from "./EditWarehouse";
+// import { useEditWareHouseMutation } from "src/services/WareHoouseService";
 import { showToast } from "src/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useGetWareHouseByIdQuery,
+  useUpdateWareHouseMutation,
+} from "src/services/WareHoouseService";
+import { setSelectedItem } from "src/redux/slices/warehouseSlice";
 import { useGetAllCountryQuery } from "src/services/CountryService";
 import { setAllCountry } from "src/redux/slices/countrySlice";
 
@@ -51,7 +56,7 @@ export type FormInitialValues = {
 const steps = [
   {
     label: "Company Details",
-    component: StepAddCompanyDetailsWrapper,
+    component: StepEditCompanyDetailsWrapper,
     validationSchema: object({
       warehouseCode: string().required("warehouseCode is required"),
       warehouseName: string().required("warehouse Name is required"),
@@ -61,7 +66,7 @@ const steps = [
   },
   {
     label: "Regd./Billing address",
-    component: StepAddAddressWrapper,
+    component: StepEditAddressWrapper,
     validationSchema: object({
       regd_address: object().shape({
         phone: string().required("Phone number is required"),
@@ -83,7 +88,7 @@ const steps = [
   },
   {
     label: "Contact",
-    component: StepAddContactWrapper,
+    component: StepEditContactWrapper,
     validationSchema: object({
       contact_informations: array().of(
         object().shape({
@@ -99,64 +104,59 @@ const steps = [
   },
 ];
 
-const AddWarehouseWrapper = () => {
+const EditWarehouseWrapper = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [addWareHouse] = useAddWareHouseMutation();
-  const { data, isLoading, isFetching } = useGetAllCountryQuery("");
-  useEffect(() => {
-    if (!isFetching && !isLoading) {
-      dispatch(setAllCountry(data?.data));
-    }
-  }, [data, isLoading, isFetching]);
-
+  const params = useParams();
+  const Id = params.id;
+  const { data, isLoading, isFetching } = useGetWareHouseByIdQuery(Id);
+  const [editWareHouse] = useUpdateWareHouseMutation();
   // States
+  const { allCountry }: any = useSelector((state: RootState) => state.country);
+
   const { userData } = useSelector((state: RootState) => state?.auth);
+  const { selectedItem }: any = useSelector(
+    (state: RootState) => state?.warehouse
+  );
+
   const [apiStatus, setApiStatus] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
-  const { allCountry }: any = useSelector((state: RootState) => state.country);
+  const {
+    data: countryData,
+    isLoading: countryIsLoading,
+    isFetching: countryIsFetching,
+  } = useGetAllCountryQuery("");
+
+  useEffect(() => {
+    if (!isFetching && !isLoading) {
+      dispatch(setAllCountry(countryData?.data));
+    }
+  }, [countryData, countryIsLoading, countryIsFetching]);
 
   // From Initial Values
   const initialValues: FormInitialValues = {
-    warehouseCode: "",
-    warehouseName: "",
-    country: "",
+    warehouseCode: selectedItem?.wareHouseCode || "",
+    warehouseName: selectedItem?.wareHouseName || "",
+    country: selectedItem?.country || "",
 
-    email: "",
+    email: selectedItem?.email || "",
     regd_address: {
-      phone: "",
-      address: "",
-      country: "",
-      state: "",
-      district: "",
-      pincode: "",
+      phone: selectedItem?.registrationAddress?.phone || "",
+      address: selectedItem?.registrationAddress?.address || "",
+      country: selectedItem?.registrationAddress?.country || "",
+      state: selectedItem?.registrationAddress?.state || "",
+      district: selectedItem?.registrationAddress?.district || "",
+      pincode: selectedItem?.registrationAddress?.pincode || "",
     },
     billing_address: {
-      phone: "",
-      address: "",
-      country: "",
-      state: "",
-      district: "",
-      pincode: "",
+      phone: selectedItem?.billingAddress?.phone || "",
+      address: selectedItem?.billingAddress?.address || "",
+      country: selectedItem?.billingAddress?.country || "",
+      state: selectedItem?.billingAddress?.state || "",
+      district: selectedItem?.billingAddress?.district || "",
+      pincode: selectedItem?.billingAddress?.pincode || "",
     },
-    contact_informations: [
-      {
-        name: "",
-        department: "",
-        designation: "",
-        email: "",
-        mobileNumber: "",
-        landLine: "",
-      },
-      {
-        name: "",
-        department: "",
-        designation: "",
-        email: "",
-        mobileNumber: "",
-        landLine: "",
-      },
-    ],
+    contact_informations: selectedItem?.contactInformation || "",
   };
 
   // Form validation schema based on the active step
@@ -168,36 +168,43 @@ const AddWarehouseWrapper = () => {
   // On Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
     if (activeStep === steps?.length - 1) {
+      const contactInformation = values.contact_informations.map((ele: any) => {
+        const { _id, ...rest } = ele; // use object destructuring to remove the _id property
+        return rest; // return the new object without the _id property
+      });
       setApiStatus(true);
       setTimeout(() => {
-        addWareHouse({
-          wareHouseCode: values.warehouseCode,
-          wareHouseName: values.warehouseName,
-          country: values.country,
-          email: values.email,
-          registrationAddress: {
-            phone: values.regd_address.phone,
-            address: values.regd_address.address,
-            country: values.regd_address.country,
-            state: values.regd_address.state,
-            district: values.regd_address.district,
-            pincode: values.regd_address.pincode,
-          },
-          billingAddress: {
-            phone: values.billing_address.phone,
-            address: values.billing_address.address,
-            country: values.billing_address.country,
-            state: values.billing_address.state,
-            district: values.billing_address.district,
-            pincode: values.billing_address.pincode,
-          },
-          contactInformation: values.contact_informations,
+        editWareHouse({
+          body: {
+            wareHouseCode: values.warehouseCode,
+            wareHouseName: values.warehouseName,
+            country: values.country,
+            email: values.email,
+            registrationAddress: {
+              phone: values.regd_address.phone,
+              address: values.regd_address.address,
+              country: values.regd_address.country,
+              state: values.regd_address.state,
+              district: values.regd_address.district,
+              pincode: values.regd_address.pincode,
+            },
+            billingAddress: {
+              phone: values.billing_address.phone,
+              address: values.billing_address.address,
+              country: values.billing_address.country,
+              state: values.billing_address.state,
+              district: values.billing_address.district,
+              pincode: values.billing_address.pincode,
+            },
+            contactInformation: contactInformation,
 
-          companyId: userData?.companyId || "",
+            companyId: userData?.companyId || "",
+          },
+          id: Id || "",
         }).then((res) => {
           if ("data" in res) {
             if (res?.data?.status) {
-              showToast("success", "Vendor added successfully!");
+              showToast("success", "Udated successfully!");
               navigate("/warehouse");
             } else {
               showToast("error", res?.data?.message);
@@ -213,23 +220,30 @@ const AddWarehouseWrapper = () => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
+
+  useEffect(() => {
+    dispatch(setSelectedItem(data?.data));
+  }, [data, isLoading, isFetching]);
   return (
     <SideNavLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={getValidationSchema(activeStep)}
         onSubmit={onSubmitHandler}
       >
         {(formikProps: FormikProps<FormInitialValues>) => (
           <Form className="">
-            <AddWarehouse
-              formikProps={formikProps}
-              steps={steps}
-              activeStep={activeStep}
-              setActiveStep={setActiveStep}
-              apiStatus={apiStatus}
-              allCountry={allCountry}
-            />
+            {!isLoading && !isFetching ? (
+              <EditWarehouse
+                formikProps={formikProps}
+                steps={steps}
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+                apiStatus={apiStatus}
+                allCountry={allCountry}
+              />
+            ) : null}
           </Form>
         )}
       </Formik>
@@ -237,4 +251,4 @@ const AddWarehouseWrapper = () => {
   );
 };
 
-export default AddWarehouseWrapper;
+export default EditWarehouseWrapper;

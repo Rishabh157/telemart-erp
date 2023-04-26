@@ -2,8 +2,8 @@
 import { FormikProps } from "formik";
 import React from "react";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
-import { FormInitialValues } from "../../AddWarehouseWrapper";
-import StepAddComapnyDetails from "./StepAddComapnyDetails";
+import { FormInitialValues } from "../../EditWarehouseWrapper";
+import StepEditComapnyDetails from "./StepEditComapnyDetails";
 
 export type DropdownOptions = {
   countryOptions: SelectOption[];
@@ -42,7 +42,7 @@ const formFields: FieldType[] = [
   },
 ];
 
-const StepAddCompanyDetailsWrapper = ({ formikProps, allCountry }: Props) => {
+const StepEditCompanyDetailsWrapper = ({ formikProps, allCountry }: Props) => {
   const countryOptions = allCountry?.map((ele: any) => {
     return { label: ele?.countryName, value: ele?._id };
   });
@@ -52,7 +52,7 @@ const StepAddCompanyDetailsWrapper = ({ formikProps, allCountry }: Props) => {
 
   return (
     <>
-      <StepAddComapnyDetails
+      <StepEditComapnyDetails
         formikProps={formikProps}
         dropdownOptions={dropdownOptions}
         formFields={formFields}
@@ -61,4 +61,4 @@ const StepAddCompanyDetailsWrapper = ({ formikProps, allCountry }: Props) => {
   );
 };
 
-export default StepAddCompanyDetailsWrapper;
+export default StepEditCompanyDetailsWrapper;
