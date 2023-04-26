@@ -21,8 +21,8 @@ const companyTypeOptions = [
   { label: "Section 8 Company", value: "Section 8 Company" },
 ];
 const ownershipTypeOptions = [
-  { label: "Partnership", value: "partnership" },
-  { label: "Single", value: "single" },
+  { label: "Partnership", value: "Partnership" },
+  { label: "Single", value: "Single" },
 ];
 
 const formFields: Field<"companyTypeOptions" | "ownershipTypeOptions">[] = [

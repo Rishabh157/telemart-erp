@@ -225,7 +225,6 @@ const EditVendorWrapper = () => {
         return rest; // return the new object without the _id property
       });
 
-      console.log(values);
       editVendor({
         body: {
           companyName: values.company_name,

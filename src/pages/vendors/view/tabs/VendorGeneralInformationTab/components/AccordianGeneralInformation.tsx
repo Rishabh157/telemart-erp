@@ -2,7 +2,6 @@ import React from "react";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 
 const AccordianGeneralInformation = (data: any) => {
-  console.log(data, "data");
   return (
     <div className="grid grid-cols-4 gap-4 gap-y-5">
       <ATMTextField

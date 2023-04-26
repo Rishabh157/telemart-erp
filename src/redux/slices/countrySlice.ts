@@ -5,9 +5,10 @@ import { LocationSelectType } from "src/utils";
 
 export interface CountrySliceStateType {
   items: CountryListResponse[] | [];
+  allCountry: CountryListResponse[] | [];
   selectedCountry: CountryListResponse | null;
-  selectedLocationCountries:LocationSelectType | null;
-  selectedCountryId:string,
+  selectedLocationCountries: LocationSelectType | null;
+  selectedCountryId: string;
   totalItems: number;
   isTableLoading: boolean;
   page: number;
@@ -15,14 +16,15 @@ export interface CountrySliceStateType {
   searchValue: string;
   sortValue: { field: string; value: "DESC" | "ASC" };
   selectedId: string;
-  filterValue:string;
+  filterValue: string;
 }
 
 const initialState: CountrySliceStateType = {
   items: [],
+  allCountry: [],
   selectedCountry: null,
-  selectedCountryId:"",
-  selectedLocationCountries:null,
+  selectedCountryId: "",
+  selectedLocationCountries: null,
   totalItems: 0,
   isTableLoading: false,
   page: 1,
@@ -30,17 +32,14 @@ const initialState: CountrySliceStateType = {
   searchValue: "",
   sortValue: { field: "createdAt", value: "DESC" },
   selectedId: "",
-  filterValue:""
+  filterValue: "",
 };
 
 const countrySlice: any = createSlice({
   name: "country",
   initialState,
   reducers: {
-    setItems: (
-      state,
-      action: PayloadAction<CountryListResponse[] | []>
-    ) => {
+    setItems: (state, action: PayloadAction<CountryListResponse[] | []>) => {
       state.items = action.payload;
     },
     setPage: (state, action: PayloadAction<number>) => {
@@ -78,22 +77,25 @@ const countrySlice: any = createSlice({
     ) => {
       state.selectedCountry = action.payload;
     },
-    setSelectedCountryId:(
+    setSelectedCountryId: (state, action: PayloadAction<string>) => {
+      state.selectedCountryId = action.payload;
+    },
+    setSelectedLocationCountry: (
       state,
-      action: PayloadAction<string>)=>{
-        state.selectedCountryId=action.payload;
-      },
-  setSelectedLocationCountry:(
-    state,
-    action:PayloadAction<LocationSelectType | null>)=>{state.selectedLocationCountries=action.payload;
-  },setFilterValue: (
-    state,
-    action: PayloadAction< string>
-  ) => {
-    state.filterValue = action.payload;
+      action: PayloadAction<LocationSelectType | null>
+    ) => {
+      state.selectedLocationCountries = action.payload;
+    },
+    setFilterValue: (state, action: PayloadAction<string>) => {
+      state.filterValue = action.payload;
+    },
+    setAllCountry: (
+      state,
+      action: PayloadAction<CountryListResponse[] | []>
+    ) => {
+      state.allCountry = action.payload;
+    },
   },
-
-  }
 });
 
 export const {
@@ -107,6 +109,7 @@ export const {
   setSelectedId,
   setSelectedCountry,
   setSelectedLocationCountry,
-  setFilterValue
+  setFilterValue,
+  setAllCountry,
 } = countrySlice.actions;
 export default countrySlice.reducer;

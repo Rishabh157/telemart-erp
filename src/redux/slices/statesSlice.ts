@@ -3,9 +3,9 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { StateListResponse } from "src/models/State.model";
 import { LocationSelectType } from "src/utils";
 
-
 export interface StateSliceStateType {
   items: StateListResponse[] | [];
+  allStates: StateListResponse[] | [];
   selectedState: StateListResponse | null;
   selectedLocationState: LocationSelectType | null;
   totalItems: number;
@@ -20,6 +20,7 @@ export interface StateSliceStateType {
 
 const initialState: StateSliceStateType = {
   items: [],
+  allStates: [],
   selectedState: null,
   selectedLocationState: null,
   totalItems: 0,
@@ -29,8 +30,7 @@ const initialState: StateSliceStateType = {
   searchValue: "",
   sortValue: { field: "createdAt", value: "DESC" },
   selectedId: "",
-  filterValue: ""
-
+  filterValue: "",
 };
 
 const stateSlice: any = createSlice({
@@ -77,15 +77,15 @@ const stateSlice: any = createSlice({
     },
     setSelctedLocationState: (
       state,
-      action: PayloadAction<LocationSelectType| null>
+      action: PayloadAction<LocationSelectType | null>
     ) => {
       state.selectedLocationState = action.payload;
     },
-    setFilterValue: (
-      state,
-      action: PayloadAction< string>
-    ) => {
+    setFilterValue: (state, action: PayloadAction<string>) => {
       state.filterValue = action.payload;
+    },
+    setAllStates: (state, action: PayloadAction<StateListResponse[] | []>) => {
+      state.allStates = action.payload;
     },
   },
 });
@@ -101,6 +101,7 @@ export const {
   setSelectedId,
   setSelectedState,
   setSelctedLocationState,
-  setFilterValue
+  setFilterValue,
+  setAllStates,
 } = stateSlice.actions;
 export default stateSlice.reducer;

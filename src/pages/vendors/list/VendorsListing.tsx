@@ -25,8 +25,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
   const navigate = useNavigate();
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const { page, rowsPerPage, searchValue, totalItem } = vendorState;
-
+  const { page, rowsPerPage, searchValue, totalItems } = vendorState;
   return (
     <div className="px-4 h-[calc(100vh-55px)]">
       {/* Page Header */}
@@ -49,7 +48,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
           <ATMTableHeader
             searchValue={searchValue}
             page={page}
-            rowCount={totalItem}
+            rowCount={totalItems}
             rowsPerPage={rowsPerPage}
             rows={rows}
             onRowsPerPageChange={(newValue) =>
@@ -79,7 +78,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
         <div className="border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={totalItem}
+            rowCount={totalItems}
             rows={rows}
             onRowsPerPageChange={(newValue) => alert(newValue)}
             rowsPerPage={rowsPerPage}

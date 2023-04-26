@@ -27,7 +27,6 @@ const VendorGeneralInformationTabWrapper = (props: Props) => {
   const { selectedItem }: any = useSelector(
     (state: RootState) => state?.vendor
   );
-  console.log(selectedItem);
   useEffect(() => {
     dispatch(setSelectedItem(data?.data));
   }, [dispatch, data, isLoading, isFetching]);
