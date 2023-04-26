@@ -5,6 +5,7 @@ import { LocationSelectType } from "src/utils";
 
 export interface PincodeSliceStateType {
   items: PincodeListResponse[] | [];
+  allPincodes: PincodeListResponse[] | [];
   selectedPincode: PincodeListResponse | null;
   selectedLocationPincode: LocationSelectType | null;
   totalItems: number;
@@ -19,6 +20,7 @@ export interface PincodeSliceStateType {
 
 const initialState: PincodeSliceStateType = {
   items: [],
+  allPincodes: [],
   selectedPincode: null,
   selectedLocationPincode: null,
   totalItems: 0,
@@ -82,6 +84,12 @@ const pincodeSlice: any = createSlice({
     setFilterValue: (state, action: PayloadAction<string>) => {
       state.filterValue = action.payload;
     },
+    setAllPincodes: (
+      state,
+      action: PayloadAction<PincodeListResponse[] | []>
+    ) => {
+      state.allPincodes = action.payload;
+    },
   },
 });
 
@@ -97,5 +105,6 @@ export const {
   setSelectedPincode,
   setSelectedLocationPincode,
   setFilterValue,
+  setAllPincodes,
 } = pincodeSlice.actions;
 export default pincodeSlice.reducer;

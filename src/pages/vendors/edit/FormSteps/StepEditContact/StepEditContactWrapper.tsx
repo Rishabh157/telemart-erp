@@ -1,7 +1,7 @@
 import React from "react";
 import { FormikProps } from "formik";
-import { FormInitialValues } from "../../AddVendorWrapper";
-import StepAddContact from "./StepAddContact";
+import { FormInitialValues } from "../../EditVendorWrapper";
+import StepEditContact from "./StepEditContact";
 import { Field } from "src/models/FormField/FormField.model";
 
 type Props = {
@@ -46,12 +46,12 @@ const formFields: { sectionName: string; fields: Field<"">[] }[] = [
   },
 ];
 
-const StepAddContactWrapper = ({ formikProps }: Props) => {
+const StepEditContactWrapper = ({ formikProps }: Props) => {
   return (
     <>
-      <StepAddContact formikProps={formikProps} formFields={formFields} />
+      <StepEditContact formikProps={formikProps} formFields={formFields} />
     </>
   );
 };
 
-export default StepAddContactWrapper;
+export default StepEditContactWrapper;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ViewLayout from "src/components/layouts/ViewLayout/ViewLayout";
 import { BiBlock, BiMessageDetail } from "react-icons/bi";
 import { AiOutlineRise } from "react-icons/ai";
@@ -8,6 +8,10 @@ import VendorInfoCard from "../components/vendorInfoCard/VendorInfoCard";
 import ListItemCard from "../components/listItemCard/ListItemCard";
 // import { useParams } from "react-router-dom";
 import { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import { useGetVendorsQuery } from "src/services/VendorServices";
+import { useDispatch, useSelector } from "react-redux";
+import { setAllItems } from "src/redux/slices/vendorSlice";
+import { RootState } from "src/redux/store";
 
 const tabsData = [
   {
@@ -69,20 +73,23 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const listData = Array(12)
-  .fill("Vendor")
-  .map((ele, index) => {
+const ViewVendor = () => {
+  //   const { vendorId } = useParams();
+  const dispatch = useDispatch();
+  const [searchValue, setSearchValue] = useState("");
+  const { allItems }: any = useSelector((state: RootState) => state?.vendor);
+
+  const { data, isLoading, isFetching } = useGetVendorsQuery("");
+  const listData = allItems?.map((ele: any) => {
     return {
-      vendorName: ele + " " + (index + 1),
-      _id: `${index + 1}`,
-      mobile: "7485968578",
+      vendorName: ele?.companyName,
+      _id: ele?._id,
+      mobile: ele?.registrationAddress?.phone,
     };
   });
-
-const ViewVendor = () => {
-//   const { vendorId } = useParams();
-  const [searchValue, setSearchValue] = useState("");
-
+  useEffect(() => {
+    dispatch(setAllItems(data?.data));
+  }, [dispatch, data, isLoading, isFetching]);
   return (
     <ViewLayout
       infoCard={

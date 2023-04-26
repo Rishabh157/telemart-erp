@@ -1,4 +1,4 @@
-import { UpdateState,AddState } from './../models/State.model';
+import { UpdateState, AddState } from "./../models/State.model";
 import { PaginationType } from "src/models/common/paginationType";
 import apiSlice from "./ApiSlice";
 
@@ -11,13 +11,23 @@ export const stateApi = apiSlice.injectEndpoints({
         url: "/state",
         method: "POST",
         body,
-      })
+      }),
+    }),
+
+    //***** GET BY COUNTRY ID*****/
+    getAllStateByCountry: builder.query({
+      providesTags: ["State"],
+      query: (id) => ({
+        url: `/state/get-country-state/${id}`,
+        method: "GET",
+        // body,
+      }),
     }),
 
     //***** GET *****/
     getAllState: builder.query({
       providesTags: ["State"],
-      query: ()=> ({
+      query: () => ({
         url: "/state",
         method: "GET",
         // body,
@@ -89,4 +99,5 @@ export const {
   useExportStateDataMutation,
   useDeleteStateMutation,
   useGetAllStateQuery,
+  useGetAllStateByCountryQuery,
 } = stateApi;

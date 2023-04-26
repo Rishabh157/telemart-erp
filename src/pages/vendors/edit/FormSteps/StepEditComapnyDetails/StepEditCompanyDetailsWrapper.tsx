@@ -1,8 +1,8 @@
 import { FormikProps } from "formik";
 import React from "react";
 import { Field } from "src/models/FormField/FormField.model";
-import { FormInitialValues } from "../../AddVendorWrapper";
-import StepAddComapnyDetails from "./StepAddComapnyDetails";
+import { FormInitialValues } from "../../EditVendorWrapper";
+import StepEditComapnyDetails from "./StepEditComapnyDetails";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -21,8 +21,8 @@ const companyTypeOptions = [
   { label: "Section 8 Company", value: "Section 8 Company" },
 ];
 const ownershipTypeOptions = [
-  { label: "Partnership", value: "partnership" },
-  { label: "Single", value: "single" },
+  { label: "Partnership", value: "Partnership" },
+  { label: "Single", value: "Single" },
 ];
 
 const formFields: Field<"companyTypeOptions" | "ownershipTypeOptions">[] = [
@@ -57,7 +57,7 @@ const formFields: Field<"companyTypeOptions" | "ownershipTypeOptions">[] = [
   },
 ];
 
-const StepAddCompanyDetailsWrapper = ({ formikProps }: Props) => {
+const StepEditCompanyDetailsWrapper = ({ formikProps }: Props) => {
   const dropdownOptions = {
     companyTypeOptions,
     ownershipTypeOptions,
@@ -65,7 +65,7 @@ const StepAddCompanyDetailsWrapper = ({ formikProps }: Props) => {
 
   return (
     <>
-      <StepAddComapnyDetails
+      <StepEditComapnyDetails
         formikProps={formikProps}
         dropdownOptions={dropdownOptions}
         formFields={formFields}
@@ -74,4 +74,4 @@ const StepAddCompanyDetailsWrapper = ({ formikProps }: Props) => {
   );
 };
 
-export default StepAddCompanyDetailsWrapper;
+export default StepEditCompanyDetailsWrapper;

@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { FormikProps } from "formik";
-import { FormInitialValues } from "../../AddVendorWrapper";
-import StepAddAddress from "./StepAddAddress";
+import { FormInitialValues } from "../../EditVendorWrapper";
+import StepEditAddress from "./StepEditAddress";
 import { Field } from "src/models/FormField/FormField.model";
 import { useGetAllCountryQuery } from "src/services/CountryService";
 import { setAllCountry } from "src/redux/slices/countrySlice";
@@ -121,7 +121,7 @@ const formFields: {
   },
 ];
 
-const StepAddAddressWrapper = ({ formikProps }: Props) => {
+const StepEditAddressWrapper = ({ formikProps }: Props) => {
   const dispatch = useDispatch();
   const [billingStateData, setBillingStateData] = useState<any>();
   const [billingDistrictData, setBillingDistrictData] = useState<any>();
@@ -255,7 +255,7 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
 
   return (
     <>
-      <StepAddAddress
+      <StepEditAddress
         formikProps={formikProps}
         formFields={formFields}
         dropdownOptions={dropdownOptions}
@@ -264,4 +264,4 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
   );
 };
 
-export default StepAddAddressWrapper;
+export default StepEditAddressWrapper;

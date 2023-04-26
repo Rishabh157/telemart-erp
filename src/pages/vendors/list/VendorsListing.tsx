@@ -5,8 +5,11 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { VendorsListResponse } from "src/models";
-import { setRowsPerPage, setPage } from "src/redux/slices/vendorSlice";
+import {
+  setRowsPerPage,
+  setPage,
+  setSearchValue,
+} from "src/redux/slices/vendorSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -22,8 +25,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
   const navigate = useNavigate();
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const { page, rowsPerPage } = vendorState;
-
+  const { page, rowsPerPage, searchValue, totalItems } = vendorState;
   return (
     <div className="px-4 h-[calc(100vh-55px)]">
       {/* Page Header */}
@@ -44,13 +46,15 @@ const VendorsListing = ({ columns, rows }: Props) => {
         {/*Table Header */}
         <div id="table-header">
           <ATMTableHeader
+            searchValue={searchValue}
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rowsPerPage={rowsPerPage}
             rows={rows}
             onRowsPerPageChange={(newValue) =>
               dispatch(setRowsPerPage(newValue))
             }
+            onSearch={(newValue) => dispatch(setSearchValue(newValue))}
             isFilter
             onFilterClick={() => setIsFilterOpen(true)}
           />
@@ -64,9 +68,9 @@ const VendorsListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            onRowClick={(row: VendorsListResponse) =>
-              navigate(`${row._id}/general-information`)
-            }
+            // onRowClick={(row: VendorsListResponse) =>
+            //   navigate(`${row._id}/general-information`)
+            // }
           />
         </div>
 
@@ -74,7 +78,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
         <div className="border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             onRowsPerPageChange={(newValue) => alert(newValue)}
             rowsPerPage={rowsPerPage}

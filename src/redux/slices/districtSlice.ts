@@ -5,8 +5,9 @@ import { LocationSelectType } from "src/utils";
 
 export interface DistrictSliceStateType {
   items: DistrictListResponse[] | [];
+  allDistricts: DistrictListResponse[] | [];
   selectedDistrict: DistrictListResponse | null;
-  selectedLocationDistrict:LocationSelectType |null
+  selectedLocationDistrict: LocationSelectType | null;
   totalItems: number;
   isTableLoading: boolean;
   page: number;
@@ -14,13 +15,14 @@ export interface DistrictSliceStateType {
   searchValue: string;
   sortValue: { field: string; value: "DESC" | "ASC" };
   selectedId: string;
-  filterValue:string;
+  filterValue: string;
 }
 
 const initialState: DistrictSliceStateType = {
   items: [],
+  allDistricts: [],
   selectedDistrict: null,
-  selectedLocationDistrict:null,
+  selectedLocationDistrict: null,
   totalItems: 0,
   isTableLoading: false,
   page: 1,
@@ -28,17 +30,14 @@ const initialState: DistrictSliceStateType = {
   searchValue: "",
   sortValue: { field: "createdAt", value: "DESC" },
   selectedId: "",
-  filterValue:"",
+  filterValue: "",
 };
 
 const districtSlice: any = createSlice({
   name: "district",
   initialState,
   reducers: {
-    setItems: (
-      state,
-      action: PayloadAction<DistrictListResponse[] | []>
-    ) => {
+    setItems: (state, action: PayloadAction<DistrictListResponse[] | []>) => {
       state.items = action.payload;
     },
     setPage: (state, action: PayloadAction<number>) => {
@@ -82,11 +81,14 @@ const districtSlice: any = createSlice({
     ) => {
       state.selectedLocationDistrict = action.payload;
     },
-    setFilterValue: (
+    setFilterValue: (state, action: PayloadAction<string>) => {
+      state.filterValue = action.payload;
+    },
+    setAllDistrict: (
       state,
-      action: PayloadAction<string>
+      action: PayloadAction<DistrictListResponse[] | []>
     ) => {
-      state.filterValue= action.payload;
+      state.allDistricts = action.payload;
     },
   },
 });
@@ -102,6 +104,7 @@ export const {
   setSelectedId,
   setSelectedDistrict,
   setSelectedLocationDistrict,
-  setFilterValue
+  setFilterValue,
+  setAllDistrict,
 } = districtSlice.actions;
 export default districtSlice.reducer;

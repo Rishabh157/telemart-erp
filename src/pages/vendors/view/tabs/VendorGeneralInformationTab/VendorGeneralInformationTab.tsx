@@ -19,6 +19,7 @@ const VendorGeneralInformationTab = ({ accordians }: Props) => {
     <div className="flex flex-col gap-3">
       {accordians.map((accordian, accordianIndex) => (
         <Accordion
+          key={accordianIndex}
           className="shadow-lg border "
           expanded={expanded === accordianIndex}
           onChange={handleChange(accordianIndex)}

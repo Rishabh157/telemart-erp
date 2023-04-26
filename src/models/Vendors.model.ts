@@ -1,40 +1,159 @@
 export type VendorsListResponse = {
-    vendorName: string;
-    vendorCode: string;
-    email: string;
-    state : string;
-    mobile: string;
+  companyName: string;
+  vendorCode: string;
+  companyType: string;
+  ownerShipType: string;
+  websiteAddress: string;
+  registrationAddress: {
+    phone: string;
+    address: string;
+    country: string;
+    state: string;
     district: string;
-    is_active: boolean;
-    is_deleted: boolean;
-    createdAt: string;
-    updatedAt: string;
-    _id: string;
-    __v: number;
-
-}
+    pincode: string;
+  };
+  billingAddress: {
+    phone: string;
+    address: string;
+    country: string;
+    state: string;
+    district: string;
+    pincode: string;
+  };
+  contactInformation: {
+    name: string;
+    department: string;
+    designation: string;
+    email: string;
+    mobileNumber: string;
+    landLine: string;
+  }[];
+  document: {
+    gstNumber: string;
+    gstCertificate: string;
+    declarationForm: string;
+  };
+  bankInformation: {
+    bankName: string;
+    bankBranchName: string;
+    accountHolderName: string;
+    ifscNumber: string;
+    accountType: string;
+    accountNumber: string;
+    cancelledCheque: string;
+  }[];
+  companyId: string;
+  registrationCountryName: string;
+  registrationStateName: string;
+  registrationDistrictName: string;
+  registrationPincodeName: string;
+  billingAddressCountryName: string;
+  billingAddressStateName: string;
+  billingAddressDistrictName: string;
+  billingAddressPincodeName: string;
+  isActive: boolean;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  __v: number;
+};
 
 export type AddVendor = {
-    vendorName: string;
-    vendorCode: string;
-    email: string;
-    mobile: string;
-    state : string;
+  companyName: string;
+  vendorCode: string;
+  companyType: string;
+  ownerShipType: string;
+  websiteAddress: string;
+  registrationAddress: {
+    phone: string;
+    address: string;
+    country: string;
+    state: string;
     district: string;
-    password: string;
-    confirm_password: string;
-}
+    pincode: string;
+  };
+  billingAddress: {
+    phone: string;
+    address: string;
+    country: string;
+    state: string;
+    district: string;
+    pincode: string;
+  };
+  contactInformation: {
+    name: string;
+    department: string;
+    designation: string;
+    email: string;
+    mobileNumber: string;
+    landLine: string;
+  }[];
+
+  document: {
+    gstNumber: string;
+    gstCertificate: string;
+    declarationForm: string;
+  };
+  bankInformation: {
+    bankName: string;
+    bankBranchName: string;
+    accountHolderName: string;
+    ifscNumber: string;
+    accountType: string;
+    accountNumber: string;
+    cancelledCheque: string;
+  }[];
+  companyId: string;
+};
 
 export type UpdateVendor = {
-    body: {
-        vendorName: string;
-        vendorCode: string;
-        email: string;
-        state : string;
-        mobile: string;
-        district: string;
-        password: string;
-        confirm_password: string;
-    },
-    id: string;
-}
+  body: {
+    companyName: string;
+    vendorCode: string;
+    companyType: string;
+    ownerShipType: string;
+    websiteAddress: string;
+    registrationAddress: {
+      phone: string;
+      address: string;
+      country: string;
+      state: string;
+      district: string;
+      pincode: string;
+    };
+    billingAddress: {
+      phone: string;
+      address: string;
+      country: string;
+      state: string;
+      district: string;
+      pincode: string;
+    };
+    contactInformation: {
+      name: string;
+      department: string;
+      designation: string;
+      email: string;
+      mobileNumber: string;
+      landLine: string;
+    }[];
+
+    document: {
+      gstNumber: string;
+      gstCertificate: string;
+      declarationForm: string;
+    };
+    bankInformation: {
+      bankName: string;
+      bankBranchName: string;
+      accountHolderName: string;
+      ifscNumber: string;
+      accountType: string;
+      accountNumber: string;
+      cancelledCheque: string;
+    }[];
+    companyId: string;
+  };
+  id: string;
+};

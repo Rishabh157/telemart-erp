@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Formik, FormikProps } from "formik";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { array, mixed, object, string } from "yup";
-import AddVendor from "./AddVendor";
-import StepAddAddressWrapper from "./FormSteps/StepAddAddress/StepAddAddressWrapper";
-import StepAddBankDetailsWrapper from "./FormSteps/StepAddBankDetails/StepAddBankDetailsWrapper";
-import StepAddCompanyDetailsWrapper from "./FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper";
-import StepAddContactWrapper from "./FormSteps/StepAddContact/StepAddContactWrapper";
-import StepAddDocumentsWrapper from "./FormSteps/StepAddDocuments/StepAddDocumentsWrapper";
-import { useAddVendorMutation } from "src/services/VendorServices";
+import EditVendor from "./EditVendor";
+import StepEditAddressWrapper from "./FormSteps/StepEditAddress/StepEditAddressWrapper";
+import StepEditBankDetailsWrapper from "./FormSteps/StepEditBankDetails/StepEditBankDetailsWrapper";
+import StepEditCompanyDetailsWrapper from "./FormSteps/StepEditComapnyDetails/StepEditCompanyDetailsWrapper";
+import StepEditContactWrapper from "./FormSteps/StepEditContact/StepEditContactWrapper";
+import StepEditDocumentsWrapper from "./FormSteps/StepEditDocuments/StepEditDocumentsWrapper";
+// import { useEditVendorMutation } from "src/services/VendorServices";
 import { showToast } from "src/utils";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
+import { setSelectedItem } from "src/redux/slices/vendorSlice";
+import {
+  useGetVendorByIdQuery,
+  useUpdateVendorMutation,
+} from "src/services/VendorServices";
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -65,7 +70,7 @@ export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/);
 const steps = [
   {
     label: "Company Details",
-    component: StepAddCompanyDetailsWrapper,
+    component: StepEditCompanyDetailsWrapper,
     validationSchema: object({
       company_name: string().required("Company name is required"),
       company_type: string().required("Please select company type"),
@@ -76,7 +81,7 @@ const steps = [
   },
   {
     label: "Regd./Billing address",
-    component: StepAddAddressWrapper,
+    component: StepEditAddressWrapper,
     validationSchema: object({
       regd_address: object().shape({
         phone: string()
@@ -104,7 +109,7 @@ const steps = [
   },
   {
     label: "Contact",
-    component: StepAddContactWrapper,
+    component: StepEditContactWrapper,
     validationSchema: object({
       contact_informations: array().of(
         object().shape({
@@ -123,7 +128,7 @@ const steps = [
   },
   {
     label: "Document",
-    component: StepAddDocumentsWrapper,
+    component: StepEditDocumentsWrapper,
     validationSchema: object({
       gst_no: string().required("GST number is required"),
       gst_certificate: mixed().required("GST certificate is required"),
@@ -132,7 +137,7 @@ const steps = [
   },
   {
     label: "Bank Details",
-    component: StepAddBankDetailsWrapper,
+    component: StepEditBankDetailsWrapper,
     validationSchema: object({
       bank_informations: array().of(
         object().shape({
@@ -151,69 +156,54 @@ const steps = [
   },
 ];
 
-const AddVendorWrapper = () => {
+const EditVendorWrapper = () => {
   const navigate = useNavigate();
-  const [addVendor] = useAddVendorMutation();
+  const dispatch = useDispatch();
+  const params = useParams();
+  const Id = params.id;
+  const [apiStatus, setApiStatus] = useState(false);
+  const [editVendor] = useUpdateVendorMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
-  const [apiStatus, setApiStatus] = React.useState(false);
+  const { selectedItem }: any = useSelector(
+    (state: RootState) => state?.vendor
+  );
+
+  const { data, isLoading, isFetching } = useGetVendorByIdQuery(Id);
+
   // States
   const [activeStep, setActiveStep] = React.useState(0);
+  useEffect(() => {
+    dispatch(setSelectedItem(data?.data));
+  }, [dispatch, data, isLoading, isFetching]);
 
   // From Initial Values
   const initialValues: FormInitialValues = {
-    company_name: "",
-    company_type: "",
-    ownership_type: "",
-    website_address: "",
-    vendor_code: "",
+    company_name: selectedItem?.companyName || "",
+    company_type: selectedItem?.companyType || "",
+    ownership_type: selectedItem?.ownershipType || "",
+    website_address: selectedItem?.websiteAddress || "",
+    vendor_code: selectedItem?.vendorCode || "",
     regd_address: {
-      phone: "",
-      address: "",
-      country: "",
-      state: "",
-      district: "",
-      pincode: "",
+      phone: selectedItem?.registrationAddress?.phone || "",
+      address: selectedItem?.registrationAddress?.address || "",
+      country: selectedItem?.registrationAddress?.country || "",
+      state: selectedItem?.registrationAddress?.state || "",
+      district: selectedItem?.registrationAddress?.district || "",
+      pincode: selectedItem?.registrationAddress?.pincode || "",
     },
     billing_address: {
-      phone: "",
-      address: "",
-      country: "",
-      state: "",
-      district: "",
-      pincode: "",
+      phone: selectedItem?.billingAddress?.phone || "",
+      address: selectedItem?.billingAddress?.address || "",
+      country: selectedItem?.billingAddress?.country || "",
+      state: selectedItem?.billingAddress?.state || "",
+      district: selectedItem?.billingAddress?.district || "",
+      pincode: selectedItem?.billingAddress?.pincode || "",
     },
-    contact_informations: [
-      {
-        name: "",
-        department: "",
-        designation: "",
-        email: "",
-        mobileNumber: "",
-        landLine: "",
-      },
-      {
-        name: "",
-        department: "",
-        designation: "",
-        email: "",
-        mobileNumber: "",
-        landLine: "",
-      },
-    ],
-    gst_no: "",
-    gst_certificate: "",
-    declaration_form: "",
-    bank_informations: [
-      {
-        bankName: "",
-        bankBranchName: "",
-        accountHolderName: "",
-        accountNumber: "",
-        ifscNumber: "",
-        accountType: "",
-        cancelledCheque: "",
-      },
-    ],
+    contact_informations: selectedItem?.contactInformation || "",
+    gst_no: selectedItem?.document?.gstNumber || "",
+    gst_certificate: selectedItem?.document?.gstCertificate || "",
+    declaration_form: selectedItem?.document?.declarationForm || "",
+    bank_informations: selectedItem?.bankInformation || "",
   };
 
   // Form validation schema based on the active step
@@ -226,9 +216,17 @@ const AddVendorWrapper = () => {
   const onSubmitHandler = (values: FormInitialValues) => {
     if (activeStep === steps.length - 1) {
       setApiStatus(true);
-      setTimeout(() => {
-        console.log(values);
-        addVendor({
+      const contactInformation = values.contact_informations.map((ele: any) => {
+        const { _id, ...rest } = ele; // use object destructuring to remove the _id property
+        return rest; // return the new object without the _id property
+      });
+      const bankInformation = values.bank_informations.map((ele: any) => {
+        const { _id, ...rest } = ele; // use object destructuring to remove the _id property
+        return rest; // return the new object without the _id property
+      });
+
+      editVendor({
+        body: {
           companyName: values.company_name,
           vendorCode: values.vendor_code,
           companyType: values.company_type,
@@ -250,29 +248,29 @@ const AddVendorWrapper = () => {
             district: values.billing_address.district,
             pincode: values.billing_address.pincode,
           },
-          contactInformation: values.contact_informations,
+          contactInformation: contactInformation,
           document: {
             gstNumber: values.gst_no,
             gstCertificate: values.gst_certificate,
             declarationForm: values.declaration_form,
           },
-          bankInformation: values.bank_informations,
+          bankInformation: bankInformation,
           companyId: userData?.companyId || "",
-        }).then((res) => {
-          if ("data" in res) {
-            if (res?.data?.status) {
-              showToast("success", "Vendor added successfully!");
-              navigate("/vendors");
-            } else {
-              showToast("error", res?.data?.message);
-            }
+        },
+        id: Id || "",
+      }).then((res) => {
+        if ("data" in res) {
+          if (res?.data?.status) {
+            showToast("success", "Updated successfully!");
+            navigate("/vendors");
           } else {
-            showToast("error", "Something went wrong");
+            showToast("error", res?.data?.message);
           }
-          setApiStatus(false);
-        });
-        setActiveStep(0);
-      }, 1000);
+        } else {
+          showToast("error", "Something went wrong");
+        }
+        setApiStatus(false);
+      });
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
@@ -281,13 +279,14 @@ const AddVendorWrapper = () => {
   return (
     <SideNavLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={getValidationSchema(activeStep)}
         onSubmit={onSubmitHandler}
       >
         {(formikProps: FormikProps<FormInitialValues>) => (
           <Form className="">
-            <AddVendor
+            <EditVendor
               formikProps={formikProps}
               steps={steps}
               activeStep={activeStep}
@@ -301,4 +300,4 @@ const AddVendorWrapper = () => {
   );
 };
 
-export default AddVendorWrapper;
+export default EditVendorWrapper;

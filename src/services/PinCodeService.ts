@@ -1,4 +1,4 @@
-import { UpdatePincode,AddPincode} from './../models/Pincode.model';
+import { UpdatePincode, AddPincode } from "./../models/Pincode.model";
 import { PaginationType } from "src/models/common/paginationType";
 import apiSlice from "./ApiSlice";
 
@@ -11,13 +11,23 @@ export const pincodeApi = apiSlice.injectEndpoints({
         url: "/pincode",
         method: "POST",
         body,
-      })
+      }),
+    }),
+
+    //***** GET *****/
+    getAllPincodeByDistrict: builder.query({
+      providesTags: ["pincode"],
+      query: (id) => ({
+        url: `/pincode/get-country-pincode/${id}`,
+        method: "GET",
+        // body,
+      }),
     }),
 
     //***** GET *****/
     getAllPincode: builder.query({
       providesTags: ["pincode"],
-      query: ()=> ({
+      query: () => ({
         url: "/pincode",
         method: "GET",
         // body,
@@ -89,4 +99,5 @@ export const {
   useExportPincodeDataMutation,
   useDeletePincodeMutation,
   useGetAllPincodeQuery,
+  useGetAllPincodeByDistrictQuery,
 } = pincodeApi;
