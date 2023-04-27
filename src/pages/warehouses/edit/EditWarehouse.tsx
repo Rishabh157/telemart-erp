@@ -3,7 +3,7 @@ import { FormikProps } from "formik";
 import React from "react";
 import ATMBreadCrumbs from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
-import { FormInitialValues } from "./AddWarehouseWrapper";
+import { FormInitialValues } from "./EditWarehouseWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -11,10 +11,10 @@ type Props = {
   setActiveStep: React.Dispatch<React.SetStateAction<number>>;
   steps: any[];
   apiStatus: boolean;
-  allCountry: any;
+  allCountry?: any;
 };
 
-const AddWarehouse = ({
+const EditWarehouse = ({
   formikProps,
   activeStep,
   setActiveStep,
@@ -36,7 +36,7 @@ const AddWarehouse = ({
       path: "/warehouse",
     },
     {
-      label: "Add Warehouse",
+      label: "Edit Warehouse",
     },
   ];
 
@@ -50,7 +50,7 @@ const AddWarehouse = ({
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New warehouse </ATMPageHeading>
+          <ATMPageHeading> Edit warehouse </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -113,4 +113,4 @@ const AddWarehouse = ({
   );
 };
 
-export default AddWarehouse;
+export default EditWarehouse;

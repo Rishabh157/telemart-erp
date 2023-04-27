@@ -180,7 +180,7 @@ const EditVendorWrapper = () => {
   const initialValues: FormInitialValues = {
     company_name: selectedItem?.companyName || "",
     company_type: selectedItem?.companyType || "",
-    ownership_type: selectedItem?.ownershipType || "",
+    ownership_type: selectedItem?.ownerShipType || "",
     website_address: selectedItem?.websiteAddress || "",
     vendor_code: selectedItem?.vendorCode || "",
     regd_address: {
@@ -216,6 +216,7 @@ const EditVendorWrapper = () => {
   const onSubmitHandler = (values: FormInitialValues) => {
     if (activeStep === steps.length - 1) {
       setApiStatus(true);
+
       const contactInformation = values.contact_informations.map((ele: any) => {
         const { _id, ...rest } = ele; // use object destructuring to remove the _id property
         return rest; // return the new object without the _id property

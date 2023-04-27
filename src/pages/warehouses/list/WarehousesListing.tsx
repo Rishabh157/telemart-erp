@@ -5,7 +5,11 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/warehouseSlice";
+import {
+  setRowsPerPage,
+  setPage,
+  setSearchValue,
+} from "src/redux/slices/warehouseSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -23,7 +27,7 @@ const WarehouseListing = ({ columns, rows }: Props) => {
   // const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const { page, rowsPerPage } = warehouseState;
+  const { page, rowsPerPage, totalItems, searchValue } = warehouseState;
 
   return (
     <div className="h-full">
@@ -42,11 +46,13 @@ const WarehouseListing = ({ columns, rows }: Props) => {
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
+          searchValue={searchValue}
           page={page}
-          rowCount={rows.length}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
+          onSearch={(newValue) => dispatch(setSearchValue(newValue))}
           isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
         />
@@ -66,7 +72,7 @@ const WarehouseListing = ({ columns, rows }: Props) => {
         <div className="border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}

@@ -84,6 +84,7 @@ import EditLanguageWrapper from "./pages/configuration/Configuration Screens/lan
 import EditDealersCategoryWrapper from "./pages/configuration/Configuration Screens/dealersCategory/edit/EditDealersCategoryWrapper";
 import EditProductSubCategoryWrapper from "./pages/configuration/Configuration Screens/productSubCategory/edit/EditProductSubCategoryWrapper";
 import EditVendorWrapper from "./pages/vendors/edit/EditVendorWrapper";
+import EditWarehouseWrapper from "./pages/warehouses/edit/EditWarehouseWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -134,6 +135,8 @@ const PageRoutes = () => {
           </Route>
 
           <Route path="/warehouse" element={<WarehousesListingWrapper />} />
+          <Route path="/warehouse/:id" element={<EditWarehouseWrapper />} />
+
           <Route
             path="/warehouse/add-warehouse"
             element={<AddWarehouseWrapper />}
@@ -344,7 +347,7 @@ const PageRoutes = () => {
             element={<EditLanguageWrapper />}
           />
 
-          <Route path="/configurations/location" element={<Locations/>} />
+          <Route path="/configurations/location" element={<Locations />} />
 
           <Route path="/configurations/asr" element={<ASRListingWrapper />} />
           <Route path="/configurations/asr/add" element={<AddASRWrapper />} />
