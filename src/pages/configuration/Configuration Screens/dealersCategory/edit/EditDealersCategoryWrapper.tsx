@@ -38,10 +38,10 @@ const EditDealersCategoryWrapper = (props: Props) => {
 
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    dealersCategory: selectedItem?.dealersCategory,
-    investAmount: selectedItem?.investAmount,
-    numberOfOrders: selectedItem?.numberOfOrders,
-    deliveryPercentage: selectedItem?.deliveryPercentage,
+    dealersCategory: selectedItem?.dealersCategory || "",
+    investAmount: selectedItem?.investAmount || "",
+    numberOfOrders: selectedItem?.numberOfOrders || "",
+    deliveryPercentage: selectedItem?.deliveryPercentage || "",
   };
 
   // Form Validation Schema

@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { AttributesGroupListResponse } from "src/models/AttrbutesGroup.model";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-// import {
-//     setIsTableLoading,
-//     setItems,
-//     setTotalItems,
-// } from "src/redux/slices/vendorSlice";
-// import { AppDispatch, RootState } from "src/redux/store";
-// import { useGetVendorsQuery } from "src/services/VendorServices";
 import AttributesGroupListing from "./AttributesGroupListing";
 import {
   useDeleteattributeGroupMutation,

@@ -21,7 +21,7 @@ const VendorInfoCard = ({ vendorData, actionIcons }: Props) => {
       </div>
 
       {/* Firm Name */}
-      <div className="flex justify-center">Firm Name</div>
+      <div className="flex justify-center">{vendorData.firmName}</div>
 
       {/* Chips */}
       <div className="flex gap-2 justify-center">
@@ -44,10 +44,12 @@ const VendorInfoCard = ({ vendorData, actionIcons }: Props) => {
 
       <div className="text-center text-slate-500">
         {/* Vendor Name */}
-        <div className="text-[15px]" > Vendor Name </div>
+        <div className="text-[15px]"> {vendorData.vendorName}</div>
 
         {/* Mobile */}
-        <div className="text-center text-slate-400 text-[13px]">8574859685</div>
+        <div className="text-center text-slate-400 text-[13px]">
+          {vendorData.mobile}
+        </div>
       </div>
 
       {/* Action Icon */}

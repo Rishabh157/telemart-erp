@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCompany } from "src/redux/slices/companySlice";
 import { RootState } from "src/redux/store";
 import { showToast } from "src/utils";
+import { regIndiaPhone } from "src/pages/vendors/add/AddVendorWrapper";
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -41,10 +42,12 @@ const steps = [
     component: StepEditCompanyDetailsWrapper,
     validationSchema: object({
       companyName: string().required("Company name is required"),
-      websiteUrl: string().required("Website url is required"),
+      websiteUrl: string().url().required("Website url is required"),
       gstNo: string().required("GST number is required"),
       address: string().required("Address is required"),
-      phoneNo: string().required("Phone number is required"),
+      phoneNo: string()
+        .matches(regIndiaPhone, "Invalid Mobile Number")
+        .required("Phone number is required"),
     }),
   },
   {
@@ -102,12 +105,12 @@ const EditCompanyWrapper = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   // From Initial Values
   const initialValues: FormInitialValues = {
-    companyName: selectedCompany?.companyName,
-    websiteUrl: selectedCompany?.websiteUrl,
-    gstNo: selectedCompany?.gstNo,
-    address: selectedCompany?.address,
-    phoneNo: selectedCompany?.phoneNo,
-    bankDetails: selectedCompany?.bankDetails,
+    companyName: selectedCompany?.companyName || "",
+    websiteUrl: selectedCompany?.websiteUrl || "",
+    gstNo: selectedCompany?.gstNo || "",
+    address: selectedCompany?.address || "",
+    phoneNo: selectedCompany?.phoneNo || "",
+    bankDetails: selectedCompany?.bankDetails || "",
   };
 
   // Form validation schema based on the active step

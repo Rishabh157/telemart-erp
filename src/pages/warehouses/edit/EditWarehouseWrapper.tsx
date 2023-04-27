@@ -19,6 +19,7 @@ import {
 import { setSelectedItem } from "src/redux/slices/warehouseSlice";
 import { useGetAllCountryQuery } from "src/services/CountryService";
 import { setAllCountry } from "src/redux/slices/countrySlice";
+import { regIndiaPhone } from "src/pages/vendors/edit/EditVendorWrapper";
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -61,7 +62,7 @@ const steps = [
       warehouseCode: string().required("warehouseCode is required"),
       warehouseName: string().required("warehouse Name is required"),
       country: string().required("please select country"),
-      email: string().required("email address is required"),
+      email: string().required().email("email address is required"),
     }),
   },
   {
@@ -69,7 +70,9 @@ const steps = [
     component: StepEditAddressWrapper,
     validationSchema: object({
       regd_address: object().shape({
-        phone: string().required("Phone number is required"),
+        phone: string()
+          .matches(regIndiaPhone, "Invalid Mobile Number")
+          .required("Phone number is required"),
         address: string().required("Address is required"),
         country: string().required("Please choose a country"),
         state: string().required("Please choose a state"),
@@ -77,7 +80,9 @@ const steps = [
         pincode: string().required("Please choose a pincode"),
       }),
       billing_address: object().shape({
-        phone: string().required("Phone number is required"),
+        phone: string()
+          .matches(regIndiaPhone, "Invalid Mobile Number")
+          .required("Phone number is required"),
         address: string().required("Address is required"),
         country: string().required("Please choose a country"),
         state: string().required("Please choose a state"),
@@ -95,8 +100,10 @@ const steps = [
           name: string().required("Name is required"),
           department: string().required("Department is required"),
           designation: string().required("Designation is required"),
-          email: string().required("Email is required"),
-          mobileNumber: string().required("Mobile number is required"),
+          email: string().required().email("Email is required"),
+          mobileNumber: string()
+            .required()
+            .matches(regIndiaPhone, "Invalid Mobile Number"),
           landLine: string().required("Landline is required"),
         })
       ),
@@ -234,16 +241,14 @@ const EditWarehouseWrapper = () => {
       >
         {(formikProps: FormikProps<FormInitialValues>) => (
           <Form className="">
-            {!isLoading && !isFetching ? (
-              <EditWarehouse
-                formikProps={formikProps}
-                steps={steps}
-                activeStep={activeStep}
-                setActiveStep={setActiveStep}
-                apiStatus={apiStatus}
-                allCountry={allCountry}
-              />
-            ) : null}
+            <EditWarehouse
+              formikProps={formikProps}
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              apiStatus={apiStatus}
+              allCountry={allCountry}
+            />
           </Form>
         )}
       </Formik>

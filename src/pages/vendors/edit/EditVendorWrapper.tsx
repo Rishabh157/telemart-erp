@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, Formik, FormikProps } from "formik";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
-import { array, mixed, object, string } from "yup";
+import { array, object, string } from "yup";
 import EditVendor from "./EditVendor";
 import StepEditAddressWrapper from "./FormSteps/StepEditAddress/StepEditAddressWrapper";
 import StepEditBankDetailsWrapper from "./FormSteps/StepEditBankDetails/StepEditBankDetailsWrapper";
@@ -131,8 +131,8 @@ const steps = [
     component: StepEditDocumentsWrapper,
     validationSchema: object({
       gst_no: string().required("GST number is required"),
-      gst_certificate: mixed().required("GST certificate is required"),
-      declaration_form: mixed().required("Declaration form is required"),
+      gst_certificate: string().url().required("GST certificate is required"),
+      declaration_form: string().url().required("Declaration form is required"),
     }),
   },
   {
@@ -149,7 +149,9 @@ const steps = [
           accountNumber: string().required("Account number is required"),
           ifscNumber: string().required("IFSC code is required"),
           accountType: string().required("Please select account type"),
-          cancelledCheque: mixed().required("Cancelled cheque is required"),
+          cancelledCheque: string()
+            .url()
+            .required("Cancelled cheque is required"),
         })
       ),
     }),
