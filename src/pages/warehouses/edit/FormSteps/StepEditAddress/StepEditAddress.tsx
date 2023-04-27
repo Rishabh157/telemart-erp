@@ -65,6 +65,12 @@ const StepEditAddress = ({
                   case "text":
                     return (
                       <ATMTextField
+                        maxLength={
+                          name === "regd_address.phone" ||
+                          name === "billing_address.phone"
+                            ? 10
+                            : 100
+                        }
                         key={name}
                         name={name}
                         value={

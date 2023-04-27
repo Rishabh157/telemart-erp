@@ -66,7 +66,7 @@ const AttributesGroupListing = ({ columns, rows }: Props) => {
         <ATMTableHeader
           searchValue={searchValue}
           page={page}
-          rowCount={rows.length}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
@@ -98,12 +98,6 @@ const AttributesGroupListing = ({ columns, rows }: Props) => {
           />
         </div>
       </div>
-
-      {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
     </div>
   );
 };

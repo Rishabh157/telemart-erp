@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
@@ -6,8 +6,11 @@ import { showToast } from "src/utils";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import {setSelectedTaxes} from 'src/redux/slices/TaxesSlice'
-import { useGetTaxesByIdQuery, useUpdateTaxesMutation } from "src/services/TaxesService";
+import { setSelectedTaxes } from "src/redux/slices/TaxesSlice";
+import {
+  useGetTaxesByIdQuery,
+  useUpdateTaxesMutation,
+} from "src/services/TaxesService";
 import EditTaxesListing from "./EditTaxesListing";
 
 type Props = {};
@@ -22,19 +25,16 @@ const EditTaxesWrapper = (props: Props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const Id = params.id;
-  const { selectedTaxes }: any = useSelector(
-    (state: RootState) => state.tax
-  );
+  const { selectedTaxes }: any = useSelector((state: RootState) => state.tax);
   const { userData } = useSelector((state: RootState) => state?.auth);
 
   const [EditTaxes] = useUpdateTaxesMutation();
   const [apiStatus, setApiStatus] = useState<boolean>(false);
 
-
   const { data, isLoading } = useGetTaxesByIdQuery(Id);
 
   const initialValues: FormInitialValues = {
-    taxName: selectedTaxes?.taxName,
+    taxName: selectedTaxes?.taxName || "",
   };
 
   // Form Validation Schema
@@ -44,28 +44,26 @@ const EditTaxesWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    setApiStatus(true)
+    setApiStatus(true);
     setTimeout(() => {
-        EditTaxes({
+      EditTaxes({
         body: {
           taxName: values.taxName,
           companyId: userData?.companyId || "",
         },
         id: Id || "",
-      }).then((res:any) => {
+      }).then((res: any) => {
         if ("data" in res) {
           if (res?.data?.status) {
             showToast("success", "Taxes updated successfully!");
             navigate("/configurations/taxes");
-
           } else {
             showToast("error", res?.data?.message);
           }
         } else {
           showToast("error", "Something went wrong");
         }
-        setApiStatus(false)
-
+        setApiStatus(false);
       });
     }, 1000);
   };
@@ -82,12 +80,13 @@ const EditTaxesWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <EditTaxesListing apiStatus={apiStatus} formikProps={formikProps} />;
+          return (
+            <EditTaxesListing apiStatus={apiStatus} formikProps={formikProps} />
+          );
         }}
       </Formik>
     </ConfigurationLayout>
   );
-}; 
+};
 
 export default EditTaxesWrapper;
-

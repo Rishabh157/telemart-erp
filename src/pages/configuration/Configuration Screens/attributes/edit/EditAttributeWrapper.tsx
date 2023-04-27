@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
 import EditAttribute from "./EditAttribute";
@@ -31,11 +31,10 @@ const EditAttributeWrapper = (props: Props) => {
   const { userData } = useSelector((state: RootState) => state?.auth);
   const [apiStatus, setApiStatus] = useState<boolean>(false);
 
-
   const [EditAttributes] = useUpdateattributesMutation();
   const { data, isLoading } = useGetattributesByIdQuery(Id);
   const initialValues: FormInitialValues = {
-    attributeName: selectedAttribute?.attributeName,
+    attributeName: selectedAttribute?.attributeName || "",
   };
 
   // Form Validation Schema
@@ -45,7 +44,7 @@ const EditAttributeWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    setApiStatus(true)
+    setApiStatus(true);
     setTimeout(() => {
       EditAttributes({
         body: {
@@ -64,7 +63,7 @@ const EditAttributeWrapper = (props: Props) => {
         } else {
           showToast("error", "Something went wrong");
         }
-        setApiStatus(false)
+        setApiStatus(false);
       });
     }, 1000);
   };
@@ -81,7 +80,9 @@ const EditAttributeWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <EditAttribute apiStatus={apiStatus} formikProps={formikProps} />;
+          return (
+            <EditAttribute apiStatus={apiStatus} formikProps={formikProps} />
+          );
         }}
       </Formik>
     </ConfigurationLayout>

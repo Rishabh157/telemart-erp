@@ -14,6 +14,7 @@ import { RootState } from "src/redux/store";
 import { useNavigate } from "react-router-dom";
 import { useGetAllCountryQuery } from "src/services/CountryService";
 import { setAllCountry } from "src/redux/slices/countrySlice";
+import { regIndiaPhone } from "src/pages/vendors/add/AddVendorWrapper";
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -64,7 +65,9 @@ const steps = [
     component: StepAddAddressWrapper,
     validationSchema: object({
       regd_address: object().shape({
-        phone: string().required("Phone number is required"),
+        phone: string()
+          .matches(regIndiaPhone, "Invalid Mobile Number")
+          .required("Phone number is required"),
         address: string().required("Address is required"),
         country: string().required("Please choose a country"),
         state: string().required("Please choose a state"),
@@ -72,7 +75,9 @@ const steps = [
         pincode: string().required("Please choose a pincode"),
       }),
       billing_address: object().shape({
-        phone: string().required("Phone number is required"),
+        phone: string()
+          .matches(regIndiaPhone, "Invalid Mobile Number")
+          .required("Phone number is required"),
         address: string().required("Address is required"),
         country: string().required("Please choose a country"),
         state: string().required("Please choose a state"),
@@ -91,7 +96,9 @@ const steps = [
           department: string().required("Department is required"),
           designation: string().required("Designation is required"),
           email: string().required("Email is required"),
-          mobileNumber: string().required("Mobile number is required"),
+          mobileNumber: string()
+            .required()
+            .matches(regIndiaPhone, "Invalid Mobile Number"),
           landLine: string().required("Landline is required"),
         })
       ),

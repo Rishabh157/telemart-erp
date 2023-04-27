@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
@@ -6,8 +6,11 @@ import { showToast } from "src/utils";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import {setSelectedProductGroup} from 'src/redux/slices/productGroupSlice'
-import { useGetProductGroupByIdQuery, useUpdateProductGroupMutation } from "src/services/ProductGroupService";
+import { setSelectedProductGroup } from "src/redux/slices/productGroupSlice";
+import {
+  useGetProductGroupByIdQuery,
+  useUpdateProductGroupMutation,
+} from "src/services/ProductGroupService";
 import EditProductGroupListing from "./EditProductGroupListing";
 
 type Props = {};
@@ -30,11 +33,10 @@ const EditProductGroupWrapper = (props: Props) => {
   const [EditProductGroup] = useUpdateProductGroupMutation();
   const [apiStatus, setApiStatus] = useState<boolean>(false);
 
-
   const { data, isLoading } = useGetProductGroupByIdQuery(Id);
 
   const initialValues: FormInitialValues = {
-    groupName: selectedProductGroup?.groupName,
+    groupName: selectedProductGroup?.groupName || "",
   };
 
   // Form Validation Schema
@@ -44,35 +46,33 @@ const EditProductGroupWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    setApiStatus(true)
+    setApiStatus(true);
     setTimeout(() => {
-        EditProductGroup({
+      EditProductGroup({
         body: {
           groupName: values.groupName,
           companyId: userData?.companyId || "",
         },
         id: Id || "",
-      }).then((res:any) => {
+      }).then((res: any) => {
         if ("data" in res) {
           if (res?.data?.status) {
             showToast("success", "Product-Group updated successfully!");
             navigate("/configurations/product-group");
-
           } else {
             showToast("error", res?.data?.message);
           }
         } else {
           showToast("error", "Something went wrong");
         }
-        setApiStatus(false)
-
+        setApiStatus(false);
       });
     }, 1000);
   };
 
   useEffect(() => {
     dispatch(setSelectedProductGroup(data?.data));
-  //  console.log(data.data ,"id")
+    //  console.log(data.data ,"id")
   }, [dispatch, data, isLoading]);
   return (
     <ConfigurationLayout>
@@ -83,7 +83,12 @@ const EditProductGroupWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <EditProductGroupListing apiStatus={apiStatus} formikProps={formikProps} />;
+          return (
+            <EditProductGroupListing
+              apiStatus={apiStatus}
+              formikProps={formikProps}
+            />
+          );
         }}
       </Formik>
     </ConfigurationLayout>
@@ -91,4 +96,3 @@ const EditProductGroupWrapper = (props: Props) => {
 };
 
 export default EditProductGroupWrapper;
-

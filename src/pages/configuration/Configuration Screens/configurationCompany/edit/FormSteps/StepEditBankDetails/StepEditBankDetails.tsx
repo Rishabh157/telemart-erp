@@ -86,6 +86,7 @@ const StepEditBankDetails = ({
                                   case "select":
                                     return (
                                       <ATMSelect
+                                        key={name}
                                         name={`bankDetails[${bankInformationIndex}].${name}`}
                                         value={bankInformation[name]}
                                         onChange={(e) => {

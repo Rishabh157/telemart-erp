@@ -35,10 +35,10 @@ const EditItemWrapper = (props: Props) => {
   const { data, isLoading, isFetching } = useGetItemsByIdQuery(Id);
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    itemCode: selectedItem?.itemCode,
-    itemName: selectedItem?.itemName,
-    itemWeight: selectedItem?.itemWeight,
-    itemImage: selectedItem?.itemImage,
+    itemCode: selectedItem?.itemCode || "",
+    itemName: selectedItem?.itemName || "",
+    itemWeight: selectedItem?.itemWeight || "",
+    itemImage: selectedItem?.itemImage || "",
   };
 
   // Form Validation Schema

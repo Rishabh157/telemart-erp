@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Formik, FormikProps } from "formik";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
-import { array, mixed, object, string } from "yup";
+import { array, object, string } from "yup";
 import AddVendor from "./AddVendor";
 import StepAddAddressWrapper from "./FormSteps/StepAddAddress/StepAddAddressWrapper";
 import StepAddBankDetailsWrapper from "./FormSteps/StepAddBankDetails/StepAddBankDetailsWrapper";
@@ -113,6 +113,7 @@ const steps = [
           designation: string().required("Designation is required"),
           email: string().required("Required!").email("Invalid  Email"),
           mobileNumber: string()
+            .max(10)
             .trim()
             .matches(regIndiaPhone, "Invalid Mobile Number")
             .required("Required!"),
@@ -126,8 +127,8 @@ const steps = [
     component: StepAddDocumentsWrapper,
     validationSchema: object({
       gst_no: string().required("GST number is required"),
-      gst_certificate: mixed().required("GST certificate is required"),
-      declaration_form: mixed().required("Declaration form is required"),
+      gst_certificate: string().url().required("GST certificate is required"),
+      declaration_form: string().url().required("Declaration form is required"),
     }),
   },
   {
@@ -144,7 +145,9 @@ const steps = [
           accountNumber: string().required("Account number is required"),
           ifscNumber: string().required("IFSC code is required"),
           accountType: string().required("Please select account type"),
-          cancelledCheque: mixed().required("Cancelled cheque is required"),
+          cancelledCheque: string()
+            .url()
+            .required("Cancelled cheque is required"),
         })
       ),
     }),
@@ -271,7 +274,6 @@ const AddVendorWrapper = () => {
           }
           setApiStatus(false);
         });
-        setActiveStep(0);
       }, 1000);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);

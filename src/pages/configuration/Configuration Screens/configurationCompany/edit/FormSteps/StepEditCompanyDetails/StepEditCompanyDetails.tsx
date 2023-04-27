@@ -64,6 +64,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
 
         {/* Phone No. */}
         <ATMTextField
+          maxLength={10}
           name="phoneNo"
           value={values.phoneNo}
           onChange={(e) => {
