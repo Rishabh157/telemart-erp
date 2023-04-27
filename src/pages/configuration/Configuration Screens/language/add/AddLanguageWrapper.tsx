@@ -31,7 +31,6 @@ const AddLanguageWrapper = (props: Props) => {
   });
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    console.log("onSubmitHandler", values);
     setApiStatus(true);
     addLanguage({
       languageName: values.languageName,
