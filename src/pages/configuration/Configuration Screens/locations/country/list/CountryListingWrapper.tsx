@@ -1,18 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import CountryListing from "./CountryListing";
 import { useGetAllCountryQuery } from "src/services/CountryService";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { setItems} from "src/redux/slices/countrySlice";
+import { setItems } from "src/redux/slices/countrySlice";
 
 const CountryListingWrapper = () => {
   const dispatch = useDispatch();
 
   const { data, isLoading, isFetching } = useGetAllCountryQuery("");
   const { items }: any = useSelector((state: RootState) => state.country);
-  const { selectLocationCountry }: any = useSelector(
-    (state: RootState) => state.country
-  );
 
   const contries = items?.map((elem: any) => {
     return {

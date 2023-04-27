@@ -7,8 +7,12 @@ import {
   setSearchValue,
   setSelectedLocationTehsil,
 } from "src/redux/slices/tehsilSlice";
-import { setFilterValue } from "src/redux/slices/pincodeSlice";
-
+import {
+  setFilterValue,
+  setSelectedLocationPincode,
+} from "src/redux/slices/pincodeSlice";
+import { setFilterValue as setAreaFilterValue } from "src/redux/slices/areaSlice";
+import { showToast } from "src/utils";
 type Props = {
   tehsils: any[];
 };
@@ -27,7 +31,10 @@ const TehsilListing = ({ tehsils }: Props) => {
   function handleCountryClick(newValue: any) {
     if (selectedLocationTehsil?.value === newValue.value) {
       dispatch(setSelectedLocationTehsil(null));
+      dispatch(setSelectedLocationPincode(null));
+
       dispatch(setFilterValue(""));
+      dispatch(setAreaFilterValue(""));
     } else {
       dispatch(setSelectedLocationTehsil(newValue));
       dispatch(setFilterValue(newValue.value));
@@ -44,12 +51,18 @@ const TehsilListing = ({ tehsils }: Props) => {
         }}
         listData={tehsils}
         onAddClick={() => {
-          setisOpenAddForm(true);
+          if (selectedLocationDistrict === null) {
+            showToast("error", "Please select district");
+          } else {
+            setisOpenAddForm(true);
+          }
         }}
         onListItemClick={(newValue) => {
-          handleCountryClick(newValue);
+          if (selectedLocationDistrict !== null) {
+            handleCountryClick(newValue);
+          }
         }}
-        disabled={selectedLocationDistrict === null}
+        disabled={false}
       />
       {isOpenAddForm && (
         <AddTehsilWrapper onClose={() => setisOpenAddForm(false)} />

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import LocationListView from "../../sharedComponents/LocationListView";
 import AddAreaWrapper from "../add/AddAreaWrapper";
-import { useSelector, useDispatch} from "react-redux";
-import { AppDispatch, RootState } from "src/redux/store";
-import { setSearchValue, setSelectedLocationArea } from "src/redux/slices/areaSlice";
-
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "src/redux/store";
+import {
+  setSearchValue,
+  setSelectedLocationArea,
+} from "src/redux/slices/areaSlice";
+import { showToast } from "src/utils";
 
 type Props = {
   areas: any[];
@@ -12,40 +15,45 @@ type Props = {
 
 const AreaListing = ({ areas }: Props) => {
   const [isOpenAddForm, setisOpenAddForm] = useState(false);
-  const dispatch=useDispatch()
-  const {searchValue}:any=useSelector((state:RootState)=>state.areas)
-  const {selectedLocationPincode}:any=useSelector((state:RootState)=>state.pincode)
-  const {selectedLocationArea}:any=useSelector((state:RootState)=>state.areas)
+  const dispatch = useDispatch();
+  const { searchValue }: any = useSelector((state: RootState) => state.areas);
+  const { selectedLocationPincode }: any = useSelector(
+    (state: RootState) => state.pincode
+  );
+  const { selectedLocationArea }: any = useSelector(
+    (state: RootState) => state.areas
+  );
 
   function handleCountryClick(newValue: any) {
-    if(selectedLocationArea?.value === newValue.value)
-    {
-        dispatch(setSelectedLocationArea(null)); 
+    if (selectedLocationArea?.value === newValue.value) {
+      dispatch(setSelectedLocationArea(null));
+    } else {
+      dispatch(setSelectedLocationArea(newValue));
     }
-    else{
-         dispatch(setSelectedLocationArea(newValue));
-     
-    }
-}
+  }
 
-
-  
-  
   return (
     <>
       <LocationListView
         listHeading="Area"
         searchValue={searchValue}
-        OnSearchChange={(newValue)=>{setSearchValue(newValue)}}
+        OnSearchChange={(newValue) => {
+          dispatch(setSearchValue(newValue));
+        }}
         listData={areas}
         onAddClick={() => {
-          setisOpenAddForm(true);
+          if (selectedLocationPincode === null) {
+            showToast("error", "Please select pincode");
+          } else {
+            setisOpenAddForm(true);
+          }
         }}
         onListItemClick={(newValue) => {
-          handleCountryClick(newValue)      
-      }}
-      disabled={selectedLocationPincode === null}
-
+          if (selectedLocationPincode !== null) {
+            handleCountryClick(newValue);
+          }
+        }}
+        disabled={false}
       />
 
       {isOpenAddForm && (

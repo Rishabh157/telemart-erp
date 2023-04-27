@@ -9,28 +9,14 @@ import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormikProps } from "formik";
 import { FormInitialValues } from "./AddDistrictWrapper";
 
-import ATMBreadCrumbs, {
-    BreadcrumbType,
-  } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
-
 type Props = {
   onClose: () => void;
   formikProps: FormikProps<FormInitialValues>;
   apiStatus: boolean;
 };
-const breadcrumbs: BreadcrumbType[] = [
-    {
-      label: "Location",
-      path: "/configurations/location",
-    },
-    {
-      label: "Add District",
-    },
-  ];
 
-
-const AddDistrictDialog = ({ onClose , formikProps , apiStatus }: Props) => {
-    const { values, setFieldValue } = formikProps;
+const AddDistrictDialog = ({ onClose, formikProps, apiStatus }: Props) => {
+  const { values, setFieldValue } = formikProps;
 
   return (
     <>
@@ -42,7 +28,9 @@ const AddDistrictDialog = ({ onClose , formikProps , apiStatus }: Props) => {
               <ATMTextField
                 name="districtName"
                 value={values.districtName}
-                onChange={(e) => {setFieldValue("districtName", e.target.value)}}
+                onChange={(e) => {
+                  setFieldValue("districtName", e.target.value);
+                }}
                 placeholder="Enter a district name"
                 label="District Name"
               />
@@ -62,7 +50,9 @@ const AddDistrictDialog = ({ onClose , formikProps , apiStatus }: Props) => {
           <button
             type="button"
             disabled={apiStatus}
-            className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true?"disabled:opacity-25":""}`}
+            className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+              true ? "disabled:opacity-25" : ""
+            }`}
             onClick={() => formikProps.handleSubmit()}
           >
             {" "}
