@@ -207,7 +207,6 @@ const AddWarehouseWrapper = () => {
           }
           setApiStatus(false);
         });
-        setActiveStep(0);
       }, 1000);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);

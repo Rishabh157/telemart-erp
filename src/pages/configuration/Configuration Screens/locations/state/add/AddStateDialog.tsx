@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Dialog,
   DialogActions,
@@ -9,16 +9,14 @@ import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from "./AddStateWrapper";
 import { FormikProps } from "formik";
 
-
-
 type Props = {
   onClose: () => void;
   formikProps: FormikProps<FormInitialValues>;
   apiStatus: boolean;
 };
 
-const AddStateDialog = ({ onClose,formikProps ,apiStatus }: Props) => {
-    const { values, setFieldValue } = formikProps;
+const AddStateDialog = ({ onClose, formikProps, apiStatus }: Props) => {
+  const { values, setFieldValue } = formikProps;
 
   return (
     <>
@@ -30,7 +28,9 @@ const AddStateDialog = ({ onClose,formikProps ,apiStatus }: Props) => {
               <ATMTextField
                 name="stateName"
                 value={values.stateName}
-                onChange={(e) => {setFieldValue("stateName" ,e.target.value)}}
+                onChange={(e) => {
+                  setFieldValue("stateName", e.target.value);
+                }}
                 placeholder="Enter a state name"
                 label="State Name"
               />
@@ -39,18 +39,16 @@ const AddStateDialog = ({ onClose,formikProps ,apiStatus }: Props) => {
         </DialogContent>
 
         <DialogActions>
-          <button
-            type="button"
-            onClick={() => onClose()}
-          >
+          <button type="button" onClick={() => onClose()}>
             {" "}
             Cancel
           </button>
           <button
             type="button"
-            className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true?"disabled:opacity-25":""}`}
+            className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+              true ? "disabled:opacity-25" : ""
+            }`}
             onClick={() => formikProps.handleSubmit()}
-
           >
             {" "}
             Submit{" "}
