@@ -1,4 +1,4 @@
-import React, { useEffect ,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { array, object, string } from "yup";
 import AddAttributeGroup from "./AddAttributeGroup";
@@ -31,7 +31,6 @@ const AddAttributeGroupWrapper = (props: Props) => {
     group_name: "",
     attributes: [],
   };
-
   // Form Validation Schema
   const validationSchema = object({
     group_name: string().required("Group name is required"),
@@ -47,7 +46,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    setApiStatus(true)
+    setApiStatus(true);
     setTimeout(() => {
       AddAttributeGroups({
         groupName: values.group_name,
@@ -64,7 +63,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
         } else {
           showToast("error", "Something went wrong");
         }
-        setApiStatus(false)
+        setApiStatus(false);
       });
     }, 1000);
   };
@@ -81,7 +80,11 @@ const AddAttributeGroupWrapper = (props: Props) => {
       >
         {(formikProps) => {
           return (
-            <AddAttributeGroup apiStatus={apiStatus} formikProps={formikProps} allItems={allItems} />
+            <AddAttributeGroup
+              apiStatus={apiStatus}
+              formikProps={formikProps}
+              allItems={allItems}
+            />
           );
         }}
       </Formik>

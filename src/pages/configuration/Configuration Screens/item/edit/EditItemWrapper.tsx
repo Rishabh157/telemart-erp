@@ -46,6 +46,7 @@ const EditItemWrapper = (props: Props) => {
     itemCode: string().required("Item Code is required"),
     itemName: string().required("Item Name is required"),
     itemWeight: string().required("Item Weight is required"),
+    itemImage: string().required("Item image is required"),
   });
 
   //    Form Submit Handler

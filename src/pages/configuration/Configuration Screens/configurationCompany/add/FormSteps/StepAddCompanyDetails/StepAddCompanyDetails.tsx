@@ -64,10 +64,14 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
 
         {/* Phone No. */}
         <ATMTextField
+          maxLength={10}
           name="phoneNo"
           value={values.phoneNo}
           onChange={(e) => {
-            setFieldValue("phoneNo", e.target.value);
+            const inputValue = e.target.value;
+            if (!isNaN(Number(inputValue))) {
+              setFieldValue("phoneNo", inputValue);
+            }
           }}
           label="Phone No."
           placeholder="Phone No."
