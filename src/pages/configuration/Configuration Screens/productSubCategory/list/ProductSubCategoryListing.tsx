@@ -8,7 +8,10 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/attributesGroupSlice";
+import {
+  setRowsPerPage,
+  setPage,
+} from "src/redux/slices/productSubCategorySlice";
 import { AppDispatch, RootState } from "src/redux/store";
 import { setSearchValue } from "src/redux/slices/productSubCategorySlice";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
@@ -27,7 +30,8 @@ const ProductSubCategoryListing = ({ columns, rows }: Props) => {
   const navigate = useNavigate();
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const { page, rowsPerPage, searchValue } = productSubCategoryState;
+  const { page, rowsPerPage, searchValue, totalItems } =
+    productSubCategoryState;
   const breadcrumbs: BreadcrumbType[] = [
     {
       label: "Configuration",
@@ -61,7 +65,7 @@ const ProductSubCategoryListing = ({ columns, rows }: Props) => {
         <ATMTableHeader
           searchValue={searchValue}
           page={page}
-          rowCount={rows.length}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
@@ -86,7 +90,7 @@ const ProductSubCategoryListing = ({ columns, rows }: Props) => {
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}

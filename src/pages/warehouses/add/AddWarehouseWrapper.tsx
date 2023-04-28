@@ -57,7 +57,7 @@ const steps = [
       warehouseCode: string().required("warehouseCode is required"),
       warehouseName: string().required("warehouse Name is required"),
       country: string().required("please select country"),
-      email: string().required("email address is required"),
+      email: string().required().email("email address is required"),
     }),
   },
   {
