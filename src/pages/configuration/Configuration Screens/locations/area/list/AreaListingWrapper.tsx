@@ -14,13 +14,13 @@ const AreaListingWrapper = () => {
   );
   const area = items?.map((ele: any) => {
     return {
-      label:ele.area,
-      value:ele.id
-    }
+      label: ele.area,
+      value: ele.id,
+    };
   });
   const { data, isLoading, isFetching } = useGetAreaQuery({
     limit: 100,
-    searchValue: searchValue || filterValue,
+    searchValue: searchValue,
     params: ["area", "pincodeId"],
     page: 0,
     filterBy: [
@@ -36,7 +36,7 @@ const AreaListingWrapper = () => {
 
   useEffect(() => {
     dispatch(setItems(data?.data));
-  }, [data, isLoading, isFetching,dispatch]);
+  }, [data, isLoading, isFetching, dispatch]);
 
   return <AreaListing areas={area} />;
 };

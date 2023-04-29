@@ -4,10 +4,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 import { object, string } from "yup";
 import { showToast } from "src/utils";
-import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import { useAddCountryMutation } from "src/services/CountryService";
-
 
 type Props = {
   onClose: () => void;
@@ -17,12 +15,9 @@ export type FormInitialValues = {
   countryName: string;
 };
 const AddCountryWrapper = ({ onClose }: Props) => {
-  const navigate = useNavigate();
-  const [AddCountry ]=useAddCountryMutation()
+  const [AddCountry] = useAddCountryMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
   const [apiStatus, setApiStatus] = useState(false);
-
-
 
   const initialValues: FormInitialValues = {
     countryName: "",
@@ -40,8 +35,7 @@ const AddCountryWrapper = ({ onClose }: Props) => {
         if ("data" in res) {
           if (res?.data?.status) {
             showToast("success", "Country added successfully!");
-            onClose()
-          
+            onClose();
           } else {
             showToast("error", res?.data?.message);
           }
@@ -55,22 +49,21 @@ const AddCountryWrapper = ({ onClose }: Props) => {
 
   return (
     <>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={onSubmitHandler}
-
-        >
-          {(formikProps) => {
-            return (
-              <AddCountryDialog
-                onClose={onClose}
-                apiStatus={apiStatus}
-                formikProps={formikProps}
-              />
-            );
-          }}
-        </Formik>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmitHandler}
+      >
+        {(formikProps) => {
+          return (
+            <AddCountryDialog
+              onClose={onClose}
+              apiStatus={apiStatus}
+              formikProps={formikProps}
+            />
+          );
+        }}
+      </Formik>
     </>
   );
 };

@@ -98,7 +98,7 @@ const AddVendor = ({
                   optional?: React.ReactNode;
                 } = {};
                 return (
-                  <Step key={step.label} {...stepProps}>
+                  <Step key={index} {...stepProps}>
                     <StepLabel {...labelProps}>{step.label}</StepLabel>
                   </Step>
                 );

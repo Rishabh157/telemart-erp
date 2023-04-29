@@ -8,7 +8,7 @@ import VendorInfoCard from "../components/vendorInfoCard/VendorInfoCard";
 import ListItemCard from "../components/listItemCard/ListItemCard";
 // import { useParams } from "react-router-dom";
 import { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
-import { useGetVendorsQuery } from "src/services/VendorServices";
+import { useGetPaginationVendorsQuery } from "src/services/VendorServices";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllItems } from "src/redux/slices/vendorSlice";
 import { RootState } from "src/redux/store";
@@ -77,9 +77,26 @@ const ViewVendor = () => {
   //   const { vendorId } = useParams();
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
-  const { allItems }: any = useSelector((state: RootState) => state?.vendor);
+  const { allItems, selectedItem }: any = useSelector(
+    (state: RootState) => state?.vendor
+  );
+  const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
+    limit: 100,
+    searchValue: searchValue,
+    params: ["companyType", "ownerShipType", "vendorCode", "companyName"],
+    page: 1,
+    filterBy: [
+      {
+        fieldName: "",
+        value: [],
+      },
+    ],
+    dateFilter: {},
+    orderBy: "createdAt",
+    orderByValue: -1,
+    isPaginationRequired: true,
+  });
 
-  const { data, isLoading, isFetching } = useGetVendorsQuery("");
   const listData = allItems?.map((ele: any) => {
     return {
       vendorName: ele?.companyName,
@@ -95,9 +112,10 @@ const ViewVendor = () => {
       infoCard={
         <VendorInfoCard
           vendorData={{
-            isActive: true,
-            vendorName: "Himanshu",
-            mobile: "8574859685",
+            isActive: selectedItem?.isActive,
+            vendorName: selectedItem?.contactInformation[0]?.name,
+            mobile: selectedItem?.registrationAddress?.phone,
+            firmName: selectedItem?.companyName,
           }}
           actionIcons={actionIcons}
         />

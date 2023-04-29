@@ -1,13 +1,11 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import AddTehsilDialog from "./AddTehsilDialog";
 import { useAddTehsilMutation } from "src/services/TehsilService";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 import { showToast } from "src/utils";
 import { object, string } from "yup";
 import { Formik } from "formik";
-
 
 type Props = {
   onClose: () => void;
@@ -17,14 +15,17 @@ export type FormInitialValues = {
   tehsilName: string;
 };
 const AddTehsilWrapper = ({ onClose }: Props) => {
-
-  const navigate = useNavigate();
-  const [AddTehsil ]=useAddTehsilMutation()
+  const [AddTehsil] = useAddTehsilMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
-  const {selectedLocationCountries}:any=useSelector((state: RootState)=>state?.country)
-  const {selectedLocationState}:any=useSelector((state: RootState)=>state?.states)
-  const {selectedLocationDistrict}:any=useSelector((state: RootState)=>state?.district)
- 
+  const { selectedLocationCountries }: any = useSelector(
+    (state: RootState) => state?.country
+  );
+  const { selectedLocationState }: any = useSelector(
+    (state: RootState) => state?.states
+  );
+  const { selectedLocationDistrict }: any = useSelector(
+    (state: RootState) => state?.district
+  );
 
   const [apiStatus, setApiStatus] = useState(false);
   const initialValues: FormInitialValues = {
@@ -46,7 +47,7 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
         if ("data" in res) {
           if (res?.data?.status) {
             showToast("success", "Tehsil added successfully!");
-            onClose()
+            onClose();
           } else {
             showToast("error", res?.data?.message);
           }
@@ -60,22 +61,21 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
 
   return (
     <>
-     <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={onSubmitHandler}
-        >
-          {(formikProps) => {
-            return (
-              <AddTehsilDialog
-                onClose={onClose}
-                apiStatus={apiStatus}
-                formikProps={formikProps}
-              />
-            );
-          }}
-        </Formik>
-
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmitHandler}
+      >
+        {(formikProps) => {
+          return (
+            <AddTehsilDialog
+              onClose={onClose}
+              apiStatus={apiStatus}
+              formikProps={formikProps}
+            />
+          );
+        }}
+      </Formik>
     </>
   );
 };

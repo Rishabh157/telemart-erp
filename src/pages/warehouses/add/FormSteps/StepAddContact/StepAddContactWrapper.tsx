@@ -35,12 +35,12 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
         placeholder: "Email",
       },
       {
-        name: "mobile_number",
+        name: "mobileNumber",
         label: "Mobile Number",
         placeholder: "Mobile Number",
       },
       {
-        name: "landline",
+        name: "landLine",
         label: "Landline",
         placeholder: "Landline",
       },

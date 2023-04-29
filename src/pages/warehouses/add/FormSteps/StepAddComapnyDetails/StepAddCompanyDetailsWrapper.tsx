@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FormikProps } from "formik";
 import React from "react";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
@@ -10,14 +11,10 @@ export type DropdownOptions = {
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
+  allCountry: any;
 };
 
 export type FieldType = Field<"countryOptions">;
-
-const countryOptions = [
-  { label: "India", value: "INDIA" },
-  { label: "Nepal", value: "NEPAL" },
-];
 
 const formFields: FieldType[] = [
   {
@@ -37,7 +34,7 @@ const formFields: FieldType[] = [
     type: "select",
     optionAccessKey: "countryOptions",
   },
-  
+
   {
     name: "email",
     label: "Email",
@@ -45,7 +42,10 @@ const formFields: FieldType[] = [
   },
 ];
 
-const StepAddCompanyDetailsWrapper = ({ formikProps }: Props) => {
+const StepAddCompanyDetailsWrapper = ({ formikProps, allCountry }: Props) => {
+  const countryOptions = allCountry?.map((ele: any) => {
+    return { label: ele?.countryName, value: ele?._id };
+  });
   const dropdownOptions: DropdownOptions = {
     countryOptions,
   };

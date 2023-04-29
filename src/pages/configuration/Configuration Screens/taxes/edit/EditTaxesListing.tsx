@@ -9,7 +9,7 @@ import { FormInitialValues } from "./EditTaxesWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
-  apiStatus:boolean
+  apiStatus: boolean;
 };
 
 // Breadcrumbs
@@ -50,8 +50,9 @@ const EditTaxesListing = ({ formikProps, apiStatus }: Props) => {
                 type="button"
                 disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true?"disabled:opacity-25":""}`}
-
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  true ? "disabled:opacity-25" : ""
+                }`}
               >
                 Update
               </button>
@@ -68,7 +69,7 @@ const EditTaxesListing = ({ formikProps, apiStatus }: Props) => {
                 label="Taxes Name"
                 placeholder="Taxes Name"
                 onChange={(e) => setFieldValue("taxName", e.target.value)}
-              />       
+              />
             </div>
           </div>
         </div>

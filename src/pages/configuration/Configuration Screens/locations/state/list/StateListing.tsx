@@ -3,51 +3,72 @@ import LocationListView from "../../sharedComponents/LocationListView";
 import AddStateWrapper from "../add/AddStateWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { setSearchValue, setSelctedLocationState } from "src/redux/slices/statesSlice";
-import { setFilterValue } from "src/redux/slices/districtSlice";
+import {
+  setSearchValue,
+  setSelctedLocationState,
+} from "src/redux/slices/statesSlice";
+import {
+  setFilterValue,
+  setSelectedLocationDistrict,
+} from "src/redux/slices/districtSlice";
+import { setSelectedLocationTehsil } from "src/redux/slices/tehsilSlice";
+import { setSelectedLocationPincode } from "src/redux/slices/pincodeSlice";
+import { setFilterValue as setAreaFilterValue } from "src/redux/slices/areaSlice";
+import { setFilterValue as setPincodeFilterValue } from "src/redux/slices/pincodeSlice";
+import { setFilterValue as setTehsilFilterValue } from "src/redux/slices/tehsilSlice";
+import { showToast } from "src/utils";
 
 type Props = {
   states: any[];
 };
 
 const StateListing = ({ states }: Props) => {
-const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const [isOpenAddForm, setisOpenAddForm] = useState(false);
-  const {searchValue}:any=useSelector((state:RootState)=>state.states)
-  const {selectedLocationCountries}:any=useSelector((state:RootState)=>state.country)
-  const {selctedLocationState}:any=useSelector((state:RootState)=>state.states)
+  const { searchValue }: any = useSelector((state: RootState) => state.states);
+  const { selectedLocationCountries }: any = useSelector(
+    (state: RootState) => state.country
+  );
+  const { selectedLocationState }: any = useSelector(
+    (state: RootState) => state.states
+  );
 
   function handleCountryClick(newValue: any) {
-    if(selctedLocationState?.value === newValue.value)
-    {
-        dispatch(setSelctedLocationState(null)); 
-        dispatch(setFilterValue(""))
+    if (selectedLocationState?.value === newValue.value) {
+      dispatch(setSelctedLocationState(null));
+      dispatch(setSelectedLocationDistrict(null));
+      dispatch(setSelectedLocationTehsil(null));
+      dispatch(setSelectedLocationPincode(null));
+      dispatch(setFilterValue(""));
+      dispatch(setAreaFilterValue(""));
+      dispatch(setPincodeFilterValue(""));
+      dispatch(setTehsilFilterValue(""));
+    } else {
+      dispatch(setSelctedLocationState(newValue));
+      dispatch(setFilterValue(newValue.value));
     }
-    else{
-         dispatch(setSelctedLocationState(newValue));
-         dispatch(setFilterValue(newValue.value))
-
-       
-    }
-}
-
+  }
 
   return (
     <>
       <LocationListView
         searchValue={searchValue}
-        OnSearchChange={(newValue)=>dispatch(setSearchValue(newValue))}
+        OnSearchChange={(newValue) => dispatch(setSearchValue(newValue))}
         listHeading="States"
         listData={states}
         onAddClick={() => {
-          setisOpenAddForm(true);
+          if (selectedLocationCountries === null) {
+            showToast("error", "Please select country");
+          } else {
+            setisOpenAddForm(true);
+          }
         }}
         onListItemClick={(newValue) => {
-            handleCountryClick(newValue)      
+          if (selectedLocationCountries !== null) {
+            handleCountryClick(newValue);
+          }
         }}
-        disabled={  selectedLocationCountries === null}
-
-
+        disabled={false}
       />
 
       {isOpenAddForm && (

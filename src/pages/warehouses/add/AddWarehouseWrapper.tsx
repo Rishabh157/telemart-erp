@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
 import { Form, Formik, FormikProps } from "formik";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { array, object, string } from "yup";
@@ -6,13 +7,20 @@ import StepAddCompanyDetailsWrapper from "./FormSteps/StepAddComapnyDetails/Step
 import StepAddAddressWrapper from "./FormSteps/StepAddAddress/StepAddAddressWrapper";
 import StepAddContactWrapper from "./FormSteps/StepAddContact/StepAddContactWrapper";
 import AddWarehouse from "./AddWarehouse";
+import { useAddWareHouseMutation } from "src/services/WareHoouseService";
+import { showToast } from "src/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
+import { useNavigate } from "react-router-dom";
+import { useGetAllCountryQuery } from "src/services/CountryService";
+import { setAllCountry } from "src/redux/slices/countrySlice";
+import { regIndiaPhone } from "src/pages/vendors/add/AddVendorWrapper";
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
   warehouseCode: string;
   warehouseName: string;
   country: string;
-  lastName: string;
   email: string;
   regd_address: {
     phone: string;
@@ -35,8 +43,8 @@ export type FormInitialValues = {
     department: string;
     designation: string;
     email: string;
-    mobile_number: string;
-    landline: string;
+    mobileNumber: string;
+    landLine: string;
   }[];
 };
 
@@ -46,11 +54,10 @@ const steps = [
     label: "Company Details",
     component: StepAddCompanyDetailsWrapper,
     validationSchema: object({
-      company_name: string().required("company name is required"),
-      company_type: string().required("Please select company type"),
-      ownership_type: string().required("please select ownership type"),
-      website_address: string().required("Website address is required"),
-      vendor_code: string().required("Vendor code is required"),
+      warehouseCode: string().required("warehouseCode is required"),
+      warehouseName: string().required("warehouse Name is required"),
+      country: string().required("please select country"),
+      email: string().required().email("email address is required"),
     }),
   },
   {
@@ -58,7 +65,9 @@ const steps = [
     component: StepAddAddressWrapper,
     validationSchema: object({
       regd_address: object().shape({
-        phone: string().required("Phone number is required"),
+        phone: string()
+          .matches(regIndiaPhone, "Invalid Mobile Number")
+          .required("Phone number is required"),
         address: string().required("Address is required"),
         country: string().required("Please choose a country"),
         state: string().required("Please choose a state"),
@@ -66,7 +75,9 @@ const steps = [
         pincode: string().required("Please choose a pincode"),
       }),
       billing_address: object().shape({
-        phone: string().required("Phone number is required"),
+        phone: string()
+          .matches(regIndiaPhone, "Invalid Mobile Number")
+          .required("Phone number is required"),
         address: string().required("Address is required"),
         country: string().required("Please choose a country"),
         state: string().required("Please choose a state"),
@@ -85,8 +96,10 @@ const steps = [
           department: string().required("Department is required"),
           designation: string().required("Designation is required"),
           email: string().required("Email is required"),
-          mobile_number: string().required("Mobile number is required"),
-          landline: string().required("Landline is required"),
+          mobileNumber: string()
+            .required()
+            .matches(regIndiaPhone, "Invalid Mobile Number"),
+          landLine: string().required("Landline is required"),
         })
       ),
     }),
@@ -94,15 +107,28 @@ const steps = [
 ];
 
 const AddWarehouseWrapper = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [addWareHouse] = useAddWareHouseMutation();
+  const { data, isLoading, isFetching } = useGetAllCountryQuery("");
+  useEffect(() => {
+    if (!isFetching && !isLoading) {
+      dispatch(setAllCountry(data?.data));
+    }
+  }, [data, isLoading, isFetching]);
+
   // States
+  const { userData } = useSelector((state: RootState) => state?.auth);
+  const [apiStatus, setApiStatus] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
+  const { allCountry }: any = useSelector((state: RootState) => state.country);
 
   // From Initial Values
   const initialValues: FormInitialValues = {
     warehouseCode: "",
     warehouseName: "",
     country: "",
-    lastName: "",
+
     email: "",
     regd_address: {
       phone: "",
@@ -126,43 +152,78 @@ const AddWarehouseWrapper = () => {
         department: "",
         designation: "",
         email: "",
-        mobile_number: "",
-        landline: "",
+        mobileNumber: "",
+        landLine: "",
       },
       {
         name: "",
         department: "",
         designation: "",
         email: "",
-        mobile_number: "",
-        landline: "",
+        mobileNumber: "",
+        landLine: "",
       },
     ],
   };
 
   // Form validation schema based on the active step
-  //   const getValidationSchema = (activeStep: number) => {
-  //     return steps.find((_, stepIndex) => stepIndex === activeStep)
-  //       ?.validationSchema;
-  //   };
+  const getValidationSchema = (activeStep: number) => {
+    return steps.find((_, stepIndex) => stepIndex === activeStep)
+      ?.validationSchema;
+  };
 
   // On Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    if (activeStep === steps.length - 1) {
+    if (activeStep === steps?.length - 1) {
+      setApiStatus(true);
       setTimeout(() => {
-        console.log(values);
-        setActiveStep(0);
+        addWareHouse({
+          wareHouseCode: values.warehouseCode,
+          wareHouseName: values.warehouseName,
+          country: values.country,
+          email: values.email,
+          registrationAddress: {
+            phone: values.regd_address.phone,
+            address: values.regd_address.address,
+            country: values.regd_address.country,
+            state: values.regd_address.state,
+            district: values.regd_address.district,
+            pincode: values.regd_address.pincode,
+          },
+          billingAddress: {
+            phone: values.billing_address.phone,
+            address: values.billing_address.address,
+            country: values.billing_address.country,
+            state: values.billing_address.state,
+            district: values.billing_address.district,
+            pincode: values.billing_address.pincode,
+          },
+          contactInformation: values.contact_informations,
+
+          companyId: userData?.companyId || "",
+        }).then((res) => {
+          if ("data" in res) {
+            if (res?.data?.status) {
+              showToast("success", "Vendor added successfully!");
+              navigate("/warehouse");
+            } else {
+              showToast("error", res?.data?.message);
+            }
+          } else {
+            showToast("error", "Something went wrong");
+          }
+          setApiStatus(false);
+        });
       }, 1000);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
-
   return (
     <SideNavLayout>
       <Formik
         initialValues={initialValues}
-        // validationSchema={getValidationSchema(activeStep)}
+        validationSchema={getValidationSchema(activeStep)}
         onSubmit={onSubmitHandler}
       >
         {(formikProps: FormikProps<FormInitialValues>) => (
@@ -172,6 +233,8 @@ const AddWarehouseWrapper = () => {
               steps={steps}
               activeStep={activeStep}
               setActiveStep={setActiveStep}
+              apiStatus={apiStatus}
+              allCountry={allCountry}
             />
           </Form>
         )}

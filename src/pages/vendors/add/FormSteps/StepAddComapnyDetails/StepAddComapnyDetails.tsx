@@ -29,14 +29,14 @@ const StepAddComapnyDetails = ({
   return (
     <div className="py-6 px-7">
       <div className="grid grid-cols-4 gap-4 gap-y-5">
-        {formFields?.map((field: FieldType) => {
+        {formFields?.map((field: FieldType, index: number) => {
           const { type = "text", name, label, placeholder } = field;
 
           switch (type) {
             case "text":
               return (
                 <ATMTextField
-                  key={name}
+                  key={index}
                   name={name}
                   value={values[name]}
                   onChange={(e) => {
@@ -51,6 +51,7 @@ const StepAddComapnyDetails = ({
             case "select":
               return (
                 <ATMSelect
+                  key={index}
                   name={name}
                   value={values[name]}
                   onChange={(e) => {

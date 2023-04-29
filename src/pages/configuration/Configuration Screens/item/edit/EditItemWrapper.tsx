@@ -35,10 +35,10 @@ const EditItemWrapper = (props: Props) => {
   const { data, isLoading, isFetching } = useGetItemsByIdQuery(Id);
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    itemCode: selectedItem?.itemCode,
-    itemName: selectedItem?.itemName,
-    itemWeight: selectedItem?.itemWeight,
-    itemImage: selectedItem?.itemImage,
+    itemCode: selectedItem?.itemCode || "",
+    itemName: selectedItem?.itemName || "",
+    itemWeight: selectedItem?.itemWeight || "",
+    itemImage: selectedItem?.itemImage || "",
   };
 
   // Form Validation Schema
@@ -46,6 +46,7 @@ const EditItemWrapper = (props: Props) => {
     itemCode: string().required("Item Code is required"),
     itemName: string().required("Item Name is required"),
     itemWeight: string().required("Item Weight is required"),
+    itemImage: string().required("Item image is required"),
   });
 
   //    Form Submit Handler

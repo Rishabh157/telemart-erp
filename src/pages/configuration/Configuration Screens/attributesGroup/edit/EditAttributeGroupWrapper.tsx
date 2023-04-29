@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { array, object, string } from "yup";
 import EditAttributeGroup from "./EditAttributeGroup";
@@ -49,7 +49,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
     }
   );
   const initialValues: FormInitialValues = {
-    group_name: selectedAttributeGroup?.groupName,
+    group_name: selectedAttributeGroup?.groupName || "",
     attributes: attributeOptions || [],
   };
 
@@ -68,7 +68,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    setApiStatus(true)
+    setApiStatus(true);
     setTimeout(() => {
       EditAttributeGroups({
         body: {
@@ -88,7 +88,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
         } else {
           showToast("error", "Something went wrong");
         }
-        setApiStatus(false)
+        setApiStatus(false);
       });
     }, 1000);
   };
@@ -110,7 +110,11 @@ const EditAttributeGroupWrapper = (props: Props) => {
       >
         {(formikProps) => {
           return (
-            <EditAttributeGroup apiStatus={apiStatus} formikProps={formikProps} allItems={allItems} />
+            <EditAttributeGroup
+              apiStatus={apiStatus}
+              formikProps={formikProps}
+              allItems={allItems}
+            />
           );
         }}
       </Formik>

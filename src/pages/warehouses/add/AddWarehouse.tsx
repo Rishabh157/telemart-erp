@@ -10,6 +10,8 @@ type Props = {
   activeStep: number;
   setActiveStep: React.Dispatch<React.SetStateAction<number>>;
   steps: any[];
+  apiStatus: boolean;
+  allCountry: any;
 };
 
 const AddWarehouse = ({
@@ -17,6 +19,8 @@ const AddWarehouse = ({
   activeStep,
   setActiveStep,
   steps,
+  apiStatus,
+  allCountry,
 }: Props) => {
   // Handle Previous
   const handlePrevious = () => {
@@ -46,7 +50,7 @@ const AddWarehouse = ({
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Dealer </ATMPageHeading>
+          <ATMPageHeading> Add New warehouse </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -71,8 +75,11 @@ const AddWarehouse = ({
 
               <button
                 type="button"
+                disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  apiStatus ? "opacity-50" : ""
+                }`}
               >
                 {activeStep === steps.length - 1 ? "Submit" : "Next"}
               </button>
@@ -98,7 +105,7 @@ const AddWarehouse = ({
 
           {/* Form */}
           <div className="grow">
-            {steps[activeStep]?.component({ formikProps })}
+            {steps[activeStep]?.component({ formikProps, allCountry })}
           </div>
         </div>
       </div>

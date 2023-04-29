@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import AddDistrictDialog from "./AddDistrictDialog";
 import { showToast } from "src/utils";
-import { setSelectedLocationCountry } from "src/redux/slices/countrySlice";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useAddDistrictMutation } from "src/services/DistricService";
 import { RootState } from "src/redux/store";
 import { Formik } from "formik";
@@ -18,18 +16,17 @@ export type FormInitialValues = {
 };
 
 const AddDistrictWrapper = ({ onClose }: Props) => {
-  const navigate = useNavigate();
   const [AddDistrict] = useAddDistrictMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
   const { selectedLocationCountries }: any = useSelector(
     (state: RootState) => state?.country
   );
-  console.log(selectedLocationCountries)
+  console.log(selectedLocationCountries);
 
   const { selectedLocationState }: any = useSelector(
     (state: RootState) => state?.states
   );
-  console.log(selectedLocationState)
+  console.log(selectedLocationState);
   const [apiStatus, setApiStatus] = useState(false);
 
   const initialValues: FormInitialValues = {

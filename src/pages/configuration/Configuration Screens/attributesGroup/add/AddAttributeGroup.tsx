@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FormikProps } from "formik";
 import ATMBreadCrumbs, {
   BreadcrumbType,
@@ -11,9 +11,7 @@ import ATMTransferList from "src/components/UI/atoms/ATMTransferList/ATMTransfer
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   allItems: any;
-  apiStatus:boolean
-
-  
+  apiStatus: boolean;
 };
 
 // Breadcrumbs
@@ -27,13 +25,20 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddAttributeGroup = ({ formikProps, allItems,apiStatus }: Props) => {
+const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
+  const [allOptions, setAllOtions] = useState([]);
+  const [flag, setFlag] = useState(true);
   const attributeOptions = allItems?.map((ele: any) => {
     return { label: ele.attributeName, value: ele._id };
   });
+  useEffect(() => {
+    if (flag && attributeOptions?.length) {
+      setFlag(false);
+      setAllOtions(attributeOptions);
+    }
+  }, [flag, attributeOptions]);
   const { values, setFieldValue } = formikProps;
-  const options: { label: string; value: string }[] = attributeOptions;
-
+  const options: { label: string; value: string }[] = allOptions;
   const transferListProps = {
     name: "attributes",
     options,
@@ -71,7 +76,6 @@ const AddAttributeGroup = ({ formikProps, allItems,apiStatus }: Props) => {
                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                   true ? "disabled:opacity-25" : ""
                 }`}
-
               >
                 Add Group
               </button>

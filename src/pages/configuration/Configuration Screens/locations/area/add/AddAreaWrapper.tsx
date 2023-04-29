@@ -1,10 +1,9 @@
-import React, {useState}from "react";
+import React, { useState } from "react";
 import AddAreaDialog from "./AddAreaDialog";
 import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 import { object, string } from "yup";
 import { showToast } from "src/utils";
-import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import { useAddAreaMutation } from "src/services/AreaService";
 
@@ -17,15 +16,24 @@ export type FormInitialValues = {
 };
 
 const AddAreaWrapper = ({ onClose }: Props) => {
-    const navigate = useNavigate();
-  const [AddArea]=useAddAreaMutation()
+  const [AddArea] = useAddAreaMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
   const [apiStatus, setApiStatus] = useState(false);
-  const {selectedLocationCountries}:any=useSelector((state: RootState)=>state?.country)
-  const {selectedLocationState}:any=useSelector((state: RootState)=>state?.states)
-  const {selectedLocationDistrict}:any=useSelector((state: RootState)=>state?.district)
- const {selectedLocationPincode}:any=useSelector((state:RootState)=>state.pincode)
- const {selectedLocationTehsil}:any=useSelector((state:RootState)=>state.tehsils)
+  const { selectedLocationCountries }: any = useSelector(
+    (state: RootState) => state?.country
+  );
+  const { selectedLocationState }: any = useSelector(
+    (state: RootState) => state?.states
+  );
+  const { selectedLocationDistrict }: any = useSelector(
+    (state: RootState) => state?.district
+  );
+  const { selectedLocationPincode }: any = useSelector(
+    (state: RootState) => state.pincode
+  );
+  const { selectedLocationTehsil }: any = useSelector(
+    (state: RootState) => state.tehsils
+  );
 
   const initialValues: FormInitialValues = {
     area: "",
@@ -38,18 +46,17 @@ const AddAreaWrapper = ({ onClose }: Props) => {
     setTimeout(() => {
       AddArea({
         area: values.area,
-        pincodeId:selectedLocationPincode?.value || "",
-        tehsilId:selectedLocationTehsil?.value || "",
-        districtId:selectedLocationDistrict?.value || "",
-        stateId:selectedLocationState?.value || "",
-        countryId:selectedLocationCountries?.value || "",
+        pincodeId: selectedLocationPincode?.value || "",
+        tehsilId: selectedLocationTehsil?.value || "",
+        districtId: selectedLocationDistrict?.value || "",
+        stateId: selectedLocationState?.value || "",
+        countryId: selectedLocationCountries?.value || "",
         companyId: userData?.companyId || "",
       }).then((res: any) => {
         if ("data" in res) {
           if (res?.data?.status) {
             showToast("success", "area added successfully!");
-            onClose()
-          
+            onClose();
           } else {
             showToast("error", res?.data?.message);
           }
@@ -63,25 +70,21 @@ const AddAreaWrapper = ({ onClose }: Props) => {
 
   return (
     <>
-    <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={onSubmitHandler}
-
-        >
-          {(formikProps) => {
-            return (
-              <AddAreaDialog
-                onClose={onClose}
-                apiStatus={apiStatus}
-                formikProps={formikProps}
-              />
-            );
-          }}
-        </Formik>
-
-
-
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmitHandler}
+      >
+        {(formikProps) => {
+          return (
+            <AddAreaDialog
+              onClose={onClose}
+              apiStatus={apiStatus}
+              formikProps={formikProps}
+            />
+          );
+        }}
+      </Formik>
     </>
   );
 };

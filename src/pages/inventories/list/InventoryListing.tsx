@@ -19,7 +19,7 @@ const InventoryListing = ({ columns, rows }: Props) => {
     (state: RootState) => state.inventory
   );
   const [selectedRows, setSelectedRows] = useState([]);
-  const { page, rowsPerPage } = inventoryState;
+  const { page, rowsPerPage, totalItems } = inventoryState;
   const navigate = useNavigate();
 
   return (
@@ -63,15 +63,13 @@ const InventoryListing = ({ columns, rows }: Props) => {
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
           />
         </div>
       </div>
-
-      
     </div>
   );
 };

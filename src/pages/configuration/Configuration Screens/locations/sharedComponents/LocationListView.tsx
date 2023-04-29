@@ -1,10 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { setSelectedLocationCountry } from "src/redux/slices/countrySlice";
-import { setSelectedLocationDistrict } from "src/redux/slices/districtSlice";
-import { setSelctedLocationState } from "src/redux/slices/statesSlice";
-import { setSelectedLocationTehsil } from "src/redux/slices/tehsilSlice";
+
 import { RootState } from "src/redux/store";
 
 type Props = {
@@ -44,7 +41,7 @@ const LocationListView = ({
   const { selectedLocationArea }: any = useSelector(
     (state: RootState) => state.areas
   );
-
+  // console.log(selectedLocationState, "************");
   return (
     <div className="border h-full w-full flex flex-col gap-1 rounded bg-white shadow-lg ">
       <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">
@@ -80,20 +77,21 @@ const LocationListView = ({
             <div
               key={listItemIndex}
               onClick={() => {
-                onListItemClick(listItem);    
+                onListItemClick(listItem);
               }}
               className={`border-b border-slate-100 py-1 px-2 text-black-500 cursor-pointer text-sm ${
-                selectedLocationCountries?.value === listItem.value ||
-                selectedLocationState?.value === listItem.value ||
-                selectedLocationDistrict?.value === listItem.value ||
-                selectedLocationTehsil?.value === listItem.value ||
-                selectedLocationPincode?.value === listItem.value ||
-                selectedLocationArea?.value === listItem.value
+                listItem.value !== undefined &&
+                (selectedLocationCountries?.value === listItem.value ||
+                  selectedLocationState?.value === listItem.value ||
+                  selectedLocationDistrict?.value === listItem.value ||
+                  selectedLocationTehsil?.value === listItem.value ||
+                  selectedLocationPincode?.value === listItem.value ||
+                  selectedLocationArea?.value === listItem.value)
                   ? "bg-gray-300"
                   : ""
               }`}
             >
-            {listItem.label}
+              {listItem.label}
             </div>
           );
         })}

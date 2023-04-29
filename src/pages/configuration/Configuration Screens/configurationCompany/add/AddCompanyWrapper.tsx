@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { Form, Formik, FormikProps } from "formik";
 import { array, object, string, number } from "yup";
 import AddCompany from "./AddCompany";
@@ -8,6 +8,7 @@ import StepAddBankDetailsWrapper from "./FormSteps/StepAddBankDetails/StepAddBan
 import { useAddCompanyMutation } from "src/services/CompanyServices";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "src/utils";
+import { regIndiaPhone } from "src/pages/vendors/add/AddVendorWrapper";
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -33,10 +34,12 @@ const steps = [
     component: StepAddCompanyDetailsWrapper,
     validationSchema: object({
       companyName: string().required("Company name is required"),
-      websiteUrl: string().required("Website url is required"),
+      websiteUrl: string().url().required("Website url is required"),
       gstNo: string().required("GST number is required"),
       address: string().required("Address is required"),
-      phoneNo: string().required("Phone number is required"),
+      phoneNo: string()
+        .matches(regIndiaPhone, "Invalid Mobile Number")
+        .required("Phone number is required"),
     }),
   },
   {

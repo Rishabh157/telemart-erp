@@ -1,4 +1,4 @@
-import React, { useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
@@ -36,8 +36,8 @@ const EditProductCategoryWrapper = (props: Props) => {
   const { data, isLoading } = useGetProductCategoryByIdQuery(Id);
 
   const initialValues: FormInitialValues = {
-    categoryCode: selectedProductCategory?.categoryCode,
-    categoryName: selectedProductCategory?.categoryName,
+    categoryCode: selectedProductCategory?.categoryCode || "",
+    categoryName: selectedProductCategory?.categoryName || "",
   };
 
   // Form Validation Schema
@@ -48,7 +48,7 @@ const EditProductCategoryWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    setApiStatus(true)
+    setApiStatus(true);
 
     setTimeout(() => {
       EditPrductCategory({
@@ -68,7 +68,7 @@ const EditProductCategoryWrapper = (props: Props) => {
         } else {
           showToast("error", "Something went wrong");
         }
-        setApiStatus(false)
+        setApiStatus(false);
       });
       navigate("/configurations/product-category");
     }, 1000);
@@ -86,7 +86,12 @@ const EditProductCategoryWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <EditProductCategoryListing apiStatus={apiStatus} formikProps={formikProps} />;
+          return (
+            <EditProductCategoryListing
+              apiStatus={apiStatus}
+              formikProps={formikProps}
+            />
+          );
         }}
       </Formik>
     </ConfigurationLayout>

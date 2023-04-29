@@ -67,6 +67,12 @@ const StepAddAddress = ({
                   case "text":
                     return (
                       <ATMTextField
+                        maxLength={
+                          name === "regd_address.phone" ||
+                          name === "billing_address.phone"
+                            ? 10
+                            : 100
+                        }
                         key={name}
                         name={name}
                         value={
@@ -75,7 +81,17 @@ const StepAddAddress = ({
                             : values[name]
                         }
                         onChange={(e) => {
-                          setFieldValue(name, e.target.value);
+                          if (
+                            name === "regd_address.phone" ||
+                            name === "billing_address.phone"
+                          ) {
+                            const inputValue = e.target.value;
+                            if (!isNaN(Number(inputValue))) {
+                              setFieldValue(name, String(inputValue));
+                            }
+                          } else {
+                            setFieldValue(name, e.target.value);
+                          }
                         }}
                         label={label}
                         placeholder={placeholder}
