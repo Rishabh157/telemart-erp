@@ -2,15 +2,15 @@ import React from "react";
 import { FieldArray, FormikProps } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddDealerWrapper";
-import { FieldType } from "./StepAddContactWrapper";
+import { FormInitialValues } from "../../EditDealerWrapper";
+import { FieldType } from "./StepEditContactWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   formFields: { sectionName: string; fields: FieldType[] }[]
 };
 
-const StepAddContact = ({ formikProps , formFields }: Props) => {
+const StepEditContact = ({ formikProps , formFields }: Props) => {
   const { values, setFieldValue }: { values: any; setFieldValue: any } =
     formikProps;
   return (
@@ -114,4 +114,4 @@ const StepAddContact = ({ formikProps , formFields }: Props) => {
   );
 };
 
-export default StepAddContact;
+export default StepEditContact;

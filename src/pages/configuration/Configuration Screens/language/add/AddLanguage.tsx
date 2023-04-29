@@ -16,7 +16,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
   {
     label: "Languages",
-    path: "/list-page",
+    path: "/configurations/language",
   },
   {
     label: "Add Language",

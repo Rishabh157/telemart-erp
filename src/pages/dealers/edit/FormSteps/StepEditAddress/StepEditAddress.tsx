@@ -2,7 +2,7 @@ import React from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddDealerWrapper";
+import { FormInitialValues } from "../../EditDealerWrapper";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
 
 type DropdownOptions = {
@@ -37,7 +37,7 @@ type FieldType = Field<
   | "billingDistrictOptions"
   | "billingPincodeOptions"
 >;
-const StepAddAddress = ({
+const StepEditAddress = ({
   formikProps,
   formFields,
   dropdownOptions,
@@ -136,4 +136,4 @@ const StepAddAddress = ({
   );
 };
 
-export default StepAddAddress;
+export default StepEditAddress;

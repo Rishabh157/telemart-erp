@@ -15,8 +15,8 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
-    label: "Product Category",
-    path: "/configurations/product-group",
+    label: "Taxes",
+    path: "/configurations/taxes",
   },
   {
     label: "Edit Taxes",

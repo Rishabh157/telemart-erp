@@ -8,14 +8,13 @@ export const dealerApi = apiSlice.injectEndpoints({
     getDealers: builder.query({
       providesTags: ["dealer"],
       query: (body: PaginationType) => ({
-        url: "",
-
-        params: {
-          _page: body.page,
-          _limit: body.limit,
-        },
-        method: "GET",
-        // body,
+        url: "/dealer",
+        // params: {
+        //   _page: body.page,
+        //   _limit: body.limit,
+        // },
+        method: "POST",
+        body,
       }),
     }),
 
@@ -23,7 +22,7 @@ export const dealerApi = apiSlice.injectEndpoints({
     addDealer: builder.mutation({
       invalidatesTags: ["dealer"],
       query: (body: AddDealer) => ({
-        url: "/register",
+        url: "/dealer/add",
         method: "POST",
 
         body,
@@ -34,7 +33,7 @@ export const dealerApi = apiSlice.injectEndpoints({
     updateDealer: builder.mutation({
       invalidatesTags: ["dealer"],
       query: ({ body, id }: UpdateDealer) => ({
-        url: `/${id}`,
+        url: `dealer/${id}`,
 
         method: "PUT",
         body,
@@ -45,16 +44,31 @@ export const dealerApi = apiSlice.injectEndpoints({
     getDealerById: builder.query({
       providesTags: ["dealer"],
       query: (id) => ({
-        url: `/${id}`,
+        url: `dealer/${id}`,
 
         method: "GET",
       }),
     }),
+  //***** Delete *****/
+  deleteDealer: builder.mutation({
+    invalidatesTags: ["dealer"],
+    query: (id) => ({
+      url: `/dealer/${id}`,
+
+      method: "DELETE",
+    }),
+  }),
+
+
+
   }),
 });
+
+
 export const {
   useGetDealersQuery,
   useAddDealerMutation,
   useUpdateDealerMutation,
   useGetDealerByIdQuery,
+  useDeleteDealerMutation
 } = dealerApi;

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const ListItemCard = ({ item }: { item: any }) => {
   const navigate = useNavigate();
   const { vendorId } = useParams();
-
+  
   useEffect(() => {
     document
       .getElementById(vendorId || "")

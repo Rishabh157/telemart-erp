@@ -64,7 +64,7 @@ const StepAddContact = ({ formikProps , formFields }: Props) => {
                                     return (
                                       <ATMTextField
                                         key={name}
-                                        name={`contact_informations[${contactInformationIndex}].${name}`}
+                                        name={`contactInformations[${contactInformationIndex}].${name}`}
                                         value={contactInformation[name]}
                                         onChange={(e) => {
                                           setFieldValue(
@@ -100,8 +100,8 @@ const StepAddContact = ({ formikProps , formFields }: Props) => {
                       department: "",
                       designation: "",
                       email: "",
-                      mobile_number: "",
-                      landline: "",
+                      mobileNumber: "",
+                      landLine: "",
                     })
                   }
                   className="bg-primary-main px-3 py-1 text-white rounded"

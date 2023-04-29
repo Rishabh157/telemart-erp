@@ -15,11 +15,11 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
-    label: "Product Group",
-    path: "/configurations/product-group",
+    label: "Barcode",
+    path: "/configurations/barcode",
   },
   {
-    label: "Add Product Group",
+    label: "Add Barcode",
   },
 ];
 

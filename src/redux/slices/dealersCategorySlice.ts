@@ -5,6 +5,7 @@ import { DealersCategoryListResponse } from "src/models/DealersCategory.model";
 export type InitialStateType = {
   items: DealersCategoryListResponse[] | [];
   selectedItem: DealersCategoryListResponse | null;
+  alldealerCategory:DealersCategoryListResponse[] | [];
   totalItems: number;
   isTableLoading: boolean;
   page: number;
@@ -17,6 +18,7 @@ export type InitialStateType = {
 const initialState: InitialStateType = {
   items: [],
   selectedItem: null,
+  alldealerCategory:[],
   totalItems: 0,
   isTableLoading: false,
   page: 1,
@@ -71,6 +73,12 @@ const dealersCategorySlice: any = createSlice({
     ) => {
       state.selectedItem = action.payload;
     },
+    setAllDealerCategory: (
+      state,
+      action: PayloadAction<DealersCategoryListResponse[] | []>
+    ) => {
+      state.alldealerCategory = action.payload;
+    },
   },
 });
 
@@ -84,5 +92,6 @@ export const {
   setIsTableLoading,
   setSelectedDealerId,
   setSelectedItem,
+  setAllDealerCategory,
 } = dealersCategorySlice.actions;
 export default dealersCategorySlice.reducer;
