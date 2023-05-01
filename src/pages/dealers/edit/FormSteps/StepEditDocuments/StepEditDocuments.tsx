@@ -2,8 +2,8 @@ import React from "react";
 import { FieldArray, FormikProps } from "formik";
 import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddDealerWrapper";
-import { FieldType } from "./StepAddDocumentsWrapper";
+import { FormInitialValues } from "../../EditDealerWrapper";
+import { FieldType } from "./StepEditDocumentsWrapper";
 import { MdDeleteOutline } from "react-icons/md";
 
 type Props = {
@@ -11,10 +11,10 @@ type Props = {
   formFields: { sectionName: string; fields: FieldType[] }[];
 };
 
-const StepAddDocuments = ({ formikProps, formFields }: Props) => {
+const StepEditDocuments = ({ formikProps, formFields }: Props) => {
   const { values, setFieldValue }: { values: any; setFieldValue: any } =
     formikProps;
-
+  console.log(values);
   return (
     <div className="">
       {formFields?.map((formField, index) => {
@@ -41,7 +41,11 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                         <ATMTextField
                           key={name}
                           name={name}
-                          value={values[name]}
+                          value={
+                            name.includes(".")
+                              ? values[name.split(".")[0]][name.split(".")[1]]
+                              : values[name]
+                          }
                           onChange={(e) => {
                             setFieldValue(name, e.target.value);
                           }}
@@ -83,7 +87,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
           </div>
         );
       })}
-        <FieldArray name="otherDocument">
+      <FieldArray name="otherDocument">
         {({ push, remove }) => {
           return (
             <>
@@ -125,12 +129,11 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                           label={"Document File"}
                           placeholder={"Document File"}
                           value={otherDocument.documentFile}
-
                           onChange={(e) =>
                             setFieldValue(
                               `otherDocument[${otherDocumentIndex}].documentFile`,
                               e.target.value
-                           )
+                            )
                           }
                           // selectedFile={otherDocument.documentFile}
                         />
@@ -164,4 +167,4 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
   );
 };
 
-export default StepAddDocuments;
+export default StepEditDocuments;

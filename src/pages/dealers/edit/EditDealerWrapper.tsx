@@ -1,19 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Formik, FormikProps } from "formik";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { array, mixed, object, string } from "yup";
-import AddDealers from "./AddDealers";
-import StepAddDealerDetailsWrapper from "./FormSteps/StepAddDealerDetails/StepAddDealerDetailsWrapper";
-import StepAddAddressWrapper from "./FormSteps/StepAddAddress/StepAddAddressWrapper";
-import StepAddContactWrapper from "./FormSteps/StepAddContact/StepAddContactWrapper";
-import StepAddDocumentsWrapper from "./FormSteps/StepAddDocuments/StepAddDocumentsWrapper";
-import { useAddDealerMutation } from "src/services/DealerServices";
+import EditDealers from "./EditDealers";
+import StepEditDealerDetailsWrapper from "./FormSteps/StepEditDealerDetails/StepEditDealerDetailsWrapper";
+import StepEditAddressWrapper from "./FormSteps/StepEditAddress/StepEditAddressWrapper";
+import StepEditContactWrapper from "./FormSteps/StepEditContact/StepEditContactWrapper";
+import StepEditDocumentsWrapper from "./FormSteps/StepEditDocuments/StepEditDocumentsWrapper";
+import {
+  useGetDealerByIdQuery,
+  useUpdateDealerMutation,
+} from "src/services/DealerServices";
 import { showToast } from "src/utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { useGetAllDealerCategoryQuery } from "src/services/DealerCategoryService";
 import { setAllDealerCategory } from "src/redux/slices/dealersCategorySlice";
+import { setSelectedItem } from "src/redux/slices/dealerSlice";
+import { useGetAllDealerCategoryQuery } from "src/services/DealerCategoryService";
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -63,7 +67,7 @@ export type FormInitialValues = {
 const steps = [
   {
     label: "Dealer Details",
-    component: StepAddDealerDetailsWrapper,
+    component: StepEditDealerDetailsWrapper,
     validationSchema: object({
       dealerCode: string().required("dealer code is required"),
       firmName: string().required("firm name is required"),
@@ -75,7 +79,7 @@ const steps = [
   },
   {
     label: "Regd./Billing address",
-    component: StepAddAddressWrapper,
+    component: StepEditAddressWrapper,
     validationSchema: object({
       registrationAddress: object().shape({
         phone: string().required("Phone number is required"),
@@ -97,7 +101,7 @@ const steps = [
   },
   {
     label: "Contact",
-    component: StepAddContactWrapper,
+    component: StepEditContactWrapper,
     validationSchema: object({
       contactInformation: array().of(
         object().shape({
@@ -113,7 +117,7 @@ const steps = [
   },
   {
     label: "Document",
-    component: StepAddDocumentsWrapper,
+    component: StepEditDocumentsWrapper,
     validationSchema: object({
       document: object().shape({
         gstNumber: string().required("GST number is required"),
@@ -145,77 +149,80 @@ const steps = [
 //   }
 // };
 
-const AddDealerWrapper = () => {
+const EditDealerWrapper = () => {
   // States
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [addDealer] = useAddDealerMutation();
+  const [apiStatus, setApiStatus] = useState(false);
+  const [UpdateDealer] = useUpdateDealerMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
+  const params = useParams();
+  const Id = params.id;
+  const { data, isLoading, isFetching } = useGetDealerByIdQuery(Id);
+  const { selectedItem }: any = useSelector(
+    (state: RootState) => state?.dealer
+  );
+  const {
+    data: dealerData,
+    isLoading: isDealerLoading,
+    isFetching: isDealerFetching,
+  } = useGetAllDealerCategoryQuery("");
 
   // From Initial Values
   const initialValues: FormInitialValues = {
-    dealerCode: "",
-    firmName: "",
-    firstName: "",
-    lastName: "",
-    dealerCategory: "",
-    email: "",
+    dealerCode: selectedItem?.dealerCode || "",
+    firmName: selectedItem?.firmName || "",
+    firstName: selectedItem?.firstName || "",
+    lastName: selectedItem?.lastName || "",
+    dealerCategory: selectedItem?.dealerCategory || "",
+    email: selectedItem?.email || "",
     registrationAddress: {
-      phone: "",
-      address: "",
-      country: "",
-      state: "",
-      district: "",
-      pincode: "",
+      phone: selectedItem?.registrationAddress.phone || "",
+      address: selectedItem?.registrationAddress.address || "",
+      country: selectedItem?.registrationAddress.country || "",
+      state: selectedItem?.registrationAddress.state || "",
+      district: selectedItem?.registrationAddress.district || "",
+      pincode: selectedItem?.registrationAddress.pincode || "",
     },
     billingAddress: {
-      phone: "",
-      address: "",
-      country: "",
-      state: "",
-      district: "",
-      pincode: "",
+      phone: selectedItem?.billingAddress.phone || "",
+      address: selectedItem?.billingAddress.address || "",
+      country: selectedItem?.billingAddress.country || "",
+      state: selectedItem?.billingAddress.state || "",
+      district: selectedItem?.billingAddress.district || "",
+      pincode: selectedItem?.billingAddress.pincode || "",
     },
-    contactInformation: [
-      {
-        name: "",
-        department: "",
-        designation: "",
-        email: "",
-        mobileNumber: "",
-        landLine: "",
-      },
-    ],
+    contactInformation:selectedItem?.contactInformation || "",
     document: {
-      gstNumber: "",
-      gstCertificate: "",
-      adharCardNumber: "",
-      adharCard: "",
+      gstNumber: selectedItem?.document?.gstNumber || "",
+      gstCertificate: selectedItem?.document?.gstCertificate || "",
+      adharCardNumber: selectedItem?.document?.adharCardNumber || "",
+      adharCard: selectedItem?.document?.adharCard || "",
     },
-    otherDocument: [
-      {
-        documentName: "",
-        documentFile: "",
-      },
-    ],
+    otherDocument: selectedItem?.otherDocument || ""
   };
   const getValidationSchema = (activeStep: number) => {
     return steps.find((_, stepIndex) => stepIndex === activeStep)
       ?.validationSchema;
   };
-  const dispatch = useDispatch();
-  const { data, isLoading, isFetching } = useGetAllDealerCategoryQuery("");
+  useEffect(() => {
+    dispatch(setSelectedItem(data?.data));
+  }, [dispatch, data, isLoading, isFetching]);
 
-  const { alldealerCategory }: any = useSelector(
+
+  const { alldealerCategory}: any = useSelector(
     (state: RootState) => state.dealersCategory
   );
 
   useEffect(() => {
-    if (!isFetching && !isLoading) {
-      dispatch(setAllDealerCategory(data?.data));
+    if (!isDealerFetching && !isDealerLoading) {
+      dispatch(setAllDealerCategory(dealerData?.data));
     }
-  }, [data, isLoading, isFetching, dispatch]);
+  }, [dealerData, isDealerLoading, isDealerFetching, dispatch]);
 
+  
   const dealerCategoryOptions = alldealerCategory?.map((ele: any) => {
     return {
       label: ele?.dealersCategory,
@@ -225,43 +232,57 @@ const AddDealerWrapper = () => {
 
   const onSubmitHandler = (values: FormInitialValues) => {
     if (activeStep === steps.length - 1) {
+      setApiStatus(true);
+      const contactInformation = values.contactInformation.map((ele: any) => {
+        const { _id, ...rest } = ele; // use object destructuring to remove the _id property
+        return rest; // return the new object without the _id property
+      });
+
+      const otherDocument = values.otherDocument.map((ele: any) => {
+        const { _id, ...rest } = ele;
+        return rest;
+      });
+
       setTimeout(() => {
-        addDealer({
-          dealerCode: values.dealerCode,
-          firmName: values.firmName,
-          firstName: values.firstName,
-          lastName: values.lastName,
-          dealerCategory: values.dealerCategory,
-          email: values.email,
-          registrationAddress: {
-            phone: values.registrationAddress.phone,
-            address: values.registrationAddress.address,
-            country: values.registrationAddress.country,
-            state: values.registrationAddress.state,
-            district: values.registrationAddress.district,
-            pincode: values.registrationAddress.pincode,
+        UpdateDealer({
+          body: {
+            dealerCode: values.dealerCode,
+            firmName: values.firmName,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            dealerCategory: values.dealerCategory,
+            email: values.email,
+            registrationAddress: {
+              phone: values.registrationAddress.phone,
+              address: values.registrationAddress.address,
+              country: values.registrationAddress.country,
+              state: values.registrationAddress.state,
+              district: values.registrationAddress.district,
+              pincode: values.registrationAddress.pincode,
+            },
+            billingAddress: {
+              phone: values.billingAddress.phone,
+              address: values.billingAddress.address,
+              country: values.billingAddress.country,
+              state: values.billingAddress.state,
+              district: values.billingAddress.district,
+              pincode: values.billingAddress.pincode,
+            },
+            contactInformation: contactInformation,
+            document: {
+              gstNumber: values.document.gstNumber,
+              gstCertificate: values.document.gstCertificate,
+              adharCardNumber: values.document.adharCardNumber,
+              adharCard: values.document.adharCard,
+            },
+            otherDocument: otherDocument,
+            companyId: userData?.companyId || "",
           },
-          billingAddress: {
-            phone: values.billingAddress.phone,
-            address: values.billingAddress.address,
-            country: values.billingAddress.country,
-            state: values.billingAddress.state,
-            district: values.billingAddress.district,
-            pincode: values.billingAddress.pincode,
-          },
-          contactInformation: values.contactInformation,
-          document: {
-            gstNumber: values.document.gstNumber,
-            gstCertificate: values.document.gstCertificate,
-            adharCardNumber: values.document.adharCardNumber,
-            adharCard: values.document.adharCard,
-          },
-          otherDocument: values.otherDocument,
-          companyId: userData?.companyId || "",
+          id: Id || "",
         }).then((res) => {
           if ("data" in res) {
             if (res?.data?.status) {
-              showToast("success", "Dealer added successfully!");
+              showToast("success", "Dealer updated successfully!");
               navigate("/dealers");
             } else {
               showToast("error", res?.data?.message);
@@ -269,6 +290,7 @@ const AddDealerWrapper = () => {
           } else {
             showToast("error", "Something went wrong");
           }
+          setApiStatus(false);
         });
       }, 1000);
     } else {
@@ -279,18 +301,20 @@ const AddDealerWrapper = () => {
   return (
     <SideNavLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={getValidationSchema(activeStep)}
         onSubmit={onSubmitHandler}
       >
         {(formikProps: FormikProps<FormInitialValues>) => (
           <Form className="">
-            <AddDealers
+            <EditDealers
               formikProps={formikProps}
               steps={steps}
               activeStep={activeStep}
               setActiveStep={setActiveStep}
               dealerCategoryOptions={dealerCategoryOptions}
+              apiStatus={apiStatus}
             />
           </Form>
         )}
@@ -299,4 +323,4 @@ const AddDealerWrapper = () => {
   );
 };
 
-export default AddDealerWrapper;
+export default EditDealerWrapper;

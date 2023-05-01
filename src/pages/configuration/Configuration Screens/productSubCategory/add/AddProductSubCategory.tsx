@@ -22,7 +22,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
   {
     label: "Product Sub Category",
-    path: "/configurations/product-sub-category/add",
+    path: "/configurations/product-sub-category",
   },
   {
     label: "Add Product Sub Category",

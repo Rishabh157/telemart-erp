@@ -10,15 +10,16 @@ type Props = {
   activeStep: number;
   setActiveStep: React.Dispatch<React.SetStateAction<number>>;
   steps: any[];
+  dealerCategoryOptions:any[];
 };
 
-const AddDealer = ({
+const AddDealers = ({
   formikProps,
   activeStep,
   setActiveStep,
   steps,
+  dealerCategoryOptions
 }: Props) => {
-  
   // Handle Previous
   const handlePrevious = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -79,6 +80,7 @@ const AddDealer = ({
                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
               >
                 {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                
               </button>
             </div>
           </div>
@@ -102,7 +104,7 @@ const AddDealer = ({
 
           {/* Form */}
           <div className="grow">
-            {steps[activeStep]?.component({ formikProps })}
+            {steps[activeStep]?.component({ formikProps,dealerCategoryOptions})}
           </div>
         </div>
       </div>
@@ -110,4 +112,4 @@ const AddDealer = ({
   );
 };
 
-export default AddDealer;
+export default AddDealers;

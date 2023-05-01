@@ -2,8 +2,8 @@ import React from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddDealerWrapper";
-import { DropdownOptions, FieldType } from "./StepAddCompanyDetailsWrapper";
+import { FormInitialValues } from "../../EditDealerWrapper";
+import { DropdownOptions, FieldType } from "./StepEditDealerDetailsWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -11,7 +11,7 @@ type Props = {
   formFields: FieldType[]
 };
 
-const StepAddComapnyDetails = ({
+const StepEditDealerDetails = ({
   formikProps,
   dropdownOptions,
   formFields
@@ -80,4 +80,4 @@ const StepAddComapnyDetails = ({
   );
 };
 
-export default StepAddComapnyDetails;
+export default StepEditDealerDetails;

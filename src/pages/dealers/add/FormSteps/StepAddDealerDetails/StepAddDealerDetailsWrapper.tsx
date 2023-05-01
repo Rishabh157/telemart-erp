@@ -2,45 +2,47 @@ import { FormikProps } from "formik";
 import React from "react";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
 import { FormInitialValues } from "../../AddDealerWrapper";
-import StepAddComapnyDetails from "./StepAddComapnyDetails";
+import StepAddComapnyDetails from "./StepAddDealerDetails";
+
 
 export type DropdownOptions = {
-  dealerCategoryOptions: SelectOption[],
-}
+  dealerCategoryOptions: SelectOption[];
+};
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
+  dealerCategoryOptions:any[]
 };
 
-export type FieldType = Field<"dealerCategoryOptions">
+export type FieldType = Field<"dealerCategoryOptions">;
 
-const dealerCategoryOptions = [{ label: "Category 1", value: "category-1" }];
+//const dealerCategoryOptions = [{ label: "Category 1", value: "category-1" }];
 
 const formFields: FieldType[] = [
   {
-    name: "dealer_code",
+    name: "dealerCode",
     label: "Dealer Code",
     placeholder: "Dealer Code",
   },
   {
-    name: "dealer_category",
+    name: "dealerCategory",
     label: "Dealer Category",
     placeholder: "Dealer Category",
     type: "select",
     optionAccessKey: "dealerCategoryOptions",
   },
   {
-    name: "firm_name",
+    name: "firmName",
     label: "Firm Name",
     placeholder: "Firm Name",
   },
   {
-    name: "first_name",
+    name: "firstName",
     label: "First Name",
     placeholder: "First Name",
   },
   {
-    name: "last_name",
+    name: "lastName",
     label: "Last Name",
     placeholder: "Last Name",
   },
@@ -51,16 +53,19 @@ const formFields: FieldType[] = [
   },
 ];
 
-const StepAddCompanyDetailsWrapper = ({ formikProps }: Props) => {
-  const dropdownOptions: DropdownOptions = {
+const StepAddCompanyDetailsWrapper = ({ formikProps,dealerCategoryOptions }: Props) => {
+ const dropdownOptions: DropdownOptions = {
     dealerCategoryOptions,
   };
 
   return (
     <>
-      <StepAddComapnyDetails formikProps={formikProps} dropdownOptions= {dropdownOptions} formFields={formFields} />
+      <StepAddComapnyDetails
+        formikProps={formikProps}
+        dropdownOptions={dropdownOptions}
+        formFields={formFields}
+      />
     </>
   );
 };
-
 export default StepAddCompanyDetailsWrapper;

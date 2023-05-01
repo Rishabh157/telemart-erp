@@ -5,7 +5,6 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { DealersListResponse } from "src/models";
 import { setRowsPerPage, setPage } from "src/redux/slices/dealerSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
@@ -23,10 +22,11 @@ const DealersListing = ({ columns, rows }: Props) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const { page, rowsPerPage } = dealerState;
+  const { page, rowsPerPage} = dealerState;
+
 
   return (
-    <div className="px-4 h-full">
+    <div className="px-4 h-[calc(100vh-55px)]">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Dealers </ATMPageHeading>
@@ -60,9 +60,7 @@ const DealersListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            onRowClick={(row: DealersListResponse) =>
-              navigate(`${row._id}/general-information`)
-            }
+            
           />
         </div>
 
