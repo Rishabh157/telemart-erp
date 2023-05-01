@@ -84,6 +84,7 @@ import EditLanguageWrapper from "./pages/configuration/Configuration Screens/lan
 import EditDealersCategoryWrapper from "./pages/configuration/Configuration Screens/dealersCategory/edit/EditDealersCategoryWrapper";
 import EditProductSubCategoryWrapper from "./pages/configuration/Configuration Screens/productSubCategory/edit/EditProductSubCategoryWrapper";
 import EditVendorWrapper from "./pages/vendors/edit/EditVendorWrapper";
+import EditDealerWrapper from "./pages/dealers/edit/EditDealerWrapper";
 import EditWarehouseWrapper from "./pages/warehouses/edit/EditWarehouseWrapper";
 import EditProductWrapper from "./pages/configuration/Configuration Screens/products/edit/EditProductWrapper";
 
@@ -116,6 +117,8 @@ const PageRoutes = () => {
           <Route path="/orders/add-order" element={<AddOrder />} />
           <Route path="/dealers" element={<DealersListingWrapper />} />
           <Route path="/dealers/add-dealer" element={<AddDealerWrapper />} />
+          <Route path="/dealers/edit-dealer/:id" element={<EditDealerWrapper />} />
+
           <Route path="/vendors" element={<VendorsListingWrapper />} />
           <Route path="/vendors/add-vendor" element={<AddVendorWrapper />} />
           <Route

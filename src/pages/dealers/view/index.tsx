@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ViewLayout from "src/components/layouts/ViewLayout/ViewLayout";
 import { BiBlock, BiMessageDetail } from "react-icons/bi";
 import { AiOutlineRise } from "react-icons/ai";
@@ -6,8 +6,11 @@ import { BsArrowRepeat } from "react-icons/bs";
 import { MdOutlinePeopleAlt } from "react-icons/md";
 import DealerInfoCard from "../components/dealerInfoCard/DealerInfoCard";
 import ListItemCard from "../components/listItemCard/ListItemCard";
-// import { useParams } from "react-router-dom";
 import { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetDealersQuery } from "src/services/DealerServices";
+import { setItems, setSearchValue } from "src/redux/slices/dealerSlice";
+import { RootState } from "src/redux/store";
 
 const tabsData = [
   {
@@ -64,19 +67,42 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const listData = Array(12)
-  .fill("Dealer")
-  .map((ele, index) => {
-    return {
-      dealerName: ele + " " + (index + 1),
-      _id: `${index + 1}`,
-      mobile: "7485968578",
-    };
+const ViewDealer = () => {
+  const dispatch = useDispatch();
+  const dealerState: any = useSelector((state: RootState) => state.dealer);
+  const { page, rowsPerPage, items } = dealerState;
+  const { searchValue }: any = useSelector(
+    (state: RootState) => state.dealer
+  );
+  const { data, isFetching, isLoading } = useGetDealersQuery({
+    limit: rowsPerPage,
+    searchValue: searchValue,
+    params: ["firstName", "lastName"],
+    page: page,
+    filterBy: [
+      {
+        fieldName: "",
+        value: [],
+      },
+    ],
+    dateFilter: {},
+    orderBy: "createdAt",
+    orderByValue: -1,
+    isPaginationRequired: true,
   });
 
-const ViewDealer = () => {
-  //   const { vendorId } = useParams();
-  const [searchValue, setSearchValue] = useState("");
+  useEffect(() => {
+    // console.log(data?.data)
+    dispatch(setItems(data?.data || []));
+  }, [isFetching, isLoading, data,dispatch]);
+
+  const listData = items?.map((ele: any, index: any) => {
+    return {
+      dealerName: ele.firstName + " ",
+      _id: ele._id,
+      mobile: ele.registrationAddress.phone,
+    };
+  });
 
   return (
     <ViewLayout
@@ -96,7 +122,7 @@ const ViewDealer = () => {
         <ListItemCard item={item} key={item._id} />
       )}
       searchValue={searchValue}
-      onSearch={(value) => setSearchValue(value)}
+      onSearch={(newValue: any) => dispatch(setSearchValue(newValue))}
       breadcrumbs={breadcrumbs}
     />
   );

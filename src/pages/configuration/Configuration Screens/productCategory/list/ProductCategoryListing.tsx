@@ -65,7 +65,7 @@ const ProductCategoryListing = ({ columns, rows }: Props) => {
         <ATMTableHeader
           searchValue={searchValue}
           page={page}
-          rowCount={rows.length}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
@@ -82,7 +82,7 @@ const ProductCategoryListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+            extraClasses="h-full overflow-auto"
           />
         </div>
 

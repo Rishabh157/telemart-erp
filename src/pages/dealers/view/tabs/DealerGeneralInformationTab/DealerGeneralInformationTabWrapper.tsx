@@ -1,9 +1,16 @@
-import React from "react";
+import React,{useEffect} from "react";
 import AccordianAddress from "./components/AccordianAddress";
 import AccordianContact from "./components/AccordianContact";
 import AccordianDocument from "./components/AccordianDocument";
 import AccordianGeneralInformation from "./components/AccordianGeneralInformation";
 import DealerGeneralInformationTab from "./DealerGeneralInformationTab";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetDealerByIdQuery } from "src/services/DealerServices";
+import { RootState } from "src/redux/store";
+import { setSelectedItem } from "src/redux/slices/dealerSlice";
+import { CircularProgress } from "@mui/material";
+
 
 type Props = {};
 
@@ -12,28 +19,45 @@ export type AccordianType = {
     component: any
 }
 
-const accordians: AccordianType[] = [
-    {
-        summary: "General Information",
-        component: <AccordianGeneralInformation/>,
-    },
-    {
-        summary: "Regd./Billing Address",
-        component: <AccordianAddress/>,
-    },
-    {
-        summary: "Contact",
-        component: <AccordianContact/>,
-    },
-    {
-        summary: "Documents",
-        component: <AccordianDocument/>,
-    },
-
-]
-
 const DealerGeneralInformationTabWrapper = (props: Props) => {
-  return <DealerGeneralInformationTab accordians={accordians} />;
+    const params = useParams();
+    const dispatch = useDispatch();
+    const Id = params.dealerId;
+    const { data, isLoading, isFetching } = useGetDealerByIdQuery(Id);
+    const { selectedItem }: any = useSelector(
+        (state: RootState) => state?.dealer
+      );
+      useEffect(() => {
+        dispatch(setSelectedItem(data?.data));
+      }, [dispatch, data, isLoading, isFetching]);
+    
+      const accordians: AccordianType[] = [
+        {
+            summary: "General Information",
+            component: <AccordianGeneralInformation data={selectedItem || {}}/>,
+        },
+        {
+            summary: "Regd./Billing Address",
+            component: <AccordianAddress data={selectedItem || {}}/>,
+        },
+        {
+            summary: "Contact",
+            component: <AccordianContact data={selectedItem || {}}/>,
+        },
+        {
+            summary: "Documents",
+            component: <AccordianDocument data={selectedItem || {}}/>,
+        },
+    
+    ]
+    
+   return selectedItem ? (
+        <DealerGeneralInformationTab accordians={accordians} />
+      ) : (
+        <div className="px-80 py-200">
+          <CircularProgress />
+        </div>
+      )
 };
 
 export default DealerGeneralInformationTabWrapper;

@@ -1,8 +1,8 @@
+import React from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { FormikProps } from "formik";
-import React from "react";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddWarehouseWrapper";
+import { FormInitialValues } from "../../EditDealerWrapper";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
 
 type DropdownOptions = {
@@ -15,7 +15,19 @@ type DropdownOptions = {
   billingDistrictOptions: SelectOption[];
   billingPincodeOptions: SelectOption[];
 };
-export type FieldType = Field<
+
+
+
+
+type Props = {
+  formikProps: FormikProps<FormInitialValues>;
+  formFields: {
+    sectionName: string;
+    fields: FieldType[];
+  }[];
+  dropdownOptions: DropdownOptions;
+};
+type FieldType = Field<
   | "counrtyOptions"
   | "stateOptions"
   | "districtOptions"
@@ -25,16 +37,7 @@ export type FieldType = Field<
   | "billingDistrictOptions"
   | "billingPincodeOptions"
 >;
-type Props = {
-  formikProps: FormikProps<FormInitialValues>;
-  formFields: {
-    sectionName: string;
-    fields: FieldType[];
-  }[];
-  dropdownOptions: DropdownOptions;
-};
-
-const StepAddAddress = ({
+const StepEditAddress = ({
   formikProps,
   formFields,
   dropdownOptions,
@@ -50,7 +53,7 @@ const StepAddAddress = ({
           <div
             key={index}
             className={`py-6 px-7 ${
-              index !== formFields?.length - 1 && "border-b"
+              index !== formFields.length - 1 && "border-b"
             }  border-slate-300`}
           >
             <div className="text-primary-main text-lg pb-2 font-medium">
@@ -65,12 +68,6 @@ const StepAddAddress = ({
                   case "text":
                     return (
                       <ATMTextField
-                        maxLength={
-                          name === "regd_address.phone" ||
-                          name === "billing_address.phone"
-                            ? 10
-                            : 100
-                        }
                         key={name}
                         name={name}
                         value={
@@ -79,17 +76,7 @@ const StepAddAddress = ({
                             : values[name]
                         }
                         onChange={(e) => {
-                          if (
-                            name === "regd_address.phone" ||
-                            name === "billing_address.phone"
-                          ) {
-                            const inputValue = e.target.value;
-                            if (!isNaN(Number(inputValue))) {
-                              setFieldValue(name, String(inputValue));
-                            }
-                          } else {
-                            setFieldValue(name, e.target.value);
-                          }
+                          setFieldValue(name, e.target.value);
                         }}
                         label={label}
                         placeholder={placeholder}
@@ -149,4 +136,4 @@ const StepAddAddress = ({
   );
 };
 
-export default StepAddAddress;
+export default StepEditAddress;

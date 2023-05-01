@@ -1,9 +1,23 @@
+import React from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { FormikProps } from "formik";
-import React from "react";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "../../AddDealerWrapper";
-import { DropdownOptions, FieldType } from "./StepAddAddressWrapper";
+import { Field, SelectOption } from "src/models/FormField/FormField.model";
+
+type DropdownOptions = {
+  counrtyOptions: SelectOption[];
+  stateOptions: SelectOption[];
+  districtOptions: SelectOption[];
+  pincodeOptions: SelectOption[];
+  billingCounrtyOptions: SelectOption[];
+  billingStateOptions: SelectOption[];
+  billingDistrictOptions: SelectOption[];
+  billingPincodeOptions: SelectOption[];
+};
+
+
+
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -13,7 +27,16 @@ type Props = {
   }[];
   dropdownOptions: DropdownOptions;
 };
-
+type FieldType = Field<
+  | "counrtyOptions"
+  | "stateOptions"
+  | "districtOptions"
+  | "pincodeOptions"
+  | "billingCounrtyOptions"
+  | "billingStateOptions"
+  | "billingDistrictOptions"
+  | "billingPincodeOptions"
+>;
 const StepAddAddress = ({
   formikProps,
   formFields,

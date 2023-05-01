@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FormikProps } from "formik";
-import { FormInitialValues } from "../../AddDealerWrapper";
-import StepAddAddress from "./StepAddAddress";
+import { FormInitialValues } from "../../EditDealerWrapper";
+import StepAddAddress from "./StepEditAddress";
 import { Field} from "src/models/FormField/FormField.model";
 import { useGetAllStateByCountryQuery } from "src/services/StateService";
 import { useGetAllCountryQuery } from "src/services/CountryService";
@@ -134,7 +134,7 @@ const formFields: {
 // const districtOptions = [{ label: "Indore", value: "indore" }];
 // const pincodeOptions = [{ label: "452001", value: "452001" }];
 
-const StepAddAddressWrapper = ({ formikProps }: Props) => {
+const StepEditAddressWrapper = ({ formikProps }: Props) => {
   const dispatch = useDispatch();
 
   const [billingStateData, setBillingStateData] = useState<any>();
@@ -220,27 +220,27 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
   //registration
   useEffect(() => {
     dispatch(setAllStates(stateData?.data));
-  }, [stateData, stateIsLoading, stateIsFetching]);
+  }, [stateData, stateIsLoading, stateIsFetching,dispatch]);
   //billing
   useEffect(() => {
     setBillingStateData(StateDataB?.data);
-  }, [StateDataB, stateIsLoadingB, stateIsFetchingB]);
+  }, [StateDataB, stateIsLoadingB, stateIsFetchingB,dispatch]);
   //registration
   useEffect(() => {
     dispatch(setAllDistrict(districtData?.data));
-  }, [districtData, districtIsLoading, districtIsFetching]);
+  }, [districtData, districtIsLoading, districtIsFetching,dispatch]);
   //billing
   useEffect(() => {
     setBillingDistrictData(districtDataB?.data);
-  }, [districtDataB, districtIsLoadingB, districtIsFetchingB]);
+  }, [districtDataB, districtIsLoadingB, districtIsFetchingB ,dispatch]);
   //registration
   useEffect(() => {
     dispatch(setAllPincodes(pincodeData?.data));
-  }, [pincodeData, pincodeIsLoading, pincodeIsFetching]);
+  }, [pincodeData, pincodeIsLoading, pincodeIsFetching,dispatch]);
   //billing
   useEffect(() => {
     setBillingPincodeData(pincodeDataB?.data);
-  }, [pincodeDataB, pincodeIsLoadingB, pincodeIsFetchingB]);
+  }, [pincodeDataB, pincodeIsLoadingB, pincodeIsFetchingB,dispatch]);
 
   const counrtyOptions = allCountry?.map((ele: any) => {
     return { label: ele?.countryName, value: ele?._id };
@@ -289,4 +289,4 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
   );
 };
 
-export default StepAddAddressWrapper;
+export default StepEditAddressWrapper;

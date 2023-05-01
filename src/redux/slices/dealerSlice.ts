@@ -1,3 +1,4 @@
+import { string } from 'yup';
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { DealersListResponse } from "src/models";
@@ -5,23 +6,28 @@ import { DealersListResponse } from "src/models";
 export interface DealerSliceStateType {
     items: DealersListResponse[] | [],
     totalItems: number,
+    selectedItem:DealersListResponse | null
     isTableLoading: boolean,
     page: number;
     rowsPerPage: number;
     searchValue: string;
     sortValue: { field: string; value: 'DESC' | 'ASC' },
-    selectedDealerId: string
+    selectedDealerId: string;
+    filterValue:string;
+
 }
 
 const initialState: DealerSliceStateType = {
     items: [],
     totalItems: 0,
+    selectedItem: null,
     isTableLoading: false,
     page: 1,
     rowsPerPage: 10,
     searchValue: "",
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectedDealerId: ""
+    selectedDealerId: "",
+    filterValue:""
 }
 
 const dealerSlice: any = createSlice({
@@ -56,7 +62,14 @@ const dealerSlice: any = createSlice({
         },
         setSelectedDealerId: (state, action: PayloadAction<string>) => {
             state.selectedDealerId = action.payload
-        }
+        },
+        setSelectedItem: (state, action: PayloadAction<DealersListResponse | null>) => {
+            state.selectedItem= action.payload
+        },
+        setFilterValue: (state, action: PayloadAction<string>) => {
+            state.filterValue= action.payload
+        },
+
 
     }
 })
@@ -69,6 +82,8 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectedDealerId
+    setSelectedDealerId,
+    setSelectedItem,
+    setFilterValue
 } = dealerSlice.actions
 export default dealerSlice.reducer

@@ -55,7 +55,7 @@ const BarcodeListing = ({
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const barcodeState: any = useSelector((state: RootState) => state.barcode);
-  //   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  //  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const [activeTab, setActiveTab] = useState("Barcode Group");
 

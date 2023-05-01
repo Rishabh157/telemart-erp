@@ -15,7 +15,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
   {
     label: "Items",
-    path: "/configurations/items",
+    path: "/configurations/item",
   },
   {
     label: "Add Item",
@@ -80,12 +80,17 @@ const AddItem = ({ formikProps }: Props) => {
                 value={values.itemWeight}
                 label="Item Weight (in gms)"
                 placeholder="Item Weight"
-                onChange={(e) => setFieldValue("itemWeight", e.target.value)}
+                onChange={(e) => {
+                  const inputValue = e.target.value;
+                  if (!isNaN(Number(inputValue))) {
+                    setFieldValue("itemWeight", inputValue);
+                  }
+                }}
               />
 
               {/* Item Image */}
               <ATMTextField
-                name="itemWeight"
+                name="itemImage"
                 value={values.itemImage}
                 label="Item Image"
                 placeholder="Item Image"

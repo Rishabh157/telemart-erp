@@ -3,40 +3,43 @@ import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTex
 
 type Props = {};
 
-const contactInfoList = Array(3).fill(null)
+//const contactInfoList = Array(3).fill(null)
 
-const AccordianContact = (props: Props) => {
+
+const AccordianContact = (data:any) => {
+  const contactInfoLength = data?.data?.contactInformation?.length;
+
   return (
     <div>
-      {contactInfoList?.map((contact, contactIndex) => (
-        <div key={contactIndex} className={`${contactIndex !== contactInfoList.length-1 && "border-b pb-4" } ${contactIndex===0 ? "pb-4" : "pt-4"}  border-slate-300 `}>
+      {data?.data?.contactInformation?.map((contact:any, contactIndex:any) => (
+        <div key={contactIndex} className={`${contactIndex !== contactInfoLength-1 && "border-b pb-4" } ${contactIndex===0 ? "pb-4" : "pt-4"}  border-slate-300 `}>
           <div className="text-primary-main text-lg pb-2 font-medium">
               Contact Information #{contactIndex+1}
           </div>
           <div className="grid grid-cols-3 gap-4 gap-y-5">
             <ATMTextField
               name=""
-              value={"Phone"}
+              value={contact?.name}
               onChange={(e) => {}}
-              label={"Phone"}
-              placeholder={"Phone"}
+              label={"name"}
+              placeholder={"name"}
               className="shadow bg-white rounded"
               disabled={true}
             />
 
             <ATMTextField
               name=""
-              value={"Address"}
+              value={contact?.department}
               onChange={(e) => {}}
-              label={"Address"}
-              placeholder={"Address"}
+              label={"department"}
+              placeholder={"department"}
               className="shadow bg-white rounded"
               disabled={true}
             />
 
             <ATMTextField
               name=""
-              value={"Country"}
+              value={contact?.designation}
               onChange={(e) => {}}
               label={"Country"}
               placeholder={"Country"}
@@ -46,7 +49,7 @@ const AccordianContact = (props: Props) => {
 
             <ATMTextField
               name=""
-              value={"State"}
+              value={contact?.email}
               onChange={(e) => {}}
               label={"State"}
               placeholder={"State"}
@@ -55,7 +58,7 @@ const AccordianContact = (props: Props) => {
             />
             <ATMTextField
               name=""
-              value={"District"}
+              value={contact?.mobileNumber}
               onChange={(e) => {}}
               label={"District"}
               placeholder={"District"}
@@ -65,7 +68,7 @@ const AccordianContact = (props: Props) => {
 
             <ATMTextField
               name=""
-              value={"Pincode"}
+              value={contact?.landLine}
               onChange={(e) => {}}
               label={"Pincode"}
               placeholder={"Pincode"}

@@ -3,12 +3,12 @@ import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTex
 
 type Props = {};
 
-const AccordianGeneralInformation = (props: Props) => {
+const AccordianGeneralInformation = (data:any) => {
   return (
     <div className="grid grid-cols-3 gap-4 gap-y-5">
       <ATMTextField
         name=""
-        value={"Dealer Code"}
+        value={data?.data?.dealerCode}
         onChange={(e) => {}}
         label={"Dealer Code"}
         placeholder={"Dealer Code"}
@@ -18,7 +18,7 @@ const AccordianGeneralInformation = (props: Props) => {
 
       <ATMTextField
         name=""
-        value={"Dealer Category"}
+        value={data?.data?.dealersCategoryName}
         onChange={(e) => {}}
         label={"Dealer Category"}
         placeholder={"Dealer Category"}
@@ -28,7 +28,7 @@ const AccordianGeneralInformation = (props: Props) => {
 
       <ATMTextField
         name=""
-        value={"Firm Name"}
+        value={data?.data?.firmName}
         onChange={(e) => {}}
         label={"Firm Name"}
         placeholder={"Firm Name"}
@@ -38,7 +38,7 @@ const AccordianGeneralInformation = (props: Props) => {
 
       <ATMTextField
         name=""
-        value={"First Name"}
+        value={data?.data?.firstName}
         onChange={(e) => {}}
         label={"First Name"}
         placeholder={"First Name"}
@@ -47,7 +47,7 @@ const AccordianGeneralInformation = (props: Props) => {
       />
       <ATMTextField
         name=""
-        value={"Last Name"}
+        value={data?.data?.lastName}
         onChange={(e) => {}}
         label={"Last Name"}
         placeholder={"Last Name"}
@@ -57,7 +57,7 @@ const AccordianGeneralInformation = (props: Props) => {
 
       <ATMTextField
         name=""
-        value={"Email"}
+        value={data?.data?.email}
         onChange={(e) => {}}
         label={"Email"}
         placeholder={"Email"}
