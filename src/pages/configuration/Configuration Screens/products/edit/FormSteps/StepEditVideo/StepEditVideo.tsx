@@ -1,7 +1,7 @@
 import React from "react";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddProductWrapper";
+import { FormInitialValues } from "../../EditProductWrapper";
 import { FieldArray } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
 
@@ -9,7 +9,7 @@ type Props = {
   formikProps: FormikProps<FormInitialValues>;
 };
 
-const StepAddVideo = ({ formikProps }: Props) => {
+const StepEditVideo = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -95,7 +95,7 @@ const StepAddVideo = ({ formikProps }: Props) => {
               );
             })}
 
-            {/* BUTTON- Add More Video */}
+            {/* BUTTON- Edit More Video */}
             <div className="flex justify-end p-5">
               <button
                 type="button"
@@ -107,7 +107,7 @@ const StepAddVideo = ({ formikProps }: Props) => {
                 }
                 className="bg-primary-main px-3 py-1 text-white rounded"
               >
-                Add More video
+                Edit More video
               </button>
             </div>
           </div>
@@ -117,4 +117,4 @@ const StepAddVideo = ({ formikProps }: Props) => {
   );
 };
 
-export default StepAddVideo;
+export default StepEditVideo;

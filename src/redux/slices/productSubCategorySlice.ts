@@ -4,6 +4,7 @@ import { ProductSubCategoryListResponse } from "src/models/ProductSubCategory.mo
 
 export interface ProductSubCategorySliceStateType {
   items: ProductSubCategoryListResponse[] | [];
+  allItems: ProductSubCategoryListResponse[] | [];
   selectedItem: ProductSubCategoryListResponse | null;
   totalItems: number;
   isTableLoading: boolean;
@@ -16,6 +17,7 @@ export interface ProductSubCategorySliceStateType {
 
 const initialState: ProductSubCategorySliceStateType = {
   items: [],
+  allItems: [],
   selectedItem: null,
   totalItems: 0,
   isTableLoading: false,
@@ -65,6 +67,12 @@ const productSubCategorySlice: any = createSlice({
     setSelectedId: (state, action: PayloadAction<string>) => {
       state.selectedId = action.payload;
     },
+    setAllItems: (
+      state,
+      action: PayloadAction<ProductSubCategoryListResponse[] | []>
+    ) => {
+      state.allItems = action.payload;
+    },
     setSelectedItem: (
       state,
       action: PayloadAction<ProductSubCategoryListResponse | null>
@@ -84,5 +92,6 @@ export const {
   setIsTableLoading,
   setSelectedId,
   setSelectedItem,
+  setAllItems,
 } = productSubCategorySlice.actions;
 export default productSubCategorySlice.reducer;

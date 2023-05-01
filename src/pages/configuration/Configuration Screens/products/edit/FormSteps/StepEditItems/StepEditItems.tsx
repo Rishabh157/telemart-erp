@@ -2,17 +2,17 @@ import React from "react";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
-import { FormInitialValues } from "../../AddProductWrapper";
+import { FormInitialValues } from "../../EditProductWrapper";
 import { FieldArray } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
-import { DropdownOptions } from "./StepAddItemsWrapper";
+import { DropdownOptions } from "./StepEditItemsWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   dropdownOptions: DropdownOptions;
 };
 
-const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
+const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -95,7 +95,7 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
                 }
                 className="bg-primary-main px-3 py-1 text-white rounded"
               >
-                Add More Item
+                Edit More Item
               </button>
             </div>
           </div>
@@ -105,4 +105,4 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
   );
 };
 
-export default StepAddItems;
+export default StepEditItems;

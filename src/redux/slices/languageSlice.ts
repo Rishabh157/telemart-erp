@@ -4,6 +4,7 @@ import { LanguageListResponse } from "src/models/Language.model";
 
 export type InitialStateType = {
   items: LanguageListResponse[] | [];
+  allItems: LanguageListResponse[] | [];
   selectedItem: LanguageListResponse | null;
   totalItems: number;
   isTableLoading: boolean;
@@ -16,6 +17,7 @@ export type InitialStateType = {
 
 const initialState: InitialStateType = {
   items: [],
+  allItems: [],
   selectedItem: null,
   totalItems: 0,
   isTableLoading: false,
@@ -62,6 +64,12 @@ const languageSlice: any = createSlice({
     setSelectedDealerId: (state, action: PayloadAction<string>) => {
       state.selectedDealerId = action.payload;
     },
+    setAllItems: (
+      state,
+      action: PayloadAction<LanguageListResponse[] | []>
+    ) => {
+      state.allItems = action.payload;
+    },
     setSelectedItem: (
       state,
       action: PayloadAction<LanguageListResponse | null>
@@ -81,5 +89,6 @@ export const {
   setIsTableLoading,
   setSelectedDealerId,
   setSelectedItem,
+  setAllItems,
 } = languageSlice.actions;
 export default languageSlice.reducer;

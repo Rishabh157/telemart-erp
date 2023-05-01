@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import { FormikProps } from "formik";
 import { Field } from "src/models/FormField/FormField.model";
-import { FormInitialValues } from "../../AddProductWrapper";
-import StepAddProductDetails from "./StepAddProductDetails";
+import { FormInitialValues } from "../../EditProductWrapper";
+import StepEditProductDetails from "./StepEditProductDetails";
 import { useGetAllProductCategoryQuery } from "src/services/ProductCategoryServices";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllproductCategory } from "src/redux/slices/productCategorySlice";
@@ -20,7 +20,7 @@ type Props = {
 export type FieldType = Field<
   "productSubCategoryOPtions" | "productCategoryOPtions"
 >;
-const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
+const StepEditProductDetailsWrapper = ({ formikProps }: Props) => {
   const dispatch = useDispatch();
   const { allProductCategory }: any = useSelector(
     (state: RootState) => state?.productCategory
@@ -45,7 +45,6 @@ const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
   } = useGetSubCategoryByParentQuery(formikProps.values.product_category, {
     skip: !formikProps.values.product_category,
   });
-
   const {
     data: pgData,
     isLoading: pgIsLoading,
@@ -84,7 +83,7 @@ const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
 
   return (
     <>
-      <StepAddProductDetails
+      <StepEditProductDetails
         formikProps={formikProps}
         dropdownOptions={dropdownOptions}
       />
@@ -92,4 +91,4 @@ const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
   );
 };
 
-export default StepAddProductDetailsWrapper;
+export default StepEditProductDetailsWrapper;

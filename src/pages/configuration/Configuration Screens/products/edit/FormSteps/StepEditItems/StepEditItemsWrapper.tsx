@@ -2,8 +2,8 @@
 import React from "react";
 import { FormikProps } from "formik";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
-import { FormInitialValues } from "../../AddProductWrapper";
-import StepAddItems from "./StepAddItems";
+import { FormInitialValues } from "../../EditProductWrapper";
+import StepEditItems from "./StepEditItems";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -16,8 +16,7 @@ export type DropdownOptions = {
 
 export type FieldType = Field<"companyTypeOptions" | "ownershipTypeOptions">;
 
-const StepAddItemsWrapper = ({ formikProps, allItems }: Props) => {
-  console.log("in add item", allItems);
+const StepEditItemsWrapper = ({ formikProps, allItems }: Props) => {
   const itemOptions = allItems?.map((ele: any) => {
     return { label: ele?.itemName, value: ele?._id };
   });
@@ -28,7 +27,7 @@ const StepAddItemsWrapper = ({ formikProps, allItems }: Props) => {
 
   return (
     <>
-      <StepAddItems
+      <StepEditItems
         formikProps={formikProps}
         dropdownOptions={dropdownOptions}
       />
@@ -36,4 +35,4 @@ const StepAddItemsWrapper = ({ formikProps, allItems }: Props) => {
   );
 };
 
-export default StepAddItemsWrapper;
+export default StepEditItemsWrapper;
