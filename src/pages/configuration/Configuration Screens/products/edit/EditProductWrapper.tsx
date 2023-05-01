@@ -2,27 +2,35 @@
 import React, { useEffect, useState } from "react";
 import { Form, Formik, FormikProps } from "formik";
 import { array, number, object, string } from "yup";
-import StepAddProductDetailsWrapper from "./FormSteps/StepAddProductDetails/StepAddProductDetailsWrapper";
-import AddProduct from "./AddProduct";
+import StepEditProductDetailsWrapper from "./FormSteps/StepEditProductDetails/StepEditProductDetailsWrapper";
+import EditProduct from "./EditProduct";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-import StepAddItemsWrapper from "./FormSteps/StepAddItems/StepAddItemsWrapper";
-import StepAddTaxWrapper from "./FormSteps/StepAddTax/StepAddTaxWrapper";
-import StepAddFAQsWrapper from "./FormSteps/StepAddFAQs/StepAddFAQsWrapper";
-import StepAddVideoWrapper from "./FormSteps/StepAddVideo/StepAddVideoWrapper";
-import { EditorState, convertToRaw } from "draft-js";
-import StepAddCallScriptWrapper from "./FormSteps/StepAddCallScript/StepAddCallScriptWrapper";
+import StepEditItemsWrapper from "./FormSteps/StepEditItems/StepEditItemsWrapper";
+import StepEditTaxWrapper from "./FormSteps/StepEditTax/StepEditTaxWrapper";
+import StepEditFAQsWrapper from "./FormSteps/StepEditFAQs/StepEditFAQsWrapper";
+import StepEditVideoWrapper from "./FormSteps/StepEditVideo/StepEditVideoWrapper";
+import StepEditCallScriptWrapper from "./FormSteps/StepEditCallScript/StepEditCallScriptWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { useGetAllTaxesQuery } from "src/services/TaxesService";
-import { setAllTaxes } from "src/redux/slices/TaxesSlice";
+import {
+  ContentState,
+  convertFromHTML,
+  convertToRaw,
+  EditorState,
+} from "draft-js";
+import draftToHtml from "draftjs-to-html";
 import { setAllItems } from "src/redux/slices/itemSlice";
 import { setAllItems as setAllLanguage } from "src/redux/slices/languageSlice";
 
 import { useGetAllItemsQuery } from "src/services/ItemService";
-import { useAddProductMutation } from "src/services/ProductService";
+// import { useEditProductMutation } from "src/services/ProductService";
 import { showToast } from "src/utils";
-import { useNavigate } from "react-router-dom";
-import draftToHtml from "draftjs-to-html";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useGetProductByIdQuery,
+  useUpdateProductMutation,
+} from "src/services/ProductService";
+import { setSelectedItem } from "src/redux/slices/productSlice";
 import { useGetAllLanguageQuery } from "src/services/LanguageService";
 
 // TYPE-  Form Intial Values
@@ -66,7 +74,7 @@ export type FormInitialValues = {
 const steps = [
   {
     label: "Product Details",
-    component: StepAddProductDetailsWrapper,
+    component: StepEditProductDetailsWrapper,
     validationSchema: object({
       product_code: string().required("Product code is required"),
       product_name: string().required("Product name is required"),
@@ -74,6 +82,7 @@ const steps = [
       product_sub_category: string().required(
         "Please select product sub category"
       ),
+      productGroup: string().required("Please select product Group"),
       product_weight: number()
         .min(0, "Weight must be positive")
         .required("Product weight is required"),
@@ -88,7 +97,7 @@ const steps = [
   },
   {
     label: "Items",
-    component: StepAddItemsWrapper,
+    component: StepEditItemsWrapper,
     validationSchema: object({
       items: array().of(
         object().shape({
@@ -103,7 +112,7 @@ const steps = [
   },
   {
     label: "Tax",
-    component: StepAddTaxWrapper,
+    component: StepEditTaxWrapper,
     validationSchema: object({
       taxes: array().of(
         object().shape({
@@ -122,7 +131,7 @@ const steps = [
   },
   {
     label: "FAQ's",
-    component: StepAddFAQsWrapper,
+    component: StepEditFAQsWrapper,
     validationSchema: object({
       FAQs: array().of(
         object().shape({
@@ -134,7 +143,7 @@ const steps = [
   },
   {
     label: "Video",
-    component: StepAddVideoWrapper,
+    component: StepEditVideoWrapper,
     validationSchema: object({
       videos: array().of(
         object().shape({
@@ -146,7 +155,7 @@ const steps = [
   },
   {
     label: "Call Script",
-    component: StepAddCallScriptWrapper,
+    component: StepEditCallScriptWrapper,
     validationSchema: object({
       call_scripts: array().of(
         object().shape({
@@ -169,31 +178,36 @@ const breadcrumbs = [
     path: "/configurations/products",
   },
   {
-    label: "Add Product",
+    label: "Edit Product",
   },
 ];
 
 // Page Heading
-const pageHeading = "Add New Product";
+const pageHeading = "Edit New Product";
 
-const AddProductWrapper = () => {
+const EditProductWrapper = () => {
+  const params = useParams();
+  const Id = params.id;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [addProduct] = useAddProductMutation();
-  const [taxStatus, setTaxStatus] = useState(false);
-  const [apiStatus, setApiStatus] = useState(false);
+  const {
+    data: prData,
+    isLoading: prIsLoading,
+    isFetching: prIsFetching,
+  } = useGetProductByIdQuery(Id);
 
-  const { allTaxes: taxData }: any = useSelector(
-    (state: RootState) => state?.tax
-  );
+  const [editProduct] = useUpdateProductMutation();
+  const [apiStatus, setApiStatus] = useState(false);
   const { userData } = useSelector((state: RootState) => state?.auth);
 
   const { allItems }: any = useSelector((state: RootState) => state?.item);
   const { allItems: allLanguages }: any = useSelector(
     (state: RootState) => state?.language
   );
+  const { selectedItem }: any = useSelector(
+    (state: RootState) => state?.products
+  );
 
-  const { data, isLoading, isFetching } = useGetAllTaxesQuery("");
   const {
     data: languageData,
     isLoading: lIsLoading,
@@ -208,10 +222,6 @@ const AddProductWrapper = () => {
 
   // States
   const [activeStep, setActiveStep] = React.useState(0);
-  const allTaxes = taxData?.map((ele: any) => {
-    return { tax_name: ele?.taxName, id: ele?._id };
-  });
-  // [{ tax_name: "ele?.taxName", id: "ele?._id" }];
 
   useEffect(() => {
     if (!itemIsLoading && !itemIsFetching) {
@@ -220,61 +230,68 @@ const AddProductWrapper = () => {
   }, [itemData, itemIsLoading, itemIsFetching]);
 
   useEffect(() => {
+    if (!prIsFetching && !prIsLoading) {
+      dispatch(setSelectedItem(prData?.data || []));
+    }
+  }, [prData, prIsLoading, prIsFetching]);
+
+  useEffect(() => {
     if (!lIsLoading && !lIsFetching) {
       dispatch(setAllLanguage(languageData?.data || []));
     }
   }, [languageData, lIsLoading, lIsFetching]);
 
-  useEffect(() => {
-    if (!isLoading && !isFetching) {
-      setTaxStatus(true);
-      dispatch(setAllTaxes(data?.data));
-    }
-  }, [data, isLoading, isFetching]);
-
   // From Initial Values
   const initialValues: FormInitialValues = {
-    product_code: "",
-    product_name: "",
-    product_category: "",
-    product_sub_category: "",
-    productGroup: "",
-    product_weight: "",
-    product_image: "",
+    product_code: selectedItem?.productCode || "",
+    product_name: selectedItem?.productName || "",
+    product_category: selectedItem?.productCategory || "",
+    product_sub_category: selectedItem?.productSubCategory || "",
+    productGroup: selectedItem?.productGroup || "",
+    product_weight: selectedItem?.productWeight || "",
+    product_image: selectedItem?.productImage || "",
     dimensions: {
-      height: "",
-      width: "",
-      depth: "",
+      height: selectedItem?.dimension?.height || "",
+      width: selectedItem?.dimension?.width || "",
+      depth: selectedItem?.dimension?.depth || "",
     },
-    description: "",
-    items: [
-      {
-        itemName: "",
-        itemQuantity: 0,
-      },
-    ],
-    taxes: allTaxes?.map((tax: any) => ({
-      taxDetail: tax,
-      tax_rate: 0,
-    })),
-    FAQs: [
+    description: selectedItem?.description,
+    items: selectedItem?.item?.map((ele: any) => {
+      return {
+        itemName: ele?.itemId,
+        itemQuantity: ele?.itemQuantity,
+      };
+    }),
+    taxes: selectedItem?.tax?.map((ele: any) => {
+      return {
+        taxDetail: { tax_name: ele?.taxName, id: ele?.taxId },
+        tax_rate: ele?.taxPercent,
+      };
+    }),
+
+    FAQs: selectedItem?.faq || [
       {
         question: "",
         answer: "",
       },
     ],
-    videos: [
+    videos: selectedItem?.video || [
       {
         videoName: "",
         videoLink: "",
       },
     ],
-    call_scripts: [
-      {
-        script: EditorState.createEmpty(),
-        language: "",
-      },
-    ],
+    call_scripts: selectedItem?.callScript?.map((ele: any) => {
+      return {
+        script: EditorState.createWithContent(
+          ContentState.createFromBlockArray(
+            convertFromHTML(ele?.script || "").contentBlocks,
+            convertFromHTML(ele?.script || "").entityMap
+          )
+        ),
+        language: ele?.languageId,
+      };
+    }),
   };
 
   // Form validation schema based on the active step
@@ -287,6 +304,15 @@ const AddProductWrapper = () => {
   const onSubmitHandler = (values: FormInitialValues) => {
     if (activeStep === steps?.length - 1) {
       setApiStatus(true);
+      const faqData = values.FAQs.map((ele: any) => {
+        const { _id, ...rest } = ele; // use object destructuring to remove the _id property
+        return rest; // return the new object without the _id property
+      });
+      const videoData = values.videos.map((ele: any) => {
+        const { _id, ...rest } = ele; // use object destructuring to remove the _id property
+        return rest; // return the new object without the _id property
+      });
+
       const taxData = values.taxes.map((ele) => {
         return { taxName: ele.taxDetail.id, taxPercent: ele.tax_rate };
       });
@@ -297,30 +323,33 @@ const AddProductWrapper = () => {
         };
       });
       setTimeout(() => {
-        addProduct({
-          productCode: values.product_code,
-          productName: values.product_name,
-          productCategory: values.product_category,
-          productSubCategory: values.product_sub_category,
-          productGroup: values.productGroup,
-          productWeight: Number(values.product_weight),
-          dimension: {
-            height: Number(values.dimensions.height),
-            width: Number(values.dimensions.width),
-            depth: Number(values.dimensions.depth),
+        editProduct({
+          body: {
+            productCode: values.product_code,
+            productName: values.product_name,
+            productCategory: values.product_category,
+            productSubCategory: values.product_sub_category,
+            productGroup: values.productGroup,
+            productWeight: Number(values.product_weight),
+            dimension: {
+              height: Number(values.dimensions.height),
+              width: Number(values.dimensions.width),
+              depth: Number(values.dimensions.depth),
+            },
+            productImage: values.product_image,
+            description: values.description,
+            item: values.items,
+            tax: taxData,
+            faq: faqData,
+            video: videoData,
+            callScript: callScriptData,
+            companyId: userData?.companyId || "",
           },
-          productImage: values.product_image,
-          description: values.description,
-          item: values.items,
-          tax: taxData,
-          faq: values.FAQs,
-          video: values.videos,
-          callScript: callScriptData,
-          companyId: userData?.companyId || "",
+          id: Id || "",
         }).then((res) => {
           if ("data" in res) {
             if (res?.data?.status) {
-              showToast("success", "Product added successfully!");
+              showToast("success", "Updated successfully!");
               navigate("/configurations/products");
             } else {
               showToast("error", res?.data?.message);
@@ -338,32 +367,30 @@ const AddProductWrapper = () => {
 
   return (
     <ConfigurationLayout>
-      {taxStatus ? (
-        <Formik
-          // enableReinitialize
-          initialValues={initialValues}
-          validationSchema={getValidationSchema(activeStep)}
-          onSubmit={onSubmitHandler}
-        >
-          {(formikProps: FormikProps<FormInitialValues>) => (
-            <Form className="">
-              <AddProduct
-                formikProps={formikProps}
-                steps={steps}
-                activeStep={activeStep}
-                setActiveStep={setActiveStep}
-                breadcrumbs={breadcrumbs}
-                pageHeading={pageHeading}
-                allItems={allItems}
-                allLanguages={allLanguages}
-                apiStatus={apiStatus}
-              />
-            </Form>
-          )}
-        </Formik>
-      ) : null}
+      <Formik
+        enableReinitialize={activeStep === 0}
+        initialValues={initialValues}
+        validationSchema={getValidationSchema(activeStep)}
+        onSubmit={onSubmitHandler}
+      >
+        {(formikProps: FormikProps<FormInitialValues>) => (
+          <Form className="">
+            <EditProduct
+              formikProps={formikProps}
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              breadcrumbs={breadcrumbs}
+              pageHeading={pageHeading}
+              allItems={allItems}
+              allLanguages={allLanguages}
+              apiStatus={apiStatus}
+            />
+          </Form>
+        )}
+      </Formik>
     </ConfigurationLayout>
   );
 };
 
-export default AddProductWrapper;
+export default EditProductWrapper;

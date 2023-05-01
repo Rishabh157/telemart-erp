@@ -1,32 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { ProductGroupListResponse } from "src/models/ProductGroup.model";
 
 export interface ProductGroupSliceStateType {
-    items: ProductGroupListResponse[] | [],
-    selectedProductGroup:ProductGroupListResponse | [],
-    allProductGroup:ProductGroupListResponse | [],
-    totalItems: number,
-    isTableLoading: boolean,
-    page: number;
-    rowsPerPage: number;
-    searchValue: string;
-    sortValue: { field: string; value: 'DESC' | 'ASC' },
-    selectedId: string
+  items: ProductGroupListResponse[] | [];
+  allItems: ProductGroupListResponse[] | [];
+
+  selectedProductGroup: ProductGroupListResponse | null;
+  totalItems: number;
+  isTableLoading: boolean;
+  page: number;
+  rowsPerPage: number;
+  searchValue: string;
+  sortValue: { field: string; value: "DESC" | "ASC" };
+  selectedId: string;
 }
 
 const initialState: ProductGroupSliceStateType = {
-    items: [],
-    selectedProductGroup:[],
-    totalItems: 0,
-    isTableLoading: false,
-    page: 1,
-    rowsPerPage: 10,
-    searchValue: "",
-    sortValue: { field: 'createdAt', value: 'DESC' },
-    selectedId: "",
-    allProductGroup:[]
-}
+  items: [],
+  allItems: [],
+  selectedProductGroup: null,
+  totalItems: 0,
+  isTableLoading: false,
+  page: 1,
+  rowsPerPage: 10,
+  searchValue: "",
+  sortValue: { field: "createdAt", value: "DESC" },
+  selectedId: "",
+};
 
 const productGroupSlice: any = createSlice({
     name: 'productsGroup',
@@ -62,29 +63,24 @@ const productGroupSlice: any = createSlice({
             state.selectedId = action.payload
         },
         setSelectedProductGroup:(state,
-            action: PayloadAction<ProductGroupListResponse | []>
+            action: PayloadAction<ProductGroupListResponse | null>
           ) => {
             state.selectedProductGroup = action.payload;
           },
-        setAllProductGroup:(state,
-            action:PayloadAction<ProductGroupListResponse | []>)=>{
-                state.allProductGroup = action.payload;
-
-            }
 
     }
 })
 
 export const {
-    setItems,
-    setPage,
-    setRowsPerPage,
-    setSearchValue,
-    setSortValue,
-    setTotalItems,
-    setIsTableLoading,
-    setSelectedId,
-    setSelectedProductGroup,
-    setAllProductGroup
-} = productGroupSlice.actions
-export default productGroupSlice.reducer
+  setItems,
+  setPage,
+  setRowsPerPage,
+  setSearchValue,
+  setSortValue,
+  setTotalItems,
+  setIsTableLoading,
+  setSelectedId,
+  setSelectedProductGroup,
+  setAllItems,
+} = productGroupSlice.actions;
+export default productGroupSlice.reducer;

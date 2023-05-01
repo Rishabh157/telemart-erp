@@ -2,8 +2,8 @@
 import React from "react";
 import { FormikProps } from "formik";
 import { Field } from "src/models/FormField/FormField.model";
-import { FormInitialValues } from "../../AddProductWrapper";
-import StepAddTax from "./StepAddTax";
+import { FormInitialValues } from "../../EditProductWrapper";
+import StepEditTax from "./StepEditTax";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -11,12 +11,12 @@ type Props = {
 
 export type FieldType = Field<"companyTypeOptions" | "ownershipTypeOptions">;
 
-const StepAddTaxWrapper = ({ formikProps }: Props) => {
+const StepEditTaxWrapper = ({ formikProps }: Props) => {
   return (
     <>
-      <StepAddTax formikProps={formikProps} />
+      <StepEditTax formikProps={formikProps} />
     </>
   );
 };
 
-export default StepAddTaxWrapper;
+export default StepEditTaxWrapper;

@@ -4,6 +4,7 @@ import { ItemListResponse } from "src/models/Item.model";
 
 export type InitialStateType = {
   items: ItemListResponse[] | [];
+  allItems: ItemListResponse[] | [];
   totalItems: number;
   selectedItem: ItemListResponse | [];
   isTableLoading: boolean;
@@ -16,6 +17,7 @@ export type InitialStateType = {
 
 const initialState: InitialStateType = {
   items: [],
+  allItems: [],
   totalItems: 0,
   selectedItem: [],
   isTableLoading: false,
@@ -65,6 +67,9 @@ const itemSlice: any = createSlice({
     setSelectedItem: (state, action: PayloadAction<ItemListResponse | []>) => {
       state.selectedItem = action.payload;
     },
+    setAllItems: (state, action: PayloadAction<ItemListResponse[] | []>) => {
+      state.allItems = action.payload;
+    },
   },
 });
 
@@ -78,5 +83,6 @@ export const {
   setIsTableLoading,
   setSelectedDealerId,
   setSelectedItem,
+  setAllItems,
 } = itemSlice.actions;
 export default itemSlice.reducer;

@@ -60,3 +60,8 @@ export type {
   AddProductSubCategory,
   UpdateProductSubCategory,
 } from "./ProductSubCategory.model";
+export type {
+  ProductsListResponse,
+  AddProducts,
+  UpdateProducts,
+} from "./Products.model";

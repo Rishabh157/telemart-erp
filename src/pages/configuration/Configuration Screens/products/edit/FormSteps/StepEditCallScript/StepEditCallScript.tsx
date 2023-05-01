@@ -1,19 +1,19 @@
 import React from "react";
 import { FormikProps } from "formik";
-import { FormInitialValues } from "../../AddProductWrapper";
+import { FormInitialValues } from "../../EditProductWrapper";
 import { FieldArray } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
 import { EditorState } from "draft-js";
 import ATMHTMLEditor from "src/components/UI/atoms/formFields/ATMHTMLEditor/ATMHTMLEditor";
+import { DropdownOptions } from "./StepEditCallScriptWrapper";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
-import { DropdownOptions } from "./StepAddCallScriptWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   dropdownOptions: DropdownOptions;
 };
 
-const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
+const StepEditCallScript = ({ formikProps, dropdownOptions }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -23,7 +23,6 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
           <div className="">
             {values.call_scripts?.map((script, scriptIndex) => {
               const { language } = script;
-
               return (
                 <div
                   key={scriptIndex}
@@ -78,7 +77,7 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
               );
             })}
 
-            {/* BUTTON- Add More Script */}
+            {/* BUTTON- Edit More Script */}
             <div className="flex justify-end p-5">
               <button
                 type="button"
@@ -90,7 +89,7 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
                 }
                 className="bg-primary-main px-3 py-1 text-white rounded"
               >
-                Add More Script
+                Edit More Script
               </button>
             </div>
           </div>
@@ -100,4 +99,4 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
   );
 };
 
-export default StepAddCallScript;
+export default StepEditCallScript;
