@@ -5,7 +5,7 @@ import StepLabel from "@mui/material/StepLabel";
 import ATMBreadCrumbs from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import { FormikProps } from "formik";
-import { FormInitialValues } from "./AddProductWrapper";
+import { FormInitialValues } from "./EditProductWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -23,7 +23,7 @@ type Props = {
   apiStatus: boolean;
 };
 
-const AddProduct = ({
+const EditProduct = ({
   formikProps,
   activeStep,
   setActiveStep,
@@ -79,7 +79,7 @@ const AddProduct = ({
                   apiStatus ? "opacity-50" : ""
                 }`}
               >
-                {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                {activeStep === steps.length - 1 ? "Update" : "Next"}
               </button>
             </div>
           </div>
@@ -115,4 +115,4 @@ const AddProduct = ({
   );
 };
 
-export default AddProduct;
+export default EditProduct;

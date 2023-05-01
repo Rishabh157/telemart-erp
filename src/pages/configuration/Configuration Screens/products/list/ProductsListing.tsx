@@ -8,7 +8,11 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/productSlice";
+import {
+  setRowsPerPage,
+  setPage,
+  setSearchValue,
+} from "src/redux/slices/productSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -24,7 +28,7 @@ const ProductsListing = ({ columns, rows }: Props) => {
   const navigate = useNavigate();
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const { page, rowsPerPage } = productsState;
+  const { page, rowsPerPage, searchValue, totalItems } = productsState;
 
   const breadcrumbs: BreadcrumbType[] = [
     {
@@ -57,11 +61,13 @@ const ProductsListing = ({ columns, rows }: Props) => {
       <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
+          searchValue={searchValue}
           page={page}
-          rowCount={rows.length}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
+          onSearch={(newValue) => dispatch(setSearchValue(newValue))}
           isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
         />
@@ -82,7 +88,7 @@ const ProductsListing = ({ columns, rows }: Props) => {
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}

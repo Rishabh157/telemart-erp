@@ -2,7 +2,7 @@ import React from "react";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { SelectOption } from "src/models/FormField/FormField.model";
-import { FormInitialValues } from "../../AddProductWrapper";
+import { FormInitialValues } from "../../EditProductWrapper";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextArea from "src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea";
 
@@ -17,7 +17,7 @@ type Props = {
   dropdownOptions: DropdownOptions;
 };
 
-const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
+const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -163,4 +163,4 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
   );
 };
 
-export default StepAddProductDetails;
+export default StepEditProductDetails;
