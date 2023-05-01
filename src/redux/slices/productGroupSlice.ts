@@ -5,6 +5,7 @@ import { ProductGroupListResponse } from "src/models/ProductGroup.model";
 export interface ProductGroupSliceStateType {
     items: ProductGroupListResponse[] | [],
     selectedProductGroup:ProductGroupListResponse | [],
+    allProductGroup:ProductGroupListResponse | [],
     totalItems: number,
     isTableLoading: boolean,
     page: number;
@@ -23,7 +24,8 @@ const initialState: ProductGroupSliceStateType = {
     rowsPerPage: 10,
     searchValue: "",
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectedId: ""
+    selectedId: "",
+    allProductGroup:[]
 }
 
 const productGroupSlice: any = createSlice({
@@ -64,6 +66,11 @@ const productGroupSlice: any = createSlice({
           ) => {
             state.selectedProductGroup = action.payload;
           },
+        setAllProductGroup:(state,
+            action:PayloadAction<ProductGroupListResponse | []>)=>{
+                state.allProductGroup = action.payload;
+
+            }
 
     }
 })
@@ -77,6 +84,7 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
-    setSelectedProductGroup
+    setSelectedProductGroup,
+    setAllProductGroup
 } = productGroupSlice.actions
 export default productGroupSlice.reducer

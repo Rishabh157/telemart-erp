@@ -5,6 +5,7 @@ import { ProductSubCategoryListResponse } from "src/models/ProductSubCategory.mo
 export interface ProductSubCategorySliceStateType {
   items: ProductSubCategoryListResponse[] | [];
   selectedItem: ProductSubCategoryListResponse | null;
+  allProductSubCategory: ProductSubCategoryListResponse[] | []
   totalItems: number;
   isTableLoading: boolean;
   page: number;
@@ -24,6 +25,7 @@ const initialState: ProductSubCategorySliceStateType = {
   searchValue: "",
   sortValue: { field: "createdAt", value: "DESC" },
   selectedId: "",
+  allProductSubCategory: []
 };
 
 const productSubCategorySlice: any = createSlice({
@@ -71,6 +73,12 @@ const productSubCategorySlice: any = createSlice({
     ) => {
       state.selectedItem = action.payload;
     },
+    setAllProductSubCategory:(
+      state,
+      action: PayloadAction<ProductSubCategoryListResponse[] | [] >
+    ) => {
+      state.allProductSubCategory = action.payload;
+    },
   },
 });
 
@@ -84,5 +92,6 @@ export const {
   setIsTableLoading,
   setSelectedId,
   setSelectedItem,
+  setAllProductSubCategory
 } = productSubCategorySlice.actions;
 export default productSubCategorySlice.reducer;

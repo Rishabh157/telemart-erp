@@ -67,7 +67,7 @@ const productCategorySlice: any = createSlice({
     setSelectedId: (state, action: PayloadAction<string>) => {
       state.selectedId = action.payload;
     },
-    selAllproductCategory: (
+    setAllProductCategory: (
       state,
       action: PayloadAction<ProductCategoryListResponse[] | []>
     ) => {
@@ -92,6 +92,6 @@ export const {
   setIsTableLoading,
   setSelectedId,
   setSelectedProductCategory,
-  selAllproductCategory,
+  setAllProductCategory,
 } = productCategorySlice.actions;
 export default productCategorySlice.reducer;

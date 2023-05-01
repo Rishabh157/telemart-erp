@@ -16,18 +16,18 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
-    <div className=" ">
-      <FieldArray name="products">
+    <div className="">
+      <FieldArray name="productInformation">
         {({ push, remove }) => (
           <div className="">
-            {values.products?.map((product, productIndex) => {
-              const { productGroup, quantity, mrp, offer_price } = product;
+            {values.productInformation?.map((product, productIndex) => {
+              const { productGroup, quantity, mrp, pop } = product;
 
               return (
                 <div
                   key={productIndex}
                   className={`flex flex-col gap-3 py-6 px-7 ${
-                    productIndex !== values.products.length - 1 && "border-b"
+                    productIndex !== values.productInformation.length - 1 && "border-b"
                   }  border-slate-300 `}
                 >
                   <div className="flex justify-between items-center">
@@ -35,7 +35,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                       Product Information #{productIndex + 1}
                     </div>
                     {/* Delete Button */}
-                    {values.products?.length > 1 && (
+                    {values.productInformation?.length > 1 && (
                       <button
                         type="button"
                         onClick={() => remove(productIndex)}
@@ -50,11 +50,11 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                     {/* Product Group */}
                     <div className="col-span-2">
                       <ATMSelect
-                        name={`products[${productIndex}].productGroup`}
+                        name={`productInformation[${productIndex}].productGroup`}
                         value={productGroup}
                         onChange={(e) => {
                           setFieldValue(
-                            `products[${productIndex}].productGroup`,
+                            `productInformation[${productIndex}].productGroup`,
                             e.target.value
                           );
                         }}
@@ -65,11 +65,11 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
 
                     {/* Product Quantity */}
                     <ATMTextField
-                      name={`products[${productIndex}].quantity`}
+                      name={`productInformation[${productIndex}].quantity`}
                       value={quantity.toString()}
                       onChange={(e) => {
                         setFieldValue(
-                          `products[${productIndex}].quantity`,
+                          `productInformation[${productIndex}].quantity`,
                           e.target.value
                         );
                       }}
@@ -80,11 +80,11 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
 
                     {/* MRP */}
                     <ATMTextField
-                      name={`products[${productIndex}].mrp`}
+                      name={`productInformation[${productIndex}].mrp`}
                       value={mrp.toString()}
                       onChange={(e) => {
                         setFieldValue(
-                          `products[${productIndex}].mrp`,
+                          `productInformation[${productIndex}].mrp`,
                           e.target.value
                         );
                       }}
@@ -95,11 +95,11 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
 
                     {/* POP  */}
                     <ATMTextField
-                      name={`products[${productIndex}].offer_price`}
-                      value={offer_price.toString()}
+                      name={`productInformation[${productIndex}].offer_price`}
+                      value={pop.toString()}
                       onChange={(e) => {
                         setFieldValue(
-                          `products[${productIndex}].offer_price`,
+                          `productInformation[${productIndex}].offer_price`,
                           e.target.value
                         );
                       }}
@@ -120,7 +120,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                     productGroup: "",
                     quantity: "",
                     mrp: 0,
-                    offer_price: 0,
+                    pop: 0,
                   })
                 }
                 className="bg-primary-main px-3 py-1 text-white rounded"

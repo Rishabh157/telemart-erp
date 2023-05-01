@@ -21,7 +21,7 @@ const initialState: ProductsSliceStateType = {
     rowsPerPage: 10,
     searchValue: "",
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectedId: ""
+    selectedId: "",
 }
 
 const productsSlice: any = createSlice({
@@ -56,7 +56,11 @@ const productsSlice: any = createSlice({
         },
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
-        }
+        },
+        // setAllProductGroup: (state, action: PayloadAction<ProductsListResponse[] | []>) => {
+        //     state.allProductGroup = action.payload
+        // },
+      
 
     }
 })

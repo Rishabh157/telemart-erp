@@ -28,7 +28,7 @@ const SchemeListing = ({ columns, rows }: Props) => {
   const breadcrumbs: BreadcrumbType[] = [
     {
       label: "Configuration",
-      path: "/dashboard",
+      path: "/Scheme",
     },
     {
       label: "Scheme",
@@ -36,7 +36,7 @@ const SchemeListing = ({ columns, rows }: Props) => {
   ];
 
   return (
-    <div className="px-4 h-full pt-3  ">
+    <div className="px-4 h-full ">
       {/* Breadcrumbs */}
       <div className="h-[30px]">
         <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
