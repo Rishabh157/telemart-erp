@@ -9,6 +9,7 @@ import { FormInitialValues } from "./EditItemWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
+  apiStatus: boolean;
 };
 
 // Breadcrumbs
@@ -22,7 +23,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const EditItem = ({ formikProps }: Props) => {
+const EditItem = ({ formikProps, apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -47,8 +48,11 @@ const EditItem = ({ formikProps }: Props) => {
             <div>
               <button
                 type="button"
+                disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  apiStatus ? "opacity-50" : ""
+                }`}
               >
                 Update
               </button>

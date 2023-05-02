@@ -139,7 +139,9 @@ const steps = [
       videos: array().of(
         object().shape({
           videoName: string().required("Video name is required"),
-          videoLink: string().url().required("Video link is required"),
+          videoLink: string()
+            .url("Must be a valid link")
+            .required("Video link is required"),
         })
       ),
     }),

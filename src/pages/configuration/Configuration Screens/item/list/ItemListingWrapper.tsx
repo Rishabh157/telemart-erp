@@ -108,7 +108,7 @@ const ItemListingWrapper = () => {
               <button
                 onClick={() => {
                   showConfirmationDialog({
-                    title: "Delete Attribute",
+                    title: "Delete Item",
                     text: "Do you want to delete",
                     showCancelButton: true,
                     next: (res) => {
