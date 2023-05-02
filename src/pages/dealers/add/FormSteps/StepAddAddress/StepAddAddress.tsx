@@ -16,9 +16,6 @@ type DropdownOptions = {
   billingPincodeOptions: SelectOption[];
 };
 
-
-
-
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   formFields: {
@@ -70,13 +67,21 @@ const StepAddAddress = ({
                       <ATMTextField
                         key={name}
                         name={name}
+                        maxLength={10}
                         value={
                           name.includes(".")
                             ? values[name.split(".")[0]][name.split(".")[1]]
                             : values[name]
                         }
                         onChange={(e) => {
-                          setFieldValue(name, e.target.value);
+                          if (name === "registrationAddress.phone" || name === "billingAddress.phone" ) {
+                            const inputValue = e.target.value;
+                            if (!isNaN(Number(inputValue))) {
+                              setFieldValue(name, e.target.value);
+                            }
+                          } else {
+                            setFieldValue(name, e.target.value);
+                          }
                         }}
                         label={label}
                         placeholder={placeholder}

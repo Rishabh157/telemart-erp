@@ -1,4 +1,4 @@
-import React, { useEffect ,useState} from "react";
+import React, { useEffect ,useRef,useState} from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
@@ -24,10 +24,25 @@ const DealersListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate=useNavigate()
     const [deletedealer]=useDeleteDealerMutation()
+    const dropdownRef = useRef<any>(null);
 
-    const { page, rowsPerPage,items } = dealerState;
+    const { page, rowsPerPage,items ,searchValue} = dealerState;
     const dispatch = useDispatch<AppDispatch>();
 
+    useEffect(() => {
+      function handleClickOutside(event:any) {
+        console.log(dropdownRef.current)
+        if (dropdownRef.current && !dropdownRef?.current?.contains(event.target)) {
+          setShowDropdown(false);
+        }
+      }
+    
+      document.addEventListener("click", handleClickOutside);
+    
+      return () => {
+        document.removeEventListener("click", handleClickOutside);
+      };
+    }, [dropdownRef]);
   
 
     // const navigate = useNavigate();
@@ -91,7 +106,7 @@ const DealersListingWrapper = () => {
         headerName: "Actions",
         flex: "flex-[0.5_0.5_0%]",
         renderCell: (row: any) => (
-          <div className="relative">
+          <div className="relative"  ref={dropdownRef}>
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -148,8 +163,8 @@ const DealersListingWrapper = () => {
   ];
   const { data, isFetching, isLoading } = useGetDealersQuery({
     limit: rowsPerPage,
-    searchValue: "",
-    params: ["dealerCode"],
+    searchValue: searchValue,
+    params: ["firstName" ,"dealerCode"],
     page: page,
     filterBy: [
         {
@@ -165,17 +180,18 @@ const DealersListingWrapper = () => {
 });
 
 useEffect(() => {
-  console.log(data?.data)
+  
     if (!isFetching && !isLoading) {
         dispatch(setIsTableLoading(false));
         dispatch(setItems(data?.data || []));
-        dispatch(setTotalItems(data?.totalItems || 4));
+        dispatch(setTotalItems(data?.totalItem || 4));
     } else {
         dispatch(setIsTableLoading(true));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [isLoading, isFetching, data]);
+
 
 
 

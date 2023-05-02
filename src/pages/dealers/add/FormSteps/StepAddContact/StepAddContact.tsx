@@ -7,10 +7,10 @@ import { FieldType } from "./StepAddContactWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
-  formFields: { sectionName: string; fields: FieldType[] }[]
+  formFields: { sectionName: string; fields: FieldType[] }[];
 };
 
-const StepAddContact = ({ formikProps , formFields }: Props) => {
+const StepAddContact = ({ formikProps, formFields }: Props) => {
   const { values, setFieldValue }: { values: any; setFieldValue: any } =
     formikProps;
   return (
@@ -32,7 +32,6 @@ const StepAddContact = ({ formikProps , formFields }: Props) => {
                           <div key={index} className={`py-6 px-7`}>
                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center">
                               {sectionName} #{contactInformationIndex + 1}
-                              
                               {/* Delete Button */}
                               {values.contactInformation?.length > 1 && (
                                 <button
@@ -61,13 +60,26 @@ const StepAddContact = ({ formikProps , formFields }: Props) => {
                                     return (
                                       <ATMTextField
                                         key={name}
+                                 
                                         name={`contactInformations[${contactInformationIndex}].${name}`}
                                         value={contactInformation[name]}
                                         onChange={(e) => {
+                                          if(name === "mobileNumber" || name === "landLine")
+                                          {
+                                            const inputValue = e.target.value;
+                                            if (!isNaN(Number(inputValue))) {
+                                              setFieldValue(
+                                              `contactInformation[${contactInformationIndex}].${name}`,
+                                              e.target.value
+                                            );
+                                          }
+                                        }
+                                        else{
                                           setFieldValue(
                                             `contactInformation[${contactInformationIndex}].${name}`,
                                             e.target.value
                                           );
+                                        }
                                         }}
                                         label={label}
                                         placeholder={placeholder}

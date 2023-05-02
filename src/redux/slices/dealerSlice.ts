@@ -1,4 +1,3 @@
-import { string } from 'yup';
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { DealersListResponse } from "src/models";
