@@ -26,7 +26,7 @@ const DistrictListingWrapper = () => {
     filterBy: [
       {
         fieldName: "stateId",
-        value: filterValue ? [filterValue] : [],
+        value: filterValue ? filterValue : [],
       },
     ],
     dateFilter: {},

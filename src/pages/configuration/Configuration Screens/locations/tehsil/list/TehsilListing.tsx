@@ -47,7 +47,7 @@ const TehsilListing = ({ tehsils }: Props) => {
         listHeading="Tehsils"
         searchValue={searchValue}
         OnSearchChange={(newValue) => {
-          setSearchValue(newValue);
+          dispatch(setSearchValue(newValue));
         }}
         listData={tehsils}
         onAddClick={() => {

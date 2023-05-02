@@ -25,7 +25,7 @@ const TehsilListingWrapper = () => {
     filterBy: [
       {
         fieldName: "districtId",
-        value: filterValue ? [filterValue] : [],
+        value: filterValue ? filterValue : [],
       },
     ],
     dateFilter: {},
