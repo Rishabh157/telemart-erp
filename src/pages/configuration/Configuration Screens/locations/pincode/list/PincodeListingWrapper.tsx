@@ -27,7 +27,7 @@ const PincodeListingWrapper = () => {
     filterBy: [
       {
         fieldName: "tehsilId",
-        value: filterValue ? [filterValue] : [],
+        value: filterValue ? filterValue : [],
       },
     ],
     dateFilter: {},

@@ -1,6 +1,6 @@
 import React, { useEffect ,useRef,useState} from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { DealersListResponse } from "src/models/Dealer.model";
@@ -28,10 +28,8 @@ const DealersListingWrapper = () => {
 
     const { page, rowsPerPage,items ,searchValue} = dealerState;
     const dispatch = useDispatch<AppDispatch>();
-
     useEffect(() => {
       function handleClickOutside(event:any) {
-        console.log(dropdownRef.current)
         if (dropdownRef.current && !dropdownRef?.current?.contains(event.target)) {
           setShowDropdown(false);
         }
@@ -98,7 +96,7 @@ const DealersListingWrapper = () => {
           headerName: "State",
           flex: "flex-[1.5_1.5_0%]",
           renderCell: (row: DealersListResponse) => {
-              return <span > {row.billingAddressDistrictName} </span>;
+              return <span > {row.billingAddressStateName} </span>;
           },
       },
       {
