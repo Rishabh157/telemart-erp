@@ -1,8 +1,8 @@
 import React from "react";
 import {  FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddSchemeWrapper";
-//import { DropdownOptions } from "./StepAddSchemeDetailsWrapper";
+import { FormInitialValues } from "../../EditSchemeWrapper";
+//import { DropdownOptions } from "./StepEditSchemeDetailsWrapper";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
 import ATMDatePicker from "src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker";
@@ -24,12 +24,14 @@ type Props = {
     fields: FieldType[];
   }[];
   dropdownOptions: DropdownOptions;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+
 };
 
 
 
-const StepAddSchemeDetails = ({ formikProps ,  formFields,
-  dropdownOptions,
+const StepEditScheme = ({ formikProps ,  formFields,
+  dropdownOptions,setSelectedCategory
 
 }: Props) => {
   const { values, setFieldValue } :{ values: any; setFieldValue: any }= formikProps;
@@ -54,6 +56,7 @@ const StepAddSchemeDetails = ({ formikProps ,  formFields,
           value={values.category}
           onChange={(e) => {
             setFieldValue("category", e.target.value);
+            setSelectedCategory(e.target.value)
           }}
           label="Category"
           options={
@@ -86,10 +89,8 @@ const StepAddSchemeDetails = ({ formikProps ,  formFields,
           name={"schemePrice"}
           value={values.schemePrice}
           onChange={(e) => {
-            const inputValue = e.target.value;
-            if (!isNaN(Number(inputValue))) {
-              setFieldValue("schemePrice", String(inputValue));
-            }          }}
+            setFieldValue("schemePrice", e.target.value);
+          }}
           label="Scheme Price"
           placeholder="Scheme Price"
           className="shadow bg-white rounded"
@@ -102,12 +103,9 @@ const StepAddSchemeDetails = ({ formikProps ,  formFields,
             <ATMTextField
               name="dimension.height"
               value={values.dimension.height}
-              onChange={(e) =>{
-                const inputValue = e.target.value;
-                if (!isNaN(Number(inputValue))) {
-                  setFieldValue("dimension.height", String(inputValue));
-                }         
-               }}
+              onChange={(e) =>
+                setFieldValue("dimension.height", e.target.value)
+              }
               placeholder="H"
               className="shadow bg-white rounded"
             />
@@ -115,13 +113,9 @@ const StepAddSchemeDetails = ({ formikProps ,  formFields,
             <ATMTextField
               name="dimension.width"
               value={values.dimension.width}
-              onChange={(e) =>{
-                const inputValue = e.target.value;
-                if (!isNaN(Number(inputValue))) {
-                  setFieldValue("dimension.width", String(inputValue));
-                }         
-               }}
-              
+              onChange={(e) =>
+                setFieldValue("dimension.width", e.target.value)
+              }
               placeholder="W"
               className="shadow bg-white rounded"
             />
@@ -129,12 +123,9 @@ const StepAddSchemeDetails = ({ formikProps ,  formFields,
             <ATMTextField
               name="dimension.depth"
               value={values.dimension.depth}
-              onChange={(e) => {
-                  const inputValue = e.target.value;
-                  if (!isNaN(Number(inputValue))) {
-                    setFieldValue("dimension.depth", String(inputValue));
-                  }         
-                 }}
+              onChange={(e) =>
+                setFieldValue("dimension.depth", e.target.value)
+              }
               placeholder="D"
               className="shadow bg-white rounded"
             />
@@ -144,12 +135,9 @@ const StepAddSchemeDetails = ({ formikProps ,  formFields,
         <ATMTextField
           name={"weight"}
           value={values.weight}
-          onChange={(e) =>{
-            const inputValue = e.target.value;
-            if (!isNaN(Number(inputValue))) {
-              setFieldValue("weight", String(inputValue));
-            }         
-           }}
+          onChange={(e) => {
+            setFieldValue("weight", e.target.value);
+          }}
           label="Weight"
           placeholder="Weight"
           className="shadow bg-white rounded"
@@ -158,12 +146,9 @@ const StepAddSchemeDetails = ({ formikProps ,  formFields,
         <ATMTextField
           name={"deliveryCharges"}
           value={values.deliveryCharges}
-          onChange={(e) => {  
-              const inputValue = e.target.value;
-              if (!isNaN(Number(inputValue))) {
-                setFieldValue("deliveryCharges", String(inputValue));
-              }         
-             }}
+          onChange={(e) => {
+            setFieldValue("deliveryCharges", e.target.value);
+          }}
           label="Delivery Charges"
           placeholder="Delivery Charges"
           className="shadow bg-white rounded"
@@ -211,4 +196,4 @@ const StepAddSchemeDetails = ({ formikProps ,  formFields,
          );
 };
 
-export default StepAddSchemeDetails;
+export default StepEditScheme;

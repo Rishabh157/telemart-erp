@@ -1,7 +1,7 @@
 import React from "react";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddSchemeWrapper";
+import { FormInitialValues } from "../../EditSchemeWrapper";
 import { FieldArray } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
 import ATMTextArea from "src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea";
@@ -10,7 +10,7 @@ type Props = {
   formikProps: FormikProps<FormInitialValues>;
 };
 
-const StepAddFAQ = ({ formikProps }: Props) => {
+const StepEditFAQ = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -97,4 +97,4 @@ const StepAddFAQ = ({ formikProps }: Props) => {
   );
 };
 
-export default StepAddFAQ;
+export default StepEditFAQ;

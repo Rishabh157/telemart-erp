@@ -6,7 +6,7 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/schemeSlice";
+import { setRowsPerPage, setPage, setSearchValue } from "src/redux/slices/schemeSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -23,12 +23,12 @@ const SchemeListing = ({ columns, rows }: Props) => {
   const [selectedRows, setSelectedRows] = useState([])
 
 
-  const { page, rowsPerPage } = schemeState;
+  const { page, rowsPerPage,searchValue,totalItems} = schemeState;
 
   const breadcrumbs: BreadcrumbType[] = [
     {
       label: "Configuration",
-      path: "/dashboard",
+      path: "/Scheme",
     },
     {
       label: "Scheme",
@@ -36,7 +36,7 @@ const SchemeListing = ({ columns, rows }: Props) => {
   ];
 
   return (
-    <div className="px-4 h-full pt-3  ">
+    <div className="px-4 h-full ">
       {/* Breadcrumbs */}
       <div className="h-[30px]">
         <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -53,16 +53,18 @@ const SchemeListing = ({ columns, rows }: Props) => {
         </button>
       </div>
 
-      <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+      <div className="h-full border flex flex-col rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
           page={page}
-          rowCount={rows.length}
+          searchValue={searchValue}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
+          onSearch={(newValue) => dispatch(setSearchValue(newValue))}
         />
 
         {/* Table */}
@@ -71,14 +73,14 @@ const SchemeListing = ({ columns, rows }: Props) => {
            isCheckbox={true}
            selectedRows={selectedRows}
            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
+           extraClasses='h-full overflow-auto' />
         </div>
 
         {/* Pagination */}
-        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+        <div className=" flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
