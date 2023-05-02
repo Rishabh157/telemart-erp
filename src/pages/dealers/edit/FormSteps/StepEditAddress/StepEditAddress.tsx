@@ -16,9 +16,6 @@ type DropdownOptions = {
   billingPincodeOptions: SelectOption[];
 };
 
-
-
-
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   formFields: {
@@ -86,7 +83,7 @@ const StepEditAddress = ({
 
                   case "select":
                     return (
-                      <div key={name}>
+                      <div key={name} className="relative mt-4">
                         <label className=" text-slate-700 font-medium">
                           {" "}
                           {label}{" "}

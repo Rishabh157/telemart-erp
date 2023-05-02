@@ -43,7 +43,7 @@ const StepEditComapnyDetails = ({
 
             case "select":
               return (
-                <div key={name}>
+                <div key={name} className="relative mt-4">
                   <InputLabel className="mb-2"> {label} </InputLabel>
                   <FormControl fullWidth>
                     <Select

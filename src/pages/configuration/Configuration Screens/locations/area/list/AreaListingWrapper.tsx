@@ -26,7 +26,7 @@ const AreaListingWrapper = () => {
     filterBy: [
       {
         fieldName: "pincodeId",
-        value: filterValue ? [filterValue] : [],
+        value: filterValue ? filterValue : [],
       },
     ],
     dateFilter: {},

@@ -41,7 +41,7 @@ const TaxesListing = ({ columns, rows }: Props) => {
   ];
 
   return (
-    <div className="px-4  pt-3  ">
+    <div className="px-4  pt-3 h-full ">
       {/* Breadcrumbs */}
       <div className="h-[30px]">
         <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -58,7 +58,7 @@ const TaxesListing = ({ columns, rows }: Props) => {
         </button>
       </div>
 
-      <div className="border flex flex-col h-full rounded bg-white">
+      <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
           searchValue={searchValue}
@@ -80,7 +80,7 @@ const TaxesListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+            extraClasses="h-full overflow-auto"
           />
         </div>
 

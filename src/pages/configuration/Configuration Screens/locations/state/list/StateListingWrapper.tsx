@@ -26,7 +26,7 @@ const StateListingWrapper = () => {
     filterBy: [
       {
         fieldName: "countryId",
-        value: filterValue ? [filterValue] : [],
+        value: filterValue ? filterValue : [],
       },
     ],
     dateFilter: {},
