@@ -72,10 +72,23 @@ const StepAddBankDetails = ({
                                         name={`bankDetails[${bankInformationIndex}].${name}`}
                                         value={bankInformation[name]}
                                         onChange={(e) => {
-                                          setFieldValue(
-                                            `bankDetails[${bankInformationIndex}].${name}`,
-                                            e.target.value
-                                          );
+                                          if (
+                                            name === "accountNumber" ||
+                                            name === "ifscNumber"
+                                          ) {
+                                            const newValue = e.target.value;
+                                            if (!isNaN(Number(newValue))) {
+                                              setFieldValue(
+                                                `bankDetails[${bankInformationIndex}].${name}`,
+                                                newValue
+                                              );
+                                            }
+                                          } else {
+                                            setFieldValue(
+                                              `bankDetails[${bankInformationIndex}].${name}`,
+                                              e.target.value
+                                            );
+                                          }
                                         }}
                                         label={label}
                                         placeholder={placeholder}

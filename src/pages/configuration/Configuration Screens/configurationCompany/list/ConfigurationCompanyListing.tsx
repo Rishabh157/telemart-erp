@@ -26,7 +26,7 @@ const ConfigurationCompanyListing = ({ columns, rows }: Props) => {
 
   const navigate = useNavigate();
 
-  const { page, rowsPerPage, searchValue } = company;
+  const { page, rowsPerPage, searchValue, totalItems } = company;
 
   const breadcrumbs: BreadcrumbType[] = [
     {
@@ -61,7 +61,7 @@ const ConfigurationCompanyListing = ({ columns, rows }: Props) => {
         <ATMTableHeader
           searchValue={searchValue}
           page={page}
-          rowCount={rows.length}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => {
@@ -91,7 +91,7 @@ const ConfigurationCompanyListing = ({ columns, rows }: Props) => {
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
