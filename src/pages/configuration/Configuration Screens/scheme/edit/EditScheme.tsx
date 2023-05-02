@@ -5,12 +5,13 @@ import StepLabel from "@mui/material/StepLabel";
 import ATMBreadCrumbs from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import { FormikProps } from "formik";
-import { FormInitialValues } from "./AddSchemeWrapper";
+import { FormInitialValues } from "./EditSchemeWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   activeStep: number;
   setActiveStep: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedCategory?:  React.Dispatch<React.SetStateAction<string>>;
   steps: any[];
   pageHeading: string;
   breadcrumbs: {
@@ -19,20 +20,28 @@ type Props = {
     path?: string;
   }[];
   productGroupOptions?:any;
+  productCategoryoption?:any;
+  productSubCategoryOption?:any;
   apiStatus:boolean
 
 };
 
-const AddScheme = ({
+const EditScheme = ({
   formikProps,
   activeStep,
   setActiveStep,
+  setSelectedCategory,
   steps,
   pageHeading,
-  breadcrumbs,productGroupOptions,   
+  breadcrumbs,
+  productGroupOptions,
   apiStatus,
+  productCategoryoption,
+  productSubCategoryOption
+
 
 }: Props) => {
+
   // Handle Previous
   const handlePrevious = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -78,7 +87,7 @@ const AddScheme = ({
                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                   apiStatus ? "opacity-50" : ""}`}
                             >
-                {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                {activeStep === steps?.length - 1 ? "Submit" : "Next"}
               </button>
             </div>
           </div>
@@ -103,7 +112,8 @@ const AddScheme = ({
           {/* Form */}
           <div className="grow">
             {steps[activeStep]?.component({
-              formikProps,productGroupOptions
+              formikProps,productGroupOptions,productCategoryoption,
+              productSubCategoryOption,setSelectedCategory
             })}
           </div>
         </div>
@@ -112,4 +122,4 @@ const AddScheme = ({
   );
 };
 
-export default AddScheme;
+export default EditScheme;

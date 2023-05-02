@@ -12,8 +12,8 @@ export type SchemeListResponse = {
   startDate: string;
   endDate: string;
   schemeDescription: string;
-  productInformation: productInformation;
-  faq: faq;
+  productInformation: productInformation[];
+  faq: faq[];
   is_active: boolean;
   is_deleted: boolean;
   createdAt: string;
@@ -27,21 +27,21 @@ export type productInformation = {
   productQuantity: number;
   mrp: number;
   pop: number;
-}[];
+};
 
 export type faq = {
   question: string;
   answer: string;
-}[];
-
-export type dimension = {
-  height: string;
-  weight: string;
-  depth: string;
 };
 
-export type AddScheme = {
-    schemeCode:string;
+export type dimension = {
+  height: number;
+  width: number;
+  depth: number;
+};
+
+export type AddSchemes = {
+  schemeCode:string;
   schemeName: string;
   category: string;
   subCategory: string;
@@ -53,8 +53,10 @@ export type AddScheme = {
   startDate: string;
   endDate: string;
   schemeDescription: string;
-  productInformation: productInformation;
-  faq: faq;
+  productInformation: productInformation[];
+  faq: faq[];
+  companyId:string;
+
 };
 
 export type UpdateScheme = {
@@ -71,8 +73,10 @@ export type UpdateScheme = {
     startDate: string;
     endDate: string;
     schemeDescription: string;
-    productInformation: productInformation;
-    faq: faq;
+    productInformation: productInformation[];
+    faq: faq[];
+    companyId:string;
+
   };
   id: string;
 };

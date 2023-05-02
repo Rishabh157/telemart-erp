@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "src/utils";
 import { useNavigate } from "react-router-dom";
 import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
-import { useDeleteSchemeMutation, useGetAllSchemeQuery, useGetSchemeQuery } from "src/services/SchemeService";
+import { useDeleteSchemeMutation, useGetAllSchemeQuery } from "src/services/SchemeService";
 import { RootState } from "src/redux/store";
 
 
@@ -23,7 +23,7 @@ const SchemeListingWrapper = () => {
     const [currentId, setCurrentId] = useState("");
     const [deleteScheme]=useDeleteSchemeMutation()
     const schemeState:any =useSelector((state:RootState)=>state.scheme)
-    const { page, rowsPerPage ,items} =schemeState ;
+    const { page, rowsPerPage ,items ,searchValue} =schemeState ;
     console.log(items)
 
 
@@ -32,8 +32,8 @@ const SchemeListingWrapper = () => {
     const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetAllSchemeQuery({
         limit: rowsPerPage,
-        searchValue: "",
-        params: [ "schemeName"],
+        searchValue: searchValue,
+        params: [ "schemeName" ,"schemeCode"],
         page: page,
         filterBy: [
             {
@@ -115,7 +115,7 @@ const SchemeListingWrapper = () => {
                       Edit
                     </button>
                     <button
-                      onClick={() => {
+                      onClick={() => {  
                         showConfirmationDialog({
                           title: "Delete Scheme",
                           text: "Do you want to delete",
@@ -145,7 +145,7 @@ const SchemeListingWrapper = () => {
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false));
             dispatch(setItems(data?.data|| []));
-            dispatch(setTotalItems(data?.totalItems || 4));
+            dispatch(setTotalItems(data?.totalItem || 4));
         } else {
             dispatch(setIsTableLoading(true));
         }

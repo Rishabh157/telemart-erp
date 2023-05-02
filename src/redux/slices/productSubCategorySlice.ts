@@ -6,7 +6,6 @@ export interface ProductSubCategorySliceStateType {
   items: ProductSubCategoryListResponse[] | [];
   allItems: ProductSubCategoryListResponse[] | [];
   selectedItem: ProductSubCategoryListResponse | null;
-  allProductSubCategory: ProductSubCategoryListResponse[] | []
   totalItems: number;
   isTableLoading: boolean;
   page: number;
@@ -27,7 +26,6 @@ const initialState: ProductSubCategorySliceStateType = {
   searchValue: "",
   sortValue: { field: "createdAt", value: "DESC" },
   selectedId: "",
-  allProductSubCategory: []
 };
 
 const productSubCategorySlice: any = createSlice({
@@ -81,12 +79,7 @@ const productSubCategorySlice: any = createSlice({
     ) => {
       state.selectedItem = action.payload;
     },
-    setAllProductSubCategory:(
-      state,
-      action: PayloadAction<ProductSubCategoryListResponse[] | [] >
-    ) => {
-      state.allProductSubCategory = action.payload;
-    },
+    
   },
 });
 

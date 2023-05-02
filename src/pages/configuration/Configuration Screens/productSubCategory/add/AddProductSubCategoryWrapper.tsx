@@ -9,12 +9,9 @@ import { RootState } from "src/redux/store";
 import { showToast } from "src/utils";
 import { useNavigate } from "react-router-dom";
 import { useGetAllProductCategoryQuery } from "src/services/ProductCategoryServices";
-<<<<<<< HEAD
-=======
-import { setAllproductCategory } from "src/redux/slices/productCategorySlice";
->>>>>>> d39f18795f3ab70ad5a25b16c8adabe08426c7b4
 import { useGetAllTaxesQuery } from "src/services/TaxesService";
 import { setAllTaxes } from "src/redux/slices/TaxesSlice";
+import { setAllProductCategory } from "src/redux/slices/productCategorySlice";
 
 type Props = {};
 
@@ -93,11 +90,7 @@ const AddProductSubCategoryWrapper = (props: Props) => {
   };
 
   useEffect(() => {
-<<<<<<< HEAD
-    // dispatch(selAllproductCategory(pcData?.data));
-=======
-    dispatch(setAllproductCategory(pcData?.data));
->>>>>>> d39f18795f3ab70ad5a25b16c8adabe08426c7b4
+    dispatch(setAllProductCategory(pcData?.data));
   }, [dispatch, pcData, pcIsLoading, pcIsFetching]);
 
   useEffect(() => {

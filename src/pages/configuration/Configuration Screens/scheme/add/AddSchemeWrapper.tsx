@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Formik  ,Form,FormikProps} from "formik";
 import { array, boolean, number, object, string } from "yup";
 import AddScheme from "./AddScheme";
@@ -8,6 +8,12 @@ import StepAddFAQ from "./FormSteps/StepAddFAQ/StepAddFAQ";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
+import { setAllItems } from "src/redux/slices/productGroupSlice";
+import { useGetAllProductGroupQuery } from "src/services/ProductGroupService";
+import { showToast } from "src/utils";
+import {  useNavigate } from "react-router-dom";
+import { useAddSchemeMutation } from "src/services/SchemeService";
+import  moment  from "moment";
 
 // TYPE-  Form Intial Values
 
@@ -17,7 +23,7 @@ export type FormInitialValues = {
   subCategory: string;
   schemeName: string;
   schemePrice: string;
-  dimensions: {
+  dimension: {
     height: string;
     width: string;
     depth: string;
@@ -30,7 +36,7 @@ export type FormInitialValues = {
   schemeDescription: string;
   productInformation: {
     productGroup: string;
-    quantity: string;
+    productQuantity: number;
     mrp: number;
     pop: number;
   }[];
@@ -50,26 +56,20 @@ const steps = [
       category: string().required("Category is required"),
       subCategory: string().required("Sub category is required"),
       schemeName: string().required("Scheme Name is required"),
-      schemePrice: number()
-        .typeError("Please enter number")
-        .integer("Price must be positive")
-        .positive("Please enter positive digit")
+      schemePrice: string()
         .required("Required!"),
-      dimensions: object().shape({
-        height: number()
-          .typeError("must be number")
+      dimension: object().shape({
+        height: string()
           .required("Height is required"),
-        width: number()
-          .typeError("must be number")
+        width: string()
           .required("Width is required"),
-        depth: number()
-          .typeError("must be number")
+        depth: string()
           .required("Depth is required"),
       }),
-      weight: number()
+      weight: string()
         .min(0, "Weight must be positive")
         .required("Product weight is required"),
-      deliveryCharges: number()
+      deliveryCharges: string()
         .min(0, "Delivery charges must be positive")
         .required("delivery charges is required"),
       comboPacking: boolean().required(),
@@ -86,7 +86,7 @@ const steps = [
       productInformation: array().of(
         object().shape({
           productGroup: string().required("Please select a product"),
-          quantity: number()
+          productQuantity: number()
             .typeError("Quantity must be a number")
             .min(1, "Please enter quantity")
             .required("Quantity is required"),
@@ -138,9 +138,16 @@ const AddSchemeWrapper = () => {
 
   // States
   const [activeStep, setActiveStep] = React.useState(0);
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
+  const [AddSchemes] = useAddSchemeMutation();
+  const [apiStatus, setApiStatus] = useState(false);
+
+ const { userData } = useSelector((state: RootState) => state?.auth);
+
   
-  const {allProdcutSubCategory}:any=useSelector((state:RootState)=>state.productSubCategory)
-  console.log(allProdcutSubCategory)
+  // const {allProdcutSubCategory}:any=useSelector((state:RootState)=>state.productSubCategory)
+  // console.log(allProdcutSubCategory)
   // From Initial Values
   const initialValues: FormInitialValues = {
     schemeCode: "",
@@ -148,7 +155,7 @@ const AddSchemeWrapper = () => {
     subCategory: "",
     schemeName: "",
     schemePrice: "",
-    dimensions: {
+    dimension: {
       height: "",
       width: "",
       depth: "",
@@ -162,7 +169,7 @@ const AddSchemeWrapper = () => {
     productInformation: [
       {
         productGroup: "",
-        quantity: "",
+        productQuantity: 0,
         mrp: 0,
         pop: 0,
       },
@@ -184,14 +191,65 @@ const AddSchemeWrapper = () => {
 
   // On Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    if (activeStep === steps.length - 1) {
-      setTimeout(() => {
-        setActiveStep(0);
-      }, 1000);
-    } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
-  };
+      if (activeStep === steps?.length - 1) {
+        setApiStatus(true);
+        setTimeout(() => {
+          AddSchemes({
+            schemeCode: values.schemeCode,
+            schemeName: values.schemeName,
+            category: values.category,
+            subCategory: values.subCategory,
+            schemePrice: Number(values.schemePrice),
+            dimension: {
+              height: Number(values.dimension.height),
+              width: Number(values.dimension.width),
+              depth: Number(values.dimension.depth),
+            },
+            weight: Number(values.weight),
+            deliveryCharges:Number(values.deliveryCharges),
+            comboPacking: values.comboPacking,
+            startDate: moment(values.startDate).format('YYYY/MM/D'),
+            endDate: moment(values.endDate).format('YYYY/MM/D'),
+            faq: values.faq,
+            schemeDescription:values.schemeDescription,
+            productInformation:values.productInformation,
+            companyId: userData?.companyId || "",
+          }).then((res) => {
+            if ("data" in res) {
+              if (res?.data?.status) {
+                showToast("success", "Scheme added successfully!");
+                navigate("/configurations/Scheme");
+              } else {
+                showToast("error", res?.data?.message);
+              }
+            } else {
+              showToast("error", "Something went wrong");
+            }
+            setApiStatus(false);
+          });
+        }, 1000);
+      } else {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      }
+    };
+  
+
+  const {data,isLoading ,isFetching}=useGetAllProductGroupQuery("")
+  const {allItems:productGroup}:any=useSelector((state:RootState)=>state.productGroup)
+  
+  const productGroupOptions=productGroup?.map((ele:any)=>{
+    return({
+      label:ele?.groupName,
+      value:ele?._id
+    })
+  })
+   
+console.log(productGroupOptions)
+
+  useEffect(()=>{
+    dispatch(setAllItems(data?.data))
+  },[data, dispatch ,isLoading ,isFetching])
+  
 
   return (
     <ConfigurationLayout>
@@ -208,7 +266,10 @@ const AddSchemeWrapper = () => {
               activeStep={activeStep}
               setActiveStep={setActiveStep}
               breadcrumbs={breadcrumbs}
-              pageHeading={pageHeading}/>
+              pageHeading={pageHeading}
+              productGroupOptions={productGroupOptions}
+              apiStatus={apiStatus}
+              />
           </Form>
         )}
       </Formik>

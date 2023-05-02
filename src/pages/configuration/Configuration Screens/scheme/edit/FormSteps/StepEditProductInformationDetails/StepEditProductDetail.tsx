@@ -1,18 +1,19 @@
 import React from "react";
-import { FormikProps, isNaN } from "formik";
+import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../AddSchemeWrapper";
+import { FormInitialValues } from "../../EditSchemeWrapper";
 import { FieldArray } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
-import { DropdownOptions } from "./StepAddProductsWrapper";
+import { DropdownOptions } from "./StepEditProductDetailWrapper";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   dropdownOptions: DropdownOptions;
+  
 };
 
-const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
+const StepEditProductDetail= ({ formikProps, dropdownOptions }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -68,14 +69,10 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                       name={`productInformation[${productIndex}].productQuantity`}
                       value={productQuantity.toString()}
                       onChange={(e) => {
-                      const inputValue=e.target.value
-                      if(!isNaN(Number(inputValue)))
-                      {
                         setFieldValue(
                           `productInformation[${productIndex}].productQuantity`,
                           e.target.value
                         );
-                      }
                       }}
                       label="Product Quantity"
                       placeholder="Product Quantity"
@@ -87,14 +84,10 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                       name={`productInformation[${productIndex}].mrp`}
                       value={mrp.toString()}
                       onChange={(e) => {
-                      const inputValue=e.target.value
-                      if(!isNaN(Number(inputValue)))
-                      {
                         setFieldValue(
                           `productInformation[${productIndex}].mrp`,
                           e.target.value
                         );
-                      }
                       }}
                       label="MRP"
                       placeholder="MRP"
@@ -106,14 +99,10 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                       name={`productInformation[${productIndex}].pop`}
                       value={pop.toString()}
                       onChange={(e) => {
-                        const inputValue=e.target.value
-                        if(!isNaN(Number(inputValue)))
-                        {
                         setFieldValue(
                           `productInformation[${productIndex}].pop`,
                           e.target.value
                         );
-                        }
                       }}
                       label="POP (product offer price)"
                       placeholder="POP (product offer price)"
@@ -147,4 +136,4 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
   );
 };
 
-export default StepAddProducts;
+export default StepEditProductDetail;

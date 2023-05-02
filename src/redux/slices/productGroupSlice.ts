@@ -5,7 +5,6 @@ import { ProductGroupListResponse } from "src/models/ProductGroup.model";
 export interface ProductGroupSliceStateType {
   items: ProductGroupListResponse[] | [];
   allItems: ProductGroupListResponse[] | [];
-
   selectedProductGroup: ProductGroupListResponse | null;
   totalItems: number;
   isTableLoading: boolean;
@@ -67,6 +66,10 @@ const productGroupSlice: any = createSlice({
           ) => {
             state.selectedProductGroup = action.payload;
           },
+        setAllItems:(state, 
+            action: PayloadAction<ProductGroupListResponse[] | []>)=>{
+                state.allItems=action.payload
+            }
 
     }
 })

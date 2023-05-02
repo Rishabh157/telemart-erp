@@ -1,4 +1,4 @@
-import { AddScheme, UpdateScheme } from './../models/scheme.model';
+import { AddSchemes, UpdateScheme } from './../models/scheme.model';
 import { PaginationType } from "src/models/common/paginationType";
 import apiSlice from "./ApiSlice";
 
@@ -28,7 +28,7 @@ export const schemeApi = apiSlice.injectEndpoints({
     //***** ADD *****/
     AddScheme: builder.mutation({
       invalidatesTags: ["scheme"],
-      query: (body: AddScheme) => ({
+      query: (body: AddSchemes) => ({
         url: "/scheme/add",
         method: "POST",
 

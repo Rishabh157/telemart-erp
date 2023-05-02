@@ -5,6 +5,7 @@ import { SchemeListResponse } from "src/models/scheme.model";
 export type InitialStateType = {
     items: SchemeListResponse[] | [],
     totalItems: number,
+    selectedItem:SchemeListResponse | null,
     isTableLoading: boolean,
     page: number;
     rowsPerPage: number;
@@ -17,6 +18,7 @@ const initialState: InitialStateType = {
     items: [],
     totalItems: 0,
     isTableLoading: false,
+    selectedItem:null,
     page: 1,
     rowsPerPage: 10,
     searchValue: "",
@@ -56,7 +58,10 @@ const schemeSlice: any = createSlice({
         },
         setSelectedDealerId: (state, action: PayloadAction<string>) => {
             state.selectedDealerId = action.payload
-        }
+        },
+        setSelectedItem: (state, action: PayloadAction<SchemeListResponse | null>) => {
+            state.selectedItem = action.payload
+        },
 
     }
 })
@@ -69,6 +74,7 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectedDealerId
+    setSelectedDealerId,
+    setSelectedItem
 } = schemeSlice.actions
 export default schemeSlice.reducer

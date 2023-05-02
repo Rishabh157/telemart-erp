@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import { FormikProps } from "formik";
-import { Field, SelectOption } from "src/models/FormField/FormField.model";
+import { Field} from "src/models/FormField/FormField.model";
 import { FormInitialValues } from "../../AddSchemeWrapper";
 import StepAddSchemeDetails from "./StepAddSchemeDetails";
 //import { useGetAllProductSubCategoryQuery, useGetProductCategoryIdSubCategoryQuery } from "src/services/ProductSubCategoryService";
@@ -9,9 +9,8 @@ import { setAllProductCategory } from "src/redux/slices/productCategorySlice";
 //import { useGetAllProductSubCategoryQuery } from "src/services/ProductSubCategoryService";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { useParams } from "react-router-dom";
-import { useGetProductCategoryIdSubCategoryQuery } from "src/services/ProductSubCategoryService";
-import { setAllProductSubCategory } from "src/redux/slices/productSubCategorySlice";
+import { useGetSubCategoryByParentQuery } from "src/services/ProductSubCategoryService";
+import { setAllItems } from "src/redux/slices/productSubCategorySlice";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -27,7 +26,6 @@ const formFields:{
       name: "SchemeCode",
       label: "Scheme code",
       placeholder: "Scheme code",
-      type:  "text",
     },
     {
       name: "Category",
@@ -64,7 +62,7 @@ const formFields:{
 
     },
     {
-      name: "dimension.weight",
+      name: "dimension.width",
       label: "Dimensions",
       placeholder: "W",
 
@@ -72,7 +70,7 @@ const formFields:{
     {
       name: "dimension.depth",
       label: "Dimensions",
-      placeholder: "D",
+      placeholder: "D", 
 
     },
     {
@@ -109,30 +107,22 @@ const formFields:{
       label: "schemeDescription",
       placeholder: "schemeDescription", 
     },
-
-
   ]
 },
 
 ]
-// export type  DropdownOptions = {
-//   categoryOptions: SelectOption[];
-// };
 
 
 
 
 
-const StepAddSchemeDetailsWrapper = ({ formikProps }: Props) => {
+const StepAddSchemeDetailsWrapper = ({ formikProps}: Props) => {
 
-  const params=useParams()
-  const id=params.id
   const dispatch = useDispatch();
   const { allProductCategory }: any = useSelector(
     (state: RootState) => state.productCategory
   );
 
-  // console.log(allProductCategory)
 
   const {
     data: dataPC,
@@ -158,40 +148,34 @@ const StepAddSchemeDetailsWrapper = ({ formikProps }: Props) => {
       value: ele._id,
     };
   });
-
-  //console.log(productCategoryoption)
-
-
   
+
   const {
     data: ProductScData,
     isLoading: ProductScIsLoading,
     isFetching: ProductScIsFetching,
-  } = useGetProductCategoryIdSubCategoryQuery(
+  } =useGetSubCategoryByParentQuery(
     formikProps.values.category,
     {
       skip: !formikProps.values.category,
     })
+    useEffect(() => { 
+      {
+         dispatch(setAllItems(ProductScData?.data));
+       }
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, [ProductScData,ProductScIsLoading,ProductScIsFetching]);
+   
 
-    const {allProductSubCategory}:any=useSelector((state:RootState)=>state.productSubCategory)
-    console.log(allProductSubCategory)
+    const {allItems:productSubCategory}:any=useSelector((state:RootState)=>state.productSubCategory)
     
-    const productSubCategoryOption: any = allProductSubCategory?.map((ele: any) => {
+    const productSubCategoryOption: any = productSubCategory?.map((ele: any) => {
       return {
-        label: ele.categoryName,
+        label: ele.subCategoryName,
         value: ele._id,
       };
     });
-
-    console.log(productSubCategoryOption)
-    useEffect(() => {
-     {
-       // console.log(setAllProductSubCategory(ProductScData?.data))
-        dispatch(setAllProductSubCategory(ProductScData?.data));
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ProductScData,ProductScIsLoading,ProductScIsFetching]);
-  
+   
   const dropdownOptions = {
     productCategoryoption,
     productSubCategoryOption
@@ -201,9 +185,10 @@ const StepAddSchemeDetailsWrapper = ({ formikProps }: Props) => {
   return (
     <>
       <StepAddSchemeDetails formikProps={formikProps} formFields={formFields}
-        dropdownOptions={dropdownOptions}
+      dropdownOptions={dropdownOptions}
    />
     </>
+
   );
 };
 
