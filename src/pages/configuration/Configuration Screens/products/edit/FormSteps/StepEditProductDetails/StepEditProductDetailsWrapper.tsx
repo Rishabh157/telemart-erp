@@ -6,7 +6,7 @@ import { FormInitialValues } from "../../EditProductWrapper";
 import StepEditProductDetails from "./StepEditProductDetails";
 import { useGetAllProductCategoryQuery } from "src/services/ProductCategoryServices";
 import { useDispatch, useSelector } from "react-redux";
-import { setAllproductCategory } from "src/redux/slices/productCategorySlice";
+import { setAllProductCategory } from "src/redux/slices/productCategorySlice";
 import { RootState } from "src/redux/store";
 import { useGetSubCategoryByParentQuery } from "src/services/ProductSubCategoryService";
 import { setAllItems } from "src/redux/slices/productSubCategorySlice";
@@ -52,7 +52,7 @@ const StepEditProductDetailsWrapper = ({ formikProps }: Props) => {
   } = useGetAllProductGroupQuery("");
 
   useEffect(() => {
-    dispatch(setAllproductCategory(pcData?.data));
+    dispatch(setAllProductCategory(pcData?.data));
   }, [pcData, pcIsLoading, pcIsFetching]);
 
   useEffect(() => {

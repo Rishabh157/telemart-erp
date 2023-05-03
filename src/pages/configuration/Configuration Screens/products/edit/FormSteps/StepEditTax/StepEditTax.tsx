@@ -26,7 +26,7 @@ const StepEditTax = ({ formikProps }: Props) => {
                 >
                   <div className="grid grid-cols-4 gap-4 gap-y-5">
                     {/* Tax Name */}
-                    <div className="">
+                    <div className="relative mt-4">
                       <label className="text-slate-700 font-medium">
                         {" "}
                         Tax Name{" "}
@@ -41,10 +41,13 @@ const StepEditTax = ({ formikProps }: Props) => {
                       name={`taxes[${taxIndex}].tax_rate`}
                       value={tax_rate.toString()}
                       onChange={(e) => {
-                        setFieldValue(
-                          `taxes[${taxIndex}].tax_rate`,
-                          e.target.value
-                        );
+                        const newValue = e.target.value;
+                        if (!isNaN(Number(newValue))) {
+                          setFieldValue(
+                            `taxes[${taxIndex}].tax_rate`,
+                            e.target.value
+                          );
+                        }
                       }}
                       label="Tax %"
                       placeholder="Tax %"

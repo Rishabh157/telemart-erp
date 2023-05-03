@@ -26,12 +26,14 @@ const StepAddTax = ({ formikProps }: Props) => {
                 >
                   <div className="grid grid-cols-4 gap-4 gap-y-5">
                     {/* Tax Name */}
-                    <div className="">
+                    <div className="relative mt-4">
                       <label className="text-slate-700 font-medium">
                         {" "}
                         Tax Name{" "}
                       </label>
-                      <div className="mt-2 bg-white border border-slate-400 rounded shadow h-[40px] flex items-center px-2 ">{taxDetail.tax_name}</div>
+                      <div className="mt-2 bg-white border border-slate-400 rounded shadow h-[40px] flex items-center px-2 ">
+                        {taxDetail.tax_name}
+                      </div>
                     </div>
 
                     {/* Tax Rate */}

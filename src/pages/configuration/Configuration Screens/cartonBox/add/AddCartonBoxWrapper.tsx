@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from"react";
 import { Formik } from "formik";
 import { number, object, string } from "yup";
 import AddCartonBox from "./AddCartonBox";
@@ -25,6 +25,7 @@ export type FormInitialValues = {
 const AddCartonBoxWrapper = (props: Props) => {
   const navigate = useNavigate();
   const [addCartonBox] = useAddCartonBoxMutation();
+  const [apiStatus, setApiStatus] = useState<boolean>(false);
   const { userData } = useSelector((state: RootState) => state?.auth);
 
   // Form Initial Values
@@ -53,6 +54,7 @@ const AddCartonBoxWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
+    setApiStatus(true);
     addCartonBox({
       boxName: values.boxName,
       innerItemCount: values.innerItemsCount,
@@ -70,6 +72,7 @@ const AddCartonBoxWrapper = (props: Props) => {
       } else {
         showToast("error", "Something went wrong");
       }
+      setApiStatus(false);
     });
   };
   return (
@@ -80,7 +83,7 @@ const AddCartonBoxWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <AddCartonBox formikProps={formikProps} />;
+          return <AddCartonBox formikProps={formikProps}  apiStatus={apiStatus} />;
         }}
       </Formik>
     </ConfigurationLayout>

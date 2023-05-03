@@ -36,6 +36,18 @@ export const productSubCategoryApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    //selection by productCategoryId
+    getProductCategoryIdSubCategory: builder.query({
+      providesTags: ["ProductSubCategory"],
+      query: (id) => ({
+        url: `product-sub-category/get-by-parent-category/${id}`,
+
+        method: "GET",
+      }),
+    }),
+
+
+
     //***** ADD *****/
     addProductSubCategory: builder.mutation({
       invalidatesTags: ["ProductSubCategory"],

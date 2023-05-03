@@ -62,6 +62,7 @@ const EditProductCategoryWrapper = (props: Props) => {
         if ("data" in res) {
           if (res?.data?.status) {
             showToast("success", "Product-category updated successfully!");
+            navigate("/configurations/product-category");
           } else {
             showToast("error", res?.data?.message);
           }
@@ -70,7 +71,6 @@ const EditProductCategoryWrapper = (props: Props) => {
         }
         setApiStatus(false);
       });
-      navigate("/configurations/product-category");
     }, 1000);
   };
 

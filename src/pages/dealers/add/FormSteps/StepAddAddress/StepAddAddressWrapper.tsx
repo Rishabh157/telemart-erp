@@ -220,27 +220,27 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
   //registration
   useEffect(() => {
     dispatch(setAllStates(stateData?.data));
-  }, [stateData, stateIsLoading, stateIsFetching]);
+  }, [stateData, stateIsLoading, stateIsFetching,dispatch]);
   //billing
   useEffect(() => {
     setBillingStateData(StateDataB?.data);
-  }, [StateDataB, stateIsLoadingB, stateIsFetchingB]);
+  }, [StateDataB, stateIsLoadingB, stateIsFetchingB,dispatch]);
   //registration
   useEffect(() => {
     dispatch(setAllDistrict(districtData?.data));
-  }, [districtData, districtIsLoading, districtIsFetching]);
+  }, [districtData, districtIsLoading, districtIsFetching,dispatch]);
   //billing
   useEffect(() => {
     setBillingDistrictData(districtDataB?.data);
-  }, [districtDataB, districtIsLoadingB, districtIsFetchingB]);
+  }, [districtDataB, districtIsLoadingB, districtIsFetchingB,dispatch]);
   //registration
   useEffect(() => {
     dispatch(setAllPincodes(pincodeData?.data));
-  }, [pincodeData, pincodeIsLoading, pincodeIsFetching]);
+  }, [pincodeData, pincodeIsLoading, pincodeIsFetching,dispatch]);
   //billing
   useEffect(() => {
     setBillingPincodeData(pincodeDataB?.data);
-  }, [pincodeDataB, pincodeIsLoadingB, pincodeIsFetchingB]);
+  }, [pincodeDataB, pincodeIsLoadingB, pincodeIsFetchingB,dispatch]);
 
   const counrtyOptions = allCountry?.map((ele: any) => {
     return { label: ele?.countryName, value: ele?._id };

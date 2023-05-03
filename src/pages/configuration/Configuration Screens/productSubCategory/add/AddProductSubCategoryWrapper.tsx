@@ -9,9 +9,9 @@ import { RootState } from "src/redux/store";
 import { showToast } from "src/utils";
 import { useNavigate } from "react-router-dom";
 import { useGetAllProductCategoryQuery } from "src/services/ProductCategoryServices";
-import { setAllproductCategory } from "src/redux/slices/productCategorySlice";
 import { useGetAllTaxesQuery } from "src/services/TaxesService";
 import { setAllTaxes } from "src/redux/slices/TaxesSlice";
+import { setAllProductCategory } from "src/redux/slices/productCategorySlice";
 
 type Props = {};
 
@@ -90,7 +90,7 @@ const AddProductSubCategoryWrapper = (props: Props) => {
   };
 
   useEffect(() => {
-    dispatch(setAllproductCategory(pcData?.data));
+    dispatch(setAllProductCategory(pcData?.data));
   }, [dispatch, pcData, pcIsLoading, pcIsFetching]);
 
   useEffect(() => {

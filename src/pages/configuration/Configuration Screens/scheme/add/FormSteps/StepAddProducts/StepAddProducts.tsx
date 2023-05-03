@@ -1,5 +1,5 @@
 import React from "react";
-import { FormikProps } from "formik";
+import { FormikProps, isNaN } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "../../AddSchemeWrapper";
 import { FieldArray } from "formik";
@@ -16,18 +16,18 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
-    <div className=" ">
-      <FieldArray name="products">
+    <div className="">
+      <FieldArray name="productInformation">
         {({ push, remove }) => (
           <div className="">
-            {values.products?.map((product, productIndex) => {
-              const { productGroup, quantity, mrp, offer_price } = product;
+            {values.productInformation?.map((product, productIndex) => {
+              const { productGroup, productQuantity, mrp, pop } = product;
 
               return (
                 <div
                   key={productIndex}
                   className={`flex flex-col gap-3 py-6 px-7 ${
-                    productIndex !== values.products.length - 1 && "border-b"
+                    productIndex !== values.productInformation.length - 1 && "border-b"
                   }  border-slate-300 `}
                 >
                   <div className="flex justify-between items-center">
@@ -35,7 +35,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                       Product Information #{productIndex + 1}
                     </div>
                     {/* Delete Button */}
-                    {values.products?.length > 1 && (
+                    {values.productInformation?.length > 1 && (
                       <button
                         type="button"
                         onClick={() => remove(productIndex)}
@@ -50,11 +50,11 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                     {/* Product Group */}
                     <div className="col-span-2">
                       <ATMSelect
-                        name={`products[${productIndex}].productGroup`}
+                        name={`productInformation[${productIndex}].productGroup`}
                         value={productGroup}
                         onChange={(e) => {
                           setFieldValue(
-                            `products[${productIndex}].productGroup`,
+                            `productInformation[${productIndex}].productGroup`,
                             e.target.value
                           );
                         }}
@@ -65,13 +65,17 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
 
                     {/* Product Quantity */}
                     <ATMTextField
-                      name={`products[${productIndex}].quantity`}
-                      value={quantity.toString()}
+                      name={`productInformation[${productIndex}].productQuantity`}
+                      value={productQuantity.toString()}
                       onChange={(e) => {
+                      const inputValue=e.target.value
+                      if(!isNaN(Number(inputValue)))
+                      {
                         setFieldValue(
-                          `products[${productIndex}].quantity`,
+                          `productInformation[${productIndex}].productQuantity`,
                           e.target.value
                         );
+                      }
                       }}
                       label="Product Quantity"
                       placeholder="Product Quantity"
@@ -80,13 +84,17 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
 
                     {/* MRP */}
                     <ATMTextField
-                      name={`products[${productIndex}].mrp`}
+                      name={`productInformation[${productIndex}].mrp`}
                       value={mrp.toString()}
                       onChange={(e) => {
+                      const inputValue=e.target.value
+                      if(!isNaN(Number(inputValue)))
+                      {
                         setFieldValue(
-                          `products[${productIndex}].mrp`,
+                          `productInformation[${productIndex}].mrp`,
                           e.target.value
                         );
+                      }
                       }}
                       label="MRP"
                       placeholder="MRP"
@@ -95,13 +103,17 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
 
                     {/* POP  */}
                     <ATMTextField
-                      name={`products[${productIndex}].offer_price`}
-                      value={offer_price.toString()}
+                      name={`productInformation[${productIndex}].pop`}
+                      value={pop.toString()}
                       onChange={(e) => {
+                        const inputValue=e.target.value
+                        if(!isNaN(Number(inputValue)))
+                        {
                         setFieldValue(
-                          `products[${productIndex}].offer_price`,
+                          `productInformation[${productIndex}].pop`,
                           e.target.value
                         );
+                        }
                       }}
                       label="POP (product offer price)"
                       placeholder="POP (product offer price)"
@@ -118,9 +130,9 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                 onClick={() =>
                   push({
                     productGroup: "",
-                    quantity: "",
+                    productQuantity: "",
                     mrp: 0,
-                    offer_price: 0,
+                    pop: 0,
                   })
                 }
                 className="bg-primary-main px-3 py-1 text-white rounded"

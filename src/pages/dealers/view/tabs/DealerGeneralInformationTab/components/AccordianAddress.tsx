@@ -1,7 +1,7 @@
 import React from "react";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 
-type Props = {};
+// type Props = {};
 
 const AccordianAddress = (data:any) => {
   return (

@@ -70,7 +70,7 @@ const steps = [
       firstName: string().required("first name is required"),
       lastName: string().required("LastName is required"),
       dealerCategory: string().required("please choose dealer category"),
-      email: string().required("email is required"),
+      email: string().email().required("email is required"),
     }),
   },
   {
@@ -78,7 +78,10 @@ const steps = [
     component: StepAddAddressWrapper,
     validationSchema: object({
       registrationAddress: object().shape({
-        phone: string().required("Phone number is required"),
+        phone: string()
+          .min(10, "Number should be !0 digits")
+          .max(10, "maximum 10 digit")
+          .required("Phone number is required"),
         address: string().required("Address is required"),
         country: string().required("Please choose a country"),
         state: string().required("Please choose a state"),
@@ -86,7 +89,10 @@ const steps = [
         pincode: string().required("Please choose a pincode"),
       }),
       billingAddress: object().shape({
-        phone: string().required("Phone number is required"),
+        phone: string()
+          .min(10, "Number should be !0 digits")
+          .max(10, "maximum 10 digit")
+          .required("Phone number is required"),
         address: string().required("Address is required"),
         country: string().required("Please choose a country"),
         state: string().required("Please choose a state"),
@@ -104,9 +110,15 @@ const steps = [
           name: string().required("Name is required"),
           department: string().required("Department is required"),
           designation: string().required("Designation is required"),
-          email: string().required("Email is required"),
-          mobileNumber: string().required("Mobile number is required"),
-          landLine: string().required("Landline is required"),
+          email: string().email().required("Email is required"),
+          mobileNumber: string()
+            .min(10, "Number should be !0 digits")
+            .max(10, "maximum 10 digit")
+            .required("Mobile number is required"),
+          landLine: string()
+            .min(10, "Number should be !0 digits")
+            .max(10, "maximum 10 digit")
+            .required("Landline is required"),
         })
       ),
     }),

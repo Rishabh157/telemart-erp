@@ -9,13 +9,17 @@ import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 import ProductsListing from "./ProductsListing";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "src/redux/store";
-import { useGetProductQuery } from "src/services/ProductService";
+import {
+  useDeleteProductMutation,
+  useGetProductQuery,
+} from "src/services/ProductService";
 import {
   setIsTableLoading,
   setItems,
   setTotalItems,
 } from "src/redux/slices/productSlice";
 import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
+import { showToast } from "src/utils";
 
 const ProductsListingWrapper = () => {
   const productState: any = useSelector((state: RootState) => state.products);
@@ -24,6 +28,7 @@ const ProductsListingWrapper = () => {
   const [currentId, setCurrentId] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const [deleteProduct] = useDeleteProductMutation();
 
   const columns: columnTypes[] = [
     {
@@ -107,7 +112,7 @@ const ProductsListingWrapper = () => {
               <button
                 onClick={() => {
                   showConfirmationDialog({
-                    title: "Delete product sub category",
+                    title: "Delete product",
                     text: "Do you want to delete",
                     showCancelButton: true,
                     next: (res) => {
@@ -157,7 +162,20 @@ const ProductsListingWrapper = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data]);
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    setShowDropdown(false);
+    deleteProduct(currentId).then((res) => {
+      if ("data" in res) {
+        if (res?.data?.status) {
+          showToast("success", "Product deleted successfully!");
+        } else {
+          showToast("error", res?.data?.message);
+        }
+      } else {
+        showToast("error", "Something went wrong, Please try again later");
+      }
+    });
+  };
   return (
     <>
       <ConfigurationLayout>

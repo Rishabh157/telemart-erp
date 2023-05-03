@@ -79,6 +79,7 @@ const productSubCategorySlice: any = createSlice({
     ) => {
       state.selectedItem = action.payload;
     },
+    
   },
 });
 

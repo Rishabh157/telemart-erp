@@ -125,12 +125,15 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                               value={quantity}
                               label="Quantity"
                               placeholder="Quantity"
-                              onChange={(e) =>
+                              onChange={(e) =>{
+                                const inputValue=e.target.value;
+                                if(!isNaN(Number(inputValue))){
                                 setFieldValue(
                                   `asrDetails[${asrIndex}].quantity`,
                                   e.target.value
                                 )
-                              }
+                                }
+                              }}
                             />
                             {/* </div> */}
                           </div>

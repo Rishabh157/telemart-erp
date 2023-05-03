@@ -9,6 +9,7 @@ import { FormInitialValues } from "./EditCartonBoxWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
+  apiStatus:boolean
 };
 
 // Breadcrumbs
@@ -22,7 +23,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const EditCartonBox = ({ formikProps }: Props) => {
+const EditCartonBox = ({ formikProps , apiStatus}: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -48,14 +49,14 @@ const EditCartonBox = ({ formikProps }: Props) => {
               <button
                 type="button"
                 onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
-              >
+                disabled={apiStatus}
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true?"disabled:opacity-25":""}`}              >
                 Update
               </button>
             </div>
           </div>
 
-          {/* Form */}
+          {/* Form */}  
           <div className="grow py-8 px-3 ">
             <div className="grid grid-cols-3 gap-4">
               {/* boxName */}

@@ -18,14 +18,14 @@ const StepAddFAQ = ({ formikProps }: Props) => {
       <FieldArray name="FAQs">
         {({ push, remove }) => (
           <div className="">
-            {values.FAQs?.map((FAQ, FAQIndex) => {
-              const { question, answer } = FAQ;
+            {values.faq?.map((faq, FAQIndex) => {
+              const { question, answer } = faq;
 
               return (
                 <div
                   key={FAQIndex}
                   className={`flex flex-col gap-3 py-6 px-7 ${
-                    FAQIndex !== values.FAQs.length - 1 && "border-b"
+                    FAQIndex !== values.faq.length - 1 && "border-b"
                   }  border-slate-300 `}
                 >
                   <div className="flex justify-between items-center">
@@ -33,7 +33,7 @@ const StepAddFAQ = ({ formikProps }: Props) => {
                       FAQ's #{FAQIndex + 1}
                     </div>
                     {/* Delete Button */}
-                    {values.FAQs?.length > 1 && (
+                    {values.faq?.length > 1 && (
                       <button
                         type="button"
                         onClick={() => remove(FAQIndex)}
@@ -47,11 +47,11 @@ const StepAddFAQ = ({ formikProps }: Props) => {
                   <div className="grid grid-cols-1 gap-4 gap-y-5">
                     {/* Question */}
                     <ATMTextField
-                      name={`FAQs[${FAQIndex}].question`}
+                      name={`faq[${FAQIndex}].question`}
                       value={question}
                       onChange={(e) => {
                         setFieldValue(
-                          `FAQs[${FAQIndex}].question`,
+                          `faq[${FAQIndex}].question`,
                           e.target.value
                         );
                       }}
@@ -62,10 +62,10 @@ const StepAddFAQ = ({ formikProps }: Props) => {
 
                     {/* Answer */}
                     <ATMTextArea
-                      name={`FAQs[${FAQIndex}].answer`}
+                      name={`faq[${FAQIndex}].answer`}
                       value={answer}
                       onChange={(newValue) => {
-                        setFieldValue(`FAQs[${FAQIndex}].answer`, newValue);
+                        setFieldValue(`faq[${FAQIndex}].answer`, newValue);
                       }}
                       label="Answer"
                       placeholder="Answer"

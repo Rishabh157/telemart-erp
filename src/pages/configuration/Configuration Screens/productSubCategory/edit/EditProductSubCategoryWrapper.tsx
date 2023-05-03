@@ -8,7 +8,6 @@ import { RootState } from "src/redux/store";
 import { showToast } from "src/utils";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetAllProductCategoryQuery } from "src/services/ProductCategoryServices";
-import { setAllproductCategory } from "src/redux/slices/productCategorySlice";
 import { useGetAllTaxesQuery } from "src/services/TaxesService";
 import { setAllTaxes } from "src/redux/slices/TaxesSlice";
 import {
@@ -113,7 +112,7 @@ const EditProductSubCategoryWrapper = (props: Props) => {
   }, [dispatch, psData, psIsFetching, psIsLoading]);
 
   useEffect(() => {
-    dispatch(setAllproductCategory(pcData?.data));
+    // dispatch(selAllproductCategory(pcData?.data));
   }, [dispatch, pcData, pcIsLoading, pcIsFetching]);
 
   useEffect(() => {

@@ -21,7 +21,7 @@ const AddStateWrapper = ({ onClose }: Props) => {
   const { selectedLocationCountries }: any = useSelector(
     (state: RootState) => state?.country
   );
-  console.log(selectedLocationCountries, "heello");
+
   const [apiStatus, setApiStatus] = useState(false);
   const initialValues: FormInitialValues = {
     stateName: "",
