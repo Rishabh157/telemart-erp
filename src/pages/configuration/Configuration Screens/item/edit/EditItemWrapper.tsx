@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
 import EditItem from "./EditItem";
@@ -31,6 +31,7 @@ const EditItemWrapper = (props: Props) => {
   const [EditItems] = useUpdateItemsMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
   const { selectedItem }: any = useSelector((state: RootState) => state?.item);
+  const [apiStatus, setApiStatus] = useState(false);
 
   const { data, isLoading, isFetching } = useGetItemsByIdQuery(Id);
   // Form Initial Values
@@ -46,11 +47,12 @@ const EditItemWrapper = (props: Props) => {
     itemCode: string().required("Item Code is required"),
     itemName: string().required("Item Name is required"),
     itemWeight: string().required("Item Weight is required"),
-    itemImage: string().required("Item image is required"),
+    itemImage: string().url().required("Item image is required"),
   });
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
+    setApiStatus(true);
     EditItems({
       body: {
         itemCode: values.itemCode,
@@ -71,6 +73,7 @@ const EditItemWrapper = (props: Props) => {
       } else {
         showToast("error", "Something went wrong");
       }
+      setApiStatus(false);
     });
   };
 
@@ -87,7 +90,7 @@ const EditItemWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <EditItem formikProps={formikProps} />;
+          return <EditItem formikProps={formikProps} apiStatus={apiStatus} />;
         }}
       </Formik>
     </ConfigurationLayout>

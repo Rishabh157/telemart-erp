@@ -60,7 +60,7 @@ const ProductCategoryListing = ({ columns, rows }: Props) => {
         </button>
       </div>
 
-      <div className="border flex flex-col  rounded bg-white">
+      <div className="border flex flex-col h-full rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
           searchValue={searchValue}
