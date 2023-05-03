@@ -4,7 +4,7 @@ import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { ASRListResponse } from "src/models/ASR.model";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 import ASRListing from "./ASRListing";
-import { useDeleteAsrMutation, useGetAsrQuery } from "src/services/AsrService";
+import { useDeleteAsrMutation, useGetAsrQuery, useUpdateAsrStatusMutation } from "src/services/AsrService";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "src/redux/store";
 import {
@@ -21,6 +21,7 @@ const ASRListingWrapper = () => {
   const navigate = useNavigate();
   const AsrState: any = useSelector((state: RootState) => state.asr);
   const [deleteAsr] = useDeleteAsrMutation();
+  const [updateAsrStatus] = useUpdateAsrStatusMutation();
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentId, setCurrentId] = useState("");
   const columns: columnTypes[] = [
@@ -92,6 +93,35 @@ const ASRListingWrapper = () => {
                 return null;
               }
             })}
+          </Stack>{" "}
+        </span>
+      ),
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      flex: "flex-[1_1_0%]",
+      renderCell: (row: ASRListResponse) => (
+        <span>
+          {" "}
+          <Stack direction="row" spacing={1}>
+            {row?.completed === true ? (
+              <Chip
+                label=""
+                color="success"
+                variant="filled"
+                size="small"
+              />
+            ) : (
+              <button onClick={() => handleComplete(row?._id)}>
+                <Chip
+                  label=""
+                  color="error"
+                  variant="filled"
+                  size="small"
+                />
+              </button>
+            )}
           </Stack>{" "}
         </span>
       ),
@@ -178,6 +208,21 @@ const ASRListingWrapper = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data]);
+
+  const handleComplete = (id: string) =>{
+    updateAsrStatus(id).then((res) => {
+      if ("data" in res) {
+        if (res?.data?.status) {
+          showToast("success", "Status Updated successfully!");
+        } else {
+          showToast("error", res?.data?.message);
+        }
+      } else {
+        showToast("error", "Something went wrong, Please try again later");
+      }
+    });
+    
+  };
 
   const handleDelete = () => {
     setShowDropdown(false);

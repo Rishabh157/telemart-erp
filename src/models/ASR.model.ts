@@ -1,6 +1,7 @@
 export type ASRListResponse = {
   asrDetails: AsrDetailsType[];
   companyId: string;
+  completed: boolean;
   isActive: boolean;
   isDeleted: boolean;
   createdAt: string;
@@ -25,3 +26,5 @@ export type UpdateASR = {
   };
   id: string;
 };
+
+
