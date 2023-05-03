@@ -21,12 +21,12 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
   const { selectedLocationCountries }: any = useSelector(
     (state: RootState) => state?.country
   );
-  console.log(selectedLocationCountries);
+  // console.log(selectedLocationCountries);
 
   const { selectedLocationState }: any = useSelector(
     (state: RootState) => state?.states
   );
-  console.log(selectedLocationState);
+  //console.log(selectedLocationState);
   const [apiStatus, setApiStatus] = useState(false);
 
   const initialValues: FormInitialValues = {

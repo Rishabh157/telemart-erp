@@ -177,7 +177,7 @@ const EditVendorWrapper = () => {
   useEffect(() => {
     dispatch(setSelectedItem(data?.data));
   }, [dispatch, data, isLoading, isFetching]);
-  console.log("****************************");
+ 
 
   // From Initial Values
   const initialValues: FormInitialValues = {

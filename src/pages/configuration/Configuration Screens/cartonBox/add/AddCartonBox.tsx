@@ -9,6 +9,7 @@ import { FormInitialValues } from "./AddCartonBoxWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
+  apiStatus: boolean;
 };
 
 // Breadcrumbs
@@ -22,7 +23,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddCartonBox = ({ formikProps }: Props) => {
+const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -48,7 +49,10 @@ const AddCartonBox = ({ formikProps }: Props) => {
               <button
                 type="button"
                 onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                disabled={apiStatus}
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  true ? "disabled:opacity-25" : ""
+                }`}
               >
                 Add Box
               </button>
@@ -64,7 +68,9 @@ const AddCartonBox = ({ formikProps }: Props) => {
                 value={values.boxName}
                 label="Box Name"
                 placeholder="Box Name"
-                onChange={(e) => setFieldValue("boxName", e.target.value)}
+                onChange={(e) =>
+                  
+                   setFieldValue("boxName", e.target.value)}
               />
 
               {/* Inner Items Count */}

@@ -14,7 +14,7 @@ type Props = {
 const StepEditDocuments = ({ formikProps, formFields }: Props) => {
   const { values, setFieldValue }: { values: any; setFieldValue: any } =
     formikProps;
-  console.log(values);
+
   return (
     <div className="">
       {formFields?.map((formField, index) => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState} from "react";
 import { Formik } from "formik";
 import { number, object, string } from "yup";
 import EditCartonBox from "./EditCartonBox";
@@ -34,6 +34,7 @@ const EditCartonBoxWrapper = (props: Props) => {
   const [EditSelectedCartonBox] = useUpdateCartonBoxMutation();
   const { data, isLoading, isFetching } = useGetCartonBoxByIdQuery(Id);
   const { userData } = useSelector((state: RootState) => state?.auth);
+  const [apiStatus, setApiStatus] = useState<boolean>(false);
   const { selectedItem }: any = useSelector(
     (state: RootState) => state?.cartonBox
   );
@@ -64,6 +65,7 @@ const EditCartonBoxWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
+    setApiStatus(true);
     EditSelectedCartonBox({
       body: {
         boxName: values.boxName,
@@ -77,6 +79,7 @@ const EditCartonBoxWrapper = (props: Props) => {
       if ("data" in res) {
         if (res?.data?.status) {
           showToast("success", "Updated successfully!");
+        
           navigate("/configurations/carton-box");
         } else {
           showToast("error", res?.data?.message);
@@ -84,6 +87,7 @@ const EditCartonBoxWrapper = (props: Props) => {
       } else {
         showToast("error", "Something went wrong");
       }
+      setApiStatus(false);
     });
   };
 
@@ -97,9 +101,10 @@ const EditCartonBoxWrapper = (props: Props) => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
+
       >
         {(formikProps) => {
-          return <EditCartonBox formikProps={formikProps} />;
+          return <EditCartonBox formikProps={formikProps}  apiStatus={apiStatus}/>;
         }}
       </Formik>
     </ConfigurationLayout>

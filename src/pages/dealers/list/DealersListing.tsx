@@ -8,6 +8,8 @@ import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import { setRowsPerPage, setPage } from "src/redux/slices/dealerSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
+import { setSearchValue } from "src/redux/slices/dealerSlice";
+import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
@@ -22,12 +24,23 @@ const DealersListing = ({ columns, rows }: Props) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const { page, rowsPerPage} = dealerState;
-
+  const { page, rowsPerPage,searchValue,totalItems} = dealerState;
+  const breadcrumbs: BreadcrumbType[] = [
+    {
+      label: "Configuration",
+      path: "/dashboard",
+    },
+    {
+      label: "dealer",
+    },
+  ];
 
   return (
-    <div className="px-4 h-[calc(100vh-55px)]">
+    <div className="px-4 h-[calc(100vh-55px)] pt-3">
       {/* Page Header */}
+      <div className="h-[30px]">
+        <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Dealers </ATMPageHeading>
         <button
@@ -44,16 +57,20 @@ const DealersListing = ({ columns, rows }: Props) => {
         {/*Table Header */}
         <ATMTableHeader
           page={page}
-          rowCount={rows.length}
+          searchValue={searchValue}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
           onFilterClick={() => setIsFilterOpen(true)}
+          onSearch={(newValue)=>{
+            dispatch(setSearchValue(newValue))
+          }}
         />
 
         {/* Table */}
-        <div className="grow overflow-auto  ">
+        <div className={`grow overflow-auto `}>
           <ATMTable
             columns={columns}
             rows={rows}
@@ -65,11 +82,12 @@ const DealersListing = ({ columns, rows }: Props) => {
         </div>
 
         {/* Pagination */}
-        <div className=" border-t border-slate-300">
+        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
+            onRowsPerPageChange={(newValue) => alert(newValue)}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
           />

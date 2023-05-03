@@ -68,7 +68,8 @@ const SchemeListingWrapper = () => {
             headerName: "Category",
             flex: "flex-[1.5_1.5_0%]",
             renderCell: (row: SchemeListResponse) => {
-                return <span > {row.category} </span>;
+                return <span > {row.productCategoryLabel
+                } </span>;
             },
         },
     
@@ -77,7 +78,7 @@ const SchemeListingWrapper = () => {
             headerName: "Sub Category",
             flex: "flex-[1.5_1.5_0%]",
             renderCell: (row: SchemeListResponse) => {
-                return <span > {row.subCategory} </span>;
+                return <span > {row.ProductSubCategoryLabel} </span>;
             },
         },
         {

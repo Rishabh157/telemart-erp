@@ -230,7 +230,6 @@ const AddVendorWrapper = () => {
     if (activeStep === steps.length - 1) {
       setApiStatus(true);
       setTimeout(() => {
-        console.log(values);
         addVendor({
           companyName: values.company_name,
           vendorCode: values.vendor_code,
