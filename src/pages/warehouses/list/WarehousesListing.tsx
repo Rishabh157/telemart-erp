@@ -29,8 +29,7 @@ const WarehouseListing = ({ columns, rows }: Props) => {
 
   const { page, rowsPerPage, totalItems, searchValue } = warehouseState;
 
-  const params: any = useParams();
-  const {vendorId} = params;
+  const params: any = useParams(); 
   
   return (
     <div className="h-full">

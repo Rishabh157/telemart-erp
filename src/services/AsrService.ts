@@ -70,6 +70,17 @@ export const asrApi = apiSlice.injectEndpoints({
       }),
     }),
 
+     //**** Status 
+     updateAsrStatus: builder.mutation({
+      invalidatesTags: ["Asr"],
+      query: (id) => ({
+        url: `/asr/completed/${id}`,
+
+        method: "PUT",        
+      }),
+    }),
+
+
     // **** Delete
     deleteAsr: builder.mutation({
       invalidatesTags: ["Asr", "asrGroup"],
@@ -85,6 +96,7 @@ export const {
   useGetAsrQuery,
   useAddAsrMutation,
   useUpdateAsrMutation,
+  useUpdateAsrStatusMutation,
   useGetAsrByIdQuery,
   useExportAsrDataMutation,
   useDeleteAsrMutation,
