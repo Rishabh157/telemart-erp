@@ -65,6 +65,8 @@ export const vendorApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    
   }),
 });
 export const {

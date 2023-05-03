@@ -11,7 +11,7 @@ type Props = {
   setActiveStep: React.Dispatch<React.SetStateAction<number>>;
   steps: any[];
   apiStatus: boolean;
-  allCountry: any;
+  allCountry: any;  
 };
 
 const AddWarehouse = ({
@@ -21,7 +21,8 @@ const AddWarehouse = ({
   steps,
   apiStatus,
   allCountry,
-}: Props) => {
+}: Props) => {  
+
   // Handle Previous
   const handlePrevious = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -38,7 +39,7 @@ const AddWarehouse = ({
     {
       label: "Add Warehouse",
     },
-  ];
+  ]; 
 
   return (
     <div className="">
