@@ -13,6 +13,8 @@ export type SchemeListResponse = {
   endDate: string;
   schemeDescription: string;
   productInformation: productInformation[];
+  productCategoryLabel:string;
+  ProductSubCategoryLabel:String;
   faq: faq[];
   is_active: boolean;
   is_deleted: boolean;
