@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -29,13 +29,16 @@ const WarehouseListing = ({ columns, rows }: Props) => {
 
   const { page, rowsPerPage, totalItems, searchValue } = warehouseState;
 
+  const params: any = useParams();
+  const {vendorId} = params;
+  
   return (
     <div className="h-full">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Warehouse </ATMPageHeading>
         <button
-          onClick={() => navigate("/warehouse/add-warehouse")}
+          onClick={() => navigate("/warehouse/add-warehouse", {state:{params}})}
           className="bg-primary-main text-white rounded py-1 px-3"
         >
           {" "}

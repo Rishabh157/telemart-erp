@@ -75,6 +75,8 @@ export type AddWarehouse = {
     landLine: string;
   }[];
   companyId: string;
+  dealerId: string;
+  vendorId: string;
 };
 
 export type UpdateWarehouse = {

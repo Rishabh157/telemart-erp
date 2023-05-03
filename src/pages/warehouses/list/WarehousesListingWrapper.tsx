@@ -28,6 +28,7 @@ const DealersListingWrapper = () => {
   const wareHouseState: any = useSelector(
     (state: RootState) => state.warehouse
   );
+
   const columns: columnTypes[] = [
     {
       field: "warehouseCode",
@@ -128,6 +129,7 @@ const DealersListingWrapper = () => {
       align: "end",
     },
   ];
+
   const { page, rowsPerPage, searchValue, items } = wareHouseState;
 
   const dispatch = useDispatch<AppDispatch>();
@@ -160,6 +162,7 @@ const DealersListingWrapper = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data]);
+
   const handleDelete = () => {
     setShowDropdown(false);
     deleteWareHouse(currentId).then((res) => {
@@ -174,6 +177,7 @@ const DealersListingWrapper = () => {
       }
     });
   };
+  
   return (
     <>
       <SideNavLayout>

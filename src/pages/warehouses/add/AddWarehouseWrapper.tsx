@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetAllCountryQuery } from "src/services/CountryService";
 import { setAllCountry } from "src/redux/slices/countrySlice";
 import { regIndiaPhone } from "src/pages/vendors/add/AddVendorWrapper";
+import { useLocation } from "react-router-dom";
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -22,6 +23,8 @@ export type FormInitialValues = {
   warehouseName: string;
   country: string;
   email: string;
+  vendorId: any;
+  dealerId: any;
   regd_address: {
     phone: string;
     address: string;
@@ -107,6 +110,10 @@ const steps = [
 ];
 
 const AddWarehouseWrapper = () => {
+  const { state } = useLocation();  
+  const vendorId = state?.params?.vendorId || null;
+  const dealerId = state?.params?.dealerId || null;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [addWareHouse] = useAddWareHouseMutation();
@@ -128,8 +135,9 @@ const AddWarehouseWrapper = () => {
     warehouseCode: "",
     warehouseName: "",
     country: "",
-
     email: "",
+    vendorId: vendorId,
+    dealerId: dealerId,
     regd_address: {
       phone: "",
       address: "",
@@ -201,11 +209,20 @@ const AddWarehouseWrapper = () => {
           contactInformation: values.contact_informations,
 
           companyId: userData?.companyId || "",
+          dealerId: values.dealerId || null,
+          vendorId: values.vendorId || null,
         }).then((res) => {
           if ("data" in res) {
             if (res?.data?.status) {
               showToast("success", "Vendor added successfully!");
-              navigate("/warehouse");
+              if(dealerId !== null){
+                navigate("/dealers/"+dealerId+"/warehouse");
+              }else if(vendorId !== null){
+                navigate("/vendors/"+vendorId+"/warehouse");
+              }else{
+                navigate("/warehouse");
+              }
+              
             } else {
               showToast("error", res?.data?.message);
             }
