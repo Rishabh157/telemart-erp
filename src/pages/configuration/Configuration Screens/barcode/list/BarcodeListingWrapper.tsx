@@ -1,45 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import {  useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BarcodeListResponse } from "src/models";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-// import {
-//   setIsTableLoading,
-//   setItems,
-//   setTotalItems,
-// } from "src/redux/slices/barcodeSlice";
-// import { RootState } from "src/redux/store";
+import {
+  setIsTableLoading,
+  setItems,
+  setTotalItems,
+} from "src/redux/slices/barcodeSlice";
+import { AppDispatch, RootState } from "src/redux/store";
 import BarcodeListing from "./BarcodeListing";
-
-const rows = Array(10)
-  .fill(null)
-  .map((_, index) => ({
-    barcode_number: "123456789",
-    product_name: "Drink Stop",
-    quantity: "10",
-    is_used: index === 1 ? true : false,
-    _id: index + 1,
-  }));
+import { useGetBarcodeQuery } from "src/services/BarcodeService";
 
 const BarcodeListingWrapper = () => {
-  //   const barcodeState: any = useSelector((state: RootState) => state.barcode);
+  const barcodeState: any = useSelector((state: RootState) => state.barcode);
 
-  //   const { page, rowsPerPage } = barcodeState;
+  const { page, rowsPerPage, searchValue, items } = barcodeState;
 
-  //   const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     if (!isFetching && !isLoading) {
-  //       dispatch(setIsTableLoading(false));
-  //       dispatch(setItems(data || []));
-  //       dispatch(setTotalItems(data?.totalItems || 4));
-  //     } else {
-  //       dispatch(setIsTableLoading(true));
-  //     }
+  const { data, isFetching, isLoading } = useGetBarcodeQuery({
+    limit: rowsPerPage,
+    searchValue: searchValue,
+    params: ["barcodeNumber", "productGroupLabel"],
+    page: page,
+    filterBy: [
+      {
+        fieldName: "",
+        value: [],
+      },
+    ],
+    dateFilter: {},
+    orderBy: "createdAt",
+    orderByValue: -1,
+    isPaginationRequired: true,
+  });
 
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, [isLoading, isFetching, data]);
+  useEffect(() => {
+    if (!isFetching && !isLoading) {
+      dispatch(setIsTableLoading(false));
+      dispatch(setItems(data?.data || []));
+      dispatch(setTotalItems(data?.totalItem || 4));
+    } else {
+      dispatch(setIsTableLoading(true));
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isFetching, data]);
 
   const [selectedBarcodes, setSelectedBarcodes] = React.useState<
     BarcodeListResponse[]
@@ -68,10 +76,12 @@ const BarcodeListingWrapper = () => {
     <>
       <ConfigurationLayout>
         <BarcodeListing
-          rows={rows}
+          rows={items}
           selectedBarcodes={selectedBarcodes}
           onBarcodeSelect={onBarcodeSelect}
-          onBarcodeClick={(barcode:BarcodeListResponse) => navigate(`${barcode._id}`)}
+          onBarcodeClick={(barcode: BarcodeListResponse) =>
+            navigate(`${barcode._id}`)
+          }
         />
       </ConfigurationLayout>
     </>

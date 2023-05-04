@@ -20,7 +20,7 @@ const BarcodeDetailsCard = ({
   onBarcodeClick,
 }: BarcodeCardProps) => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5  gap-5 py-3 px-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-5 py-3 px-3">
       {barcodeList.map((barcode: BarcodeListResponse, barcodeIndex: number) => {
         const isBarcodeSeleted =
           selectedBarcodes.findIndex(
@@ -29,9 +29,11 @@ const BarcodeDetailsCard = ({
         return (
           <div
             key={barcode._id}
-            onClick={() => {onBarcodeClick(barcode)}}
+            onClick={() => {
+              onBarcodeClick(barcode);
+            }}
             className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${
-              barcode.is_used ? " border-red-500" : "border-slate-200"
+              false ? " border-red-500" : "border-slate-200"
             }`}
           >
             {/*Checkbox */}
@@ -60,13 +62,13 @@ const BarcodeDetailsCard = ({
             <div className="flex justify-between">
               <div>
                 {/* Used Chip */}
-                {barcode.is_used && (
+                {false && (
                   <span className="text-white bg-red-500 px-2 text-[11px] rounded-full inline-flex items-center py-[1px] font-medium">
                     Used
                   </span>
                 )}
                 <div className="text-[12px] text-slate-500">Barcode No.</div>
-                <div> 123456789 </div>
+                <div>{barcode?.barcodeNumber} </div>
               </div>
               <div>
                 <HiDotsVertical />
@@ -74,7 +76,7 @@ const BarcodeDetailsCard = ({
             </div>
 
             <div className="text-primary-main font-medium grow flex items-end">
-              Product Name
+              {barcode?.productGroupLabel}
             </div>
           </div>
         );
