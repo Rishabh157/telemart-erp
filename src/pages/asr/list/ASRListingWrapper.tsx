@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { ASRListResponse } from "src/models/ASR.model";
-import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
+import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import ASRListing from "./ASRListing";
 import { useDeleteAsrMutation, useGetAsrQuery, useUpdateAsrStatusMutation } from "src/services/AsrService";
 import { useDispatch, useSelector } from "react-redux";
@@ -157,7 +157,7 @@ const ASRListingWrapper = () => {
             <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
               <button
                 onClick={() => {
-                  navigate(`/configurations/asr/${currentId}`);
+                  navigate(`/asr/${currentId}`);
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
               >
@@ -252,9 +252,9 @@ const ASRListingWrapper = () => {
   };
   return (
     <>
-      <ConfigurationLayout>
+      <SideNavLayout>
         <ASRListing columns={columns} rows={items} />
-      </ConfigurationLayout>
+      </SideNavLayout>
     </>
   );
 };
