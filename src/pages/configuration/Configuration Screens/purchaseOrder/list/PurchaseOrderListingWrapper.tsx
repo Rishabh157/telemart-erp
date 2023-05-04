@@ -7,7 +7,7 @@ import PurchaseOrderListing from "./PurchaseOrderListing";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 import {
-  useDeletePurchaseOrderMutation,
+
   useGetPurchaseOrderQuery,
 } from "src/services/PurchaseOrderService";
 import {

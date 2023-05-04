@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { VendorsListResponse } from "src/models";
-import { LocationSelectType } from "src/utils";
 
 export interface VendorSliceStateType {
   items: VendorsListResponse[] | [];

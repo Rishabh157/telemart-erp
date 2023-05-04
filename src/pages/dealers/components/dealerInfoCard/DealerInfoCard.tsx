@@ -2,6 +2,8 @@ import { Avatar } from "@mui/material";
 import React from "react";
 import { IconType } from "react-icons";
 import { GoPrimitiveDot } from "react-icons/go";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 
 type Props = {
   dealerData: any;
@@ -10,9 +12,14 @@ type Props = {
     onClick: () => void;
     label: string;
   }[];
+  
+  
 };
 
-const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
+const DealerInfoCard = ({ dealerData, actionIcons}: Props) => {
+ const {selectedItem}:any=useSelector((state:RootState)=>state.dealer)
+ console.log(selectedItem)
+  
   return (
     <div className="py-2 flex flex-col gap-1">
       {/* Image */}
@@ -21,7 +28,7 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
       </div>
 
       {/* Firm Name */}
-      <div className="flex justify-center">Firm Name</div>
+      <div className="flex justify-center">{selectedItem?.firmName}</div>
 
       {/* Chips */}
       <div className="flex gap-2 justify-center">
@@ -44,10 +51,10 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
 
       <div className="text-center text-slate-500">
         {/* Dealer Name */}
-        <div className="text-[15px]" > Dealer Name </div>
+        <div className="text-[15px]" >{selectedItem?.firstName}</div>
 
         {/* Mobile */}
-        <div className="text-center text-slate-400 text-[13px]">8574859685</div>
+        <div className="text-center text-slate-400 text-[13px]">{selectedItem?.contactInformation[0].mobileNumber}</div>
       </div>
 
       {/* Action Icon */}

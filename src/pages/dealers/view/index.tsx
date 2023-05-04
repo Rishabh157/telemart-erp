@@ -114,6 +114,7 @@ const ViewDealer = () => {
             mobile: "8574859685",
           }}
           actionIcons={actionIcons}
+         
         />
       }
       listData={listData}

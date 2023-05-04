@@ -16,6 +16,7 @@ type Props = {
   vendorOptions:any[]
   warehouseOptions:any[]
   itemOptions:any[]
+  apiStatus:boolean
 
 };
 export type DropdownOptions = {
@@ -36,7 +37,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOptions}: Props) => {
+const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOptions,apiStatus}: Props) => {
   const dropdownOptions: DropdownOptions = {
     vendorOptions,
     warehouseOptions,
@@ -67,8 +68,10 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
             <div>
               <button
                 type="button"
+                disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  true ? "disabled:opacity-25" : ""}`}
               >
                 Add PO
               </button>
