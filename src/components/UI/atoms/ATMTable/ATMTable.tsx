@@ -21,6 +21,8 @@ interface ATMTablePropTypes<T> {
   onRowClick?: (row: any) => void;
   rowExtraClasses?: (row: any) => void;
   isLoading?: boolean;
+  setShowDropdown?:React.Dispatch<React.SetStateAction<boolean>>;
+  onClick?:(event:any)=>void;
 }
 
 const ATMTable = <T extends {}>({
@@ -33,10 +35,13 @@ const ATMTable = <T extends {}>({
   onRowClick,
   rowExtraClasses,
   isLoading = false,
+  setShowDropdown,
+
 }: ATMTablePropTypes<T>) => {
   return (
     <div
-      className={twMerge(`min-w-fit relative flex flex-col   ${extraClasses}`)}
+    onClick={()=>{setShowDropdown && setShowDropdown(false) }}
+      className={twMerge(`min-w-fit relative flex flex-col h-full ${extraClasses}`)}
     >
       {/* Columns */}
       <div className="flex items-center py-2 px-2 border-b sticky top-0 border-slate-300 bg-slate-50 ">
@@ -87,7 +92,8 @@ const ATMTable = <T extends {}>({
       ) : rows.length ? (
         rows.map((row: any, rowIndex) => (
           <div
-            onClick={() => onRowClick && onRowClick(row)}
+            onClick={() => onRowClick && onRowClick(row)
+            }
             key={row[idKey] || rowIndex}
             className={`flex items-center px-2 bg-white  ${
               onRowClick && "cursor-pointer"
