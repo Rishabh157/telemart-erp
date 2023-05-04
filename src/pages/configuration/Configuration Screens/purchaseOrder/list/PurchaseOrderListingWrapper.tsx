@@ -6,10 +6,7 @@ import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 import PurchaseOrderListing from "./PurchaseOrderListing";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import {
-
-  useGetPurchaseOrderQuery,
-} from "src/services/PurchaseOrderService";
+import { useGetPurchaseOrderQuery } from "src/services/PurchaseOrderService";
 import {
   setIsTableLoading,
   setItems,
@@ -18,10 +15,9 @@ import {
 
 import { HiDotsHorizontal } from "react-icons/hi";
 
-
 const PurchaseOrderListingWrapper = () => {
   const navigate = useNavigate();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
   const productOrderState: any = useSelector(
     (state: RootState) => state.purchaseOrder
@@ -106,14 +102,14 @@ const PurchaseOrderListingWrapper = () => {
           </button>
           {showDropdown && currentId === row?._id && (
             <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-              {/* <button
+              <button
                 onClick={() => {
                   navigate(`/configurations/purchase-order/view/${currentId}`);
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
               >
                 View
-              </button> */}
+              </button>
               <button
                 onClick={() => {
                   navigate("/configurations/grn/add");
@@ -122,8 +118,6 @@ const PurchaseOrderListingWrapper = () => {
               >
                 Generate GRN
               </button>
-             
-             
             </div>
           )}
         </div>
@@ -159,8 +153,6 @@ const PurchaseOrderListingWrapper = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data, dispatch]);
-
- 
 
   return (
     <>
