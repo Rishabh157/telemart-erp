@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
+import ATMBreadCrumbs, {
+  BreadcrumbType,
+} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -9,48 +12,58 @@ import {
   setRowsPerPage,
   setPage,
   setSearchValue,
-} from "src/redux/slices/warehouseSlice";
+} from "src/redux/slices/ASRSlice";
 import { AppDispatch, RootState } from "src/redux/store";
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
   columns: any[];
   rows: any[];
 };
 
-const WarehouseListing = ({ columns, rows }: Props) => {
-  const navigate = useNavigate();
+const ASRListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const warehouseState: any = useSelector(
-    (state: RootState) => state.warehouse
-  );
-  // const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const { page, rowsPerPage, totalItems, searchValue } = warehouseState;
+  const asrState: any = useSelector((state: RootState) => state.asr);
 
-  const params: any = useParams(); 
-  
+  const navigate = useNavigate();
+
+  const { page, rowsPerPage, searchValue } = asrState;
+
+  const breadcrumbs: BreadcrumbType[] = [
+    {
+      label: "Configuration",
+      path: "/dashboard",
+    },
+    {
+      label: "ASR",
+    },
+  ];
+
   return (
-    <div className="h-full">
+    <div className="px-4 h-full pt-3  ">
+      {/* Breadcrumbs */}
+      <div className="h-[30px]">
+        <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
       {/* Page Header */}
-      <div className="flex justify-between items-center h-[55px]">
-        <ATMPageHeading> Warehouse </ATMPageHeading>
+      <div className="flex justify-between items-center h-[45px]">
+        <ATMPageHeading> ASR </ATMPageHeading>
         <button
-          onClick={() => navigate("/warehouse/add-warehouse", {state:{params}})}
+          onClick={() => navigate("/asr/add")}
           className="bg-primary-main text-white rounded py-1 px-3"
         >
           {" "}
-          + Add Warehouse{" "}
+          + Add ASR{" "}
         </button>
       </div>
 
-      <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+      <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
           searchValue={searchValue}
           page={page}
-          rowCount={totalItems}
+          rowCount={rows.length}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
@@ -67,14 +80,15 @@ const WarehouseListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            extraClasses="h-full overflow-auto"
           />
         </div>
 
         {/* Pagination */}
-        <div className="border-t border-slate-300">
+        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={totalItems}
+            rowCount={rows.length}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
@@ -91,4 +105,4 @@ const WarehouseListing = ({ columns, rows }: Props) => {
   );
 };
 
-export default WarehouseListing;
+export default ASRListing;

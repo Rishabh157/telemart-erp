@@ -79,7 +79,12 @@ const EditDealersCategory = ({ formikProps, apiStatus }: Props) => {
                 value={values.investAmount}
                 label="Invest Amount"
                 placeholder="Invest Amount"
-                onChange={(e) => setFieldValue("investAmount", e.target.value)}
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  if (!isNaN(Number(newValue))) {
+                    setFieldValue("investAmount", newValue);
+                  }
+                }}
               />
 
               {/* Number of Orders */}
@@ -88,9 +93,12 @@ const EditDealersCategory = ({ formikProps, apiStatus }: Props) => {
                 value={values.numberOfOrders}
                 label="Number Of Orders"
                 placeholder="Number Of Orders"
-                onChange={(e) =>
-                  setFieldValue("numberOfOrders", e.target.value)
-                }
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  if (!isNaN(Number(newValue))) {
+                    setFieldValue("numberOfOrders", newValue);
+                  }
+                }}
               />
               {/* Delivery Percentage */}
               <ATMTextField
@@ -98,9 +106,12 @@ const EditDealersCategory = ({ formikProps, apiStatus }: Props) => {
                 value={values.deliveryPercentage}
                 label="Delivery Percentage"
                 placeholder="Delivery Percentage"
-                onChange={(e) =>
-                  setFieldValue("deliveryPercentage", e.target.value)
-                }
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  if (!isNaN(Number(newValue))) {
+                    setFieldValue("deliveryPercentage", newValue);
+                  }
+                }}
               />
             </div>
           </div>

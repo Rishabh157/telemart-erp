@@ -1,81 +1,79 @@
-import React from "react";
+import React,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ATMBreadCrumbs, {
-  BreadcrumbType,
-} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
+import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import {
-  setRowsPerPage,
-  setPage,
-  setSearchValue,
-} from "src/redux/slices/dealersCategorySlice";
+import { setRowsPerPage, setPage, setSearchValue } from "src/redux/slices/schemeSlice";
 import { AppDispatch, RootState } from "src/redux/store";
+// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
   columns: any[];
   rows: any[];
 };
 
-const DealerCategoryListing = ({ columns, rows }: Props) => {
+const SchemeListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const dealerCategoryState: any = useSelector(
-    (state: RootState) => state.dealersCategory
-  );
-  const navigate = useNavigate();
-  const { page, rowsPerPage, searchValue, totalItems } = dealerCategoryState;
-  const breadcrumbs: BreadcrumbType[] = [
+  const schemeState: any = useSelector((state: RootState) => state.scheme);
+  // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+  const navigate = useNavigate()
+  const [selectedRows, setSelectedRows] = useState([])
+
+
+  const { page, rowsPerPage,searchValue,totalItems} = schemeState;
+
+  const breadcrumbs: BreadcrumbType[] = [    
     {
-      label: "Configuration",
-      path: "/dashboard",
-    },
-    {
-      label: "Dealer Category",
+      label: "Scheme",
     },
   ];
 
   return (
-    <div className="px-4 h-full pt-3  ">
+    <div className="px-4 h-full ">
       {/* Breadcrumbs */}
       <div className="h-[30px]">
         <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
       </div>
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
-        <ATMPageHeading> Dealer Categories </ATMPageHeading>
+        <ATMPageHeading> Schemes</ATMPageHeading>
         <button
-          onClick={() => navigate("/configurations/dealers-category/add")}
-          className="bg-primary-main text-white rounded py-1 px-3"
+        onClick={()=> navigate('/scheme/add')}
+        className="bg-primary-main text-white rounded py-1 px-3"
         >
           {" "}
-          + Add Dealer Category{" "}
+          + Add Scheme{" "}
         </button>
       </div>
 
-      <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+      <div className="h-full border flex flex-col rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
-          searchValue={searchValue}
           page={page}
+          searchValue={searchValue}
           rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
-          onSearch={(newValue) => dispatch(setSearchValue(newValue))}
           isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
+          onSearch={(newValue) => dispatch(setSearchValue(newValue))}
         />
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows} />
+        <ATMTable columns={columns} rows={rows}
+           isCheckbox={true}
+           selectedRows={selectedRows}
+           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+           extraClasses='h-full overflow-auto' />
         </div>
 
         {/* Pagination */}
-        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+        <div className=" flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
             rowCount={totalItems}
@@ -95,4 +93,4 @@ const DealerCategoryListing = ({ columns, rows }: Props) => {
   );
 };
 
-export default DealerCategoryListing;
+export default SchemeListing;

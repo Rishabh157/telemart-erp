@@ -1,45 +1,42 @@
-import { Step, StepLabel, Stepper } from "@mui/material";
-import { FormikProps } from "formik";
 import React from "react";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 import ATMBreadCrumbs from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
-import { FormInitialValues } from "./AddWarehouseWrapper";
+import { FormikProps } from "formik";
+import { FormInitialValues } from "./AddSchemeWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
   activeStep: number;
   setActiveStep: React.Dispatch<React.SetStateAction<number>>;
   steps: any[];
-  apiStatus: boolean;
-  allCountry: any;  
+  pageHeading: string;
+  breadcrumbs: {
+    label: string;
+    onClick?: () => void;
+    path?: string;
+  }[];
+  productGroupOptions?:any;
+  apiStatus:boolean
+
 };
 
-const AddWarehouse = ({
+const AddScheme = ({
   formikProps,
   activeStep,
   setActiveStep,
   steps,
+  pageHeading,
+  breadcrumbs,productGroupOptions,   
   apiStatus,
-  allCountry,
-}: Props) => {  
 
+}: Props) => {
   // Handle Previous
   const handlePrevious = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-  const breadcrumbs = [
-    {
-      label: "Warehouse",
-      onClick: () => {
-        console.log("Dealers");
-      },
-      path: "/warehouse",
-    },
-    {
-      label: "Add Warehouse",
-    },
-  ]; 
 
   return (
     <div className="">
@@ -51,7 +48,7 @@ const AddWarehouse = ({
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New warehouse </ATMPageHeading>
+          <ATMPageHeading> {pageHeading} </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -79,9 +76,8 @@ const AddWarehouse = ({
                 disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                  apiStatus ? "opacity-50" : ""
-                }`}
-              >
+                  apiStatus ? "opacity-50" : ""}`}
+                            >
                 {activeStep === steps.length - 1 ? "Submit" : "Next"}
               </button>
             </div>
@@ -106,7 +102,9 @@ const AddWarehouse = ({
 
           {/* Form */}
           <div className="grow">
-            {steps[activeStep]?.component({ formikProps, allCountry })}
+            {steps[activeStep]?.component({
+              formikProps,productGroupOptions
+            })}
           </div>
         </div>
       </div>
@@ -114,4 +112,4 @@ const AddWarehouse = ({
   );
 };
 
-export default AddWarehouse;
+export default AddScheme;

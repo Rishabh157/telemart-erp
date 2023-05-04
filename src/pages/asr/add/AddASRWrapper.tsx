@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { array, object, string } from "yup";
-import EditASR from "./EditASR";
+import AddASR from "./AddASR";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
+import { useAddAsrMutation } from "src/services/AsrService";
 import { showToast } from "src/utils";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import {
-  useGetAsrByIdQuery,
-  useUpdateAsrMutation,
-} from "src/services/AsrService";
-import { setSelectedItem } from "src/redux/slices/ASRSlice";
 import { useGetAllProductGroupQuery } from "src/services/ProductGroupService";
 import { setItems } from "src/redux/slices/productGroupSlice";
 
@@ -25,27 +21,23 @@ export type FormInitialValues = {
   }[];
 };
 
-const EditASRWrapper = (props: Props) => {
-  const params = useParams();
-  const Id = params.id;
+const AddASRWrapper = (props: Props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [addAsr] = useAddAsrMutation();
   const [apiStatus, setApiStatus] = useState<boolean>(false);
-
-  const [editAsr] = useUpdateAsrMutation();
-  const { data, isLoading, isFetching } = useGetAsrByIdQuery(Id);
-  const {
-    data: productGroupData,
-    isLoading: pgIsLoading,
-    isFetching: pgIsFetching,
-  } = useGetAllProductGroupQuery("");
-
+  const { data, isLoading, isFetching } = useGetAllProductGroupQuery("");
   const { userData } = useSelector((state: RootState) => state?.auth);
-  const { selectedItem }: any = useSelector((state: RootState) => state?.asr);
 
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    asrDetails: selectedItem?.asrDetails,
+    asrDetails: [
+      {
+        productName: "",
+        productId: "",
+        quantity: 0,
+      },
+    ],
   };
 
   // Form Validation Schema
@@ -61,20 +53,13 @@ const EditASRWrapper = (props: Props) => {
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
     setApiStatus(true);
-    const asrDetails = values.asrDetails.map((ele: any) => {
-      const { _id, ...rest } = ele; // use object destructuring to remove the _id property
-      return rest; // return the new object without the _id property
-    });
-    editAsr({
-      body: {
-        asrDetails: asrDetails,
-        companyId: userData?.companyId || "",
-      },
-      id: Id || "",
+    addAsr({
+      asrDetails: values.asrDetails,
+      companyId: userData?.companyId || "",
     }).then((res) => {
       if ("data" in res) {
         if (res?.data?.status) {
-          showToast("success", "Updated successfully!");
+          showToast("success", "Asr added successfully!");
           navigate("/asr");
         } else {
           showToast("error", res?.data?.message);
@@ -87,27 +72,22 @@ const EditASRWrapper = (props: Props) => {
   };
 
   useEffect(() => {
-    dispatch(setSelectedItem(data?.data));
+    dispatch(setItems(data?.data));
   }, [dispatch, data, isLoading, isFetching]);
-
-  useEffect(() => {
-    dispatch(setItems(productGroupData?.data));
-  }, [dispatch, productGroupData, pgIsLoading, pgIsFetching]);
 
   return (
     <SideNavLayout>
       <Formik
-        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <EditASR apiStatus={apiStatus} formikProps={formikProps} />;
+          return <AddASR apiStatus={apiStatus} formikProps={formikProps} />;
         }}
       </Formik>
     </SideNavLayout>
   );
 };
 
-export default EditASRWrapper;
+export default AddASRWrapper;

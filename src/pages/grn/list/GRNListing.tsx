@@ -1,18 +1,13 @@
-import React from "react";
+import React,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ATMBreadCrumbs, {
   BreadcrumbType,
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
-import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import {
-  setRowsPerPage,
-  setPage,
-  setSearchValue,
-} from "src/redux/slices/dealersCategorySlice";
+import { setRowsPerPage, setPage } from "src/redux/slices/GRNSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 
 type Props = {
@@ -20,20 +15,22 @@ type Props = {
   rows: any[];
 };
 
-const DealerCategoryListing = ({ columns, rows }: Props) => {
+const GRNListing = ({ columns, rows }: Props) => {
+  const [selectedRows, setSelectedRows] = useState([])
+
   const dispatch = useDispatch<AppDispatch>();
-  const dealerCategoryState: any = useSelector(
-    (state: RootState) => state.dealersCategory
-  );
-  const navigate = useNavigate();
-  const { page, rowsPerPage, searchValue, totalItems } = dealerCategoryState;
+  const grnState: any = useSelector((state: RootState) => state.grn);
+  // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+
+  const { page, rowsPerPage } = grnState;
+
   const breadcrumbs: BreadcrumbType[] = [
     {
       label: "Configuration",
       path: "/dashboard",
     },
     {
-      label: "Dealer Category",
+      label: "Goods Received Note",
     },
   ];
 
@@ -45,40 +42,35 @@ const DealerCategoryListing = ({ columns, rows }: Props) => {
       </div>
       {/* Page Header */}
       <div className="flex justify-between items-center h-[45px]">
-        <ATMPageHeading> Dealer Categories </ATMPageHeading>
-        <button
-          onClick={() => navigate("/configurations/dealers-category/add")}
-          className="bg-primary-main text-white rounded py-1 px-3"
-        >
-          {" "}
-          + Add Dealer Category{" "}
-        </button>
+        <ATMPageHeading> GRN </ATMPageHeading>
       </div>
 
       <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
-          searchValue={searchValue}
           page={page}
-          rowCount={totalItems}
+          rowCount={rows.length}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
-          onSearch={(newValue) => dispatch(setSearchValue(newValue))}
           isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
         />
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-          <ATMTable columns={columns} rows={rows} />
+        <ATMTable columns={columns} rows={rows}
+           isCheckbox={true}
+           selectedRows={selectedRows}
+           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
         </div>
 
         {/* Pagination */}
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={totalItems}
+            rowCount={rows.length}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
@@ -95,4 +87,4 @@ const DealerCategoryListing = ({ columns, rows }: Props) => {
   );
 };
 
-export default DealerCategoryListing;
+export default GRNListing;

@@ -47,11 +47,11 @@ const configurationNavigation: NavItemType[] = [
     icon: AiOutlineSetting,
     path: "/configurations/carton-box",
   },
-  {
-    label: "Scheme",
-    icon: AiOutlineSetting,
-    path: "/configurations/scheme",
-  },
+  // {
+  //   label: "Scheme",
+  //   icon: AiOutlineSetting,
+  //   path: "/configurations/scheme",
+  // },
   {
     label: "Taxes",
     icon: AiOutlineSetting,
@@ -62,21 +62,21 @@ const configurationNavigation: NavItemType[] = [
     icon: AiOutlineSetting,
     path: "/configurations/purchase-order",
   },
-  {
-    label: "GRN",
-    icon: AiOutlineSetting,
-    path: "/configurations/grn",
-  },
+  // {
+  //   label: "GRN",
+  //   icon: AiOutlineSetting,
+  //   path: "/configurations/grn",
+  // },
   {
     label: "Company",
     icon: AiOutlineSetting,
     path: "/configurations/company",
   },
-  {
-    label: "ASR",
-    icon: AiOutlineSetting,
-    path: "/configurations/asr",
-  },
+  // {
+  //   label: "ASR",
+  //   icon: AiOutlineSetting,
+  //   path: "/configurations/asr",
+  // },
   {
     label: "Barcode",
     icon: AiOutlineSetting,
