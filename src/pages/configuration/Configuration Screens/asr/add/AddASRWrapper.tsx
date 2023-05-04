@@ -60,7 +60,7 @@ const AddASRWrapper = (props: Props) => {
       if ("data" in res) {
         if (res?.data?.status) {
           showToast("success", "Asr added successfully!");
-          navigate("/configurations/asr");
+          navigate("/asr");
         } else {
           showToast("error", res?.data?.message);
         }

@@ -62,4 +62,19 @@ export const navigation: NavItemType[] = [
     icon: AiOutlineSetting,
     path: "/configurations/attributes",
   },
+  {
+    label: "ASR",
+    icon: AiOutlineSetting,
+    path: "/asr",
+  },
+  {
+    label: "GRN",
+    icon: AiOutlineSetting,
+    path: "/grn",
+  },
+  {
+    label: "Scheme",
+    icon: AiOutlineSetting,
+    path: "/scheme",
+  },
 ];
