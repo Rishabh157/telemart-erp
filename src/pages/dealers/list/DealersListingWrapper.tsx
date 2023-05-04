@@ -22,25 +22,15 @@ const DealersListingWrapper = () => {
     const dealerState: any = useSelector((state: RootState) => state.dealer);
     const [currentId, setCurrentId] = useState("");
     const [showDropdown, setShowDropdown] = useState(false);
+    
     const navigate=useNavigate()
     const [deletedealer]=useDeleteDealerMutation()
-    const dropdownRef = useRef<any>(null);
-
+  
+   
+// console.log(dropdownRef.current)
     const { page, rowsPerPage,items ,searchValue} = dealerState;
     const dispatch = useDispatch<AppDispatch>();
-    useEffect(() => {
-      function handleClickOutside(event:any) {
-        if (dropdownRef.current && !dropdownRef?.current?.contains(event.target)) {
-          setShowDropdown(false);
-        }
-      }
     
-      document.addEventListener("click", handleClickOutside);
-    
-      return () => {
-        document.removeEventListener("click", handleClickOutside);
-      };
-    }, [dropdownRef]);
   
 
     // const navigate = useNavigate();
@@ -104,7 +94,7 @@ const DealersListingWrapper = () => {
         headerName: "Actions",
         flex: "flex-[0.5_0.5_0%]",
         renderCell: (row: any) => (
-          <div className="relative"  ref={dropdownRef}>
+          <div className="relative" >
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -188,9 +178,7 @@ useEffect(() => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [isLoading, isFetching, data]);
-
-
+}, [isLoading, isFetching, data,dispatch]);
 
 
   const handleDelete = () => {
@@ -213,7 +201,7 @@ useEffect(() => {
     return (
         <>
             <SideNavLayout>
-                <DealersListing columns={columns} rows={items} />
+                <DealersListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
             </SideNavLayout>
         </>
     );

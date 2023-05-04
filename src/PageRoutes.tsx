@@ -88,6 +88,7 @@ import EditDealerWrapper from "./pages/dealers/edit/EditDealerWrapper";
 import EditWarehouseWrapper from "./pages/warehouses/edit/EditWarehouseWrapper";
 import EditProductWrapper from "./pages/configuration/Configuration Screens/products/edit/EditProductWrapper";
 import EditSchemeWrapper from "./pages/scheme/edit/EditSchemeWrapper";
+import ViewPurchaseOrderWrapper from "./pages/configuration/Configuration Screens/purchaseOrder/view/ViewPurchaseOrderWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -322,6 +323,10 @@ const PageRoutes = () => {
           <Route
             path="/configurations/purchase-order"
             element={<PurchaseOrderListingWrapper />}
+          />
+          <Route
+            path="/configurations/purchase-order/view/:id"
+            element={<ViewPurchaseOrderWrapper />}
           />
 
           <Route

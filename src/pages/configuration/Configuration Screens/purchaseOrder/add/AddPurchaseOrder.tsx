@@ -7,12 +7,22 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { DropdownOptions, FormInitialValues } from "./AddPurchaseOrderWrapper";
+import { FormInitialValues } from "./AddPurchaseOrderWrapper";
 import ATMDatePicker from "src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker";
+import { SelectOption } from "src/models/FormField/FormField.model";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
-  dropdownOptions: DropdownOptions;
+  vendorOptions:any[]
+  warehouseOptions:any[]
+  itemOptions:any[]
+
+};
+export type DropdownOptions = {
+  vendorOptions: SelectOption[];
+  warehouseOptions:SelectOption[];
+  itemOptions:SelectOption[]
+
 };
 
 // Breadcrumbs
@@ -26,7 +36,13 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddPurchaseOrder = ({ formikProps, dropdownOptions }: Props) => {
+const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOptions}: Props) => {
+  const dropdownOptions: DropdownOptions = {
+    vendorOptions,
+    warehouseOptions,
+    itemOptions
+  };
+  
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -64,20 +80,20 @@ const AddPurchaseOrder = ({ formikProps, dropdownOptions }: Props) => {
             <div className="grid grid-cols-3 gap-4">
               {/* PO Code */}
               <ATMTextField
-                name="purchase_order_code"
-                value={values.purchase_order_code}
+                name="poCode"
+                value={values.poCode}
                 label="PO Code"
                 placeholder="PO Code"
                 onChange={(e) =>
-                  setFieldValue("purchase_order_code", e.target.value)
+                  setFieldValue("poCode", e.target.value)
                 }
               />
 
               {/* Vendor */}
               <ATMSelect
                 name="vendor"
-                value={values.vendor}
-                onChange={(e) => setFieldValue("vendor", e.target.value)}
+                value={values.vendorId}
+                onChange={(e) => setFieldValue("vendorId", e.target.value)}
                 options={dropdownOptions.vendorOptions}
                 label="Vendor"
               />
@@ -85,8 +101,8 @@ const AddPurchaseOrder = ({ formikProps, dropdownOptions }: Props) => {
               {/* Warehouse */}
               <ATMSelect
                 name="warehouse"
-                value={values.warehouse}
-                onChange={(e) => setFieldValue("warehouse", e.target.value)}
+                value={values.wareHouseId}
+                onChange={(e) => setFieldValue("wareHouseId", e.target.value)}
                 options={dropdownOptions.warehouseOptions}
                 label="Warehouse"
               />
@@ -99,19 +115,19 @@ const AddPurchaseOrder = ({ formikProps, dropdownOptions }: Props) => {
               Add item to purchase order
             </div>
 
-            <FieldArray name="items">
+            <FieldArray name="purchaseOrder">
               {({ push, remove }) => {
                 return (
                   <>
                     <div className="flex flex-col gap-y-5">
-                      {values.items?.map((item, itemIndex) => {
+                      {values.purchaseOrder?.map((item, itemIndex) => {
                         const {
-                          item_name,
+                          itemId,
                           rate,
                           quantity,
-                          est_receiving_date,
+                          estReceivingDate,
                         } = item;
-
+          
                         return (
                           <div
                             key={itemIndex}
@@ -120,11 +136,11 @@ const AddPurchaseOrder = ({ formikProps, dropdownOptions }: Props) => {
                             {/* Item Name */}
                             <div className="flex-[3_3_0%]">
                               <ATMSelect
-                                name={`items[${itemIndex}].item_name`}
-                                value={item_name}
+                                name={`purchaseOrder[${itemIndex}].itemId`}
+                                value={itemId}
                                 onChange={(e) =>
                                   setFieldValue(
-                                    `items[${itemIndex}].item_name`,
+                                    `purchaseOrder[${itemIndex}].itemId`,
                                     e.target.value
                                   )
                                 }
@@ -138,13 +154,13 @@ const AddPurchaseOrder = ({ formikProps, dropdownOptions }: Props) => {
                               <ATMTextField
                                 type="number"
                                 min={0}
-                                name={`items[${itemIndex}].rate`}
+                                name={`purchaseOrder[${itemIndex}].rate`}
                                 value={rate?.toString() || ""} 
                                 label="Rate"
                                 placeholder="Rate"
                                 onChange={(e) =>
                                   setFieldValue(
-                                    `items[${itemIndex}].rate`,
+                                    `purchaseOrder[${itemIndex}].rate`,
                                     e.target.value
                                   )
                                 }
@@ -156,13 +172,13 @@ const AddPurchaseOrder = ({ formikProps, dropdownOptions }: Props) => {
                               <ATMTextField
                                 type="number"
                                 min={0}
-                                name={`items[${itemIndex}].quantity`}
+                                name={`purchaseOrder[${itemIndex}].quantity`}
                                 value={quantity?.toString() || ""}
                                 label="Quantity"
                                 placeholder="Quantity"
                                 onChange={(e) =>
                                   setFieldValue(
-                                    `items[${itemIndex}].quantity`,
+                                    `purchaseOrder[${itemIndex}].quantity`,
                                     e.target.value
                                   )
                                 }
@@ -172,12 +188,12 @@ const AddPurchaseOrder = ({ formikProps, dropdownOptions }: Props) => {
                             {/* Est. Receiving Date */}
                             <div className="flex-[3_3_0%]">
                               <ATMDatePicker
-                                name={`items[${itemIndex}].est_receiving_date`}
-                                value={est_receiving_date}
+                                name={`purchaseOrder[${itemIndex}].estReceivingDate`}
+                                value={estReceivingDate}
                                 label="Est. Receiving Date"
                                 onChange={(newValue) =>
                                   setFieldValue(
-                                    `items[${itemIndex}].est_receiving_date`,
+                                    `purchaseOrder[${itemIndex}].estReceivingDate`,
                                     newValue
                                   )
                                 }
@@ -185,7 +201,7 @@ const AddPurchaseOrder = ({ formikProps, dropdownOptions }: Props) => {
                             </div>
 
                             {/* BUTTON - Delete */}
-                            {values.items?.length > 1 && (
+                            {values.purchaseOrder?.length > 1 && (
                               <div>
                                 <button
                                   type="button"

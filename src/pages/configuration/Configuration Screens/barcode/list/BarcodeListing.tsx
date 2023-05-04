@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/barcodeSlice";
+import {
+  setRowsPerPage,
+  setPage,
+  setSearchValue,
+} from "src/redux/slices/barcodeSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 import { useState } from "react";
 import { BarcodeListResponse } from "src/models";
@@ -59,7 +63,7 @@ const BarcodeListing = ({
 
   const [activeTab, setActiveTab] = useState("Barcode Group");
 
-  const { page, rowsPerPage } = barcodeState;
+  const { page, rowsPerPage, totalItems, searchValue } = barcodeState;
 
   return (
     <div className="px-4 h-full flex flex-col gap-3">
@@ -103,13 +107,14 @@ const BarcodeListing = ({
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
         {/* Header */}
         <ATMTableHeader
+          searchValue={searchValue}
           page={page}
-          rowCount={rows.length}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
-          //   onFilterClick={() => setIsFilterOpen(true)}
+          onSearch={(newValue) => dispatch(setSearchValue(newValue))}
         />
 
         {/* Barcode Detail Cards */}
@@ -118,7 +123,9 @@ const BarcodeListing = ({
             barcodeList={rows}
             selectedBarcodes={selectedBarcodes}
             onBarcodeSelect={onBarcodeSelect}
-            onBarcodeClick={(barcode)=> {onBarcodeClick(barcode)}}
+            onBarcodeClick={(barcode) => {
+              onBarcodeClick(barcode);
+            }}
           />
         </div>
 
@@ -126,7 +133,7 @@ const BarcodeListing = ({
         <div className="border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
