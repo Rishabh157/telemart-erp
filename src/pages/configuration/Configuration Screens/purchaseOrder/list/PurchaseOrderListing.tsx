@@ -1,7 +1,9 @@
-import React, {useState}from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import ATMBreadCrumbs, {
+  BreadcrumbType,
+} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -17,13 +19,13 @@ type Props = {
 
 const PurchaseOrderListing = ({ columns, rows }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const [selectedRows, setSelectedRows] = useState([])
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const purchaseOrderState: any = useSelector(
     (state: RootState) => state.purchaseOrder
   );
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { page, rowsPerPage } = purchaseOrderState;
 
@@ -68,11 +70,14 @@ const PurchaseOrderListing = ({ columns, rows }: Props) => {
 
         {/* Table */}
         <div className="grow overflow-auto  ">
-        <ATMTable columns={columns} rows={rows}
-           isCheckbox={true}
-           selectedRows={selectedRows}
-           onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
+          <ATMTable
+            columns={columns}
+            rows={rows}
+            isCheckbox={true}
+            selectedRows={selectedRows}
+            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            extraClasses="h-full overflow-auto"
+          />
         </div>
         {/* Pagination */}
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
