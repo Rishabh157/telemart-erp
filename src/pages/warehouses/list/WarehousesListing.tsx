@@ -71,7 +71,7 @@ const WarehouseListing = ({ columns, rows }: Props) => {
         </div>
 
         {/* Pagination */}
-        <div className="border-t border-slate-300">
+        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
             rowCount={totalItems}

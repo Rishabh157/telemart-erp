@@ -19,7 +19,7 @@ const InventoryListing = ({ columns, rows }: Props) => {
     (state: RootState) => state.inventory
   );
   const [selectedRows, setSelectedRows] = useState([]);
-  const { page, rowsPerPage, totalItems } = inventoryState;
+  const { page, rowsPerPage, totalItems } = inventoryState;  
   const navigate = useNavigate();
 
   return (
@@ -60,7 +60,8 @@ const InventoryListing = ({ columns, rows }: Props) => {
         </div>
 
         {/* Pagination */}
-        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+       
+        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">          
           <ATMPagination
             page={page}
             rowCount={totalItems}
