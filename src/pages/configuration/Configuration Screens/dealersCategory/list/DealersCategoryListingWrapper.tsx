@@ -4,12 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { DealersCategoryListResponse } from "src/models/DealersCategory.model";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
-// import {
-//     setIsTableLoading,
-//     setItems,
-//     setTotalItems,
-// } from "src/Aux/slices/vendorSlice";
-// import { useGetVendorsQuery } from "src/services/VendorServices";
 import DealersCategoryListing from "./DealersCategoryListing";
 import {
   useDeleteDealerCategoryMutation,

@@ -26,7 +26,7 @@ const DealerCategoryListing = ({ columns, rows }: Props) => {
     (state: RootState) => state.dealersCategory
   );
   const navigate = useNavigate();
-  const { page, rowsPerPage, searchValue } = dealerCategoryState;
+  const { page, rowsPerPage, searchValue, totalItems } = dealerCategoryState;
   const breadcrumbs: BreadcrumbType[] = [
     {
       label: "Configuration",
@@ -60,7 +60,7 @@ const DealerCategoryListing = ({ columns, rows }: Props) => {
         <ATMTableHeader
           searchValue={searchValue}
           page={page}
-          rowCount={rows.length}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
@@ -78,7 +78,7 @@ const DealerCategoryListing = ({ columns, rows }: Props) => {
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
