@@ -13,6 +13,7 @@ type Props = {
   value: any;
   onChange: (value: any) => void;
   size?: Size;
+  disabled?: boolean;
 };
 
 const ATMDatePicker = ({
@@ -22,6 +23,7 @@ const ATMDatePicker = ({
   value,
   onChange,
   size = "small",
+  disabled = false,
 }: Props) => {
   return (
     <div className="relative">
@@ -39,6 +41,7 @@ const ATMDatePicker = ({
       >
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DesktopDatePicker
+            disabled={disabled}
             inputFormat="MM/DD/YYYY"
             value={value}
             onChange={onChange}
