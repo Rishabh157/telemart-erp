@@ -118,7 +118,10 @@ const PageRoutes = () => {
           <Route path="/orders/add-order" element={<AddOrder />} />
           <Route path="/dealers" element={<DealersListingWrapper />} />
           <Route path="/dealers/add-dealer" element={<AddDealerWrapper />} />
-          <Route path="/dealers/edit-dealer/:id" element={<EditDealerWrapper />} />
+          <Route
+            path="/dealers/edit-dealer/:id"
+            element={<EditDealerWrapper />}
+          />
 
           <Route path="/vendors" element={<VendorsListingWrapper />} />
           <Route path="/vendors/add-vendor" element={<AddVendorWrapper />} />
@@ -283,7 +286,7 @@ const PageRoutes = () => {
             path="/configurations/scheme/add"
             element={<AddSchemeWrapper />}
           />
-          
+
           <Route
             path="/configurations/scheme/:id"
             element={<EditSchemeWrapper />}

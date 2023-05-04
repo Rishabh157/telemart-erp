@@ -1,38 +1,55 @@
 export type PurchaseOrderListResponse = {
-    poCode: string;
-    itemName: string;
-    quantity: string;
-    price: string;
-    vendor: string;
-    estimateDeliveryDate: string;
-    barcode: boolean;
-    is_active: boolean;
-    is_deleted: boolean;
-    createdAt: string;
-    updatedAt: string;
-    _id: string;
-    __v: number;
-}
+  poCode: string;
+  vendorId: string;
+  vendorLabel: string;
+  warehouseLabel: string;
+  wareHouseId: string;
+  purchaseOrder: 
+    {
+      itemName: string;
+      itemId: string;
+      rate: number;
+      quantity: number;
+      estReceivingDate: string;
+    }[]
+ 
+  is_active: boolean;
+  is_deleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  __v: number;
+};
 
-export type AddPurchaseOrder = {
-    itemImage: string;
-    itemCode: string;
-    itemName: string;
-    barcode: boolean;
-    category: string;
-    subCategory: string;
-    weight: string;
-}
+;
+
+export type addPurchaseOrder = {
+  poCode: string;
+  vendorId: string;
+  wareHouseId: string;
+  purchaseOrder: 
+    {
+      itemId: string;
+      rate: number;
+      quantity: number;
+      estReceivingDate: string;
+    }[]
+  companyId: string;
+};
 
 export type UpdatePurchaseOrder = {
-    body: {
-        itemImage: string;
-        itemCode: string;
-        barcode: boolean;
-        itemName: string;
-        category: string;
-        subCategory: string;
-        weight: string;
-    },
-    id: string;
-}
+  body: {
+    poCode: string;
+    vendorId: string;
+    wareHouseId: string;
+    purchaseOrder: 
+        {
+          itemId: string;
+          rate: number;
+          quantity: number;
+          estReceivingDate: string;
+        }[]
+    companyId: string;
+  };
+  id: string;
+};

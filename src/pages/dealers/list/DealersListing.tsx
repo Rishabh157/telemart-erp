@@ -9,22 +9,33 @@ import { setRowsPerPage, setPage } from "src/redux/slices/dealerSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 import { setSearchValue } from "src/redux/slices/dealerSlice";
-import ATMBreadCrumbs, { BreadcrumbType } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import ATMBreadCrumbs, {
+  BreadcrumbType,
+} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+import { AnyARecord } from "dns";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
   columns: any[];
   rows: any[];
+  setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>;
+ 
 };
 
-const DealersListing = ({ columns, rows }: Props) => {
+const DealersListing = ({
+  columns,
+  rows,
+  setShowDropdown,
+  
+}: Props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const dealerState: any = useSelector((state: RootState) => state.dealer);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const { page, rowsPerPage,searchValue,totalItems} = dealerState;
+
+  const { page, rowsPerPage, searchValue, totalItems } = dealerState;
   const breadcrumbs: BreadcrumbType[] = [
     {
       label: "Configuration",
@@ -34,6 +45,10 @@ const DealersListing = ({ columns, rows }: Props) => {
       label: "dealer",
     },
   ];
+
+  function handleOutsideClick(this: Document, ev: MouseEvent) {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <div className="px-4 h-[calc(100vh-55px)] pt-3">
@@ -64,8 +79,8 @@ const DealersListing = ({ columns, rows }: Props) => {
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
           onFilterClick={() => setIsFilterOpen(true)}
-          onSearch={(newValue)=>{
-            dispatch(setSearchValue(newValue))
+          onSearch={(newValue) => {
+            dispatch(setSearchValue(newValue));
           }}
         />
 
@@ -77,7 +92,7 @@ const DealersListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            
+            setShowDropdown={setShowDropdown}
           />
         </div>
 

@@ -4,6 +4,7 @@ import { WarehousesListResponse } from "src/models";
 
 export type InitialStateType = {
   items: WarehousesListResponse[] | [];
+  allItems:WarehousesListResponse[] | [];
   selectedItem: WarehousesListResponse | null;
   totalItems: number;
   isTableLoading: boolean;
@@ -17,6 +18,7 @@ export type InitialStateType = {
 const initialState: InitialStateType = {
   items: [],
   selectedItem: null,
+  allItems:[],
   totalItems: 0,
   isTableLoading: false,
   page: 1,
@@ -68,6 +70,12 @@ const warehouseSlice: any = createSlice({
     ) => {
       state.selectedItem = action.payload;
     },
+    setAllItems: (
+      state,
+      action: PayloadAction<WarehousesListResponse[]| []>
+    ) => {
+      state.allItems = action.payload;
+    },
   },
 });
 
@@ -81,5 +89,7 @@ export const {
   setIsTableLoading,
   setSelectedDealerId,
   setSelectedItem,
+  setAllItems
+
 } = warehouseSlice.actions;
 export default warehouseSlice.reducer;

@@ -4,6 +4,7 @@ import { PurchaseOrderListResponse } from "src/models/PurchaseOrder.model";
 
 export type InitialStateType = {
     items: PurchaseOrderListResponse[] | [],
+    selectedItems:PurchaseOrderListResponse  | null;
     totalItems: number,
     isTableLoading: boolean,
     page: number;
@@ -21,7 +22,8 @@ const initialState: InitialStateType = {
     rowsPerPage: 10,
     searchValue: "",
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectedDealerId: ""
+    selectedDealerId: "",
+    selectedItems:null
 }
 
 const purchaseOrderSlice: any = createSlice({
@@ -56,6 +58,9 @@ const purchaseOrderSlice: any = createSlice({
         },
         setSelectedDealerId: (state, action: PayloadAction<string>) => {
             state.selectedDealerId = action.payload
+        },
+        setSelectedItems: (state, action: PayloadAction<PurchaseOrderListResponse  | null>) => {
+            state.selectedItems = action.payload
         }
 
     }
@@ -69,6 +74,7 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectedDealerId
+    setSelectedDealerId,
+    setSelectedItems   
 } = purchaseOrderSlice.actions
 export default purchaseOrderSlice.reducer
