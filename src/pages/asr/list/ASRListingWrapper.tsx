@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { ASRListResponse } from "src/models/ASR.model";
@@ -24,11 +24,12 @@ const ASRListingWrapper = () => {
   const [updateAsrStatus] = useUpdateAsrStatusMutation();
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentId, setCurrentId] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
   const columns: columnTypes[] = [
     {
       field: "itemName",
       headerName: "Item Name",
-      flex: "flex-[1_1_0%]",
+      flex: "flex-[3_3_0%]",
       renderCell: (row: ASRListResponse) => (
         <span>
           {" "}
@@ -64,7 +65,7 @@ const ASRListingWrapper = () => {
     {
       field: "quantity",
       headerName: "Quantity",
-      flex: "flex-[1.5_1.5_0%]",
+      flex: "flex-[1.8_1.8_0%]",
       renderCell: (row: ASRListResponse) => (
         <span>
           {" "}
@@ -113,10 +114,10 @@ const ASRListingWrapper = () => {
                 size="small"
               />
             ) : (
-              <button className="cursor-pointer" onClick={() => {
+              <button id="btn" disabled={isDisabled} className="cursor-pointer"  onClick={() => {
                 showConfirmationDialog({
-                title: "Update ARS Status",
-                text: "Do you want to Update Status",
+                title: "Complete ASR",
+                text: "Do you want to Complete ASR ?",
                 showCancelButton: true,
                 next: (res) => {
                   return res.isConfirmed
@@ -219,13 +220,14 @@ const ASRListingWrapper = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data]);
-
-  const handleComplete = (id: string) =>{
-    
-    updateAsrStatus(id).then((res) => {
+  
+  const handleComplete = (id: string) =>{     
+    updateAsrStatus(id).then((res) => { 
+      setIsDisabled(true);     
       if ("data" in res) {
         if (res?.data?.status) {
           showToast("success", "Status Updated successfully!");
+          setIsDisabled(false);
         } else {
           showToast("error", res?.data?.message);
         }

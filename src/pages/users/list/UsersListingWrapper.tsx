@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import {  UsersListResponse } from 'src/models'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useGetDealersQuery } from 'src/services/DealerServices'
 import { setIsTableLoading, setItems, setTotalItems } from 'src/redux/slices/dealerSlice'
 import UsersListing from './UsersListing'
@@ -105,7 +106,7 @@ const UsersListingWrapper = () => {
     }, [isLoading, isFetching, data])
 
     return (
-        <>
+        <SideNavLayout>
             <UsersListing
                 columns={columns}
                 rows={items}
@@ -114,7 +115,7 @@ const UsersListingWrapper = () => {
                 isTableLoading={isTableLoading}
 
             />
-        </>
+        </SideNavLayout>
     )
 }
 

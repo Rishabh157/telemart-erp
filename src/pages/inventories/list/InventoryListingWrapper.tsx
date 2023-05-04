@@ -125,6 +125,20 @@ const rows = [
     mobile: "8574859685",
     _id: 10,
   },
+  {
+    productName: "Alcoban",
+    quantity: "1000",
+    email: "him@gmail.com",
+    mobile: "8574859685",
+    _id: 11,
+  },
+  {
+    productName: "Alcoban",
+    quantity: "1000",
+    email: "him@gmail.com",
+    mobile: "8574859685",
+    _id: 12,
+  },
 ];
 
 const InventoryListingWrapper = () => {
