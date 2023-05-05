@@ -32,7 +32,7 @@ const SchemeListing = ({ columns, rows }: Props) => {
   ];
 
   return (
-    <div className="px-4 h-full ">
+    <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
       {/* Breadcrumbs */}
       <div className="h-[30px]">
         <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -49,7 +49,7 @@ const SchemeListing = ({ columns, rows }: Props) => {
         </button>
       </div>
 
-      <div className="h-full border flex flex-col rounded bg-white">
+      <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
           page={page}
@@ -73,7 +73,7 @@ const SchemeListing = ({ columns, rows }: Props) => {
         </div>
 
         {/* Pagination */}
-        <div className=" flex items-center justify-end border-t border-slate-300">
+        <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
             rowCount={totalItems}

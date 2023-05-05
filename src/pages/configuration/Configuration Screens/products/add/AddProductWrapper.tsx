@@ -41,7 +41,7 @@ export type FormInitialValues = {
   description: string;
   product_image: string;
   items: {
-    itemName: string;
+    itemId: string;
     itemQuantity: number;
   }[];
   taxes: {
@@ -92,7 +92,7 @@ const steps = [
     validationSchema: object({
       items: array().of(
         object().shape({
-          itemName: string().required("Please select item name"),
+          itemId: string().required("Please select item name"),
           itemQuantity: number()
             .typeError("Quantity should be number")
             .min(1, "Quantity should be greater than or equal to 1")
@@ -251,7 +251,7 @@ const AddProductWrapper = () => {
     description: "",
     items: [
       {
-        itemName: "",
+        itemId: "",
         itemQuantity: 0,
       },
     ],
@@ -290,7 +290,7 @@ const AddProductWrapper = () => {
     if (activeStep === steps?.length - 1) {
       setApiStatus(true);
       const taxData = values.taxes.map((ele) => {
-        return { taxName: ele.taxDetail.id, taxPercent: ele.tax_rate };
+        return { taxId: ele.taxDetail.id, taxPercent: ele.tax_rate };
       });
       const callScriptData = values.call_scripts.map((ele) => {
         return {

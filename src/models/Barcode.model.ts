@@ -1,10 +1,12 @@
 export type BarcodeListResponse = {
-  product_name: string;
-  quantity: string;
-  is_used: boolean;
-  barcode_number: string;
-  is_active: boolean;
-  is_deleted: boolean;
+  productGroup: string;
+  productGroupLabel: string;
+  barcodeNumber: string;
+  barcodeGroupNumber: string;
+  isUsed: boolean;
+  companyId: string;
+  isActive: boolean;
+  isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
   _id: string;
@@ -12,14 +14,18 @@ export type BarcodeListResponse = {
 };
 
 export type AddBarcode = {
-  product_name: string;
-  quantity: string;
+  productGroup: string;
+  barcodeGroupNumber: string;
+  barcodeNumber: string;
+  companyId: string;
 };
 
 export type UpdateBarcode = {
   body: {
-    product_name: string;
-    quantity: string;
+    productGroup: string;
+    barcodeGroupNumber: string;
+    barcodeNumber: string;
+    companyId: string;
   };
   id: string;
 };

@@ -65,12 +65,12 @@ export type AddProducts = {
   productImage: string;
   description: string;
   item: {
-    itemName: string;
+    itemId: string;
     itemQuantity: number;
   }[];
 
   tax: {
-    taxName: string;
+    taxId: string;
     taxPercent: number;
   }[];
 
@@ -107,12 +107,12 @@ export type UpdateProducts = {
     productImage: string;
     description: string;
     item: {
-      itemName: string;
+      itemId: string;
       itemQuantity: number;
     }[];
 
     tax: {
-      taxName: string;
+      taxId: string;
       taxPercent: number;
     }[];
 

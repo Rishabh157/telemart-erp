@@ -49,7 +49,7 @@ export type FormInitialValues = {
   description: string;
   product_image: string;
   items: {
-    itemName: string;
+    itemId: string;
     itemQuantity: number;
   }[];
   taxes: {
@@ -101,7 +101,7 @@ const steps = [
     validationSchema: object({
       items: array().of(
         object().shape({
-          itemName: string().required("Please select item name"),
+          itemId: string().required("Please select item name"),
           itemQuantity: number()
             .typeError("Quantity should be number")
             .min(1, "Quantity should be greater than or equal to 1")
@@ -243,6 +243,7 @@ const EditProductWrapper = () => {
     }
   }, [languageData, lIsLoading, lIsFetching]);
 
+  console.log(selectedItem);
   // From Initial Values
   const initialValues: FormInitialValues = {
     product_code: selectedItem?.productCode || "",
@@ -260,7 +261,7 @@ const EditProductWrapper = () => {
     description: selectedItem?.description,
     items: selectedItem?.item?.map((ele: any) => {
       return {
-        itemName: ele?.itemId,
+        itemId: ele?.itemId,
         itemQuantity: ele?.itemQuantity,
       };
     }),
@@ -316,7 +317,7 @@ const EditProductWrapper = () => {
       });
 
       const taxData = values.taxes.map((ele) => {
-        return { taxName: ele.taxDetail.id, taxPercent: ele.tax_rate };
+        return { taxId: ele.taxDetail.id, taxPercent: ele.tax_rate };
       });
       const callScriptData = values.call_scripts.map((ele) => {
         return {

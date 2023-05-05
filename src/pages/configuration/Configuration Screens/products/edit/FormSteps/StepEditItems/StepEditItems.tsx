@@ -21,7 +21,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
         {({ push, remove }) => (
           <div className="">
             {values?.items?.map((item, itemIndex) => {
-              const { itemName, itemQuantity } = item;
+              const { itemId, itemQuantity } = item;
 
               return (
                 <div
@@ -49,11 +49,11 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                   <div className="grid grid-cols-4 gap-4 gap-y-5">
                     {/* Item Name */}
                     <ATMSelect
-                      name={`items[${itemIndex}].itemName`}
-                      value={itemName}
+                      name={`items[${itemIndex}].itemId`}
+                      value={itemId}
                       onChange={(e) => {
                         setFieldValue(
-                          `items[${itemIndex}].itemName`,
+                          `items[${itemIndex}].itemId`,
                           e.target.value
                         );
                       }}
@@ -89,7 +89,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                 type="button"
                 onClick={() =>
                   push({
-                    itemName: "",
+                    itemId: "",
                     itemQuantity: "",
                   })
                 }

@@ -7,9 +7,12 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "./AddBarcodeWrapper";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
+import { SelectOption } from "src/models/FormField/FormField.model";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
+  apiStatus: boolean;
+  productGroupOption: SelectOption[];
 };
 
 // Breadcrumbs
@@ -23,7 +26,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddBarcode = ({ formikProps }: Props) => {
+const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
   const { values, setFieldValue } = formikProps;
 
   return (
@@ -48,8 +51,11 @@ const AddBarcode = ({ formikProps }: Props) => {
             <div>
               <button
                 type="button"
+                disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  apiStatus ? "opacity-50" : ""
+                }`}
               >
                 Add Product Group
               </button>
@@ -65,16 +71,7 @@ const AddBarcode = ({ formikProps }: Props) => {
                 value={values.productGroup}
                 label="Product Group"
                 onChange={(e) => setFieldValue("productGroup", e.target.value)}
-                options={[
-                  {
-                    label: "Group 1",
-                    value: "grp1",
-                  },
-                  {
-                    label: "Group 2",
-                    value: "grp2",
-                  },
-                ]}
+                options={productGroupOption}
               />
 
               {/* Quantity  */}
