@@ -61,7 +61,7 @@ const BarcodeListing = ({
   const barcodeState: any = useSelector((state: RootState) => state.barcode);
   //  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const [activeTab, setActiveTab] = useState("Barcode Group");
+  const [activeTab, setActiveTab] = useState("Product Barcode");
 
   const { page, rowsPerPage, totalItems, searchValue } = barcodeState;
 
