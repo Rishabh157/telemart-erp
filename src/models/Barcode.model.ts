@@ -2,7 +2,8 @@ export type BarcodeListResponse = {
   productGroup: string;
   productGroupLabel: string;
   barcodeNumber: string;
-  // is_used: boolean;
+  barcodeGroupNumber: string;
+  isUsed: boolean;
   companyId: string;
   isActive: boolean;
   isDeleted: boolean;
@@ -14,6 +15,7 @@ export type BarcodeListResponse = {
 
 export type AddBarcode = {
   productGroup: string;
+  barcodeGroupNumber: string;
   barcodeNumber: string;
   companyId: string;
 };
@@ -21,6 +23,7 @@ export type AddBarcode = {
 export type UpdateBarcode = {
   body: {
     productGroup: string;
+    barcodeGroupNumber: string;
     barcodeNumber: string;
     companyId: string;
   };
