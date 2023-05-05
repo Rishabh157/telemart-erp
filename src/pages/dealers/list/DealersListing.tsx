@@ -12,7 +12,7 @@ import { setSearchValue } from "src/redux/slices/dealerSlice";
 import ATMBreadCrumbs, {
   BreadcrumbType,
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
-import { AnyARecord } from "dns";
+
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
@@ -46,9 +46,7 @@ const DealersListing = ({
     },
   ];
 
-  function handleOutsideClick(this: Document, ev: MouseEvent) {
-    throw new Error("Function not implemented.");
-  }
+
 
   return (
     <div className="px-4 h-[calc(100vh-55px)] pt-3">

@@ -19,9 +19,10 @@ import { setSearchValue } from "src/redux/slices/productSubCategorySlice";
 type Props = {
   columns: any[];
   rows: any[];
+  setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ProductSubCategoryListing = ({ columns, rows }: Props) => {
+const ProductSubCategoryListing = ({ columns, rows,setShowDropdown }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const productSubCategoryState: any = useSelector(
     (state: RootState) => state.productSubCategory
@@ -82,6 +83,7 @@ const ProductSubCategoryListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            setShowDropdown={setShowDropdown}
             extraClasses="h-full overflow-auto"
           />
         </div>

@@ -1,3 +1,4 @@
+
 import React from "react";
 import { FormikProps, isNaN } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
@@ -32,7 +33,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                 >
                   <div className="flex justify-between items-center">
                     <div className="text-primary-main text-lg pb-2 font-medium ">
-                      Product Information #{productIndex + 1}
+                      Product Information {productIndex + 1}
                     </div>
                     {/* Delete Button */}
                     {values.productInformation?.length > 1 && (
@@ -64,6 +65,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                     </div>
 
                     {/* Product Quantity */}
+                  
                     <ATMTextField
                       name={`productInformation[${productIndex}].productQuantity`}
                       value={productQuantity.toString()}
@@ -81,8 +83,10 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                       placeholder="Product Quantity"
                       className="shadow bg-white rounded"
                     />
+                 
 
                     {/* MRP */}
+                 
                     <ATMTextField
                       name={`productInformation[${productIndex}].mrp`}
                       value={mrp.toString()}
@@ -100,8 +104,10 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                       placeholder="MRP"
                       className="shadow bg-white rounded"
                     />
+                   
 
                     {/* POP  */}
+                    
                     <ATMTextField
                       name={`productInformation[${productIndex}].pop`}
                       value={pop.toString()}
@@ -119,8 +125,9 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                       placeholder="POP (product offer price)"
                       className="shadow bg-white rounded"
                     />
+                    </div>
                   </div>
-                </div>
+                
               );
             })}
 

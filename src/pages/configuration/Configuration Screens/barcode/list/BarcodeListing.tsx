@@ -15,6 +15,7 @@ import { BarcodeListResponse } from "src/models";
 import { IconType } from "react-icons";
 import { MdOutbond } from "react-icons/md";
 import BarcodeDetailsCard from "./components/BarcodeDetailsCard/BarcodeDetailsCard";
+import CartonBoxBarcodeListing from "./components/CartonBoxBarcode/CartonBoxBarcodeListing";
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
@@ -26,22 +27,26 @@ type Props = {
     isBarcodeSeleted: boolean
   ) => void;
   onBarcodeClick: (barcode: BarcodeListResponse) => void;
+  setActiveStage:React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type Tabs = {
   label: string;
   icon: IconType;
   active?: boolean;
+  component?:any;
 };
 
 const tabs: Tabs[] = [
   {
     label: "Product Barcode",
     icon: MdOutbond,
+  
   },
   {
     label: "Carton Box Barcode",
     icon: MdOutbond,
+    component:CartonBoxBarcodeListing
   },
   {
     label: "Barcode Group",
@@ -54,6 +59,7 @@ const BarcodeListing = ({
   selectedBarcodes,
   onBarcodeSelect,
   onBarcodeClick,
+  setActiveStage
 }: Props) => {
   // Hooks
   const navigate = useNavigate();
@@ -87,7 +93,8 @@ const BarcodeListing = ({
           return (
             <button
               type="button"
-              onClick={() => setActiveTab(label)}
+              onClick={() => {setActiveTab(label); setActiveStage(label)}
+              }
               key={tabIndex}
               className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${
                 activeTab === label
@@ -104,6 +111,7 @@ const BarcodeListing = ({
           );
         })}
       </div>
+
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
         {/* Header */}
         <ATMTableHeader
@@ -130,13 +138,14 @@ const BarcodeListing = ({
         </div>
 
         {/* Pagination */}
-        <div className="border-t border-slate-300">
+        <div className="flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
             rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
+
           />
         </div>
       </div>

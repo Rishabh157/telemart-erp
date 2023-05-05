@@ -19,9 +19,10 @@ import { AppDispatch, RootState } from "src/redux/store";
 type Props = {
   columns: any[];
   rows: any[];
+  setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const AttributesGroupListing = ({ columns, rows }: Props) => {
+const AttributesGroupListing = ({ columns, rows,setShowDropdown }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const attributesGroupState: any = useSelector(
     (state: RootState) => state.attributesGroup
@@ -42,7 +43,7 @@ const AttributesGroupListing = ({ columns, rows }: Props) => {
   ];
 
   return (
-    <div className="px-4 h-full pt-3  ">
+    <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
       {/* Breadcrumbs */}
       <div className="h-[30px]">
         <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -83,6 +84,7 @@ const AttributesGroupListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
+            setShowDropdown={setShowDropdown}
             extraClasses="h-full overflow-auto"
           />
         </div>
