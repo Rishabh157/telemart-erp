@@ -37,6 +37,7 @@ import statesSlice from "./slices/statesSlice";
 import districtSlice from "./slices/districtSlice";
 import tehsilSlice from "./slices/tehsilSlice";
 import pincodeSlice from "./slices/pincodeSlice";
+import CartonBoxBarcodeSlice from "./slices/CartonBoxBarcodeSlice";
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -82,6 +83,7 @@ const store = configureStore({
     country:countrySlice,
     configurationCompany: configurationCompanySlice,
     barcode: barcodeSlice,
+    cartonBoxBarcode:CartonBoxBarcodeSlice,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
