@@ -7,8 +7,8 @@ import { Field } from "src/models/FormField/FormField.model";
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
 };
-
-const formFields: { sectionName: string; fields: Field<"">[] }[] = [
+export type FieldType = Field<"">;
+const formFields: { sectionName: string; fields: FieldType[] }[] = [
   {
     sectionName: "Contact Information",
     fields: [

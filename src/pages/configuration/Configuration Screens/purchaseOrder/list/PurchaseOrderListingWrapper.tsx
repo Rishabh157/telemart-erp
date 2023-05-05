@@ -157,7 +157,7 @@ const PurchaseOrderListingWrapper = () => {
   return (
     <>
       <ConfigurationLayout>
-        <PurchaseOrderListing columns={columns} rows={items} />
+        <PurchaseOrderListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
       </ConfigurationLayout>
     </>
   );

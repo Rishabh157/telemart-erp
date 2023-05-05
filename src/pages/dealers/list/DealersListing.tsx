@@ -46,7 +46,7 @@ const DealersListing = ({
     },
   ];
 
-  
+
 
   return (
     <div className="px-4 h-[calc(100vh-55px)] pt-3">

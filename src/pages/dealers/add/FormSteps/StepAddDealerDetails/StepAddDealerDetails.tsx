@@ -1,9 +1,10 @@
 import React from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "../../AddDealerWrapper";
 import { DropdownOptions, FieldType } from "./StepAddDealerDetailsWrapper";
+import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
+
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -28,47 +29,41 @@ const StepAddDealerDetails = ({
           switch (type) {
             case "text":
               return (
-                <ATMTextField
-                  key={name}
-                  name={name}
-                  value={values[name]}
-                  onChange={(e) => {
-                    setFieldValue(name, e.target.value);
-                  }}
-                  label={label}
-                  placeholder={placeholder}
-                  className="shadow bg-white rounded"
-                />
+                <div>
+                  <ATMTextField
+                    key={name}
+                    name={name}
+                    value={values[name]}
+                    onChange={(e) => {
+                      setFieldValue(name, e.target.value);
+                    }}
+                    label={label}
+                    placeholder={placeholder}
+                    className="shadow bg-white rounded"
+                  />
+                </div>
               );
 
             case "select":
               return (
-                <div key={name} className="relative mt-4">
-                  <InputLabel className="mb-2"> {label} </InputLabel>
-                  <FormControl fullWidth>
-                    <Select
-                      name={name}
-                      value={values[name]}
-                      onChange={(e) => {
-                        setFieldValue(name, e.target.value);
-                      }}
-                      size="small"
-                      className="shadow"
-                      displayEmpty
-                    >
-                      <MenuItem value="">
-                        <span className="text-slate-400">Select {label}</span>
-                      </MenuItem>
-                      {dropdownOptions[
-                        field.optionAccessKey || "dealerCategoryOptions"
-                      ]?.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {" "}
-                          {option.label}{" "}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
+                <div key={name}>
+                <ATMSelect
+                  label={label}
+                  name={name}
+                  value={
+                    name.includes(".")
+                      ? values[name.split(".")[0]][name.split(".")[1]]
+                      : values[name]
+                  }
+                  onChange={(e:any) => {
+                    setFieldValue(name, e.target.value);
+                  }}
+                  options={
+                    dropdownOptions[
+                      field.optionAccessKey || "dealerCategoryOptions"
+                    ]
+                  }
+                />
                 </div>
               );
 

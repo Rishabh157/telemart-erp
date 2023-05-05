@@ -13,9 +13,10 @@ import { AppDispatch, RootState } from "src/redux/store";
 type Props = {
   columns: any[];
   rows: any[];
+  setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const PurchaseOrderListing = ({ columns, rows }: Props) => {
+const PurchaseOrderListing = ({ columns, rows ,setShowDropdown}: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const [selectedRows, setSelectedRows] = useState([])
 
@@ -74,7 +75,9 @@ const PurchaseOrderListing = ({ columns, rows }: Props) => {
            isCheckbox={true}
            selectedRows={selectedRows}
            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-           extraClasses='max-h-full overflow-auto' />
+           extraClasses='max-h-full overflow-auto' 
+           setShowDropdown={setShowDropdown}
+           />
         </div>
         {/* Pagination */}
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">

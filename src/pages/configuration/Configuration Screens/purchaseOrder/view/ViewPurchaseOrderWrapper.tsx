@@ -36,7 +36,7 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
   );
   useEffect(() => {
     dispatch(setSelectedItems(data?.data));
-  }, [data, isLoading, isFetching]);
+  }, [data, isLoading, isFetching, dispatch]);
 
   const initialValues: FormInitialValues = {
     poCode: selectedItems?.poCode || "",

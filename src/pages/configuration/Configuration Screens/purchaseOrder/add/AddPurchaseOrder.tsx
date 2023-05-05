@@ -228,10 +228,10 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                         type="button"
                         onClick={() =>
                           push({
-                            item_name: "",
+                            itemId: "",
                             rate: null,
                             quantity: null,
-                            est_receiving_date:null
+                            estReceivingDate:null
 
                           })
                         }

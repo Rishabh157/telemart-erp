@@ -111,7 +111,7 @@ const steps = [
           name: string().required("Name is required"),
           department: string().required("Department is required"),
           designation: string().required("Designation is required"),
-          email: string().required("Required!").email("Invalid  Email"),
+          email: string().email("Invalid  Email").required("Required!"),
           mobileNumber: string()
             .max(10)
             .trim()
@@ -160,7 +160,7 @@ const AddVendorWrapper = () => {
   const { userData } = useSelector((state: RootState) => state?.auth);
   const [apiStatus, setApiStatus] = React.useState(false);
   // States
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(2);
 
   // From Initial Values
   const initialValues: FormInitialValues = {
@@ -194,14 +194,14 @@ const AddVendorWrapper = () => {
         mobileNumber: "",
         landLine: "",
       },
-      {
-        name: "",
-        department: "",
-        designation: "",
-        email: "",
-        mobileNumber: "",
-        landLine: "",
-      },
+      // {
+      //   name: "",
+      //   department: "",
+      //   designation: "",
+      //   email: "",
+      //   mobileNumber: "",
+      //   landLine: "",
+      // },
     ],
     gst_no: "",
     gst_certificate: "",
