@@ -56,16 +56,16 @@ export const navigation: NavItemType[] = [
     label: "Outward Request",
     icon: IoDocumentTextOutline,
     path: "/outward-request",
-  },
-  {
-    label: "Configurations",
-    icon: AiOutlineSetting,
-    path: "/configurations/attributes",
-  },
+  },  
   {
     label: "ASR",
     icon: AiOutlineSetting,
     path: "/asr",
+  },
+  {
+    label: "PO",
+    icon: AiOutlineSetting,
+    path: "/purchase-order",
   },
   {
     label: "GRN",
@@ -76,5 +76,10 @@ export const navigation: NavItemType[] = [
     label: "Scheme",
     icon: AiOutlineSetting,
     path: "/scheme",
+  },
+  {
+    label: "Configurations",
+    icon: AiOutlineSetting,
+    path: "/configurations/attributes",
   },
 ];

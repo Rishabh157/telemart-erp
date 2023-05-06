@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { PurchaseOrderListResponse } from "src/models/PurchaseOrder.model";
-import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
+import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import PurchaseOrderListing from "./PurchaseOrderListing";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
@@ -26,6 +26,7 @@ const PurchaseOrderListingWrapper = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentId, setCurrentId] = useState("");
 
+
   const columns: columnTypes[] = [
     {
       field: "poCode",
@@ -40,7 +41,7 @@ const PurchaseOrderListingWrapper = () => {
       headerName: "Item Name",
       flex: "flex-[1.5_1.5_0%]",
       renderCell: (row: PurchaseOrderListResponse) => {
-        return <span> {row.purchaseOrder[0].itemName} </span>;
+        return <span> {row.purchaseOrder.itemName} </span>;
       },
     },
     {
@@ -48,7 +49,7 @@ const PurchaseOrderListingWrapper = () => {
       headerName: "Quantity",
       flex: "flex-[1.5_1.5_0%]",
       renderCell: (row: PurchaseOrderListResponse) => {
-        return <span> {row.purchaseOrder[0].quantity} </span>;
+        return <span> {row.purchaseOrder.quantity} </span>;
       },
     },
     {
@@ -56,7 +57,7 @@ const PurchaseOrderListingWrapper = () => {
       headerName: "rate",
       flex: "flex-[1.5_1.5_0%]",
       renderCell: (row: PurchaseOrderListResponse) => {
-        return <span> {row.purchaseOrder[0].rate} </span>;
+        return <span> {row.purchaseOrder.rate} </span>;
       },
     },
     {
@@ -80,7 +81,7 @@ const PurchaseOrderListingWrapper = () => {
       headerName: "Est. Delivery Date",
       flex: "flex-[1.5_1.5_0%]",
       renderCell: (row: PurchaseOrderListResponse) => {
-        return <span> {row.purchaseOrder[0].estReceivingDate} </span>;
+        return <span> {row.purchaseOrder.estReceivingDate} </span>;
       },
     },
     {
@@ -104,7 +105,7 @@ const PurchaseOrderListingWrapper = () => {
             <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
               <button
                 onClick={() => {
-                  navigate(`/configurations/purchase-order/view/${currentId}`);
+                  navigate(`/purchase-order/view/${currentId}`);
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
               >
@@ -112,11 +113,19 @@ const PurchaseOrderListingWrapper = () => {
               </button>
               <button
                 onClick={() => {
-                  navigate("/configurations/grn/add");
+                  navigate("/grn/add", {
+                    state: {
+                      poCode: row?.poCode,
+                      itemId: row?.purchaseOrder.itemId,
+                      itemName: row?.purchaseOrder.itemName,
+                      quantity: row?.purchaseOrder.quantity,
+                      companyId: row?.companyId,
+                    },
+                  });
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
               >
-                Generate GRN
+                Generate GRN 
               </button>
             </div>
           )}
@@ -125,10 +134,11 @@ const PurchaseOrderListingWrapper = () => {
       align: "end",
     },
   ];
+
   const { data, isLoading, isFetching } = useGetPurchaseOrderQuery({
     limit: rowsPerPage,
     searchValue: searchValue,
-    params: ["poCode"],
+    params: ["poCode", "wareHouseId"],
     page: page,
     filterBy: [
       {
@@ -156,9 +166,9 @@ const PurchaseOrderListingWrapper = () => {
 
   return (
     <>
-      <ConfigurationLayout>
+      <SideNavLayout>
         <PurchaseOrderListing columns={columns} rows={items} />
-      </ConfigurationLayout>
+      </SideNavLayout>
     </>
   );
 };

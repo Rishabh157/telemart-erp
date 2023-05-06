@@ -149,6 +149,7 @@ const DealersListingWrapper = () => {
       },
   
   ];
+  
   const { data, isFetching, isLoading } = useGetDealersQuery({
     limit: rowsPerPage,
     searchValue: searchValue,

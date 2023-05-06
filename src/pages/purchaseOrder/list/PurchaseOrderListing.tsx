@@ -17,7 +17,7 @@ type Props = {
   rows: any[];
 };
 
-const PurchaseOrderListing = ({ columns, rows }: Props) => {
+const PurchaseOrderListing = ({ columns, rows }: Props) => {  
   const dispatch = useDispatch<AppDispatch>();
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -31,32 +31,28 @@ const PurchaseOrderListing = ({ columns, rows }: Props) => {
 
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Configuration",
-      path: "/dashboard",
-    },
-    {
       label: "Purchase Order",
     },
   ];
 
   return (
-    <div className="px-4 h-full pt-3  ">
+    <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
       {/* Breadcrumbs */}
       <div className="h-[30px]">
         <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
       </div>
       {/* Page Header */}
-      <div className="flex justify-between items-center h-[45px]">
+      <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Purchase Order </ATMPageHeading>
         <button
-          onClick={() => navigate("/configurations/purchase-order/add")}
+          onClick={() => navigate("/purchase-order/add")}
           className="bg-primary-main text-white rounded py-1 px-3"
         >
           + Add PO{" "}
         </button>
       </div>
 
-      <div className="border flex flex-col h-full rounded bg-white">
+      <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
         {/*Table Header */}
         <ATMTableHeader
           page={page}
@@ -71,14 +67,14 @@ const PurchaseOrderListing = ({ columns, rows }: Props) => {
         />
 
         {/* Table */}
-        <div className="grow overflow-auto  ">
+        <div className="grow overflow-auto h-[calc(100%-30px)] ">
           <ATMTable
             columns={columns}
             rows={rows}
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            extraClasses="h-full overflow-auto"
+            extraClasses="overflow-auto"
           />
         </div>
         {/* Pagination */}

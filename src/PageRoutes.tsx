@@ -30,8 +30,8 @@ import AddProductWrapper from "./pages/configuration/Configuration Screens/produ
 import ProductsListingWrapper from "./pages/configuration/Configuration Screens/products/list/ProductWrapper";
 import AddProductSubCategoryWrapper from "./pages/configuration/Configuration Screens/productSubCategory/add/AddProductSubCategoryWrapper";
 import ProductSubCategoryListingWrapper from "./pages/configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper";
-import AddPurchaseOrderWrapper from "./pages/configuration/Configuration Screens/purchaseOrder/add/AddPurchaseOrderWrapper";
-import PurchaseOrderListingWrapper from "./pages/configuration/Configuration Screens/purchaseOrder/list/PurchaseOrderListingWrapper";
+import AddPurchaseOrderWrapper from "./pages/purchaseOrder/add/AddPurchaseOrderWrapper";
+import PurchaseOrderListingWrapper from "./pages/purchaseOrder/list/PurchaseOrderListingWrapper";
 import AddSchemeWrapper from "./pages/scheme/add/AddSchemeWrapper";
 import SchemeListingWrapper from "./pages/scheme/list/SchemeListingWrapper";
 import AddTaxesWrapper from "./pages/configuration/Configuration Screens/taxes/add/AddTaxesWrapper";
@@ -78,7 +78,7 @@ import EditAttributeGroupWrapper from "./pages/configuration/Configuration Scree
 import EditProductGroupWrapper from "./pages/configuration/Configuration Screens/productGroup/edit/EditProductGroupWrapper";
 import EditItemWrapper from "./pages/configuration/Configuration Screens/item/edit/EditItemWrapper";
 import EditCartonBoxWrapper from "./pages/configuration/Configuration Screens/cartonBox/edit/EditCartonBoxWrapper";
-import EditASRWrapper from "./pages/configuration/Configuration Screens/asr/edit/EditASRWrapper";
+import EditASRWrapper from "./pages/asr/edit/EditASRWrapper";
 import EditTaxesWrapper from "./pages/configuration/Configuration Screens/taxes/edit/EditTaxesWrapper";
 import EditLanguageWrapper from "./pages/configuration/Configuration Screens/language/edit/EditLanguageWrapper";
 import EditDealersCategoryWrapper from "./pages/configuration/Configuration Screens/dealersCategory/edit/EditDealersCategoryWrapper";
@@ -88,7 +88,7 @@ import EditDealerWrapper from "./pages/dealers/edit/EditDealerWrapper";
 import EditWarehouseWrapper from "./pages/warehouses/edit/EditWarehouseWrapper";
 import EditProductWrapper from "./pages/configuration/Configuration Screens/products/edit/EditProductWrapper";
 import EditSchemeWrapper from "./pages/scheme/edit/EditSchemeWrapper";
-import ViewPurchaseOrderWrapper from "./pages/configuration/Configuration Screens/purchaseOrder/view/ViewPurchaseOrderWrapper";
+import ViewPurchaseOrderWrapper from "./pages/purchaseOrder/view/ViewPurchaseOrderWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -188,6 +188,19 @@ const PageRoutes = () => {
           <Route path="/scheme" element={<SchemeListingWrapper />} />
           <Route path="/scheme/add" element={<AddSchemeWrapper />} />
           <Route path="/scheme/:id" element={<EditSchemeWrapper />} />
+
+          <Route
+            path="/purchase-order"
+            element={<PurchaseOrderListingWrapper />}
+          />
+          <Route
+            path="/purchase-order/view/:id"
+            element={<ViewPurchaseOrderWrapper />}
+          />
+          <Route
+            path="/purchase-order/add"
+            element={<AddPurchaseOrderWrapper />}
+          />
 
           <Route path="/configurations" element={<ConfigurationLayout />} />
 
@@ -320,20 +333,6 @@ const PageRoutes = () => {
             path="/configurations/barcode/:barcodeId"
             element={<ViewBarcodeWrapper />}
           />
-          <Route
-            path="/configurations/purchase-order"
-            element={<PurchaseOrderListingWrapper />}
-          />
-          <Route
-            path="/configurations/purchase-order/view/:id"
-            element={<ViewPurchaseOrderWrapper />}
-          />
-
-          <Route
-            path="/configurations/purchase-order/add"
-            element={<AddPurchaseOrderWrapper />}
-          />
-
           <Route
             path="/configurations/company"
             element={<ConfigurationCompanyListingWrapper />}
