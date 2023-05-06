@@ -43,6 +43,7 @@ const productGroupBarcodeSlice: any = createSlice({
       document.getElementById("scroll-top")?.scrollTo(0, 0);
     },
     setRowsPerPage: (state, action: PayloadAction<number>) => {
+      console.log(action.payload, "payload");
       state.rowsPerPage = action.payload;
       state.page = 1;
       document.getElementById("scroll-top")?.scrollTo(0, 0);
@@ -59,6 +60,7 @@ const productGroupBarcodeSlice: any = createSlice({
       state.page = 1;
     },
     setTotalItems: (state, action: PayloadAction<number>) => {
+      console.log(action.payload, "payload");
       state.totalItems = action.payload;
     },
     setIsTableLoading: (state, action: PayloadAction<boolean>) => {

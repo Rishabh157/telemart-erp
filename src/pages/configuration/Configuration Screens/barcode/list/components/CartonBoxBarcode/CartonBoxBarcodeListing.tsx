@@ -8,7 +8,7 @@ import {
   setRowsPerPage,
   setPage,
   setSearchValue,
-} from "src/redux/slices/barcodeSlice";
+} from "src/redux/slices/CartonBoxBarcodeSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 
 import { CartonBoxBarcodeListResponse } from "src/models/CartonBoxBarcode.model";
@@ -35,7 +35,7 @@ const CartonBoxBarcodeListing = ({
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const cartonBoxBarcodeState: any = useSelector(
-    (state: RootState) => state.barcode
+    (state: RootState) => state.cartonBoxBarcode
   );
   //  const [isFilterOpen, setIsFilterOpen] = useState(false);
 

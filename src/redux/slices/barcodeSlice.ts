@@ -12,6 +12,7 @@ export interface BarcodeSliceStateType {
   sortValue: { field: string; value: "DESC" | "ASC" };
   selectedId: string;
   activeTabIndex: number;
+  barcodesToPrint: string[];
 }
 
 const initialState: BarcodeSliceStateType = {
@@ -24,6 +25,7 @@ const initialState: BarcodeSliceStateType = {
   sortValue: { field: "createdAt", value: "DESC" },
   selectedId: "",
   activeTabIndex: 0,
+  barcodesToPrint: [],
 };
 
 const barcodeSlice: any = createSlice({
@@ -65,6 +67,9 @@ const barcodeSlice: any = createSlice({
     setActiveTabIndex: (state, action: PayloadAction<number>) => {
       state.activeTabIndex = action.payload;
     },
+    setBarcodesToPrint: (state, action: PayloadAction<string[]>) => {
+      state.barcodesToPrint = action.payload;
+    },
   },
 });
 
@@ -78,5 +83,6 @@ export const {
   setIsTableLoading,
   setSelectedId,
   setActiveTabIndex,
+  setBarcodesToPrint,
 } = barcodeSlice.actions;
 export default barcodeSlice.reducer;

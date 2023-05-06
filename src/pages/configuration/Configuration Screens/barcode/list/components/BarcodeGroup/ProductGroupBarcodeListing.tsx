@@ -7,7 +7,7 @@ import {
   setRowsPerPage,
   setPage,
   setSearchValue,
-} from "src/redux/slices/barcodeSlice";
+} from "src/redux/slices/productGroupBarcodeSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 
 import { ProductBarcodeGroupResponse } from "src/models";
@@ -38,7 +38,7 @@ const ProductGroupListing = ({
   //  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const { page, rowsPerPage, totalItems, searchValue } = ProductGroupcodeState;
-
+  console.log(totalItems);
   return (
     <div className="px-4 h-full flex flex-col gap-3">
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">

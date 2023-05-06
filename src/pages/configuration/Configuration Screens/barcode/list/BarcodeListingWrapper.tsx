@@ -111,6 +111,7 @@ const BarcodeListingWrapper = () => {
 
   useEffect(() => {
     if (!pgIsFetching && !pgIsLoading) {
+      console.log(pgData);
       dispatch(pgSetIsTableLoading(false));
       dispatch(pgSetItems(pgData?.data || []));
       dispatch(pgSetTotalItems(pgData?.totalItem || 4));

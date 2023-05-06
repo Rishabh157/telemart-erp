@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { BiCheck } from "react-icons/bi";
 import { HiDotsVertical } from "react-icons/hi";
@@ -6,7 +7,9 @@ import moment from "moment";
 import ATMLoadingButton from "src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton";
 import { BsPrinter } from "react-icons/bs";
 import { useGetAllByGroupQuery } from "src/services/BarcodeService";
-import AllBarcodes from "./BarcodeGenerator";
+import { useDispatch } from "react-redux";
+import { setBarcodesToPrint } from "src/redux/slices/barcodeSlice";
+import { useNavigate } from "react-router-dom";
 
 type BarcodeCardProps = {
   cardBoxBarcodeList: ProductBarcodeGroupResponse[];
@@ -25,8 +28,9 @@ const ProductGroupDetailCard = ({
   onProductGroupBarcodeSelect,
   onBarcodeClick,
 }: BarcodeCardProps) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [groupId, setGroupId] = useState("");
-  const [barcode, setbarcode] = useState([]);
 
   const { data, isLoading, isFetching } = useGetAllByGroupQuery(groupId, {
     skip: !groupId,
@@ -34,11 +38,14 @@ const ProductGroupDetailCard = ({
 
   useEffect(() => {
     if (!isLoading && !isFetching) {
-      console.log(data?.data);
       const allBarcodes = data?.data?.map((ele: any) => {
         return ele?.barcodeNumber;
       });
-      setbarcode(allBarcodes);
+      dispatch(setBarcodesToPrint(allBarcodes));
+      console.log(data?.data);
+      if (data?.data !== undefined) {
+        navigate("/barcodes");
+      }
     }
   }, [data, isLoading, isFetching]);
 
@@ -139,7 +146,7 @@ const ProductGroupDetailCard = ({
           }
         )}
       </div>
-      {barcode?.length ? <AllBarcodes barcodes={barcode} /> : null}
+      {/* {barcode?.length ? <AllBarcodes barcodes={barcode} /> : null} */}
     </div>
   );
 };
