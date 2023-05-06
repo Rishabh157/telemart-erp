@@ -160,7 +160,7 @@ const AddVendorWrapper = () => {
   const { userData } = useSelector((state: RootState) => state?.auth);
   const [apiStatus, setApiStatus] = React.useState(false);
   // States
-  const [activeStep, setActiveStep] = React.useState(2);
+  const [activeStep, setActiveStep] = React.useState(0);
 
   // From Initial Values
   const initialValues: FormInitialValues = {

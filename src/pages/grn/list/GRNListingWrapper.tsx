@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
@@ -74,7 +74,7 @@ const GRNListingWrapper = () => {
 
   const grnState: any = useSelector((state: RootState) => state.grn);
   const { page, rowsPerPage, searchValue, items } = grnState;
-  const [currentId, setCurrentId] = useState("");
+  //const [currentId, setCurrentId] = useState("");
 
   const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
     limit: rowsPerPage,

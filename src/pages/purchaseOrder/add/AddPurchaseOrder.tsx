@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FormikProps, FieldArray } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
 import ATMBreadCrumbs, {
@@ -40,7 +40,7 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
   };
 
   const { values, setFieldValue } = formikProps;
-  const [isDisabled, setIsDisabled] = useState(false);
+  //const [isDisabled, setIsDisabled] = useState(false);
 
   return (
     <div className="">

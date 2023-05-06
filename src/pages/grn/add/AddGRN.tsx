@@ -13,6 +13,7 @@ import { useLocation } from 'react-router-dom';
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
+  apiStatus:boolean;
 };
 
 // Breadcrumbs
@@ -26,8 +27,8 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddItem = ({ formikProps }: Props) => {
-  const { state } = useLocation();   
+const AddItem = ({ formikProps ,apiStatus}: Props) => {
+  const { state } = useLocation();
   const {poCode, itemName, quantity} = state;
   const { values, setFieldValue } = formikProps;     
 
@@ -55,9 +56,11 @@ const AddItem = ({ formikProps }: Props) => {
             <div>
               <button
                 type="button"
-                onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
-              >
+                disabled={apiStatus}
+                onClick={() =>{ formikProps.handleSubmit();
+                console.log(values)}}
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  true ? "disabled:opacity-25" : ""}`}>
                 Add GRN
               </button>
             </div>
@@ -127,8 +130,7 @@ const AddItem = ({ formikProps }: Props) => {
                     />
                   </div>
                 </AccordionDetails>
-              </Accordion>
-            
+              </Accordion>            
           </div>
         </div>
       </div>
