@@ -40,6 +40,7 @@ const PurchaseOrderListingWrapper = () => {
       headerName: "Item Name",
       flex: "flex-[1.5_1.5_0%]",
       renderCell: (row: PurchaseOrderListResponse) => {
+        console.log(row.purchaseOrder[0].itemName)
         return <span> {row.purchaseOrder[0].itemName} </span>;
       },
     },
