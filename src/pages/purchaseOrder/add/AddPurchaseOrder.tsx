@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormikProps, FieldArray } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
 import ATMBreadCrumbs, {
@@ -21,17 +21,12 @@ type Props = {
 };
 export type DropdownOptions = {
   vendorOptions: SelectOption[];
-  warehouseOptions:SelectOption[];
-  itemOptions:SelectOption[]
-
+  warehouseOptions: SelectOption[];
+  itemOptions: SelectOption[];
 };
 
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
-  {
-    label: "Purchase Order",
-    path: "/configurations/purchase-order",
-  },
   {
     label: "Add Purchase Order",
   },
@@ -41,10 +36,11 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
   const dropdownOptions: DropdownOptions = {
     vendorOptions,
     warehouseOptions,
-    itemOptions
+    itemOptions,
   };
-  
+
   const { values, setFieldValue } = formikProps;
+  const [isDisabled, setIsDisabled] = useState(false);
 
   return (
     <div className="">
@@ -87,9 +83,7 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                 value={values.poCode}
                 label="PO Code"
                 placeholder="PO Code"
-                onChange={(e) =>
-                  setFieldValue("poCode", e.target.value)
-                }
+                onChange={(e) => setFieldValue("poCode", e.target.value)}
               />
 
               {/* Vendor */}
@@ -124,13 +118,9 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                   <>
                     <div className="flex flex-col gap-y-5">
                       {values.purchaseOrder?.map((item, itemIndex) => {
-                        const {
-                          itemId,
-                          rate,
-                          quantity,
-                          estReceivingDate,
-                        } = item;
-          
+                        const { itemId, rate, quantity, estReceivingDate } =
+                          item;
+
                         return (
                           <div
                             key={itemIndex}
@@ -158,7 +148,7 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                                 type="number"
                                 min={0}
                                 name={`purchaseOrder[${itemIndex}].rate`}
-                                value={rate?.toString() || ""} 
+                                value={rate?.toString() || ""}
                                 label="Rate"
                                 placeholder="Rate"
                                 onChange={(e) =>
@@ -231,8 +221,7 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                             itemId: "",
                             rate: null,
                             quantity: null,
-                            estReceivingDate:null
-
+                            estReceivingDate: null,
                           })
                         }
                         className="bg-primary-main px-3 py-1 text-white rounded"

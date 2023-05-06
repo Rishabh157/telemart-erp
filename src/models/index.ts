@@ -65,3 +65,8 @@ export type {
   AddProducts,
   UpdateProducts,
 } from "./Products.model";
+export type {
+  GRNListResponse,
+  AddGRN,
+  UpdateGRN,
+} from "./GRN.model";

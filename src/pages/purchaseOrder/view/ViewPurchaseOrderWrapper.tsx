@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Formik } from "formik";
 import { array, date, number, object, string } from "yup";
-import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
+import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import ViewPurchaseOrder from "./ViewPurchaseOrder";
 import { useParams } from "react-router-dom";
 import { useGetPurchaseOrderByIdQuery } from "src/services/PurchaseOrderService";
@@ -70,7 +70,7 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
   const onSubmitHandler = (values: FormInitialValues) => {};
 
   return (
-    <ConfigurationLayout>
+    <SideNavLayout>
       <Formik
         enableReinitialize
         initialValues={initialValues}
@@ -81,7 +81,7 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
           return <ViewPurchaseOrder formikProps={formikProps} />;
         }}
       </Formik>
-    </ConfigurationLayout>
+    </SideNavLayout>
   );
 };
 export default ViewPurchaseOrderWrapper;
