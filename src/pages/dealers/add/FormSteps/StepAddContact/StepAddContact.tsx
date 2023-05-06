@@ -98,6 +98,7 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                         name={`contactInformation[${contactInformationIndex}].email`}
                         value={email}
                         onChange={(e) => {
+                          console.log(e.target.value)
                           setFieldValue(
                             `contactInformation[${contactInformationIndex}].email`,
                             e.target.value

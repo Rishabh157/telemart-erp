@@ -8,24 +8,29 @@ import { FormInitialValues } from "./AddGRNWrapper";
 import { MdExpandMore } from "react-icons/md";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
+import { useLocation } from 'react-router-dom';
+
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
+  apiStatus:boolean;
 };
 
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
     label: "GRN",
-    path: "/configurations/grn",
+    path: "/grn",
   },
   {
     label: "Add GRN",
   },
 ];
 
-const AddItem = ({ formikProps }: Props) => {
-  const { values, setFieldValue } = formikProps;
+const AddItem = ({ formikProps ,apiStatus}: Props) => {
+  const { state } = useLocation();
+  const {poCode, itemName, quantity} = state;
+  const { values, setFieldValue } = formikProps;     
 
   return (
     <div className="">
@@ -45,22 +50,23 @@ const AddItem = ({ formikProps }: Props) => {
             {/* Form Step Label */}
             <div className="text-xl font-medium">
               <div> PO Details </div>
-              <div className="text-[13px] font-medium text-primary-main"> PO Code : 12345 </div>
+              <div className="text-[13px] font-medium text-primary-main"> PO Code : {poCode} </div>
             </div>
             {/* BUTTON - Add SO */}
             <div>
               <button
                 type="button"
-                onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
-              >
+                disabled={apiStatus}
+                onClick={() =>{ formikProps.handleSubmit();
+                console.log(values)}}
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  true ? "disabled:opacity-25" : ""}`}>
                 Add GRN
               </button>
             </div>
           </div>
 
-          <div className="px-3 py-3">
-            {values.items?.map((item, itemIndex) => (
+          <div className="px-3 py-3">            
               <Accordion className="grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat">
                 <AccordionSummary
                   expandIcon={<MdExpandMore />}
@@ -73,23 +79,23 @@ const AddItem = ({ formikProps }: Props) => {
                       Item Name :{" "}
                       <span className="text-primary-main font-medium ">
                         {" "}
-                        Slim 24{" "}
+                        {itemName}{" "}
                       </span>
                     </div>
 
                     <div className="text-primary-main text-sm">
-                      Req Qnty : 1000Pcs | Received Qnty: 900Pcs
+                      Req Qnty : {quantity} | Received Qnty: ..
                     </div>
                   </div>
                 </AccordionSummary>
                 <AccordionDetails>
                   <div className="grid grid-cols-3 gap-5">
                     <ATMTextField
-                      name="recievedQuantity"
-                      value={item.recievedQuantity}
+                      name="receivedQuantity"
+                      value={values.receivedQuantity}
                       onChange={(e) =>
                         setFieldValue(
-                          `items[${itemIndex}].recievedQuantity`,
+                          `receivedQuantity`,
                           e.target.value
                         )
                       }
@@ -99,10 +105,10 @@ const AddItem = ({ formikProps }: Props) => {
 
                     <ATMTextField
                       name="goodQuantity"
-                      value={item.goodQuantity}
+                      value={values.goodQuantity}
                       onChange={(e) =>
                         setFieldValue(
-                          `items[${itemIndex}].goodQuantity`,
+                          `goodQuantity`,
                           e.target.value
                         )
                       }
@@ -112,10 +118,10 @@ const AddItem = ({ formikProps }: Props) => {
 
                     <ATMTextField
                       name="defectiveQuantity"
-                      value={item.defectiveQuantity}
+                      value={values.defectiveQuantity}
                       onChange={(e) =>
                         setFieldValue(
-                          `items[${itemIndex}].defectiveQuantity`,
+                          `defectiveQuantity`,
                           e.target.value
                         )
                       }
@@ -124,8 +130,7 @@ const AddItem = ({ formikProps }: Props) => {
                     />
                   </div>
                 </AccordionDetails>
-              </Accordion>
-            ))}
+              </Accordion>            
           </div>
         </div>
       </div>
