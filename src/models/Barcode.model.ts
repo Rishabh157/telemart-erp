@@ -13,6 +13,13 @@ export type BarcodeListResponse = {
   __v: number;
 };
 
+export type ProductBarcodeGroupResponse = {
+  _id: string;
+  barcodeGroupNumber: string;
+  companyId: string;
+  createdAt: string;
+  productGroupLabel: string;
+};
 export type AddBarcode = {
   productGroup: string;
   barcodeGroupNumber: string;

@@ -1,7 +1,6 @@
 // import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
+// import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
 import {
@@ -11,51 +10,37 @@ import {
 } from "src/redux/slices/barcodeSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 
-import { CartonBoxBarcodeListResponse } from "src/models/CartonBoxBarcode.model";
-import CartonBoxBarcodeDetailCard from "./CartonBoxBarcodeDetailCard";
+import { ProductBarcodeGroupResponse } from "src/models";
+import ProductGroupDetailCard from "./ProductGroupDetailCard";
 
 type Props = {
   rows: any[];
-  selectedCartonBoxBarcodes: CartonBoxBarcodeListResponse[];
-  onCartonBoxBarcodeSelect: (
+  selectedProductGroupcodes: ProductBarcodeGroupResponse[];
+  onProductGroupcodeSelect: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    barcode: CartonBoxBarcodeListResponse,
+    barcode: ProductBarcodeGroupResponse,
     isBarcodeSeleted: boolean
   ) => void;
-  onBarcodeClick: (barcode: CartonBoxBarcodeListResponse) => void;
+  onBarcodeClick: (barcode: ProductBarcodeGroupResponse) => void;
 };
 
-const CartonBoxBarcodeListing = ({
+const ProductGroupListing = ({
   rows,
-  selectedCartonBoxBarcodes,
-  onCartonBoxBarcodeSelect,
+  selectedProductGroupcodes,
+  onProductGroupcodeSelect,
   onBarcodeClick,
 }: Props) => {
   // Hooks
-  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const cartonBoxBarcodeState: any = useSelector(
-    (state: RootState) => state.barcode
+  const ProductGroupcodeState: any = useSelector(
+    (state: RootState) => state.productGroupBarcode
   );
   //  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const { page, rowsPerPage, totalItems, searchValue } = cartonBoxBarcodeState;
+  const { page, rowsPerPage, totalItems, searchValue } = ProductGroupcodeState;
 
   return (
     <div className="px-4 h-full flex flex-col gap-3">
-      {/* Page Header */}
-      <div className="flex justify-between items-center h-[55px]">
-        <ATMPageHeading> Barcode </ATMPageHeading>
-        <button
-          onClick={() => {
-            navigate("/configurations/barcode/carton-box/add");
-          }}
-          className="bg-primary-main text-white rounded py-1 px-3"
-        >
-          + Add Carton BoxBarcode
-        </button>
-      </div>
-
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
         {/* Header */}
         <ATMTableHeader
@@ -71,10 +56,10 @@ const CartonBoxBarcodeListing = ({
 
         {/* Barcode Detail Cards */}
         <div className="grow overflow-auto  ">
-          <CartonBoxBarcodeDetailCard
+          <ProductGroupDetailCard
             cardBoxBarcodeList={rows}
-            selectedCartonBoxBarcodes={selectedCartonBoxBarcodes}
-            onCartonBoxBarcodeSelect={onCartonBoxBarcodeSelect}
+            selectedProductGroupBarcodes={selectedProductGroupcodes}
+            onProductGroupBarcodeSelect={onProductGroupcodeSelect}
             onBarcodeClick={(barcode) => {
               onBarcodeClick(barcode);
             }}
@@ -100,4 +85,4 @@ const CartonBoxBarcodeListing = ({
   );
 };
 
-export default CartonBoxBarcodeListing;
+export default ProductGroupListing;
