@@ -26,22 +26,18 @@ const GRNListing = ({ columns, rows }: Props) => {
 
   const breadcrumbs: BreadcrumbType[] = [
     {
-      label: "Configuration",
-      path: "/dashboard",
-    },
-    {
       label: "Goods Received Note",
     },
   ];
 
   return (
-    <div className="px-4 h-full pt-3  ">
+    <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
       {/* Breadcrumbs */}
       <div className="h-[30px]">
         <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
       </div>
       {/* Page Header */}
-      <div className="flex justify-between items-center h-[45px]">
+      <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> GRN </ATMPageHeading>
       </div>
 
@@ -63,7 +59,7 @@ const GRNListing = ({ columns, rows }: Props) => {
            isCheckbox={true}
            selectedRows={selectedRows}
            onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-           extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
+           extraClasses='max-h-full overflow-auto' />
         </div>
 
         {/* Pagination */}

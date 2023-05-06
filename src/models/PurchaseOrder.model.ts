@@ -11,7 +11,7 @@ export type PurchaseOrderListResponse = {
       rate: number;
       quantity: number;
       estReceivingDate: string;
-    }[]
+    };
  
   is_active: boolean;
   is_deleted: boolean;

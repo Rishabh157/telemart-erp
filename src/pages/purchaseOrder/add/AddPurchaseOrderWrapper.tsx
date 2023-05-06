@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Formik } from "formik";
 import { array, date, number, object, string } from "yup";
 import AddPurchaseOrder from "./AddPurchaseOrder";
-import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
+import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { RootState } from "src/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useAddPurchaseOrderMutation } from "src/services/PurchaseOrderService";
@@ -139,8 +139,8 @@ const AddPurchaseOrderWrapper = (props: Props) => {
   });
 
   //    Form Submit Handler
-  const onSubmitHandler = (values: FormInitialValues) => {
-    console.log("onSubmitHandler", values);
+  const onSubmitHandler = (values: FormInitialValues) => { 
+    //console.log(values);   
     setApiStatus(true);
     const purchaseOrder = values.purchaseOrder.map((ele: any) => {
       return {
@@ -160,7 +160,7 @@ const AddPurchaseOrderWrapper = (props: Props) => {
         if ("data" in res) {
           if (res?.data?.status) {
             showToast("success", "purchase-order added successfully!");
-            navigate("/configurations/purchase-order");
+            navigate("/purchase-order");
           } else {
             showToast("error", res?.data?.message);
           }
@@ -179,7 +179,7 @@ const AddPurchaseOrderWrapper = (props: Props) => {
   // }
 
   return (
-    <ConfigurationLayout>
+    <SideNavLayout>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -197,7 +197,7 @@ const AddPurchaseOrderWrapper = (props: Props) => {
           );
         }}
       </Formik>
-    </ConfigurationLayout>
+    </SideNavLayout>
   );
 };
 export default AddPurchaseOrderWrapper;

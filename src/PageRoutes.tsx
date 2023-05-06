@@ -204,6 +204,19 @@ const PageRoutes = () => {
           <Route path="/scheme/add" element={<AddSchemeWrapper />} />
           <Route path="/scheme/:id" element={<EditSchemeWrapper />} />
 
+          <Route
+            path="/purchase-order"
+            element={<PurchaseOrderListingWrapper />}
+          />
+          <Route
+            path="/purchase-order/view/:id"
+            element={<ViewPurchaseOrderWrapper />}
+          />
+          <Route
+            path="/purchase-order/add"
+            element={<AddPurchaseOrderWrapper />}
+          />
+
           <Route path="/configurations" element={<ConfigurationLayout />} />
 
           <Route
@@ -340,20 +353,6 @@ const PageRoutes = () => {
             path="/configurations/barcode/:barcodeId"
             element={<ViewBarcodeWrapper />}
           />
-          <Route
-            path="/configurations/purchase-order"
-            element={<PurchaseOrderListingWrapper />}
-          />
-          <Route
-            path="/configurations/purchase-order/view/:id"
-            element={<ViewPurchaseOrderWrapper />}
-          />
-
-          <Route
-            path="/configurations/purchase-order/add"
-            element={<AddPurchaseOrderWrapper />}
-          />
-
           <Route
             path="/configurations/company"
             element={<ConfigurationCompanyListingWrapper />}

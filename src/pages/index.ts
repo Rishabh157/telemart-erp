@@ -28,8 +28,8 @@ import AddProductWrapper from "./configuration/Configuration Screens/products/ad
 import ProductsListingWrapper from "./configuration/Configuration Screens/products/list/ProductWrapper";
 import AddProductSubCategoryWrapper from "./configuration/Configuration Screens/productSubCategory/add/AddProductSubCategoryWrapper";
 import ProductSubCategoryListingWrapper from "./configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper";
-import AddPurchaseOrderWrapper from "./configuration/Configuration Screens/purchaseOrder/add/AddPurchaseOrderWrapper";
-import PurchaseOrderListingWrapper from "./configuration/Configuration Screens/purchaseOrder/list/PurchaseOrderListingWrapper";
+import AddPurchaseOrderWrapper from "./purchaseOrder/add/AddPurchaseOrderWrapper";
+import PurchaseOrderListingWrapper from "./purchaseOrder/list/PurchaseOrderListingWrapper";
 import AddSchemeWrapper from "./scheme/add/AddSchemeWrapper";
 import SchemeListingWrapper from "./scheme/list/SchemeListingWrapper";
 import AddTaxesWrapper from "./configuration/Configuration Screens/taxes/add/AddTaxesWrapper";
@@ -68,7 +68,7 @@ import EditAttributeGroupWrapper from "./configuration/Configuration Screens/att
 import EditProductGroupWrapper from "./configuration/Configuration Screens/productGroup/edit/EditProductGroupWrapper";
 import EditItemWrapper from "./configuration/Configuration Screens/item/edit/EditItemWrapper";
 import EditCartonBoxWrapper from "./configuration/Configuration Screens/cartonBox/edit/EditCartonBoxWrapper";
-import EditASRWrapper from "./configuration/Configuration Screens/asr/edit/EditASRWrapper";
+import EditASRWrapper from "./asr/edit/EditASRWrapper";
 import EditTaxesWrapper from "./configuration/Configuration Screens/taxes/edit/EditTaxesWrapper";
 import EditLanguageWrapper from "./configuration/Configuration Screens/language/edit/EditLanguageWrapper";
 import EditDealersCategoryWrapper from "./configuration/Configuration Screens/dealersCategory/edit/EditDealersCategoryWrapper";
@@ -78,7 +78,7 @@ import EditDealerWrapper from "./dealers/edit/EditDealerWrapper";
 import EditWarehouseWrapper from "./warehouses/edit/EditWarehouseWrapper";
 import EditProductWrapper from "./configuration/Configuration Screens/products/edit/EditProductWrapper";
 import EditSchemeWrapper from "./scheme/edit/EditSchemeWrapper";
-import ViewPurchaseOrderWrapper from "./configuration/Configuration Screens/purchaseOrder/view/ViewPurchaseOrderWrapper";
+import ViewPurchaseOrderWrapper from "./purchaseOrder/view/ViewPurchaseOrderWrapper";
 import AddCbBarcodeWrapper from "./configuration/Configuration Screens/barcode/AddCb/AddCbWrapper";
 
 export {
