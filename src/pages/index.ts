@@ -80,7 +80,7 @@ import EditProductWrapper from "./configuration/Configuration Screens/products/e
 import EditSchemeWrapper from "./scheme/edit/EditSchemeWrapper";
 import ViewPurchaseOrderWrapper from "./purchaseOrder/view/ViewPurchaseOrderWrapper";
 import AddCbBarcodeWrapper from "./configuration/Configuration Screens/barcode/AddCb/AddCbWrapper";
-
+import BarcodeGenerator from "./configuration/Configuration Screens/barcode/list/components/BarcodeGroup/BarcodeGenerator";
 export {
   AddASRWrapper,
   ASRListingWrapper,
@@ -164,4 +164,5 @@ export {
   EditSchemeWrapper,
   ViewPurchaseOrderWrapper,
   AddCbBarcodeWrapper,
+  BarcodeGenerator,
 };

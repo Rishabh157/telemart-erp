@@ -13,6 +13,16 @@ export const barcodeApi = apiSlice.injectEndpoints({
         body,
       }),
     }),
+    //********* GET PRODUCT BARCODE GROUP *********//
+
+    getProductGroupBarcode: builder.query({
+      providesTags: ["Barcode"],
+      query: (body: PaginationType) => ({
+        url: "/bar-code/barcode-group",
+        method: "POST",
+        body,
+      }),
+    }),
 
     //***** GET *****/
     getAllBarcode: builder.query({
@@ -24,6 +34,15 @@ export const barcodeApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    //***** GET *****/
+    getAllByGroup: builder.query({
+      providesTags: ["Barcode"],
+      query: (id) => ({
+        url: `/bar-code/all-by-group/${id}`,
+        method: "GET",
+        // body,
+      }),
+    }),
     //***** ADD *****/
     addBarcode: builder.mutation({
       invalidatesTags: ["Barcode"],
@@ -89,4 +108,6 @@ export const {
   useExportBarcodeDataMutation,
   useDeleteBarcodeMutation,
   useGetAllBarcodeQuery,
+  useGetProductGroupBarcodeQuery,
+  useGetAllByGroupQuery,
 } = barcodeApi;
