@@ -70,7 +70,7 @@ const steps = [
       firstName: string().required("first name is required"),
       lastName: string().required("LastName is required"),
       dealerCategory: string().required("please choose dealer category"),
-      email: string().email().required("email is required"),
+      email: string().email("email is inavlid").required("email is required"),
     }),
   },
   {
@@ -110,15 +110,15 @@ const steps = [
           name: string().required("Name is required"),
           department: string().required("Department is required"),
           designation: string().required("Designation is required"),
-          email: string().email().required("Email is required"),
+          email: string().email("Invalid email").required("Email is required"),
           mobileNumber: string()
-            .min(10, "Number should be !0 digits")
+            .min(10, "Number should be 10 digits")
             .max(10, "maximum 10 digit")
             .required("Mobile number is required"),
           landLine: string()
-            .min(10, "Number should be !0 digits")
+            .min(10, "Number should be 10 digits")
             .max(10, "maximum 10 digit")
-            .required("Landline is required"),
+            .required("Landline is required")
         })
       ),
     }),
@@ -160,7 +160,7 @@ const steps = [
 const AddDealerWrapper = () => {
   // States
   const navigate = useNavigate();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(2);
   const [addDealer] = useAddDealerMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
 
@@ -236,6 +236,7 @@ const AddDealerWrapper = () => {
   });
 
   const onSubmitHandler = (values: FormInitialValues) => {
+    console.log(values)
     if (activeStep === steps.length - 1) {
       setTimeout(() => {
         addDealer({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { ASRListResponse } from "src/models/ASR.model";

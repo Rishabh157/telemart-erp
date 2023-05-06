@@ -87,14 +87,14 @@ const steps = [
         object().shape({
           productGroup: string().required("Please select a product"),
           productQuantity: number()
-            .typeError("Quantity must be a number")
+           
             .min(1, "Please enter quantity")
             .required("Quantity is required"),
           mrp: number()
-            .min(0, "MRP must be postive")
+            .min(1, "MRP must be postive")
             .required("MRP is required"),
           pop: number()
-            .min(0, "Offer price must be positive")
+            .min(1, "Offer price must be positive")
             .required("Offer price is required"),
         })
       ),

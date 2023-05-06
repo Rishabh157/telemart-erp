@@ -13,9 +13,11 @@ import { SelectOption } from "src/models/FormField/FormField.model";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
-  vendorOptions: any[];
-  warehouseOptions: any[];
-  itemOptions: any[];
+  vendorOptions:any[]
+  warehouseOptions:any[]
+  itemOptions:any[]
+  apiStatus:boolean
+
 };
 export type DropdownOptions = {
   vendorOptions: SelectOption[];
@@ -30,12 +32,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddPurchaseOrder = ({
-  formikProps,
-  vendorOptions,
-  warehouseOptions,
-  itemOptions,
-}: Props) => {
+const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOptions,apiStatus}: Props) => {
   const dropdownOptions: DropdownOptions = {
     vendorOptions,
     warehouseOptions,
@@ -67,12 +64,10 @@ const AddPurchaseOrder = ({
             <div>
               <button
                 type="button"
-                disabled={isDisabled}
-                onClick={() => {
-                  formikProps.handleSubmit();
-                  setIsDisabled(true);
-                }}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                disabled={apiStatus}
+                onClick={() => formikProps.handleSubmit()}
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  true ? "disabled:opacity-25" : ""}`}
               >
                 Add PO
               </button>

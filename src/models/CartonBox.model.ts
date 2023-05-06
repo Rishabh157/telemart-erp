@@ -28,7 +28,8 @@ export type AddCartonBox = {
   companyId: string;
 };
 
-export type UpdateCartonBox = {
+export type UpdateCartonBox
+ = {
   body: {
     boxName: string;
     innerItemCount: number;

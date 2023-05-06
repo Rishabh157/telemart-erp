@@ -54,6 +54,7 @@ const AddBarcodeWrapper = (props: Props) => {
   //    Form Submit Handler
   const onSubmitHandler = async (values: FormInitialValues) => {
     setApiStatus(true);
+    const uniqueGrouId = uuidv4();
     const promises = [];
     for (let i = 0; i < Number(values?.quantity); i++) {
       const uniqueId = uuidv4();
@@ -61,6 +62,7 @@ const AddBarcodeWrapper = (props: Props) => {
         addBarcode({
           productGroup: values.productGroup,
           barcodeNumber: uniqueId,
+          barcodeGroupNumber: uniqueGrouId,
           companyId: userData?.companyId || "",
         })
       );

@@ -12,7 +12,6 @@ import { useGetVendorsQuery } from "src/services/VendorServices";
 import { useGetWareHousesQuery } from "src/services/WareHoouseService";
 import {
   useGetAllItemsQuery,
-  useGetItemsQuery,
 } from "src/services/ItemService";
 import { setAllItems } from "src/redux/slices/vendorSlice";
 import { setAllItems as setAllWareHouse } from "src/redux/slices/warehouseSlice";
@@ -47,14 +46,14 @@ const AddPurchaseOrderWrapper = (props: Props) => {
   const [addPurchaseOrder] = useAddPurchaseOrderMutation();
   const {
     data: vendorData,
-    isLoading: vendorIsLoadeing,
+    isLoading: vendorIsLoading,
     isFetching: VendorIsFetching,
   } = useGetVendorsQuery("");
   const { allItems }: any = useSelector((state: RootState) => state.vendor);
 
   const {
     data: warehouseData,
-    isLoading: warehouseIsLoadeing,
+    isLoading: warehouseIsLoading,
     isFetching: warehouseIsFetching,
   } = useGetWareHousesQuery("");
   const { allItems: warehouseItems }: any = useSelector(
@@ -62,7 +61,7 @@ const AddPurchaseOrderWrapper = (props: Props) => {
   );
   const {
     data: itemsData,
-    isLoading: itemsIsLoadeing,
+    isLoading: itemsIsLoading,
     isFetching: itemsIsFetching,
   } = useGetAllItemsQuery("");
   const { allItems: itemsList }: any = useSelector(
@@ -93,16 +92,16 @@ const AddPurchaseOrderWrapper = (props: Props) => {
   //vendor
   useEffect(() => {
     disptach(setAllItems(vendorData?.data));
-  }, [vendorData]);
+  }, [vendorData, vendorIsLoading, VendorIsFetching ,disptach]);
 
   //warehouse
   useEffect(() => {
     disptach(setAllWareHouse(warehouseData?.data));
-  }, [warehouseData]);
+  }, [warehouseData,warehouseIsLoading ,warehouseIsFetching, disptach]);
 
   useEffect(() => {
     disptach(setAllItem(itemsData?.data));
-  }, [itemsData]);
+  }, [itemsData,disptach ,itemsIsLoading,itemsIsFetching]);
   //itemOption
 
   // Form Initial Values
@@ -193,6 +192,7 @@ const AddPurchaseOrderWrapper = (props: Props) => {
               vendorOptions={vendorOptions}
               warehouseOptions={warehouseOptions}
               itemOptions={itemOptions}
+              apiStatus={apiStatus}
             />
           );
         }}

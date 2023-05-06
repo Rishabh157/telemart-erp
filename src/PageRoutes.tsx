@@ -89,6 +89,7 @@ import EditWarehouseWrapper from "./pages/warehouses/edit/EditWarehouseWrapper";
 import EditProductWrapper from "./pages/configuration/Configuration Screens/products/edit/EditProductWrapper";
 import EditSchemeWrapper from "./pages/scheme/edit/EditSchemeWrapper";
 import ViewPurchaseOrderWrapper from "./pages/purchaseOrder/view/ViewPurchaseOrderWrapper";
+import AddCbBarcodeWrapper from "./pages/configuration/Configuration Screens/barcode/AddCb/AddCbWrapper";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -299,6 +300,7 @@ const PageRoutes = () => {
             path="/configurations/carton-box/add"
             element={<AddCartonBoxWrapper />}
           />
+        
           <Route
             path="/configurations/carton-box/:id"
             element={<EditCartonBoxWrapper />}
@@ -327,6 +329,10 @@ const PageRoutes = () => {
           <Route
             path="/configurations/barcode/add"
             element={<AddBarcodeWrapper />}
+          />
+              <Route
+            path="/configurations/barcode/carton-box/add"
+            element={<AddCbBarcodeWrapper />}
           />
 
           <Route

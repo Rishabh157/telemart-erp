@@ -19,9 +19,10 @@ import { AppDispatch, RootState } from "src/redux/store";
 type Props = {
   columns: any[];
   rows: any[];
+  setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ProductGroupListing = ({ columns, rows }: Props) => {
+const ProductGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const productGroupState: any = useSelector(
     (state: RootState) => state.productGroup
@@ -81,6 +82,7 @@ const ProductGroupListing = ({ columns, rows }: Props) => {
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
             extraClasses="h-full overflow-auto"
+            setShowDropdown={setShowDropdown}
           />
         </div>
 

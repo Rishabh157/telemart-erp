@@ -167,7 +167,7 @@ const PurchaseOrderListingWrapper = () => {
   return (
     <>
       <SideNavLayout>
-        <PurchaseOrderListing columns={columns} rows={items} />
+        <PurchaseOrderListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
       </SideNavLayout>
     </>
   );
