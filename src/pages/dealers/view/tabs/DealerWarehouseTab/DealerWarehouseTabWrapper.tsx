@@ -117,7 +117,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
           <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
             <button
               onClick={() => {
-                navigate(`/warehouse/${currentId}`);
+                navigate(`/warehouse/${currentId}`,{state:{params}});
               }}
               className="block w-full text-left px-4 py-2 hover:bg-gray-100"
             >

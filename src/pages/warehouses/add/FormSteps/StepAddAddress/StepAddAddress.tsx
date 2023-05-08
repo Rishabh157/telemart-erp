@@ -1,9 +1,9 @@
-import { FormControl, MenuItem, Select } from "@mui/material";
 import { FormikProps } from "formik";
 import React from "react";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "../../AddWarehouseWrapper";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
+import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 
 type DropdownOptions = {
   counrtyOptions: SelectOption[];
@@ -99,42 +99,25 @@ const StepAddAddress = ({
 
                   case "select":
                     return (
-                      <div key={name} className="relative mt-4">
-                        <label className=" text-slate-700 font-medium">
-                          {" "}
-                          {label}{" "}
-                        </label>
-                        <FormControl fullWidth>
-                          <Select
-                            name={name}
-                            value={
-                              name.includes(".")
-                                ? values[name.split(".")[0]][name.split(".")[1]]
-                                : values[name]
-                            }
-                            onChange={(e) => {
-                              setFieldValue(name, e.target.value);
-                            }}
-                            size="small"
-                            className="shadow mt-2"
-                            displayEmpty
-                          >
-                            <MenuItem value="">
-                              <span className="text-slate-400">
-                                Select {label}
-                              </span>
-                            </MenuItem>
-                            {dropdownOptions[
-                              field.optionAccessKey || "counrtyOptions"
-                            ]?.map((option) => (
-                              <MenuItem key={option.value} value={option.value}>
-                                {" "}
-                                {option.label}{" "}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </div>
+                      <div>
+                      <ATMSelect
+                        label={label}
+                        name={name}
+                        value={
+                          name.includes(".")
+                            ? values[name.split(".")[0]][name.split(".")[1]]
+                            : values[name]
+                        }
+                        onChange={(e: any) => {
+                          setFieldValue(name, e.target.value);
+                        }}
+                        options={
+                          dropdownOptions[
+                            field.optionAccessKey || "counrtyOptions"
+                          ]
+                        }
+                      />
+                    </div>
                     );
 
                   default:

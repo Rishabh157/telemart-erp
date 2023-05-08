@@ -86,7 +86,7 @@ const AddASRWrapper = (props: Props) => {
           return <AddASR apiStatus={apiStatus} formikProps={formikProps} />;
         }}
       </Formik>
-    </SideNavLayout>
+  </SideNavLayout>
   );
 };
 

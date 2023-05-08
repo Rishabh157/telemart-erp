@@ -41,7 +41,7 @@ const LocationListView = ({
   const { selectedLocationArea }: any = useSelector(
     (state: RootState) => state.areas
   );
-  // console.log(selectedLocationState, "************");
+
   return (
     <div className="border h-full w-full flex flex-col gap-1 rounded bg-white shadow-lg ">
       <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">

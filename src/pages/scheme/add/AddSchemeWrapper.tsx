@@ -244,7 +244,6 @@ const AddSchemeWrapper = () => {
     })
   })
    
-console.log(productGroupOptions)
 
   useEffect(()=>{
     dispatch(setAllItems(data?.data))
