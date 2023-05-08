@@ -239,7 +239,6 @@ const AddDealerWrapper = () => {
   });
 
   const onSubmitHandler = (values: FormInitialValues) => {
-    console.log(values)
     if (activeStep === steps.length - 1) {
       setTimeout(() => {
         addDealer({

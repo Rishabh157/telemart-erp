@@ -53,10 +53,9 @@ const AddGRNWrapper = (props: Props) => {
       })
    )
     })
-console.log(validationSchema)
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    console.log(values,"aaaaa")
+
     setApiStatus(true);
     setTimeout(() => {
       addGRN({

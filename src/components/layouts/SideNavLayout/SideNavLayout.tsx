@@ -25,6 +25,7 @@ const SideNavLayout = ({ children }: Props) => {
 
   const location = useLocation();
 
+
   const currentPath = `/${location.pathname?.split("/")[1]}`;
 
   return (
@@ -42,11 +43,10 @@ const SideNavLayout = ({ children }: Props) => {
           isPathEqualtoNavItem={(navItem: any) => navItem.path === currentPath}
         />
       </div>
-
       <div
         className={`h-full ${
           isCollapsed ? "min-w-[calc(100vw-50px)]" : "min-w-[calc(100vw-250px)]"
-        }`}
+        }`} 
       >
         {/* Header */}
         <div className="h-[55px] border-b border-slate-300  ">

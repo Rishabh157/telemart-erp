@@ -58,7 +58,7 @@ const AddItem = ({ formikProps ,apiStatus}: Props) => {
                 type="button"
                 disabled={apiStatus}
                 onClick={() =>{ formikProps.handleSubmit();
-                console.log(values)}}
+          }}
                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                   true ? "disabled:opacity-25" : ""}`}>
                 Add GRN

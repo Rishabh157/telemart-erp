@@ -50,7 +50,7 @@ const ViewLayout = ({
 
   return (
     <>
-      <SideNavLayout>
+      <SideNavLayout>   
         <div className="h-[calc(100vh-55px)]">
           <div className="w-full flex  h-[calc(100%)] bg-white">
             {/* Left Section Side Bar */}
@@ -122,7 +122,6 @@ const ViewLayout = ({
               <div className="h-[calc(100%-85px)] pt-4 ">
                 <div className="h-full overflow-auto">
                   <Outlet />
-                 
                 </div>
               </div>
             </div>

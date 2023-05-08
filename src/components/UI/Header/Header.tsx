@@ -66,7 +66,7 @@ const Header = (props: Props) => {
         >
           <div className="h-[35px] w-[35px] flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
             H
-          </div>
+          </div>0
 
           {/* <div className='flex flex-col gap-1 justify-start items-start' >
                         <div className='text-primary-main text-[13px]' > Administrator </div>
