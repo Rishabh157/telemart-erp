@@ -1,6 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AddASRWrapper, ASRListingWrapper } from "./pages/index";
+import {
+  AddASRWrapper,
+  ASRListingWrapper,
+  BarcodeGenerator,
+} from "./pages/index";
 import { AddAttributeWrapper, AttributesListingWrapper } from "./pages/index";
 import {
   AddAttributeGroupWrapper,
@@ -53,7 +57,8 @@ import {
   DealerGeneralInformationTabWrapper,
   DealerWarehouseTabWrapper,
 } from "./pages/index";
-import {InwardInventoryWrapper,
+import {
+  InwardInventoryWrapper,
   InventoryListingWrapper,
   LoginPage,
   AddOrder,
@@ -70,8 +75,8 @@ import {InwardInventoryWrapper,
   VendorGeneralInformationTabWrapper,
   VendorWarehouseTabWrapper,
   AddWarehouseWrapper,
-  WarehousesListingWrapper} from "./pages/index"
-
+  WarehousesListingWrapper,
+} from "./pages/index";
 
 import { useDispatch } from "react-redux";
 import {
@@ -101,9 +106,8 @@ import {
   EditProductWrapper,
   EditSchemeWrapper,
   ViewPurchaseOrderWrapper,
-  AddCbBarcodeWrapper
-} from "./pages/index"                                                                                                                                                                                                                                                                                 
-
+  AddCbBarcodeWrapper,
+} from "./pages/index";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -392,6 +396,7 @@ const PageRoutes = () => {
             path="/configurations/language"
             element={<LanguageListingWrapper />}
           />
+          <Route path="/barcodes" element={<BarcodeGenerator />} />
         </Routes>
       </BrowserRouter>
     </>

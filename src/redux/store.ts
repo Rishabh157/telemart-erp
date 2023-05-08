@@ -38,6 +38,7 @@ import districtSlice from "./slices/districtSlice";
 import tehsilSlice from "./slices/tehsilSlice";
 import pincodeSlice from "./slices/pincodeSlice";
 import CartonBoxBarcodeSlice from "./slices/CartonBoxBarcodeSlice";
+import ProductGroupBarcodeSlice from "./slices/productGroupBarcodeSlice";
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -67,23 +68,24 @@ const store = configureStore({
     purchaseOrder: PurchaseOrderSlice,
     grn: GRNSlice,
     productSubCategory: productSubCategorySlice,
-    productGroup:productGroupSlice,
+    productGroup: productGroupSlice,
     attributes: attributesSlice,
-    tax:TaxesSlice,
+    tax: TaxesSlice,
     item: itemSlice,
-    states:statesSlice,
-    district:districtSlice,
-    areas:areaSlice,
+    states: statesSlice,
+    district: districtSlice,
+    areas: areaSlice,
     language: languageSlice,
     dealersCategory: dealersCategorySlice,
     products: productSlice,
-    tehsils:tehsilSlice,
-    pincode:pincodeSlice,
+    tehsils: tehsilSlice,
+    pincode: pincodeSlice,
     asr: ASRSlice,
-    country:countrySlice,
+    country: countrySlice,
     configurationCompany: configurationCompanySlice,
     barcode: barcodeSlice,
-    cartonBoxBarcode:CartonBoxBarcodeSlice,
+    cartonBoxBarcode: CartonBoxBarcodeSlice,
+    productGroupBarcode: ProductGroupBarcodeSlice,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

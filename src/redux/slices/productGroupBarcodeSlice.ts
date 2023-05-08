@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { BarcodeListResponse } from "src/models";
+import { ProductGroupListResponse } from "src/models/ProductGroup.model";
 
-export interface BarcodeSliceStateType {
-  items: BarcodeListResponse[] | [];
+export interface ProductGroupBarcodeSliceStateType {
+  items: ProductGroupListResponse[] | [];
+  allProductGroupBarcode: ProductGroupListResponse[] | [];
+  selectedProductGroupBarcode: ProductGroupListResponse | null;
   totalItems: number;
   isTableLoading: boolean;
   page: number;
@@ -11,12 +13,12 @@ export interface BarcodeSliceStateType {
   searchValue: string;
   sortValue: { field: string; value: "DESC" | "ASC" };
   selectedId: string;
-  activeTabIndex: number;
-  barcodesToPrint: string[];
 }
 
-const initialState: BarcodeSliceStateType = {
+const initialState: ProductGroupBarcodeSliceStateType = {
   items: [],
+  allProductGroupBarcode: [],
+  selectedProductGroupBarcode: null,
   totalItems: 0,
   isTableLoading: false,
   page: 1,
@@ -24,15 +26,16 @@ const initialState: BarcodeSliceStateType = {
   searchValue: "",
   sortValue: { field: "createdAt", value: "DESC" },
   selectedId: "",
-  activeTabIndex: 0,
-  barcodesToPrint: [],
 };
 
-const barcodeSlice: any = createSlice({
-  name: "barcode",
+const productGroupBarcodeSlice: any = createSlice({
+  name: "productGroupBarcode",
   initialState,
   reducers: {
-    setItems: (state, action: PayloadAction<BarcodeListResponse[] | []>) => {
+    setItems: (
+      state,
+      action: PayloadAction<ProductGroupListResponse[] | []>
+    ) => {
       state.items = action.payload;
     },
     setPage: (state, action: PayloadAction<number>) => {
@@ -40,6 +43,7 @@ const barcodeSlice: any = createSlice({
       document.getElementById("scroll-top")?.scrollTo(0, 0);
     },
     setRowsPerPage: (state, action: PayloadAction<number>) => {
+      console.log(action.payload, "payload");
       state.rowsPerPage = action.payload;
       state.page = 1;
       document.getElementById("scroll-top")?.scrollTo(0, 0);
@@ -56,6 +60,7 @@ const barcodeSlice: any = createSlice({
       state.page = 1;
     },
     setTotalItems: (state, action: PayloadAction<number>) => {
+      console.log(action.payload, "payload");
       state.totalItems = action.payload;
     },
     setIsTableLoading: (state, action: PayloadAction<boolean>) => {
@@ -64,11 +69,17 @@ const barcodeSlice: any = createSlice({
     setSelectedId: (state, action: PayloadAction<string>) => {
       state.selectedId = action.payload;
     },
-    setActiveTabIndex: (state, action: PayloadAction<number>) => {
-      state.activeTabIndex = action.payload;
+    setAllProductGroupBarcode: (
+      state,
+      action: PayloadAction<ProductGroupListResponse[] | []>
+    ) => {
+      state.allProductGroupBarcode = action.payload;
     },
-    setBarcodesToPrint: (state, action: PayloadAction<string[]>) => {
-      state.barcodesToPrint = action.payload;
+    setSelectedProductGroupBarcode: (
+      state,
+      action: PayloadAction<ProductGroupListResponse | null>
+    ) => {
+      state.selectedProductGroupBarcode = action.payload;
     },
   },
 });
@@ -82,7 +93,7 @@ export const {
   setTotalItems,
   setIsTableLoading,
   setSelectedId,
-  setActiveTabIndex,
-  setBarcodesToPrint,
-} = barcodeSlice.actions;
-export default barcodeSlice.reducer;
+  setSelectedProductGroupBarcode,
+  setAllProductGroupBarcode,
+} = productGroupBarcodeSlice.actions;
+export default productGroupBarcodeSlice.reducer;
