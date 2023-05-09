@@ -15,8 +15,8 @@ type Props = {
   dropdownOptions: {
     dealerOptions: SelectOption[];
     warehouseOptions: SelectOption[];
-    productOptions: SelectOption[];
-  };
+    productGroupOptions: SelectOption[];
+  };  
 };
 
 // Breadcrumbs
@@ -32,6 +32,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
   const { values, setFieldValue } = formikProps;
+  //console.log(formikProps)
 
   return (
     <div className="">
@@ -50,7 +51,6 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
           <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
             {/* Form Step Label */}
             <div className="text-xl font-medium"> SO Details </div>
-
             {/* BUTTON - Add SO */}
             <div>
               <button
@@ -68,13 +68,11 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
             <div className="grid grid-cols-3 gap-4">
               {/* SO Number */}
               <ATMTextField
-                name="sale_order_number"
-                value={values.sale_order_number}
+                name="soNumber"
+                value={values.soNumber}
                 label="SO Number"
                 placeholder="SO Number"
-                onChange={(e) =>
-                  setFieldValue("sale_order_number", e.target.value)
-                }
+                onChange={(e) => setFieldValue("soNumber", e.target.value)}
               />
 
               {/* Dealer */}
@@ -89,45 +87,44 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
               {/* Warehouse */}
               <ATMSelect
                 name="warehouse"
-                value={values.warehouse}
-                onChange={(e) => setFieldValue("warehouse", e.target.value)}
+                value={values.wareHouse}
+                onChange={(e) => setFieldValue("wareHouse", e.target.value)}
                 options={dropdownOptions.warehouseOptions}
                 label="Warehouse"
               />
             </div>
           </div>
 
-          {/*  Products  */}
+          {/*  Sales Order  */}
           <div className="px-3">
             <div className=" text-lg pb-2 font-medium text-primary-main">
-              Add Product to sale order
+              Add ProductGroup to sale order
             </div>
 
-            <FieldArray name="products">
+            <FieldArray name="productSalesOrder">
               {({ push, remove }) => {
                 return (
                   <>
                     <div className="flex flex-col gap-y-5">
-                      {values.products?.map((product, productIndex) => {
+                      {values.productSalesOrder?.map((item, index) => {
+                        const { productGroup, rate, quantity } = item;
                         return (
-                          <div
-                            key={productIndex}
-                            className="flex gap-3 items-end "
-                          >
+                          <div key={index} className="flex gap-3 items-end ">
                             {/* Product Name */}
                             <div className="flex-1">
                               <ATMSelect
-                                name={`products[${productIndex}].product_name`}
-                                value={product.product_name}
+                                name={`productSalesOrder[${index}].productGroup`}
+                                value={productGroup}
                                 onChange={(e) =>
                                   setFieldValue(
-                                    `products[${productIndex}].product_name`,
+                                    `productSalesOrder[${index}].productGroup`,
                                     e.target.value
-                                  )
+                                  )                                  
                                 }
-                                options={dropdownOptions.productOptions}
+                                options={dropdownOptions.productGroupOptions}
                                 label="Product Group"
                               />
+                              
                             </div>
 
                             {/* Rate */}
@@ -135,13 +132,13 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
                               <ATMTextField
                                 type="number"
                                 min={0}
-                                name={`products[${productIndex}].rate`}
-                                value={product.rate?.toString() || ""}
+                                name={`productSalesOrder[${index}].rate`}
+                                value={rate?.toString() || ""}
                                 label="Rate"
                                 placeholder="Rate"
                                 onChange={(e) =>
                                   setFieldValue(
-                                    `products[${productIndex}].rate`,
+                                    `productSalesOrder[${index}].rate`,
                                     e.target.value
                                   )
                                 }
@@ -153,13 +150,13 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
                               <ATMTextField
                                 type="number"
                                 min={0}
-                                name={`products[${productIndex}].quantity`}
-                                value={product.quantity?.toString() || ""}
+                                name={`productSalesOrder[${index}].quantity`}
+                                value={quantity?.toString() || ""}
                                 label="Quantity"
                                 placeholder="Quantity"
                                 onChange={(e) =>
                                   setFieldValue(
-                                    `products[${productIndex}].quantity`,
+                                    `productSalesOrder[${index}].quantity`,
                                     e.target.value
                                   )
                                 }
@@ -167,12 +164,12 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
                             </div>
 
                             {/* BUTTON - Delete */}
-                            {values.products?.length > 1 && (
+                            {values.productSalesOrder?.length > 1 && (
                               <div>
                                 <button
                                   type="button"
                                   onClick={() => {
-                                    remove(productIndex);
+                                    remove(index);
                                   }}
                                   className="p-2 bg-red-500 text-white rounded"
                                 >
@@ -189,12 +186,12 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
                     <div className="flex justify-end py-5">
                       <button
                         type="button"
-                        onClick={() =>
+                        onClick={() => 
                           push({
-                            product_name: "",
+                            productGroup: "",
                             rate: null,
                             quantity: null,
-                          })
+                          })                          
                         }
                         className="bg-primary-main px-3 py-1 text-white rounded"
                       >

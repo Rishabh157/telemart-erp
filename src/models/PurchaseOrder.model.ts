@@ -4,6 +4,7 @@ export type PurchaseOrderListResponse = {
   vendorLabel: string;
   warehouseLabel: string;
   wareHouseId: string;
+  isEditable:boolean;
   purchaseOrder: 
     {
       itemName: string;
@@ -27,6 +28,7 @@ export type addPurchaseOrder = {
   poCode: string;
   vendorId: string;
   wareHouseId: string;
+  isEditable: boolean;
   purchaseOrder: 
     {
       itemId: string;
@@ -42,6 +44,7 @@ export type UpdatePurchaseOrder = {
     poCode: string;
     vendorId: string;
     wareHouseId: string;
+    isEditable:boolean;
     purchaseOrder: 
         {
           itemId: string;

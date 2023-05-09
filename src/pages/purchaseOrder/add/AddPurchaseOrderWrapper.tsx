@@ -24,6 +24,7 @@ export type FormInitialValues = {
   poCode: string;
   vendorId: string;
   wareHouseId: string;
+  isEditable: boolean;
   purchaseOrder: {
     itemId: string;
     rate: number;
@@ -109,6 +110,7 @@ const AddPurchaseOrderWrapper = (props: Props) => {
     poCode: "",
     vendorId: "",
     wareHouseId: "",
+    isEditable: true,
     purchaseOrder: [
       {
         itemId: "",
@@ -154,6 +156,7 @@ const AddPurchaseOrderWrapper = (props: Props) => {
         poCode: values.poCode,
         vendorId: values.vendorId,
         wareHouseId: values.wareHouseId,
+        isEditable: values.isEditable,
         purchaseOrder: purchaseOrder,
         companyId: userData?.companyId || "",
       }).then((res: any) => {
