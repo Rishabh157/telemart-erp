@@ -20,7 +20,6 @@ export type FieldType = Field<"productGroupOptions">;
 
 
 const StepEditProductsWrapper = ({ formikProps,productGroupOptions }: Props) => {
-  console.log(productGroupOptions,"*********")
    const dropdownOptions: DropdownOptions = {
     productGroupOptions,
   };

@@ -23,6 +23,7 @@ export type {
   BarcodeListResponse,
   AddBarcode,
   UpdateBarcode,
+  ProductBarcodeGroupResponse,
 } from "./Barcode.model";
 export type {
   AttributesListResponse,

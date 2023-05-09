@@ -1,57 +1,46 @@
 // import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
+// import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
 import {
   setRowsPerPage,
   setPage,
   setSearchValue,
-} from "src/redux/slices/barcodeSlice";
+} from "src/redux/slices/productGroupBarcodeSlice";
 import { AppDispatch, RootState } from "src/redux/store";
-import { BarcodeListResponse } from "src/models";
-import BarcodeDetailsCard from "./components/BarcodeDetailsCard/BarcodeDetailsCard";
+
+import { ProductBarcodeGroupResponse } from "src/models";
+import ProductGroupDetailCard from "./ProductGroupDetailCard";
 
 type Props = {
   rows: any[];
-  selectedBarcodes: BarcodeListResponse[];
-  onBarcodeSelect: (
+  selectedProductGroupcodes: ProductBarcodeGroupResponse[];
+  onProductGroupcodeSelect: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    barcode: BarcodeListResponse,
+    barcode: ProductBarcodeGroupResponse,
     isBarcodeSeleted: boolean
   ) => void;
-  onBarcodeClick: (barcode: BarcodeListResponse) => void;
+  onBarcodeClick: (barcode: ProductBarcodeGroupResponse) => void;
 };
 
-const BarcodeListing = ({
+const ProductGroupListing = ({
   rows,
-  selectedBarcodes,
-  onBarcodeSelect,
+  selectedProductGroupcodes,
+  onProductGroupcodeSelect,
   onBarcodeClick,
 }: Props) => {
   // Hooks
-  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const barcodeState: any = useSelector((state: RootState) => state.barcode);
+  const ProductGroupcodeState: any = useSelector(
+    (state: RootState) => state.productGroupBarcode
+  );
+  //  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const { page, rowsPerPage, totalItems, searchValue } = barcodeState;
-
+  const { page, rowsPerPage, totalItems, searchValue } = ProductGroupcodeState;
+  console.log(totalItems);
   return (
     <div className="px-4 h-full flex flex-col gap-3">
-      {/* Page Header */}
-      <div className="flex justify-between items-center h-[55px]">
-        <ATMPageHeading> Barcode </ATMPageHeading>
-        <button
-          onClick={() => {
-            navigate("add");
-          }}
-          className="bg-primary-main text-white rounded py-1 px-3"
-        >
-          + Add Barcode
-        </button>
-      </div>
-
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
         {/* Header */}
         <ATMTableHeader
@@ -67,10 +56,10 @@ const BarcodeListing = ({
 
         {/* Barcode Detail Cards */}
         <div className="grow overflow-auto  ">
-          <BarcodeDetailsCard
-            barcodeList={rows}
-            selectedBarcodes={selectedBarcodes}
-            onBarcodeSelect={onBarcodeSelect}
+          <ProductGroupDetailCard
+            cardBoxBarcodeList={rows}
+            selectedProductGroupBarcodes={selectedProductGroupcodes}
+            onProductGroupBarcodeSelect={onProductGroupcodeSelect}
             onBarcodeClick={(barcode) => {
               onBarcodeClick(barcode);
             }}
@@ -78,7 +67,7 @@ const BarcodeListing = ({
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center justify-end border-t border-slate-300">
+        <div className="border-t border-slate-300">
           <ATMPagination
             page={page}
             rowCount={totalItems}
@@ -96,4 +85,4 @@ const BarcodeListing = ({
   );
 };
 
-export default BarcodeListing;
+export default ProductGroupListing;

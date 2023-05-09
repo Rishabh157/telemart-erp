@@ -1,9 +1,9 @@
 import React from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { FormikProps } from "formik";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "../../AddWarehouseWrapper";
 import { DropdownOptions, FieldType } from "./StepAddCompanyDetailsWrapper";
+import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -43,33 +43,25 @@ const StepAddComapnyDetails = ({
 
             case "select":
               return (
-                <div key={name} className="relative mt-4">
-                  <InputLabel className="mb-2"> {label} </InputLabel>
-                  <FormControl fullWidth>
-                    <Select
-                      name={name}
-                      value={values[name]}
-                      onChange={(e) => {
-                        setFieldValue(name, e.target.value);
-                      }}
-                      size="small"
-                      className="shadow"
-                      displayEmpty
-                    >
-                      <MenuItem value="">
-                        <span className="text-slate-400">Select {label}</span>
-                      </MenuItem>
-                      {dropdownOptions[
-                        field.optionAccessKey || "countryOptions"
-                      ]?.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {" "}
-                          {option.label}{" "}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </div>
+                <div>
+                <ATMSelect
+                  label={label}
+                  name={name}
+                  value={
+                    name.includes(".")
+                      ? values[name.split(".")[0]][name.split(".")[1]]
+                      : values[name]
+                  }
+                  onChange={(e: any) => {
+                    setFieldValue(name, e.target.value);
+                  }}
+                  options={
+                    dropdownOptions[
+                      field.optionAccessKey || "countryOptions"
+                    ]
+                  }
+                />
+              </div>
               );
 
             default:

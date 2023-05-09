@@ -283,7 +283,7 @@ const EditDealerWrapper = () => {
           if ("data" in res) {
             if (res?.data?.status) {
               showToast("success", "Dealer updated successfully!");
-              navigate("/dealers");
+              navigate("/dealers");         
             } else {
               showToast("error", res?.data?.message);
             }

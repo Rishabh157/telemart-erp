@@ -6,8 +6,7 @@ import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAddGRNMutation } from "src/services/GRNService";
 import { showToast } from "src/utils";
-import { useSelector } from "react-redux";
-import { RootState } from "src/redux/store";
+
 
 type Props = {};
 
@@ -25,9 +24,9 @@ const AddGRNWrapper = (props: Props) => {
 
   const [addGRN] = useAddGRNMutation();
   const { state } = useLocation();
-  const { poCode, itemName, companyId, itemId } = state;
+  const { poCode, companyId, itemId } = state;
 
-  const { userData } = useSelector((state: RootState) => state?.auth);
+ //const { userData } = useSelector((state: RootState) => state?.auth);
   const [apiStatus, setApiStatus] = useState(false);
   // Form Initial Values
   const initialValues: FormInitialValues = {
@@ -41,34 +40,30 @@ const AddGRNWrapper = (props: Props) => {
 
   // Form Validation Schema
   const validationSchema = object({
-    items: array().of(
-      object().shape({
-        recievedQuantity: number()
-          .min(0, "Recieved Quantity must be greater than 0")
-          .required("Please enter Recieved Quantity")
-          .nullable(),
+   items:
+   array().of(object().shape({
+        recievedQuantity: number().min(1, "Quantity should be greater than or equal to 1")
+          .required("Please enter Recieved Quantity"),
         goodQuantity: number()
-          .min(0, "Good Quantity must be greater than 0")
-          .required("Please enter Good Quantity")
-          .nullable(),
+          .min(1, "Good Quantity must be greater than 0")
+          .required("Please enter Good Quantity"),
         defectiveQuantity: number()
-          .min(0, "Defective Quantity must be greater than 0")
-          .required("Please enter Defective Quantity")
-          .nullable(),
+          .min(1, "Defective Quantity must be greater than 0")
+          .required("Please enter Defective Quantity"),
       })
-    ),
-  });
-
+   )
+    })
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
+
     setApiStatus(true);
     setTimeout(() => {
       addGRN({
         poCode: values.poCode,
         itemId: values.itemId,
-        defectiveQuantity: values.defectiveQuantity,
-        goodQuantity: values.goodQuantity,
         receivedQuantity: values.receivedQuantity,
+        goodQuantity: values.goodQuantity,
+        defectiveQuantity : values.receivedQuantity,
         companyId: values.companyId,
       }).then((res) => {
         if ("data" in res) {
@@ -94,7 +89,7 @@ const AddGRNWrapper = (props: Props) => {
         onSubmit={onSubmitHandler}
       >
         {(formikProps) => {
-          return <AddItem formikProps={formikProps} />;
+          return <AddItem formikProps={formikProps} apiStatus={apiStatus} />;
         }}
       </Formik>
     </SideNavLayout>

@@ -8,14 +8,11 @@ import {
   setRowsPerPage,
   setPage,
   setSearchValue,
-} from "src/redux/slices/barcodeSlice";
+} from "src/redux/slices/CartonBoxBarcodeSlice";
 import { AppDispatch, RootState } from "src/redux/store";
-import { useState } from "react";
-import { IconType } from "react-icons";
-import { MdOutbond } from "react-icons/md";
+
 import { CartonBoxBarcodeListResponse } from "src/models/CartonBoxBarcode.model";
 import CartonBoxBarcodeDetailCard from "./CartonBoxBarcodeDetailCard";
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
   rows: any[];
@@ -26,47 +23,21 @@ type Props = {
     isBarcodeSeleted: boolean
   ) => void;
   onBarcodeClick: (barcode: CartonBoxBarcodeListResponse) => void;
-  setActiveStage: React.Dispatch<React.SetStateAction<string>>;
 };
-
-export type Tabs = {
-  label: string;
-  icon: IconType;
-  active?: boolean;
-  component?: any;
-};
-
-const tabs: Tabs[] = [
-  {
-    label: "Product Barcode",
-    icon: MdOutbond,
-  },
-  {
-    label: "Carton Box Barcode",
-    icon: MdOutbond,
-  },
-  {
-    label: "Barcode Group",
-    icon: MdOutbond,
-  },
-];
 
 const CartonBoxBarcodeListing = ({
   rows,
   selectedCartonBoxBarcodes,
   onCartonBoxBarcodeSelect,
   onBarcodeClick,
-  setActiveStage,
 }: Props) => {
   // Hooks
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const cartonBoxBarcodeState: any = useSelector(
-    (state: RootState) => state.barcode
+    (state: RootState) => state.cartonBoxBarcode
   );
   //  const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-  const [activeTab, setActiveTab] = useState("Carton Box Barcode");
 
   const { page, rowsPerPage, totalItems, searchValue } = cartonBoxBarcodeState;
 
@@ -83,31 +54,6 @@ const CartonBoxBarcodeListing = ({
         >
           + Add Carton BoxBarcode
         </button>
-      </div>
-
-      {/* Tabs */}
-      <div className="flex shadow rounded h-[45px] items-center gap-3 bg-white w-full overflow-auto px-3 ">
-        {tabs.map((tab, tabIndex) => {
-          const { label } = tab;
-          return (
-            <button
-              type="button"
-              onClick={() =>{ setActiveTab(label); setActiveStage(label)}}
-              key={tabIndex}
-              className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${
-                activeTab === label
-                  ? "bg-slate-100 text-primary-main "
-                  : "text-slate-500"
-              }`}
-            >
-              <div>
-                {" "}
-                <tab.icon className="text-xl" />{" "}
-              </div>
-              <div className="font-medium"> {label} </div>
-            </button>
-          );
-        })}
       </div>
 
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">

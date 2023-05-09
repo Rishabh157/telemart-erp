@@ -46,7 +46,7 @@ const StepEditCallScript = ({ formikProps, dropdownOptions }: Props) => {
                     )}
                   </div>
 
-                  <div>
+                  <div className="d-flex flex-wrap">
                     <ATMHTMLEditor
                       name={`call_scripts[${scriptIndex}].script`}
                       value={script.script}

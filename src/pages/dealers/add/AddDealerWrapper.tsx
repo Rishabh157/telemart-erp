@@ -110,7 +110,7 @@ const steps = [
           name: string().required("Name is required"),
           department: string().required("Department is required"),
           designation: string().required("Designation is required"),
-          email: string().email("Invalid email").required("Email is required"),
+          email: string().email("Email should be valid").required("Email is required"),
           mobileNumber: string()
             .min(10, "Number should be 10 digits")
             .max(10, "maximum 10 digit")
@@ -160,7 +160,7 @@ const steps = [
 const AddDealerWrapper = () => {
   // States
   const navigate = useNavigate();
-  const [activeStep, setActiveStep] = React.useState(2);
+  const [activeStep, setActiveStep] = React.useState(0);
   const [addDealer] = useAddDealerMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
 
@@ -180,6 +180,7 @@ const AddDealerWrapper = () => {
       district: "",
       pincode: "",
     },
+    
     billingAddress: {
       phone: "",
       address: "",
@@ -211,17 +212,19 @@ const AddDealerWrapper = () => {
       },
     ],
   };
+
   const getValidationSchema = (activeStep: number) => {
     return steps.find((_, stepIndex) => stepIndex === activeStep)
       ?.validationSchema;
   };
+
   const dispatch = useDispatch();
   const { data, isLoading, isFetching } = useGetAllDealerCategoryQuery("");
 
   const { alldealerCategory }: any = useSelector(
     (state: RootState) => state.dealersCategory
   );
-
+  
   useEffect(() => {
     if (!isFetching && !isLoading) {
       dispatch(setAllDealerCategory(data?.data));
@@ -236,7 +239,6 @@ const AddDealerWrapper = () => {
   });
 
   const onSubmitHandler = (values: FormInitialValues) => {
-    console.log(values)
     if (activeStep === steps.length - 1) {
       setTimeout(() => {
         addDealer({
