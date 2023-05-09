@@ -73,7 +73,7 @@ const GRNListingWrapper = () => {
   const dispatch = useDispatch();
 
   const grnState: any = useSelector((state: RootState) => state.grn);
-  const { page, rowsPerPage, searchValue, items } = grnState;
+  const { page, rowsPerPage, searchValue, items,filterValue} = grnState;
   //const [currentId, setCurrentId] = useState("");
 
   const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
@@ -83,8 +83,8 @@ const GRNListingWrapper = () => {
     page: page,
     filterBy: [
       {
-        fieldName: "",
-        value: [],
+        fieldName: "poCode",
+        value: filterValue ? filterValue : [],
       },
     ],
     dateFilter: {},

@@ -22,7 +22,7 @@ const PurchaseOrderListingWrapper = () => {
   const productOrderState: any = useSelector(
     (state: RootState) => state.purchaseOrder
   );
-  const { page, rowsPerPage, searchValue, items } = productOrderState;
+  const { page, rowsPerPage, searchValue, items  } = productOrderState;
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentId, setCurrentId] = useState("");
 
@@ -127,6 +127,22 @@ const PurchaseOrderListingWrapper = () => {
               >
                 Generate GRN 
               </button>
+              <button
+                onClick={() => {
+                  navigate("/grn", {
+                    state: {
+                      poCode: row?.poCode,
+                      itemId: row?.purchaseOrder.itemId,
+                      itemName: row?.purchaseOrder.itemName,
+                      quantity: row?.purchaseOrder.quantity,
+                      companyId: row?.companyId,
+                    },
+                  });
+                }}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              >
+                View GRN
+              </button>
             </div>
           )}
         </div>
@@ -163,6 +179,8 @@ const PurchaseOrderListingWrapper = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data, dispatch]);
+
+
 
   return (
     <>
