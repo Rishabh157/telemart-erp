@@ -70,3 +70,8 @@ export type {
   AddGRN,
   UpdateGRN,
 } from "./GRN.model";
+export type {
+  SaleOrderListResponse,
+  AddSaleOrder,
+  UpdateSaleOrder
+}  from "./SaleOrder.model";

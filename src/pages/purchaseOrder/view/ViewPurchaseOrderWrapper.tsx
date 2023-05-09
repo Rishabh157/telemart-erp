@@ -22,7 +22,7 @@ export type FormInitialValues = {
     rate: number;
     quantity: number;
     estReceivingDate: string;
-  }[];
+  };
 };
 
 const ViewPurchaseOrderWrapper = (props: Props) => {
@@ -42,7 +42,7 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
     poCode: selectedItems?.poCode || "",
     vendor: selectedItems?.vendorLabel || "",
     wareHouse: selectedItems?.warehouseLabel || "",
-    purchaseOrder: selectedItems?.purchaseOrder || [],
+    purchaseOrder: selectedItems?.purchaseOrder || "",
   };
 
   // Form Validation Schema

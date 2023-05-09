@@ -5,6 +5,16 @@ import apiSlice from "./ApiSlice";
 export const dealerApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //***** GET *****/
+    getAllDealers: builder.query({
+      providesTags: ["dealer"],
+      query: () => ({
+        url: "/dealer",
+        method: "GET",
+        // body,
+      }),
+    }),
+
+    //***** GET PAGINATION DATA *****/
     getDealers: builder.query({
       providesTags: ["dealer"],
       query: (body: PaginationType) => ({
@@ -49,26 +59,24 @@ export const dealerApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
-  //***** Delete *****/
-  deleteDealer: builder.mutation({
-    invalidatesTags: ["dealer"],
-    query: (id) => ({
-      url: `/dealer/${id}`,
 
-      method: "DELETE",
+    //***** Delete *****/
+    deleteDealer: builder.mutation({
+      invalidatesTags: ["dealer"],
+      query: (id) => ({
+        url: `/dealer/${id}`,
+
+        method: "DELETE",
+      }),
     }),
-  }),
-
-
-
   }),
 });
 
-
 export const {
+  useGetAllDealersQuery,
   useGetDealersQuery,
   useAddDealerMutation,
   useUpdateDealerMutation,
   useGetDealerByIdQuery,
-  useDeleteDealerMutation
+  useDeleteDealerMutation,
 } = dealerApi;
