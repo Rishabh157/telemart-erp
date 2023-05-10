@@ -44,14 +44,14 @@ export type FormInitialValues = {
 const EditPurchaseOrderWrapper = (props: Props) => {
   const { state } = useLocation();
   const poCode = state?.poCode;
-  const params=useParams()
-  const Id=params.id
+  const params = useParams();
+  const Id = params.id;
 
   const navigate = useNavigate();
   const disptach = useDispatch();
   const [apiStatus, setApiStatus] = useState<boolean>(false);
   const { userData } = useSelector((state: RootState) => state?.auth);
- const [UpdatePurchaseOrder]=useUpdatePurchaseOrderMutation(poCode)
+  const [UpdatePurchaseOrder] = useUpdatePurchaseOrderMutation(poCode);
   const { data, isFetching, isLoading } = useGetByPoCodeQuery(poCode);
   const { selectedItems }: any = useSelector(
     (state: RootState) => state.purchaseOrder
@@ -66,19 +66,19 @@ const EditPurchaseOrderWrapper = (props: Props) => {
       quantity: ele.purchaseOrder.quantity,
       estReceivingDate: ele.purchaseOrder.estReceivingDate,
     };
-  }) 
+  });
 
   const datas = {
     poCode: selectedItems?.[0]?.poCode,
-    vendorId:selectedItems?.[0]?.vendorId,
-    wareHouseId:selectedItems?.[0]?.wareHouseId,
-    purchaseOrder:sorteddata,
+    vendorId: selectedItems?.[0]?.vendorId,
+    wareHouseId: selectedItems?.[0]?.wareHouseId,
+    purchaseOrder: sorteddata,
   };
-  console.log(datas)
+  console.log(datas);
 
   useEffect(() => {
     disptach(setSelectedItems(data?.data));
-  }, [disptach, data,isFetching, isLoading]);
+  }, [disptach, data, isFetching, isLoading]);
 
   const {
     data: vendorData,
@@ -143,11 +143,10 @@ const EditPurchaseOrderWrapper = (props: Props) => {
   // Form Initial Values
   const initialValues: FormInitialValues = {
     poCode: datas?.poCode || "",
-    vendorId:datas?.vendorId || "",
-    wareHouseId:datas?.wareHouseId || "",
+    vendorId: datas?.vendorId || "",
+    wareHouseId: datas?.wareHouseId || "",
     isEditable: true,
-    purchaseOrder: sorteddata
-   
+    purchaseOrder: sorteddata,
   };
 
   // Form Validation Schema
@@ -182,16 +181,15 @@ const EditPurchaseOrderWrapper = (props: Props) => {
 
     setTimeout(() => {
       UpdatePurchaseOrder({
-        body:{
-        poCode: values.poCode,
-        vendorId: values.vendorId,
-        wareHouseId: values.wareHouseId,
-        isEditable: values.isEditable,
-        purchaseOrder: purchaseOrder,
-        companyId: userData?.companyId || "",
+        body: {
+          poCode: values.poCode,
+          vendorId: values.vendorId,
+          wareHouseId: values.wareHouseId,
+          isEditable: values.isEditable,
+          purchaseOrder: purchaseOrder,
+          companyId: userData?.companyId || "",
         },
-        id: Id ||""
-     
+        id: Id || "",
       }).then((res: any) => {
         if ("data" in res) {
           if (res?.data?.status) {
@@ -217,6 +215,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
   return (
     <SideNavLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}

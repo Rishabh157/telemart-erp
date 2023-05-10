@@ -16,6 +16,8 @@ type Props = {
 
 const SaleOrderListing = ({ columns, rows }: Props) => {  
 
+ // console.log(rows, "rows");
+
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const saleOrderState: any = useSelector((state: RootState) => state.saleOrder);
@@ -25,7 +27,7 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
   const { page, rowsPerPage } = saleOrderState;
 
   return (
-    <div className="px-4 h-[calc(100vh-45px)]">
+    <div className="px-4 h-[calc(100vh-55px)] pt-3">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Sale Orders </ATMPageHeading>
