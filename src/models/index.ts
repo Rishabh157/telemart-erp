@@ -68,19 +68,12 @@ export type {
 } from "./Products.model";
 export type { GRNListResponse, AddGRN, UpdateGRN } from "./GRN.model";
 export type {
-<<<<<<< HEAD
+  SaleOrderListResponse,
+  AddSaleOrder,
+  UpdateSaleOrder,
+} from "./SaleOrder.model";
+export type {
   InventoryListResponse,
   AddInventory,
   UpdateInventory,
 } from "./Inventory.model";
-=======
-  GRNListResponse,
-  AddGRN,
-  UpdateGRN,
-} from "./GRN.model";
-export type {
-  SaleOrderListResponse,
-  AddSaleOrder,
-  UpdateSaleOrder
-}  from "./SaleOrder.model";
->>>>>>> 324b40efab02673bb91e8aa7644b69571fe6c153
