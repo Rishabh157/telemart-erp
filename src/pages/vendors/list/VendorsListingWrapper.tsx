@@ -156,6 +156,7 @@ const VendorsListingWrapper = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data]);
+
   const handleDelete = () => {
     setShowDropdown(false);
     deleteVendor(currentId).then((res) => {
@@ -170,6 +171,7 @@ const VendorsListingWrapper = () => {
       }
     });
   };
+  
   return (
     <SideNavLayout>
       <VendorsListing columns={columns} rows={items} />

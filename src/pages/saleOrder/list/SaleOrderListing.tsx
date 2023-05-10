@@ -25,7 +25,7 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
   const { page, rowsPerPage } = saleOrderState;
 
   return (
-    <div className="px-4 h-full  ">
+    <div className="px-4 h-[calc(100vh-45px)]">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Sale Orders </ATMPageHeading>
@@ -53,7 +53,7 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            extraClasses='max-h-full overflow-auto' />
+            extraClasses='h-full overflow-auto' />
         </div>
 
         {/* Pagination */}

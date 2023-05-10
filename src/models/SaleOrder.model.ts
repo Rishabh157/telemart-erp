@@ -1,9 +1,16 @@
+export type productSalesOrder = {
+  productGroupId: string;
+  rate: number;
+  quantity: number;
+};
+
 export type SaleOrderListResponse = {
   soNumber: string;
   dealer: string;
   wareHouse: string;
   dealerLabel: string;
   warehouseLabel: string;
+  productSalesOrder: productSalesOrder[];
   is_active: boolean;
   is_deleted: boolean;
   createdAt: string;
@@ -11,12 +18,6 @@ export type SaleOrderListResponse = {
   _id: string;
   __v: number;
 };
-
-export type productSalesOrder = {
-    productGroup: string;
-    rate: number;
-    quantity: number;
-  }
 
 export type AddSaleOrder = {
   soNumber: string;
@@ -31,6 +32,8 @@ export type UpdateSaleOrder = {
     soNumber: string;
     dealer: string;
     wareHouse: string;
+    companyId: string;
+    productSalesOrder: productSalesOrder[];
   };
   id: string;
 };
