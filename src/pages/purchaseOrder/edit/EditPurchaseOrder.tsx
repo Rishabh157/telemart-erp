@@ -7,7 +7,7 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "./AddPurchaseOrderWrapper";
+import { FormInitialValues } from "./EditPurchaseOrderWrapper";
 import ATMDatePicker from "src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker";
 import { SelectOption } from "src/models/FormField/FormField.model";
 
@@ -26,27 +26,26 @@ export type DropdownOptions = {
 };
 
 // Breadcrumbs
+const breadcrumbs: BreadcrumbType[] = [
+  {
+    label: "Purchase-order",
+    path: "/purchase-order",
+  },
+  {
+    label: "Edit Purchase Order",
+  },
+];
 
- 
-  const breadcrumbs: BreadcrumbType[] = [
-    {
-      label: "Purchase-order",
-      path: "/purchase-order",
-    },
-    {
-      label: "Add Purchase Order",
-    },
-  ];
-
-
-const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOptions,apiStatus}: Props) => {
+const EditPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOptions,apiStatus}: Props) => {
   const dropdownOptions: DropdownOptions = {
     vendorOptions,
     warehouseOptions,
     itemOptions,
   };
 
+
   const { values, setFieldValue } = formikProps;
+  console.log(values)
 
   return (
     <div className="">
@@ -58,7 +57,7 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Purchase Order </ATMPageHeading>
+          <ATMPageHeading> Edit Purchase Order </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -75,7 +74,7 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                   true ? "disabled:opacity-25" : ""}`}
               >
-                Add PO
+               Update
               </button>
             </div>
           </div>
@@ -115,15 +114,15 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
           {/*  Items  */}
           <div className="px-3">
             <div className=" text-lg pb-2 font-medium text-primary-main">
-              Add item to purchase order
+            Edit item to purchase order
             </div>
 
-            <FieldArray name="purchaseOrder">
+            { <FieldArray name="purchaseOrder">
               {({ push, remove }) => {
                 return (
                   <>
                     <div className="flex flex-col gap-y-5">
-                      {values.purchaseOrder?.map((item, itemIndex) => {
+                      {values?.purchaseOrder?.map((item:any, itemIndex:any) => {
                         const { itemId, rate, quantity, estReceivingDate } =
                           item;
                           
@@ -133,7 +132,7 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                             className="flex gap-3 items-end "
                           >
                             {/* Item Name */}
-                            <div className="flex-[3_3_0%]">
+                             <div className="flex-[3_3_0%]">
                               <ATMSelect
                                 name={`purchaseOrder[${itemIndex}].itemId`}
                                 value={itemId}
@@ -146,10 +145,10 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                                 options={dropdownOptions.itemOptions}
                                 label="Item Name"
                               />
-                            </div>
+                            </div> 
 
                             {/* Rate */}
-                            <div className="flex-[2_2_0%]">
+                             <div className="flex-[2_2_0%]">
                               <ATMTextField
                                 type="number"
                                 min={0}
@@ -164,10 +163,10 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                                   )
                                 }
                               />
-                            </div>
+                            </div> 
 
                             {/* Quantity */}
-                            <div className="flex-[2_2_0%]">
+                             <div className="flex-[2_2_0%]">
                               <ATMTextField
                                 type="number"
                                 min={0}
@@ -185,7 +184,7 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                             </div>
 
                             {/* Est. Receiving Date */}
-                            <div className="flex-[3_3_0%]">
+                             <div className="flex-[3_3_0%]">
                               <ATMDatePicker
                                 name={`purchaseOrder[${itemIndex}].estReceivingDate`}
                                 value={estReceivingDate}
@@ -197,10 +196,10 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                                   )
                                 }
                               />
-                            </div>
+                            </div> 
 
                             {/* BUTTON - Delete */}
-                            {values.purchaseOrder?.length > 1 && (
+                             {values.purchaseOrder?.length > 1 && (
                               <div>
                                 <button
                                   type="button"
@@ -213,10 +212,10 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                                 </button>
                               </div>
                             )}
-                          </div>
+                          </div> 
                         );
                       })}
-                    </div>
+                    </div> 
 
                     {/* BUTTON - Add More Product */}
                     <div className="flex justify-end py-5">
@@ -238,7 +237,8 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                   </>
                 );
               }}
-            </FieldArray>
+            </FieldArray> 
+}
           </div>
         </div>
       </div>
@@ -246,4 +246,4 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
   );
 };
 
-export default AddPurchaseOrder;
+export default EditPurchaseOrder;

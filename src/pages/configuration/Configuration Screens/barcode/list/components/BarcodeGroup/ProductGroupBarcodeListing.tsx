@@ -38,6 +38,7 @@ const ProductGroupListing = ({
   //  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const { page, rowsPerPage, totalItems, searchValue } = ProductGroupcodeState;
+  
   return (
     <div className="px-4 h-full flex flex-col gap-3">
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
@@ -49,7 +50,11 @@ const ProductGroupListing = ({
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
+          onFilterClick={()=>{
+            
+          }}
           isFilter
+        
           onSearch={(newValue) => dispatch(setSearchValue(newValue))}
         />
 
@@ -75,6 +80,7 @@ const ProductGroupListing = ({
             onPageChange={(newPage) => dispatch(setPage(newPage))}
           />
         </div>
+
       </div>
 
       {/* {isFilterOpen && (

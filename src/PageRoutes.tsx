@@ -4,6 +4,7 @@ import {
   AddASRWrapper,
   ASRListingWrapper,
   BarcodeGenerator,
+  EditPurchaseOrderWrapper,
 } from "./pages/index";
 import { AddAttributeWrapper, AttributesListingWrapper } from "./pages/index";
 import {
@@ -222,6 +223,10 @@ const PageRoutes = () => {
           <Route
             path="/purchase-order/view/:id"
             element={<ViewPurchaseOrderWrapper />}
+          />
+            <Route
+            path="/purchase-order/edit/:id"
+            element={<EditPurchaseOrderWrapper />}
           />
           <Route
             path="/purchase-order/add"
