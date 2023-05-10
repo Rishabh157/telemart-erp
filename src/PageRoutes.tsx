@@ -56,6 +56,7 @@ import {
   DealerActivityTabWrapper,
   DealerGeneralInformationTabWrapper,
   DealerWarehouseTabWrapper,
+  DealerSalesOrderTabWrapper,
 } from "./pages/index";
 import {
   InwardInventoryWrapper,
@@ -195,7 +196,7 @@ const PageRoutes = () => {
               path="general-information"
               element={<DealerGeneralInformationTabWrapper />}
             />
-            <Route path="sale-order" element={"Sale Order"} />
+            <Route path="sale-order" element={<DealerSalesOrderTabWrapper/>} />
             <Route path="warehouse" element={<DealerWarehouseTabWrapper />} />
             <Route path="ledger" element={"Ledger"} />
             <Route path="activities" element={<DealerActivityTabWrapper />} />

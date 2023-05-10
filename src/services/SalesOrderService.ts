@@ -14,6 +14,15 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    //***** GET SALESORDER BY DEALER-ID DATA *****/
+    getSalesOrderByDealerId: builder.query({
+      providesTags: ["SalesOrder"],
+      query: (dealerId) => ({
+        url: `/sales-order/get-by-dealer/${dealerId}`,
+        method: "GET",
+      }),
+    }),
+
     //***** ADD *****/
     addSalesOrder: builder.mutation({
       invalidatesTags: ["SalesOrder"],
@@ -56,6 +65,7 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
 
 export const {
     useGetPaginationSaleOrderQuery,
+    useGetSalesOrderByDealerIdQuery,
     useAddSalesOrderMutation,
     useUpdateSalesOrderMutation,
     useGetSalesOrderByIdQuery,
