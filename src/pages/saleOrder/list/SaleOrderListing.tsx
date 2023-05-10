@@ -14,7 +14,7 @@ type Props = {
   rows: any[];
 };
 
-const SaleOrderListing = ({ columns, rows }: Props) => {
+const SaleOrderListing = ({ columns, rows }: Props) => {  
 
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const dispatch = useDispatch<AppDispatch>();
@@ -25,7 +25,7 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
   const { page, rowsPerPage } = saleOrderState;
 
   return (
-    <div className="px-4 h-full  ">
+    <div className="px-4 h-[calc(100vh-45px)]">
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Sale Orders </ATMPageHeading>
@@ -39,7 +39,7 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
         {/*Table Header */}
         <ATMTableHeader
           page={page}
-          rowCount={rows.length}
+          rowCount={rows?.length}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
@@ -53,14 +53,14 @@ const SaleOrderListing = ({ columns, rows }: Props) => {
             isCheckbox={true}
             selectedRows={selectedRows}
             onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
-            extraClasses='max-h-[calc(100%-150px)] overflow-auto' />
+            extraClasses='h-full overflow-auto' />
         </div>
 
         {/* Pagination */}
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows.length}
+            rowCount={rows?.length}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}

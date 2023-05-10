@@ -57,10 +57,10 @@ const steps = [
     label: "Company Details",
     component: StepAddCompanyDetailsWrapper,
     validationSchema: object({
-      warehouseCode: string().required("warehouseCode is required"),
-      warehouseName: string().required("warehouse Name is required"),
+      warehouseCode: string().required("code is required"),
+      warehouseName: string().required("name is required"),
       country: string().required("please select country"),
-      email: string().required().email("email address is required"),
+      email: string().required("Email is required").email("Email address is invalid"),
     }),
   },
   {
@@ -100,7 +100,7 @@ const steps = [
           designation: string().required("Designation is required"),
           email: string().required("Email is required"),
           mobileNumber: string()
-            .required()
+            .required("Mobile Number is required")
             .matches(regIndiaPhone, "Invalid Mobile Number"),
           landLine: string().required("Landline is required"),
         })
@@ -110,9 +110,12 @@ const steps = [
 ];
 
 const AddWarehouseWrapper = () => {
-  const { state } = useLocation();  
+  const { state } = useLocation(); 
   const vendorId = state?.params?.vendorId || null;
   const dealerId = state?.params?.dealerId || null;
+  // console.log(dealerId)
+  // console.log(vendorId)
+
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -176,6 +179,7 @@ const AddWarehouseWrapper = () => {
 
   // Form validation schema based on the active step
   const getValidationSchema = (activeStep: number) => {
+    console.log(steps.find((_, stepIndex) => stepIndex === activeStep))
     return steps.find((_, stepIndex) => stepIndex === activeStep)
       ?.validationSchema;
   };
@@ -211,10 +215,10 @@ const AddWarehouseWrapper = () => {
           companyId: userData?.companyId || "",
           dealerId: values.dealerId || null,
           vendorId: values.vendorId || null,
-        }).then((res) => {
+        }).then((res:any) => {
           if ("data" in res) {
             if (res?.data?.status) {
-              showToast("success", "Vendor added successfully!");
+              showToast("success", "warehouse added successfully!");
               if(dealerId !== null){
                 navigate("/dealers/"+dealerId+"/warehouse");
               }else if(vendorId !== null){

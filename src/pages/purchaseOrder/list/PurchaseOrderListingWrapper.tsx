@@ -27,6 +27,23 @@ const PurchaseOrderListingWrapper = () => {
   const [currentId, setCurrentId] = useState("");
 
 
+  const { data, isLoading, isFetching } = useGetPurchaseOrderQuery({
+    limit: rowsPerPage,
+    searchValue: searchValue,
+    params: ["poCode", "wareHouseId"],
+    page: page,
+    filterBy: [
+      {
+        fieldName: "",
+        value: [],
+      },
+    ],
+    dateFilter: {},
+    orderBy: "createdAt",
+    orderByValue: -1,
+    isPaginationRequired: true,
+  });
+
   const columns: columnTypes[] = [
     {
       field: "poCode",
@@ -111,22 +128,34 @@ const PurchaseOrderListingWrapper = () => {
               >
                 View
               </button>
-              <button
-                onClick={() => {
-                  navigate("/grn/add", {
-                    state: {
-                      poCode: row?.poCode,
-                      itemId: row?.purchaseOrder.itemId,
-                      itemName: row?.purchaseOrder.itemName,
-                      quantity: row?.purchaseOrder.quantity,
-                      companyId: row?.companyId,
-                    },
-                  });
-                }}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              >
-                Generate GRN 
-              </button>
+              
+                <button
+                  onClick={() => {
+                    navigate("/grn/add", {
+                      state: {
+                        poCode: row?.poCode,
+                        itemId: row?.purchaseOrder.itemId,
+                        itemName: row?.purchaseOrder.itemName,
+                        quantity: row?.purchaseOrder.quantity,
+                        companyId: row?.companyId,
+                      },
+                    });
+                  }}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  Generate GRN
+                </button>
+              
+              {row?.isEditable && row?.isEditable === true && (
+                <button
+                  onClick={() => {
+                    navigate(`/purchase-order/edit/${currentId}`);
+                  }}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  Edit
+                </button>
+              )}
             </div>
           )}
         </div>
@@ -134,23 +163,6 @@ const PurchaseOrderListingWrapper = () => {
       align: "end",
     },
   ];
-
-  const { data, isLoading, isFetching } = useGetPurchaseOrderQuery({
-    limit: rowsPerPage,
-    searchValue: searchValue,
-    params: ["poCode", "wareHouseId"],
-    page: page,
-    filterBy: [
-      {
-        fieldName: "",
-        value: [],
-      },
-    ],
-    dateFilter: {},
-    orderBy: "createdAt",
-    orderByValue: -1,
-    isPaginationRequired: true,
-  });
 
   useEffect(() => {
     if (!isFetching && !isLoading) {
@@ -167,7 +179,11 @@ const PurchaseOrderListingWrapper = () => {
   return (
     <>
       <SideNavLayout>
-        <PurchaseOrderListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
+        <PurchaseOrderListing
+          columns={columns}
+          rows={items}
+          setShowDropdown={setShowDropdown}
+        />
       </SideNavLayout>
     </>
   );

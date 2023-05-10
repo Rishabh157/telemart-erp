@@ -1,179 +1,153 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
+import { showToast } from "src/utils";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { SaleOrderListResponse } from "src/models/SaleOrder.model";
-// import {
-//   setIsTableLoading,
-//   setItems,
-//   setTotalItems,
-// } from "src/redux/slices/saleOrderSlice";
-// import { AppDispatch, RootState } from "src/redux/store";
-// import { useGetVendorsQuery } from "src/services/VendorServices";
+import {
+  setIsTableLoading,
+  setItems,
+  setTotalItems,
+} from "src/redux/slices/saleOrderSlice";
+import { AppDispatch, RootState } from "src/redux/store";
+import { useDeleteSalesOrderMutation, useGetPaginationSaleOrderQuery } from "src/services/SalesOrderService";
 import SaleOrderListing from "./SaleOrderListing";
 
-const columns: columnTypes[] = [
-  {
-    field: "soNumber",
-    headerName: "So Number",
-    flex: "flex-[1_1_0%]",
-    renderCell: (row: SaleOrderListResponse) => (
-      <span> {row.soNumber} </span>
-    ),
-  },
-  {
-    field: "dealer",
-    headerName: "Dealer",
-    flex: "flex-[1_1_0%]",
-    renderCell: (row: SaleOrderListResponse) => <span> {row.dealer} </span>,
-  },
-  {
-    field: "warehouse",
-    headerName: "Warehouse",
-    flex: "flex-[1.5_1.5_0%]",
-    renderCell: (row: SaleOrderListResponse) => {
-      return <span> {row.warehouse} </span>;
-    },
-  },
-  {
-    field: "actions",
-    headerName: "Actions",
-    flex: "flex-[0.5_0.5_0%]",
-    renderCell: (row: any) => (
-      <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-        {" "}
-        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{" "}
-      </button>
-    ),
-    align: "end",
-  },
-];
-
-const rows = [
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-    _id : 1
-  },
-
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-    _id : 2
-  },
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-    _id : 3
-  },
-
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-    _id : 4
-  },
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-    _id : 5
-  },
-
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-    _id : 6
-  },
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-    _id : 7
-  },
-
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-    _id : 8
-  },
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-    _id : 9
-  },
-
-  {
-    soNumber: "54864864",
-    dealer: "Anuj joshi",
-    warehouse: "Joshi's Warehouse",
-    mobile: "8574859685",
-    _id : 10
-  },
-  
-];
-
 const SaleOrderListingWrapper = () => {
-  // const vendorState: any = useSelector((state: RootState) => state.vendor);
+  const salesOrderState: any = useSelector(
+    (state: RootState) => state.saleOrder
+  );
+  const dispatch = useDispatch<AppDispatch>();
+  const { page, rowsPerPage, searchValue, items } = salesOrderState; 
+  const navigate = useNavigate();
+  const [currentId, setCurrentId] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [deleteSaleOrder] = useDeleteSalesOrderMutation(); 
 
-  // const {  page, rowsPerPage } = vendorState;
+  const { data, isFetching, isLoading } = useGetPaginationSaleOrderQuery({
+    limit: rowsPerPage,
+    searchValue: searchValue,
+    params: ["soNumber", "dealer"],
+    page: page,
+    filterBy: [
+      {
+        fieldName: "",
+        value: [],
+      },
+    ],
+    dateFilter: {},
+    orderBy: "createdAt",
+    orderByValue: -1,
+    isPaginationRequired: true,
+  });
+  //console.log(data)
+  useEffect(() => {
+    if (!isFetching && !isLoading) {
+      dispatch(setIsTableLoading(false));
+      dispatch(setItems(data?.data || []));
+      dispatch(setTotalItems(data?.totalItems || 4));
+    } else {
+      dispatch(setIsTableLoading(true));
+    }
+  }, [isLoading, isFetching, data, dispatch]);
 
-  // const dispatch = useDispatch<AppDispatch>();
-  // // const navigate = useNavigate();
-  // const { data, isFetching, isLoading } = useGetVendorsQuery({
-  //   limit: rowsPerPage,
-  //   searchValue: "",
-  //   params: ["dealerName", "dealerCode", "mobile"],
-  //   page: page,
-  //   filterBy: [
-  //     {
-  //       fieldName: "",
-  //       value: [],
-  //     },
-  //   ],
-  //   dateFilter: {
-  //     start_date: "",
-  //     end_date: "",
-  //     dateFilterKey: "",
-  //   },
-  //   orderBy: "createdAt",
-  //   orderByValue: -1,
-  //   isPaginationRequired: true,
-  // });
+  const handleDelete = () => {
+    setShowDropdown(false);
+    deleteSaleOrder(currentId).then((res) => {
+      if ("data" in res) {
+        if (res?.data?.status) {
+          showToast("success", "Sale Order deleted successfully!");
+        } else {
+          showToast("error", res?.data?.message);
+        }
+      } else {
+        showToast("error", "Something went wrong, Please try again later");
+      }
+    });
+  };
 
-  // useEffect(() => {
-  //   if (!isFetching && !isLoading) {
-  //     dispatch(setIsTableLoading(false));
-  //     dispatch(setItems(data || []));
-  //     dispatch(setTotalItems(data?.totalItems || 4));
-  //   } else {
-  //     dispatch(setIsTableLoading(true));
-  //   }
+  const columns: columnTypes[] = [
+    {
+      field: "soNumber",
+      headerName: "So Number",
+      flex: "flex-[1_1_0%]",
+      renderCell: (row: SaleOrderListResponse) => <span> {row?.soNumber} </span>,
+    },
+    {
+      field: "dealer",
+      headerName: "Dealer",
+      flex: "flex-[1_1_0%]",
+      renderCell: (row: SaleOrderListResponse) => <span> {row?.dealerLabel} </span>,
+    },
+    {
+      field: "warehouse",
+      headerName: "Warehouse",
+      flex: "flex-[1.5_1.5_0%]",
+      renderCell: (row: SaleOrderListResponse) => {
+        return <span> {row?.warehouseLabel} </span>;
+      },
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      flex: "flex-[0.5_0.5_0%]",
+      renderCell: (row: any) => (
+        <div className="relative">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDropdown(!showDropdown);
+              setCurrentId(row?._id);
+            }}
+            className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+          >
+            {" "}
+            <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{" "}
+          </button>
+          {showDropdown && currentId === row?._id && (
+            <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+              <button
+                onClick={() => {                  
+                  navigate(`/sale-order/edit-sale-order/${row?._id}`);
+                }}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => {
+                  showConfirmationDialog({
+                    title: "Delete SaleOrder",
+                    text: "Do you want to delete SaleOrder?",
+                    showCancelButton: true,
+                    next: (res: any) => {
+                      return res.isConfirmed
+                        ? handleDelete()
+                        : setShowDropdown(false);
+                    },
+                  });
+                }}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              >
+                Delete
+              </button>
+            </div>
+          )}
+        </div>
+      ),
+      align: "end",
+    },
+  ];
 
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isLoading, isFetching, data]);
+ 
 
   return (
     <>
       <SideNavLayout>
-        <SaleOrderListing columns={columns} rows={rows} />
+        <SaleOrderListing columns={columns} rows={items} />
       </SideNavLayout>
     </>
   );

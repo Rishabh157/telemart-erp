@@ -17,7 +17,6 @@ export type DropdownOptions = {
 export type FieldType = Field<"companyTypeOptions" | "ownershipTypeOptions">;
 
 const StepAddItemsWrapper = ({ formikProps, allItems }: Props) => {
-  console.log("in add item", allItems);
   const itemOptions = allItems?.map((ele: any) => {
     return { label: ele?.itemName, value: ele?._id };
   });

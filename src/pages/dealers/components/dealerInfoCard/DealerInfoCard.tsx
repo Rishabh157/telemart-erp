@@ -18,7 +18,6 @@ type Props = {
 
 const DealerInfoCard = ({ dealerData, actionIcons}: Props) => {
  const {selectedItem}:any=useSelector((state:RootState)=>state.dealer)
- console.log(selectedItem)
   
   return (
     <div className="py-2 flex flex-col gap-1">

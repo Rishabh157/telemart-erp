@@ -11,7 +11,7 @@ import EditWarehouse from "./EditWarehouse";
 import { showToast } from "src/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   useGetWareHouseByIdQuery,
   useUpdateWareHouseMutation,
@@ -27,6 +27,8 @@ export type FormInitialValues = {
   warehouseName: string;
   country: string;
   email: string;
+  vendorId: any;
+  dealerId: any;
   regd_address: {
     phone: string;
     address: string;
@@ -112,12 +114,17 @@ const steps = [
 ];
 
 const EditWarehouseWrapper = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const {state}= useLocation();
   const params = useParams();
   const Id = params.id;
+  const vendorId = state?.params?.vendorId || null;
+  const dealerId = state?.params?.dealerId  || null;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+ 
   const { data, isLoading, isFetching } = useGetWareHouseByIdQuery(Id);
   const [editWareHouse] = useUpdateWareHouseMutation();
+  
   // States
   const { allCountry }: any = useSelector((state: RootState) => state.country);
 
@@ -139,14 +146,14 @@ const EditWarehouseWrapper = () => {
       dispatch(setAllCountry(countryData?.data));
     }
   }, [countryData, countryIsLoading, countryIsFetching]);
-
+  
   // From Initial Values
   const initialValues: FormInitialValues = {
     warehouseCode: selectedItem?.wareHouseCode || "",
     warehouseName: selectedItem?.wareHouseName || "",
     country: selectedItem?.country || "",
-
     email: selectedItem?.email || "",
+    
     regd_address: {
       phone: selectedItem?.registrationAddress?.phone || "",
       address: selectedItem?.registrationAddress?.address || "",
@@ -164,6 +171,8 @@ const EditWarehouseWrapper = () => {
       pincode: selectedItem?.billingAddress?.pincode || "",
     },
     contact_informations: selectedItem?.contactInformation || "",
+    vendorId:  selectedItem?.vendorId,
+    dealerId: selectedItem?.dealerId ,
   };
 
   // Form validation schema based on the active step
@@ -174,6 +183,7 @@ const EditWarehouseWrapper = () => {
 
   // On Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
+  
     if (activeStep === steps?.length - 1) {
       const contactInformation = values.contact_informations.map((ele: any) => {
         const { _id, ...rest } = ele; // use object destructuring to remove the _id property
@@ -206,13 +216,22 @@ const EditWarehouseWrapper = () => {
             contactInformation: contactInformation,
 
             companyId: userData?.companyId || "",
-          },
+            dealerId: values?.dealerId || null,
+            vendorId: values?.vendorId || null,
+        },
           id: Id || "",
-        }).then((res) => {
+        }).then((res: any) => {
           if ("data" in res) {
             if (res?.data?.status) {
               showToast("success", "Udated successfully!");
-              navigate("/warehouse");
+              if (dealerId !== null) {
+                navigate("/dealers/" + dealerId + "/warehouse");
+               // navigate(`/dealers/${Id}/warehouse`)
+              } else if (vendorId !== null) {
+                navigate("/vendors/" + vendorId + "/warehouse");
+              } else {
+                navigate("/warehouse");
+              }
             } else {
               showToast("error", res?.data?.message);
             }

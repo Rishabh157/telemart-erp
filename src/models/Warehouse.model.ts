@@ -110,6 +110,9 @@ export type UpdateWarehouse = {
       landLine: string;
     }[];
     companyId: string;
+    dealerId: string;
+    vendorId: string;
+   
   };
   id: string;
 };

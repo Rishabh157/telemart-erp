@@ -24,10 +24,7 @@ const SchemeListingWrapper = () => {
     const [deleteScheme]=useDeleteSchemeMutation()
     const schemeState:any =useSelector((state:RootState)=>state.scheme)
     const { page, rowsPerPage ,items ,searchValue} =schemeState ;
-    console.log(items)
-
-
-
+  
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetAllSchemeQuery({

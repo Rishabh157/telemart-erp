@@ -40,7 +40,6 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
   };
 
   const { values, setFieldValue } = formikProps;
-  //const [isDisabled, setIsDisabled] = useState(false);
 
   return (
     <div className="">
@@ -120,7 +119,7 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                       {values.purchaseOrder?.map((item, itemIndex) => {
                         const { itemId, rate, quantity, estReceivingDate } =
                           item;
-
+                          
                         return (
                           <div
                             key={itemIndex}

@@ -72,7 +72,7 @@ const EditProductGroupWrapper = (props: Props) => {
 
   useEffect(() => {
     dispatch(setSelectedProductGroup(data?.data));
-    //  console.log(data.data ,"id")
+   
   }, [dispatch, data, isLoading]);
   return (
     <ConfigurationLayout>
