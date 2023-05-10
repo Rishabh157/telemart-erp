@@ -27,6 +27,23 @@ const PurchaseOrderListingWrapper = () => {
   const [currentId, setCurrentId] = useState("");
 
 
+  const { data, isLoading, isFetching } = useGetPurchaseOrderQuery({
+    limit: rowsPerPage,
+    searchValue: searchValue,
+    params: ["poCode", "wareHouseId"],
+    page: page,
+    filterBy: [
+      {
+        fieldName: "",
+        value: [],
+      },
+    ],
+    dateFilter: {},
+    orderBy: "createdAt",
+    orderByValue: -1,
+    isPaginationRequired: true,
+  });
+
   const columns: columnTypes[] = [
     {
       field: "poCode",
@@ -113,30 +130,24 @@ const PurchaseOrderListingWrapper = () => {
               </button>
               <button
                 onClick={() => {
-                  navigate("/grn/add", {
-                    state: {
-                      poCode: row?.poCode,
-                      itemId: row?.purchaseOrder.itemId,
-                      itemName: row?.purchaseOrder.itemName,
-                      quantity: row?.purchaseOrder.quantity,
-                      companyId: row?.companyId,
-                    },
-                  });
+                  navigate(`/purchase-order/edit/${currentId}`,{state:{  poCode: row?.poCode}})
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
               >
-                Generate GRN 
+                Edit
               </button>
+            
               <button
                 onClick={() => {
                   navigate("/grn", {
                     state: {
                       poCode: row?.poCode,
-                      itemId: row?.purchaseOrder.itemId,
-                      itemName: row?.purchaseOrder.itemName,
-                      quantity: row?.purchaseOrder.quantity,
-                      companyId: row?.companyId,
+                      // itemId: row?.purchaseOrder.itemId,
+                      // itemName: row?.purchaseOrder.itemName,
+                      // quantity: row?.purchaseOrder.quantity,
+                      // companyId: row?.companyId,
                     },
+                   
                   });
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -151,23 +162,6 @@ const PurchaseOrderListingWrapper = () => {
     },
   ];
 
-  const { data, isLoading, isFetching } = useGetPurchaseOrderQuery({
-    limit: rowsPerPage,
-    searchValue: searchValue,
-    params: ["poCode", "wareHouseId"],
-    page: page,
-    filterBy: [
-      {
-        fieldName: "",
-        value: [],
-      },
-    ],
-    dateFilter: {},
-    orderBy: "createdAt",
-    orderByValue: -1,
-    isPaginationRequired: true,
-  });
-
   useEffect(() => {
     if (!isFetching && !isLoading) {
       dispatch(setIsTableLoading(false));
@@ -180,12 +174,15 @@ const PurchaseOrderListingWrapper = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data, dispatch]);
 
-
-
+ 
   return (
     <>
       <SideNavLayout>
-        <PurchaseOrderListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
+        <PurchaseOrderListing
+          columns={columns}
+          rows={items}
+          setShowDropdown={setShowDropdown}
+        />
       </SideNavLayout>
     </>
   );

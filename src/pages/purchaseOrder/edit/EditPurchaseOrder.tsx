@@ -7,32 +7,45 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
+import { FormInitialValues } from "./EditPurchaseOrderWrapper";
+import ATMDatePicker from "src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker";
 import { SelectOption } from "src/models/FormField/FormField.model";
-import { FormInitialValues } from "./AddSaleOrderWrapper";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
-  dropdownOptions: {
-    dealerOptions: SelectOption[];
-    warehouseOptions: SelectOption[];
-    productGroupOptions: SelectOption[];
-  };  
+  vendorOptions:any[]
+  warehouseOptions:any[]
+  itemOptions:any[]
+  apiStatus:boolean
+
+};
+export type DropdownOptions = {
+  vendorOptions: SelectOption[];
+  warehouseOptions: SelectOption[];
+  itemOptions: SelectOption[];
 };
 
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
   {
-    label: "Sale Order",
-    path: "/sale-order",
+    label: "Purchase-order",
+    path: "/purchase-order",
   },
   {
-    label: "Add Sale Order",
+    label: "Edit Purchase Order",
   },
 ];
 
-const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
+const EditPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOptions,apiStatus}: Props) => {
+  const dropdownOptions: DropdownOptions = {
+    vendorOptions,
+    warehouseOptions,
+    itemOptions,
+  };
+
+
   const { values, setFieldValue } = formikProps;
-  //console.log(formikProps)
+  console.log(values)
 
   return (
     <div className="">
@@ -44,21 +57,24 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
 
         {/* Page Heading */}
         <div className="pt-1">
-          <ATMPageHeading> Add New Sale Order </ATMPageHeading>
+          <ATMPageHeading> Edit Purchase Order </ATMPageHeading>
         </div>
 
         <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
           <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
             {/* Form Step Label */}
-            <div className="text-xl font-medium"> SO Details </div>
+            <div className="text-xl font-medium"> PO Details </div>
+
             {/* BUTTON - Add SO */}
             <div>
               <button
                 type="button"
+                disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  true ? "disabled:opacity-25" : ""}`}
               >
-                Add SO
+               Update
               </button>
             </div>
           </div>
@@ -66,110 +82,129 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
           {/* Form */}
           <div className="grow py-8 px-3 ">
             <div className="grid grid-cols-3 gap-4">
-              {/* SO Number */}
+              {/* PO Code */}
               <ATMTextField
-                name="soNumber"
-                value={values.soNumber}
-                label="SO Number"
-                placeholder="SO Number"
-                onChange={(e) => setFieldValue("soNumber", e.target.value)}
+                name="poCode"
+                value={values.poCode}
+                label="PO Code"
+                placeholder="PO Code"
+                onChange={(e) => setFieldValue("poCode", e.target.value)}
               />
 
-              {/* Dealer */}
+              {/* Vendor */}
               <ATMSelect
-                name="dealer"
-                value={values.dealer}
-                onChange={(e) => setFieldValue("dealer", e.target.value)}
-                options={dropdownOptions.dealerOptions}
-                label="Dealer"
+                name="vendor"
+                value={values.vendorId}
+                onChange={(e) => setFieldValue("vendorId", e.target.value)}
+                options={dropdownOptions.vendorOptions}
+                label="Vendor"
               />
 
               {/* Warehouse */}
               <ATMSelect
                 name="warehouse"
-                value={values.wareHouse}
-                onChange={(e) => setFieldValue("wareHouse", e.target.value)}
+                value={values.wareHouseId}
+                onChange={(e) => setFieldValue("wareHouseId", e.target.value)}
                 options={dropdownOptions.warehouseOptions}
                 label="Warehouse"
               />
             </div>
           </div>
 
-          {/*  Sales Order  */}
+          {/*  Items  */}
           <div className="px-3">
             <div className=" text-lg pb-2 font-medium text-primary-main">
-              Add ProductGroup to sale order
+            Edit item to purchase order
             </div>
 
-            <FieldArray name="productSalesOrder">
+            { <FieldArray name="purchaseOrder">
               {({ push, remove }) => {
                 return (
                   <>
                     <div className="flex flex-col gap-y-5">
-                      {values.productSalesOrder?.map((item, index) => {
-                        const { productGroup, rate, quantity } = item;
+                      {values?.purchaseOrder?.map((item:any, itemIndex:any) => {
+                        const { itemId, rate, quantity, estReceivingDate } =
+                          item;
+                          
                         return (
-                          <div key={index} className="flex gap-3 items-end ">
-                            {/* Product Name */}
-                            <div className="flex-1">
+                          <div
+                            key={itemIndex}
+                            className="flex gap-3 items-end "
+                          >
+                            {/* Item Name */}
+                             <div className="flex-[3_3_0%]">
                               <ATMSelect
-                                name={`productSalesOrder[${index}].productGroup`}
-                                value={productGroup}
+                                name={`purchaseOrder[${itemIndex}].itemId`}
+                                value={itemId}
                                 onChange={(e) =>
                                   setFieldValue(
-                                    `productSalesOrder[${index}].productGroup`,
+                                    `purchaseOrder[${itemIndex}].itemId`,
                                     e.target.value
-                                  )                                  
+                                  )
                                 }
-                                options={dropdownOptions.productGroupOptions}
-                                label="Product Group"
+                                options={dropdownOptions.itemOptions}
+                                label="Item Name"
                               />
-                              
-                            </div>
+                            </div> 
 
                             {/* Rate */}
-                            <div className="flex-1">
+                             <div className="flex-[2_2_0%]">
                               <ATMTextField
                                 type="number"
                                 min={0}
-                                name={`productSalesOrder[${index}].rate`}
+                                name={`purchaseOrder[${itemIndex}].rate`}
                                 value={rate?.toString() || ""}
                                 label="Rate"
                                 placeholder="Rate"
                                 onChange={(e) =>
                                   setFieldValue(
-                                    `productSalesOrder[${index}].rate`,
+                                    `purchaseOrder[${itemIndex}].rate`,
                                     e.target.value
                                   )
                                 }
                               />
-                            </div>
+                            </div> 
 
                             {/* Quantity */}
-                            <div className="flex-1">
+                             <div className="flex-[2_2_0%]">
                               <ATMTextField
                                 type="number"
                                 min={0}
-                                name={`productSalesOrder[${index}].quantity`}
+                                name={`purchaseOrder[${itemIndex}].quantity`}
                                 value={quantity?.toString() || ""}
                                 label="Quantity"
                                 placeholder="Quantity"
                                 onChange={(e) =>
                                   setFieldValue(
-                                    `productSalesOrder[${index}].quantity`,
+                                    `purchaseOrder[${itemIndex}].quantity`,
                                     e.target.value
                                   )
                                 }
                               />
                             </div>
 
+                            {/* Est. Receiving Date */}
+                             <div className="flex-[3_3_0%]">
+                              <ATMDatePicker
+                                name={`purchaseOrder[${itemIndex}].estReceivingDate`}
+                                value={estReceivingDate}
+                                label="Est. Receiving Date"
+                                onChange={(newValue) =>
+                                  setFieldValue(
+                                    `purchaseOrder[${itemIndex}].estReceivingDate`,
+                                    newValue
+                                  )
+                                }
+                              />
+                            </div> 
+
                             {/* BUTTON - Delete */}
-                            {values.productSalesOrder?.length > 1 && (
+                             {values.purchaseOrder?.length > 1 && (
                               <div>
                                 <button
                                   type="button"
                                   onClick={() => {
-                                    remove(index);
+                                    remove(itemIndex);
                                   }}
                                   className="p-2 bg-red-500 text-white rounded"
                                 >
@@ -177,31 +212,33 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
                                 </button>
                               </div>
                             )}
-                          </div>
+                          </div> 
                         );
                       })}
-                    </div>
+                    </div> 
 
                     {/* BUTTON - Add More Product */}
                     <div className="flex justify-end py-5">
                       <button
                         type="button"
-                        onClick={() => 
+                        onClick={() =>
                           push({
-                            productGroup: "",
+                            itemId: "",
                             rate: null,
                             quantity: null,
-                          })                          
+                            estReceivingDate: null,
+                          })
                         }
                         className="bg-primary-main px-3 py-1 text-white rounded"
                       >
-                        Add More Product
+                        Add More Item
                       </button>
                     </div>
                   </>
                 );
               }}
-            </FieldArray>
+            </FieldArray> 
+}
           </div>
         </div>
       </div>
@@ -209,4 +246,4 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
   );
 };
 
-export default AddSaleOrder;
+export default EditPurchaseOrder;

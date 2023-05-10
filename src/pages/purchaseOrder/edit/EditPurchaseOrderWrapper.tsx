@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Formik } from "formik";
 import { array, date, number, object, string } from "yup";
-import AddPurchaseOrder from "./AddPurchaseOrder";
+import EditPurchaseOrder from "./EditPurchaseOrder";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { RootState } from "src/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useAddPurchaseOrderMutation } from "src/services/PurchaseOrderService";
+import {
+  useGetByPoCodeQuery,
+  useUpdatePurchaseOrderMutation,
+} from "src/services/PurchaseOrderService";
 import { showToast } from "src/utils";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useGetVendorsQuery } from "src/services/VendorServices";
 import { useGetWareHousesQuery } from "src/services/WareHoouseService";
-import {
-  useGetAllItemsQuery,
-} from "src/services/ItemService";
+import { useGetAllItemsQuery } from "src/services/ItemService";
 import { setAllItems } from "src/redux/slices/vendorSlice";
 import { setAllItems as setAllWareHouse } from "src/redux/slices/warehouseSlice";
 import { setAllItems as setAllItem } from "src/redux/slices/itemSlice";
 import moment from "moment";
+import { setSelectedItems } from "src/redux/slices/PurchaseOrderSlice";
 
 type Props = {};
 
@@ -39,12 +41,45 @@ export type FormInitialValues = {
 // itemOptions : SelectOption[]
 // }
 
-const AddPurchaseOrderWrapper = (props: Props) => {
+const EditPurchaseOrderWrapper = (props: Props) => {
+  const { state } = useLocation();
+  const poCode = state?.poCode;
+  const params=useParams()
+  const Id=params.id
+
   const navigate = useNavigate();
   const disptach = useDispatch();
   const [apiStatus, setApiStatus] = useState<boolean>(false);
   const { userData } = useSelector((state: RootState) => state?.auth);
-  const [addPurchaseOrder] = useAddPurchaseOrderMutation();
+ const [UpdatePurchaseOrder]=useUpdatePurchaseOrderMutation(poCode)
+  const { data, isFetching, isLoading } = useGetByPoCodeQuery(poCode);
+  const { selectedItems }: any = useSelector(
+    (state: RootState) => state.purchaseOrder
+  );
+  console.log(selectedItems);
+
+  const sorteddata = selectedItems?.map((ele: any, index: any) => {
+    return {
+      id: ele._id,
+      itemId: ele.purchaseOrder.itemId,
+      rate: ele.purchaseOrder.rate,
+      quantity: ele.purchaseOrder.quantity,
+      estReceivingDate: ele.purchaseOrder.estReceivingDate,
+    };
+  }) 
+
+  const datas = {
+    poCode: selectedItems?.[0]?.poCode,
+    vendorId:selectedItems?.[0]?.vendorId,
+    wareHouseId:selectedItems?.[0]?.wareHouseId,
+    purchaseOrder:sorteddata,
+  };
+  console.log(datas)
+
+  useEffect(() => {
+    disptach(setSelectedItems(data?.data));
+  }, [disptach, data,isFetching, isLoading]);
+
   const {
     data: vendorData,
     isLoading: vendorIsLoading,
@@ -93,32 +128,26 @@ const AddPurchaseOrderWrapper = (props: Props) => {
   //vendor
   useEffect(() => {
     disptach(setAllItems(vendorData?.data));
-  }, [vendorData, vendorIsLoading, VendorIsFetching ,disptach]);
+  }, [vendorData, vendorIsLoading, VendorIsFetching, disptach]);
 
   //warehouse
   useEffect(() => {
     disptach(setAllWareHouse(warehouseData?.data));
-  }, [warehouseData,warehouseIsLoading ,warehouseIsFetching, disptach]);
+  }, [warehouseData, warehouseIsLoading, warehouseIsFetching, disptach]);
 
   useEffect(() => {
     disptach(setAllItem(itemsData?.data));
-  }, [itemsData,disptach ,itemsIsLoading,itemsIsFetching]);
+  }, [itemsData, disptach, itemsIsLoading, itemsIsFetching]);
   //itemOption
 
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    poCode: "",
-    vendorId: "",
-    wareHouseId: "",
+    poCode: datas?.poCode || "",
+    vendorId:datas?.vendorId || "",
+    wareHouseId:datas?.wareHouseId || "",
     isEditable: true,
-    purchaseOrder: [
-      {
-        itemId: "",
-        rate: 0,
-        quantity: 0,
-        estReceivingDate: "",
-      },
-    ],
+    purchaseOrder: sorteddata
+   
   };
 
   // Form Validation Schema
@@ -141,8 +170,8 @@ const AddPurchaseOrderWrapper = (props: Props) => {
   });
 
   //    Form Submit Handler
-  const onSubmitHandler = (values: FormInitialValues) => { 
-    //console.log(values);   
+  const onSubmitHandler = (values: FormInitialValues) => {
+    //console.log(values);
     setApiStatus(true);
     const purchaseOrder = values.purchaseOrder.map((ele: any) => {
       return {
@@ -152,17 +181,21 @@ const AddPurchaseOrderWrapper = (props: Props) => {
     });
 
     setTimeout(() => {
-      addPurchaseOrder({
+      UpdatePurchaseOrder({
+        body:{
         poCode: values.poCode,
         vendorId: values.vendorId,
         wareHouseId: values.wareHouseId,
         isEditable: values.isEditable,
         purchaseOrder: purchaseOrder,
         companyId: userData?.companyId || "",
+        },
+        id: Id ||""
+     
       }).then((res: any) => {
         if ("data" in res) {
           if (res?.data?.status) {
-            showToast("success", "purchase-order added successfully!");
+            showToast("success", "purchase-order updated successfully!");
             navigate("/purchase-order");
           } else {
             showToast("error", res?.data?.message);
@@ -190,7 +223,7 @@ const AddPurchaseOrderWrapper = (props: Props) => {
       >
         {(formikProps) => {
           return (
-            <AddPurchaseOrder
+            <EditPurchaseOrder
               formikProps={formikProps}
               vendorOptions={vendorOptions}
               warehouseOptions={warehouseOptions}
@@ -203,4 +236,4 @@ const AddPurchaseOrderWrapper = (props: Props) => {
     </SideNavLayout>
   );
 };
-export default AddPurchaseOrderWrapper;
+export default EditPurchaseOrderWrapper;

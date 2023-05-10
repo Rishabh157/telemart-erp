@@ -25,6 +25,8 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const ViewPurchaseOrder = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
+  //const { estReceivingDate, itemName, quantity, rate } = values?.purchaseOrder;
+  console.log(values, "View PO");
 
   return (
     <div className="">
@@ -93,66 +95,56 @@ const ViewPurchaseOrder = ({ formikProps }: Props) => {
                 return (
                   <>
                     <div className="flex flex-col gap-y-5">
-                      {values.purchaseOrder?.map((item, itemIndex) => {
-                        const { itemName, rate, quantity, estReceivingDate } =
-                          item;
+                      <div className="flex gap-3 items-end ">
+                        <div className="flex-[3_3_0%]">
+                          <ATMTextField
+                            type="text"
+                            min={0}
+                            disabled
+                            name="itemName"
+                            value={values?.purchaseOrder?.itemName || ""}
+                            label="Item Name"
+                            placeholder="item Name"
+                            onChange={() => {}}
+                          />
+                        </div>
 
-                        return (
-                          <div
-                            key={itemIndex}
-                            className="flex gap-3 items-end "
-                          >
-                            <div className="flex-[3_3_0%]">
-                              <ATMTextField
-                                type="text"
-                                min={0}
-                                disabled
-                                name={`itemName`}
-                                value={itemName || ""}
-                                label="Item Name"
-                                placeholder="item Name"
-                                onChange={() => {}}
-                              />
-                            </div>
+                        <div className="flex-[2_2_0%]">
+                          <ATMTextField
+                            type="number"
+                            min={0}
+                            disabled
+                            name="rate"
+                            value={values?.purchaseOrder?.rate?.toString() || ""}
+                            label="Rate"
+                            placeholder="Rate"
+                            onChange={() => {}}
+                          />
+                        </div>
 
-                            <div className="flex-[2_2_0%]">
-                              <ATMTextField
-                                type="number"
-                                min={0}
-                                disabled
-                                name={`purchaseOrder[${itemIndex}].rate`}
-                                value={rate?.toString() || ""}
-                                label="Rate"
-                                placeholder="Rate"
-                                onChange={() => {}}
-                              />
-                            </div>
+                        <div className="flex-[2_2_0%]">
+                          <ATMTextField
+                            type="number"
+                            min={0}
+                            disabled
+                            name="quantity"
+                            value={values?.purchaseOrder?.quantity?.toString() || ""}
+                            label="Quantity"
+                            placeholder="Quantity"
+                            onChange={(e) => {}}
+                          />
+                        </div>
 
-                            <div className="flex-[2_2_0%]">
-                              <ATMTextField
-                                type="number"
-                                min={0}
-                                disabled
-                                name={`purchaseOrder[${itemIndex}].quantity`}
-                                value={quantity?.toString() || ""}
-                                label="Quantity"
-                                placeholder="Quantity"
-                                onChange={(e) => {}}
-                              />
-                            </div>
-
-                            <div className="flex-[3_3_0%]">
-                              <ATMDatePicker
-                                disabled
-                                name={`purchaseOrder[${itemIndex}].estReceivingDate`}
-                                value={estReceivingDate}
-                                label="Est. Receiving Date"
-                                onChange={() => {}}
-                              />
-                            </div>
-                          </div>
-                        );
-                      })}
+                        <div className="flex-[3_3_0%]">
+                          <ATMDatePicker
+                            disabled
+                            name="estReceivingDate"
+                            value={values?.purchaseOrder?.estReceivingDate}
+                            label="Est. Receiving Date"
+                            onChange={() => {}}
+                          />
+                        </div>
+                      </div>
                     </div>
 
                     <div className="flex justify-end py-5"></div>

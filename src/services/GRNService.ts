@@ -37,8 +37,10 @@ export const grnApi = apiSlice.injectEndpoints({
   }),
 });
 
+
 export const {
     useAddGRNMutation,
     useUpdateGRNMutation,
-    useGetPaginationGRNQuery,
+    useGetPaginationGRNQuery
+
 } = grnApi;
