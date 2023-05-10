@@ -7,12 +7,16 @@ import { GRNListResponse } from "src/models/GRN.model";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import GRNListing from "./GRNListing";
 import {
+  setFilterValue,
   setIsTableLoading,
   setItems,
+  setSearchValue,
   setTotalItems,
 } from "src/redux/slices/GRNSlice";
 import { RootState } from "src/redux/store";
 import { useGetPaginationGRNQuery } from "src/services/GRNService";
+import { useLocation } from "react-router-dom";
+import { clear } from "console";
 
 const columns: columnTypes[] = [
   {
@@ -71,9 +75,13 @@ const columns: columnTypes[] = [
 
 const GRNListingWrapper = () => {
   const dispatch = useDispatch();
+  const {state}=useLocation()
+  const poCode=state?.poCode;
+  console.log(poCode)
+  
 
   const grnState: any = useSelector((state: RootState) => state.grn);
-  const { page, rowsPerPage, searchValue, items } = grnState;
+  const { page, rowsPerPage, searchValue, items,filterValue} = grnState;
   //const [currentId, setCurrentId] = useState("");
 
   const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
@@ -83,8 +91,8 @@ const GRNListingWrapper = () => {
     page: page,
     filterBy: [
       {
-        fieldName: "",
-        value: [],
+        fieldName: "poCode",
+        value:filterValue,
       },
     ],
     dateFilter: {},
@@ -104,6 +112,15 @@ const GRNListingWrapper = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data, dispatch]);
+//
+
+
+// useEffect(() => {
+//   if (poCode) {
+//    dispatch(setFilterValue(poCode));
+//   }
+// }, [poCode]);
+
 
 
   return (

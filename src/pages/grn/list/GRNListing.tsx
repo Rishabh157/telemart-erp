@@ -7,13 +7,14 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
 import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeader";
-import { setRowsPerPage, setPage } from "src/redux/slices/GRNSlice";
+import { setRowsPerPage, setPage, setSearchValue } from "src/redux/slices/GRNSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 
 type Props = {
   columns: any[];
   rows: any[];
 };
+
 
 const GRNListing = ({ columns, rows }: Props) => {
   const [selectedRows, setSelectedRows] = useState([])
@@ -22,13 +23,14 @@ const GRNListing = ({ columns, rows }: Props) => {
   const grnState: any = useSelector((state: RootState) => state.grn);
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-  const { page, rowsPerPage } = grnState;
+  const { page, rowsPerPage,searchValue } = grnState;
 
   const breadcrumbs: BreadcrumbType[] = [
     {
       label: "Goods Received Note",
     },
   ];
+
 
   return (
     <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
@@ -46,10 +48,12 @@ const GRNListing = ({ columns, rows }: Props) => {
         <ATMTableHeader
           page={page}
           rowCount={rows.length}
+          searchValue={searchValue}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
           isFilter
+          onSearch={(newValue)=>dispatch(setSearchValue(newValue))}
           // onFilterClick={() => setIsFilterOpen(true)}
         />
 

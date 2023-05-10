@@ -34,9 +34,9 @@ const StateListingWrapper = () => {
     orderByValue: -1,
   });
 
-  useEffect(() => {
-    dispatch(setItems(data?.data));
-  }, [data, isLoading, isFetching]);
+  // useEffect(() => {
+  //   dispatch(setItems(data?.data));
+  // }, [data, isLoading, isFetching]);
 
   return <StateListing states={states} />;
 };

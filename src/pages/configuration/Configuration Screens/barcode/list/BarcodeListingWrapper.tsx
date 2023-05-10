@@ -60,6 +60,8 @@ const BarcodeListingWrapper = () => {
       },
     ],
     dateFilter: {},
+
+    
     orderBy: "createdAt",
     orderByValue: -1,
     isPaginationRequired: true,
@@ -268,6 +270,7 @@ const BarcodeListingWrapper = () => {
                 }`}
               >
                 <div>
+                  
                   {" "}
                   <tab.icon className="text-xl" />{" "}
                 </div>
