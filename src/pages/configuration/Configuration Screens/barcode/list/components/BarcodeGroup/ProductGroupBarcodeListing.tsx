@@ -38,7 +38,6 @@ const ProductGroupListing = ({
   //  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const { page, rowsPerPage, totalItems, searchValue } = ProductGroupcodeState;
-  console.log(totalItems);
   return (
     <div className="px-4 h-full flex flex-col gap-3">
       <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">

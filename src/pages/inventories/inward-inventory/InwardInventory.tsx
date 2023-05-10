@@ -1,4 +1,6 @@
-import React from "react";
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import ATMBreadCrumbs, {
   BreadcrumbType,
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
@@ -6,8 +8,16 @@ import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import MoveToCartonDrawer from "./MoveToCartonDrawer/MoveToCartonDrawer";
+import { SelectBoxOption } from "./InwardInventoryWrapper";
+import { useGetAllBarcodeQuery } from "src/services/BarcodeService";
+import { SelectOption } from "src/models/FormField/FormField.model";
+import { v4 as uuidv4 } from "uuid";
+// import { showToast } from "src/utils";
 
-type Props = {};
+type Props = {
+  cartonBoxOption: SelectBoxOption[] | [];
+  wareHouseOption: SelectOption[] | [];
+};
 
 const breadcrumbs: BreadcrumbType[] = [
   {
@@ -18,24 +28,96 @@ const breadcrumbs: BreadcrumbType[] = [
     label: "Inward Inventory",
   },
 ];
-
-const packagingOptions = [
-  {
-    label: "Carton 30 Pcs. Product 1",
-    value: "1",
-  },
-  {
-    label: "Carton 30 Pcs. Product 2",
-    value: "2",
-  },
-];
-
-const InwardInventory = (props: Props) => {
+export type renderBarcodType = {
+  productGroupLabel: string;
+  productGroupNumber: string;
+  barcodeNumber: string;
+  isUsed: boolean;
+};
+const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
   const [packaging, setPackaging] = React.useState("");
+  const [wareHouse, setWareHouse] = React.useState("");
+  const [status, setStatus] = React.useState("AVAILABLE");
+  const [condition, setCondition] = React.useState("GOOD");
+  const [barcodes, setBarcodes] = React.useState<renderBarcodType[]>([]);
+  const [filterBarcode, setFilterBarcode] = useState<renderBarcodType[] | []>(
+    []
+  );
+  const [dataToSend, setDataToSend] = useState<any[]>([]);
+  const [itemCount, setItemCount] = React.useState(0);
   const [barcode, setBarcode] = React.useState("");
   const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] =
     React.useState(false);
+  const { data, isLoading, isFetching } = useGetAllBarcodeQuery("");
+  const cartonBoxCode = uuidv4();
+  useEffect(() => {
+    const count =
+      (cartonBoxOption?.find((e) => e?.value === packaging)
+        ?.itemCount as number) || 0;
+    if (count) {
+      setItemCount(count - 1);
+    }
+    setFilterBarcode([]);
+  }, [packaging]);
 
+  useEffect(() => {
+    if (!isLoading && !isFetching) {
+      const dataToSet = data?.data?.map((e: any) => {
+        if (e?.isDeleted === false) {
+          return {
+            productGroupLabel: e.productGroupLabel,
+            productGroupNumber: e?.barcodeGroupNumber,
+            barcodeNumber: e?.barcodeNumber,
+            isUsed: e?.isUsed,
+          };
+        }
+      });
+      setBarcodes(dataToSet);
+    }
+  }, [data, isLoading, isFetching]);
+
+  useEffect(() => {
+    const newObject = barcodes?.filter(
+      (f: any) => f?.barcodeNumber === barcode && f?.isUsed === false
+    );
+    // console.log(newObject, "ll");
+    // if (newObject?.length ? newObject[0]?.isUsed === true : barcodes?.length) {
+    //   showToast("error", "Barcode already used");
+    // }
+    const alreadyExist = filterBarcode?.find(
+      (f) => f.barcodeNumber === newObject[0]?.barcodeNumber
+    );
+    const validBarcode = filterBarcode?.length
+      ? filterBarcode[0]?.productGroupLabel === newObject[0]?.productGroupLabel
+      : true;
+    if (
+      newObject.length &&
+      filterBarcode?.length <= itemCount &&
+      !alreadyExist &&
+      validBarcode
+    ) {
+      setFilterBarcode((prevData: any[]) => [...prevData, newObject[0]]);
+      const dataToSendObject = {
+        barcodeNumber: newObject[0]?.barcodeNumber,
+        status: status,
+        condition: condition,
+      };
+      setDataToSend((prevData: any[]) => [...prevData, dataToSendObject]);
+    }
+  }, [barcode]);
+
+  useEffect(() => {
+    if (barcode?.length === 36) {
+      setBarcode("");
+    }
+  }, [barcode]);
+
+  useEffect(() => {
+    console.log(itemCount, filterBarcode?.length);
+    if (itemCount && itemCount + 1 === filterBarcode?.length) {
+      setIsOpenMoveToCartonDrawer(true);
+    }
+  }, [itemCount, filterBarcode]);
   return (
     <div className="p-2">
       <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -58,16 +140,51 @@ const InwardInventory = (props: Props) => {
         <div className="grid grid-cols-4 gap-5 ">
           <ATMSelect
             name=""
+            value={wareHouse}
+            onChange={(e) => {
+              setWareHouse(e.target.value);
+            }}
+            options={wareHouseOption}
+            label="Warehouse"
+          />
+          <ATMSelect
+            name=""
             value={packaging}
             onChange={(e) => {
               setPackaging(e.target.value);
             }}
-            options={packagingOptions}
+            options={cartonBoxOption}
             label="Packaging"
+          />
+
+          <ATMSelect
+            name=""
+            value={status}
+            onChange={(e) => {
+              setStatus(e.target.value);
+            }}
+            options={[
+              { label: "Available", value: "AVAILABLE" },
+              { label: "Out Of Stock", value: "OUT OF STOCK" },
+            ]}
+            label="Status"
+          />
+          <ATMSelect
+            name=""
+            value={condition}
+            onChange={(e) => {
+              setCondition(e.target.value);
+            }}
+            options={[
+              { label: "Good", value: "GOOD" },
+              { label: "Defective", value: "DEFECTIVE" },
+            ]}
+            label="Condition"
           />
 
           <ATMTextField
             name=""
+            disabled={packaging?.length === 0 || wareHouse.length === 0}
             value={barcode}
             onChange={(e) => {
               setBarcode(e.target.value);
@@ -77,34 +194,38 @@ const InwardInventory = (props: Props) => {
         </div>
 
         <div className="mt-5 py-3 grid grid-cols-6 gap-4 border-t border-slate-300 ">
-          {Array(6)
-            .fill(null)
-            .map((_, index) => {
-              return (
-                <div
-                  key={index}
-                  className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer`}
-                >
-                  <div className="flex justify-between">
-                    <div>
-                      <div className="text-[12px] text-slate-500">
-                        Barcode No.
-                      </div>
-                      <div> 123456789 </div>
+          {filterBarcode?.map((barcode, index) => {
+            return (
+              <div
+                key={index}
+                className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer`}
+              >
+                <div className="flex justify-between">
+                  <div>
+                    <div className="text-[12px] text-slate-500">
+                      Barcode No.
                     </div>
-                  </div>
-
-                  <div className="text-primary-main font-medium grow flex items-end">
-                    Product Name
+                    <div> {barcode?.barcodeNumber} </div>
                   </div>
                 </div>
-              );
-            })}
+
+                <div className="text-primary-main font-medium grow flex items-end">
+                  {barcode?.productGroupLabel}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
       {isOpenMoveToCartonDrawer && (
         <MoveToCartonDrawer
+          productGroupName={filterBarcode[0]?.productGroupLabel}
+          groupBarcodeNumber={filterBarcode[0]?.productGroupNumber}
+          productDetail={dataToSend}
+          wareHouse={wareHouse}
+          cartonBoxCode={cartonBoxCode}
+          packaging={packaging}
           onClose={() => setIsOpenMoveToCartonDrawer(false)}
         />
       )}

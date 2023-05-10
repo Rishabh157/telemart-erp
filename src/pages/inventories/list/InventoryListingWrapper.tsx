@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
@@ -12,6 +12,15 @@ import { InventoryListResponse } from "src/models/Inventory.model";
 // } from "src/redux/slices/vendorSlice";
 // import { AppDispatch, RootState } from "src/redux/store";
 import InventoryListing from "./InventoryListing";
+import { useGetPaginationInventoriesQuery } from "src/services/InventoriesService";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "src/redux/store";
+// import { useNavigate } from "react-router-dom";
+import {
+  setIsTableLoading,
+  setItems,
+  setTotalItems,
+} from "src/redux/slices/inventorySlice";
 
 const columns: columnTypes[] = [
   {
@@ -19,14 +28,20 @@ const columns: columnTypes[] = [
     headerName: "Product Group Name",
     flex: "flex-[1_1_0%]",
     renderCell: (row: InventoryListResponse) => (
-      <span> {row.productName} </span>
+      <span> {row.productGroupName} </span>
     ),
   },
   {
     field: "quantity",
     headerName: "Quantity",
     flex: "flex-[1_1_0%]",
-    renderCell: (row: InventoryListResponse) => <span> {row.quantity} </span>,
+    renderCell: (row: InventoryListResponse) => <span> {row.count} </span>,
+  },
+  {
+    field: "warehouse",
+    headerName: "Warehouse",
+    flex: "flex-[1_1_0%]",
+    renderCell: (row: InventoryListResponse) => <span> {row.wareHouse} </span>,
   },
   {
     field: "actions",
@@ -42,150 +57,49 @@ const columns: columnTypes[] = [
   },
 ];
 
-const rows = [
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 1,
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 2,
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 3,
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 4,
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 5,
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 6,
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 6,
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 7,
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 8,
-  },
-
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 9,
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 10,
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 11,
-  },
-  {
-    productName: "Alcoban",
-    quantity: "1000",
-    email: "him@gmail.com",
-    mobile: "8574859685",
-    _id: 12,
-  },
-];
-
 const InventoryListingWrapper = () => {
-  // const vendorState: any = useSelector((state: RootState) => state.vendor);
+  const inventoriesState: any = useSelector(
+    (state: RootState) => state.inventory
+  );
 
-  // const {  page, rowsPerPage } = vendorState;
+  const { page, rowsPerPage, searchValue, items } = inventoriesState;
 
-  // const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
   // const navigate = useNavigate();
-  // const { data, isFetching, isLoading } = useGetVendorsQuery({
-  //   limit: rowsPerPage,
-  //   searchValue: "",
-  //   params: ["dealerName", "dealerCode", "mobile"],
-  //   page: page,
-  //   filterBy: [
-  //     {
-  //       fieldName: "",
-  //       value: [],
-  //     },
-  //   ],
-  //   dateFilter: {
-  //     start_date: "",
-  //     end_date: "",
-  //     dateFilterKey: "",
-  //   },
-  //   orderBy: "createdAt",
-  //   orderByValue: -1,
-  //   isPaginationRequired: true,
-  // });
+  const { data, isFetching, isLoading } = useGetPaginationInventoriesQuery({
+    limit: rowsPerPage,
+    searchValue: searchValue,
+    params: ["productGroupName"],
+    page: page,
+    filterBy: [
+      {
+        fieldName: "",
+        value: [],
+      },
+    ],
+    dateFilter: {},
+    orderBy: "createdAt",
+    orderByValue: -1,
+    isPaginationRequired: true,
+  });
 
-  // useEffect(() => {
-  //   if (!isFetching && !isLoading) {
-  //     dispatch(setIsTableLoading(false));
-  //     dispatch(setItems(data || []));
-  //     dispatch(setTotalItems(data?.totalItems || 4));
-  //   } else {
-  //     dispatch(setIsTableLoading(true));
-  //   }
+  useEffect(() => {
+    if (!isFetching && !isLoading) {
+      dispatch(setIsTableLoading(false));
+      dispatch(setItems(data?.data || []));
+      dispatch(setTotalItems(data?.totalItem || 4));
+    } else {
+      dispatch(setIsTableLoading(true));
+    }
 
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isLoading, isFetching, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isFetching, data]);
 
   return (
     <>
       <SideNavLayout>
         <div className="h-full">
-          <InventoryListing columns={columns} rows={rows} />
+          <InventoryListing columns={columns} rows={items} />
         </div>
       </SideNavLayout>
     </>

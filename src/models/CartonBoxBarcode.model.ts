@@ -4,6 +4,7 @@ export type CartonBoxBarcodeListResponse = {
   barcodeNumber: string;
   barcodeGroupNumber: string;
   isUsed: boolean;
+  itemBarcodeNumber: string;
   companyId: string;
   isActive: boolean;
   isDeleted: boolean;
@@ -17,6 +18,7 @@ export type AddCartonBoxBarcode = {
   cartonBoxId: string;
   barcodeGroupNumber: string;
   barcodeNumber: string;
+  itemBarcodeNumber: string;
   companyId: string;
 };
 
@@ -25,6 +27,7 @@ export type UpdateCartonBoxBarcode = {
     cartonBoxId: string;
     barcodeGroupNumber: string;
     barcodeNumber: string;
+    itemBarcodeNumber: string;
     companyId: string;
   };
   id: string;

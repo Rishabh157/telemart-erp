@@ -66,13 +66,14 @@ export type {
   AddProducts,
   UpdateProducts,
 } from "./Products.model";
-export type {
-  GRNListResponse,
-  AddGRN,
-  UpdateGRN,
-} from "./GRN.model";
+export type { GRNListResponse, AddGRN, UpdateGRN } from "./GRN.model";
 export type {
   SaleOrderListResponse,
   AddSaleOrder,
-  UpdateSaleOrder
-}  from "./SaleOrder.model";
+  UpdateSaleOrder,
+} from "./SaleOrder.model";
+export type {
+  InventoryListResponse,
+  AddInventory,
+  UpdateInventory,
+} from "./Inventory.model";
