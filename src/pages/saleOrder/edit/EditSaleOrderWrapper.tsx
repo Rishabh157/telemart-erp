@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, FormikProps } from "formik";
 import { array, number, object, string } from "yup";
-import AddSaleOrder from "./AddSaleOrder";
+import EditSaleOrder from "./EditSaleOrder";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { showToast } from "src/utils";
 import { useGetAllDealersQuery } from "src/services/DealerServices";
@@ -10,31 +10,48 @@ import { useGetAllProductGroupQuery } from "src/services/ProductGroupService";
 import { setAllItems } from "src/redux/slices/dealerSlice";
 import { setAllItems as setAllWareHouse } from "src/redux/slices/warehouseSlice";
 import { setAllItems as setAllProductGroups } from "src/redux/slices/productGroupSlice";
-import { useAddSalesOrderMutation } from "src/services/SalesOrderService";
+import {
+  useGetSalesOrderByIdQuery,
+  useUpdateSalesOrderMutation,
+} from "src/services/SalesOrderService";
 import { RootState } from "src/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { setSelectedItem } from "src/redux/slices/saleOrderSlice";
 
 type Props = {};
 
 export type FormInitialValues = {
-  soNumber: string;
-  dealer: string;
-  wareHouse: string;
-  companyId: string;
-  productSalesOrder: {   
-    productGroupId: string;
-    rate: number | 0;
-    quantity: number | 0;
-  }[];  
+  soNumber: string | "";
+  dealer: string | "";
+  wareHouse: string | "";
+  companyId: string | "";
+  productSalesOrder: [
+    {
+      productGroupId: string;
+      rate: number | 0;
+      quantity: number | 0;
+    }
+  ];
 };
 
-const AddSaleOrderWrapper = (props: Props) => {
+const EditSaleOrderWrapper = (props: Props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const params = useParams();
+  const Id = params.id;
   const [apiStatus, setApiStatus] = useState<boolean>(false);
+  const [updateSaleOrder] = useUpdateSalesOrderMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
-  const [addSalesOrder] = useAddSalesOrderMutation();
+  const { selectedItem }: any = useSelector(
+    (state: RootState) => state?.saleOrder
+  );
+
+  const { data, isLoading, isFetching } = useGetSalesOrderByIdQuery(Id);
+  //console.log(data?.data)
+  useEffect(() => {
+    dispatch(setSelectedItem(data?.data));
+  }, [dispatch, data, isLoading, isFetching]);
 
   const {
     data: dealerData,
@@ -63,7 +80,7 @@ const AddSaleOrderWrapper = (props: Props) => {
 
   const dealerOptions = allItems?.map((ele: any) => {
     return {
-      label: ele.firstName +" "+ ele.lastName,
+      label: ele.firstName + " " + ele.lastName,
       value: ele._id,
     };
   });
@@ -95,29 +112,29 @@ const AddSaleOrderWrapper = (props: Props) => {
   //ProductGroup
   useEffect(() => {
     dispatch(setAllProductGroups(productGroupData?.data));
-  }, [productGroupData, productGroupIsLoading, productGroupIsFetching, dispatch]);
+  }, [
+    productGroupData,
+    productGroupIsLoading,
+    productGroupIsFetching,
+    dispatch,
+  ]);
 
   const dropdownOptions = {
     dealerOptions: dealerOptions,
     warehouseOptions: warehouseOptions,
-    productGroupOptions: productGroupOptions
+    productGroupOptions: productGroupOptions,
   };
-
 
   // Form Initial Values
   const initialValues: FormInitialValues = {
-    soNumber: "",
-    dealer: "",
-    wareHouse: "",
-    productSalesOrder: [
-      {        
-        productGroupId: "",
-        rate: 0,
-        quantity: 0,
-      },
-    ],
-    companyId: "",   
+    soNumber: selectedItem?.soNumber || "",
+    dealer: selectedItem?.dealer || "",
+    wareHouse: selectedItem?.wareHouse || "",
+    productSalesOrder: selectedItem?.productSalesOrder,
+    companyId: selectedItem?.companyId || "",
   };
+
+  //console.log(initialValues, "initialValues");
 
   // Form Validation Schema
   const validationSchema = object({
@@ -141,20 +158,33 @@ const AddSaleOrderWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-   
-    console.log("onSubmitHandler", values);       
+    console.log("onSubmitHandler", values.productSalesOrder);
+
+    const productSalesOrder = values.productSalesOrder.map((ele: any) => {
+      return {
+        productGroupId: ele.productGroupId,
+        rate: ele.rate,
+        quantity: ele.quantity,
+      };
+    });
+
+    console.log(productSalesOrder);
+
     setApiStatus(true);
     setTimeout(() => {
-      addSalesOrder({
-        soNumber: values.soNumber,
-        dealer: values.dealer,
-        wareHouse: values.wareHouse,
-        productSalesOrder: values.productSalesOrder,              
-        companyId: userData?.companyId || "",
+      updateSaleOrder({
+        body: {
+          soNumber: values.soNumber,
+          dealer: values.dealer,
+          wareHouse: values.wareHouse,
+          productSalesOrder: productSalesOrder,
+          companyId: userData?.companyId || "",
+        },
+        id: Id || "",
       }).then((res: any) => {
         if ("data" in res) {
           if (res?.data?.status) {
-            showToast("success", "Sale-Order added successfully!");
+            showToast("success", "Sale-Order Updated successfully!");
             navigate("/sale-order");
           } else {
             showToast("error", res?.data?.message);
@@ -165,22 +195,19 @@ const AddSaleOrderWrapper = (props: Props) => {
         setApiStatus(false);
       });
     }, 1000);
-    
-    
   };
-
-  
 
   return (
     <SideNavLayout>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
       >
         {(formikProps: FormikProps<FormInitialValues>) => {
           return (
-            <AddSaleOrder
+            <EditSaleOrder
               formikProps={formikProps}
               dropdownOptions={dropdownOptions}
               apiStatus={apiStatus}
@@ -192,4 +219,4 @@ const AddSaleOrderWrapper = (props: Props) => {
   );
 };
 
-export default AddSaleOrderWrapper;
+export default EditSaleOrderWrapper;
