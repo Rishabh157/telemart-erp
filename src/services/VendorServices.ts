@@ -46,6 +46,7 @@ export const vendorApi = apiSlice.injectEndpoints({
         body,
       }),
     }),
+    
     //***** Delete *****/
     deleteVendor: builder.mutation({
       invalidatesTags: ["vendor"],

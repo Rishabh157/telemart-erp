@@ -66,6 +66,7 @@ import {
   OrderListing,
   OutwardRequestListingWrapper,
   AddSaleOrderWrapper,
+  EditSaleOrderWrapper,
   SaleOrderListingWrapper,
   Test,
   UsersListingWrapper,
@@ -180,6 +181,11 @@ const PageRoutes = () => {
             path="/sale-order/add-sale-order"
             element={<AddSaleOrderWrapper />}
           />
+          <Route
+            path="/sale-order/edit-sale-order/:id"
+            element={<EditSaleOrderWrapper />}
+          />
+
           <Route
             path="/outward-request"
             element={<OutwardRequestListingWrapper />}

@@ -49,6 +49,7 @@ import AddOrder from "./orders/add/AddOrder";
 import OrderListing from "./orders/OrderListing";
 import OutwardRequestListingWrapper from "./outwardRequest/list/OutwardRequestListingWrapper";
 import AddSaleOrderWrapper from "./saleOrder/add/AddSaleOrderWrapper";
+import EditSaleOrderWrapper from "./saleOrder/edit/EditSaleOrderWrapper";
 import SaleOrderListingWrapper from "./saleOrder/list/SaleOrderListingWrapper";
 import Test from "./test/Test";
 import UsersListingWrapper from "./users/list/UsersListingWrapper";
@@ -134,6 +135,7 @@ export {
   OrderListing,
   OutwardRequestListingWrapper,
   AddSaleOrderWrapper,
+  EditSaleOrderWrapper,
   SaleOrderListingWrapper,
   Test,
   UsersListingWrapper,

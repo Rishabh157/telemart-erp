@@ -17,6 +17,7 @@ type Props = {
     warehouseOptions: SelectOption[];
     productGroupOptions: SelectOption[];
   };  
+  apiStatus: boolean;
 };
 
 // Breadcrumbs
@@ -30,7 +31,7 @@ const breadcrumbs: BreadcrumbType[] = [
   },
 ];
 
-const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
+const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, }: Props) => {
   const { values, setFieldValue } = formikProps;
   //console.log(formikProps)
 
@@ -55,9 +56,11 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
             <div>
               <button
                 type="button"
+                disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
-                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
-              >
+                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                  apiStatus ? "opacity-50" : ""
+                }`}>
                 Add SO
               </button>
             </div>
@@ -107,17 +110,17 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
                   <>
                     <div className="flex flex-col gap-y-5">
                       {values.productSalesOrder?.map((item, index) => {
-                        const { productGroup, rate, quantity } = item;
+                        const { productGroupId, rate, quantity } = item;
                         return (
                           <div key={index} className="flex gap-3 items-end ">
                             {/* Product Name */}
                             <div className="flex-1">
                               <ATMSelect
-                                name={`productSalesOrder[${index}].productGroup`}
-                                value={productGroup}
+                                name={`productSalesOrder[${index}].productGroupId`}
+                                value={productGroupId}
                                 onChange={(e) =>
                                   setFieldValue(
-                                    `productSalesOrder[${index}].productGroup`,
+                                    `productSalesOrder[${index}].productGroupId`,
                                     e.target.value
                                   )                                  
                                 }
@@ -188,7 +191,7 @@ const AddSaleOrder = ({ formikProps, dropdownOptions }: Props) => {
                         type="button"
                         onClick={() => 
                           push({
-                            productGroup: "",
+                            productGroupId: "",
                             rate: null,
                             quantity: null,
                           })                          

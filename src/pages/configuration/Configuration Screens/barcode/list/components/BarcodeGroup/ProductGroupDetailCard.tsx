@@ -42,9 +42,8 @@ const ProductGroupDetailCard = ({
         return ele?.barcodeNumber;
       });
       dispatch(setBarcodesToPrint(allBarcodes));
-      console.log(data?.data);
       if (data?.data !== undefined) {
-        navigate("/barcodes");
+        navigate("/barcodes", { state: { path: "/configurations/barcode" } });
       }
     }
   }, [data, isLoading, isFetching]);

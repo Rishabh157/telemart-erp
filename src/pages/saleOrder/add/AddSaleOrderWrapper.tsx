@@ -23,7 +23,7 @@ export type FormInitialValues = {
   wareHouse: string;
   companyId: string;
   productSalesOrder: {   
-    productGroup: string;
+    productGroupId: string;
     rate: number | 0;
     quantity: number | 0;
   }[];  
@@ -111,7 +111,7 @@ const AddSaleOrderWrapper = (props: Props) => {
     wareHouse: "",
     productSalesOrder: [
       {        
-        productGroup: "",
+        productGroupId: "",
         rate: 0,
         quantity: 0,
       },
@@ -126,7 +126,7 @@ const AddSaleOrderWrapper = (props: Props) => {
     wareHouse: string().required("Please select a warehouse"),
     productSalesOrder: array().of(
       object().shape({
-        productGroup: string().required("Please select a product name"),
+        productGroupId: string().required("Please select a product name"),
         rate: number()
           .min(0, "Rate must be greater than 0")
           .required("Please enter rate")
@@ -183,6 +183,7 @@ const AddSaleOrderWrapper = (props: Props) => {
             <AddSaleOrder
               formikProps={formikProps}
               dropdownOptions={dropdownOptions}
+              apiStatus={apiStatus}
             />
           );
         }}
