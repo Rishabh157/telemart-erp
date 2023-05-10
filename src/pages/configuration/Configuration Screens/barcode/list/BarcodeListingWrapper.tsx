@@ -60,6 +60,8 @@ const BarcodeListingWrapper = () => {
       },
     ],
     dateFilter: {},
+
+    
     orderBy: "createdAt",
     orderByValue: -1,
     isPaginationRequired: true,
@@ -111,7 +113,6 @@ const BarcodeListingWrapper = () => {
 
   useEffect(() => {
     if (!pgIsFetching && !pgIsLoading) {
-      console.log(pgData);
       dispatch(pgSetIsTableLoading(false));
       dispatch(pgSetItems(pgData?.data || []));
       dispatch(pgSetTotalItems(pgData?.totalItem || 4));
@@ -141,7 +142,7 @@ const BarcodeListingWrapper = () => {
   } = useGetCartonBoxBarcodeQuery({
     limit: cbrowsPerPage,
     searchValue: cbsearchValue,
-    params: ["barcodeNumber"],
+    params: ["barcodeNumber", "cartonboxLabel"],
     page: cbPage,
     filterBy: [
       {
@@ -156,7 +157,6 @@ const BarcodeListingWrapper = () => {
   });
 
   useEffect(() => {
-    console.log(cbdata?.data);
     if (!cbisFetching && !cbisLoading) {
       dispatch(cbsetIsTableLoading(false));
       dispatch(cbsetItems(cbdata?.data || []));
@@ -270,6 +270,7 @@ const BarcodeListingWrapper = () => {
                 }`}
               >
                 <div>
+                  
                   {" "}
                   <tab.icon className="text-xl" />{" "}
                 </div>

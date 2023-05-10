@@ -13,6 +13,7 @@ export interface BarcodeSliceStateType {
   selectedId: string;
   activeTabIndex: number;
   barcodesToPrint: string[];
+  cartonBoxBarcode: string | null;
 }
 
 const initialState: BarcodeSliceStateType = {
@@ -26,6 +27,7 @@ const initialState: BarcodeSliceStateType = {
   selectedId: "",
   activeTabIndex: 0,
   barcodesToPrint: [],
+  cartonBoxBarcode: null,
 };
 
 const barcodeSlice: any = createSlice({
@@ -70,6 +72,9 @@ const barcodeSlice: any = createSlice({
     setBarcodesToPrint: (state, action: PayloadAction<string[]>) => {
       state.barcodesToPrint = action.payload;
     },
+    setCartonBoxBarcode: (state, action: PayloadAction<string>) => {
+      state.cartonBoxBarcode = action.payload;
+    },
   },
 });
 
@@ -84,5 +89,6 @@ export const {
   setSelectedId,
   setActiveTabIndex,
   setBarcodesToPrint,
+  setCartonBoxBarcode,
 } = barcodeSlice.actions;
 export default barcodeSlice.reducer;

@@ -4,6 +4,7 @@ import {
   AddASRWrapper,
   ASRListingWrapper,
   BarcodeGenerator,
+  EditPurchaseOrderWrapper,
 } from "./pages/index";
 import { AddAttributeWrapper, AttributesListingWrapper } from "./pages/index";
 import {
@@ -56,6 +57,7 @@ import {
   DealerActivityTabWrapper,
   DealerGeneralInformationTabWrapper,
   DealerWarehouseTabWrapper,
+  DealerSalesOrderTabWrapper,
 } from "./pages/index";
 import {
   InwardInventoryWrapper,
@@ -200,7 +202,7 @@ const PageRoutes = () => {
               path="general-information"
               element={<DealerGeneralInformationTabWrapper />}
             />
-            <Route path="sale-order" element={"Sale Order"} />
+            <Route path="sale-order" element={<DealerSalesOrderTabWrapper/>} />
             <Route path="warehouse" element={<DealerWarehouseTabWrapper />} />
             <Route path="ledger" element={"Ledger"} />
             <Route path="activities" element={<DealerActivityTabWrapper />} />
@@ -226,6 +228,10 @@ const PageRoutes = () => {
           <Route
             path="/purchase-order/view/:id"
             element={<ViewPurchaseOrderWrapper />}
+          />
+            <Route
+            path="/purchase-order/edit/:id"
+            element={<EditPurchaseOrderWrapper />}
           />
           <Route
             path="/purchase-order/add"

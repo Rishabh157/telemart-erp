@@ -42,6 +42,7 @@ import ViewDealer from "./dealers/view";
 import DealerActivityTabWrapper from "./dealers/view/tabs/DealerActivityTab/DealerActivityTabWrapper";
 import DealerGeneralInformationTabWrapper from "./dealers/view/tabs/DealerGeneralInformationTab/DealerGeneralInformationTabWrapper";
 import DealerWarehouseTabWrapper from "./dealers/view/tabs/DealerWarehouseTab/DealerWarehouseTabWrapper";
+import DealerSalesOrderTabWrapper from "./dealers/view/tabs/DealerSalesOrderTab/DealerSalesOrderTabWrapper";
 import InwardInventoryWrapper from "./inventories/inward-inventory/InwardInventoryWrapper";
 import InventoryListingWrapper from "./inventories/list/InventoryListingWrapper";
 import LoginPage from "./login/LoginPage";
@@ -82,6 +83,7 @@ import EditSchemeWrapper from "./scheme/edit/EditSchemeWrapper";
 import ViewPurchaseOrderWrapper from "./purchaseOrder/view/ViewPurchaseOrderWrapper";
 import AddCbBarcodeWrapper from "./configuration/Configuration Screens/barcode/AddCb/AddCbWrapper";
 import BarcodeGenerator from "./configuration/Configuration Screens/barcode/list/components/BarcodeGroup/BarcodeGenerator";
+import EditPurchaseOrderWrapper from "./purchaseOrder/edit/EditPurchaseOrderWrapper";
 export {
   AddASRWrapper,
   ASRListingWrapper,
@@ -127,6 +129,7 @@ export {
   DealerActivityTabWrapper,
   DealerGeneralInformationTabWrapper,
   DealerWarehouseTabWrapper,
+  DealerSalesOrderTabWrapper,
   InwardInventoryWrapper,
   InventoryListingWrapper,
   LoginPage,
@@ -167,4 +170,5 @@ export {
   ViewPurchaseOrderWrapper,
   AddCbBarcodeWrapper,
   BarcodeGenerator,
+  EditPurchaseOrderWrapper,
 };

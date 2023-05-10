@@ -33,7 +33,7 @@ const BarcodeDetailsCard = ({
               onBarcodeClick(barcode);
             }}
             className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${
-              false ? " border-red-500" : "border-slate-200"
+              barcode?.isUsed ? " border-red-500" : "border-slate-200"
             }`}
           >
             {/*Checkbox */}

@@ -26,11 +26,18 @@ export type DropdownOptions = {
 };
 
 // Breadcrumbs
-const breadcrumbs: BreadcrumbType[] = [
-  {
-    label: "Add Purchase Order",
-  },
-];
+
+ 
+  const breadcrumbs: BreadcrumbType[] = [
+    {
+      label: "Purchase-order",
+      path: "/purchase-order",
+    },
+    {
+      label: "Add Purchase Order",
+    },
+  ];
+
 
 const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOptions,apiStatus}: Props) => {
   const dropdownOptions: DropdownOptions = {

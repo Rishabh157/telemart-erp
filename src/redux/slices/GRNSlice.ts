@@ -11,7 +11,9 @@ export type InitialStateType = {
     searchValue: string;
     sortValue: { field: string; value: 'DESC' | 'ASC' },
     selectedDealerId: string
+    filterValue: string;
 }
+
 
 const initialState: InitialStateType = {
     items: [],
@@ -21,7 +23,8 @@ const initialState: InitialStateType = {
     rowsPerPage: 10,
     searchValue: "",
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectedDealerId: ""
+    selectedDealerId: "",
+    filterValue:""
 }
 
 const grnSlice: any = createSlice({
@@ -56,11 +59,14 @@ const grnSlice: any = createSlice({
         },
         setSelectedDealerId: (state, action: PayloadAction<string>) => {
             state.selectedDealerId = action.payload
-        }
+        },
+        setFilterValue: (state, action: PayloadAction<string>) => {
+            state.filterValue = action.payload;
+          },
 
     }
 })
-
+ 
 export const {
     setItems,
     setPage,
@@ -69,6 +75,7 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectedDealerId
+    setSelectedDealerId,
+    setFilterValue
 } = grnSlice.actions
 export default grnSlice.reducer

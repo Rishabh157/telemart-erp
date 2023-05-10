@@ -37,7 +37,11 @@ const Header = (props: Props) => {
               <em>Select Company</em>
             </MenuItem>
             {data?.data?.map((ele: any) => {
-              return <MenuItem key={ele._id} value={ele?._id}>{ele?.companyName}</MenuItem>;
+              return (
+                <MenuItem key={ele._id} value={ele?._id}>
+                  {ele?.companyName}
+                </MenuItem>
+              );
             })}
           </Select>
         </FormControl>
@@ -66,8 +70,8 @@ const Header = (props: Props) => {
         >
           <div className="h-[35px] w-[35px] flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
             H
-          </div>0
-
+          </div>
+          0
           {/* <div className='flex flex-col gap-1 justify-start items-start' >
                         <div className='text-primary-main text-[13px]' > Administrator </div>
                         <div className='flex gap-1 items-center font-bold text-slate-500 text-sm' > Himanshu Jain  <BiChevronDown className='text-lg font-bold' />  </div>
@@ -85,5 +89,4 @@ const Header = (props: Props) => {
     </div>
   );
 };
-
 export default Header;

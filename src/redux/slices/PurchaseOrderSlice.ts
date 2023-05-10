@@ -59,7 +59,7 @@ const purchaseOrderSlice: any = createSlice({
         setSelectedDealerId: (state, action: PayloadAction<string>) => {
             state.selectedDealerId = action.payload
         },
-        setSelectedItems: (state, action: PayloadAction<PurchaseOrderListResponse  | null>) => {
+        setSelectedItems: (state, action: PayloadAction<PurchaseOrderListResponse | null>) => {
             state.selectedItems = action.payload
         }
 
