@@ -43,7 +43,7 @@ const ProductGroupDetailCard = ({
       });
       dispatch(setBarcodesToPrint(allBarcodes));
       if (data?.data !== undefined) {
-        navigate("/barcodes");
+        navigate("/barcodes", { state: { path: "/configurations/barcode" } });
       }
     }
   }, [data, isLoading, isFetching]);
