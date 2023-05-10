@@ -128,6 +128,11 @@ const PageRoutes = () => {
   dispatch(setDeviceId(deviceId));
   dispatch(setUserData(userData));
 
+  if (!accessToken && window.location.pathname !== "/") {
+    window.location.replace("/");
+    return null;
+  }
+
   return (
     <>
       <BrowserRouter>
