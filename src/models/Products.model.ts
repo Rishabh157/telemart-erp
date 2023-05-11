@@ -10,7 +10,6 @@ export type ProductsListResponse = {
     width: number;
     depth: number;
   };
-  productImage: string;
   description: string;
   item: {
     itemName: string;
@@ -62,7 +61,6 @@ export type AddProducts = {
     width: number;
     depth: number;
   };
-  productImage: string;
   description: string;
   item: {
     itemId: string;
@@ -104,7 +102,6 @@ export type UpdateProducts = {
       width: number;
       depth: number;
     };
-    productImage: string;
     description: string;
     item: {
       itemId: string;

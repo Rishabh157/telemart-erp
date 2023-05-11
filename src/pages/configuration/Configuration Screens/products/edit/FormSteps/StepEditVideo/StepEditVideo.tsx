@@ -4,6 +4,7 @@ import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from "../../EditProductWrapper";
 import { FieldArray } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -107,7 +108,7 @@ const StepEditVideo = ({ formikProps }: Props) => {
                 }
                 className="bg-primary-main px-3 py-1 text-white rounded"
               >
-                Edit More video
+                <AddCircleOutlineOutlinedIcon style={{fontSize: '32px'}}/>
               </button>
             </div>
           </div>
