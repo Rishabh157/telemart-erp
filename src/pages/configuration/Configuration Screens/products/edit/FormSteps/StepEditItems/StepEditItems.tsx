@@ -6,6 +6,7 @@ import { FormInitialValues } from "../../EditProductWrapper";
 import { FieldArray } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
 import { DropdownOptions } from "./StepEditItemsWrapper";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -93,9 +94,9 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                     itemQuantity: "",
                   })
                 }
-                className="bg-primary-main px-3 py-1 text-white rounded"
+                className="bg-primary-main px-3 py-2 text-white rounded"
               >
-                Edit More Item
+                <AddCircleOutlineOutlinedIcon style={{fontSize: '32px'}}/>                
               </button>
             </div>
           </div>

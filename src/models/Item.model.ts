@@ -1,5 +1,4 @@
 export type ItemListResponse = {
-  itemImage: string;
   itemCode: string;
   itemName: string;
   itemWeight: string;
@@ -13,7 +12,6 @@ export type ItemListResponse = {
 };
 
 export type AddItem = {
-  itemImage: string;
   itemCode: string;
   itemName: string;
   itemWeight: string;
@@ -22,7 +20,6 @@ export type AddItem = {
 
 export type UpdateItem = {
   body: {
-    itemImage: string;
     itemCode: string;
     itemName: string;
     itemWeight: string;
