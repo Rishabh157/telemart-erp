@@ -44,6 +44,7 @@ export type FormInitialValues = {
 const EditPurchaseOrderWrapper = (props: Props) => {
   const { state } = useLocation();
   const poCode = state?.poCode;
+  console.log(poCode)
   const params=useParams()
   const Id=params.id
 
@@ -51,7 +52,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
   const disptach = useDispatch();
   const [apiStatus, setApiStatus] = useState<boolean>(false);
   const { userData } = useSelector((state: RootState) => state?.auth);
- const [UpdatePurchaseOrder]=useUpdatePurchaseOrderMutation(poCode)
+ const [UpdatePurchaseOrder]=useUpdatePurchaseOrderMutation()
   const { data, isFetching, isLoading } = useGetByPoCodeQuery(poCode);
   const { selectedItems }: any = useSelector(
     (state: RootState) => state.purchaseOrder
@@ -217,6 +218,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
   return (
     <SideNavLayout>
       <Formik
+      enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}

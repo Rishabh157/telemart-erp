@@ -79,6 +79,14 @@ export const cartonBoxBarcodeApi = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+
+    getByCartonBoxBarcode: builder.query({
+      providesTags:["CartonBoxBarcode"],
+      query:(cartonBoxId)=>({
+        url: `/cartonbox-barcode/get-by-box/${cartonBoxId}` ,
+        method:"GET"
+    })  
+  })
   }),
 });
 export const {
@@ -89,4 +97,5 @@ export const {
   useExportCartonBoxBarcodeDataMutation,
   useDeleteCartonBoxBarcodeMutation,
   useGetAllCartonBoxBarcodeQuery,
+  useGetByCartonBoxBarcodeQuery,
 } = cartonBoxBarcodeApi;

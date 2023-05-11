@@ -4,6 +4,8 @@ export type CartonBoxBarcodeListResponse = {
   barcodeNumber: string;
   barcodeGroupNumber: string;
   isUsed: boolean;
+  card:string;
+  count:string;
   itemBarcodeNumber: string;
   companyId: string;
   isActive: boolean;

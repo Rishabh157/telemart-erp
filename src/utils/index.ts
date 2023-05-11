@@ -15,7 +15,7 @@ export interface LocationSelectType {
   value:string;
   label:string
 }
-
+export const validationofGst= /^[A-Z0-9]{15}$/
 export const showToast = (type: ToastType, message: string) => {
   toast[type](message, {
     duration: 3000,

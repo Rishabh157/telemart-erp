@@ -115,6 +115,42 @@ const AddProductSubCategory = ({
                 options={dropdownOptions.applicableTaxesOptions}
                 label="Applicable Taxes"
               />
+                 <ATMSelect
+                name="applicableTaxes"
+                value={values.applicableTaxes}
+                onChange={(e) => {
+                  setFieldValue("applicableTaxes", e.target.value);
+                }}
+                options={dropdownOptions.applicableTaxesOptions}
+                label="Applicable Taxes"
+              />
+                 <ATMSelect
+                name="applicableTaxes"
+                value={values.applicableTaxes}
+                onChange={(e) => {
+                  setFieldValue("applicableTaxes", e.target.value);
+                }}
+                options={dropdownOptions.applicableTaxesOptions}
+                label="Applicable Taxes"
+              />
+                 <ATMSelect
+                name="applicableTaxes"
+                value={values.applicableTaxes}
+                onChange={(e) => {
+                  setFieldValue("applicableTaxes", e.target.value);
+                }}
+                options={dropdownOptions.applicableTaxesOptions}
+                label="Applicable Taxes"
+              />
+                 <ATMSelect
+                name="applicableTaxes"
+                value={values.applicableTaxes}
+                onChange={(e) => {
+                  setFieldValue("applicableTaxes", e.target.value);
+                }}
+                options={dropdownOptions.applicableTaxesOptions}
+                label="Applicable Taxes"
+              />
 
               {/* Field 3 */}
               <ATMTextField

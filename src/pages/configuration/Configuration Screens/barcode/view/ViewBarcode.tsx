@@ -1,25 +1,64 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import ATMBreadCrumbs from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
-import ATMTimeLine from "src/components/UI/atoms/ATMTimeLine/ATMTimeLine";
+import { setSelectedItem } from "src/redux/slices/CartonBoxBarcodeSlice";
+import { RootState } from "src/redux/store";
+import { useGetByCartonBoxBarcodeQuery } from "src/services/CartonBoxBarcodeService";
+import CartonBoxBarcodeDetailCard from "../list/components/CartonBoxBarcode/CartonBoxBarcodeDetailCard";
 
 type Props = {};
 
-const timeLineItems = Array(50).fill({
-  content: (
-    <div className="flex gap-3">
-      <div> 06 Feb 2023 </div>
-      <div className="bg-slate-100 rounded-full text-[13px] px-2 flex justify-center items-center">
-        {" "}
-        10:00 AM{" "}
-      </div>
+// const timeLineItems = Array(50).fill({
+//   content: (
+//     <div className="flex gap-3">
+//       <div> 06 Feb 2023 </div>
+//       <div className="bg-slate-100 rounded-full text-[13px] px-2 flex justify-center items-center">
+//         {" "}
+//         10:00 AM{" "}
+//       </div>
 
-      <div className="text-primary-main font-medium">Applied to the box</div>
-    </div>
-  ),
-});
+//       <div className="text-primary-main font-medium">Applied to the box</div>
+//     </div>
+//   ),
+// });
+export type barcodecardType ={
+  _id?:string
+  label:String
+  barcodenumber:String
+  count?:string
+}
 
 const ViewBarcode = (props: Props) => {
+  const dispatch = useDispatch();
+  const { state } = useLocation();
+  console.log(state);
+  const barcodeNumber = state?.barcodeNumber;
+  console.log(barcodeNumber);
+
+  const { data, isFetching, isLoading } =
+    useGetByCartonBoxBarcodeQuery(barcodeNumber);
+
+  const { selectedItem }: any = useSelector(
+    (state: RootState) => state.cartonBoxBarcode
+  );
+
+   console.log(selectedItem)
+
+  useEffect(() => {
+    console.log(data?.data);
+    dispatch(setSelectedItem(data?.data));
+  }, [isFetching, data, isLoading, dispatch]);
+
+  const datas=selectedItem?.map((ele:any, index:any)=>{
+    return {
+      barcodenumber:ele.itemBarcodeNumber,
+      label:ele.cartonboxLabel
+    }
+  })
+  console.log(datas)
+
   return (
     <div className="h-full px-2 py-2 flex flex-col">
       {/* BreadCrumbs */}
@@ -49,18 +88,30 @@ const ViewBarcode = (props: Props) => {
               {" "}
               Barcode Number :{" "}
             </div>
-            <div className="font-medium text-blue-900"> 123456789 </div>
+            <div className="font-medium text-blue-900">
+              {selectedItem?.[0].barcodeNumber}{" "}
+            </div>
           </div>
 
           <div className="flex gap-2">
-            <div className="text-primary-main font-bold"> Product Name : </div>
-            <div className="font-medium text-blue-900"> Slim24 </div>
+            <div className="text-primary-main font-bold">
+              {" "}
+              Carton Box Name :{" "}
+            </div>
+            <div className="font-medium text-blue-900">
+              {" "}
+              {selectedItem?.[0].cartonboxLabel}
+            </div>
           </div>
         </div>
 
         {/* Barcode Time Track */}
         <div className="py-3 ">
-          <ATMTimeLine timeLineItems={timeLineItems} />
+          <CartonBoxBarcodeDetailCard
+            barcodeList={datas}
+            onCartonBoxBarcodeSelect={() => {}}
+            onBarcodeClick={() => {}}
+          />
         </div>
       </div>
     </div>

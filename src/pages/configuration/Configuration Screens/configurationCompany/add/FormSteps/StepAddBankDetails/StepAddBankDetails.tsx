@@ -73,8 +73,7 @@ const StepAddBankDetails = ({
                                         value={bankInformation[name]}
                                         onChange={(e) => {
                                           if (
-                                            name === "accountNumber" ||
-                                            name === "ifscNumber"
+                                            name === "accountNumber"
                                           ) {
                                             const newValue = e.target.value;
                                             if (!isNaN(Number(newValue))) {

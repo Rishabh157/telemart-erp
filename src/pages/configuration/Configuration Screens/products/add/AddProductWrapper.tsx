@@ -209,7 +209,7 @@ const AddProductWrapper = () => {
   } = useGetAllItemsQuery("");
 
   // States
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(2);
   const allTaxes = taxData?.map((ele: any) => {
     return { tax_name: ele?.taxName, id: ele?._id };
   });

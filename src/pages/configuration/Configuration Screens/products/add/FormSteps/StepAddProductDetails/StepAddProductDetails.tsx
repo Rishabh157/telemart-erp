@@ -89,7 +89,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
 
         {/* Dimensions */}
         <div>
-          <label className="text-slate-700 font-medium"> Dimensions </label>
+          <label className="text-slate-700 font-medium"> Dimensions (in mm)</label>
           <div className="flex gap-2 mt-2">
             {/* Height */}
             <ATMTextField

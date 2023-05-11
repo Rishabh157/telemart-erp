@@ -7,16 +7,14 @@ import { GRNListResponse } from "src/models/GRN.model";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import GRNListing from "./GRNListing";
 import {
-  setFilterValue,
   setIsTableLoading,
   setItems,
-  setSearchValue,
   setTotalItems,
 } from "src/redux/slices/GRNSlice";
 import { RootState } from "src/redux/store";
 import { useGetPaginationGRNQuery } from "src/services/GRNService";
 import { useLocation } from "react-router-dom";
-import { clear } from "console";
+
 
 const columns: columnTypes[] = [
   {
