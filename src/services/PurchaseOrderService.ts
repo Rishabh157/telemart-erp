@@ -17,6 +17,15 @@ export const purchaseOrderApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    //***** GET PURCHASEORDER BY VENDOR-ID DATA *****/
+    getPurchaseOrderByVendorId: builder.query({
+      providesTags: ["PurchaseOrder"],
+      query: (vendorId) => ({
+        url: `/purchase-order/get-by-vendor/${vendorId}`,
+        method: "GET",
+      }),
+    }),
+
     //***** GET *****/
     getAllPurchaseOrder: builder.query({
       providesTags: ["PurchaseOrder"],
@@ -122,6 +131,7 @@ export const {
   useAddPurchaseOrderMutation,
   useUpdatePurchaseOrderMutation,
   useGetPurchaseOrderByIdQuery,
+  useGetPurchaseOrderByVendorIdQuery,
   useDeletePurchaseOrderMutation,
   useExportPurchaseOrderDataMutation,
   useGetByPoCodeQuery,

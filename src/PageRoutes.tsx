@@ -76,6 +76,7 @@ import {
   VendorActivityTabWrapper,
   VendorGeneralInformationTabWrapper,
   VendorWarehouseTabWrapper,
+  VendorPurchaseOrderTabWrapper,
   AddWarehouseWrapper,
   WarehousesListingWrapper,
 } from "./pages/index";
@@ -163,7 +164,7 @@ const PageRoutes = () => {
               path="general-information"
               element={<VendorGeneralInformationTabWrapper />}
             />
-            <Route path="purchase-order" element={"Purchase Order"} />
+            <Route path="purchase-order" element={<VendorPurchaseOrderTabWrapper />} />
             <Route path="warehouse" element={<VendorWarehouseTabWrapper />} />
             <Route path="return-to-vendor" element={"Return To Vendor"} />
             <Route path="ledger" element={"Ledger"} />
