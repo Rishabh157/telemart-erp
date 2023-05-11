@@ -178,7 +178,7 @@ const breadcrumbs = [
     path: "/configurations/products",
   },
   {
-    label: "Edit Product",
+    label: "Update Product",
   },
 ];
 

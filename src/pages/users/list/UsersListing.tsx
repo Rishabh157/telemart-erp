@@ -39,7 +39,7 @@ const UsersListing = ({
   const [selectedRows, setSelectedRows] = useState([]);
 
   return (
-    <div className="w-full h-full py-2 ">
+    <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
       <div className="h-[100px] ">
         <div className="mb-5 text-2xl text-slate-700 font-bold ">Users</div>
         <div className="flex justify-between">

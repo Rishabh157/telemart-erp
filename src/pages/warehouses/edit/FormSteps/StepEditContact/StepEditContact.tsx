@@ -4,6 +4,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "../../EditWarehouseWrapper";
 import { FieldType } from "./StepEditContactWrapper";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -103,7 +104,7 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                   }
                   className="bg-primary-main px-3 py-1 text-white rounded"
                 >
-                  Edit New
+                  <AddCircleOutlineOutlinedIcon style={{fontSize: '32px'}}/>
                 </button>
               </div>
             </div>
