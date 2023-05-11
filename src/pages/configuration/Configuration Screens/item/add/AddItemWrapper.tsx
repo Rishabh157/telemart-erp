@@ -14,8 +14,7 @@ type Props = {};
 export type FormInitialValues = {
   itemCode: string;
   itemName: string;
-  itemWeight: string;
-  itemImage: string;
+  itemWeight: string;  
 };
 
 const AddItemWrapper = (props: Props) => {
@@ -28,7 +27,6 @@ const AddItemWrapper = (props: Props) => {
     itemCode: "",
     itemName: "",
     itemWeight: "",
-    itemImage: "",
   };
 
   // Form Validation Schema
@@ -36,7 +34,6 @@ const AddItemWrapper = (props: Props) => {
     itemCode: string().required("Item Code is required"),
     itemName: string().required("Item Name is required"),
     itemWeight: string().required("Item Weight is required"),
-    itemImage: string().url().required("Item image is required"),
   });
 
   //    Form Submit Handler
@@ -45,7 +42,6 @@ const AddItemWrapper = (props: Props) => {
       itemCode: values.itemCode,
       itemName: values.itemName,
       itemWeight: values.itemWeight,
-      itemImage: values.itemImage,
       companyId: userData?.companyId || "",
     }).then((res) => {
       if ("data" in res) {

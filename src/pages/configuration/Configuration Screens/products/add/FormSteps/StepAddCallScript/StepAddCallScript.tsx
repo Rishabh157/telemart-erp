@@ -7,6 +7,7 @@ import { EditorState } from "draft-js";
 import ATMHTMLEditor from "src/components/UI/atoms/formFields/ATMHTMLEditor/ATMHTMLEditor";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import { DropdownOptions } from "./StepAddCallScriptWrapper";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -90,7 +91,7 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
                 }
                 className="bg-primary-main px-3 py-1 text-white rounded"
               >
-                Add More Script
+                <AddCircleOutlineOutlinedIcon style={{fontSize: '32px'}}/>
               </button>
             </div>
           </div>

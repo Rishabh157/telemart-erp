@@ -20,7 +20,6 @@ export type FormInitialValues = {
   itemCode: string;
   itemName: string;
   itemWeight: string;
-  itemImage: string;
 };
 
 const EditItemWrapper = (props: Props) => {
@@ -39,7 +38,6 @@ const EditItemWrapper = (props: Props) => {
     itemCode: selectedItem?.itemCode || "",
     itemName: selectedItem?.itemName || "",
     itemWeight: selectedItem?.itemWeight || "",
-    itemImage: selectedItem?.itemImage || "",
   };
 
   // Form Validation Schema
@@ -47,7 +45,6 @@ const EditItemWrapper = (props: Props) => {
     itemCode: string().required("Item Code is required"),
     itemName: string().required("Item Name is required"),
     itemWeight: string().required("Item Weight is required"),
-    itemImage: string().url().required("Item image is required"),
   });
 
   //    Form Submit Handler
@@ -58,7 +55,6 @@ const EditItemWrapper = (props: Props) => {
         itemCode: values.itemCode,
         itemName: values.itemName,
         itemWeight: values.itemWeight,
-        itemImage: values.itemImage,
         companyId: userData?.companyId || "",
       },
       id: Id || "",

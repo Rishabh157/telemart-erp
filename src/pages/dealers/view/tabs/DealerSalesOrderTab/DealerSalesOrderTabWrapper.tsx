@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
-import { showToast } from "src/utils";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
+//import { useNavigate } from "react-router-dom";
+//import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
+//import { showToast } from "src/utils";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { SaleOrderListResponse } from "src/models/SaleOrder.model";
 import {
@@ -13,10 +12,11 @@ import {
   setTotalItems,
 } from "src/redux/slices/saleOrderSlice";
 import { AppDispatch, RootState } from "src/redux/store";
-import {
-  useDeleteSalesOrderMutation,
-  useGetSalesOrderByDealerIdQuery,
-} from "src/services/SalesOrderService";
+// import {
+//   useDeleteSalesOrderMutation,
+//   useGetSalesOrderByDealerIdQuery,
+// } from "src/services/SalesOrderService";
+import { useGetSalesOrderByDealerIdQuery } from "src/services/SalesOrderService";
 import SaleOrderListing from "src/pages/saleOrder/list/SaleOrderListing";
 import { useParams } from "react-router-dom";
 
@@ -30,13 +30,15 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
   const dealerId: any = params.dealerId;
   //alert(dealerId);
   const dispatch = useDispatch<AppDispatch>();
-  const { page, rowsPerPage, searchValue, items } = salesOrderState;
-  const navigate = useNavigate();
-  const [currentId, setCurrentId] = useState("");
+  // const { page, rowsPerPage, searchValue, items } = salesOrderState;
+  const { items } = salesOrderState;
+  //const navigate = useNavigate();
+  //const [currentId, setCurrentId] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const [deleteSaleOrder] = useDeleteSalesOrderMutation();
+  //const [deleteSaleOrder] = useDeleteSalesOrderMutation();
 
-  const { data, isFetching, isLoading } = useGetSalesOrderByDealerIdQuery(dealerId);
+  const { data, isFetching, isLoading } =
+    useGetSalesOrderByDealerIdQuery(dealerId);
 
   //console.log(data)
 
@@ -50,20 +52,20 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
     }
   }, [isLoading, isFetching, data, dispatch]);
 
-  const handleDelete = () => {
-    setShowDropdown(false);
-    deleteSaleOrder(currentId).then((res) => {
-      if ("data" in res) {
-        if (res?.data?.status) {
-          showToast("success", "Sale Order deleted successfully!");
-        } else {
-          showToast("error", res?.data?.message);
-        }
-      } else {
-        showToast("error", "Something went wrong, Please try again later");
-      }
-    });
-  };
+  // const handleDelete = () => {
+  //   setShowDropdown(false);
+  //   deleteSaleOrder(currentId).then((res) => {
+  //     if ("data" in res) {
+  //       if (res?.data?.status) {
+  //         showToast("success", "Sale Order deleted successfully!");
+  //       } else {
+  //         showToast("error", res?.data?.message);
+  //       }
+  //     } else {
+  //       showToast("error", "Something went wrong, Please try again later");
+  //     }
+  //   });
+  // };
 
   const columns: columnTypes[] = [
     {
@@ -95,12 +97,12 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
       headerName: "Actions",
       flex: "flex-[0.5_0.5_0%]",
       renderCell: (row: any) => (
-        <div className="relative">            
+        <div className="relative">
           <button
             onClick={(e) => {
               e.stopPropagation();
               setShowDropdown(!showDropdown);
-              setCurrentId(row?._id);
+              //setCurrentId(row?._id);
             }}
             className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
           >
