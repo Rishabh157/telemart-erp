@@ -48,7 +48,6 @@ const EditSaleOrderWrapper = (props: Props) => {
   );
 
   const { data, isLoading, isFetching } = useGetSalesOrderByIdQuery(Id);
-  //console.log(data?.data)
   useEffect(() => {
     dispatch(setSelectedItem(data?.data));
   }, [dispatch, data, isLoading, isFetching]);
@@ -134,7 +133,6 @@ const EditSaleOrderWrapper = (props: Props) => {
     companyId: selectedItem?.companyId || "",
   };
 
-  //console.log(initialValues, "initialValues");
 
   // Form Validation Schema
   const validationSchema = object({

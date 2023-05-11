@@ -170,7 +170,6 @@ const EditPurchaseOrderWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    //console.log(values);
     setApiStatus(true);
     const purchaseOrder = values.purchaseOrder.map((ele: any) => {
       return {

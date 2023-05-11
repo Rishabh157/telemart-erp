@@ -1,4 +1,4 @@
-import { AddUser, UpdateUser } from "src/models";
+import { AddUser, UpdateUser, ChangeCompany } from "src/models";
 import { PaginationType } from "src/models/common/paginationType";
 import apiSlice from "./ApiSlice";
 
@@ -95,6 +95,17 @@ export const userApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    //***** Update Company By Admin *****/
+    updateCompanyByAdmin: builder.mutation({
+      invalidatesTags: ["user"],
+      query: ({ body, id }: ChangeCompany) => (
+        {
+          url: `admin/${id}`,
+          method: "PUT",
+          body,
+        }),
+    }),
   }),
 });
 export const {
@@ -107,4 +118,5 @@ export const {
   useLogoutFromAllMutation,
   useChangePasswordMutation,
   useRefreshTokenMutation,
+  useUpdateCompanyByAdminMutation,
 } = userApi;

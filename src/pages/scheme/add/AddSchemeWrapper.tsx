@@ -146,8 +146,6 @@ const AddSchemeWrapper = () => {
  const { userData } = useSelector((state: RootState) => state?.auth);
 
   
-  // const {allProdcutSubCategory}:any=useSelector((state:RootState)=>state.productSubCategory)
-  // console.log(allProdcutSubCategory)
   // From Initial Values
   const initialValues: FormInitialValues = {
     schemeCode: "",

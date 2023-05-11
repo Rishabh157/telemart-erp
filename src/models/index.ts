@@ -8,7 +8,7 @@ export type {
   AddVendor,
   UpdateVendor,
 } from "./Vendors.model";
-export type { UsersListResponse, AddUser, UpdateUser } from "./Users.model ";
+export type { UsersListResponse, AddUser, UpdateUser ,ChangeCompany} from "./Users.model ";
 export type {
   CompaniesListResponse,
   AddCompany,
