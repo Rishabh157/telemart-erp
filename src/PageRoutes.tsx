@@ -62,7 +62,6 @@ import {
 import {
   InwardInventoryWrapper,
   InventoryListingWrapper,
-  LoginPage,
   AddOrder,
   OrderListing,
   OutwardRequestListingWrapper,
@@ -111,6 +110,7 @@ import {
   ViewPurchaseOrderWrapper,
   AddCbBarcodeWrapper,
 } from "./pages/index";
+import Auth from "./pages/login/Auth";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -139,7 +139,7 @@ const PageRoutes = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<Auth />} />
           <Route path="/dashboard" element={<DashboardWrappper />} />
           <Route path="/profile" element={<ProfileWrappper />} />
           <Route path="/orders" element={<OrderListing />} />
