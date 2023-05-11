@@ -60,6 +60,7 @@ import ViewVendor from "./vendors/view";
 import VendorActivityTabWrapper from "./vendors/view/tabs/VendorActivityTab/VendorActivityTabWrapper";
 import VendorGeneralInformationTabWrapper from "./vendors/view/tabs/VendorGeneralInformationTab/VendorGeneralInformationTabWrapper";
 import VendorWarehouseTabWrapper from "./vendors/view/tabs/VendorWarehouseTab/VendorWarehouseTabWrapper";
+import VendorPurchaseOrderTabWrapper from "./vendors/view/tabs/VendorPurchaseOrderTab/VendorPurchaseOrderTabWrapper";
 import AddWarehouseWrapper from "./warehouses/add/AddWarehouseWrapper";
 import WarehousesListingWrapper from "./warehouses/list/WarehousesListingWrapper";
 import ProfileWrappper from "./profile/ProfileWrapper";
@@ -147,6 +148,7 @@ export {
   VendorActivityTabWrapper,
   VendorGeneralInformationTabWrapper,
   VendorWarehouseTabWrapper,
+  VendorPurchaseOrderTabWrapper,
   AddWarehouseWrapper,
   WarehousesListingWrapper,
   ProfileWrappper,
