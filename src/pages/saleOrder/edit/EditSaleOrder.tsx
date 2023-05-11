@@ -28,7 +28,7 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/sale-order",
   },
   {
-    label: "Add Sale Order",
+    label: "Update Sale Order",
   },
 ];
 

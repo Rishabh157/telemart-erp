@@ -9,9 +9,9 @@ import { setRowsPerPage, setPage } from "src/redux/slices/dealerSlice";
 import { AppDispatch, RootState } from "src/redux/store";
 import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 import { setSearchValue } from "src/redux/slices/dealerSlice";
-import ATMBreadCrumbs, {
-  BreadcrumbType,
-} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
+// import ATMBreadCrumbs, {
+//   BreadcrumbType,
+// } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -36,24 +36,10 @@ const DealersListing = ({
 
 
   const { page, rowsPerPage, searchValue, totalItems } = dealerState;
-  const breadcrumbs: BreadcrumbType[] = [
-    {
-      label: "Configuration",
-      path: "/dashboard",
-    },
-    {
-      label: "dealer",
-    },
-  ];
-
-
 
   return (
     <div className="px-4 h-[calc(100vh-55px)] pt-3">
-      {/* Page Header */}
-      <div className="h-[30px]">
-        <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-      </div>
+      {/* Page Header */}      
       <div className="flex justify-between items-center h-[55px]">
         <ATMPageHeading> Dealers </ATMPageHeading>
         <button

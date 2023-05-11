@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/configurations/carton-box",
   },
   {
-    label: "Edit Outer Pack Box",
+    label: "Update Outer Pack Box",
   },
 ];
 

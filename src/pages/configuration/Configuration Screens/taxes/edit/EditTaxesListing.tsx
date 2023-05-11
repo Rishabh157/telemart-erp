@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/configurations/taxes",
   },
   {
-    label: "Edit Taxes",
+    label: "Update Taxes",
   },
 ];
 

@@ -132,16 +132,16 @@ const EditSchemeWrapper = () => {
   // Breadcrumbs
   const breadcrumbs = [
     {
-      label: "Outer Scheme",
+      label: "Scheme",
       onClick: () => {
         console.log("Scheme");
       },
       path: "/scheme",
     },
     {
-      label: "Edit Scheme",
+      label: "Update Scheme",
       onClick: () => {
-        console.log("add-Scheme");
+        console.log("Update Scheme");
       },
     },
   ];

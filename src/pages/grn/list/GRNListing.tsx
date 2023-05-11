@@ -1,8 +1,5 @@
 import React,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ATMBreadCrumbs, {
-  BreadcrumbType,
-} from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import ATMTable from "src/components/UI/atoms/ATMTable/ATMTable";
@@ -23,24 +20,14 @@ const GRNListing = ({ columns, rows }: Props) => {
   const grnState: any = useSelector((state: RootState) => state.grn);
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-  const { page, rowsPerPage,searchValue } = grnState;
-
-  const breadcrumbs: BreadcrumbType[] = [
-    {
-      label: "Goods Received Note",
-    },
-  ];
+  const { page, rowsPerPage,searchValue } = grnState;  
 
 
   return (
-    <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
-      {/* Breadcrumbs */}
-      <div className="h-[30px]">
-        <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-      </div>
+    <div className="px-4 h-[calc(100vh-55px)] pt-3  ">     
       {/* Page Header */}
       <div className="flex justify-between items-center h-[55px]">
-        <ATMPageHeading> GRN </ATMPageHeading>
+        <ATMPageHeading> GRN (Goods Received Note) </ATMPageHeading>
       </div>
 
       <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

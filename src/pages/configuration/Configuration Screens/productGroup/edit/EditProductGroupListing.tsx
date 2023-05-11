@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/configurations/product-group",
   },
   {
-    label: "Edit Product Group",
+    label: "Update Product Group",
   },
 ];
 
