@@ -44,7 +44,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data, dispatch]);
 
-  //console.log(items,"items")
+  
 
 
   const columns: columnTypes[] = [

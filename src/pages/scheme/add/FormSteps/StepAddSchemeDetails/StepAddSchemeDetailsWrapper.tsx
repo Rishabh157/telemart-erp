@@ -114,7 +114,6 @@ const StepAddSchemeDetailsWrapper = ({ formikProps }: Props) => {
   } = useGetAllProductCategoryQuery("");
 
   useEffect(() => {
-    // console.log(setAllProductCategory(dataPC?.data))
     dispatch(setAllProductCategory(dataPC?.data));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

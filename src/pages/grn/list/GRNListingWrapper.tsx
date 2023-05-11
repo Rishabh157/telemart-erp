@@ -77,7 +77,6 @@ const GRNListingWrapper = () => {
   const dispatch = useDispatch();
   const {state}=useLocation()
   const poCode=state?.poCode;
-  console.log(poCode)
   
 
   const grnState: any = useSelector((state: RootState) => state.grn);

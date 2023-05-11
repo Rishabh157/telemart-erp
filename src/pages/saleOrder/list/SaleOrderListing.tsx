@@ -16,7 +16,6 @@ type Props = {
 
 const SaleOrderListing = ({ columns, rows }: Props) => {  
 
- // console.log(rows, "rows");
 
   // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const dispatch = useDispatch<AppDispatch>();

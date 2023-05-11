@@ -33,7 +33,6 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, }: Props) => {
   const { values, setFieldValue } = formikProps;
-  //console.log(formikProps)
 
   return (
     <div className="">

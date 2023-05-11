@@ -39,6 +39,7 @@ const LoginPage = () => {
                 mobile: res?.data?.data?.mobile,
                 userName: res?.data?.data?.userName,
                 companyId: res?.data?.data?.companyId,
+                role: res?.data?.data?.userType
               };
               dispatch(setAccessToken(res?.data?.data?.token));
               dispatch(setRefreshToken(res?.data?.data?.refreshToken));
