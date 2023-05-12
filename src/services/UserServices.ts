@@ -1,4 +1,4 @@
-import { AddUser, UpdateUser, ChangeCompany } from "src/models";
+import { AddUser, AddNewUser, ChangeCompany,  UpdateUser, UpdateNewUser } from "src/models";
 import { PaginationType } from "src/models/common/paginationType";
 import apiSlice from "./ApiSlice";
 
@@ -17,6 +17,8 @@ export const userApi = apiSlice.injectEndpoints({
         body,
       }),
     }),
+
+
     //***** LOGIN *****/
     changePassword: builder.mutation({
       invalidatesTags: ["user"],
@@ -30,6 +32,8 @@ export const userApi = apiSlice.injectEndpoints({
         body,
       }),
     }),
+
+
     //***** LOGIN *****/
     login: builder.mutation({
       invalidatesTags: ["user"],
@@ -39,6 +43,8 @@ export const userApi = apiSlice.injectEndpoints({
         body,
       }),
     }),
+
+
     //***** LOG OUT *****/
     refreshToken: builder.mutation({
       invalidatesTags: ["user"],
@@ -75,7 +81,7 @@ export const userApi = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
-    }),
+    }),    
 
     //***** Update *****/
     updateUser: builder.mutation({
@@ -96,16 +102,38 @@ export const userApi = apiSlice.injectEndpoints({
       }),
     }),
 
-    //***** Update Company By Admin *****/
-    updateCompanyByAdmin: builder.mutation({
-      invalidatesTags: ["user"],
-      query: ({ body, id }: ChangeCompany) => (
-        {
-          url: `admin/${id}`,
-          method: "PUT",
-          body,
-        }),
+     //***** GET NEW USERS *****/
+     getNewUsers: builder.query({
+      providesTags: ["newUser"],
+      query: (body: PaginationType) => ({
+        url: "/user",
+
+        method: "GET",
+        // body,
+      }),
     }),
+
+    //***** ADD New User*****/
+    addNewUser: builder.mutation({
+      invalidatesTags: ["newUser"],
+      query: (body: AddNewUser) => ({
+        url: "/user/signup",
+        method: "POST",
+        body,
+      }),
+    }),
+
+    //***** Update New User *****/
+    updateNewUser: builder.mutation({
+      invalidatesTags: ["newUser"],
+      query: ({ body, id }: UpdateNewUser) => ({
+        url: `/user/${id}`,
+        method: "PUT",
+        body,
+      }),
+    }),
+
+
   }),
 });
 export const {
@@ -118,5 +146,8 @@ export const {
   useLogoutFromAllMutation,
   useChangePasswordMutation,
   useRefreshTokenMutation,
+  useGetNewUsersQuery,
+  useAddNewUserMutation,
+  useUpdateNewUserMutation,
   useUpdateCompanyByAdminMutation,
 } = userApi;

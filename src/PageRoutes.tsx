@@ -70,6 +70,7 @@ import {
   SaleOrderListingWrapper,
   Test,
   UsersListingWrapper,
+  AddUserWrapper,
   AddVendorWrapper,
   VendorsListingWrapper,
   ViewVendor,
@@ -209,6 +210,7 @@ const PageRoutes = () => {
             <Route path="activities" element={<DealerActivityTabWrapper />} />
           </Route>
           <Route path="users" element={<UsersListingWrapper />} />
+          <Route path="/users/add-user" element={<AddUserWrapper />} />
           <Route path="test" element={<Test />} />
 
           <Route path="/asr" element={<ASRListingWrapper />} />

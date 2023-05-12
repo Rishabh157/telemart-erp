@@ -45,8 +45,34 @@ export type userData = {
   role:string;
 };
 
+export type UsersNewListResponse = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobile: string;
+  companyId: string;
+  is_active: boolean;
+  is_deleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  __v: number;
+};
 
-export type ChangeCompany = {
-  body: { companyId: string; }
-  id: string
-}
+export type AddNewUser = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobile: string;
+  companyId: string;
+};
+
+export type UpdateNewUser = {
+  body: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    mobile: string;
+  };
+  id: string;
+};
