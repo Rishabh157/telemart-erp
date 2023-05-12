@@ -38,6 +38,16 @@ const tabsData = [
     icon: MdOutlinePeopleAlt,
     path: "activities",
   },
+  {
+    label: "PinCode",
+    icon: MdOutlinePeopleAlt,
+    path: "PinCode",
+  },
+  {
+    label: "Schemes",
+    icon: MdOutlinePeopleAlt,
+    path: "Schemes",
+  },
 ];
 
 const actionIcons = [
