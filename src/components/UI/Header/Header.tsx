@@ -69,9 +69,9 @@ const Header = (props: Props) => {
           className="flex gap-5"
         >
           <div className="h-[35px] w-[35px] flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
-            H
+          {userData?.fullName[0].toUpperCase()}
           </div>
-          0
+          
           {/* <div className='flex flex-col gap-1 justify-start items-start' >
                         <div className='text-primary-main text-[13px]' > Administrator </div>
                         <div className='flex gap-1 items-center font-bold text-slate-500 text-sm' > Himanshu Jain  <BiChevronDown className='text-lg font-bold' />  </div>

@@ -1,47 +1,51 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { PurchaseOrderListResponse } from "src/models/PurchaseOrder.model";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
-import PurchaseOrderListing from "./PurchaseOrderListing";
+import PurchaseOrderListing from "src/pages/purchaseOrder/list/PurchaseOrderListing";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { useGetPurchaseOrderQuery } from "src/services/PurchaseOrderService";
+import { useGetPurchaseOrderByVendorIdQuery } from "src/services/PurchaseOrderService";
 import {
   setIsTableLoading,
   setItems,
   setTotalItems,
 } from "src/redux/slices/PurchaseOrderSlice";
-
 import { HiDotsHorizontal } from "react-icons/hi";
 
-const PurchaseOrderListingWrapper = () => {
+type Props = {};
+
+const VendorPurchaseOrderTabWrapper = (props: Props) => {
   const navigate = useNavigate();
+  const params = useParams();
+  const vendorId: any = params.vendorId;
   const dispatch = useDispatch();
 
   const productOrderState: any = useSelector(
     (state: RootState) => state.purchaseOrder
   );
-  const { page, rowsPerPage, searchValue, items } = productOrderState;
+  const { page, rowsPerPage, searchValue, items  } = productOrderState;
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentId, setCurrentId] = useState("");
 
-  const { data, isLoading, isFetching } = useGetPurchaseOrderQuery({
-    limit: rowsPerPage,
-    searchValue: searchValue,
-    params: ["poCode", "wareHouseId"],
-    page: page,
-    filterBy: [
-      {
-        fieldName: "",
-        value: [],
-      },
-    ],
-    dateFilter: {},
-    orderBy: "createdAt",
-    orderByValue: -1,
-    isPaginationRequired: true,
-  });
+
+  const { data, isLoading, isFetching } = useGetPurchaseOrderByVendorIdQuery(vendorId);
+
+
+  useEffect(() => {
+    if (!isFetching && !isLoading) {
+      dispatch(setIsTableLoading(false));
+      dispatch(setItems(data?.data || []));
+      dispatch(setTotalItems(data?.totalItem || 4));
+    } else {
+      dispatch(setIsTableLoading(true));
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isFetching, data, dispatch]);
+
+  //console.log(items,"items")
+
 
   const columns: columnTypes[] = [
     {
@@ -117,7 +121,7 @@ const PurchaseOrderListingWrapper = () => {
             {" "}
             <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{" "}
           </button>
-          {showDropdown && currentId === row?._id && (
+          {/* {showDropdown && currentId === row?._id && (
             <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
               <button
                 onClick={() => {
@@ -129,30 +133,13 @@ const PurchaseOrderListingWrapper = () => {
               </button>
               <button
                 onClick={() => {
-                  navigate(`/purchase-order/edit/${currentId}`, {
-                    state: { poCode: row?.poCode },
-                  });
+                  navigate(`/purchase-order/edit/${currentId}`,{state:{  poCode: row?.poCode}})
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
               >
                 Edit
               </button>
-              <button
-                onClick={() => {
-                  navigate("/grn/add", {
-                    state: {
-                      poCode: row?.poCode,
-                      itemId: row?.purchaseOrder.itemId,
-                      itemName: row?.purchaseOrder.itemName,
-                      quantity: row?.purchaseOrder.quantity,
-                      companyId: row?.companyId,
-                    },
-                  });
-                }}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              >
-                Generate GRN
-              </button>
+            
               <button
                 onClick={() => {
                   navigate("/grn", {
@@ -163,6 +150,7 @@ const PurchaseOrderListingWrapper = () => {
                       // quantity: row?.purchaseOrder.quantity,
                       // companyId: row?.companyId,
                     },
+                   
                   });
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -170,36 +158,25 @@ const PurchaseOrderListingWrapper = () => {
                 View GRN
               </button>
             </div>
-          )}
+          )} */}
         </div>
       ),
       align: "end",
     },
   ];
 
-  useEffect(() => {
-    if (!isFetching && !isLoading) {
-      dispatch(setIsTableLoading(false));
-      dispatch(setItems(data?.data || []));
-      dispatch(setTotalItems(data?.totalItem || 4));
-    } else {
-      dispatch(setIsTableLoading(true));
-    }
+  
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading, isFetching, data, dispatch]);
-
+ 
   return (
-    <>
-      <SideNavLayout>
+    <div className="px-2 h-full shadow rounded border ">
         <PurchaseOrderListing
           columns={columns}
           rows={items}
           setShowDropdown={setShowDropdown}
         />
-      </SideNavLayout>
-    </>
+      </div>    
   );
 };
 
-export default PurchaseOrderListingWrapper;
+export default VendorPurchaseOrderTabWrapper;

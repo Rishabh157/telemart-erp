@@ -73,6 +73,7 @@ const AddItem = ({ formikProps }: Props) => {
                 label="Item Name"
                 placeholder="Item Name"
                 onChange={(e) => setFieldValue("itemName", e.target.value)}
+              
               />
               {/* itemWeight */}
               <ATMTextField

@@ -67,19 +67,19 @@ const EditPurchaseOrderWrapper = (props: Props) => {
       quantity: ele.purchaseOrder.quantity,
       estReceivingDate: ele.purchaseOrder.estReceivingDate,
     };
-  }) 
+  });
 
   const datas = {
     poCode: selectedItems?.[0]?.poCode,
-    vendorId:selectedItems?.[0]?.vendorId,
-    wareHouseId:selectedItems?.[0]?.wareHouseId,
-    purchaseOrder:sorteddata,
+    vendorId: selectedItems?.[0]?.vendorId,
+    wareHouseId: selectedItems?.[0]?.wareHouseId,
+    purchaseOrder: sorteddata,
   };
-  console.log(datas)
+  console.log(datas);
 
   useEffect(() => {
     disptach(setSelectedItems(data?.data));
-  }, [disptach, data,isFetching, isLoading]);
+  }, [disptach, data, isFetching, isLoading]);
 
   const {
     data: vendorData,
@@ -144,11 +144,10 @@ const EditPurchaseOrderWrapper = (props: Props) => {
   // Form Initial Values
   const initialValues: FormInitialValues = {
     poCode: datas?.poCode || "",
-    vendorId:datas?.vendorId || "",
-    wareHouseId:datas?.wareHouseId || "",
+    vendorId: datas?.vendorId || "",
+    wareHouseId: datas?.wareHouseId || "",
     isEditable: true,
-    purchaseOrder: sorteddata
-   
+    purchaseOrder: sorteddata,
   };
 
   // Form Validation Schema
@@ -183,16 +182,15 @@ const EditPurchaseOrderWrapper = (props: Props) => {
 
     setTimeout(() => {
       UpdatePurchaseOrder({
-        body:{
-        poCode: values.poCode,
-        vendorId: values.vendorId,
-        wareHouseId: values.wareHouseId,
-        isEditable: values.isEditable,
-        purchaseOrder: purchaseOrder,
-        companyId: userData?.companyId || "",
+        body: {
+          poCode: values.poCode,
+          vendorId: values.vendorId,
+          wareHouseId: values.wareHouseId,
+          isEditable: values.isEditable,
+          purchaseOrder: purchaseOrder,
+          companyId: userData?.companyId || "",
         },
-        id: Id ||""
-     
+        id: Id || "",
       }).then((res: any) => {
         if ("data" in res) {
           if (res?.data?.status) {

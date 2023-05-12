@@ -42,6 +42,7 @@ import ViewDealer from "./dealers/view";
 import DealerActivityTabWrapper from "./dealers/view/tabs/DealerActivityTab/DealerActivityTabWrapper";
 import DealerGeneralInformationTabWrapper from "./dealers/view/tabs/DealerGeneralInformationTab/DealerGeneralInformationTabWrapper";
 import DealerWarehouseTabWrapper from "./dealers/view/tabs/DealerWarehouseTab/DealerWarehouseTabWrapper";
+import DealerSalesOrderTabWrapper from "./dealers/view/tabs/DealerSalesOrderTab/DealerSalesOrderTabWrapper";
 import InwardInventoryWrapper from "./inventories/inward-inventory/InwardInventoryWrapper";
 import InventoryListingWrapper from "./inventories/list/InventoryListingWrapper";
 import LoginPage from "./login/LoginPage";
@@ -59,6 +60,7 @@ import ViewVendor from "./vendors/view";
 import VendorActivityTabWrapper from "./vendors/view/tabs/VendorActivityTab/VendorActivityTabWrapper";
 import VendorGeneralInformationTabWrapper from "./vendors/view/tabs/VendorGeneralInformationTab/VendorGeneralInformationTabWrapper";
 import VendorWarehouseTabWrapper from "./vendors/view/tabs/VendorWarehouseTab/VendorWarehouseTabWrapper";
+import VendorPurchaseOrderTabWrapper from "./vendors/view/tabs/VendorPurchaseOrderTab/VendorPurchaseOrderTabWrapper";
 import AddWarehouseWrapper from "./warehouses/add/AddWarehouseWrapper";
 import WarehousesListingWrapper from "./warehouses/list/WarehousesListingWrapper";
 import ProfileWrappper from "./profile/ProfileWrapper";
@@ -128,6 +130,7 @@ export {
   DealerActivityTabWrapper,
   DealerGeneralInformationTabWrapper,
   DealerWarehouseTabWrapper,
+  DealerSalesOrderTabWrapper,
   InwardInventoryWrapper,
   InventoryListingWrapper,
   LoginPage,
@@ -145,6 +148,7 @@ export {
   VendorActivityTabWrapper,
   VendorGeneralInformationTabWrapper,
   VendorWarehouseTabWrapper,
+  VendorPurchaseOrderTabWrapper,
   AddWarehouseWrapper,
   WarehousesListingWrapper,
   ProfileWrappper,

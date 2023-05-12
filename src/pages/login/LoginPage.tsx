@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ATMInputAdormant from "../../components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant";
 import ATMTextField from "../../components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import loginImg from "src/assets/images/login.jpeg";
 import { BiShow, BiHide } from "react-icons/bi";
 
 import { useNavigate } from "react-router-dom";
@@ -64,16 +63,19 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-screen h-screen bg-slate-100 flex justify-center items-center">
-      <div className="w-[50%] h-[75%] bg-white rounded-xl grid grid-cols-2 overflow-hidden">
+    <div className="h-screen w-screen flex md:flex-row">
+      <div className=" bg-slate-400 flex-1  hidden md:block ">
         <div className="h-full">
-          <img src={loginImg} alt="" className="h-full" />
+          <img src="bg.jpg" className="h-full w-full"/>
         </div>
-
-        <div className="h-full px-10 py-14">
-          <div className="text-2xl font-semibold "> Login </div>
-
-          <div className="mt-6 flex flex-col gap-7">
+      </div>
+      <div className="flex flex-col h-full w-full justify-center items-center flex-1">
+        <div className="">
+          <div className="flex flex-col h-[200px] w-[250px] ">
+            <img src="logoapp.png" />
+          </div>
+          <div className=" text-2xl font-semibold text-center "> Login </div>
+          <div className="mt-5 flex flex-col gap-7">
             <div className="">
               <ATMTextField
                 name=""
@@ -88,7 +90,6 @@ const LoginPage = () => {
                 {!userName && errorInitiate ? "Please enter username" : ""}
               </span>
             </div>
-
             <div className="">
               <ATMInputAdormant
                 name=""

@@ -6,15 +6,12 @@ import StepAddProductDetailsWrapper from "./FormSteps/StepAddProductDetails/Step
 import AddProduct from "./AddProduct";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 import StepAddItemsWrapper from "./FormSteps/StepAddItems/StepAddItemsWrapper";
-import StepAddTaxWrapper from "./FormSteps/StepAddTax/StepAddTaxWrapper";
 import StepAddFAQsWrapper from "./FormSteps/StepAddFAQs/StepAddFAQsWrapper";
 import StepAddVideoWrapper from "./FormSteps/StepAddVideo/StepAddVideoWrapper";
 import { EditorState, convertToRaw } from "draft-js";
 import StepAddCallScriptWrapper from "./FormSteps/StepAddCallScript/StepAddCallScriptWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { useGetAllTaxesQuery } from "src/services/TaxesService";
-import { setAllTaxes } from "src/redux/slices/TaxesSlice";
 import { setAllItems } from "src/redux/slices/itemSlice";
 import { setAllItems as setAllLanguage } from "src/redux/slices/languageSlice";
 
@@ -44,10 +41,7 @@ export type FormInitialValues = {
     itemId: string;
     itemQuantity: number;
   }[];
-  taxes: {
-    taxDetail: { tax_name: string; id: string };
-    tax_rate: number;
-  }[];
+  
   FAQs: {
     question: string;
     answer: string;
@@ -101,25 +95,7 @@ const steps = [
       ),
     }),
   },
-  {
-    label: "Tax",
-    component: StepAddTaxWrapper,
-    validationSchema: object({
-      taxes: array().of(
-        object().shape({
-          taxDetail: object()
-            .shape({
-              tax_name: string().required(),
-              id: string().required(),
-            })
-            .required("Please select item name"),
-          tax_rate: number()
-            .typeError("Tax rate should be a number")
-            .required("Please enter tax rate"),
-        })
-      ),
-    }),
-  },
+ 
   {
     label: "FAQ's",
     component: StepAddFAQsWrapper,
@@ -182,12 +158,12 @@ const AddProductWrapper = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [addProduct] = useAddProductMutation();
-  const [taxStatus, setTaxStatus] = useState(false);
+  // const [taxStatus, setTaxStatus] = useState(false);
   const [apiStatus, setApiStatus] = useState(false);
 
-  const { allTaxes: taxData }: any = useSelector(
-    (state: RootState) => state?.tax
-  );
+  // const { allTaxes: taxData }: any = useSelector(
+  //   (state: RootState) => state?.tax
+  // );
   const { userData } = useSelector((state: RootState) => state?.auth);
 
   const { allItems }: any = useSelector((state: RootState) => state?.item);
@@ -195,7 +171,7 @@ const AddProductWrapper = () => {
     (state: RootState) => state?.language
   );
 
-  const { data, isLoading, isFetching } = useGetAllTaxesQuery("");
+
   const {
     data: languageData,
     isLoading: lIsLoading,
@@ -209,10 +185,10 @@ const AddProductWrapper = () => {
   } = useGetAllItemsQuery("");
 
   // States
-  const [activeStep, setActiveStep] = React.useState(2);
-  const allTaxes = taxData?.map((ele: any) => {
-    return { tax_name: ele?.taxName, id: ele?._id };
-  });
+  const [activeStep, setActiveStep] = React.useState(0);
+  // const allTaxes = taxData?.map((ele: any) => {
+  //   return { tax_name: ele?.taxName, id: ele?._id };
+  // });
   // [{ tax_name: "ele?.taxName", id: "ele?._id" }];
 
   useEffect(() => {
@@ -227,12 +203,7 @@ const AddProductWrapper = () => {
     }
   }, [languageData, lIsLoading, lIsFetching]);
 
-  useEffect(() => {
-    if (!isLoading && !isFetching) {
-      setTaxStatus(true);
-      dispatch(setAllTaxes(data?.data));
-    }
-  }, [data, isLoading, isFetching]);
+
 
   // From Initial Values
   const initialValues: FormInitialValues = {
@@ -255,10 +226,6 @@ const AddProductWrapper = () => {
         itemQuantity: 0,
       },
     ],
-    taxes: allTaxes?.map((tax: any) => ({
-      taxDetail: tax,
-      tax_rate: 0,
-    })),
     FAQs: [
       {
         question: "",
@@ -289,9 +256,7 @@ const AddProductWrapper = () => {
   const onSubmitHandler = (values: FormInitialValues) => {
     if (activeStep === steps?.length - 1) {
       setApiStatus(true);
-      const taxData = values.taxes.map((ele) => {
-        return { taxId: ele.taxDetail.id, taxPercent: ele.tax_rate };
-      });
+      
       const callScriptData = values.call_scripts.map((ele) => {
         return {
           language: ele?.language,
@@ -314,7 +279,7 @@ const AddProductWrapper = () => {
           productImage: values.product_image,
           description: values.description,
           item: values.items,
-          tax: taxData,
+        
           faq: values.FAQs,
           video: values.videos,
           callScript: callScriptData,
@@ -340,7 +305,6 @@ const AddProductWrapper = () => {
 
   return (
     <ConfigurationLayout>
-      {taxStatus ? (
         <Formik
           // enableReinitialize
           initialValues={initialValues}
@@ -363,7 +327,7 @@ const AddProductWrapper = () => {
             </Form>
           )}
         </Formik>
-      ) : null}
+  
     </ConfigurationLayout>
   );
 };

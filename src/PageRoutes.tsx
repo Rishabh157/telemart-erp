@@ -57,11 +57,11 @@ import {
   DealerActivityTabWrapper,
   DealerGeneralInformationTabWrapper,
   DealerWarehouseTabWrapper,
+  DealerSalesOrderTabWrapper,
 } from "./pages/index";
 import {
   InwardInventoryWrapper,
   InventoryListingWrapper,
-  LoginPage,
   AddOrder,
   OrderListing,
   OutwardRequestListingWrapper,
@@ -76,6 +76,7 @@ import {
   VendorActivityTabWrapper,
   VendorGeneralInformationTabWrapper,
   VendorWarehouseTabWrapper,
+  VendorPurchaseOrderTabWrapper,
   AddWarehouseWrapper,
   WarehousesListingWrapper,
 } from "./pages/index";
@@ -110,6 +111,7 @@ import {
   ViewPurchaseOrderWrapper,
   AddCbBarcodeWrapper,
 } from "./pages/index";
+import Auth from "./pages/login/Auth";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -129,11 +131,16 @@ const PageRoutes = () => {
   dispatch(setDeviceId(deviceId));
   dispatch(setUserData(userData));
 
+  if (!accessToken && window.location.pathname !== "/") {
+    window.location.replace("/");
+    return null;
+  }
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<Auth />} />
           <Route path="/dashboard" element={<DashboardWrappper />} />
           <Route path="/profile" element={<ProfileWrappper />} />
           <Route path="/orders" element={<OrderListing />} />
@@ -157,7 +164,7 @@ const PageRoutes = () => {
               path="general-information"
               element={<VendorGeneralInformationTabWrapper />}
             />
-            <Route path="purchase-order" element={"Purchase Order"} />
+            <Route path="purchase-order" element={<VendorPurchaseOrderTabWrapper />} />
             <Route path="warehouse" element={<VendorWarehouseTabWrapper />} />
             <Route path="return-to-vendor" element={"Return To Vendor"} />
             <Route path="ledger" element={"Ledger"} />
@@ -196,7 +203,7 @@ const PageRoutes = () => {
               path="general-information"
               element={<DealerGeneralInformationTabWrapper />}
             />
-            <Route path="sale-order" element={"Sale Order"} />
+            <Route path="sale-order" element={<DealerSalesOrderTabWrapper/>} />
             <Route path="warehouse" element={<DealerWarehouseTabWrapper />} />
             <Route path="ledger" element={"Ledger"} />
             <Route path="activities" element={<DealerActivityTabWrapper />} />

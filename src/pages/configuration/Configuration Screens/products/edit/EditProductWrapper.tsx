@@ -52,10 +52,6 @@ export type FormInitialValues = {
     itemId: string;
     itemQuantity: number;
   }[];
-  taxes: {
-    taxDetail: { tax_name: string; id: string };
-    tax_rate: number;
-  }[];
   FAQs: {
     question: string;
     answer: string;
@@ -265,12 +261,7 @@ const EditProductWrapper = () => {
         itemQuantity: ele?.itemQuantity,
       };
     }),
-    taxes: selectedItem?.tax?.map((ele: any) => {
-      return {
-        taxDetail: { tax_name: ele?.taxName, id: ele?.taxId },
-        tax_rate: ele?.taxPercent,
-      };
-    }),
+  
 
     FAQs: selectedItem?.faq || [
       {
@@ -316,9 +307,7 @@ const EditProductWrapper = () => {
         return rest; // return the new object without the _id property
       });
 
-      const taxData = values.taxes.map((ele) => {
-        return { taxId: ele.taxDetail.id, taxPercent: ele.tax_rate };
-      });
+     
       const callScriptData = values.call_scripts.map((ele) => {
         return {
           language: ele?.language,
@@ -342,7 +331,6 @@ const EditProductWrapper = () => {
             productImage: values.product_image,
             description: values.description,
             item: values.items,
-            tax: taxData,
             faq: faqData,
             video: videoData,
             callScript: callScriptData,

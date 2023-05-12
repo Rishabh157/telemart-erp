@@ -3,6 +3,7 @@ import React from "react";
 import { BsPerson } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineLogout } from "react-icons/md";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   useLogoutFromAllMutation,
@@ -18,6 +19,8 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
   // Options
   const [logout] = useLogoutMutation();
   const [logoutFromAll] = useLogoutFromAllMutation();
+  const { userData } = useSelector((state: any) => state.auth);
+  const { email, fullName } = userData;
   const profileOptions = [
     {
       path: "/profile",
@@ -45,13 +48,12 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
     <ClickAwayListener onClickAway={onClickAway}>
       <div className="absolute top-[70px] rigth-[20px] w-[290px] shadow-lg rounded animate-[fade_0.5s_ease-in-out] z-50  ">
         <div className="flex gap-5 items-center  bg-slate-50 h-[70px] px-8 border-b border-slate-300">
-          <div className="w-[43px] h-[43px] flex justify-center items-center bg-primary-main rounded-full text-white ">
-            H
+        <div className="h-[35px]  flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
+          {fullName[0].toUpperCase()}
           </div>
-
           <div className="">
-            <div className="text-slate-700"> Himanshu Jain </div>
-            <div className="text-sm text-slate-500"> himanshu@gmail.com </div>
+            <div className="text-slate-700 capitalize  "> {fullName} </div>
+            <div className="text-sm text-slate-500"> {email} </div>
           </div>
         </div>
 
