@@ -49,6 +49,14 @@ export const dealerApi = apiSlice.injectEndpoints({
         body,
       }),
     }),
+    //***** change status *****/
+    changeDealerStatus: builder.mutation({
+      invalidatesTags: ["dealer"],
+      query: (id) => ({
+        url: `dealer/status-change/${id}`,
+        method: "PUT",
+      }),
+    }),
 
     // **** GET BY ID
     getDealerById: builder.query({
@@ -79,4 +87,5 @@ export const {
   useUpdateDealerMutation,
   useGetDealerByIdQuery,
   useDeleteDealerMutation,
+  useChangeDealerStatusMutation,
 } = dealerApi;
