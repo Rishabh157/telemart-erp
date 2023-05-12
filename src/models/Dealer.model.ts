@@ -1,27 +1,26 @@
-
 export type DealersListResponse = {
   firstName: string;
   lastName: string;
   dealerCode: string;
   firmName: string;
   dealerCategory: String;
-  email:string;
-  registrationCountryName:string,
-  registrationStateName:string,
-  registrationDistrictName:string,
-  registrationPincodeName:string,
-  billingAddressCountryName:string,
-  billingAddressStateName:string;
-  billingAddressDistrictName:string;
-  billingAddressPincodeName:string;
+  email: string;
+  registrationCountryName: string;
+  registrationStateName: string;
+  registrationDistrictName: string;
+  registrationPincodeName: string;
+  billingAddressCountryName: string;
+  billingAddressStateName: string;
+  billingAddressDistrictName: string;
+  billingAddressPincodeName: string;
   registrationAddress: registrationAddress;
   billingAddress: billingAddress;
   contactInformation: contactInformation[];
   document: document;
   otherDocument: otherDocument[];
-  companyID:string
-  is_active: boolean;
-  is_deleted: boolean;
+  companyID: string;
+  isActive: boolean;
+  isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
   _id: string;
@@ -66,18 +65,18 @@ export type otherDocument = {
 };
 
 export type AddDealer = {
-    firstName: string;
-    lastName: string;
-    dealerCode: string;
-    firmName: string;
-    dealerCategory: String;
-    email:string;
-    registrationAddress: registrationAddress;
-    billingAddress: billingAddress;
-    contactInformation: contactInformation[];
-    document: document;
-    otherDocument: otherDocument[]; 
-    companyId:string;
+  firstName: string;
+  lastName: string;
+  dealerCode: string;
+  firmName: string;
+  dealerCategory: String;
+  email: string;
+  registrationAddress: registrationAddress;
+  billingAddress: billingAddress;
+  contactInformation: contactInformation[];
+  document: document;
+  otherDocument: otherDocument[];
+  companyId: string;
 };
 
 export type UpdateDealer = {
@@ -87,13 +86,13 @@ export type UpdateDealer = {
     dealerCode: string;
     firmName: string;
     dealerCategory: String;
-    email:string;
+    email: string;
     registrationAddress: registrationAddress;
     billingAddress: billingAddress;
     contactInformation: contactInformation[];
     document: document;
     otherDocument: otherDocument[];
-    companyId:string
+    companyId: string;
   };
   id: string;
 };
