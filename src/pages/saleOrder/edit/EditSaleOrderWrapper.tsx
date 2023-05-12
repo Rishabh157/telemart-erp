@@ -156,7 +156,7 @@ const EditSaleOrderWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    console.log("onSubmitHandler", values.productSalesOrder);
+  
 
     const productSalesOrder = values.productSalesOrder.map((ele: any) => {
       return {
@@ -166,7 +166,7 @@ const EditSaleOrderWrapper = (props: Props) => {
       };
     });
 
-    console.log(productSalesOrder);
+    
 
     setApiStatus(true);
     setTimeout(() => {

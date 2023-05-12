@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Form, Formik, FormikProps } from "formik";
-import { array, object, string, number } from "yup";
+import { array, object, string } from "yup";
 import EditCompany from "./EditCompany";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 import StepEditCompanyDetailsWrapper from "./FormSteps/StepEditCompanyDetails/StepEditCompanyDetailsWrapper";
@@ -14,7 +14,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCompany } from "src/redux/slices/companySlice";
 import { RootState } from "src/redux/store";
-import { showToast } from "src/utils";
+import { showToast, validationofGst } from "src/utils";
 import { regIndiaPhone } from "src/pages/vendors/add/AddVendorWrapper";
 
 // TYPE-  Form Intial Values
@@ -28,7 +28,7 @@ export type FormInitialValues = {
     bankName: string;
     branchName: string;
     accountHolderName: string;
-    accountNumber: number;
+    accountNumber: string;
     ifscNumber: string;
     accountType: string;
     _id: string;
@@ -43,7 +43,7 @@ const steps = [
     validationSchema: object({
       companyName: string().required("Company name is required"),
       websiteUrl: string().url().required("Website url is required"),
-      gstNo: string().required("GST number is required"),
+      gstNo: string().matches(validationofGst,"invalidGstNumber").required( "GST number is required"),
       address: string().required("Address is required"),
       phoneNo: string()
         .matches(regIndiaPhone, "Invalid Mobile Number")
@@ -61,7 +61,7 @@ const steps = [
           accountHolderName: string().required(
             "Account holder name is required"
           ),
-          accountNumber: number().required("Account number is required"),
+          accountNumber: string().required("Account number is required"),
           ifscNumber: string().required("IFSC number is required"),
           accountType: string().required("Please select account type"),
         })

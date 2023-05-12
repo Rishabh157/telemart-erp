@@ -78,17 +78,17 @@ const StepAddVideo = ({ formikProps }: Props) => {
                     {/* Preview */}
                     <div className="rounded">
                       {values.videos[videoIndex].videoLink ? (
-                        <div className="border rounded h-[160px] flex justify-center items-center">
-                          Preview
-                        </div>
-                      ) : (
-                        <iframe
-                          width="100%"
-                          height="160"
-                          src={values.videos[videoIndex].videoLink}
-                          title="video"
-                          className="rounded"
-                        />
+                      <iframe
+                      width="100%"
+                      height="160"
+                      src={values.videos[videoIndex].videoLink}
+                      title="video"
+                      className="rounded"
+                    />
+                  ) : (
+                    <div className="border rounded h-[160px] flex justify-center items-center">
+                      Preview
+                    </div>
                       )}
                     </div>
                   </div>

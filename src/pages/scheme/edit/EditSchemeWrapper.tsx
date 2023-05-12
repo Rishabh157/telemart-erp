@@ -202,7 +202,7 @@ const EditSchemeWrapper = () => {
       },
     ],
   };
-  console.log(initialValues)
+ 
   // Form validation schema based on the active step
   const getValidationSchema = (activeStep: number) => {
     return steps.find((_, stepIndex) => stepIndex === activeStep)
@@ -280,7 +280,6 @@ const EditSchemeWrapper = () => {
   },[data, dispatch ,isLoading ,isFetching])
   
   useEffect(()=>{
-    console.log(setSelectedItem(updateData?.data))
     dispatch(setSelectedItem(updateData?.data))
   },[updateData, dispatch ,updateisLoading ,updateisFetching])
 

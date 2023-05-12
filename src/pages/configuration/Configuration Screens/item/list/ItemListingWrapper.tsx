@@ -51,9 +51,10 @@ const ItemListingWrapper = () => {
       headerName: "Item Name",
       flex: "flex-[1.5_1.5_0%]",
       renderCell: (row: ItemListResponse) => {
-        return <span> {row.itemName} </span>;
-      },
+        return <span className="capitalize"> {row.itemName} </span>;
+      },    
     },
+  
 
     {
       field: "weight",
