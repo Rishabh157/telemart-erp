@@ -42,6 +42,7 @@ export type userData = {
   mobile: string;
   userId: string;
   userName: string;
+  role:string;
 };
 
 export type UsersNewListResponse = {

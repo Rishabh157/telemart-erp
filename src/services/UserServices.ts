@@ -1,4 +1,5 @@
 import { AddUser, AddNewUser,  UpdateUser, UpdateNewUser } from "src/models";
+import { AddUser, UpdateUser, ChangeCompany } from "src/models";
 import { PaginationType } from "src/models/common/paginationType";
 import apiSlice from "./ApiSlice";
 
@@ -149,4 +150,5 @@ export const {
   useGetNewUsersQuery,
   useAddNewUserMutation,
   useUpdateNewUserMutation,
+  useUpdateCompanyByAdminMutation,
 } = userApi;

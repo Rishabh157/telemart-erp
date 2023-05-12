@@ -53,7 +53,7 @@ const SideNavLayout = ({ children }: Props) => {
           <Header />
         </div>
 
-        <div className="grow w-full overflow-auto bg-slate-50 ">{children}</div>
+        <div className="grow w-full overflow-auto bg-slate-50  ">{children}</div>
       </div>
     </div>
   );

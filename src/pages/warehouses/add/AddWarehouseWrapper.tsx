@@ -113,8 +113,7 @@ const AddWarehouseWrapper = () => {
   const { state } = useLocation(); 
   const vendorId = state?.params?.vendorId || null;
   const dealerId = state?.params?.dealerId || null;
-  // console.log(dealerId)
-  // console.log(vendorId)
+ 
 
 
   const navigate = useNavigate();
@@ -179,7 +178,6 @@ const AddWarehouseWrapper = () => {
 
   // Form validation schema based on the active step
   const getValidationSchema = (activeStep: number) => {
-    console.log(steps.find((_, stepIndex) => stepIndex === activeStep))
     return steps.find((_, stepIndex) => stepIndex === activeStep)
       ?.validationSchema;
   };
