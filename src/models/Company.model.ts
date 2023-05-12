@@ -15,7 +15,7 @@ export type bankDetails = {
   bankName: string;
   branchName: string;
   accountHolderName: string;
-  accountNumber: number;
+  accountNumber: string;
   ifscNumber: string;
   accountType: string;
 };

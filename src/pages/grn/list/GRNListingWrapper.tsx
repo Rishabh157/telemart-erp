@@ -21,7 +21,6 @@ import {
 import { RootState } from "src/redux/store";
 import { useGetPaginationGRNQuery } from "src/services/GRNService";
 import { useLocation } from "react-router-dom";
-//import { clear } from "console";
 
 const columns: columnTypes[] = [
   {

@@ -29,7 +29,6 @@ import {
   setTotalItems as pgSetTotalItems,
 } from "src/redux/slices/productGroupBarcodeSlice";
 import CartonBoxBarcodeListing from "./components/CartonBoxBarcode/CartonBoxBarcodeListing";
-import { CartonBoxBarcodeListResponse } from "src/models/CartonBoxBarcode.model";
 import { IconType } from "react-icons";
 import { MdOutbond } from "react-icons/md";
 import ProductGroupListing from "./components/BarcodeGroup/ProductGroupBarcodeListing";
@@ -40,6 +39,13 @@ export type Tabs = {
   active?: boolean;
   index: number;
 };
+export type barcodecardType ={
+  _id?:string
+  label:String
+  barcodenumber:String
+  count?:string
+}
+
 const BarcodeListingWrapper = () => {
   const barcodeState: any = useSelector((state: RootState) => state.barcode);
   const [groupBarcode, setGroupBarcode] = useState("");
@@ -173,18 +179,19 @@ const BarcodeListingWrapper = () => {
   >([]);
 
   const [selectedCartonBoxBarcodes, setSelectedCartonBoxBarcodes] =
-    React.useState<CartonBoxBarcodeListResponse[]>([]);
+    React.useState<barcodecardType[]>([]);
+
 
   const onCartonBoxBarcodeSelect = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    barcode: CartonBoxBarcodeListResponse,
+    barcode: barcodecardType,
     isBarcodeSeleted: boolean
   ) => {
     e.stopPropagation();
     let newValue = [];
     if (isBarcodeSeleted) {
       newValue = selectedCartonBoxBarcodes.filter(
-        (seleted: CartonBoxBarcodeListResponse) => seleted._id !== barcode._id
+        (seleted: barcodecardType) => seleted._id !== barcode._id
       );
     } else {
       newValue = [...selectedCartonBoxBarcodes, barcode];
@@ -301,8 +308,8 @@ const BarcodeListingWrapper = () => {
             rows={cbitems}
             selectedCartonBoxBarcodes={selectedCartonBoxBarcodes}
             onCartonBoxBarcodeSelect={onCartonBoxBarcodeSelect}
-            onBarcodeClick={(barcode: CartonBoxBarcodeListResponse) =>
-              navigate(`${barcode._id}`)
+            onBarcodeClick={() =>
+           {}
             }
           />
         ) : (

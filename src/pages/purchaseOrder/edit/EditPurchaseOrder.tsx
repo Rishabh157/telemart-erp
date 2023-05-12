@@ -50,7 +50,6 @@ const EditPurchaseOrder = ({
   };
 
   const { values, setFieldValue } = formikProps;
-  console.log(values);
 
   return (
     <div className="">

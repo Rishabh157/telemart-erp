@@ -7,7 +7,7 @@ import StepAddCompanyDetailsWrapper from "./FormSteps/StepAddCompanyDetails/Step
 import StepAddBankDetailsWrapper from "./FormSteps/StepAddBankDetails/StepAddBankDetailsWrapper";
 import { useAddCompanyMutation } from "src/services/CompanyServices";
 import { useNavigate } from "react-router-dom";
-import { showToast } from "src/utils";
+import { showToast, validationofGst } from "src/utils";
 import { regIndiaPhone } from "src/pages/vendors/add/AddVendorWrapper";
 
 // TYPE-  Form Intial Values
@@ -21,7 +21,7 @@ export type FormInitialValues = {
     bankName: string;
     branchName: string;
     accountHolderName: string;
-    accountNumber: number;
+    accountNumber: string;
     ifscNumber: string;
     accountType: string;
   }[];
@@ -35,7 +35,7 @@ const steps = [
     validationSchema: object({
       companyName: string().required("Company name is required"),
       websiteUrl: string().url().required("Website url is required"),
-      gstNo: string().required("GST number is required"),
+      gstNo: string().matches(validationofGst,"Invalid Gst Number").required("GST number is required"),
       address: string().required("Address is required"),
       phoneNo: string()
         .matches(regIndiaPhone, "Invalid Mobile Number")
@@ -101,7 +101,7 @@ const AddCompanyWrapper = () => {
         bankName: "",
         branchName: "",
         accountHolderName: "",
-        accountNumber: 0,
+        accountNumber: "",
         ifscNumber: "",
         accountType: "",
       },

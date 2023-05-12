@@ -67,11 +67,6 @@ export type AddProducts = {
     itemQuantity: number;
   }[];
 
-  tax: {
-    taxId: string;
-    taxPercent: number;
-  }[];
-
   faq: {
     question: string;
     answer: string;
@@ -106,11 +101,6 @@ export type UpdateProducts = {
     item: {
       itemId: string;
       itemQuantity: number;
-    }[];
-
-    tax: {
-      taxId: string;
-      taxPercent: number;
     }[];
 
     faq: {

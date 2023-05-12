@@ -8,20 +8,25 @@ import {
   setSearchValue,
 } from "src/redux/slices/CartonBoxBarcodeSlice";
 import { AppDispatch, RootState } from "src/redux/store";
-
-import { CartonBoxBarcodeListResponse } from "src/models/CartonBoxBarcode.model";
 import CartonBoxBarcodeDetailCard from "./CartonBoxBarcodeDetailCard";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   rows: any[];
-  selectedCartonBoxBarcodes: CartonBoxBarcodeListResponse[];
+  selectedCartonBoxBarcodes:barcodecardType[];
   onCartonBoxBarcodeSelect: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    barcode: CartonBoxBarcodeListResponse,
+    barcode: barcodecardType,
     isBarcodeSeleted: boolean
   ) => void;
-  onBarcodeClick: (barcode: CartonBoxBarcodeListResponse) => void;
+  onBarcodeClick?: () => void;
 };
+export type barcodecardType ={
+  _id?:string
+  label:String
+  barcodenumber:String
+  count?:string
+}
 
 const CartonBoxBarcodeListing = ({
   rows,
@@ -34,9 +39,20 @@ const CartonBoxBarcodeListing = ({
   const cartonBoxBarcodeState: any = useSelector(
     (state: RootState) => state.cartonBoxBarcode
   );
+console.log(cartonBoxBarcodeState?.items)
   //  const [isFilterOpen, setIsFilterOpen] = useState(false);
+const datas=cartonBoxBarcodeState?.items?.map((ele:any )=>{
+  return{
+    _id:ele._id,
+    label:ele.cartonboxLabel,
+    barcodenumber:ele.barcodeNumber,
+    count:ele.count
+  }
 
+})
+console.log(datas)
   const { page, rowsPerPage, totalItems, searchValue } = cartonBoxBarcodeState;
+  const navigate=useNavigate()
 
   return (
     <div className="px-4 h-full flex flex-col gap-3">
@@ -58,12 +74,12 @@ const CartonBoxBarcodeListing = ({
         {/* Barcode Detail Cards */}
         <div className="grow overflow-auto  ">
           <CartonBoxBarcodeDetailCard
-            cardBoxBarcodeList={rows}
+            barcodeList={datas}
             selectedCartonBoxBarcodes={selectedCartonBoxBarcodes}
             onCartonBoxBarcodeSelect={onCartonBoxBarcodeSelect}
-            onBarcodeClick={(barcode) => {
-              onBarcodeClick(barcode);
-            }}
+            onBarcodeClick={() =>navigate("/configurations/barcode/carton-box-items" ,{state:{barcodeNumber
+              :cartonBoxBarcodeState?.items[0].barcodeNumber
+            }}) }
           />
         </div>
 
