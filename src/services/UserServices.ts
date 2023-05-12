@@ -1,4 +1,10 @@
-import { AddUser, AddNewUser, ChangeCompany,  UpdateUser, UpdateNewUser } from "src/models";
+import {
+  AddUser,
+  AddNewUser,
+  UpdateUser,
+  UpdateNewUser,
+  ChangeCompany,
+} from "src/models";
 import { PaginationType } from "src/models/common/paginationType";
 import apiSlice from "./ApiSlice";
 
@@ -18,7 +24,6 @@ export const userApi = apiSlice.injectEndpoints({
       }),
     }),
 
-
     //***** LOGIN *****/
     changePassword: builder.mutation({
       invalidatesTags: ["user"],
@@ -33,7 +38,6 @@ export const userApi = apiSlice.injectEndpoints({
       }),
     }),
 
-
     //***** LOGIN *****/
     login: builder.mutation({
       invalidatesTags: ["user"],
@@ -43,7 +47,6 @@ export const userApi = apiSlice.injectEndpoints({
         body,
       }),
     }),
-
 
     //***** LOG OUT *****/
     refreshToken: builder.mutation({
@@ -81,7 +84,7 @@ export const userApi = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
-    }),    
+    }),
 
     //***** Update *****/
     updateUser: builder.mutation({
@@ -102,8 +105,8 @@ export const userApi = apiSlice.injectEndpoints({
       }),
     }),
 
-     //***** GET NEW USERS *****/
-     getNewUsers: builder.query({
+    //***** GET NEW USERS *****/
+    getNewUsers: builder.query({
       providesTags: ["newUser"],
       query: (body: PaginationType) => ({
         url: "/user",
@@ -133,7 +136,15 @@ export const userApi = apiSlice.injectEndpoints({
       }),
     }),
 
-
+    //***** Update New User *****/
+    updateCompanyByAdmin: builder.mutation({
+      invalidatesTags: ["newUser"],
+      query: ({ body, id }: ChangeCompany) => ({
+        url: `/admin/${id}`,
+        method: "PUT",
+        body,
+      }),
+    }),
   }),
 });
 export const {
