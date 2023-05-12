@@ -82,9 +82,9 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
           <div className="">
 
             {values.tax?.map((taxes, taxIndex) => {
-              // console.log(values.tax)
+             
               const {  taxPercent } = taxes;
-              // console.log(values)
+         
 
               return (
                 <div

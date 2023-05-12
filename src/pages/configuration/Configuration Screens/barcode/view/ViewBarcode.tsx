@@ -33,9 +33,9 @@ export type barcodecardType ={
 const ViewBarcode = (props: Props) => {
   const dispatch = useDispatch();
   const { state } = useLocation();
-  console.log(state);
+  
   const barcodeNumber = state?.barcodeNumber;
-  console.log(barcodeNumber);
+
 
   const { data, isFetching, isLoading } =
     useGetByCartonBoxBarcodeQuery(barcodeNumber);
@@ -44,10 +44,8 @@ const ViewBarcode = (props: Props) => {
     (state: RootState) => state.cartonBoxBarcode
   );
 
-   console.log(selectedItem)
-
   useEffect(() => {
-    console.log(data?.data);
+ 
     dispatch(setSelectedItem(data?.data));
   }, [isFetching, data, isLoading, dispatch]);
 
@@ -57,7 +55,7 @@ const ViewBarcode = (props: Props) => {
       label:ele.cartonboxLabel
     }
   })
-  console.log(datas)
+ 
 
   return (
     <div className="h-full px-2 py-2 flex flex-col">

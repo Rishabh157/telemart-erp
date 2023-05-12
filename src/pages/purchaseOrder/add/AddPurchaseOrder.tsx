@@ -10,6 +10,7 @@ import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from "./AddPurchaseOrderWrapper";
 import ATMDatePicker from "src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker";
 import { SelectOption } from "src/models/FormField/FormField.model";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -232,7 +233,7 @@ const AddPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOpt
                         }
                         className="bg-primary-main px-3 py-1 text-white rounded"
                       >
-                        Add More Item
+                        <AddCircleOutlineOutlinedIcon style={{fontSize: '32px'}}/>
                       </button>
                     </div>
                   </>

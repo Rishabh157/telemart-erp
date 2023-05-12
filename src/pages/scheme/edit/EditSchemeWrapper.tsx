@@ -132,16 +132,16 @@ const EditSchemeWrapper = () => {
   // Breadcrumbs
   const breadcrumbs = [
     {
-      label: "Outer Scheme",
+      label: "Scheme",
       onClick: () => {
         console.log("Scheme");
       },
       path: "/scheme",
     },
     {
-      label: "Edit Scheme",
+      label: "Update Scheme",
       onClick: () => {
-        console.log("add-Scheme");
+        console.log("Update Scheme");
       },
     },
   ];
@@ -168,8 +168,7 @@ const EditSchemeWrapper = () => {
       setSelectedCategory(selectedItem?.category)
     }
   },[selectedItem])
-  // const {allProdcutSubCategory}:any=useSelectWx`or((state:RootState)=>state.productSubCategory)
-  // console.log(allProdcutSubCategory)
+ 
   // From Initial Values
   const initialValues: FormInitialValues = {
     schemeCode: selectedItem?.schemeCode ||  "",
@@ -225,7 +224,6 @@ const EditSchemeWrapper = () => {
 
   useEffect(() => {
      
-     // console.log(setAllProductCategory(dataPC?.data))
       dispatch(setAllProductCategory(dataPC?.data));
 
     
@@ -276,7 +274,6 @@ const EditSchemeWrapper = () => {
     })
   })
    
-//console.log(productGroupOptions)
 
   useEffect(()=>{
     dispatch(setAllItems(data?.data))

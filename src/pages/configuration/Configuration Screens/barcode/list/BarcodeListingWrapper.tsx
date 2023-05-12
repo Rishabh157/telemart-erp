@@ -309,7 +309,7 @@ const BarcodeListingWrapper = () => {
             selectedCartonBoxBarcodes={selectedCartonBoxBarcodes}
             onCartonBoxBarcodeSelect={onCartonBoxBarcodeSelect}
             onBarcodeClick={() =>
-             console.log("a")
+           {}
             }
           />
         ) : (

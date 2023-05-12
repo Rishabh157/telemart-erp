@@ -8,7 +8,7 @@ const Profile = ({ tabs }: { tabs: Tabs[] }) => {
   const [activeTab, setActiveTab] = useState("My Profile");
 
   return (
-    <div className="p-4">
+    <div className="p-4 ">
       <ATMPageHeading> Profile </ATMPageHeading>
       <div className="flex shadow rounded h-[45px] items-center gap-3 bg-white w-full overflow-auto px-3 ">
         {tabs.map((tab, tabIndex) => {
@@ -32,8 +32,8 @@ const Profile = ({ tabs }: { tabs: Tabs[] }) => {
           );
         })}
       </div>
-      {activeTab === "Change Password" && <ChangePassword />}
       {activeTab === "My Profile" && <ProfileDetails />}
+      {activeTab === "Change Password" && <ChangePassword />}
     </div>
   );
 };

@@ -32,18 +32,6 @@ const ProductsListingWrapper = () => {
 
   const columns: columnTypes[] = [
     {
-      field: "productImage",
-      headerName: "Product Image",
-      flex: "flex-[1_1_0%]",
-      renderCell: (row: ProductsListResponse) => (
-        <span>
-          {" "}
-          <img src={row.productImage} alt="uploaded document" />
-        </span>
-      ),
-    },
-
-    {
       field: "productCode",
       headerName: "Product Code ",
       flex: "flex-[1.5_1.5_0%]",

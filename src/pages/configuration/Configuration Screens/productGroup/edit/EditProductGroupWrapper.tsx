@@ -33,6 +33,7 @@ const EditProductGroupWrapper = (props: Props) => {
   const { selectedProductGroup }: any = useSelector(
     (state: RootState) => state.productGroup
   );
+  
   const { userData } = useSelector((state: RootState) => state?.auth);
 
   const [EditProductGroup] = useUpdateProductGroupMutation();
@@ -48,8 +49,12 @@ const EditProductGroupWrapper = (props: Props) => {
 
   const initialValues: FormInitialValues = {
     groupName: selectedProductGroup?.groupName || "",
-
-    tax: selectedProductGroup?.tax || "",
+    tax: selectedProductGroup?.tax || [
+      {
+        taxName: "",
+        taxPercent: 0,
+      },
+    ],
 
   };
 
@@ -58,7 +63,6 @@ const EditProductGroupWrapper = (props: Props) => {
     groupName: string().required("Group Name is required"),
       tax: array().of(
         object().shape({
-  
           taxName: string().required("Please select item name"),
           taxPercent: number().typeError("Tax rate should be a number").required("Please enter tax rate"),
         })

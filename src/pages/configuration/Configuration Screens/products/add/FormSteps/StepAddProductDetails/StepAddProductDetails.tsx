@@ -133,18 +133,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
               className="shadow bg-white rounded"
             />
           </div>
-        </div>
-
-        {/* Product Image */}
-
-        <ATMTextField
-          label="Product Image"
-          name="product_image"
-          value={values.product_image}
-          onChange={(e) => setFieldValue("product_image", e.target.value)}
-          placeholder="Product Image"
-          className="shadow bg-white rounded"
-        />
+        </div>        
       </div>
 
       {/* Description */}

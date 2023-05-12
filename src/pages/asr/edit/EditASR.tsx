@@ -10,6 +10,7 @@ import { FormInitialValues } from "./EditASRWrapper";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -152,7 +153,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                       }
                       className="bg-primary-main px-3 py-1 text-white rounded"
                     >
-                      Add More
+                      <AddCircleOutlineOutlinedIcon style={{fontSize: '32px'}}/>
                     </button>
                   </div>
                 </div>

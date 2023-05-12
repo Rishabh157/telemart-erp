@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
 import { PurchaseOrderListResponse } from "src/models/PurchaseOrder.model";
 import PurchaseOrderListing from "src/pages/purchaseOrder/list/PurchaseOrderListing";
@@ -16,7 +16,7 @@ import { HiDotsHorizontal } from "react-icons/hi";
 type Props = {};
 
 const VendorPurchaseOrderTabWrapper = (props: Props) => {
-  const navigate = useNavigate();
+  
   const params = useParams();
   const vendorId: any = params.vendorId;
   const dispatch = useDispatch();
@@ -24,9 +24,10 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
   const productOrderState: any = useSelector(
     (state: RootState) => state.purchaseOrder
   );
-  const { page, rowsPerPage, searchValue, items  } = productOrderState;
+  //const { page, rowsPerPage, searchValue, items  } = productOrderState;
+  const { items  } = productOrderState;
   const [showDropdown, setShowDropdown] = useState(false);
-  const [currentId, setCurrentId] = useState("");
+  //const [currentId, setCurrentId] = useState("");
 
 
   const { data, isLoading, isFetching } = useGetPurchaseOrderByVendorIdQuery(vendorId);
@@ -44,7 +45,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, data, dispatch]);
 
-  //console.log(items,"items")
+  
 
 
   const columns: columnTypes[] = [
@@ -114,8 +115,8 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             onClick={(e) => {
               e.stopPropagation();
               setShowDropdown(!showDropdown);
-              setCurrentId(row?._id);
-            }}
+            //   setCurrentId(row?._id);
+             }}
             className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
           >
             {" "}

@@ -10,14 +10,14 @@ import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from "./EditPurchaseOrderWrapper";
 import ATMDatePicker from "src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker";
 import { SelectOption } from "src/models/FormField/FormField.model";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
-  vendorOptions:any[]
-  warehouseOptions:any[]
-  itemOptions:any[]
-  apiStatus:boolean
-
+  vendorOptions: any[];
+  warehouseOptions: any[];
+  itemOptions: any[];
+  apiStatus: boolean;
 };
 export type DropdownOptions = {
   vendorOptions: SelectOption[];
@@ -32,20 +32,24 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/purchase-order",
   },
   {
-    label: "Edit Purchase Order",
+    label: "Update Purchase Order",
   },
 ];
 
-const EditPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOptions,apiStatus}: Props) => {
+const EditPurchaseOrder = ({
+  formikProps,
+  vendorOptions,
+  warehouseOptions,
+  itemOptions,
+  apiStatus,
+}: Props) => {
   const dropdownOptions: DropdownOptions = {
     vendorOptions,
     warehouseOptions,
     itemOptions,
   };
 
-
   const { values, setFieldValue } = formikProps;
-  console.log(values)
 
   return (
     <div className="">
@@ -72,9 +76,10 @@ const EditPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOp
                 disabled={apiStatus}
                 onClick={() => formikProps.handleSubmit()}
                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                  true ? "disabled:opacity-25" : ""}`}
+                  true ? "disabled:opacity-25" : ""
+                }`}
               >
-               Update
+                Update
               </button>
             </div>
           </div>
@@ -114,131 +119,136 @@ const EditPurchaseOrder = ({ formikProps, vendorOptions, warehouseOptions,itemOp
           {/*  Items  */}
           <div className="px-3">
             <div className=" text-lg pb-2 font-medium text-primary-main">
-            Edit item to purchase order
+              Edit item to purchase order
             </div>
 
-            { <FieldArray name="purchaseOrder">
-              {({ push, remove }) => {
-                return (
-                  <>
-                    <div className="flex flex-col gap-y-5">
-                      {values?.purchaseOrder?.map((item:any, itemIndex:any) => {
-                        const { itemId, rate, quantity, estReceivingDate } =
-                          item;
-                          
-                        return (
-                          <div
-                            key={itemIndex}
-                            className="flex gap-3 items-end "
-                          >
-                            {/* Item Name */}
-                             <div className="flex-[3_3_0%]">
-                              <ATMSelect
-                                name={`purchaseOrder[${itemIndex}].itemId`}
-                                value={itemId}
-                                onChange={(e) =>
-                                  setFieldValue(
-                                    `purchaseOrder[${itemIndex}].itemId`,
-                                    e.target.value
-                                  )
-                                }
-                                options={dropdownOptions.itemOptions}
-                                label="Item Name"
-                              />
-                            </div> 
+            {
+              <FieldArray name="purchaseOrder">
+                {({ push, remove }) => {
+                  return (
+                    <>
+                      <div className="flex flex-col gap-y-5">
+                        {values?.purchaseOrder?.map(
+                          (item: any, itemIndex: any) => {
+                            const { itemId, rate, quantity, estReceivingDate } =
+                              item;
 
-                            {/* Rate */}
-                             <div className="flex-[2_2_0%]">
-                              <ATMTextField
-                                type="number"
-                                min={0}
-                                name={`purchaseOrder[${itemIndex}].rate`}
-                                value={rate?.toString() || ""}
-                                label="Rate"
-                                placeholder="Rate"
-                                onChange={(e) =>
-                                  setFieldValue(
-                                    `purchaseOrder[${itemIndex}].rate`,
-                                    e.target.value
-                                  )
-                                }
-                              />
-                            </div> 
+                            return (
+                              <div
+                                key={itemIndex}
+                                className="flex gap-3 items-end "
+                              >
+                                {/* Item Name */}
+                                <div className="flex-[3_3_0%]">
+                                  <ATMSelect
+                                    name={`purchaseOrder[${itemIndex}].itemId`}
+                                    value={itemId}
+                                    onChange={(e) =>
+                                      setFieldValue(
+                                        `purchaseOrder[${itemIndex}].itemId`,
+                                        e.target.value
+                                      )
+                                    }
+                                    options={dropdownOptions.itemOptions}
+                                    label="Item Name"
+                                  />
+                                </div>
 
-                            {/* Quantity */}
-                             <div className="flex-[2_2_0%]">
-                              <ATMTextField
-                                type="number"
-                                min={0}
-                                name={`purchaseOrder[${itemIndex}].quantity`}
-                                value={quantity?.toString() || ""}
-                                label="Quantity"
-                                placeholder="Quantity"
-                                onChange={(e) =>
-                                  setFieldValue(
-                                    `purchaseOrder[${itemIndex}].quantity`,
-                                    e.target.value
-                                  )
-                                }
-                              />
-                            </div>
+                                {/* Rate */}
+                                <div className="flex-[2_2_0%]">
+                                  <ATMTextField
+                                    type="number"
+                                    min={0}
+                                    name={`purchaseOrder[${itemIndex}].rate`}
+                                    value={rate?.toString() || ""}
+                                    label="Rate"
+                                    placeholder="Rate"
+                                    onChange={(e) =>
+                                      setFieldValue(
+                                        `purchaseOrder[${itemIndex}].rate`,
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
 
-                            {/* Est. Receiving Date */}
-                             <div className="flex-[3_3_0%]">
-                              <ATMDatePicker
-                                name={`purchaseOrder[${itemIndex}].estReceivingDate`}
-                                value={estReceivingDate}
-                                label="Est. Receiving Date"
-                                onChange={(newValue) =>
-                                  setFieldValue(
-                                    `purchaseOrder[${itemIndex}].estReceivingDate`,
-                                    newValue
-                                  )
-                                }
-                              />
-                            </div> 
+                                {/* Quantity */}
+                                <div className="flex-[2_2_0%]">
+                                  <ATMTextField
+                                    type="number"
+                                    min={0}
+                                    name={`purchaseOrder[${itemIndex}].quantity`}
+                                    value={quantity?.toString() || ""}
+                                    label="Quantity"
+                                    placeholder="Quantity"
+                                    onChange={(e) =>
+                                      setFieldValue(
+                                        `purchaseOrder[${itemIndex}].quantity`,
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </div>
 
-                            {/* BUTTON - Delete */}
-                             {values.purchaseOrder?.length > 1 && (
-                              <div>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    remove(itemIndex);
-                                  }}
-                                  className="p-2 bg-red-500 text-white rounded"
-                                >
-                                  <MdDeleteOutline className="text-2xl" />
-                                </button>
+                                {/* Est. Receiving Date */}
+                                <div className="flex-[3_3_0%]">
+                                  <ATMDatePicker
+                                    name={`purchaseOrder[${itemIndex}].estReceivingDate`}
+                                    value={estReceivingDate}
+                                    label="Est. Receiving Date"
+                                    onChange={(newValue) =>
+                                      setFieldValue(
+                                        `purchaseOrder[${itemIndex}].estReceivingDate`,
+                                        newValue
+                                      )
+                                    }
+                                  />
+                                </div>
+
+                                {/* BUTTON - Delete */}
+                                {values.purchaseOrder?.length > 1 && (
+                                  <div>
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        remove(itemIndex);
+                                      }}
+                                      className="p-2 bg-red-500 text-white rounded"
+                                    >
+                                      <MdDeleteOutline className="text-2xl" />
+                                    </button>
+                                  </div>
+                                )}
                               </div>
-                            )}
-                          </div> 
-                        );
-                      })}
-                    </div> 
+                            );
+                          }
+                        )}
+                      </div>
 
-                    {/* BUTTON - Add More Product */}
-                    <div className="flex justify-end py-5">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          push({
-                            itemId: "",
-                            rate: null,
-                            quantity: null,
-                            estReceivingDate: null,
-                          })
-                        }
-                        className="bg-primary-main px-3 py-1 text-white rounded"
-                      >
-                        Add More Item
-                      </button>
-                    </div>
-                  </>
-                );
-              }}
-            </FieldArray> 
-}
+                      {/* BUTTON - Add More Product */}
+                      <div className="flex justify-end py-5">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            push({
+                              itemId: "",
+                              rate: null,
+                              quantity: null,
+                              estReceivingDate: null,
+                            })
+                          }
+                          className="bg-primary-main px-3 py-1 text-white rounded"
+                        >
+                          <AddCircleOutlineOutlinedIcon
+                            style={{ fontSize: "32px" }}
+                          />
+                        </button>
+                      </div>
+                    </>
+                  );
+                }}
+              </FieldArray>
+            }
           </div>
         </div>
       </div>

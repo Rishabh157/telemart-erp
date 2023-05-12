@@ -44,7 +44,6 @@ export type FormInitialValues = {
 const EditPurchaseOrderWrapper = (props: Props) => {
   const { state } = useLocation();
   const poCode = state?.poCode;
-  console.log(poCode)
   const params=useParams()
   const Id=params.id
 
@@ -57,8 +56,6 @@ const EditPurchaseOrderWrapper = (props: Props) => {
   const { selectedItems }: any = useSelector(
     (state: RootState) => state.purchaseOrder
   );
-  console.log(selectedItems);
-
   const sorteddata = selectedItems?.map((ele: any, index: any) => {
     return {
       id: ele._id,
@@ -75,7 +72,6 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     wareHouseId: selectedItems?.[0]?.wareHouseId,
     purchaseOrder: sorteddata,
   };
-  console.log(datas);
 
   useEffect(() => {
     disptach(setSelectedItems(data?.data));
@@ -171,7 +167,6 @@ const EditPurchaseOrderWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    //console.log(values);
     setApiStatus(true);
     const purchaseOrder = values.purchaseOrder.map((ele: any) => {
       return {

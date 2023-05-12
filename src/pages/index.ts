@@ -54,6 +54,7 @@ import EditSaleOrderWrapper from "./saleOrder/edit/EditSaleOrderWrapper";
 import SaleOrderListingWrapper from "./saleOrder/list/SaleOrderListingWrapper";
 import Test from "./test/Test";
 import UsersListingWrapper from "./users/list/UsersListingWrapper";
+import AddUserWrapper from "./users/add/AddUserWrapper";
 import AddVendorWrapper from "./vendors/add/AddVendorWrapper";
 import VendorsListingWrapper from "./vendors/list/VendorsListingWrapper";
 import ViewVendor from "./vendors/view";
@@ -142,6 +143,7 @@ export {
   SaleOrderListingWrapper,
   Test,
   UsersListingWrapper,
+  AddUserWrapper,
   AddVendorWrapper,
   VendorsListingWrapper,
   ViewVendor,

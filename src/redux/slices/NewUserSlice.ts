@@ -1,41 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { ProductGroupListResponse } from "src/models/ProductGroup.model";
+import { UsersNewListResponse } from "src/models";
 
-export interface ProductGroupBarcodeSliceStateType {
-  items: ProductGroupListResponse[] | [];
-  allProductGroupBarcode: ProductGroupListResponse[] | [];
-  selectedProductGroupBarcode: ProductGroupListResponse | null;
+export type InitialStateType = {
+  items: UsersNewListResponse[] | [];
+  allItems: UsersNewListResponse[] | [];
   totalItems: number;
+  selectedItem: UsersNewListResponse | [];
   isTableLoading: boolean;
   page: number;
   rowsPerPage: number;
   searchValue: string;
   sortValue: { field: string; value: "DESC" | "ASC" };
-  selectedId: string;
-}
+  selectedDealerId: string;
+};
 
-const initialState: ProductGroupBarcodeSliceStateType = {
+const initialState: InitialStateType = {
   items: [],
-  allProductGroupBarcode: [],
-  selectedProductGroupBarcode: null,
+  allItems: [],
   totalItems: 0,
+  selectedItem: [],
   isTableLoading: false,
   page: 1,
   rowsPerPage: 10,
   searchValue: "",
   sortValue: { field: "createdAt", value: "DESC" },
-  selectedId: "",
+  selectedDealerId: "",
 };
 
-const productGroupBarcodeSlice: any = createSlice({
-  name: "productGroupBarcode",
+const NewUserSlice: any = createSlice({
+  name: "NewUser",
   initialState,
   reducers: {
-    setItems: (
-      state,
-      action: PayloadAction<ProductGroupListResponse[] | []>
-    ) => {
+    setItems: (state, action: PayloadAction<UsersNewListResponse[] | []>) => {
       state.items = action.payload;
     },
     setPage: (state, action: PayloadAction<number>) => {
@@ -64,20 +61,14 @@ const productGroupBarcodeSlice: any = createSlice({
     setIsTableLoading: (state, action: PayloadAction<boolean>) => {
       state.isTableLoading = action.payload;
     },
-    setSelectedId: (state, action: PayloadAction<string>) => {
-      state.selectedId = action.payload;
+    setSelectedDealerId: (state, action: PayloadAction<string>) => {
+      state.selectedDealerId = action.payload;
     },
-    setAllProductGroupBarcode: (
-      state,
-      action: PayloadAction<ProductGroupListResponse[] | []>
-    ) => {
-      state.allProductGroupBarcode = action.payload;
+    setSelectedItem: (state, action: PayloadAction<UsersNewListResponse | []>) => {
+      state.selectedItem = action.payload;
     },
-    setSelectedProductGroupBarcode: (
-      state,
-      action: PayloadAction<ProductGroupListResponse | null>
-    ) => {
-      state.selectedProductGroupBarcode = action.payload;
+    setAllItems: (state, action: PayloadAction<UsersNewListResponse[] | []>) => {
+      state.allItems = action.payload;
     },
   },
 });
@@ -90,8 +81,8 @@ export const {
   setSortValue,
   setTotalItems,
   setIsTableLoading,
-  setSelectedId,
-  setSelectedProductGroupBarcode,
-  setAllProductGroupBarcode,
-} = productGroupBarcodeSlice.actions;
-export default productGroupBarcodeSlice.reducer;
+  setSelectedDealerId,
+  setSelectedItem,
+  setAllItems,
+} = NewUserSlice.actions;
+export default NewUserSlice.reducer;

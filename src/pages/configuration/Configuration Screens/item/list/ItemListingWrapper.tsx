@@ -37,22 +37,7 @@ const ItemListingWrapper = () => {
   const [currentId, setCurrentId] = useState("");
   const [deleteItem] = useDeleteItemsMutation();
 
-  const columns: columnTypes[] = [
-    {
-      field: "itemImage",
-      headerName: "Item Image",
-      flex: "flex-[1_1_0%]",
-      renderCell: (row: ItemListResponse) => (
-        <span>
-          {" "}
-          <img
-            style={{ height: 40 }}
-            src={row.itemImage}
-            alt="uploaded img"
-          ></img>{" "}
-        </span>
-      ),
-    },
+  const columns: columnTypes[] = [    
     {
       field: "itemCode",
       headerName: "Item Code",

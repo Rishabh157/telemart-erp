@@ -80,7 +80,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const newObject = barcodes?.filter(
       (f: any) => f?.barcodeNumber === barcode && f?.isUsed === false
     );
-    // console.log(newObject, "ll");
     // if (newObject?.length ? newObject[0]?.isUsed === true : barcodes?.length) {
     //   showToast("error", "Barcode already used");
     // }
@@ -113,7 +112,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
   }, [barcode]);
 
   useEffect(() => {
-    console.log(itemCount, filterBarcode?.length);
     if (itemCount && itemCount + 1 === filterBarcode?.length) {
       setIsOpenMoveToCartonDrawer(true);
     }

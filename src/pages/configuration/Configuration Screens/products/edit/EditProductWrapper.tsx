@@ -47,7 +47,6 @@ export type FormInitialValues = {
     depth: string;
   };
   description: string;
-  product_image: string;
   items: {
     itemId: string;
     itemQuantity: number;
@@ -88,7 +87,6 @@ const steps = [
         depth: number().required("Depth is required"),
       }),
       description: string().required("Product description is required"),
-      product_image: string().url().required("Product image is required"),
     }),
   },
   {
@@ -176,7 +174,7 @@ const breadcrumbs = [
     path: "/configurations/products",
   },
   {
-    label: "Edit Product",
+    label: "Update Product",
   },
 ];
 
@@ -248,7 +246,6 @@ const EditProductWrapper = () => {
     product_sub_category: selectedItem?.productSubCategory || "",
     productGroup: selectedItem?.productGroup || "",
     product_weight: selectedItem?.productWeight || "",
-    product_image: selectedItem?.productImage || "",
     dimensions: {
       height: selectedItem?.dimension?.height || "",
       width: selectedItem?.dimension?.width || "",
@@ -328,7 +325,6 @@ const EditProductWrapper = () => {
               width: Number(values.dimensions.width),
               depth: Number(values.dimensions.depth),
             },
-            productImage: values.product_image,
             description: values.description,
             item: values.items,
             faq: faqData,

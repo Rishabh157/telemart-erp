@@ -46,9 +46,9 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
   };
   return (
     <ClickAwayListener onClickAway={onClickAway}>
-      <div className="absolute top-[70px] rigth-[20px] w-[290px] shadow-lg rounded animate-[fade_0.5s_ease-in-out] z-50  ">
-        <div className="flex gap-5 items-center  bg-slate-50 h-[70px] px-8 border-b border-slate-300">
-        <div className="h-[35px]  flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
+      <div className="absolute top-[70px] rigth-[20px] w-[300px] shadow-lg rounded animate-[fade_0.5s_ease-in-out] z-50  ">
+        <div className="flex gap-5 items-center  bg-slate-50 h-[70px] px-6 border-b border-slate-300">
+        <div className="h-[35px] w-[35px] flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
           {fullName[0].toUpperCase()}
           </div>
           <div className="">
@@ -83,8 +83,7 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
                 handleSignOut();
               }}
             >
-              {" "}
-              Sign out{" "}
+              Sign out
             </div>
           </div>
         </div>
@@ -97,8 +96,7 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
                 signOutFromAllDevices();
               }}
             >
-              {" "}
-              Sign out From All Devices{" "}
+              Sign out From All Devices
             </div>
           </div>
         </div>

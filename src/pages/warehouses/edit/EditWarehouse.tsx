@@ -36,7 +36,7 @@ const EditWarehouse = ({
       path: "/warehouse",
     },
     {
-      label: "Edit Warehouse",
+      label: "Update Warehouse",
     },
   ];
 

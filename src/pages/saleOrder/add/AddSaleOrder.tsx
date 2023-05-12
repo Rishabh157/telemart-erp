@@ -9,6 +9,7 @@ import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { SelectOption } from "src/models/FormField/FormField.model";
 import { FormInitialValues } from "./AddSaleOrderWrapper";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -33,7 +34,6 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, }: Props) => {
   const { values, setFieldValue } = formikProps;
-  //console.log(formikProps)
 
   return (
     <div className="">
@@ -198,7 +198,8 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, }: Props) => {
                         }
                         className="bg-primary-main px-3 py-1 text-white rounded"
                       >
-                        Add More Product
+                        
+                    <AddCircleOutlineOutlinedIcon style={{fontSize: '32px'}}/>
                       </button>
                     </div>
                   </>

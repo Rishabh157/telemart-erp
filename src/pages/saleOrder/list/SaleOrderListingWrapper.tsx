@@ -43,7 +43,6 @@ const SaleOrderListingWrapper = () => {
     orderByValue: -1,
     isPaginationRequired: true,
   });
-  //console.log(data)
   useEffect(() => {
     if (!isFetching && !isLoading) {
       dispatch(setIsTableLoading(false));

@@ -87,16 +87,7 @@ const AddItem = ({ formikProps }: Props) => {
                     setFieldValue("itemWeight", inputValue);
                   }
                 }}
-              />
-
-              {/* Item Image */}
-              <ATMTextField
-                name="itemImage"
-                value={values.itemImage}
-                label="Item Image"
-                placeholder="Item Image"
-                onChange={(e) => setFieldValue("itemImage", e.target.value)}
-              />
+              />             
             </div>
           </div>
         </div>

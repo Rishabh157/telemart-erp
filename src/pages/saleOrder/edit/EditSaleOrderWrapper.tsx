@@ -48,7 +48,6 @@ const EditSaleOrderWrapper = (props: Props) => {
   );
 
   const { data, isLoading, isFetching } = useGetSalesOrderByIdQuery(Id);
-  //console.log(data?.data)
   useEffect(() => {
     dispatch(setSelectedItem(data?.data));
   }, [dispatch, data, isLoading, isFetching]);
@@ -134,7 +133,6 @@ const EditSaleOrderWrapper = (props: Props) => {
     companyId: selectedItem?.companyId || "",
   };
 
-  //console.log(initialValues, "initialValues");
 
   // Form Validation Schema
   const validationSchema = object({
@@ -158,7 +156,7 @@ const EditSaleOrderWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-    console.log("onSubmitHandler", values.productSalesOrder);
+  
 
     const productSalesOrder = values.productSalesOrder.map((ele: any) => {
       return {
@@ -168,7 +166,7 @@ const EditSaleOrderWrapper = (props: Props) => {
       };
     });
 
-    console.log(productSalesOrder);
+    
 
     setApiStatus(true);
     setTimeout(() => {

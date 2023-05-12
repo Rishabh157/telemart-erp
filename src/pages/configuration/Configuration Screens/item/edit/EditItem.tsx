@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
     path: "/configurations/item",
   },
   {
-    label: "Edit Item",
+    label: "Update Item",
   },
 ];
 
@@ -90,16 +90,7 @@ const EditItem = ({ formikProps, apiStatus }: Props) => {
                     setFieldValue("itemWeight", inputValue);
                   }
                 }}
-              />
-
-              {/* Item Image */}
-              <ATMTextField
-                name="itemImage"
-                value={values.itemImage}
-                label="Item Image"
-                placeholder="Item Image"
-                onChange={(e) => setFieldValue("itemImage", e.target.value)}
-              />
+              />              
             </div>
           </div>
         </div>

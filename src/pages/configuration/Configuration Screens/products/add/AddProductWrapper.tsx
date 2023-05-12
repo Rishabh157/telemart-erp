@@ -36,7 +36,6 @@ export type FormInitialValues = {
     depth: string;
   };
   description: string;
-  product_image: string;
   items: {
     itemId: string;
     itemQuantity: number;
@@ -77,7 +76,6 @@ const steps = [
         depth: number().required("Depth is required"),
       }),
       description: string().required("Product description is required"),
-      product_image: string().url().required("Product image is required"),
     }),
   },
   {
@@ -213,7 +211,6 @@ const AddProductWrapper = () => {
     product_sub_category: "",
     productGroup: "",
     product_weight: "",
-    product_image: "",
     dimensions: {
       height: "",
       width: "",
@@ -276,7 +273,6 @@ const AddProductWrapper = () => {
             width: Number(values.dimensions.width),
             depth: Number(values.dimensions.depth),
           },
-          productImage: values.product_image,
           description: values.description,
           item: values.items,
         

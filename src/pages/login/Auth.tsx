@@ -5,7 +5,6 @@ import LoginPage from "./LoginPage";
 const Auth = () => {
   const accessToken = localStorage.getItem("authToken");
   const navigation = useNavigate();
-
   useEffect(() => {
     if (accessToken) {
       navigation("/dashboard");
