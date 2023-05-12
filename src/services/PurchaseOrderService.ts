@@ -3,6 +3,7 @@ import apiSlice from "./ApiSlice";
 import {
   addPurchaseOrder,
   UpdatePurchaseOrder,
+  UpdatePOApprovalLevel,
 } from "src/models/PurchaseOrder.model";
 
 export const purchaseOrderApi = apiSlice.injectEndpoints({
@@ -76,6 +77,16 @@ export const purchaseOrderApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    //***** Update *****/
+    updatePoLevel: builder.mutation({
+      invalidatesTags: ["PurchaseOrder"],
+      query: ({ body, id }: UpdatePOApprovalLevel) => ({
+        url: `/purchase-order/approval-level/${id}`,
+
+        method: "PUT",
+        body,
+      }),
+    }),
     // **** GET BY ID
     getPurchaseOrderById: builder.query({
       providesTags: ["PurchaseOrder"],
@@ -107,22 +118,21 @@ export const purchaseOrderApi = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
-    getByPoCode:builder.query({
+    getByPoCode: builder.query({
       providesTags: ["PurchaseOrder"],
-      query: ( poCode ) => ({
+      query: (poCode) => ({
         url: `/purchase-order/get-by-po/${poCode}`,
-        method: "get",  
+        method: "get",
       }),
     }),
 
-    getByIdPurchaseOrder:builder.query({
+    getByIdPurchaseOrder: builder.query({
       providesTags: ["PurchaseOrder"],
-      query: ( id ) => ({
+      query: (id) => ({
         url: `/Purchase-order/${id}`,
-        method: "get",  
+        method: "get",
       }),
-    })
-
+    }),
   }),
 });
 export const {
@@ -135,6 +145,7 @@ export const {
   useDeletePurchaseOrderMutation,
   useExportPurchaseOrderDataMutation,
   useGetByPoCodeQuery,
-  useGetByIdPurchaseOrderQuery
+  useGetByIdPurchaseOrderQuery,
+  useUpdatePoLevelMutation,
   //useGetSubCategoryByParentQuery,
 } = purchaseOrderApi;

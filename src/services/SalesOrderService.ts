@@ -1,4 +1,8 @@
-import { AddSaleOrder, UpdateSaleOrder } from "src/models";
+import {
+  AddSaleOrder,
+  UpdateSaleOrder,
+  UpdateSOApprovalLevel,
+} from "src/models";
 import { PaginationType } from "src/models/common/paginationType";
 import apiSlice from "./ApiSlice";
 
@@ -42,6 +46,16 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
         body,
       }),
     }),
+    //***** Update *****/
+    updateSoLevel: builder.mutation({
+      invalidatesTags: ["SalesOrder"],
+      query: ({ body, id }: UpdateSOApprovalLevel) => ({
+        url: `/sales-order/approval-level/${id}`,
+
+        method: "PUT",
+        body,
+      }),
+    }),
 
     //***** Delete *****/
     deleteSalesOrder: builder.mutation({
@@ -64,10 +78,11 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
 });
 
 export const {
-    useGetPaginationSaleOrderQuery,
-    useGetSalesOrderByDealerIdQuery,
-    useAddSalesOrderMutation,
-    useUpdateSalesOrderMutation,
-    useGetSalesOrderByIdQuery,
-    useDeleteSalesOrderMutation,
-  } = SalesOrderApi;
+  useGetPaginationSaleOrderQuery,
+  useGetSalesOrderByDealerIdQuery,
+  useAddSalesOrderMutation,
+  useUpdateSalesOrderMutation,
+  useGetSalesOrderByIdQuery,
+  useDeleteSalesOrderMutation,
+  useUpdateSoLevelMutation,
+} = SalesOrderApi;
