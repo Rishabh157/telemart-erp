@@ -25,7 +25,6 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
-  console.log(values)
 
   return (
     <div className="">
@@ -79,7 +78,7 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
         {({ push, remove }) => (
           <div className="">
             {values?.tax?.map((taxes, taxIndex) => {
-              console.log(values.tax)
+          
               const {  taxPercent } = taxes;
 
               return (

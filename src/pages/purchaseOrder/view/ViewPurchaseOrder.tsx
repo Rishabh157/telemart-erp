@@ -26,7 +26,7 @@ const breadcrumbs: BreadcrumbType[] = [
 const ViewPurchaseOrder = ({ formikProps }: Props) => {
   const { values, setFieldValue } = formikProps;
   //const { estReceivingDate, itemName, quantity, rate } = values?.purchaseOrder;
-  console.log(values, "View PO");
+
 
   return (
     <div className="">

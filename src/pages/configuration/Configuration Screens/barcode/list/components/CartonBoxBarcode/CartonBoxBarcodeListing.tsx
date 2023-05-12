@@ -39,7 +39,7 @@ const CartonBoxBarcodeListing = ({
   const cartonBoxBarcodeState: any = useSelector(
     (state: RootState) => state.cartonBoxBarcode
   );
-console.log(cartonBoxBarcodeState?.items)
+
   //  const [isFilterOpen, setIsFilterOpen] = useState(false);
 const datas=cartonBoxBarcodeState?.items?.map((ele:any )=>{
   return{
@@ -50,7 +50,7 @@ const datas=cartonBoxBarcodeState?.items?.map((ele:any )=>{
   }
 
 })
-console.log(datas)
+
   const { page, rowsPerPage, totalItems, searchValue } = cartonBoxBarcodeState;
   const navigate=useNavigate()
 

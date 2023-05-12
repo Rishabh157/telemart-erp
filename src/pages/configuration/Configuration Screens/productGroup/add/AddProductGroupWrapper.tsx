@@ -71,11 +71,10 @@ const AddProductGroupWrapper = (props: Props) => {
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => { 
-    console.log(values)
     const taxData = values.tax.map((ele) => {
       return {  taxPercent: ele.taxPercent,  taxName:ele.taxName };
     });
-   // console.log("onSubmitHandler", values);
+   
     setApiStatus(true)
   
     setTimeout(() => {

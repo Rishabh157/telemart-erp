@@ -39,12 +39,12 @@ export type Tabs = {
   active?: boolean;
   index: number;
 };
-export type barcodecardType ={
-  _id?:string
-  label:String
-  barcodenumber:String
-  count?:string
-}
+export type barcodecardType = {
+  _id?: string;
+  label: String;
+  barcodenumber: String;
+  count?: string;
+};
 
 const BarcodeListingWrapper = () => {
   const barcodeState: any = useSelector((state: RootState) => state.barcode);
@@ -67,7 +67,6 @@ const BarcodeListingWrapper = () => {
     ],
     dateFilter: {},
 
-    
     orderBy: "createdAt",
     orderByValue: -1,
     isPaginationRequired: true,
@@ -181,7 +180,6 @@ const BarcodeListingWrapper = () => {
   const [selectedCartonBoxBarcodes, setSelectedCartonBoxBarcodes] =
     React.useState<barcodecardType[]>([]);
 
-
   const onCartonBoxBarcodeSelect = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     barcode: barcodecardType,
@@ -277,7 +275,6 @@ const BarcodeListingWrapper = () => {
                 }`}
               >
                 <div>
-                  
                   {" "}
                   <tab.icon className="text-xl" />{" "}
                 </div>
@@ -308,9 +305,7 @@ const BarcodeListingWrapper = () => {
             rows={cbitems}
             selectedCartonBoxBarcodes={selectedCartonBoxBarcodes}
             onCartonBoxBarcodeSelect={onCartonBoxBarcodeSelect}
-            onBarcodeClick={() =>
-           {}
-            }
+            onBarcodeClick={() => {}}
           />
         ) : (
           <ProductGroupListing
