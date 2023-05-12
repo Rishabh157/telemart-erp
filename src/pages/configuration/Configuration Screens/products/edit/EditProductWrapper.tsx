@@ -237,7 +237,7 @@ const EditProductWrapper = () => {
     }
   }, [languageData, lIsLoading, lIsFetching]);
 
-  console.log(selectedItem);
+ 
   // From Initial Values
   const initialValues: FormInitialValues = {
     product_code: selectedItem?.productCode || "",

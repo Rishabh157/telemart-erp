@@ -77,8 +77,6 @@ const UsersListingWrapper = () => {
     isPaginationRequired: true,
   });
 
-  console.log(data, "data");
-
   useEffect(() => {
     if (!isFetching && !isLoading) {
       dispatch(setIsTableLoading(false));
