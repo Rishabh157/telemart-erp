@@ -41,15 +41,15 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
     singnOut();
   };
   const signOutFromAllDevices = () => {
-    logoutFromAll({});
+    logoutFromAll({ logoutAll: true });
     singnOut();
   };
   return (
     <ClickAwayListener onClickAway={onClickAway}>
       <div className="absolute top-[70px] rigth-[20px] w-[300px] shadow-lg rounded animate-[fade_0.5s_ease-in-out] z-50  ">
         <div className="flex gap-5 items-center  bg-slate-50 h-[70px] px-6 border-b border-slate-300">
-        <div className="h-[35px] w-[35px] flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
-          {fullName[0].toUpperCase()}
+          <div className="h-[35px] w-[35px] flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
+            {fullName[0].toUpperCase()}
           </div>
           <div className="">
             <div className="text-slate-700 capitalize  "> {fullName} </div>

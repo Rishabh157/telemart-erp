@@ -10,7 +10,7 @@ import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from "./EditPurchaseOrderWrapper";
 import ATMDatePicker from "src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker";
 import { SelectOption } from "src/models/FormField/FormField.model";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import { HiPlus } from "react-icons/hi";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -50,7 +50,7 @@ const EditPurchaseOrder = ({
   };
 
   const { values, setFieldValue } = formikProps;
-  console.log(values);
+
 
   return (
     <div className="">
@@ -227,7 +227,7 @@ const EditPurchaseOrder = ({
                       </div>
 
                       {/* BUTTON - Add More Product */}
-                      <div className="flex justify-end py-5">
+                      <div className="flex justify-self-start py-5">
                         <button
                           type="button"
                           onClick={() =>
@@ -238,11 +238,10 @@ const EditPurchaseOrder = ({
                               estReceivingDate: null,
                             })
                           }
-                          className="bg-primary-main px-3 py-1 text-white rounded"
+                          className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+
                         >
-                          <AddCircleOutlineOutlinedIcon
-                            style={{ fontSize: "32px" }}
-                          />
+                            <HiPlus size="20" />  
                         </button>
                       </div>
                     </>

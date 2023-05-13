@@ -6,7 +6,7 @@ import { FormInitialValues } from "../../AddProductWrapper";
 import { FieldArray } from "formik";
 import { MdDeleteOutline } from "react-icons/md";
 import { DropdownOptions } from "./StepAddItemsWrapper";
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import { HiPlus } from "react-icons/hi";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -85,7 +85,7 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
               );
             })}
 
-            <div className="flex justify-end p-5">
+            <div className="flex justify-self-start p-5">
               <button
                 type="button"
                 onClick={() =>
@@ -94,9 +94,10 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
                     itemQuantity: "",
                   })
                 }
-                className="bg-primary-main px-3 py-1 text-white rounded"
+                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+
               >
-                <AddCircleOutlineOutlinedIcon style={{fontSize: '32px'}}/>
+              <HiPlus size="20" />   
               </button>
             </div>
           </div>

@@ -3,7 +3,6 @@ export type ProductSubCategoryListResponse = {
   subCategoryName: string;
   parentCategory: string;
   parentCategoryLabel: string;
-  applicableTaxes: string;
   applicableTaxesLabel: string;
   hsnCode: string;
   companyId: string;
@@ -19,7 +18,6 @@ export type AddProductSubCategory = {
   subCategoryCode: string;
   subCategoryName: string;
   parentCategory: string;
-  applicableTaxes: string;
   hsnCode: string;
   companyId: string;
 };
@@ -29,7 +27,6 @@ export type UpdateProductSubCategory = {
     subCategoryCode: string;
     subCategoryName: string;
     parentCategory: string;
-    applicableTaxes: string;
     hsnCode: string;
     companyId: string;
   };

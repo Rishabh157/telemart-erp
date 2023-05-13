@@ -112,7 +112,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
   }, [barcode]);
 
   useEffect(() => {
-    console.log(itemCount, filterBarcode?.length);
     if (itemCount && itemCount + 1 === filterBarcode?.length) {
       setIsOpenMoveToCartonDrawer(true);
     }

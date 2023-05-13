@@ -6,7 +6,10 @@ import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import PurchaseOrderListing from "./PurchaseOrderListing";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
-import { useGetPurchaseOrderQuery } from "src/services/PurchaseOrderService";
+import {
+  useGetPurchaseOrderQuery,
+  useUpdatePoLevelMutation,
+} from "src/services/PurchaseOrderService";
 import {
   setIsTableLoading,
   setItems,
@@ -14,14 +17,19 @@ import {
 } from "src/redux/slices/PurchaseOrderSlice";
 
 import { HiDotsHorizontal } from "react-icons/hi";
+import { Chip, Stack } from "@mui/material";
+import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
+import { showToast } from "src/utils";
 
 const PurchaseOrderListingWrapper = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [updatePoLevel] = useUpdatePoLevelMutation();
   const productOrderState: any = useSelector(
     (state: RootState) => state.purchaseOrder
   );
+  const { userData }: any = useSelector((state: RootState) => state.auth);
   const { page, rowsPerPage, searchValue, items } = productOrderState;
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentId, setCurrentId] = useState("");
@@ -43,6 +51,54 @@ const PurchaseOrderListingWrapper = () => {
     isPaginationRequired: true,
   });
 
+  const handleComplete = (_id: string, level: number) => {
+    const currentDate = new Date().toLocaleDateString("en-GB");
+    if (level === 1) {
+      updatePoLevel({
+        body: {
+          approval: {
+            approvalLevel: level,
+            approvalByName: userData?.userName,
+            approvalById: userData?.userId,
+            time: currentDate,
+          },
+        },
+        id: _id,
+      }).then((res: any) => {
+        if ("data" in res) {
+          if (res?.data?.status) {
+            showToast("success", "Level 1 approved successfully!");
+          } else {
+            showToast("error", res?.data?.message);
+          }
+        } else {
+          showToast("error", "Something went wrong");
+        }
+      });
+    } else {
+      updatePoLevel({
+        body: {
+          approval: {
+            approvalLevel: level,
+            approvalByName: userData?.userName,
+            approvalById: userData?.userId,
+            time: currentDate,
+          },
+        },
+        id: _id,
+      }).then((res: any) => {
+        if ("data" in res) {
+          if (res?.data?.status) {
+            showToast("success", "Level 2 approved successfully!");
+          } else {
+            showToast("error", res?.data?.message);
+          }
+        } else {
+          showToast("error", "Something went wrong");
+        }
+      });
+    }
+  };
   const columns: columnTypes[] = [
     {
       field: "poCode",
@@ -85,8 +141,8 @@ const PurchaseOrderListingWrapper = () => {
       },
     },
     {
-      field: "Ware House",
-      headerName: "warer house",
+      field: "warehouseLabel",
+      headerName: "ware house",
       flex: "flex-[1.5_1.5_0%]",
       renderCell: (row: PurchaseOrderListResponse) => {
         return <span> {row.warehouseLabel} </span>;
@@ -99,6 +155,99 @@ const PurchaseOrderListingWrapper = () => {
       renderCell: (row: PurchaseOrderListResponse) => {
         return <span> {row.purchaseOrder.estReceivingDate} </span>;
       },
+    },
+    {
+      field: "approval.approvalLevel",
+      headerName: "Approval level",
+      flex: "flex-[1_1_0%]",
+      renderCell: (row: PurchaseOrderListResponse) => {
+        const approvalLength = row?.approval?.length;
+        return (
+          <span>
+            {" "}
+            <Stack direction="row" spacing={1}>
+              {approvalLength === 0 ? (
+                <button
+                  id="btn"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    showConfirmationDialog({
+                      title: "Approve level 1",
+                      text: "Do you want to Approve PO  ?",
+                      showCancelButton: true,
+                      next: (res) => {
+                        return res.isConfirmed
+                          ? handleComplete(row?._id, 1)
+                          : false;
+                      },
+                    });
+                  }}
+                >
+                  <Chip
+                    label="Level 0"
+                    color="error"
+                    variant="outlined"
+                    size="small"
+                    clickable={true}
+                  />
+                </button>
+              ) : approvalLength === 1 ? (
+                <button
+                  id="btn"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    showConfirmationDialog({
+                      title: "Approve level 2",
+                      text: "Do you want to Approve PO  ?",
+                      showCancelButton: true,
+                      next: (res) => {
+                        return res.isConfirmed
+                          ? handleComplete(row?._id, 2)
+                          : false;
+                      },
+                    });
+                  }}
+                >
+                  <Chip
+                    label="Level 1"
+                    color="warning"
+                    variant="outlined"
+                    size="small"
+                    clickable={true}
+                  />
+                </button>
+              ) : (
+                <button
+                  id="btn"
+                  disabled={approvalLength >= 2}
+                  className="cursor-pointer"
+                >
+                  <Chip
+                    label="Approved"
+                    color="success"
+                    variant="outlined"
+                    size="small"
+                    clickable={true}
+                  />
+                </button>
+              )}
+            </Stack>{" "}
+          </span>
+        );
+      },
+      // renderCell: (row: PurchaseOrderListResponse) => {
+      //   const approvalLength = row?.approval?.length;
+      //   return (
+      //     <span>
+      //       {" "}
+      //       {approvalLength === 0
+      //         ? "no lvl"
+      //         : approvalLength
+      //         ? row?.approval[0]?.approvalLevel
+      //         : row?.approval[1]?.approvalLevel}{" "}
+      //     </span>
+      //   );
+      // },
     },
     {
       field: "actions",

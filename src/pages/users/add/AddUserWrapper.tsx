@@ -26,7 +26,6 @@ const AddUserWrapper = (props: Props) => {
   const [addNewUser] = useAddNewUserMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
   
-  console.log(userData?.companyId)
 
   const initialValues: FormInitialValues = {
     firstName: "",

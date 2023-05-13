@@ -9,7 +9,7 @@ import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { SelectOption } from "src/models/FormField/FormField.model";
 import { FormInitialValues } from "./AddSaleOrderWrapper";
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import { HiPlus } from "react-icons/hi";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -186,7 +186,7 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, }: Props) => {
                     </div>
 
                     {/* BUTTON - Add More Product */}
-                    <div className="flex justify-end py-5">
+                    <div className="flex justify-self-start py-5">
                       <button
                         type="button"
                         onClick={() => 
@@ -196,10 +196,9 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, }: Props) => {
                             quantity: null,
                           })                          
                         }
-                        className="bg-primary-main px-3 py-1 text-white rounded"
-                      >
+                        className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "                      >
                         
-                    <AddCircleOutlineOutlinedIcon style={{fontSize: '32px'}}/>
+                        <HiPlus size="20" />  
                       </button>
                     </div>
                   </>

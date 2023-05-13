@@ -13,7 +13,6 @@ type Props = {
   formikProps: FormikProps<FormInitialValues>;
   dropdownOptions: {
     parentCategoryOptions: SelectOption[];
-    applicableTaxesOptions: SelectOption[];
   };
   apiStatus: boolean;
 };
@@ -106,15 +105,6 @@ const AddProductSubCategory = ({
                 label="Parent Category"
               />
 
-              <ATMSelect
-                name="applicableTaxes"
-                value={values.applicableTaxes}
-                onChange={(e) => {
-                  setFieldValue("applicableTaxes", e.target.value);
-                }}
-                options={dropdownOptions.applicableTaxesOptions}
-                label="Applicable Taxes"
-              />
 
               {/* Field 3 */}
               <ATMTextField

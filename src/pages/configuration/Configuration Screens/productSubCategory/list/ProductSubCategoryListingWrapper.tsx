@@ -61,15 +61,6 @@ const ProductSubCategoryListingWrapper = () => {
         return <span> {row.parentCategoryLabel} </span>;
       },
     },
-
-    {
-      field: "applicableTaxes",
-      headerName: "Applicable Taxes ",
-      flex: "flex-[1.5_1.5_0%]",
-      renderCell: (row: ProductSubCategoryListResponse) => {
-        return <span> {row.applicableTaxesLabel} </span>;
-      },
-    },
     {
       field: "hsnCode",
       headerName: "HSN Code ",

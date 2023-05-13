@@ -5,6 +5,7 @@ import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from "../../AddDealerWrapper";
 import { FieldType } from "./StepAddDocumentsWrapper";
 import { MdDeleteOutline } from "react-icons/md";
+import { HiPlus } from "react-icons/hi";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -12,8 +13,9 @@ type Props = {
 };
 
 const StepAddDocuments = ({ formikProps, formFields }: Props) => {
-  const { values, setFieldValue }: { values: any; setFieldValue: any } =
+  const { values, setFieldValue,}: { values: any; setFieldValue: any;  } =
     formikProps;
+   
 
   return (
     <div className="">
@@ -142,7 +144,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                 }
               )}
 
-              <div className="flex justify-end px-6 py-6">
+              <div className="flex justify-self-start px-6 py-6">
                 <button
                   type="button"
                   onClick={() =>
@@ -151,9 +153,10 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                       documentFile: "",
                     })
                   }
-                  className="px-3 py-1 rounded bg-primary-main text-white"
-                >
-                  Add New
+                  className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                 >
+                   <HiPlus size="20" />
+                   
                 </button>
               </div>
             </>

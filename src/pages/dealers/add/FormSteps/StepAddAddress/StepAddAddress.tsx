@@ -40,7 +40,7 @@ const StepAddAddress = ({
   formFields,
   dropdownOptions,
 }: Props) => {
-  const { values, setFieldValue }: { values: any; setFieldValue: any } =
+  const { values, setFieldValue }: { values: any; setFieldValue: any;} =
     formikProps;
 
   return (
@@ -91,6 +91,7 @@ const StepAddAddress = ({
                         placeholder={placeholder}
                         className="shadow bg-white rounded"
                       />
+                      
                     );
 
                   case "select":

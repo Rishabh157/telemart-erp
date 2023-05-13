@@ -5,6 +5,7 @@ import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTex
 
 import { FormInitialValues } from "../../AddVendorWrapper";
 import { FieldType } from "./StepAddContactWrapper";
+import { HiPlus } from "react-icons/hi";
 
 
 type Props = {
@@ -58,7 +59,6 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                             name={`contact_informations[${contactInformationIndex}].name`}
                             value={name}
                             onChange={(e) => {
-                              console.log(e.target.value);
                               setFieldValue(
                                 `contact_informations[${contactInformationIndex}].name`,
                                 e.target.value
@@ -149,7 +149,7 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                   );
                 }
               )}
-              <div className="flex justify-end p-5">
+              <div className="flex justify-self-start p-5">
                 <button
                   type="button"
                   onClick={() =>
@@ -162,9 +162,9 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                       landLine: "",
                     })
                   }
-                  className="bg-primary-main px-3 py-1 text-white rounded"
+                  className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center " 
                 >
-                  Add New
+                  <HiPlus size="20" />  
                 </button>
               </div>
             </div>

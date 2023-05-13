@@ -1,6 +1,10 @@
 export type ProductGroupListResponse = {
   groupName: string;
   companyId: string;
+  tax: {
+    taxName: string;
+    taxPercent: number;
+  }[];
   is_active: boolean;
   is_deleted: boolean;
   createdAt: string;
@@ -12,12 +16,20 @@ export type ProductGroupListResponse = {
 export type AddProductGroup = {
   groupName: string;
   companyId:string;
+  tax: {
+    taxName: string;
+    taxPercent: number;
+  }[];
 
 };
 
 export type UpdateProductGroup = {
   body: {
     groupName: string;
+    tax: {
+      taxName: string;
+      taxPercent: number;
+    }[];
     companyId:string;
 
   };

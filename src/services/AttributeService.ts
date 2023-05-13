@@ -79,6 +79,8 @@ export const attributesApi = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+
+ 
   }),
 });
 export const {

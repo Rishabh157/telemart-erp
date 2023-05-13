@@ -98,7 +98,8 @@ export const barcodeApi = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
-  }),
+    
+}),
 });
 export const {
   useGetBarcodeQuery,

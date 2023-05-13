@@ -4,38 +4,39 @@ export type PurchaseOrderListResponse = {
   vendorLabel: string;
   warehouseLabel: string;
   wareHouseId: string;
-  isEditable:boolean;
-  purchaseOrder: 
-    {
-      itemName: string;
-      itemId: string;
-      rate: number;
-      quantity: number;
-      estReceivingDate: string;
-    };
- 
-  is_active: boolean;
-  is_deleted: boolean;
+  isEditable: boolean;
+  purchaseOrder: {
+    itemName: string;
+    itemId: string;
+    rate: number;
+    quantity: number;
+    estReceivingDate: string;
+  };
+  approval: {
+    approvalLevel: number;
+    approvalByName: string;
+    approvalById: string;
+    time: string;
+  }[];
+  isActive: boolean;
+  isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
   _id: string;
   __v: number;
 };
 
-;
-
 export type addPurchaseOrder = {
   poCode: string;
   vendorId: string;
   wareHouseId: string;
   isEditable: boolean;
-  purchaseOrder: 
-    {
-      itemId: string;
-      rate: number;
-      quantity: number;
-      estReceivingDate: string;
-    }[]
+  purchaseOrder: {
+    itemId: string;
+    rate: number;
+    quantity: number;
+    estReceivingDate: string;
+  }[];
   companyId: string;
 };
 
@@ -44,15 +45,26 @@ export type UpdatePurchaseOrder = {
     poCode: string;
     vendorId: string;
     wareHouseId: string;
-    isEditable:boolean;
-    purchaseOrder: 
-        {
-          itemId: string;
-          rate: number;
-          quantity: number;
-          estReceivingDate: string;
-        }[]
+    isEditable: boolean;
+    purchaseOrder: {
+      itemId: string;
+      rate: number;
+      quantity: number;
+      estReceivingDate: string;
+    }[];
     companyId: string;
+  };
+  id: string;
+};
+
+export type UpdatePOApprovalLevel = {
+  body: {
+    approval: {
+      approvalLevel: number;
+      approvalByName: string;
+      approvalById: string;
+      time: string;
+    };
   };
   id: string;
 };

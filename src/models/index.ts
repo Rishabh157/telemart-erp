@@ -86,6 +86,7 @@ export type {
 } from "./Products.model";
 export type { GRNListResponse, AddGRN, UpdateGRN } from "./GRN.model";
 export type {
+  UpdateSOApprovalLevel,
   SaleOrderListResponse,
   AddSaleOrder,
   UpdateSaleOrder,

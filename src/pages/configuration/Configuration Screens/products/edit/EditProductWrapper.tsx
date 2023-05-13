@@ -6,7 +6,6 @@ import StepEditProductDetailsWrapper from "./FormSteps/StepEditProductDetails/St
 import EditProduct from "./EditProduct";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 import StepEditItemsWrapper from "./FormSteps/StepEditItems/StepEditItemsWrapper";
-import StepEditTaxWrapper from "./FormSteps/StepEditTax/StepEditTaxWrapper";
 import StepEditFAQsWrapper from "./FormSteps/StepEditFAQs/StepEditFAQsWrapper";
 import StepEditVideoWrapper from "./FormSteps/StepEditVideo/StepEditVideoWrapper";
 import StepEditCallScriptWrapper from "./FormSteps/StepEditCallScript/StepEditCallScriptWrapper";
@@ -50,10 +49,6 @@ export type FormInitialValues = {
   items: {
     itemId: string;
     itemQuantity: number;
-  }[];
-  taxes: {
-    taxDetail: { tax_name: string; id: string };
-    tax_rate: number;
   }[];
   FAQs: {
     question: string;
@@ -104,25 +99,6 @@ const steps = [
             .typeError("Quantity should be number")
             .min(1, "Quantity should be greater than or equal to 1")
             .required("Please enter quantity"),
-        })
-      ),
-    }),
-  },
-  {
-    label: "Tax",
-    component: StepEditTaxWrapper,
-    validationSchema: object({
-      taxes: array().of(
-        object().shape({
-          taxDetail: object()
-            .shape({
-              tax_name: string().required(),
-              id: string().required(),
-            })
-            .required("Please select item name"),
-          tax_rate: number()
-            .typeError("Tax rate should be a number")
-            .required("Please enter tax rate"),
         })
       ),
     }),
@@ -241,7 +217,7 @@ const EditProductWrapper = () => {
     }
   }, [languageData, lIsLoading, lIsFetching]);
 
-  console.log(selectedItem);
+ 
   // From Initial Values
   const initialValues: FormInitialValues = {
     product_code: selectedItem?.productCode || "",
@@ -262,12 +238,7 @@ const EditProductWrapper = () => {
         itemQuantity: ele?.itemQuantity,
       };
     }),
-    taxes: selectedItem?.tax?.map((ele: any) => {
-      return {
-        taxDetail: { tax_name: ele?.taxName, id: ele?.taxId },
-        tax_rate: ele?.taxPercent,
-      };
-    }),
+  
 
     FAQs: selectedItem?.faq || [
       {
@@ -313,9 +284,7 @@ const EditProductWrapper = () => {
         return rest; // return the new object without the _id property
       });
 
-      const taxData = values.taxes.map((ele) => {
-        return { taxId: ele.taxDetail.id, taxPercent: ele.tax_rate };
-      });
+     
       const callScriptData = values.call_scripts.map((ele) => {
         return {
           language: ele?.language,
@@ -338,7 +307,6 @@ const EditProductWrapper = () => {
             },
             description: values.description,
             item: values.items,
-            tax: taxData,
             faq: faqData,
             video: videoData,
             callScript: callScriptData,

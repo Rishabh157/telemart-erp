@@ -70,9 +70,10 @@ export const userApi = apiSlice.injectEndpoints({
     //***** LOG OUT FROM ALL DEVICES *****/
     logoutFromAll: builder.mutation({
       invalidatesTags: ["user"],
-      query: () => ({
+      query: (body: { logoutAll: boolean }) => ({
         url: "/admin/logout",
         method: "POST",
+        body,
       }),
     }),
 
