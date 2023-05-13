@@ -41,12 +41,12 @@ const tabsData = [
   {
     label: "PinCode",
     icon: MdOutlinePeopleAlt,
-    path: "PinCode",
+    path: "pincode",
   },
   {
     label: "Schemes",
     icon: MdOutlinePeopleAlt,
-    path: "Schemes",
+    path: "scheme",
   },
 ];
 

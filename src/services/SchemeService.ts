@@ -7,11 +7,11 @@ export const schemeApi = apiSlice.injectEndpoints({
     //***** GET *****/
     getScheme: builder.query({
       providesTags: ["scheme"],
-      query: (body: PaginationType) => ({
+      query: () => ({
         url: "/scheme",
 
         method: "GET",
-        body,
+        
       }),
     }),
 

@@ -43,6 +43,8 @@ import DealerActivityTabWrapper from "./dealers/view/tabs/DealerActivityTab/Deal
 import DealerGeneralInformationTabWrapper from "./dealers/view/tabs/DealerGeneralInformationTab/DealerGeneralInformationTabWrapper";
 import DealerWarehouseTabWrapper from "./dealers/view/tabs/DealerWarehouseTab/DealerWarehouseTabWrapper";
 import DealerSalesOrderTabWrapper from "./dealers/view/tabs/DealerSalesOrderTab/DealerSalesOrderTabWrapper";
+import DealerPinCodeTabWrapper from "./dealers/view/tabs/DealerPinCodeTab/DealerPinCodeTabWrapper";
+import DealerSchemeTabWrapper from "./dealers/view/tabs/DealerSchemeTab/DealerSchemeTabWrapper";
 import InwardInventoryWrapper from "./inventories/inward-inventory/InwardInventoryWrapper";
 import InventoryListingWrapper from "./inventories/list/InventoryListingWrapper";
 import LoginPage from "./login/LoginPage";
@@ -132,6 +134,8 @@ export {
   DealerGeneralInformationTabWrapper,
   DealerWarehouseTabWrapper,
   DealerSalesOrderTabWrapper,
+  DealerPinCodeTabWrapper,
+  DealerSchemeTabWrapper,
   InwardInventoryWrapper,
   InventoryListingWrapper,
   LoginPage,

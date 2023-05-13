@@ -37,8 +37,10 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
       setAllOtions(attributeOptions);
     }
   }, [flag, attributeOptions]);
+
   const { values, setFieldValue } = formikProps;
   const options: { label: string; value: string }[] = allOptions;
+  
   const transferListProps = {
     name: "attributes",
     options,

@@ -12,10 +12,6 @@ import {
   setTotalItems,
 } from "src/redux/slices/saleOrderSlice";
 import { AppDispatch, RootState } from "src/redux/store";
-// import {
-//   useDeleteSalesOrderMutation,
-//   useGetSalesOrderByDealerIdQuery,
-// } from "src/services/SalesOrderService";
 import { useGetSalesOrderByDealerIdQuery } from "src/services/SalesOrderService";
 import SaleOrderListing from "src/pages/saleOrder/list/SaleOrderListing";
 import { useParams } from "react-router-dom";
@@ -28,7 +24,6 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
   );
   const params = useParams();
   const dealerId: any = params.dealerId;
-  //alert(dealerId);
   const dispatch = useDispatch<AppDispatch>();
   // const { page, rowsPerPage, searchValue, items } = salesOrderState;
   const { items } = salesOrderState;

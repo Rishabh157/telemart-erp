@@ -4,11 +4,29 @@ export type {
   UpdateDealer,
 } from "./Dealer.model";
 export type {
+  DealersSchemeAdd,
+  DealersSchemeListResponse,
+  UpdateDealersScheme,
+} from "./DealerScheme.model";
+export type {
+  DealersPincodeAdd,
+  DealersPincodeListResponse,
+  UpdateDealersPincode,
+} from "./DealerPinCode.model";
+export type {
   VendorsListResponse,
   AddVendor,
   UpdateVendor,
 } from "./Vendors.model";
-export type { UsersListResponse, AddUser, UpdateUser, ChangeCompany, AddNewUser, UpdateNewUser, UsersNewListResponse } from "./Users.model "; 
+export type {
+  UsersListResponse,
+  AddUser,
+  UpdateUser,
+  ChangeCompany,
+  AddNewUser,
+  UpdateNewUser,
+  UsersNewListResponse,
+} from "./Users.model "; 
 export type {
   CompaniesListResponse,
   AddCompany,
