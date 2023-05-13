@@ -13,7 +13,6 @@ export type DropdownOptions = {
 };
 
 const StepAddCallScriptWrapper = ({ formikProps, allLanguages }: Props) => {
-  console.log(allLanguages, "allLanguages");
   const langaugeOption = allLanguages?.map((ele: any) => {
     return { label: ele?.languageName, value: ele?._id };
   });

@@ -51,8 +51,8 @@ const AccordianContact = (data:any) => {
               name=""
               value={contact?.email}
               onChange={(e) => {}}
-              label={"State"}
-              placeholder={"State"}
+              label={"Email"}
+              placeholder={"Email"}
               className="shadow bg-white rounded"
               disabled={true}
             />
@@ -60,7 +60,7 @@ const AccordianContact = (data:any) => {
               name=""
               value={contact?.mobileNumber}
               onChange={(e) => {}}
-              label={"District"}
+              label={"Mobile Number"}
               placeholder={"District"}
               className="shadow bg-white rounded"
               disabled={true}
@@ -70,8 +70,8 @@ const AccordianContact = (data:any) => {
               name=""
               value={contact?.landLine}
               onChange={(e) => {}}
-              label={"Pincode"}
-              placeholder={"Pincode"}
+              label={"LandLine"}
+              placeholder={"LandLine"}
               className="shadow bg-white rounded"
               disabled={true}
             />

@@ -6,6 +6,7 @@ import { FormInitialValues } from "../../EditVendorWrapper";
 import { MdDeleteOutline } from "react-icons/md";
 import { Field, SelectOption } from "src/models/FormField/FormField.model";
 import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
+import { HiPlus } from "react-icons/hi";
 
 type FieldType = Field<"accountTypeOptions">;
 
@@ -135,7 +136,7 @@ const StepEditBankDetails = ({
               )}
 
               {/*BUTTON - Edit New */}
-              <div className="flex justify-end p-5">
+              <div className="flex justify-self-start p-5">
                 <button
                   type="button"
                   onClick={() =>
@@ -149,9 +150,9 @@ const StepEditBankDetails = ({
                       cancelled_cheque: "",
                     })
                   }
-                  className="bg-primary-main px-3 py-1 text-white rounded"
+                  className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center " 
                 >
-                  Add New
+            <HiPlus size="20" />
                 </button>
               </div>
             </div>

@@ -2,9 +2,7 @@ import React, { useEffect } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "src/redux/store";
-import { useNavigate } from "react-router-dom";
 import { columnTypes } from "src/components/UI/atoms/ATMTable/ATMTable";
-import { UsersListResponse } from "src/models";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { useGetNewUsersQuery } from "src/services/UserServices";
 import {
@@ -56,10 +54,9 @@ const columns: columnTypes[] = [
 const UsersListingWrapper = () => {
   const userState: any = useSelector((state: RootState) => state.newUser);
 
-  const { items, isTableLoading, page, rowsPerPage, searchValue } = userState;
+  const { items, page, rowsPerPage, searchValue } = userState;
 
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
   const { data, isFetching, isLoading } = useGetNewUsersQuery({
     limit: rowsPerPage,
     searchValue: searchValue,

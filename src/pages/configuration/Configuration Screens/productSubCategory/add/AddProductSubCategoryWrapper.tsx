@@ -19,7 +19,6 @@ export type FormInitialValues = {
   subCategoryCode: string;
   subCategoryName: string;
   parentCategory: string;
-  applicableTaxes: string;
   hsnCode: string;
 };
 
@@ -31,7 +30,7 @@ const AddProductSubCategoryWrapper = (props: Props) => {
   const { allProductCategory }: any = useSelector(
     (state: RootState) => state?.productCategory
   );
-  const { allTaxes }: any = useSelector((state: RootState) => state?.tax);
+  // const { allTaxes }: any = useSelector((state: RootState) => state?.tax);
 
   const {
     data: pcData,
@@ -50,7 +49,6 @@ const AddProductSubCategoryWrapper = (props: Props) => {
     subCategoryCode: "",
     subCategoryName: "",
     parentCategory: "",
-    applicableTaxes: "",
     hsnCode: "",
   };
 
@@ -59,7 +57,6 @@ const AddProductSubCategoryWrapper = (props: Props) => {
     subCategoryCode: string().required("Sub Category Code is required"),
     subCategoryName: string().required("Please select a Sub Category Name"),
     parentCategory: string().required("Please select a parent Category Name"),
-    applicableTaxes: string().required("Please select applicable tax"),
     hsnCode: string().required(" HSN Code is required"),
   });
 
@@ -70,11 +67,9 @@ const AddProductSubCategoryWrapper = (props: Props) => {
       subCategoryCode: values.subCategoryCode,
       subCategoryName: values.subCategoryName,
       parentCategory: values.parentCategory,
-      applicableTaxes: values.applicableTaxes,
       hsnCode: values.hsnCode,
-
       companyId: userData?.companyId || "",
-    }).then((res) => {
+    }).then((res:any) => {
       if ("data" in res) {
         if (res?.data?.status) {
           showToast("success", "Product sub category added successfully!");
@@ -100,12 +95,12 @@ const AddProductSubCategoryWrapper = (props: Props) => {
   const parentCategoryOptions = allProductCategory?.map((ele: any) => {
     return { label: ele?.categoryName, value: ele?._id };
   });
-  const applicableTaxesOptions = allTaxes?.map((ele: any) => {
-    return { label: ele?.taxName, value: ele?._id };
-  });
+  // const applicableTaxesOptions = allTaxes?.map((ele: any) => {
+  //   return { label: ele?.taxName, value: ele?._id };
+  // });
   const dropdownOptions = {
     parentCategoryOptions: parentCategoryOptions,
-    applicableTaxesOptions: applicableTaxesOptions,
+
   };
 
   return (

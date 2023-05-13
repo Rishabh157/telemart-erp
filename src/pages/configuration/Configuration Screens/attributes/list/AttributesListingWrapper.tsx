@@ -36,7 +36,7 @@ const AttributesListingWrapper = () => {
       headerName: "Attribute Name",
       flex: "flex-[1_1_0%]",
       renderCell: (row: AttributesListResponse) => (
-        <span> {row.attributeName} </span>
+        <span className="capitalize"> {row.attributeName} </span>
       ),
     },
 

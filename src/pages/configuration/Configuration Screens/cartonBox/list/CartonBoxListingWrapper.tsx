@@ -43,7 +43,7 @@ const CartonBoxListingWrapper = () => {
       headerName: "Box Name",
       flex: "flex-[1.5_1.5_0%]",
       renderCell: (row: CartonBoxListResponse) => {
-        return <span> {row.boxName} </span>;
+        return <span> {row?.boxName} </span>;
       },
     },
     {
@@ -51,7 +51,7 @@ const CartonBoxListingWrapper = () => {
       headerName: "Inner Items Count",
       flex: "flex-[1_1_0%]",
       renderCell: (row: CartonBoxListResponse) => (
-        <span> {row.innerItemCount} </span>
+        <span> {row?.innerItemCount} </span>
       ),
     },
     {
@@ -62,8 +62,8 @@ const CartonBoxListingWrapper = () => {
         return (
           <span>
             {" "}
-            {row.dimension.height} * {row.dimension.width} *{" "}
-            {row.dimension.depth}{" "}
+            {row.dimension?.height} * {row.dimension?.width} *{" "}
+            {row.dimension?.depth}{" "}
           </span>
         );
       },
@@ -73,7 +73,7 @@ const CartonBoxListingWrapper = () => {
       headerName: "Box Weight (in gm's)",
       flex: "flex-[1.5_1.5_0%]",
       renderCell: (row: CartonBoxListResponse) => {
-        return <span> {row.boxWeight} </span>;
+        return <span> {row?.boxWeight} </span>;
       },
     },
 

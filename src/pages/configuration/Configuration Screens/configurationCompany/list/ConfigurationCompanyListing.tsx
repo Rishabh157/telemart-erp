@@ -68,7 +68,6 @@ const ConfigurationCompanyListing = ({ columns, rows }: Props) => {
             dispatch(setRowsPerPage(newValue));
           }}
           onSearch={(newValue) => {
-            console.log(newValue, "hhhhh");
             dispatch(setSearchValue(newValue));
           }}
           isFilter

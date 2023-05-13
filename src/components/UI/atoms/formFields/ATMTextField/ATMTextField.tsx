@@ -8,6 +8,7 @@ export type ATMTextFieldPropTypes = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   size?: "small" | "medium" | "large";
+  onBlur?:(((e:any) => void) & React.FocusEventHandler<HTMLInputElement>)
 } & Omit<React.ComponentProps<"input">, "size">;
 
 const ATMTextField = ({
@@ -17,9 +18,11 @@ const ATMTextField = ({
   onChange,
   label,
   required,
+  onBlur,
   size = "small",
   ...rest
 }: ATMTextFieldPropTypes) => {
+  
   return (
     <div className="relative mt-4">
       {label && (
@@ -40,8 +43,9 @@ const ATMTextField = ({
           label && "mt-2"
         }  ${className}`}
         {...rest}
+        onBlur={onBlur}
       />
-      {name && (
+      {name &&  (
         <ErrorMessage name={name}>
           {(errMsg) => (
             <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
