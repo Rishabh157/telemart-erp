@@ -113,6 +113,7 @@ import {
   AddCbBarcodeWrapper,
 } from "./pages/index";
 import Auth from "./pages/login/Auth";
+import OrganisationHierarchy from "./pages/configuration/Configuration Screens/organizationHeirarchy/OrganizationHeirarchy";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -165,7 +166,10 @@ const PageRoutes = () => {
               path="general-information"
               element={<VendorGeneralInformationTabWrapper />}
             />
-            <Route path="purchase-order" element={<VendorPurchaseOrderTabWrapper />} />
+            <Route
+              path="purchase-order"
+              element={<VendorPurchaseOrderTabWrapper />}
+            />
             <Route path="warehouse" element={<VendorWarehouseTabWrapper />} />
             <Route path="return-to-vendor" element={"Return To Vendor"} />
             <Route path="ledger" element={"Ledger"} />
@@ -204,7 +208,7 @@ const PageRoutes = () => {
               path="general-information"
               element={<DealerGeneralInformationTabWrapper />}
             />
-            <Route path="sale-order" element={<DealerSalesOrderTabWrapper/>} />
+            <Route path="sale-order" element={<DealerSalesOrderTabWrapper />} />
             <Route path="warehouse" element={<DealerWarehouseTabWrapper />} />
             <Route path="ledger" element={"Ledger"} />
             <Route path="activities" element={<DealerActivityTabWrapper />} />
@@ -232,7 +236,7 @@ const PageRoutes = () => {
             path="/purchase-order/view/:id"
             element={<ViewPurchaseOrderWrapper />}
           />
-            <Route
+          <Route
             path="/purchase-order/edit/:id"
             element={<EditPurchaseOrderWrapper />}
           />
@@ -420,6 +424,7 @@ const PageRoutes = () => {
             path="/configurations/language"
             element={<LanguageListingWrapper />}
           />
+          <Route path="/heirarchy" element={<OrganisationHierarchy />} />
           <Route path="/barcodes" element={<BarcodeGenerator />} />
         </Routes>
       </BrowserRouter>
