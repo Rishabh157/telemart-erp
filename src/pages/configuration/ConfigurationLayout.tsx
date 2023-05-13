@@ -77,6 +77,12 @@ const configurationNavigation: NavItemType[] = [
     icon: AiOutlineSetting,
     path: "/configurations/dealers-category",
   },
+  {
+    label: "Hierarchy (Org..*)",
+    icon: AiOutlineSetting,
+    path: "/configurations/hierarchy",
+  },
+
 ];
 
 type Props = {
