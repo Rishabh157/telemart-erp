@@ -217,7 +217,7 @@ const SaleOrderListingWrapper = () => {
                   className="cursor-pointer"
                 >
                   <Chip
-                    label="Level 2"
+                    label="Approved"
                     color="success"
                     variant="outlined"
                     size="small"
