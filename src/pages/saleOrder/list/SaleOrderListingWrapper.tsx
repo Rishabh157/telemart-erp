@@ -13,20 +13,28 @@ import {
   setTotalItems,
 } from "src/redux/slices/saleOrderSlice";
 import { AppDispatch, RootState } from "src/redux/store";
-import { useDeleteSalesOrderMutation, useGetPaginationSaleOrderQuery } from "src/services/SalesOrderService";
+import {
+  useDeleteSalesOrderMutation,
+  useGetPaginationSaleOrderQuery,
+  useUpdateSoLevelMutation,
+} from "src/services/SalesOrderService";
 import SaleOrderListing from "./SaleOrderListing";
+import { Chip, Stack } from "@mui/material";
 
 const SaleOrderListingWrapper = () => {
   const salesOrderState: any = useSelector(
     (state: RootState) => state.saleOrder
   );
   const dispatch = useDispatch<AppDispatch>();
-  const { page, rowsPerPage, searchValue, items } = salesOrderState; 
+  const { page, rowsPerPage, searchValue, items } = salesOrderState;
   const navigate = useNavigate();
   const [currentId, setCurrentId] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const [deleteSaleOrder] = useDeleteSalesOrderMutation(); 
+  const [deleteSaleOrder] = useDeleteSalesOrderMutation();
+  const [updateSoLevel] = useUpdateSoLevelMutation();
+  const { userData }: any = useSelector((state: RootState) => state.auth);
 
+  //useUpdateSoLevelMutation
   const { data, isFetching, isLoading } = useGetPaginationSaleOrderQuery({
     limit: rowsPerPage,
     searchValue: searchValue,
@@ -68,18 +76,71 @@ const SaleOrderListingWrapper = () => {
     });
   };
 
+  const handleComplete = (_id: string, level: number) => {
+    const currentDate = new Date().toLocaleDateString("en-GB");
+    if (level === 1) {
+      updateSoLevel({
+        body: {
+          approval: {
+            approvalLevel: level,
+            approvalByName: userData?.userName,
+            approvalById: userData?.userId,
+            time: currentDate,
+          },
+        },
+        id: _id,
+      }).then((res: any) => {
+        if ("data" in res) {
+          if (res?.data?.status) {
+            showToast("success", "Level 1 approved successfully!");
+          } else {
+            showToast("error", res?.data?.message);
+          }
+        } else {
+          showToast("error", "Something went wrong");
+        }
+      });
+    } else {
+      updateSoLevel({
+        body: {
+          approval: {
+            approvalLevel: level,
+            approvalByName: userData?.userName,
+            approvalById: userData?.userId,
+            time: currentDate,
+          },
+        },
+        id: _id,
+      }).then((res: any) => {
+        if ("data" in res) {
+          if (res?.data?.status) {
+            showToast("success", "Level 2 approved successfully!");
+          } else {
+            showToast("error", res?.data?.message);
+          }
+        } else {
+          showToast("error", "Something went wrong");
+        }
+      });
+    }
+  };
+
   const columns: columnTypes[] = [
     {
       field: "soNumber",
       headerName: "So Number",
       flex: "flex-[1_1_0%]",
-      renderCell: (row: SaleOrderListResponse) => <span> {row?.soNumber} </span>,
+      renderCell: (row: SaleOrderListResponse) => (
+        <span> {row?.soNumber} </span>
+      ),
     },
     {
       field: "dealer",
       headerName: "Dealer",
       flex: "flex-[1_1_0%]",
-      renderCell: (row: SaleOrderListResponse) => <span> {row?.dealerLabel} </span>,
+      renderCell: (row: SaleOrderListResponse) => (
+        <span> {row?.dealerLabel} </span>
+      ),
     },
     {
       field: "warehouse",
@@ -87,6 +148,86 @@ const SaleOrderListingWrapper = () => {
       flex: "flex-[1.5_1.5_0%]",
       renderCell: (row: SaleOrderListResponse) => {
         return <span> {row?.warehouseLabel} </span>;
+      },
+    },
+    {
+      field: "approval.approvalLevel",
+      headerName: "Approval level",
+      flex: "flex-[1_1_0%]",
+      renderCell: (row: SaleOrderListResponse) => {
+        const approvalLength = row?.approval?.length;
+        return (
+          <span>
+            {" "}
+            <Stack direction="row" spacing={1}>
+              {approvalLength === 0 ? (
+                <button
+                  id="btn"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    showConfirmationDialog({
+                      title: "Approve level 1",
+                      text: "Do you want to Approve sales order ?",
+                      showCancelButton: true,
+                      next: (res) => {
+                        return res.isConfirmed
+                          ? handleComplete(row?._id, 1)
+                          : false;
+                      },
+                    });
+                  }}
+                >
+                  <Chip
+                    label="Level 0"
+                    color="error"
+                    variant="outlined"
+                    size="small"
+                    clickable={true}
+                  />
+                </button>
+              ) : approvalLength === 1 ? (
+                <button
+                  id="btn"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    showConfirmationDialog({
+                      title: "Approve level 2",
+                      text: "Do you want to Approve sales order ?",
+                      showCancelButton: true,
+                      next: (res) => {
+                        return res.isConfirmed
+                          ? handleComplete(row?._id, 2)
+                          : false;
+                      },
+                    });
+                  }}
+                >
+                  <Chip
+                    label="Level 1"
+                    color="warning"
+                    variant="outlined"
+                    size="small"
+                    clickable={true}
+                  />
+                </button>
+              ) : (
+                <button
+                  id="btn"
+                  disabled={approvalLength >= 2}
+                  className="cursor-pointer"
+                >
+                  <Chip
+                    label="Level 2"
+                    color="success"
+                    variant="outlined"
+                    size="small"
+                    clickable={true}
+                  />
+                </button>
+              )}
+            </Stack>{" "}
+          </span>
+        );
       },
     },
     {
@@ -109,7 +250,7 @@ const SaleOrderListingWrapper = () => {
           {showDropdown && currentId === row?._id && (
             <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
               <button
-                onClick={() => {                  
+                onClick={() => {
                   navigate(`/sale-order/edit-sale-order/${row?._id}`);
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -140,8 +281,6 @@ const SaleOrderListingWrapper = () => {
       align: "end",
     },
   ];
-
- 
 
   return (
     <>

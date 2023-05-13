@@ -11,8 +11,14 @@ export type SaleOrderListResponse = {
   dealerLabel: string;
   warehouseLabel: string;
   productSalesOrder: productSalesOrder[];
-  is_active: boolean;
-  is_deleted: boolean;
+  approval: {
+    approvalLevel: number;
+    approvalByName: string;
+    approvalById: string;
+    time: string;
+  }[];
+  isActive: boolean;
+  isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
   _id: string;
@@ -34,6 +40,17 @@ export type UpdateSaleOrder = {
     wareHouse: string;
     companyId: string;
     productSalesOrder: productSalesOrder[];
+  };
+  id: string;
+};
+export type UpdateSOApprovalLevel = {
+  body: {
+    approval: {
+      approvalLevel: number;
+      approvalByName: string;
+      approvalById: string;
+      time: string;
+    };
   };
   id: string;
 };
