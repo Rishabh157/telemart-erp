@@ -6,7 +6,6 @@ import StepEditProductDetailsWrapper from "./FormSteps/StepEditProductDetails/St
 import EditProduct from "./EditProduct";
 import ConfigurationLayout from "src/pages/configuration/ConfigurationLayout";
 import StepEditItemsWrapper from "./FormSteps/StepEditItems/StepEditItemsWrapper";
-import StepEditTaxWrapper from "./FormSteps/StepEditTax/StepEditTaxWrapper";
 import StepEditFAQsWrapper from "./FormSteps/StepEditFAQs/StepEditFAQsWrapper";
 import StepEditVideoWrapper from "./FormSteps/StepEditVideo/StepEditVideoWrapper";
 import StepEditCallScriptWrapper from "./FormSteps/StepEditCallScript/StepEditCallScriptWrapper";
@@ -100,25 +99,6 @@ const steps = [
             .typeError("Quantity should be number")
             .min(1, "Quantity should be greater than or equal to 1")
             .required("Please enter quantity"),
-        })
-      ),
-    }),
-  },
-  {
-    label: "Tax",
-    component: StepEditTaxWrapper,
-    validationSchema: object({
-      taxes: array().of(
-        object().shape({
-          taxDetail: object()
-            .shape({
-              tax_name: string().required(),
-              id: string().required(),
-            })
-            .required("Please select item name"),
-          tax_rate: number()
-            .typeError("Tax rate should be a number")
-            .required("Please enter tax rate"),
         })
       ),
     }),

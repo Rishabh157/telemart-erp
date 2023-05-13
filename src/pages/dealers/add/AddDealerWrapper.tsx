@@ -110,7 +110,7 @@ const steps = [
           name: string().required("Name is required"),
           department: string().required("Department is required"),
           designation: string().required("Designation is required"),
-          email: string().email("Email should be valid").required("Email is required"),
+          email: string().email("Email should be valid").required("Email is required").trim(),
           mobileNumber: string()
             .min(10, "Number should be 10 digits")
             .max(10, "maximum 10 digit")
@@ -297,6 +297,7 @@ const AddDealerWrapper = () => {
         initialValues={initialValues}
         validationSchema={getValidationSchema(activeStep)}
         onSubmit={onSubmitHandler}
+        validateOnChange={true}
       >
         {(formikProps: FormikProps<FormInitialValues>) => (
           <Form className="">

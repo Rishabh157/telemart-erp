@@ -32,7 +32,7 @@ const AttributesGroupListingWrapper = () => {
       headerName: "Group Name",
       flex: "flex-[1_1_0%]",
       renderCell: (row: AttributesGroupListResponse) => (
-        <span> {row.groupName} </span>
+        <span className="capitalize"> {row.groupName} </span>
       ),
     },
     {
@@ -44,7 +44,7 @@ const AttributesGroupListingWrapper = () => {
           return ele.label;
         });
         return (
-          <span>
+          <span className="capitalize">
             {" "}
             <Stack direction="row" spacing={1}>
               {attribute.map((ele, index) => {

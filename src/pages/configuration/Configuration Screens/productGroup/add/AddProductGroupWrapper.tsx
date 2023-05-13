@@ -33,7 +33,7 @@ const AddProductGroupWrapper = (props: Props) => {
   const { allTaxes: taxData }: any = useSelector(
     (state: RootState) => state?.tax
   );
-  console.log(taxData)
+
   const { data, isLoading, isFetching } = useGetAllTaxesQuery("");
   useEffect(() => {
     if (!isLoading && !isFetching) {
