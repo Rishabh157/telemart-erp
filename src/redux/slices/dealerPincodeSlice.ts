@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { SchemeListResponse } from "src/models/scheme.model";
+import { DealersPincodeListResponse } from "src/models/DealerPinCode.model";
 
 export type InitialStateType = {
-  items: SchemeListResponse[] | [];
-  allItems: SchemeListResponse[] | [];
+  items: DealersPincodeListResponse[] | [];
+  allItems: DealersPincodeListResponse[] | [];
+  selectedItem: DealersPincodeListResponse | null;
+  alldealerCategory: DealersPincodeListResponse[] | [];
   totalItems: number;
-  selectedItem: SchemeListResponse | null;
   isTableLoading: boolean;
   page: number;
   rowsPerPage: number;
@@ -18,9 +19,10 @@ export type InitialStateType = {
 const initialState: InitialStateType = {
   items: [],
   allItems: [],
+  selectedItem: null,
+  alldealerCategory: [],
   totalItems: 0,
   isTableLoading: false,
-  selectedItem: null,
   page: 1,
   rowsPerPage: 10,
   searchValue: "",
@@ -28,16 +30,19 @@ const initialState: InitialStateType = {
   selectedDealerId: "",
 };
 
-const schemeSlice: any = createSlice({
-  name: "scheme",
+const dealerPincodeSlice: any = createSlice({
+  name: "dealersPincode",
   initialState,
   reducers: {
-    setItems: (state, action: PayloadAction<SchemeListResponse[] | []>) => {
+    setItems: (
+      state,
+      action: PayloadAction<DealersPincodeListResponse[] | []>
+    ) => {
       state.items = action.payload;
     },
     setAllItems: (
       state,
-      action: PayloadAction<SchemeListResponse[] | []>
+      action: PayloadAction<DealersPincodeListResponse[] | []>
     ) => {
       state.allItems = action.payload;
     },
@@ -72,23 +77,31 @@ const schemeSlice: any = createSlice({
     },
     setSelectedItem: (
       state,
-      action: PayloadAction<SchemeListResponse | null>
+      action: PayloadAction<DealersPincodeListResponse | null>
     ) => {
       state.selectedItem = action.payload;
+    },
+    setAllDealerCategory: (
+      state,
+      action: PayloadAction<DealersPincodeListResponse[] | []>
+    ) => {
+      state.alldealerCategory = action.payload;
     },
   },
 });
 
 export const {
   setItems,
+  setAllItems,
   setPage,
   setRowsPerPage,
   setSearchValue,
   setSortValue,
   setTotalItems,
-  setAllItems,
   setIsTableLoading,
   setSelectedDealerId,
   setSelectedItem,
-} = schemeSlice.actions;
-export default schemeSlice.reducer;
+  setAllDealerCategory,
+} = dealerPincodeSlice.actions;
+
+export default dealerPincodeSlice.reducer;

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 import { useChangeDealerStatusMutation } from "src/services/DealerServices";
 import { showToast } from "src/utils";
+import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
 
 type Props = {
   dealerData: any;
@@ -19,18 +20,35 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
   const [changeDealerStatus] = useChangeDealerStatusMutation();
   const { selectedItem }: any = useSelector((state: RootState) => state.dealer);
   const changeStatus = () => {
-    changeDealerStatus(selectedItem?._id).then((res) => {
-      if ("data" in res) {
-        if (res?.data?.status) {
-          showToast("success", "Status change successfully!");
-        } else {
-          showToast("error", res?.data?.message);
-        }
-      } else {
-        showToast("error", "Something went wrong");
-      }
+    showConfirmationDialog({
+      title: "Activate Dealer",
+      text: "Do you want to Activate Dealer ?",
+      showCancelButton: true,
+      next: (res: any) => {
+        return res.isConfirmed
+          ? DealerStatus()
+          : false;
+      },
     });
+    
   };
+
+  const DealerStatus = ()=> {    
+    changeDealerStatus(selectedItem?._id).then((res) => {
+    if ("data" in res) {
+      if (res?.data?.status) {
+        showToast("success", "Status change successfully!");
+      } else {
+        showToast("error", res?.data?.message);
+      }
+    } else {
+      showToast("error", "Something went wrong");
+    }
+  });
+};
+
+
+
   return (
     <div className="py-2 flex flex-col gap-1">
       {/* Image */}

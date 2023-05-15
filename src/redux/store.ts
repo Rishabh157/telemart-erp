@@ -4,7 +4,7 @@ import { apiSlice } from "src/services";
 import {
   barcodeSlice,
   companySlice,
-  dealerSlice,
+  dealerSlice,  
   sideNavLayoutSlice,
   userSlice,
   vendorSlice,
@@ -15,6 +15,8 @@ import attributesSlice from "./slices/attributesSlice";
 import cartonBoxSlice from "./slices/cartonBoxSlice";
 import configurationCompanySlice from "./slices/configurationCompanySlice";
 import dealersCategorySlice from "./slices/dealersCategorySlice";
+import dealerPincodeSlice from "./slices/dealerPincodeSlice";
+import dealerSchemeSlice from "./slices/dealerSchemeSlice";
 import GRNSlice from "./slices/GRNSlice";
 import inventorySlice from "./slices/inventorySlice";
 import itemSlice from "./slices/itemSlice";
@@ -54,6 +56,8 @@ const store = configureStore({
     auth: authSlice,
     sideNavLayout: sideNavLayoutSlice,
     dealer: dealerSlice,
+    dealerPincode: dealerPincodeSlice,
+    dealerScheme: dealerSchemeSlice,
     vendor: vendorSlice,
     user: userSlice,
     newUser: NewUserSlice,

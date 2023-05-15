@@ -27,6 +27,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
   const { data, isLoading, isFetching } = useGetAllAttributesQuery("");
   const [apiStatus, setApiStatus] = useState<boolean>(false);
   const [AddAttributeGroups] = useAddAttributeGroupMutation();
+  
   const initialValues: FormInitialValues = {
     group_name: "",
     attributes: [],
@@ -71,6 +72,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
   useEffect(() => {
     dispatch(setAllItems(data?.data));
   }, [dispatch, data, isLoading, isFetching]);
+  
   return (
     <ConfigurationLayout>
       <Formik
