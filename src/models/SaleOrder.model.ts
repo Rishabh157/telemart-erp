@@ -39,7 +39,7 @@ export type UpdateSaleOrder = {
     dealer: string;
     wareHouse: string;
     companyId: string;
-    productSalesOrder: productSalesOrder[];
+    productSalesOrder: productSalesOrder;
   };
   id: string;
 };

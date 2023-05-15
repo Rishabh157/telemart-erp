@@ -139,7 +139,13 @@ const SaleOrderListingWrapper = () => {
       headerName: "Dealer",
       flex: "flex-[1_1_0%]",
       renderCell: (row: SaleOrderListResponse) => (
-        <span> {row?.dealerLabel} </span>
+        <a
+          href={`/dealers/${row?.dealer}/general-information`}
+          className="underline"
+        >
+          {" "}
+          {row?.dealerLabel}{" "}
+        </a>
       ),
     },
     {
@@ -228,6 +234,22 @@ const SaleOrderListingWrapper = () => {
             </Stack>{" "}
           </span>
         );
+      },
+    },
+    {
+      field: "approval[0].approvalByName",
+      headerName: "Level 1 Approved by",
+      flex: "flex-[1.0_1.0_0%]",
+      renderCell: (row: SaleOrderListResponse) => {
+        return <span> {row?.approval[0]?.approvalByName || "-"} </span>;
+      },
+    },
+    {
+      field: "approval[1].approvalByName",
+      headerName: "Level 2 Approved by",
+      flex: "flex-[1.0_1.0_0%]",
+      renderCell: (row: SaleOrderListResponse) => {
+        return <span> {row?.approval[1]?.approvalByName || "-"} </span>;
       },
     },
     {

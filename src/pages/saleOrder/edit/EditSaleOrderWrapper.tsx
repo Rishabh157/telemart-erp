@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Formik, FormikProps } from "formik";
-import { array, number, object, string } from "yup";
+import { number, object, string } from "yup";
 import EditSaleOrder from "./EditSaleOrder";
 import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { showToast } from "src/utils";
@@ -26,13 +26,11 @@ export type FormInitialValues = {
   dealer: string | "";
   wareHouse: string | "";
   companyId: string | "";
-  productSalesOrder: [
-    {
-      productGroupId: string;
-      rate: number | 0;
-      quantity: number | 0;
-    }
-  ];
+  productSalesOrder: {
+    productGroupId: string;
+    rate: number | 0;
+    quantity: number | 0;
+  };
 };
 
 const EditSaleOrderWrapper = (props: Props) => {
@@ -76,7 +74,6 @@ const EditSaleOrderWrapper = (props: Props) => {
   const { allItems: productGroupItems }: any = useSelector(
     (state: RootState) => state?.productGroup
   );
-
   const dealerOptions = allItems?.map((ele: any) => {
     return {
       label: ele.firstName + " " + ele.lastName,
@@ -133,40 +130,31 @@ const EditSaleOrderWrapper = (props: Props) => {
     companyId: selectedItem?.companyId || "",
   };
 
-
   // Form Validation Schema
   const validationSchema = object({
     soNumber: string().required("Sale order number is required"),
     dealer: string().required("Please select a dealer"),
     wareHouse: string().required("Please select a warehouse"),
-    productSalesOrder: array().of(
-      object().shape({
-        productGroupId: string().required("Please select a product name"),
-        rate: number()
-          .min(0, "Rate must be greater than 0")
-          .required("Please enter rate")
-          .nullable(),
-        quantity: number()
-          .min(0, "Quantity must be greater than 0")
-          .required("Please enter quantity")
-          .nullable(),
-      })
-    ),
+    productSalesOrder: object().shape({
+      productGroupId: string().required("Please select a product name"),
+      rate: number()
+        .min(0, "Rate must be greater than 0")
+        .required("Please enter rate")
+        .nullable(),
+      quantity: number()
+        .min(0, "Quantity must be greater than 0")
+        .required("Please enter quantity")
+        .nullable(),
+    }),
   });
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
-  
-
-    const productSalesOrder = values.productSalesOrder.map((ele: any) => {
-      return {
-        productGroupId: ele.productGroupId,
-        rate: ele.rate,
-        quantity: ele.quantity,
-      };
-    });
-
-    
+    const productSalesOrder = {
+      productGroupId: values.productSalesOrder.productGroupId,
+      rate: values.productSalesOrder.rate,
+      quantity: values.productSalesOrder.quantity,
+    };
 
     setApiStatus(true);
     setTimeout(() => {
