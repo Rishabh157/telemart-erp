@@ -1,4 +1,4 @@
-import React,{ useState} from "react";
+import React, { useState } from "react";
 import { Formik, FormikProps } from "formik";
 import { object, string } from "yup";
 import AddUser from "./AddUser";
@@ -6,17 +6,18 @@ import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import { useAddNewUserMutation } from "src/services/UserServices";
 import { showToast } from "src/utils";
 import { useNavigate } from "react-router-dom";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 
 type Props = {};
 
 export type FormInitialValues = {
-    firstName: string;
-    lastName: string;
-    mobile: string;
-    email: string;
-    companyId: string;
+  firstName: string;
+  lastName: string;
+  mobile: string;
+  email: string;
+  password: string;
+  companyId: string;
 };
 
 const AddUserWrapper = (props: Props) => {
@@ -25,14 +26,14 @@ const AddUserWrapper = (props: Props) => {
   const [apiStatus, setApiStatus] = useState<boolean>(false);
   const [addNewUser] = useAddNewUserMutation();
   const { userData } = useSelector((state: RootState) => state?.auth);
-  
 
   const initialValues: FormInitialValues = {
     firstName: "",
     lastName: "",
     mobile: "",
     email: "",
-    companyId:userData?.companyId || "",
+    password: "",
+    companyId: userData?.companyId || "",
   };
 
   // Form Validation Schema
@@ -40,18 +41,20 @@ const AddUserWrapper = (props: Props) => {
     firstName: string().required("First Name is required"),
     lastName: string().required("Last Name is required"),
     mobile: string().required("Mobile No is required"),
-    email: string().required("Email is required"),    
+    email: string().required("Email is required"),
+    password: string().required("Password is required"),
   });
 
   //    Form Submit Handler
   const onSubmitHandler = (values: FormInitialValues) => {
     setApiStatus(true);
     setTimeout(() => {
-        addNewUser({
+      addNewUser({
         firstName: values.firstName || "",
-        lastName: values.lastName ||  "",
-        mobile: values.mobile ||  "",
-        email: values.email ||  "",
+        lastName: values.lastName || "",
+        mobile: values.mobile || "",
+        email: values.email || "",
+        password: values.password || "",
         companyId: values.companyId || "",
       }).then((res: any) => {
         if ("data" in res) {
@@ -64,7 +67,7 @@ const AddUserWrapper = (props: Props) => {
         } else {
           showToast("error", "Something went wrong");
         }
-        setApiStatus(false)
+        setApiStatus(false);
       });
     }, 1000);
   };

@@ -69,6 +69,7 @@ export type AddNewUser = {
   lastName: string;
   email: string;
   mobile: string;
+  password: string;
   companyId: string;
 };
 
