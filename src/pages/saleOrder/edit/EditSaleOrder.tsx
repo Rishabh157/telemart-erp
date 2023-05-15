@@ -1,6 +1,6 @@
 import React from "react";
 import { FormikProps, FieldArray } from "formik";
-import { MdDeleteOutline } from "react-icons/md";
+// import { MdDeleteOutline } from "react-icons/md";
 import ATMBreadCrumbs, {
   BreadcrumbType,
 } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
@@ -9,7 +9,7 @@ import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { SelectOption } from "src/models/FormField/FormField.model";
 import { FormInitialValues } from "./EditSaleOrderWrapper";
-import { HiPlus } from "react-icons/hi";
+// import { HiPlus } from "react-icons/hi";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -34,7 +34,6 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
   const { values, setFieldValue } = formikProps;
-
   return (
     <div className="">
       <div className="p-4 flex flex-col gap-2  ">
@@ -102,7 +101,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
           {/*  Sales Order  */}
           <div className="px-3">
             <div className=" text-lg pb-2 font-medium text-primary-main">
-              Add ProductGroup to sale order
+              Update ProductGroup to sale order
             </div>
 
             <FieldArray name="productSalesOrder">
@@ -110,65 +109,72 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                 return (
                   <>
                     <div className="flex flex-col gap-y-5">
-                      {values.productSalesOrder?.map(
-                        (item: any, index: number) => {
-                          const { productGroupId, rate, quantity } = item;
-                          return (
-                            <div key={index} className="flex gap-3 items-end ">
-                              {/* Product Name */}
-                              <div className="flex-1">
-                                <ATMSelect
-                                  name={`productSalesOrder[${index}].productGroupId`}
-                                  value={productGroupId}
-                                  onChange={(e) =>
-                                    setFieldValue(
-                                      `productSalesOrder[${index}].productGroupId`,
-                                      e.target.value
-                                    )
-                                  }
-                                  options={dropdownOptions.productGroupOptions}
-                                  label="Product Group"
-                                />
-                              </div>
+                      {/* {values.productSalesOrder?.map(
+                        (item: any, index: number) => { */}
+                      {/* const { productGroupId, rate, quantity } = item; */}
+                      {/* // return ( */}
+                      <div className="flex gap-3 items-end pb-5">
+                        {/* Product Name */}
+                        <div className="flex-1">
+                          <ATMSelect
+                            name={`productSalesOrder.productGroupId`}
+                            value={
+                              values?.productSalesOrder?.productGroupId || ""
+                            }
+                            onChange={(e) =>
+                              setFieldValue(
+                                `productSalesOrder.productGroupId`,
+                                e.target.value
+                              )
+                            }
+                            options={dropdownOptions.productGroupOptions}
+                            label="Product Group"
+                          />
+                        </div>
 
-                              {/* Rate */}
-                              <div className="flex-1">
-                                <ATMTextField
-                                  type="number"
-                                  min={0}
-                                  name={`productSalesOrder[${index}].rate`}
-                                  value={rate?.toString() || ""}
-                                  label="Rate"
-                                  placeholder="Rate"
-                                  onChange={(e) =>
-                                    setFieldValue(
-                                      `productSalesOrder[${index}].rate`,
-                                      e.target.value
-                                    )
-                                  }
-                                />
-                              </div>
+                        {/* Rate */}
+                        <div className="flex-1">
+                          <ATMTextField
+                            type="number"
+                            min={0}
+                            name={`productSalesOrder.rate`}
+                            value={
+                              values?.productSalesOrder?.rate?.toString() || ""
+                            }
+                            label="Rate"
+                            placeholder="Rate"
+                            onChange={(e) =>
+                              setFieldValue(
+                                `productSalesOrder.rate`,
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
 
-                              {/* Quantity */}
-                              <div className="flex-1">
-                                <ATMTextField
-                                  type="number"
-                                  min={0}
-                                  name={`productSalesOrder[${index}].quantity`}
-                                  value={quantity?.toString() || ""}
-                                  label="Quantity"
-                                  placeholder="Quantity"
-                                  onChange={(e) =>
-                                    setFieldValue(
-                                      `productSalesOrder[${index}].quantity`,
-                                      e.target.value
-                                    )
-                                  }
-                                />
-                              </div>
+                        {/* Quantity */}
+                        <div className="flex-1 ">
+                          <ATMTextField
+                            type="number"
+                            min={0}
+                            name={`productSalesOrder.quantity`}
+                            value={
+                              values?.productSalesOrder?.quantity?.toString() ||
+                              ""
+                            }
+                            label="Quantity"
+                            placeholder="Quantity"
+                            onChange={(e) =>
+                              setFieldValue(
+                                `productSalesOrder.quantity`,
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
 
-                              {/* BUTTON - Delete */}
-                              {values.productSalesOrder?.length > 1 && (
+                        {/* BUTTON - Delete */}
+                        {/* {values.productSalesOrder?.length > 1 && (
                                 <div>
                                   <button
                                     type="button"
@@ -180,15 +186,15 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                     <MdDeleteOutline className="text-2xl" />
                                   </button>
                                 </div>
-                              )}
-                            </div>
-                          );
-                        }
-                      )}
+                              )} */}
+                      </div>
+                      {/* // ); */}
+                      {/* }
+                      )} */}
                     </div>
 
                     {/* BUTTON - Add More Product */}
-                    <div className="flex justify-self-start py-5">
+                    {/* <div className="flex justify-self-start py-5">
                       <button
                         type="button"
                         onClick={() =>
@@ -198,11 +204,11 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                             quantity: null,
                           })
                         }
-                        className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center " 
+                        className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
                       >
-                         <HiPlus size="20" />  
+                        <HiPlus size="20" />
                       </button>
-                    </div>
+                    </div> */}
                   </>
                 );
               }}

@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { Tree, TreeNode } from "react-organizational-chart";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
+// import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
 import ATMMenu from "src/components/UI/atoms/ATMMenu/ATMMenu";
 import { twMerge } from "tailwind-merge";
 import ConfigurationLayout from "../../ConfigurationLayout";
