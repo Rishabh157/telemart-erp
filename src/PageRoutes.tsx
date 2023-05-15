@@ -432,7 +432,10 @@ const PageRoutes = () => {
             path="/configurations/language"
             element={<LanguageListingWrapper />}
           />
-          <Route path="/heirarchy" element={<OrganisationHierarchy />} />
+          <Route
+            path="configurations/hierarchy"
+            element={<OrganisationHierarchy />}
+          />
           <Route path="/barcodes" element={<BarcodeGenerator />} />
         </Routes>
       </BrowserRouter>
