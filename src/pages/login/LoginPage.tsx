@@ -38,7 +38,7 @@ const LoginPage = () => {
                 mobile: res?.data?.data?.mobile,
                 userName: res?.data?.data?.userName,
                 companyId: res?.data?.data?.companyId,
-                role: res?.data?.data?.userType
+                role: res?.data?.data?.userType,
               };
               dispatch(setAccessToken(res?.data?.data?.token));
               dispatch(setRefreshToken(res?.data?.data?.refreshToken));
@@ -67,13 +67,13 @@ const LoginPage = () => {
     <div className="h-screen w-screen flex md:flex-row">
       <div className=" bg-slate-400 flex-1  hidden md:block ">
         <div className="h-full">
-          <img src="bg.jpg" className="h-full w-full"/>
+          <img src="bg.jpg" className="h-full w-full" alt="" />
         </div>
       </div>
       <div className="flex flex-col h-full w-full justify-center items-center flex-1">
         <div className="">
           <div className="flex flex-col h-[200px] w-[250px] ">
-            <img src="logoapp.png" />
+            <img src="logoapp.png" alt="" />
           </div>
           <div className=" text-2xl font-semibold text-center "> Login </div>
           <div className="mt-5 flex flex-col gap-7">
