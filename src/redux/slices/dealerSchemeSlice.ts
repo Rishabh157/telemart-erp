@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { SchemeListResponse } from "src/models/scheme.model";
+import { DealersSchemeListResponse } from "src/models/DealerScheme.model";
 
 export type InitialStateType = {
-  items: SchemeListResponse[] | [];
-  allItems: SchemeListResponse[] | [];
+  items: DealersSchemeListResponse[] | [];
+  allItems: DealersSchemeListResponse[] | [];
+  selectedItem: DealersSchemeListResponse | null;
+  alldealerCategory:DealersSchemeListResponse[] | [];
   totalItems: number;
-  selectedItem: SchemeListResponse | null;
   isTableLoading: boolean;
   page: number;
   rowsPerPage: number;
@@ -18,9 +19,10 @@ export type InitialStateType = {
 const initialState: InitialStateType = {
   items: [],
   allItems: [],
+  selectedItem: null,
+  alldealerCategory:[],
   totalItems: 0,
   isTableLoading: false,
-  selectedItem: null,
   page: 1,
   rowsPerPage: 10,
   searchValue: "",
@@ -28,19 +30,22 @@ const initialState: InitialStateType = {
   selectedDealerId: "",
 };
 
-const schemeSlice: any = createSlice({
-  name: "scheme",
+const dealerSchemeSlice: any = createSlice({
+  name: "dealersScheme",
   initialState,
   reducers: {
-    setItems: (state, action: PayloadAction<SchemeListResponse[] | []>) => {
+    setItems: (
+      state,
+      action: PayloadAction<DealersSchemeListResponse[] | []>
+    ) => {
       state.items = action.payload;
     },
     setAllItems: (
-      state,
-      action: PayloadAction<SchemeListResponse[] | []>
-    ) => {
-      state.allItems = action.payload;
-    },
+        state,
+        action: PayloadAction<DealersSchemeListResponse[] | []>
+      ) => {
+        state.allItems = action.payload;
+      },
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
       document.getElementById("scroll-top")?.scrollTo(0, 0);
@@ -72,23 +77,30 @@ const schemeSlice: any = createSlice({
     },
     setSelectedItem: (
       state,
-      action: PayloadAction<SchemeListResponse | null>
+      action: PayloadAction<DealersSchemeListResponse | null>
     ) => {
       state.selectedItem = action.payload;
+    },
+    setAllDealerCategory: (
+      state,
+      action: PayloadAction<DealersSchemeListResponse[] | []>
+    ) => {
+      state.alldealerCategory = action.payload;
     },
   },
 });
 
 export const {
   setItems,
+  setAllItems,
   setPage,
   setRowsPerPage,
   setSearchValue,
   setSortValue,
   setTotalItems,
-  setAllItems,
   setIsTableLoading,
   setSelectedDealerId,
   setSelectedItem,
-} = schemeSlice.actions;
-export default schemeSlice.reducer;
+  setAllDealerCategory,
+} = dealerSchemeSlice.actions;
+export default dealerSchemeSlice.reducer;
