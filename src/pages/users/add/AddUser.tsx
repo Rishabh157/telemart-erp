@@ -88,6 +88,14 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                 placeholder="Email"
                 onChange={(e) => setFieldValue("email", e.target.value)}
               />
+              {/* Password */}
+              <ATMTextField
+                name="password"
+                value={values.password}
+                label="Password"
+                placeholder="Password"
+                onChange={(e) => setFieldValue("password", e.target.value)}
+              />
 
               {/* Mobile */}
               <ATMTextField
@@ -97,7 +105,6 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                 placeholder="Mobile Number"
                 onChange={(e) => setFieldValue("mobile", e.target.value)}
               />
-
             </div>
           </div>
         </div>

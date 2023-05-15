@@ -111,9 +111,8 @@ export const userApi = apiSlice.injectEndpoints({
       providesTags: ["newUser"],
       query: (body: PaginationType) => ({
         url: "/user",
-
-        method: "GET",
-        // body,
+        method: "POST",
+        body,
       }),
     }),
 
