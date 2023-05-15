@@ -49,7 +49,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
   const pincodeOptions = pincodeItems?.map((ele: any) => {
     return {
       label: ele.pincode,
-      value: ele._id,
+      value: ele.pincode,
     };
   });
 

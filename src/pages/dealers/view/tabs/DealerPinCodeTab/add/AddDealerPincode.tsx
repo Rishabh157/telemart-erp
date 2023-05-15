@@ -5,7 +5,7 @@ import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
 import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
 import { FormInitialValues } from "./DealerPinCodeTabWrapper";
 import { SelectOption } from "src/models/FormField/FormField.model";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import { HiPlus } from "react-icons/hi";
 
 type Props = {
   formikProps: FormikProps<FormInitialValues>;
@@ -134,9 +134,8 @@ const AddDealerPincode = ({
                         }
                         className="bg-primary-main px-3 py-1 text-white rounded"
                       >
-                        <AddCircleOutlineOutlinedIcon
-                          style={{ fontSize: "32px" }}
-                        />
+                        <HiPlus size="20" /> 
+                       
                       </button>
                     </div>
                   </>

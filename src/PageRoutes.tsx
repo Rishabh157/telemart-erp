@@ -58,8 +58,10 @@ import {
   DealerGeneralInformationTabWrapper,
   DealerWarehouseTabWrapper,
   DealerSalesOrderTabWrapper,
-  DealerPinCodeTabWrapper,
-  DealerSchemeTabWrapper
+  AddDealerPinCodeTabWrapper,
+  AddDealerSchemeTabWrapper,
+  ListDealerPincodeTabWrapper,
+  ListDealerSchemeTabWrapper
 } from "./pages/index";
 import {
   InwardInventoryWrapper,
@@ -214,8 +216,10 @@ const PageRoutes = () => {
             <Route path="warehouse" element={<DealerWarehouseTabWrapper />} />
             <Route path="ledger" element={"Ledger"} />
             <Route path="activities" element={<DealerActivityTabWrapper />} />
-            <Route path="pincode" element={<DealerPinCodeTabWrapper />} />
-            <Route path="scheme" element={<DealerSchemeTabWrapper />} />
+            <Route path="pincode/add" element={<AddDealerPinCodeTabWrapper />} />
+            <Route path="scheme/add" element={<AddDealerSchemeTabWrapper />} />
+            <Route path="pincode" element={<ListDealerPincodeTabWrapper />} />
+            <Route path="scheme" element={<ListDealerSchemeTabWrapper />} />
           </Route>
           <Route path="users" element={<UsersListingWrapper />} />
           <Route path="/users/add-user" element={<AddUserWrapper />} />
