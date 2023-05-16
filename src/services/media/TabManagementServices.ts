@@ -1,6 +1,9 @@
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
-import { AddTabManagement, UpdateTabManagement } from 'src/models/tabManagement.model'
+import {
+    AddTabManagement,
+    UpdateTabManagement,
+} from 'src/models/tabManagement.model'
 
 export const TabManagementApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

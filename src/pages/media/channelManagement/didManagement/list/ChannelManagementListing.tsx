@@ -11,7 +11,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
-} from 'src/redux/slices/media/didManagementSlice'
+} from 'src/redux/slices/media/channelManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
     rows: any[]
 }
 
-const DidManagementListing = ({ columns, rows }: Props) => {
+const ChannelManagementListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const inventoryState: any = useSelector(
         (state: RootState) => state.inventory
@@ -33,7 +33,7 @@ const DidManagementListing = ({ columns, rows }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'Did',
+            label: 'Channel',
         },
     ]
 
@@ -44,13 +44,13 @@ const DidManagementListing = ({ columns, rows }: Props) => {
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
-                <ATMPageHeading> DID Management </ATMPageHeading>
+                <ATMPageHeading> Channel Management </ATMPageHeading>
                 <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add DID
+                    + Add Channel
                 </button>
             </div>
 
@@ -97,4 +97,4 @@ const DidManagementListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default DidManagementListing
+export default ChannelManagementListing
