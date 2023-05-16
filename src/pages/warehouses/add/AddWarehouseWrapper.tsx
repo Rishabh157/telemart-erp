@@ -120,6 +120,7 @@ const AddWarehouseWrapper = () => {
   const dispatch = useDispatch();
   const [addWareHouse] = useAddWareHouseMutation();
   const { data, isLoading, isFetching } = useGetAllCountryQuery("");
+  
   useEffect(() => {
     if (!isFetching && !isLoading) {
       dispatch(setAllCountry(data?.data));

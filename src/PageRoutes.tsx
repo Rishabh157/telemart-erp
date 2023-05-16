@@ -84,6 +84,7 @@ import {
   VendorPurchaseOrderTabWrapper,
   AddWarehouseWrapper,
   WarehousesListingWrapper,
+  ViewWarehouseWrapper,
 } from "./pages/index";
 
 import { useDispatch } from "react-redux";
@@ -184,6 +185,7 @@ const PageRoutes = () => {
 
           <Route path="/warehouse" element={<WarehousesListingWrapper />} />
           <Route path="/warehouse/:id" element={<EditWarehouseWrapper />} />
+          <Route path="/warehouse/view/:id" element={<ViewWarehouseWrapper />} />
 
           <Route
             path="/warehouse/add-warehouse"

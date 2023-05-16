@@ -68,6 +68,7 @@ import VendorWarehouseTabWrapper from "./vendors/view/tabs/VendorWarehouseTab/Ve
 import VendorPurchaseOrderTabWrapper from "./vendors/view/tabs/VendorPurchaseOrderTab/VendorPurchaseOrderTabWrapper";
 import AddWarehouseWrapper from "./warehouses/add/AddWarehouseWrapper";
 import WarehousesListingWrapper from "./warehouses/list/WarehousesListingWrapper";
+import ViewWarehouseWrapper from "./warehouses/view/ViewWarehouseWrapper";
 import ProfileWrappper from "./profile/ProfileWrapper";
 import EditCompanyWrapper from "./configuration/Configuration Screens/configurationCompany/edit/EditCompanyWrapper";
 import EditAttributeWrapper from "./configuration/Configuration Screens/attributes/edit/EditAttributeWrapper";
@@ -166,6 +167,7 @@ export {
   VendorPurchaseOrderTabWrapper,
   AddWarehouseWrapper,
   WarehousesListingWrapper,
+  ViewWarehouseWrapper,
   ProfileWrappper,
   EditCompanyWrapper,
   EditAttributeWrapper,
