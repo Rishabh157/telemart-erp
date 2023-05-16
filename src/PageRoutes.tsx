@@ -121,6 +121,8 @@ import {
     AddDidManagement,
 } from './pages/index'
 import Auth from './pages/login/Auth'
+import TabManagementListingWrapper from './pages/media/tabManement/list/TabManagementListingWrapper'
+import AddTabManagement from './pages/media/tabManement/add/AddTabManagement'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -526,6 +528,14 @@ const PageRoutes = () => {
                     <Route
                         path="media/did/edit"
                         element={<AddDidManagement />}
+                    />
+                      <Route
+                        path="media/Tab"
+                        element={<TabManagementListingWrapper />}
+                    />
+                        <Route
+                        path="media/Tab/add"
+                        element={<AddTabManagement />}
                     />
                 </Routes>
             </BrowserRouter>

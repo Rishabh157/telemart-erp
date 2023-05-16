@@ -15,7 +15,7 @@ const mediaNavigation: NavItemType[] = [
     {
         label: 'Tab Management',
         icon: AiOutlineSetting,
-        path: '/media/tap/',
+        path: '/media/tab',
     },
     {
         label: 'Channel Management',
