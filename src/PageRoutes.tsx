@@ -130,7 +130,6 @@ import AddTabManagement from './pages/media/tabManement/add/AddTabManagement'
 import CompetitorManagementListingWrapper from './pages/media/competitorManagement/list/CompetitorManagementListingWrapper'
 import AddCompetitorManagement from './pages/media/competitorManagement/add/AddCompetitorManagement'
 
-
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {

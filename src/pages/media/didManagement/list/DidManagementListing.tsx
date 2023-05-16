@@ -77,8 +77,7 @@ const DidManagementListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                    extraClasses="h-full overflow-auto"
-
+                        extraClasses="h-full overflow-auto"
                     />
                 </div>
 

@@ -1,21 +1,21 @@
 export type DidManagementListResponse = {
-    didNumber:string;
+    didNumber: string
     _id: string
-    is_active: boolean;
-    is_deleted: boolean;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
+    is_active: boolean
+    is_deleted: boolean
+    createdAt: string
+    updatedAt: string
+    __v: number
 }
 
 export type AddDidManagement = {
-    didNumber:string;
+    didNumber: string
     companyId: string
 }
 
 export type UpdateDidManagement = {
     body: {
-        didNumber:string;
+        didNumber: string
         companyId: string
     }
     id: string
