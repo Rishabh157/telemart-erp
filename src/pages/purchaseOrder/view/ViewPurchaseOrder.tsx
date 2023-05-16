@@ -7,6 +7,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './ViewPurchaseOrderWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -23,9 +25,42 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
+type approval = {
+    approvalByName: string
+    approvalLevel: number
+    time: string
+}
+
+const columns: columnTypes[] = [
+    {
+        field: 'approval[0].approvalByName',
+        headerName: 'Approved By',
+        flex: 'flex-[1.0_1.0_0%]',
+        renderCell: (row: approval) => {
+            return <span>{row?.approvalByName} </span>
+        },
+    },
+
+    {
+        field: 'approvalLevel',
+        headerName: 'Approval Level',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: approval) => {
+            return <span>{row?.approvalLevel} </span>
+        },
+    },
+    {
+        field: 'time',
+        headerName: 'Time',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: approval) => {
+            return <span className="py-4">{row.time} </span>
+        },
+    },
+]
+
 const ViewPurchaseOrder = ({ formikProps }: Props) => {
     const { values, setFieldValue } = formikProps
-    //const { estReceivingDate, itemName, quantity, rate } = values?.purchaseOrder;
 
     return (
         <div className="">
@@ -167,6 +202,23 @@ const ViewPurchaseOrder = ({ formikProps }: Props) => {
                                 )
                             }}
                         </FieldArray>
+                    </div>
+
+                    {/*  Approval  */}
+                    <div className="px-3">
+                        <div className=" text-lg pb-2 font-medium text-primary-main">
+                            Approval
+                        </div>
+                    </div>
+                    {/*Table Header */}
+                    <div className="flex flex-col gap-y-5">
+                        <div className="grow overflow-auto  ">
+                            <ATMTable
+                                columns={columns}
+                                rows={values?.approval}
+                                extraClasses="max-h-full overflow-auto p-6"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
