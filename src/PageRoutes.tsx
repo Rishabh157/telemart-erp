@@ -2,8 +2,10 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
     AddASRWrapper,
+    AddCompetitorManagement,
     ASRListingWrapper,
     BarcodeGenerator,
+    CompetitorManagementListingWrapper,
     EditDidManagement,
     EditPurchaseOrderWrapper,
 } from './pages/index'
@@ -562,6 +564,14 @@ const PageRoutes = () => {
                     <Route
                         path="media/slot/add"
                         element={<AddSlotManagement />}
+                    />
+                    <Route
+                        path="media/competitor"
+                        element={<CompetitorManagementListingWrapper />}
+                    />
+                    <Route
+                        path="media/competitor/add"
+                        element={<AddCompetitorManagement />}
                     />
                 </Routes>
             </BrowserRouter>

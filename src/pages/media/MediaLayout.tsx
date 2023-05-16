@@ -25,7 +25,7 @@ const mediaNavigation: NavItemType[] = [
     {
         label: 'Competitor Management',
         icon: AiOutlineSetting,
-        path: '/media/competitor/management',
+        path: '/media/competitor',
     },
     {
         label: 'Slot Management',
