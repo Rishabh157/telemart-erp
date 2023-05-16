@@ -18,9 +18,12 @@ const columns: columnTypes[] = [
     headerName: "User Name",
     flex: "flex-[1_1_0%]",
     renderCell: (row: any) => (
-      <span> {row.firstName} {row.lastName} </span>
+      <span>
+        {" "}
+        {row.firstName} {row.lastName}{" "}
+      </span>
     ),
-  },  
+  },
   {
     field: "email",
     headerName: "Email",
@@ -60,7 +63,7 @@ const UsersListingWrapper = () => {
   const { data, isFetching, isLoading } = useGetNewUsersQuery({
     limit: rowsPerPage,
     searchValue: searchValue,
-    params: ["firstName", "mobile"],
+    params: ["firstName", "mobile", "lastName"],
     page: page,
     filterBy: [
       {

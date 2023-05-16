@@ -6,7 +6,11 @@ import ATMTableHeader from "src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from "src/components/UI/atoms/ATMPagination/ATMPagination";
 import { AppDispatch, RootState } from "src/redux/store";
-import { setPage, setRowsPerPage } from "src/redux/slices/userSlice";
+import {
+  setPage,
+  setRowsPerPage,
+  setSearchValue,
+} from "src/redux/slices/NewUserSlice";
 
 export type Props = {
   columns: any[];
@@ -16,7 +20,7 @@ export type Props = {
 const UsersListing = ({ columns, rows }: Props) => {
   const newUserState: any = useSelector((state: RootState) => state.newUser);
 
-  const { page, rowsPerPage } = newUserState;
+  const { page, rowsPerPage, totalItems, searchValue } = newUserState;
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -44,10 +48,14 @@ const UsersListing = ({ columns, rows }: Props) => {
         {/*Table Header */}
         <ATMTableHeader
           page={page}
-          rowCount={rows?.length}
+          searchValue={searchValue}
+          rowCount={totalItems}
           rowsPerPage={rowsPerPage}
           rows={rows}
           onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
+          onSearch={(newValue) => {
+            dispatch(setSearchValue(newValue));
+          }}
           isFilter
           // onFilterClick={() => setIsFilterOpen(true)}
         />
@@ -68,7 +76,7 @@ const UsersListing = ({ columns, rows }: Props) => {
         <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
           <ATMPagination
             page={page}
-            rowCount={rows?.length}
+            rowCount={totalItems}
             rows={rows}
             rowsPerPage={rowsPerPage}
             onPageChange={(newPage) => dispatch(setPage(newPage))}
