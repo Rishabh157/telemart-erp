@@ -1,26 +1,25 @@
 import React, { useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import TabManagementListing from './TabManagementListing'
+import { SlotManagementListResponse } from 'src/models/Slot.model'
+import SlotManagementListing from './SlotManagementListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";
-
-import MediaLayout from '../../MediaLayout'
-import { TabManagementListResponse } from 'src/models/tabManagement.model'
-import { useGetPaginationTabQuery } from 'src/services/media/TabManagementServices'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/media/tabManagementSlice'
+} from 'src/redux/slices/media/slotManagementSlice'
+import { useGetPaginationSlotQuery } from 'src/services/media/SlotManagementServices'
+import MediaLayout from 'src/pages/media/MediaLayout'
 
 const columns: columnTypes[] = [
     {
         field: 'productName',
         headerName: 'Product Group Name',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: TabManagementListResponse) => (
+        renderCell: (row: SlotManagementListResponse) => (
             <span> {row.productGroupName} </span>
         ),
     },
@@ -28,7 +27,7 @@ const columns: columnTypes[] = [
         field: 'quantity',
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: TabManagementListResponse) => (
+        renderCell: (row: SlotManagementListResponse) => (
             <span> {row.count} </span>
         ),
     },
@@ -36,7 +35,7 @@ const columns: columnTypes[] = [
         field: 'warehouse',
         headerName: 'Warehouse',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: TabManagementListResponse) => (
+        renderCell: (row: SlotManagementListResponse) => (
             <span> {row.wareHouse} </span>
         ),
     },
@@ -53,16 +52,15 @@ const columns: columnTypes[] = [
     },
 ]
 
-const TabManagementListingWrapper = () => {
-    const tabManagementState: any = useSelector(
-        (state: RootState) => state.tabManagement
+const SlotManagementListingWrapper = () => {
+    const slotManagementState: any = useSelector(
+        (state: RootState) => state.slotManagement
     )
 
-    const { page, rowsPerPage, searchValue, items } = tabManagementState
-
+    const { page, rowsPerPage, searchValue, items } = slotManagementState
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetPaginationTabQuery({
+    const { data, isFetching, isLoading } = useGetPaginationSlotQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['productGroupName'],
@@ -95,11 +93,11 @@ const TabManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <TabManagementListing columns={columns} rows={items} />
+                    <SlotManagementListing columns={columns} rows={items} />
                 </div>
             </MediaLayout>
         </>
     )
 }
 
-export default TabManagementListingWrapper
+export default SlotManagementListingWrapper
