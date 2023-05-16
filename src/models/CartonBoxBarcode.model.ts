@@ -19,8 +19,7 @@ export type CartonBoxBarcodeListResponse = {
 export type AddCartonBoxBarcode = {
     cartonBoxId: string
     barcodeGroupNumber: string
-    barcodeNumber: string
-    itemBarcodeNumber: string
+    itemBarcodeNumber: string[]
     companyId: string
 }
 
@@ -28,7 +27,6 @@ export type UpdateCartonBoxBarcode = {
     body: {
         cartonBoxId: string
         barcodeGroupNumber: string
-        barcodeNumber: string
         itemBarcodeNumber: string
         companyId: string
     }
