@@ -44,6 +44,7 @@ import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import NewUserSlice from './slices/NewUserSlice'
 import didManagementSlice from './slices/media/didManagementSlice'
 import channelManagementSlice from './slices/media/channelManagementSlice'
+import tabManagementSlice from './slices/media/tabManagementSlice'
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
 //     if (action.type.includes("rejected") && action.payload.status === 401) {
@@ -95,6 +96,7 @@ const store = configureStore({
         productGroupBarcode: ProductGroupBarcodeSlice,
         didManagement: didManagementSlice,
         channelManagement: channelManagementSlice,
+        TabManagement: tabManagementSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
