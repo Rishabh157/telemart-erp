@@ -127,6 +127,8 @@ import {
 import Auth from './pages/login/Auth'
 import TabManagementListingWrapper from './pages/media/tabManement/list/TabManagementListingWrapper'
 import AddTabManagement from './pages/media/tabManement/add/AddTabManagement'
+import CompetitorManagementListingWrapper from './pages/media/competitorManagement/list/CompetitorManagementListingWrapper'
+import AddCompetitorManagement from './pages/media/competitorManagement/add/AddCompetitorManagement'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -552,6 +554,14 @@ const PageRoutes = () => {
                     <Route
                         path="media/Tab/add"
                         element={<AddTabManagement />}
+                    />
+                    <Route
+                        path="media/competitor"
+                        element={<CompetitorManagementListingWrapper />}
+                    />
+                    <Route
+                        path="media/competitor/add"
+                        element={<AddCompetitorManagement />}
                     />
                 </Routes>
             </BrowserRouter>
