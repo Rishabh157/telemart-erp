@@ -1,26 +1,25 @@
 import React, { useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import TabManagementListing from './TabManagementListing'
+import { ChannelManagementListResponse } from 'src/models/Channel.model'
+import ChannelManagementListing from './ChannelManagementListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";
-
-import MediaLayout from '../../MediaLayout'
-import { TabManagementListResponse } from 'src/models/tabManagement.model'
-import { useGetPaginationTabQuery } from 'src/services/media/TabManagementServices'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/media/tabManagementSlice'
+} from 'src/redux/slices/media/channelManagementSlice'
+import { useGetPaginationchannelQuery } from 'src/services/media/ChannelManagementServices'
+import MediaLayout from 'src/pages/media/MediaLayout'
 
 const columns: columnTypes[] = [
     {
         field: 'productName',
         headerName: 'Product Group Name',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: TabManagementListResponse) => (
+        renderCell: (row: ChannelManagementListResponse) => (
             <span> {row.productGroupName} </span>
         ),
     },
@@ -28,7 +27,7 @@ const columns: columnTypes[] = [
         field: 'quantity',
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: TabManagementListResponse) => (
+        renderCell: (row: ChannelManagementListResponse) => (
             <span> {row.count} </span>
         ),
     },
@@ -36,7 +35,7 @@ const columns: columnTypes[] = [
         field: 'warehouse',
         headerName: 'Warehouse',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: TabManagementListResponse) => (
+        renderCell: (row: ChannelManagementListResponse) => (
             <span> {row.wareHouse} </span>
         ),
     },
@@ -53,16 +52,15 @@ const columns: columnTypes[] = [
     },
 ]
 
-const TabManagementListingWrapper = () => {
-    const TabManagementState: any = useSelector(
-        (state: RootState) => state.TabManagement
+const ChannelManagementListingWrapper = () => {
+    const channelManagementState: any = useSelector(
+        (state: RootState) => state.channelManagement
     )
 
-    const { page, rowsPerPage, searchValue, items } = TabManagementState
-
+    const { page, rowsPerPage, searchValue, items } = channelManagementState
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetPaginationTabQuery({
+    const { data, isFetching, isLoading } = useGetPaginationchannelQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['productGroupName'],
@@ -95,11 +93,11 @@ const TabManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <TabManagementListing columns={columns} rows={items} />
+                    <ChannelManagementListing columns={columns} rows={items} />
                 </div>
             </MediaLayout>
         </>
     )
 }
 
-export default TabManagementListingWrapper
+export default ChannelManagementListingWrapper

@@ -43,6 +43,7 @@ import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
 import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import NewUserSlice from './slices/NewUserSlice'
 import didManagementSlice from './slices/media/didManagementSlice'
+import channelManagementSlice from './slices/media/channelManagementSlice'
 import tabManagementSlice from './slices/media/tabManagementSlice'
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -94,7 +95,8 @@ const store = configureStore({
         cartonBoxBarcode: CartonBoxBarcodeSlice,
         productGroupBarcode: ProductGroupBarcodeSlice,
         didManagement: didManagementSlice,
-        TabManagement:tabManagementSlice,
+        channelManagement: channelManagementSlice,
+        TabManagement: tabManagementSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

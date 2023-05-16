@@ -1,19 +1,19 @@
-import { TabManagementListResponse } from '../../../models/tabManagement.model'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { ChannelManagementListResponse } from 'src/models/Channel.model'
 
-export interface TabManagementSliceStateType {
-    items: TabManagementListResponse[] | []
+export interface ChannelManagementSliceStateType {
+    items: ChannelManagementListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selectetab: string
+    selectedId: string
 }
 
-const initialState: TabManagementSliceStateType = {
+const initialState: ChannelManagementSliceStateType = {
     items: [],
     totalItems: 0,
     isTableLoading: false,
@@ -21,16 +21,16 @@ const initialState: TabManagementSliceStateType = {
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectetab: '',
+    selectedId: '',
 }
 
-const TabManagementSlice: any = createSlice({
-    name: 'TabManagement',
+const channelManagementSlice: any = createSlice({
+    name: 'channelManagement',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<TabManagementListResponse[] | []>
+            action: PayloadAction<ChannelManagementListResponse[] | []>
         ) => {
             state.items = action.payload
         },
@@ -60,8 +60,8 @@ const TabManagementSlice: any = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setSelectetab: (state, action: PayloadAction<string>) => {
-            state.selectetab = action.payload
+        setSelectedId: (state, action: PayloadAction<string>) => {
+            state.selectedId = action.payload
         },
     },
 })
@@ -74,6 +74,6 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectetab,
-} = TabManagementSlice.actions
-export default TabManagementSlice.reducer
+    setSelectedId,
+} = channelManagementSlice.actions
+export default channelManagementSlice.reducer
