@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { DidManagementListResponse } from 'src/models/Media.model'
-import DidManagementListing from './DidManagementListing'
+import { ChannelManagementListResponse } from 'src/models/Channel.model'
+import ChannelManagementListing from './ChannelManagementListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";
@@ -10,16 +10,16 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/media/didManagementSlice'
-import MediaLayout from '../../MediaLayout'
-import { useGetPaginationDidQuery } from 'src/services/media/DidManagementServices'
+} from 'src/redux/slices/media/channelManagementSlice'
+import { useGetPaginationchannelQuery } from 'src/services/media/ChannelManagementServices'
+import MediaLayout from 'src/pages/media/MediaLayout'
 
 const columns: columnTypes[] = [
     {
         field: 'productName',
         headerName: 'Product Group Name',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
+        renderCell: (row: ChannelManagementListResponse) => (
             <span> {row.productGroupName} </span>
         ),
     },
@@ -27,7 +27,7 @@ const columns: columnTypes[] = [
         field: 'quantity',
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
+        renderCell: (row: ChannelManagementListResponse) => (
             <span> {row.count} </span>
         ),
     },
@@ -35,7 +35,7 @@ const columns: columnTypes[] = [
         field: 'warehouse',
         headerName: 'Warehouse',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
+        renderCell: (row: ChannelManagementListResponse) => (
             <span> {row.wareHouse} </span>
         ),
     },
@@ -52,15 +52,15 @@ const columns: columnTypes[] = [
     },
 ]
 
-const DidManagementListingWrapper = () => {
-    const didManagementState: any = useSelector(
-        (state: RootState) => state.didManagement
+const ChannelManagementListingWrapper = () => {
+    const channelManagementState: any = useSelector(
+        (state: RootState) => state.channelManagement
     )
 
-    const { page, rowsPerPage, searchValue, items } = didManagementState
+    const { page, rowsPerPage, searchValue, items } = channelManagementState
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetPaginationDidQuery({
+    const { data, isFetching, isLoading } = useGetPaginationchannelQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['productGroupName'],
@@ -93,11 +93,11 @@ const DidManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <DidManagementListing columns={columns} rows={items} />
+                    <ChannelManagementListing columns={columns} rows={items} />
                 </div>
             </MediaLayout>
         </>
     )
 }
 
-export default DidManagementListingWrapper
+export default ChannelManagementListingWrapper

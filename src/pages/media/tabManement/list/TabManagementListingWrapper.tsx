@@ -1,25 +1,26 @@
 import React, { useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { DidManagementListResponse } from 'src/models/Media.model'
-import DidManagementListing from './DidManagementListing'
+import TabManagementListing from './TabManagementListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";
+
+import MediaLayout from '../../MediaLayout'
+import { TabManagementListResponse } from 'src/models/tabManagement.model'
+import { useGetPaginationTabQuery } from 'src/services/media/TabManagementServices'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/media/didManagementSlice'
-import MediaLayout from '../../MediaLayout'
-import { useGetPaginationDidQuery } from 'src/services/media/DidManagementServices'
+} from 'src/redux/slices/media/tabManagementSlice'
 
 const columns: columnTypes[] = [
     {
         field: 'productName',
         headerName: 'Product Group Name',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
+        renderCell: (row: TabManagementListResponse) => (
             <span> {row.productGroupName} </span>
         ),
     },
@@ -27,7 +28,7 @@ const columns: columnTypes[] = [
         field: 'quantity',
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
+        renderCell: (row: TabManagementListResponse) => (
             <span> {row.count} </span>
         ),
     },
@@ -35,7 +36,7 @@ const columns: columnTypes[] = [
         field: 'warehouse',
         headerName: 'Warehouse',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
+        renderCell: (row: TabManagementListResponse) => (
             <span> {row.wareHouse} </span>
         ),
     },
@@ -52,15 +53,16 @@ const columns: columnTypes[] = [
     },
 ]
 
-const DidManagementListingWrapper = () => {
-    const didManagementState: any = useSelector(
-        (state: RootState) => state.didManagement
+const TabManagementListingWrapper = () => {
+    const TabManagementState: any = useSelector(
+        (state: RootState) => state.TabManagement
     )
 
-    const { page, rowsPerPage, searchValue, items } = didManagementState
+    const { page, rowsPerPage, searchValue, items } = TabManagementState
+
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetPaginationDidQuery({
+    const { data, isFetching, isLoading } = useGetPaginationTabQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['productGroupName'],
@@ -93,11 +95,11 @@ const DidManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <DidManagementListing columns={columns} rows={items} />
+                    <TabManagementListing columns={columns} rows={items} />
                 </div>
             </MediaLayout>
         </>
     )
 }
 
-export default DidManagementListingWrapper
+export default TabManagementListingWrapper
