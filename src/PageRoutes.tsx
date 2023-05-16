@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
     AddASRWrapper,
+    AddDidManagementWrapper,
     ASRListingWrapper,
     BarcodeGenerator,
     EditPurchaseOrderWrapper,
@@ -118,9 +119,9 @@ import {
     AddCbBarcodeWrapper,
     DidManagementListingWrapper,
     OrganisationHierarchy,
-    AddDidManagement,
 } from './pages/index'
 import Auth from './pages/login/Auth'
+
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -521,11 +522,11 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="media/did/add"
-                        element={<AddDidManagement />}
+                        element={<AddDidManagementWrapper />}
                     />
                     <Route
                         path="media/did/edit"
-                        element={<AddDidManagement />}
+                        element={<AddDidManagementWrapper />}
                     />
                 </Routes>
             </BrowserRouter>

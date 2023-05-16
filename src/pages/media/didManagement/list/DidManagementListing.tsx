@@ -21,11 +21,11 @@ type Props = {
 
 const DidManagementListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const inventoryState: any = useSelector(
-        (state: RootState) => state.inventory
+    const didManagementState: any = useSelector(
+        (state: RootState) => state.didManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = inventoryState
+    const { page, rowsPerPage, totalItems } = didManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -38,7 +38,7 @@ const DidManagementListing = ({ columns, rows }: Props) => {
     ]
 
     return (
-        <div className="px-4 h-full overflow-auto pt-3 ">
+        <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>

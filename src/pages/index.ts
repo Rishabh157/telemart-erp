@@ -95,6 +95,7 @@ import DidManagementListingWrapper from './media/didManagement/list/DidManagemen
 import OrganisationHierarchy from './configuration/Configuration Screens/organizationHeirarchy/OrganizationHeirarchy'
 import AddDidManagement from './media/didManagement/add/AddDidManagement'
 import EditDidManagement from './media/didManagement/edit/EditDidManagement'
+import AddDidManagementWrapper from './media/didManagement/add/AddDidManagementWrapper'
 
 export {
     AddASRWrapper,
@@ -194,4 +195,5 @@ export {
     DidManagementListingWrapper,
     AddDidManagement,
     EditDidManagement,
+    AddDidManagementWrapper
 }

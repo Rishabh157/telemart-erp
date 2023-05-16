@@ -8,7 +8,7 @@ export const didManagementApi = apiSlice.injectEndpoints({
         getPaginationDid: builder.query({
             providesTags: ['did'],
             query: (body: PaginationType) => ({
-                url: '/did',
+                url: '/did-management',
                 method: 'POST',
                 body,
             }),
@@ -18,7 +18,7 @@ export const didManagementApi = apiSlice.injectEndpoints({
         addDid: builder.mutation({
             invalidatesTags: ['did'],
             query: (body: AddDidManagement) => ({
-                url: '/did/add',
+                url: '/did-management/add',
                 method: 'POST',
                 body,
             }),
