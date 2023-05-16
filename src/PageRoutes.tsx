@@ -123,10 +123,13 @@ import {
     AddChannelManagement,
     ChannelManagementListingWrapper,
     EditChannelManagement,
+    SlotManagementListingWrapper,
+    AddSlotManagement,
+    AddTabManagement,
+    TabManagementListingWrapper
 } from './pages/index'
 import Auth from './pages/login/Auth'
-import TabManagementListingWrapper from './pages/media/tabManement/list/TabManagementListingWrapper'
-import AddTabManagement from './pages/media/tabManement/add/AddTabManagement'
+
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -546,12 +549,20 @@ const PageRoutes = () => {
                         element={<EditChannelManagement />}
                     />
                     <Route
-                        path="media/Tab"
+                        path="media/tab"
                         element={<TabManagementListingWrapper />}
                     />
                     <Route
-                        path="media/Tab/add"
+                        path="media/tab/add"
                         element={<AddTabManagement />}
+                    />
+                     <Route
+                        path="media/slot"
+                        element={<SlotManagementListingWrapper />}
+                    />
+                    <Route
+                        path="media/slot/add"
+                        element={<AddSlotManagement />}
                     />
                 </Routes>
             </BrowserRouter>
