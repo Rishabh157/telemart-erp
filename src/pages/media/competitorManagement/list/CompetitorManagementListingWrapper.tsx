@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { DidManagementListResponse } from 'src/models/Media.model'
-import DidManagementListing from './CompetitorManagementListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";

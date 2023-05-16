@@ -1,12 +1,12 @@
 import React from 'react'
 import MediaLayout from '../../MediaLayout'
 
-const AddDidManagement = () => {
+const AddCompetitorManagement = () => {
     return (
         <MediaLayout>
-            <div>AddDidManagement</div>
+            <div>AddComepetorManagement</div>
         </MediaLayout>
     )
 }
 
-export default AddDidManagement
+export default AddCompetitorManagement
