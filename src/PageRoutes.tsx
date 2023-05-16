@@ -5,6 +5,7 @@ import {
     AddDidManagementWrapper,
     ASRListingWrapper,
     BarcodeGenerator,
+    EditDidManagement,
     EditPurchaseOrderWrapper,
 } from './pages/index'
 import { AddAttributeWrapper, AttributesListingWrapper } from './pages/index'
@@ -119,8 +120,16 @@ import {
     AddCbBarcodeWrapper,
     DidManagementListingWrapper,
     OrganisationHierarchy,
+    AddDidManagement,
+    AddChannelManagement,
+    ChannelManagementListingWrapper,
+    EditChannelManagement,
 } from './pages/index'
 import Auth from './pages/login/Auth'
+import TabManagementListingWrapper from './pages/media/tabManement/list/TabManagementListingWrapper'
+import AddTabManagement from './pages/media/tabManement/add/AddTabManagement'
+import CompetitorManagementListingWrapper from './pages/media/competitorManagement/list/CompetitorManagementListingWrapper'
+import AddCompetitorManagement from './pages/media/competitorManagement/add/AddCompetitorManagement'
 
 
 const PageRoutes = () => {
@@ -526,7 +535,35 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="media/did/edit"
-                        element={<AddDidManagementWrapper />}
+                        element={<EditDidManagement />}
+                    />
+                    <Route
+                        path="media/channel"
+                        element={<ChannelManagementListingWrapper />}
+                    />
+                    <Route
+                        path="media/channel/add"
+                        element={<AddChannelManagement />}
+                    />
+                    <Route
+                        path="media/channel/edit"
+                        element={<EditChannelManagement />}
+                    />
+                    <Route
+                        path="media/Tab"
+                        element={<TabManagementListingWrapper />}
+                    />
+                    <Route
+                        path="media/Tab/add"
+                        element={<AddTabManagement />}
+                    />
+                    <Route
+                        path="media/competitor"
+                        element={<CompetitorManagementListingWrapper />}
+                    />
+                    <Route
+                        path="media/competitor/add"
+                        element={<AddCompetitorManagement />}
                     />
                 </Routes>
             </BrowserRouter>

@@ -15,17 +15,17 @@ const mediaNavigation: NavItemType[] = [
     {
         label: 'Tab Management',
         icon: AiOutlineSetting,
-        path: '/media/tap/',
+        path: '/media/tab',
     },
     {
         label: 'Channel Management',
         icon: AiOutlineSetting,
-        path: '/media/channel/management',
+        path: '/media/channel',
     },
     {
         label: 'Competitor Management',
         icon: AiOutlineSetting,
-        path: '/media/competitor/management',
+        path: '/media/competitor',
     },
     {
         label: 'Analysis',
