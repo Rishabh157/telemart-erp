@@ -16,29 +16,14 @@ import { useGetPaginationDidQuery } from 'src/services/media/DidManagementServic
 
 const columns: columnTypes[] = [
     {
-        field: 'productName',
-        headerName: 'Product Group Name',
+        field: 'didNumber',
+        headerName: 'DID Number',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: DidManagementListResponse) => (
-            <span> {row.productGroupName} </span>
+            <span> {row.didNumber} </span>
         ),
     },
-    {
-        field: 'quantity',
-        headerName: 'Quantity',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
-            <span> {row.count} </span>
-        ),
-    },
-    {
-        field: 'warehouse',
-        headerName: 'Warehouse',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
-            <span> {row.wareHouse} </span>
-        ),
-    },
+
     {
         field: 'actions',
         headerName: 'Actions',
@@ -58,12 +43,13 @@ const DidManagementListingWrapper = () => {
     )
 
     const { page, rowsPerPage, searchValue, items } = didManagementState
+
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetPaginationDidQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['productGroupName'],
+        params: ['didNumber'],
         page: page,
         filterBy: [
             {
@@ -92,9 +78,7 @@ const DidManagementListingWrapper = () => {
     return (
         <>
             <MediaLayout>
-                <div className="h-full">
-                    <DidManagementListing columns={columns} rows={items} />
-                </div>
+                <DidManagementListing columns={columns} rows={items} />
             </MediaLayout>
         </>
     )

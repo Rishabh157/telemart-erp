@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
     AddASRWrapper,
+    AddDidManagementWrapper,
     ASRListingWrapper,
     BarcodeGenerator,
     EditDidManagement,
@@ -119,7 +120,6 @@ import {
     AddCbBarcodeWrapper,
     DidManagementListingWrapper,
     OrganisationHierarchy,
-    AddDidManagement,
     AddChannelManagement,
     ChannelManagementListingWrapper,
     EditChannelManagement,
@@ -529,7 +529,7 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="media/did/add"
-                        element={<AddDidManagement />}
+                        element={<AddDidManagementWrapper />}
                     />
                     <Route
                         path="media/did/edit"
