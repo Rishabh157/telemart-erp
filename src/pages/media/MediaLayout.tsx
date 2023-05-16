@@ -20,7 +20,7 @@ const mediaNavigation: NavItemType[] = [
     {
         label: 'Channel Management',
         icon: AiOutlineSetting,
-        path: '/media/channel/management',
+        path: '/media/channel',
     },
     {
         label: 'Competitor Management',

@@ -95,6 +95,9 @@ import DidManagementListingWrapper from './media/didManagement/list/DidManagemen
 import OrganisationHierarchy from './configuration/Configuration Screens/organizationHeirarchy/OrganizationHeirarchy'
 import AddDidManagement from './media/didManagement/add/AddDidManagement'
 import EditDidManagement from './media/didManagement/edit/EditDidManagement'
+import ChannelManagementListingWrapper from './media/channelManagement/didManagement/list/ChannelManagementListingWrapper'
+import AddChannelManagement from './media/channelManagement/didManagement/add/AddChannelManagement'
+import EditChannelManagement from './media/channelManagement/didManagement/edit/EditChannelManagement'
 
 export {
     AddASRWrapper,
@@ -194,4 +197,7 @@ export {
     DidManagementListingWrapper,
     AddDidManagement,
     EditDidManagement,
+    AddChannelManagement,
+    ChannelManagementListingWrapper,
+    EditChannelManagement,
 }

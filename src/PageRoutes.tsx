@@ -4,6 +4,7 @@ import {
     AddASRWrapper,
     ASRListingWrapper,
     BarcodeGenerator,
+    EditDidManagement,
     EditPurchaseOrderWrapper,
 } from './pages/index'
 import { AddAttributeWrapper, AttributesListingWrapper } from './pages/index'
@@ -119,6 +120,9 @@ import {
     DidManagementListingWrapper,
     OrganisationHierarchy,
     AddDidManagement,
+    AddChannelManagement,
+    ChannelManagementListingWrapper,
+    EditChannelManagement,
 } from './pages/index'
 import Auth from './pages/login/Auth'
 
@@ -525,7 +529,19 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="media/did/edit"
-                        element={<AddDidManagement />}
+                        element={<EditDidManagement />}
+                    />
+                    <Route
+                        path="media/channel"
+                        element={<ChannelManagementListingWrapper />}
+                    />
+                    <Route
+                        path="media/channel/add"
+                        element={<AddChannelManagement />}
+                    />
+                    <Route
+                        path="media/channel/edit"
+                        element={<EditChannelManagement />}
                     />
                 </Routes>
             </BrowserRouter>
