@@ -1,277 +1,271 @@
-import React, { useEffect,useState } from "react";
-import { Formik  ,Form,FormikProps} from "formik";
-import { array, boolean, number, object, string } from "yup";
-import AddScheme from "./AddScheme";
-import StepAddSchemeDetailsWrapper from "./FormSteps/StepAddSchemeDetails/StepAddSchemeDetailsWrapper";
-import StepAddProductsWrapper from "./FormSteps/StepAddProducts/StepAddProductsWrapper";
-import StepAddFAQ from "./FormSteps/StepAddFAQ/StepAddFAQ";
-import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "src/redux/store";
-import { setAllItems } from "src/redux/slices/productGroupSlice";
-import { useGetAllProductGroupQuery } from "src/services/ProductGroupService";
-import { showToast } from "src/utils";
-import {  useNavigate } from "react-router-dom";
-import { useAddSchemeMutation } from "src/services/SchemeService";
-import  moment  from "moment";
+import React, { useEffect, useState } from 'react'
+import { Formik, Form, FormikProps } from 'formik'
+import { array, boolean, number, object, string } from 'yup'
+import AddScheme from './AddScheme'
+import StepAddSchemeDetailsWrapper from './FormSteps/StepAddSchemeDetails/StepAddSchemeDetailsWrapper'
+import StepAddProductsWrapper from './FormSteps/StepAddProducts/StepAddProductsWrapper'
+import StepAddFAQ from './FormSteps/StepAddFAQ/StepAddFAQ'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
+import { setAllItems } from 'src/redux/slices/productGroupSlice'
+import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
+import { showToast } from 'src/utils'
+import { useNavigate } from 'react-router-dom'
+import { useAddSchemeMutation } from 'src/services/SchemeService'
+import moment from 'moment'
 
 // TYPE-  Form Intial Values
 
 export type FormInitialValues = {
-  schemeCode: string;
-  category: string;
-  subCategory: string;
-  schemeName: string;
-  schemePrice: string;
-  dimension: {
-    height: string;
-    width: string;
-    depth: string;
-  };
-  weight: string;
-  deliveryCharges: string;
-  comboPacking: boolean;
-  startDate: string | null;
-  endDate: string | null;
-  schemeDescription: string;
-  productInformation: {
-    productGroup: string;
-    productQuantity: number;
-    mrp: number;
-    pop: number;
-  }[];
-  faq: {
-    question: string;
-    answer: string;
-  }[];
-};
+    schemeCode: string
+    category: string
+    subCategory: string
+    schemeName: string
+    schemePrice: string
+    dimension: {
+        height: string
+        width: string
+        depth: string
+    }
+    weight: string
+    deliveryCharges: string
+    comboPacking: boolean
+    startDate: string | null
+    endDate: string | null
+    schemeDescription: string
+    productInformation: {
+        productGroup: string
+        productQuantity: number
+        mrp: number
+        pop: number
+    }[]
+    faq: {
+        question: string
+        answer: string
+    }[]
+}
 
 // Form Steps
 const steps = [
-  {
-    label: "Scheme Details",
-    component: StepAddSchemeDetailsWrapper,
-    validationSchema: object({
-      schemeCode: string().required("Scheme code is required"),
-      category: string().required("Category is required"),
-      subCategory: string().required("Sub category is required"),
-      schemeName: string().required("Scheme Name is required"),
-      schemePrice: string()
-        .required("Required!"),
-      dimension: object().shape({
-        height: string()
-          .required("Height is required"),
-        width: string()
-          .required("Width is required"),
-        depth: string()
-          .required("Depth is required"),
-      }),
-      weight: string()
-        .min(0, "Weight must be positive")
-        .required("Product weight is required"),
-      deliveryCharges: string()
-        .min(0, "Delivery charges must be positive")
-        .required("delivery charges is required"),
-      comboPacking: boolean().required(),
-      startDate: string().required("Please select start date").nullable(),
-      endDate: string().required("Please select end date").nullable(),
-      schemeDescription: string().required("scheme description is required"),
-    }),
-  },
+    {
+        label: 'Scheme Details',
+        component: StepAddSchemeDetailsWrapper,
+        validationSchema: object({
+            schemeCode: string().required('Scheme code is required'),
+            category: string().required('Category is required'),
+            subCategory: string().required('Sub category is required'),
+            schemeName: string().required('Scheme Name is required'),
+            schemePrice: string().required('Required!'),
+            dimension: object().shape({
+                height: string().required('Height is required'),
+                width: string().required('Width is required'),
+                depth: string().required('Depth is required'),
+            }),
+            weight: string()
+                .min(0, 'Weight must be positive')
+                .required('Product weight is required'),
+            deliveryCharges: string()
+                .min(0, 'Delivery charges must be positive')
+                .required('delivery charges is required'),
+            comboPacking: boolean().required(),
+            startDate: string().required('Please select start date').nullable(),
+            endDate: string().required('Please select end date').nullable(),
+            schemeDescription: string().required(
+                'scheme description is required'
+            ),
+        }),
+    },
 
-  {
-    label: "Products",
-    component: StepAddProductsWrapper,
-    validationSchema: object({
-      productInformation: array().of(
-        object().shape({
-          productGroup: string().required("Please select a product"),
-          productQuantity: number()
-           
-            .min(1, "Please enter quantity")
-            .required("Quantity is required"),
-          mrp: number()
-            .min(1, "MRP must be postive")
-            .required("MRP is required"),
-          pop: number()
-            .min(1, "Offer price must be positive")
-            .required("Offer price is required"),
-        })
-      ),
-    }),
-  },
+    {
+        label: 'Products',
+        component: StepAddProductsWrapper,
+        validationSchema: object({
+            productInformation: array().of(
+                object().shape({
+                    productGroup: string().required('Please select a product'),
+                    productQuantity: number()
+                        .min(1, 'Please enter quantity')
+                        .required('Quantity is required'),
+                    mrp: number()
+                        .min(1, 'MRP must be postive')
+                        .required('MRP is required'),
+                    pop: number()
+                        .min(1, 'Offer price must be positive')
+                        .required('Offer price is required'),
+                })
+            ),
+        }),
+    },
 
-  {
-    label: "FAQ's",
-    component: StepAddFAQ,
-    validationSchema: object({
-      faq: array().of(
-        object().shape({
-          question: string().required("Question is required"),
-          answer: string().required("Answer is required"),
-        })
-      ),
-    }),
-  },
-];
+    {
+        label: "FAQ's",
+        component: StepAddFAQ,
+        validationSchema: object({
+            faq: array().of(
+                object().shape({
+                    question: string().required('Question is required'),
+                    answer: string().required('Answer is required'),
+                })
+            ),
+        }),
+    },
+]
 
 // Page Heading
-const pageHeading = "Add New Scheme";
+const pageHeading = 'Add New Scheme'
 
 const AddSchemeWrapper = () => {
-  // Breadcrumbs
-  const breadcrumbs = [
-    {
-      label: "Outer Scheme",
-      onClick: () => {
-        console.log("Scheme");
-      },
-      path: "/scheme",
-    },
-    {
-      label: "Add Scheme",
-      onClick: () => {
-        console.log("add-Scheme");
-      },
-    },
-  ];
-
-  // States
-  const [activeStep, setActiveStep] = React.useState(0);
-  const dispatch=useDispatch()
-  const navigate=useNavigate()
-  const [AddSchemes] = useAddSchemeMutation();
-  const [apiStatus, setApiStatus] = useState(false);
-
- const { userData } = useSelector((state: RootState) => state?.auth);
-
-  
-  // From Initial Values
-  const initialValues: FormInitialValues = {
-    schemeCode: "",
-    category: "",
-    subCategory: "",
-    schemeName: "",
-    schemePrice: "",
-    dimension: {
-      height: "",
-      width: "",
-      depth: "",
-    },
-    weight: "",
-    deliveryCharges: "",
-    comboPacking: false,
-    startDate: null,
-    endDate: null,
-    schemeDescription: "",
-    productInformation: [
-      {
-        productGroup: "",
-        productQuantity: 0,
-        mrp: 0,
-        pop: 0,
-      },
-    ],
-    faq: [
-      {
-        question: "",
-        answer: "",
-      },
-    ],
-  };
-
-  // Form validation schema based on the active step
-  const getValidationSchema = (activeStep: number) => {
-    return steps.find((_, stepIndex) => stepIndex === activeStep)
-      ?.validationSchema;
-  };
-
-
-  // On Submit Handler
-  const onSubmitHandler = (values: FormInitialValues) => {
-      if (activeStep === steps?.length - 1) {
-        setApiStatus(true);
-        setTimeout(() => {
-          AddSchemes({
-            schemeCode: values.schemeCode,
-            schemeName: values.schemeName,
-            category: values.category,
-            subCategory: values.subCategory,
-            schemePrice: Number(values.schemePrice),
-            dimension: {
-              height: Number(values.dimension.height),
-              width: Number(values.dimension.width),
-              depth: Number(values.dimension.depth),
+    // Breadcrumbs
+    const breadcrumbs = [
+        {
+            label: 'Outer Scheme',
+            onClick: () => {
+                console.log('Scheme')
             },
-            weight: Number(values.weight),
-            deliveryCharges:Number(values.deliveryCharges),
-            comboPacking: values.comboPacking,
-            startDate: moment(values.startDate).format('YYYY/MM/D'),
-            endDate: moment(values.endDate).format('YYYY/MM/D'),
-            faq: values.faq,
-            schemeDescription:values.schemeDescription,
-            productInformation:values.productInformation,
-            companyId: userData?.companyId || "",
-          }).then((res) => {
-            if ("data" in res) {
-              if (res?.data?.status) {
-                showToast("success", "Scheme added successfully!");
-                navigate("/Scheme");
-              } else {
-                showToast("error", res?.data?.message);
-              }
-            } else {
-              showToast("error", "Something went wrong");
-            }
-            setApiStatus(false);
-          });
-        }, 1000);
-      } else {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      }
-    };
-  
+            path: '/scheme',
+        },
+        {
+            label: 'Add Scheme',
+            onClick: () => {
+                console.log('add-Scheme')
+            },
+        },
+    ]
 
-  const {data,isLoading ,isFetching}=useGetAllProductGroupQuery("")
-  const {allItems:productGroup}:any=useSelector((state:RootState)=>state.productGroup)
-  
-  const productGroupOptions=productGroup?.map((ele:any)=>{
-    return({
-      label:ele?.groupName,
-      value:ele?._id
+    // States
+    const [activeStep, setActiveStep] = React.useState(0)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const [AddSchemes] = useAddSchemeMutation()
+    const [apiStatus, setApiStatus] = useState(false)
+
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
+    // From Initial Values
+    const initialValues: FormInitialValues = {
+        schemeCode: '',
+        category: '',
+        subCategory: '',
+        schemeName: '',
+        schemePrice: '',
+        dimension: {
+            height: '',
+            width: '',
+            depth: '',
+        },
+        weight: '',
+        deliveryCharges: '',
+        comboPacking: false,
+        startDate: null,
+        endDate: null,
+        schemeDescription: '',
+        productInformation: [
+            {
+                productGroup: '',
+                productQuantity: 0,
+                mrp: 0,
+                pop: 0,
+            },
+        ],
+        faq: [
+            {
+                question: '',
+                answer: '',
+            },
+        ],
+    }
+
+    // Form validation schema based on the active step
+    const getValidationSchema = (activeStep: number) => {
+        return steps.find((_, stepIndex) => stepIndex === activeStep)
+            ?.validationSchema
+    }
+
+    // On Submit Handler
+    const onSubmitHandler = (values: FormInitialValues) => {
+        if (activeStep === steps?.length - 1) {
+            setApiStatus(true)
+            setTimeout(() => {
+                AddSchemes({
+                    schemeCode: values.schemeCode,
+                    schemeName: values.schemeName,
+                    category: values.category,
+                    subCategory: values.subCategory,
+                    schemePrice: Number(values.schemePrice),
+                    dimension: {
+                        height: Number(values.dimension.height),
+                        width: Number(values.dimension.width),
+                        depth: Number(values.dimension.depth),
+                    },
+                    weight: Number(values.weight),
+                    deliveryCharges: Number(values.deliveryCharges),
+                    comboPacking: values.comboPacking,
+                    startDate: moment(values.startDate).format('YYYY/MM/D'),
+                    endDate: moment(values.endDate).format('YYYY/MM/D'),
+                    faq: values.faq,
+                    schemeDescription: values.schemeDescription,
+                    productInformation: values.productInformation,
+                    companyId: userData?.companyId || '',
+                }).then((res) => {
+                    if ('data' in res) {
+                        if (res?.data?.status) {
+                            showToast('success', 'Scheme added successfully!')
+                            navigate('/Scheme')
+                        } else {
+                            showToast('error', res?.data?.message)
+                        }
+                    } else {
+                        showToast('error', 'Something went wrong')
+                    }
+                    setApiStatus(false)
+                })
+            }, 1000)
+        } else {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1)
+        }
+    }
+
+    const { data, isLoading, isFetching } = useGetAllProductGroupQuery('')
+    const { allItems: productGroup }: any = useSelector(
+        (state: RootState) => state.productGroup
+    )
+
+    const productGroupOptions = productGroup?.map((ele: any) => {
+        return {
+            label: ele?.groupName,
+            value: ele?._id,
+        }
     })
-  })
-   
 
-  useEffect(()=>{
-    dispatch(setAllItems(data?.data))
-  },[data, dispatch ,isLoading ,isFetching])
-  
+    useEffect(() => {
+        dispatch(setAllItems(data?.data))
+    }, [data, dispatch, isLoading, isFetching])
 
-  return (
-    <SideNavLayout>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={getValidationSchema(activeStep)}
-        onSubmit={onSubmitHandler}
-      >
-        {(formikProps: FormikProps<FormInitialValues>) => (
-          <Form className="">
-            <AddScheme
-              formikProps={formikProps}
-              steps={steps}
-              activeStep={activeStep}
-              setActiveStep={setActiveStep}
-              breadcrumbs={breadcrumbs}
-              pageHeading={pageHeading}
-              productGroupOptions={productGroupOptions}
-              apiStatus={apiStatus}
-              />
-          </Form>
-        )}
-      </Formik>
-    </SideNavLayout>
-  );
-};
+    return (
+        <SideNavLayout>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={getValidationSchema(activeStep)}
+                onSubmit={onSubmitHandler}
+            >
+                {(formikProps: FormikProps<FormInitialValues>) => (
+                    <Form className="">
+                        <AddScheme
+                            formikProps={formikProps}
+                            steps={steps}
+                            activeStep={activeStep}
+                            setActiveStep={setActiveStep}
+                            breadcrumbs={breadcrumbs}
+                            pageHeading={pageHeading}
+                            productGroupOptions={productGroupOptions}
+                            apiStatus={apiStatus}
+                        />
+                    </Form>
+                )}
+            </Formik>
+        </SideNavLayout>
+    )
+}
 
-export default AddSchemeWrapper;
+export default AddSchemeWrapper

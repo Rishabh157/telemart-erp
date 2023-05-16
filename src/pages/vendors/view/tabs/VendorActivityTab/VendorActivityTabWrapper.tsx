@@ -1,10 +1,10 @@
-import React from "react";
-import VendorActivityTab from "./VendorActivityTab";
+import React from 'react'
+import VendorActivityTab from './VendorActivityTab'
 
-type Props = {};
+type Props = {}
 
 const VendorActivityTabWrapper = (props: Props) => {
-  return <VendorActivityTab />;
-};
+    return <VendorActivityTab />
+}
 
-export default VendorActivityTabWrapper;
+export default VendorActivityTabWrapper

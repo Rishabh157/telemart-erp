@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import ATMBreadCrumbs from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
-import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
-import { setSelectedItem } from "src/redux/slices/CartonBoxBarcodeSlice";
-import { RootState } from "src/redux/store";
-import { useGetByCartonBoxBarcodeQuery } from "src/services/CartonBoxBarcodeService";
-import CartonBoxBarcodeDetailCard from "../list/components/CartonBoxBarcode/CartonBoxBarcodeDetailCard";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { setSelectedItem } from 'src/redux/slices/CartonBoxBarcodeSlice'
+import { RootState } from 'src/redux/store'
+import { useGetByCartonBoxBarcodeQuery } from 'src/services/CartonBoxBarcodeService'
+import CartonBoxBarcodeDetailCard from '../list/components/CartonBoxBarcode/CartonBoxBarcodeDetailCard'
 
-type Props = {};
+type Props = {}
 
 // const timeLineItems = Array(50).fill({
 //   content: (
@@ -23,97 +23,94 @@ type Props = {};
 //     </div>
 //   ),
 // });
-export type barcodecardType ={
-  _id?:string
-  label:String
-  barcodenumber:String
-  count?:string
+export type barcodecardType = {
+    _id?: string
+    label: String
+    barcodenumber: String
+    count?: string
 }
 
 const ViewBarcode = (props: Props) => {
-  const dispatch = useDispatch();
-  const { state } = useLocation();
-  
-  const barcodeNumber = state?.barcodeNumber;
+    const dispatch = useDispatch()
+    const { state } = useLocation()
 
+    const barcodeNumber = state?.barcodeNumber
 
-  const { data, isFetching, isLoading } =
-    useGetByCartonBoxBarcodeQuery(barcodeNumber);
+    const { data, isFetching, isLoading } =
+        useGetByCartonBoxBarcodeQuery(barcodeNumber)
 
-  const { selectedItem }: any = useSelector(
-    (state: RootState) => state.cartonBoxBarcode
-  );
+    const { selectedItem }: any = useSelector(
+        (state: RootState) => state.cartonBoxBarcode
+    )
 
-  useEffect(() => {
- 
-    dispatch(setSelectedItem(data?.data));
-  }, [isFetching, data, isLoading, dispatch]);
+    useEffect(() => {
+        dispatch(setSelectedItem(data?.data))
+    }, [isFetching, data, isLoading, dispatch])
 
-  const datas=selectedItem?.map((ele:any, index:any)=>{
-    return {
-      barcodenumber:ele.itemBarcodeNumber,
-      label:ele.cartonboxLabel
-    }
-  })
- 
+    const datas = selectedItem?.map((ele: any, index: any) => {
+        return {
+            barcodenumber: ele.itemBarcodeNumber,
+            label: ele.cartonboxLabel,
+        }
+    })
 
-  return (
-    <div className="h-full px-2 py-2 flex flex-col">
-      {/* BreadCrumbs */}
-      <div>
-        <ATMBreadCrumbs
-          breadcrumbs={[
-            {
-              label: "Barcodes",
-              path: "/bacode",
-            },
-            {
-              label: "Single Barcode",
-            },
-          ]}
-        />
-      </div>
-
-      <div className="py-2">
-        <ATMPageHeading> Barcode </ATMPageHeading>
-      </div>
-
-      <div className="bg-white shadow rounded border grow overflow-auto border-slate-300 relative">
-        {/* Barcode Info */}
-        <div className="px-3 py-3 border-b border-slate-300 sticky top-0 bg-white z-50 shadow">
-          <div className="flex gap-2">
-            <div className="text-primary-main font-bold">
-              {" "}
-              Barcode Number :{" "}
+    return (
+        <div className="h-full px-2 py-2 flex flex-col">
+            {/* BreadCrumbs */}
+            <div>
+                <ATMBreadCrumbs
+                    breadcrumbs={[
+                        {
+                            label: 'Barcodes',
+                            path: '/bacode',
+                        },
+                        {
+                            label: 'Single Barcode',
+                        },
+                    ]}
+                />
             </div>
-            <div className="font-medium text-blue-900">
-              {selectedItem?.[0].barcodeNumber}{" "}
-            </div>
-          </div>
 
-          <div className="flex gap-2">
-            <div className="text-primary-main font-bold">
-              {" "}
-              Carton Box Name :{" "}
+            <div className="py-2">
+                <ATMPageHeading> Barcode </ATMPageHeading>
             </div>
-            <div className="font-medium text-blue-900">
-              {" "}
-              {selectedItem?.[0].cartonboxLabel}
+
+            <div className="bg-white shadow rounded border grow overflow-auto border-slate-300 relative">
+                {/* Barcode Info */}
+                <div className="px-3 py-3 border-b border-slate-300 sticky top-0 bg-white z-50 shadow">
+                    <div className="flex gap-2">
+                        <div className="text-primary-main font-bold">
+                            {' '}
+                            Barcode Number :{' '}
+                        </div>
+                        <div className="font-medium text-blue-900">
+                            {selectedItem?.[0].barcodeNumber}{' '}
+                        </div>
+                    </div>
+
+                    <div className="flex gap-2">
+                        <div className="text-primary-main font-bold">
+                            {' '}
+                            Carton Box Name :{' '}
+                        </div>
+                        <div className="font-medium text-blue-900">
+                            {' '}
+                            {selectedItem?.[0].cartonboxLabel}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Barcode Time Track */}
+                <div className="py-3 ">
+                    <CartonBoxBarcodeDetailCard
+                        barcodeList={datas}
+                        onCartonBoxBarcodeSelect={() => {}}
+                        onBarcodeClick={() => {}}
+                    />
+                </div>
             </div>
-          </div>
         </div>
+    )
+}
 
-        {/* Barcode Time Track */}
-        <div className="py-3 ">
-          <CartonBoxBarcodeDetailCard
-            barcodeList={datas}
-            onCartonBoxBarcodeSelect={() => {}}
-            onBarcodeClick={() => {}}
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default ViewBarcode;
+export default ViewBarcode

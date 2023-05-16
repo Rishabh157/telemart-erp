@@ -1,0 +1,19 @@
+# .prettierrc.yml
+
+# Specify the line width (maximum characters per line)
+printWidth: 80
+
+# Use single quotes instead of double quotes for strings
+singleQuote: true
+
+# Use tabs for indentation
+useTabs: true
+
+# Number of spaces per indentation level (overrides `useTabs` option)
+tabWidth: 4
+
+# Add a trailing comma at the end of multi-line objects and arrays
+trailingComma: es5
+
+# Use parentheses around arrow function parameters only when necessary
+arrowParens: avoid
