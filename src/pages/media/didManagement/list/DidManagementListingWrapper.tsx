@@ -58,7 +58,6 @@ const DidManagementListingWrapper = () => {
     )
 
     const { page, rowsPerPage, searchValue, items } = didManagementState
-    console.log('here')
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetPaginationDidQuery({
