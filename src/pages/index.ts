@@ -90,6 +90,11 @@ import ViewPurchaseOrderWrapper from "./purchaseOrder/view/ViewPurchaseOrderWrap
 import AddCbBarcodeWrapper from "./configuration/Configuration Screens/barcode/AddCb/AddCbWrapper";
 import BarcodeGenerator from "./configuration/Configuration Screens/barcode/list/components/BarcodeGroup/BarcodeGenerator";
 import EditPurchaseOrderWrapper from "./purchaseOrder/edit/EditPurchaseOrderWrapper";
+import DidManagementListingWrapper from "./media/didManagement/list/DidManagementListingWrapper";
+import OrganisationHierarchy from "./configuration/Configuration Screens/organizationHeirarchy/OrganizationHeirarchy";
+import AddDidManagement from "./media/didManagement/add/AddDidManagement";
+import EditDidManagement from "./media/didManagement/edit/EditDidManagement";
+
 export {
   AddASRWrapper,
   ASRListingWrapper,
@@ -183,4 +188,8 @@ export {
   AddCbBarcodeWrapper,
   BarcodeGenerator,
   EditPurchaseOrderWrapper,
+  OrganisationHierarchy,
+  DidManagementListingWrapper,
+  AddDidManagement,
+  EditDidManagement,
 };

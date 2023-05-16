@@ -82,4 +82,9 @@ export const navigation: NavItemType[] = [
     icon: AiOutlineSetting,
     path: "/configurations/attributes",
   },
+  {
+    label: "Media",
+    icon: AiOutlineSetting,
+    path: "/media/did",
+  },
 ];

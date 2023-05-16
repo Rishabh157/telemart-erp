@@ -61,7 +61,7 @@ import {
   AddDealerPinCodeTabWrapper,
   AddDealerSchemeTabWrapper,
   ListDealerPincodeTabWrapper,
-  ListDealerSchemeTabWrapper
+  ListDealerSchemeTabWrapper,
 } from "./pages/index";
 import {
   InwardInventoryWrapper,
@@ -115,9 +115,11 @@ import {
   EditSchemeWrapper,
   ViewPurchaseOrderWrapper,
   AddCbBarcodeWrapper,
+  DidManagementListingWrapper,
+  OrganisationHierarchy,
+  AddDidManagement,
 } from "./pages/index";
 import Auth from "./pages/login/Auth";
-import OrganisationHierarchy from "./pages/configuration/Configuration Screens/organizationHeirarchy/OrganizationHeirarchy";
 
 const PageRoutes = () => {
   const deviceId = localStorage.getItem("device-id") || "";
@@ -216,7 +218,10 @@ const PageRoutes = () => {
             <Route path="warehouse" element={<DealerWarehouseTabWrapper />} />
             <Route path="ledger" element={"Ledger"} />
             <Route path="activities" element={<DealerActivityTabWrapper />} />
-            <Route path="pincode/add" element={<AddDealerPinCodeTabWrapper />} />
+            <Route
+              path="pincode/add"
+              element={<AddDealerPinCodeTabWrapper />}
+            />
             <Route path="scheme/add" element={<AddDealerSchemeTabWrapper />} />
             <Route path="pincode" element={<ListDealerPincodeTabWrapper />} />
             <Route path="scheme" element={<ListDealerSchemeTabWrapper />} />
@@ -437,6 +442,11 @@ const PageRoutes = () => {
             element={<OrganisationHierarchy />}
           />
           <Route path="/barcodes" element={<BarcodeGenerator />} />
+
+          {/* Media Module Routes */}
+          <Route path="media/did" element={<DidManagementListingWrapper />} />
+          <Route path="media/did/add" element={<AddDidManagement />} />
+          <Route path="media/did/edit" element={<AddDidManagement />} />
         </Routes>
       </BrowserRouter>
     </>
