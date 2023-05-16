@@ -2,11 +2,11 @@ import React from 'react'
 import MediaLayout from '../../MediaLayout'
 
 const AddDidManagement = () => {
-  return (
-    <MediaLayout>
-    <div>AddDidManagement</div>
-    </MediaLayout>
-  )
+    return (
+        <MediaLayout>
+            <div>AddDidManagement</div>
+        </MediaLayout>
+    )
 }
 
 export default AddDidManagement

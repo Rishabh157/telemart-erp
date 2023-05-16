@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import LoginPage from "./LoginPage";
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import LoginPage from './LoginPage'
 
 const Auth = () => {
-  const accessToken = localStorage.getItem("authToken");
-  const navigation = useNavigate();
-  useEffect(() => {
-    if (accessToken) {
-      navigation("/dashboard");
-    }
-  }, [accessToken, navigation]);
+    const accessToken = localStorage.getItem('authToken')
+    const navigation = useNavigate()
+    useEffect(() => {
+        if (accessToken) {
+            navigation('/dashboard')
+        }
+    }, [accessToken, navigation])
 
-  return <> {!accessToken ? <LoginPage /> : null}</>;
-};
+    return <> {!accessToken ? <LoginPage /> : null}</>
+}
 
-export default Auth;
+export default Auth

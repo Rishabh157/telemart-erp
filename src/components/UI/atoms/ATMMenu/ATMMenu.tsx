@@ -1,37 +1,32 @@
-import * as React from 'react';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { HiDotsHorizontal , HiDotsVertical } from 'react-icons/hi';
+import * as React from 'react'
+import IconButton from '@mui/material/IconButton'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import { HiDotsHorizontal, HiDotsVertical } from 'react-icons/hi'
 
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 48
 
 type OptionType = {
-    label: React.ReactNode;
-    onClick: () => void;
+    label: React.ReactNode
+    onClick: () => void
 }
 
 type Props = {
-    options: OptionType[],
+    options: OptionType[]
     orientation?: 'vertical' | 'horizontal'
-
 }
 
-const ATMMenu = ({
-    options,
-    orientation= 'horizontal'
-}: Props
-) => {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+const ATMMenu = ({ options, orientation = 'horizontal' }: Props) => {
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+    const open = Boolean(anchorEl)
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation();
-        setAnchorEl(event.currentTarget);
-    };
+        event.stopPropagation()
+        setAnchorEl(event.currentTarget)
+    }
     const handleClose = (event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation();
-        setAnchorEl(null);
-    };
+        event.stopPropagation()
+        setAnchorEl(null)
+    }
 
     return (
         <div>
@@ -42,16 +37,12 @@ const ATMMenu = ({
                 aria-expanded={open ? 'true' : undefined}
                 aria-haspopup="true"
                 onClick={handleClick}
-            >  
-            {
-                orientation === 'vertical' ? 
-                ( <HiDotsVertical/> )
-                :
-                (
+            >
+                {orientation === 'vertical' ? (
+                    <HiDotsVertical />
+                ) : (
                     <HiDotsHorizontal />
-                )
-                
-            }
+                )}
             </IconButton>
             <Menu
                 id="long-menu"
@@ -69,13 +60,19 @@ const ATMMenu = ({
                 }}
             >
                 {options.map((option, optionIndex) => (
-                    <MenuItem key={optionIndex} onClick={(e) => { option.onClick(); handleClose(e) }}>
+                    <MenuItem
+                        key={optionIndex}
+                        onClick={(e) => {
+                            option.onClick()
+                            handleClose(e)
+                        }}
+                    >
                         {option.label}
                     </MenuItem>
                 ))}
             </Menu>
         </div>
-    );
+    )
 }
 
 export default ATMMenu
