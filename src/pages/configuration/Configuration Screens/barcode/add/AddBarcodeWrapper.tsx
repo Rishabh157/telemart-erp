@@ -57,11 +57,9 @@ const AddBarcodeWrapper = (props: Props) => {
         const uniqueGrouId = uuidv4()
         const promises = []
         for (let i = 0; i < Number(values?.quantity); i++) {
-            const uniqueId = uuidv4()
             promises.push(
-                addBarcode({
+                await addBarcode({
                     productGroup: values.productGroup,
-                    barcodeNumber: uniqueId,
                     barcodeGroupNumber: uniqueGrouId,
                     companyId: userData?.companyId || '',
                 })

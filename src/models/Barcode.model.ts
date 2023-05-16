@@ -23,7 +23,6 @@ export type ProductBarcodeGroupResponse = {
 export type AddBarcode = {
     productGroup: string
     barcodeGroupNumber: string
-    barcodeNumber: string
     companyId: string
 }
 
@@ -31,7 +30,6 @@ export type UpdateBarcode = {
     body: {
         productGroup: string
         barcodeGroupNumber: string
-        barcodeNumber: string
         companyId: string
     }
     id: string

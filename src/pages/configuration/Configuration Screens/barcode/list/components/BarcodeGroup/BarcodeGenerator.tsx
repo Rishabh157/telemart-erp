@@ -22,6 +22,7 @@ function AllBarcodes() {
     const { barcodesToPrint, cartonBoxBarcode }: any = useSelector(
         (state: RootState) => state?.barcode
     )
+
     const barcodeValues = barcodesToPrint
     setTimeout(() => {
         window?.print()
