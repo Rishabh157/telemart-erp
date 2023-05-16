@@ -103,7 +103,6 @@ import AddSlotManagement from './media/slotManagement/add/AddSlotManagement'
 import AddTabManagement from './media/tabManagement/add/AddTabManagement'
 import TabManagementListingWrapper from './media/tabManagement/list/TabManagementListingWrapper'
 
-
 export {
     AddASRWrapper,
     ASRListingWrapper,
@@ -208,5 +207,5 @@ export {
     SlotManagementListingWrapper,
     AddSlotManagement,
     TabManagementListingWrapper,
-    AddTabManagement
+    AddTabManagement,
 }

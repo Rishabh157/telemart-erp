@@ -126,10 +126,9 @@ import {
     SlotManagementListingWrapper,
     AddSlotManagement,
     AddTabManagement,
-    TabManagementListingWrapper
+    TabManagementListingWrapper,
 } from './pages/index'
 import Auth from './pages/login/Auth'
-
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -556,7 +555,7 @@ const PageRoutes = () => {
                         path="media/tab/add"
                         element={<AddTabManagement />}
                     />
-                     <Route
+                    <Route
                         path="media/slot"
                         element={<SlotManagementListingWrapper />}
                     />
