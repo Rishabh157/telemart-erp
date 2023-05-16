@@ -1,120 +1,120 @@
-import React, { useEffect, useState } from "react";
-import { Formik } from "formik";
-import { array, object, string } from "yup";
-import AddDealerScheme from "./AddDealerScheme";
-import { useAddDealerSchemeMutation } from "src/services/DealerSchemeService";
-import { useGetSchemeQuery } from "src/services/SchemeService";
-import { showToast } from "src/utils";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "src/redux/store";
+import React, { useEffect, useState } from 'react'
+import { Formik } from 'formik'
+import { array, object, string } from 'yup'
+import AddDealerScheme from './AddDealerScheme'
+import { useAddDealerSchemeMutation } from 'src/services/DealerSchemeService'
+import { useGetSchemeQuery } from 'src/services/SchemeService'
+import { showToast } from 'src/utils'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
-import { setAllItems as setAllDealerSchemes } from "src/redux/slices/schemeSlice";
+import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
 
-type Props = {};
+type Props = {}
 
 export type FormInitialValues = {
-  companyId: string;
-  dealerId: string;
-  schemes: [];
-};
+    companyId: string
+    dealerId: string
+    schemes: []
+}
 
 const DealerPinCodeTabWrapper = (props: Props) => {
-  const navigate = useNavigate();
-  const params = useParams();
-  const dealerId: any = params.dealerId;
-  const dispatch = useDispatch();
-  const { userData } = useSelector((state: RootState) => state?.auth);
-  const companyId: any = userData?.companyId;
+    const navigate = useNavigate()
+    const params = useParams()
+    const dealerId: any = params.dealerId
+    const dispatch = useDispatch()
+    const { userData } = useSelector((state: RootState) => state?.auth)
+    const companyId: any = userData?.companyId
 
-  const [apiStatus, setApiStatus] = useState<boolean>(false);
-  const [addDealerScheme] = useAddDealerSchemeMutation();
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const [addDealerScheme] = useAddDealerSchemeMutation()
 
-  const {
-    data: schemeData,
-    isLoading: schemeIsLoading,
-    isFetching: schemeIsFetching,
-  } = useGetSchemeQuery("");
+    const {
+        data: schemeData,
+        isLoading: schemeIsLoading,
+        isFetching: schemeIsFetching,
+    } = useGetSchemeQuery('')
 
-  useEffect(() => {
-    dispatch(setAllDealerSchemes(schemeData?.data));
-  }, [schemeData, schemeIsLoading, schemeIsFetching, dispatch]);
+    useEffect(() => {
+        dispatch(setAllDealerSchemes(schemeData?.data))
+    }, [schemeData, schemeIsLoading, schemeIsFetching, dispatch])
 
-  const { allItems: schemeItems }: any = useSelector(
-    (state: RootState) => state?.scheme
-  );
+    const { allItems: schemeItems }: any = useSelector(
+        (state: RootState) => state?.scheme
+    )
 
-  const schemeOptions = schemeItems?.map((ele: any) => {
-    return {
-      label: ele.schemeName,
-      value: ele._id,
-    };
-  });
-
-  const initialValues: FormInitialValues = {
-    companyId: companyId,
-    dealerId: dealerId,
-    schemes: [],
-  };
-
-  const validationSchema = object({
-    schemes: array()
-      .of(
-        object().shape({
-          label: string().required(),
-          value: string().required(),
-        })
-      )
-      .min(1, "Please select atleast 1 Scheme"),
-  });
-
-  //    Form Submit Handler
-  const onSubmitHandler = (values: FormInitialValues) => {
-    setApiStatus(true);
-    const scheme: any = values.schemes.map((ele: any) => {
-      return ele.value;
-    });
-
-    setTimeout(() => {
-      addDealerScheme({
-        dealerId: values.dealerId || "",
-        schemeId: scheme,
-        companyId: values.companyId || "",
-      }).then((res) => {
-        if ("data" in res) {
-          if (res?.data?.status) {
-            showToast("success", "Scheme added successfully!");
-            navigate("/dealers/" + dealerId + "/scheme");
-          } else {
-            showToast("error", res?.data?.message);
-          }
-        } else {
-          showToast("error", "Something went wrong");
+    const schemeOptions = schemeItems?.map((ele: any) => {
+        return {
+            label: ele.schemeName,
+            value: ele._id,
         }
-        setApiStatus(false);
-      });
-    }, 1000);
-  };
+    })
 
-  return (
-    <div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmitHandler}
-      >
-        {(formikProps) => {
-          return (
-            <AddDealerScheme
-              apiStatus={apiStatus}
-              formikProps={formikProps}
-              schemeOptions={schemeOptions}
-            />
-          );
-        }}
-      </Formik>
-    </div>
-  );
-};
+    const initialValues: FormInitialValues = {
+        companyId: companyId,
+        dealerId: dealerId,
+        schemes: [],
+    }
 
-export default DealerPinCodeTabWrapper;
+    const validationSchema = object({
+        schemes: array()
+            .of(
+                object().shape({
+                    label: string().required(),
+                    value: string().required(),
+                })
+            )
+            .min(1, 'Please select atleast 1 Scheme'),
+    })
+
+    //    Form Submit Handler
+    const onSubmitHandler = (values: FormInitialValues) => {
+        setApiStatus(true)
+        const scheme: any = values.schemes.map((ele: any) => {
+            return ele.value
+        })
+
+        setTimeout(() => {
+            addDealerScheme({
+                dealerId: values.dealerId || '',
+                schemeId: scheme,
+                companyId: values.companyId || '',
+            }).then((res) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'Scheme added successfully!')
+                        navigate('/dealers/' + dealerId + '/scheme')
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
+                } else {
+                    showToast('error', 'Something went wrong')
+                }
+                setApiStatus(false)
+            })
+        }, 1000)
+    }
+
+    return (
+        <div>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmitHandler}
+            >
+                {(formikProps) => {
+                    return (
+                        <AddDealerScheme
+                            apiStatus={apiStatus}
+                            formikProps={formikProps}
+                            schemeOptions={schemeOptions}
+                        />
+                    )
+                }}
+            </Formik>
+        </div>
+    )
+}
+
+export default DealerPinCodeTabWrapper
