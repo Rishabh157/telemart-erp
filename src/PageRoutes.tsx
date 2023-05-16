@@ -555,15 +555,14 @@ const PageRoutes = () => {
                         path="media/Tab/add"
                         element={<AddTabManagement />}
                     />
-                      <Route
+                    <Route
                         path="media/competitor"
                         element={<CompetitorManagementListingWrapper />}
                     />
-                     <Route
+                    <Route
                         path="media/competitor/add"
                         element={<AddCompetitorManagement />}
                     />
-                 
                 </Routes>
             </BrowserRouter>
         </>

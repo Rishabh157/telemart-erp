@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { CompetitorManagementListResponse } from 'src/models/CompetitorManagement.model'
 
-
 export interface CompetitorManagementSliceStateType {
     items: CompetitorManagementListResponse[] | []
     totalItems: number

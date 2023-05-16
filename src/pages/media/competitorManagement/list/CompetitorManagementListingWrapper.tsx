@@ -94,7 +94,10 @@ const CompetitorManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <CompetitorManagementListing columns={columns} rows={items} />
+                    <CompetitorManagementListing
+                        columns={columns}
+                        rows={items}
+                    />
                 </div>
             </MediaLayout>
         </>
