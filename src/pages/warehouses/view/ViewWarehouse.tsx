@@ -46,14 +46,14 @@ const ViewWarehouse = ({ items }: Props) => {
             <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
               Basic Details
             </div>
-            <div className="grid grid-cols-2 gap-4 pl-6 py-6">
-              <h1 className="text-slate-600">Warehouse Name </h1>
+            <div className="grid grid-cols-4 gap-3 pl-6 py-6 border border-l-2">
+              <h1 className="text-gray-800">Warehouse Name </h1>
               <p className="text-slate-600">{items?.wareHouseName}</p>
-              <h1 className="text-slate-600">Warehouse Code </h1>
+              <h1 className="text-gray-800">Warehouse Code </h1>
               <p className="text-slate-600">{items?.wareHouseCode}</p>
-              <h1 className="text-slate-600">Country </h1>
+              <h1 className="text-gray-800">Country </h1>
               <p className="text-slate-600">{items?.wareHouseCountryName}</p>
-              <h1 className="text-slate-600">Email </h1>
+              <h1 className="text-gray-800">Email </h1>
               <p className="text-slate-600">{items?.email}</p>
             </div>
           </div>
@@ -63,18 +63,18 @@ const ViewWarehouse = ({ items }: Props) => {
             <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
               Registered Address
             </div>
-            <div className="grid grid-cols-2 gap-4 pl-6 py-6">
-              <h1 className="text-slate-600">Address </h1>
+            <div className="grid grid-cols-4 gap-3 pl-6 py-6 border border-l-2">
+              <h1 className="text-gray-800">Address </h1>
               <p className="text-slate-600">{items?.registrationAddress?.address}</p>
-              <h1 className="text-slate-600">Country</h1>
+              <h1 className="text-gray-800">Country</h1>
               <p className="text-slate-600">{items?.registrationCountryName}</p>
-              <h1 className="text-slate-600">District </h1>
+              <h1 className="text-gray-800">District </h1>
               <p className="text-slate-600">{items?.registrationDistrictName}</p>
-              <h1 className="text-slate-600">Phone</h1>
+              <h1 className="text-gray-800">Phone</h1>
               <p className="text-slate-600">{items?.registrationAddress?.phone}</p>
-              <h1 className="text-slate-600">Pincode </h1>
+              <h1 className="text-gray-800">Pincode </h1>
               <p className="text-slate-600">{items?.registrationPincodeName}</p>
-              <h1 className="text-slate-600">State</h1>
+              <h1 className="text-gray-800">State</h1>
               <p className="text-slate-600">{items?.registrationStateName}</p>
             </div>
           </div>
@@ -84,18 +84,18 @@ const ViewWarehouse = ({ items }: Props) => {
             <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
               Billing Address
             </div>
-            <div className="grid grid-cols-2 gap-4 pl-6 py-6">
-              <h1 className="text-slate-600">Address </h1>
+            <div className="grid grid-cols-4 gap-2 pl-6 py-6 border border-l-2">
+              <h1 className="text-gray-800">Address </h1>
               <p className="text-slate-600">{items?.billingAddress?.address}</p>
-              <h1 className="text-slate-600">Country</h1>
+              <h1 className="text-gray-800">Country</h1>
               <p className="text-slate-600">{items?.billingAddressCountryName}</p>
-              <h1 className="text-slate-600">District </h1>
+              <h1 className="text-gray-800">District </h1>
               <p className="text-slate-600">{items?.billingAddressDistrictName}</p>
-              <h1 className="text-slate-600">Phone</h1>
+              <h1 className="text-gray-800">Phone</h1>
               <p className="text-slate-600">{items?.billingAddress?.phone}</p>
-              <h1 className="text-slate-600">Pincode </h1>
+              <h1 className="text-gray-800">Pincode </h1>
               <p className="text-slate-600">{items?.billingAddressPincodeName}</p>
-              <h1 className="text-slate-600">State</h1>
+              <h1 className="text-gray-800">State</h1>
               <p className="text-slate-600">{items?.billingAddressStateName}</p>
             </div>
           </div>
@@ -105,23 +105,24 @@ const ViewWarehouse = ({ items }: Props) => {
             <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
               Contact Information
             </div>
+            <div className="grid grid-cols-2 grow py-6 ">
             {items?.contactInformation?.map((item: any) => (
-              <div className="grid grid-cols-2 gap-4 pl-6 grow py-6" key={item._id}>
-                <h1 className="text-slate-600">Name</h1>
+              <div className="grid grid-cols-2 gap-3 pl-6  border border-l-2 grow py-6" key={item._id}>
+                <h1 className="text-gray-800">Name</h1>
                 <p className="text-slate-600">{item.name}</p>
-                <h1 className="text-slate-600">Department </h1>
+                <h1 className="text-gray-800">Department </h1>
                 <p className="text-slate-600">{item.department}</p>
-                <h1 className="text-slate-600">Designation</h1>
+                <h1 className="text-gray-800">Designation</h1>
                 <p className="text-slate-600">{item.designation}</p>
-                <h1 className="text-slate-600">Email </h1>
+                <h1 className="text-gray-800">Email </h1>
                 <p className="text-slate-600">{item.email}</p>
-                <h1 className="text-slate-600">LandLine</h1>
+                <h1 className="text-gray-800">LandLine</h1>
                 <p className="text-slate-600">{item.landLine}</p>
-                <h1 className="text-slate-600">Mobile Number </h1>
+                <h1 className="text-gray-800">Mobile Number </h1>
                 <p className="text-slate-600 ">{item.mobileNumber}</p>
-              </div>
-              
+              </div>              
             ))}
+            </div>
           </div>
         </div>
       </div>
