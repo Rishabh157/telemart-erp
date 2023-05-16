@@ -19,7 +19,6 @@ type Props = {
   groupBarcodeNumber: string;
   productDetail: any[];
   wareHouse: string;
-  cartonBoxCode: string;
   packaging: string;
 };
 
@@ -29,7 +28,6 @@ const MoveToCartonDrawer = ({
   groupBarcodeNumber,
   productDetail,
   wareHouse,
-  cartonBoxCode,
   packaging,
 }: Props) => {
   const navigate = useNavigate();
@@ -43,22 +41,21 @@ const MoveToCartonDrawer = ({
       return ele?.barcodeNumber;
     });
     setApiStatus(true);
-    dispatch(setCartonBoxBarcode(cartonBoxCode));
     dispatch(setBarcodesToPrint(barCodesToPrint));
 
-    const promises = [];
-    for (let i = 0; i < barCodesToPrint?.length; i++) {
-      promises.push(
-        AddCartonBoxBarcode({
-          cartonBoxId: packaging,
-          barcodeNumber: cartonBoxCode,
-          barcodeGroupNumber: groupBarcodeNumber,
-          itemBarcodeNumber: barCodesToPrint[i],
-          companyId: userData?.companyId || "",
-        })
-      );
-    }
-    await Promise.all(promises); // Wait for all promises to complete
+    await AddCartonBoxBarcode({
+      cartonBoxId: packaging,
+      barcodeGroupNumber: groupBarcodeNumber,
+      itemBarcodeNumber: barCodesToPrint,
+      companyId: userData?.companyId || "",
+    }).then((res) => {
+      if ("data" in res) {
+        if (res?.data?.status) {
+          dispatch(setCartonBoxBarcode(res?.data?.data[0]?.barcodeNumber));
+        }
+      }
+    });
+
     await addInventory({
       productGroupName,
       groupBarcodeNumber: groupBarcodeNumber,

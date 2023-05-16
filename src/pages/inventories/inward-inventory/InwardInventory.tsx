@@ -11,7 +11,6 @@ import MoveToCartonDrawer from "./MoveToCartonDrawer/MoveToCartonDrawer";
 import { SelectBoxOption } from "./InwardInventoryWrapper";
 import { useGetAllBarcodeQuery } from "src/services/BarcodeService";
 import { SelectOption } from "src/models/FormField/FormField.model";
-import { v4 as uuidv4 } from "uuid";
 // import { showToast } from "src/utils";
 
 type Props = {
@@ -49,7 +48,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
   const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] =
     React.useState(false);
   const { data, isLoading, isFetching } = useGetAllBarcodeQuery("");
-  const cartonBoxCode = uuidv4();
   useEffect(() => {
     const count =
       (cartonBoxOption?.find((e) => e?.value === packaging)
@@ -106,7 +104,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
   }, [barcode]);
 
   useEffect(() => {
-    if (barcode?.length === 36) {
+    if (barcode?.length === 6) {
       setBarcode("");
     }
   }, [barcode]);
@@ -222,7 +220,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
           groupBarcodeNumber={filterBarcode[0]?.productGroupNumber}
           productDetail={dataToSend}
           wareHouse={wareHouse}
-          cartonBoxCode={cartonBoxCode}
           packaging={packaging}
           onClose={() => setIsOpenMoveToCartonDrawer(false)}
         />
