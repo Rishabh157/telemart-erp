@@ -23,6 +23,11 @@ export type FormInitialValues = {
     quantity: number;
     estReceivingDate: string;
   };
+  approval:{
+    approvalByName: string;
+    approvalLevel: number;
+    time: string;
+  }[];
 };
 
 const ViewPurchaseOrderWrapper = (props: Props) => {
@@ -38,11 +43,14 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
     dispatch(setSelectedItems(data?.data));
   }, [data, isLoading, isFetching, dispatch]);
 
+  console.log(selectedItems?.approval)
+
   const initialValues: FormInitialValues = {
     poCode: selectedItems?.poCode || "",
     vendor: selectedItems?.vendorLabel || "",
     wareHouse: selectedItems?.warehouseLabel || "",
     purchaseOrder: selectedItems?.purchaseOrder || "",
+    approval: selectedItems?.approval || [],
   };
 
   // Form Validation Schema
