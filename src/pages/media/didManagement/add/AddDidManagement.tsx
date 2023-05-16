@@ -11,7 +11,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: ' Did Management',
-        path: '/did',
+        path: '/media/did',
     },
     {
         label: 'Add Did Management',

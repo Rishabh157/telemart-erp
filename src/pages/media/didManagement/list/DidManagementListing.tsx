@@ -38,12 +38,12 @@ const DidManagementListing = ({ columns, rows }: Props) => {
     ]
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+        <div className="px-4 h-full pt-3 ">
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[55px]">
+            <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> DID Management </ATMPageHeading>
                 <button
                     type="button"
@@ -54,7 +54,7 @@ const DidManagementListing = ({ columns, rows }: Props) => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
@@ -77,7 +77,8 @@ const DidManagementListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                    extraClasses="h-full overflow-auto"
+
                     />
                 </div>
 

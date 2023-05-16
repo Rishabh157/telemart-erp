@@ -120,7 +120,6 @@ import {
     AddCbBarcodeWrapper,
     DidManagementListingWrapper,
     OrganisationHierarchy,
-    AddDidManagement,
     AddChannelManagement,
     ChannelManagementListingWrapper,
     EditChannelManagement,

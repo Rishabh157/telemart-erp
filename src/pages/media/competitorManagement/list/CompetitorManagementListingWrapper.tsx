@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { DidManagementListResponse } from 'src/models/Media.model'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";
@@ -13,13 +12,14 @@ import {
 import MediaLayout from '../../MediaLayout'
 import { useGetPaginationDidQuery } from 'src/services/media/DidManagementServices'
 import CompetitorManagementListing from './CompetitorManagementListing'
+import { CompetitorManagementListResponse } from 'src/models/CompetitorManagement.model'
 
 const columns: columnTypes[] = [
     {
         field: 'productName',
         headerName: 'Product Group Name',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
+        renderCell: (row: CompetitorManagementListResponse) => (
             <span> {row.productGroupName} </span>
         ),
     },
@@ -27,7 +27,7 @@ const columns: columnTypes[] = [
         field: 'quantity',
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
+        renderCell: (row: CompetitorManagementListResponse) => (
             <span> {row.count} </span>
         ),
     },
@@ -35,7 +35,7 @@ const columns: columnTypes[] = [
         field: 'warehouse',
         headerName: 'Warehouse',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: DidManagementListResponse) => (
+        renderCell: (row: CompetitorManagementListResponse) => (
             <span> {row.wareHouse} </span>
         ),
     },
@@ -92,13 +92,11 @@ const CompetitorManagementListingWrapper = () => {
 
     return (
         <>
-            <MediaLayout>
-                <div className="h-full">
+            <MediaLayout>              
                     <CompetitorManagementListing
                         columns={columns}
                         rows={items}
                     />
-                </div>
             </MediaLayout>
         </>
     )
