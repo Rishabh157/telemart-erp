@@ -1,18 +1,18 @@
-import React from "react";
-import { FormikProps } from "formik";
-import { FormInitialValues } from "../../EditCompanyWrapper";
-import StepEditCompanyDetails from "./StepEditCompanyDetails";
+import React from 'react'
+import { FormikProps } from 'formik'
+import { FormInitialValues } from '../../EditCompanyWrapper'
+import StepEditCompanyDetails from './StepEditCompanyDetails'
 
 type Props = {
-  formikProps: FormikProps<FormInitialValues>;
-};
+    formikProps: FormikProps<FormInitialValues>
+}
 
 const StepEditCompanyDetailsWrapper = ({ formikProps }: Props) => {
-  return (
-    <>
-      <StepEditCompanyDetails formikProps={formikProps} />
-    </>
-  );
-};
+    return (
+        <>
+            <StepEditCompanyDetails formikProps={formikProps} />
+        </>
+    )
+}
 
-export default StepEditCompanyDetailsWrapper;
+export default StepEditCompanyDetailsWrapper

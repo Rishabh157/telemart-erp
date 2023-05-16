@@ -5,13 +5,13 @@ import Dashboard from './Dashboard'
 type Props = {}
 
 const DashboardWrappper = (props: Props) => {
-  return (
-    <>
-    <SideNavLayout>
-        <Dashboard/>
-    </SideNavLayout>
-    </>
-  )
+    return (
+        <>
+            <SideNavLayout>
+                <Dashboard />
+            </SideNavLayout>
+        </>
+    )
 }
 
 export default DashboardWrappper

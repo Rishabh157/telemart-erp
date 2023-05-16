@@ -1,10 +1,10 @@
-import React from "react";
-import DealerActivityTab from "./DealerActivityTab";
+import React from 'react'
+import DealerActivityTab from './DealerActivityTab'
 
-type Props = {};
+type Props = {}
 
 const DealerActivityTabWrapper = (props: Props) => {
-  return <DealerActivityTab />;
-};
+    return <DealerActivityTab />
+}
 
-export default DealerActivityTabWrapper;
+export default DealerActivityTabWrapper

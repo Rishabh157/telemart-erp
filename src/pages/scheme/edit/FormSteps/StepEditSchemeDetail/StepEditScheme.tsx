@@ -1,199 +1,204 @@
-import React from "react";
-import {  FormikProps } from "formik";
-import ATMTextField from "src/components/UI/atoms/formFields/ATMTextField/ATMTextField";
-import { FormInitialValues } from "../../EditSchemeWrapper";
+import React from 'react'
+import { FormikProps } from 'formik'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { FormInitialValues } from '../../EditSchemeWrapper'
 //import { DropdownOptions } from "./StepEditSchemeDetailsWrapper";
-import ATMSelect from "src/components/UI/atoms/formFields/ATMSelect/ATMSelect";
-import { Field, SelectOption } from "src/models/FormField/FormField.model";
-import ATMDatePicker from "src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker";
-import ATMSwitchButton from "src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton";
-import ATMTextArea from "src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea";
+import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import { Field, SelectOption } from 'src/models/FormField/FormField.model'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
-
-type DropdownOptions={
-  productCategoryoption:SelectOption[];
-  productSubCategoryOption:SelectOption[];
-  //productGroupOptions:SelectOption[];
+type DropdownOptions = {
+    productCategoryoption: SelectOption[]
+    productSubCategoryOption: SelectOption[]
+    //productGroupOptions:SelectOption[];
 }
-type FieldType = Field< |"productCategoryoption" | "productSubCategoryOption">
+type FieldType = Field<'productCategoryoption' | 'productSubCategoryOption'>
 
 type Props = {
-  formikProps: FormikProps<FormInitialValues>;
-  formFields: {
-    sectionName: string;
-    fields: FieldType[];
-  }[];
-  dropdownOptions: DropdownOptions;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+    formikProps: FormikProps<FormInitialValues>
+    formFields: {
+        sectionName: string
+        fields: FieldType[]
+    }[]
+    dropdownOptions: DropdownOptions
+    setSelectedCategory: React.Dispatch<React.SetStateAction<string>>
+}
 
-};
-
-
-
-const StepEditScheme = ({ formikProps ,  formFields,
-  dropdownOptions,setSelectedCategory
-
+const StepEditScheme = ({
+    formikProps,
+    formFields,
+    dropdownOptions,
+    setSelectedCategory,
 }: Props) => {
-  const { values, setFieldValue } :{ values: any; setFieldValue: any }= formikProps;
+    const { values, setFieldValue }: { values: any; setFieldValue: any } =
+        formikProps
 
-  return (
-    <div className="py-6 px-7 flex flex-col gap-5">
-      <div className="grid grid-cols-3 gap-4 gap-y-5">
-        {/* Scheme Code */}
-        <ATMTextField
-          name={"schemeCode"}
-          value={values.schemeCode}
-          onChange={(e) => {
-            setFieldValue("schemeCode", e.target.value);
-          }}
-          label="Scheme Code"
-          placeholder="Scheme Code"
-          className="shadow bg-white rounded"
-        />
-        {/* Category */}
-        <ATMSelect
-          name={"category"}
-          value={values.category}
-          onChange={(e) => {
-            setFieldValue("category", e.target.value);
-            setSelectedCategory(e.target.value)
-          }}
-          label="Category"
-          options={
-              dropdownOptions["productCategoryoption"]
-          }
-        />
-        {/* Sub Category */}
-        <ATMSelect
-          name={"subCategory"}
-          value={values.subCategory}
-          onChange={(e) => {
-            setFieldValue("subCategory", e.target.value);
-          }}
-          label="Sub Category"
-          options={dropdownOptions["productSubCategoryOption"]}
-        />
-        {/* Scheme Name */}
-        <ATMTextField
-          name={"schemeName"}
-          value={values.schemeName}
-          onChange={(e) => {
-            setFieldValue("schemeName", e.target.value);
-          }}
-          label="Scheme Name"
-          placeholder="Scheme Name"
-          className="shadow bg-white rounded"
-        />
-        {/* Scheme Price */}
-        <ATMTextField
-          name={"schemePrice"}
-          value={values.schemePrice}
-          onChange={(e) => {
-            setFieldValue("schemePrice", e.target.value);
-          }}
-          label="Scheme Price"
-          placeholder="Scheme Price"
-          className="shadow bg-white rounded"
-        />
-        {/* Dimensions */}
-        <div>
-          <label className="text-slate-700 font-medium"> Dimensions </label>
-          <div className="flex gap-2 mt-2">
-            {/* Height */}
-            <ATMTextField
-              name="dimension.height"
-              value={values.dimension.height}
-              onChange={(e) =>
-                setFieldValue("dimension.height", e.target.value)
-              }
-              placeholder="H"
-              className="shadow bg-white rounded"
-            />
-            {/* Weight */}
-            <ATMTextField
-              name="dimension.width"
-              value={values.dimension.width}
-              onChange={(e) =>
-                setFieldValue("dimension.width", e.target.value)
-              }
-              placeholder="W"
-              className="shadow bg-white rounded"
-            />
-            {/* Depth */}
-            <ATMTextField
-              name="dimension.depth"
-              value={values.dimension.depth}
-              onChange={(e) =>
-                setFieldValue("dimension.depth", e.target.value)
-              }
-              placeholder="D"
-              className="shadow bg-white rounded"
-            />
-          </div>
+    return (
+        <div className="py-6 px-7 flex flex-col gap-5">
+            <div className="grid grid-cols-3 gap-4 gap-y-5">
+                {/* Scheme Code */}
+                <ATMTextField
+                    name={'schemeCode'}
+                    value={values.schemeCode}
+                    onChange={(e) => {
+                        setFieldValue('schemeCode', e.target.value)
+                    }}
+                    label="Scheme Code"
+                    placeholder="Scheme Code"
+                    className="shadow bg-white rounded"
+                />
+                {/* Category */}
+                <ATMSelect
+                    name={'category'}
+                    value={values.category}
+                    onChange={(e) => {
+                        setFieldValue('category', e.target.value)
+                        setSelectedCategory(e.target.value)
+                    }}
+                    label="Category"
+                    options={dropdownOptions['productCategoryoption']}
+                />
+                {/* Sub Category */}
+                <ATMSelect
+                    name={'subCategory'}
+                    value={values.subCategory}
+                    onChange={(e) => {
+                        setFieldValue('subCategory', e.target.value)
+                    }}
+                    label="Sub Category"
+                    options={dropdownOptions['productSubCategoryOption']}
+                />
+                {/* Scheme Name */}
+                <ATMTextField
+                    name={'schemeName'}
+                    value={values.schemeName}
+                    onChange={(e) => {
+                        setFieldValue('schemeName', e.target.value)
+                    }}
+                    label="Scheme Name"
+                    placeholder="Scheme Name"
+                    className="shadow bg-white rounded"
+                />
+                {/* Scheme Price */}
+                <ATMTextField
+                    name={'schemePrice'}
+                    value={values.schemePrice}
+                    onChange={(e) => {
+                        setFieldValue('schemePrice', e.target.value)
+                    }}
+                    label="Scheme Price"
+                    placeholder="Scheme Price"
+                    className="shadow bg-white rounded"
+                />
+                {/* Dimensions */}
+                <div>
+                    <label className="text-slate-700 font-medium">
+                        {' '}
+                        Dimensions{' '}
+                    </label>
+                    <div className="flex gap-2 mt-2">
+                        {/* Height */}
+                        <ATMTextField
+                            name="dimension.height"
+                            value={values.dimension.height}
+                            onChange={(e) =>
+                                setFieldValue(
+                                    'dimension.height',
+                                    e.target.value
+                                )
+                            }
+                            placeholder="H"
+                            className="shadow bg-white rounded"
+                        />
+                        {/* Weight */}
+                        <ATMTextField
+                            name="dimension.width"
+                            value={values.dimension.width}
+                            onChange={(e) =>
+                                setFieldValue('dimension.width', e.target.value)
+                            }
+                            placeholder="W"
+                            className="shadow bg-white rounded"
+                        />
+                        {/* Depth */}
+                        <ATMTextField
+                            name="dimension.depth"
+                            value={values.dimension.depth}
+                            onChange={(e) =>
+                                setFieldValue('dimension.depth', e.target.value)
+                            }
+                            placeholder="D"
+                            className="shadow bg-white rounded"
+                        />
+                    </div>
+                </div>
+                {/* Weight */}
+                <ATMTextField
+                    name={'weight'}
+                    value={values.weight}
+                    onChange={(e) => {
+                        setFieldValue('weight', e.target.value)
+                    }}
+                    label="Weight"
+                    placeholder="Weight"
+                    className="shadow bg-white rounded"
+                />
+                {/* Delivery Charges */}
+                <ATMTextField
+                    name={'deliveryCharges'}
+                    value={values.deliveryCharges}
+                    onChange={(e) => {
+                        setFieldValue('deliveryCharges', e.target.value)
+                    }}
+                    label="Delivery Charges"
+                    placeholder="Delivery Charges"
+                    className="shadow bg-white rounded"
+                />
+                {/* Combo Packaging */}
+                <ATMSwitchButton
+                    name="comboPacking"
+                    value={values.comboPacking}
+                    onChange={(newValue) =>
+                        setFieldValue('comboPacking', newValue)
+                    }
+                    label="Combo Packaging"
+                />
+                {/* Start Date */}
+                <ATMDatePicker
+                    name={'startDate'}
+                    value={values.startDate}
+                    onChange={(newValue) => {
+                        setFieldValue('startDate', newValue)
+                    }}
+                    label="Start Date"
+                />
+                {/* End Date */}
+                <ATMDatePicker
+                    name={'endDate'}
+                    value={values.endDate}
+                    onChange={(newValue) => {
+                        setFieldValue('endDate', newValue)
+                    }}
+                    label="End Date"
+                />
+            </div>
+            {/* Scheme Description */}
+            <div>
+                <ATMTextArea
+                    name={'schemeDescription'}
+                    value={values.schemeDescription}
+                    onChange={(newValue) => {
+                        setFieldValue('schemeDescription', newValue)
+                    }}
+                    label="Scheme Description"
+                    placeholder="Scheme Description"
+                    className="shadow bg-white rounded"
+                />
+            </div>
         </div>
-        {/* Weight */}
-        <ATMTextField
-          name={"weight"}
-          value={values.weight}
-          onChange={(e) => {
-            setFieldValue("weight", e.target.value);
-          }}
-          label="Weight"
-          placeholder="Weight"
-          className="shadow bg-white rounded"
-        />
-        {/* Delivery Charges */}
-        <ATMTextField
-          name={"deliveryCharges"}
-          value={values.deliveryCharges}
-          onChange={(e) => {
-            setFieldValue("deliveryCharges", e.target.value);
-          }}
-          label="Delivery Charges"
-          placeholder="Delivery Charges"
-          className="shadow bg-white rounded"
-        />
-        {/* Combo Packaging */}
-        <ATMSwitchButton
-          name="comboPacking"
-          value={values.comboPacking}
-          onChange={(newValue) => setFieldValue("comboPacking", newValue)}
-          label="Combo Packaging"
-        />
-        {/* Start Date */}
-        <ATMDatePicker
-          name={"startDate"}
-          value={values.startDate}
-          onChange={(newValue) => {
-            setFieldValue("startDate", newValue);
-          }}
-          label="Start Date"
-        />
-        {/* End Date */}
-        <ATMDatePicker
-          name={"endDate"}
-          value={values.endDate}
-          onChange={(newValue) => {
-            setFieldValue("endDate", newValue);
-          }}
-          label="End Date"
-        />
-      </div>
-      {/* Scheme Description */}
-      <div>
-        <ATMTextArea
-          name={"schemeDescription"}
-          value={values.schemeDescription}
-          onChange={(newValue) => {
-            setFieldValue("schemeDescription", newValue);
-          }}
-          label="Scheme Description"
-          placeholder="Scheme Description"
-          className="shadow bg-white rounded"
-        />
-      </div>
-    </div>
-         );
-};
+    )
+}
 
-export default StepEditScheme;
+export default StepEditScheme

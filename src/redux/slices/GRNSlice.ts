@@ -1,19 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { GRNListResponse } from "src/models/GRN.model";
+import { GRNListResponse } from 'src/models/GRN.model'
 
 export type InitialStateType = {
-    items: GRNListResponse[] | [],
-    totalItems: number,
-    isTableLoading: boolean,
-    page: number;
-    rowsPerPage: number;
-    searchValue: string;
-    sortValue: { field: string; value: 'DESC' | 'ASC' },
+    items: GRNListResponse[] | []
+    totalItems: number
+    isTableLoading: boolean
+    page: number
+    rowsPerPage: number
+    searchValue: string
+    sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedDealerId: string
-    filterValue: string;
+    filterValue: string
 }
-
 
 const initialState: InitialStateType = {
     items: [],
@@ -21,10 +20,10 @@ const initialState: InitialStateType = {
     isTableLoading: false,
     page: 1,
     rowsPerPage: 10,
-    searchValue: "",
+    searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectedDealerId: "",
-    filterValue:""
+    selectedDealerId: '',
+    filterValue: '',
 }
 
 const grnSlice: any = createSlice({
@@ -35,21 +34,24 @@ const grnSlice: any = createSlice({
             state.items = action.payload
         },
         setPage: (state, action: PayloadAction<number>) => {
-            state.page = action.payload;
+            state.page = action.payload
             document.getElementById('scroll-top')?.scrollTo(0, 0)
         },
         setRowsPerPage: (state, action: PayloadAction<number>) => {
-            state.rowsPerPage = action.payload;
-            state.page = 1;
+            state.rowsPerPage = action.payload
+            state.page = 1
             document.getElementById('scroll-top')?.scrollTo(0, 0)
         },
         setSearchValue: (state, action: PayloadAction<string>) => {
             state.searchValue = action.payload
-            state.page = 1;
+            state.page = 1
         },
-        setSortValue: (state, action: PayloadAction<{ field: string; value: 'DESC' | 'ASC' }>) => {
-            state.sortValue = action.payload;
-            state.page = 1;
+        setSortValue: (
+            state,
+            action: PayloadAction<{ field: string; value: 'DESC' | 'ASC' }>
+        ) => {
+            state.sortValue = action.payload
+            state.page = 1
         },
         setTotalItems: (state, action: PayloadAction<number>) => {
             state.totalItems = action.payload
@@ -61,12 +63,11 @@ const grnSlice: any = createSlice({
             state.selectedDealerId = action.payload
         },
         setFilterValue: (state, action: PayloadAction<string>) => {
-            state.filterValue = action.payload;
-          },
-
-    }
+            state.filterValue = action.payload
+        },
+    },
 })
- 
+
 export const {
     setItems,
     setPage,
@@ -76,6 +77,6 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedDealerId,
-    setFilterValue
+    setFilterValue,
 } = grnSlice.actions
 export default grnSlice.reducer

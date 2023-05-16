@@ -1,77 +1,77 @@
-import { AddWarehouse, UpdateWarehouse } from "src/models";
-import { PaginationType } from "src/models/common/paginationType";
-import apiSlice from "./ApiSlice";
+import { AddWarehouse, UpdateWarehouse } from 'src/models'
+import { PaginationType } from 'src/models/common/paginationType'
+import apiSlice from './ApiSlice'
 
 export const wareHouseApi = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
-    //***** GET *****/
-    getWareHouses: builder.query({
-      providesTags: ["WareHouse"],
-      query: () => ({
-        url: "/warehouse",
+    endpoints: (builder) => ({
+        //***** GET *****/
+        getWareHouses: builder.query({
+            providesTags: ['WareHouse'],
+            query: () => ({
+                url: '/warehouse',
 
-        method: "GET",
-        // body,
-      }),
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** GET PAGINATION DATA *****/
+        getPaginationWareHouses: builder.query({
+            providesTags: ['WareHouse'],
+            query: (body: PaginationType) => ({
+                url: '/warehouse',
+                method: 'POST',
+                body,
+            }),
+        }),
+
+        //***** ADD *****/
+        addWareHouse: builder.mutation({
+            invalidatesTags: ['WareHouse'],
+            query: (body: AddWarehouse) => ({
+                url: '/warehouse/add',
+                method: 'POST',
+
+                body,
+            }),
+        }),
+
+        //***** Update *****/
+        updateWareHouse: builder.mutation({
+            invalidatesTags: ['WareHouse'],
+            query: ({ body, id }: UpdateWarehouse) => ({
+                url: `/warehouse/${id}`,
+
+                method: 'PUT',
+                body,
+            }),
+        }),
+        //***** Delete *****/
+        deleteWareHouse: builder.mutation({
+            invalidatesTags: ['WareHouse'],
+            query: (id) => ({
+                url: `/warehouse/${id}`,
+
+                method: 'DELETE',
+            }),
+        }),
+
+        // **** GET BY ID
+        getWareHouseById: builder.query({
+            providesTags: ['WareHouse'],
+            query: (id) => ({
+                url: `/warehouse/${id}`,
+
+                method: 'GET',
+            }),
+        }),
     }),
-
-    //***** GET PAGINATION DATA *****/
-    getPaginationWareHouses: builder.query({
-      providesTags: ["WareHouse"],
-      query: (body: PaginationType) => ({
-        url: "/warehouse",
-        method: "POST",
-        body,
-      }),
-    }),
-
-    //***** ADD *****/
-    addWareHouse: builder.mutation({
-      invalidatesTags: ["WareHouse"],
-      query: (body: AddWarehouse) => ({
-        url: "/warehouse/add",
-        method: "POST",
-
-        body,
-      }),
-    }),
-
-    //***** Update *****/
-    updateWareHouse: builder.mutation({
-      invalidatesTags: ["WareHouse"],
-      query: ({ body, id }: UpdateWarehouse) => ({
-        url: `/warehouse/${id}`,
-
-        method: "PUT",
-        body,
-      }),
-    }),
-    //***** Delete *****/
-    deleteWareHouse: builder.mutation({
-      invalidatesTags: ["WareHouse"],
-      query: (id) => ({
-        url: `/warehouse/${id}`,
-
-        method: "DELETE",
-      }),
-    }),
-
-    // **** GET BY ID
-    getWareHouseById: builder.query({
-      providesTags: ["WareHouse"],
-      query: (id) => ({
-        url: `/warehouse/${id}`,
-
-        method: "GET",
-      }),
-    }),
-  }),
-});
+})
 export const {
-  useGetWareHousesQuery,
-  useAddWareHouseMutation,
-  useUpdateWareHouseMutation,
-  useGetWareHouseByIdQuery,
-  useGetPaginationWareHousesQuery,
-  useDeleteWareHouseMutation,
-} = wareHouseApi;
+    useGetWareHousesQuery,
+    useAddWareHouseMutation,
+    useUpdateWareHouseMutation,
+    useGetWareHouseByIdQuery,
+    useGetPaginationWareHousesQuery,
+    useDeleteWareHouseMutation,
+} = wareHouseApi

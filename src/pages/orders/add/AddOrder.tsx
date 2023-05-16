@@ -9,12 +9,11 @@ const AddOrder = () => {
                 <ATMTextField
                     name=""
                     value={''}
-                    onChange={() => { }}
+                    onChange={() => {}}
                     placeholder="Add Order"
                 />
             </div>
         </SideNavLayout>
-
     )
 }
 
