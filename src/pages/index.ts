@@ -105,7 +105,6 @@ import TabManagementListingWrapper from './media/tabManagement/list/TabManagemen
 import AddCompetitorManagement from './media/competitorManagement/add/AddCompetitorManagement'
 import CompetitorManagementListingWrapper from './media/competitorManagement/list/CompetitorManagementListingWrapper'
 
-
 export {
     AddASRWrapper,
     ASRListingWrapper,
@@ -212,5 +211,5 @@ export {
     TabManagementListingWrapper,
     AddTabManagement,
     CompetitorManagementListingWrapper,
-    AddCompetitorManagement
+    AddCompetitorManagement,
 }
