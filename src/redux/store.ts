@@ -43,6 +43,7 @@ import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
 import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import NewUserSlice from './slices/NewUserSlice'
 import didManagementSlice from './slices/media/didManagementSlice'
+import competitorManagementSlice from './slices/media/competitorManagementSlice'
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
 //     if (action.type.includes("rejected") && action.payload.status === 401) {
@@ -93,6 +94,7 @@ const store = configureStore({
         cartonBoxBarcode: CartonBoxBarcodeSlice,
         productGroupBarcode: ProductGroupBarcodeSlice,
         didManagement: didManagementSlice,
+        competitorManagement: competitorManagementSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
