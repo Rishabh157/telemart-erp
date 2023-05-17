@@ -85,7 +85,7 @@ const EditScheme = ({
                                 }`}
                             >
                                 {activeStep === steps?.length - 1
-                                    ? 'Submit'
+                                    ? 'Update'
                                     : 'Next'}
                             </button>
                         </div>

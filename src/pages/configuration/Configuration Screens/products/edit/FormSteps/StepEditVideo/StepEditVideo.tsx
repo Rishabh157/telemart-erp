@@ -20,7 +20,6 @@ const StepEditVideo = ({ formikProps }: Props) => {
                     <div className="">
                         {values.videos?.map((video, videoIndex) => {
                             const { videoName, videoLink } = video
-
                             return (
                                 <div
                                     key={videoIndex}
@@ -81,12 +80,7 @@ const StepEditVideo = ({ formikProps }: Props) => {
 
                                         {/* Preview */}
                                         <div className="rounded">
-                                            {values.videos[videoIndex]
-                                                .videoLink ? (
-                                                <div className="border rounded h-[160px] flex justify-center items-center">
-                                                    Preview
-                                                </div>
-                                            ) : (
+                                            {videoLink ? (
                                                 <iframe
                                                     width="100%"
                                                     height="160"
@@ -98,6 +92,10 @@ const StepEditVideo = ({ formikProps }: Props) => {
                                                     title="video"
                                                     className="rounded"
                                                 />
+                                            ) : (
+                                                <div className="border rounded h-[160px] flex justify-center items-center">
+                                                    Preview
+                                                </div>
                                             )}
                                         </div>
                                     </div>
