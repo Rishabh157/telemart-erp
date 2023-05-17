@@ -23,7 +23,7 @@ const InventoryListing = ({ columns, rows }: Props) => {
     const navigate = useNavigate()
 
     return (
-        <div className="px-4 h-full overflow-auto ">
+        <div className="px-4 h-[calc(100vh-55px)] overflow-auto ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> Inventories </ATMPageHeading>

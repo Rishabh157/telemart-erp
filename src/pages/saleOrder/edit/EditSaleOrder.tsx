@@ -116,7 +116,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                     <>
                                         <div className="flex flex-col gap-y-5">
                                             {/* {values.productSalesOrder?.map(
-                        (item: any, index: number) => { */}
+                                            (item: any, index: number) => { */}
                                             {/* const { productGroupId, rate, quantity } = item; */}
                                             {/* // return ( */}
                                             <div className="flex gap-3 items-end pb-5">

@@ -16,9 +16,10 @@ const StepAddFAQ = ({ formikProps }: Props) => {
 
     return (
         <div className=" ">
-            <FieldArray name="FAQs">
-                {({ push, remove }) => (
-                    <div className="">
+            <FieldArray name="faq">
+            {({ push, remove }) => {
+                    return (
+                        <>
                         {values.faq?.map((faq, FAQIndex) => {
                             const { question, answer } = faq
 
@@ -94,9 +95,10 @@ const StepAddFAQ = ({ formikProps }: Props) => {
                             >
                                 <HiPlus size="20" />
                             </button>
-                        </div>
-                    </div>
-                )}
+                        </div>                        
+                    </>
+                    )                    
+                }}
             </FieldArray>
         </div>
     )

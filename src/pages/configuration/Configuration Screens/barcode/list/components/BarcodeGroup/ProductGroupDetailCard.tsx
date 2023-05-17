@@ -66,7 +66,7 @@ const ProductGroupDetailCard = ({
                             <div
                                 key={barcode._id}
                                 onClick={() => {
-                                    onBarcodeClick(barcode)
+                                    //onBarcodeClick(barcode)
                                 }}
                                 className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${
                                     false
@@ -77,28 +77,14 @@ const ProductGroupDetailCard = ({
                                 {/*Checkbox */}
                                 <button
                                     onClick={(e) =>
-                                        onProductGroupBarcodeSelect(
-                                            e,
-                                            barcode,
-                                            isBarcodeSeleted
-                                        )
-                                    }
-                                    className={`
-                  flex 
-                  justify-center 
-                  items-center 
-                  h-5 
-                  w-5 
-                  rounded-full 
-                  border 
-                  border-slate-400 
-                  shadow 
-                  font-bold
-                  absolute 
-                  -right-2 
-                  -top-2
-                  ${isBarcodeSeleted ? 'bg-green-500 text-white' : 'bg-white'}
-                  `}
+                                         onProductGroupBarcodeSelect(
+                                             e,
+                                             barcode,
+                                             isBarcodeSeleted
+                                         )
+                                     }
+                                    className={`flex justify-center items-center h-5 w-5 rounded-full border border-slate-400 shadow font-bold absolute -right-2 -top-2
+${isBarcodeSeleted ? 'bg-green-500 text-white' : 'bg-white'}`}
                                 >
                                     {isBarcodeSeleted && <BiCheck />}
                                 </button>

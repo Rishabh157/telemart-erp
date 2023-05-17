@@ -95,7 +95,7 @@ const StepEditCallScript = ({ formikProps, dropdownOptions }: Props) => {
                                 }
                                 className="bg-primary-main px-3 py-1 text-white rounded"
                             >
-                                Edit More Script
+                                Add More Script
                             </button>
                         </div>
                     </div>
