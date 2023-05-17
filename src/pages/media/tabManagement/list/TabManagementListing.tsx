@@ -21,11 +21,11 @@ type Props = {
 
 const TabManagementListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const inventoryState: any = useSelector(
-        (state: RootState) => state.inventory
+    const tabManagementState: any = useSelector(
+        (state: RootState) => state.tabManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = inventoryState
+    const { page, rowsPerPage, totalItems } = tabManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -43,7 +43,7 @@ const TabManagementListing = ({ columns, rows }: Props) => {
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[55px]">
+            <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Tab Management </ATMPageHeading>
                 <button
                     type="button"
@@ -54,7 +54,7 @@ const TabManagementListing = ({ columns, rows }: Props) => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
@@ -77,7 +77,7 @@ const TabManagementListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                        extraClasses="h-full overflow-auto"
                     />
                 </div>
 

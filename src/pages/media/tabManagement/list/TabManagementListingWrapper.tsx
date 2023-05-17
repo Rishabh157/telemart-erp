@@ -54,11 +54,11 @@ const columns: columnTypes[] = [
 ]
 
 const TabManagementListingWrapper = () => {
-    const TabManagementState: any = useSelector(
-        (state: RootState) => state.TabManagement
+    const tabManagementState: any = useSelector(
+        (state: RootState) => state.tabManagement
     )
 
-    const { page, rowsPerPage, searchValue, items } = TabManagementState
+    const { page, rowsPerPage, searchValue, items } = tabManagementState
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();

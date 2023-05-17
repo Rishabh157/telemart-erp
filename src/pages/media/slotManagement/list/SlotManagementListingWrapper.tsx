@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { SlotManagementListResponse } from 'src/models/Slot.model'
+import SlotManagementListing from './SlotManagementListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";
@@ -8,18 +10,16 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/media/didManagementSlice'
-import MediaLayout from '../../MediaLayout'
-import { useGetPaginationDidQuery } from 'src/services/media/DidManagementServices'
-import CompetitorManagementListing from './CompetitorManagementListing'
-import { CompetitorManagementListResponse } from 'src/models/CompetitorManagement.model'
+} from 'src/redux/slices/media/slotManagementSlice'
+import { useGetPaginationSlotQuery } from 'src/services/media/SlotManagementServices'
+import MediaLayout from 'src/pages/media/MediaLayout'
 
 const columns: columnTypes[] = [
     {
         field: 'productName',
         headerName: 'Product Group Name',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: CompetitorManagementListResponse) => (
+        renderCell: (row: SlotManagementListResponse) => (
             <span> {row.productGroupName} </span>
         ),
     },
@@ -27,7 +27,7 @@ const columns: columnTypes[] = [
         field: 'quantity',
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: CompetitorManagementListResponse) => (
+        renderCell: (row: SlotManagementListResponse) => (
             <span> {row.count} </span>
         ),
     },
@@ -35,7 +35,7 @@ const columns: columnTypes[] = [
         field: 'warehouse',
         headerName: 'Warehouse',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: CompetitorManagementListResponse) => (
+        renderCell: (row: SlotManagementListResponse) => (
             <span> {row.wareHouse} </span>
         ),
     },
@@ -52,16 +52,15 @@ const columns: columnTypes[] = [
     },
 ]
 
-const CompetitorManagementListingWrapper = () => {
-    const competitorManagementState: any = useSelector(
-        (state: RootState) => state.didManagement
+const SlotManagementListingWrapper = () => {
+    const slotManagementState: any = useSelector(
+        (state: RootState) => state.slotManagement
     )
 
-    const { page, rowsPerPage, searchValue, items } = competitorManagementState
-    console.log('here')
+    const { page, rowsPerPage, searchValue, items } = slotManagementState
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetPaginationDidQuery({
+    const { data, isFetching, isLoading } = useGetPaginationSlotQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['productGroupName'],
@@ -93,10 +92,12 @@ const CompetitorManagementListingWrapper = () => {
     return (
         <>
             <MediaLayout>
-                <CompetitorManagementListing columns={columns} rows={items} />
+                <div className="h-full">
+                    <SlotManagementListing columns={columns} rows={items} />
+                </div>
             </MediaLayout>
         </>
     )
 }
 
-export default CompetitorManagementListingWrapper
+export default SlotManagementListingWrapper

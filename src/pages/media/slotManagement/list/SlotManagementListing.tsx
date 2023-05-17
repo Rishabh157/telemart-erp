@@ -11,7 +11,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
-} from 'src/redux/slices/media/channelManagementSlice'
+} from 'src/redux/slices/media/slotManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -19,13 +19,13 @@ type Props = {
     rows: any[]
 }
 
-const ChannelManagementListing = ({ columns, rows }: Props) => {
+const SlotManagementListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const inventoryState: any = useSelector(
-        (state: RootState) => state.inventory
+    const slotManagementState: any = useSelector(
+        (state: RootState) => state.slotManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = inventoryState
+    const { page, rowsPerPage, totalItems } = slotManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -33,7 +33,7 @@ const ChannelManagementListing = ({ columns, rows }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'Channel',
+            label: 'Slot',
         },
     ]
 
@@ -44,13 +44,13 @@ const ChannelManagementListing = ({ columns, rows }: Props) => {
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
-                <ATMPageHeading> Channel Management </ATMPageHeading>
+                <ATMPageHeading> Slot Management </ATMPageHeading>
                 <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Channel
+                    + Add Slot
                 </button>
             </div>
 
@@ -97,4 +97,4 @@ const ChannelManagementListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default ChannelManagementListing
+export default SlotManagementListing

@@ -5,13 +5,13 @@ import {
     UpdateTabManagement,
 } from 'src/models/tabManagement.model'
 
-export const TabManagementApi = apiSlice.injectEndpoints({
+export const tabManagementApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
         getPaginationTab: builder.query({
-            providesTags: ['Tab'],
+            providesTags: ['tab'],
             query: (body: PaginationType) => ({
-                url: '/Tab',
+                url: '/tab',
                 method: 'POST',
                 body,
             }),
@@ -19,9 +19,9 @@ export const TabManagementApi = apiSlice.injectEndpoints({
 
         //***** ADD *****/
         addTab: builder.mutation({
-            invalidatesTags: ['Tab'],
+            invalidatesTags: ['tab'],
             query: (body: AddTabManagement) => ({
-                url: '/Tab/add',
+                url: '/tab/add',
                 method: 'POST',
                 body,
             }),
@@ -29,9 +29,9 @@ export const TabManagementApi = apiSlice.injectEndpoints({
 
         //***** Update *****/
         updateTab: builder.mutation({
-            invalidatesTags: ['Tab'],
+            invalidatesTags: ['tab'],
             query: ({ body, id }: UpdateTabManagement) => ({
-                url: `/Tab/${id}`,
+                url: `/tab/${id}`,
                 method: 'PUT',
                 body,
             }),
@@ -43,4 +43,4 @@ export const {
     useAddTabMutation,
     useGetPaginationTabQuery,
     useUpdateTabMutation,
-} = TabManagementApi
+} = tabManagementApi

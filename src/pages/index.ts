@@ -95,9 +95,16 @@ import DidManagementListingWrapper from './media/didManagement/list/DidManagemen
 import OrganisationHierarchy from './configuration/Configuration Screens/organizationHeirarchy/OrganizationHeirarchy'
 import AddDidManagement from './media/didManagement/add/AddDidManagement'
 import EditDidManagement from './media/didManagement/edit/EditDidManagement'
-import ChannelManagementListingWrapper from './media/channelManagement/didManagement/list/ChannelManagementListingWrapper'
-import AddChannelManagement from './media/channelManagement/didManagement/add/AddChannelManagement'
-import EditChannelManagement from './media/channelManagement/didManagement/edit/EditChannelManagement'
+import ChannelManagementListingWrapper from './media/channelManagement/list/ChannelManagementListingWrapper'
+import AddChannelManagement from './media/channelManagement/add/AddChannelManagement'
+import EditChannelManagement from './media/channelManagement/edit/EditChannelManagement'
+import SlotManagementListingWrapper from './media/slotManagement/list/SlotManagementListingWrapper'
+import AddSlotManagement from './media/slotManagement/add/AddSlotManagement'
+import AddTabManagement from './media/tabManagement/add/AddTabManagement'
+import TabManagementListingWrapper from './media/tabManagement/list/TabManagementListingWrapper'
+import AddCompetitorManagement from './media/competitorManagement/add/AddCompetitorManagement'
+import CompetitorManagementListingWrapper from './media/competitorManagement/list/CompetitorManagementListingWrapper'
+import AddDidManagementWrapper from './media/didManagement/add/AddDidManagementWrapper'
 
 export {
     AddASRWrapper,
@@ -197,7 +204,14 @@ export {
     DidManagementListingWrapper,
     AddDidManagement,
     EditDidManagement,
+    AddDidManagementWrapper,
     AddChannelManagement,
     ChannelManagementListingWrapper,
     EditChannelManagement,
+    SlotManagementListingWrapper,
+    AddSlotManagement,
+    TabManagementListingWrapper,
+    AddTabManagement,
+    CompetitorManagementListingWrapper,
+    AddCompetitorManagement,
 }
