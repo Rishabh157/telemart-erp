@@ -17,7 +17,8 @@ type Props = {
         label: string
         onClick?: () => void
         path?: string
-    }[]
+    }[];
+    apiStatus: boolean;
 }
 
 const EditCompany = ({
@@ -27,7 +28,9 @@ const EditCompany = ({
     steps,
     pageHeading,
     breadcrumbs,
+    apiStatus,
 }: Props) => {
+    //alert(apiStatus)
     // Handle Previous
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
@@ -68,9 +71,11 @@ const EditCompany = ({
 
                             <button
                                 type="button"
-                                onClick={() => formikProps.handleSubmit()}
-                                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
-                            >
+                                disabled={apiStatus}
+                                onClick={() =>{formikProps.handleSubmit()}}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                    apiStatus ? 'disabled:opacity-25' : ''
+                                }`} >
                                 {activeStep === steps.length - 1
                                     ? 'Update'
                                     : 'Next'}

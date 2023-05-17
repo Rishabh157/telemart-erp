@@ -76,7 +76,7 @@ const EditPurchaseOrder = ({
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
+                                    apiStatus ? 'disabled:opacity-25' : ''
                                 }`}
                             >
                                 Update

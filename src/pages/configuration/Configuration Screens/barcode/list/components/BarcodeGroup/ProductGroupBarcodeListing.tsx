@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 // import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
-import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader';
 import {
     setRowsPerPage,
     setPage,
@@ -58,7 +58,7 @@ const ProductGroupListing = ({
                 />
 
                 {/* Barcode Detail Cards */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto bg ">
                     <ProductGroupDetailCard
                         cardBoxBarcodeList={rows}
                         selectedProductGroupBarcodes={selectedProductGroupcodes}
