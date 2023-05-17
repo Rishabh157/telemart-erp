@@ -104,6 +104,7 @@ import AddTabManagement from './media/tabManagement/add/AddTabManagement'
 import TabManagementListingWrapper from './media/tabManagement/list/TabManagementListingWrapper'
 import AddCompetitorManagement from './media/competitorManagement/add/AddCompetitorManagement'
 import CompetitorManagementListingWrapper from './media/competitorManagement/list/CompetitorManagementListingWrapper'
+import AddDidManagementWrapper from './media/didManagement/add/AddDidManagementWrapper'
 
 export {
     AddASRWrapper,
@@ -203,6 +204,7 @@ export {
     DidManagementListingWrapper,
     AddDidManagement,
     EditDidManagement,
+    AddDidManagementWrapper,
     AddChannelManagement,
     ChannelManagementListingWrapper,
     EditChannelManagement,
