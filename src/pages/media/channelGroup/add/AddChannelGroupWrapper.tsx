@@ -39,7 +39,10 @@ const AddChannelGroupWrapper = () => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Channel Group name added successfully!')
+                        showToast(
+                            'success',
+                            'Channel Group name added successfully!'
+                        )
                         navigate('/media/channel-group')
                     } else {
                         showToast('error', res?.data?.message)

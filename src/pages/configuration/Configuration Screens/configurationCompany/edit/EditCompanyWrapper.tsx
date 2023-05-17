@@ -84,7 +84,7 @@ const EditCompanyWrapper = () => {
     const Id = params.id
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [apiStatus, setApiStatus] = useState<boolean>(false);
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { selectedCompany }: any = useSelector(
         (state: RootState) => state.company
     )
@@ -127,7 +127,7 @@ const EditCompanyWrapper = () => {
     }
 
     // On Submit Handler
-    const onSubmitHandler = (values: FormInitialValues) => {        
+    const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
             setApiStatus(true)
             setTimeout(() => {
@@ -158,14 +158,13 @@ const EditCompanyWrapper = () => {
                     } else {
                         showToast('error', 'Something went wrong')
                     }
-                    setApiStatus(false);
+                    setApiStatus(false)
                 })
                 navigate('/configurations/company')
             }, 1000)
         } else {
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
-        
     }
 
     useEffect(() => {

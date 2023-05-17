@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 // import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
-import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader';
+import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import {
     setRowsPerPage,
     setPage,

@@ -23,12 +23,12 @@ export type UpdateChannelGroup = {
 }
 
 export type GetAllChannelGroupResponse = {
-    companyId: string;
+    companyId: string
     createdAt: string
-    groupName: string;
-    isActive: boolean;
-    isDeleted: boolean;
-    updatedAt: string;
-    __v: number;
+    groupName: string
+    isActive: boolean
+    isDeleted: boolean
+    updatedAt: string
+    __v: number
     _id: string
 }

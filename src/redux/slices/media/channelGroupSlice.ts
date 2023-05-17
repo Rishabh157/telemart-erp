@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { ChannelGroupListResponse, GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
+import {
+    ChannelGroupListResponse,
+    GetAllChannelGroupResponse,
+} from 'src/models/ChannelGroup.model'
 
 export interface ChannelGroupSliceStateType {
     items: ChannelGroupListResponse[] | []
@@ -11,9 +14,8 @@ export interface ChannelGroupSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
-    channelgroup:GetAllChannelGroupResponse[] |null
+    channelgroup: GetAllChannelGroupResponse[] | null
 }
-
 
 const initialState: ChannelGroupSliceStateType = {
     items: [],
@@ -24,7 +26,7 @@ const initialState: ChannelGroupSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
-    channelgroup:null
+    channelgroup: null,
 }
 
 const channelGroupSlice: any = createSlice({
@@ -66,7 +68,10 @@ const channelGroupSlice: any = createSlice({
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
-        setChannelGroups: (state, action: PayloadAction<GetAllChannelGroupResponse[]>) => {
+        setChannelGroups: (
+            state,
+            action: PayloadAction<GetAllChannelGroupResponse[]>
+        ) => {
             state.channelgroup = action.payload
         },
     },

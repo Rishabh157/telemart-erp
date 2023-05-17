@@ -19,7 +19,6 @@ export const didManagementApi = apiSlice.injectEndpoints({
             query: () => ({
                 url: '/did-management',
                 method: 'GET',
-
             }),
         }),
         //***** ADD *****/

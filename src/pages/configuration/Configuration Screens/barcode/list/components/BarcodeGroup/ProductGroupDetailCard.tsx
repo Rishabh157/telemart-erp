@@ -77,12 +77,12 @@ const ProductGroupDetailCard = ({
                                 {/*Checkbox */}
                                 <button
                                     onClick={(e) =>
-                                         onProductGroupBarcodeSelect(
-                                             e,
-                                             barcode,
-                                             isBarcodeSeleted
-                                         )
-                                     }
+                                        onProductGroupBarcodeSelect(
+                                            e,
+                                            barcode,
+                                            isBarcodeSeleted
+                                        )
+                                    }
                                     className={`flex justify-center items-center h-5 w-5 rounded-full border border-slate-400 shadow font-bold absolute -right-2 -top-2
 ${isBarcodeSeleted ? 'bg-green-500 text-white' : 'bg-white'}`}
                                 >

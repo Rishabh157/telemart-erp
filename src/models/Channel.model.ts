@@ -1,5 +1,4 @@
 export type ChannelManagementListResponse = {
-
     // is_active: boolean;
     // is_deleted: boolean;
     // createdAt: string;
@@ -19,10 +18,10 @@ export type ChannelManagementListResponse = {
 }
 
 export type AddChannelManagement = {
-    didNumber: string;
-    scheme: string;
+    didNumber: string
+    scheme: string
     channelGroupId: string
-    channelName: string;
+    channelName: string
     companyId: string
 }
 

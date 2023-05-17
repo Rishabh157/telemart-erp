@@ -13,8 +13,8 @@ type Props = {
     apiStatus: boolean
     dropdownOptions: {
         channelGroupOptions: SelectOption[]
-        didDataOption:SelectOption[]
-        schemeDataOption:SelectOption[]
+        didDataOption: SelectOption[]
+        schemeDataOption: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -27,7 +27,11 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddChannelManagement = ({ formikProps, apiStatus,dropdownOptions }: Props) => {
+const AddChannelManagement = ({
+    formikProps,
+    apiStatus,
+    dropdownOptions,
+}: Props) => {
     const { values, setFieldValue } = formikProps
     return (
         <div className="">
@@ -77,7 +81,7 @@ const AddChannelManagement = ({ formikProps, apiStatus,dropdownOptions }: Props)
                                 options={dropdownOptions.didDataOption}
                                 label="Did number"
                             />
-                              <ATMSelect
+                            <ATMSelect
                                 name="scheme"
                                 value={values.scheme}
                                 onChange={(e) =>
@@ -90,7 +94,10 @@ const AddChannelManagement = ({ formikProps, apiStatus,dropdownOptions }: Props)
                                 name="channelGroupId"
                                 value={values.channelGroupId}
                                 onChange={(e) =>
-                                    setFieldValue('channelGroupId', e.target.value)
+                                    setFieldValue(
+                                        'channelGroupId',
+                                        e.target.value
+                                    )
                                 }
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"

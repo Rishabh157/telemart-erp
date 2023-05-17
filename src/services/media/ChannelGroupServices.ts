@@ -51,5 +51,5 @@ export const {
     useAddChannelGroupMutation,
     useGetPaginationChannelGroupQuery,
     useUpdateChannelGroupMutation,
-    useGetAllChannelGroupQuery
+    useGetAllChannelGroupQuery,
 } = channelGroupApi
