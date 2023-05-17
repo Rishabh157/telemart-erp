@@ -73,7 +73,7 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
                                         {/* Item Quantity */}
                                         <ATMTextField
                                             name={`items[${itemIndex}].itemQuantity`}
-                                            value={itemQuantity}
+                                            value={(itemQuantity === 0)? " ": itemQuantity}
                                             onChange={(e) => {
                                                 const inputValue =
                                                     e.target.value
