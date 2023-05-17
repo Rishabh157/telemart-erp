@@ -20,7 +20,6 @@ const StepEditVideo = ({ formikProps }: Props) => {
                     <div className="">
                         {values.videos?.map((video, videoIndex) => {
                             const { videoName, videoLink } = video
-                            console.log(videoLink, 'Preview')
                             return (
                                 <div
                                     key={videoIndex}
