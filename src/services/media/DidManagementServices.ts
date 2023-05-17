@@ -13,7 +13,15 @@ export const didManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        //***** GET Without PAGINATION DATA *****/
+        getAllDid: builder.query({
+            providesTags: ['did'],
+            query: () => ({
+                url: '/did-management',
+                method: 'GET',
 
+            }),
+        }),
         //***** ADD *****/
         addDid: builder.mutation({
             invalidatesTags: ['did'],
@@ -40,4 +48,5 @@ export const {
     useAddDidMutation,
     useGetPaginationDidQuery,
     useUpdateDidMutation,
+    useGetAllDidQuery,
 } = didManagementApi
