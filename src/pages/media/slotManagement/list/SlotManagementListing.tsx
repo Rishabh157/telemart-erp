@@ -11,7 +11,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
-} from 'src/redux/slices/media/tabManagementSlice'
+} from 'src/redux/slices/media/slotManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -19,13 +19,13 @@ type Props = {
     rows: any[]
 }
 
-const TabManagementListing = ({ columns, rows }: Props) => {
+const SlotManagementListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const inventoryState: any = useSelector(
-        (state: RootState) => state.inventory
+    const slotManagementState: any = useSelector(
+        (state: RootState) => state.slotManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = inventoryState
+    const { page, rowsPerPage, totalItems } = slotManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -33,7 +33,7 @@ const TabManagementListing = ({ columns, rows }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'Tab',
+            label: 'Slot',
         },
     ]
 
@@ -43,18 +43,18 @@ const TabManagementListing = ({ columns, rows }: Props) => {
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Tab Management </ATMPageHeading>
+            <div className="flex justify-between items-center h-[55px]">
+                <ATMPageHeading> Slot Management </ATMPageHeading>
                 <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Tab
+                    + Add Slot
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
@@ -77,7 +77,7 @@ const TabManagementListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full overflow-auto"
+                        extraClasses="max-h-[calc(100%-150px)] overflow-auto"
                     />
                 </div>
 
@@ -97,4 +97,4 @@ const TabManagementListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default TabManagementListing
+export default SlotManagementListing

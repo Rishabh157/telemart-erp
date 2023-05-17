@@ -2,9 +2,11 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
     AddASRWrapper,
+    AddCompetitorManagement,
     AddDidManagementWrapper,
     ASRListingWrapper,
     BarcodeGenerator,
+    CompetitorManagementListingWrapper,
     EditDidManagement,
     EditPurchaseOrderWrapper,
 } from './pages/index'
@@ -123,12 +125,12 @@ import {
     AddChannelManagement,
     ChannelManagementListingWrapper,
     EditChannelManagement,
+    SlotManagementListingWrapper,
+    AddSlotManagement,
+    AddTabManagement,
+    TabManagementListingWrapper,
 } from './pages/index'
 import Auth from './pages/login/Auth'
-import TabManagementListingWrapper from './pages/media/tabManement/list/TabManagementListingWrapper'
-import AddTabManagement from './pages/media/tabManement/add/AddTabManagement'
-import CompetitorManagementListingWrapper from './pages/media/competitorManagement/list/CompetitorManagementListingWrapper'
-import AddCompetitorManagement from './pages/media/competitorManagement/add/AddCompetitorManagement'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -548,12 +550,20 @@ const PageRoutes = () => {
                         element={<EditChannelManagement />}
                     />
                     <Route
-                        path="media/Tab"
+                        path="media/tab"
                         element={<TabManagementListingWrapper />}
                     />
                     <Route
-                        path="media/Tab/add"
+                        path="media/tab/add"
                         element={<AddTabManagement />}
+                    />
+                    <Route
+                        path="media/slot"
+                        element={<SlotManagementListingWrapper />}
+                    />
+                    <Route
+                        path="media/slot/add"
+                        element={<AddSlotManagement />}
                     />
                     <Route
                         path="media/competitor"

@@ -28,6 +28,11 @@ const mediaNavigation: NavItemType[] = [
         path: '/media/competitor',
     },
     {
+        label: 'Slot Management',
+        icon: AiOutlineSetting,
+        path: '/media/slot',
+    },
+    {
         label: 'Analysis',
         icon: AiOutlineSetting,
         path: '/media/analysis',
