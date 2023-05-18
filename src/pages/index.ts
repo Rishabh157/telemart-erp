@@ -96,7 +96,6 @@ import OrganisationHierarchy from './configuration/Configuration Screens/organiz
 import AddDidManagement from './media/didManagement/add/AddDidManagement'
 import EditDidManagement from './media/didManagement/edit/EditDidManagement'
 import ChannelManagementListingWrapper from './media/channelManagement/list/ChannelManagementListingWrapper'
-import AddChannelManagement from './media/channelManagement/add/AddChannelManagement'
 import EditChannelManagement from './media/channelManagement/edit/EditChannelManagement'
 import SlotManagementListingWrapper from './media/slotManagement/list/SlotManagementListingWrapper'
 import AddSlotManagement from './media/slotManagement/add/AddSlotManagement'
@@ -105,7 +104,11 @@ import TabManagementListingWrapper from './media/tabManagement/list/TabManagemen
 import AddCompetitorManagement from './media/competitorManagement/add/AddCompetitorManagement'
 import CompetitorManagementListingWrapper from './media/competitorManagement/list/CompetitorManagementListingWrapper'
 import AddDidManagementWrapper from './media/didManagement/add/AddDidManagementWrapper'
-import  DispositionOneListingWrapper from './configuration/Configuration Screens/dispositionOne/list/DispositionOneListingWrapper'
+import DispositionOneListingWrapper from './configuration/Configuration Screens/dispositionOne/list/DispositionOneListingWrapper'
+import ChannelGroupListingWrapper from './media/channelGroup/list/ChannelGroupListingWrapper'
+import AddChannelGroupWrapper from './media/channelGroup/add/AddChannelGroupWrapper'
+import EditChannelGroup from './media/channelGroup/edit/EditChannelGroup'
+import AddChannelManagementWrapper from './media/channelManagement/add/AddChannelManagementWrapper'
 
 export {
     AddASRWrapper,
@@ -206,7 +209,6 @@ export {
     AddDidManagement,
     EditDidManagement,
     AddDidManagementWrapper,
-    AddChannelManagement,
     ChannelManagementListingWrapper,
     EditChannelManagement,
     SlotManagementListingWrapper,
@@ -216,4 +218,8 @@ export {
     CompetitorManagementListingWrapper,
     AddCompetitorManagement,
     DispositionOneListingWrapper,
+    ChannelGroupListingWrapper,
+    AddChannelGroupWrapper,
+    EditChannelGroup,
+    AddChannelManagementWrapper,
 }

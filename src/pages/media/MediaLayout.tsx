@@ -18,6 +18,11 @@ const mediaNavigation: NavItemType[] = [
         path: '/media/tab',
     },
     {
+        label: 'Channel Group',
+        icon: AiOutlineSetting,
+        path: '/media/channel-group',
+    },
+    {
         label: 'Channel Management',
         icon: AiOutlineSetting,
         path: '/media/channel',

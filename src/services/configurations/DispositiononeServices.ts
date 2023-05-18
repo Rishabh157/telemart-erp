@@ -1,4 +1,7 @@
-import { AddDisPositionOne, UpdateDispositionOne } from 'src/models/configurationModel/DisposiionOne.model'
+import {
+    AddDisPositionOne,
+    UpdateDispositionOne,
+} from 'src/models/configurationModel/DisposiionOne.model'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
 

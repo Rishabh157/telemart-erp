@@ -12,69 +12,63 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/configuration/dispositionOneSlice'
+} from 'src/redux/slices/media/channelGroupSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
+const ChannelGroupListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const dispositionOneState: any = useSelector(
-        (state: RootState) => state.dispositionOne
+    const channelGroupState: any = useSelector(
+        (state: RootState) => state.channelGroup
     )
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-    const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
-
-    const { page, rowsPerPage, searchValue, totalItems } = dispositionOneState
+    const { page, rowsPerPage, totalItems } = channelGroupState
+    const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Configuration',
+            label: 'Media',
             path: '/dashboard',
         },
         {
-            label: 'Disposition One',
+            label: 'Channel Group',
         },
     ]
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
-            {/* Breadcrumbs */}
+        <div className="px-4 h-full overflow-auto pt-3 ">
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> disposition one </ATMPageHeading>
+                <ATMPageHeading> Channel Group </ATMPageHeading>
                 <button
-                    onClick={() => {
-                        navigate('/configurations/disposition-one/add')
-                    }}
+                    type="button"
+                    onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Disposition one
+                    + Add Group Channel
                 </button>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
-                    searchValue={searchValue}
                     page={page}
-                    rowCount={totalItems}
+                    rowCount={rows.length}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
+                    onSearch={(searchvalue) =>
+                        dispatch(setSearchValue(searchvalue))
+                    }
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -87,12 +81,12 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                     />
                 </div>
 
                 {/* Pagination */}
+
                 <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
@@ -107,4 +101,4 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
 }
 
-export default DispositionOneListing
+export default ChannelGroupListing

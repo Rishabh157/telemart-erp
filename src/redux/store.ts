@@ -47,6 +47,7 @@ import channelManagementSlice from './slices/media/channelManagementSlice'
 import tabManagementSlice from './slices/media/tabManagementSlice'
 import slotManagementSlice from './slices/media/slotManagementSlice'
 import dispositionOneSlice from './slices/configuration/dispositionOneSlice'
+import channelGroupSlice from './slices/media/channelGroupSlice'
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
 //     if (action.type.includes("rejected") && action.payload.status === 401) {
@@ -100,7 +101,8 @@ const store = configureStore({
         channelManagement: channelManagementSlice,
         slotManagement: slotManagementSlice,
         tabManagement: tabManagementSlice,
-        dispositionOne:dispositionOneSlice,
+        dispositionOne: dispositionOneSlice,
+        channelGroup: channelGroupSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
