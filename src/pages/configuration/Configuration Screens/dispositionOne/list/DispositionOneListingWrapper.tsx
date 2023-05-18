@@ -4,10 +4,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import DispositiononeListing from './DispositionOneListing'
-import {
-    useDeletedispositionOneMutation,
-    useGetdispositionOneQuery,
-} from 'src/services/configurations/DispositiononeServices'
+import { useGetdispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -15,13 +12,8 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/dispositionOneSlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate } from 'react-router-dom'
-import { showToast } from 'src/utils'
 
 const DispositionOneListingWrapper = () => {
-    const navigate = useNavigate()
-    const [deleteAttGroup] = useDeletedispositionOneMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
 
@@ -125,26 +117,6 @@ const DispositionOneListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteAttGroup(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        'disposition one deleted successfully!'
-                    )
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
     return (
         <>
             <ConfigurationLayout>

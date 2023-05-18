@@ -133,6 +133,8 @@ import {
     AddChannelGroupWrapper,
     EditChannelGroup,
     AddChannelManagementWrapper,
+    ChannelCategoryListingWrapper,
+    AddChannelCategoryWrapper,
 } from './pages/index'
 import Auth from './pages/login/Auth'
 import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
@@ -594,6 +596,18 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="media/competitor/add"
+                        element={<AddCompetitorManagement />}
+                    />
+                    <Route
+                        path="media/channel-category"
+                        element={<ChannelCategoryListingWrapper />}
+                    />
+                    <Route
+                        path="media/channel-category/add"
+                        element={<AddChannelCategoryWrapper />}
+                    />
+                    <Route
+                        path="media/channel-category/add"
                         element={<AddCompetitorManagement />}
                     />
                 </Routes>
