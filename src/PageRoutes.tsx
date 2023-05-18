@@ -138,6 +138,8 @@ import {
 } from './pages/index'
 import Auth from './pages/login/Auth'
 import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
+import DispositionTwoListingWrapper from './pages/configuration/Configuration Screens/dispositionTwo/list/DispositionTwoListingWrapper'
+import AddDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/add/AddDispositionTwoWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -527,9 +529,18 @@ const PageRoutes = () => {
                         path="/configurations/disposition-one"
                         element={<DispositionOneListingWrapper />}
                     />
-                    <Route
+                  
+                     <Route
                         path="/configurations/disposition-one/add"
                         element={<AddDispositionOneWrapper />}
+                    />
+                      <Route
+                        path="/configurations/disposition-two"
+                        element={<DispositionTwoListingWrapper />}
+                    />
+                     <Route
+                        path="/configurations/disposition-two/add"
+                        element={<AddDispositionTwoWrapper />}
                     />
                     <Route
                         path="configurations/hierarchy"
