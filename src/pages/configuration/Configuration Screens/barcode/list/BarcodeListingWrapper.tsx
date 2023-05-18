@@ -52,7 +52,7 @@ const BarcodeListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items, activeTabIndex } =
         barcodeState
     const dispatch = useDispatch<AppDispatch>()
-   // const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const { data, isFetching, isLoading } = useGetBarcodeQuery({
         limit: rowsPerPage,
@@ -300,7 +300,7 @@ const BarcodeListingWrapper = () => {
                         rows={items}
                         selectedBarcodes={selectedBarcodes}
                         onBarcodeSelect={onBarcodeSelect}
-                        onBarcodeClick= {()=>{}}
+                        onBarcodeClick={() => {}}
                         // onBarcodeClick={(barcode: BarcodeListResponse) =>
                         //     navigate(`${barcode._id}`)
                         //}
