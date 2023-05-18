@@ -525,7 +525,7 @@ const PageRoutes = () => {
                         path="/configurations/disposition-one"
                         element={<DispositionOneListingWrapper />}
                     />
-                        <Route
+                    <Route
                         path="/configurations/disposition-one/add"
                         element={<AddDispositionOneWrapper />}
                     />

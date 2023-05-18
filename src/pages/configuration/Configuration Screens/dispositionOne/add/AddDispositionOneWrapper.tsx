@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
-import {  object, string } from 'yup'
+import { object, string } from 'yup'
 import AddDispositionOne from './AddDispositionOne'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import { useAdddispositionOneMutation ,useGetdispositionOneByIdQuery } from 'src/services/configurations/DispositiononeServices'
+import {
+    useAdddispositionOneMutation,
+    useGetdispositionOneByIdQuery,
+} from 'src/services/configurations/DispositiononeServices'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,7 +17,6 @@ type Props = {}
 
 export type FormInitialValues = {
     dispositionName: string
-    
 }
 
 const AddDispositionOneWrapper = (props: Props) => {
@@ -32,7 +34,6 @@ const AddDispositionOneWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         dispositionName: string().required('Group name is required'),
-
     })
 
     //    Form Submit Handler
@@ -45,10 +46,7 @@ const AddDispositionOneWrapper = (props: Props) => {
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'disposition  added successfully!'
-                        )
+                        showToast('success', 'disposition  added successfully!')
                         navigate('/configurations/disposition-one')
                     } else {
                         showToast('error', res?.data?.message)
