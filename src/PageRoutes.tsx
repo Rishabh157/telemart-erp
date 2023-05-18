@@ -123,6 +123,7 @@ import {
     DidManagementListingWrapper,
     OrganisationHierarchy,
     ChannelManagementListingWrapper,
+    DispositionOneListingWrapper,
     EditChannelManagement,
     SlotManagementListingWrapper,
     AddSlotManagement,
@@ -132,8 +133,11 @@ import {
     AddChannelGroupWrapper,
     EditChannelGroup,
     AddChannelManagementWrapper,
+    ChannelCategoryListingWrapper,
+    AddChannelCategoryWrapper,
 } from './pages/index'
 import Auth from './pages/login/Auth'
+import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -520,6 +524,14 @@ const PageRoutes = () => {
                         element={<LanguageListingWrapper />}
                     />
                     <Route
+                        path="/configurations/disposition-one"
+                        element={<DispositionOneListingWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-one/add"
+                        element={<AddDispositionOneWrapper />}
+                    />
+                    <Route
                         path="configurations/hierarchy"
                         element={<OrganisationHierarchy />}
                     />
@@ -584,6 +596,18 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="media/competitor/add"
+                        element={<AddCompetitorManagement />}
+                    />
+                    <Route
+                        path="media/channel-category"
+                        element={<ChannelCategoryListingWrapper />}
+                    />
+                    <Route
+                        path="media/channel-category/add"
+                        element={<AddChannelCategoryWrapper />}
+                    />
+                    <Route
+                        path="media/channel-category/add"
                         element={<AddCompetitorManagement />}
                     />
                 </Routes>

@@ -23,6 +23,11 @@ const mediaNavigation: NavItemType[] = [
         path: '/media/channel-group',
     },
     {
+        label: 'Channel Category',
+        icon: AiOutlineSetting,
+        path: '/media/channel-category',
+    },
+    {
         label: 'Channel Management',
         icon: AiOutlineSetting,
         path: '/media/channel',
