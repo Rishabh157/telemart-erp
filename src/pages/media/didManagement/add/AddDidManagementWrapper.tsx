@@ -12,6 +12,8 @@ import AddDidManagements from './AddDidManagement'
 export type FormInitialValues = {
     didNumber: string
     companyId: string
+    schemeId: string
+    channelId: string
 }
 
 const AddDidManagementWrapper = () => {
@@ -22,6 +24,8 @@ const AddDidManagementWrapper = () => {
 
     const initialValues: FormInitialValues = {
         didNumber: '',
+        schemeId: '',
+        channelId: '',
         companyId: userData?.companyId || '',
     }
 

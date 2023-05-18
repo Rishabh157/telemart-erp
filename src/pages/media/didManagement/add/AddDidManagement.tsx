@@ -6,6 +6,7 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -67,6 +68,24 @@ const AddDidManagements = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) =>
                                     setFieldValue('didNumber', e.target.value)
                                 }
+                            />
+                            <ATMSelect
+                                name="channelId"
+                                value={values.channelId}
+                                onChange={(e) =>
+                                    setFieldValue('channelId', e.target.value)
+                                }
+                                options={[]}
+                                label="Channel Name"
+                            />
+                            <ATMSelect
+                                name="schemeId"
+                                value={values.schemeId}
+                                onChange={(e) =>
+                                    setFieldValue('schemeId', e.target.value)
+                                }
+                                options={[]}
+                                label="scheme  Name"
                             />
                         </div>
                     </div>
