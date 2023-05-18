@@ -14,6 +14,7 @@ type Props = {
     onChange: (value: any) => void
     size?: Size
     disabled?: boolean
+    isSubmitting?: boolean
 }
 
 const ATMDatePicker = ({
@@ -24,6 +25,7 @@ const ATMDatePicker = ({
     onChange,
     size = 'small',
     disabled = false,
+    isSubmitting = true,
 }: Props) => {
     return (
         <div className="relative">
@@ -58,7 +60,7 @@ const ATMDatePicker = ({
                 </LocalizationProvider>
             </div>
 
-            {name && (
+            {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">

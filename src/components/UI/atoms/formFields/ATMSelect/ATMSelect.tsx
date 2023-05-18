@@ -10,6 +10,7 @@ type Props = {
     required?: boolean
     size?: 'small' | 'medium'
     name: string
+    isSubmitting?: boolean
 }
 
 const ATMSelect = ({
@@ -20,6 +21,7 @@ const ATMSelect = ({
     onChange,
     size = 'small',
     name,
+    isSubmitting = true,
 }: Props) => {
     return (
         <>
@@ -52,7 +54,7 @@ const ATMSelect = ({
                     </Select>
                 </FormControl>
 
-                {name && (
+                {name && isSubmitting && (
                     <ErrorMessage name={name}>
                         {(errMsg) => (
                             <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">

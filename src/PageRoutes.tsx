@@ -123,6 +123,7 @@ import {
     DidManagementListingWrapper,
     OrganisationHierarchy,
     ChannelManagementListingWrapper,
+    DispositionOneListingWrapper,
     EditChannelManagement,
     SlotManagementListingWrapper,
     AddSlotManagement,
@@ -136,6 +137,7 @@ import {
     AddChannelCategoryWrapper,
 } from './pages/index'
 import Auth from './pages/login/Auth'
+import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -520,6 +522,14 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/language"
                         element={<LanguageListingWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-one"
+                        element={<DispositionOneListingWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-one/add"
+                        element={<AddDispositionOneWrapper />}
                     />
                     <Route
                         path="configurations/hierarchy"
