@@ -108,6 +108,8 @@ import ChannelGroupListingWrapper from './media/channelGroup/list/ChannelGroupLi
 import AddChannelGroupWrapper from './media/channelGroup/add/AddChannelGroupWrapper'
 import EditChannelGroup from './media/channelGroup/edit/EditChannelGroup'
 import AddChannelManagementWrapper from './media/channelManagement/add/AddChannelManagementWrapper'
+import ChannelCategoryListingWrapper from './media/channelCategory/list/ChannelCategoryListingWrapper'
+import AddChannelCategoryWrapper from './media/channelCategory/add/AddChannelCategoryWrapper'
 
 export {
     AddASRWrapper,
@@ -220,4 +222,6 @@ export {
     AddChannelGroupWrapper,
     EditChannelGroup,
     AddChannelManagementWrapper,
+    ChannelCategoryListingWrapper,
+    AddChannelCategoryWrapper,
 }
