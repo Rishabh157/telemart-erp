@@ -10,6 +10,7 @@ type Props = {
     placeholder?: string
     minRows?: number
     name?: string
+    isSubmitting?: boolean
 }
 
 const ATMTextArea = ({
@@ -21,6 +22,7 @@ const ATMTextArea = ({
     placeholder,
     minRows = 2,
     name = '',
+    isSubmitting = true,
 }: Props) => {
     return (
         <div className="relative ">
@@ -41,7 +43,7 @@ const ATMTextArea = ({
                 placeholder={placeholder}
             />
 
-            {name && (
+            {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
