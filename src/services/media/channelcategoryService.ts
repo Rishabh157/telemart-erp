@@ -19,7 +19,7 @@ export const channelCategoryApi = apiSlice.injectEndpoints({
         }),
         //***** GET Without PAGINATION DATA *****/
         getAllChannelCategory: builder.query({
-            providesTags: ['channel-Category'],
+            providesTags: ['channel-category'],
             query: () => ({
                 url: '/channel-category',
                 method: 'GET',
@@ -28,7 +28,7 @@ export const channelCategoryApi = apiSlice.injectEndpoints({
 
         //***** ADD *****/
         addChannelCategory: builder.mutation({
-            invalidatesTags: ['channel-Category'],
+            invalidatesTags: ['channel-category'],
             query: (body: AddChannelCategory) => ({
                 url: '/channel-category/add',
                 method: 'POST',
@@ -38,7 +38,7 @@ export const channelCategoryApi = apiSlice.injectEndpoints({
 
         //***** Update *****/
         updateChannelCategory: builder.mutation({
-            invalidatesTags: ['channel-Category'],
+            invalidatesTags: ['channel-category'],
             query: ({ body, id }: UpdateChannelCategory) => ({
                 url: `/channel-category/${id}`,
                 method: 'PUT',
