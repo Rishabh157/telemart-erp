@@ -117,26 +117,6 @@ const DispositionOneListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
-    // const handleDelete = () => {
-    //     setShowDropdown(false)
-    //     deleteAttGroup(currentId).then((res) => {
-    //         if ('data' in res) {
-    //             if (res?.data?.status) {
-    //                 showToast(
-    //                     'success',
-    //                     'disposition one deleted successfully!'
-    //                 )
-    //             } else {
-    //                 showToast('error', res?.data?.message)
-    //             }
-    //         } else {
-    //             showToast(
-    //                 'error',
-    //                 'Something went wrong, Please try again later'
-    //             )
-    //         }
-    //     })
-    // }
     return (
         <>
             <ConfigurationLayout>

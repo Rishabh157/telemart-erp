@@ -52,7 +52,7 @@ const ChannelCategoryListing = ({ columns, rows }: Props) => {
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Cahnnel Category
+                    + Add Channel Category
                 </button>
             </div>
 
