@@ -23,7 +23,22 @@ const columns: columnTypes[] = [
             <span> {row.didNumber} </span>
         ),
     },
-
+    {
+        field: 'schemeLabel',
+        headerName: 'Scheme label',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: DidManagementListResponse) => (
+            <span> {row.schemeLabel} </span>
+        ),
+    },
+    {
+        field: 'channelLabel',
+        headerName: 'Channel label',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: DidManagementListResponse) => (
+            <span> {row.channelLabel} </span>
+        ),
+    },
     {
         field: 'actions',
         headerName: 'Actions',

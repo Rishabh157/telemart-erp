@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MediaLayout from '../../MediaLayout'
 import { useAddDidMutation } from 'src/services/media/DidManagementServices'
-import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import AddDidManagements from './AddDidManagement'
+import { useGetSchemeQuery } from 'src/services/SchemeService'
+import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
+import { useSelector } from 'react-redux'
+import { SchemeListResponse } from 'src/models/scheme.model'
+import { ChannelManagementListResponse } from 'src/models/Channel.model'
 
 export type FormInitialValues = {
     didNumber: string
@@ -21,6 +25,8 @@ const AddDidManagementWrapper = () => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddDidManagement] = useAddDidMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const [channel, setChannel] = useState([])
+    const [schemeData, setSchemeData] = useState([])
 
     const initialValues: FormInitialValues = {
         didNumber: '',
@@ -31,7 +37,9 @@ const AddDidManagementWrapper = () => {
 
     // Form Validation Schema
     const validationSchema = object({
-        didNumber: string().required('Did Number is required'),
+        didNumber: string().required('Did number is required'),
+        schemeId: string().required('Scheme is required'),
+        channelId: string().required('Cahnnel name is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -39,6 +47,8 @@ const AddDidManagementWrapper = () => {
         setTimeout(() => {
             AddDidManagement({
                 didNumber: values.didNumber,
+                schemeId: values.schemeId,
+                channelId: values.channelId,
                 companyId: values.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
@@ -55,6 +65,46 @@ const AddDidManagementWrapper = () => {
             })
         }, 1000)
     }
+
+    const {
+        isLoading: isSchemeLoading,
+        isFetching: isSchemeFetching,
+        data: schemeDataApi,
+    } = useGetSchemeQuery(' ')
+    const {
+        isLoading,
+        isFetching,
+        data: channelData,
+    } = useGetAllChannelQuery('')
+    useEffect(() => {
+        if (!isLoading && !isFetching) {
+            setChannel(channelData?.data)
+        }
+    }, [isLoading, isFetching, channelData])
+
+    useEffect(() => {
+        if (!isSchemeLoading && !isSchemeFetching) {
+            setSchemeData(schemeDataApi?.data)
+        }
+    }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
+
+    const dropdownOptions = {
+        channelOptions: channel?.map(
+            (channelItem: ChannelManagementListResponse) => {
+                return {
+                    label: channelItem.channelName,
+                    value: channelItem._id,
+                }
+            }
+        ),
+
+        schemeDataOption: schemeData?.map((schemeItem: SchemeListResponse) => {
+            return {
+                label: schemeItem?.schemeName,
+                value: schemeItem?._id,
+            }
+        }),
+    }
     return (
         <MediaLayout>
             <Formik
@@ -67,6 +117,7 @@ const AddDidManagementWrapper = () => {
                         <AddDidManagements
                             apiStatus={apiStatus}
                             formikProps={formikProps}
+                            dropdownOptions={dropdownOptions}
                         />
                     )
                 }}

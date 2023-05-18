@@ -16,7 +16,14 @@ export const channelManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-
+        //***** GET Without PAGINATION DATA *****/
+        getAllChannel: builder.query({
+            providesTags: ['channel'],
+            query: () => ({
+                url: '/channel-management',
+                method: 'GET',
+            }),
+        }),
         //***** ADD *****/
         addChannel: builder.mutation({
             invalidatesTags: ['channel'],
@@ -43,4 +50,5 @@ export const {
     useAddChannelMutation,
     useGetPaginationchannelQuery,
     useUpdateChannelMutation,
+    useGetAllChannelQuery,
 } = channelManagementApi
