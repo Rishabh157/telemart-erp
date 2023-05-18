@@ -105,6 +105,7 @@ import TabManagementListingWrapper from './media/tabManagement/list/TabManagemen
 import AddCompetitorManagement from './media/competitorManagement/add/AddCompetitorManagement'
 import CompetitorManagementListingWrapper from './media/competitorManagement/list/CompetitorManagementListingWrapper'
 import AddDidManagementWrapper from './media/didManagement/add/AddDidManagementWrapper'
+import  DispositionOneListingWrapper from './configuration/Configuration Screens/dispositionOne/list/DispositionOneListingWrapper'
 
 export {
     AddASRWrapper,
@@ -214,4 +215,5 @@ export {
     AddTabManagement,
     CompetitorManagementListingWrapper,
     AddCompetitorManagement,
+    DispositionOneListingWrapper,
 }

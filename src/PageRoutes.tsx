@@ -124,6 +124,7 @@ import {
     OrganisationHierarchy,
     AddChannelManagement,
     ChannelManagementListingWrapper,
+    DispositionOneListingWrapper,
     EditChannelManagement,
     SlotManagementListingWrapper,
     AddSlotManagement,
@@ -517,6 +518,10 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/language"
                         element={<LanguageListingWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-one"
+                        element={<DispositionOneListingWrapper />}
                     />
                     <Route
                         path="configurations/hierarchy"
