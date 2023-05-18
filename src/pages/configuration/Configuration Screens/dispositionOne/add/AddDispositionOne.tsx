@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { FormikProps } from 'formik'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -6,50 +6,25 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddDispositionOneWrapper'
-import ATMTransferList from 'src/components/UI/atoms/ATMTransferList/ATMTransferList'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
-    allItems: any
     apiStatus: boolean
 }
 
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: 'Attributes Group',
-        path: '/configurations/attributes-group',
+        label: 'Disposition one',
+        path: '/configurations/disposition-one',
     },
     {
-        label: 'Add Attributes Group',
+        label: 'Add Disposition',
     },
 ]
 
-const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
-    const [allOptions, setAllOtions] = useState([])
-    const [flag, setFlag] = useState(true)
-    const attributeOptions = allItems?.map((ele: any) => {
-        return { label: ele.attributeName, value: ele._id }
-    })
-    useEffect(() => {
-        if (flag && attributeOptions?.length) {
-            setFlag(false)
-            setAllOtions(attributeOptions)
-        }
-    }, [flag, attributeOptions])
-
+const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-    const options: { label: string; value: string }[] = allOptions
-
-    const transferListProps = {
-        name: 'attributes',
-        options,
-        right: values.attributes,
-        setRight: (newValue: { label: string; value: string }[]) =>
-            setFieldValue('attributes', newValue),
-        leftSideTitle: 'All Atrributes',
-        rightSideTitle: 'Attributes to add',
-    }
 
     return (
         <div className="h-[calc(100%-55px)]">
@@ -61,7 +36,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Attribute Group </ATMPageHeading>
+                    <ATMPageHeading> Add New Disposition One </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -69,7 +44,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Attribute group details{' '}
+                            Disposition One details{' '}
                         </div>
 
                         {/* BUTTON - Add Button */}
@@ -82,7 +57,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                                Add Group
+                                Submit
                             </button>
                         </div>
                     </div>
@@ -92,20 +67,17 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                         <div className="grid grid-cols-3 gap-4">
                             {/* Field1 */}
                             <ATMTextField
-                                name="group_name"
-                                value={values.group_name}
-                                label="Group Name"
-                                placeholder="Group Name"
+                                name="dispositionName"
+                                value={values.dispositionName}
+                                label="Disposition Name"
+                                placeholder="Disposition Name"
                                 onChange={(e) =>
-                                    setFieldValue('group_name', e.target.value)
+                                    setFieldValue(
+                                        'dispositionName',
+                                        e.target.value
+                                    )
                                 }
                             />
-                        </div>
-
-                        <div className="h-[300px] mt-8">
-                            {options ? (
-                                <ATMTransferList {...transferListProps} />
-                            ) : null}
                         </div>
                     </div>
                 </div>
@@ -114,4 +86,4 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
     )
 }
 
-export default AddAttributeGroup
+export default AddDispositionOne

@@ -1,66 +1,55 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
-import { array, object, string } from 'yup'
-import AddAttributeGroup from './AddDispositionOne'
+import {  object, string } from 'yup'
+import AddDispositionOne from './AddDispositionOne'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import { useAddAttributeGroupMutation } from 'src/services/AttributeGroup'
+import { useAdddispositionOneMutation ,useGetdispositionOneByIdQuery } from 'src/services/configurations/DispositiononeServices'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { useGetAllAttributesQuery } from 'src/services/AttributeService'
 import { setAllItems } from 'src/redux/slices/attributesSlice'
 
 type Props = {}
 
 export type FormInitialValues = {
-    group_name: string
-    attributes: { label: string; value: string }[]
+    dispositionName: string
+    
 }
 
-const AddAttributeGroupWrapper = (props: Props) => {
+const AddDispositionOneWrapper = (props: Props) => {
     const navigate = useNavigate()
     // Form Initial Values
     const dispatch = useDispatch()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { allItems } = useSelector((state: RootState) => state?.attributes)
-    const { data, isLoading, isFetching } = useGetAllAttributesQuery('')
+    const { data, isLoading, isFetching } = useGetdispositionOneByIdQuery('')
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [AddAttributeGroups] = useAddAttributeGroupMutation()
+    const [AddDispositionOneApi] = useAdddispositionOneMutation()
 
     const initialValues: FormInitialValues = {
-        group_name: '',
-        attributes: [],
+        dispositionName: '',
     }
     // Form Validation Schema
     const validationSchema = object({
-        group_name: string().required('Group name is required'),
-        attributes: array()
-            .of(
-                object().shape({
-                    label: string().required(),
-                    value: string().required(),
-                })
-            )
-            .min(1, 'Please select atleast 1 attribute group'),
+        dispositionName: string().required('Group name is required'),
+
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            AddAttributeGroups({
-                groupName: values.group_name,
-                attributes: values.attributes,
+            AddDispositionOneApi({
+                dispositionName: values.dispositionName,
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast(
                             'success',
-                            'Attribute group added successfully!'
+                            'disposition  added successfully!'
                         )
-                        navigate('/configurations/attributes-group')
+                        navigate('/configurations/disposition-one')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -85,10 +74,9 @@ const AddAttributeGroupWrapper = (props: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <AddAttributeGroup
+                        <AddDispositionOne
                             apiStatus={apiStatus}
                             formikProps={formikProps}
-                            allItems={allItems}
                         />
                     )
                 }}
@@ -97,4 +85,4 @@ const AddAttributeGroupWrapper = (props: Props) => {
     )
 }
 
-export default AddAttributeGroupWrapper
+export default AddDispositionOneWrapper
