@@ -62,7 +62,7 @@ const ViewBarcode = (props: Props) => {
                     breadcrumbs={[
                         {
                             label: 'Barcodes',
-                            path: '/bacode',
+                            path: '/configurations/barcode/',
                         },
                         {
                             label: 'Single Barcode',

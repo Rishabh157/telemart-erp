@@ -122,13 +122,16 @@ import {
     AddCbBarcodeWrapper,
     DidManagementListingWrapper,
     OrganisationHierarchy,
-    AddChannelManagement,
     ChannelManagementListingWrapper,
     EditChannelManagement,
     SlotManagementListingWrapper,
     AddSlotManagement,
     AddTabManagement,
     TabManagementListingWrapper,
+    ChannelGroupListingWrapper,
+    AddChannelGroupWrapper,
+    EditChannelGroup,
+    AddChannelManagementWrapper,
 } from './pages/index'
 import Auth from './pages/login/Auth'
 
@@ -138,13 +141,11 @@ const PageRoutes = () => {
         const uniqueId = uuidv4()
         localStorage.setItem('device-id', uniqueId)
     }
-
     const dispatch = useDispatch()
     const accessToken = localStorage.getItem('authToken')
     const refreshToken = localStorage.getItem('refreshToken')
     const userDataLs = localStorage.getItem('userData') || '{}'
     const userData = JSON.parse(userDataLs)
-
     dispatch(setAccessToken(accessToken))
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
@@ -538,12 +539,24 @@ const PageRoutes = () => {
                         element={<EditDidManagement />}
                     />
                     <Route
+                        path="media/channel-group"
+                        element={<ChannelGroupListingWrapper />}
+                    />
+                    <Route
+                        path="media/channel-group/add"
+                        element={<AddChannelGroupWrapper />}
+                    />
+                    <Route
+                        path="media/channel-group/edit"
+                        element={<EditChannelGroup />}
+                    />
+                    <Route
                         path="media/channel"
                         element={<ChannelManagementListingWrapper />}
                     />
                     <Route
                         path="media/channel/add"
-                        element={<AddChannelManagement />}
+                        element={<AddChannelManagementWrapper />}
                     />
                     <Route
                         path="media/channel/edit"

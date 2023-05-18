@@ -89,7 +89,12 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
 
                                             <ATMTextField
                                                 name={`productInformation[${productIndex}].productQuantity`}
-                                                value={productQuantity.toString()}
+                                                value={
+                                                    productQuantity.toString() ===
+                                                    '0'
+                                                        ? ''
+                                                        : productQuantity.toString()
+                                                }
                                                 onChange={(e) => {
                                                     const inputValue =
                                                         e.target.value
@@ -114,7 +119,11 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
 
                                             <ATMTextField
                                                 name={`productInformation[${productIndex}].mrp`}
-                                                value={mrp.toString()}
+                                                value={
+                                                    mrp.toString() === '0'
+                                                        ? ''
+                                                        : mrp.toString()
+                                                }
                                                 onChange={(e) => {
                                                     const inputValue =
                                                         e.target.value
@@ -139,7 +148,11 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
 
                                             <ATMTextField
                                                 name={`productInformation[${productIndex}].pop`}
-                                                value={pop.toString()}
+                                                value={
+                                                    pop.toString() === '0'
+                                                        ? ''
+                                                        : pop.toString()
+                                                }
                                                 onChange={(e) => {
                                                     const inputValue =
                                                         e.target.value

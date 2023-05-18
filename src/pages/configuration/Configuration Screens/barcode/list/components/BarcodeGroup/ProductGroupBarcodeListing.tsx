@@ -58,7 +58,7 @@ const ProductGroupListing = ({
                 />
 
                 {/* Barcode Detail Cards */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto bg ">
                     <ProductGroupDetailCard
                         cardBoxBarcodeList={rows}
                         selectedProductGroupBarcodes={selectedProductGroupcodes}

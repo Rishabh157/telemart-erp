@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+//import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { BarcodeListResponse, ProductBarcodeGroupResponse } from 'src/models'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
@@ -52,7 +52,7 @@ const BarcodeListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items, activeTabIndex } =
         barcodeState
     const dispatch = useDispatch<AppDispatch>()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const { data, isFetching, isLoading } = useGetBarcodeQuery({
         limit: rowsPerPage,
@@ -300,9 +300,10 @@ const BarcodeListingWrapper = () => {
                         rows={items}
                         selectedBarcodes={selectedBarcodes}
                         onBarcodeSelect={onBarcodeSelect}
-                        onBarcodeClick={(barcode: BarcodeListResponse) =>
-                            navigate(`${barcode._id}`)
-                        }
+                        onBarcodeClick={() => {}}
+                        // onBarcodeClick={(barcode: BarcodeListResponse) =>
+                        //     navigate(`${barcode._id}`)
+                        //}
                     />
                 ) : activeTabIndex === 1 ? (
                     <CartonBoxBarcodeListing

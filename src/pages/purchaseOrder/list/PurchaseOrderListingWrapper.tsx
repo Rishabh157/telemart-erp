@@ -226,7 +226,7 @@ const PurchaseOrderListingWrapper = () => {
                                 <button
                                     id="btn"
                                     disabled={approvalLength >= 2}
-                                    className="cursor-pointer"
+                                    className="cursor-pointer "
                                 >
                                     <Chip
                                         label="Approved"
@@ -258,9 +258,9 @@ const PurchaseOrderListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
+            flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
+                <div className="relative ">
                     <button
                         onClick={(e) => {
                             e.stopPropagation()
@@ -270,10 +270,10 @@ const PurchaseOrderListingWrapper = () => {
                         className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
                     >
                         {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                        <HiDotsHorizontal className="text-lg text-slate-600 font-bold " />{' '}
                     </button>
                     {showDropdown && currentId === row?._id && (
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                        <div className="absolute top-8 right-0 bg-white w-32 border border-gray-200 rounded-md shadow-lg z-50">
                             <button
                                 onClick={() => {
                                     navigate(

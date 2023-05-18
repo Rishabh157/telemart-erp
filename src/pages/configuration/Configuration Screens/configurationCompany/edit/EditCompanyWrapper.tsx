@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Formik, FormikProps } from 'formik'
 import { array, object, string } from 'yup'
 import EditCompany from './EditCompany'
@@ -84,6 +84,7 @@ const EditCompanyWrapper = () => {
     const Id = params.id
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { selectedCompany }: any = useSelector(
         (state: RootState) => state.company
     )
@@ -128,6 +129,7 @@ const EditCompanyWrapper = () => {
     // On Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
+            setApiStatus(true)
             setTimeout(() => {
                 const bankDetail = values.bankDetails.map((ele) => {
                     const { _id, ...rest } = ele // use object destructuring to remove the _id property
@@ -156,6 +158,7 @@ const EditCompanyWrapper = () => {
                     } else {
                         showToast('error', 'Something went wrong')
                     }
+                    setApiStatus(false)
                 })
                 navigate('/configurations/company')
             }, 1000)
@@ -185,6 +188,7 @@ const EditCompanyWrapper = () => {
                             setActiveStep={setActiveStep}
                             breadcrumbs={breadcrumbs}
                             pageHeading={pageHeading}
+                            apiStatus={apiStatus}
                         />
                     </Form>
                 )}
