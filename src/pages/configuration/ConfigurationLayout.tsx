@@ -78,6 +78,11 @@ const configurationNavigation: NavItemType[] = [
         path: '/configurations/dealers-category',
     },
     {
+        label: 'Disposition One',
+        icon: AiOutlineSetting,
+        path: '/configurations/disposition-one',
+    },
+    {
         label: 'Hierarchy (Org..*)',
         icon: AiOutlineSetting,
         path: '/configurations/hierarchy',
