@@ -7,6 +7,8 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { DropdownOptions } from './StepAddProductsWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { HiPlus } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -15,6 +17,9 @@ type Props = {
 
 const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className="">
@@ -76,6 +81,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                     options={
                                                         dropdownOptions.productGroupOptions
                                                     }
+                                                    isSubmitting={isSubmitting}
                                                 />
                                             </div>
 
@@ -101,6 +107,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                 label="Product Quantity"
                                                 placeholder="Product Quantity"
                                                 className="shadow bg-white rounded"
+                                                isSubmitting={isSubmitting}
                                             />
 
                                             {/* MRP */}
@@ -125,6 +132,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                 label="MRP"
                                                 placeholder="MRP"
                                                 className="shadow bg-white rounded"
+                                                isSubmitting={isSubmitting}
                                             />
 
                                             {/* POP  */}
@@ -149,6 +157,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                 label="POP (product offer price)"
                                                 placeholder="POP (product offer price)"
                                                 className="shadow bg-white rounded"
+                                                isSubmitting={isSubmitting}
                                             />
                                         </div>
                                     </div>

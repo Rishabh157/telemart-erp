@@ -6,6 +6,8 @@ import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { HiPlus } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -13,7 +15,9 @@ type Props = {
 
 const StepAddFAQ = ({ formikProps }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
     return (
         <div className=" ">
             <FieldArray name="FAQs">
@@ -60,6 +64,7 @@ const StepAddFAQ = ({ formikProps }: Props) => {
                                             label="Question"
                                             placeholder="Question"
                                             className="shadow bg-white rounded"
+                                            isSubmitting={isSubmitting}
                                         />
 
                                         {/* Answer */}
@@ -75,6 +80,7 @@ const StepAddFAQ = ({ formikProps }: Props) => {
                                             label="Answer"
                                             placeholder="Answer"
                                             className="shadow bg-white rounded"
+                                            isSubmitting={isSubmitting}
                                         />
                                     </div>
                                 </div>
