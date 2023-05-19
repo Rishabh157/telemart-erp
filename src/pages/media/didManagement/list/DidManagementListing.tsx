@@ -11,6 +11,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
+    setSearchValue,
 } from 'src/redux/slices/media/didManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
@@ -61,6 +62,7 @@ const DidManagementListing = ({ columns, rows }: Props) => {
                     rowCount={rows.length}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
+                    onSearch={(value) => dispatch(setSearchValue(value))}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
