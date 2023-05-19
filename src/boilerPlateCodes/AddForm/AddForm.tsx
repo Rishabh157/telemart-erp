@@ -77,11 +77,7 @@ const AddForm = ({ formikProps, dropdownOptions }: Props) => {
                                     setFieldValue('field1', e.target.value)
                                 }
                             />
-
-                            {/* Field 2 */}
-                         c
-
-                            {/* Field 3 */}
+                            {/* Field 2 */}c{/* Field 3 */}
                             <ATMTextField
                                 name="field3"
                                 value={values.field3}

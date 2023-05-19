@@ -106,7 +106,7 @@ const store = configureStore({
         dispositionOne: dispositionOneSlice,
         channelGroup: channelGroupSlice,
         channelCategory: channelCategorySlice,
-        dispositionTwo:dispositionTwoSlice,
+        dispositionTwo: dispositionTwoSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

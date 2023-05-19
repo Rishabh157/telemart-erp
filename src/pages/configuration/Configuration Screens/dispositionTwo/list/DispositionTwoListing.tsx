@@ -8,7 +8,11 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { setPage, setRowsPerPage, setSearchValue } from 'src/redux/slices/configuration/dispositionTwoSlice'
+import {
+    setPage,
+    setRowsPerPage,
+    setSearchValue,
+} from 'src/redux/slices/configuration/dispositionTwoSlice'
 
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";

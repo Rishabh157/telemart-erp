@@ -145,7 +145,7 @@ import EditDispositionTwoWrapper from './pages/configuration/Configuration Scree
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
-    if (deviceId === '') { 
+    if (deviceId === '') {
         const uniqueId = uuidv4()
         localStorage.setItem('device-id', uniqueId)
     }
@@ -531,20 +531,20 @@ const PageRoutes = () => {
                         path="/configurations/disposition-one"
                         element={<DispositionOneListingWrapper />}
                     />
-                  
-                     <Route
+
+                    <Route
                         path="/configurations/disposition-one/add"
                         element={<AddDispositionOneWrapper />}
                     />
-                      <Route
+                    <Route
                         path="/configurations/disposition-two"
                         element={<DispositionTwoListingWrapper />}
                     />
-                     <Route
+                    <Route
                         path="/configurations/disposition-two/add"
                         element={<AddDispositionTwoWrapper />}
                     />
-                     <Route
+                    <Route
                         path="/configurations/disposition-two/:id"
                         element={<EditDispositionTwoWrapper />}
                     />
@@ -627,7 +627,7 @@ const PageRoutes = () => {
                         path="media/channel-category/add"
                         element={<AddCompetitorManagement />}
                     />
-                      <Route
+                    <Route
                         path="media/channel-master"
                         element={<ChannelMasterListingWrapper />}
                     />

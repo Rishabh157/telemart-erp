@@ -9,7 +9,6 @@ import { FormInitialValues } from './AddDispositionTwoWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
-
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -17,7 +16,6 @@ type Props = {
         dispositiononeoption: SelectOption[]
     }
 }
-
 
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
@@ -30,7 +28,11 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddDispositionTwo = ({ formikProps, apiStatus, dropdownOptions}: Props) => {
+const AddDispositionTwo = ({
+    formikProps,
+    apiStatus,
+    dropdownOptions,
+}: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -98,8 +100,6 @@ const AddDispositionTwo = ({ formikProps, apiStatus, dropdownOptions}: Props) =>
                                     )
                                 }
                             />
-                           
-
                         </div>
                     </div>
                 </div>

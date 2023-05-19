@@ -52,7 +52,7 @@ const mediaNavigation: NavItemType[] = [
         icon: AiOutlineSetting,
         path: '/media/analysis',
     },
-  
+
     {
         label: 'Flow',
         icon: AiOutlineSetting,

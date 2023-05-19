@@ -1,7 +1,10 @@
 import { PaginationType } from 'src/models/common/paginationType'
 
 import apiSlice from '../ApiSlice'
-import { AddChannelMaster, UpdateChannelMaster } from 'src/models/channelMaster.model'
+import {
+    AddChannelMaster,
+    UpdateChannelMaster,
+} from 'src/models/channelMaster.model'
 
 export const channelMasterApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

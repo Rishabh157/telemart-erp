@@ -6,18 +6,25 @@ import DispositiononeListing from './DispositionTwoListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-import { useDeletedispositionTwoMutation, useGetdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
-import { setIsTableLoading, setItems, setTotalItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
+import {
+    useDeletedispositionTwoMutation,
+    useGetdispositionTwoQuery,
+} from 'src/services/configurations/DispositionTwoServices'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/configuration/dispositionTwoSlice'
 import { DispositionTwoListResponse } from 'src/models/configurationModel/DisposiionTwo.model'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 
 const DispositionTwoListingWrapper = () => {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
-    const [deletedispositionTwo]=useDeletedispositionTwoMutation()
+    const [deletedispositionTwo] = useDeletedispositionTwoMutation()
 
     const columns: columnTypes[] = [
         {
@@ -25,8 +32,7 @@ const DispositionTwoListingWrapper = () => {
             headerName: 'Disposition One Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DispositionTwoListResponse) => (
-                <span className="capitalize"> {row.dispostionOneLabel
-                } </span>
+                <span className="capitalize"> {row.dispostionOneLabel} </span>
             ),
         },
         {
@@ -68,18 +74,18 @@ const DispositionTwoListingWrapper = () => {
                                 Edit
                             </button>
                             <button
-                                 onClick={() => {
-                                     showConfirmationDialog({
-                                         title: 'Delete Disposition Two',
-                                         text: 'Do you want to delete',
-                                         showCancelButton: true,
-                                         next: (res) => {
-                                             return res.isConfirmed
-                                                 ? handleDelete()
-                                                 : setShowDropdown(false)
-                                         },
-                                     })
-                                 }}
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Delete Disposition Two',
+                                        text: 'Do you want to delete',
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDelete()
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Delete

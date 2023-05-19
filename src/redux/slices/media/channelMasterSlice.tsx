@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { ChannelMasterListResponse } from 'src/models/channelMaster.model'
 
-
 export interface ChannelMasterSliceStateType {
     items: ChannelMasterListResponse[] | []
     totalItems: number
