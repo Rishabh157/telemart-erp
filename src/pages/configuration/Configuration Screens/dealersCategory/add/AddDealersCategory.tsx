@@ -82,7 +82,11 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                             {/* Invest Amount */}
                             <ATMTextField
                                 name="investAmount"
-                                value={(values.investAmount === 0)? "" : values.investAmount}
+                                value={
+                                    values.investAmount === 0
+                                        ? ''
+                                        : values.investAmount
+                                }
                                 label="Invest Amount"
                                 placeholder="Invest Amount"
                                 onChange={(e) => {
@@ -96,7 +100,11 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                             {/* Number of Orders */}
                             <ATMTextField
                                 name="numberOfOrders"
-                                value={(values.numberOfOrders === 0)? "": values.numberOfOrders}
+                                value={
+                                    values.numberOfOrders === 0
+                                        ? ''
+                                        : values.numberOfOrders
+                                }
                                 label="Number Of Orders"
                                 placeholder="Number Of Orders"
                                 onChange={(e) => {
@@ -112,7 +120,11 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                             {/* Delivery Percentage */}
                             <ATMTextField
                                 name="deliveryPercentage"
-                                value={(values.deliveryPercentage === 0)? "" : values.deliveryPercentage}
+                                value={
+                                    values.deliveryPercentage === 0
+                                        ? ''
+                                        : values.deliveryPercentage
+                                }
                                 label="Delivery Percentage"
                                 placeholder="Delivery Percentage"
                                 onChange={(e) => {

@@ -6,7 +6,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { GRNListResponse } from 'src/models/GRN.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import GRNListing from './GRNListing'
-import {AppDispatch} from 'src/redux/store'
+import { AppDispatch } from 'src/redux/store'
 // import {
 //   setFilterValue,
 //   setIsTableLoading,

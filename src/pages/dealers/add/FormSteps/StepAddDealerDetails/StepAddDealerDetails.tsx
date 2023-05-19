@@ -44,7 +44,7 @@ const StepAddDealerDetails = ({
                                 </div>
                             )
 
-                            case 'password':
+                        case 'password':
                             return (
                                 <div>
                                     <ATMTextField

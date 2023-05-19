@@ -87,11 +87,12 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                                     e.target
                                                                         .value
                                                                 )
-                                                            }else{
-                                                               setFieldValue(
-                                                                   name,
-                                                                   e.target.value
-                                                               ) 
+                                                            } else {
+                                                                setFieldValue(
+                                                                    name,
+                                                                    e.target
+                                                                        .value
+                                                                )
                                                             }
                                                             //     }
                                                             // })

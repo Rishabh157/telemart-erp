@@ -165,7 +165,6 @@ const StepEditScheme = ({
                             setFieldValue('comboPacking', newValue)
                         }
                         label="Combo Packaging"
-                        
                     />
                 </div>
                 {/* Start Date */}

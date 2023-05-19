@@ -178,7 +178,12 @@ const AddPurchaseOrder = ({
                                                                     type="number"
                                                                     min={0}
                                                                     name={`purchaseOrder[${itemIndex}].rate`}
-                                                                    value={(rate === 0)?"" : rate?.toString() }                                                                       
+                                                                    value={
+                                                                        rate ===
+                                                                        0
+                                                                            ? ''
+                                                                            : rate?.toString()
+                                                                    }
                                                                     label="Rate"
                                                                     placeholder="Rate"
                                                                     onChange={(
@@ -200,13 +205,22 @@ const AddPurchaseOrder = ({
                                                                     type="number"
                                                                     min={0}
                                                                     name={`purchaseOrder[${itemIndex}].quantity`}
-                                                                    value={(quantity === 0)? "" :quantity?.toString() }
+                                                                    value={
+                                                                        quantity ===
+                                                                        0
+                                                                            ? ''
+                                                                            : quantity?.toString()
+                                                                    }
                                                                     label="Quantity"
                                                                     placeholder="Quantity"
-                                                                    onChange={(e) =>
+                                                                    onChange={(
+                                                                        e
+                                                                    ) =>
                                                                         setFieldValue(
                                                                             `purchaseOrder[${itemIndex}].quantity`,
-                                                                            e.target.value
+                                                                            e
+                                                                                .target
+                                                                                .value
                                                                         )
                                                                     }
                                                                 />

@@ -158,7 +158,12 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                                                     type="number"
                                                                     min={0}
                                                                     name={`productSalesOrder[${index}].rate`}
-                                                                    value={(rate === 0)? "" : rate?.toString()}
+                                                                    value={
+                                                                        rate ===
+                                                                        0
+                                                                            ? ''
+                                                                            : rate?.toString()
+                                                                    }
                                                                     label="Rate"
                                                                     placeholder="Rate"
                                                                     onChange={(
@@ -180,7 +185,12 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                                                     type="number"
                                                                     min={0}
                                                                     name={`productSalesOrder[${index}].quantity`}
-                                                                    value={(quantity === 0 )? "" : quantity?.toString() }
+                                                                    value={
+                                                                        quantity ===
+                                                                        0
+                                                                            ? ''
+                                                                            : quantity?.toString()
+                                                                    }
                                                                     label="Quantity"
                                                                     placeholder="Quantity"
                                                                     onChange={(

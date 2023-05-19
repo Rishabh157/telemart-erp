@@ -71,7 +71,7 @@ export type AddDealer = {
     firmName: string
     dealerCategory: String
     email: string
-    password:string
+    password: string
     registrationAddress: registrationAddress
     billingAddress: billingAddress
     contactInformation: contactInformation[]

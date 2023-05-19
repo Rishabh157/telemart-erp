@@ -219,7 +219,7 @@ const PurchaseOrderListingWrapper = () => {
                                         color="warning"
                                         variant="outlined"
                                         size="small"
-                                        clickable={true}                                          
+                                        clickable={true}
                                     />
                                 </button>
                             ) : (

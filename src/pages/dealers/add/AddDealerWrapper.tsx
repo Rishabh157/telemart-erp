@@ -63,7 +63,7 @@ export type FormInitialValues = {
 // export const adharNoRegexp = RegExp(
 //     /[0-9]{4}[\-][0-9]{4}[\-][0-9]{4}[\-][0-9]{4}/
 // )
-// .matches(adharNoRegexp, "Adhar Number must be (0000-0000-0000-0000)") 
+// .matches(adharNoRegexp, "Adhar Number must be (0000-0000-0000-0000)")
 // .length(17, 'adhar card must be 16 digit')
 
 // Form Steps
@@ -260,7 +260,7 @@ const AddDealerWrapper = () => {
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
-        if (activeStep === steps.length - 1) {            
+        if (activeStep === steps.length - 1) {
             setTimeout(() => {
                 addDealer({
                     dealerCode: values.dealerCode,

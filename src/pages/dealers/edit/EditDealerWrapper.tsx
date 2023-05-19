@@ -74,7 +74,7 @@ const steps = [
             firstName: string().required('first name is required'),
             lastName: string().required('LastName is required'),
             dealerCategory: string().required('please choose dealer category'),
-            email: string().required('email is required'),            
+            email: string().required('email is required'),
         }),
     },
     {
@@ -125,9 +125,9 @@ const steps = [
                 gstNumber: string().required('GST number is required'),
                 gstCertificate: mixed().required('GST certificate is required'),
                 adharCardNumber: string()
-                .min(19, 'Number should be 16 digits')
-                .max(19, 'maximum 16 digit')
-                .required('Declaration form is required'),
+                    .min(19, 'Number should be 16 digits')
+                    .max(19, 'maximum 16 digit')
+                    .required('Declaration form is required'),
                 adharCard: mixed().required('Declaration form is required'),
             }),
             otherDocument: array().of(

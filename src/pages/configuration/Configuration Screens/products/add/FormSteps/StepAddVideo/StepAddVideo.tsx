@@ -85,7 +85,7 @@ const StepAddVideo = ({ formikProps }: Props) => {
                                                 <iframe
                                                     width="100%"
                                                     height="160"
-                                                    src={videoLink }
+                                                    src={videoLink}
                                                     title="video"
                                                     className="rounded"
                                                 />

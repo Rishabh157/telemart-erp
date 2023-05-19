@@ -52,7 +52,7 @@ const formFields: FieldType[] = [
     },
     {
         name: 'password',
-        label: 'Password',        
+        label: 'Password',
         placeholder: 'Password',
         type: 'password',
     },

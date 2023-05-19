@@ -190,7 +190,7 @@ const StepAddSchemeDetails = ({
                 </div>
                 {/* Start Date */}
                 <ATMDatePicker
-                    name='startDate'
+                    name="startDate"
                     value={values.startDate}
                     onChange={(newValue) => {
                         setFieldValue('startDate', newValue)
@@ -199,7 +199,7 @@ const StepAddSchemeDetails = ({
                 />
                 {/* End Date */}
                 <ATMDatePicker
-                    name='endDate'
+                    name="endDate"
                     value={values.endDate}
                     onChange={(newValue) => {
                         setFieldValue('endDate', newValue)

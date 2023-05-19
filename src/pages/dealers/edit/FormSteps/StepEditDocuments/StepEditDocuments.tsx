@@ -46,31 +46,63 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                     key={name}
                                                     name={name}
                                                     value={
-                                                        name.includes('.')? values[name.split('.')[0]][name.split('.')[1]]: values[name]
+                                                        name.includes('.')
+                                                            ? values[
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[0]
+                                                              ][
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[1]
+                                                              ]
+                                                            : values[name]
                                                     }
                                                     onChange={(e) => {
-                                                        const inputValue = e.target.value
-                                                        if ( name === 'document.adharCardNumber') {
-                                                          //alert(inputValue.length)
+                                                        const inputValue =
+                                                            e.target.value
+                                                        if (
+                                                            name ===
+                                                            'document.adharCardNumber'
+                                                        ) {
+                                                            //alert(inputValue.length)
                                                             if (
-                                                                inputValue.length === 4 || inputValue.length === 9 ||inputValue.length === 14) {
+                                                                inputValue.length ===
+                                                                    4 ||
+                                                                inputValue.length ===
+                                                                    9 ||
+                                                                inputValue.length ===
+                                                                    14
+                                                            ) {
                                                                 //alert(inputValue.length)
-                                                                e.target.value = inputValue + '-'
+                                                                e.target.value =
+                                                                    inputValue +
+                                                                    '-'
                                                                 setFieldValue(
                                                                     name,
-                                                                    e.target.value
+                                                                    e.target
+                                                                        .value
                                                                 )
-                                                            } else if (inputValue.length > 19) {
-                                                                e.target.value = inputValue.substring(0,19)
+                                                            } else if (
+                                                                inputValue.length >
+                                                                19
+                                                            ) {
+                                                                e.target.value =
+                                                                    inputValue.substring(
+                                                                        0,
+                                                                        19
+                                                                    )
                                                                 setFieldValue(
                                                                     name,
-                                                                    e.target.value
+                                                                    e.target
+                                                                        .value
                                                                 )
-                                                            }else{
-                                                              setFieldValue(
-                                                                  name,
-                                                                  e.target.value
-                                                              )
+                                                            } else {
+                                                                setFieldValue(
+                                                                    name,
+                                                                    e.target
+                                                                        .value
+                                                                )
                                                             }
                                                         } else {
                                                             setFieldValue(
