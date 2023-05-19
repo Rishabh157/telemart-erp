@@ -7,7 +7,7 @@ import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import AddChannelGroup from './AddChannelCategory'
-import { useAddChannelCategoryMutation } from 'src/services/media/channelcategoryService'
+import { useAddChannelCategoryMutation } from 'src/services/media/ChannelcategoryService'
 
 export type FormInitialValues = {
     channelCategory: string

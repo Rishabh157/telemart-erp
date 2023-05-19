@@ -127,8 +127,8 @@ import {
     EditChannelManagement,
     SlotManagementListingWrapper,
     AddSlotManagement,
-    AddTabManagement,
-    TabManagementListingWrapper,
+    AddTapeManagementWrapper,
+    TapeManagementListingWrapper,
     ChannelGroupListingWrapper,
     AddChannelGroupWrapper,
     EditChannelGroup,
@@ -575,12 +575,12 @@ const PageRoutes = () => {
                         element={<EditChannelManagement />}
                     />
                     <Route
-                        path="media/tab"
-                        element={<TabManagementListingWrapper />}
+                        path="media/tape"
+                        element={<TapeManagementListingWrapper />}
                     />
                     <Route
-                        path="media/tab/add"
-                        element={<AddTabManagement />}
+                        path="media/tape/add"
+                        element={<AddTapeManagementWrapper />}
                     />
                     <Route
                         path="media/slot"

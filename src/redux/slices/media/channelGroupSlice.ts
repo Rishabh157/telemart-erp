@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {
     ChannelGroupListResponse,
@@ -29,7 +29,7 @@ const initialState: ChannelGroupSliceStateType = {
     channelgroup: null,
 }
 
-const channelGroupSlice: any = createSlice({
+const channelGroupSlice: Slice<ChannelGroupSliceStateType> = createSlice({
     name: 'channelGroup',
     initialState,
     reducers: {

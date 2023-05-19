@@ -44,7 +44,7 @@ import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import NewUserSlice from './slices/NewUserSlice'
 import didManagementSlice from './slices/media/didManagementSlice'
 import channelManagementSlice from './slices/media/channelManagementSlice'
-import tabManagementSlice from './slices/media/tabManagementSlice'
+import tapeManagementSlice from './slices/media/tapeManagementSlice'
 import slotManagementSlice from './slices/media/slotManagementSlice'
 import dispositionOneSlice from './slices/configuration/dispositionOneSlice'
 import channelGroupSlice from './slices/media/channelGroupSlice'
@@ -101,7 +101,7 @@ const store = configureStore({
         didManagement: didManagementSlice,
         channelManagement: channelManagementSlice,
         slotManagement: slotManagementSlice,
-        tabManagement: tabManagementSlice,
+        tapeManagement: tapeManagementSlice,
         dispositionOne: dispositionOneSlice,
         channelGroup: channelGroupSlice,
         channelCategory: channelCategorySlice,

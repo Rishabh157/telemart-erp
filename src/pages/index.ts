@@ -99,8 +99,8 @@ import ChannelManagementListingWrapper from './media/channelManagement/list/Chan
 import EditChannelManagement from './media/channelManagement/edit/EditChannelManagement'
 import SlotManagementListingWrapper from './media/slotManagement/list/SlotManagementListingWrapper'
 import AddSlotManagement from './media/slotManagement/add/AddSlotManagement'
-import AddTabManagement from './media/tabManagement/add/AddTabManagement'
-import TabManagementListingWrapper from './media/tabManagement/list/TabManagementListingWrapper'
+import AddTapeManagementWrapper from './media/tapeManagement/add/AddTapeManagementWrapper'
+import TapeManagementListingWrapper from './media/tapeManagement/list/TapeManagementListingWrapper'
 import AddCompetitorManagement from './media/competitorManagement/add/AddCompetitorManagement'
 import CompetitorManagementListingWrapper from './media/competitorManagement/list/CompetitorManagementListingWrapper'
 import AddDidManagementWrapper from './media/didManagement/add/AddDidManagementWrapper'
@@ -215,8 +215,8 @@ export {
     EditChannelManagement,
     SlotManagementListingWrapper,
     AddSlotManagement,
-    TabManagementListingWrapper,
-    AddTabManagement,
+    TapeManagementListingWrapper,
+    AddTapeManagementWrapper,
     CompetitorManagementListingWrapper,
     AddCompetitorManagement,
     DispositionOneListingWrapper,

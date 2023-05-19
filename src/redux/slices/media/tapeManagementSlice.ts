@@ -1,9 +1,9 @@
-import { TabManagementListResponse } from '../../../models/tabManagement.model'
+import { TapeManagementListResponse } from '../../../models/tapeManagement.model'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface TabManagementSliceStateType {
-    items: TabManagementListResponse[] | []
+export interface TapeManagementSliceStateType {
+    items: TapeManagementListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -13,7 +13,7 @@ export interface TabManagementSliceStateType {
     selectetab: string
 }
 
-const initialState: TabManagementSliceStateType = {
+const initialState: TapeManagementSliceStateType = {
     items: [],
     totalItems: 0,
     isTableLoading: false,
@@ -24,13 +24,13 @@ const initialState: TabManagementSliceStateType = {
     selectetab: '',
 }
 
-const TabManagementSlice: any = createSlice({
-    name: 'TabManagement',
+const TapeManagementSlice: any = createSlice({
+    name: 'TapeManagement',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<TabManagementListResponse[] | []>
+            action: PayloadAction<TapeManagementListResponse[] | []>
         ) => {
             state.items = action.payload
         },
@@ -75,5 +75,5 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectetab,
-} = TabManagementSlice.actions
-export default TabManagementSlice.reducer
+} = TapeManagementSlice.actions
+export default TapeManagementSlice.reducer
