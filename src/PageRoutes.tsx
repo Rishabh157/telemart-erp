@@ -140,6 +140,7 @@ import Auth from './pages/login/Auth'
 import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
 import DispositionTwoListingWrapper from './pages/configuration/Configuration Screens/dispositionTwo/list/DispositionTwoListingWrapper'
 import AddDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/add/AddDispositionTwoWrapper'
+import ChannelMasterListingWrapper from './pages/media/channelMaster/list/ChannelMasterListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -620,6 +621,10 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel-category/add"
                         element={<AddCompetitorManagement />}
+                    />
+                      <Route
+                        path="media/channel-master"
+                        element={<ChannelMasterListingWrapper />}
                     />
                 </Routes>
             </BrowserRouter>
