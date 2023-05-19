@@ -12,7 +12,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/media/didManagementSlice'
+} from 'src/redux/slices/media/channelGroupSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -20,13 +20,13 @@ type Props = {
     rows: any[]
 }
 
-const DidManagementListing = ({ columns, rows }: Props) => {
+const ChannelGroupListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const didManagementState: any = useSelector(
-        (state: RootState) => state.didManagement
+    const channelGroupState: any = useSelector(
+        (state: RootState) => state.channelGroup
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = didManagementState
+    const { page, rowsPerPage, totalItems } = channelGroupState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -34,24 +34,24 @@ const DidManagementListing = ({ columns, rows }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'Did',
+            label: 'Channel Group',
         },
     ]
 
     return (
-        <div className="px-4 h-full pt-3 ">
+        <div className="px-4 h-full overflow-auto pt-3 ">
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> DID Management </ATMPageHeading>
+                <ATMPageHeading> Channel Group </ATMPageHeading>
                 <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add DID
+                    + Add Group Channel
                 </button>
             </div>
 
@@ -62,7 +62,9 @@ const DidManagementListing = ({ columns, rows }: Props) => {
                     rowCount={rows.length}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
-                    onSearch={(value) => dispatch(setSearchValue(value))}
+                    onSearch={(searchvalue) =>
+                        dispatch(setSearchValue(searchvalue))
+                    }
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
@@ -99,4 +101,4 @@ const DidManagementListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default DidManagementListing
+export default ChannelGroupListing

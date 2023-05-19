@@ -9,6 +9,7 @@ import apiSlice from './ApiSlice'
 export const SalesOrderApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
+
         getPaginationSaleOrder: builder.query({
             providesTags: ['SalesOrder'],
             query: (body: PaginationType) => ({

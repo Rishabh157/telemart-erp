@@ -8,6 +8,7 @@ export type ATMTextFieldPropTypes = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     label?: string
     size?: 'small' | 'medium' | 'large'
+    isSubmitting?: boolean
     onBlur?: ((e: any) => void) & React.FocusEventHandler<HTMLInputElement>
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
@@ -20,6 +21,7 @@ const ATMTextField = ({
     required,
     onBlur,
     size = 'small',
+    isSubmitting = true,
     ...rest
 }: ATMTextFieldPropTypes) => {
     return (
@@ -45,7 +47,7 @@ const ATMTextField = ({
                 {...rest}
                 onBlur={onBlur}
             />
-            {name && (
+            {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500 py-1 mb-1">

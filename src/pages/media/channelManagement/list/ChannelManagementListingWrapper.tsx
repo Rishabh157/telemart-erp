@@ -16,29 +16,38 @@ import MediaLayout from 'src/pages/media/MediaLayout'
 
 const columns: columnTypes[] = [
     {
-        field: 'productName',
-        headerName: 'Product Group Name',
+        field: 'ChannelGroupLabel',
+        headerName: 'Channel Group Name',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.productGroupName} </span>
+            <span> {row.ChannelGroupLabel} </span>
         ),
     },
     {
-        field: 'quantity',
-        headerName: 'Quantity',
+        field: 'channelName',
+        headerName: 'Channel Name',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.count} </span>
+            <span> {row.channelName} </span>
         ),
     },
     {
-        field: 'warehouse',
-        headerName: 'Warehouse',
+        field: 'schemeLabel',
+        headerName: 'Scheme ',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.wareHouse} </span>
+            <span> {row.schemeLabel} </span>
         ),
     },
+    {
+        field: 'didLabel',
+        headerName: 'Did Number',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: ChannelManagementListResponse) => (
+            <span> {row.didLabel} </span>
+        ),
+    },
+
     {
         field: 'actions',
         headerName: 'Actions',
@@ -63,7 +72,7 @@ const ChannelManagementListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetPaginationchannelQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['productGroupName'],
+        params: ['channelName'],
         page: page,
         filterBy: [
             {

@@ -12,61 +12,69 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/media/didManagementSlice'
+} from 'src/redux/slices/configuration/dispositionOneSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const DidManagementListing = ({ columns, rows }: Props) => {
+const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const didManagementState: any = useSelector(
-        (state: RootState) => state.didManagement
+    const dispositionOneState: any = useSelector(
+        (state: RootState) => state.dispositionOne
     )
-    const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = didManagementState
+    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
+    const [selectedRows, setSelectedRows] = useState([])
+
+    const { page, rowsPerPage, searchValue, totalItems } = dispositionOneState
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Media',
+            label: 'Configuration',
             path: '/dashboard',
         },
         {
-            label: 'Did',
+            label: 'Disposition One',
         },
     ]
 
     return (
-        <div className="px-4 h-full pt-3 ">
+        <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
+            {/* Breadcrumbs */}
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> DID Management </ATMPageHeading>
+                <ATMPageHeading> disposition one </ATMPageHeading>
                 <button
-                    type="button"
-                    onClick={() => navigate('add')}
+                    onClick={() => {
+                        navigate('/configurations/disposition-one/add')
+                    }}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add DID
+                    + Add Disposition one
                 </button>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
+                    searchValue={searchValue}
                     page={page}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
-                    onSearch={(value) => dispatch(setSearchValue(value))}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -79,12 +87,12 @@ const DidManagementListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
+                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                     />
                 </div>
 
                 {/* Pagination */}
-
                 <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
@@ -99,4 +107,4 @@ const DidManagementListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default DidManagementListing
+export default DispositionOneListing

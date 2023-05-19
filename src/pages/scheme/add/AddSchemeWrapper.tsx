@@ -14,6 +14,7 @@ import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useAddSchemeMutation } from 'src/services/SchemeService'
 import moment from 'moment'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 
@@ -222,6 +223,7 @@ const AddSchemeWrapper = () => {
                 })
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }
@@ -241,13 +243,13 @@ const AddSchemeWrapper = () => {
     useEffect(() => {
         dispatch(setAllItems(data?.data))
     }, [data, dispatch, isLoading, isFetching])
-
     return (
         <SideNavLayout>
             <Formik
                 initialValues={initialValues}
                 validationSchema={getValidationSchema(activeStep)}
                 onSubmit={onSubmitHandler}
+                touch={false}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => (
                     <Form className="">

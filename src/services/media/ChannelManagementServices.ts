@@ -11,17 +11,24 @@ export const channelManagementApi = apiSlice.injectEndpoints({
         getPaginationchannel: builder.query({
             providesTags: ['channel'],
             query: (body: PaginationType) => ({
-                url: '/channel',
+                url: '/channel-management',
                 method: 'POST',
                 body,
             }),
         }),
-
+        //***** GET Without PAGINATION DATA *****/
+        getAllChannel: builder.query({
+            providesTags: ['channel'],
+            query: () => ({
+                url: '/channel-management',
+                method: 'GET',
+            }),
+        }),
         //***** ADD *****/
         addChannel: builder.mutation({
             invalidatesTags: ['channel'],
             query: (body: AddChannelManagement) => ({
-                url: '/channel/add',
+                url: '/channel-management/add',
                 method: 'POST',
                 body,
             }),
@@ -31,7 +38,7 @@ export const channelManagementApi = apiSlice.injectEndpoints({
         updateChannel: builder.mutation({
             invalidatesTags: ['channel'],
             query: ({ body, id }: UpdateChannelManagement) => ({
-                url: `/channel/${id}`,
+                url: `/channel-management/${id}`,
                 method: 'PUT',
                 body,
             }),
@@ -43,4 +50,5 @@ export const {
     useAddChannelMutation,
     useGetPaginationchannelQuery,
     useUpdateChannelMutation,
+    useGetAllChannelQuery,
 } = channelManagementApi
