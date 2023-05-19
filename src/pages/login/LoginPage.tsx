@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ATMInputAdormant from '../../components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMTextField from '../../components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { BiShow, BiHide } from 'react-icons/bi'
-
+import {AppDispatch} from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from 'src/services/UserServices'
 import {
@@ -19,7 +19,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState('')
     const [apiError, setApiError] = useState('')
     const [errorInitiate, setErrorInitiate] = useState(false)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [login, loginInfo] = useLoginMutation()
     const handleLogin = () => {

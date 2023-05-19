@@ -7,7 +7,7 @@ import { useAddAsrMutation } from 'src/services/AsrService'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { setItems } from 'src/redux/slices/productGroupSlice'
 
@@ -23,7 +23,7 @@ export type FormInitialValues = {
 
 const AddASRWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [addAsr] = useAddAsrMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { data, isLoading, isFetching } = useGetAllProductGroupQuery('')

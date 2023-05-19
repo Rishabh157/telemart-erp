@@ -7,7 +7,7 @@ import DealerGeneralInformationTab from './DealerGeneralInformationTab'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetDealerByIdQuery } from 'src/services/DealerServices'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/dealerSlice'
 import { CircularProgress } from '@mui/material'
 
@@ -20,7 +20,7 @@ export type AccordianType = {
 
 const DealerGeneralInformationTabWrapper = (props: Props) => {
     const params = useParams()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const Id = params.dealerId
     const { data, isLoading, isFetching } = useGetDealerByIdQuery(Id)
     const { selectedItem }: any = useSelector(

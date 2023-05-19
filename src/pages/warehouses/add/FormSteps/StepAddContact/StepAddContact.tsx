@@ -40,7 +40,7 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                                                     return (
                                                         <div
                                                             key={index}
-                                                            className={`py-6 px-7`}
+                                                            className={`py-9 px-7`}
                                                         >
                                                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center">
                                                                 {sectionName} #
@@ -162,8 +162,8 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                                             department: '',
                                             designation: '',
                                             email: '',
-                                            mobile_number: '',
-                                            landline: '',
+                                            mobileNumber: '',
+                                            landLine: '',
                                         })
                                     }
                                     className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "

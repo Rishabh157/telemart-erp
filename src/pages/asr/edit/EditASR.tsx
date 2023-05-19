@@ -86,7 +86,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                                     className={`border-b border-slate-300`}
                                                 >
                                                     <div
-                                                        className={`py-6 px-7`}
+                                                        className={`py-9 px-7`}
                                                     >
                                                         <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center">
                                                             ASR #{asrIndex + 1}
@@ -148,7 +148,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                                             {/* <div className="flex-1"> */}
                                                             <ATMTextField
                                                                 name={`asrDetails[${asrIndex}].quantity`}
-                                                                value={quantity}
+                                                                value={(quantity === 0)? "": quantity}
                                                                 label="Quantity"
                                                                 placeholder="Quantity"
                                                                 onChange={(e) =>

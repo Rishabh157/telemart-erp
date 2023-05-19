@@ -6,7 +6,7 @@ import { useAddDealerPincodeMutation } from 'src/services/DealerPincodeService'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState,AppDispatch } from 'src/redux/store'
 import { useGetAllPincodeQuery } from 'src/services/PinCodeService'
 import { setAllPincodes as setAllDealerPincodes } from 'src/redux/slices/pincodeSlice'
 
@@ -25,7 +25,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const dealerId: any = params.dealerId
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
     const [apiStatus, setApiStatus] = useState<boolean>(false)

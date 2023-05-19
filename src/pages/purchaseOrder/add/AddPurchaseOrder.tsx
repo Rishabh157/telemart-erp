@@ -86,7 +86,7 @@ const AddPurchaseOrder = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* PO Code */}
                             <ATMTextField
@@ -101,7 +101,7 @@ const AddPurchaseOrder = ({
 
                             {/* Vendor */}
                             <ATMSelect
-                                name="vendor"
+                                name="vendorId"
                                 value={values.vendorId}
                                 onChange={(e) =>
                                     setFieldValue('vendorId', e.target.value)
@@ -112,7 +112,7 @@ const AddPurchaseOrder = ({
 
                             {/* Warehouse */}
                             <ATMSelect
-                                name="warehouse"
+                                name="wareHouseId"
                                 value={values.wareHouseId}
                                 onChange={(e) =>
                                     setFieldValue('wareHouseId', e.target.value)
@@ -133,7 +133,7 @@ const AddPurchaseOrder = ({
                             {({ push, remove }) => {
                                 return (
                                     <>
-                                        <div className="flex flex-col gap-y-5">
+                                        <div className="flex flex-col gap-y-9">
                                             {values.purchaseOrder?.map(
                                                 (item, itemIndex) => {
                                                     const {
@@ -146,7 +146,7 @@ const AddPurchaseOrder = ({
                                                     return (
                                                         <div
                                                             key={itemIndex}
-                                                            className="flex gap-3 items-end "
+                                                            className="flex gap-3 items-end  "
                                                         >
                                                             {/* Item Name */}
                                                             <div className="flex-[3_3_0%]">
@@ -178,10 +178,7 @@ const AddPurchaseOrder = ({
                                                                     type="number"
                                                                     min={0}
                                                                     name={`purchaseOrder[${itemIndex}].rate`}
-                                                                    value={
-                                                                        rate?.toString() ||
-                                                                        ''
-                                                                    }
+                                                                    value={(rate === 0)?"" : rate?.toString() }                                                                       
                                                                     label="Rate"
                                                                     placeholder="Rate"
                                                                     onChange={(
@@ -203,20 +200,13 @@ const AddPurchaseOrder = ({
                                                                     type="number"
                                                                     min={0}
                                                                     name={`purchaseOrder[${itemIndex}].quantity`}
-                                                                    value={
-                                                                        quantity?.toString() ||
-                                                                        ''
-                                                                    }
+                                                                    value={(quantity === 0)? "" :quantity?.toString() }
                                                                     label="Quantity"
                                                                     placeholder="Quantity"
-                                                                    onChange={(
-                                                                        e
-                                                                    ) =>
+                                                                    onChange={(e) =>
                                                                         setFieldValue(
                                                                             `purchaseOrder[${itemIndex}].quantity`,
-                                                                            e
-                                                                                .target
-                                                                                .value
+                                                                            e.target.value
                                                                         )
                                                                     }
                                                                 />
@@ -267,15 +257,15 @@ const AddPurchaseOrder = ({
                                         </div>
 
                                         {/* BUTTON - Add More Product */}
-                                        <div className="flex justify-self-start py-5">
+                                        <div className="flex justify-self-start py-7">
                                             <button
                                                 type="button"
                                                 onClick={() =>
                                                     push({
                                                         itemId: '',
-                                                        rate: null,
-                                                        quantity: null,
-                                                        estReceivingDate: null,
+                                                        rate: 0,
+                                                        quantity: 0,
+                                                        estReceivingDate: '',
                                                     })
                                                 }
                                                 className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "

@@ -7,7 +7,7 @@ import StepAddProductsWrapper from './FormSteps/StepAddProducts/StepAddProductsW
 import StepAddFAQ from './FormSteps/StepAddFAQ/StepAddFAQ'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllItems } from 'src/redux/slices/productGroupSlice'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { showToast } from 'src/utils'
@@ -135,7 +135,7 @@ const AddSchemeWrapper = () => {
 
     // States
     const [activeStep, setActiveStep] = React.useState(0)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [AddSchemes] = useAddSchemeMutation()
     const [apiStatus, setApiStatus] = useState(false)

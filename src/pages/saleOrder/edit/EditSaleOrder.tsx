@@ -67,7 +67,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* SO Number */}
                             <ATMTextField
@@ -114,7 +114,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                             {({ push, remove }) => {
                                 return (
                                     <>
-                                        <div className="flex flex-col gap-y-5">
+                                        <div className="flex flex-col gap-y-5 py-3">
                                             {/* {values.productSalesOrder?.map(
                                             (item: any, index: number) => { */}
                                             {/* const { productGroupId, rate, quantity } = item; */}
@@ -206,7 +206,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                         </div>
 
                                         {/* BUTTON - Add More Product */}
-                                        {/* <div className="flex justify-self-start py-5">
+                                        {/* <div className="flex justify-self-start py-9">
                       <button
                         type="button"
                         onClick={() =>

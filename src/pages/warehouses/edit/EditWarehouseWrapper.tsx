@@ -10,7 +10,7 @@ import EditWarehouse from './EditWarehouse'
 // import { useEditWareHouseMutation } from "src/services/WareHoouseService";
 import { showToast } from 'src/utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import {
     useGetWareHouseByIdQuery,
@@ -120,7 +120,7 @@ const EditWarehouseWrapper = () => {
     const vendorId = state?.params?.vendorId || null
     const dealerId = state?.params?.dealerId || null
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const { data, isLoading, isFetching } = useGetWareHouseByIdQuery(Id)
     const [editWareHouse] = useUpdateWareHouseMutation()

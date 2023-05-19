@@ -11,7 +11,7 @@ import { BreadcrumbType } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadC
 import { useGetPaginationVendorsQuery } from 'src/services/VendorServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAllItems } from 'src/redux/slices/vendorSlice'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 
 const tabsData = [
     {
@@ -75,7 +75,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const ViewVendor = () => {
     //   const { vendorId } = useParams();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [searchValue, setSearchValue] = useState('')
     const { allItems, selectedItem }: any = useSelector(
         (state: RootState) => state?.vendor

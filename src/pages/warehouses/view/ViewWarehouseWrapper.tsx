@@ -3,7 +3,7 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ViewWarehouse from './ViewWarehouse'
 //import { showToast } from "src/utils";
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useParams } from 'react-router-dom'
 import { useGetWareHouseByIdQuery } from 'src/services/WareHoouseService'
 import { setSelectedItem } from 'src/redux/slices/warehouseSlice'
@@ -11,7 +11,7 @@ import { setSelectedItem } from 'src/redux/slices/warehouseSlice'
 const ViewWarehouseWrapper = () => {
     const params = useParams()
     const id: any = params.id
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const { data, isLoading, isFetching } = useGetWareHouseByIdQuery(id)
 

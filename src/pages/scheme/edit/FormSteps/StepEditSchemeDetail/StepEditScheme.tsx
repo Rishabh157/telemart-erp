@@ -157,14 +157,17 @@ const StepEditScheme = ({
                     className="shadow bg-white rounded"
                 />
                 {/* Combo Packaging */}
-                <ATMSwitchButton
-                    name="comboPacking"
-                    value={values.comboPacking}
-                    onChange={(newValue) =>
-                        setFieldValue('comboPacking', newValue)
-                    }
-                    label="Combo Packaging"
-                />
+                <div className="mt-4">
+                    <ATMSwitchButton
+                        name="comboPacking"
+                        value={values.comboPacking}
+                        onChange={(newValue) =>
+                            setFieldValue('comboPacking', newValue)
+                        }
+                        label="Combo Packaging"
+                        
+                    />
+                </div>
                 {/* Start Date */}
                 <ATMDatePicker
                     name={'startDate'}

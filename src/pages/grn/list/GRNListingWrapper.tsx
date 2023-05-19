@@ -6,6 +6,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { GRNListResponse } from 'src/models/GRN.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import GRNListing from './GRNListing'
+import {AppDispatch} from 'src/redux/store'
 // import {
 //   setFilterValue,
 //   setIsTableLoading,
@@ -76,7 +77,7 @@ const columns: columnTypes[] = [
 ]
 
 const GRNListingWrapper = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     // const { state } = useLocation();
     // const poCode=state?.poCode;
 

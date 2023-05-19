@@ -97,6 +97,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                             {/* Password */}
                             <ATMTextField
                                 name="password"
+                                type="password"
                                 value={values.password}
                                 label="Password"
                                 placeholder="Password"

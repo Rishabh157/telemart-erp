@@ -13,7 +13,7 @@ import {
 } from 'src/services/CompanyServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedCompany } from 'src/redux/slices/companySlice'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { showToast, validationofGst } from 'src/utils'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 
@@ -83,7 +83,7 @@ const EditCompanyWrapper = () => {
     const params = useParams()
     const Id = params.id
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false);
     const { selectedCompany }: any = useSelector(
         (state: RootState) => state.company

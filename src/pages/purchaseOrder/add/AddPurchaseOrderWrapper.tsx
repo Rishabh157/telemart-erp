@@ -3,8 +3,8 @@ import { Formik } from 'formik'
 import { array, date, number, object, string } from 'yup'
 import AddPurchaseOrder from './AddPurchaseOrder'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { RootState } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
+import { RootState, AppDispatch } from 'src/redux/store'
+import { useDispatch, useSelector } from 'react-redux';
 import { useAddPurchaseOrderMutation } from 'src/services/PurchaseOrderService'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
@@ -39,7 +39,7 @@ export type FormInitialValues = {
 
 const AddPurchaseOrderWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const disptach = useDispatch()
+    const disptach = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [addPurchaseOrder] = useAddPurchaseOrderMutation()

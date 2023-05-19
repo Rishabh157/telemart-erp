@@ -5,7 +5,7 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 // import { v4 as uuidv4 } from "uuid";
 import { useGetAllCartonBoxQuery } from 'src/services/CartonBoxService'
 // import { useAddCartonBoxBarcodeMutation } from "src/services/CartonBoxBarcodeService";
@@ -21,7 +21,7 @@ export type FormInitialValues = {
 
 const AddCbBarcodeWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState(false)
     // const { userData } = useSelector((state: RootState) => state?.auth);
     const { allItems }: any = useSelector(

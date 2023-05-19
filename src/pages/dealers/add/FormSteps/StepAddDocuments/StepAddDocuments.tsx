@@ -23,7 +23,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                 return (
                     <div
                         key={index}
-                        className={`py-6 px-7 border-b border-slate-400`}
+                        className={`py-9 px-7 border-b border-slate-400`}
                     >
                         <div className="text-primary-main text-lg pb-2 font-medium ">
                             {sectionName}
@@ -47,10 +47,60 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     name={name}
                                                     value={values[name]}
                                                     onChange={(e) => {
-                                                        setFieldValue(
-                                                            name,
+                                                        const inputValue =
                                                             e.target.value
-                                                        )
+                                                        if (
+                                                            name ===
+                                                            'document.adharCardNumber'
+                                                        ) {
+                                                            // window.addEventListener('keydown', (event) => {
+                                                            //     console.log(event.keyCode)
+                                                            //     if(event.keyCode === 8 || event.keyCode === 46){
+                                                            if (
+                                                                inputValue.length ===
+                                                                    4 ||
+                                                                inputValue.length ===
+                                                                    9 ||
+                                                                inputValue.length ===
+                                                                    14
+                                                            ) {
+                                                                //alert(inputValue.length)
+                                                                e.target.value =
+                                                                    inputValue +
+                                                                    '-'
+                                                                setFieldValue(
+                                                                    name,
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            } else if (
+                                                                inputValue.length >
+                                                                19
+                                                            ) {
+                                                                e.target.value =
+                                                                    inputValue.substring(
+                                                                        0,
+                                                                        19
+                                                                    )
+                                                                setFieldValue(
+                                                                    name,
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            }else{
+                                                               setFieldValue(
+                                                                   name,
+                                                                   e.target.value
+                                                               ) 
+                                                            }
+                                                            //     }
+                                                            // })
+                                                        } else {
+                                                            setFieldValue(
+                                                                name,
+                                                                e.target.value
+                                                            )
+                                                        }
                                                     }}
                                                     label={label}
                                                     placeholder={placeholder}
@@ -106,7 +156,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                 ) => {
                                     return (
                                         <div
-                                            className={`py-6 px-7 border-b border-slate-400`}
+                                            className={`py-9 px-7 border-b border-slate-400`}
                                         >
                                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center ">
                                                 Other Documents #
@@ -172,7 +222,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                 }
                             )}
 
-                            <div className="flex justify-self-start px-6 py-6">
+                            <div className="flex justify-self-start px-6 py-9">
                                 <button
                                     type="button"
                                     onClick={() =>

@@ -11,7 +11,7 @@ import { setAllItems } from 'src/redux/slices/dealerSlice'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
 import { useAddSalesOrderMutation } from 'src/services/SalesOrderService'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -31,7 +31,7 @@ export type FormInitialValues = {
 
 const AddSaleOrderWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [addSalesOrder] = useAddSalesOrderMutation()

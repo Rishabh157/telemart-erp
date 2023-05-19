@@ -10,7 +10,7 @@ import AddWarehouse from './AddWarehouse'
 import { useAddWareHouseMutation } from 'src/services/WareHoouseService'
 import { showToast } from 'src/utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
@@ -116,7 +116,7 @@ const AddWarehouseWrapper = () => {
     const dealerId = state?.params?.dealerId || null
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [addWareHouse] = useAddWareHouseMutation()
     const { data, isLoading, isFetching } = useGetAllCountryQuery('')
 

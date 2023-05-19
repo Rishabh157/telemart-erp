@@ -12,7 +12,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
-        <div className="py-6 px-7">
+        <div className="py-9 px-7">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
                 {/* Company Name */}
                 <ATMTextField

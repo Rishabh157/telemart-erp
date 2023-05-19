@@ -119,8 +119,8 @@ const StepEditProductDetail = ({ formikProps, dropdownOptions }: Props) => {
                                                         e.target.value
                                                     )
                                                 }}
-                                                label="POP (product offer price)"
-                                                placeholder="POP (product offer price)"
+                                                label="POP"
+                                                placeholder="Product Offer Price"
                                                 className="shadow bg-white rounded"
                                             />
                                         </div>

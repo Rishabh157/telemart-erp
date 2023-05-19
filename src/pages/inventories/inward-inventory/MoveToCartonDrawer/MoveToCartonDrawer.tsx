@@ -8,7 +8,7 @@ import {
     setBarcodesToPrint,
     setCartonBoxBarcode,
 } from 'src/redux/slices/barcodeSlice'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useAddCartonBoxBarcodeMutation } from 'src/services/CartonBoxBarcodeService'
 import { useAddInventoriesMutation } from 'src/services/InventoriesService'
 import { showToast } from 'src/utils'
@@ -31,7 +31,7 @@ const MoveToCartonDrawer = ({
     packaging,
 }: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [AddCartonBoxBarcode] = useAddCartonBoxBarcodeMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)

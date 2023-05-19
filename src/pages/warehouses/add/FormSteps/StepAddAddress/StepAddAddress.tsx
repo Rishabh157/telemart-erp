@@ -49,7 +49,7 @@ const StepAddAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-6 px-7 ${
+                        className={`py-9 px-7 ${
                             index !== formFields?.length - 1 && 'border-b'
                         }  border-slate-300`}
                     >

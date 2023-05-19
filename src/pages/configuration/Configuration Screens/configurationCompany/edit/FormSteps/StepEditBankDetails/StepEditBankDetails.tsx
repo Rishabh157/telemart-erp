@@ -50,7 +50,7 @@ const StepEditBankDetails = ({
                                                     return (
                                                         <div
                                                             key={index}
-                                                            className={`py-6 px-7`}
+                                                            className={`py-9 px-7`}
                                                         >
                                                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center">
                                                                 {sectionName} #
