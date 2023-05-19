@@ -8,11 +8,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    setRowsPerPage,
-    setPage,
-    setSearchValue,
-} from 'src/redux/slices/configuration/dispositionOneSlice'
+import { setPage, setRowsPerPage, setSearchValue } from 'src/redux/slices/configuration/dispositionTwoSlice'
+
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -24,21 +21,22 @@ type Props = {
 
 const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const dispositionOneState: any = useSelector(
-        (state: RootState) => state.dispositionOne
+    const dispositionTwoState: any = useSelector(
+        (state: RootState) => state.dispositionTwo
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } = dispositionOneState
+    const { page, rowsPerPage, searchValue, totalItems } = dispositionTwoState
+    console.log(searchValue)
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Configuration',
             path: '/dashboard',
         },
         {
-            label: 'Disposition One',
+            label: 'Disposition Two',
         },
     ]
 

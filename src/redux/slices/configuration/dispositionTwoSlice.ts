@@ -4,7 +4,7 @@ import { DispositionTwoListResponse } from 'src/models/configurationModel/Dispos
 
 export interface DispositionTwoSliceStateType {
     items: DispositionTwoListResponse[] | []
-    selectedAttribute: DispositionTwoListResponse | null
+    selectedDispostion: DispositionTwoListResponse | null
     allItems: DispositionTwoListResponse[] | []
     totalItems: number
     isTableLoading: boolean
@@ -18,7 +18,7 @@ export interface DispositionTwoSliceStateType {
 const initialState: DispositionTwoSliceStateType = {
     items: [],
     allItems: [],
-    selectedAttribute: null,
+    selectedDispostion: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -73,11 +73,11 @@ const dispositionTwoSlice: Slice<DispositionTwoSliceStateType> = createSlice({
         ) => {
             state.allItems = action.payload
         },
-        setSelectedAttribute: (
+        setSelectedDispostion: (
             state,
             action: PayloadAction<DispositionTwoListResponse | null>
         ) => {
-            state.selectedAttribute = action.payload
+            state.selectedDispostion = action.payload
         },
     },
 })
@@ -91,7 +91,7 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
-    setSelectedAttribute,
+    setSelectedDispostion,
     setAllItems,
 } = dispositionTwoSlice.actions
 export default dispositionTwoSlice.reducer

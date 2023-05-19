@@ -141,10 +141,11 @@ import AddDispositionOneWrapper from './pages/configuration/Configuration Screen
 import DispositionTwoListingWrapper from './pages/configuration/Configuration Screens/dispositionTwo/list/DispositionTwoListingWrapper'
 import AddDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/add/AddDispositionTwoWrapper'
 import ChannelMasterListingWrapper from './pages/media/channelMaster/list/ChannelMasterListingWrapper'
+import EditDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/edit/EditDispositionTwoWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
-    if (deviceId === '') {
+    if (deviceId === '') { 
         const uniqueId = uuidv4()
         localStorage.setItem('device-id', uniqueId)
     }
@@ -542,6 +543,10 @@ const PageRoutes = () => {
                      <Route
                         path="/configurations/disposition-two/add"
                         element={<AddDispositionTwoWrapper />}
+                    />
+                     <Route
+                        path="/configurations/disposition-two/:id"
+                        element={<EditDispositionTwoWrapper />}
                     />
                     <Route
                         path="configurations/hierarchy"

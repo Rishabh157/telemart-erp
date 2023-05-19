@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './AddDispositionTwoWrapper'
+import { FormInitialValues } from './EditDispositionTwoWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
@@ -30,7 +30,7 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddDispositionTwo = ({ formikProps, apiStatus, dropdownOptions}: Props) => {
+const EditDispositionTwo = ({ formikProps, apiStatus, dropdownOptions}: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -43,7 +43,7 @@ const AddDispositionTwo = ({ formikProps, apiStatus, dropdownOptions}: Props) =>
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Disposition Two </ATMPageHeading>
+                    <ATMPageHeading> Update Disposition Two </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -108,4 +108,4 @@ const AddDispositionTwo = ({ formikProps, apiStatus, dropdownOptions}: Props) =>
     )
 }
 
-export default AddDispositionTwo
+export default EditDispositionTwo
