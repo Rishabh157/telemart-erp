@@ -42,7 +42,7 @@ const EditDidManagements = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Edit New DID </ATMPageHeading>
+                    <ATMPageHeading> Edit DID </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -69,16 +69,16 @@ const EditDidManagements = ({
                     <div className="grow py-8 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* FirstName */}
-
-                            <ATMSelectSearchable
-                                name="channelId"
-                                value={values.channelId}
-                                onChange={(value) =>
-                                    setFieldValue('channelId', value)
+                            <ATMTextField
+                                name="didNumber"
+                                value={values.didNumber}
+                                label="Did Number"
+                                placeholder="Did Number"
+                                onChange={(e) =>
+                                    setFieldValue('didNumber', e.target.value)
                                 }
-                                options={dropdownOptions.channelOptions}
-                                label="Channel Name"
                             />
+
                             <ATMSelectSearchable
                                 name="schemeId"
                                 value={values.schemeId}
@@ -88,14 +88,15 @@ const EditDidManagements = ({
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme Name"
                             />
-                            <ATMTextField
-                                name="didNumber"
-                                value={values.didNumber}
-                                label="Did Number"
-                                placeholder="Did Number"
-                                onChange={(e) =>
-                                    setFieldValue('didNumber', e.target.value)
+
+                            <ATMSelectSearchable
+                                name="channelId"
+                                value={values.channelId}
+                                onChange={(value) =>
+                                    setFieldValue('channelId', value)
                                 }
+                                options={dropdownOptions.channelOptions}
+                                label="Channel Name"
                             />
                         </div>
                     </div>

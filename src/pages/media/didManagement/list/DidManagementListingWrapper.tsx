@@ -42,7 +42,7 @@ const DidManagementListingWrapper = () => {
         },
         {
             field: 'schemeLabel',
-            headerName: 'Scheme label',
+            headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DidManagementListResponse) => (
                 <span> {row.schemeLabel} </span>
@@ -50,7 +50,7 @@ const DidManagementListingWrapper = () => {
         },
         {
             field: 'channelLabel',
-            headerName: 'Channel label',
+            headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DidManagementListResponse) => (
                 <span> {row.channelLabel} </span>
