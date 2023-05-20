@@ -100,7 +100,7 @@ const AddTapeManagementWrapper = () => {
         tapeType: string().required('Required'),
         scheme: string(),
         channelGroup: string(),
-        language: string().required('Required'),
+        // language: string().required('Required'),
         hour: string().required('Required'),
         // minute: string().required('Required'),
         // second: string().required('Required'),
