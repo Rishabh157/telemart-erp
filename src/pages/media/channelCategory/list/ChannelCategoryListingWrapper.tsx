@@ -1,12 +1,15 @@
-import React, { useEffect , useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import MediaLayout from 'src/pages/media/MediaLayout'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
-import { useGetPaginationChannelCategoryQuery, useDeleteChannelCategoryMutation } from 'src/services/media/channelcategoryService'
+import {
+    useGetPaginationChannelCategoryQuery,
+    useDeleteChannelCategoryMutation,
+} from 'src/services/media/channelcategoryService'
 import {
     setIsTableLoading,
     setItems,
@@ -15,7 +18,6 @@ import {
 import ChannelCategoryListing from './ChannelCategoryListing'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-
 
 const ChannelCategoryListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -27,8 +29,8 @@ const ChannelCategoryListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items } = channelCategoryState
 
     const dispatch = useDispatch<AppDispatch>()
-    const navigate = useNavigate();
-    const [deleteChannelCategory] = useDeleteChannelCategoryMutation();
+    const navigate = useNavigate()
+    const [deleteChannelCategory] = useDeleteChannelCategoryMutation()
 
     const { data, isFetching, isLoading } =
         useGetPaginationChannelCategoryQuery({
@@ -61,15 +63,15 @@ const ChannelCategoryListingWrapper = () => {
     }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
-    {
-        field: 'channelCategory',
-        headerName: 'Channel Category Name',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelCategoryListResponse) => (
-            <span> {row.channelCategory} </span>
-        ),
-    },
-    {
+        {
+            field: 'channelCategory',
+            headerName: 'Channel Category Name',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: ChannelCategoryListResponse) => (
+                <span> {row.channelCategory} </span>
+            ),
+        },
+        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
@@ -90,9 +92,7 @@ const ChannelCategoryListingWrapper = () => {
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
-                                    navigate(
-                                        `edit/${row?._id}`
-                                    )
+                                    navigate(`edit/${row?._id}`)
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
@@ -121,9 +121,9 @@ const ChannelCategoryListingWrapper = () => {
             ),
             align: 'end',
         },
-]
+    ]
 
-const handleDelete = () => {
+    const handleDelete = () => {
         setShowDropdown(false)
         alert(currentId)
         deleteChannelCategory(currentId).then((res) => {

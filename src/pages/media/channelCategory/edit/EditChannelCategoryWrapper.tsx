@@ -7,7 +7,10 @@ import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import EditChannelGroup from './EditChannelCategory'
-import { useGetChannelCategoryByIdQuery, useUpdateChannelCategoryMutation } from 'src/services/media/channelcategoryService'
+import {
+    useGetChannelCategoryByIdQuery,
+    useUpdateChannelCategoryMutation,
+} from 'src/services/media/channelcategoryService'
 import { setSelectedItem } from 'src/redux/slices/media/channelCategorySlice'
 
 export type FormInitialValues = {
@@ -16,31 +19,29 @@ export type FormInitialValues = {
 }
 
 const EditChannelCategoryWrapper = () => {
-		const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-		const params = useParams();
-		const id = params.id;
+    const params = useParams()
+    const id = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [updateChannelCategory] = useUpdateChannelCategoryMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-		const { selectedItem }: any = useSelector(
+    const { selectedItem }: any = useSelector(
         (state: RootState) => state?.channelCategory
     )
 
-		const {data, isLoading, isFetching} = useGetChannelCategoryByIdQuery(id);
-		
+    const { data, isLoading, isFetching } = useGetChannelCategoryByIdQuery(id)
 
-		//Channel category
+    //Channel category
     useEffect(() => {
         dispatch(setSelectedItem(data?.data))
     }, [data, isLoading, isFetching, dispatch])
-		
 
-    const initialValues: FormInitialValues = {	
-			channelCategory: selectedItem?.channelCategory || "",
-      companyId: selectedItem?.companyId || userData?.companyId || "",
-		};
+    const initialValues: FormInitialValues = {
+        channelCategory: selectedItem?.channelCategory || '',
+        companyId: selectedItem?.companyId || userData?.companyId || '',
+    }
     // Form Validation Schema
     const validationSchema = object({
         channelCategory: string().required('Group Name is required'),
@@ -50,12 +51,12 @@ const EditChannelCategoryWrapper = () => {
         setApiStatus(true)
         setTimeout(() => {
             updateChannelCategory({
-							body:{
-                channelCategory: values.channelCategory,
-                companyId: values.companyId || '',
-            },
-						id: id || '',
-					}).then((res: any) => {
+                body: {
+                    channelCategory: values.channelCategory,
+                    companyId: values.companyId || '',
+                },
+                id: id || '',
+            }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast(

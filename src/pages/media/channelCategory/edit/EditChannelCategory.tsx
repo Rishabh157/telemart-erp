@@ -7,7 +7,6 @@ import ATMBreadCrumbs, {
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
-
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -23,10 +22,9 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-
 const EditChannelCategory = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-   
+
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">

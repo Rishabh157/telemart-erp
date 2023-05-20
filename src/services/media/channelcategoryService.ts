@@ -65,8 +65,6 @@ export const channelCategoryApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
-
-
     }),
 })
 
@@ -76,5 +74,5 @@ export const {
     useUpdateChannelCategoryMutation,
     useGetAllChannelCategoryQuery,
     useGetChannelCategoryByIdQuery,
-    useDeleteChannelCategoryMutation
+    useDeleteChannelCategoryMutation,
 } = channelCategoryApi

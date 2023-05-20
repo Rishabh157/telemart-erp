@@ -112,11 +112,11 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 value={values.mobile}
                                 label="Mobile Number"
                                 placeholder="Mobile Number"
-                                onChange={(e) =>{
+                                onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
                                         setFieldValue('mobile', e.target.value)
-                                    }                                    
+                                    }
                                 }}
                             />
                         </div>

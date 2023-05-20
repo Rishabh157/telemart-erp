@@ -45,8 +45,9 @@ const AddASRWrapper = (props: Props) => {
         asrDetails: array().of(
             object().shape({
                 productName: string().required('Product name is required'),
-                quantity: number().min(1, "Quantity must be greater than 0")
-                .required('Quantity is required'),
+                quantity: number()
+                    .min(1, 'Quantity must be greater than 0')
+                    .required('Quantity is required'),
             })
         ),
     })

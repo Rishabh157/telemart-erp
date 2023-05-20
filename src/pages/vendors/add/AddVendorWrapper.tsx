@@ -127,7 +127,8 @@ const steps = [
                         .trim()
                         .matches(regIndiaPhone, 'Invalid Mobile Number')
                         .required('Required!'),
-                    landLine: string().min(10, 'Number should be 10 digits')
+                    landLine: string()
+                        .min(10, 'Number should be 10 digits')
                         .max(10, 'maximum 10 digit')
                         .required('Landline is required'),
                 })

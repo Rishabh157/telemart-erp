@@ -75,7 +75,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                                 inputValue.length ===
                                                                     4 ||
                                                                 inputValue.length ===
-                                                                    9 
+                                                                    9
                                                             ) {
                                                                 //alert(inputValue.length)
                                                                 e.target.value =

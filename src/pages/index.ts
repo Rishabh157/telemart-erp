@@ -227,5 +227,5 @@ export {
     AddChannelManagementWrapper,
     ChannelCategoryListingWrapper,
     AddChannelCategoryWrapper,
-    EditChannelCategoryWrapper
+    EditChannelCategoryWrapper,
 }
