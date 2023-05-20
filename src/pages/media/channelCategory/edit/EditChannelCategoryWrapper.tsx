@@ -23,6 +23,7 @@ const EditChannelCategoryWrapper = () => {
     const navigate = useNavigate()
     const params = useParams()
     const id = params.id
+    //alert(id)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [updateChannelCategory] = useUpdateChannelCategoryMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -36,16 +37,20 @@ const EditChannelCategoryWrapper = () => {
     //Channel category
     useEffect(() => {
         dispatch(setSelectedItem(data?.data))
-    }, [data, isLoading, isFetching, dispatch])
+    }, [dispatch, data, isLoading, isFetching])
+
+     // Form Validation Schema
+    const validationSchema = object({
+        channelCategory: string().required('Group Name is required'),
+    })
+
+    //console.log(selectedItem?.channelCategory)
 
     const initialValues: FormInitialValues = {
         channelCategory: selectedItem?.channelCategory || '',
         companyId: selectedItem?.companyId || userData?.companyId || '',
     }
-    // Form Validation Schema
-    const validationSchema = object({
-        channelCategory: string().required('Group Name is required'),
-    })
+   
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -77,6 +82,7 @@ const EditChannelCategoryWrapper = () => {
     return (
         <MediaLayout>
             <Formik
+                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}

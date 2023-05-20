@@ -24,6 +24,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditChannelCategory = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    //console.log(values?.channelCategory, "values")
 
     return (
         <div className="">
@@ -66,7 +67,7 @@ const EditChannelCategory = ({ formikProps, apiStatus }: Props) => {
                             {/* FirstName */}
                             <ATMTextField
                                 name="channelCategory"
-                                value={values.channelCategory}
+                                value={values?.channelCategory}
                                 label="Category Name"
                                 placeholder="Category Name"
                                 onChange={(e) =>
