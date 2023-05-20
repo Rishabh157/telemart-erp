@@ -74,7 +74,7 @@ const steps = [
         validationSchema: object({
             regd_address: object().shape({
                 phone: string()
-                    .max(10, "Phone must be 10 digits")
+                    .max(10, 'Phone must be 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -85,7 +85,7 @@ const steps = [
             }),
             billing_address: object().shape({
                 phone: string()
-                    .max(10, "Phone must be 10 digits")
+                    .max(10, 'Phone must be 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -107,7 +107,7 @@ const steps = [
                     designation: string().required('Designation is required'),
                     email: string().required().email('Email is required'),
                     mobileNumber: string()
-                        .max(10, "Mobile Number must be 10 digits")
+                        .max(10, 'Mobile Number must be 10 digits')
                         .required()
                         .matches(regIndiaPhone, 'Invalid Mobile Number'),
                     landLine: string().required('Landline is required'),

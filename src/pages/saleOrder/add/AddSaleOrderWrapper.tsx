@@ -135,10 +135,10 @@ const AddSaleOrderWrapper = (props: Props) => {
                 ),
                 rate: number()
                     .min(1, 'Rate must be greater than 0')
-                    .required('Please enter rate'),                    
+                    .required('Please enter rate'),
                 quantity: number()
                     .min(1, 'Quantity must be greater than 0')
-                    .required('Please enter quantity'),                    
+                    .required('Please enter quantity'),
             })
         ),
     })

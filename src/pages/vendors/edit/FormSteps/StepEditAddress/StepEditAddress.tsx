@@ -4,7 +4,7 @@ import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditVendorWrapper'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
 type DropdownOptions = {
@@ -43,10 +43,11 @@ const StepAddAddress = ({
     formFields,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue }: { values: any; setFieldValue: any } = formikProps
+    const { values, setFieldValue }: { values: any; setFieldValue: any } =
+        formikProps
     const { formSubmitting: isSubmitting } = useSelector(
-            (state: RootState) => state?.auth
-        )
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className="">
@@ -126,7 +127,7 @@ const StepAddAddress = ({
                                                 label={label}
                                                 placeholder={placeholder}
                                                 className="shadow bg-white rounded"
-                                                 isSubmitting={isSubmitting}
+                                                isSubmitting={isSubmitting}
                                             />
                                         )
 
@@ -195,7 +196,7 @@ const StepAddAddress = ({
                                                                 'counrtyOptions'
                                                         ]
                                                     }
-                                                     isSubmitting={isSubmitting}
+                                                    isSubmitting={isSubmitting}
                                                 />
                                             </div>
                                         )

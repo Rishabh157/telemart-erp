@@ -11,7 +11,7 @@ import { showToast, validationofGst } from 'src/utils'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
-import {  AppDispatch } from 'src/redux/store'
+import { AppDispatch } from 'src/redux/store'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {

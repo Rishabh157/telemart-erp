@@ -72,7 +72,7 @@ const steps = [
             regd_address: object().shape({
                 phone: string()
                     .trim()
-                    .max(10, "Phone must be 10 digits")
+                    .max(10, 'Phone must be 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -84,7 +84,7 @@ const steps = [
             billing_address: object().shape({
                 phone: string()
                     .trim()
-                    .max(10, "Phone must be 10 digits")
+                    .max(10, 'Phone must be 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -106,7 +106,7 @@ const steps = [
                     designation: string().required('Designation is required'),
                     email: string().required('Email is required'),
                     mobileNumber: string()
-                        .max(10, "Phone must be 10 characters")
+                        .max(10, 'Phone must be 10 characters')
                         .required('Mobile Number is required')
                         .matches(regIndiaPhone, 'Invalid Mobile Number'),
                     landLine: string().required('Landline is required'),

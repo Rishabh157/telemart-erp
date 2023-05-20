@@ -4,7 +4,7 @@ import React from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
 type DropdownOptions = {
@@ -43,9 +43,9 @@ const StepEditAddress = ({
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
-        const { formSubmitting: isSubmitting } = useSelector(
-            (state: RootState) => state?.auth
-        )
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className="">
@@ -198,7 +198,6 @@ const StepEditAddress = ({
                                                         size="small"
                                                         className="shadow mt-2"
                                                         displayEmpty
-                                                        
                                                     >
                                                         <MenuItem value="">
                                                             <span className="text-slate-400">

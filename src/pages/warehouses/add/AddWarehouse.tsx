@@ -26,7 +26,7 @@ const AddWarehouse = ({
     allCountry,
 }: Props) => {
     // Handle Previous
-     const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>()
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
@@ -82,7 +82,7 @@ const AddWarehouse = ({
                                 disabled={apiStatus}
                                 onClick={() => {
                                     dispatch(setFormSubmitting(true))
-                                     formikProps.handleSubmit()
+                                    formikProps.handleSubmit()
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''

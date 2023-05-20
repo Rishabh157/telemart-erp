@@ -52,7 +52,7 @@ const ATMFileUploader = ({
                 )}
             </button>
 
-            {selectedFile &&  isSubmitting && (
+            {selectedFile && isSubmitting && (
                 <div className="w-full h-[150px] mt-1 border rounded shadow">
                     <img
                         src={

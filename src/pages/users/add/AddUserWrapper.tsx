@@ -28,7 +28,6 @@ const AddUserWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addNewUser] = useAddNewUserMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    
 
     const initialValues: FormInitialValues = {
         firstName: '',
@@ -43,10 +42,11 @@ const AddUserWrapper = (props: Props) => {
     const validationSchema = object({
         firstName: string().required('First Name is required'),
         lastName: string().required('Last Name is required'),
-        mobile: string().required('Mobile No is required')
-        .max(10, "Mobile number must be 10 digits")
-        .trim()
-        .matches(regIndiaPhone, 'Invalid Mobile Number'),
+        mobile: string()
+            .required('Mobile No is required')
+            .max(10, 'Mobile number must be 10 digits')
+            .trim()
+            .matches(regIndiaPhone, 'Invalid Mobile Number'),
         email: string().required('Email is required'),
         password: string().required('Password is required'),
     })

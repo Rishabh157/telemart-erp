@@ -5,7 +5,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from '../../EditWarehouseWrapper'
 import { FieldType } from './StepEditContactWrapper'
 import { HiPlus } from 'react-icons/hi'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
 type Props = {
@@ -16,9 +16,9 @@ type Props = {
 const StepEditContact = ({ formikProps, formFields }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
-         const { formSubmitting: isSubmitting } = useSelector(
-            (state: RootState) => state?.auth
-        )
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className="">
@@ -114,7 +114,9 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                                                                                             placeholder
                                                                                         }
                                                                                         className="shadow bg-white rounded"
-                                                                                        isSubmitting={isSubmitting}
+                                                                                        isSubmitting={
+                                                                                            isSubmitting
+                                                                                        }
                                                                                     />
                                                                                 )
 

@@ -4,7 +4,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from '../../AddDealerWrapper'
 import { DropdownOptions, FieldType } from './StepAddDealerDetailsWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
 type Props = {
@@ -20,9 +20,9 @@ const StepAddDealerDetails = ({
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
-        const { formSubmitting: isSubmitting } = useSelector(
-            (state: RootState) => state?.auth
-        )
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className="py-9 px-7">

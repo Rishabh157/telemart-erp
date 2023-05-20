@@ -5,7 +5,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from '../../AddDealerWrapper'
 import { FieldType } from './StepAddContactWrapper'
 import { HiPlus } from 'react-icons/hi'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
 type Props = {
@@ -16,9 +16,9 @@ type Props = {
 const StepAddContact = ({ formikProps, formFields }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
-        const { formSubmitting: isSubmitting } = useSelector(
-            (state: RootState) => state?.auth
-        )
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
     return (
         <div className="">
             <FieldArray name="contactInformation">
@@ -79,7 +79,9 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                                                         label="Name"
                                                         placeholder="name"
                                                         className="shadow bg-white rounded"
-                                                        isSubmitting={isSubmitting}
+                                                        isSubmitting={
+                                                            isSubmitting
+                                                        }
                                                     />
 
                                                     {/* MRP */}
@@ -95,7 +97,9 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                                                         label="Department"
                                                         placeholder="department"
                                                         className="shadow bg-white rounded"
-                                                        isSubmitting={isSubmitting}
+                                                        isSubmitting={
+                                                            isSubmitting
+                                                        }
                                                     />
                                                     {/* POP  */}
                                                     <ATMTextField
@@ -110,7 +114,9 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                                                         label="Desgination"
                                                         placeholder="Desgination"
                                                         className="shadow bg-white rounded"
-                                                        isSubmitting={isSubmitting}
+                                                        isSubmitting={
+                                                            isSubmitting
+                                                        }
                                                     />
                                                     {/* email  */}
                                                     <ATMTextField
@@ -125,7 +131,9 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                                                         label="Email"
                                                         placeholder="email"
                                                         className="shadow bg-white rounded"
-                                                        isSubmitting={isSubmitting}
+                                                        isSubmitting={
+                                                            isSubmitting
+                                                        }
                                                     />
                                                     {/*  mobileNumber */}
                                                     <ATMTextField
@@ -151,7 +159,9 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                                                         label="Mobile Number"
                                                         placeholder="Mobile Number"
                                                         className="shadow bg-white rounded"
-                                                        isSubmitting={isSubmitting}
+                                                        isSubmitting={
+                                                            isSubmitting
+                                                        }
                                                     />
                                                     <ATMTextField
                                                         name={`contactInformation[${contactInformationIndex}].landLine`}
@@ -176,7 +186,9 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                                                         label="LandLine"
                                                         placeholder="LandLine"
                                                         className="shadow bg-white rounded"
-                                                        isSubmitting={isSubmitting}
+                                                        isSubmitting={
+                                                            isSubmitting
+                                                        }
                                                     />
                                                 </div>
                                             </div>

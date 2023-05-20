@@ -32,7 +32,7 @@ const AddCompany = ({
     breadcrumbs,
 }: Props) => {
     // Handle Previous
-     const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>()
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
@@ -72,9 +72,9 @@ const AddCompany = ({
 
                             <button
                                 type="button"
-                                onClick={() =>{
+                                onClick={() => {
                                     dispatch(setFormSubmitting(true))
-                                     formikProps.handleSubmit()
+                                    formikProps.handleSubmit()
                                 }}
                                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
                             >

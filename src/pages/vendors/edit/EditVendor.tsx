@@ -83,7 +83,7 @@ const EditVendor = ({
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() =>{
+                                onClick={() => {
                                     dispatch(setFormSubmitting(true))
                                     formikProps.handleSubmit()
                                 }}

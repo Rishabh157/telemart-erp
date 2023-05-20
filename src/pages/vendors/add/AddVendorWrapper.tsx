@@ -15,7 +15,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
-
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
     company_name: string
@@ -85,7 +84,7 @@ const steps = [
             regd_address: object().shape({
                 phone: string()
                     .trim()
-                    .max(10, "Phone must be 10 digits")
+                    .max(10, 'Phone must be 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Required!'),
                 address: string().required('Address is required'),
@@ -97,7 +96,7 @@ const steps = [
             billing_address: object().shape({
                 phone: string()
                     .trim()
-                    .max(10, "Phone must be 10 digits")
+                    .max(10, 'Phone must be 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Required!'),
                 address: string().required('Address is required'),
@@ -121,7 +120,7 @@ const steps = [
                         .email('Invalid  Email')
                         .required('Required!'),
                     mobileNumber: string()
-                        .max(10, "Mobile number must be 10 digits")
+                        .max(10, 'Mobile number must be 10 digits')
                         .trim()
                         .matches(regIndiaPhone, 'Invalid Mobile Number')
                         .required('Required!'),
@@ -139,7 +138,7 @@ const steps = [
                 .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),
             declaration_form: string()
-                .url("Form must be valid URL")
+                .url('Form must be valid URL')
                 .required('Declaration form is required'),
         }),
     },

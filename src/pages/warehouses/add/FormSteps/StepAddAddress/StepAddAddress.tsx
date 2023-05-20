@@ -4,7 +4,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from '../../AddWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
 type DropdownOptions = {
@@ -43,9 +43,9 @@ const StepAddAddress = ({
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
-        const { formSubmitting: isSubmitting } = useSelector(
-            (state: RootState) => state?.auth
-        )
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className="">

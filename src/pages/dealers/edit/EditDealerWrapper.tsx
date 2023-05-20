@@ -84,9 +84,9 @@ const steps = [
         validationSchema: object({
             registrationAddress: object().shape({
                 phone: string()
-                .max(10, 'maximum 10 digits')
-                .min(10, "minimum 10 digits")
-                .required('Phone number is required'),
+                    .max(10, 'maximum 10 digits')
+                    .min(10, 'minimum 10 digits')
+                    .required('Phone number is required'),
                 address: string().required('Address is required'),
                 country: string().required('Please choose a country'),
                 state: string().required('Please choose a state'),
@@ -95,9 +95,9 @@ const steps = [
             }),
             billingAddress: object().shape({
                 phone: string()
-                .max(10, 'maximum 10 digits')
-                .min(10, "minimum 10 digits")
-                .required('Phone number is required'),
+                    .max(10, 'maximum 10 digits')
+                    .min(10, 'minimum 10 digits')
+                    .required('Phone number is required'),
                 address: string().required('Address is required'),
                 country: string().required('Please choose a country'),
                 state: string().required('Please choose a state'),
@@ -117,11 +117,9 @@ const steps = [
                     designation: string().required('Designation is required'),
                     email: string().required('Email is required'),
                     mobileNumber: string()
-                    .max(10, 'maximum 10 digits')
-                    .min(10, "minimum 10 digits")
-                    .required(
-                        'Mobile number is required'
-                    ),
+                        .max(10, 'maximum 10 digits')
+                        .min(10, 'minimum 10 digits')
+                        .required('Mobile number is required'),
                     landLine: string().required('Landline is required'),
                 })
             ),

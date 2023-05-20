@@ -2,7 +2,7 @@ import React from 'react'
 import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditCompanyWrapper'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 // import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 
@@ -13,8 +13,8 @@ type Props = {
 const StepEditCompanyDetails = ({ formikProps }: Props) => {
     const { values, setFieldValue } = formikProps
     const { formSubmitting: isSubmitting } = useSelector(
-            (state: RootState) => state?.auth
-        )
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className="py-9 px-7">

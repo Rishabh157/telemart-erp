@@ -123,19 +123,16 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> Inventories </ATMPageHeading>
-                {(shouldPrint)&& (
-                <button
-                    type="button"
-                    onClick={() => {
-                        
+                {shouldPrint && (
+                    <button
+                        type="button"
+                        onClick={() => {
                             setIsOpenMoveToCartonDrawer(true)
-                       
-                        
-                    }}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Move to Carton
-                </button>
+                        }}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Move to Carton
+                    </button>
                 )}
             </div>
 
@@ -145,7 +142,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         name=""
                         value={wareHouse}
                         onChange={(e) => {
-                            setWareHouse(e.target.value)                            
+                            setWareHouse(e.target.value)
                         }}
                         options={wareHouseOption}
                         label="Warehouse"
@@ -154,7 +151,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         name=""
                         value={packaging}
                         onChange={(e) => {
-                            setPackaging(e.target.value)                            
+                            setPackaging(e.target.value)
                         }}
                         options={cartonBoxOption}
                         label="Packaging"
@@ -164,7 +161,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         name=""
                         value={status}
                         onChange={(e) => {
-                            setStatus(e.target.value)                            
+                            setStatus(e.target.value)
                         }}
                         options={[
                             { label: 'Available', value: 'AVAILABLE' },
@@ -176,7 +173,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         name=""
                         value={condition}
                         onChange={(e) => {
-                            setCondition(e.target.value)                            
+                            setCondition(e.target.value)
                         }}
                         options={[
                             { label: 'Good', value: 'GOOD' },

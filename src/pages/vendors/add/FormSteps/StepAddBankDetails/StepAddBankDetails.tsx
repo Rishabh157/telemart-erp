@@ -7,7 +7,7 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { HiPlus } from 'react-icons/hi'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
 type FieldType = Field<'accountTypeOptions'>
@@ -124,7 +124,9 @@ const StepAddBankDetails = ({
                                                                                             placeholder
                                                                                         }
                                                                                         className="shadow bg-white rounded"
-                                                                                        isSubmitting={isSubmitting}
+                                                                                        isSubmitting={
+                                                                                            isSubmitting
+                                                                                        }
                                                                                     />
                                                                                 )
 
@@ -156,7 +158,9 @@ const StepAddBankDetails = ({
                                                                                         label={
                                                                                             label
                                                                                         }
-                                                                                        isSubmitting={isSubmitting}
+                                                                                        isSubmitting={
+                                                                                            isSubmitting
+                                                                                        }
                                                                                     />
                                                                                 )
 
@@ -186,7 +190,6 @@ const StepAddBankDetails = ({
                                                                                                 name
                                                                                             ]
                                                                                         }
-                                                                                        
                                                                                     />
                                                                                 )
 

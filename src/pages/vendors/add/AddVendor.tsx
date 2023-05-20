@@ -83,9 +83,9 @@ const AddVendor = ({
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() =>{
+                                onClick={() => {
                                     dispatch(setFormSubmitting(true))
-                                     formikProps.handleSubmit()
+                                    formikProps.handleSubmit()
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
