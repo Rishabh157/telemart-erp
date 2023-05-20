@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { StateListResponse } from 'src/models/State.model'
 import { LocationSelectType } from 'src/utils'
@@ -33,7 +33,7 @@ const initialState: StateSliceStateType = {
     filterValue: '',
 }
 
-const stateSlice: any = createSlice({
+const stateSlice: Slice<StateSliceStateType> = createSlice({
     name: 'state',
     initialState,
     reducers: {
