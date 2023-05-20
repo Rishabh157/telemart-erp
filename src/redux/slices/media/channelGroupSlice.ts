@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {
     ChannelGroupListResponse,
@@ -7,6 +7,7 @@ import {
 
 export interface ChannelGroupSliceStateType {
     items: ChannelGroupListResponse[] | []
+    selectedItem: ChannelGroupListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -19,6 +20,7 @@ export interface ChannelGroupSliceStateType {
 
 const initialState: ChannelGroupSliceStateType = {
     items: [],
+    selectedItem: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -29,7 +31,7 @@ const initialState: ChannelGroupSliceStateType = {
     channelgroup: null,
 }
 
-const channelGroupSlice: any = createSlice({
+const channelGroupSlice: Slice<ChannelGroupSliceStateType> = createSlice({
     name: 'channelGroup',
     initialState,
     reducers: {
@@ -74,6 +76,12 @@ const channelGroupSlice: any = createSlice({
         ) => {
             state.channelgroup = action.payload
         },
+        setSelectedItem: (
+            state,
+            action: PayloadAction<GetAllChannelGroupResponse | null>
+        ) => {
+            state.selectedItem = action.payload
+        },
     },
 })
 
@@ -87,5 +95,6 @@ export const {
     setIsTableLoading,
     setSelectedId,
     setChannelGroups,
+    setSelectedItem,
 } = channelGroupSlice.actions
 export default channelGroupSlice.reducer

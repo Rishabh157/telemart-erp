@@ -31,7 +31,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: ' Channel Management',
-        path: '/media/channel-management',
+        path: '/media/channel',
     },
     {
         label: 'Add Channel',

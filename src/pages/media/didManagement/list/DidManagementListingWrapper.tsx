@@ -86,7 +86,7 @@ const DidManagementListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Attribute',
+                                        title: 'Delete DID',
                                         text: 'Do you want to delete',
                                         showCancelButton: true,
                                         next: (res: any) => {
