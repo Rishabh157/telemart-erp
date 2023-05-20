@@ -25,6 +25,8 @@ export type UpdateDidManagement = {
     body: {
         didNumber: string
         companyId: string
+        schemeId: string
+        channelId: string
     }
     id: string
 }

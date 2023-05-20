@@ -7,7 +7,7 @@ import {
     ASRListingWrapper,
     BarcodeGenerator,
     CompetitorManagementListingWrapper,
-    EditDidManagement,
+    EditDidManagementWrapper,
     EditPurchaseOrderWrapper,
 } from './pages/index'
 import { AddAttributeWrapper, AttributesListingWrapper } from './pages/index'
@@ -547,8 +547,8 @@ const PageRoutes = () => {
                         element={<AddDidManagementWrapper />}
                     />
                     <Route
-                        path="media/did/edit"
-                        element={<EditDidManagement />}
+                        path="media/did/:id"
+                        element={<EditDidManagementWrapper />}
                     />
                     <Route
                         path="media/channel-group"

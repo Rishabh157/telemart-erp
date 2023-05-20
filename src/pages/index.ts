@@ -93,8 +93,7 @@ import BarcodeGenerator from './configuration/Configuration Screens/barcode/list
 import EditPurchaseOrderWrapper from './purchaseOrder/edit/EditPurchaseOrderWrapper'
 import DidManagementListingWrapper from './media/didManagement/list/DidManagementListingWrapper'
 import OrganisationHierarchy from './configuration/Configuration Screens/organizationHeirarchy/OrganizationHeirarchy'
-import AddDidManagement from './media/didManagement/add/AddDidManagement'
-import EditDidManagement from './media/didManagement/edit/EditDidManagement'
+import EditDidManagementWrapper from './media/didManagement/edit/EditDidManagementWrapper'
 import ChannelManagementListingWrapper from './media/channelManagement/list/ChannelManagementListingWrapper'
 import EditChannelManagement from './media/channelManagement/edit/EditChannelManagement'
 import SlotManagementListingWrapper from './media/slotManagement/list/SlotManagementListingWrapper'
@@ -208,8 +207,7 @@ export {
     EditPurchaseOrderWrapper,
     OrganisationHierarchy,
     DidManagementListingWrapper,
-    AddDidManagement,
-    EditDidManagement,
+    EditDidManagementWrapper,
     AddDidManagementWrapper,
     ChannelManagementListingWrapper,
     EditChannelManagement,
