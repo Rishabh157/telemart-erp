@@ -1,41 +1,70 @@
 export type ChannelManagementListResponse = {
-    // is_active: boolean;
-    // is_deleted: boolean;
-    // createdAt: string;
-    // updatedAt: string;
-    // __v: number;
-    ChannelGroupLabel: string
-    channelGroupId: string
-    channelName: string
-    companyId: string
-    createdAt: string
-    didLabel: string
-    didNumber: number
-    scheme: string
-    schemeLabel: string
-    updatedAt: string
     _id: string
+    channelName: string
+    address: string
+    phone: string
+    email: string
+    area: string
+    channelGroupId: string
+    contactPerson: string
+    mobile: string
+    country: string
+    language: string
+    channelCategory: string
+    designation: string
+    website: string
+    state: string
+    paymentType: string
+    isDeleted: boolean
+    isActive: boolean
+    createdAt: string
+    updatedAt: string
+    __v: number
+    areaLabel: string
+    channelGroupLabel: string
+    countryLabel: string
+    channelCategoryLabel: string
+    stateLabel: string
+    companyId: string
+    languageLabel: string
 }
 
 export type AddChannelManagement = {
-    didNumber: string
-    scheme: string
-    channelGroupId: string
     channelName: string
     companyId: string
+    address: string
+    phone: string
+    email: string
+    area: string
+    channelGroupId: string
+    contactPerson: string
+    mobile: string
+    country: string
+    language: string
+    channelCategory: string
+    designation: string
+    website: string
+    state: string
+    paymentType: string
 }
 
 export type UpdateChannelManagement = {
     body: {
-        groupName: string
-        groupBarcodeNumber: string
-        productDetail: {
-            barcodeNumber: string
-            status?: string
-            condition?: string
-        }[]
-        wareHouse: string
-        companyId: string
+        channelName: string
+        address: string
+        phone: string
+        email: string
+        area: string
+        channelGroupId: string
+        contactPerson: string
+        mobile: string
+        country: string
+        language: string
+        channelCategory: string
+        designation: string
+        website: string
+        state: string
+        paymentType: string
     }
     id: string
 }

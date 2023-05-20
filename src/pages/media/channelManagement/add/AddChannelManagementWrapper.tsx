@@ -11,23 +11,39 @@ import AddChannelManagement from './AddChannelManagement'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
 import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
-import { useGetAllDidQuery } from 'src/services/media/DidManagementServices'
-import { useGetSchemeQuery } from 'src/services/SchemeService'
-
+import { useGetAllCountryQuery } from 'src/services/CountryService'
+import { CountryListResponse } from 'src/models/Country.model'
+import { useGetAllLanguageQuery } from 'src/services/LanguageService'
+import { LanguageListResponse } from 'src/models'
+import { useGetAllChannelCategoryQuery } from 'src/services/media/channelcategoryService'
+import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 export type FormInitialValues = {
-    didNumber: string
-    scheme: string
-    channelGroupId: string
     channelName: string
+    address: string
+    phone: string
+    email: string
+    area: string
+    channelGroupId: string
+    contactPerson: string
+    mobile: string
+    country: string
+    language: string
+    channelCategory: string
+    designation: string
+    website: string
+    state: string
+    paymentType: string
     companyId: string
 }
+export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 
 const AddChannelManagementWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [didData, setDidData] = useState([])
-    const [schemeData, setSchemeData] = useState([])
+    const [countryData, setCountryData] = useState([])
+    const [languageData, setlanguageData] = useState([])
+    const [channelCategoryData, setChannelCategoryData] = useState([])
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { channelgroup }: any = useSelector(
@@ -35,59 +51,108 @@ const AddChannelManagementWrapper = () => {
     )
     const [AddChannelApi] = useAddChannelMutation()
     const {
-        isLoading: isDidLoading,
-        isFetching: isDidFetching,
-        data: didDataApi,
-    } = useGetAllDidQuery('')
+        isLoading: isLanguageLoading,
+        isFetching: isLanguageFetching,
+        data: languageDataApi,
+    } = useGetAllLanguageQuery('')
     const {
-        isLoading: isSchemeLoading,
-        isFetching: isSchemeFetching,
-        data: schemeDataApi,
-    } = useGetSchemeQuery(' ')
+        isLoading: isCategoryLoading,
+        isFetching: isCategoryFetching,
+        data: categoryDataApi,
+    } = useGetAllChannelCategoryQuery('')
+    const {
+        isLoading: isCountryLoading,
+        isFetching: isCountryFetching,
+        data: countryDataApi,
+    } = useGetAllCountryQuery('')
+
     const {
         isLoading,
         isFetching,
         data: channelGroupsData,
     } = useGetAllChannelGroupQuery('')
+
     useEffect(() => {
         if (!isLoading && !isFetching) {
             dispatch(setChannelGroups(channelGroupsData.data || []))
         }
     }, [isLoading, isFetching, channelGroupsData, dispatch])
     useEffect(() => {
-        if (!isDidLoading && !isDidFetching) {
-            setDidData(didDataApi?.data)
+        if (!isCountryLoading && !isCountryFetching) {
+            setCountryData(countryDataApi?.data)
         }
-    }, [isDidLoading, isDidFetching, didDataApi])
+    }, [isCountryLoading, isCountryFetching, countryDataApi])
     useEffect(() => {
-        if (!isSchemeLoading && !isSchemeFetching) {
-            setSchemeData(schemeDataApi?.data)
+        if (!isLanguageLoading && !isLanguageFetching) {
+            setlanguageData(languageDataApi?.data)
         }
-    }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
+    }, [isLanguageLoading, isLanguageFetching, languageDataApi])
+    useEffect(() => {
+        if (!isCategoryLoading && !isCategoryFetching) {
+            setChannelCategoryData(categoryDataApi?.data)
+        }
+    }, [isCategoryLoading, isCategoryFetching, categoryDataApi])
+
     const initialValues: FormInitialValues = {
-        didNumber: '',
-        scheme: '',
-        channelGroupId: '',
         channelName: '',
+        address: '',
+        phone: '',
+        email: '',
+        area: '',
+        channelGroupId: '',
+        contactPerson: '',
+        mobile: '',
+        country: '',
+        language: '',
+        channelCategory: '',
+        designation: '',
+        website: '',
+        state: '',
+        paymentType: '',
         companyId: userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        didNumber: string().required('DID Number is required'),
-        scheme: string().required('Scheme  is required'),
-        channelGroupId: string().required('Channel group Name is required'),
-        channelName: string().required('Channel Name is required'),
+        channelName: string().required('Required'),
+        address: string(),
+        phone: string(),
+        email: string().email('Invalid  Email'),
+        area: string().required('Required'),
+        channelGroupId: string().required('Required'),
+        contactPerson: string(),
+        mobile: string()
+            .max(10)
+            .trim()
+            .matches(regIndiaPhone, 'Invalid Mobile Number'),
+        country: string().required('Required'),
+        language: string().required('Required'),
+        channelCategory: string().required('Required'),
+        designation: string().required('Required'),
+        website: string(),
+        state: string().required('Required'),
+        paymentType: string().required('Required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
             AddChannelApi({
-                didNumber: values.didNumber,
-                scheme: values.scheme,
-                channelGroupId: values.channelGroupId,
                 channelName: values.channelName,
+                address: values.address,
+                phone: values.phone,
+                email: values.email,
+                area: '645c727b266c589640740eaa' || values.area,
+                channelGroupId: values.channelGroupId,
+                contactPerson: values.contactPerson,
+                mobile: values.mobile,
+                country: values.country,
+                language: values.language,
+                channelCategory: values.channelCategory,
+                designation: values.designation,
+                website: values.website,
+                state: values.state,
+                paymentType: values.paymentType,
                 companyId: values.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
@@ -113,18 +178,26 @@ const AddChannelManagementWrapper = () => {
                 }
             }
         ),
-        didDataOption: didData?.map((didItem: any) => {
+        countryOption: countryData?.map((country: CountryListResponse) => {
             return {
-                label: didItem.didNumber,
-                value: didItem._id,
+                label: country.countryName,
+                value: country._id,
             }
         }),
-        schemeDataOption: schemeData?.map((schemeItem: any) => {
+        languageOption: languageData?.map((language: LanguageListResponse) => {
             return {
-                label: schemeItem?.schemeName,
-                value: schemeItem?._id,
+                label: language.languageName,
+                value: language._id,
             }
         }),
+        categoryOption: channelCategoryData?.map(
+            (category: ChannelCategoryListResponse) => {
+                return {
+                    label: category.channelCategory,
+                    value: category._id,
+                }
+            }
+        ),
     }
     return (
         <MediaLayout>
