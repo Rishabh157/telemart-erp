@@ -82,8 +82,8 @@ const steps = [
                 .min(0, 'Delivery charges must be positive')
                 .required('delivery charges is required'),
             comboPacking: boolean().required(),
-            startDate: string().required('Please select start date').nullable(),
-            endDate: string().required('Please select end date').nullable(),
+            startDate: string().required('Please select start date'),
+            endDate: string().required('Please select end date'),
             schemeDescription: string().required(
                 'scheme description is required'
             ),
