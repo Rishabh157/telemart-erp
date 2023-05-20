@@ -39,7 +39,7 @@ const EditChannelCategoryWrapper = () => {
         dispatch(setSelectedItem(data?.data))
     }, [dispatch, data, isLoading, isFetching])
 
-     // Form Validation Schema
+    // Form Validation Schema
     const validationSchema = object({
         channelCategory: string().required('Group Name is required'),
     })
@@ -50,7 +50,6 @@ const EditChannelCategoryWrapper = () => {
         channelCategory: selectedItem?.channelCategory || '',
         companyId: selectedItem?.companyId || userData?.companyId || '',
     }
-   
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
