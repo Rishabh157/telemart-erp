@@ -34,6 +34,22 @@ export const channelGroupApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        //***** GET BY ID *****/
+        getChannelGroupById: builder.query({
+            providesTags: ['channel-group'],
+            query: (id) => ({
+                url: `/channel-group/${id}`,
+                method: 'GET',
+            }),
+        }),
+        //***** DELETE *****/
+        deleteChannelGroup: builder.mutation({
+            invalidatesTags: ['channel-group'],
+            query: (id) => ({
+                url: `/channel-group/${id}`,
+                method: 'DELETE',
+            }),
+        }),
 
         //***** Update *****/
         updateChannelGroup: builder.mutation({
@@ -52,4 +68,6 @@ export const {
     useGetPaginationChannelGroupQuery,
     useUpdateChannelGroupMutation,
     useGetAllChannelGroupQuery,
+    useGetChannelGroupByIdQuery,
+    useDeleteChannelGroupMutation,
 } = channelGroupApi

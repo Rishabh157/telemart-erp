@@ -106,6 +106,7 @@ import AddDidManagementWrapper from './media/didManagement/add/AddDidManagementW
 import DispositionOneListingWrapper from './configuration/Configuration Screens/dispositionOne/list/DispositionOneListingWrapper'
 import ChannelGroupListingWrapper from './media/channelGroup/list/ChannelGroupListingWrapper'
 import AddChannelGroupWrapper from './media/channelGroup/add/AddChannelGroupWrapper'
+import EditChannelGroupWrapper from './media/channelGroup/edit/EditChannelGroupWrapper'
 import EditChannelGroup from './media/channelGroup/edit/EditChannelGroup'
 import AddChannelManagementWrapper from './media/channelManagement/add/AddChannelManagementWrapper'
 import ChannelCategoryListingWrapper from './media/channelCategory/list/ChannelCategoryListingWrapper'
@@ -220,6 +221,7 @@ export {
     DispositionOneListingWrapper,
     ChannelGroupListingWrapper,
     AddChannelGroupWrapper,
+    EditChannelGroupWrapper,
     EditChannelGroup,
     AddChannelManagementWrapper,
     ChannelCategoryListingWrapper,
