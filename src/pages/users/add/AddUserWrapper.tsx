@@ -45,9 +45,10 @@ const AddUserWrapper = (props: Props) => {
         mobile: string()
             .required('Mobile No is required')
             .max(10, 'Mobile number must be 10 digits')
+            .min(10, 'Mobile number must be 10 digits')
             .trim()
             .matches(regIndiaPhone, 'Invalid Mobile Number'),
-        email: string().required('Email is required'),
+        email: string().email("Invalid Email ID").required('Email is required'),
         password: string().required('Password is required'),
     })
 

@@ -85,6 +85,7 @@ const steps = [
                 phone: string()
                     .trim()
                     .max(10, 'Phone must be 10 digits')
+                    .min(10, 'Phone must be at least 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Required!'),
                 address: string().required('Address is required'),
@@ -97,6 +98,7 @@ const steps = [
                 phone: string()
                     .trim()
                     .max(10, 'Phone must be 10 digits')
+                    .min(10, 'Phone must be at least 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Required!'),
                 address: string().required('Address is required'),
@@ -121,10 +123,13 @@ const steps = [
                         .required('Required!'),
                     mobileNumber: string()
                         .max(10, 'Mobile number must be 10 digits')
+                        .min(10, 'Phone must be at least 10 digits')
                         .trim()
                         .matches(regIndiaPhone, 'Invalid Mobile Number')
                         .required('Required!'),
-                    landLine: string().required('LandLine is required'),
+                    landLine: string().min(10, 'Number should be 10 digits')
+                        .max(10, 'maximum 10 digit')
+                        .required('Landline is required'),
                 })
             ),
         }),

@@ -120,7 +120,8 @@ const steps = [
                         .max(10, 'maximum 10 digits')
                         .min(10, 'minimum 10 digits')
                         .required('Mobile number is required'),
-                    landLine: string().required('Landline is required'),
+                    landLine: string().max(10, 'maximum 10 digits')
+                        .min(10, 'minimum 10 digits').required('Landline is required'),
                 })
             ),
         }),
@@ -133,8 +134,8 @@ const steps = [
                 gstNumber: string().required('GST number is required'),
                 gstCertificate: mixed().required('GST certificate is required'),
                 adharCardNumber: string()
-                    .min(19, 'Number should be 16 digits')
-                    .max(19, 'maximum 16 digit')
+                    .min(14, 'Number should be 12 digits')
+                    .max(14, 'maximum 12 digit')
                     .required('Declaration form is required'),
                 adharCard: mixed().required('Declaration form is required'),
             }),

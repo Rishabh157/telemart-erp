@@ -149,10 +149,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                                             <ATMTextField
                                                                 name={`asrDetails[${asrIndex}].quantity`}
                                                                 value={
-                                                                    quantity ===
-                                                                    0
-                                                                        ? ''
-                                                                        : quantity
+                                                                    quantity 
                                                                 }
                                                                 label="Quantity"
                                                                 placeholder="Quantity"

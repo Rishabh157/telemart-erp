@@ -45,6 +45,28 @@ export const channelCategoryApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        // **** GET BY ID
+        getChannelCategoryById: builder.query({
+            providesTags: ['channel-category'],
+            query: (id) => ({
+                url: `/channel-category/${id}`,
+
+                method: 'GET',
+            }),
+        }),
+
+        //***** Delete *****/
+        deleteChannelCategory: builder.mutation({
+            invalidatesTags: ['channel-category'],
+            query: (id) => ({
+                url: `/channel-category/${id}`,
+
+                method: 'DELETE',
+            }),
+        }),
+
+
     }),
 })
 
@@ -53,4 +75,6 @@ export const {
     useGetPaginationChannelCategoryQuery,
     useUpdateChannelCategoryMutation,
     useGetAllChannelCategoryQuery,
+    useGetChannelCategoryByIdQuery,
+    useDeleteChannelCategoryMutation
 } = channelCategoryApi

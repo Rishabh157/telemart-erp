@@ -65,9 +65,8 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                                 inputValue.length ===
                                                                     4 ||
                                                                 inputValue.length ===
-                                                                    9 ||
-                                                                inputValue.length ===
-                                                                    14
+                                                                    9 
+                                                                
                                                             ) {
                                                                 //alert(inputValue.length)
                                                                 e.target.value =
@@ -80,12 +79,12 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                                 )
                                                             } else if (
                                                                 inputValue.length >
-                                                                19
+                                                                14
                                                             ) {
                                                                 e.target.value =
                                                                     inputValue.substring(
                                                                         0,
-                                                                        19
+                                                                        14
                                                                     )
                                                                 setFieldValue(
                                                                     name,

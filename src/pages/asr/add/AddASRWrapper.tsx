@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
-import { array, object, string } from 'yup'
+import { array, object, string, number } from 'yup'
 import AddASR from './AddASR'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useAddAsrMutation } from 'src/services/AsrService'
@@ -45,7 +45,8 @@ const AddASRWrapper = (props: Props) => {
         asrDetails: array().of(
             object().shape({
                 productName: string().required('Product name is required'),
-                quantity: string().required('Quantity is required'),
+                quantity: number().min(1, "Quantity must be greater than 0")
+                .required('Quantity is required'),
             })
         ),
     })
