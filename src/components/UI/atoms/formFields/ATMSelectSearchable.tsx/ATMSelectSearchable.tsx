@@ -39,7 +39,6 @@ const ATMSelectSearchable = ({
             boxShadow: 'none',
         }),
     }
-
     // const selectOptions2 = [
     //     {
     //         value: '',
@@ -53,11 +52,21 @@ const ATMSelectSearchable = ({
     // selectOptions = [...selectOptions2, ...selectOptions]
     const handleOnChange = (selectedOption: any) => {
         if (isMulti) {
-            onChange(selectedOption?.values)
+            onChange(selectedOption?.values ? selectedOption?.values : [])
         } else {
-            onChange(selectedOption?.value)
+            onChange(selectedOption?.value ? selectedOption?.value : '')
         }
     }
+    // const handleOnInputChange = (valueOp:string) => {
+    //     let inputValue = selectOptions?.find((option) => option.value === valueOp)
+    //     if (!inputValue) {
+    //         console.log("herer",valueOp)
+    //         onChange('')
+    //     } else {
+    //         onChange(valueOp)
+    //     }
+    // }
+
     return (
         <div className="relative mt-4">
             {label && (
@@ -82,14 +91,8 @@ const ATMSelectSearchable = ({
                 isClearable
                 isOptionDisabled={(options) => options.value === ''}
                 placeholder={`${selectLabel}`}
-                onInputChange={(value) => {
-                    let inputValue = selectOptions?.find(
-                        (option) => option.value === value
-                    )
-                    if (!inputValue) {
-                        onChange('')
-                    }
-                }}
+
+                // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
             />
 
             {name && (

@@ -160,6 +160,11 @@ const AddTapeManagementWrapper = () => {
             }
         }),
         artistOption: [],
+        tapeTypeOption: [
+            { label: 'Scheme Code', value: 'SCHEME_CODE' },
+            { label: 'Promotional', value: 'PROMOTIONAL' },
+            { label: 'Intruption', value: 'INTRUPTION' },
+        ],
     }
     return (
         <MediaLayout>

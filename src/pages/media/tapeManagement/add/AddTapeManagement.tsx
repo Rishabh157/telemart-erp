@@ -16,6 +16,7 @@ type Props = {
         schemeDataOption: SelectOption[]
         languageOptions: SelectOption[]
         artistOption: SelectOption[]
+        tapeTypeOption: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -38,7 +39,6 @@ const AddTapeManagement = ({
     const MinuteOptions = () => {
         let options: SelectOption[] = []
         options = [...options, { label: '00', value: '00' }]
-
         for (let i = 1; i <= 60; i++) {
             options = [...options, { label: i.toString(), value: i.toString() }]
         }
@@ -91,15 +91,14 @@ const AddTapeManagement = ({
                                 }
                             />
 
-                            <ATMTextField
+                            <ATMSelectSearchable
+                                options={dropdownOptions.tapeTypeOption}
                                 name="tapeType"
                                 required
                                 value={values.tapeType}
+                                selectLabel="Select Tape type"
                                 label="Tape Type"
-                                placeholder="Tape Type"
-                                onChange={(e) =>
-                                    setFieldValue('tapeType', e.target.value)
-                                }
+                                onChange={(e) => setFieldValue('tapeType', e)}
                             />
                             <ATMSelectSearchable
                                 name="scheme"
@@ -116,9 +115,10 @@ const AddTapeManagement = ({
                                 selectLabel="Select Channel group"
                                 value={values.channelGroup}
                                 isMulti={false}
-                                onChange={(value) =>
-                                    setFieldValue('channelGroup', value)
-                                }
+                                onChange={(e) => {
+                                    console.log('e', e)
+                                    setFieldValue('channelGroup', e)
+                                }}
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
