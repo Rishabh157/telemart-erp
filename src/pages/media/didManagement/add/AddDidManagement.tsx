@@ -70,14 +70,14 @@ const AddDidManagements = ({
                         <div className="grid grid-cols-3 gap-4">
                             {/* FirstName */}
 
-                            <ATMSelectSearchable
-                                name="channelId"
-                                value={values.channelId}
-                                onChange={(value) =>
-                                    setFieldValue('channelId', value)
+                            <ATMTextField
+                                name="didNumber"
+                                value={values.didNumber}
+                                label="Did Number"
+                                placeholder="Did Number"
+                                onChange={(e) =>
+                                    setFieldValue('didNumber', e.target.value)
                                 }
-                                options={dropdownOptions.channelOptions}
-                                label="Channel Name"
                             />
                             <ATMSelectSearchable
                                 name="schemeId"
@@ -88,14 +88,14 @@ const AddDidManagements = ({
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme Name"
                             />
-                            <ATMTextField
-                                name="didNumber"
-                                value={values.didNumber}
-                                label="Did Number"
-                                placeholder="Did Number"
-                                onChange={(e) =>
-                                    setFieldValue('didNumber', e.target.value)
+                            <ATMSelectSearchable
+                                name="channelId"
+                                value={values.channelId}
+                                onChange={(value) =>
+                                    setFieldValue('channelId', value)
                                 }
+                                options={dropdownOptions.channelOptions}
+                                label="Channel Name"
                             />
                         </div>
                     </div>
