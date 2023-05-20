@@ -131,7 +131,7 @@ import {
     TabManagementListingWrapper,
     ChannelGroupListingWrapper,
     AddChannelGroupWrapper,
-    EditChannelGroup,
+    EditChannelGroupWrapper,
     AddChannelManagementWrapper,
     ChannelCategoryListingWrapper,
     AddChannelCategoryWrapper,
@@ -560,8 +560,8 @@ const PageRoutes = () => {
                         element={<AddChannelGroupWrapper />}
                     />
                     <Route
-                        path="media/channel-group/edit"
-                        element={<EditChannelGroup />}
+                        path="media/channel-group/:id"
+                        element={<EditChannelGroupWrapper />}
                     />
                     <Route
                         path="media/channel"
