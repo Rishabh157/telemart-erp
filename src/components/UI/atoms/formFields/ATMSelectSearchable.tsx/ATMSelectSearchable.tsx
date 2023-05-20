@@ -1,10 +1,11 @@
 import React from 'react'
 import Select from 'react-select'
 import { ErrorMessage } from 'formik'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 
 type Props = {
-    options: any[]
-    value: any
+    options: SelectOption[]
+    value: string
     onChange: (value: any) => void
     label?: string
     required?: boolean
@@ -34,7 +35,7 @@ const ATMSelectSearchable = ({
         }),
     }
 
-    const selectOptions = options.map((option) => ({
+    const selectOptions = options?.map((option) => ({
         value: option.value,
         label: option.label,
     }))
@@ -51,11 +52,12 @@ const ATMSelectSearchable = ({
             <Select
                 className="mt-2 border rounded border-slate-400  "
                 name={name}
-                value={selectOptions.find((option) => option.value === value)}
+                value={selectOptions?.find((option) => option.value === value)}
                 onChange={(selectedOption) => onChange(selectedOption?.value)}
                 options={selectOptions}
                 isSearchable={isSearchable}
                 styles={selectStyles}
+                placeholder={`Select ${label}`}
             />
 
             {name && (
