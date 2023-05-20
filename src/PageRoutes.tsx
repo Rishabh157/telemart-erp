@@ -583,7 +583,7 @@ const PageRoutes = () => {
                         path="media/tape/add"
                         element={<AddTapeManagementWrapper />}
                     />
-                      <Route
+                    <Route
                         path="media/tape/:id"
                         element={<EditTapeManagementWrapper />}
                     />

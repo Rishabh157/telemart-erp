@@ -126,7 +126,7 @@ const EditTapeManagementWrapper = () => {
                     youtubeLink: values.youtubeLink,
                     companyId: values.companyId || '',
                 },
-                id :'',
+                id: '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

@@ -30,7 +30,7 @@ export type FormInitialValues = {
     hour: string
     minute: string
     second: string
-    youtubeLink:string
+    youtubeLink: string
 }
 
 const AddTapeManagementWrapper = () => {
@@ -44,9 +44,7 @@ const AddTapeManagementWrapper = () => {
     const { channelgroup } = useSelector(
         (state: RootState) => state?.channelGroup
     )
-    const { language } = useSelector(
-        (state: RootState) => state?.language
-    )
+    const { language } = useSelector((state: RootState) => state?.language)
 
     const [AddTapeApi] = useAddTapeMutation()
 
@@ -92,28 +90,28 @@ const AddTapeManagementWrapper = () => {
         hour: '0',
         minute: '00',
         second: '00',
-        youtubeLink:'',
+        youtubeLink: '',
         companyId: userData?.companyId || '',
     }
-     
+
     // Form Validation Schema
     const validationSchema = object({
-        tapeName:string(),
-        tapeType:string().required('Required'),
+        tapeName: string(),
+        tapeType: string().required('Required'),
         scheme: string(),
         channelGroup: string(),
-        language:string().required('Required'),
-        hour:string().required('Required'),
-        minute:string().required('Required'),
-        second:string().required('Required'),
-        artist:string().required('Required'),
-        remarks:string(),
-        youtubeLink:string(),
+        language: string().required('Required'),
+        hour: string().required('Required'),
+        minute: string().required('Required'),
+        second: string().required('Required'),
+        artist: string().required('Required'),
+        remarks: string(),
+        youtubeLink: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        let duration=`${values.hour}:${values.minute}:${values.second}`
+        let duration = `${values.hour}:${values.minute}:${values.second}`
         setTimeout(() => {
             AddTapeApi({
                 tapeName: values.tapeName,
@@ -121,10 +119,10 @@ const AddTapeManagementWrapper = () => {
                 tapeType: values.tapeType,
                 scheme: values.scheme,
                 language: values.language,
-                duration:duration,
-                artist:'6467554295e833e56316ccc8',
+                duration: duration,
+                artist: '6467554295e833e56316ccc8',
                 remarks: values.remarks,
-                youtubeLink:values.youtubeLink,
+                youtubeLink: values.youtubeLink,
                 companyId: values.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
@@ -161,7 +159,7 @@ const AddTapeManagementWrapper = () => {
                 value: languageItem?._id,
             }
         }),
-        artistOption:[]
+        artistOption: [],
     }
     return (
         <MediaLayout>

@@ -2,7 +2,6 @@ import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { LanguageListResponse } from 'src/models/Language.model'
 
-
 export type InitialStateType = {
     items: LanguageListResponse[] | []
     allItems: LanguageListResponse[] | []
@@ -28,10 +27,10 @@ const initialState: InitialStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedDealerId: '',
-    language: []
+    language: [],
 }
 
-const languageSlice:Slice<InitialStateType> = createSlice({
+const languageSlice: Slice<InitialStateType> = createSlice({
     name: 'language',
     initialState,
     reducers: {
@@ -90,7 +89,6 @@ const languageSlice:Slice<InitialStateType> = createSlice({
         },
     },
 })
-
 
 export const {
     setItems,
