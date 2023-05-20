@@ -5,6 +5,8 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { Field } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditVendorWrapper'
 import { HiPlus } from 'react-icons/hi'
+import {useSelector} from 'react-redux';
+import { RootState } from 'src/redux/store'
 
 type FieldType = Field<''>
 
@@ -16,6 +18,9 @@ type Props = {
 const StepEditContact = ({ formikProps, formFields }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
+        const { formSubmitting: isSubmitting } = useSelector(
+            (state: RootState) => state?.auth
+        )
 
     return (
         <div className="">
@@ -42,7 +47,7 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                                                     return (
                                                         <div
                                                             key={index}
-                                                            className={`py-6 px-7`}
+                                                            className={`py-9 px-7`}
                                                         >
                                                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center">
                                                                 {sectionName} #
@@ -111,6 +116,7 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                                                                                             placeholder
                                                                                         }
                                                                                         className="shadow bg-white rounded"
+                                                                                        isSubmitting={isSubmitting}
                                                                                     />
                                                                                 )
 

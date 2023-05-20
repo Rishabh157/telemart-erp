@@ -4,6 +4,8 @@ import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditDealerWrapper'
 import { DropdownOptions, FieldType } from './StepEditDealerDetailsWrapper'
+import {useSelector} from 'react-redux';
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -18,6 +20,9 @@ const StepEditDealerDetails = ({
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
+        const { formSubmitting: isSubmitting } = useSelector(
+            (state: RootState) => state?.auth
+        )
 
     return (
         <div className="py-9 px-7">
@@ -38,6 +43,7 @@ const StepEditDealerDetails = ({
                                     label={label}
                                     placeholder={placeholder}
                                     className="shadow bg-white rounded"
+                                    isSubmitting={isSubmitting}
                                 />
                             )
 

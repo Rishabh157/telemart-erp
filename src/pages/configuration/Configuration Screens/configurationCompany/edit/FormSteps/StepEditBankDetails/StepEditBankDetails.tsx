@@ -7,6 +7,8 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { HiPlus } from 'react-icons/hi'
+import {useSelector} from 'react-redux';
+import { RootState } from 'src/redux/store'
 
 type FieldType = Field<'accountTypeOptions'>
 
@@ -23,6 +25,9 @@ const StepEditBankDetails = ({
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
+        const { formSubmitting: isSubmitting } = useSelector(
+            (state: RootState) => state?.auth
+        )
 
     return (
         <div className="">
@@ -143,6 +148,7 @@ const StepEditBankDetails = ({
                                                                                             placeholder
                                                                                         }
                                                                                         className="shadow bg-white rounded"
+                                                                                        isSubmitting={isSubmitting}
                                                                                     />
                                                                                 )
 
@@ -177,6 +183,7 @@ const StepEditBankDetails = ({
                                                                                         label={
                                                                                             label
                                                                                         }
+                                                                                        isSubmitting={isSubmitting}
                                                                                     />
                                                                                 )
 

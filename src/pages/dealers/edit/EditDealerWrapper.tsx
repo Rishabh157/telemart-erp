@@ -18,6 +18,7 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
 import { setSelectedItem } from 'src/redux/slices/dealerSlice'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -82,7 +83,10 @@ const steps = [
         component: StepEditAddressWrapper,
         validationSchema: object({
             registrationAddress: object().shape({
-                phone: string().required('Phone number is required'),
+                phone: string()
+                .max(10, 'maximum 10 digits')
+                .min(10, "minimum 10 digits")
+                .required('Phone number is required'),
                 address: string().required('Address is required'),
                 country: string().required('Please choose a country'),
                 state: string().required('Please choose a state'),
@@ -90,7 +94,10 @@ const steps = [
                 pincode: string().required('Please choose a pincode'),
             }),
             billingAddress: object().shape({
-                phone: string().required('Phone number is required'),
+                phone: string()
+                .max(10, 'maximum 10 digits')
+                .min(10, "minimum 10 digits")
+                .required('Phone number is required'),
                 address: string().required('Address is required'),
                 country: string().required('Please choose a country'),
                 state: string().required('Please choose a state'),
@@ -109,7 +116,10 @@ const steps = [
                     department: string().required('Department is required'),
                     designation: string().required('Designation is required'),
                     email: string().required('Email is required'),
-                    mobileNumber: string().required(
+                    mobileNumber: string()
+                    .max(10, 'maximum 10 digits')
+                    .min(10, "minimum 10 digits")
+                    .required(
                         'Mobile number is required'
                     ),
                     landLine: string().required('Landline is required'),
@@ -299,6 +309,7 @@ const EditDealerWrapper = () => {
                 })
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }

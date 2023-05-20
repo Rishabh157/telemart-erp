@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
 import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -89,7 +90,7 @@ const steps = [
         validationSchema: object({
             registrationAddress: object().shape({
                 phone: string()
-                    .min(10, 'Number should be !0 digits')
+                    .min(10, 'Number should be 10 digits')
                     .max(10, 'maximum 10 digit')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -309,6 +310,7 @@ const AddDealerWrapper = () => {
                 })
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }

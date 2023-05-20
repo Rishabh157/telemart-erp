@@ -6,6 +6,8 @@ import { FormInitialValues } from '../../EditDealerWrapper'
 import { FieldType } from './StepEditDocumentsWrapper'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
+import {useSelector} from 'react-redux';
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -15,6 +17,9 @@ type Props = {
 const StepEditDocuments = ({ formikProps, formFields }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
+        const { formSubmitting: isSubmitting } = useSelector(
+            (state: RootState) => state?.auth
+        )
 
     return (
         <div className="">
@@ -114,6 +119,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                     label={label}
                                                     placeholder={placeholder}
                                                     className="shadow bg-white rounded"
+                                                    isSubmitting={isSubmitting}
                                                 />
                                                 {offset &&
                                                     Array(offset)
@@ -204,6 +210,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                         'Document Name'
                                                     }
                                                     className="shadow bg-white rounded"
+                                                    isSubmitting={isSubmitting}
                                                 />
 
                                                 <ATMTextField
@@ -222,6 +229,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                         )
                                                     }
                                                     // selectedFile={otherDocument.documentFile}
+                                                    isSubmitting={isSubmitting}
                                                 />
 
                                                 <div></div>

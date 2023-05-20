@@ -15,6 +15,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -70,6 +71,8 @@ const steps = [
         validationSchema: object({
             regd_address: object().shape({
                 phone: string()
+                    .trim()
+                    .max(10, "Phone must be 10 digits")
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -80,6 +83,8 @@ const steps = [
             }),
             billing_address: object().shape({
                 phone: string()
+                    .trim()
+                    .max(10, "Phone must be 10 digits")
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -101,6 +106,7 @@ const steps = [
                     designation: string().required('Designation is required'),
                     email: string().required('Email is required'),
                     mobileNumber: string()
+                        .max(10, "Phone must be 10 characters")
                         .required('Mobile Number is required')
                         .matches(regIndiaPhone, 'Invalid Mobile Number'),
                     landLine: string().required('Landline is required'),
@@ -237,6 +243,7 @@ const AddWarehouseWrapper = () => {
                 })
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }

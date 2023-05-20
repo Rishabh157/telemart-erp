@@ -6,6 +6,8 @@ import { FormInitialValues } from '../../AddCompanyWrapper'
 import { MdDeleteOutline } from 'react-icons/md'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import {useSelector} from 'react-redux';
+import { RootState } from 'src/redux/store'
 
 import { HiPlus } from 'react-icons/hi'
 
@@ -24,6 +26,10 @@ const StepAddBankDetails = ({
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
+
+        const { formSubmitting: isSubmitting } = useSelector(
+            (state: RootState) => state?.auth
+        )
 
     return (
         <div className="">
@@ -142,6 +148,7 @@ const StepAddBankDetails = ({
                                                                                             placeholder
                                                                                         }
                                                                                         className="shadow bg-white rounded"
+                                                                                        isSubmitting={isSubmitting}
                                                                                     />
                                                                                 )
 
@@ -176,6 +183,7 @@ const StepAddBankDetails = ({
                                                                                         label={
                                                                                             label
                                                                                         }
+                                                                                        isSubmitting={isSubmitting}
                                                                                     />
                                                                                 )
 

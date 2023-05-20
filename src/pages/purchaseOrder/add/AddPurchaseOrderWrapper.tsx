@@ -128,10 +128,10 @@ const AddPurchaseOrderWrapper = (props: Props) => {
             object().shape({
                 itemId: string().required('Please select a Item'),
                 rate: number()
-                    .min(0, 'Rate must be greater than 0')
+                    .min(1, 'Rate must be greater than 0')
                     .required('Please enter rate'),
                 quantity: number()
-                    .min(0, 'Quantity must be greater than 0')
+                    .min(1, 'Quantity must be greater than 0')
                     .required('Please enter quantity'),
                 estReceivingDate: date().required('Please select date'),
             })

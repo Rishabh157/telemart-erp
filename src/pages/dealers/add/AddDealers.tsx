@@ -4,6 +4,9 @@ import React from 'react'
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormInitialValues } from './AddDealerWrapper'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -21,6 +24,7 @@ const AddDealers = ({
     dealerCategoryOptions,
 }: Props) => {
     // Handle Previous
+    const dispatch = useDispatch<AppDispatch>()
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
@@ -76,7 +80,10 @@ const AddDealers = ({
 
                             <button
                                 type="button"
-                                onClick={() => formikProps.handleSubmit()}
+                                onClick={() =>{
+                                    dispatch(setFormSubmitting(true))
+                                     formikProps.handleSubmit()
+                                }}
                                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
                             >
                                 {activeStep === steps.length - 1
@@ -86,7 +93,7 @@ const AddDealers = ({
                         </div>
                     </div>
 
-                    <div className="py-5 px-16 border-b border-slate-300">
+                    <div className="py-9 px-16 border-b border-slate-300">
                         {/* Steps */}
                         <Stepper activeStep={activeStep}>
                             {steps.map((step, index) => {

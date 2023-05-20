@@ -4,6 +4,8 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditVendorWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import {useSelector} from 'react-redux';
+import { RootState } from 'src/redux/store'
 
 type DropdownOptions = {
     companyTypeOptions: SelectOption[]
@@ -23,11 +25,12 @@ const StepEditComapnyDetails = ({
     dropdownOptions,
     formFields,
 }: Props) => {
-    const { values, setFieldValue }: { values: any; setFieldValue: any } =
-        formikProps
-
+    const { values, setFieldValue }: { values: any; setFieldValue: any } = formikProps
+    const { formSubmitting: isSubmitting } = useSelector(
+            (state: RootState) => state?.auth
+        )
     return (
-        <div className="py-6 px-7">
+        <div className="py-9 px-7">
             <div className="grid grid-cols-4 gap-4 gap-y-5">
                 {formFields?.map((field: FieldType) => {
                     const { type = 'text', name, label, placeholder } = field
@@ -45,6 +48,7 @@ const StepEditComapnyDetails = ({
                                     label={label}
                                     placeholder={placeholder}
                                     className="shadow bg-white rounded"
+                                    isSubmitting={isSubmitting}
                                 />
                             )
 
@@ -65,6 +69,7 @@ const StepEditComapnyDetails = ({
                                                 'companyTypeOptions'
                                         ]
                                     }
+                                    isSubmitting={isSubmitting}
                                 />
                             )
 

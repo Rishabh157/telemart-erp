@@ -4,6 +4,9 @@ import React from 'react'
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormInitialValues } from './AddWarehouseWrapper'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -23,6 +26,7 @@ const AddWarehouse = ({
     allCountry,
 }: Props) => {
     // Handle Previous
+     const dispatch = useDispatch<AppDispatch>()
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
@@ -76,7 +80,10 @@ const AddWarehouse = ({
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() => formikProps.handleSubmit()}
+                                onClick={() => {
+                                    dispatch(setFormSubmitting(true))
+                                     formikProps.handleSubmit()
+                                }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}

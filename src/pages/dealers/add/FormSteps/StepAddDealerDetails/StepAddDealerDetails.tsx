@@ -1,10 +1,11 @@
 import React from 'react'
 import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import ATMPassword from 'src/components/UI/atoms/formFields/ATMPassword/ATMPassword'
 import { FormInitialValues } from '../../AddDealerWrapper'
 import { DropdownOptions, FieldType } from './StepAddDealerDetailsWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import {useSelector} from 'react-redux';
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -19,6 +20,9 @@ const StepAddDealerDetails = ({
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
+        const { formSubmitting: isSubmitting } = useSelector(
+            (state: RootState) => state?.auth
+        )
 
     return (
         <div className="py-9 px-7">
@@ -40,6 +44,7 @@ const StepAddDealerDetails = ({
                                         label={label}
                                         placeholder={placeholder}
                                         className="shadow bg-white rounded"
+                                        isSubmitting={isSubmitting}
                                     />
                                 </div>
                             )
@@ -58,6 +63,7 @@ const StepAddDealerDetails = ({
                                         label={label}
                                         placeholder={placeholder}
                                         className="shadow bg-white rounded"
+                                        isSubmitting={isSubmitting}
                                     />
                                 </div>
                             )
@@ -84,6 +90,7 @@ const StepAddDealerDetails = ({
                                                     'dealerCategoryOptions'
                                             ]
                                         }
+                                        isSubmitting={isSubmitting}
                                     />
                                 </div>
                             )

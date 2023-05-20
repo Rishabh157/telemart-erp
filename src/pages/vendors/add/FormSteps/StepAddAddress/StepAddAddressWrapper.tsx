@@ -33,7 +33,7 @@ const formFields: {
     >[]
 }[] = [
     {
-        sectionName: 'Registration  Address',
+        sectionName: 'Regd  Address',
         fields: [
             {
                 name: 'regd_address.phone',
@@ -77,7 +77,7 @@ const formFields: {
     },
 
     {
-        sectionName: 'Billing Address',
+        sectionName: 'billing_address',
         fields: [
             {
                 name: 'billing_address.phone',

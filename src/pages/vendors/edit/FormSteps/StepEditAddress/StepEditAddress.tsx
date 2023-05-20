@@ -4,6 +4,8 @@ import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditVendorWrapper'
+import {useSelector} from 'react-redux';
+import { RootState } from 'src/redux/store'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -41,8 +43,10 @@ const StepAddAddress = ({
     formFields,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue }: { values: any; setFieldValue: any } =
-        formikProps
+    const { values, setFieldValue }: { values: any; setFieldValue: any } = formikProps
+    const { formSubmitting: isSubmitting } = useSelector(
+            (state: RootState) => state?.auth
+        )
 
     return (
         <div className="">
@@ -51,7 +55,7 @@ const StepAddAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-6 px-7 ${
+                        className={`py-9 px-7 ${
                             index !== formFields.length - 1 && 'border-b'
                         }  border-slate-300`}
                     >
@@ -122,6 +126,7 @@ const StepAddAddress = ({
                                                 label={label}
                                                 placeholder={placeholder}
                                                 className="shadow bg-white rounded"
+                                                 isSubmitting={isSubmitting}
                                             />
                                         )
 
@@ -190,6 +195,7 @@ const StepAddAddress = ({
                                                                 'counrtyOptions'
                                                         ]
                                                     }
+                                                     isSubmitting={isSubmitting}
                                                 />
                                             </div>
                                         )

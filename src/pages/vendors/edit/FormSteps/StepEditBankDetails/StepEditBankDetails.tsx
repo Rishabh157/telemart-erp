@@ -7,6 +7,8 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { HiPlus } from 'react-icons/hi'
+import {useSelector} from 'react-redux';
+import { RootState } from 'src/redux/store'
 
 type FieldType = Field<'accountTypeOptions'>
 
@@ -21,9 +23,10 @@ const StepEditBankDetails = ({
     formFields,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue }: { values: any; setFieldValue: any } =
-        formikProps
-
+    const { values, setFieldValue }: { values: any; setFieldValue: any } = formikProps
+    const { formSubmitting: isSubmitting } = useSelector(
+            (state: RootState) => state?.auth
+        )
     return (
         <div className="">
             <FieldArray name="bank_informations">
@@ -50,7 +53,7 @@ const StepEditBankDetails = ({
                                                     return (
                                                         <div
                                                             key={index}
-                                                            className={`py-6 px-7`}
+                                                            className={`py-9 px-7`}
                                                         >
                                                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center">
                                                                 {sectionName} #
@@ -119,6 +122,7 @@ const StepEditBankDetails = ({
                                                                                             placeholder
                                                                                         }
                                                                                         className="shadow bg-white rounded"
+                                                                                         isSubmitting={isSubmitting}
                                                                                     />
                                                                                 )
 
@@ -150,6 +154,7 @@ const StepEditBankDetails = ({
                                                                                         label={
                                                                                             label
                                                                                         }
+                                                                                         isSubmitting={isSubmitting}
                                                                                     />
                                                                                 )
 
