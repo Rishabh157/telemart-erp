@@ -8,11 +8,11 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/media/didManagementSlice'
+} from 'src/redux/slices/media/competitorManagementSlice'
 import MediaLayout from '../../MediaLayout'
-import { useGetPaginationDidQuery } from 'src/services/media/DidManagementServices'
 import CompetitorManagementListing from './CompetitorManagementListing'
 import { CompetitorManagementListResponse } from 'src/models/CompetitorManagement.model'
+import { useGetPaginationcompetitorQuery } from 'src/services/media/CompetitorManagementServices'
 
 const columns: columnTypes[] = [
     {
@@ -20,25 +20,10 @@ const columns: columnTypes[] = [
         headerName: 'Product Group Name',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: CompetitorManagementListResponse) => (
-            <span> {row.productGroupName} </span>
+            <span> {row.competitorName} </span>
         ),
     },
-    {
-        field: 'quantity',
-        headerName: 'Quantity',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: CompetitorManagementListResponse) => (
-            <span> {row.count} </span>
-        ),
-    },
-    {
-        field: 'warehouse',
-        headerName: 'Warehouse',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: CompetitorManagementListResponse) => (
-            <span> {row.wareHouse} </span>
-        ),
-    },
+
     {
         field: 'actions',
         headerName: 'Actions',
@@ -54,17 +39,17 @@ const columns: columnTypes[] = [
 
 const CompetitorManagementListingWrapper = () => {
     const competitorManagementState: any = useSelector(
-        (state: RootState) => state.didManagement
+        (state: RootState) => state.competitor
     )
 
     const { page, rowsPerPage, searchValue, items } = competitorManagementState
     console.log('here')
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetPaginationDidQuery({
+    const { data, isFetching, isLoading } = useGetPaginationcompetitorQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['productGroupName'],
+        params: ['competitorName'],
         page: page,
         filterBy: [
             {
