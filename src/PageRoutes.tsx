@@ -138,6 +138,7 @@ import {
 } from './pages/index'
 import Auth from './pages/login/Auth'
 import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
+import Inbound from './pages/media/Inbound/Inbound'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -609,6 +610,10 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel-category/add"
                         element={<AddCompetitorManagement />}
+                    />
+                       <Route
+                        path="media/inbound/"
+                        element={<Inbound />}
                     />
                 </Routes>
             </BrowserRouter>
