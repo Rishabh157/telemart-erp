@@ -43,7 +43,6 @@ const CompetitorManagementListingWrapper = () => {
     )
 
     const { page, rowsPerPage, searchValue, items } = competitorManagementState
-    console.log('here')
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetPaginationcompetitorQuery({
