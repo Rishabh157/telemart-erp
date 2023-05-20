@@ -40,17 +40,17 @@ const ATMSelectSearchable = ({
         }),
     }
 
-    const selectOptions2 = [
-        {
-            value: '',
-            label: `${selectLabel}`,
-        },
-    ]
+    // const selectOptions2 = [
+    //     {
+    //         value: '',
+    //         label: `${selectLabel}`,
+    //     },
+    // ]
     let selectOptions = options?.map((option) => ({
         value: option.value,
         label: option.label,
     }))
-    selectOptions = [...selectOptions2, ...selectOptions]
+    // selectOptions = [...selectOptions2, ...selectOptions]
     const handleOnChange = (selectedOption: any) => {
         if (isMulti) {
             onChange(selectedOption?.values)
