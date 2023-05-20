@@ -22,7 +22,7 @@ export type FormInitialValues = {
     address: string
     phone: string
     email: string
-    area: string
+    district: string
     channelGroupId: string
     contactPerson: string
     mobile: string
@@ -98,7 +98,7 @@ const AddChannelManagementWrapper = () => {
         address: '',
         phone: '',
         email: '',
-        area: '',
+        district: '',
         channelGroupId: '',
         contactPerson: '',
         mobile: '',
@@ -118,7 +118,7 @@ const AddChannelManagementWrapper = () => {
         address: string(),
         phone: string(),
         email: string().email('Invalid  Email'),
-        area: string().required('Required'),
+        district: string().required('Required'),
         channelGroupId: string().required('Required'),
         contactPerson: string(),
         mobile: string()
@@ -142,7 +142,7 @@ const AddChannelManagementWrapper = () => {
                 address: values.address,
                 phone: values.phone,
                 email: values.email,
-                area: '645c727b266c589640740eaa' || values.area,
+                district: values.district,
                 channelGroupId: values.channelGroupId,
                 contactPerson: values.contactPerson,
                 mobile: values.mobile,
@@ -198,6 +198,13 @@ const AddChannelManagementWrapper = () => {
                 }
             }
         ),
+        paymentOptions: [
+            { label: 'checque', value: 'CHECQUE' },
+            { label: 'netBanking', value: 'NETBANKING' },
+            { label: 'cash', value: 'CASH' },
+            { label: 'creditCard', value: 'CREDITCARD' },
+            { label: 'debitCard', value: 'DEBITCARD' },
+        ],
     }
     return (
         <MediaLayout>

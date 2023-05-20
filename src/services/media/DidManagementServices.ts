@@ -30,12 +30,28 @@ export const didManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        //***** get by id *****/
+        getDidById: builder.query({
+            providesTags: ['did'],
+            query: (id) => ({
+                url: `/did-management/${id}`,
+                method: 'GET',
+            }),
+        }),
+        //***** get by id *****/
+        deleteDid: builder.mutation({
+            invalidatesTags: ['did'],
+            query: (id) => ({
+                url: `/did-management/${id}`,
+                method: 'DELETE',
+            }),
+        }),
 
         //***** Update *****/
         updateDid: builder.mutation({
             invalidatesTags: ['did'],
             query: ({ body, id }: UpdateDidManagement) => ({
-                url: `/did/${id}`,
+                url: `/did-management/${id}`,
                 method: 'PUT',
                 body,
             }),
@@ -48,4 +64,6 @@ export const {
     useGetPaginationDidQuery,
     useUpdateDidMutation,
     useGetAllDidQuery,
+    useGetDidByIdQuery,
+    useDeleteDidMutation,
 } = didManagementApi

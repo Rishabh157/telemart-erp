@@ -7,6 +7,7 @@ import {
 
 export interface ChannelGroupSliceStateType {
     items: ChannelGroupListResponse[] | []
+    selectedItem: ChannelGroupListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -19,6 +20,7 @@ export interface ChannelGroupSliceStateType {
 
 const initialState: ChannelGroupSliceStateType = {
     items: [],
+    selectedItem: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -74,6 +76,12 @@ const channelGroupSlice: Slice<ChannelGroupSliceStateType> = createSlice({
         ) => {
             state.channelgroup = action.payload
         },
+        setSelectedItem: (
+            state,
+            action: PayloadAction<GetAllChannelGroupResponse | null>
+        ) => {
+            state.selectedItem = action.payload
+        },
     },
 })
 
@@ -87,5 +95,6 @@ export const {
     setIsTableLoading,
     setSelectedId,
     setChannelGroups,
+    setSelectedItem,
 } = channelGroupSlice.actions
 export default channelGroupSlice.reducer
