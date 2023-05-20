@@ -11,7 +11,7 @@ export const tapeManagementApi = apiSlice.injectEndpoints({
         getPaginationTape: builder.query({
             providesTags: ['tape'],
             query: (body: PaginationType) => ({
-                url: '/tape',
+                url: '/tape-master',
                 method: 'POST',
                 body,
             }),
@@ -21,7 +21,7 @@ export const tapeManagementApi = apiSlice.injectEndpoints({
         addTape: builder.mutation({
             invalidatesTags: ['tape'],
             query: (body: AddTapeManagement) => ({
-                url: '/tape/add',
+                url: '/tape-master/add',
                 method: 'POST',
                 body,
             }),
@@ -31,7 +31,7 @@ export const tapeManagementApi = apiSlice.injectEndpoints({
         updateTape: builder.mutation({
             invalidatesTags: ['tape'],
             query: ({ body, id }: UpdateTapeManagement) => ({
-                url: `/tape/${id}`,
+                url: `/tape-master/${id}`,
                 method: 'PUT',
                 body,
             }),

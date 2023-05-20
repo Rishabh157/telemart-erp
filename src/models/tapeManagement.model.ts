@@ -16,6 +16,7 @@ export type TapeManagementListResponse = {
     __v: number
     schemeLabel: string
     languageLabel: string
+    youtubeLink: string
 }
 
 export type AddTapeManagement = {
@@ -28,6 +29,7 @@ export type AddTapeManagement = {
     artist: string
     remarks: string
     companyId: string
+    youtubeLink: string
 }
 
 export type UpdateTapeManagement = {
@@ -41,6 +43,7 @@ export type UpdateTapeManagement = {
         artist: string
         remarks: string
         companyId: string
+        youtubeLink: string
     }
     id: string
 }

@@ -135,6 +135,7 @@ import {
     AddChannelManagementWrapper,
     ChannelCategoryListingWrapper,
     AddChannelCategoryWrapper,
+    EditTapeManagementWrapper,
 } from './pages/index'
 import Auth from './pages/login/Auth'
 import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
@@ -581,6 +582,10 @@ const PageRoutes = () => {
                     <Route
                         path="media/tape/add"
                         element={<AddTapeManagementWrapper />}
+                    />
+                      <Route
+                        path="media/tape/:id"
+                        element={<EditTapeManagementWrapper />}
                     />
                     <Route
                         path="media/slot"

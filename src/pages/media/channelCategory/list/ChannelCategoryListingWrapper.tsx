@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";
 import MediaLayout from 'src/pages/media/MediaLayout'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
-import { useGetPaginationChannelCategoryQuery } from 'src/services/media/ChannelcategoryService'
+import { useGetPaginationChannelCategoryQuery } from 'src/services/media/ChannelCategoryService'
 import {
     setIsTableLoading,
     setItems,

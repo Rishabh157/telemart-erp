@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import MediaLayout from '../../MediaLayout'
-import { useAddTapeMutation } from 'src/services/media/TapeManagementServices'
+import { useUpdateTapeMutation } from 'src/services/media/TapeManagementServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +11,7 @@ import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServi
 import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
-import AddTapeManagement from './AddTapeManagement'
+import EditTapeManagement from './EditTapeManagement'
 import { SchemeListResponse } from 'src/models/scheme.model'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 import { setLanguage } from 'src/redux/slices/languageSlice'
@@ -30,10 +30,10 @@ export type FormInitialValues = {
     hour: string
     minute: string
     second: string
-    youtubeLink:string
+    youtubeLink: string
 }
 
-const AddTapeManagementWrapper = () => {
+const EditTapeManagementWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
@@ -44,11 +44,9 @@ const AddTapeManagementWrapper = () => {
     const { channelgroup } = useSelector(
         (state: RootState) => state?.channelGroup
     )
-    const { language } = useSelector(
-        (state: RootState) => state?.language
-    )
+    const { language } = useSelector((state: RootState) => state?.language)
 
-    const [AddTapeApi] = useAddTapeMutation()
+    const [editTapeApi] = useUpdateTapeMutation()
 
     const {
         isLoading: isSchemeLoading,
@@ -92,40 +90,43 @@ const AddTapeManagementWrapper = () => {
         hour: '0',
         minute: '00',
         second: '00',
-        youtubeLink:'',
+        youtubeLink: '',
         companyId: userData?.companyId || '',
     }
-     
+
     // Form Validation Schema
     const validationSchema = object({
-        tapeName:string(),
-        tapeType:string().required('Required'),
+        tapeName: string(),
+        tapeType: string().required('Required'),
         scheme: string(),
         channelGroup: string(),
-        language:string().required('Required'),
-        hour:string().required('Required'),
-        minute:string().required('Required'),
-        second:string().required('Required'),
-        artist:string().required('Required'),
-        remarks:string(),
-        youtubeLink:string(),
+        language: string().required('Required'),
+        hour: string().required('Required'),
+        minute: string().required('Required'),
+        second: string().required('Required'),
+        artist: string().required('Required'),
+        remarks: string(),
+        youtubeLink: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        let duration=`${values.hour}:${values.minute}:${values.second}`
+        let duration = `${values.hour}:${values.minute}:${values.second}`
         setTimeout(() => {
-            AddTapeApi({
-                tapeName: values.tapeName,
-                channelGroup: values.channelGroup,
-                tapeType: values.tapeType,
-                scheme: values.scheme,
-                language: values.language,
-                duration:duration,
-                artist:'6467554295e833e56316ccc8',
-                remarks: values.remarks,
-                youtubeLink:values.youtubeLink,
-                companyId: values.companyId || '',
+            editTapeApi({
+                body: {
+                    tapeName: values.tapeName,
+                    channelGroup: values.channelGroup,
+                    tapeType: values.tapeType,
+                    scheme: values.scheme,
+                    language: values.language,
+                    duration: duration,
+                    artist: '6467554295e833e56316ccc8',
+                    remarks: values.remarks,
+                    youtubeLink: values.youtubeLink,
+                    companyId: values.companyId || '',
+                },
+                id :'',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -161,7 +162,7 @@ const AddTapeManagementWrapper = () => {
                 value: languageItem?._id,
             }
         }),
-        artistOption:[]
+        artistOption: [],
     }
     return (
         <MediaLayout>
@@ -172,7 +173,7 @@ const AddTapeManagementWrapper = () => {
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
-                        <AddTapeManagement
+                        <EditTapeManagement
                             dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
                             formikProps={formikProps}
@@ -184,4 +185,4 @@ const AddTapeManagementWrapper = () => {
     )
 }
 
-export default AddTapeManagementWrapper
+export default EditTapeManagementWrapper

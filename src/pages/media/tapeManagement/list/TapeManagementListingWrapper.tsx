@@ -81,7 +81,7 @@ const TapeManagementListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetPaginationTapeQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['productGroupName'],
+        params: ['tapeName'],
         page: page,
         filterBy: [
             {

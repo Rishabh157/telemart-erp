@@ -1,6 +1,6 @@
 import { FormikProps } from 'formik'
 import React from 'react'
-import { FormInitialValues } from './AddTapeManagementWrapper'
+import { FormInitialValues } from './EditTapeManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -28,7 +28,7 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddTapeManagement = ({
+const EditTapeManagement = ({
     formikProps,
     apiStatus,
     dropdownOptions,
@@ -221,4 +221,4 @@ const AddTapeManagement = ({
     )
 }
 
-export default AddTapeManagement
+export default EditTapeManagement
