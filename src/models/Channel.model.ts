@@ -4,7 +4,7 @@ export type ChannelManagementListResponse = {
     address: string
     phone: string
     email: string
-    area: string
+    district: string
     channelGroupId: string
     contactPerson: string
     mobile: string
@@ -20,7 +20,7 @@ export type ChannelManagementListResponse = {
     createdAt: string
     updatedAt: string
     __v: number
-    areaLabel: string
+    districtLabel: string
     channelGroupLabel: string
     countryLabel: string
     channelCategoryLabel: string
@@ -35,7 +35,7 @@ export type AddChannelManagement = {
     address: string
     phone: string
     email: string
-    area: string
+    district: string
     channelGroupId: string
     contactPerson: string
     mobile: string
@@ -54,7 +54,7 @@ export type UpdateChannelManagement = {
         address: string
         phone: string
         email: string
-        area: string
+        district: string
         channelGroupId: string
         contactPerson: string
         mobile: string
