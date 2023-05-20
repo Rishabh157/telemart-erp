@@ -31,14 +31,7 @@ const columns: columnTypes[] = [
             <span> {row.channelGroupLabel} </span>
         ),
     },
-    {
-        field: 'channelCategoryLabel',
-        headerName: 'Channel Category',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.channelCategoryLabel} </span>
-        ),
-    },
+
     {
         field: 'contactPerson',
         headerName: 'Contact Person',
@@ -49,14 +42,6 @@ const columns: columnTypes[] = [
     },
 
     {
-        field: 'designation',
-        headerName: 'Designation',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.designation} </span>
-        ),
-    },
-    {
         field: 'mobile',
         headerName: 'Mobile',
         flex: 'flex-[1_1_0%]',
@@ -64,77 +49,13 @@ const columns: columnTypes[] = [
             <span> {row.mobile} </span>
         ),
     },
-    {
-        field: 'phone',
-        headerName: 'Phone',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.phone} </span>
-        ),
-    },
-    {
-        field: 'countryLabel',
-        headerName: 'Country',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.countryLabel} </span>
-        ),
-    },
 
-    {
-        field: 'stateLabel',
-        headerName: 'State',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.stateLabel} </span>
-        ),
-    },
-    {
-        field: 'areaLabel',
-        headerName: 'Area',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.areaLabel} </span>
-        ),
-    },
-    {
-        field: 'languageLabel',
-        headerName: 'Language',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.languageLabel} </span>
-        ),
-    },
     {
         field: 'email',
         headerName: 'Email',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: ChannelManagementListResponse) => (
             <span> {row.email} </span>
-        ),
-    },
-    {
-        field: 'address',
-        headerName: 'Address',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.address} </span>
-        ),
-    },
-    {
-        field: 'website',
-        headerName: 'Website',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.website} </span>
-        ),
-    },
-    {
-        field: 'paymentType',
-        headerName: 'Payment Mode',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.paymentType} </span>
         ),
     },
 

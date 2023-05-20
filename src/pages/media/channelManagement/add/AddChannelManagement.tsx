@@ -25,6 +25,7 @@ type Props = {
         districtOptions?: SelectOption[]
         languageOption: SelectOption[]
         categoryOption: SelectOption[]
+        paymentOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -185,33 +186,6 @@ const AddChannelManagement = ({
                                 }
                             />
                             <ATMTextField
-                                name="phone"
-                                value={values.phone}
-                                label="Phone"
-                                placeholder="Phone"
-                                onChange={(e) =>
-                                    setFieldValue('phone', e.target.value)
-                                }
-                            />
-                            <ATMTextField
-                                name="mobile"
-                                value={values.mobile}
-                                label="Mobile   "
-                                placeholder="Mobile "
-                                onChange={(e) =>
-                                    setFieldValue('mobile', e.target.value)
-                                }
-                            />
-                            <ATMTextField
-                                name="website"
-                                value={values.website}
-                                label="Website "
-                                placeholder="Website "
-                                onChange={(e) =>
-                                    setFieldValue('website', e.target.value)
-                                }
-                            />{' '}
-                            <ATMTextField
                                 name="email"
                                 value={values.email}
                                 label="Email Id"
@@ -243,12 +217,12 @@ const AddChannelManagement = ({
                             />
                             <ATMSelectSearchable
                                 options={dropdownOptions.districtOptions || []}
-                                name="area"
+                                name="district"
                                 required
-                                value={values.area}
-                                label="Area"
+                                value={values.district}
+                                label="District"
                                 onChange={(value) =>
-                                    setFieldValue('area', value)
+                                    setFieldValue('district', value)
                                 }
                             />
                             <ATMSelectSearchable
@@ -260,16 +234,43 @@ const AddChannelManagement = ({
                                     setFieldValue('language', value)
                                 }
                             />
-                            <ATMTextField
-                                name="paymentType"
+                            <ATMSelectSearchable
+                                options={dropdownOptions.paymentOptions}
                                 required
+                                name="paymentType"
                                 value={values.paymentType}
                                 label="Payment Type"
-                                placeholder="Payment Type"
-                                onChange={(e) =>
-                                    setFieldValue('paymentType', e.target.value)
+                                onChange={(value) =>
+                                    setFieldValue('paymentType', value)
                                 }
                             />
+                            <ATMTextField
+                                name="phone"
+                                value={values.phone}
+                                label="Phone"
+                                placeholder="Phone"
+                                onChange={(e) =>
+                                    setFieldValue('phone', e.target.value)
+                                }
+                            />
+                            <ATMTextField
+                                name="mobile"
+                                value={values.mobile}
+                                label="Mobile   "
+                                placeholder="Mobile "
+                                onChange={(e) =>
+                                    setFieldValue('mobile', e.target.value)
+                                }
+                            />
+                            <ATMTextField
+                                name="website"
+                                value={values.website}
+                                label="Website "
+                                placeholder="Website "
+                                onChange={(e) =>
+                                    setFieldValue('website', e.target.value)
+                                }
+                            />{' '}
                         </div>
                     </div>
                 </div>
