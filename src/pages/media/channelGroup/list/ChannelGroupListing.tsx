@@ -39,7 +39,7 @@ const ChannelGroupListing = ({ columns, rows }: Props) => {
     ]
 
     return (
-        <div className="px-4 h-full overflow-auto pt-3 ">
+        <div className="px-4 h-full pt-3">
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>

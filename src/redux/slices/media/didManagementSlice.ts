@@ -1,9 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { DidManagementListResponse } from 'src/models/Media.model'
 
 export interface DidManagementSliceStateType {
     items: DidManagementListResponse[] | []
+    selectedItem: DidManagementListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -15,6 +16,7 @@ export interface DidManagementSliceStateType {
 
 const initialState: DidManagementSliceStateType = {
     items: [],
+    selectedItem: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -24,7 +26,7 @@ const initialState: DidManagementSliceStateType = {
     selectedId: '',
 }
 
-const didManagementSlice: any = createSlice({
+const didManagementSlice: Slice<DidManagementSliceStateType> = createSlice({
     name: 'didManagement',
     initialState,
     reducers: {
@@ -63,6 +65,12 @@ const didManagementSlice: any = createSlice({
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
+        setSelectedItem: (
+            state,
+            action: PayloadAction<DidManagementListResponse | null>
+        ) => {
+            state.selectedItem = action.payload
+        },
     },
 })
 
@@ -75,5 +83,6 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
+    setSelectedItem,
 } = didManagementSlice.actions
 export default didManagementSlice.reducer

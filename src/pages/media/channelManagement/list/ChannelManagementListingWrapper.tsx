@@ -16,14 +16,6 @@ import MediaLayout from 'src/pages/media/MediaLayout'
 
 const columns: columnTypes[] = [
     {
-        field: 'ChannelGroupLabel',
-        headerName: 'Channel Group Name',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.ChannelGroupLabel} </span>
-        ),
-    },
-    {
         field: 'channelName',
         headerName: 'Channel Name',
         flex: 'flex-[1_1_0%]',
@@ -32,19 +24,38 @@ const columns: columnTypes[] = [
         ),
     },
     {
-        field: 'schemeLabel',
-        headerName: 'Scheme ',
+        field: 'channelGroupLabel',
+        headerName: 'Channel Group',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.schemeLabel} </span>
+            <span> {row.channelGroupLabel} </span>
         ),
     },
+
     {
-        field: 'didLabel',
-        headerName: 'Did Number',
+        field: 'contactPerson',
+        headerName: 'Contact Person',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: ChannelManagementListResponse) => (
-            <span> {row.didLabel} </span>
+            <span> {row.contactPerson} </span>
+        ),
+    },
+
+    {
+        field: 'mobile',
+        headerName: 'Mobile',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: ChannelManagementListResponse) => (
+            <span> {row.mobile} </span>
+        ),
+    },
+
+    {
+        field: 'email',
+        headerName: 'Email',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: ChannelManagementListResponse) => (
+            <span> {row.email} </span>
         ),
     },
 

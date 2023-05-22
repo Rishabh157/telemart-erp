@@ -93,8 +93,7 @@ import BarcodeGenerator from './configuration/Configuration Screens/barcode/list
 import EditPurchaseOrderWrapper from './purchaseOrder/edit/EditPurchaseOrderWrapper'
 import DidManagementListingWrapper from './media/didManagement/list/DidManagementListingWrapper'
 import OrganisationHierarchy from './configuration/Configuration Screens/organizationHeirarchy/OrganizationHeirarchy'
-import AddDidManagement from './media/didManagement/add/AddDidManagement'
-import EditDidManagement from './media/didManagement/edit/EditDidManagement'
+import EditDidManagementWrapper from './media/didManagement/edit/EditDidManagementWrapper'
 import ChannelManagementListingWrapper from './media/channelManagement/list/ChannelManagementListingWrapper'
 import EditChannelManagement from './media/channelManagement/edit/EditChannelManagement'
 import SlotManagementListingWrapper from './media/slotManagement/list/SlotManagementListingWrapper'
@@ -107,6 +106,7 @@ import AddDidManagementWrapper from './media/didManagement/add/AddDidManagementW
 import DispositionOneListingWrapper from './configuration/Configuration Screens/dispositionOne/list/DispositionOneListingWrapper'
 import ChannelGroupListingWrapper from './media/channelGroup/list/ChannelGroupListingWrapper'
 import AddChannelGroupWrapper from './media/channelGroup/add/AddChannelGroupWrapper'
+import EditChannelGroupWrapper from './media/channelGroup/edit/EditChannelGroupWrapper'
 import EditChannelGroup from './media/channelGroup/edit/EditChannelGroup'
 import AddChannelManagementWrapper from './media/channelManagement/add/AddChannelManagementWrapper'
 import ChannelCategoryListingWrapper from './media/channelCategory/list/ChannelCategoryListingWrapper'
@@ -208,8 +208,7 @@ export {
     EditPurchaseOrderWrapper,
     OrganisationHierarchy,
     DidManagementListingWrapper,
-    AddDidManagement,
-    EditDidManagement,
+    EditDidManagementWrapper,
     AddDidManagementWrapper,
     ChannelManagementListingWrapper,
     EditChannelManagement,
@@ -222,6 +221,7 @@ export {
     DispositionOneListingWrapper,
     ChannelGroupListingWrapper,
     AddChannelGroupWrapper,
+    EditChannelGroupWrapper,
     EditChannelGroup,
     AddChannelManagementWrapper,
     ChannelCategoryListingWrapper,
