@@ -143,6 +143,7 @@ import AddDispositionOneWrapper from './pages/configuration/Configuration Screen
 import DispositionTwoListingWrapper from './pages/configuration/Configuration Screens/dispositionTwo/list/DispositionTwoListingWrapper'
 import AddDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/add/AddDispositionTwoWrapper'
 import EditDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/edit/EditDispositionTwoWrapper'
+import EditDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/edit/EditDispositionOneWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -536,6 +537,10 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/disposition-one/add"
                         element={<AddDispositionOneWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-one/:id"
+                        element={<EditDispositionOneWrapper />}
                     />
                     <Route
                         path="/configurations/disposition-two"
