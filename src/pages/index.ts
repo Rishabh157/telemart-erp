@@ -114,7 +114,9 @@ import ChannelCategoryListingWrapper from './media/channelCategory/list/ChannelC
 import AddChannelCategoryWrapper from './media/channelCategory/add/AddChannelCategoryWrapper'
 import EditTapeManagementWrapper from './media/tapeManagement/edit/EditTapeManagementWrapper'
 import EditChannelCategoryWrapper from './media/channelCategory/edit/EditChannelCategoryWrapper'
-
+import ArtistListingWrapper from './media/artist/list/ArtistListingWrapper'
+import AddArtistWrapper from './media/artist/add/AddArtistWrapper'
+import EditArtistWrapper from './media/artist/edit/EditArtistWrapper'
 export {
     AddASRWrapper,
     ASRListingWrapper,
@@ -232,4 +234,7 @@ export {
     AddChannelCategoryWrapper,
     EditTapeManagementWrapper,
     EditChannelCategoryWrapper,
+    ArtistListingWrapper,
+    AddArtistWrapper,
+    EditArtistWrapper,
 }
