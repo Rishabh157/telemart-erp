@@ -96,7 +96,7 @@ const ChannelCategoryListingWrapper = () => {
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
-                                Edit {row?._id}
+                                Edit 
                             </button>
                             <button
                                 onClick={() => {
@@ -125,11 +125,11 @@ const ChannelCategoryListingWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        alert(currentId)
+        //alert(currentId)
         deleteChannelCategory(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Sale Order deleted successfully!')
+                    showToast('success', 'Channel Category deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }

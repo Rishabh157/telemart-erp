@@ -24,7 +24,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/media/tape',
     },
     {
-        label: 'Add Tape',
+        label: 'Update Tape',
     },
 ]
 
@@ -33,7 +33,8 @@ const EditTapeManagement = ({
     apiStatus,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue } = formikProps
+    const { values, setFieldValue } = formikProps   
+   
 
     const MinuteOptions = () => {
         let options: SelectOption[] = []
@@ -54,7 +55,7 @@ const EditTapeManagement = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Tape </ATMPageHeading>
+                    <ATMPageHeading> Update Tape </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -72,7 +73,7 @@ const EditTapeManagement = ({
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Submit
+                                Update
                             </button>
                         </div>
                     </div>
@@ -157,10 +158,7 @@ const EditTapeManagement = ({
                                         min={0}
                                         placeholder="HH"
                                         onChange={(e) =>
-                                            setFieldValue(
-                                                'hour',
-                                                e.target.value
-                                            )
+                                            setFieldValue('hour',e.target.value)
                                         }
                                     />
                                 </div>
@@ -189,7 +187,7 @@ const EditTapeManagement = ({
                                         value={values.second}
                                         selectLabel="SS"
                                         onChange={(selectValue) =>
-                                            setFieldValue('second', selectValue)
+                                            setFieldValue('second', selectValue)    
                                         }
                                     />
                                 </div>
