@@ -1,94 +1,71 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import AddDispositionOne from './EditDispositionTwo'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import {
-    useGetdispositionTwoByIdQuery,
-    useUpdatedispositionTwoMutation,
-} from 'src/services/configurations/DispositionTwoServices'
-import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
-import { setAllItems } from 'src/redux/slices/configuration/dispositionOneSlice'
-import { setSelectedDispostion } from 'src/redux/slices/configuration/dispositionTwoSlice'
+    useGetdispositionOneByIdQuery,
+    useUpdatedispositionOneMutation,
+} from 'src/services/configurations/DispositiononeServices'
+import { setSelectedDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
+import EditDispositionOne from './EditDispositionOne'
 
 type Props = {}
 
 export type FormInitialValues = {
     dispositionName: string
-    dispositionOneId: string
 }
 
-const EditDispositionTwoWrapper = (props: Props) => {
+const EditDispositionOneWrapper = (props: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const params = useParams()
     const Id = params.id
-    const { selectedDispostion }: any = useSelector(
-        (state: RootState) => state.dispositionTwo
+    const { selectedDispositionOne }: any = useSelector(
+        (state: RootState) => state.dispositionOne
     )
+    console.log(selectedDispositionOne)
     const {
         data: editData,
         isFetching: editisFetching,
         isLoading: editisLoading,
-    } = useGetdispositionTwoByIdQuery(Id)
+    } = useGetdispositionOneByIdQuery(Id)
 
     useEffect(() => {
         if (!editisFetching && !editisLoading) {
-            dispatch(setSelectedDispostion(editData?.data))
+            dispatch(setSelectedDispositionOne(editData?.data))
         }
     }, [editisFetching, editisLoading, editData, dispatch])
 
     // Form Initial Values
 
     const { userData } = useSelector((state: RootState) => state?.auth)
-    //const { data, isLoading, isFetching } = useGetdispositionOneByIdQuery('')
+
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const { allItems }: any = useSelector(
         (state: RootState) => state?.dispositionOne
     )
-    const [EditDispositionTwo] = useUpdatedispositionTwoMutation()
+    const [EditDispositionApi] = useUpdatedispositionOneMutation()
 
-    const dispositiononeoption = allItems?.map((ele: any) => {
-        return {
-            label: ele.dispositionName,
-            value: ele._id,
-        }
-    })
-    const {
-        data: datas,
-        isLoading: isLoadings,
-        isFetching: isFetchings,
-    } = useGetAlldispositionOneQuery('')
-
-    useEffect(() => {
-        if (!isFetchings && !isLoadings) {
-            dispatch(setAllItems(datas?.data || []))
-        }
-    }, [isFetchings, isLoadings, datas, dispatch])
     const initialValues: FormInitialValues = {
-        dispositionName: selectedDispostion?.dispositionName || '',
-        dispositionOneId: selectedDispostion?.dispositionOneId || '',
+        dispositionName: selectedDispositionOne?.dispositionName || '',
     }
     // Form Validation Schema
     const validationSchema = object({
-        dispositionName: string().required('Disposition Name name is required'),
-        dispositionOneId: string().required('Please select Disposition Name'),
+        dispositionName: string().required('Disposition Name is required'),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            EditDispositionTwo({
+            EditDispositionApi({
                 body: {
                     dispositionName: values?.dispositionName,
-                    dispositionOneId: values?.dispositionOneId,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',
@@ -97,9 +74,9 @@ const EditDispositionTwoWrapper = (props: Props) => {
                     if (res?.data?.status) {
                         showToast(
                             'success',
-                            'disposition Two updated successfully!'
+                            'Disposition One updated successfully!'
                         )
-                        navigate('/configurations/disposition-Two')
+                        navigate('/configurations/disposition-One')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -110,13 +87,11 @@ const EditDispositionTwoWrapper = (props: Props) => {
             })
         }, 1000)
     }
-    const dropdownOptions = {
-        dispositiononeoption: dispositiononeoption,
-    }
 
     // useEffect(() => {
     //     dispatch(setAllItems(data?.data))
     // }, [dispatch, data, isLoading, isFetching])
+
     return (
         <ConfigurationLayout>
             <Formik
@@ -127,10 +102,9 @@ const EditDispositionTwoWrapper = (props: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <AddDispositionOne
+                        <EditDispositionOne
                             apiStatus={apiStatus}
                             formikProps={formikProps}
-                            dropdownOptions={dropdownOptions}
                         />
                     )
                 }}
@@ -139,4 +113,4 @@ const EditDispositionTwoWrapper = (props: Props) => {
     )
 }
 
-export default EditDispositionTwoWrapper
+export default EditDispositionOneWrapper
