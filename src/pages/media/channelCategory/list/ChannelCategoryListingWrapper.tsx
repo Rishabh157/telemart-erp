@@ -7,9 +7,9 @@ import { showToast } from 'src/utils'
 import MediaLayout from 'src/pages/media/MediaLayout'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import {
-    useGetPaginationChannelCategoryQuery,
     useDeleteChannelCategoryMutation,
-} from 'src/services/media/channelcategoryService'
+    useGetPaginationChannelCategoryQuery,
+} from 'src/services/media/ChannelCategoryService'
 import {
     setIsTableLoading,
     setItems,
@@ -126,7 +126,7 @@ const ChannelCategoryListingWrapper = () => {
     const handleDelete = () => {
         setShowDropdown(false)
         alert(currentId)
-        deleteChannelCategory(currentId).then((res) => {
+        deleteChannelCategory(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Sale Order deleted successfully!')

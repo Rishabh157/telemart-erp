@@ -12,17 +12,23 @@ type Props = {
     size?: 'small' | 'medium'
     name: string
     isSearchable?: boolean
+    selectLabel?: string
+    defaultValue?: string
+    isMulti?: boolean
 }
 
 const ATMSelectSearchable = ({
     options,
-    label,
+    label = '',
     required = false,
     value,
+    selectLabel = `Select`,
     onChange,
     size = 'small',
     isSearchable = true,
+    defaultValue = '',
     name,
+    isMulti = false,
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -31,14 +37,35 @@ const ATMSelectSearchable = ({
             borderColor: 'border-slate-400  ',
             borderWidth: 0,
             boxShadow: 'none',
-            // padding:1
         }),
     }
-
-    const selectOptions = options?.map((option) => ({
+    // const selectOptions2 = [
+    //     {
+    //         value: '',
+    //         label: `${selectLabel}`,
+    //     },
+    // ]
+    let selectOptions = options?.map((option) => ({
         value: option.value,
         label: option.label,
     }))
+    // selectOptions = [...selectOptions2, ...selectOptions]
+    const handleOnChange = (selectedOption: any) => {
+        if (isMulti) {
+            onChange(selectedOption?.values ? selectedOption?.values : [])
+        } else {
+            onChange(selectedOption?.value ? selectedOption?.value : '')
+        }
+    }
+    // const handleOnInputChange = (valueOp:string) => {
+    //     let inputValue = selectOptions?.find((option) => option.value === valueOp)
+    //     if (!inputValue) {
+    //         console.log("herer",valueOp)
+    //         onChange('')
+    //     } else {
+    //         onChange(valueOp)
+    //     }
+    // }
 
     return (
         <div className="relative mt-4">
@@ -52,12 +79,20 @@ const ATMSelectSearchable = ({
             <Select
                 className="mt-2 border rounded border-slate-400  "
                 name={name}
+                defaultValue={selectOptions?.find(
+                    (option) => option.value === defaultValue
+                )}
                 value={selectOptions?.find((option) => option.value === value)}
-                onChange={(selectedOption) => onChange(selectedOption?.value)}
+                onChange={(selectedOption) => handleOnChange(selectedOption)}
                 options={selectOptions}
                 isSearchable={isSearchable}
                 styles={selectStyles}
-                placeholder={`Select ${label}`}
+                isMulti={isMulti}
+                isClearable
+                isOptionDisabled={(options) => options.value === ''}
+                placeholder={`${selectLabel}`}
+
+                // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
             />
 
             {name && (

@@ -98,8 +98,8 @@ import ChannelManagementListingWrapper from './media/channelManagement/list/Chan
 import EditChannelManagement from './media/channelManagement/edit/EditChannelManagement'
 import SlotManagementListingWrapper from './media/slotManagement/list/SlotManagementListingWrapper'
 import AddSlotManagement from './media/slotManagement/add/AddSlotManagement'
-import AddTabManagement from './media/tabManagement/add/AddTabManagement'
-import TabManagementListingWrapper from './media/tabManagement/list/TabManagementListingWrapper'
+import AddTapeManagementWrapper from './media/tapeManagement/add/AddTapeManagementWrapper'
+import TapeManagementListingWrapper from './media/tapeManagement/list/TapeManagementListingWrapper'
 import AddCompetitorWrapper from './media/competitorManagement/add/AddCompetitorWrapper'
 import CompetitorManagementListingWrapper from './media/competitorManagement/list/CompetitorManagementListingWrapper'
 import EditCompetitorWraper from './media/competitorManagement/edit/EditCompetitorWrapper'
@@ -112,6 +112,7 @@ import EditChannelGroup from './media/channelGroup/edit/EditChannelGroup'
 import AddChannelManagementWrapper from './media/channelManagement/add/AddChannelManagementWrapper'
 import ChannelCategoryListingWrapper from './media/channelCategory/list/ChannelCategoryListingWrapper'
 import AddChannelCategoryWrapper from './media/channelCategory/add/AddChannelCategoryWrapper'
+import EditTapeManagementWrapper from './media/tapeManagement/edit/EditTapeManagementWrapper'
 import EditChannelCategoryWrapper from './media/channelCategory/edit/EditChannelCategoryWrapper'
 
 export {
@@ -216,8 +217,8 @@ export {
     EditChannelManagement,
     SlotManagementListingWrapper,
     AddSlotManagement,
-    TabManagementListingWrapper,
-    AddTabManagement,
+    TapeManagementListingWrapper,
+    AddTapeManagementWrapper,
     CompetitorManagementListingWrapper,
     AddCompetitorWrapper,
     EditCompetitorWraper,
@@ -229,5 +230,6 @@ export {
     AddChannelManagementWrapper,
     ChannelCategoryListingWrapper,
     AddChannelCategoryWrapper,
+    EditTapeManagementWrapper,
     EditChannelCategoryWrapper,
 }

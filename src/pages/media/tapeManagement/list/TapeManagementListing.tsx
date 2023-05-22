@@ -11,7 +11,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
-} from 'src/redux/slices/media/tabManagementSlice'
+} from 'src/redux/slices/media/tapeManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -19,13 +19,13 @@ type Props = {
     rows: any[]
 }
 
-const TabManagementListing = ({ columns, rows }: Props) => {
+const TapeManagementListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const tabManagementState: any = useSelector(
-        (state: RootState) => state.tabManagement
+    const tapeManagementState: any = useSelector(
+        (state: RootState) => state.tapeManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = tabManagementState
+    const { page, rowsPerPage, totalItems } = tapeManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -33,7 +33,7 @@ const TabManagementListing = ({ columns, rows }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'Tab',
+            label: 'Tape',
         },
     ]
 
@@ -44,13 +44,13 @@ const TabManagementListing = ({ columns, rows }: Props) => {
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Tab Management </ATMPageHeading>
+                <ATMPageHeading> Tape Management </ATMPageHeading>
                 <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Tab
+                    + Add Tape
                 </button>
             </div>
 
@@ -97,4 +97,4 @@ const TabManagementListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default TabManagementListing
+export default TapeManagementListing
