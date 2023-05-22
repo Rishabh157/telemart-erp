@@ -127,21 +127,21 @@ import {
     EditChannelManagement,
     SlotManagementListingWrapper,
     AddSlotManagement,
-    AddTabManagement,
-    TabManagementListingWrapper,
+    AddTapeManagementWrapper,
+    TapeManagementListingWrapper,
     ChannelGroupListingWrapper,
     AddChannelGroupWrapper,
     EditChannelGroupWrapper,
     AddChannelManagementWrapper,
     ChannelCategoryListingWrapper,
     AddChannelCategoryWrapper,
+    EditTapeManagementWrapper,
     EditChannelCategoryWrapper,
 } from './pages/index'
 import Auth from './pages/login/Auth'
 import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
 import DispositionTwoListingWrapper from './pages/configuration/Configuration Screens/dispositionTwo/list/DispositionTwoListingWrapper'
 import AddDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/add/AddDispositionTwoWrapper'
-import ChannelMasterListingWrapper from './pages/media/channelMaster/list/ChannelMasterListingWrapper'
 import EditDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/edit/EditDispositionTwoWrapper'
 import EditDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/edit/EditDispositionOneWrapper'
 
@@ -598,12 +598,16 @@ const PageRoutes = () => {
                         element={<EditChannelManagement />}
                     />
                     <Route
-                        path="media/tab"
-                        element={<TabManagementListingWrapper />}
+                        path="media/tape"
+                        element={<TapeManagementListingWrapper />}
                     />
                     <Route
-                        path="media/tab/add"
-                        element={<AddTabManagement />}
+                        path="media/tape/add"
+                        element={<AddTapeManagementWrapper />}
+                    />
+                    <Route
+                        path="media/tape/:id"
+                        element={<EditTapeManagementWrapper />}
                     />
                     <Route
                         path="media/slot"
@@ -636,10 +640,6 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel-category/add"
                         element={<AddCompetitorManagement />}
-                    />
-                    <Route
-                        path="media/channel-master"
-                        element={<ChannelMasterListingWrapper />}
                     />
                 </Routes>
             </BrowserRouter>

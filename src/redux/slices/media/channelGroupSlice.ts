@@ -1,4 +1,4 @@
-import { Slice, createSlice } from '@reduxjs/toolkit'
+import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {
     ChannelGroupListResponse,

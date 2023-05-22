@@ -1,43 +1,59 @@
 import React, { useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import TabManagementListing from './TabManagementListing'
+import TapeManagementListing from './TapeManagementListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";
 
 import MediaLayout from '../../MediaLayout'
-import { TabManagementListResponse } from 'src/models/tabManagement.model'
-import { useGetPaginationTabQuery } from 'src/services/media/TabManagementServices'
+import { useGetPaginationTapeQuery } from 'src/services/media/TapeManagementServices'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/media/tabManagementSlice'
+} from 'src/redux/slices/media/tapeManagementSlice'
+import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 
 const columns: columnTypes[] = [
     {
-        field: 'productName',
-        headerName: 'Product Group Name',
+        field: 'tapeName',
+        headerName: 'Tabe Name',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: TabManagementListResponse) => (
-            <span> {row.productGroupName} </span>
+        renderCell: (row: TapeManagementListResponse) => (
+            <span> {row.tapeName} </span>
         ),
     },
     {
-        field: 'quantity',
-        headerName: 'Quantity',
+        field: 'tapeType',
+        headerName: 'Tape Type',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: TabManagementListResponse) => (
-            <span> {row.count} </span>
+        renderCell: (row: TapeManagementListResponse) => (
+            <span> {row.tapeType} </span>
         ),
     },
     {
-        field: 'warehouse',
-        headerName: 'Warehouse',
+        field: 'schemeLabel',
+        headerName: 'Scheme Label',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: TabManagementListResponse) => (
-            <span> {row.wareHouse} </span>
+        renderCell: (row: TapeManagementListResponse) => (
+            <span> {row.schemeLabel} </span>
+        ),
+    },
+    {
+        field: 'languageLabel',
+        headerName: 'Language Label',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: TapeManagementListResponse) => (
+            <span> {row.languageLabel} </span>
+        ),
+    },
+    {
+        field: 'remarks',
+        headerName: 'Remarks',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: TapeManagementListResponse) => (
+            <span> {row.remarks} </span>
         ),
     },
     {
@@ -53,19 +69,19 @@ const columns: columnTypes[] = [
     },
 ]
 
-const TabManagementListingWrapper = () => {
-    const tabManagementState: any = useSelector(
-        (state: RootState) => state.tabManagement
+const TapeManagementListingWrapper = () => {
+    const tapeManagementState: any = useSelector(
+        (state: RootState) => state.tapeManagement
     )
 
-    const { page, rowsPerPage, searchValue, items } = tabManagementState
+    const { page, rowsPerPage, searchValue, items } = tapeManagementState
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetPaginationTabQuery({
+    const { data, isFetching, isLoading } = useGetPaginationTapeQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['productGroupName'],
+        params: ['tapeName'],
         page: page,
         filterBy: [
             {
@@ -95,11 +111,11 @@ const TabManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <TabManagementListing columns={columns} rows={items} />
+                    <TapeManagementListing columns={columns} rows={items} />
                 </div>
             </MediaLayout>
         </>
     )
 }
 
-export default TabManagementListingWrapper
+export default TapeManagementListingWrapper
