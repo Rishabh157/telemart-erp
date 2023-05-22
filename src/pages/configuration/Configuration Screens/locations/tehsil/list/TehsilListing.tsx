@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LocationListView from '../../sharedComponents/LocationListView'
 import AddTehsilWrapper from '../add/AddTehsilWrapper'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setSearchValue,
     setSelectedLocationTehsil,
@@ -18,7 +18,7 @@ type Props = {
 }
 
 const TehsilListing = ({ tehsils }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const { searchValue }: any = useSelector(
         (state: RootState) => state.tehsils

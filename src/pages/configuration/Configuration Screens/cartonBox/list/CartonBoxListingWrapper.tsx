@@ -11,7 +11,7 @@ import {
     useGetCartonBoxQuery,
 } from 'src/services/CartonBoxService'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
@@ -29,7 +29,7 @@ import { showToast } from 'src/utils'
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 
 const CartonBoxListingWrapper = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deleteCartonBox] = useDeleteCartonBoxMutation()
     const [showDropdown, setShowDropdown] = useState(false)

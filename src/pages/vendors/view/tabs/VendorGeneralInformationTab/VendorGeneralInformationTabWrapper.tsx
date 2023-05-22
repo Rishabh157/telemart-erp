@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom'
 import { useGetVendorByIdQuery } from 'src/services/VendorServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedItem } from 'src/redux/slices/vendorSlice'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { CircularProgress } from '@mui/material'
 
 type Props = {}
@@ -21,7 +21,7 @@ export type AccordianType = {
 
 const VendorGeneralInformationTabWrapper = (props: Props) => {
     const params = useParams()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const Id = params.vendorId
     const { data, isLoading, isFetching } = useGetVendorByIdQuery(Id)
     const { selectedItem }: any = useSelector(

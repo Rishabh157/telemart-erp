@@ -5,7 +5,7 @@ import StepEditSchemeDetailsWrapper from './FormSteps/StepEditSchemeDetail/StepE
 import StepEditFAQ from './FormSteps/StepEditFAQ/StepEditFAQ'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllItems } from 'src/redux/slices/productGroupSlice'
 import { setAllItems as setAllSubCategory } from 'src/redux/slices/productSubCategorySlice'
 
@@ -82,8 +82,8 @@ const steps = [
                 .min(0, 'Delivery charges must be positive')
                 .required('delivery charges is required'),
             comboPacking: boolean().required(),
-            startDate: string().required('Please select start date').nullable(),
-            endDate: string().required('Please select end date').nullable(),
+            startDate: string().required('Please select start date'),
+            endDate: string().required('Please select end date'),
             schemeDescription: string().required(
                 'scheme description is required'
             ),
@@ -152,7 +152,7 @@ const EditSchemeWrapper = () => {
     const Id = params.id
 
     const [activeStep, setActiveStep] = React.useState(0)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     //const [AddSchemes] = useAddSchemeMutation();
     const [apiStatus, setApiStatus] = useState(false)

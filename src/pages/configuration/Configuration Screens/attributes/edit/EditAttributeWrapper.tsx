@@ -11,7 +11,7 @@ import {
 } from 'src/services/AttributeService'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedAttribute } from 'src/redux/slices/attributesSlice'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 
 type Props = {}
 
@@ -22,7 +22,7 @@ export type FormInitialValues = {
 const EditAttributeWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const Id = params.id
     const { selectedAttribute }: any = useSelector(

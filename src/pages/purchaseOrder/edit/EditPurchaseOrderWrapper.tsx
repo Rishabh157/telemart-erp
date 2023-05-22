@@ -3,7 +3,7 @@ import { Formik } from 'formik'
 import { array, date, number, object, string } from 'yup'
 import EditPurchaseOrder from './EditPurchaseOrder'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     useGetByPoCodeQuery,
@@ -48,7 +48,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     const Id = params.id
 
     const navigate = useNavigate()
-    const disptach = useDispatch()
+    const disptach = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [UpdatePurchaseOrder] = useUpdatePurchaseOrderMutation()

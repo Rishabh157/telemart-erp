@@ -112,6 +112,7 @@ import AddChannelManagementWrapper from './media/channelManagement/add/AddChanne
 import ChannelCategoryListingWrapper from './media/channelCategory/list/ChannelCategoryListingWrapper'
 import AddChannelCategoryWrapper from './media/channelCategory/add/AddChannelCategoryWrapper'
 import EditTapeManagementWrapper from './media/tapeManagement/edit/EditTapeManagementWrapper'
+import EditChannelCategoryWrapper from './media/channelCategory/edit/EditChannelCategoryWrapper'
 
 export {
     AddASRWrapper,
@@ -228,4 +229,5 @@ export {
     ChannelCategoryListingWrapper,
     AddChannelCategoryWrapper,
     EditTapeManagementWrapper,
+    EditChannelCategoryWrapper,
 }

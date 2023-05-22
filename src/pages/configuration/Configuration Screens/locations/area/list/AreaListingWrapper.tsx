@@ -3,10 +3,10 @@ import AreaListing from './AreaListing'
 import { useGetAreaQuery } from 'src/services/AreaService'
 import { useDispatch, useSelector } from 'react-redux'
 import { setItems } from 'src/redux/slices/areaSlice'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 
 const AreaListingWrapper = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.areas)
 
     const { searchValue, filterValue }: any = useSelector(

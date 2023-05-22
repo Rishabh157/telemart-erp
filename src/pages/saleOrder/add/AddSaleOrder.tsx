@@ -68,7 +68,7 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* SO Number */}
                             <ATMTextField
@@ -159,8 +159,10 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                                                     min={0}
                                                                     name={`productSalesOrder[${index}].rate`}
                                                                     value={
-                                                                        rate?.toString() ||
-                                                                        ''
+                                                                        rate ===
+                                                                        0
+                                                                            ? ''
+                                                                            : rate?.toString()
                                                                     }
                                                                     label="Rate"
                                                                     placeholder="Rate"
@@ -184,8 +186,10 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                                                     min={0}
                                                                     name={`productSalesOrder[${index}].quantity`}
                                                                     value={
-                                                                        quantity?.toString() ||
-                                                                        ''
+                                                                        quantity ===
+                                                                        0
+                                                                            ? ''
+                                                                            : quantity?.toString()
                                                                     }
                                                                     label="Quantity"
                                                                     placeholder="Quantity"
@@ -228,7 +232,7 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                         </div>
 
                                         {/* BUTTON - Add More Product */}
-                                        <div className="flex justify-self-start py-5">
+                                        <div className="flex justify-self-start py-9">
                                             <button
                                                 type="button"
                                                 onClick={() =>

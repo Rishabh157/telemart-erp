@@ -133,7 +133,7 @@ const EditPurchaseOrder = ({
                                 {({ push, remove }) => {
                                     return (
                                         <>
-                                            <div className="flex flex-col gap-y-5">
+                                            <div className="flex flex-col gap-y-7">
                                                 {values?.purchaseOrder?.map(
                                                     (
                                                         item: any,
@@ -270,7 +270,7 @@ const EditPurchaseOrder = ({
                                             </div>
 
                                             {/* BUTTON - Add More Product */}
-                                            <div className="flex justify-self-start py-5">
+                                            <div className="flex justify-self-start py-8">
                                                 <button
                                                     type="button"
                                                     onClick={() =>

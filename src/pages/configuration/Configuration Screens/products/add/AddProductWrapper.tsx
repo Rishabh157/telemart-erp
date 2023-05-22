@@ -11,7 +11,7 @@ import StepAddVideoWrapper from './FormSteps/StepAddVideo/StepAddVideoWrapper'
 import { EditorState, convertToRaw } from 'draft-js'
 import StepAddCallScriptWrapper from './FormSteps/StepAddCallScript/StepAddCallScriptWrapper'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllItems } from 'src/redux/slices/itemSlice'
 import { setAllItems as setAllLanguage } from 'src/redux/slices/languageSlice'
 
@@ -156,7 +156,7 @@ const pageHeading = 'Add New Product'
 
 const AddProductWrapper = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [addProduct] = useAddProductMutation()
     // const [taxStatus, setTaxStatus] = useState(false);
     const [apiStatus, setApiStatus] = useState(false)

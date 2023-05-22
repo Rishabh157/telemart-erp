@@ -50,6 +50,12 @@ const formFields: FieldType[] = [
         label: 'Email',
         placeholder: 'Email',
     },
+    {
+        name: 'password',
+        label: 'Password',
+        placeholder: 'Password',
+        type: 'password',
+    },
 ]
 
 const StepAddCompanyDetailsWrapper = ({

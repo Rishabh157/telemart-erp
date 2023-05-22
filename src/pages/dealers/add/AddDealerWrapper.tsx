@@ -11,9 +11,10 @@ import { useAddDealerMutation } from 'src/services/DealerServices'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
 import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -23,6 +24,7 @@ export type FormInitialValues = {
     lastName: string
     dealerCategory: string
     email: string
+    password: string
     registrationAddress: {
         phone: string
         address: string
@@ -59,20 +61,27 @@ export type FormInitialValues = {
     }[]
 }
 
+// export const adharNoRegexp = RegExp(
+//     /[0-9]{4}[\-][0-9]{4}[\-][0-9]{4}[\-][0-9]{4}/
+// )
+// .matches(adharNoRegexp, "Adhar Number must be (0000-0000-0000-0000)")
+// .length(17, 'adhar card must be 16 digit')
+
 // Form Steps
 const steps = [
     {
         label: 'Dealer Details',
         component: StepAddDealerDetailsWrapper,
         validationSchema: object({
-            dealerCode: string().required('dealer code is required'),
-            firmName: string().required('firm name is required'),
-            firstName: string().required('first name is required'),
-            lastName: string().required('LastName is required'),
-            dealerCategory: string().required('please choose dealer category'),
+            dealerCode: string().required('Dealer Code is required'),
+            firmName: string().required('Firm Name is required'),
+            firstName: string().required('First Name is required'),
+            lastName: string().required('Last Name is required'),
+            dealerCategory: string().required('Please choose Dealer Category'),
             email: string()
-                .email('email is inavlid')
-                .required('email is required'),
+                .email('Email is inavlid')
+                .required('Email is required'),
+            password: string().required('password is required'),
         }),
     },
     {
@@ -81,7 +90,7 @@ const steps = [
         validationSchema: object({
             registrationAddress: object().shape({
                 phone: string()
-                    .min(10, 'Number should be !0 digits')
+                    .min(10, 'Number should be 10 digits')
                     .max(10, 'maximum 10 digit')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -135,15 +144,20 @@ const steps = [
             document: object().shape({
                 gstNumber: string().required('GST number is required'),
                 gstCertificate: mixed().required('GST certificate is required'),
-                adharCardNumber: mixed().required(
-                    'Declaration form is required'
-                ),
+                adharCardNumber: string()
+                    .min(14, 'Number should be 12 digits')
+                    .max(14, 'maximum 12 digit')
+                    .required('Adhar Number is required'),
                 adharCard: mixed().required('Declaration form is required'),
             }),
             otherDocument: array().of(
                 object().shape({
-                    documentName: string().required('documentName is required'),
-                    documentFile: string().required('documentFile is required'),
+                    documentName: string().required(
+                        'Document Name is required'
+                    ),
+                    documentFile: string().required(
+                        'Document File is required'
+                    ),
                 })
             ),
         }),
@@ -179,6 +193,7 @@ const AddDealerWrapper = () => {
         lastName: '',
         dealerCategory: '',
         email: '',
+        password: '',
         registrationAddress: {
             phone: '',
             address: '',
@@ -225,7 +240,7 @@ const AddDealerWrapper = () => {
             ?.validationSchema
     }
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const { data, isLoading, isFetching } = useGetAllDealerCategoryQuery('')
 
     const { alldealerCategory }: any = useSelector(
@@ -255,6 +270,7 @@ const AddDealerWrapper = () => {
                     lastName: values.lastName,
                     dealerCategory: values.dealerCategory,
                     email: values.email,
+                    password: values.password,
                     registrationAddress: {
                         phone: values.registrationAddress.phone,
                         address: values.registrationAddress.address,
@@ -294,6 +310,7 @@ const AddDealerWrapper = () => {
                 })
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }

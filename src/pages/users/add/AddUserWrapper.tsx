@@ -20,6 +20,8 @@ export type FormInitialValues = {
     companyId: string
 }
 
+export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
+
 const AddUserWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
@@ -40,8 +42,13 @@ const AddUserWrapper = (props: Props) => {
     const validationSchema = object({
         firstName: string().required('First Name is required'),
         lastName: string().required('Last Name is required'),
-        mobile: string().required('Mobile No is required'),
-        email: string().required('Email is required'),
+        mobile: string()
+            .required('Mobile No is required')
+            .max(10, 'Mobile number must be 10 digits')
+            .min(10, 'Mobile number must be 10 digits')
+            .trim()
+            .matches(regIndiaPhone, 'Invalid Mobile Number'),
+        email: string().email('Invalid Email ID').required('Email is required'),
         password: string().required('Password is required'),
     })
 

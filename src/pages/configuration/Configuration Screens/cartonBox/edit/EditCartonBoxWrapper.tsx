@@ -4,7 +4,7 @@ import { number, object, string } from 'yup'
 import EditCartonBox from './EditCartonBox'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
@@ -28,7 +28,7 @@ export type FormInitialValues = {
 
 const EditCartonBoxWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const Id = params.id
     const [EditSelectedCartonBox] = useUpdateCartonBoxMutation()

@@ -3,7 +3,7 @@ import { Formik } from 'formik'
 import { array, date, number, object, string } from 'yup'
 import AddPurchaseOrder from './AddPurchaseOrder'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAddPurchaseOrderMutation } from 'src/services/PurchaseOrderService'
 import { showToast } from 'src/utils'
@@ -39,7 +39,7 @@ export type FormInitialValues = {
 
 const AddPurchaseOrderWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const disptach = useDispatch()
+    const disptach = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [addPurchaseOrder] = useAddPurchaseOrderMutation()
@@ -128,10 +128,10 @@ const AddPurchaseOrderWrapper = (props: Props) => {
             object().shape({
                 itemId: string().required('Please select a Item'),
                 rate: number()
-                    .min(0, 'Rate must be greater than 0')
+                    .min(1, 'Rate must be greater than 0')
                     .required('Please enter rate'),
                 quantity: number()
-                    .min(0, 'Quantity must be greater than 0')
+                    .min(1, 'Quantity must be greater than 0')
                     .required('Please enter quantity'),
                 estReceivingDate: date().required('Please select date'),
             })

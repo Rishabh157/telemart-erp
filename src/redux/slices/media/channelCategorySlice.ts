@@ -4,6 +4,7 @@ import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 
 export interface ChannelCategorySliceStateType {
     items: ChannelCategoryListResponse[] | []
+    selectedItem: ChannelCategoryListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -17,6 +18,7 @@ export interface ChannelCategorySliceStateType {
 const initialState: ChannelCategorySliceStateType = {
     items: [],
     totalItems: 0,
+    selectedItem: null,
     isTableLoading: false,
     page: 1,
     rowsPerPage: 10,
@@ -62,6 +64,12 @@ const channelCategorySlice: any = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
+        setSelectedItem: (
+            state,
+            action: PayloadAction<ChannelCategoryListResponse | null>
+        ) => {
+            state.selectedItem = action.payload
+        },
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
@@ -83,6 +91,7 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
+    setSelectedItem,
     setChannelCategorys,
 } = channelCategorySlice.actions
 export default channelCategorySlice.reducer

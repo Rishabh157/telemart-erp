@@ -7,7 +7,7 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     useGetItemsByIdQuery,
     useUpdateItemsMutation,
@@ -23,7 +23,7 @@ export type FormInitialValues = {
 }
 
 const EditItemWrapper = (props: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const params = useParams()
     const Id = params.id

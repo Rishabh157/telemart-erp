@@ -7,7 +7,7 @@ import { useAddAttributeGroupMutation } from 'src/services/AttributeGroup'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllAttributesQuery } from 'src/services/AttributeService'
 import { setAllItems } from 'src/redux/slices/attributesSlice'
 
@@ -21,7 +21,7 @@ export type FormInitialValues = {
 const AddAttributeGroupWrapper = (props: Props) => {
     const navigate = useNavigate()
     // Form Initial Values
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { allItems } = useSelector((state: RootState) => state?.attributes)
     const { data, isLoading, isFetching } = useGetAllAttributesQuery('')

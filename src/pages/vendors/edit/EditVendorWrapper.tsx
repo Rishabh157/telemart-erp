@@ -12,12 +12,13 @@ import StepEditDocumentsWrapper from './FormSteps/StepEditDocuments/StepEditDocu
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/vendorSlice'
 import {
     useGetVendorByIdQuery,
     useUpdateVendorMutation,
 } from 'src/services/VendorServices'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -76,7 +77,7 @@ const steps = [
             company_type: string().required('Please select company type'),
             ownership_type: string().required('Please select ownership type'),
             website_address: string()
-                .url()
+                .url('Web Address must be valid URL')
                 .required('Website address is required'),
             vendor_code: string().required('Vendor code is required'),
         }),
@@ -136,10 +137,10 @@ const steps = [
         validationSchema: object({
             gst_no: string().required('GST number is required'),
             gst_certificate: string()
-                .url()
+                .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),
             declaration_form: string()
-                .url()
+                .url('Form must be valid URL')
                 .required('Declaration form is required'),
         }),
     },
@@ -164,7 +165,7 @@ const steps = [
                         'Please select account type'
                     ),
                     cancelledCheque: string()
-                        .url()
+                        .url('Cancle Check must be valid URL')
                         .required('Cancelled cheque is required'),
                 })
             ),
@@ -174,7 +175,7 @@ const steps = [
 
 const EditVendorWrapper = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const Id = params.id
     const [apiStatus, setApiStatus] = useState(false)
@@ -291,6 +292,7 @@ const EditVendorWrapper = () => {
                 setApiStatus(false)
             })
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }

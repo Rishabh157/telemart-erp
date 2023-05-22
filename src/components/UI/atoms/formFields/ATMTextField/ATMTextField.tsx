@@ -50,12 +50,10 @@ const ATMTextField = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                        <>
-                            <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                                {' '}
-                                {errMsg}{' '}
-                            </p>
-                        </>
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500 py-1 mb-1">
+                            {' '}
+                            {errMsg}{' '}
+                        </p>
                     )}
                 </ErrorMessage>
             )}

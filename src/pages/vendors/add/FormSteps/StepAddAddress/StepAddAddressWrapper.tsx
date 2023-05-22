@@ -7,7 +7,7 @@ import { Field } from 'src/models/FormField/FormField.model'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllStateByCountryQuery } from 'src/services/StateService'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
@@ -33,7 +33,7 @@ const formFields: {
     >[]
 }[] = [
     {
-        sectionName: 'Registration  Address',
+        sectionName: 'Regd  Address',
         fields: [
             {
                 name: 'regd_address.phone',
@@ -77,7 +77,7 @@ const formFields: {
     },
 
     {
-        sectionName: 'Billing Address',
+        sectionName: 'billing_address',
         fields: [
             {
                 name: 'billing_address.phone',
@@ -122,7 +122,7 @@ const formFields: {
 ]
 
 const StepAddAddressWrapper = ({ formikProps }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [billingStateData, setBillingStateData] = useState<any>()
     const [billingDistrictData, setBillingDistrictData] = useState<any>()
     const [billingPincodeData, setBillingPincodeData] = useState<any>()

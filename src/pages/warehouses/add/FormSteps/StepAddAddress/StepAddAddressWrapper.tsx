@@ -6,7 +6,7 @@ import StepAddAddress from './StepAddAddress'
 import { Field } from 'src/models/FormField/FormField.model'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllStateByCountryQuery } from 'src/services/StateService'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
@@ -124,7 +124,7 @@ const formFields: {
 ]
 
 const StepAddAddressWrapper = ({ formikProps, allCountry }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [billingStateData, setBillingStateData] = useState<any>()
     const [billingDistrictData, setBillingDistrictData] = useState<any>()
     const [billingPincodeData, setBillingPincodeData] = useState<any>()

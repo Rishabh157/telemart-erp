@@ -5,7 +5,7 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedProductGroup } from 'src/redux/slices/productGroupSlice'
 import {
     useGetProductGroupByIdQuery,
@@ -26,7 +26,7 @@ export type FormInitialValues = {
 const EditProductGroupWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const Id = params.id
     const { selectedProductGroup }: any = useSelector(
