@@ -102,6 +102,7 @@ import AddTabManagement from './media/tabManagement/add/AddTabManagement'
 import TabManagementListingWrapper from './media/tabManagement/list/TabManagementListingWrapper'
 import AddCompetitorWrapper from './media/competitorManagement/add/AddCompetitorWrapper'
 import CompetitorManagementListingWrapper from './media/competitorManagement/list/CompetitorManagementListingWrapper'
+import EditCompetitorWraper from './media/competitorManagement/edit/EditCompetitorWrapper'
 import AddDidManagementWrapper from './media/didManagement/add/AddDidManagementWrapper'
 import DispositionOneListingWrapper from './configuration/Configuration Screens/dispositionOne/list/DispositionOneListingWrapper'
 import ChannelGroupListingWrapper from './media/channelGroup/list/ChannelGroupListingWrapper'
@@ -218,6 +219,7 @@ export {
     AddTabManagement,
     CompetitorManagementListingWrapper,
     AddCompetitorWrapper,
+    EditCompetitorWraper,
     DispositionOneListingWrapper,
     ChannelGroupListingWrapper,
     AddChannelGroupWrapper,

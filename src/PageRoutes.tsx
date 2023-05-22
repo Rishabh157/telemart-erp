@@ -7,6 +7,7 @@ import {
     ASRListingWrapper,
     BarcodeGenerator,
     CompetitorManagementListingWrapper,
+    EditCompetitorWraper,
     EditDidManagementWrapper,
     EditPurchaseOrderWrapper,
 } from './pages/index'
@@ -597,6 +598,10 @@ const PageRoutes = () => {
                     <Route
                         path="media/competitor/add"
                         element={<AddCompetitorWrapper />}
+                    />
+                    <Route
+                        path="media/competitor/:id"
+                        element={<EditCompetitorWraper />}
                     />
                     <Route
                         path="media/channel-category"
