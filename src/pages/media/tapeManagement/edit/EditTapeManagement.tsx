@@ -16,6 +16,7 @@ type Props = {
         schemeDataOption: SelectOption[]
         languageOptions: SelectOption[]
         artistOption: SelectOption[]
+        tapeTypeOption: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -24,7 +25,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/media/tape',
     },
     {
-        label: 'Add Tape',
+        label: 'Update Tape',
     },
 ]
 
@@ -54,7 +55,7 @@ const EditTapeManagement = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Tape </ATMPageHeading>
+                    <ATMPageHeading> Update Tape </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -72,7 +73,7 @@ const EditTapeManagement = ({
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Submit
+                                Update
                             </button>
                         </div>
                     </div>
@@ -90,8 +91,17 @@ const EditTapeManagement = ({
                                     setFieldValue('tapeName', e.target.value)
                                 }
                             />
+                            <ATMSelectSearchable
+                                options={dropdownOptions.tapeTypeOption}
+                                name="tapeType"
+                                required
+                                value={values.tapeType}
+                                selectLabel="Select Tape type"
+                                label="Tape Type"
+                                onChange={(e) => setFieldValue('tapeType', e)}
+                            />
 
-                            <ATMTextField
+                            {/* <ATMTextField
                                 name="tapeType"
                                 required
                                 value={values.tapeType}
@@ -100,7 +110,7 @@ const EditTapeManagement = ({
                                 onChange={(e) =>
                                     setFieldValue('tapeType', e.target.value)
                                 }
-                            />
+                            /> */}
                             <ATMSelectSearchable
                                 name="scheme"
                                 value={values.scheme}
