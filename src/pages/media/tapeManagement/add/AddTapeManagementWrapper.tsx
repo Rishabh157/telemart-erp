@@ -43,7 +43,6 @@ const AddTapeManagementWrapper = () => {
 
     const ArtistState: any = useSelector((state: RootState) => state.artist)
     const { allItems: allArtist } = ArtistState
-    
 
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -53,7 +52,11 @@ const AddTapeManagementWrapper = () => {
     const { language } = useSelector((state: RootState) => state?.language)
 
     const [AddTapeApi] = useAddTapeMutation()
-    const {data: artistData, isLoading: artistIsLoading, isFetching: artistIsFetching } = useGetAllArtistQuery(' ')
+    const {
+        data: artistData,
+        isLoading: artistIsLoading,
+        isFetching: artistIsFetching,
+    } = useGetAllArtistQuery(' ')
 
     const {
         isLoading: isSchemeLoading,
@@ -82,7 +85,7 @@ const AddTapeManagementWrapper = () => {
             dispatch(setChannelGroups(TapeGroupsData.data || []))
         }
     }, [isLoading, isFetching, TapeGroupsData, dispatch])
-    
+
     useEffect(() => {
         if (!isLanguageLoading && !isLanguageFetching) {
             dispatch(setLanguage(languageDataApi.data || []))
@@ -180,7 +183,7 @@ const AddTapeManagementWrapper = () => {
                 value: languageItem?._id,
             }
         }),
-               
+
         tapeTypeOption: [
             { label: 'Scheme Code', value: 'SCHEME_CODE' },
             { label: 'Promotional', value: 'PROMOTIONAL' },
