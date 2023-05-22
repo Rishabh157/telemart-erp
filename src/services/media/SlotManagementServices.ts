@@ -8,7 +8,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
         getPaginationSlot: builder.query({
             providesTags: ['slot'],
             query: (body: PaginationType) => ({
-                url: '/slot',
+                url: '/slot-master',
                 method: 'POST',
                 body,
             }),
@@ -18,7 +18,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
         addSlot: builder.mutation({
             invalidatesTags: ['slot'],
             query: (body: AddSlotManagement) => ({
-                url: '/slot/add',
+                url: '/slot-master/add',
                 method: 'POST',
                 body,
             }),
@@ -28,7 +28,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
         updateSlot: builder.mutation({
             invalidatesTags: ['slot'],
             query: ({ body, id }: UpdateSlotManagement) => ({
-                url: `/slot/${id}`,
+                url: `/slot-master/${id}`,
                 method: 'PUT',
                 body,
             }),
