@@ -1,4 +1,4 @@
-export type DispositionOneListResponse = {
+export type DispositionTwoListResponse = {
     dispositionName: string
     dispostionOneLabel: string
     companyId: string
@@ -10,14 +10,16 @@ export type DispositionOneListResponse = {
     __v: number
 }
 
-export type AddDisPositionOne = {
+export type AddDisPositionTwo = {
     dispositionName: string
+    dispositionOneId: string
     companyId: string
 }
 
-export type UpdateDispositionOne = {
+export type UpdateDispositionTwo = {
     body: {
         dispositionName: string
+        dispositionOneId: string
         companyId: string
     }
     id: string
