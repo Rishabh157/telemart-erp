@@ -37,7 +37,6 @@ export const tapeManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
-
         // **** GET BY ID
         getTapeById: builder.query({
             providesTags: ['tape'],
@@ -57,8 +56,6 @@ export const tapeManagementApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
-
-
     }),
 })
 

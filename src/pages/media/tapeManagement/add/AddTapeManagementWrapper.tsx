@@ -16,6 +16,8 @@ import { SchemeListResponse } from 'src/models/scheme.model'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 import { setLanguage } from 'src/redux/slices/languageSlice'
 import { LanguageListResponse } from 'src/models'
+import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
+import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
 
 export type FormInitialValues = {
     tapeName: string
@@ -39,6 +41,10 @@ const AddTapeManagementWrapper = () => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [schemeData, setSchemeData] = useState([])
 
+    const ArtistState: any = useSelector((state: RootState) => state.artist)
+    const { allItems: allArtist } = ArtistState
+    
+
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { channelgroup } = useSelector(
@@ -47,6 +53,7 @@ const AddTapeManagementWrapper = () => {
     const { language } = useSelector((state: RootState) => state?.language)
 
     const [AddTapeApi] = useAddTapeMutation()
+    const {data: artistData, isLoading: artistIsLoading, isFetching: artistIsFetching } = useGetAllArtistQuery(' ')
 
     const {
         isLoading: isSchemeLoading,
@@ -63,11 +70,19 @@ const AddTapeManagementWrapper = () => {
         isFetching,
         data: TapeGroupsData,
     } = useGetAllChannelGroupQuery('')
+
+    useEffect(() => {
+        if (!artistIsLoading && !artistIsFetching) {
+            dispatch(setAllArtist(artistData?.data || []))
+        }
+    }, [artistData, artistIsLoading, artistIsFetching, dispatch])
+
     useEffect(() => {
         if (!isLoading && !isFetching) {
             dispatch(setChannelGroups(TapeGroupsData.data || []))
         }
     }, [isLoading, isFetching, TapeGroupsData, dispatch])
+    
     useEffect(() => {
         if (!isLanguageLoading && !isLanguageFetching) {
             dispatch(setLanguage(languageDataApi.data || []))
@@ -85,7 +100,7 @@ const AddTapeManagementWrapper = () => {
         scheme: '',
         language: '',
         duration: '',
-        artist: '6467554295e833e56316ccc8',
+        artist: '',
         remarks: '',
         hour: '0',
         minute: '00',
@@ -120,7 +135,7 @@ const AddTapeManagementWrapper = () => {
                 scheme: values.scheme,
                 language: values.language,
                 duration: duration,
-                artist: '6467554295e833e56316ccc8',
+                artist: values.artist,
                 remarks: values.remarks,
                 youtubeLink: values.youtubeLink,
                 companyId: values.companyId || '',
@@ -140,6 +155,12 @@ const AddTapeManagementWrapper = () => {
         }, 1000)
     }
     const dropdownOptions = {
+        artistOption: allArtist.map((item: any) => {
+            return {
+                label: item.artistName,
+                value: item._id,
+            }
+        }),
         channelGroupOptions:
             channelgroup?.map((channelGroup: GetAllChannelGroupResponse) => {
                 return {
@@ -159,7 +180,7 @@ const AddTapeManagementWrapper = () => {
                 value: languageItem?._id,
             }
         }),
-        artistOption: [],
+               
         tapeTypeOption: [
             { label: 'Scheme Code', value: 'SCHEME_CODE' },
             { label: 'Promotional', value: 'PROMOTIONAL' },

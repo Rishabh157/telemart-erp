@@ -16,6 +16,7 @@ type Props = {
         schemeDataOption: SelectOption[]
         languageOptions: SelectOption[]
         artistOption: SelectOption[]
+        tapeTypeOption: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -33,8 +34,7 @@ const EditTapeManagement = ({
     apiStatus,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue } = formikProps   
-   
+    const { values, setFieldValue } = formikProps
 
     const MinuteOptions = () => {
         let options: SelectOption[] = []
@@ -91,8 +91,17 @@ const EditTapeManagement = ({
                                     setFieldValue('tapeName', e.target.value)
                                 }
                             />
+                            <ATMSelectSearchable
+                                options={dropdownOptions.tapeTypeOption}
+                                name="tapeType"
+                                required
+                                value={values.tapeType}
+                                selectLabel="Select Tape type"
+                                label="Tape Type"
+                                onChange={(e) => setFieldValue('tapeType', e)}
+                            />
 
-                            <ATMTextField
+                            {/* <ATMTextField
                                 name="tapeType"
                                 required
                                 value={values.tapeType}
@@ -101,7 +110,7 @@ const EditTapeManagement = ({
                                 onChange={(e) =>
                                     setFieldValue('tapeType', e.target.value)
                                 }
-                            />
+                            /> */}
                             <ATMSelectSearchable
                                 name="scheme"
                                 value={values.scheme}
@@ -158,7 +167,10 @@ const EditTapeManagement = ({
                                         min={0}
                                         placeholder="HH"
                                         onChange={(e) =>
-                                            setFieldValue('hour',e.target.value)
+                                            setFieldValue(
+                                                'hour',
+                                                e.target.value
+                                            )
                                         }
                                     />
                                 </div>
@@ -187,7 +199,7 @@ const EditTapeManagement = ({
                                         value={values.second}
                                         selectLabel="SS"
                                         onChange={(selectValue) =>
-                                            setFieldValue('second', selectValue)    
+                                            setFieldValue('second', selectValue)
                                         }
                                     />
                                 </div>
