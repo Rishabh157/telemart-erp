@@ -7,7 +7,7 @@ import apiSlice from '../ApiSlice'
 
 export const channelCategoryApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        //***** GET PAGINATION DATA *****/
+        //***** GET PAGINATION DATA ******/
 
         getPaginationChannelCategory: builder.query({
             providesTags: ['channel-category'],
