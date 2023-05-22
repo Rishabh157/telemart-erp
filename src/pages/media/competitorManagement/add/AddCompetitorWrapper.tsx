@@ -1,49 +1,49 @@
 import React, { useState } from 'react'
-import MediaLayout from '../../MediaLayout'
+import { Formik } from 'formik'
+import { object, string } from 'yup'
+import AddCompetitor from './Addcompetitor'
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+// import { useAddCompetitorsMutation } from 'src/services/AttributeService'
+import { showToast } from 'src/utils'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
-import { object, string } from 'yup'
-import { showToast } from 'src/utils'
-import { Formik, FormikProps } from 'formik'
-import AddChannelGroup from './AddChannelCategory'
-import { useAddChannelCategoryMutation } from 'src/services/media/ChannelCategoriesServices'
+import { useAddcompetitorMutation } from 'src/services/media/CompetitorManagementServices'
+
+type Props = {}
 
 export type FormInitialValues = {
-    channelCategory: string
-    companyId: string
+    competitorName: string
 }
 
-const AddChannelCategoryWrapper = () => {
+const AddCompetitorWrapper = (props: Props) => {
+    // Form Initial Values
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [AddChannelcategory] = useAddChannelCategoryMutation()
+    const [addCompetitor] = useAddcompetitorMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const initialValues: FormInitialValues = {
-        channelCategory: '',
-        companyId: userData?.companyId || '',
+        competitorName: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        channelCategory: string().required('Group Name is required'),
+        competitorName: string().required('compititor Name is required'),
     })
 
+    //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            AddChannelcategory({
-                channelCategory: values.channelCategory,
-                companyId: values.companyId || '',
-            }).then((res: any) => {
+            addCompetitor({
+                competitorName: values.competitorName,
+                companyId: userData?.companyId || '',
+            }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Channel Category name added successfully!'
-                        )
-                        navigate('/media/channel-category')
+                        showToast('success', 'Compititor added successfully!')
+                        navigate('/media/competitor')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -55,23 +55,23 @@ const AddChannelCategoryWrapper = () => {
         }, 1000)
     }
     return (
-        <MediaLayout>
+        <ConfigurationLayout>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
-                {(formikProps: FormikProps<FormInitialValues>) => {
+                {(formikProps) => {
                     return (
-                        <AddChannelGroup
+                        <AddCompetitor
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                         />
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </ConfigurationLayout>
     )
 }
 
-export default AddChannelCategoryWrapper
+export default AddCompetitorWrapper

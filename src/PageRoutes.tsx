@@ -2,11 +2,12 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
     AddASRWrapper,
-    AddCompetitorManagement,
+    AddCompetitorWrapper,
     AddDidManagementWrapper,
     ASRListingWrapper,
     BarcodeGenerator,
     CompetitorManagementListingWrapper,
+    EditCompetitorWraper,
     EditDidManagementWrapper,
     EditPurchaseOrderWrapper,
 } from './pages/index'
@@ -623,7 +624,11 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="media/competitor/add"
-                        element={<AddCompetitorManagement />}
+                        element={<AddCompetitorWrapper />}
+                    />
+                    <Route
+                        path="media/competitor/:id"
+                        element={<EditCompetitorWraper />}
                     />
                     <Route
                         path="media/channel-category"
@@ -639,7 +644,7 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="media/channel-category/add"
-                        element={<AddCompetitorManagement />}
+                        element={<AddCompetitorWrapper />}
                     />
                 </Routes>
             </BrowserRouter>
