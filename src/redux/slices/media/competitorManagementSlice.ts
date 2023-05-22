@@ -4,6 +4,7 @@ import { CompetitorManagementListResponse } from 'src/models/CompetitorManagemen
 
 export interface CompetitorManagementSliceStateType {
     items: CompetitorManagementListResponse[] | []
+    selectedItem: CompetitorManagementListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -15,6 +16,7 @@ export interface CompetitorManagementSliceStateType {
 
 const initialState: CompetitorManagementSliceStateType = {
     items: [],
+    selectedItem: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -63,6 +65,12 @@ const competitorManagementSlice: any = createSlice({
         setSelectecompetitor: (state, action: PayloadAction<string>) => {
             state.selectecompetitor = action.payload
         },
+        setSelectedCompetitor: (
+            state,
+            action: PayloadAction<CompetitorManagementListResponse | null>
+        ) => {
+            state.selectedItem = action.payload
+        },
     },
 })
 
@@ -75,5 +83,6 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectecompetitor,
+    setSelectedCompetitor,
 } = competitorManagementSlice.actions
 export default competitorManagementSlice.reducer

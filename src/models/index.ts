@@ -96,3 +96,8 @@ export type {
     AddInventory,
     UpdateInventory,
 } from './Inventory.model'
+export type {
+    CompetitorManagementListResponse,
+    AddCompetitorManagement,
+    UpdateCompetitorManagement,
+} from './CompetitorManagement.model'

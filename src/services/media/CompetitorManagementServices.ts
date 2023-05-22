@@ -1,34 +1,55 @@
 import { PaginationType } from 'src/models/common/paginationType'
-import { AddDidManagement, UpdateDidManagement } from 'src/models/Media.model'
+import {
+    AddCompetitorManagement,
+    UpdateCompetitorManagement,
+} from 'src/models/index'
 import apiSlice from '../ApiSlice'
 
-export const didManagementApi = apiSlice.injectEndpoints({
+export const competitorManagementApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
-        getPaginationDid: builder.query({
-            providesTags: ['did'],
+        getPaginationcompetitor: builder.query({
+            providesTags: ['competitor'],
             query: (body: PaginationType) => ({
-                url: '/did',
+                url: '/competitor',
                 method: 'POST',
                 body,
             }),
         }),
 
+        //***** GET SINGLE DATA *****/
+        getCompetitorById: builder.query({
+            providesTags: ['competitor'],
+            query: (id) => ({
+                url: `/competitor/${id}`,
+                method: 'GET',
+            }),
+        }),
+
+        //***** GET SINGLE DATA *****/
+        deletegetCompetitor: builder.mutation({
+            invalidatesTags: ['competitor'],
+            query: (id) => ({
+                url: `/competitor/${id}`,
+                method: 'DELETE',
+            }),
+        }),
+
         //***** ADD *****/
-        addDid: builder.mutation({
-            invalidatesTags: ['did'],
-            query: (body: AddDidManagement) => ({
-                url: '/did/add',
+        addcompetitor: builder.mutation({
+            invalidatesTags: ['competitor'],
+            query: (body: AddCompetitorManagement) => ({
+                url: '/competitor/add',
                 method: 'POST',
                 body,
             }),
         }),
 
         //***** Update *****/
-        updateDid: builder.mutation({
-            invalidatesTags: ['did'],
-            query: ({ body, id }: UpdateDidManagement) => ({
-                url: `/did/${id}`,
+        updatecompetitor: builder.mutation({
+            invalidatesTags: ['competitor'],
+            query: ({ body, id }: UpdateCompetitorManagement) => ({
+                url: `/competitor/${id}`,
                 method: 'PUT',
                 body,
             }),
@@ -37,7 +58,9 @@ export const didManagementApi = apiSlice.injectEndpoints({
 })
 
 export const {
-    useAddDidMutation,
-    useGetPaginationDidQuery,
-    useUpdateDidMutation,
-} = didManagementApi
+    useAddcompetitorMutation,
+    useGetPaginationcompetitorQuery,
+    useUpdatecompetitorMutation,
+    useGetCompetitorByIdQuery,
+    useDeletegetCompetitorMutation,
+} = competitorManagementApi

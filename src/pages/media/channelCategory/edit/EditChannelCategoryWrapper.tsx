@@ -10,7 +10,7 @@ import EditChannelGroup from './EditChannelCategory'
 import {
     useGetChannelCategoryByIdQuery,
     useUpdateChannelCategoryMutation,
-} from 'src/services/media/ChannelCategoryService'
+} from 'src/services/media/ChannelCategoriesServices'
 import { setSelectedItem } from 'src/redux/slices/media/channelCategorySlice'
 
 export type FormInitialValues = {
