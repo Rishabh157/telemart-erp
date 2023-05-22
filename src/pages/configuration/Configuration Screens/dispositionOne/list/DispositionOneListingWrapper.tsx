@@ -4,7 +4,10 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import DispositiononeListing from './DispositionOneListing'
-import { useGetdispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
+import {
+    useDeletedispositionOneMutation,
+    useGetdispositionOneQuery,
+} from 'src/services/configurations/DispositiononeServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -12,10 +15,15 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/dispositionOneSlice'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { useNavigate } from 'react-router-dom'
+import { showToast } from 'src/utils'
 
 const DispositionOneListingWrapper = () => {
+    const navigate = useNavigate()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
+    const [deleteDispositionOne] = useDeletedispositionOneMutation()
 
     const columns: columnTypes[] = [
         {
@@ -48,27 +56,27 @@ const DispositionOneListingWrapper = () => {
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
-                                    // navigate(
-                                    //     `/configurations/attributes-group/${currentId}`
-                                    // )
+                                    navigate(
+                                        `/configurations/disposition-one/${currentId}`
+                                    )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Edit
                             </button>
                             <button
-                                // onClick={() => {
-                                //     showConfirmationDialog({
-                                //         title: 'Delete Attribute',
-                                //         text: 'Do you want to delete',
-                                //         showCancelButton: true,
-                                //         next: (res) => {
-                                //             return res.isConfirmed
-                                //                 ? handleDelete()
-                                //                 : setShowDropdown(false)
-                                //         },
-                                //     })
-                                // }}
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Delete Disposition One',
+                                        text: 'Do you want to delete',
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDelete()
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Delete
@@ -117,6 +125,26 @@ const DispositionOneListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteDispositionOne(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast(
+                        'success',
+                        'Disposition One deleted successfully!'
+                    )
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     return (
         <>
             <ConfigurationLayout>
