@@ -64,47 +64,47 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
-                                                        const inputValue =
+                                                        const typedValue =
                                                             e.target.value
+                                                        const inputValue =
+                                                            typedValue.replace(
+                                                                /\D/g,
+                                                                ''
+                                                            ) // Remove non-digit characters
+
+                                                        let formattedValue = ''
+                                                        for (
+                                                            let i = 0;
+                                                            i <
+                                                            inputValue.length;
+                                                            i++
+                                                        ) {
+                                                            if (
+                                                                i > 0 &&
+                                                                i % 4 === 0
+                                                            ) {
+                                                                formattedValue +=
+                                                                    '-'
+                                                            }
+                                                            formattedValue +=
+                                                                inputValue.charAt(
+                                                                    i
+                                                                )
+                                                        }
+
                                                         if (
                                                             name ===
                                                             'document.adharCardNumber'
                                                         ) {
-                                                            //alert(inputValue.length)
                                                             if (
-                                                                inputValue.length ===
-                                                                    4 ||
-                                                                inputValue.length ===
-                                                                    9
+                                                                name ===
+                                                                    'document.adharCardNumber' &&
+                                                                formattedValue.length <=
+                                                                    14
                                                             ) {
-                                                                //alert(inputValue.length)
-                                                                e.target.value =
-                                                                    inputValue +
-                                                                    '-'
                                                                 setFieldValue(
                                                                     name,
-                                                                    e.target
-                                                                        .value
-                                                                )
-                                                            } else if (
-                                                                inputValue.length >
-                                                                14
-                                                            ) {
-                                                                e.target.value =
-                                                                    inputValue.substring(
-                                                                        0,
-                                                                        14
-                                                                    )
-                                                                setFieldValue(
-                                                                    name,
-                                                                    e.target
-                                                                        .value
-                                                                )
-                                                            } else {
-                                                                setFieldValue(
-                                                                    name,
-                                                                    e.target
-                                                                        .value
+                                                                    formattedValue
                                                                 )
                                                             }
                                                         } else {
