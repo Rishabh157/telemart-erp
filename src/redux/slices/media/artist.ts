@@ -4,6 +4,7 @@ import { ArtistListResponse } from 'src/models/Artist.model'
 
 export interface ArtistSliceStateType {
     items: ArtistListResponse[] | []
+    allItems: ArtistListResponse[] | []
     selectedItem: ArtistListResponse | null
     totalItems: number
     isTableLoading: boolean
@@ -16,6 +17,7 @@ export interface ArtistSliceStateType {
 
 const initialState: ArtistSliceStateType = {
     items: [],
+    allItems: [],
     selectedItem: null,
     totalItems: 0,
     isTableLoading: false,
@@ -32,6 +34,12 @@ const artistSlice: any = createSlice({
     reducers: {
         setItems: (state, action: PayloadAction<ArtistListResponse[] | []>) => {
             state.items = action.payload
+        },
+        setAllItems: (
+            state,
+            action: PayloadAction<ArtistListResponse[] | []>
+        ) => {
+            state.allItems = action.payload
         },
         setPage: (state, action: PayloadAction<number>) => {
             state.page = action.payload
@@ -73,6 +81,7 @@ const artistSlice: any = createSlice({
 
 export const {
     setItems,
+    setAllItems,
     setPage,
     setRowsPerPage,
     setSearchValue,
