@@ -449,7 +449,7 @@ const PageRoutes = () => {
                         element={<AddCartonBoxWrapper />}
                     />
                     <Route
-                        path="/configurations/barcode/carton-box-items"
+                        path="/configurations/barcode/carton-box-items/:cartonboxcode"
                         element={<ViewBarcodeWrapper />}
                     />
 

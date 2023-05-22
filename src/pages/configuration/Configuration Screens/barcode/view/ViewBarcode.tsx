@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { setSelectedItem } from 'src/redux/slices/CartonBoxBarcodeSlice'
@@ -8,7 +7,9 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetByCartonBoxBarcodeQuery } from 'src/services/CartonBoxBarcodeService'
 import CartonBoxBarcodeDetailCard from '../list/components/CartonBoxBarcode/CartonBoxBarcodeDetailCard'
 
-type Props = {}
+type Props = {
+    cartonBoxCode: string
+}
 
 // const timeLineItems = Array(50).fill({
 //   content: (
@@ -30,12 +31,9 @@ export type barcodecardType = {
     count?: string
 }
 
-const ViewBarcode = (props: Props) => {
+const ViewBarcode = (cartonBoxCode: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const { state } = useLocation()
-
-    const barcodeNumber = state?.barcodeNumber
-
+    const barcodeNumber = cartonBoxCode.cartonBoxCode
     const { data, isFetching, isLoading } =
         useGetByCartonBoxBarcodeQuery(barcodeNumber)
 
