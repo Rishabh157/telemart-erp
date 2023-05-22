@@ -5,7 +5,7 @@ import AddProductSubCategory from './AddProductSubCategory'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddProductSubCategoryMutation } from 'src/services/ProductSubCategoryService'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
@@ -24,7 +24,7 @@ export type FormInitialValues = {
 
 const AddProductSubCategoryWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { allProductCategory }: any = useSelector(

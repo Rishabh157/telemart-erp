@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
-import { array, object, string } from 'yup'
+import { array, object, string, number } from 'yup'
 import AddASR from './AddASR'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useAddAsrMutation } from 'src/services/AsrService'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { setItems } from 'src/redux/slices/productGroupSlice'
 
@@ -23,7 +23,7 @@ export type FormInitialValues = {
 
 const AddASRWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [addAsr] = useAddAsrMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { data, isLoading, isFetching } = useGetAllProductGroupQuery('')
@@ -45,7 +45,9 @@ const AddASRWrapper = (props: Props) => {
         asrDetails: array().of(
             object().shape({
                 productName: string().required('Product name is required'),
-                quantity: string().required('Quantity is required'),
+                quantity: number()
+                    .min(1, 'Quantity must be greater than 0')
+                    .required('Quantity is required'),
             })
         ),
     })

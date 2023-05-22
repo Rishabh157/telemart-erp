@@ -98,7 +98,7 @@ const StepAddSchemeDetails = ({
                         {' '}
                         Dimensions{' '}
                     </label>
-                    <div className="flex gap-2 mt-2">
+                    <div className="flex gap-2 mt-2 mb-4">
                         {/* Height */}
                         <ATMTextField
                             name="dimension.height"
@@ -178,7 +178,7 @@ const StepAddSchemeDetails = ({
                     className="shadow bg-white rounded"
                 />
                 {/* Combo Packaging */}
-                <div className="mt-4">
+                <div className="mt-4 mb-4">
                     <ATMSwitchButton
                         name="comboPacking"
                         value={values.comboPacking}
@@ -190,7 +190,7 @@ const StepAddSchemeDetails = ({
                 </div>
                 {/* Start Date */}
                 <ATMDatePicker
-                    name={'startDate'}
+                    name="startDate"
                     value={values.startDate}
                     onChange={(newValue) => {
                         setFieldValue('startDate', newValue)
@@ -199,7 +199,7 @@ const StepAddSchemeDetails = ({
                 />
                 {/* End Date */}
                 <ATMDatePicker
-                    name={'endDate'}
+                    name="endDate"
                     value={values.endDate}
                     onChange={(newValue) => {
                         setFieldValue('endDate', newValue)

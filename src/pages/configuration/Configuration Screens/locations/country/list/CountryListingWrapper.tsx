@@ -3,11 +3,11 @@ import React, { useEffect } from 'react'
 import CountryListing from './CountryListing'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setItems } from 'src/redux/slices/countrySlice'
 
 const CountryListingWrapper = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const { data, isLoading, isFetching } = useGetAllCountryQuery('')
     const { items }: any = useSelector((state: RootState) => state.country)

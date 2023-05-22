@@ -10,6 +10,7 @@ type Props = {
     selectedFile: any
     accept: string
     disabled?: boolean
+    isSubmitting?: boolean
 }
 
 const ATMFileUploader = ({
@@ -21,6 +22,7 @@ const ATMFileUploader = ({
     selectedFile,
     accept,
     disabled = false,
+    isSubmitting = true,
 }: Props) => {
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -50,7 +52,7 @@ const ATMFileUploader = ({
                 )}
             </button>
 
-            {selectedFile && (
+            {selectedFile && isSubmitting && (
                 <div className="w-full h-[150px] mt-1 border rounded shadow">
                     <img
                         src={

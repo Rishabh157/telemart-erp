@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { setSelectedItem } from 'src/redux/slices/CartonBoxBarcodeSlice'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetByCartonBoxBarcodeQuery } from 'src/services/CartonBoxBarcodeService'
 import CartonBoxBarcodeDetailCard from '../list/components/CartonBoxBarcode/CartonBoxBarcodeDetailCard'
 
@@ -31,7 +31,7 @@ export type barcodecardType = {
 }
 
 const ViewBarcode = (props: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const { state } = useLocation()
 
     const barcodeNumber = state?.barcodeNumber

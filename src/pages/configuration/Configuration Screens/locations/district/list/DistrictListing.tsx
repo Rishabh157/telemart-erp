@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LocationListView from '../../sharedComponents/LocationListView'
 import AddDistrictWrapper from '../add/AddDistrictWrapper'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setSearchValue,
     setSelectedLocationDistrict,
@@ -22,7 +22,7 @@ type Props = {
 
 const DistrictListing = ({ districts }: Props) => {
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const { searchValue }: any = useSelector(
         (state: RootState) => state.district
     )

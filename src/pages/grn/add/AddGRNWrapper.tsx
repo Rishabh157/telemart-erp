@@ -39,20 +39,17 @@ const AddGRNWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        items: array().of(
-            object().shape({
-                recievedQuantity: number()
-                    .min(1, 'Quantity should be greater than or equal to 1')
-                    .required('Please enter Recieved Quantity'),
-                goodQuantity: number()
-                    .min(1, 'Good Quantity must be greater than 0')
-                    .required('Please enter Good Quantity'),
-                defectiveQuantity: number()
-                    .min(1, 'Defective Quantity must be greater than 0')
-                    .required('Please enter Defective Quantity'),
-            })
-        ),
+        receivedQuantity: number()
+            .min(1, 'Quantity should be greater than or equal to 1')
+            .required('Please enter Recieved Quantity'),
+        goodQuantity: number()
+            .min(1, 'Good Quantity must be greater than 0')
+            .required('Please enter Good Quantity'),
+        defectiveQuantity: number()
+            .min(1, 'Defective Quantity must be greater than 0')
+            .required('Please enter Defective Quantity'),
     })
+
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)

@@ -11,8 +11,9 @@ import StepAddDocumentsWrapper from './FormSteps/StepAddDocuments/StepAddDocumen
 import { useAddVendorMutation } from 'src/services/VendorServices'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -71,7 +72,7 @@ const steps = [
             company_type: string().required('Please select company type'),
             ownership_type: string().required('Please select ownership type'),
             website_address: string()
-                .url()
+                .url('Invalid URL')
                 .required('Website address is required'),
             vendor_code: string().required('Vendor code is required'),
         }),
@@ -83,6 +84,8 @@ const steps = [
             regd_address: object().shape({
                 phone: string()
                     .trim()
+                    .max(10, 'Phone must be 10 digits')
+                    .min(10, 'Phone must be at least 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Required!'),
                 address: string().required('Address is required'),
@@ -94,6 +97,8 @@ const steps = [
             billing_address: object().shape({
                 phone: string()
                     .trim()
+                    .max(10, 'Phone must be 10 digits')
+                    .min(10, 'Phone must be at least 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Required!'),
                 address: string().required('Address is required'),
@@ -117,11 +122,15 @@ const steps = [
                         .email('Invalid  Email')
                         .required('Required!'),
                     mobileNumber: string()
-                        .max(10)
+                        .max(10, 'Mobile number must be 10 digits')
+                        .min(10, 'Phone must be at least 10 digits')
                         .trim()
                         .matches(regIndiaPhone, 'Invalid Mobile Number')
                         .required('Required!'),
-                    landLine: string().required('LandLine is required'),
+                    landLine: string()
+                        .min(10, 'Number should be 10 digits')
+                        .max(10, 'maximum 10 digit')
+                        .required('Landline is required'),
                 })
             ),
         }),
@@ -132,10 +141,10 @@ const steps = [
         validationSchema: object({
             gst_no: string().required('GST number is required'),
             gst_certificate: string()
-                .url()
+                .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),
             declaration_form: string()
-                .url()
+                .url('Form must be valid URL')
                 .required('Declaration form is required'),
         }),
     },
@@ -160,7 +169,7 @@ const steps = [
                         'Please select account type'
                     ),
                     cancelledCheque: string()
-                        .url()
+                        .url('Cancle Cheque must be valid URL')
                         .required('Cancelled cheque is required'),
                 })
             ),
@@ -169,6 +178,7 @@ const steps = [
 ]
 
 const AddVendorWrapper = () => {
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [addVendor] = useAddVendorMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -289,6 +299,7 @@ const AddVendorWrapper = () => {
                 })
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }
