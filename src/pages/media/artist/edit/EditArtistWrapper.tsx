@@ -1,62 +1,62 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import EditCompetitor from './EditCompetitor'
+import EditArtist from './EditArtist'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import {
-    useGetCompetitorByIdQuery,
-    useUpdatecompetitorMutation,
-} from 'src/services/media/CompetitorManagementServices'
-import { setSelectedCompetitor } from 'src/redux/slices/media/competitorManagementSlice'
+    useGetArtistByIdQuery,
+    useUpdateArtistMutation,
+} from 'src/services/media/ArtistServices'
+import { setSelectedArtist } from 'src/redux/slices/media/artist'
 import MediaLayout from '../../MediaLayout'
 
 type Props = {}
 
 export type FormInitialValues = {
-    competitorName: string
+    artistName: string
 }
 
-const EditCompetitorWrapper = (props: Props) => {
+const EditArtistWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const params = useParams()
     const Id = params.id
     const { selectedItem }: any = useSelector(
-        (state: RootState) => state.competitor
+        (state: RootState) => state.artist
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
-    const [EditCompetitors] = useUpdatecompetitorMutation()
-    const { data, isLoading, isFetching } = useGetCompetitorByIdQuery(Id)
+    const [editArtists] = useUpdateArtistMutation()
+    const { data, isLoading, isFetching } = useGetArtistByIdQuery(Id)
     const initialValues: FormInitialValues = {
-        competitorName: selectedItem?.competitorName || '',
+        artistName: selectedItem?.artistName || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        competitorName: string().required('Competitor Name is required'),
+        artistName: string().required('Artist Name is required'),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            EditCompetitors({
+            editArtists({
                 body: {
-                    competitorName: values.competitorName,
+                    artistName: values.artistName,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Competitor updated successfully!')
-                        navigate('/media/competitor')
+                        showToast('success', 'Artist updated successfully!')
+                        navigate('/media/artist')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -69,7 +69,7 @@ const EditCompetitorWrapper = (props: Props) => {
     }
 
     useEffect(() => {
-        dispatch(setSelectedCompetitor(data?.data))
+        dispatch(setSelectedArtist(data?.data))
     }, [dispatch, data, isLoading, isFetching])
     return (
         <MediaLayout>
@@ -82,7 +82,7 @@ const EditCompetitorWrapper = (props: Props) => {
                 {(formikProps) => {
                     return (
                         <>
-                            <EditCompetitor
+                            <EditArtist
                                 apiStatus={apiStatus}
                                 formikProps={formikProps}
                             />
@@ -94,4 +94,4 @@ const EditCompetitorWrapper = (props: Props) => {
     )
 }
 
-export default EditCompetitorWrapper
+export default EditArtistWrapper
