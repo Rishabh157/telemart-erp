@@ -3,7 +3,7 @@ import LocationListView from '../../sharedComponents/LocationListView'
 import AddCountryWrapper from '../add/AddCountryWrapper'
 import { setSelectedLocationCountry } from 'src/redux/slices/countrySlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setFilterValue,
     setSelctedLocationState,
@@ -22,7 +22,7 @@ type Props = {
 }
 
 const CountryListing = ({ contries, items }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state.country

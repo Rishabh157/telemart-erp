@@ -8,7 +8,7 @@ import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 import { useGetAllPincodeByDistrictQuery } from 'src/services/PinCodeService'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
@@ -136,7 +136,7 @@ const formFields: {
 // const pincodeOptions = [{ label: "452001", value: "452001" }];
 
 const StepEditAddressWrapper = ({ formikProps }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const [billingStateData, setBillingStateData] = useState<any>()
     const [billingDistrictData, setBillingDistrictData] = useState<any>()

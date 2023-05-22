@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 import { useGetPurchaseOrderByIdQuery } from 'src/services/PurchaseOrderService'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedItems } from 'src/redux/slices/PurchaseOrderSlice'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 
 type Props = {}
 
@@ -33,7 +33,7 @@ export type FormInitialValues = {
 const ViewPurchaseOrderWrapper = (props: Props) => {
     // Form Initial Values
     const params = useParams()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const Id = params.id
     const { data, isLoading, isFetching } = useGetPurchaseOrderByIdQuery(Id)
     const { selectedItems }: any = useSelector(

@@ -82,7 +82,11 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                             {/* Inner Items Count */}
                             <ATMTextField
                                 name="innerItemsCount"
-                                value={values.innerItemsCount}
+                                value={
+                                    values.innerItemsCount === 0
+                                        ? ''
+                                        : values.innerItemsCount
+                                }
                                 label="Inner Items Count"
                                 placeholder="Inner Items Count"
                                 onChange={(e) => {
@@ -104,7 +108,11 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                     {/* Height */}
                                     <ATMTextField
                                         name="dimensions.height"
-                                        value={values.dimensions.height}
+                                        value={
+                                            values.dimensions.height === 0
+                                                ? ''
+                                                : values.dimensions.height
+                                        }
                                         onChange={(e) => {
                                             const inputValue = e.target.value
                                             if (!isNaN(Number(inputValue))) {
@@ -121,7 +129,11 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                     {/* Weight */}
                                     <ATMTextField
                                         name="dimensions.width"
-                                        value={values.dimensions.width}
+                                        value={
+                                            values.dimensions.width === 0
+                                                ? ''
+                                                : values.dimensions.width
+                                        }
                                         onChange={(e) => {
                                             const inputValue = e.target.value
                                             if (!isNaN(Number(inputValue))) {
@@ -138,7 +150,11 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                     {/* Depth */}
                                     <ATMTextField
                                         name="dimensions.depth"
-                                        value={values.dimensions.depth}
+                                        value={
+                                            values.dimensions.depth === 0
+                                                ? ''
+                                                : values.dimensions.depth
+                                        }
                                         onChange={(e) => {
                                             const inputValue = e.target.value
                                             if (!isNaN(Number(inputValue))) {
@@ -157,7 +173,11 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                             {/* Box Weight */}
                             <ATMTextField
                                 name="boxWeight"
-                                value={values.boxWeight}
+                                value={
+                                    values.boxWeight === 0
+                                        ? ''
+                                        : values.boxWeight
+                                }
                                 label="Box Weight (in gms)"
                                 placeholder="Box Weight"
                                 onChange={(e) => {

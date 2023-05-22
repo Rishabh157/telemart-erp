@@ -64,7 +64,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                     <ATMPageHeading> Add New Attribute Group </ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat py-2">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium">

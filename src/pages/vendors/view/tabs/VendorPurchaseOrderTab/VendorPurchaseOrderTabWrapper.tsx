@@ -4,7 +4,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import PurchaseOrderListing from 'src/pages/purchaseOrder/list/PurchaseOrderListing'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetPurchaseOrderByVendorIdQuery } from 'src/services/PurchaseOrderService'
 import {
     setIsTableLoading,
@@ -18,7 +18,7 @@ type Props = {}
 const VendorPurchaseOrderTabWrapper = (props: Props) => {
     const params = useParams()
     const vendorId: any = params.vendorId
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const productOrderState: any = useSelector(
         (state: RootState) => state.purchaseOrder

@@ -14,10 +14,11 @@ import {
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
 import { setSelectedItem } from 'src/redux/slices/dealerSlice'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -82,7 +83,10 @@ const steps = [
         component: StepEditAddressWrapper,
         validationSchema: object({
             registrationAddress: object().shape({
-                phone: string().required('Phone number is required'),
+                phone: string()
+                    .max(10, 'maximum 10 digits')
+                    .min(10, 'minimum 10 digits')
+                    .required('Phone number is required'),
                 address: string().required('Address is required'),
                 country: string().required('Please choose a country'),
                 state: string().required('Please choose a state'),
@@ -90,7 +94,10 @@ const steps = [
                 pincode: string().required('Please choose a pincode'),
             }),
             billingAddress: object().shape({
-                phone: string().required('Phone number is required'),
+                phone: string()
+                    .max(10, 'maximum 10 digits')
+                    .min(10, 'minimum 10 digits')
+                    .required('Phone number is required'),
                 address: string().required('Address is required'),
                 country: string().required('Please choose a country'),
                 state: string().required('Please choose a state'),
@@ -109,10 +116,14 @@ const steps = [
                     department: string().required('Department is required'),
                     designation: string().required('Designation is required'),
                     email: string().required('Email is required'),
-                    mobileNumber: string().required(
-                        'Mobile number is required'
-                    ),
-                    landLine: string().required('Landline is required'),
+                    mobileNumber: string()
+                        .max(10, 'maximum 10 digits')
+                        .min(10, 'minimum 10 digits')
+                        .required('Mobile number is required'),
+                    landLine: string()
+                        .max(10, 'maximum 10 digits')
+                        .min(10, 'minimum 10 digits')
+                        .required('Landline is required'),
                 })
             ),
         }),
@@ -124,9 +135,10 @@ const steps = [
             document: object().shape({
                 gstNumber: string().required('GST number is required'),
                 gstCertificate: mixed().required('GST certificate is required'),
-                adharCardNumber: mixed().required(
-                    'Declaration form is required'
-                ),
+                adharCardNumber: string()
+                    .min(14, 'Number should be 12 digits')
+                    .max(14, 'maximum 12 digit')
+                    .required('Declaration form is required'),
                 adharCard: mixed().required('Declaration form is required'),
             }),
             otherDocument: array().of(
@@ -155,7 +167,7 @@ const steps = [
 
 const EditDealerWrapper = () => {
     // States
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const navigate = useNavigate()
     const [activeStep, setActiveStep] = React.useState(0)
@@ -298,6 +310,7 @@ const EditDealerWrapper = () => {
                 })
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }

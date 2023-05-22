@@ -10,7 +10,7 @@ import EditWarehouse from './EditWarehouse'
 // import { useEditWareHouseMutation } from "src/services/WareHoouseService";
 import { showToast } from 'src/utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import {
     useGetWareHouseByIdQuery,
@@ -20,6 +20,7 @@ import { setSelectedItem } from 'src/redux/slices/warehouseSlice'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -73,6 +74,7 @@ const steps = [
         validationSchema: object({
             regd_address: object().shape({
                 phone: string()
+                    .max(10, 'Phone must be 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -83,6 +85,7 @@ const steps = [
             }),
             billing_address: object().shape({
                 phone: string()
+                    .max(10, 'Phone must be 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -104,6 +107,7 @@ const steps = [
                     designation: string().required('Designation is required'),
                     email: string().required().email('Email is required'),
                     mobileNumber: string()
+                        .max(10, 'Mobile Number must be 10 digits')
                         .required()
                         .matches(regIndiaPhone, 'Invalid Mobile Number'),
                     landLine: string().required('Landline is required'),
@@ -120,7 +124,7 @@ const EditWarehouseWrapper = () => {
     const vendorId = state?.params?.vendorId || null
     const dealerId = state?.params?.dealerId || null
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const { data, isLoading, isFetching } = useGetWareHouseByIdQuery(Id)
     const [editWareHouse] = useUpdateWareHouseMutation()
@@ -244,6 +248,7 @@ const EditWarehouseWrapper = () => {
                 setActiveStep(0)
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }

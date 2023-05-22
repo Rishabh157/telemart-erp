@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LocationListView from '../../sharedComponents/LocationListView'
 import AddPincodeWrapper from '../add/AddPincodeWrapper'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setFilterValue } from 'src/redux/slices/areaSlice'
 import {
     setSearchValue,
@@ -16,7 +16,7 @@ type Props = {
 
 const PincodeListing = ({ pincodes }: Props) => {
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const { searchValue }: any = useSelector(
         (state: RootState) => state.pincode
     )

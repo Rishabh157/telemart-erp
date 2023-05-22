@@ -8,7 +8,7 @@ import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServi
 import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
 //import { useGetAllProductSubCategoryQuery } from "src/services/ProductSubCategoryService";
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
 import { setAllItems } from 'src/redux/slices/productSubCategorySlice'
 
@@ -102,7 +102,7 @@ const formFields: {
 ]
 
 const StepAddSchemeDetailsWrapper = ({ formikProps }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const { allProductCategory }: any = useSelector(
         (state: RootState) => state.productCategory
     )

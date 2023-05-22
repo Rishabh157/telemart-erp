@@ -4,6 +4,8 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from '../../AddWarehouseWrapper'
 import { DropdownOptions, FieldType } from './StepAddCompanyDetailsWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -18,9 +20,12 @@ const StepAddComapnyDetails = ({
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
-        <div className="py-6 px-7">
+        <div className="py-9 px-7">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
                 {formFields?.map((field: FieldType) => {
                     const { type = 'text', name, label, placeholder } = field
@@ -38,6 +43,7 @@ const StepAddComapnyDetails = ({
                                     label={label}
                                     placeholder={placeholder}
                                     className="shadow bg-white rounded"
+                                    isSubmitting={isSubmitting}
                                 />
                             )
 
@@ -63,6 +69,7 @@ const StepAddComapnyDetails = ({
                                                     'countryOptions'
                                             ]
                                         }
+                                        isSubmitting={isSubmitting}
                                     />
                                 </div>
                             )

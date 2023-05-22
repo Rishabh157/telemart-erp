@@ -7,7 +7,7 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     useGetattributeGroupByIdQuery,
     useUpdateattributeGroupMutation,
@@ -27,7 +27,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
     const params = useParams()
     const Id = params.id
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     // Form Initial Values
     const { selectedAttributeGroup }: any = useSelector(
         (state: RootState) => state.attributesGroup

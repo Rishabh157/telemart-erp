@@ -7,7 +7,7 @@ import StepAddProductDetails from './StepAddProductDetails'
 import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
 import { setAllItems } from 'src/redux/slices/productSubCategorySlice'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
@@ -21,7 +21,7 @@ export type FieldType = Field<
     'productSubCategoryOPtions' | 'productCategoryOPtions'
 >
 const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const { allProductCategory }: any = useSelector(
         (state: RootState) => state?.productCategory
     )

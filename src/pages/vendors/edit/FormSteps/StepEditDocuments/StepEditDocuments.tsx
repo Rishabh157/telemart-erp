@@ -4,6 +4,8 @@ import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUplo
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditVendorWrapper'
 import { Field } from 'src/models/FormField/FormField.model'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 type FieldType = Field<''>
 
@@ -15,13 +17,16 @@ type Props = {
 const StepEditDocuments = ({ formikProps, formFields }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className="">
             {formFields?.map((formField, index) => {
                 const { sectionName, fields } = formField
                 return (
-                    <div key={index} className={`py-6 px-7`}>
+                    <div key={index} className={`py-9 px-7`}>
                         <div className="text-primary-main text-lg pb-2 font-medium ">
                             {sectionName}
                         </div>
@@ -51,6 +56,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                 label={label}
                                                 placeholder={placeholder}
                                                 className="shadow bg-white rounded"
+                                                isSubmitting={isSubmitting}
                                             />
                                         )
 

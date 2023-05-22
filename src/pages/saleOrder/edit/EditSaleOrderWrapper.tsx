@@ -14,7 +14,7 @@ import {
     useGetSalesOrderByIdQuery,
     useUpdateSalesOrderMutation,
 } from 'src/services/SalesOrderService'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { setSelectedItem } from 'src/redux/slices/saleOrderSlice'
@@ -35,7 +35,7 @@ export type FormInitialValues = {
 
 const EditSaleOrderWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const Id = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)

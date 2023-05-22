@@ -95,7 +95,7 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                                 </div>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <div className="grid grid-cols-3 gap-5">
+                                <div className="grid grid-cols-3 gap-5 py-6">
                                     <ATMTextField
                                         name="receivedQuantity"
                                         value={values.receivedQuantity}

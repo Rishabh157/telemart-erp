@@ -8,6 +8,7 @@ import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadin
 import { BsPrinter } from 'react-icons/bs'
 import { useGetAllByGroupQuery } from 'src/services/BarcodeService'
 import { useDispatch } from 'react-redux'
+import { AppDispatch } from 'src/redux/store'
 import { setBarcodesToPrint } from 'src/redux/slices/barcodeSlice'
 import { useNavigate } from 'react-router-dom'
 
@@ -29,7 +30,7 @@ const ProductGroupDetailCard = ({
     onBarcodeClick,
 }: BarcodeCardProps) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [groupId, setGroupId] = useState('')
 
     const { data, isLoading, isFetching } = useGetAllByGroupQuery(groupId, {
