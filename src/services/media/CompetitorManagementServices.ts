@@ -26,6 +26,15 @@ export const competitorManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET SINGLE DATA *****/
+        deletegetCompetitor: builder.mutation({
+            invalidatesTags: ['competitor'],
+            query: (id) => ({
+                url: `/competitor/${id}`,
+                method: 'DELETE',
+            }),
+        }),
+
         //***** ADD *****/
         addcompetitor: builder.mutation({
             invalidatesTags: ['competitor'],
@@ -53,4 +62,5 @@ export const {
     useGetPaginationcompetitorQuery,
     useUpdatecompetitorMutation,
     useGetCompetitorByIdQuery,
+    useDeletegetCompetitorMutation,
 } = competitorManagementApi

@@ -12,13 +12,17 @@ import {
 import MediaLayout from '../../MediaLayout'
 import CompetitorManagementListing from './CompetitorManagementListing'
 import { CompetitorManagementListResponse } from 'src/models/CompetitorManagement.model'
-import { useGetPaginationcompetitorQuery } from 'src/services/media/CompetitorManagementServices'
+import {
+    useDeletegetCompetitorMutation,
+    useGetPaginationcompetitorQuery,
+} from 'src/services/media/CompetitorManagementServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
 
 const CompetitorManagementListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-
+    const [deleteCompetitor] = useDeletegetCompetitorMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const competitorManagementState: any = useSelector(
@@ -117,7 +121,23 @@ const CompetitorManagementListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
-    const handleDelete = () => {}
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteCompetitor(currentId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Competitor deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     return (
         <>
             <MediaLayout>
