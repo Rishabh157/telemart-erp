@@ -33,6 +33,11 @@ const mediaNavigation: NavItemType[] = [
         path: '/media/channel',
     },
     {
+        label: 'Channel Master',
+        icon: AiOutlineSetting,
+        path: '/media/channel-master',
+    },
+    {
         label: 'Competitor Management',
         icon: AiOutlineSetting,
         path: '/media/competitor',
@@ -47,6 +52,7 @@ const mediaNavigation: NavItemType[] = [
         icon: AiOutlineSetting,
         path: '/media/analysis',
     },
+
     {
         label: 'Flow',
         icon: AiOutlineSetting,

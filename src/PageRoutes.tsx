@@ -139,6 +139,10 @@ import {
 } from './pages/index'
 import Auth from './pages/login/Auth'
 import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
+import DispositionTwoListingWrapper from './pages/configuration/Configuration Screens/dispositionTwo/list/DispositionTwoListingWrapper'
+import AddDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/add/AddDispositionTwoWrapper'
+import ChannelMasterListingWrapper from './pages/media/channelMaster/list/ChannelMasterListingWrapper'
+import EditDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/edit/EditDispositionTwoWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -528,9 +532,22 @@ const PageRoutes = () => {
                         path="/configurations/disposition-one"
                         element={<DispositionOneListingWrapper />}
                     />
+
                     <Route
                         path="/configurations/disposition-one/add"
                         element={<AddDispositionOneWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-two"
+                        element={<DispositionTwoListingWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-two/add"
+                        element={<AddDispositionTwoWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-two/:id"
+                        element={<EditDispositionTwoWrapper />}
                     />
                     <Route
                         path="configurations/hierarchy"
@@ -614,6 +631,10 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel-category/add"
                         element={<AddCompetitorManagement />}
+                    />
+                    <Route
+                        path="media/channel-master"
+                        element={<ChannelMasterListingWrapper />}
                     />
                 </Routes>
             </BrowserRouter>
