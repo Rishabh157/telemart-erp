@@ -9,7 +9,7 @@ import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import {
     useDeleteChannelCategoryMutation,
     useGetPaginationChannelCategoryQuery,
-} from 'src/services/media/ChannelCategoryService'
+} from 'src/services/media/ChannelCategoriesServices'
 import {
     setIsTableLoading,
     setItems,
