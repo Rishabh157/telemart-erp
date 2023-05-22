@@ -101,3 +101,9 @@ export type {
     AddCompetitorManagement,
     UpdateCompetitorManagement,
 } from './CompetitorManagement.model'
+
+export type {
+    ArtistListResponse,
+    AddArtist,
+    UpdateArtist,
+} from './Artist.model'
