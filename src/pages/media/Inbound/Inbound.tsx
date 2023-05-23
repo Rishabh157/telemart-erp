@@ -14,7 +14,7 @@ const Inbound = () => {
                             label="Did Number"
                             value={''}
                             onChange={() => {}}
-                            size="small"
+                            size="xs"
                             className="h-[2.5vh]"
                             name=""
                             placeholder="Did Number"
@@ -24,7 +24,7 @@ const Inbound = () => {
                             label="In /OutBound"
                             value={''}
                             onChange={() => {}}
-                            size="small"
+                            size="xs"
                             className="h-[2.5vh]"
                             extraClassField="-mt-1"
                             placeholder="In /outbound"
@@ -34,7 +34,7 @@ const Inbound = () => {
                             label="In commind Caller Number"
                             value={''}
                             onChange={() => {}}
-                            size="small"
+                            size="xs"
                             className="h-[2.5vh]"
                             name=""
                             extraClassField="-mt-1"
@@ -43,7 +43,7 @@ const Inbound = () => {
                             label="Mobile No"
                             value={''}
                             onChange={() => {}}
-                            size="small"
+                            size="xs"
                             className="h-[2.5vh]"
                             name=""
                             extraClassField="-mt-1"
@@ -51,42 +51,41 @@ const Inbound = () => {
                     </div>
                     <div className="row-span-11 h-[50vh-50px] grid grid-cols-3 gap-4 border border-purple-200 p-1">
                         <div className="col-span-2 border border-pink-300 p-2 grid grid-rows-12 h-[50vh-5px]">
-                            <div className="  h-[20vh]  row-sapn-5 row-start-1 row-end-6 grid grid-rows-3 ">
-                                <div className=" h-[6vh] -mt-2 row-sapn-1 grid grid-cols-3 gap-x-1">
-                                    <div className="  h-[6vh] test-blue-200 col-span-1 mt-6">
+                            <div className="  h-[18vh]  row-sapn-5 row-start-1 row-end-6 grid grid-rows-3 ">
+                                <div className=" h-[6vh] -mt-2 row-sapn-1 grid grid-cols-5 gap-x-1 mt-1">
+                                    <div className=" test-blue-200 col-span-1 mt-4">
                                         search
                                     </div>
                                     <ATMTextField
-                                        size="small"
-                                        className="h-[2.5vh]"
+                                        size="xs"
                                         label="5"
                                         value={''}
                                         onChange={() => {}}
                                         name=""
-                                        extraClassField="-mt-1"
+                                        extraClassField="-mt-3 col-span-2"
                                     />
                                     <ATMTextField
                                         label="5"
                                         value={''}
                                         onChange={() => {}}
-                                        size="small"
-                                        className="h-[2.5vh]"
+                                        size="xs"
                                         name=""
-                                        extraClassField="-mt-1"
+                                        extraClassField="-mt-3 col-span-2"
+
                                     />
                                 </div>
-                                <div className=" h-[14vh] row-saan-2  border border-purple-400 h-full w-full">
+                                <div className=" h-[11vh] row-saan-2 mt-1 border border-purple-400 ">
                                     Table search
                                 </div>
                             </div>
 
-                            <div className="  h-[28vh] row-sapn-7 row-start-7 row-end-12 grid grid-cols-3 gap-1  ">
+                            <div className="h-[32vh] row-sapn-7 row-start-7 row-end-12 grid grid-cols-3 gap-x-1  ">
                                 <ATMTextField
-                                    extraClassField=" h-[3vh]"
+                                    extraClassField="h-[2.5vh]"
                                     label="Deliver Charge"
                                     value={''}
                                     onChange={() => {}}
-                                    size="small"
+                                    size="xs"
                                     className="h-[2.5vh]"
                                     name=""
                                 />
@@ -95,7 +94,7 @@ const Inbound = () => {
                                     label="Discount"
                                     value={''}
                                     onChange={() => {}}
-                                    size="small"
+                                    size="xs"
                                     className="h-[2.5vh]"
                                     name=""
                                 />
@@ -104,7 +103,7 @@ const Inbound = () => {
                                     label="Charge"
                                     value={''}
                                     onChange={() => {}}
-                                    size="small"
+                                    size="xs"
                                     className="h-[2.5vh]"
                                     name=""
                                 />
@@ -113,7 +112,7 @@ const Inbound = () => {
                                     label="Country"
                                     value={''}
                                     onChange={() => {}}
-                                    size="small"
+                                    size="xs"
                                     className="h-[2.5vh]"
                                     name=""
                                 />
@@ -122,7 +121,7 @@ const Inbound = () => {
                                     label="state"
                                     value={''}
                                     onChange={() => {}}
-                                    size="small"
+                                    size="xs"
                                     className="h-[2.5vh]"
                                     name=""
                                 />
@@ -131,7 +130,7 @@ const Inbound = () => {
                                     label="city"
                                     value={''}
                                     onChange={() => {}}
-                                    size="small"
+                                    size="xs"
                                     className="h-[2.5vh]"
                                     name=""
                                 />
@@ -140,7 +139,7 @@ const Inbound = () => {
                                     label="Tehs"
                                     value={''}
                                     onChange={() => {}}
-                                    size="small"
+                                    size="xs"
                                     className="h-[2.5vh]"
                                     name=""
                                 />
@@ -149,7 +148,7 @@ const Inbound = () => {
                                     label="pincode"
                                     value={''}
                                     onChange={() => {}}
-                                    size="small"
+                                    size="xs"
                                     className="h-[2.5vh]"
                                     name=""
                                 />
@@ -158,7 +157,7 @@ const Inbound = () => {
                                     label="Area"
                                     value={''}
                                     onChange={() => {}}
-                                    size="small"
+                                    size="xs"
                                     className="h-[2.5vh]"
                                     name=""
                                 />
@@ -174,140 +173,140 @@ const Inbound = () => {
                         </div>
                         <div className=" grid grid-cols-2 gap-1  col-span-1 h-[50vh-5px]">
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Agent Name"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="name"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Address"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Age"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Relation"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="City"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Landmark"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Alternative No"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="WhatsApp No"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />{' '}
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Gender"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Prepaid"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Email Id"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Channel"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
-                                extraClassField="h-[3vh]"
+                                extraClassField="h-[2.5vh]"
                                 label="Remark"
                                 value={''}
                                 onChange={() => {}}
-                                size="small"
+                                size="xs"
                                 className="h-[2.5vh]"
                                 name=""
                             />
                         </div>
                     </div>
                 </div>
-                <div className=" h-[10vh] row-span-[9.9] row-end-10  flex justify-around  border border-purple-200 p-1">
+                <div className=" h-[10vh] row-span-[9.9] row-end-10 gap-x-1  flex justify-around  border border-purple-200 p-1">
                     <ATMTextField
                         label="Disposition One"
                         value={''}
                         onChange={() => {}}
-                        size="small"
+                        size="xs"
                         className="h-[2.5vh]"
                         name=""
                         extraClassField="-mt-1 h-[3vh]"
@@ -316,7 +315,7 @@ const Inbound = () => {
                         label="Disposition Two"
                         value={''}
                         onChange={() => {}}
-                        size="small"
+                        size="xs"
                         className="h-[2.5vh]"
                         name=""
                         extraClassField="-mt-1 h-[3vh]"
