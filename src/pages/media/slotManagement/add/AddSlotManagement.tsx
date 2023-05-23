@@ -210,17 +210,17 @@ const AddSlotManagement = ({
                                     />
                                 </div>
                             </div>
-                            <div className=''>
-                            <ATMSelectSearchable
-                                name="channelName"
-                                required
-                                value={values.channelName}
-                                onChange={(e) =>
-                                    setFieldValue('channelName', e)
-                                }
-                                options={dropdownOptions.channelMgtOptions}
-                                label="Channel Name"
-                            />
+                            <div className="">
+                                <ATMSelectSearchable
+                                    name="channelName"
+                                    required
+                                    value={values.channelName}
+                                    onChange={(e) =>
+                                        setFieldValue('channelName', e)
+                                    }
+                                    options={dropdownOptions.channelMgtOptions}
+                                    label="Channel Name"
+                                />
                             </div>
                             <ATMSelectSearchable
                                 name="tapeName"

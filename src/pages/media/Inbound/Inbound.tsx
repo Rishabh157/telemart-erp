@@ -71,7 +71,6 @@ const Inbound = () => {
                                         size="xs"
                                         name=""
                                         extraClassField="-mt-3 col-span-2"
-
                                     />
                                 </div>
                                 <div className=" h-[11vh] row-saan-2 mt-1 border border-purple-400 ">

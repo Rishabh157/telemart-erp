@@ -55,7 +55,7 @@ const columns: columnTypes[] = [
             <span> {row.endDateTime} </span>
         ),
     },
-   
+
     {
         field: 'actions',
         headerName: 'Actions',
