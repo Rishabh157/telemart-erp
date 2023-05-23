@@ -272,7 +272,11 @@ const ASRListingWrapper = () => {
     return (
         <>
             <SideNavLayout>
-                <ASRListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
+                <ASRListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
             </SideNavLayout>
         </>
     )

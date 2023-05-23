@@ -76,7 +76,11 @@ const DealerCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
 
                 {/* Table */}
                 <div className="grow overflow-auto  ">
-                    <ATMTable columns={columns} rows={rows} setShowDropdown={setShowDropdown}/>
+                    <ATMTable
+                        columns={columns}
+                        rows={rows}
+                        setShowDropdown={setShowDropdown}
+                    />
                 </div>
 
                 {/* Pagination */}

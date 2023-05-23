@@ -47,7 +47,7 @@ const TaxesListingWrapper = () => {
                 <div className="relative">
                     <button
                         onClick={(e) => {
-                            e.stopPropagation();
+                            e.stopPropagation()
                             setShowDropdown(!showDropdown)
                             setCurrentId(row?._id)
                         }}
@@ -142,7 +142,11 @@ const TaxesListingWrapper = () => {
     return (
         <>
             <ConfigurationLayout>
-                <TaxesListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
+                <TaxesListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
             </ConfigurationLayout>
         </>
     )

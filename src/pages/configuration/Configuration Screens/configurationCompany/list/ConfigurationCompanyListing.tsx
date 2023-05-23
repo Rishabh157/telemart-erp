@@ -19,7 +19,11 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ConfigurationCompanyListing = ({ columns, rows, setShowDropdown }: Props) => {
+const ConfigurationCompanyListing = ({
+    columns,
+    rows,
+    setShowDropdown,
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const company: any = useSelector((state: RootState) => state.company)
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);

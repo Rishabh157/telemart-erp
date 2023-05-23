@@ -1,5 +1,5 @@
 import { FormikProps } from 'formik'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { FormInitialValues } from './AddTapeManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -35,7 +35,7 @@ const AddTapeManagement = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
 
     const MinuteOptions = () => {
         let options: SelectOption[] = []
@@ -68,13 +68,16 @@ const AddTapeManagement = ({
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() => { 
-                                    if((formikProps?.values.hour === "0") && (formikProps.values.minute === "00") && (formikProps.values.second === "00")){
-                                        setShow(true);
-                                    }else{
-
+                                onClick={() => {
+                                    if (
+                                        formikProps?.values.hour === '0' &&
+                                        formikProps.values.minute === '00' &&
+                                        formikProps.values.second === '00'
+                                    ) {
+                                        setShow(true)
+                                    } else {
                                         formikProps.handleSubmit()
-                                        setShow(false);
+                                        setShow(false)
                                     }
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
@@ -153,11 +156,17 @@ const AddTapeManagement = ({
                                 }
                             />
                             <div className="grid grid-cols-3 gap-4 ">
-                            <div className=" text-slate-700  font-medium mt-12 ">
-                                Duration :
-                                {(show)?(<p className="font-poppins text-[12px] text-start mt-3 text-red-500">Duration is Required</p>): ""}
-                            </div>
-                            
+                                <div className=" text-slate-700  font-medium mt-12 ">
+                                    Duration :
+                                    {show ? (
+                                        <p className="font-poppins text-[12px] text-start mt-3 text-red-500">
+                                            Duration is Required
+                                        </p>
+                                    ) : (
+                                        ''
+                                    )}
+                                </div>
+
                                 <div className=" col-span-2 ">
                                     <ATMTextField
                                         name="hour"

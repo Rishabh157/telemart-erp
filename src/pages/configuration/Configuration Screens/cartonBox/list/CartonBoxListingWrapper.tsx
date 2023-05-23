@@ -85,7 +85,7 @@ const CartonBoxListingWrapper = () => {
                 <div className="relative">
                     <button
                         onClick={(e) => {
-                            e.stopPropagation();
+                            e.stopPropagation()
                             setShowDropdown(!showDropdown)
                             setCurrentId(row?._id)
                         }}
@@ -182,7 +182,11 @@ const CartonBoxListingWrapper = () => {
     return (
         <>
             <ConfigurationLayout>
-                <CartonBoxListing columns={columns} rows={items} setShowDropdown={setShowDropdown}/>
+                <CartonBoxListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
             </ConfigurationLayout>
         </>
     )

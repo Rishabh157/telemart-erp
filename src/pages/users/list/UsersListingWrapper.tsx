@@ -12,7 +12,6 @@ import {
 } from 'src/redux/slices/NewUserSlice'
 import UsersListing from './UsersListing'
 
-
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
 
@@ -80,17 +79,17 @@ const UsersListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <div className="relative">
-                <button
-                    onClick={(e) => {
-                        e.stopPropagation()
-                        setShowDropdown(!showDropdown)
-                        //setCurrentId(row?._id)
-                    }}
-                    className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                >
-                    {' '}
-                    <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                </button>
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            setShowDropdown(!showDropdown)
+                            //setCurrentId(row?._id)
+                        }}
+                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+                    >
+                        {' '}
+                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                    </button>
                 </div>
             ),
             align: 'end',
@@ -99,7 +98,11 @@ const UsersListingWrapper = () => {
 
     return (
         <SideNavLayout>
-            <UsersListing columns={columns} rows={items} setShowDropdown={setShowDropdown}/>
+            <UsersListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </SideNavLayout>
     )
 }

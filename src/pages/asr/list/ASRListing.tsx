@@ -18,7 +18,7 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ASRListing = ({ columns, rows, setShowDropdown  }: Props) => {    
+const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [selectedRows, setSelectedRows] = useState([])
 
@@ -69,7 +69,6 @@ const ASRListing = ({ columns, rows, setShowDropdown  }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
-                       
                     />
                 </div>
 

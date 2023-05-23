@@ -181,7 +181,11 @@ const VendorsListingWrapper = () => {
 
     return (
         <SideNavLayout>
-            <VendorsListing columns={columns} rows={items} setShowDropdown={setShowDropdown}/>
+            <VendorsListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </SideNavLayout>
     )
 }

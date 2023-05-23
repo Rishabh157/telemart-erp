@@ -45,7 +45,7 @@ const LanguageListingWrapper = () => {
                 <div className="relative">
                     <button
                         onClick={(e) => {
-                            e.stopPropagation();
+                            e.stopPropagation()
                             setShowDropdown(!showDropdown)
                             setCurrentId(row?._id)
                         }}
@@ -139,7 +139,11 @@ const LanguageListingWrapper = () => {
     return (
         <>
             <ConfigurationLayout>
-                <LanguageListing columns={columns} rows={items} setShowDropdown={setShowDropdown}/>
+                <LanguageListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
             </ConfigurationLayout>
         </>
     )

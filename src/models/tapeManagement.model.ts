@@ -20,16 +20,16 @@ export type TapeManagementListResponse = {
 }
 
 export type AddTapeManagement = {
-    tapeName: string;
-    channelGroup: string | null ;
-    tapeType: string;
-    scheme: string | null ;
-    language: string;
-    duration: string;
-    artist: string;
-    remarks: string | '';
-    companyId: string;
-    youtubeLink: string | '';
+    tapeName: string
+    channelGroup: string | null
+    tapeType: string
+    scheme: string | null
+    language: string
+    duration: string
+    artist: string
+    remarks: string | ''
+    companyId: string
+    youtubeLink: string | ''
 }
 
 export type UpdateTapeManagement = {
@@ -41,9 +41,9 @@ export type UpdateTapeManagement = {
         language: string
         duration: string
         artist: string
-        remarks: string | ""
+        remarks: string | ''
         companyId: string
-        youtubeLink: string | ""
+        youtubeLink: string | ''
     }
     id: string
 }
