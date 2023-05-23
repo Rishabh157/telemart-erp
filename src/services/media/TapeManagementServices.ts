@@ -17,6 +17,14 @@ export const tapeManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        getAllTapeMangement: builder.query({
+            providesTags: ['tape'],
+            query: () => ({
+                url: '/tape-master',
+                method: 'Get',
+            }),
+        }),
+
         //***** ADD *****/
         addTape: builder.mutation({
             invalidatesTags: ['tape'],
@@ -63,6 +71,7 @@ export const {
     useAddTapeMutation,
     useGetPaginationTapeQuery,
     useUpdateTapeMutation,
+    useGetAllTapeMangementQuery,
     useGetTapeByIdQuery,
     useDeleteTapeMutation,
 } = tapeManagementApi

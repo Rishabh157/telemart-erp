@@ -12,6 +12,7 @@ export interface TapeManagementSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectetab: string
+    tapeMangement: TapeManagementListResponse[] | null
 }
 
 const initialState: TapeManagementSliceStateType = {
@@ -24,6 +25,7 @@ const initialState: TapeManagementSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectetab: '',
+    tapeMangement: null,
 }
 
 const TapeManagementSlice: any = createSlice({
@@ -71,6 +73,12 @@ const TapeManagementSlice: any = createSlice({
         setSelectetab: (state, action: PayloadAction<string>) => {
             state.selectetab = action.payload
         },
+        setSelectedTapManagement: (
+            state,
+            action: PayloadAction<TapeManagementListResponse[]>
+        ) => {
+            state.tapeMangement = action.payload
+        },
     },
 })
 
@@ -84,5 +92,6 @@ export const {
     setIsTableLoading,
     setSelectedItem,
     setSelectetab,
+    setSelectedTapManagement,
 } = TapeManagementSlice.actions
 export default TapeManagementSlice.reducer

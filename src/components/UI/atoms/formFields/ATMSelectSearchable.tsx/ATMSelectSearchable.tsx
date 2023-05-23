@@ -5,7 +5,7 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 
 type Props = {
     options: SelectOption[]
-    value: string
+    value?: string[] | string
     onChange: (value: any) => void
     label?: string
     required?: boolean
@@ -39,6 +39,7 @@ const ATMSelectSearchable = ({
             boxShadow: 'none',
         }),
     }
+
     // const selectOptions2 = [
     //     {
     //         value: '',
@@ -51,8 +52,12 @@ const ATMSelectSearchable = ({
     }))
     // selectOptions = [...selectOptions2, ...selectOptions]
     const handleOnChange = (selectedOption: any) => {
+        console.log(selectedOption)
         if (isMulti) {
-            onChange(selectedOption?.values ? selectedOption?.values : [])
+            const values = selectedOption.map((multiValue: any) => {
+                return multiValue.value
+            })
+            onChange(values.length ? values : [])
         } else {
             onChange(selectedOption?.value ? selectedOption?.value : '')
         }
@@ -66,7 +71,23 @@ const ATMSelectSearchable = ({
     //         onChange(valueOp)
     //     }
     // }
+    const handleValue = () => {
+        if (isMulti) {
+            let selectedValues: SelectOption[] = []
+            let FindSelectedValue: string[] = [...(value as string[])]
+            FindSelectedValue?.map((selecttedValue: string) => {
+                const singleValueFind = selectOptions?.filter(
+                    (option) => option.value === selecttedValue
+                )
+                selectedValues = [...selectedValues, ...singleValueFind]
+                return selectedValues
+            })
 
+            return selectedValues
+        } else {
+            return selectOptions?.find((option) => option.value === value)
+        }
+    }
     return (
         <div className="relative mt-4">
             {label && (
@@ -82,14 +103,14 @@ const ATMSelectSearchable = ({
                 defaultValue={selectOptions?.find(
                     (option) => option.value === defaultValue
                 )}
-                value={selectOptions?.find((option) => option.value === value)}
+                value={handleValue()}
                 onChange={(selectedOption) => handleOnChange(selectedOption)}
                 options={selectOptions}
                 isSearchable={isSearchable}
                 styles={selectStyles}
                 isMulti={isMulti}
                 isClearable
-                isOptionDisabled={(options) => options.value === ''}
+                isOptionDisabled={(options) => (options.value as string) === ''}
                 placeholder={`${selectLabel}`}
 
                 // onInputChange={(valueOp) => handleOnInputChange(valueOp)}

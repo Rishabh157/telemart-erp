@@ -60,7 +60,7 @@ const ATMMultiSelect = ({
 
             <div
                 className={twMerge(
-                    `relative border border border-slate-400 h-[35px] rounded  ${extraClasses}`
+                    `relative border  border-slate-400 h-[35px] rounded  ${extraClasses}`
                 )}
             >
                 <div
