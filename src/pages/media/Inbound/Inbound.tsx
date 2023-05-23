@@ -166,7 +166,7 @@ const Inbound = () => {
                                 <div className="mt-2">
                                     Profile Delivery By :
                                 </div>
-                                <div className="mt-2">Complaint Deatail :</div>
+                                <div className="mt-2">Complaint Detail :</div>
                                 <div className="mt-2">Complain NO :</div>
                             </div>
                         </div>
@@ -349,8 +349,12 @@ const Inbound = () => {
                         </Button>
                     </div>
                 </div>
-                <div className=" h-[26vh]  row-start-10 row-end-12  ">
-                    <ChannelCategoryListing columns={[]} rows={[]} />
+                <div className=" h-[26vh]  row-start-10 row-end-12 w-full -mx-3  ">
+                    <ChannelCategoryListing
+                        isHeader={false}
+                        columns={[]}
+                        rows={[]}
+                    />
                 </div>
             </div>
         </MediaLayout>

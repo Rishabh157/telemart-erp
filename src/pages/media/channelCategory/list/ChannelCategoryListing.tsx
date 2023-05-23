@@ -19,9 +19,10 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    isHeader?: boolean
 }
 
-const ChannelCategoryListing = ({ columns, rows }: Props) => {
+const ChannelCategoryListing = ({ columns, rows, isHeader = true }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const channelCategoryState: any = useSelector(
         (state: RootState) => state.channelGroup
@@ -41,36 +42,42 @@ const ChannelCategoryListing = ({ columns, rows }: Props) => {
 
     return (
         <div className="px-4 h-full overflow-auto pt-3 ">
-            <div className="h-[30px]">
-                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-            </div>
+            {isHeader && (
+                <div className="h-[30px]">
+                    <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+                </div>
+            )}
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Channel Category</ATMPageHeading>
-                <button
-                    type="button"
-                    onClick={() => navigate('add')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add Channel Category
-                </button>
-            </div>
+            {isHeader && (
+                <div className="flex justify-between items-center h-[45px]">
+                    <ATMPageHeading> Channel Category</ATMPageHeading>
+                    <button
+                        type="button"
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add Channel Category
+                    </button>
+                </div>
+            )}
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
-                <ATMTableHeader
-                    page={page}
-                    rowCount={totalItems}
-                    rowsPerPage={rowsPerPage}
-                    rows={rows}
-                    onSearch={(searchvalue) =>
-                        dispatch(setSearchValue(searchvalue))
-                    }
-                    onRowsPerPageChange={(newValue) =>
-                        dispatch(setRowsPerPage(newValue))
-                    }
-                    isFilter
-                />
+                {isHeader && (
+                    <ATMTableHeader
+                        page={page}
+                        rowCount={totalItems}
+                        rowsPerPage={rowsPerPage}
+                        rows={rows}
+                        onSearch={(searchvalue) =>
+                            dispatch(setSearchValue(searchvalue))
+                        }
+                        onRowsPerPageChange={(newValue) =>
+                            dispatch(setRowsPerPage(newValue))
+                        }
+                        isFilter
+                    />
+                )}
 
                 {/* Table */}
                 <div className="grow overflow-auto  ">
