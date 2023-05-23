@@ -1,5 +1,6 @@
 import { BiCheck } from 'react-icons/bi'
 import { HiDotsVertical } from 'react-icons/hi'
+import { useNavigate } from 'react-router-dom'
 
 type BarcodeCardProps = {
     barcodeList?: barcodecardType[]
@@ -24,6 +25,7 @@ const CartonBoxBarcodeDetailCard = ({
     onCartonBoxBarcodeSelect,
     onBarcodeClick,
 }: BarcodeCardProps) => {
+    const navigate = useNavigate()
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-5 py-3 px-3">
             {barcodeList?.map(
@@ -38,6 +40,9 @@ const CartonBoxBarcodeDetailCard = ({
                             onClick={() => {
                                 //  onBarcodeClick &&
                                 onBarcodeClick()
+                                navigate(
+                                    `/configurations/barcode/carton-box-items/${barcode?.barcodenumber}`
+                                )
                             }}
                             className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${
                                 false ? ' border-red-500' : 'border-slate-200'

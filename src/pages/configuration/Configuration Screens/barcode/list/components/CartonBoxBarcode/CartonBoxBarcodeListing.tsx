@@ -9,7 +9,6 @@ import {
 } from 'src/redux/slices/CartonBoxBarcodeSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import CartonBoxBarcodeDetailCard from './CartonBoxBarcodeDetailCard'
-import { useNavigate } from 'react-router-dom'
 
 type Props = {
     rows: any[]
@@ -39,7 +38,6 @@ const CartonBoxBarcodeListing = ({
     const cartonBoxBarcodeState: any = useSelector(
         (state: RootState) => state.cartonBoxBarcode
     )
-
     //  const [isFilterOpen, setIsFilterOpen] = useState(false);
     const datas = cartonBoxBarcodeState?.items?.map((ele: any) => {
         return {
@@ -51,7 +49,6 @@ const CartonBoxBarcodeListing = ({
     })
 
     const { page, rowsPerPage, totalItems, searchValue } = cartonBoxBarcodeState
-    const navigate = useNavigate()
 
     return (
         <div className="px-4 h-full flex flex-col gap-3">
@@ -78,18 +75,7 @@ const CartonBoxBarcodeListing = ({
                         barcodeList={datas}
                         selectedCartonBoxBarcodes={selectedCartonBoxBarcodes}
                         onCartonBoxBarcodeSelect={onCartonBoxBarcodeSelect}
-                        onBarcodeClick={() =>
-                            navigate(
-                                '/configurations/barcode/carton-box-items',
-                                {
-                                    state: {
-                                        barcodeNumber:
-                                            cartonBoxBarcodeState?.items[0]
-                                                .barcodeNumber,
-                                    },
-                                }
-                            )
-                        }
+                        onBarcodeClick={() => {}}
                     />
                 </div>
 
