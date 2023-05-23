@@ -155,7 +155,8 @@ const ASRListingWrapper = () => {
             renderCell: (row: any) => (
                 <div className="relative">
                     <button
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.stopPropagation()
                             setShowDropdown(!showDropdown)
                             setCurrentId(row?._id)
                         }}
@@ -267,10 +268,11 @@ const ASRListingWrapper = () => {
             }
         })
     }
+
     return (
         <>
             <SideNavLayout>
-                <ASRListing columns={columns} rows={items} />
+                <ASRListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
             </SideNavLayout>
         </>
     )

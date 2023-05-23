@@ -114,14 +114,19 @@ const AddTapeManagementWrapper = () => {
 
     // Form Validation Schema
     const validationSchema = object({
-        tapeName: string(),
+        tapeName: string().required('Required'),
         tapeType: string().required('Required'),
         scheme: string(),
         channelGroup: string(),
-        // language: string().required('Required'),
+        language: string().required('Required'),
         hour: string().required('Required'),
-        // minute: string().required('Required'),
-        // second: string().required('Required'),
+        minute: string().required('Required'),
+        second: string().required('Required'),
+        // duration:string().when(['hour', 'minute', 'second'], {
+        //     is:(hour: any, minute: any, second: any) => hour === 0 || minute === 0 || second === 0,
+        //     then:string().required("Duration is required"),
+        //     otherwise: string()
+        // }),
         artist: string().required('Required'),
         remarks: string(),
         youtubeLink: string(),
@@ -133,14 +138,14 @@ const AddTapeManagementWrapper = () => {
         setTimeout(() => {
             AddTapeApi({
                 tapeName: values.tapeName,
-                channelGroup: values.channelGroup,
+                channelGroup: values.channelGroup || null,
                 tapeType: values.tapeType,
-                scheme: values.scheme,
+                scheme: values.scheme || null,
                 language: values.language,
                 duration: duration,
                 artist: values.artist,
-                remarks: values.remarks,
-                youtubeLink: values.youtubeLink,
+                remarks: values.remarks || '',
+                youtubeLink: values.youtubeLink || '',
                 companyId: values.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

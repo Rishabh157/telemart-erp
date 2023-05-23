@@ -71,7 +71,8 @@ const ItemListingWrapper = () => {
             renderCell: (row: any) => (
                 <div className="relative">
                     <button
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.stopPropagation();
                             setShowDropdown(!showDropdown)
                             setCurrentId(row?._id)
                         }}
@@ -167,7 +168,7 @@ const ItemListingWrapper = () => {
     return (
         <>
             <ConfigurationLayout>
-                <ItemListing columns={columns} rows={items} />
+                <ItemListing columns={columns} rows={items} setShowDropdown={setShowDropdown}/>
             </ConfigurationLayout>
         </>
     )

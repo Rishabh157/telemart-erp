@@ -193,7 +193,7 @@ const DealersListingWrapper = () => {
         <>
             <SideNavLayout>
                 <div className="px-4 h-[calc(100vh-55px)]">
-                    <WarehouseListing columns={columns} rows={items} />
+                    <WarehouseListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
                 </div>
             </SideNavLayout>
         </>

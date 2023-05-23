@@ -149,7 +149,7 @@ const EditTapeManagementWrapper = () => {
 
     // Form Validation Schema
     const validationSchema = object({
-        tapeName: string(),
+        tapeName: string().required('Required'),
         tapeType: string().required('Required'),
         scheme: string(),
         channelGroup: string(),
@@ -169,14 +169,14 @@ const EditTapeManagementWrapper = () => {
             updateTape({
                 body: {
                     tapeName: values.tapeName,
-                    channelGroup: values.channelGroup,
+                    channelGroup: values.channelGroup || null,
                     tapeType: values.tapeType,
-                    scheme: values.scheme,
+                    scheme: values.scheme || null,
                     language: values.language,
                     duration: duration,
                     artist: values?.artist,
-                    remarks: values.remarks,
-                    youtubeLink: values.youtubeLink,
+                    remarks: values.remarks || '',
+                    youtubeLink: values.youtubeLink || '',
                     companyId: values.companyId || '',
                 },
                 id: id || '',
