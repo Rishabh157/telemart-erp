@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LocationListView from '../../sharedComponents/LocationListView'
 import AddAreaWrapper from '../add/AddAreaWrapper'
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setSearchValue,
     setSelectedLocationArea,
@@ -15,7 +15,7 @@ type Props = {
 
 const AreaListing = ({ areas }: Props) => {
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const { searchValue }: any = useSelector((state: RootState) => state.areas)
     const { selectedLocationPincode }: any = useSelector(
         (state: RootState) => state.pincode

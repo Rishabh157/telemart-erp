@@ -16,7 +16,7 @@ import {
     useGetProductSubCategoryQuery,
 } from 'src/services/ProductSubCategoryService'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
@@ -27,7 +27,7 @@ import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 
 const ProductSubCategoryListingWrapper = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deleteProductSubCategory] = useDeleteProductSubCategoryMutation()
     const [showDropdown, setShowDropdown] = useState(false)

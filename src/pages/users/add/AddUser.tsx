@@ -97,6 +97,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                             {/* Password */}
                             <ATMTextField
                                 name="password"
+                                type="password"
                                 value={values.password}
                                 label="Password"
                                 placeholder="Password"
@@ -111,9 +112,12 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 value={values.mobile}
                                 label="Mobile Number"
                                 placeholder="Mobile Number"
-                                onChange={(e) =>
-                                    setFieldValue('mobile', e.target.value)
-                                }
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        setFieldValue('mobile', e.target.value)
+                                    }
+                                }}
                             />
                         </div>
                     </div>

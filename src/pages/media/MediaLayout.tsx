@@ -13,9 +13,9 @@ const mediaNavigation: NavItemType[] = [
         path: '/media/did',
     },
     {
-        label: 'Tab Management',
+        label: 'Tape Management',
         icon: AiOutlineSetting,
-        path: '/media/tab',
+        path: '/media/tape',
     },
     {
         label: 'Channel Group',
@@ -32,6 +32,7 @@ const mediaNavigation: NavItemType[] = [
         icon: AiOutlineSetting,
         path: '/media/channel',
     },
+
     {
         label: 'Competitor Management',
         icon: AiOutlineSetting,
@@ -47,10 +48,16 @@ const mediaNavigation: NavItemType[] = [
         icon: AiOutlineSetting,
         path: '/media/analysis',
     },
+
     {
         label: 'Flow',
         icon: AiOutlineSetting,
         path: '/media/flow',
+    },
+    {
+        label: 'Inbound',
+        icon: AiOutlineSetting,
+        path: '/media/inbound',
     },
 ]
 

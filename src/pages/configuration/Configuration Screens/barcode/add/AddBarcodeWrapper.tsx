@@ -7,7 +7,7 @@ import { useAddBarcodeMutation } from 'src/services/BarcodeService'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { v4 as uuidv4 } from 'uuid'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { setAllItems } from 'src/redux/slices/productGroupSlice'
@@ -21,7 +21,7 @@ export type FormInitialValues = {
 
 const AddBarcodeWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { allItems }: any = useSelector(

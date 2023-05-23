@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LocationListView from '../../sharedComponents/LocationListView'
 import AddStateWrapper from '../add/AddStateWrapper'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setSearchValue,
     setSelctedLocationState,
@@ -23,7 +23,7 @@ type Props = {
 }
 
 const StateListing = ({ states }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
     const { searchValue }: any = useSelector((state: RootState) => state.states)
     const { selectedLocationCountries }: any = useSelector(

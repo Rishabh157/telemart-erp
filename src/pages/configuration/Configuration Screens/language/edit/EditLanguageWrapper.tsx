@@ -6,7 +6,7 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 // import { useEditLanguageMutation } from "src/services/LanguageService";
 import { showToast } from 'src/utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
     useGetLanguageByIdQuery,
@@ -24,7 +24,7 @@ const EditLanguageWrapper = (props: Props) => {
     const params = useParams()
     const Id = params.id
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [editLanguage] = useUpdateLanguageMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)

@@ -6,7 +6,7 @@ import AddProductGroup from './AddProductGroup'
 import { useNavigate } from 'react-router-dom'
 import { useAddProductGroupMutation } from 'src/services/ProductGroupService'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { showToast } from 'src/utils'
 import { useGetAllTaxesQuery } from 'src/services/TaxesService'
 import { setAllTaxes } from 'src/redux/slices/TaxesSlice'
@@ -24,7 +24,7 @@ export type FormInitialValues = {
 const AddProductGroupWrapper = (props: Props) => {
     // Form Initial Values
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [taxStatus, setTaxStatus] = useState(false)
 
     const navigate = useNavigate()

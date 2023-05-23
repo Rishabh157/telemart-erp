@@ -2,11 +2,12 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
     AddASRWrapper,
-    AddCompetitorManagement,
+    AddCompetitorWrapper,
     AddDidManagementWrapper,
     ASRListingWrapper,
     BarcodeGenerator,
     CompetitorManagementListingWrapper,
+    EditCompetitorWraper,
     EditDidManagementWrapper,
     EditPurchaseOrderWrapper,
 } from './pages/index'
@@ -127,18 +128,24 @@ import {
     EditChannelManagement,
     SlotManagementListingWrapper,
     AddSlotManagement,
-    AddTabManagement,
-    TabManagementListingWrapper,
+    AddTapeManagementWrapper,
+    TapeManagementListingWrapper,
     ChannelGroupListingWrapper,
     AddChannelGroupWrapper,
     EditChannelGroupWrapper,
     AddChannelManagementWrapper,
     ChannelCategoryListingWrapper,
     AddChannelCategoryWrapper,
+    EditTapeManagementWrapper,
+    EditChannelCategoryWrapper,
 } from './pages/index'
 import Auth from './pages/login/Auth'
 import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
 import Inbound from './pages/media/Inbound/Inbound'
+import DispositionTwoListingWrapper from './pages/configuration/Configuration Screens/dispositionTwo/list/DispositionTwoListingWrapper'
+import AddDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/add/AddDispositionTwoWrapper'
+import EditDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/edit/EditDispositionTwoWrapper'
+import EditDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/edit/EditDispositionOneWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -528,9 +535,26 @@ const PageRoutes = () => {
                         path="/configurations/disposition-one"
                         element={<DispositionOneListingWrapper />}
                     />
+
                     <Route
                         path="/configurations/disposition-one/add"
                         element={<AddDispositionOneWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-one/:id"
+                        element={<EditDispositionOneWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-two"
+                        element={<DispositionTwoListingWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-two/add"
+                        element={<AddDispositionTwoWrapper />}
+                    />
+                    <Route
+                        path="/configurations/disposition-two/:id"
+                        element={<EditDispositionTwoWrapper />}
                     />
                     <Route
                         path="configurations/hierarchy"
@@ -576,12 +600,16 @@ const PageRoutes = () => {
                         element={<EditChannelManagement />}
                     />
                     <Route
-                        path="media/tab"
-                        element={<TabManagementListingWrapper />}
+                        path="media/tape"
+                        element={<TapeManagementListingWrapper />}
                     />
                     <Route
-                        path="media/tab/add"
-                        element={<AddTabManagement />}
+                        path="media/tape/add"
+                        element={<AddTapeManagementWrapper />}
+                    />
+                    <Route
+                        path="media/tape/:id"
+                        element={<EditTapeManagementWrapper />}
                     />
                     <Route
                         path="media/slot"
@@ -597,7 +625,11 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="media/competitor/add"
-                        element={<AddCompetitorManagement />}
+                        element={<AddCompetitorWrapper />}
+                    />
+                    <Route
+                        path="media/competitor/:id"
+                        element={<EditCompetitorWraper />}
                     />
                     <Route
                         path="media/channel-category"
@@ -608,8 +640,12 @@ const PageRoutes = () => {
                         element={<AddChannelCategoryWrapper />}
                     />
                     <Route
+                        path="media/channel-category/edit/:id"
+                        element={<EditChannelCategoryWrapper />}
+                    />
+                    <Route
                         path="media/channel-category/add"
-                        element={<AddCompetitorManagement />}
+                        element={<AddCompetitorWrapper />}
                     />
                        <Route
                         path="media/inbound/"

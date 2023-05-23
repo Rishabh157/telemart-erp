@@ -10,7 +10,7 @@ import StepEditFAQsWrapper from './FormSteps/StepEditFAQs/StepEditFAQsWrapper'
 import StepEditVideoWrapper from './FormSteps/StepEditVideo/StepEditVideoWrapper'
 import StepEditCallScriptWrapper from './FormSteps/StepEditCallScript/StepEditCallScriptWrapper'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     ContentState,
     convertFromHTML,
@@ -167,7 +167,7 @@ const EditProductWrapper = () => {
     const params = useParams()
     const Id = params.id
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const {
         data: prData,
         isLoading: prIsLoading,

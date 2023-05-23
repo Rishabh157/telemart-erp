@@ -7,9 +7,10 @@ export type ATMTextFieldPropTypes = {
     value: string | string[] | number
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     label?: string
-    size?: 'small' | 'medium' | 'large'
+    size?: 'small' | 'medium' | 'large' |'xs'
     isSubmitting?: boolean
     onBlur?: ((e: any) => void) & React.FocusEventHandler<HTMLInputElement>
+    extraClassField?:string
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
 const ATMTextField = ({
@@ -22,10 +23,11 @@ const ATMTextField = ({
     onBlur,
     size = 'small',
     isSubmitting = true,
+    extraClassField='',
     ...rest
 }: ATMTextFieldPropTypes) => {
     return (
-        <div className="relative mt-4">
+        <div className={`relative mt-4 ${extraClassField}`}>
             {label && (
                 <label className="text-slate-700 font-medium">
                     {' '}
@@ -50,12 +52,10 @@ const ATMTextField = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                        <>
-                            <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                                {' '}
-                                {errMsg}{' '}
-                            </p>
-                        </>
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500 py-1 mb-1">
+                            {' '}
+                            {errMsg}{' '}
+                        </p>
                     )}
                 </ErrorMessage>
             )}

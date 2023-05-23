@@ -10,7 +10,7 @@ import { BreadcrumbType } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadC
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetDealersQuery } from 'src/services/DealerServices'
 import { setItems, setSearchValue } from 'src/redux/slices/dealerSlice'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 
 const tabsData = [
     {
@@ -78,7 +78,7 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const ViewDealer = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const dealerState: any = useSelector((state: RootState) => state.dealer)
     const { page, rowsPerPage, items } = dealerState
     const { searchValue }: any = useSelector((state: RootState) => state.dealer)

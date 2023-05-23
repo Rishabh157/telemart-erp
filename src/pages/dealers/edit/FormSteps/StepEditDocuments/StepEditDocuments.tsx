@@ -6,6 +6,8 @@ import { FormInitialValues } from '../../EditDealerWrapper'
 import { FieldType } from './StepEditDocumentsWrapper'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -15,6 +17,9 @@ type Props = {
 const StepEditDocuments = ({ formikProps, formFields }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className="">
@@ -23,7 +28,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                 return (
                     <div
                         key={index}
-                        className={`py-6 px-7 border-b border-slate-400`}
+                        className={`py-9 px-7 border-b border-slate-400`}
                     >
                         <div className="text-primary-main text-lg pb-2 font-medium ">
                             {sectionName}
@@ -59,14 +64,60 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
-                                                        setFieldValue(
-                                                            name,
+                                                        const inputValue =
                                                             e.target.value
-                                                        )
+                                                        if (
+                                                            name ===
+                                                            'document.adharCardNumber'
+                                                        ) {
+                                                            //alert(inputValue.length)
+                                                            if (
+                                                                inputValue.length ===
+                                                                    4 ||
+                                                                inputValue.length ===
+                                                                    9
+                                                            ) {
+                                                                //alert(inputValue.length)
+                                                                e.target.value =
+                                                                    inputValue +
+                                                                    '-'
+                                                                setFieldValue(
+                                                                    name,
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            } else if (
+                                                                inputValue.length >
+                                                                14
+                                                            ) {
+                                                                e.target.value =
+                                                                    inputValue.substring(
+                                                                        0,
+                                                                        14
+                                                                    )
+                                                                setFieldValue(
+                                                                    name,
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            } else {
+                                                                setFieldValue(
+                                                                    name,
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            }
+                                                        } else {
+                                                            setFieldValue(
+                                                                name,
+                                                                e.target.value
+                                                            )
+                                                        }
                                                     }}
                                                     label={label}
                                                     placeholder={placeholder}
                                                     className="shadow bg-white rounded"
+                                                    isSubmitting={isSubmitting}
                                                 />
                                                 {offset &&
                                                     Array(offset)
@@ -118,7 +169,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                 ) => {
                                     return (
                                         <div
-                                            className={`py-6 px-7 border-b border-slate-400`}
+                                            className={`py-9 px-7 border-b border-slate-400`}
                                         >
                                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center ">
                                                 Other Documents #
@@ -157,6 +208,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                         'Document Name'
                                                     }
                                                     className="shadow bg-white rounded"
+                                                    isSubmitting={isSubmitting}
                                                 />
 
                                                 <ATMTextField
@@ -175,6 +227,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                         )
                                                     }
                                                     // selectedFile={otherDocument.documentFile}
+                                                    isSubmitting={isSubmitting}
                                                 />
 
                                                 <div></div>

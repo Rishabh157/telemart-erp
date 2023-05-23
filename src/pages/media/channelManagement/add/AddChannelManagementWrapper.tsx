@@ -15,7 +15,7 @@ import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { CountryListResponse } from 'src/models/Country.model'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 import { LanguageListResponse } from 'src/models'
-import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoryService'
+import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 export type FormInitialValues = {
     channelName: string

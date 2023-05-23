@@ -5,7 +5,7 @@ import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import PurchaseOrderListing from './PurchaseOrderListing'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     useGetPurchaseOrderQuery,
     useUpdatePoLevelMutation,
@@ -23,7 +23,7 @@ import { showToast } from 'src/utils'
 
 const PurchaseOrderListingWrapper = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const [updatePoLevel] = useUpdatePoLevelMutation()
     const productOrderState: any = useSelector(

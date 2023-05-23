@@ -1,19 +1,20 @@
-import { TabManagementListResponse } from '../../../models/tabManagement.model'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { ChannelMasterListResponse } from 'src/models/channelMaster.model'
 
-export interface TabManagementSliceStateType {
-    items: TabManagementListResponse[] | []
+export interface ChannelMasterSliceStateType {
+    items: ChannelMasterListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selectetab: string
+    selectedId: string
+    channelMaster: ChannelMasterListResponse[] | null
 }
 
-const initialState: TabManagementSliceStateType = {
+const initialState: ChannelMasterSliceStateType = {
     items: [],
     totalItems: 0,
     isTableLoading: false,
@@ -21,16 +22,17 @@ const initialState: TabManagementSliceStateType = {
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectetab: '',
+    selectedId: '',
+    channelMaster: null,
 }
 
-const TabManagementSlice: any = createSlice({
-    name: 'TabManagement',
+const channelMasterSlice: any = createSlice({
+    name: 'channelMaster',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<TabManagementListResponse[] | []>
+            action: PayloadAction<ChannelMasterListResponse[] | []>
         ) => {
             state.items = action.payload
         },
@@ -60,8 +62,14 @@ const TabManagementSlice: any = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setSelectetab: (state, action: PayloadAction<string>) => {
-            state.selectetab = action.payload
+        setSelectedId: (state, action: PayloadAction<string>) => {
+            state.selectedId = action.payload
+        },
+        setChannelMasters: (
+            state,
+            action: PayloadAction<ChannelMasterListResponse[]>
+        ) => {
+            state.channelMaster = action.payload
         },
     },
 })
@@ -74,6 +82,7 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectetab,
-} = TabManagementSlice.actions
-export default TabManagementSlice.reducer
+    setSelectedId,
+    setChannelMasters,
+} = channelMasterSlice.actions
+export default channelMasterSlice.reducer

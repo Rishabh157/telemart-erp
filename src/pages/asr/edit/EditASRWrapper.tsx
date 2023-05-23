@@ -6,7 +6,7 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     useGetAsrByIdQuery,
     useUpdateAsrMutation,
@@ -29,7 +29,7 @@ const EditASRWrapper = (props: Props) => {
     const params = useParams()
     const Id = params.id
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const [editAsr] = useUpdateAsrMutation()

@@ -4,7 +4,7 @@ import { DispositionOneListResponse } from 'src/models/configurationModel/Dispos
 
 export interface DispositionOneSliceStateType {
     items: DispositionOneListResponse[] | []
-    selectedAttribute: DispositionOneListResponse | null
+    selectedDispositionOne: DispositionOneListResponse | null
     allItems: DispositionOneListResponse[] | []
     totalItems: number
     isTableLoading: boolean
@@ -18,7 +18,7 @@ export interface DispositionOneSliceStateType {
 const initialState: DispositionOneSliceStateType = {
     items: [],
     allItems: [],
-    selectedAttribute: null,
+    selectedDispositionOne: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -73,11 +73,11 @@ const dispositionOneSlice: Slice<DispositionOneSliceStateType> = createSlice({
         ) => {
             state.allItems = action.payload
         },
-        setSelectedAttribute: (
+        setSelectedDispositionOne: (
             state,
             action: PayloadAction<DispositionOneListResponse | null>
         ) => {
-            state.selectedAttribute = action.payload
+            state.selectedDispositionOne = action.payload
         },
     },
 })
@@ -91,7 +91,7 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
-    setSelectedAttribute,
+    setSelectedDispositionOne,
     setAllItems,
 } = dispositionOneSlice.actions
 export default dispositionOneSlice.reducer

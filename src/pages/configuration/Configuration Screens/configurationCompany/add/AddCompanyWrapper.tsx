@@ -9,6 +9,9 @@ import { useAddCompanyMutation } from 'src/services/CompanyServices'
 import { useNavigate } from 'react-router-dom'
 import { showToast, validationofGst } from 'src/utils'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from 'src/redux/store'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -72,6 +75,7 @@ const steps = [
 const pageHeading = 'Add New Company'
 
 const AddCompanyWrapper = () => {
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
 
     // Breadcrumbs
@@ -145,6 +149,7 @@ const AddCompanyWrapper = () => {
                 navigate('/configurations/company')
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }
