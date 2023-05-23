@@ -4,6 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface TapeManagementSliceStateType {
     items: TapeManagementListResponse[] | []
+    selectedItem: TapeManagementListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -16,6 +17,7 @@ export interface TapeManagementSliceStateType {
 const initialState: TapeManagementSliceStateType = {
     items: [],
     totalItems: 0,
+    selectedItem: null,
     isTableLoading: false,
     page: 1,
     rowsPerPage: 10,
@@ -60,6 +62,12 @@ const TapeManagementSlice: any = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
+        setSelectedItem: (
+            state,
+            action: PayloadAction<TapeManagementListResponse | null>
+        ) => {
+            state.selectedItem = action.payload
+        },
         setSelectetab: (state, action: PayloadAction<string>) => {
             state.selectetab = action.payload
         },
@@ -74,6 +82,7 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
+    setSelectedItem,
     setSelectetab,
 } = TapeManagementSlice.actions
 export default TapeManagementSlice.reducer

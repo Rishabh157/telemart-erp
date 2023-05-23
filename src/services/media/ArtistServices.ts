@@ -14,6 +14,15 @@ export const artistApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET All DATA *****/
+        getAllArtist: builder.query({
+            providesTags: ['artist'],
+            query: () => ({
+                url: `/artist`,
+                method: 'GET',
+            }),
+        }),
+
         //***** GET SINGLE DATA *****/
         getArtistById: builder.query({
             providesTags: ['artist'],
@@ -58,6 +67,7 @@ export const {
     useAddArtistMutation,
     useGetPaginationArtistQuery,
     useUpdateArtistMutation,
+    useGetAllArtistQuery,
     useGetArtistByIdQuery,
     useDeletegetArtistMutation,
 } = artistApi
