@@ -41,28 +41,21 @@ const columns: columnTypes[] = [
     },
     {
         field: 'type',
-        headerName: 'type',
+        headerName: 'Type',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: SlotManagementListResponse) => (
             <span> {row.type} </span>
         ),
     },
     {
-        field: 'startDateTime',
-        headerName: 'StartDateTime',
+        field: 'endDateTime',
+        headerName: 'EndDateTime',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.startDateTime} </span>
+            <span> {row.endDateTime} </span>
         ),
     },
-    {
-        field: 'startDateTime',
-        headerName: 'StartDateTime',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.startDateTime} </span>
-        ),
-    },
+   
     {
         field: 'actions',
         headerName: 'Actions',

@@ -25,7 +25,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: ' Slot Management',
-        path: '/media/slot-management',
+        path: '/media/slot',
     },
     {
         label: 'Add Slot',
@@ -163,7 +163,7 @@ const AddSlotManagement = ({
                                 <ATMTimePicker
                                     name="startDateTime"
                                     value={values.startDateTime}
-                                    label="startDateTime"
+                                    label="StartDateTime"
                                     onChange={(newValue) => {
                                         console.log(newValue)
                                         setFieldValue('startDateTime', newValue)
@@ -193,11 +193,11 @@ const AddSlotManagement = ({
                                     isMulti
                                 />
                             </div>
-                            <div className=" mt-5 ">
+                            <div className=" mt-9">
                                 <span className="text-slate-700 font-medium">
                                     Type
                                 </span>
-                                <div className="mt-5 ml-6 flex gap-8">
+                                <div className="mt- ml-6 flex gap-8">
                                     <ATMRadioButton
                                         name="type"
                                         options={options}
@@ -210,6 +210,7 @@ const AddSlotManagement = ({
                                     />
                                 </div>
                             </div>
+                            <div className='mt-5'>
                             <ATMSelectSearchable
                                 name="channelName"
                                 required
@@ -220,6 +221,7 @@ const AddSlotManagement = ({
                                 options={dropdownOptions.channelMgtOptions}
                                 label="Channel Name"
                             />
+                            </div>
                             <ATMSelectSearchable
                                 name="tapeName"
                                 required
@@ -232,7 +234,7 @@ const AddSlotManagement = ({
                                 <ATMTimePicker
                                     name="endDateTime"
                                     value={values.endDateTime}
-                                    label="endDateTime"
+                                    label="EndDateTime"
                                     onChange={(newValue) => {
                                         setFieldValue('endDateTime', newValue)
                                     }}
