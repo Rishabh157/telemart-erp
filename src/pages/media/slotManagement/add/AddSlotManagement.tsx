@@ -159,7 +159,7 @@ const AddSlotManagement = ({
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
-                            <div className="mt-4">
+                            <div className="">
                                 <ATMTimePicker
                                     name="startDateTime"
                                     value={values.startDateTime}
@@ -170,7 +170,7 @@ const AddSlotManagement = ({
                                     }}
                                 />
                             </div>
-                            <div className="mt-5">
+                            <div className="">
                                 {/* <ATMMultiSelect
                                     name="days"
                                     value={selectedNames}
@@ -193,11 +193,11 @@ const AddSlotManagement = ({
                                     isMulti
                                 />
                             </div>
-                            <div className=" mt-9">
+                            <div className="mt-5">
                                 <span className="text-slate-700 font-medium">
                                     Type
                                 </span>
-                                <div className="mt- ml-6 flex gap-8">
+                                <div className="-mt-5 ml-6 flex ">
                                     <ATMRadioButton
                                         name="type"
                                         options={options}
@@ -210,7 +210,7 @@ const AddSlotManagement = ({
                                     />
                                 </div>
                             </div>
-                            <div className='mt-5'>
+                            <div className=''>
                             <ATMSelectSearchable
                                 name="channelName"
                                 required
@@ -230,7 +230,7 @@ const AddSlotManagement = ({
                                 options={dropdownOptions.tapeMangementOptions}
                                 label="Tape Name"
                             />
-                            <div className="mt-4">
+                            <div className="">
                                 <ATMTimePicker
                                     name="endDateTime"
                                     value={values.endDateTime}

@@ -28,7 +28,7 @@ const ATMTimePicker = ({
     isSubmitting = true,
 }: Props) => {
     return (
-        <div className="relative">
+        <div className="relative mt-4">
             {label && (
                 <label className="text-slate-700 font-medium">
                     {' '}
