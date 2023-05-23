@@ -1,4 +1,5 @@
 import { useBarcode } from '@createnextapp/react-barcode'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { RootState } from 'src/redux/store'
@@ -24,9 +25,15 @@ function AllBarcodes() {
     )
 
     const barcodeValues = barcodesToPrint
-    setTimeout(() => {
-        window?.print()
-    }, 1000)
+    useEffect(() => {
+        const printFunc = setTimeout(() => {
+            window?.print()
+        }, 1000)
+        return () => {
+            clearInterval(printFunc)
+        }
+    }, [])
+
     return (
         <div>
             <div className="flex justify-between items-center h-[55px]">

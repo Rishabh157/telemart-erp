@@ -51,6 +51,8 @@ import channelGroupSlice from './slices/media/channelGroupSlice'
 import channelCategorySlice from './slices/media/channelCategorySlice'
 import competitorSlice from './slices/media/competitorManagementSlice'
 import dispositionTwoSlice from './slices/configuration/dispositionTwoSlice'
+import artistSlice from './slices/media/artist'
+
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
 //     if (action.type.includes("rejected") && action.payload.status === 401) {
@@ -108,6 +110,7 @@ const store = configureStore({
         channelGroup: channelGroupSlice,
         channelCategory: channelCategorySlice,
         competitor: competitorSlice,
+        artist: artistSlice,
 
         dispositionTwo: dispositionTwoSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,

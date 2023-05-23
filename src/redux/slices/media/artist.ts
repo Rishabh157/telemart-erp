@@ -1,42 +1,45 @@
-import { TapeManagementListResponse } from '../../../models/tapeManagement.model'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { ArtistListResponse } from 'src/models/Artist.model'
 
-export interface TapeManagementSliceStateType {
-    items: TapeManagementListResponse[] | []
-    selectedItem: TapeManagementListResponse | null
+export interface ArtistSliceStateType {
+    items: ArtistListResponse[] | []
+    allItems: ArtistListResponse[] | []
+    selectedItem: ArtistListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selectetab: string
-    tapeMangement: TapeManagementListResponse[] | null
+    selecteArtist: string
 }
 
-const initialState: TapeManagementSliceStateType = {
+const initialState: ArtistSliceStateType = {
     items: [],
-    totalItems: 0,
+    allItems: [],
     selectedItem: null,
+    totalItems: 0,
     isTableLoading: false,
     page: 1,
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectetab: '',
-    tapeMangement: null,
+    selecteArtist: '',
 }
 
-const TapeManagementSlice: any = createSlice({
-    name: 'TapeManagement',
+const artistSlice: any = createSlice({
+    name: 'artist',
     initialState,
     reducers: {
-        setItems: (
-            state,
-            action: PayloadAction<TapeManagementListResponse[] | []>
-        ) => {
+        setItems: (state, action: PayloadAction<ArtistListResponse[] | []>) => {
             state.items = action.payload
+        },
+        setAllItems: (
+            state,
+            action: PayloadAction<ArtistListResponse[] | []>
+        ) => {
+            state.allItems = action.payload
         },
         setPage: (state, action: PayloadAction<number>) => {
             state.page = action.payload
@@ -64,34 +67,28 @@ const TapeManagementSlice: any = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setSelectedItem: (
+        setSelecteArtist: (state, action: PayloadAction<string>) => {
+            state.selecteArtist = action.payload
+        },
+        setSelectedArtist: (
             state,
-            action: PayloadAction<TapeManagementListResponse | null>
+            action: PayloadAction<ArtistListResponse | null>
         ) => {
             state.selectedItem = action.payload
-        },
-        setSelectetab: (state, action: PayloadAction<string>) => {
-            state.selectetab = action.payload
-        },
-        setSelectedTapManagement: (
-            state,
-            action: PayloadAction<TapeManagementListResponse[]>
-        ) => {
-            state.tapeMangement = action.payload
         },
     },
 })
 
 export const {
     setItems,
+    setAllItems,
     setPage,
     setRowsPerPage,
     setSearchValue,
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectedItem,
-    setSelectetab,
-    setSelectedTapManagement,
-} = TapeManagementSlice.actions
-export default TapeManagementSlice.reducer
+    setSelecteArtist,
+    setSelectedArtist,
+} = artistSlice.actions
+export default artistSlice.reducer

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import MediaLayout from '../../MediaLayout'
-import { useUpdateTapeMutation } from 'src/services/media/TapeManagementServices'
+import {
+    useUpdateTapeMutation,
+    useGetTapeByIdQuery,
+} from 'src/services/media/TapeManagementServices'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
+import { RootState, AppDispatch } from 'src/redux/store'
+import { useNavigate, useParams } from 'react-router-dom'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
@@ -11,11 +14,14 @@ import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServi
 import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
+import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
 import EditTapeManagement from './EditTapeManagement'
 import { SchemeListResponse } from 'src/models/scheme.model'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 import { setLanguage } from 'src/redux/slices/languageSlice'
 import { LanguageListResponse } from 'src/models'
+import { setSelectedItem } from 'src/redux/slices/media/tapeManagementSlice'
+import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
 
 export type FormInitialValues = {
     tapeName: string
@@ -35,9 +41,30 @@ export type FormInitialValues = {
 
 const EditTapeManagementWrapper = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
+    const params = useParams()
+    const id = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [schemeData, setSchemeData] = useState([])
+
+    const ArtistState: any = useSelector((state: RootState) => state.artist)
+
+    const { selectedItem }: any = useSelector(
+        (state: RootState) => state?.tapeManagement
+    )
+    const {
+        data: tapeData,
+        isLoading: tapeIsLoading,
+        isFetching: tapeIsFetching,
+    } = useGetTapeByIdQuery(id)
+
+    //console.log(tapeData?.data , "tapeData")
+
+    useEffect(() => {
+        if (!tapeIsLoading && !tapeIsFetching) {
+            dispatch(setSelectedItem(tapeData?.data || []))
+        }
+    }, [dispatch, tapeData, tapeIsLoading, tapeIsFetching])
 
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -46,13 +73,24 @@ const EditTapeManagementWrapper = () => {
     )
     const { language } = useSelector((state: RootState) => state?.language)
 
-    const [editTapeApi] = useUpdateTapeMutation()
+    const { allItems: allArtist } = ArtistState
+
+    const [updateTape] = useUpdateTapeMutation()
+
+    const {
+        data: artistData,
+        isLoading: artistIsLoading,
+        isFetching: artistIsFetching,
+    } = useGetAllArtistQuery(' ')
+
+    //console.log(artistData, 'artist')
 
     const {
         isLoading: isSchemeLoading,
         isFetching: isSchemeFetching,
         data: schemeDataApi,
     } = useGetSchemeQuery(' ')
+
     const {
         isLoading: isLanguageLoading,
         isFetching: isLanguageFetching,
@@ -63,35 +101,50 @@ const EditTapeManagementWrapper = () => {
         isFetching,
         data: TapeGroupsData,
     } = useGetAllChannelGroupQuery('')
+
+    useEffect(() => {
+        if (!artistIsLoading && !artistIsFetching) {
+            dispatch(setAllArtist(artistData?.data || []))
+        }
+    }, [artistData, artistIsLoading, artistIsFetching, dispatch])
+
     useEffect(() => {
         if (!isLoading && !isFetching) {
             dispatch(setChannelGroups(TapeGroupsData.data || []))
         }
     }, [isLoading, isFetching, TapeGroupsData, dispatch])
+
     useEffect(() => {
         if (!isLanguageLoading && !isLanguageFetching) {
             dispatch(setLanguage(languageDataApi.data || []))
         }
     }, [isLanguageLoading, isLanguageFetching, languageDataApi, dispatch])
+
     useEffect(() => {
         if (!isSchemeLoading && !isSchemeFetching) {
             setSchemeData(schemeDataApi?.data)
         }
     }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
+
+    //console.log(selectedItem, "selected")
+    const newDuration = selectedItem?.duration?.split(':')
+    console.log(newDuration)
+
     const initialValues: FormInitialValues = {
-        tapeName: '',
-        channelGroup: '',
-        tapeType: '',
-        scheme: '',
-        language: '',
-        duration: '',
-        artist: '6467554295e833e56316ccc8',
-        remarks: '',
-        hour: '0',
-        minute: '00',
-        second: '00',
-        youtubeLink: '',
-        companyId: userData?.companyId || '',
+        tapeName: selectedItem?.tapeName || '',
+        channelGroup: selectedItem?.channelGroup || '',
+        tapeType: selectedItem?.tapeType || '',
+        scheme: selectedItem?.scheme || '',
+        language: selectedItem?.language || '',
+        duration: selectedItem?.duration || '',
+        artist: selectedItem?.artist || '',
+
+        remarks: selectedItem?.remarks || '',
+        hour: newDuration ? newDuration[0] : '0',
+        minute: newDuration ? newDuration[1] : '00',
+        second: newDuration ? newDuration[2] : '00',
+        youtubeLink: selectedItem?.youtubeLink || '',
+        companyId: selectedItem?.companyId || userData?.companyId || '',
     }
 
     // Form Validation Schema
@@ -113,7 +166,7 @@ const EditTapeManagementWrapper = () => {
         setApiStatus(true)
         let duration = `${values.hour}:${values.minute}:${values.second}`
         setTimeout(() => {
-            editTapeApi({
+            updateTape({
                 body: {
                     tapeName: values.tapeName,
                     channelGroup: values.channelGroup,
@@ -121,16 +174,16 @@ const EditTapeManagementWrapper = () => {
                     scheme: values.scheme,
                     language: values.language,
                     duration: duration,
-                    artist: '6467554295e833e56316ccc8',
+                    artist: values?.artist,
                     remarks: values.remarks,
                     youtubeLink: values.youtubeLink,
                     companyId: values.companyId || '',
                 },
-                id: '',
+                id: id || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Tape added successfully!')
+                        showToast('success', 'Tape Updated successfully!')
                         navigate('/media/Tape')
                     } else {
                         showToast('error', res?.data?.message)
@@ -143,6 +196,12 @@ const EditTapeManagementWrapper = () => {
         }, 1000)
     }
     const dropdownOptions = {
+        artistOption: allArtist.map((item: any) => {
+            return {
+                label: item.artistName,
+                value: item._id,
+            }
+        }),
         channelGroupOptions:
             channelgroup?.map((channelGroup: GetAllChannelGroupResponse) => {
                 return {
@@ -162,11 +221,16 @@ const EditTapeManagementWrapper = () => {
                 value: languageItem?._id,
             }
         }),
-        artistOption: [],
+        tapeTypeOption: [
+            { label: 'Scheme Code', value: 'SCHEME_CODE' },
+            { label: 'Promotional', value: 'PROMOTIONAL' },
+            { label: 'Intruption', value: 'INTRUPTION' },
+        ],
     }
     return (
         <MediaLayout>
             <Formik
+                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
