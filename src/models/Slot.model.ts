@@ -16,16 +16,20 @@ export type SlotManagementListResponse = {
     updatedAt: string
     __v: number
 }
-export enum Weeks {
-    MONDAY = 'MONDAY',
-    TUESDAY = 'TUESDAY',
-    WEDNESDAY = 'WEDNESDAY',
-    TRUSDAY = 'TRUSDAY',
-    FRIDAY = 'FRIDAY',
-    SATURDAY = 'SATURDAY',
-    SUNDAY = 'SUNDAY',
-}
-;[]
+// export enum Weeks {
+//     MONDAY = 'MONDAY',
+//     TUESDAY = 'TUESDAY',
+//     WEDNESDAY = 'WEDNESDAY',
+//     TRUSDAY = 'TRUSDAY',
+//     FRIDAY = 'FRIDAY',
+//     SATURDAY = 'SATURDAY',
+//     SUNDAY = 'SUNDAY',
+// }
+
+// export enum Type{
+// FIXED="FIXED",
+// FLEXIBLE="FLEXIBLE"
+// }
 
 export type AddSlotManagement = {
     slotName: string

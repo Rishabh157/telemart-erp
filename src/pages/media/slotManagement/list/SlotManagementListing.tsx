@@ -11,6 +11,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
+    setSearchValue,
 } from 'src/redux/slices/media/slotManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
@@ -25,7 +26,7 @@ const SlotManagementListing = ({ columns, rows }: Props) => {
         (state: RootState) => state.slotManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = slotManagementState
+    const { page, rowsPerPage, totalItems, searchValue } = slotManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -58,12 +59,14 @@ const SlotManagementListing = ({ columns, rows }: Props) => {
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
+                    searchValue={searchValue}
                     rowCount={rows.length}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
                 />
 
