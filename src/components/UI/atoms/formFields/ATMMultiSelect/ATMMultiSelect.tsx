@@ -3,8 +3,10 @@ import { twMerge } from 'tailwind-merge'
 import { MdArrowDropDown } from 'react-icons/md'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import { ClickAwayListener } from '@mui/material'
+import { ErrorMessage } from 'formik'
 
 type Props = {
+    name: string
     value: any[]
     onSelect: (newValue: any) => void
     options: any[]
@@ -23,9 +25,11 @@ type Props = {
         newValue: string
     ) => void
     isOptionEqualToValue?: (option: any, value: any) => boolean
+    isSubmitting?: boolean
 }
 
 const ATMMultiSelect = ({
+    name,
     value,
     onSelect,
     required = false,
@@ -41,6 +45,7 @@ const ATMMultiSelect = ({
     renderOption,
     renderInputValue,
     isOptionEqualToValue,
+    isSubmitting = true,
 }: Props) => {
     const [isOptionsOpen, setIsOptionsOpen] = useState(false)
     return (
@@ -201,6 +206,16 @@ const ATMMultiSelect = ({
                     </ClickAwayListener>
                 )}
             </div>
+            {name && isSubmitting && (
+                <ErrorMessage name={name}>
+                    {(errMsg) => (
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            {' '}
+                            {errMsg}{' '}
+                        </p>
+                    )}
+                </ErrorMessage>
+            )}
         </div>
     )
 }
