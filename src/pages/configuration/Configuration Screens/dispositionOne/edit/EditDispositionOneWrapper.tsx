@@ -46,9 +46,6 @@ const EditDispositionOneWrapper = (props: Props) => {
 
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
-    const { allItems }: any = useSelector(
-        (state: RootState) => state?.dispositionOne
-    )
     const [EditDispositionApi] = useUpdatedispositionOneMutation()
 
     const initialValues: FormInitialValues = {
@@ -87,10 +84,6 @@ const EditDispositionOneWrapper = (props: Props) => {
             })
         }, 1000)
     }
-
-    // useEffect(() => {
-    //     dispatch(setAllItems(data?.data))
-    // }, [dispatch, data, isLoading, isFetching])
 
     return (
         <ConfigurationLayout>
