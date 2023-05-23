@@ -1,49 +1,48 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import AddCompetitor from './Addcompetitor'
-// import { useAddCompetitorsMutation } from 'src/services/AttributeService'
+import AddArtist from './AddArtist'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { useAddcompetitorMutation } from 'src/services/media/CompetitorManagementServices'
+import { useAddArtistMutation } from 'src/services/media/ArtistServices'
 import MediaLayout from '../../MediaLayout'
 
 type Props = {}
 
 export type FormInitialValues = {
-    competitorName: string
+    artistName: string
 }
 
-const AddCompetitorWrapper = (props: Props) => {
+const AddArtistWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [addCompetitor] = useAddcompetitorMutation()
+    const [addArtist] = useAddArtistMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const initialValues: FormInitialValues = {
-        competitorName: '',
+        artistName: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        competitorName: string().required('compititor Name is required'),
+        artistName: string().required('Artist Name is required'),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            addCompetitor({
-                competitorName: values.competitorName,
+            addArtist({
+                artistName: values.artistName,
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Compititor added successfully!')
-                        navigate('/media/competitor')
+                        showToast('success', 'Artist added successfully!')
+                        navigate('/media/artist')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -63,7 +62,7 @@ const AddCompetitorWrapper = (props: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <AddCompetitor
+                        <AddArtist
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                         />
@@ -74,4 +73,4 @@ const AddCompetitorWrapper = (props: Props) => {
     )
 }
 
-export default AddCompetitorWrapper
+export default AddArtistWrapper

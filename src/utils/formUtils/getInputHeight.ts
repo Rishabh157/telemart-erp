@@ -1,4 +1,4 @@
-export type Size = 'small' | 'medium' | 'large'|'xs'
+export type Size = 'small' | 'medium' | 'large' | 'xs'
 
 export const getInputHeight = (size: Size, inNumber?: boolean) => {
     switch (size) {

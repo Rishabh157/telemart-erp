@@ -1,12 +1,15 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
+    AddArtistWrapper,
     AddASRWrapper,
     AddCompetitorWrapper,
     AddDidManagementWrapper,
+    ArtistListingWrapper,
     ASRListingWrapper,
     BarcodeGenerator,
     CompetitorManagementListingWrapper,
+    EditArtistWrapper,
     EditCompetitorWraper,
     EditDidManagementWrapper,
     EditPurchaseOrderWrapper,
@@ -608,7 +611,7 @@ const PageRoutes = () => {
                         element={<AddTapeManagementWrapper />}
                     />
                     <Route
-                        path="media/tape/:id"
+                        path="media/tape/edit/:id"
                         element={<EditTapeManagementWrapper />}
                     />
                     <Route
@@ -647,10 +650,19 @@ const PageRoutes = () => {
                         path="media/channel-category/add"
                         element={<AddCompetitorWrapper />}
                     />
-                       <Route
-                        path="media/inbound/"
-                        element={<Inbound />}
+                    <Route
+                        path="media/artist"
+                        element={<ArtistListingWrapper />}
                     />
+                    <Route
+                        path="media/artist/:id"
+                        element={<EditArtistWrapper />}
+                    />
+                    <Route
+                        path="media/artist/add"
+                        element={<AddArtistWrapper />}
+                    />
+                    <Route path="media/inbound/" element={<Inbound />} />
                 </Routes>
             </BrowserRouter>
         </>

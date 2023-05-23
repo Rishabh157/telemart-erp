@@ -15,7 +15,7 @@ const Inbound = () => {
                             value={''}
                             onChange={() => {}}
                             size="small"
-                            className='h-[2.5vh]'
+                            className="h-[2.5vh]"
                             name=""
                             placeholder="Did Number"
                             extraClassField="-mt-1"
@@ -25,7 +25,7 @@ const Inbound = () => {
                             value={''}
                             onChange={() => {}}
                             size="small"
-                            className='h-[2.5vh]'
+                            className="h-[2.5vh]"
                             extraClassField="-mt-1"
                             placeholder="In /outbound"
                             name=""
@@ -35,7 +35,7 @@ const Inbound = () => {
                             value={''}
                             onChange={() => {}}
                             size="small"
-                            className='h-[2.5vh]'
+                            className="h-[2.5vh]"
                             name=""
                             extraClassField="-mt-1"
                         />
@@ -44,7 +44,7 @@ const Inbound = () => {
                             value={''}
                             onChange={() => {}}
                             size="small"
-                            className='h-[2.5vh]'
+                            className="h-[2.5vh]"
                             name=""
                             extraClassField="-mt-1"
                         />
@@ -58,8 +58,7 @@ const Inbound = () => {
                                     </div>
                                     <ATMTextField
                                         size="small"
-                                        
-                                        className='h-[2.5vh]'
+                                        className="h-[2.5vh]"
                                         label="5"
                                         value={''}
                                         onChange={() => {}}
@@ -71,7 +70,7 @@ const Inbound = () => {
                                         value={''}
                                         onChange={() => {}}
                                         size="small"
-                                        className='h-[2.5vh]'
+                                        className="h-[2.5vh]"
                                         name=""
                                         extraClassField="-mt-1"
                                     />
@@ -84,92 +83,83 @@ const Inbound = () => {
                             <div className="  h-[28vh] row-sapn-7 row-start-7 row-end-12 grid grid-cols-3 gap-1  ">
                                 <ATMTextField
                                     extraClassField=" h-[3vh]"
-                                 
                                     label="Deliver Charge"
                                     value={''}
                                     onChange={() => {}}
                                     size="small"
-                                    className='h-[2.5vh]'
+                                    className="h-[2.5vh]"
                                     name=""
                                 />
                                 <ATMTextField
                                     extraClassField=" h-[3vh]"
-                                 
                                     label="Discount"
                                     value={''}
                                     onChange={() => {}}
                                     size="small"
-                                    className='h-[2.5vh]'
+                                    className="h-[2.5vh]"
                                     name=""
                                 />
                                 <ATMTextField
                                     extraClassField=" h-[3vh]"
-                                 
                                     label="Charge"
                                     value={''}
                                     onChange={() => {}}
                                     size="small"
-                                    className='h-[2.5vh]'
+                                    className="h-[2.5vh]"
                                     name=""
                                 />
                                 <ATMTextField
                                     extraClassField=" h-[3vh]"
-                                 
                                     label="Country"
                                     value={''}
                                     onChange={() => {}}
                                     size="small"
-                                    className='h-[2.5vh]'
+                                    className="h-[2.5vh]"
                                     name=""
                                 />
                                 <ATMTextField
                                     extraClassField=" h-[3vh]"
-                                 
                                     label="state"
                                     value={''}
                                     onChange={() => {}}
                                     size="small"
-                                    className='h-[2.5vh]'
+                                    className="h-[2.5vh]"
                                     name=""
                                 />
                                 <ATMTextField
                                     extraClassField=" h-[3vh]"
-                                 
                                     label="city"
                                     value={''}
                                     onChange={() => {}}
                                     size="small"
-                                    className='h-[2.5vh]'
+                                    className="h-[2.5vh]"
                                     name=""
                                 />
                                 <ATMTextField
                                     extraClassField=" h-[3vh]"
-                                 
                                     label="Tehs"
                                     value={''}
                                     onChange={() => {}}
                                     size="small"
-                                    className='h-[2.5vh]'
+                                    className="h-[2.5vh]"
                                     name=""
                                 />
                                 <ATMTextField
                                     extraClassField=" h-[3vh]"
-                                 
                                     label="pincode"
                                     value={''}
                                     onChange={() => {}}
                                     size="small"
-                                    className='h-[2.5vh]'
+                                    className="h-[2.5vh]"
                                     name=""
                                 />
                                 <ATMTextField
                                     extraClassField=" h-[3vh]"
-                                 
                                     label="Area"
                                     value={''}
                                     onChange={() => {}}
                                     size="small"
-                                    className='h-[2.5vh]'
+                                    className="h-[2.5vh]"
                                     name=""
                                 />
                                 <div className="mt-2">
@@ -185,142 +175,128 @@ const Inbound = () => {
                         <div className=" grid grid-cols-2 gap-1  col-span-1 h-[50vh-5px]">
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Agent Name"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="name"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Address"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Age"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Relation"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="City"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Landmark"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Alternative No"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="WhatsApp No"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />{' '}
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Gender"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Prepaid"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Email Id"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Channel"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                             <ATMTextField
                                 extraClassField="h-[3vh]"
-                             
                                 label="Remark"
                                 value={''}
                                 onChange={() => {}}
                                 size="small"
-                                className='h-[2.5vh]'
+                                className="h-[2.5vh]"
                                 name=""
                             />
                         </div>
@@ -332,7 +308,7 @@ const Inbound = () => {
                         value={''}
                         onChange={() => {}}
                         size="small"
-                        className='h-[2.5vh]'
+                        className="h-[2.5vh]"
                         name=""
                         extraClassField="-mt-1 h-[3vh]"
                     />
@@ -341,7 +317,7 @@ const Inbound = () => {
                         value={''}
                         onChange={() => {}}
                         size="small"
-                        className='h-[2.5vh]'
+                        className="h-[2.5vh]"
                         name=""
                         extraClassField="-mt-1 h-[3vh]"
                     />

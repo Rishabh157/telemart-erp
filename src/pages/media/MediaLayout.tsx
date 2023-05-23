@@ -8,6 +8,11 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 const mediaNavigation: NavItemType[] = [
     {
+        label: 'Artist',
+        icon: AiOutlineSetting,
+        path: '/media/artist',
+    },
+    {
         label: 'DID Management',
         icon: AiOutlineSetting,
         path: '/media/did',
