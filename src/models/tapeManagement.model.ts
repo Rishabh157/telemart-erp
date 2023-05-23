@@ -3,10 +3,10 @@ export type TapeManagementListResponse = {
     tapeName: string
     channelGroup: string
     tapeType: string
-    scheme: string
-    language: string
+    schemeId: string
+    languageId: string
     duration: string
-    artist: string
+    artistId: string
     companyId: string
     remarks: string
     isDeleted: boolean

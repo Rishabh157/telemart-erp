@@ -1,11 +1,12 @@
 export type SlotManagementListResponse = {
     slotName: string
-    channelGroup: string
+    groupNameLabel: string
     startDateTime: string
     type: string
     days: string[]
-    tapeName: String
-    channelName: string
+    tapeName: string
+    tapeLabel: string
+    channelLabel: string
     endDateTime: string
     channelTrp: string
     remarks: string

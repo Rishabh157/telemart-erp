@@ -4,7 +4,7 @@ import { useAddTapeMutation } from 'src/services/media/TapeManagementServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import { object, string } from 'yup'
+import { array, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
@@ -122,7 +122,7 @@ const AddTapeManagementWrapper = () => {
         hour: string().required('Required'),
         // minute: string().required('Required'),
         // second: string().required('Required'),
-        artist: string().required('Required'),
+        artist: array().of(string().required('Required')),
         remarks: string(),
         youtubeLink: string(),
     })

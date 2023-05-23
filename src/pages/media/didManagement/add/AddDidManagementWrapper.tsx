@@ -39,7 +39,7 @@ const AddDidManagementWrapper = () => {
     const validationSchema = object({
         didNumber: string().required('Did number is required'),
         schemeId: string().required('Scheme is required'),
-        channelId: string().required('Cahnnel name is required'),
+        channelId: string().required('Channel name is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {

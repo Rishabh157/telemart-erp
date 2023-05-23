@@ -45,6 +45,7 @@ const ATMTimePicker = ({
                 <LocalizationProvider dateAdapter={AdapterMoment}>
                     <TimePicker
                         value={value}
+                        inputFormat="HH:mm:ss"
                         onChange={onChange}
                         renderInput={(params) => (
                             <TextField

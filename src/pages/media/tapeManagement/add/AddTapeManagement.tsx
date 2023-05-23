@@ -133,6 +133,7 @@ const AddTapeManagement = ({
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
+                                isMulti
                             />
                             <ATMTextField
                                 name="youtubeLink"

@@ -23,6 +23,13 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        getSlotMangementById: builder.query({
+            providesTags: ['slot'],
+            query: (id:string) => ({
+                url: `/slot-master/${id}`,
+                method: 'GET',
+            }),
+        }),
 
         //***** Update *****/
         updateSlot: builder.mutation({
@@ -33,6 +40,13 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        deleteSlotMangement: builder.mutation({
+            invalidatesTags: ['slot'],
+            query: (id:string) => ({
+                url: `/slot-master/${id}`,
+                method: 'DELETE',
+            }),
+        }),
     }),
 })
 
@@ -40,4 +54,6 @@ export const {
     useAddSlotMutation,
     useGetPaginationSlotQuery,
     useUpdateSlotMutation,
+    useGetSlotMangementByIdQuery,
+    useDeleteSlotMangementMutation
 } = slotManagementApi

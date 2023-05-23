@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MediaLayout from '../../MediaLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { array, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
@@ -10,8 +10,10 @@ import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServi
 import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
-import AddSlotManagement from './AddSlotManagement'
-import { useAddSlotMutation } from 'src/services/media/SlotManagementServices'
+import {
+    useGetSlotMangementByIdQuery,
+    useUpdateSlotMutation,
+} from 'src/services/media/SlotManagementServices'
 import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
 import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
@@ -19,7 +21,10 @@ import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import { useGetAllTapeMangementQuery } from 'src/services/media/TapeManagementServices'
 import { setSelectedTapManagement } from 'src/redux/slices/media/tapeManagementSlice'
 import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
-import moment from 'moment'
+import EditSlotManagement from './editSlotManagement'
+import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
+
+
 export type FormInitialValues = {
     slotName: string
     channelGroup: string
@@ -35,11 +40,18 @@ export type FormInitialValues = {
 }
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 
-const AddSlotManagementWrapper = () => {
+const EditSlotManagementWrapper = () => {
     const navigate = useNavigate()
+    const params = useParams()
+    const Id = params.id
     const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [channelCategoryData, setChannelCategoryData] = useState([])
+    const { selectedItems }: any = useSelector(
+        (state: RootState) => state?.slotManagement
+    )
+
+     const [editSlotMangementApi] = useUpdateSlotMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { channelgroup }: any = useSelector(
@@ -52,8 +64,21 @@ const AddSlotManagementWrapper = () => {
     const { channelMgt }: any = useSelector(
         (state: RootState) => state?.channelManagement
     )
+   
 
-    const [AddSlotManagementApi] = useAddSlotMutation()
+   
+    const {
+        data: dataSmApi,
+        isLoading: smisLoading,
+        isFetching: smisFetching,
+    } = useGetSlotMangementByIdQuery(Id || "")
+    console.log(dataSmApi)
+
+    useEffect(() => {
+        if (!smisLoading && !smisFetching) {
+            dispatch(setSelectedItems(dataSmApi?.data || []))
+        }
+    }, [smisLoading, smisFetching, dataSmApi, dispatch])
     // const {
     //     isLoading: isLanguageLoading,
     //     isFetching: isLanguageFetching,
@@ -127,16 +152,16 @@ const AddSlotManagementWrapper = () => {
     }, [isCategoryLoading, isCategoryFetching, categoryDataApi])
 
     const initialValues: FormInitialValues = {
-        slotName: '',
-        channelGroup: '',
-        startDateTime: '',
-        type: '',
-        days: [''],
-        tapeName: '',
-        channelName: '',
-        endDateTime: '',
-        channelTrp: '',
-        remarks: '',
+        slotName: selectedItems?.slotName || '',
+        channelGroup: selectedItems?.channelGroup || '',
+        startDateTime: selectedItems?.startDateTime || '',
+        type: selectedItems?.type || '',
+        days: selectedItems?.days || [],
+        tapeName: selectedItems?.tapeName || '',
+        channelName: selectedItems?.channelName || '',
+        endDateTime:selectedItems?.endDateTime || '',
+        channelTrp: selectedItems?.channelTrp || '',
+        remarks: selectedItems?.remarks || '',
         companyId: userData?.companyId || '',
     }
 
@@ -147,7 +172,6 @@ const AddSlotManagementWrapper = () => {
         startDateTime: string().required('Required'),
         type: string().required('Required'),
         days: array().of(string().required('Required')),
-
         tapeName: string().required('Required'),
         channelName: string().required('Required'),
         endDateTime: string().required('Required'),
@@ -158,7 +182,8 @@ const AddSlotManagementWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            AddSlotManagementApi({
+            editSlotMangementApi({
+                body:{
                 slotName: values.slotName,
                 channelGroup: values.channelGroup,
                 startDateTime: values.startDateTime,
@@ -170,10 +195,12 @@ const AddSlotManagementWrapper = () => {
                 channelTrp: values.channelTrp,
                 remarks: values.remarks,
                 companyId: values.companyId || '',
+                },
+                id: Id || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Slot Added successfully!')
+                        showToast('success', 'Slot Updated successfully!')
                         navigate('/media/slot')
                     } else {
                         showToast('error', res?.data?.message)
@@ -241,16 +268,18 @@ const AddSlotManagementWrapper = () => {
         //     { label: 'debitCard', value: 'DEBITCARD' },
         // ],
     }
+    
     return (
         <MediaLayout>
-            <Formik
+            <Formik 
+                 enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
-                        <AddSlotManagement
+                        <EditSlotManagement
                             dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
                             formikProps={formikProps}
@@ -262,4 +291,4 @@ const AddSlotManagementWrapper = () => {
     )
 }
 
-export default AddSlotManagementWrapper
+export default EditSlotManagementWrapper
