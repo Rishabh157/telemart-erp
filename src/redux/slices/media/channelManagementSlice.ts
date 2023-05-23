@@ -11,6 +11,7 @@ export interface ChannelManagementSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
+    channelMgt: ChannelManagementListResponse[] | null
 }
 
 const initialState: ChannelManagementSliceStateType = {
@@ -22,6 +23,7 @@ const initialState: ChannelManagementSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
+    channelMgt: null,
 }
 
 const channelManagementSlice: any = createSlice({
@@ -63,6 +65,12 @@ const channelManagementSlice: any = createSlice({
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
+        setChannelMgt: (
+            state,
+            action: PayloadAction<ChannelManagementListResponse[]>
+        ) => {
+            state.channelMgt = action.payload
+        },
     },
 })
 
@@ -75,5 +83,6 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
+    setChannelMgt,
 } = channelManagementSlice.actions
 export default channelManagementSlice.reducer

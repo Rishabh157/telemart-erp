@@ -130,7 +130,6 @@ import {
     DispositionOneListingWrapper,
     EditChannelManagement,
     SlotManagementListingWrapper,
-    AddSlotManagement,
     AddTapeManagementWrapper,
     TapeManagementListingWrapper,
     ChannelGroupListingWrapper,
@@ -148,6 +147,7 @@ import DispositionTwoListingWrapper from './pages/configuration/Configuration Sc
 import AddDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/add/AddDispositionTwoWrapper'
 import EditDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/edit/EditDispositionTwoWrapper'
 import EditDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/edit/EditDispositionOneWrapper'
+import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -619,7 +619,7 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="media/slot/add"
-                        element={<AddSlotManagement />}
+                        element={<AddSlotManagementWrapper />}
                     />
                     <Route
                         path="media/competitor"

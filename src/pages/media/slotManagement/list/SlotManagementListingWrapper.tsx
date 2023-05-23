@@ -16,29 +16,46 @@ import MediaLayout from 'src/pages/media/MediaLayout'
 
 const columns: columnTypes[] = [
     {
-        field: 'productName',
-        headerName: 'Product Group Name',
+        field: 'slotName',
+        headerName: 'Slot Name',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.productGroupName} </span>
+            <span> {row.slotName} </span>
         ),
     },
     {
-        field: 'quantity',
-        headerName: 'Quantity',
+        field: 'channelGroup',
+        headerName: 'Channel Group',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.count} </span>
+            <span> {row.channelGroup} </span>
         ),
     },
     {
-        field: 'warehouse',
-        headerName: 'Warehouse',
+        field: 'startDateTime',
+        headerName: 'StartDateTime',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.wareHouse} </span>
+            <span> {row.startDateTime} </span>
         ),
     },
+    {
+        field: 'type',
+        headerName: 'Type',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: SlotManagementListResponse) => (
+            <span> {row.type} </span>
+        ),
+    },
+    {
+        field: 'endDateTime',
+        headerName: 'EndDateTime',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: SlotManagementListResponse) => (
+            <span> {row.endDateTime} </span>
+        ),
+    },
+   
     {
         field: 'actions',
         headerName: 'Actions',
@@ -63,7 +80,7 @@ const SlotManagementListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetPaginationSlotQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['productGroupName'],
+        params: ['slotName'],
         page: page,
         filterBy: [
             {
