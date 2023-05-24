@@ -42,5 +42,5 @@ export type Field<OptionAccessKey> =
 
 export type SelectOption = {
     label: string
-    value: string | number
+    value: string | number 
 }

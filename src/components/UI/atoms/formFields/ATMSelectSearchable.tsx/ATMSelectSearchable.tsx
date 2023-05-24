@@ -1,7 +1,11 @@
 import React from 'react'
 import Select from 'react-select'
 import { ErrorMessage } from 'formik'
-import { SelectOption } from 'src/models/FormField/FormField.model'
+// import { SelectOption } from 'src/models/FormField/FormField.model'
+export type SelectOption = {
+    label: string
+    value: string | number | string[]
+}
 
 type Props = {
     options: SelectOption[]
@@ -15,6 +19,7 @@ type Props = {
     selectLabel?: string
     defaultValue?: string
     isMulti?: boolean
+    isAllSelect?: boolean
 }
 
 const ATMSelectSearchable = ({
@@ -29,6 +34,7 @@ const ATMSelectSearchable = ({
     defaultValue = '',
     name,
     isMulti = false,
+    isAllSelect = false,
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -40,20 +46,31 @@ const ATMSelectSearchable = ({
         }),
     }
 
-    // const selectOptions2 = [
-    //     {
-    //         value: '',
-    //         label: `${selectLabel}`,
-    //     },
-    // ]
     let selectOptions = options?.map((option) => ({
         value: option.value,
         label: option.label,
     }))
-    // selectOptions = [...selectOptions2, ...selectOptions]
+    if (isMulti && isAllSelect) {
+        const selectOptions2 = [
+            {
+                value: 'All select',
+                label: `All Select`,
+            },
+        ]
+        selectOptions = [...selectOptions2, ...selectOptions]
+    }
     const handleOnChange = (selectedOption: any) => {
-        console.log(selectedOption)
         if (isMulti) {
+            if (isAllSelect) {
+                const allValues = selectedOption?.find(
+                    (multiValue: any) => multiValue.label === 'All Select'
+                )
+                if (allValues?.value) {
+                    const valuesAll = options.map((option) => option.value)
+                    onChange(valuesAll)
+                    return
+                }
+            }
             const values = selectedOption.map((multiValue: any) => {
                 return multiValue.value
             })

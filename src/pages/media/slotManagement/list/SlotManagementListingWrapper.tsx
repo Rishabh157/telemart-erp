@@ -19,9 +19,12 @@ import MediaLayout from 'src/pages/media/MediaLayout'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import SlotRunWrapper from '../update/SlotRunWrapper'
 
 const SlotManagementListingWrapper = () => {
     const navigate = useNavigate()
+    const [isOpenDialog, setIsOpenDialog] = useState(false)
     const slotManagementState: any = useSelector(
         (state: RootState) => state.slotManagement
     )
@@ -118,7 +121,27 @@ const SlotManagementListingWrapper = () => {
                 <span> {row.endDateTime} </span>
             ),
         },
-
+        {
+            field: 'SlotRun',
+            headerName: 'Slot Run',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <div className="relative">
+                    <button
+                        onClick={(e) => {
+                            // e.stopPropagation()
+                            // setShowDropdown(!showDropdown)
+                            // setCurrentId(row?._id)
+                            setIsOpenDialog(true)
+                        }}
+                        className="text-slate-600 font-bold m-1 bg-green-500 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full"
+                    >
+                        Pending
+                    </button>
+                </div>
+            ),
+            align: 'end',
+        },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -194,6 +217,13 @@ const SlotManagementListingWrapper = () => {
             <MediaLayout>
                 <div className="h-full">
                     <SlotManagementListing columns={columns} rows={items} />
+                    <DialogLogBox
+                        isOpen={isOpenDialog}
+                        handleClose={() => {
+                            setIsOpenDialog(false)
+                        }}
+                        Component={<SlotRunWrapper data={''}/>}
+                    />
                 </div>
             </MediaLayout>
         </>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FormikProps } from 'formik'
 import { FormInitialValues } from './AddSlotManagementWrapper'
 import ATMBreadCrumbs, {
@@ -91,13 +91,13 @@ const AddSlotManagement = ({
         }
     })
 
-    const [selectedValue, setSelectedValue] = useState('')
+    // const [selectedValue, setSelectedValue] = useState('')
 
     const options = ['FIXED', 'FLEXIBLE']
 
-    const handleSelect = (newValue: any) => {
-        setSelectedValue(newValue)
-    }
+    // const handleSelect = (newValue: any) => {
+    //     setSelectedValue(newValue)
+    // }
 
     return (
         <div className="">
@@ -123,8 +123,7 @@ const AddSlotManagement = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => {
-                                    console.log(values)
-                                    formikProps.handleSubmit()
+                                        formikProps.handleSubmit()
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
@@ -201,24 +200,20 @@ const AddSlotManagement = ({
                                     options={optionss}
                                     label="Days"
                                     isMulti
+                                    isAllSelect
                                 />
                             </div>
-                            <div className="mt-5">
-                                <span className="text-slate-700 font-medium">
-                                    Type
-                                </span>
-                                <div className="-mt-5 ml-6 flex ">
-                                    <ATMRadioButton
-                                        name="type"
-                                        options={options}
-                                        value={selectedValue}
-                                        onSelect={(value) => {
-                                            handleSelect(value)
-                                            setFieldValue('type', value)
-                                        }}
-                                        required={true}
-                                    />
-                                </div>
+                            <div className="">
+                                <ATMRadioButton
+                                    name="type"
+                                    label="Type"
+                                    options={options}
+                                    value={values.type}
+                                    onChange={(e) => {
+                                        setFieldValue('type', e)
+                                    }}
+                                    required={true}
+                                />
                             </div>
                             <div className="">
                                 <ATMSelectSearchable
