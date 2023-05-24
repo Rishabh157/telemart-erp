@@ -21,8 +21,8 @@ import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import { useGetAllTapeMangementQuery } from 'src/services/media/TapeManagementServices'
 import { setSelectedTapManagement } from 'src/redux/slices/media/tapeManagementSlice'
 import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
-import EditSlotManagement from './editSlotManagement'
 import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
+import EditSlotManagement from './EditSlotManagement'
 
 export type FormInitialValues = {
     slotName: string

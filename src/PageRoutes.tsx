@@ -148,7 +148,7 @@ import AddDispositionTwoWrapper from './pages/configuration/Configuration Screen
 import EditDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/edit/EditDispositionTwoWrapper'
 import EditDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/edit/EditDispositionOneWrapper'
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
-import EditSlotManagementWrapper from './pages/media/slotManagement/edit/editSlotManagementWrapper'
+import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''

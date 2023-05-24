@@ -11,7 +11,7 @@ import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMT
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
-import { FormInitialValues } from './editSlotManagementWrapper'
+import { FormInitialValues } from './EditSlotManagementWrapper'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
