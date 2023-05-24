@@ -4,7 +4,7 @@ import { useAddTapeMutation } from 'src/services/media/TapeManagementServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import { array, object, string } from 'yup'
+import { object, string, array } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
@@ -32,7 +32,6 @@ export type FormInitialValues = {
     hour: string
     minute: string
     second: string
-    youtubeLink: string
 }
 
 const AddTapeManagementWrapper = () => {
@@ -108,15 +107,13 @@ const AddTapeManagementWrapper = () => {
         hour: '0',
         minute: '00',
         second: '00',
-        youtubeLink: '',
         companyId: userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        tapeName: string(),
+        tapeName: string().required('Required'),
         tapeType: string().required('Required'),
-        schemeId: string(),
         channelGroupId: string(),
         languageId: string().required('Required'),
         hour: string().required('Required'),
@@ -124,23 +121,22 @@ const AddTapeManagementWrapper = () => {
         second: string().required('Required'),
         artistId: array().of(string().required('Required')),
         remarks: string(),
-        youtubeLink: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        //console.log(values.artistId, "Add")
         let duration = `${values.hour}:${values.minute}:${values.second}`
         setTimeout(() => {
             AddTapeApi({
                 tapeName: values.tapeName,
-                channelGroupId: values.channelGroupId,
+                channelGroupId: values.channelGroupId || null,
                 tapeType: values.tapeType,
-                schemeId: values.schemeId,
+                schemeId: values.schemeId || null,
                 languageId: values.languageId,
                 duration: duration,
                 artistId: values.artistId,
-                remarks: values.remarks,
-                youtubeLink: values.youtubeLink,
+                remarks: values.remarks || '',
                 companyId: values.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

@@ -95,7 +95,8 @@ const SchemeListingWrapper = () => {
             renderCell: (row: any) => (
                 <div className="relative">
                     <button
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.stopPropagation()
                             setShowDropdown(!showDropdown)
                             setCurrentId(row?._id)
                         }}
@@ -171,7 +172,11 @@ const SchemeListingWrapper = () => {
     return (
         <>
             <SideNavLayout>
-                <SchemeListing columns={columns} rows={items} />
+                <SchemeListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
             </SideNavLayout>
         </>
     )

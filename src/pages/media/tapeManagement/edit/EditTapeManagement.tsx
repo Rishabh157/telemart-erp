@@ -1,5 +1,5 @@
 import { FormikProps } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import { FormInitialValues } from './EditTapeManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -35,6 +35,8 @@ const EditTapeManagement = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+    const [show, setShow] = useState(false)
+    // console.log(values, "values")
 
     const MinuteOptions = () => {
         let options: SelectOption[] = []
@@ -68,7 +70,30 @@ const EditTapeManagement = ({
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() => formikProps.handleSubmit()}
+                                onClick={() => {
+                                    if (
+                                        formikProps?.values.hour === '0' &&
+                                        formikProps.values.minute === '00' &&
+                                        formikProps.values.second === '00'
+                                    ) {
+                                        setShow(true)
+                                        if (
+                                            formikProps.values.languageId ===
+                                                '' ||
+                                            formikProps.values.tapeName ===
+                                                '' ||
+                                            formikProps.values.tapeType ===
+                                                '' ||
+                                            formikProps.values.artistId
+                                                .length === 0
+                                        ) {
+                                            formikProps.handleSubmit()
+                                        }
+                                    } else {
+                                        setShow(false)
+                                        formikProps.handleSubmit()
+                                    }
+                                }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
@@ -84,6 +109,7 @@ const EditTapeManagement = ({
                             {/* FirstName */}
                             <ATMTextField
                                 name="tapeName"
+                                required
                                 value={values.tapeName}
                                 label="Tape Name"
                                 placeholder="Tape Name"
@@ -114,7 +140,7 @@ const EditTapeManagement = ({
                             <ATMSelectSearchable
                                 name="schemeId"
                                 value={values.schemeId}
-                                selectLabel="Select SchemeId"
+                                selectLabel="Select Scheme"
                                 onChange={(value) =>
                                     setFieldValue('schemeId', value)
                                 }
@@ -136,6 +162,7 @@ const EditTapeManagement = ({
                             <ATMSelectSearchable
                                 name="artistId"
                                 required
+                                isMulti={true}
                                 selectLabel="Select Artist"
                                 value={values.artistId}
                                 onChange={(value) =>
@@ -143,9 +170,19 @@ const EditTapeManagement = ({
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
-                                isMulti
                             />
-                            <ATMTextField
+                            <ATMSelectSearchable
+                                name="languageId"
+                                required
+                                value={values.languageId}
+                                onChange={(value) =>
+                                    setFieldValue('languageId', value)
+                                }
+                                options={dropdownOptions.languageOptions}
+                                label="Language"
+                            />
+
+                            {/* <ATMTextField
                                 name="youtubeLink"
                                 value={values.youtubeLink}
                                 label="Youtube Link"
@@ -153,7 +190,8 @@ const EditTapeManagement = ({
                                 onChange={(e) =>
                                     setFieldValue('youtubeLink', e.target.value)
                                 }
-                            />
+                            /> */}
+
                             <div className="grid grid-cols-3 gap-4 ">
                                 <div className=" text-slate-700  font-medium mt-12 ">
                                     Duration :
@@ -167,54 +205,59 @@ const EditTapeManagement = ({
                                         label="Hour"
                                         min={0}
                                         placeholder="HH"
-                                        onChange={(e) =>
+                                        onChange={(e) => {
+                                            if (e.target.value !== '0') {
+                                                setShow(false)
+                                            }
                                             setFieldValue(
                                                 'hour',
                                                 e.target.value
                                             )
-                                        }
+                                        }}
                                     />
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4 ">
-                                <div className="">
-                                    <ATMSelectSearchable
-                                        name="minute"
-                                        required
-                                        value={values.minute}
-                                        selectLabel="MM"
-                                        label="Minute"
-                                        options={MinuteOptions()}
-                                        onChange={(selectValue) =>
-                                            setFieldValue('minute', selectValue)
+                                <ATMSelectSearchable
+                                    name="minute"
+                                    required
+                                    value={values.minute}
+                                    selectLabel="MM"
+                                    label="Minute"
+                                    options={MinuteOptions()}
+                                    onChange={(selectValue) => {
+                                        if (selectValue !== '00') {
+                                            setShow(false)
                                         }
-                                    />
-                                </div>
-                                <div className="">
-                                    <ATMSelectSearchable
-                                        defaultValue="00"
-                                        label="Second"
-                                        required
-                                        options={MinuteOptions()}
-                                        name="second"
-                                        value={values.second}
-                                        selectLabel="SS"
-                                        onChange={(selectValue) =>
-                                            setFieldValue('second', selectValue)
+                                        setFieldValue('minute', selectValue)
+                                    }}
+                                />
+
+                                <ATMSelectSearchable
+                                    defaultValue="00"
+                                    label="Second"
+                                    required
+                                    options={MinuteOptions()}
+                                    name="second"
+                                    value={values.second}
+                                    selectLabel="SS"
+                                    onChange={(selectValue) => {
+                                        if (selectValue !== '00') {
+                                            setShow(false)
                                         }
-                                    />
-                                </div>
+                                        setFieldValue('second', selectValue)
+                                    }}
+                                />
+
+                                {show ? (
+                                    <p className="font-poppins relative text-[14px] text-start mt-0 mr-2 text-red-500">
+                                        Duration is Required
+                                    </p>
+                                ) : (
+                                    ''
+                                )}
                             </div>
-                            <ATMSelectSearchable
-                                name="languageId"
-                                required
-                                value={values.languageId}
-                                onChange={(value) =>
-                                    setFieldValue('languageId', value)
-                                }
-                                options={dropdownOptions.languageOptions}
-                                label="Language"
-                            />
+
                             <ATMTextField
                                 name="remarks"
                                 value={values.remarks}

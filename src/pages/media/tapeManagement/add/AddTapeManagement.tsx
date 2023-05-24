@@ -1,5 +1,5 @@
 import { FormikProps } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import { FormInitialValues } from './AddTapeManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -35,6 +35,7 @@ const AddTapeManagement = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+    const [show, setShow] = useState(false)
 
     const MinuteOptions = () => {
         let options: SelectOption[] = []
@@ -68,8 +69,28 @@ const AddTapeManagement = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => {
-                                    console.log(values)
-                                    formikProps.handleSubmit()
+                                    if (
+                                        formikProps?.values.hour === '0' &&
+                                        formikProps.values.minute === '00' &&
+                                        formikProps.values.second === '00'
+                                    ) {
+                                        setShow(true)
+                                        if (
+                                            formikProps.values.languageId ===
+                                                '' ||
+                                            formikProps.values.tapeName ===
+                                                '' ||
+                                            formikProps.values.tapeType ===
+                                                '' ||
+                                            formikProps.values.artistId
+                                                .length === 0
+                                        ) {
+                                            formikProps.handleSubmit()
+                                        }
+                                    } else {
+                                        setShow(false)
+                                        formikProps.handleSubmit()
+                                    }
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
@@ -86,6 +107,7 @@ const AddTapeManagement = ({
                             {/* FirstName */}
                             <ATMTextField
                                 name="tapeName"
+                                required
                                 value={values.tapeName}
                                 label="Tape Name"
                                 placeholder="Tape Name"
@@ -119,7 +141,6 @@ const AddTapeManagement = ({
                                 value={values.channelGroupId}
                                 isMulti={false}
                                 onChange={(e) => {
-                                    console.log('e', e)
                                     setFieldValue('channelGroupId', e)
                                 }}
                                 options={dropdownOptions.channelGroupOptions}
@@ -130,27 +151,29 @@ const AddTapeManagement = ({
                                 name="artistId"
                                 required
                                 selectLabel="Select Artist"
+                                isMulti={true}
                                 value={values.artistId}
                                 onChange={(value) =>
                                     setFieldValue('artistId', value)
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
-                                isMulti
                             />
-                            <ATMTextField
-                                name="youtubeLink"
-                                value={values.youtubeLink}
-                                label="Youtube Link"
-                                placeholder="Youtube Link"
-                                onChange={(e) =>
-                                    setFieldValue('youtubeLink', e.target.value)
+                            <ATMSelectSearchable
+                                name="languageId"
+                                required
+                                value={values.languageId}
+                                onChange={(value) =>
+                                    setFieldValue('languageId', value)
                                 }
+                                options={dropdownOptions.languageOptions}
+                                label="Language"
                             />
                             <div className="grid grid-cols-3 gap-4 ">
                                 <div className=" text-slate-700  font-medium mt-12 ">
                                     Duration :
                                 </div>
+
                                 <div className=" col-span-2 ">
                                     <ATMTextField
                                         name="hour"
@@ -160,12 +183,15 @@ const AddTapeManagement = ({
                                         label="Hour"
                                         min={0}
                                         placeholder="HH"
-                                        onChange={(e) =>
+                                        onChange={(e) => {
+                                            if (e.target.value !== '0') {
+                                                setShow(false)
+                                            }
                                             setFieldValue(
                                                 'hour',
                                                 e.target.value
                                             )
-                                        }
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -178,9 +204,12 @@ const AddTapeManagement = ({
                                         selectLabel="MM"
                                         label="Minute"
                                         options={MinuteOptions()}
-                                        onChange={(selectValue) =>
+                                        onChange={(selectValue) => {
+                                            if (selectValue !== '00') {
+                                                setShow(false)
+                                            }
                                             setFieldValue('minute', selectValue)
-                                        }
+                                        }}
                                     />
                                 </div>
                                 <div className="">
@@ -192,22 +221,24 @@ const AddTapeManagement = ({
                                         name="second"
                                         value={values.second}
                                         selectLabel="SS"
-                                        onChange={(selectValue) =>
+                                        onChange={(selectValue) => {
+                                            if (selectValue !== '00') {
+                                                setShow(false)
+                                            }
+
                                             setFieldValue('second', selectValue)
-                                        }
+                                        }}
                                     />
                                 </div>
+                                {show ? (
+                                    <p className="font-poppins relative text-[14px] text-start mt-0 mr-2 text-red-500">
+                                        Duration is Required
+                                    </p>
+                                ) : (
+                                    ''
+                                )}
                             </div>
-                            <ATMSelectSearchable
-                                name="languageId"
-                                required
-                                value={values.languageId}
-                                onChange={(value) =>
-                                    setFieldValue('languageId', value)
-                                }
-                                options={dropdownOptions.languageOptions}
-                                label="Language"
-                            />
+
                             <ATMTextField
                                 name="remarks"
                                 value={values.remarks}

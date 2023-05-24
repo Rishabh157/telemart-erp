@@ -82,7 +82,6 @@ const EditSlotManagementWrapper = () => {
     //     isFetching: isLanguageFetching,
     //     data: languageDataApi,
     // } = useGetAllLanguageQuery('')
-    
 
     const {
         isLoading: isCategoryLoading,
