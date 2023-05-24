@@ -125,7 +125,10 @@ const EditTapeManagementWrapper = () => {
         }
     }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
 
-    //console.log(selectedItem, "selected")
+    const artist = selectedItem?.artistId.map((ele: any) => {
+        return ele._id
+    });
+    //console.log(artist)
     const newDuration = selectedItem?.duration?.split(':')
     //console.log(newDuration)
 
@@ -136,7 +139,7 @@ const EditTapeManagementWrapper = () => {
         schemeId: selectedItem?.schemeId || '',
         languageId: selectedItem?.languageId || '',
         duration: selectedItem?.duration || '',
-        artistId: selectedItem?.artistId || [''],
+        artistId: artist || [],
         remarks: selectedItem?.remarks || '',
         hour: newDuration ? newDuration[0] : '0',
         minute: newDuration ? newDuration[1] : '00',
@@ -160,6 +163,7 @@ const EditTapeManagementWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        //console.log(values.artistId)
         let duration = `${values.hour}:${values.minute}:${values.second}`
         setTimeout(() => {
             updateTape({

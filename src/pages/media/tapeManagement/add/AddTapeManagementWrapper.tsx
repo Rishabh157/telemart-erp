@@ -125,6 +125,7 @@ const AddTapeManagementWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        //console.log(values.artistId, "Add")
         let duration = `${values.hour}:${values.minute}:${values.second}`
         setTimeout(() => {
             AddTapeApi({

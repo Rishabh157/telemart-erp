@@ -129,7 +129,6 @@ const AddTapeManagement = ({
                                 value={values.channelGroupId}
                                 isMulti={false}
                                 onChange={(e) => {
-                                    //console.log('e', e)
                                     setFieldValue('channelGroupId', e)
                                 }}
                                 options={dropdownOptions.channelGroupOptions}
