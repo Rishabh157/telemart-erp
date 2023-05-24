@@ -36,8 +36,6 @@ const AddTapeManagement = ({
 }: Props) => {
     const { values, setFieldValue } = formikProps
     const [show, setShow] = useState(false)
-    const [submit, setSubmit] = useState(true)
-
 
     const MinuteOptions = () => {
         let options: SelectOption[] = []
@@ -77,22 +75,15 @@ const AddTapeManagement = ({
                                         formikProps.values.second === '00' )
                                                                             
                                     ) {
-                                        setShow(true)  
-                                                                            
-                                        //alert("step0")
+                                        setShow(true) 
                                         if(formikProps.values.languageId === "" || formikProps.values.tapeName === "" || formikProps.values.tapeType === "" || formikProps.values.artistId.length === 0 ){
-                                            //alert("step1")
-                                            formikProps.handleSubmit()                                            
+                                          formikProps.handleSubmit()                                            
                                         }                                       
                                     }else{
+                                        setShow(false)
+                                        formikProps.handleSubmit()
                                         
-                                            //alert("step3")
-                                            formikProps.handleSubmit()
-                                            setShow(false)
                                     }
-                                
-                                        
-                                    
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
@@ -185,12 +176,16 @@ const AddTapeManagement = ({
                                         label="Hour"
                                         min={0}
                                         placeholder="HH"
-                                        onChange={(e) =>
+                                        onChange={(e) =>{
+                                            if(e.target.value !== '0' ){
+                                                setShow(false)
+                                            }
                                             setFieldValue(
                                                 'hour',
                                                 e.target.value
                                             )
-                                        }
+                                           
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -203,9 +198,12 @@ const AddTapeManagement = ({
                                         selectLabel="MM"
                                         label="Minute"
                                         options={MinuteOptions()}
-                                        onChange={(selectValue) =>
+                                        onChange={(selectValue) =>{
+                                            if(selectValue !== "00" ){
+                                                setShow(false)
+                                            }
                                             setFieldValue('minute', selectValue)
-                                        }
+                                        }}
                                     />
                                 </div>
                                 <div className="">
@@ -217,9 +215,13 @@ const AddTapeManagement = ({
                                         name="second"
                                         value={values.second}
                                         selectLabel="SS"
-                                        onChange={(selectValue) =>
+                                        onChange={(selectValue) =>{
+                                            if(selectValue !== "00" ){
+                                                setShow(false)
+                                            }
+                                        
                                             setFieldValue('second', selectValue)
-                                        }
+                                        }}
                                     />
                                 </div>
                                 {show ? (

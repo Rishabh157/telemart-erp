@@ -72,16 +72,19 @@ const EditTapeManagement = ({
                                 disabled={apiStatus}
                                 onClick={() => {
                                     if (
-                                        formikProps?.values.hour === '0' &&
+                                        (formikProps?.values.hour === '0' &&
                                         formikProps.values.minute === '00' &&
-                                        formikProps.values.second === '00' 
-                                        
+                                        formikProps.values.second === '00' )
+                                                                            
                                     ) {
-                                        setShow(true)
-                                        formikProps.handleSubmit()
-                                    } else {
-                                        formikProps.handleSubmit()
+                                        setShow(true) 
+                                        if(formikProps.values.languageId === "" || formikProps.values.tapeName === "" || formikProps.values.tapeType === "" || formikProps.values.artistId.length === 0 ){
+                                          formikProps.handleSubmit()                                            
+                                        }                                       
+                                    }else{
                                         setShow(false)
+                                        formikProps.handleSubmit()
+                                        
                                     }
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
@@ -195,11 +198,16 @@ const EditTapeManagement = ({
                                         label="Hour"
                                         min={0}
                                         placeholder="HH"
-                                        onChange={(e) =>
+                                        onChange={(e) =>{
+                                            if(e.target.value !== '0' ){
+                                                setShow(false)
+                                            }
                                             setFieldValue(
                                                 'hour',
                                                 e.target.value
                                             )
+                                        }
+                                            
                                         }
                                     />
                                 </div>
@@ -212,8 +220,13 @@ const EditTapeManagement = ({
                                     selectLabel="MM"
                                     label="Minute"
                                     options={MinuteOptions()}
-                                    onChange={(selectValue) =>
+                                    onChange={(selectValue) =>{
+                                        if(selectValue !== '00' ){
+                                            setShow(false)
+                                        }
                                         setFieldValue('minute', selectValue)
+                                    }
+                                        
                                     }
                                 />
 
@@ -225,8 +238,13 @@ const EditTapeManagement = ({
                                     name="second"
                                     value={values.second}
                                     selectLabel="SS"
-                                    onChange={(selectValue) =>
+                                    onChange={(selectValue) =>{
+                                        if(selectValue !== '00' ){
+                                            setShow(false)
+                                        }
                                         setFieldValue('second', selectValue)
+                                    }
+                                        
                                     }
                                 />
 
