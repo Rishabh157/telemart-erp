@@ -16,7 +16,6 @@ export type TapeManagementListResponse = {
     __v: number
     schemeLabel: string
     languageLabel: string
-   
 }
 
 export type AddTapeManagement = {

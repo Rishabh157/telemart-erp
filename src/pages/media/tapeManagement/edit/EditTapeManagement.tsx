@@ -157,7 +157,7 @@ const EditTapeManagement = ({
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
-                                isMulti
+                                
                             />
                             <ATMSelectSearchable
                                 name="languageId"
@@ -182,7 +182,7 @@ const EditTapeManagement = ({
 
                             <div className="grid grid-cols-3 gap-4 ">
                                 <div className=" text-slate-700  font-medium mt-12 ">
-                                    Duration :                                    
+                                    Duration :
                                 </div>
                                 <div className=" col-span-2 ">
                                     <ATMTextField
@@ -203,45 +203,40 @@ const EditTapeManagement = ({
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4 ">
-                                
-                                    <ATMSelectSearchable
-                                        name="minute"
-                                        required
-                                        value={values.minute}
-                                        selectLabel="MM"
-                                        label="Minute"
-                                        options={MinuteOptions()}
-                                        onChange={(selectValue) =>
-                                            setFieldValue('minute', selectValue)
-                                        }
-                                    />
-                                
-                                
-                                    <ATMSelectSearchable
-                                        defaultValue="00"
-                                        label="Second"
-                                        required
-                                        options={MinuteOptions()}
-                                        name="second"
-                                        value={values.second}
-                                        selectLabel="SS"
-                                        onChange={(selectValue) =>
-                                            setFieldValue('second', selectValue)
-                                        }
-                                    />
+                                <ATMSelectSearchable
+                                    name="minute"
+                                    required
+                                    value={values.minute}
+                                    selectLabel="MM"
+                                    label="Minute"
+                                    options={MinuteOptions()}
+                                    onChange={(selectValue) =>
+                                        setFieldValue('minute', selectValue)
+                                    }
+                                />
 
-                                    {show ? (
-                                        <p className="font-poppins relative text-[14px] text-start mt-0 mr-2 text-red-500">
-                                            Duration is Required
-                                        </p>
-                                    ) : (
-                                        ''
-                                    )}
-                               
-                            </div>                  
+                                <ATMSelectSearchable
+                                    defaultValue="00"
+                                    label="Second"
+                                    required
+                                    options={MinuteOptions()}
+                                    name="second"
+                                    value={values.second}
+                                    selectLabel="SS"
+                                    onChange={(selectValue) =>
+                                        setFieldValue('second', selectValue)
+                                    }
+                                />
 
+                                {show ? (
+                                    <p className="font-poppins relative text-[14px] text-start mt-0 mr-2 text-red-500">
+                                        Duration is Required
+                                    </p>
+                                ) : (
+                                    ''
+                                )}
+                            </div>
 
-                            
                             <ATMTextField
                                 name="remarks"
                                 value={values.remarks}

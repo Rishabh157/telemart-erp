@@ -139,7 +139,11 @@ const ArtistListingWrapper = () => {
     return (
         <>
             <MediaLayout>
-                <ArtistListing columns={columns} rows={items}  setShowDropdown={setShowDropdown}/>
+                <ArtistListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
             </MediaLayout>
         </>
     )
