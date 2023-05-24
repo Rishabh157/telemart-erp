@@ -24,7 +24,6 @@ import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 import EditSlotManagement from './editSlotManagement'
 import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
 
-
 export type FormInitialValues = {
     slotName: string
     channelGroup: string
@@ -51,7 +50,7 @@ const EditSlotManagementWrapper = () => {
         (state: RootState) => state?.slotManagement
     )
 
-     const [editSlotMangementApi] = useUpdateSlotMutation()
+    const [editSlotMangementApi] = useUpdateSlotMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { channelgroup }: any = useSelector(
@@ -64,14 +63,12 @@ const EditSlotManagementWrapper = () => {
     const { channelMgt }: any = useSelector(
         (state: RootState) => state?.channelManagement
     )
-   
 
-   
     const {
         data: dataSmApi,
         isLoading: smisLoading,
         isFetching: smisFetching,
-    } = useGetSlotMangementByIdQuery(Id || "")
+    } = useGetSlotMangementByIdQuery(Id || '')
     console.log(dataSmApi)
 
     useEffect(() => {
@@ -159,7 +156,7 @@ const EditSlotManagementWrapper = () => {
         days: selectedItems?.days || [],
         tapeName: selectedItems?.tapeName || '',
         channelName: selectedItems?.channelName || '',
-        endDateTime:selectedItems?.endDateTime || '',
+        endDateTime: selectedItems?.endDateTime || '',
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.remarks || '',
         companyId: userData?.companyId || '',
@@ -183,18 +180,18 @@ const EditSlotManagementWrapper = () => {
         setApiStatus(true)
         setTimeout(() => {
             editSlotMangementApi({
-                body:{
-                slotName: values.slotName,
-                channelGroup: values.channelGroup,
-                startDateTime: values.startDateTime,
-                type: values.type,
-                days: values.days,
-                tapeName: values.tapeName,
-                channelName: values.channelName,
-                endDateTime: values.endDateTime,
-                channelTrp: values.channelTrp,
-                remarks: values.remarks,
-                companyId: values.companyId || '',
+                body: {
+                    slotName: values.slotName,
+                    channelGroup: values.channelGroup,
+                    startDateTime: values.startDateTime,
+                    type: values.type,
+                    days: values.days,
+                    tapeName: values.tapeName,
+                    channelName: values.channelName,
+                    endDateTime: values.endDateTime,
+                    channelTrp: values.channelTrp,
+                    remarks: values.remarks,
+                    companyId: values.companyId || '',
                 },
                 id: Id || '',
             }).then((res: any) => {
@@ -268,11 +265,11 @@ const EditSlotManagementWrapper = () => {
         //     { label: 'debitCard', value: 'DEBITCARD' },
         // ],
     }
-    
+
     return (
         <MediaLayout>
-            <Formik 
-                 enableReinitialize
+            <Formik
+                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}

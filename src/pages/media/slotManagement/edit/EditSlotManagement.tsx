@@ -13,7 +13,6 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
 import { FormInitialValues } from './editSlotManagementWrapper'
 
-
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -163,12 +162,22 @@ const EditSlotManagement = ({
                             />
                             <div className="">
                                 <ATMTimePicker
-                                    name={"startDateTime"}
+                                    name={'startDateTime'}
                                     value={values.startDateTime || null}
-                                    label="StartDateTime"
+                                    label="Startdate Time"
                                     onChange={(newValue) => {
                                         console.log(newValue)
                                         setFieldValue('startDateTime', newValue)
+                                    }}
+                                />
+                            </div>
+                            <div className="">
+                                <ATMTimePicker
+                                    name="endDateTime"
+                                    value={values.endDateTime || null}
+                                    label="Enddate Time"
+                                    onChange={(newValue) => {
+                                        setFieldValue('endDateTime', newValue)
                                     }}
                                 />
                             </div>
@@ -212,17 +221,17 @@ const EditSlotManagement = ({
                                     />
                                 </div>
                             </div>
-                            <div className=''>
-                            <ATMSelectSearchable
-                                name="channelName"
-                                required
-                                value={values.channelName}
-                                onChange={(e) =>
-                                    setFieldValue('channelName', e)
-                                }
-                                options={dropdownOptions.channelMgtOptions}
-                                label="Channel Name"
-                            />
+                            <div className="">
+                                <ATMSelectSearchable
+                                    name="channelName"
+                                    required
+                                    value={values.channelName}
+                                    onChange={(e) =>
+                                        setFieldValue('channelName', e)
+                                    }
+                                    options={dropdownOptions.channelMgtOptions}
+                                    label="Channel Name"
+                                />
                             </div>
                             <ATMSelectSearchable
                                 name="tapeName"
@@ -232,16 +241,6 @@ const EditSlotManagement = ({
                                 options={dropdownOptions.tapeMangementOptions}
                                 label="Tape Name"
                             />
-                            <div className="">
-                                <ATMTimePicker
-                                    name="endDateTime"
-                                    value={values.endDateTime || null}
-                                    label="EndDateTime"
-                                    onChange={(newValue) => {
-                                        setFieldValue('endDateTime', newValue)
-                                    }}
-                                />
-                            </div>
                             <ATMTextField
                                 name="channelTrp"
                                 value={values.channelTrp}

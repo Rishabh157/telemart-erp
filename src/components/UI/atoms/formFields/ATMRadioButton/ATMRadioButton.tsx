@@ -25,7 +25,7 @@ const ATMRadioButton = ({
     }
 
     return (
-        <div className='realtive mt-4'>
+        <div className="realtive mt-4">
             {label ? (
                 <label className="text-slate-700 mb-1 block">
                     {' '}

@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface SlotManagementSliceStateType {
     items: SlotManagementListResponse[] | []
-    selectedItems:SlotManagementListResponse[] | null
+    selectedItems: SlotManagementListResponse[] | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -23,7 +23,7 @@ const initialState: SlotManagementSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
-    selectedItems: null
+    selectedItems: null,
 }
 
 const SlotManagementSlice: Slice<SlotManagementSliceStateType> = createSlice({
@@ -65,7 +65,10 @@ const SlotManagementSlice: Slice<SlotManagementSliceStateType> = createSlice({
         setSelectetab: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
-        setSelectedItems: (state, action: PayloadAction<SlotManagementListResponse []>) => {
+        setSelectedItems: (
+            state,
+            action: PayloadAction<SlotManagementListResponse[]>
+        ) => {
             state.selectedItems = action.payload
         },
     },

@@ -112,34 +112,34 @@ const EditTapeManagement = ({
                                 }
                             /> */}
                             <ATMSelectSearchable
-                                name="scheme"
-                                value={values.scheme}
-                                selectLabel="Select Scheme"
+                                name="schemeId"
+                                value={values.schemeId}
+                                selectLabel="Select SchemeId"
                                 onChange={(value) =>
-                                    setFieldValue('scheme', value)
+                                    setFieldValue('schemeId', value)
                                 }
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme"
                             />
                             <ATMSelectSearchable
-                                name="channelGroup"
+                                name="channelGroupId"
                                 selectLabel="Select Channel group"
-                                value={values.channelGroup}
+                                value={values.channelGroupId}
                                 isMulti={false}
                                 onChange={(value) =>
-                                    setFieldValue('channelGroup', value)
+                                    setFieldValue('channelGroupId', value)
                                 }
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
 
                             <ATMSelectSearchable
-                                name="artist"
+                                name="artistId"
                                 required
                                 selectLabel="Select Artist"
-                                value={values.artist}
+                                value={values.artistId}
                                 onChange={(value) =>
-                                    setFieldValue('artist', value)
+                                    setFieldValue('artistId', value)
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
@@ -206,11 +206,11 @@ const EditTapeManagement = ({
                                 </div>
                             </div>
                             <ATMSelectSearchable
-                                name="language"
+                                name="languageId"
                                 required
-                                value={values.language}
+                                value={values.languageId}
                                 onChange={(value) =>
-                                    setFieldValue('language', value)
+                                    setFieldValue('languageId', value)
                                 }
                                 options={dropdownOptions.languageOptions}
                                 label="Language"

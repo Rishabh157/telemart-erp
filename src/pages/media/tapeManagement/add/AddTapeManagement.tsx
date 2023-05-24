@@ -67,7 +67,10 @@ const AddTapeManagement = ({
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() => formikProps.handleSubmit()}
+                                onClick={() => {
+                                    console.log(values)
+                                    formikProps.handleSubmit()
+                                }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
@@ -101,35 +104,35 @@ const AddTapeManagement = ({
                                 onChange={(e) => setFieldValue('tapeType', e)}
                             />
                             <ATMSelectSearchable
-                                name="scheme"
-                                value={values.scheme}
+                                name="schemeId"
+                                value={values.schemeId}
                                 selectLabel="Select Scheme"
                                 onChange={(value) =>
-                                    setFieldValue('scheme', value)
+                                    setFieldValue('schemeId', value)
                                 }
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme"
                             />
                             <ATMSelectSearchable
-                                name="channelGroup"
+                                name="channelGroupId"
                                 selectLabel="Select Channel group"
-                                value={values.channelGroup}
+                                value={values.channelGroupId}
                                 isMulti={false}
                                 onChange={(e) => {
                                     console.log('e', e)
-                                    setFieldValue('channelGroup', e)
+                                    setFieldValue('channelGroupId', e)
                                 }}
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
 
                             <ATMSelectSearchable
-                                name="artist"
+                                name="artistId"
                                 required
                                 selectLabel="Select Artist"
-                                value={values.artist}
+                                value={values.artistId}
                                 onChange={(value) =>
-                                    setFieldValue('artist', value)
+                                    setFieldValue('artistId', value)
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
@@ -196,11 +199,11 @@ const AddTapeManagement = ({
                                 </div>
                             </div>
                             <ATMSelectSearchable
-                                name="language"
+                                name="languageId"
                                 required
-                                value={values.language}
+                                value={values.languageId}
                                 onChange={(value) =>
-                                    setFieldValue('language', value)
+                                    setFieldValue('languageId', value)
                                 }
                                 options={dropdownOptions.languageOptions}
                                 label="Language"

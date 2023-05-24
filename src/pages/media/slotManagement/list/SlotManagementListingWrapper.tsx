@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SlotManagementListResponse } from 'src/models/Slot.model'
@@ -11,22 +11,24 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/slotManagementSlice'
-import { useDeleteSlotMangementMutation, useGetPaginationSlotQuery } from 'src/services/media/SlotManagementServices'
+import {
+    useDeleteSlotMangementMutation,
+    useGetPaginationSlotQuery,
+} from 'src/services/media/SlotManagementServices'
 import MediaLayout from 'src/pages/media/MediaLayout'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 
-
 const SlotManagementListingWrapper = () => {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const slotManagementState: any = useSelector(
         (state: RootState) => state.slotManagement
     )
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { page, rowsPerPage, searchValue, items } = slotManagementState
-    const [deleteSlotMangement]=useDeleteSlotMangementMutation()
+    const [deleteSlotMangement] = useDeleteSlotMangementMutation()
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetPaginationSlotQuery({
@@ -45,10 +47,9 @@ const SlotManagementListingWrapper = () => {
         orderByValue: -1,
         isPaginationRequired: true,
     })
-        
+
     useEffect(() => {
         if (!isFetching && !isLoading) {
-    
             dispatch(setIsTableLoading(false))
             dispatch(setItems(data?.data || []))
             dispatch(setTotalItems(data?.totalItem || 4))
@@ -73,8 +74,7 @@ const SlotManagementListingWrapper = () => {
             headerName: 'Channel Group',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {row.groupNameLabel
-                } </span>
+                <span> {row.groupNameLabel} </span>
             ),
         },
         {
@@ -85,7 +85,7 @@ const SlotManagementListingWrapper = () => {
                 <span> {row.channelLabel} </span>
             ),
         },
-     
+
         {
             field: 'tapeName',
             headerName: 'Tape Name',
@@ -104,21 +104,21 @@ const SlotManagementListingWrapper = () => {
         },
         {
             field: 'startDateTime',
-            headerName: 'StartDateTime',
-            flex: 'flex-[1_1_0%]',  
+            headerName: 'Startdate Time',
+            flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
                 <span> {row.startDateTime} </span>
             ),
         },
         {
             field: 'endDateTime',
-            headerName: 'EndDateTime',
+            headerName: 'Enddate Time',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
                 <span> {row.endDateTime} </span>
             ),
         },
-       
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -176,10 +176,7 @@ const SlotManagementListingWrapper = () => {
         deleteSlotMangement(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        'Slot deleted successfully!'
-                    )
+                    showToast('success', 'Slot deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -191,7 +188,6 @@ const SlotManagementListingWrapper = () => {
             }
         })
     }
-    
 
     return (
         <>

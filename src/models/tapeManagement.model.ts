@@ -3,10 +3,10 @@ export type TapeManagementListResponse = {
     tapeName: string
     channelGroup: string
     tapeType: string
-    schemeId: string
-    languageId: string
+    scheme: string
+    language: string
     duration: string
-    artistId: string
+    artist: string
     companyId: string
     remarks: string
     isDeleted: boolean
@@ -21,12 +21,12 @@ export type TapeManagementListResponse = {
 
 export type AddTapeManagement = {
     tapeName: string
-    channelGroup: string
+    channelGroupId: string
     tapeType: string
-    scheme: string
-    language: string
+    schemeId: string
+    languageId: string
     duration: string
-    artist: string
+    artistId: string[]
     remarks: string
     companyId: string
     youtubeLink: string
@@ -35,12 +35,12 @@ export type AddTapeManagement = {
 export type UpdateTapeManagement = {
     body: {
         tapeName: string
-        channelGroup: string
+        channelGroupId: string
         tapeType: string
-        scheme: string
-        language: string
+        schemeId: string
+        languageId: string
         duration: string
-        artist: string
+        artistId: string[]
         remarks: string
         companyId: string
         youtubeLink: string

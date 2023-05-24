@@ -163,10 +163,20 @@ const AddSlotManagement = ({
                                 <ATMTimePicker
                                     name="startDateTime"
                                     value={values.startDateTime}
-                                    label="StartDateTime"
+                                    label="Startdate Time"
                                     onChange={(newValue) => {
                                         console.log(newValue)
                                         setFieldValue('startDateTime', newValue)
+                                    }}
+                                />
+                            </div>
+                            <div className="">
+                                <ATMTimePicker
+                                    name="endDateTime"
+                                    value={values.endDateTime}
+                                    label="Enddate Time"
+                                    onChange={(newValue) => {
+                                        setFieldValue('endDateTime', newValue)
                                     }}
                                 />
                             </div>
@@ -210,17 +220,17 @@ const AddSlotManagement = ({
                                     />
                                 </div>
                             </div>
-                            <div className=''>
-                            <ATMSelectSearchable
-                                name="channelName"
-                                required
-                                value={values.channelName}
-                                onChange={(e) =>
-                                    setFieldValue('channelName', e)
-                                }
-                                options={dropdownOptions.channelMgtOptions}
-                                label="Channel Name"
-                            />
+                            <div className="">
+                                <ATMSelectSearchable
+                                    name="channelName"
+                                    required
+                                    value={values.channelName}
+                                    onChange={(e) =>
+                                        setFieldValue('channelName', e)
+                                    }
+                                    options={dropdownOptions.channelMgtOptions}
+                                    label="Channel Name"
+                                />
                             </div>
                             <ATMSelectSearchable
                                 name="tapeName"
@@ -230,16 +240,6 @@ const AddSlotManagement = ({
                                 options={dropdownOptions.tapeMangementOptions}
                                 label="Tape Name"
                             />
-                            <div className="">
-                                <ATMTimePicker
-                                    name="endDateTime"
-                                    value={values.endDateTime}
-                                    label="EndDateTime"
-                                    onChange={(newValue) => {
-                                        setFieldValue('endDateTime', newValue)
-                                    }}
-                                />
-                            </div>
                             <ATMTextField
                                 name="channelTrp"
                                 value={values.channelTrp}

@@ -21,12 +21,12 @@ import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
 
 export type FormInitialValues = {
     tapeName: string
-    channelGroup: string
+    channelGroupId: string
     tapeType: string
-    scheme: string
-    language: string
+    schemeId: string
+    languageId: string
     duration: string
-    artist: string
+    artistId: string[]
     remarks: string
     companyId: string
     hour: string
@@ -98,12 +98,12 @@ const AddTapeManagementWrapper = () => {
     }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
     const initialValues: FormInitialValues = {
         tapeName: '',
-        channelGroup: '',
+        channelGroupId: '',
         tapeType: '',
-        scheme: '',
-        language: '',
+        schemeId: '',
+        languageId: '',
         duration: '',
-        artist: '',
+        artistId: [''],
         remarks: '',
         hour: '0',
         minute: '00',
@@ -116,13 +116,13 @@ const AddTapeManagementWrapper = () => {
     const validationSchema = object({
         tapeName: string(),
         tapeType: string().required('Required'),
-        scheme: string(),
-        channelGroup: string(),
-        // language: string().required('Required'),
+        schemeId: string(),
+        channelGroupId: string(),
+        languageId: string().required('Required'),
         hour: string().required('Required'),
-        // minute: string().required('Required'),
-        // second: string().required('Required'),
-        artist: array().of(string().required('Required')),
+        minute: string().required('Required'),
+        second: string().required('Required'),
+        artistId: array().of(string().required('Required')),
         remarks: string(),
         youtubeLink: string(),
     })
@@ -133,12 +133,12 @@ const AddTapeManagementWrapper = () => {
         setTimeout(() => {
             AddTapeApi({
                 tapeName: values.tapeName,
-                channelGroup: values.channelGroup,
+                channelGroupId: values.channelGroupId,
                 tapeType: values.tapeType,
-                scheme: values.scheme,
-                language: values.language,
+                schemeId: values.schemeId,
+                languageId: values.languageId,
                 duration: duration,
-                artist: values.artist,
+                artistId: values.artistId,
                 remarks: values.remarks,
                 youtubeLink: values.youtubeLink,
                 companyId: values.companyId || '',
