@@ -37,6 +37,7 @@ export type FormInitialValues = {
     remarks: string
     companyId: string
 }
+
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 
 const EditSlotManagementWrapper = () => {
@@ -81,6 +82,7 @@ const EditSlotManagementWrapper = () => {
     //     isFetching: isLanguageFetching,
     //     data: languageDataApi,
     // } = useGetAllLanguageQuery('')
+    
 
     const {
         isLoading: isCategoryLoading,
