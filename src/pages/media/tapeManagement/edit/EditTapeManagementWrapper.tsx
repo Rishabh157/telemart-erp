@@ -155,8 +155,7 @@ const EditTapeManagementWrapper = () => {
         minute: string().required('Required'),
         second: string().required('Required'),
         artistId: array().of(string().required('Required')),
-        remarks: string(),
-        youtubeLink: string(),
+        remarks: string(),       
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -166,14 +165,13 @@ const EditTapeManagementWrapper = () => {
             updateTape({
                 body: {
                     tapeName: values.tapeName,
-                    channelGroupId: values.channelGroupId,
+                    channelGroupId: values.channelGroupId || null,
                     tapeType: values.tapeType,
-                    schemeId: values.schemeId,
+                    schemeId: values.schemeId || null,
                     languageId: values.languageId,
                     duration: duration,
                     artistId: values?.artistId,
-                    remarks: values.remarks,
-                    youtubeLink: values.youtubeLink,
+                    remarks: values.remarks || "",                    
                     companyId: values.companyId || '',
                 },
                 id: id || '',

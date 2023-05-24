@@ -20,28 +20,27 @@ export type TapeManagementListResponse = {
 
 export type AddTapeManagement = {
     tapeName: string
-    channelGroupId: string
+    channelGroupId: string | null
     tapeType: string
-    schemeId: string
+    schemeId: string | null
     languageId: string
     duration: string
     artistId: string[]
-    remarks: string
+    remarks: string | ""
     companyId: string
 }
 
 export type UpdateTapeManagement = {
     body: {
         tapeName: string
-        channelGroupId: string
+        channelGroupId: string | null
         tapeType: string
-        schemeId: string
+        schemeId: string | null
         languageId: string
         duration: string
         artistId: string[]
-        remarks: string
+        remarks: string | ""
         companyId: string
-        youtubeLink: string
     }
     id: string
 }

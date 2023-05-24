@@ -113,7 +113,7 @@ const AddTapeManagementWrapper = () => {
     // Form Validation Schema
     const validationSchema = object({
         tapeName: string().required('Required'),
-        tapeType: string().required('Required'),        
+        tapeType: string().required('Required'),
         channelGroupId: string(),
         languageId: string().required('Required'),
         hour: string().required('Required'),
@@ -121,7 +121,6 @@ const AddTapeManagementWrapper = () => {
         second: string().required('Required'),
         artistId: array().of(string().required('Required')),
         remarks: string(),
-        
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {

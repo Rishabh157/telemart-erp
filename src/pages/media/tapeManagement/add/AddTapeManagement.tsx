@@ -78,9 +78,7 @@ const AddTapeManagement = ({
                                     } else {
                                         formikProps.handleSubmit()
                                         setShow(false)
-                                    }
-                                    //console.log(values)
-                                    formikProps.handleSubmit()
+                                    }                                    
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
@@ -148,9 +146,9 @@ const AddTapeManagement = ({
                                     setFieldValue('artistId', value)
                                 }
                                 options={dropdownOptions.artistOption}
-                                label="Artist"                               
+                                label="Artist"
                             />
-                             <ATMSelectSearchable
+                            <ATMSelectSearchable
                                 name="languageId"
                                 required
                                 value={values.languageId}
@@ -162,7 +160,7 @@ const AddTapeManagement = ({
                             />
                             <div className="grid grid-cols-3 gap-4 ">
                                 <div className=" text-slate-700  font-medium mt-12 ">
-                                    Duration :                                   
+                                    Duration :
                                 </div>
 
                                 <div className=" col-span-2 ">
@@ -212,14 +210,14 @@ const AddTapeManagement = ({
                                     />
                                 </div>
                                 {show ? (
-                                        <p className="font-poppins relative text-[14px] text-start mt-0 mr-2 text-red-500">
-                                            Duration is Required
-                                        </p>
-                                    ) : (
-                                        ''
-                                    )}
+                                    <p className="font-poppins relative text-[14px] text-start mt-0 mr-2 text-red-500">
+                                        Duration is Required
+                                    </p>
+                                ) : (
+                                    ''
+                                )}
                             </div>
-                            
+
                             <ATMTextField
                                 name="remarks"
                                 value={values.remarks}
