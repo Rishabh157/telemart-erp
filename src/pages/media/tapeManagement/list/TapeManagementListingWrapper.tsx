@@ -170,12 +170,17 @@ const TapeManagementListingWrapper = () => {
             }
         })
     }
+    //console.log(items, 'items')
 
     return (
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <TapeManagementListing columns={columns} rows={items} />
+                    <TapeManagementListing
+                        columns={columns}
+                        rows={items}
+                        setShowDropdown={setShowDropdown}
+                    />
                 </div>
             </MediaLayout>
         </>

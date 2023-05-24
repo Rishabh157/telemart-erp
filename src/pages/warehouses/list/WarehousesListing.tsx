@@ -16,9 +16,10 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const WarehouseListing = ({ columns, rows }: Props) => {
+const WarehouseListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const warehouseState: any = useSelector(
@@ -75,6 +76,7 @@ const WarehouseListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
+                        setShowDropdown={setShowDropdown}
                     />
                 </div>
 

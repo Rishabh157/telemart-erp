@@ -19,9 +19,10 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const TaxesListing = ({ columns, rows }: Props) => {
+const TaxesListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const taxState: any = useSelector((state: RootState) => state.tax)
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
@@ -84,6 +85,7 @@ const TaxesListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
+                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                     />
                 </div>

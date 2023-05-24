@@ -172,7 +172,11 @@ const ProductsListingWrapper = () => {
     return (
         <>
             <ConfigurationLayout>
-                <ProductsListing columns={columns} rows={items} />
+                <ProductsListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
             </ConfigurationLayout>
         </>
     )
