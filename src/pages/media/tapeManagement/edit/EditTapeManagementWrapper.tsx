@@ -127,7 +127,7 @@ const EditTapeManagementWrapper = () => {
 
     const artist = selectedItem?.artistId.map((ele: any) => {
         return ele._id
-    });
+    })
     //console.log(artist)
     const newDuration = selectedItem?.duration?.split(':')
     //console.log(newDuration)
