@@ -157,7 +157,6 @@ const EditTapeManagement = ({
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
-                                
                             />
                             <ATMSelectSearchable
                                 name="languageId"
