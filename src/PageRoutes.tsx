@@ -148,6 +148,8 @@ import AddDispositionTwoWrapper from './pages/configuration/Configuration Screen
 import EditDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/edit/EditDispositionTwoWrapper'
 import EditDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/edit/EditDispositionOneWrapper'
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
+import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
+
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -620,6 +622,10 @@ const PageRoutes = () => {
                     <Route
                         path="media/slot/add"
                         element={<AddSlotManagementWrapper />}
+                    />
+                    <Route
+                        path="media/slot/edit/:id"
+                        element={<EditSlotManagementWrapper />}
                     />
                     <Route
                         path="media/competitor"

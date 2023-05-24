@@ -11,6 +11,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
+    setSearchValue,
 } from 'src/redux/slices/media/tapeManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
@@ -26,7 +27,7 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.tapeManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = tapeManagementState
+    const { page, rowsPerPage, totalItems, searchValue } = tapeManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -58,6 +59,7 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
+                    searchValue={searchValue}
                     page={page}
                     rowCount={rows.length}
                     rowsPerPage={rowsPerPage}
@@ -65,6 +67,9 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
+                    onSearch={(newValue) => {
+                        dispatch(setSearchValue(newValue))
+                    }}
                     isFilter
                 />
 

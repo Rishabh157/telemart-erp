@@ -79,6 +79,8 @@ const AddTapeManagement = ({
                                         formikProps.handleSubmit()
                                         setShow(false)
                                     }
+                                    //console.log(values)
+                                    formikProps.handleSubmit()
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
@@ -140,13 +142,17 @@ const AddTapeManagement = ({
                                 name="artistId"
                                 required
                                 selectLabel="Select Artist"
+<<<<<<< HEAD
                                 isMulti={true}
+=======
+>>>>>>> 917152fd7b235a2f818f1295a614bc70ca0582ef
                                 value={values.artistId}
                                 onChange={(value) =>
                                     setFieldValue('artistId', value)
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
+                                isMulti
                             />
                              <ATMSelectSearchable
                                 name="languageId"
@@ -217,7 +223,20 @@ const AddTapeManagement = ({
                                         ''
                                     )}
                             </div>
+<<<<<<< HEAD
                             
+=======
+                            <ATMSelectSearchable
+                                name="languageId"
+                                required
+                                value={values.languageId}
+                                onChange={(value) =>
+                                    setFieldValue('languageId', value)
+                                }
+                                options={dropdownOptions.languageOptions}
+                                label="Language"
+                            />
+>>>>>>> 917152fd7b235a2f818f1295a614bc70ca0582ef
                             <ATMTextField
                                 name="remarks"
                                 value={values.remarks}

@@ -4,7 +4,11 @@ import { useAddTapeMutation } from 'src/services/media/TapeManagementServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
+<<<<<<< HEAD
 import { object, string, array } from 'yup'
+=======
+import { array, object, string } from 'yup'
+>>>>>>> 917152fd7b235a2f818f1295a614bc70ca0582ef
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
@@ -102,7 +106,7 @@ const AddTapeManagementWrapper = () => {
         schemeId: '',
         languageId: '',
         duration: '',
-        artistId: [],
+        artistId: [''],
         remarks: '',
         hour: '0',
         minute: '00',
@@ -118,8 +122,9 @@ const AddTapeManagementWrapper = () => {
         languageId: string().required('Required'),
         hour: string().required('Required'),
         minute: string().required('Required'),
-        second: string().required('Required'),        
-        artistId: array().required('Required'),        
+        second: string().required('Required'),
+        artistId: array().of(string().required('Required')),
+        remarks: string(),        
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -128,6 +133,7 @@ const AddTapeManagementWrapper = () => {
         setTimeout(() => {
             AddTapeApi({
                 tapeName: values.tapeName,
+<<<<<<< HEAD
                 channelGroupId: values.channelGroupId || null,
                 tapeType: values.tapeType,
                 schemeId: values.schemeId || null,
@@ -135,6 +141,16 @@ const AddTapeManagementWrapper = () => {
                 duration: duration,
                 artistId: values.artistId,
                 remarks: values.remarks || '',
+=======
+                channelGroupId: values.channelGroupId,
+                tapeType: values.tapeType,
+                schemeId: values.schemeId,
+                languageId: values.languageId,
+                duration: duration,
+                artistId: values.artistId,
+                remarks: values.remarks,
+                youtubeLink: values.youtubeLink,
+>>>>>>> 917152fd7b235a2f818f1295a614bc70ca0582ef
                 companyId: values.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

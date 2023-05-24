@@ -157,6 +157,7 @@ const EditTapeManagement = ({
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
+                                isMulti
                             />
                             <ATMSelectSearchable
                                 name="languageId"
@@ -238,10 +239,23 @@ const EditTapeManagement = ({
                                     )}
                                
                             </div>
+<<<<<<< HEAD
                             
 
 
                             
+=======
+                            <ATMSelectSearchable
+                                name="languageId"
+                                required
+                                value={values.languageId}
+                                onChange={(value) =>
+                                    setFieldValue('languageId', value)
+                                }
+                                options={dropdownOptions.languageOptions}
+                                label="Language"
+                            />
+>>>>>>> 917152fd7b235a2f818f1295a614bc70ca0582ef
                             <ATMTextField
                                 name="remarks"
                                 value={values.remarks}

@@ -136,7 +136,7 @@ const EditTapeManagementWrapper = () => {
         schemeId: selectedItem?.schemeId || '',
         languageId: selectedItem?.languageId || '',
         duration: selectedItem?.duration || '',
-        artistId: selectedItem?.artistId || '',
+        artistId: selectedItem?.artistId || [''],
         remarks: selectedItem?.remarks || '',
         hour: newDuration ? newDuration[0] : '0',
         minute: newDuration ? newDuration[1] : '00',
@@ -147,13 +147,16 @@ const EditTapeManagementWrapper = () => {
     // Form Validation Schema
     const validationSchema = object({
         tapeName: string().required('Required'),
-        tapeType: string().required('Required'),      
+        tapeType: string().required('Required'),
+        schemeId: string(),
+        channelGroupId: string(),
         languageId: string().required('Required'),
         hour: string().required('Required'),
         minute: string().required('Required'),
         second: string().required('Required'),
-        artistId: array().required('Required'),
-        
+        artistId: array().of(string().required('Required')),
+        remarks: string(),
+        youtubeLink: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -163,13 +166,14 @@ const EditTapeManagementWrapper = () => {
             updateTape({
                 body: {
                     tapeName: values.tapeName,
-                    channelGroupId: values.channelGroupId || null,
+                    channelGroupId: values.channelGroupId,
                     tapeType: values.tapeType,
-                    schemeId: values.schemeId || null,
+                    schemeId: values.schemeId,
                     languageId: values.languageId,
                     duration: duration,
                     artistId: values?.artistId,
-                    remarks: values.remarks || '',
+                    remarks: values.remarks,
+                    youtubeLink: values.youtubeLink,
                     companyId: values.companyId || '',
                 },
                 id: id || '',

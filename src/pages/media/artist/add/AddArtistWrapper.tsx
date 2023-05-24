@@ -28,7 +28,7 @@ const AddArtistWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        artistName: string().required('Artist Name is required'),
+        artistName: string().required('artist Name is required'),
     })
 
     //    Form Submit Handler
