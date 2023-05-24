@@ -93,6 +93,7 @@ const EditSlotManagement = ({
     })
 
     const [selectedValue, setSelectedValue] = useState('')
+    
 
     const options = ['FIXED', 'FLEXIBLE']
 
