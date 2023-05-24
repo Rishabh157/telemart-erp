@@ -69,7 +69,7 @@ const AddArtist = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name="ArtistName"
+                                name="artistName"
                                 value={values.artistName}
                                 label="Artist Name"
                                 placeholder="Artist Name"

@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate, useParams } from 'react-router-dom'
-import { object, string } from 'yup'
+import { array, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
@@ -25,12 +25,12 @@ import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
 
 export type FormInitialValues = {
     tapeName: string
-    channelGroup: string
+    channelGroupId: string
     tapeType: string
-    scheme: string
-    language: string
+    schemeId: string
+    languageId: string
     duration: string
-    artist: string
+    artistId: string[]
     remarks: string
     companyId: string
     hour: string
@@ -132,12 +132,12 @@ const EditTapeManagementWrapper = () => {
 
     const initialValues: FormInitialValues = {
         tapeName: selectedItem?.tapeName || '',
-        channelGroup: selectedItem?.channelGroup || '',
+        channelGroupId: selectedItem?.channelGroupId || '',
         tapeType: selectedItem?.tapeType || '',
-        scheme: selectedItem?.scheme || '',
-        language: selectedItem?.language || '',
+        schemeId: selectedItem?.schemeId || '',
+        languageId: selectedItem?.languageId || '',
         duration: selectedItem?.duration || '',
-        artist: selectedItem?.artist || '',
+        artistId: selectedItem?.artistId || [''],
 
         remarks: selectedItem?.remarks || '',
         hour: newDuration ? newDuration[0] : '0',
@@ -151,13 +151,13 @@ const EditTapeManagementWrapper = () => {
     const validationSchema = object({
         tapeName: string(),
         tapeType: string().required('Required'),
-        scheme: string(),
-        channelGroup: string(),
-        language: string().required('Required'),
+        schemeId: string(),
+        channelGroupId: string(),
+        languageId: string().required('Required'),
         hour: string().required('Required'),
         minute: string().required('Required'),
         second: string().required('Required'),
-        artist: string().required('Required'),
+        artistId: array().of(string().required('Required')),
         remarks: string(),
         youtubeLink: string(),
     })
@@ -169,12 +169,12 @@ const EditTapeManagementWrapper = () => {
             updateTape({
                 body: {
                     tapeName: values.tapeName,
-                    channelGroup: values.channelGroup,
+                    channelGroupId: values.channelGroupId,
                     tapeType: values.tapeType,
-                    scheme: values.scheme,
-                    language: values.language,
+                    schemeId: values.schemeId,
+                    languageId: values.languageId,
                     duration: duration,
-                    artist: values?.artist,
+                    artistId: values?.artistId,
                     remarks: values.remarks,
                     youtubeLink: values.youtubeLink,
                     companyId: values.companyId || '',

@@ -15,6 +15,7 @@ type Props = {
     size?: Size
     disabled?: boolean
     isSubmitting?: boolean
+    error?: boolean
 }
 
 const ATMTimePicker = ({
@@ -26,6 +27,7 @@ const ATMTimePicker = ({
     size = 'small',
     disabled = false,
     isSubmitting = true,
+    error,
 }: Props) => {
     return (
         <div className="relative mt-4">
@@ -45,6 +47,8 @@ const ATMTimePicker = ({
                 <LocalizationProvider dateAdapter={AdapterMoment}>
                     <TimePicker
                         value={value}
+                        inputFormat="HH:mm:ss"
+                        disabled={disabled}
                         onChange={onChange}
                         renderInput={(params) => (
                             <TextField
@@ -52,6 +56,7 @@ const ATMTimePicker = ({
                                 size="small"
                                 fullWidth
                                 className="bg-white"
+                                error={value === '' ? false : undefined}
                             />
                         )}
                     />
