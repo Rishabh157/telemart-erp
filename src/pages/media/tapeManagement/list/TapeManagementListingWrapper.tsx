@@ -170,6 +170,7 @@ const TapeManagementListingWrapper = () => {
             }
         })
     }
+    console.log(items, "items")
 
     return (
         <>

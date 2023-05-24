@@ -95,6 +95,7 @@ const AddTapeManagement = ({
                             {/* FirstName */}
                             <ATMTextField
                                 name="tapeName"
+                                required
                                 value={values.tapeName}
                                 label="Tape Name"
                                 placeholder="Tape Name"
@@ -113,58 +114,53 @@ const AddTapeManagement = ({
                                 onChange={(e) => setFieldValue('tapeType', e)}
                             />
                             <ATMSelectSearchable
-                                name="scheme"
-                                value={values.scheme}
+                                name="schemeId"
+                                value={values.schemeId}
                                 selectLabel="Select Scheme"
                                 onChange={(value) =>
-                                    setFieldValue('scheme', value)
+                                    setFieldValue('schemeId', value)
                                 }
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme"
                             />
                             <ATMSelectSearchable
-                                name="channelGroup"
+                                name="channelGroupId"
                                 selectLabel="Select Channel group"
-                                value={values.channelGroup}
+                                value={values.channelGroupId}
                                 isMulti={false}
                                 onChange={(e) => {
                                     console.log('e', e)
-                                    setFieldValue('channelGroup', e)
+                                    setFieldValue('channelGroupId', e)
                                 }}
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
 
                             <ATMSelectSearchable
-                                name="artist"
+                                name="artistId"
                                 required
                                 selectLabel="Select Artist"
-                                value={values.artist}
+                                isMulti={true}
+                                value={values.artistId}
                                 onChange={(value) =>
-                                    setFieldValue('artist', value)
+                                    setFieldValue('artistId', value)
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
                             />
-                            <ATMTextField
-                                name="youtubeLink"
-                                value={values.youtubeLink}
-                                label="Youtube Link"
-                                placeholder="Youtube Link"
-                                onChange={(e) =>
-                                    setFieldValue('youtubeLink', e.target.value)
+                             <ATMSelectSearchable
+                                name="languageId"
+                                required
+                                value={values.languageId}
+                                onChange={(value) =>
+                                    setFieldValue('languageId', value)
                                 }
+                                options={dropdownOptions.languageOptions}
+                                label="Language"
                             />
                             <div className="grid grid-cols-3 gap-4 ">
                                 <div className=" text-slate-700  font-medium mt-12 ">
-                                    Duration :
-                                    {show ? (
-                                        <p className="font-poppins text-[12px] text-start mt-3 text-red-500">
-                                            Duration is Required
-                                        </p>
-                                    ) : (
-                                        ''
-                                    )}
+                                    Duration :                                   
                                 </div>
 
                                 <div className=" col-span-2 ">
@@ -213,17 +209,15 @@ const AddTapeManagement = ({
                                         }
                                     />
                                 </div>
+                                {show ? (
+                                        <p className="font-poppins relative text-[14px] text-start mt-0 mr-2 text-red-500">
+                                            Duration is Required
+                                        </p>
+                                    ) : (
+                                        ''
+                                    )}
                             </div>
-                            <ATMSelectSearchable
-                                name="language"
-                                required
-                                value={values.language}
-                                onChange={(value) =>
-                                    setFieldValue('language', value)
-                                }
-                                options={dropdownOptions.languageOptions}
-                                label="Language"
-                            />
+                            
                             <ATMTextField
                                 name="remarks"
                                 value={values.remarks}
