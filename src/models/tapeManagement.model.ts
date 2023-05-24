@@ -26,7 +26,7 @@ export type AddTapeManagement = {
     languageId: string
     duration: string
     artistId: string[]
-    remarks: string | ""
+    remarks: string | ''
     companyId: string
 }
 
@@ -39,7 +39,7 @@ export type UpdateTapeManagement = {
         languageId: string
         duration: string
         artistId: string[]
-        remarks: string | ""
+        remarks: string | ''
         companyId: string
     }
     id: string
