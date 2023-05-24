@@ -74,9 +74,11 @@ const EditTapeManagement = ({
                                     if (
                                         formikProps?.values.hour === '0' &&
                                         formikProps.values.minute === '00' &&
-                                        formikProps.values.second === '00'
+                                        formikProps.values.second === '00' 
+                                        
                                     ) {
                                         setShow(true)
+                                        formikProps.handleSubmit()
                                     } else {
                                         formikProps.handleSubmit()
                                         setShow(false)

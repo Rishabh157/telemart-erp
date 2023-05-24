@@ -36,6 +36,8 @@ const AddTapeManagement = ({
 }: Props) => {
     const { values, setFieldValue } = formikProps
     const [show, setShow] = useState(false)
+    const [submit, setSubmit] = useState(true)
+
 
     const MinuteOptions = () => {
         let options: SelectOption[] = []
@@ -70,15 +72,27 @@ const AddTapeManagement = ({
                                 disabled={apiStatus}
                                 onClick={() => {
                                     if (
-                                        formikProps?.values.hour === '0' &&
+                                        (formikProps?.values.hour === '0' &&
                                         formikProps.values.minute === '00' &&
-                                        formikProps.values.second === '00'
+                                        formikProps.values.second === '00' )
+                                                                            
                                     ) {
-                                        setShow(true)
-                                    } else {
-                                        formikProps.handleSubmit()
-                                        setShow(false)
+                                        setShow(true)  
+                                                                            
+                                        //alert("step0")
+                                        if(formikProps.values.languageId === "" || formikProps.values.tapeName === "" || formikProps.values.tapeType === "" || formikProps.values.artistId.length === 0 ){
+                                            //alert("step1")
+                                            formikProps.handleSubmit()                                            
+                                        }                                       
+                                    }else{
+                                        
+                                            //alert("step3")
+                                            formikProps.handleSubmit()
+                                            setShow(false)
                                     }
+                                
+                                        
+                                    
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
