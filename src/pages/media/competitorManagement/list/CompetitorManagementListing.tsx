@@ -21,7 +21,11 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CompetitorManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
+const CompetitorManagementListing = ({
+    columns,
+    rows,
+    setShowDropdown,
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const competitorState: any = useSelector(
         (state: RootState) => state.competitor

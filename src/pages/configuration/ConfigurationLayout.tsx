@@ -2,17 +2,22 @@ import React, { useState } from 'react'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
-import { BiChevronsLeft, BiCategory, BiCheckboxSquare, BiCategoryAlt } from 'react-icons/bi'
+import {
+    BiChevronsLeft,
+    BiCategory,
+    BiCheckboxSquare,
+    BiCategoryAlt,
+} from 'react-icons/bi'
 import { MdOutlineCategory } from 'react-icons/md'
 import { BsBox, BsBoxes, BsBoxFill } from 'react-icons/bs'
 import { TbAppsFilled } from 'react-icons/tb'
-import {FaObjectGroup }  from 'react-icons/fa'
-import {HiOutlineReceiptTax}  from 'react-icons/hi'
-import { CgOrganisation}  from 'react-icons/cg'
-import {CiBarcode, CiLocationOn}  from 'react-icons/ci'
+import { FaObjectGroup } from 'react-icons/fa'
+import { HiOutlineReceiptTax } from 'react-icons/hi'
+import { CgOrganisation } from 'react-icons/cg'
+import { CiBarcode, CiLocationOn } from 'react-icons/ci'
 import { GrLanguage } from 'react-icons/gr'
-import {RiDeleteBin4Line, RiDeleteBin5Line } from 'react-icons/ri'
-import {TbBinaryTree2 } from 'react-icons/tb'
+import { RiDeleteBin4Line, RiDeleteBin5Line } from 'react-icons/ri'
+import { TbBinaryTree2 } from 'react-icons/tb'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const configurationNavigation: NavItemType[] = [

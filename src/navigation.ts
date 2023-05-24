@@ -9,9 +9,9 @@ import { MdPermMedia } from 'react-icons/md'
 import { GrCompliance, GrNotes } from 'react-icons/gr'
 import { IoDocumentTextOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
-import {BiPurchaseTagAlt} from 'react-icons/bi'
+import { BiPurchaseTagAlt } from 'react-icons/bi'
 import { IconType } from 'react-icons'
-import {TfiLayoutMediaOverlayAlt2} from 'react-icons/tfi'
+import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 
 export type NavItemType = {
     label: string

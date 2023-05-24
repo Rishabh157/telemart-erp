@@ -175,7 +175,11 @@ const TapeManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <TapeManagementListing columns={columns} rows={items} setShowDropdown={setShowDropdown}/>
+                    <TapeManagementListing
+                        columns={columns}
+                        rows={items}
+                        setShowDropdown={setShowDropdown}
+                    />
                 </div>
             </MediaLayout>
         </>

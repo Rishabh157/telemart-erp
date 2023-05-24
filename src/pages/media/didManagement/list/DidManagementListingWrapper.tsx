@@ -158,7 +158,11 @@ const DidManagementListingWrapper = () => {
     return (
         <>
             <MediaLayout>
-                <DidManagementListing columns={columns} rows={items} setShowDropdown={setShowDropdown}/>
+                <DidManagementListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
             </MediaLayout>
         </>
     )

@@ -142,7 +142,11 @@ const ChannelGroupListingWrapper = () => {
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <ChannelGroupListing columns={columns} rows={items} setShowDropdown={setShowDropdown}/>
+                    <ChannelGroupListing
+                        columns={columns}
+                        rows={items}
+                        setShowDropdown={setShowDropdown}
+                    />
                 </div>
             </MediaLayout>
         </>
