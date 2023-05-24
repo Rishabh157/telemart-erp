@@ -92,11 +92,7 @@ const EditSlotManagement = ({
         }
     })
 
-
-
     const options = ['FIXED', 'FLEXIBLE']
-
-
 
     return (
         <div className="">

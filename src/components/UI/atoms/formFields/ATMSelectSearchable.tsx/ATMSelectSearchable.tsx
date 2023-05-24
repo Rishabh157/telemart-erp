@@ -20,6 +20,7 @@ type Props = {
     defaultValue?: string
     isMulti?: boolean
     isAllSelect?: boolean
+    isLoading?: boolean
 }
 
 const ATMSelectSearchable = ({
@@ -35,6 +36,7 @@ const ATMSelectSearchable = ({
     name,
     isMulti = false,
     isAllSelect = false,
+    isLoading = false,
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -115,7 +117,7 @@ const ATMSelectSearchable = ({
             )}
 
             <Select
-                className="mt-2 border rounded border-slate-400  "
+                className="mt-2 border rounded border-slate-400   "
                 name={name}
                 defaultValue={selectOptions?.find(
                     (option) => option.value === defaultValue
@@ -127,9 +129,9 @@ const ATMSelectSearchable = ({
                 styles={selectStyles}
                 isMulti={isMulti}
                 isClearable
+                isLoading={isLoading}
                 isOptionDisabled={(options) => (options.value as string) === ''}
                 placeholder={`${selectLabel}`}
-
                 // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
             />
 

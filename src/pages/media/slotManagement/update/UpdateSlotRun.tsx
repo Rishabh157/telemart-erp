@@ -4,11 +4,7 @@ import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
 
-const UpdateSlotRun = ({
-    dropdownOptions,
-    apiStatus ,
-    formikProps,
-}: any) => {
+const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
     const [switch1, setSwitch2] = useState<boolean>(false)
     const { values, setFieldValue } = formikProps
     return (
