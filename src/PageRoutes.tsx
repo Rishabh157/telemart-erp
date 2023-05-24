@@ -150,6 +150,7 @@ import EditDispositionOneWrapper from './pages/configuration/Configuration Scree
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
 import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
 
+
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
