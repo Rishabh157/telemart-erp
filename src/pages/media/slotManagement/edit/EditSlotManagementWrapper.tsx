@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import MediaLayout from '../../MediaLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { useNavigate, useParams } from 'react-router-dom'
+import { /*useNavigate ,*/ useParams } from 'react-router-dom'
 import { array, object, string } from 'yup'
-import { showToast } from 'src/utils'
+// import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
 import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
@@ -12,7 +12,7 @@ import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import {
     useGetSlotMangementByIdQuery,
-    useUpdateSlotMutation,
+    // useUpdateSlotMutation,
 } from 'src/services/media/SlotManagementServices'
 import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
@@ -41,7 +41,7 @@ export type FormInitialValues = {
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 
 const EditSlotManagementWrapper = () => {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const params = useParams()
     const Id = params.id
     const dispatch = useDispatch()
@@ -51,7 +51,7 @@ const EditSlotManagementWrapper = () => {
         (state: RootState) => state?.slotManagement
     )
 
-    const [editSlotMangementApi] = useUpdateSlotMutation()
+    // const [editSlotMangementApi] = useUpdateSlotMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { channelgroup }: any = useSelector(
@@ -180,34 +180,32 @@ const EditSlotManagementWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            editSlotMangementApi({
-                body: {
-                    slotName: values.slotName,
-                    channelGroup: values.channelGroup,
-                    startDateTime: values.startDateTime,
-                    type: values.type,
-                    days: values.days,
-                    tapeName: values.tapeName,
-                    channelName: values.channelName,
-                    endDateTime: values.endDateTime,
-                    channelTrp: values.channelTrp,
-                    remarks: values.remarks,
-                    companyId: values.companyId || '',
-                },
-                id: Id || '',
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'Slot Updated successfully!')
-                        navigate('/media/slot')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-                setApiStatus(false)
-            })
+            // editSlotMangementApi({
+            //     body: {
+            //         slotName: values.slotName,
+            //         channelGroupId: values.channelGroup,
+            //         type: values.type,
+            //         days: values.days,
+            //         tapeNameId: values.tapeName,
+            //         channelNameId: values.channelName,
+            //         channelTrp: values.channelTrp,
+            //         remarks: values.remarks,
+            //         companyId: values.companyId || '',
+            //     },
+            //     id: Id || '',
+            // }).then((res: any) => {
+            //     if ('data' in res) {
+            //         if (res?.data?.status) {
+            //             showToast('success', 'Slot Updated successfully!')
+            //             navigate('/media/slot')
+            //         } else {
+            //             showToast('error', res?.data?.message)
+            //         }
+            //     } else {
+            //         showToast('error', 'Something went wrong')
+            //     }
+            //     setApiStatus(false)
+            // })
         }, 1000)
     }
     const dropdownOptions = {

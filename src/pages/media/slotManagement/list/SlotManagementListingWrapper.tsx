@@ -16,8 +16,9 @@ import {
     useGetPaginationSlotQuery,
 } from 'src/services/media/SlotManagementServices'
 import MediaLayout from 'src/pages/media/MediaLayout'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import SlotRunWrapper from '../update/SlotRunWrapper'
@@ -98,27 +99,27 @@ const SlotManagementListingWrapper = () => {
             ),
         },
         {
-            field: 'type',
-            headerName: 'Type',
+            field: 'tapeLabel',
+            headerName: 'Tape Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {row.type} </span>
+                <span> {row.tapeLabel} </span>
             ),
         },
         {
-            field: 'startDateTime',
-            headerName: 'Startdate Time',
+            field: 'slotStartTime',
+            headerName: 'Start Time',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {row.startDateTime} </span>
+                <span> {moment(row.slotStartTime).format('DD/MM/YYYY')} </span>
             ),
         },
         {
-            field: 'endDateTime',
-            headerName: 'Enddate Time',
+            field: 'slotEndTime',
+            headerName: 'End Time',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {row.endDateTime} </span>
+                <span> {moment(row.slotEndTime).format('DD/MM/YYYY')} </span>
             ),
         },
         {

@@ -19,16 +19,18 @@ import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import { useGetAllTapeMangementQuery } from 'src/services/media/TapeManagementServices'
 import { setSelectedTapManagement } from 'src/redux/slices/media/tapeManagementSlice'
 import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
-//import moment from 'moment'
 export type FormInitialValues = {
     slotName: string
     channelGroup: string
-    startDateTime: string
     type: string
     days: string[]
+    channelSlot: {
+        date: string
+        startTime: string
+        endTime: string
+    }[]
     tapeName: string
     channelName: string
-    endDateTime: string
     channelTrp: string
     remarks: string
     companyId: string
@@ -54,11 +56,6 @@ const AddSlotManagementWrapper = () => {
     )
 
     const [AddSlotManagementApi] = useAddSlotMutation()
-    // const {
-    //     isLoading: isLanguageLoading,
-    //     isFetching: isLanguageFetching,
-    //     data: languageDataApi,
-    // } = useGetAllLanguageQuery('')
 
     const {
         isLoading: isCategoryLoading,
@@ -77,12 +74,6 @@ const AddSlotManagementWrapper = () => {
             dispatch(setChannelMgt(ChannelMgtDataApi?.data || []))
         }
     }, [isChannelMgtLoading, isChannelMgtFetching, ChannelMgtDataApi, dispatch])
-
-    // const {
-    //     isLoading: isCountryLoading,
-    //     isFetching: isCountryFetching,
-    //     data: countryDataApi,
-    // } = useGetAllCountryQuery('')
 
     const {
         isLoading,
@@ -108,18 +99,6 @@ const AddSlotManagementWrapper = () => {
         }
     }, [isTapeMgtLoading, isTapeMgtFetching, TapeMgtdata, dispatch])
 
-    // useEffect(() => {
-    //     if (!isCountryLoading && !isCountryFetching) {
-    //         setCountryData(countryDataApi?.data)
-    //     }
-    // }, [isCountryLoading, isCountryFetching, countryDataApi])
-
-    // useEffect(() => {
-    //     if (!isLanguageLoading && !isLanguageFetching) {
-    //         setlanguageData(languageDataApi?.data)
-    //     }
-    // }, [isLanguageLoading, isLanguageFetching, languageDataApi])
-
     useEffect(() => {
         if (!isCategoryLoading && !isCategoryFetching) {
             setChannelCategoryData(categoryDataApi?.data)
@@ -129,12 +108,17 @@ const AddSlotManagementWrapper = () => {
     const initialValues: FormInitialValues = {
         slotName: '',
         channelGroup: '',
-        startDateTime: '',
         type: '',
+        channelSlot: [
+            {
+                date: '',
+                startTime: '',
+                endTime: '',
+            },
+        ],
         days: [''],
         tapeName: '',
         channelName: '',
-        endDateTime: '',
         channelTrp: '',
         remarks: '',
         companyId: userData?.companyId || '',
@@ -144,46 +128,51 @@ const AddSlotManagementWrapper = () => {
     const validationSchema = object({
         slotName: string().required('Required'),
         channelGroup: string().required('Required'),
-        startDateTime: string().required('Required'),
         type: string().required('Required'),
         days: array().of(string().required('Required')),
-
+        channelSlot: array().of(
+            object().shape({
+                date: string().required('Date is required'),
+                startTime: string().required('Start time is required'),
+                endTime: string().required('End time is required'),
+            })
+        ),
         tapeName: string().required('Required'),
         channelName: string().required('Required'),
-        endDateTime: string().required('Required'),
         channelTrp: string().required('Required'),
-        remarks: string().required('Required'),
+        remarks: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        setTimeout(() => {
-            AddSlotManagementApi({
-                slotName: values.slotName,
-                channelGroup: values.channelGroup,
-                startDateTime: values.startDateTime,
-                type: values.type,
-                days: values.days,
-                tapeName: values.tapeName,
-                channelName: values.channelName,
-                endDateTime: values.endDateTime,
-                channelTrp: values.channelTrp,
-                remarks: values.remarks,
-                companyId: values.companyId || '',
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'Slot Added successfully!')
-                        navigate('/media/slot')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
+        AddSlotManagementApi({
+            slotName: values.slotName,
+            channelGroupId: values.channelGroup,
+            type: values.type,
+            days: values.days,
+            tapeNameId: values.tapeName,
+            channelNameId: values.channelName,
+            channelTrp: values.channelTrp,
+            remarks: values.remarks,
+            channelSlots: values.channelSlot,
+            run: false,
+            runStartTime: '',
+            runEndTime: '',
+            runRemark: '',
+            companyId: values.companyId || '',
+        }).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Slot Added successfully!')
+                    navigate('/media/slot')
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.data?.message)
                 }
-                setApiStatus(false)
-            })
-        }, 1000)
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+            setApiStatus(false)
+        })
     }
     const dropdownOptions = {
         channelGroupOptions: channelgroup?.map(
@@ -204,18 +193,6 @@ const AddSlotManagementWrapper = () => {
             }
         ),
 
-        // countryOption: countryData?.map((country: CountryListResponse) => {
-        //     return {
-        //         label: country.countryName,
-        //         value: country._id,
-        //     }
-        // }),
-        // languageOption: languageData?.map((language: LanguageListResponse) => {
-        //     return {
-        //         label: language.languageName,
-        //         value: language._id,
-        //     }
-        // }),
         categoryOption: channelCategoryData?.map(
             (category: ChannelCategoryListResponse) => {
                 return {
