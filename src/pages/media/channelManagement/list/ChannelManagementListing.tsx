@@ -18,9 +18,14 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ChannelManagementListing = ({ columns, rows }: Props) => {
+const ChannelManagementListing = ({
+    columns,
+    rows,
+    setShowDropdown,
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const channelManagementState: any = useSelector(
         (state: RootState) => state.channelManagement
@@ -82,6 +87,7 @@ const ChannelManagementListing = ({ columns, rows }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="h-full overflow-auto"
+                        setShowDropdown={setShowDropdown}
                     />
                 </div>
 

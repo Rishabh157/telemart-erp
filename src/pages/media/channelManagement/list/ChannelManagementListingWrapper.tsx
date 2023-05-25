@@ -177,7 +177,11 @@ const ChannelManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <ChannelManagementListing columns={columns} rows={items} />
+                    <ChannelManagementListing
+                        columns={columns}
+                        rows={items}
+                        setShowDropdown={setShowDropdown}
+                    />
                 </div>
             </MediaLayout>
         </>
