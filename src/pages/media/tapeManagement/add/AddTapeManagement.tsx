@@ -68,7 +68,7 @@ const AddTapeManagement = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => {
-                                    console.log(values)
+                             
                                     formikProps.handleSubmit()
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
@@ -119,7 +119,7 @@ const AddTapeManagement = ({
                                 value={values.channelGroupId}
                                 isMulti={false}
                                 onChange={(e) => {
-                                    console.log('e', e)
+                            
                                     setFieldValue('channelGroupId', e)
                                 }}
                                 options={dropdownOptions.channelGroupOptions}

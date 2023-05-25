@@ -1,11 +1,12 @@
 import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
+import { InitialCallerOneListResponse } from 'src/models/configurationModel/InitialCallerOne.model'
 
-export interface DispositionTwoSliceStateType {
-    items: DispositionTwoListResponse[] | []
-    selectedDispostion: DispositionTwoListResponse | null
-    allItems: DispositionTwoListResponse[] | []
+
+export interface InitialCallerOneSliceStateType {
+    items: InitialCallerOneListResponse[] | []
+    selectedInitialOne: InitialCallerOneListResponse | null
+    allItems: InitialCallerOneListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -13,13 +14,12 @@ export interface DispositionTwoSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
-    filterValue: string,
 }
 
-const initialState: DispositionTwoSliceStateType = {
+const initialState: InitialCallerOneSliceStateType = {
     items: [],
     allItems: [],
-    selectedDispostion: null,
+    selectedInitialOne: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -27,16 +27,15 @@ const initialState: DispositionTwoSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
-    filterValue: "",
 }
 
-const dispositionTwoSlice: Slice<DispositionTwoSliceStateType> = createSlice({
-    name: 'dispositionTwo',
+const initialCallerOneSlice: Slice<InitialCallerOneSliceStateType> = createSlice({
+    name: 'initialcallerOne',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<DispositionTwoListResponse[] | []>
+            action: PayloadAction<InitialCallerOneListResponse[] | []>
         ) => {
             state.items = action.payload
         },
@@ -66,23 +65,20 @@ const dispositionTwoSlice: Slice<DispositionTwoSliceStateType> = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setFilterValue: (state, action: PayloadAction<string>) => {
-            state.filterValue = action.payload
-        },
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
         setAllItems: (
             state,
-            action: PayloadAction<DispositionTwoListResponse[] | []>
+            action: PayloadAction<InitialCallerOneListResponse[] | []>
         ) => {
             state.allItems = action.payload
         },
-        setSelectedDispostion: (
+        setSelectedInitialOne: (
             state,
-            action: PayloadAction<DispositionTwoListResponse | null>
+            action: PayloadAction<InitialCallerOneListResponse | null>
         ) => {
-            state.selectedDispostion = action.payload
+            state.selectedInitialOne = action.payload
         },
     },
 })
@@ -96,8 +92,7 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
-    setFilterValue,
-    setSelectedDispostion,
+    setSelectedInitialOne,
     setAllItems,
-} = dispositionTwoSlice.actions
-export default dispositionTwoSlice.reducer
+} = initialCallerOneSlice.actions
+export default initialCallerOneSlice.reducer

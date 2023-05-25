@@ -1,11 +1,11 @@
 import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
+import { DispositionThreeListResponse } from 'src/models/configurationModel/DispositionThree.model'
 
-export interface DispositionTwoSliceStateType {
-    items: DispositionTwoListResponse[] | []
-    selectedDispostion: DispositionTwoListResponse | null
-    allItems: DispositionTwoListResponse[] | []
+export interface DispositionThreeSliceStateType {
+    items: DispositionThreeListResponse[] | []
+    selectedDispostionThree: DispositionThreeListResponse | null
+    allItems: DispositionThreeListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -16,10 +16,10 @@ export interface DispositionTwoSliceStateType {
     filterValue: string,
 }
 
-const initialState: DispositionTwoSliceStateType = {
+const initialState: DispositionThreeSliceStateType = {
     items: [],
     allItems: [],
-    selectedDispostion: null,
+    selectedDispostionThree: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -30,13 +30,13 @@ const initialState: DispositionTwoSliceStateType = {
     filterValue: "",
 }
 
-const dispositionTwoSlice: Slice<DispositionTwoSliceStateType> = createSlice({
-    name: 'dispositionTwo',
+const dispositionThreeSlice: Slice<DispositionThreeSliceStateType> = createSlice({
+    name: 'dispositionThree',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<DispositionTwoListResponse[] | []>
+            action: PayloadAction<DispositionThreeListResponse[] | []>
         ) => {
             state.items = action.payload
         },
@@ -74,15 +74,15 @@ const dispositionTwoSlice: Slice<DispositionTwoSliceStateType> = createSlice({
         },
         setAllItems: (
             state,
-            action: PayloadAction<DispositionTwoListResponse[] | []>
+            action: PayloadAction<DispositionThreeListResponse[] | []>
         ) => {
             state.allItems = action.payload
         },
-        setSelectedDispostion: (
+        setSelectedDispostionThree: (
             state,
-            action: PayloadAction<DispositionTwoListResponse | null>
+            action: PayloadAction<DispositionThreeListResponse | null>
         ) => {
-            state.selectedDispostion = action.payload
+            state.selectedDispostionThree = action.payload
         },
     },
 })
@@ -97,7 +97,7 @@ export const {
     setIsTableLoading,
     setSelectedId,
     setFilterValue,
-    setSelectedDispostion,
+    setSelectedDispostionThree,
     setAllItems,
-} = dispositionTwoSlice.actions
-export default dispositionTwoSlice.reducer
+} = dispositionThreeSlice.actions
+export default dispositionThreeSlice.reducer

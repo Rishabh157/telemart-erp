@@ -123,7 +123,6 @@ const AddSlotManagement = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => {
-                                    console.log(values)
                                     formikProps.handleSubmit()
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
@@ -146,7 +145,7 @@ const AddSlotManagement = ({
                                 required
                                 placeholder="Slot Name"
                                 onChange={(e) => {
-                                    console.log(e.target.value)
+                                    
                                     setFieldValue('slotName', e.target.value)
                                 }}
                             />
@@ -165,7 +164,7 @@ const AddSlotManagement = ({
                                     value={values.startDateTime}
                                     label="Startdate Time"
                                     onChange={(newValue) => {
-                                        console.log(newValue)
+                                    
                                         setFieldValue('startDateTime', newValue)
                                     }}
                                 />

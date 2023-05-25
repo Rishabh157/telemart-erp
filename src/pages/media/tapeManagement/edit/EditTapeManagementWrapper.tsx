@@ -58,7 +58,7 @@ const EditTapeManagementWrapper = () => {
         isFetching: tapeIsFetching,
     } = useGetTapeByIdQuery(id)
 
-    //console.log(tapeData?.data , "tapeData")
+
 
     useEffect(() => {
         if (!tapeIsLoading && !tapeIsFetching) {
@@ -128,7 +128,7 @@ const EditTapeManagementWrapper = () => {
 
     //console.log(selectedItem, "selected")
     const newDuration = selectedItem?.duration?.split(':')
-    console.log(newDuration)
+
 
     const initialValues: FormInitialValues = {
         tapeName: selectedItem?.tapeName || '',
