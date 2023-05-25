@@ -64,7 +64,6 @@ const SlotManagementListingWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
-    
 
     const columns: columnTypes[] = [
         {
@@ -112,7 +111,7 @@ const SlotManagementListingWrapper = () => {
             field: 'slotStartTime',
             headerName: 'Start Time',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: SlotManagementListResponse) => (                
+            renderCell: (row: SlotManagementListResponse) => (
                 <span> {moment(row.slotStartTime).format('hh:mm:ss a')} </span>
             ),
         },
@@ -132,7 +131,7 @@ const SlotManagementListingWrapper = () => {
                 <div className="relative">
                     <button
                         onClick={(e) => {
-                            setRunState(row._id);                            
+                            setRunState(row._id)
                             // e.stopPropagation()
                             // setShowDropdown(!showDropdown)
                             // setCurrentId(row?._id)
@@ -216,13 +215,16 @@ const SlotManagementListingWrapper = () => {
         })
     }
 
-    
-   // console.log(items, "items")
+    // console.log(items, "items")
     return (
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <SlotManagementListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
+                    <SlotManagementListing
+                        columns={columns}
+                        rows={items}
+                        setShowDropdown={setShowDropdown}
+                    />
                     <DialogLogBox
                         isOpen={isOpenDialog}
                         handleClose={() => {

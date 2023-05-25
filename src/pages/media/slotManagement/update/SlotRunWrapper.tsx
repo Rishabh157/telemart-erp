@@ -1,14 +1,16 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Formik, FormikProps } from 'formik'
 import { object, string, boolean } from 'yup'
 import UpdateSlotRun from './UpdateSlotRun'
 import { showToast } from 'src/utils'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
-import {useGetSlotMangementByIdQuery, useUpdateSlotMutation } from 'src/services/media/SlotManagementServices'
+import {
+    useGetSlotMangementByIdQuery,
+    useUpdateSlotMutation,
+} from 'src/services/media/SlotManagementServices'
 import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
-
 
 type FormInitialValues = {
     slotName: string
@@ -22,66 +24,66 @@ type FormInitialValues = {
     slotDate: string
     slotStartTime: string
     slotEndTime: string
-    run: boolean;
-    runStartTime:string;
-    runEndTime: string;
-    runRemark: string;
+    run: boolean
+    runStartTime: string
+    runEndTime: string
+    runRemark: string
     companyId: string
 }
 type SlotRunWrapperProps = {
-    id: string    
+    id: string
 }
 const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({ id }) => {
-    const dispatch = useDispatch<AppDispatch>();
-    const navigate = useNavigate();
+    const dispatch = useDispatch<AppDispatch>()
+    const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [updateSlot] = useUpdateSlotMutation();
-    const {selectedItems} : any = useSelector((state: RootState) => state.slotManagement)
-    const {data, isLoading, isFetching} = useGetSlotMangementByIdQuery(id);    
+    const [updateSlot] = useUpdateSlotMutation()
+    const { selectedItems }: any = useSelector(
+        (state: RootState) => state.slotManagement
+    )
+    const { data, isLoading, isFetching } = useGetSlotMangementByIdQuery(id)
 
     useEffect(() => {
-        if(!isLoading && !isFetching){            
+        if (!isLoading && !isFetching) {
             dispatch(setSelectedItems(data?.data || []))
         }
-    }, [data, dispatch, isLoading, isFetching]);   
+    }, [data, dispatch, isLoading, isFetching])
 
-    useEffect(()=>{
-        return()=>{
+    useEffect(() => {
+        return () => {
             dispatch(setSelectedItems([]))
         }
-    },[]);
-    
+    }, [])
+
     //console.log(selectedItems)
-    
-    
 
     const initialValues: FormInitialValues = {
-        slotName: selectedItems?.slotName || "",
-        channelGroupId: selectedItems?.channelGroupId || "",
-        type: selectedItems?.type || "",
+        slotName: selectedItems?.slotName || '',
+        channelGroupId: selectedItems?.channelGroupId || '',
+        type: selectedItems?.type || '',
         days: selectedItems?.days || [],
-        tapeNameId: selectedItems?.tapeNameId || "",
-        channelNameId: selectedItems?.channelNameId || "",
-        channelTrp: selectedItems?.channelTrp || "", 
-        remarks: selectedItems?.reamrks || "",
-        slotDate: selectedItems?.slotDate || "",
-        slotStartTime: selectedItems?.slotStartTime || "",
-        slotEndTime: selectedItems?.slotEndTime || "",
+        tapeNameId: selectedItems?.tapeNameId || '',
+        channelNameId: selectedItems?.channelNameId || '',
+        channelTrp: selectedItems?.channelTrp || '',
+        remarks: selectedItems?.reamrks || '',
+        slotDate: selectedItems?.slotDate || '',
+        slotStartTime: selectedItems?.slotStartTime || '',
+        slotEndTime: selectedItems?.slotEndTime || '',
         run: selectedItems?.run || false,
-        runStartTime: selectedItems?.runStartTime || "",
-        runEndTime: selectedItems?.runEndTime || "" ,
-        runRemark: selectedItems?.runRemark  || "",
-        companyId: selectedItems?.companyId || "",
+        runStartTime: selectedItems?.runStartTime || '',
+        runEndTime: selectedItems?.runEndTime || '',
+        runRemark: selectedItems?.runRemark || '',
+        companyId: selectedItems?.companyId || '',
     }
     const validationSchema = object({
         run: boolean().required('Required'),
         runStartTime: string().required('Required'),
         runEndTime: string().required('Required'),
-        runRemark:  string(),
-    });
+        runRemark: string(),
+    })
 
     const onSubmitHandler = (values: FormInitialValues) => {
-       setApiStatus(true)
+        setApiStatus(true)
         setTimeout(() => {
             updateSlot({
                 body: {
@@ -91,7 +93,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({ id }) => {
                     days: values?.days,
                     tapeNameId: values?.tapeNameId,
                     channelNameId: values?.channelNameId,
-                    channelTrp: values?.channelTrp, 
+                    channelTrp: values?.channelTrp,
                     remarks: values?.remarks,
                     slotDate: values?.slotDate,
                     slotStartTime: values?.slotStartTime,
@@ -107,7 +109,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({ id }) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Status Updated successfully!')
-                        navigate('/media/slot')                                              
+                        navigate('/media/slot')
                     } else {
                         showToast('error', res?.data?.message)
                     }

@@ -118,7 +118,7 @@ const EditSlotManagement = ({
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() => {                                    
+                                onClick={() => {
                                     formikProps.handleSubmit()
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
@@ -154,8 +154,6 @@ const EditSlotManagement = ({
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
-                            
-                            
                             <div className="">
                                 {/* <ATMMultiSelect
                                     name="days"
@@ -229,44 +227,49 @@ const EditSlotManagement = ({
                                     setFieldValue('remarks', newValue)
                                 }
                             />{' '}
-                            </div>
-                            <div className="px-3 pt-5">
+                        </div>
+                        <div className="px-3 pt-5">
                             <div className=" text-lg pb-2 font-medium text-primary-main">
                                 Slot Details
                             </div>
                             <div className="flex gap-5 items-end  pb-5">
-
-                            <div className="flex-[3_3_0%]">
-                                <ATMDatePicker
-                                    name='slotDate'
-                                    value={values.slotDate}
-                                    label="Date"
-                                    onChange={(newValue) =>
-                                        setFieldValue('slotDate',newValue)
-                                    }
-                                />
-                            </div>
-                            <div className="flex-[3_3_0%]">
-                                <ATMTimePicker
-                                    name="slotEndTime"
-                                    value={values.slotEndTime || null}
-                                    label="Enddate Time"
-                                    onChange={(newValue) => {
-                                        setFieldValue('slotEndTime', newValue)
-                                    }}
-                                />
-                            </div>
-                            <div className="flex-[3_3_0%]">
-                                <ATMTimePicker
-                                    name={'slotStartTime'}
-                                    value={values.slotStartTime || null}
-                                    label="Startdate Time"
-                                    onChange={(newValue) => {
-                                        console.log(newValue)
-                                        setFieldValue('slotStartTime', newValue)
-                                    }}
-                                />
-                            </div>
+                                <div className="flex-[3_3_0%]">
+                                    <ATMDatePicker
+                                        name="slotDate"
+                                        value={values.slotDate}
+                                        label="Date"
+                                        onChange={(newValue) =>
+                                            setFieldValue('slotDate', newValue)
+                                        }
+                                    />
+                                </div>
+                                <div className="flex-[3_3_0%]">
+                                    <ATMTimePicker
+                                        name="slotEndTime"
+                                        value={values.slotEndTime || null}
+                                        label="Enddate Time"
+                                        onChange={(newValue) => {
+                                            setFieldValue(
+                                                'slotEndTime',
+                                                newValue
+                                            )
+                                        }}
+                                    />
+                                </div>
+                                <div className="flex-[3_3_0%]">
+                                    <ATMTimePicker
+                                        name={'slotStartTime'}
+                                        value={values.slotStartTime || null}
+                                        label="Startdate Time"
+                                        onChange={(newValue) => {
+                                            console.log(newValue)
+                                            setFieldValue(
+                                                'slotStartTime',
+                                                newValue
+                                            )
+                                        }}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

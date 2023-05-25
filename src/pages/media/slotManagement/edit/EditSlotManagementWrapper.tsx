@@ -3,7 +3,7 @@ import MediaLayout from '../../MediaLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { showToast } from 'src/utils'
-import { useNavigate ,useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { array, object, string } from 'yup'
 // import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
@@ -34,14 +34,14 @@ export type FormInitialValues = {
     type: string
     days: string[]
     tapeNameId: string
-    channelNameId: string    
+    channelNameId: string
     channelTrp: string
     remarks: string
     companyId: string
-    run: boolean;
-    runStartTime:string;
-    runEndTime: string;
-    runRemark: string;
+    run: boolean
+    runStartTime: string
+    runEndTime: string
+    runRemark: string
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -51,7 +51,7 @@ const EditSlotManagementWrapper = () => {
     const params = useParams()
     const Id = params.id
     const dispatch = useDispatch<AppDispatch>()
-    const [updateSlot] = useUpdateSlotMutation();
+    const [updateSlot] = useUpdateSlotMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [channelCategoryData, setChannelCategoryData] = useState([])
     const { selectedItems }: any = useSelector(
@@ -164,14 +164,14 @@ const EditSlotManagementWrapper = () => {
         days: selectedItems?.days || [],
         tapeNameId: selectedItems?.tapeNameId || '',
         channelNameId: selectedItems?.channelNameId || '',
-        slotDate: selectedItems?.slotDate || "",
+        slotDate: selectedItems?.slotDate || '',
         slotEndTime: selectedItems?.slotEndTime || '',
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.remarks || '',
         run: selectedItems?.run || false,
-        runStartTime: selectedItems?.runStartTime || "",
-        runEndTime: selectedItems?.runEndTime || "" ,
-        runRemark: selectedItems?.runRemark  || "",
+        runStartTime: selectedItems?.runStartTime || '',
+        runEndTime: selectedItems?.runEndTime || '',
+        runRemark: selectedItems?.runRemark || '',
         companyId: userData?.companyId || '',
     }
 
@@ -201,7 +201,7 @@ const EditSlotManagementWrapper = () => {
                     days: values?.days,
                     tapeNameId: values?.tapeNameId,
                     channelNameId: values?.channelNameId,
-                    channelTrp: values?.channelTrp, 
+                    channelTrp: values?.channelTrp,
                     remarks: values?.remarks,
                     slotDate: values?.slotDate,
                     slotStartTime: values?.slotStartTime,
@@ -217,7 +217,7 @@ const EditSlotManagementWrapper = () => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Slot Updated successfully!')
-                        navigate('/media/slot')                                              
+                        navigate('/media/slot')
                     } else {
                         showToast('error', res?.data?.message)
                     }

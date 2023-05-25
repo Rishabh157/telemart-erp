@@ -81,5 +81,3 @@ export type UpdateSlotManagement = {
     }
     id: string
 }
-
-

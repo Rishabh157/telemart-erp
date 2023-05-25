@@ -5,7 +5,6 @@ import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/
 import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
-
 const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
     //const [switch, setSwitch] = useState<boolean>(false)
     const { values, setFieldValue } = formikProps
@@ -22,12 +21,12 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                         label="Status"
                         required
                         onChange={(value: any) => {
-                           // console.log(value)
-                           // setSwitch(value)
+                            // console.log(value)
+                            // setSwitch(value)
                             setFieldValue('run', value)
                         }}
                     />
-                    
+
                     <ATMTimePicker
                         name="runStartTime"
                         value={values.runStartTime}
@@ -51,16 +50,13 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                     /> */}
 
                     <ATMTextArea
-                        name='runRemark'                        
+                        name="runRemark"
                         value={values.runRemark}
                         onChange={(newValue) =>
-                            setFieldValue(
-                                'runRemark',
-                                newValue
-                            )
+                            setFieldValue('runRemark', newValue)
                         }
                     />
-                                    
+
                     <ATMTimePicker
                         name="runEndTime"
                         value={values.runEndTime}
@@ -71,7 +67,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             setFieldValue('runEndTime', newValue)
                         }}
                     />
-                    
+
                     {/* <ATMTextField
                         name="slotName"
                         value={values.slotName}
