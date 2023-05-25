@@ -1,9 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
 
 export interface ChannelManagementSliceStateType {
     items: ChannelManagementListResponse[] | []
+    selectedItem: ChannelManagementListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -16,6 +17,7 @@ export interface ChannelManagementSliceStateType {
 
 const initialState: ChannelManagementSliceStateType = {
     items: [],
+    selectedItem: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -26,53 +28,60 @@ const initialState: ChannelManagementSliceStateType = {
     channelMgt: null,
 }
 
-const channelManagementSlice: any = createSlice({
-    name: 'channelManagement',
-    initialState,
-    reducers: {
-        setItems: (
-            state,
-            action: PayloadAction<ChannelManagementListResponse[] | []>
-        ) => {
-            state.items = action.payload
+const channelManagementSlice: Slice<ChannelManagementSliceStateType> =
+    createSlice({
+        name: 'channelManagement',
+        initialState,
+        reducers: {
+            setItems: (
+                state,
+                action: PayloadAction<ChannelManagementListResponse[] | []>
+            ) => {
+                state.items = action.payload
+            },
+            setPage: (state, action: PayloadAction<number>) => {
+                state.page = action.payload
+                document.getElementById('scroll-top')?.scrollTo(0, 0)
+            },
+            setRowsPerPage: (state, action: PayloadAction<number>) => {
+                state.rowsPerPage = action.payload
+                state.page = 1
+                document.getElementById('scroll-top')?.scrollTo(0, 0)
+            },
+            setSearchValue: (state, action: PayloadAction<string>) => {
+                state.searchValue = action.payload
+                state.page = 1
+            },
+            setSortValue: (
+                state,
+                action: PayloadAction<{ field: string; value: 'DESC' | 'ASC' }>
+            ) => {
+                state.sortValue = action.payload
+                state.page = 1
+            },
+            setTotalItems: (state, action: PayloadAction<number>) => {
+                state.totalItems = action.payload
+            },
+            setIsTableLoading: (state, action: PayloadAction<boolean>) => {
+                state.isTableLoading = action.payload
+            },
+            setSelectedId: (state, action: PayloadAction<string>) => {
+                state.selectedId = action.payload
+            },
+            setSelectedItem: (
+                state,
+                action: PayloadAction<ChannelManagementListResponse | null>
+            ) => {
+                state.selectedItem = action.payload
+            },
+            setChannelMgt: (
+                state,
+                action: PayloadAction<ChannelManagementListResponse[]>
+            ) => {
+                state.channelMgt = action.payload
+            },
         },
-        setPage: (state, action: PayloadAction<number>) => {
-            state.page = action.payload
-            document.getElementById('scroll-top')?.scrollTo(0, 0)
-        },
-        setRowsPerPage: (state, action: PayloadAction<number>) => {
-            state.rowsPerPage = action.payload
-            state.page = 1
-            document.getElementById('scroll-top')?.scrollTo(0, 0)
-        },
-        setSearchValue: (state, action: PayloadAction<string>) => {
-            state.searchValue = action.payload
-            state.page = 1
-        },
-        setSortValue: (
-            state,
-            action: PayloadAction<{ field: string; value: 'DESC' | 'ASC' }>
-        ) => {
-            state.sortValue = action.payload
-            state.page = 1
-        },
-        setTotalItems: (state, action: PayloadAction<number>) => {
-            state.totalItems = action.payload
-        },
-        setIsTableLoading: (state, action: PayloadAction<boolean>) => {
-            state.isTableLoading = action.payload
-        },
-        setSelectedId: (state, action: PayloadAction<string>) => {
-            state.selectedId = action.payload
-        },
-        setChannelMgt: (
-            state,
-            action: PayloadAction<ChannelManagementListResponse[]>
-        ) => {
-            state.channelMgt = action.payload
-        },
-    },
-})
+    })
 
 export const {
     setItems,
@@ -84,5 +93,6 @@ export const {
     setIsTableLoading,
     setSelectedId,
     setChannelMgt,
+    setSelectedItem,
 } = channelManagementSlice.actions
 export default channelManagementSlice.reducer
