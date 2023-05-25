@@ -6,18 +6,18 @@ export type WarehousesListResponse = {
     registrationAddress: {
         phone: string
         address: string
-        country: string
-        state: string
-        district: string
-        pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        pincodeId: string
     }
     billingAddress: {
         phone: string
         address: string
-        country: string
-        state: string
-        district: string
-        pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        pincodeId: string
     }
     contactInformation: {
         name: string
@@ -53,18 +53,18 @@ export type AddWarehouse = {
     registrationAddress: {
         phone: string
         address: string
-        country: string
-        state: string
-        district: string
-        pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        pincodeId: string
     }
     billingAddress: {
         phone: string
         address: string
-        country: string
-        state: string
-        district: string
-        pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        pincodeId: string
     }
     contactInformation: {
         name: string
@@ -88,18 +88,18 @@ export type UpdateWarehouse = {
         registrationAddress: {
             phone: string
             address: string
-            country: string
-            state: string
-            district: string
-            pincode: string
+            countryId: string
+            stateId: string
+            districtId: string
+            pincodeId: string
         }
         billingAddress: {
             phone: string
             address: string
-            country: string
-            state: string
-            district: string
-            pincode: string
+            countryId: string
+            stateId: string
+            districtId: string
+            pincodeId: string
         }
         contactInformation: {
             name: string

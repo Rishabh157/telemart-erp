@@ -7,18 +7,18 @@ export type VendorsListResponse = {
     registrationAddress: {
         phone: string
         address: string
-        country: string
-        state: string
-        district: string
-        pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        pincodeId: string
     }
     billingAddress: {
         phone: string
         address: string
-        country: string
-        state: string
-        district: string
-        pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        pincodeId: string
     }
     contactInformation: {
         name: string
@@ -68,18 +68,18 @@ export type AddVendor = {
     registrationAddress: {
         phone: string
         address: string
-        country: string
-        state: string
-        district: string
-        pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        pincodeId: string
     }
     billingAddress: {
         phone: string
         address: string
-        country: string
-        state: string
-        district: string
-        pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        pincodeId: string
     }
     contactInformation: {
         name: string
@@ -117,18 +117,18 @@ export type UpdateVendor = {
         registrationAddress: {
             phone: string
             address: string
-            country: string
-            state: string
-            district: string
-            pincode: string
+            countryId: string
+            stateId: string
+            districtId: string
+            pincodeId: string
         }
         billingAddress: {
             phone: string
             address: string
-            country: string
-            state: string
-            district: string
-            pincode: string
+            countryId: string
+            stateId: string
+            districtId: string
+            pincodeId: string
         }
         contactInformation: {
             name: string
