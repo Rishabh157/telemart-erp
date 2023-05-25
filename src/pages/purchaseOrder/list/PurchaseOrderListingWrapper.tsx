@@ -20,6 +20,7 @@ import { HiDotsHorizontal } from 'react-icons/hi'
 import { Chip, Stack } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import { setFilterValue } from 'src/redux/slices/GRNSlice'
 
 const PurchaseOrderListingWrapper = () => {
     const navigate = useNavigate()
@@ -317,6 +318,7 @@ const PurchaseOrderListingWrapper = () => {
                             </button>
                             <button
                                 onClick={() => {
+                                    dispatch(setFilterValue([row?.poCode]))
                                     navigate('/grn', {
                                         state: {
                                             poCode: row?.poCode,

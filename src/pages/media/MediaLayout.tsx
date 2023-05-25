@@ -14,21 +14,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 const mediaNavigation: NavItemType[] = [
     {
-        label: 'Artist',
-        icon: BsPersonHeart,
-        path: '/media/artist',
-    },
-    {
-        label: 'DID Management',
-        icon: DiDart,
-        path: '/media/did',
-    },
-    {
-        label: 'Tape Management',
-        icon: FaTape,
-        path: '/media/tape',
-    },
-    {
         label: 'Channel Group',
         icon: GrChannel,
         path: '/media/channel-group',
@@ -43,7 +28,21 @@ const mediaNavigation: NavItemType[] = [
         icon: SiGoogletagmanager,
         path: '/media/channel',
     },
-
+    {
+        label: 'DID Management',
+        icon: DiDart,
+        path: '/media/did',
+    },
+    {
+        label: 'Artist',
+        icon: BsPersonHeart,
+        path: '/media/artist',
+    },
+    {
+        label: 'Tape Management',
+        icon: FaTape,
+        path: '/media/tape',
+    },
     {
         label: 'Competitor Management',
         icon: MdEmojiEvents,
@@ -115,9 +114,12 @@ const MediaLayout = ({ children }: Props) => {
             <button
                 type="button"
                 onClick={() => navigate('/dashboard')}
-                className="bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm "
+                className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${
+                    isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
+                }`}
             >
-                <BiChevronsLeft className="text-2xl" /> BACK TO MAIN MENU
+                <BiChevronsLeft className="text-2xl" />
+                {!isCollapsed && <div> BACK TO MAIN MENU </div>}
             </button>
         </div>
     )

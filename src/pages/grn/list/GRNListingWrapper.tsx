@@ -18,10 +18,11 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
+    setFilterValue,
 } from 'src/redux/slices/GRNSlice'
 import { RootState } from 'src/redux/store'
 import { useGetPaginationGRNQuery } from 'src/services/GRNService'
-// import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom'
 
 const columns: columnTypes[] = [
     {
@@ -78,12 +79,12 @@ const columns: columnTypes[] = [
 
 const GRNListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
-    // const { state } = useLocation();
-    // const poCode=state?.poCode;
+    const { state } = useLocation()
+    const poCode = state?.poCode
+    console.log(poCode, 'pocode')
 
     const grnState: any = useSelector((state: RootState) => state.grn)
     const { page, rowsPerPage, searchValue, items, filterValue } = grnState
-    //const [currentId, setCurrentId] = useState("");
 
     const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
         limit: rowsPerPage,
@@ -117,7 +118,7 @@ const GRNListingWrapper = () => {
 
     // useEffect(() => {
     //   if (poCode) {
-    //    dispatch(setFilterValue(poCode));
+    //    dispatch(setFilterValue([poCode]));
     //   }
     // }, [poCode]);
 

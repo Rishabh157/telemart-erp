@@ -156,9 +156,12 @@ const ConfigurationLayout = ({ children }: Props) => {
             <button
                 type="button"
                 onClick={() => navigate('/dashboard')}
-                className="bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm "
+                className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${
+                    isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
+                }`}
             >
-                <BiChevronsLeft className="text-2xl" /> BACK TO MAIN MENU
+                <BiChevronsLeft className="text-2xl" />{' '}
+                {!isCollapsed && <div> BACK TO MAIN MENU </div>}
             </button>
         </div>
     )
