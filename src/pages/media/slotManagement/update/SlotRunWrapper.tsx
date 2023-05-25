@@ -32,8 +32,9 @@ type FormInitialValues = {
 }
 type SlotRunWrapperProps = {
     id: string
+    setIsOpenDialog: React.Dispatch<React.SetStateAction<boolean>>
 }
-const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({ id }) => {
+const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({ id, setIsOpenDialog }) => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
@@ -109,6 +110,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({ id }) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Status Updated successfully!')
+                        setIsOpenDialog(false)
                         navigate('/media/slot')
                     } else {
                         showToast('error', res?.data?.message)
