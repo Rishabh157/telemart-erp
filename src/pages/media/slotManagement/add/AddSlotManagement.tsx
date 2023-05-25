@@ -62,7 +62,6 @@ const AddSlotManagement = ({
         }
     })
 
-    const [selectedValue, setSelectedValue] = useState('')
     const [slotStartDate, setSlotStartDate] = useState('')
     const [slotEndDate, setSlotEndDate] = useState('')
     const [slotStartTime, setSlotStartTime] = useState('')
@@ -71,9 +70,6 @@ const AddSlotManagement = ({
 
     const options = ['FIXED', 'FLEXIBLE']
 
-    const handleSelect = (newValue: any) => {
-        setSelectedValue(newValue)
-    }
     const getDates = (startDate: any, endDate: any) => {
         const dateArray = []
         const currentDate = moment(startDate, 'MM/DD/YYYY')
@@ -165,24 +161,20 @@ const AddSlotManagement = ({
                                     options={optionss}
                                     label="Days"
                                     isMulti
+                                    isAllSelect
                                 />
                             </div>
-                            <div className="mt-5">
-                                <span className="text-slate-700 font-medium">
-                                    Type
-                                </span>
-                                <div className="-mt-5 ml-6 flex ">
-                                    <ATMRadioButton
-                                        name="type"
-                                        options={options}
-                                        value={selectedValue}
-                                        onSelect={(value) => {
-                                            handleSelect(value)
-                                            setFieldValue('type', value)
-                                        }}
-                                        required={true}
-                                    />
-                                </div>
+                            <div className="">
+                                <ATMRadioButton
+                                    name="type"
+                                    label="Type"
+                                    options={options}
+                                    value={values.type}
+                                    onChange={(e) => {
+                                        setFieldValue('type', e)
+                                    }}
+                                    required={true}
+                                />
                             </div>
                             <div className="">
                                 <ATMSelectSearchable
