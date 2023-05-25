@@ -11,6 +11,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
+    setSearchValue,
 } from 'src/redux/slices/media/channelManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
@@ -21,11 +22,12 @@ type Props = {
 
 const ChannelManagementListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const inventoryState: any = useSelector(
-        (state: RootState) => state.inventory
+    const channelManagementState: any = useSelector(
+        (state: RootState) => state.channelManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = inventoryState
+    const { page, rowsPerPage, totalItems, searchValue } =
+        channelManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -58,12 +60,14 @@ const ChannelManagementListing = ({ columns, rows }: Props) => {
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
-                    rowCount={rows.length}
+                    searchValue={searchValue}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
                 />
 
