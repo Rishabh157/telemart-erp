@@ -21,61 +21,6 @@ import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 
-const columns: columnTypes[] = [
-    {
-        field: 'slotName',
-        headerName: 'Slot Name',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.slotName} </span>
-        ),
-    },
-    {
-        field: 'channelGroup',
-        headerName: 'Channel Group',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.groupNameLabel} </span>
-        ),
-    },
-    {
-        field: 'slotStartTime',
-        headerName: 'Start Time',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: SlotManagementListResponse) => (
-            <span> {moment(row.slotStartTime).format('DD/MM/YYYY')}</span>
-        ),
-    },
-    {
-        field: 'slotEndTime',
-        headerName: 'End Time',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: SlotManagementListResponse) => (
-            <span> {moment(row.slotEndTime).format('DD/MM/YYYY')} </span>
-        ),
-    },
-    {
-        field: 'tapeLabel',
-        headerName: 'Tape Name',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.tapeLabel} </span>
-        ),
-    },
-
-    {
-        field: 'actions',
-        headerName: 'Actions',
-        flex: 'flex-[0.5_0.5_0%]',
-        renderCell: (row: any) => (
-            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />
-            </button>
-        ),
-        align: 'end',
-    },
-]
-
 const SlotManagementListingWrapper = () => {
     const navigate = useNavigate()
     const slotManagementState: any = useSelector(
@@ -163,7 +108,7 @@ const SlotManagementListingWrapper = () => {
             headerName: 'Start Time',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {row.slotStartTime} </span>
+                <span> {moment(row.slotStartTime).format('DD/MM/YYYY')} </span>
             ),
         },
         {
@@ -171,7 +116,7 @@ const SlotManagementListingWrapper = () => {
             headerName: 'End Time',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {row.slotEndTime} </span>
+                <span> {moment(row.slotEndTime).format('DD/MM/YYYY')} </span>
             ),
         },
 
