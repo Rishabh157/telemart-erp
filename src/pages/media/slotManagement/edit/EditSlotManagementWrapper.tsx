@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import MediaLayout from '../../MediaLayout'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { /*useNavigate ,*/ useParams } from 'react-router-dom'
+import { RootState, AppDispatch } from 'src/redux/store'
+import { showToast } from 'src/utils'
+import { useNavigate ,useParams } from 'react-router-dom'
 import { array, object, string } from 'yup'
 // import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
@@ -12,7 +13,7 @@ import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import {
     useGetSlotMangementByIdQuery,
-    // useUpdateSlotMutation,
+    useUpdateSlotMutation,
 } from 'src/services/media/SlotManagementServices'
 import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
@@ -26,25 +27,31 @@ import EditSlotManagement from './EditSlotManagement'
 
 export type FormInitialValues = {
     slotName: string
-    channelGroup: string
-    startDateTime: string
+    channelGroupId: string
+    slotStartTime: string
+    slotDate: string
+    slotEndTime: string
     type: string
     days: string[]
-    tapeName: string
-    channelName: string
-    endDateTime: string
+    tapeNameId: string
+    channelNameId: string    
     channelTrp: string
     remarks: string
     companyId: string
+    run: boolean;
+    runStartTime:string;
+    runEndTime: string;
+    runRemark: string;
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 
 const EditSlotManagementWrapper = () => {
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const params = useParams()
     const Id = params.id
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
+    const [updateSlot] = useUpdateSlotMutation();
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [channelCategoryData, setChannelCategoryData] = useState([])
     const { selectedItems }: any = useSelector(
@@ -151,28 +158,34 @@ const EditSlotManagementWrapper = () => {
 
     const initialValues: FormInitialValues = {
         slotName: selectedItems?.slotName || '',
-        channelGroup: selectedItems?.channelGroup || '',
-        startDateTime: selectedItems?.startDateTime || '',
+        channelGroupId: selectedItems?.channelGroupId || '',
+        slotStartTime: selectedItems?.slotStartTime || '',
         type: selectedItems?.type || '',
         days: selectedItems?.days || [],
-        tapeName: selectedItems?.tapeName || '',
-        channelName: selectedItems?.channelName || '',
-        endDateTime: selectedItems?.endDateTime || '',
+        tapeNameId: selectedItems?.tapeNameId || '',
+        channelNameId: selectedItems?.channelNameId || '',
+        slotDate: selectedItems?.slotDate || "",
+        slotEndTime: selectedItems?.slotEndTime || '',
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.remarks || '',
+        run: selectedItems?.run || false,
+        runStartTime: selectedItems?.runStartTime || "",
+        runEndTime: selectedItems?.runEndTime || "" ,
+        runRemark: selectedItems?.runRemark  || "",
         companyId: userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
         slotName: string().required('Required'),
-        channelGroup: string().required('Required'),
-        startDateTime: string().required('Required'),
+        channelGroupId: string().required('Required'),
+        slotStartTime: string().required('Required'),
+        slotEndTime: string().required('Required'),
         type: string().required('Required'),
         days: array().of(string().required('Required')),
-        tapeName: string().required('Required'),
-        channelName: string().required('Required'),
-        endDateTime: string().required('Required'),
+        tapeNameId: string().required('Required'),
+        channelNameId: string().required('Required'),
+        slotDate: string().required('Required'),
         channelTrp: string().required('Required'),
         remarks: string().required('Required'),
     })
@@ -180,32 +193,39 @@ const EditSlotManagementWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            // editSlotMangementApi({
-            //     body: {
-            //         slotName: values.slotName,
-            //         channelGroupId: values.channelGroup,
-            //         type: values.type,
-            //         days: values.days,
-            //         tapeNameId: values.tapeName,
-            //         channelNameId: values.channelName,
-            //         channelTrp: values.channelTrp,
-            //         remarks: values.remarks,
-            //         companyId: values.companyId || '',
-            //     },
-            //     id: Id || '',
-            // }).then((res: any) => {
-            //     if ('data' in res) {
-            //         if (res?.data?.status) {
-            //             showToast('success', 'Slot Updated successfully!')
-            //             navigate('/media/slot')
-            //         } else {
-            //             showToast('error', res?.data?.message)
-            //         }
-            //     } else {
-            //         showToast('error', 'Something went wrong')
-            //     }
-            //     setApiStatus(false)
-            // })
+            updateSlot({
+                body: {
+                    slotName: values?.slotName,
+                    channelGroupId: values?.channelGroupId,
+                    type: values?.type,
+                    days: values?.days,
+                    tapeNameId: values?.tapeNameId,
+                    channelNameId: values?.channelNameId,
+                    channelTrp: values?.channelTrp, 
+                    remarks: values?.remarks,
+                    slotDate: values?.slotDate,
+                    slotStartTime: values?.slotStartTime,
+                    slotEndTime: values?.slotEndTime,
+                    run: values?.run,
+                    runStartTime: values?.runStartTime,
+                    runEndTime: values?.runEndTime,
+                    runRemark: values?.runRemark,
+                    companyId: values?.companyId,
+                },
+                id: Id || '',
+            }).then((res) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'Slot Updated successfully!')
+                        navigate('/media/slot')                                              
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
+                } else {
+                    showToast('error', 'Something went wrong')
+                }
+                setApiStatus(false)
+            })
         }, 1000)
     }
     const dropdownOptions = {

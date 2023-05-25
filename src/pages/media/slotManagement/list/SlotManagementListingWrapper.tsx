@@ -30,6 +30,7 @@ const SlotManagementListingWrapper = () => {
         (state: RootState) => state.slotManagement
     )
     const [showDropdown, setShowDropdown] = useState(false)
+    const [runState, setRunState] = useState('')
     const [currentId, setCurrentId] = useState('')
     const { page, rowsPerPage, searchValue, items } = slotManagementState
     const [deleteSlotMangement] = useDeleteSlotMangementMutation()
@@ -63,6 +64,7 @@ const SlotManagementListingWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
+    
 
     const columns: columnTypes[] = [
         {
@@ -110,8 +112,8 @@ const SlotManagementListingWrapper = () => {
             field: 'slotStartTime',
             headerName: 'Start Time',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: SlotManagementListResponse) => (
-                <span> {moment(row.slotStartTime).format('DD/MM/YYYY')} </span>
+            renderCell: (row: SlotManagementListResponse) => (                
+                <span> {moment(row.slotStartTime).format('hh:mm:ss a')} </span>
             ),
         },
         {
@@ -119,7 +121,7 @@ const SlotManagementListingWrapper = () => {
             headerName: 'End Time',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {moment(row.slotEndTime).format('DD/MM/YYYY')} </span>
+                <span> {moment(row.slotEndTime).format('hh:mm:ss a')} </span>
             ),
         },
         {
@@ -130,12 +132,13 @@ const SlotManagementListingWrapper = () => {
                 <div className="relative">
                     <button
                         onClick={(e) => {
+                            setRunState(row._id);                            
                             // e.stopPropagation()
                             // setShowDropdown(!showDropdown)
                             // setCurrentId(row?._id)
                             setIsOpenDialog(true)
                         }}
-                        className="text-slate-600 font-bold m-1 bg-green-500 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full"
+                        className="text-slate-600 font-bold m-1 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full border border-green-500"
                     >
                         Pending
                     </button>
@@ -213,17 +216,19 @@ const SlotManagementListingWrapper = () => {
         })
     }
 
+    
+   // console.log(items, "items")
     return (
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <SlotManagementListing columns={columns} rows={items} />
+                    <SlotManagementListing columns={columns} rows={items} setShowDropdown={setShowDropdown} />
                     <DialogLogBox
                         isOpen={isOpenDialog}
                         handleClose={() => {
                             setIsOpenDialog(false)
                         }}
-                        Component={<SlotRunWrapper data={''} />}
+                        Component={<SlotRunWrapper id={runState} />}
                     />
                 </div>
             </MediaLayout>

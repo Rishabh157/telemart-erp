@@ -11,6 +11,7 @@ import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMT
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { FormInitialValues } from './EditSlotManagementWrapper'
 
 type Props = {
@@ -29,7 +30,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/media/slot',
     },
     {
-        label: 'Add Slot',
+        label: 'Update Slot',
     },
 ]
 
@@ -117,15 +118,14 @@ const EditSlotManagement = ({
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() => {
-                                    console.log(values)
+                                onClick={() => {                                    
                                     formikProps.handleSubmit()
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Submit
+                                Update
                             </button>
                         </div>
                     </div>
@@ -141,40 +141,21 @@ const EditSlotManagement = ({
                                 required
                                 placeholder="Slot Name"
                                 onChange={(e) => {
-                                    console.log(e.target.value)
+                                    //console.log(e.target.value)
                                     setFieldValue('slotName', e.target.value)
                                 }}
                             />
                             <ATMSelectSearchable
-                                name="channelGroup"
-                                value={values.channelGroup}
+                                name="channelGroupId"
+                                value={values.channelGroupId}
                                 onChange={(e) =>
-                                    setFieldValue('channelGroup', e)
+                                    setFieldValue('channelGroupId', e)
                                 }
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
-                            <div className="">
-                                <ATMTimePicker
-                                    name={'startDateTime'}
-                                    value={values.startDateTime || null}
-                                    label="Startdate Time"
-                                    onChange={(newValue) => {
-                                        console.log(newValue)
-                                        setFieldValue('startDateTime', newValue)
-                                    }}
-                                />
-                            </div>
-                            <div className="">
-                                <ATMTimePicker
-                                    name="endDateTime"
-                                    value={values.endDateTime || null}
-                                    label="Enddate Time"
-                                    onChange={(newValue) => {
-                                        setFieldValue('endDateTime', newValue)
-                                    }}
-                                />
-                            </div>
+                            
+                            
                             <div className="">
                                 {/* <ATMMultiSelect
                                     name="days"
@@ -212,21 +193,21 @@ const EditSlotManagement = ({
                             </div>
                             <div className="">
                                 <ATMSelectSearchable
-                                    name="channelName"
+                                    name="channelNameId"
                                     required
-                                    value={values.channelName}
+                                    value={values.channelNameId}
                                     onChange={(e) =>
-                                        setFieldValue('channelName', e)
+                                        setFieldValue('channelNameId', e)
                                     }
                                     options={dropdownOptions.channelMgtOptions}
                                     label="Channel Name"
                                 />
                             </div>
                             <ATMSelectSearchable
-                                name="tapeName"
+                                name="tapeNameId"
                                 required
-                                value={values.tapeName}
-                                onChange={(e) => setFieldValue('tapeName', e)}
+                                value={values.tapeNameId}
+                                onChange={(e) => setFieldValue('tapeNameId', e)}
                                 options={dropdownOptions.tapeMangementOptions}
                                 label="Tape Name"
                             />
@@ -248,6 +229,45 @@ const EditSlotManagement = ({
                                     setFieldValue('remarks', newValue)
                                 }
                             />{' '}
+                            </div>
+                            <div className="px-3 pt-5">
+                            <div className=" text-lg pb-2 font-medium text-primary-main">
+                                Slot Details
+                            </div>
+                            <div className="flex gap-5 items-end  pb-5">
+
+                            <div className="flex-[3_3_0%]">
+                                <ATMDatePicker
+                                    name='slotDate'
+                                    value={values.slotDate}
+                                    label="Date"
+                                    onChange={(newValue) =>
+                                        setFieldValue('slotDate',newValue)
+                                    }
+                                />
+                            </div>
+                            <div className="flex-[3_3_0%]">
+                                <ATMTimePicker
+                                    name="slotEndTime"
+                                    value={values.slotEndTime || null}
+                                    label="Enddate Time"
+                                    onChange={(newValue) => {
+                                        setFieldValue('slotEndTime', newValue)
+                                    }}
+                                />
+                            </div>
+                            <div className="flex-[3_3_0%]">
+                                <ATMTimePicker
+                                    name={'slotStartTime'}
+                                    value={values.slotStartTime || null}
+                                    label="Startdate Time"
+                                    onChange={(newValue) => {
+                                        console.log(newValue)
+                                        setFieldValue('slotStartTime', newValue)
+                                    }}
+                                />
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
