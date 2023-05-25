@@ -1,53 +1,69 @@
+import { ErrorMessage } from 'formik'
 import React from 'react'
 
 export type Props = {
     name: string
-    options: any[]
+    options: string[]
     label?: string
     value: string | string[] | number
-    onSelect: (newValue: any) => void
     required?: boolean
-    onChange?: (e: any) => void
+    onChange: (e: string) => void
+    isSubmitting?: boolean
 }
 
 const ATMRadioButton = ({
     value,
-    onSelect,
     required = false,
     name,
     options,
     label,
     onChange,
+    isSubmitting = true,
 }: Props) => {
-    const handleSelect = (option: any) => {
-        const newValue = option === value ? '' : option
-        onSelect(newValue)
-    }
-
     return (
-        <div className="realtive mt-4">
-            {label ? (
-                <label className="text-slate-700 mb-1 block">
-                    {' '}
-                    {label}{' '}
-                    {required && <span className="text-red-400"> * </span>}{' '}
+        <div className="relative mt-4">
+            {label && (
+                <label className="text-slate-700 font-medium">
+                    {label}
+                    {required && <span className="text-red-500"> * </span>}
                 </label>
-            ) : null}
+            )}
 
-            <div className="flex mt-4 -ml-6">
+            <div className="flex mt-2 gap-4 p-2">
                 {options.map((option, index) => (
-                    <div key={index} className={`${index === 0 ? '' : 'ml-4'}`}>
+                    <div
+                        onChange={() => {
+                            onChange(option)
+                        }}
+                        key={index}
+                        className={`${index === 0 ? '' : 'ml-4'}`}
+                    >
                         <input
                             type="radio"
                             name={name}
                             value={option}
                             checked={option === value}
-                            onChange={() => handleSelect(option)}
                         />
-                        <label className="ml-2">{option}</label>
+                        <label
+                            onClick={() => {
+                                onChange(option)
+                            }}
+                            className="ml-2"
+                        >
+                            {option}
+                        </label>
                     </div>
                 ))}
             </div>
+            {name && isSubmitting && (
+                <ErrorMessage name={name}>
+                    {(errMsg) => (
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500 py-1 mb-1">
+                            {errMsg}
+                        </p>
+                    )}
+                </ErrorMessage>
+            )}
         </div>
     )
 }
