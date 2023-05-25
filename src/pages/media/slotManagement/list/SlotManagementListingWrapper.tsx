@@ -13,6 +13,7 @@ import {
 } from 'src/redux/slices/media/slotManagementSlice'
 import { useGetPaginationSlotQuery } from 'src/services/media/SlotManagementServices'
 import MediaLayout from 'src/pages/media/MediaLayout'
+import moment from 'moment'
 
 const columns: columnTypes[] = [
     {
@@ -28,34 +29,34 @@ const columns: columnTypes[] = [
         headerName: 'Channel Group',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.channelGroup} </span>
+            <span> {row.groupNameLabel} </span>
         ),
     },
     {
-        field: 'startDateTime',
-        headerName: 'StartDateTime',
+        field: 'slotStartTime',
+        headerName: 'Start Time',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.startDateTime} </span>
+            <span> {moment(row.slotStartTime).format('DD/MM/YYYY')}</span>
         ),
     },
     {
-        field: 'type',
-        headerName: 'Type',
+        field: 'slotEndTime',
+        headerName: 'End Time',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.type} </span>
+            <span> {moment(row.slotEndTime).format('DD/MM/YYYY')} </span>
         ),
     },
     {
-        field: 'endDateTime',
-        headerName: 'EndDateTime',
+        field: 'tapeLabel',
+        headerName: 'Tape Name',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: SlotManagementListResponse) => (
-            <span> {row.endDateTime} </span>
+            <span> {row.tapeLabel} </span>
         ),
     },
-   
+
     {
         field: 'actions',
         headerName: 'Actions',
