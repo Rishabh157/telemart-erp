@@ -4,7 +4,7 @@ import { useAddTapeMutation } from 'src/services/media/TapeManagementServices'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import { object, string } from 'yup'
+import { object, string, array } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
@@ -21,18 +21,17 @@ import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
 
 export type FormInitialValues = {
     tapeName: string
-    channelGroup: string
+    channelGroupId: string
     tapeType: string
-    scheme: string
-    language: string
+    schemeId: string
+    languageId: string
     duration: string
-    artist: string
+    artistId: string[]
     remarks: string
     companyId: string
     hour: string
     minute: string
     second: string
-    youtubeLink: string
 }
 
 const AddTapeManagementWrapper = () => {
@@ -98,49 +97,46 @@ const AddTapeManagementWrapper = () => {
     }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
     const initialValues: FormInitialValues = {
         tapeName: '',
-        channelGroup: '',
+        channelGroupId: '',
         tapeType: '',
-        scheme: '',
-        language: '',
+        schemeId: '',
+        languageId: '',
         duration: '',
-        artist: '',
+        artistId: [''],
         remarks: '',
         hour: '0',
         minute: '00',
         second: '00',
-        youtubeLink: '',
         companyId: userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        tapeName: string(),
+        tapeName: string().required('Required'),
         tapeType: string().required('Required'),
-        scheme: string(),
-        channelGroup: string(),
-        // language: string().required('Required'),
+        channelGroupId: string(),
+        languageId: string().required('Required'),
         hour: string().required('Required'),
-        // minute: string().required('Required'),
-        // second: string().required('Required'),
-        artist: string().required('Required'),
+        minute: string().required('Required'),
+        second: string().required('Required'),
+        artistId: array().of(string().required('Required')),
         remarks: string(),
-        youtubeLink: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        //console.log(values.artistId, "Add")
         let duration = `${values.hour}:${values.minute}:${values.second}`
         setTimeout(() => {
             AddTapeApi({
                 tapeName: values.tapeName,
-                channelGroup: values.channelGroup,
+                channelGroupId: values.channelGroupId || null,
                 tapeType: values.tapeType,
-                scheme: values.scheme,
-                language: values.language,
+                schemeId: values.schemeId || null,
+                languageId: values.languageId,
                 duration: duration,
-                artist: values.artist,
-                remarks: values.remarks,
-                youtubeLink: values.youtubeLink,
+                artistId: values.artistId,
+                remarks: values.remarks || '',
                 companyId: values.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

@@ -318,7 +318,11 @@ const SaleOrderListingWrapper = () => {
     return (
         <>
             <SideNavLayout>
-                <SaleOrderListing columns={columns} rows={items} />
+                <SaleOrderListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
             </SideNavLayout>
         </>
     )

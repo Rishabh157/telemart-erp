@@ -18,9 +18,10 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ArtistListing = ({ columns, rows }: Props) => {
+const ArtistListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const artistState: any = useSelector((state: RootState) => state.artist)
     const [selectedRows, setSelectedRows] = useState([])
@@ -78,6 +79,7 @@ const ArtistListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
+                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                     />
                 </div>

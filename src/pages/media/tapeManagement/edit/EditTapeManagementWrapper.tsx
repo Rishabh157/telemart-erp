@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate, useParams } from 'react-router-dom'
-import { object, string } from 'yup'
+import { object, string, array } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
@@ -25,18 +25,17 @@ import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
 
 export type FormInitialValues = {
     tapeName: string
-    channelGroup: string
+    channelGroupId: string
     tapeType: string
-    scheme: string
-    language: string
+    schemeId: string
+    languageId: string
     duration: string
-    artist: string
+    artistId: string[]
     remarks: string
     companyId: string
     hour: string
     minute: string
     second: string
-    youtubeLink: string
 }
 
 const EditTapeManagementWrapper = () => {
@@ -126,57 +125,57 @@ const EditTapeManagementWrapper = () => {
         }
     }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
 
-    //console.log(selectedItem, "selected")
+    const artist = selectedItem?.artistId.map((ele: any) => {
+        return ele._id
+    })
+    //console.log(artist)
     const newDuration = selectedItem?.duration?.split(':')
-    console.log(newDuration)
+    //console.log(newDuration)
 
     const initialValues: FormInitialValues = {
         tapeName: selectedItem?.tapeName || '',
-        channelGroup: selectedItem?.channelGroup || '',
+        channelGroupId: selectedItem?.channelGroupId || '',
         tapeType: selectedItem?.tapeType || '',
-        scheme: selectedItem?.scheme || '',
-        language: selectedItem?.language || '',
+        schemeId: selectedItem?.schemeId || '',
+        languageId: selectedItem?.languageId || '',
         duration: selectedItem?.duration || '',
-        artist: selectedItem?.artist || '',
-
+        artistId: artist || [],
         remarks: selectedItem?.remarks || '',
         hour: newDuration ? newDuration[0] : '0',
         minute: newDuration ? newDuration[1] : '00',
         second: newDuration ? newDuration[2] : '00',
-        youtubeLink: selectedItem?.youtubeLink || '',
         companyId: selectedItem?.companyId || userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        tapeName: string(),
+        tapeName: string().required('Required'),
         tapeType: string().required('Required'),
-        scheme: string(),
-        channelGroup: string(),
-        language: string().required('Required'),
+        schemeId: string(),
+        channelGroupId: string(),
+        languageId: string().required('Required'),
         hour: string().required('Required'),
         minute: string().required('Required'),
         second: string().required('Required'),
-        artist: string().required('Required'),
+        artistId: array().of(string().required('Required')),
         remarks: string(),
-        youtubeLink: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        //console.log(values.artistId)
         let duration = `${values.hour}:${values.minute}:${values.second}`
         setTimeout(() => {
             updateTape({
                 body: {
                     tapeName: values.tapeName,
-                    channelGroup: values.channelGroup,
+                    channelGroupId: values.channelGroupId || null,
                     tapeType: values.tapeType,
-                    scheme: values.scheme,
-                    language: values.language,
+                    schemeId: values.schemeId || null,
+                    languageId: values.languageId,
                     duration: duration,
-                    artist: values?.artist,
-                    remarks: values.remarks,
-                    youtubeLink: values.youtubeLink,
+                    artistId: values?.artistId,
+                    remarks: values.remarks || '',
                     companyId: values.companyId || '',
                 },
                 id: id || '',

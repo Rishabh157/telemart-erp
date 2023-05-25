@@ -141,7 +141,11 @@ const CompetitorManagementListingWrapper = () => {
     return (
         <>
             <MediaLayout>
-                <CompetitorManagementListing columns={columns} rows={items} />
+                <CompetitorManagementListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
             </MediaLayout>
         </>
     )

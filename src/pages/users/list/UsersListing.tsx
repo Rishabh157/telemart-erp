@@ -15,9 +15,10 @@ import {
 export type Props = {
     columns: any[]
     rows: any[] | []
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const UsersListing = ({ columns, rows }: Props) => {
+const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
     const newUserState: any = useSelector((state: RootState) => state.newUser)
 
     const { page, rowsPerPage, totalItems, searchValue } = newUserState
@@ -73,6 +74,7 @@ const UsersListing = ({ columns, rows }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="h-full overflow-auto"
+                        setShowDropdown={setShowDropdown}
                     />
                 </div>
 
