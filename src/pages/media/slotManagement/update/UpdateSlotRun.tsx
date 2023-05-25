@@ -10,11 +10,12 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
     const { values, setFieldValue } = formikProps
     return (
         <>
-            <div className=" mt-0 pb-2 border-b-4 border-slate-500">
+            <div className=" -mt-6 pb-2 border-b-4 border-slate-500">
                 <ATMPageHeading>Run Slot</ATMPageHeading>
             </div>
             <div className="grow py-4  px-3 ">
                 <div className="grid grid-cols-2 gap-4">
+                <div className="py-3">
                     <ATMSwitchButton
                         name="run"
                         value={values.run}
@@ -26,7 +27,9 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             setFieldValue('run', value)
                         }}
                     />
+                </div>
 
+                <div className="">
                     <ATMTimePicker
                         name="runStartTime"
                         value={values.runStartTime}
@@ -37,26 +40,19 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             setFieldValue('runStartTime', newValue)
                         }}
                     />
-                    {/* <ATMTextField
-                        name="runRemark"
-                        value={values.runRemark}
-                        label="Reamrk"
-                        required
-                        size="medium"
-                        placeholder="Remark"
-                        onChange={(e) => {
-                            setFieldValue('runRemark', e.target.value)
-                        }}
-                    /> */}
-
+                </div>
+                   
+                <div className="-mt-4">
                     <ATMTextArea
                         name="runRemark"
                         value={values.runRemark}
+                        label="Remark"
                         onChange={(newValue) =>
                             setFieldValue('runRemark', newValue)
-                        }
+                        }                        
                     />
-
+                </div>
+                <div className="mt-0 mb-5">
                     <ATMTimePicker
                         name="runEndTime"
                         value={values.runEndTime}
@@ -67,18 +63,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             setFieldValue('runEndTime', newValue)
                         }}
                     />
-
-                    {/* <ATMTextField
-                        name="slotName"
-                        value={values.slotName}
-                        label="Slot Name"
-                        required
-                        size="medium"
-                        placeholder="Slot Name"
-                        onChange={(e) => {
-                            setFieldValue('slotName', e.target.value)
-                        }}
-                    /> */}
+                    </div>
                 </div>
             </div>
             <div className="flex justify-end">
