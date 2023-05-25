@@ -15,54 +15,54 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
             </div>
             <div className="grow py-4  px-3 ">
                 <div className="grid grid-cols-2 gap-4">
-                <div className="py-3">
-                    <ATMSwitchButton
-                        name="run"
-                        value={values.run}
-                        label="Status"
-                        required
-                        onChange={(value: any) => {
-                            // console.log(value)
-                            // setSwitch(value)
-                            setFieldValue('run', value)
-                        }}
-                    />
-                </div>
+                    <div className="py-3">
+                        <ATMSwitchButton
+                            name="run"
+                            value={values.run}
+                            label="Status"
+                            required
+                            onChange={(value: any) => {
+                                // console.log(value)
+                                // setSwitch(value)
+                                setFieldValue('run', value)
+                            }}
+                        />
+                    </div>
 
-                <div className="">
-                    <ATMTimePicker
-                        name="runStartTime"
-                        value={values.runStartTime}
-                        label="Start Time"
-                        required
-                        size="medium"
-                        onChange={(newValue) => {
-                            setFieldValue('runStartTime', newValue)
-                        }}
-                    />
-                </div>
-                   
-                <div className="-mt-4">
-                    <ATMTextArea
-                        name="runRemark"
-                        value={values.runRemark}
-                        label="Remark"
-                        onChange={(newValue) =>
-                            setFieldValue('runRemark', newValue)
-                        }                        
-                    />
-                </div>
-                <div className="mt-0 mb-5">
-                    <ATMTimePicker
-                        name="runEndTime"
-                        value={values.runEndTime}
-                        label="End Time"
-                        required
-                        size="medium"
-                        onChange={(newValue) => {
-                            setFieldValue('runEndTime', newValue)
-                        }}
-                    />
+                    <div className="">
+                        <ATMTimePicker
+                            name="runStartTime"
+                            value={values.runStartTime}
+                            label="Start Time"
+                            required
+                            size="medium"
+                            onChange={(newValue) => {
+                                setFieldValue('runStartTime', newValue)
+                            }}
+                        />
+                    </div>
+
+                    <div className="-mt-4">
+                        <ATMTextArea
+                            name="runRemark"
+                            value={values.runRemark}
+                            label="Remark"
+                            onChange={(newValue) =>
+                                setFieldValue('runRemark', newValue)
+                            }
+                        />
+                    </div>
+                    <div className="mt-0 mb-5">
+                        <ATMTimePicker
+                            name="runEndTime"
+                            value={values.runEndTime}
+                            label="End Time"
+                            required
+                            size="medium"
+                            onChange={(newValue) => {
+                                setFieldValue('runEndTime', newValue)
+                            }}
+                        />
                     </div>
                 </div>
             </div>

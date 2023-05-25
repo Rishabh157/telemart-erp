@@ -230,7 +230,12 @@ const SlotManagementListingWrapper = () => {
                         handleClose={() => {
                             setIsOpenDialog(false)
                         }}
-                        Component={<SlotRunWrapper id={runState}  setIsOpenDialog={setIsOpenDialog}/>}
+                        Component={
+                            <SlotRunWrapper
+                                id={runState}
+                                setIsOpenDialog={setIsOpenDialog}
+                            />
+                        }
                     />
                 </div>
             </MediaLayout>
