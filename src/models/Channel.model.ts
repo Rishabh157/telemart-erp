@@ -51,6 +51,7 @@ export type AddChannelManagement = {
 export type UpdateChannelManagement = {
     body: {
         channelName: string
+        companyId: string
         address: string
         phone: string
         email: string
