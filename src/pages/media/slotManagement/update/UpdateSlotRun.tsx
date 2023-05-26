@@ -49,7 +49,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                                 setFieldValue('runYoutubeLink', e.target.value)
                             }
                         />
-                    </div>                                      
+                    </div>
 
                     <div className="">
                         <ATMTextArea
@@ -72,8 +72,6 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             }}
                         />
                     </div>
-
-                    
                 </div>
             </div>
             <div className="flex justify-end">
