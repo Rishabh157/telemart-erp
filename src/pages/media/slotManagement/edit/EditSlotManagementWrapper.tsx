@@ -78,7 +78,6 @@ const EditSlotManagementWrapper = () => {
         isLoading: smisLoading,
         isFetching: smisFetching,
     } = useGetSlotMangementByIdQuery(Id || '')
-    console.log(dataSmApi)
 
     useEffect(() => {
         if (!smisLoading && !smisFetching) {

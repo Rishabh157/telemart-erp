@@ -104,7 +104,6 @@ import AddCompetitorWrapper from './media/competitorManagement/add/AddCompetitor
 import CompetitorManagementListingWrapper from './media/competitorManagement/list/CompetitorManagementListingWrapper'
 import EditCompetitorWraper from './media/competitorManagement/edit/EditCompetitorWrapper'
 import AddDidManagementWrapper from './media/didManagement/add/AddDidManagementWrapper'
-import DispositionOneListingWrapper from './configuration/Configuration Screens/dispositionOne/list/DispositionOneListingWrapper'
 import ChannelGroupListingWrapper from './media/channelGroup/list/ChannelGroupListingWrapper'
 import AddChannelGroupWrapper from './media/channelGroup/add/AddChannelGroupWrapper'
 import EditChannelGroupWrapper from './media/channelGroup/edit/EditChannelGroupWrapper'
@@ -224,7 +223,6 @@ export {
     CompetitorManagementListingWrapper,
     AddCompetitorWrapper,
     EditCompetitorWraper,
-    DispositionOneListingWrapper,
     ChannelGroupListingWrapper,
     AddChannelGroupWrapper,
     EditChannelGroupWrapper,

@@ -1,7 +1,7 @@
 import {
     AddDisPositionTwo,
     UpdateDispositionTwo,
-} from 'src/models/configurationModel/DisposiionTwo.model'
+} from 'src/models/configurationModel/DispositionTwo.model'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
 

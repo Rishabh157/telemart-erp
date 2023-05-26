@@ -91,4 +91,9 @@ export const navigation: NavItemType[] = [
         icon: MdPermMedia,
         path: '/media/did',
     },
+    {
+        label: 'Disposition',
+        icon: AiOutlineSetting,
+        path: '/disposition',
+    },
 ]
