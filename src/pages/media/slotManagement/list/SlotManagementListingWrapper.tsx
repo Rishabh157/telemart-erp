@@ -67,6 +67,8 @@ const SlotManagementListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
+   
+
     const columns: columnTypes[] = [
         {
             field: 'slotName',
@@ -122,18 +124,20 @@ const SlotManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <div className="relative">
-                    {moment(row?.slotStartTime).format('HH:MM:SS') <
-                        moment(new Date()).format('hh:MM:SS') &&
-                    moment(new Date()).format('hh:MM:SS') <
-                        moment(row?.slotEndTime).format('HH:MM:SS') ? (
+                    {moment(row?.slotStartTime).format('hh:mm:ss') <
+                        moment(new Date()).format('hh:mm:ss') &&
+                    moment(new Date()).format('hh:mm:ss') <
+                        moment(row?.slotEndTime).format('hh:mm:ss') ? (
                         <button
                             disabled={true}
                             className="text-slate-600 font-bold m-1 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full border border-green-500"
                         >
-                            {row.runStatus ? (
+                             {(row.runStatus === true && row.run === true) ? (
                                 <MdDoneOutline />
-                            ) : (
+                            ) : (row.runStatus === true && row.run === false)?(
                                 <AiOutlineClose />
+                            ):(
+                                "Pending"
                             )}
                         </button>
                     ) : (
@@ -144,10 +148,12 @@ const SlotManagementListingWrapper = () => {
                             }}
                             className="text-slate-600 font-bold m-1 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full border border-green-500"
                         >
-                            {row.runStatus ? (
+                            {(row.runStatus === true && row.run === true) ? (
                                 <MdDoneOutline />
-                            ) : (
+                            ) : (row.runStatus === true && row.run === false)?(
                                 <AiOutlineClose />
+                            ):(
+                                "Pending"
                             )}
                         </button>
                     )}

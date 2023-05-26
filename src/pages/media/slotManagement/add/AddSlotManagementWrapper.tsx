@@ -23,7 +23,6 @@ export type FormInitialValues = {
     slotName: string
     channelGroup: string
     type: string
-    days: string[]
     channelSlot: {
         date: string
         startTime: string
@@ -117,7 +116,6 @@ const AddSlotManagementWrapper = () => {
                 endTime: '',
             },
         ],
-        days: [''],
         tapeName: '',
         channelName: '',
         channelTrp: '',
@@ -131,7 +129,6 @@ const AddSlotManagementWrapper = () => {
         slotName: string().required('Required'),
         channelGroup: string().required('Required'),
         type: string().required('Required'),
-        days: array().of(string().required('Required')),
         channelSlot: array().of(
             object().shape({
                 date: string().required('Date is required'),
@@ -151,7 +148,6 @@ const AddSlotManagementWrapper = () => {
             slotName: values.slotName,
             channelGroupId: values.channelGroup,
             type: values.type,
-            days: values.days,
             tapeNameId: values.tapeName,
             channelNameId: values.channelName,
             channelTrp: values.channelTrp,

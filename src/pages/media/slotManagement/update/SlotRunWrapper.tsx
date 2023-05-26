@@ -16,7 +16,6 @@ type FormInitialValues = {
     slotName: string
     channelGroupId: string
     type: string
-    days: string[]
     tapeNameId: String
     channelNameId: string
     channelTrp: string
@@ -67,7 +66,6 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         slotName: selectedItems?.slotName || '',
         channelGroupId: selectedItems?.channelGroupId || '',
         type: selectedItems?.type || '',
-        days: selectedItems?.days || [],
         tapeNameId: selectedItems?.tapeNameId || '',
         channelNameId: selectedItems?.channelNameId || '',
         channelTrp: selectedItems?.channelTrp || '',
@@ -103,7 +101,6 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     slotName: values?.slotName,
                     channelGroupId: values?.channelGroupId,
                     type: values?.type,
-                    days: values?.days,
                     tapeNameId: values?.tapeNameId,
                     channelNameId: values?.channelNameId,
                     channelTrp: values?.channelTrp,

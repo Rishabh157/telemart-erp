@@ -2,7 +2,6 @@ export type SlotManagementListResponse = {
     slotName: string
     channelGroupId: string
     type: string
-    days: string[]
     tapeNameId: String
     channelNameId: string
     slotStartTime: string
@@ -44,7 +43,6 @@ export type AddSlotManagement = {
     slotName: string
     channelGroupId: string
     type: string
-    days: string[]
     tapeNameId: String
     channelNameId: string
     channelTrp: string
@@ -67,7 +65,6 @@ export type UpdateSlotManagement = {
         slotName: string
         channelGroupId: string
         type: string
-        days: string[]
         tapeNameId: String
         channelNameId: string
         channelTrp: string
