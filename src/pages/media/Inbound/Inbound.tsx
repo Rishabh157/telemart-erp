@@ -2,14 +2,184 @@ import { Button } from '@mui/material'
 import React from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ChannelCategoryListing from '../channelCategory/list/ChannelCategoryListing'
-import MediaLayout from '../MediaLayout'
+// import MediaLayout from '../MediaLayout'
 
 const Inbound = () => {
     return (
-        <MediaLayout>
+        <>
+            <div className="container-fluid flex gap-4">
+                <div className="flex gap-4 px-5 w-full">
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                </div>
+                <div className='border-l-2 px-4'>
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="col-span-2">Title</div>
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        className="py-2"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                    <ATMTextField
+                        label="Did Number"
+                        value={''}
+                        onChange={() => {}}
+                        size="xs"
+                        // className="h-[2.5vh]"
+                        name=""
+                        placeholder="Did Number"
+                        extraClassField="w-full"
+                    />
+                </div>
+                </div>
+            </div>
+
             <div className="relative h-[100vh-10px] w-full  grid grid-rows-12 border-black p-3">
                 <div className=" h-[60vh-20px] w-full row-start-1 row-end-[9.5]  grid grid-rows-12 ">
-                    <div className="row-sapn-1 h-[10vh-50px] grid grid-cols-4 gap-x-1  pb-2 ">
+                    {/* <div className="row-sapn-1 h-[10vh-50px] grid grid-cols-4 gap-x-1  pb-2 ">
                         <div className="-mt-4">
                             <ATMTextField
                                 label="Did Number"
@@ -56,7 +226,7 @@ const Inbound = () => {
                                 extraClassField="-mt-1"
                             />
                         </div>
-                    </div>
+                    </div> */}
                     <div className="row-span-11 h-[50vh-50px] grid grid-cols-3 gap-4 border border-purple-200 py-2 px-1 ">
                         <div className="col-span-2 border border-pink-300 p-2 grid grid-rows-12 h-[50vh-5px]">
                             <div className="  h-[18vh]  row-sapn-5 row-start-1 row-end-6 grid grid-rows-3 ">
@@ -373,7 +543,7 @@ const Inbound = () => {
                     />
                 </div>
             </div>
-        </MediaLayout>
+        </>
     )
 }
 
