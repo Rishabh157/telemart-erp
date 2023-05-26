@@ -15,6 +15,7 @@ type Props = {
     size?: Size
     disabled?: boolean
     isSubmitting?: boolean
+    dateTimeFormat?: string
 }
 
 const ATMDatePicker = ({
@@ -26,6 +27,7 @@ const ATMDatePicker = ({
     size = 'small',
     disabled = false,
     isSubmitting = true,
+    dateTimeFormat = 'MM/DD/YYYY',
 }: Props) => {
     return (
         <div className="relative">
@@ -45,7 +47,7 @@ const ATMDatePicker = ({
                 <LocalizationProvider dateAdapter={AdapterMoment}>
                     <DesktopDatePicker
                         disabled={disabled}
-                        inputFormat="MM/DD/YYYY"
+                        inputFormat={dateTimeFormat}
                         value={value}
                         onChange={onChange}
                         renderInput={(params) => (

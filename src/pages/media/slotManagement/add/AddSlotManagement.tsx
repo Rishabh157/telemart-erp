@@ -211,6 +211,7 @@ const AddSlotManagement = ({
                                         name={`endDate`}
                                         value={slotEndDate}
                                         label="Slot End Date"
+                                        dateTimeFormat="LLL"
                                         onChange={(newValue) =>
                                             setSlotEndDate(newValue)
                                         }

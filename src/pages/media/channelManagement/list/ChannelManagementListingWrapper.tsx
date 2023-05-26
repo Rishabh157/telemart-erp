@@ -130,7 +130,7 @@ const ChannelManagementListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetPaginationchannelQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['channelName'],
+        params: ['channelName', 'channelGroupLabel'],
         page: page,
         filterBy: [
             {
