@@ -1,6 +1,9 @@
 import React from 'react'
 import { BiFilter, BiSearch } from 'react-icons/bi'
 import { IoReload } from 'react-icons/io5'
+import { useDispatch } from 'react-redux'
+import { setFilterValue } from 'src/redux/slices/GRNSlice'
+import { AppDispatch } from 'src/redux/store'
 
 type Props = {
     rowsPerPage: number
@@ -29,6 +32,7 @@ const ATMTableHeader = ({
     onFilterClick = () => {},
     onSearch = () => {},
 }: Props) => {
+    const dispatch = useDispatch<AppDispatch>()
     return (
         <div className="p-3 border-b border-slate-300 grid grid-cols-2">
             {/* Left */}
@@ -55,7 +59,7 @@ const ATMTableHeader = ({
                 )}
                 {isRefresh && (
                     <button
-                        onClick={() => window.location.reload()}
+                        onClick={() => dispatch(setFilterValue([]))}
                         className="bg-white shadow px-2 flex items-center rounded border"
                     >
                         <IoReload className="text-2xl text-slate-600" />

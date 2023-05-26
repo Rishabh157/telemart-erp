@@ -35,7 +35,7 @@ const TapeManagementListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetPaginationTapeQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['tapeName'],
+        params: ['tapeName', 'schemeLabel', 'channelGroupLabel'],
         page: page,
         filterBy: [
             {
@@ -80,28 +80,29 @@ const TapeManagementListingWrapper = () => {
         },
         {
             field: 'schemeLabel',
-            headerName: 'Scheme Label',
+            headerName: 'Scheme',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: TapeManagementListResponse) => (
                 <span> {row.schemeLabel} </span>
             ),
         },
         {
+            field: 'channelGroupLabel',
+            headerName: 'Channel Group',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: TapeManagementListResponse) => (
+                <span> {row.channelGroupLabel} </span>
+            ),
+        },
+        {
             field: 'languageLabel',
-            headerName: 'Language Label',
+            headerName: 'Language',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: TapeManagementListResponse) => (
                 <span> {row.languageLabel} </span>
             ),
         },
-        {
-            field: 'remarks',
-            headerName: 'Remarks',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: TapeManagementListResponse) => (
-                <span> {row.remarks} </span>
-            ),
-        },
+
         {
             field: 'actions',
             headerName: 'Actions',

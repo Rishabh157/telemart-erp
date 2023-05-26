@@ -18,7 +18,7 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-    setFilterValue,
+    // setFilterValue,
 } from 'src/redux/slices/GRNSlice'
 import { RootState } from 'src/redux/store'
 import { useGetPaginationGRNQuery } from 'src/services/GRNService'
