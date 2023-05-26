@@ -158,6 +158,7 @@ const AddTapeManagement = ({
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
+                                isAllSelect
                             />
                             <ATMSelectSearchable
                                 name="languageId"
