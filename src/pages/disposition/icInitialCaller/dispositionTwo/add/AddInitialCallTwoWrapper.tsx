@@ -26,7 +26,7 @@ const AddInitialCallTwoWrapper = ({ onClose }: Props) => {
     }
     const validationSchema = object({
         initialCallName: string().required(
-            'InitialCaller-Two Name is required'
+            'InitialCaller-two name is required'
         ),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -41,7 +41,7 @@ const AddInitialCallTwoWrapper = ({ onClose }: Props) => {
                     if (res?.data?.status) {
                         showToast(
                             'success',
-                            'InitialCall Two added successfully!'
+                            'InitialCaller-two added successfully!'
                         )
                         onClose()
                     } else {

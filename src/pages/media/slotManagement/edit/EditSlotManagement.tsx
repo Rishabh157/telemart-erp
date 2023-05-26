@@ -262,7 +262,7 @@ const EditSlotManagement = ({
                                         value={values.slotStartTime || null}
                                         label="Startdate Time"
                                         onChange={(newValue) => {
-                                            console.log(newValue)
+                                        
                                             setFieldValue(
                                                 'slotStartTime',
                                                 newValue

@@ -81,7 +81,7 @@ const GRNListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { state } = useLocation()
     const poCode = state?.poCode
-    console.log(poCode, 'pocode')
+  
 
     const grnState: any = useSelector((state: RootState) => state.grn)
     const { page, rowsPerPage, searchValue, items, filterValue } = grnState

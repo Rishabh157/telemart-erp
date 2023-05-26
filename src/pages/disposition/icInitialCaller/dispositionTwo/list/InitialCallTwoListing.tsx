@@ -24,7 +24,7 @@ const InitialCallTwoListing = ({ initialCallerTwo }: Props) => {
     )
     //const {selectedInitialCallerThree}:any=useSelector((state:RootState)=>state.initialCallerTwo)
 
-    console.log(selectedInitialCallerTwo)
+
     function handleDispositionOneClick(newValue: any) {
         if (selectedInitialCallerTwo?.value === newValue.value) {
             dispatch(setSelectedInitialCallerTwo(null))

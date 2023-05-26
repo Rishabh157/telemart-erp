@@ -14,7 +14,7 @@ const InitialCallOneListingWrapper = () => {
 
     const initialCallerOne = items?.map((ele: any) => {
         return {
-            label: ele.initailCallName,
+            label: ele.initialCallName,
             value: ele._id,
         }
     })

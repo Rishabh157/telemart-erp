@@ -46,7 +46,7 @@ const AddDispositionThreeWrappper = ({ onClose }: Props) => {
                     if (res?.data?.status) {
                         showToast(
                             'success',
-                            'Disposition-Three added successfully!'
+                            'Disposition-three added successfully!'
                         )
                         onClose()
                     } else {

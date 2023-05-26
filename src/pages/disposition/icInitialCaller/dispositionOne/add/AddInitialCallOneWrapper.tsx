@@ -12,7 +12,7 @@ type Props = {
 }
 
 export type FormInitialValues = {
-    initailCallName: string
+    initialCallName: string
 }
 const AddInitialCallOneWrapper = ({ onClose }: Props) => {
     const [AddInitialcallOne] = useAddinitialCallerOneMutation()
@@ -20,10 +20,10 @@ const AddInitialCallOneWrapper = ({ onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
 
     const initialValues: FormInitialValues = {
-        initailCallName: '',
+        initialCallName: '',
     }
     const validationSchema = object({
-        initailCallName: string().required(
+        initialCallName: string().required(
             'InitialCaller-One Name is required'
         ),
     })
@@ -31,7 +31,7 @@ const AddInitialCallOneWrapper = ({ onClose }: Props) => {
         setApiStatus(true)
         setTimeout(() => {
             AddInitialcallOne({
-                initailCallName: values.initailCallName,
+                initialCallName: values.initialCallName,
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

@@ -20,7 +20,7 @@ const InitialCallOneListing = ({ initialCallerOne }: Props) => {
     const { selectedInitialOne }: any = useSelector(
         (state: RootState) => state.initialCallerOne
     )
-    //console.log(selectedInitialOne)
+   
     // const {selectedInitialCallerTwo}:any=useSelector((state:RootState)=>state.initialCallerTwo)
     // const {selectedInitialCallerThree}:any=useSelector((state:RootState)=>state.initialCallerTwo)
 

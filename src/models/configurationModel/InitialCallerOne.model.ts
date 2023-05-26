@@ -1,5 +1,5 @@
 export type InitialCallerOneListResponse = {
-    initailCallName: string
+    initialCallName: string
     initailCallNameLabel: string
     companyId: string
     isActive: boolean
@@ -11,13 +11,13 @@ export type InitialCallerOneListResponse = {
 }
 
 export type AddInitialCallerOne = {
-    initailCallName: string
+    initialCallName: string
     companyId: string
 }
 
 export type UpdateInitialCallerOne = {
     body: {
-        initailCallName: string
+        initialCallName: string
         companyId: string
     }
     id: string

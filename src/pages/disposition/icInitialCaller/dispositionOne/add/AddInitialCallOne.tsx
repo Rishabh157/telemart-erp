@@ -29,13 +29,13 @@ const AddInitialCallOne = ({ onClose, formikProps, apiStatus }: Props) => {
                     <div>
                         <div>
                             <ATMTextField
-                                name="initailCallName"
-                                value={values.initailCallName}
+                                name="initialCallName"
+                                value={values.initialCallName}
                                 placeholder="Enter a InitailCaller  name"
                                 label="InitialCaller  name"
                                 onChange={(e) =>
                                     setFieldValue(
-                                        'initailCallName',
+                                        'initialCallName',
                                         e.target.value
                                     )
                                 }
