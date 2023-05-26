@@ -2,61 +2,68 @@ import React, { useState } from 'react'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
-import { AiOutlineSetting } from 'react-icons/ai'
-import { BiChevronsLeft } from 'react-icons/bi'
+import { BsPersonHeart } from 'react-icons/bs'
+import { BiChevronsLeft, BiCategory } from 'react-icons/bi'
+import { DiDart } from 'react-icons/di'
+import { FaTape } from 'react-icons/fa'
+import { GrChannel } from 'react-icons/gr'
+import { SiGoogletagmanager } from 'react-icons/si'
+import { MdEmojiEvents, MdViewTimeline, MdAnalytics } from 'react-icons/md'
+import { TiFlowMerge } from 'react-icons/ti'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { AiOutlineSetting } from 'react-icons/ai'
 
 const mediaNavigation: NavItemType[] = [
     {
         label: 'Artist',
-        icon: AiOutlineSetting,
+        icon: BsPersonHeart,
         path: '/media/artist',
     },
     {
         label: 'DID Management',
-        icon: AiOutlineSetting,
+        icon: DiDart,
         path: '/media/did',
     },
     {
         label: 'Tape Management',
-        icon: AiOutlineSetting,
+        icon: FaTape,
         path: '/media/tape',
     },
     {
         label: 'Channel Group',
-        icon: AiOutlineSetting,
+        icon: GrChannel,
         path: '/media/channel-group',
     },
     {
         label: 'Channel Category',
-        icon: AiOutlineSetting,
+        icon: BiCategory,
         path: '/media/channel-category',
     },
     {
         label: 'Channel Management',
-        icon: AiOutlineSetting,
+        icon: SiGoogletagmanager,
         path: '/media/channel',
     },
 
     {
         label: 'Competitor Management',
-        icon: AiOutlineSetting,
+        icon: MdEmojiEvents,
         path: '/media/competitor',
     },
     {
         label: 'Slot Management',
-        icon: AiOutlineSetting,
+        icon: MdViewTimeline,
         path: '/media/slot',
     },
     {
         label: 'Analysis',
-        icon: AiOutlineSetting,
+        icon: MdAnalytics,
         path: '/media/analysis',
     },
 
     {
         label: 'Flow',
-        icon: AiOutlineSetting,
+        icon: TiFlowMerge,
         path: '/media/flow',
     },
     {

@@ -20,9 +20,10 @@ type Props = {
     columns: any[]
     rows: any[]
     isHeader?: boolean
+    setShowDropdown?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ChannelCategoryListing = ({ columns, rows, isHeader = true }: Props) => {
+const ChannelCategoryListing = ({ columns, rows, setShowDropdown,isHeader = true }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const channelCategoryState: any = useSelector(
         (state: RootState) => state.channelGroup
@@ -89,6 +90,7 @@ const ChannelCategoryListing = ({ columns, rows, isHeader = true }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
+                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                     />
                 </div>

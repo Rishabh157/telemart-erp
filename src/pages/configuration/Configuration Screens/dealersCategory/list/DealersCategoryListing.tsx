@@ -18,9 +18,10 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const DealerCategoryListing = ({ columns, rows }: Props) => {
+const DealerCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const dealerCategoryState: any = useSelector(
         (state: RootState) => state.dealersCategory
@@ -75,7 +76,11 @@ const DealerCategoryListing = ({ columns, rows }: Props) => {
 
                 {/* Table */}
                 <div className="grow overflow-auto  ">
-                    <ATMTable columns={columns} rows={rows} />
+                    <ATMTable
+                        columns={columns}
+                        rows={rows}
+                        setShowDropdown={setShowDropdown}
+                    />
                 </div>
 
                 {/* Pagination */}

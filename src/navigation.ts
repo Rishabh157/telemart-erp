@@ -5,9 +5,13 @@ import { HiOutlineTruck } from 'react-icons/hi'
 import { FaRegHandshake } from 'react-icons/fa'
 import { CiBoxes } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
+import { MdPermMedia } from 'react-icons/md'
+import { GrCompliance, GrNotes } from 'react-icons/gr'
 import { IoDocumentTextOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
+import { BiPurchaseTagAlt } from 'react-icons/bi'
 import { IconType } from 'react-icons'
+import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 
 export type NavItemType = {
     label: string
@@ -59,22 +63,22 @@ export const navigation: NavItemType[] = [
     },
     {
         label: 'ASR',
-        icon: AiOutlineSetting,
+        icon: GrCompliance,
         path: '/asr',
     },
     {
         label: 'PO',
-        icon: AiOutlineSetting,
+        icon: BiPurchaseTagAlt,
         path: '/purchase-order',
     },
     {
         label: 'GRN',
-        icon: AiOutlineSetting,
+        icon: GrNotes,
         path: '/grn',
     },
     {
         label: 'Scheme',
-        icon: AiOutlineSetting,
+        icon: TfiLayoutMediaOverlayAlt2,
         path: '/scheme',
     },
     {
@@ -84,7 +88,7 @@ export const navigation: NavItemType[] = [
     },
     {
         label: 'Media',
-        icon: AiOutlineSetting,
+        icon: MdPermMedia,
         path: '/media/did',
     },
 ]

@@ -149,7 +149,11 @@ const ChannelCategoryListingWrapper = () => {
         <>
             <MediaLayout>
                 <div className="h-full">
-                    <ChannelCategoryListing columns={columns} rows={items} />
+                    <ChannelCategoryListing
+                        columns={columns}
+                        rows={items}
+                        setShowDropdown={setShowDropdown}
+                    />
                 </div>
             </MediaLayout>
         </>

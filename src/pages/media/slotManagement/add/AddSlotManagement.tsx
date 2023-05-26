@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FormikProps } from 'formik'
+import { FieldArray, FormikProps } from 'formik'
 import { FormInitialValues } from './AddSlotManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -11,6 +11,9 @@ import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMT
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import { MdDeleteOutline } from 'react-icons/md'
+import moment from 'moment'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -39,40 +42,8 @@ const AddSlotManagement = ({
 }: Props) => {
     const { values, setFieldValue } = formikProps
 
-    // const {
-    //     data: stateData,
-    //     isLoading: stateIsLoading,
-    //     isFetching: stateIsFetching,
-    // } = useGetAllStateByCountryQuery(formikProps.values.country, {
-    //     skip: !formikProps.values.country,
-    // })
-    // const {
-    //     data: districtData,
-    //     isLoading: districtIsLoading,
-    //     isFetching: districtIsFetching,
-    // } = useGetAllDistrictByStateQuery(formikProps.values.state, {
-    //     skip: !formikProps.values.state,
-    // })
-    // useEffect(() => {
-    //     dispatch(setAllStates(stateData?.data))
-    // }, [stateData, stateIsLoading, stateIsFetching, dispatch])
-
-    //district
-    // useEffect(() => {
-    //     dispatch(setAllDistrict(districtData?.data))
-    // }, [districtData, districtIsLoading, districtIsFetching, dispatch])
-
     dropdownOptions = {
         ...dropdownOptions,
-        // stateOption: allStates?.map((schemeItem: any) => {
-        //     return {
-        //         label: schemeItem?.stateName,
-        //         value: schemeItem?._id,
-        //     }
-        // }),
-        // districtOptions: allDistricts?.map((ele: any) => {
-        //     return { label: ele?.districtName, value: ele?._id }
-        // }),
     }
 
     const days = [
@@ -91,12 +62,35 @@ const AddSlotManagement = ({
         }
     })
 
-    const [selectedValue, setSelectedValue] = useState('')
+    const [slotStartDate, setSlotStartDate] = useState('')
+    const [slotEndDate, setSlotEndDate] = useState('')
+    const [slotStartTime, setSlotStartTime] = useState('')
+    const [slotEndTime, setSlotEndTime] = useState('')
+    const [showSlots, setShowSlots] = useState(false)
 
     const options = ['FIXED', 'FLEXIBLE']
 
-    const handleSelect = (newValue: any) => {
-        setSelectedValue(newValue)
+    const getDates = (startDate: any, endDate: any) => {
+        const dateArray = []
+        const currentDate = moment(startDate, 'MM/DD/YYYY')
+        const finalDate = moment(endDate, 'MM/DD/YYYY')
+        while (moment(currentDate).isSameOrBefore(finalDate)) {
+            dateArray.push(currentDate.format('MM/DD/YYYY'))
+            currentDate.add(1, 'days')
+        }
+
+        return dateArray
+    }
+
+    const handleConfirm = () => {
+        setShowSlots(true)
+        const startDate = moment(slotStartDate).format('MM/DD/YYYY')
+        const endDate = moment(slotEndDate).format('MM/DD/YYYY')
+        const datesBetween = getDates(startDate, endDate)
+        const newData = datesBetween?.map((ele) => {
+            return { date: ele, startTime: slotStartTime, endTime: slotEndTime }
+        })
+        setFieldValue('channelSlot', newData)
     }
 
     return (
@@ -123,7 +117,6 @@ const AddSlotManagement = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => {
-                                    console.log(values)
                                     formikProps.handleSubmit()
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
@@ -146,7 +139,6 @@ const AddSlotManagement = ({
                                 required
                                 placeholder="Slot Name"
                                 onChange={(e) => {
-                                    console.log(e.target.value)
                                     setFieldValue('slotName', e.target.value)
                                 }}
                             />
@@ -160,28 +152,6 @@ const AddSlotManagement = ({
                                 label="Channel Group"
                             />
                             <div className="">
-                                <ATMTimePicker
-                                    name="startDateTime"
-                                    value={values.startDateTime}
-                                    label="StartDateTime"
-                                    onChange={(newValue) => {
-                                        console.log(newValue)
-                                        setFieldValue('startDateTime', newValue)
-                                    }}
-                                />
-                            </div>
-                            <div className="">
-                                {/* <ATMMultiSelect
-                                    name="days"
-                                    value={selectedNames}
-                                    onSelect={(e) => setSelectedNames(e.target.value)}
-                                    required
-                                    label='Days'
-                                    options={days.map((week)=>week)}
-                                    placeholder="days"
-                                
-                                    
-                                /> */}
                                 <ATMSelectSearchable
                                     name="days"
                                     value={values.days}
@@ -191,24 +161,20 @@ const AddSlotManagement = ({
                                     options={optionss}
                                     label="Days"
                                     isMulti
+                                    isAllSelect
                                 />
                             </div>
-                            <div className="mt-5">
-                                <span className="text-slate-700 font-medium">
-                                    Type
-                                </span>
-                                <div className="-mt-5 ml-6 flex ">
-                                    <ATMRadioButton
-                                        name="type"
-                                        options={options}
-                                        value={selectedValue}
-                                        onSelect={(value) => {
-                                            handleSelect(value)
-                                            setFieldValue('type', value)
-                                        }}
-                                        required={true}
-                                    />
-                                </div>
+                            <div className="">
+                                <ATMRadioButton
+                                    name="type"
+                                    label="Type"
+                                    options={options}
+                                    value={values.type}
+                                    onChange={(e) => {
+                                        setFieldValue('type', e)
+                                    }}
+                                    required={true}
+                                />
                             </div>
                             <div className="">
                                 <ATMSelectSearchable
@@ -230,16 +196,6 @@ const AddSlotManagement = ({
                                 options={dropdownOptions.tapeMangementOptions}
                                 label="Tape Name"
                             />
-                            <div className="">
-                                <ATMTimePicker
-                                    name="endDateTime"
-                                    value={values.endDateTime}
-                                    label="EndDateTime"
-                                    onChange={(newValue) => {
-                                        setFieldValue('endDateTime', newValue)
-                                    }}
-                                />
-                            </div>
                             <ATMTextField
                                 name="channelTrp"
                                 value={values.channelTrp}
@@ -258,6 +214,198 @@ const AddSlotManagement = ({
                                     setFieldValue('remarks', newValue)
                                 }
                             />{' '}
+                        </div>
+                        <div className="px-3 pt-5">
+                            <div className=" text-lg pb-2 font-medium text-primary-main">
+                                Add Slot Details
+                            </div>
+
+                            <div className="flex gap-5 items-end  pb-5">
+                                {/* Est. Receiving Date */}
+                                <div className="flex-[3_3_0%]">
+                                    <ATMDatePicker
+                                        name={`date`}
+                                        value={slotStartDate}
+                                        label="Slot Start Date"
+                                        onChange={(newValue) =>
+                                            setSlotStartDate(newValue)
+                                        }
+                                    />
+                                </div>
+                                <div className="flex-[3_3_0%]">
+                                    <ATMDatePicker
+                                        name={`endDate`}
+                                        value={slotEndDate}
+                                        label="Slot End Date"
+                                        onChange={(newValue) =>
+                                            setSlotEndDate(newValue)
+                                        }
+                                    />
+                                </div>
+                                <div className="">
+                                    <ATMTimePicker
+                                        name={`startTime`}
+                                        value={slotStartTime}
+                                        label="Start Time"
+                                        onChange={(newValue) => {
+                                            setSlotStartTime(newValue)
+                                        }}
+                                    />
+                                </div>
+                                <div className="">
+                                    <ATMTimePicker
+                                        name={`endTime`}
+                                        value={slotEndTime}
+                                        label="End Time"
+                                        onChange={(newValue) => {
+                                            setSlotEndTime(newValue)
+                                        }}
+                                    />
+                                </div>
+                                <button
+                                    type="button"
+                                    disabled={
+                                        !slotStartDate ||
+                                        !slotEndDate ||
+                                        !slotStartTime ||
+                                        !slotEndTime
+                                    }
+                                    onClick={() => {
+                                        handleConfirm()
+                                    }}
+                                    className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                        !slotStartDate ||
+                                        !slotEndDate ||
+                                        !slotStartTime ||
+                                        !slotEndTime
+                                            ? 'opacity-50'
+                                            : ''
+                                    }`}
+                                >
+                                    Confirm
+                                </button>
+                            </div>
+
+                            {showSlots ? (
+                                <FieldArray name="channelSlot">
+                                    {({ push, remove }) => {
+                                        return (
+                                            <>
+                                                <div className="flex flex-col gap-y-9">
+                                                    {values.channelSlot?.map(
+                                                        (item, itemIndex) => {
+                                                            const {
+                                                                date,
+                                                                startTime,
+                                                                endTime,
+                                                            } = item
+
+                                                            return (
+                                                                <div
+                                                                    key={
+                                                                        itemIndex
+                                                                    }
+                                                                    className="flex gap-5 items-end  "
+                                                                >
+                                                                    {/* Est. Receiving Date */}
+                                                                    <div className="flex-[3_3_0%]">
+                                                                        <ATMDatePicker
+                                                                            name={`channelSlot[${itemIndex}].date`}
+                                                                            value={
+                                                                                date
+                                                                            }
+                                                                            label="Date"
+                                                                            onChange={(
+                                                                                newValue
+                                                                            ) =>
+                                                                                setFieldValue(
+                                                                                    `channelSlot[${itemIndex}].date`,
+                                                                                    newValue
+                                                                                )
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                    <div className="flex-[3_3_0%]">
+                                                                        <ATMTimePicker
+                                                                            name={`channelSlot[${itemIndex}].startTime`}
+                                                                            value={
+                                                                                startTime
+                                                                            }
+                                                                            label="Start Time"
+                                                                            onChange={(
+                                                                                newValue
+                                                                            ) => {
+                                                                                setFieldValue(
+                                                                                    `channelSlot[${itemIndex}].startTime`,
+                                                                                    newValue
+                                                                                )
+                                                                            }}
+                                                                        />
+                                                                    </div>
+                                                                    <div className="flex-[3_3_0%]">
+                                                                        <ATMTimePicker
+                                                                            name={`channelSlot[${itemIndex}].endTime`}
+                                                                            value={
+                                                                                endTime
+                                                                            }
+                                                                            label="End Time"
+                                                                            onChange={(
+                                                                                newValue
+                                                                            ) => {
+                                                                                setFieldValue(
+                                                                                    `channelSlot[${itemIndex}].endTime`,
+                                                                                    newValue
+                                                                                )
+                                                                            }}
+                                                                        />
+                                                                    </div>
+
+                                                                    {/* BUTTON - Delete */}
+                                                                    {values
+                                                                        .channelSlot
+                                                                        ?.length >
+                                                                        1 && (
+                                                                        <div>
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => {
+                                                                                    remove(
+                                                                                        itemIndex
+                                                                                    )
+                                                                                }}
+                                                                                className="p-2 bg-red-500 text-white rounded"
+                                                                            >
+                                                                                <MdDeleteOutline className="text-2xl" />
+                                                                            </button>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            )
+                                                        }
+                                                    )}
+                                                </div>
+
+                                                {/* BUTTON - Add More Product */}
+                                                {/* <div className="flex justify-self-start py-7">
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        push({
+                                                            date: '',
+                                                            startTime: '',
+                                                            endTime: '',
+                                                        })
+                                                    }
+                                                    className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                                >
+                                                    <HiPlus size="20" />
+                                                </button>
+                                            </div> */}
+                                            </>
+                                        )
+                                    }}
+                                </FieldArray>
+                            ) : null}
                         </div>
                     </div>
                 </div>

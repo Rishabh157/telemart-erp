@@ -11,21 +11,23 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
+    setSearchValue,
 } from 'src/redux/slices/media/tapeManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const TapeManagementListing = ({ columns, rows }: Props) => {
+const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const tapeManagementState: any = useSelector(
         (state: RootState) => state.tapeManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = tapeManagementState
+    const { page, rowsPerPage, totalItems, searchValue } = tapeManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -57,6 +59,7 @@ const TapeManagementListing = ({ columns, rows }: Props) => {
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
+                    searchValue={searchValue}
                     page={page}
                     rowCount={rows.length}
                     rowsPerPage={rowsPerPage}
@@ -64,6 +67,9 @@ const TapeManagementListing = ({ columns, rows }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
+                    onSearch={(newValue) => {
+                        dispatch(setSearchValue(newValue))
+                    }}
                     isFilter
                 />
 
@@ -77,6 +83,7 @@ const TapeManagementListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
+                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                     />
                 </div>
