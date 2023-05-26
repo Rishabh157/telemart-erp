@@ -1,6 +1,5 @@
 export type AreaListResponse = {
     area: string
-
     pincodeId: string
     tehsilId: string
     districtId: string

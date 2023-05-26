@@ -35,8 +35,6 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
     const { data, isFetching, isLoading } =
         useGetSalesOrderByDealerIdQuery(dealerId)
 
-    //console.log(data)
-
     useEffect(() => {
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false))

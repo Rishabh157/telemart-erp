@@ -52,6 +52,10 @@ import channelCategorySlice from './slices/media/channelCategorySlice'
 import competitorSlice from './slices/media/competitorManagementSlice'
 import dispositionTwoSlice from './slices/configuration/dispositionTwoSlice'
 import artistSlice from './slices/media/artist'
+import dispositionThreeSlice from './slices/configuration/dispositionThreeSlice'
+import initialCallerOneSlice from './slices/configuration/initialCallerOneSlice'
+import initialCallerTwoSlice from './slices/configuration/initialCallerTwoSlice'
+import initialCallerThreeSlice from './slices/configuration/initialCallerThreeSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -111,6 +115,10 @@ const store = configureStore({
         channelCategory: channelCategorySlice,
         competitor: competitorSlice,
         artist: artistSlice,
+        dispositionThree: dispositionThreeSlice,
+        initialCallerOne: initialCallerOneSlice,
+        initialCallerTwo: initialCallerTwoSlice,
+        initialCallerThree: initialCallerThreeSlice,
 
         dispositionTwo: dispositionTwoSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,

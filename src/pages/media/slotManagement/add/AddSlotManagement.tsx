@@ -46,22 +46,6 @@ const AddSlotManagement = ({
         ...dropdownOptions,
     }
 
-    const days = [
-        'MONDAY',
-        'TUESDAY',
-        'WEDNESDAY',
-        'THURSDAY',
-        'FRIDAY',
-        'SATURDAY',
-        'SUNDAY',
-    ]
-    const optionss = days.map((ele: any) => {
-        return {
-            label: ele,
-            value: ele,
-        }
-    })
-
     const [slotStartDate, setSlotStartDate] = useState('')
     const [slotEndDate, setSlotEndDate] = useState('')
     const [slotStartTime, setSlotStartTime] = useState('')
@@ -151,19 +135,6 @@ const AddSlotManagement = ({
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
-                            <div className="">
-                                <ATMSelectSearchable
-                                    name="days"
-                                    value={values.days}
-                                    onChange={(e) => {
-                                        setFieldValue('days', e)
-                                    }}
-                                    options={optionss}
-                                    label="Days"
-                                    isMulti
-                                    isAllSelect
-                                />
-                            </div>
                             <div className="">
                                 <ATMRadioButton
                                     name="type"

@@ -16,7 +16,6 @@ import { HiOutlineReceiptTax } from 'react-icons/hi'
 import { CgOrganisation } from 'react-icons/cg'
 import { CiBarcode, CiLocationOn } from 'react-icons/ci'
 import { GrLanguage } from 'react-icons/gr'
-import { RiDeleteBin4Line, RiDeleteBin5Line } from 'react-icons/ri'
 import { TbBinaryTree2 } from 'react-icons/tb'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -91,16 +90,16 @@ const configurationNavigation: NavItemType[] = [
         icon: BiCategoryAlt,
         path: '/configurations/dealers-category',
     },
-    {
-        label: 'Disposition One',
-        icon: RiDeleteBin4Line,
-        path: '/configurations/disposition-one',
-    },
-    {
-        label: 'Disposition Two',
-        icon: RiDeleteBin5Line,
-        path: '/configurations/disposition-two',
-    },
+    // {
+    //     label: 'Disposition One',
+    //     icon: AiOutlineSetting,
+    //     path: '/configurations/disposition-one',
+    // },
+    // {
+    //     label: 'Disposition Two',
+    //     icon: AiOutlineSetting,
+    //     path: '/configurations/disposition-two',
+    // },
     {
         label: 'Hierarchy (Org..*)',
         icon: TbBinaryTree2,

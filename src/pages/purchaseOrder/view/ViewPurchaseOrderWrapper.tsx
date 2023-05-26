@@ -43,8 +43,6 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
         dispatch(setSelectedItems(data?.data))
     }, [data, isLoading, isFetching, dispatch])
 
-    console.log(selectedItems?.approval)
-
     const initialValues: FormInitialValues = {
         poCode: selectedItems?.poCode || '',
         vendor: selectedItems?.vendorLabel || '',

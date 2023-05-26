@@ -1,6 +1,6 @@
 import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { DispositionTwoListResponse } from 'src/models/configurationModel/DisposiionTwo.model'
+import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
 
 export interface DispositionTwoSliceStateType {
     items: DispositionTwoListResponse[] | []
@@ -13,6 +13,7 @@ export interface DispositionTwoSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
+    filterValue: string
 }
 
 const initialState: DispositionTwoSliceStateType = {
@@ -26,6 +27,7 @@ const initialState: DispositionTwoSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
+    filterValue: '',
 }
 
 const dispositionTwoSlice: Slice<DispositionTwoSliceStateType> = createSlice({
@@ -64,6 +66,9 @@ const dispositionTwoSlice: Slice<DispositionTwoSliceStateType> = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
+        setFilterValue: (state, action: PayloadAction<string>) => {
+            state.filterValue = action.payload
+        },
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
@@ -91,6 +96,7 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
+    setFilterValue,
     setSelectedDispostion,
     setAllItems,
 } = dispositionTwoSlice.actions

@@ -128,7 +128,8 @@ import {
     DidManagementListingWrapper,
     OrganisationHierarchy,
     ChannelManagementListingWrapper,
-    DispositionOneListingWrapper,
+    // EditChannelManagement,
+    // DispositionOneListingWrapper,
     SlotManagementListingWrapper,
     AddTapeManagementWrapper,
     TapeManagementListingWrapper,
@@ -142,14 +143,10 @@ import {
     EditChannelCategoryWrapper,
 } from './pages/index'
 import Auth from './pages/login/Auth'
-import AddDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/add/AddDispositionOneWrapper'
-import Inbound from './pages/media/Inbound/Inbound'
-import DispositionTwoListingWrapper from './pages/configuration/Configuration Screens/dispositionTwo/list/DispositionTwoListingWrapper'
-import AddDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/add/AddDispositionTwoWrapper'
-import EditDispositionTwoWrapper from './pages/configuration/Configuration Screens/dispositionTwo/edit/EditDispositionTwoWrapper'
-import EditDispositionOneWrapper from './pages/configuration/Configuration Screens/dispositionOne/edit/EditDispositionOneWrapper'
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
 import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
+import Disposition from './pages/disposition/Disposition'
+import Inbound from './pages/media/Inbound/Inbound'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -527,6 +524,7 @@ const PageRoutes = () => {
                         path="/configurations/location"
                         element={<Locations />}
                     />
+                    <Route path="/disposition" element={<Disposition />} />
                     <Route
                         path="/configurations/dealers-category"
                         element={<DealersCategoryListingWrapper />}
@@ -535,31 +533,7 @@ const PageRoutes = () => {
                         path="/configurations/language"
                         element={<LanguageListingWrapper />}
                     />
-                    <Route
-                        path="/configurations/disposition-one"
-                        element={<DispositionOneListingWrapper />}
-                    />
 
-                    <Route
-                        path="/configurations/disposition-one/add"
-                        element={<AddDispositionOneWrapper />}
-                    />
-                    <Route
-                        path="/configurations/disposition-one/:id"
-                        element={<EditDispositionOneWrapper />}
-                    />
-                    <Route
-                        path="/configurations/disposition-two"
-                        element={<DispositionTwoListingWrapper />}
-                    />
-                    <Route
-                        path="/configurations/disposition-two/add"
-                        element={<AddDispositionTwoWrapper />}
-                    />
-                    <Route
-                        path="/configurations/disposition-two/:id"
-                        element={<EditDispositionTwoWrapper />}
-                    />
                     <Route
                         path="configurations/hierarchy"
                         element={<OrganisationHierarchy />}
@@ -669,6 +643,7 @@ const PageRoutes = () => {
                         element={<AddArtistWrapper />}
                     />
                     <Route path="media/inbound/" element={<Inbound />} />
+                    {/* disposition route */}
                 </Routes>
             </BrowserRouter>
         </>

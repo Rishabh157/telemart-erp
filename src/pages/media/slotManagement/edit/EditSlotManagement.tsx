@@ -26,7 +26,7 @@ type Props = {
 }
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: ' Slot Management',
+        label: 'Slot Management',
         path: '/media/slot',
     },
     {
@@ -77,22 +77,6 @@ const EditSlotManagement = ({
         // }),
     }
 
-    const days = [
-        'MONDAY',
-        'TUESDAY',
-        'WEDNESDAY',
-        'THURSDAY',
-        'FRIDAY',
-        'SATURDAY',
-        'SUNDAY',
-    ]
-    const optionss = days.map((ele: any) => {
-        return {
-            label: ele,
-            value: ele,
-        }
-    })
-
     const options = ['FIXED', 'FLEXIBLE']
 
     return (
@@ -105,7 +89,7 @@ const EditSlotManagement = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Slot</ATMPageHeading>
+                    <ATMPageHeading> Update Slot</ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -154,29 +138,6 @@ const EditSlotManagement = ({
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
-                            <div className="">
-                                {/* <ATMMultiSelect
-                                    name="days"
-                                    value={selectedNames}
-                                    onSelect={(e) => setSelectedNames(e.target.value)}
-                                    required
-                                    label='Days'
-                                    options={days.map((week)=>week)}
-                                    placeholder="days"
-                                
-                                    
-                                /> */}
-                                <ATMSelectSearchable
-                                    name="days"
-                                    value={values.days}
-                                    onChange={(e) => {
-                                        setFieldValue('days', e)
-                                    }}
-                                    options={optionss}
-                                    label="Days"
-                                    isMulti
-                                />
-                            </div>
                             <div className="">
                                 <ATMRadioButton
                                     name="type"
@@ -262,7 +223,6 @@ const EditSlotManagement = ({
                                         value={values.slotStartTime || null}
                                         label="Startdate Time"
                                         onChange={(newValue) => {
-                                            console.log(newValue)
                                             setFieldValue(
                                                 'slotStartTime',
                                                 newValue

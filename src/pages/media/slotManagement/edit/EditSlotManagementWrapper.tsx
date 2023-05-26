@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
-import { array, object, string } from 'yup'
+import { object, string } from 'yup'
 // import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
@@ -32,12 +32,13 @@ export type FormInitialValues = {
     slotDate: string
     slotEndTime: string
     type: string
-    days: string[]
     tapeNameId: string
     channelNameId: string
     channelTrp: string
     remarks: string
     companyId: string
+    runYoutubeLink: string
+    runStatus: boolean
     run: boolean
     runStartTime: string
     runEndTime: string
@@ -77,7 +78,6 @@ const EditSlotManagementWrapper = () => {
         isLoading: smisLoading,
         isFetching: smisFetching,
     } = useGetSlotMangementByIdQuery(Id || '')
-    console.log(dataSmApi)
 
     useEffect(() => {
         if (!smisLoading && !smisFetching) {
@@ -161,13 +161,14 @@ const EditSlotManagementWrapper = () => {
         channelGroupId: selectedItems?.channelGroupId || '',
         slotStartTime: selectedItems?.slotStartTime || '',
         type: selectedItems?.type || '',
-        days: selectedItems?.days || [],
         tapeNameId: selectedItems?.tapeNameId || '',
         channelNameId: selectedItems?.channelNameId || '',
         slotDate: selectedItems?.slotDate || '',
         slotEndTime: selectedItems?.slotEndTime || '',
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.remarks || '',
+        runYoutubeLink: selectedItems?.runYoutubeLink || '',
+        runStatus: selectedItems?.runStatus || false,
         run: selectedItems?.run || false,
         runStartTime: selectedItems?.runStartTime || '',
         runEndTime: selectedItems?.runEndTime || '',
@@ -182,12 +183,11 @@ const EditSlotManagementWrapper = () => {
         slotStartTime: string().required('Required'),
         slotEndTime: string().required('Required'),
         type: string().required('Required'),
-        days: array().of(string().required('Required')),
         tapeNameId: string().required('Required'),
         channelNameId: string().required('Required'),
         slotDate: string().required('Required'),
         channelTrp: string().required('Required'),
-        remarks: string().required('Required'),
+        remarks: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -198,7 +198,6 @@ const EditSlotManagementWrapper = () => {
                     slotName: values?.slotName,
                     channelGroupId: values?.channelGroupId,
                     type: values?.type,
-                    days: values?.days,
                     tapeNameId: values?.tapeNameId,
                     channelNameId: values?.channelNameId,
                     channelTrp: values?.channelTrp,
@@ -206,6 +205,8 @@ const EditSlotManagementWrapper = () => {
                     slotDate: values?.slotDate,
                     slotStartTime: values?.slotStartTime,
                     slotEndTime: values?.slotEndTime,
+                    runYoutubeLink: values?.runYoutubeLink,
+                    runStatus: values?.runStatus,
                     run: values?.run,
                     runStartTime: values?.runStartTime,
                     runEndTime: values?.runEndTime,
