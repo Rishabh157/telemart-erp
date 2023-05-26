@@ -111,7 +111,7 @@ const DidManagementListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetPaginationDidQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['didNumber'],
+        params: ['didNumber', 'schemeLabel', 'channelLabel'],
         page: page,
         filterBy: [
             {
