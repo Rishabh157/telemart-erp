@@ -38,6 +38,7 @@ export type FormInitialValues = {
     channelTrp: string
     remarks: string
     companyId: string
+    runStatus:boolean
     run: boolean
     runStartTime: string
     runEndTime: string
@@ -168,6 +169,7 @@ const EditSlotManagementWrapper = () => {
         slotEndTime: selectedItems?.slotEndTime || '',
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.remarks || '',
+        runStatus: selectedItems?.runStatus || false,
         run: selectedItems?.run || false,
         runStartTime: selectedItems?.runStartTime || '',
         runEndTime: selectedItems?.runEndTime || '',
@@ -187,7 +189,7 @@ const EditSlotManagementWrapper = () => {
         channelNameId: string().required('Required'),
         slotDate: string().required('Required'),
         channelTrp: string().required('Required'),
-        remarks: string().required('Required'),
+        remarks: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -206,6 +208,7 @@ const EditSlotManagementWrapper = () => {
                     slotDate: values?.slotDate,
                     slotStartTime: values?.slotStartTime,
                     slotEndTime: values?.slotEndTime,
+                    runStatus: values?.runStatus,
                     run: values?.run,
                     runStartTime: values?.runStartTime,
                     runEndTime: values?.runEndTime,

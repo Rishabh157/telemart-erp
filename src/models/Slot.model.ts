@@ -73,6 +73,7 @@ export type UpdateSlotManagement = {
         slotDate: string
         slotStartTime: string
         slotEndTime: string
+        runStatus: boolean
         run: boolean
         runStartTime: string
         runEndTime: string

@@ -24,6 +24,7 @@ type FormInitialValues = {
     slotDate: string
     slotStartTime: string
     slotEndTime: string
+    runStatus: boolean
     run: boolean
     runStartTime: string
     runEndTime: string
@@ -73,6 +74,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         slotDate: selectedItems?.slotDate || '',
         slotStartTime: selectedItems?.slotStartTime || '',
         slotEndTime: selectedItems?.slotEndTime || '',
+        runStatus: selectedItems?.runStatus || false,
         run: selectedItems?.run || false,
         runStartTime: selectedItems?.runStartTime || '',
         runEndTime: selectedItems?.runEndTime || '',
@@ -80,14 +82,19 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         companyId: selectedItems?.companyId || '',
     }
     const validationSchema = object({
-        run: boolean().required('Required'),
-        runStartTime: string().required('Required'),
-        runEndTime: string().required('Required'),
+        run: boolean(),
+        runStartTime: string(),
+        runEndTime: string(),
         runRemark: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        var newRunStatus: boolean = false;
+        if(values?.runStartTime !== "" && values?.runEndTime !== ""){
+             newRunStatus = true;
+        }
+        //console.log(newRunStatus);
         setTimeout(() => {
             updateSlot({
                 body: {
@@ -102,6 +109,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     slotDate: values?.slotDate,
                     slotStartTime: values?.slotStartTime,
                     slotEndTime: values?.slotEndTime,
+                    runStatus: newRunStatus,
                     run: values?.run,
                     runStartTime: values?.runStartTime,
                     runEndTime: values?.runEndTime,

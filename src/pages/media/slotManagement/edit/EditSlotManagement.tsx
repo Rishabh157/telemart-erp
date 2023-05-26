@@ -26,7 +26,7 @@ type Props = {
 }
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: ' Slot Management',
+        label: 'Slot Management',
         path: '/media/slot',
     },
     {
@@ -105,7 +105,7 @@ const EditSlotManagement = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Slot</ATMPageHeading>
+                    <ATMPageHeading> Update Slot</ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
