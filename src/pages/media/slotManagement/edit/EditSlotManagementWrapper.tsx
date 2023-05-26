@@ -38,7 +38,7 @@ export type FormInitialValues = {
     channelTrp: string
     remarks: string
     companyId: string
-    runStatus:boolean
+    runStatus: boolean
     run: boolean
     runStartTime: string
     runEndTime: string

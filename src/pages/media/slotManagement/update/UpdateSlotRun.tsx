@@ -15,25 +15,23 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
             </div>
             <div className="grow py-4  px-3 ">
                 <div className="grid grid-cols-2 gap-4">
-                    
                     <div className="">
                         <ATMTimePicker
                             name="runStartTime"
                             value={values.runStartTime}
-                            label="Start Time"                            
+                            label="Start Time"
                             size="medium"
                             onChange={(newValue) => {
                                 setFieldValue('runStartTime', newValue)
                             }}
                         />
                     </div>
-                    
 
                     <div className="">
                         <ATMTimePicker
                             name="runEndTime"
                             value={values.runEndTime}
-                            label="End Time"                            
+                            label="End Time"
                             size="medium"
                             onChange={(newValue) => {
                                 setFieldValue('runEndTime', newValue)
@@ -45,13 +43,12 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                         <ATMSwitchButton
                             name="run"
                             value={values.run}
-                            label="Status"                           
-                            onChange={(value: any) => {                                
+                            label="Status"
+                            onChange={(value: any) => {
                                 setFieldValue('run', value)
                             }}
                         />
                     </div>
-                    
 
                     <div className="-mt-4">
                         <ATMTextArea
@@ -63,7 +60,6 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             }
                         />
                     </div>
-                    
                 </div>
             </div>
             <div className="flex justify-end">

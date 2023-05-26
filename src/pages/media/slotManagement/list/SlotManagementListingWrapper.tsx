@@ -4,8 +4,8 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SlotManagementListResponse } from 'src/models/Slot.model'
 import SlotManagementListing from './SlotManagementListing'
 import { useDispatch, useSelector } from 'react-redux'
-import {MdDoneOutline } from 'react-icons/md'
-import {AiOutlineClose} from 'react-icons/ai'
+import { MdDoneOutline } from 'react-icons/md'
+import { AiOutlineClose } from 'react-icons/ai'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";
 import {
@@ -67,8 +67,6 @@ const SlotManagementListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
- 
-
     const columns: columnTypes[] = [
         {
             field: 'slotName',
@@ -93,7 +91,7 @@ const SlotManagementListingWrapper = () => {
             renderCell: (row: SlotManagementListResponse) => (
                 <span> {row.channelLabel} </span>
             ),
-        },        
+        },
         {
             field: 'tapeLabel',
             headerName: 'Tape Name',
@@ -123,28 +121,35 @@ const SlotManagementListingWrapper = () => {
             headerName: 'Slot Run Status',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="relative">               
-                        
-                     { (moment(row?.slotStartTime).format('HH:MM:SS')) < (moment(new Date()).format('hh:MM:SS')) && (moment(new Date()).format('hh:MM:SS')) < (moment(row?.slotEndTime).format('HH:MM:SS'))? (
-                                    
+                <div className="relative">
+                    {moment(row?.slotStartTime).format('HH:MM:SS') <
+                        moment(new Date()).format('hh:MM:SS') &&
+                    moment(new Date()).format('hh:MM:SS') <
+                        moment(row?.slotEndTime).format('HH:MM:SS') ? (
                         <button
-                        disabled={true}                        
-                        className="text-slate-600 font-bold m-1 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full border border-green-500"
-                    >
-                        { (row.runStatus)?(<MdDoneOutline />) : (<AiOutlineClose/>) }                        
-                        
-                    </button>
-                    ):(
+                            disabled={true}
+                            className="text-slate-600 font-bold m-1 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full border border-green-500"
+                        >
+                            {row.runStatus ? (
+                                <MdDoneOutline />
+                            ) : (
+                                <AiOutlineClose />
+                            )}
+                        </button>
+                    ) : (
                         <button
-                        onClick={(e) => {
-                            setRunState(row._id)                            
-                            setIsOpenDialog(true)
-                        }}
-                        className="text-slate-600 font-bold m-1 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full border border-green-500"
-                    >
-                        { (row.runStatus)?(<MdDoneOutline />) : (<AiOutlineClose/>) }                        
-                        
-                    </button>
+                            onClick={(e) => {
+                                setRunState(row._id)
+                                setIsOpenDialog(true)
+                            }}
+                            className="text-slate-600 font-bold m-1 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full border border-green-500"
+                        >
+                            {row.runStatus ? (
+                                <MdDoneOutline />
+                            ) : (
+                                <AiOutlineClose />
+                            )}
+                        </button>
                     )}
                 </div>
             ),

@@ -90,9 +90,9 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        var newRunStatus: boolean = false;
-        if(values?.runStartTime !== "" && values?.runEndTime !== ""){
-             newRunStatus = true;
+        var newRunStatus: boolean = false
+        if (values?.runStartTime !== '' && values?.runEndTime !== '') {
+            newRunStatus = true
         }
         //console.log(newRunStatus);
         setTimeout(() => {
