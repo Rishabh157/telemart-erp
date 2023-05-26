@@ -1,5 +1,6 @@
 import React from 'react'
 import { BiFilter, BiSearch } from 'react-icons/bi'
+import { IoReload } from 'react-icons/io5'
 
 type Props = {
     rowsPerPage: number
@@ -12,9 +13,11 @@ type Props = {
     isFilter?: boolean
     onFilterClick?: () => void
     onSearch?: (newValue: string) => void
+    isRefresh?: boolean
 }
 
 const ATMTableHeader = ({
+    isRefresh = false,
     rowCount,
     rows,
     rowsPerPage,
@@ -48,6 +51,14 @@ const ATMTableHeader = ({
                         className="bg-white shadow px-2 flex items-center rounded border"
                     >
                         <BiFilter className="text-2xl text-slate-600" />
+                    </button>
+                )}
+                {isRefresh && (
+                    <button
+                        onClick={() => window.location.reload()}
+                        className="bg-white shadow px-2 flex items-center rounded border"
+                    >
+                        <IoReload className="text-2xl text-slate-600" />
                     </button>
                 )}
             </div>

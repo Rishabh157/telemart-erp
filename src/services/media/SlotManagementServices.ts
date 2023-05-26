@@ -40,6 +40,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
         deleteSlotMangement: builder.mutation({
             invalidatesTags: ['slot'],
             query: (id: string) => ({

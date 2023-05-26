@@ -54,6 +54,7 @@ const ATMDatePicker = ({
                                 size="small"
                                 fullWidth
                                 className="bg-white"
+                                error={value === '' ? false : undefined}
                             />
                         )}
                     />
