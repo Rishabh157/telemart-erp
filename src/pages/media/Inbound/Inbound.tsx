@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Button, Divider } from '@mui/material'
 import React from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ChannelCategoryListing from '../channelCategory/list/ChannelCategoryListing'
@@ -7,540 +7,333 @@ import ChannelCategoryListing from '../channelCategory/list/ChannelCategoryListi
 const Inbound = () => {
     return (
         <>
-            <div className="container-fluid flex gap-4">
-                <div className="flex gap-4 px-5 w-full">
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                </div>
-                <div className='border-l-2 px-4'>
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="col-span-2">Title</div>
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        className="py-2"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                    <ATMTextField
-                        label="Did Number"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        placeholder="Did Number"
-                        extraClassField="w-full"
-                    />
-                </div>
-                </div>
-            </div>
+            <div className="container-fluid p-5 flex flex-col gap-4">
+                <div className="h-fit w-full flex gap-5">
+                    <div className="w-3/5 flex flex-col gap-4">
+                       
+                        <div>
+                            <p className="bg-gray-50 p-2 rounded-md text-20 col-span-4 mb-2">
+                                Gerneral informtion
+                            </p>
+                            <div className="flex gap-4">
+                                <div className="flex flex-col gap-1 w-full">
+                                    <ATMTextField
+                                    name=''
+                                    label='DID NO'
+                                    size='xs'
+                                    className='-mt-0  shadow bg-white rounded'
+                                    onChange={()=>{}}
+                                    value=''
+                                    
+                                    />
+                                    {/* <p>title</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    /> */}
+                                </div>
 
-            <div className="relative h-[100vh-10px] w-full  grid grid-rows-12 border-black p-3">
-                <div className=" h-[60vh-20px] w-full row-start-1 row-end-[9.5]  grid grid-rows-12 ">
-                    {/* <div className="row-sapn-1 h-[10vh-50px] grid grid-cols-4 gap-x-1  pb-2 ">
-                        <div className="-mt-4">
-                            <ATMTextField
-                                label="Did Number"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                                placeholder="Did Number"
-                                extraClassField="-mt-1"
-                            />
-                        </div>
-                        <div className="-mt-4">
-                            <ATMTextField
-                                label="In /OutBound"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                extraClassField="-mt-1"
-                                placeholder="In /outbound"
-                                name=""
-                            />
-                        </div>
-                        <div className="-mt-4">
-                            <ATMTextField
-                                label="Caller Number"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                className="h-[2.5vh]"
-                                name=""
-                                extraClassField="-mt-1"
-                            />
-                        </div>
-                        <div className="-mt-4">
-                            <ATMTextField
-                                label="Mobile No"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                className="h-[2.5vh]"
-                                name=""
-                                extraClassField="-mt-1"
-                            />
-                        </div>
-                    </div> */}
-                    <div className="row-span-11 h-[50vh-50px] grid grid-cols-3 gap-4 border border-purple-200 py-2 px-1 ">
-                        <div className="col-span-2 border border-pink-300 p-2 grid grid-rows-12 h-[50vh-5px]">
-                            <div className="  h-[18vh]  row-sapn-5 row-start-1 row-end-6 grid grid-rows-3 ">
-                                <div className=" h-[4vh] row-sapn-1 mt-1 flex gap-x-1">
-                                    <div className=" -mt-1 test-blue-200 w-1/4 ">
-                                        search By scheme
-                                    </div>
-                                    <div className="-mt-6 w-3/4 ">
-                                        <ATMTextField
-                                            size="xs"
-                                            label=""
-                                            value={''}
-                                            onChange={() => {}}
-                                            name=""
-                                            extraClassField=""
-                                        />
-                                    </div>
+                                <div className="flex flex-col gap-1 w-full">
+                                <ATMTextField
+                                    name=''
+                                    label='IN /OutBound'
+                                    size='xs'
+                                    className='-mt-0  shadow bg-white rounded'
+                                    onChange={()=>{}}
+                                    value=''
+                                    
+                                    />
+                                    {/* <p>title</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    /> */}
                                 </div>
-                                <div className="  flex justify-around row-span-2 border border-purple-400 ">
-                                    <div>Scheme name</div>
-                                    <div>price</div>
-                                </div>
-                            </div>
 
-                            <div className="h-[32vh] row-start-7 row-end-12 ">
-                                <div className=" grid grid-cols-3 gap-1 ">
-                                    <ATMTextField
-                                        extraClassField="h-[2.5vh]"
-                                        label="Deliver Charge"
-                                        value={''}
-                                        onChange={() => {}}
-                                        size="xs"
-                                        className="h-[2.5vh]"
-                                        name=""
+                                <div className="flex flex-col gap-1 w-full">
+                                <ATMTextField
+                                    name=''
+                                    label='In Comming Caller No' 
+                                    size='xs'
+                                    className='-mt-0  shadow bg-white rounded'
+                                    onChange={()=>{}}
+                                    value=''
+                                    
                                     />
-                                    <ATMTextField
-                                        extraClassField=" h-[3vh]"
-                                        label="Discount"
-                                        value={''}
-                                        onChange={() => {}}
-                                        size="xs"
-                                        className="h-[2.5vh]"
-                                        name=""
-                                    />
-                                    <ATMTextField
-                                        extraClassField=" h-[3vh]"
-                                        label="Charge"
-                                        value={''}
-                                        onChange={() => {}}
-                                        size="xs"
-                                        className="h-[2.5vh]"
-                                        name=""
-                                    />
+                                    {/* <p>title</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    /> */}
                                 </div>
-                                <div className=" grid grid-cols-3 gap-1 mt-10">
-                                    <div className="-mt-4">
-                                        <ATMTextField
-                                            extraClassField=""
-                                            label="Country"
-                                            value={''}
-                                            onChange={() => {}}
-                                            size="xs"
-                                            // className="h-[2.5vh]"
-                                            name=""
-                                        />
-                                    </div>
-                                    <div className="-mt-4">
-                                        <ATMTextField
-                                            extraClassField=""
-                                            label="state"
-                                            value={''}
-                                            onChange={() => {}}
-                                            size="xs"
-                                            // className="h-[2.5vh]"
-                                            name=""
-                                        />
-                                    </div>
-                                    <div className="-mt-4">
-                                        <ATMTextField
-                                            extraClassField=""
-                                            label="city"
-                                            value={''}
-                                            onChange={() => {}}
-                                            size="xs"
-                                            // className="h-[2.5vh]"
-                                            name=""
-                                        />
-                                    </div>
-                                    <div className="-mt-4">
-                                        <ATMTextField
-                                            extraClassField=" "
-                                            label="Tehs"
-                                            value={''}
-                                            onChange={() => {}}
-                                            size="xs"
-                                            // className="h-[2.5vh]"
-                                            name=""
-                                        />
-                                    </div>
-                                    <div className="-mt-4">
-                                        <ATMTextField
-                                            // extraClassField=" h-[3vh]"
-                                            label="pincode"
-                                            value={''}
-                                            onChange={() => {}}
-                                            size="xs"
-                                            // className="h-[2.5vh]"
-                                            name=""
-                                        />
-                                    </div>
-                                    <div className="-mt-4">
-                                        <ATMTextField
-                                            // extraClassField=" h-[3vh]"
-                                            label="Area"
-                                            value={''}
-                                            onChange={() => {}}
-                                            size="xs"
-                                            // className="h-[2.5vh]"
-                                            name=""
-                                        />
-                                    </div>
-                                </div>
-                                <div className=" grid grid-cols-2 gap-2 ">
-                                    <div className="mt-2">
-                                        Expected Delivery time :
-                                    </div>
-                                    <div className="mt-2">
-                                        Profile Delivery By :
-                                    </div>
-                                    <div className="mt-2">
-                                        Complaint Detail :
-                                    </div>
-                                    <div className="mt-2">Complain NO :</div>
+
+                                <div className="flex flex-col gap-1 w-full">
+                                <ATMTextField
+                                    name=''
+                                    label='Mobile No'
+                                    onChange={()=>{}}
+                                    value=''
+                                    size='xs'
+                                    className='-mt-0  shadow bg-white rounded'
+                                    
+                                    />
+                                    {/* <p>title</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    /> */}
                                 </div>
                             </div>
                         </div>
-                        <div className=" grid grid-cols-2 gap-1 -mt-4 pb-3 col-span-1 h-[50vh-5px]">
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Agent Name"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="name"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Address"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Age"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Relation"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="City"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Landmark"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Alternative No"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="WhatsApp No"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />{' '}
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Gender"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Prepaid"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Email Id"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Channel"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
-                            <ATMTextField
-                                extraClassField="h-[2.5vh]"
-                                label="Remark"
-                                value={''}
-                                onChange={() => {}}
-                                size="xs"
-                                // className="h-[2.5vh]"
-                                name=""
-                            />
+
+                        {/* //Search by schema */}
+                        <div className="bg-blue-50 rounded-xl px-3 py-2">
+                            <div className="flex gap-4">
+                                <div className="flex flex-col gap-2 w-full">
+                                    <p className="">Search by schema</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-fit border border-gray-300"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <Divider />
+
+                        {/* //Delivery information */}
+                        <div className="">
+                            <p className="bg-gray-50 p-2 rounded-md text-20 col-span-4 mb-2">
+                                Address informtion
+                            </p>
+
+                            <div className="grid grid-cols-4 gap-4">
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p>Delivery charges</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    />
+                                </div>
+
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p>Discount</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    />
+                                </div>
+
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p>total</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    />
+                                </div>
+
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p>country</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p>state</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    />
+                                </div>
+
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p>city</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    />
+                                </div>
+
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p>tehsil</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    />
+                                </div>
+
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p>Pincode</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-1 w-full">
+                                    <p>Area</p>
+                                    <input
+                                        placeholder="input area"
+                                        className="px-3 py-.5 rounded w-full border border-gray-300"
+                                    />
+                                </div>
+                                {/* <div className="grid grid-cols-4 gap-4 col-span-3"> */}
+                                    <div className="flex flex-col gap-1 w-full">
+                                        <p>Expected delivery date</p>
+                                        <p className="font-bold">text</p>
+                                    </div>
+
+                                    <div className="flex flex-col gap-1 w-full">
+                                        <p>Profile delivered by</p>
+                                        <p className="font-bold">text</p>
+                                    </div>
+
+                                    <div className="flex flex-col gap-1 w-full">
+                                        <p>Complaint details</p>
+                                        <p className="text-red-500 font-bold">
+                                            NO
+                                        </p>
+                                    </div>
+                                    <div className="flex flex-col gap-1 w-full">
+                                        <p>Complaint No.</p>
+                                        <p className="text-red font-bold">
+                                            1321354894518
+                                        </p>
+                                    </div>
+                                {/* </div> */}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* //Address information */}
+                    <div className="w-2/5 bg-white flex flex-col gap-2 pl-4 border-l">
+                        <p className="bg-gray-50 p-2 rounded-md text-20">
+                            Personal informtion
+                        </p>
+                        <div className="grid grid-cols-3 gap-4">
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>Agent name</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>Name</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>age</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full col-span-3">
+                                <p>Address</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>relation</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>city</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>landmark</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>whatsapp no.</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>gender</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>prepaid</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>email</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full">
+                                <p>channel</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1 w-full col-span-3">
+                                <p>other remark</p>
+                                <input
+                                    placeholder="input area"
+                                    className="px-3 py-.5 rounded w-full border border-gray-300"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className=" h-[10vh] w-full row-start-[9.9] row-end-10 mt-1  flex justify-around  border border-purple-200 ">
-                    <ATMTextField
-                        label="Disposition One"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        extraClassField="-mt-1 h-[3vh]"
-                    />
-                    <ATMTextField
-                        label="Disposition Two"
-                        value={''}
-                        onChange={() => {}}
-                        size="xs"
-                        // className="h-[2.5vh]"
-                        name=""
-                        extraClassField="-mt-1 h-[3vh]"
-                    />
 
-                    <div className="flex justify-center text-blue items-center">
-                        <a
-                            href="https://google.com"
-                            className="text-blue underline"
-                        >
-                            {' '}
-                            Free prediction
-                        </a>
+                <Divider />
+
+                <div>
+                    <div className="flex gap-4 items-center">
+                        <div className="flex flex-col gap-1 w-fit">
+                            <p>Disposition Level 1</p>
+                            <input
+                                placeholder="input area"
+                                className="px-3 py-.5 rounded w-full border border-gray-300"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-1 w-fit">
+                            <p>Disposition Level 2</p>
+                            <input
+                                placeholder="input area"
+                                className="px-3 py-.5 rounded w-full border border-gray-300"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-1 w-fit">
+                            <p>Free Prediction</p>
+                        </div>
+
+                        <div className="flex px-4 py-1 w-fit bg-blue-900 text-white justify-center rounded-md items-center">
+                            Save
+                        </div>
                     </div>
-                    <div className="p-5 w-1/5 flex justify-center items-center">
-                        <Button
-                            fullWidth
-                            className="p-2"
-                            size="medium"
-                            onChange={() => {}}
-                            type="submit"
-                            variant="outlined"
-                        >
-                            save
-                        </Button>
-                    </div>
-                </div>
-                <div className=" h-[26vh]  row-start-10 row-end-12 w-full  ">
-                    <ChannelCategoryListing
-                        isHeader={false}
-                        columns={[]}
-                        rows={[]}
-                    />
                 </div>
             </div>
         </>
