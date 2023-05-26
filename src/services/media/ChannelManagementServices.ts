@@ -24,6 +24,14 @@ export const channelManagementApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        //***** GET BY ID *****/
+        getChannelById: builder.query({
+            providesTags: ['channel'],
+            query: (id) => ({
+                url: `/channel-master/${id}`,
+                method: 'GET',
+            }),
+        }),
         //***** ADD *****/
         addChannel: builder.mutation({
             invalidatesTags: ['channel'],
@@ -43,6 +51,14 @@ export const channelManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        //***** DELETE *****/
+        deleteChannel: builder.mutation({
+            invalidatesTags: ['channel'],
+            query: (id) => ({
+                url: `/channel-master/${id}`,
+                method: 'DELETE',
+            }),
+        }),
     }),
 })
 
@@ -51,4 +67,6 @@ export const {
     useGetPaginationchannelQuery,
     useUpdateChannelMutation,
     useGetAllChannelQuery,
+    useGetChannelByIdQuery,
+    useDeleteChannelMutation,
 } = channelManagementApi

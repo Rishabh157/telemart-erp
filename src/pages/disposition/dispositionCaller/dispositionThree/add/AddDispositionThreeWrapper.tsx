@@ -29,7 +29,7 @@ const AddDispositionThreeWrappper = ({ onClose }: Props) => {
         dispositionName: '',
     }
     const validationSchema = object({
-        dispositionName: string().required('Country Name is required'),
+        dispositionName: string().required('Disposition-Three name is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)

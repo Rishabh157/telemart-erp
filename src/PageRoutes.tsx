@@ -10,6 +10,7 @@ import {
     BarcodeGenerator,
     CompetitorManagementListingWrapper,
     EditArtistWrapper,
+    EditChannelManagementWrapper,
     EditCompetitorWraper,
     EditDidManagementWrapper,
     EditPurchaseOrderWrapper,
@@ -127,7 +128,8 @@ import {
     DidManagementListingWrapper,
     OrganisationHierarchy,
     ChannelManagementListingWrapper,
-    EditChannelManagement,
+    // EditChannelManagement,
+    // DispositionOneListingWrapper,
     SlotManagementListingWrapper,
     AddTapeManagementWrapper,
     TapeManagementListingWrapper,
@@ -571,9 +573,10 @@ const PageRoutes = () => {
                         element={<AddChannelManagementWrapper />}
                     />
                     <Route
-                        path="media/channel/edit"
-                        element={<EditChannelManagement />}
+                        path="media/channel/:id"
+                        element={<EditChannelManagementWrapper />}
                     />
+
                     <Route
                         path="media/tape"
                         element={<TapeManagementListingWrapper />}

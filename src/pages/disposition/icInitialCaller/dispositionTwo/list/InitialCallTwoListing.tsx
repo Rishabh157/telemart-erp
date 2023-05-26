@@ -19,10 +19,10 @@ const InitialCallTwoListing = ({initialCallerTwo}:Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
     const {selectedInitialOne}:any=useSelector((state:RootState)=>state.initialCallerOne)
-    const {selectedInitialCallerTwo,searchValue}:any=useSelector((state:RootState)=>state.initialCallerTwo)
+    const {selectedInitialCallerTwo, searchValue}:any=useSelector((state:RootState)=>state.initialCallerTwo)
     //const {selectedInitialCallerThree}:any=useSelector((state:RootState)=>state.initialCallerTwo)
    
-
+console.log(selectedInitialCallerTwo)
     function handleDispositionOneClick(newValue: any)
     {
         if(selectedInitialCallerTwo?.value===newValue.value)
@@ -32,7 +32,7 @@ const InitialCallTwoListing = ({initialCallerTwo}:Props) => {
             dispatch(setFilterValue(""))
         }
         else{
-            dispatch(setSelectedDispostionThree(newValue))
+            dispatch(setSelectedInitialCallerTwo(newValue))
             dispatch(setFilterValue(newValue.value))
         }
     }

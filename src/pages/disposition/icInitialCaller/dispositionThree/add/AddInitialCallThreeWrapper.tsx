@@ -12,7 +12,7 @@ type Props = {
 }
 
 export type FormInitialValues = {
-    initailCallName: string
+    initialCallName: string
 }
 const AddInitialCallThreeWrappper = ({ onClose }: Props) => {
     const [addIntialCallThree] = useAddInitialCallerThreeMutation()
@@ -22,27 +22,28 @@ const AddInitialCallThreeWrappper = ({ onClose }: Props) => {
         (state: RootState) => state?.initialCallerOne
     )
     const { selectedInitialCallerTwo }: any = useSelector(
-        (state: RootState) => state?.dispositionTwo
+        (state: RootState) => state?.initialCallerTwo
     )
 
+
     const initialValues: FormInitialValues = {
-        initailCallName: '',
+        initialCallName: '',
     }
     const validationSchema = object({
-        initailCallName: string().required('Country Name is required'),
+        initialCallName: string().required('InitialCaller-three name is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
             addIntialCallThree({
-                initailCallName: values.initailCallName,
+                initialCallName: values.initialCallName,
                 initialCallOneId: selectedInitialOne?.value || '',
-                initialCallTwoId: selectedInitialCallerTwo?.values || '',
+                initialCallTwoId: selectedInitialCallerTwo?.value || '',
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Disposition-Three added successfully!')
+                        showToast('success', 'InitialCaller-Three added successfully!')
                         onClose()
                     } else {
                         showToast('error', res?.data?.message)

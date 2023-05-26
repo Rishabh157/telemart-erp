@@ -12,11 +12,13 @@ const InitialCallThreeListingWrapper = () => {
 
     const initialCallerThree=items?.map((ele:any)=>{
         return {
-            label:ele.dispositionName,
+            label:ele.initialCallName,
             value:ele._id
         }
     })
+
     const { data } = useGetAllInitialCallerThreeQuery('')
+   // console.log(data)
 
     useEffect(()=>{
         dispatch(setItems(data?.data || []))

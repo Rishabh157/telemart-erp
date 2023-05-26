@@ -1,15 +1,22 @@
 export type SlotManagementListResponse = {
     slotName: string
-    groupNameLabel: string
-    startDateTime: string
+    channelGroupId: string
     type: string
     days: string[]
-    tapeName: string
-    tapeLabel: string
-    channelLabel: string
-    endDateTime: string
+    tapeNameId: String
+    channelNameId: string
+    slotStartTime: string
+    slotEndTime: string
     channelTrp: string
     remarks: string
+    run: boolean
+    runStartTime: string
+    runEndTime: string
+    runRemark: string
+    groupNameLabel: string
+    tapeLabel: string
+    channelLabel: string
+    companyId: string
     _id: string
     is_active: boolean
     is_deleted: boolean
@@ -34,30 +41,42 @@ export type SlotManagementListResponse = {
 
 export type AddSlotManagement = {
     slotName: string
-    channelGroup: string
-    startDateTime: string
+    channelGroupId: string
     type: string
     days: string[]
-    tapeName: String
-    channelName: string
-    endDateTime: string
+    tapeNameId: String
+    channelNameId: string
     channelTrp: string
     remarks: string
+    channelSlots: {
+        date: string
+        startTime: string
+        endTime: string
+    }[]
+    run: boolean
+    runStartTime: string
+    runEndTime: string
+    runRemark: string
     companyId: string
 }
 
 export type UpdateSlotManagement = {
     body: {
         slotName: string
-        channelGroup: string
-        startDateTime: string
+        channelGroupId: string
         type: string
         days: string[]
-        tapeName: String
-        channelName: string
-        endDateTime: string
+        tapeNameId: String
+        channelNameId: string
         channelTrp: string
         remarks: string
+        slotDate: string
+        slotStartTime: string
+        slotEndTime: string
+        run: boolean
+        runStartTime: string
+        runEndTime: string
+        runRemark: string
         companyId: string
     }
     id: string

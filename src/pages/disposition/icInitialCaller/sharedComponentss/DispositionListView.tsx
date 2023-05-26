@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { setSelectedInitialCallerThree } from 'src/redux/slices/configuration/initialCallerThreeSlice'
 import { RootState } from 'src/redux/store'
 type Props = {
     listHeading: string
@@ -12,7 +13,7 @@ type Props = {
     disabled: boolean
 }
 
-const DispositionListViews = ({
+const   DispositionListViews = ({
     listHeading,
     onAddClick,
     listData,
@@ -33,6 +34,9 @@ const DispositionListViews = ({
     const { selectedInitialCallerTwo }: any = useSelector(
         (state: RootState) => state.initialCallerTwo
     )
+    // const {selectedInitialCallerThree}:any = useSelector(
+    //     (state: RootState) => state.initialCallerThree
+    // )
 
     return (
         <div className="border h-full w-full flex flex-col gap-1 rounded bg-white shadow-lg ">
@@ -75,7 +79,7 @@ const DispositionListViews = ({
                                 listItem.value !== undefined &&
                                 (selectedInitialOne?.value ===
                                         listItem.value ||
-                                    selectedInitialCallerTwo?.value === listItem.value)
+                                    selectedInitialCallerTwo?.value === listItem.value )
                                     ? 'bg-gray-300'
                                     : ''
                             }`}

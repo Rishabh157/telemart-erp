@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate, useParams } from 'react-router-dom'
-import { array, object, string } from 'yup'
+import { object, string, array } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
@@ -36,7 +36,6 @@ export type FormInitialValues = {
     hour: string
     minute: string
     second: string
-    youtubeLink: string
 }
 
 const EditTapeManagementWrapper = () => {
@@ -126,9 +125,13 @@ const EditTapeManagementWrapper = () => {
         }
     }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
 
-    //console.log(selectedItem, "selected")
+    const artist = selectedItem?.artistId.map((ele: any) => {
+        return ele._id
+    })
+    //console.log(artist)
     const newDuration = selectedItem?.duration?.split(':')
 
+    //console.log(newDuration)
 
     const initialValues: FormInitialValues = {
         tapeName: selectedItem?.tapeName || '',
@@ -137,19 +140,17 @@ const EditTapeManagementWrapper = () => {
         schemeId: selectedItem?.schemeId || '',
         languageId: selectedItem?.languageId || '',
         duration: selectedItem?.duration || '',
-        artistId: selectedItem?.artistId || [''],
-
+        artistId: artist || [],
         remarks: selectedItem?.remarks || '',
         hour: newDuration ? newDuration[0] : '0',
         minute: newDuration ? newDuration[1] : '00',
         second: newDuration ? newDuration[2] : '00',
-        youtubeLink: selectedItem?.youtubeLink || '',
         companyId: selectedItem?.companyId || userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        tapeName: string(),
+        tapeName: string().required('Required'),
         tapeType: string().required('Required'),
         schemeId: string(),
         channelGroupId: string(),
@@ -159,24 +160,23 @@ const EditTapeManagementWrapper = () => {
         second: string().required('Required'),
         artistId: array().of(string().required('Required')),
         remarks: string(),
-        youtubeLink: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        //console.log(values.artistId)
         let duration = `${values.hour}:${values.minute}:${values.second}`
         setTimeout(() => {
             updateTape({
                 body: {
                     tapeName: values.tapeName,
-                    channelGroupId: values.channelGroupId,
+                    channelGroupId: values.channelGroupId || null,
                     tapeType: values.tapeType,
-                    schemeId: values.schemeId,
+                    schemeId: values.schemeId || null,
                     languageId: values.languageId,
                     duration: duration,
                     artistId: values?.artistId,
-                    remarks: values.remarks,
-                    youtubeLink: values.youtubeLink,
+                    remarks: values.remarks || '',
                     companyId: values.companyId || '',
                 },
                 id: id || '',

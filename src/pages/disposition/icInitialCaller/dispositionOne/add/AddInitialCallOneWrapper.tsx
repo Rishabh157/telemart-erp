@@ -23,7 +23,7 @@ const AddInitialCallOneWrapper = ({ onClose }: Props) => {
         initailCallName: '',
     }
     const validationSchema = object({
-        initailCallName: string().required('Country Name is required'),
+        initailCallName: string().required('InitialCaller-One Name is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)

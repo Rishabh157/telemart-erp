@@ -11,26 +11,27 @@ const InitialCallTwoListingWrapper = () => {
     const { items }: any = useSelector(
         (state: RootState) => state.initialCallerTwo
     )
-    
+
     const { searchValue, filterValue }: any = useSelector(
-        (state: RootState) => state.dispositionTwo
+        (state: RootState) => state.initialCallerTwo
     )
   
 
     const initialCallerTwo = items?.map((ele: any) => {
         return {
-            label: ele.initailCallName,
+            label: ele.initialCallName,
             value: ele._id,
         }
     })
+    console.log(initialCallerTwo)
     const { data} = useGetinitialCallerTwoQuery({
         limit: 100,
         searchValue: searchValue,
-        params: ['initailCallName', 'initailCallOneId'],
+        params: ['initialCallName',"initialCallOneId"],
         page: 0,
         filterBy: [
             {
-                fieldName: 'initailCallOneId',
+                fieldName: 'initialCallOneId',
                 value: filterValue ? filterValue : [],
             },
         ],

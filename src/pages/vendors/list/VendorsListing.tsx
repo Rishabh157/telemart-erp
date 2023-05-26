@@ -16,9 +16,10 @@ import FilterDialogWarpper from '../components/FilterDialog/FilterDialogWarpper'
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const VendorsListing = ({ columns, rows }: Props) => {
+const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const vendorState: any = useSelector((state: RootState) => state.vendor)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
@@ -72,6 +73,7 @@ const VendorsListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
+                        setShowDropdown={setShowDropdown}
                         // onRowClick={(row: VendorsListResponse) =>
                         //   navigate(`${row._id}/general-information`)
                         // }

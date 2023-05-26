@@ -141,7 +141,11 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
 
     return (
         <div className="px-2 h-full shadow rounded border ">
-            <SaleOrderListing columns={columns} rows={items} />
+            <SaleOrderListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </div>
     )
 }

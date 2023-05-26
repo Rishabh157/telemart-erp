@@ -29,12 +29,12 @@ const AddInitialCallThreeDialog = ({ onClose, formikProps, apiStatus }: Props) =
                     <div>
                         <div>
                             <ATMTextField
-                                name="initailCallName"
-                                value={values.initailCallName}
+                                name="initialCallName"
+                                value={values.initialCallName}
                                 placeholder="Enter a InitialCall Three name"
                                 label="Disposition  name"
                                 onChange={(e) =>
-                                    setFieldValue('initailCallName', e.target.value)
+                                    setFieldValue('initialCallName', e.target.value)
                                 }
                             />
                         </div>

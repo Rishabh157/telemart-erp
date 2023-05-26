@@ -2,79 +2,92 @@ import React, { useState } from 'react'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
-import { AiOutlineSetting } from 'react-icons/ai'
-import { BiChevronsLeft } from 'react-icons/bi'
+import {
+    BiChevronsLeft,
+    BiCategory,
+    BiCheckboxSquare,
+    BiCategoryAlt,
+} from 'react-icons/bi'
+import { MdOutlineCategory } from 'react-icons/md'
+import { BsBox, BsBoxes, BsBoxFill } from 'react-icons/bs'
+import { TbAppsFilled } from 'react-icons/tb'
+import { FaObjectGroup } from 'react-icons/fa'
+import { HiOutlineReceiptTax } from 'react-icons/hi'
+import { CgOrganisation } from 'react-icons/cg'
+import { CiBarcode, CiLocationOn } from 'react-icons/ci'
+import { GrLanguage } from 'react-icons/gr'
+import { TbBinaryTree2 } from 'react-icons/tb'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const configurationNavigation: NavItemType[] = [
     {
         label: 'Attributes',
-        icon: AiOutlineSetting,
+        icon: TbAppsFilled,
         path: '/configurations/attributes',
     },
     {
         label: 'Attributes Group',
-        icon: AiOutlineSetting,
+        icon: FaObjectGroup,
         path: '/configurations/attributes-group',
     },
     {
         label: 'Product Category',
-        icon: AiOutlineSetting,
+        icon: BiCategory,
         path: '/configurations/product-category',
     },
     {
         label: 'Product Sub Category',
-        icon: AiOutlineSetting,
+        icon: MdOutlineCategory,
         path: '/configurations/product-sub-category',
     },
     {
         label: 'Product Group',
-        icon: AiOutlineSetting,
+        icon: BsBoxes,
         path: '/configurations/product-group',
     },
     {
         label: 'Item',
-        icon: AiOutlineSetting,
+        icon: BiCheckboxSquare,
         path: '/configurations/item',
     },
     {
         label: 'Products',
-        icon: AiOutlineSetting,
+        icon: BsBox,
         path: '/configurations/products',
     },
     {
         label: 'Carton Box',
-        icon: AiOutlineSetting,
+        icon: BsBoxFill,
         path: '/configurations/carton-box',
     },
     {
         label: 'Taxes',
-        icon: AiOutlineSetting,
+        icon: HiOutlineReceiptTax,
         path: '/configurations/taxes',
     },
     {
         label: 'Company',
-        icon: AiOutlineSetting,
+        icon: CgOrganisation,
         path: '/configurations/company',
     },
     {
         label: 'Barcode',
-        icon: AiOutlineSetting,
+        icon: CiBarcode,
         path: '/configurations/barcode',
     },
     {
         label: 'Location',
-        icon: AiOutlineSetting,
+        icon: CiLocationOn,
         path: '/configurations/location',
     },
     {
         label: 'Language',
-        icon: AiOutlineSetting,
+        icon: GrLanguage,
         path: '/configurations/language',
     },
     {
         label: 'Dealers Category',
-        icon: AiOutlineSetting,
+        icon: BiCategoryAlt,
         path: '/configurations/dealers-category',
     },
     // {
@@ -89,7 +102,7 @@ const configurationNavigation: NavItemType[] = [
     // },
     {
         label: 'Hierarchy (Org..*)',
-        icon: AiOutlineSetting,
+        icon: TbBinaryTree2,
         path: '/configurations/hierarchy',
     },
 ]

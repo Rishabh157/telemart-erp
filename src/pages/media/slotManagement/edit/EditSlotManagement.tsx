@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FormikProps } from 'formik'
 
 import ATMBreadCrumbs, {
@@ -92,13 +92,7 @@ const EditSlotManagement = ({
         }
     })
 
-    const [selectedValue, setSelectedValue] = useState('')
-
     const options = ['FIXED', 'FLEXIBLE']
-
-    const handleSelect = (newValue: any) => {
-        setSelectedValue(newValue)
-    }
 
     return (
         <div className="">
@@ -204,22 +198,17 @@ const EditSlotManagement = ({
                                     isMulti
                                 />
                             </div>
-                            <div className="mt-5">
-                                <span className="text-slate-700 font-medium">
-                                    Type
-                                </span>
-                                <div className="-mt-5 ml-6 flex ">
-                                    <ATMRadioButton
-                                        name="type"
-                                        options={options}
-                                        value={values.type}
-                                        onSelect={(value) => {
-                                            handleSelect(value)
-                                            setFieldValue('type', value)
-                                        }}
-                                        required={true}
-                                    />
-                                </div>
+                            <div className="">
+                                <ATMRadioButton
+                                    name="type"
+                                    label="Type"
+                                    options={options}
+                                    value={values.type}
+                                    onChange={(value) => {
+                                        setFieldValue('type', value)
+                                    }}
+                                    required={true}
+                                />
                             </div>
                             <div className="">
                                 <ATMSelectSearchable

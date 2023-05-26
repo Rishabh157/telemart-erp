@@ -19,9 +19,10 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CartonBoxListing = ({ columns, rows }: Props) => {
+const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const cartonBoxState: any = useSelector(
         (state: RootState) => state.cartonBox
@@ -86,6 +87,7 @@ const CartonBoxListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
+                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                     />
                 </div>
