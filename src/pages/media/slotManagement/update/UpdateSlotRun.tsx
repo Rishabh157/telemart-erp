@@ -1,7 +1,7 @@
 import React from 'react'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
-//import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
@@ -15,26 +15,11 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
             </div>
             <div className="grow py-4  px-3 ">
                 <div className="grid grid-cols-2 gap-4">
-                    <div className="py-3">
-                        <ATMSwitchButton
-                            name="run"
-                            value={values.run}
-                            label="Status"
-                            required
-                            onChange={(value: any) => {
-                                // console.log(value)
-                                // setSwitch(value)
-                                setFieldValue('run', value)
-                            }}
-                        />
-                    </div>
-
                     <div className="">
                         <ATMTimePicker
                             name="runStartTime"
                             value={values.runStartTime}
                             label="Start Time"
-                            required
                             size="medium"
                             onChange={(newValue) => {
                                 setFieldValue('runStartTime', newValue)
@@ -42,7 +27,31 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                         />
                     </div>
 
-                    <div className="-mt-4">
+                    <div className="">
+                        <ATMTimePicker
+                            name="runEndTime"
+                            value={values.runEndTime}
+                            label="End Time"
+                            size="medium"
+                            onChange={(newValue) => {
+                                setFieldValue('runEndTime', newValue)
+                            }}
+                        />
+                    </div>
+
+                    <div>
+                        <ATMTextField
+                            name="runYoutubeLink"
+                            value={values.runYoutubeLink}
+                            label="Youtube Link"
+                            placeholder="Youtube Link "
+                            onChange={(e) =>
+                                setFieldValue('runYoutubeLink', e.target.value)
+                            }
+                        />
+                    </div>
+
+                    <div className="">
                         <ATMTextArea
                             name="runRemark"
                             value={values.runRemark}
@@ -52,15 +61,14 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             }
                         />
                     </div>
-                    <div className="mt-0 mb-5">
-                        <ATMTimePicker
-                            name="runEndTime"
-                            value={values.runEndTime}
-                            label="End Time"
-                            required
-                            size="medium"
-                            onChange={(newValue) => {
-                                setFieldValue('runEndTime', newValue)
+
+                    <div className="py-3">
+                        <ATMSwitchButton
+                            name="run"
+                            value={values.run}
+                            label="Status"
+                            onChange={(value: any) => {
+                                setFieldValue('run', value)
                             }}
                         />
                     </div>

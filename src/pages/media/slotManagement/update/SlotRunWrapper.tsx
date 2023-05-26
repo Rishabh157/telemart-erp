@@ -16,7 +16,6 @@ type FormInitialValues = {
     slotName: string
     channelGroupId: string
     type: string
-    days: string[]
     tapeNameId: String
     channelNameId: string
     channelTrp: string
@@ -24,6 +23,8 @@ type FormInitialValues = {
     slotDate: string
     slotStartTime: string
     slotEndTime: string
+    runYoutubeLink: string
+    runStatus: boolean
     run: boolean
     runStartTime: string
     runEndTime: string
@@ -65,7 +66,6 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         slotName: selectedItems?.slotName || '',
         channelGroupId: selectedItems?.channelGroupId || '',
         type: selectedItems?.type || '',
-        days: selectedItems?.days || [],
         tapeNameId: selectedItems?.tapeNameId || '',
         channelNameId: selectedItems?.channelNameId || '',
         channelTrp: selectedItems?.channelTrp || '',
@@ -73,6 +73,8 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         slotDate: selectedItems?.slotDate || '',
         slotStartTime: selectedItems?.slotStartTime || '',
         slotEndTime: selectedItems?.slotEndTime || '',
+        runYoutubeLink: selectedItems?.runYoutubeLink || '',
+        runStatus: selectedItems?.runStatus || false,
         run: selectedItems?.run || false,
         runStartTime: selectedItems?.runStartTime || '',
         runEndTime: selectedItems?.runEndTime || '',
@@ -80,21 +82,25 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         companyId: selectedItems?.companyId || '',
     }
     const validationSchema = object({
-        run: boolean().required('Required'),
-        runStartTime: string().required('Required'),
-        runEndTime: string().required('Required'),
+        run: boolean(),
+        runStartTime: string(),
+        runEndTime: string(),
         runRemark: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        var newRunStatus: boolean = false
+        if (values?.runStartTime !== '' && values?.runEndTime !== '') {
+            newRunStatus = true
+        }
+        //console.log(newRunStatus);
         setTimeout(() => {
             updateSlot({
                 body: {
                     slotName: values?.slotName,
                     channelGroupId: values?.channelGroupId,
                     type: values?.type,
-                    days: values?.days,
                     tapeNameId: values?.tapeNameId,
                     channelNameId: values?.channelNameId,
                     channelTrp: values?.channelTrp,
@@ -102,6 +108,8 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     slotDate: values?.slotDate,
                     slotStartTime: values?.slotStartTime,
                     slotEndTime: values?.slotEndTime,
+                    runYoutubeLink: values?.runYoutubeLink || '',
+                    runStatus: newRunStatus,
                     run: values?.run,
                     runStartTime: values?.runStartTime,
                     runEndTime: values?.runEndTime,
