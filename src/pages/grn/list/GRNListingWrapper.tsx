@@ -22,7 +22,6 @@ import {
 } from 'src/redux/slices/GRNSlice'
 import { RootState } from 'src/redux/store'
 import { useGetPaginationGRNQuery } from 'src/services/GRNService'
-import { useLocation } from 'react-router-dom'
 
 const columns: columnTypes[] = [
     {
@@ -79,8 +78,6 @@ const columns: columnTypes[] = [
 
 const GRNListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const { state } = useLocation()
-    const poCode = state?.poCode
 
     const grnState: any = useSelector((state: RootState) => state.grn)
     const { page, rowsPerPage, searchValue, items, filterValue } = grnState
