@@ -13,7 +13,7 @@ export interface DispositionTwoSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
-    filterValue: string,
+    filterValue: string
 }
 
 const initialState: DispositionTwoSliceStateType = {
@@ -27,7 +27,7 @@ const initialState: DispositionTwoSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
-    filterValue: "",
+    filterValue: '',
 }
 
 const dispositionTwoSlice: Slice<DispositionTwoSliceStateType> = createSlice({

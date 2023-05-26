@@ -16,13 +16,14 @@ export type FormInitialValues = {
     dispositionName: string
 }
 const AddDispositionTwoWrappper = ({ onClose }: Props) => {
-    const[addDispositionTwo]=useAdddispositionTwoMutation()
+    const [addDispositionTwo] = useAdddispositionTwoMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
-    const {selectedDispositionOne}:any=useSelector((state:RootState)=>state?.dispositionOne)
+    const { selectedDispositionOne }: any = useSelector(
+        (state: RootState) => state?.dispositionOne
+    )
     const initialValues: FormInitialValues = {
         dispositionName: '',
-
     }
     const validationSchema = object({
         dispositionName: string().required('Country Name is required'),
@@ -32,7 +33,7 @@ const AddDispositionTwoWrappper = ({ onClose }: Props) => {
         setTimeout(() => {
             addDispositionTwo({
                 dispositionName: values.dispositionName,
-                dispositionOneId:selectedDispositionOne?.value || "",
+                dispositionOneId: selectedDispositionOne?.value || '',
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

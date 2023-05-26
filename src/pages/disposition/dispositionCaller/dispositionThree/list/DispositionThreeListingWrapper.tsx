@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -8,13 +8,14 @@ import { setItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
 
 const DispositionThreeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const { searchValue, filterValue,items }: any = useSelector((state: RootState) => state.dispositionThree)
-   
+    const { searchValue, filterValue, items }: any = useSelector(
+        (state: RootState) => state.dispositionThree
+    )
 
-    const dispositionThree=items?.map((ele:any)=>{
+    const dispositionThree = items?.map((ele: any) => {
         return {
-            label:ele.dispositionName,
-            value:ele._id
+            label: ele.dispositionName,
+            value: ele._id,
         }
     })
     const { data } = useGetdispositionThreeQuery({
@@ -33,15 +34,18 @@ const DispositionThreeListingWrapper = () => {
         orderByValue: -1,
     })
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(setItems(data?.data || []))
-    },[dispatch,data])
+    }, [dispatch, data])
 
-  return (
-   <>
-   <DispositionOneListing dispositionThree={dispositionThree} items={dispositionThree}/>
-   </>
-  )
+    return (
+        <>
+            <DispositionOneListing
+                dispositionThree={dispositionThree}
+                items={dispositionThree}
+            />
+        </>
+    )
 }
 
 export default DispositionThreeListingWrapper

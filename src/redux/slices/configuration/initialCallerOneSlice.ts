@@ -2,7 +2,6 @@ import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { InitialCallerOneListResponse } from 'src/models/configurationModel/InitialCallerOne.model'
 
-
 export interface InitialCallerOneSliceStateType {
     items: InitialCallerOneListResponse[] | []
     selectedInitialOne: InitialCallerOneListResponse | null
@@ -29,59 +28,60 @@ const initialState: InitialCallerOneSliceStateType = {
     selectedId: '',
 }
 
-const initialCallerOneSlice: Slice<InitialCallerOneSliceStateType> = createSlice({
-    name: 'initialcallerOne',
-    initialState,
-    reducers: {
-        setItems: (
-            state,
-            action: PayloadAction<InitialCallerOneListResponse[] | []>
-        ) => {
-            state.items = action.payload
+const initialCallerOneSlice: Slice<InitialCallerOneSliceStateType> =
+    createSlice({
+        name: 'initialcallerOne',
+        initialState,
+        reducers: {
+            setItems: (
+                state,
+                action: PayloadAction<InitialCallerOneListResponse[] | []>
+            ) => {
+                state.items = action.payload
+            },
+            setPage: (state, action: PayloadAction<number>) => {
+                state.page = action.payload
+                document.getElementById('scroll-top')?.scrollTo(0, 0)
+            },
+            setRowsPerPage: (state, action: PayloadAction<number>) => {
+                state.rowsPerPage = action.payload
+                state.page = 1
+                document.getElementById('scroll-top')?.scrollTo(0, 0)
+            },
+            setSearchValue: (state, action: PayloadAction<string>) => {
+                state.searchValue = action.payload
+                state.page = 1
+            },
+            setSortValue: (
+                state,
+                action: PayloadAction<{ field: string; value: 'DESC' | 'ASC' }>
+            ) => {
+                state.sortValue = action.payload
+                state.page = 1
+            },
+            setTotalItems: (state, action: PayloadAction<number>) => {
+                state.totalItems = action.payload
+            },
+            setIsTableLoading: (state, action: PayloadAction<boolean>) => {
+                state.isTableLoading = action.payload
+            },
+            setSelectedId: (state, action: PayloadAction<string>) => {
+                state.selectedId = action.payload
+            },
+            setAllItems: (
+                state,
+                action: PayloadAction<InitialCallerOneListResponse[] | []>
+            ) => {
+                state.allItems = action.payload
+            },
+            setSelectedInitialOne: (
+                state,
+                action: PayloadAction<InitialCallerOneListResponse | null>
+            ) => {
+                state.selectedInitialOne = action.payload
+            },
         },
-        setPage: (state, action: PayloadAction<number>) => {
-            state.page = action.payload
-            document.getElementById('scroll-top')?.scrollTo(0, 0)
-        },
-        setRowsPerPage: (state, action: PayloadAction<number>) => {
-            state.rowsPerPage = action.payload
-            state.page = 1
-            document.getElementById('scroll-top')?.scrollTo(0, 0)
-        },
-        setSearchValue: (state, action: PayloadAction<string>) => {
-            state.searchValue = action.payload
-            state.page = 1
-        },
-        setSortValue: (
-            state,
-            action: PayloadAction<{ field: string; value: 'DESC' | 'ASC' }>
-        ) => {
-            state.sortValue = action.payload
-            state.page = 1
-        },
-        setTotalItems: (state, action: PayloadAction<number>) => {
-            state.totalItems = action.payload
-        },
-        setIsTableLoading: (state, action: PayloadAction<boolean>) => {
-            state.isTableLoading = action.payload
-        },
-        setSelectedId: (state, action: PayloadAction<string>) => {
-            state.selectedId = action.payload
-        },
-        setAllItems: (
-            state,
-            action: PayloadAction<InitialCallerOneListResponse[] | []>
-        ) => {
-            state.allItems = action.payload
-        },
-        setSelectedInitialOne: (
-            state,
-            action: PayloadAction<InitialCallerOneListResponse | null>
-        ) => {
-            state.selectedInitialOne = action.payload
-        },
-    },
-})
+    })
 
 export const {
     setItems,

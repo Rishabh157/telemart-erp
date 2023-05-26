@@ -15,7 +15,11 @@ type Props = {
     apiStatus: boolean
 }
 
-const AddDispositionThreedialog = ({ onClose, formikProps, apiStatus }: Props) => {
+const AddDispositionThreedialog = ({
+    onClose,
+    formikProps,
+    apiStatus,
+}: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -34,7 +38,10 @@ const AddDispositionThreedialog = ({ onClose, formikProps, apiStatus }: Props) =
                                 placeholder="Enter a Disposition Three name"
                                 label="Disposition  name"
                                 onChange={(e) =>
-                                    setFieldValue('dispositionName', e.target.value)
+                                    setFieldValue(
+                                        'dispositionName',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

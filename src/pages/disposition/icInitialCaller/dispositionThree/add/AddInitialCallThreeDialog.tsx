@@ -15,7 +15,11 @@ type Props = {
     apiStatus: boolean
 }
 
-const AddInitialCallThreeDialog = ({ onClose, formikProps, apiStatus }: Props) => {
+const AddInitialCallThreeDialog = ({
+    onClose,
+    formikProps,
+    apiStatus,
+}: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -34,7 +38,10 @@ const AddInitialCallThreeDialog = ({ onClose, formikProps, apiStatus }: Props) =
                                 placeholder="Enter a InitialCall Three name"
                                 label="Disposition  name"
                                 onChange={(e) =>
-                                    setFieldValue('initialCallName', e.target.value)
+                                    setFieldValue(
+                                        'initialCallName',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

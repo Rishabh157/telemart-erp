@@ -10,11 +10,11 @@ const DispositionTwoListingWrapper = () => {
     const { items }: any = useSelector(
         (state: RootState) => state.dispositionTwo
     )
-   
+
     const { searchValue, filterValue }: any = useSelector(
         (state: RootState) => state.dispositionTwo
     )
-    
+
     const dispositionTwo = items?.map((ele: any) => {
         return {
             label: ele.dispositionName,
@@ -43,9 +43,7 @@ const DispositionTwoListingWrapper = () => {
 
     return (
         <>
-            <DispositionOneListing
-                dispositionTwo={dispositionTwo}
-            />
+            <DispositionOneListing dispositionTwo={dispositionTwo} />
         </>
     )
 }

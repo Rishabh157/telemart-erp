@@ -13,7 +13,7 @@ type Props = {
     disabled: boolean
 }
 
-const   DispositionListViews = ({
+const DispositionListViews = ({
     listHeading,
     onAddClick,
     listData,
@@ -77,9 +77,9 @@ const   DispositionListViews = ({
                             }}
                             className={`border-b border-slate-100 py-1 px-2 text-black-500 cursor-pointer text-sm ${
                                 listItem.value !== undefined &&
-                                (selectedInitialOne?.value ===
-                                        listItem.value ||
-                                    selectedInitialCallerTwo?.value === listItem.value )
+                                (selectedInitialOne?.value === listItem.value ||
+                                    selectedInitialCallerTwo?.value ===
+                                        listItem.value)
                                     ? 'bg-gray-300'
                                     : ''
                             }`}

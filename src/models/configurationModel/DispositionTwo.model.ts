@@ -1,7 +1,7 @@
 export type DispositionTwoListResponse = {
     dispositionName: string
     dispostionOneLabel: string
-    dispositionOneId:string;
+    dispositionOneId: string
     companyId: string
     isActive: boolean
     isDeleted: boolean

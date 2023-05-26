@@ -1,4 +1,3 @@
-
 import React from 'react'
 import {
     Dialog,
@@ -16,7 +15,11 @@ type Props = {
     apiStatus: boolean
 }
 
-const AddDispositionOnedialog = ({ onClose, formikProps, apiStatus }: Props) => {
+const AddDispositionOnedialog = ({
+    onClose,
+    formikProps,
+    apiStatus,
+}: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -35,7 +38,10 @@ const AddDispositionOnedialog = ({ onClose, formikProps, apiStatus }: Props) => 
                                 placeholder="Enter a Disposition  name"
                                 label="Disposition  name"
                                 onChange={(e) =>
-                                    setFieldValue('dispositionName', e.target.value)
+                                    setFieldValue(
+                                        'dispositionName',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

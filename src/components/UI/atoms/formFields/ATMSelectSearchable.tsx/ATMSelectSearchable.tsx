@@ -45,7 +45,6 @@ const ATMSelectSearchable = ({
             borderColor: 'border-slate-400  ',
             borderWidth: 0,
             boxShadow: 'none',
-            
         }),
     }
 

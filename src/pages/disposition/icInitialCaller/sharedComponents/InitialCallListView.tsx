@@ -21,64 +21,66 @@ const InitialCallListView = ({
     onListItemClick = (item: any) => {},
     disabled = false,
 }: Props) => {
-
     const { selectedDispositionOne }: any = useSelector(
         (state: RootState) => state.dispositionOne
     )
-    const {selectedDispostion}: any = useSelector(
-      (state: RootState) => state.dispositionTwo
-  )
+    const { selectedDispostion }: any = useSelector(
+        (state: RootState) => state.dispositionTwo
+    )
 
     return (
-      <div className="border h-full w-full flex flex-col gap-1 rounded bg-white shadow-lg ">
-      <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">
-          {listHeading}
-          <button
-              type="button"
-              disabled={disabled}
-              className="flex items-center gap-2 text-primary-main  text-sm h-[33px] px-4 rounded hover:bg-slate-100"
-              onClick={() => {
-                  onAddClick()
-              }}
-          >
-              {' '}
-              + Add{' '}
-          </button>
-      </div>
+        <div className="border h-full w-full flex flex-col gap-1 rounded bg-white shadow-lg ">
+            <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">
+                {listHeading}
+                <button
+                    type="button"
+                    disabled={disabled}
+                    className="flex items-center gap-2 text-primary-main  text-sm h-[33px] px-4 rounded hover:bg-slate-100"
+                    onClick={() => {
+                        onAddClick()
+                    }}
+                >
+                    {' '}
+                    + Add{' '}
+                </button>
+            </div>
 
-      <div className="px-2 border-b">
-          <ATMTextField
-              name=""
-              value={searchValue}
-              onChange={(e) => {
-                  OnSearchChange(e.target.value)
-              }}
-              placeholder="Search"
-              className="h-[30px] border-none"
-          />
-      </div>
+            <div className="px-2 border-b">
+                <ATMTextField
+                    name=""
+                    value={searchValue}
+                    onChange={(e) => {
+                        OnSearchChange(e.target.value)
+                    }}
+                    placeholder="Search"
+                    className="h-[30px] border-none"
+                />
+            </div>
 
-      <div className="max-h-[calc(100%-100px)]  overflow-hidden hover:overflow-auto">
-          {listData?.map((listItem, listItemIndex) => {
-              return (
-                  <div
-                      key={listItemIndex}
-                      onClick={() => {
-                          onListItemClick(listItem)
-                      }}
-                      className={`border-b border-slate-100 py-1 px-2 text-black-500 cursor-pointer text-sm ${
-                        listItem.value !== undefined &&
-                        (selectedDispositionOne?.value===
-                          listItem.value || selectedDispostion?.value === listItem.value)? 'bg-gray-300'
-                          : ''
-                  }`}
-              >
-                  {listItem.label}
-              </div>
-          )
-      })}
-  </div>
-</div>
+            <div className="max-h-[calc(100%-100px)]  overflow-hidden hover:overflow-auto">
+                {listData?.map((listItem, listItemIndex) => {
+                    return (
+                        <div
+                            key={listItemIndex}
+                            onClick={() => {
+                                onListItemClick(listItem)
+                            }}
+                            className={`border-b border-slate-100 py-1 px-2 text-black-500 cursor-pointer text-sm ${
+                                listItem.value !== undefined &&
+                                (selectedDispositionOne?.value ===
+                                    listItem.value ||
+                                    selectedDispostion?.value ===
+                                        listItem.value)
+                                    ? 'bg-gray-300'
+                                    : ''
+                            }`}
+                        >
+                            {listItem.label}
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
     )
 }
 

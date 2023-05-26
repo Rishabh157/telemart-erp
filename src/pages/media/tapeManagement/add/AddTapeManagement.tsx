@@ -69,7 +69,6 @@ const AddTapeManagement = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => {
-                             
                                     formikProps.handleSubmit()
                                     if (
                                         formikProps?.values.hour === '0' &&

@@ -15,28 +15,34 @@ export type FormInitialValues = {
     initialCallName: string
 }
 const AddInitialCallTwoWrapper = ({ onClose }: Props) => {
-    const[addInitialCallTwo]=useAddinitialCallerTwoMutation()
+    const [addInitialCallTwo] = useAddinitialCallerTwoMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
-    const {selectedInitialOne}:any=useSelector((state:RootState)=>state?.initialCallerOne)
+    const { selectedInitialOne }: any = useSelector(
+        (state: RootState) => state?.initialCallerOne
+    )
     const initialValues: FormInitialValues = {
         initialCallName: '',
-
     }
     const validationSchema = object({
-        initialCallName: string().required('InitialCaller-Two Name is required'),
+        initialCallName: string().required(
+            'InitialCaller-Two Name is required'
+        ),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
             addInitialCallTwo({
                 initialCallName: values.initialCallName,
-                initialCallOneId:selectedInitialOne?.value || "",
+                initialCallOneId: selectedInitialOne?.value || '',
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'InitialCall Two added successfully!')
+                        showToast(
+                            'success',
+                            'InitialCall Two added successfully!'
+                        )
                         onClose()
                     } else {
                         showToast('error', res?.data?.message)

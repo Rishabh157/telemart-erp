@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import InitialCallThreeListing from './InitialCallThreeListing'
@@ -7,28 +7,29 @@ import { useGetAllInitialCallerThreeQuery } from 'src/services/configurations/In
 
 const InitialCallThreeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const { items }: any = useSelector((state: RootState) => state.initialCallerThree)
- 
+    const { items }: any = useSelector(
+        (state: RootState) => state.initialCallerThree
+    )
 
-    const initialCallerThree=items?.map((ele:any)=>{
+    const initialCallerThree = items?.map((ele: any) => {
         return {
-            label:ele.initialCallName,
-            value:ele._id
+            label: ele.initialCallName,
+            value: ele._id,
         }
     })
 
     const { data } = useGetAllInitialCallerThreeQuery('')
-   // console.log(data)
+    // console.log(data)
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(setItems(data?.data || []))
-    },[dispatch,data])
+    }, [dispatch, data])
 
-  return (
-   <>
-   <InitialCallThreeListing initialCallerThree={initialCallerThree} />
-   </>
-  )
+    return (
+        <>
+            <InitialCallThreeListing initialCallerThree={initialCallerThree} />
+        </>
+    )
 }
 
 export default InitialCallThreeListingWrapper

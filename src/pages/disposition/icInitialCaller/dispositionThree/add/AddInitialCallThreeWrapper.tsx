@@ -25,12 +25,13 @@ const AddInitialCallThreeWrappper = ({ onClose }: Props) => {
         (state: RootState) => state?.initialCallerTwo
     )
 
-
     const initialValues: FormInitialValues = {
         initialCallName: '',
     }
     const validationSchema = object({
-        initialCallName: string().required('InitialCaller-three name is required'),
+        initialCallName: string().required(
+            'InitialCaller-three name is required'
+        ),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -43,7 +44,10 @@ const AddInitialCallThreeWrappper = ({ onClose }: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'InitialCaller-Three added successfully!')
+                        showToast(
+                            'success',
+                            'InitialCaller-Three added successfully!'
+                        )
                         onClose()
                     } else {
                         showToast('error', res?.data?.message)

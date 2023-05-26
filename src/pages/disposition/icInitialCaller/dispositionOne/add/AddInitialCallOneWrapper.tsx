@@ -15,7 +15,7 @@ export type FormInitialValues = {
     initailCallName: string
 }
 const AddInitialCallOneWrapper = ({ onClose }: Props) => {
-    const[AddInitialcallOne]=useAddinitialCallerOneMutation()
+    const [AddInitialcallOne] = useAddinitialCallerOneMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
@@ -23,7 +23,9 @@ const AddInitialCallOneWrapper = ({ onClose }: Props) => {
         initailCallName: '',
     }
     const validationSchema = object({
-        initailCallName: string().required('InitialCaller-One Name is required'),
+        initailCallName: string().required(
+            'InitialCaller-One Name is required'
+        ),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -34,7 +36,10 @@ const AddInitialCallOneWrapper = ({ onClose }: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'InitialCallerOne added successfully!')
+                        showToast(
+                            'success',
+                            'InitialCallerOne added successfully!'
+                        )
                         onClose()
                     } else {
                         showToast('error', res?.data?.message)
@@ -54,7 +59,7 @@ const AddInitialCallOneWrapper = ({ onClose }: Props) => {
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
-                {(formikProps:any) => {
+                {(formikProps: any) => {
                     return (
                         <AddInitialCallOne
                             onClose={onClose}

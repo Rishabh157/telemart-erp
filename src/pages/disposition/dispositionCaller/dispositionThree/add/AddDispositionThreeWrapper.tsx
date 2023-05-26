@@ -29,7 +29,9 @@ const AddDispositionThreeWrappper = ({ onClose }: Props) => {
         dispositionName: '',
     }
     const validationSchema = object({
-        dispositionName: string().required('Disposition-Three name is required'),
+        dispositionName: string().required(
+            'Disposition-Three name is required'
+        ),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -42,7 +44,10 @@ const AddDispositionThreeWrappper = ({ onClose }: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Disposition-Three added successfully!')
+                        showToast(
+                            'success',
+                            'Disposition-Three added successfully!'
+                        )
                         onClose()
                     } else {
                         showToast('error', res?.data?.message)

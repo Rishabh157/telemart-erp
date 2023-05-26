@@ -1,4 +1,3 @@
-
 import React from 'react'
 import {
     Dialog,
@@ -35,7 +34,10 @@ const AddInitialCallOne = ({ onClose, formikProps, apiStatus }: Props) => {
                                 placeholder="Enter a InitailCaller  name"
                                 label="InitialCaller  name"
                                 onChange={(e) =>
-                                    setFieldValue('initailCallName', e.target.value)
+                                    setFieldValue(
+                                        'initailCallName',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

@@ -1,92 +1,94 @@
-
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
-import { AddInitialCallerTwo, UpdateInitialCallerTwo } from 'src/models/configurationModel/InitialCallerTwo.model'
+import {
+    AddInitialCallerTwo,
+    UpdateInitialCallerTwo,
+} from 'src/models/configurationModel/InitialCallerTwo.model'
 
 export const initialCallerTwoApi = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
-      //***** GET *****/
-      getinitialCallerTwo: builder.query({
-          providesTags: ['initialCallerTwo'],
-          query: (body: PaginationType) => ({
-              url: '/initialcall-two',
-              method: 'POST',
-              body,
-          }),
-      }),
+    endpoints: (builder) => ({
+        //***** GET *****/
+        getinitialCallerTwo: builder.query({
+            providesTags: ['initialCallerTwo'],
+            query: (body: PaginationType) => ({
+                url: '/initialcall-two',
+                method: 'POST',
+                body,
+            }),
+        }),
 
-      //***** GET *****/
-      getAllinitialCallerTwo: builder.query({
-          providesTags: ['initialCallerTwo'],
-          query: () => ({
-              url: '/initialcall-two',
-              method: 'GET',
-              // body,
-          }),
-      }),
+        //***** GET *****/
+        getAllinitialCallerTwo: builder.query({
+            providesTags: ['initialCallerTwo'],
+            query: () => ({
+                url: '/initialcall-two',
+                method: 'GET',
+                // body,
+            }),
+        }),
 
-      //***** ADD *****/
-      addinitialCallerTwo: builder.mutation({
-          invalidatesTags: ['initialCallerTwo'],
-          query: (body: AddInitialCallerTwo) => ({
-              url: '/initialcall-two/add',
-              method: 'POST',
-              body,
-          }),
-      }),
+        //***** ADD *****/
+        addinitialCallerTwo: builder.mutation({
+            invalidatesTags: ['initialCallerTwo'],
+            query: (body: AddInitialCallerTwo) => ({
+                url: '/initialcall-two/add',
+                method: 'POST',
+                body,
+            }),
+        }),
 
-      //***** Update *****/
-      updateinitialCallerTwo: builder.mutation({
-          invalidatesTags: ['initialCallerTwo'],
-          query: ({ body, id }: UpdateInitialCallerTwo) => ({
-              url: `/initialcall-two/${id}`,
+        //***** Update *****/
+        updateinitialCallerTwo: builder.mutation({
+            invalidatesTags: ['initialCallerTwo'],
+            query: ({ body, id }: UpdateInitialCallerTwo) => ({
+                url: `/initialcall-two/${id}`,
 
-              method: 'PUT',
-              body,
-          }),
-      }),
+                method: 'PUT',
+                body,
+            }),
+        }),
 
-      // **** GET BY ID
-      getinitialCallerTwoById: builder.query({
-          providesTags: ['initialCallerTwo'],
-          query: (id) => ({
-              url: `/initialcall-two/${id}`,
+        // **** GET BY ID
+        getinitialCallerTwoById: builder.query({
+            providesTags: ['initialCallerTwo'],
+            query: (id) => ({
+                url: `/initialcall-two/${id}`,
 
-              method: 'GET',
-          }),
-      }),
+                method: 'GET',
+            }),
+        }),
 
-      //**** Export
-      exportinitialCallerTwoData: builder.mutation({
-          query: (body: PaginationType) => ({
-              url: '',
+        //**** Export
+        exportinitialCallerTwoData: builder.mutation({
+            query: (body: PaginationType) => ({
+                url: '',
 
-              params: {
-                  _page: body.page,
-                  _limit: body.limit,
-              },
-              method: 'GET',
-              // body,
-          }),
-      }),
+                params: {
+                    _page: body.page,
+                    _limit: body.limit,
+                },
+                method: 'GET',
+                // body,
+            }),
+        }),
 
-      // **** Delete
-      deleteinitialCallerTwo: builder.mutation({
-          invalidatesTags: ['initialCallerTwo'],
-          query: (id) => ({
-              url: `/initialcall-two/${id}`,
+        // **** Delete
+        deleteinitialCallerTwo: builder.mutation({
+            invalidatesTags: ['initialCallerTwo'],
+            query: (id) => ({
+                url: `/initialcall-two/${id}`,
 
-              method: 'DELETE',
-          }),
-      }),
-  }),
+                method: 'DELETE',
+            }),
+        }),
+    }),
 })
 export const {
-  useGetinitialCallerTwoQuery,
-  useAddinitialCallerTwoMutation,
-  useUpdateinitialCallerTwoMutation,
-  useGetinitialCallerTwoByIdQuery,
-  useExportinitialCallerTwoDataMutation,
-  useDeleteinitialCallerTwoMutation,
-  useGetAllinitialCallerTwoQuery,
+    useGetinitialCallerTwoQuery,
+    useAddinitialCallerTwoMutation,
+    useUpdateinitialCallerTwoMutation,
+    useGetinitialCallerTwoByIdQuery,
+    useExportinitialCallerTwoDataMutation,
+    useDeleteinitialCallerTwoMutation,
+    useGetAllinitialCallerTwoQuery,
 } = initialCallerTwoApi

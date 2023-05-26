@@ -57,8 +57,6 @@ const EditTapeManagementWrapper = () => {
         isFetching: tapeIsFetching,
     } = useGetTapeByIdQuery(id)
 
-
-
     useEffect(() => {
         if (!tapeIsLoading && !tapeIsFetching) {
             dispatch(setSelectedItem(tapeData?.data || []))

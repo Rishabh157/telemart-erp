@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setItems } from 'src/redux/slices/configuration/dispositionOneSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -8,23 +8,25 @@ import DispositionOneListing from './DispositionOneListing'
 const DispositionOneListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { data, isLoading, isFetching } = useGetAlldispositionOneQuery('')
-    const { items }: any = useSelector((state: RootState) => state.dispositionOne)
+    const { items }: any = useSelector(
+        (state: RootState) => state.dispositionOne
+    )
 
-    const dispositionOne=items?.map((ele:any)=>{
+    const dispositionOne = items?.map((ele: any) => {
         return {
-            label:ele.dispositionName,
-            value:ele._id
+            label: ele.dispositionName,
+            value: ele._id,
         }
     })
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(setItems(data?.data || []))
-    },[dispatch,data])
+    }, [dispatch, data])
 
-  return (
-   <>
-   <DispositionOneListing dispositionOne={dispositionOne}/>
-   </>
-  )
+    return (
+        <>
+            <DispositionOneListing dispositionOne={dispositionOne} />
+        </>
+    )
 }
 
 export default DispositionOneListingWrapper
