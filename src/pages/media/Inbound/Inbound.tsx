@@ -378,11 +378,11 @@ const Inbound = () => {
                                     placeholder="input area"
                                     className="px-3 py-.5 rounded w-full border border-gray-300"
                                 /> */}
-                               <ATMTextArea
+                                <ATMTextArea
                                     name=""
                                     value=""
                                     label="Remarks"
-                                    onChange={() =>{}}
+                                    onChange={() => {}}
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full">
@@ -519,7 +519,7 @@ const Inbound = () => {
                                     name=""
                                     value=""
                                     label="Remarks"
-                                    onChange={() =>{}}
+                                    onChange={() => {}}
                                 />
                             </div>
                         </div>
@@ -536,16 +536,16 @@ const Inbound = () => {
                                 placeholder="input area"
                                 className="px-3 py-.5 rounded w-full border border-gray-300"
                             /> */}
-                             <ATMSelectSearchable
-                                    options={[]}
-                                    name=""
-                                    label="Disposition Level 1"
-                                    required
-                                    value=""
-                                    onChange={() => {}}
-                                    size="small"
-                                    // className="-mt-0  shadow bg-white rounded"
-                                />
+                            <ATMSelectSearchable
+                                options={[]}
+                                name=""
+                                label="Disposition Level 1"
+                                required
+                                value=""
+                                onChange={() => {}}
+                                size="small"
+                                // className="-mt-0  shadow bg-white rounded"
+                            />
                         </div>
 
                         <div className="flex flex-col gap-1 w-fit">
@@ -554,17 +554,16 @@ const Inbound = () => {
                                 placeholder="input area"
                                 className="px-3 py-.5 rounded w-full border border-gray-300"
                             /> */}
-                             <ATMSelectSearchable
-                                    options={[]}
-                                    name=""
-                                    label="Disposition Level 2"
-                                    required
-                                    value=""
-                                    onChange={() => {}}
-                                    size="small"
-                                    // className="-mt-0  shadow bg-white rounded"
-                                />
-
+                            <ATMSelectSearchable
+                                options={[]}
+                                name=""
+                                label="Disposition Level 2"
+                                required
+                                value=""
+                                onChange={() => {}}
+                                size="small"
+                                // className="-mt-0  shadow bg-white rounded"
+                            />
                         </div>
 
                         <div className="flex flex-col gap-1 w-fit">
@@ -578,13 +577,7 @@ const Inbound = () => {
                 </div>
                 <Divider />
                 <div>
-                    <ATMTable
-                     columns={[]}
-                     rows={[]}
-                     onRowSelect={() => 
-                         {}
-                     }
-                    />
+                    <ATMTable columns={[]} rows={[]} onRowSelect={() => {}} />
                 </div>
             </div>
         </>
