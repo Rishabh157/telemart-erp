@@ -77,10 +77,10 @@ const DispositionListView = ({
                                     listItem.value ||
                                     selectedDispostion?.value ===
                                         listItem.value)
-                                // selectedInitialOne?.value ===
-                                //     listItem.value ||
-                                // selectedInitialCallerTwo?.value === listItem.value
-                                    ? 'bg-gray-300'
+                                    ? // selectedInitialOne?.value ===
+                                      //     listItem.value ||
+                                      // selectedInitialCallerTwo?.value === listItem.value
+                                      'bg-gray-300'
                                     : ''
                             }`}
                         >
