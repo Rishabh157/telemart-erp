@@ -95,7 +95,7 @@ import DidManagementListingWrapper from './media/didManagement/list/DidManagemen
 import OrganisationHierarchy from './configuration/Configuration Screens/organizationHeirarchy/OrganizationHeirarchy'
 import EditDidManagementWrapper from './media/didManagement/edit/EditDidManagementWrapper'
 import ChannelManagementListingWrapper from './media/channelManagement/list/ChannelManagementListingWrapper'
-import EditChannelManagement from './media/channelManagement/edit/EditChannelManagement'
+import EditChannelManagementWrapper from './media/channelManagement/edit/EditChannelManagementWrapper'
 import SlotManagementListingWrapper from './media/slotManagement/list/SlotManagementListingWrapper'
 import AddSlotManagement from './media/slotManagement/add/AddSlotManagement'
 import AddTapeManagementWrapper from './media/tapeManagement/add/AddTapeManagementWrapper'
@@ -216,7 +216,7 @@ export {
     EditDidManagementWrapper,
     AddDidManagementWrapper,
     ChannelManagementListingWrapper,
-    EditChannelManagement,
+    EditChannelManagementWrapper,
     SlotManagementListingWrapper,
     AddSlotManagement,
     TapeManagementListingWrapper,

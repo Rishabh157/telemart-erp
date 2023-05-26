@@ -50,7 +50,7 @@ const DialogLogBox: React.FC<DialogLogBoxType> = ({
                 onClick={handleClose}
                 className={`${handleButtonClose(
                     closeButtonPosition
-                )} ${buttonClass}  p-1 px-4 mt-2  flex w-full`}
+                )} ${buttonClass}  p-1 px-4 mt-0  flex w-full`}
             >
                 <MdCancel size="40" color="red" />
             </div>

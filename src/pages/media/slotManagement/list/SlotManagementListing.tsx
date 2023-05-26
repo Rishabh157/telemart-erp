@@ -18,9 +18,10 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SlotManagementListing = ({ columns, rows }: Props) => {
+const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const slotManagementState: any = useSelector(
         (state: RootState) => state.slotManagement
@@ -39,7 +40,7 @@ const SlotManagementListing = ({ columns, rows }: Props) => {
     ]
 
     return (
-        <div className="px-4 h-full overflow-auto pt-3 ">
+        <div className="px-4 h-[calc(100vh-55px)] overflow-auto pt-3 ">
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
@@ -80,7 +81,8 @@ const SlotManagementListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                        setShowDropdown={setShowDropdown}
+                        extraClasses="max-h-full overflow-auto"
                     />
                 </div>
 
