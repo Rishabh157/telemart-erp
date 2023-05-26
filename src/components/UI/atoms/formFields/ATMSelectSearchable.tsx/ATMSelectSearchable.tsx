@@ -13,7 +13,7 @@ type Props = {
     onChange: (value: any) => void
     label?: string
     required?: boolean
-    size?: 'small' | 'medium'
+    size?: 'small' | 'medium' 
     name: string
     isSearchable?: boolean
     selectLabel?: string
@@ -45,6 +45,7 @@ const ATMSelectSearchable = ({
             borderColor: 'border-slate-400  ',
             borderWidth: 0,
             boxShadow: 'none',
+            padding:0
         }),
     }
 
@@ -132,6 +133,7 @@ const ATMSelectSearchable = ({
                 isLoading={isLoading}
                 isOptionDisabled={(options) => (options.value as string) === ''}
                 placeholder={`${selectLabel}`}
+                
                 // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
             />
 
