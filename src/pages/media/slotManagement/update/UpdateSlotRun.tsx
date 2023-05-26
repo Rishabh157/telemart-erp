@@ -1,7 +1,7 @@
 import React from 'react'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
-//import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
@@ -39,6 +39,29 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                         />
                     </div>
 
+                    <div>
+                        <ATMTextField
+                            name="runYoutubeLink"
+                            value={values.runYoutubeLink}
+                            label="Youtube Link"
+                            placeholder="Youtube Link "
+                            onChange={(e) =>
+                                setFieldValue('runYoutubeLink', e.target.value)
+                            }
+                        />
+                    </div>                                      
+
+                    <div className="">
+                        <ATMTextArea
+                            name="runRemark"
+                            value={values.runRemark}
+                            label="Remark"
+                            onChange={(newValue) =>
+                                setFieldValue('runRemark', newValue)
+                            }
+                        />
+                    </div>
+
                     <div className="py-3">
                         <ATMSwitchButton
                             name="run"
@@ -50,16 +73,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                         />
                     </div>
 
-                    <div className="-mt-4">
-                        <ATMTextArea
-                            name="runRemark"
-                            value={values.runRemark}
-                            label="Remark"
-                            onChange={(newValue) =>
-                                setFieldValue('runRemark', newValue)
-                            }
-                        />
-                    </div>
+                    
                 </div>
             </div>
             <div className="flex justify-end">

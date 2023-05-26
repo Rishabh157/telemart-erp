@@ -9,6 +9,7 @@ export type SlotManagementListResponse = {
     slotEndTime: string
     channelTrp: string
     remarks: string
+    runYoutubeLink: string | ''
     run: boolean
     runStartTime: string
     runEndTime: string
@@ -53,6 +54,7 @@ export type AddSlotManagement = {
         startTime: string
         endTime: string
     }[]
+    runYoutubeLink: string | ''
     run: boolean
     runStartTime: string
     runEndTime: string
@@ -73,6 +75,7 @@ export type UpdateSlotManagement = {
         slotDate: string
         slotStartTime: string
         slotEndTime: string
+        runYoutubeLink: string | ''
         runStatus: boolean
         run: boolean
         runStartTime: string

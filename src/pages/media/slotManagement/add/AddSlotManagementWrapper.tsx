@@ -33,6 +33,7 @@ export type FormInitialValues = {
     channelName: string
     channelTrp: string
     remarks: string
+    runYoutubeLink: string
     companyId: string
 }
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -121,6 +122,7 @@ const AddSlotManagementWrapper = () => {
         channelName: '',
         channelTrp: '',
         remarks: '',
+        runYoutubeLink: '',
         companyId: userData?.companyId || '',
     }
 
@@ -155,6 +157,7 @@ const AddSlotManagementWrapper = () => {
             channelTrp: values.channelTrp,
             remarks: values.remarks,
             channelSlots: values.channelSlot,
+            runYoutubeLink: '',
             run: false,
             runStartTime: '',
             runEndTime: '',

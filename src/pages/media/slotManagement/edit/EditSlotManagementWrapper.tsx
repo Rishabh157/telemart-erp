@@ -38,6 +38,7 @@ export type FormInitialValues = {
     channelTrp: string
     remarks: string
     companyId: string
+    runYoutubeLink: string
     runStatus: boolean
     run: boolean
     runStartTime: string
@@ -169,6 +170,7 @@ const EditSlotManagementWrapper = () => {
         slotEndTime: selectedItems?.slotEndTime || '',
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.remarks || '',
+        runYoutubeLink: selectedItems?.runYoutubeLink || '',
         runStatus: selectedItems?.runStatus || false,
         run: selectedItems?.run || false,
         runStartTime: selectedItems?.runStartTime || '',
@@ -208,6 +210,7 @@ const EditSlotManagementWrapper = () => {
                     slotDate: values?.slotDate,
                     slotStartTime: values?.slotStartTime,
                     slotEndTime: values?.slotEndTime,
+                    runYoutubeLink: values?.runYoutubeLink,
                     runStatus: values?.runStatus,
                     run: values?.run,
                     runStartTime: values?.runStartTime,

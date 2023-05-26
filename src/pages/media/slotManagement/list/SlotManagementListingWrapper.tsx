@@ -41,7 +41,7 @@ const SlotManagementListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetPaginationSlotQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['slotName'],
+        params: ["slotName", "channelLabel", "groupNameLabel", "tapeLabel"],
         page: page,
         filterBy: [
             {

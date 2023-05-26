@@ -24,6 +24,7 @@ type FormInitialValues = {
     slotDate: string
     slotStartTime: string
     slotEndTime: string
+    runYoutubeLink: string
     runStatus: boolean
     run: boolean
     runStartTime: string
@@ -74,6 +75,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         slotDate: selectedItems?.slotDate || '',
         slotStartTime: selectedItems?.slotStartTime || '',
         slotEndTime: selectedItems?.slotEndTime || '',
+        runYoutubeLink: selectedItems?.runYoutubeLink || '',
         runStatus: selectedItems?.runStatus || false,
         run: selectedItems?.run || false,
         runStartTime: selectedItems?.runStartTime || '',
@@ -109,6 +111,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     slotDate: values?.slotDate,
                     slotStartTime: values?.slotStartTime,
                     slotEndTime: values?.slotEndTime,
+                    runYoutubeLink: values?.runYoutubeLink || '',
                     runStatus: newRunStatus,
                     run: values?.run,
                     runStartTime: values?.runStartTime,
