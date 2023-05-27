@@ -31,8 +31,7 @@ const InitialCallOneListing = ({ initialCallerOne }: Props) => {
             dispatch(setSelectedInitialCallerTwo(null))
             dispatch(setSelectedInitialCallerThree(null))
             dispatch(setFilterValue(''))
-            dispatch(setThreeFilterVAlue(""))
-     
+            dispatch(setThreeFilterVAlue(''))
         } else {
             dispatch(setSelectedInitialOne(newValue))
             dispatch(setFilterValue(newValue.value))

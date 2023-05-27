@@ -75,8 +75,7 @@ const EditSlotManagement = ({
         // districtOptions: allDistricts?.map((ele: any) => {
         //     return { label: ele?.districtName, value: ele?._id }
         // }),
-    }  
-    
+    }
 
     const options = ['FIXED', 'FLEXIBLE']
 
@@ -139,7 +138,6 @@ const EditSlotManagement = ({
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
-                           
                             <div className="">
                                 <ATMRadioButton
                                     name="type"

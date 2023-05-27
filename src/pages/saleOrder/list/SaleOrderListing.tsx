@@ -5,7 +5,11 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { setRowsPerPage, setPage, setSearchValue } from 'src/redux/slices/saleOrderSlice'
+import {
+    setRowsPerPage,
+    setPage,
+    setSearchValue,
+} from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -24,7 +28,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage,searchValue } = saleOrderState
+    const { page, rowsPerPage, searchValue } = saleOrderState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3">
@@ -51,7 +55,9 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    onSearch={(newValue)=>{dispatch(setSearchValue(newValue))}}
+                    onSearch={(newValue) => {
+                        dispatch(setSearchValue(newValue))
+                    }}
                     isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
