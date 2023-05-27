@@ -160,7 +160,7 @@ const EditSlotManagementWrapper = () => {
         slotName: selectedItems?.slotName || '',
         channelGroupId: selectedItems?.channelGroupId || '',
         slotStartTime: selectedItems?.slotStartTime || '',
-        type: selectedItems?.type || '',        
+        type: selectedItems?.type || '',
         tapeNameId: selectedItems?.tapeNameId || '',
         channelNameId: selectedItems?.channelNameId || '',
         slotDate: selectedItems?.slotDate || '',
