@@ -4,6 +4,7 @@ import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { Divider } from '@mui/material'
 
 const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
     //const [switch, setSwitch] = useState<boolean>(false)
@@ -27,42 +28,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                         />
                     </div>
 
-                    <div className="">
-                        <ATMTimePicker
-                            name="runEndTime"
-                            value={values.runEndTime}
-                            label="End Time"
-                            size="medium"
-                            onChange={(newValue) => {
-                                setFieldValue('runEndTime', newValue)
-                            }}
-                        />
-                    </div>
-
-                    <div>
-                        <ATMTextField
-                            name="runYoutubeLink"
-                            value={values.runYoutubeLink}
-                            label="Youtube Link"
-                            placeholder="Youtube Link "
-                            onChange={(e) =>
-                                setFieldValue('runYoutubeLink', e.target.value)
-                            }
-                        />
-                    </div>
-
-                    <div className="">
-                        <ATMTextArea
-                            name="runRemark"
-                            value={values.runRemark}
-                            label="Remark"
-                            onChange={(newValue) =>
-                                setFieldValue('runRemark', newValue)
-                            }
-                        />
-                    </div>
-
-                    <div className="py-3">
+                    <div className="py-1 pl-12 mt-3">
                         <ATMSwitchButton
                             name="run"
                             value={values.run}
@@ -73,15 +39,59 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                         />
                     </div>
                 </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-rows-1  gap-4">
+                        <div className="-mt-4">
+                            <ATMTimePicker
+                                name="runEndTime"
+                                value={values.runEndTime}
+                                label="End Time"
+                                size="medium"
+                                onChange={(newValue) => {
+                                    setFieldValue('runEndTime', newValue)
+                                }}
+                            />
+                        </div>
+
+                        <div className="-mt-8">
+                            <ATMTextField
+                                name="runYoutubeLink"
+                                value={values.runYoutubeLink}
+                                label="Youtube Link"
+                                placeholder="Youtube Link "
+                                onChange={(e) =>
+                                    setFieldValue(
+                                        'runYoutubeLink',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                        </div>
+                    </div>
+                    <div className="grid grid-rows-1 gap-4 ">
+                        <div className="-mt-4 ml-12">
+                            <ATMTextArea
+                                minRows={4}
+                                name="runRemark"
+                                value={values.runRemark}
+                                label="Remark"
+                                onChange={(newValue) =>
+                                    setFieldValue('runRemark', newValue)
+                                }
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="flex justify-end">
+            <Divider />
+            <div className="flex justify-center mt-2 ml-12">
                 <button
                     type="button"
                     disabled={apiStatus}
                     onClick={() => {
                         formikProps.handleSubmit()
                     }}
-                    className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main
+                    className={`bg-primary-main rounded py-1 px-5 item-center text-white border border-primary-main
                     ${apiStatus ? 'opacity-50' : ''}
 
                    
