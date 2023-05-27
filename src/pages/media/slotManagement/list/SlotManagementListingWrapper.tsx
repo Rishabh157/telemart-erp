@@ -148,19 +148,11 @@ const SlotManagementListingWrapper = () => {
                             `}
                         >
                             {row.runStatus === true && row.run === true ? (
-<<<<<<< HEAD
-                                <MdDoneOutline />
-                            ) : row.runStatus === true && row.run === false ? (
-                                <AiOutlineClose />
-                            ) : (
-                                'Pending'
-=======
                                 <TiTick />
                             ) : row.runStatus === true && row.run === false ? (
                                 <FaTimes />
                             ) : (
                                 <FaExclamation />
->>>>>>> e09566a7d62571504e7b5d301d6b1fca3194b876
                             )}
                         </button>
                     ) : (
@@ -186,19 +178,11 @@ const SlotManagementListingWrapper = () => {
                             }`}
                         >
                             {row.runStatus === true && row.run === true ? (
-<<<<<<< HEAD
-                                <MdDoneOutline />
-                            ) : row.runStatus === true && row.run === false ? (
-                                <AiOutlineClose />
-                            ) : (
-                                'Pending'
-=======
                                 <TiTick />
                             ) : row.runStatus === true && row.run === false ? (
                                 <FaTimes />
                             ) : (
                                 <FaExclamation />
->>>>>>> e09566a7d62571504e7b5d301d6b1fca3194b876
                             )}
                         </button>
                     )}
