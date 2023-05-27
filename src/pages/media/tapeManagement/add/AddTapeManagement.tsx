@@ -266,8 +266,8 @@ const AddTapeManagement = ({
                             />
                         </div>
 
-                        {/*  Sales Order  */}
-                        <div className="px-3 mt-6">
+                        {/*  Phone  */}
+                        <div className="px-3 py-8">
                             <div className=" text-lg pb-2 font-medium text-primary-main">
                                 Add Phone Number
                             </div>
@@ -276,17 +276,19 @@ const AddTapeManagement = ({
                                 {({ push, remove }) => {
                                     return (
                                         <>
-                                            <div className="grid grid-col-1 gap-y-4 ">
+                                            <div className="grid grid-cols-3 gap-9 ">
+                                               
                                                 {values.phone?.map(
-                                                    (item, itemIndex) => {
+                                                    (
+                                                        item: any,
+                                                        itemIndex: any
+                                                    ) => {
                                                         let { phoneNo } = item
+                                                        console.log(phoneNo)
                                                         return (
-                                                            <div
-                                                                key={itemIndex}
-                                                                className="flex gap-3 items-end  "
-                                                            >
+                                                            <div key={itemIndex}  className="flex ">
                                                                 {/* Phone */}
-                                                                <div className="col-span-2">
+                                                                <div className="flex">
                                                                     <ATMTextField
                                                                         type="text"
                                                                         name={`phone[${itemIndex}].phoneNo`}
@@ -297,34 +299,34 @@ const AddTapeManagement = ({
                                                                         placeholder="Phone"
                                                                         onChange={(
                                                                             e
-                                                                        ) =>
+                                                                        ) => {
                                                                             setFieldValue(
                                                                                 `phone[${itemIndex}].phoneNo`,
                                                                                 e
                                                                                     .target
                                                                                     .value
                                                                             )
-                                                                        }
+                                                                        }}
                                                                     />
-                                                                </div>
+                                                                
 
-                                                                {/* BUTTON - Delete */}
-                                                                {values.phone?.length >
-                                                                    1 && (
-                                                                    <div>
-                                                                        <button
-                                                                            type="button"
-                                                                            onClick={() => {
-                                                                                remove(
-                                                                                    itemIndex
-                                                                                )
-                                                                            }}
-                                                                            className="p-2 bg-red-500 text-white rounded"
-                                                                        >
-                                                                            <MdDeleteOutline className="text-2xl" />
-                                                                        </button>
-                                                                    </div>
-                                                                )}
+                                                                    {/* BUTTON - Delete */}
+                                                                    {values.phone?.length > 1 && (
+                                                                        
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => {
+                                                                                    remove(
+                                                                                        itemIndex
+                                                                                    )
+                                                                                }}
+                                                                                className="p-2 bg-red-500 text-white rounded my-[48px] mx-[10px]"
+                                                                            >
+                                                                                <MdDeleteOutline className="text-2xl" />
+                                                                            </button>
+                                                                        
+                                                                     )}
+                                                                </div>
                                                             </div>
                                                         )
                                                     }
@@ -335,11 +337,11 @@ const AddTapeManagement = ({
                                             <div className="flex justify-self-start py-7">
                                                 <button
                                                     type="button"
-                                                    onClick={() =>
+                                                    onClick={() =>{                                                  
                                                         push({
                                                             phone: '',
                                                         })
-                                                    }
+                                                    }}
                                                     className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
                                                 >
                                                     <HiPlus size="20" /> Add
