@@ -38,7 +38,7 @@ const SaleOrderListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetPaginationSaleOrderQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['soNumber', 'dealer'],
+        params: ['soNumber', 'dealerLabel'],
         page: page,
         filterBy: [
             {

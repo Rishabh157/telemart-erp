@@ -4,8 +4,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SlotManagementListResponse } from 'src/models/Slot.model'
 import SlotManagementListing from './SlotManagementListing'
 import { useDispatch, useSelector } from 'react-redux'
-import { MdDoneOutline } from 'react-icons/md'
-import { AiOutlineClose } from 'react-icons/ai'
+import { FaTimes } from 'react-icons/fa'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from "react-router-dom";
 import {
@@ -24,6 +23,8 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import SlotRunWrapper from '../update/SlotRunWrapper'
+import { FaExclamation } from 'react-icons/fa'
+import { TiTick } from 'react-icons/ti'
 
 const SlotManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -118,7 +119,7 @@ const SlotManagementListingWrapper = () => {
         },
         {
             field: 'SlotRun',
-            headerName: 'Slot Run Status',
+            headerName: 'Run Status',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <div className="relative">
@@ -128,14 +129,38 @@ const SlotManagementListingWrapper = () => {
                         moment(row?.slotEndTime).format('hh:mm:ss') ? (
                         <button
                             disabled={true}
-                            className="text-slate-600 font-bold m-1 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full border border-green-500"
+                            className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
+                                row.runStatus === true && row.run === true
+                                    ? 'hover:bg-green-100'
+                                    : row.runStatus === true &&
+                                      row.run === false
+                                    ? 'hover:bg-red-100'
+                                    : 'hover:bg-orange-100'
+                            } p-2 rounded-full border
+                            ${
+                                row.runStatus === true && row.run === true
+                                    ? 'border-green-500'
+                                    : row.runStatus === true &&
+                                      row.run === false
+                                    ? 'border-red-500'
+                                    : 'border-orange-500'
+                            }
+                            `}
                         >
                             {row.runStatus === true && row.run === true ? (
+<<<<<<< HEAD
                                 <MdDoneOutline />
                             ) : row.runStatus === true && row.run === false ? (
                                 <AiOutlineClose />
                             ) : (
                                 'Pending'
+=======
+                                <TiTick />
+                            ) : row.runStatus === true && row.run === false ? (
+                                <FaTimes />
+                            ) : (
+                                <FaExclamation />
+>>>>>>> e09566a7d62571504e7b5d301d6b1fca3194b876
                             )}
                         </button>
                     ) : (
@@ -144,14 +169,36 @@ const SlotManagementListingWrapper = () => {
                                 setRunState(row._id)
                                 setIsOpenDialog(true)
                             }}
-                            className="text-slate-600 font-bold m-1 transition-all duration-[600ms] hover:bg-green-100 p-2 rounded-full border border-green-500"
+                            className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
+                                row.runStatus === true && row.run === true
+                                    ? 'hover:bg-green-100'
+                                    : row.runStatus === true &&
+                                      row.run === false
+                                    ? 'hover:bg-red-100'
+                                    : 'hover:bg-orange-100'
+                            } p-2 rounded-full border  ${
+                                row.runStatus === true && row.run === true
+                                    ? 'border-green-500'
+                                    : row.runStatus === true &&
+                                      row.run === false
+                                    ? 'border-red-500'
+                                    : 'border-orange-500'
+                            }`}
                         >
                             {row.runStatus === true && row.run === true ? (
+<<<<<<< HEAD
                                 <MdDoneOutline />
                             ) : row.runStatus === true && row.run === false ? (
                                 <AiOutlineClose />
                             ) : (
                                 'Pending'
+=======
+                                <TiTick />
+                            ) : row.runStatus === true && row.run === false ? (
+                                <FaTimes />
+                            ) : (
+                                <FaExclamation />
+>>>>>>> e09566a7d62571504e7b5d301d6b1fca3194b876
                             )}
                         </button>
                     )}
@@ -229,7 +276,6 @@ const SlotManagementListingWrapper = () => {
         })
     }
 
-    // console.log(items, "items")
     return (
         <>
             <MediaLayout>
@@ -241,6 +287,7 @@ const SlotManagementListingWrapper = () => {
                     />
                     <DialogLogBox
                         isOpen={isOpenDialog}
+                        buttonClass="cursor-pointer"
                         handleClose={() => {
                             setIsOpenDialog(false)
                         }}

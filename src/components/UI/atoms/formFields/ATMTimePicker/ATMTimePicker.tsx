@@ -40,7 +40,7 @@ const ATMTimePicker = ({
             )}
 
             <div
-                className={`${label && 'mt-2'} ${getInputHeight(
+                className={`${label && 'mt-0'} ${getInputHeight(
                     size
                 )} flex items-center`}
             >
