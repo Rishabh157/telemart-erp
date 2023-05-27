@@ -11,8 +11,7 @@ type Props = {
     minRows?: number
     name?: string
     isSubmitting?: boolean
-    labelClass?:string;
-
+    labelClass?: string
 }
 
 const ATMTextArea = ({
@@ -23,14 +22,14 @@ const ATMTextArea = ({
     className,
     placeholder,
     minRows = 2,
-    labelClass=' font-medium',
+    labelClass = ' font-medium',
     name = '',
     isSubmitting = true,
 }: Props) => {
     return (
         <div className="relative mt-4">
             {label && (
-                    <label className={`text-slate-700 ${labelClass}`}>
+                <label className={`text-slate-700 ${labelClass}`}>
                     {label}{' '}
                     {required && <span className="text-red-500"> * </span>}
                 </label>

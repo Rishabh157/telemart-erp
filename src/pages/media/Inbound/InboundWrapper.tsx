@@ -10,7 +10,6 @@ import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { useAddInboundCallerMutation } from 'src/services/media/InboundCallerServices'
 
-
 export type FormInitialValues = {
     generalInformation: {
         didNo: string
@@ -48,91 +47,89 @@ export type FormInitialValues = {
         channel: string
         otherRemarks: string
     }
-    dispositionLevelOne:string
-    
-    dispositionLevelTwo:string
+    dispositionLevelOne: string
+
+    dispositionLevelTwo: string
 }
 
 const InbouundWrapper = () => {
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-  const [AddInbopundCaller]=useAddInboundCallerMutation()
+    const [AddInbopundCaller] = useAddInboundCallerMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-   
 
     const initialValues: FormInitialValues = {
         generalInformation: {
-            didNo: "",
-            inOutBound: "",
-            incomingCallerNo: "",
-            mobileNo: ""
+            didNo: '',
+            inOutBound: '',
+            incomingCallerNo: '',
+            mobileNo: '',
         },
-        addressInformation:{
+        addressInformation: {
             deliveryCharges: 0,
             discount: 0,
             total: 0,
-            country: "",
-            state: "",
-            city: "",
-            tehsil: "",
-            pincode: "",
-            area: "",
-            expectedDeliveryDate: "",
-            profileDeliveredBy: "",
-            complaintDetails: "",
-            complaintNo: ""
-        } ,
-        personalInformation:{
-            agentName: "",
-            name: "",
-            age: "",
-            address: "",
-            realtion: "",
-            city: "",
-            landmark: "",
-            alternateNo1: "",
-            gender: "",
-            prepaid: "",
-            email: "",
-            channel: "",
-            otherRemarks: ""
+            country: '',
+            state: '',
+            city: '',
+            tehsil: '',
+            pincode: '',
+            area: '',
+            expectedDeliveryDate: '',
+            profileDeliveredBy: '',
+            complaintDetails: '',
+            complaintNo: '',
         },
-        dispositionLevelOne:"",
-        dispositionLevelTwo:""
-
+        personalInformation: {
+            agentName: '',
+            name: '',
+            age: '',
+            address: '',
+            realtion: '',
+            city: '',
+            landmark: '',
+            alternateNo1: '',
+            gender: '',
+            prepaid: '',
+            email: '',
+            channel: '',
+            otherRemarks: '',
+        },
+        dispositionLevelOne: '',
+        dispositionLevelTwo: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
         generalInformation: object().shape({
             didNo: string().required(),
-            inOutBound:  string().required(),
+            inOutBound: string().required(),
             incomingCallerNo: string().required(),
-            mobileNo: string().required()
-        }),  
-        addressInformation:object().shape({
+            mobileNo: string().required(),
+        }),
+        addressInformation: object().shape({
             deliveryCharges: number().required(),
-            discount:number().required(),
+            discount: number().required(),
             total: number().required(),
-            country:  string().required(),
-            state:  string().required(),
-            city:  string().required(),
-            tehsil:  string().required(),
-            pincode:  string().required(),
-            area:  string().required(),
-            expectedDeliveryDate:  string().required(),
-            profileDeliveredBy:  string().required(),
-            complaintDetails:  string().required(),
-            complaintNo:  string().required()
-        }) ,
-        personalInformation:object().shape({
+            country: string().required(),
+            state: string().required(),
+            city: string().required(),
+            tehsil: string().required(),
+            pincode: string().required(),
+            area: string().required(),
+            expectedDeliveryDate: string().required(),
+            profileDeliveredBy: string().required(),
+            complaintDetails: string().required(),
+            complaintNo: string().required(),
+        }),
+        personalInformation: object().shape({
             agentName: string().required(),
             name: string().required(),
             age: string().required(),
             address: string().required(),
             realtion: string().required(),
             city: string().required(),
-            landmark:string().required(),
+            landmark: string().required(),
             alternateNo1: string().required(),
             gender: string().required(),
             prepaid: string().required(),
@@ -140,9 +137,8 @@ const InbouundWrapper = () => {
             channel: string().required(),
             otherRemarks: string().required(),
         }),
-        dispositionLevelOne:string().required(),
-        dispositionLevelTwo:string().required()
-
+        dispositionLevelOne: string().required(),
+        dispositionLevelTwo: string().required(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -150,12 +146,13 @@ const InbouundWrapper = () => {
         setTimeout(() => {
             AddInbopundCaller({
                 generalInformation: {
-                    didNo:values.generalInformation.didNo ,
-                    inOutBound:values.generalInformation.inOutBound,
-                    incomingCallerNo:values.generalInformation.incomingCallerNo,
-                    mobileNo:values.generalInformation.mobileNo,
+                    didNo: values.generalInformation.didNo,
+                    inOutBound: values.generalInformation.inOutBound,
+                    incomingCallerNo:
+                        values.generalInformation.incomingCallerNo,
+                    mobileNo: values.generalInformation.mobileNo,
                 },
-                addressInformation:{
+                addressInformation: {
                     deliveryCharges: values.addressInformation.deliveryCharges,
                     discount: values.addressInformation.discount,
                     total: values.addressInformation.total,
@@ -163,14 +160,17 @@ const InbouundWrapper = () => {
                     state: values.addressInformation.state,
                     city: values.addressInformation.city,
                     tehsil: values.addressInformation.tehsil,
-                    pincode:values.addressInformation.pincode ,
+                    pincode: values.addressInformation.pincode,
                     area: values.addressInformation.area,
-                    expectedDeliveryDate:values.addressInformation.expectedDeliveryDate ,
-                    profileDeliveredBy:values.addressInformation.profileDeliveredBy ,
-                    complaintDetails: values.addressInformation.complaintDetails,
-                    complaintNo: values.addressInformation.complaintNo
-                } ,
-                personalInformation:{
+                    expectedDeliveryDate:
+                        values.addressInformation.expectedDeliveryDate,
+                    profileDeliveredBy:
+                        values.addressInformation.profileDeliveredBy,
+                    complaintDetails:
+                        values.addressInformation.complaintDetails,
+                    complaintNo: values.addressInformation.complaintNo,
+                },
+                personalInformation: {
                     agentName: values.personalInformation.agentName,
                     name: values.personalInformation.name,
                     age: values.personalInformation.age,
@@ -183,15 +183,18 @@ const InbouundWrapper = () => {
                     prepaid: values.personalInformation.prepaid,
                     email: values.personalInformation.email,
                     channel: values.personalInformation.channel,
-                    otherRemarks: values.personalInformation.otherRemarks
+                    otherRemarks: values.personalInformation.otherRemarks,
                 },
-                dispositionLevelOne:values.dispositionLevelOne,
-                dispositionLevelTwo:values.dispositionLevelTwo,
+                dispositionLevelOne: values.dispositionLevelOne,
+                dispositionLevelTwo: values.dispositionLevelTwo,
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'InboundCaller added successfully!')
+                        showToast(
+                            'success',
+                            'InboundCaller added successfully!'
+                        )
                         navigate('/media/inbound')
                     } else {
                         showToast('error', res?.data?.message)
@@ -204,12 +207,10 @@ const InbouundWrapper = () => {
         }, 1000)
     }
     const dispatch = useDispatch<AppDispatch>()
-    
+
     const { data, isLoading, isFetching } = useGetAllCountryQuery('')
-    
 
     const { allCountry }: any = useSelector((state: RootState) => state.country)
-   
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -218,12 +219,11 @@ const InbouundWrapper = () => {
     }, [data, isLoading, isFetching, dispatch])
 
     //registration
-    
+
     const dropdownOptions = {
-         counrtyOptions : allCountry?.map((ele: any) => {
+        counrtyOptions: allCountry?.map((ele: any) => {
             return { label: ele?.countryName, value: ele?._id }
         }),
-     
     }
     return (
         <Formik

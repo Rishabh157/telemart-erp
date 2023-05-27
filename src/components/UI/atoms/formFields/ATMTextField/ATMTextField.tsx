@@ -12,7 +12,7 @@ export type ATMTextFieldPropTypes = {
     isSubmitting?: boolean
     onBlur?: ((e: any) => void) & React.FocusEventHandler<HTMLInputElement>
     extraClassField?: string
-    labelClass?:string;
+    labelClass?: string
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
 const ATMTextField = ({
@@ -26,7 +26,7 @@ const ATMTextField = ({
     size = 'small',
     isSubmitting = true,
     extraClassField = '',
-    labelClass=' font-medium',
+    labelClass = ' font-medium',
     ...rest
 }: ATMTextFieldPropTypes) => {
     return (

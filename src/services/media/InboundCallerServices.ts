@@ -1,6 +1,9 @@
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
-import { AddInboundCaller, UpdateInboundCaller } from 'src/models/configurationModel/InboundCaller.model'
+import {
+    AddInboundCaller,
+    UpdateInboundCaller,
+} from 'src/models/configurationModel/InboundCaller.model'
 
 export const inboundCallerManagementApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

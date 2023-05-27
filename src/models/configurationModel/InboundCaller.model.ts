@@ -54,9 +54,8 @@ export type AddInboundCaller = {
     generalInformation: generalInformation
     addressInformation: addressInformation
     personalInformation: personalInformation
-    dispositionLevelOne:string
-    dispositionLevelTwo:string
-
+    dispositionLevelOne: string
+    dispositionLevelTwo: string
 
     companyId: string
 }

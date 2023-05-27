@@ -642,7 +642,10 @@ const PageRoutes = () => {
                         path="media/artist/add"
                         element={<AddArtistWrapper />}
                     />
-                    <Route path="media/inbound/" element={<InbouundWrapper />} />
+                    <Route
+                        path="media/inbound/"
+                        element={<InbouundWrapper />}
+                    />
                     {/* disposition route */}
                 </Routes>
             </BrowserRouter>

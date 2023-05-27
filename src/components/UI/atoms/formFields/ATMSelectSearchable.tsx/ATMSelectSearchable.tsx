@@ -20,7 +20,7 @@ type Props = {
     isMulti?: boolean
     isAllSelect?: boolean
     isLoading?: boolean
-    labelClass?:string
+    labelClass?: string
 }
 
 const ATMSelectSearchable = ({
@@ -35,7 +35,7 @@ const ATMSelectSearchable = ({
     defaultValue = '',
     name,
     isMulti = false,
-    labelClass=' font-medium',
+    labelClass = ' font-medium',
     isAllSelect = false,
     isLoading = false,
 }: Props) => {
@@ -54,7 +54,7 @@ const ATMSelectSearchable = ({
         input: (provided: any) => ({
             ...provided,
             minHeight: 'unset',
-            height:  size == 'xs' ? '28px' : '40px',
+            height: size == 'xs' ? '28px' : '40px',
             textAlign: 'center',
         }),
     }
@@ -121,7 +121,7 @@ const ATMSelectSearchable = ({
     return (
         <div className="relative mt-4">
             {label && (
-                  <label className={`text-slate-700 ${labelClass}`}>
+                <label className={`text-slate-700 ${labelClass}`}>
                     {label}
                     {required && <span className="text-red-500"> * </span>}
                 </label>

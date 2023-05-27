@@ -170,12 +170,11 @@ const Inbound: React.FC<Props> = ({
                                         onChange={(e) => {
                                             console.log(e.target.value)
                                             setFieldValue(
-                                                'generalInformation.didNo', 
+                                                'generalInformation.didNo',
                                                 e.target.value
                                             )
                                         }}
                                         value={values.generalInformation.didNo}
-                                        
                                     />
                                 </div>
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
@@ -186,7 +185,7 @@ const Inbound: React.FC<Props> = ({
                                         size="xs"
                                         className="-mt-0  shadow bg-white rounded"
                                         onChange={(e) => {
-                                            setFieldValue('inOutBound' ,e)
+                                            setFieldValue('inOutBound', e)
                                         }}
                                         value={
                                             values.generalInformation.inOutBound
@@ -239,9 +238,12 @@ const Inbound: React.FC<Props> = ({
                                         size="xs"
                                         className="-mt-0  shadow bg-white rounded"
                                     />
-                                </div >
+                                </div>
                                 <div>
-                                    <ATMTable columns={[]} rows={[]} onRowSelect={() => {}}
+                                    <ATMTable
+                                        columns={[]}
+                                        rows={[]}
+                                        onRowSelect={() => {}}
                                     />
                                 </div>
                                 <div className="col-span-3"></div>
@@ -400,11 +402,13 @@ const Inbound: React.FC<Props> = ({
                                     <div className="flex flex-col gap-1 w-full  -mt-4">
                                         <ATMDatePicker
                                             name="expectedDeliveryDate"
-                                            value={values.addressInformation.expectedDeliveryDate}
+                                            value={
+                                                values.addressInformation
+                                                    .expectedDeliveryDate
+                                            }
                                             label="expectedDeliveryDate"
                                             dateTimeFormat="LLL"
-                                            onChange={() =>{}
-                                            }
+                                            onChange={() => {}}
                                         />
                                     </div>
 
@@ -414,7 +418,10 @@ const Inbound: React.FC<Props> = ({
                                             labelClass="font-semibold text-sm"
                                             label="Profile delivered by"
                                             onChange={() => {}}
-                                            value={values.addressInformation.profileDeliveredBy}
+                                            value={
+                                                values.addressInformation
+                                                    .profileDeliveredBy
+                                            }
                                             size="xs"
                                             className="-mt-0  shadow bg-white rounded"
                                         />
@@ -449,7 +456,9 @@ const Inbound: React.FC<Props> = ({
                                     name="agentName"
                                     labelClass="font-semibold text-sm"
                                     label="Agent Name"
-                                    onChange={(e) => {setFieldValue("agentName" ,e)}}
+                                    onChange={(e) => {
+                                        setFieldValue('agentName', e)
+                                    }}
                                     value={values.personalInformation.agentName}
                                     size="xs"
                                     className="-mt-0  shadow bg-white rounded"
@@ -460,7 +469,9 @@ const Inbound: React.FC<Props> = ({
                                     name="name"
                                     labelClass="font-semibold text-sm"
                                     label="Name"
-                                    onChange={(e) => {setFieldValue("name" ,e)}}
+                                    onChange={(e) => {
+                                        setFieldValue('name', e)
+                                    }}
                                     value={values.personalInformation.name}
                                     size="xs"
                                     className="-mt-0  shadow bg-white rounded"
@@ -471,7 +482,9 @@ const Inbound: React.FC<Props> = ({
                                     name="age"
                                     labelClass="font-semibold text-sm"
                                     label="Age"
-                                    onChange={(e) => {setFieldValue("age" , e)}}
+                                    onChange={(e) => {
+                                        setFieldValue('age', e)
+                                    }}
                                     value={values.personalInformation.age}
                                     size="xs"
                                     className="-mt-0  shadow bg-white rounded"
@@ -484,7 +497,9 @@ const Inbound: React.FC<Props> = ({
                                     labelClass="font-semibold text-sm"
                                     value={values.personalInformation.address}
                                     label="Address"
-                                    onChange={(e) => {setFieldValue("address", e)}}
+                                    onChange={(e) => {
+                                        setFieldValue('address', e)
+                                    }}
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
@@ -518,7 +533,9 @@ const Inbound: React.FC<Props> = ({
                                     name="landmark"
                                     labelClass="font-semibold text-sm"
                                     label="Landmark"
-                                    onChange={(e) => {setFieldValue("landmark" ,e)}}
+                                    onChange={(e) => {
+                                        setFieldValue('landmark', e)
+                                    }}
                                     value={values.personalInformation.landmark}
                                     size="xs"
                                     className="-mt-0  shadow bg-white rounded"
@@ -529,8 +546,12 @@ const Inbound: React.FC<Props> = ({
                                     name="alterNateNo1"
                                     labelClass="font-semibold text-sm"
                                     label="Alternate No.1"
-                                    onChange={(e) => {setFieldValue("alterNateNo1" ,e)}}
-                                    value={values.personalInformation.alternateNo1}
+                                    onChange={(e) => {
+                                        setFieldValue('alterNateNo1', e)
+                                    }}
+                                    value={
+                                        values.personalInformation.alternateNo1
+                                    }
                                     size="xs"
                                     className="-mt-0  shadow bg-white rounded"
                                 />
@@ -551,7 +572,9 @@ const Inbound: React.FC<Props> = ({
                                     name="prepaid"
                                     labelClass="font-semibold text-sm"
                                     label="prepaid"
-                                    onChange={(e) => {setFieldValue("prepaid" ,e)}}
+                                    onChange={(e) => {
+                                        setFieldValue('prepaid', e)
+                                    }}
                                     value={values.personalInformation.prepaid}
                                     size="xs"
                                     className="-mt-0  shadow bg-white rounded"
@@ -562,7 +585,9 @@ const Inbound: React.FC<Props> = ({
                                     name="email"
                                     labelClass="font-semibold text-sm"
                                     label="Email"
-                                    onChange={(e) => {setFieldValue("email" ,e)}}
+                                    onChange={(e) => {
+                                        setFieldValue('email', e)
+                                    }}
                                     value={values.personalInformation.email}
                                     size="xs"
                                     className="-mt-0  shadow bg-white rounded"
@@ -586,9 +611,13 @@ const Inbound: React.FC<Props> = ({
                                     name="otherRemarks"
                                     minRows={1}
                                     labelClass="font-bold text-sm"
-                                    value={values.personalInformation.otherRemarks}
+                                    value={
+                                        values.personalInformation.otherRemarks
+                                    }
                                     label="Remarks"
-                                    onChange={(e) => {setFieldValue("otherRemarks" ,e)}}
+                                    onChange={(e) => {
+                                        setFieldValue('otherRemarks', e)
+                                    }}
                                 />
                             </div>
                         </div>
