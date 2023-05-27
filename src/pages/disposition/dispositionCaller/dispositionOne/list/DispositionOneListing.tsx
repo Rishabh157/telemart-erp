@@ -9,6 +9,7 @@ import {
     setSelectedDispostion,
 } from 'src/redux/slices/configuration/dispositionTwoSlice'
 import { setSelectedDispostionThree } from 'src/redux/slices/configuration/dispositionThreeSlice'
+import { setFilterValue as setThreeFilterValueValue } from 'src/redux/slices/configuration/dispositionThreeSlice'
 
 type Props = {
     dispositionOne: any[]
@@ -28,6 +29,7 @@ const DispositionOneListing = ({ dispositionOne }: Props) => {
             dispatch(setSelectedDispostion(null))
             dispatch(setSelectedDispostionThree(null))
             dispatch(setFilterValue(''))
+            dispatch(setThreeFilterValueValue(''))
         } else {
             dispatch(setSelectedDispositionOne(newValue))
             dispatch(setFilterValue(newValue.value))

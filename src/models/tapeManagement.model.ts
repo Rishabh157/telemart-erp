@@ -17,6 +17,7 @@ export type TapeManagementListResponse = {
     updatedAt: string
     __v: number
     schemeLabel: string
+    channelGroupLabel: string
     languageLabel: string
 }
 

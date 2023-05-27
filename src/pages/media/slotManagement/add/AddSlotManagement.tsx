@@ -46,8 +46,6 @@ const AddSlotManagement = ({
         ...dropdownOptions,
     }
 
-    
-
     const [slotStartDate, setSlotStartDate] = useState('')
     const [slotEndDate, setSlotEndDate] = useState('')
     const [slotStartTime, setSlotStartTime] = useState('')
@@ -137,7 +135,6 @@ const AddSlotManagement = ({
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
-                           
                             <div className="">
                                 <ATMRadioButton
                                     name="type"
@@ -211,6 +208,7 @@ const AddSlotManagement = ({
                                         name={`endDate`}
                                         value={slotEndDate}
                                         label="Slot End Date"
+                                        dateTimeFormat="LLL"
                                         onChange={(newValue) =>
                                             setSlotEndDate(newValue)
                                         }
