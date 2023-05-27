@@ -107,7 +107,7 @@ const AddTapeManagement = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow py-2 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* FirstName */}
                             <ATMTextField
@@ -276,7 +276,7 @@ const AddTapeManagement = ({
                                 {({ push, remove }) => {
                                     return (
                                         <>
-                                            <div className="flex flex-col gap-y-9">
+                                            <div className="grid grid-col-1 gap-y-4 ">
                                                 {values.phone?.map(
                                                     (item, itemIndex) => {
                                                         let { phoneNo } = item
@@ -286,7 +286,7 @@ const AddTapeManagement = ({
                                                                 className="flex gap-3 items-end  "
                                                             >
                                                                 {/* Phone */}
-                                                                <div className="flex-[2_2_0%]">
+                                                                <div className="col-span-2">
                                                                     <ATMTextField
                                                                         type="text"
                                                                         name={`phone[${itemIndex}].phoneNo`}
@@ -309,8 +309,7 @@ const AddTapeManagement = ({
                                                                 </div>
 
                                                                 {/* BUTTON - Delete */}
-                                                                {values.phone
-                                                                    ?.length >
+                                                                {values.phone?.length >
                                                                     1 && (
                                                                     <div>
                                                                         <button

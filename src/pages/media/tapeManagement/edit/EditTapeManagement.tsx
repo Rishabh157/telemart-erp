@@ -111,7 +111,7 @@ const EditTapeManagement = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow py-2 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* FirstName */}
                             <ATMTextField
@@ -295,7 +295,7 @@ const EditTapeManagement = ({
                                                                 className="flex gap-3 items-end  "
                                                             >
                                                                 {/* Phone */}
-                                                                <div className="flex-[2_2_0%]">
+                                                                <div className="fcol-span-2">
                                                                     <ATMTextField
                                                                         type="text"
                                                                         name={`phone[${itemIndex}].phoneNo`}
