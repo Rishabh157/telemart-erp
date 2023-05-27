@@ -26,6 +26,14 @@ export const dispositionOneApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+        getAlldispositionOneunauth: builder.query({
+            providesTags: ['dispositionOne'],
+            query: () => ({
+                url: '/disposition-one/unauth/get-all',
+                method: 'GET',
+                // body,
+            }),
+        }),
 
         //***** ADD *****/
         adddispositionOne: builder.mutation({
@@ -91,4 +99,5 @@ export const {
     useExportdispositionOneDataMutation,
     useDeletedispositionOneMutation,
     useGetAlldispositionOneQuery,
+    useGetAlldispositionOneunauthQuery,
 } = dispositionOneApi
