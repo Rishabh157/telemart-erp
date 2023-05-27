@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { Formik, FormikProps } from 'formik'
 import { object, string, boolean } from 'yup'
@@ -111,8 +112,8 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     runYoutubeLink: values?.runYoutubeLink || '',
                     runStatus: newRunStatus,
                     run: values?.run,
-                    runStartTime: values?.runStartTime,
-                    runEndTime: values?.runEndTime,
+                    runStartTime: values?.run ? values?.runStartTime : '',
+                    runEndTime: values?.run ? values?.runEndTime : '',
                     runRemark: values?.runRemark,
                     companyId: values?.companyId,
                 },
