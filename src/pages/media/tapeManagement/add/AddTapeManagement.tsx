@@ -141,18 +141,19 @@ const AddTapeManagement = ({
                                 label="Scheme"
                             />
 
+                        </div>
+                        <div className="grid grid-cols-3 gap-4">
                             <ATMSelectSearchable
                                 name="artistId"
                                 required
-                                selectLabel="Select Artist"
                                 isMulti={true}
+                                selectLabel="Select Artist"
                                 value={values.artistId}
                                 onChange={(value) =>
                                     setFieldValue('artistId', value)
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
-                                isAllSelect
                             />
                             <ATMSelectSearchable
                                 name="languageId"
@@ -165,67 +166,64 @@ const AddTapeManagement = ({
                                 options={dropdownOptions.languageOptions}
                                 label="Language"
                             />
-                            <div className="grid grid-cols-3 gap-4 ">
-                                <div className=" text-slate-700  font-medium mt-12 ">
-                                    Duration :
-                                </div>
+                        </div>
 
-                                <div className=" col-span-2 ">
-                                    <ATMTextField
-                                        name="hour"
-                                        required
-                                        value={values.hour}
-                                        type="number"
-                                        label="Hour"
-                                        min={0}
-                                        placeholder="HH"
-                                        onChange={(e) => {
-                                            if (e.target.value !== '0') {
-                                                setShow(false)
-                                            }
-                                            setFieldValue(
-                                                'hour',
-                                                e.target.value
-                                            )
-                                        }}
-                                    />
-                                </div>
+                            
+                        <div className="grid grid-cols-4 gap-4 py-5">
+                            <div className=" text-slate-700  font-medium mt-12 ">
+                                Duration :
                             </div>
-                            <div className="grid grid-cols-2 gap-4 ">
-                                <div className="">
-                                    <ATMSelectSearchable
-                                        name="minute"
-                                        required
-                                        value={values.minute}
-                                        selectLabel="MM"
-                                        label="Minute"
-                                        options={MinuteOptions()}
-                                        onChange={(selectValue) => {
-                                            if (selectValue !== '00') {
-                                                setShow(false)
-                                            }
-                                            setFieldValue('minute', selectValue)
-                                        }}
-                                    />
-                                </div>
-                                <div className="">
-                                    <ATMSelectSearchable
-                                        defaultValue="00"
-                                        label="Second"
-                                        required
-                                        options={MinuteOptions()}
-                                        name="second"
-                                        value={values.second}
-                                        selectLabel="SS"
-                                        onChange={(selectValue) => {
-                                            if (selectValue !== '00') {
-                                                setShow(false)
-                                            }
+                            <div className="-ml-32 mr-20 ">
+                                <ATMTextField
+                                    name="hour"
+                                    required
+                                    value={values.hour}
+                                    type="number"
+                                    label="Hour"
+                                    min={0}
+                                    placeholder="HH"
+                                    onChange={(e) => {
+                                        if (e.target.value !== '0') {
+                                            setShow(false)
+                                        }
+                                        setFieldValue('hour', e.target.value)
+                                    }}
+                                />
+                            </div>
+                            <div className="-ml-20 mr-12">
+                                <ATMSelectSearchable
+                                    name="minute"
+                                    required
+                                    value={values.minute}
+                                    selectLabel="MM"
+                                    label="Minute"
+                                    options={MinuteOptions()}
+                                    onChange={(selectValue) => {
+                                        if (selectValue !== '00') {
+                                            setShow(false)
+                                        }
+                                        setFieldValue('minute', selectValue)
+                                    }}
+                                />
+                            </div>
+                            <div className="-ml-12 mr-4">
+                                <ATMSelectSearchable
+                                    defaultValue="00"
+                                    label="Second"
+                                    required
+                                    options={MinuteOptions()}
+                                    name="second"
+                                    value={values.second}
+                                    selectLabel="SS"
+                                    onChange={(selectValue) => {
+                                        if (selectValue !== '00') {
+                                            setShow(false)
+                                        }
+                                        setFieldValue('second', selectValue)
+                                    }}
+                                />
+                            </div>
 
-                                            setFieldValue('second', selectValue)
-                                        }}
-                                    />
-                                </div>
                                 {show ? (
                                     <p className="font-poppins relative text-[14px] text-start mt-0 mr-2 text-red-500">
                                         Duration is Required
@@ -233,18 +231,10 @@ const AddTapeManagement = ({
                                 ) : (
                                     ''
                                 )}
-                            </div>
+                            
+                        </div>
 
-                            <ATMTextField
-                                name="remarks"
-                                value={values.remarks}
-                                label="Remarks"
-                                placeholder="Remarks"
-                                onChange={(e) =>
-                                    setFieldValue('remarks', e.target.value)
-                                }
-                            />
-
+                           <div className="grid grid-cols-3 gap-4">
                             <ATMTextField
                                 name="webSiteLink"
                                 value={values.webSiteLink}
@@ -264,7 +254,18 @@ const AddTapeManagement = ({
                                     setFieldValue('youtubeLink', e.target.value)
                                 }
                             />
+
+                            <ATMTextField
+                                name="remarks"
+                                value={values.remarks}
+                                label="Remarks"
+                                placeholder="Remarks"
+                                onChange={(e) =>
+                                    setFieldValue('remarks', e.target.value)
+                                }
+                            />
                         </div>
+                        
 
                         {/*  Phone  */}
                         <div className="px-3 py-8">
