@@ -21,13 +21,17 @@ import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
 
 export type FormInitialValues = {
     tapeName: string
-    channelGroupId: string
     tapeType: string
     schemeId: string
-    languageId: string
+    languageId: string[]
     duration: string
     artistId: string[]
     remarks: string
+    phone:{
+        phoneNo:string
+    }[]
+    webSiteLink: string
+    youtubeLink: string
     companyId: string
     hour: string
     minute: string
@@ -95,15 +99,20 @@ const AddTapeManagementWrapper = () => {
             setSchemeData(schemeDataApi?.data)
         }
     }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
+
     const initialValues: FormInitialValues = {
         tapeName: '',
-        channelGroupId: '',
         tapeType: '',
         schemeId: '',
-        languageId: '',
+        languageId: [],
         duration: '',
         artistId: [''],
         remarks: '',
+        phone: [{
+            phoneNo:''
+        }],
+        webSiteLink: '',
+        youtubeLink: '',
         hour: '0',
         minute: '00',
         second: '00',
@@ -114,29 +123,42 @@ const AddTapeManagementWrapper = () => {
     const validationSchema = object({
         tapeName: string().required('Required'),
         tapeType: string().required('Required'),
-        channelGroupId: string(),
-        languageId: string().required('Required'),
+        languageId: array().of(string().required('Required')),
         hour: string().required('Required'),
         minute: string().required('Required'),
         second: string().required('Required'),
         artistId: array().of(string().required('Required')),
         remarks: string(),
+        phone: array().of(
+            object().shape({
+                phoneNo: string().required('Please select a Item')
+                .min(10, "phone must be 10 digits").max(10, "phone must be 10 digits"),
+            })
+        ),       
+        webSiteLink: string(),
+        youtubeLink: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        //console.log(values.artistId, "Add")
-        let duration = `${values.hour}:${values.minute}:${values.second}`
+        
+        let newphoneNo = values?.phone?.map((ele) => {
+            return ele.phoneNo
+        })
+        let duration = `${values.hour}:${values.minute}:${values.second}`;         
+
         setTimeout(() => {
             AddTapeApi({
-                tapeName: values.tapeName,
-                channelGroupId: values.channelGroupId || null,
+                tapeName: values.tapeName,               
                 tapeType: values.tapeType,
                 schemeId: values.schemeId || null,
                 languageId: values.languageId,
                 duration: duration,
                 artistId: values.artistId,
                 remarks: values.remarks || '',
+                phone: newphoneNo,
+                webSiteLink: values?.webSiteLink || '',
+                youtubeLink: values?.youtubeLink || '',
                 companyId: values.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

@@ -1,4 +1,4 @@
-import { FormikProps } from 'formik'
+import { FormikProps, FieldArray } from 'formik'
 import React, { useState } from 'react'
 import { FormInitialValues } from './AddTapeManagementWrapper'
 import ATMBreadCrumbs, {
@@ -8,6 +8,9 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { HiPlus } from 'react-icons/hi'
+import { MdDeleteOutline } from 'react-icons/md'
+
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -69,16 +72,16 @@ const AddTapeManagement = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => {
-                                    formikProps.handleSubmit()
                                     if (
                                         formikProps?.values.hour === '0' &&
                                         formikProps.values.minute === '00' &&
                                         formikProps.values.second === '00'
                                     ) {
                                         setShow(true)
+                                        alert(0)
                                         if (
-                                            formikProps.values.languageId ===
-                                                '' ||
+                                            formikProps.values.languageId.length ===
+                                                0 ||
                                             formikProps.values.tapeName ===
                                                 '' ||
                                             formikProps.values.tapeType ===
@@ -86,10 +89,11 @@ const AddTapeManagement = ({
                                             formikProps.values.artistId
                                                 .length === 0
                                         ) {
+                                            alert(1)
                                             formikProps.handleSubmit()
                                         }
-                                    } else {
-                                        setShow(false)
+                                    } else {   
+                                        console.log(1)                                     
                                         formikProps.handleSubmit()
                                     }
                                 }}
@@ -135,18 +139,7 @@ const AddTapeManagement = ({
                                 }
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme"
-                            />
-                            <ATMSelectSearchable
-                                name="channelGroupId"
-                                selectLabel="Select Channel group"
-                                value={values.channelGroupId}
-                                isMulti={false}
-                                onChange={(e) => {
-                                    setFieldValue('channelGroupId', e)
-                                }}
-                                options={dropdownOptions.channelGroupOptions}
-                                label="Channel Group"
-                            />
+                            />                       
 
                             <ATMSelectSearchable
                                 name="artistId"
@@ -164,6 +157,7 @@ const AddTapeManagement = ({
                             <ATMSelectSearchable
                                 name="languageId"
                                 required
+                                isMulti={true}
                                 value={values.languageId}
                                 onChange={(value) =>
                                     setFieldValue('languageId', value)
@@ -250,12 +244,119 @@ const AddTapeManagement = ({
                                     setFieldValue('remarks', e.target.value)
                                 }
                             />
+
+                            <ATMTextField
+                                name="webSiteLink"
+                                value={values.webSiteLink}
+                                label="Website Link"
+                                placeholder="Website Link"
+                                onChange={(e) =>
+                                    setFieldValue('webSiteLink', e.target.value)
+                                }
+                            />
+
+                            <ATMTextField
+                                name="youtubeLink"
+                                value={values.youtubeLink}
+                                label="Youtube Link"
+                                placeholder="Youtube Link"
+                                onChange={(e) =>
+                                    setFieldValue('youtubeLink', e.target.value)
+                                }
+                            />
                         </div>
+
+                        {/*  Sales Order  */}
+                    <div className="px-3 mt-6">
+                        <div className=" text-lg pb-2 font-medium text-primary-main">
+                            Add Phone Number
+                        </div>
+
+                        <FieldArray name="phone">
+                            {({ push, remove }) => {
+                                return (
+                                    <>
+                                        <div className="flex flex-col gap-y-9">
+                                            {values.phone?.map(
+                                                (item, itemIndex) => {                                    
+                                                    let {phoneNo} = item
+                                                    return (
+                                                        <div
+                                                            key={itemIndex}
+                                                            className="flex gap-3 items-end  "
+                                                        >
+                                                            {/* Phone */}
+                                                            <div className="flex-[2_2_0%]">
+                                                                <ATMTextField
+                                                                    type="text"                                                                    
+                                                                    name={`phone[${itemIndex}].phoneNo`}
+                                                                    value={phoneNo }
+                                                                    label="Phone"
+                                                                    placeholder="Phone"
+                                                                    onChange={(e) =>
+                                                                     setFieldValue(
+                                                                            `phone[${itemIndex}].phoneNo`,
+                                                                            e.target.value
+                                                                        )
+                                                                    }
+                                                                />
+                                                            </div>
+
+                                                            
+
+                                                            {/* BUTTON - Delete */}
+                                                            {values
+                                                                .phone
+                                                                ?.length >
+                                                                1 && (
+                                                                <div>
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => {
+                                                                            remove(
+                                                                                itemIndex
+                                                                            )
+                                                                        }}
+                                                                        className="p-2 bg-red-500 text-white rounded"
+                                                                    >
+                                                                        <MdDeleteOutline className="text-2xl" />
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+
+                                        {/* BUTTON - Add More Product */}
+                                        <div className="flex justify-self-start py-7">
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    push({
+                                                        phone: ''                                                        
+                                                    })
+                                                }
+                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                            >
+                                                <HiPlus size="20" /> Add More
+                                            </button>
+                                        </div>
+                                    </>
+                                )
+                            }}
+                        </FieldArray>
+
+                        
+                    </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
+        
     )
 }
-
 export default AddTapeManagement
