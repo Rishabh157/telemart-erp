@@ -9,6 +9,7 @@ import {
 } from 'src/redux/slices/configuration/initialCallerTwoSlice'
 import { setSelectedInitialCallerThree } from 'src/redux/slices/configuration/initialCallerThreeSlice'
 import DispositionListViews from '../../sharedComponentss/DispositionListView'
+import { setFilterValue as setThreeFilterVAlue } from 'src/redux/slices/configuration/initialCallerThreeSlice'
 
 type Props = {
     initialCallerOne: any[]
@@ -30,6 +31,8 @@ const InitialCallOneListing = ({ initialCallerOne }: Props) => {
             dispatch(setSelectedInitialCallerTwo(null))
             dispatch(setSelectedInitialCallerThree(null))
             dispatch(setFilterValue(''))
+            dispatch(setThreeFilterVAlue(""))
+     
         } else {
             dispatch(setSelectedInitialOne(newValue))
             dispatch(setFilterValue(newValue.value))
