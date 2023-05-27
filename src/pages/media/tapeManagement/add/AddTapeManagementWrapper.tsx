@@ -27,8 +27,8 @@ export type FormInitialValues = {
     duration: string
     artistId: string[]
     remarks: string
-    phone:{
-        phoneNo:string
+    phone: {
+        phoneNo: string
     }[]
     webSiteLink: string
     youtubeLink: string
@@ -108,9 +108,11 @@ const AddTapeManagementWrapper = () => {
         duration: '',
         artistId: [''],
         remarks: '',
-        phone: [{
-            phoneNo:''
-        }],
+        phone: [
+            {
+                phoneNo: '',
+            },
+        ],
         webSiteLink: '',
         youtubeLink: '',
         hour: '0',
@@ -131,25 +133,27 @@ const AddTapeManagementWrapper = () => {
         remarks: string(),
         phone: array().of(
             object().shape({
-                phoneNo: string().required('Please select a Item')
-                .min(10, "phone must be 10 digits").max(10, "phone must be 10 digits"),
+                phoneNo: string()
+                    .required('Please select a Item')
+                    .min(10, 'phone must be 10 digits')
+                    .max(10, 'phone must be 10 digits'),
             })
-        ),       
+        ),
         webSiteLink: string(),
         youtubeLink: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        
+
         let newphoneNo = values?.phone?.map((ele) => {
             return ele.phoneNo
         })
-        let duration = `${values.hour}:${values.minute}:${values.second}`;         
+        let duration = `${values.hour}:${values.minute}:${values.second}`
 
         setTimeout(() => {
             AddTapeApi({
-                tapeName: values.tapeName,               
+                tapeName: values.tapeName,
                 tapeType: values.tapeType,
                 schemeId: values.schemeId || null,
                 languageId: values.languageId,

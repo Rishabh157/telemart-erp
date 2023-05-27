@@ -80,8 +80,8 @@ const AddTapeManagement = ({
                                         setShow(true)
                                         alert(0)
                                         if (
-                                            formikProps.values.languageId.length ===
-                                                0 ||
+                                            formikProps.values.languageId
+                                                .length === 0 ||
                                             formikProps.values.tapeName ===
                                                 '' ||
                                             formikProps.values.tapeType ===
@@ -92,8 +92,8 @@ const AddTapeManagement = ({
                                             alert(1)
                                             formikProps.handleSubmit()
                                         }
-                                    } else {   
-                                        console.log(1)                                     
+                                    } else {
+                                        console.log(1)
                                         formikProps.handleSubmit()
                                     }
                                 }}
@@ -139,7 +139,7 @@ const AddTapeManagement = ({
                                 }
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme"
-                            />                       
+                            />
 
                             <ATMSelectSearchable
                                 name="artistId"
@@ -267,96 +267,95 @@ const AddTapeManagement = ({
                         </div>
 
                         {/*  Sales Order  */}
-                    <div className="px-3 mt-6">
-                        <div className=" text-lg pb-2 font-medium text-primary-main">
-                            Add Phone Number
-                        </div>
+                        <div className="px-3 mt-6">
+                            <div className=" text-lg pb-2 font-medium text-primary-main">
+                                Add Phone Number
+                            </div>
 
-                        <FieldArray name="phone">
-                            {({ push, remove }) => {
-                                return (
-                                    <>
-                                        <div className="flex flex-col gap-y-9">
-                                            {values.phone?.map(
-                                                (item, itemIndex) => {                                    
-                                                    let {phoneNo} = item
-                                                    return (
-                                                        <div
-                                                            key={itemIndex}
-                                                            className="flex gap-3 items-end  "
-                                                        >
-                                                            {/* Phone */}
-                                                            <div className="flex-[2_2_0%]">
-                                                                <ATMTextField
-                                                                    type="text"                                                                    
-                                                                    name={`phone[${itemIndex}].phoneNo`}
-                                                                    value={phoneNo }
-                                                                    label="Phone"
-                                                                    placeholder="Phone"
-                                                                    onChange={(e) =>
-                                                                     setFieldValue(
-                                                                            `phone[${itemIndex}].phoneNo`,
-                                                                            e.target.value
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </div>
-
-                                                            
-
-                                                            {/* BUTTON - Delete */}
-                                                            {values
-                                                                .phone
-                                                                ?.length >
-                                                                1 && (
-                                                                <div>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                itemIndex
+                            <FieldArray name="phone">
+                                {({ push, remove }) => {
+                                    return (
+                                        <>
+                                            <div className="flex flex-col gap-y-9">
+                                                {values.phone?.map(
+                                                    (item, itemIndex) => {
+                                                        let { phoneNo } = item
+                                                        return (
+                                                            <div
+                                                                key={itemIndex}
+                                                                className="flex gap-3 items-end  "
+                                                            >
+                                                                {/* Phone */}
+                                                                <div className="flex-[2_2_0%]">
+                                                                    <ATMTextField
+                                                                        type="text"
+                                                                        name={`phone[${itemIndex}].phoneNo`}
+                                                                        value={
+                                                                            phoneNo
+                                                                        }
+                                                                        label="Phone"
+                                                                        placeholder="Phone"
+                                                                        onChange={(
+                                                                            e
+                                                                        ) =>
+                                                                            setFieldValue(
+                                                                                `phone[${itemIndex}].phoneNo`,
+                                                                                e
+                                                                                    .target
+                                                                                    .value
                                                                             )
-                                                                        }}
-                                                                        className="p-2 bg-red-500 text-white rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
+                                                                        }
+                                                                    />
                                                                 </div>
-                                                            )}
-                                                        </div>
-                                                    )
-                                                }
-                                            )}
-                                        </div>
 
-                                        {/* BUTTON - Add More Product */}
-                                        <div className="flex justify-self-start py-7">
-                                            <button
-                                                type="button"
-                                                onClick={() =>
-                                                    push({
-                                                        phone: ''                                                        
-                                                    })
-                                                }
-                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
-                                            >
-                                                <HiPlus size="20" /> Add More
-                                            </button>
-                                        </div>
-                                    </>
-                                )
-                            }}
-                        </FieldArray>
+                                                                {/* BUTTON - Delete */}
+                                                                {values.phone
+                                                                    ?.length >
+                                                                    1 && (
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    itemIndex
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        )
+                                                    }
+                                                )}
+                                            </div>
 
-                        
-                    </div>
-
-
+                                            {/* BUTTON - Add More Product */}
+                                            <div className="flex justify-self-start py-7">
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        push({
+                                                            phone: '',
+                                                        })
+                                                    }
+                                                    className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                                >
+                                                    <HiPlus size="20" /> Add
+                                                    More
+                                                </button>
+                                            </div>
+                                        </>
+                                    )
+                                }}
+                            </FieldArray>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
     )
 }
 export default AddTapeManagement

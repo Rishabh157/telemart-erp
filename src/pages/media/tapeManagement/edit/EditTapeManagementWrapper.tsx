@@ -31,8 +31,8 @@ export type FormInitialValues = {
     languageId: string[]
     duration: string
     artistId: string[]
-    phone:{
-        phoneNo:string
+    phone: {
+        phoneNo: string
     }[]
     webSiteLink: string
     youtubeLink: string
@@ -47,12 +47,12 @@ export type FieldType = Field<''>
 const formFields: { sectionName: string; fields: FieldType[] }[] = [
     {
         sectionName: 'phone',
-        fields: [           
+        fields: [
             {
                 name: 'phone',
                 label: 'Phone Number',
                 placeholder: 'Phone Number',
-            },           
+            },
         ],
     },
 ]
@@ -148,21 +148,21 @@ const EditTapeManagementWrapper = () => {
     //console.log(artist)
     const newDuration = selectedItem?.duration?.split(':')
 
-    let phoneNumber: any = [];
-    
+    let phoneNumber: any = []
+
     selectedItem?.phone.map((val: any) => {
-        return phoneNumber.push({"phoneNo": val})
-    })    
+        return phoneNumber.push({ phoneNo: val })
+    })
 
     const initialValues: FormInitialValues = {
-        tapeName: selectedItem?.tapeName || '',        
+        tapeName: selectedItem?.tapeName || '',
         tapeType: selectedItem?.tapeType || '',
         schemeId: selectedItem?.schemeId || '',
         languageId: selectedItem?.languageId || [],
         duration: selectedItem?.duration || '',
         artistId: artist || [],
         remarks: selectedItem?.remarks || '',
-        phone: phoneNumber || '',        
+        phone: phoneNumber || '',
         webSiteLink: selectedItem?.webSiteLink || '',
         youtubeLink: selectedItem?.youtubeLink || '',
         hour: newDuration ? newDuration[0] : '0',
@@ -184,10 +184,12 @@ const EditTapeManagementWrapper = () => {
         remarks: string(),
         phone: array().of(
             object().shape({
-                phoneNo: string().required('Please select a Item')
-                .min(10, "phone must be 10 digits").max(10, "phone must be 10 digits"),
+                phoneNo: string()
+                    .required('Please select a Item')
+                    .min(10, 'phone must be 10 digits')
+                    .max(10, 'phone must be 10 digits'),
             })
-        ), 
+        ),
         webSiteLink: string(),
         youtubeLink: string(),
     })
@@ -199,7 +201,7 @@ const EditTapeManagementWrapper = () => {
         let newPhoneNo = values?.phone?.map((ele) => {
             return ele.phoneNo
         })
-        
+
         setTimeout(() => {
             updateTape({
                 body: {

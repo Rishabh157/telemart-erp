@@ -1,6 +1,6 @@
 import { FieldArray, FormikProps } from 'formik'
 import React, { useState } from 'react'
-import {FormInitialValues } from './EditTapeManagementWrapper'
+import { FormInitialValues } from './EditTapeManagementWrapper'
 import { MdDeleteOutline } from 'react-icons/md'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -40,7 +40,8 @@ const EditTapeManagement = ({
     dropdownOptions,
     formFields,
 }: Props) => {
-    const { values, setFieldValue }: { values: any; setFieldValue: any } = formikProps
+    const { values, setFieldValue }: { values: any; setFieldValue: any } =
+        formikProps
     const [show, setShow] = useState(false)
     // console.log(values, "values")
 
@@ -84,8 +85,8 @@ const EditTapeManagement = ({
                                     ) {
                                         setShow(true)
                                         if (
-                                            formikProps.values.languageId.length ===
-                                                0 ||
+                                            formikProps.values.languageId
+                                                .length === 0 ||
                                             formikProps.values.tapeName ===
                                                 '' ||
                                             formikProps.values.tapeType ===
@@ -152,7 +153,7 @@ const EditTapeManagement = ({
                                 }
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme"
-                            />                           
+                            />
 
                             <ATMSelectSearchable
                                 name="artistId"
@@ -177,74 +178,69 @@ const EditTapeManagement = ({
                                 options={dropdownOptions.languageOptions}
                                 label="Language"
                             />
-                        
-                            </div>
-                        
-                            <div className="grid grid-cols-4 gap-4 py-5">
-                                <div className=" text-slate-700  font-medium mt-12 ">
-                                    Duration :
-                                </div>  
-                                                           
-                                    <ATMTextField
-                                        name="hour"
-                                        required
-                                        value={values.hour}
-                                        type="number"
-                                        label="Hour"
-                                        min={0}
-                                        placeholder="HH"
-                                        onChange={(e) => {
-                                            if (e.target.value !== '0') {
-                                                setShow(false)
-                                            }
-                                            setFieldValue(
-                                                'hour',
-                                                e.target.value
-                                            )
-                                        }}
-                                    />
-                                    <ATMSelectSearchable
-                                        name="minute"
-                                        required
-                                        value={values.minute}
-                                        selectLabel="MM"
-                                        label="Minute"
-                                        options={MinuteOptions()}
-                                        onChange={(selectValue) => {
-                                            if (selectValue !== '00') {
-                                                setShow(false)
-                                            }
-                                            setFieldValue('minute', selectValue)
-                                        }}
-                                    />
+                        </div>
 
-                                    <ATMSelectSearchable
-                                        defaultValue="00"
-                                        label="Second"
-                                        required
-                                        options={MinuteOptions()}
-                                        name="second"
-                                        value={values.second}
-                                        selectLabel="SS"
-                                        onChange={(selectValue) => {
-                                            if (selectValue !== '00') {
-                                                setShow(false)
-                                            }
-                                            setFieldValue('second', selectValue)
-                                        }}
-                                    />
-                                
-
-                                {show ? (
-                                    <p className="font-poppins relative text-[14px] text-start mt-0 mr-2 text-red-500">
-                                        Duration is Required
-                                    </p>
-                                ) : (
-                                    ''
-                                )}
+                        <div className="grid grid-cols-4 gap-4 py-5">
+                            <div className=" text-slate-700  font-medium mt-12 ">
+                                Duration :
                             </div>
 
-                            <div className="grid grid-cols-3 gap-4">
+                            <ATMTextField
+                                name="hour"
+                                required
+                                value={values.hour}
+                                type="number"
+                                label="Hour"
+                                min={0}
+                                placeholder="HH"
+                                onChange={(e) => {
+                                    if (e.target.value !== '0') {
+                                        setShow(false)
+                                    }
+                                    setFieldValue('hour', e.target.value)
+                                }}
+                            />
+                            <ATMSelectSearchable
+                                name="minute"
+                                required
+                                value={values.minute}
+                                selectLabel="MM"
+                                label="Minute"
+                                options={MinuteOptions()}
+                                onChange={(selectValue) => {
+                                    if (selectValue !== '00') {
+                                        setShow(false)
+                                    }
+                                    setFieldValue('minute', selectValue)
+                                }}
+                            />
+
+                            <ATMSelectSearchable
+                                defaultValue="00"
+                                label="Second"
+                                required
+                                options={MinuteOptions()}
+                                name="second"
+                                value={values.second}
+                                selectLabel="SS"
+                                onChange={(selectValue) => {
+                                    if (selectValue !== '00') {
+                                        setShow(false)
+                                    }
+                                    setFieldValue('second', selectValue)
+                                }}
+                            />
+
+                            {show ? (
+                                <p className="font-poppins relative text-[14px] text-start mt-0 mr-2 text-red-500">
+                                    Duration is Required
+                                </p>
+                            ) : (
+                                ''
+                            )}
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-4">
                             <ATMTextField
                                 name="webSiteLink"
                                 value={values.webSiteLink}
@@ -274,94 +270,96 @@ const EditTapeManagement = ({
                                     setFieldValue('remarks', e.target.value)
                                 }
                             />
-                            </div>
+                        </div>
 
-                    <div className="px-3 py-8">
-                        <div className=" text-lg pb-2 font-medium text-primary-main">
+                        <div className="px-3 py-8">
+                            <div className=" text-lg pb-2 font-medium text-primary-main">
                                 Add Phone Number
                             </div>
 
                             <FieldArray name="phone">
-                            {({ push, remove }) => {
-                                return (
-                                    <>
-                                        <div className="flex flex-col gap-y-9">
-                                            {values.phone?.map(
-                                                (item: any, itemIndex: any) => {                                    
-                                                    let {phoneNo} = item
-                                                    console.log(phoneNo)
-                                                    return (
-                                                        <div
-                                                            key={itemIndex}
-                                                            className="flex gap-3 items-end  "
-                                                        >
-                                                           
-                                                           
-
-                                                            {/* Phone */}
-                                                            <div className="flex-[2_2_0%]">
-                                                                <ATMTextField
-                                                                    type="text"                                                                    
-                                                                    name={`phone[${itemIndex}].phoneNo`}
-                                                                    value={phoneNo }
-                                                                    label="Phone"
-                                                                    placeholder="Phone"
-                                                                    onChange={(e) =>
-                                                                    { setFieldValue(
-                                                                            `phone[${itemIndex}].phoneNo`,
-                                                                            e.target.value
-                                                                        )
-                                                                    }}
-                                                                />
-                                                            </div>
-
-                                                            
-
-                                                            {/* BUTTON - Delete */}
-                                                            {values
-                                                                .phone
-                                                                ?.length >
-                                                                1 && (
-                                                                <div>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                itemIndex
+                                {({ push, remove }) => {
+                                    return (
+                                        <>
+                                            <div className="flex flex-col gap-y-9">
+                                                {values.phone?.map(
+                                                    (
+                                                        item: any,
+                                                        itemIndex: any
+                                                    ) => {
+                                                        let { phoneNo } = item
+                                                        console.log(phoneNo)
+                                                        return (
+                                                            <div
+                                                                key={itemIndex}
+                                                                className="flex gap-3 items-end  "
+                                                            >
+                                                                {/* Phone */}
+                                                                <div className="flex-[2_2_0%]">
+                                                                    <ATMTextField
+                                                                        type="text"
+                                                                        name={`phone[${itemIndex}].phoneNo`}
+                                                                        value={
+                                                                            phoneNo
+                                                                        }
+                                                                        label="Phone"
+                                                                        placeholder="Phone"
+                                                                        onChange={(
+                                                                            e
+                                                                        ) => {
+                                                                            setFieldValue(
+                                                                                `phone[${itemIndex}].phoneNo`,
+                                                                                e
+                                                                                    .target
+                                                                                    .value
                                                                             )
                                                                         }}
-                                                                        className="p-2 bg-red-500 text-white rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
+                                                                    />
                                                                 </div>
-                                                            )}
-                                                        </div>
-                                                    )
-                                                }
-                                            )}
-                                        </div>
 
-                                        {/* BUTTON - Add More Product */}
-                                        <div className="flex justify-self-start py-7">
-                                            <button
-                                                type="button"
-                                                onClick={() =>
-                                                    push({
-                                                        phone: ''                                                        
-                                                    })
-                                                }
-                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
-                                            >
-                                                <HiPlus size="20" /> Add More
-                                            </button>
-                                        </div>
-                                    </>
-                                )
-                            }}
-                        </FieldArray>
+                                                                {/* BUTTON - Delete */}
+                                                                {values.phone
+                                                                    ?.length >
+                                                                    1 && (
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    itemIndex
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        )
+                                                    }
+                                                )}
+                                            </div>
 
-
+                                            {/* BUTTON - Add More Product */}
+                                            <div className="flex justify-self-start py-7">
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        push({
+                                                            phone: '',
+                                                        })
+                                                    }
+                                                    className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                                >
+                                                    <HiPlus size="20" /> Add
+                                                    More
+                                                </button>
+                                            </div>
+                                        </>
+                                    )
+                                }}
+                            </FieldArray>
                         </div>
                     </div>
                 </div>
