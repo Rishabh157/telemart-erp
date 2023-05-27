@@ -146,7 +146,7 @@ import Auth from './pages/login/Auth'
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
 import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
 import Disposition from './pages/disposition/Disposition'
-import Inbound from './pages/media/Inbound/Inbound'
+import InbouundWrapper from './pages/media/Inbound/InboundWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -642,7 +642,7 @@ const PageRoutes = () => {
                         path="media/artist/add"
                         element={<AddArtistWrapper />}
                     />
-                    <Route path="media/inbound/" element={<Inbound />} />
+                    <Route path="media/inbound/" element={<InbouundWrapper />} />
                     {/* disposition route */}
                 </Routes>
             </BrowserRouter>

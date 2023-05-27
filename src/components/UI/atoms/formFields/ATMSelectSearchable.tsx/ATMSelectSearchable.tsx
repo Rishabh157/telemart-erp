@@ -1,7 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
 import { ErrorMessage } from 'formik'
-// import { SelectOption } from 'src/models/FormField/FormField.model'
 export type SelectOption = {
     label: string
     value: string | number | string[]
@@ -13,7 +12,7 @@ type Props = {
     onChange: (value: any) => void
     label?: string
     required?: boolean
-    size?: 'small' | 'medium'
+    size?: 'small' | 'medium' | 'xs'
     name: string
     isSearchable?: boolean
     selectLabel?: string
@@ -21,6 +20,7 @@ type Props = {
     isMulti?: boolean
     isAllSelect?: boolean
     isLoading?: boolean
+    labelClass?:string
 }
 
 const ATMSelectSearchable = ({
@@ -35,6 +35,7 @@ const ATMSelectSearchable = ({
     defaultValue = '',
     name,
     isMulti = false,
+    labelClass=' font-medium',
     isAllSelect = false,
     isLoading = false,
 }: Props) => {
@@ -45,7 +46,16 @@ const ATMSelectSearchable = ({
             borderColor: 'border-slate-400  ',
             borderWidth: 0,
             boxShadow: 'none',
-            padding: 0,
+            minHeight: 'unset',
+            height: size === 'xs' ? '28px' : '40px',
+            display: 'flex',
+            alignItems: 'center',
+        }),
+        input: (provided: any) => ({
+            ...provided,
+            minHeight: 'unset',
+            height:  size == 'xs' ? '28px' : '40px',
+            textAlign: 'center',
         }),
     }
 
@@ -111,14 +121,14 @@ const ATMSelectSearchable = ({
     return (
         <div className="relative mt-4">
             {label && (
-                <label className="text-slate-700 font-medium">
+                  <label className={`text-slate-700 ${labelClass}`}>
                     {label}
                     {required && <span className="text-red-500"> * </span>}
                 </label>
             )}
 
             <Select
-                className="mt-2 border rounded border-slate-400   "
+                className="mt-2 border rounded border-slate-400      "
                 name={name}
                 defaultValue={selectOptions?.find(
                     (option) => option.value === defaultValue
@@ -133,7 +143,6 @@ const ATMSelectSearchable = ({
                 isLoading={isLoading}
                 isOptionDisabled={(options) => (options.value as string) === ''}
                 placeholder={`${selectLabel}`}
-
                 // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
             />
 
