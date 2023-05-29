@@ -1,41 +1,48 @@
 import React, { useState } from 'react'
-import AddCountryDialog from './AddDispositionOneDialog'
+import { Formik } from 'formik'
+import { object, string } from 'yup'
+import AddWebsite from './AddWebsite'
+import { showToast } from 'src/utils'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { object, string } from 'yup'
-import { showToast } from 'src/utils'
-import { Formik } from 'formik'
-import { useAdddispositionOneMutation } from 'src/services/configurations/DispositiononeServices'
+import { useAddWebsiteMutation } from 'src/services/websites/WebsiteServices'
+import WebsiteLayout from '../../WebsiteLayout'
 
-type Props = {
-    onClose: () => void
-}
+type Props = {}
 
 export type FormInitialValues = {
-    dispositionName: string
+    websiteName: string
 }
-const AddDispositionOneWrappper = ({ onClose }: Props) => {
-    const [addDisposition] = useAdddispositionOneMutation()
+
+const AddWebsiteWrapper = (props: Props) => {
+    // Form Initial Values
+    const navigate = useNavigate()
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const [addWebsite] = useAddWebsiteMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const [apiStatus, setApiStatus] = useState(false)
 
     const initialValues: FormInitialValues = {
-        dispositionName: '',
+        websiteName: '',
     }
+
+    // Form Validation Schema
     const validationSchema = object({
-        dispositionName: string().required('Disposition Name is required'),
+        websiteName: string().required('Website Name is required'),
     })
+
+    //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            addDisposition({
-                dispositionName: values.dispositionName,
+            addWebsite({
+                websiteName: values.websiteName,
                 companyId: userData?.companyId || '',
-            }).then((res: any) => {
+            }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Disposition added successfully!')
-                        onClose()
+                        showToast('success', 'Website added successfully!')
+                        navigate('/website/Website')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -46,9 +53,8 @@ const AddDispositionOneWrappper = ({ onClose }: Props) => {
             })
         }, 1000)
     }
-
     return (
-        <>
+        <WebsiteLayout>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -56,16 +62,15 @@ const AddDispositionOneWrappper = ({ onClose }: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <AddCountryDialog
-                            onClose={onClose}
+                        <AddWebsite
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                         />
                     )
                 }}
             </Formik>
-        </>
+        </WebsiteLayout>
     )
 }
 
-export default AddDispositionOneWrappper
+export default AddWebsiteWrapper
