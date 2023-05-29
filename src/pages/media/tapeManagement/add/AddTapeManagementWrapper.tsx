@@ -18,6 +18,7 @@ import { setLanguage } from 'src/redux/slices/languageSlice'
 import { LanguageListResponse } from 'src/models'
 import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
 import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     tapeName: string
@@ -134,7 +135,7 @@ const AddTapeManagementWrapper = () => {
         phone: array().of(
             object().shape({
                 phoneNo: string()
-                    .required('Please select a Item')
+                    .required('required')
                     .min(10, 'phone must be 10 digits')
                     .max(10, 'phone must be 10 digits'),
             })
@@ -178,6 +179,7 @@ const AddTapeManagementWrapper = () => {
                 setApiStatus(false)
             })
         }, 1000)
+        dispatch(setFormSubmitting(false))
     }
     const dropdownOptions = {
         artistOption: allArtist.map((item: any) => {

@@ -185,7 +185,7 @@ const EditTapeManagementWrapper = () => {
         phone: array().of(
             object().shape({
                 phoneNo: string()
-                    .required('Please select a Item')
+                    .required('Required')
                     .min(10, 'phone must be 10 digits')
                     .max(10, 'phone must be 10 digits'),
             })

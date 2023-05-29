@@ -10,7 +10,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { HiPlus } from 'react-icons/hi'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { useSelector, useDispatch } from 'react-redux'
 import { MdDeleteOutline } from 'react-icons/md'
+import { RootState, AppDispatch } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -40,6 +43,12 @@ const AddTapeManagement = ({
 }: Props) => {
     const { values, setFieldValue } = formikProps
     const [show, setShow] = useState(false)
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     const MinuteOptions = () => {
         let options: SelectOption[] = []
@@ -79,7 +88,7 @@ const AddTapeManagement = ({
                                         formikProps.values.second === '00'
                                     ) {
                                         setShow(true)
-                                        alert(0)
+                                        dispatch(setFormSubmitting(true))
                                         if (
                                             formikProps.values.languageId
                                                 .length === 0 ||
@@ -90,11 +99,11 @@ const AddTapeManagement = ({
                                             formikProps.values.artistId
                                                 .length === 0
                                         ) {
-                                            alert(1)
+                                            dispatch(setFormSubmitting(true))
                                             formikProps.handleSubmit()
                                         }
                                     } else {
-                                        console.log(1)
+                                        dispatch(setFormSubmitting(true))
                                         formikProps.handleSubmit()
                                     }
                                 }}
@@ -301,15 +310,12 @@ const AddTapeManagement = ({
                                                                 <div className="flex">
                                                                     <ATMTextField
                                                                         type="text"
+                                                                        required
                                                                         name={`phone[${itemIndex}].phoneNo`}
-                                                                        value={
-                                                                            phoneNo
-                                                                        }
+                                                                        value={phoneNo }
                                                                         label="Phone"
                                                                         placeholder="Phone"
-                                                                        onChange={(
-                                                                            e
-                                                                        ) => {
+                                                                        onChange={(e) => {
                                                                             setFieldValue(
                                                                                 `phone[${itemIndex}].phoneNo`,
                                                                                 e
@@ -317,6 +323,7 @@ const AddTapeManagement = ({
                                                                                     .value
                                                                             )
                                                                         }}
+                                                                        isSubmitting={isSubmitting}
                                                                     />
                                                                 
 
@@ -347,11 +354,11 @@ const AddTapeManagement = ({
                                             <div className="flex justify-self-start py-7">
                                                 <button
                                                     type="button"
-                                                    onClick={() =>{                                                  
+                                                    onClick={() =>                                                  
                                                         push({
-                                                            phone: '',
+                                                            phoneNo: '',
                                                         })
-                                                    }}
+                                                    }
                                                     className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
                                                 >
                                                     <HiPlus size="20" /> Add
