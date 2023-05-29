@@ -148,6 +148,9 @@ import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlo
 import Disposition from './pages/disposition/Disposition'
 import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
 import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
+import WebsiteBlogListingWrapper from './pages/websites/websites-blog/list/WebsiteBlogListingWrapper'
+import AddWebsiteBlogWrapper from './pages/websites/websites-blog/add/AddwebsiteBlogWrapper'
+import EditWebsiteBlogWrapper from './pages/websites/websites-blog/edit/EditWebsiteBlogWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -651,6 +654,18 @@ const PageRoutes = () => {
                          <Route
                         path="all-websites/website/add"
                         element={<AddWebsiteWrapper />}
+                    />
+                     <Route
+                        path="all-websites/website-blog"
+                        element={<WebsiteBlogListingWrapper />}
+                    />
+                       <Route
+                        path="all-websites/website-blog/add"
+                        element={<AddWebsiteBlogWrapper />}
+                    />
+                     <Route
+                        path="all-websites/website-blog/:id"
+                        element={<EditWebsiteBlogWrapper />}
                     />
                  
                 </Routes>
