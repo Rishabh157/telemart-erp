@@ -20,7 +20,7 @@ type Props = {
     isMulti?: boolean
     isAllSelect?: boolean
     isLoading?: boolean
-    labelClass?:string
+    labelClass?: string
 }
 
 const ATMSelectSearchable = ({
@@ -35,7 +35,7 @@ const ATMSelectSearchable = ({
     defaultValue = '',
     name,
     isMulti = false,
-    labelClass=' font-medium',
+    labelClass = ' font-medium',
     isAllSelect = false,
     isLoading = false,
 }: Props) => {
@@ -50,12 +50,30 @@ const ATMSelectSearchable = ({
             height: size === 'xs' ? '28px' : '40px',
             display: 'flex',
             alignItems: 'center',
+            padding: '0px',
+        }),
+        valueContainer: (provided: any) => ({
+            ...provided,
+            paddingLeft: '4px',
+            paddingTop: '0px',
+            backgroundColor: 'lightgray',
+            // borderRadius: '4px',
+            alignItems: 'start',
+        }),
+        indicator:(provided:any)=>({
+            ...provided,
+            padding:'0px'
+
         }),
         input: (provided: any) => ({
             ...provided,
             minHeight: 'unset',
-            height:  size == 'xs' ? '28px' : '40px',
-            textAlign: 'center',
+            textColor:'rgb(51 65 85,0)',
+            // color: rgb(51 65 85 / var(--tw-text-opacity));
+            // height: size === 'xs' ? '28px' : '40px',
+            // textAlign: 'center',
+            paddingLeft: '4px',
+            paddingTop: '0px',  
         }),
     }
 
@@ -66,7 +84,7 @@ const ATMSelectSearchable = ({
     if (isMulti && isAllSelect) {
         const selectOptions2 = [
             {
-                value: 'All select',
+                value: 'all-select',
                 label: `All Select`,
             },
         ]
@@ -76,7 +94,7 @@ const ATMSelectSearchable = ({
         if (isMulti) {
             if (isAllSelect) {
                 const allValues = selectedOption?.find(
-                    (multiValue: any) => multiValue.label === 'All Select'
+                    (multiValue: any) => multiValue.value === 'all-select'
                 )
                 if (allValues?.value) {
                     const valuesAll = options.map((option) => option.value)
@@ -121,14 +139,15 @@ const ATMSelectSearchable = ({
     return (
         <div className="relative mt-4">
             {label && (
-                  <label className={`text-slate-700 ${labelClass}`}>
+                <label className={`text-slate-700 ${labelClass}`}>
                     {label}
                     {required && <span className="text-red-500"> * </span>}
                 </label>
             )}
 
             <Select
-                className="mt-2 border rounded border-slate-400      "
+                className="mt-2 border rounded border-slate-400 "
+                classNamePrefix={'css-uypqwk'}
                 name={name}
                 defaultValue={selectOptions?.find(
                     (option) => option.value === defaultValue

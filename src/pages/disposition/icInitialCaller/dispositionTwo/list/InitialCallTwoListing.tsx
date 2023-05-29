@@ -32,6 +32,7 @@ const InitialCallTwoListing = ({ initialCallerTwo }: Props) => {
         } else {
             dispatch(setSelectedInitialCallerTwo(newValue))
             dispatch(setFilterValue(newValue.value))
+            dispatch(setSelectedDispostionThree(null))
         }
     }
 

@@ -22,7 +22,6 @@ const InitialCallTwoListingWrapper = () => {
             value: ele._id,
         }
     })
-    console.log(initialCallerTwo)
     const { data } = useGetinitialCallerTwoQuery({
         limit: 100,
         searchValue: searchValue,
