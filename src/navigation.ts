@@ -96,4 +96,9 @@ export const navigation: NavItemType[] = [
         icon: AiOutlineSetting,
         path: '/disposition',
     },
+    {
+        label: 'All Website',
+        icon: AiOutlineSetting,
+        path: '/all-websites/website',
+    },
 ]

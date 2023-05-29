@@ -146,6 +146,8 @@ import Auth from './pages/login/Auth'
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
 import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
 import Disposition from './pages/disposition/Disposition'
+import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
+import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -641,7 +643,16 @@ const PageRoutes = () => {
                         path="media/artist/add"
                         element={<AddArtistWrapper />}
                     />
-                    {/* disposition route */}
+                       {/* Website route */}
+                       <Route
+                        path="all-websites/website"
+                        element={<WebstieListingWrapper />}
+                    />
+                         <Route
+                        path="all-websites/website/add"
+                        element={<AddWebsiteWrapper />}
+                    />
+                 
                 </Routes>
             </BrowserRouter>
         </>
