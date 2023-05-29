@@ -16,7 +16,13 @@ import WebsitesLayout from '../../WebsiteLayout'
 type Props = {}
 
 export type FormInitialValues = {
-    websiteName: string
+    productName: string,
+    url: string,
+    gaTagIp: string,
+    searchConsoleIp: string,
+    headerSpace: string,
+    footerSpace: string,
+    siteMap: string,   
 }
 
 const EditWebsiteWrapper = (props: Props) => {
@@ -33,13 +39,31 @@ const EditWebsiteWrapper = (props: Props) => {
 
     const [editWebsites] = useUpdateWebsiteMutation()
     const { data, isLoading, isFetching } = useGetWebsiteByIdQuery(Id)
+
+    useEffect(() => {
+        dispatch(setSelectedWebsite(data?.data))
+    }, [dispatch, data, isLoading, isFetching])
+    
+
     const initialValues: FormInitialValues = {
-        websiteName: selectedItem?.websiteName || '',
+        productName: selectedItem?.productName,
+        url: selectedItem?.url,
+        gaTagIp: selectedItem?.gaTagIp || "",
+        searchConsoleIp: selectedItem?.searchConsoleIp || "",
+        headerSpace: selectedItem?.headerSpace || "",
+        footerSpace: selectedItem?.footerSpace || "",
+        siteMap: selectedItem?.siteMap || "",
     }
 
     // Form Validation Schema
-    const validationSchema = object({
-        websiteName: string().required('Website Name is required'),
+     const validationSchema = object({
+        productName: string().required('Required'),
+        url: string().required('Required'),
+        gaTagIp: string(),
+        searchConsoleIp: string(),
+        headerSpace: string(),
+        footerSpace: string(),
+        siteMap: string(),
     })
 
     //    Form Submit Handler
@@ -48,7 +72,13 @@ const EditWebsiteWrapper = (props: Props) => {
         setTimeout(() => {
             editWebsites({
                 body: {
-                    websiteName: values.websiteName,
+                    productName: values.productName,
+                    url: values.url,
+                    gaTagIp: values.gaTagIp || "",
+                    searchConsoleIp: values.searchConsoleIp || "",
+                    headerSpace: values.headerSpace || "",
+                    footerSpace: values.footerSpace || "",
+                    siteMap: values.siteMap || "",
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',
@@ -68,9 +98,9 @@ const EditWebsiteWrapper = (props: Props) => {
         }, 1000)
     }
 
-    useEffect(() => {
-        dispatch(setSelectedWebsite(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
+   
+
+
     return (
         <WebsitesLayout>
             <Formik

@@ -148,6 +148,7 @@ import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlo
 import Disposition from './pages/disposition/Disposition'
 import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
 import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
+import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -652,6 +653,11 @@ const PageRoutes = () => {
                         path="all-websites/website/add"
                         element={<AddWebsiteWrapper />}
                     />
+                    <Route
+                        path="all-websites/website/:id"
+                        element={<EditWebsiteWrapper />}
+                    />
+                    
                  
                 </Routes>
             </BrowserRouter>

@@ -1,5 +1,11 @@
 export type WebsiteListResponse = {
-    websiteName: string
+    productName: string,
+    url: string,
+    gaTagIp: string | '',
+    searchConsoleIp: string | '',
+    headerSpace: string | '',
+    footerSpace: string | '',
+    siteMap: string | '',
     companyId: string
     count: number
     _id: string
@@ -11,13 +17,25 @@ export type WebsiteListResponse = {
 }
 
 export type AddWebsite = {
-    websiteName: string
-    companyId: string
+    productName: string,
+    url: string,
+    gaTagIp: string | '',
+    searchConsoleIp: string | '',
+    headerSpace: string | '',
+    footerSpace: string | '',
+    siteMap: string | '',  
+    companyId: string | ''
 }
 
 export type UpdateWebsite = {
     body: {
-        websiteName: string
+        productName: string,
+        url: string,
+        gaTagIp: string | '',
+        searchConsoleIp: string | '',
+        headerSpace: string | '',
+        footerSpace: string | '',
+        siteMap: string | '',
         companyId: string
     }
     id: string
