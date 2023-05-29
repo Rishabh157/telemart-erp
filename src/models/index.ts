@@ -113,3 +113,8 @@ export type {
     AddWebsite,
     UpdateWebsite,
 } from './website/Website.model'
+export type {
+    WebsiteBlogListResponse,
+    AddWebsiteBlog,
+    UpdateWebsiteBlog,
+} from './website/WebsiteBlog.model'

@@ -22,7 +22,7 @@ import { showToast } from 'src/utils'
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const [deleteCompetitor] = useDeletegetWebsiteMutation()
+    const [deleteWebsite] = useDeletegetWebsiteMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsiteState: any = useSelector((state: RootState) => state.website)
@@ -123,7 +123,7 @@ const WebstieListingWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteCompetitor(currentId).then((res: any) => {
+        deleteWebsite(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Website deleted successfully!')

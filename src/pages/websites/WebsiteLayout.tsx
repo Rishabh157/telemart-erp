@@ -25,6 +25,11 @@ const websitesNavigation: NavItemType[] = [
         icon: TbAppsFilled,
         path: '/all-websites/website',
     },
+    {
+        label: 'Website Blog',
+        icon: TbAppsFilled,
+        path: '/all-websites/website-blog',
+    },
 ]
 
 type Props = {

@@ -37,7 +37,7 @@ const EditWebsiteWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
-    const [editWebsites] = useUpdateWebsiteMutation()
+    const [updateWebsite] = useUpdateWebsiteMutation()
     const { data, isLoading, isFetching } = useGetWebsiteByIdQuery(Id)
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const EditWebsiteWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         productName: string().required('Required'),
-        url: string().required('Required'),
+        url: string().url("Please enter valid URL").required('Required'),
         gaTagIp: string(),
         searchConsoleIp: string(),
         headerSpace: string(),
@@ -69,7 +69,7 @@ const EditWebsiteWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            editWebsites({
+            updateWebsite({
                 body: {
                     productName: values.productName,
                     url: values.url,

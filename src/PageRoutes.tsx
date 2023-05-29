@@ -149,6 +149,9 @@ import Disposition from './pages/disposition/Disposition'
 import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
 import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
 import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
+import ListWebstieBlogWrapper from './pages/websites/website-blog/list/ListWebsiteBlogWrapper'
+import AddWebsiteBlogWrapper from './pages/websites/website-blog/add/AddWebsiteBlogWrapper'
+import EditWebsiteBlogWrapper from './pages/websites/website-blog/edit/EditWebsiteBlogWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -656,6 +659,20 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website/:id"
                         element={<EditWebsiteWrapper />}
+                    />
+
+                    {/* Website Blog route */}
+                    <Route
+                        path="all-websites/website-blog"
+                        element={<ListWebstieBlogWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-blog/add"
+                        element={<AddWebsiteBlogWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-blog/:id"
+                        element={<EditWebsiteBlogWrapper />}
                     />
                 </Routes>
             </BrowserRouter>
