@@ -12,7 +12,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/media/tapeManagementSlice'
+} from 'src/redux/slices/website/websiteSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -21,22 +21,19 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
+const WebsiteListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const tapeManagementState: any = useSelector(
-        (state: RootState) => state.tapeManagement
-    )
+    const WebsiteState: any = useSelector((state: RootState) => state.website)
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = tapeManagementState
-
+    const { page, rowsPerPage, totalItems, searchValue } = WebsiteState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Media',
+            label: 'Website',
             path: '/dashboard',
         },
         {
-            label: 'Tape',
+            label: 'Website',
         },
     ]
 
@@ -47,30 +44,28 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Tape Management </ATMPageHeading>
+                <ATMPageHeading> Website Management </ATMPageHeading>
                 <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Tape
+                    + Add Website
                 </button>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
-                    searchValue={searchValue}
                     page={page}
+                    searchValue={searchValue}
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    onSearch={(newValue) => {
-                        dispatch(setSearchValue(newValue))
-                    }}
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
                 />
 
@@ -105,4 +100,4 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
 }
 
-export default TapeManagementListing
+export default WebsiteListing

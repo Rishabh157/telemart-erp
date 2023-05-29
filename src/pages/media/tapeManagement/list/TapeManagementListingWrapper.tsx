@@ -19,6 +19,11 @@ import {
 } from 'src/redux/slices/media/tapeManagementSlice'
 import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 
+// export type language ={
+//     languageId:string[];
+
+// }
+
 const TapeManagementListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteTape] = useDeleteTapeMutation()
@@ -35,7 +40,7 @@ const TapeManagementListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetPaginationTapeQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['tapeName', 'schemeLabel', 'channelGroupLabel'],
+        params: ['tapeName', 'schemeLabel'],
         page: page,
         filterBy: [
             {
@@ -87,20 +92,16 @@ const TapeManagementListingWrapper = () => {
             ),
         },
         {
-            field: 'channelGroupLabel',
-            headerName: 'Channel Group',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: TapeManagementListResponse) => (
-                <span> {row.channelGroupLabel} </span>
-            ),
-        },
-        {
-            field: 'languageLabel',
+            field: 'languageName',
             headerName: 'Language',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: TapeManagementListResponse) => (
-                <span> {row.languageLabel} </span>
-            ),
+            renderCell: (row: any) => {
+                const languageLength = row.languageId.length
+
+                for (let i = 0; i < languageLength; i++) {
+                    return <span> {row.languageId[i].languageName}</span>
+                }
+            },
         },
 
         {
