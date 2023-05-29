@@ -12,7 +12,13 @@ import WebsiteLayout from '../../WebsiteLayout'
 type Props = {}
 
 export type FormInitialValues = {
-    websiteName: string
+    productName: string
+    url: string
+    gaTagIp: string
+    searchConsoleIp: string
+    headerSpace: string
+    footerSpace: string
+    siteMap: string
 }
 
 const AddWebsiteWrapper = (props: Props) => {
@@ -23,26 +29,45 @@ const AddWebsiteWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const initialValues: FormInitialValues = {
-        websiteName: '',
+        productName: '',
+        url: '',
+        gaTagIp: '',
+        searchConsoleIp: '',
+        headerSpace: '',
+        footerSpace: '',
+        siteMap: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        websiteName: string().required('Website Name is required'),
+        productName: string().required('Required'),
+        url: string().required('Required'),
+        gaTagIp: string(),
+        searchConsoleIp: string(),
+        headerSpace: string(),
+        footerSpace: string(),
+        siteMap: string(),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        //console.log(values)
         setTimeout(() => {
             addWebsite({
-                websiteName: values.websiteName,
+                productName: values.productName,
+                url: values.url,
+                gaTagIp: values.gaTagIp || '',
+                searchConsoleIp: values.searchConsoleIp || '',
+                headerSpace: values.headerSpace || '',
+                footerSpace: values.footerSpace || '',
+                siteMap: values.siteMap || '',
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Website added successfully!')
-                        navigate('/website/Website')
+                        navigate('/all-websites/website')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -53,6 +78,7 @@ const AddWebsiteWrapper = (props: Props) => {
             })
         }, 1000)
     }
+
     return (
         <WebsiteLayout>
             <Formik

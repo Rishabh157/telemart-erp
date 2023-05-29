@@ -6,6 +6,7 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditWebsiteWrapper'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -16,10 +17,10 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: 'Website',
-        path: '/all-websites/website',
+        path: '/all-websites/Website',
     },
     {
-        label: 'Edit Website',
+        label: 'Update Website',
     },
 ]
 
@@ -36,7 +37,7 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Edit Website </ATMPageHeading>
+                    <ATMPageHeading> Add New Website </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -47,7 +48,7 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
                             Website Details
                         </div>
 
-                        {/* BUTTON - Edit Button */}
+                        {/* BUTTON - Add Button */}
                         <div>
                             <button
                                 type="button"
@@ -69,12 +70,73 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name="websiteName"
-                                value={values.websiteName}
+                                name="productName"
+                                value={values.productName}
                                 label="Website Name"
                                 placeholder="Website Name"
                                 onChange={(e) =>
-                                    setFieldValue('websiteName', e.target.value)
+                                    setFieldValue('productName', e.target.value)
+                                }
+                            />
+
+                            {/* Field 3 */}
+                            <ATMTextField
+                                name="url"
+                                value={values.url}
+                                label="URL"
+                                placeholder="URL"
+                                onChange={(e) =>
+                                    setFieldValue('url', e.target.value)
+                                }
+                            />
+
+                            <ATMTextArea
+                                minRows={4}
+                                name="gaTagIp"
+                                value={values.gaTagIp}
+                                label="GA Tag IP Address"
+                                onChange={(newValue) =>
+                                    setFieldValue('gaTagIp', newValue)
+                                }
+                            />
+
+                            <ATMTextArea
+                                minRows={4}
+                                name="searchConsoleIp"
+                                value={values.searchConsoleIp}
+                                label="Search Console IP Address"
+                                onChange={(newValue) =>
+                                    setFieldValue('searchConsoleIp', newValue)
+                                }
+                            />
+
+                            <ATMTextArea
+                                minRows={4}
+                                name="headerSpace"
+                                value={values.headerSpace}
+                                label="Header Space"
+                                onChange={(newValue) =>
+                                    setFieldValue('headerSpace', newValue)
+                                }
+                            />
+
+                            <ATMTextArea
+                                minRows={4}
+                                name="footerSpace"
+                                value={values.footerSpace}
+                                label="Footer Space"
+                                onChange={(newValue) =>
+                                    setFieldValue('footerSpace', newValue)
+                                }
+                            />
+
+                            <ATMTextArea
+                                minRows={4}
+                                name="siteMap"
+                                value={values.siteMap}
+                                label="SiteMap"
+                                onChange={(newValue) =>
+                                    setFieldValue('siteMap', newValue)
                                 }
                             />
                         </div>
