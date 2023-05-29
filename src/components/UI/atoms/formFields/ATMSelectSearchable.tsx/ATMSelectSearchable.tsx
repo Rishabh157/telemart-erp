@@ -74,6 +74,8 @@ const ATMSelectSearchable = ({
             // textAlign: 'center',
             paddingLeft: '4px',
             paddingTop: '0px',  
+            // height: size == 'xs' ? '28px' : '40px',
+            // textAlign: 'center',
         }),
     }
 

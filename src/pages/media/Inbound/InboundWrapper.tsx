@@ -1,59 +1,201 @@
 import React, { useEffect, useState } from 'react'
-import { useAddDidMutation } from 'src/services/media/DidManagementServices'
-import { RootState } from 'src/redux/store'
+import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import { object, string } from 'yup'
+import { number, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
-import { useGetSchemeQuery } from 'src/services/SchemeService'
-import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
-import { useSelector } from 'react-redux'
-import { SchemeListResponse } from 'src/models/scheme.model'
-import { ChannelManagementListResponse } from 'src/models/Channel.model'
+import { useDispatch, useSelector } from 'react-redux'
 import Inbound from './Inbound'
+import { useGetAllCountryQuery } from 'src/services/CountryService'
+import { setAllCountry } from 'src/redux/slices/countrySlice'
+import { useAddInboundCallerMutation } from 'src/services/media/InboundCallerServices'
 
 export type FormInitialValues = {
-    didNumber: string
-    companyId: string
-    schemeId: string
-    channelId: string
+    generalInformation: {
+        didNo: string
+        inOutBound: string
+        incomingCallerNo: string
+        mobileNo: string
+    }
+    addressInformation: {
+        deliveryCharges: number
+        discount: number
+        total: number
+        country: string
+        state: string
+        city: string
+        tehsil: string
+        pincode: string
+        area: string
+        expectedDeliveryDate: string
+        profileDeliveredBy: string
+        complaintDetails: string
+        complaintNo: string
+    }
+    personalInformation: {
+        agentName: string
+        name: string
+        age: string
+        address: string
+        realtion: string
+        city: string
+        landmark: string
+        alternateNo1: string
+        gender: string
+        prepaid: string
+        email: string
+        channel: string
+        otherRemarks: string
+    }
+    dispositionLevelOne: string
+
+    dispositionLevelTwo: string
 }
 
 const InbouundWrapper = () => {
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [AddDidManagement] = useAddDidMutation()
+    const [AddInbopundCaller] = useAddInboundCallerMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const [channel, setChannel] = useState([])
-    const [schemeData, setSchemeData] = useState([])
 
     const initialValues: FormInitialValues = {
-        didNumber: '',
-        schemeId: '',
-        channelId: '',
-        companyId: userData?.companyId || '',
+        generalInformation: {
+            didNo: '',
+            inOutBound: '',
+            incomingCallerNo: '',
+            mobileNo: '',
+        },
+        addressInformation: {
+            deliveryCharges: 0,
+            discount: 0,
+            total: 0,
+            country: '',
+            state: '',
+            city: '',
+            tehsil: '',
+            pincode: '',
+            area: '',
+            expectedDeliveryDate: '',
+            profileDeliveredBy: '',
+            complaintDetails: '',
+            complaintNo: '',
+        },
+        personalInformation: {
+            agentName: '',
+            name: '',
+            age: '',
+            address: '',
+            realtion: '',
+            city: '',
+            landmark: '',
+            alternateNo1: '',
+            gender: '',
+            prepaid: '',
+            email: '',
+            channel: '',
+            otherRemarks: '',
+        },
+        dispositionLevelOne: '',
+        dispositionLevelTwo: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        didNumber: string().required('Did number is required'),
-        schemeId: string().required('Scheme is required'),
-        channelId: string().required('Channel name is required'),
+        generalInformation: object().shape({
+            didNo: string().required(),
+            inOutBound: string().required(),
+            incomingCallerNo: string().required(),
+            mobileNo: string().required(),
+        }),
+        addressInformation: object().shape({
+            deliveryCharges: number().required(),
+            discount: number().required(),
+            total: number().required(),
+            country: string().required(),
+            state: string().required(),
+            city: string().required(),
+            tehsil: string().required(),
+            pincode: string().required(),
+            area: string().required(),
+            expectedDeliveryDate: string().required(),
+            profileDeliveredBy: string().required(),
+            complaintDetails: string().required(),
+            complaintNo: string().required(),
+        }),
+        personalInformation: object().shape({
+            agentName: string().required(),
+            name: string().required(),
+            age: string().required(),
+            address: string().required(),
+            realtion: string().required(),
+            city: string().required(),
+            landmark: string().required(),
+            alternateNo1: string().required(),
+            gender: string().required(),
+            prepaid: string().required(),
+            email: string().required(),
+            channel: string().required(),
+            otherRemarks: string().required(),
+        }),
+        dispositionLevelOne: string().required(),
+        dispositionLevelTwo: string().required(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            AddDidManagement({
-                didNumber: values.didNumber,
-                schemeId: values.schemeId,
-                channelId: values.channelId,
-                companyId: values.companyId || '',
+            AddInbopundCaller({
+                generalInformation: {
+                    didNo: values.generalInformation.didNo,
+                    inOutBound: values.generalInformation.inOutBound,
+                    incomingCallerNo:
+                        values.generalInformation.incomingCallerNo,
+                    mobileNo: values.generalInformation.mobileNo,
+                },
+                addressInformation: {
+                    deliveryCharges: values.addressInformation.deliveryCharges,
+                    discount: values.addressInformation.discount,
+                    total: values.addressInformation.total,
+                    country: values.addressInformation.country,
+                    state: values.addressInformation.state,
+                    city: values.addressInformation.city,
+                    tehsil: values.addressInformation.tehsil,
+                    pincode: values.addressInformation.pincode,
+                    area: values.addressInformation.area,
+                    expectedDeliveryDate:
+                        values.addressInformation.expectedDeliveryDate,
+                    profileDeliveredBy:
+                        values.addressInformation.profileDeliveredBy,
+                    complaintDetails:
+                        values.addressInformation.complaintDetails,
+                    complaintNo: values.addressInformation.complaintNo,
+                },
+                personalInformation: {
+                    agentName: values.personalInformation.agentName,
+                    name: values.personalInformation.name,
+                    age: values.personalInformation.age,
+                    address: values.personalInformation.address,
+                    realtion: values.personalInformation.realtion,
+                    city: values.personalInformation.city,
+                    landmark: values.personalInformation.landmark,
+                    alternateNo1: values.personalInformation.alternateNo1,
+                    gender: values.personalInformation.gender,
+                    prepaid: values.personalInformation.prepaid,
+                    email: values.personalInformation.email,
+                    channel: values.personalInformation.channel,
+                    otherRemarks: values.personalInformation.otherRemarks,
+                },
+                dispositionLevelOne: values.dispositionLevelOne,
+                dispositionLevelTwo: values.dispositionLevelTwo,
+                companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Did Number added successfully!')
-                        navigate('/media/did')
+                        showToast(
+                            'success',
+                            'InboundCaller added successfully!'
+                        )
+                        navigate('/media/inbound')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -64,64 +206,41 @@ const InbouundWrapper = () => {
             })
         }, 1000)
     }
+    const dispatch = useDispatch<AppDispatch>()
 
-    const {
-        isLoading: isSchemeLoading,
-        isFetching: isSchemeFetching,
-        data: schemeDataApi,
-    } = useGetSchemeQuery(' ')
-    const {
-        isLoading,
-        isFetching,
-        data: channelData,
-    } = useGetAllChannelQuery('')
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            setChannel(channelData?.data)
-        }
-    }, [isLoading, isFetching, channelData])
+    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
+
+    const { allCountry }: any = useSelector((state: RootState) => state.country)
 
     useEffect(() => {
-        if (!isSchemeLoading && !isSchemeFetching) {
-            setSchemeData(schemeDataApi?.data)
+        if (!isFetching && !isLoading) {
+            dispatch(setAllCountry(data?.data))
         }
-    }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
+    }, [data, isLoading, isFetching, dispatch])
+
+    //registration
 
     const dropdownOptions = {
-        channelOptions: channel?.map(
-            (channelItem: ChannelManagementListResponse) => {
-                return {
-                    label: channelItem.channelName,
-                    value: channelItem._id,
-                }
-            }
-        ),
-
-        schemeDataOption: schemeData?.map((schemeItem: SchemeListResponse) => {
-            return {
-                label: schemeItem?.schemeName,
-                value: schemeItem?._id,
-            }
+        counrtyOptions: allCountry?.map((ele: any) => {
+            return { label: ele?.countryName, value: ele?._id }
         }),
     }
     return (
-      
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <Inbound
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                            dropdownOptions={dropdownOptions}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <Inbound
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        dropdownOptions={dropdownOptions}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

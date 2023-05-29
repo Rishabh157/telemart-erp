@@ -27,6 +27,15 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        getAlldispositionTwounauth: builder.query({
+            providesTags: ['dispositionTwo'],
+            query: (Id) => ({
+                url: `/disposition-Two/unauth/get-all/${Id}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
         //***** ADD *****/
         adddispositionTwo: builder.mutation({
             invalidatesTags: ['dispositionTwo'],
@@ -91,4 +100,5 @@ export const {
     useExportdispositionTwoDataMutation,
     useDeletedispositionTwoMutation,
     useGetAlldispositionTwoQuery,
+    useGetAlldispositionTwounauthQuery,
 } = dispositionTwoApi
