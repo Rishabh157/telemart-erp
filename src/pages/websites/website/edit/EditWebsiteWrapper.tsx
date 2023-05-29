@@ -16,13 +16,13 @@ import WebsitesLayout from '../../WebsiteLayout'
 type Props = {}
 
 export type FormInitialValues = {
-    productName: string,
-    url: string,
-    gaTagIp: string,
-    searchConsoleIp: string,
-    headerSpace: string,
-    footerSpace: string,
-    siteMap: string,   
+    productName: string
+    url: string
+    gaTagIp: string
+    searchConsoleIp: string
+    headerSpace: string
+    footerSpace: string
+    siteMap: string
 }
 
 const EditWebsiteWrapper = (props: Props) => {
@@ -43,20 +43,19 @@ const EditWebsiteWrapper = (props: Props) => {
     useEffect(() => {
         dispatch(setSelectedWebsite(data?.data))
     }, [dispatch, data, isLoading, isFetching])
-    
 
     const initialValues: FormInitialValues = {
         productName: selectedItem?.productName,
         url: selectedItem?.url,
-        gaTagIp: selectedItem?.gaTagIp || "",
-        searchConsoleIp: selectedItem?.searchConsoleIp || "",
-        headerSpace: selectedItem?.headerSpace || "",
-        footerSpace: selectedItem?.footerSpace || "",
-        siteMap: selectedItem?.siteMap || "",
+        gaTagIp: selectedItem?.gaTagIp || '',
+        searchConsoleIp: selectedItem?.searchConsoleIp || '',
+        headerSpace: selectedItem?.headerSpace || '',
+        footerSpace: selectedItem?.footerSpace || '',
+        siteMap: selectedItem?.siteMap || '',
     }
 
     // Form Validation Schema
-     const validationSchema = object({
+    const validationSchema = object({
         productName: string().required('Required'),
         url: string().required('Required'),
         gaTagIp: string(),
@@ -74,11 +73,11 @@ const EditWebsiteWrapper = (props: Props) => {
                 body: {
                     productName: values.productName,
                     url: values.url,
-                    gaTagIp: values.gaTagIp || "",
-                    searchConsoleIp: values.searchConsoleIp || "",
-                    headerSpace: values.headerSpace || "",
-                    footerSpace: values.footerSpace || "",
-                    siteMap: values.siteMap || "",
+                    gaTagIp: values.gaTagIp || '',
+                    searchConsoleIp: values.searchConsoleIp || '',
+                    headerSpace: values.headerSpace || '',
+                    footerSpace: values.footerSpace || '',
+                    siteMap: values.siteMap || '',
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',
@@ -97,9 +96,6 @@ const EditWebsiteWrapper = (props: Props) => {
             })
         }, 1000)
     }
-
-   
-
 
     return (
         <WebsitesLayout>

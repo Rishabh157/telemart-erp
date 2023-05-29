@@ -12,13 +12,13 @@ import WebsiteLayout from '../../WebsiteLayout'
 type Props = {}
 
 export type FormInitialValues = {
-    productName: string,
-    url: string,
-    gaTagIp: string,
-    searchConsoleIp: string,
-    headerSpace: string,
-    footerSpace: string,
-    siteMap: string,   
+    productName: string
+    url: string
+    gaTagIp: string
+    searchConsoleIp: string
+    headerSpace: string
+    footerSpace: string
+    siteMap: string
 }
 
 const AddWebsiteWrapper = (props: Props) => {
@@ -29,13 +29,13 @@ const AddWebsiteWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const initialValues: FormInitialValues = {
-        productName: "",
-        url: "",
-        gaTagIp: "",
-        searchConsoleIp: "",
-        headerSpace: "",
-        footerSpace: "",
-        siteMap: "",        
+        productName: '',
+        url: '',
+        gaTagIp: '',
+        searchConsoleIp: '',
+        headerSpace: '',
+        footerSpace: '',
+        siteMap: '',
     }
 
     // Form Validation Schema
@@ -78,7 +78,6 @@ const AddWebsiteWrapper = (props: Props) => {
             })
         }, 1000)
     }
-
 
     return (
         <WebsiteLayout>

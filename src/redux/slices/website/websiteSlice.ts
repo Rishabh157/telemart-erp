@@ -28,11 +28,14 @@ const initialState: WebsiteSliceStateType = {
     selecteWebsite: '',
 }
 
-const WebsiteSlice: Slice<WebsiteSliceStateType>= createSlice({
+const WebsiteSlice: Slice<WebsiteSliceStateType> = createSlice({
     name: 'website',
     initialState,
     reducers: {
-        setItems: (state, action: PayloadAction<WebsiteListResponse[] | []>) => {
+        setItems: (
+            state,
+            action: PayloadAction<WebsiteListResponse[] | []>
+        ) => {
             state.items = action.payload
         },
         setAllItems: (

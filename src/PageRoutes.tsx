@@ -644,12 +644,12 @@ const PageRoutes = () => {
                         path="media/artist/add"
                         element={<AddArtistWrapper />}
                     />
-                       {/* Website route */}
-                       <Route
+                    {/* Website route */}
+                    <Route
                         path="all-websites/website"
                         element={<WebstieListingWrapper />}
                     />
-                         <Route
+                    <Route
                         path="all-websites/website/add"
                         element={<AddWebsiteWrapper />}
                     />
@@ -657,8 +657,6 @@ const PageRoutes = () => {
                         path="all-websites/website/:id"
                         element={<EditWebsiteWrapper />}
                     />
-                    
-                 
                 </Routes>
             </BrowserRouter>
         </>
