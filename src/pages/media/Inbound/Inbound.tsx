@@ -399,7 +399,7 @@ const Inbound: React.FC<Props> = ({
                                         />
                                     </div>
 
-                                    <div className="flex flex-col gap-1 w-full  -mt-4">
+                                    <div className="flex flex-col gap-1 w-full ">
                                         <ATMDatePicker
                                             name="expectedDeliveryDate"
                                             value={
@@ -409,6 +409,7 @@ const Inbound: React.FC<Props> = ({
                                             label="expectedDeliveryDate"
                                             dateTimeFormat="LLL"
                                             onChange={() => {}}
+                                            size="xs"
                                         />
                                     </div>
 

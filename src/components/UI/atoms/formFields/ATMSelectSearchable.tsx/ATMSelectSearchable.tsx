@@ -56,7 +56,7 @@ const ATMSelectSearchable = ({
             ...provided,
             paddingLeft: '4px',
             paddingTop: '0px',
-            backgroundColor: 'lightgray',
+            //backgroundColor: 'lightgray',
             // borderRadius: '4px',
             alignItems: 'start',
         }),

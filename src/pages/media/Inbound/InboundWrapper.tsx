@@ -6,7 +6,7 @@ import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import Inbound from './Inbound'
-import { useGetAllCountryQuery } from 'src/services/CountryService'
+import { useGetAllCountryQuery, useGetAllCountryUnauthQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { useAddInboundCallerMutation } from 'src/services/media/InboundCallerServices'
 
@@ -208,7 +208,7 @@ const InbouundWrapper = () => {
     }
     const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
+    const { data, isLoading, isFetching } = useGetAllCountryUnauthQuery('')
 
     const { allCountry }: any = useSelector((state: RootState) => state.country)
 

@@ -23,6 +23,15 @@ export const countryApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+        getAllCountryUnauth: builder.query({
+            providesTags: ['Country'],
+            query: () => ({
+                url: '/country/inbound',
+                method: 'GET',
+                // body,
+            }),
+        }),
+
 
         //***** ADD *****/
         AddCountry: builder.mutation({
@@ -89,4 +98,5 @@ export const {
     useExportCountryDataMutation,
     useDeleteCountryMutation,
     useGetAllCountryQuery,
+    useGetAllCountryUnauthQuery,
 } = countryApi
