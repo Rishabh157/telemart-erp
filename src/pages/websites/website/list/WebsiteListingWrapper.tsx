@@ -18,6 +18,7 @@ import {
 } from 'src/services/websites/WebsiteServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
 
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -41,7 +42,7 @@ const WebstieListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
+            flex: 'flex-[1.8_1.8_0%]',
             renderCell: (row: any) => (
                 <div className="relative">
                     <button
@@ -56,7 +57,7 @@ const WebstieListingWrapper = () => {
                         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
                     </button>
                     {showDropdown && currentId === row?._id && (
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10  w-24">
                             <button
                                 onClick={() => {
                                     navigate(
@@ -67,6 +68,33 @@ const WebstieListingWrapper = () => {
                             >
                                 Edit
                             </button>
+
+                            <button
+                                onClick={() => {
+                                    navigate('/all-websites/website-blog/add', {
+                                        state: {
+                                            siteId: currentId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Add Blog
+                            </button>
+                            <button
+                                onClick={() => {
+                                    dispatch(setFilterValue([currentId]))
+                                    navigate('/all-websites/website-blog', {
+                                        state: {
+                                            websiteId: currentId,                                           
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View Blog
+                            </button>
+
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({

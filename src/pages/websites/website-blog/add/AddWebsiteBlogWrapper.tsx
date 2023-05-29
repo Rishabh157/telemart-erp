@@ -3,7 +3,7 @@ import { Formik } from 'formik'
 import { object, string } from 'yup'
 import AddWebsiteBlog from './AddWebsiteBlog'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useAddWebsiteBlogMutation } from 'src/services/websites/WebsiteBlogServices'
@@ -16,12 +16,15 @@ export type FormInitialValues = {
     blogTitle: string
     blogSubtitle: string
     image: string
-    blogDescription: string
+    blogDescription: string    
 }
 
 const AddWebsiteBlogWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const { state } = useLocation()
+    const { siteId} = state
+    //console.log(siteId)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addWebsiteBlog] = useAddWebsiteBlogMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -54,6 +57,7 @@ const AddWebsiteBlogWrapper = (props: Props) => {
                 blogSubtitle: values.blogSubtitle || '',
                 image: values.image || '',
                 blogDescription: values.blogDescription || '',
+                websiteId: siteId,
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {

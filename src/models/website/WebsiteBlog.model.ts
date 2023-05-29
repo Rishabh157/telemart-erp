@@ -20,7 +20,8 @@ export type AddWebsiteBlog = {
     blogSubtitle: string | ''
     image: string | ''
     blogDescription: string | ''
-    companyId: string | ''
+    companyId: string 
+    websiteId: string
 }
 
 export type UpdateWebsiteBlog = {
@@ -31,6 +32,7 @@ export type UpdateWebsiteBlog = {
         image: string | ''
         blogDescription: string | '' | ''
         companyId: string
+        websiteId: string
     }
     id: string
 }

@@ -13,6 +13,7 @@ export interface WebsiteBlogSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectWebsiteBlog: string
+    filterValue: string    
 }
 
 const initialState: WebsiteBlogSliceStateType = {
@@ -26,6 +27,7 @@ const initialState: WebsiteBlogSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectWebsiteBlog: '',
+    filterValue: '',
 }
 
 const WebsiteBlogSlice: Slice<WebsiteBlogSliceStateType> = createSlice({
@@ -79,6 +81,9 @@ const WebsiteBlogSlice: Slice<WebsiteBlogSliceStateType> = createSlice({
         ) => {
             state.selectedItem = action.payload
         },
+        setFilterValue: (state, action: PayloadAction<string>) => {
+            state.filterValue = action.payload
+        },
     },
 })
 
@@ -93,6 +98,7 @@ export const {
     setIsTableLoading,
     setSelectWebsiteBlog,
     setSelectedWebsiteBlog,
+    setFilterValue,
 } = WebsiteBlogSlice.actions
 
 export default WebsiteBlogSlice.reducer

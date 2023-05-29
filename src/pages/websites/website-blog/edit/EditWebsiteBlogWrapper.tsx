@@ -21,6 +21,7 @@ export type FormInitialValues = {
     blogSubtitle: string
     image: string
     blogDescription: string
+    websiteId: string
 }
 
 const EditWebsiteBlogWrapper = (props: Props) => {
@@ -48,6 +49,7 @@ const EditWebsiteBlogWrapper = (props: Props) => {
         blogSubtitle: selectedItem?.blogSubtitle || '',
         image: selectedItem?.image || '',
         blogDescription: selectedItem?.blogDescription || '',
+        websiteId: selectedItem?.websiteId,
     }
 
     // Form Validation Schema
@@ -71,6 +73,7 @@ const EditWebsiteBlogWrapper = (props: Props) => {
                     image: values.image || '',
                     blogDescription: values.blogDescription || '',
                     companyId: userData?.companyId || '',
+                    websiteId: values.websiteId,
                 },
                 id: Id || '',
             }).then((res) => {

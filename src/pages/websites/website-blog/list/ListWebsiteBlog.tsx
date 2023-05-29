@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+//import { useNavigate } from 'react-router-dom'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -28,7 +28,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue } = WebsiteBlogState
-    const navigate = useNavigate()
+   // const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Website',
@@ -47,13 +47,13 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Website Blog Management </ATMPageHeading>
-                <button
+                {/* <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
                     + Add Blog
-                </button>
+                </button> */}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
@@ -61,7 +61,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMTableHeader
                     page={page}
                     searchValue={searchValue}
-                    rowCount={totalItems}
+                    rowCount={rows.length}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -69,6 +69,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
+                    isRefresh
                 />
 
                 {/* Table */}
