@@ -133,7 +133,7 @@ const EditTapeManagement = ({
                                 label="Tape Type"
                                 onChange={(e) => setFieldValue('tapeType', e)}
                             />
-                            
+
                             <ATMSelectSearchable
                                 name="schemeId"
                                 value={values.schemeId}
@@ -170,14 +170,12 @@ const EditTapeManagement = ({
                                 options={dropdownOptions.languageOptions}
                                 label="Language"
                             />
-                        
 
-                            
                             <div className="grid grid-cols-4 gap-4 ">
                                 <div className=" text-slate-700  font-medium -mt-4 ">
                                     Duration
                                 </div>
-                                
+
                                 <div className="-ml-24 mr-24 ">
                                     <ATMTextField
                                         name="hour"
@@ -191,12 +189,14 @@ const EditTapeManagement = ({
                                             if (e.target.value !== '0') {
                                                 setShow(false)
                                             }
-                                            setFieldValue('hour', e.target.value)
+                                            setFieldValue(
+                                                'hour',
+                                                e.target.value
+                                            )
                                         }}
-                                    />   
+                                    />
                                 </div>
-                                <div className="-ml-24 mr-16 ">                           
-                                
+                                <div className="-ml-24 mr-16 ">
                                     <ATMSelectSearchable
                                         name="minute"
                                         required
@@ -210,9 +210,9 @@ const EditTapeManagement = ({
                                             }
                                             setFieldValue('minute', selectValue)
                                         }}
-                                    />     
+                                    />
                                 </div>
-                                <div className="-ml-16 mr-8 ">                          
+                                <div className="-ml-16 mr-8 ">
                                     <ATMSelectSearchable
                                         defaultValue="00"
                                         label="Second"
@@ -229,22 +229,18 @@ const EditTapeManagement = ({
                                         }}
                                     />
                                 </div>
-                                    
-                                
 
-                                    {show ? (
-                                        <p className="font-poppins relative text-[14px] text-start mt-0 ml-24 text-red-500 col-span-3">
-                                            Duration is Required
-                                        </p>
-                                    ) : (
-                                        ''
-                                    )}
-                                
+                                {show ? (
+                                    <p className="font-poppins relative text-[14px] text-start mt-0 ml-24 text-red-500 col-span-3">
+                                        Duration is Required
+                                    </p>
+                                ) : (
+                                    ''
+                                )}
                             </div>
-
                         </div>
 
-                           <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-3 gap-4">
                             <ATMTextField
                                 name="webSiteLink"
                                 value={values.webSiteLink}
@@ -273,7 +269,7 @@ const EditTapeManagement = ({
                                 onChange={(newValue) =>
                                     setFieldValue('remarks', newValue)
                                 }
-                            />                           
+                            />
                         </div>
 
                         <div className="px-3 py-8">
@@ -286,7 +282,6 @@ const EditTapeManagement = ({
                                     return (
                                         <>
                                             <div className="grid grid-cols-3 gap-9 ">
-                                               
                                                 {values.phone?.map(
                                                     (
                                                         item: any,
@@ -295,7 +290,10 @@ const EditTapeManagement = ({
                                                         let { phoneNo } = item
                                                         console.log(phoneNo)
                                                         return (
-                                                            <div key={itemIndex}  className="flex ">
+                                                            <div
+                                                                key={itemIndex}
+                                                                className="flex "
+                                                            >
                                                                 {/* Phone */}
                                                                 <div className="flex">
                                                                     <ATMTextField
@@ -317,24 +315,24 @@ const EditTapeManagement = ({
                                                                             )
                                                                         }}
                                                                     />
-                                                                
 
                                                                     {/* BUTTON - Delete */}
-                                                                    {values.phone?.length > 1 && (
-                                                                        
-                                                                            <button
-                                                                                type="button"
-                                                                                onClick={() => {
-                                                                                    remove(
-                                                                                        itemIndex
-                                                                                    )
-                                                                                }}
-                                                                                className="p-2 bg-red-500 text-white rounded my-[48px] mx-[10px]"
-                                                                            >
-                                                                                <MdDeleteOutline className="text-2xl" />
-                                                                            </button>
-                                                                        
-                                                                     )}
+                                                                    {values
+                                                                        .phone
+                                                                        ?.length >
+                                                                        1 && (
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    itemIndex
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded my-[48px] mx-[10px]"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    )}
                                                                 </div>
                                                             </div>
                                                         )
@@ -346,7 +344,7 @@ const EditTapeManagement = ({
                                             <div className="flex justify-self-start py-7">
                                                 <button
                                                     type="button"
-                                                    onClick={() =>{                                                  
+                                                    onClick={() => {
                                                         push({
                                                             phoneNo: '',
                                                         })
