@@ -1,7 +1,6 @@
 import { ErrorMessage } from 'formik'
 import React from 'react'
 import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
-import { string } from 'yup'
 
 export type ATMTextFieldPropTypes = {
     name: string

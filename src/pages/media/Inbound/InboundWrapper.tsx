@@ -6,9 +6,17 @@ import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import Inbound from './Inbound'
-import { useGetAllCountryQuery, useGetAllCountryUnauthQuery } from 'src/services/CountryService'
+import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { useAddInboundCallerMutation } from 'src/services/media/InboundCallerServices'
+import { useGetAllTehsilUnauthQuery } from 'src/services/TehsilService'
+import { setAllStates } from 'src/redux/slices/statesSlice'
+import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
+import { setAllTehsils } from 'src/redux/slices/tehsilSlice'
+import { setAllDistrict } from 'src/redux/slices/districtSlice'
+import { useGetAllDistrictUnauthQuery } from 'src/services/DistricService'
+import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
+import { setItems } from 'src/redux/slices/areaSlice'
 
 export type FormInitialValues = {
     generalInformation: {
@@ -142,6 +150,7 @@ const InbouundWrapper = () => {
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
+        console.log(values)
         setApiStatus(true)
         setTimeout(() => {
             AddInbopundCaller({
@@ -211,12 +220,68 @@ const InbouundWrapper = () => {
     const { data, isLoading, isFetching } = useGetAllCountryUnauthQuery('')
 
     const { allCountry }: any = useSelector((state: RootState) => state.country)
+    const { allStates }: any = useSelector((state: RootState) => state.states)
+    //console.log(allStates)
+    const { allDistricts }: any = useSelector(
+        (state: RootState) => state.district
+    )
 
     useEffect(() => {
-        if (!isFetching && !isLoading) {
+        if (!isLoading && !isFetching)
+            // console.log(stateData)
             dispatch(setAllCountry(data?.data))
-        }
     }, [data, isLoading, isFetching, dispatch])
+
+    const { allTehsils }: any = useSelector((state: RootState) => state.tehsils)
+    const { items: allArea }: any = useSelector(
+        (state: RootState) => state.tehsils
+    )
+
+    const {
+        data: areaData,
+        isLoading: areaIsLoading,
+        isFetching: areaIsFetching,
+    } = useGetAllAreaUnauthQuery('')
+
+    const {
+        data: stateData,
+        isLoading: stateIsLoading,
+        isFetching: stateIsFetching,
+    } = useGetByAllStateUnauthQuery('')
+
+    useEffect(() => {
+        if (!stateIsLoading && !stateIsFetching)
+            // console.log(stateData)
+            dispatch(setAllStates(stateData?.data))
+    }, [stateData, stateIsLoading, stateIsFetching, dispatch])
+
+    const {
+        data: districtData,
+        isLoading: districtIsLoading,
+        isFetching: districtIsFetching,
+    } = useGetAllDistrictUnauthQuery('')
+
+    useEffect(() => {
+        dispatch(setAllDistrict(districtData?.data))
+    }, [districtData, districtIsLoading, districtIsFetching, dispatch])
+
+    const {
+        data: tehsilData,
+        isFetching: tehsilIsFetching,
+        isLoading: tehsilIsLoading,
+    } = useGetAllTehsilUnauthQuery('')
+
+    useEffect(() => {
+        if (!tehsilIsFetching && !tehsilIsLoading) {
+            dispatch(setAllTehsils(tehsilData?.data))
+        }
+    }, [tehsilData, dispatch, tehsilIsFetching, tehsilIsLoading])
+
+    useEffect(() => {
+        if (!areaIsFetching && !areaIsLoading) {
+            dispatch(setItems(areaData?.data))
+        }
+    }, [areaData, areaIsLoading, areaIsFetching, dispatch])
 
     //registration
 
@@ -224,7 +289,21 @@ const InbouundWrapper = () => {
         counrtyOptions: allCountry?.map((ele: any) => {
             return { label: ele?.countryName, value: ele?._id }
         }),
+        stateOptions: allStates?.map((ele: any) => {
+            return { label: ele?.stateName, value: ele?._id }
+        }),
+
+        districtOptions: allDistricts?.map((ele: any) => {
+            return { label: ele?.districtName, value: ele?._id }
+        }),
+        tehsilOptions: allTehsils?.map((ele: any) => {
+            return { label: ele?.tehsilName, value: ele?._id }
+        }),
+        areaOptions: allArea?.map((ele: any) => {
+            return { label: ele?.areaName, value: ele?._id }
+        }),
     }
+
     return (
         <Formik
             initialValues={initialValues}

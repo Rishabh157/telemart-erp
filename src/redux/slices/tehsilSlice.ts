@@ -5,6 +5,7 @@ import { LocationSelectType } from 'src/utils'
 
 export interface TehsilSliceStateType {
     items: TehsilListResponse[] | []
+    allTehsils: TehsilListResponse[] | []
     selectedTehsil: TehsilListResponse | null
     selectedLocationTehsil: LocationSelectType | null
     totalItems: number
@@ -29,6 +30,7 @@ const initialState: TehsilSliceStateType = {
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
     filterValue: '',
+    allTehsils: [],
 }
 
 const tehsilSlice: any = createSlice({
@@ -82,6 +84,9 @@ const tehsilSlice: any = createSlice({
         setFilterValue: (state, action: PayloadAction<string>) => {
             state.filterValue = action.payload
         },
+        setAllTehsils: (state, action: PayloadAction<TehsilListResponse[]>) => {
+            state.allTehsils = action.payload
+        },
     },
 })
 
@@ -97,5 +102,6 @@ export const {
     setSelectedTehsil,
     setSelectedLocationTehsil,
     setFilterValue,
+    setAllTehsils,
 } = tehsilSlice.actions
 export default tehsilSlice.reducer

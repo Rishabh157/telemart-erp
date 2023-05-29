@@ -5,7 +5,6 @@ import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
-import { useAdddispositionOneMutation } from 'src/services/configurations/DispositiononeServices'
 import { useAdddispositionTwoMutation } from 'src/services/configurations/DispositionTwoServices'
 
 type Props = {

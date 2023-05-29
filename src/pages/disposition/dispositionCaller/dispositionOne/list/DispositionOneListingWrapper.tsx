@@ -7,7 +7,7 @@ import DispositionOneListing from './DispositionOneListing'
 
 const DispositionOneListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const { data, isLoading, isFetching } = useGetAlldispositionOneQuery('')
+    const { data } = useGetAlldispositionOneQuery('')
     const { items }: any = useSelector(
         (state: RootState) => state.dispositionOne
     )

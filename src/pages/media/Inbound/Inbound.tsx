@@ -1,25 +1,22 @@
 import { Divider } from '@mui/material'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { FormikProps } from 'formik'
-import { Field, SelectOption } from 'src/models/FormField/FormField.model'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './InboundWrapper'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { setAllStates } from 'src/redux/slices/statesSlice'
-import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
-import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
-import { useGetAllStateByCountryQuery } from 'src/services/StateService'
 import { useGetAlldispositionOneunauthQuery } from 'src/services/configurations/DispositiononeServices'
 import { setAllItems } from 'src/redux/slices/configuration/dispositionOneSlice'
 import { useGetAlldispositionTwounauthQuery } from 'src/services/configurations/DispositionTwoServices'
 import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import { useGetAllPincodeUnauthQuery } from 'src/services/PinCodeService'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -31,15 +28,11 @@ type Props = {
         pincodeOptions?: SelectOption[] | []
         dispositionOneOptions?: SelectOption[] | []
         dispositionTwoOptions?: SelectOption[] | []
+        tehsilOptions?: SelectOption[] | []
+        areaOptions?: SelectOption[] | []
     }
 }
-type FieldType = Field<
-    | 'counrtyOptions'
-    | 'stateOptions'
-    | 'districtOptions'
-    | 'pincodeOptions'
-    | 'dispositionOneOptions'
->
+
 const Inbound: React.FC<Props> = ({
     formikProps,
     apiStatus,
@@ -48,21 +41,32 @@ const Inbound: React.FC<Props> = ({
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch<AppDispatch>()
-    const { allStates }: any = useSelector((state: RootState) => state.states)
-    const { allDistricts }: any = useSelector(
-        (state: RootState) => state.district
-    )
-    const { allPincodes }: any = useSelector(
-        (state: RootState) => state.pincode
-    )
+
     const { allItems: allDispositionItems }: any = useSelector(
         (state: RootState) => state.dispositionOne
     )
+
+    const { allPincodes }: any = useSelector(
+        (state: RootState) => state.pincode
+    )
+
+    const {
+        data: PCdata,
+        isFetching: PCisFetching,
+        isLoading: PCisLoading,
+    } = useGetAllPincodeUnauthQuery('')
+
+    useEffect(() => {
+        if (!PCisLoading && !PCisFetching) {
+            dispatch(setAllPincodes(PCdata?.data))
+        }
+    }, [PCdata, dispatch, PCisLoading, PCisFetching])
     const {
         data: dispositionOnedata,
         isLoading: dispositionOneIsLoading,
         isFetching: dispositionOneIsFetching,
     } = useGetAlldispositionOneunauthQuery('')
+
     const {
         data: dispositionTwodata,
         isLoading: dispositionTwoIsLoading,
@@ -71,40 +75,10 @@ const Inbound: React.FC<Props> = ({
         formikProps.values.dispositionLevelOne,
         { skip: !formikProps.values.dispositionLevelOne }
     )
-    //console.log(formikProps.values.dispositionLevelOne, 'sdfvjhsfv')
+
     const { items: dispositionTwoItems }: any = useSelector(
         (state: RootState) => state.dispositionTwo
     )
-    console.log(dispositionTwoItems)
-
-    const {
-        data: stateData,
-        isLoading: stateIsLoading,
-        isFetching: stateIsFetching,
-    } = useGetAllStateByCountryQuery(
-        formikProps.values.addressInformation.country,
-        {
-            skip: !formikProps.values.addressInformation.country,
-        }
-    )
-    const {
-        data: districtData,
-        isLoading: districtIsLoading,
-        isFetching: districtIsFetching,
-    } = useGetAllDistrictByStateQuery(
-        formikProps.values.addressInformation.state,
-        {
-            skip: !formikProps.values.addressInformation.state,
-        }
-    )
-    useEffect(() => {
-        dispatch(setAllStates(stateData?.data))
-    }, [stateData, stateIsLoading, stateIsFetching, dispatch])
-
-    //district
-    useEffect(() => {
-        dispatch(setAllDistrict(districtData?.data))
-    }, [districtData, districtIsLoading, districtIsFetching, dispatch])
 
     useEffect(() => {
         if (!dispositionOneIsLoading && !dispositionOneIsFetching) {
@@ -132,22 +106,26 @@ const Inbound: React.FC<Props> = ({
     dropdownOptions = {
         ...dropdownOptions,
 
-        stateOptions: allStates?.map((ele: any) => {
-            return { label: ele?.stateName, value: ele?._id }
-        }),
-
-        districtOptions: allDistricts?.map((ele: any) => {
-            return { label: ele?.districtName, value: ele?._id }
-        }),
-        pincodeOptions: allPincodes?.map((ele: any) => {
-            return { label: ele?.pincode, value: ele?._id }
-        }),
         dispositionOneOptions: allDispositionItems?.map((ele: any) => {
             return { label: ele?.dispositionName, value: ele?._id }
         }),
         dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
             return { label: ele?.dispositionName, value: ele?._id }
         }),
+        pincodeOptions: allPincodes?.map((ele: any) => {
+            return { label: ele?.pincode, value: ele?._id }
+        }),
+    }
+
+    function handleClick(newValue: string) {
+        var newarray = allPincodes?.find((ele: any) => {
+            return ele._id === newValue
+        })
+        setFieldValue('addressInformation.pincode', newarray?.pincode)
+        setFieldValue('addressInformation.tehsil', newarray?.tehsilId)
+        setFieldValue('addressInformation.city', newarray?.districtId)
+        setFieldValue('addressInformation.state', newarray?.stateId)
+        setFieldValue('addressInformation.country', newarray?.countryId)
     }
 
     return (
@@ -162,7 +140,7 @@ const Inbound: React.FC<Props> = ({
                             <div className="flex gap-4">
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMTextField
-                                        name="didNo"
+                                        name="generalInformation.didNo"
                                         labelClass="font-semibold text-sm "
                                         label="DID NO"
                                         size="xs"
@@ -179,13 +157,16 @@ const Inbound: React.FC<Props> = ({
                                 </div>
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMTextField
-                                        name="inOutBound"
+                                        name="generalInformation.inOutBound"
                                         labelClass="font-semibold text-sm"
                                         label="IN /OutBound"
                                         size="xs"
                                         className="-mt-0  shadow bg-white rounded"
                                         onChange={(e) => {
-                                            setFieldValue('inOutBound', e)
+                                            setFieldValue(
+                                                'generalInformation.inOutBound',
+                                                e.target.value
+                                            )
                                         }}
                                         value={
                                             values.generalInformation.inOutBound
@@ -194,13 +175,17 @@ const Inbound: React.FC<Props> = ({
                                 </div>
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMTextField
-                                        name="incomingCallerNo"
+                                        name="generalInformation.incomingCallerNo"
                                         labelClass="font-semibold text-sm"
                                         label="In Comming Caller No"
                                         size="xs"
                                         className="-mt-0  shadow bg-white rounded"
                                         onChange={(e) => {
-                                            setFieldValue('incomingCallerNo', e)
+                                            console.log(e)
+                                            setFieldValue(
+                                                'generalInformation.incomingCallerNo',
+                                                e.target.value
+                                            )
                                         }}
                                         value={
                                             values.generalInformation
@@ -210,11 +195,14 @@ const Inbound: React.FC<Props> = ({
                                 </div>
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMTextField
-                                        name="mobileNo"
+                                        name="generalInformation.mobileNo"
                                         labelClass="font-semibold text-sm"
                                         label="Mobile No"
                                         onChange={(e) => {
-                                            setFieldValue('mobileNo', e)
+                                            setFieldValue(
+                                                'generalInformation.mobileNo',
+                                                e.target.value
+                                            )
                                         }}
                                         value={
                                             values.generalInformation.mobileNo
@@ -261,11 +249,14 @@ const Inbound: React.FC<Props> = ({
                             <div className="grid grid-cols-4 gap-4">
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMTextField
-                                        name="deliveryCharges"
+                                        name="addressInformation.deliveryCharges"
                                         labelClass="font-semibold text-sm"
                                         label="Delivery charges"
                                         onChange={(e) => {
-                                            setFieldValue('deliveryCharges', e)
+                                            setFieldValue(
+                                                'addressInformation.deliveryCharges',
+                                                e
+                                            )
                                         }}
                                         value={
                                             values.addressInformation
@@ -278,10 +269,15 @@ const Inbound: React.FC<Props> = ({
 
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMTextField
-                                        name="discount"
+                                        name="addressInformation.discount"
                                         labelClass="font-semibold text-sm"
                                         label="Discount"
-                                        onChange={() => {}}
+                                        onChange={(e) => {
+                                            setFieldValue(
+                                                'addressInformation.discount',
+                                                e
+                                            )
+                                        }}
                                         value={
                                             values.addressInformation.discount
                                         }
@@ -292,10 +288,15 @@ const Inbound: React.FC<Props> = ({
 
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMTextField
-                                        name="total"
+                                        name="addressInformation.total"
                                         labelClass="font-semibold text-sm"
                                         label="Total"
-                                        onChange={() => {}}
+                                        onChange={(e) => {
+                                            setFieldValue(
+                                                'addressInformation.total',
+                                                e
+                                            )
+                                        }}
                                         value={values.addressInformation.total}
                                         size="xs"
                                         className="-mt-0  shadow bg-white rounded"
@@ -305,7 +306,7 @@ const Inbound: React.FC<Props> = ({
                                 <div className="flex flex-col gap-1 w-full -mt-4">
                                     <ATMSelectSearchable
                                         options={dropdownOptions.counrtyOptions}
-                                        name="country"
+                                        name="addressInformation.country"
                                         labelClass="font-semibold text-sm"
                                         label="Country"
                                         required
@@ -313,7 +314,10 @@ const Inbound: React.FC<Props> = ({
                                             values.addressInformation.country
                                         }
                                         onChange={(e) => {
-                                            setFieldValue('country', e)
+                                            setFieldValue(
+                                                'addressInformation.country',
+                                                e
+                                            )
                                         }}
                                         size="xs"
                                         // className="-mt-0  shadow bg-white rounded"
@@ -324,13 +328,16 @@ const Inbound: React.FC<Props> = ({
                                         options={
                                             dropdownOptions.stateOptions || []
                                         }
-                                        name="state"
+                                        name="addressInformation.state"
                                         labelClass="font-semibold text-sm"
                                         label="State"
                                         required
                                         value={values.addressInformation.state}
                                         onChange={(e) => {
-                                            setFieldValue('state', e)
+                                            setFieldValue(
+                                                'addressInformation.state',
+                                                e
+                                            )
                                         }}
                                         size="xs"
                                         // className="-mt-0  shadow bg-white rounded"
@@ -339,13 +346,21 @@ const Inbound: React.FC<Props> = ({
 
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMSelectSearchable
-                                        options={[]}
-                                        name=""
+                                        options={
+                                            dropdownOptions.districtOptions ||
+                                            []
+                                        }
+                                        name="addressInformation.city"
                                         labelClass="font-semibold text-sm"
-                                        label="City"
+                                        label="District"
                                         required
-                                        value=""
-                                        onChange={() => {}}
+                                        value={values.addressInformation.city}
+                                        onChange={(e) => {
+                                            setFieldValue(
+                                                'addressInformation.city',
+                                                e
+                                            )
+                                        }}
                                         size="xs"
                                         // className="-mt-0  shadow bg-white rounded"
                                     />
@@ -353,13 +368,20 @@ const Inbound: React.FC<Props> = ({
 
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMSelectSearchable
-                                        options={[]}
-                                        name=""
+                                        options={
+                                            dropdownOptions.tehsilOptions || []
+                                        }
+                                        name="addressInformation.tehsil"
                                         labelClass="font-semibold text-sm"
                                         label="Tehsil"
                                         required
-                                        value=""
-                                        onChange={() => {}}
+                                        value={values.addressInformation.tehsil}
+                                        onChange={(e) => {
+                                            setFieldValue(
+                                                'addressInformation.tehsil',
+                                                e
+                                            )
+                                        }}
                                         size="xs"
                                         // className="-mt-0  shadow bg-white rounded"
                                     />
@@ -370,15 +392,15 @@ const Inbound: React.FC<Props> = ({
                                         options={
                                             dropdownOptions.pincodeOptions || []
                                         }
-                                        name="pincode"
+                                        name="addressInformation.pincode"
                                         labelClass="font-semibold text-sm"
                                         label="Pincode"
                                         required
                                         value={
                                             values.addressInformation.pincode
                                         }
-                                        onChange={(e) => {
-                                            setFieldValue('pincode', e)
+                                        onChange={(newValue: string) => {
+                                            handleClick(newValue)
                                         }}
                                         size="xs"
                                         // className="-mt-0  shadow bg-white rounded"
@@ -387,13 +409,23 @@ const Inbound: React.FC<Props> = ({
                                 <div className="grid grid-cols-3 gap-4 col-span-4">
                                     <div className="flex flex-col gap-1 w-full  -mt-4">
                                         <ATMSelectSearchable
-                                            options={[]}
+                                            options={
+                                                dropdownOptions.areaOptions ||
+                                                []
+                                            }
                                             name=""
                                             labelClass="font-semibold text-sm"
                                             label="Area"
                                             required
-                                            value=""
-                                            onChange={() => {}}
+                                            value={
+                                                values.addressInformation.area
+                                            }
+                                            onChange={(e) => {
+                                                setFieldValue(
+                                                    'addressInformation.Area',
+                                                    e
+                                                )
+                                            }}
                                             size="xs"
                                             // className="-mt-0  shadow bg-white rounded"
                                         />
@@ -401,14 +433,19 @@ const Inbound: React.FC<Props> = ({
 
                                     <div className="flex flex-col gap-1 w-full ">
                                         <ATMDatePicker
-                                            name="expectedDeliveryDate"
+                                            name="addressInformation.expectedDeliveryDate"
                                             value={
                                                 values.addressInformation
                                                     .expectedDeliveryDate
                                             }
-                                            label="expectedDeliveryDate"
+                                            label="ExpectedDelivery Date"
                                             dateTimeFormat="LLL"
-                                            onChange={() => {}}
+                                            onChange={(e) => {
+                                                setFieldValue(
+                                                    'addressInformation.expectedDeliveryDate',
+                                                    e
+                                                )
+                                            }}
                                             size="xs"
                                         />
                                     </div>
@@ -418,7 +455,12 @@ const Inbound: React.FC<Props> = ({
                                             name="profileDeliveredBy"
                                             labelClass="font-semibold text-sm"
                                             label="Profile delivered by"
-                                            onChange={() => {}}
+                                            onChange={(e) => {
+                                                setFieldValue(
+                                                    'profileDeliveredBy',
+                                                    e
+                                                )
+                                            }}
                                             value={
                                                 values.addressInformation
                                                     .profileDeliveredBy
@@ -454,11 +496,14 @@ const Inbound: React.FC<Props> = ({
                         <div className="grid grid-cols-3 gap-4">
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMTextField
-                                    name="agentName"
+                                    name="personalInformation.agentName"
                                     labelClass="font-semibold text-sm"
                                     label="Agent Name"
                                     onChange={(e) => {
-                                        setFieldValue('agentName', e)
+                                        setFieldValue(
+                                            'personalInformation.agentName',
+                                            e
+                                        )
                                     }}
                                     value={values.personalInformation.agentName}
                                     size="xs"
@@ -467,11 +512,14 @@ const Inbound: React.FC<Props> = ({
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMTextField
-                                    name="name"
+                                    name="personalInformation.name"
                                     labelClass="font-semibold text-sm"
                                     label="Name"
                                     onChange={(e) => {
-                                        setFieldValue('name', e)
+                                        setFieldValue(
+                                            'personalInformation.name',
+                                            e
+                                        )
                                     }}
                                     value={values.personalInformation.name}
                                     size="xs"
@@ -480,11 +528,14 @@ const Inbound: React.FC<Props> = ({
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMTextField
-                                    name="age"
+                                    name="personalInformation.age"
                                     labelClass="font-semibold text-sm"
                                     label="Age"
                                     onChange={(e) => {
-                                        setFieldValue('age', e)
+                                        setFieldValue(
+                                            'personalInformation.age',
+                                            e
+                                        )
                                     }}
                                     value={values.personalInformation.age}
                                     size="xs"
@@ -499,7 +550,10 @@ const Inbound: React.FC<Props> = ({
                                     value={values.personalInformation.address}
                                     label="Address"
                                     onChange={(e) => {
-                                        setFieldValue('address', e)
+                                        setFieldValue(
+                                            'personalInformation.address',
+                                            e
+                                        )
                                     }}
                                 />
                             </div>
@@ -511,7 +565,12 @@ const Inbound: React.FC<Props> = ({
                                     label="Relation"
                                     required
                                     value=""
-                                    onChange={() => {}}
+                                    onChange={(e) => {
+                                        setFieldValue(
+                                            'personalInformation.relation',
+                                            e
+                                        )
+                                    }}
                                     size="xs"
                                     // className="-mt-0  shadow bg-white rounded"
                                 />
@@ -519,23 +578,31 @@ const Inbound: React.FC<Props> = ({
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMSelectSearchable
                                     options={[]}
-                                    name=""
+                                    name="personalInformation.city"
                                     labelClass="font-semibold text-sm"
                                     label="City"
                                     required
-                                    value=""
-                                    onChange={() => {}}
+                                    value={values.personalInformation.city}
+                                    onChange={(e) => {
+                                        setFieldValue(
+                                            'personalInformation.city',
+                                            e
+                                        )
+                                    }}
                                     size="xs"
                                     // className="-mt-0  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMTextField
-                                    name="landmark"
+                                    name="peronalInfromation.landmark"
                                     labelClass="font-semibold text-sm"
                                     label="Landmark"
                                     onChange={(e) => {
-                                        setFieldValue('landmark', e)
+                                        setFieldValue(
+                                            'peronalInfromation.landmark',
+                                            e
+                                        )
                                     }}
                                     value={values.personalInformation.landmark}
                                     size="xs"
@@ -544,7 +611,7 @@ const Inbound: React.FC<Props> = ({
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMTextField
-                                    name="alterNateNo1"
+                                    name="personalInformation.alterNateNo1"
                                     labelClass="font-semibold text-sm"
                                     label="Alternate No.1"
                                     onChange={(e) => {
@@ -563,18 +630,26 @@ const Inbound: React.FC<Props> = ({
                                     // labelClass='font-bold text-sm'
                                     label="Gender"
                                     options={[]}
-                                    value={''}
-                                    onChange={() => {}}
+                                    value={values.personalInformation.gender}
+                                    onChange={(e) => {
+                                        setFieldValue(
+                                            'personalInformation.gender',
+                                            e
+                                        )
+                                    }}
                                     required
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMTextField
-                                    name="prepaid"
+                                    name="personalInformation.prepaid"
                                     labelClass="font-semibold text-sm"
                                     label="prepaid"
                                     onChange={(e) => {
-                                        setFieldValue('prepaid', e)
+                                        setFieldValue(
+                                            'personalInformation.prepaid',
+                                            e
+                                        )
                                     }}
                                     value={values.personalInformation.prepaid}
                                     size="xs"
@@ -583,11 +658,14 @@ const Inbound: React.FC<Props> = ({
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMTextField
-                                    name="email"
+                                    name="personalInformation.email"
                                     labelClass="font-semibold text-sm"
                                     label="Email"
                                     onChange={(e) => {
-                                        setFieldValue('email', e)
+                                        setFieldValue(
+                                            'personalInformation.email',
+                                            e
+                                        )
                                     }}
                                     value={values.personalInformation.email}
                                     size="xs"
@@ -597,19 +675,24 @@ const Inbound: React.FC<Props> = ({
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMSelectSearchable
                                     options={[]}
-                                    name=""
+                                    name="personalInformation.relation"
                                     labelClass="font-semibold text-sm"
                                     label="Relation"
                                     required
                                     value=""
-                                    onChange={() => {}}
+                                    onChange={(e) => {
+                                        setFieldValue(
+                                            'personalInformation.relation',
+                                            e
+                                        )
+                                    }}
                                     size="xs"
                                     // className="-mt-0  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4 col-span-3">
                                 <ATMTextArea
-                                    name="otherRemarks"
+                                    name="personalInformation.otherRemarks"
                                     minRows={1}
                                     labelClass="font-bold text-sm"
                                     value={
@@ -617,7 +700,10 @@ const Inbound: React.FC<Props> = ({
                                     }
                                     label="Remarks"
                                     onChange={(e) => {
-                                        setFieldValue('otherRemarks', e)
+                                        setFieldValue(
+                                            'personalInformation.otherRemarks',
+                                            e
+                                        )
                                     }}
                                 />
                             </div>
