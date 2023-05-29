@@ -21,8 +21,7 @@ import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 
 // export type language ={
 //     languageId:string[];
-        
-    
+
 // }
 
 const TapeManagementListingWrapper = () => {
@@ -53,7 +52,7 @@ const TapeManagementListingWrapper = () => {
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
-    })   
+    })
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -66,8 +65,6 @@ const TapeManagementListingWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
-    
-    
 
     const columns: columnTypes[] = [
         {
@@ -93,21 +90,18 @@ const TapeManagementListingWrapper = () => {
             renderCell: (row: TapeManagementListResponse) => (
                 <span> {row.schemeLabel} </span>
             ),
-        },        
+        },
         {
             field: 'languageName',
             headerName: 'Language',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => {
-                const languageLength = row.languageId.length;
-                
-                for(let i = 0; i<languageLength; i++){
+                const languageLength = row.languageId.length
+
+                for (let i = 0; i < languageLength; i++) {
                     return <span> {row.languageId[i].languageName}</span>
                 }
-                
             },
-               
-            
         },
 
         {
@@ -178,8 +172,6 @@ const TapeManagementListingWrapper = () => {
             }
         })
     }
-
-    
 
     return (
         <>
