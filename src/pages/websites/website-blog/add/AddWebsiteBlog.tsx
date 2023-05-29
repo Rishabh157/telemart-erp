@@ -43,10 +43,7 @@ const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            {' '}
-                            Blog Details
-                        </div>
+                        <div className="text-xl font-medium"> Blog Details</div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -97,11 +94,14 @@ const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                                 label="Blog SubTitle"
                                 placeholder="Blog SubTitle"
                                 onChange={(e) =>
-                                    setFieldValue('blogSubtitle', e.target.value)
+                                    setFieldValue(
+                                        'blogSubtitle',
+                                        e.target.value
+                                    )
                                 }
                             />
 
-															<ATMTextField
+                            <ATMTextField
                                 name="image"
                                 value={values.image}
                                 label="Image"
@@ -119,10 +119,7 @@ const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(newValue) =>
                                     setFieldValue('blogDescription', newValue)
                                 }
-														/>	
-
-
-                           
+                            />
                         </div>
                     </div>
                 </div>

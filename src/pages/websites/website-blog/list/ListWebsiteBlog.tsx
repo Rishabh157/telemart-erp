@@ -23,7 +23,9 @@ type Props = {
 
 const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const WebsiteBlogState: any = useSelector((state: RootState) => state.websiteBlog)
+    const WebsiteBlogState: any = useSelector(
+        (state: RootState) => state.websiteBlog
+    )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue } = WebsiteBlogState
     const navigate = useNavigate()

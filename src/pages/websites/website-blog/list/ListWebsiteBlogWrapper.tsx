@@ -25,7 +25,9 @@ const ListWebsiteBlogWrapper = () => {
     const [deleteWebsiteBlog] = useDeletegetWebsiteBlogMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteBlogState: any = useSelector((state: RootState) => state.websiteBlog)
+    const WebsiteBlogState: any = useSelector(
+        (state: RootState) => state.websiteBlog
+    )
 
     const { page, rowsPerPage, searchValue, items } = WebsiteBlogState
 
@@ -38,14 +40,14 @@ const ListWebsiteBlogWrapper = () => {
                 <span> {row.blogName} </span>
             ),
         },
-				{
-					field: 'blogTitle',
-					headerName: 'Blog Title',
-					flex: 'flex-[1_1_0%]',
-					renderCell: (row: WebsiteBlogListResponse) => (
-							<span> {row.blogTitle} </span>
-					),
-			},
+        {
+            field: 'blogTitle',
+            headerName: 'Blog Title',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsiteBlogListResponse) => (
+                <span> {row.blogTitle} </span>
+            ),
+        },
 
         {
             field: 'actions',

@@ -12,11 +12,11 @@ import WebsiteLayout from '../../WebsiteLayout'
 type Props = {}
 
 export type FormInitialValues = {
-	blogName: string
-	blogTitle: string
-	blogSubtitle: string
-	image: string
-	blogDescription: string  
+    blogName: string
+    blogTitle: string
+    blogSubtitle: string
+    image: string
+    blogDescription: string
 }
 
 const AddWebsiteBlogWrapper = (props: Props) => {
@@ -27,20 +27,20 @@ const AddWebsiteBlogWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const initialValues: FormInitialValues = {
-			blogName: '',
-			blogTitle: '',
-			blogSubtitle: '',
-			image: '',
-			blogDescription: '', 
+        blogName: '',
+        blogTitle: '',
+        blogSubtitle: '',
+        image: '',
+        blogDescription: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-			blogName: string().required('Required'),
-			blogTitle: string().required('Required'),
-			blogSubtitle: string(),
-			image: string().url("Image must be valid url"),
-			blogDescription: string(),      
+        blogName: string().required('Required'),
+        blogTitle: string().required('Required'),
+        blogSubtitle: string(),
+        image: string().url('Image must be valid url'),
+        blogDescription: string(),
     })
 
     //    Form Submit Handler
@@ -49,12 +49,12 @@ const AddWebsiteBlogWrapper = (props: Props) => {
         //console.log(values)
         setTimeout(() => {
             addWebsiteBlog({
-							blogName: values.blogName,
-							blogTitle: values.blogTitle,
-							blogSubtitle: values.blogSubtitle || '',
-							image: values.image || '',
-							blogDescription: values.blogDescription || '',
-              companyId: userData?.companyId || '',
+                blogName: values.blogName,
+                blogTitle: values.blogTitle,
+                blogSubtitle: values.blogSubtitle || '',
+                image: values.image || '',
+                blogDescription: values.blogDescription || '',
+                companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

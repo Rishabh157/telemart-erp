@@ -57,7 +57,7 @@ const EditWebsiteWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         productName: string().required('Required'),
-        url: string().url("Please enter valid URL").required('Required'),
+        url: string().url('Please enter valid URL').required('Required'),
         gaTagIp: string(),
         searchConsoleIp: string(),
         headerSpace: string(),

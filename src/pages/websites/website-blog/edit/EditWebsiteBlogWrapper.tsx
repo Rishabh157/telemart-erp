@@ -16,11 +16,11 @@ import WebsitesLayout from '../../WebsiteLayout'
 type Props = {}
 
 export type FormInitialValues = {
-	blogName: string
-	blogTitle: string
-	blogSubtitle: string
-	image: string
-	blogDescription: string  
+    blogName: string
+    blogTitle: string
+    blogSubtitle: string
+    image: string
+    blogDescription: string
 }
 
 const EditWebsiteBlogWrapper = (props: Props) => {
@@ -38,43 +38,39 @@ const EditWebsiteBlogWrapper = (props: Props) => {
     const [updateWebsiteBlog] = useUpdateWebsiteBlogMutation()
     const { data, isLoading, isFetching } = useGetWebsiteBlogByIdQuery(Id)
 
-		
-
     useEffect(() => {
         dispatch(setSelectedWebsiteBlog(data?.data))
     }, [dispatch, data, isLoading, isFetching])
 
-		
-
     const initialValues: FormInitialValues = {
-			blogName: selectedItem?.blogName,
-			blogTitle: selectedItem?.blogTitle,
-			blogSubtitle: selectedItem?.blogSubtitle || '',
-			image: selectedItem?.image || '',  
-			blogDescription: selectedItem?.blogDescription || '',      
+        blogName: selectedItem?.blogName,
+        blogTitle: selectedItem?.blogTitle,
+        blogSubtitle: selectedItem?.blogSubtitle || '',
+        image: selectedItem?.image || '',
+        blogDescription: selectedItem?.blogDescription || '',
     }
 
     // Form Validation Schema
-		const validationSchema = object({
-			blogName: string().required('Required'),
-			blogTitle: string().required('Required'),
-			blogSubtitle: string(),
-			image: string().url("Image must be valid URL"),
-			blogDescription: string(),      
+    const validationSchema = object({
+        blogName: string().required('Required'),
+        blogTitle: string().required('Required'),
+        blogSubtitle: string(),
+        image: string().url('Image must be valid URL'),
+        blogDescription: string(),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-					updateWebsiteBlog({
+            updateWebsiteBlog({
                 body: {
-									blogName: values.blogName,
-									blogTitle: values.blogTitle,
-									blogSubtitle: values.blogSubtitle || '',
-									image: values.image || '',
-									blogDescription: values.blogDescription || '',
-									companyId: userData?.companyId || '',
+                    blogName: values.blogName,
+                    blogTitle: values.blogTitle,
+                    blogSubtitle: values.blogSubtitle || '',
+                    image: values.image || '',
+                    blogDescription: values.blogDescription || '',
+                    companyId: userData?.companyId || '',
                 },
                 id: Id || '',
             }).then((res) => {
