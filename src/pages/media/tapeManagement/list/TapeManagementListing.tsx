@@ -28,6 +28,8 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue } = tapeManagementState
+
+    
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -61,7 +63,7 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMTableHeader
                     searchValue={searchValue}
                     page={page}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
