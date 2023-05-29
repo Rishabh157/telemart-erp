@@ -151,6 +151,8 @@ import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
 import WebsiteBlogListingWrapper from './pages/websites/websites-blog/list/WebsiteBlogListingWrapper'
 import AddWebsiteBlogWrapper from './pages/websites/websites-blog/add/AddwebsiteBlogWrapper'
 import EditWebsiteBlogWrapper from './pages/websites/websites-blog/edit/EditWebsiteBlogWrapper'
+import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
+
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -646,12 +648,12 @@ const PageRoutes = () => {
                         path="media/artist/add"
                         element={<AddArtistWrapper />}
                     />
-                       {/* Website route */}
-                       <Route
+                    {/* Website route */}
+                    <Route
                         path="all-websites/website"
                         element={<WebstieListingWrapper />}
                     />
-                         <Route
+                    <Route
                         path="all-websites/website/add"
                         element={<AddWebsiteWrapper />}
                     />
@@ -668,6 +670,10 @@ const PageRoutes = () => {
                         element={<EditWebsiteBlogWrapper />}
                     />
                  
+                    <Route
+                        path="all-websites/website/:id"
+                        element={<EditWebsiteWrapper />}
+                    />
                 </Routes>
             </BrowserRouter>
         </>

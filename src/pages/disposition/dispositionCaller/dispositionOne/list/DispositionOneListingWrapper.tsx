@@ -19,12 +19,10 @@ const DispositionOneListingWrapper = () => {
         }
     })
     useEffect(() => {
-        if(!isFetching && !isLoading)
-        {
-
+        if (!isFetching && !isLoading) {
             dispatch(setItems(data?.data || []))
         }
-    }, [isLoading, isFetching,dispatch, data])
+    }, [isLoading, isFetching, dispatch, data])
 
     return (
         <>

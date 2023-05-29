@@ -29,7 +29,6 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue } = tapeManagementState
 
-    
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {

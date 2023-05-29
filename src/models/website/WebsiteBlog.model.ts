@@ -31,7 +31,7 @@ export type UpdateWebsiteBlog = {
     blogSubtitle:string
     image:string
     blogDescription:string
-    websiteId:string
+    //websiteId:string
     companyId: string
   }
   id: string
