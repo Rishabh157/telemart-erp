@@ -152,6 +152,10 @@ import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper
 import DispositionOneListingWrapper from './pages/disposition/dispositionOne/list/DispositionOneListingWrapper'
 //
 
+import WebsitePageListingWrapper from './pages/websites/websitePage/list/WebsitePageListingWrapper'
+import AddWebsitePageWrapper from './pages/websites/websitePage/add/AddwebsitePageWrapper'
+import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsitePageWrapper'
+
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -655,6 +659,19 @@ const PageRoutes = () => {
                         path="all-websites/website/add"
                         element={<AddWebsiteWrapper />}
                     />
+                    <Route
+                        path="all-websites/website-page"
+                        element={<WebsitePageListingWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-page/add"
+                        element={<AddWebsitePageWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-page/:id"
+                        element={<EditWebsitePageWrapper />}
+                    />
+
                     <Route
                         path="all-websites/website/:id"
                         element={<EditWebsiteWrapper />}
