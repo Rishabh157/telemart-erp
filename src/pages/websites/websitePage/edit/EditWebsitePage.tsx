@@ -5,8 +5,8 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './AddwebsiteWrapper'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { FormInitialValues } from './EditWebsitePageWrapper'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -17,14 +17,14 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: 'Website',
-        path: '/all-websites/Website',
+        path: '/all-websites/website-Page',
     },
     {
         label: 'Add Website',
     },
 ]
 
-const AddWebsite = ({ formikProps, apiStatus }: Props) => {
+const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -37,7 +37,7 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New produc </ATMPageHeading>
+                    <ATMPageHeading> Add New Website-Page </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -45,7 +45,7 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Website Details
+                            Website-Page Details
                         </div>
 
                         {/* BUTTON - Add Button */}
@@ -70,75 +70,41 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name="productName"
-                                value={values.productName}
-                                label="Product Name"
-                                placeholder="Product Name"
+                                name="pageUrl"
+                                value={values.pageUrl}
+                                label="Page Url"
+                                placeholder="Url"
                                 onChange={(e) =>
-                                    setFieldValue('productName', e.target.value)
-                                }
-                            />
-
-                            {/* Field 3 */}
-                            <ATMTextField
-                                name="url"
-                                value={values.url}
-                                label="URL"
-                                placeholder="URL"
-                                onChange={(e) =>
-                                    setFieldValue('url', e.target.value)
+                                    setFieldValue('pageUrl', e.target.value)
                                 }
                             />
 
                             <ATMTextField
-                                // minRows={4}
-                                name="gaTagIp"
-                                value={values.gaTagIp}
-                                label="Gatag IP Address"
+                                name="pageName"
+                                value={values.pageName}
+                                label="Page Name "
+                                placeholder="Name"
                                 onChange={(e) =>
-                                    setFieldValue('gaTagIp', e.target.value)
+                                    setFieldValue('pageName', e.target.value)
                                 }
                             />
-                        </div>
-                        <div className="grid grid-cols-2 gap-4 mt-4">
                             <ATMTextArea
-                                minRows={4}
-                                name="searchConsoleIp"
-                                value={values.searchConsoleIp}
-                                label="Search Console IP Address"
-                                onChange={(newValue) =>
-                                    setFieldValue('searchConsoleIp', newValue)
-                                }
-                            />
-
-                            <ATMTextArea
-                                minRows={4}
                                 name="headerSpace"
                                 value={values.headerSpace}
-                                label="Header Space"
-                                onChange={(newValue) =>
-                                    setFieldValue('headerSpace', newValue)
+                                label="Subtitle Name"
+                                onChange={(e: any) =>
+                                    setFieldValue('headerSpace', e)
                                 }
-                            />
-
-                            <ATMTextArea
                                 minRows={4}
+                            />
+                            <ATMTextArea
                                 name="footerSpace"
                                 value={values.footerSpace}
-                                label="Footer Space"
-                                onChange={(newValue) =>
-                                    setFieldValue('footerSpace', newValue)
+                                label="footer Space"
+                                onChange={(e: any) =>
+                                    setFieldValue('footerSpace', e)
                                 }
-                            />
-
-                            <ATMTextArea
                                 minRows={4}
-                                name="siteMap"
-                                value={values.siteMap}
-                                label="SiteMap"
-                                onChange={(newValue) =>
-                                    setFieldValue('siteMap', newValue)
-                                }
                             />
                         </div>
                     </div>
@@ -148,4 +114,4 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
     )
 }
 
-export default AddWebsite
+export default EditWebsitePage

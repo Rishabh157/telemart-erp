@@ -1,11 +1,11 @@
 import { RxDashboard } from 'react-icons/rx'
 import { FiUsers } from 'react-icons/fi'
-import { TbBuildingWarehouse } from 'react-icons/tb'
+import { TbBuildingWarehouse, TbSettings2 } from 'react-icons/tb'
 import { HiOutlineTruck } from 'react-icons/hi'
 import { FaRegHandshake } from 'react-icons/fa'
 import { CiBoxes } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
-import { MdPermMedia } from 'react-icons/md'
+import { MdPermMedia, MdWeb } from 'react-icons/md'
 import { GrCompliance, GrNotes } from 'react-icons/gr'
 import { IoDocumentTextOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
@@ -93,12 +93,17 @@ export const navigation: NavItemType[] = [
     },
     {
         label: 'Disposition',
-        icon: AiOutlineSetting,
+        icon: TbSettings2,
         path: '/disposition',
     },
     {
-        label: 'All Website',
+        label: 'Dispositions',
         icon: AiOutlineSetting,
+        path: '/dispositions/disposition-one    ',
+    },
+    {
+        label: 'All Website',
+        icon: MdWeb,
         path: '/all-websites/website',
     },
 ]

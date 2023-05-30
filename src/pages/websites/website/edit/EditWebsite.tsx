@@ -72,8 +72,8 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 name="productName"
                                 value={values.productName}
-                                label="Website Name"
-                                placeholder="Website Name"
+                                label="Product Name"
+                                placeholder="Product Name"
                                 onChange={(e) =>
                                     setFieldValue('productName', e.target.value)
                                 }
@@ -90,16 +90,17 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
 
-                            <ATMTextArea
-                                minRows={4}
+                            <ATMTextField
+                                // minRows={4}
                                 name="gaTagIp"
                                 value={values.gaTagIp}
-                                label="GA Tag IP Address"
-                                onChange={(newValue) =>
-                                    setFieldValue('gaTagIp', newValue)
+                                label="Gatag IP Address"
+                                onChange={(e) =>
+                                    setFieldValue('gaTagIp', e.target.value)
                                 }
                             />
-
+                        </div>
+                        <div className="grid grid-cols-3 gap-4 mt-4">
                             <ATMTextArea
                                 minRows={4}
                                 name="searchConsoleIp"

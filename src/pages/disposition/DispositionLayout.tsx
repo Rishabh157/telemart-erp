@@ -2,38 +2,51 @@ import React, { useState } from 'react'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
-import {
-    BiChevronsLeft,
-    // BiCategory,
-    // BiCheckboxSquare,
-    // BiCategoryAlt,
-} from 'react-icons/bi'
-// import { MdOutlineCategory } from 'react-icons/md'
-// import { BsBox, BsBoxes, BsBoxFill } from 'react-icons/bs'
-import { CgWebsite } from 'react-icons/cg'
-// import { FaObjectGroup } from 'react-icons/fa'
-// import { HiOutlineReceiptTax } from 'react-icons/hi'
-// import { CgOrganisation } from 'react-icons/cg'
-// import { CiBarcode, CiLocationOn } from 'react-icons/ci'
-import { RiPagesLine } from 'react-icons/ri'
-import { TbBrandBlogger } from 'react-icons/tb'
+import { BsPersonHeart } from 'react-icons/bs'
+import { BiChevronsLeft, BiCategory } from 'react-icons/bi'
+import { DiDart } from 'react-icons/di'
+import { FaTape } from 'react-icons/fa'
+import { GrChannel } from 'react-icons/gr'
+import { SiGoogletagmanager } from 'react-icons/si'
+import { MdEmojiEvents, MdViewTimeline, MdAnalytics } from 'react-icons/md'
+import { TiFlowMerge } from 'react-icons/ti'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const websitesNavigation: NavItemType[] = [
+const dispositionNavigation: NavItemType[] = [
     {
-        label: 'Websites',
-        icon: CgWebsite,
-        path: '/all-websites/website',
+        label: 'Disposition One',
+        icon: GrChannel,
+        path: '/dispositions/disposition-one',
     },
     {
-        label: 'Website Blog',
-        icon: TbBrandBlogger,
-        path: '/all-websites/website-blog',
+        label: 'Disposition Two',
+        icon: BiCategory,
+        path: '/dispositions/disposition-two',
     },
     {
-        label: 'Websites-page',
-        icon: RiPagesLine,
-        path: '/all-websites/website-page',
+        label: 'Disposition Three',
+        icon: SiGoogletagmanager,
+        path: '/dispositions/disposition-three',
+    },
+    {
+        label: 'IC-One',
+        icon: DiDart,
+        path: '/dispositions/incoming-call-one',
+    },
+    {
+        label: 'IC-Two',
+        icon: BsPersonHeart,
+        path: '/dispositions/incoming-call-two',
+    },
+    {
+        label: 'IC-Three',
+        icon: FaTape,
+        path: '/dispositions/incoming-call-three',
+    },
+    {
+        label: 'Disposition Complaint',
+        icon: MdEmojiEvents,
+        path: '/dispositions/disposition-complaint',
     },
 ]
 
@@ -41,7 +54,7 @@ type Props = {
     children?: React.ReactNode | string
 }
 
-const WebsitesLayout = ({ children }: Props) => {
+const DispositionLayout = ({ children }: Props) => {
     const [isCollapsed, setIsCollapsed] = useState(false)
     const toggleCollapse = () => {
         setIsCollapsed((prev) => !prev)
@@ -50,7 +63,7 @@ const WebsitesLayout = ({ children }: Props) => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const currentPath = `/all-website/${location.pathname?.split('/')[2]}`
+    const currentPath = `/media/${location.pathname?.split('/')[2]}`
 
     return (
         <div className="flex h-screen w-screen relative">
@@ -63,7 +76,7 @@ const WebsitesLayout = ({ children }: Props) => {
                 <VerticalNavBar
                     toggleCollapse={toggleCollapse}
                     isCollapsed={isCollapsed}
-                    navigation={websitesNavigation}
+                    navigation={dispositionNavigation}
                     isPathEqualtoNavItem={(navItem: any) =>
                         navItem.path === currentPath
                     }
@@ -89,11 +102,11 @@ const WebsitesLayout = ({ children }: Props) => {
                     isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
                 }`}
             >
-                <BiChevronsLeft className="text-2xl" />{' '}
+                <BiChevronsLeft className="text-2xl" />
                 {!isCollapsed && <div> BACK TO MAIN MENU </div>}
             </button>
         </div>
     )
 }
 
-export default WebsitesLayout
+export default DispositionLayout

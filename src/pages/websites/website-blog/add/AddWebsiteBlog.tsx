@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './AddwebsiteWrapper'
+import { FormInitialValues } from './AddWebsiteBlogWrapper'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 type Props = {
@@ -16,15 +16,15 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: 'Website',
-        path: '/all-websites/Website',
+        label: 'Website Blog',
+        path: '/all-websites/website-blog',
     },
     {
-        label: 'Add Website',
+        label: 'Add Website Blog',
     },
 ]
 
-const AddWebsite = ({ formikProps, apiStatus }: Props) => {
+const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -37,16 +37,13 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New produc </ATMPageHeading>
+                    <ATMPageHeading> Add New Blog </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            {' '}
-                            Website Details
-                        </div>
+                        <div className="text-xl font-medium"> Blog Details</div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -70,74 +67,57 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name="productName"
-                                value={values.productName}
-                                label="Product Name"
-                                placeholder="Product Name"
+                                name="blogName"
+                                value={values.blogName}
+                                label="Blog Name"
+                                placeholder="Blog Name"
                                 onChange={(e) =>
-                                    setFieldValue('productName', e.target.value)
+                                    setFieldValue('blogName', e.target.value)
                                 }
                             />
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name="url"
-                                value={values.url}
-                                label="URL"
-                                placeholder="URL"
+                                name="blogTitle"
+                                value={values.blogTitle}
+                                label="Blog Title"
+                                placeholder="Blog Title"
                                 onChange={(e) =>
-                                    setFieldValue('url', e.target.value)
+                                    setFieldValue('blogTitle', e.target.value)
+                                }
+                            />
+
+                            {/* Field 3 */}
+                            <ATMTextField
+                                name="blogSubtitle"
+                                value={values.blogSubtitle}
+                                label="Blog SubTitle"
+                                placeholder="Blog SubTitle"
+                                onChange={(e) =>
+                                    setFieldValue(
+                                        'blogSubtitle',
+                                        e.target.value
+                                    )
                                 }
                             />
 
                             <ATMTextField
-                                // minRows={4}
-                                name="gaTagIp"
-                                value={values.gaTagIp}
-                                label="Gatag IP Address"
+                                name="image"
+                                value={values.image}
+                                label="Image"
+                                placeholder="Image"
                                 onChange={(e) =>
-                                    setFieldValue('gaTagIp', e.target.value)
-                                }
-                            />
-                        </div>
-                        <div className="grid grid-cols-2 gap-4 mt-4">
-                            <ATMTextArea
-                                minRows={4}
-                                name="searchConsoleIp"
-                                value={values.searchConsoleIp}
-                                label="Search Console IP Address"
-                                onChange={(newValue) =>
-                                    setFieldValue('searchConsoleIp', newValue)
+                                    setFieldValue('image', e.target.value)
                                 }
                             />
 
                             <ATMTextArea
                                 minRows={4}
-                                name="headerSpace"
-                                value={values.headerSpace}
-                                label="Header Space"
+                                name="blogDescription"
+                                value={values.blogDescription}
+                                label="Blog Description"
                                 onChange={(newValue) =>
-                                    setFieldValue('headerSpace', newValue)
-                                }
-                            />
-
-                            <ATMTextArea
-                                minRows={4}
-                                name="footerSpace"
-                                value={values.footerSpace}
-                                label="Footer Space"
-                                onChange={(newValue) =>
-                                    setFieldValue('footerSpace', newValue)
-                                }
-                            />
-
-                            <ATMTextArea
-                                minRows={4}
-                                name="siteMap"
-                                value={values.siteMap}
-                                label="SiteMap"
-                                onChange={(newValue) =>
-                                    setFieldValue('siteMap', newValue)
+                                    setFieldValue('blogDescription', newValue)
                                 }
                             />
                         </div>
@@ -148,4 +128,4 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
     )
 }
 
-export default AddWebsite
+export default AddWebsiteBlog

@@ -846,7 +846,7 @@ const OrganisationHierarchy = () => {
                         </TreeNode>
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-normal  font-sans">
+                                <StyledNode extraClasses="text-sm font-bold  font-sans">
                                     Procurement Dept. Head
                                 </StyledNode>
                             }
@@ -869,7 +869,7 @@ const OrganisationHierarchy = () => {
                         </TreeNode>
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-normal  font-sans">
+                                <StyledNode extraClasses="text-sm font-bold  font-sans">
                                     Callcenter Dept. Head
                                 </StyledNode>
                             }
@@ -893,7 +893,7 @@ const OrganisationHierarchy = () => {
 
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                <StyledNode extraClasses="text-sm font-bold font-sans">
                                     Creatives Dept. Head
                                 </StyledNode>
                             }
@@ -916,7 +916,7 @@ const OrganisationHierarchy = () => {
                         </TreeNode>
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                <StyledNode extraClasses="text-sm font-bold font-sans">
                                     Warehouse Dept. Head
                                 </StyledNode>
                             }

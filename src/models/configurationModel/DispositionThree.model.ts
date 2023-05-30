@@ -1,6 +1,7 @@
 export type DispositionThreeListResponse = {
     dispositionName: string
     dispostionOneLabel: string
+    dispostionTwoLabel: string
     dispositionOneId: string
     dispositionTwoId: string
     companyId: string

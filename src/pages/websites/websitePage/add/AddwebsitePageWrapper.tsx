@@ -1,73 +1,61 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import AddWebsite from './AddWebsite'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { useAddWebsiteMutation } from 'src/services/websites/WebsiteServices'
 import WebsiteLayout from '../../WebsiteLayout'
+import { useAddWebsitePageMutation } from 'src/services/websites/WebsitePageServices'
+import AddWebsitePage from './AddWebsitePage'
 
 type Props = {}
 
 export type FormInitialValues = {
-    productName: string
-    url: string
-    gaTagIp: string
-    searchConsoleIp: string
+    pageUrl: string
+    pageName: string
     headerSpace: string
     footerSpace: string
-    siteMap: string
 }
 
-const AddWebsiteWrapper = (props: Props) => {
+const AddWebsitePageWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [addWebsite] = useAddWebsiteMutation()
+    const [addWebsitePage] = useAddWebsitePageMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const initialValues: FormInitialValues = {
-        productName: '',
-        url: '',
-        gaTagIp: '',
-        searchConsoleIp: '',
+        pageUrl: '',
+        pageName: '',
         headerSpace: '',
         footerSpace: '',
-        siteMap: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        productName: string().required('Required'),
-        url: string().url('Please enter valid URL').required('Required'),
-        gaTagIp: string(),
-        searchConsoleIp: string(),
-        headerSpace: string(),
-        footerSpace: string(),
-        siteMap: string(),
+        pageUrl: string().required('Url is required'),
+        pageName: string().required('Name is required'),
+        headerSpace: string().required('Header is required'),
+        footerSpace: string().required('Footer is required'),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        //console.log(values)
         setTimeout(() => {
-            addWebsite({
-                productName: values.productName,
-                url: values.url,
-                gaTagIp: values.gaTagIp || '',
-                searchConsoleIp: values.searchConsoleIp || '',
-                headerSpace: values.headerSpace || '',
-                footerSpace: values.footerSpace || '',
-                siteMap: values.siteMap || '',
+            addWebsitePage({
+                pageUrl: values.pageUrl,
+                pageName: values.pageName,
+                headerSpace: values.headerSpace,
+                footerSpace: values.footerSpace,
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Website added successfully!')
-                        navigate('/all-websites/website')
+                        showToast('success', 'Website-Page added successfully!')
+                        navigate('/all-websites/website-Page')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -78,7 +66,6 @@ const AddWebsiteWrapper = (props: Props) => {
             })
         }, 1000)
     }
-
     return (
         <WebsiteLayout>
             <Formik
@@ -88,7 +75,7 @@ const AddWebsiteWrapper = (props: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <AddWebsite
+                        <AddWebsitePage
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                         />
@@ -99,4 +86,4 @@ const AddWebsiteWrapper = (props: Props) => {
     )
 }
 
-export default AddWebsiteWrapper
+export default AddWebsitePageWrapper

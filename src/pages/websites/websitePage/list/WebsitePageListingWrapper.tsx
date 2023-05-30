@@ -1,48 +1,57 @@
 import React, { useEffect, useState } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/website/websiteSlice'
-import WebsiteLayout from '../../WebsiteLayout'
-import WebsiteListing from './WebsitetListing'
-import { WebsiteListResponse } from 'src/models/website/Website.model'
+} from 'src/redux/slices/website/websitePageSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    useDeletegetWebsiteMutation,
-    useGetPaginationWebsiteQuery,
-} from 'src/services/websites/WebsiteServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+    useDeleteWebsitePageMutation,
+    useGetPaginationWebsitePageQuery,
+} from 'src/services/websites/WebsitePageServices'
 import { showToast } from 'src/utils'
-import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import WebsitesLayout from '../../WebsiteLayout'
+import WebsitePageListing from './WebsitetPageListing'
 
-const WebstieListingWrapper = () => {
+const WebsitePageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const [deleteWebsite] = useDeletegetWebsiteMutation()
+    const [deletePage] = useDeleteWebsitePageMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteState: any = useSelector((state: RootState) => state.website)
+    const WebsitePageState = useSelector(
+        (state: RootState) => state.websitePage
+    )
 
-    const { page, rowsPerPage, searchValue, items } = WebsiteState
+    const { page, rowsPerPage, searchValue, items } = WebsitePageState
     const columns: columnTypes[] = [
         {
-            field: 'productName',
-            headerName: 'Website Name',
+            field: 'pagerName',
+            headerName: 'Page Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsiteListResponse) => (
-                <span> {row.productName} </span>
+            renderCell: (row: WebsitePageListResponse) => (
+                <span> {row.pageName} </span>
+            ),
+        },
+        {
+            field: 'pageUrl',
+            headerName: 'Page Url',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsitePageListResponse) => (
+                <span> {row.pageUrl} </span>
             ),
         },
 
         {
             field: 'actions',
             headerName: 'Actions',
-            flex: 'flex-[1.8_1.8_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <div className="relative">
                     <button
@@ -57,48 +66,21 @@ const WebstieListingWrapper = () => {
                         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
                     </button>
                     {showDropdown && currentId === row?._id && (
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10  w-24">
+                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
                                     navigate(
-                                        `/all-websites/Website/${currentId}`
+                                        `/all-websites/website-Page/${currentId}`
                                     )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Edit
                             </button>
-
-                            <button
-                                onClick={() => {
-                                    navigate('/all-websites/website-blog/add', {
-                                        state: {
-                                            siteId: currentId,
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Add Blog
-                            </button>
-                            <button
-                                onClick={() => {
-                                    dispatch(setFilterValue(currentId))
-                                    navigate('/all-websites/website-blog', {
-                                        state: {
-                                            websiteId: currentId,
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                View Blog
-                            </button>
-
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Website',
+                                        title: 'Delete Website-Page',
                                         text: 'Do you want to delete',
                                         showCancelButton: true,
                                         next: (res: any) => {
@@ -120,10 +102,10 @@ const WebstieListingWrapper = () => {
         },
     ]
 
-    const { data, isFetching, isLoading } = useGetPaginationWebsiteQuery({
+    const { data, isFetching, isLoading } = useGetPaginationWebsitePageQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['productName', 'url'],
+        params: ['pageName'],
         page: page,
         filterBy: [
             {
@@ -151,10 +133,10 @@ const WebstieListingWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteWebsite(currentId).then((res: any) => {
+        deletePage(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Website deleted successfully!')
+                    showToast('success', 'Website-Page deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -168,15 +150,15 @@ const WebstieListingWrapper = () => {
     }
     return (
         <>
-            <WebsiteLayout>
-                <WebsiteListing
+            <WebsitesLayout>
+                <WebsitePageListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </WebsiteLayout>
+            </WebsitesLayout>
         </>
     )
 }
 
-export default WebstieListingWrapper
+export default WebsitePageListingWrapper
