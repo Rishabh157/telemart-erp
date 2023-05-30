@@ -41,7 +41,7 @@ const DispositionOneListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetdispositionOneQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['tapeName', 'schemeLabel'],
+        params: ['dispositionName'],
         page: page,
         filterBy: [
             {
@@ -70,24 +70,11 @@ const DispositionOneListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'dispositionName',
-            headerName: 'Tabe Name',
+            headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DispositionOneListResponse) => (
                 <span> {row.dispositionName} </span>
             ),
-        },
-      
-        {
-            field: 'languageName',
-            headerName: 'Language',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => {
-                const languageLength = row.languageId.length
-
-                for (let i = 0; i < languageLength; i++) {
-                    return <span> {row.languageId[i].languageName}</span>
-                }
-            },
         },
 
         {
@@ -120,7 +107,7 @@ const DispositionOneListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Delete Tape',
-                                        text: 'Do you want to delete Tape?',
+                                        text: 'Do you want to delete Disposition-One?',
                                         showCancelButton: true,
                                         next: (res: any) => {
                                             return res.isConfirmed

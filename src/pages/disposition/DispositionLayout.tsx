@@ -48,7 +48,6 @@ const dispositionNavigation: NavItemType[] = [
         icon: MdEmojiEvents,
         path: '/dispositions/disposition-complaint',
     },
-   
 ]
 
 type Props = {

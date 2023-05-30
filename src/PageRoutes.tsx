@@ -155,6 +155,9 @@ import DispositionOneListingWrapper from './pages/disposition/dispositionOne/lis
 import WebsitePageListingWrapper from './pages/websites/websitePage/list/WebsitePageListingWrapper'
 import AddWebsitePageWrapper from './pages/websites/websitePage/add/AddwebsitePageWrapper'
 import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsitePageWrapper'
+import DispositionTwoListingWrapper from './pages/disposition/dispositionCaller/dispositionTwo/list/DispositionTwoListingWrapper'
+import DispositionThreeListingWrapper from './pages/disposition/dispositionCaller/dispositionThree/list/DispositionThreeListingWrapper'
+import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -173,7 +176,6 @@ const PageRoutes = () => {
     dispatch(setUserData(userData))
 
     if (!accessToken && window.location.pathname !== '/') {
-        window.location.replace('/')
         return null
     }
 
@@ -682,7 +684,18 @@ const PageRoutes = () => {
                         path="dispositions/disposition-one"
                         element={<DispositionOneListingWrapper />}
                     />
-                    
+                    <Route
+                        path="dispositions/disposition-one/add"
+                        element={<AddDispositionOneWrappper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-two"
+                        element={<DispositionTwoListingWrapper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-three"
+                        element={<DispositionThreeListingWrapper />}
+                    />
                 </Routes>
             </BrowserRouter>
         </>
