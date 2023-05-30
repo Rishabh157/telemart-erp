@@ -1,21 +1,21 @@
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { WebsiteBlogListResponse } from '../../../models/website/WebsiteBlog.model'
+import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
 
-export interface WebsiteBlogSliceStateType {
-    items: WebsiteBlogListResponse[] | []
-    allItems: WebsiteBlogListResponse[] | []
-    selectedItem: WebsiteBlogListResponse | null
+export interface WebsitePageSliceStateType {
+    items: WebsitePageListResponse[] | []
+    allItems: WebsitePageListResponse[] | []
+    selectedItem: WebsitePageListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selecteWebsiteBlog: string
+    selecteWebsitePage: string
 }
 
-const initialState: WebsiteBlogSliceStateType = {
+const initialState: WebsitePageSliceStateType = {
     items: [],
     allItems: [],
     selectedItem: null,
@@ -25,22 +25,22 @@ const initialState: WebsiteBlogSliceStateType = {
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selecteWebsiteBlog: '',
+    selecteWebsitePage: '',
 }
 
-const websiteBlogSlice: Slice<WebsiteBlogSliceStateType> = createSlice({
-    name: 'websiteBlog',
+const websitePageSlice: Slice<WebsitePageSliceStateType> = createSlice({
+    name: 'websitePage',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<WebsiteBlogListResponse[] | []>
+            action: PayloadAction<WebsitePageListResponse[] | []>
         ) => {
             state.items = action.payload
         },
         setAllItems: (
             state,
-            action: PayloadAction<WebsiteBlogListResponse[] | []>
+            action: PayloadAction<WebsitePageListResponse[] | []>
         ) => {
             state.allItems = action.payload
         },
@@ -71,11 +71,11 @@ const websiteBlogSlice: Slice<WebsiteBlogSliceStateType> = createSlice({
             state.isTableLoading = action.payload
         },
         setSelecteWebsite: (state, action: PayloadAction<string>) => {
-            state.selecteWebsiteBlog = action.payload
+            state.selecteWebsitePage = action.payload
         },
         setSelectedWebsite: (
             state,
-            action: PayloadAction<WebsiteBlogListResponse | null>
+            action: PayloadAction<WebsitePageListResponse | null>
         ) => {
             state.selectedItem = action.payload
         },
@@ -93,5 +93,5 @@ export const {
     setIsTableLoading,
     setSelecteWebsite,
     setSelectedWebsite,
-} = websiteBlogSlice.actions
-export default websiteBlogSlice.reducer
+} = websitePageSlice.actions
+export default websitePageSlice.reducer

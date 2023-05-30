@@ -6,28 +6,25 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
-import { FormInitialValues } from './EditWebsiteBlogWrapper'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { SelectOption } from 'src/models/FormField/FormField.model'
+import { FormInitialValues } from './EditWebsitePageWrapper'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
-    websiteOptions: SelectOption[]
 }
 
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: 'Website',
-        path: '/all-websites/website-blog',
+        path: '/all-websites/website-Page',
     },
     {
         label: 'Add Website',
     },
 ]
 
-const EditWebsiteBlog = ({ formikProps, apiStatus, websiteOptions }: Props) => {
+const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -40,7 +37,7 @@ const EditWebsiteBlog = ({ formikProps, apiStatus, websiteOptions }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Website-blog </ATMPageHeading>
+                    <ATMPageHeading> Add New Website-Page </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -48,7 +45,7 @@ const EditWebsiteBlog = ({ formikProps, apiStatus, websiteOptions }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Website-blog Details
+                            Website-Page Details
                         </div>
 
                         {/* BUTTON - Add Button */}
@@ -73,62 +70,41 @@ const EditWebsiteBlog = ({ formikProps, apiStatus, websiteOptions }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name="blogName"
-                                value={values.blogName}
-                                label="Blog Name"
-                                placeholder="Name"
+                                name="pageUrl"
+                                value={values.pageUrl}
+                                label="Page Url"
+                                placeholder="Url"
                                 onChange={(e) =>
-                                    setFieldValue('blogName', e.target.value)
+                                    setFieldValue('pageUrl', e.target.value)
                                 }
                             />
 
                             <ATMTextField
-                                name="blogTitle"
-                                value={values.blogTitle}
-                                label="Blog Title "
-                                placeholder="Title "
+                                name="pageName"
+                                value={values.pageName}
+                                label="Page Name "
+                                placeholder="Name"
                                 onChange={(e) =>
-                                    setFieldValue('blogTitle', e.target.value)
-                                }
-                            />
-                            <ATMTextField
-                                name="blogSubtitle"
-                                value={values.blogSubtitle}
-                                label="Subtitle Name"
-                                placeholder="Subtitle "
-                                onChange={(e) =>
-                                    setFieldValue(
-                                        'blogSubtitle',
-                                        e.target.value
-                                    )
-                                }
-                            />
-                            <ATMSelectSearchable
-                                name="websiteId"
-                                value={values.websiteId}
-                                label="website"
-                                options={websiteOptions}
-                                onChange={(value) =>
-                                    setFieldValue('websiteId', value)
-                                }
-                            />
-                            <ATMTextField
-                                name="image"
-                                value={values.image}
-                                label="Image Name"
-                                placeholder="Image Name"
-                                onChange={(e) =>
-                                    setFieldValue('image', e.target.value)
+                                    setFieldValue('pageName', e.target.value)
                                 }
                             />
                             <ATMTextArea
-                                label="Blog Description"
-                                value={values.blogDescription}
-                                onChange={(e) => {
-                                    setFieldValue('blogDescription', e)
-                                }}
-                                minRows={3}
-                                name="blogDescription"
+                                name="headerSpace"
+                                value={values.headerSpace}
+                                label="Subtitle Name"
+                                onChange={(e: any) =>
+                                    setFieldValue('headerSpace', e)
+                                }
+                                minRows={4}
+                            />
+                            <ATMTextArea
+                                name="footerSpace"
+                                value={values.footerSpace}
+                                label="footer Space"
+                                onChange={(e: any) =>
+                                    setFieldValue('footerSpace', e)
+                                }
+                                minRows={4}
                             />
                         </div>
                     </div>
@@ -138,4 +114,4 @@ const EditWebsiteBlog = ({ formikProps, apiStatus, websiteOptions }: Props) => {
     )
 }
 
-export default EditWebsiteBlog
+export default EditWebsitePage

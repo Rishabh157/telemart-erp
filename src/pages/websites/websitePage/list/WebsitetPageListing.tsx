@@ -12,7 +12,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/website/websiteBlogSlice'
+} from 'src/redux/slices/website/websitePageSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -21,13 +21,13 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const WebsiteBlogListing = ({ columns, rows, setShowDropdown }: Props) => {
+const WebsitePageListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const WebsiteBlogState: any = useSelector(
-        (state: RootState) => state.websiteBlog
+    const WebsitePageState: any = useSelector(
+        (state: RootState) => state.websitePage
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = WebsiteBlogState
+    const { page, rowsPerPage, totalItems, searchValue } = WebsitePageState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -46,13 +46,13 @@ const WebsiteBlogListing = ({ columns, rows, setShowDropdown }: Props) => {
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Website Management </ATMPageHeading>
+                <ATMPageHeading> Website Page </ATMPageHeading>
                 <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Website-Blog
+                    + Add Website-Page
                 </button>
             </div>
 
@@ -102,4 +102,4 @@ const WebsiteBlogListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
 }
 
-export default WebsiteBlogListing
+export default WebsitePageListing

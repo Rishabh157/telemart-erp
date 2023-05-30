@@ -3,48 +3,48 @@ import { HiDotsHorizontal } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { WebsiteBlogListResponse } from 'src/models/website/WebsiteBlog.model'
+import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/website/websiteBlogSlice'
+} from 'src/redux/slices/website/websitePageSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    useDeleteWebsiteBlogMutation,
-    useGetPaginationWebsiteBlogQuery,
-} from 'src/services/websites/WebsiteBlogServices'
+    useDeleteWebsitePageMutation,
+    useGetPaginationWebsitePageQuery,
+} from 'src/services/websites/WebsitePageServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsitesLayout from '../../WebsiteLayout'
-import WebsiteBlogListing from './WebsitetBlogListing'
+import WebsitePageListing from './WebsitetPageListing'
 
-const WebsiteBlogListingWrapper = () => {
+const WebsitePageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const [deleteBlog] = useDeleteWebsiteBlogMutation()
+    const [deletePage] = useDeleteWebsitePageMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteBlogState = useSelector(
-        (state: RootState) => state.websiteBlog
+    const WebsitePageState = useSelector(
+        (state: RootState) => state.websitePage
     )
 
-    const { page, rowsPerPage, searchValue, items } = WebsiteBlogState
+    const { page, rowsPerPage, searchValue, items } = WebsitePageState
     const columns: columnTypes[] = [
         {
-            field: 'blogName',
-            headerName: 'Blog Name',
+            field: 'pagerName',
+            headerName: 'Page Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogName} </span>
+            renderCell: (row: WebsitePageListResponse) => (
+                <span> {row.pageName} </span>
             ),
         },
         {
-            field: 'blogTitle',
-            headerName: 'Blog Title',
+            field: 'pageUrl',
+            headerName: 'Page Url',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogTitle} </span>
+            renderCell: (row: WebsitePageListResponse) => (
+                <span> {row.pageUrl} </span>
             ),
         },
 
@@ -70,7 +70,7 @@ const WebsiteBlogListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     navigate(
-                                        `/all-websites/website-blog/${currentId}`
+                                        `/all-websites/website-Page/${currentId}`
                                     )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -80,7 +80,7 @@ const WebsiteBlogListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Website-Blog',
+                                        title: 'Delete Website-Page',
                                         text: 'Do you want to delete',
                                         showCancelButton: true,
                                         next: (res: any) => {
@@ -102,10 +102,10 @@ const WebsiteBlogListingWrapper = () => {
         },
     ]
 
-    const { data, isFetching, isLoading } = useGetPaginationWebsiteBlogQuery({
+    const { data, isFetching, isLoading } = useGetPaginationWebsitePageQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['blogName'],
+        params: ['pageName'],
         page: page,
         filterBy: [
             {
@@ -133,10 +133,10 @@ const WebsiteBlogListingWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteBlog(currentId).then((res: any) => {
+        deletePage(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Website-blog deleted successfully!')
+                    showToast('success', 'Website-Page deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -151,7 +151,7 @@ const WebsiteBlogListingWrapper = () => {
     return (
         <>
             <WebsitesLayout>
-                <WebsiteBlogListing
+                <WebsitePageListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
@@ -161,4 +161,4 @@ const WebsiteBlogListingWrapper = () => {
     )
 }
 
-export default WebsiteBlogListingWrapper
+export default WebsitePageListingWrapper

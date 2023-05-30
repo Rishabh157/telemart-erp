@@ -146,12 +146,13 @@ import Auth from './pages/login/Auth'
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
 import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
 import Disposition from './pages/disposition/Disposition'
-import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
+
 import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
-import WebsiteBlogListingWrapper from './pages/websites/websites-blog/list/WebsiteBlogListingWrapper'
-import AddWebsiteBlogWrapper from './pages/websites/websites-blog/add/AddwebsiteBlogWrapper'
-import EditWebsiteBlogWrapper from './pages/websites/websites-blog/edit/EditWebsiteBlogWrapper'
 import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
+import WebsitePageListingWrapper from './pages/websites/websitePage/list/WebsitePageListingWrapper'
+import AddWebsitePageWrapper from './pages/websites/websitePage/add/AddwebsitePageWrapper'
+import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsitePageWrapper'
+import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -657,16 +658,16 @@ const PageRoutes = () => {
                         element={<AddWebsiteWrapper />}
                     />
                     <Route
-                        path="all-websites/website-blog"
-                        element={<WebsiteBlogListingWrapper />}
+                        path="all-websites/website-page"
+                        element={<WebsitePageListingWrapper />}
                     />
                     <Route
-                        path="all-websites/website-blog/add"
-                        element={<AddWebsiteBlogWrapper />}
+                        path="all-websites/website-page/add"
+                        element={<AddWebsitePageWrapper />}
                     />
                     <Route
-                        path="all-websites/website-blog/:id"
-                        element={<EditWebsiteBlogWrapper />}
+                        path="all-websites/website-page/:id"
+                        element={<EditWebsitePageWrapper />}
                     />
 
                     <Route

@@ -26,9 +26,9 @@ const websitesNavigation: NavItemType[] = [
         path: '/all-websites/website',
     },
     {
-        label: 'Websites-blog',
+        label: 'Websites-page',
         icon: TbAppsFilled,
-        path: '/all-websites/website-blog',
+        path: '/all-websites/website-page',
     },
 ]
 
