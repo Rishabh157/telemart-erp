@@ -10,29 +10,29 @@ import {
 } from 'react-icons/bi'
 // import { MdOutlineCategory } from 'react-icons/md'
 // import { BsBox, BsBoxes, BsBoxFill } from 'react-icons/bs'
-import { TbAppsFilled } from 'react-icons/tb'
+import { CgWebsite } from 'react-icons/cg'
 // import { FaObjectGroup } from 'react-icons/fa'
 // import { HiOutlineReceiptTax } from 'react-icons/hi'
 // import { CgOrganisation } from 'react-icons/cg'
 // import { CiBarcode, CiLocationOn } from 'react-icons/ci'
-// import { GrLanguage } from 'react-icons/gr'
-// import { TbBinaryTree2 } from 'react-icons/tb'
+import { RiPagesLine } from 'react-icons/ri'
+import { TbBrandBlogger } from 'react-icons/tb'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const websitesNavigation: NavItemType[] = [
     {
         label: 'Websites',
-        icon: TbAppsFilled,
+        icon: CgWebsite,
         path: '/all-websites/website',
     },
     {
         label: 'Website Blog',
-        icon: TbAppsFilled,
+        icon: TbBrandBlogger,
         path: '/all-websites/website-blog',
     },
     {
         label: 'Websites-page',
-        icon: TbAppsFilled,
+        icon: RiPagesLine,
         path: '/all-websites/website-page',
     },
 ]
