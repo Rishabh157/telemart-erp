@@ -30,11 +30,11 @@ const WebstieListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items } = WebsiteState
     const columns: columnTypes[] = [
         {
-            field: 'websiteName',
+            field: 'productName',
             headerName: 'Website Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: WebsiteListResponse) => (
-                <span> {row.websiteName} </span>
+                <span> {row.productName} </span>
             ),
         },
 
@@ -59,7 +59,9 @@ const WebstieListingWrapper = () => {
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
-                                    navigate(`/website/Website/${currentId}`)
+                                    navigate(
+                                        `/all-websites/Website/${currentId}`
+                                    )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
@@ -93,7 +95,7 @@ const WebstieListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetPaginationWebsiteQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['websiteName'],
+        params: ['productName', 'url'],
         page: page,
         filterBy: [
             {

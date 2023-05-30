@@ -8,7 +8,7 @@ export const WebsiteApi = apiSlice.injectEndpoints({
         getPaginationWebsite: builder.query({
             providesTags: ['website'],
             query: (body: PaginationType) => ({
-                url: '/website',
+                url: '/website-master',
                 method: 'POST',
                 body,
             }),
@@ -18,7 +18,7 @@ export const WebsiteApi = apiSlice.injectEndpoints({
         getAllWebsite: builder.query({
             providesTags: ['website'],
             query: () => ({
-                url: `/Website`,
+                url: `/website-master`,
                 method: 'GET',
             }),
         }),
@@ -27,16 +27,16 @@ export const WebsiteApi = apiSlice.injectEndpoints({
         getWebsiteById: builder.query({
             providesTags: ['website'],
             query: (id) => ({
-                url: `/Website/${id}`,
+                url: `/website-master/${id}`,
                 method: 'GET',
             }),
         }),
 
-        //***** GET SINGLE DATA *****/
+        //***** DELETE SINGLE DATA *****/
         deletegetWebsite: builder.mutation({
             invalidatesTags: ['website'],
             query: (id) => ({
-                url: `/Website/${id}`,
+                url: `/website-master/${id}`,
                 method: 'DELETE',
             }),
         }),
@@ -45,7 +45,7 @@ export const WebsiteApi = apiSlice.injectEndpoints({
         addWebsite: builder.mutation({
             invalidatesTags: ['website'],
             query: (body: AddWebsite) => ({
-                url: '/website/add',
+                url: '/website-master/add',
                 method: 'POST',
                 body,
             }),
@@ -55,7 +55,7 @@ export const WebsiteApi = apiSlice.injectEndpoints({
         updateWebsite: builder.mutation({
             invalidatesTags: ['website'],
             query: ({ body, id }: UpdateWebsite) => ({
-                url: `/Website/${id}`,
+                url: `/website-master/${id}`,
                 method: 'PUT',
                 body,
             }),
