@@ -45,6 +45,7 @@ export type FormInitialValues = {
         question: string
         answer: string
     }[]
+    commission: number
 }
 
 // Form Steps
@@ -75,6 +76,7 @@ const steps = [
             schemeDescription: string().required(
                 'scheme description is required'
             ),
+            commission: string().required('Commission is required'),
         }),
     },
 
@@ -175,6 +177,7 @@ const AddSchemeWrapper = () => {
                 answer: '',
             },
         ],
+        commission: 0,
     }
 
     // Form validation schema based on the active step
@@ -207,6 +210,7 @@ const AddSchemeWrapper = () => {
                     faq: values.faq,
                     schemeDescription: values.schemeDescription,
                     productInformation: values.productInformation,
+                    commission: values.commission,
                     companyId: userData?.companyId || '',
                 }).then((res) => {
                     if ('data' in res) {

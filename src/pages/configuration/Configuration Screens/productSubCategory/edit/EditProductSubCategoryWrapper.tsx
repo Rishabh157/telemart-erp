@@ -84,7 +84,7 @@ const EditProductSubCategoryWrapper = (props: Props) => {
             body: {
                 subCategoryCode: values.subCategoryCode,
                 subCategoryName: values.subCategoryName,
-                parentCategory: values.parentCategory,
+                parentCategoryId: values.parentCategory,
                 hsnCode: values.hsnCode,
                 companyId: userData?.companyId || '',
             },

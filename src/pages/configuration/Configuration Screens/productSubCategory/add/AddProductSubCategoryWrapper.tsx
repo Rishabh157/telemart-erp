@@ -68,7 +68,7 @@ const AddProductSubCategoryWrapper = (props: Props) => {
         addProductSubCategory({
             subCategoryCode: values.subCategoryCode,
             subCategoryName: values.subCategoryName,
-            parentCategory: values.parentCategory,
+            parentCategoryId: values.parentCategory,
             hsnCode: values.hsnCode,
             companyId: userData?.companyId || '',
         }).then((res: any) => {

@@ -17,6 +17,7 @@ type Props = {}
 export type FormInitialValues = {
     productGroup: string
     quantity: string
+    lotNumber: string
 }
 
 const AddBarcodeWrapper = (props: Props) => {
@@ -43,12 +44,14 @@ const AddBarcodeWrapper = (props: Props) => {
     const initialValues: FormInitialValues = {
         productGroup: '',
         quantity: '',
+        lotNumber: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
         productGroup: string().required('Group Name is required'),
         quantity: string().required('Quantity is required'),
+        lotNumber: string().required('Lot number is required'),
     })
 
     //    Form Submit Handler
@@ -59,8 +62,9 @@ const AddBarcodeWrapper = (props: Props) => {
         for (let i = 0; i < Number(values?.quantity); i++) {
             promises.push(
                 await addBarcode({
-                    productGroup: values.productGroup,
+                    productGroupId: values.productGroup,
                     barcodeGroupNumber: uniqueGrouId,
+                    lotNumber: values.lotNumber,
                     companyId: userData?.companyId || '',
                 })
             )
