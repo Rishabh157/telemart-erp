@@ -68,6 +68,15 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                     {/* Form */}
                     <div className="grow py-8 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
+                            <ATMTextField
+                                name="lotNumber"
+                                value={values.lotNumber}
+                                label="Lot Number"
+                                placeholder="Lot Number"
+                                onChange={(e) =>
+                                    setFieldValue('lotNumber', e.target.value)
+                                }
+                            />
                             {/* Product Group  */}
                             <ATMSelect
                                 name="productGroup"

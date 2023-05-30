@@ -129,7 +129,7 @@ const ProductSubCategoryListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetProductSubCategoryQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['subCategoryName', 'subCategoryCode', 'parentCategory'],
+        params: ['subCategoryName', 'subCategoryCode', 'parentCategoryLabel'],
         page: page,
         filterBy: [
             {

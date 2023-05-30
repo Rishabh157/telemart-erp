@@ -14,6 +14,7 @@ export type SchemeListResponse = {
     productInformation: productInformation[]
     productCategoryLabel: string
     ProductSubCategoryLabel: String
+    commission: number
     faq: faq[]
     is_active: boolean
     is_deleted: boolean
@@ -56,6 +57,7 @@ export type AddSchemes = {
     schemeDescription: string
     productInformation: productInformation[]
     faq: faq[]
+    commission: number
     companyId: string
 }
 
@@ -75,6 +77,7 @@ export type UpdateScheme = {
         schemeDescription: string
         productInformation: productInformation[]
         faq: faq[]
+        commission: number
         companyId: string
     }
     id: string
