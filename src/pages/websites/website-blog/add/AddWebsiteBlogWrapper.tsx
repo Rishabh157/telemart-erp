@@ -63,7 +63,7 @@ const AddWebsiteBlogWrapper = (props: Props) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Blog added successfully!')
-                        navigate('/all-websites/website-blog')
+                        navigate('/all-websites/website')
                     } else {
                         showToast('error', res?.data?.message)
                     }

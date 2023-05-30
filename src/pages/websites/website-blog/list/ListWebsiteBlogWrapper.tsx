@@ -3,7 +3,7 @@ import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import {
     setIsTableLoading,
     setItems,
@@ -22,8 +22,8 @@ import { showToast } from 'src/utils'
 const ListWebsiteBlogWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const {state} = useLocation()
-    const {websiteId} = state
+    //const {state} = useLocation()
+    //const {websiteId} = state
     const [deleteWebsiteBlog] = useDeletegetWebsiteBlogMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
@@ -104,8 +104,6 @@ const ListWebsiteBlogWrapper = () => {
             align: 'end',
         },
     ]
-    console.log(filterValue, "filter")
-
     const { data, isFetching, isLoading } = useGetPaginationWebsiteBlogQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -114,7 +112,7 @@ const ListWebsiteBlogWrapper = () => {
         filterBy: [
             {
                 fieldName: 'websiteId',
-                value: websiteId,
+                value: filterValue,
             },
         ],
         dateFilter: {},
@@ -152,6 +150,8 @@ const ListWebsiteBlogWrapper = () => {
             }
         })
     }
+    
+
     return (
         <>
             <WebsiteLayout>

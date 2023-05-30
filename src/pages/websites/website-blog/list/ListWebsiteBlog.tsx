@@ -12,6 +12,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
+    setFilterValue,
 } from 'src/redux/slices/website/websiteBlogSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
@@ -28,6 +29,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue } = WebsiteBlogState
+   
    // const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -67,9 +69,13 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
                     isRefresh
+                    onFilterDispatch= {
+                        () => dispatch(setFilterValue([]))
+                    }
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    
                 />
 
                 {/* Table */}

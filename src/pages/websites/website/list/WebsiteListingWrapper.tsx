@@ -83,7 +83,7 @@ const WebstieListingWrapper = () => {
                             </button>
                             <button
                                 onClick={() => {
-                                    dispatch(setFilterValue([currentId]))
+                                    dispatch(setFilterValue(currentId))
                                     navigate('/all-websites/website-blog', {
                                         state: {
                                             websiteId: currentId,                                           
