@@ -57,6 +57,7 @@ import initialCallerOneSlice from './slices/configuration/initialCallerOneSlice'
 import initialCallerTwoSlice from './slices/configuration/initialCallerTwoSlice'
 import initialCallerThreeSlice from './slices/configuration/initialCallerThreeSlice'
 import websiteSlice from './slices/website/websiteSlice'
+import websitePageSlice from './slices/website/websitePageSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -121,7 +122,7 @@ const store = configureStore({
         initialCallerOne: initialCallerOneSlice,
         initialCallerTwo: initialCallerTwoSlice,
         initialCallerThree: initialCallerThreeSlice,
-
+        websitePage: websitePageSlice,
         dispositionTwo: dispositionTwoSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
