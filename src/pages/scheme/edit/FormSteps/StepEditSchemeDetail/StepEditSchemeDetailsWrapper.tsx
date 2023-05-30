@@ -57,6 +57,11 @@ const formFields: {
                 placeholder: 'Scheme Price',
             },
             {
+                name: 'commission',
+                label: 'Commission',
+                placeholder: 'Commission',
+            },
+            {
                 name: 'dimension.height',
                 label: 'Dimensions',
                 placeholder: 'H',
