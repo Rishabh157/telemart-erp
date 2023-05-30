@@ -1,80 +1,79 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
-import { AppDispatch, RootState } from 'src/redux/store'
-import {
-    useDeletedispositionThreeMutation,
-    useGetdispositionThreeQuery,
-} from 'src/services/configurations/DispositionThreeServices'
-import {
-    setItems,
-    setIsTableLoading,
-    setTotalItems,
-} from 'src/redux/slices/configuration/dispositionThreeSlice'
-import { DispositionThreeListResponse } from 'src/models/configurationModel/DispositionThree.model'
 import { HiDotsHorizontal } from 'react-icons/hi'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { showToast } from 'src/utils'
-import DispositionThreeListing from './DispositionThreeListing'
+import DispositionOneListing from './DispositionOneListing'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
 
-const DispositionThreeListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
+import {
+    useGetdispositionOneQuery,
+    useDeletedispositionOneMutation,
+} from 'src/services/configurations/DispositiononeServices'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/configuration/dispositionOneSlice'
+import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
+import DispositionLayout from '../../DispositionLayout'
+
+// export type language ={
+//     languageId:string[];
+
+// }
+
+const DispositionOneListingWrapper = () => {
     const navigate = useNavigate()
-    const { searchValue, filterValue, items }: any = useSelector(
-        (state: RootState) => state.dispositionThree
-    )
-
-    const [deleteDispositonThree] = useDeletedispositionThreeMutation()
-
+    const [deleteTape] = useDeletedispositionOneMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
-    const dispositionThreeState: any = useSelector(
-        (state: RootState) => state.dispositionThree
+    const dispositionOneState: any = useSelector(
+        (state: RootState) => state.dispositionOne
     )
 
-    const { page, rowsPerPage } = dispositionThreeState
+    const { page, rowsPerPage, searchValue, items } = dispositionOneState
 
-    const { data, isFetching, isLoading } = useGetdispositionThreeQuery({
+    const dispatch = useDispatch<AppDispatch>()
+    // const navigate = useNavigate();
+    const { data, isFetching, isLoading } = useGetdispositionOneQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['dispositionName', 'dispositionTwoId'],
+        params: ['dispositionName'],
         page: page,
         filterBy: [
             {
                 fieldName: '',
-                value: filterValue ? filterValue : [],
+                value: [],
             },
         ],
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,
+        isPaginationRequired: true,
     })
+
+    useEffect(() => {
+        if (!isFetching && !isLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setItems(data?.data || []))
+            dispatch(setTotalItems(data?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading, isFetching, data])
+
     const columns: columnTypes[] = [
         {
             field: 'dispositionName',
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: DispositionThreeListResponse) => (
+            renderCell: (row: DispositionOneListResponse) => (
                 <span> {row.dispositionName} </span>
-            ),
-        },
-        {
-            field: 'dispostionOneLabel',
-            headerName: 'DispositionOne Name',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: DispositionThreeListResponse) => (
-                <span> {row.dispostionOneLabel} </span>
-            ),
-        },
-        {
-            field: 'dispostionTwoLabel',
-            headerName: 'DispositionTwo Name',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: DispositionThreeListResponse) => (
-                <span> {row.dispostionTwoLabel} </span>
             ),
         },
 
@@ -108,7 +107,7 @@ const DispositionThreeListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Delete Tape',
-                                        text: 'Do you want to delete Disposition-Three?',
+                                        text: 'Do you want to delete Disposition-One?',
                                         showCancelButton: true,
                                         next: (res: any) => {
                                             return res.isConfirmed
@@ -131,7 +130,7 @@ const DispositionThreeListingWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteDispositonThree(currentId).then((res: any) => {
+        deleteTape(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Tape deleted successfully!')
@@ -147,21 +146,11 @@ const DispositionThreeListingWrapper = () => {
         })
     }
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [dispatch, data, isFetching, isLoading])
-
     return (
         <>
             <DispositionLayout>
                 <div className="h-full">
-                    <DispositionThreeListing
+                    <DispositionOneListing
                         columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
@@ -172,4 +161,4 @@ const DispositionThreeListingWrapper = () => {
     )
 }
 
-export default DispositionThreeListingWrapper
+export default DispositionOneListingWrapper

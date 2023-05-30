@@ -4,7 +4,7 @@ import DispositionTwoListingWrapper from './dispositionCaller/dispositionTwo/lis
 import DispositionThreeListingWrapper from './dispositionCaller/dispositionThree/list/DispositionThreeListingWrapper'
 import { IconType } from 'react-icons'
 import { BiPhoneCall } from 'react-icons/bi'
-import DispositionOneListingWrapper from './dispositionCaller/dispositionOne/list/DispositionOneListingWrapper'
+
 import InitialCallOneListingWrapper from './icInitialCaller/dispositionOne/list/InitialCallOneListingWrapper'
 import InitialCallTwoListingWrapper from './icInitialCaller/dispositionTwo/list/InitialCallTwoListingWrapper'
 import InitialCallThreeListingWrapper from './icInitialCaller/dispositionThree/list/InitialCallThreeListingWrapper'
@@ -61,9 +61,9 @@ const Disposition = () => {
             {activeTabIndex === 0 ? (
                 <div className=" h-full grid grid-cols-3  gap-4  p-3 overflow-auto">
                     {/* Country */}
-                    <div className=" h-full">
+                    {/* <div className=" h-full">
                         <DispositionOneListingWrapper />
-                    </div>
+                    </div> */}
 
                     {/* State */}
                     <div className=" h-full ">

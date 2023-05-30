@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
-import AddCountryDialog from './AddDispositionOneDialog'
+import AddCountryDialog from './AddDispositionOne'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import { useAdddispositionOneMutation } from 'src/services/configurations/DispositiononeServices'
-
-type Props = {
-    onClose: () => void
-}
+import { useNavigate } from 'react-router-dom'
+import AddDispositionOne from './AddDispositionOne'
+import DispositionLayout from '../../DispositionLayout'
 
 export type FormInitialValues = {
     dispositionName: string
 }
-const AddDispositionOneWrappper = ({ onClose }: Props) => {
+const AddDispositionOneWrappper = () => {
+    const navigate = useNavigate()
     const [addDisposition] = useAdddispositionOneMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
@@ -23,7 +23,7 @@ const AddDispositionOneWrappper = ({ onClose }: Props) => {
         dispositionName: '',
     }
     const validationSchema = object({
-        dispositionName: string().required('Disposition Name is required'),
+        dispositionName: string().required('Name is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -35,7 +35,7 @@ const AddDispositionOneWrappper = ({ onClose }: Props) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Disposition added successfully!')
-                        onClose()
+                        navigate('/dispositions/disposition-one')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -49,21 +49,23 @@ const AddDispositionOneWrappper = ({ onClose }: Props) => {
 
     return (
         <>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddCountryDialog
-                            onClose={onClose}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
+            <DispositionLayout>
+                {' '}
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmitHandler}
+                >
+                    {(formikProps) => {
+                        return (
+                            <AddDispositionOne
+                                apiStatus={apiStatus}
+                                formikProps={formikProps}
+                            />
+                        )
+                    }}
+                </Formik>
+            </DispositionLayout>
         </>
     )
 }
