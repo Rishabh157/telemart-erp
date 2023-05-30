@@ -33,6 +33,8 @@ const DispositionOneListing = ({ dispositionOne }: Props) => {
         } else {
             dispatch(setSelectedDispositionOne(newValue))
             dispatch(setFilterValue(newValue.value))
+            dispatch(setSelectedDispostion(null))
+            dispatch(setSelectedDispostionThree(null))
         }
     }
 

@@ -37,7 +37,7 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Website </ATMPageHeading>
+                    <ATMPageHeading> Add New  produc </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -72,8 +72,8 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 name="productName"
                                 value={values.productName}
-                                label="Website Name"
-                                placeholder="Website Name"
+                                label="Product Name"
+                                placeholder="Product Name"
                                 onChange={(e) =>
                                     setFieldValue('productName', e.target.value)
                                 }
@@ -90,55 +90,60 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
 
-                            <ATMTextArea
-                                minRows={4}
+                            <ATMTextField
+                                // minRows={4}
                                 name="gaTagIp"
                                 value={values.gaTagIp}
-                                label="GA Tag IP Address"
-                                onChange={(newValue) =>
-                                    setFieldValue('gaTagIp', newValue)
+                                label="Gatag IP Address"
+                                onChange={(e) =>
+                                    setFieldValue('gaTagIp', e.target.value)
                                 }
                             />
+                             </div>
+                            <div className="grid grid-cols-2 gap-4 mt-4">
+                                <ATMTextArea
+                                    minRows={4}
+                                    name="searchConsoleIp"
+                                    value={values.searchConsoleIp}
+                                    label="Search Console IP Address"
+                                    onChange={(newValue) =>
+                                        setFieldValue(
+                                            'searchConsoleIp',
+                                            newValue
+                                        )
+                                    }
+                                />
 
-                            <ATMTextArea
-                                minRows={4}
-                                name="searchConsoleIp"
-                                value={values.searchConsoleIp}
-                                label="Search Console IP Address"
-                                onChange={(newValue) =>
-                                    setFieldValue('searchConsoleIp', newValue)
-                                }
-                            />
+                                <ATMTextArea
+                                    minRows={4}
+                                    name="headerSpace"
+                                    value={values.headerSpace}
+                                    label="Header Space"
+                                    onChange={(newValue) =>
+                                        setFieldValue('headerSpace', newValue)
+                                    }
+                                />
 
-                            <ATMTextArea
-                                minRows={4}
-                                name="headerSpace"
-                                value={values.headerSpace}
-                                label="Header Space"
-                                onChange={(newValue) =>
-                                    setFieldValue('headerSpace', newValue)
-                                }
-                            />
+                                <ATMTextArea
+                                    minRows={4}
+                                    name="footerSpace"
+                                    value={values.footerSpace}
+                                    label="Footer Space"
+                                    onChange={(newValue) =>
+                                        setFieldValue('footerSpace', newValue)
+                                    }
+                                />
 
-                            <ATMTextArea
-                                minRows={4}
-                                name="footerSpace"
-                                value={values.footerSpace}
-                                label="Footer Space"
-                                onChange={(newValue) =>
-                                    setFieldValue('footerSpace', newValue)
-                                }
-                            />
-
-                            <ATMTextArea
-                                minRows={4}
-                                name="siteMap"
-                                value={values.siteMap}
-                                label="SiteMap"
-                                onChange={(newValue) =>
-                                    setFieldValue('siteMap', newValue)
-                                }
-                            />
+                                <ATMTextArea
+                                    minRows={4}
+                                    name="siteMap"
+                                    value={values.siteMap}
+                                    label="SiteMap"
+                                    onChange={(newValue) =>
+                                        setFieldValue('siteMap', newValue)
+                                    }
+                                />
+                           
                         </div>
                     </div>
                 </div>

@@ -97,6 +97,11 @@ export const navigation: NavItemType[] = [
         path: '/disposition',
     },
     {
+        label: 'Dispositions',
+        icon: AiOutlineSetting,
+        path: '/dispositions/disposition-one    ',
+    },
+    {
         label: 'All Website',
         icon: AiOutlineSetting,
         path: '/all-websites/website',

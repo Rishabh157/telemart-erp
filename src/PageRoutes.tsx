@@ -145,10 +145,12 @@ import {
 import Auth from './pages/login/Auth'
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
 import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
-import Disposition from './pages/disposition/Disposition'
+// import Disposition from './pages/disposition/Disposition'
 import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
 import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
 import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
+import DispositionOneListingWrapper from './pages/disposition/dispositionOne/list/DispositionOneListingWrapper'
+//
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -526,7 +528,7 @@ const PageRoutes = () => {
                         path="/configurations/location"
                         element={<Locations />}
                     />
-                    <Route path="/disposition" element={<Disposition />} />
+                    {/* <Route path="/disposition" element={<Disposition />} /> */}
                     <Route
                         path="/configurations/dealers-category"
                         element={<DealersCategoryListingWrapper />}
@@ -657,6 +659,13 @@ const PageRoutes = () => {
                         path="all-websites/website/:id"
                         element={<EditWebsiteWrapper />}
                     />
+
+                    {/* disposition */}
+                    <Route
+                        path="dispositions/disposition-one"
+                        element={<DispositionOneListingWrapper />}
+                    />
+                    
                 </Routes>
             </BrowserRouter>
         </>
