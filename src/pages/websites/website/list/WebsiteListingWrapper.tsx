@@ -86,7 +86,7 @@ const WebstieListingWrapper = () => {
                                     dispatch(setFilterValue(currentId))
                                     navigate('/all-websites/website-blog', {
                                         state: {
-                                            websiteId: currentId,                                           
+                                            websiteId: currentId,
                                         },
                                     })
                                 }}

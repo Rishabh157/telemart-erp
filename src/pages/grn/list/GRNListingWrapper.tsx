@@ -80,7 +80,7 @@ const GRNListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     const grnState: any = useSelector((state: RootState) => state.grn)
-    const { page, rowsPerPage, searchValue, items, filterValue } = grnState    
+    const { page, rowsPerPage, searchValue, items, filterValue } = grnState
 
     const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
         limit: rowsPerPage,

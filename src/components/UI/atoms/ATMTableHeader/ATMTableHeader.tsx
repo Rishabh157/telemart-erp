@@ -31,7 +31,6 @@ const ATMTableHeader = ({
     onFilterDispatch = () => {},
     onSearch = () => {},
 }: Props) => {
-    
     return (
         <div className="p-3 border-b border-slate-300 grid grid-cols-2">
             {/* Left */}

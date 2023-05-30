@@ -29,8 +29,8 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue } = WebsiteBlogState
-   
-   // const navigate = useNavigate()
+
+    // const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Website',
@@ -71,11 +71,8 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
                     }
                     isFilter
                     isRefresh
-                    onFilterDispatch= {
-                        () => dispatch(setFilterValue([]))
-                    }
+                    onFilterDispatch={() => dispatch(setFilterValue([]))}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    
                 />
 
                 {/* Table */}

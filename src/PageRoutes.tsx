@@ -146,12 +146,16 @@ import Auth from './pages/login/Auth'
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
 import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
 import Disposition from './pages/disposition/Disposition'
-import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
+
 import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
 import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
 import ListWebstieBlogWrapper from './pages/websites/website-blog/list/ListWebsiteBlogWrapper'
 import AddWebsiteBlogWrapper from './pages/websites/website-blog/add/AddWebsiteBlogWrapper'
 import EditWebsiteBlogWrapper from './pages/websites/website-blog/edit/EditWebsiteBlogWrapper'
+import WebsitePageListingWrapper from './pages/websites/websitePage/list/WebsitePageListingWrapper'
+import AddWebsitePageWrapper from './pages/websites/websitePage/add/AddwebsitePageWrapper'
+import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsitePageWrapper'
+import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -656,6 +660,19 @@ const PageRoutes = () => {
                         path="all-websites/website/add"
                         element={<AddWebsiteWrapper />}
                     />
+                    <Route
+                        path="all-websites/website-page"
+                        element={<WebsitePageListingWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-page/add"
+                        element={<AddWebsitePageWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-page/:id"
+                        element={<EditWebsitePageWrapper />}
+                    />
+
                     <Route
                         path="all-websites/website/:id"
                         element={<EditWebsiteWrapper />}

@@ -20,7 +20,7 @@ export type AddWebsiteBlog = {
     blogSubtitle: string | ''
     image: string | ''
     blogDescription: string | ''
-    companyId: string 
+    companyId: string
     websiteId: string
 }
 

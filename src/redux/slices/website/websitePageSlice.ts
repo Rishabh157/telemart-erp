@@ -1,22 +1,21 @@
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { WebsiteBlogListResponse } from 'src/models/website/WebsiteBlog.model'
+import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
 
-export interface WebsiteBlogSliceStateType {
-    items: WebsiteBlogListResponse[] | []
-    allItems: WebsiteBlogListResponse[] | []
-    selectedItem: WebsiteBlogListResponse | null
+export interface WebsitePageSliceStateType {
+    items: WebsitePageListResponse[] | []
+    allItems: WebsitePageListResponse[] | []
+    selectedItem: WebsitePageListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selectWebsiteBlog: string
-    filterValue: string
+    selecteWebsitePage: string
 }
 
-const initialState: WebsiteBlogSliceStateType = {
+const initialState: WebsitePageSliceStateType = {
     items: [],
     allItems: [],
     selectedItem: null,
@@ -26,23 +25,22 @@ const initialState: WebsiteBlogSliceStateType = {
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectWebsiteBlog: '',
-    filterValue: '',
+    selecteWebsitePage: '',
 }
 
-const WebsiteBlogSlice: Slice<WebsiteBlogSliceStateType> = createSlice({
-    name: 'websiteBlog',
+const websitePageSlice: Slice<WebsitePageSliceStateType> = createSlice({
+    name: 'websitePage',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<WebsiteBlogListResponse[] | []>
+            action: PayloadAction<WebsitePageListResponse[] | []>
         ) => {
             state.items = action.payload
         },
         setAllItems: (
             state,
-            action: PayloadAction<WebsiteBlogListResponse[] | []>
+            action: PayloadAction<WebsitePageListResponse[] | []>
         ) => {
             state.allItems = action.payload
         },
@@ -72,17 +70,14 @@ const WebsiteBlogSlice: Slice<WebsiteBlogSliceStateType> = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setSelectWebsiteBlog: (state, action: PayloadAction<string>) => {
-            state.selectWebsiteBlog = action.payload
+        setSelecteWebsite: (state, action: PayloadAction<string>) => {
+            state.selecteWebsitePage = action.payload
         },
-        setSelectedWebsiteBlog: (
+        setSelectedWebsite: (
             state,
-            action: PayloadAction<WebsiteBlogListResponse | null>
+            action: PayloadAction<WebsitePageListResponse | null>
         ) => {
             state.selectedItem = action.payload
-        },
-        setFilterValue: (state, action: PayloadAction<string>) => {
-            state.filterValue = action.payload
         },
     },
 })
@@ -96,9 +91,7 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectWebsiteBlog,
-    setSelectedWebsiteBlog,
-    setFilterValue,
-} = WebsiteBlogSlice.actions
-
-export default WebsiteBlogSlice.reducer
+    setSelecteWebsite,
+    setSelectedWebsite,
+} = websitePageSlice.actions
+export default websitePageSlice.reducer

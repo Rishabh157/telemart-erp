@@ -1,54 +1,74 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import ATMBreadCrumbs, {
+    BreadcrumbType,
+} from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
-    setFilterValue,
-} from 'src/redux/slices/GRNSlice'
+} from 'src/redux/slices/website/websitePageSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const GRNListing = ({ columns, rows }: Props) => {
-    const [selectedRows, setSelectedRows] = useState([])
-
+const WebsitePageListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const grnState: any = useSelector((state: RootState) => state.grn)
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-
-    const { page, rowsPerPage, searchValue } = grnState
+    const WebsitePageState: any = useSelector(
+        (state: RootState) => state.websitePage
+    )
+    const [selectedRows, setSelectedRows] = useState([])
+    const { page, rowsPerPage, totalItems, searchValue } = WebsitePageState
+    const navigate = useNavigate()
+    const breadcrumbs: BreadcrumbType[] = [
+        {
+            label: 'Website',
+            path: '/dashboard',
+        },
+        {
+            label: 'Website',
+        },
+    ]
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
+        <div className="px-4 h-full overflow-auto pt-3 ">
+            <div className="h-[30px]">
+                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+            </div>
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[55px]">
-                <ATMPageHeading> GRN (Goods Received Note) </ATMPageHeading>
+            <div className="flex justify-between items-center h-[45px]">
+                <ATMPageHeading> Website Page </ATMPageHeading>
+                <button
+                    type="button"
+                    onClick={() => navigate('add')}
+                    className="bg-primary-main text-white rounded py-1 px-3"
+                >
+                    + Add Website-Page
+                </button>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
-                    rowCount={rows.length}
                     searchValue={searchValue}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    isFilter
-                    isRefresh
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    onFilterDispatch={() => dispatch(setFilterValue([]))}
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                    isFilter
                 />
 
                 {/* Table */}
@@ -61,29 +81,25 @@ const GRNListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="max-h-full overflow-auto"
+                        setShowDropdown={setShowDropdown}
+                        extraClasses="h-full overflow-auto"
                     />
                 </div>
 
                 {/* Pagination */}
+
                 <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
         </div>
     )
 }
 
-export default GRNListing
+export default WebsitePageListing
