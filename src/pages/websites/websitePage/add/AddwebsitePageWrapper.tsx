@@ -35,7 +35,7 @@ const AddWebsitePageWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        pageUrl: string().required('Name is required'),
+        pageUrl: string().required('Url is required'),
         pageName: string().required('Name is required'),
         headerSpace: string().required('Header is required'),
         footerSpace: string().required('Footer is required'),

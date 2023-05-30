@@ -52,9 +52,9 @@ const EditWebsitePageWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         pageName: string().required('Name is required'),
-        pageUrl: string().required('Title is required'),
-        headerSpace: string().required('Title is required'),
-        footerSpace: string().required('Title is required'),
+        pageUrl: string().required('url is required'),
+        headerSpace: string().required('Header is required'),
+        footerSpace: string().required('Footer is required'),
     })
 
     //    Form Submit Handler
