@@ -1,91 +1,86 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import EditWebsite from './EditWebsite'
+import EditWebsiteBlog from './EditWebsiteBlog'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import {
-    useGetWebsiteByIdQuery,
-    useUpdateWebsiteMutation,
-} from 'src/services/websites/WebsiteServices'
-import { setSelectedWebsite } from 'src/redux/slices/website/websiteSlice'
+    useGetWebsiteBlogByIdQuery,
+    useUpdateWebsiteBlogMutation,
+} from 'src/services/websites/WebsiteBlogServices'
+import { setSelectedWebsiteBlog } from 'src/redux/slices/website/websiteBlogSlice'
 import WebsitesLayout from '../../WebsiteLayout'
 
 type Props = {}
 
 export type FormInitialValues = {
-    productName: string
-    url: string
-    gaTagIp: string
-    searchConsoleIp: string
-    headerSpace: string
-    footerSpace: string
-    siteMap: string
+    blogName: string
+    blogTitle: string
+    blogSubtitle: string
+    image: string
+    blogDescription: string
+    websiteId: string
 }
 
-const EditWebsiteWrapper = (props: Props) => {
+const EditWebsiteBlogWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const params = useParams()
     const Id = params.id
     const { selectedItem }: any = useSelector(
-        (state: RootState) => state.website
+        (state: RootState) => state.websiteBlog
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
-    const [updateWebsite] = useUpdateWebsiteMutation()
-    const { data, isLoading, isFetching } = useGetWebsiteByIdQuery(Id)
+    const [updateWebsiteBlog] = useUpdateWebsiteBlogMutation()
+    const { data, isLoading, isFetching } = useGetWebsiteBlogByIdQuery(Id)
 
     useEffect(() => {
-        dispatch(setSelectedWebsite(data?.data))
+        dispatch(setSelectedWebsiteBlog(data?.data))
     }, [dispatch, data, isLoading, isFetching])
 
     const initialValues: FormInitialValues = {
-        productName: selectedItem?.productName,
-        url: selectedItem?.url,
-        gaTagIp: selectedItem?.gaTagIp || '',
-        searchConsoleIp: selectedItem?.searchConsoleIp || '',
-        headerSpace: selectedItem?.headerSpace || '',
-        footerSpace: selectedItem?.footerSpace || '',
-        siteMap: selectedItem?.siteMap || '',
+        blogName: selectedItem?.blogName,
+        blogTitle: selectedItem?.blogTitle,
+        blogSubtitle: selectedItem?.blogSubtitle || '',
+        image: selectedItem?.image || '',
+        blogDescription: selectedItem?.blogDescription || '',
+        websiteId: selectedItem?.websiteId,
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        productName: string().required('Required'),
-        url: string().url('Please enter valid URL').required('Required'),
-        gaTagIp: string(),
-        searchConsoleIp: string(),
-        headerSpace: string(),
-        footerSpace: string(),
-        siteMap: string(),
+        blogName: string().required('Required'),
+        blogTitle: string().required('Required'),
+        blogSubtitle: string(),
+        image: string().url('Image must be valid URL'),
+        blogDescription: string(),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            updateWebsite({
+            updateWebsiteBlog({
                 body: {
-                    productName: values.productName,
-                    url: values.url,
-                    gaTagIp: values.gaTagIp || '',
-                    searchConsoleIp: values.searchConsoleIp || '',
-                    headerSpace: values.headerSpace || '',
-                    footerSpace: values.footerSpace || '',
-                    siteMap: values.siteMap || '',
+                    blogName: values.blogName,
+                    blogTitle: values.blogTitle,
+                    blogSubtitle: values.blogSubtitle || '',
+                    image: values.image || '',
+                    blogDescription: values.blogDescription || '',
                     companyId: userData?.companyId || '',
+                    websiteId: values.websiteId,
                 },
                 id: Id || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Website updated successfully!')
-                        navigate('/all-websites/website')
+                        showToast('success', 'Blog updated successfully!')
+                        navigate('/all-websites/website-blog')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -108,7 +103,7 @@ const EditWebsiteWrapper = (props: Props) => {
                 {(formikProps) => {
                     return (
                         <>
-                            <EditWebsite
+                            <EditWebsiteBlog
                                 apiStatus={apiStatus}
                                 formikProps={formikProps}
                             />
@@ -120,4 +115,4 @@ const EditWebsiteWrapper = (props: Props) => {
     )
 }
 
-export default EditWebsiteWrapper
+export default EditWebsiteBlogWrapper
