@@ -160,6 +160,7 @@ import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsit
 import DispositionTwoListingWrapper from './pages/disposition/dispositionCaller/dispositionTwo/list/DispositionTwoListingWrapper'
 import DispositionThreeListingWrapper from './pages/disposition/dispositionCaller/dispositionThree/list/DispositionThreeListingWrapper'
 import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
+import EditDispositionOneWrappper from './pages/disposition/dispositionOne/edit/EditDispositionOneWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -689,6 +690,10 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-one/add"
                         element={<AddDispositionOneWrappper />}
+                    />
+                     <Route
+                        path="dispositions/disposition-one/:id"
+                        element={<EditDispositionOneWrappper />}
                     />
                     <Route
                         path="dispositions/disposition-two"

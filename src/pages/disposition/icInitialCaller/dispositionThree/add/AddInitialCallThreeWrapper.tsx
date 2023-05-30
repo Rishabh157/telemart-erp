@@ -4,17 +4,18 @@ import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
-import AddInitialCallThreeDialog from './AddInitialCallThreeDialog'
+import AddInitialCallThreeDialog from './AddInitialCallThree'
 import { useAddInitialCallerThreeMutation } from 'src/services/configurations/InitialCallerThreeServices'
+import AddInitialCallThree from './AddInitialCallThree'
+import { useNavigate} from 'react-router-dom'
 
-type Props = {
-    onClose: () => void
-}
 
 export type FormInitialValues = {
     initialCallName: string
+
 }
-const AddInitialCallThreeWrappper = ({ onClose }: Props) => {
+const AddInitialCallThreeWrappper = () => {
+    const navigate=useNavigate()
     const [addIntialCallThree] = useAddInitialCallerThreeMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
@@ -40,6 +41,7 @@ const AddInitialCallThreeWrappper = ({ onClose }: Props) => {
                 initialCallName: values.initialCallName,
                 initialCallOneId: selectedInitialOne?.value || '',
                 initialCallTwoId: selectedInitialCallerTwo?.value || '',
+
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
@@ -48,7 +50,7 @@ const AddInitialCallThreeWrappper = ({ onClose }: Props) => {
                             'success',
                             'InitialCaller-Three added successfully!'
                         )
-                        onClose()
+                        navigate("/disposition/disposition-three")
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -69,8 +71,8 @@ const AddInitialCallThreeWrappper = ({ onClose }: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <AddInitialCallThreeDialog
-                            onClose={onClose}
+                        <AddInitialCallThree
+                        
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                         />

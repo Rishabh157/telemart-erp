@@ -49,7 +49,7 @@ const InitialCallThreeListing = ({ initialCallerThree }: Props) => {
             />
             {isOpenAddForm && (
                 <AddInitialCallThreeWrappper
-                    onClose={() => setisOpenAddForm(false)}
+                   
                 />
             )}
         </>
