@@ -151,7 +151,9 @@ import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
 import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
 import DispositionOneListingWrapper from './pages/disposition/dispositionOne/list/DispositionOneListingWrapper'
 //
-
+import ListWebstieBlogWrapper from './pages/websites/website-blog/list/ListWebsiteBlogWrapper'
+import AddWebsiteBlogWrapper from './pages/websites/website-blog/add/AddWebsiteBlogWrapper'
+import EditWebsiteBlogWrapper from './pages/websites/website-blog/edit/EditWebsiteBlogWrapper'
 import WebsitePageListingWrapper from './pages/websites/websitePage/list/WebsitePageListingWrapper'
 import AddWebsitePageWrapper from './pages/websites/websitePage/add/AddwebsitePageWrapper'
 import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsitePageWrapper'
@@ -695,6 +697,20 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three"
                         element={<DispositionThreeListingWrapper />}
+                    
+                    />
+                    {/* Website Blog route */}
+                    <Route
+                        path="all-websites/website-blog"
+                        element={<ListWebstieBlogWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-blog/add"
+                        element={<AddWebsiteBlogWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-blog/:id"
+                        element={<EditWebsiteBlogWrapper />}
                     />
                 </Routes>
             </BrowserRouter>

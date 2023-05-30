@@ -8,41 +8,54 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/website/websiteSlice'
+} from 'src/redux/slices/website/websiteBlogSlice'
 import WebsiteLayout from '../../WebsiteLayout'
-import WebsiteListing from './WebsitetListing'
-import { WebsiteListResponse } from 'src/models/website/Website.model'
+import ListWebsiteBlog from './ListWebsiteBlog'
+import { WebsiteBlogListResponse } from 'src/models/website/WebsiteBlog.model'
 import {
-    useDeletegetWebsiteMutation,
-    useGetPaginationWebsiteQuery,
-} from 'src/services/websites/WebsiteServices'
+    useDeletegetWebsiteBlogMutation,
+    useGetPaginationWebsiteBlogQuery,
+} from 'src/services/websites/WebsiteBlogServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
 
-const WebstieListingWrapper = () => {
+const ListWebsiteBlogWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const [deleteWebsite] = useDeletegetWebsiteMutation()
+    //const {state} = useLocation()
+    //const {websiteId} = state
+    const [deleteWebsiteBlog] = useDeletegetWebsiteBlogMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteState: any = useSelector((state: RootState) => state.website)
+    const WebsiteBlogState: any = useSelector(
+        (state: RootState) => state.websiteBlog
+    )
 
-    const { page, rowsPerPage, searchValue, items } = WebsiteState
+    const { page, rowsPerPage, searchValue, items, filterValue } =
+        WebsiteBlogState
+
     const columns: columnTypes[] = [
         {
-            field: 'productName',
-            headerName: 'Website Name',
+            field: 'blogName',
+            headerName: 'Blog Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsiteListResponse) => (
-                <span> {row.productName} </span>
+            renderCell: (row: WebsiteBlogListResponse) => (
+                <span> {row.blogName} </span>
+            ),
+        },
+        {
+            field: 'blogTitle',
+            headerName: 'Blog Title',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsiteBlogListResponse) => (
+                <span> {row.blogTitle} </span>
             ),
         },
 
         {
             field: 'actions',
             headerName: 'Actions',
-            flex: 'flex-[1.8_1.8_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <div className="relative">
                     <button
@@ -57,48 +70,21 @@ const WebstieListingWrapper = () => {
                         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
                     </button>
                     {showDropdown && currentId === row?._id && (
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10  w-24">
+                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
                                     navigate(
-                                        `/all-websites/Website/${currentId}`
+                                        `/all-websites/website-blog/${currentId}`
                                     )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Edit
                             </button>
-
-                            <button
-                                onClick={() => {
-                                    navigate('/all-websites/website-blog/add', {
-                                        state: {
-                                            siteId: currentId,
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Add Blog
-                            </button>
-                            <button
-                                onClick={() => {
-                                    dispatch(setFilterValue(currentId))
-                                    navigate('/all-websites/website-blog', {
-                                        state: {
-                                            websiteId: currentId,
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                View Blog
-                            </button>
-
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Website',
+                                        title: 'Delete Blog',
                                         text: 'Do you want to delete',
                                         showCancelButton: true,
                                         next: (res: any) => {
@@ -119,16 +105,15 @@ const WebstieListingWrapper = () => {
             align: 'end',
         },
     ]
-
-    const { data, isFetching, isLoading } = useGetPaginationWebsiteQuery({
+    const { data, isFetching, isLoading } = useGetPaginationWebsiteBlogQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['productName', 'url'],
+        params: ['blogName', 'blogTitle'],
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'websiteId',
+                value: filterValue,
             },
         ],
         dateFilter: {},
@@ -151,10 +136,10 @@ const WebstieListingWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteWebsite(currentId).then((res: any) => {
+        deleteWebsiteBlog(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Website deleted successfully!')
+                    showToast('success', 'Blog deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -166,10 +151,11 @@ const WebstieListingWrapper = () => {
             }
         })
     }
+
     return (
         <>
             <WebsiteLayout>
-                <WebsiteListing
+                <ListWebsiteBlog
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
@@ -179,4 +165,4 @@ const WebstieListingWrapper = () => {
     )
 }
 
-export default WebstieListingWrapper
+export default ListWebsiteBlogWrapper

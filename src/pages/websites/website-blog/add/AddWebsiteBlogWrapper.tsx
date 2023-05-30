@@ -1,52 +1,49 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import AddWebsite from './AddWebsite'
+import AddWebsiteBlog from './AddWebsiteBlog'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { useAddWebsiteMutation } from 'src/services/websites/WebsiteServices'
+import { useAddWebsiteBlogMutation } from 'src/services/websites/WebsiteBlogServices'
 import WebsiteLayout from '../../WebsiteLayout'
 
 type Props = {}
 
 export type FormInitialValues = {
-    productName: string
-    url: string
-    gaTagIp: string
-    searchConsoleIp: string
-    headerSpace: string
-    footerSpace: string
-    siteMap: string
+    blogName: string
+    blogTitle: string
+    blogSubtitle: string
+    image: string
+    blogDescription: string
 }
 
-const AddWebsiteWrapper = (props: Props) => {
+const AddWebsiteBlogWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const { state } = useLocation()
+    const { siteId } = state
+    //console.log(siteId)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [addWebsite] = useAddWebsiteMutation()
+    const [addWebsiteBlog] = useAddWebsiteBlogMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const initialValues: FormInitialValues = {
-        productName: '',
-        url: '',
-        gaTagIp: '',
-        searchConsoleIp: '',
-        headerSpace: '',
-        footerSpace: '',
-        siteMap: '',
+        blogName: '',
+        blogTitle: '',
+        blogSubtitle: '',
+        image: '',
+        blogDescription: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        productName: string().required('Required'),
-        url: string().url('Please enter valid URL').required('Required'),
-        gaTagIp: string(),
-        searchConsoleIp: string(),
-        headerSpace: string(),
-        footerSpace: string(),
-        siteMap: string(),
+        blogName: string().required('Required'),
+        blogTitle: string().required('Required'),
+        blogSubtitle: string(),
+        image: string().url('Image must be valid url'),
+        blogDescription: string(),
     })
 
     //    Form Submit Handler
@@ -54,19 +51,18 @@ const AddWebsiteWrapper = (props: Props) => {
         setApiStatus(true)
         //console.log(values)
         setTimeout(() => {
-            addWebsite({
-                productName: values.productName,
-                url: values.url,
-                gaTagIp: values.gaTagIp || '',
-                searchConsoleIp: values.searchConsoleIp || '',
-                headerSpace: values.headerSpace || '',
-                footerSpace: values.footerSpace || '',
-                siteMap: values.siteMap || '',
+            addWebsiteBlog({
+                blogName: values.blogName,
+                blogTitle: values.blogTitle,
+                blogSubtitle: values.blogSubtitle || '',
+                image: values.image || '',
+                blogDescription: values.blogDescription || '',
+                websiteId: siteId,
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Website added successfully!')
+                        showToast('success', 'Blog added successfully!')
                         navigate('/all-websites/website')
                     } else {
                         showToast('error', res?.data?.message)
@@ -88,7 +84,7 @@ const AddWebsiteWrapper = (props: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <AddWebsite
+                        <AddWebsiteBlog
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                         />
@@ -99,4 +95,4 @@ const AddWebsiteWrapper = (props: Props) => {
     )
 }
 
-export default AddWebsiteWrapper
+export default AddWebsiteBlogWrapper
