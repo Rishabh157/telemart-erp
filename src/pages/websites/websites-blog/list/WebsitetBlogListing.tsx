@@ -8,7 +8,11 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { setPage, setRowsPerPage, setSearchValue } from 'src/redux/slices/website/websiteBlogSlice'
+import {
+    setPage,
+    setRowsPerPage,
+    setSearchValue,
+} from 'src/redux/slices/website/websiteBlogSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -19,7 +23,9 @@ type Props = {
 
 const WebsiteBlogListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const WebsiteBlogState: any = useSelector((state: RootState) => state.websiteBlog)
+    const WebsiteBlogState: any = useSelector(
+        (state: RootState) => state.websiteBlog
+    )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue } = WebsiteBlogState
     const navigate = useNavigate()

@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import WebsiteLayout from '../../WebsiteLayout'
 import { useAddWebsiteBlogMutation } from 'src/services/websites/WebsiteBlogServices'
 import AddWebsiteBlog from './AddWebsiteBlog'
+import { setAllItems } from 'src/redux/slices/website/websiteSlice'
+import { useGetAllWebsiteQuery } from 'src/services/websites/WebsiteServices'
 
 type Props = {}
 
@@ -17,14 +19,30 @@ export type FormInitialValues = {
     blogSubtitle: string
     image: string
     blogDescription: string
+    websiteId: string
 }
 
 const AddWebsiteBlogWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addWebsiteBlog] = useAddWebsiteBlogMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { items }: any = useSelector((state: RootState) => state?.website)
+
+    const websiteOptions = items?.map((ele: any) => {
+        return {
+            label: ele.productName,
+            value: ele._id,
+        }
+    })
+
+    const { data, isFetching, isLoading } = useGetAllWebsiteQuery('')
+
+    useEffect(() => {
+        if (!isFetching && !isLoading) dispatch(setAllItems(data?.data))
+    }, [data, isFetching, isLoading])
 
     const initialValues: FormInitialValues = {
         blogName: '',
@@ -32,8 +50,8 @@ const AddWebsiteBlogWrapper = (props: Props) => {
         blogSubtitle: '',
         image: '',
         blogDescription: '',
-        //websiteId:""
-    }   
+        websiteId: '',
+    }
 
     // Form Validation Schema
     const validationSchema = object({
@@ -41,7 +59,8 @@ const AddWebsiteBlogWrapper = (props: Props) => {
         blogTitle: string().required('Title is required'),
         blogSubtitle: string().required('SubTitle is required'),
         image: string().required('Image is required'),
-        blogDescription:string().required('Description is required')
+        blogDescription: string().required('Description is required'),
+        websiteId: string().required('website is required'),
     })
 
     //    Form Submit Handler
@@ -50,11 +69,11 @@ const AddWebsiteBlogWrapper = (props: Props) => {
         setTimeout(() => {
             addWebsiteBlog({
                 blogName: values.blogName,
-                blogTitle:values.blogTitle,
-                blogSubtitle:values.blogSubtitle,
-                image:values.image,
-                blogDescription:values.blogDescription ,
-               // websiteId:values.websiteId,
+                blogTitle: values.blogTitle,
+                blogSubtitle: values.blogSubtitle,
+                image: values.image,
+                blogDescription: values.blogDescription,
+                websiteId: values.websiteId,
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
@@ -83,6 +102,7 @@ const AddWebsiteBlogWrapper = (props: Props) => {
                         <AddWebsiteBlog
                             apiStatus={apiStatus}
                             formikProps={formikProps}
+                            websiteOptions={websiteOptions}
                         />
                     )
                 }}

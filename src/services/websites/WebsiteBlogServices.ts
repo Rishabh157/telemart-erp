@@ -1,6 +1,9 @@
-import { PaginationType } from './../../models/common/paginationType';
+import { PaginationType } from './../../models/common/paginationType'
 import apiSlice from '../ApiSlice'
-import { AddWebsiteBlog, UpdateWebsiteBlog } from '../../models/website/WebsiteBlog.model';
+import {
+    AddWebsiteBlog,
+    UpdateWebsiteBlog,
+} from '../../models/website/WebsiteBlog.model'
 
 export const WebsiteBlogApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

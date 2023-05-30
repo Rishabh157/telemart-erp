@@ -4,22 +4,30 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { WebsiteBlogListResponse } from 'src/models/website/WebsiteBlog.model'
-import { setIsTableLoading, setItems, setTotalItems } from 'src/redux/slices/website/websiteBlogSlice'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/website/websiteBlogSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import {  useDeleteWebsiteBlogMutation, useGetPaginationWebsiteBlogQuery } from 'src/services/websites/WebsiteBlogServices'
+import {
+    useDeleteWebsiteBlogMutation,
+    useGetPaginationWebsiteBlogQuery,
+} from 'src/services/websites/WebsiteBlogServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsitesLayout from '../../WebsiteLayout'
 import WebsiteBlogListing from './WebsitetBlogListing'
 
-
 const WebsiteBlogListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-   const [deleteBlog]=useDeleteWebsiteBlogMutation()
+    const [deleteBlog] = useDeleteWebsiteBlogMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteBlogState= useSelector((state: RootState) => state.websiteBlog)
+    const WebsiteBlogState = useSelector(
+        (state: RootState) => state.websiteBlog
+    )
 
     const { page, rowsPerPage, searchValue, items } = WebsiteBlogState
     const columns: columnTypes[] = [
@@ -33,7 +41,7 @@ const WebsiteBlogListingWrapper = () => {
         },
         {
             field: 'blogTitle',
-            headerName: 'blogTitle',
+            headerName: 'Blog Title',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: WebsiteBlogListResponse) => (
                 <span> {row.blogTitle} </span>
@@ -61,8 +69,10 @@ const WebsiteBlogListingWrapper = () => {
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
-                                    navigate(`/all-websites/website-blog/${currentId}`)
-                                }}  
+                                    navigate(
+                                        `/all-websites/website-blog/${currentId}`
+                                    )
+                                }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Edit

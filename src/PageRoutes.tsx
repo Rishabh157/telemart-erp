@@ -153,7 +153,6 @@ import AddWebsiteBlogWrapper from './pages/websites/websites-blog/add/Addwebsite
 import EditWebsiteBlogWrapper from './pages/websites/websites-blog/edit/EditWebsiteBlogWrapper'
 import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
 
-
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -657,19 +656,19 @@ const PageRoutes = () => {
                         path="all-websites/website/add"
                         element={<AddWebsiteWrapper />}
                     />
-                     <Route
+                    <Route
                         path="all-websites/website-blog"
                         element={<WebsiteBlogListingWrapper />}
                     />
-                       <Route
+                    <Route
                         path="all-websites/website-blog/add"
                         element={<AddWebsiteBlogWrapper />}
                     />
-                     <Route
+                    <Route
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
                     />
-                 
+
                     <Route
                         path="all-websites/website/:id"
                         element={<EditWebsiteWrapper />}

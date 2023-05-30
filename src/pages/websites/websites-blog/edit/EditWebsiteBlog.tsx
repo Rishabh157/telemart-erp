@@ -7,10 +7,13 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { FormInitialValues } from './EditWebsiteBlogWrapper'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+    websiteOptions: SelectOption[]
 }
 
 // Breadcrumbs
@@ -24,7 +27,7 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const EditWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
+const EditWebsiteBlog = ({ formikProps, apiStatus, websiteOptions }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -78,7 +81,7 @@ const EditWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                                     setFieldValue('blogName', e.target.value)
                                 }
                             />
-                       
+
                             <ATMTextField
                                 name="blogTitle"
                                 value={values.blogTitle}
@@ -94,7 +97,19 @@ const EditWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                                 label="Subtitle Name"
                                 placeholder="Subtitle "
                                 onChange={(e) =>
-                                    setFieldValue('blogSubtitle', e.target.value)
+                                    setFieldValue(
+                                        'blogSubtitle',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                            <ATMSelectSearchable
+                                name="websiteId"
+                                value={values.websiteId}
+                                label="website"
+                                options={websiteOptions}
+                                onChange={(value) =>
+                                    setFieldValue('websiteId', value)
                                 }
                             />
                             <ATMTextField
