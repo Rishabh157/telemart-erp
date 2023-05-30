@@ -211,7 +211,7 @@ const EditSchemeWrapper = () => {
                 answer: '',
             },
         ],
-        commission: selectedItem?.commission || '',
+        commission: selectedItem?.commission || 0,
     }
 
     // Form validation schema based on the active step
