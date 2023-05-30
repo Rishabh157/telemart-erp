@@ -107,3 +107,14 @@ export type {
     AddArtist,
     UpdateArtist,
 } from './Artist.model'
+
+export type {
+    WebsiteListResponse,
+    AddWebsite,
+    UpdateWebsite,
+} from './website/Website.model'
+export type {
+    WebsiteBlogListResponse,
+    AddWebsiteBlog,
+    UpdateWebsiteBlog,
+} from './website/WebsiteBlog.model'

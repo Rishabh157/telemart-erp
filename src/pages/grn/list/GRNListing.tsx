@@ -8,6 +8,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
+    setFilterValue,
 } from 'src/redux/slices/GRNSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
@@ -46,6 +47,7 @@ const GRNListing = ({ columns, rows }: Props) => {
                     isFilter
                     isRefresh
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    onFilterDispatch={() => dispatch(setFilterValue([]))}
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
 

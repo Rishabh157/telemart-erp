@@ -22,21 +22,40 @@ import { setLanguage } from 'src/redux/slices/languageSlice'
 import { LanguageListResponse } from 'src/models'
 import { setSelectedItem } from 'src/redux/slices/media/tapeManagementSlice'
 import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
+import { Field } from 'src/models/FormField/FormField.model'
 
 export type FormInitialValues = {
     tapeName: string
-    channelGroupId: string
     tapeType: string
     schemeId: string
-    languageId: string
+    languageId: string[]
     duration: string
     artistId: string[]
+    phone: {
+        phoneNo: string
+    }[]
+    webSiteLink: string
+    youtubeLink: string
     remarks: string
     companyId: string
     hour: string
     minute: string
     second: string
 }
+
+export type FieldType = Field<''>
+const formFields: { sectionName: string; fields: FieldType[] }[] = [
+    {
+        sectionName: 'phone',
+        fields: [
+            {
+                name: 'phone',
+                label: 'Phone Number',
+                placeholder: 'Phone Number',
+            },
+        ],
+    },
+]
 
 const EditTapeManagementWrapper = () => {
     const navigate = useNavigate()
@@ -129,17 +148,23 @@ const EditTapeManagementWrapper = () => {
     //console.log(artist)
     const newDuration = selectedItem?.duration?.split(':')
 
-    //console.log(newDuration)
+    let phoneNumber: any = []
+
+    selectedItem?.phone.map((val: any) => {
+        return phoneNumber.push({ phoneNo: val })
+    })
 
     const initialValues: FormInitialValues = {
         tapeName: selectedItem?.tapeName || '',
-        channelGroupId: selectedItem?.channelGroupId || '',
         tapeType: selectedItem?.tapeType || '',
         schemeId: selectedItem?.schemeId || '',
-        languageId: selectedItem?.languageId || '',
+        languageId: selectedItem?.languageId || [],
         duration: selectedItem?.duration || '',
         artistId: artist || [],
         remarks: selectedItem?.remarks || '',
+        phone: phoneNumber || '',
+        webSiteLink: selectedItem?.webSiteLink || '',
+        youtubeLink: selectedItem?.youtubeLink || '',
         hour: newDuration ? newDuration[0] : '0',
         minute: newDuration ? newDuration[1] : '00',
         second: newDuration ? newDuration[2] : '00',
@@ -151,30 +176,45 @@ const EditTapeManagementWrapper = () => {
         tapeName: string().required('Required'),
         tapeType: string().required('Required'),
         schemeId: string(),
-        channelGroupId: string(),
-        languageId: string().required('Required'),
+        languageId: array().of(string().required('Required')),
         hour: string().required('Required'),
         minute: string().required('Required'),
         second: string().required('Required'),
         artistId: array().of(string().required('Required')),
         remarks: string(),
+        phone: array().of(
+            object().shape({
+                phoneNo: string()
+                    .required('Required')
+                    .min(10, 'phone must be 10 digits')
+                    .max(10, 'phone must be 10 digits'),
+            })
+        ),
+        webSiteLink: string(),
+        youtubeLink: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         //console.log(values.artistId)
         let duration = `${values.hour}:${values.minute}:${values.second}`
+        let newPhoneNo = values?.phone?.map((ele) => {
+            return ele.phoneNo
+        })
+
         setTimeout(() => {
             updateTape({
                 body: {
                     tapeName: values.tapeName,
-                    channelGroupId: values.channelGroupId || null,
                     tapeType: values.tapeType,
                     schemeId: values.schemeId || null,
                     languageId: values.languageId,
                     duration: duration,
                     artistId: values?.artistId,
                     remarks: values.remarks || '',
+                    phone: newPhoneNo,
+                    webSiteLink: values?.webSiteLink || '',
+                    youtubeLink: values?.youtubeLink || '',
                     companyId: values.companyId || '',
                 },
                 id: id || '',
@@ -239,6 +279,7 @@ const EditTapeManagementWrapper = () => {
                             dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
                             formikProps={formikProps}
+                            formFields={formFields}
                         />
                     )
                 }}

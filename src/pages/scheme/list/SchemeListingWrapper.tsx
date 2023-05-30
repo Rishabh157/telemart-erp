@@ -89,6 +89,14 @@ const SchemeListingWrapper = () => {
             },
         },
         {
+            field: 'commission',
+            headerName: 'Commission',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: SchemeListResponse) => {
+                return <span> {row.commission} </span>
+            },
+        },
+        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',

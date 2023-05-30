@@ -1,5 +1,5 @@
 export type BarcodeListResponse = {
-    productGroup: string
+    productGroupId: string
     productGroupLabel: string
     barcodeNumber: string
     barcodeGroupNumber: string
@@ -21,14 +21,15 @@ export type ProductBarcodeGroupResponse = {
     productGroupLabel: string
 }
 export type AddBarcode = {
-    productGroup: string
+    productGroupId: string
     barcodeGroupNumber: string
+    lotNumber: string
     companyId: string
 }
 
 export type UpdateBarcode = {
     body: {
-        productGroup: string
+        productGroupId: string
         barcodeGroupNumber: string
         companyId: string
     }

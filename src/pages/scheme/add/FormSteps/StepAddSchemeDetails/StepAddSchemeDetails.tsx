@@ -92,6 +92,20 @@ const StepAddSchemeDetails = ({
                     placeholder="Scheme Price"
                     className="shadow bg-white rounded"
                 />
+                {/* Commission */}
+                <ATMTextField
+                    name={'commission'}
+                    value={values.commission}
+                    onChange={(e) => {
+                        const inputValue = e.target.value
+                        if (!isNaN(Number(inputValue))) {
+                            setFieldValue('commission', String(inputValue))
+                        }
+                    }}
+                    label="Commission"
+                    placeholder="Commission"
+                    className="shadow bg-white rounded"
+                />
                 {/* Dimensions */}
                 <div>
                     <label className="text-slate-700 font-medium">

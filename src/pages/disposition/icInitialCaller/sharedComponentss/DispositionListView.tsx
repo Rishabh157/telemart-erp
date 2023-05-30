@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { setSelectedInitialCallerThree } from 'src/redux/slices/configuration/initialCallerThreeSlice'
 import { RootState } from 'src/redux/store'
 type Props = {
     listHeading: string

@@ -147,6 +147,21 @@ import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotMa
 import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
 import Disposition from './pages/disposition/Disposition'
 import InbouundWrapper from './pages/media/Inbound/InboundWrapper'
+// import Disposition from './pages/disposition/Disposition'
+import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
+import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
+import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
+import DispositionOneListingWrapper from './pages/disposition/dispositionOne/list/DispositionOneListingWrapper'
+//
+import ListWebstieBlogWrapper from './pages/websites/website-blog/list/ListWebsiteBlogWrapper'
+import AddWebsiteBlogWrapper from './pages/websites/website-blog/add/AddWebsiteBlogWrapper'
+import EditWebsiteBlogWrapper from './pages/websites/website-blog/edit/EditWebsiteBlogWrapper'
+import WebsitePageListingWrapper from './pages/websites/websitePage/list/WebsitePageListingWrapper'
+import AddWebsitePageWrapper from './pages/websites/websitePage/add/AddwebsitePageWrapper'
+import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsitePageWrapper'
+import DispositionTwoListingWrapper from './pages/disposition/dispositionCaller/dispositionTwo/list/DispositionTwoListingWrapper'
+import DispositionThreeListingWrapper from './pages/disposition/dispositionCaller/dispositionThree/list/DispositionThreeListingWrapper'
+import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -165,7 +180,6 @@ const PageRoutes = () => {
     dispatch(setUserData(userData))
 
     if (!accessToken && window.location.pathname !== '/') {
-        window.location.replace('/')
         return null
     }
 
@@ -524,7 +538,7 @@ const PageRoutes = () => {
                         path="/configurations/location"
                         element={<Locations />}
                     />
-                    <Route path="/disposition" element={<Disposition />} />
+                    {/* <Route path="/disposition" element={<Disposition />} /> */}
                     <Route
                         path="/configurations/dealers-category"
                         element={<DealersCategoryListingWrapper />}
@@ -647,6 +661,64 @@ const PageRoutes = () => {
                         element={<InbouundWrapper />}
                     />
                     {/* disposition route */}
+                    {/* Website route */}
+                    <Route
+                        path="all-websites/website"
+                        element={<WebstieListingWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website/add"
+                        element={<AddWebsiteWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-page"
+                        element={<WebsitePageListingWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-page/add"
+                        element={<AddWebsitePageWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-page/:id"
+                        element={<EditWebsitePageWrapper />}
+                    />
+
+                    <Route
+                        path="all-websites/website/:id"
+                        element={<EditWebsiteWrapper />}
+                    />
+
+                    {/* disposition */}
+                    <Route
+                        path="dispositions/disposition-one"
+                        element={<DispositionOneListingWrapper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-one/add"
+                        element={<AddDispositionOneWrappper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-two"
+                        element={<DispositionTwoListingWrapper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-three"
+                        element={<DispositionThreeListingWrapper />}
+                    
+                    />
+                    {/* Website Blog route */}
+                    <Route
+                        path="all-websites/website-blog"
+                        element={<ListWebstieBlogWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-blog/add"
+                        element={<AddWebsiteBlogWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-blog/:id"
+                        element={<EditWebsiteBlogWrapper />}
+                    />
                 </Routes>
             </BrowserRouter>
         </>
