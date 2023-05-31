@@ -207,7 +207,7 @@ const EditDispositionThreeWrappper = () => {
             { label: 'IS ORDER', value: 'IS ORDER' },
             { label: 'IS PREPAID', value: 'IS PREPAID' },
             { label: 'IS CALLBACK', value: 'IS CALLBACK' },
-            { label: 'IS REPLACEMENT', value: 'IS REPLACEMENT' },           
+            { label: 'IS REPLACEMENT', value: 'IS REPLACEMENT' },
         ],
     }
 
