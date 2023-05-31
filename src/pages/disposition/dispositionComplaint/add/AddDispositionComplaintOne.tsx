@@ -1,27 +1,38 @@
 import React from 'react'
 import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './EditDispositionOneWrapper'
+import { FormInitialValues } from './AddDispositionComplaintWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+    dropdownOptions: {
+        smstypeOptions: SelectOption[]
+        emailTypeOptions: SelectOption[]
+        priorityTypeOptions: SelectOption[]
+    }
 }
 
-const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
+const AddDispositionComplaint = ({
+    formikProps,
+    apiStatus,
+    dropdownOptions,
+}: Props) => {
     const { values, setFieldValue } = formikProps
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition-One',
-            path: '/configurations/disposition-one',
+            label: 'Disposition-Comaplaint',
+            path: '/dispositions/disposition-complaint',
         },
         {
-            label: 'Add Disposition',
+            label: 'Add Disposition-complaint',
         },
     ]
 
@@ -38,7 +49,7 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                     <div className="pt-1">
                         <ATMPageHeading>
                             {' '}
-                            Update Disposition-One{' '}
+                            Add Disposition-Complaint{' '}
                         </ATMPageHeading>
                     </div>
 
@@ -47,7 +58,7 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                             {/* Form Heading */}
                             <div className="text-xl font-medium">
                                 {' '}
-                                Disposition-One Details{' '}
+                                Disposition-Complaint Details{' '}
                             </div>
 
                             {/* BUTTON - Add Button */}
@@ -81,6 +92,35 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                                         )
                                     }
                                 />
+                                <ATMSelectSearchable
+                                    options={dropdownOptions.emailTypeOptions}
+                                    name="emailType"
+                                    value={values.emailType}
+                                    label="Email Type"
+                                    onChange={(e) =>
+                                        setFieldValue('emailType', e)
+                                    }
+                                />
+                                <ATMSelectSearchable
+                                    options={dropdownOptions.smstypeOptions}
+                                    name="smsType"
+                                    value={values.smsType}
+                                    label="SMS Type "
+                                    onChange={(e) =>
+                                        setFieldValue('smsType', e)
+                                    }
+                                />
+                                <ATMSelectSearchable
+                                    options={
+                                        dropdownOptions.priorityTypeOptions
+                                    }
+                                    name="priority"
+                                    value={values.priority}
+                                    label="Priority"
+                                    onChange={(e) =>
+                                        setFieldValue('priority', e)
+                                    }
+                                />
                             </div>
                         </div>
                     </div>
@@ -90,4 +130,4 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
     )
 }
 
-export default EditDispositionOne
+export default AddDispositionComplaint

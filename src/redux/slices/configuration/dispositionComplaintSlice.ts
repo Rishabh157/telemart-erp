@@ -1,11 +1,11 @@
+import { DispositionComplaintListResponse } from 'src/models/configurationModel/DispositionComplaint.model'
 import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
 
-export interface InitialCallerThreeSliceStateType {
-    items: InitialCallerThreeListResponse[] | []
-    selectedInitialCallerThree: InitialCallerThreeListResponse | null
-    allItemsDisposition: InitialCallerThreeListResponse[] | []
+export interface DispositionCompliantSliceStateType {
+    items: DispositionComplaintListResponse[] | []
+    selectedDispositionCompalint: DispositionComplaintListResponse | null
+    allItems: DispositionComplaintListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -13,13 +13,12 @@ export interface InitialCallerThreeSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
-    filterValue: string
 }
 
-const initialState: InitialCallerThreeSliceStateType = {
+const initialState: DispositionCompliantSliceStateType = {
     items: [],
-    allItemsDisposition: [],
-    selectedInitialCallerThree: null,
+    allItems: [],
+    selectedDispositionCompalint: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -27,17 +26,16 @@ const initialState: InitialCallerThreeSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
-    filterValue: '',
 }
 
-const initialCallerThreeSlice: Slice<InitialCallerThreeSliceStateType> =
+const dispositionCompliantSlice: Slice<DispositionCompliantSliceStateType> =
     createSlice({
-        name: 'initialCallerThree',
+        name: 'dispositionCompliant',
         initialState,
         reducers: {
             setItems: (
                 state,
-                action: PayloadAction<InitialCallerThreeListResponse[] | []>
+                action: PayloadAction<DispositionComplaintListResponse[] | []>
             ) => {
                 state.items = action.payload
             },
@@ -72,18 +70,15 @@ const initialCallerThreeSlice: Slice<InitialCallerThreeSliceStateType> =
             },
             setAllItems: (
                 state,
-                action: PayloadAction<InitialCallerThreeListResponse[] | []>
+                action: PayloadAction<DispositionComplaintListResponse[] | []>
             ) => {
-                state.allItemsDisposition = action.payload
+                state.allItems = action.payload
             },
-            setFilterValue: (state, action: PayloadAction<string>) => {
-                state.filterValue = action.payload
-            },
-            setSelectedInitialCallerThree: (
+            setSelectedDispositionComplaint: (
                 state,
-                action: PayloadAction<InitialCallerThreeListResponse | null>
+                action: PayloadAction<DispositionComplaintListResponse | null>
             ) => {
-                state.selectedInitialCallerThree = action.payload
+                state.selectedDispositionCompalint = action.payload
             },
         },
     })
@@ -97,8 +92,7 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
-    setSelectedInitialCallerThree,
+    setSelectedDispositionComplaint,
     setAllItems,
-    setFilterValue,
-} = initialCallerThreeSlice.actions
-export default initialCallerThreeSlice.reducer
+} = dispositionCompliantSlice.actions
+export default dispositionCompliantSlice.reducer

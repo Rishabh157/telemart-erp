@@ -1,7 +1,7 @@
 import React from 'react'
-import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './EditDispositionOneWrapper'
+import { FormInitialValues } from './EditInitialCallOneWrapper'
+import { FormikProps } from 'formik'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -12,16 +12,16 @@ type Props = {
     apiStatus: boolean
 }
 
-const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
+const EditInitialCallOne = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition-One',
-            path: '/configurations/disposition-one',
+            label: 'Initialcall-One',
+            path: '/dispositions/initialCall-one',
         },
         {
-            label: 'Add Disposition',
+            label: 'Update Initialcall-One',
         },
     ]
 
@@ -70,13 +70,13 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                             <div className="grid grid-cols-3 gap-4">
                                 {/* languageName */}
                                 <ATMTextField
-                                    name="dispositionName"
-                                    value={values.dispositionName}
-                                    label="Disposition Name"
+                                    name="initialCallName"
+                                    value={values.initialCallName}
                                     placeholder="Name"
+                                    label="InitialCall  name"
                                     onChange={(e) =>
                                         setFieldValue(
-                                            'dispositionName',
+                                            'initialCallName',
                                             e.target.value
                                         )
                                     }
@@ -90,4 +90,4 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
     )
 }
 
-export default EditDispositionOne
+export default EditInitialCallOne

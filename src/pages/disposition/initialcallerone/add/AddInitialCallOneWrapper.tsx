@@ -6,15 +6,14 @@ import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import { useAddinitialCallerOneMutation } from 'src/services/configurations/InitialCallerOneServices'
 import AddInitialCallOne from './AddInitialCallOne'
-
-type Props = {
-    onClose: () => void
-}
+import { useNavigate } from 'react-router-dom'
+import DispositionLayout from '../../DispositionLayout'
 
 export type FormInitialValues = {
     initialCallName: string
 }
-const AddInitialCallOneWrapper = ({ onClose }: Props) => {
+const AddInitialCallOneWrapper = () => {
+    const navigate = useNavigate()
     const [AddInitialcallOne] = useAddinitialCallerOneMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
@@ -23,9 +22,7 @@ const AddInitialCallOneWrapper = ({ onClose }: Props) => {
         initialCallName: '',
     }
     const validationSchema = object({
-        initialCallName: string().required(
-            'InitialCaller-One Name is required'
-        ),
+        initialCallName: string().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -36,11 +33,8 @@ const AddInitialCallOneWrapper = ({ onClose }: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'InitialCallerOne added successfully!'
-                        )
-                        onClose()
+                        showToast('success', 'Added successfully!')
+                        navigate('/dispositions/initialcall-one')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -54,21 +48,22 @@ const AddInitialCallOneWrapper = ({ onClose }: Props) => {
 
     return (
         <>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: any) => {
-                    return (
-                        <AddInitialCallOne
-                            onClose={onClose}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
+            <DispositionLayout>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmitHandler}
+                >
+                    {(formikProps: any) => {
+                        return (
+                            <AddInitialCallOne
+                                apiStatus={apiStatus}
+                                formikProps={formikProps}
+                            />
+                        )
+                    }}
+                </Formik>
+            </DispositionLayout>
         </>
     )
 }

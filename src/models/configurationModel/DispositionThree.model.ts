@@ -25,6 +25,7 @@ export type UpdateDispositionThree = {
         dispositionName: string
         dispositionOneId: string
         dispositionTwoId: string
+
         companyId: string
     }
     id: string

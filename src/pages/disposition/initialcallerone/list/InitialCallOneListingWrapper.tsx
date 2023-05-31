@@ -1,41 +1,47 @@
 import React, { useEffect, useState } from 'react'
+import { HiDotsHorizontal } from 'react-icons/hi'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import InitialCallOneListing from './InitialCallOneListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-import InitialCallThreeListing from './InitialCallThreeListing'
+import { useNavigate } from 'react-router-dom'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
+
+import {
+    useGetinitialCallerOneQuery,
+    useDeleteinitialCallerOneMutation,
+} from 'src/services/configurations/InitialCallerOneServices'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/configuration/initialCallerThreeSlice'
-import {
-    useDeleteInitialCallerThreeMutation,
-    useGetInitialCallerThreeQuery,
-} from 'src/services/configurations/InitialCallerThreeServices'
-import { useNavigate } from 'react-router-dom'
-import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
-import { HiDotsHorizontal } from 'react-icons/hi'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
+} from 'src/redux/slices/configuration/initialCallerOneSlice'
+import { InitialCallerOneListResponse } from 'src/models/configurationModel/InitialCallerOne.model'
+import DispositionLayout from '../../DispositionLayout'
 
-const InitialCallThreeListingWrapper = () => {
+// export type language ={
+//     languageId:string[];
+
+// }
+
+const InitialCallOneListingWrapper = () => {
     const navigate = useNavigate()
-    const [deleteIniticallthree] = useDeleteInitialCallerThreeMutation()
+    const [deleteTape] = useDeleteinitialCallerOneMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
-    const initialCallThreeState: any = useSelector(
-        (state: RootState) => state.initialCallerThree
+    const initialCallOneState: any = useSelector(
+        (state: RootState) => state.initialCallerOne
     )
 
-    const { page, rowsPerPage, searchValue, items } = initialCallThreeState
+    const { page, rowsPerPage, searchValue, items } = initialCallOneState
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetInitialCallerThreeQuery({
+    const { data, isFetching, isLoading } = useGetinitialCallerOneQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['initailCallName'],
+        params: ['initialCallName'],
         page: page,
         filterBy: [
             {
@@ -64,9 +70,9 @@ const InitialCallThreeListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'initialCallName',
-            headerName: 'Initialcall-Three',
+            headerName: 'initial call ',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: InitialCallerThreeListResponse) => (
+            renderCell: (row: InitialCallerOneListResponse) => (
                 <span> {row.initialCallName} </span>
             ),
         },
@@ -100,8 +106,8 @@ const InitialCallThreeListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete InitialCaller-Three',
-                                        text: 'Do you want to delete InitialCaller-Three?',
+                                        title: 'Delete Tape',
+                                        text: 'Do you want to delete Tape?',
                                         showCancelButton: true,
                                         next: (res: any) => {
                                             return res.isConfirmed
@@ -124,13 +130,10 @@ const InitialCallThreeListingWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteIniticallthree(currentId).then((res: any) => {
+        deleteTape(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        'Initiacall-Three deleted successfully!'
-                    )
+                    showToast('success', 'Tape deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -146,15 +149,16 @@ const InitialCallThreeListingWrapper = () => {
     return (
         <>
             <DispositionLayout>
-                {' '}
-                <InitialCallThreeListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
+                <div className="h-full">
+                    <InitialCallOneListing
+                        columns={columns}
+                        rows={items}
+                        setShowDropdown={setShowDropdown}
+                    />
+                </div>
             </DispositionLayout>
         </>
     )
 }
 
-export default InitialCallThreeListingWrapper
+export default InitialCallOneListingWrapper
