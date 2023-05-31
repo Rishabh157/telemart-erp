@@ -13,10 +13,14 @@ export type DispositionThreeListResponse = {
     __v: number
 }
 
-export type AddDisPositionThree = {
+export type AddDispositionThree = {
     dispositionName: string
     dispositionOneId: string
     dispositionTwoId: string
+    smsType: string
+    emailType: string
+    priority: string
+    applicableCriteria: string[]
     companyId: string
 }
 
@@ -25,7 +29,10 @@ export type UpdateDispositionThree = {
         dispositionName: string
         dispositionOneId: string
         dispositionTwoId: string
-
+        smsType: string
+        emailType: string
+        priority: string
+        applicableCriteria: string[]
         companyId: string
     }
     id: string

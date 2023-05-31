@@ -112,8 +112,8 @@ const DispositionTwoListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Tape',
-                                        text: 'Do you want to delete Disposition-One?',
+                                        title: 'Delete Disposition-Two',
+                                        text: 'Do you want to delete Disposition-Two?',
                                         showCancelButton: true,
                                         next: (res: any) => {
                                             return res.isConfirmed
@@ -139,7 +139,10 @@ const DispositionTwoListingWrapper = () => {
         deleteDispositonTwo(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Tape deleted successfully!')
+                    showToast(
+                        'success',
+                        'Disposition Two deleted successfully!'
+                    )
                 } else {
                     showToast('error', res?.data?.message)
                 }

@@ -161,6 +161,10 @@ import InitialCallTwoListingWrapper from './pages/disposition/initialcallertwo/l
 import DispositionTwoListingWrapper from './pages/disposition/dispositionCaller/dispositionTwo/list/DispositionTwoListingWrapper'
 import DispositionThreeListingWrapper from './pages/disposition/dispositionCaller/dispositionThree/list/DispositionThreeListingWrapper'
 import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
+import AddDispositionThreeWrappper from './pages/disposition/dispositionCaller/dispositionThree/add/AddDispositionThreeWrappper'
+import EditDispositionThreeWrapper from './pages/disposition/dispositionCaller/dispositionThree/edit/EditDispositionThreeWrapper'
+import AddDispositionTwoWrapper from './pages/disposition/dispositionCaller/dispositionTwo/add/AddDispositionTwoWrapper'
+import EditDispositionTwoWrapper from './pages/disposition/dispositionCaller/dispositionTwo/edit/EditDispositionTwoWrapper'
 import EditDispositionOneWrappper from './pages/disposition/dispositionOne/edit/EditDispositionOneWrapper'
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/dispositionThree/add/AddInitialCallThreeWrapper'
 import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/dispositionThree/list/InitialCallThreeListingWrapper'
@@ -751,6 +755,20 @@ const PageRoutes = () => {
                         element={<DispositionThreeListingWrapper />}
                     />
                     <Route
+                        path="dispositions/disposition-three/add"
+                        element={<AddDispositionThreeWrappper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-three/edit/:id"
+                        element={<EditDispositionThreeWrapper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-two/add"
+                        element={<AddDispositionTwoWrapper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-two/edit/:id"
+                        element={<EditDispositionTwoWrapper />}
                         path="dispositions/disposition-complaint"
                         element={<DispositionComplaintListingWrapper />}
                     />
