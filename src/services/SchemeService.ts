@@ -64,6 +64,17 @@ export const schemeApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+          //inbound
+          inboundScheme: builder.query({
+            providesTags: ['scheme'],
+            query: (body: PaginationType) => ({
+                url: '/scheme/inbound',
+                method: 'POST',
+                body,
+            }),
+    
+        }),
     }),
 })
 export const {
@@ -73,4 +84,5 @@ export const {
     useGetSchemeByIdQuery,
     useGetAllSchemeQuery,
     useDeleteSchemeMutation,
+    useInboundSchemeQuery
 } = schemeApi

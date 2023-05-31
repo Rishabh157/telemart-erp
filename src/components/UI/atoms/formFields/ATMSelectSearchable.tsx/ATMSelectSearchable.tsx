@@ -56,24 +56,23 @@ const ATMSelectSearchable = ({
             ...provided,
             paddingLeft: '4px',
             paddingTop: '0px',
-            backgroundColor: 'lightgray',
+            //backgroundColor: 'lightgray',
             // borderRadius: '4px',
             alignItems: 'start',
         }),
-        indicator:(provided:any)=>({
+        indicator: (provided: any) => ({
             ...provided,
-            padding:'0px'
-
+            padding: '0px',
         }),
         input: (provided: any) => ({
             ...provided,
             minHeight: 'unset',
-            textColor:'rgb(51 65 85,0)',
+            textColor: 'rgb(51 65 85,0)',
             // color: rgb(51 65 85 / var(--tw-text-opacity));
             // height: size === 'xs' ? '28px' : '40px',
             // textAlign: 'center',
             paddingLeft: '4px',
-            paddingTop: '0px',  
+            paddingTop: '0px',
             // height: size == 'xs' ? '28px' : '40px',
             // textAlign: 'center',
         }),

@@ -22,12 +22,12 @@ export type addressInformation = {
     deliveryCharges: number
     discount: number
     total: number
-    country: string
-    state: string
-    city: string
-    tehsil: string
-    pincode: string
-    area: string
+    countryId: string
+    stateId: string
+    districtId: string
+    tehsilId: string
+    areaId: string
+    pincodeId:string
     expectedDeliveryDate: string
     profileDeliveredBy: string
     complaintDetails: string
@@ -39,25 +39,23 @@ export type personalInformation = {
     name: string
     age: string
     address: string
-    realtion: string
-    city: string
+    relation: string
+    agentDistrictId: string
     landmark: string
-    alternateNo1: string
+    whatsappNo: string
     gender: string
-    prepaid: string
+    prepaid: boolean
     email: string
-    channel: string
-    otherRemarks: string
+    channelId: string
+    remark: string
 }
 
-export type AddInboundCaller = {
-    generalInformation: generalInformation
-    addressInformation: addressInformation
-    personalInformation: personalInformation
-    dispositionLevelOne: string
-    dispositionLevelTwo: string
-
+export interface AddInboundCaller extends generalInformation, addressInformation, generalInformation {
+    dispositionLevelTwoId: string
+    dispositionLevelThreeId: string
+    schemeId: string
     companyId: string
+    alternateNo1: string
 }
 
 export type UpdateInboundCaller = {

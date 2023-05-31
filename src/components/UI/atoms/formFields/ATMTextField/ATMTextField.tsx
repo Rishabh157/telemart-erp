@@ -1,7 +1,6 @@
 import { ErrorMessage } from 'formik'
 import React from 'react'
 import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
-import { string } from 'yup'
 
 export type ATMTextFieldPropTypes = {
     name: string
@@ -33,7 +32,7 @@ const ATMTextField = ({
         <div className={`relative mt-4 ${extraClassField}`}>
             {label && (
                 <label className={`text-slate-700 ${labelClass}`}>
-                    {' '}
+                  
                     {label}{' '}
                     {required && <span className="text-red-500"> * </span>}{' '}
                 </label>

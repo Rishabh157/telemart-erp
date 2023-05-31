@@ -77,7 +77,17 @@ const EditSlotManagement = ({
         // }),
     }
 
-    const options = ['FIXED', 'FLEXIBLE']
+    // const options = ['FIXED', 'FLEXIBLE']
+    const options = [
+        {
+            label: 'Fixed',
+            value: 'FIXED',
+        },
+        {
+            label: 'Flexible',
+            value: 'FLEXIBLE',
+        },
+    ]
 
     return (
         <div className="">
@@ -193,12 +203,13 @@ const EditSlotManagement = ({
                             <div className=" text-lg pb-2 font-medium text-primary-main">
                                 Slot Details
                             </div>
-                            <div className="flex gap-5 items-end  pb-5">
+                            <div className="grid grid-cols-3 gap-2 items-end  pb-5">
                                 <div className="flex-[3_3_0%]">
                                     <ATMDatePicker
                                         name="slotDate"
                                         value={values.slotDate}
                                         label="Date"
+                                        dateTimeFormat="MM/DD/YY ddd"
                                         onChange={(newValue) =>
                                             setFieldValue('slotDate', newValue)
                                         }
@@ -209,6 +220,7 @@ const EditSlotManagement = ({
                                         name="slotEndTime"
                                         value={values.slotEndTime || null}
                                         label="Enddate Time"
+                                     
                                         onChange={(newValue) => {
                                             setFieldValue(
                                                 'slotEndTime',

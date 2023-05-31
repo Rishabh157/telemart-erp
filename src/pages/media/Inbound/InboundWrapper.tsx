@@ -6,9 +6,25 @@ import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import Inbound from './Inbound'
-import { useGetAllCountryQuery } from 'src/services/CountryService'
+import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { useAddInboundCallerMutation } from 'src/services/media/InboundCallerServices'
+import { useGetAllTehsilUnauthQuery } from 'src/services/TehsilService'
+import { setAllStates } from 'src/redux/slices/statesSlice'
+import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
+import { setAllTehsils } from 'src/redux/slices/tehsilSlice'
+import { setAllDistrict } from 'src/redux/slices/districtSlice'
+import { useGetAllDistrictUnauthQuery } from 'src/services/DistricService'
+import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
+import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
+import { SchemeListResponse } from 'src/models/scheme.model'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { CountryListResponse } from 'src/models/Country.model'
+import { StateListResponse } from 'src/models/State.model'
+import { DistrictListResponse } from 'src/models/District.model'
+import { TehsilListResponse } from 'src/models/Tehsil.model'
+import { AreaListResponse } from 'src/models/Area.model'
+import { setItems } from 'src/redux/slices/media/channelManagementSlice'
 
 export type FormInitialValues = {
     generalInformation: {
@@ -21,12 +37,12 @@ export type FormInitialValues = {
         deliveryCharges: number
         discount: number
         total: number
-        country: string
-        state: string
-        city: string
-        tehsil: string
-        pincode: string
-        area: string
+        countryId: string
+        stateId: string
+        districtId: string
+        tehsilId: string
+        areaId: string
+        pincodeId:string
         expectedDeliveryDate: string
         profileDeliveredBy: string
         complaintDetails: string
@@ -38,21 +54,42 @@ export type FormInitialValues = {
         age: string
         address: string
         realtion: string
-        city: string
+        agentDistrictId: string
         landmark: string
-        alternateNo1: string
+        whatsappNo: string
         gender: string
-        prepaid: string
+        prepaid: boolean | string
         email: string
-        channel: string
-        otherRemarks: string
+        channelId: string
+        remark: string
     }
-    dispositionLevelOne: string
-
-    dispositionLevelTwo: string
+    dispositionLevelTwoId: string
+    dispositionLevelThreeId: string
+    schemeId: string
+    alternateNo: string
 }
 
 const InbouundWrapper = () => {
+    const columns: columnTypes[] = [
+        {
+            field: 'schemeName',
+            headerName: 'Scheme Name',
+            flex: 'flex-[2_2_0%]',
+            renderCell: (row: SchemeListResponse) => (
+                <span> {row.schemeName} </span>
+            ),
+            extraClasses: 'p-0 m-0',
+        },
+        {
+            field: 'schemePrice',
+            headerName: 'Price',
+            flex: 'flex-[0.3_0.3_0%]',
+            renderCell: (row: SchemeListResponse) => {
+                return <span> {row?.schemePrice} </span>
+            },
+            extraClasses: 'p-0 m-0',
+        },
+    ]
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddInbopundCaller] = useAddInboundCallerMutation()
@@ -69,12 +106,12 @@ const InbouundWrapper = () => {
             deliveryCharges: 0,
             discount: 0,
             total: 0,
-            country: '',
-            state: '',
-            city: '',
-            tehsil: '',
-            pincode: '',
-            area: '',
+            countryId: "",
+            stateId: "",
+            districtId: "",
+            tehsilId: "",
+            areaId: "",
+            pincodeId:"",
             expectedDeliveryDate: '',
             profileDeliveredBy: '',
             complaintDetails: '',
@@ -86,107 +123,79 @@ const InbouundWrapper = () => {
             age: '',
             address: '',
             realtion: '',
-            city: '',
+            agentDistrictId: '',
             landmark: '',
-            alternateNo1: '',
+          
+            whatsappNo: '',
             gender: '',
             prepaid: '',
             email: '',
-            channel: '',
-            otherRemarks: '',
+            channelId: '',
+            remark: '',
         },
-        dispositionLevelOne: '',
-        dispositionLevelTwo: '',
+
+        alternateNo: '',
+        dispositionLevelTwoId: '',
+        dispositionLevelThreeId: '',
+        schemeId: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
         generalInformation: object().shape({
-            didNo: string().required(),
-            inOutBound: string().required(),
-            incomingCallerNo: string().required(),
-            mobileNo: string().required(),
+            didNo: string().required('Required !'),
+            // inOutBound: string().required('Required !'),
+            // incomingCallerNo: string().required('Required !'),
+            // mobileNo: string().required('Required !'),
         }),
         addressInformation: object().shape({
-            deliveryCharges: number().required(),
-            discount: number().required(),
-            total: number().required(),
-            country: string().required(),
-            state: string().required(),
-            city: string().required(),
-            tehsil: string().required(),
-            pincode: string().required(),
-            area: string().required(),
-            expectedDeliveryDate: string().required(),
-            profileDeliveredBy: string().required(),
-            complaintDetails: string().required(),
-            complaintNo: string().required(),
+            deliveryCharges: number().required('Required !'),
+            // discount: number().required('Required !'),
+            // total: number().required('Required !'),
+            // country: string().required('Required !'),
+            // state: string().required('Required !'),
+            // city: string().required('Required !'),
+            // tehsil: string().required('Required !'),
+            // pincode: string().required('Required !'),
+            // area: string().required('Required !'),
+            // expectedDeliveryDate: string().required('Required !'),
+            // profileDeliveredBy: string().required('Required !'),
+            // complaintDetails: string().required('Required !'),
+            // complaintNo: string().required('Required !'),
         }),
         personalInformation: object().shape({
-            agentName: string().required(),
-            name: string().required(),
-            age: string().required(),
-            address: string().required(),
-            realtion: string().required(),
-            city: string().required(),
-            landmark: string().required(),
-            alternateNo1: string().required(),
-            gender: string().required(),
-            prepaid: string().required(),
-            email: string().required(),
-            channel: string().required(),
-            otherRemarks: string().required(),
+            // agentName: string().required('Required !'),
+            // name: string().required('Required !'),
+            // age: string().required('Required !'),
+            // address: string().required('Required !'),
+            // realtion: string().required('Required !'),
+            // city: string().required('Required !'),
+            // landmark: string().required('Required !'),
+            // alternateNo: string().required('Required !'),
+            // gender: string().required('Required !'),
+            // email: string().required('Required !'),
+            // channel: string().required('Required !'),
+            // otherRemarks: string().required('Required !'),
         }),
-        dispositionLevelOne: string().required(),
-        dispositionLevelTwo: string().required(),
+        // dispositionLevelOne: string().required('Required'),
+        // dispositionLevelTwo: string().required('Required'),
+        // schemeId: string().required('Required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
-        setApiStatus(true)
+        const valuesInbound = {
+            ...values.generalInformation,
+            ...values.addressInformation,
+            ...values.personalInformation,
+        }
+        setApiStatus(true)  
         setTimeout(() => {
             AddInbopundCaller({
-                generalInformation: {
-                    didNo: values.generalInformation.didNo,
-                    inOutBound: values.generalInformation.inOutBound,
-                    incomingCallerNo:
-                        values.generalInformation.incomingCallerNo,
-                    mobileNo: values.generalInformation.mobileNo,
-                },
-                addressInformation: {
-                    deliveryCharges: values.addressInformation.deliveryCharges,
-                    discount: values.addressInformation.discount,
-                    total: values.addressInformation.total,
-                    country: values.addressInformation.country,
-                    state: values.addressInformation.state,
-                    city: values.addressInformation.city,
-                    tehsil: values.addressInformation.tehsil,
-                    pincode: values.addressInformation.pincode,
-                    area: values.addressInformation.area,
-                    expectedDeliveryDate:
-                        values.addressInformation.expectedDeliveryDate,
-                    profileDeliveredBy:
-                        values.addressInformation.profileDeliveredBy,
-                    complaintDetails:
-                        values.addressInformation.complaintDetails,
-                    complaintNo: values.addressInformation.complaintNo,
-                },
-                personalInformation: {
-                    agentName: values.personalInformation.agentName,
-                    name: values.personalInformation.name,
-                    age: values.personalInformation.age,
-                    address: values.personalInformation.address,
-                    realtion: values.personalInformation.realtion,
-                    city: values.personalInformation.city,
-                    landmark: values.personalInformation.landmark,
-                    alternateNo1: values.personalInformation.alternateNo1,
-                    gender: values.personalInformation.gender,
-                    prepaid: values.personalInformation.prepaid,
-                    email: values.personalInformation.email,
-                    channel: values.personalInformation.channel,
-                    otherRemarks: values.personalInformation.otherRemarks,
-                },
-                dispositionLevelOne: values.dispositionLevelOne,
-                dispositionLevelTwo: values.dispositionLevelTwo,
+                ...valuesInbound,
+                alternateNo1: values.alternateNo,
+                schemeId: values.schemeId,
+                dispositionLevelTwoId: values.dispositionLevelTwoId,
+                dispositionLevelThreeId: values.dispositionLevelThreeId,
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
@@ -208,23 +217,116 @@ const InbouundWrapper = () => {
     }
     const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
+    const { data, isLoading, isFetching } = useGetAllCountryUnauthQuery('')
 
+    //country
     const { allCountry }: any = useSelector((state: RootState) => state.country)
+    const { allStates }: any = useSelector((state: RootState) => state.states)
+
+    const { allDistricts }: any = useSelector(
+        (state: RootState) => state.district
+    )
 
     useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setAllCountry(data?.data))
-        }
+        if (!isLoading && !isFetching) dispatch(setAllCountry(data?.data))
     }, [data, isLoading, isFetching, dispatch])
+
+    const { allTehsils }: any = useSelector((state: RootState) => state.tehsils)
+    const { items: allArea }: any = useSelector(
+        (state: RootState) => state.areas
+    )
+
+
+    const { items: Channelitems }: any = useSelector(
+        (state: RootState) => state.channelGroup
+    )
+    console.log("Channelitems",Channelitems)
+    //state
+    const {
+        data: stateData,
+        isLoading: stateIsLoading,
+        isFetching: stateIsFetching,
+    } = useGetByAllStateUnauthQuery('')
+
+    useEffect(() => {
+        if (!stateIsLoading && !stateIsFetching)
+            dispatch(setAllStates(stateData?.data))
+    }, [stateData, stateIsLoading, stateIsFetching, dispatch])
+
+    // district
+    const {
+        data: districtData,
+        isLoading: districtIsLoading,
+        isFetching: districtIsFetching,
+    } = useGetAllDistrictUnauthQuery('')
+
+    useEffect(() => {
+        dispatch(setAllDistrict(districtData?.data))
+    }, [districtData, districtIsLoading, districtIsFetching, dispatch])
+
+    // tehsil
+    const {
+        data: tehsilData,
+        isFetching: tehsilIsFetching,
+        isLoading: tehsilIsLoading,
+    } = useGetAllTehsilUnauthQuery('')
+
+    useEffect(() => {
+        if (!tehsilIsFetching && !tehsilIsLoading) {
+            dispatch(setAllTehsils(tehsilData?.data))
+        }
+    }, [tehsilData, dispatch, tehsilIsFetching, tehsilIsLoading])
+
+    //area
+    const {
+        data: areaData,
+        isLoading: areaIsLoading,
+        isFetching: areaIsFetching,
+    } = useGetAllAreaUnauthQuery('')
+
+    useEffect(() => {
+        if (!areaIsFetching && !areaIsLoading) {
+            dispatch(setAreaItems(areaData?.data))
+        }
+    }, [areaData, areaIsLoading, areaIsFetching, dispatch])
+
+    //channel
+    const {
+        data: channelData,
+        isFetching: channelIsFetching,
+        isLoading: channelIsLoading,
+    } = useGetAllTehsilUnauthQuery('')
+
+    useEffect(() => {
+        if (!channelIsFetching && !channelIsLoading) {
+            dispatch(setItems(channelData?.data))
+        }
+    }, [channelData, channelIsLoading, channelIsFetching, dispatch])
 
     //registration
 
     const dropdownOptions = {
-        counrtyOptions: allCountry?.map((ele: any) => {
+        counrtyOptions: allCountry?.map((ele:CountryListResponse) => {
             return { label: ele?.countryName, value: ele?._id }
         }),
+        stateOptions: allStates?.map((ele: StateListResponse) => {
+            return { label: ele?.stateName, value: ele?._id }
+        }),
+
+        districtOptions: allDistricts?.map((ele: DistrictListResponse) => {
+            return { label: ele?.districtName, value: ele?._id }
+        }),
+        tehsilOptions: allTehsils?.map((ele: TehsilListResponse) => {
+            return { label: ele?.tehsilName, value: ele?._id }
+        }),
+        areaOptions: allArea?.map((ele:AreaListResponse) => {
+            return { label: ele?.area, value: ele?._id }
+        }),
+        channelOptions: allDistricts?.map((ele: DistrictListResponse) => {
+            return { label: ele?.districtName, value: ele?._id }
+        }),
     }
+
     return (
         <Formik
             initialValues={initialValues}
@@ -237,6 +339,7 @@ const InbouundWrapper = () => {
                         apiStatus={apiStatus}
                         formikProps={formikProps}
                         dropdownOptions={dropdownOptions}
+                        schemeColumn={columns}
                     />
                 )
             }}

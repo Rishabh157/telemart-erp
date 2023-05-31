@@ -9,34 +9,34 @@ export const inboundCallerManagementApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
         getPaginationInboundCaller: builder.query({
-            providesTags: ['inboundCaller'],
+            providesTags: ['call'],
             query: (body: PaginationType) => ({
-                url: '/channel-master',
+                url: '/call',
                 method: 'POST',
                 body,
             }),
         }),
         //***** GET Without PAGINATION DATA *****/
         getAllInboundCaller: builder.query({
-            providesTags: ['inboundCaller'],
+            providesTags: ['call'],
             query: () => ({
-                url: '/inboundCaller-master',
+                url: '/call',
                 method: 'GET',
             }),
         }),
         //***** GET BY ID *****/
         getInboundCallerById: builder.query({
-            providesTags: ['inboundCaller'],
+            providesTags: ['call'],
             query: (id) => ({
-                url: `/InboundCaller-master/${id}`,
+                url: `/call/${id}`,
                 method: 'GET',
             }),
         }),
         //***** ADD *****/
         addInboundCaller: builder.mutation({
-            invalidatesTags: ['inboundCaller'],
+            invalidatesTags: ['call'],
             query: (body: AddInboundCaller) => ({
-                url: '/chaInboundCallerster/add',
+                url: '/call/add',
                 method: 'POST',
                 body,
             }),
@@ -46,7 +46,7 @@ export const inboundCallerManagementApi = apiSlice.injectEndpoints({
         updateInboundCaller: builder.mutation({
             invalidatesTags: ['inboundCaller'],
             query: ({ body, id }: UpdateInboundCaller) => ({
-                url: `/channel-master/${id}`,
+                url: `/call/${id}`,
                 method: 'PUT',
                 body,
             }),

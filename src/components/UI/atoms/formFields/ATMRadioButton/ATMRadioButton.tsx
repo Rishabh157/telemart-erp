@@ -1,9 +1,10 @@
 import { ErrorMessage } from 'formik'
 import React from 'react'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 
 export type Props = {
     name: string
-    options: string[]
+    options: SelectOption[]
     label?: string
     value: string | string[] | number
     required?: boolean
@@ -29,28 +30,32 @@ const ATMRadioButton = ({
                 </label>
             )}
 
-            <div className="flex mt-2 gap-4 p-2">
-                {options.map((option, index) => (
+            <div className="flex mt-1 w-full py-2 pr-2 ">
+                {options.map((option: SelectOption, index) => (
                     <div
                         onChange={() => {
-                            onChange(option)
+                            onChange(option.value as string)
                         }}
                         key={index}
-                        className={`${index === 0 ? '' : 'ml-4'}`}
+                        className={`${
+                            index === 0 ? '' : 'ml-2 '
+                        } lg:flex ms:flex   xl:flex sm:text-sm  lg:text-lg text-base  `}
                     >
                         <input
                             type="radio"
                             name={name}
-                            value={option}
-                            checked={option === value}
+                            value={value}
+                            checked={option.value === value}
                         />
                         <label
                             onClick={() => {
-                                onChange(option)
+                                onChange(option.value as string)
                             }}
-                            className="ml-2"
+                            className="ml-1 Class
+                            Properties
+                            xs:text-xs sm:text-sm  lg:text-base md:text-sm "
                         >
-                            {option}
+                            {option.label}
                         </label>
                     </div>
                 ))}

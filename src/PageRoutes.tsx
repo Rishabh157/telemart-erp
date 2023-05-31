@@ -145,7 +145,7 @@ import {
 import Auth from './pages/login/Auth'
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
 import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
-import Disposition from './pages/disposition/Disposition'
+// import Disposition from './pages/disposition/Disposition'
 import InbouundWrapper from './pages/media/Inbound/InboundWrapper'
 // import Disposition from './pages/disposition/Disposition'
 import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
@@ -162,7 +162,7 @@ import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsit
 import DispositionTwoListingWrapper from './pages/disposition/dispositionCaller/dispositionTwo/list/DispositionTwoListingWrapper'
 import DispositionThreeListingWrapper from './pages/disposition/dispositionCaller/dispositionThree/list/DispositionThreeListingWrapper'
 import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
-
+import PageNotFound from './PageNotFound'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -180,13 +180,26 @@ const PageRoutes = () => {
     dispatch(setUserData(userData))
 
     if (!accessToken && window.location.pathname !== '/') {
-        return null
+        return (
+            <>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="*" element={<Auth />} />
+                        <Route
+                            path="media/inbound/"
+                            element={<InbouundWrapper />}
+                        />
+                    </Routes>
+                </BrowserRouter>
+            </>
+        )
     }
 
     return (
         <>
             <BrowserRouter>
                 <Routes>
+                    <Route path="*" element={<PageNotFound />} />
                     <Route path="/" element={<Auth />} />
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
@@ -704,7 +717,6 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three"
                         element={<DispositionThreeListingWrapper />}
-                    
                     />
                     {/* Website Blog route */}
                     <Route
