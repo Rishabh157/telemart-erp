@@ -12,13 +12,11 @@ import { DispositionOneListResponse } from 'src/models/configurationModel/Dispos
 import AddDispositionTwo from './AddDispositionTwo'
 import { useAdddispositionTwoMutation } from 'src/services/configurations/DispositionTwoServices'
 
-
 export type FormInitialValues = {
-	dispositionName: string
-	dispositionOneId: string
+    dispositionName: string
+    dispositionOneId: string
     companyId: string
 }
-
 
 const AddDispositionTwoWrapper = () => {
     const navigate = useNavigate()
@@ -26,45 +24,42 @@ const AddDispositionTwoWrapper = () => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const { userData } = useSelector((state: RootState) => state?.auth)
-    
+
     const { allItems: dispositionOne }: any = useSelector(
         (state: RootState) => state.dispositionOne
-    )    
+    )
 
     const [adddispositionTwo] = useAdddispositionTwoMutation()
-    
 
     const {
-			isLoading: isDOLoading,
-			isFetching: isDOFetching,
-			data: DoData,
-	} = useGetAlldispositionOneQuery('')
+        isLoading: isDOLoading,
+        isFetching: isDOFetching,
+        data: DoData,
+    } = useGetAlldispositionOneQuery('')
 
     useEffect(() => {
         if (!isDOLoading && !isDOFetching) {
             dispatch(setAllDispositionOne(DoData?.data || []))
         }
-    }, [isDOLoading, isDOFetching, DoData, dispatch])    
-    
+    }, [isDOLoading, isDOFetching, DoData, dispatch])
 
-   
     const initialValues: FormInitialValues = {
-			dispositionName: '',
-			dispositionOneId: '',			
-			companyId: userData?.companyId || '',
+        dispositionName: '',
+        dispositionOneId: '',
+        companyId: userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-			dispositionName: string().required('Required'),
-			dispositionOneId: string().required('Required'),					
+        dispositionName: string().required('Required'),
+        dispositionOneId: string().required('Required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         adddispositionTwo({
             dispositionName: values.dispositionName,
-            dispositionOneId: values.dispositionOneId,            
+            dispositionOneId: values.dispositionOneId,
             companyId: values.companyId || '',
         }).then((res: any) => {
             if ('data' in res) {
@@ -81,7 +76,6 @@ const AddDispositionTwoWrapper = () => {
         })
     }
 
-
     const dropdownOptions = {
         DispotionOneOptions: dispositionOne?.map(
             (dispositionOne: DispositionOneListResponse) => {
@@ -91,9 +85,7 @@ const AddDispositionTwoWrapper = () => {
                 }
             }
         ),
-
     }
-
 
     return (
         <DispositionLayout>

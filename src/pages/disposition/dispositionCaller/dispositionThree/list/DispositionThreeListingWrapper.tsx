@@ -134,7 +134,10 @@ const DispositionThreeListingWrapper = () => {
         deleteDispositonThree(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Disposition Three deleted successfully!')
+                    showToast(
+                        'success',
+                        'Disposition Three deleted successfully!'
+                    )
                 } else {
                     showToast('error', res?.data?.message)
                 }

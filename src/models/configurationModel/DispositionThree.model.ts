@@ -14,26 +14,26 @@ export type DispositionThreeListResponse = {
 }
 
 export type AddDispositionThree = {
-	dispositionName: string
-	dispositionOneId: string
-	dispositionTwoId: string
-	smsType: string
-	emailType: string
-	priority: string
-	applicableCriteria:string[]
-	companyId: string	
+    dispositionName: string
+    dispositionOneId: string
+    dispositionTwoId: string
+    smsType: string
+    emailType: string
+    priority: string
+    applicableCriteria: string[]
+    companyId: string
 }
 
 export type UpdateDispositionThree = {
-	body: {
-		dispositionName: string
-		dispositionOneId: string
-		dispositionTwoId: string
-		smsType: string
-		emailType: string
-		priority: string
-		applicableCriteria:string[]
-		companyId: string
-	}
-	id: string
+    body: {
+        dispositionName: string
+        dispositionOneId: string
+        dispositionTwoId: string
+        smsType: string
+        emailType: string
+        priority: string
+        applicableCriteria: string[]
+        companyId: string
+    }
+    id: string
 }

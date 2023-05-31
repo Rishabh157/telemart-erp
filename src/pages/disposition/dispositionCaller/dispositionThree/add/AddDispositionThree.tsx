@@ -1,5 +1,5 @@
 import React from 'react'
-import {  FormikProps } from 'formik'
+import { FormikProps } from 'formik'
 import { FormInitialValues } from './AddDispositionThreeWrappper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -9,18 +9,16 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
-
-
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     dropdownOptions: {
-			DispotionOneOptions: SelectOption[]
-			DispositionTwoOptions: SelectOption[]
-			priorityOptions: SelectOption[]
-			smsTypeOptions: SelectOption[]
-			emailTypeOptions: SelectOption[]
-			applicableCriteriaOptions: SelectOption[]
+        DispotionOneOptions: SelectOption[]
+        DispositionTwoOptions: SelectOption[]
+        priorityOptions: SelectOption[]
+        smsTypeOptions: SelectOption[]
+        emailTypeOptions: SelectOption[]
+        applicableCriteriaOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -90,7 +88,10 @@ const AddDispositionThree = ({
                                 required
                                 placeholder="Disposition Name"
                                 onChange={(e) => {
-                                    setFieldValue('dispositionName', e.target.value)
+                                    setFieldValue(
+                                        'dispositionName',
+                                        e.target.value
+                                    )
                                 }}
                             />
                             <ATMSelectSearchable
@@ -102,7 +103,7 @@ const AddDispositionThree = ({
                                 options={dropdownOptions.DispotionOneOptions}
                                 label="Disposition One"
                             />
-                            
+
                             <div className="">
                                 <ATMSelectSearchable
                                     name="dispositionTwoId"
@@ -111,7 +112,9 @@ const AddDispositionThree = ({
                                     onChange={(e) =>
                                         setFieldValue('dispositionTwoId', e)
                                     }
-                                    options={dropdownOptions.DispositionTwoOptions}
+                                    options={
+                                        dropdownOptions.DispositionTwoOptions
+                                    }
                                     label="Disposition Two"
                                 />
                             </div>
@@ -126,34 +129,37 @@ const AddDispositionThree = ({
                             />
 
                             <ATMSelectSearchable
-															name="emailType"
-															required
-															value={values.emailType}
-															onChange={(e) => setFieldValue('emailType', e)}
-															options={dropdownOptions.emailTypeOptions}
-															label="Email Type"                                
+                                name="emailType"
+                                required
+                                value={values.emailType}
+                                onChange={(e) => setFieldValue('emailType', e)}
+                                options={dropdownOptions.emailTypeOptions}
+                                label="Email Type"
                             />
 
-														<ATMSelectSearchable
-															name="priority"
-															required
-															value={values.priority}
-															onChange={(e) => setFieldValue('priority', e)}
-															options={dropdownOptions.priorityOptions}
-															label="Priority"                                
+                            <ATMSelectSearchable
+                                name="priority"
+                                required
+                                value={values.priority}
+                                onChange={(e) => setFieldValue('priority', e)}
+                                options={dropdownOptions.priorityOptions}
+                                label="Priority"
                             />
 
-														<ATMSelectSearchable
-															name="applicableCriteria"
-															required
-															isMulti={true}
-															value={values.applicableCriteria}
-															onChange={(e) => setFieldValue('applicableCriteria', e)}
-															options={dropdownOptions.applicableCriteriaOptions}
-															label="Applicable Criteria"                                 
+                            <ATMSelectSearchable
+                                name="applicableCriteria"
+                                required
+                                isMulti={true}
+                                value={values.applicableCriteria}
+                                onChange={(e) =>
+                                    setFieldValue('applicableCriteria', e)
+                                }
+                                options={
+                                    dropdownOptions.applicableCriteriaOptions
+                                }
+                                label="Applicable Criteria"
                             />
                         </div>
-                        
                     </div>
                 </div>
             </div>

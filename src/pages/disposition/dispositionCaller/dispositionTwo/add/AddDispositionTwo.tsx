@@ -1,5 +1,5 @@
 import React from 'react'
-import {  FormikProps } from 'formik'
+import { FormikProps } from 'formik'
 import { FormInitialValues } from './AddDispositionTwoWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -9,13 +9,11 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
-
-
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     dropdownOptions: {
-		DispotionOneOptions: SelectOption[]			
+        DispotionOneOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -85,10 +83,13 @@ const AddDispositionTwo = ({
                                 required
                                 placeholder="Disposition Name"
                                 onChange={(e) => {
-                                    setFieldValue('dispositionName', e.target.value)
+                                    setFieldValue(
+                                        'dispositionName',
+                                        e.target.value
+                                    )
                                 }}
                             />
-                             <ATMSelectSearchable
+                            <ATMSelectSearchable
                                 name="dispositionOneId"
                                 value={values.dispositionOneId}
                                 onChange={(e) =>
@@ -97,10 +98,7 @@ const AddDispositionTwo = ({
                                 options={dropdownOptions.DispotionOneOptions}
                                 label="Disposition One"
                             />
-                            
-                          
                         </div>
-                        
                     </div>
                 </div>
             </div>

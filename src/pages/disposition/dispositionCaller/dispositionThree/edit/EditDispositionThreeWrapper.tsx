@@ -13,20 +13,22 @@ import { setAllItems as setAllDispositionOne } from 'src/redux/slices/configurat
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
 import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
 import EditDispositionThree from './EditDispositionThree'
-import { useGetDispositionThreeByIdQuery, useUpdatedispositionThreeMutation } from 'src/services/configurations/DispositionThreeServices'
-import {setSelectedDispostionThree} from 'src/redux/slices/configuration/dispositionThreeSlice'
+import {
+    useGetDispositionThreeByIdQuery,
+    useUpdatedispositionThreeMutation,
+} from 'src/services/configurations/DispositionThreeServices'
+import { setSelectedDispostionThree } from 'src/redux/slices/configuration/dispositionThreeSlice'
 
 export type FormInitialValues = {
-	dispositionName: string
-	dispositionOneId: string
-	dispositionTwoId: string
-	smsType: string
-	emailType: string
-	priority: string
-	applicableCriteria: string[]
+    dispositionName: string
+    dispositionOneId: string
+    dispositionTwoId: string
+    smsType: string
+    emailType: string
+    priority: string
+    applicableCriteria: string[]
     companyId: string
 }
-
 
 const EditDispositionThreeWrappper = () => {
     const navigate = useNavigate()
@@ -35,10 +37,10 @@ const EditDispositionThreeWrappper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
-   const [updatedispositionThree] =  useUpdatedispositionThreeMutation()
+    const [updatedispositionThree] = useUpdatedispositionThreeMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
-    
+
     const { allItems: dispositionOne }: any = useSelector(
         (state: RootState) => state.dispositionOne
     )
@@ -51,21 +53,19 @@ const EditDispositionThreeWrappper = () => {
         (state: RootState) => state?.dispositionThree
     )
 
-    const {data, isLoading, isFetching} = useGetDispositionThreeByIdQuery(Id)
+    const { data, isLoading, isFetching } = useGetDispositionThreeByIdQuery(Id)
 
     useEffect(() => {
-        if(!isLoading && !isFetching){
+        if (!isLoading && !isFetching) {
             dispatch(setSelectedDispostionThree(data?.data || []))
         }
     }, [isLoading, isFetching, data, dispatch])
-       
 
     const {
         isLoading: isDTLoading,
         isFetching: isDTFetching,
         data: DtData,
     } = useGetAlldispositionTwoQuery('')
-    
 
     useEffect(() => {
         if (!isDTLoading && !isDTFetching) {
@@ -74,45 +74,43 @@ const EditDispositionThreeWrappper = () => {
     }, [isDTLoading, isDTFetching, DtData, dispatch])
 
     const {
-			isLoading: isDOLoading,
-			isFetching: isDOFetching,
-			data: DoData,
-	} = useGetAlldispositionOneQuery('')
+        isLoading: isDOLoading,
+        isFetching: isDOFetching,
+        data: DoData,
+    } = useGetAlldispositionOneQuery('')
 
     useEffect(() => {
         if (!isDOLoading && !isDOFetching) {
             dispatch(setAllDispositionOne(DoData?.data || []))
         }
-    }, [isDOLoading, isDOFetching, DoData, dispatch])    
-    
-   
+    }, [isDOLoading, isDOFetching, DoData, dispatch])
+
     const initialValues: FormInitialValues = {
-			dispositionName: selectedDispostionThree?.dispositionName || "",
-			dispositionOneId: selectedDispostionThree?.dispositionOneId || "",
-			dispositionTwoId: selectedDispostionThree?.dispositionTwoId || "",
-			smsType: selectedDispostionThree?.smsType || "",
-			emailType: selectedDispostionThree?.emailType || "",
-			priority: selectedDispostionThree?.priority || "",
-			applicableCriteria: selectedDispostionThree?.applicableCriteria || [],
-			companyId: userData?.companyId || '',
+        dispositionName: selectedDispostionThree?.dispositionName || '',
+        dispositionOneId: selectedDispostionThree?.dispositionOneId || '',
+        dispositionTwoId: selectedDispostionThree?.dispositionTwoId || '',
+        smsType: selectedDispostionThree?.smsType || '',
+        emailType: selectedDispostionThree?.emailType || '',
+        priority: selectedDispostionThree?.priority || '',
+        applicableCriteria: selectedDispostionThree?.applicableCriteria || [],
+        companyId: userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-			dispositionName: string().required('Required'),
-			dispositionOneId: string().required('Required'),
-			dispositionTwoId: string().required('Required'),
-			applicableCriteria: array().of(
-           string().required('Required')),        
-			smsType: string().required('Required'),
-			emailType: string().required('Required'),
-			priority: string().required('Required'),			
+        dispositionName: string().required('Required'),
+        dispositionOneId: string().required('Required'),
+        dispositionTwoId: string().required('Required'),
+        applicableCriteria: array().of(string().required('Required')),
+        smsType: string().required('Required'),
+        emailType: string().required('Required'),
+        priority: string().required('Required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         updatedispositionThree({
-            body:{
+            body: {
                 dispositionName: values.dispositionName,
                 dispositionOneId: values.dispositionOneId,
                 dispositionTwoId: values.dispositionTwoId,
@@ -122,7 +120,7 @@ const EditDispositionThreeWrappper = () => {
                 priority: values.priority,
                 companyId: values.companyId || '',
             },
-            id: Id || ''
+            id: Id || '',
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -138,14 +136,14 @@ const EditDispositionThreeWrappper = () => {
         })
     }
 
-		const priorityOpt = () => {
-			let options: any = []
-			
-			for (let i = 0; i <= 50; i++) {
-					options.push( { label: i.toString(), value: i.toString() })
-			}
-			return options
-	}
+    const priorityOpt = () => {
+        let options: any = []
+
+        for (let i = 0; i <= 50; i++) {
+            options.push({ label: i.toString(), value: i.toString() })
+        }
+        return options
+    }
 
     const priorityOptions = priorityOpt()
 
@@ -166,48 +164,59 @@ const EditDispositionThreeWrappper = () => {
                     value: dispositionTwo._id,
                 }
             }
-        ),				
-            priorityOptions,
-			emailTypeOptions: [
-				{label: 'personalEmail', value: 'PERSONAL EMAIL'},
-				{label: 'officialEmail', value: 'OFFICIAL EMAIL'},
-				{label: 'buisnessEmail', value: 'BUISNESS EMAIL'},
-				{label: 'companyEmail', value: 'COMPANY EMAIL'},
-			],
+        ),
+        priorityOptions,
+        emailTypeOptions: [
+            { label: 'personalEmail', value: 'PERSONAL EMAIL' },
+            { label: 'officialEmail', value: 'OFFICIAL EMAIL' },
+            { label: 'buisnessEmail', value: 'BUISNESS EMAIL' },
+            { label: 'companyEmail', value: 'COMPANY EMAIL' },
+        ],
 
-			smsTypeOptions: [
-                { label: 'alcobanSms', value: 'ALCOBAN SMS' },
-                { label: 'complaintCCA_CNC', value: 'CUSTOMER NOT CONTACTABLE' },
-                { label: 'complaintCCA_OWEI', value: 'COMPLAINT CCA-ORDERS WITH EMAIL ID' },
-                { label: 'complaintCCA_OWNEI', value: 'COMPLAINT CCA-ORDERS WITHOUT EMAIL ID' },
-                { label: 'complaintORC', value: 'CREATE ORDER REFUND-CHEQUE' },
-                { label: 'complaintORN', value: 'CREATE ORDER REFUND-NEFT' },
-                { label: 'complaintRPIM', value: 'CREATE RPI-MANUAL' },
-                { label: 'complaintRPI', value: 'CREATE RPI-TV-SHOP COURIER ASSIGNED' },
-                { label: 'complaintSCD', value: 'COMPLAINT SERVICE DETAILS' },
-                { label: 'createComplant', value: 'CREATE COMPLAINT' },
-                { label: 'dealerDelivered', value: 'DEALER DELIVERED' },
-                { label: 'dealerDeliveredBI', value: 'DEALER DELIVERED BOY INTRANSIT' },
-                { label: 'dispositionMsg', value: 'DISPOSITION MESSAGE' },
-                { label: 'hold', value: 'HOLD' },
-                { label: 'inTransitDB', value: 'IN-TRANSIT-DELIVERY-BOY' },
-                { label: 'invoiceSent', value: 'INVOICE SENT' },
-            ],
-            applicableCriteriaOptions: [
-            {label: 'is_order', value: 'Is Order'},
-            {label: 'is_prepaid', value: 'Is Prepaid'},
-            {label: 'is_replacement', value: 'Is Replacement'},
-            {label: 'is_callback', value: 'Is Callback'},
-            {label: 'is_scheme_app', value: 'Is Scheme App'},
-            {label: 'out_of_stock', value: 'Out Of Stock'},
-            {label: 'is_product_app', value: 'Is Product App'},
-            {label: 'adt_applicable', value: 'ADT Applicable'},
-            {label: 'is_textbox_req', value: 'Is TextBox REQ'},
-            {label: 'is_urgent', value: 'Is Urgent'},
-            {label: 'is_remark_date_app', value: 'Is Remark Date App'},
+        smsTypeOptions: [
+            { label: 'alcobanSms', value: 'ALCOBAN SMS' },
+            { label: 'complaintCCA_CNC', value: 'CUSTOMER NOT CONTACTABLE' },
+            {
+                label: 'complaintCCA_OWEI',
+                value: 'COMPLAINT CCA-ORDERS WITH EMAIL ID',
+            },
+            {
+                label: 'complaintCCA_OWNEI',
+                value: 'COMPLAINT CCA-ORDERS WITHOUT EMAIL ID',
+            },
+            { label: 'complaintORC', value: 'CREATE ORDER REFUND-CHEQUE' },
+            { label: 'complaintORN', value: 'CREATE ORDER REFUND-NEFT' },
+            { label: 'complaintRPIM', value: 'CREATE RPI-MANUAL' },
+            {
+                label: 'complaintRPI',
+                value: 'CREATE RPI-TV-SHOP COURIER ASSIGNED',
+            },
+            { label: 'complaintSCD', value: 'COMPLAINT SERVICE DETAILS' },
+            { label: 'createComplant', value: 'CREATE COMPLAINT' },
+            { label: 'dealerDelivered', value: 'DEALER DELIVERED' },
+            {
+                label: 'dealerDeliveredBI',
+                value: 'DEALER DELIVERED BOY INTRANSIT',
+            },
+            { label: 'dispositionMsg', value: 'DISPOSITION MESSAGE' },
+            { label: 'hold', value: 'HOLD' },
+            { label: 'inTransitDB', value: 'IN-TRANSIT-DELIVERY-BOY' },
+            { label: 'invoiceSent', value: 'INVOICE SENT' },
+        ],
+        applicableCriteriaOptions: [
+            { label: 'is_order', value: 'Is Order' },
+            { label: 'is_prepaid', value: 'Is Prepaid' },
+            { label: 'is_replacement', value: 'Is Replacement' },
+            { label: 'is_callback', value: 'Is Callback' },
+            { label: 'is_scheme_app', value: 'Is Scheme App' },
+            { label: 'out_of_stock', value: 'Out Of Stock' },
+            { label: 'is_product_app', value: 'Is Product App' },
+            { label: 'adt_applicable', value: 'ADT Applicable' },
+            { label: 'is_textbox_req', value: 'Is TextBox REQ' },
+            { label: 'is_urgent', value: 'Is Urgent' },
+            { label: 'is_remark_date_app', value: 'Is Remark Date App' },
         ],
     }
-
 
     return (
         <DispositionLayout>

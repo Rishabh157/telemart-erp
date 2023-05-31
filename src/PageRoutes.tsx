@@ -165,8 +165,6 @@ import EditDispositionThreeWrapper from './pages/disposition/dispositionCaller/d
 import AddDispositionTwoWrapper from './pages/disposition/dispositionCaller/dispositionTwo/add/AddDispositionTwoWrapper'
 import EditDispositionTwoWrapper from './pages/disposition/dispositionCaller/dispositionTwo/edit/EditDispositionTwoWrapper'
 
-
-
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -703,29 +701,24 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three"
                         element={<DispositionThreeListingWrapper />}
-                    
                     />
                     <Route
                         path="dispositions/disposition-three/add"
                         element={<AddDispositionThreeWrappper />}
-                    
-                    />                    
+                    />
                     <Route
                         path="dispositions/disposition-three/edit/:id"
                         element={<EditDispositionThreeWrapper />}
-                    
                     />
                     <Route
                         path="dispositions/disposition-two/add"
                         element={<AddDispositionTwoWrapper />}
-                    
-                    />                    
+                    />
                     <Route
                         path="dispositions/disposition-two/edit/:id"
                         element={<EditDispositionTwoWrapper />}
-                    
                     />
-                    
+
                     {/* Website Blog route */}
                     <Route
                         path="all-websites/website-blog"
