@@ -38,7 +38,7 @@ const DispositionComplaintListing = ({
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Disposition Complaint',
-            path: '/disposition-complaint',
+            path: '/dashboard',
         },
         {
             label: 'Disposition Complaint',
@@ -58,7 +58,7 @@ const DispositionComplaintListing = ({
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Disposition-complaint
+                    + Add   
                 </button>
             </div>
 

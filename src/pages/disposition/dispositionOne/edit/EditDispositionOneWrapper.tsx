@@ -40,7 +40,7 @@ const EditDispositionOneWrappper = () => {
     }, [data, dispatch, isFetching, isLoading])
 
     const validationSchema = object({
-        dispositionName: string().required('Name is required'),
+        dispositionName: string().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -56,7 +56,7 @@ const EditDispositionOneWrappper = () => {
                     if (res?.data?.status) {
                         showToast(
                             'success',
-                            'Disposition Updated successfully!'
+                            'Updated successfully!'
                         )
                         navigate('/dispositions/disposition-one')
                     } else {

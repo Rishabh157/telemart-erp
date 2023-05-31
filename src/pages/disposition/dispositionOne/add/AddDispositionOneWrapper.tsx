@@ -22,7 +22,7 @@ const AddDispositionOneWrappper = () => {
         dispositionName: '',
     }
     const validationSchema = object({
-        dispositionName: string().required('Name is required'),
+        dispositionName: string().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -33,7 +33,7 @@ const AddDispositionOneWrappper = () => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Disposition added successfully!')
+                        showToast('success', 'Added successfully!')
                         navigate('/dispositions/disposition-one')
                     } else {
                         showToast('error', res?.data?.message)

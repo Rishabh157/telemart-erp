@@ -17,11 +17,11 @@ const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Languages',
-            path: '/configurations/language',
+            label: 'Disposition-One',
+            path: '/dispositions/disposition-one',
         },
         {
-            label: 'Add Language',
+            label: 'Add Disposition-one',
         },
     ]
 

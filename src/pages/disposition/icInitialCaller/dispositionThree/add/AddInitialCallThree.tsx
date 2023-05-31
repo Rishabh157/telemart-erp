@@ -36,7 +36,7 @@ const AddInitialCallThree = ({
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'IntialCall-Three',
-            path: '/dispositions/initialcaller-three',
+            path: '/dispositions/initialcall-three',
         },
         {
             label: 'Add InitialCall-Three',
