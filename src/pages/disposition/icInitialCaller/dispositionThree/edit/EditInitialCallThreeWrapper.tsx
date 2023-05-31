@@ -96,7 +96,7 @@ const EditInitialCallThreeWrapper = () => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Call updated successfully!')
+                        showToast('success', 'Updated successfully!')
                         navigate('/dispositions/initialcall-three')
                     } else {
                         showToast('error', res?.data?.message)
