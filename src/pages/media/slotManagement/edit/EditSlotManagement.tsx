@@ -220,7 +220,6 @@ const EditSlotManagement = ({
                                         name="slotEndTime"
                                         value={values.slotEndTime || null}
                                         label="Enddate Time"
-                                     
                                         onChange={(newValue) => {
                                             setFieldValue(
                                                 'slotEndTime',

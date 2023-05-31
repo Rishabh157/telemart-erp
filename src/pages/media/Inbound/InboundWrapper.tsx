@@ -42,7 +42,7 @@ export type FormInitialValues = {
         districtId: string
         tehsilId: string
         areaId: string
-        pincodeId:string
+        pincodeId: string
         expectedDeliveryDate: string
         profileDeliveredBy: string
         complaintDetails: string
@@ -106,12 +106,12 @@ const InbouundWrapper = () => {
             deliveryCharges: 0,
             discount: 0,
             total: 0,
-            countryId: "",
-            stateId: "",
-            districtId: "",
-            tehsilId: "",
-            areaId: "",
-            pincodeId:"",
+            countryId: '',
+            stateId: '',
+            districtId: '',
+            tehsilId: '',
+            areaId: '',
+            pincodeId: '',
             expectedDeliveryDate: '',
             profileDeliveredBy: '',
             complaintDetails: '',
@@ -125,7 +125,7 @@ const InbouundWrapper = () => {
             realtion: '',
             agentDistrictId: '',
             landmark: '',
-          
+
             whatsappNo: '',
             gender: '',
             prepaid: '',
@@ -188,7 +188,7 @@ const InbouundWrapper = () => {
             ...values.addressInformation,
             ...values.personalInformation,
         }
-        setApiStatus(true)  
+        setApiStatus(true)
         setTimeout(() => {
             AddInbopundCaller({
                 ...valuesInbound,
@@ -236,11 +236,10 @@ const InbouundWrapper = () => {
         (state: RootState) => state.areas
     )
 
-
     const { items: Channelitems }: any = useSelector(
         (state: RootState) => state.channelGroup
     )
-    console.log("Channelitems",Channelitems)
+    console.log('Channelitems', Channelitems)
     //state
     const {
         data: stateData,
@@ -306,7 +305,7 @@ const InbouundWrapper = () => {
     //registration
 
     const dropdownOptions = {
-        counrtyOptions: allCountry?.map((ele:CountryListResponse) => {
+        counrtyOptions: allCountry?.map((ele: CountryListResponse) => {
             return { label: ele?.countryName, value: ele?._id }
         }),
         stateOptions: allStates?.map((ele: StateListResponse) => {
@@ -319,7 +318,7 @@ const InbouundWrapper = () => {
         tehsilOptions: allTehsils?.map((ele: TehsilListResponse) => {
             return { label: ele?.tehsilName, value: ele?._id }
         }),
-        areaOptions: allArea?.map((ele:AreaListResponse) => {
+        areaOptions: allArea?.map((ele: AreaListResponse) => {
             return { label: ele?.area, value: ele?._id }
         }),
         channelOptions: allDistricts?.map((ele: DistrictListResponse) => {

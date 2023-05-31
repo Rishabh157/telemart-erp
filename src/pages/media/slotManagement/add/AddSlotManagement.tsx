@@ -53,14 +53,16 @@ const AddSlotManagement = ({
     const [showSlots, setShowSlots] = useState(false)
 
     // const options = ['FIXED', 'FLEXIBLE']
-    const options=[{
-        label:"Fixed",
-        value:"FIXED"
-    },
-    {
-        label:"Flexible",
-        value:"FLEXIBLE"
-    }]
+    const options = [
+        {
+            label: 'Fixed',
+            value: 'FIXED',
+        },
+        {
+            label: 'Flexible',
+            value: 'FLEXIBLE',
+        },
+    ]
 
     const getDates = (startDate: any, endDate: any) => {
         const dateArray = []
@@ -206,7 +208,7 @@ const AddSlotManagement = ({
                                         name={`date`}
                                         value={slotStartDate}
                                         label="Slot Start Date"
-                                       dateTimeFormat="MM/DD/YY ddd"
+                                        dateTimeFormat="MM/DD/YY ddd"
                                         onChange={(newValue) =>
                                             setSlotStartDate(newValue)
                                         }
@@ -217,7 +219,7 @@ const AddSlotManagement = ({
                                         name={`endDate`}
                                         value={slotEndDate}
                                         label="Slot End Date"
-                                       dateTimeFormat="MM/DD/YY ddd"
+                                        dateTimeFormat="MM/DD/YY ddd"
                                         onChange={(newValue) =>
                                             setSlotEndDate(newValue)
                                         }

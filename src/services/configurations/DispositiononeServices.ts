@@ -6,7 +6,6 @@ import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
 
 export const dispositionOneApi = apiSlice.injectEndpoints({
-
     endpoints: (builder) => ({
         //***** GET *****/
         getdispositionOne: builder.query({
@@ -29,11 +28,11 @@ export const dispositionOneApi = apiSlice.injectEndpoints({
         }),
         getAlldispositionOneunauth: builder.query({
             providesTags: ['dispositionOne'],
-            
+
             query: () => ({
                 url: '/disposition-one/unauth/get-all',
                 method: 'GET',
-                extra:'true,"dsfdsf',
+                extra: 'true,"dsfdsf',
                 // body,
             }),
         }),

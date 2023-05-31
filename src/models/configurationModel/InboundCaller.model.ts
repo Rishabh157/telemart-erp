@@ -27,7 +27,7 @@ export type addressInformation = {
     districtId: string
     tehsilId: string
     areaId: string
-    pincodeId:string
+    pincodeId: string
     expectedDeliveryDate: string
     profileDeliveredBy: string
     complaintDetails: string
@@ -50,7 +50,10 @@ export type personalInformation = {
     remark: string
 }
 
-export interface AddInboundCaller extends generalInformation, addressInformation, generalInformation {
+export interface AddInboundCaller
+    extends generalInformation,
+        addressInformation,
+        generalInformation {
     dispositionLevelTwoId: string
     dispositionLevelThreeId: string
     schemeId: string

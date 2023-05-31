@@ -59,16 +59,15 @@ const ATMDatePicker = ({
                                 size="small"
                                 fullWidth
                                 className="bg-white"
-                                style={{height: size === 'xs' ? '30px' : '', 
-                            }}
+                                style={{ height: size === 'xs' ? '30px' : '' }}
                                 // InputProps={{
                                 //     style: {
-                                        
+
                                 //         // height: size === 'xs' ? '30px' : '',
                                 //         borderColor: 'rgb(51 65 85)',
                                 //         // borderWidth: '0.5px',
                                 //     },
-                                // }}  
+                                // }}
                                 error={value === '' ? false : undefined}
                             />
                         )}

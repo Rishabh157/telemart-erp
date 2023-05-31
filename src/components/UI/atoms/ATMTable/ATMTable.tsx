@@ -25,8 +25,8 @@ interface ATMTablePropTypes<T> {
     onClick?: (event: any) => void
     headerClassName?: string
     rowClassName?: string
-    noDataFoundText?:string
-    noDataFoundClass?:string
+    noDataFoundText?: string
+    noDataFoundClass?: string
 }
 
 const NOT_DATA_FOUND = 'No Data Found'
@@ -44,7 +44,7 @@ const ATMTable = <T extends {}>({
     headerClassName = ' py-2 px-2',
     rowClassName = 'px-2 bg-white',
     noDataFoundText = `${NOT_DATA_FOUND}`,
-    noDataFoundClass='text-slate-500'
+    noDataFoundClass = 'text-slate-500',
 }: ATMTablePropTypes<T>) => {
     return (
         <div
@@ -168,7 +168,9 @@ const ATMTable = <T extends {}>({
                     </div>
                 ))
             ) : (
-                <div className={`w-full flex justify-center  ${noDataFoundClass}`}>
+                <div
+                    className={`w-full flex justify-center  ${noDataFoundClass}`}
+                >
                     {noDataFoundText}
                 </div>
             )}
