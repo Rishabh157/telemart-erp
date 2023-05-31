@@ -160,6 +160,7 @@ import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsit
 import DispositionTwoListingWrapper from './pages/disposition/dispositionCaller/dispositionTwo/list/DispositionTwoListingWrapper'
 import DispositionThreeListingWrapper from './pages/disposition/dispositionCaller/dispositionThree/list/DispositionThreeListingWrapper'
 import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
+import BatchLisitngWrapper from './pages/batch/list/BatchLisitngWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -711,6 +712,10 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
+                    />
+                     <Route
+                        path="batch"
+                        element={<BatchLisitngWrapper />}
                     />
                 </Routes>
             </BrowserRouter>
