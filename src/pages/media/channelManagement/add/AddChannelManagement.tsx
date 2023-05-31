@@ -15,6 +15,7 @@ import { RootState } from 'src/redux/store'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
+
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -230,7 +231,7 @@ const AddChannelManagement = ({
                                 name="language"
                                 value={values.language}
                                 label="Language"
-                                onChange={(value) =>
+                                onChange={(value: any) =>
                                     setFieldValue('language', value)
                                 }
                             />

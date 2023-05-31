@@ -1,43 +1,46 @@
 import React, { useEffect, useState } from 'react'
-import AddCountryDialog from './EditDispositionOne'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import {
-    useAdddispositionOneMutation,
     useGetdispositionOneByIdQuery,
     useUpdatedispositionOneMutation,
 } from 'src/services/configurations/DispositiononeServices'
 import { useNavigate, useParams } from 'react-router-dom'
 import AddDispositionOne from './EditDispositionOne'
 import DispositionLayout from '../../DispositionLayout'
+import { setSelectedDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
 
 export type FormInitialValues = {
     dispositionName: string
 }
-const AddDispositionOneWrappper = () => {
+const EditDispositionOneWrappper = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [editDispositionOne] = useUpdatedispositionOneMutation()
     const params = useParams()
     const Id = params.id
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
-    const { selectedDispositionOne } = useSelector(
+    const { selectedDispositionOne }: any = useSelector(
         (state: RootState) => state?.dispositionOne
     )
 
     const { data, isLoading, isFetching } = useGetdispositionOneByIdQuery(Id)
     const initialValues: FormInitialValues = {
-        dispositionName: '',
+        dispositionName: selectedDispositionOne?.dispositionName || '',
     }
 
-    useEffect(() => {})
+    useEffect(() => {
+        if (!isLoading && !isFetching)
+            dispatch(setSelectedDispositionOne(data?.data))
+    }, [data, dispatch, isFetching, isLoading])
 
     const validationSchema = object({
-        dispositionName: string().required('Name is required'),
+        dispositionName: string().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -51,7 +54,7 @@ const AddDispositionOneWrappper = () => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Disposition added successfully!')
+                        showToast('success', 'Updated successfully!')
                         navigate('/dispositions/disposition-one')
                     } else {
                         showToast('error', res?.data?.message)
@@ -69,6 +72,7 @@ const AddDispositionOneWrappper = () => {
             <DispositionLayout>
                 {' '}
                 <Formik
+                    enableReinitialize
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmitHandler}
@@ -87,4 +91,4 @@ const AddDispositionOneWrappper = () => {
     )
 }
 
-export default AddDispositionOneWrappper
+export default EditDispositionOneWrappper

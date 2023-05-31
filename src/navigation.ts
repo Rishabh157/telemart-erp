@@ -1,6 +1,6 @@
 import { RxDashboard } from 'react-icons/rx'
 import { FiUsers } from 'react-icons/fi'
-import { TbBuildingWarehouse, TbSettings2 } from 'react-icons/tb'
+import { TbBuildingWarehouse } from 'react-icons/tb'
 import { HiOutlineTruck } from 'react-icons/hi'
 import { FaRegHandshake } from 'react-icons/fa'
 import { CiBoxes } from 'react-icons/ci'
@@ -91,11 +91,11 @@ export const navigation: NavItemType[] = [
         icon: MdPermMedia,
         path: '/media/did',
     },
-    {
-        label: 'Disposition',
-        icon: TbSettings2,
-        path: '/disposition',
-    },
+    // {
+    //     label: 'Disposition',
+    //     icon: TbSettings2,
+    //     path: '/disposition',
+    // },
     {
         label: 'Dispositions',
         icon: AiOutlineSetting,
