@@ -1,17 +1,17 @@
-import { FormikProps } from 'formik'
 import React, { useEffect } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './AddInitialCallThreeWrapper'
+import { FormInitialValues } from './EditInitialCallThreeWrapper'
+import { FormikProps } from 'formik'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { SelectOption } from 'src/models/FormField/FormField.model'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { setAllItems as setAllItemsdisposition } from 'src/redux/slices/configuration/initialCallerTwoSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useGetAllinitialCallerTwoByIdQuery } from 'src/services/configurations/InitialCallerTwoServices'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import { setAllItems as setAllItemsdisposition } from 'src/redux/slices/configuration/initialCallerTwoSlice'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -26,12 +26,13 @@ type Props = {
     }
 }
 
-const AddInitialCallThree = ({
+const EditInitialCallThree = ({
     formikProps,
     apiStatus,
     dropdownoptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+
     const dispatch = useDispatch()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -67,7 +68,7 @@ const AddInitialCallThree = ({
 
     useEffect(() => {
         if (!dispositionisFetching && !dispositionisLoading) {
-            dispatch(setAllItemsdisposition(dispositionData?.data))
+            dispatch(setAllItemsdisposition(dispositionData?.data || []))
         }
     }, [dispositionData, dispositionisLoading, dispositionisFetching, dispatch])
 
@@ -82,7 +83,7 @@ const AddInitialCallThree = ({
 
                     {/* Page Heading */}
                     <div className="pt-1">
-                        <ATMPageHeading> Add Disposition-Three </ATMPageHeading>
+                        <ATMPageHeading> Disposition-Three</ATMPageHeading>
                     </div>
 
                     <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -98,10 +99,7 @@ const AddInitialCallThree = ({
                                 <button
                                     type="button"
                                     disabled={apiStatus}
-                                    onClick={() => {
-                                        console.log(formikProps)
-                                        formikProps.handleSubmit()
-                                    }}
+                                    onClick={() => formikProps.handleSubmit()}
                                     className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                         apiStatus ? 'opacity-50' : ''
                                     }`}
@@ -205,4 +203,4 @@ const AddInitialCallThree = ({
     )
 }
 
-export default AddInitialCallThree
+export default EditInitialCallThree

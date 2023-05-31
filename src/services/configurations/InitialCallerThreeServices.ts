@@ -1,9 +1,9 @@
-import { PaginationType } from 'src/models/common/paginationType'
-import apiSlice from '../ApiSlice'
 import {
     AddInitialCallerThree,
     UpdateInitialCallerThree,
-} from 'src/models/configurationModel/InitialCallerThree.model'
+} from './../../models/configurationModel/InitialCallerThree.model'
+import { PaginationType } from 'src/models/common/paginationType'
+import apiSlice from '../ApiSlice'
 
 export const initialCallerThreeApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

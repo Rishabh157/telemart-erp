@@ -1,41 +1,47 @@
 import React, { useEffect, useState } from 'react'
+import { HiDotsHorizontal } from 'react-icons/hi'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-import InitialCallThreeListing from './InitialCallThreeListing'
+import { useNavigate } from 'react-router-dom'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
+
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/configuration/initialCallerThreeSlice'
+} from 'src/redux/slices/configuration/dispositionComplaintSlice'
+import DispositionLayout from '../../DispositionLayout'
+import DispositionComplaintListing from './DispositionComplaintListing'
 import {
-    useDeleteInitialCallerThreeMutation,
-    useGetInitialCallerThreeQuery,
-} from 'src/services/configurations/InitialCallerThreeServices'
-import { useNavigate } from 'react-router-dom'
-import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
-import { HiDotsHorizontal } from 'react-icons/hi'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
+    useDeletedispositionComplaintMutation,
+    useGetdispositionComplaintQuery,
+} from 'src/services/configurations/DispositionComplaintServices'
+import { DispositionComplaintListResponse } from 'src/models/configurationModel/DispositionComplaint.model'
 
-const InitialCallThreeListingWrapper = () => {
+// export type language ={
+//     languageId:string[];
+
+// }
+
+const DispositionComplaintListingWrapper = () => {
     const navigate = useNavigate()
-    const [deleteIniticallthree] = useDeleteInitialCallerThreeMutation()
+    const [deletecomaplaint] = useDeletedispositionComplaintMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
-    const initialCallThreeState: any = useSelector(
-        (state: RootState) => state.initialCallerThree
+    const dispositionComplaintState: any = useSelector(
+        (state: RootState) => state.dispositionComplaint
     )
 
-    const { page, rowsPerPage, searchValue, items } = initialCallThreeState
+    const { page, rowsPerPage, searchValue, items } = dispositionComplaintState
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetInitialCallerThreeQuery({
+    const { data, isFetching, isLoading } = useGetdispositionComplaintQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['initailCallName'],
+        params: ['dispositionName'],
         page: page,
         filterBy: [
             {
@@ -63,11 +69,11 @@ const InitialCallThreeListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'initialCallName',
-            headerName: 'Initialcall-Three',
+            field: 'dispositionName',
+            headerName: 'Disposition Complaint',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.initialCallName} </span>
+            renderCell: (row: DispositionComplaintListResponse) => (
+                <span> {row.dispositionName} </span>
             ),
         },
 
@@ -100,8 +106,8 @@ const InitialCallThreeListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete InitialCaller-Three',
-                                        text: 'Do you want to delete InitialCaller-Three?',
+                                        title: 'Delete Tape',
+                                        text: 'Do you want to delete Disposition-One?',
                                         showCancelButton: true,
                                         next: (res: any) => {
                                             return res.isConfirmed
@@ -124,13 +130,10 @@ const InitialCallThreeListingWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteIniticallthree(currentId).then((res: any) => {
+        deletecomaplaint(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        'Initiacall-Three deleted successfully!'
-                    )
+                    showToast('success', 'Complaint deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -146,15 +149,16 @@ const InitialCallThreeListingWrapper = () => {
     return (
         <>
             <DispositionLayout>
-                {' '}
-                <InitialCallThreeListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
+                <div className="h-full">
+                    <DispositionComplaintListing
+                        columns={columns}
+                        rows={items}
+                        setShowDropdown={setShowDropdown}
+                    />
+                </div>
             </DispositionLayout>
         </>
     )
 }
 
-export default InitialCallThreeListingWrapper
+export default DispositionComplaintListingWrapper

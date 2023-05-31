@@ -8,7 +8,7 @@ import { DiDart } from 'react-icons/di'
 import { FaTape } from 'react-icons/fa'
 import { GrChannel } from 'react-icons/gr'
 import { SiGoogletagmanager } from 'react-icons/si'
-import { MdEmojiEvents} from 'react-icons/md'
+import { MdEmojiEvents } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const dispositionNavigation: NavItemType[] = [
@@ -30,17 +30,17 @@ const dispositionNavigation: NavItemType[] = [
     {
         label: 'IC-One',
         icon: DiDart,
-        path: '/dispositions/incoming-call-one',
+        path: '/dispositions/initialcall-one',
     },
     {
         label: 'IC-Two',
         icon: BsPersonHeart,
-        path: '/dispositions/incoming-call-two',
+        path: '/dispositions/initialcall-two',
     },
     {
         label: 'IC-Three',
         icon: FaTape,
-        path: '/dispositions/incoming-call-three',
+        path: '/dispositions/initialcall-three',
     },
     {
         label: 'Disposition Complaint',
