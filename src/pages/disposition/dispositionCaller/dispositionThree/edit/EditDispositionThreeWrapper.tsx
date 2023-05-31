@@ -109,6 +109,7 @@ const EditDispositionThreeWrappper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        console.log(values.applicableCriteria)
         updatedispositionThree({
             body: {
                 dispositionName: values.dispositionName,
@@ -203,10 +204,10 @@ const EditDispositionThreeWrappper = () => {
             { label: 'invoiceSent', value: 'INVOICE SENT' },
         ],
         applicableCriteriaOptions: [
-            { label: 'Is Order', value: 'isOrder' },
-            { label: 'Is Prepaid', value: 'isPrepaid' },
-            { label: 'Is Replacement', value: 'isReplacement' },
-            { label: 'Is Callback', value: 'isCallback' },           
+            { label: 'IS ORDER', value: 'IS ORDER' },
+            { label: 'IS PREPAID', value: 'IS PREPAID' },
+            { label: 'IS CALLBACK', value: 'IS CALLBACK' },
+            { label: 'IS REPLACEMENT', value: 'IS REPLACEMENT' },           
         ],
     }
 
