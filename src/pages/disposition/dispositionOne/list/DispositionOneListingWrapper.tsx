@@ -97,7 +97,7 @@ const DispositionOneListingWrapper = () => {
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
-                                    navigate(`edit/${row?._id}`)
+                                    navigate(`${row?._id}`)
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >

@@ -1,9 +1,5 @@
-export type InitialCallerThreeListResponse = {
-    initialCallName: string
-    initialCallOneLabel: string
-    initialCallTwoLabel: string
-    initialCallOneId: string
-    initialCallTwoId: string
+export type DispositionComplaintListResponse = {
+    dispositionName: string
     companyId: string
     isActive: boolean
     isDeleted: boolean
@@ -23,11 +19,6 @@ enum emailType {
     officialEmail = 'OFFICIAL EMAIL',
     buisnessEmail = 'BUISNESS EMAIL',
     companyEmail = 'COMPANY EMAIL',
-}
-enum returnType {
-    Escalate = 'ESCALATE',
-    Replacement = 'REPLACEMENT',
-    Refund = 'REFUND',
 }
 
 enum smsType {
@@ -49,26 +40,20 @@ enum smsType {
     invoiceSent = 'INVOICE SENT',
 }
 
-export type AddInitialCallerThree = {
-    initialCallName: string
-    initialCallOneId: string
-    initialCallTwoId: string
-    complaintType: string
+export type AddDispositionComplaint = {
+    dispositionName: string
+    priority: string
     emailType: string
     smsType: string
-    returnType: string[]
     companyId: string
 }
 
-export type UpdateInitialCallerThree = {
+export type UpdateDispositionComplaint = {
     body: {
-        initialCallName: string
-        initialCallOneId: string
-        initialCallTwoId: string
-        complaintType: string
+        dispositionName: string
+        priority: String
         emailType: string
         smsType: string
-        returnType: string[]
         companyId: string
     }
     id: string

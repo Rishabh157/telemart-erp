@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-import DispositionListView from '../../sharedComponents/DispositionListView'
-
 import {
     setRowsPerPage,
     setPage,
     setSearchValue,
 } from 'src/redux/slices/configuration/dispositionThreeSlice'
-import { showToast } from 'src/utils'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'

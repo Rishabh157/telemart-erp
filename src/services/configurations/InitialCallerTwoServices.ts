@@ -26,6 +26,14 @@ export const initialCallerTwoApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+        getAllinitialCallerTwoById: builder.query({
+            providesTags: ['initialCallerTwo'],
+            query: (Id) => ({
+                url: `/initialcall-two/get-all/${Id}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
 
         //***** ADD *****/
         addinitialCallerTwo: builder.mutation({
@@ -88,6 +96,7 @@ export const {
     useAddinitialCallerTwoMutation,
     useUpdateinitialCallerTwoMutation,
     useGetinitialCallerTwoByIdQuery,
+    useGetAllinitialCallerTwoByIdQuery,
     useExportinitialCallerTwoDataMutation,
     useDeleteinitialCallerTwoMutation,
     useGetAllinitialCallerTwoQuery,
