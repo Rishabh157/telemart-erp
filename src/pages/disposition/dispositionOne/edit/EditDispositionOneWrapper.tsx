@@ -54,10 +54,7 @@ const EditDispositionOneWrappper = () => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Updated successfully!'
-                        )
+                        showToast('success', 'Updated successfully!')
                         navigate('/dispositions/disposition-one')
                     } else {
                         showToast('error', res?.data?.message)

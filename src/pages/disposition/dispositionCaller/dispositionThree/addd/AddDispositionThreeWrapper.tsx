@@ -40,6 +40,10 @@ const AddDispositionThreeWrappper = ({ onClose }: Props) => {
                 dispositionName: values.dispositionName,
                 dispositionOneId: selectedDispositionOne?.value || '',
                 dispositionTwoId: selectedDispostion?.value || '',
+                applicableCriteria: [''],
+                smsType: '',
+                emailType: '',
+                priority: '',
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
