@@ -1,6 +1,6 @@
 import React from 'react'
 import {  FormikProps } from 'formik'
-import { FormInitialValues } from './AddSlotManagementWrapper'
+import { FormInitialValues } from './AddDispositionTwoWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -15,25 +15,20 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     dropdownOptions: {
-			DispotionOneOptions: SelectOption[]
-			DispositionTwoOptions: SelectOption[]
-			priorityOptions: SelectOption[]
-			smsTypeOptions: SelectOption[]
-			emailTypeOptions: SelectOption[]
-			applicableCriteriaOptions: SelectOption[]
+		DispotionOneOptions: SelectOption[]			
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: ' Dispositions',
-        path: '/dispositions/disposition-three',
+        path: '/dispositions/disposition-two',
     },
     {
-        label: 'Add Disposition L-3',
+        label: 'Add Disposition L-2',
     },
 ]
 
-const AddDispositionThree = ({
+const AddDispositionTwo = ({
     formikProps,
     apiStatus,
     dropdownOptions,
@@ -54,13 +49,13 @@ const AddDispositionThree = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Disposition L-3</ATMPageHeading>
+                    <ATMPageHeading> Add New Disposition L-2</ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">Disposition L-3 Details</div>
+                        <div className="text-xl font-medium">Details</div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -93,7 +88,7 @@ const AddDispositionThree = ({
                                     setFieldValue('dispositionName', e.target.value)
                                 }}
                             />
-                            <ATMSelectSearchable
+                             <ATMSelectSearchable
                                 name="dispositionOneId"
                                 value={values.dispositionOneId}
                                 onChange={(e) =>
@@ -103,55 +98,7 @@ const AddDispositionThree = ({
                                 label="Disposition One"
                             />
                             
-                            <div className="">
-                                <ATMSelectSearchable
-                                    name="dispositionTwoId"
-                                    required
-                                    value={values.dispositionTwoId}
-                                    onChange={(e) =>
-                                        setFieldValue('dispositionTwoId', e)
-                                    }
-                                    options={dropdownOptions.DispositionTwoOptions}
-                                    label="Disposition Two"
-                                />
-                            </div>
-
-                            <ATMSelectSearchable
-                                name="smsType"
-                                required
-                                value={values.smsType}
-                                onChange={(e) => setFieldValue('smsType', e)}
-                                options={dropdownOptions.smsTypeOptions}
-                                label="SMS Type"
-                            />
-
-                            <ATMSelectSearchable
-															name="emailType"
-															required
-															value={values.emailType}
-															onChange={(e) => setFieldValue('emailType', e)}
-															options={dropdownOptions.emailTypeOptions}
-															label="Email Type"                                
-                            />
-
-														<ATMSelectSearchable
-															name="priority"
-															required
-															value={values.priority}
-															onChange={(e) => setFieldValue('priority', e)}
-															options={dropdownOptions.priorityOptions}
-															label="Priority"                                
-                            />
-
-														<ATMSelectSearchable
-															name="applicableCriteria"
-															required
-															isMulti={true}
-															value={values.applicableCriteria}
-															onChange={(e) => setFieldValue('applicableCriteria', e)}
-															options={dropdownOptions.applicableCriteriaOptions}
-															label="Applicable Criteria"                                 
-                            />
+                          
                         </div>
                         
                     </div>
@@ -161,4 +108,4 @@ const AddDispositionThree = ({
     )
 }
 
-export default AddDispositionThree
+export default AddDispositionTwo

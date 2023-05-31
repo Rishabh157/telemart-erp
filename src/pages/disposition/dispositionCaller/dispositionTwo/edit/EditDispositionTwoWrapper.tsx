@@ -2,37 +2,52 @@ import React, { useEffect, useState } from 'react'
 import DispositionLayout from '../../../DispositionLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
 import { setAllItems as setAllDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
-import AddDispositionTwo from './AddDispositionTwo'
-import { useAdddispositionTwoMutation } from 'src/services/configurations/DispositionTwoServices'
-
+import EditDispositionTwo from './EditDispositionTwo'
+import { useGetdispositionTwoByIdQuery, useUpdatedispositionTwoMutation } from 'src/services/configurations/DispositionTwoServices'
+import {setSelectedDispostion} from 'src/redux/slices/configuration/dispositionTwoSlice'
 
 export type FormInitialValues = {
 	dispositionName: string
-	dispositionOneId: string
+	dispositionOneId: string	
     companyId: string
 }
 
 
-const AddDispositionTwoWrapper = () => {
+const EditDispositionTwoWrapper = () => {
     const navigate = useNavigate()
+    const params = useParams()
+    const Id = params.id
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
+
+   const [updatedispositionTwo] =  useUpdatedispositionTwoMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     
     const { allItems: dispositionOne }: any = useSelector(
         (state: RootState) => state.dispositionOne
-    )    
+    )
 
-    const [adddispositionTwo] = useAdddispositionTwoMutation()
     
+
+    const { selectedDispostion }: any = useSelector(
+        (state: RootState) => state?.dispositionTwo
+    )
+
+    const {data, isLoading, isFetching} = useGetdispositionTwoByIdQuery(Id)
+
+    useEffect(() => {
+        if(!isLoading && !isFetching){
+            dispatch(setSelectedDispostion(data?.data || []))
+        }
+    }, [isLoading, isFetching, data, dispatch])
 
     const {
 			isLoading: isDOLoading,
@@ -46,11 +61,11 @@ const AddDispositionTwoWrapper = () => {
         }
     }, [isDOLoading, isDOFetching, DoData, dispatch])    
     
-
    
     const initialValues: FormInitialValues = {
-			dispositionName: '',
-			dispositionOneId: '',			
+			dispositionName: selectedDispostion?.dispositionName || "",
+			dispositionOneId: selectedDispostion?.dispositionOneId || "",
+			
 			companyId: userData?.companyId || '',
     }
 
@@ -62,14 +77,17 @@ const AddDispositionTwoWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        adddispositionTwo({
-            dispositionName: values.dispositionName,
-            dispositionOneId: values.dispositionOneId,            
-            companyId: values.companyId || '',
+        updatedispositionTwo({
+            body:{
+                dispositionName: values.dispositionName,
+                dispositionOneId: values.dispositionOneId,
+                companyId: values.companyId || '',
+            },
+            id: Id || ''
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Disposition Two Added successfully!')
+                    showToast('success', 'Disposition Two Updated successfully!')
                     navigate('/dispositions/disposition-two')
                 } else {
                     showToast('error', res?.data?.message)
@@ -81,7 +99,6 @@ const AddDispositionTwoWrapper = () => {
         })
     }
 
-
     const dropdownOptions = {
         DispotionOneOptions: dispositionOne?.map(
             (dispositionOne: DispositionOneListResponse) => {
@@ -92,19 +109,21 @@ const AddDispositionTwoWrapper = () => {
             }
         ),
 
+        
     }
 
 
     return (
         <DispositionLayout>
             <Formik
+                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
-                        <AddDispositionTwo
+                        <EditDispositionTwo
                             dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
                             formikProps={formikProps}
@@ -116,4 +135,4 @@ const AddDispositionTwoWrapper = () => {
     )
 }
 
-export default AddDispositionTwoWrapper
+export default EditDispositionTwoWrapper
