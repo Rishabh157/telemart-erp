@@ -1,79 +1,75 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { array, object, string } from 'yup'
+import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
-import { useAddInitialCallerThreeMutation } from 'src/services/configurations/InitialCallerThreeServices'
-import AddInitialCallThree from './AddInitialCallThree'
-import { useNavigate } from 'react-router-dom'
-import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
-import { setAllItems } from 'src/redux/slices/configuration/initialCallerOneSlice'
+import { useNavigate, useParams } from 'react-router-dom'
+import AddDispositionOne from './EditDispositionComplaint'
+import DispositionLayout from '../../DispositionLayout'
+import {
+    useGetdispositionComplaintByIdQuery,
+    useUpdatedispositionComplaintMutation,
+} from 'src/services/configurations/DispositionComplaintServices'
+import { setSelectedDispositionComplaint } from 'src/redux/slices/configuration/dispositionComplaintSlice'
 
 export type FormInitialValues = {
-    initialCallName: string
-    initialCallOneId: string
-    initialCallTwoId: string
-    complaintType: string
+    dispositionName: string
+    priority: string
     emailType: string
     smsType: string
-    returnType: string[]
 }
-const AddInitialCallThreeWrappper = () => {
+const EditDispositionComplaintWrappper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [addIntialCallThree] = useAddInitialCallerThreeMutation()
+    const [editDispositionComplaint] = useUpdatedispositionComplaintMutation()
+    const params = useParams()
+    const Id = params.id
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
-    const { allItems }: any = useSelector(
-        (state: RootState) => state?.initialCallerOne
+
+    const { selectedDispositionCompalint }: any = useSelector(
+        (state: RootState) => state.dispositionComplaint
     )
-    //console.log(allItems)
 
-    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery('')
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setAllItems(data?.data))
-        }
-    }, [data, isLoading, isFetching, dispatch])
+    const { data, isLoading, isFetching } =
+        useGetdispositionComplaintByIdQuery(Id)
 
     const initialValues: FormInitialValues = {
-        initialCallName: '',
-        initialCallOneId: '',
-        initialCallTwoId: '',
-        complaintType: '',
-        emailType: '',
-        smsType: '',
-        returnType: [''],
+        dispositionName: selectedDispositionCompalint?.dispositionName || '',
+        priority: selectedDispositionCompalint?.priority || '',
+        emailType: selectedDispositionCompalint?.emailType || '',
+        smsType: selectedDispositionCompalint?.smsType || '',
     }
+
     const validationSchema = object({
-        initialCallName: string().required('Required'),
-        initialCallOneId: string().required('Required'),
-        initialCallTwoId: string().required('Required'),
-        complaintType: string().required(' Required'),
+        dispositionName: string().required('Required'),
+        priority: string().required('Required'),
         emailType: string().required('Required'),
         smsType: string().required('Required'),
-        returnType: array().of(string().required('Required')),
     })
+    useEffect(() => {
+        if (!isLoading && !isFetching)
+            dispatch(setSelectedDispositionComplaint(data?.data || []))
+    }, [data, dispatch, isFetching, isLoading])
+
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            addIntialCallThree({
-                initialCallName: values.initialCallName,
-                initialCallOneId: values.initialCallOneId,
-                initialCallTwoId: values.initialCallTwoId,
-                complaintType: values.complaintType,
-                emailType: values.emailType,
-                smsType: values.smsType,
-                returnType: values.returnType,
-                companyId: userData?.companyId || '',
+            editDispositionComplaint({
+                body: {
+                    dispositionName: values.dispositionName,
+                    priority: values.priority,
+                    emailType: values.emailType,
+                    smsType: values.smsType,
+                    companyId: userData?.companyId || '',
+                },
+                id: Id || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Call added successfully!')
-                        navigate('/dispositions/initialcall-three')
+                        showToast('success', 'Updated successfully!')
+                        navigate('/dispositions/disposition-complaint')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -84,9 +80,20 @@ const AddInitialCallThreeWrappper = () => {
             })
         }, 1000)
     }
-
-    //console.log(initialCallOneOptions)
-
+    const priorityTYpe = [
+        { label: '1', value: '1' },
+        { label: '2', value: '2' },
+        { label: '3', value: '3' },
+        { label: '4', value: '5' },
+        { label: '6', value: '6' },
+        { label: '7', value: '7' },
+        { label: '8', value: '8' },
+        { label: '9', value: '9' },
+        { label: '10', value: '10' },
+        { label: '11', value: '12' },
+        { label: '13', value: '13' },
+        { label: '14', value: '14' },
+    ]
     const smstype = [
         //    { label:"alcobanSms" ,value:"ALCOBAN SMS"},
         //    { label:"complaintCCA_CNC" ,value:"CUSTOMER NOT CONTACTABLE"},
@@ -116,70 +123,50 @@ const AddInitialCallThreeWrappper = () => {
         { label: 'inTransitDB', value: 'IN-TRANSIT-DELIVERY-BOY' },
         { label: 'invoiceSent', value: 'INVOICE SENT' },
     ]
-
-    const complainttype = [
-        { label: 'complaint', value: 'COMPLAINT' },
-        { label: 'enquiry', value: 'ENQUIRY' },
-    ]
-
-    const returntype = [
-        { label: 'ESCALATE', value: 'ESCALATE' },
-        { label: 'REPLACEMENT', value: 'REPLACEMENT' },
-        { label: 'REFUND', value: 'REFUND' },
-    ]
-
     const EmailType = [
         { label: 'personalEmail', value: 'PERSONAL EMAIL' },
+        { label: 'officialEmail', value: 'OFFICIAL EMAIL' },
         { label: 'buisnessEmail', value: 'BUISNESS EMAIL' },
-        { label: 'companyEmail', value: 'COMPANY EMAIL' },
     ]
 
-    const dropdownoptions = {
-        initialCallOneOptions: allItems?.map((ele: any) => {
-            return {
-                label: ele.initialCallName,
-                value: ele._id,
-            }
-        }),
-        complainttypeOptions: complainttype?.map((ele: any) => {
-            return {
-                label: ele.label,
-                value: ele.value,
-            }
-        }),
+    const dropdownOptions = {
         smstypeOptions: smstype?.map((ele: any) => {
             return {
                 label: ele.label,
                 value: ele.value,
             }
         }),
-        returntypeOptions: returntype?.map((ele: any) => {
-            return {
-                label: ele.label,
-                value: ele.value,
-            }
-        }),
+
         emailTypeOptions: EmailType?.map((ele: any) => {
             return {
                 label: ele.label,
                 value: ele.value,
             }
         }),
+        priorityTypeOptions: priorityTYpe?.map((ele: any) => {
+            return {
+                label: ele.label,
+                value: ele.value,
+            }
+        }),
     }
+
     return (
         <>
             <DispositionLayout>
+                {' '}
                 <Formik
+                    enableReinitialize
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmitHandler}
                 >
                     {(formikProps) => {
                         return (
-                            <AddInitialCallThree
+                            <AddDispositionOne
                                 apiStatus={apiStatus}
                                 formikProps={formikProps}
-                                dropdownoptions={dropdownoptions}
+                                dropdownOptions={dropdownOptions}
                             />
                         )
                     }}
@@ -189,4 +176,4 @@ const AddInitialCallThreeWrappper = () => {
     )
 }
 
-export default AddInitialCallThreeWrappper
+export default EditDispositionComplaintWrappper

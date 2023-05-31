@@ -4,12 +4,16 @@ import { RootState } from 'src/redux/store'
 import { array, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
-import { useAddInitialCallerThreeMutation } from 'src/services/configurations/InitialCallerThreeServices'
-import AddInitialCallThree from './AddInitialCallThree'
-import { useNavigate } from 'react-router-dom'
-import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
+import { useNavigate, useParams } from 'react-router-dom'
+import EditInitialCallOne from './EditInitialCallThree'
 import DispositionLayout from 'src/pages/disposition/DispositionLayout'
+import {
+    useGetInitialCallerThreeByIdQuery,
+    useUpdateInitialCallerThreeMutation,
+} from 'src/services/configurations/InitialCallerThreeServices'
+import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 import { setAllItems } from 'src/redux/slices/configuration/initialCallerOneSlice'
+import { setSelectedInitialCallerThree } from 'src/redux/slices/configuration/initialCallerThreeSlice'
 
 export type FormInitialValues = {
     initialCallName: string
@@ -20,36 +24,53 @@ export type FormInitialValues = {
     smsType: string
     returnType: string[]
 }
-const AddInitialCallThreeWrappper = () => {
+const EditInitialCallThreeWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [addIntialCallThree] = useAddInitialCallerThreeMutation()
+    const [editInitialCallThree] = useUpdateInitialCallerThreeMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
+    const params = useParams()
+    const Id = params.id
+    const { selectedInitialCallerThree }: any = useSelector(
+        (state: RootState) => state.initialCallerThree
+    )
+
+    const initialValues: FormInitialValues = {
+        initialCallName: selectedInitialCallerThree?.initialCallName || '',
+        initialCallOneId: selectedInitialCallerThree?.initialCallOneId || '',
+        initialCallTwoId: selectedInitialCallerThree?.initialCallTwoId || '',
+        complaintType: selectedInitialCallerThree?.complaintType || '',
+        emailType: selectedInitialCallerThree?.emailType || '',
+        smsType: selectedInitialCallerThree?.smsType || '',
+        returnType: selectedInitialCallerThree?.returnType || [''],
+    }
+
     const { allItems }: any = useSelector(
         (state: RootState) => state?.initialCallerOne
     )
-    //console.log(allItems)
 
     const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery('')
+    const {
+        data: Icdata,
+        isFetching: IcisFetching,
+        isLoading: IcisLoading,
+    } = useGetInitialCallerThreeByIdQuery(Id)
+
+    useEffect(() => {
+        if (!IcisLoading && !IcisFetching) {
+            dispatch(setSelectedInitialCallerThree(Icdata?.data || []))
+        }
+    }, [Icdata, IcisLoading, IcisFetching, dispatch])
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            dispatch(setAllItems(data?.data))
+            dispatch(setAllItems(data?.data || []))
         }
     }, [data, isLoading, isFetching, dispatch])
 
-    const initialValues: FormInitialValues = {
-        initialCallName: '',
-        initialCallOneId: '',
-        initialCallTwoId: '',
-        complaintType: '',
-        emailType: '',
-        smsType: '',
-        returnType: [''],
-    }
     const validationSchema = object({
-        initialCallName: string().required('Required'),
+        initialCallName: string().required('Requiredd'),
         initialCallOneId: string().required('Required'),
         initialCallTwoId: string().required('Required'),
         complaintType: string().required(' Required'),
@@ -60,19 +81,22 @@ const AddInitialCallThreeWrappper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            addIntialCallThree({
-                initialCallName: values.initialCallName,
-                initialCallOneId: values.initialCallOneId,
-                initialCallTwoId: values.initialCallTwoId,
-                complaintType: values.complaintType,
-                emailType: values.emailType,
-                smsType: values.smsType,
-                returnType: values.returnType,
-                companyId: userData?.companyId || '',
+            editInitialCallThree({
+                body: {
+                    initialCallName: values.initialCallName,
+                    initialCallOneId: values.initialCallOneId,
+                    initialCallTwoId: values.initialCallTwoId,
+                    complaintType: values.complaintType,
+                    emailType: values.emailType,
+                    smsType: values.smsType,
+                    returnType: values.returnType,
+                    companyId: userData?.companyId || '',
+                },
+                id: Id || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Call added successfully!')
+                        showToast('success', 'Updated successfully!')
                         navigate('/dispositions/initialcall-three')
                     } else {
                         showToast('error', res?.data?.message)
@@ -84,15 +108,7 @@ const AddInitialCallThreeWrappper = () => {
             })
         }, 1000)
     }
-
-    //console.log(initialCallOneOptions)
-
     const smstype = [
-        //    { label:"alcobanSms" ,value:"ALCOBAN SMS"},
-        //    { label:"complaintCCA_CNC" ,value:"CUSTOMER NOT CONTACTABLE"},
-        //     { label:"alcobanSms" ,value:"ALCOBAN SMS"},
-        //     { label:"alcobanSms" ,value:"ALCOBAN SMS"},
-        //     { label:"alcobanSms" ,value:"ALCOBAN SMS"},
         { label: 'alcobanSms', value: 'ALCOBAN SMS' },
         { label: 'complaintCCA_CNC', value: 'CUSTOMER NOT CONTACTABLE' },
         {
@@ -130,8 +146,8 @@ const AddInitialCallThreeWrappper = () => {
 
     const EmailType = [
         { label: 'personalEmail', value: 'PERSONAL EMAIL' },
+        { label: 'officialEmail', value: 'OFFICIAL EMAIL' },
         { label: 'buisnessEmail', value: 'BUISNESS EMAIL' },
-        { label: 'companyEmail', value: 'COMPANY EMAIL' },
     ]
 
     const dropdownoptions = {
@@ -166,17 +182,19 @@ const AddInitialCallThreeWrappper = () => {
             }
         }),
     }
+
     return (
         <>
             <DispositionLayout>
                 <Formik
+                    enableReinitialize
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmitHandler}
                 >
-                    {(formikProps) => {
+                    {(formikProps: any) => {
                         return (
-                            <AddInitialCallThree
+                            <EditInitialCallOne
                                 apiStatus={apiStatus}
                                 formikProps={formikProps}
                                 dropdownoptions={dropdownoptions}
@@ -189,4 +207,4 @@ const AddInitialCallThreeWrappper = () => {
     )
 }
 
-export default AddInitialCallThreeWrappper
+export default EditInitialCallThreeWrapper

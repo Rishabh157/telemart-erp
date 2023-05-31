@@ -1,64 +1,63 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
-import {
-    useGetdispositionOneByIdQuery,
-    useUpdatedispositionOneMutation,
-} from 'src/services/configurations/DispositiononeServices'
+import { useUpdateinitialCallerOneMutation } from 'src/services/configurations/InitialCallerOneServices'
 import { useNavigate, useParams } from 'react-router-dom'
-import AddDispositionOne from './EditDispositionOne'
 import DispositionLayout from '../../DispositionLayout'
-import { setSelectedDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
+import EditInitialCallOne from './EditInitialCallOne'
+import { useGetinitialCallerOneByIdQuery } from 'src/services/configurations/InitialCallerOneServices'
+import { setSelectedInitialOne } from 'src/redux/slices/configuration/initialCallerOneSlice'
 
 export type FormInitialValues = {
-    dispositionName: string
+    initialCallName: string
 }
-const EditDispositionOneWrappper = () => {
+const EditInitialCallOneWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [editDispositionOne] = useUpdatedispositionOneMutation()
     const params = useParams()
     const Id = params.id
+    const [editInitialcallOne] = useUpdateinitialCallerOneMutation()
+
+    const { selectedInitialOne }: any = useSelector(
+        (state: RootState) => state.initialCallerOne
+    )
+
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
-    const { selectedDispositionOne }: any = useSelector(
-        (state: RootState) => state?.dispositionOne
-    )
-
-    const { data, isLoading, isFetching } = useGetdispositionOneByIdQuery(Id)
     const initialValues: FormInitialValues = {
-        dispositionName: selectedDispositionOne?.dispositionName || '',
+        initialCallName: selectedInitialOne?.initialCallName || '',
     }
+    const validationSchema = object({
+        initialCallName: string().required('Required'),
+    })
+
+    const { data, isFetching, isLoading } = useGetinitialCallerOneByIdQuery(Id)
 
     useEffect(() => {
-        if (!isLoading && !isFetching)
-            dispatch(setSelectedDispositionOne(data?.data))
-    }, [data, dispatch, isFetching, isLoading])
+        if (!isFetching && !isLoading) {
+            dispatch(setSelectedInitialOne(data?.data || []))
+        }
 
-    const validationSchema = object({
-        dispositionName: string().required('Required'),
-    })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading, isFetching, data])
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            editDispositionOne({
+            editInitialcallOne({
                 body: {
-                    dispositionName: values.dispositionName,
+                    initialCallName: values.initialCallName,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Updated successfully!'
-                        )
-                        navigate('/dispositions/disposition-one')
+                        showToast('success', 'Updated successfully!')
+                        navigate('/dispositions/initialcall-one')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -73,16 +72,15 @@ const EditDispositionOneWrappper = () => {
     return (
         <>
             <DispositionLayout>
-                {' '}
                 <Formik
                     enableReinitialize
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmitHandler}
                 >
-                    {(formikProps) => {
+                    {(formikProps: any) => {
                         return (
-                            <AddDispositionOne
+                            <EditInitialCallOne
                                 apiStatus={apiStatus}
                                 formikProps={formikProps}
                             />
@@ -94,4 +92,4 @@ const EditDispositionOneWrappper = () => {
     )
 }
 
-export default EditDispositionOneWrappper
+export default EditInitialCallOneWrapper

@@ -12,7 +12,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/configuration/dispositionOneSlice'
+} from 'src/redux/slices/configuration/initialCallerOneSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -21,22 +21,22 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
+const InitialCalloneListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const dispositionOneState: any = useSelector(
-        (state: RootState) => state.dispositionOne
+    const initialCalloneState: any = useSelector(
+        (state: RootState) => state.initialCallerOne
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = dispositionOneState
+    const { page, rowsPerPage, totalItems, searchValue } = initialCalloneState
 
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition One',
-            path: '/disposition-one',
+            label: 'Initialcall One',
+            path: 'dispositions/initialcall-one',
         },
         {
-            label: 'Disposition One',
+            label: 'initialcall One',
         },
     ]
 
@@ -47,13 +47,13 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Disposition One </ATMPageHeading>
+                <ATMPageHeading> Initialcall One </ATMPageHeading>
                 <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add 
+                    + Add
                 </button>
             </div>
 
@@ -105,4 +105,4 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
 }
 
-export default DispositionOneListing
+export default InitialCalloneListing

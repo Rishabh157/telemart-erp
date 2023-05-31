@@ -1,27 +1,37 @@
 import React from 'react'
-import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './EditDispositionOneWrapper'
+
+import { FormikProps } from 'formik'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { FormInitialValues } from '../add/AddInitialCallTwoWrapper'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+    dropdownOptions: {
+        initicalCallOneOptions: SelectOption[]
+    }
 }
 
-const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
+const EditInitialCallTwo = ({
+    formikProps,
+    apiStatus,
+    dropdownOptions,
+}: Props) => {
     const { values, setFieldValue } = formikProps
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition-One',
-            path: '/configurations/disposition-one',
+            label: 'Initialcall-One',
+            path: '/dispositions/initialCall-one',
         },
         {
-            label: 'Add Disposition',
+            label: 'Update Initialcall-One',
         },
     ]
 
@@ -38,7 +48,7 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                     <div className="pt-1">
                         <ATMPageHeading>
                             {' '}
-                            Update Disposition-One{' '}
+                            Update Initialcall-Two{' '}
                         </ATMPageHeading>
                     </div>
 
@@ -47,7 +57,7 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                             {/* Form Heading */}
                             <div className="text-xl font-medium">
                                 {' '}
-                                Disposition-One Details{' '}
+                                InitialCall-Two Details{' '}
                             </div>
 
                             {/* BUTTON - Add Button */}
@@ -69,14 +79,26 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                         <div className="grow py-8 px-3 ">
                             <div className="grid grid-cols-3 gap-4">
                                 {/* languageName */}
+
+                                <ATMSelectSearchable
+                                    options={
+                                        dropdownOptions.initicalCallOneOptions
+                                    }
+                                    name="initialCallOneId"
+                                    value={values.initialCallOneId}
+                                    label="Initialcall-One"
+                                    onChange={(e) =>
+                                        setFieldValue('initialCallOneId', e)
+                                    }
+                                />
                                 <ATMTextField
-                                    name="dispositionName"
-                                    value={values.dispositionName}
-                                    label="Disposition Name"
-                                    placeholder="Name"
+                                    name="initialCallName"
+                                    value={values.initialCallName}
+                                    placeholder="Enter a InitailCaller  name"
+                                    label="Initialcall  name"
                                     onChange={(e) =>
                                         setFieldValue(
-                                            'dispositionName',
+                                            'initialCallName',
                                             e.target.value
                                         )
                                     }
@@ -90,4 +112,4 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
     )
 }
 
-export default EditDispositionOne
+export default EditInitialCallTwo

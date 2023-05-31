@@ -59,7 +59,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         return () => {
             dispatch(setSelectedItems([]))
         }
-    }, [])
+    }, [dispatch])
 
     //console.log(selectedItems)
 

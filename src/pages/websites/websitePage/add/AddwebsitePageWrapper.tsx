@@ -3,7 +3,7 @@ import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import WebsiteLayout from '../../WebsiteLayout'
 import { useAddWebsitePageMutation } from 'src/services/websites/WebsitePageServices'
@@ -21,7 +21,7 @@ export type FormInitialValues = {
 const AddWebsitePageWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addWebsitePage] = useAddWebsitePageMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)

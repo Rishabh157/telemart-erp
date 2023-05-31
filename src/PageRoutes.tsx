@@ -145,7 +145,6 @@ import {
 import Auth from './pages/login/Auth'
 import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
 import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
-// import Disposition from './pages/disposition/Disposition'
 import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
 import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
 import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
@@ -157,9 +156,22 @@ import EditWebsiteBlogWrapper from './pages/websites/website-blog/edit/EditWebsi
 import WebsitePageListingWrapper from './pages/websites/websitePage/list/WebsitePageListingWrapper'
 import AddWebsitePageWrapper from './pages/websites/websitePage/add/AddwebsitePageWrapper'
 import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsitePageWrapper'
+import InitialCallOneListingWrapper from './pages/disposition/initialcallerone/list/InitialCallOneListingWrapper'
+import InitialCallTwoListingWrapper from './pages/disposition/initialcallertwo/list/InitialCallTwoListingWrapper'
 import DispositionTwoListingWrapper from './pages/disposition/dispositionCaller/dispositionTwo/list/DispositionTwoListingWrapper'
 import DispositionThreeListingWrapper from './pages/disposition/dispositionCaller/dispositionThree/list/DispositionThreeListingWrapper'
 import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
+import EditDispositionOneWrappper from './pages/disposition/dispositionOne/edit/EditDispositionOneWrapper'
+import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/dispositionThree/add/AddInitialCallThreeWrapper'
+import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/dispositionThree/list/InitialCallThreeListingWrapper'
+import AddInitialCallOneWrapper from './pages/disposition/initialcallerone/add/AddInitialCallOneWrapper'
+import AddInitialCallTwoWrapper from './pages/disposition/initialcallertwo/add/AddInitialCallTwoWrapper'
+import EditInitialCallOneWrapper from './pages/disposition/initialcallerone/edit/EditInitialCallOneWrapper'
+import EditInitialCallTwoWrapper from './pages/disposition/initialcallertwo/edit/EditInitialCallTwoWrapper'
+import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/dispositionThree/edit/EditInitialCallThreeWrapper'
+import DispositionComplaintListingWrapper from './pages/disposition/dispositionComplaint/list/DispositionComplaintListingWrapper'
+import AddDispositionComplaintWrappper from './pages/disposition/dispositionComplaint/add/AddDispositionComplaintWrapper'
+import EditDispositionComplaintWrappper from './pages/disposition/dispositionComplaint/edit/EditDispositionComplaintWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -687,8 +699,48 @@ const PageRoutes = () => {
                         element={<DispositionOneListingWrapper />}
                     />
                     <Route
+                        path="dispositions/initialcall-one"
+                        element={<InitialCallOneListingWrapper />}
+                    />
+                    <Route
+                        path="dispositions/initialcall-one/add"
+                        element={<AddInitialCallOneWrapper />}
+                    />
+                    <Route
+                        path="dispositions/initialcall-one/:id"
+                        element={<EditInitialCallOneWrapper />}
+                    />
+                    <Route
+                        path="dispositions/initialcall-two"
+                        element={<InitialCallTwoListingWrapper />}
+                    />
+                    <Route
+                        path="dispositions/initialcall-two/add"
+                        element={<AddInitialCallTwoWrapper />}
+                    />
+                    <Route
+                        path="dispositions/initialcall-two/:id"
+                        element={<EditInitialCallTwoWrapper />}
+                    />
+                    <Route
+                        path="dispositions/initialcall-three"
+                        element={<InitialCallThreeListingWrapper />}
+                    />
+                    <Route
+                        path="dispositions/initialcall-three/:id"
+                        element={<EditInitialCallThreeWrapper />}
+                    />
+                    <Route
+                        path="dispositions/initialcall-three/add"
+                        element={<AddInitialCallThreeWrappper />}
+                    />
+                    <Route
                         path="dispositions/disposition-one/add"
                         element={<AddDispositionOneWrappper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-one/:id"
+                        element={<EditDispositionOneWrappper />}
                     />
                     <Route
                         path="dispositions/disposition-two"
@@ -697,8 +749,20 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three"
                         element={<DispositionThreeListingWrapper />}
-                    
                     />
+                    <Route
+                        path="dispositions/disposition-complaint"
+                        element={<DispositionComplaintListingWrapper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-complaint/add"
+                        element={<AddDispositionComplaintWrappper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-complaint/:id"
+                        element={<EditDispositionComplaintWrappper />}
+                    />
+
                     {/* Website Blog route */}
                     <Route
                         path="all-websites/website-blog"
