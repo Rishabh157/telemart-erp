@@ -170,7 +170,6 @@ const EditDispositionThreeWrappper = () => {
             { label: 'personalEmail', value: 'PERSONAL EMAIL' },
             { label: 'officialEmail', value: 'OFFICIAL EMAIL' },
             { label: 'buisnessEmail', value: 'BUISNESS EMAIL' },
-            { label: 'companyEmail', value: 'COMPANY EMAIL' },
         ],
 
         smsTypeOptions: [
@@ -204,17 +203,10 @@ const EditDispositionThreeWrappper = () => {
             { label: 'invoiceSent', value: 'INVOICE SENT' },
         ],
         applicableCriteriaOptions: [
-            { label: 'is_order', value: 'Is Order' },
-            { label: 'is_prepaid', value: 'Is Prepaid' },
-            { label: 'is_replacement', value: 'Is Replacement' },
-            { label: 'is_callback', value: 'Is Callback' },
-            { label: 'is_scheme_app', value: 'Is Scheme App' },
-            { label: 'out_of_stock', value: 'Out Of Stock' },
-            { label: 'is_product_app', value: 'Is Product App' },
-            { label: 'adt_applicable', value: 'ADT Applicable' },
-            { label: 'is_textbox_req', value: 'Is TextBox REQ' },
-            { label: 'is_urgent', value: 'Is Urgent' },
-            { label: 'is_remark_date_app', value: 'Is Remark Date App' },
+            { label: 'Is Order', value: 'isOrder' },
+            { label: 'Is Prepaid', value: 'isPrepaid' },
+            { label: 'Is Replacement', value: 'isReplacement' },
+            { label: 'Is Callback', value: 'isCallback' },           
         ],
     }
 
