@@ -185,8 +185,6 @@ import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edi
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
 import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
 
-
-
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -229,7 +227,10 @@ const PageRoutes = () => {
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
                     <Route path="/orders/add-order" element={<AddOrder />} />
-                    <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
+                    <Route
+                        path="/orders/view/:id"
+                        element={<OrderViewWrapper />}
+                    />
                     <Route
                         path="/dealers"
                         element={<DealersListingWrapper />}

@@ -19,9 +19,8 @@ import {
     setSearchValue,
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-
 
 const OrderListing = () => {
     // Hooks
@@ -29,10 +28,9 @@ const OrderListing = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     // States
-    const [selectedRows, setSelectedRows] = useState([])    
+    const [selectedRows, setSelectedRows] = useState([])
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-
 
     const orderState: any = useSelector((state: RootState) => state.order)
     const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
@@ -67,7 +65,6 @@ const OrderListing = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
 
-
     const columns: columnTypes[] = [
         {
             field: 'orderNumber',
@@ -83,12 +80,14 @@ const OrderListing = () => {
             flex: 'flex-[1_1_0%]',
             renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
         },
-    
+
         {
             field: 'mobileNo',
             headerName: 'Mobile No',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: OrderListResponse) => <span> {row.mobileNo} </span>,
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.mobileNo} </span>
+            ),
         },
         {
             field: 'batchNo',
@@ -103,7 +102,10 @@ const OrderListing = () => {
             headerName: 'Delivery Charges',
             flex: 'flex-[2_2_0%]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "> {row.deliveryCharges} </span>
+                <span className="text-primary-main ">
+                    {' '}
+                    {row.deliveryCharges}{' '}
+                </span>
             ),
         },
         {
@@ -121,7 +123,7 @@ const OrderListing = () => {
             renderCell: (row: OrderListResponse) => (
                 <span className="text-slate-800"> &#8377; {row.total} </span>
             ),
-        },    
+        },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -181,7 +183,7 @@ const OrderListing = () => {
             align: 'end',
         },
     ]
-    
+
     const handleDelete = () => {
         setShowDropdown(false)
         // deleteOrdercurrentId).then((res) => {
@@ -199,8 +201,6 @@ const OrderListing = () => {
         //     }
         // })
     }
-
-
 
     return (
         <SideNavLayout>

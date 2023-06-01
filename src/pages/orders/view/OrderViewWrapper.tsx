@@ -8,11 +8,11 @@ import { setSelectedItem } from 'src/redux/slices/orderSlice'
 import OrderView from './OrderView'
 
 const OrderViewWrapper = () => {
-	const params = useParams()
-	const id: any = params.id
-	const dispatch = useDispatch<AppDispatch>()
+    const params = useParams()
+    const id: any = params.id
+    const dispatch = useDispatch<AppDispatch>()
 
-	const { data, isLoading, isFetching } = useGetOrderByIdQuery(id)
+    const { data, isLoading, isFetching } = useGetOrderByIdQuery(id)
 
     useEffect(() => {
         dispatch(setSelectedItem(data?.data))
@@ -22,11 +22,11 @@ const OrderViewWrapper = () => {
         (state: RootState) => state?.order
     )
 
-	return (
-		<SideNavLayout>
-			<OrderView items={selectedItem}/>
-		</SideNavLayout>
-	)
+    return (
+        <SideNavLayout>
+            <OrderView items={selectedItem} />
+        </SideNavLayout>
+    )
 }
 
 export default OrderViewWrapper
