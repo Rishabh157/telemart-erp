@@ -8,11 +8,13 @@ import { renderorderStatus } from 'src/utils/renderOrderStatus'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
+import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import { OrderListResponse } from 'src/models'
 import { useGetOrderQuery } from 'src/services/OrderService'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
+    setRowsPerPage,
     setIsTableLoading,
     setItems,
     setPage,
@@ -253,6 +255,25 @@ const OrderListing = () => {
                         </div> */}
                     </div>
                 </div>
+                <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+                {/*Table Header */}
+                <ATMTableHeader
+                    searchValue={searchValue}
+                    page={page}
+                    rowCount={totalItems}
+                    rowsPerPage={rowsPerPage}
+                    rows={items}
+                    onRowsPerPageChange={(newValue) =>
+                        dispatch(setRowsPerPage(newValue))
+                    }
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
+                />
+
+                {/* Table */}
+                <div className="grow overflow-auto  ">
+            
 
                 <ATMTable
                     columns={columns}
@@ -262,23 +283,24 @@ const OrderListing = () => {
                     onRowSelect={(selectedRows) =>
                         setSelectedRows(selectedRows)
                     }
-                    extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                    
                 />
+                </div>
 
-                <div className=" border-t  h-[50px] flex items-end ">
-                    <div className="w-full">
-                        <ATMPagination
-                            page={page}
-                            rowCount={totalItems}
-                            rows={items}
-                            rowsPerPage={rowsPerPage}
-                            onPageChange={(newPage) =>
-                                dispatch(setPage(newPage))
-                            }
-                        />
-                    </div>
+                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                    <ATMPagination
+                        page={page}
+                        rowCount={totalItems}
+                        rows={items}
+                        rowsPerPage={rowsPerPage}
+                        onPageChange={(newPage) =>
+                            dispatch(setPage(newPage))
+                        }
+                    />                    
                 </div>
             </div>
+            </div>
+        
         </SideNavLayout>
     )
 }
