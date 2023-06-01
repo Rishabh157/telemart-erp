@@ -23,8 +23,13 @@ interface ATMTablePropTypes<T> {
     isLoading?: boolean
     setShowDropdown?: React.Dispatch<React.SetStateAction<boolean>>
     onClick?: (event: any) => void
+    headerClassName?: string
+    rowClassName?: string
+    noDataFoundText?: string
+    noDataFoundClass?: string
 }
 
+const NOT_DATA_FOUND = 'No Data Found'
 const ATMTable = <T extends {}>({
     columns,
     rows,
@@ -36,6 +41,10 @@ const ATMTable = <T extends {}>({
     rowExtraClasses,
     isLoading = false,
     setShowDropdown,
+    headerClassName = ' py-2 px-2',
+    rowClassName = 'px-2 bg-white',
+    noDataFoundText = `${NOT_DATA_FOUND}`,
+    noDataFoundClass = 'text-slate-500',
 }: ATMTablePropTypes<T>) => {
     return (
         <div
@@ -47,7 +56,9 @@ const ATMTable = <T extends {}>({
             )}
         >
             {/* Columns */}
-            <div className="flex items-center py-2 px-2 border-b sticky top-0 border-slate-300 bg-slate-50 ">
+            <div
+                className={`flex items-center ${headerClassName} border-b sticky top-0 border-slate-300 bg-slate-50 `}
+            >
                 {/* Checkbox */}
                 {rows.length && isCheckbox ? (
                     <div className={`w-[20px]`}>
@@ -97,7 +108,7 @@ const ATMTable = <T extends {}>({
                     <div
                         onClick={() => onRowClick && onRowClick(row)}
                         key={row[idKey] || rowIndex}
-                        className={`flex items-center px-2 bg-white  ${
+                        className={`flex items-center  ${rowClassName} ${
                             onRowClick && 'cursor-pointer'
                         } ${rowExtraClasses && rowExtraClasses(row)} ${
                             rowIndex !== rows.length - 1 && 'border-b'
@@ -157,8 +168,10 @@ const ATMTable = <T extends {}>({
                     </div>
                 ))
             ) : (
-                <div className="w-full flex justify-center text-slate-500">
-                    No Data Found
+                <div
+                    className={`w-full flex justify-center  ${noDataFoundClass}`}
+                >
+                    {noDataFoundText}
                 </div>
             )}
         </div>

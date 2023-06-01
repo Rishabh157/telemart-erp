@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import DispositionLayout from '../../../DispositionLayout'
+import DispositionLayout from '../../DispositionLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { array, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
@@ -12,12 +12,8 @@ import { setAllItems as setAllDispositionTwo } from 'src/redux/slices/configurat
 import { setAllItems as setAllDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
 import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
-import EditDispositionThree from './EditDispositionThree'
-import {
-    useGetDispositionThreeByIdQuery,
-    useUpdatedispositionThreeMutation,
-} from 'src/services/configurations/DispositionThreeServices'
-import { setSelectedDispostionThree } from 'src/redux/slices/configuration/dispositionThreeSlice'
+import AddDispositionThree from './AddDispositionThree'
+import { useAdddispositionThreeMutation } from 'src/services/configurations/DispositionThreeServices'
 
 export type FormInitialValues = {
     dispositionName: string
@@ -30,14 +26,10 @@ export type FormInitialValues = {
     companyId: string
 }
 
-const EditDispositionThreeWrappper = () => {
+const AddDispositionThreeWrappper = () => {
     const navigate = useNavigate()
-    const params = useParams()
-    const Id = params.id
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-
-    const [updatedispositionThree] = useUpdatedispositionThreeMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -49,17 +41,7 @@ const EditDispositionThreeWrappper = () => {
         (state: RootState) => state?.dispositionTwo
     )
 
-    const { selectedDispostionThree }: any = useSelector(
-        (state: RootState) => state?.dispositionThree
-    )
-
-    const { data, isLoading, isFetching } = useGetDispositionThreeByIdQuery(Id)
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedDispostionThree(data?.data || []))
-        }
-    }, [isLoading, isFetching, data, dispatch])
+    const [adddispositionThree] = useAdddispositionThreeMutation()
 
     const {
         isLoading: isDTLoading,
@@ -86,13 +68,13 @@ const EditDispositionThreeWrappper = () => {
     }, [isDOLoading, isDOFetching, DoData, dispatch])
 
     const initialValues: FormInitialValues = {
-        dispositionName: selectedDispostionThree?.dispositionName || '',
-        dispositionOneId: selectedDispostionThree?.dispositionOneId || '',
-        dispositionTwoId: selectedDispostionThree?.dispositionTwoId || '',
-        smsType: selectedDispostionThree?.smsType || '',
-        emailType: selectedDispostionThree?.emailType || '',
-        priority: selectedDispostionThree?.priority || '',
-        applicableCriteria: selectedDispostionThree?.applicableCriteria || [],
+        dispositionName: '',
+        dispositionOneId: '',
+        dispositionTwoId: '',
+        smsType: '',
+        emailType: '',
+        priority: '',
+        applicableCriteria: [''],
         companyId: userData?.companyId || '',
     }
 
@@ -109,23 +91,19 @@ const EditDispositionThreeWrappper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        console.log(values.applicableCriteria)
-        updatedispositionThree({
-            body: {
-                dispositionName: values.dispositionName,
-                dispositionOneId: values.dispositionOneId,
-                dispositionTwoId: values.dispositionTwoId,
-                applicableCriteria: values.applicableCriteria,
-                smsType: values.smsType,
-                emailType: values.emailType,
-                priority: values.priority,
-                companyId: values.companyId || '',
-            },
-            id: Id || '',
+        adddispositionThree({
+            dispositionName: values.dispositionName,
+            dispositionOneId: values.dispositionOneId,
+            dispositionTwoId: values.dispositionTwoId,
+            applicableCriteria: values.applicableCriteria,
+            smsType: values.smsType,
+            emailType: values.emailType,
+            priority: values.priority,
+            companyId: values.companyId || '',
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Disposition 3 Updated successfully!')
+                    showToast('success', 'Disposition 3 Added successfully!')
                     navigate('/dispositions/disposition-three')
                 } else {
                     showToast('error', res?.data?.message)
@@ -214,14 +192,13 @@ const EditDispositionThreeWrappper = () => {
     return (
         <DispositionLayout>
             <Formik
-                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
-                        <EditDispositionThree
+                        <AddDispositionThree
                             dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
                             formikProps={formikProps}
@@ -233,4 +210,4 @@ const EditDispositionThreeWrappper = () => {
     )
 }
 
-export default EditDispositionThreeWrappper
+export default AddDispositionThreeWrappper
