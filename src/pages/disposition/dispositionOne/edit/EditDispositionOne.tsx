@@ -21,7 +21,7 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
             path: '/configurations/disposition-one',
         },
         {
-            label: 'Add Disposition',
+            label: 'Edit',
         },
     ]
 
@@ -36,19 +36,13 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Page Heading */}
                     <div className="pt-1">
-                        <ATMPageHeading>
-                            {' '}
-                            Update Disposition-One{' '}
-                        </ATMPageHeading>
+                        <ATMPageHeading> Update </ATMPageHeading>
                     </div>
 
                     <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                         <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                             {/* Form Heading */}
-                            <div className="text-xl font-medium">
-                                {' '}
-                                Disposition-One Details{' '}
-                            </div>
+                            <div className="text-xl font-medium"> Details </div>
 
                             {/* BUTTON - Add Button */}
                             <div>
@@ -60,7 +54,7 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                                         apiStatus ? 'opacity-50' : ''
                                     }`}
                                 >
-                                    Submit
+                                    Update
                                 </button>
                             </div>
                         </div>

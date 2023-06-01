@@ -27,11 +27,11 @@ const EditInitialCallTwo = ({
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Initialcall-One',
-            path: '/dispositions/initialCall-one',
+            label: 'Initialcall-Two',
+            path: '/dispositions/initialCall-two',
         },
         {
-            label: 'Update Initialcall-One',
+            label: 'Edit',
         },
     ]
 
@@ -46,19 +46,13 @@ const EditInitialCallTwo = ({
 
                     {/* Page Heading */}
                     <div className="pt-1">
-                        <ATMPageHeading>
-                            {' '}
-                            Update Initialcall-Two{' '}
-                        </ATMPageHeading>
+                        <ATMPageHeading> Update </ATMPageHeading>
                     </div>
 
                     <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                         <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                             {/* Form Heading */}
-                            <div className="text-xl font-medium">
-                                {' '}
-                                InitialCall-Two Details{' '}
-                            </div>
+                            <div className="text-xl font-medium"> Details </div>
 
                             {/* BUTTON - Add Button */}
                             <div>

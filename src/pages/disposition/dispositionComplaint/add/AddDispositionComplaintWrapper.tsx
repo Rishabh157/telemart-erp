@@ -59,20 +59,16 @@ const AddDispositionComplaintWrappper = () => {
         }, 1000)
     }
 
-    const priorityTYpe = [
-        { label: '1', value: '1' },
-        { label: '2', value: '2' },
-        { label: '3', value: '3' },
-        { label: '4', value: '5' },
-        { label: '6', value: '6' },
-        { label: '7', value: '7' },
-        { label: '8', value: '8' },
-        { label: '9', value: '9' },
-        { label: '10', value: '10' },
-        { label: '11', value: '12' },
-        { label: '13', value: '13' },
-        { label: '14', value: '14' },
-    ]
+    const priorityOpt = () => {
+        let options: any = []
+
+        for (let i = 0; i <= 50; i++) {
+            options.push({ label: i.toString(), value: i.toString() })
+        }
+        return options
+    }
+    const priorityOptions = priorityOpt()
+
     const smstype = [
         //    { label:"alcobanSms" ,value:"ALCOBAN SMS"},
         //    { label:"complaintCCA_CNC" ,value:"CUSTOMER NOT CONTACTABLE"},
@@ -122,12 +118,7 @@ const AddDispositionComplaintWrappper = () => {
                 value: ele.value,
             }
         }),
-        priorityTypeOptions: priorityTYpe?.map((ele: any) => {
-            return {
-                label: ele.label,
-                value: ele.value,
-            }
-        }),
+        priorityOptions,
     }
 
     return (

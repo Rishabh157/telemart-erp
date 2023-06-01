@@ -106,8 +106,8 @@ const InitialCallTwoListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Tape',
-                                        text: 'Do you want to delete Tape?',
+                                        title: 'Delete InitialCall-Two',
+                                        text: 'Do you want to delete InitialCall-Two?',
                                         showCancelButton: true,
                                         next: (res: any) => {
                                             return res.isConfirmed
@@ -133,7 +133,7 @@ const InitialCallTwoListingWrapper = () => {
         deleteTape(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Tape deleted successfully!')
+                    showToast('success', 'Deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }

@@ -32,7 +32,7 @@ const InitialCallTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'InitialCall Two',
+            label: 'InitialCall',
             path: '/initialcall-two',
         },
         {

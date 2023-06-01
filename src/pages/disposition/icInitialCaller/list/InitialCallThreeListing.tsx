@@ -32,7 +32,7 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Initialcall ',
+            label: 'Initialcall',
             path: '/dispositions/initialcall-three',
         },
         {

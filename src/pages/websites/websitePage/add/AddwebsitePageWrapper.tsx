@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import WebsiteLayout from '../../WebsiteLayout'
@@ -21,6 +21,8 @@ export type FormInitialValues = {
 const AddWebsitePageWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const { state } = useLocation()
+    const { siteId } = state
 
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addWebsitePage] = useAddWebsitePageMutation()
@@ -35,10 +37,10 @@ const AddWebsitePageWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        pageUrl: string().required('Url is required'),
-        pageName: string().required('Name is required'),
-        headerSpace: string().required('Header is required'),
-        footerSpace: string().required('Footer is required'),
+        pageUrl: string().required('Required'),
+        pageName: string().required('Required'),
+        headerSpace: string().required('Required'),
+        footerSpace: string().required('Required'),
     })
 
     //    Form Submit Handler
@@ -50,11 +52,12 @@ const AddWebsitePageWrapper = (props: Props) => {
                 pageName: values.pageName,
                 headerSpace: values.headerSpace,
                 footerSpace: values.footerSpace,
+                websiteId: siteId,
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Website-Page added successfully!')
+                        showToast('success', 'Added successfully!')
                         navigate('/all-websites/website-Page')
                     } else {
                         showToast('error', res?.data?.message)

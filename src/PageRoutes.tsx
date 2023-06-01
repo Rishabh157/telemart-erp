@@ -184,6 +184,8 @@ import EditDispositionComplaintWrappper from './pages/disposition/dispositionCom
 import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/list/InitialCallThreeListingWrapper'
 import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edit/EditInitialCallThreeWrapper'
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
+import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
+import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -783,6 +785,14 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three/add"
                         element={<AddDispositionThreeWrappper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-three/:id"
+                        element={<ViewDispositionThreeWrappper />}
+                    />
+                    <Route
+                        path="dispositions/initialCall-three/view/:id"
+                        element={<ViewInitialCallThreeWrappper />}
                     />
                     <Route
                         path="dispositions/disposition-three/edit/:id"

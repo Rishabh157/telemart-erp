@@ -18,11 +18,11 @@ type Props = {
 }
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: ' Dispositions',
+        label: ' Disposition-Two',
         path: '/dispositions/disposition-two',
     },
     {
-        label: 'Update Disposition L-2',
+        label: 'Edit',
     },
 ]
 
@@ -47,7 +47,7 @@ const EditDispositionTwo = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Update Disposition L-2</ATMPageHeading>
+                    <ATMPageHeading> Update </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">

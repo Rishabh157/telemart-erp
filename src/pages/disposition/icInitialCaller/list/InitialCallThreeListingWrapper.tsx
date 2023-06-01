@@ -99,6 +99,14 @@ const InitialCallThreeListingWrapper = () => {
                             </button>
                             <button
                                 onClick={() => {
+                                    navigate(`view/${row?._id}`)
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View
+                            </button>
+                            <button
+                                onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Delete InitialCaller-Three',
                                         text: 'Do you want to delete InitialCaller-Three?',
