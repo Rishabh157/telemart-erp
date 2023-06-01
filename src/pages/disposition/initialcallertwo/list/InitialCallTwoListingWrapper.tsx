@@ -70,7 +70,7 @@ const InitialCallTwoListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'initialCallName',
-            headerName: 'Initialcall Two',
+            headerName: 'Initial Call Two',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InitialCallerTwoListResponse) => (
                 <span> {row.initialCallName} </span>
@@ -106,8 +106,8 @@ const InitialCallTwoListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete InitialCall-Two',
-                                        text: 'Do you want to delete InitialCall-Two?',
+                                        title: 'Delete Initial Call-Two',
+                                        text: 'Do you want to delete Initial Call-Two?',
                                         showCancelButton: true,
                                         next: (res: any) => {
                                             return res.isConfirmed

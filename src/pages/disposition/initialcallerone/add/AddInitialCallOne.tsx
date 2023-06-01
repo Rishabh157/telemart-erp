@@ -17,7 +17,7 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Initialcall One',
+            label: 'Initial Call One',
             path: '/dispositions/initialCall-one',
         },
         {
@@ -67,7 +67,7 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                                     name="initialCallName"
                                     value={values.initialCallName}
                                     placeholder="Name"
-                                    label="Initialcall  Name"
+                                    label="Initial Call  Name"
                                     onChange={(e) =>
                                         setFieldValue(
                                             'initialCallName',

@@ -76,7 +76,7 @@ const DispositionTwoListingWrapper = () => {
         },
         {
             field: 'dispostionOneLabel',
-            headerName: 'Dispositionone Name',
+            headerName: 'Disposition One Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DispositionTwoListResponse) => (
                 <span> {row.dispostionOneLabel} </span>

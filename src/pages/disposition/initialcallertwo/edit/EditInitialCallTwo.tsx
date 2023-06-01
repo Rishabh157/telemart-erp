@@ -27,7 +27,7 @@ const EditInitialCallTwo = ({
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Initialcall Two',
+            label: 'Initial Call Two',
             path: '/dispositions/initialCall-two',
         },
         {
@@ -80,7 +80,7 @@ const EditInitialCallTwo = ({
                                     }
                                     name="initialCallOneId"
                                     value={values.initialCallOneId}
-                                    label="Initialcall-One"
+                                    label="Initial Call One"
                                     onChange={(e) =>
                                         setFieldValue('initialCallOneId', e)
                                     }
@@ -88,8 +88,8 @@ const EditInitialCallTwo = ({
                                 <ATMTextField
                                     name="initialCallName"
                                     value={values.initialCallName}
-                                    placeholder="Enter a InitailCaller  name"
-                                    label="Initialcall  name"
+                                    placeholder=" Name"
+                                    label="Initial Call  name"
                                     onChange={(e) =>
                                         setFieldValue(
                                             'initialCallName',

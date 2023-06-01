@@ -63,7 +63,7 @@ const DispositionThreeListingWrapper = () => {
         },
         {
             field: 'dispostionOneLabel',
-            headerName: 'DispositionOne Name',
+            headerName: 'Disposition One Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DispositionThreeListResponse) => (
                 <span> {row.dispostionOneLabel} </span>
@@ -71,7 +71,7 @@ const DispositionThreeListingWrapper = () => {
         },
         {
             field: 'dispostionTwoLabel',
-            headerName: 'DispositionTwo Name',
+            headerName: 'Disposition Two Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DispositionThreeListResponse) => (
                 <span> {row.dispostionTwoLabel} </span>

@@ -25,7 +25,7 @@ const AddInitialCallTwo = ({
     const { values, setFieldValue } = formikProps
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Initialcall',
+            label: 'Initial Call',
             path: '/dispositions/initialCall-two',
         },
         {
@@ -77,7 +77,7 @@ const AddInitialCallTwo = ({
                                     }
                                     name="initialCallOneId"
                                     value={values.initialCallOneId}
-                                    label="InitialCall-One"
+                                    label="Initial Call One"
                                     onChange={(e) =>
                                         setFieldValue('initialCallOneId', e)
                                     }
@@ -86,7 +86,7 @@ const AddInitialCallTwo = ({
                                     name="initialCallName"
                                     value={values.initialCallName}
                                     placeholder="Name"
-                                    label="InitialCall  name"
+                                    label="Initial Call  Name"
                                     onChange={(e) =>
                                         setFieldValue(
                                             'initialCallName',

@@ -28,11 +28,11 @@ const EditDispositionCompliant = ({
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition-One',
-            path: '/configurations/disposition-one',
+            label: 'Disposition Complaint ',
+            path: '/dispositions/disposition-complaint',
         },
         {
-            label: 'Add Disposition',
+            label: 'Edit ',
         },
     ]
 
@@ -48,8 +48,8 @@ const EditDispositionCompliant = ({
                     {/* Page Heading */}
                     <div className="pt-1">
                         <ATMPageHeading>
-                            {' '}
-                            Update Disposition-Complaint{' '}
+                            
+                           Edit 
                         </ATMPageHeading>
                     </div>
 
@@ -58,7 +58,7 @@ const EditDispositionCompliant = ({
                             {/* Form Heading */}
                             <div className="text-xl font-medium">
                                 {' '}
-                                Disposition-Complaint Details{' '}
+                             Details{' '}
                             </div>
 
                             {/* BUTTON - Add Button */}

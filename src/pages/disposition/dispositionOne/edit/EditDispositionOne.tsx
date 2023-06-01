@@ -18,7 +18,7 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Disposition One',
-            path: '/configurations/disposition-one',
+            path: '/dispositions/disposition-one',
         },
         {
             label: 'Edit',
@@ -36,7 +36,7 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Page Heading */}
                     <div className="pt-1">
-                        <ATMPageHeading> Update </ATMPageHeading>
+                        <ATMPageHeading>Edit </ATMPageHeading>
                     </div>
 
                     <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -54,7 +54,7 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                                         apiStatus ? 'opacity-50' : ''
                                     }`}
                                 >
-                                    Update
+                                 Update
                                 </button>
                             </div>
                         </div>
