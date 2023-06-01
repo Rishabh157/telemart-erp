@@ -769,6 +769,8 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-two/edit/:id"
                         element={<EditDispositionTwoWrapper />}
+                    />
+                    <Route
                         path="dispositions/disposition-complaint"
                         element={<DispositionComplaintListingWrapper />}
                     />
