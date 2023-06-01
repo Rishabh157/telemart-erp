@@ -1,5 +1,5 @@
 import {
-    AddDisPositionThree,
+    AddDispositionThree,
     UpdateDispositionThree,
 } from 'src/models/configurationModel/DispositionThree.model'
 import { PaginationType } from 'src/models/common/paginationType'
@@ -30,7 +30,7 @@ export const dispositionThreeApi = apiSlice.injectEndpoints({
         //***** ADD *****/
         adddispositionThree: builder.mutation({
             invalidatesTags: ['dispositionThree'],
-            query: (body: AddDisPositionThree) => ({
+            query: (body: AddDispositionThree) => ({
                 url: '/disposition-three/add',
                 method: 'POST',
                 body,
@@ -49,7 +49,7 @@ export const dispositionThreeApi = apiSlice.injectEndpoints({
         }),
 
         // **** GET BY ID
-        getdispositionThreeById: builder.query({
+        getDispositionThreeById: builder.query({
             providesTags: ['dispositionThree'],
             query: (id) => ({
                 url: `/disposition-three/${id}`,
@@ -87,7 +87,7 @@ export const {
     useGetdispositionThreeQuery,
     useAdddispositionThreeMutation,
     useUpdatedispositionThreeMutation,
-    useGetdispositionThreeByIdQuery,
+    useGetDispositionThreeByIdQuery,
     useExportdispositionThreeDataMutation,
     useDeletedispositionThreeMutation,
     useGetAlldispositionThreeQuery,

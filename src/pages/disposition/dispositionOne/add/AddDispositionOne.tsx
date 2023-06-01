@@ -1,10 +1,4 @@
 import React from 'react'
-import {
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-} from '@mui/material'
 import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddDispositionOneWrapper'
@@ -23,11 +17,11 @@ const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Languages',
-            path: '/configurations/language',
+            label: 'Disposition-One',
+            path: '/dispositions/disposition-one',
         },
         {
-            label: 'Add Language',
+            label: 'Add Disposition-one',
         },
     ]
 

@@ -5,7 +5,7 @@ import { InitialCallerThreeListResponse } from 'src/models/configurationModel/In
 export interface InitialCallerThreeSliceStateType {
     items: InitialCallerThreeListResponse[] | []
     selectedInitialCallerThree: InitialCallerThreeListResponse | null
-    allItems: InitialCallerThreeListResponse[] | []
+    allItemsDisposition: InitialCallerThreeListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -18,7 +18,7 @@ export interface InitialCallerThreeSliceStateType {
 
 const initialState: InitialCallerThreeSliceStateType = {
     items: [],
-    allItems: [],
+    allItemsDisposition: [],
     selectedInitialCallerThree: null,
     totalItems: 0,
     isTableLoading: false,
@@ -74,7 +74,7 @@ const initialCallerThreeSlice: Slice<InitialCallerThreeSliceStateType> =
                 state,
                 action: PayloadAction<InitialCallerThreeListResponse[] | []>
             ) => {
-                state.allItems = action.payload
+                state.allItemsDisposition = action.payload
             },
             setFilterValue: (state, action: PayloadAction<string>) => {
                 state.filterValue = action.payload
