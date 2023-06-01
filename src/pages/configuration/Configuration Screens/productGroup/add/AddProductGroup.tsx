@@ -20,7 +20,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/product-group',
     },
     {
-        label: 'Add Product Group',
+        label: 'Add ',
     },
 ]
 
@@ -37,7 +37,7 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Product Group </ATMPageHeading>
+                    <ATMPageHeading> Add  </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -58,7 +58,7 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                                Add Product Group
+                                + Add 
                             </button>
                         </div>
                     </div>

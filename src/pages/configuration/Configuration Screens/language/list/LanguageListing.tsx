@@ -56,7 +56,7 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
                     {' '}
-                    + Add Language{' '}
+                    + Add {' '}
                 </button>
             </div>
 

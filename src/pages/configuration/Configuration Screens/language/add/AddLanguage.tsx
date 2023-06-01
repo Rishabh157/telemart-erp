@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/language',
     },
     {
-        label: 'Add Language',
+        label: 'Add',
     },
 ]
 
@@ -36,7 +36,7 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add Language </ATMPageHeading>
+                    <ATMPageHeading> Add </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -44,7 +44,7 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Language Details{' '}
+                           Details{' '}
                         </div>
 
                         {/* BUTTON - Add Button */}
@@ -57,7 +57,7 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Add Language
+                              + Add 
                             </button>
                         </div>
                     </div>

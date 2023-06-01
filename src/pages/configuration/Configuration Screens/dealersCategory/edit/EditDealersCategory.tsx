@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/dealers-category',
     },
     {
-        label: 'Update Dealer Category',
+        label: 'Edit',
     },
 ]
 
@@ -44,7 +44,7 @@ const EditDealersCategory = ({ formikProps, apiStatus }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Dealer Category Details{' '}
+                            Details{' '}
                         </div>
 
                         {/* BUTTON - Add Button */}

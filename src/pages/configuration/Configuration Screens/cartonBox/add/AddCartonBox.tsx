@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/carton-box',
     },
     {
-        label: 'Add Outer Pack Box',
+        label: 'Add ',
     },
 ]
 
@@ -38,7 +38,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                 <div className="pt-1">
                     <ATMPageHeading>
                         {' '}
-                        Add New Outer Packaging Box{' '}
+                        Add{' '}
                     </ATMPageHeading>
                 </div>
 
@@ -47,7 +47,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Outer Pack Box Details{' '}
+                            Details{' '}
                         </div>
 
                         {/* BUTTON - Add Button */}
@@ -60,7 +60,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                                Add Box
+                               + Add 
                             </button>
                         </div>
                     </div>

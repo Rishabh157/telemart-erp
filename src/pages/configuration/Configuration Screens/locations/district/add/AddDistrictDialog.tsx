@@ -37,7 +37,7 @@ const AddDistrictDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                                         e.target.value
                                     )
                                 }}
-                                placeholder="Enter a district name"
+                                placeholder="Name"
                                 label="District Name"
                             />
                         </div>

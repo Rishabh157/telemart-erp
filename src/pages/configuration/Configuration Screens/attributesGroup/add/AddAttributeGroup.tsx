@@ -21,7 +21,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/attributes-group',
     },
     {
-        label: 'Add Attributes Group',
+        label: 'Add',
     },
 ]
 
@@ -61,7 +61,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Attribute Group </ATMPageHeading>
+                    <ATMPageHeading> Add  </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat py-2">
@@ -69,7 +69,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Attribute group details{' '}
+                            Details{' '}
                         </div>
 
                         {/* BUTTON - Add Button */}
@@ -82,7 +82,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                                Add Group
+                                Add 
                             </button>
                         </div>
                     </div>

@@ -135,7 +135,7 @@ const ProductCategoryListingWrapper = () => {
                 if (res?.data?.status) {
                     showToast(
                         'success',
-                        'product-category deleted successfully!'
+                        'Deleted successfully!'
                     )
                 } else {
                     showToast('error', res?.data?.message)

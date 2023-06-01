@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/language',
     },
     {
-        label: 'Update Language',
+        label: 'Edit',
     },
 ]
 
@@ -36,7 +36,7 @@ const EditLanguage = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Update Language </ATMPageHeading>
+                    <ATMPageHeading> Update </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -44,7 +44,7 @@ const EditLanguage = ({ formikProps, apiStatus }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Language Details{' '}
+                            Details{' '}
                         </div>
 
                         {/* BUTTON - Add Button */}

@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/item',
     },
     {
-        label: 'Update Item',
+        label: 'Edit',
     },
 ]
 
@@ -36,7 +36,7 @@ const EditItem = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Update Item </ATMPageHeading>
+                    <ATMPageHeading> Update </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -44,7 +44,7 @@ const EditItem = ({ formikProps, apiStatus }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Item Details{' '}
+                           Details{' '}
                         </div>
 
                         {/* BUTTON - Add Button */}

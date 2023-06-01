@@ -34,7 +34,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
     }
     // Form Validation Schema
     const validationSchema = object({
-        group_name: string().required('Group name is required'),
+        group_name: string().required('Required'),
         attributes: array()
             .of(
                 object().shape({
@@ -58,7 +58,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
                     if (res?.data?.status) {
                         showToast(
                             'success',
-                            'Attribute group added successfully!'
+                            'Added successfully!'
                         )
                         navigate('/configurations/attributes-group')
                     } else {

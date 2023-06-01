@@ -31,8 +31,8 @@ const AddProductCategoryWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        categoryCode: string().required('Category Type is required'),
-        categoryName: string().required('Category Name is required'),
+        categoryCode: string().required('Required'),
+        categoryName: string().required('Required'),
     })
 
     //    Form Submit Handler
@@ -48,7 +48,7 @@ const AddProductCategoryWrapper = (props: Props) => {
                     if (res?.data?.status) {
                         showToast(
                             'success',
-                            'Product-category added successfully!'
+                            'Added successfully!'
                         )
                         navigate('/configurations/product-category')
                     } else {

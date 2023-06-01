@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/dealers-category',
     },
     {
-        label: 'Add Dealer Category',
+        label: 'Add ',
     },
 ]
 
@@ -44,7 +44,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Dealer Category Details{' '}
+                           Details{' '}
                         </div>
 
                         {/* BUTTON - Add Button */}
@@ -57,7 +57,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Add Dealer Category
+                               + Add 
                             </button>
                         </div>
                     </div>

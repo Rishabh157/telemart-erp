@@ -125,7 +125,7 @@ const ProductGroupListingWrapper = () => {
         deleteProductGroup(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'product-group deleted successfully!')
+                    showToast('success', 'Deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }

@@ -31,7 +31,7 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
         districtName: '',
     }
     const validationSchema = object({
-        districtName: string().required('District Name is required'),
+        districtName: string().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -44,7 +44,7 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'District added successfully!')
+                        showToast('success', 'Added successfully!')
                         onClose()
                     } else {
                         showToast('error', res?.data?.message)

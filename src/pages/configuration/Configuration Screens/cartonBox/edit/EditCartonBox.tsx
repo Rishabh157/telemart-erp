@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/carton-box',
     },
     {
-        label: 'Update Outer Pack Box',
+        label: 'Edit',
     },
 ]
 
@@ -38,7 +38,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                 <div className="pt-1">
                     <ATMPageHeading>
                         {' '}
-                        Update Outer Packaging Box{' '}
+                        Update{' '}
                     </ATMPageHeading>
                 </div>
 
