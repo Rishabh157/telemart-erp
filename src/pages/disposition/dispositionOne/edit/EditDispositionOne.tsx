@@ -54,7 +54,7 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                                         apiStatus ? 'opacity-50' : ''
                                     }`}
                                 >
-                                 Update
+                                    Update
                                 </button>
                             </div>
                         </div>
