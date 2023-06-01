@@ -97,9 +97,7 @@ const ViewInitialCallThree = ({ formikProps }: Props) => {
                                                 className="form-checkbox h-5 w-5 mr-2"
                                                 checked
                                             />
-                                            <span>
-                                                {criteria}
-                                            </span>
+                                            <span>{criteria}</span>
                                         </div>
                                     ))}
                                 </div>

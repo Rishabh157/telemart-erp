@@ -24,7 +24,7 @@ const GRNListing = ({ columns, rows }: Props) => {
     const grnState: any = useSelector((state: RootState) => state.grn)
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-    const { page, rowsPerPage, searchValue } = grnState
+    const { page, rowsPerPage, searchValue, totalItems } = grnState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
@@ -37,7 +37,7 @@ const GRNListing = ({ columns, rows }: Props) => {
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     searchValue={searchValue}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
@@ -69,7 +69,7 @@ const GRNListing = ({ columns, rows }: Props) => {
                 <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
