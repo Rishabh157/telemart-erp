@@ -34,6 +34,15 @@ export const pincodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        getAllPincodeUnauth: builder.query({
+            providesTags: ['pincode'],
+            query: () => ({
+                url: `/pincode/inbound`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
         //***** ADD *****/
         AddPincode: builder.mutation({
             invalidatesTags: ['pincode'],
@@ -100,4 +109,5 @@ export const {
     useDeletePincodeMutation,
     useGetAllPincodeQuery,
     useGetAllPincodeByDistrictQuery,
+    useGetAllPincodeUnauthQuery,
 } = pincodeApi

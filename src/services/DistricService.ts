@@ -23,6 +23,15 @@ export const districtApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        getAllDistrictUnauth: builder.query({
+            providesTags: ['District'],
+            query: () => ({
+                url: '/district/inbound',
+                method: 'GET',
+                // body,
+            }),
+        }),
+
         //***** GET *****/
         getAllDistrictByState: builder.query({
             providesTags: ['District'],
@@ -99,4 +108,5 @@ export const {
     useDeleteDistrictMutation,
     useGetAllDistrictQuery,
     useGetAllDistrictByStateQuery,
+    useGetAllDistrictUnauthQuery,
 } = districtApi

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import DispositionLayout from '../../../DispositionLayout'
+import DispositionLayout from '../../DispositionLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'

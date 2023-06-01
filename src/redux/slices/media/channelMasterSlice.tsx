@@ -1,13 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { TehsilListResponse } from 'src/models/Tehsil.model'
-import { LocationSelectType } from 'src/utils'
+import { ChannelMasterListResponse } from 'src/models/channelMaster.model'
 
-export interface TehsilSliceStateType {
-    items: TehsilListResponse[] | []
-    allTehsils: TehsilListResponse[] | []
-    selectedTehsil: TehsilListResponse | null
-    selectedLocationTehsil: LocationSelectType | null
+export interface ChannelMasterSliceStateType {
+    items: ChannelMasterListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -15,13 +11,11 @@ export interface TehsilSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
-    filterValue: string
+    channelMaster: ChannelMasterListResponse[] | null
 }
 
-const initialState: TehsilSliceStateType = {
+const initialState: ChannelMasterSliceStateType = {
     items: [],
-    selectedTehsil: null,
-    selectedLocationTehsil: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -29,15 +23,17 @@ const initialState: TehsilSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
-    filterValue: '',
-    allTehsils: [],
+    channelMaster: null,
 }
 
-const tehsilSlice: any = createSlice({
-    name: 'tehsil',
+const channelMasterSlice: any = createSlice({
+    name: 'channelMaster',
     initialState,
     reducers: {
-        setItems: (state, action: PayloadAction<TehsilListResponse[] | []>) => {
+        setItems: (
+            state,
+            action: PayloadAction<ChannelMasterListResponse[] | []>
+        ) => {
             state.items = action.payload
         },
         setPage: (state, action: PayloadAction<number>) => {
@@ -69,23 +65,11 @@ const tehsilSlice: any = createSlice({
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
-        setSelectedTehsil: (
+        setChannelMasters: (
             state,
-            action: PayloadAction<TehsilListResponse | null>
+            action: PayloadAction<ChannelMasterListResponse[]>
         ) => {
-            state.selectedTehsil = action.payload
-        },
-        setSelectedLocationTehsil: (
-            state,
-            action: PayloadAction<LocationSelectType | null>
-        ) => {
-            state.selectedLocationTehsil = action.payload
-        },
-        setFilterValue: (state, action: PayloadAction<string>) => {
-            state.filterValue = action.payload
-        },
-        setAllTehsils: (state, action: PayloadAction<TehsilListResponse[]>) => {
-            state.allTehsils = action.payload
+            state.channelMaster = action.payload
         },
     },
 })
@@ -99,9 +83,6 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
-    setSelectedTehsil,
-    setSelectedLocationTehsil,
-    setFilterValue,
-    setAllTehsils,
-} = tehsilSlice.actions
-export default tehsilSlice.reducer
+    setChannelMasters,
+} = channelMasterSlice.actions
+export default channelMasterSlice.reducer
