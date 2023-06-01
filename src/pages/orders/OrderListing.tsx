@@ -19,81 +19,20 @@ import {
     setSearchValue,
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
+import {useNavigate} from 'react-router-dom'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
-const columns: columnTypes[] = [
-    {
-        field: 'orderNumber',
-        headerName: 'Order No',
-        flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: OrderListResponse) => (
-            <span className="text-primary-main "># {row.orderNumber} </span>
-        ),
-    },
-    {
-        field: 'didNo',
-        headerName: 'DID No',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
-    },
-
-    {
-        field: 'mobileNo',
-        headerName: 'Mobile No',
-        flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: OrderListResponse) => <span> {row.mobileNo} </span>,
-    },
-    {
-        field: 'batchNo',
-        headerName: 'Batch Assigned',
-        flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: OrderListResponse) => {
-            return renderorderStatus(row.batchNo?.length)
-        },
-    },
-    {
-        field: 'deliveryCharges',
-        headerName: 'Delivery Charges',
-        flex: 'flex-[2_2_0%]',
-        renderCell: (row: OrderListResponse) => (
-            <span className="text-primary-main "> {row.deliveryCharges} </span>
-        ),
-    },
-    {
-        field: 'discount',
-        headerName: 'Discount',
-        flex: 'flex-[2_2_0%]',
-        renderCell: (row: OrderListResponse) => (
-            <span className="text-primary-main "> {row.discount} </span>
-        ),
-    },
-    {
-        field: 'total',
-        headerName: 'Total',
-        flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: OrderListResponse) => (
-            <span className="text-slate-800"> &#8377; {row.total} </span>
-        ),
-    },
-    {
-        field: 'actions',
-        headerName: 'Actions',
-        flex: 'flex-[0.5_0.5_0%]',
-        renderCell: (row: OrderListResponse) => (
-            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-                {' '}
-                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-            </button>
-        ),
-        align: 'end',
-    },
-]
 
 const OrderListing = () => {
     // Hooks
+    const navigate = useNavigate()
+    const dispatch = useDispatch<AppDispatch>()
 
     // States
-    const [selectedRows, setSelectedRows] = useState([])
-    const dispatch = useDispatch<AppDispatch>()
+    const [selectedRows, setSelectedRows] = useState([])    
+    const [currentId, setCurrentId] = useState('')
+    const [showDropdown, setShowDropdown] = useState(false)
+
 
     const orderState: any = useSelector((state: RootState) => state.order)
     const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
@@ -127,6 +66,142 @@ const OrderListing = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
+
+
+    const columns: columnTypes[] = [
+        {
+            field: 'orderNumber',
+            headerName: 'Order No',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: OrderListResponse) => (
+                <span className="text-primary-main "># {row.orderNumber} </span>
+            ),
+        },
+        {
+            field: 'didNo',
+            headerName: 'DID No',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
+        },
+    
+        {
+            field: 'mobileNo',
+            headerName: 'Mobile No',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: OrderListResponse) => <span> {row.mobileNo} </span>,
+        },
+        {
+            field: 'batchNo',
+            headerName: 'Batch Assigned',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: OrderListResponse) => {
+                return renderorderStatus(row.batchNo?.length)
+            },
+        },
+        {
+            field: 'deliveryCharges',
+            headerName: 'Delivery Charges',
+            flex: 'flex-[2_2_0%]',
+            renderCell: (row: OrderListResponse) => (
+                <span className="text-primary-main "> {row.deliveryCharges} </span>
+            ),
+        },
+        {
+            field: 'discount',
+            headerName: 'Discount',
+            flex: 'flex-[2_2_0%]',
+            renderCell: (row: OrderListResponse) => (
+                <span className="text-primary-main "> {row.discount} </span>
+            ),
+        },
+        {
+            field: 'total',
+            headerName: 'Total',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: OrderListResponse) => (
+                <span className="text-slate-800"> &#8377; {row.total} </span>
+            ),
+        },    
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <div className="relative">
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            setShowDropdown(!showDropdown)
+                            setCurrentId(row?._id)
+                        }}
+                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+                    >
+                        {' '}
+                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                    </button>
+                    {showDropdown && currentId === row?._id && (
+                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                            <button
+                                onClick={() => {
+                                    navigate(`/orders/view/${currentId}`)
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View
+                            </button>
+                            <button
+                                onClick={() => {
+                                    navigate(`/orders/${currentId}`)
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Edit
+                            </button>
+                            <button
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Delete Order',
+                                        text: 'Do you want to delete',
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDelete()
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    )}
+                </div>
+            ),
+            align: 'end',
+        },
+    ]
+    
+    const handleDelete = () => {
+        setShowDropdown(false)
+        // deleteOrdercurrentId).then((res) => {
+        //     if ('data' in res) {
+        //         if (res?.data?.status) {
+        //             showToast('success', 'Order deleted successfully!')
+        //         } else {
+        //             showToast('error', res?.data?.message)
+        //         }
+        //     } else {
+        //         showToast(
+        //             'error',
+        //             'Something went wrong, Please try again later'
+        //         )
+        //     }
+        // })
+    }
+
+
+
     return (
         <SideNavLayout>
             <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
