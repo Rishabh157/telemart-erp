@@ -23,6 +23,14 @@ export const areaApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+        getAllAreaUnauth: builder.query({
+            providesTags: ['Area'],
+            query: () => ({
+                url: '/area/inbound',
+                method: 'GET',
+                // body,
+            }),
+        }),
 
         //***** ADD *****/
         addArea: builder.mutation({
@@ -89,4 +97,5 @@ export const {
     useExportAreaDataMutation,
     useDeleteAreaMutation,
     useGetAllAreaQuery,
+    useGetAllAreaUnauthQuery,
 } = areaApi

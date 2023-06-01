@@ -11,6 +11,7 @@ import { SiGoogletagmanager } from 'react-icons/si'
 import { MdEmojiEvents, MdViewTimeline, MdAnalytics } from 'react-icons/md'
 import { TiFlowMerge } from 'react-icons/ti'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { AiOutlineSetting } from 'react-icons/ai'
 
 const mediaNavigation: NavItemType[] = [
     {
@@ -63,6 +64,11 @@ const mediaNavigation: NavItemType[] = [
         label: 'Flow',
         icon: TiFlowMerge,
         path: '/media/flow',
+    },
+    {
+        label: 'Inbound',
+        icon: AiOutlineSetting,
+        path: '/media/inbound',
     },
 ]
 

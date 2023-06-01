@@ -34,6 +34,15 @@ export const stateApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        getByAllStateUnauth: builder.query({
+            providesTags: ['State'],
+            query: () => ({
+                url: `/state/inbound`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
         //***** ADD *****/
         AddState: builder.mutation({
             invalidatesTags: ['State'],
@@ -100,4 +109,5 @@ export const {
     useDeleteStateMutation,
     useGetAllStateQuery,
     useGetAllStateByCountryQuery,
+    useGetByAllStateUnauthQuery,
 } = stateApi

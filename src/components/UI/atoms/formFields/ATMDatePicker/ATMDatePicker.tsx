@@ -16,6 +16,7 @@ type Props = {
     disabled?: boolean
     isSubmitting?: boolean
     dateTimeFormat?: string
+    labelClass?: string
 }
 
 const ATMDatePicker = ({
@@ -27,12 +28,13 @@ const ATMDatePicker = ({
     size = 'small',
     disabled = false,
     isSubmitting = true,
+    labelClass = 'font-medium',
     dateTimeFormat = 'MM/DD/YYYY',
 }: Props) => {
     return (
         <div className="relative">
             {label && (
-                <label className="text-slate-700 font-medium">
+                <label className={`text-slate-700 ${labelClass}`}>
                     {' '}
                     {label}{' '}
                     {required && <span className="text-red-500"> * </span>}{' '}
@@ -42,7 +44,7 @@ const ATMDatePicker = ({
             <div
                 className={`${label && 'mt-2'} ${getInputHeight(
                     size
-                )} flex items-center`}
+                )} flex items-center `}
             >
                 <LocalizationProvider dateAdapter={AdapterMoment}>
                     <DesktopDatePicker
@@ -50,12 +52,22 @@ const ATMDatePicker = ({
                         inputFormat={dateTimeFormat}
                         value={value}
                         onChange={onChange}
+                        showDaysOutsideCurrentMonth
                         renderInput={(params) => (
                             <TextField
                                 {...params}
                                 size="small"
                                 fullWidth
                                 className="bg-white"
+                                style={{ height: size === 'xs' ? '30px' : '' }}
+                                // InputProps={{
+                                //     style: {
+
+                                //         // height: size === 'xs' ? '30px' : '',
+                                //         borderColor: 'rgb(51 65 85)',
+                                //         // borderWidth: '0.5px',
+                                //     },
+                                // }}
                                 error={value === '' ? false : undefined}
                             />
                         )}
