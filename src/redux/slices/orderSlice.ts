@@ -1,43 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { TehsilListResponse } from 'src/models/Tehsil.model'
-import { LocationSelectType } from 'src/utils'
+import { OrderListResponse } from 'src/models'
 
-export interface TehsilSliceStateType {
-    items: TehsilListResponse[] | []
-    allTehsils: TehsilListResponse[] | []
-    selectedTehsil: TehsilListResponse | null
-    selectedLocationTehsil: LocationSelectType | null
+export type InitialStateType = {
+    items: OrderListResponse[] | []
+    allItems: OrderListResponse[] | []
+    selectedItem: OrderListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selectedId: string
-    filterValue: string
+    selectedDealerId: string
 }
 
-const initialState: TehsilSliceStateType = {
+const initialState: InitialStateType = {
     items: [],
-    selectedTehsil: null,
-    selectedLocationTehsil: null,
+    allItems: [],
+    selectedItem: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectedId: '',
-    filterValue: '',
-    allTehsils: [],
+    selectedDealerId: '',
 }
 
-const tehsilSlice: any = createSlice({
-    name: 'tehsil',
+const orderSlice: Slice<InitialStateType> = createSlice({
+    name: 'order',
     initialState,
     reducers: {
-        setItems: (state, action: PayloadAction<TehsilListResponse[] | []>) => {
+        setItems: (state, action: PayloadAction<OrderListResponse[] | []>) => {
             state.items = action.payload
         },
         setPage: (state, action: PayloadAction<number>) => {
@@ -66,26 +61,20 @@ const tehsilSlice: any = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setSelectedId: (state, action: PayloadAction<string>) => {
-            state.selectedId = action.payload
+        setSelectedDealerId: (state, action: PayloadAction<string>) => {
+            state.selectedDealerId = action.payload
         },
-        setSelectedTehsil: (
+        setAllItems: (
             state,
-            action: PayloadAction<TehsilListResponse | null>
+            action: PayloadAction<OrderListResponse[] | []>
         ) => {
-            state.selectedTehsil = action.payload
+            state.allItems = action.payload
         },
-        setSelectedLocationTehsil: (
+        setSelectedItem: (
             state,
-            action: PayloadAction<LocationSelectType | null>
+            action: PayloadAction<OrderListResponse | null>
         ) => {
-            state.selectedLocationTehsil = action.payload
-        },
-        setFilterValue: (state, action: PayloadAction<string>) => {
-            state.filterValue = action.payload
-        },
-        setAllTehsils: (state, action: PayloadAction<TehsilListResponse[]>) => {
-            state.allTehsils = action.payload
+            state.selectedItem = action.payload
         },
     },
 })
@@ -98,10 +87,8 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectedId,
-    setSelectedTehsil,
-    setSelectedLocationTehsil,
-    setFilterValue,
-    setAllTehsils,
-} = tehsilSlice.actions
-export default tehsilSlice.reducer
+    setSelectedDealerId,
+    setSelectedItem,
+    setAllItems,
+} = orderSlice.actions
+export default orderSlice.reducer

@@ -52,7 +52,17 @@ const AddSlotManagement = ({
     const [slotEndTime, setSlotEndTime] = useState('')
     const [showSlots, setShowSlots] = useState(false)
 
-    const options = ['FIXED', 'FLEXIBLE']
+    // const options = ['FIXED', 'FLEXIBLE']
+    const options = [
+        {
+            label: 'Fixed',
+            value: 'FIXED',
+        },
+        {
+            label: 'Flexible',
+            value: 'FLEXIBLE',
+        },
+    ]
 
     const getDates = (startDate: any, endDate: any) => {
         const dateArray = []
@@ -191,13 +201,14 @@ const AddSlotManagement = ({
                                 Add Slot Details
                             </div>
 
-                            <div className="flex gap-5 items-end  pb-5">
+                            <div className="grid grid-cols-5 gap-2 items-end  pb-5">
                                 {/* Est. Receiving Date */}
                                 <div className="flex-[3_3_0%]">
                                     <ATMDatePicker
                                         name={`date`}
                                         value={slotStartDate}
                                         label="Slot Start Date"
+                                        dateTimeFormat="MM/DD/YY ddd"
                                         onChange={(newValue) =>
                                             setSlotStartDate(newValue)
                                         }
@@ -208,7 +219,7 @@ const AddSlotManagement = ({
                                         name={`endDate`}
                                         value={slotEndDate}
                                         label="Slot End Date"
-                                        dateTimeFormat="LLL"
+                                        dateTimeFormat="MM/DD/YY ddd"
                                         onChange={(newValue) =>
                                             setSlotEndDate(newValue)
                                         }
@@ -286,6 +297,7 @@ const AddSlotManagement = ({
                                                                             value={
                                                                                 date
                                                                             }
+                                                                            dateTimeFormat="MM/DD/YY ddd"
                                                                             label="Date"
                                                                             onChange={(
                                                                                 newValue

@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import ATMTable, {
@@ -9,48 +8,69 @@ import { renderorderStatus } from 'src/utils/renderOrderStatus'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
+import { OrderListResponse } from 'src/models'
+import { useGetOrderQuery } from 'src/services/OrderService'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from 'src/redux/store'
+import {
+    setIsTableLoading,
+    setItems,
+    setPage,
+    setSearchValue,
+    setTotalItems,
+} from 'src/redux/slices/orderSlice'
 
 const columns: columnTypes[] = [
     {
-        field: 'order_no',
-        headerName: 'Order',
+        field: 'orderNumber',
+        headerName: 'Order No',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: OrderListResponse) => (
+            <span className="text-primary-main "># {row.orderNumber} </span>
+        ),
+    },
+    {
+        field: 'didNo',
+        headerName: 'DID No',
         flex: 'flex-[1_1_0%]',
-        // renderCell: (row: any) => (
-        //     <span className='text-primary-main ' > # {row.order_no} </span>
-        // )
+        renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
+    },
+
+    {
+        field: 'mobileNo',
+        headerName: 'Mobile No',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: OrderListResponse) => <span> {row.mobileNo} </span>,
     },
     {
-        field: 'date',
-        headerName: 'Date',
+        field: 'batchNo',
+        headerName: 'Batch Assigned',
         flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: any) => <span> {row.date} </span>,
-    },
-    {
-        field: 'status',
-        headerName: 'Status',
-        flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: any) => {
-            return renderorderStatus(row.status)
+        renderCell: (row: OrderListResponse) => {
+            return renderorderStatus(row.batchNo?.length)
         },
     },
     {
-        field: 'customer',
-        headerName: 'Customer',
+        field: 'deliveryCharges',
+        headerName: 'Delivery Charges',
         flex: 'flex-[2_2_0%]',
+        renderCell: (row: OrderListResponse) => (
+            <span className="text-primary-main "> {row.deliveryCharges} </span>
+        ),
     },
     {
-        field: 'purchased',
-        headerName: 'Purchased',
+        field: 'discount',
+        headerName: 'Discount',
         flex: 'flex-[2_2_0%]',
-        renderCell: (row: any) => (
-            <span className="text-primary-main "> {row.purchased} </span>
+        renderCell: (row: OrderListResponse) => (
+            <span className="text-primary-main "> {row.discount} </span>
         ),
     },
     {
         field: 'total',
         headerName: 'Total',
         flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: any) => (
+        renderCell: (row: OrderListResponse) => (
             <span className="text-slate-800"> &#8377; {row.total} </span>
         ),
     },
@@ -58,7 +78,7 @@ const columns: columnTypes[] = [
         field: 'actions',
         headerName: 'Actions',
         flex: 'flex-[0.5_0.5_0%]',
-        renderCell: (row: any) => (
+        renderCell: (row: OrderListResponse) => (
             <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
                 {' '}
                 <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
@@ -68,168 +88,48 @@ const columns: columnTypes[] = [
     },
 ]
 
-const rows = [
-    {
-        order_no: '10001',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 1,
-    },
-
-    {
-        order_no: '10002',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 2,
-    },
-
-    {
-        order_no: '10003',
-        date: 'November 12, 2022',
-        status: 'DELIVERED',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 3,
-    },
-
-    {
-        order_no: '10004',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 4,
-    },
-
-    {
-        order_no: '10005',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 5,
-    },
-
-    {
-        order_no: '10006',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 6,
-    },
-
-    {
-        order_no: '10007',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 7,
-    },
-
-    {
-        order_no: '10008',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 8,
-    },
-
-    {
-        order_no: '10008',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 9,
-    },
-
-    {
-        order_no: '10008',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 10,
-    },
-
-    {
-        order_no: '10008',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 11,
-    },
-
-    {
-        order_no: '10008',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 12,
-    },
-
-    {
-        order_no: '10008',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 13,
-    },
-
-    {
-        order_no: '10008',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 14,
-    },
-
-    {
-        order_no: '10008',
-        date: 'November 12, 2022',
-        status: 'HOLD',
-        customer: 'Himanshu',
-        purchased: '3 Items',
-        total: 4299,
-        _id: 15,
-    },
-]
-
 const OrderListing = () => {
     // Hooks
-    const navigate = useNavigate()
 
     // States
     const [selectedRows, setSelectedRows] = useState([])
+    const dispatch = useDispatch<AppDispatch>()
 
+    const orderState: any = useSelector((state: RootState) => state.order)
+    const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
+        orderState
+
+    const { data, isLoading, isFetching } = useGetOrderQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: ['didNo', 'mobileNo'],
+        page: page,
+        filterBy: [
+            {
+                fieldName: 'poCode',
+                value: filterValue,
+            },
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: 1,
+        isPaginationRequired: true,
+    })
+
+    useEffect(() => {
+        if (!isFetching && !isLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setItems(data?.data || []))
+            dispatch(setTotalItems(data?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading, isFetching, data, dispatch])
     return (
         <SideNavLayout>
-            <div className="w-full h-full ">
+            <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
                 <div className="h-[100px] ">
                     <div className="mb-5 text-2xl text-slate-700 font-bold ">
                         Orders
@@ -238,8 +138,12 @@ const OrderListing = () => {
                         <div className="flex gap-2">
                             <ATMInputAdormant
                                 name=""
-                                value=""
-                                onChange={() => {}}
+                                value={searchValue}
+                                onChange={(newValue) =>
+                                    dispatch(
+                                        setSearchValue(newValue.target.value)
+                                    )
+                                }
                                 placeholder="Search"
                                 adormant={
                                     <BiSearchAlt2 className="text-slate-400" />
@@ -261,7 +165,7 @@ const OrderListing = () => {
                             ) : null}
                         </div>
 
-                        <div>
+                        {/* <div>
                             <button
                                 type="button"
                                 className="flex items-center gap-2 bg-primary-main text-white text-sm h-[33px] px-4 rounded font-bold"
@@ -271,13 +175,13 @@ const OrderListing = () => {
                             >
                                 <span className="text-xl"> + </span> Add Orders
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
                 <ATMTable
                     columns={columns}
-                    rows={rows}
+                    rows={items}
                     isCheckbox={true}
                     selectedRows={selectedRows}
                     onRowSelect={(selectedRows) =>
@@ -286,15 +190,16 @@ const OrderListing = () => {
                     extraClasses="max-h-[calc(100%-150px)] overflow-auto"
                 />
 
-                <div className=" border-t  h-[50px] flex items-center ">
+                <div className=" border-t  h-[50px] flex items-end ">
                     <div className="w-full">
                         <ATMPagination
-                            page={1}
-                            onPageChange={(newPage) => alert(newPage)}
-                            rowsPerPage={10}
-                            rowCount={100}
-                            rows={Array(10).fill(0)}
-                            onRowsPerPageChange={(newValue) => alert(newValue)}
+                            page={page}
+                            rowCount={totalItems}
+                            rows={items}
+                            rowsPerPage={rowsPerPage}
+                            onPageChange={(newPage) =>
+                                dispatch(setPage(newPage))
+                            }
                         />
                     </div>
                 </div>

@@ -24,6 +24,14 @@ export const tehsilApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        getAllTehsilUnauth: builder.query({
+            providesTags: ['Tehsil'],
+            query: (id) => ({
+                url: '/tehsil/inbound',
+                method: 'GET',
+                // body,
+            }),
+        }),
         //***** ADD *****/
         AddTehsil: builder.mutation({
             invalidatesTags: ['Tehsil'],
@@ -89,4 +97,5 @@ export const {
     useExportTehsilDataMutation,
     useDeleteTehsilMutation,
     useGetAllTehsilQuery,
+    useGetAllTehsilUnauthQuery,
 } = tehsilApi
