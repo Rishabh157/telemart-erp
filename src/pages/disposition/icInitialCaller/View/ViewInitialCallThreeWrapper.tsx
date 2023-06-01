@@ -30,7 +30,7 @@ const ViewInitialCallThreeWrappper = () => {
     const initialValues: FormInitialValues = {
         initialCallName: selectedInitialCallerThree?.initialCallName || '',
         initialCallOneId: selectedInitialCallerThree?.initialCallOneLabel || '',
-        initialCallTwoId: selectedInitialCallerThree?.initialCalTwoLabel || '',
+        initialCallTwoId: selectedInitialCallerThree?.initialCallTwoLabel || '',
         complaintType: selectedInitialCallerThree?.complaintType || '',
         emailType: selectedInitialCallerThree?.emailType || '',
         smsType: selectedInitialCallerThree?.smsType || '',

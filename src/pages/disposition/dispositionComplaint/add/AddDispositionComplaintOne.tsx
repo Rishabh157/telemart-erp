@@ -28,11 +28,11 @@ const AddDispositionComplaint = ({
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition-Comaplaint',
+            label: 'Disposition Comaplaint',
             path: '/dispositions/disposition-complaint',
         },
         {
-            label: 'Add Disposition-complaint',
+            label: 'Add ',
         },
     ]
 

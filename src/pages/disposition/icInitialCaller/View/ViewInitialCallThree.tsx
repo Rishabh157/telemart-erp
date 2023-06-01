@@ -11,7 +11,7 @@ type Props = {
 }
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: ' Initialcall-Three',
+        label: ' Initialcall Three',
         path: '/dispositions/initialCall-three',
     },
     {
@@ -49,9 +49,9 @@ const ViewInitialCallThree = ({ formikProps }: Props) => {
 
                     {/* Form */}
                     <div className="grow py-8 px-3 ">
-                        <div className="grid grid-cols-3 gap-2 text-xl">
+                        <div className="grid  gap-2 text-l">
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     <span>Initialcall Name:</span>
                                 </label>
                                 <span className="">
@@ -59,31 +59,31 @@ const ViewInitialCallThree = ({ formikProps }: Props) => {
                                 </span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     Initialcall One:
                                 </label>
                                 <span>{values.initialCallOneId}</span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     Initialcall Two:
                                 </label>
                                 <span>{values.initialCallTwoId}</span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     Sms Type:
                                 </label>
                                 <span>{values.smsType}</span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     Email Type:
                                 </label>
                                 <span>{values.emailType}</span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     Return TYpe:
                                 </label>
                                 <div className="flex  gap-3">
@@ -97,7 +97,7 @@ const ViewInitialCallThree = ({ formikProps }: Props) => {
                                                 className="form-checkbox h-5 w-5 mr-2"
                                                 checked
                                             />
-                                            <span className="gap-8">
+                                            <span>
                                                 {criteria}
                                             </span>
                                         </div>

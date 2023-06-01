@@ -18,7 +18,7 @@ type Props = {
 }
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: ' Disposition-Two',
+        label: ' Disposition Two',
         path: '/dispositions/disposition-two',
     },
     {

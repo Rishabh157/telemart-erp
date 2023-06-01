@@ -70,7 +70,7 @@ const InitialCallTwoListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'initialCallName',
-            headerName: 'initial call two',
+            headerName: 'Initialcall Two',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InitialCallerTwoListResponse) => (
                 <span> {row.initialCallName} </span>

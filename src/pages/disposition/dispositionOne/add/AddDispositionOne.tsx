@@ -17,7 +17,7 @@ const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition-One',
+            label: 'Disposition One',
             path: '/dispositions/disposition-one',
         },
         {

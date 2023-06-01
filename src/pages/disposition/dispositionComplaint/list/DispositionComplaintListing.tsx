@@ -37,7 +37,7 @@ const DispositionComplaintListing = ({
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition Complaint',
+            label: 'Disposition ',
             path: '/dashboard',
         },
         {

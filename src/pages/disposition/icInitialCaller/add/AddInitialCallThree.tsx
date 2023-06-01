@@ -35,7 +35,7 @@ const AddInitialCallThree = ({
     const dispatch = useDispatch()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'IntialCall-Three',
+            label: 'Intialcall Three',
             path: '/dispositions/initialcall-three',
         },
         {
@@ -115,7 +115,7 @@ const AddInitialCallThree = ({
                                 <ATMTextField
                                     name="initialCallName"
                                     value={values.initialCallName}
-                                    label="InitialCall Name"
+                                    label="Initialcall Name"
                                     placeholder="Name"
                                     onChange={(e) =>
                                         setFieldValue(
@@ -132,7 +132,7 @@ const AddInitialCallThree = ({
                                     name="initialCallOneId"
                                     required
                                     value={values.initialCallOneId}
-                                    label="InitialCall One"
+                                    label="Initialcall One"
                                     onChange={(value) => {
                                         console.log(value)
                                         setFieldValue('initialCallOneId', value)
@@ -146,7 +146,7 @@ const AddInitialCallThree = ({
                                     name="initialCallTwoId"
                                     required
                                     value={values.initialCallTwoId}
-                                    label="InitialCall Two"
+                                    label="Initialcall Two"
                                     onChange={(value) =>
                                         setFieldValue('initialCallTwoId', value)
                                     }

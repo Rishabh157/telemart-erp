@@ -27,7 +27,7 @@ const EditInitialCallTwo = ({
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Initialcall-Two',
+            label: 'Initialcall Two',
             path: '/dispositions/initialCall-two',
         },
         {

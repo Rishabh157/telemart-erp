@@ -18,7 +18,7 @@ type Props = {
 }
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: ' Disposition-Two',
+        label: ' Disposition Two',
         path: '/dispositions/disposition-two',
     },
     {
@@ -81,7 +81,7 @@ const EditDispositionTwo = ({
                                 value={values.dispositionName}
                                 label="Disposition Name"
                                 required
-                                placeholder="Disposition Name"
+                                placeholder="Name"
                                 onChange={(e) => {
                                     setFieldValue(
                                         'dispositionName',

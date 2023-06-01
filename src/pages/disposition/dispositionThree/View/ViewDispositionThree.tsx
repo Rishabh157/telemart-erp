@@ -11,7 +11,7 @@ type Props = {
 }
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: ' Disposition-Three',
+        label: ' Disposition Three',
         path: '/dispositions/disposition-three',
     },
     {
@@ -49,9 +49,9 @@ const ViewDispositionThree = ({ formikProps }: Props) => {
 
                     {/* Form */}
                     <div className="grow py-8 px-3 ">
-                        <div className="grid grid-cols-3 gap-2 text-xl">
+                        <div className="grid gap-2 text-l">
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     <span>Disposition Name:</span>
                                 </label>
                                 <span className="">
@@ -59,37 +59,37 @@ const ViewDispositionThree = ({ formikProps }: Props) => {
                                 </span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     Disposition One:
                                 </label>
                                 <span>{values.dispositionOneId}</span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     Disposition Two:
                                 </label>
                                 <span>{values.dispositionTwoId}</span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     SMS Type:
                                 </label>
                                 <span>{values.smsType}</span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     Email Type:
                                 </label>
                                 <span>{values.emailType}</span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     Priority:
                                 </label>
                                 <span>{values.priority}</span>
                             </div>
                             <div className="flex mb-2">
-                                <label className="w-60 font-medium text-xl">
+                                <label className="w-60 font-medium text-l">
                                     Applicable Criteria:
                                 </label>
                                 <div className="flex  gap-3">
