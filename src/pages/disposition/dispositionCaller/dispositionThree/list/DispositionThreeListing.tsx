@@ -31,7 +31,7 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
     const { page, rowsPerPage, totalItems, searchValue } = dispositionThreeState
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition Three',
+            label: 'Disposition',
             path: '/disposition-three',
         },
         {

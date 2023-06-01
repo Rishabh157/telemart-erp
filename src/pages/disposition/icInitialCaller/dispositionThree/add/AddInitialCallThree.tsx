@@ -39,7 +39,7 @@ const AddInitialCallThree = ({
             path: '/dispositions/initialcall-three',
         },
         {
-            label: 'Add InitialCall-Three',
+            label: 'Add ',
         },
     ]
 
@@ -82,7 +82,7 @@ const AddInitialCallThree = ({
 
                     {/* Page Heading */}
                     <div className="pt-1">
-                        <ATMPageHeading> Add Disposition-Three </ATMPageHeading>
+                        <ATMPageHeading> Add  </ATMPageHeading>
                     </div>
 
                     <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -90,7 +90,7 @@ const AddInitialCallThree = ({
                             {/* Form Heading */}
                             <div className="text-xl font-medium">
                                 {' '}
-                                Disposition-Three Details{' '}
+                               Details{' '}
                             </div>
 
                             {/* BUTTON - Add Button */}

@@ -49,7 +49,7 @@ const AddDispositionComplaint = ({
                     <div className="pt-1">
                         <ATMPageHeading>
                             {' '}
-                            Add Disposition-Complaint{' '}
+                            Add {' '}
                         </ATMPageHeading>
                     </div>
 
@@ -58,7 +58,7 @@ const AddDispositionComplaint = ({
                             {/* Form Heading */}
                             <div className="text-xl font-medium">
                                 {' '}
-                                Disposition-Complaint Details{' '}
+                                Details{' '}
                             </div>
 
                             {/* BUTTON - Add Button */}

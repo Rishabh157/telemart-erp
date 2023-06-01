@@ -32,7 +32,7 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition One',
+            label: 'Disposition',
             path: '/disposition-one',
         },
         {

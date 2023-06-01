@@ -21,7 +21,7 @@ const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
             path: '/dispositions/disposition-one',
         },
         {
-            label: 'Add Disposition-one',
+            label: 'Add ',
         },
     ]
 
@@ -36,7 +36,7 @@ const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Page Heading */}
                     <div className="pt-1">
-                        <ATMPageHeading> Add Disposition-One </ATMPageHeading>
+                        <ATMPageHeading> Add </ATMPageHeading>
                     </div>
 
                     <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -44,7 +44,7 @@ const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
                             {/* Form Heading */}
                             <div className="text-xl font-medium">
                                 {' '}
-                                Disposition-One Details{' '}
+                              Details{' '}
                             </div>
 
                             {/* BUTTON - Add Button */}

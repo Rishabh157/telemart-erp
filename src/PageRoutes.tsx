@@ -770,11 +770,11 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-two/edit/:id"
                         element={<EditDispositionTwoWrapper />}
-                       
                     />
-                     <Route
-                     path="dispositions/disposition-complaint"
-                        element={<DispositionComplaintListingWrapper />}/>
+                    <Route
+                        path="dispositions/disposition-complaint"
+                        element={<DispositionComplaintListingWrapper />}
+                    />
                     <Route
                         path="dispositions/disposition-complaint/add"
                         element={<AddDispositionComplaintWrappper />}
@@ -797,10 +797,7 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
                     />
-                     <Route
-                        path="batch"
-                        element={<BatchLisitngWrapper />}
-                    />
+                    <Route path="batch" element={<BatchLisitngWrapper />} />
                 </Routes>
             </BrowserRouter>
         </>
