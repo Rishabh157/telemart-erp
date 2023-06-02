@@ -183,12 +183,12 @@ const Inbound: React.FC<Props> = ({
 
     const RelationOption = [
         {
-            label: 'Male',
+            label: 'Manager',
             value: 'male',
         },
         {
             label: 'Female',
-            value: 'female',
+            value: 'sales',
         },
     ]
 
