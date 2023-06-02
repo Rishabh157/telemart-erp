@@ -55,16 +55,12 @@ const steps = [
                 object().shape({
                     bankName: string().required('Bank name is required'),
                     branchName: string().required('Branch name is required'),
-                    accountHolderName: string().required(
-                        'Account holder name is required'
-                    ),
+                    accountHolderName: string().required('Required'),
                     accountNumber: number().required(
                         'Account number is required'
                     ),
-                    ifscNumber: string().required('IFSC number is required'),
-                    accountType: string().required(
-                        'Please select account type'
-                    ),
+                    ifscNumber: string().required('Required'),
+                    accountType: string().required('Required'),
                 })
             ),
         }),
@@ -72,7 +68,7 @@ const steps = [
 ]
 
 // Page Heading
-const pageHeading = 'Add New Company'
+const pageHeading = 'Add '
 
 const AddCompanyWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -138,7 +134,7 @@ const AddCompanyWrapper = () => {
                 }).then((res) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
-                            showToast('success', 'Company added successfully!')
+                            showToast('success', 'Added successfully!')
                         } else {
                             showToast('error', res?.data?.message)
                         }

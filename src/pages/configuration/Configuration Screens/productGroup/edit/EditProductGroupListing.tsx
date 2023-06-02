@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/product-group',
     },
     {
-        label: 'Update Product Group',
+        label: 'Edit',
     },
 ]
 
@@ -36,16 +36,13 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Edit Product Group </ATMPageHeading>
+                    <ATMPageHeading> Edit </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            {' '}
-                            Product-Group Details
-                        </div>
+                        <div className="text-xl font-medium"> Details</div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -63,7 +60,7 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow pb-9 pt-2 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* Field1 */}
                             <ATMTextField
@@ -79,7 +76,7 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                     </div>
                 </div>
             </div>
-            <div className="py-6 ">
+            <div className="py-2 ">
                 <FieldArray name="tax">
                     {({ push, remove }) => (
                         <div className="">

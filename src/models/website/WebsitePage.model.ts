@@ -19,6 +19,7 @@ export type AddWebsitePage = {
     headerSpace: string
     footerSpace: string
     companyId: string
+    websiteId: string
 }
 
 export type UpdateWebsitePage = {
@@ -28,6 +29,7 @@ export type UpdateWebsitePage = {
         headerSpace: string
         footerSpace: string
         companyId: string
+        websiteId: string
     }
     id: string
 }

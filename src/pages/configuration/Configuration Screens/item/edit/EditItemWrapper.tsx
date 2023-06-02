@@ -42,9 +42,9 @@ const EditItemWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        itemCode: string().required('Item Code is required'),
-        itemName: string().required('Item Name is required'),
-        itemWeight: string().required('Item Weight is required'),
+        itemCode: string().required('Required'),
+        itemName: string().required('Required'),
+        itemWeight: string().required('Required'),
     })
 
     //    Form Submit Handler

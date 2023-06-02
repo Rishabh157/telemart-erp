@@ -59,7 +59,7 @@ const ProductCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
                     {' '}
-                    + Add Product Category{' '}
+                    + Add{' '}
                 </button>
             </div>
 

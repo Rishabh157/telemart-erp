@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { CartonBoxListResponse } from 'src/models/CartonBox.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
@@ -20,13 +18,6 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
-// import {
-//     setIsTableLoading,
-//     setItems,
-//     setTotalItems,
-// } from "src/redux/slices/vendorSlice";
-// import { AppDispatch, Rootweight } from "src/redux/store";
-// import { useGetVendorsQuery } from "src/services/VendorServices";
 
 const CartonBoxListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -167,7 +158,7 @@ const CartonBoxListingWrapper = () => {
         deleteCartonBox(currentId).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Carton box deleted successfully!')
+                    showToast('success', 'Deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }

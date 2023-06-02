@@ -20,7 +20,7 @@ export type AddInventory = {
         status?: string
         condition?: string
     }[]
-    wareHouse: string
+    wareHouseId: string
     companyId: string
 }
 
@@ -33,7 +33,7 @@ export type UpdateInventory = {
             status?: string
             condition?: string
         }[]
-        wareHouse: string
+        wareHouseId: string
         companyId: string
     }
     id: string

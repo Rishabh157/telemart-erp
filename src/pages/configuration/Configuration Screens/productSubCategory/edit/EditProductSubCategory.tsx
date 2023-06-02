@@ -24,7 +24,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/product-sub-category',
     },
     {
-        label: 'Update Product Sub Category',
+        label: 'Edit',
     },
 ]
 
@@ -44,19 +44,13 @@ const EditProductSubCategory = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading>
-                        {' '}
-                        Update Product Sub Category{' '}
-                    </ATMPageHeading>
+                    <ATMPageHeading> Edit </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            {' '}
-                            Product Sub Category Details{' '}
-                        </div>
+                        <div className="text-xl font-medium"> Details </div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -74,7 +68,7 @@ const EditProductSubCategory = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow pt-2 pb-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* subCategoryCode */}
                             <ATMTextField
@@ -104,11 +98,11 @@ const EditProductSubCategory = ({
                             />
 
                             <ATMSelect
-                                name="parentCategory"
-                                value={values?.parentCategory}
+                                name="parentCategoryId"
+                                value={values?.parentCategoryId}
                                 onChange={(e) => {
                                     setFieldValue(
-                                        'parentCategory',
+                                        'parentCategoryId',
                                         e.target.value
                                     )
                                 }}

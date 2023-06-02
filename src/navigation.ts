@@ -5,7 +5,7 @@ import { HiOutlineTruck } from 'react-icons/hi'
 import { FaRegHandshake } from 'react-icons/fa'
 import { CiBoxes } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
-import { MdPermMedia, MdWeb } from 'react-icons/md'
+import { MdOutlineBorderColor, MdPermMedia, MdWeb } from 'react-icons/md'
 import { GrCompliance, GrNotes } from 'react-icons/gr'
 import { IoDocumentTextOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
@@ -80,6 +80,16 @@ export const navigation: NavItemType[] = [
         label: 'Scheme',
         icon: TfiLayoutMediaOverlayAlt2,
         path: '/scheme',
+    },
+    {
+        label: 'Batch',
+        icon: TfiLayoutMediaOverlayAlt2,
+        path: '/batch',
+    },
+    {
+        label: 'Orders',
+        icon: MdOutlineBorderColor,
+        path: '/orders',
     },
     {
         label: 'Configurations',

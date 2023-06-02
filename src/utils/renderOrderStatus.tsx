@@ -1,20 +1,22 @@
 import { GoPrimitiveDot } from 'react-icons/go'
 
 export const orderStatusKey = {
-    HOLD: {
+    NOTASSIGNED: {
         bgColor: 'bg-yellow-100',
         textColor: 'text-yellow-500',
-        label: 'On Hold',
+        label: 'Not Assigned',
     },
-    DELIVERED: {
+    ASSIGNED: {
         bgColor: 'bg-green-100',
         textColor: 'text-green-500',
-        label: 'Delivered',
+        label: 'Assigned',
     },
 }
 
-export const renderorderStatus = (status: 'HOLD' | 'DELIVERED') => {
-    const { bgColor, textColor, label } = orderStatusKey[status]
+export const renderorderStatus = (status: number) => {
+    const { bgColor, textColor, label } = status
+        ? orderStatusKey['ASSIGNED']
+        : orderStatusKey['NOTASSIGNED']
 
     return (
         <span

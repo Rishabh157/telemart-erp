@@ -38,7 +38,6 @@ const WebstieListingWrapper = () => {
                 <span> {row.productName} </span>
             ),
         },
-
         {
             field: 'actions',
             headerName: 'Actions',
@@ -93,6 +92,18 @@ const WebstieListingWrapper = () => {
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 View Blog
+                            </button>
+                            <button
+                                onClick={() => {
+                                    navigate('/all-websites/website-page/add', {
+                                        state: {
+                                            siteId: currentId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Add Page
                             </button>
 
                             <button
