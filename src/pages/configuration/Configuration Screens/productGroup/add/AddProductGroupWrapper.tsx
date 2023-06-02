@@ -58,13 +58,13 @@ const AddProductGroupWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        groupName: string().required('Group Name is required'),
+        groupName: string().required('Required'),
         tax: array().of(
             object().shape({
-                taxName: string().required('Please select item name'),
+                taxName: string().required('Required'),
                 taxPercent: number()
                     .typeError('Tax rate should be a number')
-                    .required('Please enter tax rate'),
+                    .required('Required'),
             })
         ),
     })
@@ -85,10 +85,7 @@ const AddProductGroupWrapper = (props: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Product-Group added successfully!'
-                        )
+                        showToast('success', 'Added successfully!')
                         navigate('/configurations/product-group')
                     } else {
                         showToast('error', res?.data?.message)

@@ -46,10 +46,10 @@ const EditDealersCategoryWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        dealersCategory: string().required('Dealers Category is required'),
-        investAmount: number().required(' Invest Amount is required'),
-        numberOfOrders: number().required('No Of Orders is required'),
-        deliveryPercentage: number().required('No Of Orders is required'),
+        dealersCategory: string().required('Required'),
+        investAmount: number().required('Required'),
+        numberOfOrders: number().required('Required'),
+        deliveryPercentage: number().required('Required'),
     })
 
     //    Form Submit Handler
@@ -67,7 +67,7 @@ const EditDealersCategoryWrapper = (props: Props) => {
         }).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Updated added successfully!')
+                    showToast('success', 'Updated successfully!')
                     navigate('/configurations/dealers-category')
                 } else {
                     showToast('error', res?.data?.message)

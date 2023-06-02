@@ -31,7 +31,7 @@ const AddCountryDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 name="countryName"
                                 value={values.countryName}
-                                placeholder="Enter a country name"
+                                placeholder="Name"
                                 label="Country Name"
                                 onChange={(e) =>
                                     setFieldValue('countryName', e.target.value)

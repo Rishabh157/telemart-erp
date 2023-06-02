@@ -34,7 +34,7 @@ const AddAreaDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     setFieldValue('area', e.target.value)
                                 }}
-                                placeholder="Enter an area name "
+                                placeholder="Name "
                                 label="Area Name"
                             />
                         </div>

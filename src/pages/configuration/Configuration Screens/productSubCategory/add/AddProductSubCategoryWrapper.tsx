@@ -18,7 +18,7 @@ type Props = {}
 export type FormInitialValues = {
     subCategoryCode: string
     subCategoryName: string
-    parentCategory: string
+    parentCategoryId: string
     hsnCode: string
 }
 
@@ -48,18 +48,16 @@ const AddProductSubCategoryWrapper = (props: Props) => {
     const initialValues: FormInitialValues = {
         subCategoryCode: '',
         subCategoryName: '',
-        parentCategory: '',
+        parentCategoryId: '',
         hsnCode: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        subCategoryCode: string().required('Sub Category Code is required'),
-        subCategoryName: string().required('Please select a Sub Category Name'),
-        parentCategory: string().required(
-            'Please select a parent Category Name'
-        ),
-        hsnCode: string().required(' HSN Code is required'),
+        subCategoryCode: string().required('Required'),
+        subCategoryName: string().required('Required'),
+        parentCategoryId: string().required('Required'),
+        hsnCode: string().required('Required'),
     })
 
     //    Form Submit Handler
@@ -68,16 +66,13 @@ const AddProductSubCategoryWrapper = (props: Props) => {
         addProductSubCategory({
             subCategoryCode: values.subCategoryCode,
             subCategoryName: values.subCategoryName,
-            parentCategoryId: values.parentCategory,
+            parentCategoryId: values.parentCategoryId,
             hsnCode: values.hsnCode,
             companyId: userData?.companyId || '',
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        'Product sub category added successfully!'
-                    )
+                    showToast('success', 'Added successfully!')
                     navigate('/configurations/product-sub-category')
                 } else {
                     showToast('error', res?.data?.message)
@@ -97,14 +92,14 @@ const AddProductSubCategoryWrapper = (props: Props) => {
         dispatch(setAllTaxes(tData?.data))
     }, [dispatch, tData, tIsLoading, tIsFetching])
 
-    const parentCategoryOptions = allProductCategory?.map((ele: any) => {
+    const parentCategoryIdOptions = allProductCategory?.map((ele: any) => {
         return { label: ele?.categoryName, value: ele?._id }
     })
     // const applicableTaxesOptions = allTaxes?.map((ele: any) => {
     //   return { label: ele?.taxName, value: ele?._id };
     // });
     const dropdownOptions = {
-        parentCategoryOptions: parentCategoryOptions,
+        parentCategoryOptions: parentCategoryIdOptions,
     }
 
     return (

@@ -18,7 +18,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/item',
     },
     {
-        label: 'Add Item',
+        label: 'Add ',
     },
 ]
 
@@ -35,16 +35,13 @@ const AddItem = ({ formikProps }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Item </ATMPageHeading>
+                    <ATMPageHeading> Add </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            {' '}
-                            Item Details{' '}
-                        </div>
+                        <div className="text-xl font-medium"> Details </div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -53,7 +50,7 @@ const AddItem = ({ formikProps }: Props) => {
                                 onClick={() => formikProps.handleSubmit()}
                                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
                             >
-                                Add Item
+                                + Add
                             </button>
                         </div>
                     </div>

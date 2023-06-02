@@ -31,9 +31,9 @@ const AddItemWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        itemCode: string().required('Item Code is required'),
-        itemName: string().required('Item Name is required'),
-        itemWeight: string().required('Item Weight is required'),
+        itemCode: string().required('Required'),
+        itemName: string().required('Required'),
+        itemWeight: string().required('Required'),
     })
 
     //    Form Submit Handler
@@ -46,7 +46,7 @@ const AddItemWrapper = (props: Props) => {
         }).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Item added successfully!')
+                    showToast('success', 'Added successfully!')
                     navigate('/configurations/item')
                 } else {
                     showToast('error', res?.data?.message)

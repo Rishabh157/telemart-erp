@@ -39,7 +39,7 @@ const EditAttributeWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        attributeName: string().required('Attribute Name is required'),
+        attributeName: string().required('Required'),
     })
 
     //    Form Submit Handler
@@ -55,7 +55,7 @@ const EditAttributeWrapper = (props: Props) => {
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'attributes updated successfully!')
+                        showToast('success', 'Updated successfully!')
                         navigate('/configurations/attributes')
                     } else {
                         showToast('error', res?.data?.message)

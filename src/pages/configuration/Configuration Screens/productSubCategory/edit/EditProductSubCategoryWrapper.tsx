@@ -13,13 +13,14 @@ import {
     useUpdateProductSubCategoryMutation,
 } from 'src/services/ProductSubCategoryService'
 import { setSelectedItem } from 'src/redux/slices/productSubCategorySlice'
+import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
 
 type Props = {}
 
 export type FormInitialValues = {
     subCategoryCode: string
     subCategoryName: string
-    parentCategory: string
+    parentCategoryId: string
     hsnCode: string
 }
 
@@ -63,18 +64,16 @@ const EditProductSubCategoryWrapper = (props: Props) => {
     const initialValues: FormInitialValues = {
         subCategoryCode: selectedItem?.subCategoryCode || '',
         subCategoryName: selectedItem?.subCategoryName || '',
-        parentCategory: selectedItem?.parentCategory || '',
+        parentCategoryId: selectedItem?.parentCategoryId || '',
         hsnCode: selectedItem?.hsnCode || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        subCategoryCode: string().required('Sub Category Code is required'),
-        subCategoryName: string().required('Please select a Sub Category Name'),
-        parentCategory: string().required(
-            'Please select a parent Category Name'
-        ),
-        hsnCode: string().required(' HSN Code is required'),
+        subCategoryCode: string().required('Required'),
+        subCategoryName: string().required('Required'),
+        parentCategoryId: string().required('Required'),
+        hsnCode: string().required('Required'),
     })
 
     //    Form Submit Handler
@@ -84,7 +83,7 @@ const EditProductSubCategoryWrapper = (props: Props) => {
             body: {
                 subCategoryCode: values.subCategoryCode,
                 subCategoryName: values.subCategoryName,
-                parentCategoryId: values.parentCategory,
+                parentCategoryId: values.parentCategoryId,
                 hsnCode: values.hsnCode,
                 companyId: userData?.companyId || '',
             },
@@ -109,7 +108,7 @@ const EditProductSubCategoryWrapper = (props: Props) => {
     }, [dispatch, psData, psIsFetching, psIsLoading])
 
     useEffect(() => {
-        // dispatch(selAllproductCategory(pcData?.data));
+        dispatch(setAllProductCategory(pcData?.data))
     }, [dispatch, pcData, pcIsLoading, pcIsFetching])
 
     // useEffect(() => {

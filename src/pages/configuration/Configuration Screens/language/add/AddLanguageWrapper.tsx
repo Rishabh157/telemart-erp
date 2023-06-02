@@ -27,7 +27,7 @@ const AddLanguageWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        languageName: string().required('Language Name is required'),
+        languageName: string().required('Required'),
     })
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -38,7 +38,7 @@ const AddLanguageWrapper = (props: Props) => {
         }).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Langugae added successfully!')
+                    showToast('success', 'Added successfully!')
                     navigate('/configurations/language')
                 } else {
                     showToast('error', res?.data?.message)

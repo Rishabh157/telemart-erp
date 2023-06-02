@@ -152,10 +152,7 @@ const DealersCategoryListingWrapper = () => {
         deleteDealersCategory(currentId).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        'Dealers category deleted successfully!'
-                    )
+                    showToast('success', 'Deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }

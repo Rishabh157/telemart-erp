@@ -14,7 +14,6 @@ import {
     setSearchValue,
 } from 'src/redux/slices/cartonBoxSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
     columns: any[]
@@ -29,7 +28,6 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
     const [selectedRows, setSelectedRows] = useState([])
 
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
     const { page, rowsPerPage, searchValue, totalItems } = cartonBoxState
 
@@ -57,7 +55,7 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
                     {' '}
-                    + Add Box{' '}
+                    + Add{' '}
                 </button>
             </div>
 
