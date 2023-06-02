@@ -96,11 +96,11 @@ export const navigation: NavItemType[] = [
         icon: MdOutlineBorderColor,
         path: '/orders',
     },
-    {
-        label: 'Batch',
-        icon: MdOutlineBatchPrediction,
-        path: '/batch',
-    },
+    // {
+    //     label: 'Batch',
+    //     icon: MdOutlineBatchPrediction,
+    //     path: '/batch',
+    // },
 
     {
         label: 'Configurations',

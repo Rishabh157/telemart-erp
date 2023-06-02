@@ -117,13 +117,7 @@ const BatchListing = ({ columns, rows }: Props) => {
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />
                 </div>
-            </div>
-
-            {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
+            </div>           
         </div>
     )
 }
