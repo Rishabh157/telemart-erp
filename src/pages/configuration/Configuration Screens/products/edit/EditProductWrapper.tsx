@@ -70,24 +70,20 @@ const steps = [
         label: 'Product Details',
         component: StepEditProductDetailsWrapper,
         validationSchema: object({
-            product_code: string().required('Product code is required'),
-            product_name: string().required('Product name is required'),
-            product_category: string().required(
-                'Please select product category'
-            ),
-            product_sub_category: string().required(
-                'Please select product sub category'
-            ),
-            productGroup: string().required('Please select product Group'),
+            product_code: string().required('Required'),
+            product_name: string().required('Required'),
+            product_category: string().required('Required'),
+            product_sub_category: string().required('Required'),
+            productGroup: string().required('Required'),
             product_weight: number()
                 .min(0, 'Weight must be positive')
-                .required('Product weight is required'),
+                .required('Required'),
             dimensions: object().shape({
-                height: number().required('Height is required'),
-                width: number().required('Width is required'),
-                depth: number().required('Depth is required'),
+                height: number().required('Required'),
+                width: number().required('Required'),
+                depth: number().required('Required'),
             }),
-            description: string().required('Product description is required'),
+            description: string().required('Required'),
         }),
     },
     {
@@ -96,11 +92,11 @@ const steps = [
         validationSchema: object({
             items: array().of(
                 object().shape({
-                    itemId: string().required('Please select item name'),
+                    itemId: string().required('Required'),
                     itemQuantity: number()
                         .typeError('Quantity should be number')
                         .min(1, 'Quantity should be greater than or equal to 1')
-                        .required('Please enter quantity'),
+                        .required('Required'),
                 })
             ),
         }),
@@ -111,8 +107,8 @@ const steps = [
         validationSchema: object({
             FAQs: array().of(
                 object().shape({
-                    question: string().required('Question is required'),
-                    answer: string().required('Answer is required'),
+                    question: string().required('Required'),
+                    answer: string().required('Required'),
                 })
             ),
         }),
@@ -123,10 +119,10 @@ const steps = [
         validationSchema: object({
             videos: array().of(
                 object().shape({
-                    videoName: string().required('Video name is required'),
+                    videoName: string().required('Required'),
                     videoLink: string()
                         .url('Must be a valid link')
-                        .required('Video link is required'),
+                        .required('Required'),
                 })
             ),
         }),
@@ -142,7 +138,7 @@ const steps = [
                         'Please write script',
                         (value: any) => value.getCurrentContent().hasText()
                     ),
-                    language: string().required('language is required'),
+                    language: string().required('Required'),
                 })
             ),
         }),
@@ -156,12 +152,12 @@ const breadcrumbs = [
         path: '/configurations/products',
     },
     {
-        label: 'Update Product',
+        label: 'Edit',
     },
 ]
 
 // Page Heading
-const pageHeading = 'Edit New Product'
+const pageHeading = 'Update'
 
 const EditProductWrapper = () => {
     const params = useParams()

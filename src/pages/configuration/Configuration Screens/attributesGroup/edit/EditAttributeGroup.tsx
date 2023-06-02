@@ -22,7 +22,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/attributes-group',
     },
     {
-        label: 'Add Attributes Group',
+        label: 'Add ',
     },
 ]
 
@@ -70,16 +70,13 @@ const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Attribute Group </ATMPageHeading>
+                    <ATMPageHeading> Edit </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            {' '}
-                            Attribute group details{' '}
-                        </div>
+                        <div className="text-xl font-medium"> Details </div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -97,7 +94,7 @@ const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow  py-8 px-3 ">
+                    <div className="grow pb-9 pt-2 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* Field1 */}
                             <ATMTextField

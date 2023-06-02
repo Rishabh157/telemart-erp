@@ -39,7 +39,7 @@ const AddAreaWrapper = ({ onClose }: Props) => {
         area: '',
     }
     const validationSchema = object({
-        area: string().required('Area Name is required'),
+        area: string().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -55,7 +55,7 @@ const AddAreaWrapper = ({ onClose }: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'area added successfully!')
+                        showToast('success', 'Added successfully!')
                         onClose()
                     } else {
                         showToast('error', res?.data?.message)

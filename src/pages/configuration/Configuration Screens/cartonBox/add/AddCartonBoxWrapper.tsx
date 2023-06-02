@@ -42,23 +42,23 @@ const AddCartonBoxWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        boxName: string().required('boxName is required'),
+        boxName: string().required('Required'),
         innerItemsCount: number()
             .min(1, 'Item count should be greater than 0')
             .required('Please select a innerItemsCount'),
         boxWeight: number()
             .min(1, 'Box weight should be greater than 0')
-            .required('boxWeight is required'),
+            .required('Required'),
         dimensions: object().shape({
             height: number()
                 .min(1, 'Height should be greter than 0')
-                .required('Height is required'),
+                .required('Required'),
             width: number()
                 .min(1, 'Weight should be greater than 0')
-                .required('Width is required'),
+                .required('Required'),
             depth: number()
                 .min(1, 'depth should be greater than 0')
-                .required('Depth is required'),
+                .required('Required'),
         }),
     })
 
@@ -74,7 +74,7 @@ const AddCartonBoxWrapper = (props: Props) => {
         }).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Carton box added successfully!')
+                    showToast('success', 'Added successfully!')
                     navigate('/configurations/carton-box')
                 } else {
                     showToast('error', res?.data?.message)

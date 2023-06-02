@@ -171,10 +171,7 @@ const AttributesGroupListingWrapper = () => {
         deleteAttGroup(currentId).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        'Attribute group deleted successfully!'
-                    )
+                    showToast('success', 'Deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }

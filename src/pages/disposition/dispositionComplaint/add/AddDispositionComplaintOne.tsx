@@ -15,7 +15,7 @@ type Props = {
     dropdownOptions: {
         smstypeOptions: SelectOption[]
         emailTypeOptions: SelectOption[]
-        priorityTypeOptions: SelectOption[]
+        priorityOptions: SelectOption[]
     }
 }
 
@@ -28,11 +28,11 @@ const AddDispositionComplaint = ({
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition-Comaplaint',
+            label: 'Disposition Comaplaint',
             path: '/dispositions/disposition-complaint',
         },
         {
-            label: 'Add Disposition-complaint',
+            label: 'Add ',
         },
     ]
 
@@ -47,19 +47,13 @@ const AddDispositionComplaint = ({
 
                     {/* Page Heading */}
                     <div className="pt-1">
-                        <ATMPageHeading>
-                            {' '}
-                            Add Disposition-Complaint{' '}
-                        </ATMPageHeading>
+                        <ATMPageHeading> Add </ATMPageHeading>
                     </div>
 
                     <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                         <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                             {/* Form Heading */}
-                            <div className="text-xl font-medium">
-                                {' '}
-                                Disposition-Complaint Details{' '}
-                            </div>
+                            <div className="text-xl font-medium"> Details </div>
 
                             {/* BUTTON - Add Button */}
                             <div>
@@ -111,9 +105,7 @@ const AddDispositionComplaint = ({
                                     }
                                 />
                                 <ATMSelectSearchable
-                                    options={
-                                        dropdownOptions.priorityTypeOptions
-                                    }
+                                    options={dropdownOptions.priorityOptions}
                                     name="priority"
                                     value={values.priority}
                                     label="Priority"

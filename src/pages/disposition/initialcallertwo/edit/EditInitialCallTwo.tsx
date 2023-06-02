@@ -27,11 +27,11 @@ const EditInitialCallTwo = ({
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Initialcall-One',
-            path: '/dispositions/initialCall-one',
+            label: 'Initial Call Two',
+            path: '/dispositions/initialCall-two',
         },
         {
-            label: 'Update Initialcall-One',
+            label: 'Edit',
         },
     ]
 
@@ -46,19 +46,13 @@ const EditInitialCallTwo = ({
 
                     {/* Page Heading */}
                     <div className="pt-1">
-                        <ATMPageHeading>
-                            {' '}
-                            Update Initialcall-Two{' '}
-                        </ATMPageHeading>
+                        <ATMPageHeading> Edit </ATMPageHeading>
                     </div>
 
                     <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                         <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                             {/* Form Heading */}
-                            <div className="text-xl font-medium">
-                                {' '}
-                                InitialCall-Two Details{' '}
-                            </div>
+                            <div className="text-xl font-medium"> Details </div>
 
                             {/* BUTTON - Add Button */}
                             <div>
@@ -86,7 +80,7 @@ const EditInitialCallTwo = ({
                                     }
                                     name="initialCallOneId"
                                     value={values.initialCallOneId}
-                                    label="Initialcall-One"
+                                    label="Initial Call One"
                                     onChange={(e) =>
                                         setFieldValue('initialCallOneId', e)
                                     }
@@ -94,8 +88,8 @@ const EditInitialCallTwo = ({
                                 <ATMTextField
                                     name="initialCallName"
                                     value={values.initialCallName}
-                                    placeholder="Enter a InitailCaller  name"
-                                    label="Initialcall  name"
+                                    placeholder=" Name"
+                                    label="Initial Call  name"
                                     onChange={(e) =>
                                         setFieldValue(
                                             'initialCallName',

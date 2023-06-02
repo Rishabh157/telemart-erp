@@ -35,8 +35,8 @@ const AddPincodeDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     setFieldValue('pincode', e.target.value)
                                 }}
-                                placeholder="Enter a pincode"
-                                label="Pincode Name"
+                                placeholder="Pincode"
+                                label="Name"
                             />
                         </div>
                     </div>

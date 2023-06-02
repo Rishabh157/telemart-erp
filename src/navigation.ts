@@ -82,6 +82,11 @@ export const navigation: NavItemType[] = [
         path: '/scheme',
     },
     {
+        label: 'Batch',
+        icon: TfiLayoutMediaOverlayAlt2,
+        path: '/batch',
+    },
+    {
         label: 'Orders',
         icon: MdOutlineBorderColor,
         path: '/orders',

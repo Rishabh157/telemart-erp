@@ -35,7 +35,7 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
         pincode: '',
     }
     const validationSchema = object({
-        pincode: string().required('Pincode Name is required'),
+        pincode: string().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -50,7 +50,7 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'pincode added successfully!')
+                        showToast('success', 'Added successfully!')
                         onClose()
                     } else {
                         showToast('error', res?.data?.message)
