@@ -27,10 +27,21 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET all by disposition One Without token  *****/
         getAlldispositionTwounauth: builder.query({
             providesTags: ['dispositionTwo'],
             query: (Id) => ({
                 url: `/disposition-Two/unauth/get-all/${Id}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** GET all Without token *****/
+        getAllUnAuthdispositionTwo: builder.query({
+            providesTags: ['dispositionTwo'],
+            query: (Id) => ({
+                url: `/disposition-two/unauth/`,
                 method: 'GET',
                 // body,
             }),
@@ -101,4 +112,5 @@ export const {
     useDeletedispositionTwoMutation,
     useGetAlldispositionTwoQuery,
     useGetAlldispositionTwounauthQuery,
+    useGetAllUnAuthdispositionTwoQuery,
 } = dispositionTwoApi

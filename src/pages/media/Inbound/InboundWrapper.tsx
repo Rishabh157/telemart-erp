@@ -25,6 +25,8 @@ import { DistrictListResponse } from 'src/models/District.model'
 import { TehsilListResponse } from 'src/models/Tehsil.model'
 import { AreaListResponse } from 'src/models/Area.model'
 import { setItems } from 'src/redux/slices/media/channelManagementSlice'
+import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
+import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
 
 export type FormInitialValues = {
     generalInformation: {
@@ -51,16 +53,16 @@ export type FormInitialValues = {
     personalInformation: {
         agentName: string
         name: string
-        age: string
+        age: number
         address: string
-        realtion: string
+        relation: string
         agentDistrictId: string
         landmark: string
         whatsappNo: string
         gender: string
-        prepaid: boolean | string
-        email: string
-        channelId: string
+        prepaid: boolean
+        emailId: string
+        channel: string
         remark: string
     }
     dispositionLevelTwoId: string
@@ -73,27 +75,26 @@ const InbouundWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'schemeName',
-            headerName: 'Scheme Name',
+            headerName: '',
             flex: 'flex-[2_2_0%]',
             renderCell: (row: SchemeListResponse) => (
                 <span> {row.schemeName} </span>
             ),
-            extraClasses: 'p-0 m-0',
+            extraClasses: 'p-0 m-0 ',
         },
         {
             field: 'schemePrice',
-            headerName: 'Price',
+            headerName: '',
             flex: 'flex-[0.3_0.3_0%]',
             renderCell: (row: SchemeListResponse) => {
                 return <span> {row?.schemePrice} </span>
             },
-            extraClasses: 'p-0 m-0',
+            extraClasses: 'p-0 m-0 ',
         },
     ]
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddInbopundCaller] = useAddInboundCallerMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const initialValues: FormInitialValues = {
         generalInformation: {
@@ -120,17 +121,17 @@ const InbouundWrapper = () => {
         personalInformation: {
             agentName: '',
             name: '',
-            age: '',
+            age: 0,
             address: '',
-            realtion: '',
+            relation: '',
             agentDistrictId: '',
             landmark: '',
 
             whatsappNo: '',
             gender: '',
-            prepaid: '',
-            email: '',
-            channelId: '',
+            prepaid: false,
+            emailId: '',
+            channel: 'Sony',
             remark: '',
         },
 
@@ -144,42 +145,38 @@ const InbouundWrapper = () => {
     const validationSchema = object({
         generalInformation: object().shape({
             didNo: string().required('Required !'),
-            // inOutBound: string().required('Required !'),
-            // incomingCallerNo: string().required('Required !'),
-            // mobileNo: string().required('Required !'),
+            inOutBound: string().required('Required !'),
+            incomingCallerNo: string().required('Required !'),
+            mobileNo: string().required('Required !'),
         }),
         addressInformation: object().shape({
             deliveryCharges: number().required('Required !'),
-            // discount: number().required('Required !'),
-            // total: number().required('Required !'),
-            // country: string().required('Required !'),
-            // state: string().required('Required !'),
-            // city: string().required('Required !'),
-            // tehsil: string().required('Required !'),
-            // pincode: string().required('Required !'),
-            // area: string().required('Required !'),
-            // expectedDeliveryDate: string().required('Required !'),
-            // profileDeliveredBy: string().required('Required !'),
-            // complaintDetails: string().required('Required !'),
-            // complaintNo: string().required('Required !'),
+            discount: number().required('Required !'),
+            total: number().required('Required !'),
+            countryId: string().required('Required !'),
+            stateId: string().required('Required !'),
+            districtId: string().required('Required !'),
+            tehsilId: string().required('Required !'),
+            pincodeId: string().required('Required !'),
+            areaId: string().required('Required !'),
         }),
         personalInformation: object().shape({
             // agentName: string().required('Required !'),
             // name: string().required('Required !'),
-            // age: string().required('Required !'),
+            age: number().required('Required !'),
             // address: string().required('Required !'),
-            // realtion: string().required('Required !'),
-            // city: string().required('Required !'),
+            relation: string().required('Required !'),
+            agentDistrictId: string().required('Required !'),
             // landmark: string().required('Required !'),
             // alternateNo: string().required('Required !'),
-            // gender: string().required('Required !'),
-            // email: string().required('Required !'),
+            gender: string().required('Required !'),
+            // emailId: string().required('Required !'),
             // channel: string().required('Required !'),
-            // otherRemarks: string().required('Required !'),
+            // remark: string().required('Required !'),
         }),
-        // dispositionLevelOne: string().required('Required'),
-        // dispositionLevelTwo: string().required('Required'),
-        // schemeId: string().required('Required'),
+        dispositionLevelTwoId: string().required('Required'),
+        dispositionLevelThreeId: string().required('Required'),
+        schemeId: string().required('Required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -196,7 +193,6 @@ const InbouundWrapper = () => {
                 schemeId: values.schemeId,
                 dispositionLevelTwoId: values.dispositionLevelTwoId,
                 dispositionLevelThreeId: values.dispositionLevelThreeId,
-                companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -226,20 +222,31 @@ const InbouundWrapper = () => {
     const { allDistricts }: any = useSelector(
         (state: RootState) => state.district
     )
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) dispatch(setAllCountry(data?.data))
-    }, [data, isLoading, isFetching, dispatch])
-
     const { allTehsils }: any = useSelector((state: RootState) => state.tehsils)
     const { items: allArea }: any = useSelector(
         (state: RootState) => state.areas
     )
-
-    const { items: Channelitems }: any = useSelector(
-        (state: RootState) => state.channelGroup
+    const { selectedItem: didItems }: any = useSelector(
+        (state: RootState) => state.didManagement
     )
-    console.log('Channelitems', Channelitems)
+    console.log('Channelitems', didItems)
+    useEffect(() => {
+        if (!isLoading && !isFetching) dispatch(setAllCountry(data?.data))
+    }, [data, isLoading, isFetching, dispatch])
+    let DidNO = '452001'
+    // did
+    //state
+    const {
+        data: didData,
+        isLoading: didIsLoading,
+        isFetching: didIsFetching,
+    } = useGetByDidNumberQuery(DidNO)
+
+    useEffect(() => {
+        if (!didIsLoading && !didIsFetching)
+            dispatch(setDidItems(didData?.data))
+    }, [didData, didIsLoading, didIsFetching, dispatch])
+
     //state
     const {
         data: stateData,
@@ -333,12 +340,14 @@ const InbouundWrapper = () => {
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => {
+              
                 return (
                     <Inbound
                         apiStatus={apiStatus}
                         formikProps={formikProps}
                         dropdownOptions={dropdownOptions}
                         schemeColumn={columns}
+                        didItems={didItems}
                     />
                 )
             }}

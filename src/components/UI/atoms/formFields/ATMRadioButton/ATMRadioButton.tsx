@@ -8,6 +8,7 @@ export type Props = {
     label?: string
     value: string | string[] | number
     required?: boolean
+    className?: string
     onChange: (e: string) => void
     isSubmitting?: boolean
 }
@@ -18,11 +19,12 @@ const ATMRadioButton = ({
     name,
     options,
     label,
+    className = 'mt-2',
     onChange,
     isSubmitting = true,
 }: Props) => {
     return (
-        <div className="relative mt-4">
+        <div className="relative mt-4  w-full">
             {label && (
                 <label className="text-slate-700 font-medium">
                     {label}
@@ -30,7 +32,7 @@ const ATMRadioButton = ({
                 </label>
             )}
 
-            <div className="flex mt-1 w-full py-2 pr-2 ">
+            <div className={`flex ${className} w-full py-2 pr-2 `}>
                 {options.map((option: SelectOption, index) => (
                     <div
                         onChange={() => {
@@ -39,7 +41,7 @@ const ATMRadioButton = ({
                         key={index}
                         className={`${
                             index === 0 ? '' : 'ml-2 '
-                        } lg:flex ms:flex   xl:flex sm:text-sm  lg:text-lg text-base  `}
+                        } lg:flex ms:flex  xl:flex sm:text-sm lg:text-lg text-base  `}
                     >
                         <input
                             type="radio"
@@ -51,9 +53,7 @@ const ATMRadioButton = ({
                             onClick={() => {
                                 onChange(option.value as string)
                             }}
-                            className="ml-1 Class
-                            Properties
-                            xs:text-xs sm:text-sm  lg:text-base md:text-sm "
+                            className="ml-1 xs:text-xs sm:text-sm  lg:text-base md:text-sm "
                         >
                             {option.label}
                         </label>

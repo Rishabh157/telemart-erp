@@ -8,8 +8,7 @@ import { DiDart } from 'react-icons/di'
 import { FaTape } from 'react-icons/fa'
 import { GrChannel } from 'react-icons/gr'
 import { SiGoogletagmanager } from 'react-icons/si'
-import { MdEmojiEvents, MdViewTimeline, MdAnalytics } from 'react-icons/md'
-import { TiFlowMerge } from 'react-icons/ti'
+import { MdEmojiEvents, MdViewTimeline } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineSetting } from 'react-icons/ai'
 
@@ -45,7 +44,7 @@ const mediaNavigation: NavItemType[] = [
         path: '/media/tape',
     },
     {
-        label: 'Competitor Management',
+        label: 'Competitor(Analysis & flow)',
         icon: MdEmojiEvents,
         path: '/media/competitor',
     },
@@ -53,17 +52,6 @@ const mediaNavigation: NavItemType[] = [
         label: 'Slot Management',
         icon: MdViewTimeline,
         path: '/media/slot',
-    },
-    {
-        label: 'Analysis',
-        icon: MdAnalytics,
-        path: '/media/analysis',
-    },
-
-    {
-        label: 'Flow',
-        icon: TiFlowMerge,
-        path: '/media/flow',
     },
     {
         label: 'Inbound',
