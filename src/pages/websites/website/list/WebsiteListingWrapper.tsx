@@ -38,7 +38,6 @@ const WebstieListingWrapper = () => {
                 <span> {row.productName} </span>
             ),
         },
-
         {
             field: 'actions',
             headerName: 'Actions',

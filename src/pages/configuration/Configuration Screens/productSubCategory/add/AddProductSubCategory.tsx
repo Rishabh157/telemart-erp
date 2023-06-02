@@ -69,7 +69,7 @@ const AddProductSubCategory = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow pb-9 pt-2 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* subCategoryCode */}
                             <ATMTextField
@@ -99,11 +99,11 @@ const AddProductSubCategory = ({
                             />
 
                             <ATMSelect
-                                name="parentCategory"
-                                value={values.parentCategory}
+                                name="parentCategoryId"
+                                value={values.parentCategoryId}
                                 onChange={(e) => {
                                     setFieldValue(
-                                        'parentCategory',
+                                        'parentCategoryId',
                                         e.target.value
                                     )
                                 }}
