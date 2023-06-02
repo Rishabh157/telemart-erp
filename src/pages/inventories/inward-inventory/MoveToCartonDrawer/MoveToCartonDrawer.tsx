@@ -62,7 +62,7 @@ const MoveToCartonDrawer = ({
             productGroupName,
             groupBarcodeNumber: groupBarcodeNumber,
             productDetail,
-            wareHouse,
+            wareHouseId: wareHouse,
             companyId: userData?.companyId || '',
         }).then((res: any) => {
             if ('data' in res) {
