@@ -20,6 +20,7 @@ export type FormInitialValues = {
     pageUrl: string
     headerSpace: string
     footerSpace: string
+    websiteId: string
 }
 
 const EditWebsitePageWrapper = (props: Props) => {
@@ -42,6 +43,7 @@ const EditWebsitePageWrapper = (props: Props) => {
         pageUrl: selectedItem?.pageUrl || '',
         headerSpace: selectedItem?.headerSpace || '',
         footerSpace: selectedItem?.footerSpace || '',
+        websiteId: selectedItem?.websiteId || '',
     }
 
     useEffect(() => {
@@ -67,16 +69,14 @@ const EditWebsitePageWrapper = (props: Props) => {
                     pageUrl: values.pageUrl,
                     headerSpace: values.headerSpace,
                     footerSpace: values.footerSpace,
+                    websiteId: values.websiteId,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Website-Page updated successfully!'
-                        )
+                        showToast('success', 'Updated successfully!')
                         navigate('/all-websites/website-Page')
                     } else {
                         showToast('error', res?.data?.message)

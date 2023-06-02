@@ -256,51 +256,49 @@ const OrderListing = () => {
                     </div>
                 </div>
                 <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
-                {/*Table Header */}
-                <ATMTableHeader
-                    searchValue={searchValue}
-                    page={page}
-                    rowCount={totalItems}
-                    rowsPerPage={rowsPerPage}
-                    rows={items}
-                    onRowsPerPageChange={(newValue) =>
-                        dispatch(setRowsPerPage(newValue))
-                    }
-                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
-                />
-
-                {/* Table */}
-                <div className="grow overflow-auto  ">
-            
-
-                <ATMTable
-                    columns={columns}
-                    rows={items}
-                    isCheckbox={true}
-                    selectedRows={selectedRows}
-                    onRowSelect={(selectedRows) =>
-                        setSelectedRows(selectedRows)
-                    }
-                    
-                />
-                </div>
-
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
-                    <ATMPagination
+                    {/*Table Header */}
+                    <ATMTableHeader
+                        searchValue={searchValue}
                         page={page}
                         rowCount={totalItems}
-                        rows={items}
                         rowsPerPage={rowsPerPage}
-                        onPageChange={(newPage) =>
-                            dispatch(setPage(newPage))
+                        rows={items}
+                        onRowsPerPageChange={(newValue) =>
+                            dispatch(setRowsPerPage(newValue))
                         }
-                    />                    
+                        onSearch={(newValue) =>
+                            dispatch(setSearchValue(newValue))
+                        }
+                        isFilter
+                        // onFilterClick={() => setIsFilterOpen(true)}
+                    />
+
+                    {/* Table */}
+                    <div className="grow overflow-auto  ">
+                        <ATMTable
+                            columns={columns}
+                            rows={items}
+                            isCheckbox={true}
+                            selectedRows={selectedRows}
+                            onRowSelect={(selectedRows) =>
+                                setSelectedRows(selectedRows)
+                            }
+                        />
+                    </div>
+
+                    <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                        <ATMPagination
+                            page={page}
+                            rowCount={totalItems}
+                            rows={items}
+                            rowsPerPage={rowsPerPage}
+                            onPageChange={(newPage) =>
+                                dispatch(setPage(newPage))
+                            }
+                        />
+                    </div>
                 </div>
             </div>
-            </div>
-        
         </SideNavLayout>
     )
 }

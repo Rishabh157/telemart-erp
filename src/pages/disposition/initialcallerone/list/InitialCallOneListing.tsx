@@ -32,11 +32,11 @@ const InitialCalloneListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Initialcall One',
+            label: 'Initial Call',
             path: 'dispositions/initialcall-one',
         },
         {
-            label: 'initialcall One',
+            label: 'Initial Call One',
         },
     ]
 
@@ -47,7 +47,7 @@ const InitialCalloneListing = ({ columns, rows, setShowDropdown }: Props) => {
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Initialcall One </ATMPageHeading>
+                <ATMPageHeading> Initial Call One </ATMPageHeading>
                 <button
                     type="button"
                     onClick={() => navigate('add')}

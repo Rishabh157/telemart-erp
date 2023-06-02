@@ -164,6 +164,7 @@ import InitialCallTwoListingWrapper from './pages/disposition/initialcallertwo/l
 import DispositionTwoListingWrapper from './pages/disposition/dispositionTwo/list/DispositionTwoListingWrapper'
 import DispositionThreeListingWrapper from './pages/disposition/dispositionThree/list/DispositionThreeListingWrapper'
 import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
+import BatchLisitngWrapper from './pages/batch/list/BatchLisitngWrapper'
 import PageNotFound from './PageNotFound'
 import AddDispositionThreeWrappper from './pages/disposition/dispositionThree/add/AddDispositionThreeWrappper'
 import EditDispositionThreeWrapper from './pages/disposition/dispositionThree/edit/EditDispositionThreeWrapper'
@@ -183,6 +184,8 @@ import EditDispositionComplaintWrappper from './pages/disposition/dispositionCom
 import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/list/InitialCallThreeListingWrapper'
 import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edit/EditInitialCallThreeWrapper'
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
+import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
+import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
 import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
 
 const PageRoutes = () => {
@@ -789,6 +792,14 @@ const PageRoutes = () => {
                         element={<AddDispositionThreeWrappper />}
                     />
                     <Route
+                        path="dispositions/disposition-three/:id"
+                        element={<ViewDispositionThreeWrappper />}
+                    />
+                    <Route
+                        path="dispositions/initialCall-three/view/:id"
+                        element={<ViewInitialCallThreeWrappper />}
+                    />
+                    <Route
                         path="dispositions/disposition-three/edit/:id"
                         element={<EditDispositionThreeWrapper />}
                     />
@@ -826,6 +837,7 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
                     />
+                    <Route path="batch" element={<BatchLisitngWrapper />} />
                 </Routes>
             </BrowserRouter>
         </>

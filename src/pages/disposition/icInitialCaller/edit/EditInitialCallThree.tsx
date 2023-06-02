@@ -36,11 +36,11 @@ const EditInitialCallThree = ({
     const dispatch = useDispatch()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'IntialCall-Three',
-            path: '/dispositions/initialcaller-three',
+            label: 'Intial Call Three',
+            path: '/dispositions/initialcall-three',
         },
         {
-            label: 'Add InitialCall-Three',
+            label: 'Edit',
         },
     ]
 
@@ -83,16 +83,13 @@ const EditInitialCallThree = ({
 
                     {/* Page Heading */}
                     <div className="pt-1">
-                        <ATMPageHeading> Disposition-Three</ATMPageHeading>
+                        <ATMPageHeading>Edit </ATMPageHeading>
                     </div>
 
                     <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                         <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                             {/* Form Heading */}
-                            <div className="text-xl font-medium">
-                                {' '}
-                                Disposition-Three Details{' '}
-                            </div>
+                            <div className="text-xl font-medium"> Details </div>
 
                             {/* BUTTON - Add Button */}
                             <div>
@@ -104,7 +101,7 @@ const EditInitialCallThree = ({
                                         apiStatus ? 'opacity-50' : ''
                                     }`}
                                 >
-                                    Submit
+                                    Update
                                 </button>
                             </div>
                         </div>
@@ -113,6 +110,18 @@ const EditInitialCallThree = ({
                         <div className="grow py-8 px-3 ">
                             <div className="grid grid-cols-3 gap-4">
                                 {/* languageName */}
+                                <ATMTextField
+                                    name="initialCallName"
+                                    value={values.initialCallName}
+                                    label="Initial Call Name"
+                                    placeholder="Name"
+                                    onChange={(e) =>
+                                        setFieldValue(
+                                            'initialCallName',
+                                            e.target.value
+                                        )
+                                    }
+                                />
                                 <ATMSelectSearchable
                                     options={
                                         dropdownoptions.initialCallOneOptions ||
@@ -121,7 +130,7 @@ const EditInitialCallThree = ({
                                     name="initialCallOneId"
                                     required
                                     value={values.initialCallOneId}
-                                    label="InitialCall-One"
+                                    label="Initial Call One"
                                     onChange={(value) => {
                                         console.log(value)
                                         setFieldValue('initialCallOneId', value)
@@ -135,7 +144,7 @@ const EditInitialCallThree = ({
                                     name="initialCallTwoId"
                                     required
                                     value={values.initialCallTwoId}
-                                    label="InitialCall-Two"
+                                    label="Initial Call Two"
                                     onChange={(value) =>
                                         setFieldValue('initialCallTwoId', value)
                                     }
@@ -162,18 +171,7 @@ const EditInitialCallThree = ({
                                         setFieldValue('smsType', value)
                                     }
                                 />
-                                <ATMTextField
-                                    name="initialCallName"
-                                    value={values.initialCallName}
-                                    label="InitialCall Name"
-                                    placeholder="Name"
-                                    onChange={(e) =>
-                                        setFieldValue(
-                                            'initialCallName',
-                                            e.target.value
-                                        )
-                                    }
-                                />
+
                                 <ATMSelectSearchable
                                     options={dropdownoptions.emailTypeOptions}
                                     name="emailType"

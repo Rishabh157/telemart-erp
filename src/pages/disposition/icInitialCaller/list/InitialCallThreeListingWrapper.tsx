@@ -64,7 +64,7 @@ const InitialCallThreeListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'initialCallName',
-            headerName: 'Initialcall-Three',
+            headerName: 'Initial Call Three',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.initialCallName} </span>
@@ -96,6 +96,14 @@ const InitialCallThreeListingWrapper = () => {
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Edit
+                            </button>
+                            <button
+                                onClick={() => {
+                                    navigate(`view/${row?._id}`)
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View
                             </button>
                             <button
                                 onClick={() => {

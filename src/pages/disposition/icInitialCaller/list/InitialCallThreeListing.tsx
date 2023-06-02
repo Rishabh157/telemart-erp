@@ -32,11 +32,11 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Initialcall Three',
-            path: 'dispositions/initialcall-three',
+            label: 'Initial Call',
+            path: '/dispositions/initialcall-three',
         },
         {
-            label: 'initialcall One',
+            label: 'Initial Call Three',
         },
     ]
 
@@ -48,7 +48,7 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </div>
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[45px]">
-                    <ATMPageHeading> Initialcall Three </ATMPageHeading>
+                    <ATMPageHeading> Initial Call Three </ATMPageHeading>
                     <button
                         type="button"
                         onClick={() => navigate('add')}

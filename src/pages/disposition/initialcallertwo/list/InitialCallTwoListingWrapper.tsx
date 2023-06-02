@@ -70,7 +70,7 @@ const InitialCallTwoListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'initialCallName',
-            headerName: 'initial call two',
+            headerName: 'Initial Call Two',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InitialCallerTwoListResponse) => (
                 <span> {row.initialCallName} </span>
@@ -106,8 +106,8 @@ const InitialCallTwoListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Tape',
-                                        text: 'Do you want to delete Tape?',
+                                        title: 'Delete Initial Call-Two',
+                                        text: 'Do you want to delete Initial Call-Two?',
                                         showCancelButton: true,
                                         next: (res: any) => {
                                             return res.isConfirmed
@@ -133,7 +133,7 @@ const InitialCallTwoListingWrapper = () => {
         deleteTape(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Tape deleted successfully!')
+                    showToast('success', 'Deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }

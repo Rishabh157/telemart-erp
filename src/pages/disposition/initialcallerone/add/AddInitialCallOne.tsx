@@ -17,11 +17,11 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Initialcall-One',
+            label: 'Initial Call One',
             path: '/dispositions/initialCall-one',
         },
         {
-            label: 'Add Initialcall-One',
+            label: 'Add ',
         },
     ]
 
@@ -36,16 +36,13 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Page Heading */}
                     <div className="pt-1">
-                        <ATMPageHeading> Add Disposition-One </ATMPageHeading>
+                        <ATMPageHeading> Add </ATMPageHeading>
                     </div>
 
                     <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                         <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                             {/* Form Heading */}
-                            <div className="text-xl font-medium">
-                                {' '}
-                                Disposition-One Details{' '}
-                            </div>
+                            <div className="text-xl font-medium"> Details </div>
 
                             {/* BUTTON - Add Button */}
                             <div>
@@ -70,7 +67,7 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                                     name="initialCallName"
                                     value={values.initialCallName}
                                     placeholder="Name"
-                                    label="InitialCall  Name"
+                                    label="Initial Call  Name"
                                     onChange={(e) =>
                                         setFieldValue(
                                             'initialCallName',
