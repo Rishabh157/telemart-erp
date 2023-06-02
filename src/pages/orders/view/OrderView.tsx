@@ -20,7 +20,6 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const OrderView = ({ items }: Props) => {
-    
     return (
         <div className="mt-3 h-full  ">
             <div className="p-4 flex flex-col gap-2  ">
@@ -55,55 +54,80 @@ const OrderView = ({ items }: Props) => {
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-3 pl-6 py-6 border border-l-2">
-																	<div className="grid grid-cols-3">
-																			<h1 className="text-gray-800 col-span-1">
-																					DID Number{' '}
-																			</h1>
-																			<p className=" col-span-1 text-center"> - </p>
-																			<p className="text-slate-600  col-span-1">
-																					{(items?.didNo === "")? "NA": items?.didNo}
-																			</p>
-																		</div>
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            DID Number{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600  col-span-1">
+                                            {items?.didNo === ''
+                                                ? 'NA'
+                                                : items?.didNo}
+                                        </p>
+                                    </div>
 
-																		<div className="grid grid-cols-3">
-																			<h1 className="text-gray-800 col-span-1">
-																					In/Out Bound{' '}
-																			</h1>
-																			<p className=" col-span-1 text-center"> - </p>
-																			<p className="text-slate-600 col-span-1 ">
-																					{(items?.inOutBound === "")? "NA": items?.inOutBound}
-																			</p>
-																		</div>
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            In/Out Bound{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1 ">
+                                            {items?.inOutBound === ''
+                                                ? 'NA'
+                                                : items?.inOutBound}
+                                        </p>
+                                    </div>
 
-																		<div className="grid grid-cols-3">
-																			<h1 className="text-gray-800 col-span-1">
-																					Incomming Caller No{' '}
-																			</h1> 
-																			<p className=" col-span-1 text-center"> - </p>
-																			<p className="text-slate-600">
-																					{(items?.incomingCallerNo === "")? "NA": items?.incomingCallerNo}
-																			</p>
-																		</div>
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Incomming Caller No{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600">
+                                            {items?.incomingCallerNo === ''
+                                                ? 'NA'
+                                                : items?.incomingCallerNo}
+                                        </p>
+                                    </div>
 
-																		<div className="grid grid-cols-3">
-																			<h1 className="text-gray-800 col-span-1">
-																					Mobile Number{' '}
-																			</h1>
-																			<p className=" col-span-1 text-center"> - </p>
-																			<p className="text-slate-600 col-span-1">
-																					{(items?.mobileNo === "")? "NA": items?.mobileNo}
-																			</p>
-																		</div>
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Mobile Number{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.mobileNo === ''
+                                                ? 'NA'
+                                                : items?.mobileNo}
+                                        </p>
+                                    </div>
 
-																		<div className="grid grid-cols-3">
-                                    <h1 className="text-gray-800 col-span-1">
-                                        Scheme Name{' '}
-                                    </h1>
-																		<p className=" col-span-1 text-center"> - </p>
-                                    <p className="text-slate-600 col-span-1">
-																		{(items?.schemeLabel === "")? "NA": items?.schemeLabel}
-                                    </p>
-																		</div>
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Scheme Name{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.schemeLabel === ''
+                                                ? 'NA'
+                                                : items?.schemeLabel}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -117,71 +141,88 @@ const OrderView = ({ items }: Props) => {
                                     Personal Information
                                 </div>
                                 <div className="grid grid-cols-3 gap-3 pl-6 py-6 border border-l-2">
-																	
                                     <h1 className="text-gray-800">
                                         Agent Name{' '}
                                     </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.agentName === "")? "NA": items?.agentName}
-                                    </p>	
+                                        {items?.agentName === ''
+                                            ? 'NA'
+                                            : items?.agentName}
+                                    </p>
 
                                     <h1 className="text-gray-800">Name</h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.name === "")? "NA": items?.name}
+                                        {items?.name === ''
+                                            ? 'NA'
+                                            : items?.name}
                                     </p>
-																	
+
                                     <h1 className="text-gray-800">Age </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.age === "")? "NA": items?.age}
+                                        {items?.age === '' ? 'NA' : items?.age}
                                     </p>
 
                                     <h1 className="text-gray-800">Address</h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.address === "")? "NA": items?.address}
+                                        {items?.address === ''
+                                            ? 'NA'
+                                            : items?.address}
                                     </p>
 
                                     <h1 className="text-gray-800">Relation</h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.realtion === "")? "NA": items?.realtion}
+                                        {items?.realtion === ''
+                                            ? 'NA'
+                                            : items?.realtion}
                                     </p>
 
                                     <h1 className="text-gray-800">District </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.agentDistrictLabel === "")? "NA": items?.agentDistrictLabel}
+                                        {items?.agentDistrictLabel === ''
+                                            ? 'NA'
+                                            : items?.agentDistrictLabel}
                                     </p>
 
                                     <h1 className="text-gray-800">Landmark </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.landmark === "")? "NA": items?.landmark}
+                                        {items?.landmark === ''
+                                            ? 'NA'
+                                            : items?.landmark}
                                     </p>
 
                                     <h1 className="text-gray-800">
                                         Alternate No{' '}
                                     </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.alternateNo1 === "")? "NA": items?.alternateNo1}
+                                        {items?.alternateNo1 === ''
+                                            ? 'NA'
+                                            : items?.alternateNo1}
                                     </p>
 
                                     <h1 className="text-gray-800">
                                         Whatsapp No{' '}
                                     </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.watsappNo === "")? "NA": items?.watsappNo}
+                                        {items?.watsappNo === ''
+                                            ? 'NA'
+                                            : items?.watsappNo}
                                     </p>
 
                                     <h1 className="text-gray-800">Gender </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.gender === "")? "NA": items?.gender}
+                                        {items?.gender === ''
+                                            ? 'NA'
+                                            : items?.gender}
                                     </p>
 
                                     {/* <h1 className="text-gray-800">Channel </h1>
@@ -191,13 +232,15 @@ const OrderView = ({ items }: Props) => {
                                     </p> */}
 
                                     <h1 className="text-gray-800">Email</h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.emailId === "")? "NA": items?.emailId}
+                                        {items?.emailId === ''
+                                            ? 'NA'
+                                            : items?.emailId}
                                     </p>
 
                                     <h1 className="text-gray-800">Prepaid</h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
                                         {items?.prepaid === false
                                             ? 'No'
@@ -205,9 +248,11 @@ const OrderView = ({ items }: Props) => {
                                     </p>
 
                                     <h1 className="text-gray-800">Remarks</h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.remark === "")? "NA": items?.remark}
+                                        {items?.remark === ''
+                                            ? 'NA'
+                                            : items?.remark}
                                     </p>
                                 </div>
                             </div>
@@ -221,89 +266,115 @@ const OrderView = ({ items }: Props) => {
                                     <h1 className="text-gray-800">
                                         Delivery Charges{' '}
                                     </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.deliveryCharges === "")? "NA": items?.deliveryCharges}
+                                        {items?.deliveryCharges === ''
+                                            ? 'NA'
+                                            : items?.deliveryCharges}
                                     </p>
 
                                     <h1 className="text-gray-800">Discount</h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.discount === "")? "NA": items?.discount}
+                                        {items?.discount === ''
+                                            ? 'NA'
+                                            : items?.discount}
                                     </p>
 
                                     <h1 className="text-gray-800">Total </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                       {(items?.total === "")? "NA": items?.total}
+                                        {items?.total === ''
+                                            ? 'NA'
+                                            : items?.total}
                                     </p>
 
                                     <h1 className="text-gray-800">Country</h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.countryLabel === "")? "NA": items?.countryLabel}
+                                        {items?.countryLabel === ''
+                                            ? 'NA'
+                                            : items?.countryLabel}
                                     </p>
 
                                     <h1 className="text-gray-800">State</h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                      {(items?.stateLabel === "")? "NA": items?.stateLabel}
+                                        {items?.stateLabel === ''
+                                            ? 'NA'
+                                            : items?.stateLabel}
                                     </p>
 
                                     <h1 className="text-gray-800">District </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                       {(items?.districtLabel === "")? "NA": items?.districtLabel}
+                                        {items?.districtLabel === ''
+                                            ? 'NA'
+                                            : items?.districtLabel}
                                     </p>
 
                                     <h1 className="text-gray-800">Tehsil </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.tehsilLabel === "")? "NA": items?.tehsilLabel}
+                                        {items?.tehsilLabel === ''
+                                            ? 'NA'
+                                            : items?.tehsilLabel}
                                     </p>
 
                                     <h1 className="text-gray-800">Pincode </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.pincodeLabel === "")? "NA": items?.pincodeLabel}
+                                        {items?.pincodeLabel === ''
+                                            ? 'NA'
+                                            : items?.pincodeLabel}
                                     </p>
 
                                     <h1 className="text-gray-800">Area</h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.areaLabel === "")? "NA": items?.areaLabel}
+                                        {items?.areaLabel === ''
+                                            ? 'NA'
+                                            : items?.areaLabel}
                                     </p>
 
                                     <h1 className="text-gray-800">
                                         Expected Delivery Date{' '}
                                     </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.expectedDeliveryDate === "")? "NA": items?.expectedDeliveryDate}
+                                        {items?.expectedDeliveryDate === ''
+                                            ? 'NA'
+                                            : items?.expectedDeliveryDate}
                                     </p>
 
                                     <h1 className="text-gray-800">
                                         Delivered By{' '}
                                     </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                      {(items?.profileDeliveredBy === "")? "NA": items?.profileDeliveredBy}
+                                        {items?.profileDeliveredBy === ''
+                                            ? 'NA'
+                                            : items?.profileDeliveredBy}
                                     </p>
 
                                     <h1 className="text-gray-800">
                                         Complaint Details{' '}
                                     </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.complaintDetails === "")? "NA": items?.complaintDetails}
+                                        {items?.complaintDetails === ''
+                                            ? 'NA'
+                                            : items?.complaintDetails}
                                     </p>
 
                                     <h1 className="text-gray-800">
                                         Complaint No{' '}
                                     </h1>
-																		<p className="text-center">-</p>
+                                    <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {(items?.complaintNo === "")? "NA": items?.complaintNo}
+                                        {items?.complaintNo === ''
+                                            ? 'NA'
+                                            : items?.complaintNo}
                                     </p>
                                 </div>
                             </div>
@@ -319,16 +390,20 @@ const OrderView = ({ items }: Props) => {
                             <h1 className="text-gray-800">
                                 Disposition Level Two{' '}
                             </h1>
-														<p className="">-</p>
+                            <p className="">-</p>
                             <p className="text-slate-600">
-                                {(items?.dispositionLevelTwo === "")? "NA": items?.dispositionLevelTwo}
+                                {items?.dispositionLevelTwo === ''
+                                    ? 'NA'
+                                    : items?.dispositionLevelTwo}
                             </p>
                             <h1 className="text-gray-800">
                                 Disposition Level Three{' '}
                             </h1>
-														<p className="">-</p>
+                            <p className="">-</p>
                             <p className="text-slate-600">
-                                {(items?.dispositionLevelThree === "")? "NA": items?.dispositionLevelThree}
+                                {items?.dispositionLevelThree === ''
+                                    ? 'NA'
+                                    : items?.dispositionLevelThree}
                             </p>
                         </div>
                     </div>
