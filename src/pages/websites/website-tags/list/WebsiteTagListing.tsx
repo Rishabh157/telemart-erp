@@ -15,6 +15,7 @@ import {
     setFilterValue,
 } from 'src/redux/slices/website/websiteBlogSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import {useNavigate} from 'react-router-dom'
 
 type Props = {
     columns: any[]
@@ -24,6 +25,7 @@ type Props = {
 
 const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
+		const navigate = useNavigate()
     const WebsiteBlogState: any = useSelector(
         (state: RootState) => state.websiteBlog
     )
@@ -49,13 +51,13 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Website Blog Management </ATMPageHeading>
-                {/* <button
+                <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Blog
-                </button> */}
+                    + Add Tags
+                </button>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

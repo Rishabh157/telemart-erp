@@ -1,6 +1,6 @@
 export type WebsiteTagsListResponse = {
-	websitPageIid: string
-	websiteMasterId: string
+	websitPageIid: string | ''
+	websiteMasterId: string | ''
 	metaDescription: string
 	metaKeyword: string
 	metaOgTitle: string
@@ -21,8 +21,8 @@ export type WebsiteTagsListResponse = {
 }
 
 export type AddWebsiteTags = {
-	websitPageIid: string
-	websiteMasterId: string
+	websitPageIid: string | ''
+	websiteMasterId: string | ''
 	metaDescription: string
 	metaKeyword: string
 	metaOgTitle: string
@@ -38,8 +38,8 @@ export type AddWebsiteTags = {
 
 export type UpdateWebsiteTags = {
 	body: {
-		websitPageIid: string
-		websiteMasterId: string
+		websitPageIid: string | ''
+		websiteMasterId: string | ''
 		metaDescription: string
 		metaKeyword: string
 		metaOgTitle: string
