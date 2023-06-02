@@ -19,7 +19,6 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 
-
 const CartonBoxListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()

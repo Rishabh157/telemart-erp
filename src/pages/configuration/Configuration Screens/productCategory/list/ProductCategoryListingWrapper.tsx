@@ -133,10 +133,7 @@ const ProductCategoryListingWrapper = () => {
         deleteProductCategory(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        'Deleted successfully!'
-                    )
+                    showToast('success', 'Deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }

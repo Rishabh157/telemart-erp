@@ -16,7 +16,7 @@ type Props = {
     setActiveStep: React.Dispatch<React.SetStateAction<number>>
     steps: any[]
     pageHeading: string
-    
+
     breadcrumbs: {
         label: string
         onClick?: () => void

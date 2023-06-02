@@ -72,12 +72,8 @@ const steps = [
         validationSchema: object({
             product_code: string().required('Required'),
             product_name: string().required('Required'),
-            product_category: string().required(
-                'Required'
-            ),
-            product_sub_category: string().required(
-                'Required'
-            ),
+            product_category: string().required('Required'),
+            product_sub_category: string().required('Required'),
             productGroup: string().required('Required'),
             product_weight: number()
                 .min(0, 'Weight must be positive')

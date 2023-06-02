@@ -55,16 +55,12 @@ const steps = [
                 object().shape({
                     bankName: string().required('Bank name is required'),
                     branchName: string().required('Branch name is required'),
-                    accountHolderName: string().required(
-                        'Required'
-                    ),
+                    accountHolderName: string().required('Required'),
                     accountNumber: number().required(
                         'Account number is required'
                     ),
                     ifscNumber: string().required('Required'),
-                    accountType: string().required(
-                        'Required'
-                    ),
+                    accountType: string().required('Required'),
                 })
             ),
         }),

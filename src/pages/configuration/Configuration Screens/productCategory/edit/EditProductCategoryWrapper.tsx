@@ -61,10 +61,7 @@ const EditProductCategoryWrapper = (props: Props) => {
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Updated successfully!'
-                        )
+                        showToast('success', 'Updated successfully!')
                         navigate('/configurations/product-category')
                     } else {
                         showToast('error', res?.data?.message)

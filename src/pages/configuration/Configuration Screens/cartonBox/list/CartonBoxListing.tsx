@@ -15,7 +15,6 @@ import {
 } from 'src/redux/slices/cartonBoxSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 type Props = {
     columns: any[]
     rows: any[]
@@ -28,7 +27,6 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.cartonBox
     )
     const [selectedRows, setSelectedRows] = useState([])
-
 
     const navigate = useNavigate()
     const { page, rowsPerPage, searchValue, totalItems } = cartonBoxState
@@ -57,7 +55,7 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
                     {' '}
-                    + Add {' '}
+                    + Add{' '}
                 </button>
             </div>
 

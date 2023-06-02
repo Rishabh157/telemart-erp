@@ -57,7 +57,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        group_name: string().required('Group name is required'),
+        group_name: string().required('Required'),
         attributes: array()
             .of(
                 object().shape({

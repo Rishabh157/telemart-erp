@@ -56,10 +56,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Added successfully!'
-                        )
+                        showToast('success', 'Added successfully!')
                         navigate('/configurations/attributes-group')
                     } else {
                         showToast('error', res?.data?.message)

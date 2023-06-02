@@ -39,7 +39,7 @@ const EditAttributeWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        attributeName: string().required('Attribute Name is required'),
+        attributeName: string().required('Required'),
     })
 
     //    Form Submit Handler

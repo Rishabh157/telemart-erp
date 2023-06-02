@@ -85,10 +85,7 @@ const AddProductGroupWrapper = (props: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Added successfully!'
-                        )
+                        showToast('success', 'Added successfully!')
                         navigate('/configurations/product-group')
                     } else {
                         showToast('error', res?.data?.message)
