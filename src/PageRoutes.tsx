@@ -184,6 +184,7 @@ import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/
 import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edit/EditInitialCallThreeWrapper'
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
 import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
+import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -826,6 +827,10 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
                     />
+                    <Route
+                        path="batch"
+                        element={<BatchListingWrapper />}
+                    />                    
                 </Routes>
             </BrowserRouter>
         </>
