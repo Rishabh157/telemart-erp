@@ -38,7 +38,7 @@ const BatchListing = ({ columns, rows }: Props) => {
             addBatch({}).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Batch assigned successfully!')
+                        showToast('success', 'Batch added successfully!')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -58,8 +58,8 @@ const BatchListing = ({ columns, rows }: Props) => {
                 <button
                     onClick={() =>
                         showConfirmationDialog({
-                            title: 'Assign Batch ',
-                            text: 'Do you want to Assign Batch ?',
+                            title: 'Add Batch ',
+                            text: 'Do you want to Add Batch ?',
                             showCancelButton: true,
                             next: (res: any) => {
                                 return res.isConfirmed
@@ -73,7 +73,7 @@ const BatchListing = ({ columns, rows }: Props) => {
                     }`}
                 >
                     {' '}
-                    Assign Batch{' '}
+                    Add Batch{' '}
                 </button>
             </div>
 
