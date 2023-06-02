@@ -108,7 +108,7 @@ const EditProductSubCategoryWrapper = (props: Props) => {
     }, [dispatch, psData, psIsFetching, psIsLoading])
 
     useEffect(() => {
-         dispatch(setAllProductCategory(pcData?.data));
+        dispatch(setAllProductCategory(pcData?.data))
     }, [dispatch, pcData, pcIsLoading, pcIsFetching])
 
     // useEffect(() => {
