@@ -106,7 +106,7 @@ const DispositionOneListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Tape',
+                                        title: 'Delete Disposition-one',
                                         text: 'Do you want to delete Disposition-One?',
                                         showCancelButton: true,
                                         next: (res: any) => {
@@ -133,7 +133,7 @@ const DispositionOneListingWrapper = () => {
         deleteTape(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Tape deleted successfully!')
+                    showToast('success', 'Deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }

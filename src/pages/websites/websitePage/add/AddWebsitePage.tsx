@@ -16,11 +16,11 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: 'Website',
+        label: 'Website-Page',
         path: '/all-websites/website-page',
     },
     {
-        label: 'Add Website',
+        label: 'Add ',
     },
 ]
 
@@ -37,16 +37,13 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Website-Page </ATMPageHeading>
+                    <ATMPageHeading> Add </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            {' '}
-                            Website-Page Details
-                        </div>
+                        <div className="text-xl font-medium"> Details</div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -65,10 +62,19 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Form */}
                     <div className="grow py-8 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-2 gap-6">
                             {/* Field1 */}
 
                             {/* Field 3 */}
+                            <ATMTextField
+                                name="pageName"
+                                value={values.pageName}
+                                label="Page Name "
+                                placeholder="Name"
+                                onChange={(e) =>
+                                    setFieldValue('pageName', e.target.value)
+                                }
+                            />
 
                             <ATMTextField
                                 name="pageUrl"
@@ -77,16 +83,6 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
                                 placeholder="Url"
                                 onChange={(e) =>
                                     setFieldValue('pageUrl', e.target.value)
-                                }
-                            />
-
-                            <ATMTextField
-                                name="pageName"
-                                value={values.pageName}
-                                label="Page Name "
-                                placeholder="Name"
-                                onChange={(e) =>
-                                    setFieldValue('pageName', e.target.value)
                                 }
                             />
 

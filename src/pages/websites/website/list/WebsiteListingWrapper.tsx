@@ -93,6 +93,18 @@ const WebstieListingWrapper = () => {
                             >
                                 View Blog
                             </button>
+                            <button
+                                onClick={() => {
+                                    navigate('/all-websites/website-page/add', {
+                                        state: {
+                                            siteId: currentId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Add Page
+                            </button>
 
                             <button
                                 onClick={() => {
