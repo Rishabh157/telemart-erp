@@ -9,7 +9,7 @@ const AddAsstesRequest = () => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Assets Request',
-            path: '/assets/assets-request',
+            path: '/assets/assets-management',
         },
         {
             label: 'Add ',
