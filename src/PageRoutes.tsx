@@ -187,6 +187,8 @@ import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add
 import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
 import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
 import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
+import AssetsMangementWrapper from './pages/assets/assetsMangement/assetsMangementWrapper'
+
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -704,6 +706,17 @@ const PageRoutes = () => {
                     />
                     {/* disposition route */}
                     {/* Website route */}
+
+                    {/* start Assets mangement */}
+
+        
+                    <Route
+                        path="assets/assets-management"
+                        element={<AssetsMangementWrapper />}
+                    />
+
+
+                  {/* start Assets mangement */}
                     <Route
                         path="all-websites/website"
                         element={<WebstieListingWrapper />}
