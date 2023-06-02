@@ -12,7 +12,7 @@ const AssetsRequestListing = () => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Assets',
-            path: '/assets/assets-management',
+            path: '/dashboard',
         },
         {
             label: 'Assets Request ',

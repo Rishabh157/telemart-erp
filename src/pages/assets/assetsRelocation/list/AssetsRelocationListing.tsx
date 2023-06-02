@@ -12,7 +12,7 @@ const AssetsRelocationListing = () => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Assets',
-            path: '/assets/assets-relocation',
+            path: '/dashboard',
         },
         {
             label: 'Assets Relocation ',

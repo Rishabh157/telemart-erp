@@ -37,7 +37,7 @@ const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Disposition',
-            path: '/dispositions/disposition-two',
+            path: '/dashboard',
         },
         {
             label: 'Disposition Two',
