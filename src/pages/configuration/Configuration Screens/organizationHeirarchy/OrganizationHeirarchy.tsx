@@ -57,7 +57,7 @@ const OrganisationHierarchy = () => {
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
-                <div className="h-full py-4 overflow-auto ">
+                <div className="h-full py-4  ">
                     <Tree
                         lineWidth={'2px'}
                         lineHeight={'40px'}
