@@ -99,7 +99,7 @@ export const navigation: NavItemType[] = [
     {
         label: 'Media',
         icon: MdPermMedia,
-        path: '/media/did',
+        path: '/media/channel-group',
     },
     {
         label: 'Assets',
