@@ -12,7 +12,7 @@ const AssetsAllocationListing = () => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Assets',
-            path: '/assets/assets-management',
+            path: '/assets/assets-allocation',
         },
         {
             label: 'Assets Allocation ',
