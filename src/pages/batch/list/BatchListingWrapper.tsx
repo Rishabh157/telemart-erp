@@ -11,19 +11,15 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/BatchSlice'
-import { useGetBatchQuery} from 'src/services/BatchService'
+import { useGetBatchQuery } from 'src/services/BatchService'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import moment from 'moment'
 
-
-const BatchListingWrapper = () => {    
-    
-    const batchState: any = useSelector(
-        (state: RootState) => state.batch
-    )
-    //const [showDropdown, setShowDropdown] = useState(false)    
+const BatchListingWrapper = () => {
+    const batchState: any = useSelector((state: RootState) => state.batch)
+    //const [showDropdown, setShowDropdown] = useState(false)
     const { page, rowsPerPage, searchValue, items } = batchState
-    
+
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetBatchQuery({
@@ -77,7 +73,11 @@ const BatchListingWrapper = () => {
             headerName: 'Created At',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: BatchListResponse) => (
-                <span> {moment(row.createdAt).format("DD/MM/YYYY") } - {moment(row.createdAt).format("hh:mm:ss")} </span>
+                <span>
+                    {' '}
+                    {moment(row.createdAt).format('DD/MM/YYYY')} -{' '}
+                    {moment(row.createdAt).format('hh:mm:ss')}{' '}
+                </span>
             ),
         },
         {
@@ -96,26 +96,21 @@ const BatchListingWrapper = () => {
                     >
                         {' '}
                         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                    </button>                   
+                    </button>
                 </div>
             ),
             align: 'end',
         },
     ]
-    
 
-    return (        
-            <SideNavLayout>
-                
-                    <BatchListing
-                        columns={columns}
-                        rows={items}
-                        //setShowDropdown={setShowDropdown}
-                    />
-                   
-                
-            </SideNavLayout>
-       
+    return (
+        <SideNavLayout>
+            <BatchListing
+                columns={columns}
+                rows={items}
+                //setShowDropdown={setShowDropdown}
+            />
+        </SideNavLayout>
     )
 }
 

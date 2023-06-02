@@ -838,10 +838,7 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
                     />
-                    <Route
-                        path="batch"
-                        element={<BatchListingWrapper />}
-                    />                    
+                    <Route path="batch" element={<BatchListingWrapper />} />
                 </Routes>
             </BrowserRouter>
         </>

@@ -1,4 +1,4 @@
-import { AddBatch} from 'src/models'
+import { AddBatch } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
@@ -14,16 +14,16 @@ export const batchApi = apiSlice.injectEndpoints({
             }),
         }),
 
-				//***** ADD *****/
+        //***** ADD *****/
         addBatch: builder.mutation({
-					invalidatesTags: ['Batch'],
-					query: (body: AddBatch) => ({
-							url: '/batch/add',
-							method: 'POST',
+            invalidatesTags: ['Batch'],
+            query: (body: AddBatch) => ({
+                url: '/batch/add',
+                method: 'POST',
 
-							body,
-					}),
-			}),
+                body,
+            }),
+        }),
 
         // //***** GET *****/
         // getAllBatch: builder.query({
@@ -46,7 +46,4 @@ export const batchApi = apiSlice.injectEndpoints({
         // }),
     }),
 })
-export const {
-    useGetBatchQuery,
-    useAddBatchMutation,    
-} = batchApi
+export const { useGetBatchQuery, useAddBatchMutation } = batchApi

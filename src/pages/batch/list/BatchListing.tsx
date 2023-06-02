@@ -15,8 +15,6 @@ import { useAddBatchMutation } from 'src/services/BatchService'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 
-
-
 type Props = {
     columns: any[]
     rows: any[]
@@ -30,30 +28,27 @@ const BatchListing = ({ columns, rows }: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addBatch] = useAddBatchMutation()
 
-    const batchState: any = useSelector((state: RootState) => state.batch)   
+    const batchState: any = useSelector((state: RootState) => state.batch)
 
     const { page, rowsPerPage, searchValue } = batchState
 
-    const submit = () =>{
-        setApiStatus(false)        
+    const submit = () => {
+        setApiStatus(false)
         setTimeout(() => {
-        addBatch({}).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Batch assigned successfully!')                    
+            addBatch({}).then((res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'Batch assigned successfully!')
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
                 } else {
-                    showToast('error', res?.data?.message)
+                    showToast('error', 'Something went wrong')
                 }
-            } else {
-                showToast('error', 'Something went wrong')
-            }
-            setApiStatus(false)
-        })
-    }, 1000)
+                setApiStatus(false)
+            })
+        }, 1000)
     }
-       
-        
-    
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
@@ -61,20 +56,21 @@ const BatchListing = ({ columns, rows }: Props) => {
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Batch</ATMPageHeading>
                 <button
-                    onClick={() => showConfirmationDialog({
-                        title: 'Assign Batch ',
-                        text: 'Do you want to Assign Batch ?',
-                        showCancelButton: true,
-                        next: (res: any) => {
-                            return res.isConfirmed
-                                ? submit()
-                                : setShowDropdown(false)
-                        },
-                    })
-                }
-                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                    apiStatus ? 'opacity-50' : ''
-                }`}
+                    onClick={() =>
+                        showConfirmationDialog({
+                            title: 'Assign Batch ',
+                            text: 'Do you want to Assign Batch ?',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? submit()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }
+                    className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                        apiStatus ? 'opacity-50' : ''
+                    }`}
                 >
                     {' '}
                     Assign Batch{' '}
