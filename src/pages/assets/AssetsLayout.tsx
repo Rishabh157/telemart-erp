@@ -9,7 +9,7 @@ import { TbLayoutDistributeHorizontal } from 'react-icons/tb'
 
 const asstesNavigation: NavItemType[] = [
     {
-        label: 'Assets Request Management',
+        label: 'Assets Request ',
         icon: MdOutlineWebAsset,
         path: '/assets/assets-management',
     },
