@@ -64,7 +64,7 @@ const InitialCallThreeListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'initialCallName',
-            headerName: 'Initial call Three',
+            headerName: 'Initial Call Three',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.initialCallName} </span>
