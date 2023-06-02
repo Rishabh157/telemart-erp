@@ -102,11 +102,11 @@ export const navigation: NavItemType[] = [
         path: '/media/did',
     },
     {
-        label: 'Assets Management',
+        label: 'Assets',
         icon: MdPermMedia,
-        path: '/assets',
+        path: '/assets/assets-management',
     },
-   
+
     {
         label: 'Dispositions',
         icon: AiOutlineSetting,

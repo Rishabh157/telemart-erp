@@ -3,24 +3,25 @@ import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
 import { BiChevronsLeft } from 'react-icons/bi'
-import { GrChannel } from 'react-icons/gr'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { MdOutlineWebAsset, MdShareLocation } from 'react-icons/md'
+import { TbLayoutDistributeHorizontal } from 'react-icons/tb'
 
 const asstesNavigation: NavItemType[] = [
     {
-        label: 'Assets Management',
-        icon: GrChannel,
-        path: '/asstes/assets-management',
+        label: 'Assets Request Management',
+        icon: MdOutlineWebAsset,
+        path: '/assets/assets-management',
     },
     {
         label: 'Assets Relocation',
-        icon: GrChannel,
-        path: '/asstes/channel-group',
+        icon: MdShareLocation,
+        path: '/assets/assets-relocation',
     },
     {
-        label: 'Assets Management',
-        icon: GrChannel,
-        path: '/asstes/channel-group',
+        label: 'Assets Allocation',
+        icon: TbLayoutDistributeHorizontal,
+        path: '/assets/assets-allocation',
     },
 ]
 
@@ -28,7 +29,7 @@ type Props = {
     children?: React.ReactNode | string
 }
 
-const asstesLayout = ({ children }: Props) => {
+const AsstesLayout = ({ children }: Props) => {
     const [isCollapsed, setIsCollapsed] = useState(false)
     const toggleCollapse = () => {
         setIsCollapsed((prev) => !prev)
@@ -83,4 +84,4 @@ const asstesLayout = ({ children }: Props) => {
     )
 }
 
-export default asstesLayout
+export default AsstesLayout
