@@ -36,7 +36,7 @@ const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
     const { page, rowsPerPage, totalItems, searchValue } = dispositionTwoState
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition Two',
+            label: 'Disposition',
             path: '/dashboard',
         },
         {

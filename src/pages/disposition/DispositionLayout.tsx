@@ -3,11 +3,8 @@ import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
 import { BsPersonHeart } from 'react-icons/bs'
-import { BiChevronsLeft, BiCategory } from 'react-icons/bi'
-import { DiDart } from 'react-icons/di'
-import { FaTape } from 'react-icons/fa'
+import { BiChevronsLeft } from 'react-icons/bi'
 import { GrChannel } from 'react-icons/gr'
-import { SiGoogletagmanager } from 'react-icons/si'
 import { MdEmojiEvents } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -19,17 +16,17 @@ const dispositionNavigation: NavItemType[] = [
     },
     {
         label: 'Disposition Two',
-        icon: BiCategory,
+        icon: GrChannel,
         path: '/dispositions/disposition-two',
     },
     {
         label: 'Disposition Three',
-        icon: SiGoogletagmanager,
+        icon: GrChannel,
         path: '/dispositions/disposition-three',
     },
     {
         label: 'IC-One',
-        icon: DiDart,
+        icon: BsPersonHeart,
         path: '/dispositions/initialcall-one',
     },
     {
@@ -39,7 +36,7 @@ const dispositionNavigation: NavItemType[] = [
     },
     {
         label: 'IC-Three',
-        icon: FaTape,
+        icon: BsPersonHeart,
         path: '/dispositions/initialcall-three',
     },
     {

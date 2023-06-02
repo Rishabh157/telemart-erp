@@ -21,6 +21,7 @@ type Props = {
     isAllSelect?: boolean
     isLoading?: boolean
     labelClass?: string
+    isDisabled?: boolean
 }
 
 const ATMSelectSearchable = ({
@@ -38,6 +39,7 @@ const ATMSelectSearchable = ({
     labelClass = ' font-medium',
     isAllSelect = false,
     isLoading = false,
+    isDisabled = false,
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -159,6 +161,7 @@ const ATMSelectSearchable = ({
                 isSearchable={isSearchable}
                 styles={selectStyles}
                 isMulti={isMulti}
+                isDisabled={isDisabled}
                 isClearable
                 isLoading={isLoading}
                 isOptionDisabled={(options) => (options.value as string) === ''}
