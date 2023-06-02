@@ -164,7 +164,6 @@ import InitialCallTwoListingWrapper from './pages/disposition/initialcallertwo/l
 import DispositionTwoListingWrapper from './pages/disposition/dispositionTwo/list/DispositionTwoListingWrapper'
 import DispositionThreeListingWrapper from './pages/disposition/dispositionThree/list/DispositionThreeListingWrapper'
 import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
-import BatchLisitngWrapper from './pages/batch/list/BatchLisitngWrapper'
 import PageNotFound from './PageNotFound'
 import AddDispositionThreeWrappper from './pages/disposition/dispositionThree/add/AddDispositionThreeWrappper'
 import EditDispositionThreeWrapper from './pages/disposition/dispositionThree/edit/EditDispositionThreeWrapper'
@@ -188,6 +187,11 @@ import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/V
 import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
 import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
 import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
+import WebsiteTagListingWrapper from './pages/websites/website-tags/list/WebsiteTagListingWrapper'
+import AddWebsiteTagsWrapper from './pages/websites/website-tags/add/AddWebsiteTagsWrapper'
+import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsiteTagWrapper'
+import WebsiteTagsView from './pages/websites/website-tags/view/WebsiteTagsView'
+
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -839,6 +843,10 @@ const PageRoutes = () => {
                         element={<EditWebsiteBlogWrapper />}
                     />
                     <Route path="batch" element={<BatchListingWrapper />} />
+                    <Route path="/all-websites/website-tags" element={<WebsiteTagListingWrapper />} />
+                    <Route path="/all-websites/website-tags/add" element={<AddWebsiteTagsWrapper />} />
+                    <Route path="/all-websites/website-tags/edit/:id" element={<EditWebsiteTagWrapper />} />
+                    <Route path="/all-websites/website-tags/:id" element={<WebsiteTagsView />} />
                 </Routes>
             </BrowserRouter>
         </>

@@ -35,6 +35,11 @@ const websitesNavigation: NavItemType[] = [
         icon: RiPagesLine,
         path: '/all-websites/website-page',
     },
+    {
+        label: 'Websites-Tags',
+        icon: RiPagesLine,
+        path: '/all-websites/website-tags',
+    },
 ]
 
 type Props = {
