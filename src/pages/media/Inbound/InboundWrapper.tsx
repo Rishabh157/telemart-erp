@@ -186,7 +186,7 @@ const InbouundWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         const callDetails: any = localStorage.getItem('callerData')
         let callDataItem = JSON.parse(callDetails)
-    
+
         const valuesInbound = {
             ...values.generalInformation,
             ...values.addressInformation,
@@ -333,8 +333,6 @@ const InbouundWrapper = () => {
         }
     }, [tehsilData, dispatch, tehsilIsFetching, tehsilIsLoading])
 
-
-
     //channel
     const {
         data: channelData,
@@ -364,7 +362,7 @@ const InbouundWrapper = () => {
         tehsilOptions: allTehsils?.map((ele: TehsilListResponse) => {
             return { label: ele?.tehsilName, value: ele?._id }
         }),
-    
+
         channelOptions: allDistricts?.map((ele: DistrictListResponse) => {
             return { label: ele?.districtName, value: ele?._id }
         }),

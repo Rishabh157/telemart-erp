@@ -354,7 +354,6 @@ const Inbound: React.FC<Props> = ({
                                                 )
                                             }}
                                             rowExtraClasses={(row) => {
-                                          
                                                 return row?._id ===
                                                     values?.schemeId
                                                     ? 'bg-green-200'

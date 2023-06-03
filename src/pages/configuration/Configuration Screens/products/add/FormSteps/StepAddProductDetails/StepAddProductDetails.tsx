@@ -49,41 +49,37 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
 
                 {/* Product Category */}
                 <div className="-mt-2">
-                <ATMSelectSearchable
-                    name="product_category"
-                    value={values.product_category}
-                    onChange={(e) =>
-                        setFieldValue('product_category', e)
-                    }
-                    label="Product Category"
-                    options={dropdownOptions.productCategoryOPtions}
-                />
+                    <ATMSelectSearchable
+                        name="product_category"
+                        value={values.product_category}
+                        onChange={(e) => setFieldValue('product_category', e)}
+                        label="Product Category"
+                        options={dropdownOptions.productCategoryOPtions}
+                    />
                 </div>
 
                 {/* Product Sub Category */}
                 <div className="-mt-2">
-                <ATMSelectSearchable
-                    name="product_sub_category"
-                    value={values.product_sub_category}
-                    onChange={(e) =>
-                        setFieldValue('product_sub_category', e)
-                    }
-                    label="Product Sub Category"
-                    options={dropdownOptions.productSubCategoryOPtions}
-                />
+                    <ATMSelectSearchable
+                        name="product_sub_category"
+                        value={values.product_sub_category}
+                        onChange={(e) =>
+                            setFieldValue('product_sub_category', e)
+                        }
+                        label="Product Sub Category"
+                        options={dropdownOptions.productSubCategoryOPtions}
+                    />
                 </div>
 
                 {/* Product Sub Category */}
                 <div className="-mt-2">
-                <ATMSelectSearchable
-                    name="productGroup"
-                    value={values.productGroup}
-                    onChange={(e) =>
-                        setFieldValue('productGroup', e)
-                    }
-                    label="Product Group"
-                    options={dropdownOptions.productGroupOPtions}
-                />
+                    <ATMSelectSearchable
+                        name="productGroup"
+                        value={values.productGroup}
+                        onChange={(e) => setFieldValue('productGroup', e)}
+                        label="Product Group"
+                        options={dropdownOptions.productGroupOPtions}
+                    />
                 </div>
 
                 {/* Product Weight */}

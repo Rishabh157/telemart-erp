@@ -153,8 +153,6 @@ const ProductsListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
-    
-
     const handleDelete = () => {
         setShowDropdown(false)
         deleteProduct(currentId).then((res) => {
