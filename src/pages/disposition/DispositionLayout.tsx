@@ -59,7 +59,7 @@ const DispositionLayout = ({ children }: Props) => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const currentPath = `/media/${location.pathname?.split('/')[2]}`
+    const currentPath = `/dispositions/${location.pathname?.split('/')[2]}`
 
     return (
         <div className="flex h-screen w-screen relative">
@@ -98,7 +98,7 @@ const DispositionLayout = ({ children }: Props) => {
                     isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
                 }`}
             >
-                <BiChevronsLeft className="text-2xl" />
+                <BiChevronsLeft className="text-2xl" />{' '}
                 {!isCollapsed && <div> BACK TO MAIN MENU </div>}
             </button>
         </div>

@@ -48,7 +48,7 @@ const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Items </ATMPageHeading>
+                <ATMPageHeading> Item </ATMPageHeading>
                 <button
                     onClick={() => navigate('/configurations/item/add')}
                     className="bg-primary-main text-white rounded py-1 px-3"

@@ -2,73 +2,26 @@ import React, { useState } from 'react'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
-import { BsPersonHeart } from 'react-icons/bs'
-import { BiChevronsLeft, BiCategory } from 'react-icons/bi'
-import { DiDart } from 'react-icons/di'
-import { FaTape } from 'react-icons/fa'
-import { GrChannel } from 'react-icons/gr'
-import { SiGoogletagmanager } from 'react-icons/si'
-import { MdEmojiEvents, MdViewTimeline, MdAnalytics } from 'react-icons/md'
-import { TiFlowMerge } from 'react-icons/ti'
+import { BiChevronsLeft } from 'react-icons/bi'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { AiOutlineSetting } from 'react-icons/ai'
+import { MdOutlineWebAsset, MdShareLocation } from 'react-icons/md'
+import { TbLayoutDistributeHorizontal } from 'react-icons/tb'
 
-const mediaNavigation: NavItemType[] = [
+const asstesNavigation: NavItemType[] = [
     {
-        label: 'Channel Group',
-        icon: GrChannel,
-        path: '/media/channel-group',
+        label: 'Assets Request ',
+        icon: MdOutlineWebAsset,
+        path: '/assets/assets-management',
     },
     {
-        label: 'Channel Category',
-        icon: BiCategory,
-        path: '/media/channel-category',
+        label: 'Assets Relocation',
+        icon: MdShareLocation,
+        path: '/assets/assets-relocation',
     },
     {
-        label: 'Channel Management',
-        icon: SiGoogletagmanager,
-        path: '/media/channel',
-    },
-    {
-        label: 'DID Management',
-        icon: DiDart,
-        path: '/media/did',
-    },
-    {
-        label: 'Artist',
-        icon: BsPersonHeart,
-        path: '/media/artist',
-    },
-    {
-        label: 'Tape Management',
-        icon: FaTape,
-        path: '/media/tape',
-    },
-    {
-        label: 'Competitor Management',
-        icon: MdEmojiEvents,
-        path: '/media/competitor',
-    },
-    {
-        label: 'Slot Management',
-        icon: MdViewTimeline,
-        path: '/media/slot',
-    },
-    {
-        label: 'Analysis',
-        icon: MdAnalytics,
-        path: '/media/analysis',
-    },
-
-    {
-        label: 'Flow',
-        icon: TiFlowMerge,
-        path: '/media/flow',
-    },
-    {
-        label: 'Inbound',
-        icon: AiOutlineSetting,
-        path: '/media/inbound',
+        label: 'Assets Allocation',
+        icon: TbLayoutDistributeHorizontal,
+        path: '/assets/assets-allocation',
     },
 ]
 
@@ -76,7 +29,7 @@ type Props = {
     children?: React.ReactNode | string
 }
 
-const MediaLayout = ({ children }: Props) => {
+const AsstesLayout = ({ children }: Props) => {
     const [isCollapsed, setIsCollapsed] = useState(false)
     const toggleCollapse = () => {
         setIsCollapsed((prev) => !prev)
@@ -85,7 +38,7 @@ const MediaLayout = ({ children }: Props) => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const currentPath = `/media/${location.pathname?.split('/')[2]}`
+    const currentPath = `/assets/${location.pathname?.split('/')[2]}`
 
     return (
         <div className="flex h-screen w-screen relative">
@@ -98,7 +51,7 @@ const MediaLayout = ({ children }: Props) => {
                 <VerticalNavBar
                     toggleCollapse={toggleCollapse}
                     isCollapsed={isCollapsed}
-                    navigation={mediaNavigation}
+                    navigation={asstesNavigation}
                     isPathEqualtoNavItem={(navItem: any) =>
                         navItem.path === currentPath
                     }
@@ -131,4 +84,4 @@ const MediaLayout = ({ children }: Props) => {
     )
 }
 
-export default MediaLayout
+export default AsstesLayout

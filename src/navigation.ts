@@ -96,11 +96,11 @@ export const navigation: NavItemType[] = [
         icon: MdOutlineBorderColor,
         path: '/orders',
     },
-    {
-        label: 'Batch',
-        icon: MdOutlineBatchPrediction,
-        path: '/batch',
-    },
+    // {
+    //     label: 'Batch',
+    //     icon: MdOutlineBatchPrediction,
+    //     path: '/batch',
+    // },
 
     {
         label: 'Configurations',
@@ -110,13 +110,14 @@ export const navigation: NavItemType[] = [
     {
         label: 'Media',
         icon: MdPermMedia,
-        path: '/media/did',
+        path: '/media/channel-group',
     },
-    // {
-    //     label: 'Disposition',
-    //     icon: TbSettings2,
-    //     path: '/disposition',
-    // },
+    {
+        label: 'Assets',
+        icon: MdPermMedia,
+        path: '/assets/assets-management',
+    },
+
     {
         label: 'Dispositions',
         icon: AiOutlineSetting,
