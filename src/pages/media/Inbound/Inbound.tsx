@@ -13,17 +13,14 @@ import { FormInitialValues } from './InboundWrapper'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
-import { useGetAlldispositionOneunauthQuery } from 'src/services/configurations/DispositiononeServices'
-import { setAllItems } from 'src/redux/slices/configuration/dispositionOneSlice'
-import { useGetAlldispositionTwounauthQuery } from 'src/services/configurations/DispositionTwoServices'
+import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
+import { setAllItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
+import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
 import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
-// import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { useGetAllPincodeUnauthQuery } from 'src/services/PinCodeService'
-// import { GRNListResponse } from 'src/models'
 import { useInboundSchemeQuery } from 'src/services/SchemeService'
 import { setTotalItems, setSearchValue } from 'src/redux/slices/schemeSlice'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
-// import { SchemeListResponse } from 'src/models/scheme.model'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -34,12 +31,13 @@ type Props = {
         stateOptions?: SelectOption[] | []
         districtOptions?: SelectOption[] | []
         pincodeOptions?: SelectOption[] | []
-        dispositionOneOptions?: SelectOption[] | []
+        dispositionThreeOptions?: SelectOption[] | []
         dispositionTwoOptions?: SelectOption[] | []
         tehsilOptions?: SelectOption[] | []
         areaOptions?: SelectOption[] | []
-        channelOptions?: SelectOption[] | []
+        OutBoundOptions?: SelectOption[] | []
     }
+    didItems: any
 }
 
 const Inbound: React.FC<Props> = ({
@@ -47,13 +45,14 @@ const Inbound: React.FC<Props> = ({
     apiStatus,
     dropdownOptions,
     schemeColumn,
+    didItems
 }) => {
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch<AppDispatch>()
 
     const { allItems: allDispositionItems }: any = useSelector(
-        (state: RootState) => state.dispositionOne
+        (state: RootState) => state.dispositionThree
     )
 
     const { allPincodes }: any = useSelector(
@@ -101,33 +100,33 @@ const Inbound: React.FC<Props> = ({
     }, [schemeData, dispatch, schemeisLoading, schemeisFetching])
 
     const {
-        data: dispositionOnedata,
-        isLoading: dispositionOneIsLoading,
-        isFetching: dispositionOneIsFetching,
-    } = useGetAlldispositionOneunauthQuery('')
+        data: dispositionThreedata,
+        isLoading: dispositionThreeIsLoading,
+        isFetching: dispositionThreeIsFetching,
+    } = useGetAllUnAuthDispositionThreeQuery(
+        formikProps.values.dispositionLevelTwoId,
+        { skip: !formikProps.values.dispositionLevelTwoId }
+    )
 
     const {
         data: dispositionTwodata,
         isLoading: dispositionTwoIsLoading,
         isFetching: dispositionTwoIsFetching,
-    } = useGetAlldispositionTwounauthQuery(
-        formikProps.values.dispositionLevelTwoId,
-        { skip: !formikProps.values.dispositionLevelTwoId }
-    )
+    } = useGetAllUnAuthdispositionTwoQuery('')
 
     const { items: dispositionTwoItems }: any = useSelector(
         (state: RootState) => state.dispositionTwo
     )
 
     useEffect(() => {
-        if (!dispositionOneIsLoading && !dispositionOneIsFetching) {
-            dispatch(setAllItems(dispositionOnedata?.data))
+        if (!dispositionThreeIsLoading && !dispositionThreeIsFetching) {
+            dispatch(setAllItems(dispositionThreedata?.data))
         }
     }, [
-        dispositionOnedata,
+        dispositionThreedata,
         dispatch,
-        dispositionOneIsLoading,
-        dispositionOneIsFetching,
+        dispositionThreeIsLoading,
+        dispositionThreeIsFetching,
     ])
 
     useEffect(() => {
@@ -140,11 +139,16 @@ const Inbound: React.FC<Props> = ({
         dispositionTwoIsLoading,
         dispositionTwoIsFetching,
     ])
+    useEffect(() => {
+        if (didItems) {
+            setFieldValue('personalInformation.channel', didItems?.channelLabel)
+        }
+    }, [didItems,setFieldValue])
 
     dropdownOptions = {
         ...dropdownOptions,
 
-        dispositionOneOptions: allDispositionItems?.map((ele: any) => {
+        dispositionThreeOptions: allDispositionItems?.map((ele: any) => {
             return { label: ele?.dispositionName, value: ele?._id }
         }),
         dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
@@ -169,22 +173,36 @@ const Inbound: React.FC<Props> = ({
     const genderOption = [
         {
             label: 'Male',
-            value: 'male',
+            value: 'MALE',
         },
         {
             label: 'Female',
-            value: 'female',
+            value: 'FEMALE',
+        },
+        {
+            label: 'Other',
+            value: 'OTHER',
         },
     ]
 
     const RelationOption = [
         {
-            label: 'Male',
+            label: 'Manager',
             value: 'male',
         },
         {
             label: 'Female',
-            value: 'female',
+            value: 'sales',
+        },
+    ]
+ const OutBoundOptions=[
+        {
+            label: 'Manual',
+            value: 'male',
+        },
+        {
+            label: 'Automatic',
+            value: 'sales',
         },
     ]
 
@@ -192,19 +210,19 @@ const Inbound: React.FC<Props> = ({
         <>
             <div className="container-fluid px-5 py-2 flex flex-col gap-4 mt-0">
                 <div className="h-fit w-full flex gap-5">
-                    <div className="w-3/5 flex flex-col gap-4 ">
+                    <div className="w-3/5 flex flex-col gap-x-4 gap-y-2 ">
                         <div className="pb-5">
                             <p className="bg-gray-50 p-2 rounded-md text-20 col-span-4 mb-2">
-                                Gerneral informtion
+                                Gerneral information
                             </p>
-                            <div className="flex gap-4">
+                            <div className="flex gap-x-4 gap-y-2">
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMTextField
                                         name="generalInformation.didNo"
                                         labelClass="font-semibold text-sm "
                                         label="DID NO"
                                         size="xs"
-                                        className="-mt-0  shadow bg-white rounded"
+                                        className="mt-1  shadow bg-white rounded"
                                         onChange={(e) => {
                                             console.log(e.target.value)
                                             setFieldValue(
@@ -215,17 +233,18 @@ const Inbound: React.FC<Props> = ({
                                         value={values.generalInformation.didNo}
                                     />
                                 </div>
-                                <div className="flex flex-col gap-1 w-full  -mt-4">
-                                    <ATMTextField
+                                <div className="flex flex-col gap-1 w-full  -mt-5">
+                                    <ATMSelectSearchable
                                         name="generalInformation.inOutBound"
                                         labelClass="font-semibold text-sm"
                                         label="IN /OutBound"
                                         size="xs"
-                                        className="-mt-0  shadow bg-white rounded"
+                                        options={OutBoundOptions ||[]}
+                                        // className="mt-1  shadow bg-white rounded"
                                         onChange={(e) => {
                                             setFieldValue(
                                                 'generalInformation.inOutBound',
-                                                e.target.value
+                                                e
                                             )
                                         }}
                                         value={
@@ -239,7 +258,7 @@ const Inbound: React.FC<Props> = ({
                                         labelClass="font-semibold text-xs"
                                         label="In Comming Caller No"
                                         size="xs"
-                                        className="-mt-0  shadow bg-white rounded"
+                                        className="mt-1  shadow bg-white rounded"
                                         onChange={(e) => {
                                             console.log(e)
                                             setFieldValue(
@@ -268,7 +287,7 @@ const Inbound: React.FC<Props> = ({
                                             values.generalInformation.mobileNo
                                         }
                                         size="xs"
-                                        className="-mt-0  shadow bg-white rounded"
+                                        className="mt-1  shadow bg-white rounded"
                                     />
                                 </div>
                             </div>
@@ -276,7 +295,7 @@ const Inbound: React.FC<Props> = ({
                         {/* //Search by schema */}
                         <div className="bg-blue-50 rounded-xl px-3 py-1 ">
                             <div className=" gap-2 grid grid-cols-4 ">
-                                <div className="flex flex-col gap-2 col-span-1 -mt-4  mb-0 pb-0">
+                                <div className="flex flex-col gap-2 col-span-1 -mt-4 mr-4 mb-0 pb-0">
                                     <ATMTextField
                                         name="schemeId"
                                         labelClass="font-semibold text-sm"
@@ -289,29 +308,49 @@ const Inbound: React.FC<Props> = ({
                                         }}
                                         value={searchValue}
                                         size="xs"
-                                        className="-mt-0  shadow bg-white rounded"
+                                        className="mt-1  shadow bg-white rounded"
                                     />
                                 </div>
-                                <div className="overflow-scroll w-full col-span-3  h-[14vh]  mb-0 pb-0">
-                                    <ATMTable
-                                        rowClassName="px-2 bg-red-100 hover:bg-blue-100 text-light "
-                                        headerClassName="p-0 m-0 bg-white rounded "
-                                        onRowClick={(row) => {
-                                            setFieldValue('schemeId', row._id)
-                                        }}
-                                        rowExtraClasses={(row) => {
-                                            return row?._id === values?.schemeId
-                                                ? 'bg-green-200'
-                                                : ''
-                                        }}
-                                        noDataFoundText={
-                                            'No Matching Scheme Found Please Search Again'
-                                        }
-                                        noDataFoundClass={'text-red-400'}
-                                        columns={schemeColumn || []}
-                                        rows={schemeitems || []}
-                                        onRowSelect={() => {}}
-                                    />
+
+                                <div className=" w-full col-span-3 mb-0 pb-0">
+                                    <div className="flex items-center">
+                                        <div className="flex-[2_2_0%] px-4  items-center text-start">
+                                            Scheme Name
+                                        </div>
+                                        <div className="flex-[0.3_0.3_0%] px-5  items-center  text-start">
+                                            Price
+                                        </div>
+                                    </div>
+                                    <div className="overflow-scroll h-[14vh]  ">
+                                        <ATMTable
+                                            rowClassName="px-2 hover:bg-blue-100 text-light "
+                                            headerClassName="p-0 m-0 bg-white rounded  "
+                                            onRowClick={(row) => {
+                                                console.log(row, 'row')
+                                                setFieldValue(
+                                                    'schemeId',
+                                                    row._id
+                                                )
+                                            }}
+                                            rowExtraClasses={(row) => {
+                                                console.log(
+                                                    values?.schemeId,
+                                                    row?._id
+                                                )
+                                                return row?._id ===
+                                                    values?.schemeId
+                                                    ? 'bg-green-200'
+                                                    : 'bg-white'
+                                            }}
+                                            noDataFoundText={
+                                                'No Matching Scheme Found Please Search Again'
+                                            }
+                                            noDataFoundClass={'text-red-400'}
+                                            columns={schemeColumn || []}
+                                            rows={schemeitems || []}
+                                            onRowSelect={() => {}}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="col-span-3"></div>
                             </div>
@@ -322,7 +361,7 @@ const Inbound: React.FC<Props> = ({
                         {/* //Delivery information */}
                         <div className="bg-gray-50 p-2 rounded-md text-20 col-span-4 mb-2">
                             <p className="bg-gray-50 p-2 rounded-md text-20 col-span-4 mb-2">
-                                Address informtion
+                                Address information
                             </p>
 
                             <div className="grid grid-cols-4 gap-4">
@@ -342,7 +381,7 @@ const Inbound: React.FC<Props> = ({
                                                 .deliveryCharges
                                         }
                                         size="xs"
-                                        className="-mt-0  shadow bg-white rounded"
+                                        className="mt-1  shadow bg-white rounded"
                                     />
                                 </div>
 
@@ -361,7 +400,7 @@ const Inbound: React.FC<Props> = ({
                                             values.addressInformation.discount
                                         }
                                         size="xs"
-                                        className="-mt-0  shadow bg-white rounded"
+                                        className="mt-1  shadow bg-white rounded"
                                     />
                                 </div>
 
@@ -378,12 +417,13 @@ const Inbound: React.FC<Props> = ({
                                         }}
                                         value={values.addressInformation.total}
                                         size="xs"
-                                        className="-mt-0  shadow bg-white rounded"
+                                        className="mt-1  shadow bg-white rounded"
                                     />
                                 </div>
 
                                 <div className="flex flex-col gap-1 w-full -mt-4">
                                     <ATMSelectSearchable
+                                        selectClass="mt-1"
                                         options={dropdownOptions.counrtyOptions}
                                         name="addressInformation.countryId"
                                         labelClass="font-semibold text-sm"
@@ -399,11 +439,12 @@ const Inbound: React.FC<Props> = ({
                                             )
                                         }}
                                         size="xs"
-                                        // className="-mt-0  shadow bg-white rounded"
+                                        // className="mt-1  shadow bg-white rounded"
                                     />
                                 </div>
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMSelectSearchable
+                                        selectClass="mt-1"
                                         options={
                                             dropdownOptions.stateOptions || []
                                         }
@@ -421,12 +462,13 @@ const Inbound: React.FC<Props> = ({
                                             )
                                         }}
                                         size="xs"
-                                        // className="-mt-0  shadow bg-white rounded"
+                                        // className="mt-1  shadow bg-white rounded"
                                     />
                                 </div>
 
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMSelectSearchable
+                                        selectClass="mt-1"
                                         options={
                                             dropdownOptions.districtOptions ||
                                             []
@@ -445,12 +487,13 @@ const Inbound: React.FC<Props> = ({
                                             )
                                         }}
                                         size="xs"
-                                        // className="-mt-0  shadow bg-white rounded"
+                                        // className="mt-1  shadow bg-white rounded"
                                     />
                                 </div>
 
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMSelectSearchable
+                                        selectClass="mt-1"
                                         options={
                                             dropdownOptions.tehsilOptions || []
                                         }
@@ -468,12 +511,13 @@ const Inbound: React.FC<Props> = ({
                                             )
                                         }}
                                         size="xs"
-                                        // className="-mt-0  shadow bg-white rounded"
+                                        // className="mt-1  shadow bg-white rounded"
                                     />
                                 </div>
 
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
                                     <ATMSelectSearchable
+                                        selectClass="mt-1"
                                         options={
                                             dropdownOptions.pincodeOptions || []
                                         }
@@ -488,19 +532,20 @@ const Inbound: React.FC<Props> = ({
                                             handleClick(newValue)
                                         }}
                                         size="xs"
-                                        // className="-mt-0  shadow bg-white rounded"
+                                        // className="mt-1  shadow bg-white rounded"
                                     />
                                 </div>
-                                <div className="grid grid-cols-3 gap-4 col-span-4">
+                                <div className="grid grid-cols-4 gap-4 col-span-4">
                                     <div className="flex flex-col gap-1 w-full  -mt-4">
                                         <ATMSelectSearchable
+                                            selectClass="mt-1"
                                             options={
                                                 dropdownOptions.areaOptions ||
                                                 []
                                             }
                                             name=""
                                             labelClass="font-semibold text-sm"
-                                            label="areaId"
+                                            label="Area"
                                             required
                                             value={
                                                 values.addressInformation.areaId
@@ -512,58 +557,19 @@ const Inbound: React.FC<Props> = ({
                                                 )
                                             }}
                                             size="xs"
-                                            // className="-mt-0  shadow bg-white rounded"
+                                            // className="mt-1  shadow bg-white rounded"
                                         />
                                     </div>
 
-                                    {/* <div className="flex flex-col gap-1 w-full ">
-                                        <ATMDatePicker
-                                            name="addressInformation.expectedDeliveryDate"
-                                            value={
-                                                values.addressInformation
-                                                    .expectedDeliveryDate
-                                            }
-                                            label="ExpectedDelivery Date"
-                                            labelClass="font-semibold text-sm"
-                                            dateTimeFormat="MM/DD/YY ddd"
-                                            onChange={(e) => {
-                                                setFieldValue(
-                                                    'addressInformation.expectedDeliveryDate',
-                                                    e
-                                                )
-                                            }}
-                                            size="xs"
-                                        />
-                                    </div> */}
-
-                                    {/* <div className="flex flex-col gap-1 w-full  -mt-4">
-                                        <ATMTextField
-                                            name="profileDeliveredBy"
-                                            labelClass="font-semibold text-sm"
-                                            label="Profile delivered by"
-                                            onChange={(e) => {
-                                                setFieldValue(
-                                                    'profileDeliveredBy',
-                                                    e
-                                                )
-                                            }}
-                                            value={
-                                                values.addressInformation
-                                                    .profileDeliveredBy
-                                            }
-                                            size="xs"
-                                            className="-mt-0  shadow bg-white rounded"
-                                        />
-                                    </div> */}
                                     <div className="flex flex-col gap-1 w-full mt-2">
                                         <p className="font-semibold text-sm">
-                                            ExpectedDelivery Date
+                                            Expected Delivery Date
                                         </p>
                                         <p className=" font-normal">20/05/23</p>
                                     </div>
                                     <div className="flex flex-col gap-1 w-full mt-2">
                                         <p className="font-semibold text-sm">
-                                            Profile delivered by
+                                            Profile Delivered by
                                         </p>
                                         <p className=" font-normal">Mayank</p>
                                     </div>
@@ -592,10 +598,10 @@ const Inbound: React.FC<Props> = ({
                     {/* //Address information */}
                     <div className="w-2/5 bg-white flex flex-col gap-2 pl-4 border-l">
                         <p className="bg-gray-50 p-2 rounded-md text-20">
-                            Personal informtion
+                            Personal information
                         </p>
 
-                        <div className="grid grid-cols-3 gap-4 gap-b-5">
+                        <div className="grid grid-cols-3 gap-4 ">
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMTextField
                                     name="personalInformation.agentName"
@@ -609,7 +615,7 @@ const Inbound: React.FC<Props> = ({
                                     }}
                                     value={values.personalInformation.agentName}
                                     size="xs"
-                                    className="-mt-0  shadow bg-white rounded"
+                                    className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
@@ -625,7 +631,7 @@ const Inbound: React.FC<Props> = ({
                                     }}
                                     value={values.personalInformation.name}
                                     size="xs"
-                                    className="-mt-0  shadow bg-white rounded"
+                                    className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
@@ -641,13 +647,13 @@ const Inbound: React.FC<Props> = ({
                                     }}
                                     value={values.personalInformation.age}
                                     size="xs"
-                                    className="-mt-0  shadow bg-white rounded"
+                                    className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4 col-span-3">
                                 <ATMTextArea
-                                    minRows={1}
-                                    name="address"
+                                    minRows={2}
+                                    name="personalInformation.address"
                                     labelClass="font-semibold text-sm"
                                     value={values.personalInformation.address}
                                     label="Address"
@@ -661,12 +667,13 @@ const Inbound: React.FC<Props> = ({
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMSelectSearchable
+                                    selectClass="mt-1"
                                     options={RelationOption}
-                                    name=""
+                                    name="personalInformation.relation"
                                     labelClass="font-semibold text-sm"
                                     label="Relation"
                                     required
-                                    value=""
+                                    value={values.personalInformation.relation}
                                     onChange={(e) => {
                                         setFieldValue(
                                             'personalInformation.relation',
@@ -674,11 +681,12 @@ const Inbound: React.FC<Props> = ({
                                         )
                                     }}
                                     size="xs"
-                                    // className="-mt-0  shadow bg-white rounded"
+                                    // className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMSelectSearchable
+                                    selectClass="mt-1"
                                     options={
                                         dropdownOptions.districtOptions || []
                                     }
@@ -697,7 +705,7 @@ const Inbound: React.FC<Props> = ({
                                         )
                                     }}
                                     size="xs"
-                                    // className="-mt-0  shadow bg-white rounded"
+                                    // className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
@@ -713,7 +721,7 @@ const Inbound: React.FC<Props> = ({
                                     }}
                                     value={values.personalInformation.landmark}
                                     size="xs"
-                                    className="-mt-0  shadow bg-white rounded"
+                                    className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
@@ -729,7 +737,7 @@ const Inbound: React.FC<Props> = ({
                                     }}
                                     value={values.alternateNo}
                                     size="xs"
-                                    className="-mt-0  shadow bg-white rounded"
+                                    className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
@@ -747,12 +755,12 @@ const Inbound: React.FC<Props> = ({
                                         values.personalInformation.whatsappNo
                                     }
                                     size="xs"
-                                    className="-mt-0  shadow bg-white rounded"
+                                    className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
-                            <div className="flex flex-col gap-1 w-full  -mt-4">
+                            <div className="flex flex-col gap-1 w-full -mt-4">
                                 <ATMRadioButton
-                                    name=""
+                                    name="personalInformation.gender"
                                     // labelClass='font-bold text-sm'
                                     label="Gender"
                                     options={genderOption}
@@ -764,39 +772,40 @@ const Inbound: React.FC<Props> = ({
                                         )
                                     }}
                                     required
+                                    className="mt-0"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMTextField
-                                    name="personalInformation.channelId"
+                                    name="personalInformation.channel"
                                     labelClass="font-semibold text-sm"
                                     label="Channel"
-                                    disabled
-                                    value={values.personalInformation.channelId}
+                                    disabled={true}
+                                    value={values.personalInformation.channel}
                                     onChange={(e) => {
                                         setFieldValue(
-                                            'personalInformation.channelId',
-                                            e
+                                            'personalInformation.channel',
+                                            e.target.value
                                         )
                                     }}
                                     size="xs"
-                                    // className="-mt-0  shadow bg-white rounded"
+                                    className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4">
                                 <ATMTextField
-                                    name="personalInformation.email"
+                                    name="personalInformation.emailId"
                                     labelClass="font-semibold text-sm"
                                     label="Email"
                                     onChange={(e) => {
                                         setFieldValue(
-                                            'personalInformation.email',
+                                            'personalInformation.emailId',
                                             e.target.value
                                         )
                                     }}
-                                    value={values.personalInformation.email}
+                                    value={values.personalInformation.emailId}
                                     size="xs"
-                                    className="-mt-0  shadow bg-white rounded"
+                                    className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
 
@@ -815,18 +824,15 @@ const Inbound: React.FC<Props> = ({
                                         values.personalInformation
                                             .prepaid as boolean
                                     }
-                                    value={
-                                        values.personalInformation
-                                            .prepaid as string
-                                    }
+
                                     // size="xs"
-                                    // className="-mt-0  shadow bg-white rounded"
+                                    // className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
                             <div className="flex flex-col gap-1 w-full  -mt-4 col-span-3">
                                 <ATMTextArea
                                     name="personalInformation.remark"
-                                    minRows={1}
+                                    minRows={2}
                                     labelClass="font-bold text-sm"
                                     value={values.personalInformation.remark}
                                     label="Remarks"
@@ -849,8 +855,9 @@ const Inbound: React.FC<Props> = ({
                         <div className="col-span-3 w-full flex gap-4 pb-3">
                             <div className="flex flex-col gap-1  w-full  ">
                                 <ATMSelectSearchable
+                                    selectClass="mt-1"
                                     options={
-                                        dropdownOptions.dispositionOneOptions ||
+                                        dropdownOptions.dispositionTwoOptions ||
                                         []
                                     }
                                     name="dispositionLevelTwoId"
@@ -866,14 +873,15 @@ const Inbound: React.FC<Props> = ({
                                         )
                                     }}
                                     size="xs"
-                                    // className="-mt-0  shadow bg-white rounded"
+                                    // className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
 
                             <div className="flex flex-col gap-1 w-full">
                                 <ATMSelectSearchable
+                                    selectClass="mt-1"
                                     options={
-                                        dropdownOptions.dispositionTwoOptions ||
+                                        dropdownOptions.dispositionThreeOptions ||
                                         []
                                     }
                                     name="dispositionLevelThreeId"
@@ -888,7 +896,7 @@ const Inbound: React.FC<Props> = ({
                                         )
                                     }}
                                     size="xs"
-                                    // className="-mt-0  shadow bg-white rounded"
+                                    // className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
                         </div>

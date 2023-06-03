@@ -37,7 +37,7 @@ export type addressInformation = {
 export type personalInformation = {
     agentName: string
     name: string
-    age: string
+    age: number
     address: string
     relation: string
     agentDistrictId: string
@@ -45,8 +45,8 @@ export type personalInformation = {
     whatsappNo: string
     gender: string
     prepaid: boolean
-    email: string
-    channelId: string
+    emailId: string
+    channel: string
     remark: string
 }
 
@@ -57,16 +57,10 @@ export interface AddInboundCaller
     dispositionLevelTwoId: string
     dispositionLevelThreeId: string
     schemeId: string
-    companyId: string
     alternateNo1: string
 }
 
 export type UpdateInboundCaller = {
-    body: {
-        generalInformation: generalInformation
-        addressInformation: addressInformation
-        personalInformation: personalInformation
-        companyId: string
-    }
+    body: AddInboundCaller
     id: string
 }
