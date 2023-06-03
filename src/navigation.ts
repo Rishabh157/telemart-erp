@@ -7,7 +7,6 @@ import { CiBoxes } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
 import {
     MdOutlineBorderColor,
-    MdOutlineBatchPrediction,
     MdPermMedia,
     MdWeb,
 } from 'react-icons/md'
@@ -90,11 +89,16 @@ export const navigation: NavItemType[] = [
         label: 'Batch',
         icon: TfiLayoutMediaOverlayAlt2,
         path: '/batch',
-    },
+    },   
     {
         label: 'Orders',
         icon: MdOutlineBorderColor,
         path: '/orders',
+    },
+    {
+        label: 'Call',
+        icon: MdOutlineBorderColor,
+        path: '/call',
     },
     // {
     //     label: 'Batch',

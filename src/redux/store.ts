@@ -62,6 +62,8 @@ import websitePageSlice from './slices/website/websitePageSlice'
 import orderSlice from './slices/orderSlice'
 import dispositionComplaintSlice from './slices/configuration/dispositionComplaintSlice'
 import batchSlice from './slices/BatchSlice'
+import influencerSlice from './slices/website/influencerSlice'
+import inboundCallerSlice from './slices/media/inboundCallerSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -132,6 +134,8 @@ const store = configureStore({
         order: orderSlice,
         batch: batchSlice,
         dispositionComplaint: dispositionComplaintSlice,
+        influencer:influencerSlice,
+        inboundCaller:inboundCallerSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

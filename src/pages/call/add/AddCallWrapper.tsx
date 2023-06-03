@@ -5,9 +5,10 @@ import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import WebsiteLayout from '../../WebsiteLayout'
-import AddInfluencer from './AddInfluencer'
+import AddInfluencer from './AddCall'
 import { useAddInfluencerMutation } from 'src/services/websites/InfluencerServices'
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+import AddCall from './AddCall'
 
 type Props = {}
 
@@ -18,7 +19,7 @@ export type FormInitialValues = {
     endDate: string
 }
 
-const AddInfluencerWrapper = (props: Props) => {
+const AddCallWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
@@ -26,17 +27,17 @@ const AddInfluencerWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const initialValues: FormInitialValues = {
-        name: "",
-        schemeId: "",
-        startDate: "",
-        endDate: "",
+        name: '',
+        schemeId: '',
+        startDate: '',
+        endDate: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
         name: string().required('Required'),
         schemeId: string().required('Required'),
-        startDate:string().required('Required') ,
+        startDate: string().required('Required'),
         endDate: string().required('Required'),
     })
 
@@ -47,8 +48,8 @@ const AddInfluencerWrapper = (props: Props) => {
         setTimeout(() => {
             addInfluencer({
                 name: values.name,
-                schemeId:values.schemeId,
-                startDate:values.startDate,
+                schemeId: values.schemeId,
+                startDate: values.startDate,
                 endDate: values.endDate,
                 companyId: userData?.companyId || '',
             }).then((res) => {
@@ -68,7 +69,7 @@ const AddInfluencerWrapper = (props: Props) => {
     }
 
     return (
-        <WebsiteLayout>
+        <ConfigurationLayout>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -76,15 +77,15 @@ const AddInfluencerWrapper = (props: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <AddInfluencer
+                        <AddCall
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                         />
                     )
                 }}
             </Formik>
-        </WebsiteLayout>
+        </ConfigurationLayout>
     )
 }
 
-export default AddInfluencerWrapper
+export default AddCallWrapper

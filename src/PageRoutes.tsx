@@ -184,9 +184,6 @@ import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/
 import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edit/EditInitialCallThreeWrapper'
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
 import InfluencerListingWrapper from './pages/websites/influencerManagement/list/InfluencerListingWrapper'
-import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
-import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
-import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
 import AddAssetsRequestWrapper from './pages/assets/assetsRequest/add/AddAssetsRequestWrapper'
 import AddAssetsRelocationWrapper from './pages/assets/assetsRelocation/add/AddAssetsRelocationWrapper'
 import AssetsRelocationWrapper from './pages/assets/assetsRelocation/list/AssetsRelocationWrapper'
@@ -195,6 +192,8 @@ import AssetsAllocationWrapper from './pages/assets/assetsAllocation/list/Assets
 import AddAssetsAllocationWrapper from './pages/assets/assetsAllocation/add/AddAssetsAllocationWrapper'
 
 import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
+import AddInfluencerWrapper from './pages/websites/influencerManagement/add/AddInfluencerWrapper'
+import CallListingWrapper from './pages/call/list/CallListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -863,15 +862,25 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
                     />
-                      {/* Website Blog route */}
+                    {/* Website Blog route */}
 
-                    {/* Influencer routing */}
+                    {/* start Influencer routing */}
                     <Route
                         path="all-websites/influencers-management"
-                        element={<InfluencerListingWrapper/>}
+                        element={<InfluencerListingWrapper />}
                     />
+                    <Route
+                        path="all-websites/influencers-management/add"
+                        element={<AddInfluencerWrapper />}
+                    />
+                    {/*end  Influencer routing */}
 
-
+                    {/* start call routing */}
+                    <Route
+                        path="/call"
+                        element={<CallListingWrapper />}
+                    />
+                    {/* end call routing */}
                     <Route path="batch" element={<BatchListingWrapper />} />
                 </Routes>
             </BrowserRouter>

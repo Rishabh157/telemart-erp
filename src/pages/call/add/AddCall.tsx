@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './AddInfluencerWrapper'
+import { FormInitialValues } from './AddCallWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 
 type Props = {
@@ -16,15 +16,15 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: 'Influencer',
-        path: '/all-websites/influencers-management',
+        label: 'Call',
+        path: '/call',
     },
     {
         label: 'Add ',
     },
 ]
 
-const AddInfluencer = ({ formikProps, apiStatus }: Props) => {
+const AddCall = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -117,4 +117,4 @@ const AddInfluencer = ({ formikProps, apiStatus }: Props) => {
     )
 }
 
-export default AddInfluencer
+export default AddCall

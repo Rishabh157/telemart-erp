@@ -4,40 +4,80 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/website/websiteSlice'
-import WebsiteLayout from '../../WebsiteLayout'
-import { WebsiteListResponse } from 'src/models/website/Website.model'
+
 import {
     useDeletegetWebsiteMutation,
-    useGetPaginationWebsiteQuery,
+   
 } from 'src/services/websites/WebsiteServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
-import InfluencerListing from './InfluencerListing'
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+import CallListing from './CallListing'
+import { setIsTableLoading, setItems, setTotalItems } from 'src/redux/slices/media/inboundCallerSlice'
+import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
+import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
 
-const InfluencerListingWrapper = () => {
+
+
+const CallListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deleteWebsite] = useDeletegetWebsiteMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteState: any = useSelector((state: RootState) => state.website)
+    const inboundCallerState: any = useSelector((state: RootState) => state.inboundCaller)
 
-    const { page, rowsPerPage, searchValue, items } = WebsiteState
+
+    const { page, rowsPerPage, searchValue, items } = inboundCallerState
     const columns: columnTypes[] = [
-        {
-            field: 'productName',
-            headerName: 'Website Name',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsiteListResponse) => (
-                <span> {row.productName} </span>
-            ),
-        },
+        // {
+        //     field: 'didNo',
+        //     headerName: 'DID No',
+        //     flex: 'flex-[1_1_0%]',
+        //     renderCell: (row: InbooundCallerListResponse) => (
+        //         <span> {row.didNo} </span>
+        //     ),
+        // },
+        // {
+        //     field: 'generalInformation.incomingCallerNo',
+        //     headerName: 'Incoming Caller No',
+        //     flex: 'flex-[1_1_0%]',
+        //     renderCell: (row: InbooundCallerListResponse) => (
+        //         <span> {row.incomingCallerNo} </span>
+        //     ),
+        // },
+        // {
+        //     field: 'dispositionTwoLabel',
+        //     headerName: 'Disposition Two',
+        //     flex: 'flex-[1_1_0%]',
+        //     renderCell: (row: InbooundCallerListResponse) => (
+        //         <span> {row.dispositionTwoLabel?row.dispositionTwoLabel:'NA'}</span>
+        //     ),
+        // },
+        // {
+        //     field: 'dispositionThreeLabel',
+        //     headerName: 'Disposition Three Label',
+        //     flex: 'flex-[1_1_0%]',
+        //     renderCell: (row: InbooundCallerListResponse) => (
+        //         <span> {row.dispositionThreeLabel?row.dispositionThreeLabel:"NA"} </span>
+        //     ),
+        // },
+        // {
+        //     field: 'schemeLabel',
+        //     headerName: 'Scheme',
+        //     flex: 'flex-[1_1_0%]',
+        //     renderCell: (row: InbooundCallerListResponse) => (
+        //         <span> {row.schemeLabel} </span>
+        //     ),
+        // },
+        // {
+        //     field: 'channelId',
+        //     headerName: 'Channel',
+        //     flex: 'flex-[1_1_0%]',
+        //     renderCell: (row: InbooundCallerListResponse) => (
+        //         <span> {row.channelId} </span>
+        //     ),
+        // },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -80,7 +120,7 @@ const InfluencerListingWrapper = () => {
                             >
                                 Add Blog
                             </button>
-                            <button
+                            {/* <button
                                 onClick={() => {
                                     dispatch(setFilterValue(currentId))
                                     navigate('/all-websites/website-blog', {
@@ -92,7 +132,7 @@ const InfluencerListingWrapper = () => {
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 View Blog
-                            </button>
+                            </button> */}
                             <button
                                 onClick={() => {
                                     navigate('/all-websites/website-page/add', {
@@ -131,10 +171,10 @@ const InfluencerListingWrapper = () => {
         },
     ]
 
-    const { data, isFetching, isLoading } = useGetPaginationWebsiteQuery({
+    const { data, isFetching, isLoading } = useGetPaginationInboundCallerQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['productName', 'url'],
+        params: ['didNo'],
         page: page,
         filterBy: [
             {
@@ -165,7 +205,7 @@ const InfluencerListingWrapper = () => {
         deleteWebsite(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Website deleted successfully!')
+                    showToast('success', 'Deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -179,15 +219,16 @@ const InfluencerListingWrapper = () => {
     }
     return (
         <>
-            <WebsiteLayout>
-                <InfluencerListing
+            <ConfigurationLayout>
+                <CallListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </WebsiteLayout>
+            </ConfigurationLayout>
         </>
     )
 }
 
-export default InfluencerListingWrapper
+export default CallListingWrapper
+

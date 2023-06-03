@@ -1,18 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import ATMBreadCrumbs, {
-    BreadcrumbType,
-} from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    setRowsPerPage,
-    setPage,
-    setSearchValue,
-} from 'src/redux/slices/website/websiteSlice'
+import { setPage, setRowsPerPage, setSearchValue } from 'src/redux/slices/media/inboundCallerSlice'
+
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -21,37 +14,27 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const InfluencerListing = ({ columns, rows, setShowDropdown }: Props) => {
+const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const WebsiteState: any = useSelector((state: RootState) => state.website)
+    const inboundCallerState: any = useSelector((state: RootState) => state.website)
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = WebsiteState
-    const navigate = useNavigate()
-    const breadcrumbs: BreadcrumbType[] = [
-        {
-            label: 'Website',
-            path: '/dashboard',
-        },
-        {
-            label: 'Influencer',
-        },
-    ]
+    const { page, rowsPerPage, totalItems, searchValue } = inboundCallerState
+    
+
 
     return (
         <div className="px-4 h-full overflow-auto pt-3 ">
-            <div className="h-[30px]">
-                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-            </div>
+        
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Influencer Management </ATMPageHeading>
-                <button
+                <ATMPageHeading> Call Management </ATMPageHeading>
+                {/* <button
                     type="button"
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
                     + Add 
-                </button>
+                </button> */}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
@@ -100,4 +83,4 @@ const InfluencerListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
 }
 
-export default InfluencerListing
+export default CallListing
