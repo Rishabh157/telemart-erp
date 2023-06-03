@@ -33,7 +33,7 @@ const WebsiteListing = ({ columns, rows, setShowDropdown }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'Website',
+            label: 'Websites',
         },
     ]
 
