@@ -88,7 +88,7 @@ export const navigation: NavItemType[] = [
     },
     {
         label: 'Batch',
-        icon: TfiLayoutMediaOverlayAlt2,
+        icon: MdOutlineBatchPrediction,
         path: '/batch',
     },
     {
@@ -96,11 +96,7 @@ export const navigation: NavItemType[] = [
         icon: MdOutlineBorderColor,
         path: '/orders',
     },
-    // {
-    //     label: 'Batch',
-    //     icon: MdOutlineBatchPrediction,
-    //     path: '/batch',
-    // },
+    
 
     {
         label: 'Configurations',

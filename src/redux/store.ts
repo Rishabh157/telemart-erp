@@ -59,6 +59,7 @@ import initialCallerThreeSlice from './slices/configuration/initialCallerThreeSl
 import websiteSlice from './slices/website/websiteSlice'
 import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
+import websiteTagsSlice from './slices/website/websiteTagsSlice'
 import orderSlice from './slices/orderSlice'
 import dispositionComplaintSlice from './slices/configuration/dispositionComplaintSlice'
 import batchSlice from './slices/BatchSlice'
@@ -123,6 +124,7 @@ const store = configureStore({
         artist: artistSlice,
         website: websiteSlice,
         websiteBlog: websiteBlogSlice,
+        websiteTags:websiteTagsSlice,
         dispositionThree: dispositionThreeSlice,
         initialCallerOne: initialCallerOneSlice,
         initialCallerTwo: initialCallerTwoSlice,
