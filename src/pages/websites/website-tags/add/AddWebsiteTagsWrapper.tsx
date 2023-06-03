@@ -1,18 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 import AddWebsiteTag from './AddWebsiteTag'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { useAddWebsiteTagsMutation } from 'src/services/websites/WebsiteTagsServices'
 import WebsiteLayout from '../../WebsiteLayout'
+import { useGetAllWebsiteQuery } from 'src/services/websites/WebsiteServices'
+import { useGetAllWebsitePageQuery } from 'src/services/websites/WebsitePageServices'
+import { setAllItems as setAllWebsites } from 'src/redux/slices/website/websiteSlice'
+import { setAllItems as setAllWebsitePage } from 'src/redux/slices/website/websitePageSlice'
+import { WebsiteListResponse } from 'src/models/website/Website.model'
+import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
+
 
 type Props = {}
 
 export type FormInitialValues = {
-	websitPageIid: string
+	websitPageId: string
 	websiteMasterId: string
 	metaDescription: string
 	metaKeyword: string
@@ -29,13 +36,49 @@ export type FormInitialValues = {
 
 const AddWebsiteTagsWrapper = (props: Props) => {
     // Form Initial Values
+		const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()    
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addWebsiteTags] = useAddWebsiteTagsMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
+		const { allItems: websiteItems }: any = useSelector(
+			(state: RootState) => state.website
+		)
+
+		const { allItems: websitePageItems }: any = useSelector(
+				(state: RootState) => state?.websitePage
+		)
+
+		const {
+			isLoading: iswebsiteLoading,
+			isFetching: isWebsiteFetching,
+			data: WebsiteData,
+	} = useGetAllWebsiteQuery('')
+
+	useEffect(() => {
+			if (!iswebsiteLoading && !isWebsiteFetching) {
+					dispatch(setAllWebsites(WebsiteData?.data || []))
+			}
+	}, [dispatch, iswebsiteLoading, isWebsiteFetching, WebsiteData])
+
+	const {
+			isLoading: isPageLoading,
+			isFetching: isPageFetching,
+			data: PageData,
+	} = useGetAllWebsitePageQuery('')
+
+	useEffect(() => {
+			if (!isPageLoading && !isPageFetching) {
+					dispatch(setAllWebsitePage(PageData?.data || []))
+			}
+	}, [isPageLoading, isPageFetching, PageData, dispatch])
+
+
+
+
     const initialValues: FormInitialValues = {
-			websitPageIid: '',
+			websitPageId: '',
 			websiteMasterId: '',
 			metaDescription: '',
 			metaKeyword: '',
@@ -52,6 +95,8 @@ const AddWebsiteTagsWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
+			websitPageId: string().required('Required'),
+			websiteMasterId: string().required('Required'),
 			metaDescription: string().required('Required'),
 			metaKeyword: string().required('Required'),
 			metaOgTitle: string().required('Required'),
@@ -70,8 +115,8 @@ const AddWebsiteTagsWrapper = (props: Props) => {
         //console.log(values)
         setTimeout(() => {
             addWebsiteTags({
-							websitPageIid: '',
-							websiteMasterId: '',
+							websitPageId: values.websitPageId,
+							websiteMasterId: values.websiteMasterId,
 							metaDescription: values?.metaDescription ||'',
 							metaKeyword: values?.metaKeyword || '',
 							metaOgTitle: values?.metaOgTitle || '',
@@ -99,6 +144,26 @@ const AddWebsiteTagsWrapper = (props: Props) => {
         }, 1000)
     }
 
+		const dropdownOptions = {
+			WebsiteOptions: websiteItems?.map(
+					(website: WebsiteListResponse) => {
+							return {
+									label: website.productName,
+									value: website._id,
+							}
+					}
+			),
+
+			WebsitePageOptions: websitePageItems?.map(
+					(page: WebsitePageListResponse) => {
+							return {
+									label: page.pageName,
+									value: page._id,
+							}
+					}
+			),
+	}
+
     return (
         <WebsiteLayout>
             <Formik
@@ -111,6 +176,7 @@ const AddWebsiteTagsWrapper = (props: Props) => {
                         <AddWebsiteTag
                             apiStatus={apiStatus}
                             formikProps={formikProps}
+														dropdownOptions={dropdownOptions}
                         />
                     )
                 }}

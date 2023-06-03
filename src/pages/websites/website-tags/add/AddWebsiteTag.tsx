@@ -7,10 +7,17 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddWebsiteTagsWrapper'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+		dropdownOptions: {
+			WebsiteOptions: SelectOption[]
+			WebsitePageOptions: SelectOption[]
+			
+	}
 }
 
 // Breadcrumbs
@@ -24,8 +31,11 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddWebsiteTag = ({ formikProps, apiStatus }: Props) => {
+const AddWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
+		dropdownOptions = {
+			...dropdownOptions,
+	}
 
     return (
         <div className="">
@@ -64,6 +74,30 @@ const AddWebsiteTag = ({ formikProps, apiStatus }: Props) => {
                     <div className="grow py-8 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* Field1 */}
+														<ATMSelectSearchable
+                                name="websiteMasterId"
+                                value={values.websiteMasterId}
+                                onChange={(e) =>
+                                    setFieldValue('websiteMasterId', e)
+                                }
+                                options={dropdownOptions.WebsiteOptions}
+                                label="Website"
+                            />
+
+                            <div className="">
+                                <ATMSelectSearchable
+                                    name="websitPageId"
+                                    required
+                                    value={values.websitPageId}
+                                    onChange={(e) =>
+                                        setFieldValue('websitPageId', e)
+                                    }
+                                    options={
+                                        dropdownOptions.WebsitePageOptions
+                                    }
+                                    label="Website Page"
+                                />
+                            </div>
 
                             {/* Field 3 */}
                             <ATMTextField
@@ -77,16 +111,7 @@ const AddWebsiteTag = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
 
-														<ATMTextArea
-                                minRows={4}
-																required
-                                name="metaDescription"
-                                value={values.metaDescription}
-                                label="Meta Description"
-                                onChange={(newValue) =>
-                                    setFieldValue('metaDescription', newValue)
-                                }
-                            />
+														
 
                             {/* Field 3 */}
                             <ATMTextField
@@ -126,17 +151,7 @@ const AddWebsiteTag = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
 
-                            <ATMTextArea
-                                minRows={4}
-																required
-                                name="metaOgDescription"
-                                value={values.metaOgDescription}
-                                label="Meta OG Description"
-                                onChange={(newValue) =>
-                                    setFieldValue('metaOgDescription', newValue)
-                                }
-                            />
-
+                           
 															<ATMTextField
                                 name="metaOgType"
 																required
@@ -180,6 +195,29 @@ const AddWebsiteTag = ({ formikProps, apiStatus }: Props) => {
                                     setFieldValue('metaTwitterImage', e.target.value)
                                 }
                             />
+
+<ATMTextArea
+                                minRows={4}
+																required
+                                name="metaOgDescription"
+                                value={values.metaOgDescription}
+                                label="Meta OG Description"
+                                onChange={(newValue) =>
+                                    setFieldValue('metaOgDescription', newValue)
+                                }
+                            />
+
+															<ATMTextArea
+                                minRows={4}
+																required
+                                name="metaDescription"
+                                value={values.metaDescription}
+                                label="Meta Description"
+                                onChange={(newValue) =>
+                                    setFieldValue('metaDescription', newValue)
+                                }
+                            />
+
                         </div>
                     </div>
                 </div>

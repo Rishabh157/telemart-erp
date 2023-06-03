@@ -190,7 +190,7 @@ import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
 import WebsiteTagListingWrapper from './pages/websites/website-tags/list/WebsiteTagListingWrapper'
 import AddWebsiteTagsWrapper from './pages/websites/website-tags/add/AddWebsiteTagsWrapper'
 import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsiteTagWrapper'
-import WebsiteTagsView from './pages/websites/website-tags/view/WebsiteTagsView'
+import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsiteTagsWrapper'
 
 
 const PageRoutes = () => {
@@ -846,7 +846,7 @@ const PageRoutes = () => {
                     <Route path="/all-websites/website-tags" element={<WebsiteTagListingWrapper />} />
                     <Route path="/all-websites/website-tags/add" element={<AddWebsiteTagsWrapper />} />
                     <Route path="/all-websites/website-tags/edit/:id" element={<EditWebsiteTagWrapper />} />
-                    <Route path="/all-websites/website-tags/:id" element={<WebsiteTagsView />} />
+                    <Route path="/all-websites/website-tags/:id" element={<ViewWebsiteTagsWrapper />} />
                 </Routes>
             </BrowserRouter>
         </>

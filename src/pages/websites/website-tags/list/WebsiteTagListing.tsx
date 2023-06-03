@@ -39,7 +39,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
             path: '/all-websites/website',
         },
         {
-            label: 'Website Blog',
+            label: 'Website Tags',
         },
     ]
 
@@ -50,7 +50,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
             </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Website Blog Management </ATMPageHeading>
+                <ATMPageHeading> Website MetaTags Management </ATMPageHeading>
                 <button
                     type="button"
                     onClick={() => navigate('add')}
