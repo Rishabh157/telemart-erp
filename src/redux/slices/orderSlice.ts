@@ -13,6 +13,7 @@ export type InitialStateType = {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedDealerId: string
+    filterValue: string
 }
 
 const initialState: InitialStateType = {
@@ -26,6 +27,7 @@ const initialState: InitialStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedDealerId: '',
+    filterValue: '',
 }
 
 const orderSlice: Slice<InitialStateType> = createSlice({
@@ -76,6 +78,9 @@ const orderSlice: Slice<InitialStateType> = createSlice({
         ) => {
             state.selectedItem = action.payload
         },
+        setFilterValue: (state, action: PayloadAction<string>) => {
+            state.filterValue = action.payload
+        },
     },
 })
 
@@ -90,5 +95,6 @@ export const {
     setSelectedDealerId,
     setSelectedItem,
     setAllItems,
+    setFilterValue,
 } = orderSlice.actions
 export default orderSlice.reducer
