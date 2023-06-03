@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { number, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
@@ -8,7 +8,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import Inbound from './Inbound'
 import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
-import { useAddInboundCallerMutation } from 'src/services/media/InboundCallerServices'
+import {
+    useAddInboundCallerMutation,
+    useUpdateInboundCallerMutation,
+} from 'src/services/media/InboundCallerServices'
 import { useGetAllTehsilUnauthQuery } from 'src/services/TehsilService'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
@@ -39,12 +42,12 @@ export type FormInitialValues = {
         deliveryCharges: number
         discount: number
         total: number
-        countryId: string
-        stateId: string
-        districtId: string
-        tehsilId: string
-        areaId: string
-        pincodeId: string
+        countryId: string | null
+        stateId: string | null
+        districtId: string | null
+        tehsilId: string | null
+        areaId: string | null
+        pincodeId: string | null
         expectedDeliveryDate: string
         profileDeliveredBy: string
         complaintDetails: string
@@ -56,7 +59,7 @@ export type FormInitialValues = {
         age: number
         address: string
         relation: string
-        agentDistrictId: string
+        agentDistrictId: string | null
         landmark: string
         whatsappNo: string
         gender: string
@@ -65,9 +68,9 @@ export type FormInitialValues = {
         channel: string
         remark: string
     }
-    dispositionLevelTwoId: string
-    dispositionLevelThreeId: string
-    schemeId: string
+    dispositionLevelTwoId: string | null
+    dispositionLevelThreeId: string | null
+    schemeId: string | null
     alternateNo: string
 }
 
@@ -92,28 +95,30 @@ const InbouundWrapper = () => {
             extraClasses: 'p-0 m-0 ',
         },
     ]
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddInbopundCaller] = useAddInboundCallerMutation()
+    const [UpdateInbopundCaller] = useUpdateInboundCallerMutation()
     let DidNO = '452001'
+    let MobileNO = '9893432611'
 
     const initialValues: FormInitialValues = {
         generalInformation: {
             didNo: DidNO,
-            inOutBound: '',
-            incomingCallerNo: '',
-            mobileNo: '',
+            inOutBound: 'Manual',
+            incomingCallerNo: MobileNO,
+            mobileNo: MobileNO,
         },
         addressInformation: {
             deliveryCharges: 0,
             discount: 0,
             total: 0,
-            countryId: '',
-            stateId: '',
-            districtId: '',
-            tehsilId: '',
-            areaId: '',
-            pincodeId: '',
+            countryId: null,
+            stateId: null,
+            districtId: null,
+            tehsilId: null,
+            areaId: null,
+            pincodeId: null,
             expectedDeliveryDate: '',
             profileDeliveredBy: '',
             complaintDetails: '',
@@ -125,11 +130,10 @@ const InbouundWrapper = () => {
             age: 0,
             address: '',
             relation: '',
-            agentDistrictId: '',
+            agentDistrictId: null,
             landmark: '',
-
             whatsappNo: '',
-            gender: '',
+            gender: 'OTHER',
             prepaid: false,
             emailId: '',
             channel: 'Sony',
@@ -137,9 +141,9 @@ const InbouundWrapper = () => {
         },
 
         alternateNo: '',
-        dispositionLevelTwoId: '',
-        dispositionLevelThreeId: '',
-        schemeId: '',
+        dispositionLevelTwoId: null,
+        dispositionLevelThreeId: null,
+        schemeId: null,
     }
 
     // Form Validation Schema
@@ -181,6 +185,12 @@ const InbouundWrapper = () => {
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
+        const callDetails: any = localStorage.getItem('callerData')
+        let callDataItem = JSON.parse(callDetails)
+        console.log(
+            'callDataItemcallDataItemcallDataItemcallDataItem',
+            callDataItem
+        )
         const valuesInbound = {
             ...values.generalInformation,
             ...values.addressInformation,
@@ -188,12 +198,15 @@ const InbouundWrapper = () => {
         }
         setApiStatus(true)
         setTimeout(() => {
-            AddInbopundCaller({
-                ...valuesInbound,
-                alternateNo1: values.alternateNo,
-                schemeId: values.schemeId,
-                dispositionLevelTwoId: values.dispositionLevelTwoId,
-                dispositionLevelThreeId: values.dispositionLevelThreeId,
+            UpdateInbopundCaller({
+                body: {
+                    ...valuesInbound,
+                    alternateNo1: values.alternateNo,
+                    schemeId: values.schemeId,
+                    dispositionLevelTwoId: values.dispositionLevelTwoId,
+                    dispositionLevelThreeId: values.dispositionLevelThreeId,
+                },
+                id: callDataItem?.orderID,
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -201,7 +214,8 @@ const InbouundWrapper = () => {
                             'success',
                             'InboundCaller added successfully!'
                         )
-                        navigate('/media/inbound')
+                        localStorage.removeItem('callerData')
+                        // navigate('/media/inbound')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -212,6 +226,50 @@ const InbouundWrapper = () => {
             })
         }, 1000)
     }
+    useEffect(() => {
+        const callDetails: any = localStorage.getItem('callerData')
+        let callDataItem = JSON.parse(callDetails)
+        console.log(callDataItem, 'callDataItem')
+        if (!callDataItem) {
+            const valuesInbound = {
+                ...initialValues.generalInformation,
+                ...initialValues.addressInformation,
+                ...initialValues.personalInformation,
+            }
+            // setApiStatus(true)
+
+            AddInbopundCaller({
+                ...valuesInbound,
+                alternateNo1: initialValues.alternateNo,
+                schemeId: initialValues.schemeId,
+                dispositionLevelTwoId: initialValues.dispositionLevelTwoId,
+                dispositionLevelThreeId: initialValues.dispositionLevelThreeId,
+            }).then((res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        console.log(res?.data?.data?.id,"res?.data?._id")
+                        if (res?.data?.data?._id) {
+                            let CallData = {
+                                orderID: res?.data?.data?._id,
+                                MobileNO: MobileNO,
+                                DidNO: DidNO,
+                            }
+                            localStorage.setItem(
+                                'callerData',
+                                JSON.stringify(CallData)
+                            )
+                        }
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
+                } else {
+                    showToast('error', 'Something went wrong')
+                }
+                // setApiStatus(false)
+            })
+        }
+    }, [])
+
     const dispatch = useDispatch<AppDispatch>()
 
     const { data, isLoading, isFetching } = useGetAllCountryUnauthQuery('')

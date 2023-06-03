@@ -86,7 +86,7 @@ export const dispositionThreeApi = apiSlice.injectEndpoints({
         GetAllUnAuthDispositionThree: builder.query({
             providesTags: ['dispositionThree'],
             query: (id) => ({
-                url: `/disposition-three//unauth/get-all/${id}`,
+                url: `/disposition-three/unauth/get-all/${id}`,
 
                 method: 'GET',
             }),

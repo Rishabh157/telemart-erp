@@ -430,7 +430,7 @@ const Inbound: React.FC<Props> = ({
                                         label="Country"
                                         required
                                         value={
-                                            values.addressInformation.countryId
+                                            values.addressInformation.countryId as string
                                         }
                                         onChange={(e) => {
                                             setFieldValue(
@@ -453,7 +453,7 @@ const Inbound: React.FC<Props> = ({
                                         label="State"
                                         required
                                         value={
-                                            values.addressInformation.stateId
+                                            values.addressInformation.stateId as string
                                         }
                                         onChange={(e) => {
                                             setFieldValue(
@@ -478,7 +478,7 @@ const Inbound: React.FC<Props> = ({
                                         label="District"
                                         required
                                         value={
-                                            values.addressInformation.districtId
+                                            values.addressInformation.districtId as string
                                         }
                                         onChange={(e) => {
                                             setFieldValue(
@@ -502,7 +502,7 @@ const Inbound: React.FC<Props> = ({
                                         label="Tehsil"
                                         required
                                         value={
-                                            values.addressInformation.tehsilId
+                                            values.addressInformation.tehsilId as string
                                         }
                                         onChange={(e) => {
                                             setFieldValue(
@@ -526,7 +526,7 @@ const Inbound: React.FC<Props> = ({
                                         label="Pincode"
                                         required
                                         value={
-                                            values.addressInformation.pincodeId
+                                            values.addressInformation.pincodeId as string
                                         }
                                         onChange={(newValue: string) => {
                                             handleClick(newValue)
@@ -548,7 +548,7 @@ const Inbound: React.FC<Props> = ({
                                             label="Area"
                                             required
                                             value={
-                                                values.addressInformation.areaId
+                                                values.addressInformation.areaId as string
                                             }
                                             onChange={(e) => {
                                                 setFieldValue(
@@ -696,7 +696,7 @@ const Inbound: React.FC<Props> = ({
                                     required
                                     value={
                                         values.personalInformation
-                                            .agentDistrictId
+                                            .agentDistrictId as string
                                     }
                                     onChange={(e) => {
                                         setFieldValue(
@@ -803,7 +803,7 @@ const Inbound: React.FC<Props> = ({
                                             e.target.value
                                         )
                                     }}
-                                    value={values.personalInformation.emailId}
+                                    value={values.personalInformation.emailId as string} 
                                     size="xs"
                                     className="mt-1  shadow bg-white rounded"
                                 />
@@ -864,7 +864,7 @@ const Inbound: React.FC<Props> = ({
                                     labelClass="font-semibold text-sm"
                                     label="Disposition Level 1"
                                     required
-                                    value={values.dispositionLevelTwoId}
+                                    value={values.dispositionLevelTwoId as string}
                                     onChange={(e) => {
                                         console.log(e)
                                         setFieldValue(
@@ -888,7 +888,7 @@ const Inbound: React.FC<Props> = ({
                                     labelClass="font-semibold text-sm"
                                     label="Disposition Level 2"
                                     required
-                                    value={values.dispositionLevelThreeId}
+                                    value={values.dispositionLevelThreeId as string}
                                     onChange={(e) => {
                                         setFieldValue(
                                             'dispositionLevelThreeId',
