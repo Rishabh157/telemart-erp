@@ -95,10 +95,11 @@ const InbouundWrapper = () => {
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddInbopundCaller] = useAddInboundCallerMutation()
+    let DidNO = '452001'
 
     const initialValues: FormInitialValues = {
         generalInformation: {
-            didNo: '',
+            didNo: DidNO,
             inOutBound: '',
             incomingCallerNo: '',
             mobileNo: '',
@@ -229,11 +230,9 @@ const InbouundWrapper = () => {
     const { selectedItem: didItems }: any = useSelector(
         (state: RootState) => state.didManagement
     )
-    console.log('Channelitems', didItems)
     useEffect(() => {
         if (!isLoading && !isFetching) dispatch(setAllCountry(data?.data))
     }, [data, isLoading, isFetching, dispatch])
-    let DidNO = '452001'
     // did
     //state
     const {
@@ -340,7 +339,6 @@ const InbouundWrapper = () => {
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => {
-              
                 return (
                     <Inbound
                         apiStatus={apiStatus}

@@ -35,7 +35,7 @@ type Props = {
         dispositionTwoOptions?: SelectOption[] | []
         tehsilOptions?: SelectOption[] | []
         areaOptions?: SelectOption[] | []
-        // channelOptions?: SelectOption[] | []
+        OutBoundOptions?: SelectOption[] | []
     }
     didItems: any
 }
@@ -173,11 +173,15 @@ const Inbound: React.FC<Props> = ({
     const genderOption = [
         {
             label: 'Male',
-            value: 'male',
+            value: 'MALE',
         },
         {
             label: 'Female',
-            value: 'female',
+            value: 'FEMALE',
+        },
+        {
+            label: 'Other',
+            value: 'OTHER',
         },
     ]
 
@@ -188,6 +192,16 @@ const Inbound: React.FC<Props> = ({
         },
         {
             label: 'Female',
+            value: 'sales',
+        },
+    ]
+ const OutBoundOptions=[
+        {
+            label: 'Manual',
+            value: 'male',
+        },
+        {
+            label: 'Automatic',
             value: 'sales',
         },
     ]
@@ -225,12 +239,12 @@ const Inbound: React.FC<Props> = ({
                                         labelClass="font-semibold text-sm"
                                         label="IN /OutBound"
                                         size="xs"
-                                        options={[]}
+                                        options={OutBoundOptions ||[]}
                                         // className="mt-1  shadow bg-white rounded"
                                         onChange={(e) => {
                                             setFieldValue(
                                                 'generalInformation.inOutBound',
-                                                e.target.value
+                                                e
                                             )
                                         }}
                                         value={
@@ -325,7 +339,7 @@ const Inbound: React.FC<Props> = ({
                                                 )
                                                 return row?._id ===
                                                     values?.schemeId
-                                                    ? 'bg-green-400'
+                                                    ? 'bg-green-200'
                                                     : 'bg-white'
                                             }}
                                             noDataFoundText={

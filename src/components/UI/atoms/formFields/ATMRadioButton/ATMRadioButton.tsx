@@ -32,7 +32,7 @@ const ATMRadioButton = ({
                 </label>
             )}
 
-            <div className={`flex ${className} w-full py-2 pr-2 `}>
+            <div className={`flex ${className} w-full py-2 pr-2 grid grid-cols-2 gap-1`}>
                 {options.map((option: SelectOption, index) => (
                     <div
                         onChange={() => {
@@ -40,7 +40,7 @@ const ATMRadioButton = ({
                         }}
                         key={index}
                         className={`${
-                            index === 0 ? '' : 'ml-2 '
+                            index === 0 ? '' : ''
                         } lg:flex ms:flex  xl:flex sm:text-sm lg:text-lg text-base  `}
                     >
                         <input
