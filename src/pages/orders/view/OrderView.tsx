@@ -176,9 +176,9 @@ const OrderView = ({ items }: Props) => {
                                     <h1 className="text-gray-800">Relation</h1>
                                     <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {items?.realtion === ''
+                                        {items?.relation === ''
                                             ? 'NA'
-                                            : items?.realtion}
+                                            : items?.relation}
                                     </p>
 
                                     <h1 className="text-gray-800">District </h1>
@@ -212,9 +212,9 @@ const OrderView = ({ items }: Props) => {
                                     </h1>
                                     <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {items?.watsappNo === ''
+                                        {items?.whatsappNo === ''
                                             ? 'NA'
-                                            : items?.watsappNo}
+                                            : items?.whatsappNo}
                                     </p>
 
                                     <h1 className="text-gray-800">Gender </h1>

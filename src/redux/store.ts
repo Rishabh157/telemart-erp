@@ -61,6 +61,7 @@ import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
 import websiteTagsSlice from './slices/website/websiteTagsSlice'
 import orderSlice from './slices/orderSlice'
+import inquirySlice from './slices/inquirySlice'
 import dispositionComplaintSlice from './slices/configuration/dispositionComplaintSlice'
 import batchSlice from './slices/BatchSlice'
 
@@ -132,6 +133,7 @@ const store = configureStore({
         websitePage: websitePageSlice,
         dispositionTwo: dispositionTwoSlice,
         order: orderSlice,
+        inquiry:inquirySlice,
         batch: batchSlice,
         dispositionComplaint: dispositionComplaintSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,

@@ -186,6 +186,8 @@ import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add
 import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
 import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
 import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
+import InquiryViewWrapper from './pages/inquiry/view/InquiryViewWrapper'
+import InquiryListingWrapper from './pages/inquiry/list/InquiryListingWrapper'
 import AddAssetsRequestWrapper from './pages/assets/assetsRequest/add/AddAssetsRequestWrapper'
 import AddAssetsRelocationWrapper from './pages/assets/assetsRelocation/add/AddAssetsRelocationWrapper'
 import AssetsRelocationWrapper from './pages/assets/assetsRelocation/list/AssetsRelocationWrapper'
@@ -894,6 +896,12 @@ const PageRoutes = () => {
                     <Route
                         path="/all-websites/website-tags/:id"
                         element={<ViewWebsiteTagsWrapper />}
+                    />
+                    <Route path="/inquiry" element={<InquiryListingWrapper />} />
+                    
+                    <Route
+                        path="/inquiry/view/:id"
+                        element={<InquiryViewWrapper />}
                     />
                 </Routes>
             </BrowserRouter>
