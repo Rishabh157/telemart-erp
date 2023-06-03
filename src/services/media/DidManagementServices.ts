@@ -56,6 +56,15 @@ export const didManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** get by id *****/
+        getByDidNumber: builder.query({
+            providesTags: ['did'],
+            query: (id) => ({
+                url: `/did-management/unauth/${id}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 
@@ -66,4 +75,5 @@ export const {
     useGetAllDidQuery,
     useGetDidByIdQuery,
     useDeleteDidMutation,
+    useGetByDidNumberQuery,
 } = didManagementApi

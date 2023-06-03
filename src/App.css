@@ -36,3 +36,15 @@
         transform: rotate(360deg);
     }
 }
+
+.css-1xc3v61-indicatorContainer {
+    margin-top: -4px;
+    /* background-color: red; */
+    padding: 4px !important;
+}
+.css-15lsz6c-indicatorContainer {
+    margin-top: -4px;
+
+    /* background-color: red; */
+    padding: 4px !important;
+}

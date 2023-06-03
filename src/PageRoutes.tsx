@@ -194,6 +194,10 @@ import AddAssetsAllocationWrapper from './pages/assets/assetsAllocation/add/AddA
 import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
 import AddInfluencerWrapper from './pages/websites/influencerManagement/add/AddInfluencerWrapper'
 import CallListingWrapper from './pages/call/list/CallListingWrapper'
+import WebsiteTagListingWrapper from './pages/websites/website-tags/list/WebsiteTagListingWrapper'
+import AddWebsiteTagsWrapper from './pages/websites/website-tags/add/AddWebsiteTagsWrapper'
+import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsiteTagWrapper'
+import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsiteTagsWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -882,6 +886,22 @@ const PageRoutes = () => {
                     />
                     {/* end call routing */}
                     <Route path="batch" element={<BatchListingWrapper />} />
+                    <Route
+                        path="/all-websites/website-tags"
+                        element={<WebsiteTagListingWrapper />}
+                    />
+                    <Route
+                        path="/all-websites/website-tags/add"
+                        element={<AddWebsiteTagsWrapper />}
+                    />
+                    <Route
+                        path="/all-websites/website-tags/edit/:id"
+                        element={<EditWebsiteTagWrapper />}
+                    />
+                    <Route
+                        path="/all-websites/website-tags/:id"
+                        element={<ViewWebsiteTagsWrapper />}
+                    />
                 </Routes>
             </BrowserRouter>
         </>

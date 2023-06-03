@@ -11,7 +11,7 @@ const Auth = () => {
         }
     }, [accessToken, navigation])
 
-    return <> {!accessToken ? <LoginPage /> : null}</>
+    return <> {!accessToken && <LoginPage />}</>
 }
 
 export default Auth

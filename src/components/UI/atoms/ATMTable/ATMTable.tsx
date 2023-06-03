@@ -108,9 +108,9 @@ const ATMTable = <T extends {}>({
                     <div
                         onClick={() => onRowClick && onRowClick(row)}
                         key={row[idKey] || rowIndex}
-                        className={`flex items-center  ${rowClassName} ${
+                        className={`flex items-center  ${rowClassName}  ${
                             onRowClick && 'cursor-pointer'
-                        } ${rowExtraClasses && rowExtraClasses(row)} ${
+                        }  ${rowExtraClasses && rowExtraClasses(row)}  ${
                             rowIndex !== rows.length - 1 && 'border-b'
                         } `}
                     >

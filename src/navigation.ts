@@ -6,6 +6,7 @@ import { FaRegHandshake } from 'react-icons/fa'
 import { CiBoxes } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
 import {
+    MdOutlineBatchPrediction,
     MdOutlineBorderColor,
     MdPermMedia,
     MdWeb,
@@ -87,7 +88,7 @@ export const navigation: NavItemType[] = [
     },
     {
         label: 'Batch',
-        icon: TfiLayoutMediaOverlayAlt2,
+        icon: MdOutlineBatchPrediction,
         path: '/batch',
     },   
     {

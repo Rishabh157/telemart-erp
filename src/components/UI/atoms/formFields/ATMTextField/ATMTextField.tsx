@@ -12,20 +12,22 @@ export type ATMTextFieldPropTypes = {
     onBlur?: ((e: any) => void) & React.FocusEventHandler<HTMLInputElement>
     extraClassField?: string
     labelClass?: string
+    disabled?: boolean
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
 const ATMTextField = ({
     name,
     value,
-    className = 'shadow bg-white rounded',
     onChange,
     label,
+    className = `shadow bg-white rounded ${label && 'mt-2'}`,
     required,
     onBlur,
     size = 'small',
     isSubmitting = true,
     extraClassField = '',
-    labelClass = ' font-medium',
+    disabled = false,
+    labelClass = 'font-medium',
     ...rest
 }: ATMTextFieldPropTypes) => {
     return (
@@ -39,14 +41,15 @@ const ATMTextField = ({
             <input
                 name={name}
                 value={value}
+                disabled={disabled}
                 onChange={(e) => {
                     onChange(e)
                 }}
                 className={`${getInputHeight(
                     size
-                )} w-full px-2 text-slate-700 border border-slate-400 outline-blue-400  ${
-                    label && 'mt-2'
-                }  ${className}`}
+                )} w-full px-2 text-slate-700 border ${
+                    disabled ? 'bg-blue-100' : ''
+                } border-slate-400 outline-blue-400  ${className}`}
                 {...rest}
                 onBlur={onBlur}
             />

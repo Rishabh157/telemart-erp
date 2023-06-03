@@ -1,22 +1,21 @@
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { OrderListResponse } from 'src/models'
+import { WebsiteTagsListResponse } from 'src/models/website/WebsiteTags.model'
 
-export type InitialStateType = {
-    items: OrderListResponse[] | []
-    allItems: OrderListResponse[] | []
-    selectedItem: OrderListResponse | null
+export interface WebsiteTagsSliceStateType {
+    items: WebsiteTagsListResponse[] | []
+    allItems: WebsiteTagsListResponse[] | []
+    selectedItem: WebsiteTagsListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selectedDealerId: string
-    filterValue: string
+    selectTag: string
 }
 
-const initialState: InitialStateType = {
+const initialState: WebsiteTagsSliceStateType = {
     items: [],
     allItems: [],
     selectedItem: null,
@@ -26,16 +25,24 @@ const initialState: InitialStateType = {
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectedDealerId: '',
-    filterValue: '',
+    selectTag: '',
 }
 
-const orderSlice: Slice<InitialStateType> = createSlice({
-    name: 'order',
+const websiteTagsSlice: Slice<WebsiteTagsSliceStateType> = createSlice({
+    name: 'websiteTags',
     initialState,
     reducers: {
-        setItems: (state, action: PayloadAction<OrderListResponse[] | []>) => {
+        setItems: (
+            state,
+            action: PayloadAction<WebsiteTagsListResponse[] | []>
+        ) => {
             state.items = action.payload
+        },
+        setAllItems: (
+            state,
+            action: PayloadAction<WebsiteTagsListResponse[] | []>
+        ) => {
+            state.allItems = action.payload
         },
         setPage: (state, action: PayloadAction<number>) => {
             state.page = action.payload
@@ -63,38 +70,28 @@ const orderSlice: Slice<InitialStateType> = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setSelectedDealerId: (state, action: PayloadAction<string>) => {
-            state.selectedDealerId = action.payload
+        setSelectTag: (state, action: PayloadAction<string>) => {
+            state.selectTag = action.payload
         },
-        setAllItems: (
+        setSelectedTags: (
             state,
-            action: PayloadAction<OrderListResponse[] | []>
-        ) => {
-            state.allItems = action.payload
-        },
-        setSelectedItem: (
-            state,
-            action: PayloadAction<OrderListResponse | null>
+            action: PayloadAction<WebsiteTagsListResponse | null>
         ) => {
             state.selectedItem = action.payload
-        },
-        setFilterValue: (state, action: PayloadAction<string>) => {
-            state.filterValue = action.payload
         },
     },
 })
 
 export const {
     setItems,
+    setAllItems,
     setPage,
     setRowsPerPage,
     setSearchValue,
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectedDealerId,
-    setSelectedItem,
-    setAllItems,
-    setFilterValue,
-} = orderSlice.actions
-export default orderSlice.reducer
+    setSelectTag,
+    setSelectedTags,
+} = websiteTagsSlice.actions
+export default websiteTagsSlice.reducer

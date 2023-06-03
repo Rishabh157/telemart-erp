@@ -118,5 +118,10 @@ export type {
     AddWebsiteBlog,
     UpdateWebsiteBlog,
 } from './website/WebsiteBlog.model'
+export type {
+    WebsiteTagsListResponse,
+    AddWebsiteTags,
+    UpdateWebsiteTags,
+} from './website/WebsiteTags.model'
 export type { OrderListResponse } from './Order.model'
 export type { BatchListResponse, AddBatch } from './Batch.model'
