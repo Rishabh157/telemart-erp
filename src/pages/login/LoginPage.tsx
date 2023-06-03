@@ -57,8 +57,8 @@ const LoginPage = () => {
                                 'refreshToken',
                                 res?.data?.data?.refreshToken
                             )
-
-                            navigate('/dashboard')
+                               
+                            window.location.pathname='/dashboard'
                             showToast('success', 'Login successfull')
                         } else {
                             setApiError(res?.data?.message)
