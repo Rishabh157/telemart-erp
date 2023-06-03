@@ -13,8 +13,8 @@ import WebsiteLayout from '../../WebsiteLayout'
 import WebsiteTagListing from './WebsiteTagListing'
 import { WebsiteTagsListResponse } from 'src/models/website/WebsiteTags.model'
 import {
-	useDeleteWebsiteTagsMutation,
-	useGetPaginationWebsiteTagsQuery,
+    useDeleteWebsiteTagsMutation,
+    useGetPaginationWebsiteTagsQuery,
 } from 'src/services/websites/WebsiteTagsServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
@@ -31,8 +31,7 @@ const WebsiteTagListingWrapper = () => {
         (state: RootState) => state.websiteTags
     )
 
-    const { page, rowsPerPage, searchValue, items } =
-		WebsiteTagsState
+    const { page, rowsPerPage, searchValue, items } = WebsiteTagsState
 
     const columns: columnTypes[] = [
         {
@@ -51,22 +50,22 @@ const WebsiteTagListingWrapper = () => {
                 <span> {row.metaOgType} </span>
             ),
         },
-				{
-					field: 'metaTwitterTitle',
-					headerName: 'Meta Twitter Title',
-					flex: 'flex-[1_1_0%]',
-					renderCell: (row: WebsiteTagsListResponse) => (
-							<span> {row.metaTwitterTitle} </span>
-					),
-			},
-			{
-				field: 'metaTwitterCard',
-				headerName: 'Meta Twitter Card',
-				flex: 'flex-[1_1_0%]',
-				renderCell: (row: WebsiteTagsListResponse) => (
-						<span> {row.metaTwitterCard} </span>
-				),
-		},
+        {
+            field: 'metaTwitterTitle',
+            headerName: 'Meta Twitter Title',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsiteTagsListResponse) => (
+                <span> {row.metaTwitterTitle} </span>
+            ),
+        },
+        {
+            field: 'metaTwitterCard',
+            headerName: 'Meta Twitter Card',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsiteTagsListResponse) => (
+                <span> {row.metaTwitterCard} </span>
+            ),
+        },
 
         {
             field: 'actions',
@@ -97,7 +96,7 @@ const WebsiteTagListingWrapper = () => {
                             >
                                 Edit
                             </button>
-														<button
+                            <button
                                 onClick={() => {
                                     navigate(
                                         `/all-websites/website-tags/${currentId}`

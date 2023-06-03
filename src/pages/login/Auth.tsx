@@ -9,7 +9,6 @@ const Auth = () => {
         if (accessToken) {
             navigation('/dashboard')
         }
-    
     }, [accessToken, navigation])
 
     return <> {!accessToken && <LoginPage />}</>

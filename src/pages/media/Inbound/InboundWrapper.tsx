@@ -18,15 +18,14 @@ import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
 import { setAllTehsils } from 'src/redux/slices/tehsilSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { useGetAllDistrictUnauthQuery } from 'src/services/DistricService'
-import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
-import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
+
 import { SchemeListResponse } from 'src/models/scheme.model'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { CountryListResponse } from 'src/models/Country.model'
 import { StateListResponse } from 'src/models/State.model'
 import { DistrictListResponse } from 'src/models/District.model'
 import { TehsilListResponse } from 'src/models/Tehsil.model'
-import { AreaListResponse } from 'src/models/Area.model'
+// import { AreaListResponse } from 'src/models/Area.model'
 import { setItems } from 'src/redux/slices/media/channelManagementSlice'
 import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
@@ -187,10 +186,7 @@ const InbouundWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         const callDetails: any = localStorage.getItem('callerData')
         let callDataItem = JSON.parse(callDetails)
-        console.log(
-            'callDataItemcallDataItemcallDataItemcallDataItem',
-            callDataItem
-        )
+    
         const valuesInbound = {
             ...values.generalInformation,
             ...values.addressInformation,
@@ -229,7 +225,6 @@ const InbouundWrapper = () => {
     useEffect(() => {
         const callDetails: any = localStorage.getItem('callerData')
         let callDataItem = JSON.parse(callDetails)
-        console.log(callDataItem, 'callDataItem')
         if (!callDataItem) {
             const valuesInbound = {
                 ...initialValues.generalInformation,
@@ -247,7 +242,6 @@ const InbouundWrapper = () => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        console.log(res?.data?.data?.id,"res?.data?._id")
                         if (res?.data?.data?._id) {
                             let CallData = {
                                 orderID: res?.data?.data?._id,
@@ -268,6 +262,7 @@ const InbouundWrapper = () => {
                 // setApiStatus(false)
             })
         }
+        // eslint-disable-next-line
     }, [])
 
     const dispatch = useDispatch<AppDispatch>()
@@ -282,9 +277,7 @@ const InbouundWrapper = () => {
         (state: RootState) => state.district
     )
     const { allTehsils }: any = useSelector((state: RootState) => state.tehsils)
-    const { items: allArea }: any = useSelector(
-        (state: RootState) => state.areas
-    )
+
     const { selectedItem: didItems }: any = useSelector(
         (state: RootState) => state.didManagement
     )
@@ -340,18 +333,7 @@ const InbouundWrapper = () => {
         }
     }, [tehsilData, dispatch, tehsilIsFetching, tehsilIsLoading])
 
-    //area
-    const {
-        data: areaData,
-        isLoading: areaIsLoading,
-        isFetching: areaIsFetching,
-    } = useGetAllAreaUnauthQuery('')
 
-    useEffect(() => {
-        if (!areaIsFetching && !areaIsLoading) {
-            dispatch(setAreaItems(areaData?.data))
-        }
-    }, [areaData, areaIsLoading, areaIsFetching, dispatch])
 
     //channel
     const {
@@ -382,9 +364,7 @@ const InbouundWrapper = () => {
         tehsilOptions: allTehsils?.map((ele: TehsilListResponse) => {
             return { label: ele?.tehsilName, value: ele?._id }
         }),
-        areaOptions: allArea?.map((ele: AreaListResponse) => {
-            return { label: ele?.area, value: ele?._id }
-        }),
+    
         channelOptions: allDistricts?.map((ele: DistrictListResponse) => {
             return { label: ele?.districtName, value: ele?._id }
         }),

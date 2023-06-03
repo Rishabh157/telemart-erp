@@ -52,18 +52,15 @@ export type personalInformation = {
 
 export interface AddInboundCaller
     extends personalInformation,
-    addressInformation,
-    generalInformation {
+        addressInformation,
+        generalInformation {
     dispositionLevelTwoId: string | null
     dispositionLevelThreeId: string | null
     schemeId: string | null
     alternateNo1: string | null
 }
 
-
-
 export interface UpdateInboundCaller {
     body: AddInboundCaller
-
     id: string
 }
