@@ -3,7 +3,7 @@ import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditProductWrapper'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 type DropdownOptions = {
@@ -24,6 +24,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
         <div className="py-6 px-7 flex flex-col gap-5">
             <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4 gap-y-5">
                 {/* Product Code */}
+               
                 <ATMTextField
                     name="product_code"
                     value={values.product_code}
@@ -34,6 +35,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     placeholder="Product Code"
                     className="shadow bg-white rounded"
                 />
+                
 
                 {/* Product Name */}
                 <ATMTextField
@@ -46,39 +48,46 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     placeholder="Product Name"
                     className="shadow bg-white rounded"
                 />
-
+                
                 {/* Product Category */}
-                <ATMSelect
+                <div className="-mt-2">
+                <ATMSelectSearchable
                     name="product_category"
                     value={values.product_category}
                     onChange={(e) =>
-                        setFieldValue('product_category', e.target.value)
+                        setFieldValue('product_category', e)
                     }
                     label="Product Category"
                     options={dropdownOptions.productCategoryOPtions}
                 />
+                </div>
 
                 {/* Product Sub Category */}
-                <ATMSelect
+                <div className="-mt-2">
+                <ATMSelectSearchable
                     name="product_sub_category"
                     value={values.product_sub_category}
                     onChange={(e) =>
-                        setFieldValue('product_sub_category', e.target.value)
+                        setFieldValue('product_sub_category', e)
                     }
                     label="Product Sub Category"
                     options={dropdownOptions.productSubCategoryOPtions}
                 />
+                </div>
 
+                <div className="-mt-2">
                 {/* Product Sub Category */}
-                <ATMSelect
+                <ATMSelectSearchable
                     name="productGroup"
+                    required
                     value={values.productGroup}
                     onChange={(e) =>
-                        setFieldValue('productGroup', e.target.value)
+                        setFieldValue('productGroup', e)
                     }
                     label="Product Group"
                     options={dropdownOptions.productGroupOPtions}
                 />
+                </div>
 
                 {/* Product Weight */}
                 <ATMTextField

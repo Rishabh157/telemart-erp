@@ -1,9 +1,9 @@
 import React from 'react'
 import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { SelectOption } from 'src/models/FormField/FormField.model'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { FormInitialValues } from '../../AddProductWrapper'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 type DropdownOptions = {
@@ -48,37 +48,43 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                 />
 
                 {/* Product Category */}
-                <ATMSelect
+                <div className="-mt-2">
+                <ATMSelectSearchable
                     name="product_category"
                     value={values.product_category}
                     onChange={(e) =>
-                        setFieldValue('product_category', e.target.value)
+                        setFieldValue('product_category', e)
                     }
                     label="Product Category"
                     options={dropdownOptions.productCategoryOPtions}
                 />
+                </div>
 
                 {/* Product Sub Category */}
-                <ATMSelect
+                <div className="-mt-2">
+                <ATMSelectSearchable
                     name="product_sub_category"
                     value={values.product_sub_category}
                     onChange={(e) =>
-                        setFieldValue('product_sub_category', e.target.value)
+                        setFieldValue('product_sub_category', e)
                     }
                     label="Product Sub Category"
                     options={dropdownOptions.productSubCategoryOPtions}
                 />
+                </div>
 
                 {/* Product Sub Category */}
-                <ATMSelect
+                <div className="-mt-2">
+                <ATMSelectSearchable
                     name="productGroup"
                     value={values.productGroup}
                     onChange={(e) =>
-                        setFieldValue('productGroup', e.target.value)
+                        setFieldValue('productGroup', e)
                     }
                     label="Product Group"
                     options={dropdownOptions.productGroupOPtions}
                 />
+                </div>
 
                 {/* Product Weight */}
                 <ATMTextField
