@@ -61,6 +61,7 @@ import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
 import orderSlice from './slices/orderSlice'
 import dispositionComplaintSlice from './slices/configuration/dispositionComplaintSlice'
+import batchSlice from './slices/BatchSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -129,6 +130,7 @@ const store = configureStore({
         websitePage: websitePageSlice,
         dispositionTwo: dispositionTwoSlice,
         order: orderSlice,
+        batch: batchSlice,
         dispositionComplaint: dispositionComplaintSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
