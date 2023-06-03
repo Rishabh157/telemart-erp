@@ -10,6 +10,7 @@ import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import {
     useAddInboundCallerMutation,
+    useGetPaginationInboundCallerQuery,
     useUpdateInboundCallerMutation,
 } from 'src/services/media/InboundCallerServices'
 import { useGetAllTehsilUnauthQuery } from 'src/services/TehsilService'
@@ -29,6 +30,8 @@ import { TehsilListResponse } from 'src/models/Tehsil.model'
 import { setItems } from 'src/redux/slices/media/channelManagementSlice'
 import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
+import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
+import { setIsTableLoading, setTotalItems ,setItems as setCallItems} from 'src/redux/slices/media/inboundCallerSlice'
 
 export type FormInitialValues = {
     generalInformation: {
@@ -94,6 +97,93 @@ const InbouundWrapper = () => {
             extraClasses: 'p-0 m-0 ',
         },
     ]
+
+    const column: columnTypes[] = [
+        {
+            field: 'didNo',
+            headerName: 'DID No',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InbooundCallerListResponse) => (
+                <span> {row.didNo} </span>
+            ),
+        },
+        {
+            field: 'generalInformation.incomingCallerNo',
+            headerName: 'Incoming Caller No',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InbooundCallerListResponse) => (
+                <span> {row.incomingCallerNo} </span>
+            ),
+        },
+        {
+            field: 'dispositionTwoLabel',
+            headerName: 'Disposition Two',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InbooundCallerListResponse) => (
+                <span> {row.dispositionTwoLabel?row.dispositionTwoLabel:'NA'}</span>
+            ),
+        },
+        {
+            field: 'dispositionThreeLabel',
+            headerName: 'Disposition Three Label',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InbooundCallerListResponse) => (
+                <span> {row.dispositionThreeLabel?row.dispositionThreeLabel:"NA"} </span>
+            ),
+        },
+        {
+            field: 'schemeLabel',
+            headerName: 'Scheme',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InbooundCallerListResponse) => (
+                <span> {row.schemeLabel} </span>
+            ),
+        },
+        {
+            field: 'channelId',
+            headerName: 'Channel',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InbooundCallerListResponse) => (
+                <span> {row.channel} </span>
+            ),
+        },
+
+    ]
+
+    const inboundCallerState: any = useSelector((state: RootState) => state.inboundCaller)
+
+
+    const { page, rowsPerPage, searchValue, items} = inboundCallerState
+    const { data:Calldata, isFetching:callisFetching, isLoading:callisLoading } = useGetPaginationInboundCallerQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: ['didNo'],
+        page: page,
+        filterBy: [
+            {
+                fieldName: 'mobileNo',
+                value: ["9893432611"],
+            },
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: true,
+    })
+
+    useEffect(() => {
+        if (!callisFetching && !callisLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setCallItems(Calldata?.data || []))
+            dispatch(setTotalItems(data?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [callisLoading, callisFetching, Calldata])
+
+
     // const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddInbopundCaller] = useAddInboundCallerMutation()
@@ -180,7 +270,7 @@ const InbouundWrapper = () => {
         }),
         dispositionLevelTwoId: string().required('Required'),
         dispositionLevelThreeId: string().required('Required'),
-        schemeId: string().required('Required'),
+        schemeId: string().required('Please select scheme'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -384,6 +474,8 @@ const InbouundWrapper = () => {
                         dropdownOptions={dropdownOptions}
                         schemeColumn={columns}
                         didItems={didItems}
+                        column={column}
+                        rows={items}
                     />
                 )
             }}

@@ -103,7 +103,7 @@ const AddDispositionThreeWrappper = () => {
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Disposition 3 Added successfully!')
+                    showToast('success', 'Added successfully!')
                     navigate('/dispositions/disposition-three')
                 } else {
                     showToast('error', res?.data?.message)
@@ -186,6 +186,7 @@ const AddDispositionThreeWrappper = () => {
             { label: 'IS PREPAID', value: 'IS PREPAID' },
             { label: 'IS CALLBACK', value: 'IS CALLBACK' },
             { label: 'IS REPLACEMENT', value: 'IS REPLACEMENT' },
+            {label: 'IS INQUIRY', value: 'IS INQUIRY' }
         ],
     }
 

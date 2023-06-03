@@ -16,7 +16,7 @@ type Props = {
 
 const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const inboundCallerState: any = useSelector((state: RootState) => state.website)
+    const inboundCallerState: any = useSelector((state: RootState) => state.inboundCaller)
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue } = inboundCallerState
     

@@ -26,7 +26,7 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
 
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue } = asrState
+    const { page, rowsPerPage, searchValue ,totalItems} = asrState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
@@ -47,7 +47,7 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMTableHeader
                     searchValue={searchValue}
                     page={page}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -76,7 +76,7 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}

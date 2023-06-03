@@ -16,7 +16,7 @@ export const batchApi = apiSlice.injectEndpoints({
 
         //***** ADD *****/
         addBatch: builder.mutation({
-            invalidatesTags: ['Batch'],
+            invalidatesTags: ['Batch' ,"order"],
             query: (body: AddBatch) => ({
                 url: '/batch/add',
                 method: 'POST',

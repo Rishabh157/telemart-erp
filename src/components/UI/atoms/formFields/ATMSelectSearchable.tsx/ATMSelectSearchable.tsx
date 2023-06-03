@@ -51,10 +51,10 @@ const ATMSelectSearchable = ({
             borderWidth: 0,
             boxShadow: 'none',
             minHeight: 'unset',
-            height: size === 'xs' ? '28px' : '40px',
+            height: size === 'xs' ? '28px' : '',
             display: 'flex',
             alignItems: 'center',
-            padding: '1px',
+            paddingTop: size === 'xs' ? '1px' : '6px',
         }),
         valueContainer: (provided: any) => ({
             ...provided,
@@ -77,7 +77,7 @@ const ATMSelectSearchable = ({
             paddingLeft: '4px',
             paddingTop: '-4px',
         }),
-
+     
         indicatorSeparator: (provided: any) => ({
             ...provided,
             display: 'none',
@@ -153,7 +153,9 @@ const ATMSelectSearchable = ({
             )}
 
             <Select
-                className={`${selectClass} border rounded border-slate-400`}
+                className={`${selectClass} border rounded border-slate-400 ${
+                    isMulti ? 'overflow-scroll' : ''
+                } min-h-fit max-h-24`}
                 name={name}
                 defaultValue={selectOptions?.find(
                     (option) => option.value === defaultValue

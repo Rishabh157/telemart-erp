@@ -1,5 +1,5 @@
 import { Divider } from '@mui/material'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
@@ -27,6 +27,8 @@ import { AreaListResponse } from 'src/models/Area.model'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
+    column: any[]
+    rows: any[]
     apiStatus: boolean
     schemeColumn: columnTypes[] | []
     dropdownOptions: {
@@ -49,8 +51,13 @@ const Inbound: React.FC<Props> = ({
     dropdownOptions,
     schemeColumn,
     didItems,
+    column,
+    rows,
 }) => {
     const { values, setFieldValue } = formikProps
+  
+    const [selectedRows, setSelectedRows] = useState([])
+  
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -354,7 +361,6 @@ const Inbound: React.FC<Props> = ({
                                                 )
                                             }}
                                             rowExtraClasses={(row) => {
-                                          
                                                 return row?._id ===
                                                     values?.schemeId
                                                     ? 'bg-green-200'
@@ -566,7 +572,7 @@ const Inbound: React.FC<Props> = ({
                                                 dropdownOptions.areaOptions ||
                                                 []
                                             }
-                                            name=""
+                                            name="addressInformation.areaId"
                                             labelClass="font-semibold text-sm"
                                             label="Area"
                                             required
@@ -951,8 +957,17 @@ const Inbound: React.FC<Props> = ({
                     </div>
                 </div>
                 <Divider />
-                <div>
-                    <ATMTable columns={[]} rows={[]} onRowSelect={() => {}} />
+                <div className='w-full h-[10%] overflow-auto'>
+                    <ATMTable
+                        columns={column}
+                        rows={rows}
+                        isCheckbox={true}
+                        selectedRows={selectedRows}
+                        onRowSelect={(selectedRows) =>
+                            setSelectedRows(selectedRows)
+                        }
+                        extraClasses="h-full overflow-auto"
+                    />
                 </div>
             </div>
         </>
