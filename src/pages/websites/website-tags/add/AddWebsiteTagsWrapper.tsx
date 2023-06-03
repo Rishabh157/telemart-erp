@@ -106,7 +106,7 @@ const AddWebsiteTagsWrapper = (props: Props) => {
 			metaOgType: string().required('Required'),
 			metaTwitterTitle: string().required('Required'),
 			metaTwitterCard: string().required('Required'),
-			metaTwitterImage: string().url('Image must be valid url'),      
+			metaTwitterImage: string().url('Image must be valid url').required('Required'),      
     })
 
     //    Form Submit Handler
