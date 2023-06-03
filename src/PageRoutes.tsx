@@ -183,6 +183,7 @@ import EditDispositionComplaintWrappper from './pages/disposition/dispositionCom
 import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/list/InitialCallThreeListingWrapper'
 import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edit/EditInitialCallThreeWrapper'
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
+import InfluencerListingWrapper from './pages/websites/influencerManagement/list/InfluencerListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -821,6 +822,15 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
                     />
+                      {/* Website Blog route */}
+
+                    {/* Influencer routing */}
+                    <Route
+                        path="all-websites/influencers-management"
+                        element={<InfluencerListingWrapper/>}
+                    />
+
+
                 </Routes>
             </BrowserRouter>
         </>
