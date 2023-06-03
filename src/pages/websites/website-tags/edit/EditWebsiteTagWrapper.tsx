@@ -116,13 +116,13 @@ const EditWebsiteTagWrapper = (props: Props) => {
 			metaDescription: string().required('Required'),
 			metaKeyword: string().required('Required'),
 			metaOgTitle: string().required('Required'),
-			metaOgUrl: string().url('URL must be valid'),
-			metaOgImage: string().url('Image must be valid url'),
+			metaOgUrl: string().url('URL must be valid').required('Required'),
+			metaOgImage: string().url('Image must be valid url').required('Required'),
 			metaOgDescription: string().required('Required'),
 			metaOgType: string().required('Required'),
 			metaTwitterTitle: string().required('Required'),
 			metaTwitterCard: string().required('Required'),
-			metaTwitterImage: string().url('Image must be valid url'),      
+			metaTwitterImage: string().url('Image must be valid url').required('Required'),      
     })
 
     //    Form Submit Handler
