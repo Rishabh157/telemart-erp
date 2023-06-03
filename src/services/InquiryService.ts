@@ -23,8 +23,6 @@ export const InquiryApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        
-
         // **** GET BY ID
         getInquiryById: builder.query({
             providesTags: ['inquiry'],

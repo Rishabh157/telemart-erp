@@ -133,7 +133,7 @@ const store = configureStore({
         websitePage: websitePageSlice,
         dispositionTwo: dispositionTwoSlice,
         order: orderSlice,
-        inquiry:inquirySlice,
+        inquiry: inquirySlice,
         batch: batchSlice,
         dispositionComplaint: dispositionComplaintSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,

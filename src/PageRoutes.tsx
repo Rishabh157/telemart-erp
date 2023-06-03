@@ -897,8 +897,11 @@ const PageRoutes = () => {
                         path="/all-websites/website-tags/:id"
                         element={<ViewWebsiteTagsWrapper />}
                     />
-                    <Route path="/inquiry" element={<InquiryListingWrapper />} />
-                    
+                    <Route
+                        path="/inquiry"
+                        element={<InquiryListingWrapper />}
+                    />
+
                     <Route
                         path="/inquiry/view/:id"
                         element={<InquiryViewWrapper />}

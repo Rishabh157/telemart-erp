@@ -68,22 +68,24 @@ const InquiryListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
 
-		
-
     const columns: columnTypes[] = [
         {
             field: 'inquiryNumber',
             headerName: 'Inquiry No',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: InquiryListResponse) => (
-                <span className="text-primary-main "># {row.inquiryNumber} </span>
+                <span className="text-primary-main ">
+                    # {row.inquiryNumber}{' '}
+                </span>
             ),
         },
         {
             field: 'didNo',
             headerName: 'DID No',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: InquiryListResponse) => <span> {row.didNo} </span>,
+            renderCell: (row: InquiryListResponse) => (
+                <span> {row.didNo} </span>
+            ),
         },
 
         {

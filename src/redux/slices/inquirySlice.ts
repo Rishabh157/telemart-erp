@@ -1,6 +1,6 @@
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import {InquiryListResponse } from 'src/models'
+import { InquiryListResponse } from 'src/models'
 
 export type InitialStateType = {
     items: InquiryListResponse[] | []
@@ -34,7 +34,10 @@ const inquirySlice: Slice<InitialStateType> = createSlice({
     name: 'inquiry',
     initialState,
     reducers: {
-        setItems: (state, action: PayloadAction<InquiryListResponse[] | []>) => {
+        setItems: (
+            state,
+            action: PayloadAction<InquiryListResponse[] | []>
+        ) => {
             state.items = action.payload
         },
         setPage: (state, action: PayloadAction<number>) => {
