@@ -51,6 +51,14 @@ const ListWebsiteBlogWrapper = () => {
                 <span> {row.blogTitle} </span>
             ),
         },
+        {
+            field: 'blogSubtitle',
+            headerName: 'Blog Subtitle',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsiteBlogListResponse) => (
+                <span> {row.blogSubtitle} </span>
+            ),
+        },
 
         {
             field: 'actions',

@@ -8,6 +8,7 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import {
+    setFilterValue,
     setPage,
     setRowsPerPage,
     setSearchValue,
@@ -67,6 +68,8 @@ const WebsitePageListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
+                    isRefresh
+                    onFilterDispatch={() => dispatch(setFilterValue([]))}
                 />
 
                 {/* Table */}
