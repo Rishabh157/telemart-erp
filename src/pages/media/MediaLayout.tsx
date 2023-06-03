@@ -88,7 +88,7 @@ const MediaLayout = ({ children }: Props) => {
     const currentPath = `/media/${location.pathname?.split('/')[2]}`
 
     return (
-         <div className="flex h-screen w-screen relative">
+        <div className="flex h-screen w-screen relative">
             {/* Side Navigation Bar */}
             <div
                 className={`border-r border-slate-300 h-full transition-all duration-500   ${

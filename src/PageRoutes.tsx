@@ -164,7 +164,6 @@ import InitialCallTwoListingWrapper from './pages/disposition/initialcallertwo/l
 import DispositionTwoListingWrapper from './pages/disposition/dispositionTwo/list/DispositionTwoListingWrapper'
 import DispositionThreeListingWrapper from './pages/disposition/dispositionThree/list/DispositionThreeListingWrapper'
 import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
-import BatchLisitngWrapper from './pages/batch/list/BatchLisitngWrapper'
 import PageNotFound from './PageNotFound'
 import AddDispositionThreeWrappper from './pages/disposition/dispositionThree/add/AddDispositionThreeWrappper'
 import EditDispositionThreeWrapper from './pages/disposition/dispositionThree/edit/EditDispositionThreeWrapper'
@@ -194,6 +193,7 @@ import AssetsRequestWrapper from './pages/assets/assetsRequest/list/AssetsReques
 import AssetsAllocationWrapper from './pages/assets/assetsAllocation/list/AssetsAllocationWrapper'
 import AddAssetsAllocationWrapper from './pages/assets/assetsAllocation/add/AddAssetsAllocationWrapper'
 
+import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -874,7 +874,7 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
                     />
-                    <Route path="batch" element={<BatchLisitngWrapper />} />
+                    <Route path="batch" element={<BatchListingWrapper />} />
                 </Routes>
             </BrowserRouter>
         </>
