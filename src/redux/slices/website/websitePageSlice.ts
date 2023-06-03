@@ -13,6 +13,7 @@ export interface WebsitePageSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selecteWebsitePage: string
+    filterValue: any
 }
 
 const initialState: WebsitePageSliceStateType = {
@@ -26,6 +27,7 @@ const initialState: WebsitePageSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selecteWebsitePage: '',
+    filterValue: '',
 }
 
 const websitePageSlice: Slice<WebsitePageSliceStateType> = createSlice({
@@ -79,6 +81,9 @@ const websitePageSlice: Slice<WebsitePageSliceStateType> = createSlice({
         ) => {
             state.selectedItem = action.payload
         },
+        setFilterValue: (state, action: PayloadAction<string>) => {
+            state.filterValue = action.payload
+        },
     },
 })
 
@@ -93,5 +98,6 @@ export const {
     setIsTableLoading,
     setSelecteWebsite,
     setSelectedWebsite,
+    setFilterValue,
 } = websitePageSlice.actions
 export default websitePageSlice.reducer

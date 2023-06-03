@@ -94,7 +94,7 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
                                 // minRows={4}
                                 name="gaTagIp"
                                 value={values.gaTagIp}
-                                label="Gatag IP Address"
+                                label="GA Tag"
                                 onChange={(e) =>
                                     setFieldValue('gaTagIp', e.target.value)
                                 }

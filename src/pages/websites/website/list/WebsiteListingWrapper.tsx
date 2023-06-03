@@ -19,6 +19,7 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
+import { setFilterValue as setPageFilterValue } from 'src/redux/slices/website/websitePageSlice'
 
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -39,9 +40,23 @@ const WebstieListingWrapper = () => {
             ),
         },
         {
+            field: 'gaTagIp',
+            headerName: 'GA Tag',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsiteListResponse) => (
+                <span> {row.gaTagIp} </span>
+            ),
+        },
+        {
+            field: 'url',
+            headerName: 'URL',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsiteListResponse) => <span> {row.url} </span>,
+        },
+        {
             field: 'actions',
             headerName: 'Actions',
-            flex: 'flex-[1.8_1.8_0%]',
+            flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => (
                 <div className="relative">
                     <button
@@ -105,7 +120,19 @@ const WebstieListingWrapper = () => {
                             >
                                 Add Page
                             </button>
-
+                            <button
+                                onClick={() => {
+                                    dispatch(setPageFilterValue(currentId))
+                                    navigate('/all-websites/website-page', {
+                                        state: {
+                                            siteId: currentId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
+                            >
+                                View Page
+                            </button>
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
