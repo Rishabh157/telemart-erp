@@ -59,8 +59,8 @@ const AddTapeManagement = ({
         return options
     }
     return (
-        <div className="">
-            <div className="p-4 flex flex-col gap-2  ">
+        <div className="h-[calc(100%-55px)] w-full ">
+            <div className="p-4 flex flex-col gap-2 h-full  ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -201,7 +201,7 @@ const AddTapeManagement = ({
                                     Duration
                                 </div>
 
-                                <div className=" row-sapn-1 grid grid-cols-3 gap-x-2 -mt-6 ">
+                                <div className=" row-sapn-1 grid grid-cols-3 gap-x-2 -mt-9 ">
                                     <div className=" ">
                                         <ATMTextField
                                             name="hour"
@@ -272,7 +272,7 @@ const AddTapeManagement = ({
                                 </div>
                             </div>
                             <ATMTextArea
-                                minRows={3}
+                                minRows={2}
                                 name="remarks"
                                 value={values.remarks}
                                 label="Remark"

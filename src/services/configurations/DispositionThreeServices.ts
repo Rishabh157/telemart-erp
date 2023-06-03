@@ -81,6 +81,16 @@ export const dispositionThreeApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+        // **** unauth Dispostion three by id two
+        GetAllUnAuthDispositionThree: builder.query({
+            providesTags: ['dispositionThree'],
+            query: (id) => ({
+                url: `/disposition-three//unauth/get-all/${id}`,
+
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
@@ -91,4 +101,5 @@ export const {
     useExportdispositionThreeDataMutation,
     useDeletedispositionThreeMutation,
     useGetAlldispositionThreeQuery,
+    useGetAllUnAuthDispositionThreeQuery,
 } = dispositionThreeApi

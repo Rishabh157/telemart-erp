@@ -20,6 +20,7 @@ import {
     setPage,
     setSearchValue,
     setTotalItems,
+    setFilterValue,
 } from 'src/redux/slices/orderSlice'
 import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
@@ -38,6 +39,8 @@ const OrderListing = () => {
     const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
         orderState
 
+    
+
     const { data, isLoading, isFetching } = useGetOrderQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -45,7 +48,7 @@ const OrderListing = () => {
         page: page,
         filterBy: [
             {
-                fieldName: 'poCode',
+                fieldName: 'batchNo',
                 value: filterValue,
             },
         ],
@@ -66,6 +69,8 @@ const OrderListing = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
+
+    
 
     const columns: columnTypes[] = [
         {
@@ -270,7 +275,8 @@ const OrderListing = () => {
                             dispatch(setSearchValue(newValue))
                         }
                         isFilter
-                        // onFilterClick={() => setIsFilterOpen(true)}
+                        isRefresh
+                        onFilterDispatch={() => dispatch(setFilterValue([]))}
                     />
 
                     {/* Table */}

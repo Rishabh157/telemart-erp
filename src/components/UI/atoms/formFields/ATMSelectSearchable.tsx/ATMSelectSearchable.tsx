@@ -21,6 +21,7 @@ type Props = {
     isAllSelect?: boolean
     isLoading?: boolean
     labelClass?: string
+    selectClass?: string
     isDisabled?: boolean
 }
 
@@ -39,6 +40,7 @@ const ATMSelectSearchable = ({
     labelClass = ' font-medium',
     isAllSelect = false,
     isLoading = false,
+    selectClass = 'mt-2',
     isDisabled = false,
 }: Props) => {
     const selectStyles = {
@@ -52,17 +54,19 @@ const ATMSelectSearchable = ({
             height: size === 'xs' ? '28px' : '40px',
             display: 'flex',
             alignItems: 'center',
-            padding: '0px',
+            padding: '1px',
         }),
         valueContainer: (provided: any) => ({
             ...provided,
             paddingLeft: '4px',
             paddingTop: '0px',
-            //backgroundColor: 'lightgray',
-            // borderRadius: '4px',
             alignItems: 'start',
         }),
         indicator: (provided: any) => ({
+            ...provided,
+            padding: '0px',
+        }),
+        singleValue: (provided: any) => ({
             ...provided,
             padding: '0px',
         }),
@@ -70,13 +74,13 @@ const ATMSelectSearchable = ({
             ...provided,
             minHeight: 'unset',
             textColor: 'rgb(51 65 85,0)',
-            // color: rgb(51 65 85 / var(--tw-text-opacity));
-            // height: size === 'xs' ? '28px' : '40px',
-            // textAlign: 'center',
             paddingLeft: '4px',
-            paddingTop: '0px',
-            // height: size == 'xs' ? '28px' : '40px',
-            // textAlign: 'center',
+            paddingTop: '-4px',
+        }),
+
+        indicatorSeparator: (provided: any) => ({
+            ...provided,
+            display: 'none',
         }),
     }
 
@@ -149,8 +153,7 @@ const ATMSelectSearchable = ({
             )}
 
             <Select
-                className="mt-2 border rounded border-slate-400 "
-                classNamePrefix={'css-uypqwk'}
+                className={`${selectClass} border rounded border-slate-400`}
                 name={name}
                 defaultValue={selectOptions?.find(
                     (option) => option.value === defaultValue
@@ -166,6 +169,7 @@ const ATMSelectSearchable = ({
                 isLoading={isLoading}
                 isOptionDisabled={(options) => (options.value as string) === ''}
                 placeholder={`${selectLabel}`}
+                menuPosition="fixed"
                 // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
             />
 
