@@ -3,7 +3,7 @@ import ATMInputAdormant from '../../components/UI/atoms/formFields/ATMInputAdorm
 import ATMTextField from '../../components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { BiShow, BiHide } from 'react-icons/bi'
 import { AppDispatch } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'   
 import { useLoginMutation } from 'src/services/UserServices'
 import {
     setAccessToken,
@@ -20,7 +20,7 @@ const LoginPage = () => {
     const [apiError, setApiError] = useState('')
     const [errorInitiate, setErrorInitiate] = useState(false)
     const dispatch = useDispatch<AppDispatch>()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const [login, loginInfo] = useLoginMutation()
     const handleLogin = () => {
         if (userName && password) {
@@ -58,7 +58,7 @@ const LoginPage = () => {
                                 res?.data?.data?.refreshToken
                             )
 
-                            navigate('/dashboard')
+                            window.location.pathname = '/dashboard'
                             showToast('success', 'Login successfull')
                         } else {
                             setApiError(res?.data?.message)
