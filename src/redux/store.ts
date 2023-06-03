@@ -124,7 +124,7 @@ const store = configureStore({
         artist: artistSlice,
         website: websiteSlice,
         websiteBlog: websiteBlogSlice,
-        websiteTags:websiteTagsSlice,
+        websiteTags: websiteTagsSlice,
         dispositionThree: dispositionThreeSlice,
         initialCallerOne: initialCallerOneSlice,
         initialCallerTwo: initialCallerTwoSlice,

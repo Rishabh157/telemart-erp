@@ -57,13 +57,15 @@ const OrganisationHierarchy = () => {
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
-                <div className="h-full py-4 overflow-auto ">
+                <div className="h-full py-4  ">
                     <Tree
                         lineWidth={'2px'}
                         lineHeight={'40px'}
                         lineColor={'#bbbbcc'}
                         lineBorderRadius={'10px'}
                         label={<StyledNode extraClasses=" ">Root</StyledNode>}
+                        // nodePadding={'50px'} // Set the padding between nodes
+                        // direction={'horizontal'} // Set the direction to horizontal
                     >
                         {/*  Sales */}
                         <TreeNode
@@ -713,7 +715,7 @@ const OrganisationHierarchy = () => {
                         <TreeNode
                             label={
                                 <StyledNode extraClasses="text-sm font-bold  font-sans">
-                                    Quality Analyst Dept. Head
+                                    Logistics Dept. Head
                                 </StyledNode>
                             }
                         >
@@ -785,7 +787,7 @@ const OrganisationHierarchy = () => {
                         <TreeNode
                             label={
                                 <StyledNode extraClasses="text-sm font-bold  font-sans">
-                                    Mapping & MIS Dept. Head
+                                    Admin Dept. Head
                                 </StyledNode>
                             }
                         >
@@ -819,122 +821,6 @@ const OrganisationHierarchy = () => {
                                         ></TreeNode>
                                     </TreeNode>
                                 </TreeNode>
-                            </TreeNode>
-                        </TreeNode>
-                        <TreeNode
-                            label={
-                                <StyledNode extraClasses="text-sm font-normal  font-sans">
-                                    Account Dept. Head
-                                </StyledNode>
-                            }
-                        >
-                            <TreeNode
-                                label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
-                                        Manager
-                                    </StyledNode>
-                                }
-                            >
-                                <TreeNode
-                                    label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
-                                            Team Lead
-                                        </StyledNode>
-                                    }
-                                />
-                            </TreeNode>
-                        </TreeNode>
-                        <TreeNode
-                            label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
-                                    Procurement Dept. Head
-                                </StyledNode>
-                            }
-                        >
-                            <TreeNode
-                                label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
-                                        Manager
-                                    </StyledNode>
-                                }
-                            >
-                                <TreeNode
-                                    label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
-                                            Team Lead
-                                        </StyledNode>
-                                    }
-                                />
-                            </TreeNode>
-                        </TreeNode>
-                        <TreeNode
-                            label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
-                                    Callcenter Dept. Head
-                                </StyledNode>
-                            }
-                        >
-                            <TreeNode
-                                label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
-                                        Manager
-                                    </StyledNode>
-                                }
-                            >
-                                <TreeNode
-                                    label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
-                                            Team Lead
-                                        </StyledNode>
-                                    }
-                                />
-                            </TreeNode>
-                        </TreeNode>
-
-                        <TreeNode
-                            label={
-                                <StyledNode extraClasses="text-sm font-bold font-sans">
-                                    Creatives Dept. Head
-                                </StyledNode>
-                            }
-                        >
-                            <TreeNode
-                                label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
-                                        Manager
-                                    </StyledNode>
-                                }
-                            >
-                                <TreeNode
-                                    label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
-                                            Team Lead
-                                        </StyledNode>
-                                    }
-                                />
-                            </TreeNode>
-                        </TreeNode>
-                        <TreeNode
-                            label={
-                                <StyledNode extraClasses="text-sm font-bold font-sans">
-                                    Warehouse Dept. Head
-                                </StyledNode>
-                            }
-                        >
-                            <TreeNode
-                                label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
-                                        Manager
-                                    </StyledNode>
-                                }
-                            >
-                                <TreeNode
-                                    label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
-                                            Team Lead
-                                        </StyledNode>
-                                    }
-                                />
                             </TreeNode>
                         </TreeNode>
                     </Tree>

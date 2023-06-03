@@ -199,7 +199,6 @@ import AddWebsiteTagsWrapper from './pages/websites/website-tags/add/AddWebsiteT
 import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsiteTagWrapper'
 import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsiteTagsWrapper'
 
-
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -880,10 +879,22 @@ const PageRoutes = () => {
                         element={<EditWebsiteBlogWrapper />}
                     />
                     <Route path="batch" element={<BatchListingWrapper />} />
-                    <Route path="/all-websites/website-tags" element={<WebsiteTagListingWrapper />} />
-                    <Route path="/all-websites/website-tags/add" element={<AddWebsiteTagsWrapper />} />
-                    <Route path="/all-websites/website-tags/edit/:id" element={<EditWebsiteTagWrapper />} />
-                    <Route path="/all-websites/website-tags/:id" element={<ViewWebsiteTagsWrapper />} />
+                    <Route
+                        path="/all-websites/website-tags"
+                        element={<WebsiteTagListingWrapper />}
+                    />
+                    <Route
+                        path="/all-websites/website-tags/add"
+                        element={<AddWebsiteTagsWrapper />}
+                    />
+                    <Route
+                        path="/all-websites/website-tags/edit/:id"
+                        element={<EditWebsiteTagWrapper />}
+                    />
+                    <Route
+                        path="/all-websites/website-tags/:id"
+                        element={<ViewWebsiteTagsWrapper />}
+                    />
                 </Routes>
             </BrowserRouter>
         </>

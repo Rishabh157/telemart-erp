@@ -10,13 +10,13 @@ type Props = {
 
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
-	{
-		label: 'Website Tags',
-		path: '/all-websites/website-tags',
-},
-{
-		label: 'View Website Tags',
-},
+    {
+        label: 'Website Tags',
+        path: '/all-websites/website-tags',
+    },
+    {
+        label: 'View Website Tags',
+    },
 ]
 
 const WebsiteTagsView = ({ items }: Props) => {
@@ -56,12 +56,9 @@ const WebsiteTagsView = ({ items }: Props) => {
                                 <div className="grid grid-cols-1 gap-3 pl-6 py-6 border border-l-2">
                                     <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Website{' '}
+                                            Website{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600  col-span-1">
                                             {items?.websiteMasterLabel === ''
                                                 ? 'NA'
@@ -73,10 +70,7 @@ const WebsiteTagsView = ({ items }: Props) => {
                                         <h1 className="text-gray-800 col-span-1">
                                             Website Page{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1 ">
                                             {items?.websitePageLabel === ''
                                                 ? 'NA'
@@ -86,12 +80,9 @@ const WebsiteTagsView = ({ items }: Props) => {
 
                                     <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta Keyword{' '}
+                                            Meta Keyword{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600">
                                             {items?.metaKeyword === ''
                                                 ? 'NA'
@@ -101,12 +92,9 @@ const WebsiteTagsView = ({ items }: Props) => {
 
                                     <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta OG Title{' '}
+                                            Meta OG Title{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaOgTitle === ''
                                                 ? 'NA'
@@ -116,12 +104,9 @@ const WebsiteTagsView = ({ items }: Props) => {
 
                                     <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta OG URL{' '}
+                                            Meta OG URL{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaOgUrl === ''
                                                 ? 'NA'
@@ -129,14 +114,11 @@ const WebsiteTagsView = ({ items }: Props) => {
                                         </p>
                                     </div>
 
-																		<div className="grid grid-cols-3">
+                                    <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta OG Image{' '}
+                                            Meta OG Image{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaOgImage === ''
                                                 ? 'NA'
@@ -144,14 +126,11 @@ const WebsiteTagsView = ({ items }: Props) => {
                                         </p>
                                     </div>
 
-																		<div className="grid grid-cols-3">
+                                    <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta OG Type{' '}
+                                            Meta OG Type{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaOgType === ''
                                                 ? 'NA'
@@ -159,14 +138,11 @@ const WebsiteTagsView = ({ items }: Props) => {
                                         </p>
                                     </div>
 
-																		<div className="grid grid-cols-3">
+                                    <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta Twitter Title{' '}
+                                            Meta Twitter Title{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaTwitterTitle === ''
                                                 ? 'NA'
@@ -174,14 +150,11 @@ const WebsiteTagsView = ({ items }: Props) => {
                                         </p>
                                     </div>
 
-																		<div className="grid grid-cols-3">
+                                    <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta Twitter Card{' '}
+                                            Meta Twitter Card{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaTwitterCard === ''
                                                 ? 'NA'
@@ -189,14 +162,11 @@ const WebsiteTagsView = ({ items }: Props) => {
                                         </p>
                                     </div>
 
-																		<div className="grid grid-cols-3">
+                                    <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta Twitter Image{' '}
+                                            Meta Twitter Image{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaTwitterImage === ''
                                                 ? 'NA'
@@ -204,14 +174,11 @@ const WebsiteTagsView = ({ items }: Props) => {
                                         </p>
                                     </div>
 
-																		<div className="grid grid-cols-3">
+                                    <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta Twitter Image{' '}
+                                            Meta Twitter Image{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaTwitterImage === ''
                                                 ? 'NA'
@@ -219,14 +186,11 @@ const WebsiteTagsView = ({ items }: Props) => {
                                         </p>
                                     </div>
 
-																		<div className="grid grid-cols-3">
+                                    <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta Twitter Image{' '}
+                                            Meta Twitter Image{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaTwitterImage === ''
                                                 ? 'NA'
@@ -234,14 +198,11 @@ const WebsiteTagsView = ({ items }: Props) => {
                                         </p>
                                     </div>
 
-																		<div className="grid grid-cols-3">
+                                    <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta OG Description{' '}
+                                            Meta OG Description{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaOgDescription === ''
                                                 ? 'NA'
@@ -249,14 +210,11 @@ const WebsiteTagsView = ({ items }: Props) => {
                                         </p>
                                     </div>
 
-																		<div className="grid grid-cols-3">
+                                    <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-																				Meta Description{' '}
+                                            Meta Description{' '}
                                         </h1>
-                                        <p>
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                        <p> - </p>
                                         <p className="text-slate-600 col-span-1">
                                             {items?.metaDescription === ''
                                                 ? 'NA'
@@ -267,10 +225,6 @@ const WebsiteTagsView = ({ items }: Props) => {
                             </div>
                         </div>
                     </div>
-
-                   
-
-                   
                 </div>
             </div>
         </div>
