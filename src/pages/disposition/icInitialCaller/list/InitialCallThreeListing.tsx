@@ -33,7 +33,7 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Initial Call',
-            path: '/dispositions/initialcall-three',
+            path: '/dashboard',
         },
         {
             label: 'Initial Call Three',

@@ -55,7 +55,7 @@ const WebsitesLayout = ({ children }: Props) => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const currentPath = `/all-website/${location.pathname?.split('/')[2]}`
+    const currentPath = `/all-websites/${location.pathname?.split('/')[2]}`
 
     return (
         <div className="flex h-screen w-screen relative">

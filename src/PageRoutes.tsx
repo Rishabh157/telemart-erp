@@ -184,6 +184,17 @@ import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/
 import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edit/EditInitialCallThreeWrapper'
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
 import InfluencerListingWrapper from './pages/websites/influencerManagement/list/InfluencerListingWrapper'
+import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
+import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
+import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
+import AddAssetsRequestWrapper from './pages/assets/assetsRequest/add/AddAssetsRequestWrapper'
+import AddAssetsRelocationWrapper from './pages/assets/assetsRelocation/add/AddAssetsRelocationWrapper'
+import AssetsRelocationWrapper from './pages/assets/assetsRelocation/list/AssetsRelocationWrapper'
+import AssetsRequestWrapper from './pages/assets/assetsRequest/list/AssetsRequestWrapper'
+import AssetsAllocationWrapper from './pages/assets/assetsAllocation/list/AssetsAllocationWrapper'
+import AddAssetsAllocationWrapper from './pages/assets/assetsAllocation/add/AddAssetsAllocationWrapper'
+
+import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -697,10 +708,40 @@ const PageRoutes = () => {
                     />
                     {/* disposition route */}
                     {/* Website route */}
+
+                    {/* start Assets mangement */}
+                    <Route
+                        path="assets/assets-management"
+                        element={<AssetsRequestWrapper />}
+                    />
+                    <Route
+                        path="assets/assets-management/add"
+                        element={<AddAssetsRequestWrapper />}
+                    />
+                    <Route
+                        path="assets/assets-relocation"
+                        element={<AssetsRelocationWrapper />}
+                    />
+                    <Route
+                        path="assets/assets-allocation"
+                        element={<AssetsAllocationWrapper />}
+                    />
+                    <Route
+                        path="assets/assets-relocation/add"
+                        element={<AddAssetsRelocationWrapper />}
+                    />
+                    <Route
+                        path="assets/assets-allocation/add"
+                        element={<AddAssetsAllocationWrapper />}
+                    />
+
+                    {/* end Assets mangement */}
+
                     <Route
                         path="all-websites/website"
                         element={<WebstieListingWrapper />}
                     />
+
                     <Route
                         path="all-websites/website/add"
                         element={<AddWebsiteWrapper />}
@@ -831,6 +872,7 @@ const PageRoutes = () => {
                     />
 
 
+                    <Route path="batch" element={<BatchListingWrapper />} />
                 </Routes>
             </BrowserRouter>
         </>

@@ -51,7 +51,7 @@ const OrderListing = () => {
         ],
         dateFilter: {},
         orderBy: 'createdAt',
-        orderByValue: 1,
+        orderByValue: -1,
         isPaginationRequired: true,
     })
 

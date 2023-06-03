@@ -119,3 +119,4 @@ export type {
     UpdateWebsiteBlog,
 } from './website/WebsiteBlog.model'
 export type { OrderListResponse } from './Order.model'
+export type { BatchListResponse, AddBatch } from './Batch.model'
