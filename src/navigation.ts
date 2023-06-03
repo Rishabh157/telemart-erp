@@ -110,13 +110,14 @@ export const navigation: NavItemType[] = [
     {
         label: 'Media',
         icon: MdPermMedia,
-        path: '/media/did',
+        path: '/media/channel-group',
     },
-    // {
-    //     label: 'Disposition',
-    //     icon: TbSettings2,
-    //     path: '/disposition',
-    // },
+    {
+        label: 'Assets',
+        icon: MdPermMedia,
+        path: '/assets/assets-management',
+    },
+
     {
         label: 'Dispositions',
         icon: AiOutlineSetting,

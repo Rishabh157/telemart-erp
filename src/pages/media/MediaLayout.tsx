@@ -112,7 +112,7 @@ const MediaLayout = ({ children }: Props) => {
                     isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
                 }`}
             >
-                <BiChevronsLeft className="text-2xl" />
+                <BiChevronsLeft className="text-2xl" />{' '}
                 {!isCollapsed && <div> BACK TO MAIN MENU </div>}
             </button>
         </div>

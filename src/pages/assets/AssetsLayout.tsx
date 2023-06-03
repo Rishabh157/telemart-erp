@@ -2,47 +2,26 @@ import React, { useState } from 'react'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
-import { BsPersonHeart } from 'react-icons/bs'
 import { BiChevronsLeft } from 'react-icons/bi'
-import { GrChannel } from 'react-icons/gr'
-import { MdEmojiEvents } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { MdOutlineWebAsset, MdShareLocation } from 'react-icons/md'
+import { TbLayoutDistributeHorizontal } from 'react-icons/tb'
 
-const dispositionNavigation: NavItemType[] = [
+const asstesNavigation: NavItemType[] = [
     {
-        label: 'Disposition One',
-        icon: GrChannel,
-        path: '/dispositions/disposition-one',
+        label: 'Assets Request ',
+        icon: MdOutlineWebAsset,
+        path: '/assets/assets-management',
     },
     {
-        label: 'Disposition Two',
-        icon: GrChannel,
-        path: '/dispositions/disposition-two',
+        label: 'Assets Relocation',
+        icon: MdShareLocation,
+        path: '/assets/assets-relocation',
     },
     {
-        label: 'Disposition Three',
-        icon: GrChannel,
-        path: '/dispositions/disposition-three',
-    },
-    {
-        label: 'IC-One',
-        icon: BsPersonHeart,
-        path: '/dispositions/initialcall-one',
-    },
-    {
-        label: 'IC-Two',
-        icon: BsPersonHeart,
-        path: '/dispositions/initialcall-two',
-    },
-    {
-        label: 'IC-Three',
-        icon: BsPersonHeart,
-        path: '/dispositions/initialcall-three',
-    },
-    {
-        label: 'Disposition Complaint',
-        icon: MdEmojiEvents,
-        path: '/dispositions/disposition-complaint',
+        label: 'Assets Allocation',
+        icon: TbLayoutDistributeHorizontal,
+        path: '/assets/assets-allocation',
     },
 ]
 
@@ -50,7 +29,7 @@ type Props = {
     children?: React.ReactNode | string
 }
 
-const DispositionLayout = ({ children }: Props) => {
+const AsstesLayout = ({ children }: Props) => {
     const [isCollapsed, setIsCollapsed] = useState(false)
     const toggleCollapse = () => {
         setIsCollapsed((prev) => !prev)
@@ -59,7 +38,7 @@ const DispositionLayout = ({ children }: Props) => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const currentPath = `/dispositions/${location.pathname?.split('/')[2]}`
+    const currentPath = `/assets/${location.pathname?.split('/')[2]}`
 
     return (
         <div className="flex h-screen w-screen relative">
@@ -72,7 +51,7 @@ const DispositionLayout = ({ children }: Props) => {
                 <VerticalNavBar
                     toggleCollapse={toggleCollapse}
                     isCollapsed={isCollapsed}
-                    navigation={dispositionNavigation}
+                    navigation={asstesNavigation}
                     isPathEqualtoNavItem={(navItem: any) =>
                         navItem.path === currentPath
                     }
@@ -105,4 +84,4 @@ const DispositionLayout = ({ children }: Props) => {
     )
 }
 
-export default DispositionLayout
+export default AsstesLayout
