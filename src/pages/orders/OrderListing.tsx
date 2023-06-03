@@ -39,8 +39,6 @@ const OrderListing = () => {
     const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
         orderState
 
-    
-
     const { data, isLoading, isFetching } = useGetOrderQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -69,8 +67,6 @@ const OrderListing = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
-
-    
 
     const columns: columnTypes[] = [
         {

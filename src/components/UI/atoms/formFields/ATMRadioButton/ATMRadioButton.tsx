@@ -32,7 +32,9 @@ const ATMRadioButton = ({
                 </label>
             )}
 
-            <div className={`flex ${className} w-full py-2 pr-2 grid grid-cols-2 gap-1`}>
+            <div
+                className={`flex ${className} w-full py-2 pr-2 grid grid-cols-2 gap-1`}
+            >
                 {options.map((option: SelectOption, index) => (
                     <div
                         onChange={() => {

@@ -15,7 +15,7 @@ import {
     setFilterValue,
 } from 'src/redux/slices/website/websiteBlogSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
     columns: any[]
@@ -25,7 +25,7 @@ type Props = {
 
 const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-		const navigate = useNavigate()
+    const navigate = useNavigate()
     const WebsiteBlogState: any = useSelector(
         (state: RootState) => state.websiteBlog
     )
