@@ -21,7 +21,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
-        <div className="py-4 px-7 flex flex-col gap-5">
+        <div className="px-7 flex flex-col gap-5">
             <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4 gap-y-5">
                 {/* Product Code */}
                 <ATMTextField
@@ -103,7 +103,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                         {' '}
                         Dimensions (in mm)
                     </label>
-                    <div className="flex gap-2 mt-1 mb-6">
+                    <div className="flex gap-2 -mt-2 mb-6">
                         {/* Height */}
                         <ATMTextField
                             name="dimensions.height"
@@ -159,7 +159,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
             </div>
 
             {/* Description */}
-            <div className="-mt-6">
+            <div className="-mt-6 mb-10">
                 <ATMTextArea
                     name="description"
                     value={values.description}
