@@ -117,7 +117,7 @@ const BatchListing = ({ columns, rows }: Props) => {
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />
                 </div>
-            </div>           
+            </div>
         </div>
     )
 }
