@@ -1,6 +1,9 @@
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
-import { AddInfluencer, UpdateInfluencer } from 'src/models/website/Influencer.model'
+import {
+    AddInfluencer,
+    UpdateInfluencer,
+} from 'src/models/website/Influencer.model'
 
 export const InfluencerApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

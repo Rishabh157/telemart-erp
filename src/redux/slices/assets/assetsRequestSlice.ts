@@ -2,8 +2,6 @@ import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { AssetsRequestListResponse } from 'src/models/assets/AssetsRequest.model'
 
-
-
 export interface AssetsRequestSliceStateType {
     items: AssetsRequestListResponse[] | []
     allItems: AssetsRequestListResponse[] | []

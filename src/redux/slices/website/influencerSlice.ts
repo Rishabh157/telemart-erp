@@ -2,7 +2,6 @@ import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { InfluencerListResponse } from 'src/models/website/Influencer.model'
 
-
 export interface influencerSliceStateType {
     items: InfluencerListResponse[] | []
     allItems: InfluencerListResponse[] | []

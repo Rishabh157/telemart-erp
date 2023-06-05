@@ -26,17 +26,17 @@ const AddInfluencerWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const initialValues: FormInitialValues = {
-        name: "",
-        schemeId: "",
-        startDate: "",
-        endDate: "",
+        name: '',
+        schemeId: '',
+        startDate: '',
+        endDate: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
         name: string().required('Required'),
         schemeId: string().required('Required'),
-        startDate:string().required('Required') ,
+        startDate: string().required('Required'),
         endDate: string().required('Required'),
     })
 
@@ -47,8 +47,8 @@ const AddInfluencerWrapper = (props: Props) => {
         setTimeout(() => {
             addInfluencer({
                 name: values.name,
-                schemeId:values.schemeId,
-                startDate:values.startDate,
+                schemeId: values.schemeId,
+                startDate: values.startDate,
                 endDate: values.endDate,
                 companyId: userData?.companyId || '',
             }).then((res) => {

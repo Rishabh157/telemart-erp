@@ -50,7 +50,7 @@ const ATMRadioButton = ({
                             name={name}
                             value={value}
                             checked={option.value === value}
-                            onChange={()=>{}}
+                            onChange={() => {}}
                         />
                         <label
                             onClick={() => {

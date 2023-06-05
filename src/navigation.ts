@@ -90,7 +90,7 @@ export const navigation: NavItemType[] = [
         label: 'Batch',
         icon: MdOutlineBatchPrediction,
         path: '/batch',
-    },   
+    },
     {
         label: 'Orders',
         icon: MdOutlineBorderColor,

@@ -55,9 +55,8 @@ const Inbound: React.FC<Props> = ({
     rows,
 }) => {
     const { values, setFieldValue } = formikProps
-  
+
     const [selectedRows, setSelectedRows] = useState([])
-  
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -957,7 +956,7 @@ const Inbound: React.FC<Props> = ({
                     </div>
                 </div>
                 <Divider />
-                <div className='w-full h-36 overflow-auto'>
+                <div className="w-full h-36 overflow-auto">
                     <ATMTable
                         columns={column}
                         rows={rows}

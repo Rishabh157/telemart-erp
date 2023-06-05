@@ -2,7 +2,6 @@ import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
 
-
 export interface InboundCallerSliceStateType {
     items: InbooundCallerListResponse[] | []
     selectedItem: InbooundCallerListResponse | null
@@ -29,60 +28,59 @@ const initialState: InboundCallerSliceStateType = {
     channelMgt: null,
 }
 
-const channelManagementSlice: Slice<InboundCallerSliceStateType> =
-    createSlice({
-        name: 'inboundCaller',
-        initialState,
-        reducers: {
-            setItems: (
-                state,
-                action: PayloadAction<InbooundCallerListResponse[] | []>
-            ) => {
-                state.items = action.payload
-            },
-            setPage: (state, action: PayloadAction<number>) => {
-                state.page = action.payload
-                document.getElementById('scroll-top')?.scrollTo(0, 0)
-            },
-            setRowsPerPage: (state, action: PayloadAction<number>) => {
-                state.rowsPerPage = action.payload
-                state.page = 1
-                document.getElementById('scroll-top')?.scrollTo(0, 0)
-            },
-            setSearchValue: (state, action: PayloadAction<string>) => {
-                state.searchValue = action.payload
-                state.page = 1
-            },
-            setSortValue: (
-                state,
-                action: PayloadAction<{ field: string; value: 'DESC' | 'ASC' }>
-            ) => {
-                state.sortValue = action.payload
-                state.page = 1
-            },
-            setTotalItems: (state, action: PayloadAction<number>) => {
-                state.totalItems = action.payload
-            },
-            setIsTableLoading: (state, action: PayloadAction<boolean>) => {
-                state.isTableLoading = action.payload
-            },
-            setSelectedId: (state, action: PayloadAction<string>) => {
-                state.selectedId = action.payload
-            },
-            setSelectedItem: (
-                state,
-                action: PayloadAction<InbooundCallerListResponse | null>
-            ) => {
-                state.selectedItem = action.payload
-            },
-            setChannelMgt: (
-                state,
-                action: PayloadAction<InbooundCallerListResponse[]>
-            ) => {
-                state.channelMgt = action.payload
-            },
+const channelManagementSlice: Slice<InboundCallerSliceStateType> = createSlice({
+    name: 'inboundCaller',
+    initialState,
+    reducers: {
+        setItems: (
+            state,
+            action: PayloadAction<InbooundCallerListResponse[] | []>
+        ) => {
+            state.items = action.payload
         },
-    })
+        setPage: (state, action: PayloadAction<number>) => {
+            state.page = action.payload
+            document.getElementById('scroll-top')?.scrollTo(0, 0)
+        },
+        setRowsPerPage: (state, action: PayloadAction<number>) => {
+            state.rowsPerPage = action.payload
+            state.page = 1
+            document.getElementById('scroll-top')?.scrollTo(0, 0)
+        },
+        setSearchValue: (state, action: PayloadAction<string>) => {
+            state.searchValue = action.payload
+            state.page = 1
+        },
+        setSortValue: (
+            state,
+            action: PayloadAction<{ field: string; value: 'DESC' | 'ASC' }>
+        ) => {
+            state.sortValue = action.payload
+            state.page = 1
+        },
+        setTotalItems: (state, action: PayloadAction<number>) => {
+            state.totalItems = action.payload
+        },
+        setIsTableLoading: (state, action: PayloadAction<boolean>) => {
+            state.isTableLoading = action.payload
+        },
+        setSelectedId: (state, action: PayloadAction<string>) => {
+            state.selectedId = action.payload
+        },
+        setSelectedItem: (
+            state,
+            action: PayloadAction<InbooundCallerListResponse | null>
+        ) => {
+            state.selectedItem = action.payload
+        },
+        setChannelMgt: (
+            state,
+            action: PayloadAction<InbooundCallerListResponse[]>
+        ) => {
+            state.channelMgt = action.payload
+        },
+    },
+})
 
 export const {
     setItems,

@@ -4,7 +4,11 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { setPage, setRowsPerPage, setSearchValue } from 'src/redux/slices/media/inboundCallerSlice'
+import {
+    setPage,
+    setRowsPerPage,
+    setSearchValue,
+} from 'src/redux/slices/media/inboundCallerSlice'
 
 import { AppDispatch, RootState } from 'src/redux/store'
 
@@ -16,15 +20,14 @@ type Props = {
 
 const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const inboundCallerState: any = useSelector((state: RootState) => state.inboundCaller)
+    const inboundCallerState: any = useSelector(
+        (state: RootState) => state.inboundCaller
+    )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue } = inboundCallerState
-    
-
 
     return (
         <div className="px-4 h-full overflow-auto pt-3 ">
-        
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Call Management </ATMPageHeading>

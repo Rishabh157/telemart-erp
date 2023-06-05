@@ -136,8 +136,8 @@ const store = configureStore({
         order: orderSlice,
         batch: batchSlice,
         dispositionComplaint: dispositionComplaintSlice,
-        influencer:influencerSlice,
-        inboundCaller:inboundCallerSlice,
+        influencer: influencerSlice,
+        inboundCaller: inboundCallerSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

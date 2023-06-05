@@ -880,10 +880,7 @@ const PageRoutes = () => {
                     {/*end  Influencer routing */}
 
                     {/* start call routing */}
-                    <Route
-                        path="/call"
-                        element={<CallListingWrapper />}
-                    />
+                    <Route path="/call" element={<CallListingWrapper />} />
                     {/* end call routing */}
                     <Route path="batch" element={<BatchListingWrapper />} />
                     <Route

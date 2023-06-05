@@ -77,7 +77,7 @@ const ATMSelectSearchable = ({
             paddingLeft: '4px',
             paddingTop: '-4px',
         }),
-     
+
         indicatorSeparator: (provided: any) => ({
             ...provided,
             display: 'none',

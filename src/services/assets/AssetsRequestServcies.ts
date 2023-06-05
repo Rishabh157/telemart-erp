@@ -1,8 +1,9 @@
-
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
-import { AddAssetsRequest, UpdateAssetsRequest } from 'src/models/assets/AssetsRequest.model'
-
+import {
+    AddAssetsRequest,
+    UpdateAssetsRequest,
+} from 'src/models/assets/AssetsRequest.model'
 
 export const assetsRequestApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

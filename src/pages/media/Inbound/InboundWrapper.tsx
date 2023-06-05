@@ -31,7 +31,11 @@ import { setItems } from 'src/redux/slices/media/channelManagementSlice'
 import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
 import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
-import { setIsTableLoading, setTotalItems ,setItems as setCallItems} from 'src/redux/slices/media/inboundCallerSlice'
+import {
+    setIsTableLoading,
+    setTotalItems,
+    setItems as setCallItems,
+} from 'src/redux/slices/media/inboundCallerSlice'
 
 export type FormInitialValues = {
     generalInformation: {
@@ -120,7 +124,10 @@ const InbouundWrapper = () => {
             headerName: 'Disposition Two',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.dispositionTwoLabel?row.dispositionTwoLabel:'NA'}</span>
+                <span>
+                    {' '}
+                    {row.dispositionTwoLabel ? row.dispositionTwoLabel : 'NA'}
+                </span>
             ),
         },
         {
@@ -128,7 +135,12 @@ const InbouundWrapper = () => {
             headerName: 'Disposition Three Label',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.dispositionThreeLabel?row.dispositionThreeLabel:"NA"} </span>
+                <span>
+                    {' '}
+                    {row.dispositionThreeLabel
+                        ? row.dispositionThreeLabel
+                        : 'NA'}{' '}
+                </span>
             ),
         },
         {
@@ -147,14 +159,18 @@ const InbouundWrapper = () => {
                 <span> {row.channel} </span>
             ),
         },
-
     ]
 
-    const inboundCallerState: any = useSelector((state: RootState) => state.inboundCaller)
+    const inboundCallerState: any = useSelector(
+        (state: RootState) => state.inboundCaller
+    )
 
-
-    const { page, rowsPerPage, searchValue, items} = inboundCallerState
-    const { data:Calldata, isFetching:callisFetching, isLoading:callisLoading } = useGetPaginationInboundCallerQuery({
+    const { page, rowsPerPage, searchValue, items } = inboundCallerState
+    const {
+        data: Calldata,
+        isFetching: callisFetching,
+        isLoading: callisLoading,
+    } = useGetPaginationInboundCallerQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['didNo'],
@@ -162,7 +178,7 @@ const InbouundWrapper = () => {
         filterBy: [
             {
                 fieldName: 'mobileNo',
-                value: ["9893432611"],
+                value: ['9893432611'],
             },
         ],
         dateFilter: {},
@@ -182,7 +198,6 @@ const InbouundWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [callisLoading, callisFetching, Calldata])
-
 
     // const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
@@ -276,7 +291,7 @@ const InbouundWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         const callDetails: any = localStorage.getItem('callerData')
         let callDataItem = JSON.parse(callDetails)
-    
+
         const valuesInbound = {
             ...values.generalInformation,
             ...values.addressInformation,
@@ -423,8 +438,6 @@ const InbouundWrapper = () => {
         }
     }, [tehsilData, dispatch, tehsilIsFetching, tehsilIsLoading])
 
-
-
     //channel
     const {
         data: channelData,
@@ -454,7 +467,7 @@ const InbouundWrapper = () => {
         tehsilOptions: allTehsils?.map((ele: TehsilListResponse) => {
             return { label: ele?.tehsilName, value: ele?._id }
         }),
-    
+
         channelOptions: allDistricts?.map((ele: DistrictListResponse) => {
             return { label: ele?.districtName, value: ele?._id }
         }),

@@ -26,7 +26,7 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
 
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue ,totalItems} = asrState
+    const { page, rowsPerPage, searchValue, totalItems } = asrState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">

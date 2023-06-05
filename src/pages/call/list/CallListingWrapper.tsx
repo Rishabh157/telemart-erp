@@ -4,18 +4,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import CallListing from './CallListing'
-import { setIsTableLoading, setItems, setTotalItems } from 'src/redux/slices/media/inboundCallerSlice'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/media/inboundCallerSlice'
 import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
 import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
 
-
-
 const CallListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
-  
-    const [showDropdown, setShowDropdown] = useState(false)
-    const inboundCallerState: any = useSelector((state: RootState) => state.inboundCaller)
 
+    const [showDropdown, setShowDropdown] = useState(false)
+    const inboundCallerState: any = useSelector(
+        (state: RootState) => state.inboundCaller
+    )
 
     const { page, rowsPerPage, searchValue, items } = inboundCallerState
     const columns: columnTypes[] = [
@@ -40,7 +43,10 @@ const CallListingWrapper = () => {
             headerName: 'Disposition Two',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.dispositionTwoLabel?row.dispositionTwoLabel:'NA'}</span>
+                <span>
+                    {' '}
+                    {row.dispositionTwoLabel ? row.dispositionTwoLabel : 'NA'}
+                </span>
             ),
         },
         {
@@ -48,7 +54,12 @@ const CallListingWrapper = () => {
             headerName: 'Disposition Three Label',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.dispositionThreeLabel?row.dispositionThreeLabel:"NA"} </span>
+                <span>
+                    {' '}
+                    {row.dispositionThreeLabel
+                        ? row.dispositionThreeLabel
+                        : 'NA'}{' '}
+                </span>
             ),
         },
         {
@@ -67,13 +78,12 @@ const CallListingWrapper = () => {
                 <span> {row.channel} </span>
             ),
         },
-      
     ]
 
     const { data, isFetching, isLoading } = useGetPaginationInboundCallerQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['didNo',],
+        params: ['didNo'],
         page: page,
         filterBy: [
             {
@@ -99,7 +109,6 @@ const CallListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
-    
     return (
         <>
             <ConfigurationLayout>
@@ -107,8 +116,6 @@ const CallListingWrapper = () => {
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
-              
-                  
                 />
             </ConfigurationLayout>
         </>
@@ -116,4 +123,3 @@ const CallListingWrapper = () => {
 }
 
 export default CallListingWrapper
-
