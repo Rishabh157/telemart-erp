@@ -31,7 +31,6 @@ export const areaApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
-        
 
         //***** ADD *****/
         addArea: builder.mutation({

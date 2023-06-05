@@ -152,7 +152,7 @@ const AddTapeManagement = ({
                             />
                         </div>
 
-                        <div className="grid grid-cols-4 gap-4 pt-8 -mt-4">
+                        <div className="grid grid-cols-4 gap-4 ">
                             <ATMSelectSearchable
                                 name="artistId"
                                 required
@@ -195,7 +195,7 @@ const AddTapeManagement = ({
                                 }
                             />
                         </div>
-                        <div className="grid grid-cols-2 gap-4 ">
+                        <div className="grid grid-cols-2 gap-4 mt-4">
                             <div className="grid grid-rows-2 ">
                                 <div className=" row-sapn-1 text-slate-700 text-center justify-start flex -mt-4 p-0 m-0 items-center   font-medium ">
                                     Duration
@@ -272,7 +272,7 @@ const AddTapeManagement = ({
                                 </div>
                             </div>
                             <ATMTextArea
-                                minRows={2}
+                                minRows={3}
                                 name="remarks"
                                 value={values.remarks}
                                 label="Remark"

@@ -38,7 +38,7 @@ const ASRListingWrapper = () => {
                 <span>
                     {' '}
                     <Stack direction="row" spacing={1}>
-                        {row?.asrDetails.map((ele, index) => {
+                        {row?.asrDetails?.map((ele, index) => {
                             if (index < 4) {
                                 return (
                                     <Chip
@@ -74,7 +74,7 @@ const ASRListingWrapper = () => {
                 <span>
                     {' '}
                     <Stack direction="row" spacing={1}>
-                        {row?.asrDetails.map((ele, index) => {
+                        {row?.asrDetails?.map((ele, index) => {
                             if (index < 4) {
                                 return (
                                     <Chip
