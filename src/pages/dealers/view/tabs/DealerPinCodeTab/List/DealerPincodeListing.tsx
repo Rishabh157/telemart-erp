@@ -22,7 +22,9 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const dealerId: any = params.dealerId
-    const pincodeState: any = useSelector((state: RootState) => state.dealerPincode)
+    const pincodeState: any = useSelector(
+        (state: RootState) => state.dealerPincode
+    )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])

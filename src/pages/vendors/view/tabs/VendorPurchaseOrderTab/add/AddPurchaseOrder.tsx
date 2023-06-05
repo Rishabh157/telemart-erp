@@ -103,10 +103,9 @@ const AddPurchaseOrder = ({
                             <ATMSelect
                                 name="vendorId"
                                 value={values.vendorId}
-                                onChange={(e) => (e)}
+                                onChange={(e) => e}
+                                //setFieldValue('vendorId', e.target.value)
 
-                                    //setFieldValue('vendorId', e.target.value)
-                                
                                 options={dropdownOptions.vendorOptions}
                                 label="Vendor"
                             />

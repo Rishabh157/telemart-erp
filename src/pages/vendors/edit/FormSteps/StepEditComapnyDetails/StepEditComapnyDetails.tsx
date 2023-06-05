@@ -56,23 +56,23 @@ const StepEditComapnyDetails = ({
                         case 'select':
                             return (
                                 <div className="-mt-2">
-                                <ATMSelect
-                                    key={name}
-                                    name={name}
-                                    value={values[name]}
-                                    onChange={(e) => {
-                                        setFieldValue(name, e.target.value)
-                                    }}
-                                    size="small"
-                                    label={label}
-                                    options={
-                                        dropdownOptions[
-                                            field.optionAccessKey ||
-                                                'companyTypeOptions'
-                                        ]
-                                    }
-                                    isSubmitting={isSubmitting}
-                                />
+                                    <ATMSelect
+                                        key={name}
+                                        name={name}
+                                        value={values[name]}
+                                        onChange={(e) => {
+                                            setFieldValue(name, e.target.value)
+                                        }}
+                                        size="small"
+                                        label={label}
+                                        options={
+                                            dropdownOptions[
+                                                field.optionAccessKey ||
+                                                    'companyTypeOptions'
+                                            ]
+                                        }
+                                        isSubmitting={isSubmitting}
+                                    />
                                 </div>
                             )
 

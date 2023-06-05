@@ -55,7 +55,6 @@ const StepEditDealerDetails = ({
                                         {label}{' '}
                                     </InputLabel>
                                     <FormControl fullWidth>
-                                    
                                         <Select
                                             name={name}
                                             value={values[name]}
@@ -87,7 +86,6 @@ const StepEditDealerDetails = ({
                                                 </MenuItem>
                                             ))}
                                         </Select>
-                                        
                                     </FormControl>
                                 </div>
                             )

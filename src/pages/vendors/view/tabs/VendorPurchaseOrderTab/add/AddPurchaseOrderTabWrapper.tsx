@@ -41,7 +41,7 @@ const AddPurchaseOrderTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const vendorId: any = params.vendorId
-   
+
     const disptach = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -187,25 +187,23 @@ const AddPurchaseOrderTabWrapper = (props: Props) => {
     // }
 
     return (
-        
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddPurchaseOrder
-                            formikProps={formikProps}
-                            vendorOptions={vendorOptions}
-                            warehouseOptions={warehouseOptions}
-                            itemOptions={itemOptions}
-                            apiStatus={apiStatus}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddPurchaseOrder
+                        formikProps={formikProps}
+                        vendorOptions={vendorOptions}
+                        warehouseOptions={warehouseOptions}
+                        itemOptions={itemOptions}
+                        apiStatus={apiStatus}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 export default AddPurchaseOrderTabWrapper
