@@ -1,6 +1,7 @@
 export type InitialCallerTwoListResponse = {
     initialCallName: string
     initailCallNameLabel: string
+    initialCallOneLabel: string
     companyId: string
     isActive: boolean
     isDeleted: boolean

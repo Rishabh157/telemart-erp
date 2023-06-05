@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import CallListing from './CallListing'
 import {
     setIsTableLoading,
@@ -11,6 +10,8 @@ import {
 } from 'src/redux/slices/media/inboundCallerSlice'
 import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
 import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import { HiDotsHorizontal } from 'react-icons/hi'
 
 const CallListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -78,6 +79,18 @@ const CallListingWrapper = () => {
                 <span> {row.channel} </span>
             ),
         },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
+                    {' '}
+                    <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                </button>
+            ),
+            align: 'end',
+        },
     ]
 
     const { data, isFetching, isLoading } = useGetPaginationInboundCallerQuery({
@@ -111,13 +124,13 @@ const CallListingWrapper = () => {
 
     return (
         <>
-            <ConfigurationLayout>
+            <SideNavLayout>
                 <CallListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+            </SideNavLayout>
         </>
     )
 }
