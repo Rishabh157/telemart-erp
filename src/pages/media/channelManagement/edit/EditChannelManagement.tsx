@@ -267,7 +267,14 @@ const EditChannelManagement = ({
                                 onChange={(e) =>
                                     setFieldValue('website', e.target.value)
                                 }
-                            />{' '}
+                            />
+                            <ATMTextArea
+                                name="address"
+                                value={values.address}
+                                label="Address Name"
+                                placeholder="Address Name"
+                                onChange={(e) => setFieldValue('address', e)}
+                            />
                         </div>
                     </div>
                 </div>
