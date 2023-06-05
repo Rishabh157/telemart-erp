@@ -4,12 +4,12 @@ import { array, object, string } from 'yup'
 import AddDealerScheme from './AddDealerScheme'
 import { useAddDealerSchemeMutation } from 'src/services/DealerSchemeService'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
-//import { useGetAllDealerSchemeQuery } from 'src/services/DealerSchemeService'
+import { useGetAllDealerSchemeQuery } from 'src/services/DealerSchemeService'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
-
+import { setAllItems  } from 'src/redux/slices/dealerSchemeSlice'
 import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
 
 type Props = {}
@@ -31,7 +31,23 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addDealerScheme] = useAddDealerSchemeMutation()
 
-    //const {data: allData, isLoading: allIsLoading, isFetching:AllIsFetching} = useGetAllDealerSchemeQuery();
+    const { allItems}: any = useSelector(
+        (state: RootState) => state?.dealerScheme
+    )
+
+
+    const {data: allData, isLoading: allIsLoading, isFetching:AllIsFetching} = useGetAllDealerSchemeQuery('');
+    //console.log(allData)
+
+    useEffect(() => {
+        if(!allIsLoading && AllIsFetching){
+            dispatch(setAllItems(allData?.data || []))
+        }
+        
+    }, [dispatch, allData, allIsLoading, AllIsFetching])
+
+    
+
 
     const {
         data: schemeData,
@@ -59,6 +75,27 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         dealerId: dealerId,
         schemes: [],
     }
+
+
+
+    function hasAllElems(value: any) {
+        schemeItems.map((el:any) => {
+            if(el.id !== value.schemeId){
+                console.log(value)
+                return value;
+            }
+      })
+      
+    }
+      
+    const filtered = allItems.filter(hasAllElems);
+
+
+   
+    console.log(filtered)
+
+
+
 
     const validationSchema = object({
         schemes: array()
