@@ -1,22 +1,22 @@
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
+import { InfluencerListResponse } from 'src/models/website/Influencer.model'
 
-export interface WebsitePageSliceStateType {
-    items: WebsitePageListResponse[] | []
-    allItems: WebsitePageListResponse[] | []
-    selectedItem: WebsitePageListResponse | null
+export interface influencerSliceStateType {
+    items: InfluencerListResponse[] | []
+    allItems: InfluencerListResponse[] | []
+    selectedItem: InfluencerListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selecteWebsitePage: string
-    filterValue: any
+    selectinfluencer: string
+    filterValue: string
 }
 
-const initialState: WebsitePageSliceStateType = {
+const initialState: influencerSliceStateType = {
     items: [],
     allItems: [],
     selectedItem: null,
@@ -26,23 +26,23 @@ const initialState: WebsitePageSliceStateType = {
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selecteWebsitePage: '',
+    selectinfluencer: '',
     filterValue: '',
 }
 
-const websitePageSlice: Slice<WebsitePageSliceStateType> = createSlice({
-    name: 'websitePage',
+const influencerSlice: Slice<influencerSliceStateType> = createSlice({
+    name: 'influencer',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<WebsitePageListResponse[] | []>
+            action: PayloadAction<InfluencerListResponse[] | []>
         ) => {
             state.items = action.payload
         },
         setAllItems: (
             state,
-            action: PayloadAction<WebsitePageListResponse[] | []>
+            action: PayloadAction<InfluencerListResponse[] | []>
         ) => {
             state.allItems = action.payload
         },
@@ -72,12 +72,12 @@ const websitePageSlice: Slice<WebsitePageSliceStateType> = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setSelecteWebsite: (state, action: PayloadAction<string>) => {
-            state.selecteWebsitePage = action.payload
+        setSelectinfluencer: (state, action: PayloadAction<string>) => {
+            state.selectinfluencer = action.payload
         },
-        setSelectedWebsite: (
+        setSelectedinfluencer: (
             state,
-            action: PayloadAction<WebsitePageListResponse | null>
+            action: PayloadAction<InfluencerListResponse | null>
         ) => {
             state.selectedItem = action.payload
         },
@@ -96,8 +96,9 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelecteWebsite,
-    setSelectedWebsite,
+    setSelectinfluencer,
+    setSelectedinfluencer,
     setFilterValue,
-} = websitePageSlice.actions
-export default websitePageSlice.reducer
+} = influencerSlice.actions
+
+export default influencerSlice.reducer

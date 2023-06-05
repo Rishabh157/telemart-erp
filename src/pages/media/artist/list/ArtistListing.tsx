@@ -33,7 +33,7 @@ const ArtistListing = ({ columns, rows, setShowDropdown }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'artist',
+            label: 'Artist',
         },
     ]
 

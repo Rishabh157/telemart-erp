@@ -76,6 +76,14 @@ const InitialCallTwoListingWrapper = () => {
                 <span> {row.initialCallName} </span>
             ),
         },
+        {
+            field: 'initialCallOneLabel',
+            headerName: 'Initial Call One',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InitialCallerTwoListResponse) => (
+                <span> {row.initialCallOneLabel} </span>
+            ),
+        },
 
         {
             field: 'actions',

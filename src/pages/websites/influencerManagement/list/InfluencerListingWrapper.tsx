@@ -8,62 +8,40 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/website/websiteBlogSlice'
+} from 'src/redux/slices/website/websiteSlice'
 import WebsiteLayout from '../../WebsiteLayout'
-import ListWebsiteBlog from './ListWebsiteBlog'
-import { WebsiteBlogListResponse } from 'src/models/website/WebsiteBlog.model'
+import { WebsiteListResponse } from 'src/models/website/Website.model'
 import {
-    useDeletegetWebsiteBlogMutation,
-    useGetPaginationWebsiteBlogQuery,
-} from 'src/services/websites/WebsiteBlogServices'
+    useDeletegetWebsiteMutation,
+    useGetPaginationWebsiteQuery,
+} from 'src/services/websites/WebsiteServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
+import InfluencerListing from './InfluencerListing'
 
-const ListWebsiteBlogWrapper = () => {
+const InfluencerListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    //const {state} = useLocation()
-    //const {websiteId} = state
-    const [deleteWebsiteBlog] = useDeletegetWebsiteBlogMutation()
+    const [deleteWebsite] = useDeletegetWebsiteMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteBlogState: any = useSelector(
-        (state: RootState) => state.websiteBlog
-    )
+    const WebsiteState: any = useSelector((state: RootState) => state.website)
 
-    const { page, rowsPerPage, searchValue, items, filterValue } =
-        WebsiteBlogState
-
+    const { page, rowsPerPage, searchValue, items } = WebsiteState
     const columns: columnTypes[] = [
         {
-            field: 'blogName',
-            headerName: 'Blog Name',
+            field: 'productName',
+            headerName: 'Website Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogName} </span>
+            renderCell: (row: WebsiteListResponse) => (
+                <span> {row.productName} </span>
             ),
         },
-        {
-            field: 'blogTitle',
-            headerName: 'Blog Title',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogTitle} </span>
-            ),
-        },
-        {
-            field: 'blogSubtitle',
-            headerName: 'Blog Subtitle',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogSubtitle} </span>
-            ),
-        },
-
         {
             field: 'actions',
             headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
+            flex: 'flex-[1.8_1.8_0%]',
             renderCell: (row: any) => (
                 <div className="relative">
                     <button
@@ -78,21 +56,60 @@ const ListWebsiteBlogWrapper = () => {
                         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
                     </button>
                     {showDropdown && currentId === row?._id && (
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10  w-24">
                             <button
                                 onClick={() => {
                                     navigate(
-                                        `/all-websites/website-blog/${currentId}`
+                                        `/all-websites/Website/${currentId}`
                                     )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Edit
                             </button>
+
+                            <button
+                                onClick={() => {
+                                    navigate('/all-websites/website-blog/add', {
+                                        state: {
+                                            siteId: currentId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Add Blog
+                            </button>
+                            <button
+                                onClick={() => {
+                                    dispatch(setFilterValue(currentId))
+                                    navigate('/all-websites/website-blog', {
+                                        state: {
+                                            websiteId: currentId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View Blog
+                            </button>
+                            <button
+                                onClick={() => {
+                                    navigate('/all-websites/website-page/add', {
+                                        state: {
+                                            siteId: currentId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Add Page
+                            </button>
+
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Blog',
+                                        title: 'Delete Website',
                                         text: 'Do you want to delete',
                                         showCancelButton: true,
                                         next: (res: any) => {
@@ -113,15 +130,16 @@ const ListWebsiteBlogWrapper = () => {
             align: 'end',
         },
     ]
-    const { data, isFetching, isLoading } = useGetPaginationWebsiteBlogQuery({
+
+    const { data, isFetching, isLoading } = useGetPaginationWebsiteQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['blogName', 'blogTitle'],
+        params: ['productName', 'url'],
         page: page,
         filterBy: [
             {
-                fieldName: 'websiteId',
-                value: filterValue,
+                fieldName: '',
+                value: [],
             },
         ],
         dateFilter: {},
@@ -144,10 +162,10 @@ const ListWebsiteBlogWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteWebsiteBlog(currentId).then((res: any) => {
+        deleteWebsite(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Blog deleted successfully!')
+                    showToast('success', 'Website deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -159,11 +177,10 @@ const ListWebsiteBlogWrapper = () => {
             }
         })
     }
-
     return (
         <>
             <WebsiteLayout>
-                <ListWebsiteBlog
+                <InfluencerListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
@@ -173,4 +190,4 @@ const ListWebsiteBlogWrapper = () => {
     )
 }
 
-export default ListWebsiteBlogWrapper
+export default InfluencerListingWrapper

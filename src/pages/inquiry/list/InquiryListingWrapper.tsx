@@ -214,9 +214,7 @@ const InquiryListingWrapper = () => {
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Inquiry</ATMPageHeading>
                 </div>
-                
-                    
-                
+
                 <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
                     {/*Table Header */}
                     <ATMTableHeader

@@ -6,8 +6,8 @@ import { FaRegHandshake } from 'react-icons/fa'
 import { CiBoxes } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
 import {
-    MdOutlineBorderColor,
     MdOutlineBatchPrediction,
+    MdOutlineBorderColor,
     MdPermMedia,
     MdWeb,
 } from 'react-icons/md'
@@ -101,6 +101,16 @@ export const navigation: NavItemType[] = [
         icon: MdOutlineBorderColor,
         path: '/orders',
     },
+    {
+        label: 'Call',
+        icon: MdOutlineBorderColor,
+        path: '/call',
+    },
+    // {
+    //     label: 'Batch',
+    //     icon: MdOutlineBatchPrediction,
+    //     path: '/batch',
+    // },
 
     {
         label: 'Configurations',

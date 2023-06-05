@@ -33,7 +33,7 @@ const WebsiteListing = ({ columns, rows, setShowDropdown }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'Website',
+            label: 'Websites',
         },
     ]
 
@@ -50,7 +50,7 @@ const WebsiteListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Website
+                    + Add
                 </button>
             </div>
 

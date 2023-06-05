@@ -1,24 +1,22 @@
-import { createSlice, Slice } from '@reduxjs/toolkit'
+import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
+import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
 
-export interface WebsitePageSliceStateType {
-    items: WebsitePageListResponse[] | []
-    allItems: WebsitePageListResponse[] | []
-    selectedItem: WebsitePageListResponse | null
+export interface InboundCallerSliceStateType {
+    items: InbooundCallerListResponse[] | []
+    selectedItem: InbooundCallerListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selecteWebsitePage: string
-    filterValue: any
+    selectedId: string
+    channelMgt: InbooundCallerListResponse[] | null
 }
 
-const initialState: WebsitePageSliceStateType = {
+const initialState: InboundCallerSliceStateType = {
     items: [],
-    allItems: [],
     selectedItem: null,
     totalItems: 0,
     isTableLoading: false,
@@ -26,25 +24,19 @@ const initialState: WebsitePageSliceStateType = {
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selecteWebsitePage: '',
-    filterValue: '',
+    selectedId: '',
+    channelMgt: null,
 }
 
-const websitePageSlice: Slice<WebsitePageSliceStateType> = createSlice({
-    name: 'websitePage',
+const channelManagementSlice: Slice<InboundCallerSliceStateType> = createSlice({
+    name: 'inboundCaller',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<WebsitePageListResponse[] | []>
+            action: PayloadAction<InbooundCallerListResponse[] | []>
         ) => {
             state.items = action.payload
-        },
-        setAllItems: (
-            state,
-            action: PayloadAction<WebsitePageListResponse[] | []>
-        ) => {
-            state.allItems = action.payload
         },
         setPage: (state, action: PayloadAction<number>) => {
             state.page = action.payload
@@ -72,32 +64,34 @@ const websitePageSlice: Slice<WebsitePageSliceStateType> = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setSelecteWebsite: (state, action: PayloadAction<string>) => {
-            state.selecteWebsitePage = action.payload
+        setSelectedId: (state, action: PayloadAction<string>) => {
+            state.selectedId = action.payload
         },
-        setSelectedWebsite: (
+        setSelectedItem: (
             state,
-            action: PayloadAction<WebsitePageListResponse | null>
+            action: PayloadAction<InbooundCallerListResponse | null>
         ) => {
             state.selectedItem = action.payload
         },
-        setFilterValue: (state, action: PayloadAction<string>) => {
-            state.filterValue = action.payload
+        setChannelMgt: (
+            state,
+            action: PayloadAction<InbooundCallerListResponse[]>
+        ) => {
+            state.channelMgt = action.payload
         },
     },
 })
 
 export const {
     setItems,
-    setAllItems,
     setPage,
     setRowsPerPage,
     setSearchValue,
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelecteWebsite,
-    setSelectedWebsite,
-    setFilterValue,
-} = websitePageSlice.actions
-export default websitePageSlice.reducer
+    setSelectedId,
+    setChannelMgt,
+    setSelectedItem,
+} = channelManagementSlice.actions
+export default channelManagementSlice.reducer

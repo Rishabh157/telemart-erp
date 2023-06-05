@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import ATMBreadCrumbs, {
+    BreadcrumbType,
+} from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -9,7 +12,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/ASRSlice'
+} from 'src/redux/slices/website/websiteSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
@@ -18,35 +21,44 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
+const InfluencerListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
+    const WebsiteState: any = useSelector((state: RootState) => state.website)
     const [selectedRows, setSelectedRows] = useState([])
-
-    const asrState: any = useSelector((state: RootState) => state.asr)
-
+    const { page, rowsPerPage, totalItems, searchValue } = WebsiteState
     const navigate = useNavigate()
-
-    const { page, rowsPerPage, searchValue, totalItems } = asrState
+    const breadcrumbs: BreadcrumbType[] = [
+        {
+            label: 'Website',
+            path: '/dashboard',
+        },
+        {
+            label: 'Influencer',
+        },
+    ]
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+        <div className="px-4 h-full overflow-auto pt-3 ">
+            <div className="h-[30px]">
+                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+            </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> ASR </ATMPageHeading>
+                <ATMPageHeading> Influencer Management </ATMPageHeading>
                 <button
-                    onClick={() => navigate('/asr/add')}
+                    type="button"
+                    onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    {' '}
-                    + Add ASR{' '}
+                    + Add
                 </button>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
-                    searchValue={searchValue}
                     page={page}
+                    searchValue={searchValue}
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
@@ -55,7 +67,6 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -69,10 +80,12 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
+                        extraClasses="h-full overflow-auto"
                     />
                 </div>
 
                 {/* Pagination */}
+
                 <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
@@ -83,14 +96,8 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
         </div>
     )
 }
 
-export default ASRListing
+export default InfluencerListing

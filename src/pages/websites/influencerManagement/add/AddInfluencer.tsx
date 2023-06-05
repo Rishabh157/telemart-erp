@@ -5,8 +5,9 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
-import { FormInitialValues } from './EditWebsitePageWrapper'
+import { FormInitialValues } from './AddInfluencerWrapper'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -16,20 +17,20 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: 'Website',
-        path: '/all-websites/website-Page',
+        label: 'Influencer',
+        path: '/all-websites/influencers-management',
     },
     {
-        label: 'Update',
+        label: 'Add ',
     },
 ]
 
-const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
+const AddInfluencer = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
         <div className="">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="p-4 flex flex-col gap-4  ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -37,7 +38,7 @@ const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Update Website Page </ATMPageHeading>
+                    <ATMPageHeading> Add </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -55,53 +56,54 @@ const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                                Update
+                                Submit
                             </button>
                         </div>
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow pt-2 pb-9  px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* Field1 */}
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name="pageUrl"
-                                value={values.pageUrl}
-                                label="Page Url"
-                                placeholder="Url"
+                                name="name"
+                                value={values.name}
+                                label="Name"
+                                placeholder=" Name"
                                 onChange={(e) =>
-                                    setFieldValue('pageUrl', e.target.value)
+                                    setFieldValue('name', e.target.value)
                                 }
                             />
 
-                            <ATMTextField
-                                name="pageName"
-                                value={values.pageName}
-                                label="Page Name "
-                                placeholder="Name"
-                                onChange={(e) =>
-                                    setFieldValue('pageName', e.target.value)
-                                }
+                            {/* Field 3 */}
+                            <ATMSelectSearchable
+                                options={[]}
+                                name="schemeId"
+                                value={values.schemeId}
+                                label="Scheme"
+                                onChange={(e) => setFieldValue('schemeId', e)}
                             />
-                            <ATMTextArea
-                                name="headerSpace"
-                                value={values.headerSpace}
-                                label="Subtitle Name"
-                                onChange={(e: any) =>
-                                    setFieldValue('headerSpace', e)
+                            <div className="mt-4">
+                                <ATMDatePicker
+                                    name="startDate"
+                                    value={values.startDate}
+                                    dateTimeFormat="MM/DD/YY ddd"
+                                    label="Start Date"
+                                    onChange={(newValue) =>
+                                        setFieldValue('startDate', newValue)
+                                    }
+                                />
+                            </div>
+                            <ATMDatePicker
+                                name="endDate"
+                                value={values.endDate}
+                                dateTimeFormat="MM/DD/YY ddd"
+                                label="End Date"
+                                onChange={(newValue) =>
+                                    setFieldValue('endDate', newValue)
                                 }
-                                minRows={4}
-                            />
-                            <ATMTextArea
-                                name="footerSpace"
-                                value={values.footerSpace}
-                                label="footer Space"
-                                onChange={(e: any) =>
-                                    setFieldValue('footerSpace', e)
-                                }
-                                minRows={4}
                             />
                         </div>
                     </div>
@@ -111,4 +113,4 @@ const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
     )
 }
 
-export default EditWebsitePage
+export default AddInfluencer
