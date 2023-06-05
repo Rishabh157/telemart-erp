@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { FormInitialValues } from '../../EditProductWrapper'
 import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
@@ -53,13 +53,13 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
 
                                     <div className="grid grid-cols-4 gap-4 gap-y-5">
                                         {/* Item Name */}
-                                        <ATMSelect
+                                        <ATMSelectSearchable
                                             name={`items[${itemIndex}].itemId`}
                                             value={itemId}
                                             onChange={(e) => {
                                                 setFieldValue(
                                                     `items[${itemIndex}].itemId`,
-                                                    e.target.value
+                                                    e
                                                 )
                                             }}
                                             size="small"
@@ -88,7 +88,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                                             }}
                                             label="Item Quantity"
                                             placeholder="Item Quantity"
-                                            className="shadow bg-white rounded"
+                                            className="shadow bg-white rounded mt-2"
                                         />
                                     </div>
                                 </div>
