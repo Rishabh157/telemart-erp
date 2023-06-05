@@ -4,16 +4,16 @@ export type ChannelManagementListResponse = {
     address: string
     phone: string
     email: string
-    district: string
+    districtId: string
     channelGroupId: string
     contactPerson: string
     mobile: string
-    country: string
-    language: string
-    channelCategory: string
+    countryId: string
+    languageId: string
+    channelCategoryId: string
     designation: string
     website: string
-    state: string
+    stateId: string
     paymentType: string
     isDeleted: boolean
     isActive: boolean
@@ -35,16 +35,16 @@ export type AddChannelManagement = {
     address: string
     phone: string
     email: string
-    district: string
+    districtId: string
     channelGroupId: string
     contactPerson: string
     mobile: string
-    country: string
-    language: string
-    channelCategory: string
+    countryId: string
+    languageId: string
+    channelCategoryId: string
     designation: string
     website: string
-    state: string
+    stateId: string
     paymentType: string
 }
 
@@ -55,16 +55,16 @@ export type UpdateChannelManagement = {
         address: string
         phone: string
         email: string
-        district: string
+        districtId: string
         channelGroupId: string
         contactPerson: string
         mobile: string
-        country: string
-        language: string
-        channelCategory: string
+        countryId: string
+        languageId: string
+        channelCategoryId: string
         designation: string
         website: string
-        state: string
+        stateId: string
         paymentType: string
     }
     id: string

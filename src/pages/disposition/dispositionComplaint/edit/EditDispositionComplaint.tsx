@@ -65,7 +65,7 @@ const EditDispositionCompliant = ({
                                         apiStatus ? 'opacity-50' : ''
                                     }`}
                                 >
-                                    Submit
+                                    Update
                                 </button>
                             </div>
                         </div>

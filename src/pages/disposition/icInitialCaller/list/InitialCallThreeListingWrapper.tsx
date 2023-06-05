@@ -70,6 +70,22 @@ const InitialCallThreeListingWrapper = () => {
                 <span> {row.initialCallName} </span>
             ),
         },
+        {
+            field: 'initialCallOneLabel',
+            headerName: 'Initial Call One',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InitialCallerThreeListResponse) => (
+                <span> {row.initialCallOneLabel} </span>
+            ),
+        },
+        {
+            field: 'initialCallTwoLabel',
+            headerName: 'Initial Call Two',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InitialCallerThreeListResponse) => (
+                <span> {row.initialCallTwoLabel} </span>
+            ),
+        },
 
         {
             field: 'actions',
