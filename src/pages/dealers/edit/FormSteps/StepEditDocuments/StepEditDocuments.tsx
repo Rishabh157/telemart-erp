@@ -128,8 +128,9 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
 
                                     case 'file-picker':
                                         return (
-                                            <>
-                                                <ATMFilePickerWrapper
+                                           
+                                            <div className="-mt-2">
+                                                   <ATMFilePickerWrapper
                                                     name={name}
                                                     key={name}
                                                     label={label}
@@ -141,13 +142,17 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                         )
                                                     }
                                                     selectedFile={values[name]}
+                                                    
                                                 />
+                                               
 
                                                 {offset &&
                                                     Array(offset)
                                                         .fill(null)
                                                         .map(() => <div></div>)}
-                                            </>
+                                                        
+                                            </div>
+
                                         )
 
                                     default:

@@ -22,12 +22,13 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
     const params = useParams()
     const dealerId: any = params.dealerId
     const dispatch = useDispatch<AppDispatch>()
-    const schemeState: any = useSelector((state: RootState) => state.scheme)
+    const schemeState: any = useSelector((state: RootState) => state.dealerScheme)
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, totalItems } = schemeState
+    console.log(page, rowsPerPage, searchValue, totalItems)
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
@@ -58,7 +59,9 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
                     }
                     isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
-                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    onSearch={(newValue) =>
+                        dispatch(setSearchValue(newValue))
+                    }
                 />
 
                 {/* Table */}

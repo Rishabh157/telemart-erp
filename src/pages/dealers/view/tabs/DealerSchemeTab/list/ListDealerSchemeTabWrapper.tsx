@@ -44,6 +44,8 @@ const ListDealerSchemeTabWrapper = () => {
         orderByValue: -1,
         isPaginationRequired: true,
     })
+
+
     const columns: columnTypes[] = [
         {
             field: 'schemeName',

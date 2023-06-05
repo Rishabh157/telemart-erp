@@ -22,12 +22,12 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const dealerId: any = params.dealerId
-    const schemeState: any = useSelector((state: RootState) => state.scheme)
+    const pincodeState: any = useSelector((state: RootState) => state.dealerPincode)
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } = schemeState
+    const { page, rowsPerPage, searchValue, totalItems } = pincodeState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">

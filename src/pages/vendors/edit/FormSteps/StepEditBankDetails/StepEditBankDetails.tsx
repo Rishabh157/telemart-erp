@@ -131,6 +131,7 @@ const StepEditBankDetails = ({
 
                                                                             case 'select':
                                                                                 return (
+                                                                                    <div className="-mt-2">
                                                                                     <ATMSelect
                                                                                         name={`bank_informations[${bankInformationIndex}].${name}`}
                                                                                         value={
@@ -161,6 +162,7 @@ const StepEditBankDetails = ({
                                                                                             isSubmitting
                                                                                         }
                                                                                     />
+                                                                                    </div>
                                                                                 )
 
                                                                             case 'file-picker':

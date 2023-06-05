@@ -20,7 +20,7 @@ const ListDealerPincodeTabWrapper = () => {
     //const [showDropdown, setShowDropdown] = useState(false);
     //const [currentId, setCurrentId] = useState("");
     const params = useParams()
-    const dealerId: any = params.dealerId
+    const dealerId: any = params.dealerId    
     const dealerPincodeState: any = useSelector(
         (state: RootState) => state.dealerPincode
     )
@@ -125,6 +125,8 @@ const ListDealerPincodeTabWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
+
+    console.log(data)
 
     //   const handleDelete = () => {
     //     setShowDropdown(false);

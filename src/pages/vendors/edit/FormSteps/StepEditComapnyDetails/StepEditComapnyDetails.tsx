@@ -55,6 +55,7 @@ const StepEditComapnyDetails = ({
 
                         case 'select':
                             return (
+                                <div className="-mt-2">
                                 <ATMSelect
                                     key={name}
                                     name={name}
@@ -72,6 +73,7 @@ const StepEditComapnyDetails = ({
                                     }
                                     isSubmitting={isSubmitting}
                                 />
+                                </div>
                             )
 
                         default:

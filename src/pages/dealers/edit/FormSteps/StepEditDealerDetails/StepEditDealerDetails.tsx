@@ -49,12 +49,13 @@ const StepEditDealerDetails = ({
 
                         case 'select':
                             return (
-                                <div key={name} className="relative mt-4">
+                                <div key={name} className="relative mt-2">
                                     <InputLabel className="mb-2">
                                         {' '}
                                         {label}{' '}
                                     </InputLabel>
                                     <FormControl fullWidth>
+                                    
                                         <Select
                                             name={name}
                                             value={values[name]}
@@ -86,6 +87,7 @@ const StepEditDealerDetails = ({
                                                 </MenuItem>
                                             ))}
                                         </Select>
+                                        
                                     </FormControl>
                                 </div>
                             )

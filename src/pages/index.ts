@@ -65,7 +65,8 @@ import ViewVendor from './vendors/view'
 import VendorActivityTabWrapper from './vendors/view/tabs/VendorActivityTab/VendorActivityTabWrapper'
 import VendorGeneralInformationTabWrapper from './vendors/view/tabs/VendorGeneralInformationTab/VendorGeneralInformationTabWrapper'
 import VendorWarehouseTabWrapper from './vendors/view/tabs/VendorWarehouseTab/VendorWarehouseTabWrapper'
-import VendorPurchaseOrderTabWrapper from './vendors/view/tabs/VendorPurchaseOrderTab/VendorPurchaseOrderTabWrapper'
+import VendorPurchaseOrderTabWrapper from './vendors/view/tabs/VendorPurchaseOrderTab/list/VendorPurchaseOrderTabWrapper'
+import AddPurchaseOrderTabWrapper from './vendors/view/tabs/VendorPurchaseOrderTab/add/AddPurchaseOrderTabWrapper'
 import AddWarehouseWrapper from './warehouses/add/AddWarehouseWrapper'
 import WarehousesListingWrapper from './warehouses/list/WarehousesListingWrapper'
 import ViewWarehouseWrapper from './warehouses/view/ViewWarehouseWrapper'
@@ -180,6 +181,7 @@ export {
     AddUserWrapper,
     AddVendorWrapper,
     VendorsListingWrapper,
+    AddPurchaseOrderTabWrapper,
     ViewVendor,
     VendorActivityTabWrapper,
     VendorGeneralInformationTabWrapper,

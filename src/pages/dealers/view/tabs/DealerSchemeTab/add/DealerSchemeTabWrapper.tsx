@@ -3,7 +3,8 @@ import { Formik } from 'formik'
 import { array, object, string } from 'yup'
 import AddDealerScheme from './AddDealerScheme'
 import { useAddDealerSchemeMutation } from 'src/services/DealerSchemeService'
-import { useGetSchemeQuery } from 'src/services/SchemeService'
+import { useGetSchemeQuery} from 'src/services/SchemeService'
+import {useGetAllDealerSchemeQuery } from 'src/services/DealerSchemeService'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -29,6 +30,8 @@ const DealerPinCodeTabWrapper = (props: Props) => {
 
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addDealerScheme] = useAddDealerSchemeMutation()
+
+    //const {data: allData, isLoading: allIsLoading, isFetching:AllIsFetching} = useGetAllDealerSchemeQuery();
 
     const {
         data: schemeData,
