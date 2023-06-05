@@ -95,10 +95,7 @@ const AddChannelManagement = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading>
-                        {' '}
-                        Add New Channel (Changes Area field)
-                    </ATMPageHeading>
+                    <ATMPageHeading>Add New Channel</ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -157,13 +154,6 @@ const AddChannelManagement = ({
                                     setFieldValue('channelCategory', value)
                                 }
                             />{' '}
-                            <ATMTextArea
-                                name="address"
-                                value={values.address}
-                                label="Address Name"
-                                placeholder="Address Name"
-                                onChange={(e) => setFieldValue('address', e)}
-                            />
                             <ATMTextField
                                 name="contactPerson"
                                 value={values.contactPerson}
@@ -272,6 +262,13 @@ const AddChannelManagement = ({
                                     setFieldValue('website', e.target.value)
                                 }
                             />{' '}
+                            <ATMTextArea
+                                name="address"
+                                value={values.address}
+                                label="Address Name"
+                                placeholder="Address Name"
+                                onChange={(e) => setFieldValue('address', e)}
+                            />
                         </div>
                     </div>
                 </div>

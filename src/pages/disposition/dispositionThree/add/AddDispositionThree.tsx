@@ -151,9 +151,9 @@ const AddDispositionThree = ({
                                 required
                                 isMulti={true}
                                 value={values.applicableCriteria}
-                                onChange={(e) =>
+                                onChange={(e) => {
                                     setFieldValue('applicableCriteria', e)
-                                }
+                                }}
                                 options={
                                     dropdownOptions.applicableCriteriaOptions
                                 }

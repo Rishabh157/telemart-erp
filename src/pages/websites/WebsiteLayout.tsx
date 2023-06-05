@@ -35,6 +35,11 @@ const websitesNavigation: NavItemType[] = [
         icon: RiPagesLine,
         path: '/all-websites/website-page',
     },
+    // {
+    //     label: 'Influencers Management',
+    //     icon: RiPagesLine,
+    //     path: '/all-websites/influencers-management'
+    // },
     {
         label: 'Websites Tags',
         icon: RiPagesLine,

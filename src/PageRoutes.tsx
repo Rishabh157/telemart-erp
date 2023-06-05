@@ -184,9 +184,7 @@ import EditDispositionComplaintWrappper from './pages/disposition/dispositionCom
 import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/list/InitialCallThreeListingWrapper'
 import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edit/EditInitialCallThreeWrapper'
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
-import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
-import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
-import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
+import InfluencerListingWrapper from './pages/websites/influencerManagement/list/InfluencerListingWrapper'
 import AddAssetsRequestWrapper from './pages/assets/assetsRequest/add/AddAssetsRequestWrapper'
 import AddAssetsRelocationWrapper from './pages/assets/assetsRelocation/add/AddAssetsRelocationWrapper'
 import AssetsRelocationWrapper from './pages/assets/assetsRelocation/list/AssetsRelocationWrapper'
@@ -195,6 +193,8 @@ import AssetsAllocationWrapper from './pages/assets/assetsAllocation/list/Assets
 import AddAssetsAllocationWrapper from './pages/assets/assetsAllocation/add/AddAssetsAllocationWrapper'
 
 import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
+import AddInfluencerWrapper from './pages/websites/influencerManagement/add/AddInfluencerWrapper'
+import CallListingWrapper from './pages/call/list/CallListingWrapper'
 import WebsiteTagListingWrapper from './pages/websites/website-tags/list/WebsiteTagListingWrapper'
 import AddWebsiteTagsWrapper from './pages/websites/website-tags/add/AddWebsiteTagsWrapper'
 import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsiteTagWrapper'
@@ -242,10 +242,6 @@ const PageRoutes = () => {
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
                     <Route path="/orders/add-order" element={<AddOrder />} />
-                    <Route
-                        path="/orders/view/:id"
-                        element={<OrderViewWrapper />}
-                    />
                     <Route
                         path="/dealers"
                         element={<DealersListingWrapper />}
@@ -838,14 +834,6 @@ const PageRoutes = () => {
                         element={<AddDispositionThreeWrappper />}
                     />
                     <Route
-                        path="dispositions/disposition-three/:id"
-                        element={<ViewDispositionThreeWrappper />}
-                    />
-                    <Route
-                        path="dispositions/initialCall-three/view/:id"
-                        element={<ViewInitialCallThreeWrappper />}
-                    />
-                    <Route
                         path="dispositions/disposition-three/edit/:id"
                         element={<EditDispositionThreeWrapper />}
                     />
@@ -883,6 +871,22 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
                     />
+                    {/* Website Blog route */}
+
+                    {/* start Influencer routing */}
+                    <Route
+                        path="all-websites/influencers-management"
+                        element={<InfluencerListingWrapper />}
+                    />
+                    <Route
+                        path="all-websites/influencers-management/add"
+                        element={<AddInfluencerWrapper />}
+                    />
+                    {/*end  Influencer routing */}
+
+                    {/* start call routing */}
+                    <Route path="/call" element={<CallListingWrapper />} />
+                    {/* end call routing */}
                     <Route path="batch" element={<BatchListingWrapper />} />
                     <Route
                         path="/all-websites/website-tags"

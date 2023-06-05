@@ -120,7 +120,7 @@ const EditChannelManagement = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow py-2 pb-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* FirstName */}
                             <ATMTextField
@@ -267,7 +267,14 @@ const EditChannelManagement = ({
                                 onChange={(e) =>
                                     setFieldValue('website', e.target.value)
                                 }
-                            />{' '}
+                            />
+                            <ATMTextArea
+                                name="address"
+                                value={values.address}
+                                label="Address Name"
+                                placeholder="Address Name"
+                                onChange={(e) => setFieldValue('address', e)}
+                            />
                         </div>
                     </div>
                 </div>
