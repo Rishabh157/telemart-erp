@@ -48,7 +48,7 @@ const InquiryView = ({ items }: Props) => {
 
                     <div className="grow px-3 ">
                         <div className="grid grid-cols-1">
-                            <div className="grow py-8 px-3">
+                            <div className="grow py-3 px-3">
                                 <div className=" flex col-span-2 text-lg pb-2 font-medium text-primary-main pl-2">
                                     General Information
                                 </div>
@@ -382,7 +382,7 @@ const InquiryView = ({ items }: Props) => {
                     </div>
 
                     {/*  Other Information  */}
-                    <div className="grow px-3 py-8">
+                    <div className="grow px-3 py-2">
                         <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
                             Other Information
                         </div>
