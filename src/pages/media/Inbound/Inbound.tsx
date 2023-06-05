@@ -957,7 +957,7 @@ const Inbound: React.FC<Props> = ({
                     </div>
                 </div>
                 <Divider />
-                <div className='w-full h-[10%] overflow-auto'>
+                <div className='w-full h-36 overflow-auto'>
                     <ATMTable
                         columns={column}
                         rows={rows}
@@ -966,7 +966,7 @@ const Inbound: React.FC<Props> = ({
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full overflow-auto"
+                        extraClasses="h-36 overflow-auto"
                     />
                 </div>
             </div>

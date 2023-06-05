@@ -29,7 +29,8 @@ const WebsitePageListingWrapper = () => {
         (state: RootState) => state.websitePage
     )
 
-    const { page, rowsPerPage, searchValue, items } = WebsitePageState
+    const { page, rowsPerPage, searchValue, items, filterValue } =
+        WebsitePageState
     const columns: columnTypes[] = [
         {
             field: 'pagerName',
@@ -109,8 +110,8 @@ const WebsitePageListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'websiteId',
+                value: filterValue,
             },
         ],
         dateFilter: {},

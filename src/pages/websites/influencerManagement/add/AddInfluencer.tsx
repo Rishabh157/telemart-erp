@@ -7,6 +7,7 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddInfluencerWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -29,7 +30,7 @@ const AddInfluencer = ({ formikProps, apiStatus }: Props) => {
 
     return (
         <div className="">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="p-4 flex flex-col gap-4  ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -43,10 +44,7 @@ const AddInfluencer = ({ formikProps, apiStatus }: Props) => {
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            {' '}
-                     Details
-                        </div>
+                        <div className="text-xl font-medium"> Details</div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -80,40 +78,38 @@ const AddInfluencer = ({ formikProps, apiStatus }: Props) => {
                             />
 
                             {/* Field 3 */}
-                            <ATMTextField
+                            <ATMSelectSearchable
+                                options={[]}
                                 name="schemeId"
                                 value={values.schemeId}
                                 label="Scheme"
-                                onChange={(e) =>
-                                    setFieldValue('schemeId', e.target.value)
+                                onChange={(e) => setFieldValue('schemeId', e)}
+                            />
+                            <div className="mt-4">
+                                <ATMDatePicker
+                                    name="startDate"
+                                    value={values.startDate}
+                                    dateTimeFormat="MM/DD/YY ddd"
+                                    label="Start Date"
+                                    onChange={(newValue) =>
+                                        setFieldValue('startDate', newValue)
+                                    }
+                                />
+                            </div>
+                            <ATMDatePicker
+                                name="endDate"
+                                value={values.endDate}
+                                dateTimeFormat="MM/DD/YY ddd"
+                                label="End Date"
+                                onChange={(newValue) =>
+                                    setFieldValue('endDate', newValue)
                                 }
                             />
-                              <ATMDatePicker
-                                        name="startDate"
-                                        value={values.startDate}
-                                        dateTimeFormat="MM/DD/YY ddd"
-                                        label="Start Date"
-                                        onChange={(newValue) =>
-                                            setFieldValue(
-                                                "startDate",newValue)}
-                             />
-                                <ATMDatePicker
-                                        name="endDate"
-                                        value={values.startDate}
-                                        dateTimeFormat="MM/DD/YY ddd"
-                                        label="End Date"
-                                        onChange={(newValue) =>
-                                            setFieldValue(
-                                                "endDate",newValue)}
-                             />
                         </div>
-                          
-                    </div>
-                        
                     </div>
                 </div>
             </div>
-        
+        </div>
     )
 }
 
