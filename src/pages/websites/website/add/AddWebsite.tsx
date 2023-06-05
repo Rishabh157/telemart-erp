@@ -20,7 +20,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/all-websites/Website',
     },
     {
-        label: 'Add Website',
+        label: 'Add',
     },
 ]
 
@@ -37,16 +37,13 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New produc </ATMPageHeading>
+                    <ATMPageHeading> Add </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            {' '}
-                            Website Details
-                        </div>
+                        <div className="text-xl font-medium"> Details</div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -64,7 +61,7 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow py-2 pb-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* Field1 */}
 
@@ -94,7 +91,7 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
                                 // minRows={4}
                                 name="gaTagIp"
                                 value={values.gaTagIp}
-                                label="Gatag IP Address"
+                                label="GA Tag"
                                 onChange={(e) =>
                                     setFieldValue('gaTagIp', e.target.value)
                                 }

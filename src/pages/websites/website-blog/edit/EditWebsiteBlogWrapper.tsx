@@ -44,12 +44,12 @@ const EditWebsiteBlogWrapper = (props: Props) => {
     }, [dispatch, data, isLoading, isFetching])
 
     const initialValues: FormInitialValues = {
-        blogName: selectedItem?.blogName,
-        blogTitle: selectedItem?.blogTitle,
+        blogName: selectedItem?.blogName || '',
+        blogTitle: selectedItem?.blogTitle || '',
         blogSubtitle: selectedItem?.blogSubtitle || '',
         image: selectedItem?.image || '',
         blogDescription: selectedItem?.blogDescription || '',
-        websiteId: selectedItem?.websiteId,
+        websiteId: selectedItem?.websiteId || '',
     }
 
     // Form Validation Schema

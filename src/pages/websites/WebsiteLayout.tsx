@@ -31,12 +31,12 @@ const websitesNavigation: NavItemType[] = [
         path: '/all-websites/website-blog',
     },
     {
-        label: 'Websites-page',
+        label: 'Websites Page',
         icon: RiPagesLine,
         path: '/all-websites/website-page',
     },
     {
-        label: 'Websites-Tags',
+        label: 'Websites Tags',
         icon: RiPagesLine,
         path: '/all-websites/website-tags',
     },

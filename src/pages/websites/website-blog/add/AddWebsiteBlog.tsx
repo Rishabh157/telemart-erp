@@ -61,7 +61,7 @@ const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow py-2 pb-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* Field1 */}
 
