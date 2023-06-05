@@ -16,7 +16,7 @@ export const inventoriesApi = apiSlice.injectEndpoints({
 
         //***** ADD *****/
         addInventories: builder.mutation({
-            invalidatesTags: ['inventories','Barcode'],
+            invalidatesTags: ['inventories', 'Barcode'],
             query: (body: AddInventory) => ({
                 url: '/inventories/add',
                 method: 'POST',
