@@ -3,6 +3,7 @@ import { HiDotsHorizontal } from 'react-icons/hi'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { renderorderStatus } from 'src/utils/renderOrderStatus'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
@@ -210,12 +211,12 @@ const InquiryListingWrapper = () => {
     return (
         <SideNavLayout>
             <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
-                <div className="h-[100px] ">
-                    <div className="mb-5 text-2xl text-slate-700 font-bold ">
-                        Inquiry
-                    </div>
-                    
+                <div className="flex justify-between items-center h-[45px]">
+                    <ATMPageHeading> Inquiry</ATMPageHeading>
                 </div>
+                
+                    
+                
                 <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
                     {/*Table Header */}
                     <ATMTableHeader
