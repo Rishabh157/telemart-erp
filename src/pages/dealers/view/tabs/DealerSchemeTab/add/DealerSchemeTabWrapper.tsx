@@ -76,25 +76,11 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         schemes: [],
     }
 
-
-
-    function hasAllElems(value: any) {
-        schemeItems.map((el:any) => {
-            if(el.id !== value.schemeId){
-                console.log(value)
-                return value;
-            }
-      })
-      
-    }
-      
-    const filtered = allItems.filter(hasAllElems);
-
-
-   
-    console.log(filtered)
-
-
+    console.log(allItems)
+    console.log(allItems.length, schemeItems.length)
+    
+    const output = schemeItems.filter(function (obj: any) { return allItems.schemeId !== obj.value; });
+    console.log(output)
 
 
     const validationSchema = object({
