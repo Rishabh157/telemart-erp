@@ -15,7 +15,7 @@ import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCa
 const CallListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
-    const [showDropdown, setShowDropdown] = useState(false)
+    const [, setShowDropdown] = useState(false)
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.inboundCaller
     )
