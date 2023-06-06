@@ -6,6 +6,9 @@ import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumb
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormikProps } from 'formik'
 import { FormInitialValues } from './AddProductWrapper'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -35,6 +38,7 @@ const AddProduct = ({
     apiStatus,
 }: Props) => {
     // Handle Previous
+    const dispatch = useDispatch<AppDispatch>()
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
@@ -74,7 +78,10 @@ const AddProduct = ({
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() => formikProps.handleSubmit()}
+                                onClick={() => {
+                                    dispatch(setFormSubmitting(true));
+                                    formikProps.handleSubmit()}
+                                }
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}

@@ -30,7 +30,7 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, totalItems } = schemeState
-    console.log(page, rowsPerPage, searchValue, totalItems)
+    
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">

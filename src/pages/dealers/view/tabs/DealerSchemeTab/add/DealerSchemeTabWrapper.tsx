@@ -4,7 +4,7 @@ import { array, object, string } from 'yup'
 import AddDealerScheme from './AddDealerScheme'
 import { useAddDealerSchemeMutation } from 'src/services/DealerSchemeService'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
-import { useGetAllDealerSchemeQuery } from 'src/services/DealerSchemeService'
+import { useGetDealerSchemeQuery } from 'src/services/DealerSchemeService'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -31,13 +31,27 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addDealerScheme] = useAddDealerSchemeMutation()
 
-    const { allItems}: any = useSelector(
-        (state: RootState) => state?.dealerScheme
-    )
+    // const { allItems}: any = useSelector(
+    //     (state: RootState) => state?.dealerScheme
+    // )
 
 
-    const {data: allData, isLoading: allIsLoading, isFetching:AllIsFetching} = useGetAllDealerSchemeQuery('');
-    //console.log(allData)
+    const {data: allData, isLoading: allIsLoading, isFetching:AllIsFetching} = useGetDealerSchemeQuery({
+        limit: 10,
+        searchValue: '',
+        params: ['schemeId', 'schemeName'],
+        page: 1,
+        filterBy: [
+            {
+                fieldName: 'dealerId',
+                value: dealerId,
+            },            
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: true,
+    })
 
     useEffect(() => {
         if(!allIsLoading && AllIsFetching){
@@ -70,17 +84,32 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         }
     })
 
+    //console.log(schemeOptions)
+
+    // const removeItems = allItems?.map((ele: any) => {
+    //     return {
+    //         label: ele.schemeName,
+    //         value: ele._id,
+    //     }
+    // })
+   
     const initialValues: FormInitialValues = {
         companyId: companyId,
         dealerId: dealerId,
         schemes: [],
-    }
-
-    console.log(allItems)
-    console.log(allItems.length, schemeItems.length)
+    }  
     
-    const output = schemeItems.filter(function (obj: any) { return allItems.schemeId !== obj.value; });
-    console.log(output)
+    // const output = schemeOptions?.filter(function (obj: any) { return !removeItems?.includes(obj.value) });
+    // const out = output?.map((el: any) => {
+    //     return el.schemeName;
+        
+    // })
+    // console.log(out)
+
+    // for (let key in schemeItems) {
+    //     delete schemeItems[key]._id;        
+    //   }
+    
 
 
     const validationSchema = object({

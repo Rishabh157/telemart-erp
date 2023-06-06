@@ -31,6 +31,7 @@ import {
 } from 'src/services/ProductService'
 import { setSelectedItem } from 'src/redux/slices/productSlice'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -325,6 +326,7 @@ const EditProductWrapper = () => {
                 })
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }
