@@ -246,7 +246,10 @@ const PageRoutes = () => {
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
-                    <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
+                    <Route
+                        path="/orders/view/:id"
+                        element={<OrderViewWrapper />}
+                    />
                     <Route path="/orders/add-order" element={<AddOrder />} />
                     <Route
                         path="/dealers"

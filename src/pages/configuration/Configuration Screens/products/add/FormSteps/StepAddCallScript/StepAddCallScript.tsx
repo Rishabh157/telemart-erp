@@ -68,7 +68,6 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
                                                     newValue
                                                 )
                                             }
-                                            
                                         />
                                     </div>
                                     <div className="grid grid-cols-4 gap-4 gap-y-5 my-3">

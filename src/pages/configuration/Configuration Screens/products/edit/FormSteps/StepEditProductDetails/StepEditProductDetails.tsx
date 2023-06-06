@@ -19,7 +19,6 @@ type Props = {
     dropdownOptions: DropdownOptions
 }
 
-
 const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
 

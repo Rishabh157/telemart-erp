@@ -21,7 +21,6 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 
-
 const ProductsListingWrapper = () => {
     const productState: any = useSelector((state: RootState) => state.products)
     const { page, rowsPerPage, searchValue, items } = productState
@@ -147,7 +146,7 @@ const ProductsListingWrapper = () => {
             dispatch(setIsTableLoading(false))
             dispatch(setItems(data?.data || []))
             dispatch(setTotalItems(data?.totalItem || 4))
-        } else {            
+        } else {
             dispatch(setIsTableLoading(true))
         }
 

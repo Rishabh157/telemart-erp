@@ -79,9 +79,9 @@ const AddProduct = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => {
-                                    dispatch(setFormSubmitting(true));
-                                    formikProps.handleSubmit()}
-                                }
+                                    dispatch(setFormSubmitting(true))
+                                    formikProps.handleSubmit()
+                                }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}

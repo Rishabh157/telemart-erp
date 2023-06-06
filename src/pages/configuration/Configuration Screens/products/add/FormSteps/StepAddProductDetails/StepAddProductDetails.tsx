@@ -63,7 +63,6 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                         onChange={(e) => setFieldValue('product_category', e)}
                         label="Product Category"
                         options={dropdownOptions.productCategoryOPtions}
-                        
                     />
                 </div>
 
@@ -77,7 +76,6 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                         }
                         label="Product Sub Category"
                         options={dropdownOptions.productSubCategoryOPtions}
-                        
                     />
                 </div>
 
@@ -89,7 +87,6 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                         onChange={(e) => setFieldValue('productGroup', e)}
                         label="Product Group"
                         options={dropdownOptions.productGroupOPtions}
-                        
                     />
                 </div>
 
