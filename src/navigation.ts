@@ -87,6 +87,11 @@ export const navigation: NavItemType[] = [
         path: '/scheme',
     },
     {
+        label: 'Inquiry',
+        icon: MdOutlineBorderColor,
+        path: '/inquiry',
+    },
+    {
         label: 'Batch',
         icon: MdOutlineBatchPrediction,
         path: '/batch',

@@ -259,9 +259,9 @@ const AddProductWrapper = () => {
                 addProduct({
                     productCode: values.product_code,
                     productName: values.product_name,
-                    productCategory: values.product_category,
-                    productSubCategory: values.product_sub_category,
-                    productGroup: values.productGroup,
+                    productCategoryId: values.product_category,
+                    productSubCategoryId: values.product_sub_category,
+                    productGroupId: values.productGroup,
                     productWeight: Number(values.product_weight),
                     dimension: {
                         height: Number(values.dimensions.height),

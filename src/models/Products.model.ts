@@ -1,9 +1,9 @@
 export type ProductsListResponse = {
     productCode: string
     productName: string
-    productCategory: string
-    productSubCategory: string
-    productGroup: string
+    productCategoryId: string
+    productSubCategoryId: string
+    productGroupId: string
     productWeight: number
     dimension: {
         height: number
@@ -52,9 +52,9 @@ export type ProductsListResponse = {
 export type AddProducts = {
     productCode: string
     productName: string
-    productCategory: string
-    productSubCategory: string
-    productGroup: string
+    productCategoryId: string
+    productSubCategoryId: string
+    productGroupId: string
     productWeight: number
     dimension: {
         height: number
@@ -88,9 +88,9 @@ export type UpdateProducts = {
     body: {
         productCode: string
         productName: string
-        productCategory: string
-        productSubCategory: string
-        productGroup: string
+        productCategoryId: string
+        productSubCategoryId: string
+        productGroupId: string
         productWeight: number
         dimension: {
             height: number
