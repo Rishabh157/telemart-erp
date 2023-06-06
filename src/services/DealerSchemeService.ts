@@ -14,6 +14,16 @@ export const dealerSchemeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET ALL DATA *****/
+        getAllDealerScheme: builder.query({
+            providesTags: ['dealerScheme'],
+            query: () => ({
+                url: '/dealer-scheme',
+                method: 'GET',
+                // body,
+            }),
+        }),
+
         //***** ADD *****/
         addDealerScheme: builder.mutation({
             invalidatesTags: ['dealerScheme'],
@@ -39,6 +49,7 @@ export const dealerSchemeApi = apiSlice.injectEndpoints({
 
 export const {
     useGetDealerSchemeQuery,
+    useGetAllDealerSchemeQuery,
     useAddDealerSchemeMutation,
     useUpdateDealerSchemeMutation,
 } = dealerSchemeApi

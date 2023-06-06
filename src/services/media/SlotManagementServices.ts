@@ -48,6 +48,14 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+        FileUploader: builder.mutation({
+            invalidatesTags: [''],
+            query: (body: any) => ({
+                url: `/file-manager/add`,
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 
@@ -57,4 +65,5 @@ export const {
     useUpdateSlotMutation,
     useGetSlotMangementByIdQuery,
     useDeleteSlotMangementMutation,
+    useFileUploaderMutation,
 } = slotManagementApi

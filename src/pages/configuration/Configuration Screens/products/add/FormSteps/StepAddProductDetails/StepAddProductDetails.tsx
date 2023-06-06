@@ -5,6 +5,8 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { FormInitialValues } from '../../AddProductWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 type DropdownOptions = {
     productSubCategoryOPtions: SelectOption[]
@@ -20,8 +22,12 @@ type Props = {
 const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
 
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
+
     return (
-        <div className="py-4 px-7 flex flex-col gap-5">
+        <div className="px-7 flex flex-col gap-5">
             <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4 gap-y-5">
                 {/* Product Code */}
                 <ATMTextField
@@ -33,6 +39,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     label="Product Code"
                     placeholder="Product Code"
                     className="shadow bg-white rounded"
+                    isSubmitting={isSubmitting}
                 />
 
                 {/* Product Name */}
@@ -45,6 +52,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     label="Product Name"
                     placeholder="Product Name"
                     className="shadow bg-white rounded"
+                    isSubmitting={isSubmitting}
                 />
 
                 {/* Product Category */}
@@ -75,6 +83,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                 <div className="-mt-2">
                     <ATMSelectSearchable
                         name="productGroup"
+                        required
                         value={values.productGroup}
                         onChange={(e) => setFieldValue('productGroup', e)}
                         label="Product Group"
@@ -95,6 +104,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     label="Product Weight (in gms)"
                     placeholder="Product Weight"
                     className="shadow bg-white rounded"
+                    isSubmitting={isSubmitting}
                 />
 
                 {/* Dimensions */}
@@ -103,7 +113,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                         {' '}
                         Dimensions (in mm)
                     </label>
-                    <div className="flex gap-2 mt-1 mb-6">
+                    <div className="flex gap-2 -mt-2 mb-6">
                         {/* Height */}
                         <ATMTextField
                             name="dimensions.height"
@@ -119,6 +129,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             }}
                             placeholder="H"
                             className="shadow bg-white rounded"
+                            isSubmitting={isSubmitting}
                         />
 
                         {/* Weight */}
@@ -136,6 +147,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             }}
                             placeholder="W"
                             className="shadow bg-white rounded"
+                            isSubmitting={isSubmitting}
                         />
 
                         {/* Depth */}
@@ -153,13 +165,14 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             }}
                             placeholder="D"
                             className="shadow bg-white rounded"
+                            isSubmitting={isSubmitting}
                         />
                     </div>
                 </div>
             </div>
 
             {/* Description */}
-            <div className="-mt-6">
+            <div className="-mt-6 mb-10">
                 <ATMTextArea
                     name="description"
                     value={values.description}
@@ -170,6 +183,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     placeholder="Description"
                     className="shadow bg-white rounded"
                     minRows={3}
+                    isSubmitting={isSubmitting}
                 />
             </div>
         </div>

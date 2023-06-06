@@ -50,22 +50,24 @@ const StepAddComapnyDetails = ({
 
                         case 'select':
                             return (
-                                <ATMSelect
-                                    key={index}
-                                    name={name}
-                                    value={values[name]}
-                                    onChange={(e) => {
-                                        setFieldValue(name, e.target.value)
-                                    }}
-                                    size="small"
-                                    label={label}
-                                    options={
-                                        dropdownOptions[
-                                            field.optionAccessKey ||
-                                                'companyTypeOptions'
-                                        ]
-                                    }
-                                />
+                                <div className="-mt-2">
+                                    <ATMSelect
+                                        key={index}
+                                        name={name}
+                                        value={values[name]}
+                                        onChange={(e) => {
+                                            setFieldValue(name, e.target.value)
+                                        }}
+                                        size="small"
+                                        label={label}
+                                        options={
+                                            dropdownOptions[
+                                                field.optionAccessKey ||
+                                                    'companyTypeOptions'
+                                            ]
+                                        }
+                                    />
+                                </div>
                             )
 
                         default:

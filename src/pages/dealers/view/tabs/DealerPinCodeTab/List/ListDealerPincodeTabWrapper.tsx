@@ -126,6 +126,8 @@ const ListDealerPincodeTabWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
 
+    console.log(data)
+
     //   const handleDelete = () => {
     //     setShowDropdown(false);
     //     deleteScheme(currentId).then((res: any) => {

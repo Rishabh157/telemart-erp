@@ -27,6 +27,10 @@ type FormInitialValues = {
     runYoutubeLink: string
     runStatus: boolean
     run: boolean
+    showOk: boolean
+    slotRunImage: string
+    slotRunVideo: string
+    reasonNotShow: string | null
     runStartTime: string
     runEndTime: string
     runRemark: string
@@ -77,6 +81,10 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         runYoutubeLink: selectedItems?.runYoutubeLink || '',
         runStatus: selectedItems?.runStatus || false,
         run: selectedItems?.run || false,
+        slotRunImage: selectedItems?.slotRunImage || '',
+        slotRunVideo: selectedItems?.slotRunVideo || '',
+        showOk: selectedItems?.showOk || true,
+        reasonNotShow: selectedItems?.reasonNotShow || '',
         runStartTime: selectedItems?.runStartTime || '',
         runEndTime: selectedItems?.runEndTime || '',
         runRemark: selectedItems?.runRemark || '',
@@ -112,8 +120,12 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     runYoutubeLink: values?.runYoutubeLink || '',
                     runStatus: newRunStatus,
                     run: values?.run,
-                    runStartTime: values?.run ? values?.runStartTime : '',
-                    runEndTime: values?.run ? values?.runEndTime : '',
+                    slotRunImage: values?.slotRunImage || '',
+                    slotRunVideo: values?.slotRunVideo || '',
+                    showOk: values?.showOk || true,
+                    reasonNotShow: values?.reasonNotShow || null,
+                    runStartTime: values?.runStartTime || '',
+                    runEndTime: values?.runEndTime || '',
                     runRemark: values?.runRemark,
                     companyId: values?.companyId,
                 },

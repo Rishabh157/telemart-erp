@@ -29,6 +29,7 @@ export type FormInitialValues = {
         startTime: string
         endTime: string
     }[]
+
     tapeName: string
     channelName: string
     channelTrp: string
@@ -156,6 +157,10 @@ const AddSlotManagementWrapper = () => {
             channelSlots: values.channelSlot,
             runYoutubeLink: '',
             run: false,
+            showOk: false,
+            slotRunImage: '',
+            slotRunVideo: '',
+            reasonNotShow: null,
             runStartTime: '',
             runEndTime: '',
             runRemark: '',

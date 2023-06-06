@@ -86,6 +86,7 @@ import {
     AddUserWrapper,
     AddVendorWrapper,
     VendorsListingWrapper,
+    AddPurchaseOrderTabWrapper,
     ViewVendor,
     VendorActivityTabWrapper,
     VendorGeneralInformationTabWrapper,
@@ -245,7 +246,10 @@ const PageRoutes = () => {
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
-                    <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
+                    <Route
+                        path="/orders/view/:id"
+                        element={<OrderViewWrapper />}
+                    />
                     <Route path="/orders/add-order" element={<AddOrder />} />
                     <Route
                         path="/dealers"
@@ -281,6 +285,10 @@ const PageRoutes = () => {
                         <Route
                             path="purchase-order"
                             element={<VendorPurchaseOrderTabWrapper />}
+                        />
+                        <Route
+                            path="purchase-order/add"
+                            element={<AddPurchaseOrderTabWrapper />}
                         />
                         <Route
                             path="warehouse"
@@ -843,7 +851,7 @@ const PageRoutes = () => {
                         element={<EditDispositionThreeWrapper />}
                     />
                     <Route
-                        path="dispositions/disposition-three/view/:id"
+                        path="dispositions/disposition-three/:id"
                         element={<ViewDispositionThreeWrappper />}
                     />
                     <Route
