@@ -14,6 +14,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
     useGetDealerSchemeQuery,
     useDeleteDealerSchemeMutation,
+    useDeactiveDealerSchemeMutation,
 } from 'src/services/DealerSchemeService'
 import { RootState } from 'src/redux/store'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
@@ -66,6 +67,23 @@ const ListDealerSchemeTabWrapper = () => {
             },
         },
         {
+            field: 'isActive',
+            headerName: 'Status',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: DealersSchemeListResponse) => {
+                return (
+                    <span>
+                        {' '}
+                        {row.isActive ? (
+                            <span className="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
+                        ) : (
+                            <span className="inline-block w-3 h-3 bg-red-500 rounded-full"></span>
+                        )}{' '}
+                    </span>
+                )
+            },
+        },
+        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
@@ -107,6 +125,23 @@ const ListDealerSchemeTabWrapper = () => {
                             >
                                 Delete
                             </button>
+                            <button
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive Scheme',
+                                        text: 'Do you want to Deactive',
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive()
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                {row.isActive ? 'Deactive' : 'Active'}
+                            </button>
                         </div>
                     )}
                 </div>
@@ -127,6 +162,7 @@ const ListDealerSchemeTabWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
     const [deleteDealerSchemeCall] = useDeleteDealerSchemeMutation()
+    const [deactiveDealerScheme] = useDeactiveDealerSchemeMutation()
 
     const handleDelete = () => {
         setShowDropdown(false)
@@ -146,6 +182,23 @@ const ListDealerSchemeTabWrapper = () => {
         })
     }
 
+    const handleDeactive = () => {
+        setShowDropdown(false)
+        deactiveDealerScheme(currentId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Scheme Deactive successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     return (
         <>
             <DealerSchemeListing columns={columns} rows={items} />
