@@ -54,8 +54,8 @@ const CompetitorManagementListingWrapper = () => {
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {row.productName} </span>
             ),
-        },       
-       
+        },
+
         {
             field: 'price',
             headerName: 'Price',

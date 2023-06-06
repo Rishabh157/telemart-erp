@@ -5,7 +5,7 @@ export type CompetitorManagementListResponse = {
     websiteLink: string
     youtubeLink: string
     schemePrice: string
-    whatsappNo:string
+    whatsappNo: string
     companyId: string
     count: number
     _id: string
@@ -23,7 +23,7 @@ export type AddCompetitorManagement = {
     websiteLink: string
     youtubeLink: string
     schemePrice: string
-    whatsappNumber:string
+    whatsappNumber: string
     channelNameId: string
     startTime: string
     endTime: string
@@ -38,7 +38,7 @@ export type UpdateCompetitorManagement = {
         websiteLink: string
         youtubeLink: string
         schemePrice: string
-        whatsappNumber:string
+        whatsappNumber: string
         channelNameId: string
         startTime: string
         endTime: string

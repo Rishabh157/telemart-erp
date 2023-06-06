@@ -9,8 +9,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useAddcompetitorMutation } from 'src/services/media/CompetitorManagementServices'
 import MediaLayout from '../../MediaLayout'
-import {useGetPaginationchannelQuery} from 'src/services/media/ChannelManagementServices'
-import {setChannelMgt} from 'src/redux/slices/media/channelManagementSlice'
+import { useGetPaginationchannelQuery } from 'src/services/media/ChannelManagementServices'
+import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
 
 type Props = {}
@@ -23,8 +23,8 @@ export type FormInitialValues = {
     youtubeLink: string
     whatsappNumber: string
     schemePrice: string
-    channelNameId: string,
-    startTime: string,
+    channelNameId: string
+    startTime: string
     endTime: string
 }
 
@@ -36,9 +36,11 @@ const AddCompetitorWrapper = (props: Props) => {
     const [addCompetitor] = useAddcompetitorMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { channelMgt } = useSelector((state: RootState) => state?.channelManagement)
+    const { channelMgt } = useSelector(
+        (state: RootState) => state?.channelManagement
+    )
 
-    const {data, isLoading, isFetching} = useGetPaginationchannelQuery({
+    const { data, isLoading, isFetching } = useGetPaginationchannelQuery({
         limit: 10,
         searchValue: '',
         params: ['channelName'],
@@ -56,20 +58,20 @@ const AddCompetitorWrapper = (props: Props) => {
     })
 
     useEffect(() => {
-        if(!isLoading && !isFetching){
+        if (!isLoading && !isFetching) {
             dispatch(setChannelMgt(data?.data || []))
         }
     }, [dispatch, data, isLoading, isFetching])
-    
+
     const dropdownOptions = {
         channelOptions: channelMgt?.map(
             (channel: ChannelManagementListResponse) => {
-            return{
-                label: channel.channelName,
-                value: channel._id,
+                return {
+                    label: channel.channelName,
+                    value: channel._id,
+                }
             }
-        }
-        ),    
+        ),
     }
 
     const initialValues: FormInitialValues = {
@@ -82,8 +84,7 @@ const AddCompetitorWrapper = (props: Props) => {
         schemePrice: '0',
         channelNameId: '',
         startTime: '',
-        endTime: ''
-
+        endTime: '',
     }
 
     // Form Validation Schema
@@ -98,7 +99,7 @@ const AddCompetitorWrapper = (props: Props) => {
             .positive(' Must be a positive number.'),
         channelNameId: string(),
         startTime: string(),
-        endTime: string()
+        endTime: string(),
     })
 
     //    Form Submit Handler

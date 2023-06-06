@@ -10,7 +10,6 @@ import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMT
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
-
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -34,7 +33,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
     dropdownOptions = {
         ...dropdownOptions,
     }
-    const { values, setFieldValue } = formikProps  
+    const { values, setFieldValue } = formikProps
 
     return (
         <div className="">
@@ -46,16 +45,13 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add  </ATMPageHeading>
+                    <ATMPageHeading> Add </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            {' '}
-                             Details
-                        </div>
+                        <div className="text-xl font-medium"> Details</div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -67,7 +63,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                               Submit
+                                Submit
                             </button>
                         </div>
                     </div>
@@ -90,28 +86,22 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     )
                                 }
                             />
-                             <ATMTextField
+                            <ATMTextField
                                 name="companyName"
                                 value={values.companyName}
                                 label="Company Name"
                                 placeholder="Company Name"
                                 onChange={(e) =>
-                                    setFieldValue(
-                                        'companyName',
-                                        e.target.value
-                                    )
+                                    setFieldValue('companyName', e.target.value)
                                 }
                             />
-                             <ATMTextField
+                            <ATMTextField
                                 name="productName"
                                 value={values.productName}
                                 label="Product Name"
                                 placeholder="Product Name"
                                 onChange={(e) =>
-                                    setFieldValue(
-                                        'productName',
-                                        e.target.value
-                                    )
+                                    setFieldValue('productName', e.target.value)
                                 }
                             />
                             <ATMSelectSearchable
@@ -123,41 +113,32 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 options={dropdownOptions.channelOptions}
                                 label="Channel Name"
                             />
-                             <ATMTextField
+                            <ATMTextField
                                 name="schemePrice"
                                 type={'text'}
                                 value={values.schemePrice}
                                 label="Scheme Price"
                                 placeholder="Scheme Price"
                                 onChange={(e) =>
-                                    setFieldValue(
-                                        'schemePrice',
-                                        e.target.value
-                                    )
+                                    setFieldValue('schemePrice', e.target.value)
                                 }
                             />
-                             <ATMTextField
+                            <ATMTextField
                                 name="websiteLink"
                                 value={values.websiteLink}
                                 label="Website Link"
                                 placeholder="Website Link"
                                 onChange={(e) =>
-                                    setFieldValue(
-                                        'websiteLink',
-                                        e.target.value
-                                    )
+                                    setFieldValue('websiteLink', e.target.value)
                                 }
                             />
-                             <ATMTextField
+                            <ATMTextField
                                 name="youtubeLink"
                                 value={values.youtubeLink}
                                 label="Youtube Link"
                                 placeholder="Youtube Link"
                                 onChange={(e) =>
-                                    setFieldValue(
-                                        'youtubeLink',
-                                        e.target.value
-                                    )
+                                    setFieldValue('youtubeLink', e.target.value)
                                 }
                             />
 
@@ -174,34 +155,27 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 }
                             />
 
-                                <div className="mt-2">
-                                    <ATMTimePicker
-                                        name={`startTime`}
-                                        value={values.startTime}
-                                        label="Start Time"
-                                        onChange={(newValue) => {
-                                            setFieldValue(
-                                                'startTime',
-                                                newValue
-                                            )
-                                        }}
-                                    />
-                                </div>
-                                <div className="mt-2">
-                                    <ATMTimePicker
-                                        name={`endTime`}
-                                        value={values.endTime}
-                                        label="End Time"
-                                        onChange={(newValue) => {
-                                            setFieldValue(
-                                                'endTime',
-                                                newValue
-                                            )                                            
-                                        }}
-                                    />
-                                </div>
+                            <div className="mt-2">
+                                <ATMTimePicker
+                                    name={`startTime`}
+                                    value={values.startTime}
+                                    label="Start Time"
+                                    onChange={(newValue) => {
+                                        setFieldValue('startTime', newValue)
+                                    }}
+                                />
+                            </div>
+                            <div className="mt-2">
+                                <ATMTimePicker
+                                    name={`endTime`}
+                                    value={values.endTime}
+                                    label="End Time"
+                                    onChange={(newValue) => {
+                                        setFieldValue('endTime', newValue)
+                                    }}
+                                />
+                            </div>
                         </div>
-                    
                     </div>
                 </div>
             </div>
