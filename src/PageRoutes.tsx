@@ -861,7 +861,7 @@ const PageRoutes = () => {
                         element={<EditDispositionThreeWrapper />}
                     />
                     <Route
-                        path="dispositions/disposition-three/view/:id"
+                        path="dispositions/disposition-three/:id"
                         element={<ViewDispositionThreeWrappper />}
                     />
                     <Route

@@ -4,6 +4,10 @@ export type DispositionThreeListResponse = {
     dispostionTwoLabel: string
     dispositionOneId: string
     dispositionTwoId: string
+    whatsApp: string
+    smsType: string
+    emailType: string
+    priority: string
     companyId: string
     isActive: boolean
     isDeleted: boolean
@@ -17,8 +21,9 @@ export type AddDispositionThree = {
     dispositionName: string
     dispositionOneId: string
     dispositionTwoId: string
-    smsType: string
-    emailType: string
+    smsType: string | null
+    emailType: string | null
+    whatsApp: string | null
     priority: string
     applicableCriteria: string[]
     companyId: string
@@ -29,8 +34,9 @@ export type UpdateDispositionThree = {
         dispositionName: string
         dispositionOneId: string
         dispositionTwoId: string
-        smsType: string
-        emailType: string
+        smsType: string | null
+        emailType: string | null
+        whatsApp: string | null
         priority: string
         applicableCriteria: string[]
         companyId: string
