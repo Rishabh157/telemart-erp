@@ -24,7 +24,7 @@ type Props = {
 const BatchListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [selectedRows, setSelectedRows] = useState([])
-    const [showDropdown, setShowDropdown] = useState(false)
+    // const [showDropdown, setShowDropdown] = useState(false)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addBatch] = useAddBatchMutation()
 
@@ -62,9 +62,8 @@ const BatchListing = ({ columns, rows }: Props) => {
                             text: 'Do you want to Add Batch ?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? submit()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? submit() : ''
+                                // : setShowDropdown(false)
                             },
                         })
                     }
@@ -103,7 +102,7 @@ const BatchListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        setShowDropdown={setShowDropdown}
+                        // setShowDropdown={setShowDropdown}
                     />
                 </div>
 

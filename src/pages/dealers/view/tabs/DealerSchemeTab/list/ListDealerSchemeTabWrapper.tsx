@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { DealersSchemeListResponse } from 'src/models/DealerScheme.model'
@@ -10,15 +10,18 @@ import {
 } from 'src/redux/slices/dealerSchemeSlice'
 import { AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
-//import { showToast } from "src/utils";
-import { useParams } from 'react-router-dom'
-//import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
-import { useGetDealerSchemeQuery } from 'src/services/DealerSchemeService'
+import { useNavigate, useParams } from 'react-router-dom'
+import {
+    useGetDealerSchemeQuery,
+    useDeleteDealerSchemeMutation,
+} from 'src/services/DealerSchemeService'
 import { RootState } from 'src/redux/store'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
 
 const ListDealerSchemeTabWrapper = () => {
-    //const [showDropdown, setShowDropdown] = useState(false);
-    //const [currentId, setCurrentId] = useState("");
+    const [showDropdown, setShowDropdown] = useState(false)
+    const [currentId, setCurrentId] = useState('')
     const params = useParams()
     const dealerId: any = params.dealerId
     const dealerSchemeState: any = useSelector(
@@ -27,7 +30,7 @@ const ListDealerSchemeTabWrapper = () => {
     const { page, rowsPerPage, items, searchValue } = dealerSchemeState
 
     const dispatch = useDispatch<AppDispatch>()
-    //const navigate = useNavigate();
+    const navigate = useNavigate()
     const { data, isFetching, isLoading } = useGetDealerSchemeQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -70,43 +73,42 @@ const ListDealerSchemeTabWrapper = () => {
                 <div className="relative">
                     <button
                         onClick={() => {
-                            //setShowDropdown(!showDropdown);
-                            //setCurrentId(row?._id);
+                            setShowDropdown(!showDropdown)
+                            setCurrentId(row?._id)
                         }}
                         className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
                     >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />
                     </button>
-                    {/* {showDropdown && currentId === row?._id && (
-            <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-              <button
-                onClick={() => {
-                  navigate(`/scheme/${currentId}`);
-                }}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => {
-                  showConfirmationDialog({
-                    title: "Delete Scheme",
-                    text: "Do you want to delete",
-                    showCancelButton: true,
-                    next: (res) => {
-                      return res.isConfirmed
-                        ? handleDelete()
-                        : setShowDropdown(false);
-                    },
-                  });
-                }}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              >
-                Delete
-              </button>
-            </div>
-          )} */}
+                    {showDropdown && currentId === row?._id && (
+                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                            <button
+                                onClick={() => {
+                                    navigate(`/scheme/${currentId}`)
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Edit
+                            </button>
+                            <button
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Delete Scheme',
+                                        text: 'Do you want to delete',
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDelete()
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    )}
                 </div>
             ),
             align: 'end',
@@ -124,21 +126,25 @@ const ListDealerSchemeTabWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
+    const [deleteDealerSchemeCall] = useDeleteDealerSchemeMutation()
 
-    //   const handleDelete = () => {
-    //     setShowDropdown(false);
-    //     deleteScheme(currentId).then((res: any) => {
-    //       if ("data" in res) {
-    //         if (res?.data?.status) {
-    //           showToast("success", "Scheme deleted successfully!");
-    //         } else {
-    //           showToast("error", res?.data?.message);
-    //         }
-    //       } else {
-    //         showToast("error", "Something went wrong, Please try again later");
-    //       }
-    //     });
-    //   };
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteDealerSchemeCall(currentId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Scheme deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
 
     return (
         <>

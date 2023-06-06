@@ -44,6 +44,17 @@ export const dealerSchemeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        //***** delete *****/
+        deleteDealerScheme: builder.mutation({
+            invalidatesTags: ['dealerScheme'],
+            query: (id: string) => (
+                {
+
+                    url: `/dealer-scheme/${id}`,
+                    method: 'DELETE',
+
+                }),
+        }),
     }),
 })
 
@@ -52,4 +63,5 @@ export const {
     useGetAllDealerSchemeQuery,
     useAddDealerSchemeMutation,
     useUpdateDealerSchemeMutation,
+    useDeleteDealerSchemeMutation
 } = dealerSchemeApi
