@@ -64,7 +64,7 @@ const BatchListing = ({ columns, rows }: Props) => {
                             next: (res: any) => {
                                 return res.isConfirmed
                                     ? submit()
-                                    : setShowDropdown(false)
+                                    : setShowDropdown(!showDropdown)
                             },
                         })
                     }

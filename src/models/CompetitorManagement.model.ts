@@ -23,7 +23,10 @@ export type AddCompetitorManagement = {
     websiteLink: string
     youtubeLink: string
     schemePrice: string
-    whatsappNo:string
+    whatsappNumber:string
+    channelNameId: string
+    startTime: string
+    endTime: string
     companyId: string
 }
 
@@ -35,7 +38,10 @@ export type UpdateCompetitorManagement = {
         websiteLink: string
         youtubeLink: string
         schemePrice: string
-        whatsappNo:string
+        whatsappNumber:string
+        channelNameId: string
+        startTime: string
+        endTime: string
         companyId: string
     }
     id: string

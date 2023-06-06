@@ -6,10 +6,17 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddCompetitorWrapper'
+import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+    dropdownOptions: {
+        channelOptions: SelectOption[]
+    }
 }
 
 // Breadcrumbs
@@ -23,8 +30,11 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddCompetitor = ({ formikProps, apiStatus }: Props) => {
-    const { values, setFieldValue } = formikProps
+const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
+    dropdownOptions = {
+        ...dropdownOptions,
+    }
+    const { values, setFieldValue } = formikProps  
 
     return (
         <div className="">
@@ -104,6 +114,15 @@ const AddCompetitor = ({ formikProps, apiStatus }: Props) => {
                                     )
                                 }
                             />
+                            <ATMSelectSearchable
+                                name="channelNameId"
+                                value={values.channelNameId}
+                                onChange={(e) =>
+                                    setFieldValue('channelNameId', e)
+                                }
+                                options={dropdownOptions.channelOptions}
+                                label="Channel Name"
+                            />
                              <ATMTextField
                                 name="schemePrice"
                                 type={'text'}
@@ -141,8 +160,48 @@ const AddCompetitor = ({ formikProps, apiStatus }: Props) => {
                                     )
                                 }
                             />
-                            
+
+                            <ATMTextField
+                                name="whatsappNumber"
+                                value={values.whatsappNumber}
+                                label="Whatsapp Number"
+                                placeholder="Whatsapp Number"
+                                onChange={(e) =>
+                                    setFieldValue(
+                                        'whatsappNumber',
+                                        e.target.value
+                                    )
+                                }
+                            />
+
+                                <div className="mt-2">
+                                    <ATMTimePicker
+                                        name={`startTime`}
+                                        value={values.startTime}
+                                        label="Start Time"
+                                        onChange={(newValue) => {
+                                            setFieldValue(
+                                                'startTime',
+                                                newValue
+                                            )
+                                        }}
+                                    />
+                                </div>
+                                <div className="mt-2">
+                                    <ATMTimePicker
+                                        name={`endTime`}
+                                        value={values.endTime}
+                                        label="End Time"
+                                        onChange={(newValue) => {
+                                            setFieldValue(
+                                                'endTime',
+                                                newValue
+                                            )                                            
+                                        }}
+                                    />
+                                </div>
                         </div>
+                    
                     </div>
                 </div>
             </div>

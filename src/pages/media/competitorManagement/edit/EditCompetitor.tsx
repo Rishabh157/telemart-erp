@@ -6,10 +6,16 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditCompetitorWrapper'
+import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+    dropdownOptions: {
+        channelOptions: SelectOption[]
+    }
 }
 
 // Breadcrumbs
@@ -23,8 +29,12 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const EditCompetitor = ({ formikProps, apiStatus }: Props) => {
+const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions  }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    dropdownOptions = {
+        ...dropdownOptions,
+    }
 
     return (
         <div className="">
@@ -104,6 +114,15 @@ const EditCompetitor = ({ formikProps, apiStatus }: Props) => {
                                     )
                                 }
                             />
+                             <ATMSelectSearchable
+                                name="channelNameId"
+                                value={values.channelNameId}
+                                onChange={(e) =>
+                                    setFieldValue('channelNameId', e)
+                                }
+                                options={dropdownOptions.channelOptions}
+                                label="Channel Name"
+                            />
                                 <ATMTextField
                                 name="schemePrice"
                                 value={values.schemePrice}
@@ -117,13 +136,13 @@ const EditCompetitor = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
                              <ATMTextField
-                                name="whatsappNo"
-                                value={values.whatsappNo}
-                                label="whatsappNo"
-                                placeholder="whatsappNo"
+                                name="whatsappNumber"
+                                value={values.whatsappNumber}
+                                label="Whatsapp Number"
+                                placeholder="Whatsapp Number"
                                 onChange={(e) =>
                                     setFieldValue(
-                                        'whatsappNo',
+                                        'whatsappNumber',
                                         e.target.value
                                     )
                                 }
@@ -152,8 +171,37 @@ const EditCompetitor = ({ formikProps, apiStatus }: Props) => {
                                     )
                                 }
                             />
+
+                                <div className="mt-2">
+                                    <ATMTimePicker
+                                        name={`startTime`}
+                                        value={values.startTime}
+                                        label="Start Time"
+                                        onChange={(newValue) => {
+                                            setFieldValue(
+                                                'startTime',
+                                                newValue
+                                            )
+                                        }}
+                                    />
+                                </div>
+                                <div className="mt-2">
+                                    <ATMTimePicker
+                                        name={`endTime`}
+                                        value={values.endTime}
+                                        label="End Time"
+                                        onChange={(newValue) => {
+                                            setFieldValue(
+                                                'endTime',
+                                                newValue
+                                            )                                            
+                                        }}
+                                    />
+                                </div>
+
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

@@ -54,23 +54,8 @@ const CompetitorManagementListingWrapper = () => {
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {row.productName} </span>
             ),
-        },
-        {
-            field: 'websiteLink',
-            headerName: 'Website Link',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.websiteLink} </span>
-            ),
-        },
-        {
-            field: 'youtubeLink',
-            headerName: 'Youtube Link',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.youtubeLink} </span>
-            ),
-        },
+        },       
+       
         {
             field: 'price',
             headerName: 'Price',
