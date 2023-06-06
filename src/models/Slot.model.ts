@@ -9,7 +9,11 @@ export type SlotManagementListResponse = {
     channelTrp: string
     remarks: string
     runYoutubeLink: string | ''
+    showOk: boolean
+    reasonNotShow: string | null
     run: boolean
+    slotRunImage: string
+    slotRunVideo: string
     runStartTime: string
     runEndTime: string
     runRemark: string
@@ -54,8 +58,12 @@ export type AddSlotManagement = {
     }[]
     runYoutubeLink: string | ''
     run: boolean
+    slotRunImage: string
+    slotRunVideo: string
     runStartTime: string
     runEndTime: string
+    showOk: boolean
+    reasonNotShow: string | null
     runRemark: string
     companyId: string
 }
@@ -75,10 +83,20 @@ export type UpdateSlotManagement = {
         runYoutubeLink: string | ''
         runStatus: boolean
         run: boolean
+        slotRunImage: string
+        slotRunVideo: string
+        showOk: boolean
+        reasonNotShow: string | null
         runStartTime: string
         runEndTime: string
         runRemark: string
         companyId: string
     }
     id: string
+}
+
+export type FileMangerType = {
+    fileType: string
+    category: string
+    fileUrl: any
 }

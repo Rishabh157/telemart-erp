@@ -27,7 +27,7 @@ const ATMTextArea = ({
     isSubmitting = true,
 }: Props) => {
     return (
-        <div className="relative mt-4">
+        <div className=" mt-4">
             {label && (
                 <label className={`text-slate-700 ${labelClass}`}>
                     {label}{' '}

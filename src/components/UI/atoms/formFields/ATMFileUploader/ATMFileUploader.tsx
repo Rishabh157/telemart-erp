@@ -11,8 +11,8 @@ type Props = {
     accept: string
     disabled?: boolean
     isSubmitting?: boolean
+    isVideo?: boolean
 }
-
 const ATMFileUploader = ({
     size = 'small',
     label = '',
@@ -23,6 +23,7 @@ const ATMFileUploader = ({
     accept,
     disabled = false,
     isSubmitting = true,
+    isVideo = false,
 }: Props) => {
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -45,7 +46,7 @@ const ATMFileUploader = ({
             >
                 {selectedFile ? (
                     <div className="overflow-x-auto py-2 text-slate-900 font-medium ">
-                        {selectedFile.name || 'ABC'}
+                        {selectedFile.name || 'Uploaded file'}
                     </div>
                 ) : (
                     placeholder
@@ -54,15 +55,27 @@ const ATMFileUploader = ({
 
             {selectedFile && isSubmitting && (
                 <div className="w-full h-[150px] mt-1 border rounded shadow">
-                    <img
-                        src={
-                            typeof selectedFile === 'string'
-                                ? selectedFile
-                                : URL.createObjectURL(selectedFile)
-                        }
-                        alt=""
-                        className="w-full h-full rounded"
-                    />
+                    {isVideo ? (
+                        <video
+                            src={
+                                typeof selectedFile === 'string'
+                                    ? selectedFile
+                                    : URL.createObjectURL(selectedFile)
+                            }
+                            className="w-full h-full rounded"
+                            controls
+                        />
+                    ) : (
+                        <img
+                            src={
+                                typeof selectedFile === 'string'
+                                    ? selectedFile
+                                    : URL.createObjectURL(selectedFile)
+                            }
+                            alt=""
+                            className="w-full h-full rounded"
+                        />
+                    )}
                 </div>
             )}
 

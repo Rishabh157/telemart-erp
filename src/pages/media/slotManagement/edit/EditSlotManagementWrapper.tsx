@@ -40,6 +40,10 @@ export type FormInitialValues = {
     runYoutubeLink: string
     runStatus: boolean
     run: boolean
+    slotRunImage: string
+    slotRunVideo: string
+    showOk: boolean
+    reasonNotShow: string | null
     runStartTime: string
     runEndTime: string
     runRemark: string
@@ -168,8 +172,12 @@ const EditSlotManagementWrapper = () => {
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.remarks || '',
         runYoutubeLink: selectedItems?.runYoutubeLink || '',
-        runStatus: selectedItems?.runStatus || false,
-        run: selectedItems?.run || false,
+        runStatus: selectedItems?.runStatus,
+        run: selectedItems?.run,
+        showOk: false,
+        reasonNotShow: null,
+        slotRunImage: '',
+        slotRunVideo: '',
         runStartTime: selectedItems?.runStartTime || '',
         runEndTime: selectedItems?.runEndTime || '',
         runRemark: selectedItems?.runRemark || '',
@@ -208,6 +216,10 @@ const EditSlotManagementWrapper = () => {
                     runYoutubeLink: values?.runYoutubeLink,
                     runStatus: values?.runStatus,
                     run: values?.run,
+                    slotRunImage: values?.slotRunImage,
+                    slotRunVideo: values?.slotRunVideo,
+                    showOk: values?.showOk,
+                    reasonNotShow: values?.reasonNotShow,
                     runStartTime: values?.runStartTime,
                     runEndTime: values?.runEndTime,
                     runRemark: values?.runRemark,
