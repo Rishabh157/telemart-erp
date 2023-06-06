@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/media/competitor',
     },
     {
-        label: 'Edit Competitor',
+        label: 'Edit',
     },
 ]
 
@@ -36,7 +36,7 @@ const EditCompetitor = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Edit Competitor </ATMPageHeading>
+                    <ATMPageHeading> Edit  </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -44,7 +44,7 @@ const EditCompetitor = ({ formikProps, apiStatus }: Props) => {
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Competitor Details
+                             Details
                         </div>
 
                         {/* BUTTON - Edit Button */}
@@ -63,7 +63,7 @@ const EditCompetitor = ({ formikProps, apiStatus }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow py-2 pb-8 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* Field1 */}
 
@@ -76,6 +76,66 @@ const EditCompetitor = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) =>
                                     setFieldValue(
                                         'competitorName',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                              <ATMTextField
+                                name="companyName"
+                                value={values.companyName}
+                                label="Company Name"
+                                placeholder="Company Name"
+                                onChange={(e) =>
+                                    setFieldValue(
+                                        'companyName',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                             <ATMTextField
+                                name="productName"
+                                value={values.productName}
+                                label="Product Name"
+                                placeholder="Product Name"
+                                onChange={(e) =>
+                                    setFieldValue(
+                                        'productName',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                                <ATMTextField
+                                name="price"
+                                value={values.price}
+                                label="Price"
+                                placeholder="Price"
+                                onChange={(e) =>
+                                    setFieldValue(
+                                        'price',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                             <ATMTextField
+                                name="websiteLink"
+                                value={values.websiteLink}
+                                label="Website Link"
+                                placeholder="Website Link"
+                                onChange={(e) =>
+                                    setFieldValue(
+                                        'websiteLink',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                             <ATMTextField
+                                name="youtubeLink"
+                                value={values.youtubeLink}
+                                label="Youtube Link"
+                                placeholder="Youtube Link"
+                                onChange={(e) =>
+                                    setFieldValue(
+                                        'youtubeLink',
                                         e.target.value
                                     )
                                 }

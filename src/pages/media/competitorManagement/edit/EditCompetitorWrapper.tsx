@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
-import { object, string } from 'yup'
+import { object, string, number } from 'yup'
 import EditCompetitor from './EditCompetitor'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -17,6 +17,11 @@ type Props = {}
 
 export type FormInitialValues = {
     competitorName: string
+    companyName: string
+    productName: string
+    websiteLink: string
+    youtubeLink: string
+    price: string
 }
 
 const EditCompetitorWrapper = (props: Props) => {
@@ -35,11 +40,23 @@ const EditCompetitorWrapper = (props: Props) => {
     const { data, isLoading, isFetching } = useGetCompetitorByIdQuery(Id)
     const initialValues: FormInitialValues = {
         competitorName: selectedItem?.competitorName || '',
+        companyName: '',
+        productName: '',
+        websiteLink: '',
+        youtubeLink: '',
+        price: '0',
     }
 
     // Form Validation Schema
     const validationSchema = object({
         competitorName: string().required('Competitor Name is required'),
+        companyName: string(),
+        productName: string(),
+        websiteLink: string(),
+        youtubeLink: string(),
+        price: number()
+        .typeError('Price must be a number')
+        .positive(' Must be a positive number.'),
     })
 
     //    Form Submit Handler
@@ -49,6 +66,11 @@ const EditCompetitorWrapper = (props: Props) => {
             EditCompetitors({
                 body: {
                     competitorName: values.competitorName,
+                    companyName: values.companyName,
+                    productName: values.productName,
+                    websiteLink: values.websiteLink,
+                    youtubeLink: values.youtubeLink,
+                    price: values.price,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',

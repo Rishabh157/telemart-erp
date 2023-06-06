@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
-import { object, string } from 'yup'
+import { object, string, number } from 'yup'
 import AddCompetitor from './Addcompetitor'
 // import { useAddCompetitorsMutation } from 'src/services/AttributeService'
 import { showToast } from 'src/utils'
@@ -14,6 +14,12 @@ type Props = {}
 
 export type FormInitialValues = {
     competitorName: string
+    companyName: string
+    productName: string
+    websiteLink: string
+    youtubeLink: string
+    whatsapp: string
+    price: string
 }
 
 const AddCompetitorWrapper = (props: Props) => {
@@ -25,11 +31,24 @@ const AddCompetitorWrapper = (props: Props) => {
 
     const initialValues: FormInitialValues = {
         competitorName: '',
+        companyName: '',
+        productName: '',
+        websiteLink: '',
+        youtubeLink: '',
+        whatsapp: '',
+        price: '0',
     }
 
     // Form Validation Schema
     const validationSchema = object({
         competitorName: string().required('compititor Name is required'),
+        productName: string(),
+        websiteLink: string(),
+        youtubeLink: string(),
+        whatsapp: string(),
+        price: number()
+            .typeError('Price must be a number')
+            .positive(' Must be a positive number.'),
     })
 
     //    Form Submit Handler
@@ -38,6 +57,12 @@ const AddCompetitorWrapper = (props: Props) => {
         setTimeout(() => {
             addCompetitor({
                 competitorName: values.competitorName,
+                companyName: values.companyName,
+                productName: values.productName,
+                websiteLink: values.websiteLink,
+                youtubeLink: values.youtubeLink,
+                whatsapp: values.whatsapp,
+                price: values.price,
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
