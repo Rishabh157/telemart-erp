@@ -11,15 +11,15 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: 'Order',
-        path: '/orders',
+        label: 'Inquiry',
+        path: '/inquiry',
     },
     {
-        label: 'View Order',
+        label: 'View Inquiry',
     },
 ]
 
-const OrderView = ({ items }: Props) => {
+const InquiryView = ({ items }: Props) => {
     return (
         <div className="mt-3 h-full  ">
             <div className="p-4 flex flex-col gap-2  ">
@@ -30,7 +30,7 @@ const OrderView = ({ items }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1 ">
-                    <ATMPageHeading> Order</ATMPageHeading>
+                    <ATMPageHeading> Inquiry</ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -48,7 +48,7 @@ const OrderView = ({ items }: Props) => {
 
                     <div className="grow px-3 ">
                         <div className="grid grid-cols-1">
-                            <div className="grow py-8 px-3">
+                            <div className="grow py-3 px-3">
                                 <div className=" flex col-span-2 text-lg pb-2 font-medium text-primary-main pl-2">
                                     General Information
                                 </div>
@@ -382,7 +382,7 @@ const OrderView = ({ items }: Props) => {
                     </div>
 
                     {/*  Other Information  */}
-                    <div className="grow px-3 py-8">
+                    <div className="grow px-3 py-2">
                         <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
                             Other Information
                         </div>
@@ -415,4 +415,4 @@ const OrderView = ({ items }: Props) => {
     )
 }
 
-export default OrderView
+export default InquiryView

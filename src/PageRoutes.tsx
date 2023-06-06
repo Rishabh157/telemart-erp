@@ -184,6 +184,11 @@ import EditDispositionComplaintWrappper from './pages/disposition/dispositionCom
 import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/list/InitialCallThreeListingWrapper'
 import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edit/EditInitialCallThreeWrapper'
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
+import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
+import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
+import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
+import InquiryViewWrapper from './pages/inquiry/view/InquiryViewWrapper'
+import InquiryListingWrapper from './pages/inquiry/list/InquiryListingWrapper'
 import InfluencerListingWrapper from './pages/websites/influencerManagement/list/InfluencerListingWrapper'
 import AddAssetsRequestWrapper from './pages/assets/assetsRequest/add/AddAssetsRequestWrapper'
 import AddAssetsRelocationWrapper from './pages/assets/assetsRelocation/add/AddAssetsRelocationWrapper'
@@ -241,6 +246,7 @@ const PageRoutes = () => {
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
+                    <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
                     <Route path="/orders/add-order" element={<AddOrder />} />
                     <Route
                         path="/dealers"
@@ -810,6 +816,10 @@ const PageRoutes = () => {
                         element={<EditInitialCallThreeWrapper />}
                     />
                     <Route
+                        path="dispositions/initialcall-three/view/:id"
+                        element={<ViewInitialCallThreeWrappper />}
+                    />
+                    <Route
                         path="dispositions/initialcall-three/add"
                         element={<AddInitialCallThreeWrappper />}
                     />
@@ -836,6 +846,10 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three/edit/:id"
                         element={<EditDispositionThreeWrapper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-three/view/:id"
+                        element={<ViewDispositionThreeWrappper />}
                     />
                     <Route
                         path="dispositions/disposition-two/add"
@@ -903,6 +917,15 @@ const PageRoutes = () => {
                     <Route
                         path="/all-websites/website-tags/:id"
                         element={<ViewWebsiteTagsWrapper />}
+                    />
+                    <Route
+                        path="/inquiry"
+                        element={<InquiryListingWrapper />}
+                    />
+
+                    <Route
+                        path="/inquiry/view/:id"
+                        element={<InquiryViewWrapper />}
                     />
                 </Routes>
             </BrowserRouter>
