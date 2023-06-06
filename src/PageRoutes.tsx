@@ -198,6 +198,8 @@ import WebsiteTagListingWrapper from './pages/websites/website-tags/list/Website
 import AddWebsiteTagsWrapper from './pages/websites/website-tags/add/AddWebsiteTagsWrapper'
 import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsiteTagWrapper'
 import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsiteTagsWrapper'
+import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
+import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -240,6 +242,11 @@ const PageRoutes = () => {
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
+                    <Route
+                        path="/orders/view/:id"
+                        element={<OrderViewWrapper />}
+                    />
+
                     <Route path="/orders/add-order" element={<AddOrder />} />
                     <Route
                         path="/dealers"
@@ -831,6 +838,10 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three/edit/:id"
                         element={<EditDispositionThreeWrapper />}
+                    />
+                    <Route
+                        path="dispositions/disposition-three/:id"
+                        element={<ViewDispositionThreeWrappper />}
                     />
                     <Route
                         path="dispositions/disposition-two/add"
