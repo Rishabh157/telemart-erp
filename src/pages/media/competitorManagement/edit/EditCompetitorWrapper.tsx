@@ -12,8 +12,8 @@ import {
 } from 'src/services/media/CompetitorManagementServices'
 import { setSelectedCompetitor } from 'src/redux/slices/media/competitorManagementSlice'
 import MediaLayout from '../../MediaLayout'
-import {useGetPaginationchannelQuery} from 'src/services/media/ChannelManagementServices'
-import {setChannelMgt} from 'src/redux/slices/media/channelManagementSlice'
+import { useGetPaginationchannelQuery } from 'src/services/media/ChannelManagementServices'
+import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
 
 type Props = {}
@@ -26,8 +26,8 @@ export type FormInitialValues = {
     youtubeLink: string
     whatsappNumber: string
     schemePrice: string
-    channelNameId: string,
-    startTime: string,
+    channelNameId: string
+    startTime: string
     endTime: string
 }
 
@@ -43,9 +43,15 @@ const EditCompetitorWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
-    const { channelMgt } = useSelector((state: RootState) => state?.channelManagement)
+    const { channelMgt } = useSelector(
+        (state: RootState) => state?.channelManagement
+    )
 
-    const {data: channelData, isLoading: channelIsLoading, isFetching: channelIsFetching} = useGetPaginationchannelQuery({
+    const {
+        data: channelData,
+        isLoading: channelIsLoading,
+        isFetching: channelIsFetching,
+    } = useGetPaginationchannelQuery({
         limit: 10,
         searchValue: '',
         params: ['channelName'],
@@ -63,8 +69,8 @@ const EditCompetitorWrapper = (props: Props) => {
     })
 
     useEffect(() => {
-        if(!channelIsLoading && !channelIsFetching){
-            dispatch(setChannelMgt(channelData?.data || []))
+        if (!channelIsLoading && !channelIsFetching) {
+            dispatch(setChannelMgt(channelData?.data))
         }
     }, [dispatch, channelData, channelIsLoading, channelIsFetching])
 
@@ -72,10 +78,10 @@ const EditCompetitorWrapper = (props: Props) => {
     const { data, isLoading, isFetching } = useGetCompetitorByIdQuery(Id)
 
     useEffect(() => {
-        dispatch(setSelectedCompetitor(data?.data ))
+        dispatch(setSelectedCompetitor(data?.data))
     }, [dispatch, data, isLoading, isFetching])
 
-    console.log(data)
+    //console.log(data)
 
     const initialValues: FormInitialValues = {
         competitorName: selectedItem?.competitorName || '',
@@ -84,11 +90,10 @@ const EditCompetitorWrapper = (props: Props) => {
         websiteLink: selectedItem?.websiteLink || '',
         youtubeLink: selectedItem?.youtubeLink || '',
         schemePrice: selectedItem?.schemePrice || '0',
-        whatsappNumber: selectedItem?.whatsappNumber || '',        
+        whatsappNumber: selectedItem?.whatsappNumber || '',
         channelNameId: selectedItem?.channelNameId || '',
         startTime: selectedItem?.startTime || '',
-        endTime: selectedItem?.endTime || '',
-        companyId: userData?.companyId || '',
+        endTime: selectedItem?.endTime || '',        
     }
 
     // Form Validation Schema
@@ -98,7 +103,10 @@ const EditCompetitorWrapper = (props: Props) => {
         productName: string(),
         websiteLink: string(),
         youtubeLink: string(),
-        whatsappNo:string().min(10).max(10),
+        whatsappNumber:  string()
+        .min(10, 'Number should be 10 digits')
+        .max(10, 'maximum 10 digit')
+        .required('Mobile number is required'),
         schemePrice: number()
             .typeError('schemePrice must be a number')
             .positive(' Must be a positive number.'),
@@ -108,12 +116,14 @@ const EditCompetitorWrapper = (props: Props) => {
     })
 
     const dropdownOptions = {
-        channelOptions: channelMgt?.map((ele: ChannelManagementListResponse) => {
-            return{
-                label: ele.channelName,
-                value: ele._id
+        channelOptions: channelMgt?.map(
+            (ele: ChannelManagementListResponse) => {
+                return {
+                    label: ele.channelName,
+                    value: ele._id,
+                }
             }
-        })    
+        ) || [],
     }
 
     //console.log(dropdownOptions)
@@ -131,7 +141,7 @@ const EditCompetitorWrapper = (props: Props) => {
                     websiteLink: values.websiteLink,
                     youtubeLink: values.youtubeLink,
                     schemePrice: values.schemePrice,
-                    whatsappNumber: values.whatsappNumber,                
+                    whatsappNumber: values.whatsappNumber,
                     channelNameId: values.channelNameId || '',
                     startTime: values.startTime,
                     endTime: values.endTime,
@@ -154,7 +164,6 @@ const EditCompetitorWrapper = (props: Props) => {
         }, 1000)
     }
 
-    
     return (
         <MediaLayout>
             <Formik
