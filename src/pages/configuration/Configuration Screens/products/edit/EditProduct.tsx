@@ -6,6 +6,9 @@ import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumb
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormikProps } from 'formik'
 import { FormInitialValues } from './EditProductWrapper'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from 'src/redux/store'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -38,6 +41,7 @@ const EditProduct = ({
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
+    const dispatch = useDispatch<AppDispatch>()
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -74,7 +78,10 @@ const EditProduct = ({
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() => formikProps.handleSubmit()}
+                                onClick={() => {
+                                    dispatch(setFormSubmitting(true))
+                                    formikProps.handleSubmit()
+                                }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}

@@ -8,6 +8,8 @@ import ATMHTMLEditor from 'src/components/UI/atoms/formFields/ATMHTMLEditor/ATMH
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { DropdownOptions } from './StepAddCallScriptWrapper'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -16,6 +18,10 @@ type Props = {
 
 const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className=" ">
@@ -79,6 +85,7 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
                                             options={
                                                 dropdownOptions?.langaugeOption
                                             }
+                                            isSubmitting={isSubmitting}
                                         />
                                     </div>
                                 </div>

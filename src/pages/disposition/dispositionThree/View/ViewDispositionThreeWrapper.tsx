@@ -3,7 +3,6 @@ import DispositionLayout from '../../DispositionLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useParams } from 'react-router-dom'
-import { array, object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 import { useGetDispositionThreeByIdQuery } from 'src/services/configurations/DispositionThreeServices'
@@ -16,6 +15,7 @@ export type FormInitialValues = {
     dispositionTwoId: string
     smsType: string
     emailType: string
+    whatsApp: string
     priority: string
     applicableCriteria: string[]
     companyId: string
@@ -46,21 +46,11 @@ const ViewDispositionThreeWrappper = () => {
         dispositionTwoId: selectedDispostionThree?.dispostionTwoLabel || '',
         smsType: selectedDispostionThree?.smsType || '',
         emailType: selectedDispostionThree?.emailType || '',
+        whatsApp: selectedDispostionThree?.whatsApp || '',
         priority: selectedDispostionThree?.priority || '',
         applicableCriteria: selectedDispostionThree?.applicableCriteria || [],
         companyId: userData?.companyId || '',
     }
-
-    // Form Validation Schema
-    const validationSchema = object({
-        dispositionName: string().required('Required'),
-        dispositionOneId: string().required('Required'),
-        dispositionTwoId: string().required('Required'),
-        applicableCriteria: array().of(string().required('Required')),
-        smsType: string().required('Required'),
-        emailType: string().required('Required'),
-        priority: string().required('Required'),
-    })
 
     const onSubmitHandler = (values: FormInitialValues) => {}
     return (
@@ -68,7 +58,6 @@ const ViewDispositionThreeWrappper = () => {
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
-                validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {

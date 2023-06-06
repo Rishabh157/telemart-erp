@@ -18,6 +18,7 @@ type Props = {
         priorityOptions: SelectOption[]
         smsTypeOptions: SelectOption[]
         emailTypeOptions: SelectOption[]
+        whatsAppOptions: SelectOption[]
         applicableCriteriaOptions: SelectOption[]
     }
 }
@@ -96,6 +97,7 @@ const EditDispositionThree = ({
                             />
                             <ATMSelectSearchable
                                 name="dispositionOneId"
+                                required
                                 value={values.dispositionOneId}
                                 onChange={(e) =>
                                     setFieldValue('dispositionOneId', e)
@@ -121,7 +123,6 @@ const EditDispositionThree = ({
 
                             <ATMSelectSearchable
                                 name="smsType"
-                                required
                                 value={values.smsType}
                                 onChange={(e) => setFieldValue('smsType', e)}
                                 options={dropdownOptions.smsTypeOptions}
@@ -130,16 +131,21 @@ const EditDispositionThree = ({
 
                             <ATMSelectSearchable
                                 name="emailType"
-                                required
                                 value={values.emailType}
                                 onChange={(e) => setFieldValue('emailType', e)}
                                 options={dropdownOptions.emailTypeOptions}
                                 label="Email Type"
                             />
+                            <ATMSelectSearchable
+                                name="whatsApp"
+                                value={values.whatsApp}
+                                onChange={(e) => setFieldValue('whatsApp', e)}
+                                options={dropdownOptions.whatsAppOptions}
+                                label="Whatsapp Template"
+                            />
 
                             <ATMSelectSearchable
                                 name="priority"
-                                required
                                 value={values.priority}
                                 onChange={(e) => setFieldValue('priority', e)}
                                 options={dropdownOptions.priorityOptions}

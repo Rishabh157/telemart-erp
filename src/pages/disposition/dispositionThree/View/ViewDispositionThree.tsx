@@ -74,19 +74,25 @@ const ViewDispositionThree = ({ formikProps }: Props) => {
                                 <label className="w-60 font-medium text-l">
                                     SMS Type:
                                 </label>
-                                <span>{values.smsType}</span>
+                                <span>{values?.smsType || 'NA'}</span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
                                     Email Type:
                                 </label>
-                                <span>{values.emailType}</span>
+                                <span>{values?.emailType || 'NA'}</span>
+                            </div>
+                            <div className="flex mb-2">
+                                <label className="w-60 font-medium text-l">
+                                    Whatsapp Template:
+                                </label>
+                                <span>{values?.whatsApp || 'NA'}</span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
                                     Priority:
                                 </label>
-                                <span>{values.priority}</span>
+                                <span>{values?.priority || 'NA'}</span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">

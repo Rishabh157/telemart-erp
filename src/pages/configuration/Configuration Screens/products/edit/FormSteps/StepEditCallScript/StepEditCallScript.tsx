@@ -7,6 +7,8 @@ import { EditorState } from 'draft-js'
 import ATMHTMLEditor from 'src/components/UI/atoms/formFields/ATMHTMLEditor/ATMHTMLEditor'
 import { DropdownOptions } from './StepEditCallScriptWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -15,6 +17,10 @@ type Props = {
 
 const StepEditCallScript = ({ formikProps, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className=" ">
@@ -77,6 +83,7 @@ const StepEditCallScript = ({ formikProps, dropdownOptions }: Props) => {
                                             options={
                                                 dropdownOptions?.langaugeOption
                                             }
+                                            isSubmitting={isSubmitting}
                                         />
                                     </div>
                                 </div>

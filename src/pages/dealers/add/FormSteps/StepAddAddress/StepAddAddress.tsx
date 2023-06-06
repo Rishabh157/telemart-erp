@@ -123,7 +123,7 @@ const StepAddAddress = ({
 
                                     case 'select':
                                         return (
-                                            <div>
+                                            <div className="-mt-2">
                                                 <ATMSelect
                                                     label={label}
                                                     name={name}

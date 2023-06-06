@@ -70,7 +70,7 @@ const StepAddDealerDetails = ({
 
                         case 'select':
                             return (
-                                <div key={name}>
+                                <div key={name} className="mt-2">
                                     <ATMSelect
                                         label={label}
                                         name={name}
