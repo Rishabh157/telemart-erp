@@ -183,6 +183,11 @@ import EditDispositionComplaintWrappper from './pages/disposition/dispositionCom
 import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/list/InitialCallThreeListingWrapper'
 import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edit/EditInitialCallThreeWrapper'
 import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
+import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
+import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
+import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
+import InquiryViewWrapper from './pages/inquiry/view/InquiryViewWrapper'
+import InquiryListingWrapper from './pages/inquiry/list/InquiryListingWrapper'
 import InfluencerListingWrapper from './pages/websites/influencerManagement/list/InfluencerListingWrapper'
 import AddAssetsRequestWrapper from './pages/assets/assetsRequest/add/AddAssetsRequestWrapper'
 import AddAssetsRelocationWrapper from './pages/assets/assetsRelocation/add/AddAssetsRelocationWrapper'
@@ -198,8 +203,6 @@ import WebsiteTagListingWrapper from './pages/websites/website-tags/list/Website
 import AddWebsiteTagsWrapper from './pages/websites/website-tags/add/AddWebsiteTagsWrapper'
 import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsiteTagWrapper'
 import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsiteTagsWrapper'
-import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
-import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -812,6 +815,10 @@ const PageRoutes = () => {
                         element={<EditInitialCallThreeWrapper />}
                     />
                     <Route
+                        path="dispositions/initialcall-three/view/:id"
+                        element={<ViewInitialCallThreeWrappper />}
+                    />
+                    <Route
                         path="dispositions/initialcall-three/add"
                         element={<AddInitialCallThreeWrappper />}
                     />
@@ -909,6 +916,15 @@ const PageRoutes = () => {
                     <Route
                         path="/all-websites/website-tags/:id"
                         element={<ViewWebsiteTagsWrapper />}
+                    />
+                    <Route
+                        path="/inquiry"
+                        element={<InquiryListingWrapper />}
+                    />
+
+                    <Route
+                        path="/inquiry/view/:id"
+                        element={<InquiryViewWrapper />}
                     />
                 </Routes>
             </BrowserRouter>
