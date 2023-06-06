@@ -25,6 +25,7 @@ export type FormInitialValues = {
     dispositionTwoId: string
     smsType: string
     emailType: string
+    whatsApp: string
     priority: string
     applicableCriteria: string[]
     companyId: string
@@ -91,6 +92,7 @@ const EditDispositionThreeWrappper = () => {
         dispositionTwoId: selectedDispostionThree?.dispositionTwoId || '',
         smsType: selectedDispostionThree?.smsType || '',
         emailType: selectedDispostionThree?.emailType || '',
+        whatsApp: selectedDispostionThree?.whatsApp || '',
         priority: selectedDispostionThree?.priority || '',
         applicableCriteria: selectedDispostionThree?.applicableCriteria || [],
         companyId: userData?.companyId || '',
@@ -102,9 +104,10 @@ const EditDispositionThreeWrappper = () => {
         dispositionOneId: string().required('Required'),
         dispositionTwoId: string().required('Required'),
         applicableCriteria: array().of(string().required('Required')),
-        smsType: string().required('Required'),
-        emailType: string().required('Required'),
-        priority: string().required('Required'),
+        smsType: string(),
+        emailType: string(),
+        whatsApp: string(),
+        priority: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -116,9 +119,10 @@ const EditDispositionThreeWrappper = () => {
                 dispositionOneId: values.dispositionOneId,
                 dispositionTwoId: values.dispositionTwoId,
                 applicableCriteria: values.applicableCriteria,
-                smsType: values.smsType,
-                emailType: values.emailType,
-                priority: values.priority,
+                smsType: values.smsType || null,
+                emailType: values.emailType || null,
+                whatsApp: values.whatsApp || null,
+                priority: values.priority || '',
                 companyId: values.companyId || '',
             },
             id: Id || '',
@@ -171,6 +175,11 @@ const EditDispositionThreeWrappper = () => {
             { label: 'personalEmail', value: 'PERSONAL EMAIL' },
             { label: 'officialEmail', value: 'OFFICIAL EMAIL' },
             { label: 'buisnessEmail', value: 'BUISNESS EMAIL' },
+        ],
+        whatsAppOptions: [
+            { label: 'template 1', value: 'TEMP ONE' },
+            { label: 'template 2', value: 'TEMP TWO' },
+            { label: 'template 3', value: 'TEMP THREE' },
         ],
 
         smsTypeOptions: [
