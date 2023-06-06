@@ -76,7 +76,7 @@ const CompetitorManagementListingWrapper = () => {
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.price} </span>
+                <span> {row.schemePrice} </span>
             ),
         },
 

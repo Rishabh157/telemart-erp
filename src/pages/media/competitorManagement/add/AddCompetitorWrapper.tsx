@@ -18,8 +18,8 @@ export type FormInitialValues = {
     productName: string
     websiteLink: string
     youtubeLink: string
-    whatsapp: string
-    price: string
+    whatsappNo: string
+    schemePrice: string
 }
 
 const AddCompetitorWrapper = (props: Props) => {
@@ -35,8 +35,8 @@ const AddCompetitorWrapper = (props: Props) => {
         productName: '',
         websiteLink: '',
         youtubeLink: '',
-        whatsapp: '',
-        price: '0',
+        whatsappNo: '',
+        schemePrice: '0',
     }
 
     // Form Validation Schema
@@ -46,8 +46,8 @@ const AddCompetitorWrapper = (props: Props) => {
         websiteLink: string(),
         youtubeLink: string(),
         whatsapp: string(),
-        price: number()
-            .typeError('Price must be a number')
+        schemePrice: number()
+            .typeError('SchemePrice must be a number')
             .positive(' Must be a positive number.'),
     })
 
@@ -61,8 +61,8 @@ const AddCompetitorWrapper = (props: Props) => {
                 productName: values.productName,
                 websiteLink: values.websiteLink,
                 youtubeLink: values.youtubeLink,
-                whatsapp: values.whatsapp,
-                price: values.price,
+                whatsappNo: values.whatsappNo,
+                schemePrice: values.schemePrice,
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {

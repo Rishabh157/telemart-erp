@@ -4,7 +4,8 @@ export type CompetitorManagementListResponse = {
     productName: string
     websiteLink: string
     youtubeLink: string
-    price: string
+    schemePrice: string
+    whatsappNo:string
     companyId: string
     count: number
     _id: string
@@ -21,7 +22,8 @@ export type AddCompetitorManagement = {
     productName: string
     websiteLink: string
     youtubeLink: string
-    price: string
+    schemePrice: string
+    whatsappNo:string
     companyId: string
 }
 
@@ -32,7 +34,8 @@ export type UpdateCompetitorManagement = {
         productName: string
         websiteLink: string
         youtubeLink: string
-        price: string
+        schemePrice: string
+        whatsappNo:string
         companyId: string
     }
     id: string

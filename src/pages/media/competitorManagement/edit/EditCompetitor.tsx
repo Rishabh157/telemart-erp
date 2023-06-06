@@ -105,13 +105,25 @@ const EditCompetitor = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
                                 <ATMTextField
-                                name="price"
-                                value={values.price}
-                                label="Price"
-                                placeholder="Price"
+                                name="schemePrice"
+                                value={values.schemePrice}
+                                label="schemePrice"
+                                placeholder="schemePrice"
                                 onChange={(e) =>
                                     setFieldValue(
-                                        'price',
+                                        'schemePrice',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                             <ATMTextField
+                                name="whatsappNo"
+                                value={values.whatsappNo}
+                                label="whatsappNo"
+                                placeholder="whatsappNo"
+                                onChange={(e) =>
+                                    setFieldValue(
+                                        'whatsappNo',
                                         e.target.value
                                     )
                                 }
