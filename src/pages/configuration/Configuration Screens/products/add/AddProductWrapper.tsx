@@ -21,6 +21,7 @@ import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import draftToHtml from 'draftjs-to-html'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -66,6 +67,7 @@ const steps = [
             product_category: string().required('Required'),
             product_sub_category: string().required('Required'),
             product_weight: number().min(0, 'Required').required('Required'),
+            productGroup: string().required('Required'),
             dimensions: object().shape({
                 height: number().required('Required'),
                 width: number().required('Required'),
@@ -290,6 +292,7 @@ const AddProductWrapper = () => {
                 })
             }, 1000)
         } else {
+            dispatch(setFormSubmitting(false))
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }

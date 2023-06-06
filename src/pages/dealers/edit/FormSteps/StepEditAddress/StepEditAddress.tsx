@@ -101,7 +101,7 @@ const StepEditAddress = ({
                                         return (
                                             <div
                                                 key={name}
-                                                className="relative mt-4"
+                                                className="relative mt-2"
                                             >
                                                 <label className=" text-slate-700 font-medium">
                                                     {' '}

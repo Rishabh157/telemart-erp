@@ -86,6 +86,7 @@ import {
     AddUserWrapper,
     AddVendorWrapper,
     VendorsListingWrapper,
+    AddPurchaseOrderTabWrapper,
     ViewVendor,
     VendorActivityTabWrapper,
     VendorGeneralInformationTabWrapper,
@@ -249,7 +250,6 @@ const PageRoutes = () => {
                         path="/orders/view/:id"
                         element={<OrderViewWrapper />}
                     />
-
                     <Route path="/orders/add-order" element={<AddOrder />} />
                     <Route
                         path="/dealers"
@@ -285,6 +285,10 @@ const PageRoutes = () => {
                         <Route
                             path="purchase-order"
                             element={<VendorPurchaseOrderTabWrapper />}
+                        />
+                        <Route
+                            path="purchase-order/add"
+                            element={<AddPurchaseOrderTabWrapper />}
                         />
                         <Route
                             path="warehouse"

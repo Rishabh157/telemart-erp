@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -9,41 +9,38 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/dealerPincodeSlice'
+} from 'src/redux/slices/PurchaseOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const DealerPincodeListing = ({ columns, rows }: Props) => {
+const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const params = useParams()
-    const dealerId: any = params.dealerId
-    const pincodeState: any = useSelector(
-        (state: RootState) => state.dealerPincode
+    const [selectedRows, setSelectedRows] = useState([])
+
+    const purchaseOrderState: any = useSelector(
+        (state: RootState) => state.purchaseOrder
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
-    const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } = pincodeState
+    const { page, rowsPerPage, searchValue } = purchaseOrderState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+        <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Pincode</ATMPageHeading>
+            <div className="flex justify-between items-center h-[55px]">
+                <ATMPageHeading> Purchase Order </ATMPageHeading>
                 <button
-                    onClick={() =>
-                        navigate('/dealers/' + dealerId + '/pincode/add')
-                    }
+                    onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    {' '}
-                    + Add Pincode{' '}
+                    + Add PO{' '}
                 </button>
             </div>
 
@@ -52,15 +49,15 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
                 <ATMTableHeader
                     page={page}
                     searchValue={searchValue}
-                    rowCount={totalItems}
+                    rowCount={rows.length}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
                     isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -73,15 +70,15 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full overflow-auto"
+                        extraClasses="max-h-full overflow-auto"
+                        setShowDropdown={setShowDropdown}
                     />
                 </div>
-
                 {/* Pagination */}
                 <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={totalItems}
+                        rowCount={rows.length}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
@@ -98,4 +95,4 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default DealerPincodeListing
+export default PurchaseOrderListing
