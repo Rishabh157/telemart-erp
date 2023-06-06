@@ -83,6 +83,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                 <div className="-mt-2">
                     <ATMSelectSearchable
                         name="productGroup"
+                        required
                         value={values.productGroup}
                         onChange={(e) => setFieldValue('productGroup', e)}
                         label="Product Group"

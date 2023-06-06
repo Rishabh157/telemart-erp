@@ -67,6 +67,7 @@ const steps = [
             product_category: string().required('Required'),
             product_sub_category: string().required('Required'),
             product_weight: number().min(0, 'Required').required('Required'),
+            productGroup: string().required('Required'),
             dimensions: object().shape({
                 height: number().required('Required'),
                 width: number().required('Required'),
