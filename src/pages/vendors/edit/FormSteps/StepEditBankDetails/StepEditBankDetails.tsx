@@ -131,36 +131,38 @@ const StepEditBankDetails = ({
 
                                                                             case 'select':
                                                                                 return (
-                                                                                    <ATMSelect
-                                                                                        name={`bank_informations[${bankInformationIndex}].${name}`}
-                                                                                        value={
-                                                                                            bankInformation[
-                                                                                                name
-                                                                                            ]
-                                                                                        }
-                                                                                        onChange={(
-                                                                                            e
-                                                                                        ) => {
-                                                                                            setFieldValue(
-                                                                                                `bank_informations[${bankInformationIndex}].${name}`,
+                                                                                    <div className="-mt-2">
+                                                                                        <ATMSelect
+                                                                                            name={`bank_informations[${bankInformationIndex}].${name}`}
+                                                                                            value={
+                                                                                                bankInformation[
+                                                                                                    name
+                                                                                                ]
+                                                                                            }
+                                                                                            onChange={(
                                                                                                 e
-                                                                                                    .target
-                                                                                                    .value
-                                                                                            )
-                                                                                        }}
-                                                                                        options={
-                                                                                            dropdownOptions[
-                                                                                                field.optionAccessKey ||
-                                                                                                    'accountTypeOptions'
-                                                                                            ]
-                                                                                        }
-                                                                                        label={
-                                                                                            label
-                                                                                        }
-                                                                                        isSubmitting={
-                                                                                            isSubmitting
-                                                                                        }
-                                                                                    />
+                                                                                            ) => {
+                                                                                                setFieldValue(
+                                                                                                    `bank_informations[${bankInformationIndex}].${name}`,
+                                                                                                    e
+                                                                                                        .target
+                                                                                                        .value
+                                                                                                )
+                                                                                            }}
+                                                                                            options={
+                                                                                                dropdownOptions[
+                                                                                                    field.optionAccessKey ||
+                                                                                                        'accountTypeOptions'
+                                                                                                ]
+                                                                                            }
+                                                                                            label={
+                                                                                                label
+                                                                                            }
+                                                                                            isSubmitting={
+                                                                                                isSubmitting
+                                                                                            }
+                                                                                        />
+                                                                                    </div>
                                                                                 )
 
                                                                             case 'file-picker':

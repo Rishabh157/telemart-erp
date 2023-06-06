@@ -5,6 +5,8 @@ import { FormInitialValues } from '../../AddProductWrapper'
 import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -12,6 +14,10 @@ type Props = {
 
 const StepAddVideo = ({ formikProps }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className=" ">
@@ -62,6 +68,7 @@ const StepAddVideo = ({ formikProps }: Props) => {
                                             label="Video Name"
                                             placeholder="Video Name"
                                             className="shadow bg-white rounded"
+                                            isSubmitting={isSubmitting}
                                         />
 
                                         {/* Video Link */}
@@ -77,6 +84,7 @@ const StepAddVideo = ({ formikProps }: Props) => {
                                             label="Video Link"
                                             placeholder="Video Link"
                                             className="shadow bg-white rounded"
+                                            isSubmitting={isSubmitting}
                                         />
 
                                         {/* Preview */}

@@ -7,6 +7,8 @@ import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { DropdownOptions } from './StepEditItemsWrapper'
 import { HiPlus } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -15,6 +17,10 @@ type Props = {
 
 const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    const { formSubmitting: isSubmitting } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     return (
         <div className="py-6 ">
@@ -89,6 +95,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                                             label="Item Quantity"
                                             placeholder="Item Quantity"
                                             className="shadow bg-white rounded mt-2"
+                                            isSubmitting={isSubmitting}
                                         />
                                     </div>
                                 </div>
