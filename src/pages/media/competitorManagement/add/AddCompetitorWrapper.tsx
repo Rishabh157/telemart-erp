@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
-import { object, string, number } from 'yup'
+import { object, string } from 'yup'
 import AddCompetitor from './Addcompetitor'
 // import { useAddCompetitorsMutation } from 'src/services/AttributeService'
 import { showToast } from 'src/utils'
@@ -59,7 +59,7 @@ const AddCompetitorWrapper = (props: Props) => {
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            dispatch(setChannelMgt(data?.data))
+            dispatch(setChannelMgt(data?.data || []))
         }
     }, [dispatch, data, isLoading, isFetching])
 
@@ -95,11 +95,8 @@ const AddCompetitorWrapper = (props: Props) => {
         whatsappNumber: string()
             .min(10, 'Number should be 10 digits')
             .max(10, 'maximum 10 digit')
-            .required('Mobile number is required'),
-        schemePrice: number()
-            .typeError('SchemePrice must be a number')
-            .positive(' Must be a positive number.')
             .required('Required'),
+        schemePrice: string().required('Required'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),

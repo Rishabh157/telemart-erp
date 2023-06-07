@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
-import { object, string, number } from 'yup'
+import { object, string } from 'yup'
 import EditCompetitor from './EditCompetitor'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -70,7 +70,7 @@ const EditCompetitorWrapper = (props: Props) => {
 
     useEffect(() => {
         if (!channelIsLoading && !channelIsFetching) {
-            dispatch(setChannelMgt(channelData?.data))
+            dispatch(setChannelMgt(channelData?.data || []))
         }
     }, [dispatch, channelData, channelIsLoading, channelIsFetching])
 
@@ -98,18 +98,15 @@ const EditCompetitorWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        competitorName: string().required('Competitor Name is required'),
-        companyName: string(),
-        productName: string(),
-        websiteLink: string(),
-        youtubeLink: string(),
+        competitorName: string().required('Required'),
+        productName: string().required('Required'),
+        websiteLink: string().url().required('Required'),
+        youtubeLink: string().url().required('Required'),
         whatsappNumber: string()
             .min(10, 'Number should be 10 digits')
             .max(10, 'maximum 10 digit')
-            .required('Mobile number is required'),
-        schemePrice: number()
-            .typeError('schemePrice must be a number')
-            .positive(' Must be a positive number.'),
+            .required('Required'),
+        schemePrice: string().required('Required'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),
