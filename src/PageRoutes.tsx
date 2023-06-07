@@ -157,9 +157,11 @@ import DispositionOneListingWrapper from './pages/disposition/dispositionOne/lis
 import ListWebstieBlogWrapper from './pages/websites/website-blog/list/ListWebsiteBlogWrapper'
 import AddWebsiteBlogWrapper from './pages/websites/website-blog/add/AddWebsiteBlogWrapper'
 import EditWebsiteBlogWrapper from './pages/websites/website-blog/edit/EditWebsiteBlogWrapper'
+import WebsiteBlogViewWrapper from './pages/websites/website-blog/view/WebsiteBlogViewWrapper'
 import WebsitePageListingWrapper from './pages/websites/websitePage/list/WebsitePageListingWrapper'
 import AddWebsitePageWrapper from './pages/websites/websitePage/add/AddwebsitePageWrapper'
 import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsitePageWrapper'
+import ViewWebsitePageWrapper from './pages/websites/websitePage/view/ViewWebsitePageWrapper'
 import InitialCallOneListingWrapper from './pages/disposition/initialcallerone/list/InitialCallOneListingWrapper'
 import InitialCallTwoListingWrapper from './pages/disposition/initialcallertwo/list/InitialCallTwoListingWrapper'
 import DispositionTwoListingWrapper from './pages/disposition/dispositionTwo/list/DispositionTwoListingWrapper'
@@ -789,6 +791,10 @@ const PageRoutes = () => {
                         path="all-websites/website-page/:id"
                         element={<EditWebsitePageWrapper />}
                     />
+                    <Route
+                        path="all-websites/website-page/view/:id"
+                        element={<ViewWebsitePageWrapper />}
+                    />
 
                     <Route
                         path="all-websites/website/:id"
@@ -901,6 +907,10 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website-blog/:id"
                         element={<EditWebsiteBlogWrapper />}
+                    />
+                    <Route
+                        path="all-websites/website-blog/view/:id"
+                        element={<WebsiteBlogViewWrapper />}
                     />
                     {/* Website Blog route */}
 
