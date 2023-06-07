@@ -126,5 +126,13 @@ export type {
 export type { OrderListResponse } from './Order.model'
 export type { InquiryListResponse } from './Inquiry.model'
 export type { BatchListResponse, AddBatch } from './Batch.model'
-export type { DealersSupervisorListResponse, DealersSupervisorAdd, UpdateDealersSupervisor } from './DealerSupervisor.model'
-export type { LedgerListResponse, LedgerAdd, UpdateLedger } from './Ledger.model'
+export type {
+    DealersSupervisorListResponse,
+    DealersSupervisorAdd,
+    UpdateDealersSupervisor,
+} from './DealerSupervisor.model'
+export type {
+    LedgerListResponse,
+    LedgerAdd,
+    UpdateLedger,
+} from './Ledger.model'

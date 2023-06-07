@@ -32,11 +32,36 @@ const CompetitorManagementListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items } = competitorManagementState
     const columns: columnTypes[] = [
         {
-            field: 'productName',
-            headerName: 'Product Group Name',
+            field: 'competitorName',
+            headerName: 'Competitor Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {row.competitorName} </span>
+            ),
+        },
+        {
+            field: 'companyName',
+            headerName: 'Company Name',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: CompetitorManagementListResponse) => (
+                <span> {row.companyName} </span>
+            ),
+        },
+        {
+            field: 'productName',
+            headerName: 'Product  Name',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: CompetitorManagementListResponse) => (
+                <span> {row.productName} </span>
+            ),
+        },
+
+        {
+            field: 'price',
+            headerName: 'Price',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: CompetitorManagementListResponse) => (
+                <span> {row.schemePrice} </span>
             ),
         },
 

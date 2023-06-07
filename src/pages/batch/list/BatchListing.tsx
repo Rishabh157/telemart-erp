@@ -62,8 +62,9 @@ const BatchListing = ({ columns, rows }: Props) => {
                             text: 'Do you want to Add Batch ?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed ? submit() : ''
-                                // : setShowDropdown(false)
+                                return res.isConfirmed
+                                    ? submit()
+                                    : setShowDropdown(!showDropdown)
                             },
                         })
                     }

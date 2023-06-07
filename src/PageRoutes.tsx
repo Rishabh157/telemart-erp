@@ -301,7 +301,10 @@ const PageRoutes = () => {
                             path="return-to-vendor"
                             element={'Return To Vendor'}
                         />
-                        <Route path="ledger" element={<ListLedgerTabWrapper/>} />
+                        <Route
+                            path="ledger"
+                            element={<ListLedgerTabWrapper />}
+                        />
                         <Route
                             path="activities"
                             element={<VendorActivityTabWrapper />}
