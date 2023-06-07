@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
-import { object, string, number } from 'yup'
+import { object, string } from 'yup'
 import EditCompetitor from './EditCompetitor'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -106,9 +106,7 @@ const EditCompetitorWrapper = (props: Props) => {
         .min(10, 'Number should be 10 digits')
         .max(10, 'maximum 10 digit')
         .required('Required'),
-        schemePrice: number()
-            .typeError('SchemePrice must be a number')
-            .positive(' Must be a positive number.'),
+        schemePrice: string().required('Required'),            
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),

@@ -119,9 +119,13 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 value={values.schemePrice}
                                 label="Scheme Price"
                                 placeholder="Scheme Price"
-                                onChange={(e) =>
-                                    setFieldValue('schemePrice', e.target.value)
-                                }
+                                onChange={(e) =>{
+                                    const inputValue =e.target.value
+                                    if (!isNaN(Number(inputValue))) { 
+                                        setFieldValue('schemePrice', e.target.value)
+                                    }                                    
+                                }}
+                                
                             />
                             <ATMTextField
                                 name="websiteLink"
