@@ -175,7 +175,6 @@ const InbouundWrapper = () => {
         params: ['didNo'],
         page: page,
         filterBy: [
-          
             {
                 fieldName: 'mobileNo',
                 value: ['9893432611'],

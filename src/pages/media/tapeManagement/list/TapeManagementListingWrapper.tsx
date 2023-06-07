@@ -36,7 +36,6 @@ const TapeManagementListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items } = tapeManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetPaginationTapeQuery({

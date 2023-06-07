@@ -130,7 +130,6 @@ const ConfigurationCompanyListingWrapper = () => {
     ]
     const { page, rowsPerPage, items, searchValue }: any = useSelector(
         (state: RootState) => state.company
-        
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
 

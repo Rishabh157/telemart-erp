@@ -103,7 +103,6 @@ const ChannelGroupListingWrapper = () => {
                 fieldName: 'companyId',
                 value: userData?.companyId as string,
             },
-           
         ],
         dateFilter: {},
         orderBy: 'createdAt',

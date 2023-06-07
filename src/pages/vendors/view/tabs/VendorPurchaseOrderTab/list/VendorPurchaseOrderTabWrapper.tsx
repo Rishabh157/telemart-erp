@@ -5,9 +5,7 @@ import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import PurchaseOrderListing from './PurchaseOrderListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
-import {
-    useGetPurchaseOrderQuery,
-} from 'src/services/PurchaseOrderService'
+import { useGetPurchaseOrderQuery } from 'src/services/PurchaseOrderService'
 import {
     setIsTableLoading,
     setItems,
