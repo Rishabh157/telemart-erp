@@ -97,7 +97,7 @@ const AddSlotManagementWrapper = () => {
 
     useEffect(() => {
         if (!isTapeMgtLoading && !isTapeMgtFetching) {
-            dispatch(setSelectedTapManagement(TapeMgtdata.data || []))
+            dispatch(setSelectedTapManagement(TapeMgtdata?.data || []))
         }
     }, [isTapeMgtLoading, isTapeMgtFetching, TapeMgtdata, dispatch])
 
