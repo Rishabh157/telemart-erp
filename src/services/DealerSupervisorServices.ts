@@ -1,7 +1,4 @@
-import {
-    DealersSupervisorAdd,
-    UpdateDealersSupervisor,
-} from 'src/models'
+import { DealersSupervisorAdd, UpdateDealersSupervisor } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 

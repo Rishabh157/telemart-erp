@@ -17,7 +17,6 @@ import { useGetDealerSupervisorQuery } from 'src/services/DealerSupervisorServic
 import { RootState } from 'src/redux/store'
 
 const ListDealerSupervisorTabWrapper = () => {
-   
     const params = useParams()
     const dealerId: any = params.dealerId
     const dealerSupervisorState: any = useSelector(
@@ -32,7 +31,7 @@ const ListDealerSupervisorTabWrapper = () => {
     const { data, isFetching, isLoading } = useGetDealerSupervisorQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ["dealerId","supervisorName"],
+        params: ['dealerId', 'supervisorName'],
         page: page,
         filterBy: [
             {
@@ -60,7 +59,7 @@ const ListDealerSupervisorTabWrapper = () => {
             renderCell: (row: DealersSupervisorListResponse) => (
                 <span> {row.supervisorName} </span>
             ),
-        },       
+        },
         {
             field: 'actions',
             headerName: 'Actions',

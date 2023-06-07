@@ -8,7 +8,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
-
 type Props = {}
 
 export type FormInitialValues = {
@@ -21,12 +20,12 @@ const DealerSupervisorTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const dealerId: any = params.dealerId
-    
+
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addDealerSupervisor] = useAddDealerSupervisorMutation()
-   
+
     const initialValues: FormInitialValues = {
         companyId: companyId,
         dealerId: dealerId,
@@ -39,7 +38,7 @@ const DealerSupervisorTabWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
-        setApiStatus(true)      
+        setApiStatus(true)
 
         setTimeout(() => {
             addDealerSupervisor({
@@ -73,7 +72,7 @@ const DealerSupervisorTabWrapper = (props: Props) => {
                     return (
                         <AddDealerSupervisor
                             apiStatus={apiStatus}
-                            formikProps={formikProps}                           
+                            formikProps={formikProps}
                         />
                     )
                 }}

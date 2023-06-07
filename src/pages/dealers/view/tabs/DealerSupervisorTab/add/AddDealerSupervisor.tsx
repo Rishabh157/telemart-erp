@@ -4,15 +4,11 @@ import { FormInitialValues } from './DealerSupervisorTabWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 
 type Props = {
-    formikProps: FormikProps<FormInitialValues>    
+    formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
 }
 
-const AddDealerSupervisor = ({
-    formikProps,
-    apiStatus,
-}: Props) => {
-
+const AddDealerSupervisor = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -48,10 +44,12 @@ const AddDealerSupervisor = ({
                                 label="Supervisor Name"
                                 placeholder="Supervisor Name"
                                 onChange={(e) =>
-                                    setFieldValue('supervisorName', e.target.value)
+                                    setFieldValue(
+                                        'supervisorName',
+                                        e.target.value
+                                    )
                                 }
                             />
-
                         </div>
                     </div>
                 </div>

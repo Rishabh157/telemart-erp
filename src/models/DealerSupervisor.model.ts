@@ -1,6 +1,6 @@
 export type DealersSupervisorListResponse = {
-    dealerId: string    
-    supervisorName: string   
+    dealerId: string
+    supervisorName: string
     companyId: string
     isActive: boolean
     isDeleted: boolean

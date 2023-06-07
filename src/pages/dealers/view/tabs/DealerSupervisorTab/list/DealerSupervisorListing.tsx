@@ -12,7 +12,6 @@ import {
 } from 'src/redux/DealerSupervisorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
@@ -23,7 +22,6 @@ type Props = {
 const DealerSupervisorListing = ({ columns, rows }: Props) => {
     const params = useParams()
     const dealerId: any = params.dealerId
-    
 
     const dispatch = useDispatch<AppDispatch>()
     const dealerSupervisorState: any = useSelector(
