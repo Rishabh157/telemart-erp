@@ -81,7 +81,7 @@ const EditCompetitorWrapper = (props: Props) => {
         dispatch(setSelectedCompetitor(data?.data))
     }, [dispatch, data, isLoading, isFetching])
 
-    console.log(data)
+    //console.log(data)
 
     const initialValues: FormInitialValues = {
         competitorName: selectedItem?.competitorName || '',
@@ -93,7 +93,7 @@ const EditCompetitorWrapper = (props: Props) => {
         whatsappNumber: selectedItem?.whatsappNumber || '',
         channelNameId: selectedItem?.channelNameId || '',
         startTime: selectedItem?.startTime || '',
-        endTime: selectedItem?.endTime || '',        
+        endTime: selectedItem?.endTime || '',
     }
 
     // Form Validation Schema
@@ -103,24 +103,23 @@ const EditCompetitorWrapper = (props: Props) => {
         websiteLink: string().url().required('Required'),
         youtubeLink: string().url().required('Required'),
         whatsappNumber: string()
-        .min(10, 'Number should be 10 digits')
-        .max(10, 'maximum 10 digit')
-        .required('Required'),
-        schemePrice: string().required('Required'),            
+            .min(10, 'Number should be 10 digits')
+            .max(10, 'maximum 10 digit')
+            .required('Required'),
+        schemePrice: string().required('Required'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),
     })
 
     const dropdownOptions = {
-        channelOptions: channelMgt?.map(
-            (ele: ChannelManagementListResponse) => {
+        channelOptions:
+            channelMgt?.map((ele: ChannelManagementListResponse) => {
                 return {
                     label: ele.channelName,
                     value: ele._id,
                 }
-            }
-        ) || [],
+            }) || [],
     }
 
     //console.log(dropdownOptions)

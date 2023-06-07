@@ -14,7 +14,7 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     dropdownOptions: {
-        channelOptions: SelectOption[]
+        channelOptions: SelectOption[] | []
     }
 }
 
@@ -119,11 +119,14 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 value={values.schemePrice}
                                 label="schemePrice"
                                 placeholder="schemePrice"
-                                onChange={(e) =>{
-                                    const inputValue =e.target.value
-                                    if (!isNaN(Number(inputValue))) { 
-                                        setFieldValue('schemePrice', e.target.value)
-                                    }                                    
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        setFieldValue(
+                                            'schemePrice',
+                                            e.target.value
+                                        )
+                                    }
                                 }}
                             />
                             <ATMTextField
@@ -131,14 +134,14 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 value={values.whatsappNumber}
                                 label="Whatsapp Number"
                                 placeholder="Whatsapp Number"
-                                onChange={(e) =>{
-                                    const inputValue =e.target.value
-                                    if (!isNaN(Number(inputValue))) { 
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
                                         setFieldValue(
                                             'whatsappNumber',
                                             e.target.value
                                         )
-                                    }                                    
+                                    }
                                 }}
                             />
                             <ATMTextField

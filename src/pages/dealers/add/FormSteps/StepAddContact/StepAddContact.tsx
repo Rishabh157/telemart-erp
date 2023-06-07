@@ -140,7 +140,7 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                                                         name={`contactInformation[${contactInformationIndex}].mobileNumber`}
                                                         value={mobileNumber}
                                                         onChange={(e) => {
-                                                           const inputValue =
+                                                            const inputValue =
                                                                 e.target.value
                                                             if (
                                                                 !isNaN(
@@ -148,7 +148,7 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
                                                                         inputValue
                                                                     )
                                                                 )
-                                                            ) { 
+                                                            ) {
                                                                 setFieldValue(
                                                                     `contactInformation[${contactInformationIndex}].mobileNumber`,
                                                                     e.target

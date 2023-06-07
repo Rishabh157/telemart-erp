@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
-import { object, string} from 'yup'
+import { object, string } from 'yup'
 import AddCompetitor from './Addcompetitor'
 // import { useAddCompetitorsMutation } from 'src/services/AttributeService'
 import { showToast } from 'src/utils'
@@ -64,14 +64,13 @@ const AddCompetitorWrapper = (props: Props) => {
     }, [dispatch, data, isLoading, isFetching])
 
     const dropdownOptions = {
-        channelOptions: channelMgt?.map(
-            (channel: ChannelManagementListResponse) => {
+        channelOptions:
+            channelMgt?.map((channel: ChannelManagementListResponse) => {
                 return {
                     label: channel.channelName,
                     value: channel._id,
                 }
-            }
-        ) || [],
+            }) || [],
     }
 
     const initialValues: FormInitialValues = {
@@ -94,10 +93,10 @@ const AddCompetitorWrapper = (props: Props) => {
         websiteLink: string().url().required('Required'),
         youtubeLink: string().url().required('Required'),
         whatsappNumber: string()
-        .min(10, 'Number should be 10 digits')
-        .max(10, 'maximum 10 digit')
-        .required('Required'),
-        schemePrice: string().required('Required'),           
+            .min(10, 'Number should be 10 digits')
+            .max(10, 'maximum 10 digit')
+            .required('Required'),
+        schemePrice: string().required('Required'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),
