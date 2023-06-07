@@ -40,14 +40,14 @@ const AddSaleOrderWrapper = (props: Props) => {
         data: dealerData,
         isLoading: dealerIsLoading,
         isFetching: dealerIsFetching,
-    } = useGetAllDealersQuery('')
+    } = useGetAllDealersQuery(userData?.companyId)
     const { allItems }: any = useSelector((state: RootState) => state?.dealer)
 
     const {
         data: warehouseData,
         isLoading: warehouseIsLoading,
         isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery('')
+    } = useGetWareHousesQuery(userData?.companyId)
     const { allItems: warehouseItems }: any = useSelector(
         (state: RootState) => state?.warehouse
     )
