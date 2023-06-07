@@ -51,7 +51,7 @@ const EditProductSubCategoryWrapper = (props: Props) => {
         data: pcData,
         isLoading: pcIsLoading,
         isFetching: pcIsFetching,
-    } = useGetAllProductCategoryQuery('')
+    } = useGetAllProductCategoryQuery(userData?.companyId)
 
     // Taxes all data (t)
     // const {

@@ -5,6 +5,8 @@ import { useGetAllCartonBoxQuery } from 'src/services/CartonBoxService'
 import { CartonBoxListResponse, WarehousesListResponse } from 'src/models'
 import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { RootState } from 'src/redux/store'
+import { useSelector } from 'react-redux'
 
 type Props = {}
 export type SelectBoxOption = {
@@ -16,10 +18,14 @@ const InwardInventoryWrapper = (props: Props) => {
     const [cartonBoxOption, setCartonBoxOption] = useState<
         SelectBoxOption[] | []
     >([])
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const [wareHouseOption, setWareHouseOption] = useState<SelectOption[] | []>(
         []
     )
-    const { data, isLoading, isFetching } = useGetAllCartonBoxQuery('')
+    const { data, isLoading, isFetching } = useGetAllCartonBoxQuery(
+        userData?.companyId
+    )
     const {
         data: whData,
         isLoading: whIsLoading,

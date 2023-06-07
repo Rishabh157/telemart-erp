@@ -62,7 +62,7 @@ const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Form */}
                     <div className="grow py-8 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-3 gap-9 px-5">
                             {/* Field1 */}
 
                             {/* Field 3 */}
@@ -85,6 +85,8 @@ const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
                                     setFieldValue('pageName', e.target.value)
                                 }
                             />
+                        </div>
+                        <div className="grid grid-cols-3 gap-9 px-5">
                             <ATMTextArea
                                 name="headerSpace"
                                 value={values.headerSpace}

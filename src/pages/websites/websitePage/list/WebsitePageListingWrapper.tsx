@@ -28,6 +28,7 @@ const WebsitePageListingWrapper = () => {
     const WebsitePageState = useSelector(
         (state: RootState) => state.websitePage
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { page, rowsPerPage, searchValue, items, filterValue } =
         WebsitePageState
@@ -80,6 +81,16 @@ const WebsitePageListingWrapper = () => {
                             </button>
                             <button
                                 onClick={() => {
+                                    navigate(
+                                        `/all-websites/website-Page/view/${currentId}`
+                                    )
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View
+                            </button>
+                            <button
+                                onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Delete Website-Page',
                                         text: 'Do you want to delete',
@@ -112,6 +123,10 @@ const WebsitePageListingWrapper = () => {
             {
                 fieldName: 'websiteId',
                 value: filterValue,
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

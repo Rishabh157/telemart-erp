@@ -56,7 +56,7 @@ const AddSaleOrderWrapper = (props: Props) => {
         data: productGroupData,
         isLoading: productGroupIsLoading,
         isFetching: productGroupIsFetching,
-    } = useGetAllProductGroupQuery('')
+    } = useGetAllProductGroupQuery(userData?.companyId)
     const { allItems: productGroupItems }: any = useSelector(
         (state: RootState) => state?.productGroup
     )

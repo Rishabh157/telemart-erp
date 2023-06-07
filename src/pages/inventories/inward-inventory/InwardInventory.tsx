@@ -11,6 +11,8 @@ import MoveToCartonDrawer from './MoveToCartonDrawer/MoveToCartonDrawer'
 import { SelectBoxOption } from './InwardInventoryWrapper'
 import { useGetAllBarcodeQuery } from 'src/services/BarcodeService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 // import { showToast } from "src/utils";
 
 type Props = {
@@ -43,12 +45,15 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [filterBarcode, setFilterBarcode] = useState<renderBarcodType[] | []>(
         []
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const [dataToSend, setDataToSend] = useState<any[]>([])
     const [itemCount, setItemCount] = React.useState(0)
     const [barcode, setBarcode] = React.useState('')
     const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] =
         React.useState(false)
-    const { data, isLoading, isFetching } = useGetAllBarcodeQuery('')
+    const { data, isLoading, isFetching } = useGetAllBarcodeQuery(
+        userData?.companyId
+    )
     useEffect(() => {
         const count =
             (cartonBoxOption?.find((e) => e?.value === packaging)

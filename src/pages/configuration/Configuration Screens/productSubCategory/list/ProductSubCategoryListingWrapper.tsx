@@ -35,6 +35,7 @@ const ProductSubCategoryListingWrapper = () => {
     const productSubCategoryState: any = useSelector(
         (state: RootState) => state.productSubCategory
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
         {
@@ -123,7 +124,7 @@ const ProductSubCategoryListingWrapper = () => {
         },
     ]
     const { page, rowsPerPage, searchValue, items } = productSubCategoryState
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    // const { userData } = useSelector((state: RootState) => state?.auth)
 
     // const dispatch = useDispatch<AppDispatch>();
     // // const navigate = useNavigate();

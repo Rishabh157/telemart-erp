@@ -177,7 +177,7 @@ const AddProductWrapper = () => {
         data: itemData,
         isLoading: itemIsLoading,
         isFetching: itemIsFetching,
-    } = useGetAllItemsQuery('')
+    } = useGetAllItemsQuery(userData?.companyId)
 
     // States
     const [activeStep, setActiveStep] = React.useState(0)

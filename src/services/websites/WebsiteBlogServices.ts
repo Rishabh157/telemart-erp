@@ -17,8 +17,8 @@ export const WebsiteBlogApi = apiSlice.injectEndpoints({
         //***** GET All DATA *****/
         getAllWebsiteBlog: builder.query({
             providesTags: ['website-blog'],
-            query: () => ({
-                url: `/website-blog`,
+            query: (companyId) => ({
+                url: `/website-blog/company/${companyId}`,
                 method: 'GET',
             }),
         }),

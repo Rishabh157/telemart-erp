@@ -36,6 +36,7 @@ const ItemListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteItem] = useDeleteItemsMutation()
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
         {
@@ -119,7 +120,7 @@ const ItemListingWrapper = () => {
     ]
     // const dispatch = useDispatch<AppDispatch>();
     // // const navigate = useNavigate();
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    // const { userData } = useSelector((state: RootState) => state?.auth)
     const { data, isFetching, isLoading } = useGetItemsQuery({
         limit: rowsPerPage,
         searchValue: searchValue,

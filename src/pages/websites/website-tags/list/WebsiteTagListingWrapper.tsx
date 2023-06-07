@@ -30,6 +30,7 @@ const WebsiteTagListingWrapper = () => {
     const WebsiteTagsState: any = useSelector(
         (state: RootState) => state.websiteTags
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { page, rowsPerPage, searchValue, items } = WebsiteTagsState
 
@@ -139,6 +140,10 @@ const WebsiteTagListingWrapper = () => {
             {
                 fieldName: '',
                 value: [],
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

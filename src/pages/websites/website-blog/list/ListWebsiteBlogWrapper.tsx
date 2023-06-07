@@ -30,6 +30,7 @@ const ListWebsiteBlogWrapper = () => {
     const WebsiteBlogState: any = useSelector(
         (state: RootState) => state.websiteBlog
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { page, rowsPerPage, searchValue, items, filterValue } =
         WebsiteBlogState
@@ -91,6 +92,16 @@ const ListWebsiteBlogWrapper = () => {
                             </button>
                             <button
                                 onClick={() => {
+                                    navigate(
+                                        `/all-websites/website-blog/view/${currentId}`
+                                    )
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View
+                            </button>
+                            <button
+                                onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Delete Blog',
                                         text: 'Do you want to delete',
@@ -122,6 +133,10 @@ const ListWebsiteBlogWrapper = () => {
             {
                 fieldName: 'websiteId',
                 value: filterValue,
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

@@ -72,7 +72,7 @@ const EditWebsiteTagWrapper = (props: Props) => {
         isLoading: iswebsiteLoading,
         isFetching: isWebsiteFetching,
         data: WebsiteData,
-    } = useGetAllWebsiteQuery('')
+    } = useGetAllWebsiteQuery(userData?.companyId)
 
     useEffect(() => {
         if (!iswebsiteLoading && !isWebsiteFetching) {
@@ -84,7 +84,7 @@ const EditWebsiteTagWrapper = (props: Props) => {
         isLoading: isPageLoading,
         isFetching: isPageFetching,
         data: PageData,
-    } = useGetAllWebsitePageQuery('')
+    } = useGetAllWebsitePageQuery(userData?.companyId)
 
     useEffect(() => {
         if (!isPageLoading && !isPageFetching) {
@@ -112,20 +112,6 @@ const EditWebsiteTagWrapper = (props: Props) => {
     const validationSchema = object({
         websitPageId: string().required('Required'),
         websiteMasterId: string().required('Required'),
-        metaDescription: string().required('Required'),
-        metaKeyword: string().required('Required'),
-        metaOgTitle: string().required('Required'),
-        metaOgUrl: string().url('URL must be valid').required('Required'),
-        metaOgImage: string()
-            .url('Image must be valid url')
-            .required('Required'),
-        metaOgDescription: string().required('Required'),
-        metaOgType: string().required('Required'),
-        metaTwitterTitle: string().required('Required'),
-        metaTwitterCard: string().required('Required'),
-        metaTwitterImage: string()
-            .url('Image must be valid url')
-            .required('Required'),
     })
 
     //    Form Submit Handler

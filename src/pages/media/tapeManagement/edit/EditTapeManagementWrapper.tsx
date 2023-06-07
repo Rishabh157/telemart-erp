@@ -109,7 +109,7 @@ const EditTapeManagementWrapper = () => {
         isLoading: isLanguageLoading,
         isFetching: isLanguageFetching,
         data: languageDataApi,
-    } = useGetAllLanguageQuery(' ')
+    } = useGetAllLanguageQuery('')
     const {
         isLoading,
         isFetching,

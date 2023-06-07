@@ -115,7 +115,7 @@ const DealersCategoryListingWrapper = () => {
         },
     ]
     const { page, rowsPerPage, searchValue, items } = dealersCategoryState
-
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
     // // const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetDealerCategoryQuery({
@@ -127,6 +127,10 @@ const DealersCategoryListingWrapper = () => {
             {
                 fieldName: '',
                 value: [],
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

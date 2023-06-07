@@ -8,7 +8,6 @@ import { setItems } from 'src/redux/slices/tehsilSlice'
 const TehsilListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.tehsils)
-
     const { searchValue: searchValueTehsil, filterValue }: any = useSelector(
         (state: RootState) => state.tehsils
     )

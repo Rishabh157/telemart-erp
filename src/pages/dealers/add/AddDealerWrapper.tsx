@@ -241,7 +241,9 @@ const AddDealerWrapper = () => {
     }
 
     const dispatch = useDispatch<AppDispatch>()
-    const { data, isLoading, isFetching } = useGetAllDealerCategoryQuery(userData?.companyId)
+    const { data, isLoading, isFetching } = useGetAllDealerCategoryQuery(
+        userData?.companyId
+    )
 
     const { alldealerCategory }: any = useSelector(
         (state: RootState) => state.dealersCategory
