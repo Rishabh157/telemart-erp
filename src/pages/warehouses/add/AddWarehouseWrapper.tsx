@@ -125,9 +125,7 @@ const AddWarehouseWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [addWareHouse] = useAddWareHouseMutation()
-    const { data, isLoading, isFetching } = useGetAllCountryQuery(
-        userData?.companyId
-    )
+    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
 
     useEffect(() => {
         if (!isFetching && !isLoading) {

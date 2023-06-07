@@ -187,7 +187,7 @@ const EditProductWrapper = () => {
         data: languageData,
         isLoading: lIsLoading,
         isFetching: lIsFetching,
-    } = useGetAllLanguageQuery(userData?.companyId)
+    } = useGetAllLanguageQuery('')
 
     const {
         data: itemData,

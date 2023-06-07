@@ -8,7 +8,6 @@ import { RootState, AppDispatch } from 'src/redux/store'
 const AreaListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.areas)
-    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { searchValue, filterValue }: any = useSelector(
         (state: RootState) => state.areas
@@ -28,10 +27,6 @@ const AreaListingWrapper = () => {
             {
                 fieldName: 'pincodeId',
                 value: filterValue ? filterValue : [],
-            },
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
             },
         ],
         dateFilter: {},

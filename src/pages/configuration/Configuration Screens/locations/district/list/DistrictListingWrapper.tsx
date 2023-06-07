@@ -8,7 +8,6 @@ import { setItems } from 'src/redux/slices/districtSlice'
 const DistrictListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.district)
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const { searchValue: searchValueDistrict, filterValue }: any = useSelector(
         (state: RootState) => state.district
     )
@@ -26,10 +25,6 @@ const DistrictListingWrapper = () => {
             {
                 fieldName: 'stateId',
                 value: filterValue ? filterValue : [],
-            },
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
             },
         ],
         dateFilter: {},

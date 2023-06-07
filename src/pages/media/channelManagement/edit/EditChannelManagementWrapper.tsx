@@ -69,7 +69,7 @@ const EditChannelManagementWrapper = () => {
         isLoading: isLanguageLoading,
         isFetching: isLanguageFetching,
         data: languageDataApi,
-    } = useGetAllLanguageQuery(userData?.companyId)
+    } = useGetAllLanguageQuery('')
     const {
         isLoading: isCategoryLoading,
         isFetching: isCategoryFetching,
@@ -79,7 +79,7 @@ const EditChannelManagementWrapper = () => {
         isLoading: isCountryLoading,
         isFetching: isCountryFetching,
         data: countryDataApi,
-    } = useGetAllCountryQuery(userData?.companyId)
+    } = useGetAllCountryQuery('')
 
     const {
         isLoading,

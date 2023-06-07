@@ -17,8 +17,8 @@ export const languageApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getAllLanguage: builder.query({
             providesTags: ['Language'],
-            query: (companyId) => ({
-                url: `/language/company/${companyId}`,
+            query: () => ({
+                url: `/language`,
                 method: 'GET',
                 // body,
             }),

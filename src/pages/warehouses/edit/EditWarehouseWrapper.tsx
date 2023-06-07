@@ -143,7 +143,7 @@ const EditWarehouseWrapper = () => {
         data: countryData,
         isLoading: countryIsLoading,
         isFetching: countryIsFetching,
-    } = useGetAllCountryQuery(userData?.companyId)
+    } = useGetAllCountryQuery('')
 
     useEffect(() => {
         if (!isFetching && !isLoading) {

@@ -71,7 +71,7 @@ const AddTapeManagementWrapper = () => {
         isLoading: isLanguageLoading,
         isFetching: isLanguageFetching,
         data: languageDataApi,
-    } = useGetAllLanguageQuery(userData?.companyId)
+    } = useGetAllLanguageQuery('')
     const {
         isLoading,
         isFetching,

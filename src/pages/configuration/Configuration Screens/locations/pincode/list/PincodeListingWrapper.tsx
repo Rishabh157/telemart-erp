@@ -9,7 +9,6 @@ import { setItems } from 'src/redux/slices/pincodeSlice'
 const PincodeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.pincode)
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const { searchValue, filterValue }: any = useSelector(
         (state: RootState) => state.pincode
     )
@@ -26,10 +25,6 @@ const PincodeListingWrapper = () => {
             {
                 fieldName: 'tehsilId',
                 value: filterValue ? filterValue : [],
-            },
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
             },
         ],
         dateFilter: {},
