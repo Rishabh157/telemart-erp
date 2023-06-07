@@ -101,14 +101,14 @@ const SchemeListingWrapper = () => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
+                <div className="">
                     <button
                         onClick={(e) => {
                             e.stopPropagation()
                             setShowDropdown(!showDropdown)
                             setCurrentId(row?._id)
                         }}
-                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+                        className=" absolute text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
                     >
                         {' '}
                         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}

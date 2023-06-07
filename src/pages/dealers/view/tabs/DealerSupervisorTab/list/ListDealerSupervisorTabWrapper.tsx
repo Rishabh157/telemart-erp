@@ -48,7 +48,7 @@ const ListDealerSupervisorTabWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'schemeName',
-            headerName: 'Scheme Name',
+            headerName: 'Supervisor Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DealersSchemeListResponse) => (
                 <span> {row.schemeName} </span>
