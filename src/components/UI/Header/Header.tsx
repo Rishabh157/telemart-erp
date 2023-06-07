@@ -50,6 +50,7 @@ const Header = (props: Props) => {
                     }
                     localStorage.setItem('userData', JSON.stringify(userData))
                     dispatch(setUserData(userData))
+                    window.location.reload()
                 }
             }
         )
