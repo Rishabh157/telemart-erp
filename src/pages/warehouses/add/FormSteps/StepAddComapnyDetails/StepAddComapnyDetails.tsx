@@ -3,7 +3,7 @@ import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddWarehouseWrapper'
 import { DropdownOptions, FieldType } from './StepAddCompanyDetailsWrapper'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
@@ -49,8 +49,9 @@ const StepAddComapnyDetails = ({
 
                         case 'select':
                             return (
-                                <div>
-                                    <ATMSelect
+                                <div className="-mt-2">
+                                    <ATMSelectSearchable
+                                        selectLabel={label}
                                         label={label}
                                         name={name}
                                         value={
@@ -59,9 +60,9 @@ const StepAddComapnyDetails = ({
                                                       name.split('.')[1]
                                                   ]
                                                 : values[name]
-                                        }
+                                        }                                        
                                         onChange={(e: any) => {
-                                            setFieldValue(name, e.target.value)
+                                            setFieldValue(name, e)
                                         }}
                                         options={
                                             dropdownOptions[
@@ -69,7 +70,7 @@ const StepAddComapnyDetails = ({
                                                     'countryOptions'
                                             ]
                                         }
-                                        isSubmitting={isSubmitting}
+                                        
                                     />
                                 </div>
                             )
