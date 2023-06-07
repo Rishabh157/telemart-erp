@@ -34,6 +34,8 @@ const TapeManagementListingWrapper = () => {
     )
 
     const { page, rowsPerPage, searchValue, items } = tapeManagementState
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -43,6 +45,10 @@ const TapeManagementListingWrapper = () => {
         params: ['tapeName', 'schemeLabel'],
         page: page,
         filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: '',
                 value: [],

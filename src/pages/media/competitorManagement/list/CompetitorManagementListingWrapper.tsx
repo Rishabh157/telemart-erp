@@ -30,6 +30,7 @@ const CompetitorManagementListingWrapper = () => {
     )
 
     const { page, rowsPerPage, searchValue, items } = competitorManagementState
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const columns: columnTypes[] = [
         {
             field: 'competitorName',
@@ -123,6 +124,10 @@ const CompetitorManagementListingWrapper = () => {
         params: ['competitorName'],
         page: page,
         filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: '',
                 value: [],

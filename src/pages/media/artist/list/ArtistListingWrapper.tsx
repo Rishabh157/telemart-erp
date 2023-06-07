@@ -28,6 +28,8 @@ const ArtistListingWrapper = () => {
     const ArtistState: any = useSelector((state: RootState) => state.artist)
 
     const { page, rowsPerPage, searchValue, items } = ArtistState
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const columns: columnTypes[] = [
         {
             field: 'artistName',
@@ -96,6 +98,10 @@ const ArtistListingWrapper = () => {
         params: ['artistName'],
         page: page,
         filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: '',
                 value: [],

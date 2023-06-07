@@ -5,7 +5,7 @@ export type PaginationType = {
     page: number
     filterBy: {
         fieldName: string
-        value: any[]
+        value: any[] | string
     }[]
     dateFilter: {
         start_date?: string

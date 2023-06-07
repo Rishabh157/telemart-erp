@@ -27,6 +27,7 @@ const ChannelManagementListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const { page, rowsPerPage, searchValue, items } = channelManagementState
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const [deleteChannel] = useDeleteChannelMutation()
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -133,6 +134,10 @@ const ChannelManagementListingWrapper = () => {
         params: ['channelName', 'channelGroupLabel'],
         page: page,
         filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: '',
                 value: [],

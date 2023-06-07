@@ -5,7 +5,9 @@ import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import PurchaseOrderListing from './PurchaseOrderListing'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { useGetPurchaseOrderByVendorIdQuery } from 'src/services/PurchaseOrderService'
+import {
+    useGetPurchaseOrderQuery,
+} from 'src/services/PurchaseOrderService'
 import {
     setIsTableLoading,
     setItems,
@@ -23,13 +25,31 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
     const productOrderState: any = useSelector(
         (state: RootState) => state.purchaseOrder
     )
-    //const { page, rowsPerPage, searchValue, items  } = productOrderState;
-    const { items } = productOrderState
     const [showDropdown, setShowDropdown] = useState(false)
-    //const [currentId, setCurrentId] = useState("");
 
-    const { data, isLoading, isFetching } =
-        useGetPurchaseOrderByVendorIdQuery(vendorId)
+    const { page, rowsPerPage, searchValue, items } = productOrderState
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
+    const { data, isLoading, isFetching } = useGetPurchaseOrderQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: ['poCode', 'wareHouseId'],
+        page: page,
+        filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
+            {
+                fieldName: 'vendorId',
+                value: vendorId as string,
+            },
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: true,
+    })
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -117,44 +137,6 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
                         {' '}
                         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
                     </button>
-                    {/* {showDropdown && currentId === row?._id && (
-            <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-              <button
-                onClick={() => {
-                  navigate(`/purchase-order/view/${currentId}`);
-                }}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              >
-                View
-              </button>
-              <button
-                onClick={() => {
-                  navigate(`/purchase-order/edit/${currentId}`,{state:{  poCode: row?.poCode}})
-                }}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              >
-                Edit
-              </button>
-            
-              <button
-                onClick={() => {
-                  navigate("/grn", {
-                    state: {
-                      poCode: row?.poCode,
-                      // itemId: row?.purchaseOrder.itemId,
-                      // itemName: row?.purchaseOrder.itemName,
-                      // quantity: row?.purchaseOrder.quantity,
-                      // companyId: row?.companyId,
-                    },
-                   
-                  });
-                }}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              >
-                View GRN
-              </button>
-            </div>
-          )} */}
                 </div>
             ),
             align: 'end',

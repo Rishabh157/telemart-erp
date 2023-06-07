@@ -21,7 +21,7 @@ const BatchListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { page, rowsPerPage, searchValue, items } = batchState
-
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const { data, isFetching, isLoading } = useGetBatchQuery({
@@ -31,8 +31,8 @@ const BatchListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},
