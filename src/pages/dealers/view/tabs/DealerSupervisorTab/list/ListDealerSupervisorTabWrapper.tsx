@@ -1,42 +1,46 @@
 import React, { useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { DealersSchemeListResponse } from 'src/models/DealerScheme.model'
+import { DealersSupervisorListResponse } from 'src/models/DealerSupervisor.model'
 import DealerSupervisorListing from './DealerSupervisorListing'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/dealerSchemeSlice'
+} from 'src/redux/DealerSupervisorSlice'
 import { AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 //import { showToast } from "src/utils";
 import { useParams } from 'react-router-dom'
 //import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
-import { useGetDealerSchemeQuery } from 'src/services/DealerSchemeService'
+import { useGetDealerSupervisorQuery } from 'src/services/DealerSupervisorServices'
 import { RootState } from 'src/redux/store'
 
 const ListDealerSupervisorTabWrapper = () => {
-    //const [showDropdown, setShowDropdown] = useState(false);
-    //const [currentId, setCurrentId] = useState("");
     const params = useParams()
     const dealerId: any = params.dealerId
-    const dealerSchemeState: any = useSelector(
-        (state: RootState) => state.dealerScheme
+    const dealerSupervisorState: any = useSelector(
+        (state: RootState) => state.dealerSupervisor
     )
-    const { page, rowsPerPage, items, searchValue } = dealerSchemeState
+    const { page, rowsPerPage, items, searchValue } = dealerSupervisorState
+    const { userData } = useSelector((state: RootState) => state?.auth)
+    const companyId: any = userData?.companyId
 
     const dispatch = useDispatch<AppDispatch>()
     //const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetDealerSchemeQuery({
+    const { data, isFetching, isLoading } = useGetDealerSupervisorQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['schemeId'],
+        params: ['dealerId', 'supervisorName'],
         page: page,
         filterBy: [
             {
                 fieldName: 'dealerId',
                 value: dealerId,
+            },
+            {
+                fieldName: 'companyId',
+                value: companyId,
             },
         ],
         dateFilter: {},
@@ -45,22 +49,16 @@ const ListDealerSupervisorTabWrapper = () => {
         isPaginationRequired: true,
     })
 
+   // console.log(data)
+
     const columns: columnTypes[] = [
         {
             field: 'schemeName',
             headerName: 'Supervisor Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: DealersSchemeListResponse) => (
-                <span> {row.schemeName} </span>
+            renderCell: (row: DealersSupervisorListResponse) => (
+                <span> {row.supervisorName} </span>
             ),
-        },
-        {
-            field: 'price',
-            headerName: 'Price',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: DealersSchemeListResponse) => {
-                return <span> {row.price} </span>
-            },
         },
         {
             field: 'actions',

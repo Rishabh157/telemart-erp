@@ -9,8 +9,9 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/dealerSchemeSlice'
+} from 'src/redux/DealerSupervisorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
@@ -21,15 +22,16 @@ type Props = {
 const DealerSupervisorListing = ({ columns, rows }: Props) => {
     const params = useParams()
     const dealerId: any = params.dealerId
+
     const dispatch = useDispatch<AppDispatch>()
-    const schemeState: any = useSelector(
-        (state: RootState) => state.dealerScheme
+    const dealerSupervisorState: any = useSelector(
+        (state: RootState) => state.dealerSupervisor
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } = schemeState
+    const { page, rowsPerPage, searchValue, totalItems } = dealerSupervisorState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
