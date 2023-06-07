@@ -30,6 +30,7 @@ const ListWebsiteBlogWrapper = () => {
     const WebsiteBlogState: any = useSelector(
         (state: RootState) => state.websiteBlog
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { page, rowsPerPage, searchValue, items, filterValue } =
         WebsiteBlogState
@@ -122,6 +123,10 @@ const ListWebsiteBlogWrapper = () => {
             {
                 fieldName: 'websiteId',
                 value: filterValue,
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

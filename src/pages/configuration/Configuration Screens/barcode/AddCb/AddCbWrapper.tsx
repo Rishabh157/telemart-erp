@@ -23,7 +23,7 @@ const AddCbBarcodeWrapper = (props: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState(false)
-    // const { userData } = useSelector((state: RootState) => state?.auth);
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const { allItems }: any = useSelector(
         (state: RootState) => state?.cartonBox
     )
@@ -33,7 +33,7 @@ const AddCbBarcodeWrapper = (props: Props) => {
         data: cbData,
         isLoading: cbIsLoading,
         isFetching: cbIsFetching,
-    } = useGetAllCartonBoxQuery('')
+    } = useGetAllCartonBoxQuery(userData?.companyId)
 
     useEffect(() => {
         dispatch(setAllItems(cbData?.data))

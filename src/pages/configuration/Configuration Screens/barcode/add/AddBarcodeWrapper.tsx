@@ -34,7 +34,7 @@ const AddBarcodeWrapper = (props: Props) => {
         data: productGroupData,
         isLoading: pgIsLoading,
         isFetching: pgIsFetching,
-    } = useGetAllProductGroupQuery('')
+    } = useGetAllProductGroupQuery(userData?.companyId)
 
     useEffect(() => {
         dispatch(setAllItems(productGroupData?.data))

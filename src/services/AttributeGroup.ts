@@ -17,8 +17,8 @@ export const attributeGroupApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getAllAttributeGroup: builder.query({
             providesTags: ['attributeGroup'],
-            query: () => ({
-                url: '/attributes-group',
+            query: (companyId) => ({
+                url: `/attributes-group/comapny/${companyId}`,
                 method: 'GET',
                 // body,
             }),

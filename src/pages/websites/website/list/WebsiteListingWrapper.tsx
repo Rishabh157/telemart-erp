@@ -28,6 +28,7 @@ const WebstieListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsiteState: any = useSelector((state: RootState) => state.website)
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { page, rowsPerPage, searchValue, items } = WebsiteState
     const columns: columnTypes[] = [
@@ -167,6 +168,10 @@ const WebstieListingWrapper = () => {
             {
                 fieldName: '',
                 value: [],
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

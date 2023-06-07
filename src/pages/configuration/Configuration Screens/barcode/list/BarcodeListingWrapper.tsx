@@ -52,6 +52,8 @@ const BarcodeListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items, activeTabIndex } =
         barcodeState
     const dispatch = useDispatch<AppDispatch>()
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     // const navigate = useNavigate()
 
     const { data, isFetching, isLoading } = useGetBarcodeQuery({
@@ -63,6 +65,10 @@ const BarcodeListingWrapper = () => {
             {
                 fieldName: 'barcodeGroupNumber',
                 value: [groupBarcode],
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

@@ -34,7 +34,9 @@ const AddProductGroupWrapper = (props: Props) => {
         (state: RootState) => state?.tax
     )
 
-    const { data, isLoading, isFetching } = useGetAllTaxesQuery('')
+    const { data, isLoading, isFetching } = useGetAllTaxesQuery(
+        userData?.companyId
+    )
     useEffect(() => {
         if (!isLoading && !isFetching) {
             setTaxStatus(true)

@@ -24,7 +24,9 @@ const AddAttributeGroupWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { allItems } = useSelector((state: RootState) => state?.attributes)
-    const { data, isLoading, isFetching } = useGetAllAttributesQuery('')
+    const { data, isLoading, isFetching } = useGetAllAttributesQuery(
+        userData?.companyId
+    )
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddAttributeGroups] = useAddAttributeGroupMutation()
 

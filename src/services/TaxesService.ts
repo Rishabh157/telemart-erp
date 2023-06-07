@@ -17,8 +17,8 @@ export const taxtesApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getAllTaxes: builder.query({
             providesTags: ['Taxes'],
-            query: () => ({
-                url: '/taxes',
+            query: (companyId) => ({
+                url: `/taxes/company/${companyId}`,
                 method: 'GET',
                 // body,
             }),

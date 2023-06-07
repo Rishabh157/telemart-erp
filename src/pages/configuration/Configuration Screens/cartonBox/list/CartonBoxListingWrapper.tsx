@@ -25,6 +25,8 @@ const CartonBoxListingWrapper = () => {
     const [deleteCartonBox] = useDeleteCartonBoxMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const cartonBoxState: any = useSelector(
         (state: RootState) => state.cartonBox
     )
@@ -131,8 +133,8 @@ const CartonBoxListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

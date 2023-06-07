@@ -36,6 +36,7 @@ const ItemListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteItem] = useDeleteItemsMutation()
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
         {
@@ -126,8 +127,8 @@ const ItemListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},
