@@ -93,20 +93,21 @@ const EditCompetitorWrapper = (props: Props) => {
         whatsappNumber: selectedItem?.whatsappNumber || '',
         channelNameId: selectedItem?.channelNameId || '',
         startTime: selectedItem?.startTime || '',
-        endTime: selectedItem?.endTime || '',
-        companyId: userData?.companyId || '',
+        endTime: selectedItem?.endTime || '',        
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        competitorName: string().required('Competitor Name is required'),
-        companyName: string(),
-        productName: string(),
-        websiteLink: string(),
-        youtubeLink: string(),
-        whatsappNo: string().min(10).max(10),
+        competitorName: string().required('Required'),
+        productName: string().required('Required'),
+        websiteLink: string().url().required('Required'),
+        youtubeLink: string().url().required('Required'),
+        whatsappNumber: string()
+        .min(10, 'Number should be 10 digits')
+        .max(10, 'maximum 10 digit')
+        .required('Required'),
         schemePrice: number()
-            .typeError('schemePrice must be a number')
+            .typeError('SchemePrice must be a number')
             .positive(' Must be a positive number.'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
@@ -121,7 +122,7 @@ const EditCompetitorWrapper = (props: Props) => {
                     value: ele._id,
                 }
             }
-        ),
+        ) || [],
     }
 
     //console.log(dropdownOptions)

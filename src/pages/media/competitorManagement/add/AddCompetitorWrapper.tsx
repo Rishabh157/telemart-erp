@@ -71,7 +71,7 @@ const AddCompetitorWrapper = (props: Props) => {
                     value: channel._id,
                 }
             }
-        ),
+        ) || [],
     }
 
     const initialValues: FormInitialValues = {
@@ -89,17 +89,20 @@ const AddCompetitorWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        competitorName: string().required('compititor Name is required'),
-        productName: string(),
-        websiteLink: string(),
-        youtubeLink: string(),
-        whatsappNumber: string(),
+        competitorName: string().required('Required'),
+        productName: string().required('Required'),
+        websiteLink: string().url().required('Required'),
+        youtubeLink: string().url().required('Required'),
+        whatsappNumber: string()
+        .min(10, 'Number should be 10 digits')
+        .max(10, 'maximum 10 digit')
+        .required('Required'),
         schemePrice: number()
             .typeError('SchemePrice must be a number')
             .positive(' Must be a positive number.'),
-        channelNameId: string(),
-        startTime: string(),
-        endTime: string(),
+        channelNameId: string().required('Required'),
+        startTime: string().required('Required'),
+        endTime: string().required('Required'),
     })
 
     //    Form Submit Handler
