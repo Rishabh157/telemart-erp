@@ -108,7 +108,7 @@ const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                             />
                         </div>
 
-                        <div className="h-[300px] mt-8">
+                        <div className="h-[300px] mt-8 overflow-auto ">
                             {filteredOptions ? (
                                 <ATMTransferList {...transferListProps} />
                             ) : null}

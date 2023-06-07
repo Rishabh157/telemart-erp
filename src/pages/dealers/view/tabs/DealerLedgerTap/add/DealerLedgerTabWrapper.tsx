@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { array, object, string } from 'yup'
-import AddDealerScheme from './AddDealerScheme'
-import { useAddDealerSchemeMutation } from 'src/services/DealerSchemeService'
+import AddDealerSupervisor from './AddDealerLedger'
+import { useAddDealerLedgerMutation } from 'src/services/DealerLedgerServices'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
-import { useGetDealerSchemeQuery } from 'src/services/DealerSchemeService'
+import { useGetDealerLedgerQuery } from 'src/services/DealerLedgerServices'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllItems } from 'src/redux/slices/dealerSchemeSlice'
-import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
+import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/DealerLedgerSlice'
 
 type Props = {}
 
@@ -20,26 +20,20 @@ export type FormInitialValues = {
     schemes: []
 }
 
-const DealerPinCodeTabWrapper = (props: Props) => {
+const DealerLedgerTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const dealerId: any = params.dealerId
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
-
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [addDealerScheme] = useAddDealerSchemeMutation()
-
-    // const { allItems}: any = useSelector(
-    //     (state: RootState) => state?.dealerScheme
-    // )
-
+    const [addDealerScheme] = useAddDealerLedgerMutation()
     const {
         data: allData,
         isLoading: allIsLoading,
         isFetching: AllIsFetching,
-    } = useGetDealerSchemeQuery({
+    } = useGetDealerLedgerQuery({
         limit: 10,
         searchValue: '',
         params: ['schemeId', 'schemeName'],
@@ -75,13 +69,13 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const { allItems: schemeItems }: any = useSelector(
         (state: RootState) => state?.scheme
     )
+
     const schemeOptions = schemeItems?.map((ele: any) => {
         return {
             label: ele.schemeName,
             value: ele._id,
         }
     })
-
     const initialValues: FormInitialValues = {
         companyId: companyId,
         dealerId: dealerId,
@@ -114,8 +108,8 @@ const DealerPinCodeTabWrapper = (props: Props) => {
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Scheme added successfully!')
-                        navigate('/dealers/' + dealerId + '/scheme')
+                        showToast('success', 'Supervisor added successfully!')
+                        navigate('/dealers/' + dealerId + '/supervisor')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -136,7 +130,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <AddDealerScheme
+                        <AddDealerSupervisor
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                             schemeOptions={schemeOptions}
@@ -148,4 +142,4 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     )
 }
 
-export default DealerPinCodeTabWrapper
+export default DealerLedgerTabWrapper
