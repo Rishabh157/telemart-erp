@@ -220,9 +220,9 @@ const EditProductWrapper = () => {
     const initialValues: FormInitialValues = {
         product_code: selectedItem?.productCode || '',
         product_name: selectedItem?.productName || '',
-        product_category: selectedItem?.productCategory || '',
-        product_sub_category: selectedItem?.productSubCategory || '',
-        productGroup: selectedItem?.productGroup || '',
+        product_category: selectedItem?.productCategoryId || '',
+        product_sub_category: selectedItem?.productSubCategoryId || '',
+        productGroup: selectedItem?.productGroupId || '',
         product_weight: selectedItem?.productWeight || '',
         dimensions: {
             height: selectedItem?.dimension?.height || '',
