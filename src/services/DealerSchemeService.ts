@@ -47,24 +47,18 @@ export const dealerSchemeApi = apiSlice.injectEndpoints({
         //***** delete *****/
         deleteDealerScheme: builder.mutation({
             invalidatesTags: ['dealerScheme'],
-            query: (id: string) => (
-                {
-
-                    url: `/dealer-scheme/${id}`,
-                    method: 'DELETE',
-
-                }),
+            query: (id: string) => ({
+                url: `/dealer-scheme/${id}`,
+                method: 'DELETE',
+            }),
         }),
         //***** deactive *****/
         deactiveDealerScheme: builder.mutation({
             invalidatesTags: ['dealerScheme'],
-            query: (id: string) => (
-                {
-
-                    url: `/dealer-scheme/status-change/${id}`,
-                    method: 'PUT',
-
-                }),
+            query: (id: string) => ({
+                url: `/dealer-scheme/status-change/${id}`,
+                method: 'PUT',
+            }),
         }),
     }),
 })
@@ -75,6 +69,5 @@ export const {
     useAddDealerSchemeMutation,
     useUpdateDealerSchemeMutation,
     useDeleteDealerSchemeMutation,
-    useDeactiveDealerSchemeMutation
-
+    useDeactiveDealerSchemeMutation,
 } = dealerSchemeApi

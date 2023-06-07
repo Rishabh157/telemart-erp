@@ -24,7 +24,7 @@ type Props = {
 const BatchListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [selectedRows, setSelectedRows] = useState([])
-    // const [showDropdown, setShowDropdown] = useState(false)
+    const [showDropdown, setShowDropdown] = useState(false)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addBatch] = useAddBatchMutation()
 

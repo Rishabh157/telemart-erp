@@ -8,10 +8,11 @@ type Props = {
     apiStatus: boolean
 }
 
-const AddDealerSupervisor = ({ formikProps, schemeOptions, apiStatus }: Props) => {
-   
-
-
+const AddDealerSupervisor = ({
+    formikProps,
+    schemeOptions,
+    apiStatus,
+}: Props) => {
     return (
         <div className="h-[calc(100%-55px)]">
             <div className="p-4 flex flex-col gap-2  ">
@@ -30,16 +31,14 @@ const AddDealerSupervisor = ({ formikProps, schemeOptions, apiStatus }: Props) =
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                                Submit 
+                                Submit
                             </button>
                         </div>
                     </div>
 
                     {/* Form */}
                     <div className="grow  py-8 px-3 ">
-                        <div className="h-[300px] mt-8">
-                          
-                        </div>
+                        <div className="h-[300px] mt-8"></div>
                     </div>
                 </div>
             </div>

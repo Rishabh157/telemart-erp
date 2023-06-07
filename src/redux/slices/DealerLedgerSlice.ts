@@ -34,10 +34,7 @@ const dealerLedgerSlice: any = createSlice({
     name: 'dealersLedger',
     initialState,
     reducers: {
-        setItems: (
-            state,
-            action: PayloadAction<LedgerListResponse[] | []>
-        ) => {
+        setItems: (state, action: PayloadAction<LedgerListResponse[] | []>) => {
             state.items = action.payload
         },
         setAllItems: (
