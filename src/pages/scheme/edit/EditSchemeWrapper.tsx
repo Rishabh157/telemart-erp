@@ -229,7 +229,7 @@ const EditSchemeWrapper = () => {
         data: dataPC,
         isLoading: isLoadingPC,
         isFetching: isFetchingPC,
-    } = useGetAllProductCategoryQuery('')
+    } = useGetAllProductCategoryQuery(userData?.companyId)
 
     useEffect(() => {
         dispatch(setAllProductCategory(dataPC?.data))
@@ -270,7 +270,9 @@ const EditSchemeWrapper = () => {
         }
     )
 
-    const { data, isLoading, isFetching } = useGetAllProductGroupQuery('')
+    const { data, isLoading, isFetching } = useGetAllProductGroupQuery(
+        userData?.companyId
+    )
     const { allItems: productGroup }: any = useSelector(
         (state: RootState) => state.productGroup
     )

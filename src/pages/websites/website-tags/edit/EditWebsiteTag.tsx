@@ -78,6 +78,7 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             {/* Field1 */}
                             <ATMSelectSearchable
                                 name="websiteMasterId"
+                                required
                                 value={values.websiteMasterId}
                                 onChange={(e) =>
                                     setFieldValue('websiteMasterId', e)
@@ -102,7 +103,6 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             {/* Field 3 */}
                             <ATMTextField
                                 name="metaKeyword"
-                                required
                                 value={values.metaKeyword}
                                 label="Meta Keyword"
                                 placeholder="Meta Keyword"
@@ -114,7 +114,6 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             {/* Field 3 */}
                             <ATMTextField
                                 name="metaOgTitle"
-                                required
                                 value={values.metaOgTitle}
                                 label="Meta OG Title"
                                 placeholder="Meta OG Title"
@@ -126,7 +125,6 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             {/* Field 3 */}
                             <ATMTextField
                                 name="metaOgUrl"
-                                required
                                 value={values.metaOgUrl}
                                 label="Meta OG URL"
                                 placeholder="Meta OG URL"
@@ -137,7 +135,6 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             <ATMTextField
                                 name="metaOgImage"
-                                required
                                 value={values.metaOgImage}
                                 label="Meta OG Image"
                                 placeholder="Meta OG Image"
@@ -148,7 +145,6 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             <ATMTextField
                                 name="metaOgType"
-                                required
                                 value={values.metaOgType}
                                 label="Meta OG Type"
                                 placeholder="Meta OG Type"
@@ -159,7 +155,6 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             <ATMTextField
                                 name="metaTwitterTitle"
-                                required
                                 value={values.metaTwitterTitle}
                                 label="Meta Twitter Title"
                                 placeholder="Meta Twitter Title"
@@ -173,7 +168,6 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             <ATMTextField
                                 name="metaTwitterCard"
-                                required
                                 value={values.metaTwitterCard}
                                 label="Meta Twitter Card"
                                 placeholder="Meta Twitter Card"
@@ -187,7 +181,6 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             <ATMTextField
                                 name="metaTwitterImage"
-                                required
                                 value={values.metaTwitterImage}
                                 label="Meta Twitter Image"
                                 placeholder="Meta Twitter Image"
@@ -201,7 +194,6 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             <ATMTextArea
                                 minRows={4}
-                                required
                                 name="metaOgDescription"
                                 value={values.metaOgDescription}
                                 label="Meta OG Description"
@@ -212,7 +204,6 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             <ATMTextArea
                                 minRows={4}
-                                required
                                 name="metaDescription"
                                 value={values.metaDescription}
                                 label="Meta Description"

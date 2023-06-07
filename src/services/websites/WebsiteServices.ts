@@ -17,8 +17,8 @@ export const WebsiteApi = apiSlice.injectEndpoints({
         //***** GET All DATA *****/
         getAllWebsite: builder.query({
             providesTags: ['website'],
-            query: () => ({
-                url: `/website-master`,
+            query: (companyId) => ({
+                url: `/website-master/company/${companyId}`,
                 method: 'GET',
             }),
         }),

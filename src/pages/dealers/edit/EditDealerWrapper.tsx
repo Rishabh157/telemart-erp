@@ -184,7 +184,7 @@ const EditDealerWrapper = () => {
         data: dealerData,
         isLoading: isDealerLoading,
         isFetching: isDealerFetching,
-    } = useGetAllDealerCategoryQuery('')
+    } = useGetAllDealerCategoryQuery(userData?.companyId)
 
     // From Initial Values
     const initialValues: FormInitialValues = {

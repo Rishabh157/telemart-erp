@@ -232,7 +232,9 @@ const AddSchemeWrapper = () => {
         }
     }
 
-    const { data, isLoading, isFetching } = useGetAllProductGroupQuery('')
+    const { data, isLoading, isFetching } = useGetAllProductGroupQuery(
+        userData?.companyId
+    )
     const { allItems: productGroup }: any = useSelector(
         (state: RootState) => state.productGroup
     )

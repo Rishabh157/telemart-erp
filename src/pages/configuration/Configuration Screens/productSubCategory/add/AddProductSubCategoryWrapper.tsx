@@ -36,13 +36,13 @@ const AddProductSubCategoryWrapper = (props: Props) => {
         data: pcData,
         isLoading: pcIsLoading,
         isFetching: pcIsFetching,
-    } = useGetAllProductCategoryQuery('')
+    } = useGetAllProductCategoryQuery(userData?.companyId)
 
     const {
         data: tData,
         isLoading: tIsLoading,
         isFetching: tIsFetching,
-    } = useGetAllTaxesQuery('')
+    } = useGetAllTaxesQuery(userData?.companyId)
     const [addProductSubCategory] = useAddProductSubCategoryMutation()
     // Form Initial Values
     const initialValues: FormInitialValues = {

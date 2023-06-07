@@ -109,6 +109,8 @@ const formFields: {
 
 const StepAddSchemeDetailsWrapper = ({ formikProps }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const { allProductCategory }: any = useSelector(
         (state: RootState) => state.productCategory
     )
@@ -117,7 +119,7 @@ const StepAddSchemeDetailsWrapper = ({ formikProps }: Props) => {
         data: dataPC,
         isLoading: isLoadingPC,
         isFetching: isFetchingPC,
-    } = useGetAllProductCategoryQuery('')
+    } = useGetAllProductCategoryQuery(userData?.companyId)
 
     useEffect(() => {
         dispatch(setAllProductCategory(dataPC?.data))

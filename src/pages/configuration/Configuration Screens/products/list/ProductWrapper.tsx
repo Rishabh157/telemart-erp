@@ -29,6 +29,7 @@ const ProductsListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deleteProduct] = useDeleteProductMutation()
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
         {
@@ -131,8 +132,8 @@ const ProductsListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

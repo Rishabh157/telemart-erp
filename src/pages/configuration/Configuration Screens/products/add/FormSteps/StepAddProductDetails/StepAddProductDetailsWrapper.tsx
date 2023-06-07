@@ -22,6 +22,8 @@ export type FieldType = Field<
 >
 const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const { allProductCategory }: any = useSelector(
         (state: RootState) => state?.productCategory
     )
@@ -36,7 +38,7 @@ const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
         data: pcData,
         isLoading: pcIsLoading,
         isFetching: pcIsFetching,
-    } = useGetAllProductCategoryQuery('')
+    } = useGetAllProductCategoryQuery(userData?.companyId)
 
     const {
         data: pscData,
@@ -50,7 +52,7 @@ const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
         data: pgData,
         isLoading: pgIsLoading,
         isFetching: pgIsFetching,
-    } = useGetAllProductGroupQuery('')
+    } = useGetAllProductGroupQuery(userData?.companyId)
 
     useEffect(() => {
         dispatch(setAllProductCategory(pcData?.data))

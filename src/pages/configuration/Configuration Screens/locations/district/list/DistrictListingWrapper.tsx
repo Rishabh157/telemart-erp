@@ -7,9 +7,7 @@ import { setItems } from 'src/redux/slices/districtSlice'
 
 const DistrictListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
-
     const { items }: any = useSelector((state: RootState) => state.district)
-
     const { searchValue: searchValueDistrict, filterValue }: any = useSelector(
         (state: RootState) => state.district
     )
