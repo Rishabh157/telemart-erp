@@ -49,7 +49,7 @@ const ListDealerSupervisorTabWrapper = () => {
         isPaginationRequired: true,
     })
 
-    console.log(data)
+   // console.log(data)
 
     const columns: columnTypes[] = [
         {
