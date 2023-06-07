@@ -39,7 +39,7 @@ const AddChannelGroup = ({ formikProps, apiStatus }: Props) => {
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
-                            Channel Group Details
+                            Channel Group 
                         </div>
 
                         {/* BUTTON - Add Button */}

@@ -20,8 +20,8 @@ export const channelCategoryApi = apiSlice.injectEndpoints({
         //***** GET Without PAGINATION DATA *****/
         getAllChannelCategory: builder.query({
             providesTags: ['channel-category'],
-            query: () => ({
-                url: '/channel-category',
+            query: (companyId) => ({
+                url: `/channel-category/company/${companyId}`,
                 method: 'GET',
             }),
         }),

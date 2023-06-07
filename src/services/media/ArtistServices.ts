@@ -17,8 +17,8 @@ export const artistApi = apiSlice.injectEndpoints({
         //***** GET All DATA *****/
         getAllArtist: builder.query({
             providesTags: ['artist'],
-            query: () => ({
-                url: `/artist`,
+            query: (companyId) => ({
+                url: `/artist/company/${companyId}`,
                 method: 'GET',
             }),
         }),

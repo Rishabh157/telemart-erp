@@ -60,23 +60,23 @@ const AddTapeManagementWrapper = () => {
         data: artistData,
         isLoading: artistIsLoading,
         isFetching: artistIsFetching,
-    } = useGetAllArtistQuery(' ')
+    } = useGetAllArtistQuery(userData?.companyId)
 
     const {
         isLoading: isSchemeLoading,
         isFetching: isSchemeFetching,
         data: schemeDataApi,
-    } = useGetSchemeQuery(' ')
+    } = useGetSchemeQuery(userData?.companyId)
     const {
         isLoading: isLanguageLoading,
         isFetching: isLanguageFetching,
         data: languageDataApi,
-    } = useGetAllLanguageQuery(' ')
+    } = useGetAllLanguageQuery('')
     const {
         isLoading,
         isFetching,
         data: TapeGroupsData,
-    } = useGetAllChannelGroupQuery('')
+    } = useGetAllChannelGroupQuery(userData?.companyId)
 
     useEffect(() => {
         if (!artistIsLoading && !artistIsFetching) {
