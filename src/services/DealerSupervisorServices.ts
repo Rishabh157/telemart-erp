@@ -1,5 +1,5 @@
 import {
-    DealersSupervisorListResponse,
+    DealersSupervisorAdd,
     UpdateDealersSupervisor,
 } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
@@ -30,7 +30,7 @@ export const dealerSupervisorApi = apiSlice.injectEndpoints({
         //***** ADD *****/
         addDealerSupervisor: builder.mutation({
             invalidatesTags: ['dealerSupervisor'],
-            query: (body: DealersSupervisorListResponse) => ({
+            query: (body: DealersSupervisorAdd) => ({
                 url: '/dealer-supervisor/add',
                 method: 'POST',
 

@@ -1,18 +1,20 @@
 import React from 'react'
 import { FormikProps } from 'formik'
 import { FormInitialValues } from './DealerSupervisorTabWrapper'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 
 type Props = {
-    formikProps: FormikProps<FormInitialValues>
-    schemeOptions: any
+    formikProps: FormikProps<FormInitialValues>    
     apiStatus: boolean
 }
 
 const AddDealerSupervisor = ({
     formikProps,
-    schemeOptions,
     apiStatus,
 }: Props) => {
+
+    const { values, setFieldValue } = formikProps
+
     return (
         <div className="h-[calc(100%-55px)]">
             <div className="p-4 flex flex-col gap-2  ">
@@ -37,8 +39,20 @@ const AddDealerSupervisor = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow  py-8 px-3 ">
-                        <div className="h-[300px] mt-8"></div>
+                    <div className="grow py-9 px-3 ">
+                        <div className="grid grid-cols-3 gap-4">
+                            <ATMTextField
+                                name="supervisorName"
+                                required
+                                value={values.supervisorName}
+                                label="Supervisor Name"
+                                placeholder="Supervisor Name"
+                                onChange={(e) =>
+                                    setFieldValue('supervisorName', e.target.value)
+                                }
+                            />
+
+                        </div>
                     </div>
                 </div>
             </div>
