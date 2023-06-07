@@ -72,7 +72,7 @@ const EditWebsiteTagWrapper = (props: Props) => {
         isLoading: iswebsiteLoading,
         isFetching: isWebsiteFetching,
         data: WebsiteData,
-    } = useGetAllWebsiteQuery('')
+    } = useGetAllWebsiteQuery(userData?.companyId)
 
     useEffect(() => {
         if (!iswebsiteLoading && !isWebsiteFetching) {
@@ -84,7 +84,7 @@ const EditWebsiteTagWrapper = (props: Props) => {
         isLoading: isPageLoading,
         isFetching: isPageFetching,
         data: PageData,
-    } = useGetAllWebsitePageQuery('')
+    } = useGetAllWebsitePageQuery(userData?.companyId)
 
     useEffect(() => {
         if (!isPageLoading && !isPageFetching) {

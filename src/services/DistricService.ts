@@ -17,7 +17,7 @@ export const districtApi = apiSlice.injectEndpoints({
         getAllDistrict: builder.query({
             providesTags: ['District'],
             query: (companyId) => ({
-                url: `/district/comany/${companyId}`,
+                url: `/district/company/${companyId}`,
                 method: 'GET',
                 // body,
             }),

@@ -20,8 +20,8 @@ export const WebsitePageApi = apiSlice.injectEndpoints({
         //***** GET All DATA *****/
         getAllWebsitePage: builder.query({
             providesTags: ['websitePage'],
-            query: () => ({
-                url: `/website-page`,
+            query: (companyId) => ({
+                url: `/website-page/company/${companyId}`,
                 method: 'GET',
             }),
         }),

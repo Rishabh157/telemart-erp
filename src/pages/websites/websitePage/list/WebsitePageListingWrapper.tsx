@@ -28,6 +28,7 @@ const WebsitePageListingWrapper = () => {
     const WebsitePageState = useSelector(
         (state: RootState) => state.websitePage
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { page, rowsPerPage, searchValue, items, filterValue } =
         WebsitePageState
@@ -112,6 +113,10 @@ const WebsitePageListingWrapper = () => {
             {
                 fieldName: 'websiteId',
                 value: filterValue,
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},
