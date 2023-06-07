@@ -62,7 +62,7 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Form */}
                     <div className="grow py-2 pb-9 px-3 ">
-                        <div className="grid grid-cols-2 gap-6">
+                        <div className="grid grid-cols-3 gap-6 px-5">
                             {/* Field1 */}
 
                             {/* Field 3 */}
@@ -85,7 +85,8 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
                                     setFieldValue('pageUrl', e.target.value)
                                 }
                             />
-
+                        </div>
+                        <div className="grid grid-cols-3 gap-4 px-5">
                             <ATMTextArea
                                 name="headerSpace"
                                 value={values.headerSpace}
