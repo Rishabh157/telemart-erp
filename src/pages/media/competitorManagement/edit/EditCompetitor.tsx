@@ -128,11 +128,14 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 value={values.whatsappNumber}
                                 label="Whatsapp Number"
                                 placeholder="Whatsapp Number"
-                                onChange={(e) =>{
-                                    const inputValue =e.target.value
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('whatsappNumber',e.target.value)
-                                    }                                    
+                                        setFieldValue(
+                                            'whatsappNumber',
+                                            e.target.value
+                                        )
+                                    }
                                 }}
                             />
                             <ATMTextField

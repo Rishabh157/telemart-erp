@@ -179,7 +179,7 @@ const AddSlotManagementWrapper = () => {
             setApiStatus(false)
         })
     }
-    
+
     const dropdownOptions = {
         channelGroupOptions: channelgroup?.map(
             (channelGroup: GetAllChannelGroupResponse) => {

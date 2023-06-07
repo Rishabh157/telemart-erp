@@ -93,7 +93,7 @@ const EditCompetitorWrapper = (props: Props) => {
         whatsappNumber: selectedItem?.whatsappNumber || '',
         channelNameId: selectedItem?.channelNameId || '',
         startTime: selectedItem?.startTime || '',
-        endTime: selectedItem?.endTime || '',        
+        endTime: selectedItem?.endTime || '',
     }
 
     // Form Validation Schema
@@ -103,10 +103,10 @@ const EditCompetitorWrapper = (props: Props) => {
         productName: string(),
         websiteLink: string(),
         youtubeLink: string(),
-        whatsappNumber:  string()
-        .min(10, 'Number should be 10 digits')
-        .max(10, 'maximum 10 digit')
-        .required('Mobile number is required'),
+        whatsappNumber: string()
+            .min(10, 'Number should be 10 digits')
+            .max(10, 'maximum 10 digit')
+            .required('Mobile number is required'),
         schemePrice: number()
             .typeError('schemePrice must be a number')
             .positive(' Must be a positive number.'),
@@ -116,14 +116,13 @@ const EditCompetitorWrapper = (props: Props) => {
     })
 
     const dropdownOptions = {
-        channelOptions: channelMgt?.map(
-            (ele: ChannelManagementListResponse) => {
+        channelOptions:
+            channelMgt?.map((ele: ChannelManagementListResponse) => {
                 return {
                     label: ele.channelName,
                     value: ele._id,
                 }
-            }
-        ) || [],
+            }) || [],
     }
 
     //console.log(dropdownOptions)

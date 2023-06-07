@@ -64,14 +64,13 @@ const AddCompetitorWrapper = (props: Props) => {
     }, [dispatch, data, isLoading, isFetching])
 
     const dropdownOptions = {
-        channelOptions: channelMgt?.map(
-            (channel: ChannelManagementListResponse) => {
+        channelOptions:
+            channelMgt?.map((channel: ChannelManagementListResponse) => {
                 return {
                     label: channel.channelName,
                     value: channel._id,
                 }
-            }
-        ) || [],
+            }) || [],
     }
 
     const initialValues: FormInitialValues = {
@@ -93,10 +92,10 @@ const AddCompetitorWrapper = (props: Props) => {
         productName: string().required('Required'),
         websiteLink: string().url().required('Required'),
         youtubeLink: string().url().required('Required'),
-        whatsappNumber:  string()
-        .min(10, 'Number should be 10 digits')
-        .max(10, 'maximum 10 digit')
-        .required('Mobile number is required'),
+        whatsappNumber: string()
+            .min(10, 'Number should be 10 digits')
+            .max(10, 'maximum 10 digit')
+            .required('Mobile number is required'),
         schemePrice: number()
             .typeError('SchemePrice must be a number')
             .positive(' Must be a positive number.')

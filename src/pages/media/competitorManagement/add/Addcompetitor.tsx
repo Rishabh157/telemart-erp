@@ -14,7 +14,7 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     dropdownOptions: {
-        channelOptions: SelectOption[]| []
+        channelOptions: SelectOption[] | []
     }
 }
 
@@ -30,7 +30,6 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
-
     dropdownOptions = {
         ...dropdownOptions,
     }
@@ -148,11 +147,14 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 value={values.whatsappNumber}
                                 label="Whatsapp Number"
                                 placeholder="Whatsapp Number"
-                                onChange={(e) =>{
-                                    const inputValue =e.target.value
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('whatsappNumber',e.target.value)
-                                    }                                    
+                                        setFieldValue(
+                                            'whatsappNumber',
+                                            e.target.value
+                                        )
+                                    }
                                 }}
                             />
 
