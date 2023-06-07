@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-//import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -9,87 +9,57 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/BatchSlice'
+} from 'src/redux/slices/dealerSchemeSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useAddBatchMutation } from 'src/services/BatchService'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
+// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 type Props = {
     columns: any[]
     rows: any[]
-    //setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const BatchListing = ({ columns, rows }: Props) => {
+const DealerSupervisorListing = ({ columns, rows }: Props) => {
+    const params = useParams()
+    const dealerId: any = params.dealerId
     const dispatch = useDispatch<AppDispatch>()
+    const schemeState: any = useSelector(
+        (state: RootState) => state.dealerScheme
+    )
+    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+    const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
-    // const [showDropdown, setShowDropdown] = useState(false)
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [addBatch] = useAddBatchMutation()
 
-    const batchState: any = useSelector((state: RootState) => state.batch)
-
-    const { page, rowsPerPage, searchValue } = batchState
-
-    const submit = () => {
-        setApiStatus(false)
-        setTimeout(() => {
-            addBatch({}).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'Batch added successfully!')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-                setApiStatus(false)
-            })
-        }, 1000)
-    }
+    const { page, rowsPerPage, searchValue, totalItems } = schemeState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Batch</ATMPageHeading>
+                <ATMPageHeading> Supervisor</ATMPageHeading>
                 <button
                     onClick={() =>
-                        showConfirmationDialog({
-                            title: 'Add Batch ',
-                            text: 'Do you want to Add Batch ?',
-                            showCancelButton: true,
-                            next: (res: any) => {
-                                return res.isConfirmed ? submit() : ''
-                                // : setShowDropdown(false)
-                            },
-                        })
+                        navigate('/dealers/' + dealerId + '/supervisor/add')
                     }
-                    className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                        apiStatus ? 'opacity-50' : ''
-                    }`}
+                    className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    {' '}
-                    Add Batch{' '}
+                    + Add
                 </button>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
-                    searchValue={searchValue}
                     page={page}
-                    rowCount={rows.length}
+                    searchValue={searchValue}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                 />
 
                 {/* Table */}
@@ -102,7 +72,7 @@ const BatchListing = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        // setShowDropdown={setShowDropdown}
+                        extraClasses="h-full overflow-auto"
                     />
                 </div>
 
@@ -110,15 +80,21 @@ const BatchListing = ({ columns, rows }: Props) => {
                 <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />
                 </div>
             </div>
+
+            {/* {isFilterOpen && (
+       <FilterDialogWarpper
+       onClose={()=> setIsFilterOpen(false)}
+       />
+      )} */}
         </div>
     )
 }
 
-export default BatchListing
+export default DealerSupervisorListing

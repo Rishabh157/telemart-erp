@@ -37,8 +37,7 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onClick={() => navigate('/scheme/add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    {' '}
-                    + Add Scheme{' '}
+                    + Add Scheme
                 </button>
             </div>
 

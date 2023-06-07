@@ -204,6 +204,9 @@ import WebsiteTagListingWrapper from './pages/websites/website-tags/list/Website
 import AddWebsiteTagsWrapper from './pages/websites/website-tags/add/AddWebsiteTagsWrapper'
 import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsiteTagWrapper'
 import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsiteTagsWrapper'
+import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
+import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
+import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -298,7 +301,7 @@ const PageRoutes = () => {
                             path="return-to-vendor"
                             element={'Return To Vendor'}
                         />
-                        <Route path="ledger" element={'Ledger'} />
+                        <Route path="ledger" element={<ListLedgerTabWrapper/>} />
                         <Route
                             path="activities"
                             element={<VendorActivityTabWrapper />}
@@ -381,6 +384,14 @@ const PageRoutes = () => {
                         <Route
                             path="scheme"
                             element={<ListDealerSchemeTabWrapper />}
+                        />
+                        <Route
+                            path="supervisor"
+                            element={<ListDealerSupervisorTabWrapper />}
+                        />
+                        <Route
+                            path="supervisor/add"
+                            element={<DealerSupervisorTabWrapper />}
                         />
                     </Route>
                     <Route path="users" element={<UsersListingWrapper />} />

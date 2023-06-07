@@ -7,8 +7,7 @@ type Props = {
 const ATMPageHeading = ({ children }: Props) => {
     return (
         <span className="text-xl font-semibold text-slate-600">
-            {' '}
-            {children}{' '}
+            {children}
         </span>
     )
 }
