@@ -29,6 +29,7 @@ const AttributesListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const dispatch = useDispatch<AppDispatch>()
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
         {
@@ -101,8 +102,8 @@ const AttributesListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

@@ -120,11 +120,14 @@ const AddWarehouseWrapper = () => {
     const { state } = useLocation()
     const vendorId = state?.params?.vendorId || null
     const dealerId = state?.params?.dealerId || null
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [addWareHouse] = useAddWareHouseMutation()
-    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
+    const { data, isLoading, isFetching } = useGetAllCountryQuery(
+        userData?.companyId
+    )
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -133,7 +136,6 @@ const AddWarehouseWrapper = () => {
     }, [data, isLoading, isFetching])
 
     // States
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
     const [activeStep, setActiveStep] = React.useState(0)
     const { allCountry }: any = useSelector((state: RootState) => state.country)

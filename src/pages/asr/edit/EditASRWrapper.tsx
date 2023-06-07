@@ -31,6 +31,7 @@ const EditASRWrapper = (props: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const [editAsr] = useUpdateAsrMutation()
     const { data, isLoading, isFetching } = useGetAsrByIdQuery(Id)
@@ -38,9 +39,8 @@ const EditASRWrapper = (props: Props) => {
         data: productGroupData,
         isLoading: pgIsLoading,
         isFetching: pgIsFetching,
-    } = useGetAllProductGroupQuery('')
+    } = useGetAllProductGroupQuery(userData?.companyId)
 
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedItem }: any = useSelector((state: RootState) => state?.asr)
 
     // Form Initial Values

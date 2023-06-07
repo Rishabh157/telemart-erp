@@ -141,8 +141,11 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
     const [billingStateData, setBillingStateData] = useState<any>()
     const [billingDistrictData, setBillingDistrictData] = useState<any>()
     const [billingPincodeData, setBillingPincodeData] = useState<any>()
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
+    const { data, isLoading, isFetching } = useGetAllCountryQuery(
+        userData?.companyId
+    )
 
     //REGSITRATION
     const {

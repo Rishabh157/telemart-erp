@@ -13,6 +13,7 @@ const StateListingWrapper = () => {
     const { searchValue: searchValueState, filterValue }: any = useSelector(
         (state: RootState) => state.states
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const states = items?.map((ele: any) => {
         return { label: ele.stateName, value: ele._id }
@@ -27,6 +28,10 @@ const StateListingWrapper = () => {
             {
                 fieldName: 'countryId',
                 value: filterValue ? filterValue : [],
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

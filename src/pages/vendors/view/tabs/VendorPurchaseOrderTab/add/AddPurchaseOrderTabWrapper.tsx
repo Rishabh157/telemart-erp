@@ -65,7 +65,7 @@ const AddPurchaseOrderTabWrapper = (props: Props) => {
         data: itemsData,
         isLoading: itemsIsLoading,
         isFetching: itemsIsFetching,
-    } = useGetAllItemsQuery('')
+    } = useGetAllItemsQuery(userData?.companyId)
     const { allItems: itemsList }: any = useSelector(
         (state: RootState) => state.item
     )

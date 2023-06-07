@@ -23,6 +23,7 @@ const TaxesListingWrapper = () => {
     const taxState: any = useSelector((state: RootState) => state.tax)
 
     const { page, rowsPerPage, items, searchValue } = taxState
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -100,8 +101,8 @@ const TaxesListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

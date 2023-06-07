@@ -17,8 +17,8 @@ export const countryApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getAllCountry: builder.query({
             providesTags: ['Country'],
-            query: () => ({
-                url: '/country',
+            query: (companyId) => ({
+                url: `/country/company/${companyId}`,
                 method: 'GET',
                 // body,
             }),

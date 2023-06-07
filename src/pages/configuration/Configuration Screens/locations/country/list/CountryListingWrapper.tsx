@@ -8,8 +8,11 @@ import { setItems } from 'src/redux/slices/countrySlice'
 
 const CountryListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
+    const { data, isLoading, isFetching } = useGetAllCountryQuery(
+        userData?.companyId
+    )
     const { items }: any = useSelector((state: RootState) => state.country)
 
     const contries = items?.map((elem: any) => {

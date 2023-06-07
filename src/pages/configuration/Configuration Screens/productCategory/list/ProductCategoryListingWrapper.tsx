@@ -27,7 +27,7 @@ const ProductCategoryListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items } = productCategoryState
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
-
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const columns: columnTypes[] = [
@@ -107,8 +107,8 @@ const ProductCategoryListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

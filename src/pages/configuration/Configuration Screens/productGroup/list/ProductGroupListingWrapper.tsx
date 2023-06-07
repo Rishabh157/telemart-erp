@@ -27,6 +27,7 @@ const ProductGroupListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items } = productGroupState
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -101,8 +102,8 @@ const ProductGroupListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

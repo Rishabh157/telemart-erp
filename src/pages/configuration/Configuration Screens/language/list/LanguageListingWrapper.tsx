@@ -27,6 +27,7 @@ const LanguageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
         {
@@ -99,6 +100,10 @@ const LanguageListingWrapper = () => {
             {
                 fieldName: '',
                 value: [],
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

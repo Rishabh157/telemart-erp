@@ -8,7 +8,7 @@ import { setItems } from 'src/redux/slices/tehsilSlice'
 const TehsilListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.tehsils)
-
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const { searchValue: searchValueTehsil, filterValue }: any = useSelector(
         (state: RootState) => state.tehsils
     )
@@ -26,6 +26,10 @@ const TehsilListingWrapper = () => {
             {
                 fieldName: 'districtId',
                 value: filterValue ? filterValue : [],
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},
