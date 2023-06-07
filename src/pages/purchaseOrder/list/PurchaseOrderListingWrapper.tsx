@@ -358,7 +358,7 @@ const PurchaseOrderListingWrapper = () => {
             <SideNavLayout>
                 <PurchaseOrderListing
                     columns={columns}
-                    rows={items}
+                    rows={items || []}
                     setShowDropdown={setShowDropdown}
                 />
             </SideNavLayout>
