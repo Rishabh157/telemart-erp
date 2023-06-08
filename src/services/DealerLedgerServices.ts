@@ -17,8 +17,8 @@ export const dealerLedgerApi = apiSlice.injectEndpoints({
         //***** GET ALL DATA *****/
         getAllDealerLedger: builder.query({
             providesTags: ['ledger'],
-            query: () => ({
-                url: '/ledger',
+            query: (companyId) => ({
+                url: `/ledger/company/${companyId}`,
                 method: 'GET',
                 // body,
             }),

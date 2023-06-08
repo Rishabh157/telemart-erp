@@ -6,7 +6,7 @@ export type InitialStateType = {
     items: LedgerListResponse[] | []
     allItems: LedgerListResponse[] | []
     selectedItem: LedgerListResponse | null
-    alldealerCategory: LedgerListResponse[] | []
+    alldealerLedger: LedgerListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -20,7 +20,7 @@ const initialState: InitialStateType = {
     items: [],
     allItems: [],
     selectedItem: null,
-    alldealerCategory: [],
+    alldealerLedger: [],
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -82,7 +82,7 @@ const dealerLedgerSlice: any = createSlice({
             state,
             action: PayloadAction<LedgerListResponse[] | []>
         ) => {
-            state.alldealerCategory = action.payload
+            state.alldealerLedger = action.payload
         },
     },
 })
@@ -98,6 +98,6 @@ export const {
     setIsTableLoading,
     setSelectedDealerId,
     setSelectedItem,
-    setAllDealerCategory,
+    setAllDealerLedger,
 } = dealerLedgerSlice.actions
 export default dealerLedgerSlice.reducer

@@ -209,6 +209,9 @@ import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsi
 import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
 import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
+import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
+
+
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -369,7 +372,14 @@ const PageRoutes = () => {
                             path="warehouse"
                             element={<DealerWarehouseTabWrapper />}
                         />
-                        <Route path="ledger" element={'Ledger'} />
+                        <Route
+                            path="ledger" 
+                            element={<ListLedgerTabWrapper/>}
+                         />
+                         <Route
+                            path="ledger/add" 
+                            element={<AddDealerLedgerTabWrapper/>}
+                         />
                         <Route
                             path="activities"
                             element={<DealerActivityTabWrapper />}

@@ -22,23 +22,23 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
     const params = useParams()
     const dealerId: any = params.dealerId
     const dispatch = useDispatch<AppDispatch>()
-    const schemeState: any = useSelector(
-        (state: RootState) => state.dealerScheme
+    const dealerLedgerState: any = useSelector(
+        (state: RootState) => state.dealerLedger
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } = schemeState
+    const { page, rowsPerPage, searchValue, totalItems } = dealerLedgerState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Supervisor</ATMPageHeading>
+                <ATMPageHeading> Ledger</ATMPageHeading>
                 <button
                     onClick={() =>
-                        navigate('/dealers/' + dealerId + '/supervisor/add')
+                        navigate('/dealers/' + dealerId + '/ledger/add')
                     }
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
