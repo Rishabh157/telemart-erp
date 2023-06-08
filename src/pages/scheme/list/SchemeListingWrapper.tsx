@@ -148,7 +148,6 @@ const SchemeListingWrapper = () => {
                         </div>
                     )}
                 </div>
-               
             ),
             align: 'end',
         },

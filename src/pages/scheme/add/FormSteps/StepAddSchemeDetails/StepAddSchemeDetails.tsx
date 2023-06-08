@@ -49,29 +49,29 @@ const StepAddSchemeDetails = ({
                 />
                 {/* Category */}
                 <div className="-mt-2">
-                <ATMSelectSearchable
-                    name={'category'}
-                    value={values.category}
-                    onChange={(e) => {
-                        setFieldValue('category', e)
-                    }}
-                    selectLabel="Select Category"
-                    label="Category"
-                    options={dropdownOptions['productCategoryoption']}
-                />
+                    <ATMSelectSearchable
+                        name={'category'}
+                        value={values.category}
+                        onChange={(e) => {
+                            setFieldValue('category', e)
+                        }}
+                        selectLabel="Select Category"
+                        label="Category"
+                        options={dropdownOptions['productCategoryoption']}
+                    />
                 </div>
                 <div className="-mt-2">
-                {/* Sub Category */}
-                <ATMSelectSearchable
-                    name={'subCategory'}
-                    value={values.subCategory}
-                    onChange={(e) => {
-                        setFieldValue('subCategory', e)
-                    }}
-                    label="Sub Category"
-                    selectLabel="Select Sub Category"
-                    options={dropdownOptions['productSubCategoryOption']}
-                />
+                    {/* Sub Category */}
+                    <ATMSelectSearchable
+                        name={'subCategory'}
+                        value={values.subCategory}
+                        onChange={(e) => {
+                            setFieldValue('subCategory', e)
+                        }}
+                        label="Sub Category"
+                        selectLabel="Select Sub Category"
+                        options={dropdownOptions['productSubCategoryOption']}
+                    />
                 </div>
                 {/* Scheme Name */}
                 <ATMTextField

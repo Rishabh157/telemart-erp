@@ -173,7 +173,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
             </div>
 
             {/* Description */}
-            <div className="-mt-6 mb-10">
+            <div className="-mt-10 pb-4">
                 <ATMTextArea
                     name="description"
                     value={values.description}
@@ -182,7 +182,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     }
                     label="Description"
                     placeholder="Description"
-                    className="shadow bg-white rounded"
+                    className="shadow bg-white rounded mt-0"
                     minRows={3}
                     isSubmitting={isSubmitting}
                 />
