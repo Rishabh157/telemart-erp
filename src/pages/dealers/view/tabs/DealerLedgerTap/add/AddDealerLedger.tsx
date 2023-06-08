@@ -6,7 +6,6 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
-
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -15,7 +14,11 @@ type Props = {
     }
 }
 
-const AddDealerLedger = ({ formikProps, apiStatus, dropdownOptions, }: Props) => {
+const AddDealerLedger = ({
+    formikProps,
+    apiStatus,
+    dropdownOptions,
+}: Props) => {
     const { values, setFieldValue } = formikProps
     return (
         <div className="h-[calc(100%-55px)]">
@@ -53,22 +56,19 @@ const AddDealerLedger = ({ formikProps, apiStatus, dropdownOptions, }: Props) =>
                                 options={dropdownOptions.noteTypeOptions}
                                 label="Note Type"
                             />
-                            
+
                             <ATMTextField
                                 name="price"
                                 required
                                 value={values.price}
                                 label="Price"
                                 placeholder="Price"
-                                onChange={(e) =>{
-                                    const inputValue =e.target.value
-                                    if (!isNaN( Number(inputValue))) {
-                                        setFieldValue(
-                                            'price',
-                                            e.target.value
-                                        )
-                                }}}
-
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        setFieldValue('price', e.target.value)
+                                    }
+                                }}
                             />
                             <div>
                                 <ATMTextArea

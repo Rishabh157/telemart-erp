@@ -211,8 +211,6 @@ import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervis
 import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
 import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
 
-
-
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -373,13 +371,13 @@ const PageRoutes = () => {
                             element={<DealerWarehouseTabWrapper />}
                         />
                         <Route
-                            path="ledger" 
-                            element={<ListLedgerTabWrapper/>}
-                         />
-                         <Route
-                            path="ledger/add" 
-                            element={<AddDealerLedgerTabWrapper/>}
-                         />
+                            path="ledger"
+                            element={<ListLedgerTabWrapper />}
+                        />
+                        <Route
+                            path="ledger/add"
+                            element={<AddDealerLedgerTabWrapper />}
+                        />
                         <Route
                             path="activities"
                             element={<DealerActivityTabWrapper />}

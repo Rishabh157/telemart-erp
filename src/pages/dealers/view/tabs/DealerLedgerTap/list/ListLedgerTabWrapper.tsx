@@ -13,7 +13,7 @@ import { useGetDealerLedgerQuery } from 'src/services/DealerLedgerServices'
 import { RootState, AppDispatch } from 'src/redux/store'
 import DealerLedgerListing from './DealerLedgerListing'
 
-const ListLedgerTabWrapper = () => {    
+const ListLedgerTabWrapper = () => {
     const params = useParams()
     const dealerId: any = params.dealerId
 
@@ -26,7 +26,7 @@ const ListLedgerTabWrapper = () => {
     const { page, rowsPerPage, items, searchValue } = dealerLedgerState
 
     const dispatch = useDispatch<AppDispatch>()
-    
+
     const { data, isFetching, isLoading } = useGetDealerLedgerQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
