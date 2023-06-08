@@ -21,7 +21,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: 'ASR',
-        path: '/configurations/asr',
+        path: '/asr',
     },
     {
         label: 'Add ASR',
