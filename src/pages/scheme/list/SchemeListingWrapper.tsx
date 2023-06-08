@@ -71,7 +71,7 @@ const SchemeListingWrapper = () => {
         {
             field: 'category',
             headerName: 'Category',
-            flex: 'flex-[1.5_1.5_0%]',
+            flex: 'flex-[1_1_0%]',
             renderCell: (row: SchemeListResponse) => {
                 return <span> {row.productCategoryLabel} </span>
             },
@@ -80,7 +80,7 @@ const SchemeListingWrapper = () => {
         {
             field: 'subCategory',
             headerName: 'Sub Category',
-            flex: 'flex-[1.5_1.5_0%]',
+            flex: 'flex-[1_1_0%]',
             renderCell: (row: SchemeListResponse) => {
                 return <span> {row.ProductSubCategoryLabel} </span>
             },
@@ -88,32 +88,32 @@ const SchemeListingWrapper = () => {
         {
             field: 'price',
             headerName: 'Price',
-            flex: 'flex-[1.5_1.5_0%]',
+            flex: 'flex-[1_1_0%]',
             renderCell: (row: SchemeListResponse) => {
                 return <span> {row.schemePrice} </span>
             },
         },
-        {
-            field: 'commission',
-            headerName: 'Commission',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: SchemeListResponse) => {
-                return <span> {row.commission} </span>
-            },
-        },
+        // {
+        //     field: 'commission',
+        //     headerName: 'Commission',
+        //     flex: 'flex-[1_1_0%]',
+        //     renderCell: (row: SchemeListResponse) => {
+        //         return <span> {row.commission} </span>
+        //     },
+        // },
         {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="">
+                <div className="relative">
                     <button
                         onClick={(e) => {
                             e.stopPropagation()
                             setShowDropdown(!showDropdown)
                             setCurrentId(row?._id)
                         }}
-                        className=" absolute text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
                     >
                         {' '}
                         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
@@ -131,7 +131,7 @@ const SchemeListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Scheme',
+                                        title: 'Delete vendor',
                                         text: 'Do you want to delete',
                                         showCancelButton: true,
                                         next: (res) => {
@@ -148,6 +148,7 @@ const SchemeListingWrapper = () => {
                         </div>
                     )}
                 </div>
+               
             ),
             align: 'end',
         },

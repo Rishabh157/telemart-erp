@@ -31,7 +31,7 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
+            <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
                 <button
                     onClick={() => navigate('/scheme/add')}
@@ -43,6 +43,7 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
+                <div id="table-header">
                 <ATMTableHeader
                     page={page}
                     searchValue={searchValue}
@@ -56,6 +57,7 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
                     // onFilterClick={() => setIsFilterOpen(true)}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                 />
+                </div>
 
                 {/* Table */}
                 <div className="grow overflow-auto  ">
@@ -68,7 +70,7 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
-                        extraClasses="h-full overflow-auto"
+                        
                     />
                 </div>
 
