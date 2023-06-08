@@ -74,7 +74,7 @@ const AddChannelManagementWrapper = () => {
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            dispatch(setChannelGroups(channelGroupsData.data || []))
+            dispatch(setChannelGroups(channelGroupsData?.data || []))
         }
     }, [isLoading, isFetching, channelGroupsData, dispatch])
     useEffect(() => {

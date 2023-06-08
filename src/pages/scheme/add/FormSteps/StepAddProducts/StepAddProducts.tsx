@@ -5,7 +5,7 @@ import { FormInitialValues } from '../../AddSchemeWrapper'
 import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { DropdownOptions } from './StepAddProductsWrapper'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { HiPlus } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
@@ -67,21 +67,21 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
 
                                         <div className="grid grid-cols-5 gap-4 gap-y-5">
                                             {/* Product Group */}
-                                            <div className="col-span-2">
-                                                <ATMSelect
+                                            <div className="col-span-2 -mt-2">
+                                                <ATMSelectSearchable
                                                     name={`productInformation[${productIndex}].productGroup`}
                                                     value={productGroup}
                                                     onChange={(e) => {
                                                         setFieldValue(
                                                             `productInformation[${productIndex}].productGroup`,
-                                                            e.target.value
+                                                            e
                                                         )
                                                     }}
                                                     label="Product Group"
+                                                    selectLabel="Select Product Group"
                                                     options={
                                                         dropdownOptions.productGroupOptions
                                                     }
-                                                    isSubmitting={isSubmitting}
                                                 />
                                             </div>
 

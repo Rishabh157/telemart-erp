@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormikProps } from 'formik'
-import { FormInitialValues } from './DealerLedgerTabWrapper'
+import { FormInitialValues } from './AddDealerLedgerTabWrapper'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>

@@ -115,7 +115,7 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                                 }}
                                                 label="Tax %"
                                                 placeholder="Tax %"
-                                                className="shadow bg-white rounded"
+                                                className="shadow bg-white rounded mt-2 "
                                             />
                                         </div>
                                     </div>

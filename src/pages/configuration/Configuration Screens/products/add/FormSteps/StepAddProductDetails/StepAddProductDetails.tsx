@@ -38,7 +38,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     }
                     label="Product Code"
                     placeholder="Product Code"
-                    className="shadow bg-white rounded"
+                    className="shadow bg-white rounded mt-1"
                     isSubmitting={isSubmitting}
                 />
 
@@ -51,12 +51,12 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     }
                     label="Product Name"
                     placeholder="Product Name"
-                    className="shadow bg-white rounded"
+                    className="shadow bg-white rounded mt-1"
                     isSubmitting={isSubmitting}
                 />
 
                 {/* Product Category */}
-                <div className="-mt-2">
+                <div className="-mt-1">
                     <ATMSelectSearchable
                         name="product_category"
                         value={values.product_category}
@@ -67,7 +67,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                 </div>
 
                 {/* Product Sub Category */}
-                <div className="-mt-2">
+                <div className="-mt-1">
                     <ATMSelectSearchable
                         name="product_sub_category"
                         value={values.product_sub_category}
@@ -80,7 +80,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                 </div>
 
                 {/* Product Sub Category */}
-                <div className="-mt-2">
+                <div className="-mt-1">
                     <ATMSelectSearchable
                         name="productGroup"
                         required
@@ -103,7 +103,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     }}
                     label="Product Weight (in gms)"
                     placeholder="Product Weight"
-                    className="shadow bg-white rounded"
+                    className="shadow bg-white rounded mt-1"
                     isSubmitting={isSubmitting}
                 />
 
@@ -172,7 +172,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
             </div>
 
             {/* Description */}
-            <div className="-mt-6 mb-10">
+            <div className="-mt-10 pb-4">
                 <ATMTextArea
                     name="description"
                     value={values.description}
@@ -181,7 +181,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     }
                     label="Description"
                     placeholder="Description"
-                    className="shadow bg-white rounded"
+                    className="shadow bg-white rounded mt-0"
                     minRows={3}
                     isSubmitting={isSubmitting}
                 />
