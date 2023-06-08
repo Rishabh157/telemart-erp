@@ -228,6 +228,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                     }
                                                     // selectedFile={otherDocument.documentFile}
                                                     isSubmitting={isSubmitting}
+                                                    className="shadow bg-white rounded mt-0"
                                                 />
 
                                                 <div></div>

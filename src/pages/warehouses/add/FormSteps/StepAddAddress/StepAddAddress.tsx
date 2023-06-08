@@ -158,6 +158,7 @@ const StepAddAddress = ({
                                                                 'counrtyOptions'
                                                         ]
                                                     }
+                                                    isSubmitting={isSubmitting}
                                                 />
                                             </div>
                                         )

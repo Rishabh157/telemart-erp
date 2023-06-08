@@ -213,6 +213,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                             e.target.value
                                                         )
                                                     }
+                                                    className="shadow bg-white rounded mt-0"
                                                     // selectedFile={otherDocument.documentFile}
                                                 />
 
