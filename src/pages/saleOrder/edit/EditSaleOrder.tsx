@@ -38,7 +38,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
     }
 
     const { values, setFieldValue } = formikProps
-    
+
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -89,9 +89,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                             <ATMSelectSearchable
                                 name="dealer"
                                 value={values?.dealer}
-                                onChange={(e) =>
-                                    setFieldValue('dealer', e)
-                                }
+                                onChange={(e) => setFieldValue('dealer', e)}
                                 options={dropdownOptions.dealerOptions}
                                 label="Dealer"
                                 selectLabel="Select Dealer"
@@ -101,9 +99,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                             <ATMSelectSearchable
                                 name="warehouse"
                                 value={values.wareHouse}
-                                onChange={(e) =>
-                                    setFieldValue('wareHouse', e)
-                                }
+                                onChange={(e) => setFieldValue('wareHouse', e)}
                                 options={dropdownOptions.warehouseOptions}
                                 label="Warehouse"
                                 selectLabel="Select Warehouse"

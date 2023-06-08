@@ -80,7 +80,6 @@ const EditSaleOrderWrapper = (props: Props) => {
             value: ele._id,
         }
     })
-    
 
     const warehouseOptions = warehouseItems?.map((ele: any) => {
         return {
