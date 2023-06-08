@@ -60,7 +60,7 @@ const StepAddComapnyDetails = ({
                                                       name.split('.')[1]
                                                   ]
                                                 : values[name]
-                                        }                                        
+                                        }
                                         onChange={(e: any) => {
                                             setFieldValue(name, e)
                                         }}
@@ -70,7 +70,6 @@ const StepAddComapnyDetails = ({
                                                     'countryOptions'
                                             ]
                                         }
-                                        
                                     />
                                 </div>
                             )

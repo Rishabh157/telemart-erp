@@ -279,7 +279,7 @@ const AddDealerWrapper = () => {
                         countryId: values.registrationAddress.country,
                         stateId: values.registrationAddress.state,
                         districtId: values.registrationAddress.district,
-                        pincodeId: values.registrationAddress.pincode,  
+                        pincodeId: values.registrationAddress.pincode,
                     },
                     billingAddress: {
                         phone: values.billingAddress.phone,
