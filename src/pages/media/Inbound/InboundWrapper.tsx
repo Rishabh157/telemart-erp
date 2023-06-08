@@ -164,7 +164,6 @@ const InbouundWrapper = () => {
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.inboundCaller
     )
-
     const { page, rowsPerPage, searchValue, items } = inboundCallerState
     const {
         data: Calldata,

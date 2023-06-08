@@ -29,6 +29,7 @@ const ChannelGroupListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const { page, rowsPerPage, searchValue, items } = channelGroupState
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
     const columns: columnTypes[] = [
         {
@@ -99,8 +100,8 @@ const ChannelGroupListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},

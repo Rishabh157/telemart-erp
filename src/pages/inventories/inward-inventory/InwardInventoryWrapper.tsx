@@ -30,7 +30,7 @@ const InwardInventoryWrapper = (props: Props) => {
         data: whData,
         isLoading: whIsLoading,
         isFetching: whIsFetching,
-    } = useGetWareHousesQuery('')
+    } = useGetWareHousesQuery(userData?.companyId)
 
     useEffect(() => {
         if (!isFetching && !isLoading) {

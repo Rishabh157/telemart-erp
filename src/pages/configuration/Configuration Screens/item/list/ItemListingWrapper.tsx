@@ -120,6 +120,7 @@ const ItemListingWrapper = () => {
     ]
     // const dispatch = useDispatch<AppDispatch>();
     // // const navigate = useNavigate();
+    // const { userData } = useSelector((state: RootState) => state?.auth)
     const { data, isFetching, isLoading } = useGetItemsQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -128,7 +129,7 @@ const ItemListingWrapper = () => {
         filterBy: [
             {
                 fieldName: 'companyId',
-                value: userData?.companyId,
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},

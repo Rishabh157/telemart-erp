@@ -21,6 +21,7 @@ import {
 
 const DealersListingWrapper = () => {
     const dealerState: any = useSelector((state: RootState) => state.dealer)
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
 
@@ -174,8 +175,8 @@ const DealersListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},

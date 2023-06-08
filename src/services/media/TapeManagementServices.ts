@@ -19,8 +19,8 @@ export const tapeManagementApi = apiSlice.injectEndpoints({
 
         getAllTapeMangement: builder.query({
             providesTags: ['tape'],
-            query: () => ({
-                url: '/tape-master',
+            query: (companyId) => ({
+                url: `/tape-master/company/${companyId}`,
                 method: 'Get',
             }),
         }),

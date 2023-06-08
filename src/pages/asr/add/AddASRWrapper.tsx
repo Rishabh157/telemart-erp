@@ -26,8 +26,8 @@ const AddASRWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [addAsr] = useAddAsrMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const { data, isLoading, isFetching } = useGetAllProductGroupQuery('')
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { data, isLoading, isFetching } = useGetAllProductGroupQuery(userData?.companyId)
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
