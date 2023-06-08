@@ -56,7 +56,7 @@ const EditSaleOrderWrapper = (props: Props) => {
         isFetching: dealerIsFetching,
     } = useGetAllDealersQuery(userData?.companyId)
     const { allItems }: any = useSelector((state: RootState) => state?.dealer)
-
+    //console.log(dealerData)
     const {
         data: warehouseData,
         isLoading: warehouseIsLoading,
@@ -80,6 +80,7 @@ const EditSaleOrderWrapper = (props: Props) => {
             value: ele._id,
         }
     })
+    
 
     const warehouseOptions = warehouseItems?.map((ele: any) => {
         return {
