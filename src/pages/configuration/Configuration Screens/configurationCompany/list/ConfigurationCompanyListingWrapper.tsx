@@ -131,6 +131,8 @@ const ConfigurationCompanyListingWrapper = () => {
     const { page, rowsPerPage, items, searchValue }: any = useSelector(
         (state: RootState) => state.company
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetCompaniesQuery({
@@ -140,8 +142,8 @@ const ConfigurationCompanyListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},

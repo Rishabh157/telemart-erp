@@ -63,13 +63,13 @@ const AddSlotManagementWrapper = () => {
         isLoading: isCategoryLoading,
         isFetching: isCategoryFetching,
         data: categoryDataApi,
-    } = useGetAllChannelCategoryQuery('')
+    } = useGetAllChannelCategoryQuery(userData?.companyId)
 
     const {
         isLoading: isChannelMgtLoading,
         isFetching: isChannelMgtFetching,
         data: ChannelMgtDataApi,
-    } = useGetAllChannelQuery('')
+    } = useGetAllChannelQuery(userData?.companyId)
 
     useEffect(() => {
         if (!isChannelMgtLoading && !isChannelMgtFetching) {
@@ -81,7 +81,7 @@ const AddSlotManagementWrapper = () => {
         isLoading,
         isFetching,
         data: channelGroupsData,
-    } = useGetAllChannelGroupQuery('')
+    } = useGetAllChannelGroupQuery(userData?.companyId)
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
@@ -93,7 +93,7 @@ const AddSlotManagementWrapper = () => {
         isLoading: isTapeMgtLoading,
         isFetching: isTapeMgtFetching,
         data: TapeMgtdata,
-    } = useGetAllTapeMangementQuery('')
+    } = useGetAllTapeMangementQuery(userData?.companyId)
 
     useEffect(() => {
         if (!isTapeMgtLoading && !isTapeMgtFetching) {

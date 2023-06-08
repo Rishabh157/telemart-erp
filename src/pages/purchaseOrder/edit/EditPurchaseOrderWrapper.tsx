@@ -18,7 +18,7 @@ import { setAllItems } from 'src/redux/slices/vendorSlice'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllItem } from 'src/redux/slices/itemSlice'
 import moment from 'moment'
-import { setSelectedItems } from 'src/redux/slices/PurchaseOrderSlice'
+import { setItems } from 'src/redux/slices/PurchaseOrderSlice'
 
 type Props = {}
 
@@ -53,10 +53,10 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [UpdatePurchaseOrder] = useUpdatePurchaseOrderMutation()
     const { data, isFetching, isLoading } = useGetByPoCodeQuery(poCode)
-    const { selectedItems }: any = useSelector(
+    const { items }: any = useSelector(
         (state: RootState) => state.purchaseOrder
     )
-    const sorteddata = selectedItems?.map((ele: any, index: any) => {
+    const sorteddata = items?.map((ele: any, index: any) => {
         return {
             id: ele._id,
             itemId: ele.purchaseOrder.itemId,
@@ -67,28 +67,28 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     })
 
     const datas = {
-        poCode: selectedItems?.[0]?.poCode,
-        vendorId: selectedItems?.[0]?.vendorId,
-        wareHouseId: selectedItems?.[0]?.wareHouseId,
+        poCode: items?.[0]?.poCode,
+        vendorId: items?.[0]?.vendorId,
+        wareHouseId: items?.[0]?.wareHouseId,
         purchaseOrder: sorteddata,
     }
 
     useEffect(() => {
-        disptach(setSelectedItems(data?.data))
+        disptach(setItems(data?.data))
     }, [disptach, data, isFetching, isLoading])
 
     const {
         data: vendorData,
         isLoading: vendorIsLoading,
         isFetching: VendorIsFetching,
-    } = useGetVendorsQuery('')
+    } = useGetVendorsQuery(userData?.companyId)
     const { allItems }: any = useSelector((state: RootState) => state.vendor)
 
     const {
         data: warehouseData,
         isLoading: warehouseIsLoading,
         isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery('')
+    } = useGetWareHousesQuery(userData?.companyId)
     const { allItems: warehouseItems }: any = useSelector(
         (state: RootState) => state?.warehouse
     )

@@ -124,6 +124,7 @@ const ProductSubCategoryListingWrapper = () => {
         },
     ]
     const { page, rowsPerPage, searchValue, items } = productSubCategoryState
+    // const { userData } = useSelector((state: RootState) => state?.auth)
 
     // const dispatch = useDispatch<AppDispatch>();
     // // const navigate = useNavigate();
@@ -135,7 +136,7 @@ const ProductSubCategoryListingWrapper = () => {
         filterBy: [
             {
                 fieldName: 'companyId',
-                value: userData?.companyId,
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},

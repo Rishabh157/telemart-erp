@@ -19,8 +19,8 @@ export const channelGroupApi = apiSlice.injectEndpoints({
         //***** GET Without PAGINATION DATA *****/
         getAllChannelGroup: builder.query({
             providesTags: ['channel-group'],
-            query: () => ({
-                url: '/channel-group',
+            query: (companyId) => ({
+                url: `/channel-group/company/${companyId}`,
                 method: 'GET',
             }),
         }),

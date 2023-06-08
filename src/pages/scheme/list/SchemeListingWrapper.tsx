@@ -26,6 +26,7 @@ const SchemeListingWrapper = () => {
     const [deleteScheme] = useDeleteSchemeMutation()
     const schemeState: any = useSelector((state: RootState) => state.scheme)
     const { page, rowsPerPage, items, searchValue } = schemeState
+    const { userData }: any = useSelector((state: RootState) => state.auth)
 
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -35,6 +36,10 @@ const SchemeListingWrapper = () => {
         params: ['schemeName', 'schemeCode'],
         page: page,
         filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: '',
                 value: [],

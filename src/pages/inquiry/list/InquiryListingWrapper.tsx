@@ -35,6 +35,8 @@ const InquiryListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
 
     const inquiryState: any = useSelector((state: RootState) => state.inquiry)
+    const { userData }: any = useSelector((state: RootState) => state.auth)
+
     const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
         inquiryState
 
@@ -44,6 +46,10 @@ const InquiryListingWrapper = () => {
         params: ['inquiryNumber'],
         page: page,
         filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: 'dispositionLevelThreeId',
                 value: filterValue,

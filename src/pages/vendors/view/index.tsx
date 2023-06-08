@@ -80,6 +80,7 @@ const ViewVendor = () => {
     const { allItems, selectedItem }: any = useSelector(
         (state: RootState) => state?.vendor
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
         limit: 100,
         searchValue: searchValue,
@@ -87,8 +88,8 @@ const ViewVendor = () => {
         page: 1,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},

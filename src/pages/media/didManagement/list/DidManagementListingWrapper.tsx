@@ -28,7 +28,7 @@ const DidManagementListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [deleteDid] = useDeleteDidMutation()
     const { page, rowsPerPage, searchValue, items } = didManagementState
-
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
 
     const columns: columnTypes[] = [
@@ -114,6 +114,10 @@ const DidManagementListingWrapper = () => {
         params: ['didNumber', 'schemeLabel', 'channelLabel'],
         page: page,
         filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: '',
                 value: [],

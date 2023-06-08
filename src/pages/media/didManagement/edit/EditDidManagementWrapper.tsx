@@ -89,12 +89,12 @@ const EditDidManagementWrapper = () => {
         isLoading: isSchemeLoading,
         isFetching: isSchemeFetching,
         data: schemeDataApi,
-    } = useGetSchemeQuery(' ')
+    } = useGetSchemeQuery(userData?.companyId)
     const {
         isLoading,
         isFetching,
         data: channelData,
-    } = useGetAllChannelQuery('')
+    } = useGetAllChannelQuery(userData?.companyId)
     useEffect(() => {
         if (!isLoading && !isFetching) {
             setChannel(channelData?.data)

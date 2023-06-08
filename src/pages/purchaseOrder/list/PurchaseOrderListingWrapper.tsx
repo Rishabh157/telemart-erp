@@ -30,8 +30,8 @@ const PurchaseOrderListingWrapper = () => {
     const productOrderState: any = useSelector(
         (state: RootState) => state.purchaseOrder
     )
-    const { userData }: any = useSelector((state: RootState) => state.auth)
     const { page, rowsPerPage, searchValue, items } = productOrderState
+    const { userData }: any = useSelector((state: RootState) => state.auth)
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
 
@@ -42,8 +42,8 @@ const PurchaseOrderListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},
@@ -358,7 +358,7 @@ const PurchaseOrderListingWrapper = () => {
             <SideNavLayout>
                 <PurchaseOrderListing
                     columns={columns}
-                    rows={items}
+                    rows={items || []}
                     setShowDropdown={setShowDropdown}
                 />
             </SideNavLayout>

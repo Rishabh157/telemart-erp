@@ -81,13 +81,17 @@ const GRNListingWrapper = () => {
 
     const grnState: any = useSelector((state: RootState) => state.grn)
     const { page, rowsPerPage, searchValue, items, filterValue } = grnState
-
+    const { userData }: any = useSelector((state: RootState) => state.auth)
     const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['poCode'],
         page: page,
         filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: 'poCode',
                 value: filterValue,
