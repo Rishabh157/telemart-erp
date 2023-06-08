@@ -54,10 +54,11 @@ const AddDealerLedgerTabWrapper = (props: Props) => {
                 price: values.price,
                 remark: values.remark,
                 companyId: companyId || '',
+                dealerId: dealerId
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Supervisor added successfully!')
+                        showToast('success', 'Ledger added successfully!')
                         navigate('/dealers/' + dealerId + '/ledger')
                     } else {
                         showToast('error', res?.data?.message)
@@ -70,6 +71,13 @@ const AddDealerLedgerTabWrapper = (props: Props) => {
         }, 1000)
     }
 
+    const dropdownOptions = {
+        noteTypeOptions: [
+            { label: 'CREDIT', value: 'CREDIT' },
+            { label: 'DEBIT', value: 'DEBIT' },            
+        ],
+    }
+
     return (
         <div>
             <Formik
@@ -80,6 +88,7 @@ const AddDealerLedgerTabWrapper = (props: Props) => {
                 {(formikProps) => {
                     return (
                         <AddDealerLedger
+                            dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
                             formikProps={formikProps}                            
                         />
