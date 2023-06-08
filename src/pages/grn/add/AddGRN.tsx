@@ -5,8 +5,8 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormInitialValues } from './AddGRNWrapper'
-import { MdExpandMore } from 'react-icons/md'
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+// import { MdExpandMore } from 'react-icons/md'
+// import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { useLocation } from 'react-router-dom'
 
@@ -72,71 +72,104 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                     </div>
 
                     <div className="px-3 py-3">
-                        <Accordion className="grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat">
+                        {/* <Accordion className="grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat">
                             <AccordionSummary
+                            
                                 expandIcon={<MdExpandMore />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                                 className="border-b border-slate-300"
-                            >
-                                <div className="flex justify-between px-3 items-center  w-full">
-                                    <div>
-                                        Item Name :{' '}
-                                        <span className="text-primary-main font-medium ">
-                                            {' '}
-                                            {itemName}{' '}
-                                        </span>
-                                    </div>
+                            > */}
+                        <div className="flex justify-between  items-center  w-full">
+                            <div>
+                                Item Name :
+                                <span className="text-primary-main font-medium ">
+                                    {itemName}
+                                </span>
+                            </div>
 
-                                    <div className="text-primary-main text-sm">
-                                        Req Qnty : {quantity} | Received Qnty:
-                                        ..
-                                    </div>
-                                </div>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <div className="grid grid-cols-3 gap-5 py-6">
-                                    <ATMTextField
-                                        name="receivedQuantity"
-                                        value={values.receivedQuantity}
-                                        onChange={(e) =>
-                                            setFieldValue(
-                                                `receivedQuantity`,
-                                                e.target.value
-                                            )
-                                        }
-                                        label="Received Quantity"
-                                        placeholder="Received Quantity"
-                                    />
+                            <div className="text-primary-main text-md">
+                                Req Qnty : {quantity} | Received Qnty:
+                            </div>
+                        </div>
+                        {/* </AccordionSummary>
+                            <AccordionDetails> */}
+                        <div className="grid grid-cols-3 gap-5 py-2 pb-9">
+                            <ATMTextField
+                                name="receivedQuantity"
+                                type={'text'}
+                                value={values.receivedQuantity}
+                                onChange={(e) =>
+                                    setFieldValue(
+                                        `receivedQuantity`,
+                                        e.target.value
+                                    )
+                                }
+                                label="Received Quantity"
+                                placeholder="Received Quantity"
+                            />
 
-                                    <ATMTextField
-                                        name="goodQuantity"
-                                        value={values.goodQuantity}
-                                        onChange={(e) =>
-                                            setFieldValue(
-                                                `goodQuantity`,
-                                                e.target.value
-                                            )
-                                        }
-                                        label="Good Quantity"
-                                        placeholder="Good Quantity"
-                                    />
+                            <ATMTextField
+                                name="goodQuantity"
+                                type={'text'}
+                                value={values.goodQuantity}
+                                onChange={(e) => {
+                                    console.log(e.target.value)
+                                    if (
+                                        parseInt(e.target.value) <=
+                                        values.receivedQuantity
+                                    ) {
+                                        setFieldValue(
+                                            `goodQuantity`,
+                                            e.target.value
+                                        )
+                                        let value =
+                                            ((values.receivedQuantity as number) -
+                                                parseInt(
+                                                    e.target.value
+                                                )) as number
+                                        setFieldValue(
+                                            `defectiveQuantity`,
+                                            value
+                                        )
+                                    } else if (e.target.value === '') {
+                                        setFieldValue(`goodQuantity`, 0)
+                                        setFieldValue(`defectiveQuantity`, 0)
+                                    }
+                                }}
+                                label="Good Quantity"
+                                placeholder="Good Quantity"
+                            />
 
-                                    <ATMTextField
-                                        name="defectiveQuantity"
-                                        value={values.defectiveQuantity}
-                                        onChange={(e) =>
-                                            setFieldValue(
-                                                `defectiveQuantity`,
-                                                e.target.value
-                                            )
-                                        }
-                                        label="Defective Quantity"
-                                        placeholder="Defective Quantity"
-                                    />
-                                </div>
-                            </AccordionDetails>
-                        </Accordion>
+                            <ATMTextField
+                                name="defectiveQuantity"
+                                value={values.defectiveQuantity}
+                                onChange={(e) => {
+                                    if (
+                                        parseInt(e.target.value) <=
+                                        values.receivedQuantity
+                                    ) {
+                                        setFieldValue(
+                                            `defectiveQuantity`,
+                                            e.target.value
+                                        )
+                                        let value =
+                                            ((values.receivedQuantity as number) -
+                                                parseInt(
+                                                    e.target.value
+                                                )) as number
+                                        setFieldValue(`goodQuantity`, value)
+                                    } else if (e.target.value === '') {
+                                        setFieldValue(`goodQuantity`, 0)
+                                        setFieldValue(`defectiveQuantity`, 0)
+                                    }
+                                }}
+                                label="Defective Quantity"
+                                placeholder="Defective Quantity"
+                            />
+                        </div>
+                        {/* </AccordionDetails>
+                        </Accordion> */}
                     </div>
                 </div>
             </div>

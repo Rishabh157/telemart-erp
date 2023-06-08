@@ -99,13 +99,13 @@ const EditCompetitorWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         competitorName: string().required('Required'),
+        companyName: string().required('Required'),
         productName: string().required('Required'),
-        websiteLink: string().url().required('Required'),
-        youtubeLink: string().url().required('Required'),
+        websiteLink: string().url(),
+        youtubeLink: string().url(),
         whatsappNumber: string()
             .min(10, 'Number should be 10 digits')
-            .max(10, 'maximum 10 digit')
-            .required('Required'),
+            .max(10, 'maximum 10 digit'),
         schemePrice: string().required('Required'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
