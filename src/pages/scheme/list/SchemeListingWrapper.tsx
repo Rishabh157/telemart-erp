@@ -49,7 +49,7 @@ const SchemeListingWrapper = () => {
         {
             field: 'schemeCode',
             headerName: 'Scheme Code',
-            flex: 'flex-[1.5_1.5_0%]',
+            flex: 'flex-[1_1_0%]',
             renderCell: (row: SchemeListResponse) => {
                 return <span> {row.schemeCode} </span>
             },
