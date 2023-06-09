@@ -42,13 +42,15 @@ const AddStateDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                 </DialogContent>
 
                 <DialogActions>
-                    <button type="button" onClick={() => onClose()}>
+                    <button 
+                    className="border border-primary-main text-primary-main px-3 py-2 rounded"
+                    type="button" onClick={() => onClose()}>
                         {' '}
                         Cancel
                     </button>
                     <button
                         type="button"
-                        className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                        className={`bg-primary-main rounded py-2 px-5 text-white border border-primary-main ${
                             true ? 'disabled:opacity-25' : ''
                         }`}
                         onClick={() => formikProps.handleSubmit()}

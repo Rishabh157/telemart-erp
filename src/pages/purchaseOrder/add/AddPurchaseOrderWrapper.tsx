@@ -133,7 +133,9 @@ const AddPurchaseOrderWrapper = (props: Props) => {
                 quantity: number()
                     .min(1, 'Quantity must be greater than 0')
                     .required('Please enter quantity'),
-                estReceivingDate: date().required('Please select date'),
+                estReceivingDate: date()
+                .typeError('Invalid Date')
+                .required('Please select date'),
             })
         ),
     })

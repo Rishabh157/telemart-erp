@@ -39,7 +39,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [packaging, setPackaging] = React.useState('')
     const [wareHouse, setWareHouse] = React.useState('')
     const [status, setStatus] = React.useState('AVAILABLE')
-    const [shouldPrint, setShouldPrint] = React.useState(false)
+    //const [shouldPrint, setShouldPrint] = React.useState(false)
     const [condition, setCondition] = React.useState('GOOD')
     const [barcodes, setBarcodes] = React.useState<renderBarcodType[]>([])
     const [filterBarcode, setFilterBarcode] = useState<renderBarcodType[] | []>(
@@ -84,16 +84,22 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
         const newObject = barcodes?.filter(
             (f: any) => f?.barcodeNumber === barcode && f?.isUsed === false
         )
+
+       // console.log(newObject)
         // if (newObject?.length ? newObject[0]?.isUsed === true : barcodes?.length) {
         //   showToast("error", "Barcode already used");
         // }
         const alreadyExist = filterBarcode?.find(
             (f) => f.barcodeNumber === newObject[0]?.barcodeNumber
         )
+       
         const validBarcode = filterBarcode?.length
             ? filterBarcode[0]?.productGroupLabel ===
               newObject[0]?.productGroupLabel
             : true
+
+            
+
         if (
             newObject.length &&
             filterBarcode?.length <= itemCount &&
@@ -111,7 +117,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     }, [barcode])
 
     useEffect(() => {
-        if (barcode?.length === 6) {
+        if (barcode && barcode?.length === 6) {
             setBarcode('')
         }
     }, [barcode])
@@ -128,7 +134,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> Inventories </ATMPageHeading>
-                {shouldPrint && (
+                {barcode && (
                     <button
                         type="button"
                         onClick={() => {
@@ -169,6 +175,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                             setStatus(e.target.value)
                         }}
                         options={[
+                            { label: 'Select' },
                             { label: 'Available', value: 'AVAILABLE' },
                             { label: 'Out Of Stock', value: 'OUT OF STOCK' },
                         ]}
@@ -181,6 +188,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                             setCondition(e.target.value)
                         }}
                         options={[
+                            { label: 'Select' },
                             { label: 'Good', value: 'GOOD' },
                             { label: 'Defective', value: 'DEFECTIVE' },
                         ]}
@@ -193,9 +201,9 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                             packaging?.length === 0 || wareHouse.length === 0
                         }
                         value={barcode}
-                        onChange={(e) => {
+                        onChange={(e) => { 
                             setBarcode(e.target.value)
-                            setShouldPrint(true)
+                            //setShouldPrint(true)
                         }}
                         label="Barcode"
                     />

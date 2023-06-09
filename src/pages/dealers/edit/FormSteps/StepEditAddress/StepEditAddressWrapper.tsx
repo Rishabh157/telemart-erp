@@ -55,28 +55,28 @@ const formFields: {
                 placeholder: 'Address',
             },
             {
-                name: 'registrationAddress.country',
+                name: 'registrationAddress.countryId',
                 label: 'Country',
                 placeholder: 'Country',
                 type: 'select',
                 optionAccessKey: 'counrtyOptions',
             },
             {
-                name: 'registrationAddress.state',
+                name: 'registrationAddress.stateId',
                 label: 'State',
                 placeholder: 'State',
                 type: 'select',
                 optionAccessKey: 'stateOptions',
             },
             {
-                name: 'registrationAddress.district',
+                name: 'registrationAddress.districtId',
                 label: 'District',
                 placeholder: 'District',
                 type: 'select',
                 optionAccessKey: 'districtOptions',
             },
             {
-                name: 'registrationAddress.pincode',
+                name: 'registrationAddress.pincodeId',
                 label: 'Pincode',
                 placeholder: 'Pincode',
                 type: 'select',
@@ -99,28 +99,28 @@ const formFields: {
                 placeholder: 'Address',
             },
             {
-                name: 'billingAddress.country',
+                name: 'billingAddress.countryId',
                 label: 'Country',
                 placeholder: 'Country',
                 type: 'select',
                 optionAccessKey: 'billingCounrtyOptions',
             },
             {
-                name: 'billingAddress.state',
+                name: 'billingAddress.stateId',
                 label: 'State',
                 placeholder: 'State',
                 type: 'select',
                 optionAccessKey: 'billingStateOptions',
             },
             {
-                name: 'billingAddress.district',
+                name: 'billingAddress.districtId',
                 label: 'District',
                 placeholder: 'District',
                 type: 'select',
                 optionAccessKey: 'billingDistrictOptions',
             },
             {
-                name: 'billingAddress.pincode',
+                name: 'billingAddress.pincodeId',
                 label: 'Pincode',
                 placeholder: 'Pincode',
                 type: 'select',
@@ -150,9 +150,9 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         isLoading: stateIsLoading,
         isFetching: stateIsFetching,
     } = useGetAllStateByCountryQuery(
-        formikProps.values.registrationAddress.country,
+        formikProps.values.registrationAddress.countryId,
         {
-            skip: !formikProps.values.registrationAddress.country,
+            skip: !formikProps.values.registrationAddress.countryId,
         }
     )
     //billing
@@ -161,9 +161,9 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         isLoading: stateIsLoadingB,
         isFetching: stateIsFetchingB,
     } = useGetAllStateByCountryQuery(
-        formikProps.values.billingAddress.country,
+        formikProps.values.billingAddress.countryId,
         {
-            skip: !formikProps.values.billingAddress.country,
+            skip: !formikProps.values.billingAddress.countryId,
         }
     )
     //registraion
@@ -172,9 +172,9 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         isLoading: districtIsLoading,
         isFetching: districtIsFetching,
     } = useGetAllDistrictByStateQuery(
-        formikProps.values.registrationAddress.state,
+        formikProps.values.registrationAddress.stateId,
         {
-            skip: !formikProps.values.registrationAddress.state,
+            skip: !formikProps.values.registrationAddress.stateId,
         }
     )
     //billing
@@ -182,8 +182,8 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         data: districtDataB,
         isLoading: districtIsLoadingB,
         isFetching: districtIsFetchingB,
-    } = useGetAllDistrictByStateQuery(formikProps.values.billingAddress.state, {
-        skip: !formikProps.values.billingAddress.state,
+    } = useGetAllDistrictByStateQuery(formikProps.values.billingAddress.stateId, {
+        skip: !formikProps.values.billingAddress.stateId,
     })
     //registration
     const {
@@ -191,9 +191,9 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         isLoading: pincodeIsLoading,
         isFetching: pincodeIsFetching,
     } = useGetAllPincodeByDistrictQuery(
-        formikProps.values.registrationAddress.country,
+        formikProps.values.registrationAddress.countryId,
         {
-            skip: !formikProps.values.registrationAddress.country,
+            skip: !formikProps.values.registrationAddress.countryId,
         }
     )
     //billing
@@ -202,9 +202,9 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         isLoading: pincodeIsLoadingB,
         isFetching: pincodeIsFetchingB,
     } = useGetAllPincodeByDistrictQuery(
-        formikProps.values.billingAddress.country,
+        formikProps.values.billingAddress.countryId,
         {
-            skip: !formikProps.values.billingAddress.country,
+            skip: !formikProps.values.billingAddress.countryId,
         }
     )
 
