@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
-
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: DropdownOptions
@@ -94,14 +93,19 @@ const StepEditDealerDetails = ({
                                     </FormControl> */}
 
                                     <ATMSelectSearchable
-                                        options={dropdownOptions['dealerCategoryOptions']}
+                                        options={
+                                            dropdownOptions[
+                                                'dealerCategoryOptions'
+                                            ]
+                                        }
                                         name={name}
                                         required
                                         value={values?.dealerCategoryId}
                                         selectLabel={`Select Dealer Category`}
                                         label="Dealer Category"
-                                        onChange={(e) => {                                            
-                                            setFieldValue(name, e)}}
+                                        onChange={(e) => {
+                                            setFieldValue(name, e)
+                                        }}
                                     />
                                 </div>
                             )

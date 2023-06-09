@@ -85,20 +85,18 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
             (f: any) => f?.barcodeNumber === barcode && f?.isUsed === false
         )
 
-       // console.log(newObject)
+        // console.log(newObject)
         // if (newObject?.length ? newObject[0]?.isUsed === true : barcodes?.length) {
         //   showToast("error", "Barcode already used");
         // }
         const alreadyExist = filterBarcode?.find(
             (f) => f.barcodeNumber === newObject[0]?.barcodeNumber
         )
-       
+
         const validBarcode = filterBarcode?.length
             ? filterBarcode[0]?.productGroupLabel ===
               newObject[0]?.productGroupLabel
             : true
-
-            
 
         if (
             newObject.length &&
@@ -201,7 +199,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                             packaging?.length === 0 || wareHouse.length === 0
                         }
                         value={barcode}
-                        onChange={(e) => { 
+                        onChange={(e) => {
                             setBarcode(e.target.value)
                             //setShouldPrint(true)
                         }}

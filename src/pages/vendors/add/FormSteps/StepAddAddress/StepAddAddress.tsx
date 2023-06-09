@@ -153,10 +153,7 @@ const StepAddAddress = ({
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
-                                                        setFieldValue(
-                                                            name,
-                                                            e
-                                                        )
+                                                        setFieldValue(name, e)
                                                     }}
                                                     options={
                                                         dropdownOptions[

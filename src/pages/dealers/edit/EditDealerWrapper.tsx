@@ -74,7 +74,9 @@ const steps = [
             firmName: string().required('firm name is required'),
             firstName: string().required('first name is required'),
             lastName: string().required('LastName is required'),
-            dealerCategoryId: string().required('please choose dealer category'),
+            dealerCategoryId: string().required(
+                'please choose dealer category'
+            ),
             email: string().required('email is required'),
         }),
     },

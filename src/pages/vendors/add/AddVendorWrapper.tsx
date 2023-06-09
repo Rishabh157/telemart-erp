@@ -124,7 +124,7 @@ const steps = [
                     mobileNumber: string()
                         .trim()
                         .max(10, 'Mobile number must be 10 digits')
-                        .min(10, 'Phone must be at least 10 digits')                        
+                        .min(10, 'Phone must be at least 10 digits')
                         .matches(regIndiaPhone, 'Invalid Mobile Number')
                         .required('Required!'),
                     landLine: string()

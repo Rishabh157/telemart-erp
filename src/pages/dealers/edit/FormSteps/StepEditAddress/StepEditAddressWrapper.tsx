@@ -182,9 +182,12 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         data: districtDataB,
         isLoading: districtIsLoadingB,
         isFetching: districtIsFetchingB,
-    } = useGetAllDistrictByStateQuery(formikProps.values.billingAddress.stateId, {
-        skip: !formikProps.values.billingAddress.stateId,
-    })
+    } = useGetAllDistrictByStateQuery(
+        formikProps.values.billingAddress.stateId,
+        {
+            skip: !formikProps.values.billingAddress.stateId,
+        }
+    )
     //registration
     const {
         data: pincodeData,
