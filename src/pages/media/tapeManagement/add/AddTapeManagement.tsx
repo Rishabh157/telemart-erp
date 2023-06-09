@@ -59,8 +59,8 @@ const AddTapeManagement = ({
         return options
     }
     return (
-        <div className="h-[calc(100%-55px)] w-full ">
-            <div className="p-4 flex flex-col gap-2 h-full  ">
+        <div className="">
+            <div className="p-4 flex flex-col gap-2   ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />

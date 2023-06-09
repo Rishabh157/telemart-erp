@@ -46,6 +46,7 @@ const EditSaleOrderWrapper = (props: Props) => {
     )
 
     const { data, isLoading, isFetching } = useGetSalesOrderByIdQuery(Id)
+    
     useEffect(() => {
         dispatch(setSelectedItem(data?.data))
     }, [dispatch, data, isLoading, isFetching])
