@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormikProps } from 'formik'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../AddVendorWrapper'
@@ -135,8 +135,9 @@ const StepAddAddress = ({
                                     case 'select':
                                         return (
                                             <div key={name} className="-mt-2">
-                                                <ATMSelect
+                                                <ATMSelectSearchable
                                                     label={label}
+                                                    selectLabel={`Select ${label}`}
                                                     name={name}
                                                     value={
                                                         name.includes('.')
@@ -154,7 +155,7 @@ const StepAddAddress = ({
                                                     onChange={(e) => {
                                                         setFieldValue(
                                                             name,
-                                                            e.target.value
+                                                            e
                                                         )
                                                     }}
                                                     options={

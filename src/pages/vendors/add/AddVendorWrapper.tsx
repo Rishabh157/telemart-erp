@@ -122,9 +122,9 @@ const steps = [
                         .email('Invalid  Email')
                         .required('Required!'),
                     mobileNumber: string()
-                        .max(10, 'Mobile number must be 10 digits')
-                        .min(10, 'Phone must be at least 10 digits')
                         .trim()
+                        .max(10, 'Mobile number must be 10 digits')
+                        .min(10, 'Phone must be at least 10 digits')                        
                         .matches(regIndiaPhone, 'Invalid Mobile Number')
                         .required('Required!'),
                     landLine: string()
@@ -293,7 +293,7 @@ const AddVendorWrapper = () => {
                             showToast('error', res?.data?.message)
                         }
                     } else {
-                        showToast('error', 'Something went wrong')
+                        showToast('error', 'Not able to add vendor')
                     }
                     setApiStatus(false)
                 })
