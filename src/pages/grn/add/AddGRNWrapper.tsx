@@ -28,6 +28,8 @@ const AddGRNWrapper = (props: Props) => {
 
     //const { userData } = useSelector((state: RootState) => state?.auth);
     const [apiStatus, setApiStatus] = useState(false)
+    // const { state } = useLocation()
+    // const { poCode, itemName, quantity } = state
     // Form Initial Values
     const initialValues: FormInitialValues = {
         poCode: poCode,
@@ -51,6 +53,23 @@ const AddGRNWrapper = (props: Props) => {
             .required('Please enter Defective Quantity'),
     })
 
+    // const validationSchema = object({
+    //     receivedQuantity: number()
+    //         .min(1, 'Quantity should be greater than or equal to 1')
+    //         .required('Please enter Received Quantity'),
+    //     goodQuantity: number()
+    //         .min(0, 'Good Quantity must be greater than or equal to 0')
+    //         .when('receivedQuantity', (receivedQuantity: any, schema) => {
+    //             return schema.max(
+    //                 receivedQuantity,
+    //                 'Good Quantity must be less than or equal to Received Quantity'
+    //             )
+    //         })
+    //         .required('Please enter Good Quantity'),
+    //     defectiveQuantity: number()
+    //         .min(0, 'Defective Quantity must be greater than or equal to 0')
+    //         .required('Please enter Defective Quantity'),
+    // })
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -60,7 +79,7 @@ const AddGRNWrapper = (props: Props) => {
                 itemId: values.itemId,
                 receivedQuantity: values.receivedQuantity,
                 goodQuantity: values.goodQuantity,
-                defectiveQuantity: values.receivedQuantity,
+                defectiveQuantity: values.defectiveQuantity,
                 companyId: values.companyId,
             }).then((res) => {
                 if ('data' in res) {

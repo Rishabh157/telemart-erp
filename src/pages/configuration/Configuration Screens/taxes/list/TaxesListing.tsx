@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -27,7 +27,7 @@ const TaxesListing = ({ columns, rows, setShowDropdown }: Props) => {
     const taxState: any = useSelector((state: RootState) => state.tax)
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const [selectedRows, setSelectedRows] = useState([])
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const { page, rowsPerPage, totalItems, searchValue } = taxState
 
@@ -50,13 +50,12 @@ const TaxesListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Taxes </ATMPageHeading>
-                <button
+                {/* <button
                     onClick={() => navigate('/configurations/taxes/add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    {' '}
-                    + Add Tax{' '}
-                </button>
+                    + Add
+                </button> */}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

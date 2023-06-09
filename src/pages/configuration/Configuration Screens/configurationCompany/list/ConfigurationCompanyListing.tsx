@@ -11,8 +11,6 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import { setSearchValue } from 'src/redux/slices/companySlice'
 import { setRowsPerPage, setPage } from 'src/redux/slices/companySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
-
 type Props = {
     columns: any[]
     rows: any[]
@@ -26,7 +24,6 @@ const ConfigurationCompanyListing = ({
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const company: any = useSelector((state: RootState) => state.company)
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const [selectedRows, setSelectedRows] = useState([])
 
     const navigate = useNavigate()

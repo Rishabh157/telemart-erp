@@ -300,7 +300,7 @@ const PurchaseOrderListingWrapper = () => {
                             </button>
                             <button
                                 onClick={() => {
-                                    navigate('/grn/add', {
+                                    navigate('/grn/add?', {
                                         state: {
                                             poCode: row?.poCode,
                                             itemId: row?.purchaseOrder.itemId,
