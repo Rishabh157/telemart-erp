@@ -215,8 +215,6 @@ const DealersListingWrapper = () => {
         })
     }
 
-    
-
     return (
         <>
             <SideNavLayout>

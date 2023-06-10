@@ -1,115 +1,61 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
-import { array, object, string } from 'yup'
-import AddDealerSupervisor from './AddDealerLedger'
+import { number, object, string } from 'yup'
+import AddDealerLedger from './AddDealerLedger'
 import { useAddDealerLedgerMutation } from 'src/services/DealerLedgerServices'
-import { useGetSchemeQuery } from 'src/services/SchemeService'
-import { useGetDealerLedgerQuery } from 'src/services/DealerLedgerServices'
+//import { useGetDealerLedgerQuery } from 'src/services/DealerLedgerServices'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/dealerSchemeSlice'
-import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/DealerLedgerSlice'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
+//import { setAllDealerLedger } from 'src/redux/slices/dealerLedgerSlice'
 
 type Props = {}
 
 export type FormInitialValues = {
-    companyId: string
-    dealerId: string
-    schemes: []
+    noteType: string
+    price: number
+    remark: string
 }
 
-const DealerLedgerTabWrapper = (props: Props) => {
+const AddDealerLedgerTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const dealerId: any = params.dealerId
-    const dispatch = useDispatch<AppDispatch>()
+
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [addDealerScheme] = useAddDealerLedgerMutation()
-    const {
-        data: allData,
-        isLoading: allIsLoading,
-        isFetching: AllIsFetching,
-    } = useGetDealerLedgerQuery({
-        limit: 10,
-        searchValue: '',
-        params: ['schemeId', 'schemeName'],
-        page: 1,
-        filterBy: [
-            {
-                fieldName: 'dealerId',
-                value: dealerId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    const [addDealerLedger] = useAddDealerLedgerMutation()
 
-    useEffect(() => {
-        if (!allIsLoading && AllIsFetching) {
-            dispatch(setAllItems(allData?.data || []))
-        }
-    }, [dispatch, allData, allIsLoading, AllIsFetching])
-
-    const {
-        data: schemeData,
-        isLoading: schemeIsLoading,
-        isFetching: schemeIsFetching,
-    } = useGetSchemeQuery('')
-
-    useEffect(() => {
-        dispatch(setAllDealerSchemes(schemeData?.data))
-    }, [schemeData, schemeIsLoading, schemeIsFetching, dispatch])
-
-    const { allItems: schemeItems }: any = useSelector(
-        (state: RootState) => state?.scheme
-    )
-
-    const schemeOptions = schemeItems?.map((ele: any) => {
-        return {
-            label: ele.schemeName,
-            value: ele._id,
-        }
-    })
     const initialValues: FormInitialValues = {
-        companyId: companyId,
-        dealerId: dealerId,
-        schemes: [],
+        noteType: '',
+        price: 0,
+        remark: '',
     }
 
     const validationSchema = object({
-        schemes: array()
-            .of(
-                object().shape({
-                    label: string().required(),
-                    value: string().required(),
-                })
-            )
-            .min(1, 'Please select atleast 1 Scheme'),
+        noteType: string().required('Required'),
+        price: number().required('Required'),
+        remark: string().required('Required'),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        const scheme: any = values.schemes.map((ele: any) => {
-            return ele.value
-        })
 
         setTimeout(() => {
-            addDealerScheme({
-                dealerId: values.dealerId || '',
-                schemeId: scheme,
-                companyId: values.companyId || '',
+            addDealerLedger({
+                noteType: values.noteType,
+                price: values.price,
+                remark: values.remark,
+                companyId: companyId || '',
+                dealerId: dealerId,
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Supervisor added successfully!')
-                        navigate('/dealers/' + dealerId + '/supervisor')
+                        showToast('success', 'Ledger added successfully!')
+                        navigate('/dealers/' + dealerId + '/ledger')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -121,6 +67,13 @@ const DealerLedgerTabWrapper = (props: Props) => {
         }, 1000)
     }
 
+    const dropdownOptions = {
+        noteTypeOptions: [
+            { label: 'CREDIT', value: 'CREDIT' },
+            { label: 'DEBIT', value: 'DEBIT' },
+        ],
+    }
+
     return (
         <div>
             <Formik
@@ -130,10 +83,10 @@ const DealerLedgerTabWrapper = (props: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <AddDealerSupervisor
+                        <AddDealerLedger
+                            dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
                             formikProps={formikProps}
-                            schemeOptions={schemeOptions}
                         />
                     )
                 }}
@@ -142,4 +95,4 @@ const DealerLedgerTabWrapper = (props: Props) => {
     )
 }
 
-export default DealerLedgerTabWrapper
+export default AddDealerLedgerTabWrapper
