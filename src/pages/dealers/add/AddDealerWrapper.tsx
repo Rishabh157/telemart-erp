@@ -15,6 +15,7 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
 import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -92,6 +93,7 @@ const steps = [
                 phone: string()
                     .min(10, 'Number should be 10 digits')
                     .max(10, 'maximum 10 digit')
+                    .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
                 country: string().required('Please choose a country'),
@@ -101,8 +103,9 @@ const steps = [
             }),
             billingAddress: object().shape({
                 phone: string()
-                    .min(10, 'Number should be !0 digits')
+                    .min(10, 'Number should be 10 digits')
                     .max(10, 'maximum 10 digit')
+                    .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
                 country: string().required('Please choose a country'),
@@ -128,6 +131,7 @@ const steps = [
                     mobileNumber: string()
                         .min(10, 'Number should be 10 digits')
                         .max(10, 'maximum 10 digit')
+                        .matches(regIndiaPhone, 'Invalid Mobile Number')
                         .required('Mobile number is required'),
                     landLine: string()
                         .min(10, 'Number should be 10 digits')
@@ -152,12 +156,8 @@ const steps = [
             }),
             otherDocument: array().of(
                 object().shape({
-                    documentName: string().required(
-                        'Document Name is required'
-                    ),
-                    documentFile: string().required(
-                        'Document File is required'
-                    ),
+                    documentName: string(),
+                    documentFile: string(),
                 })
             ),
         }),

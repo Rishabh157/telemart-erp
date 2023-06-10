@@ -12,7 +12,7 @@ export type FieldType = Field<''>
 
 const formFields: { sectionName: string; fields: FieldType[] }[] = [
     {
-        sectionName: 'Contact Information',
+        sectionName: 'contactInformation',
         fields: [
             {
                 name: 'name',

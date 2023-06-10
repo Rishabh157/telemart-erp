@@ -1,11 +1,12 @@
 import React from 'react'
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+//import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditDealerWrapper'
 import { DropdownOptions, FieldType } from './StepEditDealerDetailsWrapper'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -23,6 +24,8 @@ const StepEditDealerDetails = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+
+    console.log(values)
 
     return (
         <div className="py-9 px-7">
@@ -49,12 +52,12 @@ const StepEditDealerDetails = ({
 
                         case 'select':
                             return (
-                                <div key={name} className="relative mt-2">
-                                    <InputLabel className="mb-2">
+                                <div key={name} className="relative -mt-2">
+                                    {/* <InputLabel className="mb-2">
                                         {' '}
                                         {label}{' '}
-                                    </InputLabel>
-                                    <FormControl fullWidth>
+                                    </InputLabel> */}
+                                    {/* <FormControl fullWidth>
                                         <Select
                                             name={name}
                                             value={values[name]}
@@ -86,7 +89,24 @@ const StepEditDealerDetails = ({
                                                 </MenuItem>
                                             ))}
                                         </Select>
-                                    </FormControl>
+                                        
+                                    </FormControl> */}
+
+                                    <ATMSelectSearchable
+                                        options={
+                                            dropdownOptions[
+                                                'dealerCategoryOptions'
+                                            ]
+                                        }
+                                        name={name}
+                                        required
+                                        value={values?.dealerCategoryId}
+                                        selectLabel={`Select Dealer Category`}
+                                        label="Dealer Category"
+                                        onChange={(e) => {
+                                            setFieldValue(name, e)
+                                        }}
+                                    />
                                 </div>
                             )
 

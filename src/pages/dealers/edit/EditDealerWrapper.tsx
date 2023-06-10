@@ -19,6 +19,7 @@ import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
 import { setSelectedItem } from 'src/redux/slices/dealerSlice'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -26,23 +27,23 @@ export type FormInitialValues = {
     firmName: string
     firstName: string
     lastName: string
-    dealerCategory: string
+    dealerCategoryId: string
     email: string
     registrationAddress: {
         phone: string
         address: string
-        country: string
-        state: string
-        district: string
-        pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        pincodeId: string
     }
     billingAddress: {
         phone: string
         address: string
-        country: string
-        state: string
-        district: string
-        pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        pincodeId: string
     }
     contactInformation: {
         name: string
@@ -74,8 +75,12 @@ const steps = [
             firmName: string().required('firm name is required'),
             firstName: string().required('first name is required'),
             lastName: string().required('LastName is required'),
-            dealerCategory: string().required('please choose dealer category'),
-            email: string().required('email is required'),
+            dealerCategoryId: string().required(
+                'please choose dealer category'
+            ),
+            email: string()
+                .email('Invalid Email')
+                .required('email is required'),
         }),
     },
     {
@@ -86,23 +91,25 @@ const steps = [
                 phone: string()
                     .max(10, 'maximum 10 digits')
                     .min(10, 'minimum 10 digits')
+                    .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
-                country: string().required('Please choose a country'),
-                state: string().required('Please choose a state'),
-                district: string().required('Please choose a district'),
-                pincode: string().required('Please choose a pincode'),
+                countryId: string().required('Please choose a country'),
+                stateId: string().required('Please choose a state'),
+                districtId: string().required('Please choose a district'),
+                pincodeId: string().required('Please choose a pincode'),
             }),
             billingAddress: object().shape({
                 phone: string()
                     .max(10, 'maximum 10 digits')
+                    .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .min(10, 'minimum 10 digits')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
-                country: string().required('Please choose a country'),
-                state: string().required('Please choose a state'),
-                district: string().required('Please choose a district'),
-                pincode: string().required('Please choose a pincode'),
+                countryId: string().required('Please choose a country'),
+                stateId: string().required('Please choose a state'),
+                districtId: string().required('Please choose a district'),
+                pincodeId: string().required('Please choose a pincode'),
             }),
         }),
     },
@@ -115,10 +122,13 @@ const steps = [
                     name: string().required('Name is required'),
                     department: string().required('Department is required'),
                     designation: string().required('Designation is required'),
-                    email: string().required('Email is required'),
+                    email: string()
+                        .required('Email is required')
+                        .email('Invalid email'),
                     mobileNumber: string()
                         .max(10, 'maximum 10 digits')
                         .min(10, 'minimum 10 digits')
+                        .matches(regIndiaPhone, 'Invalid Mobile Number')
                         .required('Mobile number is required'),
                     landLine: string()
                         .max(10, 'maximum 10 digits')
@@ -143,8 +153,8 @@ const steps = [
             }),
             otherDocument: array().of(
                 object().shape({
-                    documentName: string().required('documentName is required'),
-                    documentFile: string().required('documentFile is required'),
+                    documentName: string(),
+                    documentFile: string(),
                 })
             ),
         }),
@@ -192,23 +202,23 @@ const EditDealerWrapper = () => {
         firmName: selectedItem?.firmName || '',
         firstName: selectedItem?.firstName || '',
         lastName: selectedItem?.lastName || '',
-        dealerCategory: selectedItem?.dealerCategory || '',
+        dealerCategoryId: selectedItem?.dealerCategoryId || '',
         email: selectedItem?.email || '',
         registrationAddress: {
             phone: selectedItem?.registrationAddress.phone || '',
             address: selectedItem?.registrationAddress.address || '',
-            country: selectedItem?.registrationAddress.country || '',
-            state: selectedItem?.registrationAddress.state || '',
-            district: selectedItem?.registrationAddress.district || '',
-            pincode: selectedItem?.registrationAddress.pincode || '',
+            countryId: selectedItem?.registrationAddress.countryId || '',
+            stateId: selectedItem?.registrationAddress.stateId || '',
+            districtId: selectedItem?.registrationAddress.districtId || '',
+            pincodeId: selectedItem?.registrationAddress.pincodeId || '',
         },
         billingAddress: {
             phone: selectedItem?.billingAddress.phone || '',
             address: selectedItem?.billingAddress.address || '',
-            country: selectedItem?.billingAddress.country || '',
-            state: selectedItem?.billingAddress.state || '',
-            district: selectedItem?.billingAddress.district || '',
-            pincode: selectedItem?.billingAddress.pincode || '',
+            countryId: selectedItem?.billingAddress.countryId || '',
+            stateId: selectedItem?.billingAddress.stateId || '',
+            districtId: selectedItem?.billingAddress.districtId || '',
+            pincodeId: selectedItem?.billingAddress.pincodeId || '',
         },
         contactInformation: selectedItem?.contactInformation || '',
         document: {
@@ -266,23 +276,23 @@ const EditDealerWrapper = () => {
                         firmName: values.firmName,
                         firstName: values.firstName,
                         lastName: values.lastName,
-                        dealerCategoryId: values.dealerCategory,
+                        dealerCategoryId: values.dealerCategoryId,
                         email: values.email,
                         registrationAddress: {
                             phone: values.registrationAddress.phone,
                             address: values.registrationAddress.address,
-                            countryId: values.registrationAddress.country,
-                            stateId: values.registrationAddress.state,
-                            districtId: values.registrationAddress.district,
-                            pincodeId: values.registrationAddress.pincode,
+                            countryId: values.registrationAddress.countryId,
+                            stateId: values.registrationAddress.stateId,
+                            districtId: values.registrationAddress.districtId,
+                            pincodeId: values.registrationAddress.pincodeId,
                         },
                         billingAddress: {
                             phone: values.billingAddress.phone,
                             address: values.billingAddress.address,
-                            countryId: values.billingAddress.country,
-                            stateId: values.billingAddress.state,
-                            districtId: values.billingAddress.district,
-                            pincodeId: values.billingAddress.pincode,
+                            countryId: values.billingAddress.countryId,
+                            stateId: values.billingAddress.stateId,
+                            districtId: values.billingAddress.districtId,
+                            pincodeId: values.billingAddress.pincodeId,
                         },
                         contactInformation: contactInformation,
                         document: {
