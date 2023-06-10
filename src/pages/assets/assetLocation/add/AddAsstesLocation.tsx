@@ -1,31 +1,28 @@
-import React from 'react'
 import { FormikProps } from 'formik'
+import React from 'react'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './AddAttributeWrapper'
-
+import { FormInitialValues } from './AddAssetsLocationWrapper'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
 }
 
-// Breadcrumbs
-const breadcrumbs: BreadcrumbType[] = [
-    {
-        label: 'Attributes',
-        path: '/configurations/attributes',
-    },
-    {
-        label: 'Add',
-    },
-]
-
-const AddAttribute = ({ formikProps, apiStatus }: Props) => {
+const AddAsstesLocation = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
+    const breadcrumbs: BreadcrumbType[] = [
+        {
+            label: 'Assets Location',
+            path: '/assets/assets-location',
+        },
+        {
+            label: 'Add ',
+        },
+    ]
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -66,13 +63,13 @@ const AddAttribute = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name="attributeName"
-                                value={values.attributeName}
-                                label="Attribute Name"
-                                placeholder="Attribute Name"
+                                name="locationName"
+                                value={values.locationName}
+                                label="Asset Location"
+                                placeholder="Asset Location"
                                 onChange={(e) =>
                                     setFieldValue(
-                                        'attributeName',
+                                        'locationName',
                                         e.target.value
                                     )
                                 }
@@ -85,4 +82,4 @@ const AddAttribute = ({ formikProps, apiStatus }: Props) => {
     )
 }
 
-export default AddAttribute
+export default AddAsstesLocation

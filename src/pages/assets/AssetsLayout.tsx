@@ -14,6 +14,16 @@ const asstesNavigation: NavItemType[] = [
         path: '/assets/assets-management',
     },
     {
+        label: 'Assets Category ',
+        icon: MdOutlineWebAsset,
+        path: '/assets/assets-category',
+    },
+    {
+        label: 'Assets Location ',
+        icon: MdOutlineWebAsset,
+        path: '/assets/assets-location',
+    },
+    {
         label: 'Assets Relocation',
         icon: MdShareLocation,
         path: '/assets/assets-relocation',

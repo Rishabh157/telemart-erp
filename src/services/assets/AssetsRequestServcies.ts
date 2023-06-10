@@ -1,9 +1,6 @@
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
-import {
-    AddAssetsRequest,
-    UpdateAssetsRequest,
-} from 'src/models/assets/AssetsRequest.model'
+import { AddAssetsRequest, UpdateAssetsRequest } from 'src/models/index'
 
 export const assetsRequestApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -11,7 +8,7 @@ export const assetsRequestApi = apiSlice.injectEndpoints({
         getAssetsRequest: builder.query({
             providesTags: ['AssetsRequest'],
             query: (body: PaginationType) => ({
-                url: '/assets-request',
+                url: '/asset',
                 method: 'POST',
                 body,
             }),
@@ -21,7 +18,7 @@ export const assetsRequestApi = apiSlice.injectEndpoints({
         getAllAssetsRequest: builder.query({
             providesTags: ['AssetsRequest'],
             query: () => ({
-                url: '/assets-request',
+                url: '/asset',
                 method: 'GET',
                 // body,
             }),
@@ -31,7 +28,7 @@ export const assetsRequestApi = apiSlice.injectEndpoints({
         addAssetsRequest: builder.mutation({
             invalidatesTags: ['AssetsRequest'],
             query: (body: AddAssetsRequest) => ({
-                url: '/assets-request/add',
+                url: '/asset/add',
                 method: 'POST',
 
                 body,
@@ -42,7 +39,7 @@ export const assetsRequestApi = apiSlice.injectEndpoints({
         updateAssetsRequest: builder.mutation({
             invalidatesTags: ['AssetsRequest'],
             query: ({ body, id }: UpdateAssetsRequest) => ({
-                url: `/assets-request/${id}`,
+                url: `/asset/${id}`,
 
                 method: 'PUT',
                 body,
@@ -53,7 +50,7 @@ export const assetsRequestApi = apiSlice.injectEndpoints({
         getAssetsRequestById: builder.query({
             providesTags: ['AssetsRequest'],
             query: (id) => ({
-                url: `/assets-request/${id}`,
+                url: `/asset/${id}`,
 
                 method: 'GET',
             }),
@@ -75,9 +72,9 @@ export const assetsRequestApi = apiSlice.injectEndpoints({
 
         // **** Delete
         deleteAssetsRequest: builder.mutation({
-            invalidatesTags: ['AssetsRequest', 'assets-requestGroup'],
+            invalidatesTags: ['AssetsRequest'],
             query: (id) => ({
-                url: `/assets-request/${id}`,
+                url: `/asset/${id}`,
 
                 method: 'DELETE',
             }),

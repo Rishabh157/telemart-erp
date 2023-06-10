@@ -3,13 +3,20 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
     AddArtistWrapper,
     AddASRWrapper,
+    AddAssetsCategoryWrapper,
+    AddAssetsLocationWrapper,
     AddCompetitorWrapper,
     AddDidManagementWrapper,
     ArtistListingWrapper,
     ASRListingWrapper,
+    AssetsCategoryWrapper,
+    AssetsLocationWrapper,
     BarcodeGenerator,
     CompetitorManagementListingWrapper,
     EditArtistWrapper,
+    EditAssetsCategoryWrapper,
+    EditAssetsLocatonWrapper,
+    EditAssetsRequestwrapper,
     EditChannelManagementWrapper,
     EditCompetitorWraper,
     EditDidManagementWrapper,
@@ -748,9 +755,39 @@ const PageRoutes = () => {
                         element={<AssetsRequestWrapper />}
                     />
                     <Route
+                        path="assets/assets-management/:id"
+                        element={<EditAssetsRequestwrapper />}
+                    />
+                    <Route
                         path="assets/assets-management/add"
                         element={<AddAssetsRequestWrapper />}
                     />
+
+                    <Route
+                        path="/assets/assets-location"
+                        element={<AssetsLocationWrapper />}
+                    />
+                    <Route
+                        path="/assets/assets-location/:id"
+                        element={<EditAssetsLocatonWrapper />}
+                    />
+                    <Route
+                        path="/assets/assets-category"
+                        element={<AssetsCategoryWrapper />}
+                    />
+                    <Route
+                        path="/assets/assets-category/add"
+                        element={<AddAssetsCategoryWrapper />}
+                    />
+                    <Route
+                        path="/assets/assets-category/:id"
+                        element={<EditAssetsCategoryWrapper />}
+                    />
+                    <Route
+                        path="/assets/assets-location/add"
+                        element={<AddAssetsLocationWrapper />}
+                    />
+
                     <Route
                         path="assets/assets-relocation"
                         element={<AssetsRelocationWrapper />}
