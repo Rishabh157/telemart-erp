@@ -139,6 +139,7 @@ const DealersListingWrapper = () => {
     ]
 
     const { page, rowsPerPage, searchValue, items } = wareHouseState
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -149,8 +150,8 @@ const DealersListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},

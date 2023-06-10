@@ -59,7 +59,7 @@ const AddChannelManagementWrapper = () => {
         isLoading: isCategoryLoading,
         isFetching: isCategoryFetching,
         data: categoryDataApi,
-    } = useGetAllChannelCategoryQuery('')
+    } = useGetAllChannelCategoryQuery(userData?.companyId)
     const {
         isLoading: isCountryLoading,
         isFetching: isCountryFetching,
@@ -70,11 +70,11 @@ const AddChannelManagementWrapper = () => {
         isLoading,
         isFetching,
         data: channelGroupsData,
-    } = useGetAllChannelGroupQuery('')
+    } = useGetAllChannelGroupQuery(userData?.companyId)
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            dispatch(setChannelGroups(channelGroupsData.data || []))
+            dispatch(setChannelGroups(channelGroupsData?.data || []))
         }
     }, [isLoading, isFetching, channelGroupsData, dispatch])
     useEffect(() => {

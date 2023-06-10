@@ -54,8 +54,7 @@ const TaxesListingWrapper = () => {
                         }}
                         className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
                     >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />
                     </button>
                     {showDropdown && currentId === row?._id && (
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">

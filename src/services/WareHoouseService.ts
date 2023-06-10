@@ -7,8 +7,8 @@ export const wareHouseApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getWareHouses: builder.query({
             providesTags: ['WareHouse'],
-            query: () => ({
-                url: '/warehouse',
+            query: (companyId) => ({
+                url: `/warehouse/company/${companyId}`,
 
                 method: 'GET',
                 // body,

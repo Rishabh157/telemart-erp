@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/configurations/taxes',
     },
     {
-        label: 'Add Tax',
+        label: 'Add',
     },
 ]
 
@@ -36,7 +36,7 @@ const AddTaxes = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Tax </ATMPageHeading>
+                    <ATMPageHeading> Add  </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -54,13 +54,13 @@ const AddTaxes = ({ formikProps, apiStatus }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                                Add Tax
+                              Submit
                             </button>
                         </div>
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="grow py-2 pb-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* taxName */}
                             <ATMTextField

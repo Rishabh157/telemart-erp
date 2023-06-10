@@ -3,7 +3,7 @@ export type DealersListResponse = {
     lastName: string
     dealerCode: string
     firmName: string
-    dealerCategory: String
+    dealerCategoryId: String
     email: string
     registrationCountryName: string
     registrationStateName: string
@@ -30,19 +30,19 @@ export type DealersListResponse = {
 export type registrationAddress = {
     phone: string
     address: string
-    country: string
-    state: string
-    district: string
-    pincode: string
+    countryId: string
+    stateId: string
+    districtId: string
+    pincodeId: string
 }
 
 export type billingAddress = {
     phone: string
     address: string
-    country: string
-    state: string
-    district: string
-    pincode: string
+    countryId: string
+    stateId: string
+    districtId: string
+    pincodeId: string
 }
 export type contactInformation = {
     name: string
@@ -69,7 +69,7 @@ export type AddDealer = {
     lastName: string
     dealerCode: string
     firmName: string
-    dealerCategory: String
+    dealerCategoryId: String
     email: string
     password: string
     registrationAddress: registrationAddress
@@ -86,7 +86,7 @@ export type UpdateDealer = {
         lastName: string
         dealerCode: string
         firmName: string
-        dealerCategory: String
+        dealerCategoryId: String
         email: string
         registrationAddress: registrationAddress
         billingAddress: billingAddress

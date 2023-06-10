@@ -97,15 +97,13 @@ const EditTapeManagementWrapper = () => {
         data: artistData,
         isLoading: artistIsLoading,
         isFetching: artistIsFetching,
-    } = useGetAllArtistQuery(' ')
-
-    //console.log(artistData, 'artist')
+    } = useGetAllArtistQuery(userData?.companyId)
 
     const {
         isLoading: isSchemeLoading,
         isFetching: isSchemeFetching,
         data: schemeDataApi,
-    } = useGetSchemeQuery(' ')
+    } = useGetSchemeQuery(userData?.companyId)
 
     const {
         isLoading: isLanguageLoading,
@@ -116,7 +114,7 @@ const EditTapeManagementWrapper = () => {
         isLoading,
         isFetching,
         data: TapeGroupsData,
-    } = useGetAllChannelGroupQuery('')
+    } = useGetAllChannelGroupQuery(userData?.companyId)
 
     useEffect(() => {
         if (!artistIsLoading && !artistIsFetching) {
@@ -126,13 +124,13 @@ const EditTapeManagementWrapper = () => {
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            dispatch(setChannelGroups(TapeGroupsData.data || []))
+            dispatch(setChannelGroups(TapeGroupsData?.data || []))
         }
     }, [isLoading, isFetching, TapeGroupsData, dispatch])
 
     useEffect(() => {
         if (!isLanguageLoading && !isLanguageFetching) {
-            dispatch(setLanguage(languageDataApi.data || []))
+            dispatch(setLanguage(languageDataApi?.data || []))
         }
     }, [isLanguageLoading, isLanguageFetching, languageDataApi, dispatch])
 

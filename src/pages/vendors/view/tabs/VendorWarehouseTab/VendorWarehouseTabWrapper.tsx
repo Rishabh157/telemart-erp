@@ -30,6 +30,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
     const wareHouseState: any = useSelector(
         (state: RootState) => state.warehouse
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
         {
@@ -169,6 +170,10 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             {
                 fieldName: 'vendorId',
                 value: vendorId,
+            },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},

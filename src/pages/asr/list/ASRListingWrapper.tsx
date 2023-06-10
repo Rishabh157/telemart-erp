@@ -200,6 +200,7 @@ const ASRListingWrapper = () => {
         },
     ]
     const { page, rowsPerPage, searchValue, items } = AsrState
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const dispatch = useDispatch<AppDispatch>()
     // // const navigate = useNavigate();
@@ -210,8 +211,8 @@ const ASRListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},

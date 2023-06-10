@@ -16,7 +16,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: 'Add User',
-        path: '/add-user',
+        path: '/users',
     },
     {
         label: 'Add User',

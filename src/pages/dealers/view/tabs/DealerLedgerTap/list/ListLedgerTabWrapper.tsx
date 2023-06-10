@@ -2,42 +2,44 @@ import React, { useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { LedgerListResponse } from 'src/models/Ledger.model'
-// import DealerSupervisorListing from './DealerLedgerListing'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/DealerLedgerSlice'
-import { AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
-//import { showToast } from "src/utils";
 import { useParams } from 'react-router-dom'
-//import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
 import { useGetDealerLedgerQuery } from 'src/services/DealerLedgerServices'
-import { RootState } from 'src/redux/store'
+import { RootState, AppDispatch } from 'src/redux/store'
 import DealerLedgerListing from './DealerLedgerListing'
 
 const ListLedgerTabWrapper = () => {
-    //const [showDropdown, setShowDropdown] = useState(false);
-    //const [currentId, setCurrentId] = useState("");
     const params = useParams()
     const dealerId: any = params.dealerId
-    const dealerSchemeState: any = useSelector(
-        (state: RootState) => state.dealerScheme
+
+    const { userData } = useSelector((state: RootState) => state?.auth)
+    const companyId: any = userData?.companyId
+
+    const dealerLedgerState: any = useSelector(
+        (state: RootState) => state.dealerLedger
     )
-    const { page, rowsPerPage, items, searchValue } = dealerSchemeState
+    const { page, rowsPerPage, items, searchValue } = dealerLedgerState
 
     const dispatch = useDispatch<AppDispatch>()
-    //const navigate = useNavigate();
+
     const { data, isFetching, isLoading } = useGetDealerLedgerQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['schemeId'],
+        params: ['noteType'],
         page: page,
         filterBy: [
             {
                 fieldName: 'dealerId',
                 value: dealerId,
+            },
+            {
+                fieldName: 'companyId',
+                value: companyId,
             },
         ],
         dateFilter: {},
@@ -48,11 +50,11 @@ const ListLedgerTabWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'schemeName',
-            headerName: 'Scheme Name',
+            field: 'noteType',
+            headerName: 'Note Type',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: LedgerListResponse) => (
-                <span> {row.schemeName} </span>
+                <span> {row.noteType} </span>
             ),
         },
         {
@@ -61,6 +63,14 @@ const ListLedgerTabWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => {
                 return <span> {row.price} </span>
+            },
+        },
+        {
+            field: 'remark',
+            headerName: 'Remark',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: LedgerListResponse) => {
+                return <span> {row.remark} </span>
             },
         },
         {

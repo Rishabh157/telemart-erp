@@ -23,6 +23,7 @@ import { showToast } from 'src/utils'
 const VendorsListingWrapper = () => {
     const navigate = useNavigate()
     const vendorState: any = useSelector((state: RootState) => state.vendor)
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const { page, rowsPerPage, searchValue, items } = vendorState
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
@@ -139,8 +140,8 @@ const VendorsListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},

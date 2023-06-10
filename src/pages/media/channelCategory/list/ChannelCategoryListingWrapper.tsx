@@ -27,7 +27,7 @@ const ChannelCategoryListingWrapper = () => {
     )
     //console.log(channelCategoryState)
     const { page, rowsPerPage, searchValue, items } = channelCategoryState
-
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deleteChannelCategory] = useDeleteChannelCategoryMutation()
@@ -39,6 +39,10 @@ const ChannelCategoryListingWrapper = () => {
             params: ['channelCategory'],
             page: page,
             filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
                 {
                     fieldName: '',
                     value: [],

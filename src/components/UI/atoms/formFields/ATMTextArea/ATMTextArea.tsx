@@ -48,7 +48,7 @@ const ATMTextArea = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                        <p className="font-poppins text-[14px] text-start mt-0 text-red-500">
                             {errMsg}
                         </p>
                     )}

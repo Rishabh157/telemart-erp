@@ -12,6 +12,7 @@ type Props = {
     onChange: (value: any) => void
     label?: string
     required?: boolean
+    isSubmitting?: boolean
     size?: 'small' | 'medium' | 'xs'
     name: string
     isSearchable?: boolean
@@ -37,6 +38,7 @@ const ATMSelectSearchable = ({
     defaultValue = '',
     name,
     isMulti = false,
+    isSubmitting = true,
     labelClass = ' font-medium',
     isAllSelect = false,
     isLoading = false,
@@ -175,7 +177,7 @@ const ATMSelectSearchable = ({
                 // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
             />
 
-            {name && (
+            {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">

@@ -47,14 +47,14 @@ const AddPurchaseOrderWrapper = (props: Props) => {
         data: vendorData,
         isLoading: vendorIsLoading,
         isFetching: VendorIsFetching,
-    } = useGetVendorsQuery('')
+    } = useGetVendorsQuery(userData?.companyId)
     const { allItems }: any = useSelector((state: RootState) => state.vendor)
 
     const {
         data: warehouseData,
         isLoading: warehouseIsLoading,
         isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery('')
+    } = useGetWareHousesQuery(userData?.companyId)
     const { allItems: warehouseItems }: any = useSelector(
         (state: RootState) => state?.warehouse
     )

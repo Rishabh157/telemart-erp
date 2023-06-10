@@ -36,6 +36,8 @@ const SlotManagementListingWrapper = () => {
     const [runState, setRunState] = useState('')
     const [currentId, setCurrentId] = useState('')
     const { page, rowsPerPage, searchValue, items } = slotManagementState
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const [deleteSlotMangement] = useDeleteSlotMangementMutation()
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -45,6 +47,10 @@ const SlotManagementListingWrapper = () => {
         params: ['slotName', 'channelLabel', 'groupNameLabel', 'tapeLabel'],
         page: page,
         filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: '',
                 value: [],

@@ -14,7 +14,7 @@ import UsersListing from './UsersListing'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
-
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const { items, page, rowsPerPage, searchValue } = userState
     const [showDropdown, setShowDropdown] = useState(false)
 
@@ -26,8 +26,8 @@ const UsersListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},
