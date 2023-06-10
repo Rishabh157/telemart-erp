@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormikProps} from 'formik'
+import { FormikProps } from 'formik'
 //import { MdDeleteOutline } from 'react-icons/md'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -140,9 +140,7 @@ const EditPurchaseOrder = ({
                             <div className="flex-[2_2_0%]">
                                 <ATMTextField
                                     type="number"
-                                    min={
-                                        0
-                                    }
+                                    min={0}
                                     name={`purchaseOrder.rate`}
                                     value={
                                         values.purchaseOrder.rate?.toString() ||
@@ -150,14 +148,10 @@ const EditPurchaseOrder = ({
                                     }
                                     label="Rate"
                                     placeholder="Rate"
-                                    onChange={(
-                                        e
-                                    ) =>
+                                    onChange={(e) =>
                                         setFieldValue(
                                             `purchaseOrder.rate`,
-                                            e
-                                                .target
-                                                .value
+                                            e.target.value
                                         )
                                     }
                                 />
@@ -167,9 +161,7 @@ const EditPurchaseOrder = ({
                             <div className="flex-[2_2_0%]">
                                 <ATMTextField
                                     type="number"
-                                    min={
-                                        0
-                                    }
+                                    min={0}
                                     name={`purchaseOrder.quantity`}
                                     value={
                                         values.purchaseOrder.quantity?.toString() ||
@@ -177,14 +169,10 @@ const EditPurchaseOrder = ({
                                     }
                                     label="Quantity"
                                     placeholder="Quantity"
-                                    onChange={(
-                                        e
-                                    ) =>
+                                    onChange={(e) =>
                                         setFieldValue(
                                             `purchaseOrder.quantity`,
-                                            e
-                                                .target
-                                                .value
+                                            e.target.value
                                         )
                                     }
                                 />
@@ -198,9 +186,7 @@ const EditPurchaseOrder = ({
                                         values.purchaseOrder.estReceivingDate
                                     }
                                     label="Est. Receiving Date"
-                                    onChange={(
-                                        newValue
-                                    ) =>
+                                    onChange={(newValue) =>
                                         setFieldValue(
                                             `purchaseOrder.estReceivingDate`,
                                             newValue
@@ -208,11 +194,8 @@ const EditPurchaseOrder = ({
                                     }
                                 />
                             </div>
-
                         </div>
                     </div>
-
-                    
                 </div>
             </div>
         </div>

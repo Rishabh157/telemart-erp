@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import EditPurchaseOrder from './EditPurchaseOrder'
 import { Formik } from 'formik'
-import {  date, number, object, string } from 'yup'
+import { date, number, object, string } from 'yup'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
@@ -47,33 +47,31 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [UpdatePurchaseOrder] = useUpdatePurchaseOrderMutation()
 
-		const { data: poData, isLoading: poIsLoading, isFetching: poIsFetching}: any = useGetByIdPurchaseOrderQuery(Id)
-		
-		const { selectedItems }: any = useSelector((state: RootState) => state?.purchaseOrder)
+    const {
+        data: poData,
+        isLoading: poIsLoading,
+        isFetching: poIsFetching,
+    }: any = useGetByIdPurchaseOrderQuery(Id)
 
-		useEffect(()=> {
-			
-			if(!poIsFetching &&!poIsLoading){
-				disptach(setSelectedItems(poData?.data || []))
-			}
-			
+    const { selectedItems }: any = useSelector(
+        (state: RootState) => state?.purchaseOrder
+    )
 
-		}, [poData, poIsLoading, poIsFetching])
+    useEffect(() => {
+        if (!poIsFetching && !poIsLoading) {
+            disptach(setSelectedItems(poData?.data || []))
+        }
+    }, [poData, poIsLoading, poIsFetching])
 
-		//console.log(selectedItems)
-		
-		
-		
+    //console.log(selectedItems)
+
     const initialValues: FormInitialValues = {
-			poCode: selectedItems?.poCode ||'',
-			vendorId: selectedItems?.vendorId ||'',
-			wareHouseId: selectedItems?.wareHouseId ||'',
-			isEditable: selectedItems?.isEditable || true,
-			purchaseOrder: selectedItems?.purchaseOrder || {},
-	}
-
-
-
+        poCode: selectedItems?.poCode || '',
+        vendorId: selectedItems?.vendorId || '',
+        wareHouseId: selectedItems?.wareHouseId || '',
+        isEditable: selectedItems?.isEditable || true,
+        purchaseOrder: selectedItems?.purchaseOrder || {},
+    }
 
     const {
         data: vendorData,
@@ -136,42 +134,38 @@ const EditPurchaseOrderWrapper = (props: Props) => {
         disptach(setAllItem(itemsData?.data))
     }, [itemsData, disptach, itemsIsLoading, itemsIsFetching])
 
-    
-
     // Form Validation Schema
     const validationSchema = object({
         poCode: string().required('Purchase order code is required'),
         vendorId: string().required('Please select a vendor'),
         wareHouseId: string().required('Please select a warehouse'),
         purchaseOrder: object({
-                id:string(),
-                itemId: string().required('Please select a Item'),
-                rate: number()
-                    .min(0, 'Rate must be greater than 0')
-                    .required('Please enter rate'),
-                quantity: number()
-                    .min(0, 'Quantity must be greater than 0')
-                    .required('Please enter quantity'),
-                estReceivingDate: date().required('Please select date'),
-            }),
-        
+            id: string(),
+            itemId: string().required('Please select a Item'),
+            rate: number()
+                .min(0, 'Rate must be greater than 0')
+                .required('Please enter rate'),
+            quantity: number()
+                .min(0, 'Quantity must be greater than 0')
+                .required('Please enter quantity'),
+            estReceivingDate: date().required('Please select date'),
+        }),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         //console.log(values?.purchaseOrder, "values")
-        
+
         const purchaseOrder = {
-                id: values?.purchaseOrder?._id,
-                itemId: values?.purchaseOrder?.itemId,
-                rate: values?.purchaseOrder?.rate,
-                quantity: values?.purchaseOrder?.quantity,
-                estReceivingDate: moment(values?.purchaseOrder?.estReceivingDate).format(
-                    'YYYY/MM/D'
-                ),
-            }
-    
+            id: values?.purchaseOrder?._id,
+            itemId: values?.purchaseOrder?.itemId,
+            rate: values?.purchaseOrder?.rate,
+            quantity: values?.purchaseOrder?.quantity,
+            estReceivingDate: moment(
+                values?.purchaseOrder?.estReceivingDate
+            ).format('YYYY/MM/D'),
+        }
 
         setTimeout(() => {
             UpdatePurchaseOrder({
