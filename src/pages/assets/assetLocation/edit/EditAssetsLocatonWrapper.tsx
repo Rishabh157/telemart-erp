@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 import EditAsstesLocation from './EditAssetsLocation'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import {
     useUpdateAssetsLocationMutation,
     useGetAssetsLocationByIdQuery,
@@ -14,6 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { setSelectedLocation } from 'src/redux/slices/assets/assetsLocationSlice'
+import AsstesLayout from '../../AssetsLayout'
 
 type Props = {}
 
@@ -74,7 +74,7 @@ const EditAssetsLocationWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <ConfigurationLayout>
+        <AsstesLayout>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -90,7 +90,7 @@ const EditAssetsLocationWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+        </AsstesLayout>
     )
 }
 

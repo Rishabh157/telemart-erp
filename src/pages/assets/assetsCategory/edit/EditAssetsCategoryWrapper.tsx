@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 import EditAsstesCategory from './EditAssetsCategory'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import {
     useUpdateAssetsCategoryMutation,
     useGetAssetsCategoryByIdQuery,
@@ -14,6 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { setSelectedCategory } from 'src/redux/slices/assets/assetsCategorySlice'
+import AsstesLayout from '../../AssetsLayout'
 
 type Props = {}
 
@@ -74,7 +74,7 @@ const EditAssetsCategoryWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <ConfigurationLayout>
+        <AsstesLayout>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -90,7 +90,7 @@ const EditAssetsCategoryWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+        </AsstesLayout>
     )
 }
 
