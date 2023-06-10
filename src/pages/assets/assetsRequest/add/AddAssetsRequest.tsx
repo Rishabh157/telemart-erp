@@ -4,8 +4,25 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { FormInitialValues } from './AddAssetsRequestWrapper'
+import { FormikProps } from 'formik'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 
-const AddAsstesRequest = () => {
+type Props = {
+    formikProps: FormikProps<FormInitialValues>
+    apiStatus: boolean
+    dropdownOptions: {
+        assetCategoryOptions: SelectOption[]
+    }
+}
+const AddAsstesRequest = ({
+    formikProps,
+    apiStatus,
+    dropdownOptions,
+}: Props) => {
+    const { values, setFieldValue } = formikProps
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Assets Request',
@@ -37,9 +54,13 @@ const AddAsstesRequest = () => {
                         <div>
                             <button
                                 type="button"
-                                // onClick={() => formikProps.handleSubmit()}
+                                disabled={apiStatus}
+                                onClick={() => {
+                                    console.log(formikProps)
+                                    formikProps.handleSubmit()
+                                }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
+                                    apiStatus ? 'disabled:opacity-25' : ''
                                 }`}
                             >
                                 Add
@@ -54,11 +75,60 @@ const AddAsstesRequest = () => {
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name=""
-                                value={''}
-                                label="Name"
-                                placeholder="Name"
-                                onChange={() => {}}
+                                name="assetName"
+                                required
+                                value={values.assetName}
+                                label="Asset Name"
+                                placeholder="Asset Name"
+                                onChange={(e) =>
+                                    setFieldValue('assetName', e.target.value)
+                                }
+                            />
+                            <ATMSelectSearchable
+                                name="assetCategory"
+                                required
+                                value={values.assetCategory}
+                                onChange={(e) =>
+                                    setFieldValue('assetCategory', e)
+                                }
+                                options={dropdownOptions?.assetCategoryOptions}
+                                label="Asset Category"
+                            />
+                            <ATMTextField
+                                name="quantity"
+                                value={values.quantity}
+                                label="Quantity"
+                                placeholder="Quantity"
+                                onChange={(e) =>
+                                    setFieldValue('quantity', e.target.value)
+                                }
+                            />
+                            <ATMTextField
+                                name="price"
+                                value={values.price}
+                                label="Price"
+                                placeholder="Price"
+                                onChange={(e) =>
+                                    setFieldValue('price', e.target.value)
+                                }
+                            />
+                            <ATMTextArea
+                                name="remark"
+                                value={values.remark}
+                                label="Remark "
+                                placeholder="Remark "
+                                onChange={(newValue) =>
+                                    setFieldValue('remark', newValue)
+                                }
+                            />
+                            <ATMTextArea
+                                name="assetDetails"
+                                value={values.assetDetails}
+                                label="Asset Details (, seperated values)"
+                                placeholder="Asset Details "
+                                onChange={(newValue) =>
+                                    setFieldValue('assetDetails', newValue)
+                                }
                             />
                         </div>
                     </div>

@@ -60,7 +60,7 @@ const AddTapeManagement = ({
     }
     return (
         <div className="">
-            <div className="p-4 flex flex-col gap-2   ">
+            <div className="p-4 flex flex-col gap-2 ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />

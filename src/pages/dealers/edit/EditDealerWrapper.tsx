@@ -19,6 +19,7 @@ import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
 import { setSelectedItem } from 'src/redux/slices/dealerSlice'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -77,7 +78,9 @@ const steps = [
             dealerCategoryId: string().required(
                 'please choose dealer category'
             ),
-            email: string().required('email is required'),
+            email: string()
+                .email('Invalid Email')
+                .required('email is required'),
         }),
     },
     {
@@ -88,6 +91,7 @@ const steps = [
                 phone: string()
                     .max(10, 'maximum 10 digits')
                     .min(10, 'minimum 10 digits')
+                    .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
                 countryId: string().required('Please choose a country'),
@@ -98,6 +102,7 @@ const steps = [
             billingAddress: object().shape({
                 phone: string()
                     .max(10, 'maximum 10 digits')
+                    .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .min(10, 'minimum 10 digits')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -117,10 +122,13 @@ const steps = [
                     name: string().required('Name is required'),
                     department: string().required('Department is required'),
                     designation: string().required('Designation is required'),
-                    email: string().required('Email is required'),
+                    email: string()
+                        .required('Email is required')
+                        .email('Invalid email'),
                     mobileNumber: string()
                         .max(10, 'maximum 10 digits')
                         .min(10, 'minimum 10 digits')
+                        .matches(regIndiaPhone, 'Invalid Mobile Number')
                         .required('Mobile number is required'),
                     landLine: string()
                         .max(10, 'maximum 10 digits')
@@ -145,8 +153,8 @@ const steps = [
             }),
             otherDocument: array().of(
                 object().shape({
-                    documentName: string().required('documentName is required'),
-                    documentFile: string().required('documentFile is required'),
+                    documentName: string(),
+                    documentFile: string(),
                 })
             ),
         }),

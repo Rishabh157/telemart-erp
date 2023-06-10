@@ -136,3 +136,18 @@ export type {
     LedgerAdd,
     UpdateLedger,
 } from './Ledger.model'
+export type {
+    AssetsLocationListResponse,
+    AddAssetsLocation,
+    UpdateAssetsLocation,
+} from './assets/AssetsLocation.modal'
+export type {
+    AssetsRequestListResponse,
+    AddAssetsRequest,
+    UpdateAssetsRequest,
+} from './assets/AssetsRequest.model'
+export type {
+    AssetsCategoryListResponse,
+    AddAssetsCategory,
+    UpdateAssetsCategory,
+} from './assets/AssetsCategory.modal'

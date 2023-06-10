@@ -12,7 +12,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/assets/assetsRequestSlice'
+} from 'src/redux/slices/assets/assetsCategorySlice'
 import { RootState } from 'src/redux/store'
 
 type Props = {
@@ -20,21 +20,24 @@ type Props = {
     rows: any[]
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
-const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
+const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
+    const dispatch = useDispatch()
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Assets',
             path: '/dashboard',
         },
         {
-            label: 'Assets Request ',
+            label: 'Assets Location ',
         },
     ]
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const assetsRequest = useSelector((state: RootState) => state.assetsRequest)
-    const { page, rowsPerPage, totalItems, searchValue } = assetsRequest
+    const assetCategory = useSelector(
+        (state: RootState) => state.assetsCategory
+    )
+
+    const { page, rowsPerPage, searchValue, totalItems } = assetCategory
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
             <div className="h-[30px]">
@@ -43,7 +46,7 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
 
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading>Assets Request </ATMPageHeading>
+                <ATMPageHeading>Assets Location</ATMPageHeading>
                 <button
                     onClick={() => navigate('add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
@@ -65,6 +68,8 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -72,13 +77,9 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
-                        // selectedRows={selectedRows}
-                        // onRowSelect={(selectedRows) =>
-                        //     setSelectedRows(selectedRows)
-                        // }
-                        setShowDropdown={setShowDropdown}
+                        // isCheckbox={true}
                         extraClasses="h-full overflow-auto"
+                        setShowDropdown={setShowDropdown}
                     />
                 </div>
 
@@ -97,4 +98,4 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
 }
 
-export default AssetsRequestListing
+export default AssetsLocationListing

@@ -90,7 +90,7 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                                                                                         key={
                                                                                             name
                                                                                         }
-                                                                                        name={`contactInformations[${contactInformationIndex}].${name}`}
+                                                                                        name={`contactInformation[${contactInformationIndex}].${name}`}
                                                                                         value={
                                                                                             contactInformation[
                                                                                                 name
@@ -99,12 +99,38 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                                                                                         onChange={(
                                                                                             e
                                                                                         ) => {
-                                                                                            setFieldValue(
-                                                                                                `contactInformation[${contactInformationIndex}].${name}`,
-                                                                                                e
-                                                                                                    .target
-                                                                                                    .value
-                                                                                            )
+                                                                                            if (
+                                                                                                name ===
+                                                                                                    'mobileNumber' ||
+                                                                                                name ===
+                                                                                                    'landLine'
+                                                                                            ) {
+                                                                                                const inputValue =
+                                                                                                    e
+                                                                                                        .target
+                                                                                                        .value
+                                                                                                if (
+                                                                                                    !isNaN(
+                                                                                                        Number(
+                                                                                                            inputValue
+                                                                                                        )
+                                                                                                    )
+                                                                                                ) {
+                                                                                                    setFieldValue(
+                                                                                                        `contactInformation[${contactInformationIndex}].${name}`,
+                                                                                                        e
+                                                                                                            .target
+                                                                                                            .value
+                                                                                                    )
+                                                                                                }
+                                                                                            } else {
+                                                                                                setFieldValue(
+                                                                                                    `contactInformation[${contactInformationIndex}].${name}`,
+                                                                                                    e
+                                                                                                        .target
+                                                                                                        .value
+                                                                                                )
+                                                                                            }
                                                                                         }}
                                                                                         label={
                                                                                             label
