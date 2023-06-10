@@ -65,7 +65,7 @@ const steps = [
             warehouseCode: string().required('warehouseCode is required'),
             warehouseName: string().required('warehouse Name is required'),
             country: string().required('please select country'),
-            email: string().required().email('email address is required'),
+            email: string().required('Required').email('Invalid email'),
         }),
     },
     {
@@ -75,6 +75,7 @@ const steps = [
             regd_address: object().shape({
                 phone: string()
                     .max(10, 'Phone must be 10 digits')
+                    .min(10, 'Phone must be 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -86,6 +87,7 @@ const steps = [
             billing_address: object().shape({
                 phone: string()
                     .max(10, 'Phone must be 10 digits')
+                    .min(10, 'Pnone must be 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
@@ -105,12 +107,16 @@ const steps = [
                     name: string().required('Name is required'),
                     department: string().required('Department is required'),
                     designation: string().required('Designation is required'),
-                    email: string().required().email('Email is required'),
+                    email: string().email('Invalid Email').required('Email is Required'),
                     mobileNumber: string()
                         .max(10, 'Mobile Number must be 10 digits')
-                        .required()
+                        .min(10, 'Mobile Number must be 10 digits')
+                        .required('Mobile Number is Required')
                         .matches(regIndiaPhone, 'Invalid Mobile Number'),
-                    landLine: string().required('Landline is required'),
+                    landLine: string()
+                        .max(10, 'Mobile Number must be 10 characters')
+                        .min(10, 'Mobile Number must be 10 digits')
+                        .required('Landline is required'),
                 })
             ),
         }),

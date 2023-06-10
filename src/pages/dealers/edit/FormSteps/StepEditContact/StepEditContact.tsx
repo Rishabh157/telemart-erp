@@ -90,7 +90,7 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                                                                                         key={
                                                                                             name
                                                                                         }
-                                                                                        name={`contactInformations[${contactInformationIndex}].${name}`}
+                                                                                        name={`contactInformation[${contactInformationIndex}].${name}`}
                                                                                         value={
                                                                                             contactInformation[
                                                                                                 name

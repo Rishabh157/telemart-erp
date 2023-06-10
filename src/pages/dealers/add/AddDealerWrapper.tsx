@@ -156,12 +156,8 @@ const steps = [
             }),
             otherDocument: array().of(
                 object().shape({
-                    documentName: string().required(
-                        'Document Name is required'
-                    ),
-                    documentFile: string().required(
-                        'Document File is required'
-                    ),
+                    documentName: string(),
+                    documentFile: string(),
                 })
             ),
         }),
