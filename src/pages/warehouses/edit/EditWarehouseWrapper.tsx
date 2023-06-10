@@ -107,7 +107,9 @@ const steps = [
                     name: string().required('Name is required'),
                     department: string().required('Department is required'),
                     designation: string().required('Designation is required'),
-                    email: string().email('Invalid Email').required('Email is Required'),
+                    email: string()
+                        .email('Invalid Email')
+                        .required('Email is Required'),
                     mobileNumber: string()
                         .max(10, 'Mobile Number must be 10 digits')
                         .min(10, 'Mobile Number must be 10 digits')
@@ -234,7 +236,10 @@ const EditWarehouseWrapper = () => {
                 }).then((res: any) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
-                            showToast('success', 'Warehouse Upated successfully!')
+                            showToast(
+                                'success',
+                                'Warehouse Upated successfully!'
+                            )
                             if (dealerId !== null) {
                                 navigate('/dealers/' + dealerId + '/warehouse')
                                 // navigate(`/dealers/${Id}/warehouse`)

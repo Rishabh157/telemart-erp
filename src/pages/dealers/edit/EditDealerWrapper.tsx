@@ -122,7 +122,9 @@ const steps = [
                     name: string().required('Name is required'),
                     department: string().required('Department is required'),
                     designation: string().required('Designation is required'),
-                    email: string().required('Email is required').email("Invalid email"),
+                    email: string()
+                        .required('Email is required')
+                        .email('Invalid email'),
                     mobileNumber: string()
                         .max(10, 'maximum 10 digits')
                         .min(10, 'minimum 10 digits')

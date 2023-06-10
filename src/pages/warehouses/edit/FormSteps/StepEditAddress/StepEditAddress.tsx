@@ -134,7 +134,7 @@ const StepEditAddress = ({
                                             <div
                                                 key={name}
                                                 className="relative mt-8"
-                                            >                                               
+                                            >
                                                 <FormControl fullWidth>
                                                     <Select
                                                         name={name}
@@ -195,7 +195,6 @@ const StepEditAddress = ({
                                                         className="shadow mt-2"
                                                         displayEmpty
                                                     >
-                                                        
                                                         {dropdownOptions[
                                                             field.optionAccessKey ||
                                                                 'counrtyOptions'

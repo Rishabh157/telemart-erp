@@ -60,7 +60,8 @@ const steps = [
             warehouseCode: string().required('code is required'),
             warehouseName: string().required('name is required'),
             country: string().required('please select country'),
-            email: string().email("Invalid Email")
+            email: string()
+                .email('Invalid Email')
                 .required('Email is required')
                 .email('Email address is invalid'),
         }),
@@ -106,16 +107,18 @@ const steps = [
                     name: string().required('Name is required'),
                     department: string().required('Department is required'),
                     designation: string().required('Designation is required'),
-                    email: string().email('Invalid email').required('Email is required'),
+                    email: string()
+                        .email('Invalid email')
+                        .required('Email is required'),
                     mobileNumber: string()
                         .max(10, 'Mobile Number must be 10 characters')
                         .min(10, 'Mobile Number must be 10 digits')
                         .required('Mobile Number is required')
                         .matches(regIndiaPhone, 'Invalid Mobile Number'),
                     landLine: string()
-                    .max(10, 'Mobile Number must be 10 characters')
-                    .min(10, 'Mobile Number must be 10 digits')
-                    .required('Landline is required'),
+                        .max(10, 'Mobile Number must be 10 characters')
+                        .min(10, 'Mobile Number must be 10 digits')
+                        .required('Landline is required'),
                 })
             ),
         }),

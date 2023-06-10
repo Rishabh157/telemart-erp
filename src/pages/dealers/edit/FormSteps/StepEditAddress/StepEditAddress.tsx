@@ -155,7 +155,6 @@ const StepEditAddress = ({
                                                         className="shadow mt-2"
                                                         displayEmpty
                                                     >
-                                                        
                                                         {dropdownOptions[
                                                             field.optionAccessKey ||
                                                                 'counrtyOptions'
