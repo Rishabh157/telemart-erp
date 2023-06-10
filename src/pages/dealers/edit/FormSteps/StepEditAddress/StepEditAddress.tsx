@@ -85,10 +85,32 @@ const StepEditAddress = ({
                                                         : values[name]
                                                 }
                                                 onChange={(e) => {
-                                                    setFieldValue(
-                                                        name,
-                                                        e.target.value
-                                                    )
+                                                    if (
+                                                        name ===
+                                                            'registrationAddress.phone' ||
+                                                        name ===
+                                                            'billingAddress.phone'
+                                                    ) {
+                                                        const inputValue =
+                                                            e.target.value
+                                                        if (
+                                                            !isNaN(
+                                                                Number(
+                                                                    inputValue
+                                                                )
+                                                            )
+                                                        ) {
+                                                            setFieldValue(
+                                                                name,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    } else {
+                                                        setFieldValue(
+                                                            name,
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 }}
                                                 label={label}
                                                 placeholder={placeholder}
@@ -133,11 +155,6 @@ const StepEditAddress = ({
                                                         className="shadow mt-2"
                                                         displayEmpty
                                                     >
-                                                        <MenuItem value="">
-                                                            <span className="text-slate-400">
-                                                                Select {label}
-                                                            </span>
-                                                        </MenuItem>
                                                         {dropdownOptions[
                                                             field.optionAccessKey ||
                                                                 'counrtyOptions'

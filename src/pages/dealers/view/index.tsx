@@ -84,6 +84,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const ViewDealer = () => {
     const dispatch = useDispatch<AppDispatch>()
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const dealerState: any = useSelector((state: RootState) => state.dealer)
     const { page, rowsPerPage, items } = dealerState
     const { searchValue }: any = useSelector((state: RootState) => state.dealer)
@@ -94,14 +95,14 @@ const ViewDealer = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
             },
         ],
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,
-        isPaginationRequired: true,
+        isPaginationRequired: false,
     })
 
     useEffect(() => {
