@@ -55,7 +55,7 @@ const AddDealerSupervisor = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
 
-                            <ATMSelectSearchable
+                            {/* <ATMSelectSearchable
                                 name="zonalDistribution"
                                 required
                                 value={values.zonalDistribution}
@@ -68,7 +68,7 @@ const AddDealerSupervisor = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) =>
                                     setFieldValue('zonalDistribution', e)
                                 }
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
