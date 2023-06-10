@@ -84,11 +84,33 @@ const StepEditAddress = ({
                                                           ][name.split('.')[1]]
                                                         : values[name]
                                                 }
-                                                onChange={(e) => {
-                                                    setFieldValue(
-                                                        name,
-                                                        e.target.value
-                                                    )
+                                                onChange={(e) => { 
+                                                    if (
+                                                        name ===
+                                                            'registrationAddress.phone' ||
+                                                        name ===
+                                                            'billingAddress.phone'
+                                                    ) {
+                                                        const inputValue =
+                                                            e.target.value
+                                                        if (
+                                                            !isNaN(
+                                                                Number(
+                                                                    inputValue
+                                                                )
+                                                            )
+                                                        ) {
+                                                            setFieldValue(
+                                                                name,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    } else {
+                                                        setFieldValue(
+                                                            name,
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 }}
                                                 label={label}
                                                 placeholder={placeholder}
