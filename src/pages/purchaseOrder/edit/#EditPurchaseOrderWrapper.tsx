@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react'
-import EditPurchaseOrder from './EditPurchaseOrder'
+import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
 import { array, date, number, object, string } from 'yup'
+import EditPurchaseOrder from './EditPurchaseOrder'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-    useGetByIdPurchaseOrderQuery,
+    useGetPurchaseOrderByIdQuery,
     useUpdatePurchaseOrderMutation,
 } from 'src/services/PurchaseOrderService'
 import { showToast } from 'src/utils'
@@ -46,35 +46,27 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [UpdatePurchaseOrder] = useUpdatePurchaseOrderMutation()
 
-		const { data: poData, isLoading: poIsLoading, isFetching: poIsFetching}: any = useGetByIdPurchaseOrderQuery(Id)
-		
-		const { selectedItems }: any = useSelector((state: RootState) => state?.purchaseOrder)
+    const {
+        data: poData,
+        isFetching: poIsFetching,
+        isLoading: poIsLoading,
+    } = useGetPurchaseOrderByIdQuery(Id)
+    console.log(poData?.data, 'data')
 
-		useEffect(()=> {
-			
-			if(!poIsFetching &&!poIsLoading){
-				disptach(setSelectedItems(poData?.data || []))
-			}
-			
+    const { selectedItems }: any = useSelector(
+        (state: RootState) => state.purchaseOrder
+    )
 
-		}, [poData, poIsLoading, poIsFetching])
+    useEffect(() => {
+        console.log('Effect Called')
+    }, [])
 
-		//console.log(selectedItems)
-		var poValues = [];
-		poValues.push(selectedItems?.purchaseOrder);
-		//console.log(poValues)
-		
-		
-    const initialValues: FormInitialValues = {
-			poCode: selectedItems?.poCode ||'',
-			vendorId: selectedItems?.vendorId ||'',
-			wareHouseId: selectedItems?.wareHouseId ||'',
-			isEditable: selectedItems?.isEditable || true,
-			purchaseOrder: poValues || {},
-	}
-
-
-
+    useEffect(() => {
+        if (!poIsFetching && !poIsLoading) {
+            console.log(poData?.data, 'effect')
+            disptach(setSelectedItems(poData?.data || []))
+        }
+    }, [poData, poIsFetching, poIsLoading])
 
     const {
         data: vendorData,
@@ -137,7 +129,16 @@ const EditPurchaseOrderWrapper = (props: Props) => {
         disptach(setAllItem(itemsData?.data))
     }, [itemsData, disptach, itemsIsLoading, itemsIsFetching])
 
-    
+    var purchaseOrderValue = []
+    purchaseOrderValue.push(selectedItems?.purchaseOrder)
+
+    const initialValues: FormInitialValues = {
+        poCode: selectedItems?.poCode || '',
+        vendorId: selectedItems?.vendorId || '',
+        wareHouseId: selectedItems?.wareHouseId || '',
+        isEditable: true,
+        purchaseOrder: purchaseOrderValue || [],
+    }
 
     // Form Validation Schema
     const validationSchema = object({
@@ -161,7 +162,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        console.log(values, "values")
+        console.log(values?.purchaseOrder)
         const purchaseOrder = values?.purchaseOrder?.map((ele: any) => {
             return {
                 id: ele._id,
@@ -177,10 +178,10 @@ const EditPurchaseOrderWrapper = (props: Props) => {
         setTimeout(() => {
             UpdatePurchaseOrder({
                 body: {
-                    poCode: values?.poCode,
-                    vendorId: values?.vendorId,
-                    wareHouseId: values?.wareHouseId,
-                    isEditable: values?.isEditable,
+                    poCode: values.poCode,
+                    vendorId: values.vendorId,
+                    wareHouseId: values.wareHouseId,
+                    isEditable: values.isEditable,
                     purchaseOrder: purchaseOrder,
                     companyId: userData?.companyId || '',
                 },
@@ -203,6 +204,12 @@ const EditPurchaseOrderWrapper = (props: Props) => {
             })
         }, 1000)
     }
+
+    // const dropdownOptions : DropdownOptions = {
+    //   vendorOptions,
+    //   warehouseOptions,
+    //   itemOptions,
+    // }
 
     return (
         <SideNavLayout>
@@ -227,5 +234,4 @@ const EditPurchaseOrderWrapper = (props: Props) => {
         </SideNavLayout>
     )
 }
-
 export default EditPurchaseOrderWrapper

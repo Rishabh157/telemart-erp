@@ -51,6 +51,8 @@ const EditPurchaseOrder = ({
 
     const { values, setFieldValue } = formikProps
 
+    //console.log(values?.purchaseOrder)
+
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -134,139 +136,146 @@ const EditPurchaseOrder = ({
                                     return (
                                         <>
                                             <div className="flex flex-col gap-y-7">
-                                                {values?.purchaseOrder?.map(
-                                                    (
-                                                        item: any,
-                                                        itemIndex: any
-                                                    ) => {
-                                                        const {
-                                                            itemId,
-                                                            rate,
-                                                            quantity,
-                                                            estReceivingDate,
-                                                        } = item
+                                                {(values?.purchaseOrder.length > 0) &&
+                                                    values?.purchaseOrder?.map(
+                                                        (
+                                                            item: any,
+                                                            itemIndex: any
+                                                        ) => {                                                            
+                                                            const {
+                                                                itemId,
+                                                                rate,
+                                                                quantity,
+                                                                estReceivingDate,
+                                                            } = item
 
-                                                        return (
-                                                            <div
-                                                                key={itemIndex}
-                                                                className="flex gap-3 items-end "
-                                                            >
-                                                                {/* Item Name */}
-                                                                <div className="flex-[3_3_0%]">
-                                                                    <ATMSelect
-                                                                        name={`purchaseOrder[${itemIndex}].itemId`}
-                                                                        value={
-                                                                            itemId
-                                                                        }
-                                                                        onChange={(
-                                                                            e
-                                                                        ) =>
-                                                                            setFieldValue(
-                                                                                `purchaseOrder[${itemIndex}].itemId`,
+                                                            return (
+                                                                <div
+                                                                    key={
+                                                                        itemIndex
+                                                                    }
+                                                                    className="flex gap-3 items-end "
+                                                                >
+                                                                    {/* Item Name */}
+                                                                    <div className="flex-[3_3_0%]">
+                                                                        <ATMSelect
+                                                                            name={`purchaseOrder[${itemIndex}].itemId`}
+                                                                            value={
+                                                                                itemId
+                                                                            }
+                                                                            onChange={(
                                                                                 e
-                                                                                    .target
-                                                                                    .value
-                                                                            )
-                                                                        }
-                                                                        options={
-                                                                            dropdownOptions.itemOptions
-                                                                        }
-                                                                        label="Item Name"
-                                                                    />
-                                                                </div>
-
-                                                                {/* Rate */}
-                                                                <div className="flex-[2_2_0%]">
-                                                                    <ATMTextField
-                                                                        type="number"
-                                                                        min={0}
-                                                                        name={`purchaseOrder[${itemIndex}].rate`}
-                                                                        value={
-                                                                            rate?.toString() ||
-                                                                            ''
-                                                                        }
-                                                                        label="Rate"
-                                                                        placeholder="Rate"
-                                                                        onChange={(
-                                                                            e
-                                                                        ) =>
-                                                                            setFieldValue(
-                                                                                `purchaseOrder[${itemIndex}].rate`,
-                                                                                e
-                                                                                    .target
-                                                                                    .value
-                                                                            )
-                                                                        }
-                                                                    />
-                                                                </div>
-
-                                                                {/* Quantity */}
-                                                                <div className="flex-[2_2_0%]">
-                                                                    <ATMTextField
-                                                                        type="number"
-                                                                        min={0}
-                                                                        name={`purchaseOrder[${itemIndex}].quantity`}
-                                                                        value={
-                                                                            quantity?.toString() ||
-                                                                            ''
-                                                                        }
-                                                                        label="Quantity"
-                                                                        placeholder="Quantity"
-                                                                        onChange={(
-                                                                            e
-                                                                        ) =>
-                                                                            setFieldValue(
-                                                                                `purchaseOrder[${itemIndex}].quantity`,
-                                                                                e
-                                                                                    .target
-                                                                                    .value
-                                                                            )
-                                                                        }
-                                                                    />
-                                                                </div>
-
-                                                                {/* Est. Receiving Date */}
-                                                                <div className="flex-[3_3_0%]">
-                                                                    <ATMDatePicker
-                                                                        name={`purchaseOrder[${itemIndex}].estReceivingDate`}
-                                                                        value={
-                                                                            estReceivingDate
-                                                                        }
-                                                                        label="Est. Receiving Date"
-                                                                        onChange={(
-                                                                            newValue
-                                                                        ) =>
-                                                                            setFieldValue(
-                                                                                `purchaseOrder[${itemIndex}].estReceivingDate`,
-                                                                                newValue
-                                                                            )
-                                                                        }
-                                                                    />
-                                                                </div>
-
-                                                                {/* BUTTON - Delete */}
-                                                                {values
-                                                                    .purchaseOrder
-                                                                    ?.length >
-                                                                    1 && (
-                                                                    <div>
-                                                                        <button
-                                                                            type="button"
-                                                                            onClick={() => {
-                                                                                remove(
-                                                                                    itemIndex
+                                                                            ) =>
+                                                                                setFieldValue(
+                                                                                    `purchaseOrder[${itemIndex}].itemId`,
+                                                                                    e
+                                                                                        .target
+                                                                                        .value
                                                                                 )
-                                                                            }}
-                                                                            className="p-2 bg-red-500 text-white rounded"
-                                                                        >
-                                                                            <MdDeleteOutline className="text-2xl" />
-                                                                        </button>
+                                                                            }
+                                                                            options={
+                                                                                dropdownOptions.itemOptions
+                                                                            }
+                                                                            label="Item Name"
+                                                                        />
                                                                     </div>
-                                                                )}
-                                                            </div>
-                                                        )
-                                                    }
-                                                )}
+
+                                                                    {/* Rate */}
+                                                                    <div className="flex-[2_2_0%]">
+                                                                        <ATMTextField
+                                                                            type="number"
+                                                                            min={
+                                                                                0
+                                                                            }
+                                                                            name={`purchaseOrder[${itemIndex}].rate`}
+                                                                            value={
+                                                                                rate?.toString() ||
+                                                                                ''
+                                                                            }
+                                                                            label="Rate"
+                                                                            placeholder="Rate"
+                                                                            onChange={(
+                                                                                e
+                                                                            ) =>
+                                                                                setFieldValue(
+                                                                                    `purchaseOrder[${itemIndex}].rate`,
+                                                                                    e
+                                                                                        .target
+                                                                                        .value
+                                                                                )
+                                                                            }
+                                                                        />
+                                                                    </div>
+
+                                                                    {/* Quantity */}
+                                                                    <div className="flex-[2_2_0%]">
+                                                                        <ATMTextField
+                                                                            type="number"
+                                                                            min={
+                                                                                0
+                                                                            }
+                                                                            name={`purchaseOrder[${itemIndex}].quantity`}
+                                                                            value={
+                                                                                quantity?.toString() ||
+                                                                                ''
+                                                                            }
+                                                                            label="Quantity"
+                                                                            placeholder="Quantity"
+                                                                            onChange={(
+                                                                                e
+                                                                            ) =>
+                                                                                setFieldValue(
+                                                                                    `purchaseOrder[${itemIndex}].quantity`,
+                                                                                    e
+                                                                                        .target
+                                                                                        .value
+                                                                                )
+                                                                            }
+                                                                        />
+                                                                    </div>
+
+                                                                    {/* Est. Receiving Date */}
+                                                                    <div className="flex-[3_3_0%]">
+                                                                        <ATMDatePicker
+                                                                            name={`purchaseOrder[${itemIndex}].estReceivingDate`}
+                                                                            value={
+                                                                                estReceivingDate
+                                                                            }
+                                                                            label="Est. Receiving Date"
+                                                                            onChange={(
+                                                                                newValue
+                                                                            ) =>
+                                                                                setFieldValue(
+                                                                                    `purchaseOrder[${itemIndex}].estReceivingDate`,
+                                                                                    newValue
+                                                                                )
+                                                                            }
+                                                                        />
+                                                                    </div>
+
+                                                                    {/* BUTTON - Delete */}
+                                                                    {values
+                                                                        .purchaseOrder
+                                                                        ?.length >
+                                                                        1 && (
+                                                                        <div>
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => {
+                                                                                    remove(
+                                                                                        itemIndex
+                                                                                    )
+                                                                                }}
+                                                                                className="p-2 bg-red-500 text-white rounded"
+                                                                            >
+                                                                                <MdDeleteOutline className="text-2xl" />
+                                                                            </button>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            )
+                                                        }
+                                                    )}
                                             </div>
 
                                             {/* BUTTON - Add More Product */}
