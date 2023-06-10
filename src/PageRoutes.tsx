@@ -209,6 +209,7 @@ import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsi
 import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
 import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
+import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -953,6 +954,10 @@ const PageRoutes = () => {
                     <Route
                         path="/inquiry/view/:id"
                         element={<InquiryViewWrapper />}
+                    />
+                    <Route
+                        path="user-access"
+                        element={<UserAccessWrapper />}
                     />
                 </Routes>
             </BrowserRouter>

@@ -31,7 +31,7 @@ const ListDealerSupervisorTabWrapper = () => {
     const { data, isFetching, isLoading } = useGetDealerSupervisorQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['dealerId', 'supervisorName'],
+        params: ['dealerId', 'zonalManager'],
         page: page,
         filterBy: [
             {
@@ -57,7 +57,7 @@ const ListDealerSupervisorTabWrapper = () => {
             headerName: 'Supervisor Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DealersSupervisorListResponse) => (
-                <span> {row.supervisorName} </span>
+                <span> {row.zonalManagerName} </span>
             ),
         },
         {

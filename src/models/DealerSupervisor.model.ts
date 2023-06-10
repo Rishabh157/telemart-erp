@@ -1,6 +1,7 @@
 export type DealersSupervisorListResponse = {
     dealerId: string
-    supervisorName: string
+    zonalManagerName: string
+    zonalDistribution?:string
     companyId: string
     isActive: boolean
     isDeleted: boolean
@@ -12,13 +13,15 @@ export type DealersSupervisorListResponse = {
 
 export type DealersSupervisorAdd = {
     dealerId: string
-    supervisorName: string
+    zonalManagerName: string
+    zonalDistribution?:string
     companyId: string
 }
 
 export type UpdateDealersSupervisor = {
     body: {
-        supervisorName: string
+        zonalManagerName: string
+        zonalDistribution?:string
         dealerId: string
         companyId: string
     }

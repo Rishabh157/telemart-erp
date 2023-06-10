@@ -1,7 +1,10 @@
 import React from 'react'
 import { FormikProps } from 'formik'
 import { FormInitialValues } from './DealerSupervisorTabWrapper'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import ATMSelectSearchable, {
+    SelectOption,
+} from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { getHierarchyByDept } from 'src/utils/GetHierarchyByDept'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -10,7 +13,7 @@ type Props = {
 
 const AddDealerSupervisor = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    console.log()
     return (
         <div className="h-[calc(100%-55px)]">
             <div className="p-4 flex flex-col gap-2  ">
@@ -35,19 +38,35 @@ const AddDealerSupervisor = ({ formikProps, apiStatus }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-9 px-3 ">
+                    <div className="grow py-2 pb-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
-                            <ATMTextField
-                                name="supervisorName"
+                            <ATMSelectSearchable
+                                name="zonalManager"
                                 required
-                                value={values.supervisorName}
-                                label="Supervisor Name"
-                                placeholder="Supervisor Name"
+                                value={values.zonalManager}
+                                label="Zonal Manager Name"
+                                options={
+                                    getHierarchyByDept({
+                                        department: 'DISTRBUTION_DEPARTMENT',
+                                    }) as SelectOption[]
+                                }
                                 onChange={(e) =>
-                                    setFieldValue(
-                                        'supervisorName',
-                                        e.target.value
-                                    )
+                                    setFieldValue('zonalManager', e)
+                                }
+                            />
+
+                            <ATMSelectSearchable
+                                name="zonalDistribution"
+                                required
+                                value={values.zonalDistribution}
+                                label="Zonal Distribution Name"
+                                options={
+                                    getHierarchyByDept({
+                                        department: 'DISTRBUTION_DEPARTMENT',
+                                    }) as SelectOption[]
+                                }
+                                onChange={(e) =>
+                                    setFieldValue('zonalDistribution', e)
                                 }
                             />
                         </div>
