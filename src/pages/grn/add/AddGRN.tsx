@@ -50,8 +50,7 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                         <div className="text-xl font-medium">
                             <div> PO Details </div>
                             <div className="text-[13px] font-medium text-primary-main">
-                                {' '}
-                                PO Code : {poCode}{' '}
+                                PO Code : {poCode}
                             </div>
                         </div>
                         {/* BUTTON - Add SO */}
@@ -99,12 +98,14 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                                 name="receivedQuantity"
                                 type={'text'}
                                 value={values.receivedQuantity}
-                                onChange={(e) =>
+                                onChange={(e) => {
                                     setFieldValue(
                                         `receivedQuantity`,
                                         e.target.value
                                     )
-                                }
+                                    setFieldValue(`goodQuantity`, '')
+                                    setFieldValue(`defectiveQuantity`, '')
+                                }}
                                 label="Received Quantity"
                                 placeholder="Received Quantity"
                             />
@@ -114,15 +115,14 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                                 type={'text'}
                                 value={values.goodQuantity}
                                 onChange={(e) => {
-                                    console.log(e.target.value)
+                                    setFieldValue(
+                                        `goodQuantity`,
+                                        e.target.value
+                                    )
                                     if (
                                         parseInt(e.target.value) <=
                                         values.receivedQuantity
                                     ) {
-                                        setFieldValue(
-                                            `goodQuantity`,
-                                            e.target.value
-                                        )
                                         let value =
                                             ((values.receivedQuantity as number) -
                                                 parseInt(
@@ -132,10 +132,11 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                                             `defectiveQuantity`,
                                             value
                                         )
-                                    } else if (e.target.value === '') {
-                                        setFieldValue(`goodQuantity`, 0)
-                                        setFieldValue(`defectiveQuantity`, 0)
                                     }
+                                    //  else if (e.target.value === '') {
+                                    //     // setFieldValue(`goodQuantity`, '')
+                                    //     // setFieldValue(`defectiveQuantity`, '')
+                                    // }
                                 }}
                                 label="Good Quantity"
                                 placeholder="Good Quantity"
@@ -145,23 +146,20 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                                 name="defectiveQuantity"
                                 value={values.defectiveQuantity}
                                 onChange={(e) => {
+                                    setFieldValue(
+                                        `defectiveQuantity`,
+                                        e.target.value
+                                    )
                                     if (
                                         parseInt(e.target.value) <=
                                         values.receivedQuantity
                                     ) {
-                                        setFieldValue(
-                                            `defectiveQuantity`,
-                                            e.target.value
-                                        )
                                         let value =
                                             ((values.receivedQuantity as number) -
                                                 parseInt(
                                                     e.target.value
                                                 )) as number
                                         setFieldValue(`goodQuantity`, value)
-                                    } else if (e.target.value === '') {
-                                        setFieldValue(`goodQuantity`, 0)
-                                        setFieldValue(`defectiveQuantity`, 0)
                                     }
                                 }}
                                 label="Defective Quantity"
