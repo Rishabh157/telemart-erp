@@ -1,75 +1,74 @@
 {
-   
-  "salesDepartment": [
-    {
-      "label": "AVP",
-      "value": "SALE_AVP"
-    },
-    {
-      "label": "AGM Sales",
-      "value": "SALE_AGM_SALES"
-    },
-    {
-      "label": "Manager Sales Center",
-      "value": "SALE_MANAGER_SALES_CENTER"
-    },
-    {
-      "label": "Asst. Manager Sales Center",
-      "value": "SALE_ASST_MANAGER_SALES_CENTER"
-    },
-    {
-      "label": "Sr. Team Leader/Sr.Executive , MIS",
-      "value": "SALE_SR_EXECUTIVE"
-    },
-    {
-      "label": "Team Leader/Executive , MIS",
-      "value": "SALE_EXECUTIVE"
-    },
-    {
-      "label": "SR. Executive, Sales Center ",
-      "value": "SALE_SR_SALES_CENTER"
-    },
-    {
-      "label": " Executive, Sales Center ",
-      "value": "SALE_SALES_CENTER"
-    },
-    {
-      "label": " Executive,Trainee  ",
-      "value": "SALE_TRAINEE"
-    }
-  ],
-  "hrDepartment": {},
-  "distributionDepartment": [
-    {
-      "label": "AVM",
-      "value": "DISTB_AVM"
-    },
-    {
-      "label": "SR. Manager / Distribution",
-      "value": "DISTB_SR_MANAGER"
-    },
-    {
-      "label": " Manager / area",
-      "value": "DISTB_MANAGER"
-    },
-    {
-      "label": " SR. Executive / area",
-      "value": "DISTB_SR_EXECUTIVE"
-    },
-    {
-      "label": " Executive / area",
-      "value": "DISTB_EXECUTIVE"
-    }
-  ],
-  "financeDepartment": {},
-  "mediaDepartment": {},
-  "mediaProductionDepartment": {},
-  "ITDepartment": {},
-  "DevelopmentDepartment": {},
-  "webDepartment": {},
-  "operationDepartment": {},
-  "qualityDepartment": {},
-  "logisticDepartment": {},
-  "mapingAndMISDepartment": {},
-  "adminDepartment": {}
+    "salesDepartment": [
+        {
+            "label": "AVP",
+            "value": "SALE_AVP"
+        },
+        {
+            "label": "AGM Sales",
+            "value": "SALE_AGM_SALES"
+        },
+        {
+            "label": "Manager Sales Center",
+            "value": "SALE_MANAGER_SALES_CENTER"
+        },
+        {
+            "label": "Asst. Manager Sales Center",
+            "value": "SALE_ASST_MANAGER_SALES_CENTER"
+        },
+        {
+            "label": "Sr. Team Leader/Sr.Executive , MIS",
+            "value": "SALE_SR_EXECUTIVE"
+        },
+        {
+            "label": "Team Leader/Executive , MIS",
+            "value": "SALE_EXECUTIVE"
+        },
+        {
+            "label": "SR. Executive, Sales Center ",
+            "value": "SALE_SR_SALES_CENTER"
+        },
+        {
+            "label": " Executive, Sales Center ",
+            "value": "SALE_SALES_CENTER"
+        },
+        {
+            "label": " Executive,Trainee  ",
+            "value": "SALE_TRAINEE"
+        }
+    ],
+    "hrDepartment": {},
+    "distributionDepartment": [
+        {
+            "label": "AVM",
+            "value": "DISTB_AVM"
+        },
+        {
+            "label": "SR. Manager / Distribution",
+            "value": "DISTB_SR_MANAGER"
+        },
+        {
+            "label": " Manager / area",
+            "value": "DISTB_MANAGER"
+        },
+        {
+            "label": " SR. Executive / area",
+            "value": "DISTB_SR_EXECUTIVE"
+        },
+        {
+            "label": " Executive / area",
+            "value": "DISTB_EXECUTIVE"
+        }
+    ],
+    "financeDepartment": {},
+    "mediaDepartment": {},
+    "mediaProductionDepartment": {},
+    "ITDepartment": {},
+    "DevelopmentDepartment": {},
+    "webDepartment": {},
+    "operationDepartment": {},
+    "qualityDepartment": {},
+    "logisticDepartment": {},
+    "mapingAndMISDepartment": {},
+    "adminDepartment": {}
 }

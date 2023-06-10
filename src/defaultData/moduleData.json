@@ -1,134 +1,134 @@
 {
-  "modules": [
-    {
-      "id": "vendorid",
-      "label": "Vendor Module",
-      "moduleName": "vendores",
-      "moduleRoute": "/vendors",
-      "moduleAction": [
+    "modules": [
         {
-          "id": "vendoreActionAdd",
-          "name": "add",
-          "label": "Add",
-          "value": "",
-          "ischeck": false
+            "id": "vendorid",
+            "label": "Vendor Module",
+            "moduleName": "vendores",
+            "moduleRoute": "/vendors",
+            "moduleAction": [
+                {
+                    "id": "vendoreActionAdd",
+                    "name": "add",
+                    "label": "Add",
+                    "value": "",
+                    "ischeck": false
+                },
+                {
+                    "id": "vendoreActionList",
+                    "name": "list",
+                    "label": "List",
+                    "listkeys": [
+                        "vendorCode",
+                        "companyType",
+                        "ownerShipType",
+                        "websiteAddress",
+                        "registrationAddress",
+                        "billingAddress",
+                        "contactInformation",
+                        "document",
+                        "bankInformation",
+                        "companyId",
+                        "registrationCountryName",
+                        "registrationStateName",
+                        "registrationDistrictName",
+                        "registrationPincodeName",
+                        "billingAddressCountryName",
+                        "billingAddressStateName",
+                        "billingAddressDistrictName",
+                        "billingAddressPincodeName"
+                    ],
+                    "value": "",
+                    "ischeck": false
+                },
+                {
+                    "id": "vendoreActionView",
+                    "label": "View",
+                    "name": "view",
+                    "value": "",
+                    "ischeck": false
+                },
+                {
+                    "id": "vendoreActionDelete",
+                    "name": "delete",
+                    "label": "Delete",
+                    "value": "",
+                    "ischeck": false
+                }
+            ]
         },
         {
-          "id": "vendoreActionList",
-          "name": "list",
-          "label": "List",
-          "listkeys": [
-            "vendorCode",
-            "companyType",
-            "ownerShipType",
-            "websiteAddress",
-            "registrationAddress",
-            "billingAddress",
-            "contactInformation",
-            "document",
-            "bankInformation",
-            "companyId",
-            "registrationCountryName",
-            "registrationStateName",
-            "registrationDistrictName",
-            "registrationPincodeName",
-            "billingAddressCountryName",
-            "billingAddressStateName",
-            "billingAddressDistrictName",
-            "billingAddressPincodeName"
-          ],
-          "value": "",
-          "ischeck": false
+            "id": "dealersId",
+            "label": "Dealers Module",
+            "moduleName": "dealers",
+            "moduleRoute": "/dealers",
+            "moduleAction": [
+                {
+                    "id": "dealerActionAdd",
+                    "name": "add",
+                    "label": "Add",
+                    "value": "",
+                    "ischeck": false
+                },
+                {
+                    "id": "dealerActionList",
+                    "name": "list",
+                    "label": "List",
+                    "listkeys": [],
+                    "value": "",
+                    "ischeck": false
+                },
+                {
+                    "id": "dealerActionView",
+                    "label": "View",
+                    "name": "view",
+                    "value": "",
+                    "ischeck": false
+                },
+                {
+                    "id": "dealerActionDelete",
+                    "name": "delete",
+                    "label": "Delete",
+                    "value": "",
+                    "ischeck": false
+                }
+            ]
         },
         {
-          "id": "vendoreActionView",
-          "label": "View",
-          "name": "view",
-          "value": "",
-          "ischeck": false
-        },
-        {
-          "id": "vendoreActionDelete",
-          "name": "delete",
-          "label": "Delete",
-          "value": "",
-          "ischeck": false
+            "id": "warehouseid",
+            "label": "Warehouse Module",
+            "moduleName": "warehouses",
+            "moduleRoute": "/warehouse",
+            "moduleAction": [
+                {
+                    "id": "warehouseActionAdd",
+                    "name": "add",
+                    "label": "Add",
+                    "value": "",
+                    "ischeck": false
+                },
+                {
+                    "id": "warehouseActionList",
+                    "name": "list",
+                    "label": "List",
+                    "value": "",
+                    "listkeys": [],
+                    "ischeck": false
+                },
+                {
+                    "id": "warehouseActionView",
+                    "label": "View",
+                    "name": "view",
+                    "value": "",
+                    "ischeck": false
+                },
+                {
+                    "id": "warehouseActionDelete",
+                    "name": "delete",
+                    "label": "Delete",
+                    "value": "",
+                    "ischeck": false
+                }
+            ]
         }
-      ]
-    },
-    {
-      "id": "dealersId",
-      "label": "Dealers Module",
-      "moduleName": "dealers",
-      "moduleRoute": "/dealers",
-      "moduleAction": [
-        {
-          "id": "dealerActionAdd",
-          "name": "add",
-          "label": "Add",
-          "value": "",
-          "ischeck": false
-        },
-        {
-          "id": "dealerActionList",
-          "name": "list",
-          "label": "List",
-          "listkeys": [],
-          "value": "",
-          "ischeck": false
-        },
-        {
-          "id": "dealerActionView",
-          "label": "View",
-          "name": "view",
-          "value": "",
-          "ischeck": false
-        },
-        {
-          "id": "dealerActionDelete",
-          "name": "delete",
-          "label": "Delete",
-          "value": "",
-          "ischeck": false
-        }
-      ]
-    },
-    {
-      "id": "warehouseid",
-      "label": "Warehouse Module",
-      "moduleName": "warehouses",
-      "moduleRoute": "/warehouse",
-      "moduleAction": [
-        {
-          "id": "warehouseActionAdd",
-          "name": "add",
-          "label": "Add",
-          "value": "",
-          "ischeck": false
-        },
-        {
-          "id": "warehouseActionList",
-          "name": "list",
-          "label": "List",
-          "value": "",
-          "listkeys": [],
-          "ischeck": false
-        },
-        {
-          "id": "warehouseActionView",
-          "label": "View",
-          "name": "view",
-          "value": "",
-          "ischeck": false
-        },
-        {
-          "id": "warehouseActionDelete",
-          "name": "delete",
-          "label": "Delete",
-          "value": "",
-          "ischeck": false
-        }
-      ]
-    }
-  ]
+    ]
 }

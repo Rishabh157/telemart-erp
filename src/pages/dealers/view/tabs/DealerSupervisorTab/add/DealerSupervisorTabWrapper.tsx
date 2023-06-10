@@ -14,7 +14,7 @@ export type FormInitialValues = {
     companyId: string
     dealerId: string
     zonalManager: string
-    zonalDistribution:string
+    zonalDistribution: string
 }
 
 const DealerSupervisorTabWrapper = (props: Props) => {
@@ -31,7 +31,7 @@ const DealerSupervisorTabWrapper = (props: Props) => {
         companyId: companyId,
         dealerId: dealerId,
         zonalManager: '',
-        zonalDistribution:''
+        zonalDistribution: '',
     }
 
     const validationSchema = object({
