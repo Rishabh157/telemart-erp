@@ -228,7 +228,7 @@ const EditWarehouseWrapper = () => {
                 }).then((res: any) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
-                            showToast('success', 'Udated successfully!')
+                            showToast('success', 'Warehouse Upated successfully!')
                             if (dealerId !== null) {
                                 navigate('/dealers/' + dealerId + '/warehouse')
                                 // navigate(`/dealers/${Id}/warehouse`)

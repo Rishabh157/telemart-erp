@@ -155,11 +155,7 @@ const StepEditAddress = ({
                                                         className="shadow mt-2"
                                                         displayEmpty
                                                     >
-                                                        <MenuItem value="">
-                                                            <span className="text-slate-400">
-                                                                Select {label}
-                                                            </span>
-                                                        </MenuItem>
+                                                        
                                                         {dropdownOptions[
                                                             field.optionAccessKey ||
                                                                 'counrtyOptions'

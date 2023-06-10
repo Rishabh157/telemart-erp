@@ -134,11 +134,7 @@ const StepEditAddress = ({
                                             <div
                                                 key={name}
                                                 className="relative mt-2"
-                                            >
-                                                <label className=" text-slate-700 font-medium">
-                                                    {' '}
-                                                    {label}{' '}
-                                                </label>
+                                            >                                               
                                                 <FormControl fullWidth>
                                                     <Select
                                                         name={name}
