@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import EditPurchaseOrder from './EditPurchaseOrder'
 import { Formik } from 'formik'
-import { array, date, number, object, string } from 'yup'
+import {  date, number, object, string } from 'yup'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
@@ -29,11 +29,12 @@ export type FormInitialValues = {
     wareHouseId: string
     isEditable: boolean
     purchaseOrder: {
+        id: string
         itemId: string
         rate: number
         quantity: number
         estReceivingDate: string
-    }[]
+    }
 }
 
 const EditPurchaseOrderWrapper = (props: Props) => {
@@ -60,9 +61,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
 		}, [poData, poIsLoading, poIsFetching])
 
 		//console.log(selectedItems)
-		var poValues = [];
-		poValues.push(selectedItems?.purchaseOrder);
-		//console.log(poValues)
+		
 		
 		
     const initialValues: FormInitialValues = {
@@ -70,7 +69,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
 			vendorId: selectedItems?.vendorId ||'',
 			wareHouseId: selectedItems?.wareHouseId ||'',
 			isEditable: selectedItems?.isEditable || true,
-			purchaseOrder: poValues || {},
+			purchaseOrder: selectedItems?.purchaseOrder || {},
 	}
 
 
@@ -144,8 +143,8 @@ const EditPurchaseOrderWrapper = (props: Props) => {
         poCode: string().required('Purchase order code is required'),
         vendorId: string().required('Please select a vendor'),
         wareHouseId: string().required('Please select a warehouse'),
-        purchaseOrder: array().of(
-            object().shape({
+        purchaseOrder: object({
+                id:string(),
                 itemId: string().required('Please select a Item'),
                 rate: number()
                     .min(0, 'Rate must be greater than 0')
@@ -154,25 +153,25 @@ const EditPurchaseOrderWrapper = (props: Props) => {
                     .min(0, 'Quantity must be greater than 0')
                     .required('Please enter quantity'),
                 estReceivingDate: date().required('Please select date'),
-            })
-        ),
+            }),
+        
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        console.log(values, "values")
-        const purchaseOrder = values?.purchaseOrder?.map((ele: any) => {
-            return {
-                id: ele._id,
-                itemId: ele.itemId,
-                rate: ele.rate,
-                quantity: ele.quantity,
-                estReceivingDate: moment(ele.estReceivingDate).format(
+        //console.log(values?.purchaseOrder, "values")
+        
+        const purchaseOrder = {
+                id: values?.purchaseOrder?._id,
+                itemId: values?.purchaseOrder?.itemId,
+                rate: values?.purchaseOrder?.rate,
+                quantity: values?.purchaseOrder?.quantity,
+                estReceivingDate: moment(values?.purchaseOrder?.estReceivingDate).format(
                     'YYYY/MM/D'
                 ),
             }
-        })
+    
 
         setTimeout(() => {
             UpdatePurchaseOrder({
