@@ -124,13 +124,13 @@ const EditTapeManagementWrapper = () => {
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            dispatch(setChannelGroups(TapeGroupsData.data || []))
+            dispatch(setChannelGroups(TapeGroupsData?.data || []))
         }
     }, [isLoading, isFetching, TapeGroupsData, dispatch])
 
     useEffect(() => {
         if (!isLanguageLoading && !isLanguageFetching) {
-            dispatch(setLanguage(languageDataApi.data || []))
+            dispatch(setLanguage(languageDataApi?.data || []))
         }
     }, [isLanguageLoading, isLanguageFetching, languageDataApi, dispatch])
 

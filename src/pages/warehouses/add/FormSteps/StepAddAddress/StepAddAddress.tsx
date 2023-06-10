@@ -3,7 +3,7 @@ import React from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
@@ -131,9 +131,10 @@ const StepAddAddress = ({
 
                                     case 'select':
                                         return (
-                                            <div>
-                                                <ATMSelect
+                                            <div className="-mt-2">
+                                                <ATMSelectSearchable
                                                     label={label}
+                                                    selectLabel={label}
                                                     name={name}
                                                     value={
                                                         name.includes('.')
@@ -149,10 +150,7 @@ const StepAddAddress = ({
                                                             : values[name]
                                                     }
                                                     onChange={(e: any) => {
-                                                        setFieldValue(
-                                                            name,
-                                                            e.target.value
-                                                        )
+                                                        setFieldValue(name, e)
                                                     }}
                                                     options={
                                                         dropdownOptions[

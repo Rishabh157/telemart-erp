@@ -3,7 +3,7 @@ import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditSchemeWrapper'
 //import { DropdownOptions } from "./StepEditSchemeDetailsWrapper";
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
@@ -50,26 +50,32 @@ const StepEditScheme = ({
                     className="shadow bg-white rounded"
                 />
                 {/* Category */}
-                <ATMSelect
-                    name={'category'}
-                    value={values.category}
-                    onChange={(e) => {
-                        setFieldValue('category', e.target.value)
-                        setSelectedCategory(e.target.value)
-                    }}
-                    label="Category"
-                    options={dropdownOptions['productCategoryoption']}
-                />
-                {/* Sub Category */}
-                <ATMSelect
-                    name={'subCategory'}
-                    value={values.subCategory}
-                    onChange={(e) => {
-                        setFieldValue('subCategory', e.target.value)
-                    }}
-                    label="Sub Category"
-                    options={dropdownOptions['productSubCategoryOption']}
-                />
+                <div className="-mt-2">
+                    <ATMSelectSearchable
+                        name={'category'}
+                        value={values.category}
+                        onChange={(e) => {
+                            setFieldValue('category', e)
+                            setSelectedCategory(e)
+                        }}
+                        label="Category"
+                        selectLabel="Select Category"
+                        options={dropdownOptions['productCategoryoption']}
+                    />
+                </div>
+                <div className="-mt-2">
+                    {/* Sub Category */}
+                    <ATMSelectSearchable
+                        name={'subCategory'}
+                        value={values.subCategory}
+                        onChange={(e) => {
+                            setFieldValue('subCategory', e)
+                        }}
+                        label="Sub Category"
+                        selectLabel="Select Sub Category"
+                        options={dropdownOptions['productSubCategoryOption']}
+                    />
+                </div>
                 {/* Scheme Name */}
                 <ATMTextField
                     name={'schemeName'}
@@ -107,12 +113,12 @@ const StepEditScheme = ({
                     className="shadow bg-white rounded"
                 />
                 {/* Dimensions */}
-                <div>
-                    <label className="text-slate-700 font-medium">
+                <div className="mt-2">
+                    <label className="text-slate-700 font-medium ">
                         {' '}
                         Dimensions{' '}
                     </label>
-                    <div className="flex gap-2 mt-2">
+                    <div className="flex gap-2">
                         {/* Height */}
                         <ATMTextField
                             name="dimension.height"
@@ -124,7 +130,7 @@ const StepEditScheme = ({
                                 )
                             }
                             placeholder="H"
-                            className="shadow bg-white rounded"
+                            className="shadow bg-white rounded -mt-6"
                         />
                         {/* Weight */}
                         <ATMTextField
@@ -134,7 +140,7 @@ const StepEditScheme = ({
                                 setFieldValue('dimension.width', e.target.value)
                             }
                             placeholder="W"
-                            className="shadow bg-white rounded"
+                            className="shadow bg-white rounded -mt-6"
                         />
                         {/* Depth */}
                         <ATMTextField
@@ -144,7 +150,7 @@ const StepEditScheme = ({
                                 setFieldValue('dimension.depth', e.target.value)
                             }
                             placeholder="D"
-                            className="shadow bg-white rounded"
+                            className="shadow bg-white rounded -mt-6"
                         />
                     </div>
                 </div>
@@ -171,7 +177,7 @@ const StepEditScheme = ({
                     className="shadow bg-white rounded"
                 />
                 {/* Combo Packaging */}
-                <div className="mt-4">
+                <div className="mt-1">
                     <ATMSwitchButton
                         name="comboPacking"
                         value={values.comboPacking}

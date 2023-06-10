@@ -3,7 +3,7 @@ import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddDealerWrapper'
 import { DropdownOptions, FieldType } from './StepAddDealerDetailsWrapper'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
@@ -70,9 +70,10 @@ const StepAddDealerDetails = ({
 
                         case 'select':
                             return (
-                                <div key={name} className="mt-2">
-                                    <ATMSelect
+                                <div key={name} className="-mt-2">
+                                    <ATMSelectSearchable
                                         label={label}
+                                        selectLabel={`Select ${label}`}
                                         name={name}
                                         value={
                                             name.includes('.')
@@ -82,7 +83,7 @@ const StepAddDealerDetails = ({
                                                 : values[name]
                                         }
                                         onChange={(e: any) => {
-                                            setFieldValue(name, e.target.value)
+                                            setFieldValue(name, e)
                                         }}
                                         options={
                                             dropdownOptions[
@@ -90,7 +91,6 @@ const StepAddDealerDetails = ({
                                                     'dealerCategoryOptions'
                                             ]
                                         }
-                                        isSubmitting={isSubmitting}
                                     />
                                 </div>
                             )

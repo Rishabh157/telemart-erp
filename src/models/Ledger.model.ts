@@ -1,8 +1,8 @@
 export type LedgerListResponse = {
+    noteType: string
+    price: number
+    remark: string
     dealerId: string
-    schemeId: string
-    schemeName: string
-    price: string
     companyId: string
     isActive: boolean
     isDeleted: boolean
@@ -13,16 +13,20 @@ export type LedgerListResponse = {
 }
 
 export type LedgerAdd = {
-    dealerId: string
-    schemeId: string[]
+    noteType: string
+    price: number
+    remark: string
     companyId: string
+    dealerId: string
 }
 
 export type UpdateLedger = {
     body: {
-        SchemeId: string[]
-        dealerId: string
+        noteType: string
+        price: number
+        remark: string
         companyId: string
+        dealerId: string
     }
     id: string
 }

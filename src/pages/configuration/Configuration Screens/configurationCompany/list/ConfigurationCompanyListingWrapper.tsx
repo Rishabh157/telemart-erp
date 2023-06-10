@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
-// import { useDispatch, useSelector } from "react--ux";
-// import { useNavigate } from "react-router-dom";
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ConfigurationCompanyListResponse } from 'src/models/ConfigurationCompany.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-// import {
-//     setIsTableLoading,
-//     setItems,
-//     setTotalItems,
-// } from "src/-ux/slices/vendorSlice";
-// import { AppDispatch, Rootaddress } from "src/-ux/store";
-// import { useGetVendorsQuery } from "src/services/VendorServices";
 import ConfigurationCompanyListing from './ConfigurationCompanyListing'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -131,21 +122,13 @@ const ConfigurationCompanyListingWrapper = () => {
     const { page, rowsPerPage, items, searchValue }: any = useSelector(
         (state: RootState) => state.company
     )
-    const { userData } = useSelector((state: RootState) => state?.auth)
-
     const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetCompaniesQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['companyName', 'phoneNo'],
         page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
+        filterBy: [],
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,

@@ -5,7 +5,7 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './EditSaleOrderWrapper'
@@ -33,7 +33,12 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
+    dropdownOptions = {
+        ...dropdownOptions,
+    }
+
     const { values, setFieldValue } = formikProps
+
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -81,25 +86,23 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                             />
 
                             {/* Dealer */}
-                            <ATMSelect
+                            <ATMSelectSearchable
                                 name="dealer"
-                                value={values.dealer}
-                                onChange={(e) =>
-                                    setFieldValue('dealer', e.target.value)
-                                }
+                                value={values?.dealer}
+                                onChange={(e) => setFieldValue('dealer', e)}
                                 options={dropdownOptions.dealerOptions}
                                 label="Dealer"
+                                selectLabel="Select Dealer"
                             />
 
                             {/* Warehouse */}
-                            <ATMSelect
+                            <ATMSelectSearchable
                                 name="warehouse"
                                 value={values.wareHouse}
-                                onChange={(e) =>
-                                    setFieldValue('wareHouse', e.target.value)
-                                }
+                                onChange={(e) => setFieldValue('wareHouse', e)}
                                 options={dropdownOptions.warehouseOptions}
                                 label="Warehouse"
+                                selectLabel="Select Warehouse"
                             />
                         </div>
                     </div>
@@ -122,7 +125,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                             <div className="flex gap-3 items-end pb-5">
                                                 {/* Product Name */}
                                                 <div className="flex-1">
-                                                    <ATMSelect
+                                                    <ATMSelectSearchable
                                                         name={`productSalesOrder.productGroupId`}
                                                         value={
                                                             values
@@ -133,9 +136,10 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                                         onChange={(e) =>
                                                             setFieldValue(
                                                                 `productSalesOrder.productGroupId`,
-                                                                e.target.value
+                                                                e
                                                             )
                                                         }
+                                                        selectLabel=" Select Product Group"
                                                         options={
                                                             dropdownOptions.productGroupOptions
                                                         }

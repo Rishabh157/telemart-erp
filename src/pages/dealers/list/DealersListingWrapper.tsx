@@ -69,8 +69,8 @@ const DealersListingWrapper = () => {
             field: 'mobile',
             headerName: 'Phone',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: DealersListResponse) => {
-                return <span> {row.lastName} </span>
+            renderCell: (row: any) => {
+                return <span> {row.billingAddress.phone} </span>
             },
         },
         {
