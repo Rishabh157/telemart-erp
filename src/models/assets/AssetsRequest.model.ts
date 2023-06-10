@@ -1,5 +1,11 @@
 export type AssetsRequestListResponse = {
-    name: string
+    assetName: string
+    assetCategoryId: string
+    quantity: number
+    price: number
+    remark: string
+    assetDetails: string[]
+    assetcategorieLabel: string
     companyId: string
     isActive: boolean
     isDeleted: boolean
@@ -10,13 +16,23 @@ export type AssetsRequestListResponse = {
 }
 
 export type AddAssetsRequest = {
-    name: string
+    assetName: string
+    assetCategoryId: string
+    quantity: number
+    price: number
+    remark: string
+    assetDetails: string[]
     companyId: string
 }
 
 export type UpdateAssetsRequest = {
     body: {
-        name: string
+        assetName: string
+        assetCategoryId: string
+        quantity: number
+        price: number
+        remark: string
+        assetDetails: string[]
         companyId: string
     }
     id: string

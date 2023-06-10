@@ -5,13 +5,24 @@ import { NavItemType } from 'src/navigation'
 import { BiChevronsLeft } from 'react-icons/bi'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { MdOutlineWebAsset, MdShareLocation } from 'react-icons/md'
-import { TbLayoutDistributeHorizontal } from 'react-icons/tb'
+import { TbCategory2, TbLayoutDistributeHorizontal } from 'react-icons/tb'
+import { CiLocationOn } from 'react-icons/ci'
 
 const asstesNavigation: NavItemType[] = [
     {
         label: 'Assets Request ',
         icon: MdOutlineWebAsset,
         path: '/assets/assets-management',
+    },
+    {
+        label: 'Assets Category ',
+        icon: TbCategory2,
+        path: '/assets/assets-category',
+    },
+    {
+        label: 'Assets Location ',
+        icon: CiLocationOn,
+        path: '/assets/assets-location',
     },
     {
         label: 'Assets Relocation',

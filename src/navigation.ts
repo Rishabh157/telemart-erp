@@ -6,15 +6,16 @@ import { FaRegHandshake } from 'react-icons/fa'
 import { CiBoxes } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
 import {
+    MdCallReceived,
     MdOutlineBatchPrediction,
     MdOutlineBorderColor,
     MdPermMedia,
     MdWeb,
 } from 'react-icons/md'
 import { GrCompliance, GrNotes } from 'react-icons/gr'
-import { IoDocumentTextOutline } from 'react-icons/io5'
+import { IoCallOutline, IoDocumentTextOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
-import { BiPurchaseTagAlt } from 'react-icons/bi'
+import { BiBox, BiPurchaseTagAlt } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 
@@ -88,7 +89,7 @@ export const navigation: NavItemType[] = [
     },
     {
         label: 'Inquiry',
-        icon: MdOutlineBorderColor,
+        icon: MdCallReceived,
         path: '/inquiry',
     },
     {
@@ -103,7 +104,7 @@ export const navigation: NavItemType[] = [
     },
     {
         label: 'Call',
-        icon: MdOutlineBorderColor,
+        icon: IoCallOutline,
         path: '/call',
     },
     // {
@@ -124,7 +125,7 @@ export const navigation: NavItemType[] = [
     },
     {
         label: 'Assets',
-        icon: MdPermMedia,
+        icon: BiBox,
         path: '/assets/assets-management',
     },
 

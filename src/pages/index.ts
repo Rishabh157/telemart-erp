@@ -117,6 +117,14 @@ import EditChannelCategoryWrapper from './media/channelCategory/edit/EditChannel
 import ArtistListingWrapper from './media/artist/list/ArtistListingWrapper'
 import AddArtistWrapper from './media/artist/add/AddArtistWrapper'
 import EditArtistWrapper from './media/artist/edit/EditArtistWrapper'
+import AssetsLocationWrapper from './assets/assetLocation/list/AssetsLocationWrapper'
+import EditAssetsLocatonWrapper from './assets/assetLocation/edit/EditAssetsLocatonWrapper'
+import AddAssetsLocationWrapper from './assets/assetLocation/add/AddAssetsLocationWrapper'
+import AddAssetsCategoryWrapper from './assets/assetsCategory/add/AddAssetsCategoryWrapper'
+import AssetsCategoryWrapper from './assets/assetsCategory/list/AssetsCategoryWrapper'
+import EditAssetsCategoryWrapper from './assets/assetsCategory/edit/EditAssetsCategoryWrapper'
+import EditAssetsRequestwrapper from './assets/assetsRequest/edit/EditAssetsRequestwrapper'
+
 export {
     AddASRWrapper,
     ASRListingWrapper,
@@ -237,4 +245,11 @@ export {
     ArtistListingWrapper,
     AddArtistWrapper,
     EditArtistWrapper,
+    AssetsLocationWrapper,
+    EditAssetsLocatonWrapper,
+    AddAssetsLocationWrapper,
+    AddAssetsCategoryWrapper,
+    AssetsCategoryWrapper,
+    EditAssetsCategoryWrapper,
+    EditAssetsRequestwrapper,
 }

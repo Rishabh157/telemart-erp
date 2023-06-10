@@ -2,64 +2,42 @@ import React, { useEffect, useState } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import AsstesLayout from '../../AssetsLayout'
-import AssetsRequestListing from './AssetsRequestListing'
+import AssetsCategoryListing from './AssetsCategoryListing'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { useNavigate } from 'react-router-dom'
+import { showToast } from 'src/utils'
 import {
-    useGetAssetsRequestQuery,
-    useDeleteAssetsRequestMutation,
-} from 'src/services/assets/AssetsRequestServcies'
+    useDeleteAssetsCategoryMutation,
+    useGetAssetsCategoryQuery,
+} from 'src/services/assets/AssetsCategoryService'
 import {
     setIsTableLoading,
-    setTotalItems,
     setItems,
-} from 'src/redux/slices/assets/assetsRequestSlice'
-import { AssetsRequestListResponse } from 'src/models'
-import { showToast } from 'src/utils'
+    setTotalItems,
+} from 'src/redux/slices/assets/assetsCategorySlice'
+import { AssetsCategoryListResponse } from 'src/models'
 
-const AssetsRequestWrapper = () => {
+const AssetsCategoryWrapper = () => {
     const navigate = useNavigate()
-    const assetsRequest = useSelector((state: RootState) => state.assetsRequest)
+    const [deleteAssetCategory] = useDeleteAssetsCategoryMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
-    const [deleteAsset] = useDeleteAssetsRequestMutation()
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const columns: columnTypes[] = [
         {
-            field: 'assetName',
-            headerName: 'Asset Name',
-            flex: 'flex-[1.8_1.8_0%]',
-            renderCell: (row: AssetsRequestListResponse) => (
-                <span>{row?.assetName}</span>
+            field: 'assetCategoryName',
+            headerName: 'Category Name',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: AssetsCategoryListResponse) => (
+                <span className="capitalize"> {row.assetCategoryName} </span>
             ),
         },
-        {
-            field: 'assetCategory',
-            headerName: 'Asset Category',
-            flex: 'flex-[1.8_1.8_0%]',
-            renderCell: (row: AssetsRequestListResponse) => (
-                <span>{row?.assetcategorieLabel}</span>
-            ),
-        },
-        {
-            field: 'quantity',
-            headerName: 'Quantity',
-            flex: 'flex-[1.8_1.8_0%]',
-            renderCell: (row: AssetsRequestListResponse) => (
-                <span>{row?.quantity}</span>
-            ),
-        },
-        {
-            field: 'price',
-            headerName: 'Price',
-            flex: 'flex-[1.8_1.8_0%]',
-            renderCell: (row: AssetsRequestListResponse) => (
-                <span>{row?.price}</span>
-            ),
-        },
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -82,7 +60,7 @@ const AssetsRequestWrapper = () => {
                             <button
                                 onClick={() => {
                                     navigate(
-                                        `/assets/assets-management/${currentId}`
+                                        `/assets/assets-category/${currentId}`
                                     )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -92,7 +70,7 @@ const AssetsRequestWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Asset',
+                                        title: 'Delete Asset Category',
                                         text: 'Do you want to delete',
                                         showCancelButton: true,
                                         next: (res) => {
@@ -113,20 +91,23 @@ const AssetsRequestWrapper = () => {
             align: 'end',
         },
     ]
+    const assetCategoryState: any = useSelector(
+        (state: RootState) => state.assetsCategory
+    )
 
-    const { page, rowsPerPage, searchValue, items } = assetsRequest
+    const { page, rowsPerPage, items, searchValue } = assetCategoryState
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetAssetsRequestQuery({
+    const { data, isFetching, isLoading } = useGetAssetsCategoryQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['assetName'],
+        params: ['assetCategoryName'],
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},
@@ -149,7 +130,7 @@ const AssetsRequestWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteAsset(currentId).then((res) => {
+        deleteAssetCategory(currentId).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Deleted successfully!')
@@ -164,11 +145,10 @@ const AssetsRequestWrapper = () => {
             }
         })
     }
-
     return (
         <>
             <AsstesLayout>
-                <AssetsRequestListing
+                <AssetsCategoryListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
@@ -178,4 +158,4 @@ const AssetsRequestWrapper = () => {
     )
 }
 
-export default AssetsRequestWrapper
+export default AssetsCategoryWrapper
