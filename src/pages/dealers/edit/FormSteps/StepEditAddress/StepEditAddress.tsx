@@ -84,7 +84,7 @@ const StepEditAddress = ({
                                                           ][name.split('.')[1]]
                                                         : values[name]
                                                 }
-                                                onChange={(e) => { 
+                                                onChange={(e) => {
                                                     if (
                                                         name ===
                                                             'registrationAddress.phone' ||

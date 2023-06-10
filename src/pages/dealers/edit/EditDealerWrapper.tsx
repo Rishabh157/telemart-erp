@@ -78,7 +78,9 @@ const steps = [
             dealerCategoryId: string().required(
                 'please choose dealer category'
             ),
-            email: string().email("Invalid Email").required('email is required'),
+            email: string()
+                .email('Invalid Email')
+                .required('email is required'),
         }),
     },
     {
@@ -128,7 +130,7 @@ const steps = [
                         .required('Mobile number is required'),
                     landLine: string()
                         .max(10, 'maximum 10 digits')
-                        .min(10, 'minimum 10 digits')                        
+                        .min(10, 'minimum 10 digits')
                         .required('Landline is required'),
                 })
             ),

@@ -99,8 +99,16 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                                                                                         onChange={(
                                                                                             e
                                                                                         ) => {
-                                                                                            if((name === 'mobileNumber') || (name === 'landLine')) {
-                                                                                                const inputValue = e.target.value
+                                                                                            if (
+                                                                                                name ===
+                                                                                                    'mobileNumber' ||
+                                                                                                name ===
+                                                                                                    'landLine'
+                                                                                            ) {
+                                                                                                const inputValue =
+                                                                                                    e
+                                                                                                        .target
+                                                                                                        .value
                                                                                                 if (
                                                                                                     !isNaN(
                                                                                                         Number(
@@ -123,7 +131,6 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                                                                                                         .value
                                                                                                 )
                                                                                             }
-                                                                                            
                                                                                         }}
                                                                                         label={
                                                                                             label
