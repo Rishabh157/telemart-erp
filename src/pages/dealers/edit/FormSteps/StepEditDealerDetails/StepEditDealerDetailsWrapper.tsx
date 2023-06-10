@@ -24,7 +24,7 @@ const formFields: FieldType[] = [
         placeholder: 'Dealer Code',
     },
     {
-        name: 'dealerCategory',
+        name: 'dealerCategoryId',
         label: 'Dealer Category',
         placeholder: 'Dealer Category',
         type: 'select',

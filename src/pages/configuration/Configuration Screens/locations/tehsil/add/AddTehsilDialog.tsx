@@ -52,7 +52,7 @@ const AddTehsilDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                     </button>
                     <button
                         type="button"
-                        className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                        className={`bg-primary-main rounded py-2 px-5 text-white border border-primary-main ${
                             true ? 'disabled:opacity-25' : ''
                         }`}
                         onClick={() => formikProps.handleSubmit()}
