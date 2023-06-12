@@ -56,13 +56,13 @@ const WebsitePageListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                handleOnAction={() => {
-                    setShowDropdown(!showDropdown)
-                    setCurrentId(row?._id)
-                }}
-            >
-                <>
-                {/* // <div className="relative">
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                >
+                    <>
+                        {/* // <div className="relative">
                 //     <button
                 //         onClick={(e) => {
                 //             e.stopPropagation()
@@ -76,45 +76,45 @@ const WebsitePageListingWrapper = () => {
                 //     </button>
                 //     {showDropdown && currentId === row?._id && (
                 //         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10"> */}
-                            <button
-                                onClick={() => {
-                                    navigate(
-                                        `/all-websites/website-Page/${currentId}`
-                                    )
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => {
-                                    navigate(
-                                        `/all-websites/website-Page/view/${currentId}`
-                                    )
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                View
-                            </button>
-                            <button
-                                onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Delete Website-Page',
-                                        text: 'Do you want to delete',
-                                        showCancelButton: true,
-                                        next: (res: any) => {
-                                            return res.isConfirmed
-                                                ? handleDelete()
-                                                : setShowDropdown(false)
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Delete
-                            </button>
-                            </>
-            </ActionPopup>
+                        <button
+                            onClick={() => {
+                                navigate(
+                                    `/all-websites/website-Page/${currentId}`
+                                )
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            onClick={() => {
+                                navigate(
+                                    `/all-websites/website-Page/view/${currentId}`
+                                )
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                            View
+                        </button>
+                        <button
+                            onClick={() => {
+                                showConfirmationDialog({
+                                    title: 'Delete Website-Page',
+                                    text: 'Do you want to delete',
+                                    showCancelButton: true,
+                                    next: (res: any) => {
+                                        return res.isConfirmed
+                                            ? handleDelete()
+                                            : setShowDropdown(false)
+                                    },
+                                })
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                            Delete
+                        </button>
+                    </>
+                </ActionPopup>
                 //         {/* </div>
                 //     )}
                 // </div> */}

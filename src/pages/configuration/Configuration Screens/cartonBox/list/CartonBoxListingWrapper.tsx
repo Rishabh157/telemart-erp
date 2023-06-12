@@ -76,43 +76,43 @@ const CartonBoxListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                handleOnAction={() => {
-                    // e.stopPropagation()
-                    setShowDropdown(!showDropdown)
-                    setCurrentId(row?._id)
-                }}
-            >
-                <>
-                {/* <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10"> */}
-                            <button
-                                onClick={() => {
-                                    navigate(
-                                        `/configurations/carton-box/${currentId}`
-                                    )
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Delete carton box',
-                                        text: 'Do you want to delete',
-                                        showCancelButton: true,
-                                        next: (res) => {
-                                            return res.isConfirmed
-                                                ? handleDelete()
-                                                : setShowDropdown(false)
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Delete
-                            </button>
+                    handleOnAction={() => {
+                        // e.stopPropagation()
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                >
+                    <>
+                        {/* <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10"> */}
+                        <button
+                            onClick={() => {
+                                navigate(
+                                    `/configurations/carton-box/${currentId}`
+                                )
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            onClick={() => {
+                                showConfirmationDialog({
+                                    title: 'Delete carton box',
+                                    text: 'Do you want to delete',
+                                    showCancelButton: true,
+                                    next: (res) => {
+                                        return res.isConfirmed
+                                            ? handleDelete()
+                                            : setShowDropdown(false)
+                                    },
+                                })
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                            Delete
+                        </button>
                         {/* </div> */}
-                        </>
+                    </>
                 </ActionPopup>
                 // <div className="relative">
                 //     <button

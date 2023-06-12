@@ -73,8 +73,7 @@ const columns: columnTypes[] = [
                     // setCurrentId(row?._id)
                 }}
             >
-                <>
-                </>
+                <></>
             </ActionPopup>
         ),
         align: 'end',

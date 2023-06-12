@@ -14,7 +14,7 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
 }) => {
     return (
         <>
-            <PopupState variant="popover" popupId="demo-popup-popover" >
+            <PopupState variant="popover" popupId="demo-popup-popover">
                 {(popupState) => (
                     <div onClick={handleOnAction}>
                         <button
