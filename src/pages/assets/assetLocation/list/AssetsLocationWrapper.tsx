@@ -2,64 +2,42 @@ import React, { useEffect, useState } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import AsstesLayout from '../../AssetsLayout'
-import AssetsRequestListing from './AssetsRequestListing'
+import AssetsLocationListing from './AssetsLocationListing'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { useNavigate } from 'react-router-dom'
+import { showToast } from 'src/utils'
 import {
-    useGetAssetsRequestQuery,
-    useDeleteAssetsRequestMutation,
-} from 'src/services/assets/AssetsRequestServcies'
+    useDeleteAssetsLocationMutation,
+    useGetAssetsLocationQuery,
+} from 'src/services/assets/AssetsLocationService'
 import {
     setIsTableLoading,
-    setTotalItems,
     setItems,
-} from 'src/redux/slices/assets/assetsRequestSlice'
-import { AssetsRequestListResponse } from 'src/models'
-import { showToast } from 'src/utils'
+    setTotalItems,
+} from 'src/redux/slices/assets/assetsLocationSlice'
+import { AssetsLocationListResponse } from 'src/models'
 
-const AssetsRequestWrapper = () => {
+const AssetsLocationWrapper = () => {
     const navigate = useNavigate()
-    const assetsRequest = useSelector((state: RootState) => state.assetsRequest)
+    const [deleteAssetLocation] = useDeleteAssetsLocationMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
-    const [deleteAsset] = useDeleteAssetsRequestMutation()
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const columns: columnTypes[] = [
         {
-            field: 'assetName',
-            headerName: 'Asset Name',
-            flex: 'flex-[1.8_1.8_0%]',
-            renderCell: (row: AssetsRequestListResponse) => (
-                <span>{row?.assetName}</span>
+            field: 'locationName',
+            headerName: 'Location Name',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: AssetsLocationListResponse) => (
+                <span className="capitalize"> {row.locationName} </span>
             ),
         },
-        {
-            field: 'assetCategory',
-            headerName: 'Asset Category',
-            flex: 'flex-[1.8_1.8_0%]',
-            renderCell: (row: AssetsRequestListResponse) => (
-                <span>{row?.assetcategorieLabel}</span>
-            ),
-        },
-        {
-            field: 'quantity',
-            headerName: 'Quantity',
-            flex: 'flex-[1.8_1.8_0%]',
-            renderCell: (row: AssetsRequestListResponse) => (
-                <span>{row?.quantity}</span>
-            ),
-        },
-        {
-            field: 'price',
-            headerName: 'Price',
-            flex: 'flex-[1.8_1.8_0%]',
-            renderCell: (row: AssetsRequestListResponse) => (
-                <span>{row?.price}</span>
-            ),
-        },
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -82,7 +60,7 @@ const AssetsRequestWrapper = () => {
                             <button
                                 onClick={() => {
                                     navigate(
-                                        `/assets/assets-management/${currentId}`
+                                        `/assets/assets-location/${currentId}`
                                     )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -92,7 +70,7 @@ const AssetsRequestWrapper = () => {
                             <button
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Delete Asset',
+                                        title: 'Delete Asset Location',
                                         text: 'Do you want to delete',
                                         showCancelButton: true,
                                         next: (res) => {
@@ -113,20 +91,23 @@ const AssetsRequestWrapper = () => {
             align: 'end',
         },
     ]
+    const assetLocationState: any = useSelector(
+        (state: RootState) => state.assetLocation
+    )
 
-    const { page, rowsPerPage, searchValue, items } = assetsRequest
+    const { page, rowsPerPage, items, searchValue } = assetLocationState
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetAssetsRequestQuery({
+    const { data, isFetching, isLoading } = useGetAssetsLocationQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['assetName'],
+        params: ['locationName'],
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},
@@ -149,7 +130,7 @@ const AssetsRequestWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteAsset(currentId).then((res) => {
+        deleteAssetLocation(currentId).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Deleted successfully!')
@@ -164,11 +145,10 @@ const AssetsRequestWrapper = () => {
             }
         })
     }
-
     return (
         <>
             <AsstesLayout>
-                <AssetsRequestListing
+                <AssetsLocationListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
@@ -178,4 +158,4 @@ const AssetsRequestWrapper = () => {
     )
 }
 
-export default AssetsRequestWrapper
+export default AssetsLocationWrapper

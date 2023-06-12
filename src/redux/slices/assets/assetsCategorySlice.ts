@@ -1,22 +1,22 @@
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { AssetsRequestListResponse } from 'src/models/assets/AssetsRequest.model'
+import { AssetsCategoryListResponse } from 'src/models/index'
 
-export interface AssetsRequestSliceStateType {
-    items: AssetsRequestListResponse[] | []
-    allItems: AssetsRequestListResponse[] | []
-    selectedItem: AssetsRequestListResponse | null
+export interface AssetsCategorySliceStateType {
+    items: AssetsCategoryListResponse[] | []
+    allItems: AssetsCategoryListResponse[] | []
+    selectedItem: AssetsCategoryListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selectAssetRequest: string
+    selectCategory: string
     filterValue: string
 }
 
-const initialState: AssetsRequestSliceStateType = {
+const initialState: AssetsCategorySliceStateType = {
     items: [],
     allItems: [],
     selectedItem: null,
@@ -26,23 +26,23 @@ const initialState: AssetsRequestSliceStateType = {
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectAssetRequest: '',
+    selectCategory: '',
     filterValue: '',
 }
 
-const assetsRequestSlice: Slice<AssetsRequestSliceStateType> = createSlice({
-    name: 'assetsRequest',
+const assetsCategorySlice: Slice<AssetsCategorySliceStateType> = createSlice({
+    name: 'assetsCategory',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<AssetsRequestListResponse[] | []>
+            action: PayloadAction<AssetsCategoryListResponse[] | []>
         ) => {
             state.items = action.payload
         },
         setAllItems: (
             state,
-            action: PayloadAction<AssetsRequestListResponse[] | []>
+            action: PayloadAction<AssetsCategoryListResponse[] | []>
         ) => {
             state.allItems = action.payload
         },
@@ -72,12 +72,12 @@ const assetsRequestSlice: Slice<AssetsRequestSliceStateType> = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setSelectAssetRequest: (state, action: PayloadAction<string>) => {
-            state.selectAssetRequest = action.payload
+        setSelectCategory: (state, action: PayloadAction<string>) => {
+            state.selectCategory = action.payload
         },
-        setSelectedAssetRequest: (
+        setSelectedCategory: (
             state,
-            action: PayloadAction<AssetsRequestListResponse | null>
+            action: PayloadAction<AssetsCategoryListResponse | null>
         ) => {
             state.selectedItem = action.payload
         },
@@ -96,9 +96,9 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectAssetRequest,
-    setSelectedAssetRequest,
+    setSelectCategory,
+    setSelectedCategory,
     setFilterValue,
-} = assetsRequestSlice.actions
+} = assetsCategorySlice.actions
 
-export default assetsRequestSlice.reducer
+export default assetsCategorySlice.reducer
