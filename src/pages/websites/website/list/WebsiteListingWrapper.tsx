@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -20,6 +19,7 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
 import { setFilterValue as setPageFilterValue } from 'src/redux/slices/website/websitePageSlice'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -59,21 +59,32 @@ const WebstieListingWrapper = () => {
             headerName: 'Actions',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                    >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                    </button>
-                    {showDropdown && currentId === row?._id && (
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10  w-24">
-                            <button
+                // <div className="relative">
+                //     <button
+                //         onClick={(e) => {
+                //             e.stopPropagation()
+                //             setShowDropdown(!showDropdown)
+                //             setCurrentId(row?._id)
+                //         }}
+                //         className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+                //     >
+                //         {' '}
+                //         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                //     </button>
+                //     {showDropdown && currentId === row?._id && (
+                //         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10  w-24">
+                         
+                //         </div>
+                //     )}
+                // </div>
+                <ActionPopup
+handleOnAction={() => {
+    setShowDropdown(!showDropdown)
+    setCurrentId(row?._id)
+}}
+>
+<>
+<button
                                 onClick={() => {
                                     navigate(
                                         `/all-websites/Website/${currentId}`
@@ -151,9 +162,8 @@ const WebstieListingWrapper = () => {
                             >
                                 Delete
                             </button>
-                        </div>
-                    )}
-                </div>
+</>
+</ActionPopup>
             ),
             align: 'end',
         },

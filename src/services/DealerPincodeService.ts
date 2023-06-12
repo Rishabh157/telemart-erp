@@ -34,6 +34,14 @@ export const dealerPincodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        //***** deactive *****/
+        deactiveDealerPincode: builder.mutation({
+            invalidatesTags: ['dealerPincode'],
+            query: (id: string) => ({
+                url: `/dealer-pincode/status-change/${id}`,
+                method: 'PUT',
+            }),
+        }),
     }),
 })
 
@@ -41,4 +49,5 @@ export const {
     useGetDealerPincodeQuery,
     useAddDealerPincodeMutation,
     useUpdateDealerPincodeMutation,
+    useDeactiveDealerPincodeMutation
 } = dealerPincodeApi

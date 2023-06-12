@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { HiDotsHorizontal } from 'react-icons/hi'
+import React, { useEffect, useState } from 'react'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { DealersPincodeListResponse } from 'src/models/DealerPinCode.model'
 import DealerPincodeListing from './DealerPincodeListing'
@@ -10,15 +9,20 @@ import {
 } from 'src/redux/slices/dealerPincodeSlice'
 import { AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
-//import { showToast } from "src/utils";
 import { useParams } from 'react-router-dom'
-//import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
-import { useGetDealerPincodeQuery } from 'src/services/DealerPincodeService'
+import {
+    useDeactiveDealerPincodeMutation,
+    useGetDealerPincodeQuery,
+} from 'src/services/DealerPincodeService'
 import { RootState } from 'src/redux/store'
+import { showToast } from 'src/utils'
+
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const ListDealerPincodeTabWrapper = () => {
-    //const [showDropdown, setShowDropdown] = useState(false);
-    //const [currentId, setCurrentId] = useState("");
+    const [showDropdown, setShowDropdown] = useState(false)
+    const [currentId, setCurrentId] = useState('')
     const params = useParams()
     const dealerId: any = params.dealerId
     const dealerPincodeState: any = useSelector(
@@ -27,7 +31,8 @@ const ListDealerPincodeTabWrapper = () => {
     const { page, rowsPerPage, items, searchValue } = dealerPincodeState
 
     const dispatch = useDispatch<AppDispatch>()
-    //const navigate = useNavigate();
+    const [deactiveDealerPincode] = useDeactiveDealerPincodeMutation()
+
     const { data, isFetching, isLoading } = useGetDealerPincodeQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -68,47 +73,30 @@ const ListDealerPincodeTabWrapper = () => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
+                <ActionPopup
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                >
                     <button
                         onClick={() => {
-                            //setShowDropdown(!showDropdown);
-                            //setCurrentId(row?._id);
+                            showConfirmationDialog({
+                                title: 'Deactive Scheme',
+                                text: 'Do you want to Deactive',
+                                showCancelButton: true,
+                                next: (res: any) => {
+                                    return res.isConfirmed
+                                        ? handleDeactive()
+                                        : setShowDropdown(false)
+                                },
+                            })
                         }}
-                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                     >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                        {row.isActive ? 'Deactive' : 'Active'}
                     </button>
-                    {/* {showDropdown && currentId === row?._id && (
-            <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-              <button
-                onClick={() => {
-                  navigate(`/scheme/${currentId}`);
-                }}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => {
-                  showConfirmationDialog({
-                    title: "Delete Scheme",
-                    text: "Do you want to delete",
-                    showCancelButton: true,
-                    next: (res) => {
-                      return res.isConfirmed
-                        ? handleDelete()
-                        : setShowDropdown(false);
-                    },
-                  });
-                }}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              >
-                Delete
-              </button>
-            </div>
-          )} */}
-                </div>
+                </ActionPopup>
             ),
             align: 'end',
         },
@@ -126,22 +114,24 @@ const ListDealerPincodeTabWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
 
-    console.log(data)
-
-    //   const handleDelete = () => {
-    //     setShowDropdown(false);
-    //     deleteScheme(currentId).then((res: any) => {
-    //       if ("data" in res) {
-    //         if (res?.data?.status) {
-    //           showToast("success", "Scheme deleted successfully!");
-    //         } else {
-    //           showToast("error", res?.data?.message);
-    //         }
-    //       } else {
-    //         showToast("error", "Something went wrong, Please try again later");
-    //       }
-    //     });
-    //   };
+    const handleDeactive = () => {
+        setShowDropdown(false)
+        console.log(currentId, 'currentIdcurrentIdcurrentIdcurrentId')
+        deactiveDealerPincode(currentId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Scheme Deactive successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
 
     return (
         <>

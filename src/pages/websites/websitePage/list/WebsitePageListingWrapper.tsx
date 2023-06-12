@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { HiDotsHorizontal } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
 import {
     setIsTableLoading,
@@ -55,20 +55,27 @@ const WebsitePageListingWrapper = () => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                    >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                    </button>
-                    {showDropdown && currentId === row?._id && (
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                <ActionPopup
+                handleOnAction={() => {
+                    setShowDropdown(!showDropdown)
+                    setCurrentId(row?._id)
+                }}
+            >
+                <>
+                {/* // <div className="relative">
+                //     <button
+                //         onClick={(e) => {
+                //             e.stopPropagation()
+                //             setShowDropdown(!showDropdown)
+                //             setCurrentId(row?._id)
+                //         }}
+                //         className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+                //     >
+                //         {' '}
+                //         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                //     </button>
+                //     {showDropdown && currentId === row?._id && (
+                //         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10"> */}
                             <button
                                 onClick={() => {
                                     navigate(
@@ -106,9 +113,11 @@ const WebsitePageListingWrapper = () => {
                             >
                                 Delete
                             </button>
-                        </div>
-                    )}
-                </div>
+                            </>
+            </ActionPopup>
+                //         {/* </div>
+                //     )}
+                // </div> */}
             ),
             align: 'end',
         },
