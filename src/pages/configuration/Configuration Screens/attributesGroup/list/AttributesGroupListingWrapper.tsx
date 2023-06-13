@@ -84,7 +84,7 @@ const AttributesGroupListingWrapper = () => {
             renderCell: (row: any) => (
                 <ActionPopup
                     handleOnAction={() => {
-                        // e.stopPropagation()
+                       // e.stopPropagation()
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
