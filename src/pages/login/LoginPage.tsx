@@ -13,7 +13,7 @@ import {
 import { useDispatch } from 'react-redux'
 import { showToast } from 'src/utils'
 
-const LoginPage = () => {
+const LoginPage = ({ pathName }: any) => {
     const [isShowPassword, setIsShowPassword] = useState(false)
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
@@ -58,7 +58,7 @@ const LoginPage = () => {
                                 res?.data?.data?.refreshToken
                             )
 
-                            window.location.pathname = '/dashboard'
+                            window.location.pathname = `${pathName}`
                             showToast('success', 'Login successfull')
                         } else {
                             setApiError(res?.data?.message)
@@ -87,8 +87,7 @@ const LoginPage = () => {
                         <img src="logoapp.png" alt="" />
                     </div>
                     <div className=" text-2xl font-semibold text-center ">
-                        {' '}
-                        Login{' '}
+                        Login
                     </div>
                     <div className="mt-5 flex flex-col gap-7">
                         <div className="">
@@ -118,7 +117,7 @@ const LoginPage = () => {
                                 label="Password"
                                 className="bg-slate-100 focus:bg-white h-[50px]"
                                 adormant={
-                                    isShowPassword ? (
+                                    !isShowPassword ? (
                                         <BiHide className="text-xl" />
                                     ) : (
                                         <BiShow className="text-xl" />
