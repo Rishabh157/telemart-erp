@@ -27,8 +27,8 @@ export const barcodeApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getAllBarcode: builder.query({
             providesTags: ['Barcode'],
-            query: (companyId) => ({
-                url: `/bar-code/company/${companyId}`,
+            query: () => ({
+                url: `/bar-code`,
                 method: 'GET',
                 // body,
             }),

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import ChannelManagementListing from './ChannelManagementListing'
@@ -19,6 +18,7 @@ import MediaLayout from 'src/pages/media/MediaLayout'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const ChannelManagementListingWrapper = () => {
     const channelManagementState: any = useSelector(
@@ -81,48 +81,40 @@ const ChannelManagementListingWrapper = () => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                    >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                    </button>
-                    {showDropdown && currentId === row?._id && (
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                            <button
-                                onClick={() => {
-                                    navigate(`/media/channel/${currentId}`)
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Delete Channel',
-                                        text: 'Do you want to delete',
-                                        showCancelButton: true,
-                                        next: (res: any) => {
-                                            return res.isConfirmed
-                                                ? handleDelete()
-                                                : setShowDropdown(false)
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    )}
-                </div>
+                <ActionPopup
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                >
+                    <>
+                        <button
+                            onClick={() => {
+                                navigate(`/media/channel/${currentId}`)
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            onClick={() => {
+                                showConfirmationDialog({
+                                    title: 'Delete Channel',
+                                    text: 'Do you want to delete',
+                                    showCancelButton: true,
+                                    next: (res: any) => {
+                                        return res.isConfirmed
+                                            ? handleDelete()
+                                            : setShowDropdown(false)
+                                    },
+                                })
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                            Delete
+                        </button>
+                    </>
+                </ActionPopup>
             ),
             align: 'end',
         },

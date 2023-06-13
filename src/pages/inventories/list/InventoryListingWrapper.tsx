@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { HiDotsHorizontal } from 'react-icons/hi'
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
@@ -21,6 +20,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/inventorySlice'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const columns: columnTypes[] = [
     {
@@ -50,10 +50,14 @@ const columns: columnTypes[] = [
         headerName: 'Actions',
         flex: 'flex-[0.5_0.5_0%]',
         renderCell: (row: any) => (
-            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-                {' '}
-                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-            </button>
+            <ActionPopup
+                handleOnAction={() => {
+                    // setShowDropdown(!showDropdown)
+                    // setCurrentId(row?._id)
+                }}
+            >
+                <></>
+            </ActionPopup>
         ),
         align: 'end',
     },
