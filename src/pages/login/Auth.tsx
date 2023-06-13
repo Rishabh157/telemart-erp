@@ -5,7 +5,7 @@ import LoginPage from './LoginPage'
 const Auth = () => {
     const accessToken = localStorage.getItem('authToken')
     const navigation = useNavigate()
-    const {pathname} = useLocation()
+    const { pathname } = useLocation()
     console.log(pathname)
     useEffect(() => {
         if (accessToken) {
@@ -13,7 +13,7 @@ const Auth = () => {
         }
     }, [accessToken, navigation])
 
-    return <> {!accessToken && <LoginPage pathName={pathname}/>}</>
+    return <> {!accessToken && <LoginPage pathName={pathname} />}</>
 }
 
 export default Auth
