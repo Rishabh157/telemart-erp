@@ -66,7 +66,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         data: schemeData,
         isLoading: schemeIsLoading,
         isFetching: schemeIsFetching,
-    } = useGetSchemeQuery('')
+    } = useGetSchemeQuery(userData?.companyId)
 
     useEffect(() => {
         dispatch(setAllDealerSchemes(schemeData?.data))

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { HiDotsHorizontal } from 'react-icons/hi'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { AttributesListResponse } from 'src/models/Attrbutes.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
@@ -18,6 +17,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const AttributesListingWrapper = () => {
     const attributeState: any = useSelector(
@@ -46,19 +46,14 @@ const AttributesListingWrapper = () => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                    >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                    </button>
-                    {showDropdown && currentId === row?._id && (
+                <ActionPopup
+                    handleOnAction={() => {
+                        // e.stopPropagation()
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                >
+                    <>
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
@@ -88,8 +83,52 @@ const AttributesListingWrapper = () => {
                                 Delete
                             </button>
                         </div>
-                    )}
-                </div>
+                    </>
+                </ActionPopup>
+                // <div className="relative">
+                //     <button
+                //         onClick={(e) => {
+                //             e.stopPropagation()
+                //             setShowDropdown(!showDropdown)
+                //             setCurrentId(row?._id)
+                //         }}
+                //         className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+                //     >
+                //         {' '}
+                //         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                //     </button>
+                //     {showDropdown && currentId === row?._id && (
+                //         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                //             <button
+                //                 onClick={() => {
+                //                     navigate(
+                //                         `/configurations/attributes/${currentId}`
+                //                     )
+                //                 }}
+                //                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                //             >
+                //                 Edit
+                //             </button>
+                //             <button
+                //                 onClick={() => {
+                //                     showConfirmationDialog({
+                //                         title: 'Delete Attribute',
+                //                         text: 'Do you want to delete',
+                //                         showCancelButton: true,
+                //                         next: (res) => {
+                //                             return res.isConfirmed
+                //                                 ? handleDelete()
+                //                                 : setShowDropdown(false)
+                //                         },
+                //                     })
+                //                 }}
+                //                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                //             >
+                //                 Delete
+                //             </button>
+                //         </div>
+                //     )}
+                // </div>
             ),
             align: 'end',
         },

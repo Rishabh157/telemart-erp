@@ -8,7 +8,7 @@ export const dealerSupervisorApi = apiSlice.injectEndpoints({
         getDealerSupervisor: builder.query({
             providesTags: ['dealerSupervisor'],
             query: (body: PaginationType) => ({
-                url: '/dealer-supervisor',
+                url: '/zonal-manager',
                 method: 'POST',
                 body,
             }),
@@ -18,7 +18,7 @@ export const dealerSupervisorApi = apiSlice.injectEndpoints({
         getAllDealerSupervisor: builder.query({
             providesTags: ['dealerSupervisor'],
             query: () => ({
-                url: '/dealer-supervisor',
+                url: '/zonal-manager',
                 method: 'GET',
                 // body,
             }),
@@ -28,7 +28,7 @@ export const dealerSupervisorApi = apiSlice.injectEndpoints({
         addDealerSupervisor: builder.mutation({
             invalidatesTags: ['dealerSupervisor'],
             query: (body: DealersSupervisorAdd) => ({
-                url: '/dealer-supervisor/add',
+                url: '/zonal-manager/add',
                 method: 'POST',
 
                 body,
@@ -39,7 +39,7 @@ export const dealerSupervisorApi = apiSlice.injectEndpoints({
         updateDealerSupervisor: builder.mutation({
             invalidatesTags: ['dealerSupervisor'],
             query: ({ body, id }: UpdateDealersSupervisor) => ({
-                url: `/dealer-supervisor/${id}`,
+                url: `/zonal-manager/${id}`,
                 method: 'PUT',
                 body,
             }),
@@ -48,7 +48,7 @@ export const dealerSupervisorApi = apiSlice.injectEndpoints({
         deleteDealerSupervisor: builder.mutation({
             invalidatesTags: ['dealerSupervisor'],
             query: (id: string) => ({
-                url: `/dealer-supervisor/${id}`,
+                url: `/zonal-manager/${id}`,
                 method: 'DELETE',
             }),
         }),
@@ -56,7 +56,7 @@ export const dealerSupervisorApi = apiSlice.injectEndpoints({
         deactiveDealerSupervisor: builder.mutation({
             invalidatesTags: ['dealerSupervisor'],
             query: (id: string) => ({
-                url: `/dealer-supervisor/status-change/${id}`,
+                url: `/zonal-manager/status-change/${id}`,
                 method: 'PUT',
             }),
         }),

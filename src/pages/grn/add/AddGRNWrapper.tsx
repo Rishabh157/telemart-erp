@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
 // eslint-disable-next-line
-import { number, object } from 'yup'
+import { number, object, ref } from 'yup'
 import AddItem from './AddGRN'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -47,9 +47,17 @@ const AddGRNWrapper = (props: Props) => {
             .required('Please enter Recieved Quantity'),
         goodQuantity: number()
             .min(0, 'Good Quantity must be greater than 0')
+            .max(
+                ref('receivedQuantity'),
+                'Good Quantity must be less than or Equal to Receive Quantity'
+            )
             .required('Please enter Good Quantity'),
         defectiveQuantity: number()
             .min(0, 'Defective Quantity must be greater than 0')
+            .max(
+                ref('receivedQuantity'),
+                'Defective Quantity must be less than or Equal to Receive Quantity'
+            )
             .required('Please enter Defective Quantity'),
     })
 
