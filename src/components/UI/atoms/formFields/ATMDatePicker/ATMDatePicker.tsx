@@ -31,7 +31,7 @@ const ATMDatePicker = ({
     isSubmitting = true,
     labelClass = 'font-medium',
     dateTimeFormat = 'MM/DD/YYYY',
-    minDate
+    minDate,
 }: Props) => {
     return (
         <div className="relative">
@@ -72,7 +72,6 @@ const ATMDatePicker = ({
                                 //     },
                                 // }}
                                 error={value === '' ? false : undefined}
-                                
                             />
                         )}
                     />

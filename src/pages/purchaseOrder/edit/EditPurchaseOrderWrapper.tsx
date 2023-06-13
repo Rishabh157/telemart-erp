@@ -70,15 +70,16 @@ const EditPurchaseOrderWrapper = (props: Props) => {
         vendorId: selectedItems?.vendorId || '',
         wareHouseId: selectedItems?.wareHouseId || '',
         isEditable: selectedItems?.isEditable || true,
-       // purchaseOrder: selectedItems?.purchaseOrder || {},
-       purchaseOrder:{
-        id: selectedItems?.purchaseOrder?._id,
-        itemId: selectedItems?.purchaseOrder?.itemId,
-        rate: selectedItems?.purchaseOrder?.rate,
-        quantity: selectedItems?.purchaseOrder?.quantity,
-        estReceivingDate: selectedItems?.purchaseOrder?.estReceivingDate,
-        
-       } || {},
+        // purchaseOrder: selectedItems?.purchaseOrder || {},
+        purchaseOrder:
+            {
+                id: selectedItems?.purchaseOrder?._id,
+                itemId: selectedItems?.purchaseOrder?.itemId,
+                rate: selectedItems?.purchaseOrder?.rate,
+                quantity: selectedItems?.purchaseOrder?.quantity,
+                estReceivingDate:
+                    selectedItems?.purchaseOrder?.estReceivingDate,
+            } || {},
     }
 
     const {
@@ -164,7 +165,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         //console.log(values?.purchaseOrder?._id, "values")
-        let iid = values?.purchaseOrder?.id;
+        let iid = values?.purchaseOrder?.id
 
         const purchaseOrder: any = {
             id: iid,

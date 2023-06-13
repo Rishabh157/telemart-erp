@@ -57,19 +57,20 @@ const ATMTableHeader = ({
                 )}
                 {isRefresh && (
                     <button
-                        onClick={() =>{ onFilterDispatch();
-                            setTimeout(() =>(
-                                
-                                <div className="w-[100%] h-[100vh] flex justify-center fixed z-10">
+                        onClick={() => {
+                            onFilterDispatch()
+                            setTimeout(
+                                () => (
+                                    <div className="w-[100%] h-[100vh] flex justify-center fixed z-10">
                                         <div className="w-[64px] h-[64px] border border-spacing-8 border-cyan-600 rounded animate-spin "></div>
-                                </div>
-                                
-                            ), 1000)
+                                    </div>
+                                ),
+                                1000
+                            )
                         }}
                         className="bg-white shadow px-2 flex items-center rounded border"
                     >
                         <IoReload className="text-2xl text-slate-600" />
-                        
                     </button>
                 )}
             </div>

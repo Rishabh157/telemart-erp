@@ -218,7 +218,7 @@ const AddSlotManagement = ({
                                 <div className="flex-[3_3_0%]">
                                     <ATMDatePicker
                                         name={`endDate`}
-                                        minDate={ new Date()}
+                                        minDate={new Date()}
                                         value={slotEndDate}
                                         label="Slot End Date"
                                         dateTimeFormat="MM/DD/YY ddd"
