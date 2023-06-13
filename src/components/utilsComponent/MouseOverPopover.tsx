@@ -51,10 +51,13 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
                 }}
                 onClose={handlePopoverClose}
                 disableRestoreFocus
-                className='w-60'
+                className="w-60"
             >
-                <span style={{ padding: '1px' }} className="text-xs font-normal  italic">
-                   Ex. {title}
+                <span
+                    style={{ padding: '1px' }}
+                    className="text-xs font-normal  italic"
+                >
+                    Ex. {title}
                 </span>
                 {children}
             </Popover>

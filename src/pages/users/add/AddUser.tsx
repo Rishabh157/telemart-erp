@@ -66,7 +66,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 name="firstName"
                                 isInfo
-                                InfoTitle='please Enter full name  please Enter full nameplease Enter full nameplease Enter full nameplease Enter full nameplease Enter full name'
+                                InfoTitle="please Enter full name  please Enter full nameplease Enter full nameplease Enter full nameplease Enter full nameplease Enter full name"
                                 value={values.firstName}
                                 label="First Name"
                                 placeholder="First Name"
