@@ -24,6 +24,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
 import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
 import { AreaListResponse } from 'src/models/Area.model'
+import {useNavigate} from 'react-router-dom'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -59,6 +60,7 @@ const Inbound: React.FC<Props> = ({
     const [selectedRows, setSelectedRows] = useState([])
 
     const dispatch = useDispatch<AppDispatch>()
+    const navigate = useNavigate()
 
     const { allItems: allDispositionItems }: any = useSelector(
         (state: RootState) => state.dispositionThree
@@ -119,6 +121,7 @@ const Inbound: React.FC<Props> = ({
         formikProps.values.dispositionLevelTwoId,
         { skip: !formikProps.values.dispositionLevelTwoId }
     )
+    
 
     const {
         data: dispositionTwodata,
@@ -240,7 +243,17 @@ const Inbound: React.FC<Props> = ({
     return (
         <>
             <div className="container-fluid px-5 py-2 flex flex-col gap-4 mt-0">
+            <div className="flex justify-between items-center h-[45px]">
+                <button
+                    type="button"
+                    onClick={() => navigate('/media/channel-group')}
+                    className="bg-primary-main text-white rounded py-1 px-3"
+                >
+                    Go BAck
+                </button>
+                </div>
                 <div className="h-fit w-full flex gap-5">
+                
                     <div className="w-3/5 flex flex-col gap-x-4 gap-y-2 ">
                         <div className="pb-5">
                             <p className="bg-gray-50 p-2 rounded-md text-20 col-span-4 mb-2">

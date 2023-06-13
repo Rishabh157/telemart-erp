@@ -54,8 +54,9 @@ const AttributesListingWrapper = () => {
                     }}
                 >
                     <>
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                            <button
+                        {/* <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                             */}
+                             <button
                                 onClick={() => {
                                     navigate(
                                         `/configurations/attributes/${currentId}`
@@ -82,10 +83,10 @@ const AttributesListingWrapper = () => {
                             >
                                 Delete
                             </button>
-                        </div>
+                        {/* </div> */}
                     </>
                 </ActionPopup>
-                // <div className="relative">
+                // // <div className="relative">
                 //     <button
                 //         onClick={(e) => {
                 //             e.stopPropagation()
@@ -126,7 +127,7 @@ const AttributesListingWrapper = () => {
                 //             >
                 //                 Delete
                 //             </button>
-                //         </div>
+                //         // </div>
                 //     )}
                 // </div>
             ),

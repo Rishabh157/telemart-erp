@@ -63,14 +63,22 @@ const EditPurchaseOrderWrapper = (props: Props) => {
         }
     }, [poData, poIsLoading, poIsFetching])
 
-    //console.log(selectedItems)
+    //console.log(selectedItems?.purchaseOrder?._id)
 
     const initialValues: FormInitialValues = {
         poCode: selectedItems?.poCode || '',
         vendorId: selectedItems?.vendorId || '',
         wareHouseId: selectedItems?.wareHouseId || '',
         isEditable: selectedItems?.isEditable || true,
-        purchaseOrder: selectedItems?.purchaseOrder || {},
+       // purchaseOrder: selectedItems?.purchaseOrder || {},
+       purchaseOrder:{
+        id: selectedItems?.purchaseOrder?._id,
+        itemId: selectedItems?.purchaseOrder?.itemId,
+        rate: selectedItems?.purchaseOrder?.rate,
+        quantity: selectedItems?.purchaseOrder?.quantity,
+        estReceivingDate: selectedItems?.purchaseOrder?.estReceivingDate,
+        
+       } || {},
     }
 
     const {
@@ -155,10 +163,11 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        //console.log(values?.purchaseOrder, "values")
+        //console.log(values?.purchaseOrder?._id, "values")
+        let iid = values?.purchaseOrder?.id;
 
         const purchaseOrder: any = {
-            id: values?.purchaseOrder?._id,
+            id: iid,
             itemId: values?.purchaseOrder?.itemId,
             rate: values?.purchaseOrder?.rate,
             quantity: values?.purchaseOrder?.quantity,
