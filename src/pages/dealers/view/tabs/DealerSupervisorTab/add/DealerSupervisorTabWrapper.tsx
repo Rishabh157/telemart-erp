@@ -13,7 +13,8 @@ type Props = {}
 export type FormInitialValues = {
     companyId: string
     dealerId: string
-    supervisorName: string
+    zonalManager: string
+    zonalDistribution: string
 }
 
 const DealerSupervisorTabWrapper = (props: Props) => {
@@ -29,11 +30,12 @@ const DealerSupervisorTabWrapper = (props: Props) => {
     const initialValues: FormInitialValues = {
         companyId: companyId,
         dealerId: dealerId,
-        supervisorName: '',
+        zonalManager: '',
+        zonalDistribution: '',
     }
 
     const validationSchema = object({
-        supervisorName: string().required('Required'),
+        zonalManager: string().required('Required'),
     })
 
     //    Form Submit Handler
@@ -43,7 +45,8 @@ const DealerSupervisorTabWrapper = (props: Props) => {
         setTimeout(() => {
             addDealerSupervisor({
                 dealerId: values.dealerId || '',
-                supervisorName: values.supervisorName,
+                zonalManagerName: values.zonalManager,
+                // zonalDistribution:values.zonalDistribution,
                 companyId: values.companyId || '',
             }).then((res) => {
                 if ('data' in res) {

@@ -216,6 +216,7 @@ import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsi
 import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
 import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
+import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
 import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
 
 const PageRoutes = () => {
@@ -999,6 +1000,7 @@ const PageRoutes = () => {
                         path="/inquiry/view/:id"
                         element={<InquiryViewWrapper />}
                     />
+                    <Route path="user-access" element={<UserAccessWrapper />} />
                 </Routes>
             </BrowserRouter>
         </>

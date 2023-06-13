@@ -11,7 +11,7 @@ import {
 import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
 import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { HiDotsHorizontal } from 'react-icons/hi'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const CallListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -84,10 +84,15 @@ const CallListingWrapper = () => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-                    {' '}
-                    <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                </button>
+                <ActionPopup
+                    handleOnAction={() => {
+                        // e.stopPropagation()
+                        // setShowDropdown(!showDropdown)
+                        // setCurrentId(row?._id)
+                    }}
+                >
+                    <></>
+                </ActionPopup>
             ),
             align: 'end',
         },

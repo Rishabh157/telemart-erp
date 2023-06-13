@@ -7,6 +7,7 @@ import ConfigurationLayout from '../../ConfigurationLayout'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
+import { useNavigate } from 'react-router-dom'
 
 const StyledNode = ({
     children,
@@ -15,6 +16,7 @@ const StyledNode = ({
     children: ReactNode
     extraClasses?: string
 }) => {
+    const navigate = useNavigate()
     return (
         <button
             className={twMerge(
@@ -29,7 +31,7 @@ const StyledNode = ({
                         {
                             label: 'Add Policy',
                             onClick: () => {
-                                // alert('clicked')
+                                navigate('/user-access')
                             },
                         },
                     ]}
@@ -114,30 +116,35 @@ const OrganisationHierarchy = () => {
                                                 <TreeNode
                                                     label={
                                                         <StyledNode extraClasses="text-sm font-normal font-sans">
-                                                            Sr. Team
-                                                            Leader/Sr.Executive,
-                                                            MIS
+                                                            Team Leader/
+                                                            Executive, MIS
                                                         </StyledNode>
                                                     }
                                                 >
                                                     <TreeNode
                                                         label={
                                                             <StyledNode extraClasses="text-sm font-normal font-sans">
-                                                                Sr. Team
-                                                                Leader/Sr.Executive,
-                                                                MIS
+                                                                Sr. Executive,
+                                                                Sales Center
                                                             </StyledNode>
                                                         }
                                                     >
                                                         <TreeNode
                                                             label={
                                                                 <StyledNode extraClasses="text-sm font-normal font-sans">
-                                                                    Sr. Team
-                                                                    Leader/Sr.Executive,
-                                                                    MIS
+                                                                    Executive,
+                                                                    Sales Center
                                                                 </StyledNode>
                                                             }
-                                                        />
+                                                        >
+                                                            <TreeNode
+                                                                label={
+                                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                        Executive,Trainee
+                                                                    </StyledNode>
+                                                                }
+                                                            />
+                                                        </TreeNode>
                                                     </TreeNode>
                                                 </TreeNode>
                                             </TreeNode>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { HiDotsHorizontal } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -11,6 +10,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/NewUserSlice'
 import UsersListing from './UsersListing'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
@@ -78,19 +78,14 @@ const UsersListingWrapper = () => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setShowDropdown(!showDropdown)
-                            //setCurrentId(row?._id)
-                        }}
-                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                    >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                    </button>
-                </div>
+                <ActionPopup
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        //   setCurrentId(row?._id);
+                    }}
+                >
+                    <></>
+                </ActionPopup>
             ),
             align: 'end',
         },

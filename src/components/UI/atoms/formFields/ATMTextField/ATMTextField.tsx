@@ -1,5 +1,7 @@
 import { ErrorMessage } from 'formik'
 import React from 'react'
+// import { BsInfoCircle } from 'react-icons/bs'
+import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
 
 export type ATMTextFieldPropTypes = {
@@ -13,6 +15,9 @@ export type ATMTextFieldPropTypes = {
     extraClassField?: string
     labelClass?: string
     disabled?: boolean
+    isInfo?: boolean
+    InfoChildren?: React.ReactNode
+    InfoTitle?: string
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
 const ATMTextField = ({
@@ -27,17 +32,28 @@ const ATMTextField = ({
     isSubmitting = true,
     extraClassField = '',
     disabled = false,
+    isInfo = false,
+    InfoChildren = null,
+    InfoTitle = 'Info',
     labelClass = 'font-medium',
     ...rest
 }: ATMTextFieldPropTypes) => {
     return (
         <div className={`relative mt-4 ${extraClassField}`}>
-            {label && (
-                <label className={`text-slate-700 ${labelClass}`}>
-                    {label}{' '}
-                    {required && <span className="text-red-500"> * </span>}{' '}
-                </label>
-            )}
+            <div className="flex gap-1">
+                {label && (
+                    <label className={`text-slate-700 ${labelClass}`}>
+                        {label}{' '}
+                        {required && <span className="text-red-500"> * </span>}{' '}
+                    </label>
+                )}
+                {isInfo && (
+                    <MouseOverPopover
+                        title={InfoTitle}
+                        children={InfoChildren}
+                    />
+                )}
+            </div>
             <input
                 name={name}
                 value={value}
