@@ -20,8 +20,8 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getAlldispositionTwo: builder.query({
             providesTags: ['dispositionTwo'],
-            query: (companyId) => ({
-                url: `/disposition-two/company/${companyId}`,
+            query: () => ({
+                url: `/disposition-two`,
                 method: 'GET',
                 // body,
             }),

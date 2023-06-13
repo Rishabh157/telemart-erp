@@ -35,7 +35,7 @@ const AddDispositionTwoWrapper = () => {
         isLoading: isDOLoading,
         isFetching: isDOFetching,
         data: DoData,
-    } = useGetAlldispositionOneQuery(userData?.companyId)
+    } = useGetAlldispositionOneQuery('')
 
     useEffect(() => {
         if (!isDOLoading && !isDOFetching) {

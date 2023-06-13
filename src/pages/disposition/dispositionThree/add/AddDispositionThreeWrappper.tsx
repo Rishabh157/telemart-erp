@@ -48,7 +48,7 @@ const AddDispositionThreeWrappper = () => {
         isLoading: isDTLoading,
         isFetching: isDTFetching,
         data: DtData,
-    } = useGetAlldispositionTwoQuery(userData?.companyId)
+    } = useGetAlldispositionTwoQuery('')
 
     useEffect(() => {
         if (!isDTLoading && !isDTFetching) {
@@ -60,7 +60,7 @@ const AddDispositionThreeWrappper = () => {
         isLoading: isDOLoading,
         isFetching: isDOFetching,
         data: DoData,
-    } = useGetAlldispositionOneQuery(userData?.companyId)
+    } = useGetAlldispositionOneQuery('')
 
     useEffect(() => {
         if (!isDOLoading && !isDOFetching) {
