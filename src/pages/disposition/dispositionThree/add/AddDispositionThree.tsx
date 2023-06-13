@@ -155,7 +155,6 @@ const AddDispositionThree = ({
                             <ATMSelectSearchable
                                 name="applicableCriteria"
                                 required
-                                isMulti={true}
                                 value={values.applicableCriteria}
                                 onChange={(e) => {
                                     setFieldValue('applicableCriteria', e)

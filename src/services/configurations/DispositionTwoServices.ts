@@ -11,7 +11,7 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
         getdispositionTwo: builder.query({
             providesTags: ['dispositionTwo'],
             query: (body: PaginationType) => ({
-                url: '/disposition-Two',
+                url: '/disposition-two',
                 method: 'POST',
                 body,
             }),
@@ -20,8 +20,8 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getAlldispositionTwo: builder.query({
             providesTags: ['dispositionTwo'],
-            query: () => ({
-                url: '/disposition-Two',
+            query: (companyId) => ({
+                url: `/disposition-two/company/${companyId}`,
                 method: 'GET',
                 // body,
             }),
@@ -31,7 +31,7 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
         getAlldispositionTwounauth: builder.query({
             providesTags: ['dispositionTwo'],
             query: (Id) => ({
-                url: `/disposition-Two/unauth/get-all/${Id}`,
+                url: `/disposition-two/unauth/get-all/${Id}`,
                 method: 'GET',
                 // body,
             }),
@@ -51,7 +51,7 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
         adddispositionTwo: builder.mutation({
             invalidatesTags: ['dispositionTwo'],
             query: (body: AddDisPositionTwo) => ({
-                url: '/disposition-Two/add',
+                url: '/disposition-two/add',
                 method: 'POST',
                 body,
             }),
@@ -61,7 +61,7 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
         updatedispositionTwo: builder.mutation({
             invalidatesTags: ['dispositionTwo'],
             query: ({ body, id }: UpdateDispositionTwo) => ({
-                url: `/disposition-Two/${id}`,
+                url: `/disposition-two/${id}`,
 
                 method: 'PUT',
                 body,
@@ -72,7 +72,7 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
         getdispositionTwoById: builder.query({
             providesTags: ['dispositionTwo'],
             query: (id) => ({
-                url: `/disposition-Two/${id}`,
+                url: `/disposition-two/${id}`,
 
                 method: 'GET',
             }),
@@ -96,7 +96,7 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
         deletedispositionTwo: builder.mutation({
             invalidatesTags: ['dispositionTwo'],
             query: (id) => ({
-                url: `/disposition-Two/${id}`,
+                url: `/disposition-two/${id}`,
 
                 method: 'DELETE',
             }),

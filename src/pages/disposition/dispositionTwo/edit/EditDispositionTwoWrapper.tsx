@@ -53,7 +53,7 @@ const EditDispositionTwoWrapper = () => {
         isLoading: isDOLoading,
         isFetching: isDOFetching,
         data: DoData,
-    } = useGetAlldispositionOneQuery('')
+    } = useGetAlldispositionOneQuery(userData?.companyId)
 
     useEffect(() => {
         if (!isDOLoading && !isDOFetching) {
