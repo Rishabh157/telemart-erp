@@ -19,6 +19,8 @@ import { RootState } from 'src/redux/store'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import Stack from '@mui/material/Stack'
+import Chip from '@mui/material/Chip'
 
 const ListDealerSchemeTabWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -36,7 +38,7 @@ const ListDealerSchemeTabWrapper = () => {
     const { data, isFetching, isLoading } = useGetDealerSchemeQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['schemeId'],
+        params: ["schemeName", "price"],
         page: page,
         filterBy: [
             {
@@ -59,18 +61,52 @@ const ListDealerSchemeTabWrapper = () => {
                 <span> {row.schemeName} </span>
             ),
         },
+        
         {
             field: 'price',
             headerName: 'Price',
-            flex: 'flex-[1.5_1.5_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: DealersSchemeListResponse) => {
                 return <span> {row.price} </span>
             },
         },
         {
+            field:"details",
+            headerName:"Available Pincode",
+            flex:'flex-[2_2_0%]',
+            renderCell:(row:DealersSchemeListResponse)=>(
+                <Stack direction="row" spacing={1}>
+                {row?.details?.pincodes?.map((ele, index) => {
+                    if (index < 6) {
+                        return (
+                            <Chip
+                                label={ele}
+                                color="primary"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )
+                    }
+                    if (index === 10) {
+                        return (
+                            <Chip
+                                label={'...'}
+                                color="primary"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )
+                    } else {
+                        return null
+                    }
+                })}
+            </Stack>
+            )
+        },
+        {
             field: 'isActive',
             headerName: 'Status',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.25_0.25_0%]',
             renderCell: (row: DealersSchemeListResponse) => {
                 return (
                     <span>
@@ -87,7 +123,7 @@ const ListDealerSchemeTabWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
+            flex: 'flex-[0.25_0.25_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
                     handleOnAction={() => {

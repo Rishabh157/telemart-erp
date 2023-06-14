@@ -1,6 +1,7 @@
 import { DealersPincodeAdd, UpdateDealersPincode } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
+import { GetDealerPincode } from 'src/models/DealerPinCode.model'
 
 export const dealerPincodeApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -42,6 +43,22 @@ export const dealerPincodeApi = apiSlice.injectEndpoints({
                 method: 'PUT',
             }),
         }),
+        // **** Get all pincode of a dealer ****/
+        getAllPincodeByDealer: builder.query({
+            providesTags: ['dealerPincode'],
+            query: ({ companyId, dealerId }: GetDealerPincode) => ({
+                url: `/dealer-pincode/dealer/${dealerId}/company/${companyId}`,
+                method: 'GET',
+            }),
+        }),
+        //****Delete dealer pincode ****/
+        deleteDealerPincode: builder.mutation({
+            invalidatesTags: ['dealerPincode'],
+            query: (id: string) => ({
+                url: `/dealer-pincode/${id}`,
+                method: 'DELETE',
+            }),
+        }),
     }),
 })
 
@@ -50,4 +67,6 @@ export const {
     useAddDealerPincodeMutation,
     useUpdateDealerPincodeMutation,
     useDeactiveDealerPincodeMutation,
+    useGetAllPincodeByDealerQuery,
+    useDeleteDealerPincodeMutation
 } = dealerPincodeApi

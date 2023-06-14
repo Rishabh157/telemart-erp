@@ -5,6 +5,7 @@ import AddDealerScheme from './AddDealerScheme'
 import { useAddDealerSchemeMutation } from 'src/services/DealerSchemeService'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useGetDealerSchemeQuery } from 'src/services/DealerSchemeService'
+import { useGetAllPincodeByDealerQuery } from 'src/services/DealerPincodeService'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,7 +18,10 @@ type Props = {}
 export type FormInitialValues = {
     companyId: string
     dealerId: string
-    schemes: []
+    details: {
+        schemeId: string,
+        pincodes: string[]
+    }[]
 }
 
 const DealerPinCodeTabWrapper = (props: Props) => {
@@ -29,6 +33,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const companyId: any = userData?.companyId
 
     const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const [pinCodeOptions, setPinCodeOptions] = useState([])
     const [addDealerScheme] = useAddDealerSchemeMutation()
 
     // const { allItems}: any = useSelector(
@@ -42,7 +47,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     } = useGetDealerSchemeQuery({
         limit: 10,
         searchValue: '',
-        params: ['schemeId', 'schemeName'],
+        params: [ 'schemeName',"price"],
         page: 1,
         filterBy: [
             {
@@ -75,25 +80,48 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const { allItems: schemeItems }: any = useSelector(
         (state: RootState) => state?.scheme
     )
+
     const schemeOptions = schemeItems?.map((ele: any) => {
         return {
             label: ele.schemeName,
             value: ele._id,
         }
     })
+    const { data: pinCodeList, isLoading: pinCodeIsLoading, isFetching: pinCodeIsFetching } = useGetAllPincodeByDealerQuery({
+        companyId: companyId,
+        dealerId: dealerId
+    })
+
+
+    useEffect(() => {
+        if (!pinCodeIsLoading && !pinCodeIsFetching) {
+            let options = pinCodeList?.data?.map((item: any) => {
+                return {
+                    label: item?.pincode,
+                    value: item?.pincode
+                }
+            })
+            setPinCodeOptions(options)
+        }
+    }, [pinCodeList, pinCodeIsLoading, pinCodeIsFetching])
 
     const initialValues: FormInitialValues = {
         companyId: companyId,
         dealerId: dealerId,
-        schemes: [],
+        details: [
+            {
+                schemeId: "",
+                pincodes: pinCodeOptions?.map((item: any) => item?.label)
+            }
+        ],
     }
 
     const validationSchema = object({
-        schemes: array()
+        details: array()
             .of(
                 object().shape({
-                    label: string().required(),
-                    value: string().required(),
+                    schemeId: string().required("Please select scheme"),
+                    pincodes: array().min(1, "Please select atleast 1 pincode").required(),
                 })
             )
             .min(1, 'Please select atleast 1 Scheme'),
@@ -102,14 +130,10 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        const scheme: any = values.schemes.map((ele: any) => {
-            return ele.value
-        })
-
         setTimeout(() => {
             addDealerScheme({
                 dealerId: values.dealerId || '',
-                schemeId: scheme,
+                details: values?.details,
                 companyId: values.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
@@ -130,6 +154,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     return (
         <div>
             <Formik
+                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
@@ -140,6 +165,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                             schemeOptions={schemeOptions}
+                            pinCodeOptions={pinCodeOptions}
                         />
                     )
                 }}

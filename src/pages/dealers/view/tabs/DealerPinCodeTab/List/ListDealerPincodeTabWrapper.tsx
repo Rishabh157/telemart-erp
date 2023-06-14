@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import {
     useDeactiveDealerPincodeMutation,
+    useDeleteDealerPincodeMutation,
     useGetDealerPincodeQuery,
 } from 'src/services/DealerPincodeService'
 import { RootState } from 'src/redux/store'
@@ -32,6 +33,7 @@ const ListDealerPincodeTabWrapper = () => {
 
     const dispatch = useDispatch<AppDispatch>()
     const [deactiveDealerPincode] = useDeactiveDealerPincodeMutation()
+    const [deleteDealerPincode] = useDeleteDealerPincodeMutation()
 
     const { data, isFetching, isLoading } = useGetDealerPincodeQuery({
         limit: rowsPerPage,
@@ -82,7 +84,7 @@ const ListDealerPincodeTabWrapper = () => {
                     <button
                         onClick={() => {
                             showConfirmationDialog({
-                                title: 'Deactive Scheme',
+                                title: 'Deactive Pincode',
                                 text: 'Do you want to Deactive',
                                 showCancelButton: true,
                                 next: (res: any) => {
@@ -95,6 +97,22 @@ const ListDealerPincodeTabWrapper = () => {
                         className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                     >
                         {row.isActive ? 'Deactive' : 'Active'}
+                    </button>
+                    <button
+                        onClick={() => {
+                            showConfirmationDialog({
+                                title: 'Delete Pincode',
+                                text: 'Do you want to Delete',
+                                showCancelButton: true,
+                                next: (res: any) => {
+                                    return res.isConfirmed
+                                        ? handleDeletePincode(row._id)
+                                        : setShowDropdown(false)
+                                },
+                            })
+                        }}
+                        className='block w-full text-left px-4 py-2 hover:bg-gray-100'>
+                        Delete
                     </button>
                 </ActionPopup>
             ),
@@ -116,11 +134,29 @@ const ListDealerPincodeTabWrapper = () => {
 
     const handleDeactive = () => {
         setShowDropdown(false)
-        console.log(currentId, 'currentIdcurrentIdcurrentIdcurrentId')
         deactiveDealerPincode(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Scheme Deactive successfully!')
+                    showToast('success', 'Pincode Deactive successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+
+
+    const handleDeletePincode = (id: string) => {
+        setShowDropdown(false)
+        deleteDealerPincode(id).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Pincode deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
