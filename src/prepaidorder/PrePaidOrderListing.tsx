@@ -38,7 +38,22 @@ const PrePaidOrderListing = () => {
     const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
         orderState
 
-    const { data, isLoading, isFetching } = useGetPrePaidOrderQuery('');
+    const { data, isLoading, isFetching } = useGetPrePaidOrderQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: ['didNo', 'mobileNo'],
+        page: page,
+        filterBy: [
+            {
+                fieldName: 'batchNo',
+                value: filterValue,
+            },
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: true,
+    });
 
     useEffect(() => {
         if (!isFetching && !isLoading) {

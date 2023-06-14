@@ -1,4 +1,4 @@
-// import { PaginationType } from 'src/models/common/paginationType'
+import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
 export const PrePaidOrderApi = apiSlice.injectEndpoints({
@@ -6,9 +6,10 @@ export const PrePaidOrderApi = apiSlice.injectEndpoints({
 
     //***** GET *****/
     getPrePaidOrder: builder.query({
-      query: () => ({
+      query: (body: PaginationType) => ({
         url: '/prepaid-order',
-        method: 'GET',
+        method: 'POST',
+        body
       }),
     }),
 
