@@ -27,6 +27,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
     const params = useParams()
     const Id = params.id
     const navigate = useNavigate()
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
     // Form Initial Values
     const { selectedAttributeGroup }: any = useSelector(
@@ -40,9 +41,10 @@ const EditAttributeGroupWrapper = (props: Props) => {
         data: attributeData,
         isLoading: attrLoading,
         isFetching: attrIsFetching,
-    } = useGetAllAttributesQuery('')
+    } = useGetAllAttributesQuery(userData?.companyId)
 
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    console.log(attributeData)
+
     const [EditAttributeGroups] = useUpdateattributeGroupMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const attributeOptions = selectedAttributeGroup?.attributes?.map(
