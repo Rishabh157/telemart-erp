@@ -4,13 +4,11 @@ import { BiSearchAlt2 } from 'react-icons/bi'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { renderorderStatus } from 'src/utils/renderOrderStatus'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { OrderListResponse } from 'src/models'
-import { useGetOrderQuery } from 'src/services/OrderService'
+import { PrepaidOrderListResponse } from '../models/PrepaidOrder.modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -24,8 +22,9 @@ import {
 } from 'src/redux/slices/orderSlice'
 import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { useGetPrePaidOrderQuery } from 'src/services/PrePaidOrderService'
 
-const OrderListing = () => {
+const PrePaidOrderListing = () => {
     // Hooks
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
@@ -39,22 +38,7 @@ const OrderListing = () => {
     const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
         orderState
 
-    const { data, isLoading, isFetching } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'batchNo',
-                value: filterValue,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    const { data, isLoading, isFetching } = useGetPrePaidOrderQuery('');
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -70,25 +54,25 @@ const OrderListing = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'orderNumber',
-            headerName: 'Order No',
+            field: 'prepaidOrderNumber',
+            headerName: 'Prepaid Order No',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row.orderNumber} </span>
+            renderCell: (row: PrepaidOrderListResponse) => (
+                <span className="text-primary-main "># {row.prepaidOrderNumber} </span>
             ),
         },
         {
             field: 'didNo',
             headerName: 'DID No',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
+            renderCell: (row: PrepaidOrderListResponse) => <span> {row.didNo} </span>,
         },
 
         {
             field: 'mobileNo',
             headerName: 'Mobile No',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: OrderListResponse) => (
+            renderCell: (row: PrepaidOrderListResponse) => (
                 <span> {row.mobileNo} </span>
             ),
         },
@@ -96,7 +80,7 @@ const OrderListing = () => {
             field: 'deliveryCharges',
             headerName: 'Delivery Charges',
             flex: 'flex-[2_2_0%]',
-            renderCell: (row: OrderListResponse) => (
+            renderCell: (row: PrepaidOrderListResponse) => (
                 <span className="text-primary-main ">
                     {' '}
                     {row.deliveryCharges}{' '}
@@ -107,7 +91,7 @@ const OrderListing = () => {
             field: 'discount',
             headerName: 'Discount',
             flex: 'flex-[2_2_0%]',
-            renderCell: (row: OrderListResponse) => (
+            renderCell: (row: PrepaidOrderListResponse) => (
                 <span className="text-primary-main "> {row.discount} </span>
             ),
         },
@@ -115,7 +99,7 @@ const OrderListing = () => {
             field: 'total',
             headerName: 'Total',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: OrderListResponse) => (
+            renderCell: (row: PrepaidOrderListResponse) => (
                 <span className="text-slate-800"> &#8377; {row.total} </span>
             ),
         },
@@ -140,7 +124,7 @@ const OrderListing = () => {
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
-                                    navigate(`/orders/view/${currentId}`)
+                                    navigate(`/prepaidorder/view/${currentId}`)
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
@@ -148,7 +132,7 @@ const OrderListing = () => {
                             </button>
                             <button
                                 onClick={() => {
-                                    navigate(`/orders/${currentId}`)
+                                    navigate(`/prepaidorder/${currentId}`)
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
@@ -197,12 +181,15 @@ const OrderListing = () => {
         // })
     }
 
+
+    console.log('prePaid order ', data);
+
     return (
         <SideNavLayout>
             <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
                 <div className="h-[100px] ">
                     <div className="mb-5 text-2xl text-slate-700 font-bold ">
-                        Orders
+                        Prepaid Order
                     </div>
                     <div className="flex justify-between">
                         <div className="flex gap-2">
@@ -297,4 +284,4 @@ const OrderListing = () => {
     )
 }
 
-export default OrderListing
+export default PrePaidOrderListing

@@ -218,6 +218,8 @@ import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervis
 import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
 import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
 import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
+import PrePaidOrderListing from './prepaidorder/PrePaidOrderListing'
+import PrePaidOrderViewWrapper from './prepaidorder/view/PrePaidOrderViewWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -260,11 +262,13 @@ const PageRoutes = () => {
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
+                    <Route path="/prepaidorder" element={<PrePaidOrderListing />} />
                     <Route
                         path="/orders/view/:id"
                         element={<OrderViewWrapper />}
                     />
                     <Route path="/orders/add-order" element={<AddOrder />} />
+                    <Route path="/prepaidorder/view/:id" element={<PrePaidOrderViewWrapper />} />
                     <Route
                         path="/dealers"
                         element={<DealersListingWrapper />}

@@ -6,7 +6,6 @@ const Auth = () => {
     const accessToken = localStorage.getItem('authToken')
     const navigation = useNavigate()
     const { pathname } = useLocation()
-    console.log(pathname)
     useEffect(() => {
         if (accessToken) {
             navigation('/dashboard')
