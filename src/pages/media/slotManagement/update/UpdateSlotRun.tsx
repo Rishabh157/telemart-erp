@@ -14,7 +14,7 @@ import { CircularProgress } from '@mui/material'
 const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
     //const [switch, setSwitch] = useState<boolean>(false)
     const [imageApiStatus, setImageApiStatus] = useState(false)
-    const [videoApiStatus, setVideoApiStatus] = useState(false)    
+    const [videoApiStatus, setVideoApiStatus] = useState(false)
 
     const { values, setFieldValue } = formikProps
     const [fileUploader] = useFileUploaderMutation()
@@ -79,8 +79,8 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             required
                             name="reasonNotShow"
                             value={values.reasonNotShow}
-                            onChange={(e) => {                               
-                                setFieldValue('reasonNotShow', e)                                
+                            onChange={(e) => {
+                                setFieldValue('reasonNotShow', e)
                             }}
                             options={reasonNotShowOption}
                             label="Reason Not Show"
@@ -89,10 +89,12 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
 
                     {!values.showOk && values.reasonNotShow === '' ? (
                         <>
-                        <p className="text-right -my-4"></p>
-                        <p className="text-left -my-4 text-red-500">Required</p>
+                            <p className="text-right -my-4"></p>
+                            <p className="text-left -my-4 text-red-500">
+                                Required
+                            </p>
                         </>
-                    ): null }
+                    ) : null}
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                     {values.run ? (
@@ -206,9 +208,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                 <button
                     type="button"
                     disabled={apiStatus || imageApiStatus || videoApiStatus}
-                    onClick={() =>                         
-                        formikProps.handleSubmit()                       
-                    }
+                    onClick={() => formikProps.handleSubmit()}
                     className={`bg-primary-main rounded py-1 px-5 item-center text-white border border-primary-main
                     ${
                         apiStatus || imageApiStatus || videoApiStatus
