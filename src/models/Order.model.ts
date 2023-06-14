@@ -2,7 +2,7 @@ export type OrderListResponse = {
     _id: string
     orderNumber: string
     didNo: string
-    batchNo: string
+    // batchNo: string
     inOutBound: string
     incomingCallerNo: string
     mobileNo: string

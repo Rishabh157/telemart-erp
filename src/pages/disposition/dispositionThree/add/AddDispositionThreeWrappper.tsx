@@ -3,7 +3,7 @@ import DispositionLayout from '../../DispositionLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import { array, object, string } from 'yup'
+import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
@@ -23,7 +23,7 @@ export type FormInitialValues = {
     emailType: string
     whatsApp: string
     priority: string
-    applicableCriteria: string[]
+    applicableCriteria: string
     companyId: string
 }
 
@@ -76,7 +76,7 @@ const AddDispositionThreeWrappper = () => {
         emailType: '',
         whatsApp: '',
         priority: '',
-        applicableCriteria: [''],
+        applicableCriteria: '',
         companyId: userData?.companyId || '',
     }
 
@@ -85,7 +85,7 @@ const AddDispositionThreeWrappper = () => {
         dispositionName: string().required('Required'),
         dispositionOneId: string().required('Required'),
         dispositionTwoId: string().required('Required'),
-        applicableCriteria: array().of(string().required('Required')),
+        applicableCriteria: string().required('Required'),
         smsType: string(),
         emailType: string(),
         whatsApp: string(),
@@ -98,7 +98,7 @@ const AddDispositionThreeWrappper = () => {
             dispositionName: values.dispositionName,
             dispositionOneId: values.dispositionOneId,
             dispositionTwoId: values.dispositionTwoId,
-            applicableCriteria: values.applicableCriteria,
+            applicableCriteria: [values.applicableCriteria],
             smsType: values.smsType || null,
             emailType: values.emailType || null,
             whatsApp: values.whatsApp || null,

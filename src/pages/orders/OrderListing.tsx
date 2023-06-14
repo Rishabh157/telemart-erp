@@ -4,7 +4,6 @@ import { BiSearchAlt2 } from 'react-icons/bi'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { renderorderStatus } from 'src/utils/renderOrderStatus'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
@@ -23,7 +22,6 @@ import {
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
 import { useNavigate } from 'react-router-dom'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 const OrderListing = () => {
     // Hooks
@@ -34,22 +32,14 @@ const OrderListing = () => {
     const [selectedRows, setSelectedRows] = useState([])
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-
     const orderState: any = useSelector((state: RootState) => state.order)
-    const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
-        orderState
-
+    const { page, rowsPerPage, searchValue, items, totalItems } = orderState
     const { data, isLoading, isFetching } = useGetOrderQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['didNo', 'mobileNo'],
         page: page,
-        filterBy: [
-            {
-                fieldName: 'batchNo',
-                value: filterValue,
-            },
-        ],
+        filterBy: [],
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,
@@ -92,14 +82,7 @@ const OrderListing = () => {
                 <span> {row.mobileNo} </span>
             ),
         },
-        {
-            field: 'batchNo',
-            headerName: 'Batch Assigned',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: OrderListResponse) => {
-                return renderorderStatus(row.batchNo?.length)
-            },
-        },
+
         {
             field: 'deliveryCharges',
             headerName: 'Delivery Charges',
@@ -162,23 +145,6 @@ const OrderListing = () => {
                             >
                                 Edit
                             </button>
-                            <button
-                                onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Delete Order',
-                                        text: 'Do you want to delete',
-                                        showCancelButton: true,
-                                        next: (res) => {
-                                            return res.isConfirmed
-                                                ? handleDelete()
-                                                : setShowDropdown(false)
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Delete
-                            </button>
                         </div>
                     )}
                 </div>
@@ -186,24 +152,6 @@ const OrderListing = () => {
             align: 'end',
         },
     ]
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        // deleteOrdercurrentId).then((res) => {
-        //     if ('data' in res) {
-        //         if (res?.data?.status) {
-        //             showToast('success', 'Order deleted successfully!')
-        //         } else {
-        //             showToast('error', res?.data?.message)
-        //         }
-        //     } else {
-        //         showToast(
-        //             'error',
-        //             'Something went wrong, Please try again later'
-        //         )
-        //     }
-        // })
-    }
 
     return (
         <SideNavLayout>
