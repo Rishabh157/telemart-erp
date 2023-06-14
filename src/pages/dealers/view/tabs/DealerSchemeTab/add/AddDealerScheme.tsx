@@ -88,7 +88,7 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                                             <ATMSelect
                                                                 name={`details[${index}].schemeId`}
                                                                 value={
-                                                                    schemeId
+                                                                    schemeId || ""
                                                                 }
                                                                 onChange={(
                                                                     e
@@ -112,7 +112,7 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                                             <ATMSelectSearchable
                                                                 name={`details[${index}].pincodes`}
                                                                 value={
-                                                                    pincodes
+                                                                    pincodes || []
                                                                 }
                                                                 onChange={(
                                                                     value
