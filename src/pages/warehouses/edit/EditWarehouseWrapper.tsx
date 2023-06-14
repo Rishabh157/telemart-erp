@@ -256,7 +256,7 @@ const EditWarehouseWrapper = () => {
                     }
                     setApiStatus(false)
                 })
-                setActiveStep(0)
+                //setActiveStep(0)
             }, 1000)
         } else {
             dispatch(setFormSubmitting(false))

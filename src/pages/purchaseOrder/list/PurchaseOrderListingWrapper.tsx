@@ -338,6 +338,8 @@ const PurchaseOrderListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
 
+    //console.log(items)
+
     return (
         <>
             <SideNavLayout>

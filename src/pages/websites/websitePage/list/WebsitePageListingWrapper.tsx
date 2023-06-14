@@ -173,7 +173,11 @@ const WebsitePageListingWrapper = () => {
             }
         })
     }
-    return (
+    return isLoading ? (
+        <div className="w-[100%] h-[100vh] flex justify-center fixed z-1 mt-72">
+            <div className="w-[34px] h-[34px] border border-spacing-8 border-cyan-600 rounded animate-spin "></div>
+        </div>
+    ) : (
         <>
             <WebsitesLayout>
                 <WebsitePageListing

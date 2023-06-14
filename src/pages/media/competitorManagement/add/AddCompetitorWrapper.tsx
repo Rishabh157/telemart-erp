@@ -91,11 +91,12 @@ const AddCompetitorWrapper = (props: Props) => {
         competitorName: string().required('Required'),
         companyName: string().required('Required'),
         productName: string().required('Required'),
-        websiteLink: string().url(),
-        youtubeLink: string().url(),
+        websiteLink: string().url('Invalid URL').required('Required'),
+        youtubeLink: string().url('Invalid URL').required('Required'),
         whatsappNumber: string()
             .min(10, 'Number should be 10 digits')
-            .max(10, 'maximum 10 digit'),
+            .max(10, 'maximum 10 digit')
+            .required('Required'),
         schemePrice: string().required('Required'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),

@@ -17,6 +17,7 @@ type Props = {
     isSubmitting?: boolean
     dateTimeFormat?: string
     labelClass?: string
+    minDate?: any | null
 }
 
 const ATMDatePicker = ({
@@ -30,6 +31,7 @@ const ATMDatePicker = ({
     isSubmitting = true,
     labelClass = 'font-medium',
     dateTimeFormat = 'MM/DD/YYYY',
+    minDate,
 }: Props) => {
     return (
         <div className="relative">
@@ -52,6 +54,7 @@ const ATMDatePicker = ({
                         inputFormat={dateTimeFormat}
                         value={value}
                         onChange={onChange}
+                        minDate={minDate}
                         showDaysOutsideCurrentMonth
                         renderInput={(params) => (
                             <TextField
