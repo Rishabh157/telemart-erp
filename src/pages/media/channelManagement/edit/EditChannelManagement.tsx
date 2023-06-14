@@ -153,13 +153,13 @@ const EditChannelManagement = ({
                                     setFieldValue('channelCategory', value)
                                 }
                             />{' '}
-                            <ATMTextArea
+                            {/* <ATMTextArea
                                 name="address"
                                 value={values.address}
                                 label="Address Name"
                                 placeholder="Address Name"
                                 onChange={(e) => setFieldValue('address', e)}
-                            />
+                            /> */}
                             <ATMTextField
                                 name="contactPerson"
                                 value={values.contactPerson}

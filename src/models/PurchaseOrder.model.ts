@@ -47,6 +47,7 @@ export type UpdatePurchaseOrder = {
         wareHouseId: string
         isEditable: boolean
         purchaseOrder: {
+            id: string
             itemId: string
             rate: number
             quantity: number

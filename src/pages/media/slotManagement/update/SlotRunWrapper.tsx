@@ -92,9 +92,10 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
     }
     const validationSchema = object({
         run: boolean(),
-        runStartTime: string(),
-        runEndTime: string(),
-        runRemark: string(),
+        //reasonNotShow:string().required('Required'),
+        runStartTime: string().required('Required'),
+        runEndTime: string().required('Required'),
+        runRemark: string().required('Required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {

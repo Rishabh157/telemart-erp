@@ -179,6 +179,7 @@ const AddSlotManagement = ({
                             />
                             <ATMTextField
                                 name="channelTrp"
+                                required
                                 value={values.channelTrp}
                                 label="Channel Trp   "
                                 placeholder="Channel Trp "
@@ -207,6 +208,7 @@ const AddSlotManagement = ({
                                     <ATMDatePicker
                                         name={`date`}
                                         value={slotStartDate}
+                                        minDate={new Date()}
                                         label="Slot Start Date"
                                         dateTimeFormat="MM/DD/YY ddd"
                                         onChange={(newValue) =>
@@ -217,6 +219,7 @@ const AddSlotManagement = ({
                                 <div className="flex-[3_3_0%]">
                                     <ATMDatePicker
                                         name={`endDate`}
+                                        minDate={new Date()}
                                         value={slotEndDate}
                                         label="Slot End Date"
                                         dateTimeFormat="MM/DD/YY ddd"

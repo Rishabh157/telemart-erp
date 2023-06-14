@@ -53,7 +53,7 @@ const ProductGroupDetailCard = ({
 
     return (
         <div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-5 py-3 px-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3  gap-5 py-3 px-3">
                 {cardBoxBarcodeList.map(
                     (
                         barcode: ProductBarcodeGroupResponse,
