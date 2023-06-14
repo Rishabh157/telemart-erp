@@ -155,7 +155,7 @@ const SlotManagementListingWrapper = () => {
                         >
                             {row.runStatus === true && row.run === true ? (
                                 <TiTick />
-                            ) : row.runStatus === true && row.run === false ? (
+                            ) : (row.runStatus === true && row.run === false) || (row.runStatus === false && row.run === true)? (
                                 <FaTimes />
                             ) : (
                                 <FaExclamation />

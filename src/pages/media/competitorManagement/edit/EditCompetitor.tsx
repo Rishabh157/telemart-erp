@@ -77,6 +77,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             {/* Field 3 */}
                             <ATMTextField
                                 name="competitorName"
+                                required
                                 value={values.competitorName}
                                 label="Competitor Name"
                                 placeholder="Competitor Name"
@@ -89,6 +90,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             />
                             <ATMTextField
                                 name="companyName"
+                                required
                                 value={values.companyName}
                                 label="Company Name"
                                 placeholder="Company Name"
@@ -98,6 +100,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             />
                             <ATMTextField
                                 name="productName"
+                                required
                                 value={values.productName}
                                 label="Product Name"
                                 placeholder="Product Name"
@@ -107,6 +110,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             />
                             <ATMSelectSearchable
                                 name="channelNameId"
+                                required
                                 value={values.channelNameId}
                                 onChange={(e) =>
                                     setFieldValue('channelNameId', e)
@@ -116,6 +120,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             />
                             <ATMTextField
                                 name="schemePrice"
+                                required
                                 value={values.schemePrice}
                                 label="schemePrice"
                                 placeholder="schemePrice"
@@ -131,6 +136,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             />
                             <ATMTextField
                                 name="whatsappNumber"
+                                required
                                 value={values.whatsappNumber}
                                 label="Whatsapp Number"
                                 placeholder="Whatsapp Number"
@@ -146,6 +152,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             />
                             <ATMTextField
                                 name="websiteLink"
+                                required
                                 value={values.websiteLink}
                                 label="Website Link"
                                 placeholder="Website Link"
@@ -155,6 +162,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             />
                             <ATMTextField
                                 name="youtubeLink"
+                                required
                                 value={values.youtubeLink}
                                 label="Youtube Link"
                                 placeholder="Youtube Link"
@@ -165,6 +173,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             <div className="mt-2">
                                 <ATMTimePicker
+                                    required
                                     name={`startTime`}
                                     value={values.startTime}
                                     label="Start Time"
@@ -175,6 +184,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             </div>
                             <div className="mt-2">
                                 <ATMTimePicker
+                                    required
                                     name={`endTime`}
                                     value={values.endTime}
                                     label="End Time"

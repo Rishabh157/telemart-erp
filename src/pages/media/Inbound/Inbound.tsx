@@ -248,7 +248,7 @@ const Inbound: React.FC<Props> = ({
                         onClick={() => navigate('/media/channel-group')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
-                        Go BAck
+                        Go Back
                     </button>
                 </div>
                 <div className="h-fit w-full flex gap-5">
