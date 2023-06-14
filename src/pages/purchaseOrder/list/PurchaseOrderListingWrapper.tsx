@@ -164,13 +164,13 @@ const PurchaseOrderListingWrapper = () => {
             renderCell: (row: PurchaseOrderListResponse) => {
                 const approvalLength = row?.approval?.length
                 return (
-                    <span>
+                    <span className="z-10">
                         {' '}
                         <Stack direction="row" spacing={1}>
                             {approvalLength === 0 ? (
                                 <button
                                     id="btn"
-                                    className="cursor-pointer"
+                                    className=" overflow-hidden cursor-pointer z-0"
                                     onClick={() => {
                                         showConfirmationDialog({
                                             title: 'Approve level 1',
@@ -227,7 +227,7 @@ const PurchaseOrderListingWrapper = () => {
                                 <button
                                     id="btn"
                                     disabled={approvalLength >= 2}
-                                    className="cursor-pointer "
+                                    className="cursor-pointer"
                                 >
                                     <Chip
                                         label="Approved"

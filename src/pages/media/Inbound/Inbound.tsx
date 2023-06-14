@@ -255,7 +255,7 @@ const Inbound: React.FC<Props> = ({
                     <div className="w-3/5 flex flex-col gap-x-4 gap-y-2 ">
                         <div className="pb-5">
                             <p className="bg-gray-50 p-2 rounded-md text-20 col-span-4 mb-2">
-                                Gerneral information
+                                General information
                             </p>
                             <div className="flex gap-x-4 gap-y-2">
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
