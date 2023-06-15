@@ -58,21 +58,26 @@ const AddBarcodeWrapper = (props: Props) => {
     const onSubmitHandler = async (values: FormInitialValues) => {
         setApiStatus(true)
         const uniqueGrouId = uuidv4()
-        const promises = []
-        for (let i = 0; i < Number(values?.quantity); i++) {
-            promises.push(
-                await addBarcode({
-                    productGroupId: values.productGroup,
-                    barcodeGroupNumber: uniqueGrouId,
-                    lotNumber: values.lotNumber,
-                    companyId: userData?.companyId || '',
-                })
-            )
-        }
-        await Promise.all(promises) // Wait for all promises to complete
-        setApiStatus(false)
-        navigate('/configurations/barcode')
-        showToast('success', 'Barcodes added successfully!')
+
+        await addBarcode({
+            productGroupId: values.productGroup,
+            barcodeGroupNumber: uniqueGrouId,
+            quantity: Number(values?.quantity),
+            lotNumber: values.lotNumber,
+            companyId: userData?.companyId || '',
+        }).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Added successfully!')
+                    navigate('/configurations/barcode')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+            setApiStatus(false)
+        })
     }
     const productGroupOption = allItems?.map((ele: any) => {
         return { label: ele?.groupName, value: ele?._id }
