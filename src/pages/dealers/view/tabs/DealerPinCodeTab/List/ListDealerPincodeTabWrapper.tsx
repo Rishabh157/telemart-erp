@@ -32,7 +32,6 @@ const ListDealerPincodeTabWrapper = () => {
     const { page, rowsPerPage, items, searchValue } = dealerPincodeState
 
     const dispatch = useDispatch<AppDispatch>()
-    const [deactiveDealerPincode] = useDeactiveDealerPincodeMutation()
     const [deleteDealerPincode] = useDeleteDealerPincodeMutation()
 
     const { data, isFetching, isLoading } = useGetDealerPincodeQuery({
@@ -71,23 +70,6 @@ const ListDealerPincodeTabWrapper = () => {
             },
         },
         {
-            field: 'isActive',
-            headerName: 'Status',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: DealersPincodeListResponse) => {
-                return (
-                    <span>
-                        {' '}
-                        {row.isActive ? (
-                            <span className="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
-                        ) : (
-                            <span className="inline-block w-3 h-3 bg-red-500 rounded-full"></span>
-                        )}{' '}
-                    </span>
-                )
-            },
-        },
-        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
@@ -98,23 +80,6 @@ const ListDealerPincodeTabWrapper = () => {
                         setCurrentId(row?._id)
                     }}
                 >
-                    <button
-                        onClick={() => {
-                            showConfirmationDialog({
-                                title: 'Deactive Pincode',
-                                text: 'Do you want to Deactive',
-                                showCancelButton: true,
-                                next: (res: any) => {
-                                    return res.isConfirmed
-                                        ? handleDeactive()
-                                        : setShowDropdown(false)
-                                },
-                            })
-                        }}
-                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                    >
-                        {row.isActive ? 'Deactive' : 'Active'}
-                    </button>
                     <button
                         onClick={() => {
                             showConfirmationDialog({
@@ -148,25 +113,6 @@ const ListDealerPincodeTabWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
-
-    const handleDeactive = () => {
-        setShowDropdown(false)
-        deactiveDealerPincode(currentId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Pincode Deactive successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
-
 
     const handleDeletePincode = (id: string) => {
         setShowDropdown(false)

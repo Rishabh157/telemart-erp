@@ -76,7 +76,7 @@ const ListDealerSchemeTabWrapper = () => {
             flex:'flex-[2_2_0%]',
             renderCell:(row:DealersSchemeListResponse)=>(
                 <Stack direction="row" spacing={1}>
-                {row?.details?.pincodes?.map((ele, index) => {
+                {row?.pincodes?.map((ele, index) => {
                     if (index < 6) {
                         return (
                             <Chip

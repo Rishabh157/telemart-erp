@@ -2,10 +2,7 @@ export type DealersSchemeListResponse = {
     dealerId: string
     schemeId: string
     schemeName: string
-    details:{
-        schemeId:string,
-        pincodes:string[]
-    }
+    pincodes: string[]
     price: string
     companyId: string
     isActive: boolean
