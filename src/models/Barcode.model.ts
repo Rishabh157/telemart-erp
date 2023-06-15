@@ -24,6 +24,7 @@ export type AddBarcode = {
     productGroupId: string
     barcodeGroupNumber: string
     lotNumber: string
+    quantity: number
     companyId: string
 }
 
