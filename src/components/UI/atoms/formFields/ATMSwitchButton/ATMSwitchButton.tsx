@@ -19,7 +19,7 @@ const ATMSwitchButton = ({
     disabled,
 }: Props) => {
     return (
-        <div className="relative">
+        <div className="relative mt-5 ml-1">
             {label && (
                 <label className="text-slate-700 font-medium">
                     {' '}
@@ -28,7 +28,7 @@ const ATMSwitchButton = ({
                 </label>
             )}
 
-            <div className={`${label && 'mt-2'} h-[40px] flex items-center`}>
+            <div className={`${label} h-[40px] flex items-center`}>
                 <button
                     type="button"
                     disabled={disabled}
