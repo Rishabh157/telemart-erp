@@ -19,7 +19,7 @@ const ATMSwitchButton = ({
     disabled,
 }: Props) => {
     return (
-        <div className="relative mt-5 ml-1">
+        <div className="relative mt-4 ml-1">
             {label && (
                 <label className="text-slate-700 font-medium">
                     {' '}
