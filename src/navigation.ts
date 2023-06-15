@@ -10,7 +10,6 @@ import {
     MdOutlineBorderColor,
     MdPermMedia,
     MdWeb,
-    MdPayment,
 } from 'react-icons/md'
 import { GrCompliance, GrNotes } from 'react-icons/gr'
 import { IoCallOutline, IoDocumentTextOutline } from 'react-icons/io5'
@@ -102,11 +101,6 @@ export const navigation: NavItemType[] = [
         label: 'Orders',
         icon: MdOutlineBorderColor,
         path: '/orders',
-    },
-    {
-        label: 'Prepaid Orders',
-        icon: MdPayment,
-        path: '/prepaidorder',
     },
     {
         label: 'Approved Orders',

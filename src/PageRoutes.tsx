@@ -218,8 +218,8 @@ import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervis
 import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
 import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
 import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
-import PrePaidOrderListing from './pages/prepaidorder/PrePaidOrderListing'
-import PrePaidOrderViewWrapper from './pages/prepaidorder/view/PrePaidOrderViewWrapper'
+// import PrePaidOrderListing from './pages/prepaidorder/PrePaidOrderListing'
+// import PrePaidOrderViewWrapper from './pages/prepaidorder/view/PrePaidOrderViewWrapper'
 import ApprovedOrderListing from './pages/approvedorders/ApprovedOrderListing'
 import ApprovedOrderViewWrapper from './pages/approvedorders/view/ApprovedOrderViewWrapper'
 
@@ -265,21 +265,13 @@ const PageRoutes = () => {
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
                     <Route
-                        path="/prepaidorder"
-                        element={<PrePaidOrderListing />}
-                    />
-                    <Route
-                        path="/approved-orders"
-                        element={<ApprovedOrderListing />}
-                    />
-                    <Route
                         path="/orders/view/:id"
                         element={<OrderViewWrapper />}
                     />
                     <Route path="/orders/add-order" element={<AddOrder />} />
                     <Route
-                        path="/prepaidorder/view/:id"
-                        element={<PrePaidOrderViewWrapper />}
+                        path="/approved-orders"
+                        element={<ApprovedOrderListing />}
                     />
                     <Route
                         path="/approved-orders/view/:id"
