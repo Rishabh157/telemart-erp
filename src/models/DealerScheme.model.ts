@@ -2,6 +2,7 @@ export type DealersSchemeListResponse = {
     dealerId: string
     schemeId: string
     schemeName: string
+    pincodes: string[]
     price: string
     companyId: string
     isActive: boolean
@@ -14,7 +15,10 @@ export type DealersSchemeListResponse = {
 
 export type DealersSchemeAdd = {
     dealerId: string
-    schemeId: string[]
+    details: {
+        schemeId: string,
+        pincodes: string[]
+    }[]
     companyId: string
 }
 
