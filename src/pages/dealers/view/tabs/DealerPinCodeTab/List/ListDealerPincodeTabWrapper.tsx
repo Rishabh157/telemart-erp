@@ -11,7 +11,6 @@ import { AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import {
-    useDeactiveDealerPincodeMutation,
     useDeleteDealerPincodeMutation,
     useGetDealerPincodeQuery,
 } from 'src/services/DealerPincodeService'
@@ -23,7 +22,6 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const ListDealerPincodeTabWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
-    const [currentId, setCurrentId] = useState('')
     const params = useParams()
     const dealerId: any = params.dealerId
     const dealerPincodeState: any = useSelector(
@@ -77,7 +75,6 @@ const ListDealerPincodeTabWrapper = () => {
                 <ActionPopup
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
                     }}
                 >
                     <button
