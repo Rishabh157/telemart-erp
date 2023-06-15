@@ -2,29 +2,39 @@ import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
 export const PrePaidOrderApi = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
+    endpoints: (builder) => ({
+        //***** GET *****/
+        getPrePaidOrder: builder.query({
+            providesTags: ['prepaidorder'],
+            query: (body: PaginationType) => ({
+                url: '/prepaid-order',
+                method: 'POST',
+                body,
+            }),
+        }),
 
-    //***** GET *****/
-    getPrePaidOrder: builder.query({
-      query: (body: PaginationType) => ({
-        url: '/prepaid-order',
-        method: 'POST',
-        body
-      }),
+        // **** GET BY ID
+        getPrePaidOrderById: builder.query({
+            providesTags: ['prepaidorder'],
+            query: (id) => ({
+                url: `/prepaid-order/${id}`,
+                method: 'GET',
+            }),
+        }),
+
+        //**** Change Approve Status
+        updatePrePaidOrderStatus: builder.mutation({
+            invalidatesTags: ['prepaidorder'],
+            query: (id: string) => ({
+                url: `/prepaid-order/approved-change/${id}`,
+                method: 'PUT',
+            }),
+        }),
     }),
-
-    // **** GET BY ID
-    getPrePaidOrderById: builder.query({
-      query: (id) => ({
-        url: `/prepaid-order/${id}`,
-        method: 'GET',
-      }),
-    }),
-
-  }),
 })
 
 export const {
-  useGetPrePaidOrderQuery,
-  useGetPrePaidOrderByIdQuery
+    useGetPrePaidOrderQuery,
+    useGetPrePaidOrderByIdQuery,
+    useUpdatePrePaidOrderStatusMutation,
 } = PrePaidOrderApi

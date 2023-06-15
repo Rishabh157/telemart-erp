@@ -6,7 +6,7 @@ import ATMTable, {
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { PrepaidOrderListResponse } from '../models/PrepaidOrder.modal'
+import { PrepaidOrderListResponse } from '../../models/PrepaidOrder.modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -43,15 +43,15 @@ const PrePaidOrderListing = () => {
         page: page,
         filterBy: [
             {
-                fieldName: 'batchNo',
-                value: filterValue,
+                fieldName: 'approved',
+                value: true,
             },
         ],
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
-    });
+    })
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -71,14 +71,18 @@ const PrePaidOrderListing = () => {
             headerName: 'Prepaid Order No',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PrepaidOrderListResponse) => (
-                <span className="text-primary-main "># {row.prepaidOrderNumber} </span>
+                <span className="text-primary-main ">
+                    # {row.prepaidOrderNumber}{' '}
+                </span>
             ),
         },
         {
             field: 'didNo',
             headerName: 'DID No',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: PrepaidOrderListResponse) => <span> {row.didNo} </span>,
+            renderCell: (row: PrepaidOrderListResponse) => (
+                <span> {row.didNo} </span>
+            ),
         },
 
         {
@@ -193,7 +197,7 @@ const PrePaidOrderListing = () => {
         //     }
         // })
     }
-
+    
     return (
         <SideNavLayout>
             <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
