@@ -7,7 +7,6 @@ import { CiBoxes } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
 import {
     MdCallReceived,
-    MdOutlineBatchPrediction,
     MdOutlineBorderColor,
     MdPermMedia,
     MdWeb,
@@ -94,11 +93,11 @@ export const navigation: NavItemType[] = [
         icon: MdCallReceived,
         path: '/inquiry',
     },
-    {
-        label: 'Batch',
-        icon: MdOutlineBatchPrediction,
-        path: '/batch',
-    },
+    // {
+    //     label: 'Batch',
+    //     icon: MdOutlineBatchPrediction,
+    //     path: '/batch',
+    // },
     {
         label: 'Orders',
         icon: MdOutlineBorderColor,

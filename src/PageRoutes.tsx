@@ -206,7 +206,7 @@ import AssetsRequestWrapper from './pages/assets/assetsRequest/list/AssetsReques
 import AssetsAllocationWrapper from './pages/assets/assetsAllocation/list/AssetsAllocationWrapper'
 import AddAssetsAllocationWrapper from './pages/assets/assetsAllocation/add/AddAssetsAllocationWrapper'
 
-import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
+// import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
 import AddInfluencerWrapper from './pages/websites/influencerManagement/add/AddInfluencerWrapper'
 import CallListingWrapper from './pages/call/list/CallListingWrapper'
 import WebsiteTagListingWrapper from './pages/websites/website-tags/list/WebsiteTagListingWrapper'
@@ -994,7 +994,7 @@ const PageRoutes = () => {
                     {/* start call routing */}
                     <Route path="/call" element={<CallListingWrapper />} />
                     {/* end call routing */}
-                    <Route path="batch" element={<BatchListingWrapper />} />
+                    {/* <Route path="batch" element={<BatchListingWrapper />} /> */}
                     <Route
                         path="/all-websites/website-tags"
                         element={<WebsiteTagListingWrapper />}
