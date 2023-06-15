@@ -121,7 +121,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
             .of(
                 object().shape({
                     schemeId: string().required("Please select scheme"),
-                    pincodes: array().min(1, "Please select atleast 1 pincode").required(),
+                    pincodes: array().min(1, "Please select atleast 1 pincode").required("Please select atleast 1 pincode"),
                 })
             )
             .min(1, 'Please select atleast 1 Scheme'),

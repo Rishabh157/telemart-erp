@@ -127,7 +127,7 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                                                 }
                                                                 label="Pincode"
                                                                 isMulti={true}
-                                                                selectClass={"max-h-10 mt-2"}
+                                                                selectClass={" mt-2 max-h-11 select-margin"}
                                                             />
                                                         </div>
 

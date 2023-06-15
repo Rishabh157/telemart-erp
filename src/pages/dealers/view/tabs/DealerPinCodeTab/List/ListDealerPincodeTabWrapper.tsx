@@ -71,6 +71,23 @@ const ListDealerPincodeTabWrapper = () => {
             },
         },
         {
+            field: 'isActive',
+            headerName: 'Status',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: DealersPincodeListResponse) => {
+                return (
+                    <span>
+                        {' '}
+                        {row.isActive ? (
+                            <span className="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
+                        ) : (
+                            <span className="inline-block w-3 h-3 bg-red-500 rounded-full"></span>
+                        )}{' '}
+                    </span>
+                )
+            },
+        },
+        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
