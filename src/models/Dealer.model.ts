@@ -1,6 +1,10 @@
 export type DealersListResponse = {
     firstName: string
     lastName: string
+    creditLimit: number
+    openingBalance: number
+    autoMapping: boolean
+    quantityQuotient: number
     dealerCode: string
     firmName: string
     dealerCategoryId: String
@@ -67,6 +71,10 @@ export type otherDocument = {
 export type AddDealer = {
     firstName: string
     lastName: string
+    creditLimit: number
+    openingBalance: number
+    autoMapping: boolean
+    quantityQuotient: number
     dealerCode: string
     firmName: string
     dealerCategoryId: String
@@ -84,6 +92,10 @@ export type UpdateDealer = {
     body: {
         firstName: string
         lastName: string
+        creditLimit: number
+        openingBalance: number
+        autoMapping: boolean
+        quantityQuotient: number
         dealerCode: string
         firmName: string
         dealerCategoryId: String
