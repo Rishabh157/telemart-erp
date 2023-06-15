@@ -57,7 +57,7 @@ const ATMTable = <T extends {}>({
         >
             {/* Columns */}
             <div
-                className={`flex items-center ${headerClassName} border-b sticky top-0 border-slate-300 bg-slate-50 `}
+                className={`flex items-center ${headerClassName} border-b sticky top-0 border-slate-300 bg-slate-50 z-50`}
             >
                 {/* Checkbox */}
                 {rows.length && isCheckbox ? (
