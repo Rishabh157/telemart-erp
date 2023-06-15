@@ -124,8 +124,8 @@ const ViewDealer = () => {
                 <DealerInfoCard
                     dealerData={{
                         isActive: true,
-                        vendorName: 'Himanshu',
-                        mobile: '8574859685',
+                        vendorName: '',
+                        mobile: '',
                     }}
                     actionIcons={actionIcons}
                 />

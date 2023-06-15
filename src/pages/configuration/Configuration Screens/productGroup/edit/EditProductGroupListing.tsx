@@ -1,5 +1,5 @@
 import React from 'react'
-import { FieldArray, FormikProps } from 'formik'
+import { FormikProps } from 'formik'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -61,8 +61,8 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Form */}
                     <div className="grow pb-9 pt-2 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
-                            {/* Field1 */}
+                        <div className="grid grid-cols-2 gap-4">
+                            {/* Product Group Name  */}
                             <ATMTextField
                                 name="groupName"
                                 value={values.groupName}
@@ -72,61 +72,87 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                                     setFieldValue('groupName', e.target.value)
                                 }
                             />
+                            <ATMTextField
+                                name="dealerSalePrice"
+                                disabled
+                                value={values.dealerSalePrice}
+                                label="Dealer Sale Price"
+                                placeholder="Dealer Sale Price"
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        setFieldValue(
+                                            'dealerSalePrice',
+                                            e.target.value
+                                        )
+                                    }
+                                }}
+                            />
+                        </div>
+                        <div className="grid grid-cols-4 gap-4">
+                            {/* <ATMTextField
+                                name="gst"
+                                value={values.gst}
+                                label="Good Services Taxes"
+                                placeholder="GST Per(%)"
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        setFieldValue('gst', e.target.value)
+                                    }
+                                }}
+                            /> */}
+                            <ATMTextField
+                                name="cgst"
+                                value={values.cgst}
+                                label=" Central GST (%)"
+                                placeholder="CGST (%)"
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        setFieldValue('cgst', e.target.value)
+                                    }
+                                }}
+                            />
+                            <ATMTextField
+                                name="sgst"
+                                value={values.sgst}
+                                label="State GST (%)"
+                                placeholder="SGST (%)"
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        setFieldValue('sgst', e.target.value)
+                                    }
+                                }}
+                            />
+                            <ATMTextField
+                                name="utgst"
+                                value={values.utgst}
+                                label="Union Territory GST (%)"
+                                placeholder="UTGST (%)"
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        setFieldValue('utgst', e.target.value)
+                                    }
+                                }}
+                            />
+                            <ATMTextField
+                                name="igst"
+                                value={values.igst}
+                                label="Integrated GST (%)"
+                                placeholder=" IGST (%)"
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        setFieldValue('igst', e.target.value)
+                                    }
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="py-2 ">
-                <FieldArray name="tax">
-                    {({ push, remove }) => (
-                        <div className="">
-                            {values?.tax?.map((taxes, taxIndex) => {
-                                const { taxPercent } = taxes
-
-                                return (
-                                    <div
-                                        key={taxIndex}
-                                        className={`flex flex-col gap-3 pb-6 px-7 border-slate-300 `}
-                                    >
-                                        <div className="grid grid-cols-4 gap-4 gap-y-5">
-                                            {/* Tax Name */}
-                                            <div className="relative mt-4">
-                                                <label className="text-slate-700 font-medium">
-                                                    {' '}
-                                                    Tax Name{' '}
-                                                </label>
-                                                <div className="mt-2 bg-white border border-slate-400 rounded shadow h-[40px] flex items-center px-2 ">
-                                                    {taxes.taxName}
-                                                </div>
-                                            </div>
-
-                                            {/* Tax Rate */}
-                                            <ATMTextField
-                                                name={`tax[${taxIndex}].taxPercent`}
-                                                value={taxPercent.toString()}
-                                                onChange={(e) => {
-                                                    const newValue =
-                                                        e.target.value
-                                                    if (
-                                                        !isNaN(Number(newValue))
-                                                    ) {
-                                                        setFieldValue(
-                                                            `tax[${taxIndex}].taxPercent`,
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                }}
-                                                label="Tax %"
-                                                placeholder="Tax %"
-                                                className="shadow bg-white rounded"
-                                            />
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    )}
-                </FieldArray>
             </div>
         </div>
     )

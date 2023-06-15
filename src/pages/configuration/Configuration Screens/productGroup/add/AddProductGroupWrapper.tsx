@@ -1,88 +1,66 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
-import { array, number, object, string } from 'yup'
+import {  number, object, string } from 'yup'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import AddProductGroup from './AddProductGroup'
 import { useNavigate } from 'react-router-dom'
 import { useAddProductGroupMutation } from 'src/services/ProductGroupService'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
-import { useGetAllTaxesQuery } from 'src/services/TaxesService'
-import { setAllTaxes } from 'src/redux/slices/TaxesSlice'
-
-type Props = {}
 
 export type FormInitialValues = {
     groupName: string
-    tax: {
-        taxName: string
-        taxPercent: number
-    }[]
+    dealerSalePrice: number
+    gst: number
+    sgst: number
+    cgst: number
+    igst: number
+    utgst: number
 }
 
-const AddProductGroupWrapper = (props: Props) => {
+const AddProductGroupWrapper: React.FC<{}> = () => {
     // Form Initial Values
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const dispatch = useDispatch<AppDispatch>()
-    const [taxStatus, setTaxStatus] = useState(false)
 
     const navigate = useNavigate()
     const [addProductGroup] = useAddProductGroupMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { allTaxes: taxData }: any = useSelector(
-        (state: RootState) => state?.tax
-    )
-
-    const { data, isLoading, isFetching } = useGetAllTaxesQuery(
-        userData?.companyId
-    )
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            setTaxStatus(true)
-            dispatch(setAllTaxes(data?.data))
-        }
-    }, [data, isLoading, isFetching, dispatch])
-
-    const allTaxes = taxData?.map((ele: any) => {
-        return { taxName: ele?.taxName, taxPercent: 0 }
-    })
-
-    // allTaxes?.map((tax: any) => ({
-    //   tax_name: tax,
-    //   tax_rate: 0,
-    // })),
 
     const initialValues: FormInitialValues = {
         groupName: '',
-        tax: allTaxes,
+        dealerSalePrice: 0,
+        gst: 0,
+        sgst: 0,
+        cgst: 0,
+        igst: 0,
+        utgst: 0,
     }
 
     // Form Validation Schema
     const validationSchema = object({
         groupName: string().required('Required'),
-        tax: array().of(
-            object().shape({
-                taxName: string().required('Required'),
-                taxPercent: number()
-                    .typeError('Tax rate should be a number')
-                    .required('Required'),
-            })
-        ),
+        dealerSalePrice: number().required('Required'),
+        gst: number(),
+        sgst: number(),
+        cgst: number(),
+        igst: number(),
+        utgst: number(),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
-        const taxData = values.tax.map((ele) => {
-            return { taxPercent: ele.taxPercent, taxName: ele.taxName }
-        })
-
         setApiStatus(true)
 
         setTimeout(() => {
             addProductGroup({
+                dealerSalePrice: values.dealerSalePrice,
                 groupName: values.groupName,
-                tax: taxData,
+                gst: values.gst,
+                sgst: values.sgst,
+                cgst: values.cgst,
+                igst: values.igst,
+                utgst: values.utgst,
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
@@ -102,22 +80,20 @@ const AddProductGroupWrapper = (props: Props) => {
 
     return (
         <ConfigurationLayout>
-            {taxStatus ? (
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps) => {
-                        return (
-                            <AddProductGroup
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        )
-                    }}
-                </Formik>
-            ) : null}
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmitHandler}
+            >
+                {(formikProps) => {
+                    return (
+                        <AddProductGroup
+                            apiStatus={apiStatus}
+                            formikProps={formikProps}
+                        />
+                    )
+                }}
+            </Formik>
         </ConfigurationLayout>
     )
 }

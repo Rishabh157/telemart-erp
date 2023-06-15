@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router'
+// import { useNavigate, useParams } from 'react-router'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -11,7 +11,9 @@ import {
     setSearchValue,
 } from 'src/redux/slices/DealerLedgerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import AddDealerLedgerModelWrapper from '../add/AddDealerLedgerModelWrapper'
+import { NoteType } from 'src/models/Ledger.model'
 
 type Props = {
     columns: any[]
@@ -19,14 +21,15 @@ type Props = {
 }
 
 const DealerLedgerListing = ({ columns, rows }: Props) => {
-    const params = useParams()
-    const dealerId: any = params.dealerId
+    const [openModel, setOpenModel] = useState<keyof typeof NoteType>(
+        'CREDIT_NOTE_CREATED'
+    )
+    const [isOpenModel, setIsOpenModel] = useState(false)
     const dispatch = useDispatch<AppDispatch>()
     const dealerLedgerState: any = useSelector(
         (state: RootState) => state.dealerLedger
     )
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-    const navigate = useNavigate()
+
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, totalItems } = dealerLedgerState
@@ -36,14 +39,35 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Ledger</ATMPageHeading>
-                <button
-                    onClick={() =>
-                        navigate('/dealers/' + dealerId + '/ledger/add')
-                    }
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add
-                </button>
+                <div className="flex gap-3">
+                    <button
+                        onClick={() => {
+                            setIsOpenModel(true)
+                            setOpenModel(NoteType.DEALER_AMOUNT_CREDITED)
+                        }}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Cr. Amount
+                    </button>
+                    <button
+                        onClick={() => {
+                            setIsOpenModel(true)
+                            setOpenModel(NoteType.CREDIT_NOTE_CREATED)
+                        }}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Cr. Note
+                    </button>
+                    <button
+                        onClick={() => {
+                            setIsOpenModel(true)
+                            setOpenModel(NoteType.DEBIT_NOTE_CREATED)
+                        }}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Db. Note
+                    </button>
+                </div>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
@@ -93,6 +117,17 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
        onClose={()=> setIsFilterOpen(false)}
        />
       )} */}
+
+            <DialogLogBox
+                isOpen={isOpenModel}
+                handleClose={() => setIsOpenModel(false)}
+                Component={
+                    <AddDealerLedgerModelWrapper
+                        addType={openModel}
+                        setIsOpenModel={setIsOpenModel}
+                    />
+                }
+            />
         </div>
     )
 }
