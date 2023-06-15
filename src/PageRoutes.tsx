@@ -218,6 +218,7 @@ import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervis
 import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
 import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
 import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
+import OrderLedgerListing from './pages/orderledger/OrderLedgerListing';
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -260,6 +261,7 @@ const PageRoutes = () => {
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
+                    <Route path="/order-ledger" element={<OrderLedgerListing />} />
                     <Route
                         path="/orders/view/:id"
                         element={<OrderViewWrapper />}
