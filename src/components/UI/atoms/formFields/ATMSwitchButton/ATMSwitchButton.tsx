@@ -7,6 +7,7 @@ type Props = {
     name: string
     value: boolean
     onChange: (value: boolean) => void
+    disabled?: boolean
 }
 
 const ATMSwitchButton = ({
@@ -15,9 +16,10 @@ const ATMSwitchButton = ({
     required = false,
     value,
     onChange,
+    disabled,
 }: Props) => {
     return (
-        <div className="relative">
+        <div className="relative mt-4 ml-1">
             {label && (
                 <label className="text-slate-700 font-medium">
                     {' '}
@@ -26,9 +28,10 @@ const ATMSwitchButton = ({
                 </label>
             )}
 
-            <div className={`${label && 'mt-2'} h-[40px] flex items-center`}>
+            <div className={`${label} h-[40px] flex items-center`}>
                 <button
                     type="button"
+                    disabled={disabled}
                     onClick={() => onChange(!value)}
                     className="flex justify-between min-w-[150px]  rounded bg-slate-200 shadow"
                 >
