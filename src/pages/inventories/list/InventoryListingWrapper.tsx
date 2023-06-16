@@ -35,7 +35,9 @@ const columns: columnTypes[] = [
         field: 'quantity',
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: InventoryListResponse) => <span className="p-1"> {row.count} </span>,
+        renderCell: (row: InventoryListResponse) => (
+            <span className="p-1"> {row.count} </span>
+        ),
     },
     {
         field: 'warehouse',

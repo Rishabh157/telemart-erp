@@ -164,7 +164,6 @@ const AddTapeManagement = ({
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
-                                
                             />
                             <ATMSelectSearchable
                                 name="languageId"
@@ -186,7 +185,7 @@ const AddTapeManagement = ({
                                     setFieldValue('webSiteLink', e.target.value)
                                 }
                             />
-                             <ATMTextField
+                            <ATMTextField
                                 name="youtubeLink"
                                 value={values.youtubeLink}
                                 label="Youtube Link"
@@ -282,9 +281,7 @@ const AddTapeManagement = ({
                                 }
                             />
                         </div>
-                        <div className="grid grid-cols-3 gap-4 ">
-                           
-                        </div>
+                        <div className="grid grid-cols-3 gap-4 "></div>
                         {/*  Phone  */}
                         <div className="px-3 py-8">
                             <div className=" text-lg pb-2 font-medium text-primary-main">
