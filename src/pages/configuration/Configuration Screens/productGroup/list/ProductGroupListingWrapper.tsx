@@ -42,6 +42,46 @@ const ProductGroupListingWrapper = () => {
             },
         },
         {
+            field: 'dealerSalePrice',
+            headerName: 'Dealer Sale Price ',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: ProductGroupListResponse) => {
+                return <span> {row.dealerSalePrice} </span>
+            },
+        },
+         {
+            field: 'sgst',
+            headerName: 'Sate GST',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: ProductGroupListResponse) => {
+                return <span> {row.sgst} </span>
+            },
+        }, {
+            field: 'cgst',
+            headerName: 'Center GST ',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: ProductGroupListResponse) => {
+                return <span> {row.cgst} </span>
+            },
+        },
+        {
+            field: 'igst',
+            headerName: 'Integated GST ',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: ProductGroupListResponse) => {
+                return <span> {row.igst} </span>
+            },
+        },
+        {
+            field: 'utgst',
+            headerName: 'Union Territory ',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: ProductGroupListResponse) => {
+                return <span> {row.utgst} </span>
+            },
+        },
+  
+        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
