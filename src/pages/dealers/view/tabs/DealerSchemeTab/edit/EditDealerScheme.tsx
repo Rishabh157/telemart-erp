@@ -52,7 +52,7 @@ const EditDealerScheme = ({
                             </button>
                         </div>
                     </div>
-                    <div className="grid grid-cols-12 gap-10 items-end ">
+                    <div className="grid grid-cols-12 gap-10 items-end pb-4">
                         {/* Product Name */}
                         <div className="col-span-3">
                             <ATMSelect
