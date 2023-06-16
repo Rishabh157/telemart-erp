@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { HiDotsHorizontal } from 'react-icons/hi'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -66,31 +66,22 @@ const ListWebsiteBlogWrapper = () => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
+                <ActionPopup
+                handleOnAction={() => {
+                    setShowDropdown(!showDropdown)
+                    setCurrentId(row?._id)
+                }}
+            >
+                <>
                     <button
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
+                        onClick={() => {
+                            navigate(`/all-websites/website-blog/${currentId}`)
                         }}
-                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                     >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+                        Edit
                     </button>
-                    {showDropdown && currentId === row?._id && (
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                            <button
-                                onClick={() => {
-                                    navigate(
-                                        `/all-websites/website-blog/${currentId}`
-                                    )
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Edit
-                            </button>
-                            <button
+                    <button
                                 onClick={() => {
                                     navigate(
                                         `/all-websites/website-blog/view/${currentId}`
@@ -116,10 +107,9 @@ const ListWebsiteBlogWrapper = () => {
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Delete
-                            </button>
-                        </div>
-                    )}
-                </div>
+                            </button>                   
+                </>
+            </ActionPopup> 
             ),
             align: 'end',
         },

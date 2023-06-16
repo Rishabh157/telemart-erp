@@ -274,7 +274,7 @@ const Inbound: React.FC<Props> = ({
                                         value={values.generalInformation.didNo}
                                     />
                                 </div>
-                                <div className="flex flex-col gap-1 w-full  -mt-5">
+                                <div className="flex flex-col gap-1 w-full  -mt-6">
                                     <ATMSelectSearchable
                                         name="generalInformation.inOutBound"
                                         labelClass="font-semibold text-sm"
@@ -293,7 +293,7 @@ const Inbound: React.FC<Props> = ({
                                         }
                                     />
                                 </div>
-                                <div className="flex flex-col gap-1 w-full  -mt-4">
+                                <div className="flex flex-col gap-1 w-full  -mt-3">
                                     <ATMTextField
                                         name="generalInformation.incomingCallerNo"
                                         labelClass="font-semibold text-xs"
@@ -455,7 +455,7 @@ const Inbound: React.FC<Props> = ({
                                     />
                                 </div>
 
-                                <div className="flex flex-col gap-1 w-full -mt-4">
+                                <div className="flex flex-col gap-1 w-full -mt-5">
                                     <ATMSelectSearchable
                                         selectClass="mt-1"
                                         options={dropdownOptions.counrtyOptions}
@@ -748,7 +748,7 @@ const Inbound: React.FC<Props> = ({
                                     // className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
-                            <div className="flex flex-col gap-1 w-full  -mt-4">
+                            <div className="flex flex-col gap-1 w-full  -mt-3">
                                 <ATMTextField
                                     name="personalInformation.landmark"
                                     labelClass="font-semibold text-sm"
