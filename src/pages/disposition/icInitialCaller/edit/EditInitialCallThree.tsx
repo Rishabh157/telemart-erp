@@ -36,7 +36,7 @@ const EditInitialCallThree = ({
     const dispatch = useDispatch()
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Intial Call Three',
+            label: 'Initial Call Three',
             path: '/dispositions/initialcall-three',
         },
         {

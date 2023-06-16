@@ -10,11 +10,16 @@ import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
 type Props = {
     formikProps: FormikProps<AddDealerSchemeFormInitialValues>
     schemeOptions: any
-    apiStatus: boolean,
-    pinCodeOptions:SelectOption[]
+    apiStatus: boolean
+    pinCodeOptions: SelectOption[]
 }
 
-const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions }: Props) => {
+const AddDealerScheme = ({
+    formikProps,
+    schemeOptions,
+    apiStatus,
+    pinCodeOptions,
+}: Props) => {
     const [allOptions, setAllOtions] = useState([])
     const [flag, setFlag] = useState(true)
 
@@ -26,18 +31,7 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
     }, [flag, schemeOptions])
 
     const { values, setFieldValue } = formikProps
-    // const options: { label: string; value: string }[] = allOptions
-
-    // const transferListProps = {
-    //     name: 'schemes',
-    //     options,
-    //     right: values.schemes,
-    //     setRight: (newValue: { label: string; value: string }[]) =>
-    //         setFieldValue('schemes', newValue),
-    //     leftSideTitle: 'All Schemes',
-    //     rightSideTitle: 'Schemes to add',
-    // }
-
+    
 
     return (
         <div className="h-[calc(100%-55px)]">
@@ -61,15 +55,6 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                         </div>
                     </div>
 
-                    {/* Form */}
-                    {/* <div className="grow  py-8 px-3 ">
-                        <div className="h-[300px] mt-8">
-                            {options ? (
-                                <ATMTransferList {...transferListProps} />
-                            ) : null}
-                        </div>
-                    </div> */}
-
                     <FieldArray name="details">
                         {({ push, remove }) => {
                             return (
@@ -77,7 +62,7 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                     <div className="flex flex-col gap-y-5 px-3">
                                         {values.details?.map(
                                             (item, index) => {
-                                                const {schemeId,pincodes} = item
+                                                const { schemeId, pincodes } = item
                                                 return (
                                                     <div
                                                         key={index}
@@ -117,9 +102,9 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                                                 onChange={(
                                                                     value
                                                                 ) =>
-                                                               
+
                                                                     setFieldValue(
-                                                                        `details[${index}].pincodes`,value
+                                                                        `details[${index}].pincodes`, value
                                                                     )
                                                                 }
                                                                 options={
@@ -152,8 +137,7 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                                             )}
                                                     </div>
                                                 )
-                                            }
-                                        )}
+                                            })}
                                     </div>
 
                                     {/* BUTTON - Add More Product */}
@@ -163,7 +147,11 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                             onClick={() =>
                                                 push({
                                                     schemeId: '',
-                                                    pincodes: pinCodeOptions?.map((item:any)=>item.label),
+                                                    pincodes:
+                                                        pinCodeOptions?.map(
+                                                            (item: any) =>
+                                                                item.label
+                                                        ),
                                                 })
                                             }
                                             className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "

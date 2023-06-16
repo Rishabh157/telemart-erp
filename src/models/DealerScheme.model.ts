@@ -55,7 +55,7 @@ export type AddDealerSchemeFormInitialValues = {
     companyId: string
     dealerId: string
     details: {
-        schemeId: string,
+        schemeId: string
         pincodes: string[]
     }[]
 }

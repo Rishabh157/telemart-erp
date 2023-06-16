@@ -26,7 +26,7 @@ const ATMRadioButton = ({
     return (
         <div className="relative mt-4  w-full">
             {label && (
-                <label className="text-slate-700 font-medium">
+                <label className="text-slate-700 text-sm font-semibold">
                     {label}
                     {required && <span className="text-red-500"> * </span>}
                 </label>

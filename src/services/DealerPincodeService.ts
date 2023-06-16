@@ -68,5 +68,5 @@ export const {
     useUpdateDealerPincodeMutation,
     useDeactiveDealerPincodeMutation,
     useGetAllPincodeByDealerQuery,
-    useDeleteDealerPincodeMutation
+    useDeleteDealerPincodeMutation,
 } = dealerPincodeApi

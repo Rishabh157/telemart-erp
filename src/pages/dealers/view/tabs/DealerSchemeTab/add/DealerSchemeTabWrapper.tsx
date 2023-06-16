@@ -45,18 +45,21 @@ const DealerPinCodeTabWrapper = (props: Props) => {
             value: ele._id,
         }
     })
-    const { data: pinCodeList, isLoading: pinCodeIsLoading, isFetching: pinCodeIsFetching } = useGetAllPincodeByDealerQuery({
+    const {
+        data: pinCodeList,
+        isLoading: pinCodeIsLoading,
+        isFetching: pinCodeIsFetching,
+    } = useGetAllPincodeByDealerQuery({
         companyId: companyId,
-        dealerId: dealerId
+        dealerId: dealerId,
     })
-
 
     useEffect(() => {
         if (!pinCodeIsLoading && !pinCodeIsFetching) {
             let options = pinCodeList?.data?.map((item: any) => {
                 return {
                     label: item?.pincode,
-                    value: item?.pincode
+                    value: item?.pincode,
                 }
             })
             setPinCodeOptions(options)
@@ -68,9 +71,9 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         dealerId: dealerId,
         details: [
             {
-                schemeId: "",
-                pincodes: pinCodeOptions?.map((item: any) => item?.label)
-            }
+                schemeId: '',
+                pincodes: pinCodeOptions?.map((item: any) => item?.label),
+            },
         ],
     }
 
@@ -78,8 +81,10 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         details: array()
             .of(
                 object().shape({
-                    schemeId: string().required("Please select scheme"),
-                    pincodes: array().min(1, "Please select atleast 1 pincode").required("Please select atleast 1 pincode"),
+                    schemeId: string().required('Please select scheme'),
+                    pincodes: array()
+                        .min(1, 'Please select atleast 1 pincode')
+                        .required('Please select atleast 1 pincode'),
                 })
             )
             .min(1, 'Please select atleast 1 Scheme'),
