@@ -12,8 +12,9 @@ import { useGetDealerLedgerQuery } from 'src/services/DealerLedgerServices'
 import { RootState, AppDispatch } from 'src/redux/store'
 import DealerLedgerListing from './DealerLedgerListing'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { format } from 'date-fns'
 
-const ListLedgerTabWrapper = () => {
+const DealerListLedgerTabWrapper = () => {
     const params = useParams()
     const dealerId: any = params.dealerId
 
@@ -50,19 +51,19 @@ const ListLedgerTabWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'noteType',
-            headerName: 'Note Type',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: LedgerListResponse) => (
-                <span> {row.noteType} </span>
-            ),
-        },
-        {
-            field: 'price',
-            headerName: 'Price',
+            field: 'createdAt',
+            headerName: 'Date',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => {
-                return <span> {row.price} </span>
+                return (
+                    <span>
+                        {' '}
+                        {format(
+                            new Date(row.createdAt),
+                            'yyyy-MM-dd HH:mm'
+                        )}{' '}
+                    </span>
+                )
             },
         },
         {
@@ -72,6 +73,38 @@ const ListLedgerTabWrapper = () => {
             renderCell: (row: LedgerListResponse) => {
                 return <span> {row.remark} </span>
             },
+        },
+        {
+            field: 'creditAmount',
+            headerName: 'Credit Amount',
+            flex: 'flex-[0.8_0.5_0%]',
+            renderCell: (row: LedgerListResponse) => (
+                <span> {row.creditAmount} </span>
+            ),
+        },
+        {
+            field: 'debitAmount',
+            headerName: 'Debit Amount',
+            flex: 'flex-[0.8_0.5_0%]',
+            renderCell: (row: LedgerListResponse) => (
+                <span> {row.debitAmount} </span>
+            ),
+        },
+        {
+            field: 'balance',
+            headerName: 'Balance',
+            flex: 'flex-[0.8_0.5_0%]',
+            renderCell: (row: LedgerListResponse) => (
+                <span> {row.balance} </span>
+            ),
+        },
+        {
+            field: 'noteType',
+            headerName: 'Note Type',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: LedgerListResponse) => (
+                <span> {row.noteType} </span>
+            ),
         },
         {
             field: 'actions',
@@ -110,4 +143,4 @@ const ListLedgerTabWrapper = () => {
     )
 }
 
-export default ListLedgerTabWrapper
+export default DealerListLedgerTabWrapper

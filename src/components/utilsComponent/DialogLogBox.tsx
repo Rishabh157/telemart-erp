@@ -52,9 +52,9 @@ const DialogLogBox: React.FC<DialogLogBoxType> = ({
                     closeButtonPosition
                 )} ${buttonClass}  p-1 px-4 mt-0  flex w-full`}
             >
-                <MdCancel size="40" color="red" />
+                <MdCancel size="30" color="red" className='cursor-pointer' />
             </div>
-            <DialogContent>{Component}</DialogContent>
+            <DialogContent  style={{ margin : '0px' , padding : '0px' }} >{Component}</DialogContent>
         </Dialog>
     )
 }

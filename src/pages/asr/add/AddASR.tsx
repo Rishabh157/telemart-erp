@@ -61,9 +61,8 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main  ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main  ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Add ASR
                             </button>
@@ -94,18 +93,18 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                                             {values.asrDetails
                                                                 ?.length >
                                                                 1 && (
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() =>
-                                                                        remove(
-                                                                            asrIndex
-                                                                        )
-                                                                    }
-                                                                    className="p-1 bg-red-500 text-white rounded"
-                                                                >
-                                                                    <MdDeleteOutline className="text-2xl" />
-                                                                </button>
-                                                            )}
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() =>
+                                                                            remove(
+                                                                                asrIndex
+                                                                            )
+                                                                        }
+                                                                        className="p-1 bg-red-500 text-white rounded"
+                                                                    >
+                                                                        <MdDeleteOutline className="text-2xl" />
+                                                                    </button>
+                                                                )}
                                                         </div>
 
                                                         <div className="grid grid-cols-3 gap-4 gap-y-5">
