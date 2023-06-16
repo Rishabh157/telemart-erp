@@ -158,7 +158,7 @@ const ATMSelectSearchable = ({
             <Select
                 className={twMerge(
                     `border rounded border-slate-400 ${
-                        isMulti ? 'overflow-scroll' : ''
+                        isMulti ? 'overflow-scroll overflow-x-auto' : ''
                     } min-h-fit max-h-24`,
                     `${selectClass}`
                 )}

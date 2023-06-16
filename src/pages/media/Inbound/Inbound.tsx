@@ -812,10 +812,10 @@ const Inbound: React.FC<Props> = ({
                                         )
                                     }}
                                     required
-                                    className="mt-0"
+                                    className="-mt-2"
                                 />
                             </div>
-                            <div className="flex flex-col gap-1 w-full  -mt-4">
+                            <div className="flex flex-col gap-1 w-full -mt-10">
                                 <ATMTextField
                                     name="personalInformation.channel"
                                     labelClass="font-semibold text-sm"
@@ -832,7 +832,7 @@ const Inbound: React.FC<Props> = ({
                                     className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
-                            <div className="flex flex-col gap-1 w-full  -mt-4">
+                            <div className="flex flex-col gap-1 w-full  -mt-10">
                                 <ATMTextField
                                     name="personalInformation.emailId"
                                     labelClass="font-semibold text-sm"
@@ -852,7 +852,7 @@ const Inbound: React.FC<Props> = ({
                                 />
                             </div>
 
-                            <div className="flex flex-col gap-1 w-full  justify-start text-center items-start ">
+                            <div className="flex flex-col gap-1 w-full  justify-start text-center items-start -mt-8">
                                 <ATMCheckbox
                                     name="personalInformation.prepaid"
                                     // labelClass="font-semibold text-sm"
