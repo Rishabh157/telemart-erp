@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { FormikProps, FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import ATMBreadCrumbs, {
@@ -10,6 +10,10 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './AddSaleOrderWrapper'
 import { HiPlus } from 'react-icons/hi'
+import { useDispatch, useSelector } from 'react-redux'
+import { useGetDealersQuery } from 'src/services/DealerServices'
+import { setDealerWarehouse } from 'src/redux/slices/dealerSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -17,6 +21,7 @@ type Props = {
         dealerOptions: SelectOption[]
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
+        productPriceOptions: SelectOption[]
     }
     apiStatus: boolean
 }
@@ -33,9 +38,17 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
-    const { values, setFieldValue } = formikProps
+    const { values, setFieldValue } = formikProps  
 
-    return (
+    console.log(dropdownOptions.productPriceOptions)
+    
+    const dispatch = useDispatch<AppDispatch>()
+    const [dealerId, setDealerId] = useState();
+    const dealerState: any = useSelector((state: RootState) => state.dealer)
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
+    
+        return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
@@ -85,9 +98,11 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                             <ATMSelect
                                 name="dealer"
                                 value={values.dealer}
-                                onChange={(e) =>
+                                onChange={(e) =>{
                                     setFieldValue('dealer', e.target.value)
-                                }
+                                    setDealerId(e.target.value)
+
+                                }}
                                 options={dropdownOptions.dealerOptions}
                                 label="Dealer"
                             />
@@ -156,7 +171,7 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                                             <div className="flex-1">
                                                                 <ATMTextField
                                                                     type="number"
-                                                                    min={0}
+                                                                    disabled={true}                                                                    
                                                                     name={`productSalesOrder[${index}].rate`}
                                                                     value={
                                                                         rate ===

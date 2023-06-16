@@ -4,7 +4,8 @@ import { DealersListResponse } from 'src/models'
 
 export interface DealerSliceStateType {
     items: DealersListResponse[] | []
-    allItems: DealersListResponse[] | []
+    allItems: DealersListResponse[] | [] 
+    dealerWarehouse: DealersListResponse[] | []
     totalItems: number
     selectedItem: DealersListResponse | null
     isTableLoading: boolean
@@ -19,6 +20,7 @@ export interface DealerSliceStateType {
 const initialState: DealerSliceStateType = {
     items: [],
     allItems: [],
+    dealerWarehouse: [],
     totalItems: 0,
     selectedItem: null,
     isTableLoading: false,
@@ -84,6 +86,12 @@ const dealerSlice: any = createSlice({
         setFilterValue: (state, action: PayloadAction<string>) => {
             state.filterValue = action.payload
         },
+        setDealerWarehouse: (
+            state,
+            action: PayloadAction<DealersListResponse[] | []>
+        ) => {
+            state.dealerWarehouse = action.payload
+        },
     },
 })
 
@@ -99,5 +107,6 @@ export const {
     setSelectedItem,
     setAllItems,
     setFilterValue,
+    setDealerWarehouse
 } = dealerSlice.actions
 export default dealerSlice.reducer

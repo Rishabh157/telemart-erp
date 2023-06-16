@@ -15,7 +15,8 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-type Props = {}
+type Props = {    
+}
 
 export type FormInitialValues = {
     soNumber: string
@@ -59,7 +60,7 @@ const AddSaleOrderWrapper = (props: Props) => {
     } = useGetAllProductGroupQuery(userData?.companyId)
     const { allItems: productGroupItems }: any = useSelector(
         (state: RootState) => state?.productGroup
-    )
+    )    
 
     const dealerOptions = allItems?.map((ele: any) => {
         return {
@@ -81,6 +82,15 @@ const AddSaleOrderWrapper = (props: Props) => {
             value: ele._id,
         }
     })
+    
+    const productPriceOptions = productGroupItems?.map((ele: any) => {
+        return {
+            key: ele._id,
+            value: ele.price,
+            
+        }
+    })
+
 
     //Dealer
     useEffect(() => {
@@ -106,6 +116,7 @@ const AddSaleOrderWrapper = (props: Props) => {
         dealerOptions: dealerOptions,
         warehouseOptions: warehouseOptions,
         productGroupOptions: productGroupOptions,
+        productPriceOptions: productPriceOptions,
     }
 
     // Form Initial Values
