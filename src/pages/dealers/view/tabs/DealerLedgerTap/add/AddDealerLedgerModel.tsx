@@ -14,7 +14,7 @@ type Props = {
 const AddDealerLedgerModel = ({ formikProps, apiStatus, addType }: Props) => {
     const { values, setFieldValue } = formikProps
     return (
-        <div className='p-4'>
+        <div className="p-4">
             <div className="flex justify-between items-center border-b border-slate-300 py-2">
                 {/* Form Heading */}
                 <div className="text-xl font-medium">
@@ -23,7 +23,7 @@ const AddDealerLedgerModel = ({ formikProps, apiStatus, addType }: Props) => {
                     )) ||
                         (addType === 'DEBIT_NOTE_CREATED' && (
                             <p> Debit Details </p>
-                        )) || <p> Credit Amount  Details </p>}
+                        )) || <p> Credit Amount Details </p>}
                 </div>
             </div>
             <div className="grow  p-2  border border-slate-600 ">
@@ -43,7 +43,7 @@ const AddDealerLedgerModel = ({ formikProps, apiStatus, addType }: Props) => {
                             }}
                         />
                     </div>
-                    <div hidden={(addType === 'DEBIT_NOTE_CREATED')}>
+                    <div hidden={addType === 'DEBIT_NOTE_CREATED'}>
                         <ATMTextField
                             name="creditAmount"
                             required
