@@ -101,6 +101,6 @@ export const {
     setSelectedDealerId,
     setSelectedItem,
     setAllItems,
-    setDealerWarehouse
+    setDealerWarehouse,
 } = warehouseSlice.actions
 export default warehouseSlice.reducer

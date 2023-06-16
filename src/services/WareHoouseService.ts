@@ -66,17 +66,15 @@ export const wareHouseApi = apiSlice.injectEndpoints({
             }),
         }),
 
-
         // **** GET ALL BY Dealer ID
         getAllWareHouseByDealerId: builder.query({
             providesTags: ['WareHouse'],
-            query: ({companyId, dealerId}) => ({
+            query: ({ companyId, dealerId }) => ({
                 url: `/warehouse/company/${companyId}/dealer/${dealerId}`,
 
                 method: 'GET',
             }),
         }),
-
     }),
 })
 export const {

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { FormikProps, FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import ATMBreadCrumbs, {
@@ -16,13 +16,12 @@ import { useGetAllWareHouseByDealerIdQuery } from 'src/services/WareHoouseServic
 import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: {
         dealerOptions: SelectOption[]
         warehouseOptions: SelectOption[]
-        productGroupOptions: SelectOption[]        
+        productGroupOptions: SelectOption[]
     }
     productPriceOptions: []
     apiStatus: boolean
@@ -39,54 +38,59 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOptions }: Props) => {
-    const { values, setFieldValue } = formikProps  
+const AddSaleOrder = ({
+    formikProps,
+    dropdownOptions,
+    apiStatus,
+    productPriceOptions,
+}: Props) => {
+    const { values, setFieldValue } = formikProps
 
     //console.log(productPriceOptions)
-    
+
     const dispatch = useDispatch<AppDispatch>()
-    const [dealerId, setDealerId] = useState('');   
-    const [productGroup, setProductGroup] = useState('');    
-    const [i, setI] = useState(0);
+    const [dealerId, setDealerId] = useState('')
+    const [productGroup, setProductGroup] = useState('')
+    const [i, setI] = useState(0)
 
-    const dealerWarehouse: any = useSelector((state: RootState) => state.warehouse)    
+    const dealerWarehouse: any = useSelector(
+        (state: RootState) => state.warehouse
+    )
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const companyId = userData?.companyId;
+    const companyId = userData?.companyId
 
-    const {data, isLoading, isFetching} = useGetAllWareHouseByDealerIdQuery({companyId, dealerId});
-
-
-    useEffect(() => {
-        if((dealerId !== '') && (!isLoading && !isFetching)){
-            dispatch(setDealerWarehouse(data?.data))
-        }
-
-    }, [data, isLoading, isFetching, dealerId, dispatch])
-   
-    const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map((ele: any) => {
-        return {
-            label: ele.wareHouseName,
-            value: ele._id,
-        }
+    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery({
+        companyId,
+        dealerId,
     })
 
+    useEffect(() => {
+        if (dealerId !== '' && !isLoading && !isFetching) {
+            dispatch(setDealerWarehouse(data?.data))
+        }
+    }, [data, isLoading, isFetching, dealerId, dispatch])
 
-    useEffect(() => {        
-        const val: any =
-            (productPriceOptions?.find((e) => e['key'] === productGroup))           
-               
-        if (val) {            
-            setFieldValue(
-                `productSalesOrder[${i}].rate`,val['value']
-            ) 
-                  
-        } 
+    const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
+        (ele: any) => {
+            return {
+                label: ele.wareHouseName,
+                value: ele._id,
+            }
+        }
+    )
+
+    useEffect(() => {
+        const val: any = productPriceOptions?.find(
+            (e) => e['key'] === productGroup
+        )
+
+        if (val) {
+            setFieldValue(`productSalesOrder[${i}].rate`, val['value'])
+        }
         //alert( i)
-    },[productGroup])
+    }, [productGroup])
 
-
-    
-        return (
+    return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
@@ -136,10 +140,9 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOpt
                             <ATMSelect
                                 name="dealer"
                                 value={values.dealer}
-                                onChange={(e) =>{
+                                onChange={(e) => {
                                     setFieldValue('dealer', e.target.value)
                                     setDealerId(e.target.value)
-
                                 }}
                                 options={dropdownOptions.dealerOptions}
                                 label="Dealer"
@@ -150,7 +153,10 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOpt
                                 name="dealerWareHouseId"
                                 value={values.dealerWareHouseId}
                                 onChange={(e) =>
-                                    setFieldValue('dealerWareHouseId', e.target.value)
+                                    setFieldValue(
+                                        'dealerWareHouseId',
+                                        e.target.value
+                                    )
                                 }
                                 options={dealerWarehouseOptions}
                                 label="Dealer Warehouse"
@@ -160,7 +166,10 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOpt
                                 name="companyWareHouseId"
                                 value={values.companyWareHouseId}
                                 onChange={(e) =>
-                                    setFieldValue('companyWareHouseId', e.target.value)
+                                    setFieldValue(
+                                        'companyWareHouseId',
+                                        e.target.value
+                                    )
                                 }
                                 options={dropdownOptions.warehouseOptions}
                                 label="Warehouse"
@@ -180,10 +189,10 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOpt
                                     <>
                                         <div className="flex flex-col gap-y-5">
                                             {values.productSalesOrder?.map(
-                                                (item, index) => {                                                    
+                                                (item, index) => {
                                                     const {
                                                         productGroupId,
-                                                        rate,                                                        
+                                                        rate,
                                                         quantity,
                                                     } = item
                                                     return (
@@ -200,19 +209,23 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOpt
                                                                     }
                                                                     onChange={(
                                                                         e
-                                                                    ) =>{
+                                                                    ) => {
                                                                         setFieldValue(
                                                                             `productSalesOrder[${index}].productGroupId`,
                                                                             e
                                                                                 .target
                                                                                 .value
                                                                         )
-                                                                        
+
                                                                         setI(0)
-                                                                        setProductGroup(e.target.value)
-                                                                        setI(index)
-                                                                        
-                                                                        
+                                                                        setProductGroup(
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        )
+                                                                        setI(
+                                                                            index
+                                                                        )
                                                                     }}
                                                                     options={
                                                                         dropdownOptions.productGroupOptions
@@ -225,14 +238,16 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOpt
                                                             <div className="flex-1">
                                                                 <ATMTextField
                                                                     type="number"
-                                                                    disabled={true}                                                                    
+                                                                    disabled={
+                                                                        true
+                                                                    }
                                                                     name={`productSalesOrder[${index}].rate`}
                                                                     value={rate}
                                                                     label="Rate"
-                                                                    placeholder="Rate"  
-                                                                    onChange={(e) => {
-                                                                        
-                                                                    }}                                                                                                                       
+                                                                    placeholder="Rate"
+                                                                    onChange={(
+                                                                        e
+                                                                    ) => {}}
                                                                 />
                                                             </div>
 
@@ -252,13 +267,13 @@ const AddSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOpt
                                                                     placeholder="Quantity"
                                                                     onChange={(
                                                                         e
-                                                                    ) =>{
+                                                                    ) => {
                                                                         setFieldValue(
                                                                             `productSalesOrder[${index}].quantity`,
                                                                             e
                                                                                 .target
                                                                                 .value
-                                                                        )                                                                        
+                                                                        )
                                                                     }}
                                                                 />
                                                             </div>

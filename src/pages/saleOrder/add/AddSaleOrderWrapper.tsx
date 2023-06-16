@@ -15,8 +15,7 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-type Props = {    
-}
+type Props = {}
 
 export type FormInitialValues = {
     soNumber: string
@@ -61,7 +60,7 @@ const AddSaleOrderWrapper = (props: Props) => {
     } = useGetAllProductGroupQuery(userData?.companyId)
     const { allItems: productGroupItems }: any = useSelector(
         (state: RootState) => state?.productGroup
-    )    
+    )
 
     const dealerOptions = allItems?.map((ele: any) => {
         return {
@@ -83,15 +82,13 @@ const AddSaleOrderWrapper = (props: Props) => {
             value: ele._id,
         }
     })
-    
+
     const productPriceOptions: any = productGroupItems?.map((ele: any) => {
         return {
             key: ele._id,
             value: ele.dealerSalePrice,
-            
         }
     })
-
 
     //Dealer
     useEffect(() => {
@@ -116,7 +113,7 @@ const AddSaleOrderWrapper = (props: Props) => {
     const dropdownOptions = {
         dealerOptions: dealerOptions,
         warehouseOptions: warehouseOptions,
-        productGroupOptions: productGroupOptions,       
+        productGroupOptions: productGroupOptions,
     }
 
     // Form Initial Values
@@ -139,7 +136,9 @@ const AddSaleOrderWrapper = (props: Props) => {
     const validationSchema = object({
         soNumber: string().required('Sale order number is required'),
         dealer: string().required('Please select a dealer'),
-        dealerWareHouseId: string().required('Please select a  Dealer Warehouse'),
+        dealerWareHouseId: string().required(
+            'Please select a  Dealer Warehouse'
+        ),
         companyWareHouseId: string().required('Please select a warehouse'),
         productSalesOrder: array().of(
             object().shape({
@@ -164,7 +163,7 @@ const AddSaleOrderWrapper = (props: Props) => {
             addSalesOrder({
                 soNumber: values.soNumber,
                 dealer: values.dealer,
-                dealerWareHouseId: values.dealerWareHouseId,   
+                dealerWareHouseId: values.dealerWareHouseId,
                 companyWareHouseId: values.companyWareHouseId,
                 productSalesOrder: values.productSalesOrder,
                 companyId: userData?.companyId || '',

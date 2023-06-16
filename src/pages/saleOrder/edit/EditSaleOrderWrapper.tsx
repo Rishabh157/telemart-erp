@@ -100,7 +100,6 @@ const EditSaleOrderWrapper = (props: Props) => {
         return {
             key: ele._id,
             value: ele.dealerSalePrice,
-            
         }
     })
 
@@ -134,8 +133,8 @@ const EditSaleOrderWrapper = (props: Props) => {
     const initialValues: FormInitialValues = {
         soNumber: selectedItem?.soNumber || '',
         dealer: selectedItem?.dealer || '',
-        dealerWareHouseId: selectedItem?.dealerWareHouseId || '',        
-        companyWareHouseId:  selectedItem?.companyWareHouseId || '',
+        dealerWareHouseId: selectedItem?.dealerWareHouseId || '',
+        companyWareHouseId: selectedItem?.companyWareHouseId || '',
         productSalesOrder: selectedItem?.productSalesOrder,
         companyId: selectedItem?.companyId || '',
     }
@@ -144,7 +143,9 @@ const EditSaleOrderWrapper = (props: Props) => {
     const validationSchema = object({
         soNumber: string().required('Sale order number is required'),
         dealer: string().required('Please select a dealer'),
-        dealerWareHouseId: string().required('Please select a dealer warehouse'),
+        dealerWareHouseId: string().required(
+            'Please select a dealer warehouse'
+        ),
         companyWareHouseId: string().required('Please select a warehouse'),
         productSalesOrder: object().shape({
             productGroupId: string().required('Please select a product name'),
@@ -173,7 +174,7 @@ const EditSaleOrderWrapper = (props: Props) => {
                 body: {
                     soNumber: values.soNumber,
                     dealer: values.dealer,
-                    dealerWareHouseId: values.dealerWareHouseId,   
+                    dealerWareHouseId: values.dealerWareHouseId,
                     companyWareHouseId: values.companyWareHouseId,
                     productSalesOrder: productSalesOrder,
                     companyId: userData?.companyId || '',

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { FormikProps, FieldArray } from 'formik'
 // import { MdDeleteOutline } from "react-icons/md";
 import ATMBreadCrumbs, {
@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGetAllWareHouseByDealerIdQuery } from 'src/services/WareHoouseService'
 import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -38,7 +37,12 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOptions }: Props) => {
+const EditSaleOrder = ({
+    formikProps,
+    dropdownOptions,
+    apiStatus,
+    productPriceOptions,
+}: Props) => {
     dropdownOptions = {
         ...dropdownOptions,
     }
@@ -48,44 +52,43 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOp
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch<AppDispatch>()
-    const [dealerId, setDealerId] = useState('');   
-    const [productGroup, setProductGroup] = useState('');
-    const [price, setPrice] = useState('');
+    const [dealerId, setDealerId] = useState('')
+    const [productGroup, setProductGroup] = useState('')
+    const [price, setPrice] = useState('')
 
-    const dealerWarehouse: any = useSelector((state: RootState) => state.warehouse)    
+    const dealerWarehouse: any = useSelector(
+        (state: RootState) => state.warehouse
+    )
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const companyId = userData?.companyId;
+    const companyId = userData?.companyId
 
-    const {data, isLoading, isFetching} = useGetAllWareHouseByDealerIdQuery({companyId, dealerId});
-
-
-    useEffect(() => {
-        if((dealerId !== '') && (!isLoading && !isFetching)){
-            dispatch(setDealerWarehouse(data?.data))
-        }
-
-    }, [data, isLoading, isFetching, dealerId, dispatch])
-   
-    const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map((ele: any) => {
-        return {
-            label: ele.wareHouseName,
-            value: ele._id,
-        }
+    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery({
+        companyId,
+        dealerId,
     })
 
+    useEffect(() => {
+        if (dealerId !== '' && !isLoading && !isFetching) {
+            dispatch(setDealerWarehouse(data?.data))
+        }
+    }, [data, isLoading, isFetching, dealerId, dispatch])
 
-    useEffect(() => {        
-        const val =
-            (productPriceOptions?.find((e) => e['key'] === productGroup))                     
-               
-        if (val ) {            
-            setFieldValue(
-                `productSalesOrder.rate`, val['value']
-            )
-           
-        } 
-    },[productGroup])
+    const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
+        (ele: any) => {
+            return {
+                label: ele.wareHouseName,
+                value: ele._id,
+            }
+        }
+    )
 
+    useEffect(() => {
+        const val = productPriceOptions?.find((e) => e['key'] === productGroup)
+
+        if (val) {
+            setFieldValue(`productSalesOrder.rate`, val['value'])
+        }
+    }, [productGroup])
 
     return (
         <div className="">
@@ -137,20 +140,21 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOp
                             <ATMSelectSearchable
                                 name="dealer"
                                 value={values?.dealer}
-                                onChange={(e) => {setFieldValue('dealer', e)
-                                setDealerId(e)}}
+                                onChange={(e) => {
+                                    setFieldValue('dealer', e)
+                                    setDealerId(e)
+                                }}
                                 options={dropdownOptions.dealerOptions}
                                 label="Dealer"
                                 selectLabel="Select Dealer"
                             />
 
-                             {/* Dealer Warehouse */}
-                             <ATMSelectSearchable
+                            {/* Dealer Warehouse */}
+                            <ATMSelectSearchable
                                 name="dealerWareHouseId"
                                 value={values.dealerWareHouseId}
                                 onChange={(e) =>
                                     setFieldValue('dealerWareHouseId', e)
-                                    
                                 }
                                 options={dealerWarehouseOptions}
                                 label="Dealer Warehouse"
@@ -196,7 +200,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOp
                                                                 ?.productGroupId ||
                                                             ''
                                                         }
-                                                        onChange={(e) =>{
+                                                        onChange={(e) => {
                                                             setFieldValue(
                                                                 `productSalesOrder.productGroupId`,
                                                                 e
@@ -249,13 +253,14 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus, productPriceOp
                                                         }
                                                         label="Quantity"
                                                         placeholder="Quantity"
-                                                        onChange={(e) =>{
+                                                        onChange={(e) => {
                                                             setFieldValue(
                                                                 `productSalesOrder.quantity`,
                                                                 e.target.value
                                                             )
                                                             setFieldValue(
-                                                                `productSalesOrder.rate`,price
+                                                                `productSalesOrder.rate`,
+                                                                price
                                                             )
                                                         }}
                                                     />
