@@ -3,9 +3,8 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom'
 
 const ListItemCard = ({ item }: { item: any }) => {
     const navigate = useNavigate()
-    const location = useLocation()
-    console.log(location, 'location')
     const { dealerId } = useParams()
+    const location = useLocation()
     const pathValue = location.pathname.split('/')[3] || 'general-information'
 
     return (
@@ -25,7 +24,6 @@ const ListItemCard = ({ item }: { item: any }) => {
                             : 'bg-slate-300 '
                     } `}
                 >
-                    {' '}
                     {item.dealerName[0].toUpperCase()}{' '}
                 </div>
             </div>

@@ -14,7 +14,7 @@ import DealerLedgerListing from './DealerLedgerListing'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { format } from 'date-fns'
 
-const ListLedgerTabWrapper = () => {
+const DealerListLedgerTabWrapper = () => {
     const params = useParams()
     const dealerId: any = params.dealerId
 
@@ -143,4 +143,4 @@ const ListLedgerTabWrapper = () => {
     )
 }
 
-export default ListLedgerTabWrapper
+export default DealerListLedgerTabWrapper

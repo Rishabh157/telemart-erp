@@ -215,8 +215,8 @@ import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsit
 import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsiteTagsWrapper'
 import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
-import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
 import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
+import DealerListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -311,10 +311,7 @@ const PageRoutes = () => {
                             path="return-to-vendor"
                             element={'Return To Vendor'}
                         />
-                        <Route
-                            path="ledger"
-                            element={<ListLedgerTabWrapper />}
-                        />
+                        <Route path="ledger" element={'ListLedgerTabWrapper'} />
                         <Route
                             path="activities"
                             element={<VendorActivityTabWrapper />}
@@ -379,7 +376,7 @@ const PageRoutes = () => {
                         />
                         <Route
                             path="ledger"
-                            element={<ListLedgerTabWrapper />}
+                            element={<DealerListLedgerTabWrapper />}
                         />
 
                         <Route
