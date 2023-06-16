@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { FormikProps, FieldArray } from 'formik'
-import { FormInitialValues } from './DealerSchemeTabWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
 
 type Props = {
-    formikProps: FormikProps<FormInitialValues>
+    formikProps: FormikProps<AddDealerSchemeFormInitialValues>
     schemeOptions: any
     apiStatus: boolean,
     pinCodeOptions:SelectOption[]
@@ -81,10 +81,10 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                                 return (
                                                     <div
                                                         key={index}
-                                                        className="grid grid-cols-12 gap-10 items-end "
+                                                        className="flex gap-10 items-end  "
                                                     >
                                                         {/* Product Name */}
-                                                        <div className="col-span-3">
+                                                        <div className="flex-[0.75_0.75_0%]">
                                                             <ATMSelect
                                                                 name={`details[${index}].schemeId`}
                                                                 value={
@@ -108,7 +108,7 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                                         </div>
 
                                                         {/* pincodes */}
-                                                        <div className="col-span-8">
+                                                        <div className="flex-[3_3_0%]">
                                                             <ATMSelectSearchable
                                                                 name={`details[${index}].pincodes`}
                                                                 value={
@@ -136,7 +136,7 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                                             .details
                                                             ?.length >
                                                             1 && (
-                                                                <div className='col-span-1'>
+                                                                <div>
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => {
@@ -157,7 +157,7 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                     </div>
 
                                     {/* BUTTON - Add More Product */}
-                                    <div className="flex justify-self-start py-9 px-3">
+                                    <div className="flex justify-end py-9 px-3">
                                         <button
                                             type="button"
                                             onClick={() =>
