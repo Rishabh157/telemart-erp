@@ -61,7 +61,7 @@ const ListDealerPincodeTabWrapper = () => {
 
         {
             field: 'estTime',
-            headerName: 'Estimated Time',
+            headerName: 'Estimated Time (in Min.)',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: DealersPincodeListResponse) => {
                 return <span> {row.estTime} </span>

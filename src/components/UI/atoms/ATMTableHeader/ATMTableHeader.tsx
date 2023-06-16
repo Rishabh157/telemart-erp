@@ -1,6 +1,7 @@
 import React from 'react'
 import { BiFilter, BiSearch } from 'react-icons/bi'
 import { IoReload } from 'react-icons/io5'
+import DateFilterForm from 'src/components/utilsComponent/DateFilterForm'
 
 type Props = {
     rowsPerPage: number
@@ -15,6 +16,9 @@ type Props = {
     onFilterDispatch?: () => void
     onSearch?: (newValue: string) => void
     isRefresh?: boolean
+    isDateFilter?: boolean
+    onSubmitDateHandler?: (values: any) => void
+    IsDaterFilterLoading?: boolean
 }
 
 const ATMTableHeader = ({
@@ -30,11 +34,15 @@ const ATMTableHeader = ({
     onFilterClick = () => {},
     onFilterDispatch = () => {},
     onSearch = () => {},
+    isDateFilter = false,
+    IsDaterFilterLoading=false,
+    onSubmitDateHandler,
+
 }: Props) => {
     return (
-        <div className="p-3 border-b border-slate-300 grid grid-cols-2">
+        <div className="p-3 border-b border-slate-300 grid grid-cols-3">
             {/* Left */}
-            <div className="flex gap-1">
+            <div className="flex gap-1  col-span-2">
                 <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
                     <BiSearch className="text-slate-600 text-xl" />
                     <input
@@ -73,10 +81,18 @@ const ATMTableHeader = ({
                         <IoReload className="text-2xl text-slate-600" />
                     </button>
                 )}
+                {isDateFilter && (
+                    <DateFilterForm
+                        IsDaterFilterLoading={IsDaterFilterLoading as boolean}
+                        onSubmitDateHandler={
+                            onSubmitDateHandler as (values: any) => void
+                        }
+                    />
+                )}
             </div>
 
             {/* Right */}
-            <div className="flex justify-end ">
+            <div className="flex justify-end col-span-1 -mt-2">
                 <div className="flex gap-3 items-center">
                     <div className="text-sm"> Rows per page : </div>
                     <select

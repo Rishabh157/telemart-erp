@@ -360,6 +360,14 @@ const PageRoutes = () => {
                         path="/outward-request"
                         element={<OutwardRequestListingWrapper />}
                     />
+                    <Route
+                        path="dealers/add-warehouse"
+                        element={<AddWarehouseWrapper />}
+                    />
+                    <Route
+                        path="vendors/add-warehouse"
+                        element={<AddWarehouseWrapper />}
+                    />
 
                     <Route path="/dealers/:dealerId" element={<ViewDealer />}>
                         <Route
@@ -374,6 +382,7 @@ const PageRoutes = () => {
                             path="warehouse"
                             element={<DealerWarehouseTabWrapper />}
                         />
+
                         <Route
                             path="ledger"
                             element={<DealerListLedgerTabWrapper />}

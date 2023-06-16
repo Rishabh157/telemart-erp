@@ -103,7 +103,7 @@ const AddDealerPincode = ({
                                                                         estTime?.toString() ||
                                                                         ''
                                                                     }
-                                                                    label="Estimated Time"
+                                                                    label="Estimated Time (in Min.)"
                                                                     placeholder="Estimated Time"
                                                                     onChange={(
                                                                         e

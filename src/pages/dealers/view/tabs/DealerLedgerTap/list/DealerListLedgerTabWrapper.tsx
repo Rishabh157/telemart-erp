@@ -11,21 +11,20 @@ import { useParams } from 'react-router-dom'
 import { useGetDealerLedgerQuery } from 'src/services/DealerLedgerServices'
 import { RootState, AppDispatch } from 'src/redux/store'
 import DealerLedgerListing from './DealerLedgerListing'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { format } from 'date-fns'
 
 const DealerListLedgerTabWrapper = () => {
     const params = useParams()
     const dealerId: any = params.dealerId
-
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
 
     const dealerLedgerState: any = useSelector(
         (state: RootState) => state.dealerLedger
     )
-    const { page, rowsPerPage, items, searchValue } = dealerLedgerState
-
+    const { page, rowsPerPage, items, searchValue, filterBy } =
+        dealerLedgerState
     const dispatch = useDispatch<AppDispatch>()
 
     const { data, isFetching, isLoading } = useGetDealerLedgerQuery({
@@ -43,7 +42,7 @@ const DealerListLedgerTabWrapper = () => {
                 value: companyId,
             },
         ],
-        dateFilter: {},
+        dateFilter: filterBy,
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
@@ -57,11 +56,7 @@ const DealerListLedgerTabWrapper = () => {
             renderCell: (row: LedgerListResponse) => {
                 return (
                     <span>
-                        {' '}
-                        {format(
-                            new Date(row.createdAt),
-                            'yyyy-MM-dd HH:mm'
-                        )}{' '}
+                        {format(new Date(row.createdAt), 'dd/MM/yyyy HH:mm')}
                     </span>
                 )
             },
@@ -106,22 +101,22 @@ const DealerListLedgerTabWrapper = () => {
                 <span> {row.noteType} </span>
             ),
         },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    handleOnAction={() => {
-                        // setShowDropdown(!showDropdown)
-                        // setCurrentId(row?._id)
-                    }}
-                >
-                    <></>
-                </ActionPopup>
-            ),
-            align: 'end',
-        },
+        // {
+        //     field: 'actions',
+        //     headerName: 'Actions',
+        //     flex: 'flex-[0.5_0.5_0%]',
+        //     renderCell: (row: any) => (
+        //         <ActionPopup
+        //             handleOnAction={() => {
+        //                 // setShowDropdown(!showDropdown)
+        //                 // setCurrentId(row?._id)
+        //             }}
+        //         >
+        //             <></>
+        //         </ActionPopup>
+        //     ),
+        //     align: 'end',
+        // },
     ]
 
     useEffect(() => {

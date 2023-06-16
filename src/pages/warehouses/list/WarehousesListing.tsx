@@ -17,9 +17,10 @@ type Props = {
     columns: any[]
     rows: any[]
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
+    AddpathName:string
 }
 
-const WarehouseListing = ({ columns, rows, setShowDropdown }: Props) => {
+const WarehouseListing = ({ columns, rows, setShowDropdown ,AddpathName }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const warehouseState: any = useSelector(
@@ -39,7 +40,7 @@ const WarehouseListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMPageHeading> Warehouse </ATMPageHeading>
                 <button
                     onClick={() =>
-                        navigate('/warehouse/add-warehouse', {
+                        navigate(`${AddpathName}`, {
                             state: { params },
                         })
                     }

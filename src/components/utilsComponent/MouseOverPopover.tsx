@@ -6,11 +6,17 @@ import { BsInfoCircle } from 'react-icons/bs'
 interface MouseOverPopoverProps {
     title: string
     children: React.ReactNode
+    isIcon?: false
+    buttonName?: string
+    isbuttonName?: boolean
 }
 
 const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
     title,
     children,
+    isIcon = false,
+    buttonName = 'name',
+    isbuttonName = false,
 }) => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
 
@@ -32,7 +38,10 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
                 onMouseEnter={handlePopoverOpen}
                 onMouseLeave={handlePopoverClose}
             >
-                <BsInfoCircle color="blue" />
+                {isIcon && <BsInfoCircle color="blue" />}
+                {isbuttonName && (
+                    <div className="text-xs font-bold ">{buttonName}</div>
+                )}
             </Typography>
             <Popover
                 id="mouse-over-popover"
@@ -42,22 +51,22 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
                 open={open}
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
+                    vertical: 'top',
+                    horizontal: 'left',
                 }}
                 transformOrigin={{
-                    vertical: 'bottom',
+                    vertical: 'top',
                     horizontal: 'left',
                 }}
                 onClose={handlePopoverClose}
                 disableRestoreFocus
-                className="w-60"
+                className="w-full p-2"
             >
                 <span
-                    style={{ padding: '1px' }}
-                    className="text-xs font-normal  italic"
+                    style={{ padding: '20px' }}
+                    className="text-xs font-bold "
                 >
-                    Ex. {title}
+                    {title}
                 </span>
                 {children}
             </Popover>
