@@ -51,6 +51,17 @@ export type SwitchButton = {
     offset?: number
 }
 
+export type Checkbox = {
+    name: string
+    label: string
+    checked: boolean
+    type? : 'checkbox'
+    value: string
+    placeholder: string
+    optionAccessKey?:never
+    offset?: number
+}
+
 export type Field<OptionAccessKey> =
     | TextFieldType
     | PasswordFieldType
@@ -58,6 +69,7 @@ export type Field<OptionAccessKey> =
     | FilePickerFieldType
     | NumberFieldType
     | SwitchButton
+    | Checkbox
 
 export type SelectOption = {
     label: string

@@ -83,9 +83,11 @@ const steps = [
             creditLimit: number().required('Credit limit is required'),
             openingBalance: number().required('Opeaning balance is required'),
             autoMapping: boolean(),
-            quantityQuotient: number().required('Firm Name is required'),
-            firstName: string().required('First Name is required'),
-            lastName: string().required('Last Name is required'),
+            quantityQuotient: number().required(
+                'quantity quotient is required'
+            ),
+            firstName: string(),
+            lastName: string(),
             dealerCategory: string().required('Please choose Dealer Category'),
             email: string()
                 .email('Email is inavlid')
@@ -129,22 +131,17 @@ const steps = [
         validationSchema: object({
             contactInformation: array().of(
                 object().shape({
-                    name: string().required('Name is required'),
-                    department: string().required('Department is required'),
-                    designation: string().required('Designation is required'),
-                    email: string()
-                        .email('Email should be valid')
-                        .required('Email is required')
-                        .trim(),
+                    name: string(),
+                    department: string(),
+                    designation: string(),
+                    email: string().email('Email should be valid').trim(),
                     mobileNumber: string()
                         .min(10, 'Number should be 10 digits')
                         .max(10, 'maximum 10 digit')
-                        .matches(regIndiaPhone, 'Invalid Mobile Number')
-                        .required('Mobile number is required'),
+                        .matches(regIndiaPhone, 'Invalid Mobile Number'),
                     landLine: string()
                         .min(10, 'Number should be 10 digits')
-                        .max(10, 'maximum 10 digit')
-                        .required('Landline is required'),
+                        .max(10, 'maximum 10 digit'),
                 })
             ),
         }),

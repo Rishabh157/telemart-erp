@@ -4,7 +4,7 @@ import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddDealerWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
@@ -78,7 +78,6 @@ const StepAddAddress = ({
                                             <ATMTextField
                                                 key={name}
                                                 name={name}
-                                                maxLength={10}
                                                 value={
                                                     name.includes('.')
                                                         ? values[
@@ -120,11 +119,10 @@ const StepAddAddress = ({
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
-
                                     case 'select':
                                         return (
                                             <div className="-mt-2">
-                                                <ATMSelect
+                                                <ATMSelectSearchable
                                                     label={label}
                                                     name={name}
                                                     value={
@@ -140,19 +138,17 @@ const StepAddAddress = ({
                                                               ]
                                                             : values[name]
                                                     }
-                                                    onChange={(e: any) => {
-                                                        setFieldValue(
-                                                            name,
-                                                            e.target.value
-                                                        )
-                                                    }}
                                                     options={
                                                         dropdownOptions[
                                                             field.optionAccessKey ||
                                                                 'counrtyOptions'
                                                         ]
                                                     }
-                                                    isSubmitting={isSubmitting}
+                                                    onChange={(e) => {
+                                                        setFieldValue(name, e)
+                                                    }}
+                                                    // size="small"
+                                                    selectClass="shadow mt-2"
                                                 />
                                             </div>
                                         )

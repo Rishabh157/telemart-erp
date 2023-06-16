@@ -7,7 +7,7 @@ const AccordianAddress = (data: any) => {
             {/* Regd. Address */}
             <div className="border-b border-slate-300 pb-4">
                 <div className="text-primary-main text-lg pb-2 font-medium">
-                    Regd Address
+                    Regd. Address
                 </div>
                 <div className="grid grid-cols-3 gap-4 gap-y-5">
                     <ATMTextField

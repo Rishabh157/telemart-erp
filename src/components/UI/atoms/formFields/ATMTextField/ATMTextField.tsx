@@ -75,10 +75,10 @@ const ATMTextField = ({
                 onBlur={onBlur}
             />
             {type === 'password' ? (
-                <div className="absolute top-8 right-2">
+                <div className="absolute top-9 right-2">
                     {visibility==="text" ? (
                         <AiFillEye
-                            size={22}
+                            size={18}
                             onClick={(e) => {
                                 e.stopPropagation()
                                  setVisibility("password")
@@ -86,7 +86,7 @@ const ATMTextField = ({
                         />
                     ) : (
                         <AiFillEyeInvisible
-                            size={22}
+                            size={18}
                             onClick={(e) => {
                                 e.stopPropagation()
                                  setVisibility("text")

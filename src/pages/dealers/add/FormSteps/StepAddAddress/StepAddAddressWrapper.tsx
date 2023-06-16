@@ -42,7 +42,7 @@ const formFields: {
     >[]
 }[] = [
     {
-        sectionName: 'Regd Address',
+        sectionName: 'Regd. Address',
         fields: [
             {
                 name: 'registrationAddress.phone',
