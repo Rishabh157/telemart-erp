@@ -7,7 +7,6 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -83,7 +82,7 @@ const StepAddDealerDetails = ({
 
                         case 'password':
                             return (
-                                <div className='bg-red-300 relative'>
+                                <div>
                                     <ATMTextField
                                         type="password"
                                         key={name}
@@ -97,9 +96,6 @@ const StepAddDealerDetails = ({
                                         className="shadow bg-white rounded"
                                         isSubmitting={isSubmitting}
                                     />
-                                    <div className='absolute right-0 top-3'>
-                                        <AiFillEye size={22} />
-                                    </div>
                                 </div>
                             )
 

@@ -1,8 +1,9 @@
 import { ErrorMessage } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 // import { BsInfoCircle } from 'react-icons/bs'
 import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 export type ATMTextFieldPropTypes = {
     name: string
@@ -18,6 +19,7 @@ export type ATMTextFieldPropTypes = {
     isInfo?: boolean
     InfoChildren?: React.ReactNode
     InfoTitle?: string
+    isPassWordVisible?: boolean
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
 const ATMTextField = ({
@@ -29,6 +31,7 @@ const ATMTextField = ({
     required,
     onBlur,
     size = 'small',
+    type = 'text',
     isSubmitting = true,
     extraClassField = '',
     disabled = false,
@@ -38,6 +41,7 @@ const ATMTextField = ({
     labelClass = 'font-medium',
     ...rest
 }: ATMTextFieldPropTypes) => {
+    const [visibility, setVisibility] = useState(type)
     return (
         <div className={`relative mt-4 ${extraClassField}`}>
             <div className="flex gap-1">
@@ -56,6 +60,7 @@ const ATMTextField = ({
             </div>
             <input
                 name={name}
+                type={visibility}
                 value={value}
                 disabled={disabled}
                 onChange={(e) => {
@@ -69,6 +74,27 @@ const ATMTextField = ({
                 {...rest}
                 onBlur={onBlur}
             />
+            {type === 'password' ? (
+                <div className="absolute top-8 right-2">
+                    {visibility==="text" ? (
+                        <AiFillEye
+                            size={22}
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                 setVisibility("password")
+                            }}
+                        />
+                    ) : (
+                        <AiFillEyeInvisible
+                            size={22}
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                 setVisibility("text")
+                            }}
+                        />
+                    )}
+                </div>
+            ) : null}
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (

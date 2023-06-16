@@ -34,7 +34,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                             {sectionName}
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4 gap-y-4">
+                        <div className="grid grid-cols-2 gap-4 gap-y-4">
                             {fields?.map((field: FieldType) => {
                                 const {
                                     type = 'text',
@@ -128,7 +128,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
 
                                     case 'file-picker':
                                         return (
-                                            <div className="-mt-2">
+                                            <div className="mt-2">
                                                 <ATMFilePickerWrapper
                                                     name={name}
                                                     key={name}
