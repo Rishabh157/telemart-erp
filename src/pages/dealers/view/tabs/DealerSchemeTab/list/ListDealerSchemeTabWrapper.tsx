@@ -38,7 +38,7 @@ const ListDealerSchemeTabWrapper = () => {
     const { data, isFetching, isLoading } = useGetDealerSchemeQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ["schemeName", "price"],
+        params: ['schemeName', 'price'],
         page: page,
         filterBy: [
             {
@@ -61,7 +61,7 @@ const ListDealerSchemeTabWrapper = () => {
                 <span> {row.schemeName} </span>
             ),
         },
-        
+
         {
             field: 'price',
             headerName: 'Price',
@@ -71,37 +71,37 @@ const ListDealerSchemeTabWrapper = () => {
             },
         },
         {
-            field:"details",
-            headerName:"Available Pincode",
-            flex:'flex-[2_2_0%]',
-            renderCell:(row:DealersSchemeListResponse)=>(
+            field: 'details',
+            headerName: 'Available Pincode',
+            flex: 'flex-[2_2_0%]',
+            renderCell: (row: DealersSchemeListResponse) => (
                 <Stack direction="row" spacing={1}>
-                {row?.pincodes?.map((ele, index) => {
-                    if (index < 6) {
-                        return (
-                            <Chip
-                                label={ele}
-                                color="primary"
-                                variant="outlined"
-                                size="small"
-                            />
-                        )
-                    }
-                    if (index === 10) {
-                        return (
-                            <Chip
-                                label={'...'}
-                                color="primary"
-                                variant="outlined"
-                                size="small"
-                            />
-                        )
-                    } else {
-                        return null
-                    }
-                })}
-            </Stack>
-            )
+                    {row?.pincodes?.map((ele, index) => {
+                        if (index < 6) {
+                            return (
+                                <Chip
+                                    label={ele}
+                                    color="primary"
+                                    variant="outlined"
+                                    size="small"
+                                />
+                            )
+                        }
+                        if (index === 10) {
+                            return (
+                                <Chip
+                                    label={'...'}
+                                    color="primary"
+                                    variant="outlined"
+                                    size="small"
+                                />
+                            )
+                        } else {
+                            return null
+                        }
+                    })}
+                </Stack>
+            ),
         },
         {
             field: 'isActive',

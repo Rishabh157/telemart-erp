@@ -74,9 +74,7 @@ const AssetsLocationWrapper = () => {
                             Delete
                         </button>
                     </>
-                </ActionPopup> 
-
-                
+                </ActionPopup>
             ),
             align: 'end',
         },

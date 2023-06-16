@@ -72,7 +72,9 @@ const AssetsRequestWrapper = () => {
                     <>
                         <button
                             onClick={() => {
-                                navigate(`/assets/assets-management/${currentId}`)
+                                navigate(
+                                    `/assets/assets-management/${currentId}`
+                                )
                             }}
                             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                         >
@@ -96,7 +98,7 @@ const AssetsRequestWrapper = () => {
                             Delete
                         </button>
                     </>
-                </ActionPopup>               
+                </ActionPopup>
             ),
             align: 'end',
         },

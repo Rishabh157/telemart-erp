@@ -67,49 +67,51 @@ const ListWebsiteBlogWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                handleOnAction={() => {
-                    setShowDropdown(!showDropdown)
-                    setCurrentId(row?._id)
-                }}
-            >
-                <>
-                    <button
-                        onClick={() => {
-                            navigate(`/all-websites/website-blog/${currentId}`)
-                        }}
-                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                    >
-                        Edit
-                    </button>
-                    <button
-                                onClick={() => {
-                                    navigate(
-                                        `/all-websites/website-blog/view/${currentId}`
-                                    )
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                View
-                            </button>
-                            <button
-                                onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Delete Blog',
-                                        text: 'Do you want to delete',
-                                        showCancelButton: true,
-                                        next: (res: any) => {
-                                            return res.isConfirmed
-                                                ? handleDelete()
-                                                : setShowDropdown(false)
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Delete
-                            </button>                   
-                </>
-            </ActionPopup> 
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                >
+                    <>
+                        <button
+                            onClick={() => {
+                                navigate(
+                                    `/all-websites/website-blog/${currentId}`
+                                )
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            onClick={() => {
+                                navigate(
+                                    `/all-websites/website-blog/view/${currentId}`
+                                )
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                            View
+                        </button>
+                        <button
+                            onClick={() => {
+                                showConfirmationDialog({
+                                    title: 'Delete Blog',
+                                    text: 'Do you want to delete',
+                                    showCancelButton: true,
+                                    next: (res: any) => {
+                                        return res.isConfirmed
+                                            ? handleDelete()
+                                            : setShowDropdown(false)
+                                    },
+                                })
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                            Delete
+                        </button>
+                    </>
+                </ActionPopup>
             ),
             align: 'end',
         },
