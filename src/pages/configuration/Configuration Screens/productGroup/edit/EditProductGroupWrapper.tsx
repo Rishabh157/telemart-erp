@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
-import {  number, object, string } from 'yup'
+import { number, object, string } from 'yup'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'

@@ -216,6 +216,7 @@ import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsi
 import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
 import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
+import EditDealerSchemeWrapper from './pages/dealers/view/tabs/DealerSchemeTab/edit/EditDealerSchemeWrapper'
 import DealerListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
 
 const PageRoutes = () => {
@@ -390,6 +391,10 @@ const PageRoutes = () => {
                         <Route
                             path="scheme/add"
                             element={<AddDealerSchemeTabWrapper />}
+                        />
+                        <Route
+                            path="scheme/edit/:schemeId"
+                            element={<EditDealerSchemeWrapper />}
                         />
                         <Route
                             path="pincode"

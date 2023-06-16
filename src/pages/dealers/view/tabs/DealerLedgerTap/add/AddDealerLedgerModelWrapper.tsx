@@ -12,7 +12,7 @@ import AddDealerLedgerModel from './AddDealerLedgerModel'
 
 interface PropsType {
     addType: keyof typeof NoteType
-    setIsOpenModel:any
+    setIsOpenModel: any
 }
 
 export type FormInitialValues = {
@@ -24,7 +24,10 @@ export type FormInitialValues = {
     companyId: string
 }
 
-const AddDealerLedgerModelWrapper: React.FC<PropsType> = ({ addType ,setIsOpenModel}) => {
+const AddDealerLedgerModelWrapper: React.FC<PropsType> = ({
+    addType,
+    setIsOpenModel,
+}) => {
     const navigate = useNavigate()
     const params = useParams()
     const dealerId: any = params.dealerId
@@ -49,7 +52,7 @@ const AddDealerLedgerModelWrapper: React.FC<PropsType> = ({ addType ,setIsOpenMo
     })
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
-      console.log('values', values)
+        console.log('values', values)
         setApiStatus(true)
 
         setTimeout(() => {
@@ -63,7 +66,7 @@ const AddDealerLedgerModelWrapper: React.FC<PropsType> = ({ addType ,setIsOpenMo
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                      setIsOpenModel(false)
+                        setIsOpenModel(false)
                         showToast('success', 'Ledger added successfully!')
                         navigate('/dealers/' + dealerId + '/ledger')
                     } else {
