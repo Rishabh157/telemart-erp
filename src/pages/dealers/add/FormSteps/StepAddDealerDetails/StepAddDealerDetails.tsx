@@ -6,6 +6,7 @@ import { DropdownOptions, FieldType } from './StepAddDealerDetailsWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -45,6 +46,36 @@ const StepAddDealerDetails = ({
                                         placeholder={placeholder}
                                         className="shadow bg-white rounded"
                                         isSubmitting={isSubmitting}
+                                    />
+                                </div>
+                            )
+                        case 'number':
+                            return (
+                                <div>
+                                    <ATMTextField
+                                        key={name}
+                                        name={name}
+                                        value={values[name]}
+                                        onChange={(e) => {
+                                            setFieldValue(name, e.target.value)
+                                        }}
+                                        label={label}
+                                        placeholder={placeholder}
+                                        className="shadow bg-white rounded"
+                                        isSubmitting={isSubmitting}
+                                    />
+                                </div>
+                            )
+                        case 'switch-button':
+                            return (
+                                <div>
+                                    <ATMSwitchButton
+                                        name={name}
+                                        value={values[name]}
+                                        label={label}
+                                        onChange={(value: any) => {
+                                            setFieldValue(name, value)
+                                        }}
                                     />
                                 </div>
                             )

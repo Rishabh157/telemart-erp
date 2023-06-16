@@ -35,10 +35,35 @@ const formFields: FieldType[] = [
         label: 'Firm Name',
         placeholder: 'Firm Name',
     },
+
+    {
+        name: 'creditLimit',
+        label: 'Credit Limit',
+        placeholder: 'Credit Limit',
+        type: 'number',
+    },
+    {
+        name: 'openingBalance',
+        label: 'Opeaning Balance',
+        placeholder: 'Opeaning Balance',
+        type: 'number',
+    },
+    {
+        name: 'autoMapping',
+        label: 'Auto Mapping',
+        placeholder: 'Auto Mapping',
+        type: 'switch-button',
+    },
     {
         name: 'firstName',
         label: 'First Name',
         placeholder: 'First Name',
+    },
+    {
+        name: 'quantityQuotient',
+        label: 'Quantity Quotient',
+        placeholder: 'Quantity Quotient',
+        type: 'number',
     },
     {
         name: 'lastName',
