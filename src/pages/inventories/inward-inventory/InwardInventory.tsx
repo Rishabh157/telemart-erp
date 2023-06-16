@@ -141,8 +141,8 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                 )}
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white p-2">
-                <div className="grid grid-cols-4 gap-5 ">
+            <div className="grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat p-2">
+                <div className="grid grid-cols-4 gap-5 px-3">
                     <ATMSelect
                         name=""
                         value={wareHouse}
@@ -203,7 +203,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     />
                 </div>
 
-                <div className="mt-5 py-3 grid grid-cols-6 gap-4 border-t border-slate-300 ">
+                <div className="mt-5 py-3 grid grid-cols-6 gap-4  ">
                     {filterBarcode?.map((barcode, index) => {
                         return (
                             <div

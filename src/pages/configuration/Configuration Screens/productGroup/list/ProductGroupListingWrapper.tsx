@@ -49,14 +49,15 @@ const ProductGroupListingWrapper = () => {
                 return <span> {row.dealerSalePrice} </span>
             },
         },
-         {
+        {
             field: 'sgst',
             headerName: 'Sate GST',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.sgst} </span>
             },
-        }, {
+        },
+        {
             field: 'cgst',
             headerName: 'Center GST ',
             flex: 'flex-[1.5_1.5_0%]',
@@ -80,7 +81,7 @@ const ProductGroupListingWrapper = () => {
                 return <span> {row.utgst} </span>
             },
         },
-  
+
         {
             field: 'actions',
             headerName: 'Actions',

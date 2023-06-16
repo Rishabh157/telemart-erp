@@ -255,7 +255,7 @@ const Inbound: React.FC<Props> = ({
                     <div className="w-3/5 flex flex-col gap-x-4 gap-y-2 ">
                         <div className="pb-5">
                             <p className="bg-gray-50 p-2 rounded-md text-20 col-span-4 mb-2">
-                                Gerneral information
+                                General information
                             </p>
                             <div className="flex gap-x-4 gap-y-2">
                                 <div className="flex flex-col gap-1 w-full  -mt-4">
@@ -274,7 +274,7 @@ const Inbound: React.FC<Props> = ({
                                         value={values.generalInformation.didNo}
                                     />
                                 </div>
-                                <div className="flex flex-col gap-1 w-full  -mt-5">
+                                <div className="flex flex-col gap-1 w-full  -mt-6">
                                     <ATMSelectSearchable
                                         name="generalInformation.inOutBound"
                                         labelClass="font-semibold text-sm"
@@ -293,7 +293,7 @@ const Inbound: React.FC<Props> = ({
                                         }
                                     />
                                 </div>
-                                <div className="flex flex-col gap-1 w-full  -mt-4">
+                                <div className="flex flex-col gap-1 w-full  -mt-3">
                                     <ATMTextField
                                         name="generalInformation.incomingCallerNo"
                                         labelClass="font-semibold text-xs"
@@ -455,7 +455,7 @@ const Inbound: React.FC<Props> = ({
                                     />
                                 </div>
 
-                                <div className="flex flex-col gap-1 w-full -mt-4">
+                                <div className="flex flex-col gap-1 w-full -mt-5">
                                     <ATMSelectSearchable
                                         selectClass="mt-1"
                                         options={dropdownOptions.counrtyOptions}
@@ -748,7 +748,7 @@ const Inbound: React.FC<Props> = ({
                                     // className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
-                            <div className="flex flex-col gap-1 w-full  -mt-4">
+                            <div className="flex flex-col gap-1 w-full  -mt-3">
                                 <ATMTextField
                                     name="personalInformation.landmark"
                                     labelClass="font-semibold text-sm"
@@ -812,10 +812,10 @@ const Inbound: React.FC<Props> = ({
                                         )
                                     }}
                                     required
-                                    className="mt-0"
+                                    className="-mt-2"
                                 />
                             </div>
-                            <div className="flex flex-col gap-1 w-full  -mt-4">
+                            <div className="flex flex-col gap-1 w-full -mt-10">
                                 <ATMTextField
                                     name="personalInformation.channel"
                                     labelClass="font-semibold text-sm"
@@ -832,7 +832,7 @@ const Inbound: React.FC<Props> = ({
                                     className="mt-1  shadow bg-white rounded"
                                 />
                             </div>
-                            <div className="flex flex-col gap-1 w-full  -mt-4">
+                            <div className="flex flex-col gap-1 w-full  -mt-10">
                                 <ATMTextField
                                     name="personalInformation.emailId"
                                     labelClass="font-semibold text-sm"
@@ -852,7 +852,7 @@ const Inbound: React.FC<Props> = ({
                                 />
                             </div>
 
-                            <div className="flex flex-col gap-1 w-full  justify-start text-center items-start ">
+                            <div className="flex flex-col gap-1 w-full  justify-start text-center items-start -mt-8">
                                 <ATMCheckbox
                                     name="personalInformation.prepaid"
                                     // labelClass="font-semibold text-sm"

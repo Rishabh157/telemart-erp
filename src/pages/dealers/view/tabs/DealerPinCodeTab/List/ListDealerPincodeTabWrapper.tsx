@@ -85,12 +85,16 @@ const ListDealerPincodeTabWrapper = () => {
                                 showCancelButton: true,
                                 next: (res: any) => {
                                     return res.isConfirmed
-                                        ? handleDeletePincode(row._id)
+                                        ? handleDeletePincode(
+                                              row._id,
+                                              row.pincode
+                                          )
                                         : setShowDropdown(false)
                                 },
                             })
                         }}
-                        className='block w-full text-left px-4 py-2 hover:bg-gray-100'>
+                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                    >
                         Delete
                     </button>
                 </ActionPopup>
@@ -111,9 +115,9 @@ const ListDealerPincodeTabWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
 
-    const handleDeletePincode = (id: string) => {
+    const handleDeletePincode = (id: string, pincode: string) => {
         setShowDropdown(false)
-        deleteDealerPincode(id).then((res: any) => {
+        deleteDealerPincode({ id, pincode }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Pincode deleted successfully!')

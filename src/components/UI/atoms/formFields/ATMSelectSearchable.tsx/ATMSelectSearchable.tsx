@@ -135,9 +135,9 @@ const ATMSelectSearchable = ({
             let selectedValues: SelectOption[] = []
             let FindSelectedValue: string[] = [...(value as string[])]
             FindSelectedValue?.map((selecttedValue: string) => {
-                const singleValueFind = selectOptions?.filter(
+                const singleValueFind = (selectOptions?.filter(
                     (option) => option.value === selecttedValue
-                )
+                 )) || []
                 selectedValues = [...selectedValues, ...singleValueFind]
                 return selectedValues
             })
@@ -156,8 +156,12 @@ const ATMSelectSearchable = ({
             )}
 
             <Select
-                className={twMerge(`border rounded border-slate-400 ${isMulti ? 'overflow-scroll' : ''
-                    } min-h-fit max-h-24`, `${selectClass}`)}
+                className={twMerge(
+                    `border rounded border-slate-400 ${
+                        isMulti ? 'overflow-scroll overflow-x-auto' : ''
+                    } min-h-fit max-h-24`,
+                    `${selectClass}`
+                )}
                 name={name}
                 defaultValue={selectOptions?.find(
                     (option) => option.value === defaultValue
@@ -174,7 +178,7 @@ const ATMSelectSearchable = ({
                 isOptionDisabled={(options) => (options.value as string) === ''}
                 placeholder={`${selectLabel}`}
                 menuPosition="fixed"
-            // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
+                // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
             />
 
             {name && isSubmitting && (
