@@ -135,9 +135,10 @@ const ATMSelectSearchable = ({
             let selectedValues: SelectOption[] = []
             let FindSelectedValue: string[] = [...(value as string[])]
             FindSelectedValue?.map((selecttedValue: string) => {
-                const singleValueFind = (selectOptions?.filter(
-                    (option) => option.value === selecttedValue
-                 )) || []
+                const singleValueFind =
+                    selectOptions?.filter(
+                        (option) => option.value === selecttedValue
+                    ) || []
                 selectedValues = [...selectedValues, ...singleValueFind]
                 return selectedValues
             })

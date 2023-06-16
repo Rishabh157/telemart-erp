@@ -17,10 +17,15 @@ type Props = {
     columns: any[]
     rows: any[]
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
-    AddpathName:string
+    AddpathName: string
 }
 
-const WarehouseListing = ({ columns, rows, setShowDropdown ,AddpathName }: Props) => {
+const WarehouseListing = ({
+    columns,
+    rows,
+    setShowDropdown,
+    AddpathName,
+}: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const warehouseState: any = useSelector(

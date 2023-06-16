@@ -86,12 +86,8 @@ const dealerLedgerSlice: any = createSlice({
             state.alldealerLedger = action.payload
         },
 
-        setFilterBy: (
-            state,
-            action: PayloadAction<[]>
-        ) => {
+        setFilterBy: (state, action: PayloadAction<[]>) => {
             state.filterBy = action.payload
-
         },
     },
 })
@@ -108,6 +104,6 @@ export const {
     setSelectedDealerId,
     setSelectedItem,
     setAllDealerLedger,
-    setFilterBy
+    setFilterBy,
 } = dealerLedgerSlice.actions
 export default dealerLedgerSlice.reducer

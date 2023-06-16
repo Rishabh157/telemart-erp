@@ -35,9 +35,8 @@ const ATMTableHeader = ({
     onFilterDispatch = () => {},
     onSearch = () => {},
     isDateFilter = false,
-    IsDaterFilterLoading=false,
+    IsDaterFilterLoading = false,
     onSubmitDateHandler,
-
 }: Props) => {
     return (
         <div className="p-3 border-b border-slate-300 grid grid-cols-3">

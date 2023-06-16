@@ -190,7 +190,7 @@ const DealersListingWrapper = () => {
                         columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
-                        AddpathName='/warehouse/add-warehouse'
+                        AddpathName="/warehouse/add-warehouse"
                     />
                 </div>
             </SideNavLayout>
