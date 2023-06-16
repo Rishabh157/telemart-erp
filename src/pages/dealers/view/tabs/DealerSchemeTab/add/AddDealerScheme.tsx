@@ -10,11 +10,16 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     schemeOptions: any
-    apiStatus: boolean,
-    pinCodeOptions:SelectOption[]
+    apiStatus: boolean
+    pinCodeOptions: SelectOption[]
 }
 
-const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions }: Props) => {
+const AddDealerScheme = ({
+    formikProps,
+    schemeOptions,
+    apiStatus,
+    pinCodeOptions,
+}: Props) => {
     const [allOptions, setAllOtions] = useState([])
     const [flag, setFlag] = useState(true)
 
@@ -38,7 +43,6 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
     //     rightSideTitle: 'Schemes to add',
     // }
 
-
     return (
         <div className="h-[calc(100%-55px)]">
             <div className="p-4 flex flex-col gap-2  ">
@@ -53,8 +57,9 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()} //handleSubmit
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
-                                    }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                    true ? 'disabled:opacity-25' : ''
+                                }`}
                             >
                                 Add Scheme
                             </button>
@@ -75,85 +80,76 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                             return (
                                 <>
                                     <div className="flex flex-col gap-y-5 px-3">
-                                        {values.details?.map(
-                                            (item, index) => {
-                                                const {schemeId,pincodes} = item
-                                                return (
-                                                    <div
-                                                        key={index}
-                                                        className="grid grid-cols-12 gap-10 items-end "
-                                                    >
-                                                        {/* Product Name */}
-                                                        <div className="col-span-3">
-                                                            <ATMSelect
-                                                                name={`details[${index}].schemeId`}
-                                                                value={
-                                                                    schemeId || ""
-                                                                }
-                                                                onChange={(
-                                                                    e
-                                                                ) =>
-                                                                    setFieldValue(
-                                                                        `details[${index}].schemeId`,
-                                                                        e
-                                                                            .target
-                                                                            .value
-                                                                    )
-                                                                }
-                                                                options={
-                                                                    allOptions
-                                                                }
-                                                                label="Scheme"
-                                                            />
-                                                        </div>
-
-                                                        {/* pincodes */}
-                                                        <div className="col-span-8">
-                                                            <ATMSelectSearchable
-                                                                name={`details[${index}].pincodes`}
-                                                                value={
-                                                                    pincodes || []
-                                                                }
-                                                                onChange={(
-                                                                    value
-                                                                ) =>
-                                                               
-                                                                    setFieldValue(
-                                                                        `details[${index}].pincodes`,value
-                                                                    )
-                                                                }
-                                                                options={
-                                                                    pinCodeOptions
-                                                                }
-                                                                label="Pincode"
-                                                                isMulti={true}
-                                                                selectClass={" mt-2 max-h-11 select-margin"}
-                                                            />
-                                                        </div>
-
-                                                        {/* BUTTON - Delete */}
-                                                        {values
-                                                            .details
-                                                            ?.length >
-                                                            1 && (
-                                                                <div className='col-span-1'>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                index
-                                                                            )
-                                                                        }}
-                                                                        className="p-2 bg-red-500 text-white rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                </div>
-                                                            )}
+                                        {values.details?.map((item, index) => {
+                                            const { schemeId, pincodes } = item
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className="grid grid-cols-12 gap-10 items-end "
+                                                >
+                                                    {/* Product Name */}
+                                                    <div className="col-span-3">
+                                                        <ATMSelect
+                                                            name={`details[${index}].schemeId`}
+                                                            value={
+                                                                schemeId || ''
+                                                            }
+                                                            onChange={(e) =>
+                                                                setFieldValue(
+                                                                    `details[${index}].schemeId`,
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            }
+                                                            options={allOptions}
+                                                            label="Scheme"
+                                                        />
                                                     </div>
-                                                )
-                                            }
-                                        )}
+
+                                                    {/* pincodes */}
+                                                    <div className="col-span-8">
+                                                        <ATMSelectSearchable
+                                                            name={`details[${index}].pincodes`}
+                                                            value={
+                                                                pincodes || []
+                                                            }
+                                                            onChange={(value) =>
+                                                                setFieldValue(
+                                                                    `details[${index}].pincodes`,
+                                                                    value
+                                                                )
+                                                            }
+                                                            options={
+                                                                pinCodeOptions
+                                                            }
+                                                            label="Pincode"
+                                                            isMulti={true}
+                                                            selectClass={
+                                                                ' mt-2 max-h-11 select-margin'
+                                                            }
+                                                        />
+                                                    </div>
+
+                                                    {/* BUTTON - Delete */}
+                                                    {values.details?.length >
+                                                        1 && (
+                                                        <div className="col-span-1">
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => {
+                                                                    remove(
+                                                                        index
+                                                                    )
+                                                                }}
+                                                                className="p-2 bg-red-500 text-white rounded"
+                                                            >
+                                                                <MdDeleteOutline className="text-2xl" />
+                                                            </button>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
                                     </div>
 
                                     {/* BUTTON - Add More Product */}
@@ -163,7 +159,11 @@ const AddDealerScheme = ({ formikProps, schemeOptions, apiStatus,pinCodeOptions 
                                             onClick={() =>
                                                 push({
                                                     schemeId: '',
-                                                    pincodes: pinCodeOptions?.map((item:any)=>item.label),
+                                                    pincodes:
+                                                        pinCodeOptions?.map(
+                                                            (item: any) =>
+                                                                item.label
+                                                        ),
                                                 })
                                             }
                                             className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "

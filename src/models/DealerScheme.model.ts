@@ -16,7 +16,7 @@ export type DealersSchemeListResponse = {
 export type DealersSchemeAdd = {
     dealerId: string
     details: {
-        schemeId: string,
+        schemeId: string
         pincodes: string[]
     }[]
     companyId: string

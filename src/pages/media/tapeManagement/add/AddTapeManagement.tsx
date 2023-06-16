@@ -152,7 +152,7 @@ const AddTapeManagement = ({
                             />
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4 ">
+                        <div className="grid grid-cols-4 gap-4 ">
                             <ATMSelectSearchable
                                 name="artistId"
                                 required
@@ -183,6 +183,15 @@ const AddTapeManagement = ({
                                 placeholder="Website Link"
                                 onChange={(e) =>
                                     setFieldValue('webSiteLink', e.target.value)
+                                }
+                            />
+                            <ATMTextField
+                                name="youtubeLink"
+                                value={values.youtubeLink}
+                                label="Youtube Link"
+                                placeholder="Youtube Link"
+                                onChange={(e) =>
+                                    setFieldValue('youtubeLink', e.target.value)
                                 }
                             />
                         </div>
@@ -272,17 +281,7 @@ const AddTapeManagement = ({
                                 }
                             />
                         </div>
-                        <div className="grid grid-cols-3 gap-4 ">
-                            <ATMTextField
-                                name="youtubeLink"
-                                value={values.youtubeLink}
-                                label="Youtube Link"
-                                placeholder="Youtube Link"
-                                onChange={(e) =>
-                                    setFieldValue('youtubeLink', e.target.value)
-                                }
-                            />
-                        </div>
+                        <div className="grid grid-cols-3 gap-4 "></div>
                         {/*  Phone  */}
                         <div className="px-3 py-8">
                             <div className=" text-lg pb-2 font-medium text-primary-main">

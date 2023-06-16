@@ -98,7 +98,6 @@ export const pincodeApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
-        
     }),
 })
 export const {
@@ -111,5 +110,4 @@ export const {
     useGetAllPincodeQuery,
     useGetAllPincodeByDistrictQuery,
     useGetAllPincodeUnauthQuery,
-
 } = pincodeApi
