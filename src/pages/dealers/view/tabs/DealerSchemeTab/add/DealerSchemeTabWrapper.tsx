@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { array, object, string } from 'yup'
@@ -35,10 +36,14 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         companyId: userData?.companyId,
         dealerId,
     })
-
+    useEffect(() => {
+        return () => {
+            dispatch(setAllDealerSchemes([]))
+        }
+    }, [])
     useEffect(() => {
         dispatch(setAllDealerSchemes(schemeData?.data))
-    }, [schemeData, schemeIsLoading, schemeIsFetching, dispatch])
+    }, [schemeData, schemeIsLoading, schemeIsFetching, dispatch, dealerId])
 
     const { allItems: schemeItems }: any = useSelector(
         (state: RootState) => state?.scheme
