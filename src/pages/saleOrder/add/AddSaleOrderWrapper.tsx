@@ -21,7 +21,8 @@ type Props = {
 export type FormInitialValues = {
     soNumber: string
     dealer: string
-    wareHouse: string
+    dealerWareHouseId: string
+    companyWareHouseId: string
     companyId: string
     productSalesOrder: {
         productGroupId: string
@@ -83,10 +84,10 @@ const AddSaleOrderWrapper = (props: Props) => {
         }
     })
     
-    const productPriceOptions = productGroupItems?.map((ele: any) => {
+    const productPriceOptions: any = productGroupItems?.map((ele: any) => {
         return {
             key: ele._id,
-            value: ele.price,
+            value: ele.dealerSalePrice,
             
         }
     })
@@ -115,15 +116,15 @@ const AddSaleOrderWrapper = (props: Props) => {
     const dropdownOptions = {
         dealerOptions: dealerOptions,
         warehouseOptions: warehouseOptions,
-        productGroupOptions: productGroupOptions,
-        productPriceOptions: productPriceOptions,
+        productGroupOptions: productGroupOptions,       
     }
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
         soNumber: '',
         dealer: '',
-        wareHouse: '',
+        dealerWareHouseId: '',
+        companyWareHouseId: '',
         productSalesOrder: [
             {
                 productGroupId: '',
@@ -138,7 +139,8 @@ const AddSaleOrderWrapper = (props: Props) => {
     const validationSchema = object({
         soNumber: string().required('Sale order number is required'),
         dealer: string().required('Please select a dealer'),
-        wareHouse: string().required('Please select a warehouse'),
+        dealerWareHouseId: string().required('Please select a  Dealer Warehouse'),
+        companyWareHouseId: string().required('Please select a warehouse'),
         productSalesOrder: array().of(
             object().shape({
                 productGroupId: string().required(
@@ -156,12 +158,14 @@ const AddSaleOrderWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
+        console.log(values)
         setApiStatus(true)
         setTimeout(() => {
             addSalesOrder({
                 soNumber: values.soNumber,
                 dealer: values.dealer,
-                wareHouse: values.wareHouse,
+                dealerWareHouseId: values.dealerWareHouseId,   
+                companyWareHouseId: values.companyWareHouseId,
                 productSalesOrder: values.productSalesOrder,
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
@@ -193,6 +197,7 @@ const AddSaleOrderWrapper = (props: Props) => {
                             formikProps={formikProps}
                             dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
+                            productPriceOptions={productPriceOptions}
                         />
                     )
                 }}

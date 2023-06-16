@@ -24,7 +24,8 @@ type Props = {}
 export type FormInitialValues = {
     soNumber: string | ''
     dealer: string | ''
-    wareHouse: string | ''
+    dealerWareHouseId: string | ''
+    companyWareHouseId: string | ''
     companyId: string | ''
     productSalesOrder: {
         productGroupId: string
@@ -95,6 +96,13 @@ const EditSaleOrderWrapper = (props: Props) => {
             value: ele._id,
         }
     })
+    const productPriceOptions: any = productGroupItems?.map((ele: any) => {
+        return {
+            key: ele._id,
+            value: ele.dealerSalePrice,
+            
+        }
+    })
 
     //Dealer
     useEffect(() => {
@@ -126,7 +134,8 @@ const EditSaleOrderWrapper = (props: Props) => {
     const initialValues: FormInitialValues = {
         soNumber: selectedItem?.soNumber || '',
         dealer: selectedItem?.dealer || '',
-        wareHouse: selectedItem?.wareHouse || '',
+        dealerWareHouseId: selectedItem?.dealerWareHouseId || '',        
+        companyWareHouseId:  selectedItem?.companyWareHouseId || '',
         productSalesOrder: selectedItem?.productSalesOrder,
         companyId: selectedItem?.companyId || '',
     }
@@ -135,7 +144,8 @@ const EditSaleOrderWrapper = (props: Props) => {
     const validationSchema = object({
         soNumber: string().required('Sale order number is required'),
         dealer: string().required('Please select a dealer'),
-        wareHouse: string().required('Please select a warehouse'),
+        dealerWareHouseId: string().required('Please select a dealer warehouse'),
+        companyWareHouseId: string().required('Please select a warehouse'),
         productSalesOrder: object().shape({
             productGroupId: string().required('Please select a product name'),
             rate: number()
@@ -163,7 +173,8 @@ const EditSaleOrderWrapper = (props: Props) => {
                 body: {
                     soNumber: values.soNumber,
                     dealer: values.dealer,
-                    wareHouse: values.wareHouse,
+                    dealerWareHouseId: values.dealerWareHouseId,   
+                    companyWareHouseId: values.companyWareHouseId,
                     productSalesOrder: productSalesOrder,
                     companyId: userData?.companyId || '',
                 },
@@ -198,6 +209,7 @@ const EditSaleOrderWrapper = (props: Props) => {
                             formikProps={formikProps}
                             dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
+                            productPriceOptions={productPriceOptions}
                         />
                     )
                 }}

@@ -28,7 +28,8 @@ export type SaleOrderListResponse = {
 export type AddSaleOrder = {
     soNumber: string
     dealer: string
-    wareHouse: string
+    dealerWareHouseId: string
+    companyWareHouseId: string
     companyId: string
     productSalesOrder: productSalesOrder[]
 }
@@ -37,7 +38,8 @@ export type UpdateSaleOrder = {
     body: {
         soNumber: string
         dealer: string
-        wareHouse: string
+        dealerWareHouseId: string
+        companyWareHouseId: string
         companyId: string
         productSalesOrder: productSalesOrder
     }
