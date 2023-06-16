@@ -134,7 +134,9 @@ const ListDealerSchemeTabWrapper = () => {
                     <>
                         <button
                             onClick={() => {
-                                navigate(`/dealers/${dealerId}/scheme/edit/${row?._id}`)
+                                navigate(
+                                    `/dealers/${dealerId}/scheme/edit/${row?._id}`
+                                )
                             }}
                             className="block w-full text-left px-2 py-1  hover:bg-gray-100"
                         >

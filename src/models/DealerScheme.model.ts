@@ -29,7 +29,7 @@ export type DealerSchemeByIdResponse = {
 }
 
 export type DealerSchemeDetails = {
-    schemeId: string,
+    schemeId: string
     pincodes: string[]
 }
 
@@ -39,10 +39,10 @@ export type DealersSchemeAdd = {
     companyId: string
 }
 
-export type UpdateDealerSchemeInitialValues={
+export type UpdateDealerSchemeInitialValues = {
     dealerId: string
     schemeId: string
-    pincodes:string[]
+    pincodes: string[]
     companyId: string
 }
 

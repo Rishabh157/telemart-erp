@@ -61,7 +61,6 @@ export const dealerSchemeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-
         //***** Get dealer By Id *****/
         getDealerSchemeById: builder.query({
             providesTags: ['dealerScheme'],
@@ -80,5 +79,5 @@ export const {
     useUpdateDealerSchemeMutation,
     useDeleteDealerSchemeMutation,
     useDeactiveDealerSchemeMutation,
-    useGetDealerSchemeByIdQuery
+    useGetDealerSchemeByIdQuery,
 } = dealerSchemeApi

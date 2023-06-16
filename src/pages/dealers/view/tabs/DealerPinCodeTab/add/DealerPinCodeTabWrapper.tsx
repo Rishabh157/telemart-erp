@@ -66,7 +66,9 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const validationSchema = object({
         pincodeDetail: array().of(
             object().shape({
-                estTime: number().min(1,"Please enter estimated time").required('Please enter estimated time'),
+                estTime: number()
+                    .min(1, 'Please enter estimated time')
+                    .required('Please enter estimated time'),
                 pincode: string().required('Please select any pincode'),
             })
         ),

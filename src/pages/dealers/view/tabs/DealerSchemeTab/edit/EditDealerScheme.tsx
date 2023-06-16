@@ -8,11 +8,16 @@ import { UpdateDealerSchemeInitialValues } from 'src/models/DealerScheme.model'
 type Props = {
     formikProps: FormikProps<UpdateDealerSchemeInitialValues>
     schemeOptions: any
-    apiStatus: boolean,
+    apiStatus: boolean
     pinCodeOptions: SelectOption[]
 }
 
-const EditDealerScheme = ({ formikProps, schemeOptions, apiStatus, pinCodeOptions }: Props) => {
+const EditDealerScheme = ({
+    formikProps,
+    schemeOptions,
+    apiStatus,
+    pinCodeOptions,
+}: Props) => {
     const [allOptions, setAllOtions] = useState([])
     const [flag, setFlag] = useState(true)
 
@@ -39,36 +44,24 @@ const EditDealerScheme = ({ formikProps, schemeOptions, apiStatus, pinCodeOption
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()} //handleSubmit
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
-                                    }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                    true ? 'disabled:opacity-25' : ''
+                                }`}
                             >
                                 Edit Scheme
                             </button>
                         </div>
                     </div>
-                    <div
-                        className="grid grid-cols-12 gap-10 items-end "
-                    >
+                    <div className="grid grid-cols-12 gap-10 items-end ">
                         {/* Product Name */}
                         <div className="col-span-3">
                             <ATMSelect
                                 name={'schemeId'}
-                                value={
-                                    values?.schemeId || ""
+                                value={values?.schemeId || ''}
+                                onChange={(e) =>
+                                    setFieldValue('schemeId', e.target.value)
                                 }
-                                onChange={(
-                                    e
-                                ) =>
-                                    setFieldValue(
-                                        'schemeId',
-                                        e
-                                            .target
-                                            .value
-                                    )
-                                }
-                                options={
-                                    allOptions
-                                }
+                                options={allOptions}
                                 label="Scheme"
                             />
                         </div>
@@ -77,31 +70,20 @@ const EditDealerScheme = ({ formikProps, schemeOptions, apiStatus, pinCodeOption
                         <div className="col-span-9">
                             <ATMSelectSearchable
                                 name={'pincodes'}
-                                value={
-                                    values?.pincodes || []
+                                value={values?.pincodes || []}
+                                onChange={(value) =>
+                                    setFieldValue('pincodes', value)
                                 }
-                                onChange={(
-                                    value
-                                ) =>
-                                    setFieldValue(
-                                        'pincodes', value
-                                    )
-                                }
-                                options={
-                                    pinCodeOptions
-                                }
+                                options={pinCodeOptions}
                                 label="Pincode"
                                 isMulti={true}
-                                selectClass={" mt-2 max-h-11 select-margin"}
+                                selectClass={' mt-2 max-h-11 select-margin'}
                             />
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-        </div >
+        </div>
     )
 }
 
