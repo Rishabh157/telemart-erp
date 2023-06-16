@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { array, object, string } from 'yup'
 import AddDealerScheme from './AddDealerScheme'
-import { useAddDealerSchemeMutation } from 'src/services/DealerSchemeService'
-import { useGetSchemeQuery } from 'src/services/SchemeService'
+import {
+    useAddDealerSchemeMutation,
+    useGetAllDealerSchemeByDealerIdQuery,
+} from 'src/services/DealerSchemeService'
 import { useGetAllPincodeByDealerQuery } from 'src/services/DealerPincodeService'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -29,7 +31,10 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         data: schemeData,
         isLoading: schemeIsLoading,
         isFetching: schemeIsFetching,
-    } = useGetSchemeQuery(userData?.companyId)
+    } = useGetAllDealerSchemeByDealerIdQuery({
+        companyId: userData?.companyId,
+        dealerId,
+    })
 
     useEffect(() => {
         dispatch(setAllDealerSchemes(schemeData?.data))
