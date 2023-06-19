@@ -9,11 +9,14 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
+    setFilterBy,
 } from 'src/redux/slices/DealerLedgerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import AddDealerLedgerModelWrapper from '../add/AddDealerLedgerModelWrapper'
 import { NoteType } from 'src/models/Ledger.model'
+import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
+// import FilterDialogWarpper from 'src/pages/dealers/components/FilterDialog/FilterDialogWarpper'
 
 type Props = {
     columns: any[]
@@ -25,6 +28,7 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
         'CREDIT_NOTE_CREATED'
     )
     const [isOpenModel, setIsOpenModel] = useState(false)
+    // const [isFilterOpen, setIsFilterOpen] = useState(false)
     const dispatch = useDispatch<AppDispatch>()
     const dealerLedgerState: any = useSelector(
         (state: RootState) => state.dealerLedger
@@ -32,13 +36,38 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
 
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } = dealerLedgerState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        dealerLedgerState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Ledger</ATMPageHeading>
+                <div className="flex gap-6">
+                    <ATMPageHeading> Ledger</ATMPageHeading>
+                    <div className=" pl-3 p-2  hover:outline-blue-400 outline outline-offset-1 outline-blue-200 rounded">
+                        <MouseOverPopover
+                            title="Order Ledger Details"
+                            children={
+                                <>
+                                    <div className="px-4 py-1 border">
+                                        <div className="p-1 text-xs font-normal font-semibold">
+                                            Credit Note :4000
+                                        </div>
+                                        <div className="p-1 text-xs font-normal font-semibold">
+                                            Debit Note limit :7000
+                                        </div>
+                                        <div className="p-1 text-xs font-normal font-semibold">
+                                            Effective Balane :9000
+                                        </div>
+                                    </div>
+                                </>
+                            }
+                            buttonName="Order Ledger"
+                            isbuttonName
+                        />
+                    </div>
+                </div>
                 <div className="flex gap-3">
                     <button
                         onClick={() => {
@@ -81,7 +110,14 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    isFilter
+                    // isFilter
+                    // isRefresh
+
+                    isDateFilter
+                    IsDaterFilterLoading={isTableLoading}
+                    onSubmitDateHandler={(values) => {
+                        dispatch(setFilterBy(values))
+                    }}
                     // onFilterClick={() => setIsFilterOpen(true)}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                 />
@@ -113,10 +149,8 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
             </div>
 
             {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
+                <FilterDialogWarpper onClose={() => setIsFilterOpen(false)} />
+            )} */}
 
             <DialogLogBox
                 isOpen={isOpenModel}
