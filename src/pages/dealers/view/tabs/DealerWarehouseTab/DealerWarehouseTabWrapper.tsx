@@ -213,7 +213,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
-                AddpathName={`/dealers/add-warehouse`}
+                AddpathName={`add-warehouse`}
             />
         </div>
     )

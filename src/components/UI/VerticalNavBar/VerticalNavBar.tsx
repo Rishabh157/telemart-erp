@@ -83,6 +83,7 @@ const VerticalNavBar = ({
                 hover:bg-sky-50 
                 transition-all
                 duration-500
+                text-normal
                 ${isCollapsed && 'justify-center'} 
                 ${
                     isPathEqualtoNavItem(navItem)

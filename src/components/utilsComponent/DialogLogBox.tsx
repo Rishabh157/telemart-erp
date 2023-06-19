@@ -16,6 +16,8 @@ type DialogLogBoxType = {
     buttonClass?: string
     fullScreen?: boolean
     fullWidth?: boolean
+    width?: string
+    maxWidth?: 'lg' | 'sm'
 }
 
 const DialogLogBox: React.FC<DialogLogBoxType> = ({
@@ -26,6 +28,7 @@ const DialogLogBox: React.FC<DialogLogBoxType> = ({
     buttonClass = 'rounded',
     fullScreen = false,
     fullWidth = true,
+    maxWidth = 'lg',
 }) => {
     const handleButtonClose = (closeButtonPosition: string) => {
         switch (closeButtonPosition) {
@@ -39,10 +42,10 @@ const DialogLogBox: React.FC<DialogLogBoxType> = ({
     }
     return (
         <Dialog
-            className="h-full w-full mb-0 "
+            className={`h-full w-full mb-0 `}
             fullScreen={fullScreen}
             fullWidth={fullWidth}
-            maxWidth="lg"
+            maxWidth={maxWidth}
             open={isOpen}
             onClose={handleClose}
         >
