@@ -49,7 +49,7 @@ export type UpdateSaleOrder = {
         companyId: string
         productSalesOrder: productSalesOrder
         dhApproved?: boolean | null
-        dhApprovedBydId?: string
+        dhApprovedById?: string
         dhApprovedAt?: string
         accApproved?: boolean | null
         accApprovedById?: string

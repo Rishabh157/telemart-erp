@@ -99,7 +99,7 @@ const SaleOrderListingWrapper = () => {
                     productSalesOrder: pSO,
                     companyId: userData?.companyId || '',
                     dhApproved: true,
-                    dhApprovedBydId: userData?.userId,
+                    dhApprovedById: userData?.userId,
                     dhApprovedAt: currentDate,
                 },
                 id: _id,
@@ -124,7 +124,7 @@ const SaleOrderListingWrapper = () => {
                     productSalesOrder: pSO,
                     companyId: userData?.companyId || '',
                     dhApproved: false,
-                    dhApprovedBydId: userData?.userId,
+                    dhApprovedById: userData?.userId,
                     dhApprovedAt: currentDate,
                 },
                 id: _id,
@@ -498,7 +498,7 @@ const SaleOrderListingWrapper = () => {
             align: 'end',
         },
     ]
-    console.log(items)
+    //console.log(items)
 
     return (
         <>

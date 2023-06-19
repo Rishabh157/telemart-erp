@@ -47,6 +47,7 @@ const EditSaleOrderWrapper = (props: Props) => {
     )
 
     const { data, isLoading, isFetching } = useGetSalesOrderByIdQuery(Id)
+    //console.log(data)
 
     useEffect(() => {
         dispatch(setSelectedItem(data?.data))
@@ -128,6 +129,7 @@ const EditSaleOrderWrapper = (props: Props) => {
         warehouseOptions: warehouseOptions,
         productGroupOptions: productGroupOptions,
     }
+    //console.log(selectedItem)
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
