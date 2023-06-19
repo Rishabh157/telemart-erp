@@ -31,10 +31,11 @@ const ChannelCategoryListing = ({
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const channelCategoryState: any = useSelector(
-        (state: RootState) => state.channelGroup
+        (state: RootState) => state.channelCategory
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = channelCategoryState
+    const { page, rowsPerPage, totalItems ,isTableLoading } = channelCategoryState
+    console.log(isTableLoading,"isTableLoading")
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -97,6 +98,8 @@ const ChannelCategoryListing = ({
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
+
                     />
                 </div>
 

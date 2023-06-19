@@ -29,7 +29,7 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
 
     const navigate = useNavigate()
-    const { page, rowsPerPage, searchValue, totalItems } = cartonBoxState
+    const { page, rowsPerPage, searchValue, totalItems,isTableLoading } = cartonBoxState
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -87,6 +87,7 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

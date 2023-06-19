@@ -19,7 +19,7 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
+const SaleOrderListing = ({ columns, rows, setShowDropdown  }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const dispatch = useDispatch<AppDispatch>()
     const saleOrderState: any = useSelector(
@@ -28,7 +28,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue } = saleOrderState
+    const { page, rowsPerPage, searchValue ,isTableLoading} = saleOrderState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3">
@@ -65,6 +65,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/* Table */}
                 <div className="grow overflow-auto">
                     <ATMTable
+                        isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
                         isCheckbox={true}
@@ -74,6 +75,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         extraClasses="h-full overflow-auto"
                         setShowDropdown={setShowDropdown}
+                        
                     />
                 </div>
 

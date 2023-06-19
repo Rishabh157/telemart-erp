@@ -35,7 +35,8 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const assetLocation = useSelector((state: RootState) => state.assetLocation)
 
-    const { page, rowsPerPage, searchValue, totalItems } = assetLocation
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        assetLocation
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
             <div className="h-[30px]">
@@ -73,6 +74,7 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/* Table */}
                 <div className="grow overflow-auto  ">
                     <ATMTable
+                        isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
                         // isCheckbox={true}
