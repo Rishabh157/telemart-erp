@@ -77,7 +77,10 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
                 // disableRestoreFocus
                 className="w-full p-2"
             >
-                <div style={{ padding: '10px' }} className="font-bold text-center  text-sm ">
+                <div
+                    style={{ padding: '10px' }}
+                    className="font-bold text-center  text-sm "
+                >
                     {title}
                 </div>
                 <div>{children}</div>

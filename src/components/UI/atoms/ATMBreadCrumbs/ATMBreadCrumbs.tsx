@@ -30,7 +30,9 @@ const ATMBreadCrumbs = ({ breadcrumbs }: Props) => {
                         breadcrumb.onClick && breadcrumb.onClick()
                         navigate(breadcrumb.path || '')
                     }}
-                    className={`${breadcrumb.path  && 'cursor-pointer'}  text-black`}
+                    className={`${
+                        breadcrumb.path && 'cursor-pointer'
+                    }  text-black`}
                 >
                     {breadcrumb.label}
                 </Link>

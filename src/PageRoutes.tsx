@@ -369,7 +369,7 @@ const PageRoutes = () => {
                         path="vendors/add-warehouse"
                         element={<AddWarehouseWrapper />}
                     /> */}
-                          <Route
+                    <Route
                         path="vendors/:dealerId/warehouse/add-warehouse"
                         element={<AddWarehouseWrapper />}
                     />
