@@ -83,12 +83,12 @@ const AddSaleOrder = ({
         const val: any = productPriceOptions?.find(
             (e) => e['key'] === productGroup
         )
-            
-        if (val) {            
+
+        if (val) {
             setFieldValue(`productSalesOrder[${i}].rate`, val['value'])
         }
         //alert( i)
-        return ()=>{
+        return () => {
             setProductGroup('')
         }
     }, [productGroup])
@@ -219,7 +219,7 @@ const AddSaleOrder = ({
                                                                                 .target
                                                                                 .value
                                                                         )
-                                                                        
+
                                                                         setI(0)
                                                                         setProductGroup(
                                                                             e

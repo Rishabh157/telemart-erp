@@ -55,19 +55,23 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                                             <h1 className="font-bold">
                                                 Credit Amouunt :
                                             </h1>
-                                            <p className='text-green-400'>4000</p>
+                                            <p className="text-green-400">
+                                                4000
+                                            </p>
                                         </div>
                                         <div className="p-2 text-sm font-normal flex gap-1 ">
                                             <h1 className="font-bold">
                                                 Debit Amount :
                                             </h1>
-                                            <p className='text-red-400'>4000</p>
+                                            <p className="text-red-400">4000</p>
                                         </div>
                                         <div className="p-2 text-sm font-normal  gap-1 flex">
                                             <h1 className="font-bold">
                                                 Effective Balane :
                                             </h1>
-                                            <p className='text-blue-400'>9000</p>
+                                            <p className="text-blue-400">
+                                                9000
+                                            </p>
                                         </div>
                                     </div>
                                 </>
