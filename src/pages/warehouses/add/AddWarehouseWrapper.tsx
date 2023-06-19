@@ -127,6 +127,7 @@ const steps = [
 
 const AddWarehouseWrapper = () => {
     const { state } = useLocation()
+
     const vendorId = state?.params?.vendorId || null
     const dealerId = state?.params?.dealerId || null
     const { userData } = useSelector((state: RootState) => state?.auth)

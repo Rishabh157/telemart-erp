@@ -34,7 +34,7 @@ const StepAddDealerDetails = ({
                     switch (type) {
                         case 'text':
                             return (
-                                <div>
+                                <div key={name}>
                                     <ATMTextField
                                         key={name}
                                         name={name}
@@ -51,7 +51,7 @@ const StepAddDealerDetails = ({
                             )
                         case 'number':
                             return (
-                                <div>
+                                <div key={name}>
                                     <ATMTextField
                                         key={name}
                                         name={name}
@@ -68,7 +68,7 @@ const StepAddDealerDetails = ({
                             )
                         case 'switch-button':
                             return (
-                                <div>
+                                <div key={name}>
                                     <ATMSwitchButton
                                         name={name}
                                         value={values[name]}
@@ -83,7 +83,7 @@ const StepAddDealerDetails = ({
 
                         case 'password':
                             return (
-                                <div>
+                                <div key={name}>
                                     <ATMTextField
                                         type="password"
                                         key={name}

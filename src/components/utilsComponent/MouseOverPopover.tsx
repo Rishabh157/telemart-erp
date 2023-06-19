@@ -18,13 +18,23 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
     buttonName = 'name',
     isbuttonName = false,
 }) => {
-    const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
+    // const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+        null
+    )
 
-    const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    // const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    //     setAnchorEl(event.currentTarget)
+    // }
+
+    // const handlePopoverClose = () => {
+    //     setAnchorEl(null)
+    // }
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget)
     }
 
-    const handlePopoverClose = () => {
+    const handleClose = () => {
         setAnchorEl(null)
     }
 
@@ -33,24 +43,27 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
     return (
         <div>
             <Typography
-                aria-owns={open ? 'mouse-over-popover' : undefined}
+                aria-owns={open ? 'simple-popover' : undefined}
                 aria-haspopup="true"
-                onMouseEnter={handlePopoverOpen}
-                onMouseLeave={handlePopoverClose}
+                // onMouseEnter={handlePopoverOpen}
+                // onMouseLeave={handlePopoverClose}
+                onClick={handleClick}
+                // className="text-xs font-bold  font-sans p-1 "
             >
                 {isIcon && <BsInfoCircle color="blue" />}
                 {isbuttonName && (
-                    <div className="text-xs font-bold  font-sans  ">
+                    <label className="text-xs font-bold  font-sans  ">
                         {buttonName}
-                    </div>
+                    </label>
                 )}
             </Typography>
             <Popover
-                id="mouse-over-popover"
-                sx={{
-                    pointerEvents: 'none',
-                }}
+                id="simple-popover"
+                // sx={{
+                //     pointerEvents: 'none',
+                // }}
                 open={open}
+                onClose={handleClose}
                 anchorEl={anchorEl}
                 anchorOrigin={{
                     vertical: 'top',
@@ -60,17 +73,14 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
                     vertical: 'top',
                     horizontal: 'left',
                 }}
-                onClose={handlePopoverClose}
-                disableRestoreFocus
+                // onClose={handlePopoverClose}
+                // disableRestoreFocus
                 className="w-full p-2"
             >
-                <span
-                    style={{ padding: '20px' }}
-                    className="text-xs font-bold "
-                >
+                <div style={{ padding: '10px' }} className="font-bold text-center  text-sm ">
                     {title}
-                </span>
-                {children}
+                </div>
+                <div>{children}</div>
             </Popover>
         </div>
     )

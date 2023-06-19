@@ -118,7 +118,7 @@ const LoginPage = () => {
                                 label="Password"
                                 className="bg-slate-100 focus:bg-white h-[50px]"
                                 adormant={
-                                    isShowPassword ? (
+                                    !isShowPassword ? (
                                         <BiHide className="text-xl" />
                                     ) : (
                                         <BiShow className="text-xl" />
