@@ -1,11 +1,14 @@
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { FormikProps } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
+import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+import { CircularProgress } from '@mui/material'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -46,6 +49,8 @@ const StepEditAddress = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const [imageApiStatus, setImageApiStatus] = useState(false)
+    const [fileUploader] = useFileUploaderMutation()
 
     return (
         <div className="">
@@ -127,6 +132,60 @@ const StepEditAddress = ({
                                                 className="shadow bg-white rounded"
                                                 isSubmitting={isSubmitting}
                                             />
+                                        )
+                                    case 'file-picker':
+                                        return (
+                                            <div className="mt-2">
+                                                <ATMFilePickerWrapper
+                                                    name="gstCertificate"
+                                                    label="GST Certificate"
+                                                    placeholder="GST Certificate"
+                                                    onSelect={(newFile) => {
+                                                        const formData =
+                                                            new FormData()
+                                                        formData.append(
+                                                            'fileType',
+                                                            'IMAGE'
+                                                        )
+                                                        formData.append(
+                                                            'category',
+                                                            'WAREHOUSEGSTCERTIFICATE'
+                                                        )
+                                                        formData.append(
+                                                            'fileUrl',
+                                                            newFile || ''
+                                                        )
+                                                        setImageApiStatus(true)
+                                                        fileUploader(
+                                                            formData
+                                                        ).then((res) => {
+                                                            if ('data' in res) {
+                                                                setImageApiStatus(
+                                                                    false
+                                                                )
+                                                                setFieldValue(
+                                                                    'gstCertificate',
+                                                                    res?.data
+                                                                        ?.data
+                                                                        ?.fileUrl
+                                                                )
+                                                            }
+                                                            setImageApiStatus(
+                                                                false
+                                                            )
+                                                        })
+                                                    }}
+                                                    selectedFile={
+                                                        values.gstCertificate
+                                                    }
+                                                    disabled={false}
+                                                />
+                                                {imageApiStatus ? (
+                                                    <div className=" mt-3">
+                                                        <CircularProgress />
+                                                    </div>
+                                                ) : null}
+                                            </div>
                                         )
 
                                     case 'select':

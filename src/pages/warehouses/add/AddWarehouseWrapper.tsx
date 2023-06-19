@@ -34,6 +34,8 @@ export type FormInitialValues = {
         pincode: string
     }
     billing_address: {
+        gstNumber: string
+        gstCertificate: string
         phone: string
         address: string
         country: string
@@ -91,6 +93,10 @@ const steps = [
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
+                gstNumber: string().required('GST Number is required'),
+                gstCertificate: string().required(
+                    'GST Certificate is required'
+                ),
                 country: string().required('Please choose a country'),
                 state: string().required('Please choose a state'),
                 district: string().required('Please choose a district'),
@@ -164,6 +170,8 @@ const AddWarehouseWrapper = () => {
             pincode: '',
         },
         billing_address: {
+            gstNumber: '',
+            gstCertificate: '',
             phone: '',
             address: '',
             country: '',
@@ -216,6 +224,8 @@ const AddWarehouseWrapper = () => {
                         pincodeId: values.regd_address.pincode,
                     },
                     billingAddress: {
+                        gstNumber: values.billing_address.gstNumber,
+                        gstCertificate: values.billing_address.gstCertificate,
                         phone: values.billing_address.phone,
                         address: values.billing_address.address,
                         countryId: values.billing_address.country,

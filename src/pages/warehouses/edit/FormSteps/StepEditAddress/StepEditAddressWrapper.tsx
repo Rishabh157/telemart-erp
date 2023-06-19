@@ -118,6 +118,17 @@ const formFields: {
                 type: 'select',
                 optionAccessKey: 'billingPincodeOptions',
             },
+            {
+                name: 'billing_address.gstNumber',
+                label: 'GST Number',
+                placeholder: 'GST Number',
+            },
+            {
+                name: 'billing_address.gstCertificate',
+                label: 'GST Certificate',
+                placeholder: 'GST Certificate',
+                type: 'file-picker',
+            },
         ],
     },
 ]
