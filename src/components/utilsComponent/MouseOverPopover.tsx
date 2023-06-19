@@ -40,7 +40,9 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
             >
                 {isIcon && <BsInfoCircle color="blue" />}
                 {isbuttonName && (
-                    <div className="text-xs font-bold ">{buttonName}</div>
+                    <div className="text-xs font-bold  font-sans  ">
+                        {buttonName}
+                    </div>
                 )}
             </Typography>
             <Popover
