@@ -356,6 +356,11 @@ const PageRoutes = () => {
                         element={<AddSaleOrderWrapper />}
                     />
                     <Route
+                        path="/dealers/:dealerId/sale-order/add-sale-order"
+                        element={<AddSaleOrderWrapper />}
+                    />
+
+                    <Route
                         path="/sale-order/edit-sale-order/:id"
                         element={<EditSaleOrderWrapper />}
                     />

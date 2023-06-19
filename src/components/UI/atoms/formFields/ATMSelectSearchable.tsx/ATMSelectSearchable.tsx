@@ -44,7 +44,7 @@ const ATMSelectSearchable = ({
     labelClass = ' font-medium',
     isAllSelect = false,
     isLoading = false,
-    selectClass = 'mt-2',
+    selectClass = 'mt-0',
     isDisabled = false,
 }: Props) => {
     const selectStyles = {
@@ -148,9 +148,9 @@ const ATMSelectSearchable = ({
         }
     }
     return (
-        <div className="relative mt-4">
+        <div className="relative mt-6">
             {label && (
-                <label className={`text-slate-700 ${labelClass}`}>
+                <label className={`text-slate-700  ${labelClass}`}>
                     {label}
                     {required && <span className="text-red-500"> * </span>}
                 </label>

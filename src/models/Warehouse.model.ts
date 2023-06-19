@@ -12,6 +12,8 @@ export type WarehousesListResponse = {
         pincodeId: string
     }
     billingAddress: {
+        gstNumber: string
+        gstCertificate: string
         phone: string
         address: string
         countryId: string
@@ -59,6 +61,8 @@ export type AddWarehouse = {
         pincodeId: string
     }
     billingAddress: {
+        gstNumber: string
+        gstCertificate: string
         phone: string
         address: string
         countryId: string
@@ -94,6 +98,8 @@ export type UpdateWarehouse = {
             pincodeId: string
         }
         billingAddress: {
+            gstNumber: string
+            gstCertificate: string
             phone: string
             address: string
             countryId: string
