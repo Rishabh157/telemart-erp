@@ -73,6 +73,7 @@ const StepAddDealerDetails = ({
                                         name={name}
                                         value={values[name]}
                                         label={label}
+                                        
                                         onChange={(value: any) => {
                                             setFieldValue(name, value)
                                         }}
