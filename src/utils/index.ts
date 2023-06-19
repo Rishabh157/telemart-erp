@@ -22,6 +22,13 @@ export const showToast = (type: ToastType, message: string) => {
         position: 'top-right',
     })
 }
+
+export const ledgerNoteType = {
+    DEALER_AMOUNT_CREDITED: 'DEALER AMOUNT CREDITED',
+    CREDIT_NOTE_CREATED: 'CREDIT',
+    DEBIT_NOTE_CREATED: 'DEBIT',
+}
+
 export const authMiddleware = (store: any) => (next: any) => (action: any) => {
     const result = next(action)
     const token = localStorage.getItem('authToken')

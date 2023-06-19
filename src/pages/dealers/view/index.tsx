@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGetDealersQuery } from 'src/services/DealerServices'
 import { setItems, setSearchValue } from 'src/redux/slices/dealerSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
+import { RiBillLine } from 'react-icons/ri'
 
 const tabsData = [
     {
@@ -32,6 +33,11 @@ const tabsData = [
         label: 'Ledger',
         icon: MdOutlinePeopleAlt,
         path: 'ledger',
+    },
+    {
+        label: 'Orders Ledger',
+        icon: RiBillLine,
+        path: 'order-ledger',
     },
     {
         label: 'Activity',

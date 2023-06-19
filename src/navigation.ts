@@ -17,7 +17,6 @@ import { AiOutlineSetting } from 'react-icons/ai'
 import { BiBox, BiPurchaseTagAlt } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
-import { RiBillLine } from 'react-icons/ri';
 
 export type NavItemType = {
     label: string
@@ -102,11 +101,7 @@ export const navigation: NavItemType[] = [
         icon: MdOutlineBorderColor,
         path: '/orders',
     },
-    {
-        label: 'Orders Ledger',
-        icon: RiBillLine,
-        path: '/order-ledger',
-    },
+
     {
         label: 'Call',
         icon: IoCallOutline,
