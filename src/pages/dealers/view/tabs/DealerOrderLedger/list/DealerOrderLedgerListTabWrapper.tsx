@@ -73,7 +73,7 @@ const DealerOrderLedgerTabWrapper = () => {
         {
             field: 'creditAmount',
             headerName: 'Credit Amount',
-            flex: 'flex-[0.8_0.5_0%]',
+            flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
                 <span> {row.creditAmount} </span>
             ),
@@ -81,7 +81,7 @@ const DealerOrderLedgerTabWrapper = () => {
         {
             field: 'debitAmount',
             headerName: 'Debit Amount',
-            flex: 'flex-[0.8_0.5_0%]',
+            flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
                 <span> {row.debitAmount} </span>
             ),
@@ -89,7 +89,7 @@ const DealerOrderLedgerTabWrapper = () => {
         {
             field: 'balance',
             headerName: 'Balance',
-            flex: 'flex-[0.8_0.5_0%]',
+            flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
                 <span> {row.balance} </span>
             ),
