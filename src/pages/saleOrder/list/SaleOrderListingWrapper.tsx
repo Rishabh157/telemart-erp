@@ -15,7 +15,7 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import {
     useDeleteSalesOrderMutation,
     useGetPaginationSaleOrderQuery,
-    useUpdateSalesOrderMutation
+    useUpdateSalesOrderMutation,
 } from 'src/services/SalesOrderService'
 import SaleOrderListing from './SaleOrderListing'
 import { Chip, Stack } from '@mui/material'
@@ -30,7 +30,7 @@ const SaleOrderListingWrapper = () => {
     const navigate = useNavigate()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const [deleteSaleOrder] = useDeleteSalesOrderMutation()    
+    const [deleteSaleOrder] = useDeleteSalesOrderMutation()
     const [updateSalesOrder] = useUpdateSalesOrderMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
@@ -79,19 +79,15 @@ const SaleOrderListingWrapper = () => {
         })
     }
 
-   
-
     const handleDHComplete = (_id: string, level: number) => {
         const currentDate = new Date().toLocaleDateString('en-GB')
-        const so: any = items?.find(
-            (e:any) => e._id === _id
-        )
+        const so: any = items?.find((e: any) => e._id === _id)
 
         //console.log(so?.productSalesOrder, "so")
-        const pSO = {          
+        const pSO = {
             productGroupId: so?.productSalesOrder?.productGroupId,
             quantity: so?.productSalesOrder?.quantity,
-            rate: so?.productSalesOrder?.rate
+            rate: so?.productSalesOrder?.rate,
         }
         if (level === 1) {
             updateSalesOrder({
@@ -105,7 +101,6 @@ const SaleOrderListingWrapper = () => {
                     dhApproved: true,
                     dhApprovedBydId: userData?.userId,
                     dhApprovedAt: currentDate,
-                    
                 },
                 id: _id,
             }).then((res: any) => {
@@ -149,15 +144,13 @@ const SaleOrderListingWrapper = () => {
 
     const handleAccComplete = (_id: string, level: number) => {
         const currentDate = new Date().toLocaleDateString('en-GB')
-        const so: any = items?.find(
-            (e:any) => e._id === _id
-        )
+        const so: any = items?.find((e: any) => e._id === _id)
 
-       // console.log(so?.productSalesOrder, "so")
-        const pSO = {          
+        // console.log(so?.productSalesOrder, "so")
+        const pSO = {
             productGroupId: so?.productSalesOrder?.productGroupId,
             quantity: so?.productSalesOrder?.quantity,
-            rate: so?.productSalesOrder?.rate
+            rate: so?.productSalesOrder?.rate,
         }
         if (level === 1) {
             updateSalesOrder({
@@ -171,7 +164,6 @@ const SaleOrderListingWrapper = () => {
                     accApproved: true,
                     accApprovedById: userData?.userId,
                     accApprovedAt: currentDate,
-                    
                 },
                 id: _id,
             }).then((res: any) => {
@@ -235,12 +227,12 @@ const SaleOrderListingWrapper = () => {
                     {row?.dealerLabel}{' '}
                 </a>
             ),
-        },               
+        },
         {
             field: 'dhApproved',
             headerName: 'DH Approved Status',
             flex: 'flex-[1.0_1.0_0%]',
-            renderCell: (row: SaleOrderListResponse) => {                
+            renderCell: (row: SaleOrderListResponse) => {
                 return (
                     <span className="z-10">
                         {' '}
@@ -255,22 +247,21 @@ const SaleOrderListingWrapper = () => {
                                             text: 'Do you want to Approve ?',
                                             showCancelButton: true,
                                             showDenyButton: true,
-                                            denyButtonText: 'Reject',                                            
-                                            next: (res) => {                                                
-                                                if(res.isConfirmed){
+                                            denyButtonText: 'Reject',
+                                            next: (res) => {
+                                                if (res.isConfirmed) {
                                                     return handleDHComplete(
                                                         row?._id,
                                                         1
-                                                    ) 
-                                                }else if(res.isDenied){
-                                                   return handleDHComplete(
+                                                    )
+                                                } else if (res.isDenied) {
+                                                    return handleDHComplete(
                                                         row?._id,
                                                         2
                                                     )
-                                                }else{
+                                                } else {
                                                     return false
                                                 }
-                                                    
                                             },
                                         })
                                     }}
@@ -290,9 +281,9 @@ const SaleOrderListingWrapper = () => {
                                     onClick={() => {
                                         showConfirmationDialog({
                                             title: '<span className="text-red-700">Reject</span>',
-                                            text: 'Do you want to Reject ?', 
-                                            icon: 'error',    
-                                            confirmButtonColor: '#dc3741',                                      
+                                            text: 'Do you want to Reject ?',
+                                            icon: 'error',
+                                            confirmButtonColor: '#dc3741',
                                             showCancelButton: true,
                                             next: (res) => {
                                                 return res.isConfirmed
@@ -341,7 +332,7 @@ const SaleOrderListingWrapper = () => {
                 return <span> {row?.dhApprovedActionBy} </span>
             },
         },
-       
+
         {
             field: 'accApproved',
             headerName: 'Acc Approved Status',
@@ -351,89 +342,90 @@ const SaleOrderListingWrapper = () => {
                     <span className="z-10">
                         {' '}
                         <Stack direction="row" spacing={1}>
-                            {row?.dhApproved === true ? row?.accApproved === null ? (
-                                <button
-                                    id="btn"
-                                    className=" overflow-hidden cursor-pointer z-0"
-                                    onClick={() => {
-                                        showConfirmationDialog({
-                                            title: 'Approve',
-                                            text: 'Do you want to Approve ?',
-                                            showCancelButton: true,
-                                            showDenyButton: true,
-                                            denyButtonText: 'Reject',                                            
-                                            next: (res) => {                                                
-                                                if(res.isConfirmed){
-                                                    return handleAccComplete(
-                                                        row?._id,
-                                                        1
-                                                    ) 
-                                                }else if(res.isDenied){
-                                                   return handleAccComplete(
-                                                        row?._id,
-                                                        2
-                                                    )
-                                                }else{
-                                                    return false
-                                                }
-                                                    
-                                            },
-                                        })
-                                    }}
-                                >
-                                    <Chip
-                                        label="!"
-                                        color="warning"
-                                        variant="outlined"
-                                        size="small"
-                                        clickable={true}
-                                    />
-                                </button>
-                            ) : row?.accApproved === true ? (
-                                <button
-                                    id="btn"
-                                    className="cursor-pointer"
-                                    onClick={() => {
-                                        showConfirmationDialog({
-                                            title: '<span className="text-red-700">Reject</span>',
-                                            text: 'Do you want to Reject ?', 
-                                            icon: 'error',    
-                                            confirmButtonColor: '#dc3741',                                      
-                                            showCancelButton: true,
-                                            next: (res) => {
-                                                return res.isConfirmed
-                                                    ? handleAccComplete(
-                                                          row?._id,
-                                                          2
-                                                      )
-                                                    : false
-                                            },
-                                        })
-                                    }}
-                                >
-                                    <Chip
-                                        label="Approved"
-                                        color="success"
-                                        variant="outlined"
-                                        size="small"
-                                        clickable={true}
-                                    />
-                                </button>
+                            {row?.dhApproved === true ? (
+                                row?.accApproved === null ? (
+                                    <button
+                                        id="btn"
+                                        className=" overflow-hidden cursor-pointer z-0"
+                                        onClick={() => {
+                                            showConfirmationDialog({
+                                                title: 'Approve',
+                                                text: 'Do you want to Approve ?',
+                                                showCancelButton: true,
+                                                showDenyButton: true,
+                                                denyButtonText: 'Reject',
+                                                next: (res) => {
+                                                    if (res.isConfirmed) {
+                                                        return handleAccComplete(
+                                                            row?._id,
+                                                            1
+                                                        )
+                                                    } else if (res.isDenied) {
+                                                        return handleAccComplete(
+                                                            row?._id,
+                                                            2
+                                                        )
+                                                    } else {
+                                                        return false
+                                                    }
+                                                },
+                                            })
+                                        }}
+                                    >
+                                        <Chip
+                                            label="!"
+                                            color="warning"
+                                            variant="outlined"
+                                            size="small"
+                                            clickable={true}
+                                        />
+                                    </button>
+                                ) : row?.accApproved === true ? (
+                                    <button
+                                        id="btn"
+                                        className="cursor-pointer"
+                                        onClick={() => {
+                                            showConfirmationDialog({
+                                                title: '<span className="text-red-700">Reject</span>',
+                                                text: 'Do you want to Reject ?',
+                                                icon: 'error',
+                                                confirmButtonColor: '#dc3741',
+                                                showCancelButton: true,
+                                                next: (res) => {
+                                                    return res.isConfirmed
+                                                        ? handleAccComplete(
+                                                              row?._id,
+                                                              2
+                                                          )
+                                                        : false
+                                                },
+                                            })
+                                        }}
+                                    >
+                                        <Chip
+                                            label="Approved"
+                                            color="success"
+                                            variant="outlined"
+                                            size="small"
+                                            clickable={true}
+                                        />
+                                    </button>
+                                ) : (
+                                    <button
+                                        id="btn"
+                                        disabled={true}
+                                        className="cursor-pointer"
+                                    >
+                                        <Chip
+                                            label="Rejected"
+                                            color="error"
+                                            variant="outlined"
+                                            size="small"
+                                            clickable={true}
+                                        />
+                                    </button>
+                                )
                             ) : (
-                                <button
-                                    id="btn"
-                                    disabled={true}
-                                    className="cursor-pointer"
-                                >
-                                    <Chip
-                                        label="Rejected"
-                                        color="error"
-                                        variant="outlined"
-                                        size="small"
-                                        clickable={true}
-                                    />
-                                </button>
-                            ):(
                                 <button
                                     id="btn"
                                     disabled={true}
@@ -506,8 +498,8 @@ const SaleOrderListingWrapper = () => {
             align: 'end',
         },
     ]
-console.log(items)
-   
+    console.log(items)
+
     return (
         <>
             <SideNavLayout>

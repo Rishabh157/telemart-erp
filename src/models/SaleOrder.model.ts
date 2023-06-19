@@ -22,7 +22,7 @@ export type SaleOrderListResponse = {
     dhApprovedAt: string
     accApproved: boolean | null
     accApprovedActionBy: string
-    accApprovedAt: string 
+    accApprovedAt: string
     isActive: boolean
     isDeleted: boolean
     createdAt: string
@@ -53,7 +53,7 @@ export type UpdateSaleOrder = {
         dhApprovedAt?: string
         accApproved?: boolean | null
         accApprovedById?: string
-        accApprovedAt?: string 
+        accApprovedAt?: string
     }
     id: string
 }
