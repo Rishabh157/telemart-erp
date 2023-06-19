@@ -38,15 +38,15 @@ const AddWarehouse = ({
     let redirectLabel = 'Warehouse'
     if (dealerId) {
         redirectLabel = 'Dealer Warehouse'
-        redirectPath = `/dealers/${dealerId}/warehouse`
+        redirectPath = `dealers/${dealerId}/warehouse`
     } else if (vendorId) {
         redirectLabel = 'Vendor Warehouse'
-        redirectPath = `/vendors/${vendorId}/warehouse`
+        redirectPath = `vendors/${vendorId}/warehouse`
     }
     const breadcrumbs = [
         {
             label: `${redirectLabel}`,
-            path: `${redirectPath}`,
+            path: `/${redirectPath}`,
         },
         {
             label: 'Add Warehouse',

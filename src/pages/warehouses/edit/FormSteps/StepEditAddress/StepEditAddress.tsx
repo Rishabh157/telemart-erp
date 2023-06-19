@@ -1,11 +1,14 @@
-import { FormControl, MenuItem, Select } from '@mui/material'
 import { FormikProps } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
+import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+import { CircularProgress } from '@mui/material'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -46,6 +49,8 @@ const StepEditAddress = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const [imageApiStatus, setImageApiStatus] = useState(false)
+    const [fileUploader] = useFileUploaderMutation()
 
     return (
         <div className="">
@@ -128,93 +133,92 @@ const StepEditAddress = ({
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
+                                    case 'file-picker':
+                                        return (
+                                            <div className="mt-4">
+                                                <ATMFilePickerWrapper
+                                                    name={name}
+                                                    label={label}
+                                                    placeholder={placeholder}
+                                                    onSelect={(newFile) => {
+                                                        const formData =
+                                                            new FormData()
+                                                        formData.append(
+                                                            'fileType',
+                                                            'IMAGE'
+                                                        )
+                                                        formData.append(
+                                                            'category',
+                                                            'WAREHOUSEGSTCERTIFICATE'
+                                                        )
+                                                        formData.append(
+                                                            'fileUrl',
+                                                            newFile || ''
+                                                        )
+                                                        setImageApiStatus(true)
+                                                        fileUploader(
+                                                            formData
+                                                        ).then((res) => {
+                                                            if ('data' in res) {
+                                                                setImageApiStatus(
+                                                                    false
+                                                                )
+                                                                setFieldValue(
+                                                                    name,
+                                                                    res?.data
+                                                                        ?.data
+                                                                        ?.fileUrl
+                                                                )
+                                                            }
+                                                            setImageApiStatus(
+                                                                false
+                                                            )
+                                                        })
+                                                    }}
+                                                    selectedFile={
+                                                        values.gstCertificate
+                                                    }
+                                                    disabled={false}
+                                                />
+                                                {imageApiStatus ? (
+                                                    <div className=" mt-3">
+                                                        <CircularProgress />
+                                                    </div>
+                                                ) : null}
+                                            </div>
+                                        )
 
                                     case 'select':
                                         return (
-                                            <div
-                                                key={name}
-                                                className="relative mt-8"
-                                            >
-                                                <FormControl fullWidth>
-                                                    <Select
-                                                        name={name}
-                                                        value={
-                                                            name.includes('.')
-                                                                ? values[
-                                                                      name.split(
-                                                                          '.'
-                                                                      )[0]
-                                                                  ][
-                                                                      name.split(
-                                                                          '.'
-                                                                      )[1]
-                                                                  ]
-                                                                : values[name]
-                                                        }
-                                                        onChange={(e) => {
-                                                            setFieldValue(
-                                                                name,
-                                                                e.target.value
-                                                            )
-                                                            if (
-                                                                name ===
-                                                                'regd_address.country'
-                                                            ) {
-                                                                formikProps.setFieldValue(
-                                                                    'regd_address.district',
-                                                                    ''
-                                                                )
-                                                                formikProps.setFieldValue(
-                                                                    'regd_address.state',
-                                                                    ''
-                                                                )
-                                                                formikProps.setFieldValue(
-                                                                    'regd_address.pincode',
-                                                                    ''
-                                                                )
-                                                            }
-                                                            if (
-                                                                name ===
-                                                                'billing_address.country'
-                                                            ) {
-                                                                formikProps.setFieldValue(
-                                                                    'billing_address.district',
-                                                                    ''
-                                                                )
-                                                                formikProps.setFieldValue(
-                                                                    'billing_address.state',
-                                                                    ''
-                                                                )
-                                                                formikProps.setFieldValue(
-                                                                    'billing_address.pincode',
-                                                                    ''
-                                                                )
-                                                            }
-                                                        }}
-                                                        size="small"
-                                                        className="shadow mt-2"
-                                                        displayEmpty
-                                                    >
-                                                        {dropdownOptions[
+                                            <div className="-mt-2">
+                                                <ATMSelectSearchable
+                                                    label={label}
+                                                    selectLabel={label}
+                                                    name={name}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[0]
+                                                              ][
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[1]
+                                                              ]
+                                                            : values[name]
+                                                    }
+                                                    onChange={(e: any) => {
+                                                        setFieldValue(name, e)
+                                                    }}
+                                                    options={
+                                                        dropdownOptions[
                                                             field.optionAccessKey ||
                                                                 'counrtyOptions'
-                                                        ]?.map((option) => (
-                                                            <MenuItem
-                                                                key={
-                                                                    option.value
-                                                                }
-                                                                value={
-                                                                    option.value
-                                                                }
-                                                            >
-                                                                {' '}
-                                                                {
-                                                                    option.label
-                                                                }{' '}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
+                                                        ]
+                                                    }
+                                                    isSubmitting={isSubmitting}
+                                                />
                                             </div>
                                         )
 
