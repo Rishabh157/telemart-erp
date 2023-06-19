@@ -19,8 +19,9 @@ type Props = {}
 
 export type FormInitialValues = {
     soNumber: string
-    dealer: string
-    wareHouse: string
+    dealerId: string
+    dealerWareHouseId: string
+    companyWareHouseId: string
     companyId: string
     productSalesOrder: {
         productGroupId: string
@@ -82,6 +83,13 @@ const AddSaleOrderWrapper = (props: Props) => {
         }
     })
 
+    const productPriceOptions: any = productGroupItems?.map((ele: any) => {
+        return {
+            key: ele._id,
+            value: ele.dealerSalePrice,
+        }
+    })
+
     //Dealer
     useEffect(() => {
         dispatch(setAllItems(dealerData?.data))
@@ -111,8 +119,9 @@ const AddSaleOrderWrapper = (props: Props) => {
     // Form Initial Values
     const initialValues: FormInitialValues = {
         soNumber: '',
-        dealer: '',
-        wareHouse: '',
+        dealerId: '',
+        dealerWareHouseId: '',
+        companyWareHouseId: '',
         productSalesOrder: [
             {
                 productGroupId: '',
@@ -126,8 +135,11 @@ const AddSaleOrderWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         soNumber: string().required('Sale order number is required'),
-        dealer: string().required('Please select a dealer'),
-        wareHouse: string().required('Please select a warehouse'),
+        dealerId: string().required('Please select a dealer'),
+        dealerWareHouseId: string().required(
+            'Please select a  Dealer Warehouse'
+        ),
+        companyWareHouseId: string().required('Please select a warehouse'),
         productSalesOrder: array().of(
             object().shape({
                 productGroupId: string().required(
@@ -145,12 +157,14 @@ const AddSaleOrderWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
+        //console.log(values)
         setApiStatus(true)
         setTimeout(() => {
             addSalesOrder({
                 soNumber: values.soNumber,
-                dealer: values.dealer,
-                wareHouse: values.wareHouse,
+                dealerId: values.dealerId,
+                dealerWareHouseId: values.dealerWareHouseId,
+                companyWareHouseId: values.companyWareHouseId,
                 productSalesOrder: values.productSalesOrder,
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
@@ -182,6 +196,7 @@ const AddSaleOrderWrapper = (props: Props) => {
                             formikProps={formikProps}
                             dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
+                            productPriceOptions={productPriceOptions}
                         />
                     )
                 }}

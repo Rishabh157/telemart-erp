@@ -55,7 +55,10 @@ const AccordianDocument = (data: any) => {
 
             {otherDocumentList.map(
                 (otherDocument: any, otherDocumentIndex: any) => (
-                    <div key={otherDocument} className={`py-5  border-b border-slate-400`}>
+                    <div
+                        key={otherDocument}
+                        className={`py-5  border-b border-slate-400`}
+                    >
                         <div className="text-primary-main text-lg pb-2 font-medium ">
                             Other Documents #{otherDocumentIndex + 1}
                         </div>
