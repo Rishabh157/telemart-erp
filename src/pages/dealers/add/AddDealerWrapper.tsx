@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Form, Formik, FormikProps } from 'formik'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { array, mixed, object, string } from 'yup'
+import { array, boolean, mixed, number, object, string } from 'yup'
 import AddDealers from './AddDealers'
 import StepAddDealerDetailsWrapper from './FormSteps/StepAddDealerDetails/StepAddDealerDetailsWrapper'
 import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
@@ -21,6 +21,10 @@ import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 export type FormInitialValues = {
     dealerCode: string
     firmName: string
+    creditLimit: number
+    openingBalance: number
+    autoMapping: boolean
+    quantityQuotient: number
     firstName: string
     lastName: string
     dealerCategory: string
@@ -76,6 +80,10 @@ const steps = [
         validationSchema: object({
             dealerCode: string().required('Dealer Code is required'),
             firmName: string().required('Firm Name is required'),
+            creditLimit: number().required('Credit limit is required'),
+            openingBalance: number().required('Opeaning balance is required'),
+            autoMapping: boolean(),
+            quantityQuotient: number().required('Firm Name is required'),
             firstName: string().required('First Name is required'),
             lastName: string().required('Last Name is required'),
             dealerCategory: string().required('Please choose Dealer Category'),
@@ -164,20 +172,6 @@ const steps = [
     },
 ]
 
-//Form validation schema based on the active step
-
-// On Submit Handler
-// const onSubmitHandler = (values: FormInitialValues) => {
-//   if (activeStep === steps.length - 1) {
-//     setTimeout(() => {
-//       console.log(values);
-//       setActiveStep(0);
-//     }, 1000);
-//   } else {
-//     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-//   }
-// };
-
 const AddDealerWrapper = () => {
     // States
     const navigate = useNavigate()
@@ -189,6 +183,10 @@ const AddDealerWrapper = () => {
     const initialValues: FormInitialValues = {
         dealerCode: '',
         firmName: '',
+        creditLimit: 0,
+        openingBalance: 0,
+        autoMapping: true,
+        quantityQuotient: 0,
         firstName: '',
         lastName: '',
         dealerCategory: '',
@@ -269,6 +267,10 @@ const AddDealerWrapper = () => {
                     dealerCode: values.dealerCode,
                     firmName: values.firmName,
                     firstName: values.firstName,
+                    creditLimit: values.creditLimit,
+                    openingBalance: values.openingBalance,
+                    autoMapping: values.autoMapping,
+                    quantityQuotient: values.quantityQuotient,
                     lastName: values.lastName,
                     dealerCategoryId: values.dealerCategory,
                     email: values.email,

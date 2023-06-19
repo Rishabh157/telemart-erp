@@ -23,6 +23,15 @@ export const dealerSchemeApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+        //***** GET ALL DEALER SCHEME BY DEALERID *****/
+        getAllDealerSchemeByDealerId: builder.query({
+            providesTags: ['dealerScheme'],
+            query: ({ companyId, dealerId }) => ({
+                url: `/dealer-scheme/company/${companyId}/dealer/${dealerId}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
 
         //***** ADD *****/
         addDealerScheme: builder.mutation({
@@ -60,6 +69,15 @@ export const dealerSchemeApi = apiSlice.injectEndpoints({
                 method: 'PUT',
             }),
         }),
+
+        //***** Get dealer By Id *****/
+        getDealerSchemeById: builder.query({
+            providesTags: ['dealerScheme'],
+            query: (id: string) => ({
+                url: `/dealer-scheme/${id}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 
@@ -70,4 +88,6 @@ export const {
     useUpdateDealerSchemeMutation,
     useDeleteDealerSchemeMutation,
     useDeactiveDealerSchemeMutation,
+    useGetDealerSchemeByIdQuery,
+    useGetAllDealerSchemeByDealerIdQuery,
 } = dealerSchemeApi

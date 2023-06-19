@@ -1,6 +1,8 @@
 import React from 'react'
 import Select from 'react-select'
 import { ErrorMessage } from 'formik'
+import { twMerge } from 'tailwind-merge'
+
 export type SelectOption = {
     label: string
     value: string | number | string[]
@@ -133,13 +135,13 @@ const ATMSelectSearchable = ({
             let selectedValues: SelectOption[] = []
             let FindSelectedValue: string[] = [...(value as string[])]
             FindSelectedValue?.map((selecttedValue: string) => {
-                const singleValueFind = selectOptions?.filter(
-                    (option) => option.value === selecttedValue
-                )
+                const singleValueFind =
+                    selectOptions?.filter(
+                        (option) => option.value === selecttedValue
+                    ) || []
                 selectedValues = [...selectedValues, ...singleValueFind]
                 return selectedValues
             })
-
             return selectedValues
         } else {
             return selectOptions?.find((option) => option.value === value)
@@ -155,9 +157,12 @@ const ATMSelectSearchable = ({
             )}
 
             <Select
-                className={`${selectClass} border rounded border-slate-400 ${
-                    isMulti ? 'overflow-scroll' : ''
-                } min-h-fit max-h-24`}
+                className={twMerge(
+                    `border rounded border-slate-400 ${
+                        isMulti ? 'overflow-scroll overflow-x-auto' : ''
+                    } min-h-fit max-h-24`,
+                    `${selectClass}`
+                )}
                 name={name}
                 defaultValue={selectOptions?.find(
                     (option) => option.value === defaultValue

@@ -14,8 +14,8 @@ export type InitialStateType = {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedDealerId: string
+    filterBy: any
 }
-
 const initialState: InitialStateType = {
     items: [],
     allItems: [],
@@ -27,6 +27,7 @@ const initialState: InitialStateType = {
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
+    filterBy: {},
     selectedDealerId: '',
 }
 
@@ -84,6 +85,10 @@ const dealerLedgerSlice: any = createSlice({
         ) => {
             state.alldealerLedger = action.payload
         },
+
+        setFilterBy: (state, action: PayloadAction<[]>) => {
+            state.filterBy = action.payload
+        },
     },
 })
 
@@ -99,5 +104,6 @@ export const {
     setSelectedDealerId,
     setSelectedItem,
     setAllDealerLedger,
+    setFilterBy,
 } = dealerLedgerSlice.actions
 export default dealerLedgerSlice.reducer

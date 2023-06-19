@@ -11,20 +11,20 @@ import { useParams } from 'react-router-dom'
 import { useGetDealerLedgerQuery } from 'src/services/DealerLedgerServices'
 import { RootState, AppDispatch } from 'src/redux/store'
 import DealerLedgerListing from './DealerLedgerListing'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { format } from 'date-fns'
 
-const ListLedgerTabWrapper = () => {
+const DealerListLedgerTabWrapper = () => {
     const params = useParams()
     const dealerId: any = params.dealerId
-
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
 
     const dealerLedgerState: any = useSelector(
         (state: RootState) => state.dealerLedger
     )
-    const { page, rowsPerPage, items, searchValue } = dealerLedgerState
-
+    const { page, rowsPerPage, items, searchValue, filterBy } =
+        dealerLedgerState
     const dispatch = useDispatch<AppDispatch>()
 
     const { data, isFetching, isLoading } = useGetDealerLedgerQuery({
@@ -42,7 +42,7 @@ const ListLedgerTabWrapper = () => {
                 value: companyId,
             },
         ],
-        dateFilter: {},
+        dateFilter: filterBy,
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
@@ -50,19 +50,15 @@ const ListLedgerTabWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'noteType',
-            headerName: 'Note Type',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: LedgerListResponse) => (
-                <span> {row.noteType} </span>
-            ),
-        },
-        {
-            field: 'price',
-            headerName: 'Price',
+            field: 'createdAt',
+            headerName: 'Date',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => {
-                return <span> {row.price} </span>
+                return (
+                    <span>
+                        {format(new Date(row.createdAt), 'dd/MM/yyyy HH:mm')}
+                    </span>
+                )
             },
         },
         {
@@ -74,21 +70,53 @@ const ListLedgerTabWrapper = () => {
             },
         },
         {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    handleOnAction={() => {
-                        // setShowDropdown(!showDropdown)
-                        // setCurrentId(row?._id)
-                    }}
-                >
-                    <></>
-                </ActionPopup>
+            field: 'creditAmount',
+            headerName: 'Credit Amount',
+            flex: 'flex-[0.8_0.5_0%]',
+            renderCell: (row: LedgerListResponse) => (
+                <span> {row.creditAmount} </span>
             ),
-            align: 'end',
         },
+        {
+            field: 'debitAmount',
+            headerName: 'Debit Amount',
+            flex: 'flex-[0.8_0.5_0%]',
+            renderCell: (row: LedgerListResponse) => (
+                <span> {row.debitAmount} </span>
+            ),
+        },
+        {
+            field: 'balance',
+            headerName: 'Balance',
+            flex: 'flex-[0.8_0.5_0%]',
+            renderCell: (row: LedgerListResponse) => (
+                <span> {row.balance} </span>
+            ),
+        },
+        {
+            field: 'noteType',
+            headerName: 'Note Type',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: LedgerListResponse) => (
+                <span> {row.noteType} </span>
+            ),
+        },
+        // {
+        //     field: 'actions',
+        //     headerName: 'Actions',
+        //     flex: 'flex-[0.5_0.5_0%]',
+        //     renderCell: (row: any) => (
+        //         <ActionPopup
+        //             handleOnAction={() => {
+        //                 // setShowDropdown(!showDropdown)
+        //                 // setCurrentId(row?._id)
+        //             }}
+        //         >
+        //             <></>
+        //         </ActionPopup>
+        //     ),
+        //     align: 'end',
+        // },
     ]
 
     useEffect(() => {
@@ -110,4 +138,4 @@ const ListLedgerTabWrapper = () => {
     )
 }
 
-export default ListLedgerTabWrapper
+export default DealerListLedgerTabWrapper

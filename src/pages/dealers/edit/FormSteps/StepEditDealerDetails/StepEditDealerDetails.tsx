@@ -7,6 +7,7 @@ import { DropdownOptions, FieldType } from './StepEditDealerDetailsWrapper'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -24,8 +25,6 @@ const StepEditDealerDetails = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-
-    console.log(values)
 
     return (
         <div className="py-9 px-7">
@@ -49,49 +48,40 @@ const StepEditDealerDetails = ({
                                     isSubmitting={isSubmitting}
                                 />
                             )
+                        case 'number':
+                            return (
+                                <div>
+                                    <ATMTextField
+                                        key={name}
+                                        name={name}
+                                        value={values[name]}
+                                        onChange={(e) => {
+                                            setFieldValue(name, e.target.value)
+                                        }}
+                                        label={label}
+                                        placeholder={placeholder}
+                                        className="shadow bg-white rounded"
+                                        isSubmitting={isSubmitting}
+                                    />
+                                </div>
+                            )
+                        case 'switch-button':
+                            return (
+                                <div>
+                                    <ATMSwitchButton
+                                        name={name}
+                                        value={values[name]}
+                                        label={label}
+                                        onChange={(value: any) => {
+                                            setFieldValue(name, value)
+                                        }}
+                                    />
+                                </div>
+                            )
 
                         case 'select':
                             return (
                                 <div key={name} className="relative -mt-2">
-                                    {/* <InputLabel className="mb-2">
-                                        {' '}
-                                        {label}{' '}
-                                    </InputLabel> */}
-                                    {/* <FormControl fullWidth>
-                                        <Select
-                                            name={name}
-                                            value={values[name]}
-                                            onChange={(e) => {
-                                                setFieldValue(
-                                                    name,
-                                                    e.target.value
-                                                )
-                                            }}
-                                            size="small"
-                                            className="shadow"
-                                            displayEmpty
-                                        >
-                                            <MenuItem value="">
-                                                <span className="text-slate-400">
-                                                    Select {label}
-                                                </span>
-                                            </MenuItem>
-                                            {dropdownOptions[
-                                                field.optionAccessKey ||
-                                                    'dealerCategoryOptions'
-                                            ]?.map((option) => (
-                                                <MenuItem
-                                                    key={option.value}
-                                                    value={option.value}
-                                                >
-                                                    {' '}
-                                                    {option.label}{' '}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                        
-                                    </FormControl> */}
-
                                     <ATMSelectSearchable
                                         options={
                                             dropdownOptions[

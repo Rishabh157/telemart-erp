@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
-import { array, number, object, string } from 'yup'
+import { number, object, string } from 'yup'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -17,10 +17,12 @@ type Props = {}
 
 export type FormInitialValues = {
     groupName: string
-    tax: {
-        taxName: string
-        taxPercent: number
-    }[]
+    dealerSalePrice: number
+    gst: number
+    sgst: number
+    cgst: number
+    igst: number
+    utgst: number
 }
 
 const EditProductGroupWrapper = (props: Props) => {
@@ -39,47 +41,41 @@ const EditProductGroupWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const { data, isLoading } = useGetProductGroupByIdQuery(Id)
-    // ?.map((ele: any) => {
-    //   return {
-    //     taxDetail: { tax_name: ele?.taxName },
-    //     tax_rate: ele?.taxPercent,
-    //   };
-    // }),
 
     const initialValues: FormInitialValues = {
         groupName: selectedProductGroup?.groupName || '',
-        tax: selectedProductGroup?.tax || [
-            {
-                taxName: '',
-                taxPercent: 0,
-            },
-        ],
+        dealerSalePrice: selectedProductGroup.dealerSalePrice,
+        gst: selectedProductGroup.gst,
+        sgst: selectedProductGroup.sgst,
+        cgst: selectedProductGroup.cgst,
+        igst: selectedProductGroup.igst,
+        utgst: selectedProductGroup.utgst,
     }
 
     // Form Validation Schema
     const validationSchema = object({
         groupName: string().required('Required'),
-        tax: array().of(
-            object().shape({
-                taxName: string().required('Required'),
-                taxPercent: number()
-                    .typeError('Tax rate should be a number')
-                    .required('Required'),
-            })
-        ),
+        dealerSalePrice: number(),
+        gst: number(),
+        sgst: number(),
+        cgst: number(),
+        igst: number(),
+        utgst: number(),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
-        const taxData = values.tax.map((ele) => {
-            return { taxPercent: ele.taxPercent, taxName: ele.taxName }
-        })
         setApiStatus(true)
         setTimeout(() => {
             EditProductGroup({
                 body: {
                     groupName: values.groupName,
-                    tax: taxData,
+                    dealerSalePrice: values.dealerSalePrice,
+                    gst: values.gst,
+                    sgst: values.sgst,
+                    cgst: values.cgst,
+                    igst: values.igst,
+                    utgst: values.utgst,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',

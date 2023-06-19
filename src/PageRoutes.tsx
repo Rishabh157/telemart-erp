@@ -215,10 +215,11 @@ import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsit
 import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsiteTagsWrapper'
 import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
-import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
 import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
-import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
-import OrderLedgerListing from './pages/orderledger/OrderLedgerListing';
+// import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
+import OrderLedgerListing from './pages/orderledger/OrderLedgerListing'
+import EditDealerSchemeWrapper from './pages/dealers/view/tabs/DealerSchemeTab/edit/EditDealerSchemeWrapper'
+import DealerListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -261,7 +262,10 @@ const PageRoutes = () => {
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
-                    <Route path="/order-ledger" element={<OrderLedgerListing />} />
+                    <Route
+                        path="/order-ledger"
+                        element={<OrderLedgerListing />}
+                    />
                     <Route
                         path="/orders/view/:id"
                         element={<OrderViewWrapper />}
@@ -314,10 +318,7 @@ const PageRoutes = () => {
                             path="return-to-vendor"
                             element={'Return To Vendor'}
                         />
-                        <Route
-                            path="ledger"
-                            element={<ListLedgerTabWrapper />}
-                        />
+                        <Route path="ledger" element={'ListLedgerTabWrapper'} />
                         <Route
                             path="activities"
                             element={<VendorActivityTabWrapper />}
@@ -366,6 +367,14 @@ const PageRoutes = () => {
                         path="/outward-request"
                         element={<OutwardRequestListingWrapper />}
                     />
+                    <Route
+                        path="dealers/add-warehouse"
+                        element={<AddWarehouseWrapper />}
+                    />
+                    <Route
+                        path="vendors/add-warehouse"
+                        element={<AddWarehouseWrapper />}
+                    />
 
                     <Route path="/dealers/:dealerId" element={<ViewDealer />}>
                         <Route
@@ -380,14 +389,12 @@ const PageRoutes = () => {
                             path="warehouse"
                             element={<DealerWarehouseTabWrapper />}
                         />
+
                         <Route
                             path="ledger"
-                            element={<ListLedgerTabWrapper />}
+                            element={<DealerListLedgerTabWrapper />}
                         />
-                        <Route
-                            path="ledger/add"
-                            element={<AddDealerLedgerTabWrapper />}
-                        />
+
                         <Route
                             path="activities"
                             element={<DealerActivityTabWrapper />}
@@ -399,6 +406,10 @@ const PageRoutes = () => {
                         <Route
                             path="scheme/add"
                             element={<AddDealerSchemeTabWrapper />}
+                        />
+                        <Route
+                            path="scheme/edit/:schemeId"
+                            element={<EditDealerSchemeWrapper />}
                         />
                         <Route
                             path="pincode"
