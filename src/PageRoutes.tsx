@@ -13,6 +13,7 @@ import {
     AssetsLocationWrapper,
     BarcodeGenerator,
     CompetitorManagementListingWrapper,
+    DealerOrderLedgerListTabWrapper,
     EditArtistWrapper,
     EditAssetsCategoryWrapper,
     EditAssetsLocatonWrapper,
@@ -216,6 +217,7 @@ import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsi
 import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
 import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
+// import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
 import EditDealerSchemeWrapper from './pages/dealers/view/tabs/DealerSchemeTab/edit/EditDealerSchemeWrapper'
 import DealerListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
 
@@ -260,6 +262,7 @@ const PageRoutes = () => {
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
+
                     <Route
                         path="/orders/view/:id"
                         element={<OrderViewWrapper />}
@@ -400,6 +403,10 @@ const PageRoutes = () => {
                         <Route
                             path="ledger"
                             element={<DealerListLedgerTabWrapper />}
+                        />
+                        <Route
+                            path="order-ledger"
+                            element={<DealerOrderLedgerListTabWrapper />}
                         />
 
                         <Route

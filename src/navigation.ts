@@ -101,6 +101,7 @@ export const navigation: NavItemType[] = [
         icon: MdOutlineBorderColor,
         path: '/orders',
     },
+
     {
         label: 'Call',
         icon: IoCallOutline,

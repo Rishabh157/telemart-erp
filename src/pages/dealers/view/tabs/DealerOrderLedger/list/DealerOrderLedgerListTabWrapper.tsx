@@ -5,30 +5,30 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/DealerLedgerSlice'
+} from 'src/redux/slices/dealerOrderLedgerSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useGetDealerLedgerQuery } from 'src/services/DealerLedgerServices'
 import { RootState, AppDispatch } from 'src/redux/store'
-import DealerLedgerListing from './DealerLedgerListing'
+import DealerOrderLedgerListing from './DealerOrderLedgerListing'
 // import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { format } from 'date-fns'
+import { useGetDealerOrderLedgerQuery } from 'src/services/DealerOrderLedgerService'
 import { ledgerNoteType } from 'src/utils'
 
-const DealerListLedgerTabWrapper = () => {
+const DealerOrderLedgerTabWrapper = () => {
     const params = useParams()
     const dealerId: any = params.dealerId
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
 
-    const dealerLedgerState: any = useSelector(
-        (state: RootState) => state.dealerLedger
+    const dealerOrderLedgerState: any = useSelector(
+        (state: RootState) => state.dealerOrderLedger
     )
     const { page, rowsPerPage, items, searchValue, filterBy } =
-        dealerLedgerState
+        dealerOrderLedgerState
     const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isFetching, isLoading } = useGetDealerLedgerQuery({
+    const { data, isFetching, isLoading } = useGetDealerOrderLedgerQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['noteType'],
@@ -99,7 +99,7 @@ const DealerListLedgerTabWrapper = () => {
             headerName: 'Note Type',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
-                <span> {ledgerNoteType[row.noteType]} </span>
+                <span>{ledgerNoteType[row.noteType]} </span>
             ),
         },
     ]
@@ -118,9 +118,9 @@ const DealerListLedgerTabWrapper = () => {
 
     return (
         <>
-            <DealerLedgerListing columns={columns} rows={items} />
+            <DealerOrderLedgerListing columns={columns} rows={items} />
         </>
     )
 }
 
-export default DealerListLedgerTabWrapper
+export default DealerOrderLedgerTabWrapper
