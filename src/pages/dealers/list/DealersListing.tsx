@@ -28,7 +28,7 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } = dealerState
+    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading} = dealerState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3">
@@ -74,6 +74,7 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
+                        isLoading={isTableLoading}
                     />
                 </div>
 

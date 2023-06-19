@@ -32,7 +32,7 @@ const AttributesListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-    const { page, rowsPerPage, searchValue, totalItems } = attributesState
+    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading} = attributesState
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Configuration',
@@ -81,6 +81,7 @@ const AttributesListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/* Table */}
                 <div className="grow overflow-auto">
                     <ATMTable
+                        isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
                         isCheckbox={true}

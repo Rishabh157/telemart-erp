@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { HiDotsHorizontal } from 'react-icons/hi'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import ATMTable, {
     columnTypes,

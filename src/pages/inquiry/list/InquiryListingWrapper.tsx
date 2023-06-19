@@ -37,7 +37,7 @@ const InquiryListingWrapper = () => {
     const inquiryState: any = useSelector((state: RootState) => state.inquiry)
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-    const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
+    const { page, rowsPerPage, searchValue, items, filterValue, totalItems,isTableLoading } =
         inquiryState
 
     const { data, isLoading, isFetching } = useGetInquiryQuery({
@@ -217,6 +217,8 @@ const InquiryListingWrapper = () => {
                             onRowSelect={(selectedRows) =>
                                 setSelectedRows(selectedRows)
                             }
+                            isLoading={isTableLoading}
+
                         />
                     </div>
 

@@ -24,7 +24,7 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.inboundCaller
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = inboundCallerState
+    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading } = inboundCallerState
 
     return (
         <div className="px-4 h-full overflow-auto pt-3 ">
@@ -67,6 +67,7 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

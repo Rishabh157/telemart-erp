@@ -29,7 +29,7 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } = pincodeState
+    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading } = pincodeState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
@@ -74,6 +74,7 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 
