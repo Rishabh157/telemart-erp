@@ -54,9 +54,9 @@ export type SwitchButton = {
 export type Checkbox = {
     name: string
     label: string
-    checked: boolean
+    // checked?: boolean
     type? : 'checkbox'
-    value: string
+    value?: string
     placeholder?: string
     optionAccessKey?:never
     offset?: number

@@ -39,7 +39,6 @@ const formFields: {
         | 'billingStateOptions'
         | 'billingDistrictOptions'
         | 'billingPincodeOptions'
-        
     >[]
 }[] = [
     {
@@ -85,24 +84,20 @@ const formFields: {
             },
         ],
     },
-    // {
-    //     sectionName: 'Same as above address',
-    //     fields: [
-           
-    //     ],
-    // },
-
+    {
+        sectionName: '',
+        fields: [
+            {
+                name: 'checkbox',
+                label: 'As Above values',
+                type: 'checkbox',
+                placeholder: 'checbox',
+            },
+        ],
+    },
     {
         sectionName: 'Billing Address',
         fields: [
-            {
-                name: 'isAddreessAbove',
-                label: 'Same as above address',
-                placeholder : '',
-                type:'checkbox',
-                checked: false,
-                value: ""
-            },
             {
                 name: 'billingAddress.phone',
                 label: 'Phone',

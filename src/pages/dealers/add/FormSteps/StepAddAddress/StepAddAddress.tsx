@@ -7,6 +7,7 @@ import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -55,13 +56,15 @@ const StepAddAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-9 px-7 ${
+                        className={`py-4 px-7 ${
                             index !== formFields.length - 1 && 'border-b'
                         }  border-slate-300`}
                     >
-                        <div className="text-primary-main text-lg pb-2 font-medium">
-                            {sectionName}
-                        </div>
+                        {sectionName && (
+                            <div className="text-primary-main text-lg pb-2 font-medium">
+                                {sectionName}
+                            </div>
+                        )}
 
                         <div className="grid grid-cols-4 gap-4 gap-y-5">
                             {fields?.map((field: FieldType) => {
@@ -149,6 +152,38 @@ const StepAddAddress = ({
                                                     }}
                                                     // size="small"
                                                     selectClass="shadow mt-2"
+                                                />
+                                            </div>
+                                        )
+                                    case 'checkbox':
+                                        return (
+                                            <div className="-mt-2">
+                                                <ATMCheckbox
+                                                    name={name}
+                                                    label={label}
+                                                    onChange={(e) => {
+                                                        setFieldValue(name, e)
+                                                        if (e) {
+                                                            const { address, country, district, phone, pincode, state } =
+                                                                values.registrationAddress
+                                                            setFieldValue('billingAddress.address', address)
+                                                            setFieldValue('billingAddress.country', country)
+                                                            setFieldValue('billingAddress.district', district)
+                                                            setFieldValue('billingAddress.phone', phone)
+                                                            setFieldValue('billingAddress.pincode', pincode)
+                                                            setFieldValue('billingAddress.state', state)
+                                                        }else{
+                                                            setFieldValue('billingAddress.address', '')
+                                                            setFieldValue('billingAddress.country', '')
+                                                            setFieldValue('billingAddress.district', '')
+                                                            setFieldValue('billingAddress.phone', '')
+                                                            setFieldValue('billingAddress.pincode', '')
+                                                            setFieldValue('billingAddress.state', '')
+                                                        }
+                                                    }}
+                                                    checked={Boolean(
+                                                        values[name]
+                                                    )}
                                                 />
                                             </div>
                                         )
