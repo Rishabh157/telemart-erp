@@ -25,7 +25,7 @@ const InfluencerListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const WebsiteState: any = useSelector((state: RootState) => state.website)
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = WebsiteState
+    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading } = WebsiteState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -81,6 +81,7 @@ const InfluencerListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

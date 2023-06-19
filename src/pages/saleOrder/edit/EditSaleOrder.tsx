@@ -1,4 +1,5 @@
-import React from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react'
 import { FormikProps, FieldArray } from 'formik'
 // import { MdDeleteOutline } from "react-icons/md";
 import ATMBreadCrumbs, {
@@ -9,7 +10,10 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './EditSaleOrderWrapper'
-// import { HiPlus } from "react-icons/hi";
+import { useDispatch, useSelector } from 'react-redux'
+import { useGetAllWareHouseByDealerIdQuery } from 'src/services/WareHoouseService'
+import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -18,6 +22,7 @@ type Props = {
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
+    productPriceOptions: []
     apiStatus: boolean
 }
 
@@ -32,12 +37,58 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
+const EditSaleOrder = ({
+    formikProps,
+    dropdownOptions,
+    apiStatus,
+    productPriceOptions,
+}: Props) => {
     dropdownOptions = {
         ...dropdownOptions,
     }
 
+    //console.log(productPriceOptions)
+
     const { values, setFieldValue } = formikProps
+
+    const dispatch = useDispatch<AppDispatch>()
+    const [dealerId, setDealerId] = useState('')
+    const [productGroup, setProductGroup] = useState('')
+    const [price, setPrice] = useState('')
+
+    const dealerWarehouse: any = useSelector(
+        (state: RootState) => state.warehouse
+    )
+    const { userData } = useSelector((state: RootState) => state?.auth)
+    const companyId = userData?.companyId
+
+    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery({
+        companyId,
+        dealerId,
+    })
+
+    useEffect(() => {
+        if (dealerId !== '' && !isLoading && !isFetching) {
+            dispatch(setDealerWarehouse(data?.data))
+        }
+    }, [data, isLoading, isFetching, dealerId, dispatch])
+
+    const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
+        (ele: any) => {
+            return {
+                label: ele.wareHouseName,
+                value: ele._id,
+            }
+        }
+    )
+
+    useEffect(() => {
+        const val = productPriceOptions?.find((e) => e['key'] === productGroup)
+
+        if (val) {
+            setFieldValue(`productSalesOrder.rate`, val['value'])
+        }
+    }, [productGroup])
 
     return (
         <div className="">
@@ -73,7 +124,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-4 gap-4">
                             {/* SO Number */}
                             <ATMTextField
                                 name="soNumber"
@@ -87,19 +138,35 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
 
                             {/* Dealer */}
                             <ATMSelectSearchable
-                                name="dealer"
-                                value={values?.dealer}
-                                onChange={(e) => setFieldValue('dealer', e)}
+                                name="dealerId"
+                                value={values?.dealerId}
+                                onChange={(e) => {
+                                    setFieldValue('dealerId', e)
+                                    setDealerId(e)
+                                }}
                                 options={dropdownOptions.dealerOptions}
                                 label="Dealer"
                                 selectLabel="Select Dealer"
                             />
 
+                            {/* Dealer Warehouse */}
+                            <ATMSelectSearchable
+                                name="dealerWareHouseId"
+                                value={values.dealerWareHouseId}
+                                onChange={(e) =>
+                                    setFieldValue('dealerWareHouseId', e)
+                                }
+                                options={dealerWarehouseOptions}
+                                label="Dealer Warehouse"
+                                selectLabel="Select Dealer Warehouse"
+                            />
                             {/* Warehouse */}
                             <ATMSelectSearchable
-                                name="warehouse"
-                                value={values.wareHouse}
-                                onChange={(e) => setFieldValue('wareHouse', e)}
+                                name="companyWareHouseId"
+                                value={values.companyWareHouseId}
+                                onChange={(e) =>
+                                    setFieldValue('companyWareHouseId', e)
+                                }
                                 options={dropdownOptions.warehouseOptions}
                                 label="Warehouse"
                                 selectLabel="Select Warehouse"
@@ -133,12 +200,18 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                                                 ?.productGroupId ||
                                                             ''
                                                         }
-                                                        onChange={(e) =>
+                                                        onChange={(e) => {
                                                             setFieldValue(
                                                                 `productSalesOrder.productGroupId`,
                                                                 e
                                                             )
-                                                        }
+                                                            setFieldValue(
+                                                                `productSalesOrder.rate`,
+                                                                ''
+                                                            )
+                                                            setProductGroup(e)
+                                                            setPrice('')
+                                                        }}
                                                         selectLabel=" Select Product Group"
                                                         options={
                                                             dropdownOptions.productGroupOptions
@@ -151,7 +224,7 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                                 <div className="flex-1">
                                                     <ATMTextField
                                                         type="number"
-                                                        min={0}
+                                                        disabled={true}
                                                         name={`productSalesOrder.rate`}
                                                         value={
                                                             values?.productSalesOrder?.rate?.toString() ||
@@ -180,12 +253,16 @@ const EditSaleOrder = ({ formikProps, dropdownOptions, apiStatus }: Props) => {
                                                         }
                                                         label="Quantity"
                                                         placeholder="Quantity"
-                                                        onChange={(e) =>
+                                                        onChange={(e) => {
                                                             setFieldValue(
                                                                 `productSalesOrder.quantity`,
                                                                 e.target.value
                                                             )
-                                                        }
+                                                            setFieldValue(
+                                                                `productSalesOrder.rate`,
+                                                                price
+                                                            )
+                                                        }}
                                                     />
                                                 </div>
 

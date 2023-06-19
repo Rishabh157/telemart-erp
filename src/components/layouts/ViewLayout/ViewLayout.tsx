@@ -99,7 +99,7 @@ const ViewLayout = ({
                                         <div
                                             key={index}
                                             onClick={() => navigate(tab.path)}
-                                            className={`h-full px-3 flex gap-2 items-center  cursor-pointer hover:text-primary-main rounded font-medium text-sm
+                                            className={`h-full px-3 flex gap-2 items-center  cursor-pointer hover:text-primary-main rounded font-medium text-sm font-semibold
                                                  ${
                                                      location.pathname.split(
                                                          '/'

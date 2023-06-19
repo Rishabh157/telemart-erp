@@ -1,10 +1,12 @@
 export type ProductGroupListResponse = {
-    groupName: string
     companyId: string
-    tax: {
-        taxName: string
-        taxPercent: number
-    }[]
+    groupName: string
+    gst: number
+    dealerSalePrice: number
+    sgst: number
+    cgst: number
+    igst: number
+    utgst: number
     is_active: boolean
     is_deleted: boolean
     createdAt: string
@@ -15,20 +17,24 @@ export type ProductGroupListResponse = {
 
 export type AddProductGroup = {
     groupName: string
+    dealerSalePrice: number
     companyId: string
-    tax: {
-        taxName: string
-        taxPercent: number
-    }[]
+    gst: number
+    sgst: number
+    cgst: number
+    igst: number
+    utgst: number
 }
 
 export type UpdateProductGroup = {
     body: {
+        dealerSalePrice: number
         groupName: string
-        tax: {
-            taxName: string
-            taxPercent: number
-        }[]
+        gst: number
+        sgst: number
+        cgst: number
+        igst: number
+        utgst: number
         companyId: string
     }
     id: string

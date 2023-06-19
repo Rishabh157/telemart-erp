@@ -31,7 +31,7 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } = attributesGroupState
+    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading } = attributesGroupState
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Configuration',
@@ -90,6 +90,7 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

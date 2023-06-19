@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 const ListItemCard = ({ item }: { item: any }) => {
     const navigate = useNavigate()
     const { vendorId } = useParams()
+    const location = useLocation()
+    const pathValue = location.pathname.split('/')[3] || 'general-information'
 
     useEffect(() => {
         document
@@ -15,7 +17,7 @@ const ListItemCard = ({ item }: { item: any }) => {
         <div
             id={item._id}
             onClick={() => {
-                navigate(`/vendors/${item._id}/general-information`)
+                navigate(`/vendors/${item._id}/${pathValue}`)
             }}
             key={item._id}
             className="flex gap-4 border-b items-center  px-3 py-1 cursor-pointer"

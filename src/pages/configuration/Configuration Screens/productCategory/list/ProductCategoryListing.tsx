@@ -30,7 +30,7 @@ const ProductCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.productCategory
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-    const { page, rowsPerPage, searchValue, totalItems } = productCategoryState
+    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading } = productCategoryState
     const [selectedRows, setSelectedRows] = useState([])
 
     const breadcrumbs: BreadcrumbType[] = [
@@ -91,6 +91,7 @@ const ProductCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         extraClasses="h-full overflow-auto"
                         setShowDropdown={setShowDropdown}
+                        isLoading={isTableLoading}
                     />
                 </div>
 

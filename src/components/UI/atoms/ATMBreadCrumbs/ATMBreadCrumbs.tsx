@@ -18,7 +18,7 @@ const ATMBreadCrumbs = ({ breadcrumbs }: Props) => {
 
     return (
         <Breadcrumbs
-            separator={<FiChevronRight className="text-xl" />}
+            separator={<FiChevronRight className="text-xl text-black" />}
             aria-label="breadcrumb"
         >
             {breadcrumbs.map((breadcrumb, breadcrumbIndex) => (
@@ -30,7 +30,9 @@ const ATMBreadCrumbs = ({ breadcrumbs }: Props) => {
                         breadcrumb.onClick && breadcrumb.onClick()
                         navigate(breadcrumb.path || '')
                     }}
-                    className={breadcrumb.path && 'cursor-pointer'}
+                    className={`${
+                        breadcrumb.path && 'cursor-pointer'
+                    }  text-black`}
                 >
                     {breadcrumb.label}
                 </Link>

@@ -277,6 +277,7 @@ const VendorOrderTab = () => {
                 selectedRows={selectedRows}
                 onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
                 extraClasses={`max-h-[calc(100%-100px)] overflow-auto`}
+         
             />
 
             <div className=" border-t  h-[50px] flex items-center ">

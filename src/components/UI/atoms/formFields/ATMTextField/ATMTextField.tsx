@@ -9,6 +9,7 @@ export type ATMTextFieldPropTypes = {
     name: string
     value: string | string[] | number
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    autoFocus?: boolean
     label?: string
     size?: 'small' | 'medium' | 'large' | 'xs'
     isSubmitting?: boolean
@@ -30,6 +31,8 @@ const ATMTextField = ({
     className = `shadow bg-white rounded ${label && 'mt-2'}`,
     required,
     onBlur,
+    autoFocus,
+    onInput,
     size = 'small',
     type = 'text',
     isSubmitting = true,

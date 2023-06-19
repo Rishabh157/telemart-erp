@@ -31,7 +31,7 @@ const DispositionComplaintListing = ({
         (state: RootState) => state.dispositionComplaint
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } =
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         dispositionComplaintState
 
     const navigate = useNavigate()
@@ -91,6 +91,7 @@ const DispositionComplaintListing = ({
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

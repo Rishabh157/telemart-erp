@@ -42,7 +42,7 @@ const ATMTable = <T extends {}>({
     isLoading = false,
     setShowDropdown,
     headerClassName = ' py-2 px-2',
-    rowClassName = 'px-2 bg-white',
+    rowClassName = 'px-2 bg-white py-2',
     noDataFoundText = `${NOT_DATA_FOUND}`,
     noDataFoundClass = 'text-slate-500',
 }: ATMTablePropTypes<T>) => {
@@ -57,7 +57,7 @@ const ATMTable = <T extends {}>({
         >
             {/* Columns */}
             <div
-                className={`flex items-center ${headerClassName} border-b sticky top-0 border-slate-300 bg-slate-50 `}
+                className={`flex items-center ${headerClassName} border-b sticky top-0 border-slate-300 bg-slate-50 z-40 `}
             >
                 {/* Checkbox */}
                 {rows.length && isCheckbox ? (
@@ -82,7 +82,7 @@ const ATMTable = <T extends {}>({
                             key={column.field}
                             className={`${
                                 column.flex
-                            } text-sm text-slate-500 font-semibold px-2 flex justify-${
+                            } text-sm text-black  font-semibold px-2 flex justify-${
                                 column.align || 'start'
                             }  ${column.extraClasses}`}
                         >
@@ -99,8 +99,12 @@ const ATMTable = <T extends {}>({
                         return (
                             <div
                                 key={index}
-                                className="animate-pulse bg-slate-200 h-[50px]"
-                            ></div>
+                                className="animate-pulse  h-[50px] p-2"
+                            >
+                                <div className="bg-slate-200 h-full rounded">
+                                    {' '}
+                                </div>
+                            </div>
                         )
                     })
             ) : rows.length ? (
@@ -108,7 +112,7 @@ const ATMTable = <T extends {}>({
                     <div
                         onClick={() => onRowClick && onRowClick(row)}
                         key={row[idKey] || rowIndex}
-                        className={`flex items-center  ${rowClassName}  ${
+                        className={`flex items-center font-semibold text-grey-600  ${rowClassName}  ${
                             onRowClick && 'cursor-pointer'
                         }  ${rowExtraClasses && rowExtraClasses(row)}  ${
                             rowIndex !== rows.length - 1 && 'border-b'
@@ -169,7 +173,7 @@ const ATMTable = <T extends {}>({
                 ))
             ) : (
                 <div
-                    className={`w-full flex justify-center  ${noDataFoundClass}`}
+                    className={`w-full flex justify-center font-semibold ${noDataFoundClass}`}
                 >
                     {noDataFoundText}
                 </div>

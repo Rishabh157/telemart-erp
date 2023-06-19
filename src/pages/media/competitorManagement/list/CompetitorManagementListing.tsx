@@ -31,7 +31,7 @@ const CompetitorManagementListing = ({
         (state: RootState) => state.competitor
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = competitorState
+    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading} = competitorState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -86,6 +86,8 @@ const CompetitorManagementListing = ({
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
+                        isLoading={isTableLoading}
+
                         extraClasses="h-full overflow-auto"
                     />
                 </div>

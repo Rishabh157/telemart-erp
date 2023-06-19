@@ -7,6 +7,7 @@ import { FormInitialValues } from './AddWarehouseWrapper'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from 'src/redux/store'
+import { useLocation } from 'react-router-dom'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -30,14 +31,22 @@ const AddWarehouse = ({
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
-
+    const { state } = useLocation()
+    const vendorId = state?.params?.vendorId || null
+    const dealerId = state?.params?.dealerId || null
+    let redirectPath = 'warehouse'
+    let redirectLabel = 'Warehouse'
+    if (dealerId) {
+        redirectLabel = 'Dealer Warehouse'
+        redirectPath = `dealers/${dealerId}/warehouse`
+    } else if (vendorId) {
+        redirectLabel = 'Vendor Warehouse'
+        redirectPath = `vendors/${vendorId}/warehouse`
+    }
     const breadcrumbs = [
         {
-            label: 'Warehouse',
-            onClick: () => {
-                console.log('Dealers')
-            },
-            path: '/warehouse',
+            label: `${redirectLabel}`,
+            path: `/${redirectPath}`,
         },
         {
             label: 'Add Warehouse',

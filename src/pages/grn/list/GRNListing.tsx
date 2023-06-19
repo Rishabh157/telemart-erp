@@ -24,7 +24,7 @@ const GRNListing = ({ columns, rows }: Props) => {
     const grnState: any = useSelector((state: RootState) => state.grn)
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-    const { page, rowsPerPage, searchValue, totalItems } = grnState
+    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading} = grnState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
@@ -54,6 +54,7 @@ const GRNListing = ({ columns, rows }: Props) => {
                 {/* Table */}
                 <div className="grow overflow-auto  ">
                     <ATMTable
+                    isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
                         isCheckbox={true}
@@ -62,6 +63,7 @@ const GRNListing = ({ columns, rows }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="max-h-full overflow-auto"
+                        
                     />
                 </div>
 

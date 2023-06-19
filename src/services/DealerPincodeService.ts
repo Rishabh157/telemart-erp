@@ -53,9 +53,9 @@ export const dealerPincodeApi = apiSlice.injectEndpoints({
         }),
         //****Delete dealer pincode ****/
         deleteDealerPincode: builder.mutation({
-            invalidatesTags: ['dealerPincode'],
-            query: (id: string) => ({
-                url: `/dealer-pincode/${id}`,
+            invalidatesTags: ['dealerPincode', 'dealerScheme'],
+            query: ({ id, pincode }: { id: string; pincode: string }) => ({
+                url: `/dealer-pincode/${id}/pincode/${pincode}`,
                 method: 'DELETE',
             }),
         }),
@@ -68,5 +68,5 @@ export const {
     useUpdateDealerPincodeMutation,
     useDeactiveDealerPincodeMutation,
     useGetAllPincodeByDealerQuery,
-    useDeleteDealerPincodeMutation
+    useDeleteDealerPincodeMutation,
 } = dealerPincodeApi
