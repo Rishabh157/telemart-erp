@@ -137,9 +137,9 @@ const StepEditAddress = ({
                                         return (
                                             <div className="mt-4">
                                                 <ATMFilePickerWrapper
-                                                    name="gstCertificate"
-                                                    label="GST Certificate"
-                                                    placeholder="GST Certificate"
+                                                    name={name}
+                                                    label={label}
+                                                    placeholder={placeholder}
                                                     onSelect={(newFile) => {
                                                         const formData =
                                                             new FormData()
@@ -164,7 +164,7 @@ const StepEditAddress = ({
                                                                     false
                                                                 )
                                                                 setFieldValue(
-                                                                    'gstCertificate',
+                                                                    name,
                                                                     res?.data
                                                                         ?.data
                                                                         ?.fileUrl
