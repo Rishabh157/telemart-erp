@@ -9,7 +9,7 @@ const VendorActivityTab = (props: Props) => {
         <div className="p-2 ">
             <div className="flex flex-col gap-4 ">
                 {activitiesList?.map((activity, index) => (
-                    <div className="flex gap-2 shadow rounded border px-3 py-2">
+                    <div key={index} className="flex gap-2 shadow rounded border px-3 py-2">
                         <div className="flex flex-col w-[130px]">
                             <div className="text-slate-500 text-sm">
                                 {' '}
