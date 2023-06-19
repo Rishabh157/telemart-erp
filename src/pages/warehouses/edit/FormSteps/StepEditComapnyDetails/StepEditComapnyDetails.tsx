@@ -6,6 +6,7 @@ import { FormInitialValues } from '../../EditWarehouseWrapper'
 import { DropdownOptions, FieldType } from './StepEditCompanyDetailsWrapper'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -48,44 +49,28 @@ const StepEditComapnyDetails = ({
 
                         case 'select':
                             return (
-                                <div key={name} className="relative mt-2">
-                                    <InputLabel className="mb-2">
-                                        {' '}
-                                        {label}{' '}
-                                    </InputLabel>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            name={name}
-                                            value={values[name]}
-                                            onChange={(e) => {
-                                                setFieldValue(
-                                                    name,
-                                                    e.target.value
-                                                )
-                                            }}
-                                            size="small"
-                                            className="shadow"
-                                            displayEmpty
-                                        >
-                                            <MenuItem value="">
-                                                <span className="text-slate-400">
-                                                    Select {label}
-                                                </span>
-                                            </MenuItem>
-                                            {dropdownOptions[
+                                <div className="-mt-2">
+                                    <ATMSelectSearchable
+                                        selectLabel={label}
+                                        label={label}
+                                        name={name}
+                                        value={
+                                            name.includes('.')
+                                                ? values[name.split('.')[0]][
+                                                      name.split('.')[1]
+                                                  ]
+                                                : values[name]
+                                        }
+                                        onChange={(e: any) => {
+                                            setFieldValue(name, e)
+                                        }}
+                                        options={
+                                            dropdownOptions[
                                                 field.optionAccessKey ||
                                                     'countryOptions'
-                                            ]?.map((option) => (
-                                                <MenuItem
-                                                    key={option.value}
-                                                    value={option.value}
-                                                >
-                                                    {' '}
-                                                    {option.label}{' '}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
+                                            ]
+                                        }
+                                    />
                                 </div>
                             )
 

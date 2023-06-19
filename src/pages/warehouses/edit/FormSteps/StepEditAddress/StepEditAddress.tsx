@@ -1,4 +1,3 @@
-import { FormControl, MenuItem, Select } from '@mui/material'
 import { FormikProps } from 'formik'
 import React, { useState } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -9,6 +8,7 @@ import { RootState } from 'src/redux/store'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
 import { CircularProgress } from '@mui/material'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -135,7 +135,7 @@ const StepEditAddress = ({
                                         )
                                     case 'file-picker':
                                         return (
-                                            <div className="mt-2">
+                                            <div className="mt-4">
                                                 <ATMFilePickerWrapper
                                                     name="gstCertificate"
                                                     label="GST Certificate"
@@ -190,90 +190,35 @@ const StepEditAddress = ({
 
                                     case 'select':
                                         return (
-                                            <div
-                                                key={name}
-                                                className="relative mt-8"
-                                            >
-                                                <FormControl fullWidth>
-                                                    <Select
-                                                        name={name}
-                                                        value={
-                                                            name.includes('.')
-                                                                ? values[
-                                                                      name.split(
-                                                                          '.'
-                                                                      )[0]
-                                                                  ][
-                                                                      name.split(
-                                                                          '.'
-                                                                      )[1]
-                                                                  ]
-                                                                : values[name]
-                                                        }
-                                                        onChange={(e) => {
-                                                            setFieldValue(
-                                                                name,
-                                                                e.target.value
-                                                            )
-                                                            if (
-                                                                name ===
-                                                                'regd_address.country'
-                                                            ) {
-                                                                formikProps.setFieldValue(
-                                                                    'regd_address.district',
-                                                                    ''
-                                                                )
-                                                                formikProps.setFieldValue(
-                                                                    'regd_address.state',
-                                                                    ''
-                                                                )
-                                                                formikProps.setFieldValue(
-                                                                    'regd_address.pincode',
-                                                                    ''
-                                                                )
-                                                            }
-                                                            if (
-                                                                name ===
-                                                                'billing_address.country'
-                                                            ) {
-                                                                formikProps.setFieldValue(
-                                                                    'billing_address.district',
-                                                                    ''
-                                                                )
-                                                                formikProps.setFieldValue(
-                                                                    'billing_address.state',
-                                                                    ''
-                                                                )
-                                                                formikProps.setFieldValue(
-                                                                    'billing_address.pincode',
-                                                                    ''
-                                                                )
-                                                            }
-                                                        }}
-                                                        size="small"
-                                                        className="shadow mt-2"
-                                                        displayEmpty
-                                                    >
-                                                        {dropdownOptions[
+                                            <div className="-mt-2">
+                                                <ATMSelectSearchable
+                                                    label={label}
+                                                    selectLabel={label}
+                                                    name={name}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[0]
+                                                              ][
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[1]
+                                                              ]
+                                                            : values[name]
+                                                    }
+                                                    onChange={(e: any) => {
+                                                        setFieldValue(name, e)
+                                                    }}
+                                                    options={
+                                                        dropdownOptions[
                                                             field.optionAccessKey ||
                                                                 'counrtyOptions'
-                                                        ]?.map((option) => (
-                                                            <MenuItem
-                                                                key={
-                                                                    option.value
-                                                                }
-                                                                value={
-                                                                    option.value
-                                                                }
-                                                            >
-                                                                {' '}
-                                                                {
-                                                                    option.label
-                                                                }{' '}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
+                                                        ]
+                                                    }
+                                                    isSubmitting={isSubmitting}
+                                                />
                                             </div>
                                         )
 

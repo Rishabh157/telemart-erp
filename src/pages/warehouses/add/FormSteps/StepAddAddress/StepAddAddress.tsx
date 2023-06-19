@@ -135,7 +135,7 @@ const StepAddAddress = ({
                                         )
                                     case 'file-picker':
                                         return (
-                                            <div className="mt-2">
+                                            <div className="mt-4">
                                                 <ATMFilePickerWrapper
                                                     name={name}
                                                     label={label}
