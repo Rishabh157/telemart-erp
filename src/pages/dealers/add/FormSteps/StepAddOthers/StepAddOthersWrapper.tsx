@@ -39,7 +39,7 @@ const othersformFields: { sectionName: string; fields: FieldType[] }[] = [
 const StepAddOthersWrapper = ({ formikProps }: Props) => {
     return (
         <>
-            <StepAddOthers formikProps={formikProps} othersformFields={othersformFields}  />
+            <StepAddOthers formikProps={formikProps}   />
         </>
     )
 }

@@ -2,29 +2,50 @@ import React from 'react'
 import { FormikProps } from 'formik'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import { FormInitialValues } from '../../AddDealerWrapper'
-import { FieldType } from './StepAddOthersWrapper'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import {  getHierarchyByDept } from 'src/utils/GetHierarchyByDept'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
-    othersformFields: { sectionName: string; fields: FieldType[] }[]
 }
 
-const StepAddOthers = ({ formikProps, othersformFields }: Props) => {
+const StepAddOthers = ({ formikProps }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
-    const { formSubmitting: isSubmitting } = useSelector(
-        (state: RootState) => state?.auth
-    )
 
     return (
         <div className="">
             <div className={`py-9 px-7 border-b border-slate-400`}>
+              
+
+                <div className="grid grid-cols-12 gap-4 gap-y-4 mb-4">
+                    <div className="col-span-4">
+                        <ATMSelectSearchable
+                            name="zonalManagerId"
+                            value={values.zonalManager}
+                            options={getHierarchyByDept({department:"DISTRBUTION_DEPARTMENT"}) as SelectOption[] ||[]}
+                            label="Zonal Manager"
+                            onChange={(e) => {
+                                setFieldValue("zonalManagerId",e)
+                            }}
+                        />
+                    </div>
+                    <div className="col-span-4">
+                        <ATMSelectSearchable
+                            name="zonalExecutiveId"
+                            value={values.zonalManager}
+                            options={getHierarchyByDept({department:"DISTRBUTION_DEPARTMENT"}) as SelectOption[] ||[]}
+                            label="Zonal Executive"
+                            onChange={(e) => {
+                                setFieldValue("zonalExecutiveId",e)
+                            }}
+                        />
+                    </div>
+                </div>
                 <div className="text-primary-main text-lg pb-2 font-medium ">
                     Others
                 </div>
-
                 <div className="grid grid-cols-12 gap-4 gap-y-4">
                     <div className="col-span-4">
                         <ATMSwitchButton
@@ -66,7 +87,7 @@ const StepAddOthers = ({ formikProps, othersformFields }: Props) => {
                             </div>
                         </>
                     )}
-                </div>
+                </div>               
             </div>
         </div>
     )

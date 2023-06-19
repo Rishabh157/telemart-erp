@@ -42,23 +42,6 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
             },
         ],
     },
-    // {
-    //   sectionName: "otherDocument ",
-    //   fields: [
-    //     {
-    //       name: "documentName",
-    //       label: "document Name",
-    //       placeholder: "document Name",
-
-    //     },
-    //     {
-    //       name: "documentFile",
-    //       label: "document File",
-    //       placeholder: "document File",
-
-    //     },
-    //   ]
-    // }
 ]
 
 const StepAddDocumentsWrapper = ({ formikProps }: Props) => {

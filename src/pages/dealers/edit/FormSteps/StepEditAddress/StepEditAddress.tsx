@@ -226,7 +226,7 @@ const StepEditAddress = ({
                                                         setFieldValue(
                                                             'billingAddress.stateId',
                                                             ''
-                                                        )
+                                                        )   
                                                     }
                                                 }}
                                             />
