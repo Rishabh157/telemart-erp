@@ -23,7 +23,7 @@ type Props = {}
 
 export type FormInitialValues = {
     soNumber: string | ''
-    dealer: string | ''
+    dealerId: string | ''
     dealerWareHouseId: string | ''
     companyWareHouseId: string | ''
     companyId: string | ''
@@ -132,7 +132,7 @@ const EditSaleOrderWrapper = (props: Props) => {
     // Form Initial Values
     const initialValues: FormInitialValues = {
         soNumber: selectedItem?.soNumber || '',
-        dealer: selectedItem?.dealer || '',
+        dealerId: selectedItem?.dealerId || '',
         dealerWareHouseId: selectedItem?.dealerWareHouseId || '',
         companyWareHouseId: selectedItem?.companyWareHouseId || '',
         productSalesOrder: selectedItem?.productSalesOrder,
@@ -142,7 +142,7 @@ const EditSaleOrderWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         soNumber: string().required('Sale order number is required'),
-        dealer: string().required('Please select a dealer'),
+        dealerId: string().required('Please select a dealer'),
         dealerWareHouseId: string().required(
             'Please select a dealer warehouse'
         ),
@@ -173,7 +173,7 @@ const EditSaleOrderWrapper = (props: Props) => {
             updateSaleOrder({
                 body: {
                     soNumber: values.soNumber,
-                    dealer: values.dealer,
+                    dealerId: values.dealerId,
                     dealerWareHouseId: values.dealerWareHouseId,
                     companyWareHouseId: values.companyWareHouseId,
                     productSalesOrder: productSalesOrder,

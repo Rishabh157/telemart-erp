@@ -138,10 +138,10 @@ const AddSaleOrder = ({
 
                             {/* Dealer */}
                             <ATMSelect
-                                name="dealer"
-                                value={values.dealer}
+                                name="dealerId"
+                                value={values.dealerId}
                                 onChange={(e) => {
-                                    setFieldValue('dealer', e.target.value)
+                                    setFieldValue('dealerId', e.target.value)
                                     setDealerId(e.target.value)
                                 }}
                                 options={dropdownOptions.dealerOptions}

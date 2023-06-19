@@ -47,7 +47,7 @@ const EditSaleOrder = ({
         ...dropdownOptions,
     }
 
-    console.log(productPriceOptions)
+    //console.log(productPriceOptions)
 
     const { values, setFieldValue } = formikProps
 
@@ -138,10 +138,10 @@ const EditSaleOrder = ({
 
                             {/* Dealer */}
                             <ATMSelectSearchable
-                                name="dealer"
-                                value={values?.dealer}
+                                name="dealerId"
+                                value={values?.dealerId}
                                 onChange={(e) => {
-                                    setFieldValue('dealer', e)
+                                    setFieldValue('dealerId', e)
                                     setDealerId(e)
                                 }}
                                 options={dropdownOptions.dealerOptions}

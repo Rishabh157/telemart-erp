@@ -6,7 +6,7 @@ export type productSalesOrder = {
 
 export type SaleOrderListResponse = {
     soNumber: string
-    dealer: string
+    dealerId: string
     wareHouse: string
     dealerLabel: string
     warehouseLabel: string
@@ -17,6 +17,12 @@ export type SaleOrderListResponse = {
         approvalById: string
         time: string
     }[]
+    dhApproved: boolean | null
+    dhApprovedActionBy: string
+    dhApprovedAt: string
+    accApproved: boolean | null
+    accApprovedActionBy: string
+    accApprovedAt: string 
     isActive: boolean
     isDeleted: boolean
     createdAt: string
@@ -27,7 +33,7 @@ export type SaleOrderListResponse = {
 
 export type AddSaleOrder = {
     soNumber: string
-    dealer: string
+    dealerId: string
     dealerWareHouseId: string
     companyWareHouseId: string
     companyId: string
@@ -37,11 +43,17 @@ export type AddSaleOrder = {
 export type UpdateSaleOrder = {
     body: {
         soNumber: string
-        dealer: string
+        dealerId: string
         dealerWareHouseId: string
         companyWareHouseId: string
         companyId: string
         productSalesOrder: productSalesOrder
+        dhApproved?: boolean | null
+        dhApprovedBydId?: string
+        dhApprovedAt?: string
+        accApproved?: boolean | null
+        accApprovedById?: string
+        accApprovedAt?: string 
     }
     id: string
 }
