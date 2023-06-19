@@ -47,12 +47,6 @@ const formFields: FieldType[] = [
         placeholder: 'Opeaning Balance',
         type: 'number',
     },
-    // {
-    //     name: 'autoMapping',
-    //     label: 'Auto Mapping',
-    //     placeholder: 'Auto Mapping',
-    //     type: 'switch-button',
-    // },
     {
         name: 'quantityQuotient',
         label: 'Quantity Quotient',

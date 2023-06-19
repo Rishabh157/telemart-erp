@@ -7,6 +7,7 @@ import StepAddDealerDetailsWrapper from './FormSteps/StepAddDealerDetails/StepAd
 import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
 import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
 import StepAddDocumentsWrapper from './FormSteps/StepAddDocuments/StepAddDocumentsWrapper'
+import StepAddOthersWrapper from './FormSteps/StepAddOthers/StepAddOthersWrapper'
 import { useAddDealerMutation } from 'src/services/DealerServices'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
@@ -30,6 +31,9 @@ export type FormInitialValues = {
     dealerCategory: string
     email: string
     password: string
+    isAutoMap: boolean
+    isCreditLimit: boolean
+    isAvailableQuantity: boolean
     registrationAddress: {
         phone: string
         address: string
@@ -156,8 +160,8 @@ const steps = [
                 adharCardNumber: string()
                     .min(14, 'Number should be 12 digits')
                     .max(14, 'maximum 12 digit')
-                    .required('Adhar Number is required'),
-                adharCard: mixed().required('Declaration form is required'),
+                    .required('Aadhar number  is required'),
+                adharCard: mixed().required('Aadhar certificate is required'),
             }),
             otherDocument: array().of(
                 object().shape({
@@ -165,6 +169,15 @@ const steps = [
                     documentFile: string(),
                 })
             ),
+        }),
+    },
+    {
+        label: 'Others',
+        component: StepAddOthersWrapper,
+        validationSchema: object({
+            isAutoMap: boolean(),
+            isCreditLimit: boolean(),
+            isAvailableQuantity: boolean(),
         }),
     },
 ]
@@ -182,13 +195,16 @@ const AddDealerWrapper = () => {
         firmName: '',
         creditLimit: 0,
         openingBalance: 0,
-        autoMapping: true,
+        autoMapping: false,
         quantityQuotient: 0,
         firstName: '',
         lastName: '',
         dealerCategory: '',
         email: '',
         password: '',
+        isAutoMap: true,
+        isCreditLimit: false,
+        isAvailableQuantity: false,
         registrationAddress: {
             phone: '',
             address: '',
@@ -266,12 +282,15 @@ const AddDealerWrapper = () => {
                     firstName: values.firstName,
                     creditLimit: values.creditLimit,
                     openingBalance: values.openingBalance,
-                    autoMapping: values.autoMapping,
+                    // autoMapping: values.autoMapping,
                     quantityQuotient: values.quantityQuotient,
                     lastName: values.lastName,
                     dealerCategoryId: values.dealerCategory,
                     email: values.email,
                     password: values.password,
+                    isAutoMapping: values.isAutoMap,
+                    isCheckCreditLimit: values.isCreditLimit,
+                    isCheckAvailableQuotient: values.isAvailableQuantity,
                     registrationAddress: {
                         phone: values.registrationAddress.phone,
                         address: values.registrationAddress.address,

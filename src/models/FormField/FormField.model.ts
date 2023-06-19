@@ -57,7 +57,7 @@ export type Checkbox = {
     checked: boolean
     type? : 'checkbox'
     value: string
-    placeholder: string
+    placeholder?: string
     optionAccessKey?:never
     offset?: number
 }

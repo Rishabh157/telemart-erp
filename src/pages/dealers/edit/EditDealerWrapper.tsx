@@ -7,6 +7,7 @@ import StepEditDealerDetailsWrapper from './FormSteps/StepEditDealerDetails/Step
 import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
 import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
 import StepEditDocumentsWrapper from './FormSteps/StepEditDocuments/StepEditDocumentsWrapper'
+import StepEditOthersWrapper from './FormSteps/StepEditOthers/StepEditOthersWrapper'
 import {
     useGetDealerByIdQuery,
     useUpdateDealerMutation,
@@ -28,11 +29,13 @@ export type FormInitialValues = {
     firstName: string
     creditLimit: number
     openingBalance: number
-    autoMapping: boolean
     quantityQuotient: number
     lastName: string
     dealerCategoryId: string
     email: string
+    isAutoMap: boolean
+    isCreditLimit: boolean
+    isAvailableQuantity: boolean
     registrationAddress: {
         phone: string
         address: string
@@ -130,8 +133,7 @@ const steps = [
                     name: string(),
                     department: string(),
                     designation: string(),
-                    email: string()
-                        .email('Invalid email'),
+                    email: string().email('Invalid email'),
                     mobileNumber: string()
                         .max(10, 'maximum 10 digits')
                         .min(10, 'minimum 10 digits')
@@ -164,6 +166,15 @@ const steps = [
             ),
         }),
     },
+    {
+        label: 'Others',
+        component: StepEditOthersWrapper,
+        validationSchema: object({
+            isAutoMap: boolean(),
+            isCreditLimit: boolean(),
+            isAvailableQuantity: boolean(),
+        }),
+    },
 ]
 
 const EditDealerWrapper = () => {
@@ -194,10 +205,12 @@ const EditDealerWrapper = () => {
         firstName: selectedItem?.firstName || '',
         creditLimit: selectedItem?.creditLimit || 0,
         openingBalance: selectedItem?.openingBalance || 0,
-        autoMapping: selectedItem?.autoMapping || true,
         quantityQuotient: selectedItem?.quantityQuotient || 0,
         lastName: selectedItem?.lastName || '',
         dealerCategoryId: selectedItem?.dealerCategoryId || '',
+        isAutoMap: selectedItem?.isAutoMapping,
+        isCreditLimit: selectedItem?.isCheckCreditLimit,
+        isAvailableQuantity: selectedItem?.isCheckAvailableQuotient,
         email: selectedItem?.email || '',
         registrationAddress: {
             phone: selectedItem?.registrationAddress.phone || '',
@@ -272,7 +285,9 @@ const EditDealerWrapper = () => {
                         firstName: values.firstName,
                         creditLimit: values.creditLimit,
                         openingBalance: values.openingBalance,
-                        autoMapping: values.autoMapping,
+                        isCheckAvailableQuotient: values.isAvailableQuantity,
+                        isCheckCreditLimit: values.isCreditLimit,
+                        isAutoMapping: values.isAutoMap,
                         quantityQuotient: values.quantityQuotient,
                         lastName: values.lastName,
                         dealerCategoryId: values.dealerCategoryId,
