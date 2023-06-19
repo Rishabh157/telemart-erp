@@ -82,7 +82,7 @@ const ATMTable = <T extends {}>({
                             key={column.field}
                             className={`${
                                 column.flex
-                            } text-sm text-slate-500 font-semibold px-2 flex justify-${
+                            } text-sm text-black  font-semibold px-2 flex justify-${
                                 column.align || 'start'
                             }  ${column.extraClasses}`}
                         >
@@ -108,7 +108,7 @@ const ATMTable = <T extends {}>({
                     <div
                         onClick={() => onRowClick && onRowClick(row)}
                         key={row[idKey] || rowIndex}
-                        className={`flex items-center  ${rowClassName}  ${
+                        className={`flex items-center font-semibold text-grey-600  ${rowClassName}  ${
                             onRowClick && 'cursor-pointer'
                         }  ${rowExtraClasses && rowExtraClasses(row)}  ${
                             rowIndex !== rows.length - 1 && 'border-b'
@@ -169,7 +169,7 @@ const ATMTable = <T extends {}>({
                 ))
             ) : (
                 <div
-                    className={`w-full flex justify-center  ${noDataFoundClass}`}
+                    className={`w-full flex justify-center font-semibold ${noDataFoundClass}`}
                 >
                     {noDataFoundText}
                 </div>

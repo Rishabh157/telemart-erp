@@ -45,20 +45,29 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
             <div className="flex justify-between items-center h-[45px]">
                 <div className="flex gap-6">
                     <ATMPageHeading> Ledger</ATMPageHeading>
-                    <div className=" pl-3 p-2  hover:outline-blue-400 outline outline-offset-1 outline-blue-200 rounded">
+                    <div className=" pl-1 p-1 mb-1 hover:outline-blue-400 outline outline-offset-1 outline-blue-200 rounded">
                         <MouseOverPopover
                             title="Order Ledger Details"
                             children={
                                 <>
-                                    <div className="px-4 py-1 border">
-                                        <div className="p-1 text-xs font-normal font-semibold">
-                                            Credit Note :4000
+                                    <div className="px-4 py-1 border flex justify-between">
+                                        <div className="p-2 text-sm font-normal flex gap-1 ">
+                                            <h1 className="font-bold">
+                                                Credit Amouunt :
+                                            </h1>
+                                            <p className='text-green-400'>4000</p>
                                         </div>
-                                        <div className="p-1 text-xs font-normal font-semibold">
-                                            Debit Note limit :7000
+                                        <div className="p-2 text-sm font-normal flex gap-1 ">
+                                            <h1 className="font-bold">
+                                                Debit Amount :
+                                            </h1>
+                                            <p className='text-red-400'>4000</p>
                                         </div>
-                                        <div className="p-1 text-xs font-normal font-semibold">
-                                            Effective Balane :9000
+                                        <div className="p-2 text-sm font-normal  gap-1 flex">
+                                            <h1 className="font-bold">
+                                                Effective Balane :
+                                            </h1>
+                                            <p className='text-blue-400'>9000</p>
                                         </div>
                                     </div>
                                 </>
@@ -154,6 +163,7 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
 
             <DialogLogBox
                 isOpen={isOpenModel}
+                maxWidth="sm"
                 handleClose={() => setIsOpenModel(false)}
                 Component={
                     <AddDealerLedgerModelWrapper

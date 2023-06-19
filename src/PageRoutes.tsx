@@ -361,12 +361,20 @@ const PageRoutes = () => {
                         path="/outward-request"
                         element={<OutwardRequestListingWrapper />}
                     />
-                    <Route
+                    {/* <Route
                         path="dealers/add-warehouse"
+                        element={<AddWarehouseWrapper />}
+                    /> */}
+                    {/* <Route
+                        path="vendors/add-warehouse"
+                        element={<AddWarehouseWrapper />}
+                    /> */}
+                          <Route
+                        path="vendors/:dealerId/warehouse/add-warehouse"
                         element={<AddWarehouseWrapper />}
                     />
                     <Route
-                        path="vendors/add-warehouse"
+                        path="dealers/:dealerId/warehouse/add-warehouse"
                         element={<AddWarehouseWrapper />}
                     />
 
