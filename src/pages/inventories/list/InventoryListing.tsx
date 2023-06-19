@@ -23,7 +23,7 @@ const InventoryListing = ({ columns, rows }: Props) => {
         (state: RootState) => state.inventory
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = inventoryState
+    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading} = inventoryState
     const navigate = useNavigate()
 
     return (
@@ -68,6 +68,8 @@ const InventoryListing = ({ columns, rows }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                        isLoading={isTableLoading}
+
                     />
                 </div>
 

@@ -977,6 +977,7 @@ const Inbound: React.FC<Props> = ({
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="h-36 overflow-auto"
+       
                     />
                 </div>
             </div>

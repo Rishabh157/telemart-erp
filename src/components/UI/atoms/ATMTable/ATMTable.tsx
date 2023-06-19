@@ -99,8 +99,12 @@ const ATMTable = <T extends {}>({
                         return (
                             <div
                                 key={index}
-                                className="animate-pulse bg-slate-200 h-[50px]"
-                            ></div>
+                                className="animate-pulse  h-[50px] p-2"
+                            >
+                                <div className="bg-slate-200 h-full rounded">
+                                    {' '}
+                                </div>
+                            </div>
                         )
                     })
             ) : rows.length ? (

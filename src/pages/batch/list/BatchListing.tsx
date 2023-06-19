@@ -30,7 +30,7 @@ const BatchListing = ({ columns, rows }: Props) => {
 
     const batchState: any = useSelector((state: RootState) => state.batch)
 
-    const { page, rowsPerPage, searchValue } = batchState
+    const { page, rowsPerPage, searchValue ,isTableLoading } = batchState
 
     const submit = () => {
         setApiStatus(false)
@@ -95,6 +95,7 @@ const BatchListing = ({ columns, rows }: Props) => {
                 <div className="grow overflow-auto  ">
                     <ATMTable
                         columns={columns}
+                        isLoading={isTableLoading}
                         rows={rows}
                         isCheckbox={true}
                         selectedRows={selectedRows}

@@ -29,7 +29,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue } = purchaseOrderState
+    const { page, rowsPerPage, searchValue ,isTableLoading } = purchaseOrderState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
@@ -72,6 +72,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         extraClasses="max-h-full overflow-auto"
                         setShowDropdown={setShowDropdown}
+                        isLoading={isTableLoading}
                     />
                 </div>
                 {/* Pagination */}

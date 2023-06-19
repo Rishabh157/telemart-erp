@@ -31,7 +31,7 @@ const ChannelManagementListing = ({
         (state: RootState) => state.channelManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } =
+    const { page, rowsPerPage, totalItems, searchValue , isTableLoading } =
         channelManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
@@ -88,6 +88,8 @@ const ChannelManagementListing = ({
                         }
                         extraClasses="h-full overflow-auto"
                         setShowDropdown={setShowDropdown}
+                        isLoading={isTableLoading}
+
                     />
                 </div>
 

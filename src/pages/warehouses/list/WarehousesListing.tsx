@@ -34,7 +34,7 @@ const WarehouseListing = ({
     // const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, totalItems, searchValue } = warehouseState
+    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading} = warehouseState
 
     const params: any = useParams()
 
@@ -83,6 +83,7 @@ const WarehouseListing = ({
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
+                        isLoading={isTableLoading}
                     />
                 </div>
 
