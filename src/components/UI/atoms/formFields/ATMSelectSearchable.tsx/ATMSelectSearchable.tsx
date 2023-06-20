@@ -178,7 +178,6 @@ const ATMSelectSearchable = ({
                 isLoading={isLoading}
                 isOptionDisabled={(options) => (options.value as string) === ''}
                 placeholder={`${selectLabel}`}
-                menuPosition="fixed"
                 // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
             />
 

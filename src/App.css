@@ -64,7 +64,7 @@ body {
 #root {
     background-image: url('../public/telemartLogo.png');
     background-repeat: no-repeat;
-    z-index: 400 !important;
+    /* z-index: 400 !important; */
     /* background-color: rebeccapurple; */
     background-position: 50% 50% !important;
 }

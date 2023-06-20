@@ -22,6 +22,8 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
     handleEditActionButton,
     handleDeleteActionButton,
     isView = false,
+    isEdit=false,
+    isDelete=false,
     className = 'block w-full text-left px-4 py-2 hover:bg-gray-100',
 }) => {
     return (
@@ -55,18 +57,18 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                                         View
                                     </button>
                                 )}
-                                <button
+                               {isEdit && <button
                                     onClick={handleEditActionButton}
                                     className={className}
                                 >
                                     Edit
-                                </button>
-                                <button
+                                </button>}
+                               {isDelete && <button
                                     onClick={handleDeleteActionButton}
                                     className={className}
                                 >
                                     Delete
-                                </button>
+                                </button>}
                             </>
                             {children}
                         </Popover>
