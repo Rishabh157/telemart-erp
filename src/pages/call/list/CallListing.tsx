@@ -29,7 +29,7 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
 
     return (
         // <div className="px-4 h-full overflow-auto pt-3  bg-white ">
-             <div className="px-4 h-[calc(100vh-55px)] pt-2 bg-white ">
+        <div className="px-4 h-[calc(100vh-55px)] pt-2 bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Call Management </ATMPageHeading>

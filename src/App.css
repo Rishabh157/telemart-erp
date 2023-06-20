@@ -68,7 +68,7 @@ body {
     /* background-color: rebeccapurple; */
     background-position: 50% 50% !important;
 }
-.bg-invert{
+.bg-invert {
     filter: invert();
 }
 .bg-transparent-body {

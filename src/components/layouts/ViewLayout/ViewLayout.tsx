@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import SideNavLayout from '../SideNavLayout/SideNavLayout'
 import { BiSearchAlt2 } from 'react-icons/bi'
-import { Outlet
-     
-    //, useLocation, useNavigate 
+import {
+    Outlet,
+
+    //, useLocation, useNavigate
 } from 'react-router-dom'
 import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import { IconType } from 'react-icons'
@@ -122,8 +123,7 @@ const ViewLayout = ({
                                 })}
                             </div> */}
                             <div className="h-[45px] border flex gap-4 items-center   shadow rounded ">
-
-                            <TabScrollable tabs={tabs} />
+                                <TabScrollable tabs={tabs} />
                             </div>
 
                             {/* Children */}

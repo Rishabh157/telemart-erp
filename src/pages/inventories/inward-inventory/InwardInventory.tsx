@@ -122,7 +122,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
         }
     }, [itemCount, filterBarcode])
     return (
-        <div className="p-2  h-[calc(100vh-55px)] overflow-auto" >
+        <div className="p-2  h-[calc(100vh-55px)] overflow-auto">
             <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
 
             {/* Page Header */}

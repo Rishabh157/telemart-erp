@@ -29,8 +29,8 @@ const TabScrollable: React.FC<Props> = ({ tabs }) => {
                 navBtnClassName={'text-[30px]'}
                 // rightBtnIcon={<FaChevronCircleRight size={26} fill="blue" />}
                 // leftBtnIcon={<FaChevronCircleLeft size={26} fill="blue" />}
-                rightBtnIcon={<span className='select-none'>&#x22D9; </span>}
-                leftBtnIcon={<span className='select-none'>&#x22D8; </span>}
+                rightBtnIcon={<span className="select-none">&#x22D9; </span>}
+                leftBtnIcon={<span className="select-none">&#x22D8; </span>}
                 leftNavBtnClassName={
                     'bg-inherit border-0 hover:bg-white p-0 m-0  font-bold'
                 }

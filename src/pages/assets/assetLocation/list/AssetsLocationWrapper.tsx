@@ -48,7 +48,6 @@ const AssetsLocationWrapper = () => {
                     }}
                     isDelete
                     isEdit
-                 
                     handleEditActionButton={() => {
                         navigate(`/assets/assets-location/${currentId}`)
                     }}
@@ -64,9 +63,7 @@ const AssetsLocationWrapper = () => {
                             },
                         })
                     }}
-                    
                 />
-                   
             ),
             align: 'end',
         },

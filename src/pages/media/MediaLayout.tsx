@@ -77,11 +77,12 @@ const MediaLayout = ({ children }: Props) => {
     const bgColorLocal = localStorage.getItem('themeColor') as string
     const bgColor = JSON.parse(bgColorLocal) as string | null
 
-   
     return (
-        <div  className={`flex h-screen w-screen relative ${
-            bgColor === 'black' ? 'bg-invert' : ''
-        }`}>
+        <div
+            className={`flex h-screen w-screen relative ${
+                bgColor === 'black' ? 'bg-invert' : ''
+            }`}
+        >
             {/* Side Navigation Bar */}
             <div
                 className={`border-r border-slate-300 h-full transition-all duration-500   ${
