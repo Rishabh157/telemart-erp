@@ -27,7 +27,8 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.dispositionOne
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading} = dispositionOneState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        dispositionOneState
 
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
@@ -86,7 +87,6 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
-
                         isLoading={isTableLoading}
                     />
                 </div>

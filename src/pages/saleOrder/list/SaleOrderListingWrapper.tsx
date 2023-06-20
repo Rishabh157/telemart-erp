@@ -507,7 +507,6 @@ const SaleOrderListingWrapper = () => {
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
-                    
                 />
             </SideNavLayout>
         </>

@@ -29,7 +29,8 @@ const ProductGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
-    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading} = productGroupState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        productGroupState
     const [selectedRows, setSelectedRows] = useState([])
     const breadcrumbs: BreadcrumbType[] = [
         {

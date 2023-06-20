@@ -29,7 +29,8 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue ,isTableLoading} = purchaseOrderState
+    const { page, rowsPerPage, searchValue, isTableLoading } =
+        purchaseOrderState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3  ">

@@ -29,7 +29,8 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
 
     const navigate = useNavigate()
-    const { page, rowsPerPage, searchValue, totalItems,isTableLoading } = cartonBoxState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        cartonBoxState
 
     const breadcrumbs: BreadcrumbType[] = [
         {
