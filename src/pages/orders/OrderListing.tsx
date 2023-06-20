@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
-import { BiSearchAlt2 } from 'react-icons/bi'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import { OrderListResponse } from 'src/models'
@@ -33,7 +31,14 @@ const OrderListing = () => {
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const orderState: any = useSelector((state: RootState) => state.order)
-    const { page, rowsPerPage, searchValue, items, totalItems,isTableLoading } = orderState
+    const {
+        page,
+        rowsPerPage,
+        searchValue,
+        items,
+        totalItems,
+        isTableLoading,
+    } = orderState
     const { data, isLoading, isFetching } = useGetOrderQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -155,12 +160,12 @@ const OrderListing = () => {
 
     return (
         <SideNavLayout>
-            <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
-                <div className="h-[100px] ">
-                    <div className="mb-5 text-2xl text-slate-700 font-bold ">
+            <div className="px-4 h-[calc(100vh-55px)] pt-2 ">
+                <div className=" ">
+                    <div className="mb-2 text-2xl text-slate-700 font-bold ">
                         Orders
                     </div>
-                    <div className="flex justify-between">
+                    {/* <div className="flex justify-between">
                         <div className="flex gap-2">
                             <ATMInputAdormant
                                 name=""
@@ -189,9 +194,9 @@ const OrderListing = () => {
                                     </button>
                                 </div>
                             ) : null}
-                        </div>
+                        </div> */}
 
-                        {/* <div>
+                    {/* <div>
                             <button
                                 type="button"
                                 className="flex items-center gap-2 bg-primary-main text-white text-sm h-[33px] px-4 rounded font-bold"
@@ -202,7 +207,7 @@ const OrderListing = () => {
                                 <span className="text-xl"> + </span> Add Orders
                             </button>
                         </div> */}
-                    </div>
+                    {/* </div> */}
                 </div>
                 <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
                     {/*Table Header */}
@@ -234,7 +239,6 @@ const OrderListing = () => {
                                 setSelectedRows(selectedRows)
                             }
                             isLoading={isTableLoading}
-
                         />
                     </div>
 

@@ -9,9 +9,11 @@ import { RootState } from 'src/redux/store'
 import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
 import { setUserData } from 'src/redux/slices/authSlice'
 
-interface Props {}
+interface Props {
+    setBgColor?: any
+}
 
-const Header = (props: Props) => {
+const Header = ({ setBgColor }: Props) => {
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
     const [isShowNotification, setIsShowNotification] = useState(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -57,9 +59,35 @@ const Header = (props: Props) => {
     }
 
     return (
-        <div className="grid grid-cols-2 w-full h-full shadow-lg border ">
+        <div className={`rid grid-cols-2 w-full h-full shadow-lg border `}>
             {/* Right Section */}
             <div className="flex gap-4 col-start-2 justify-end items-center px-4 ">
+                <div className="flex gap-2 ">
+                    <div
+                        onClick={() => {
+                            localStorage.setItem(
+                                'themeColor',
+                                JSON.stringify('black')
+                            )
+                            window.location.reload()
+                        }}
+                        className="border  border-2 p-1 rounded bg-blue-500"
+                    >
+                        Dark
+                    </div>
+                    <div
+                        onClick={() => {
+                            localStorage.setItem(
+                                'themeColor',
+                                JSON.stringify('white')
+                            )
+                            window.location.reload()
+                        }}
+                        className="border  border-2  p-1 rounded bg-blue-500"
+                    >
+                        Light
+                    </div>
+                </div>
                 {userData?.role === 'ADMIN' ? (
                     <FormControl sx={{ width: 150 }}>
                         <Select

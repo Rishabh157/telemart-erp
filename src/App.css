@@ -55,11 +55,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,700&display=swap');
 body {
     font-family: 'Poppins', sans-serif;
-
+    /* filter: invert(); */
     /* font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
     /* font-serif	font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
     font-mono	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
      */
+}
+#root {
+    background-image: url('../public/telemartLogo.png');
+    background-repeat: no-repeat;
+    z-index: 400 !important;
+    /* background-color: rebeccapurple; */
+    background-position: 50% 50% !important;
+}
+.bg-invert{
+    filter: invert();
+}
+.bg-transparent-body {
+    filter: opacity(0.9);
 }
 .MuiBreadcrumbs-li {
     color: rgb(0, 0, 0);
@@ -71,3 +84,37 @@ body {
     font-weight: 600;
     text-decoration: underline;
 }
+
+/* scroll tabs css */
+.rts___btn {
+    border: none !important;
+}
+
+.rts___nav___btn:hover {
+    background-color: white !important;
+    color: rgb(6, 6, 255);
+}
+.rts___nav___btn___container {
+    margin: 20px 5px;
+    font-size: 20px;
+    display: block !important;
+}
+.rts___tabs___container {
+    padding: 0px !important;
+}
+.rts___tab {
+    padding: 10px 10px !important;
+    border-radius: 4px !important;
+}
+.rts___tabs {
+    padding: 0px !important;
+    border-radius: 4px !important;
+}
+.rts___nav___btn___container {
+    margin: 5px 5px !important;
+    font-size: 10px !important;
+}
+.rts___tab___selected {
+    background-color: #0a66b7 !important;
+}
+/* scroll tabs css */
