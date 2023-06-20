@@ -123,7 +123,7 @@ const StepEditAddress = ({
                                         )
                                     case 'select':
                                         return (
-                                            <div className="-mt-2">
+                                            <div className="-mt-4" key={name}>
                                                 <ATMSelectSearchable
                                                     label={label}
                                                     name={name}
@@ -156,6 +156,7 @@ const StepEditAddress = ({
                                     case 'checkbox':
                                         return (
                                             <ATMCheckbox
+                                                key={name}
                                                 name={name}
                                                 label={label}
                                                 checked={Boolean(values[name])}
@@ -219,7 +220,7 @@ const StepEditAddress = ({
                                                         setFieldValue(
                                                             'billingAddress.stateId',
                                                             ''
-                                                        )   
+                                                        )
                                                     }
                                                 }}
                                             />

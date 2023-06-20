@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FieldArray, FormikProps } from 'formik'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -8,6 +8,8 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { CircularProgress } from '@mui/material'
+import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -20,6 +22,10 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+    const [loaderState, setLoaderState] = useState<string>('')
+    const [fileUploader] = useFileUploaderMutation()
 
     return (
         <div className="">
@@ -41,14 +47,12 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                     name,
                                     label,
                                     placeholder,
-                                    offset,
                                 } = field
                                 switch (type) {
                                     case 'text':
                                         return (
-                                            <>
+                                            <React.Fragment key={name}>
                                                 <ATMTextField
-                                                    key={name}
                                                     name={name}
                                                     value={
                                                         name.includes('.')
@@ -119,34 +123,63 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                     className="shadow bg-white rounded"
                                                     isSubmitting={isSubmitting}
                                                 />
-                                                {offset &&
-                                                    Array(offset)
-                                                        .fill(null)
-                                                        .map(() => <div></div>)}
-                                            </>
+                                            </React.Fragment>
                                         )
 
                                     case 'file-picker':
                                         return (
-                                            <div className="mt-2">
+                                            <div
+                                                className="mt-4"
+                                                key={name || index}
+                                            >
                                                 <ATMFilePickerWrapper
                                                     name={name}
-                                                    key={name}
                                                     label={label}
                                                     placeholder={placeholder}
-                                                    onSelect={(newFile) =>
-                                                        setFieldValue(
-                                                            name,
-                                                            newFile
+                                                    onSelect={(newFile) => {
+                                                        setLoaderState(name)
+                                                        const formData =
+                                                            new FormData()
+                                                        formData.append(
+                                                            'fileType',
+                                                            'IMAGE'
                                                         )
-                                                    }
+                                                        formData.append(
+                                                            'category',
+                                                            'Dealer'
+                                                        )
+                                                        formData.append(
+                                                            'fileUrl',
+                                                            newFile || ''
+                                                        )
+                                                        setImageApiStatus(true)
+                                                        fileUploader(
+                                                            formData
+                                                        ).then((res: any) => {
+                                                            if ('data' in res) {
+                                                                setImageApiStatus(
+                                                                    false
+                                                                )
+                                                                setFieldValue(
+                                                                    name,
+                                                                    res?.data
+                                                                        ?.data
+                                                                        ?.fileUrl
+                                                                )
+                                                            }
+                                                            setImageApiStatus(
+                                                                false
+                                                            )
+                                                        })
+                                                    }}
                                                     selectedFile={values[name]}
                                                 />
-
-                                                {offset &&
-                                                    Array(offset)
-                                                        .fill(null)
-                                                        .map(() => <div></div>)}
+                                                {loaderState === name &&
+                                                imageApiStatus ? (
+                                                    <div className=" mt-3">
+                                                        <CircularProgress />
+                                                    </div>
+                                                ) : null}
                                             </div>
                                         )
 
@@ -169,6 +202,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                 ) => {
                                     return (
                                         <div
+                                            key={otherDocumentIndex}
                                             className={`py-9 px-7 border-b border-slate-400`}
                                         >
                                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center ">
