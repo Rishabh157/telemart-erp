@@ -56,7 +56,7 @@ const StepAddAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-4 px-7 ${
+                        className={`pb-6 pt-2 px-7 ${
                             index !== formFields.length - 1 && 'border-b'
                         }  border-slate-300`}
                     >
@@ -67,7 +67,7 @@ const StepAddAddress = ({
                         )}
 
                         <div className="grid grid-cols-4 gap-4 gap-y-5">
-                            {fields?.map((field: FieldType) => {
+                            {fields?.map((field: FieldType, index: number) => {
                                 const {
                                     type = 'text',
                                     name,
@@ -79,7 +79,7 @@ const StepAddAddress = ({
                                     case 'text':
                                         return (
                                             <ATMTextField
-                                                key={name}
+                                                key={name || index}
                                                 name={name}
                                                 value={
                                                     name.includes('.')
@@ -124,7 +124,7 @@ const StepAddAddress = ({
                                         )
                                     case 'select':
                                         return (
-                                            <div className="-mt-2">
+                                            <div className="-mt-2" key={name || index}>
                                                 <ATMSelectSearchable
                                                     label={label}
                                                     name={name}
@@ -157,28 +157,71 @@ const StepAddAddress = ({
                                         )
                                     case 'checkbox':
                                         return (
-                                            <div className="-mt-2">
+                                            <div className="-mt-2" key={name || index}>
                                                 <ATMCheckbox
                                                     name={name}
                                                     label={label}
                                                     onChange={(e) => {
                                                         setFieldValue(name, e)
                                                         if (e) {
-                                                            const { address, country, district, phone, pincode, state } =
+                                                            const {
+                                                                address,
+                                                                country,
+                                                                district,
+                                                                phone,
+                                                                pincode,
+                                                                state,
+                                                            } =
                                                                 values.registrationAddress
-                                                            setFieldValue('billingAddress.address', address)
-                                                            setFieldValue('billingAddress.country', country)
-                                                            setFieldValue('billingAddress.district', district)
-                                                            setFieldValue('billingAddress.phone', phone)
-                                                            setFieldValue('billingAddress.pincode', pincode)
-                                                            setFieldValue('billingAddress.state', state)
-                                                        }else{
-                                                            setFieldValue('billingAddress.address', '')
-                                                            setFieldValue('billingAddress.country', '')
-                                                            setFieldValue('billingAddress.district', '')
-                                                            setFieldValue('billingAddress.phone', '')
-                                                            setFieldValue('billingAddress.pincode', '')
-                                                            setFieldValue('billingAddress.state', '')
+                                                            setFieldValue(
+                                                                'billingAddress.address',
+                                                                address
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.country',
+                                                                country
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.district',
+                                                                district
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.phone',
+                                                                phone
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.pincode',
+                                                                pincode
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.state',
+                                                                state
+                                                            )
+                                                        } else {
+                                                            setFieldValue(
+                                                                'billingAddress.address',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.country',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.district',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.phone',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.pincode',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.state',
+                                                                ''
+                                                            )
                                                         }
                                                     }}
                                                     checked={Boolean(
@@ -187,7 +230,6 @@ const StepAddAddress = ({
                                                 />
                                             </div>
                                         )
-
                                     default:
                                         return null
                                 }

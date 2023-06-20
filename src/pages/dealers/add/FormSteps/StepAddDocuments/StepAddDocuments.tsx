@@ -41,7 +41,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                         </div>
 
                         <div className="grid grid-cols-2 gap-4 gap-y-4">
-                            {fields?.map((field: FieldType) => {
+                            {fields?.map((field: FieldType, index: number) => {
                                 const {
                                     type = 'text',
                                     name,
@@ -51,9 +51,8 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                 switch (type) {
                                     case 'text':
                                         return (
-                                            <>
+                                            <React.Fragment key={name || index}>
                                                 <ATMTextField
-                                                    key={name}
                                                     name={name}
                                                     value={values[name]}
                                                     onChange={(e) => {
@@ -112,15 +111,17 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     className="shadow bg-white rounded"
                                                     isSubmitting={isSubmitting}
                                                 />
-                                            </>
+                                            </React.Fragment>
                                         )
 
                                     case 'file-picker':
                                         return (
-                                            <div className="mt-4">
+                                            <div
+                                                className="mt-4"
+                                                key={name || index}
+                                            >
                                                 <ATMFilePickerWrapper
                                                     name={name}
-                                                    key={name}
                                                     label={label}
                                                     placeholder={placeholder}
                                                     onSelect={(newFile) => {
@@ -189,6 +190,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                 ) => {
                                     return (
                                         <div
+                                            key={otherDocumentIndex}
                                             className={`py-9 px-7 border-b border-slate-400`}
                                         >
                                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center ">
