@@ -28,7 +28,8 @@ const ConfigurationCompanyListing = ({
 
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading} = company
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        company
 
     const breadcrumbs: BreadcrumbType[] = [
         {

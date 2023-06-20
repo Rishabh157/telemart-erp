@@ -27,7 +27,8 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.slotManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue,isTableLoading } = slotManagementState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        slotManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -83,8 +84,7 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="max-h-full overflow-auto"
-                isLoading={isTableLoading}
-
+                        isLoading={isTableLoading}
                     />
                 </div>
 

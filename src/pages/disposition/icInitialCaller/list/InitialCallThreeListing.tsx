@@ -27,7 +27,8 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.initialCallerThree
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading } = initialCallThreeState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        initialCallThreeState
 
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
@@ -88,7 +89,6 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                             setShowDropdown={setShowDropdown}
                             extraClasses="h-full overflow-auto"
                             isLoading={isTableLoading}
-
                         />
                     </div>
 

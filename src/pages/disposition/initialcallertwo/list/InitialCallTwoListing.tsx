@@ -27,7 +27,8 @@ const InitialCallTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.initialCallerTwo
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading} = initialCallTwoState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        initialCallTwoState
 
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
@@ -87,7 +88,6 @@ const InitialCallTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
-
                     />
                 </div>
 

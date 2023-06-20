@@ -21,7 +21,7 @@ export const showConfirmationDialog = ({
     confirmButtonColor = '#3085d6',
     showDenyButton = false,
     denyButtonText = `Reject`,
-    cancelButtonColor = 'orange',
+    cancelButtonColor = '#dc3741',
     confirmButtonText = 'Yes',
     next = () => {},
 }: Props) => {

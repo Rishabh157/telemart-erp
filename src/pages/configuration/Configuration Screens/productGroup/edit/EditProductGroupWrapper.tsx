@@ -44,12 +44,12 @@ const EditProductGroupWrapper = (props: Props) => {
 
     const initialValues: FormInitialValues = {
         groupName: selectedProductGroup?.groupName || '',
-        dealerSalePrice: selectedProductGroup.dealerSalePrice,
-        gst: selectedProductGroup.gst,
-        sgst: selectedProductGroup.sgst,
-        cgst: selectedProductGroup.cgst,
-        igst: selectedProductGroup.igst,
-        utgst: selectedProductGroup.utgst,
+        dealerSalePrice: selectedProductGroup?.dealerSalePrice,
+        gst: selectedProductGroup?.gst,
+        sgst: selectedProductGroup?.sgst,
+        cgst: selectedProductGroup?.cgst,
+        igst: selectedProductGroup?.igst,
+        utgst: selectedProductGroup?.utgst,
     }
 
     // Form Validation Schema

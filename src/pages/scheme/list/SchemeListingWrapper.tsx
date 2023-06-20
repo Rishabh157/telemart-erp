@@ -124,7 +124,7 @@ const SchemeListingWrapper = () => {
                         <button
                             onClick={() => {
                                 showConfirmationDialog({
-                                    title: 'Delete vendor',
+                                    title: 'Delete Scheme',
                                     text: 'Do you want to delete',
                                     showCancelButton: true,
                                     next: (res) => {

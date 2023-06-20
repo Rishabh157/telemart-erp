@@ -28,7 +28,8 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.dispositionThree
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading} = dispositionThreeState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        dispositionThreeState
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Disposition',
