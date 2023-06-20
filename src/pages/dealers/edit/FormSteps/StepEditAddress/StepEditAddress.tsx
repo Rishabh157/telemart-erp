@@ -157,14 +157,7 @@ const StepEditAddress = ({
                                         return (
                                             <ATMCheckbox
                                                 name={name}
-                                                label={name}
-                                                // checked={
-                                                //     name.includes('.')
-                                                //         ? values[
-                                                //               name.split('.')[0]
-                                                //           ][name.split('.')[1]]
-                                                //         : values[name]
-                                                // }
+                                                label={label}
                                                 checked={Boolean(values[name])}
                                                 onChange={(e) => {
                                                     setFieldValue(name, e)

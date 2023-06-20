@@ -68,6 +68,8 @@ export type FormInitialValues = {
         documentName: string
         documentFile: string
     }[]
+    zonalManagerId: string | null
+    zonalExecutiveId: string | null
 }
 
 // export const adharNoRegexp = RegExp(
@@ -244,6 +246,8 @@ const AddDealerWrapper = () => {
                 documentFile: '',
             },
         ],
+        zonalManagerId: null,
+        zonalExecutiveId: null,
     }
 
     const getValidationSchema = (activeStep: number) => {
@@ -316,6 +320,8 @@ const AddDealerWrapper = () => {
                     },
                     otherDocument: values.otherDocument,
                     companyId: userData?.companyId || '',
+                    zonalManagerId: null,
+                    zonalExecutiveId: null,
                 }).then((res) => {
                     if ('data' in res) {
                         if (res?.data?.status) {

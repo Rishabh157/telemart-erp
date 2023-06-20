@@ -70,6 +70,8 @@ export type FormInitialValues = {
         documentName: string
         documentFile: string
     }[]
+    zonalManagerId: string | null
+    zonalExecutiveId: string | null
 }
 
 // Form Steps
@@ -170,6 +172,8 @@ const steps = [
         label: 'Others',
         component: StepEditOthersWrapper,
         validationSchema: object({
+            zonalManagerId: string().nullable(),
+            zonalExecutiveId: string().nullable(),
             isAutoMap: boolean(),
             isCreditLimit: boolean(),
             isAvailableQuantity: boolean(),
@@ -182,7 +186,7 @@ const EditDealerWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     const navigate = useNavigate()
-    const [activeStep, setActiveStep] = React.useState(1)
+    const [activeStep, setActiveStep] = React.useState(0)
     const [apiStatus, setApiStatus] = useState(false)
     const [UpdateDealer] = useUpdateDealerMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -236,6 +240,8 @@ const EditDealerWrapper = () => {
             adharCard: selectedItem?.document?.adharCard || '',
         },
         otherDocument: selectedItem?.otherDocument || '',
+        zonalManagerId: null,
+        zonalExecutiveId: null,
     }
     const getValidationSchema = (activeStep: number) => {
         return steps.find((_, stepIndex) => stepIndex === activeStep)
@@ -317,6 +323,8 @@ const EditDealerWrapper = () => {
                         },
                         otherDocument: otherDocument,
                         companyId: userData?.companyId || '',
+                        zonalManagerId: values.zonalManagerId || null,
+                        zonalExecutiveId: values.zonalExecutiveId || null,
                     },
                     id: Id || '',
                 }).then((res) => {

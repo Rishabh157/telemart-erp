@@ -80,7 +80,6 @@ export type AddDealer = {
     lastName: string
     creditLimit: number
     openingBalance: number
-
     isAutoMapping: boolean
     isCheckCreditLimit?: boolean
     isCheckAvailableQuotient?: boolean
@@ -96,6 +95,8 @@ export type AddDealer = {
     document: document
     otherDocument: otherDocument[]
     companyId: string
+    zonalManagerId: string | null
+    zonalExecutiveId: string | null
 }
 
 export type UpdateDealer = {
@@ -104,7 +105,6 @@ export type UpdateDealer = {
         lastName: string
         creditLimit: number
         openingBalance: number
-
         isAutoMapping: boolean
         isCheckCreditLimit: boolean
         isCheckAvailableQuotient: boolean
@@ -119,6 +119,8 @@ export type UpdateDealer = {
         document: document
         otherDocument: otherDocument[]
         companyId: string
+        zonalManagerId: string | null
+        zonalExecutiveId: string | null
     }
     id: string
 }

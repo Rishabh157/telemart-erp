@@ -10,32 +10,6 @@ type Props = {
 
 export type FieldType = Field<''>
 
-const othersformFields: { sectionName: string; fields: FieldType[] }[] = [
-    {
-        sectionName: '',
-        fields: [
-            {
-                name: 'otherMapDocument.autoMap',
-                label: 'Auto Mapping',
-                placeholder: 'Auto Mapping',
-                type: 'switch-button',
-            },
-            {
-                name: 'otherMapDocument.creditLimit',
-                label: 'Credit Limit',
-                placeholder: 'Auto Mapping',
-                type: 'switch-button',
-            }, 
-            {
-                name: 'otherMapDocument.availableQuantity',
-                label: 'Available Quantity',
-                placeholder: 'Auto Mapping',    
-                type: 'switch-button',
-            },
-        ],
-    },
-]
-
 const StepAddOthersWrapper = ({ formikProps }: Props) => {
     return (
         <>
