@@ -30,7 +30,8 @@ const ProductCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.productCategory
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading } = productCategoryState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        productCategoryState
     const [selectedRows, setSelectedRows] = useState([])
 
     const breadcrumbs: BreadcrumbType[] = [

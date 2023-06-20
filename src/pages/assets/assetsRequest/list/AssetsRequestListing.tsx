@@ -34,7 +34,8 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const assetsRequest = useSelector((state: RootState) => state.assetsRequest)
-    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading } = assetsRequest
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        assetsRequest
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
             <div className="h-[30px]">

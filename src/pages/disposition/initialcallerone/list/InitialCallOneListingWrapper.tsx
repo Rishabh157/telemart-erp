@@ -100,8 +100,8 @@ const InitialCallOneListingWrapper = () => {
                         <button
                             onClick={() => {
                                 showConfirmationDialog({
-                                    title: 'Delete Initial Call Three',
-                                    text: 'Do you want to delete Initial Call Three?',
+                                    title: 'Delete Initial Call One',
+                                    text: 'Do you want to delete Initial Call One?',
                                     showCancelButton: true,
                                     next: (res: any) => {
                                         return res.isConfirmed

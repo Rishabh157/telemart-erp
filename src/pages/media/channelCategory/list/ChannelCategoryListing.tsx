@@ -34,8 +34,9 @@ const ChannelCategoryListing = ({
         (state: RootState) => state.channelCategory
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems ,isTableLoading } = channelCategoryState
-    console.log(isTableLoading,"isTableLoading")
+    const { page, rowsPerPage, totalItems, isTableLoading } =
+        channelCategoryState
+    console.log(isTableLoading, 'isTableLoading')
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -99,7 +100,6 @@ const ChannelCategoryListing = ({
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
-
                     />
                 </div>
 

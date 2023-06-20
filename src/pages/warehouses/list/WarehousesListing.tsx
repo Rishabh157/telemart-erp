@@ -34,7 +34,8 @@ const WarehouseListing = ({
     // const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading} = warehouseState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        warehouseState
 
     const params: any = useParams()
 

@@ -27,7 +27,8 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.tapeManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading } = tapeManagementState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        tapeManagementState
 
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
@@ -86,8 +87,7 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
-                isLoading={isTableLoading}
-
+                        isLoading={isTableLoading}
                     />
                 </div>
 
