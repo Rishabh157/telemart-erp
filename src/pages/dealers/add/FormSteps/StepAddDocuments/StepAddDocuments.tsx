@@ -23,7 +23,8 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
         (state: RootState) => state?.auth
     )
 
-    const [imageApiStatus, setImageApiStatus] = useState(false)
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+    const [loaderState, setLoaderState] = useState<string>('')
     const [fileUploader] = useFileUploaderMutation()
 
     return (
@@ -46,7 +47,6 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                     name,
                                     label,
                                     placeholder,
-                                    offset,
                                 } = field
                                 switch (type) {
                                     case 'text':
@@ -112,27 +112,19 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     className="shadow bg-white rounded"
                                                     isSubmitting={isSubmitting}
                                                 />
-                                                {imageApiStatus ? (
-                                                    <div className=" mt-3">
-                                                        <CircularProgress />
-                                                    </div>
-                                                ) : null}
-                                                {offset &&
-                                                    Array(offset)
-                                                        .fill(null)
-                                                        .map(() => <div></div>)}
                                             </>
                                         )
 
                                     case 'file-picker':
                                         return (
-                                            <div className="mt-2">
+                                            <div className="mt-4">
                                                 <ATMFilePickerWrapper
                                                     name={name}
                                                     key={name}
                                                     label={label}
                                                     placeholder={placeholder}
                                                     onSelect={(newFile) => {
+                                                        setLoaderState(name)
                                                         const formData =
                                                             new FormData()
                                                         formData.append(
@@ -169,11 +161,12 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     }}
                                                     selectedFile={values[name]}
                                                 />
-
-                                                {offset &&
-                                                    Array(offset)
-                                                        .fill(null)
-                                                        .map(() => <div></div>)}
+                                                {loaderState === name &&
+                                                imageApiStatus ? (
+                                                    <div className=" mt-3">
+                                                        <CircularProgress />
+                                                    </div>
+                                                ) : null}
                                             </div>
                                         )
 
