@@ -25,7 +25,7 @@ const OutwardRequestListing = ({ columns, rows, tabs }: Props) => {
 
     const [activeTab, setActiveTab] = useState('Dealer')
 
-    const { page, rowsPerPage ,isTableLoading } = outwardRequestState
+    const { page, rowsPerPage, isTableLoading } = outwardRequestState
 
     return (
         <div className="px-4 h-full flex flex-col gap-2 w-full">

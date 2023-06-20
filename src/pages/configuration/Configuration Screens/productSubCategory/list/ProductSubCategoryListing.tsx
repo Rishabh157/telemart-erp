@@ -35,7 +35,7 @@ const ProductSubCategoryListing = ({
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading} =
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
         productSubCategoryState
     const breadcrumbs: BreadcrumbType[] = [
         {

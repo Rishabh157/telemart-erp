@@ -29,7 +29,8 @@ const TaxesListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     // const navigate = useNavigate()
 
-    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading} = taxState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        taxState
 
     const breadcrumbs: BreadcrumbType[] = [
         {

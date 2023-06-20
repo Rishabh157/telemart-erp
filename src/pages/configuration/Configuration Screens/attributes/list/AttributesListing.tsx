@@ -32,7 +32,8 @@ const AttributesListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading} = attributesState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        attributesState
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Configuration',

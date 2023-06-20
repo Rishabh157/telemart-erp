@@ -26,7 +26,8 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems,isTableLoading } = vendorState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        vendorState
     return (
         <div className="px-4 h-[calc(100vh-55px)]">
             {/* Page Header */}
@@ -47,7 +48,6 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/*Table Header */}
                 <div id="table-header">
                     <ATMTableHeader
-                    
                         searchValue={searchValue}
                         page={page}
                         rowCount={totalItems}
@@ -67,7 +67,7 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/* Table */}
                 <div className={`grow overflow-auto `}>
                     <ATMTable
-                    isLoading={isTableLoading}
+                        isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
                         isCheckbox={true}

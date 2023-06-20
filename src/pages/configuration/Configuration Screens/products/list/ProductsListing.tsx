@@ -29,7 +29,8 @@ const ProductsListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading } = productsState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        productsState
 
     const breadcrumbs: BreadcrumbType[] = [
         {
