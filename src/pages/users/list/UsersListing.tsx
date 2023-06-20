@@ -21,7 +21,8 @@ export type Props = {
 const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
     const newUserState: any = useSelector((state: RootState) => state.newUser)
 
-    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading } = newUserState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        newUserState
 
     const dispatch = useDispatch<AppDispatch>()
 

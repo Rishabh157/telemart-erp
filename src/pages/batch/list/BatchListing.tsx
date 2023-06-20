@@ -30,7 +30,7 @@ const BatchListing = ({ columns, rows }: Props) => {
 
     const batchState: any = useSelector((state: RootState) => state.batch)
 
-    const { page, rowsPerPage, searchValue ,isTableLoading } = batchState
+    const { page, rowsPerPage, searchValue, isTableLoading } = batchState
 
     const submit = () => {
         setApiStatus(false)

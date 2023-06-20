@@ -30,7 +30,7 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue ,isTableLoading } = languageState
+    const { page, rowsPerPage, searchValue, isTableLoading } = languageState
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -74,7 +74,6 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
-
                 />
 
                 {/* Table */}

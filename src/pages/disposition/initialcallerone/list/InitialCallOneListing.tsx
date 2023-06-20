@@ -27,7 +27,8 @@ const InitialCalloneListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.initialCallerOne
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue ,isTableLoading} = initialCalloneState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        initialCalloneState
 
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
@@ -87,7 +88,6 @@ const InitialCalloneListing = ({ columns, rows, setShowDropdown }: Props) => {
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
-
                     />
                 </div>
 

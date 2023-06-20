@@ -31,7 +31,8 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems ,isTableLoading } = attributesGroupState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        attributesGroupState
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Configuration',

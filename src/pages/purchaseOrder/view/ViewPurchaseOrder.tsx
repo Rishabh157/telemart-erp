@@ -217,7 +217,6 @@ const ViewPurchaseOrder = ({ formikProps }: Props) => {
                                 columns={columns}
                                 rows={values?.approval}
                                 extraClasses="max-h-full overflow-auto p-6"
-                                
                             />
                         </div>
                     </div>

@@ -128,7 +128,7 @@ const OrderView = ({ items }: Props) => {
                                                 : items?.schemeLabel}
                                         </p>
                                     </div>
-                                    
+
                                     <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
                                             Order Number{' '}
@@ -143,7 +143,6 @@ const OrderView = ({ items }: Props) => {
                                                 : items?.orderNumber}
                                         </p>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

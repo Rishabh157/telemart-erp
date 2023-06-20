@@ -62,7 +62,7 @@ const LanguageListingWrapper = () => {
                         <button
                             onClick={() => {
                                 showConfirmationDialog({
-                                    title: 'Delete Attribute',
+                                    title: 'Delete Language',
                                     text: 'Do you want to delete',
                                     showCancelButton: true,
                                     next: (res) => {
