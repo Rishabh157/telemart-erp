@@ -38,7 +38,7 @@ const ATMSelect = ({
                         value={value}
                         onChange={onChange}
                         size={size}
-                        className="shadow mt-2 "
+                        className="shadow "
                         displayEmpty
                     >
                         <MenuItem value="">

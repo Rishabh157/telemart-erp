@@ -248,7 +248,6 @@ const ApprovedOrderListing = () => {
         },
     ]
 
-     
     const handleDelete = () => {
         setShowDropdown(false)
         // deleteOrdercurrentId).then((res) => {
