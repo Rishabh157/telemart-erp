@@ -159,11 +159,11 @@ const OrderListing = () => {
 
     return (
         <SideNavLayout>
-           <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+            <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
                 <div className="mb-10 text-2xl text-slate-700 font-bold ">
                     Orders
                 </div>
-                    {/* <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                         <div className="flex gap-2">
                             <ATMInputAdormant
                                 name=""
@@ -194,7 +194,7 @@ const OrderListing = () => {
                             ) : null}
                         </div> */}
 
-                    {/* <div>
+                {/* <div>
                             <button
                                 type="button"
                                 className="flex items-center gap-2 bg-primary-main text-white text-sm h-[33px] px-4 rounded font-bold"
@@ -205,8 +205,8 @@ const OrderListing = () => {
                                 <span className="text-xl"> + </span> Add Orders
                             </button>
                         </div> */}
-                    {/* </div> */}
-         
+                {/* </div> */}
+
                 <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
                     {/*Table Header */}
                     <ATMTableHeader
