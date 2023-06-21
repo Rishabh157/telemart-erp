@@ -56,7 +56,7 @@ const ListDealerSchemeTabWrapper = () => {
         {
             field: 'schemeName',
             headerName: 'Scheme Name',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: DealersSchemeListResponse) => (
                 <span> {row.schemeName} </span>
             ),
@@ -65,7 +65,7 @@ const ListDealerSchemeTabWrapper = () => {
         {
             field: 'price',
             headerName: 'Price',
-            flex: 'flex-[0.5_0.5_0%]',
+            flex: 'flex-[0.25_0.25_0%]',
             renderCell: (row: DealersSchemeListResponse) => {
                 return <span> {row.price} </span>
             },
@@ -104,22 +104,62 @@ const ListDealerSchemeTabWrapper = () => {
             ),
         },
         {
-            field: 'isActive',
+            field: 'status',
             headerName: 'Status',
-            flex: 'flex-[0.25_0.25_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: DealersSchemeListResponse) => {
                 return (
-                    <span>
-                        {' '}
+                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
                         {row.isActive ? (
-                            <span className="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive Scheme',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Active"
+                                color="success"
+                                variant="outlined"
+                                size="small"
+                            />
                         ) : (
-                            <span className="inline-block w-3 h-3 bg-red-500 rounded-full"></span>
-                        )}{' '}
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive Scheme',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Deactive"
+                                color="error"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )}
                     </span>
                 )
             },
         },
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -158,23 +198,6 @@ const ListDealerSchemeTabWrapper = () => {
                             className="block w-full text-left px-2 py-1  hover:bg-gray-100"
                         >
                             Delete
-                        </button>
-                        <button
-                            onClick={() => {
-                                showConfirmationDialog({
-                                    title: 'Deactive Scheme',
-                                    text: 'Do you want to Deactive',
-                                    showCancelButton: true,
-                                    next: (res) => {
-                                        return res.isConfirmed
-                                            ? handleDeactive()
-                                            : setShowDropdown(false)
-                                    },
-                                })
-                            }}
-                            className="block w-full text-left px-2 py-1  hover:bg-gray-100"
-                        >
-                            {row.isActive ? 'Deactive' : 'Active'}
                         </button>
                     </>
                 </ActionPopup>
@@ -215,12 +238,12 @@ const ListDealerSchemeTabWrapper = () => {
         })
     }
 
-    const handleDeactive = () => {
+    const handleDeactive = (rowId: string) => {
         setShowDropdown(false)
-        deactiveDealerScheme(currentId).then((res: any) => {
+        deactiveDealerScheme(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Scheme Deactive successfully!')
+                    showToast('success', 'Status changed successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
