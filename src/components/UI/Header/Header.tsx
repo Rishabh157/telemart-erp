@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
 import { setUserData } from 'src/redux/slices/authSlice'
+import ATMSwitchButton from '../atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 
 interface Props {
     setBgColor?: any
@@ -57,12 +58,30 @@ const Header = ({ setBgColor }: Props) => {
             }
         )
     }
-
+    const bgColorLocal = localStorage.getItem('themeColor') as string
+    const bgColor = (JSON.parse(bgColorLocal) as string | null) || 'white'
     return (
         <div className={`rid grid-cols-2 w-full h-full shadow-lg border `}>
             {/* Right Section */}
             <div className="flex gap-4 col-start-2 justify-end items-center px-4 ">
-                <div className="flex gap-2 ">
+                <div className="-mt-3">
+                    <ATMSwitchButton
+                        // label='Theme Mode'
+                        name=""
+                        value={bgColor === 'white' ? true : false}
+                        title1="Light"
+                        title2="Dark"
+                        onChange={(e) => {
+                            let themeColor = e ? 'white' : 'black'
+                            localStorage.setItem(
+                                'themeColor',
+                                JSON.stringify(themeColor)
+                            )
+                            window.location.reload()
+                        }}
+                    />
+                </div>
+                {/* <div className="flex gap-2 ">
                     <div
                         onClick={() => {
                             localStorage.setItem(
@@ -87,7 +106,7 @@ const Header = ({ setBgColor }: Props) => {
                     >
                         Light
                     </div>
-                </div>
+                </div> */}
                 {userData?.role === 'ADMIN' ? (
                     <FormControl sx={{ width: 150 }}>
                         <Select
