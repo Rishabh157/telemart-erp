@@ -6,6 +6,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from './DealerPinCodeTabWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { HiPlus } from 'react-icons/hi'
+import { showToast } from 'src/utils'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -78,14 +79,31 @@ const AddDealerPincode = ({
                                                                     }
                                                                     onChange={(
                                                                         e
-                                                                    ) =>
-                                                                        setFieldValue(
-                                                                            `pincodeDetail[${itemIndex}].pincode`,
-                                                                            e
-                                                                                .target
-                                                                                .value
-                                                                        )
-                                                                    }
+                                                                    ) => {
+                                                                        if (
+                                                                            !values?.pincodeDetail?.find(
+                                                                                (
+                                                                                    f
+                                                                                ) =>
+                                                                                    f.pincode ===
+                                                                                    e
+                                                                                        .target
+                                                                                        .value
+                                                                            )
+                                                                        ) {
+                                                                            setFieldValue(
+                                                                                `pincodeDetail[${itemIndex}].pincode`,
+                                                                                e
+                                                                                    .target
+                                                                                    .value
+                                                                            )
+                                                                        } else {
+                                                                            showToast(
+                                                                                'error',
+                                                                                'Pincode Already Added!'
+                                                                            )
+                                                                        }
+                                                                    }}
                                                                     options={
                                                                         dropdownOptions.pincodeOptions
                                                                     }

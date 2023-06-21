@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { VendorsListResponse } from 'src/models'
+import { UsersNewListResponse } from 'src/models'
 
 export interface UserSliceStateType {
-    items: VendorsListResponse[] | []
+    items: UsersNewListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -30,7 +30,7 @@ const userSlice: any = createSlice({
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<VendorsListResponse[] | []>
+            action: PayloadAction<UsersNewListResponse[] | []>
         ) => {
             state.items = action.payload
         },
