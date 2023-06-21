@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { IoNotifications } from 'react-icons/io5'
 import UserProfileCard from '../UserProfileCard/UserProfileCard'
@@ -60,6 +60,21 @@ const Header = ({ setBgColor }: Props) => {
     }
     const bgColorLocal = localStorage.getItem('themeColor') as string
     const bgColor = (JSON.parse(bgColorLocal) as string | null) || 'white'
+
+    useEffect(() => {
+        window.addEventListener("beforeunload", handleBeforeUnload);
+        return () => {
+          window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+      }, []);
+      
+      const handleBeforeUnload = (e:any) => {
+        e.preventDefault();
+        const message =
+          "Are you sure you want to leave? All provided data will  be lost.";
+        e.returnValue = message;
+        return message;
+      }
     return (
         <div className={`rid grid-cols-2 w-full h-full shadow-lg border `}>
             {/* Right Section */}
