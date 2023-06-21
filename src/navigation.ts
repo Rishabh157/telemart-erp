@@ -102,6 +102,7 @@ export const navigation: NavItemType[] = [
         icon: MdOutlineBorderColor,
         path: '/orders',
     },
+
     {
         label: 'Approved Orders',
         icon: BsFillCalendarCheckFill,

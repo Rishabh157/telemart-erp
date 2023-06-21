@@ -30,3 +30,7 @@ export type UpdateDealersPincode = {
     }
     id: string
 }
+export type GetDealerPincode = {
+    companyId: string
+    dealerId: string
+}

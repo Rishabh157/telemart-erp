@@ -27,7 +27,7 @@ const DidManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.didManagement
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems } = didManagementState
+    const { page, rowsPerPage, totalItems, isTableLoading } = didManagementState
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -82,6 +82,7 @@ const DidManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

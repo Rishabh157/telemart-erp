@@ -30,7 +30,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div className=" text-black font-bold">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

@@ -28,7 +28,8 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.dispositionThree
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = dispositionThreeState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        dispositionThreeState
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Disposition',
@@ -86,6 +87,7 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                             }
                             setShowDropdown={setShowDropdown}
                             extraClasses="h-full overflow-auto"
+                            isLoading={isTableLoading}
                         />
                     </div>
 

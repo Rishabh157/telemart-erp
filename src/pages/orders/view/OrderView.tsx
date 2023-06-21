@@ -128,6 +128,21 @@ const OrderView = ({ items }: Props) => {
                                                 : items?.schemeLabel}
                                         </p>
                                     </div>
+
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Order Number{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.orderNumber === ''
+                                                ? 'NA'
+                                                : items?.orderNumber}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

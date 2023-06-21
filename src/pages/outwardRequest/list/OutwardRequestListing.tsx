@@ -25,7 +25,7 @@ const OutwardRequestListing = ({ columns, rows, tabs }: Props) => {
 
     const [activeTab, setActiveTab] = useState('Dealer')
 
-    const { page, rowsPerPage } = outwardRequestState
+    const { page, rowsPerPage, isTableLoading } = outwardRequestState
 
     return (
         <div className="px-4 h-full flex flex-col gap-2 w-full">
@@ -88,6 +88,7 @@ const OutwardRequestListing = ({ columns, rows, tabs }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

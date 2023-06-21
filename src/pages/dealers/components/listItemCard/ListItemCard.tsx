@@ -1,15 +1,17 @@
 import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 
 const ListItemCard = ({ item }: { item: any }) => {
     const navigate = useNavigate()
     const { dealerId } = useParams()
+    const location = useLocation()
+    const pathValue = location.pathname.split('/')[3] || 'general-information'
 
     return (
         <div
             id={item._id}
             onClick={() => {
-                navigate(`/dealers/${item._id}/general-information`)
+                navigate(`/dealers/${item._id}/${pathValue}`)
             }}
             key={item._id}
             className="flex gap-4 border-b items-center  px-3 py-1 cursor-pointer"
@@ -22,7 +24,6 @@ const ListItemCard = ({ item }: { item: any }) => {
                             : 'bg-slate-300 '
                     } `}
                 >
-                    {' '}
                     {item.dealerName[0].toUpperCase()}{' '}
                 </div>
             </div>

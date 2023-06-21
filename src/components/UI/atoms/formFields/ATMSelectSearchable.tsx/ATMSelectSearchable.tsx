@@ -1,6 +1,8 @@
 import React from 'react'
 import Select from 'react-select'
 import { ErrorMessage } from 'formik'
+import { twMerge } from 'tailwind-merge'
+
 export type SelectOption = {
     label: string
     value: string | number | string[]
@@ -42,7 +44,7 @@ const ATMSelectSearchable = ({
     labelClass = ' font-medium',
     isAllSelect = false,
     isLoading = false,
-    selectClass = 'mt-2',
+    selectClass = 'mt-0',
     isDisabled = false,
 }: Props) => {
     const selectStyles = {
@@ -133,31 +135,34 @@ const ATMSelectSearchable = ({
             let selectedValues: SelectOption[] = []
             let FindSelectedValue: string[] = [...(value as string[])]
             FindSelectedValue?.map((selecttedValue: string) => {
-                const singleValueFind = selectOptions?.filter(
-                    (option) => option.value === selecttedValue
-                )
+                const singleValueFind =
+                    selectOptions?.filter(
+                        (option) => option.value === selecttedValue
+                    ) || []
                 selectedValues = [...selectedValues, ...singleValueFind]
                 return selectedValues
             })
-
             return selectedValues
         } else {
             return selectOptions?.find((option) => option.value === value)
         }
     }
     return (
-        <div className="relative mt-4">
+        <div className="relative mt-6">
             {label && (
-                <label className={`text-slate-700 ${labelClass}`}>
+                <label className={`text-slate-700  ${labelClass}`}>
                     {label}
                     {required && <span className="text-red-500"> * </span>}
                 </label>
             )}
 
             <Select
-                className={`${selectClass} border rounded border-slate-400 ${
-                    isMulti ? 'overflow-scroll' : ''
-                } min-h-fit max-h-24`}
+                className={twMerge(
+                    `border rounded border-slate-400 ${
+                        isMulti ? 'overflow-scroll overflow-x-auto' : ''
+                    } min-h-fit max-h-24`,
+                    `${selectClass}`
+                )}
                 name={name}
                 defaultValue={selectOptions?.find(
                     (option) => option.value === defaultValue

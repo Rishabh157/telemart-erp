@@ -31,7 +31,14 @@ const OrderListing = () => {
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const orderState: any = useSelector((state: RootState) => state.order)
-    const { page, rowsPerPage, searchValue, items, totalItems } = orderState
+    const {
+        page,
+        rowsPerPage,
+        searchValue,
+        items,
+        totalItems,
+        isTableLoading,
+    } = orderState
     const { data, isLoading, isFetching } = useGetOrderQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -185,6 +192,7 @@ const OrderListing = () => {
                             onRowSelect={(selectedRows) =>
                                 setSelectedRows(selectedRows)
                             }
+                            isLoading={isTableLoading}
                         />
                     </div>
 

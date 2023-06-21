@@ -31,7 +31,8 @@ const DealerSupervisorListing = ({ columns, rows }: Props) => {
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } = dealerSupervisorState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        dealerSupervisorState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
@@ -75,6 +76,7 @@ const DealerSupervisorListing = ({ columns, rows }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Formik, FormikProps } from 'formik'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { array, mixed, object, string } from 'yup'
+import { array, boolean, mixed, number, object, string } from 'yup'
 import EditDealers from './EditDealers'
 import StepEditDealerDetailsWrapper from './FormSteps/StepEditDealerDetails/StepEditDealerDetailsWrapper'
 import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
@@ -26,6 +26,10 @@ export type FormInitialValues = {
     dealerCode: string
     firmName: string
     firstName: string
+    creditLimit: number
+    openingBalance: number
+    autoMapping: boolean
+    quantityQuotient: number
     lastName: string
     dealerCategoryId: string
     email: string
@@ -73,6 +77,10 @@ const steps = [
         validationSchema: object({
             dealerCode: string().required('dealer code is required'),
             firmName: string().required('firm name is required'),
+            creditLimit: number().required('Credit limit is required'),
+            openingBalance: number().required('Opeaning balance is required'),
+            autoMapping: boolean(),
+            quantityQuotient: number().required('Firm Name is required'),
             firstName: string().required('first name is required'),
             lastName: string().required('LastName is required'),
             dealerCategoryId: string().required(
@@ -161,20 +169,6 @@ const steps = [
     },
 ]
 
-//Form validation schema based on the active step
-
-// On Submit Handler
-// const onSubmitHandler = (values: FormInitialValues) => {
-//   if (activeStep === steps.length - 1) {
-//     setTimeout(() => {
-//       console.log(values);
-//       setActiveStep(0);
-//     }, 1000);
-//   } else {
-//     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-//   }
-// };
-
 const EditDealerWrapper = () => {
     // States
     const dispatch = useDispatch<AppDispatch>()
@@ -201,6 +195,10 @@ const EditDealerWrapper = () => {
         dealerCode: selectedItem?.dealerCode || '',
         firmName: selectedItem?.firmName || '',
         firstName: selectedItem?.firstName || '',
+        creditLimit: selectedItem?.creditLimit || 0,
+        openingBalance: selectedItem?.openingBalance || 0,
+        autoMapping: selectedItem?.autoMapping || true,
+        quantityQuotient: selectedItem?.quantityQuotient || 0,
         lastName: selectedItem?.lastName || '',
         dealerCategoryId: selectedItem?.dealerCategoryId || '',
         email: selectedItem?.email || '',
@@ -275,6 +273,10 @@ const EditDealerWrapper = () => {
                         dealerCode: values.dealerCode,
                         firmName: values.firmName,
                         firstName: values.firstName,
+                        creditLimit: values.creditLimit,
+                        openingBalance: values.openingBalance,
+                        autoMapping: values.autoMapping,
+                        quantityQuotient: values.quantityQuotient,
                         lastName: values.lastName,
                         dealerCategoryId: values.dealerCategoryId,
                         email: values.email,

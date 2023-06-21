@@ -13,6 +13,7 @@ import {
     AssetsLocationWrapper,
     BarcodeGenerator,
     CompetitorManagementListingWrapper,
+    DealerOrderLedgerListTabWrapper,
     EditArtistWrapper,
     EditAssetsCategoryWrapper,
     EditAssetsLocatonWrapper,
@@ -215,13 +216,15 @@ import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsit
 import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsiteTagsWrapper'
 import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
-import ListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/ListLedgerTabWrapper'
 import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
-import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
+ // import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
 // import PrePaidOrderListing from './pages/prepaidorder/PrePaidOrderListing'
 // import PrePaidOrderViewWrapper from './pages/prepaidorder/view/PrePaidOrderViewWrapper'
 import ApprovedOrderListing from './pages/approvedorders/ApprovedOrderListing'
 import ApprovedOrderViewWrapper from './pages/approvedorders/view/ApprovedOrderViewWrapper'
+// import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
+import EditDealerSchemeWrapper from './pages/dealers/view/tabs/DealerSchemeTab/edit/EditDealerSchemeWrapper'
+import DealerListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -264,6 +267,7 @@ const PageRoutes = () => {
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
                     <Route path="/orders" element={<OrderListing />} />
+
                     <Route
                         path="/orders/view/:id"
                         element={<OrderViewWrapper />}
@@ -324,10 +328,7 @@ const PageRoutes = () => {
                             path="return-to-vendor"
                             element={'Return To Vendor'}
                         />
-                        <Route
-                            path="ledger"
-                            element={<ListLedgerTabWrapper />}
-                        />
+                        <Route path="ledger" element={'ListLedgerTabWrapper'} />
                         <Route
                             path="activities"
                             element={<VendorActivityTabWrapper />}
@@ -368,6 +369,11 @@ const PageRoutes = () => {
                         element={<AddSaleOrderWrapper />}
                     />
                     <Route
+                        path="/dealers/:dealerId/sale-order/add-sale-order"
+                        element={<AddSaleOrderWrapper />}
+                    />
+
+                    <Route
                         path="/sale-order/edit-sale-order/:id"
                         element={<EditSaleOrderWrapper />}
                     />
@@ -375,6 +381,22 @@ const PageRoutes = () => {
                     <Route
                         path="/outward-request"
                         element={<OutwardRequestListingWrapper />}
+                    />
+                    {/* <Route
+                        path="dealers/add-warehouse"
+                        element={<AddWarehouseWrapper />}
+                    /> */}
+                    {/* <Route
+                        path="vendors/add-warehouse"
+                        element={<AddWarehouseWrapper />}
+                    /> */}
+                    <Route
+                        path="vendors/:dealerId/warehouse/add-warehouse"
+                        element={<AddWarehouseWrapper />}
+                    />
+                    <Route
+                        path="dealers/:dealerId/warehouse/add-warehouse"
+                        element={<AddWarehouseWrapper />}
                     />
 
                     <Route path="/dealers/:dealerId" element={<ViewDealer />}>
@@ -390,14 +412,16 @@ const PageRoutes = () => {
                             path="warehouse"
                             element={<DealerWarehouseTabWrapper />}
                         />
+
                         <Route
                             path="ledger"
-                            element={<ListLedgerTabWrapper />}
+                            element={<DealerListLedgerTabWrapper />}
                         />
                         <Route
-                            path="ledger/add"
-                            element={<AddDealerLedgerTabWrapper />}
+                            path="order-ledger"
+                            element={<DealerOrderLedgerListTabWrapper />}
                         />
+
                         <Route
                             path="activities"
                             element={<DealerActivityTabWrapper />}
@@ -409,6 +433,10 @@ const PageRoutes = () => {
                         <Route
                             path="scheme/add"
                             element={<AddDealerSchemeTabWrapper />}
+                        />
+                        <Route
+                            path="scheme/edit/:schemeId"
+                            element={<EditDealerSchemeWrapper />}
                         />
                         <Route
                             path="pincode"

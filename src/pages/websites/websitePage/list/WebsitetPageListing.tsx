@@ -27,7 +27,8 @@ const WebsitePageListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.websitePage
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = WebsitePageState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        WebsitePageState
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Website',
@@ -84,6 +85,7 @@ const WebsitePageListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

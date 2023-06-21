@@ -27,7 +27,8 @@ const DealerCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
         (state: RootState) => state.dealersCategory
     )
     const navigate = useNavigate()
-    const { page, rowsPerPage, searchValue, totalItems } = dealerCategoryState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        dealerCategoryState
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Configuration',
@@ -80,6 +81,7 @@ const DealerCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
                         columns={columns}
                         rows={rows}
                         setShowDropdown={setShowDropdown}
+                        isLoading={isTableLoading}
                     />
                 </div>
 

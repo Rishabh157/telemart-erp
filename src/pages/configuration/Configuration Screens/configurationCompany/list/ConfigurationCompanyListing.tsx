@@ -28,7 +28,8 @@ const ConfigurationCompanyListing = ({
 
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue, totalItems } = company
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        company
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -88,6 +89,7 @@ const ConfigurationCompanyListing = ({
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

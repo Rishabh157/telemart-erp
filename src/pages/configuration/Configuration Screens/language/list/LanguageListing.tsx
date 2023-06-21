@@ -30,7 +30,7 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue } = languageState
+    const { page, rowsPerPage, searchValue, isTableLoading } = languageState
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -88,6 +88,7 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

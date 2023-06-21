@@ -7,6 +7,15 @@ export type TextFieldType = {
     offset?: number
 }
 
+export type NumberFieldType = {
+    name: string
+    label: string
+    placeholder: string
+    type?: 'number'
+    optionAccessKey?: never
+    offset?: number
+}
+
 export type PasswordFieldType = {
     name: string
     label: string
@@ -33,12 +42,22 @@ export type FilePickerFieldType = {
     optionAccessKey?: never
     offset?: number
 }
+export type SwitchButton = {
+    name: string
+    label: string
+    placeholder: string
+    type?: 'switch-button'
+    optionAccessKey?: never
+    offset?: number
+}
 
 export type Field<OptionAccessKey> =
     | TextFieldType
     | PasswordFieldType
     | SelectFieldType<OptionAccessKey>
     | FilePickerFieldType
+    | NumberFieldType
+    | SwitchButton
 
 export type SelectOption = {
     label: string

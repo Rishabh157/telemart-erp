@@ -11,7 +11,7 @@ import { AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import {
-    useDeactiveDealerPincodeMutation,
+    useDeleteDealerPincodeMutation,
     useGetDealerPincodeQuery,
 } from 'src/services/DealerPincodeService'
 import { RootState } from 'src/redux/store'
@@ -22,7 +22,6 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const ListDealerPincodeTabWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
-    const [currentId, setCurrentId] = useState('')
     const params = useParams()
     const dealerId: any = params.dealerId
     const dealerPincodeState: any = useSelector(
@@ -31,7 +30,7 @@ const ListDealerPincodeTabWrapper = () => {
     const { page, rowsPerPage, items, searchValue } = dealerPincodeState
 
     const dispatch = useDispatch<AppDispatch>()
-    const [deactiveDealerPincode] = useDeactiveDealerPincodeMutation()
+    const [deleteDealerPincode] = useDeleteDealerPincodeMutation()
 
     const { data, isFetching, isLoading } = useGetDealerPincodeQuery({
         limit: rowsPerPage,
@@ -62,7 +61,7 @@ const ListDealerPincodeTabWrapper = () => {
 
         {
             field: 'estTime',
-            headerName: 'Estimated Time',
+            headerName: 'Estimated Time (in Min.)',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: DealersPincodeListResponse) => {
                 return <span> {row.estTime} </span>
@@ -76,25 +75,27 @@ const ListDealerPincodeTabWrapper = () => {
                 <ActionPopup
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
                     }}
                 >
                     <button
                         onClick={() => {
                             showConfirmationDialog({
-                                title: 'Deactive Scheme',
-                                text: 'Do you want to Deactive',
+                                title: 'Delete Pincode',
+                                text: 'Do you want to Delete',
                                 showCancelButton: true,
                                 next: (res: any) => {
                                     return res.isConfirmed
-                                        ? handleDeactive()
+                                        ? handleDeletePincode(
+                                              row._id,
+                                              row.pincode
+                                          )
                                         : setShowDropdown(false)
                                 },
                             })
                         }}
                         className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                     >
-                        {row.isActive ? 'Deactive' : 'Active'}
+                        Delete
                     </button>
                 </ActionPopup>
             ),
@@ -114,13 +115,12 @@ const ListDealerPincodeTabWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
 
-    const handleDeactive = () => {
+    const handleDeletePincode = (id: string, pincode: string) => {
         setShowDropdown(false)
-        console.log(currentId, 'currentIdcurrentIdcurrentIdcurrentId')
-        deactiveDealerPincode(currentId).then((res: any) => {
+        deleteDealerPincode({ id, pincode }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Scheme Deactive successfully!')
+                    showToast('success', 'Pincode deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }

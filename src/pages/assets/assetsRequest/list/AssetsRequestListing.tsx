@@ -34,7 +34,8 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const assetsRequest = useSelector((state: RootState) => state.assetsRequest)
-    const { page, rowsPerPage, totalItems, searchValue } = assetsRequest
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        assetsRequest
     return (
         <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
             <div className="h-[30px]">
@@ -73,6 +74,7 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
                         columns={columns}
                         rows={rows}
                         isCheckbox={true}
+                        isLoading={isTableLoading}
                         // selectedRows={selectedRows}
                         // onRowSelect={(selectedRows) =>
                         //     setSelectedRows(selectedRows)

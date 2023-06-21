@@ -1,24 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { array, object, string } from 'yup'
 import AddDealerScheme from './AddDealerScheme'
-import { useAddDealerSchemeMutation } from 'src/services/DealerSchemeService'
-import { useGetSchemeQuery } from 'src/services/SchemeService'
-import { useGetDealerSchemeQuery } from 'src/services/DealerSchemeService'
+import {
+    useAddDealerSchemeMutation,
+    useGetAllDealerSchemeByDealerIdQuery,
+} from 'src/services/DealerSchemeService'
+import { useGetAllPincodeByDealerQuery } from 'src/services/DealerPincodeService'
 import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/dealerSchemeSlice'
 import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
+import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
 
 type Props = {}
-
-export type FormInitialValues = {
-    companyId: string
-    dealerId: string
-    schemes: []
-}
 
 const DealerPinCodeTabWrapper = (props: Props) => {
     const navigate = useNavigate()
@@ -27,89 +24,89 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
-
     const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const [pinCodeOptions, setPinCodeOptions] = useState([])
     const [addDealerScheme] = useAddDealerSchemeMutation()
-
-    // const { allItems}: any = useSelector(
-    //     (state: RootState) => state?.dealerScheme
-    // )
-
-    const {
-        data: allData,
-        isLoading: allIsLoading,
-        isFetching: AllIsFetching,
-    } = useGetDealerSchemeQuery({
-        limit: 10,
-        searchValue: '',
-        params: ['schemeId', 'schemeName'],
-        page: 1,
-        filterBy: [
-            {
-                fieldName: 'dealerId',
-                value: dealerId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!allIsLoading && AllIsFetching) {
-            dispatch(setAllItems(allData?.data || []))
-        }
-    }, [dispatch, allData, allIsLoading, AllIsFetching])
 
     const {
         data: schemeData,
         isLoading: schemeIsLoading,
         isFetching: schemeIsFetching,
-    } = useGetSchemeQuery(userData?.companyId)
-
+    } = useGetAllDealerSchemeByDealerIdQuery({
+        companyId: userData?.companyId,
+        dealerId,
+    })
+    useEffect(() => {
+        return () => {
+            dispatch(setAllDealerSchemes([]))
+        }
+    }, [])
     useEffect(() => {
         dispatch(setAllDealerSchemes(schemeData?.data))
-    }, [schemeData, schemeIsLoading, schemeIsFetching, dispatch])
+    }, [schemeData, schemeIsLoading, schemeIsFetching, dispatch, dealerId])
 
     const { allItems: schemeItems }: any = useSelector(
         (state: RootState) => state?.scheme
     )
+
     const schemeOptions = schemeItems?.map((ele: any) => {
         return {
             label: ele.schemeName,
             value: ele._id,
         }
     })
-
-    const initialValues: FormInitialValues = {
+    const {
+        data: pinCodeList,
+        isLoading: pinCodeIsLoading,
+        isFetching: pinCodeIsFetching,
+    } = useGetAllPincodeByDealerQuery({
         companyId: companyId,
         dealerId: dealerId,
-        schemes: [],
+    })
+
+    useEffect(() => {
+        if (!pinCodeIsLoading && !pinCodeIsFetching) {
+            let options = pinCodeList?.data?.map((item: any) => {
+                return {
+                    label: item?.pincode,
+                    value: item?.pincode,
+                }
+            })
+            setPinCodeOptions(options)
+        }
+    }, [pinCodeList, pinCodeIsLoading, pinCodeIsFetching])
+
+    const initialValues: AddDealerSchemeFormInitialValues = {
+        companyId: companyId,
+        dealerId: dealerId,
+        details: [
+            {
+                schemeId: '',
+                pincodes: pinCodeOptions?.map((item: any) => item?.label),
+            },
+        ],
     }
 
     const validationSchema = object({
-        schemes: array()
+        details: array()
             .of(
                 object().shape({
-                    label: string().required(),
-                    value: string().required(),
+                    schemeId: string().required('Please select scheme'),
+                    pincodes: array()
+                        .min(1, 'Please select atleast 1 pincode')
+                        .required('Please select atleast 1 pincode'),
                 })
             )
             .min(1, 'Please select atleast 1 Scheme'),
     })
 
     //    Form Submit Handler
-    const onSubmitHandler = (values: FormInitialValues) => {
+    const onSubmitHandler = (values: AddDealerSchemeFormInitialValues) => {
         setApiStatus(true)
-        const scheme: any = values.schemes.map((ele: any) => {
-            return ele.value
-        })
-
         setTimeout(() => {
             addDealerScheme({
                 dealerId: values.dealerId || '',
-                schemeId: scheme,
+                details: values?.details,
                 companyId: values.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
@@ -130,6 +127,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     return (
         <div>
             <Formik
+                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
@@ -140,6 +138,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                             schemeOptions={schemeOptions}
+                            pinCodeOptions={pinCodeOptions}
                         />
                     )
                 }}

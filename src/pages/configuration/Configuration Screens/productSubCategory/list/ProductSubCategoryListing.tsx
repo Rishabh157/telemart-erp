@@ -35,7 +35,7 @@ const ProductSubCategoryListing = ({
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems } =
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
         productSubCategoryState
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -95,6 +95,7 @@ const ProductSubCategoryListing = ({
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 

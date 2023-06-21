@@ -17,9 +17,15 @@ type Props = {
     columns: any[]
     rows: any[]
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
+    AddpathName: string
 }
 
-const WarehouseListing = ({ columns, rows, setShowDropdown }: Props) => {
+const WarehouseListing = ({
+    columns,
+    rows,
+    setShowDropdown,
+    AddpathName,
+}: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const warehouseState: any = useSelector(
@@ -28,7 +34,8 @@ const WarehouseListing = ({ columns, rows, setShowDropdown }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, totalItems, searchValue } = warehouseState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        warehouseState
 
     const params: any = useParams()
 
@@ -39,7 +46,7 @@ const WarehouseListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMPageHeading> Warehouse </ATMPageHeading>
                 <button
                     onClick={() =>
-                        navigate('/warehouse/add-warehouse', {
+                        navigate(`${AddpathName}`, {
                             state: { params },
                         })
                     }
@@ -77,6 +84,7 @@ const WarehouseListing = ({ columns, rows, setShowDropdown }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
+                        isLoading={isTableLoading}
                     />
                 </div>
 

@@ -8,6 +8,8 @@ type Props = {
     confirmButtonColor?: string
     cancelButtonColor?: string
     confirmButtonText?: string
+    showDenyButton?: boolean
+    denyButtonText?: string
     next?: (result: SweetAlertResult<any>) => void
 }
 
@@ -17,7 +19,9 @@ export const showConfirmationDialog = ({
     icon = 'warning',
     showCancelButton = false,
     confirmButtonColor = '#3085d6',
-    cancelButtonColor = '#d33',
+    showDenyButton = false,
+    denyButtonText = `Reject`,
+    cancelButtonColor = '#dc3741',
     confirmButtonText = 'Yes',
     next = () => {},
 }: Props) => {
@@ -29,5 +33,7 @@ export const showConfirmationDialog = ({
         confirmButtonColor,
         cancelButtonColor,
         confirmButtonText,
+        showDenyButton,
+        denyButtonText,
     }).then(next)
 }

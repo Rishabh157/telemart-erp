@@ -28,7 +28,8 @@ const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue } = itemState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        itemState
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -86,6 +87,7 @@ const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }
                         setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 
