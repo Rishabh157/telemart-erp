@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react'
 import SideNavLayout from '../SideNavLayout/SideNavLayout'
 import { BiSearchAlt2 } from 'react-icons/bi'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import {
+    Outlet,
+
+    //, useLocation, useNavigate
+} from 'react-router-dom'
 import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import { IconType } from 'react-icons'
 import { useDispatch } from 'react-redux'
@@ -10,6 +14,7 @@ import { setIsCollapsed } from 'src/redux/slices/SideNavLayout'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
+import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 
 type ViewLayoutPropTypes = {
     infoCard?: React.ReactNode
@@ -38,8 +43,8 @@ const ViewLayout = ({
     onSearch,
     breadcrumbs,
 }: ViewLayoutPropTypes) => {
-    const navigate = useNavigate()
-    const location = useLocation()
+    // const navigate = useNavigate()
+    // const location = useLocation()
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -93,13 +98,13 @@ const ViewLayout = ({
                                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                             </div>
                             {/* Tabs */}
-                            <div className="h-[45px] border flex gap-4 items-center px-2 py-1 bg-white shadow rounded ">
+                            {/* <div className="h-[45px] border flex gap-4 items-center px-2 py-1 overflow-x-scroll  bg-red-500 shadow rounded ">
                                 {tabs.map((tab, index) => {
                                     return (
                                         <div
                                             key={index}
                                             onClick={() => navigate(tab.path)}
-                                            className={`h-full px-3 flex gap-2 items-center  cursor-pointer hover:text-primary-main rounded font-medium text-sm font-semibold
+                                            className={`h-full px-3 flex gap-2 items-center   cursor-pointer hover:text-primary-main rounded font-medium text-sm font-semibold
                                                  ${
                                                      location.pathname.split(
                                                          '/'
@@ -116,6 +121,9 @@ const ViewLayout = ({
                                         </div>
                                     )
                                 })}
+                            </div> */}
+                            <div className="h-[45px] border flex gap-4 items-center   shadow rounded ">
+                                <TabScrollable tabs={tabs} />
                             </div>
 
                             {/* Children */}

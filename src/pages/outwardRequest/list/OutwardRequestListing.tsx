@@ -28,13 +28,13 @@ const OutwardRequestListing = ({ columns, rows, tabs }: Props) => {
     const { page, rowsPerPage, isTableLoading } = outwardRequestState
 
     return (
-        <div className="px-4 h-full flex flex-col gap-2 w-full">
+        // <div className="px-4 h-full flex flex-col gap-2 w-full">
+        <div className="px-4 h-[calc(100vh-55px)] pt-2 bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> Outward Requests </ATMPageHeading>
                 <button className="bg-primary-main text-white rounded py-1 px-3">
-                    {' '}
-                    + Assign Courier{' '}
+                    + Assign Courier
                 </button>
             </div>
 

@@ -59,7 +59,7 @@ const VendorGeneralInformationTabWrapper = (props: Props) => {
     return selectedItem ? (
         <VendorGeneralInformationTab accordians={accordians} />
     ) : (
-        <div className="">
+        <div className="flex justify-center  items-center w-full h-full">
             <CircularProgress />
         </div>
     )

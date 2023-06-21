@@ -38,7 +38,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
         return { id: ele?._id, label: ele?.groupName, value: ele?.groupName }
     })
     return (
-        <div className="">
+        <div className=" h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
