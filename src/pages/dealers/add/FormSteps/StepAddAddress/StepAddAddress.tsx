@@ -152,6 +152,7 @@ const StepAddAddress = ({
                                                     }}
                                                     // size="small"
                                                     selectClass="shadow mt-2"
+                                                    isSubmitting={isSubmitting}
                                                 />
                                             </div>
                                         )

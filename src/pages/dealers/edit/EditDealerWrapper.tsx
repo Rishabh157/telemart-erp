@@ -157,7 +157,7 @@ const steps = [
                 adharCardNumber: string()
                     .min(14, 'Number should be 12 digits')
                     .max(14, 'maximum 12 digit')
-                    .required('Declaration form is required'),
+                    .required('Aadhar number  is required'),
                 adharCard: mixed().required('Declaration form is required'),
             }),
             otherDocument: array().of(

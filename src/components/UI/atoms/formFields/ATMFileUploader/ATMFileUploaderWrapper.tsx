@@ -10,6 +10,7 @@ type Props = {
     placeholder?: string
     onSelect: (file: File) => void
     selectedFile: any
+    isSubmitting?: boolean
     name: string
     accept?: string
     disabled?: boolean
@@ -24,6 +25,7 @@ const ATMFilePickerWrapper = ({
     placeholder = '',
     onSelect,
     selectedFile,
+    isSubmitting = true,
     accept = 'image/*, video/*',
     disabled,
     isVideo = false,
@@ -42,7 +44,7 @@ const ATMFilePickerWrapper = ({
                 isVideo={isVideo}
             />
 
-            {name && (
+            {name && isSubmitting &&  (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-1 text-red-500">

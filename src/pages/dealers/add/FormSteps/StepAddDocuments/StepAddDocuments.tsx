@@ -54,7 +54,19 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                             <React.Fragment key={name || index}>
                                                 <ATMTextField
                                                     name={name}
-                                                    value={values[name]}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[0]
+                                                              ][
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[1]
+                                                              ]
+                                                            : values[name]
+                                                    }
                                                     onChange={(e) => {
                                                         const typedValue =
                                                             e.target.value
@@ -161,6 +173,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                         })
                                                     }}
                                                     selectedFile={values[name]}
+                                                    isSubmitting={isSubmitting}
                                                 />
                                                 {loaderState === name &&
                                                 imageApiStatus ? (
