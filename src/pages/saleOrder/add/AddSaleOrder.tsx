@@ -46,8 +46,6 @@ const AddSaleOrder = ({
 }: Props) => {
     const { values, setFieldValue } = formikProps
 
-    //console.log(productPriceOptions)
-
     const dispatch = useDispatch<AppDispatch>()
     const [dealerId, setDealerId] = useState('')
     const [productGroup, setProductGroup] = useState('')
@@ -86,11 +84,10 @@ const AddSaleOrder = ({
 
         if (val) {
             setFieldValue(`productSalesOrder[${i}].rate`, val['value'])
+        } else {
+            setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
-        //alert( i)
-        return () => {
-            setProductGroup('')
-        }
+        
     }, [productGroup])
 
     return (
