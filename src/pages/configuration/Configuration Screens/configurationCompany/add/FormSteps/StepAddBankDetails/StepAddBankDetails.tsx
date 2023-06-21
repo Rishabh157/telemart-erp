@@ -156,6 +156,7 @@ const StepAddBankDetails = ({
 
                                                                             case 'select':
                                                                                 return (
+                                                                                    <div className="-mt-2">
                                                                                     <ATMSelect
                                                                                         key={
                                                                                             name
@@ -189,6 +190,7 @@ const StepAddBankDetails = ({
                                                                                             isSubmitting
                                                                                         }
                                                                                     />
+                                                                                    </div>
                                                                                 )
 
                                                                             case 'file-picker':
