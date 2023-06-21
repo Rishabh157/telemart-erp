@@ -17,6 +17,7 @@ import { AiOutlineSetting } from 'react-icons/ai'
 import { BiBox, BiPurchaseTagAlt } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
+import { BsFillCalendarCheckFill } from 'react-icons/bs'
 
 export type NavItemType = {
     label: string
@@ -102,6 +103,11 @@ export const navigation: NavItemType[] = [
         path: '/orders',
     },
 
+    {
+        label: 'Approved Orders',
+        icon: BsFillCalendarCheckFill,
+        path: '/approved-orders',
+    },
     {
         label: 'Call',
         icon: IoCallOutline,

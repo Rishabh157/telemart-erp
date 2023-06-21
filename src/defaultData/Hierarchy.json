@@ -1,7 +1,7 @@
 {
     "salesDepartment": [
         {
-            "label": "AVP",
+            "label": "AVP Sales",
             "value": "SALE_AVP"
         },
         {
@@ -10,65 +10,330 @@
         },
         {
             "label": "Manager Sales Center",
-            "value": "SALE_MANAGER_SALES_CENTER"
+            "value": "MANAGER_SALES_CENTER"
         },
         {
             "label": "Asst. Manager Sales Center",
-            "value": "SALE_ASST_MANAGER_SALES_CENTER"
+            "value": "ASST_MANAGER_SALES_CENTER"
         },
         {
             "label": "Sr. Team Leader/Sr.Executive , MIS",
-            "value": "SALE_SR_EXECUTIVE"
+            "value": "SR_TEAM_LEADER_OR_SR_EXICUTIVE_MIS"
         },
         {
             "label": "Team Leader/Executive , MIS",
-            "value": "SALE_EXECUTIVE"
+            "value": "TEAM_LEADER_OR_EXICUTIVE_SALES_CENTER"
         },
         {
             "label": "SR. Executive, Sales Center ",
-            "value": "SALE_SR_SALES_CENTER"
+            "value": "SR_EXICUTIVE_SALES_CENTER"
         },
-        {
-            "label": " Executive, Sales Center ",
-            "value": "SALE_SALES_CENTER"
-        },
+
         {
             "label": " Executive,Trainee  ",
-            "value": "SALE_TRAINEE"
+            "value": "EXICUTIVE_TRAINEE"
         }
     ],
-    "hrDepartment": {},
+    "hrDepartment": [
+        {
+            "label": "HR AVM",
+            "value": "HR_AVM"
+        },
+        {
+            "label": "AMG Hr And Statutory Compliance",
+            "value": "AMG_HR_AND_STATUTORY_COMPLIANCE"
+        },
+        {
+            "label": "ASST Manager Hr",
+            "value": "ASST_MANAGER_HR"
+        },
+        {
+            "label": "SR Exicutive Hr",
+            "value": "SR_EXICUTIVE_HR"
+        },
+        {
+            "label": "Exicutive Hr",
+            "value": "EXICUTIVE_HR"
+        }
+    ],
     "distributionDepartment": [
         {
-            "label": "AVM",
-            "value": "DISTB_AVM"
+            "label": "AVM Distribution",
+            "value": "DISTRIBUTION_AVM"
         },
         {
             "label": "SR. Manager / Distribution",
-            "value": "DISTB_SR_MANAGER"
+            "value": "SR_MANAGER_DISTRIBUTION"
         },
         {
             "label": " Manager / area",
-            "value": "DISTB_MANAGER"
+            "value": "MANAGER_AREA"
         },
         {
             "label": " SR. Executive / area",
-            "value": "DISTB_SR_EXECUTIVE"
+            "value": "SR_EXICUTIVE_AREA"
         },
         {
             "label": " Executive / area",
-            "value": "DISTB_EXECUTIVE"
+            "value": "EXICUTIVE_AREA"
         }
     ],
-    "financeDepartment": {},
-    "mediaDepartment": {},
-    "mediaProductionDepartment": {},
-    "ITDepartment": {},
-    "DevelopmentDepartment": {},
-    "webDepartment": {},
-    "operationDepartment": {},
-    "qualityDepartment": {},
-    "logisticDepartment": {},
-    "mapingAndMISDepartment": {},
-    "adminDepartment": {}
+    "financeDepartment": [
+        {
+            "label": "AVP Finance",
+            "value": "FINANCE_AVP"
+        },
+        {
+            "label": "AGM Finance",
+            "value": "AGM_FINANCE"
+        },
+        {
+            "label": "SR Manager Finance",
+            "value": "SR_MANAGER_FINANCE"
+        },
+        {
+            "label": "Manager Finance",
+            "value": "MANAGER_FINANCE"
+        },
+        {
+            "label": "AM Finance",
+            "value": "AM_FINANCE"
+        },
+        {
+            "label": "Exicutive Finance",
+            "value": "EXICUTIVE_FINANCE"
+        }
+    ],
+    "mediaDepartment": [
+        {
+            "label": "AVP Media",
+            "value": "MEDIA_AVP"
+        },
+        {
+            "label": "AGM Media Planning And Procurement",
+            "value": "AGM_MEDIA_PLANNING_AND_PROCUREMENT"
+        },
+        {
+            "label": "AM Media",
+            "value": "AM_MEDIA"
+        },
+        {
+            "label": "Exicutive Media",
+            "value": "EXICUTIVE_MEDIA"
+        }
+    ],
+    "mediaProductionDepartment": [
+        {
+            "label": "AVP Media Production",
+            "value": "AVP_MEDIA_PRODUCTION"
+        },
+        {
+            "label": "SR Manager Media Production",
+            "value": "SR_MANAGER_MEDIA_PRODUCTION"
+        },
+        {
+            "label": "SR Editor",
+            "value": "SR_EDITOR"
+        },
+        {
+            "label": "Video Editor",
+            "value": "VIDEO_EDITOR"
+        },
+        {
+            "label": "Associate Aditor",
+            "value": "ASSOCIATE_EDITOR"
+        }
+    ],
+    "ITDepartment": [
+        {
+            "label": "AVP IT",
+            "value": "IT_AVP"
+        },
+        {
+            "label": "Manager System And Network",
+            "value": "MANAGER_SYSTEM_AND_NETWORK"
+        },
+        {
+            "label": "Manager Server And IT",
+            "value": "MANAGER_SERVER_AND_IT"
+        },
+        {
+            "label": "Manager Telecom And Technology",
+            "value": "MANAGER_TELECOM_AND_TECHNOLOGY"
+        },
+        {
+            "label": "AM Network",
+            "value": "AM_NETWORK"
+        },
+        {
+            "label": "Exicutive Network",
+            "value": "EXICUTIVE_NETWORK"
+        },
+        {
+            "label": "Exicutive IT",
+            "value": "EXICUTIVE_IT"
+        }
+    ],
+    "DevelopmentDepartment": [
+        {
+            "label": "AVP Development",
+            "value": "DEVELOPMENT_AVP"
+        },
+        {
+            "label": "Graphic Designer",
+            "value": "GRAPHIC_DESIGNER"
+        },
+        {
+            "label": "Product Development And Research",
+            "value": "PRODUCT_DEVELOPMENT_AND_RESEARCH"
+        },
+        {
+            "label": "SR 3D Artist",
+            "value": "SR_3D_ARTIST"
+        },
+        {
+            "label": "SR VFX Artist",
+            "value": "SR_VFX_ARTIST"
+        },
+        {
+            "label": "SR Visualize",
+            "value": "SR_VISUALIZE"
+        }
+    ],
+    "webDepartment": [
+        {
+            "label": "AVP Webdevelopment",
+            "value": "WEB_DEVELOPMENT_AVP"
+        },
+        {
+            "label": "SR Manager Digital Sales",
+            "value": "SR_MANAGER_DIGITAL_SALES"
+        },
+        {
+            "label": "SR Manager SEO",
+            "value": "SR_MANAGER_SEO"
+        },
+        {
+            "label": "Manager SEO",
+            "value": "MANAGER_SEO"
+        },
+        {
+            "label": "Exicutive SEO",
+            "value": "EXICUTIVE_SEO"
+        },
+        {
+            "label": "Content Creator",
+            "value": "CONTENT_CREATOR"
+        },
+        {
+            "label": "Content Writer",
+            "value": "CONTENT_WRITER"
+        },
+        {
+            "label": "Frontend Developer",
+            "value": "FRONTEND_DEVELOPER"
+        },
+        {
+            "label": "Graphic Designer",
+            "value": "GRAPHIC_DESIGNER_WEB"
+        },
+        {
+            "label": "JR WebDeveloper",
+            "value": "JR_WEB_DEVELOPER"
+        },
+        {
+            "label": "SR WebDeveloper",
+            "value": "SR_WEB_DEVELOPER"
+        },
+        {
+            "label": "WebDeveloper",
+            "value": "WEB_DEVELOPER"
+        }
+    ],
+    "operationDepartment": [
+        {
+            "label": "AVP Operations",
+            "value": "AVP_OPERATIONS"
+        },
+        {
+            "label": "VP Operations",
+            "value": "VP_OPERATIONS"
+        },
+        {
+            "label": "AGM Compliance",
+            "value": "AGM_COMPLIANCE"
+        },
+        {
+            "label": "AGM Operations",
+            "value": "AGM_OPERATIONS"
+        }
+    ],
+    "qualityDepartment": [
+        {
+            "label": "AVP QA",
+            "value": "QA_AVP"
+        },
+        {
+            "label": "AM QA",
+            "value": "AM_QUALITY_ANALYST"
+        },
+        {
+            "label": "Team Leader Quality Analyst",
+            "value": "TEAM_LEADER_QUALITY_ANALYST"
+        },
+        {
+            "label": "Exicutive Quality Analyst",
+            "value": "EXICUTIVE_QUALITY_ANALYST"
+        }
+    ],
+    "logisticDepartment": [
+        {
+            "label": "AVP Logistics",
+            "value": "LOGISTICS_AVP"
+        },
+        {
+            "label": "Manager Logistics",
+            "value": "MANAGER_LOGISTICS"
+        },
+        {
+            "label": "AM Logistics",
+            "value": "AM_LOGISTICS"
+        },
+        {
+            "label": "Exicutive Logistics",
+            "value": "EXICUTIVE_LOGISTICS"
+        }
+    ],
+    "mapingAndMISDepartment": [
+        {
+            "label": "AVP Mapping",
+            "value": "MAPPING_AVP"
+        },
+        {
+            "label": "Manager MIS",
+            "value": "MANAGER_MIS"
+        },
+        {
+            "label": "Exicutive MIS",
+            "value": "EXICUTIVE_MIS"
+        }
+    ],
+    "adminDepartment": [
+        {
+            "label": "AVP Admin",
+            "value": "ADMIN_AVP"
+        },
+        {
+            "label": "Manager Admin",
+            "value": "MANAGER_ADMIN"
+        },
+        {
+            "label": "SR Exicutive Admin",
+            "value": "SR_EXICUTIVE_ADMIN"
+        },
+        {
+            "label": "Exicutive Admin",
+            "value": "EXICUTIVE_ADMIN"
+        }
+    ]
 }

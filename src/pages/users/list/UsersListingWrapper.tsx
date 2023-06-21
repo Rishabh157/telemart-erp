@@ -11,6 +11,10 @@ import {
 } from 'src/redux/slices/NewUserSlice'
 import UsersListing from './UsersListing'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import {
+    getDepartmentLabel,
+    getUserRoleLabel,
+} from 'src/utils/GetHierarchyByDept'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
@@ -72,6 +76,30 @@ const UsersListingWrapper = () => {
             field: 'mobile',
             headerName: 'Mobile no.',
             flex: 'flex-[1_1_0%]',
+        },
+        {
+            field: 'userDepartment',
+            headerName: 'User Department',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: any) => {
+                return <span> {getDepartmentLabel(row.userDepartment)} </span>
+            },
+        },
+        {
+            field: 'userRole',
+            headerName: 'User Role',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: any) => {
+                return (
+                    <span>
+                        {' '}
+                        {getUserRoleLabel(
+                            row.userRole,
+                            row.userDepartment
+                        )}{' '}
+                    </span>
+                )
+            },
         },
         {
             field: 'actions',

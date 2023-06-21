@@ -6,6 +6,7 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
+import { showToast } from 'src/utils'
 
 type Props = {
     formikProps: FormikProps<AddDealerSchemeFormInitialValues>
@@ -74,13 +75,28 @@ const AddDealerScheme = ({
                                                             value={
                                                                 schemeId || ''
                                                             }
-                                                            onChange={(e) =>
-                                                                setFieldValue(
-                                                                    `details[${index}].schemeId`,
-                                                                    e.target
-                                                                        .value
-                                                                )
-                                                            }
+                                                            onChange={(e) => {
+                                                                if (
+                                                                    !values?.details?.find(
+                                                                        (f) =>
+                                                                            f.schemeId ===
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                    )
+                                                                ) {
+                                                                    setFieldValue(
+                                                                        `details[${index}].schemeId`,
+                                                                        e.target
+                                                                            .value
+                                                                    )
+                                                                } else {
+                                                                    showToast(
+                                                                        'error',
+                                                                        'Scheme Already Added!'
+                                                                    )
+                                                                }
+                                                            }}
                                                             options={allOptions}
                                                             label="Scheme"
                                                         />

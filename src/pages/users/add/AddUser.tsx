@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormikProps } from 'formik'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -6,7 +6,12 @@ import { FormInitialValues } from './AddUserWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { userDepartmentOptions } from 'src/utils'
+import {
+    GetHierarchByDeptProps,
+    getHierarchyByDept,
+} from 'src/utils/GetHierarchyByDept'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -25,7 +30,15 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddUser = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const [userRole, setuserRole] = useState<any[]>([])
 
+    useEffect(() => {
+        const departmentroles = getHierarchyByDept({
+            department: values?.userDepartment as GetHierarchByDeptProps,
+        })
+
+        setuserRole(departmentroles)
+    }, [values])
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -66,7 +79,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 name="firstName"
                                 isInfo
-                                InfoTitle="please Enter full name  please Enter full nameplease Enter full nameplease Enter full nameplease Enter full nameplease Enter full name"
+                                InfoTitle="please Enter full name "
                                 value={values.firstName}
                                 label="First Name"
                                 placeholder="First Name"
@@ -120,6 +133,24 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                         setFieldValue('mobile', e.target.value)
                                     }
                                 }}
+                            />
+                            <ATMSelectSearchable
+                                name="userDepartment"
+                                required
+                                value={values.userDepartment}
+                                onChange={(e) =>
+                                    setFieldValue('userDepartment', e)
+                                }
+                                options={userDepartmentOptions}
+                                label="User Department"
+                            />
+                            <ATMSelectSearchable
+                                name="userRole"
+                                required
+                                value={values.userRole}
+                                onChange={(e) => setFieldValue('userRole', e)}
+                                options={userRole}
+                                label="User Role"
                             />
                         </div>
                     </div>

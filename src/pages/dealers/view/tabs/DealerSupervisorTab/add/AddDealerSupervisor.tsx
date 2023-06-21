@@ -13,7 +13,6 @@ type Props = {
 
 const AddDealerSupervisor = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-    console.log()
     return (
         <div className="h-[calc(100%-55px)]">
             <div className="p-4 flex flex-col gap-2  ">
@@ -47,7 +46,7 @@ const AddDealerSupervisor = ({ formikProps, apiStatus }: Props) => {
                                 label="Zonal Manager Name"
                                 options={
                                     getHierarchyByDept({
-                                        department: 'DISTRBUTION_DEPARTMENT',
+                                        department: 'DISTRIBUTION_DEPARTMENT',
                                     }) as SelectOption[]
                                 }
                                 onChange={(e) =>
