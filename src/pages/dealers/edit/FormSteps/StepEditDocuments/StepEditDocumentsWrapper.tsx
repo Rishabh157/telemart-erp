@@ -24,7 +24,7 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
                 name: 'document.gstCertificate',
                 label: 'GST Certificate',
                 placeholder: 'GST Certificate',
-                type: 'text',
+                type: 'file-picker',
                 offset: 1,
             },
             {
@@ -37,7 +37,7 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
                 name: 'document.adharCard',
                 label: 'Aadhar Card',
                 placeholder: 'Aadhar Card',
-                type: 'text',
+                type: 'file-picker',
                 offset: 1,
             },
         ],

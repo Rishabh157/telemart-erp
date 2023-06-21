@@ -55,7 +55,7 @@ const AddStep1 = ({ formikProps, dropdownOptions, formFields }: Props) => {
                                     label={label}
                                     options={
                                         dropdownOptions[
-                                            field.optionAccessKey ||
+                                            // field.optionAccessKey ||
                                                 'companyTypeOptions'
                                         ]
                                     }

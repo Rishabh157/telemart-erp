@@ -48,12 +48,6 @@ const formFields: FieldType[] = [
         type: 'number',
     },
     {
-        name: 'autoMapping',
-        label: 'Auto Mapping',
-        placeholder: 'Auto Mapping',
-        type: 'switch-button',
-    },
-    {
         name: 'quantityQuotient',
         label: 'Quantity Quotient',
         placeholder: 'Quantity Quotient',

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FieldArray, FormikProps } from 'formik'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -8,6 +8,8 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+import { CircularProgress } from '@mui/material'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -20,6 +22,10 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+    const [loaderState, setLoaderState] = useState<string>('')
+    const [fileUploader] = useFileUploaderMutation()
 
     return (
         <div className="">
@@ -34,23 +40,33 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                             {sectionName}
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4 gap-y-4">
-                            {fields?.map((field: FieldType) => {
+                        <div className="grid grid-cols-2 gap-4 gap-y-4">
+                            {fields?.map((field: FieldType, index: number) => {
                                 const {
                                     type = 'text',
                                     name,
                                     label,
                                     placeholder,
-                                    offset,
                                 } = field
                                 switch (type) {
                                     case 'text':
                                         return (
-                                            <>
+                                            <React.Fragment key={name || index}>
                                                 <ATMTextField
-                                                    key={name}
                                                     name={name}
-                                                    value={values[name]}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[0]
+                                                              ][
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[1]
+                                                              ]
+                                                            : values[name]
+                                                    }
                                                     onChange={(e) => {
                                                         const typedValue =
                                                             e.target.value
@@ -107,34 +123,64 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     className="shadow bg-white rounded"
                                                     isSubmitting={isSubmitting}
                                                 />
-                                                {offset &&
-                                                    Array(offset)
-                                                        .fill(null)
-                                                        .map(() => <div></div>)}
-                                            </>
+                                            </React.Fragment>
                                         )
 
                                     case 'file-picker':
                                         return (
-                                            <div className="mt-2">
+                                            <div
+                                                className="mt-4"
+                                                key={name || index}
+                                            >
                                                 <ATMFilePickerWrapper
                                                     name={name}
-                                                    key={name}
                                                     label={label}
                                                     placeholder={placeholder}
-                                                    onSelect={(newFile) =>
-                                                        setFieldValue(
-                                                            name,
-                                                            newFile
+                                                    onSelect={(newFile) => {
+                                                        setLoaderState(name)
+                                                        const formData =
+                                                            new FormData()
+                                                        formData.append(
+                                                            'fileType',
+                                                            'IMAGE'
                                                         )
-                                                    }
+                                                        formData.append(
+                                                            'category',
+                                                            'Dealer'
+                                                        )
+                                                        formData.append(
+                                                            'fileUrl',
+                                                            newFile || ''
+                                                        )
+                                                        setImageApiStatus(true)
+                                                        fileUploader(
+                                                            formData
+                                                        ).then((res) => {
+                                                            if ('data' in res) {
+                                                                setImageApiStatus(
+                                                                    false
+                                                                )
+                                                                setFieldValue(
+                                                                    name,
+                                                                    res?.data
+                                                                        ?.data
+                                                                        ?.fileUrl
+                                                                )
+                                                            }
+                                                            setImageApiStatus(
+                                                                false
+                                                            )
+                                                        })
+                                                    }}
                                                     selectedFile={values[name]}
+                                                    isSubmitting={isSubmitting}
                                                 />
-
-                                                {offset &&
-                                                    Array(offset)
-                                                        .fill(null)
-                                                        .map(() => <div></div>)}
+                                                {loaderState === name &&
+                                                imageApiStatus ? (
+                                                    <div className=" mt-3">
+                                                        <CircularProgress />
+                                                    </div>
+                                                ) : null}
                                             </div>
                                         )
 
@@ -157,6 +203,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                 ) => {
                                     return (
                                         <div
+                                            key={otherDocumentIndex}
                                             className={`py-9 px-7 border-b border-slate-400`}
                                         >
                                             <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center ">

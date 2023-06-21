@@ -22,6 +22,7 @@ export type DealersListResponse = {
     contactInformation: contactInformation[]
     document: document
     otherDocument: otherDocument[]
+    otherDocumentAutoMap: otherDocumentAutoMap
     companyID: string
     isActive: boolean
     isDeleted: boolean
@@ -68,12 +69,20 @@ export type otherDocument = {
     documentFile: string
 }
 
+export type otherDocumentAutoMap = {
+    autoMap: boolean
+    creditLimit: boolean
+    availableQuantity: boolean
+}
+
 export type AddDealer = {
     firstName: string
     lastName: string
     creditLimit: number
     openingBalance: number
-    autoMapping: boolean
+    isAutoMapping: boolean
+    isCheckCreditLimit?: boolean
+    isCheckAvailableQuotient?: boolean
     quantityQuotient: number
     dealerCode: string
     firmName: string
@@ -86,6 +95,8 @@ export type AddDealer = {
     document: document
     otherDocument: otherDocument[]
     companyId: string
+    zonalManagerId: string | null
+    zonalExecutiveId: string | null
 }
 
 export type UpdateDealer = {
@@ -94,7 +105,9 @@ export type UpdateDealer = {
         lastName: string
         creditLimit: number
         openingBalance: number
-        autoMapping: boolean
+        isAutoMapping: boolean
+        isCheckCreditLimit: boolean
+        isCheckAvailableQuotient: boolean
         quantityQuotient: number
         dealerCode: string
         firmName: string
@@ -106,6 +119,8 @@ export type UpdateDealer = {
         document: document
         otherDocument: otherDocument[]
         companyId: string
+        zonalManagerId: string | null
+        zonalExecutiveId: string | null
     }
     id: string
 }

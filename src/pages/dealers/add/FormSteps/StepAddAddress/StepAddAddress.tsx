@@ -4,9 +4,10 @@ import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddDealerWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -55,16 +56,18 @@ const StepAddAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-9 px-7 ${
+                        className={`pb-6 pt-2 px-7 ${
                             index !== formFields.length - 1 && 'border-b'
                         }  border-slate-300`}
                     >
-                        <div className="text-primary-main text-lg pb-2 font-medium">
-                            {sectionName}
-                        </div>
+                        {sectionName && (
+                            <div className="text-primary-main text-lg pb-2 font-medium">
+                                {sectionName}
+                            </div>
+                        )}
 
                         <div className="grid grid-cols-4 gap-4 gap-y-5">
-                            {fields?.map((field: FieldType) => {
+                            {fields?.map((field: FieldType, index: number) => {
                                 const {
                                     type = 'text',
                                     name,
@@ -76,9 +79,8 @@ const StepAddAddress = ({
                                     case 'text':
                                         return (
                                             <ATMTextField
-                                                key={name}
+                                                key={name || index}
                                                 name={name}
-                                                maxLength={10}
                                                 value={
                                                     name.includes('.')
                                                         ? values[
@@ -120,11 +122,10 @@ const StepAddAddress = ({
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
-
                                     case 'select':
                                         return (
-                                            <div className="-mt-2">
-                                                <ATMSelect
+                                            <div className="-mt-4" key={name || index}>
+                                                <ATMSelectSearchable
                                                     label={label}
                                                     name={name}
                                                     value={
@@ -140,23 +141,96 @@ const StepAddAddress = ({
                                                               ]
                                                             : values[name]
                                                     }
-                                                    onChange={(e: any) => {
-                                                        setFieldValue(
-                                                            name,
-                                                            e.target.value
-                                                        )
-                                                    }}
                                                     options={
                                                         dropdownOptions[
                                                             field.optionAccessKey ||
                                                                 'counrtyOptions'
                                                         ]
                                                     }
+                                                    onChange={(e) => {
+                                                        setFieldValue(name, e)
+                                                    }}
+                                                    // size="small"
+                                                    selectClass="shadow mt-2"
                                                     isSubmitting={isSubmitting}
                                                 />
                                             </div>
                                         )
-
+                                    case 'checkbox':
+                                        return (
+                                            <div className="-mt-2" key={name || index}>
+                                                <ATMCheckbox
+                                                    name={name}
+                                                    label={label}
+                                                    onChange={(e) => {
+                                                        setFieldValue(name, e)
+                                                        if (e) {
+                                                            const {
+                                                                address,
+                                                                country,
+                                                                district,
+                                                                phone,
+                                                                pincode,
+                                                                state,
+                                                            } =
+                                                                values.registrationAddress
+                                                            setFieldValue(
+                                                                'billingAddress.address',
+                                                                address
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.country',
+                                                                country
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.district',
+                                                                district
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.phone',
+                                                                phone
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.pincode',
+                                                                pincode
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.state',
+                                                                state
+                                                            )
+                                                        } else {
+                                                            setFieldValue(
+                                                                'billingAddress.address',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.country',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.district',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.phone',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.pincode',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.state',
+                                                                ''
+                                                            )
+                                                        }
+                                                    }}
+                                                    checked={Boolean(
+                                                        values[name]
+                                                    )}
+                                                />
+                                            </div>
+                                        )
                                     default:
                                         return null
                                 }
