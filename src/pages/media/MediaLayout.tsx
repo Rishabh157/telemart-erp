@@ -44,7 +44,7 @@ const mediaNavigation: NavItemType[] = [
         path: '/media/tape',
     },
     {
-        label: 'Competitor(Analysis & flow)',
+        label: 'Competitor',
         icon: MdEmojiEvents,
         path: '/media/competitor',
     },
@@ -74,9 +74,15 @@ const MediaLayout = ({ children }: Props) => {
     const navigate = useNavigate()
 
     const currentPath = `/media/${location.pathname?.split('/')[2]}`
+    const bgColorLocal = localStorage.getItem('themeColor') as string
+    const bgColor = JSON.parse(bgColorLocal) as string | null
 
     return (
-        <div className="flex h-screen w-screen relative">
+        <div
+            className={`flex h-screen w-screen relative ${
+                bgColor === 'black' ? 'bg-invert' : ''
+            }`}
+        >
             {/* Side Navigation Bar */}
             <div
                 className={`border-r border-slate-300 h-full transition-all duration-500   ${
@@ -95,11 +101,11 @@ const MediaLayout = ({ children }: Props) => {
 
             <div className="h-full grow ">
                 {/* Header */}
-                <div className="h-[55px] border-b border-slate-300  ">
+                <div className="h-[55px] border-b border-slate-300 bg-white ">
                     <Header />
                 </div>
 
-                <div className="h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50 ">
+                <div className="h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50  bg-transparent-body">
                     {children}
                 </div>
             </div>

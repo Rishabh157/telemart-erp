@@ -8,6 +8,8 @@ type Props = {
     value: boolean
     onChange: (value: boolean) => void
     disabled?: boolean
+    title1?: string
+    title2?: string
 }
 
 const ATMSwitchButton = ({
@@ -17,6 +19,8 @@ const ATMSwitchButton = ({
     value,
     onChange,
     disabled,
+    title1 = 'Yes',
+    title2 = 'No',
 }: Props) => {
     return (
         <div className="relative mt-4 ml-1">
@@ -42,7 +46,7 @@ const ATMSwitchButton = ({
                                 : 'rounded-r'
                         } flex-1 py-1 h-full transition-all duration-500`}
                     >
-                        YES
+                        {title1}
                     </div>
                     <div
                         className={`${
@@ -51,7 +55,7 @@ const ATMSwitchButton = ({
                                 : 'rounded-r'
                         } flex-1 py-1 h-full transition-all duration-500`}
                     >
-                        NO
+                        {title2}
                     </div>
                 </button>
             </div>

@@ -28,7 +28,8 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
         inboundCallerState
 
     return (
-        <div className="px-4 h-full overflow-auto pt-3 ">
+        // <div className="px-4 h-full overflow-auto pt-3  bg-white ">
+        <div className="px-4 h-[calc(100vh-55px)] pt-2 bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Call Management </ATMPageHeading>
@@ -57,7 +58,7 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
                 />
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto h-full ">
                     <ATMTable
                         columns={columns}
                         rows={rows}
@@ -67,7 +68,7 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
-                        extraClasses="h-full overflow-auto"
+                        // extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>

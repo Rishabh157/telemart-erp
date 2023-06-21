@@ -5,12 +5,26 @@ import { HiDotsHorizontal } from 'react-icons/hi'
 
 interface ActionPopupProps {
     handleOnAction: () => void
-    children: ReactNode
+    children?: ReactNode
+    handleViewActionButton?: () => void
+    handleEditActionButton?: () => void
+    handleDeleteActionButton?: () => void
+    isView?: boolean
+    isDelete?: boolean
+    isEdit?: boolean
+    className?: string
 }
 
 const ActionPopup: React.FC<ActionPopupProps> = ({
     handleOnAction,
     children,
+    handleViewActionButton,
+    handleEditActionButton,
+    handleDeleteActionButton,
+    isView = false,
+    isEdit=false,
+    isDelete=false,
+    className = 'block w-full text-left px-4 py-2 hover:bg-gray-100',
 }) => {
     return (
         <>
@@ -34,6 +48,28 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                                 horizontal: 'center',
                             }}
                         >
+                            <>
+                                {isView && (
+                                    <button
+                                        onClick={handleViewActionButton}
+                                        className={className}
+                                    >
+                                        View
+                                    </button>
+                                )}
+                               {isEdit && <button
+                                    onClick={handleEditActionButton}
+                                    className={className}
+                                >
+                                    Edit
+                                </button>}
+                               {isDelete && <button
+                                    onClick={handleDeleteActionButton}
+                                    className={className}
+                                >
+                                    Delete
+                                </button>}
+                            </>
                             {children}
                         </Popover>
                     </div>

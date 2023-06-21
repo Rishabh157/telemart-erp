@@ -181,7 +181,7 @@ const StepEditAddress = ({
                                                     disabled={false}
                                                 />
                                                 {imageApiStatus ? (
-                                                    <div className=" mt-3">
+                                                    <div className=" mt-3 flex justify-center  items-center w-full h-full">
                                                         <CircularProgress />
                                                     </div>
                                                 ) : null}
