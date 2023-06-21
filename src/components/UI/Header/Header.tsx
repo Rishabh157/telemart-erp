@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { IoNotifications } from 'react-icons/io5'
 import UserProfileCard from '../UserProfileCard/UserProfileCard'
@@ -8,10 +8,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
 import { setUserData } from 'src/redux/slices/authSlice'
+import ATMSwitchButton from '../atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 
-interface Props {}
+interface Props {
+    setBgColor?: any
+}
 
-const Header = (props: Props) => {
+const Header = ({ setBgColor }: Props) => {
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
     const [isShowNotification, setIsShowNotification] = useState(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -55,11 +58,70 @@ const Header = (props: Props) => {
             }
         )
     }
+    const bgColorLocal = localStorage.getItem('themeColor') as string
+    const bgColor = (JSON.parse(bgColorLocal) as string | null) || 'white'
 
+    useEffect(() => {
+        window.addEventListener("beforeunload", handleBeforeUnload);
+        return () => {
+          window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+      }, []);
+      
+      const handleBeforeUnload = (e:any) => {
+        e.preventDefault();
+        const message =
+          "Are you sure you want to leave? All provided data will  be lost.";
+        e.returnValue = message;
+        return message;
+      }
     return (
-        <div className="grid grid-cols-2 w-full h-full shadow-lg border ">
+        <div className={`rid grid-cols-2 w-full h-full shadow-lg border `}>
             {/* Right Section */}
             <div className="flex gap-4 col-start-2 justify-end items-center px-4 ">
+                <div className="-mt-3">
+                    <ATMSwitchButton
+                        // label='Theme Mode'
+                        name=""
+                        value={bgColor === 'white' ? true : false}
+                        title1="Light"
+                        title2="Dark"
+                        onChange={(e) => {
+                            let themeColor = e ? 'white' : 'black'
+                            localStorage.setItem(
+                                'themeColor',
+                                JSON.stringify(themeColor)
+                            )
+                            window.location.reload()
+                        }}
+                    />
+                </div>
+                {/* <div className="flex gap-2 ">
+                    <div
+                        onClick={() => {
+                            localStorage.setItem(
+                                'themeColor',
+                                JSON.stringify('black')
+                            )
+                            window.location.reload()
+                        }}
+                        className="border  border-2 p-1 rounded bg-blue-500"
+                    >
+                        Dark
+                    </div>
+                    <div
+                        onClick={() => {
+                            localStorage.setItem(
+                                'themeColor',
+                                JSON.stringify('white')
+                            )
+                            window.location.reload()
+                        }}
+                        className="border  border-2  p-1 rounded bg-blue-500"
+                    >
+                        Light
+                    </div>
+                </div> */}
                 {userData?.role === 'ADMIN' ? (
                     <FormControl sx={{ width: 150 }}>
                         <Select

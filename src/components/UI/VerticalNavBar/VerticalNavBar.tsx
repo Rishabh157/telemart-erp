@@ -7,6 +7,8 @@ type Props = {
     isCollapsed: boolean
     navigation: NavItemType[]
     isPathEqualtoNavItem?: (navItem: any) => boolean
+    bgColor?: any
+    setBgColor?: any
 }
 
 const VerticalNavBar = ({
@@ -14,11 +16,14 @@ const VerticalNavBar = ({
     isCollapsed,
     navigation,
     isPathEqualtoNavItem = (navItem) => false,
+    bgColor,
+    setBgColor,
 }: Props) => {
     const navigate = useNavigate()
     return (
         <div className="h-full py-3 overflow-auto bg-white">
             {/* Logo & Menu Icon */}
+
             <div
                 className={`flex px-3 items-center ${
                     isCollapsed ? 'justify-between' : 'justify-between'
@@ -93,8 +98,7 @@ const VerticalNavBar = ({
                 `}
                         >
                             <div className="py-1">
-                                {' '}
-                                <navItem.icon />{' '}
+                                <navItem.icon />
                             </div>
                             {!isCollapsed && (
                                 <div className=""> {navItem.label} </div>
