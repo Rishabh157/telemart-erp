@@ -97,6 +97,7 @@ const AddPurchaseOrder = ({
                                 onChange={(e) =>
                                     setFieldValue('poCode', e.target.value)
                                 }
+                                className="mt-0"
                             />
 
                             {/* Vendor */}

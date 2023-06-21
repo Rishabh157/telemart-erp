@@ -83,6 +83,7 @@ const AddProductSubCategory = ({
                                         e.target.value
                                     )
                                 }
+                                className="mt-0"
                             />
 
                             <ATMTextField
@@ -96,6 +97,7 @@ const AddProductSubCategory = ({
                                         e.target.value
                                     )
                                 }
+                                className="mt-0"
                             />
 
                             <ATMSelect
@@ -120,6 +122,7 @@ const AddProductSubCategory = ({
                                 onChange={(e) =>
                                     setFieldValue('hsnCode', e.target.value)
                                 }
+                                className="mt-0"
                             />
                         </div>
                     </div>
