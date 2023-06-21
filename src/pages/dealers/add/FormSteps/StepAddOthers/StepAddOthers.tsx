@@ -24,7 +24,7 @@ const StepAddOthers = ({ formikProps }: Props) => {
                             value={values.zonalManagerId}
                             options={
                                 (getHierarchyByDept({
-                                    department: 'DISTRBUTION_DEPARTMENT',
+                                    department: 'DISTRIBUTION_DEPARTMENT',
                                 }) as SelectOption[]) || []
                             }
                             label="Zonal Manager"
@@ -39,7 +39,7 @@ const StepAddOthers = ({ formikProps }: Props) => {
                             value={values.zonalExecutiveId}
                             options={
                                 (getHierarchyByDept({
-                                    department: 'DISTRBUTION_DEPARTMENT',
+                                    department: 'DISTRIBUTION_DEPARTMENT',
                                 }) as SelectOption[]) || []
                             }
                             label="Zonal Executive"
