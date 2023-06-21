@@ -17,6 +17,8 @@ export type FormInitialValues = {
     mobile: string
     email: string
     password: string
+    userDepartment: string
+    userRole: string
     companyId: string
 }
 
@@ -35,6 +37,8 @@ const AddUserWrapper = (props: Props) => {
         mobile: '',
         email: '',
         password: '',
+        userDepartment: '',
+        userRole: '',
         companyId: userData?.companyId || '',
     }
 
@@ -49,6 +53,9 @@ const AddUserWrapper = (props: Props) => {
             .trim()
             .matches(regIndiaPhone, 'Invalid Mobile Number'),
         email: string().email('Invalid Email ID').required('Email is required'),
+        userDepartment: string().required('User Department is required'),
+        userRole: string().required('User Role is required'),
+
         password: string().required('Password is required'),
     })
 
@@ -62,6 +69,8 @@ const AddUserWrapper = (props: Props) => {
                 mobile: values.mobile || '',
                 email: values.email || '',
                 password: values.password || '',
+                userDepartment: values.userDepartment || '',
+                userRole: values.userRole || '',
                 companyId: values.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
