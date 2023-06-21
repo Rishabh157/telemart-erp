@@ -57,7 +57,21 @@ const StepAddDealerDetails = ({
                                         name={name}
                                         value={values[name]}
                                         onChange={(e) => {
-                                            setFieldValue(name, e.target.value)
+                                            const inputValue =
+                                            e.target
+                                                .value
+                                        if (
+                                            !isNaN(
+                                                Number(
+                                                    inputValue
+                                                )
+                                            )
+                                        ) {
+                                            setFieldValue(
+                                                name,e.target.value
+                                            )
+                                        }
+                                            // setFieldValue(name, e.target.value)
                                         }}
                                         label={label}
                                         placeholder={placeholder}
@@ -109,8 +123,8 @@ const StepAddDealerDetails = ({
                                         value={
                                             name.includes('.')
                                                 ? values[name.split('.')[0]][
-                                                      name.split('.')[1]
-                                                  ]
+                                                name.split('.')[1]
+                                                ]
                                                 : values[name]
                                         }
                                         onChange={(e: any) => {
@@ -118,8 +132,8 @@ const StepAddDealerDetails = ({
                                         }}
                                         options={
                                             dropdownOptions[
-                                                field.optionAccessKey ||
-                                                    'dealerCategoryOptions'
+                                            field.optionAccessKey ||
+                                            'dealerCategoryOptions'
                                             ]
                                         }
                                     />

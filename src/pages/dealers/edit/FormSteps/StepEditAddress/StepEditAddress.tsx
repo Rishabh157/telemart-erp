@@ -1,11 +1,12 @@
 import React from 'react'
-import { FormControl, MenuItem, Select } from '@mui/material'
 import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditDealerWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -54,13 +55,15 @@ const StepEditAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-9 px-7 ${
+                        className={`py-4 px-7 ${
                             index !== formFields.length - 1 && 'border-b'
                         }  border-slate-300`}
                     >
-                        <div className="text-primary-main text-lg pb-2 font-medium">
-                            {sectionName}
-                        </div>
+                        {sectionName && (
+                            <div className="text-primary-main text-lg pb-4 font-medium">
+                                {sectionName}
+                            </div>
+                        )}
 
                         <div className="grid grid-cols-4 gap-4 gap-y-5">
                             {fields?.map((field: FieldType) => {
@@ -118,66 +121,110 @@ const StepEditAddress = ({
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
-
                                     case 'select':
                                         return (
-                                            <div
-                                                key={name}
-                                                className="relative mt-2"
-                                            >
-                                                <label className=" text-slate-700 font-medium">
-                                                    {' '}
-                                                    {label}{' '}
-                                                </label>
-                                                <FormControl fullWidth>
-                                                    <Select
-                                                        name={name}
-                                                        value={
-                                                            name.includes('.')
-                                                                ? values[
-                                                                      name.split(
-                                                                          '.'
-                                                                      )[0]
-                                                                  ][
-                                                                      name.split(
-                                                                          '.'
-                                                                      )[1]
-                                                                  ]
-                                                                : values[name]
-                                                        }
-                                                        onChange={(e) => {
-                                                            setFieldValue(
-                                                                name,
-                                                                e.target.value
-                                                            )
-                                                        }}
-                                                        size="small"
-                                                        className="shadow mt-2"
-                                                        displayEmpty
-                                                    >
-                                                        {dropdownOptions[
+                                            <div className="-mt-4" key={name}>
+                                                <ATMSelectSearchable
+                                                    label={label}
+                                                    name={name}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[0]
+                                                              ][
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[1]
+                                                              ]
+                                                            : values[name]
+                                                    }
+                                                    options={
+                                                        dropdownOptions[
                                                             field.optionAccessKey ||
                                                                 'counrtyOptions'
-                                                        ]?.map((option) => (
-                                                            <MenuItem
-                                                                key={
-                                                                    option.value
-                                                                }
-                                                                value={
-                                                                    option.value
-                                                                }
-                                                            >
-                                                                {' '}
-                                                                {
-                                                                    option.label
-                                                                }{' '}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
+                                                        ]
+                                                    }
+                                                    onChange={(e) => {
+                                                        setFieldValue(name, e)
+                                                    }}
+                                                    selectClass="shadow mt-2"
+                                                />
                                             </div>
                                         )
-
+                                    case 'checkbox':
+                                        return (
+                                            <ATMCheckbox
+                                                key={name}
+                                                name={name}
+                                                label={label}
+                                                checked={Boolean(values[name])}
+                                                onChange={(e) => {
+                                                    setFieldValue(name, e)
+                                                    if (e) {
+                                                        const {
+                                                            address,
+                                                            countryId,
+                                                            districtId,
+                                                            phone,
+                                                            pincodeId,
+                                                            stateId,
+                                                        } =
+                                                            values.registrationAddress
+                                                        setFieldValue(
+                                                            'billingAddress.phone',
+                                                            phone
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.address',
+                                                            address
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.countryId',
+                                                            countryId
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.districtId',
+                                                            districtId
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.pincodeId',
+                                                            pincodeId
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.stateId',
+                                                            stateId
+                                                        )
+                                                    } else {
+                                                        setFieldValue(
+                                                            'billingAddress.address',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.countryId',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.districtId',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.phone',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.pincodeId',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.stateId',
+                                                            ''
+                                                        )
+                                                    }
+                                                }}
+                                            />
+                                        )
                                     default:
                                         return null
                                 }

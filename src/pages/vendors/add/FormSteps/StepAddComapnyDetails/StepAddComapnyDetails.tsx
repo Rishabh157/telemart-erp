@@ -50,7 +50,7 @@ const StepAddComapnyDetails = ({
 
                         case 'select':
                             return (
-                                <div className="-mt-2">
+                                <div className="mt-0">
                                     <ATMSelect
                                         key={index}
                                         name={name}

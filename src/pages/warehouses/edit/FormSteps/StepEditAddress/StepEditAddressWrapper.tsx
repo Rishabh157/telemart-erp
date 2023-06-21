@@ -34,7 +34,7 @@ const formFields: {
     fields: FieldType[]
 }[] = [
     {
-        sectionName: 'Regd Address',
+        sectionName: 'Regd. Address',
         fields: [
             {
                 name: 'regd_address.phone',

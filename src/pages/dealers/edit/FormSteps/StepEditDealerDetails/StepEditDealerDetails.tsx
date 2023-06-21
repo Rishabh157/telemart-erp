@@ -50,9 +50,8 @@ const StepEditDealerDetails = ({
                             )
                         case 'number':
                             return (
-                                <div>
+                                <div key={name}>
                                     <ATMTextField
-                                        key={name}
                                         name={name}
                                         value={values[name]}
                                         onChange={(e) => {
@@ -67,7 +66,7 @@ const StepEditDealerDetails = ({
                             )
                         case 'switch-button':
                             return (
-                                <div>
+                                <div key={name}>
                                     <ATMSwitchButton
                                         name={name}
                                         value={values[name]}

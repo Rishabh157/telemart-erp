@@ -7,6 +7,7 @@ import StepEditDealerDetailsWrapper from './FormSteps/StepEditDealerDetails/Step
 import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
 import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
 import StepEditDocumentsWrapper from './FormSteps/StepEditDocuments/StepEditDocumentsWrapper'
+import StepEditOthersWrapper from './FormSteps/StepEditOthers/StepEditOthersWrapper'
 import {
     useGetDealerByIdQuery,
     useUpdateDealerMutation,
@@ -28,11 +29,13 @@ export type FormInitialValues = {
     firstName: string
     creditLimit: number
     openingBalance: number
-    autoMapping: boolean
     quantityQuotient: number
     lastName: string
     dealerCategoryId: string
     email: string
+    isAutoMap: boolean
+    isCreditLimit: boolean
+    isAvailableQuantity: boolean
     registrationAddress: {
         phone: string
         address: string
@@ -67,6 +70,8 @@ export type FormInitialValues = {
         documentName: string
         documentFile: string
     }[]
+    zonalManagerId: string | null
+    zonalExecutiveId: string | null
 }
 
 // Form Steps
@@ -75,20 +80,20 @@ const steps = [
         label: 'Dealer Details',
         component: StepEditDealerDetailsWrapper,
         validationSchema: object({
-            dealerCode: string().required('dealer code is required'),
-            firmName: string().required('firm name is required'),
-            creditLimit: number().required('Credit limit is required'),
-            openingBalance: number().required('Opeaning balance is required'),
+            dealerCode: string().required('Dealer Code is required'),
+            firmName: string().required('Firm Name is required'),
+            creditLimit: number().moreThan(0, 'Credit limit must be greater than 0').required('Credit limit is required'),
+            openingBalance: number().moreThan(0, 'Opeaning balance must be greater than 0').required('Opeaning balance is required'),
             autoMapping: boolean(),
-            quantityQuotient: number().required('Firm Name is required'),
-            firstName: string().required('first name is required'),
-            lastName: string().required('LastName is required'),
+            quantityQuotient: number().moreThan(0, 'Quantity quotient must be greater than 0').required('Firm Name is required'),
+            firstName: string().required('First Name is required'),
+            lastName: string().required('Last Name is required'),
             dealerCategoryId: string().required(
                 'please choose dealer category'
             ),
             email: string()
                 .email('Invalid Email')
-                .required('email is required'),
+                .required('Email is required'),
         }),
     },
     {
@@ -127,21 +132,17 @@ const steps = [
         validationSchema: object({
             contactInformation: array().of(
                 object().shape({
-                    name: string().required('Name is required'),
-                    department: string().required('Department is required'),
-                    designation: string().required('Designation is required'),
-                    email: string()
-                        .required('Email is required')
-                        .email('Invalid email'),
+                    name: string(),
+                    department: string(),
+                    designation: string(),
+                    email: string().email('Invalid email'),
                     mobileNumber: string()
                         .max(10, 'maximum 10 digits')
                         .min(10, 'minimum 10 digits')
-                        .matches(regIndiaPhone, 'Invalid Mobile Number')
-                        .required('Mobile number is required'),
+                        .matches(regIndiaPhone, 'Invalid Mobile Number'),
                     landLine: string()
                         .max(10, 'maximum 10 digits')
-                        .min(10, 'minimum 10 digits')
-                        .required('Landline is required'),
+                        .min(10, 'minimum 10 digits'),
                 })
             ),
         }),
@@ -156,7 +157,7 @@ const steps = [
                 adharCardNumber: string()
                     .min(14, 'Number should be 12 digits')
                     .max(14, 'maximum 12 digit')
-                    .required('Declaration form is required'),
+                    .required('Aadhar number  is required'),
                 adharCard: mixed().required('Declaration form is required'),
             }),
             otherDocument: array().of(
@@ -165,6 +166,17 @@ const steps = [
                     documentFile: string(),
                 })
             ),
+        }),
+    },
+    {
+        label: 'Others',
+        component: StepEditOthersWrapper,
+        validationSchema: object({
+            zonalManagerId: string().nullable(),
+            zonalExecutiveId: string().nullable(),
+            isAutoMap: boolean(),
+            isCreditLimit: boolean(),
+            isAvailableQuantity: boolean(),
         }),
     },
 ]
@@ -197,10 +209,12 @@ const EditDealerWrapper = () => {
         firstName: selectedItem?.firstName || '',
         creditLimit: selectedItem?.creditLimit || 0,
         openingBalance: selectedItem?.openingBalance || 0,
-        autoMapping: selectedItem?.autoMapping || true,
         quantityQuotient: selectedItem?.quantityQuotient || 0,
         lastName: selectedItem?.lastName || '',
         dealerCategoryId: selectedItem?.dealerCategoryId || '',
+        isAutoMap: selectedItem?.isAutoMapping,
+        isCreditLimit: selectedItem?.isCheckCreditLimit,
+        isAvailableQuantity: selectedItem?.isCheckAvailableQuotient,
         email: selectedItem?.email || '',
         registrationAddress: {
             phone: selectedItem?.registrationAddress.phone || '',
@@ -226,6 +240,8 @@ const EditDealerWrapper = () => {
             adharCard: selectedItem?.document?.adharCard || '',
         },
         otherDocument: selectedItem?.otherDocument || '',
+        zonalManagerId: null,
+        zonalExecutiveId: null,
     }
     const getValidationSchema = (activeStep: number) => {
         return steps.find((_, stepIndex) => stepIndex === activeStep)
@@ -275,7 +291,9 @@ const EditDealerWrapper = () => {
                         firstName: values.firstName,
                         creditLimit: values.creditLimit,
                         openingBalance: values.openingBalance,
-                        autoMapping: values.autoMapping,
+                        isCheckAvailableQuotient: values.isAvailableQuantity,
+                        isCheckCreditLimit: values.isCreditLimit,
+                        isAutoMapping: values.isAutoMap,
                         quantityQuotient: values.quantityQuotient,
                         lastName: values.lastName,
                         dealerCategoryId: values.dealerCategoryId,
@@ -305,6 +323,8 @@ const EditDealerWrapper = () => {
                         },
                         otherDocument: otherDocument,
                         companyId: userData?.companyId || '',
+                        zonalManagerId: values.zonalManagerId || null,
+                        zonalExecutiveId: values.zonalExecutiveId || null,
                     },
                     id: Id || '',
                 }).then((res) => {
