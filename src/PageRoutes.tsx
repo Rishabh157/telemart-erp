@@ -217,6 +217,11 @@ import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsi
 import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
 import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
+ // import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
+// import PrePaidOrderListing from './pages/prepaidorder/PrePaidOrderListing'
+// import PrePaidOrderViewWrapper from './pages/prepaidorder/view/PrePaidOrderViewWrapper'
+import ApprovedOrderListing from './pages/approvedorders/ApprovedOrderListing'
+import ApprovedOrderViewWrapper from './pages/approvedorders/view/ApprovedOrderViewWrapper'
 // import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
 import EditDealerSchemeWrapper from './pages/dealers/view/tabs/DealerSchemeTab/edit/EditDealerSchemeWrapper'
 import DealerListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
@@ -268,6 +273,14 @@ const PageRoutes = () => {
                         element={<OrderViewWrapper />}
                     />
                     <Route path="/orders/add-order" element={<AddOrder />} />
+                    <Route
+                        path="/approved-orders"
+                        element={<ApprovedOrderListing />}
+                    />
+                    <Route
+                        path="/approved-orders/view/:id"
+                        element={<ApprovedOrderViewWrapper />}
+                    />
                     <Route
                         path="/dealers"
                         element={<DealersListingWrapper />}
