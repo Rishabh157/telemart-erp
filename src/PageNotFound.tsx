@@ -1,7 +1,12 @@
 import React from 'react'
 
 const PageNotFound = () => {
-    return <div>PageNotFound</div>
+    return (
+        <div className="h-[100vh] w-full flex gap-2 justify-center items-center ">
+            <h1>400 </h1>
+            <h1> Page Not Found</h1>
+        </div>
+    )
 }
 
 export default PageNotFound

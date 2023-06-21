@@ -6,8 +6,7 @@ import ATMTable, {
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { OrderListResponse } from 'src/models'
-import { useGetOrderQuery } from 'src/services/OrderService'
+import { PrepaidOrderListResponse } from '../../models/PrepaidOrder.modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -20,8 +19,15 @@ import {
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
 import { useNavigate } from 'react-router-dom'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { Chip } from '@mui/material'
+import {
+    useGetPrePaidOrderQuery,
+    useUpdatePrePaidOrderStatusMutation,
+} from 'src/services/PrePaidOrderService'
+import { showToast } from 'src/utils'
 
-const OrderListing = () => {
+const ApprovedOrderListing = () => {
     // Hooks
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
@@ -30,26 +36,42 @@ const OrderListing = () => {
     const [selectedRows, setSelectedRows] = useState([])
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
+
     const orderState: any = useSelector((state: RootState) => state.order)
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-        items,
-        totalItems,
-        isTableLoading,
-    } = orderState
-    const { data, isLoading, isFetching } = useGetOrderQuery({
+    const { page, rowsPerPage, searchValue, items, filterValue, totalItems } =
+        orderState
+
+    const [updatePrePaidOrderStatus] = useUpdatePrePaidOrderStatusMutation()
+    const { data, isLoading, isFetching } = useGetPrePaidOrderQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['didNo', 'mobileNo'],
         page: page,
-        filterBy: [],
+        filterBy: [
+            {
+                fieldName: 'batchNo',
+                value: filterValue,
+            },
+        ],
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
     })
+
+    const changeOrderStaus = (id: string) => {
+        updatePrePaidOrderStatus(id)
+            .then((res: any) => {
+                if (res?.data?.status) {
+                    showToast('success', res?.data?.message)
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            })
+            .catch((err: any) => {
+                showToast('error', 'Something went wrong')
+            })
+    }
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -65,25 +87,29 @@ const OrderListing = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'orderNumber',
-            headerName: 'Order No',
+            field: 'prepaidOrderNumber',
+            headerName: 'Prepaid Order No',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row.orderNumber} </span>
+            renderCell: (row: PrepaidOrderListResponse) => (
+                <span className="text-primary-main ">
+                    # {row.prepaidOrderNumber}{' '}
+                </span>
             ),
         },
         {
             field: 'didNo',
             headerName: 'DID No',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
+            renderCell: (row: PrepaidOrderListResponse) => (
+                <span> {row.didNo} </span>
+            ),
         },
 
         {
             field: 'mobileNo',
             headerName: 'Mobile No',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: OrderListResponse) => (
+            renderCell: (row: PrepaidOrderListResponse) => (
                 <span> {row.mobileNo} </span>
             ),
         },
@@ -91,7 +117,7 @@ const OrderListing = () => {
             field: 'deliveryCharges',
             headerName: 'Delivery Charges',
             flex: 'flex-[2_2_0%]',
-            renderCell: (row: OrderListResponse) => (
+            renderCell: (row: PrepaidOrderListResponse) => (
                 <span className="text-primary-main ">
                     {' '}
                     {row.deliveryCharges}{' '}
@@ -102,7 +128,7 @@ const OrderListing = () => {
             field: 'discount',
             headerName: 'Discount',
             flex: 'flex-[2_2_0%]',
-            renderCell: (row: OrderListResponse) => (
+            renderCell: (row: PrepaidOrderListResponse) => (
                 <span className="text-primary-main "> {row.discount} </span>
             ),
         },
@@ -110,8 +136,54 @@ const OrderListing = () => {
             field: 'total',
             headerName: 'Total',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: OrderListResponse) => (
+            renderCell: (row: PrepaidOrderListResponse) => (
                 <span className="text-slate-800"> &#8377; {row.total} </span>
+            ),
+        },
+        // {
+        //     field: 'approved',
+        //     headerName: 'Status',
+        //     flex: 'flex-[1.5_1.5_0%]',
+        //     renderCell: (row: PrepaidOrderListResponse) => (
+        //         <span className="text-slate-800">{row.approved ? 'true' : 'false'}</span>
+        //     ),
+        // },
+        {
+            field: 'approved',
+            headerName: 'Status',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: PrepaidOrderListResponse) => (
+                <div className="relative">
+                    <button
+                        id="btn"
+                        className="cursor-pointer"
+                        onClick={() => {
+                            showConfirmationDialog({
+                                title: `${
+                                    row.approved ? 'Disapprove' : 'Approve'
+                                } Order`,
+                                text: `Do you want to ${
+                                    row.approved ? 'disapprove' : 'approve'
+                                } this order`,
+                                showCancelButton: true,
+                                next: (res) => {
+                                    return res.isConfirmed
+                                        ? (handleDelete(),
+                                          changeOrderStaus(row._id))
+                                        : setShowDropdown(false)
+                                },
+                            })
+                        }}
+                    >
+                        <Chip
+                            label={`${row.approved ? 'Approve' : 'Disapprove'}`}
+                            color={`${row.approved ? 'success' : 'error'}`}
+                            variant="outlined"
+                            size="small"
+                            clickable={true}
+                        />
+                    </button>
+                </div>
             ),
         },
         {
@@ -135,7 +207,9 @@ const OrderListing = () => {
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
-                                    navigate(`/orders/view/${currentId}`)
+                                    navigate(
+                                        `/approved-orders/view/${currentId}`
+                                    )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
@@ -143,11 +217,28 @@ const OrderListing = () => {
                             </button>
                             <button
                                 onClick={() => {
-                                    navigate(`/orders/${currentId}`)
+                                    navigate(`/approved-orders/${currentId}`)
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Edit
+                            </button>
+                            <button
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Delete Order',
+                                        text: 'Do you want to delete',
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDelete()
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Delete
                             </button>
                         </div>
                     )}
@@ -157,11 +248,30 @@ const OrderListing = () => {
         },
     ]
 
+     
+    const handleDelete = () => {
+        setShowDropdown(false)
+        // deleteOrdercurrentId).then((res) => {
+        //     if ('data' in res) {
+        //         if (res?.data?.status) {
+        //             showToast('success', 'Order deleted successfully!')
+        //         } else {
+        //             showToast('error', res?.data?.message)
+        //         }
+        //     } else {
+        //         showToast(
+        //             'error',
+        //             'Something went wrong, Please try again later'
+        //         )
+        //     }
+        // })
+    }
+
     return (
         <SideNavLayout>
             <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
                 <div className="mb-10 text-2xl text-slate-700 font-bold ">
-                    Orders
+                    Approved Orders
                 </div>
                 <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
                     {/*Table Header */}
@@ -192,7 +302,6 @@ const OrderListing = () => {
                             onRowSelect={(selectedRows) =>
                                 setSelectedRows(selectedRows)
                             }
-                            isLoading={isTableLoading}
                         />
                     </div>
 
@@ -213,4 +322,4 @@ const OrderListing = () => {
     )
 }
 
-export default OrderListing
+export default ApprovedOrderListing

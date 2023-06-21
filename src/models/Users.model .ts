@@ -1,11 +1,14 @@
 export type UsersListResponse = {
-    vendorName: string
-    vendorCode: string
-    email: string
+    firstName: string
+    lastName: string
     mobile: string
-    district: string
-    is_active: boolean
-    is_deleted: boolean
+    email: string
+    userDepartment: string
+    userRole: string
+    userType: string
+    companyId: string
+    isActive: boolean
+    isDeleted: boolean
     createdAt: string
     updatedAt: string
     _id: string
@@ -13,24 +16,28 @@ export type UsersListResponse = {
 }
 
 export type AddUser = {
-    vendorName: string
-    vendorCode: string
-    email: string
+    firstName: string
+    lastName: string
     mobile: string
-    district: string
+    email: string
+    userDepartment: string
+    userRole: string
+    userType: string
     password: string
-    confirm_password: string
+    companyId: string
 }
 
 export type UpdateUser = {
     body: {
-        vendorName: string
-        vendorCode: string
-        email: string
+        firstName: string
+        lastName: string
         mobile: string
-        district: string
+        email: string
+        userDepartment: string
+        userRole: string
+        userType: string
         password: string
-        confirm_password: string
+        companyId: string
     }
     id: string
 }
@@ -67,8 +74,10 @@ export type UsersNewListResponse = {
 export type AddNewUser = {
     firstName: string
     lastName: string
-    email: string
     mobile: string
+    email: string
+    userDepartment: string
+    userRole: string
     password: string
     companyId: string
 }
@@ -79,6 +88,9 @@ export type UpdateNewUser = {
         lastName: string
         email: string
         mobile: string
+        userDepartment: string
+        userRole: string
+        companyId: string
     }
     id: string
 }
