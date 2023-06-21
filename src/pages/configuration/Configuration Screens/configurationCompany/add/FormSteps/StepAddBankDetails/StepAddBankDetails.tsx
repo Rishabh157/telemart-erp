@@ -157,39 +157,39 @@ const StepAddBankDetails = ({
                                                                             case 'select':
                                                                                 return (
                                                                                     <div className="-mt-2">
-                                                                                    <ATMSelect
-                                                                                        key={
-                                                                                            name
-                                                                                        }
-                                                                                        name={`bankDetails[${bankInformationIndex}].${name}`}
-                                                                                        value={
-                                                                                            bankInformation[
+                                                                                        <ATMSelect
+                                                                                            key={
                                                                                                 name
-                                                                                            ]
-                                                                                        }
-                                                                                        onChange={(
-                                                                                            e
-                                                                                        ) => {
-                                                                                            setFieldValue(
-                                                                                                `bankDetails[${bankInformationIndex}].${name}`,
+                                                                                            }
+                                                                                            name={`bankDetails[${bankInformationIndex}].${name}`}
+                                                                                            value={
+                                                                                                bankInformation[
+                                                                                                    name
+                                                                                                ]
+                                                                                            }
+                                                                                            onChange={(
                                                                                                 e
-                                                                                                    .target
-                                                                                                    .value
-                                                                                            )
-                                                                                        }}
-                                                                                        options={
-                                                                                            dropdownOptions[
-                                                                                                field.optionAccessKey ||
-                                                                                                    'accountTypeOptions'
-                                                                                            ]
-                                                                                        }
-                                                                                        label={
-                                                                                            label
-                                                                                        }
-                                                                                        isSubmitting={
-                                                                                            isSubmitting
-                                                                                        }
-                                                                                    />
+                                                                                            ) => {
+                                                                                                setFieldValue(
+                                                                                                    `bankDetails[${bankInformationIndex}].${name}`,
+                                                                                                    e
+                                                                                                        .target
+                                                                                                        .value
+                                                                                                )
+                                                                                            }}
+                                                                                            options={
+                                                                                                dropdownOptions[
+                                                                                                    field.optionAccessKey ||
+                                                                                                        'accountTypeOptions'
+                                                                                                ]
+                                                                                            }
+                                                                                            label={
+                                                                                                label
+                                                                                            }
+                                                                                            isSubmitting={
+                                                                                                isSubmitting
+                                                                                            }
+                                                                                        />
                                                                                     </div>
                                                                                 )
 

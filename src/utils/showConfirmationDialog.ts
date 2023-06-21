@@ -37,6 +37,6 @@ export const showConfirmationDialog = ({
         confirmButtonText,
         showDenyButton,
         denyButtonText,
-        reverseButtons
+        reverseButtons,
     }).then(next)
 }
