@@ -163,7 +163,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                                                             .value
                                                                     )
                                                                 }
-                                                                className="mt-0"
+                                                                className="mt-0 rounded"
                                                             />
                                                             {/* </div> */}
                                                         </div>

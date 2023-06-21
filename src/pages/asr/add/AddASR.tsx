@@ -172,7 +172,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                                                         )
                                                                     }
                                                                 }}
-                                                                className="mt-0"
+                                                                className="mt-0 rounded"
                                                             />
                                                             {/* </div> */}
                                                         </div>

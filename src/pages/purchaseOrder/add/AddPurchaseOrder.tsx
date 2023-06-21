@@ -97,7 +97,7 @@ const AddPurchaseOrder = ({
                                 onChange={(e) =>
                                     setFieldValue('poCode', e.target.value)
                                 }
-                                className="mt-0"
+                                className="mt-0 rounded"
                             />
 
                             {/* Vendor */}
@@ -224,6 +224,7 @@ const AddPurchaseOrder = ({
                                                                                 .value
                                                                         )
                                                                     }
+                                                                    className="rounded"
                                                                 />
                                                             </div>
 
