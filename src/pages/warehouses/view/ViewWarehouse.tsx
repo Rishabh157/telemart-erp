@@ -21,7 +21,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const ViewWarehouse = ({ items }: Props) => {
     return (
-        <div className="mt-3 h-full  ">
+        <div className="mt-3 h-full  overflow-auto min-w-[100%-250px] w-[100%-250px]">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">

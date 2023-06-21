@@ -28,7 +28,7 @@ const SideNavLayout = ({ children }: Props) => {
     const currentPath = `/${location.pathname?.split('/')[1]}`
 
     return (
-        <div className="flex h-screen w-screen">
+        <div className="flex h-screen w-screen ">
             {/* Side Navigation Bar */}
             <div
                 className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   ${
@@ -54,7 +54,7 @@ const SideNavLayout = ({ children }: Props) => {
                 }`}
             >
                 {/* Header */}
-                <div className="h-[55px] border-b border-slate-300  ">
+                <div className="h-[55px] border-b border-slate-300  sticky top-0 bg-white ">
                     <Header />
                 </div>
 
