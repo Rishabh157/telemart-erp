@@ -1,14 +1,24 @@
+/// ==============================================
+// Filename:AssetCategoryWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+
+// |-- Internal Dependencies --|
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import AsstesLayout from '../../AssetsLayout'
 import AssetsCategoryListing from './AssetsCategoryListing'
-
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import {
     useDeleteAssetsCategoryMutation,
@@ -20,6 +30,9 @@ import {
     setTotalItems,
 } from 'src/redux/slices/assets/assetsCategorySlice'
 import { AssetsCategoryListResponse } from 'src/models'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const AssetsCategoryWrapper = () => {
     const navigate = useNavigate()

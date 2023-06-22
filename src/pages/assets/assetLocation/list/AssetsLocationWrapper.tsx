@@ -1,12 +1,24 @@
+/// ==============================================
+// Filename:AssertLocationWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import AsstesLayout from '../../AssetsLayout'
 import AssetsLocationListing from './AssetsLocationListing'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import {
     useDeleteAssetsLocationMutation,
@@ -18,6 +30,9 @@ import {
     setTotalItems,
 } from 'src/redux/slices/assets/assetsLocationSlice'
 import { AssetsLocationListResponse } from 'src/models'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const AssetsLocationWrapper = () => {
     const navigate = useNavigate()

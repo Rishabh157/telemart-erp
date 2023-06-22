@@ -1,20 +1,37 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:EditAssetsLocationWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
 
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+
+// |-- Internal Dependencies --|
 import EditAsstesLocation from './EditAssetsLocation'
 import {
     useUpdateAssetsLocationMutation,
     useGetAssetsLocationByIdQuery,
 } from 'src/services/assets/AssetsLocationService'
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import { setSelectedLocation } from 'src/redux/slices/assets/assetsLocationSlice'
 import AsstesLayout from '../../AssetsLayout'
 
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
