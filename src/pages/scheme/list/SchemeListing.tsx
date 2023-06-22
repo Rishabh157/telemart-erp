@@ -44,23 +44,20 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
-                <div id="table-header">
-                    <ATMTableHeader
-                        page={page}
-                        searchValue={searchValue}
-                        rowCount={totalItems}
-                        rowsPerPage={rowsPerPage}
-                        rows={rows}
-                        onRowsPerPageChange={(newValue) =>
-                            dispatch(setRowsPerPage(newValue))
-                        }
-                        isFilter
-                        // onFilterClick={() => setIsFilterOpen(true)}
-                        onSearch={(newValue) =>
-                            dispatch(setSearchValue(newValue))
-                        }
-                    />
-                </div>
+
+                <ATMTableHeader
+                    page={page}
+                    searchValue={searchValue}
+                    rowCount={totalItems}
+                    rowsPerPage={rowsPerPage}
+                    rows={rows}
+                    onRowsPerPageChange={(newValue) =>
+                        dispatch(setRowsPerPage(newValue))
+                    }
+                    isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                />
 
                 {/* Table */}
                 <div className="grow overflow-auto  ">
