@@ -44,7 +44,6 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
-
                 <ATMTableHeader
                     page={page}
                     searchValue={searchValue}
@@ -58,7 +57,6 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
                     // onFilterClick={() => setIsFilterOpen(true)}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                 />
-
                 {/* Table */}
                 <div className="grow overflow-auto  ">
                     <ATMTable
