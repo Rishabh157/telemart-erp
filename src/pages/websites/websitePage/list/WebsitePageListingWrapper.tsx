@@ -17,7 +17,7 @@ import {
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsitesLayout from '../../WebsiteLayout'
-import WebsitePageListing from './WebsitetPageListing'
+import WebsitePageListing from './WebsitePageListing'
 
 const WebsitePageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -60,64 +60,28 @@ const WebsitePageListingWrapper = () => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                >
-                    <>
-                        {/* // <div className="relative">
-                //     <button
-                //         onClick={(e) => {
-                //             e.stopPropagation()
-                //             setShowDropdown(!showDropdown)
-                //             setCurrentId(row?._id)
-                //         }}
-                //         className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                //     >
-                //         {' '}
-                //         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                //     </button>
-                //     {showDropdown && currentId === row?._id && (
-                //         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10"> */}
-                        <button
-                            onClick={() => {
-                                navigate(
-                                    `/all-websites/website-Page/${currentId}`
-                                )
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Edit
-                        </button>
-                        <button
-                            onClick={() => {
-                                navigate(
-                                    `/all-websites/website-Page/view/${currentId}`
-                                )
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            View
-                        </button>
-                        <button
-                            onClick={() => {
-                                showConfirmationDialog({
-                                    title: 'Delete Website-Page',
-                                    text: 'Do you want to delete',
-                                    showCancelButton: true,
-                                    next: (res: any) => {
-                                        return res.isConfirmed
-                                            ? handleDelete()
-                                            : setShowDropdown(false)
-                                    },
-                                })
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Delete
-                        </button>
-                    </>
-                </ActionPopup>
-                //         {/* </div>
-                //     )}
-                // </div> */}
+                    isDelete
+                    isView
+                    isEdit
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Website-Page',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                    handleViewActionButton={() => {
+                        navigate(`/all-websites/website-Page/view/${currentId}`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/all-websites/website-Page/${currentId}`)
+                    }}
+                />
             ),
             align: 'end',
         },
@@ -173,11 +137,7 @@ const WebsitePageListingWrapper = () => {
             }
         })
     }
-    return isLoading ? (
-        <div className="w-[100%] h-[100vh] flex justify-center fixed z-1 mt-72">
-            <div className="w-[34px] h-[34px] border border-spacing-8 border-cyan-600 rounded animate-spin "></div>
-        </div>
-    ) : (
+    return (
         <>
             <WebsitesLayout>
                 <WebsitePageListing

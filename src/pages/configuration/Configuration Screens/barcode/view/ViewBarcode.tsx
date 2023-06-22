@@ -53,7 +53,7 @@ const ViewBarcode = (cartonBoxCode: Props) => {
     })
 
     return (
-        <div className="h-full px-2 py-2 flex flex-col">
+        <div className="h-[calc(100vh-55px)] overflow-auto px-2 py-2 flex flex-col">
             {/* BreadCrumbs */}
             <div>
                 <ATMBreadCrumbs

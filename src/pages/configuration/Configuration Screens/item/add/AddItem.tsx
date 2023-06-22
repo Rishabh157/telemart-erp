@@ -26,7 +26,7 @@ const AddItem = ({ formikProps }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
-        <div className="">
+        <div className=" h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -35,7 +35,7 @@ const AddItem = ({ formikProps }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add </ATMPageHeading>
+                    <ATMPageHeading> Items </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -50,7 +50,7 @@ const AddItem = ({ formikProps }: Props) => {
                                 onClick={() => formikProps.handleSubmit()}
                                 className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
                             >
-                                + Add
+                                Submit
                             </button>
                         </div>
                     </div>
