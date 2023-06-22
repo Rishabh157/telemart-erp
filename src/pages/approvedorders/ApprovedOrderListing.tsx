@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { HiDotsHorizontal } from 'react-icons/hi'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
