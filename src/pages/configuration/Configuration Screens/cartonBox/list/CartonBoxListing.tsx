@@ -45,7 +45,7 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
     return (
         <div className="px-4  h-[calc(100%- 55px)]  ">
             {/* Breadcrumbs */}
-            <div className="h-[30px]">
+            <div className="h-[30px] py-3 pb-5">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
             {/* Page Header */}

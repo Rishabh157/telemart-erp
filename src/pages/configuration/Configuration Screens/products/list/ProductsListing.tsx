@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -43,7 +44,7 @@ const ProductsListing = ({ columns, rows, setShowDropdown }: Props) => {
     ]
 
     return (
-        <div className="px-4 h-full pt-3  ">
+       <MainLayout>
             {/* Breadcrumbs */}
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -109,7 +110,7 @@ const ProductsListing = ({ columns, rows, setShowDropdown }: Props) => {
        onClose={()=> setIsFilterOpen(false)}
        />
       )} */}
-        </div>
+        </MainLayout>
     )
 }
 
