@@ -21,17 +21,17 @@ const VerticalNavBar = ({
 }: Props) => {
     const navigate = useNavigate()
     return (
-        <div className="h-full py-3 overflow-auto bg-white">
+        <div className="h-full  overflow-auto bg-white ">
             {/* Logo & Menu Icon */}
 
             <div
-                className={`flex px-3 items-center ${
+                className={`flex px-3 py-2 items-center  bg-white sticky top-0 ${
                     isCollapsed ? 'justify-between' : 'justify-between'
                 }`}
             >
                 {/* Logo */}
                 {!isCollapsed && (
-                    <div className="font-semibold text-xl">
+                    <div className="font-semibold text-xl  ">
                         <img
                             src="/telemartLogo.png"
                             alt="Logo"
@@ -43,27 +43,23 @@ const VerticalNavBar = ({
                 {/* Menu Icon */}
                 <div
                     onClick={toggleCollapse}
-                    className="flex flex-col gap-1 cursor-pointer "
+                    className="flex flex-col gap-1 cursor-pointer p-1  "
                 >
                     <div
-                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500 ${
+                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500    ${
                             !isCollapsed &&
-                            'origin-top-left translate-x-[1.5px]  rotate-45'
+                            'origin-top-left translate-x-[1.5px]  rotate-45 -mt-3'
                         }`}
-                    >
-                        {' '}
-                    </div>
+                    ></div>
                     {isCollapsed && (
-                        <div className={`h-[1.5px] w-5 bg-slate-500`}> </div>
+                        <div className={`h-[1.5px] w-5 bg-slate-500  `}> </div>
                     )}
                     <div
-                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500 ${
+                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500  ${
                             !isCollapsed &&
-                            'origin-top-left translate-y-2  -rotate-45'
+                            'origin-top-left translate-y-2  -rotate-45 '
                         }`}
-                    >
-                        {' '}
-                    </div>
+                    ></div>
                 </div>
 
                 {/* <div onClick={toggleCollapse} className="text-xl text-slate-500">

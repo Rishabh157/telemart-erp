@@ -1,6 +1,19 @@
+/// ==============================================
+// Filename:AddASR.ts
+// Type: ADD Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
+import { HiPlus } from 'react-icons/hi'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -8,10 +21,12 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddASRWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+
+// |-- Redux --|
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { HiPlus } from 'react-icons/hi'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -47,13 +62,13 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New ASR </ATMPageHeading>
+                    <ATMPageHeading> ASR </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
-                        <div className="text-xl font-medium"> ASR Details </div>
+                        <div className="text-xl font-medium"> Details </div>
 
                         {/* BUTTON - Add Button */}
                         <div>
@@ -65,7 +80,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Add ASR
+                                Submit
                             </button>
                         </div>
                     </div>

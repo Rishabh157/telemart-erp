@@ -40,7 +40,7 @@ const ProductGroupListing = ({
     const { page, rowsPerPage, totalItems, searchValue } = ProductGroupcodeState
 
     return (
-        <div className="px-4 h-full flex flex-col gap-3">
+        <div className="px-4  h-[calc(100%-55px)] flex flex-col gap-3 pt-4">
             <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
                 {/* Header */}
                 <ATMTableHeader

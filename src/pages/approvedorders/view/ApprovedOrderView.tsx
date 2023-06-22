@@ -21,7 +21,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const ApprovedOrderView = ({ items }: Props) => {
     return (
-        <div className="mt-3 h-full  ">
+        <div className="px-4 h-[calc(100vh-55px)] pt-3 bg-white">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">

@@ -103,7 +103,7 @@ const AddSaleOrder = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Sale Order </ATMPageHeading>
+                    <ATMPageHeading> Sale Order </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -120,7 +120,7 @@ const AddSaleOrder = ({
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Add SO
+                                Submit
                             </button>
                         </div>
                     </div>

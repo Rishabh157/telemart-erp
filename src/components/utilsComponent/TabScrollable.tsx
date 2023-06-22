@@ -7,7 +7,7 @@ type Props = {
     tabs: {
         label: string
         icon: IconType
-        path: string
+        path?: string
     }[]
 }
 const TabScrollable: React.FC<Props> = ({ tabs }) => {
@@ -17,7 +17,7 @@ const TabScrollable: React.FC<Props> = ({ tabs }) => {
 
     // define a onClick function to bind the value on tab click
     const onTabClick = (e: any, index: number) => {
-        navigate(tabs[index].path)
+        navigate(tabs[index]?.path as string)
         setActiveTab(index)
     }
     const tabsArray = [...tabs]

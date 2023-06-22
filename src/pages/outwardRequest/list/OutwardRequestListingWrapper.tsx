@@ -19,7 +19,7 @@ import OutwardRequestListing from './OutwardRequestListing'
 export type Tabs = {
     label: string
     icon: IconType
-    active?: boolean
+    path?: string
 }
 
 const columns: columnTypes[] = [
@@ -146,30 +146,37 @@ const tabs: Tabs[] = [
     {
         label: 'Dealer',
         icon: MdOutbond,
+        // path:'/dealer'
     },
     {
         label: 'Customer',
         icon: MdOutbond,
+        // path:'/dealer'
     },
     {
         label: 'RTV',
         icon: MdOutbond,
+        // path:'/dealer'
     },
     {
         label: 'Warehouse',
         icon: MdOutbond,
+        // path:'/dealer'
     },
     {
         label: 'Sample',
         icon: MdOutbond,
+        // path:'/dealer'
     },
     {
         label: 'E-comm',
         icon: MdOutbond,
+        // path:'/dealer'
     },
     {
         label: 'Replacements/Repackaging',
         icon: MdOutbond,
+        // path:'/dealer'
     },
 ]
 

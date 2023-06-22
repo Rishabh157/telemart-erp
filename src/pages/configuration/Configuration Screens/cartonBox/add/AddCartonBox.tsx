@@ -27,7 +27,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
-        <div className="">
+        <div className=" h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -36,7 +36,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add </ATMPageHeading>
+                    <ATMPageHeading>  Outer Pack Box </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -54,7 +54,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                                + Add
+                                Submit
                             </button>
                         </div>
                     </div>
