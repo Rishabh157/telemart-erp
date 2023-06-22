@@ -42,12 +42,12 @@ const AssetsLocationWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    isDelete
+                    isEdit
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                    isDelete
-                    isEdit
                     handleEditActionButton={() => {
                         navigate(`/assets/assets-location/${currentId}`)
                     }}

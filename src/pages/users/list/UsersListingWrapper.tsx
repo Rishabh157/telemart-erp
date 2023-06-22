@@ -101,22 +101,20 @@ const UsersListingWrapper = () => {
                 )
             },
         },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        //   setCurrentId(row?._id);
-                    }}
-                >
-                    <></>
-                </ActionPopup>
-            ),
-            align: 'end',
-        },
+        // {
+        //     field: 'actions',
+        //     headerName: 'Actions',
+        //     flex: 'flex-[0.5_0.5_0%]',
+        //     renderCell: (row: any) => (
+        //         <ActionPopup
+        //             handleOnAction={() => {
+        //                 setShowDropdown(!showDropdown)
+        //                 //   setCurrentId(row?._id);
+        //             }}
+        //         />
+        //     ),
+        //     align: 'end',
+        // },
     ]
 
     return (

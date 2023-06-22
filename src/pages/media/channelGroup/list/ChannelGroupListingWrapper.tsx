@@ -46,39 +46,28 @@ const ChannelGroupListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    isEdit
+                    isDelete
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                >
-                    <>
-                        <button
-                            onClick={() => {
-                                navigate(`/media/channel-group/${currentId}`)
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Edit
-                        </button>
-                        <button
-                            onClick={() => {
-                                showConfirmationDialog({
-                                    title: 'Delete channel group',
-                                    text: 'Do you want to delete',
-                                    showCancelButton: true,
-                                    next: (res: any) => {
-                                        return res.isConfirmed
-                                            ? handleDelete()
-                                            : setShowDropdown(false)
-                                    },
-                                })
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Delete
-                        </button>
-                    </>
-                </ActionPopup>
+                    handleEditActionButton={() => {
+                        navigate(`/media/channel-group/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete channel group',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
             ),
             align: 'end',
         },

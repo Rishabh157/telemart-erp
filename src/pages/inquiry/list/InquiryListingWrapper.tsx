@@ -149,22 +149,15 @@ const InquiryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    isView
+                    handleViewActionButton={() => {
+                        navigate(`/inquiry/view/${currentId}`)
+                    }}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                >
-                    <>
-                        <button
-                            onClick={() => {
-                                navigate(`/inquiry/view/${currentId}`)
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            View
-                        </button>
-                    </>
-                </ActionPopup>
+                />
             ),
             align: 'end',
         },
