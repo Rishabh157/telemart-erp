@@ -38,7 +38,7 @@ const BarcodeListing = ({
     const { page, rowsPerPage, totalItems, searchValue } = barcodeState
 
     return (
-        <div className="px-4 h-full flex flex-col gap-3">
+        <div className="px-4 h-[calc(100%-55px)] flex flex-col gap-3">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> Barcode </ATMPageHeading>
@@ -52,7 +52,7 @@ const BarcodeListing = ({
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/* Header */}
                 <ATMTableHeader
                     searchValue={searchValue}

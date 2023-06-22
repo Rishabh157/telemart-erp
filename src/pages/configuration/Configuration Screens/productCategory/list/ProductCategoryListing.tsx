@@ -45,7 +45,7 @@ const ProductCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
     ]
 
     return (
-        <div className="px-4 h-full pt-3  ">
+        <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
             {/* Breadcrumbs */}
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -64,7 +64,7 @@ const ProductCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-full rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     searchValue={searchValue}

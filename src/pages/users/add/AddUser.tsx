@@ -67,7 +67,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Add User
+                                Submit
                             </button>
                         </div>
                     </div>

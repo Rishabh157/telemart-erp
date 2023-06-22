@@ -38,7 +38,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
         return { id: ele?._id, label: ele?.groupName, value: ele?.groupName }
     })
     return (
-        <div className="">
+        <div className="px-4 h-[calc(100vh-55px)] pt-3 bg-white">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">

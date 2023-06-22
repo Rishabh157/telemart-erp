@@ -17,7 +17,7 @@ import {
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsitesLayout from '../../WebsiteLayout'
-import WebsitePageListing from './WebsitetPageListing'
+import WebsitePageListing from './WebsitePageListing'
 
 const WebsitePageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -137,11 +137,7 @@ const WebsitePageListingWrapper = () => {
             }
         })
     }
-    return isLoading ? (
-        <div className="w-[100%] h-[100vh] flex justify-center fixed z-1 mt-72">
-            <div className="w-[34px] h-[34px] border border-spacing-8 border-cyan-600 rounded animate-spin "></div>
-        </div>
-    ) : (
+    return (
         <>
             <WebsitesLayout>
                 <WebsitePageListing

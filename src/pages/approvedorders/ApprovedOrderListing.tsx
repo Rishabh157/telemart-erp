@@ -192,35 +192,33 @@ const ApprovedOrderListing = () => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-             <ActionPopup 
-             isView
-             isEdit
-             isDelete
-             handleOnAction={()=>{
-                setShowDropdown(!showDropdown)
-                setCurrentId(row?._id)
-             }}
-             handleViewActionButton={() => {
-                navigate(
-                    `/approved-orders/view/${currentId}`
-                )
-            }}
-            handleEditActionButton={() => {
-                navigate(`/approved-orders/${currentId}`)
-            }}
-            handleDeleteActionButton={() => {
-                showConfirmationDialog({
-                    title: 'Delete Order',
-                    text: 'Do you want to delete',
-                    showCancelButton: true,
-                    next: (res) => {
-                        return res.isConfirmed
-                            ? handleDelete()
-                            : setShowDropdown(false)
-                    },
-                })
-            }}
-             />
+                <ActionPopup
+                    isView
+                    isEdit
+                    isDelete
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    handleViewActionButton={() => {
+                        navigate(`/approved-orders/view/${currentId}`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/approved-orders/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Order',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
             ),
             align: 'end',
         },
@@ -250,7 +248,7 @@ const ApprovedOrderListing = () => {
                 <div className="mb-10 text-2xl text-slate-700 font-bold ">
                     Approved Orders
                 </div>
-                <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+                <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                     {/*Table Header */}
                     <ATMTableHeader
                         searchValue={searchValue}

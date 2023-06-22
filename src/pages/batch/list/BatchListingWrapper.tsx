@@ -93,47 +93,12 @@ const BatchListingWrapper = () => {
                         setShowDropdown(!showDropdown)
                         // setCurrentId(row?._id)
                     }}
-                >
-                    <>
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                            <button
-                                onClick={() => {
-                                    dispatch(setFilterValue([row?.batchNo]))
-                                    navigate('/orders')
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                View
-                            </button>
-                        </div>
-                    </>
-                </ActionPopup>
-                // <div className="relative">
-                //     <button
-                //         onClick={(e) => {
-                //             e.stopPropagation()
-                //             setShowDropdown(!showDropdown)
-                //             setCurrentId(row?._id)
-                //         }}
-                //         className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                //     >
-                //         {' '}
-                //         <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                //     </button>
-                //     {showDropdown && currentId === row?._id && (
-                //         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                //             <button
-                //                 onClick={() => {
-                //                     dispatch(setFilterValue([row?.batchNo]))
-                //                     navigate('/orders')
-                //                 }}
-                //                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                //             >
-                //                 View
-                //             </button>
-                //         </div>
-                //     )}
-                // </div>
+                    isView
+                    handleViewActionButton={() => {
+                        dispatch(setFilterValue([row?.batchNo]))
+                        navigate('/orders')
+                    }}
+                />
             ),
             align: 'end',
         },

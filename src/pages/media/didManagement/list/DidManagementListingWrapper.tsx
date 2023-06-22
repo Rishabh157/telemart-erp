@@ -83,7 +83,7 @@ const DidManagementListingWrapper = () => {
                             },
                         })
                     }}
-                />  
+                />
             ),
             align: 'end',
         },

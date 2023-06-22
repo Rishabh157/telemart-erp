@@ -30,7 +30,7 @@ const AddCbBarcode = ({ formikProps, apiStatus, cartonBoxOption }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
-        <div className="">
+        <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -39,7 +39,7 @@ const AddCbBarcode = ({ formikProps, apiStatus, cartonBoxOption }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New Product Group </ATMPageHeading>
+                    <ATMPageHeading> Product Group </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -60,7 +60,7 @@ const AddCbBarcode = ({ formikProps, apiStatus, cartonBoxOption }: Props) => {
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Add Product Group
+                                Submit
                             </button>
                         </div>
                     </div>

@@ -71,8 +71,10 @@ const WebsitesLayout = ({ children }: Props) => {
         >
             {/* Side Navigation Bar */}
             <div
-                className={`border-r border-slate-300 h-full transition-all duration-500   ${
-                    isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
+                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${
+                    isCollapsed
+                        ? 'min-w-[50px] w-[50px]'
+                        : 'min-w-[250px] w-[250px]'
                 }`}
             >
                 <VerticalNavBar

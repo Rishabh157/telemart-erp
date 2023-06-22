@@ -51,10 +51,10 @@ const CartonBoxBarcodeListing = ({
     const { page, rowsPerPage, totalItems, searchValue } = cartonBoxBarcodeState
 
     return (
-        <div className="px-4 h-full flex flex-col gap-3">
+        <div className="px-4  h-[calc(100%-55px)]  flex flex-col gap-3 pt-4">
             {/* Page Header */}
 
-            <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white ">
                 {/* Header */}
                 <ATMTableHeader
                     searchValue={searchValue}
