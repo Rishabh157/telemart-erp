@@ -134,6 +134,7 @@ const AddSaleOrder = ({
                                 onChange={(e) =>
                                     setFieldValue('soNumber', e.target.value)
                                 }
+                                className="mt-0"
                             />
 
                             {/* Dealer */}

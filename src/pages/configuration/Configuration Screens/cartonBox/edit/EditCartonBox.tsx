@@ -96,12 +96,12 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                     }
                                 }}
                             />
-                            <div>
+                            <div className="mt-4">
                                 <label className="text-slate-700 font-medium">
                                     {' '}
                                     Dimensions{' '}
                                 </label>
-                                <div className="flex gap-2 mt-2">
+                                <div className="flex gap-2">
                                     {/* Height */}
                                     <ATMTextField
                                         name="dimensions.height"
@@ -120,7 +120,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                             }
                                         }}
                                         placeholder="H"
-                                        className="shadow bg-white rounded"
+                                        className="shadow bg-white rounded -mt-2"
                                     />
 
                                     {/* Weight */}
@@ -141,7 +141,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                             }
                                         }}
                                         placeholder="W"
-                                        className="shadow bg-white rounded"
+                                        className="shadow bg-white rounded -mt-2"
                                     />
 
                                     {/* Depth */}
@@ -162,7 +162,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                             }
                                         }}
                                         placeholder="D"
-                                        className="shadow bg-white rounded"
+                                        className="shadow bg-white rounded -mt-2"
                                     />
                                 </div>
                             </div>

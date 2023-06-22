@@ -82,6 +82,7 @@ const EditProductSubCategory = ({
                                         e.target.value
                                     )
                                 }
+                                className="mt-0 rounded"
                             />
 
                             <ATMTextField
@@ -95,6 +96,7 @@ const EditProductSubCategory = ({
                                         e.target.value
                                     )
                                 }
+                                className="mt-0 rounded"
                             />
 
                             <ATMSelect
@@ -119,6 +121,7 @@ const EditProductSubCategory = ({
                                 onChange={(e) =>
                                     setFieldValue('hsnCode', e.target.value)
                                 }
+                                className="mt-0 rounded"
                             />
                         </div>
                     </div>
