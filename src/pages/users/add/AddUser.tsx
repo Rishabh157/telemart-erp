@@ -12,6 +12,7 @@ import {
     GetHierarchByDeptProps,
     getHierarchyByDept,
 } from 'src/utils/GetHierarchyByDept'
+import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -40,7 +41,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
         setuserRole(departmentroles)
     }, [values])
     return (
-        <div className=" h-[calc(100vh-55px)] overflow-auto">
+        <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className=" text-black font-bold">
@@ -156,7 +157,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                     </div>
                 </div>
             </div>
-        </div>
+            </MainLayout>
     )
 }
 

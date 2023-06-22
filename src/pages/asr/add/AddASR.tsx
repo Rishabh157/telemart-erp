@@ -25,6 +25,7 @@ import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 // |-- Redux --|
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 // |-- Types --|
 type Props = {
@@ -53,7 +54,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
         return { id: ele?._id, label: ele?.groupName, value: ele?.groupName }
     })
     return (
-        <div className=" h-[calc(100vh-55px)] overflow-auto">
+        <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -219,7 +220,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                     </FieldArray>
                 </div>
             </div>
-        </div>
+        </MainLayout>
     )
 }
 
