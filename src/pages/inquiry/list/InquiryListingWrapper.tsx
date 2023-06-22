@@ -190,7 +190,7 @@ const InquiryListingWrapper = () => {
 
     return (
         <SideNavLayout>
-            <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+            <div className="px-4 h-[calc(100vh-55px)] ">
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Inquiry</ATMPageHeading>
                 </div>

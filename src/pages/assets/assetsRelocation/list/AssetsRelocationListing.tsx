@@ -21,7 +21,7 @@ const AssetsRelocationListing = () => {
 
     const navigate = useNavigate()
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+        <div className="px-4 h-[calc(100vh-55px)] ">
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>

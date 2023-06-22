@@ -45,7 +45,7 @@ const ProductCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
     ]
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
+        <div className="px-4 h-[calc(100vh-55px)]  ">
             {/* Breadcrumbs */}
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />

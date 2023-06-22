@@ -159,7 +159,7 @@ const OrderListing = () => {
 
     return (
         <SideNavLayout>
-            <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+            <div className="px-4 h-[calc(100vh-55px)] ">
                 <div className="mb-10 text-2xl text-slate-700 font-bold ">
                     Orders
                 </div>

@@ -5,7 +5,7 @@ type Props = {}
 
 const Dashboard = (props: Props) => {
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3 bg-white">
+        <div className="px-4 h-[calc(100vh-55px)] bg-white">
             <ATMPageHeading> Dashboard </ATMPageHeading>
         </div>
     )

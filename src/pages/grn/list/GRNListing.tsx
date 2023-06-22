@@ -28,7 +28,7 @@ const GRNListing = ({ columns, rows }: Props) => {
         grnState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
+        <div className="px-4 h-[calc(100vh-55px)]  ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> GRN (Goods Received Note) </ATMPageHeading>

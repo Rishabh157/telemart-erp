@@ -38,7 +38,7 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
         assetLocation
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+        <div className="px-4 h-[calc(100vh-55px)] ">
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>

@@ -33,7 +33,7 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3">
+        <div className="px-4 h-[calc(100vh-55px)]">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> Users </ATMPageHeading>
@@ -46,7 +46,7 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
