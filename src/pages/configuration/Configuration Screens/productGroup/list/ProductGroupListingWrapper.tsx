@@ -99,7 +99,7 @@ const ProductGroupListingWrapper = () => {
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({
-                            title: 'Delete Product-Group',
+                            title: 'Delete Product Group',
                             text: 'Do you want to delete',
                             showCancelButton: true,
                             next: (res: any) => {

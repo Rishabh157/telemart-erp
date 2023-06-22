@@ -60,7 +60,7 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                                 {isEdit && (
                                     <button
                                         onClick={handleEditActionButton}
-                                        className={className}
+                                    className={className}
                                     >
                                         Edit
                                     </button>

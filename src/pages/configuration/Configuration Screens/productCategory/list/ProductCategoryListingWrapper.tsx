@@ -66,7 +66,7 @@ const ProductCategoryListingWrapper = () => {
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({
-                            title: 'Delete Product-category',
+                            title: 'Delete Product category',
                             text: 'Do you want to delete',
                             showCancelButton: true,
                             next: (res) => {
