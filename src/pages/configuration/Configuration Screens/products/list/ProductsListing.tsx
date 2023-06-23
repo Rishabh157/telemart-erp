@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -44,7 +43,7 @@ const ProductsListing = ({ columns, rows, setShowDropdown }: Props) => {
     ]
 
     return (
-       <MainLayout>
+        <div className="px-4 h-full pt-3  ">
             {/* Breadcrumbs */}
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -61,7 +60,7 @@ const ProductsListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     searchValue={searchValue}
@@ -104,13 +103,7 @@ const ProductsListing = ({ columns, rows, setShowDropdown }: Props) => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
-        </MainLayout>
+        </div>
     )
 }
 
