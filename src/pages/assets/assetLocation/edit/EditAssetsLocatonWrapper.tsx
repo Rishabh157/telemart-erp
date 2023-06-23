@@ -15,7 +15,6 @@ import { object, string } from 'yup'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-
 // |-- Internal Dependencies --|
 import EditAsstesLocation from './EditAssetsLocation'
 import {
@@ -26,10 +25,8 @@ import { showToast } from 'src/utils'
 import { setSelectedLocation } from 'src/redux/slices/assets/assetsLocationSlice'
 import AsstesLayout from '../../AssetsLayout'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {}

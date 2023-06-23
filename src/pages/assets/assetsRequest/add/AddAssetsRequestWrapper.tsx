@@ -27,7 +27,6 @@ import { AssetsCategoryListResponse } from 'src/models'
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 
-
 // |-- Types --|
 type Props = {}
 

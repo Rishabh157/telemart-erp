@@ -29,7 +29,6 @@ import {
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 
-
 // |-- Types --|
 type Props = {
     columns: any[]

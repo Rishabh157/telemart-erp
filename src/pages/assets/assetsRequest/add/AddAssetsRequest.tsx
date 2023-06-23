@@ -22,7 +22,6 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

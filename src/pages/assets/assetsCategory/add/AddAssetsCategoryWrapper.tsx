@@ -20,10 +20,8 @@ import { useAddAssetsCategoryMutation } from 'src/services/assets/AssetsCategory
 import { showToast } from 'src/utils'
 import AsstesLayout from '../../AssetsLayout'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {}

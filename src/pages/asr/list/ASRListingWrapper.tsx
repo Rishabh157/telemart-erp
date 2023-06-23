@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Chip, Stack } from '@mui/material'
 
-
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ASRListResponse } from 'src/models/ASR.model'
@@ -33,10 +32,8 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
-
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 const ASRListingWrapper = () => {
     const navigate = useNavigate()

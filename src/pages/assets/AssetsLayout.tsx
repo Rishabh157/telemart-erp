@@ -16,12 +16,9 @@ import { MdOutlineWebAsset, MdShareLocation } from 'react-icons/md'
 import { TbCategory2, TbLayoutDistributeHorizontal } from 'react-icons/tb'
 import { CiLocationOn } from 'react-icons/ci'
 
-
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
-
-
 
 const asstesNavigation: NavItemType[] = [
     {

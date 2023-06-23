@@ -23,11 +23,8 @@ import {
     setFilterValue,
 } from 'src/redux/slices/GRNSlice'
 
-
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-
-
 
 // |-- Types --|
 type Props = {

@@ -12,7 +12,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-
 // |-- Internal Dependencies --|
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'

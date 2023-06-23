@@ -31,7 +31,6 @@ import { setSelectedAssetRequest } from 'src/redux/slices/assets/assetsRequestSl
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 
-
 // |-- Types --|
 type Props = {}
 

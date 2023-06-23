@@ -90,7 +90,6 @@ const StepAddBankDetails = ({
                                                                             name,
                                                                             label,
                                                                             placeholder,
-                                                                            
                                                                         } = field
 
                                                                         switch (
@@ -155,7 +154,7 @@ const StepAddBankDetails = ({
                                                                                                 dropdownOptions[
                                                                                                     field.optionAccessKey ||
                                                                                                         'accountTypeOptions'
-                                                                                                ] 
+                                                                                                ]
                                                                                             }
                                                                                             label={
                                                                                                 label

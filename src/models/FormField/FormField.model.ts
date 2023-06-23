@@ -55,10 +55,10 @@ export type Checkbox = {
     name: string
     label: string
     // checked?: boolean
-    type? : 'checkbox'
+    type?: 'checkbox'
     value?: string
     placeholder?: string
-    optionAccessKey?:never
+    optionAccessKey?: never
     offset?: number
 }
 

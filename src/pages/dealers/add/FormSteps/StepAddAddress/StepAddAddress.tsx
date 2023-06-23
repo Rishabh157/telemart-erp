@@ -124,7 +124,10 @@ const StepAddAddress = ({
                                         )
                                     case 'select':
                                         return (
-                                            <div className="-mt-4" key={name || index}>
+                                            <div
+                                                className="-mt-4"
+                                                key={name || index}
+                                            >
                                                 <ATMSelectSearchable
                                                     label={label}
                                                     name={name}
@@ -158,7 +161,10 @@ const StepAddAddress = ({
                                         )
                                     case 'checkbox':
                                         return (
-                                            <div className="-mt-2" key={name || index}>
+                                            <div
+                                                className="-mt-2"
+                                                key={name || index}
+                                            >
                                                 <ATMCheckbox
                                                     name={name}
                                                     label={label}

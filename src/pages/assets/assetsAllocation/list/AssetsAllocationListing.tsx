@@ -11,7 +11,6 @@ import React from 'react'
 // |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
 
-
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,

@@ -8,7 +8,6 @@
 // |-- Built-in Dependencies --|
 import React from 'react'
 
-
 // |-- Internal Dependencies --|
 import AsstesLayout from '../../AssetsLayout'
 import AssetsAllocationListing from './AssetsAllocationListing'

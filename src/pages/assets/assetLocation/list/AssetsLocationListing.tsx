@@ -8,11 +8,9 @@
 // |-- Built-in Dependencies --|
 import React from 'react'
 
-
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -30,7 +28,6 @@ import {
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {
