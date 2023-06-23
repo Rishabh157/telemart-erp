@@ -23,14 +23,16 @@ const AccordianDocument = (data: any) => {
                         placeholder={'GST No.'}
                         className="shadow bg-white rounded"
                     />
-                    <ATMFilePickerWrapper
-                        name=""
-                        label={'GST Certificate'}
-                        placeholder={'GST Certificate'}
-                        onSelect={(newFile) => {}}
-                        selectedFile={data?.data?.document?.gstCertificate}
-                        disabled={true}
-                    />
+                    <div className="mt-4">
+                        <ATMFilePickerWrapper
+                            name=""
+                            label={'GST Certificate'}
+                            placeholder={'GST Certificate'}
+                            onSelect={(newFile) => {}}
+                            selectedFile={data?.data?.document?.gstCertificate}
+                            disabled={true}
+                        />
+                    </div>
 
                     <div></div>
 
@@ -42,14 +44,16 @@ const AccordianDocument = (data: any) => {
                         placeholder={'Aadhar No.'}
                         className="shadow bg-white rounded"
                     />
-                    <ATMFilePickerWrapper
-                        name=""
-                        label={'Aadhar Card'}
-                        placeholder={'Aadhar Card'}
-                        onSelect={(newFile) => {}}
-                        selectedFile={data?.data?.document?.adharCard}
-                        disabled={true}
-                    />
+                    <div className="mt-4">
+                        <ATMFilePickerWrapper
+                            name=""
+                            label={'Aadhar Card'}
+                            placeholder={'Aadhar Card'}
+                            onSelect={(newFile) => {}}
+                            selectedFile={data?.data?.document?.adharCard}
+                            disabled={true}
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -72,15 +76,16 @@ const AccordianDocument = (data: any) => {
                                 placeholder={'Document Name'}
                                 className="shadow bg-white rounded"
                             />
-                            <ATMFilePickerWrapper
-                                name=""
-                                label={'Document File'}
-                                placeholder={'Document File'}
-                                onSelect={(newFile) => {}}
-                                selectedFile={otherDocument.documentFile}
-                                disabled={true}
-                            />
-
+                            <div className="mt-4">
+                                <ATMFilePickerWrapper
+                                    name=""
+                                    label={'Document File'}
+                                    placeholder={'Document File'}
+                                    onSelect={(newFile) => {}}
+                                    selectedFile={otherDocument.documentFile}
+                                    disabled={true}
+                                />
+                            </div>
                             <div></div>
                         </div>
                     </div>

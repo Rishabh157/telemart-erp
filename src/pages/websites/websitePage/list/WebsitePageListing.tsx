@@ -35,7 +35,7 @@ const WebsitePageListing = ({ columns, rows, setShowDropdown }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'Website',
+            label: 'Website Page',
         },
     ]
 
