@@ -61,12 +61,25 @@ const WebstieListingWrapper = () => {
             renderCell: (row: any) => (
                 <ActionPopup
                     isEdit
+                    isDelete
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
                         navigate(`/all-websites/Website/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Website',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
                     }}
                 >
                     <>
@@ -119,23 +132,6 @@ const WebstieListingWrapper = () => {
                             className="block w-full text-left px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
                         >
                             View Page
-                        </button>
-                        <button
-                            onClick={() => {
-                                showConfirmationDialog({
-                                    title: 'Delete Website',
-                                    text: 'Do you want to delete',
-                                    showCancelButton: true,
-                                    next: (res: any) => {
-                                        return res.isConfirmed
-                                            ? handleDelete()
-                                            : setShowDropdown(false)
-                                    },
-                                })
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Delete
                         </button>
                     </>
                 </ActionPopup>

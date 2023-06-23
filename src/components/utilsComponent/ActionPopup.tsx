@@ -65,6 +65,7 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                                         Edit
                                     </button>
                                 )}
+                                {children}
                                 {isDelete && (
                                     <button
                                         onClick={popupState.close}
@@ -79,7 +80,6 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                                     </button>
                                 )}
                             </>
-                            {children}
                         </Popover>
                     </div>
                 )}
