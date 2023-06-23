@@ -43,7 +43,7 @@ const ProductGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
     ]
 
     return (
-        <div className="px-4 h-full pt-3  ">
+        <div className="px-4 h-full pt-3">
             {/* Breadcrumbs */}
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -62,7 +62,7 @@ const ProductGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
@@ -105,12 +105,6 @@ const ProductGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
         </div>
     )
 }
