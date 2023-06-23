@@ -82,10 +82,16 @@ const steps = [
         validationSchema: object({
             dealerCode: string().required('Dealer Code is required'),
             firmName: string().required('Firm Name is required'),
-            creditLimit: number().moreThan(0, 'Credit limit must be greater than 0').required('Credit limit is required'),
-            openingBalance: number().moreThan(0, 'Opeaning balance must be greater than 0').required('Opeaning balance is required'),
+            creditLimit: number()
+                .moreThan(0, 'Credit limit must be greater than 0')
+                .required('Credit limit is required'),
+            openingBalance: number()
+                .moreThan(0, 'Opeaning balance must be greater than 0')
+                .required('Opeaning balance is required'),
             autoMapping: boolean(),
-            quantityQuotient: number().moreThan(0, 'Quantity quotient must be greater than 0').required('Firm Name is required'),
+            quantityQuotient: number()
+                .moreThan(0, 'Quantity quotient must be greater than 0')
+                .required('Firm Name is required'),
             firstName: string().required('First Name is required'),
             lastName: string().required('Last Name is required'),
             dealerCategoryId: string().required(

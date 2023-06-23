@@ -79,7 +79,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                              Submit
+                                Submit
                             </button>
                         </div>
                     </div>

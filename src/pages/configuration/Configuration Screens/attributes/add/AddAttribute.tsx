@@ -54,7 +54,7 @@ const AddAttribute = ({ formikProps, apiStatus }: Props) => {
                                     apiStatus ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                               Submit
+                                Submit
                             </button>
                         </div>
                     </div>

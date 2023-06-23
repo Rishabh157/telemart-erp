@@ -1,12 +1,24 @@
+/// ==============================================
+// Filename:AssetsLayout.tsx
+// Type: Layout Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-import Header from 'src/components/UI/Header/Header'
-import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
+
+// |-- External Dependencies --|
 import { NavItemType } from 'src/navigation'
 import { BiChevronsLeft } from 'react-icons/bi'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { MdOutlineWebAsset, MdShareLocation } from 'react-icons/md'
 import { TbCategory2, TbLayoutDistributeHorizontal } from 'react-icons/tb'
 import { CiLocationOn } from 'react-icons/ci'
+
+// |-- Internal Dependencies --|
+import Header from 'src/components/UI/Header/Header'
+import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 
 const asstesNavigation: NavItemType[] = [
     {

@@ -54,7 +54,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                              Submit
+                                Submit
                             </button>
                         </div>
                     </div>

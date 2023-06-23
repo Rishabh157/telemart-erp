@@ -1,6 +1,18 @@
+/// ==============================================
+// Filename:AssetsRequestListing.tsx
+// Type: List Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -13,8 +25,11 @@ import {
     setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/assets/assetsRequestSlice'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
