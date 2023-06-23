@@ -188,6 +188,8 @@ import {
     EditDealerSchemeWrapper,
     DealerListLedgerTabWrapper,
 } from './pages/index'
+import CallerPage from './pages/callerpage/index'
+
 import { useDispatch } from 'react-redux'
 import {
     setAccessToken,
@@ -236,6 +238,7 @@ const PageRoutes = () => {
                     <Route path="/" element={<Auth />} />
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
+                    <Route path="/caller-page" element={<CallerPage />} />
                     <Route path="/orders" element={<OrderListing />} />
 
                     <Route
