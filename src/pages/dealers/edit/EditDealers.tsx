@@ -7,6 +7,7 @@ import { FormInitialValues } from './EditDealerWrapper'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from 'src/redux/store'
+import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -48,8 +49,9 @@ const EditDealers = ({
     ]
 
     return (
-        <div className="h-[calc(100vh-55px)] overflow-auto">
-            <div className="p-4 flex flex-col gap-2  ">
+        // <div className="h-[calc(100vh-55px)] overflow-auto">
+        <MainLayout>
+            <div className="flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -125,7 +127,7 @@ const EditDealers = ({
                     </div>
                 </div>
             </div>
-        </div>
+        </MainLayout>
     )
 }
 

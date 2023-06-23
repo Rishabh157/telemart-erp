@@ -20,6 +20,7 @@ import {
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
 import { useNavigate } from 'react-router-dom'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
 const OrderListing = () => {
     // Hooks
@@ -159,53 +160,10 @@ const OrderListing = () => {
 
     return (
         <SideNavLayout>
-            <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
-                <div className="mb-10 text-2xl text-slate-700 font-bold ">
-                    Orders
+            <div className="px-4 h-[calc(100vh-55px)]  ">
+                <div className="flex justify-between items-center h-[55px]">
+                    <ATMPageHeading> Order </ATMPageHeading>
                 </div>
-                {/* <div className="flex justify-between">
-                        <div className="flex gap-2">
-                            <ATMInputAdormant
-                                name=""
-                                value={searchValue}
-                                onChange={(newValue) =>
-                                    dispatch(
-                                        setSearchValue(newValue.target.value)
-                                    )
-                                }
-                                placeholder="Search"
-                                adormant={
-                                    <BiSearchAlt2 className="text-slate-400" />
-                                }
-                                adormantProps={{
-                                    position: 'end',
-                                    extraClasses: 'bg-white border-none',
-                                }}
-                                className="h-[33px]"
-                            />
-
-                            {selectedRows.length ? (
-                                <div>
-                                    <button className="bg-primary-main text-white p-2 rounded animate-[fade_0.3s_ease-in-out]">
-                                        {' '}
-                                        Actions{' '}
-                                    </button>
-                                </div>
-                            ) : null}
-                        </div> */}
-
-                {/* <div>
-                            <button
-                                type="button"
-                                className="flex items-center gap-2 bg-primary-main text-white text-sm h-[33px] px-4 rounded font-bold"
-                                onClick={() => {
-                                    navigate('add-order')
-                                }}
-                            >
-                                <span className="text-xl"> + </span> Add Orders
-                            </button>
-                        </div> */}
-                {/* </div> */}
 
                 <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                     {/*Table Header */}

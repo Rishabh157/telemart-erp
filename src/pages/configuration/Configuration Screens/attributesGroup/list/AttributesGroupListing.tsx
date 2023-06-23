@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -44,9 +45,9 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
     ]
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
+        <MainLayout>
             {/* Breadcrumbs */}
-            <div className="h-[30px]">
+            <div className="h-[30px] pt-3">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
             {/* Page Header */}
@@ -106,7 +107,7 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                     />
                 </div>
             </div>
-        </div>
+        </MainLayout>
     )
 }
 

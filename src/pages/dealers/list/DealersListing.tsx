@@ -9,6 +9,7 @@ import { setRowsPerPage, setPage } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import FilterDialogWarpper from '../components/FilterDialog/FilterDialogWarpper'
 import { setSearchValue } from 'src/redux/slices/dealerSlice'
+import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 // import ATMBreadCrumbs, {
 //   BreadcrumbType,
 // } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
@@ -32,7 +33,7 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
         dealerState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3">
+        <MainLayout>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> Dealers </ATMPageHeading>
@@ -46,7 +47,7 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
@@ -95,7 +96,7 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
             {isFilterOpen && (
                 <FilterDialogWarpper onClose={() => setIsFilterOpen(false)} />
             )}
-        </div>
+        </MainLayout>
     )
 }
 

@@ -8,6 +8,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from './AddBarcodeWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -30,7 +31,7 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
-        <div className=" h-[calc(100vh-55px)] overflow-auto">
+        <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -105,7 +106,7 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </MainLayout>
     )
 }
 

@@ -6,6 +6,7 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddLanguageWrapper'
+import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -27,7 +28,7 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
-        <div className="h-[calc(100vh-55px)] overflow-auto">
+        <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -79,7 +80,7 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </MainLayout>
     )
 }
 

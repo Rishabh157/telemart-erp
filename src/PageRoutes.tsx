@@ -22,32 +22,24 @@ import {
     EditCompetitorWraper,
     EditDidManagementWrapper,
     EditPurchaseOrderWrapper,
-} from './pages/index'
-import { AddAttributeWrapper, AttributesListingWrapper } from './pages/index'
-import {
+    AddAttributeWrapper,
+    AttributesListingWrapper,
     AddAttributeGroupWrapper,
     AttributesGroupListingWrapper,
-} from './pages/index'
-import { AddBarcodeWrapper, BarcodeListingWrapper } from './pages/index'
-import {
+    AddBarcodeWrapper,
+    BarcodeListingWrapper,
     ViewBarcodeWrapper,
     AddCartonBoxWrapper,
     CartonBoxListingWrapper,
-} from './pages/index'
-import {
     AddCompanyWrapper,
     ConfigurationCompanyListingWrapper,
     AddDealersCategoryWrapper,
     DealersCategoryListingWrapper,
-} from './pages/index'
-import {
     AddGRNWrapper,
     GRNListingWrapper,
     AddItemWrapper,
     ItemListingWrapper,
     AddLanguageWrapper,
-} from './pages/index'
-import {
     LanguageListingWrapper,
     Locations,
     AddProductCategoryWrapper,
@@ -62,8 +54,6 @@ import {
     PurchaseOrderListingWrapper,
     AddSchemeWrapper,
     SchemeListingWrapper,
-} from './pages/index'
-import {
     AddTaxesWrapper,
     TaxesListingWrapper,
     ConfigurationLayout,
@@ -79,8 +69,6 @@ import {
     AddDealerSchemeTabWrapper,
     ListDealerPincodeTabWrapper,
     ListDealerSchemeTabWrapper,
-} from './pages/index'
-import {
     InwardInventoryWrapper,
     InventoryListingWrapper,
     AddOrder,
@@ -103,17 +91,6 @@ import {
     AddWarehouseWrapper,
     WarehousesListingWrapper,
     ViewWarehouseWrapper,
-} from './pages/index'
-
-import { useDispatch } from 'react-redux'
-import {
-    setAccessToken,
-    setDeviceId,
-    setRefreshToken,
-    setUserData,
-} from './redux/slices/authSlice'
-import { v4 as uuidv4 } from 'uuid'
-import {
     ProfileWrappper,
     EditCompanyWrapper,
     EditAttributeWrapper,
@@ -137,8 +114,6 @@ import {
     DidManagementListingWrapper,
     OrganisationHierarchy,
     ChannelManagementListingWrapper,
-    // EditChannelManagement,
-    // DispositionOneListingWrapper,
     SlotManagementListingWrapper,
     AddTapeManagementWrapper,
     TapeManagementListingWrapper,
@@ -150,82 +125,77 @@ import {
     AddChannelCategoryWrapper,
     EditTapeManagementWrapper,
     EditChannelCategoryWrapper,
+    Auth,
+    AddSlotManagementWrapper,
+    EditSlotManagementWrapper,
+    InbouundWrapper,
+    WebstieListingWrapper,
+    AddWebsiteWrapper,
+    EditWebsiteWrapper,
+    DispositionOneListingWrapper,
+    ListWebstieBlogWrapper,
+    AddWebsiteBlogWrapper,
+    EditWebsiteBlogWrapper,
+    WebsiteBlogViewWrapper,
+    WebsitePageListingWrapper,
+    AddWebsitePageWrapper,
+    EditWebsitePageWrapper,
+    ViewWebsitePageWrapper,
+    InitialCallOneListingWrapper,
+    InitialCallTwoListingWrapper,
+    DispositionTwoListingWrapper,
+    DispositionThreeListingWrapper,
+    AddDispositionOneWrappper,
+    PageNotFound,
+    AddDispositionThreeWrappper,
+    EditDispositionThreeWrapper,
+    AddDispositionTwoWrapper,
+    EditDispositionTwoWrapper,
+    EditDispositionOneWrappper,
+    AddInitialCallOneWrapper,
+    AddInitialCallTwoWrapper,
+    EditInitialCallOneWrapper,
+    EditInitialCallTwoWrapper,
+    DispositionComplaintListingWrapper,
+    AddDispositionComplaintWrappper,
+    EditDispositionComplaintWrappper,
+    InitialCallThreeListingWrapper,
+    EditInitialCallThreeWrapper,
+    AddInitialCallThreeWrappper,
+    ViewDispositionThreeWrappper,
+    ViewInitialCallThreeWrappper,
+    OrderViewWrapper,
+    InquiryViewWrapper,
+    InquiryListingWrapper,
+    InfluencerListingWrapper,
+    AddAssetsRequestWrapper,
+    AddAssetsRelocationWrapper,
+    AssetsRelocationWrapper,
+    AssetsRequestWrapper,
+    AssetsAllocationWrapper,
+    AddAssetsAllocationWrapper,
+    AddInfluencerWrapper,
+    CallListingWrapper,
+    WebsiteTagListingWrapper,
+    AddWebsiteTagsWrapper,
+    EditWebsiteTagWrapper,
+    ViewWebsiteTagsWrapper,
+    ListDealerSupervisorTabWrapper,
+    DealerSupervisorTabWrapper,
+    UserAccessWrapper,
+    ApprovedOrderListing,
+    ApprovedOrderViewWrapper,
+    EditDealerSchemeWrapper,
+    DealerListLedgerTabWrapper,
 } from './pages/index'
-import Auth from './pages/login/Auth'
-import AddSlotManagementWrapper from './pages/media/slotManagement/add/AddSlotManagementWrapper'
-import EditSlotManagementWrapper from './pages/media/slotManagement/edit/EditSlotManagementWrapper'
-// import Disposition from './pages/disposition/Disposition'
-import InbouundWrapper from './pages/media/Inbound/InboundWrapper'
-// import Disposition from './pages/disposition/Disposition'
-import WebstieListingWrapper from './pages/websites/website/list/WebsiteListingWrapper'
-import AddWebsiteWrapper from './pages/websites/website/add/AddwebsiteWrapper'
-import EditWebsiteWrapper from './pages/websites/website/edit/EditWebsiteWrapper'
-import DispositionOneListingWrapper from './pages/disposition/dispositionOne/list/DispositionOneListingWrapper'
-//
-import ListWebstieBlogWrapper from './pages/websites/website-blog/list/ListWebsiteBlogWrapper'
-import AddWebsiteBlogWrapper from './pages/websites/website-blog/add/AddWebsiteBlogWrapper'
-import EditWebsiteBlogWrapper from './pages/websites/website-blog/edit/EditWebsiteBlogWrapper'
-import WebsiteBlogViewWrapper from './pages/websites/website-blog/view/WebsiteBlogViewWrapper'
-import WebsitePageListingWrapper from './pages/websites/websitePage/list/WebsitePageListingWrapper'
-import AddWebsitePageWrapper from './pages/websites/websitePage/add/AddwebsitePageWrapper'
-import EditWebsitePageWrapper from './pages/websites/websitePage/edit/EditWebsitePageWrapper'
-import ViewWebsitePageWrapper from './pages/websites/websitePage/view/ViewWebsitePageWrapper'
-import InitialCallOneListingWrapper from './pages/disposition/initialcallerone/list/InitialCallOneListingWrapper'
-import InitialCallTwoListingWrapper from './pages/disposition/initialcallertwo/list/InitialCallTwoListingWrapper'
-import DispositionTwoListingWrapper from './pages/disposition/dispositionTwo/list/DispositionTwoListingWrapper'
-import DispositionThreeListingWrapper from './pages/disposition/dispositionThree/list/DispositionThreeListingWrapper'
-import AddDispositionOneWrappper from './pages/disposition/dispositionOne/add/AddDispositionOneWrapper'
-import PageNotFound from './PageNotFound'
-import AddDispositionThreeWrappper from './pages/disposition/dispositionThree/add/AddDispositionThreeWrappper'
-import EditDispositionThreeWrapper from './pages/disposition/dispositionThree/edit/EditDispositionThreeWrapper'
-import AddDispositionTwoWrapper from './pages/disposition/dispositionTwo/add/AddDispositionTwoWrapper'
-import EditDispositionTwoWrapper from './pages/disposition/dispositionTwo/edit/EditDispositionTwoWrapper'
-import EditDispositionOneWrappper from './pages/disposition/dispositionOne/edit/EditDispositionOneWrapper'
-// import AddInitialCallThreeWrappper from './pages/disposition/dispositionThree/add/AddInitialCallThreeWrapper'
-// import InitialCallThreeListingWrapper from './pages/disposition/dispositionThree/list/InitialCallThreeListingWrapper'
-import AddInitialCallOneWrapper from './pages/disposition/initialcallerone/add/AddInitialCallOneWrapper'
-import AddInitialCallTwoWrapper from './pages/disposition/initialcallertwo/add/AddInitialCallTwoWrapper'
-import EditInitialCallOneWrapper from './pages/disposition/initialcallerone/edit/EditInitialCallOneWrapper'
-import EditInitialCallTwoWrapper from './pages/disposition/initialcallertwo/edit/EditInitialCallTwoWrapper'
-// import EditInitialCallThreeWrapper from './pages/disposition/dispositionThree/edit/EditInitialCallThreeWrapper'
-import DispositionComplaintListingWrapper from './pages/disposition/dispositionComplaint/list/DispositionComplaintListingWrapper'
-import AddDispositionComplaintWrappper from './pages/disposition/dispositionComplaint/add/AddDispositionComplaintWrapper'
-import EditDispositionComplaintWrappper from './pages/disposition/dispositionComplaint/edit/EditDispositionComplaintWrapper'
-import InitialCallThreeListingWrapper from './pages/disposition/icInitialCaller/list/InitialCallThreeListingWrapper'
-import EditInitialCallThreeWrapper from './pages/disposition/icInitialCaller/edit/EditInitialCallThreeWrapper'
-import AddInitialCallThreeWrappper from './pages/disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
-import ViewDispositionThreeWrappper from './pages/disposition/dispositionThree/View/ViewDispositionThreeWrapper'
-import ViewInitialCallThreeWrappper from './pages/disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
-import OrderViewWrapper from './pages/orders/view/OrderViewWrapper'
-import InquiryViewWrapper from './pages/inquiry/view/InquiryViewWrapper'
-import InquiryListingWrapper from './pages/inquiry/list/InquiryListingWrapper'
-import InfluencerListingWrapper from './pages/websites/influencerManagement/list/InfluencerListingWrapper'
-import AddAssetsRequestWrapper from './pages/assets/assetsRequest/add/AddAssetsRequestWrapper'
-import AddAssetsRelocationWrapper from './pages/assets/assetsRelocation/add/AddAssetsRelocationWrapper'
-import AssetsRelocationWrapper from './pages/assets/assetsRelocation/list/AssetsRelocationWrapper'
-import AssetsRequestWrapper from './pages/assets/assetsRequest/list/AssetsRequestWrapper'
-import AssetsAllocationWrapper from './pages/assets/assetsAllocation/list/AssetsAllocationWrapper'
-import AddAssetsAllocationWrapper from './pages/assets/assetsAllocation/add/AddAssetsAllocationWrapper'
-
-// import BatchListingWrapper from './pages/batch/list/BatchListingWrapper'
-import AddInfluencerWrapper from './pages/websites/influencerManagement/add/AddInfluencerWrapper'
-import CallListingWrapper from './pages/call/list/CallListingWrapper'
-import WebsiteTagListingWrapper from './pages/websites/website-tags/list/WebsiteTagListingWrapper'
-import AddWebsiteTagsWrapper from './pages/websites/website-tags/add/AddWebsiteTagsWrapper'
-import EditWebsiteTagWrapper from './pages/websites/website-tags/edit/EditWebsiteTagWrapper'
-import ViewWebsiteTagsWrapper from './pages/websites/website-tags/view/ViewWebsiteTagsWrapper'
-import ListDealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
-import DealerSupervisorTabWrapper from './pages/dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
-import UserAccessWrapper from './pages/userAccess/UserAccessWrapper'
-// import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
-// import PrePaidOrderListing from './pages/prepaidorder/PrePaidOrderListing'
-// import PrePaidOrderViewWrapper from './pages/prepaidorder/view/PrePaidOrderViewWrapper'
-import ApprovedOrderListing from './pages/approvedorders/ApprovedOrderListing'
-import ApprovedOrderViewWrapper from './pages/approvedorders/view/ApprovedOrderViewWrapper'
-// import AddDealerLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/add/AddDealerLedgerTabWrapper'
-import EditDealerSchemeWrapper from './pages/dealers/view/tabs/DealerSchemeTab/edit/EditDealerSchemeWrapper'
-import DealerListLedgerTabWrapper from './pages/dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
-
+import { useDispatch } from 'react-redux'
+import {
+    setAccessToken,
+    setDeviceId,
+    setRefreshToken,
+    setUserData,
+} from './redux/slices/authSlice'
+import { v4 as uuidv4 } from 'uuid'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {

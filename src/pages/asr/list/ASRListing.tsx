@@ -44,16 +44,15 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
     const { page, rowsPerPage, searchValue, totalItems } = asrState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+        <div className="px-4 h-[calc(100vh-55px)] ">
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
+            <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> ASR </ATMPageHeading>
                 <button
                     onClick={() => navigate('/asr/add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    {' '}
-                    + Add ASR{' '}
+                    + Add AS
                 </button>
             </div>
 
