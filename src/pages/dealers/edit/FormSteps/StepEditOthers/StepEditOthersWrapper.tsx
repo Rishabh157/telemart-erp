@@ -10,7 +10,6 @@ type Props = {
 
 export type FieldType = Field<''>
 
-
 const StepEditOthersWrapper = ({ formikProps }: Props) => {
     return (
         <>

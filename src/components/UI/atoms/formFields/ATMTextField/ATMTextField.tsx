@@ -79,12 +79,12 @@ const ATMTextField = ({
             />
             {type === 'password' ? (
                 <div className="absolute top-9 right-2">
-                    {visibility==="text" ? (
+                    {visibility === 'text' ? (
                         <AiFillEye
                             size={18}
                             onClick={(e) => {
                                 e.stopPropagation()
-                                 setVisibility("password")
+                                setVisibility('password')
                             }}
                         />
                     ) : (
@@ -92,7 +92,7 @@ const ATMTextField = ({
                             size={18}
                             onClick={(e) => {
                                 e.stopPropagation()
-                                 setVisibility("text")
+                                setVisibility('text')
                             }}
                         />
                     )}

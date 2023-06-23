@@ -13,7 +13,7 @@ export type FieldType = Field<''>
 const StepAddOthersWrapper = ({ formikProps }: Props) => {
     return (
         <>
-            <StepAddOthers formikProps={formikProps}   />
+            <StepAddOthers formikProps={formikProps} />
         </>
     )
 }

@@ -75,7 +75,9 @@ const DispositionLayout = ({ children }: Props) => {
                         ? 'min-w-[50px] w-[50px]'
                         : 'min-w-[250px] w-[250px]'
                 }`}
-            >    <VerticalNavBar
+            >
+                {' '}
+                <VerticalNavBar
                     toggleCollapse={toggleCollapse}
                     isCollapsed={isCollapsed}
                     navigation={dispositionNavigation}

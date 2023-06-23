@@ -1,14 +1,29 @@
+/// ==============================================
+// Filename:AddAssetCategory.tsx
+// Type: Add Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddAsstesCategory from './AddAsstesCategory'
 import { useAddAssetsCategoryMutation } from 'src/services/assets/AssetsCategoryService'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import AsstesLayout from '../../AssetsLayout'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
