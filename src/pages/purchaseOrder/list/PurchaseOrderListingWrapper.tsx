@@ -262,30 +262,22 @@ const PurchaseOrderListingWrapper = () => {
             flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    isView
+                    isEdit
+                    handleViewActionButton={() => {
+                        navigate(`/purchase-order/view/${currentId}`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/purchase-order/edit/${currentId}`, {
+                            state: { poCode: row?.poCode },
+                        })
+                    }}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                 >
                     <>
-                        <button
-                            onClick={() => {
-                                navigate(`/purchase-order/view/${currentId}`)
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            View
-                        </button>
-                        <button
-                            onClick={() => {
-                                navigate(`/purchase-order/edit/${currentId}`, {
-                                    state: { poCode: row?.poCode },
-                                })
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Edit
-                        </button>
                         <button
                             onClick={() => {
                                 navigate('/grn/add?', {

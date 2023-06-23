@@ -78,47 +78,32 @@ const VendorsListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    isView
+                    isEdit
+                    isDelete
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                >
-                    <>
-                        <button
-                            onClick={() => {
-                                navigate(`${currentId}/general-information`)
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            View
-                        </button>
-                        <button
-                            onClick={() => {
-                                navigate(`/vendors/edit-vendor/${currentId}`)
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Edit
-                        </button>
-                        <button
-                            onClick={() => {
-                                showConfirmationDialog({
-                                    title: 'Delete vendor',
-                                    text: 'Do you want to delete',
-                                    showCancelButton: true,
-                                    next: (res) => {
-                                        return res.isConfirmed
-                                            ? handleDelete()
-                                            : setShowDropdown(false)
-                                    },
-                                })
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Delete
-                        </button>
-                    </>
-                </ActionPopup>
+                    handleViewActionButton={() => {
+                        navigate(`${currentId}/general-information`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/vendors/edit-vendor/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete vendor',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
             ),
             align: 'end',
         },

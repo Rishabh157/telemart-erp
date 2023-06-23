@@ -21,7 +21,7 @@ import {
 } from 'src/redux/slices/GRNSlice'
 import { RootState } from 'src/redux/store'
 import { useGetPaginationGRNQuery } from 'src/services/GRNService'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const columns: columnTypes[] = [
     {
@@ -62,22 +62,23 @@ const columns: columnTypes[] = [
             return <span> {row.defectiveQuantity} </span>
         },
     },
-    {
-        field: 'actions',
-        headerName: 'Actions',
-        flex: 'flex-[0.5_0.5_0%]',
-        renderCell: (row: any) => (
-            <ActionPopup
-                handleOnAction={() => {
-                    // setShowDropdown(!showDropdown)
-                    // setCurrentId(row?._id)
-                }}
-            >
-                <></>
-            </ActionPopup>
-        ),
-        align: 'end',
-    },
+    // {
+    //     field: 'actions',
+    //     headerName: 'Actions',
+    //     flex: 'flex-[0.5_0.5_0%]',
+    //     renderCell: (row: any) => (
+    //         <ActionPopup
+    //             isView
+    //             isEdit
+    //             isDelete
+    //             handleOnAction={() => {
+    //                 // setShowDropdown(!showDropdown)
+    //                 // setCurrentId(row?._id)
+    //             }}
+    //         />
+    //     ),
+    //     align: 'end',
+    // },
 ]
 
 const GRNListingWrapper = () => {

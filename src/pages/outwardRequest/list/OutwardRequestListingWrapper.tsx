@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconType } from 'react-icons'
-import { HiDotsHorizontal } from 'react-icons/hi'
+// import { HiDotsHorizontal } from 'react-icons/hi'
 import { MdOutbond } from 'react-icons/md'
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
@@ -47,18 +47,18 @@ const columns: columnTypes[] = [
             return <span> {row.address} </span>
         },
     },
-    {
-        field: 'actions',
-        headerName: 'Actions',
-        flex: 'flex-[0.5_0.5_0%]',
-        renderCell: (row: any) => (
-            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-                {' '}
-                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-            </button>
-        ),
-        align: 'end',
-    },
+    // {
+    //     field: 'actions',
+    //     headerName: 'Actions',
+    //     flex: 'flex-[0.5_0.5_0%]',
+    //     renderCell: (row: any) => (
+    //         <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
+    //             {' '}
+    //             <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+    //         </button>
+    //     ),
+    //     align: 'end',
+    // },
 ]
 
 const rows = [

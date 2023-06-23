@@ -56,13 +56,19 @@ const WebsitePageListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    isView
+                    isEdit
+                    isDelete
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                    isDelete
-                    isView
-                    isEdit
+                    handleViewActionButton={() => {
+                        navigate(`/all-websites/website-Page/view/${currentId}`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/all-websites/website-Page/${currentId}`)
+                    }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({
                             title: 'Delete Website-Page',
@@ -74,12 +80,6 @@ const WebsitePageListingWrapper = () => {
                                     : setShowDropdown(false)
                             },
                         })
-                    }}
-                    handleViewActionButton={() => {
-                        navigate(`/all-websites/website-Page/view/${currentId}`)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(`/all-websites/website-Page/${currentId}`)
                     }}
                 />
             ),

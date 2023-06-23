@@ -75,7 +75,7 @@ const LoginPage = ({ pathName }: any) => {
     }
 
     return (
-        <div className="h-screen w-screen flex md:flex-row">
+        <div className="h-screen w-screen flex md:flex-row bg-white">
             <div className=" bg-slate-400 flex-1  hidden md:block ">
                 <div className="h-full">
                     <img src="bg.jpg" className="h-full w-full" alt="" />

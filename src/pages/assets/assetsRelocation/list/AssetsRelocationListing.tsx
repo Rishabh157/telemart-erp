@@ -33,7 +33,7 @@ const AssetsRelocationListing = () => {
 
     const navigate = useNavigate()
     return (
-        <div className="px-4 h-[calc(100vh-55px)] ">
+        <div className="px-4 h-full mt-3 ">
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
@@ -50,7 +50,7 @@ const AssetsRelocationListing = () => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={0}
