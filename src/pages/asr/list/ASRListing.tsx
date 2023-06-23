@@ -1,6 +1,18 @@
+/// ==============================================
+// Filename:ASRListing.ts
+// Type: List Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -10,8 +22,11 @@ import {
     setPage,
     setSearchValue,
 } from 'src/redux/slices/ASRSlice'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
@@ -29,16 +44,15 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
     const { page, rowsPerPage, searchValue, totalItems } = asrState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+        <div className="px-4 h-[calc(100vh-55px)] ">
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
+            <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> ASR </ATMPageHeading>
                 <button
                     onClick={() => navigate('/asr/add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    {' '}
-                    + Add ASR{' '}
+                    + Add AS
                 </button>
             </div>
 

@@ -7,6 +7,7 @@ import { FormInitialValues } from './AddDealerWrapper'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from 'src/redux/store'
+import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -46,7 +47,7 @@ const AddDealers = ({
     ]
 
     return (
-        <div className="h-[calc(100vh-55px)] overflow-auto">
+        <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -121,7 +122,7 @@ const AddDealers = ({
                     </div>
                 </div>
             </div>
-        </div>
+        </MainLayout>
     )
 }
 

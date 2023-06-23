@@ -164,7 +164,6 @@ const SchemeListingWrapper = () => {
     }
 
     return (
-        <>
             <SideNavLayout>
                 <SchemeListing
                     columns={columns || []}
@@ -172,7 +171,6 @@ const SchemeListingWrapper = () => {
                     setShowDropdown={setShowDropdown}
                 />
             </SideNavLayout>
-        </>
     )
 }
 

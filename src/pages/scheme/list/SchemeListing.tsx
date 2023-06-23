@@ -30,7 +30,7 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
         schemeState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+        <div className="px-4 h-[calc(100vh-55px)] ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
@@ -44,24 +44,19 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
-                <div id="table-header">
-                    <ATMTableHeader
-                        page={page}
-                        searchValue={searchValue}
-                        rowCount={totalItems}
-                        rowsPerPage={rowsPerPage}
-                        rows={rows}
-                        onRowsPerPageChange={(newValue) =>
-                            dispatch(setRowsPerPage(newValue))
-                        }
-                        isFilter
-                        // onFilterClick={() => setIsFilterOpen(true)}
-                        onSearch={(newValue) =>
-                            dispatch(setSearchValue(newValue))
-                        }
-                    />
-                </div>
-
+                <ATMTableHeader
+                    page={page}
+                    searchValue={searchValue}
+                    rowCount={totalItems}
+                    rowsPerPage={rowsPerPage}
+                    rows={rows}
+                    onRowsPerPageChange={(newValue) =>
+                        dispatch(setRowsPerPage(newValue))
+                    }
+                    isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                />
                 {/* Table */}
                 <div className="grow overflow-auto  ">
                     <ATMTable

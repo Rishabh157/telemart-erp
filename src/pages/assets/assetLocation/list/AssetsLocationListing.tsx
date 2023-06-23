@@ -1,6 +1,18 @@
+/// ==============================================
+// Filename:AssertLocationListing.tsx
+// Type: List Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -13,13 +25,17 @@ import {
     setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/assets/assetsLocationSlice'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
+
 const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch()
     const breadcrumbs: BreadcrumbType[] = [
@@ -38,7 +54,7 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
         assetLocation
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3 ">
+        <div className="px-4 h-[calc(100vh-55px)] ">
             <div className="h-[30px]">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>

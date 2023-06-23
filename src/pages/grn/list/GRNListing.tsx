@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:GRNListing.tsx
+// Type: List Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -10,8 +22,11 @@ import {
     setSearchValue,
     setFilterValue,
 } from 'src/redux/slices/GRNSlice'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
@@ -28,7 +43,7 @@ const GRNListing = ({ columns, rows }: Props) => {
         grnState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] pt-3  ">
+        <div className="px-4 h-[calc(100vh-55px)]  ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[55px]">
                 <ATMPageHeading> GRN (Goods Received Note) </ATMPageHeading>
