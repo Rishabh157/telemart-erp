@@ -1,5 +1,16 @@
+/// ==============================================
+// Filename:AddCbBarcode.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -11,6 +22,7 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useDispatch } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -80,7 +92,10 @@ const AddCbBarcode = ({ formikProps, apiStatus, cartonBoxOption }: Props) => {
                                 value={values.cartonBox}
                                 label="Carton Box"
                                 onChange={(e) =>
-                                    handleSetFieldValue('cartonBox', e.target.value)
+                                    handleSetFieldValue(
+                                        'cartonBox',
+                                        e.target.value
+                                    )
                                 }
                                 options={cartonBoxOption}
                             />
@@ -92,7 +107,10 @@ const AddCbBarcode = ({ formikProps, apiStatus, cartonBoxOption }: Props) => {
                                 label="Quantity"
                                 placeholder="Quantity"
                                 onChange={(e) =>
-                                    handleSetFieldValue('quantity', e.target.value)
+                                    handleSetFieldValue(
+                                        'quantity',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

@@ -1,4 +1,18 @@
+/// ==============================================
+// Filename:CartonBoxListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { CartonBoxListResponse } from 'src/models/CartonBox.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
@@ -7,17 +21,17 @@ import {
     useDeleteCartonBoxMutation,
     useGetCartonBoxQuery,
 } from 'src/services/CartonBoxService'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/cartonBoxSlice'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 
 const CartonBoxListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

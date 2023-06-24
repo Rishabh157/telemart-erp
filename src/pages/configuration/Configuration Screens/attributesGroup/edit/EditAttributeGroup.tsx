@@ -1,6 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// Filename:EditAttributeGroup.tsx
+// Type: Edit Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -11,6 +22,7 @@ import ATMTransferList from 'src/components/UI/atoms/ATMTransferList/ATMTransfer
 import { useDispatch } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     allItems: any
@@ -111,7 +123,10 @@ const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                                 label="Group Name"
                                 placeholder="Group Name"
                                 onChange={(e) =>
-                                    handleSetFieldValue('group_name', e.target.value)
+                                    handleSetFieldValue(
+                                        'group_name',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

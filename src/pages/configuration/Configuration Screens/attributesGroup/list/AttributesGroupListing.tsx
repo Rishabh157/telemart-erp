@@ -1,6 +1,17 @@
+// Filename:AttributeGroupListing.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -13,9 +24,12 @@ import {
     setPage,
     setSearchValue,
 } from 'src/redux/slices/attributesGroupSlice'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]

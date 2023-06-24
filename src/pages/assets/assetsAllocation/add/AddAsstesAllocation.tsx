@@ -73,7 +73,7 @@ const AddAsstesAllocation = () => {
                                 value={''}
                                 label="Name"
                                 placeholder="Name"
-                                onChange={()=>{}}
+                                onChange={() => {}}
                                 // onChange={() =>handleSetFieldValue("","")}
                             />
                         </div>

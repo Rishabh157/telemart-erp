@@ -1,7 +1,16 @@
+/// ==============================================
+// Filename:BarcodeDetailsCard.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- External Dependencies --|
 import { BiCheck } from 'react-icons/bi'
 import { HiDotsVertical } from 'react-icons/hi'
 import { BarcodeListResponse } from 'src/models'
 
+// |-- Types --|
 type BarcodeCardProps = {
     barcodeList: BarcodeListResponse[]
     selectedBarcodes: BarcodeListResponse[]
