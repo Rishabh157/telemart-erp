@@ -49,7 +49,7 @@ const StepEditScheme = ({
                     name={'schemeCode'}
                     value={values.schemeCode}
                     onChange={(e) => {
-                        setFieldValue('schemeCode', e.target.value)
+                        handleSetFieldValue('schemeCode', e.target.value)
                     }}
                     label="Scheme Code"
                     placeholder="Scheme Code"
