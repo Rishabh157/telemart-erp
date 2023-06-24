@@ -19,6 +19,8 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from './AddCbWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {
@@ -40,7 +42,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddCbBarcode = ({ formikProps, apiStatus, cartonBoxOption }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
@@ -86,7 +92,7 @@ const AddCbBarcode = ({ formikProps, apiStatus, cartonBoxOption }: Props) => {
                                 value={values.cartonBox}
                                 label="Carton Box"
                                 onChange={(e) =>
-                                    setFieldValue('cartonBox', e.target.value)
+                                    handleSetFieldValue('cartonBox', e.target.value)
                                 }
                                 options={cartonBoxOption}
                             />
@@ -98,7 +104,7 @@ const AddCbBarcode = ({ formikProps, apiStatus, cartonBoxOption }: Props) => {
                                 label="Quantity"
                                 placeholder="Quantity"
                                 onChange={(e) =>
-                                    setFieldValue('quantity', e.target.value)
+                                    handleSetFieldValue('quantity', e.target.value)
                                 }
                             />
                         </div>

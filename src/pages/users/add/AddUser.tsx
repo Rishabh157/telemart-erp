@@ -13,6 +13,8 @@ import {
     getHierarchyByDept,
 } from 'src/utils/GetHierarchyByDept'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -40,6 +42,11 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
 
         setuserRole(departmentroles)
     }, [values])
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
@@ -85,7 +92,10 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 label="First Name"
                                 placeholder="First Name"
                                 onChange={(e) =>
-                                    setFieldValue('firstName', e.target.value)
+                                    handleSetFieldValue(
+                                        'firstName',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -96,7 +106,10 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 label="Last Name"
                                 placeholder="Last Name"
                                 onChange={(e) =>
-                                    setFieldValue('lastName', e.target.value)
+                                    handleSetFieldValue(
+                                        'lastName',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -107,7 +120,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 label="Email"
                                 placeholder="Email"
                                 onChange={(e) =>
-                                    setFieldValue('email', e.target.value)
+                                    handleSetFieldValue('email', e.target.value)
                                 }
                             />
                             {/* Password */}
@@ -118,7 +131,10 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 label="Password"
                                 placeholder="Password"
                                 onChange={(e) =>
-                                    setFieldValue('password', e.target.value)
+                                    handleSetFieldValue(
+                                        'password',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -131,7 +147,10 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('mobile', e.target.value)
+                                        handleSetFieldValue(
+                                            'mobile',
+                                            e.target.value
+                                        )
                                     }
                                 }}
                             />
@@ -140,7 +159,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 required
                                 value={values.userDepartment}
                                 onChange={(e) =>
-                                    setFieldValue('userDepartment', e)
+                                    handleSetFieldValue('userDepartment', e)
                                 }
                                 options={userDepartmentOptions}
                                 label="User Department"
@@ -149,7 +168,9 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 name="userRole"
                                 required
                                 value={values.userRole}
-                                onChange={(e) => setFieldValue('userRole', e)}
+                                onChange={(e) =>
+                                    handleSetFieldValue('userRole', e)
+                                }
                                 options={userRole}
                                 label="User Role"
                             />

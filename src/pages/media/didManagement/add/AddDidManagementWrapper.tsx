@@ -9,9 +9,10 @@ import { Formik, FormikProps } from 'formik'
 import AddDidManagements from './AddDidManagement'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { SchemeListResponse } from 'src/models/scheme.model'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     didNumber: string
@@ -22,6 +23,7 @@ export type FormInitialValues = {
 
 const AddDidManagementWrapper = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddDidManagement] = useAddDidMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -44,6 +46,7 @@ const AddDidManagementWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             AddDidManagement({
                 didNumber: values.didNumber,

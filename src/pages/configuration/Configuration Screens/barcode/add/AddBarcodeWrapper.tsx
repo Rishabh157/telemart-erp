@@ -22,6 +22,7 @@ import { useAddBarcodeMutation } from 'src/services/BarcodeService'
 import { showToast } from 'src/utils'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { setAllItems } from 'src/redux/slices/productGroupSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -72,6 +73,8 @@ const AddBarcodeWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = async (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         const uniqueGrouId = uuidv4()
 
         await addBarcode({

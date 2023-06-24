@@ -9,6 +9,8 @@ import { FormInitialValues } from './AddCompetitorWrapper'
 import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -34,7 +36,11 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
         ...dropdownOptions,
     }
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -81,7 +87,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Competitor Name"
                                 placeholder="Competitor Name"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'competitorName',
                                         e.target.value
                                     )
@@ -94,7 +100,10 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Company Name"
                                 placeholder="Company Name"
                                 onChange={(e) =>
-                                    setFieldValue('companyName', e.target.value)
+                                    handleSetFieldValue(
+                                        'companyName',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMTextField
@@ -104,7 +113,10 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Product Name"
                                 placeholder="Product Name"
                                 onChange={(e) =>
-                                    setFieldValue('productName', e.target.value)
+                                    handleSetFieldValue(
+                                        'productName',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMSelectSearchable
@@ -112,7 +124,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 required
                                 value={values.channelNameId}
                                 onChange={(e) =>
-                                    setFieldValue('channelNameId', e)
+                                    handleSetFieldValue('channelNameId', e)
                                 }
                                 options={dropdownOptions.channelOptions}
                                 label="Channel Name"
@@ -127,7 +139,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'schemePrice',
                                             e.target.value
                                         )
@@ -141,7 +153,10 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Website Link"
                                 placeholder="Website Link"
                                 onChange={(e) =>
-                                    setFieldValue('websiteLink', e.target.value)
+                                    handleSetFieldValue(
+                                        'websiteLink',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMTextField
@@ -151,7 +166,10 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Youtube Link"
                                 placeholder="Youtube Link"
                                 onChange={(e) =>
-                                    setFieldValue('youtubeLink', e.target.value)
+                                    handleSetFieldValue(
+                                        'youtubeLink',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -164,7 +182,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'whatsappNumber',
                                             e.target.value
                                         )
@@ -179,7 +197,10 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     value={values.startTime}
                                     label="Start Time"
                                     onChange={(newValue) => {
-                                        setFieldValue('startTime', newValue)
+                                        handleSetFieldValue(
+                                            'startTime',
+                                            newValue
+                                        )
                                     }}
                                 />
                             </div>
@@ -190,7 +211,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     value={values.endTime}
                                     label="End Time"
                                     onChange={(newValue) => {
-                                        setFieldValue('endTime', newValue)
+                                        handleSetFieldValue('endTime', newValue)
                                     }}
                                 />
                             </div>

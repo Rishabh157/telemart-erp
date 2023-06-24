@@ -9,6 +9,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { FormInitialValues } from '../add/AddInitialCallTwoWrapper'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -34,6 +36,11 @@ const EditInitialCallTwo = ({
             label: 'Edit',
         },
     ]
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <>
@@ -82,7 +89,10 @@ const EditInitialCallTwo = ({
                                     value={values.initialCallOneId}
                                     label="Initial Call One"
                                     onChange={(e) =>
-                                        setFieldValue('initialCallOneId', e)
+                                        handleSetFieldValue(
+                                            'initialCallOneId',
+                                            e
+                                        )
                                     }
                                 />
                                 <ATMTextField
@@ -91,7 +101,7 @@ const EditInitialCallTwo = ({
                                     placeholder=" Name"
                                     label="Initial Call  name"
                                     onChange={(e) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'initialCallName',
                                             e.target.value
                                         )

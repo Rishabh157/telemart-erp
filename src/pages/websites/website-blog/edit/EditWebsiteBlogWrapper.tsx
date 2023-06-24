@@ -12,6 +12,7 @@ import {
 } from 'src/services/websites/WebsiteBlogServices'
 import { setSelectedWebsiteBlog } from 'src/redux/slices/website/websiteBlogSlice'
 import WebsitesLayout from '../../WebsiteLayout'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -64,6 +65,7 @@ const EditWebsiteBlogWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             updateWebsiteBlog({
                 body: {

@@ -22,6 +22,7 @@ import { useGetAllCartonBoxQuery } from 'src/services/CartonBoxService'
 // import { useAddCartonBoxBarcodeMutation } from "src/services/CartonBoxBarcodeService";
 import AddCbBarcode from './AddCbBarcode'
 import { setAllItems } from 'src/redux/slices/cartonBoxSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -69,6 +70,7 @@ const AddCbBarcodeWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = async (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         // const uniqueGroupId = uuidv4();
         // const promises = [];
         // for (let i = 0; i < Number(values?.quantity); i++) {

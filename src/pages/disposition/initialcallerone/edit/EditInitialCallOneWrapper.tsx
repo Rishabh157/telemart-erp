@@ -10,6 +10,7 @@ import DispositionLayout from '../../DispositionLayout'
 import EditInitialCallOne from './EditInitialCallOne'
 import { useGetinitialCallerOneByIdQuery } from 'src/services/configurations/InitialCallerOneServices'
 import { setSelectedInitialOne } from 'src/redux/slices/configuration/initialCallerOneSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     initialCallName: string
@@ -46,6 +47,7 @@ const EditInitialCallOneWrapper = () => {
     }, [isLoading, isFetching, data])
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             editInitialcallOne({
                 body: {

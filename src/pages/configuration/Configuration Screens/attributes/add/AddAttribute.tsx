@@ -17,6 +17,8 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddAttributeWrapper'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {
@@ -38,6 +40,11 @@ const breadcrumbs: BreadcrumbType[] = [
 const AddAttribute = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className=" h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
@@ -83,7 +90,7 @@ const AddAttribute = ({ formikProps, apiStatus }: Props) => {
                                 label="Attribute Name"
                                 placeholder="Attribute Name"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'attributeName',
                                         e.target.value
                                     )

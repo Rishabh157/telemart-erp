@@ -14,6 +14,7 @@ import { setAllItems as setAllWebsites } from 'src/redux/slices/website/websiteS
 import { setAllItems as setAllWebsitePage } from 'src/redux/slices/website/websitePageSlice'
 import { WebsiteListResponse } from 'src/models/website/Website.model'
 import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -98,6 +99,7 @@ const AddWebsiteTagsWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         //console.log(values)
         setTimeout(() => {
             addWebsiteTags({

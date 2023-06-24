@@ -1,14 +1,15 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { NavItemType } from 'src/navigation'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState } from 'src/redux/store'
 
 type Props = {
     toggleCollapse: () => void
     isCollapsed: boolean
     navigation: NavItemType[]
     isPathEqualtoNavItem?: (navItem: any) => boolean
-    bgColor?: any
-    setBgColor?: any
 }
 
 const VerticalNavBar = ({
@@ -16,10 +17,13 @@ const VerticalNavBar = ({
     isCollapsed,
     navigation,
     isPathEqualtoNavItem = (navItem) => false,
-    bgColor,
-    setBgColor,
 }: Props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { customized } = useSelector((state: RootState) => state?.auth)
+    const AlertText =
+        'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
+
     return (
         <div className="h-full  overflow-auto bg-white ">
             {/* Logo & Menu Icon */}
@@ -73,7 +77,18 @@ const VerticalNavBar = ({
                     return (
                         <div
                             key={navIndex}
-                            onClick={() => navigate(navItem.path)}
+                            onClick={() => {
+                                if (customized) {
+                                    const confirmValue: boolean =
+                                        window.confirm(AlertText)
+                                    if (confirmValue) {
+                                        dispatch(setFieldCustomized(false))
+                                        navigate(navItem.path)
+                                    }
+                                } else {
+                                    navigate(navItem.path)
+                                }
+                            }}
                             className={`
                 flex
                 gap-3

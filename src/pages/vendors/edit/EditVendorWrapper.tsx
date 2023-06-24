@@ -18,7 +18,10 @@ import {
     useGetVendorByIdQuery,
     useUpdateVendorMutation,
 } from 'src/services/VendorServices'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -233,7 +236,7 @@ const EditVendorWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
             setApiStatus(true)
-
+            dispatch(setFieldCustomized(false))
             const contactInformation = values.contact_informations.map(
                 (ele: any) => {
                     const { _id, ...rest } = ele // use object destructuring to remove the _id property

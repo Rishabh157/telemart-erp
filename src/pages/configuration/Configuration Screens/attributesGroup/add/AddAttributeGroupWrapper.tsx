@@ -20,6 +20,7 @@ import { useAddAttributeGroupMutation } from 'src/services/AttributeGroup'
 import { showToast } from 'src/utils'
 import { useGetAllAttributesQuery } from 'src/services/AttributeService'
 import { setAllItems } from 'src/redux/slices/attributesSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -64,6 +65,8 @@ const AddAttributeGroupWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         setTimeout(() => {
             AddAttributeGroups({
                 groupName: values.group_name,

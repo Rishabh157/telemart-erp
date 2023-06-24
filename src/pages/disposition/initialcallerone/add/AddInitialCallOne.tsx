@@ -6,6 +6,8 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -14,6 +16,7 @@ type Props = {
 
 const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -24,7 +27,10 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
             label: 'Add ',
         },
     ]
-
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <>
             <div className="">
@@ -69,7 +75,7 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                                     placeholder="Name"
                                     label="Initial Call  Name"
                                     onChange={(e) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'initialCallName',
                                             e.target.value
                                         )

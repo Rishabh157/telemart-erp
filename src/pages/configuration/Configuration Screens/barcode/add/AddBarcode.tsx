@@ -21,6 +21,8 @@ import { FormInitialValues } from './AddBarcodeWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {
@@ -43,6 +45,11 @@ const breadcrumbs: BreadcrumbType[] = [
 const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
     const { values, setFieldValue } = formikProps
 
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
@@ -88,7 +95,7 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 label="Lot Number"
                                 placeholder="Lot Number"
                                 onChange={(e) =>
-                                    setFieldValue('lotNumber', e.target.value)
+                                    handleSetFieldValue('lotNumber', e.target.value)
                                 }
                             />
                             {/* Product Group  */}
@@ -97,7 +104,7 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 value={values.productGroup}
                                 label="Product Group"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'productGroup',
                                         e.target.value
                                     )
@@ -112,7 +119,7 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 label="Quantity"
                                 placeholder="Quantity"
                                 onChange={(e) =>
-                                    setFieldValue('quantity', e.target.value)
+                                    handleSetFieldValue('quantity', e.target.value)
                                 }
                             />
                         </div>

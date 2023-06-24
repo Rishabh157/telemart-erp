@@ -26,6 +26,7 @@ import { setSelectedAttribute } from 'src/redux/slices/attributesSlice'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {}
@@ -60,6 +61,7 @@ const EditAttributeWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             EditAttributes({
                 body: {

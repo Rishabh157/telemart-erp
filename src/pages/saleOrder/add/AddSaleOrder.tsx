@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGetAllWareHouseByDealerIdQuery } from 'src/services/WareHoouseService'
 import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -89,6 +90,10 @@ const AddSaleOrder = ({
         }
     }, [productGroup])
 
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className=" h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
@@ -131,7 +136,10 @@ const AddSaleOrder = ({
                                 label="SO Number"
                                 placeholder="SO Number"
                                 onChange={(e) =>
-                                    setFieldValue('soNumber', e.target.value)
+                                    handleSetFieldValue(
+                                        'soNumber',
+                                        e.target.value
+                                    )
                                 }
                                 className="mt-0"
                             />
@@ -141,7 +149,10 @@ const AddSaleOrder = ({
                                 name="dealerId"
                                 value={values.dealerId}
                                 onChange={(e) => {
-                                    setFieldValue('dealerId', e.target.value)
+                                    handleSetFieldValue(
+                                        'dealerId',
+                                        e.target.value
+                                    )
                                     setDealerId(e.target.value)
                                 }}
                                 options={dropdownOptions.dealerOptions}
@@ -153,7 +164,7 @@ const AddSaleOrder = ({
                                 name="dealerWareHouseId"
                                 value={values.dealerWareHouseId}
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'dealerWareHouseId',
                                         e.target.value
                                     )
@@ -166,7 +177,7 @@ const AddSaleOrder = ({
                                 name="companyWareHouseId"
                                 value={values.companyWareHouseId}
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'companyWareHouseId',
                                         e.target.value
                                     )
@@ -210,7 +221,7 @@ const AddSaleOrder = ({
                                                                     onChange={(
                                                                         e
                                                                     ) => {
-                                                                        setFieldValue(
+                                                                        handleSetFieldValue(
                                                                             `productSalesOrder[${index}].productGroupId`,
                                                                             e
                                                                                 .target
@@ -268,7 +279,7 @@ const AddSaleOrder = ({
                                                                     onChange={(
                                                                         e
                                                                     ) => {
-                                                                        setFieldValue(
+                                                                        handleSetFieldValue(
                                                                             `productSalesOrder[${index}].quantity`,
                                                                             e
                                                                                 .target

@@ -19,7 +19,10 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
 import { setSelectedItem } from 'src/redux/slices/dealerSlice'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 
 // TYPE-  Form Intial Values
@@ -277,6 +280,7 @@ const EditDealerWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
             const contactInformation = values.contactInformation.map(
                 (ele: any) => {
                     const { _id, ...rest } = ele // use object destructuring to remove the _id property

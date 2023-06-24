@@ -19,6 +19,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditAttributeGroupWrapper'
 import ATMTransferList from 'src/components/UI/atoms/ATMTransferList/ATMTransferList'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {
@@ -73,6 +75,11 @@ const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
         leftSideTitle: 'All Atrributes',
         rightSideTitle: 'Attributes to add',
     }
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
@@ -116,7 +123,7 @@ const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                                 label="Group Name"
                                 placeholder="Group Name"
                                 onChange={(e) =>
-                                    setFieldValue('group_name', e.target.value)
+                                    handleSetFieldValue('group_name', e.target.value)
                                 }
                             />
                         </div>

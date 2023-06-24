@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
@@ -8,12 +8,14 @@ import { useAddinitialCallerOneMutation } from 'src/services/configurations/Init
 import AddInitialCallOne from './AddInitialCallOne'
 import { useNavigate } from 'react-router-dom'
 import DispositionLayout from '../../DispositionLayout'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     initialCallName: string
 }
 const AddInitialCallOneWrapper = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [AddInitialcallOne] = useAddinitialCallerOneMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
@@ -26,6 +28,7 @@ const AddInitialCallOneWrapper = () => {
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             AddInitialcallOne({
                 initialCallName: values.initialCallName,

@@ -8,6 +8,8 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -36,7 +38,11 @@ const EditDispositionTwo = ({
     dropdownOptions = {
         ...dropdownOptions,
     }
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -83,7 +89,7 @@ const EditDispositionTwo = ({
                                 required
                                 placeholder="Name"
                                 onChange={(e) => {
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'dispositionName',
                                         e.target.value
                                     )
@@ -93,7 +99,7 @@ const EditDispositionTwo = ({
                                 name="dispositionOneId"
                                 value={values.dispositionOneId}
                                 onChange={(e) =>
-                                    setFieldValue('dispositionOneId', e)
+                                    handleSetFieldValue('dispositionOneId', e)
                                 }
                                 options={dropdownOptions.DispotionOneOptions}
                                 label="Disposition One"
