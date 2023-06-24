@@ -21,8 +21,6 @@ import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddAreaWrapper'
 
-
-
 // |-- Types --|
 type Props = {
     onClose: () => void
