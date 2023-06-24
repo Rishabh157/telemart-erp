@@ -11,7 +11,6 @@ import {
 import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
 import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const CallListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
