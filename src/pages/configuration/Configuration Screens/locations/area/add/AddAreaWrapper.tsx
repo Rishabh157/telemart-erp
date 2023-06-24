@@ -1,12 +1,27 @@
+/// ==============================================
+// Filename:AddAreaWrapper.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-import AddAreaDialog from './AddAreaDialog'
+
+// |-- External Dependencies --|
 import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik } from 'formik'
+
+// |-- Internal Dependencies --|
+import AddAreaDialog from './AddAreaDialog'
+import { showToast } from 'src/utils'
 import { useAddAreaMutation } from 'src/services/AreaService'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     onClose: () => void
 }

@@ -1,14 +1,29 @@
+/// ==============================================
+// Filename:AreaListing.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { useSelector, useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import LocationListView from '../../sharedComponents/LocationListView'
 import AddAreaWrapper from '../add/AddAreaWrapper'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setSearchValue,
     setSelectedLocationArea,
 } from 'src/redux/slices/areaSlice'
 import { showToast } from 'src/utils'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     areas: any[]
 }
