@@ -12,6 +12,7 @@ import {
 } from 'src/services/websites/WebsiteServices'
 import { setSelectedWebsite } from 'src/redux/slices/website/websiteSlice'
 import WebsitesLayout from '../../WebsiteLayout'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -68,6 +69,7 @@ const EditWebsiteWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             updateWebsite({
                 body: {

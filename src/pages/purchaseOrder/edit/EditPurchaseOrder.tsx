@@ -10,6 +10,8 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from './EditPurchaseOrderWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 //import { HiPlus } from 'react-icons/hi'
 
 type Props = {
@@ -48,11 +50,14 @@ const EditPurchaseOrder = ({
         warehouseOptions,
         itemOptions,
     }
-
+    const dispatch = useDispatch()
     const { values, setFieldValue } = formikProps
 
     //console.log(values?.purchaseOrder)
-
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
@@ -96,7 +101,10 @@ const EditPurchaseOrder = ({
                                 label="PO Code"
                                 placeholder="PO Code"
                                 onChange={(e) =>
-                                    setFieldValue('poCode', e.target.value)
+                                    handleSetFieldValue(
+                                        'poCode',
+                                        e.target.value
+                                    )
                                 }
                                 className="mt-0 rounded"
                             />
@@ -106,7 +114,10 @@ const EditPurchaseOrder = ({
                                 name="vendor"
                                 value={values.vendorId}
                                 onChange={(e) =>
-                                    setFieldValue('vendorId', e.target.value)
+                                    handleSetFieldValue(
+                                        'vendorId',
+                                        e.target.value
+                                    )
                                 }
                                 options={dropdownOptions.vendorOptions}
                                 label="Vendor"
@@ -117,7 +128,10 @@ const EditPurchaseOrder = ({
                                 name="warehouse"
                                 value={values.wareHouseId}
                                 onChange={(e) =>
-                                    setFieldValue('wareHouseId', e.target.value)
+                                    handleSetFieldValue(
+                                        'wareHouseId',
+                                        e.target.value
+                                    )
                                 }
                                 options={dropdownOptions.warehouseOptions}
                                 label="Warehouse"
@@ -127,7 +141,7 @@ const EditPurchaseOrder = ({
                                     name={`purchaseOrder.itemId`}
                                     value={values?.purchaseOrder?.itemId}
                                     onChange={(e) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             `purchaseOrder.itemId`,
                                             e.target.value
                                         )
@@ -150,7 +164,7 @@ const EditPurchaseOrder = ({
                                     label="Rate"
                                     placeholder="Rate"
                                     onChange={(e) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             `purchaseOrder.rate`,
                                             e.target.value
                                         )
@@ -172,7 +186,7 @@ const EditPurchaseOrder = ({
                                     label="Quantity"
                                     placeholder="Quantity"
                                     onChange={(e) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             `purchaseOrder.quantity`,
                                             e.target.value
                                         )
@@ -190,7 +204,7 @@ const EditPurchaseOrder = ({
                                     }
                                     label="Est. Receiving Date"
                                     onChange={(newValue) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             `purchaseOrder.estReceivingDate`,
                                             newValue
                                         )

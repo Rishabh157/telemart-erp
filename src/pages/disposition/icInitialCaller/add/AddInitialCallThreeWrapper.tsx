@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import { setAllItems } from 'src/redux/slices/configuration/initialCallerOneSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     initialCallName: string
@@ -59,6 +60,7 @@ const AddInitialCallThreeWrappper = () => {
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addIntialCallThree({
                 initialCallName: values.initialCallName,

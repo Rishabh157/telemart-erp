@@ -15,7 +15,10 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -210,6 +213,7 @@ const AddWarehouseWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps?.length - 1) {
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 addWareHouse({
                     wareHouseCode: values.warehouseCode,

@@ -3,11 +3,12 @@ import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import WebsiteLayout from '../../WebsiteLayout'
 import { useAddWebsitePageMutation } from 'src/services/websites/WebsitePageServices'
 import AddWebsitePage from './AddWebsitePage'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -21,6 +22,7 @@ export type FormInitialValues = {
 const AddWebsitePageWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const { state } = useLocation()
     const { siteId } = state
 
@@ -46,6 +48,7 @@ const AddWebsitePageWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addWebsitePage({
                 pageUrl: values.pageUrl,

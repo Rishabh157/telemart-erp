@@ -8,6 +8,8 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -35,7 +37,11 @@ const AddDispositionComplaint = ({
             label: 'Add ',
         },
     ]
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <>
             <div className="">
@@ -80,7 +86,7 @@ const AddDispositionComplaint = ({
                                     label="Disposition Name"
                                     placeholder="Name"
                                     onChange={(e) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'dispositionName',
                                             e.target.value
                                         )
@@ -92,7 +98,7 @@ const AddDispositionComplaint = ({
                                     value={values.emailType}
                                     label="Email Type"
                                     onChange={(e) =>
-                                        setFieldValue('emailType', e)
+                                        handleSetFieldValue('emailType', e)
                                     }
                                 />
                                 <ATMSelectSearchable
@@ -101,7 +107,7 @@ const AddDispositionComplaint = ({
                                     value={values.smsType}
                                     label="SMS Type "
                                     onChange={(e) =>
-                                        setFieldValue('smsType', e)
+                                        handleSetFieldValue('smsType', e)
                                     }
                                 />
                                 <ATMSelectSearchable
@@ -110,7 +116,7 @@ const AddDispositionComplaint = ({
                                     value={values.priority}
                                     label="Priority"
                                     onChange={(e) =>
-                                        setFieldValue('priority', e)
+                                        handleSetFieldValue('priority', e)
                                     }
                                 />
                             </div>

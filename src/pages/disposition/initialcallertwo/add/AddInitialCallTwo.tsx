@@ -8,6 +8,8 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -32,7 +34,11 @@ const AddInitialCallTwo = ({
             label: 'Add',
         },
     ]
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <>
             <div className="">
@@ -79,7 +85,10 @@ const AddInitialCallTwo = ({
                                     value={values.initialCallOneId}
                                     label="Initial Call One"
                                     onChange={(e) =>
-                                        setFieldValue('initialCallOneId', e)
+                                        handleSetFieldValue(
+                                            'initialCallOneId',
+                                            e
+                                        )
                                     }
                                 />
                                 <ATMTextField
@@ -88,7 +97,7 @@ const AddInitialCallTwo = ({
                                     placeholder="Name"
                                     label="Initial Call  Name"
                                     onChange={(e) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'initialCallName',
                                             e.target.value
                                         )

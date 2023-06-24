@@ -14,6 +14,7 @@ import { useAddSalesOrderMutation } from 'src/services/SalesOrderService'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -159,6 +160,7 @@ const AddSaleOrderWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         //console.log(values)
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addSalesOrder({
                 soNumber: values.soNumber,

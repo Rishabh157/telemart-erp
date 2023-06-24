@@ -10,6 +10,7 @@ import { useAddinitialCallerTwoMutation } from 'src/services/configurations/Init
 import { setAllItems } from 'src/redux/slices/configuration/initialCallerOneSlice'
 import DispositionLayout from '../../DispositionLayout'
 import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     initialCallName: string
@@ -54,6 +55,7 @@ const AddInitialCallTwoWrapper = () => {
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addinitialCallTwo({
                 initialCallName: values.initialCallName,

@@ -15,6 +15,7 @@ import { RootState } from 'src/redux/store'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -84,6 +85,10 @@ const EditChannelManagement = ({
             return { label: ele?.districtName, value: ele?._id }
         }),
     }
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -130,7 +135,10 @@ const EditChannelManagement = ({
                                 required
                                 placeholder="Channel Name"
                                 onChange={(e) =>
-                                    setFieldValue('channelName', e.target.value)
+                                    handleSetFieldValue(
+                                        'channelName',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMSelectSearchable
@@ -138,7 +146,7 @@ const EditChannelManagement = ({
                                 required
                                 value={values.channelGroupId}
                                 onChange={(e) =>
-                                    setFieldValue('channelGroupId', e)
+                                    handleSetFieldValue('channelGroupId', e)
                                 }
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
@@ -150,7 +158,10 @@ const EditChannelManagement = ({
                                 value={values.channelCategory}
                                 label="Channel Category "
                                 onChange={(value) =>
-                                    setFieldValue('channelCategory', value)
+                                    handleSetFieldValue(
+                                        'channelCategory',
+                                        value
+                                    )
                                 }
                             />{' '}
                             {/* <ATMTextArea
@@ -158,7 +169,7 @@ const EditChannelManagement = ({
                                 value={values.address}
                                 label="Address Name"
                                 placeholder="Address Name"
-                                onChange={(e) => setFieldValue('address', e)}
+                                onChange={(e) => handleSetFieldValue('address', e)}
                             /> */}
                             <ATMTextField
                                 name="contactPerson"
@@ -166,7 +177,7 @@ const EditChannelManagement = ({
                                 label="Contact Person"
                                 placeholder="Contact Person"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'contactPerson',
                                         e.target.value
                                     )
@@ -179,7 +190,10 @@ const EditChannelManagement = ({
                                 label="Designation"
                                 placeholder="Designation"
                                 onChange={(e) =>
-                                    setFieldValue('designation', e.target.value)
+                                    handleSetFieldValue(
+                                        'designation',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMTextField
@@ -188,7 +202,7 @@ const EditChannelManagement = ({
                                 label="Email Id"
                                 placeholder="Email Id"
                                 onChange={(e) =>
-                                    setFieldValue('email', e.target.value)
+                                    handleSetFieldValue('email', e.target.value)
                                 }
                             />
                             <ATMSelectSearchable
@@ -199,7 +213,7 @@ const EditChannelManagement = ({
                                 label="Country "
                                 // placeholder="Country"
                                 onChange={(value) => {
-                                    setFieldValue('country', value)
+                                    handleSetFieldValue('country', value)
                                 }}
                             />
                             <ATMSelectSearchable
@@ -209,7 +223,7 @@ const EditChannelManagement = ({
                                 value={values.state}
                                 label="State"
                                 onChange={(value) =>
-                                    setFieldValue('state', value)
+                                    handleSetFieldValue('state', value)
                                 }
                             />
                             <ATMSelectSearchable
@@ -219,7 +233,7 @@ const EditChannelManagement = ({
                                 value={values.district}
                                 label="District"
                                 onChange={(value) =>
-                                    setFieldValue('district', value)
+                                    handleSetFieldValue('district', value)
                                 }
                             />
                             <ATMSelectSearchable
@@ -228,7 +242,7 @@ const EditChannelManagement = ({
                                 value={values.language}
                                 label="Language"
                                 onChange={(value) =>
-                                    setFieldValue('language', value)
+                                    handleSetFieldValue('language', value)
                                 }
                             />
                             <ATMSelectSearchable
@@ -238,7 +252,7 @@ const EditChannelManagement = ({
                                 value={values.paymentType}
                                 label="Payment Type"
                                 onChange={(value) =>
-                                    setFieldValue('paymentType', value)
+                                    handleSetFieldValue('paymentType', value)
                                 }
                             />
                             <ATMTextField
@@ -247,7 +261,7 @@ const EditChannelManagement = ({
                                 label="Phone"
                                 placeholder="Phone"
                                 onChange={(e) =>
-                                    setFieldValue('phone', e.target.value)
+                                    handleSetFieldValue('phone', e.target.value)
                                 }
                             />
                             <ATMTextField
@@ -256,7 +270,10 @@ const EditChannelManagement = ({
                                 label="Mobile   "
                                 placeholder="Mobile "
                                 onChange={(e) =>
-                                    setFieldValue('mobile', e.target.value)
+                                    handleSetFieldValue(
+                                        'mobile',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMTextField
@@ -265,7 +282,10 @@ const EditChannelManagement = ({
                                 label="Website "
                                 placeholder="Website "
                                 onChange={(e) =>
-                                    setFieldValue('website', e.target.value)
+                                    handleSetFieldValue(
+                                        'website',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMTextArea
@@ -273,7 +293,9 @@ const EditChannelManagement = ({
                                 value={values.address}
                                 label="Address Name"
                                 placeholder="Address Name"
-                                onChange={(e) => setFieldValue('address', e)}
+                                onChange={(e) =>
+                                    handleSetFieldValue('address', e)
+                                }
                             />
                         </div>
                     </div>

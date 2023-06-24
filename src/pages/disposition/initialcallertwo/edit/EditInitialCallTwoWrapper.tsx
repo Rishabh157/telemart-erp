@@ -14,6 +14,7 @@ import {
 } from 'src/services/configurations/InitialCallerTwoServices'
 import { setSelectedInitialCallerTwo } from 'src/redux/slices/configuration/initialCallerTwoSlice'
 import EditInitialCallTwo from './EditInitialCallTwo'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     initialCallName: string
@@ -72,6 +73,7 @@ const EditInitialCallTwoWrapper = () => {
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             editInitialCallTwo({
                 body: {

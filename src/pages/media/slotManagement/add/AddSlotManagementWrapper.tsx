@@ -19,6 +19,7 @@ import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import { useGetAllTapeMangementQuery } from 'src/services/media/TapeManagementServices'
 import { setSelectedTapManagement } from 'src/redux/slices/media/tapeManagementSlice'
 import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     slotName: string
@@ -146,6 +147,7 @@ const AddSlotManagementWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         AddSlotManagementApi({
             slotName: values.slotName,
             channelGroupId: values.channelGroup,

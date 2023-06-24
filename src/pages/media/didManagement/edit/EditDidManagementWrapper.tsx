@@ -17,6 +17,7 @@ import {
     useUpdateDidMutation,
 } from 'src/services/media/DidManagementServices'
 import { setSelectedItem } from 'src/redux/slices/media/didManagementSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     didNumber: string
@@ -60,6 +61,7 @@ const EditDidManagementWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             EditDidManagement({
                 body: {

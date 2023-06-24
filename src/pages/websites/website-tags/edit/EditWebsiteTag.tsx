@@ -9,6 +9,8 @@ import { FormInitialValues } from './EditWebsiteTagWrapper'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -35,7 +37,11 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
     dropdownOptions = {
         ...dropdownOptions,
     }
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -81,7 +87,7 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 required
                                 value={values.websiteMasterId}
                                 onChange={(e) =>
-                                    setFieldValue('websiteMasterId', e)
+                                    handleSetFieldValue('websiteMasterId', e)
                                 }
                                 options={dropdownOptions.WebsiteOptions}
                                 label="Website"
@@ -93,7 +99,7 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     required
                                     value={values.websitPageId}
                                     onChange={(e) =>
-                                        setFieldValue('websitPageId', e)
+                                        handleSetFieldValue('websitPageId', e)
                                     }
                                     options={dropdownOptions.WebsitePageOptions}
                                     label="Website Page"
@@ -107,7 +113,10 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Meta Keyword"
                                 placeholder="Meta Keyword"
                                 onChange={(e) =>
-                                    setFieldValue('metaKeyword', e.target.value)
+                                    handleSetFieldValue(
+                                        'metaKeyword',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -118,7 +127,10 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Meta OG Title"
                                 placeholder="Meta OG Title"
                                 onChange={(e) =>
-                                    setFieldValue('metaOgTitle', e.target.value)
+                                    handleSetFieldValue(
+                                        'metaOgTitle',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -129,7 +141,10 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Meta OG URL"
                                 placeholder="Meta OG URL"
                                 onChange={(e) =>
-                                    setFieldValue('metaOgUrl', e.target.value)
+                                    handleSetFieldValue(
+                                        'metaOgUrl',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -139,7 +154,10 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Meta OG Image"
                                 placeholder="Meta OG Image"
                                 onChange={(e) =>
-                                    setFieldValue('metaOgImage', e.target.value)
+                                    handleSetFieldValue(
+                                        'metaOgImage',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -149,7 +167,10 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Meta OG Type"
                                 placeholder="Meta OG Type"
                                 onChange={(e) =>
-                                    setFieldValue('metaOgType', e.target.value)
+                                    handleSetFieldValue(
+                                        'metaOgType',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -159,7 +180,7 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Meta Twitter Title"
                                 placeholder="Meta Twitter Title"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'metaTwitterTitle',
                                         e.target.value
                                     )
@@ -172,7 +193,7 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Meta Twitter Card"
                                 placeholder="Meta Twitter Card"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'metaTwitterCard',
                                         e.target.value
                                     )
@@ -185,7 +206,7 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Meta Twitter Image"
                                 placeholder="Meta Twitter Image"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'metaTwitterImage',
                                         e.target.value
                                     )
@@ -198,7 +219,10 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 value={values.metaOgDescription}
                                 label="Meta OG Description"
                                 onChange={(newValue) =>
-                                    setFieldValue('metaOgDescription', newValue)
+                                    handleSetFieldValue(
+                                        'metaOgDescription',
+                                        newValue
+                                    )
                                 }
                             />
 
@@ -208,7 +232,10 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 value={values.metaDescription}
                                 label="Meta Description"
                                 onChange={(newValue) =>
-                                    setFieldValue('metaDescription', newValue)
+                                    handleSetFieldValue(
+                                        'metaDescription',
+                                        newValue
+                                    )
                                 }
                             />
                         </div>

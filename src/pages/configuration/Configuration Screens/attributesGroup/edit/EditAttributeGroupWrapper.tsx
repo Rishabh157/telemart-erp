@@ -44,8 +44,6 @@ const EditAttributeGroupWrapper = (props: Props) => {
         isFetching: attrIsFetching,
     } = useGetAllAttributesQuery(userData?.companyId)
 
-    
-
     const [EditAttributeGroups] = useUpdateattributeGroupMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const attributeOptions = selectedAttributeGroup?.attributes?.map(

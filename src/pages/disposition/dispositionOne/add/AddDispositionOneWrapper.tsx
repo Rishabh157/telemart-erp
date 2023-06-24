@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
@@ -8,12 +8,14 @@ import { useAdddispositionOneMutation } from 'src/services/configurations/Dispos
 import { useNavigate } from 'react-router-dom'
 import AddDispositionOne from './AddDispositionOne'
 import DispositionLayout from '../../DispositionLayout'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     dispositionName: string
 }
 const AddDispositionOneWrappper = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [addDisposition] = useAdddispositionOneMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
@@ -26,6 +28,7 @@ const AddDispositionOneWrappper = () => {
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addDisposition({
                 dispositionName: values.dispositionName,
