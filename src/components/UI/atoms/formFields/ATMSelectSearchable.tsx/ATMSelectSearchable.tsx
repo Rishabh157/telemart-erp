@@ -65,6 +65,8 @@ const ATMSelectSearchable = ({
             paddingLeft: '4px',
             paddingTop: '0px',
             alignItems: 'start',
+            overflow: 'scroll',
+            maxHeight: '67px',
         }),
         indicator: (provided: any) => ({
             ...provided,
@@ -76,7 +78,7 @@ const ATMSelectSearchable = ({
         }),
         input: (provided: any) => ({
             ...provided,
-            minHeight: 'unset',
+
             textColor: 'rgb(51 65 85,0)',
             paddingLeft: '4px',
             paddingTop: '-4px',
@@ -158,9 +160,7 @@ const ATMSelectSearchable = ({
 
             <Select
                 className={twMerge(
-                    `border rounded border-slate-400 ${
-                        isMulti ? 'overflow-scroll overflow-x-auto' : ''
-                    } min-h-fit max-h-24`,
+                    `border rounded border-slate-400 `,
                     `${selectClass}`
                 )}
                 name={name}
