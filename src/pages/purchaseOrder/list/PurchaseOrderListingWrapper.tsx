@@ -21,6 +21,7 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import { setFilterValue } from 'src/redux/slices/GRNSlice'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import moment from 'moment'
 
 const PurchaseOrderListingWrapper = () => {
     const navigate = useNavigate()
@@ -154,7 +155,14 @@ const PurchaseOrderListingWrapper = () => {
             headerName: 'Est. Delivery Date',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
-                return <span> {row.purchaseOrder.estReceivingDate} </span>
+                return (
+                    <span>
+                        {' '}
+                        {moment(row.purchaseOrder.estReceivingDate).format(
+                            'DD/MM/YYYY'
+                        )}{' '}
+                    </span>
+                )
             },
         },
         {

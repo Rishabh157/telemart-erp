@@ -11,7 +11,7 @@ import React from 'react'
 // |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { HiPlus } from 'react-icons/hi'
 
 // |-- Internal Dependencies --|
@@ -25,6 +25,7 @@ import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {
@@ -52,6 +53,11 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
     const options = items?.map((ele: any) => {
         return { id: ele?._id, label: ele?.groupName, value: ele?.groupName }
     })
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
@@ -138,12 +144,12 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                                                 onChange={(
                                                                     e
                                                                 ) => {
-                                                                    setFieldValue(
+                                                                    handleSetFieldValue(
                                                                         `asrDetails[${asrIndex}].productName`,
                                                                         e.target
                                                                             .value
                                                                     )
-                                                                    setFieldValue(
+                                                                    handleSetFieldValue(
                                                                         `asrDetails[${asrIndex}].productId`,
                                                                         options.find(
                                                                             (
@@ -172,7 +178,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                                                 label="Quantity"
                                                                 placeholder="Quantity"
                                                                 onChange={(e) =>
-                                                                    setFieldValue(
+                                                                    handleSetFieldValue(
                                                                         `asrDetails[${asrIndex}].quantity`,
                                                                         e.target
                                                                             .value

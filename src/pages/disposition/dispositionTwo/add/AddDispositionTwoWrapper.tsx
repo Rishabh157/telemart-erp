@@ -11,6 +11,7 @@ import { setAllItems as setAllDispositionOne } from 'src/redux/slices/configurat
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
 import AddDispositionTwo from './AddDispositionTwo'
 import { useAdddispositionTwoMutation } from 'src/services/configurations/DispositionTwoServices'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     dispositionName: string
@@ -57,6 +58,7 @@ const AddDispositionTwoWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         adddispositionTwo({
             dispositionName: values.dispositionName,
             dispositionOneId: values.dispositionOneId,

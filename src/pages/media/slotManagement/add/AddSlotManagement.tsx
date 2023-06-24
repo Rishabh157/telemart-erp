@@ -14,6 +14,8 @@ import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/AT
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { MdDeleteOutline } from 'react-icons/md'
 import moment from 'moment'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -86,7 +88,11 @@ const AddSlotManagement = ({
         })
         setFieldValue('channelSlot', newData)
     }
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -133,14 +139,17 @@ const AddSlotManagement = ({
                                 required
                                 placeholder="Slot Name"
                                 onChange={(e) => {
-                                    setFieldValue('slotName', e.target.value)
+                                    handleSetFieldValue(
+                                        'slotName',
+                                        e.target.value
+                                    )
                                 }}
                             />
                             <ATMSelectSearchable
                                 name="channelGroup"
                                 value={values.channelGroup}
                                 onChange={(e) =>
-                                    setFieldValue('channelGroup', e)
+                                    handleSetFieldValue('channelGroup', e)
                                 }
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
@@ -152,7 +161,7 @@ const AddSlotManagement = ({
                                     options={options}
                                     value={values.type}
                                     onChange={(e) => {
-                                        setFieldValue('type', e)
+                                        handleSetFieldValue('type', e)
                                     }}
                                     required={true}
                                 />
@@ -163,7 +172,7 @@ const AddSlotManagement = ({
                                     required
                                     value={values.channelName}
                                     onChange={(e) =>
-                                        setFieldValue('channelName', e)
+                                        handleSetFieldValue('channelName', e)
                                     }
                                     options={dropdownOptions.channelMgtOptions}
                                     label="Channel Name"
@@ -173,7 +182,9 @@ const AddSlotManagement = ({
                                 name="tapeName"
                                 required
                                 value={values.tapeName}
-                                onChange={(e) => setFieldValue('tapeName', e)}
+                                onChange={(e) =>
+                                    handleSetFieldValue('tapeName', e)
+                                }
                                 options={dropdownOptions.tapeMangementOptions}
                                 label="Tape Name"
                             />
@@ -184,7 +195,10 @@ const AddSlotManagement = ({
                                 label="Channel Trp   "
                                 placeholder="Channel Trp "
                                 onChange={(e) =>
-                                    setFieldValue('channelTrp', e.target.value)
+                                    handleSetFieldValue(
+                                        'channelTrp',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMTextArea
@@ -193,7 +207,7 @@ const AddSlotManagement = ({
                                 label="Remarks "
                                 placeholder="Remarks "
                                 onChange={(newValue) =>
-                                    setFieldValue('remarks', newValue)
+                                    handleSetFieldValue('remarks', newValue)
                                 }
                             />{' '}
                         </div>
@@ -305,7 +319,7 @@ const AddSlotManagement = ({
                                                                             onChange={(
                                                                                 newValue
                                                                             ) =>
-                                                                                setFieldValue(
+                                                                                handleSetFieldValue(
                                                                                     `channelSlot[${itemIndex}].date`,
                                                                                     newValue
                                                                                 )
@@ -322,7 +336,7 @@ const AddSlotManagement = ({
                                                                             onChange={(
                                                                                 newValue
                                                                             ) => {
-                                                                                setFieldValue(
+                                                                                handleSetFieldValue(
                                                                                     `channelSlot[${itemIndex}].startTime`,
                                                                                     newValue
                                                                                 )
@@ -339,7 +353,7 @@ const AddSlotManagement = ({
                                                                             onChange={(
                                                                                 newValue
                                                                             ) => {
-                                                                                setFieldValue(
+                                                                                handleSetFieldValue(
                                                                                     `channelSlot[${itemIndex}].endTime`,
                                                                                     newValue
                                                                                 )

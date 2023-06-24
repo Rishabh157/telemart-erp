@@ -24,6 +24,7 @@ import { setSelectedTapManagement } from 'src/redux/slices/media/tapeManagementS
 import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
 import EditSlotManagement from './EditSlotManagement'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     slotName: string
@@ -200,6 +201,7 @@ const EditSlotManagementWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             updateSlot({
                 body: {

@@ -8,6 +8,8 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -42,7 +44,11 @@ const EditDispositionThree = ({
     dropdownOptions = {
         ...dropdownOptions,
     }
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -89,7 +95,7 @@ const EditDispositionThree = ({
                                 required
                                 placeholder="Disposition Name"
                                 onChange={(e) => {
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'dispositionName',
                                         e.target.value
                                     )
@@ -100,7 +106,7 @@ const EditDispositionThree = ({
                                 required
                                 value={values.dispositionOneId}
                                 onChange={(e) =>
-                                    setFieldValue('dispositionOneId', e)
+                                    handleSetFieldValue('dispositionOneId', e)
                                 }
                                 options={dropdownOptions.DispotionOneOptions}
                                 label="Disposition One"
@@ -112,7 +118,10 @@ const EditDispositionThree = ({
                                     required
                                     value={values.dispositionTwoId}
                                     onChange={(e) =>
-                                        setFieldValue('dispositionTwoId', e)
+                                        handleSetFieldValue(
+                                            'dispositionTwoId',
+                                            e
+                                        )
                                     }
                                     options={
                                         dropdownOptions.DispositionTwoOptions
@@ -124,7 +133,9 @@ const EditDispositionThree = ({
                             <ATMSelectSearchable
                                 name="smsType"
                                 value={values.smsType}
-                                onChange={(e) => setFieldValue('smsType', e)}
+                                onChange={(e) =>
+                                    handleSetFieldValue('smsType', e)
+                                }
                                 options={dropdownOptions.smsTypeOptions}
                                 label="SMS Type"
                             />
@@ -132,14 +143,18 @@ const EditDispositionThree = ({
                             <ATMSelectSearchable
                                 name="emailType"
                                 value={values.emailType}
-                                onChange={(e) => setFieldValue('emailType', e)}
+                                onChange={(e) =>
+                                    handleSetFieldValue('emailType', e)
+                                }
                                 options={dropdownOptions.emailTypeOptions}
                                 label="Email Type"
                             />
                             <ATMSelectSearchable
                                 name="whatsApp"
                                 value={values.whatsApp}
-                                onChange={(e) => setFieldValue('whatsApp', e)}
+                                onChange={(e) =>
+                                    handleSetFieldValue('whatsApp', e)
+                                }
                                 options={dropdownOptions.whatsAppOptions}
                                 label="Whatsapp Template"
                             />
@@ -147,7 +162,9 @@ const EditDispositionThree = ({
                             <ATMSelectSearchable
                                 name="priority"
                                 value={values.priority}
-                                onChange={(e) => setFieldValue('priority', e)}
+                                onChange={(e) =>
+                                    handleSetFieldValue('priority', e)
+                                }
                                 options={dropdownOptions.priorityOptions}
                                 label="Priority"
                             />
@@ -157,7 +174,7 @@ const EditDispositionThree = ({
                                 required
                                 value={values.applicableCriteria}
                                 onChange={(e) =>
-                                    setFieldValue('applicableCriteria', e)
+                                    handleSetFieldValue('applicableCriteria', e)
                                 }
                                 options={
                                     dropdownOptions.applicableCriteriaOptions

@@ -7,6 +7,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddWebsiteBlogWrapper'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -26,7 +28,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -72,7 +78,10 @@ const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                                 label="Blog Name"
                                 placeholder="Blog Name"
                                 onChange={(e) =>
-                                    setFieldValue('blogName', e.target.value)
+                                    handleSetFieldValue(
+                                        'blogName',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -83,7 +92,10 @@ const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                                 label="Blog Title"
                                 placeholder="Blog Title"
                                 onChange={(e) =>
-                                    setFieldValue('blogTitle', e.target.value)
+                                    handleSetFieldValue(
+                                        'blogTitle',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -94,7 +106,7 @@ const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                                 label="Blog SubTitle"
                                 placeholder="Blog SubTitle"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'blogSubtitle',
                                         e.target.value
                                     )
@@ -107,7 +119,7 @@ const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                                 label="Image"
                                 placeholder="Image"
                                 onChange={(e) =>
-                                    setFieldValue('image', e.target.value)
+                                    handleSetFieldValue('image', e.target.value)
                                 }
                             />
 
@@ -117,7 +129,10 @@ const AddWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                                 value={values.blogDescription}
                                 label="Blog Description"
                                 onChange={(newValue) =>
-                                    setFieldValue('blogDescription', newValue)
+                                    handleSetFieldValue(
+                                        'blogDescription',
+                                        newValue
+                                    )
                                 }
                             />
                         </div>

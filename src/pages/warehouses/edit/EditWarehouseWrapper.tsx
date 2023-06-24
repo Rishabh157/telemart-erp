@@ -20,7 +20,10 @@ import { setSelectedItem } from 'src/redux/slices/warehouseSlice'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -211,6 +214,7 @@ const EditWarehouseWrapper = () => {
                 }
             )
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 editWareHouse({
                     body: {

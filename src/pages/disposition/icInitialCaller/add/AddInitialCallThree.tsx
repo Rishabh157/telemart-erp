@@ -12,6 +12,7 @@ import { setAllItems as setAllItemsdisposition } from 'src/redux/slices/configur
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useGetAllinitialCallerTwoByIdQuery } from 'src/services/configurations/InitialCallerTwoServices'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -71,6 +72,10 @@ const AddInitialCallThree = ({
         }
     }, [dispositionData, dispositionisLoading, dispositionisFetching, dispatch])
 
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <>
             <div className="">
@@ -118,7 +123,7 @@ const AddInitialCallThree = ({
                                     label="Initial Call Name"
                                     placeholder="Name"
                                     onChange={(e) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'initialCallName',
                                             e.target.value
                                         )
@@ -135,7 +140,10 @@ const AddInitialCallThree = ({
                                     label="Initial Call One"
                                     onChange={(value) => {
                                         console.log(value)
-                                        setFieldValue('initialCallOneId', value)
+                                        handleSetFieldValue(
+                                            'initialCallOneId',
+                                            value
+                                        )
                                     }}
                                 />
                                 <ATMSelectSearchable
@@ -148,7 +156,10 @@ const AddInitialCallThree = ({
                                     value={values.initialCallTwoId}
                                     label="Initial Call Two"
                                     onChange={(value) =>
-                                        setFieldValue('initialCallTwoId', value)
+                                        handleSetFieldValue(
+                                            'initialCallTwoId',
+                                            value
+                                        )
                                     }
                                 />
                                 <ATMSelectSearchable
@@ -158,7 +169,7 @@ const AddInitialCallThree = ({
                                     value={values.returnType}
                                     label="Return Type"
                                     onChange={(value) =>
-                                        setFieldValue('returnType', value)
+                                        handleSetFieldValue('returnType', value)
                                     }
                                     isMulti
                                     isAllSelect
@@ -170,7 +181,7 @@ const AddInitialCallThree = ({
                                     value={values.smsType}
                                     label="SMS Type"
                                     onChange={(value) =>
-                                        setFieldValue('smsType', value)
+                                        handleSetFieldValue('smsType', value)
                                     }
                                 />
 
@@ -180,7 +191,7 @@ const AddInitialCallThree = ({
                                     value={values.emailType}
                                     label="Email Type"
                                     onChange={(e) =>
-                                        setFieldValue('emailType', e)
+                                        handleSetFieldValue('emailType', e)
                                     }
                                 />
                                 <ATMSelectSearchable
@@ -191,7 +202,7 @@ const AddInitialCallThree = ({
                                     value={values.complaintType}
                                     label="Complaint Type"
                                     onChange={(e) =>
-                                        setFieldValue('complaintType', e)
+                                        handleSetFieldValue('complaintType', e)
                                     }
                                 />
                             </div>

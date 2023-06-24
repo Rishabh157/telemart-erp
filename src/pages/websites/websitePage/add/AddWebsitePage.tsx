@@ -7,6 +7,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { FormInitialValues } from './AddwebsitePageWrapper'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -26,7 +28,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -72,7 +78,10 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
                                 label="Page Name "
                                 placeholder="Name"
                                 onChange={(e) =>
-                                    setFieldValue('pageName', e.target.value)
+                                    handleSetFieldValue(
+                                        'pageName',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -82,7 +91,10 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
                                 label="Page Url"
                                 placeholder="Url"
                                 onChange={(e) =>
-                                    setFieldValue('pageUrl', e.target.value)
+                                    handleSetFieldValue(
+                                        'pageUrl',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>
@@ -92,7 +104,7 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
                                 value={values.headerSpace}
                                 label="Subtitle Name"
                                 onChange={(e: any) =>
-                                    setFieldValue('headerSpace', e)
+                                    handleSetFieldValue('headerSpace', e)
                                 }
                                 minRows={4}
                             />
@@ -101,7 +113,7 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
                                 value={values.footerSpace}
                                 label="footer Space"
                                 onChange={(e: any) =>
-                                    setFieldValue('footerSpace', e)
+                                    handleSetFieldValue('footerSpace', e)
                                 }
                                 minRows={4}
                             />

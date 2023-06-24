@@ -23,9 +23,10 @@ import { FormInitialValues } from './AddASRWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 
 // |-- Redux --|
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {
@@ -53,6 +54,11 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
     const options = items?.map((ele: any) => {
         return { id: ele?._id, label: ele?.groupName, value: ele?.groupName }
     })
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
@@ -139,12 +145,12 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                                                 onChange={(
                                                                     e
                                                                 ) => {
-                                                                    setFieldValue(
+                                                                    handleSetFieldValue(
                                                                         `asrDetails[${asrIndex}].productName`,
                                                                         e.target
                                                                             .value
                                                                     )
-                                                                    setFieldValue(
+                                                                    handleSetFieldValue(
                                                                         `asrDetails[${asrIndex}].productId`,
                                                                         options.find(
                                                                             (
@@ -180,7 +186,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                                                             )
                                                                         )
                                                                     ) {
-                                                                        setFieldValue(
+                                                                        handleSetFieldValue(
                                                                             `asrDetails[${asrIndex}].quantity`,
                                                                             e
                                                                                 .target

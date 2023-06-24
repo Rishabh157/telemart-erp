@@ -6,6 +6,8 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -24,7 +26,11 @@ const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
             label: 'Add ',
         },
     ]
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <>
             <div className="">
@@ -69,7 +75,7 @@ const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
                                     label="Disposition Name"
                                     placeholder="Name"
                                     onChange={(e) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'dispositionName',
                                             e.target.value
                                         )

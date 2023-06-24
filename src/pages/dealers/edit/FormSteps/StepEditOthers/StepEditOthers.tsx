@@ -5,6 +5,8 @@ import { FormInitialValues } from '../../EditDealerWrapper'
 import { getHierarchyByDept } from 'src/utils/GetHierarchyByDept'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -13,7 +15,11 @@ type Props = {
 const StepEditOthers = ({ formikProps }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className={`py-9 px-7 border-b border-slate-400`}>
@@ -29,7 +35,7 @@ const StepEditOthers = ({ formikProps }: Props) => {
                             }
                             label="Zonal Manager"
                             onChange={(e) => {
-                                setFieldValue('zonalManagerId', e)
+                                handleSetFieldValue('zonalManagerId', e)
                             }}
                         />
                     </div>
@@ -44,7 +50,7 @@ const StepEditOthers = ({ formikProps }: Props) => {
                             }
                             label="Zonal Executive"
                             onChange={(e) => {
-                                setFieldValue('zonalExecutiveId', e)
+                                handleSetFieldValue('zonalExecutiveId', e)
                             }}
                         />
                     </div>
@@ -61,9 +67,12 @@ const StepEditOthers = ({ formikProps }: Props) => {
                             value={values.isAutoMap}
                             label="Auto Map"
                             onChange={(value: any) => {
-                                setFieldValue('isAutoMap', value)
-                                setFieldValue('isCreditLimit', false)
-                                setFieldValue('isAvailableQuantity', false)
+                                handleSetFieldValue('isAutoMap', value)
+                                handleSetFieldValue('isCreditLimit', false)
+                                handleSetFieldValue(
+                                    'isAvailableQuantity',
+                                    false
+                                )
                             }}
                         />
                     </div>
@@ -76,7 +85,10 @@ const StepEditOthers = ({ formikProps }: Props) => {
                                     value={values.isCreditLimit}
                                     label="Credit Limit"
                                     onChange={(value: any) => {
-                                        setFieldValue('isCreditLimit', value)
+                                        handleSetFieldValue(
+                                            'isCreditLimit',
+                                            value
+                                        )
                                     }}
                                 />
                             </div>
@@ -86,7 +98,7 @@ const StepEditOthers = ({ formikProps }: Props) => {
                                     value={values.isAvailableQuantity}
                                     label="Available Quantity"
                                     onChange={(value: any) => {
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'isAvailableQuantity',
                                             value
                                         )

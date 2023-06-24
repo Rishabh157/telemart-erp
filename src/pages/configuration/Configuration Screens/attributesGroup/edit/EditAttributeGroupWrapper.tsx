@@ -15,6 +15,7 @@ import {
 import { setSelectedAttGroup } from 'src/redux/slices/attributesGroupSlice'
 import { useGetAllAttributesQuery } from 'src/services/AttributeService'
 import { setAllItems } from 'src/redux/slices/attributesSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -42,8 +43,6 @@ const EditAttributeGroupWrapper = (props: Props) => {
         isLoading: attrLoading,
         isFetching: attrIsFetching,
     } = useGetAllAttributesQuery(userData?.companyId)
-
-    console.log(attributeData)
 
     const [EditAttributeGroups] = useUpdateattributeGroupMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
@@ -73,6 +72,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             EditAttributeGroups({
                 body: {

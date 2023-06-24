@@ -15,7 +15,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
 import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 
 // TYPE-  Form Intial Values
@@ -283,6 +286,7 @@ const AddDealerWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
+            dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 addDealer({
                     dealerCode: values.dealerCode,
