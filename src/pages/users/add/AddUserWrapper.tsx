@@ -6,8 +6,9 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useAddNewUserMutation } from 'src/services/UserServices'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -27,6 +28,7 @@ export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 const AddUserWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addNewUser] = useAddNewUserMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -62,6 +64,7 @@ const AddUserWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addNewUser({
                 firstName: values.firstName || '',

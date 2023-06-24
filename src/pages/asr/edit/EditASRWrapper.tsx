@@ -28,6 +28,7 @@ import { setItems } from 'src/redux/slices/productGroupSlice'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {}
@@ -76,6 +77,7 @@ const EditASRWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         const asrDetails = values.asrDetails.map((ele: any) => {
             const { _id, ...rest } = ele // use object destructuring to remove the _id property
             return rest // return the new object without the _id property

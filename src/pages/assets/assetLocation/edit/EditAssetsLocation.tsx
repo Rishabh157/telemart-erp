@@ -18,6 +18,8 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditAssetsLocatonWrapper'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {
@@ -37,6 +39,11 @@ const EditAsstesLocation = ({ formikProps, apiStatus }: Props) => {
             label: 'Update ',
         },
     ]
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -82,7 +89,7 @@ const EditAsstesLocation = ({ formikProps, apiStatus }: Props) => {
                                 label="Asset Location"
                                 placeholder="Asset Location"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'locationName',
                                         e.target.value
                                     )

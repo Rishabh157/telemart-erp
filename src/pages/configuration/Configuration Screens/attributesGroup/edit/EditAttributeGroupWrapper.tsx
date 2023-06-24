@@ -43,7 +43,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
         isFetching: attrIsFetching,
     } = useGetAllAttributesQuery(userData?.companyId)
 
-    console.log(attributeData)
+    
 
     const [EditAttributeGroups] = useUpdateattributeGroupMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
@@ -73,6 +73,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             EditAttributeGroups({
                 body: {

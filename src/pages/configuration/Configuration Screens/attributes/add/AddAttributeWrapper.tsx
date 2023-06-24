@@ -6,8 +6,9 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddAttributesMutation } from 'src/services/AttributeService'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -18,6 +19,7 @@ export type FormInitialValues = {
 const AddAttributeWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addAttribute] = useAddAttributesMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -34,6 +36,7 @@ const AddAttributeWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addAttribute({
                 attributeName: values.attributeName,

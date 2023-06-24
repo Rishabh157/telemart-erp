@@ -7,6 +7,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddAttributeGroupWrapper'
 import ATMTransferList from 'src/components/UI/atoms/ATMTransferList/ATMTransferList'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -49,6 +51,12 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
             setFieldValue('attributes', newValue),
         leftSideTitle: 'All Atrributes',
         rightSideTitle: 'Attributes to add',
+    }
+
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
     }
 
     return (
@@ -94,7 +102,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                                 label="Group Name"
                                 placeholder="Group Name"
                                 onChange={(e) =>
-                                    setFieldValue('group_name', e.target.value)
+                                    handleSetFieldValue('group_name', e.target.value)
                                 }
                             />
                         </div>

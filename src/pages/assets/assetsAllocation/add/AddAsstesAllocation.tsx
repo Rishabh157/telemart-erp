@@ -25,6 +25,11 @@ const AddAsstesAllocation = () => {
             label: 'Add ',
         },
     ]
+    // const dispatch = useDispatch()
+    // const handleSetFieldValue = (name: string, value: string) => {
+    //     setFieldValue(name, value)
+    //     dispatch(setFieldCustomized(true))
+    // }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -68,7 +73,8 @@ const AddAsstesAllocation = () => {
                                 value={''}
                                 label="Name"
                                 placeholder="Name"
-                                onChange={() => {}}
+                                onChange={()=>{}}
+                                // onChange={() =>handleSetFieldValue("","")}
                             />
                         </div>
                     </div>
