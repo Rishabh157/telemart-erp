@@ -81,7 +81,7 @@ const AddCompetitorWrapper = (props: Props) => {
         websiteLink: '',
         youtubeLink: '',
         whatsappNumber: '',
-        schemePrice: '0',
+        schemePrice: '',
         channelNameId: '',
         startTime: '',
         endTime: '',

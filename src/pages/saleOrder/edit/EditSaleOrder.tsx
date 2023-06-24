@@ -55,7 +55,6 @@ const EditSaleOrder = ({
     const dispatch = useDispatch<AppDispatch>()
     const [dealerId, setDealerId] = useState('')
     const [productGroup, setProductGroup] = useState('')
-    const [price, setPrice] = useState('')
 
     const dealerWarehouse: any = useSelector(
         (state: RootState) => state.warehouse
@@ -219,7 +218,6 @@ const EditSaleOrder = ({
                                                                 ''
                                                             )
                                                             setProductGroup(e)
-                                                            setPrice('')
                                                         }}
                                                         selectLabel=" Select Product Group"
                                                         options={
@@ -266,10 +264,6 @@ const EditSaleOrder = ({
                                                             handleSetFieldValue(
                                                                 `productSalesOrder.quantity`,
                                                                 e.target.value
-                                                            )
-                                                            handleSetFieldValue(
-                                                                `productSalesOrder.rate`,
-                                                                price
                                                             )
                                                         }}
                                                     />

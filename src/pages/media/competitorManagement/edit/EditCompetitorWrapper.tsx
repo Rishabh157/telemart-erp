@@ -90,7 +90,7 @@ const EditCompetitorWrapper = (props: Props) => {
         productName: selectedItem?.productName || '',
         websiteLink: selectedItem?.websiteLink || '',
         youtubeLink: selectedItem?.youtubeLink || '',
-        schemePrice: selectedItem?.schemePrice || '0',
+        schemePrice: selectedItem?.schemePrice || '',
         whatsappNumber: selectedItem?.whatsappNumber || '',
         channelNameId: selectedItem?.channelNameId || '',
         startTime: selectedItem?.startTime || '',

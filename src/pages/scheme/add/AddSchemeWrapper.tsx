@@ -63,9 +63,9 @@ const steps = [
             schemeName: string().required('Scheme Name is required'),
             schemePrice: string().required('Required!'),
             dimension: object().shape({
-                height: string().required('Height is required'),
-                width: string().required('Width is required'),
-                depth: string().required('Depth is required'),
+                height: string().required('required'),
+                width: string().required('required'),
+                depth: string().required('required'),
             }),
             weight: string()
                 .min(0, 'Weight must be positive')
@@ -79,7 +79,9 @@ const steps = [
             schemeDescription: string().required(
                 'scheme description is required'
             ),
-            commission: string().required('Commission is required'),
+            commission: number()
+                .required('Commission is required')
+                .min(1, 'Commission is required'),
         }),
     },
 

@@ -64,7 +64,7 @@ const StepEditComapnyDetails = ({
 
                         case 'select':
                             return (
-                                <div className="-mt-2">
+                                <div className="mt-0">
                                     <ATMSelect
                                         key={name}
                                         name={name}

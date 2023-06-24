@@ -138,7 +138,7 @@ const StepAddAddress = ({
 
                                     case 'select':
                                         return (
-                                            <div key={name} className="-mt-2">
+                                            <div key={name} className="mt-0">
                                                 <ATMSelect
                                                     label={label}
                                                     name={name}
