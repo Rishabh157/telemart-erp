@@ -35,7 +35,7 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
     return (
         <MainLayout>
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[55px]">
+            <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Dealers </ATMPageHeading>
                 <button
                     onClick={() => {
@@ -81,7 +81,7 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </div>
 
                 {/* Pagination */}
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}

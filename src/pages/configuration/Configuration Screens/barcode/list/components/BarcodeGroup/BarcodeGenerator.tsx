@@ -36,7 +36,7 @@ function AllBarcodes() {
 
     return (
         <div>
-            <div className="flex justify-between items-center h-[55px]">
+            <div className="flex justify-between items-center h-[45px]">
                 {/* <ATMPageHeading> Barcode </ATMPageHeading> */}
                 <button
                     onClick={() => {

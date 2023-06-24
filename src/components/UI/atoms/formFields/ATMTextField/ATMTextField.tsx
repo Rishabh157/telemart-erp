@@ -21,6 +21,8 @@ export type ATMTextFieldPropTypes = {
     InfoChildren?: React.ReactNode
     InfoTitle?: string
     isPassWordVisible?: boolean
+    LabelDirection?: 'horizontal' | 'vertical'
+    classDirection?: string
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
 const ATMTextField = ({
@@ -28,7 +30,7 @@ const ATMTextField = ({
     value,
     onChange,
     label,
-    className = `shadow bg-white rounded ${label && 'mt-2'}`,
+    className = `shadow bg-white rounded ${label && 'mt-2'} `,
     required,
     onBlur,
     autoFocus,
@@ -36,47 +38,68 @@ const ATMTextField = ({
     size = 'small',
     type = 'text',
     isSubmitting = true,
-    extraClassField = '',
+    extraClassField = 'w-full',
     disabled = false,
     isInfo = false,
     InfoChildren = null,
     InfoTitle = 'Info',
     labelClass = 'font-medium',
+    LabelDirection = 'vertical',
+    classDirection = 'grid grid-cols-12 ',
     ...rest
 }: ATMTextFieldPropTypes) => {
     const [visibility, setVisibility] = useState(type)
     return (
         <div className={`relative mt-4 ${extraClassField}`}>
-            <div className="flex gap-1">
-                {label && (
-                    <label className={`text-slate-700 ${labelClass}`}>
-                        {label}{' '}
-                        {required && <span className="text-red-500"> * </span>}{' '}
-                    </label>
-                )}
-                {isInfo && (
-                    <MouseOverPopover
-                        title={InfoTitle}
-                        children={InfoChildren}
-                    />
-                )}
+            <div
+                className={`  ${
+                    LabelDirection === 'horizontal'
+                        ? `  gap-2 w-full  ${classDirection}`
+                        : ' '
+                }`}
+            >
+                <div
+                    className={`flex gap-1 ${
+                        LabelDirection === 'horizontal'
+                            ? `  col-span-4 w-full h-full flex items-center `
+                            : ' '
+                    }`}
+                >
+                    {label && (
+                        <label className={`text-slate-700 ${labelClass}`}>
+                            {label}{' '}
+                            {required && (
+                                <span className="text-red-500"> * </span>
+                            )}{' '}
+                        </label>
+                    )}
+                    {isInfo && (
+                        <MouseOverPopover
+                            title={InfoTitle}
+                            children={InfoChildren}
+                        />
+                    )}
+                </div>
+
+                <input
+                    name={name}
+                    type={visibility}
+                    value={value}
+                    disabled={disabled}
+                    onChange={(e) => {
+                        onChange(e)
+                    }}
+                    className={`${getInputHeight(
+                        size
+                    )}  w-full px-2 text-slate-700 border ${
+                        disabled ? 'bg-blue-100' : ''
+                    } border-slate-400 outline-blue-400   ${
+                        LabelDirection === 'horizontal' ? 'col-span-8' : ''
+                    } ${className}`}
+                    {...rest}
+                    onBlur={onBlur}
+                />
             </div>
-            <input
-                name={name}
-                type={visibility}
-                value={value}
-                disabled={disabled}
-                onChange={(e) => {
-                    onChange(e)
-                }}
-                className={`${getInputHeight(
-                    size
-                )} w-full px-2 text-slate-700 border ${
-                    disabled ? 'bg-blue-100' : ''
-                } border-slate-400 outline-blue-400  ${className}`}
-                {...rest}
-                onBlur={onBlur}
-            />
             {type === 'password' ? (
                 <div className="absolute top-9 right-2">
                     {visibility === 'text' ? (

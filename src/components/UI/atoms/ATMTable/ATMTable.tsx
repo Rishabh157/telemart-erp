@@ -41,7 +41,7 @@ const ATMTable = <T extends {}>({
     rowExtraClasses,
     isLoading = false,
     setShowDropdown,
-    headerClassName = ' py-2 px-2',
+    headerClassName = ' py-1 px-2',
     rowClassName = 'px-2 bg-white py-1',
     noDataFoundText = `${NOT_DATA_FOUND}`,
     noDataFoundClass = 'text-slate-500',
@@ -174,7 +174,7 @@ const ATMTable = <T extends {}>({
                 ))
             ) : (
                 <div
-                    className={`w-full flex justify-center font-semibold ${noDataFoundClass}`}
+                    className={`w-full flex justify-center items-center h-[60vh] font-semibold ${noDataFoundClass}`}
                 >
                     {noDataFoundText}
                 </div>

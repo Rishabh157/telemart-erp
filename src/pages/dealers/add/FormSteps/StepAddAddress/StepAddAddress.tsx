@@ -120,6 +120,7 @@ const StepAddAddress = ({
                                                 placeholder={placeholder}
                                                 className="shadow bg-white rounded"
                                                 isSubmitting={isSubmitting}
+                                               
                                             />
                                         )
                                     case 'select':

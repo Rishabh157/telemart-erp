@@ -191,7 +191,7 @@ const InquiryListingWrapper = () => {
     return (
         <SideNavLayout>
             <div className="px-4 h-[calc(100vh-55px)] ">
-                <div className="flex justify-between items-center h-[55px]">
+                <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Inquiry</ATMPageHeading>
                 </div>
 
@@ -228,7 +228,7 @@ const InquiryListingWrapper = () => {
                         />
                     </div>
 
-                    <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                    <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                         <ATMPagination
                             page={page}
                             rowCount={totalItems}
