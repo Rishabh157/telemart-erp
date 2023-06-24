@@ -1,15 +1,9 @@
 import React, { useEffect } from 'react'
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { InventoryListResponse } from 'src/models/Inventory.model'
-// import {
-//   setIsTableLoading,
-//   setItems,
-//   setTotalItems,
-// } from "src/redux/slices/vendorSlice";
-// import { AppDispatch, RootState } from "src/redux/store";
+
 import InventoryListing from './InventoryListing'
 import { useGetPaginationInventoriesQuery } from 'src/services/InventoriesService'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,7 +14,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/inventorySlice'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const columns: columnTypes[] = [
     {

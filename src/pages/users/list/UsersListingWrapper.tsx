@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -10,7 +10,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/NewUserSlice'
 import UsersListing from './UsersListing'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import {
     getDepartmentLabel,
     getUserRoleLabel,
@@ -20,7 +19,7 @@ const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { items, page, rowsPerPage, searchValue } = userState
-    const [showDropdown, setShowDropdown] = useState(false)
+    // const [showDropdown, setShowDropdown] = useState(false)
 
     const dispatch = useDispatch<AppDispatch>()
     const { data, isFetching, isLoading } = useGetNewUsersQuery({
@@ -122,7 +121,7 @@ const UsersListingWrapper = () => {
             <UsersListing
                 columns={columns}
                 rows={items}
-                setShowDropdown={setShowDropdown}
+                setShowDropdown={() => {}}
             />
         </SideNavLayout>
     )

@@ -1,7 +1,6 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
 import { IconType } from 'react-icons'
-import { GoPrimitiveDot } from 'react-icons/go'
 
 type Props = {
     vendorData: any
@@ -37,7 +36,11 @@ const VendorInfoCard = ({ vendorData, actionIcons }: Props) => {
                     }`}
                 >
                     {' '}
-                    <GoPrimitiveDot className="text-lg" />{' '}
+                    {vendorData.isActive ? (
+                        <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                    ) : (
+                        <span className="inline-block w-2 h-2 bg-red-500 rounded-full"></span>
+                    )}
                     {vendorData.isActive ? 'Active' : 'Deactive'}{' '}
                 </span>
             </div>

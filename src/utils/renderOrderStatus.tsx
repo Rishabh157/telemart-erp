@@ -1,5 +1,3 @@
-import { GoPrimitiveDot } from 'react-icons/go'
-
 export const orderStatusKey = {
     NOTASSIGNED: {
         bgColor: 'bg-yellow-100',
@@ -22,7 +20,6 @@ export const renderorderStatus = (status: number) => {
         <span
             className={`px-3 py-1 rounded-full text-[12px] inline-flex gap-2 items-center  ${bgColor} ${textColor}`}
         >
-            <GoPrimitiveDot className=" text-[17px] " />
             {label}
         </span>
     )
