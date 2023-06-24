@@ -126,7 +126,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
             <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
 
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[55px]">
+            <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Inventories </ATMPageHeading>
                 {barcode && (
                     <button

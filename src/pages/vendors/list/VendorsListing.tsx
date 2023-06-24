@@ -31,7 +31,7 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
     return (
         <div className="px-4 h-[calc(100vh-55px)]">
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[55px]">
+            <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Vendors </ATMPageHeading>
                 <button
                     onClick={() => {
@@ -46,7 +46,7 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
-                <div id="table-header">
+             
                     <ATMTableHeader
                         searchValue={searchValue}
                         page={page}
@@ -62,7 +62,6 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
                         isFilter
                         onFilterClick={() => setIsFilterOpen(true)}
                     />
-                </div>
 
                 {/* Table */}
                 <div className={`grow overflow-auto `}>
@@ -83,7 +82,7 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </div>
 
                 {/* Pagination */}
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}
