@@ -5,9 +5,10 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import AddProductGroup from './AddProductGroup'
 import { useNavigate } from 'react-router-dom'
 import { useAddProductGroupMutation } from 'src/services/ProductGroupService'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     groupName: string
@@ -24,6 +25,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [addProductGroup] = useAddProductGroupMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -51,6 +53,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
 
         setTimeout(() => {
             addProductGroup({

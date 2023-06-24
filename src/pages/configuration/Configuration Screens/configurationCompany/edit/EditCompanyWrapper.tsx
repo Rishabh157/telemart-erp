@@ -16,7 +16,7 @@ import { setSelectedCompany } from 'src/redux/slices/companySlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { showToast, validationofGst } from 'src/utils'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { setFieldCustomized, setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -129,8 +129,10 @@ const EditCompanyWrapper = () => {
 
     // On Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
+      
         if (activeStep === steps.length - 1) {
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 const bankDetail = values.bankDetails.map((ele) => {
                     const { _id, ...rest } = ele // use object destructuring to remove the _id property

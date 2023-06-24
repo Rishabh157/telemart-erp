@@ -15,6 +15,7 @@ import {
 import { setSelectedAttGroup } from 'src/redux/slices/attributesGroupSlice'
 import { useGetAllAttributesQuery } from 'src/services/AttributeService'
 import { setAllItems } from 'src/redux/slices/attributesSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 

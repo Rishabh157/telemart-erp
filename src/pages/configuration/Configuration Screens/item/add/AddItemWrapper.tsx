@@ -6,8 +6,9 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddItemsMutation } from 'src/services/ItemService'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -19,6 +20,7 @@ export type FormInitialValues = {
 
 const AddItemWrapper = (props: Props) => {
     const navigate = useNavigate()
+    const dispatch =useDispatch()
     const [addItem] = useAddItemsMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -38,6 +40,7 @@ const AddItemWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
+        dispatch(setFieldCustomized(true))
         addItem({
             itemCode: values.itemCode,
             itemName: values.itemName,

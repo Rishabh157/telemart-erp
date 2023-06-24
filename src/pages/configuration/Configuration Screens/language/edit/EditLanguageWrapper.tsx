@@ -13,6 +13,7 @@ import {
     useUpdateLanguageMutation,
 } from 'src/services/LanguageService'
 import { setSelectedItem } from 'src/redux/slices/languageSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -46,6 +47,8 @@ const EditLanguageWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         editLanguage({
             body: {
                 languageName: values.languageName,

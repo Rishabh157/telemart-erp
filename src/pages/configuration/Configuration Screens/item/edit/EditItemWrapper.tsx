@@ -13,6 +13,7 @@ import {
     useUpdateItemsMutation,
 } from 'src/services/ItemService'
 import { setSelectedItem } from 'src/redux/slices/itemSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -50,6 +51,7 @@ const EditItemWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         EditItems({
             body: {
                 itemCode: values.itemCode,

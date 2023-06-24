@@ -6,10 +6,11 @@ import { FormInitialValues } from '../../AddCompanyWrapper'
 import { MdDeleteOutline } from 'react-icons/md'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
 import { HiPlus } from 'react-icons/hi'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type FieldType = Field<'accountTypeOptions'>
 
@@ -30,6 +31,11 @@ const StepAddBankDetails = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="">
@@ -127,13 +133,13 @@ const StepAddBankDetails = ({
                                                                                                         )
                                                                                                     )
                                                                                                 ) {
-                                                                                                    setFieldValue(
+                                                                                                    handleSetFieldValue(
                                                                                                         `bankDetails[${bankInformationIndex}].${name}`,
                                                                                                         newValue
                                                                                                     )
                                                                                                 }
                                                                                             } else {
-                                                                                                setFieldValue(
+                                                                                                handleSetFieldValue(
                                                                                                     `bankDetails[${bankInformationIndex}].${name}`,
                                                                                                     e
                                                                                                         .target
@@ -170,7 +176,7 @@ const StepAddBankDetails = ({
                                                                                             onChange={(
                                                                                                 e
                                                                                             ) => {
-                                                                                                setFieldValue(
+                                                                                                handleSetFieldValue(
                                                                                                     `bankDetails[${bankInformationIndex}].${name}`,
                                                                                                     e
                                                                                                         .target
@@ -209,7 +215,7 @@ const StepAddBankDetails = ({
                                                                                         onSelect={(
                                                                                             newFile
                                                                                         ) =>
-                                                                                            setFieldValue(
+                                                                                            handleSetFieldValue(
                                                                                                 `bankDetails[${bankInformationIndex}].${name}`,
                                                                                                 newFile
                                                                                             )

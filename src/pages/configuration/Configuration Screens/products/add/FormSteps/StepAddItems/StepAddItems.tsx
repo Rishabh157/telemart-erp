@@ -7,8 +7,9 @@ import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { DropdownOptions } from './StepAddItemsWrapper'
 import { HiPlus } from 'react-icons/hi'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -21,6 +22,12 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
+
 
     return (
         <div className="py-6 ">
@@ -63,7 +70,7 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
                                             name={`items[${itemIndex}].itemId`}
                                             value={itemId}
                                             onChange={(e) => {
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     `items[${itemIndex}].itemId`,
                                                     e
                                                 )
@@ -90,7 +97,7 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
                                                 if (
                                                     !isNaN(Number(inputValue))
                                                 ) {
-                                                    setFieldValue(
+                                                    handleSetFieldValue(
                                                         `items[${itemIndex}].itemQuantity`,
                                                         e.target.value
                                                     )

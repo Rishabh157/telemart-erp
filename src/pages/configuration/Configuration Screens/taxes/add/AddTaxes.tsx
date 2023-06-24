@@ -7,6 +7,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddTaxesWrapper'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -26,6 +28,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddTaxes = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <MainLayout>
@@ -70,7 +77,7 @@ const AddTaxes = ({ formikProps, apiStatus }: Props) => {
                                 label="Tax Name"
                                 placeholder="Tax Name"
                                 onChange={(e) =>
-                                    setFieldValue('taxName', e.target.value)
+                                    handleSetFieldValue('taxName', e.target.value)
                                 }
                             />
                         </div>

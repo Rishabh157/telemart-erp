@@ -7,6 +7,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddItemWrapper'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -25,7 +27,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddItem = ({ formikProps }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
@@ -66,7 +72,7 @@ const AddItem = ({ formikProps }: Props) => {
                                 label="Item Code"
                                 placeholder="Item Code"
                                 onChange={(e) =>
-                                    setFieldValue('itemCode', e.target.value)
+                                    handleSetFieldValue('itemCode', e.target.value)
                                 }
                             />
                             {/* itemName */}
@@ -76,7 +82,7 @@ const AddItem = ({ formikProps }: Props) => {
                                 label="Item Name"
                                 placeholder="Item Name"
                                 onChange={(e) =>
-                                    setFieldValue('itemName', e.target.value)
+                                    handleSetFieldValue('itemName', e.target.value)
                                 }
                             />
                             {/* itemWeight */}
@@ -88,7 +94,7 @@ const AddItem = ({ formikProps }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('itemWeight', inputValue)
+                                        handleSetFieldValue('itemWeight', inputValue)
                                     }
                                 }}
                             />

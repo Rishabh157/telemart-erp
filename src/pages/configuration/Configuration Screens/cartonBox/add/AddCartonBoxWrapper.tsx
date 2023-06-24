@@ -6,8 +6,9 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddCartonBoxMutation } from 'src/services/CartonBoxService'
 import { showToast } from 'src/utils'
 import { RootState } from 'src/redux/store'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -24,6 +25,7 @@ export type FormInitialValues = {
 
 const AddCartonBoxWrapper = (props: Props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [addCartonBox] = useAddCartonBoxMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -65,6 +67,7 @@ const AddCartonBoxWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         addCartonBox({
             boxName: values.boxName,
             innerItemCount: values.innerItemsCount,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { IoNotifications } from 'react-icons/io5'
 import UserProfileCard from '../UserProfileCard/UserProfileCard'
@@ -10,16 +10,11 @@ import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
 import { setUserData } from 'src/redux/slices/authSlice'
 import ATMSwitchButton from '../atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 
-interface Props {
-    setBgColor?: any
-}
-
-const Header = ({ setBgColor }: Props) => {
+const Header = () => {
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
     const [isShowNotification, setIsShowNotification] = useState(false)
-    const { userData } = useSelector(
-        (state: RootState) => state?.auth
-    )
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
         useState(true)
     const [company, setCompany] = useState(userData?.companyId)

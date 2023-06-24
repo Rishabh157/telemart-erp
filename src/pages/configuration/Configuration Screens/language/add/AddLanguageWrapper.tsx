@@ -5,9 +5,10 @@ import AddLanguage from './AddLanguage'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddLanguageMutation } from 'src/services/LanguageService'
 import { showToast } from 'src/utils'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -17,6 +18,7 @@ export type FormInitialValues = {
 
 const AddLanguageWrapper = (props: Props) => {
     const navigate = useNavigate()
+    const dispatch=useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [addLanguage] = useAddLanguageMutation()
@@ -32,6 +34,8 @@ const AddLanguageWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         addLanguage({
             languageName: values.languageName,
             companyId: userData?.companyId || '',

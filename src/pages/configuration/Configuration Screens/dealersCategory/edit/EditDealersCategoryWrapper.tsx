@@ -13,6 +13,7 @@ import {
     useUpdateDealerCategoryMutation,
 } from 'src/services/DealerCategoryService'
 import { setSelectedItem } from 'src/redux/slices/dealersCategorySlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -55,6 +56,8 @@ const EditDealersCategoryWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         editDealerscategory({
             body: {
                 dealersCategory: values.dealersCategory,

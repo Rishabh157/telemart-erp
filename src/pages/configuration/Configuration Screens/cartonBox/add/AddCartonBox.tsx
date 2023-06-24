@@ -6,6 +6,8 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddCartonBoxWrapper'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -25,7 +27,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className=" h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
@@ -69,7 +75,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                 label="Box Name"
                                 placeholder="Box Name"
                                 onChange={(e) =>
-                                    setFieldValue('boxName', e.target.value)
+                                    handleSetFieldValue('boxName', e.target.value)
                                 }
                             />
 
@@ -86,7 +92,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'innerItemsCount',
                                             inputValue
                                         )
@@ -110,7 +116,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                         onChange={(e) => {
                                             const inputValue = e.target.value
                                             if (!isNaN(Number(inputValue))) {
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     'dimensions.height',
                                                     inputValue
                                                 )
@@ -131,7 +137,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                         onChange={(e) => {
                                             const inputValue = e.target.value
                                             if (!isNaN(Number(inputValue))) {
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     'dimensions.width',
                                                     inputValue
                                                 )
@@ -152,7 +158,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                         onChange={(e) => {
                                             const inputValue = e.target.value
                                             if (!isNaN(Number(inputValue))) {
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     'dimensions.depth',
                                                     inputValue
                                                 )
@@ -177,7 +183,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('boxWeight', inputValue)
+                                        handleSetFieldValue('boxWeight', inputValue)
                                     }
                                 }}
                             />

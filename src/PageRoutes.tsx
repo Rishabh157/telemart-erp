@@ -211,6 +211,7 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData))
+ 
 
     if (!accessToken && window.location.pathname !== '/') {
         return (

@@ -9,7 +9,7 @@ import { useAddCompanyMutation } from 'src/services/CompanyServices'
 import { useNavigate } from 'react-router-dom'
 import { showToast, validationofGst } from 'src/utils'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { setFieldCustomized, setFormSubmitting } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from 'src/redux/store'
 
@@ -122,7 +122,9 @@ const AddCompanyWrapper = () => {
 
     // On Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
+
         if (activeStep === steps.length - 1) {
+        dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 company({
                     companyName: values.companyName,

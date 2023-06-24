@@ -12,6 +12,7 @@ import {
     useUpdateProductGroupMutation,
 } from 'src/services/ProductGroupService'
 import EditProductGroupListing from './EditProductGroupListing'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -66,6 +67,8 @@ const EditProductGroupWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         setTimeout(() => {
             EditProductGroup({
                 body: {

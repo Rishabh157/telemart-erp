@@ -6,6 +6,8 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditProductCategoryWrapper'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -25,6 +27,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditProductCategoryListing = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="">
@@ -69,7 +76,7 @@ const EditProductCategoryListing = ({ formikProps, apiStatus }: Props) => {
                                 label="Category Code"
                                 placeholder="Category Code"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'categoryCode',
                                         e.target.value
                                     )
@@ -83,7 +90,7 @@ const EditProductCategoryListing = ({ formikProps, apiStatus }: Props) => {
                                 label="Category Name"
                                 placeholder="Category Name"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'categoryName',
                                         e.target.value
                                     )

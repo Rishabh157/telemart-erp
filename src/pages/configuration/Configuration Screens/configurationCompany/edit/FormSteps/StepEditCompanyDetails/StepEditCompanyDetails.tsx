@@ -2,8 +2,9 @@ import React from 'react'
 import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditCompanyWrapper'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 // import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 
 type Props = {
@@ -15,6 +16,11 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="py-9 px-7">
@@ -24,7 +30,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
                     name="companyName"
                     value={values.companyName}
                     onChange={(e) => {
-                        setFieldValue('companyName', e.target.value)
+                        handleSetFieldValue('companyName', e.target.value)
                     }}
                     label="Company Name"
                     placeholder="Company Name"
@@ -37,7 +43,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
                     name="websiteUrl"
                     value={values.websiteUrl}
                     onChange={(e) => {
-                        setFieldValue('websiteUrl', e.target.value)
+                        handleSetFieldValue('websiteUrl', e.target.value)
                     }}
                     label="Website URL"
                     placeholder="Website URL"
@@ -50,7 +56,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
                     name="gstNo"
                     value={values.gstNo}
                     onChange={(e) => {
-                        setFieldValue('gstNo', e.target.value)
+                        handleSetFieldValue('gstNo', e.target.value)
                     }}
                     label="GST NO."
                     placeholder="GST NO."
@@ -63,7 +69,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
                     name="address"
                     value={values.address}
                     onChange={(e) => {
-                        setFieldValue('address', e.target.value)
+                        handleSetFieldValue('address', e.target.value)
                     }}
                     label="Address"
                     placeholder="Address"
@@ -78,7 +84,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
                     onChange={(e) => {
                         const inputValue = e.target.value
                         if (!isNaN(Number(inputValue))) {
-                            setFieldValue('phoneNo', inputValue)
+                            handleSetFieldValue('phoneNo', inputValue)
                         }
                     }}
                     label="Phone No."
