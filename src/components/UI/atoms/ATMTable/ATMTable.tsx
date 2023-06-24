@@ -57,7 +57,7 @@ const ATMTable = <T extends {}>({
         >
             {/* Columns */}
             <div
-                className={`flex items-center ${headerClassName} border-b sticky top-0 border-slate-300 bg-slate-50 z-50`}
+                className={`flex items-center ${headerClassName} border-b sticky top-0 border-slate-300 bg-slate-50`}
             >
                 {/* Checkbox */}
                 {rows.length && isCheckbox ? (
@@ -65,7 +65,7 @@ const ATMTable = <T extends {}>({
                         <input
                             type="checkbox"
                             className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 "
-                            checked={selectedRows.length === rows.length}
+                            checked={selectedRows.length === rows.length} 
                             onChange={(e) => {
                                 e.stopPropagation()
                                 selectedRows.length === rows.length

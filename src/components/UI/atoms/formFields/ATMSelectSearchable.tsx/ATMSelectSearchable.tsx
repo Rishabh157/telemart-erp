@@ -26,6 +26,11 @@ type Props = {
     labelClass?: string
     selectClass?: string
     isDisabled?: boolean
+    LabelDirection?: 'horizontal' | 'vertical'
+    classDirection?: string
+    labelSpan?: string
+    inputSpan?: string
+    componentClass?: string
 }
 
 const ATMSelectSearchable = ({
@@ -46,6 +51,11 @@ const ATMSelectSearchable = ({
     isLoading = false,
     selectClass = 'mt-0',
     isDisabled = false,
+    LabelDirection = 'vertical',
+    classDirection = 'grid grid-cols-3',
+    labelSpan = 'col-span-1',
+    inputSpan = 'col-span-2',
+    componentClass = '  mt-6',
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -148,39 +158,63 @@ const ATMSelectSearchable = ({
         }
     }
     return (
-        <div className="relative mt-6">
-            {label && (
-                <label className={`text-slate-700  ${labelClass}`}>
-                    {label}
-                    {required && <span className="text-red-500"> * </span>}
-                </label>
-            )}
-
-            <Select
-                className={twMerge(
-                    `border rounded border-slate-400 ${
-                        isMulti ? 'overflow-scroll overflow-x-auto' : ''
-                    } min-h-fit max-h-24`,
-                    `${selectClass}`
-                )}
-                name={name}
-                defaultValue={selectOptions?.find(
-                    (option) => option.value === defaultValue
-                )}
-                value={handleValue()}
-                onChange={(selectedOption) => handleOnChange(selectedOption)}
-                options={selectOptions}
-                isSearchable={isSearchable}
-                styles={selectStyles}
-                isMulti={isMulti}
-                isDisabled={isDisabled}
-                isClearable
-                isLoading={isLoading}
-                isOptionDisabled={(options) => (options.value as string) === ''}
-                placeholder={`${selectLabel}`}
-                // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
-            />
-
+        <div className={`${componentClass} relative`}>
+            <div
+                className={`  ${
+                    LabelDirection === 'horizontal'
+                        ? `  gap-2 w-full  ${classDirection}`
+                        : ' '
+                }`}
+            >
+                <div
+                    className={`flex gap-1 ${
+                        LabelDirection === 'horizontal'
+                            ? `  ${labelSpan} w-full h-full flex items-center `
+                            : ' '
+                    }`}
+                >
+                    {label && (
+                        <label className={`text-slate-700  ${labelClass}`}>
+                            {label}
+                            {required && (
+                                <span className="text-red-500"> * </span>
+                            )}
+                        </label>
+                    )}
+                </div>
+                <Select
+                    className={twMerge(
+                        `border rounded border-slate-400 ${
+                            LabelDirection === 'horizontal'
+                                ? `${inputSpan}`
+                                : ''
+                        }  ${
+                            isMulti ? 'overflow-scroll overflow-x-auto' : ''
+                        } min-h-fit max-h-24`,
+                        `${selectClass}`
+                    )}
+                    name={name}
+                    defaultValue={selectOptions?.find(
+                        (option) => option.value === defaultValue
+                    )}
+                    value={handleValue()}
+                    onChange={(selectedOption) =>
+                        handleOnChange(selectedOption)
+                    }
+                    options={selectOptions}
+                    isSearchable={isSearchable}
+                    styles={selectStyles}
+                    isMulti={isMulti}
+                    isDisabled={isDisabled}
+                    isClearable
+                    isLoading={isLoading}
+                    isOptionDisabled={(options) =>
+                        (options.value as string) === ''
+                    }
+                    placeholder={`${selectLabel}`}
+                    // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
+                />
+            </div>
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
