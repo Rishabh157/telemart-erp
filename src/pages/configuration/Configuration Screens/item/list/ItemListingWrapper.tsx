@@ -1,5 +1,20 @@
+/// ==============================================
+// Filename:ItemListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ItemListResponse } from 'src/models/Item.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
@@ -9,17 +24,18 @@ import {
     useDeleteItemsMutation,
     useGetItemsQuery,
 } from 'src/services/ItemService'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/itemSlice'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
 
 const ItemListingWrapper = () => {
     const navigate = useNavigate()

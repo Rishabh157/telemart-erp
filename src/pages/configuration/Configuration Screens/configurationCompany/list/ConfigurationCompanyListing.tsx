@@ -1,6 +1,19 @@
+
+/// ==============================================
+// Filename:ConfigurationCompanyListing.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,8 +22,12 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import { setSearchValue } from 'src/redux/slices/companySlice'
+
+// |-- Redux --|
 import { setRowsPerPage, setPage } from 'src/redux/slices/companySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]

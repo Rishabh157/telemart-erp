@@ -1,23 +1,40 @@
+
+/// ==============================================
+// Filename:ConfigurationCompanyListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ConfigurationCompanyListResponse } from 'src/models/ConfigurationCompany.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import ConfigurationCompanyListing from './ConfigurationCompanyListing'
-import { useDispatch, useSelector } from 'react-redux'
 import {
     useDeleteCompanyMutation,
     useGetCompaniesQuery,
 } from 'src/services/CompanyServices'
-import { AppDispatch, RootState } from 'src/redux/store'
+
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/companySlice'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const ConfigurationCompanyListingWrapper = () => {
     const navigate = useNavigate()

@@ -1,14 +1,29 @@
+/// ==============================================
+// Filename:AddDealerCategoryWrapper.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { number, object, string } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddDealersCategory from './AddDealersCategory'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddDealerCategoryMutation } from 'src/services/DealerCategoryService'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

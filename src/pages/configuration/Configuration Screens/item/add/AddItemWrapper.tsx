@@ -1,14 +1,30 @@
+/// ==============================================
+// Filename:AddItemWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddItem from './AddItem'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddItemsMutation } from 'src/services/ItemService'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
