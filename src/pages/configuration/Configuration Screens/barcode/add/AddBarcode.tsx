@@ -95,7 +95,10 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 label="Lot Number"
                                 placeholder="Lot Number"
                                 onChange={(e) =>
-                                    handleSetFieldValue('lotNumber', e.target.value)
+                                    handleSetFieldValue(
+                                        'lotNumber',
+                                        e.target.value
+                                    )
                                 }
                             />
                             {/* Product Group  */}
@@ -119,7 +122,10 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 label="Quantity"
                                 placeholder="Quantity"
                                 onChange={(e) =>
-                                    handleSetFieldValue('quantity', e.target.value)
+                                    handleSetFieldValue(
+                                        'quantity',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

@@ -8,12 +8,11 @@ export interface AuthStateType {
     deviceId: string
     userData: userData | null
     formSubmitting: boolean
-    customized: boolean,
-
+    customized: boolean
 }
 
 const initialState: AuthStateType = {
-    customized:false,
+    customized: false,
     accessToken: '',
     refreshToken: '',
     deviceId: '',
@@ -53,6 +52,6 @@ export const {
     setDeviceId,
     setUserData,
     setFormSubmitting,
-    setFieldCustomized
+    setFieldCustomized,
 } = authSlice.actions
 export default authSlice.reducer

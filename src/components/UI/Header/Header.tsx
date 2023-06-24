@@ -17,9 +17,7 @@ interface Props {
 const Header = ({ setBgColor }: Props) => {
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
     const [isShowNotification, setIsShowNotification] = useState(false)
-    const { userData } = useSelector(
-        (state: RootState) => state?.auth
-    )
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
         useState(true)
     const [company, setCompany] = useState(userData?.companyId)

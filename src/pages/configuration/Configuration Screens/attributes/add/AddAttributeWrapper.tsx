@@ -12,7 +12,7 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddAttribute from './AddAttribute'

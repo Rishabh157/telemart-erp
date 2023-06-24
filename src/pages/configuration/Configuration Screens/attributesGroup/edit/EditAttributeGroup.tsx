@@ -123,7 +123,10 @@ const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                                 label="Group Name"
                                 placeholder="Group Name"
                                 onChange={(e) =>
-                                    handleSetFieldValue('group_name', e.target.value)
+                                    handleSetFieldValue(
+                                        'group_name',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

@@ -92,7 +92,10 @@ const AddCbBarcode = ({ formikProps, apiStatus, cartonBoxOption }: Props) => {
                                 value={values.cartonBox}
                                 label="Carton Box"
                                 onChange={(e) =>
-                                    handleSetFieldValue('cartonBox', e.target.value)
+                                    handleSetFieldValue(
+                                        'cartonBox',
+                                        e.target.value
+                                    )
                                 }
                                 options={cartonBoxOption}
                             />
@@ -104,7 +107,10 @@ const AddCbBarcode = ({ formikProps, apiStatus, cartonBoxOption }: Props) => {
                                 label="Quantity"
                                 placeholder="Quantity"
                                 onChange={(e) =>
-                                    handleSetFieldValue('quantity', e.target.value)
+                                    handleSetFieldValue(
+                                        'quantity',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>
