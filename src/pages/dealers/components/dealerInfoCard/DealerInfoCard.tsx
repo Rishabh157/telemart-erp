@@ -1,7 +1,7 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
 import { IconType } from 'react-icons'
-import { GoPrimitiveDot } from 'react-icons/go'
+
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useChangeDealerStatusMutation } from 'src/services/DealerServices'
@@ -70,7 +70,11 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
                     }`}
                 >
                     {' '}
-                    <GoPrimitiveDot className="text-lg" />{' '}
+                    {selectedItem?.isActive ? (
+                        <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                    ) : (
+                        <span className="inline-block w-2 h-2 bg-red-500 rounded-full"></span>
+                    )}
                     {selectedItem?.isActive ? 'Active' : 'Deactive'}{' '}
                 </span>
             </div>
