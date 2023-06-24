@@ -5,8 +5,9 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from '../../EditWarehouseWrapper'
 import { FieldType } from './StepEditContactWrapper'
 import { HiPlus } from 'react-icons/hi'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -19,7 +20,11 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <FieldArray name="contact_informations">
@@ -100,7 +105,7 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                                                                                         onChange={(
                                                                                             e
                                                                                         ) => {
-                                                                                            setFieldValue(
+                                                                                            handleSetFieldValue(
                                                                                                 `contact_informations[${contactInformationIndex}].${name}`,
                                                                                                 e
                                                                                                     .target

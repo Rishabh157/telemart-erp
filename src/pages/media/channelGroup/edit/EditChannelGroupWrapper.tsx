@@ -14,6 +14,7 @@ import {
     useUpdateChannelGroupMutation,
 } from 'src/services/media/ChannelGroupServices'
 import { setSelectedItem } from 'src/redux/slices/media/channelGroupSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     groupName: string
@@ -49,6 +50,7 @@ const EditChannelGroupWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             EditChannelGroupApi({
                 body: {

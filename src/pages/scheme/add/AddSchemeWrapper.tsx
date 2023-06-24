@@ -14,7 +14,10 @@ import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useAddSchemeMutation } from 'src/services/SchemeService'
 import moment from 'moment'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 
@@ -190,6 +193,7 @@ const AddSchemeWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps?.length - 1) {
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 AddSchemes({
                     schemeCode: values.schemeCode,

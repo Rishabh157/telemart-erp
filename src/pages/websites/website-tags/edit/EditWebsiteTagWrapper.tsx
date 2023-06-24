@@ -18,6 +18,7 @@ import { setAllItems as setAllWebsitePage } from 'src/redux/slices/website/websi
 import { WebsiteListResponse } from 'src/models/website/Website.model'
 import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
 import { setSelectedTags } from 'src/redux/slices/website/websiteTagsSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -117,6 +118,7 @@ const EditWebsiteTagWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         //console.log(values)
         setTimeout(() => {
             updateWebsiteTags({

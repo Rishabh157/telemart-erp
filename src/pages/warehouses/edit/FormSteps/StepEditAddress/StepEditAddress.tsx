@@ -3,12 +3,13 @@ import React, { useState } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
 import { CircularProgress } from '@mui/material'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -51,7 +52,11 @@ const StepEditAddress = ({
     )
     const [imageApiStatus, setImageApiStatus] = useState(false)
     const [fileUploader] = useFileUploaderMutation()
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             {formFields?.map((formField, index) => {
@@ -113,7 +118,7 @@ const StepEditAddress = ({
                                                                 )
                                                             )
                                                         ) {
-                                                            setFieldValue(
+                                                            handleSetFieldValue(
                                                                 name,
                                                                 String(
                                                                     inputValue
@@ -121,7 +126,7 @@ const StepEditAddress = ({
                                                             )
                                                         }
                                                     } else {
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             name,
                                                             e.target.value
                                                         )
@@ -163,7 +168,7 @@ const StepEditAddress = ({
                                                                 setImageApiStatus(
                                                                     false
                                                                 )
-                                                                setFieldValue(
+                                                                handleSetFieldValue(
                                                                     name,
                                                                     res?.data
                                                                         ?.data
@@ -209,7 +214,10 @@ const StepEditAddress = ({
                                                             : values[name]
                                                     }
                                                     onChange={(e: any) => {
-                                                        setFieldValue(name, e)
+                                                        handleSetFieldValue(
+                                                            name,
+                                                            e
+                                                        )
                                                     }}
                                                     options={
                                                         dropdownOptions[

@@ -23,6 +23,7 @@ import { LanguageListResponse } from 'src/models'
 import { setSelectedItem } from 'src/redux/slices/media/tapeManagementSlice'
 import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
 import { Field } from 'src/models/FormField/FormField.model'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     tapeName: string
@@ -194,6 +195,8 @@ const EditTapeManagementWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         //console.log(values.artistId)
         let duration = `${values.hour}:${values.minute}:${values.second}`
         let newPhoneNo = values?.phone?.map((ele) => {

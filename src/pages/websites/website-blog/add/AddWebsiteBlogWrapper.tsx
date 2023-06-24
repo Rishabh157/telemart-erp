@@ -4,10 +4,11 @@ import { object, string } from 'yup'
 import AddWebsiteBlog from './AddWebsiteBlog'
 import { showToast } from 'src/utils'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useAddWebsiteBlogMutation } from 'src/services/websites/WebsiteBlogServices'
 import WebsiteLayout from '../../WebsiteLayout'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -22,6 +23,7 @@ export type FormInitialValues = {
 const AddWebsiteBlogWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const { state } = useLocation()
     const { siteId } = state
     //console.log(siteId)
@@ -49,6 +51,7 @@ const AddWebsiteBlogWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         //console.log(values)
         setTimeout(() => {
             addWebsiteBlog({

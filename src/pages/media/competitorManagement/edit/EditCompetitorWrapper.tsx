@@ -15,6 +15,7 @@ import MediaLayout from '../../MediaLayout'
 import { useGetPaginationchannelQuery } from 'src/services/media/ChannelManagementServices'
 import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -128,7 +129,7 @@ const EditCompetitorWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        console.log(values.channelNameId)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             EditCompetitors({
                 body: {

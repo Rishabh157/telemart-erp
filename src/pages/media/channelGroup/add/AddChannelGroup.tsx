@@ -6,6 +6,8 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -22,6 +24,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddChannelGroup = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -65,7 +72,10 @@ const AddChannelGroup = ({ formikProps, apiStatus }: Props) => {
                                 label="Group Name"
                                 placeholder="Group Name"
                                 onChange={(e) =>
-                                    setFieldValue('groupName', e.target.value)
+                                    handleSetFieldValue(
+                                        'groupName',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

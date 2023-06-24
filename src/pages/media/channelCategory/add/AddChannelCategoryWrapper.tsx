@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import MediaLayout from '../../MediaLayout'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
 import { object, string } from 'yup'
@@ -8,6 +8,7 @@ import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import AddChannelGroup from './AddChannelCategory'
 import { useAddChannelCategoryMutation } from 'src/services/media/ChannelCategoriesServices'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     channelCategory: string
@@ -16,6 +17,7 @@ export type FormInitialValues = {
 
 const AddChannelCategoryWrapper = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddChannelcategory] = useAddChannelCategoryMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -32,6 +34,7 @@ const AddChannelCategoryWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             AddChannelcategory({
                 channelCategory: values.channelCategory,

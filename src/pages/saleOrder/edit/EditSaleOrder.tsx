@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGetAllWareHouseByDealerIdQuery } from 'src/services/WareHoouseService'
 import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -90,6 +91,11 @@ const EditSaleOrder = ({
         }
     }, [productGroup])
 
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
+
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
@@ -132,7 +138,10 @@ const EditSaleOrder = ({
                                 label="SO Number"
                                 placeholder="SO Number"
                                 onChange={(e) =>
-                                    setFieldValue('soNumber', e.target.value)
+                                    handleSetFieldValue(
+                                        'soNumber',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -141,7 +150,7 @@ const EditSaleOrder = ({
                                 name="dealerId"
                                 value={values?.dealerId}
                                 onChange={(e) => {
-                                    setFieldValue('dealerId', e)
+                                    handleSetFieldValue('dealerId', e)
                                     setDealerId(e)
                                 }}
                                 options={dropdownOptions.dealerOptions}
@@ -154,7 +163,7 @@ const EditSaleOrder = ({
                                 name="dealerWareHouseId"
                                 value={values.dealerWareHouseId}
                                 onChange={(e) =>
-                                    setFieldValue('dealerWareHouseId', e)
+                                    handleSetFieldValue('dealerWareHouseId', e)
                                 }
                                 options={dealerWarehouseOptions}
                                 label="Dealer Warehouse"
@@ -165,7 +174,7 @@ const EditSaleOrder = ({
                                 name="companyWareHouseId"
                                 value={values.companyWareHouseId}
                                 onChange={(e) =>
-                                    setFieldValue('companyWareHouseId', e)
+                                    handleSetFieldValue('companyWareHouseId', e)
                                 }
                                 options={dropdownOptions.warehouseOptions}
                                 label="Warehouse"
@@ -201,11 +210,11 @@ const EditSaleOrder = ({
                                                             ''
                                                         }
                                                         onChange={(e) => {
-                                                            setFieldValue(
+                                                            handleSetFieldValue(
                                                                 `productSalesOrder.productGroupId`,
                                                                 e
                                                             )
-                                                            setFieldValue(
+                                                            handleSetFieldValue(
                                                                 `productSalesOrder.rate`,
                                                                 ''
                                                             )
@@ -233,7 +242,7 @@ const EditSaleOrder = ({
                                                         label="Rate"
                                                         placeholder="Rate"
                                                         onChange={(e) =>
-                                                            setFieldValue(
+                                                            handleSetFieldValue(
                                                                 `productSalesOrder.rate`,
                                                                 e.target.value
                                                             )
@@ -254,54 +263,19 @@ const EditSaleOrder = ({
                                                         label="Quantity"
                                                         placeholder="Quantity"
                                                         onChange={(e) => {
-                                                            setFieldValue(
+                                                            handleSetFieldValue(
                                                                 `productSalesOrder.quantity`,
                                                                 e.target.value
                                                             )
-                                                            setFieldValue(
+                                                            handleSetFieldValue(
                                                                 `productSalesOrder.rate`,
                                                                 price
                                                             )
                                                         }}
                                                     />
                                                 </div>
-
-                                                {/* BUTTON - Delete */}
-                                                {/* {values.productSalesOrder?.length > 1 && (
-                                <div>
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      remove(index);
-                                    }}
-                                    className="p-2 bg-red-500 text-white rounded"
-                                  >
-                                    <MdDeleteOutline className="text-2xl" />
-                                  </button>
-                                </div>
-                              )} */}
                                             </div>
-                                            {/* // ); */}
-                                            {/* }
-                      )} */}
                                         </div>
-
-                                        {/* BUTTON - Add More Product */}
-                                        {/* <div className="flex justify-self-start py-9">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          push({
-                            productGroupId: "",
-                            rate: null,
-                            quantity: null,
-                          })
-                        }
-                        className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
-                      >
-                        <HiPlus size="20" />
-                      </button>
-                    </div> */}
                                     </>
                                 )
                             }}

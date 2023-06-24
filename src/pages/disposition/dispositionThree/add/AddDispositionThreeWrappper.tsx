@@ -14,6 +14,7 @@ import { DispositionOneListResponse } from 'src/models/configurationModel/Dispos
 import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
 import AddDispositionThree from './AddDispositionThree'
 import { useAdddispositionThreeMutation } from 'src/services/configurations/DispositionThreeServices'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     dispositionName: string
@@ -94,6 +95,7 @@ const AddDispositionThreeWrappper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         adddispositionThree({
             dispositionName: values.dispositionName,
             dispositionOneId: values.dispositionOneId,

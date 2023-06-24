@@ -4,6 +4,8 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../AddVendorWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type DropdownOptions = {
     companyTypeOptions: SelectOption[]
@@ -25,7 +27,11 @@ const StepAddComapnyDetails = ({
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="py-6 px-7">
             <div className="grid grid-cols-4 gap-4 gap-y-5">
@@ -40,7 +46,10 @@ const StepAddComapnyDetails = ({
                                     name={name}
                                     value={values[name]}
                                     onChange={(e) => {
-                                        setFieldValue(name, e.target.value)
+                                        handleSetFieldValue(
+                                            name,
+                                            e.target.value
+                                        )
                                     }}
                                     label={label}
                                     placeholder={placeholder}
@@ -56,7 +65,10 @@ const StepAddComapnyDetails = ({
                                         name={name}
                                         value={values[name]}
                                         onChange={(e) => {
-                                            setFieldValue(name, e.target.value)
+                                            handleSetFieldValue(
+                                                name,
+                                                e.target.value
+                                            )
                                         }}
                                         size="small"
                                         label={label}

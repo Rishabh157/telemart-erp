@@ -13,7 +13,10 @@ import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -253,6 +256,7 @@ const AddVendorWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 addVendor({
                     companyName: values.company_name,

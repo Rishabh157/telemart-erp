@@ -17,6 +17,7 @@ import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 import { LanguageListResponse } from 'src/models'
 import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 export type FormInitialValues = {
     channelName: string
     address: string
@@ -136,6 +137,7 @@ const AddChannelManagementWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             AddChannelApi({
                 channelName: values.channelName,
