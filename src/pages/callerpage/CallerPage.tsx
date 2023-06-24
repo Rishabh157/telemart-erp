@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TbBrandNetflix } from 'react-icons/tb'
 import CallerButton from './components/CallerButton'
 import Navbar from './components/Navbar'
@@ -6,13 +6,58 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
-// import ATMOtpInput from 'src/components/UI/atoms/ATMOtpInput/ATMOtpInput'
+import ATMOtpInput from 'src/components/UI/atoms/ATMOtpInput/ATMOtpInput'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { FormInitialValues } from './CallerPageWrapper'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import { FormikProps } from 'formik'
 
-const index = () => {
+type Props = {
+    formikProps: FormikProps<FormInitialValues>
+    column: any[]
+    rows: any[]
+    apiStatus: boolean
+    schemeColumn: columnTypes[] | []
+    dropdownOptions: {
+        counrtyOptions: SelectOption[]
+        stateOptions?: SelectOption[] | []
+        districtOptions?: SelectOption[] | []
+        pincodeOptions?: SelectOption[] | []
+        dispositionThreeOptions?: SelectOption[] | []
+        dispositionTwoOptions?: SelectOption[] | []
+        tehsilOptions?: SelectOption[] | []
+        areaOptions?: SelectOption[] | []
+        OutBoundOptions?: SelectOption[] | []
+    }
+    didItems: any
+}
+
+const CallerPage: React.FC<Props> = ({
+    formikProps,
+    apiStatus,
+    dropdownOptions,
+    schemeColumn,
+    didItems,
+    column,
+    rows,
+}) => {
+    console.log(
+        formikProps,
+        apiStatus,
+        dropdownOptions,
+        schemeColumn,
+        didItems,
+        column,
+        rows
+    )
+
+    const [quantity, setQuantity] = useState<number>(1)
+    const [multiSelect, setMultiSelect] = useState<any[]>([])
+    const [otp, setotp] = useState(new Array(10).fill(''))
+
     const columns: columnTypes[] = [
         {
             field: 'order',
@@ -116,7 +161,7 @@ const index = () => {
 
     return (
         <div className="bg-white px-4 h-[2000px]">
-            <div className="flex justify-between py-4">
+            <div className="flex justify-between py-1">
                 <div className="logo-img">
                     <TbBrandNetflix size={40} color="red" />
                 </div>
@@ -137,7 +182,9 @@ const index = () => {
             <Navbar />
 
             <div className="flex items-center mt-1 px-2">
-                <div className="mt-2 text-[15px]">Search By Scheme</div>
+                <div className="mt-2 text-sm font-semibold">
+                    Search By Scheme
+                </div>
                 <div className="px-2 flex">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
@@ -149,8 +196,6 @@ const index = () => {
                             options={[
                                 { label: 'one', value: 'one' },
                                 { label: 'two', value: 'two' },
-                                { label: 'three', value: 'three' },
-                                { label: 'four', value: 'four' },
                             ]}
                             onChange={(e) => {
                                 // setFieldValue('zonalManagerId', e)
@@ -167,8 +212,6 @@ const index = () => {
                             value={''}
                             options={[
                                 { label: 'one', value: 'one' },
-                                { label: 'two', value: 'two' },
-                                { label: 'three', value: 'three' },
                                 { label: 'four', value: 'four' },
                             ]}
                             onChange={(e) => {
@@ -192,7 +235,7 @@ const index = () => {
                         </h2>
                     </div>
                     <div className="col-span-2">
-                        <h2 className="text-[15px] font-bold text-white">
+                        <h2 className="text-[15px] font-bold text-white pl-3">
                             QTY
                         </h2>
                     </div>
@@ -222,7 +265,30 @@ const index = () => {
                         </div>
                         <div className="col-span-2">
                             <h2 className="text-[15px] font-bold text-white">
-                                - 1 +
+                                <button
+                                    className="mr-4 text-[18px]"
+                                    onClick={() => {
+                                        if (quantity <= 0) {
+                                            alert(
+                                                'Quantity Can Not Be In Nagetive Value'
+                                            )
+                                        } else {
+                                            setQuantity((pre) => quantity - 1)
+                                        }
+                                    }}
+                                >
+                                    {' '}
+                                    -{' '}
+                                </button>
+                                {quantity}
+                                <button
+                                    className="ml-4 text-[18px]"
+                                    onClick={() =>
+                                        setQuantity((pre) => quantity + 1)
+                                    }
+                                >
+                                    +
+                                </button>
                             </h2>
                         </div>
                         <div className="col-span-2">
@@ -261,12 +327,7 @@ const index = () => {
                                 // isSubmitting
                                 name=""
                                 value={''}
-                                options={[
-                                    { label: '456782', value: 'one' },
-                                    { label: '456342', value: 'two' },
-                                    { label: '534523', value: 'three' },
-                                    { label: '754654', value: 'four' },
-                                ]}
+                                options={dropdownOptions.pincodeOptions || []}
                                 onChange={(e) => {
                                     // setFieldValue('zonalManagerId', e)
                                 }}
@@ -299,12 +360,7 @@ const index = () => {
                         // isSubmitting
                         name=""
                         value={''}
-                        options={[
-                            { label: 'M.P', value: 'one' },
-                            { label: 'U.P', value: 'two' },
-                            { label: 'U.K', value: 'three' },
-                            { label: 'A.P', value: 'four' },
-                        ]}
+                        options={dropdownOptions.stateOptions || []}
                         onChange={(e) => {
                             // setFieldValue('zonalManagerId', e)
                         }}
@@ -318,12 +374,7 @@ const index = () => {
                         // isSubmitting
                         name=""
                         value={''}
-                        options={[
-                            { label: 'Indore', value: 'one' },
-                            { label: 'Betul', value: 'two' },
-                            { label: 'Mahow', value: 'three' },
-                            { label: 'Delhi', value: 'four' },
-                        ]}
+                        options={dropdownOptions.areaOptions || []}
                         onChange={(e) => {
                             // setFieldValue('zonalManagerId', e)
                         }}
@@ -339,10 +390,7 @@ const index = () => {
                         // isSubmitting
                         name=""
                         value={''}
-                        options={[
-                            { label: 'CHITAWAD ROAD', value: 'one' },
-                            { label: 'AV. ROAD', value: 'two' },
-                        ]}
+                        options={dropdownOptions.areaOptions || []}
                         onChange={(e) => {
                             // setFieldValue('zonalManagerId', e)
                         }}
@@ -356,10 +404,7 @@ const index = () => {
                         // isSubmitting
                         name=""
                         value={''}
-                        options={[
-                            { label: 'Bhopal', value: 'one' },
-                            { label: 'Indore', value: 'two' },
-                        ]}
+                        options={dropdownOptions.districtOptions || []}
                         onChange={(e) => {
                             // setFieldValue('zonalManagerId', e)
                         }}
@@ -373,10 +418,7 @@ const index = () => {
                         // isSubmitting
                         name=""
                         value={''}
-                        options={[
-                            { label: 'Dewas', value: 'one' },
-                            { label: 'Mandu', value: 'one' },
-                        ]}
+                        options={dropdownOptions.tehsilOptions || []}
                         onChange={(e) => {
                             // setFieldValue('zonalManagerId', e)
                         }}
@@ -495,7 +537,46 @@ const index = () => {
                         }}
                     />
 
-                    {/* <ATMOtpInput length={10} onChange={(e) => console.log(e)} /> */}
+                    <ATMTextField
+                        extraClassField="mt-0"
+                        label="Alternate Mobile No"
+                        value={''}
+                        size="xs"
+                        LabelDirection="horizontal"
+                        name=""
+                        // isSubmitting
+                        onChange={(e) => {
+                            // setFieldValue('zonalManagerId', e)
+                        }}
+                    />
+
+                    {/* <div className="grid grid-cols-12 mt-2">
+                        <div className="col-span-4 pt-2 text-slate-700 text-sm font-medium">
+                            Alternate Mobile No
+                        </div>
+                        <div className="col-span-8 px-">
+                            <ATMOtpInput
+                                length={10}
+                                values={otp}
+                                setValues={setotp}
+                                onChange={(e) => console.log(e)}
+                            />
+                        </div>
+                    </div> */}
+
+                    <ATMTextField
+                        extraClassField="mt-0"
+                        label="WhatsApp Number"
+                        value={''}
+                        size="xs"
+                        LabelDirection="horizontal"
+                        name=""
+                        // classDirection="grid grid-cols-3"
+                        // isSubmitting
+                        onChange={(e) => {
+                            // setFieldValue('zonalManagerId', e)
+                        }}
+                    />
                 </div>
                 <div className="col-span-6 py-2 px-8 border-r-[1px]">
                     <div className="-mt-2">
@@ -503,7 +584,7 @@ const index = () => {
                             name=""
                             value={''}
                             placeholder="AUTOFILL SHIPPING ADDRESS"
-                            minRows={6}
+                            minRows={9}
                             onChange={(value) => {}}
                         />
                     </div>
@@ -512,11 +593,11 @@ const index = () => {
                         <ATMSwitchButton
                             label="Recording"
                             name=""
-                            value={false}
+                            value={true}
                             title1="ON"
                             title2="OFF"
                             onChange={(e) => {
-                                console.log(e)
+                                // console.log(e)
                             }}
                         />
                     </div>
@@ -532,25 +613,32 @@ const index = () => {
 
             <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700">
                 <div className="col-span-6 py-2  gap-x-4 border-r-[1px] px-6 border-grey-800">
-                    <ATMRadioButton
-                        name=""
-                        label="Gander"
-                        value={'MALE'}
-                        required={true}
-                        options={[
-                            {
-                                label: 'MALE (MR.)',
-                                value: 'MALE',
-                            },
-                            {
-                                label: 'FEMALE (Ms.)',
-                                value: 'FEMALE',
-                            },
-                        ]}
-                        onChange={(e) => {
-                            // setFieldValue('type', e)
-                        }}
-                    />
+                    <div className="grid grid-cols-12">
+                        <div className="col-span-4 pt-1">
+                            Gander <span className="text-red-500"> * </span>
+                        </div>
+                        <div className="col-span-4">
+                            <div className="-mt-5">
+                                <ATMRadioButton
+                                    name=""
+                                    value={'MALE'}
+                                    options={[
+                                        {
+                                            label: 'MALE (MR.)',
+                                            value: 'MALE',
+                                        },
+                                        {
+                                            label: 'FEMALE (Ms.)',
+                                            value: 'FEMALE',
+                                        },
+                                    ]}
+                                    onChange={(e) => {
+                                        // setFieldValue('type', e)
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </div>
 
                     <ATMSelectSearchable
                         componentClass="  mt-2"
@@ -595,6 +683,7 @@ const index = () => {
                         extraClassField="mt-0"
                         label="Email-ID"
                         size="xs"
+                        labelSize="small"
                         LabelDirection="horizontal"
                         // classDirection="grid grid-cols-3"
                         // isSubmitting
@@ -646,24 +735,51 @@ const index = () => {
                             />
                         </div>
                     </div>
+
                     <ATMSelectSearchable
-                        componentClass="  mt-2"
-                        label="Any Other Medical Issue"
-                        size="xs"
+                        isMenuOpen
+                        isMulti
+                        name={``}
+                        value={multiSelect}
                         LabelDirection="horizontal"
-                        classDirection="grid grid-cols-3"
-                        // isSubmitting
-                        name=""
-                        value={''}
-                        options={[
-                            { label: 'indore', value: 'one' },
-                            { label: 'betul', value: 'two' },
-                            { label: 'bhanwarkua', value: 'three' },
-                            { label: 'mumbai', value: 'four' },
-                        ]}
-                        onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                        size="small"
+                        onChange={(value) => {
+                            // setFieldValue(`details[${index}].pincodes`, value)
+                            setMultiSelect(value)
                         }}
+                        options={[
+                            {
+                                label: 'COD',
+                                value: 'COD',
+                            },
+                            {
+                                label: 'Online (UPI only)',
+                                value: 'UPI',
+                            },
+                            {
+                                label: 'Online (UPI only)',
+                                value: 'edfrest',
+                            },
+                            {
+                                label: 'Online (UPI only)',
+                                value: 'ewrrwe',
+                            },
+                            {
+                                label: 'Online (UPI only)',
+                                value: 'rwewerwer',
+                            },
+                            {
+                                label: 'Online (UPI only)',
+                                value: 'fdgdfgh',
+                            },
+                            {
+                                label: 'Online (UPI only)',
+                                value: 'sdg',
+                            },
+                        ]}
+                        label="Any Other Medical Issue"
+                        // isMulti={true}
+                        selectClass={'-mt-4 select-margin'}
                     />
                 </div>
 
@@ -671,7 +787,7 @@ const index = () => {
                     <div className="grid grid-cols-12">
                         <div className="col-span-6"></div>
                         <div className="col-span-6 bg-slate-300 px-6 border-[1px]">
-                            <div className="-mt-2">
+                            <div className="-mt-6 p-4">
                                 <ATMRadioButton
                                     label="Payment Mode :"
                                     name=""
@@ -700,7 +816,7 @@ const index = () => {
                             name=""
                             value={''}
                             placeholder="Other Remarks"
-                            minRows={8}
+                            minRows={6}
                             onChange={(value) => {}}
                         />
                     </div>
@@ -718,10 +834,7 @@ const index = () => {
                         name=""
                         value={''}
                         // isSubmitting
-                        options={[
-                            { label: 'One', value: 'one' },
-                            { label: 'Two', value: 'two' },
-                        ]}
+                        options={dropdownOptions.dispositionTwoOptions || []}
                         onChange={(e) => {
                             // setFieldValue('zonalManagerId', e)
                         }}
@@ -736,10 +849,7 @@ const index = () => {
                         name=""
                         value={''}
                         // isSubmitting
-                        options={[
-                            { label: 'One', value: 'one' },
-                            { label: 'Two', value: 'two' },
-                        ]}
+                        options={dropdownOptions.dispositionThreeOptions || []}
                         onChange={(e) => {
                             // setFieldValue('zonalManagerId', e)
                         }}
@@ -754,7 +864,7 @@ const index = () => {
 
             <div className="border-[1px] pb-2 mt-1 border-grey-700">
                 <ATMTable
-                    headerClassName="bg-[#87527C]"
+                    headerClassName="bg-[#87527c]"
                     columns={columns}
                     rows={[]}
                 />
@@ -763,4 +873,4 @@ const index = () => {
     )
 }
 
-export default index
+export default CallerPage

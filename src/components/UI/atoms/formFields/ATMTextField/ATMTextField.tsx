@@ -2,7 +2,10 @@ import { ErrorMessage } from 'formik'
 import React, { useState } from 'react'
 // import { BsInfoCircle } from 'react-icons/bs'
 import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
-import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
+import {
+    getInputHeight,
+    getLabelFont,
+} from 'src/utils/formUtils/getInputHeight'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import { twMerge } from 'tailwind-merge'
 
@@ -24,6 +27,7 @@ export type ATMTextFieldPropTypes = {
     isPassWordVisible?: boolean
     LabelDirection?: 'horizontal' | 'vertical'
     classDirection?: string
+    labelSize?: 'small' | 'medium' | 'large' | 'xs'
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
 const ATMTextField = ({
@@ -47,6 +51,7 @@ const ATMTextField = ({
     labelClass = 'font-medium',
     LabelDirection = 'vertical',
     classDirection = 'grid grid-cols-12',
+    labelSize = 'small',
     ...rest
 }: ATMTextFieldPropTypes) => {
     const [visibility, setVisibility] = useState(type)
@@ -67,7 +72,11 @@ const ATMTextField = ({
                     }`}
                 >
                     {label && (
-                        <label className={`text-slate-700 ${labelClass}`}>
+                        <label
+                            className={`text-slate-700 ${getLabelFont(
+                                labelSize
+                            )} ${labelClass}`}
+                        >
                             {label}{' '}
                             {required && (
                                 <span className="text-red-500"> * </span>

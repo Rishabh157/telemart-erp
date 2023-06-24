@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react'
-// import TextInput from '../TextInput/TextInput'
-import ATMTextField from '../formFields/ATMTextField/ATMTextField'
+import TextInput from './TextInput'
 
 interface OtpInputType {
+    values?: string | number | any
+    setValues?: React.Dispatch<React.SetStateAction<any[]>>
     length: number
     onChange: (text: string) => void
 }
-const ATMOtpInput = ({ length = 6, onChange }: OtpInputType) => {
-    const [values, setValues] = useState(new Array(length).fill(''))
+const ATMOtpInput = ({
+    values,
+    setValues = () => {},
+    length = 6,
+    onChange,
+}: OtpInputType) => {
+    // const [values, setValues] = useState(new Array(length).fill(''))
+
     const [focusArray, setFocusArray] = useState<boolean[]>([
         true,
         ...new Array<boolean>(length - 1).fill(false),
@@ -64,15 +71,15 @@ const ATMOtpInput = ({ length = 6, onChange }: OtpInputType) => {
         } else {
             setIsMounted(true)
         }
-    }, [values])
+    }, [])
 
-    useEffect(() => {
-        setValues(new Array(length).fill(''))
-    }, [length])
+    // useEffect(() => {
+    //     setValues(new Array(length).fill(''))
+    // }, [length])
 
     return (
         <div className="flex flex-row">
-            {values.map((data, index) => {
+            {values?.map((data: any, index: any) => {
                 return (
                     <div
                         onPaste={(e) => handlePaste(e)}
@@ -84,30 +91,19 @@ const ATMOtpInput = ({ length = 6, onChange }: OtpInputType) => {
                             }
                         }}
                     >
-                        <ATMTextField
-                            // isFocused={focusArray[index]}
-                            // isNumber={true}
-                            name=""
-                            size="xs"
-                            autoFocus={index === 0}
-                            placeholder="-"
-                            value=""
-                            onChange={(event) => {
-                                handleChange(index, event.target.value)
-                            }}
-                            // extraInputClass={'text-center disable-arrow'}
-                        />
-                        {/* <TextInput
+                        <TextInput
                             isFocused={focusArray[index]}
-                            isNumber={true}
+                            isNumber={false}
                             autoFocus={index === 0}
                             placeholder="-"
                             value={data}
-                            extraInputClass={'text-center disable-arrow'}
+                            extraInputClass={
+                                'text-center disable-arrow border-[1px] border-slate-500 p-1'
+                            }
                             onChangeFunc={(event) => {
                                 handleChange(index, event.target.value)
                             }}
-                        /> */}
+                        />
                     </div>
                 )
             })}

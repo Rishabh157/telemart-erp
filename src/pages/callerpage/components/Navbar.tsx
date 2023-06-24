@@ -19,7 +19,7 @@ const Navbar = () => {
                             CALL TYPE
                         </h3>
                         <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
-                            DHUANDHAAR
+                            INBOUND
                         </div>
                     </div>
 
@@ -28,7 +28,7 @@ const Navbar = () => {
                             INCOMING NO.
                         </h3>
                         <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
-                            DHUANDHAAR
+                            9988776655
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@ const Navbar = () => {
                             CUSTOMER
                         </h3>
                         <div className=" bg-green-500 p-1 text-center rounded bedge text-white text-[14px] font-bold">
-                            DHUANDHAAR
+                            AJAY CHORE
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@ const Navbar = () => {
                             DID NO
                         </h3>
                         <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
-                            DHUANDHAAR
+                            DID NO.
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import { ErrorMessage } from 'formik'
 import { twMerge } from 'tailwind-merge'
+import { getLabelFont } from 'src/utils/formUtils/getInputHeight'
 
 export type SelectOption = {
     label: string
@@ -31,6 +32,8 @@ type Props = {
     labelSpan?: string
     inputSpan?: string
     componentClass?: string
+    labelSize?: 'small' | 'medium' | 'large' | 'xs'
+    isMenuOpen?: boolean
 }
 
 const ATMSelectSearchable = ({
@@ -56,6 +59,8 @@ const ATMSelectSearchable = ({
     labelSpan = 'col-span-1',
     inputSpan = 'col-span-2',
     componentClass = '  mt-6',
+    labelSize = 'small',
+    isMenuOpen = false,
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -75,6 +80,8 @@ const ATMSelectSearchable = ({
             paddingLeft: '4px',
             paddingTop: '0px',
             alignItems: 'start',
+            overflow: 'scroll',
+            maxHeight: '67px',
         }),
         indicator: (provided: any) => ({
             ...provided,
@@ -86,7 +93,6 @@ const ATMSelectSearchable = ({
         }),
         input: (provided: any) => ({
             ...provided,
-            minHeight: 'unset',
             textColor: 'rgb(51 65 85,0)',
             paddingLeft: '4px',
             paddingTop: '-4px',
@@ -174,7 +180,11 @@ const ATMSelectSearchable = ({
                     }`}
                 >
                     {label && (
-                        <label className={`text-slate-700  ${labelClass}`}>
+                        <label
+                            className={`text-slate-700   ${getLabelFont(
+                                labelSize
+                            )}  ${labelClass}`}
+                        >
                             {label}
                             {required && (
                                 <span className="text-red-500"> * </span>
@@ -183,14 +193,14 @@ const ATMSelectSearchable = ({
                     )}
                 </div>
                 <Select
+                    defaultMenuIsOpen={isMenuOpen}
+                    maxMenuHeight={isMenuOpen ? 150 : 300}
                     className={twMerge(
                         `border rounded border-slate-400 ${
                             LabelDirection === 'horizontal'
                                 ? `${inputSpan}`
                                 : ''
-                        }  ${
-                            isMulti ? 'overflow-scroll overflow-x-auto' : ''
-                        } min-h-fit max-h-24`,
+                        }`,
                         `${selectClass}`
                     )}
                     name={name}
