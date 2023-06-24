@@ -79,23 +79,23 @@ const CallListingWrapper = () => {
                 <span> {row.channel} </span>
             ),
         },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    handleOnAction={() => {
-                        // e.stopPropagation()
-                        // setShowDropdown(!showDropdown)
-                        // setCurrentId(row?._id)
-                    }}
-                >
-                    <></>
-                </ActionPopup>
-            ),
-            align: 'end',
-        },
+        // {
+        //     field: 'actions',
+        //     headerName: 'Actions',
+        //     flex: 'flex-[0.5_0.5_0%]',
+        //     renderCell: (row: any) => (
+        //         <ActionPopup
+        //             handleOnAction={() => {
+        //                 // e.stopPropagation()
+        //                 // setShowDropdown(!showDropdown)
+        //                 // setCurrentId(row?._id)
+        //             }}
+        //         />
+        //
+        //
+        //     ),
+        //     align: 'end',
+        // },
     ]
 
     const { data, isFetching, isLoading } = useGetPaginationInboundCallerQuery({

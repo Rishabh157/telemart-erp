@@ -168,11 +168,6 @@ const ASRListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    handleOnAction={() => {
-                        // e.stopPropagation()
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
                     isEdit
                     isDelete
                     handleEditActionButton={() => {
@@ -189,6 +184,11 @@ const ASRListingWrapper = () => {
                                     : setShowDropdown(false)
                             },
                         })
+                    }}
+                    handleOnAction={() => {
+                        // e.stopPropagation()
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
                     }}
                 />
             ),

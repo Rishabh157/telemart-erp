@@ -36,7 +36,6 @@ const ChannelCategoryListing = ({
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, isTableLoading } =
         channelCategoryState
-    console.log(isTableLoading, 'isTableLoading')
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {

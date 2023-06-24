@@ -84,47 +84,32 @@ const DispositionThreeListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    isView
+                    isEdit
+                    isDelete
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                >
-                    <>
-                        <button
-                            onClick={() => {
-                                navigate(`edit/${row?._id}`)
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Edit
-                        </button>
-                        <button
-                            onClick={() => {
-                                navigate(`${row?._id}`)
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            View
-                        </button>
-                        <button
-                            onClick={() => {
-                                showConfirmationDialog({
-                                    title: 'Delete Disposition Three',
-                                    text: 'Do you want to delete Disposition-Three?',
-                                    showCancelButton: true,
-                                    next: (res: any) => {
-                                        return res.isConfirmed
-                                            ? handleDelete()
-                                            : setShowDropdown(false)
-                                    },
-                                })
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Delete
-                        </button>
-                    </>
-                </ActionPopup>
+                    handleViewActionButton={() => {
+                        navigate(`${row?._id}`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`edit/${row?._id}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Disposition Three',
+                            text: 'Do you want to delete Disposition-Three?',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
             ),
             align: 'end',
         },
