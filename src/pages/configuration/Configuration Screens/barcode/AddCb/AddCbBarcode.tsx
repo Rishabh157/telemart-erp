@@ -1,5 +1,16 @@
+/// ==============================================
+// Filename:AddCbBarcode.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,6 +20,7 @@ import { FormInitialValues } from './AddCbWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean

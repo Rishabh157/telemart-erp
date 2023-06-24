@@ -121,7 +121,7 @@ const ATMTable = <T extends {}>({
                         {/* Checkbox */}
                         {isCheckbox ? (
                             <div
-                            key={'checkbox'+row[idKey] || rowIndex}
+                                key={'checkbox' + row[idKey] || rowIndex}
                                 className={`w-[20px]`}
                                 onClick={(e) => e.stopPropagation()}
                             >

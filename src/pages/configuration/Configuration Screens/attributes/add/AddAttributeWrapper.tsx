@@ -1,14 +1,29 @@
+/// ==============================================
+// Filename:AddAttributesWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddAttribute from './AddAttribute'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddAttributesMutation } from 'src/services/AttributeService'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

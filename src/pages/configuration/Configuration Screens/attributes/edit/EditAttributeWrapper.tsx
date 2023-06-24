@@ -1,18 +1,33 @@
+/// ==============================================
+// Filename:EditAttributesWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import EditAttribute from './EditAttribute'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
 import {
     useGetattributesByIdQuery,
     useUpdateattributesMutation,
 } from 'src/services/AttributeService'
-import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedAttribute } from 'src/redux/slices/attributesSlice'
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

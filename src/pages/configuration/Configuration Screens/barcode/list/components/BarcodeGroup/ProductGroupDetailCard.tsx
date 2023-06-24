@@ -1,17 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:ProductGroupDetailCard.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { BiCheck } from 'react-icons/bi'
 import { HiDotsVertical } from 'react-icons/hi'
 import { ProductBarcodeGroupResponse } from 'src/models'
 import moment from 'moment'
-import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import { BsPrinter } from 'react-icons/bs'
-import { useGetAllByGroupQuery } from 'src/services/BarcodeService'
 import { useDispatch } from 'react-redux'
-import { AppDispatch } from 'src/redux/store'
-import { setBarcodesToPrint } from 'src/redux/slices/barcodeSlice'
 import { useNavigate } from 'react-router-dom'
 
+// |-- Internal Dependencies --|
+import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import { useGetAllByGroupQuery } from 'src/services/BarcodeService'
+
+// |-- Redux --|
+import { AppDispatch } from 'src/redux/store'
+import { setBarcodesToPrint } from 'src/redux/slices/barcodeSlice'
+
+// |-- Types --|
 type BarcodeCardProps = {
     cardBoxBarcodeList: ProductBarcodeGroupResponse[]
     selectedProductGroupBarcodes: ProductBarcodeGroupResponse[]

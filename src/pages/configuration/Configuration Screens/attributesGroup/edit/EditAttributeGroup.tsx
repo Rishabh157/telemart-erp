@@ -1,6 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// Filename:EditAttributeGroup.tsx
+// Type: Edit Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,6 +20,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from './EditAttributeGroupWrapper'
 import ATMTransferList from 'src/components/UI/atoms/ATMTransferList/ATMTransferList'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     allItems: any

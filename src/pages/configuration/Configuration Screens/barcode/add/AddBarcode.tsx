@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:AddBarcode.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -10,6 +22,7 @@ import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
