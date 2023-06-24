@@ -15,7 +15,6 @@ import StepLabel from '@mui/material/StepLabel'
 import { useDispatch } from 'react-redux'
 import { FormikProps } from 'formik'
 
-
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -25,7 +24,6 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 // |-- Redux --|
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {

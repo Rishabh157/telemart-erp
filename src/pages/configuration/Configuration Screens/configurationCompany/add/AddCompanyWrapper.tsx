@@ -8,7 +8,6 @@
 // |-- Built-in Dependencies --|
 import React from 'react'
 
-
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
 import { array, object, string, number } from 'yup'
@@ -27,7 +26,6 @@ import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 // |-- Redux --|
 import { AppDispatch } from 'src/redux/store'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
-
 
 // |-- Types --|
 // TYPE-  Form Intial Values

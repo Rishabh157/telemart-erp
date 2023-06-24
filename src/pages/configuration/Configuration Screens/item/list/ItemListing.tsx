@@ -8,7 +8,6 @@
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
-
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -28,10 +27,8 @@ import {
 } from 'src/redux/slices/itemSlice'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
-
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {

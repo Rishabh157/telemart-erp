@@ -32,7 +32,6 @@ import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import { setSelectedCompany } from 'src/redux/slices/companySlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 
-
 // |-- Types --|
 // TYPE-  Form Intial Values
 export type FormInitialValues = {

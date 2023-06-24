@@ -20,7 +20,6 @@ import { FormInitialValues } from '../../EditCompanyWrapper'
 import { RootState } from 'src/redux/store'
 // import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

@@ -1,4 +1,3 @@
-
 /// ==============================================
 // Filename:ConfigurationCompanyListingWrapper.tsx
 // Type: List Component
@@ -12,7 +11,6 @@ import React, { useEffect, useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'

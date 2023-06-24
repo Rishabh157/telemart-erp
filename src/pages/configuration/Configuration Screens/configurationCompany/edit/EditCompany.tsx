@@ -24,7 +24,6 @@ import { FormInitialValues } from './EditCompanyWrapper'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

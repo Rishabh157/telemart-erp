@@ -15,7 +15,6 @@ import { FormikProps } from 'formik'
 import { FormInitialValues } from '../../EditCompanyWrapper'
 import StepEditCompanyDetails from './StepEditCompanyDetails'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

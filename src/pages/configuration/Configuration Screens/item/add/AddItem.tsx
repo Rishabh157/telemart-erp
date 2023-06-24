@@ -20,7 +20,6 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from './AddItemWrapper'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

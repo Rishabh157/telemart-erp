@@ -21,10 +21,8 @@ import { FormInitialValues } from '../../EditCompanyWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type FieldType = Field<'accountTypeOptions'>

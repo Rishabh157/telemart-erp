@@ -20,7 +20,6 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddItemsMutation } from 'src/services/ItemService'
 import { showToast } from 'src/utils'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 

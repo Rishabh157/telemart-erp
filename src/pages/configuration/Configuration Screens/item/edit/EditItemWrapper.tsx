@@ -24,11 +24,9 @@ import {
     useUpdateItemsMutation,
 } from 'src/services/ItemService'
 
-
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/itemSlice'
-
 
 // |-- Types --|
 type Props = {}

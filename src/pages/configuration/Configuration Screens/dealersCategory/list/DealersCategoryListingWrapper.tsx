@@ -33,7 +33,6 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 const DealersCategoryListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteDealersCategory] = useDeleteDealerCategoryMutation()

@@ -8,11 +8,9 @@
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
-
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -32,7 +30,6 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
