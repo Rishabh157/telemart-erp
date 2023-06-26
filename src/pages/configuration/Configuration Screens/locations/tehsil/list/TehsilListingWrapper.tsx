@@ -1,6 +1,20 @@
+/// ==============================================
+// Filename:TehsilListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
-import TehsilListing from './TehsilListing'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import TehsilListing from './TehsilListing'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetTehsilQuery } from 'src/services/TehsilService'
 import { setItems } from 'src/redux/slices/tehsilSlice'

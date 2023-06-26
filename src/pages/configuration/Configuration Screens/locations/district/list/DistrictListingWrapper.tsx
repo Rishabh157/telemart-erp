@@ -1,9 +1,24 @@
+/// ==============================================
+// Filename:DistrictListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
-import DistrictListing from './DistrictListing'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import DistrictListing from './DistrictListing'
 import { useGetDistictQuery } from 'src/services/DistricService'
 import { setItems } from 'src/redux/slices/districtSlice'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+
 
 const DistrictListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
