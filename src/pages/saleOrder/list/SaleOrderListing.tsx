@@ -48,15 +48,14 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onClick={() => navigate('add-sale-order')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    {' '}
-                    + Add Sale Order{' '}
+                    + Add Sale Order
                 </button>
             </div>
 
             <div
                 className={` border flex flex-col  rounded bg-white ${
                     path === 'dealers'
-                        ? 'h-[calc(100%-250px)]'
+                        ? 'h-[calc(100%-50px)]'
                         : 'h-[calc(100%-75px)]'
                 }`}
             >

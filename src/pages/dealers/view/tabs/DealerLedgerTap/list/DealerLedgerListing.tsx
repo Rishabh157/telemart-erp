@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import { useNavigate, useParams } from 'react-router'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -16,7 +15,6 @@ import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import AddDealerLedgerModelWrapper from '../add/AddDealerLedgerModelWrapper'
 import { NoteType } from 'src/models/Ledger.model'
 import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
-// import FilterDialogWarpper from 'src/pages/dealers/components/FilterDialog/FilterDialogWarpper'
 
 type Props = {
     columns: any[]
