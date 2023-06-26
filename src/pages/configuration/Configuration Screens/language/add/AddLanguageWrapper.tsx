@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:AddLanguageWrapper.tsx
 // Type: Add Component
-// Last Updated: JUNE 24, 2023
+// Last Updated: JUNE 26, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -11,7 +11,8 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -19,6 +20,7 @@ import AddLanguage from './AddLanguage'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddLanguageMutation } from 'src/services/LanguageService'
 import { showToast } from 'src/utils'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -32,6 +34,7 @@ export type FormInitialValues = {
 
 const AddLanguageWrapper = (props: Props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [addLanguage] = useAddLanguageMutation()
@@ -47,6 +50,8 @@ const AddLanguageWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         addLanguage({
             languageName: values.languageName,
             companyId: userData?.companyId || '',

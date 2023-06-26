@@ -6,6 +6,8 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditProductGroupWrapper'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -25,6 +27,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
@@ -69,7 +76,10 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                                 label="Group Name"
                                 placeholder="Group Name"
                                 onChange={(e) =>
-                                    setFieldValue('groupName', e.target.value)
+                                    handleSetFieldValue(
+                                        'groupName',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMTextField
@@ -81,7 +91,7 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'dealerSalePrice',
                                             e.target.value
                                         )
@@ -98,7 +108,7 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('gst', e.target.value)
+                                        handleSetFieldValue('gst', e.target.value)
                                     }
                                 }}
                             /> */}
@@ -110,7 +120,10 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('cgst', e.target.value)
+                                        handleSetFieldValue(
+                                            'cgst',
+                                            e.target.value
+                                        )
                                     }
                                 }}
                             />
@@ -122,7 +135,10 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('sgst', e.target.value)
+                                        handleSetFieldValue(
+                                            'sgst',
+                                            e.target.value
+                                        )
                                     }
                                 }}
                             />
@@ -134,7 +150,10 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('utgst', e.target.value)
+                                        handleSetFieldValue(
+                                            'utgst',
+                                            e.target.value
+                                        )
                                     }
                                 }}
                             />
@@ -146,7 +165,10 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('igst', e.target.value)
+                                        handleSetFieldValue(
+                                            'igst',
+                                            e.target.value
+                                        )
                                     }
                                 }}
                             />

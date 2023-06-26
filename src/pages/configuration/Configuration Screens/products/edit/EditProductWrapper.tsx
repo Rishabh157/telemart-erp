@@ -31,7 +31,10 @@ import {
 } from 'src/services/ProductService'
 import { setSelectedItem } from 'src/redux/slices/productSlice'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -271,6 +274,8 @@ const EditProductWrapper = () => {
     // On Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps?.length - 1) {
+            dispatch(setFieldCustomized(false))
+
             setApiStatus(true)
             const faqData = values.FAQs.map((ele: any) => {
                 const { _id, ...rest } = ele // use object destructuring to remove the _id property

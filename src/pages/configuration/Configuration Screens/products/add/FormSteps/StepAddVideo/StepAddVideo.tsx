@@ -5,8 +5,9 @@ import { FormInitialValues } from '../../AddProductWrapper'
 import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -18,6 +19,11 @@ const StepAddVideo = ({ formikProps }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className=" ">
@@ -60,7 +66,7 @@ const StepAddVideo = ({ formikProps }: Props) => {
                                             name={`videos[${videoIndex}].videoName`}
                                             value={videoName}
                                             onChange={(e) => {
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     `videos[${videoIndex}].videoName`,
                                                     e.target.value
                                                 )
@@ -76,7 +82,7 @@ const StepAddVideo = ({ formikProps }: Props) => {
                                             name={`videos[${videoIndex}].videoLink`}
                                             value={videoLink}
                                             onChange={(e) => {
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     `videos[${videoIndex}].videoLink`,
                                                     e.target.value
                                                 )

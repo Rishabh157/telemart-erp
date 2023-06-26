@@ -11,16 +11,19 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { Formik } from 'formik'
 import { number, object, string } from 'yup'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import AddCartonBox from './AddCartonBox'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddCartonBoxMutation } from 'src/services/CartonBoxService'
+
+// |-- Utils --|
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -39,6 +42,7 @@ export type FormInitialValues = {
 
 const AddCartonBoxWrapper = (props: Props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [addCartonBox] = useAddCartonBoxMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -80,6 +84,7 @@ const AddCartonBoxWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         addCartonBox({
             boxName: values.boxName,
             innerItemCount: values.innerItemsCount,

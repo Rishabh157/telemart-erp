@@ -12,7 +12,7 @@ import React from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddItem from './AddItem'
@@ -22,6 +22,7 @@ import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {}
@@ -34,6 +35,7 @@ export type FormInitialValues = {
 
 const AddItemWrapper = (props: Props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [addItem] = useAddItemsMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -53,6 +55,7 @@ const AddItemWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
+        dispatch(setFieldCustomized(true))
         addItem({
             itemCode: values.itemCode,
             itemName: values.itemName,

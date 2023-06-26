@@ -18,6 +18,8 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditDealersCategoryWrapper'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {
@@ -38,7 +40,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditDealersCategory = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
@@ -82,7 +88,7 @@ const EditDealersCategory = ({ formikProps, apiStatus }: Props) => {
                                 label="Dealers Category"
                                 placeholder="Dealers Category"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'dealersCategory',
                                         e.target.value
                                     )
@@ -102,7 +108,10 @@ const EditDealersCategory = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const newValue = e.target.value
                                     if (!isNaN(Number(newValue))) {
-                                        setFieldValue('investAmount', newValue)
+                                        handleSetFieldValue(
+                                            'investAmount',
+                                            newValue
+                                        )
                                     }
                                 }}
                             />
@@ -120,7 +129,7 @@ const EditDealersCategory = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const newValue = e.target.value
                                     if (!isNaN(Number(newValue))) {
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'numberOfOrders',
                                             newValue
                                         )
@@ -140,7 +149,7 @@ const EditDealersCategory = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const newValue = e.target.value
                                     if (!isNaN(Number(newValue))) {
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'deliveryPercentage',
                                             newValue
                                         )

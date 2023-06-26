@@ -8,6 +8,8 @@ import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './AddProductSubCategoryWrapper'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -34,6 +36,11 @@ const AddProductSubCategory = ({
     apiStatus,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="">
@@ -78,7 +85,7 @@ const AddProductSubCategory = ({
                                 label="Sub Category Code"
                                 placeholder="Sub Category Code"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'subCategoryCode',
                                         e.target.value
                                     )
@@ -92,7 +99,7 @@ const AddProductSubCategory = ({
                                 label="Sub Category Name"
                                 placeholder="Sub Category Name"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'subCategoryName',
                                         e.target.value
                                     )
@@ -104,7 +111,7 @@ const AddProductSubCategory = ({
                                 name="parentCategoryId"
                                 value={values.parentCategoryId}
                                 onChange={(e) => {
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'parentCategoryId',
                                         e.target.value
                                     )
@@ -120,7 +127,10 @@ const AddProductSubCategory = ({
                                 label="HSN Code"
                                 placeholder="HSN Code"
                                 onChange={(e) =>
-                                    setFieldValue('hsnCode', e.target.value)
+                                    handleSetFieldValue(
+                                        'hsnCode',
+                                        e.target.value
+                                    )
                                 }
                                 className="mt-0 rounded"
                             />
