@@ -1,15 +1,30 @@
+/// ==============================================
+// Filename:AddTaxesWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import AddTaxes from './AddTaxes'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import { useAddTaxesMutation } from 'src/services/TaxesService'
-import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

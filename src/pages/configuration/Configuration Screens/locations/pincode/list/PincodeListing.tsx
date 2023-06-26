@@ -1,15 +1,30 @@
+/// ==============================================
+// Filename:PicodeListing.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import LocationListView from '../../sharedComponents/LocationListView'
 import AddPincodeWrapper from '../add/AddPincodeWrapper'
-import { useDispatch, useSelector } from 'react-redux'
+import { showToast } from 'src/utils'
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setFilterValue } from 'src/redux/slices/areaSlice'
 import {
     setSearchValue,
     setSelectedLocationPincode,
 } from 'src/redux/slices/pincodeSlice'
-import { showToast } from 'src/utils'
 
+// |-- Types --|
 type Props = {
     pincodes: any[]
 }

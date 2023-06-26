@@ -1,5 +1,18 @@
+/// ==============================================
+// Filename:ProductSubCategoryListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-// import { useNavigate } from "react-router-dom";
+
+// |-- External Dependencies --|
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ProductSubCategoryListResponse } from 'src/models/ProductSubCategory.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
@@ -7,24 +20,24 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 //     setIsTableLoading,
 //     setItems,
 //     setTotalItems,
-// } from "src/123456ux/slices/vendorSlice";
+// } from "src/redux/slices/vendorSlice";
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 import ProductSubCategoryListing from './ProductSubCategoryListing'
 import {
     useDeleteProductSubCategoryMutation,
     useGetProductSubCategoryQuery,
 } from 'src/services/ProductSubCategoryService'
-import { useDispatch, useSelector } from 'react-redux'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/productSubCategorySlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate } from 'react-router-dom'
-import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const ProductSubCategoryListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

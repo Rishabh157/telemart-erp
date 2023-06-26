@@ -1,8 +1,22 @@
+/// ==============================================
+// Filename:CountryListing.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import LocationListView from '../../sharedComponents/LocationListView'
 import AddCountryWrapper from '../add/AddCountryWrapper'
+
+// |-- Redux --|
 import { setSelectedLocationCountry } from 'src/redux/slices/countrySlice'
-import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setFilterValue,
@@ -16,6 +30,7 @@ import { setFilterValue as setPincodeFilterValue } from 'src/redux/slices/pincod
 import { setFilterValue as setTehsilFilterValue } from 'src/redux/slices/tehsilSlice'
 import { setFilterValue as setDistrictFilterValue } from 'src/redux/slices/districtSlice'
 
+// |-- Types --|
 type Props = {
     contries: any[]
     items: any

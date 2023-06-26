@@ -1,15 +1,30 @@
+/// ==============================================
+// Filename:AddProductCategoryWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddProductCategory from './AddProductCategory'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddProductCategoryMutation } from 'src/services/ProductCategoryServices'
 import { showToast } from 'src/utils'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

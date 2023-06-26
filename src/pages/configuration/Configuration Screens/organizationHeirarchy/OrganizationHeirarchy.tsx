@@ -1,13 +1,27 @@
+/// ==============================================
+// Filename:OrganizationHeirarchy.tsx
+// Type: Heirarchy Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { ReactNode } from 'react'
+
+// |-- Redux --|
+
+// |-- Types --|
+// |-- External Dependencies --|
 import { Tree, TreeNode } from 'react-organizational-chart'
-// import SideNavLayout from "src/components/layouts/SideNavLayout/SideNavLayout";
-import ATMMenu from 'src/components/UI/atoms/ATMMenu/ATMMenu'
 import { twMerge } from 'tailwind-merge'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import ATMMenu from 'src/components/UI/atoms/ATMMenu/ATMMenu'
 import ConfigurationLayout from '../../ConfigurationLayout'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import { useNavigate } from 'react-router-dom'
 
 const StyledNode = ({
     children,

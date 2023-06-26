@@ -1,16 +1,30 @@
+/// ==============================================
+// Filename:StepEditCallScript.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
-import { FormikProps } from 'formik'
-import { FormInitialValues } from '../../EditProductWrapper'
-import { FieldArray } from 'formik'
+
+// |-- External Dependencies --|
+import { FormikProps, FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { EditorState } from 'draft-js'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import { FormInitialValues } from '../../EditProductWrapper'
 import ATMHTMLEditor from 'src/components/UI/atoms/formFields/ATMHTMLEditor/ATMHTMLEditor'
 import { DropdownOptions } from './StepEditCallScriptWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
-import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: DropdownOptions
@@ -107,7 +121,7 @@ const StepEditCallScript = ({ formikProps, dropdownOptions }: Props) => {
                                 }
                                 className="bg-primary-main px-3 py-1 text-white rounded"
                             >
-                                Add More Script
+                                Edit More Script
                             </button>
                         </div>
                     </div>

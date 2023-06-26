@@ -1,12 +1,27 @@
+/// ==============================================
+// Filename:AddDistrictWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-import AddDistrictDialog from './AddDistrictDialog'
-import { showToast } from 'src/utils'
+
+// |-- External Dependencies --|
 import { useSelector } from 'react-redux'
-import { useAddDistrictMutation } from 'src/services/DistricService'
-import { RootState } from 'src/redux/store'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 
+// |-- Internal Dependencies --|
+import AddDistrictDialog from './AddDistrictDialog'
+import { showToast } from 'src/utils'
+import { useAddDistrictMutation } from 'src/services/DistricService'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     onClose: () => void
 }
