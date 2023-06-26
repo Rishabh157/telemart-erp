@@ -57,7 +57,7 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}

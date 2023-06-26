@@ -6,7 +6,6 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddItemWrapper'
-import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -27,8 +26,8 @@ const AddItem = ({ formikProps }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
-        <MainLayout>
-            <div className="p-4 flex flex-col gap-2  ">
+        <div className=" h-[calc(100vh-55px)] overflow-auto">
+        <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -96,7 +95,7 @@ const AddItem = ({ formikProps }: Props) => {
                     </div>
                 </div>
             </div>
-        </MainLayout>
+        </div>
     )
 }
 
