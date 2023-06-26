@@ -1,12 +1,27 @@
+/// ==============================================
+// Filename:ViewBarcode.tsx
+// Type: View Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { setSelectedItem } from 'src/redux/slices/CartonBoxBarcodeSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetByCartonBoxBarcodeQuery } from 'src/services/CartonBoxBarcodeService'
 import CartonBoxBarcodeDetailCard from '../list/components/CartonBoxBarcode/CartonBoxBarcodeDetailCard'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     cartonBoxCode: string
 }

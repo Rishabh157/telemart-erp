@@ -1,12 +1,23 @@
+/// ==============================================
+// Filename:EditCartonBoxWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { number, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import EditCartonBox from './EditCartonBox'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
 import {
     useGetCartonBoxByIdQuery,
     useUpdateCartonBoxMutation,
@@ -14,6 +25,10 @@ import {
 import { setSelectedItem } from 'src/redux/slices/cartonBoxSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

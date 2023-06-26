@@ -1,7 +1,19 @@
+/// ==============================================
+// Filename:CartonBoxBarcodeDetailCard.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React from 'react'
+
+// |-- External Dependencies --|
 import { BiCheck } from 'react-icons/bi'
 import { HiDotsVertical } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 
+// |-- Types --|
 type BarcodeCardProps = {
     barcodeList?: barcodecardType[]
     selectedCartonBoxBarcodes?: barcodecardType[]

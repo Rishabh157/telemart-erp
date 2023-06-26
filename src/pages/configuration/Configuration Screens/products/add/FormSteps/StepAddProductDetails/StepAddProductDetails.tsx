@@ -66,7 +66,9 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     <ATMSelectSearchable
                         name="product_category"
                         value={values.product_category}
-                        onChange={(e) => handleSetFieldValue('product_category', e)}
+                        onChange={(e) =>
+                            handleSetFieldValue('product_category', e)
+                        }
                         label="Product Category"
                         options={dropdownOptions.productCategoryOPtions}
                     />
@@ -104,7 +106,10 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     onChange={(e) => {
                         const inputValue = e.target.value
                         if (!isNaN(Number(inputValue))) {
-                            handleSetFieldValue('product_weight', String(inputValue))
+                            handleSetFieldValue(
+                                'product_weight',
+                                String(inputValue)
+                            )
                         }
                     }}
                     label="Product Weight (in gms)"

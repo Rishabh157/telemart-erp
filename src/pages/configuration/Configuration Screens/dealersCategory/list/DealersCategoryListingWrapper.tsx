@@ -1,5 +1,18 @@
+/// ==============================================
+// Filename:ListDealerCategoryWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { DealersCategoryListResponse } from 'src/models/DealersCategory.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
@@ -13,11 +26,12 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/dealersCategorySlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const DealersCategoryListingWrapper = () => {
     const navigate = useNavigate()

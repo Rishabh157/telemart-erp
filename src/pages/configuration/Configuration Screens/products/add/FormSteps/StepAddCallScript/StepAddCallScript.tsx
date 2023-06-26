@@ -29,7 +29,6 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-
     return (
         <div className=" ">
             <FieldArray name="call_scripts">

@@ -127,7 +127,10 @@ const EditProductSubCategory = ({
                                 label="HSN Code"
                                 placeholder="HSN Code"
                                 onChange={(e) =>
-                                    handleSetFieldValue('hsnCode', e.target.value)
+                                    handleSetFieldValue(
+                                        'hsnCode',
+                                        e.target.value
+                                    )
                                 }
                                 className="mt-0 rounded"
                             />

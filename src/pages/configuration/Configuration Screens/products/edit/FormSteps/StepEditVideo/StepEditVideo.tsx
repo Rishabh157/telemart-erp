@@ -25,7 +25,6 @@ const StepEditVideo = ({ formikProps }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-
     return (
         <div className=" ">
             <FieldArray name="videos">

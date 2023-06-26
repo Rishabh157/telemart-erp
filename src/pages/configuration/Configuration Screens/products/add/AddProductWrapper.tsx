@@ -21,7 +21,10 @@ import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import draftToHtml from 'draftjs-to-html'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { setFieldCustomized, setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {

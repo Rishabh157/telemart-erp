@@ -122,7 +122,7 @@ const AddScheme = ({
                     </div>
                 </div>
             </div>
-    </MainLayout>
+        </MainLayout>
     )
 }
 

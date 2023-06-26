@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:EditCartonBox.tsx
+// Type: Edit Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,6 +21,7 @@ import { FormInitialValues } from './EditCartonBoxWrapper'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -79,7 +92,10 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                 label="Box Name"
                                 placeholder="Box Name"
                                 onChange={(e) =>
-                                    handleSetFieldValue('boxName', e.target.value)
+                                    handleSetFieldValue(
+                                        'boxName',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -187,7 +203,10 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        handleSetFieldValue('boxWeight', inputValue)
+                                        handleSetFieldValue(
+                                            'boxWeight',
+                                            inputValue
+                                        )
                                     }
                                 }}
                             />

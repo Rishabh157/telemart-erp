@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:EditItem.tsx
+// Type: Edit Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,6 +21,7 @@ import { FormInitialValues } from './EditItemWrapper'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -75,7 +88,10 @@ const EditItem = ({ formikProps, apiStatus }: Props) => {
                                 label="Item Code"
                                 placeholder="Item Code"
                                 onChange={(e) =>
-                                    handleSetFieldValue('itemCode', e.target.value)
+                                    handleSetFieldValue(
+                                        'itemCode',
+                                        e.target.value
+                                    )
                                 }
                             />
                             {/* itemName */}
@@ -85,7 +101,10 @@ const EditItem = ({ formikProps, apiStatus }: Props) => {
                                 label="Item Name"
                                 placeholder="Item Name"
                                 onChange={(e) =>
-                                    handleSetFieldValue('itemName', e.target.value)
+                                    handleSetFieldValue(
+                                        'itemName',
+                                        e.target.value
+                                    )
                                 }
                             />
                             {/* itemWeight */}
@@ -97,7 +116,10 @@ const EditItem = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        handleSetFieldValue('itemWeight', inputValue)
+                                        handleSetFieldValue(
+                                            'itemWeight',
+                                            inputValue
+                                        )
                                     }
                                 }}
                             />

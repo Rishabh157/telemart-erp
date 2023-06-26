@@ -42,7 +42,6 @@ const AddProductSubCategory = ({
         dispatch(setFieldCustomized(true))
     }
 
-
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -128,7 +127,10 @@ const AddProductSubCategory = ({
                                 label="HSN Code"
                                 placeholder="HSN Code"
                                 onChange={(e) =>
-                                    handleSetFieldValue('hsnCode', e.target.value)
+                                    handleSetFieldValue(
+                                        'hsnCode',
+                                        e.target.value
+                                    )
                                 }
                                 className="mt-0 rounded"
                             />

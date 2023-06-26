@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:AddDealerCategory.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,6 +21,7 @@ import { FormInitialValues } from './AddDealersCategoryWrapper'
 import { useDispatch } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -96,7 +109,10 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const newValue = e.target.value
                                     if (!isNaN(Number(newValue))) {
-                                        handleSetFieldValue('investAmount', newValue)
+                                        handleSetFieldValue(
+                                            'investAmount',
+                                            newValue
+                                        )
                                     }
                                 }}
                             />

@@ -32,7 +32,6 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-
     return (
         <div className="px-7 flex flex-col gap-5">
             <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4 gap-y-5">
@@ -68,7 +67,9 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     <ATMSelectSearchable
                         name="product_category"
                         value={values.product_category}
-                        onChange={(e) => handleSetFieldValue('product_category', e)}
+                        onChange={(e) =>
+                            handleSetFieldValue('product_category', e)
+                        }
                         label="Product Category"
                         options={dropdownOptions.productCategoryOPtions}
                     />
@@ -106,7 +107,10 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     onChange={(e) => {
                         const inputValue = e.target.value
                         if (!isNaN(Number(inputValue))) {
-                            handleSetFieldValue('product_weight', String(inputValue))
+                            handleSetFieldValue(
+                                'product_weight',
+                                String(inputValue)
+                            )
                         }
                     }}
                     label="Product Weight (in gms)"

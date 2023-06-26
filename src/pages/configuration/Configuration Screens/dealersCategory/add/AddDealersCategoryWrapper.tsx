@@ -1,15 +1,33 @@
+/// ==============================================
+// Filename:AddDealerCategoryWrapper.tsx
+// Type: ADD Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { number, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import AddDealersCategory from './AddDealersCategory'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddDealerCategoryMutation } from 'src/services/DealerCategoryService'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+
+// |-- Utils  --|
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -21,7 +39,7 @@ export type FormInitialValues = {
 
 const AddDealersCategoryWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch =useDispatch()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState(false)
 
     const [addDealerscategory] = useAddDealerCategoryMutation()

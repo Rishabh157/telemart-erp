@@ -25,7 +25,6 @@ const StepAddFAQs = ({ formikProps }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-
     return (
         <div className=" ">
             <FieldArray name="FAQs">

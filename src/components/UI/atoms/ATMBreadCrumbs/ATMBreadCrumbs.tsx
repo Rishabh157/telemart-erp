@@ -45,7 +45,6 @@ const ATMBreadCrumbs = ({ breadcrumbs }: Props) => {
                         } else {
                             navigate(breadcrumb.path || '')
                         }
-                       
                     }}
                     className={`${
                         breadcrumb.path && 'cursor-pointer'

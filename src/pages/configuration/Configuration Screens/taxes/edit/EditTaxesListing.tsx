@@ -28,7 +28,7 @@ const breadcrumbs: BreadcrumbType[] = [
 const EditTaxesListing = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
     const dispatch = useDispatch()
-    const handleSetFieldValue =( name: string, value: string | File) => {
+    const handleSetFieldValue = (name: string, value: string | File) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
@@ -79,7 +79,10 @@ const EditTaxesListing = ({ formikProps, apiStatus }: Props) => {
                                 label="Taxes Name"
                                 placeholder="Taxes Name"
                                 onChange={(e) =>
-                                    handleSetFieldValue('taxName', e.target.value)
+                                    handleSetFieldValue(
+                                        'taxName',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

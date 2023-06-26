@@ -28,7 +28,6 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-
     return (
         <div className="py-6 ">
             <FieldArray name="items">

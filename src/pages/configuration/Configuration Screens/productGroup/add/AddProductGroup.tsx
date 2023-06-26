@@ -33,7 +33,6 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
@@ -79,7 +78,10 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 label="Group Name"
                                 placeholder="Group Name"
                                 onChange={(e) =>
-                                    handleSetFieldValue('groupName', e.target.value)
+                                    handleSetFieldValue(
+                                        'groupName',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMTextField
@@ -119,7 +121,10 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        handleSetFieldValue('cgst', e.target.value)
+                                        handleSetFieldValue(
+                                            'cgst',
+                                            e.target.value
+                                        )
                                     }
                                 }}
                             />
@@ -131,7 +136,10 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        handleSetFieldValue('sgst', e.target.value)
+                                        handleSetFieldValue(
+                                            'sgst',
+                                            e.target.value
+                                        )
                                     }
                                 }}
                             />
@@ -143,7 +151,10 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        handleSetFieldValue('utgst', e.target.value)
+                                        handleSetFieldValue(
+                                            'utgst',
+                                            e.target.value
+                                        )
                                     }
                                 }}
                             />
@@ -155,7 +166,10 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        handleSetFieldValue('igst', e.target.value)
+                                        handleSetFieldValue(
+                                            'igst',
+                                            e.target.value
+                                        )
                                     }
                                 }}
                             />

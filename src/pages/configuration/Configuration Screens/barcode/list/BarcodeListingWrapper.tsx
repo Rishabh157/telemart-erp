@@ -1,7 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:BarcodeListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 //import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { IconType } from 'react-icons'
+import { MdOutbond } from 'react-icons/md'
+import { BiFilter } from 'react-icons/bi'
+
+// |-- Internal Dependencies --|
 import { BarcodeListResponse, ProductBarcodeGroupResponse } from 'src/models'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import {
@@ -10,7 +25,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/barcodeSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import BarcodeListing from './BarcodeListing'
 import {
     useGetBarcodeQuery,
@@ -22,17 +36,18 @@ import {
     setItems as cbsetItems,
     setTotalItems as cbsetTotalItems,
 } from 'src/redux/slices/CartonBoxBarcodeSlice'
-
 import {
     setIsTableLoading as pgSetIsTableLoading,
     setItems as pgSetItems,
     setTotalItems as pgSetTotalItems,
 } from 'src/redux/slices/productGroupBarcodeSlice'
 import CartonBoxBarcodeListing from './components/CartonBoxBarcode/CartonBoxBarcodeListing'
-import { IconType } from 'react-icons'
-import { MdOutbond } from 'react-icons/md'
 import ProductGroupListing from './components/BarcodeGroup/ProductGroupBarcodeListing'
-import { BiFilter } from 'react-icons/bi'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- Types --|
 export type Tabs = {
     label: string
     icon: IconType

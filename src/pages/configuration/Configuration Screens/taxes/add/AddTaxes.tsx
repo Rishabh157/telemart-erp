@@ -77,14 +77,17 @@ const AddTaxes = ({ formikProps, apiStatus }: Props) => {
                                 label="Tax Name"
                                 placeholder="Tax Name"
                                 onChange={(e) =>
-                                    handleSetFieldValue('taxName', e.target.value)
+                                    handleSetFieldValue(
+                                        'taxName',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>
                     </div>
                 </div>
             </div>
-            </MainLayout>
+        </MainLayout>
     )
 }
 

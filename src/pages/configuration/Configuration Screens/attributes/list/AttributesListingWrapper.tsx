@@ -1,10 +1,22 @@
+/// ==============================================
+// Filename:AttributesListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { AttributesListResponse } from 'src/models/Attrbutes.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import AttributesListing from './AttributesListing'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     useDeleteattributesMutation,
     useGetAttributesQuery,
@@ -14,10 +26,12 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/attributesSlice'
-import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const AttributesListingWrapper = () => {
     const attributeState: any = useSelector(

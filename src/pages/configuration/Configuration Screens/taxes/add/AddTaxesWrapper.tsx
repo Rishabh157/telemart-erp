@@ -19,7 +19,7 @@ export type FormInitialValues = {
 const AddTaxesWrapper = (props: Props) => {
     // Form Initial Values
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-   const dispatch= useDispatch()
+    const dispatch = useDispatch()
     const [addTaxes] = useAddTaxesMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const navigate = useNavigate()
