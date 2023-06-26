@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React  from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 //import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
@@ -20,11 +20,9 @@ import { DropdownOptions, FieldType } from './StepEditDealerDetailsWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-
 
 // |-- Types --|
 type Props = {

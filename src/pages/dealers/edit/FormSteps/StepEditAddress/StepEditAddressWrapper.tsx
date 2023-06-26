@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect }  from 'react'
+import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
@@ -21,14 +21,12 @@ import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 import { useGetAllPincodeByDistrictQuery } from 'src/services/PinCodeService'
 
-
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
-
 
 // |-- Types --|
 type Props = {

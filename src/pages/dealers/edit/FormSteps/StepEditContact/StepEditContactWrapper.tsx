@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React  from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
@@ -15,7 +15,6 @@ import { FormikProps } from 'formik'
 import { FormInitialValues } from '../../EditDealerWrapper'
 import StepEditContact from './StepEditContact'
 import { Field } from 'src/models/FormField/FormField.model'
-
 
 // |-- Types --|
 type Props = {

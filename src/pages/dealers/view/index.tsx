@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect }  from 'react'
+import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { BiBlock, BiMessageDetail } from 'react-icons/bi'
@@ -26,7 +26,6 @@ import { useGetDealersQuery } from 'src/services/DealerServices'
 // |-- Redux --|
 import { setItems, setSearchValue } from 'src/redux/slices/dealerSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-
 
 const tabsData = [
     {

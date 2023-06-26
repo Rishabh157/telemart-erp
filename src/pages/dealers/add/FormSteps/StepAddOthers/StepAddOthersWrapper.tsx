@@ -16,7 +16,6 @@ import { FormInitialValues } from '../../AddDealerWrapper'
 import StepAddOthers from './StepAddOthers'
 import { Field } from 'src/models/FormField/FormField.model'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

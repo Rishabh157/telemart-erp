@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
@@ -26,7 +26,6 @@ import {
     setTotalItems,
 } from 'src/redux/DealerSupervisorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 const ListDealerSupervisorTabWrapper = () => {
     // const [showDropdown, setShowDropdown] = useState(false)

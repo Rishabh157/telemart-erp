@@ -11,7 +11,6 @@ import React from 'react'
 // |-- External Dependencies --|
 import { Formik, Form, FormikProps, FormikHelpers } from 'formik'
 
-
 // |-- Internal Dependencies --|
 import FilterDialog from './FilterDialog'
 

@@ -22,7 +22,6 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

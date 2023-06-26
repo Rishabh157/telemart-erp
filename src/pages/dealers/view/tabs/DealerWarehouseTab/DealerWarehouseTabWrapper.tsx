@@ -24,7 +24,6 @@ import {
 } from 'src/services/WareHoouseService'
 import { showToast } from 'src/utils'
 
-
 // |-- Redux --|
 import {
     setIsTableLoading,
@@ -32,7 +31,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {}

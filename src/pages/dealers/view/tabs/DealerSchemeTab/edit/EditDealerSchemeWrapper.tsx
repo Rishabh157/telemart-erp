@@ -15,7 +15,6 @@ import { Formik } from 'formik'
 import { object, array, string } from 'yup'
 import { useSelector, useDispatch } from 'react-redux'
 
-
 // |-- Internal Dependencies --|
 import {
     useGetDealerSchemeByIdQuery,
@@ -30,11 +29,9 @@ import {
     DealerSchemeByIdResponse,
 } from 'src/models/DealerScheme.model'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
-
 
 const EditDealerSchemeWrapper = () => {
     const params = useParams()

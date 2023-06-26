@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -18,11 +18,9 @@ import AddDealerSupervisor from './AddDealerSupervisor'
 import { useAddDealerSupervisorMutation } from 'src/services/DealerSupervisorServices'
 import { showToast } from 'src/utils'
 
-
 // |-- Redux --|
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {}

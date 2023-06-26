@@ -35,7 +35,6 @@ import {
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 export type FormInitialValues = {
     dealerCode: string

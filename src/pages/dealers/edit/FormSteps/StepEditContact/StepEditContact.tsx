@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React  from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { FieldArray, FormikProps } from 'formik'
@@ -22,7 +22,6 @@ import { FieldType } from './StepEditContactWrapper'
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-
 
 // |-- Types --|
 type Props = {

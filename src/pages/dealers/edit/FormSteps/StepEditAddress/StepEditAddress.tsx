@@ -23,7 +23,6 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -35,7 +34,6 @@ type DropdownOptions = {
     billingDistrictOptions: SelectOption[]
     billingPincodeOptions: SelectOption[]
 }
-
 
 // |-- Types --|
 type Props = {

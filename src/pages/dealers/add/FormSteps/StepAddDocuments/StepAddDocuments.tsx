@@ -22,7 +22,6 @@ import { FormInitialValues } from '../../AddDealerWrapper'
 import { FieldType } from './StepAddDocumentsWrapper'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 

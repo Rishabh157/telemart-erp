@@ -19,10 +19,8 @@ import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type DropdownOptions = {
