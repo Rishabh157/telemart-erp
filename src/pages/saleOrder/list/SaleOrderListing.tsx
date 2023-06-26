@@ -54,7 +54,10 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
             </div>
 
             <div
-                className={` border flex flex-col  rounded bg-white ${path === 'dealers'? 'h-[calc(100%-250px)]': 'h-[calc(100%-75px)]'
+                className={` border flex flex-col  rounded bg-white ${
+                    path === 'dealers'
+                        ? 'h-[calc(100%-250px)]'
+                        : 'h-[calc(100%-75px)]'
                 }`}
             >
                 {/*Table Header */}

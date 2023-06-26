@@ -12,6 +12,7 @@ import {
     useUpdateChannelCategoryMutation,
 } from 'src/services/media/ChannelCategoriesServices'
 import { setSelectedItem } from 'src/redux/slices/media/channelCategorySlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     channelCategory: string
@@ -53,6 +54,7 @@ const EditChannelCategoryWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             updateChannelCategory({
                 body: {

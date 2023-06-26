@@ -1,6 +1,15 @@
-// import React, { useState } from "react";
+/// ==============================================
+// Filename:BarcodeListing.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
@@ -9,10 +18,13 @@ import {
     setPage,
     setSearchValue,
 } from 'src/redux/slices/barcodeSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import { BarcodeListResponse } from 'src/models'
 import BarcodeDetailsCard from './components/BarcodeDetailsCard/BarcodeDetailsCard'
 
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     rows: any[]
     selectedBarcodes: BarcodeListResponse[]

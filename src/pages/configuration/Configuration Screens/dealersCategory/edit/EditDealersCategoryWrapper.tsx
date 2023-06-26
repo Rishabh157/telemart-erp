@@ -1,19 +1,34 @@
+/// ==============================================
+// Filename:EditDealerCategoryWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { number, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import EditDealersCategory from './EditDealersCategory'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 // import { useAddDealerCategoryMutation } from "src/services/DealerCategoryService";
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
 import {
     useGetDealerCategoryByIdQuery,
     useUpdateDealerCategoryMutation,
 } from 'src/services/DealerCategoryService'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/dealersCategorySlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

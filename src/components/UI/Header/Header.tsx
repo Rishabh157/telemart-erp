@@ -75,6 +75,7 @@ const Header = ({ setBgColor }: Props) => {
         e.returnValue = message
         return message
     }
+
     return (
         <div className={`rid grid-cols-2 w-full h-full shadow-lg border `}>
             {/* Right Section */}

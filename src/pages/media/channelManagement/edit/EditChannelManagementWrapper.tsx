@@ -22,6 +22,7 @@ import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategor
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import EditChannelManagement from './EditChannelManagement'
 import { setSelectedItem } from 'src/redux/slices/media/channelManagementSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 export type FormInitialValues = {
     channelName: string
     address: string
@@ -157,6 +158,7 @@ const EditChannelManagementWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             EditChannelApi({
                 body: {

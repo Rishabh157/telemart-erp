@@ -6,10 +6,11 @@ import { FormInitialValues } from '../../EditDealerWrapper'
 import { FieldType } from './StepEditDocumentsWrapper'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { CircularProgress } from '@mui/material'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -26,7 +27,11 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
     const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
     const [loaderState, setLoaderState] = useState<string>('')
     const [fileUploader] = useFileUploaderMutation()
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             {formFields?.map((formField, index) => {
@@ -106,13 +111,13 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                                 formattedValue.length <=
                                                                     14
                                                             ) {
-                                                                setFieldValue(
+                                                                handleSetFieldValue(
                                                                     name,
                                                                     formattedValue
                                                                 )
                                                             }
                                                         } else {
-                                                            setFieldValue(
+                                                            handleSetFieldValue(
                                                                 name,
                                                                 e.target.value
                                                             )
@@ -160,7 +165,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                                 setImageApiStatus(
                                                                     false
                                                                 )
-                                                                setFieldValue(
+                                                                handleSetFieldValue(
                                                                     name,
                                                                     res?.data
                                                                         ?.data
@@ -232,7 +237,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                         otherDocument.documentName
                                                     }
                                                     onChange={(e) => {
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             `otherDocument[${otherDocumentIndex}].documentName`,
                                                             e.target.value
                                                         )
@@ -255,7 +260,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                         otherDocument.documentFile
                                                     }
                                                     onChange={(e) =>
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             `otherDocument[${otherDocumentIndex}].documentFile`,
                                                             e.target.value
                                                         )

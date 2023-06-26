@@ -1,6 +1,14 @@
+/// ==============================================
+// Filename:ConfigurationLayout.tsx
+// Type: Layout Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-import Header from 'src/components/UI/Header/Header'
-import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
+
+// |-- External Dependencies --|
 import { NavItemType } from 'src/navigation'
 import {
     BiChevronsLeft,
@@ -18,6 +26,10 @@ import { CiBarcode, CiLocationOn } from 'react-icons/ci'
 import { GrLanguage } from 'react-icons/gr'
 import { TbBinaryTree2 } from 'react-icons/tb'
 import { useLocation, useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import Header from 'src/components/UI/Header/Header'
+import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 
 const configurationNavigation: NavItemType[] = [
     {

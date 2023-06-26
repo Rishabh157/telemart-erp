@@ -12,6 +12,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { FieldType } from './EditTapeManagementWrapper'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -41,6 +43,7 @@ const EditTapeManagement = ({
     dropdownOptions,
     formFields,
 }: Props) => {
+    const dispatch = useDispatch()
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
     const [show, setShow] = useState(false)
@@ -53,6 +56,10 @@ const EditTapeManagement = ({
             options = [...options, { label: i.toString(), value: i.toString() }]
         }
         return options
+    }
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
     }
     return (
         <div className="">
@@ -121,7 +128,10 @@ const EditTapeManagement = ({
                                 label="Tape Name"
                                 placeholder="Tape Name"
                                 onChange={(e) =>
-                                    setFieldValue('tapeName', e.target.value)
+                                    handleSetFieldValue(
+                                        'tapeName',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMSelectSearchable
@@ -131,7 +141,9 @@ const EditTapeManagement = ({
                                 value={values.tapeType}
                                 selectLabel="Select Tape type"
                                 label="Tape Type"
-                                onChange={(e) => setFieldValue('tapeType', e)}
+                                onChange={(e) =>
+                                    handleSetFieldValue('tapeType', e)
+                                }
                             />
 
                             <ATMSelectSearchable
@@ -139,7 +151,7 @@ const EditTapeManagement = ({
                                 value={values.schemeId}
                                 selectLabel="Select Scheme"
                                 onChange={(value) =>
-                                    setFieldValue('schemeId', value)
+                                    handleSetFieldValue('schemeId', value)
                                 }
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme"
@@ -154,7 +166,7 @@ const EditTapeManagement = ({
                                 selectLabel="Select Artist"
                                 value={values.artistId}
                                 onChange={(value) =>
-                                    setFieldValue('artistId', value)
+                                    handleSetFieldValue('artistId', value)
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
@@ -165,7 +177,7 @@ const EditTapeManagement = ({
                                 isMulti={true}
                                 value={values.languageId}
                                 onChange={(value) =>
-                                    setFieldValue('languageId', value)
+                                    handleSetFieldValue('languageId', value)
                                 }
                                 options={dropdownOptions.languageOptions}
                                 label="Language"
@@ -176,7 +188,10 @@ const EditTapeManagement = ({
                                 label="Website Link"
                                 placeholder="Website Link"
                                 onChange={(e) =>
-                                    setFieldValue('webSiteLink', e.target.value)
+                                    handleSetFieldValue(
+                                        'webSiteLink',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -186,7 +201,10 @@ const EditTapeManagement = ({
                                 label="Youtube Link"
                                 placeholder="Youtube Link"
                                 onChange={(e) =>
-                                    setFieldValue('youtubeLink', e.target.value)
+                                    handleSetFieldValue(
+                                        'youtubeLink',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>
@@ -211,7 +229,7 @@ const EditTapeManagement = ({
                                                 if (e.target.value !== '0') {
                                                     setShow(false)
                                                 }
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     'hour',
                                                     e.target.value
                                                 )
@@ -230,7 +248,7 @@ const EditTapeManagement = ({
                                                 if (selectValue !== '00') {
                                                     setShow(false)
                                                 }
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     'minute',
                                                     selectValue
                                                 )
@@ -250,7 +268,7 @@ const EditTapeManagement = ({
                                                 if (selectValue !== '00') {
                                                     setShow(false)
                                                 }
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     'second',
                                                     selectValue
                                                 )
@@ -273,7 +291,7 @@ const EditTapeManagement = ({
                                 value={values.remarks}
                                 label="Remark"
                                 onChange={(newValue) =>
-                                    setFieldValue('remarks', newValue)
+                                    handleSetFieldValue('remarks', newValue)
                                 }
                             />
                         </div>
@@ -313,7 +331,7 @@ const EditTapeManagement = ({
                                                                         onChange={(
                                                                             e
                                                                         ) => {
-                                                                            setFieldValue(
+                                                                            handleSetFieldValue(
                                                                                 `phone[${itemIndex}].phoneNo`,
                                                                                 e
                                                                                     .target

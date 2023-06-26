@@ -247,7 +247,7 @@ const ApprovedOrderListing = () => {
             <div className="px-4 h-[calc(100vh-55px)] ">
                 {/* <div className="mb-5 p-2 text-2xl text-slate-700 font-bold "> */}
                 <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Purchase Order </ATMPageHeading>
+                    <ATMPageHeading> Purchase Order </ATMPageHeading>
                 </div>
                 <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                     {/*Table Header */}

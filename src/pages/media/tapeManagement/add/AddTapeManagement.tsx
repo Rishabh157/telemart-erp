@@ -10,7 +10,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { HiPlus } from 'react-icons/hi'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { MdDeleteOutline } from 'react-icons/md'
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -57,6 +60,10 @@ const AddTapeManagement = ({
             options = [...options, { label: i.toString(), value: i.toString() }]
         }
         return options
+    }
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
     }
     return (
         <div className="">
@@ -127,7 +134,10 @@ const AddTapeManagement = ({
                                 label="Tape Name"
                                 placeholder="Tape Name"
                                 onChange={(e) =>
-                                    setFieldValue('tapeName', e.target.value)
+                                    handleSetFieldValue(
+                                        'tapeName',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -138,14 +148,16 @@ const AddTapeManagement = ({
                                 value={values.tapeType}
                                 selectLabel="Select Tape type"
                                 label="Tape Type"
-                                onChange={(e) => setFieldValue('tapeType', e)}
+                                onChange={(e) =>
+                                    handleSetFieldValue('tapeType', e)
+                                }
                             />
                             <ATMSelectSearchable
                                 name="schemeId"
                                 value={values.schemeId}
                                 selectLabel="Select Scheme"
                                 onChange={(value) =>
-                                    setFieldValue('schemeId', value)
+                                    handleSetFieldValue('schemeId', value)
                                 }
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme"
@@ -160,7 +172,7 @@ const AddTapeManagement = ({
                                 selectLabel="Select Artist"
                                 value={values.artistId}
                                 onChange={(value) =>
-                                    setFieldValue('artistId', value)
+                                    handleSetFieldValue('artistId', value)
                                 }
                                 options={dropdownOptions.artistOption}
                                 label="Artist"
@@ -171,7 +183,7 @@ const AddTapeManagement = ({
                                 isMulti={true}
                                 value={values.languageId}
                                 onChange={(value) =>
-                                    setFieldValue('languageId', value)
+                                    handleSetFieldValue('languageId', value)
                                 }
                                 options={dropdownOptions.languageOptions}
                                 label="Language"
@@ -182,7 +194,10 @@ const AddTapeManagement = ({
                                 label="Website Link"
                                 placeholder="Website Link"
                                 onChange={(e) =>
-                                    setFieldValue('webSiteLink', e.target.value)
+                                    handleSetFieldValue(
+                                        'webSiteLink',
+                                        e.target.value
+                                    )
                                 }
                             />
                             <ATMTextField
@@ -191,7 +206,10 @@ const AddTapeManagement = ({
                                 label="Youtube Link"
                                 placeholder="Youtube Link"
                                 onChange={(e) =>
-                                    setFieldValue('youtubeLink', e.target.value)
+                                    handleSetFieldValue(
+                                        'youtubeLink',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>
@@ -215,7 +233,7 @@ const AddTapeManagement = ({
                                                 if (e.target.value !== '0') {
                                                     setShow(false)
                                                 }
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     'hour',
                                                     e.target.value
                                                 )
@@ -234,7 +252,7 @@ const AddTapeManagement = ({
                                                 if (selectValue !== '00') {
                                                     setShow(false)
                                                 }
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     'minute',
                                                     selectValue
                                                 )
@@ -254,7 +272,7 @@ const AddTapeManagement = ({
                                                 if (selectValue !== '00') {
                                                     setShow(false)
                                                 }
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     'second',
                                                     selectValue
                                                 )
@@ -277,7 +295,7 @@ const AddTapeManagement = ({
                                 value={values.remarks}
                                 label="Remark"
                                 onChange={(newValue) =>
-                                    setFieldValue('remarks', newValue)
+                                    handleSetFieldValue('remarks', newValue)
                                 }
                             />
                         </div>
@@ -319,7 +337,7 @@ const AddTapeManagement = ({
                                                                         onChange={(
                                                                             e
                                                                         ) => {
-                                                                            setFieldValue(
+                                                                            handleSetFieldValue(
                                                                                 `phone[${itemIndex}].phoneNo`,
                                                                                 e
                                                                                     .target

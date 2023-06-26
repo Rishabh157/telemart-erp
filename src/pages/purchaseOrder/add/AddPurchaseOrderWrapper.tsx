@@ -15,6 +15,7 @@ import { setAllItems } from 'src/redux/slices/vendorSlice'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllItem } from 'src/redux/slices/itemSlice'
 import moment from 'moment'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -39,7 +40,7 @@ export type FormInitialValues = {
 
 const AddPurchaseOrderWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const disptach = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [addPurchaseOrder] = useAddPurchaseOrderMutation()
@@ -90,17 +91,17 @@ const AddPurchaseOrderWrapper = (props: Props) => {
 
     //vendor
     useEffect(() => {
-        disptach(setAllItems(vendorData?.data))
-    }, [vendorData, vendorIsLoading, VendorIsFetching, disptach])
+        dispatch(setAllItems(vendorData?.data))
+    }, [vendorData, vendorIsLoading, VendorIsFetching, dispatch])
 
     //warehouse
     useEffect(() => {
-        disptach(setAllWareHouse(warehouseData?.data))
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, disptach])
+        dispatch(setAllWareHouse(warehouseData?.data))
+    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
 
     useEffect(() => {
-        disptach(setAllItem(itemsData?.data))
-    }, [itemsData, disptach, itemsIsLoading, itemsIsFetching])
+        dispatch(setAllItem(itemsData?.data))
+    }, [itemsData, dispatch, itemsIsLoading, itemsIsFetching])
     //itemOption
 
     // Form Initial Values
@@ -143,6 +144,7 @@ const AddPurchaseOrderWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         const purchaseOrder = values.purchaseOrder.map((ele: any) => {
             return {
                 ...ele,

@@ -12,6 +12,7 @@ import {
 } from 'src/services/websites/WebsitePageServices'
 import EditWebsitePage from './EditWebsitePage'
 import { setSelectedWebsite } from 'src/redux/slices/website/websitePageSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -62,6 +63,7 @@ const EditWebsitePageWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             editWebsitePage({
                 body: {

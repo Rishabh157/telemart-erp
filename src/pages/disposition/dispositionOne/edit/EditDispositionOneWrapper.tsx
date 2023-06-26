@@ -12,6 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import AddDispositionOne from './EditDispositionOne'
 import DispositionLayout from '../../DispositionLayout'
 import { setSelectedDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     dispositionName: string
@@ -44,6 +45,7 @@ const EditDispositionOneWrappper = () => {
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             editDispositionOne({
                 body: {

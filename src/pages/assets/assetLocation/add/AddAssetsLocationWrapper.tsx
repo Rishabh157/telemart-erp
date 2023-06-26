@@ -12,7 +12,7 @@ import React, { useState } from 'react'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddAsstesLocation from './AddAsstesLocation'
@@ -22,6 +22,7 @@ import AsstesLayout from '../../AssetsLayout'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {}
@@ -33,6 +34,8 @@ export type FormInitialValues = {
 const AddAssetsLocationWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addLocation] = useAddAssetsLocationMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -49,6 +52,7 @@ const AddAssetsLocationWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addLocation({
                 locationName: values.locationName,

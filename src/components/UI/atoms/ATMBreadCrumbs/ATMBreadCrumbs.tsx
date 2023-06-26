@@ -2,6 +2,9 @@ import React from 'react'
 import { Breadcrumbs, Link } from '@mui/material'
 import { FiChevronRight } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState } from 'src/redux/store'
+import { useDispatch, useSelector } from 'react-redux'
 
 export type BreadcrumbType = {
     label: string
@@ -15,6 +18,10 @@ type Props = {
 
 const ATMBreadCrumbs = ({ breadcrumbs }: Props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { customized } = useSelector((state: RootState) => state?.auth)
+    const AlertText =
+        'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
 
     return (
         <Breadcrumbs
@@ -28,7 +35,16 @@ const ATMBreadCrumbs = ({ breadcrumbs }: Props) => {
                     color="inherit"
                     onClick={() => {
                         breadcrumb.onClick && breadcrumb.onClick()
-                        navigate(breadcrumb.path || '')
+                        if (customized) {
+                            const confirmValue: boolean =
+                                window.confirm(AlertText)
+                            if (confirmValue) {
+                                dispatch(setFieldCustomized(false))
+                                navigate(breadcrumb.path || '')
+                            }
+                        } else {
+                            navigate(breadcrumb.path || '')
+                        }
                     }}
                     className={`${
                         breadcrumb.path && 'cursor-pointer'

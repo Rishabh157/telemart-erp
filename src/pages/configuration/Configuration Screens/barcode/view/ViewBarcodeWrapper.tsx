@@ -1,8 +1,21 @@
+/// ==============================================
+// Filename:ViewBarcodeWrapper.tsx
+// Type: View Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import ViewBarcode from './ViewBarcode'
+
+// |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
 
+// |-- Internal Dependencies --|
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+import ViewBarcode from './ViewBarcode'
+
+// |-- Types --|
 type Props = {}
 
 const ViewBarcodeWrapper = (props: Props) => {

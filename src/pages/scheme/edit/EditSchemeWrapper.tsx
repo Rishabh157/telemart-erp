@@ -23,6 +23,7 @@ import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServi
 import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
 import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
 import StepEditProductDetailWrapper from './FormSteps/StepEditProductInformationDetails/StepEditProductDetailWrapper'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 
@@ -88,7 +89,9 @@ const steps = [
             schemeDescription: string().required(
                 'scheme description is required'
             ),
-            commission: string().required('Commission is required'),
+            commission: number()
+                .required('Commission is required')
+                .min(1, 'Commission is required'),
         }),
     },
 
@@ -307,6 +310,7 @@ const EditSchemeWrapper = () => {
             })
 
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 UpdateScheme({
                     body: {

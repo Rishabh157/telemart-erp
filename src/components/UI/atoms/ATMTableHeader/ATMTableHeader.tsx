@@ -95,7 +95,7 @@ const ATMTableHeader = ({
                 <div className="flex gap-3 items-center">
                     <div className="text-sm"> Rows per page : </div>
                     <select
-                        value={rowsPerPage as number} 
+                        value={rowsPerPage as number}
                         onChange={(e) =>
                             onRowsPerPageChange(parseInt(e.target.value))
                         }

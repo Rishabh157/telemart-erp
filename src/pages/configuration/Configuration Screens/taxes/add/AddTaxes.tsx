@@ -77,7 +77,7 @@ const AddTaxes = ({ formikProps, apiStatus }: Props) => {
                     </div>
                 </div>
             </div>
-            </MainLayout>
+        </MainLayout>
     )
 }
 

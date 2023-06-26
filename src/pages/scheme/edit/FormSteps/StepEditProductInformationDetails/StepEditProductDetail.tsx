@@ -7,6 +7,8 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { DropdownOptions } from './StepEditProductDetailWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { HiPlus } from 'react-icons/hi'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -15,7 +17,11 @@ type Props = {
 
 const StepEditProductDetail = ({ formikProps, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <FieldArray name="productInformation">
@@ -67,7 +73,7 @@ const StepEditProductDetail = ({ formikProps, dropdownOptions }: Props) => {
                                                     name={`productInformation[${productIndex}].productGroup`}
                                                     value={productGroup}
                                                     onChange={(e) => {
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             `productInformation[${productIndex}].productGroup`,
                                                             e
                                                         )
@@ -85,7 +91,7 @@ const StepEditProductDetail = ({ formikProps, dropdownOptions }: Props) => {
                                                 name={`productInformation[${productIndex}].productQuantity`}
                                                 value={productQuantity.toString()}
                                                 onChange={(e) => {
-                                                    setFieldValue(
+                                                    handleSetFieldValue(
                                                         `productInformation[${productIndex}].productQuantity`,
                                                         e.target.value
                                                     )
@@ -100,7 +106,7 @@ const StepEditProductDetail = ({ formikProps, dropdownOptions }: Props) => {
                                                 name={`productInformation[${productIndex}].mrp`}
                                                 value={mrp.toString()}
                                                 onChange={(e) => {
-                                                    setFieldValue(
+                                                    handleSetFieldValue(
                                                         `productInformation[${productIndex}].mrp`,
                                                         e.target.value
                                                     )
@@ -115,7 +121,7 @@ const StepEditProductDetail = ({ formikProps, dropdownOptions }: Props) => {
                                                 name={`productInformation[${productIndex}].pop`}
                                                 value={pop.toString()}
                                                 onChange={(e) => {
-                                                    setFieldValue(
+                                                    handleSetFieldValue(
                                                         `productInformation[${productIndex}].pop`,
                                                         e.target.value
                                                     )

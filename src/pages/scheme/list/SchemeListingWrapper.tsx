@@ -164,13 +164,13 @@ const SchemeListingWrapper = () => {
     }
 
     return (
-            <SideNavLayout>
-                <SchemeListing
-                    columns={columns || []}
-                    rows={items || []}
-                    setShowDropdown={setShowDropdown}
-                />
-            </SideNavLayout>
+        <SideNavLayout>
+            <SchemeListing
+                columns={columns || []}
+                rows={items || []}
+                setShowDropdown={setShowDropdown}
+            />
+        </SideNavLayout>
     )
 }
 

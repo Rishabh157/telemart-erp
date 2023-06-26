@@ -7,6 +7,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditWebsiteWrapper'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -26,7 +28,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditWebsite = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -75,7 +81,10 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
                                 label="Product Name"
                                 placeholder="Product Name"
                                 onChange={(e) =>
-                                    setFieldValue('productName', e.target.value)
+                                    handleSetFieldValue(
+                                        'productName',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -86,7 +95,7 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
                                 label="URL"
                                 placeholder="URL"
                                 onChange={(e) =>
-                                    setFieldValue('url', e.target.value)
+                                    handleSetFieldValue('url', e.target.value)
                                 }
                             />
 
@@ -96,7 +105,10 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
                                 value={values.gaTagIp}
                                 label="GA Tag"
                                 onChange={(e) =>
-                                    setFieldValue('gaTagIp', e.target.value)
+                                    handleSetFieldValue(
+                                        'gaTagIp',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>
@@ -107,7 +119,10 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
                                 value={values.searchConsoleIp}
                                 label="Search Console IP Address"
                                 onChange={(newValue) =>
-                                    setFieldValue('searchConsoleIp', newValue)
+                                    handleSetFieldValue(
+                                        'searchConsoleIp',
+                                        newValue
+                                    )
                                 }
                             />
 
@@ -117,7 +132,7 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
                                 value={values.headerSpace}
                                 label="Header Space"
                                 onChange={(newValue) =>
-                                    setFieldValue('headerSpace', newValue)
+                                    handleSetFieldValue('headerSpace', newValue)
                                 }
                             />
 
@@ -127,7 +142,7 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
                                 value={values.footerSpace}
                                 label="Footer Space"
                                 onChange={(newValue) =>
-                                    setFieldValue('footerSpace', newValue)
+                                    handleSetFieldValue('footerSpace', newValue)
                                 }
                             />
 
@@ -137,7 +152,7 @@ const EditWebsite = ({ formikProps, apiStatus }: Props) => {
                                 value={values.siteMap}
                                 label="SiteMap"
                                 onChange={(newValue) =>
-                                    setFieldValue('siteMap', newValue)
+                                    handleSetFieldValue('siteMap', newValue)
                                 }
                             />
                         </div>

@@ -8,6 +8,8 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -32,6 +34,11 @@ const EditDidManagements = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -75,7 +82,10 @@ const EditDidManagements = ({
                                 label="Did Number"
                                 placeholder="Did Number"
                                 onChange={(e) =>
-                                    setFieldValue('didNumber', e.target.value)
+                                    handleSetFieldValue(
+                                        'didNumber',
+                                        e.target.value
+                                    )
                                 }
                             />
 
@@ -83,7 +93,7 @@ const EditDidManagements = ({
                                 name="schemeId"
                                 value={values.schemeId}
                                 onChange={(value) =>
-                                    setFieldValue('schemeId', value)
+                                    handleSetFieldValue('schemeId', value)
                                 }
                                 options={dropdownOptions.schemeDataOption}
                                 label="Scheme Name"
@@ -93,7 +103,7 @@ const EditDidManagements = ({
                                 name="channelId"
                                 value={values.channelId}
                                 onChange={(value) =>
-                                    setFieldValue('channelId', value)
+                                    handleSetFieldValue('channelId', value)
                                 }
                                 options={dropdownOptions.channelOptions}
                                 label="Channel Name"

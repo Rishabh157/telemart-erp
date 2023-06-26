@@ -4,10 +4,11 @@ import { object, string } from 'yup'
 import AddArtist from './AddArtist'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useAddArtistMutation } from 'src/services/media/ArtistServices'
 import MediaLayout from '../../MediaLayout'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -18,6 +19,7 @@ export type FormInitialValues = {
 const AddArtistWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addArtist] = useAddArtistMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -34,6 +36,7 @@ const AddArtistWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addArtist({
                 artistName: values.artistName,

@@ -46,22 +46,20 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
-             
-                    <ATMTableHeader
-                        searchValue={searchValue}
-                        page={page}
-                        rowCount={totalItems}
-                        rowsPerPage={rowsPerPage}
-                        rows={rows}
-                        onRowsPerPageChange={(newValue) =>
-                            dispatch(setRowsPerPage(newValue))
-                        }
-                        onSearch={(newValue) =>
-                            dispatch(setSearchValue(newValue))
-                        }
-                        isFilter
-                        onFilterClick={() => setIsFilterOpen(true)}
-                    />
+
+                <ATMTableHeader
+                    searchValue={searchValue}
+                    page={page}
+                    rowCount={totalItems}
+                    rowsPerPage={rowsPerPage}
+                    rows={rows}
+                    onRowsPerPageChange={(newValue) =>
+                        dispatch(setRowsPerPage(newValue))
+                    }
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    isFilter
+                    onFilterClick={() => setIsFilterOpen(true)}
+                />
 
                 {/* Table */}
                 <div className={`grow overflow-auto `}>

@@ -1,18 +1,33 @@
+/// ==============================================
+// Filename:AddCompanyWrapper.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
 import { array, object, string, number } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddCompany from './AddCompany'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import StepAddCompanyDetailsWrapper from './FormSteps/StepAddCompanyDetails/StepAddCompanyDetailsWrapper'
 import StepAddBankDetailsWrapper from './FormSteps/StepAddBankDetails/StepAddBankDetailsWrapper'
 import { useAddCompanyMutation } from 'src/services/CompanyServices'
-import { useNavigate } from 'react-router-dom'
 import { showToast, validationofGst } from 'src/utils'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from 'src/redux/store'
 
+// |-- Redux --|
+import { AppDispatch } from 'src/redux/store'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
     companyName: string
