@@ -5,8 +5,9 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditProductWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type DropdownOptions = {
     productSubCategoryOPtions: SelectOption[]
@@ -25,6 +26,11 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="px-7 flex flex-col gap-5">
@@ -35,7 +41,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     name="product_code"
                     value={values.product_code}
                     onChange={(e) =>
-                        setFieldValue('product_code', e.target.value)
+                        handleSetFieldValue('product_code', e.target.value)
                     }
                     label="Product Code"
                     placeholder="Product Code"
@@ -48,7 +54,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     name="product_name"
                     value={values.product_name}
                     onChange={(e) =>
-                        setFieldValue('product_name', e.target.value)
+                        handleSetFieldValue('product_name', e.target.value)
                     }
                     label="Product Name"
                     placeholder="Product Name"
@@ -61,7 +67,9 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     <ATMSelectSearchable
                         name="product_category"
                         value={values.product_category}
-                        onChange={(e) => setFieldValue('product_category', e)}
+                        onChange={(e) =>
+                            handleSetFieldValue('product_category', e)
+                        }
                         label="Product Category"
                         options={dropdownOptions.productCategoryOPtions}
                     />
@@ -73,7 +81,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                         name="product_sub_category"
                         value={values.product_sub_category}
                         onChange={(e) =>
-                            setFieldValue('product_sub_category', e)
+                            handleSetFieldValue('product_sub_category', e)
                         }
                         label="Product Sub Category"
                         options={dropdownOptions.productSubCategoryOPtions}
@@ -86,7 +94,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                         name="productGroup"
                         required
                         value={values.productGroup}
-                        onChange={(e) => setFieldValue('productGroup', e)}
+                        onChange={(e) => handleSetFieldValue('productGroup', e)}
                         label="Product Group"
                         options={dropdownOptions.productGroupOPtions}
                     />
@@ -99,7 +107,10 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     onChange={(e) => {
                         const inputValue = e.target.value
                         if (!isNaN(Number(inputValue))) {
-                            setFieldValue('product_weight', String(inputValue))
+                            handleSetFieldValue(
+                                'product_weight',
+                                String(inputValue)
+                            )
                         }
                     }}
                     label="Product Weight (in gms)"
@@ -122,7 +133,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'dimensions.height',
                                         inputValue
                                     )
@@ -140,7 +151,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'dimensions.width',
                                         inputValue
                                     )
@@ -158,7 +169,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'dimensions.depth',
                                         inputValue
                                     )
@@ -178,7 +189,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     name="description"
                     value={values.description}
                     onChange={(newValue) =>
-                        setFieldValue('description', newValue)
+                        handleSetFieldValue('description', newValue)
                     }
                     label="Description"
                     placeholder="Description"

@@ -6,8 +6,9 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import { useAddTaxesMutation } from 'src/services/TaxesService'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -18,6 +19,7 @@ export type FormInitialValues = {
 const AddTaxesWrapper = (props: Props) => {
     // Form Initial Values
     const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const dispatch = useDispatch()
     const [addTaxes] = useAddTaxesMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const navigate = useNavigate()
@@ -34,6 +36,8 @@ const AddTaxesWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         setTimeout(() => {
             addTaxes({
                 taxName: values.taxName,

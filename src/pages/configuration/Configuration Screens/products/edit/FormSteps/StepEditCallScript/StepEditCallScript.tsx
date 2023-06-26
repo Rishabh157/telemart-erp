@@ -7,8 +7,9 @@ import { EditorState } from 'draft-js'
 import ATMHTMLEditor from 'src/components/UI/atoms/formFields/ATMHTMLEditor/ATMHTMLEditor'
 import { DropdownOptions } from './StepEditCallScriptWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -21,7 +22,11 @@ const StepEditCallScript = ({ formikProps, dropdownOptions }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className=" ">
             <FieldArray name="call_scripts">
@@ -61,7 +66,7 @@ const StepEditCallScript = ({ formikProps, dropdownOptions }: Props) => {
                                             name={`call_scripts[${scriptIndex}].script`}
                                             value={script.script}
                                             onChange={(newValue) =>
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     `call_scripts[${scriptIndex}].script`,
                                                     newValue
                                                 )
@@ -73,7 +78,7 @@ const StepEditCallScript = ({ formikProps, dropdownOptions }: Props) => {
                                             name={`call_scripts[${scriptIndex}].language`}
                                             value={language}
                                             onChange={(e) => {
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     `call_scripts[${scriptIndex}].language`,
                                                     e.target.value
                                                 )

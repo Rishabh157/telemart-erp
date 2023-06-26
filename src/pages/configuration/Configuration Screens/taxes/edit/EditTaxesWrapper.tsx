@@ -12,6 +12,7 @@ import {
     useUpdateTaxesMutation,
 } from 'src/services/TaxesService'
 import EditTaxesListing from './EditTaxesListing'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -45,6 +46,8 @@ const EditTaxesWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         setTimeout(() => {
             EditTaxes({
                 body: {

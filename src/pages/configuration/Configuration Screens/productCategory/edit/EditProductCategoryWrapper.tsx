@@ -12,6 +12,7 @@ import {
 } from 'src/services/ProductCategoryServices'
 import EditProductCategoryListing from './EditProductCategoryListing'
 import { setSelectedProductCategory } from 'src/redux/slices/productCategorySlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -49,6 +50,7 @@ const EditProductCategoryWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
 
         setTimeout(() => {
             EditPrductCategory({

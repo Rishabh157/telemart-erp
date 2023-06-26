@@ -14,6 +14,7 @@ import {
 } from 'src/services/ProductSubCategoryService'
 import { setSelectedItem } from 'src/redux/slices/productSubCategorySlice'
 import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -79,6 +80,8 @@ const EditProductSubCategoryWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         editProductSubCategory({
             body: {
                 subCategoryCode: values.subCategoryCode,

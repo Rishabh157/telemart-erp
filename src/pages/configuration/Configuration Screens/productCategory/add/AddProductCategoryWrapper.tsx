@@ -7,7 +7,8 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddProductCategoryMutation } from 'src/services/ProductCategoryServices'
 import { showToast } from 'src/utils'
 import { RootState } from 'src/redux/store'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -18,6 +19,7 @@ export type FormInitialValues = {
 
 const AddProductCategoryWrapper = (props: Props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const [addProductCategory] = useAddProductCategoryMutation()
@@ -38,6 +40,8 @@ const AddProductCategoryWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         setTimeout(() => {
             addProductCategory({
                 categoryCode: values.categoryCode,
