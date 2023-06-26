@@ -1,13 +1,27 @@
+/// ==============================================
+// Filename:StepAddDealerDetailsWrapper.tsx
+// Type: ADD Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- External Dependencies --|
 import React from 'react'
+
+// |-- Internal Dependencies --|
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../AddDealerWrapper'
 import StepAddComapnyDetails from './StepAddDealerDetails'
 
+// |-- Types --|
 export type DropdownOptions = {
     dealerCategoryOptions: SelectOption[]
 }
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dealerCategoryOptions: any[]

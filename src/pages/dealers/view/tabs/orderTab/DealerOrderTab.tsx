@@ -1,6 +1,18 @@
-import React, { useState } from 'react'
+/// ==============================================
+// Filename:DealerOrderTab.tsx
+// Type: Tab Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useState }  from 'react'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
 import { BiSearchAlt2 } from 'react-icons/bi'
+
+// |-- Internal Dependencies --|
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'

@@ -1,17 +1,33 @@
-import React, { useState } from 'react'
+/// ==============================================
+// Filename:StepEditDocuments.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useState }  from 'react'
+
+// |-- External Dependencies --|
 import { FieldArray, FormikProps } from 'formik'
+import { MdDeleteOutline } from 'react-icons/md'
+import { HiPlus } from 'react-icons/hi'
+import { useDispatch, useSelector } from 'react-redux'
+import { CircularProgress } from '@mui/material'
+
+// |-- Internal Dependencies --|
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditDealerWrapper'
 import { FieldType } from './StepEditDocumentsWrapper'
-import { MdDeleteOutline } from 'react-icons/md'
-import { HiPlus } from 'react-icons/hi'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { CircularProgress } from '@mui/material'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     formFields: { sectionName: string; fields: FieldType[] }[]

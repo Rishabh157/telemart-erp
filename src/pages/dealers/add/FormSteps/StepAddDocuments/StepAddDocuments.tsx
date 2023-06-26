@@ -1,16 +1,32 @@
+/// ==============================================
+// Filename:StepAddDocuments.tsx
+// Type: ADD Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { FieldArray, FormikProps } from 'formik'
+import { MdDeleteOutline } from 'react-icons/md'
+import { HiPlus } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
+import { CircularProgress } from '@mui/material'
+
+// |-- Internal Dependencies --|
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddDealerWrapper'
 import { FieldType } from './StepAddDocumentsWrapper'
-import { MdDeleteOutline } from 'react-icons/md'
-import { HiPlus } from 'react-icons/hi'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
-import { CircularProgress } from '@mui/material'
 
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     formFields: { sectionName: string; fields: FieldType[] }[]

@@ -1,5 +1,18 @@
-import React, { useState, useEffect } from 'react'
+/// ==============================================
+// Filename:StepEditAddressWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useState, useEffect }  from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import { FormInitialValues } from '../../EditDealerWrapper'
 import StepAddAddress from './StepEditAddress'
 import { Field } from 'src/models/FormField/FormField.model'
@@ -7,13 +20,17 @@ import { useGetAllStateByCountryQuery } from 'src/services/StateService'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 import { useGetAllPincodeByDistrictQuery } from 'src/services/PinCodeService'
-import { useDispatch, useSelector } from 'react-redux'
+
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
 }
