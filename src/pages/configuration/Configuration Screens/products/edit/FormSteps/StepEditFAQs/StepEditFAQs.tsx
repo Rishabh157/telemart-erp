@@ -14,17 +14,13 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 
-
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditProductWrapper'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-
-
 
 // |-- Types --|
 type Props = {

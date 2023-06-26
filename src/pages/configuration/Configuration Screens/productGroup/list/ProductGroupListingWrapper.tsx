@@ -25,7 +25,6 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
-
 // |-- Redux --|
 import {
     setIsTableLoading,
@@ -33,7 +32,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/productGroupSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 const ProductGroupListingWrapper = () => {
     const productGroupState: any = useSelector(

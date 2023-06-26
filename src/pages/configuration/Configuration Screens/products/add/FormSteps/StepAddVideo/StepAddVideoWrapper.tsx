@@ -16,7 +16,6 @@ import { Field } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../AddProductWrapper'
 import StepAddVideo from './StepAddVideo'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

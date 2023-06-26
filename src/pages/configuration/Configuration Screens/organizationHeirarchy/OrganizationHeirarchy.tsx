@@ -8,8 +8,6 @@
 // |-- Built-in Dependencies --|
 import React, { ReactNode } from 'react'
 
-
-
 // |-- Redux --|
 
 // |-- Types --|
@@ -18,14 +16,12 @@ import { Tree, TreeNode } from 'react-organizational-chart'
 import { twMerge } from 'tailwind-merge'
 import { useNavigate } from 'react-router-dom'
 
-
 // |-- Internal Dependencies --|
 import ATMMenu from 'src/components/UI/atoms/ATMMenu/ATMMenu'
 import ConfigurationLayout from '../../ConfigurationLayout'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-
 
 const StyledNode = ({
     children,

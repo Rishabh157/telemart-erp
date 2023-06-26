@@ -23,7 +23,6 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
-
 // |-- Redux --|
 import {
     setRowsPerPage,

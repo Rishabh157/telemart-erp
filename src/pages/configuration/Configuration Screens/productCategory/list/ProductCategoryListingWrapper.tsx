@@ -25,7 +25,6 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
-
 // |-- Redux --|
 import {
     setIsTableLoading,

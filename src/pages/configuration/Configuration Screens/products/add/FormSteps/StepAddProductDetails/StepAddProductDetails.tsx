@@ -19,7 +19,6 @@ import { FormInitialValues } from '../../AddProductWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

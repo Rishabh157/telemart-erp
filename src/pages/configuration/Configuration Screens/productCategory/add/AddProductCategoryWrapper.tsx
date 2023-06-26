@@ -24,7 +24,6 @@ import { showToast } from 'src/utils'
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 type Props = {}
 

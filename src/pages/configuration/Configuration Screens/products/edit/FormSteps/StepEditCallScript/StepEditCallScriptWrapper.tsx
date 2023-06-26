@@ -16,7 +16,6 @@ import { FormInitialValues } from '../../EditProductWrapper'
 import StepEditCallScript from './StepEditCallScript'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

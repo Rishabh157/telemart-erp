@@ -9,7 +9,7 @@
 import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -38,8 +38,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/productSubCategorySlice'
-
-
 
 const ProductSubCategoryListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

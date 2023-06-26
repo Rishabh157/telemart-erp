@@ -28,7 +28,6 @@ import { setAllTaxes } from 'src/redux/slices/TaxesSlice'
 import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 type Props = {}
 

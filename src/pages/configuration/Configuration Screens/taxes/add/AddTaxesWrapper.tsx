@@ -20,7 +20,6 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
 import { useAddTaxesMutation } from 'src/services/TaxesService'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

@@ -21,7 +21,6 @@ import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServi
 import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 
-
 // |-- Redux --|
 import { setAllItems as setAllProductGroup } from 'src/redux/slices/productGroupSlice'
 import { setAllItems } from 'src/redux/slices/productSubCategorySlice'
