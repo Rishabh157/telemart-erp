@@ -1,23 +1,39 @@
+/// ==============================================
+// Filename:ProductGroupListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import ProductGroupListing from './ProductGroupListing'
+import {
+    useDeleteProductGroupMutation,
+    useGetProductGroupQuery,
+} from 'src/services/ProductGroupService'
+import { ProductGroupListResponse } from 'src/models/ProductGroup.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+
+// |-- Redux --|
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/productGroupSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-    useDeleteProductGroupMutation,
-    useGetProductGroupQuery,
-} from 'src/services/ProductGroupService'
-import { useNavigate } from 'react-router-dom'
-import { ProductGroupListResponse } from 'src/models/ProductGroup.model'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
 
 const ProductGroupListingWrapper = () => {
     const productGroupState: any = useSelector(

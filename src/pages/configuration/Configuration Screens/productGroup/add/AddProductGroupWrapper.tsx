@@ -1,15 +1,29 @@
+// Filename:EditProductGroup.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { number, object, string } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import AddProductGroup from './AddProductGroup'
-import { useNavigate } from 'react-router-dom'
 import { useAddProductGroupMutation } from 'src/services/ProductGroupService'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 export type FormInitialValues = {
     groupName: string
     dealerSalePrice: number

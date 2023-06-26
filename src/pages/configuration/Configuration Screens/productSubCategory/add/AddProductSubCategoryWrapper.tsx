@@ -1,19 +1,35 @@
+/// ==============================================
+// Filename:AddProductSubWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import AddProductSubCategory from './AddProductSubCategory'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddProductSubCategoryMutation } from 'src/services/ProductSubCategoryService'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
 import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
 import { useGetAllTaxesQuery } from 'src/services/TaxesService'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllTaxes } from 'src/redux/slices/TaxesSlice'
 import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

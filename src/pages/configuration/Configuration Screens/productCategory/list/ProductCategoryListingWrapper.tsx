@@ -1,15 +1,21 @@
+/// ==============================================
+// Filename:ProductCategoryListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ProductCategoryListResponse } from 'src/models/ProductCategory.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/productCategorySlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import ProductCategoryListing from './ProductCategoryListing'
 import {
     useDeleteProductCategoryMutation,
@@ -18,6 +24,15 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+
+// |-- Redux --|
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/productCategorySlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const ProductCategoryListingWrapper = () => {
     const productCategoryState: any = useSelector(
