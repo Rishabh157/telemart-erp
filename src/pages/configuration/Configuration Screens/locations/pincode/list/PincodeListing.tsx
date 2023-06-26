@@ -16,7 +16,6 @@ import LocationListView from '../../sharedComponents/LocationListView'
 import AddPincodeWrapper from '../add/AddPincodeWrapper'
 import { showToast } from 'src/utils'
 
-
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setFilterValue } from 'src/redux/slices/areaSlice'
@@ -24,7 +23,6 @@ import {
     setSearchValue,
     setSelectedLocationPincode,
 } from 'src/redux/slices/pincodeSlice'
-
 
 // |-- Types --|
 type Props = {

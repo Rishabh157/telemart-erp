@@ -20,7 +20,6 @@ import { useGetStateQuery } from 'src/services/StateService'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setItems } from 'src/redux/slices/statesSlice'
 
-
 const StateListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.states)

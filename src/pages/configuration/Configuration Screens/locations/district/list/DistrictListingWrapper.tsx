@@ -19,7 +19,6 @@ import { setItems } from 'src/redux/slices/districtSlice'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 const DistrictListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.district)
