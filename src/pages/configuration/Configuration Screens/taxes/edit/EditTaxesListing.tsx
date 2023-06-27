@@ -1,5 +1,18 @@
+/// ==============================================
+// Filename:EditTaxesListing.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -7,6 +20,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditTaxesWrapper'
 
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -25,6 +42,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditTaxesListing = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
@@ -72,7 +94,10 @@ const EditTaxesListing = ({ formikProps, apiStatus }: Props) => {
                                 label="Taxes Name"
                                 placeholder="Taxes Name"
                                 onChange={(e) =>
-                                    setFieldValue('taxName', e.target.value)
+                                    handleSetFieldValue(
+                                        'taxName',
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>

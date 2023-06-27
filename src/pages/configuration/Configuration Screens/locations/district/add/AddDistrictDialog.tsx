@@ -1,14 +1,27 @@
+/// ==============================================
+// Filename:AddDistrictDialog.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React from 'react'
+
+// |-- External Dependencies --|
 import {
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
 } from '@mui/material'
-import React from 'react'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddDistrictWrapper'
 
+// |-- Types --|
 type Props = {
     onClose: () => void
     formikProps: FormikProps<FormInitialValues>

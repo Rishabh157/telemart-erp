@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:AddDealerCategoryWrapper.tsx
 // Type: ADD Component
-// Last Updated: JUNE 24, 2023
+// Last Updated: JUNE 26, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -11,17 +11,21 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { Formik } from 'formik'
 import { number, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddDealersCategory from './AddDealersCategory'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddDealerCategoryMutation } from 'src/services/DealerCategoryService'
+
+// |-- Utils  --|
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {}
@@ -35,6 +39,7 @@ export type FormInitialValues = {
 
 const AddDealersCategoryWrapper = (props: Props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState(false)
 
     const [addDealerscategory] = useAddDealerCategoryMutation()
@@ -59,6 +64,8 @@ const AddDealersCategoryWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         addDealerscategory({
             dealersCategory: values.dealersCategory,
             investAmount: values.investAmount,

@@ -42,7 +42,7 @@ const ATMTable = <T extends {}>({
     isLoading = false,
     setShowDropdown,
     headerClassName = ' py-1 px-2',
-    rowClassName = 'px-2 bg-white py-1',
+    rowClassName = 'px-2 bg-white py-2',
     noDataFoundText = `${NOT_DATA_FOUND}`,
     noDataFoundClass = 'text-slate-500',
 }: ATMTablePropTypes<T>) => {

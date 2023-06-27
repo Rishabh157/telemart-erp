@@ -1,15 +1,30 @@
+/// ==============================================
+// Filename:StepEditItems.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
-import { FormikProps } from 'formik'
+
+// |-- External Dependencies --|
+import { FormikProps, FieldArray } from 'formik'
+import { MdDeleteOutline } from 'react-icons/md'
+import { HiPlus } from 'react-icons/hi'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { FormInitialValues } from '../../EditProductWrapper'
-import { FieldArray } from 'formik'
-import { MdDeleteOutline } from 'react-icons/md'
 import { DropdownOptions } from './StepEditItemsWrapper'
-import { HiPlus } from 'react-icons/hi'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: DropdownOptions
@@ -21,6 +36,11 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="py-6 ">
@@ -63,7 +83,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                                             name={`items[${itemIndex}].itemId`}
                                             value={itemId}
                                             onChange={(e) => {
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     `items[${itemIndex}].itemId`,
                                                     e
                                                 )
@@ -86,7 +106,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                                                 if (
                                                     !isNaN(Number(inputValue))
                                                 ) {
-                                                    setFieldValue(
+                                                    handleSetFieldValue(
                                                         `items[${itemIndex}].itemQuantity`,
                                                         e.target.value
                                                     )

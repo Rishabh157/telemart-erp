@@ -1,7 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:AddProductWrapper.tsx
+// Type: ADD Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
 import { array, number, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import draftToHtml from 'draftjs-to-html'
+
+// |-- Internal Dependencies --|
 import StepAddProductDetailsWrapper from './FormSteps/StepAddProductDetails/StepAddProductDetailsWrapper'
 import AddProduct from './AddProduct'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
@@ -10,20 +25,21 @@ import StepAddFAQsWrapper from './FormSteps/StepAddFAQs/StepAddFAQsWrapper'
 import StepAddVideoWrapper from './FormSteps/StepAddVideo/StepAddVideoWrapper'
 import { EditorState, convertToRaw } from 'draft-js'
 import StepAddCallScriptWrapper from './FormSteps/StepAddCallScript/StepAddCallScriptWrapper'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/itemSlice'
-import { setAllItems as setAllLanguage } from 'src/redux/slices/languageSlice'
-
 import { useGetAllItemsQuery } from 'src/services/ItemService'
 import { useAddProductMutation } from 'src/services/ProductService'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import draftToHtml from 'draftjs-to-html'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
-// TYPE-  Form Intial Values
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setAllItems } from 'src/redux/slices/itemSlice'
+import { setAllItems as setAllLanguage } from 'src/redux/slices/languageSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 export type FormInitialValues = {
     product_code: string
     product_name: string
@@ -248,6 +264,7 @@ const AddProductWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps?.length - 1) {
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
 
             const callScriptData = values.call_scripts.map((ele) => {
                 return {

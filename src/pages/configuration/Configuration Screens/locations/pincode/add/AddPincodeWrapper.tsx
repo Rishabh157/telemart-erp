@@ -1,12 +1,27 @@
-import React, { useState } from 'react'
-import AddPincodeDialog from './AddPincodeDialog'
-import { object, string } from 'yup'
-import { useAddPincodeMutation } from 'src/services/PinCodeService'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { showToast } from 'src/utils'
-import { Formik } from 'formik'
+/// ==============================================
+// Filename:AddPicodeWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
 
+// |-- Built-in Dependencies --|
+import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { object, string } from 'yup'
+import { Formik } from 'formik'
+import { useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import AddPincodeDialog from './AddPincodeDialog'
+import { useAddPincodeMutation } from 'src/services/PinCodeService'
+import { showToast } from 'src/utils'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     onClose: () => void
 }

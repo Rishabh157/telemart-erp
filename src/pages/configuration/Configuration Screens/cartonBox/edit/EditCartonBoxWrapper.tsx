@@ -23,6 +23,7 @@ import {
     useUpdateCartonBoxMutation,
 } from 'src/services/CartonBoxService'
 import { setSelectedItem } from 'src/redux/slices/cartonBoxSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -81,6 +82,7 @@ const EditCartonBoxWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         EditSelectedCartonBox({
             body: {
                 boxName: values.boxName,

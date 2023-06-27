@@ -1,14 +1,30 @@
+/// ==============================================
+// Filename:AddProductCategoryWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddProductCategory from './AddProductCategory'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddProductCategoryMutation } from 'src/services/ProductCategoryServices'
 import { showToast } from 'src/utils'
-import { RootState } from 'src/redux/store'
-import { useSelector } from 'react-redux'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -18,6 +34,7 @@ export type FormInitialValues = {
 
 const AddProductCategoryWrapper = (props: Props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const [addProductCategory] = useAddProductCategoryMutation()
@@ -38,6 +55,8 @@ const AddProductCategoryWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         setTimeout(() => {
             addProductCategory({
                 categoryCode: values.categoryCode,

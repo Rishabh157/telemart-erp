@@ -1,14 +1,30 @@
+/// ==============================================
+// Filename:AddTaxesWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import AddTaxes from './AddTaxes'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import { useAddTaxesMutation } from 'src/services/TaxesService'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -18,6 +34,7 @@ export type FormInitialValues = {
 const AddTaxesWrapper = (props: Props) => {
     // Form Initial Values
     const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const dispatch = useDispatch()
     const [addTaxes] = useAddTaxesMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const navigate = useNavigate()
@@ -34,6 +51,8 @@ const AddTaxesWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         setTimeout(() => {
             addTaxes({
                 taxName: values.taxName,
