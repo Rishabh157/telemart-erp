@@ -81,7 +81,7 @@ const CompetitorManagementListing = ({
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { IoNotifications } from 'react-icons/io5'
 import UserProfileCard from '../UserProfileCard/UserProfileCard'
@@ -58,30 +58,13 @@ const Header = () => {
             }
         )
     }
-    console.log(window.location.pathname)
-    useEffect(() => {
-        if (window.location.pathname !== '/dashboard') {
-            window.addEventListener('beforeunload', handleBeforeUnload)
-        }
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload)
-        }
-    }, [])
-
-    const handleBeforeUnload = (e: any) => {
-        e.preventDefault()
-        const message =
-            'Are you sure you want to leave? All provided data will  be lost.'
-        e.returnValue = message
-        return message
-    }
 
     return (
         <div className={`rid grid-cols-2 w-full h-full shadow-lg borde bg-white`}>
             {/* Right Section */}
             <div className="flex gap-4 col-start-2 justify-end items-center px-4 ">
                 <div>
-                    <div className=" p-2 mt-1 mb-1 hover:outline-slate-200 cursor-pointer outline outline-offset-1 outline-slate-300 rounded-full ">
+                    <div className="mt-1 mb-1 hover:outline-slate-200 cursor-pointer outline outline-offset-1 outline-slate-300 rounded-full ">
                         <MouseOverPopover
                             title=""
                             children={
@@ -135,6 +118,7 @@ const Header = () => {
                                     />
                                 )
                             }
+                            extraClasses="p-2"
                             isbuttonName
                         />
                     </div>

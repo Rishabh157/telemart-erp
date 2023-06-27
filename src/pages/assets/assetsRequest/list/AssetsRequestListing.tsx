@@ -88,7 +88,7 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         isLoading={isTableLoading}
                         // selectedRows={selectedRows}
                         // onRowSelect={(selectedRows) =>
