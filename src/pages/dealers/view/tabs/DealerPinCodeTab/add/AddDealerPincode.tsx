@@ -20,7 +20,6 @@ import { FormInitialValues } from './DealerPinCodeTabWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { showToast } from 'src/utils'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

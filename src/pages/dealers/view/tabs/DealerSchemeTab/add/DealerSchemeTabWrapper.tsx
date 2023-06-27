@@ -25,11 +25,9 @@ import { useGetAllPincodeByDealerQuery } from 'src/services/DealerPincodeService
 import { showToast } from 'src/utils'
 import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
 
-
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
-
 
 // |-- Types --|
 type Props = {}

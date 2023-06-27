@@ -24,7 +24,6 @@ import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
-
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import {
@@ -32,7 +31,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/dealerPincodeSlice'
-
 
 const ListDealerPincodeTabWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)

@@ -20,7 +20,6 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
 import { showToast } from 'src/utils'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<AddDealerSchemeFormInitialValues>

@@ -31,7 +31,8 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, isTableLoading } = saleOrderState
+    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
+        saleOrderState
 
     return (
         <div
@@ -48,15 +49,14 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onClick={() => navigate('add-sale-order')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    {' '}
-                    + Add Sale Order{' '}
+                    + Add Sale Order
                 </button>
             </div>
 
             <div
                 className={` border flex flex-col  rounded bg-white ${
                     path === 'dealers'
-                        ? 'h-[calc(100%-250px)]'
+                        ? 'h-[calc(100%-50px)]'
                         : 'h-[calc(100%-75px)]'
                 }`}
             >
@@ -64,7 +64,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMTableHeader
                     searchValue={searchValue}
                     page={page}
-                    rowCount={rows?.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -83,7 +83,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                         isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -97,7 +97,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows?.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}

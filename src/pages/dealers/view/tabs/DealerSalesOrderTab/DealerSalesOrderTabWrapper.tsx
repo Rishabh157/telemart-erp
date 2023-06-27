@@ -16,13 +16,11 @@ import { useParams } from 'react-router-dom'
 //import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
 //import { showToast } from "src/utils";
 
-
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SaleOrderListResponse } from 'src/models/SaleOrder.model'
 import { useGetSalesOrderByDealerIdQuery } from 'src/services/SalesOrderService'
 import SaleOrderListing from 'src/pages/saleOrder/list/SaleOrderListing'
-
 
 // |-- Redux --|
 import {
@@ -31,7 +29,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {}

@@ -27,7 +27,6 @@ import {
 } from 'src/redux/slices/dealerPincodeSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 // |-- Types --|
 type Props = {
     columns: any[]
@@ -85,7 +84,7 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
