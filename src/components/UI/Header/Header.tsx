@@ -58,9 +58,11 @@ const Header = () => {
             }
         )
     }
-
+    console.log(window.location.pathname)
     useEffect(() => {
-        window.addEventListener('beforeunload', handleBeforeUnload)
+        if (window.location.pathname !== '/dashboard') {
+            window.addEventListener('beforeunload', handleBeforeUnload)
+        }
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload)
         }
