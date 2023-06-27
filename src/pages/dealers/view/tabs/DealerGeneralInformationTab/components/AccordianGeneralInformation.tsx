@@ -1,8 +1,18 @@
+/// ==============================================
+// Filename:AccordianGeneralInformation.tsx
+// Type: Tab  Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- Internal Dependencies --|
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 
-// type Props = {};
+
 
 const AccordianGeneralInformation = (data: any) => {
     return (

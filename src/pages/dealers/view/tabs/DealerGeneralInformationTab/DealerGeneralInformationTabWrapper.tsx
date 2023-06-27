@@ -1,16 +1,33 @@
-import React, { useEffect } from 'react'
+/// ==============================================
+// Filename:AddDealerLedgerModelWrapper.tsx
+// Type: Tab Add Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useEffect }  from 'react'
+
+// |-- External Dependencies --|
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { CircularProgress } from '@mui/material'
+
+
+// |-- Internal Dependencies --|
 import AccordianAddress from './components/AccordianAddress'
 import AccordianContact from './components/AccordianContact'
 import AccordianDocument from './components/AccordianDocument'
 import AccordianGeneralInformation from './components/AccordianGeneralInformation'
 import DealerGeneralInformationTab from './DealerGeneralInformationTab'
-import { useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { useGetDealerByIdQuery } from 'src/services/DealerServices'
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/dealerSlice'
-import { CircularProgress } from '@mui/material'
 
+
+// |-- Types --|
 type Props = {}
 
 export type AccordianType = {

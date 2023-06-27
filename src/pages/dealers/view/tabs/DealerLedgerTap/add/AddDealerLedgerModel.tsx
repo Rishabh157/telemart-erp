@@ -1,11 +1,25 @@
+/// ==============================================
+// Filename:AddDealerLedgerModel.tsx
+// Type: Tab Add Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { Divider } from '@mui/material'
+
+// |-- Internal Dependencies --|
 import { FormInitialValues } from './AddDealerLedgerModelWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { NoteType } from 'src/models/Ledger.model'
-import { Divider } from '@mui/material'
 
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean

@@ -1,6 +1,6 @@
 /// ==============================================
-// Filename:ListDealerPincodeTabWrapper.tsx
-// Type: Tab List Component
+// Filename:AddDealerPincode.tsx
+// Type: Tab Add Component
 // Last Updated: JUNE 27, 2023
 // Project: TELIMART - Front End
 // ==============================================

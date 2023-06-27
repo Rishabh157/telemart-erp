@@ -1,8 +1,22 @@
+/// ==============================================
+// Filename:DealerGeneralInformationTab.tsx
+// Type: Tab Add Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import { MdExpandMore } from 'react-icons/md'
+
+// |-- Internal Dependencies --|
 import { AccordianType } from './DealerGeneralInformationTabWrapper'
 
+
+// |-- Types --|
 type Props = {
     accordians: AccordianType[]
 }
