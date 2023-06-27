@@ -97,7 +97,7 @@ const BatchListing = ({ columns, rows }: Props) => {
                         columns={columns}
                         isLoading={isTableLoading}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

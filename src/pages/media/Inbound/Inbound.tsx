@@ -971,7 +971,7 @@ const Inbound: React.FC<Props> = ({
                     <ATMTable
                         columns={column}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

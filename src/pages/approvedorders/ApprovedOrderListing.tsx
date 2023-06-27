@@ -273,7 +273,7 @@ const ApprovedOrderListing = () => {
                         <ATMTable
                             columns={columns}
                             rows={items}
-                            isCheckbox={true}
+                            // isCheckbox={true}
                             selectedRows={selectedRows}
                             onRowSelect={(selectedRows) =>
                                 setSelectedRows(selectedRows)
