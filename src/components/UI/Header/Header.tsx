@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
 import { setUserData } from 'src/redux/slices/authSlice'
-import ATMSwitchButton from '../atoms/formFields/ATMSwitchButton/ATMSwitchButton'
+import { BsMoon, BsSun } from 'react-icons/bs'
+import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 
 const Header = () => {
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
@@ -18,6 +19,8 @@ const Header = () => {
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
         useState(true)
     const [company, setCompany] = useState(userData?.companyId)
+    const themeColor = JSON.parse(localStorage.getItem('themeColor') || '')
+    const [siteMode, setSiteMode] = useState(themeColor)
     const { data } = useGetAllCompaniesQuery('')
     const [updaeCompany] = useUpdateCompanyByAdminMutation()
     const dispatch = useDispatch()
@@ -55,11 +58,11 @@ const Header = () => {
             }
         )
     }
-    const bgColorLocal = localStorage.getItem('themeColor') as string
-    const bgColor = (JSON.parse(bgColorLocal) as string | null) || 'white'
-
+    console.log(window.location.pathname)
     useEffect(() => {
-        window.addEventListener('beforeunload', handleBeforeUnload)
+        if (window.location.pathname !== '/dashboard') {
+            window.addEventListener('beforeunload', handleBeforeUnload)
+        }
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload)
         }
@@ -77,49 +80,66 @@ const Header = () => {
         <div className={`rid grid-cols-2 w-full h-full shadow-lg border `}>
             {/* Right Section */}
             <div className="flex gap-4 col-start-2 justify-end items-center px-4 ">
-                <div className="-mt-3">
-                    <ATMSwitchButton
-                        // label='Theme Mode'
-                        name=""
-                        value={bgColor === 'white' ? true : false}
-                        title1="Light"
-                        title2="Dark"
-                        onChange={(e) => {
-                            let themeColor = e ? 'white' : 'black'
-                            localStorage.setItem(
-                                'themeColor',
-                                JSON.stringify(themeColor)
-                            )
-                            window.location.reload()
-                        }}
-                    />
+                <div>
+                    <div className=" p-2 mt-1 mb-1 hover:outline-slate-200 cursor-pointer outline outline-offset-1 outline-slate-300 rounded-full ">
+                        <MouseOverPopover
+                            title=""
+                            children={
+                                <>
+                                    <div
+                                        onClick={() => {
+                                            setSiteMode('black')
+
+                                            localStorage.setItem(
+                                                'themeColor',
+                                                JSON.stringify('black')
+                                            )
+                                            window.location.reload()
+                                        }}
+                                        className={` ${
+                                            siteMode === 'black' &&
+                                            'text-[#dd9c4c]'
+                                        } p-2 px-4 text-lg font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
+                                    >
+                                        <BsMoon /> Dark
+                                    </div>
+                                    <div
+                                        onClick={() => {
+                                            setSiteMode('white')
+
+                                            localStorage.setItem(
+                                                'themeColor',
+                                                JSON.stringify('white')
+                                            )
+                                            window.location.reload()
+                                        }}
+                                        className={`${
+                                            siteMode === 'white' &&
+                                            'text-[#dd9c4c]'
+                                        } p-2 px-4 text-lg font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
+                                    >
+                                        <BsSun /> Light
+                                    </div>
+                                </>
+                            }
+                            buttonName={
+                                siteMode === 'black' ? (
+                                    <BsMoon
+                                        size={20}
+                                        className="cursor-pointer"
+                                    />
+                                ) : (
+                                    <BsSun
+                                        size={20}
+                                        className="cursor-pointer"
+                                    />
+                                )
+                            }
+                            isbuttonName
+                        />
+                    </div>
                 </div>
-                {/* <div className="flex gap-2 ">
-                    <div
-                        onClick={() => {
-                            localStorage.setItem(
-                                'themeColor',
-                                JSON.stringify('black')
-                            )
-                            window.location.reload()
-                        }}
-                        className="border  border-2 p-1 rounded bg-blue-500"
-                    >
-                        Dark
-                    </div>
-                    <div
-                        onClick={() => {
-                            localStorage.setItem(
-                                'themeColor',
-                                JSON.stringify('white')
-                            )
-                            window.location.reload()
-                        }}
-                        className="border  border-2  p-1 rounded bg-blue-500"
-                    >
-                        Light
-                    </div>
-                </div> */}
+
                 {userData?.role === 'ADMIN' ? (
                     <FormControl sx={{ width: 150 }}>
                         <Select
