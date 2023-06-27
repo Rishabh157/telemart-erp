@@ -20,11 +20,9 @@ import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { Tabs } from './OutwardRequestListingWrapper'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
-
 // |-- Redux --|
 import { setRowsPerPage, setPage } from 'src/redux/slices/outwardRequestSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {

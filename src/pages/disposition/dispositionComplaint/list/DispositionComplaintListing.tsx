@@ -21,7 +21,6 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 
-
 // |-- Redux --|
 import {
     setRowsPerPage,
@@ -29,7 +28,6 @@ import {
     setSearchValue,
 } from 'src/redux/slices/configuration/dispositionComplaintSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {

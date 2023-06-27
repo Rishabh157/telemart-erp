@@ -18,7 +18,6 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { NoteType } from 'src/models/Ledger.model'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

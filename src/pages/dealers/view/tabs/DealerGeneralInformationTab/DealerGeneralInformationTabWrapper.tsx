@@ -6,13 +6,12 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect }  from 'react'
+import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
-
 
 // |-- Internal Dependencies --|
 import AccordianAddress from './components/AccordianAddress'
@@ -25,7 +24,6 @@ import { useGetDealerByIdQuery } from 'src/services/DealerServices'
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/dealerSlice'
-
 
 // |-- Types --|
 type Props = {}

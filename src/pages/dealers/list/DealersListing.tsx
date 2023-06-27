@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -29,7 +29,6 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { setRowsPerPage, setPage } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setSearchValue } from 'src/redux/slices/dealerSlice'
-
 
 // |-- Types --|
 type Props = {

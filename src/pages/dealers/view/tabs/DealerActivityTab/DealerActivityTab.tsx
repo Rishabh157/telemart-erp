@@ -1,4 +1,3 @@
-
 /// ==============================================
 // Filename:DealerActivityTab.tsx
 // Type: Tab  Component

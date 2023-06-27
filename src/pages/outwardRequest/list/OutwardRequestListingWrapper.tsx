@@ -22,7 +22,6 @@ import { OutwardRequestListResponse } from 'src/models/OutwardRequest.model'
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 import OutwardRequestListing from './OutwardRequestListing'
 
-
 // |-- Redux --|
 // import {
 //   setIsTableLoading,

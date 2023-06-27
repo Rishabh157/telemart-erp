@@ -20,10 +20,8 @@ import { showToast } from 'src/utils'
 import { NoteType } from 'src/models/Ledger.model'
 import AddDealerLedgerModel from './AddDealerLedgerModel'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-
 
 interface PropsType {
     addType: keyof typeof NoteType

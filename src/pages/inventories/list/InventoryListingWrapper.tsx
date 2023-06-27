@@ -12,14 +12,12 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import { useNavigate } from "react-router-dom";
 
-
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { InventoryListResponse } from 'src/models/Inventory.model'
 import InventoryListing from './InventoryListing'
 import { useGetPaginationInventoriesQuery } from 'src/services/InventoriesService'
-
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'

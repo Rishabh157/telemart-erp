@@ -12,8 +12,6 @@ import React from 'react'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 
-
-
 const AccordianGeneralInformation = (data: any) => {
     return (
         <div className="grid grid-cols-3 gap-4 gap-y-5">

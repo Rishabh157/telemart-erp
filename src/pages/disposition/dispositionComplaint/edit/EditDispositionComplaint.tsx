@@ -22,7 +22,6 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
-
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 

@@ -15,7 +15,6 @@ import { MdExpandMore } from 'react-icons/md'
 // |-- Internal Dependencies --|
 import { AccordianType } from './DealerGeneralInformationTabWrapper'
 
-
 // |-- Types --|
 type Props = {
     accordians: AccordianType[]

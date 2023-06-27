@@ -14,7 +14,6 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
-
 // |-- Types --|
 type Props = {
     items: any

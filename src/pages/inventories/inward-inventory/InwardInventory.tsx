@@ -1,6 +1,16 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
+/// ==============================================
+// Filename:InventoryListing.tsx
+// Type: List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'

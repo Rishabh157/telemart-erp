@@ -33,7 +33,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/configuration/dispositionComplaintSlice'
 
-
 // export type language ={
 //     languageId:string[];
 

@@ -21,7 +21,6 @@ import OrderView from './OrderView'
 // |-- Redux --|
 import { setSelectedItem } from 'src/redux/slices/orderSlice'
 
-
 const OrderViewWrapper = () => {
     const params = useParams()
     const id: any = params.id
