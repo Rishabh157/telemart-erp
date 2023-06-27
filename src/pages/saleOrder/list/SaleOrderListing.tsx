@@ -31,7 +31,8 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, isTableLoading } = saleOrderState
+    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
+        saleOrderState
 
     return (
         <div
@@ -64,7 +65,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMTableHeader
                     searchValue={searchValue}
                     page={page}
-                    rowCount={rows?.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -97,7 +98,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows?.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
