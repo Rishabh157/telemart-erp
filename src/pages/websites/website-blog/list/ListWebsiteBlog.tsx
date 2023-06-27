@@ -64,7 +64,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMTableHeader
                     page={page}
                     searchValue={searchValue}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
