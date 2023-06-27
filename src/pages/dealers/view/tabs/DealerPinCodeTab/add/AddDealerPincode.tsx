@@ -1,13 +1,27 @@
+/// ==============================================
+// Filename:ListDealerPincodeTabWrapper.tsx
+// Type: Tab List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
+import { HiPlus } from 'react-icons/hi'
+
+// |-- Internal Dependencies --|
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './DealerPinCodeTabWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-import { HiPlus } from 'react-icons/hi'
 import { showToast } from 'src/utils'
 
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     pincodeOptions: any[]

@@ -1,21 +1,39 @@
+/// ==============================================
+// Filename:DealerSaleOrderTabWrapper.tsx
+// Type: Tab Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 //import { useNavigate } from "react-router-dom";
 //import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
 //import { showToast } from "src/utils";
+
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SaleOrderListResponse } from 'src/models/SaleOrder.model'
+import { useGetSalesOrderByDealerIdQuery } from 'src/services/SalesOrderService'
+import SaleOrderListing from 'src/pages/saleOrder/list/SaleOrderListing'
+
+
+// |-- Redux --|
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useGetSalesOrderByDealerIdQuery } from 'src/services/SalesOrderService'
-import SaleOrderListing from 'src/pages/saleOrder/list/SaleOrderListing'
-import { useParams } from 'react-router-dom'
 
+
+// |-- Types --|
 type Props = {}
 
 const DealerSaleOrderTabWrapper = (props: Props) => {

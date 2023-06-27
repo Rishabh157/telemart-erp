@@ -1,18 +1,34 @@
+/// ==============================================
+// Filename:ListDealerPincodeTabWrapper.tsx
+// Type: Tab List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
+
+// |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
     setSearchValue,
 } from 'src/redux/slices/dealerPincodeSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
+
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
