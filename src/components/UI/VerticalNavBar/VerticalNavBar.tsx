@@ -25,8 +25,6 @@ const VerticalNavBar = ({
     const { customized } = useSelector((state: RootState) => state?.auth)
     const AlertText =
         'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
-
-    console.log(window.location.pathname)
     useEffect(() => {
         if (customized) {
             window.addEventListener('beforeunload', handleBeforeUnload)
