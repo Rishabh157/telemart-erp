@@ -60,7 +60,7 @@ const DidManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onSearch={(value) => dispatch(setSearchValue(value))}
@@ -75,7 +75,7 @@ const DidManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

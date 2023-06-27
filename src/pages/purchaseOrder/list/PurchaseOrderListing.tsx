@@ -29,7 +29,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue, isTableLoading } =
+    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         purchaseOrderState
 
     return (
@@ -50,7 +50,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMTableHeader
                     page={page}
                     searchValue={searchValue}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -66,7 +66,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -80,7 +80,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
