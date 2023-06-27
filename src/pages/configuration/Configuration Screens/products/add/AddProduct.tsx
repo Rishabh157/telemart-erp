@@ -13,18 +13,17 @@ import React from 'react'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
-import { useDispatch } from 'react-redux'
 import { FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormInitialValues } from './AddProductWrapper'
-import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 // |-- Redux --|
 import { AppDispatch } from 'src/redux/store'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
 // |-- Types --|
 type Props = {
@@ -60,7 +59,7 @@ const AddProduct = ({
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
     return (
-        <MainLayout>
+        <div className=" h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -139,7 +138,7 @@ const AddProduct = ({
                     </div>
                 </div>
             </div>
-        </MainLayout>
+        </div>
     )
 }
 

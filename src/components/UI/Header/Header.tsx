@@ -60,7 +60,9 @@ const Header = () => {
     }
 
     return (
-        <div className={`rid grid-cols-2 w-full h-full shadow-lg border `}>
+        <div
+            className={`rid grid-cols-2 w-full h-full shadow-lg borde bg-white`}
+        >
             {/* Right Section */}
             <div className="flex gap-4 col-start-2 justify-end items-center px-4 ">
                 <div>
