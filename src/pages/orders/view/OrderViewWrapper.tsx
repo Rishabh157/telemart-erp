@@ -1,11 +1,26 @@
+/// ==============================================
+// Filename:OrderViewWrapper.tsx
+// Type: View Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useGetOrderByIdQuery } from 'src/services/OrderService'
-import { setSelectedItem } from 'src/redux/slices/orderSlice'
 import OrderView from './OrderView'
+
+// |-- Redux --|
+import { setSelectedItem } from 'src/redux/slices/orderSlice'
+
 
 const OrderViewWrapper = () => {
     const params = useParams()

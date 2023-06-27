@@ -1,18 +1,33 @@
+/// ==============================================
+// Filename:EditDispositionComplaintWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik } from 'formik'
-import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import { showToast } from 'src/utils'
 import AddDispositionOne from './EditDispositionComplaint'
 import DispositionLayout from '../../DispositionLayout'
 import {
     useGetdispositionComplaintByIdQuery,
     useUpdatedispositionComplaintMutation,
 } from 'src/services/configurations/DispositionComplaintServices'
-import { setSelectedDispositionComplaint } from 'src/redux/slices/configuration/dispositionComplaintSlice'
 
+// |-- Redux --|
+import { setSelectedDispositionComplaint } from 'src/redux/slices/configuration/dispositionComplaintSlice'
+import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Types --|
 export type FormInitialValues = {
     dispositionName: string
     priority: string

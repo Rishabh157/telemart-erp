@@ -1,16 +1,21 @@
+/// ==============================================
+// Filename:DispositionComplaintListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/configuration/dispositionComplaintSlice'
 import DispositionLayout from '../../DispositionLayout'
 import DispositionComplaintListing from './DispositionComplaintListing'
 import {
@@ -19,6 +24,15 @@ import {
 } from 'src/services/configurations/DispositionComplaintServices'
 import { DispositionComplaintListResponse } from 'src/models/configurationModel/DispositionComplaint.model'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/configuration/dispositionComplaintSlice'
+
 
 // export type language ={
 //     languageId:string[];

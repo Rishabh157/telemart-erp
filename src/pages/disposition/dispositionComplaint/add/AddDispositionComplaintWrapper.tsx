@@ -1,14 +1,29 @@
+/// ==============================================
+// Filename:AddDispositionComplaintWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import { showToast } from 'src/utils'
 import DispositionLayout from '../../DispositionLayout'
 import { useAdddispositionComplaintMutation } from 'src/services/configurations/DispositionComplaintServices'
 import AddDispositionComplaint from './AddDispositionComplaintOne'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+// |-- Types --|
 export type FormInitialValues = {
     dispositionName: string
     priority: string
