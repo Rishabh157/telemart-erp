@@ -7,7 +7,7 @@ interface MouseOverPopoverProps {
     title: string
     children: React.ReactNode
     isIcon?: false
-    buttonName?: string
+    buttonName?: string | React.ReactNode
     isbuttonName?: boolean
 }
 
@@ -77,12 +77,14 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
                 // disableRestoreFocus
                 className="w-full p-2"
             >
-                <div
-                    style={{ padding: '10px' }}
-                    className="font-bold text-center  text-sm "
-                >
-                    {title}
-                </div>
+                {title ? (
+                    <div
+                        style={{ padding: '10px' }}
+                        className="font-bold text-center  text-sm "
+                    >
+                        {title}
+                    </div>
+                ) : null}
                 <div>{children}</div>
             </Popover>
         </div>
