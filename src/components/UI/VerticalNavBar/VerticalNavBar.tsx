@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { NavItemType } from 'src/navigation'
@@ -26,6 +26,23 @@ const VerticalNavBar = ({
     const AlertText =
         'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
 
+    console.log(window.location.pathname)
+    useEffect(() => {
+        if (customized) {
+            window.addEventListener('beforeunload', handleBeforeUnload)
+        }
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload)
+        }
+    }, [customized])
+
+    const handleBeforeUnload = (e: any) => {
+        e.preventDefault()
+        const message = AlertText
+
+        e.returnValue = message
+        return message
+    }
     return (
         <div className="h-full  overflow-auto bg-white ">
             {/* Logo & Menu Icon */}
