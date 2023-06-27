@@ -1,18 +1,34 @@
+/// ==============================================
+// Filename:EditProductCategoryWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+import { showToast } from 'src/utils'
 import {
     useGetProductCategoryByIdQuery,
     useUpdateProductCategoryMutation,
 } from 'src/services/ProductCategoryServices'
 import EditProductCategoryListing from './EditProductCategoryListing'
-import { setSelectedProductCategory } from 'src/redux/slices/productCategorySlice'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setSelectedProductCategory } from 'src/redux/slices/productCategorySlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -49,6 +65,7 @@ const EditProductCategoryWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
 
         setTimeout(() => {
             EditPrductCategory({

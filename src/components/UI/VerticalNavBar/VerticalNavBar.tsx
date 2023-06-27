@@ -20,6 +20,8 @@ const VerticalNavBar = ({
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    // const { pathname } = useLocation()
+
     const { customized } = useSelector((state: RootState) => state?.auth)
     const AlertText =
         'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'

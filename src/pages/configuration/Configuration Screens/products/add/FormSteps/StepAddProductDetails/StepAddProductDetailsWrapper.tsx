@@ -1,18 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:StepAddProductDetailsWrapper.tsx
+// Type: ADD Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import { Field } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../AddProductWrapper'
 import StepAddProductDetails from './StepAddProductDetails'
 import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
-import { useDispatch, useSelector } from 'react-redux'
+import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
+import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
+
+// |-- Redux --|
+import { setAllItems as setAllProductGroup } from 'src/redux/slices/productGroupSlice'
+import { setAllItems } from 'src/redux/slices/productSubCategorySlice'
 import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
-import { setAllItems } from 'src/redux/slices/productSubCategorySlice'
-import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
-import { setAllItems as setAllProductGroup } from 'src/redux/slices/productGroupSlice'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
 }

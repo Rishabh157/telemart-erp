@@ -1,8 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:CountryListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import CountryListing from './CountryListing'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
-import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setItems } from 'src/redux/slices/countrySlice'
 

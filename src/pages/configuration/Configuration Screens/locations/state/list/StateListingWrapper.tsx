@@ -1,10 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:StateListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
-import StateListing from './StateListing'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import StateListing from './StateListing'
+import { useGetStateQuery } from 'src/services/StateService'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setItems } from 'src/redux/slices/statesSlice'
-import { useGetStateQuery } from 'src/services/StateService'
 
 const StateListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

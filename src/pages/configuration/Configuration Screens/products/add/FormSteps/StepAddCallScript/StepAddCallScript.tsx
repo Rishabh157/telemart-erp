@@ -1,16 +1,31 @@
+/// ==============================================
+// Filename:StepAddCallScript.tsx
+// Type: ADD Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
-import { FormikProps } from 'formik'
-import { FormInitialValues } from '../../AddProductWrapper'
-import { FieldArray } from 'formik'
+
+// |-- External Dependencies --|
+import { FormikProps, FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { EditorState } from 'draft-js'
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import { FormInitialValues } from '../../AddProductWrapper'
 import ATMHTMLEditor from 'src/components/UI/atoms/formFields/ATMHTMLEditor/ATMHTMLEditor'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { DropdownOptions } from './StepAddCallScriptWrapper'
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: DropdownOptions
@@ -22,6 +37,11 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className=" ">
@@ -63,7 +83,7 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
                                             name={`call_scripts[${scriptIndex}].script`}
                                             value={script.script}
                                             onChange={(newValue) =>
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     `call_scripts[${scriptIndex}].script`,
                                                     newValue
                                                 )
@@ -75,7 +95,7 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
                                             name={`call_scripts[${scriptIndex}].language`}
                                             value={language}
                                             onChange={(e) => {
-                                                setFieldValue(
+                                                handleSetFieldValue(
                                                     `call_scripts[${scriptIndex}].language`,
                                                     e.target.value
                                                 )

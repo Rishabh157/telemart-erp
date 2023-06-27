@@ -1,7 +1,22 @@
+/// ==============================================
+// Filename:TehsilListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import LocationListView from '../../sharedComponents/LocationListView'
 import AddTehsilWrapper from '../add/AddTehsilWrapper'
-import { useDispatch, useSelector } from 'react-redux'
+import { showToast } from 'src/utils'
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setSearchValue,
@@ -12,7 +27,8 @@ import {
     setSelectedLocationPincode,
 } from 'src/redux/slices/pincodeSlice'
 import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
-import { showToast } from 'src/utils'
+
+// |-- Types --|
 type Props = {
     tehsils: any[]
 }

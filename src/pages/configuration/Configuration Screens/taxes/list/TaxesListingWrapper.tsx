@@ -1,23 +1,37 @@
+/// ==============================================
+// Filename:TaxesListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { TaxesListResponse } from 'src/models/taxes.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import TaxesListing from './TaxesListing'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import {
     useDeleteTaxesMutation,
     useGetTaxesQuery,
 } from 'src/services/TaxesService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/TaxesSlice'
-import { showToast } from 'src/utils'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const TaxesListingWrapper = () => {
     const taxState: any = useSelector((state: RootState) => state.tax)

@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:AddCompanyWrapper.tsx
 // Type: ADD Component
-// Last Updated: JUNE 24, 2023
+// Last Updated: JUNE 26, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -25,7 +25,10 @@ import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 
 // |-- Redux --|
 import { AppDispatch } from 'src/redux/store'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 // TYPE-  Form Intial Values
@@ -138,6 +141,7 @@ const AddCompanyWrapper = () => {
     // On Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
+            dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 company({
                     companyName: values.companyName,

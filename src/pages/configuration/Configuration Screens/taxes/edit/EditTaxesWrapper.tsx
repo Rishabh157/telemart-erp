@@ -1,18 +1,35 @@
+/// ==============================================
+// Filename:EditTaxesWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedTaxes } from 'src/redux/slices/TaxesSlice'
+
+// |-- Internal Dependencies --|
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+import { showToast } from 'src/utils'
 import {
     useGetTaxesByIdQuery,
     useUpdateTaxesMutation,
 } from 'src/services/TaxesService'
 import EditTaxesListing from './EditTaxesListing'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { setSelectedTaxes } from 'src/redux/slices/TaxesSlice'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -45,6 +62,8 @@ const EditTaxesWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         setTimeout(() => {
             EditTaxes({
                 body: {

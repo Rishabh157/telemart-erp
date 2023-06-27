@@ -1,11 +1,21 @@
+// Filename:EditProductGroupWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { number, object, string } from 'yup'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+import { showToast } from 'src/utils'
 import { setSelectedProductGroup } from 'src/redux/slices/productGroupSlice'
 import {
     useGetProductGroupByIdQuery,
@@ -13,6 +23,11 @@ import {
 } from 'src/services/ProductGroupService'
 import EditProductGroupListing from './EditProductGroupListing'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -66,6 +81,8 @@ const EditProductGroupWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         setTimeout(() => {
             EditProductGroup({
                 body: {

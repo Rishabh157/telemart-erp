@@ -1,5 +1,18 @@
+/// ==============================================
+// Filename:AddProductSub.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,6 +22,10 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './AddProductSubCategoryWrapper'
 
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: {
@@ -34,6 +51,11 @@ const AddProductSubCategory = ({
     apiStatus,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="">
@@ -78,7 +100,7 @@ const AddProductSubCategory = ({
                                 label="Sub Category Code"
                                 placeholder="Sub Category Code"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'subCategoryCode',
                                         e.target.value
                                     )
@@ -92,7 +114,7 @@ const AddProductSubCategory = ({
                                 label="Sub Category Name"
                                 placeholder="Sub Category Name"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'subCategoryName',
                                         e.target.value
                                     )
@@ -104,7 +126,7 @@ const AddProductSubCategory = ({
                                 name="parentCategoryId"
                                 value={values.parentCategoryId}
                                 onChange={(e) => {
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'parentCategoryId',
                                         e.target.value
                                     )
@@ -120,7 +142,10 @@ const AddProductSubCategory = ({
                                 label="HSN Code"
                                 placeholder="HSN Code"
                                 onChange={(e) =>
-                                    setFieldValue('hsnCode', e.target.value)
+                                    handleSetFieldValue(
+                                        'hsnCode',
+                                        e.target.value
+                                    )
                                 }
                                 className="mt-0 rounded"
                             />

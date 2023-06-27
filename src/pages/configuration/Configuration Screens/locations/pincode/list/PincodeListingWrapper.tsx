@@ -1,9 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:PicodeListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
-import PincodeListing from './PincodeListing'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import PincodeListing from './PincodeListing'
 import { useGetPincodeQuery } from 'src/services/PinCodeService'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 import { setItems } from 'src/redux/slices/pincodeSlice'
 
 const PincodeListingWrapper = () => {
