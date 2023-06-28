@@ -1,14 +1,26 @@
+/// ==============================================
+// Filename:InventoryListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
 
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+// import { useNavigate } from "react-router-dom";
+
+// |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { InventoryListResponse } from 'src/models/Inventory.model'
-
 import InventoryListing from './InventoryListing'
 import { useGetPaginationInventoriesQuery } from 'src/services/InventoriesService'
-import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-// import { useNavigate } from "react-router-dom";
 import {
     setIsTableLoading,
     setItems,

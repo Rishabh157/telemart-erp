@@ -1,9 +1,27 @@
+/// ==============================================
+// Filename:DealerLedgerListing.tsx
+// Type: Tab List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import AddDealerLedgerModelWrapper from '../add/AddDealerLedgerModelWrapper'
+import { NoteType } from 'src/models/Ledger.model'
+import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
+
+// |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
@@ -11,11 +29,8 @@ import {
     setFilterBy,
 } from 'src/redux/slices/DealerLedgerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddDealerLedgerModelWrapper from '../add/AddDealerLedgerModelWrapper'
-import { NoteType } from 'src/models/Ledger.model'
-import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]

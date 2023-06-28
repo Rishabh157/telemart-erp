@@ -1,18 +1,33 @@
+/// ==============================================
+// Filename:MoveToCartonDrawer.tsx
+// Type: Add Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { BsPrinter } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMDrawer from 'src/components/UI/atoms/ATMDrawer/ATMDrawer'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import { useAddCartonBoxBarcodeMutation } from 'src/services/CartonBoxBarcodeService'
+import { useAddInventoriesMutation } from 'src/services/InventoriesService'
+import { showToast } from 'src/utils'
+
+// |-- Redux --|
 import {
     setBarcodesToPrint,
     setCartonBoxBarcode,
 } from 'src/redux/slices/barcodeSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { useAddCartonBoxBarcodeMutation } from 'src/services/CartonBoxBarcodeService'
-import { useAddInventoriesMutation } from 'src/services/InventoriesService'
-import { showToast } from 'src/utils'
 
+// |-- Types --|
 type Props = {
     onClose: () => void
     productGroupName: string

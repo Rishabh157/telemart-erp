@@ -1,5 +1,14 @@
+/// ==============================================
+// Filename:DealerActivityTab.tsx
+// Type: Tab  Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
 
+// |-- Types --|
 type Props = {}
 
 const activitiesList = Array(15).fill(null)

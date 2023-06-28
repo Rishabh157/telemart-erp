@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:ProfileDetails.tsx
+// Type: Profile Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { useSelector } from 'react-redux'
 
 const ProfileDetails = () => {

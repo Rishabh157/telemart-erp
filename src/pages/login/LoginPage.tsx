@@ -1,17 +1,31 @@
+/// ==============================================
+// Filename:LoginPage.tsx
+// Type: Login Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { BiShow, BiHide } from 'react-icons/bi'
+import { useDispatch } from 'react-redux'
+// import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMInputAdormant from '../../components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMTextField from '../../components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { BiShow, BiHide } from 'react-icons/bi'
-import { AppDispatch } from 'src/redux/store'
-// import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from 'src/services/UserServices'
+import { showToast } from 'src/utils'
+
+// |-- Redux --|
 import {
     setAccessToken,
     setRefreshToken,
     setUserData,
 } from 'src/redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
-import { showToast } from 'src/utils'
+import { AppDispatch } from 'src/redux/store'
 
 const LoginPage = ({ pathName }: any) => {
     const [isShowPassword, setIsShowPassword] = useState(false)

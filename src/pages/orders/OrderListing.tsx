@@ -1,4 +1,18 @@
+/// ==============================================
+// Filename:OrderListing.tsx
+// Type: List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -7,7 +21,10 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import { OrderListResponse } from 'src/models'
 import { useGetOrderQuery } from 'src/services/OrderService'
-import { useDispatch, useSelector } from 'react-redux'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setRowsPerPage,
@@ -18,9 +35,6 @@ import {
     setTotalItems,
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
-import { useNavigate } from 'react-router-dom'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
 const OrderListing = () => {
     // Hooks

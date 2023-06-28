@@ -1,13 +1,26 @@
+/// ==============================================
+// Filename:AddDealerScheme.tsx
+// Type: Tab Add Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
+
+// |-- Internal Dependencies --|
+import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
 import { showToast } from 'src/utils'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<AddDealerSchemeFormInitialValues>
     schemeOptions: any

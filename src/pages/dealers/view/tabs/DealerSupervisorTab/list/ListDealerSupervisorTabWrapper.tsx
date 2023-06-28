@@ -1,19 +1,31 @@
+/// ==============================================
+// Filename:ListDealerSupervisorTabWrapper.tsx
+// Type: View Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
 
+// |-- External Dependencies --|
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { DealersSupervisorListResponse } from 'src/models/DealerSupervisor.model'
 import DealerSupervisorListing from './DealerSupervisorListing'
+import { useGetDealerSupervisorQuery } from 'src/services/DealerSupervisorServices'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/DealerSupervisorSlice'
-import { AppDispatch } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { useGetDealerSupervisorQuery } from 'src/services/DealerSupervisorServices'
-import { RootState } from 'src/redux/store'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const ListDealerSupervisorTabWrapper = () => {
     // const [showDropdown, setShowDropdown] = useState(false)

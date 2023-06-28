@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:Profile.tsx
+// Type: Profile Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { Tabs } from '../outwardRequest/list/OutwardRequestListingWrapper'
 import ChangePassword from './ChangePassword'

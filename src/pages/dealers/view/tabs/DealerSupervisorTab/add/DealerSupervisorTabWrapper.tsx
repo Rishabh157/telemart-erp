@@ -1,13 +1,28 @@
+/// ==============================================
+// Filename:DealerSupervisorTabWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import AddDealerSupervisor from './AddDealerSupervisor'
 import { useAddDealerSupervisorMutation } from 'src/services/DealerSupervisorServices'
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Redux --|
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

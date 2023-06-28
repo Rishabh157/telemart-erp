@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:ListItemCard.tsx
+// Type: Card Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 
 const ListItemCard = ({ item }: { item: any }) => {

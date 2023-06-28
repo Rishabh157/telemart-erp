@@ -1,14 +1,23 @@
+/// ==============================================
+// Filename:DealerListinggWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { setRowsPerPage, setPage } from 'src/redux/slices/dealerSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import FilterDialogWarpper from '../components/FilterDialog/FilterDialogWarpper'
-import { setSearchValue } from 'src/redux/slices/dealerSlice'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 // import ATMBreadCrumbs, {
 //   BreadcrumbType,
@@ -16,6 +25,12 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
+// |-- Redux --|
+import { setRowsPerPage, setPage } from 'src/redux/slices/dealerSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { setSearchValue } from 'src/redux/slices/dealerSlice'
+
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]

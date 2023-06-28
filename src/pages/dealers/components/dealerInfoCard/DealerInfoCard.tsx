@@ -1,13 +1,27 @@
-import { Avatar } from '@mui/material'
-import React from 'react'
-import { IconType } from 'react-icons'
+/// ==============================================
+// Filename:FilterDialog.tsx
+// Type: Card Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
 
+// |-- Built-in Dependencies --|
+import React from 'react'
+
+// |-- External Dependencies --|
+import { Avatar } from '@mui/material'
+import { IconType } from 'react-icons'
 import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
 import { useChangeDealerStatusMutation } from 'src/services/DealerServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     dealerData: any
     actionIcons?: {

@@ -1,7 +1,21 @@
+/// ==============================================
+// Filename:StepAddDealerWrapper.tsx
+// Type: ADD Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { array, boolean, mixed, number, object, string } from 'yup'
+
+// |-- Internal Dependencies --|
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import AddDealers from './AddDealers'
 import StepAddDealerDetailsWrapper from './FormSteps/StepAddDealerDetails/StepAddDealerDetailsWrapper'
 import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
@@ -10,18 +24,18 @@ import StepAddDocumentsWrapper from './FormSteps/StepAddDocuments/StepAddDocumen
 import StepAddOthersWrapper from './FormSteps/StepAddOthers/StepAddOthersWrapper'
 import { useAddDealerMutation } from 'src/services/DealerServices'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
+import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
-import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 
-// TYPE-  Form Intial Values
+// |-- Types --|
 export type FormInitialValues = {
     dealerCode: string
     firmName: string

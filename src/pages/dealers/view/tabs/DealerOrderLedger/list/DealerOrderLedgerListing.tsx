@@ -1,10 +1,25 @@
+/// ==============================================
+// Filename:DealerOrderLedgerListing.tsx
+// Type: Tab List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 // import { useNavigate, useParams } from 'react-router'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+// import FilterDialogWarpper from 'src/pages/dealers/components/FilterDialog/FilterDialogWarpper'
+
+// |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
@@ -13,8 +28,7 @@ import {
 } from 'src/redux/slices/DealerLedgerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-// import FilterDialogWarpper from 'src/pages/dealers/components/FilterDialog/FilterDialogWarpper'
-
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
