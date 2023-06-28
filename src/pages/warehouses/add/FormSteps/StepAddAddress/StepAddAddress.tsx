@@ -1,15 +1,31 @@
-import { FormikProps } from 'formik'
+/// ==============================================
+// Filename:StepAddAddress.tsx
+// Type: Add Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { FormikProps } from 'formik'
+import { CircularProgress } from '@mui/material'
+import { useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
-import { CircularProgress } from '@mui/material'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+
+// |-- Types --|
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
     stateOptions: SelectOption[]
@@ -20,6 +36,8 @@ type DropdownOptions = {
     billingDistrictOptions: SelectOption[]
     billingPincodeOptions: SelectOption[]
 }
+
+// |-- Types --|
 export type FieldType = Field<
     | 'counrtyOptions'
     | 'stateOptions'

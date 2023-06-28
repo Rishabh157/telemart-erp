@@ -1,18 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:StepEditAddressWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import { FormInitialValues } from '../../EditWarehouseWrapper'
 import StepEditAddress from './StepEditAddress'
 import { Field } from 'src/models/FormField/FormField.model'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllStateByCountryQuery } from 'src/services/StateService'
-import { setAllStates } from 'src/redux/slices/statesSlice'
 import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
-import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { useGetAllPincodeByDistrictQuery } from 'src/services/PinCodeService'
-import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setAllDistrict } from 'src/redux/slices/districtSlice'
+import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
+import { setAllStates } from 'src/redux/slices/statesSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     allCountry: any
