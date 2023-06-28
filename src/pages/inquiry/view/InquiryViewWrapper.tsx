@@ -1,11 +1,25 @@
-import React, { useEffect } from 'react'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+/// ==============================================
+// Filename:InquiryViewWrapper.tsx
+// Type: View Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useEffect} from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useGetInquiryByIdQuery } from 'src/services/InquiryService'
 import { setSelectedItem } from 'src/redux/slices/inquirySlice'
 import InquiryView from './InquiryView'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 
 const InquiryViewWrapper = () => {
     const params = useParams()

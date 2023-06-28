@@ -1,8 +1,8 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
-// Filename:InventoryListing.tsx
-// Type: List Component
+// Filename:InwardInventory.tsx
+// Type: Add Component
 // Last Updated: JUNE 27, 2023
 // Project: TELIMART - Front End
 // ==============================================
@@ -10,7 +10,8 @@
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
 
-// |-- External Dependencies --|
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -25,6 +26,8 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 // import { RootState } from 'src/redux/store'
 // import { showToast } from "src/utils";
 
+
+// |-- Types --|
 type Props = {
     cartonBoxOption: SelectBoxOption[] | []
     wareHouseOption: SelectOption[] | []
