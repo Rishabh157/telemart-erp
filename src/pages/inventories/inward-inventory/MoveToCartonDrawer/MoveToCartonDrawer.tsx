@@ -6,8 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState} from 'react'
-
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { BsPrinter } from 'react-icons/bs'
@@ -21,14 +20,12 @@ import { useAddCartonBoxBarcodeMutation } from 'src/services/CartonBoxBarcodeSer
 import { useAddInventoriesMutation } from 'src/services/InventoriesService'
 import { showToast } from 'src/utils'
 
-
 // |-- Redux --|
 import {
     setBarcodesToPrint,
     setCartonBoxBarcode,
 } from 'src/redux/slices/barcodeSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {

@@ -26,7 +26,6 @@ import { useGetInquiryQuery } from 'src/services/InquiryService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 //import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
-
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -38,7 +37,6 @@ import {
     setTotalItems,
     //setFilterValue,
 } from 'src/redux/slices/inquirySlice'
-
 
 const InquiryListingWrapper = () => {
     // Hooks

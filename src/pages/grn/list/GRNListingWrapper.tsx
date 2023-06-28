@@ -36,8 +36,6 @@ import { RootState, AppDispatch } from 'src/redux/store'
 //   setTotalItems,
 // } from "src/redux/slices/GRNSlice";
 
-
-
 const columns: columnTypes[] = [
     {
         field: 'poCode',
