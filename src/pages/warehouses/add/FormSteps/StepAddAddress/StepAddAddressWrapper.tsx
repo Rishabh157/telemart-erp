@@ -27,7 +27,6 @@ import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

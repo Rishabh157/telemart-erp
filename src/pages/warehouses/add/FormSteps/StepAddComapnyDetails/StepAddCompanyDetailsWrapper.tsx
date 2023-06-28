@@ -22,7 +22,6 @@ export type DropdownOptions = {
     countryOptions: SelectOption[]
 }
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

@@ -19,11 +19,9 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from '../../EditWarehouseWrapper'
 import { FieldType } from './StepEditContactWrapper'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-
 
 // |-- Types --|
 type Props = {

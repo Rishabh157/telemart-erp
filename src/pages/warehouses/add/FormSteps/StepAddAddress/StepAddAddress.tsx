@@ -24,7 +24,6 @@ import { useFileUploaderMutation } from 'src/services/media/SlotManagementServic
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 
-
 // |-- Types --|
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
