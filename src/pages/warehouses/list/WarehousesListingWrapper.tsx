@@ -1,24 +1,38 @@
+/// ==============================================
+// Filename:WarehouseListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 // import { useNavigate } from "react-router-dom";
+
+// |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { WarehousesListResponse } from 'src/models/Warehouse.model'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/warehouseSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import WarehouseListing from './WarehousesListing'
 import {
     useDeleteWareHouseMutation,
     useGetPaginationWareHousesQuery,
 } from 'src/services/WareHoouseService'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/warehouseSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const DealersListingWrapper = () => {
     const navigate = useNavigate()

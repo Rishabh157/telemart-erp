@@ -1,14 +1,28 @@
+/// ==============================================
+// Filename:AddWarehouse.tsx
+// Type: Add Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React from 'react'
+
+// |-- External Dependencies --|
 import { Step, StepLabel, Stepper } from '@mui/material'
 import { FormikProps } from 'formik'
-import React from 'react'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormInitialValues } from './AddWarehouseWrapper'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from 'src/redux/store'
-import { useLocation } from 'react-router-dom'
 
+// |-- Redux --|
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { AppDispatch } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     activeStep: number
@@ -31,22 +45,11 @@ const AddWarehouse = ({
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
-    const { state } = useLocation()
-    const vendorId = state?.params?.vendorId || null
-    const dealerId = state?.params?.dealerId || null
-    let redirectPath = 'warehouse'
-    let redirectLabel = 'Warehouse'
-    if (dealerId) {
-        redirectLabel = 'Dealer Warehouse'
-        redirectPath = `dealers/${dealerId}/warehouse`
-    } else if (vendorId) {
-        redirectLabel = 'Vendor Warehouse'
-        redirectPath = `vendors/${vendorId}/warehouse`
-    }
+
     const breadcrumbs = [
         {
-            label: `${redirectLabel}`,
-            path: `/${redirectPath}`,
+            label: 'Warehouse',
+            path: `/warehouse`,
         },
         {
             label: 'Add Warehouse',
