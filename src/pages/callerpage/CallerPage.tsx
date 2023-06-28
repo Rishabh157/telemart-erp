@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TbBrandNetflix } from 'react-icons/tb'
 import CallerButton from './components/CallerButton'
 import Navbar from './components/Navbar'
@@ -6,20 +6,40 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
-import ATMOtpInput from 'src/components/UI/atoms/ATMOtpInput/ATMOtpInput'
+// import ATMOtpInput from 'src/components/UI/atoms/ATMOtpInput/ATMOtpInput'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+
 import { FormInitialValues } from './CallerPageWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { setAllItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
+import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
+import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
+import { useGetAllPincodeUnauthQuery } from 'src/services/PinCodeService'
+import {
+    useInboundSchemeQuery,
+    useGetSchemeByIdQuery,
+} from 'src/services/SchemeService'
+import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
+import { setTotalItems } from 'src/redux/slices/schemeSlice'
+// import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
+import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
+import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
+import { AreaListResponse } from 'src/models/Area.model'
+// import { useNavigate } from 'react-router-dom'
+import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
+import { showToast } from 'src/utils'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     column: any[]
     rows: any[]
-    apiStatus: boolean
+    apiStatus?: boolean
     schemeColumn: columnTypes[] | []
     dropdownOptions: {
         counrtyOptions: SelectOption[]
@@ -35,6 +55,14 @@ type Props = {
     didItems: any
 }
 
+interface SchemeDetailsPropTypes {
+    schemeName: string
+    price: number
+    quantity: number
+    deliveryCharges: number
+    totalAmount: number
+}
+
 const CallerPage: React.FC<Props> = ({
     formikProps,
     apiStatus,
@@ -44,120 +72,242 @@ const CallerPage: React.FC<Props> = ({
     column,
     rows,
 }) => {
-    console.log(
-        formikProps,
-        apiStatus,
-        dropdownOptions,
-        schemeColumn,
-        didItems,
-        column,
-        rows
+    const [quantity, setQuantity] = useState<number>(1)
+    const [isFacebookId, setFacebookId] = useState(false)
+    const [isInstagramId, setInstagramId] = useState(false)
+    const [schemeDetails, setSchemeDetails] = useState<SchemeDetailsPropTypes>({
+        schemeName: '',
+        price: 0,
+        quantity: 1,
+        deliveryCharges: 0,
+        totalAmount: 0,
+    })
+
+    const [firstSchemesOptionsList, setFirstSchemesOptionsList] = useState<
+        SelectOption[] | []
+    >([])
+
+    const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch<AppDispatch>()
+    // const navigate = useNavigate()
+
+    const { allItems: allDispositionItems }: any = useSelector(
+        (state: RootState) => state.dispositionThree
+    )
+    const { items: allArea }: any = useSelector(
+        (state: RootState) => state.areas
     )
 
-    const [quantity, setQuantity] = useState<number>(1)
-    const [multiSelect, setMultiSelect] = useState<any[]>([])
-    const [otp, setotp] = useState(new Array(10).fill(''))
+    const { allPincodes }: any = useSelector(
+        (state: RootState) => state.pincode
+    )
+    const { searchValue, totalItems: schemeitems }: any = useSelector(
+        (state: RootState) => state.scheme
+    )
 
-    const columns: columnTypes[] = [
+    const {
+        data: PCdata,
+        isFetching: PCisFetching,
+        isLoading: PCisLoading,
+    } = useGetAllPincodeUnauthQuery('')
+
+    useEffect(() => {
+        if (!PCisLoading && !PCisFetching) {
+            dispatch(setAllPincodes(PCdata?.data))
+        }
+    }, [PCdata, dispatch, PCisLoading, PCisFetching])
+
+    // get all Scheme
+    const {
+        data: schemeData,
+        isFetching: schemeisFetching,
+        isLoading: schemeisLoading,
+    } = useInboundSchemeQuery({
+        limit: 10,
+        searchValue: searchValue,
+        params: ['schemeName', 'schemeCode', 'schemePrice'],
+        page: 1,
+        filterBy: [
+            {
+                fieldName: '',
+                value: [],
+            },
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: false,
+    })
+
+    useEffect(() => {
+        if (!schemeisLoading && !schemeisFetching) {
+            dispatch(setTotalItems(schemeData?.data))
+        }
+    }, [schemeData, dispatch, schemeisLoading, schemeisFetching])
+
+    // get single scheme by id
+    const {
+        data: singleSchemeData,
+        isFetching: isSingleSchemeFetching,
+        isLoading: isSingleSchemeLoading,
+    } = useGetSchemeByIdQuery(
+        values.productGroupId || '64967b613d01c87837235507'
+    )
+
+    useEffect(() => {
+        if (!isSingleSchemeLoading && !isSingleSchemeFetching) {
+            setSchemeDetails((prevSchemeDetails) => ({
+                ...prevSchemeDetails,
+                schemeName: singleSchemeData?.data?.schemeName,
+                price: singleSchemeData?.data?.schemePrice,
+                quantity: 1,
+                deliveryCharges: singleSchemeData?.data?.deliveryCharges,
+                totalAmount:
+                    singleSchemeData?.data?.schemePrice +
+                    singleSchemeData?.data?.deliveryCharges,
+            }))
+        }
+    }, [singleSchemeData, isSingleSchemeLoading, isSingleSchemeFetching])
+
+    const {
+        data: dispositionThreedata,
+        isLoading: dispositionThreeIsLoading,
+        isFetching: dispositionThreeIsFetching,
+    } = useGetAllUnAuthDispositionThreeQuery(
+        formikProps.values.dispositionLevelTwoId,
+        { skip: !formikProps.values.dispositionLevelTwoId }
+    )
+
+    const {
+        data: dispositionTwodata,
+        isLoading: dispositionTwoIsLoading,
+        isFetching: dispositionTwoIsFetching,
+    } = useGetAllUnAuthdispositionTwoQuery('')
+
+    const { items: dispositionTwoItems }: any = useSelector(
+        (state: RootState) => state.dispositionTwo
+    )
+
+    useEffect(() => {
+        if (!dispositionThreeIsLoading && !dispositionThreeIsFetching) {
+            dispatch(setAllItems(dispositionThreedata?.data))
+        }
+    }, [
+        dispositionThreedata,
+        dispatch,
+        dispositionThreeIsLoading,
+        dispositionThreeIsFetching,
+    ])
+
+    useEffect(() => {
+        if (!dispositionTwoIsLoading && !dispositionTwoIsFetching) {
+            dispatch(setDispositionTwoItems(dispositionTwodata?.data))
+        }
+    }, [
+        dispositionTwodata,
+        dispatch,
+        dispositionTwoIsLoading,
+        dispositionTwoIsFetching,
+    ])
+
+    //area
+    const {
+        data: areaData,
+        isLoading: areaIsLoading,
+        isFetching: areaIsFetching,
+    } = useGetAllAreaUnauthQuery(formikProps.values?.pincodeId, {
+        skip: !formikProps.values?.pincodeId,
+    })
+
+    useEffect(() => {
+        if (!areaIsFetching && !areaIsLoading) {
+            dispatch(setAreaItems(areaData?.data))
+        }
+    }, [areaData, areaIsLoading, areaIsFetching, dispatch])
+
+    dropdownOptions = {
+        ...dropdownOptions,
+
+        dispositionThreeOptions: allDispositionItems?.map((ele: any) => {
+            return { label: ele?.dispositionName, value: ele?._id }
+        }),
+        dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
+            return { label: ele?.dispositionName, value: ele?._id }
+        }),
+        pincodeOptions: allPincodes?.map((ele: any) => {
+            return { label: ele?.pincode, value: ele?._id }
+        }),
+        areaOptions: allArea?.map((ele: AreaListResponse) => {
+            return { label: ele?.area, value: ele?._id }
+        }),
+    }
+
+    function handleClick(newValue: string) {
+        var newarray = allPincodes?.find((ele: any) => {
+            return ele._id === newValue
+        })
+        setFieldValue('pincodeId', newarray?._id)
+        setFieldValue('tehsilId', newarray?.tehsilId)
+        setFieldValue('districtId', newarray?.districtId)
+        setFieldValue('stateId', newarray?.stateId)
+        setFieldValue('countryId', newarray?.countryId)
+    }
+
+    useEffect(() => {
+        if (Array.isArray(schemeitems)) {
+            const schemeOptionRename = schemeitems?.map((ele) => {
+                return {
+                    label: ele?.schemeName,
+                    value: ele?._id,
+                }
+            })
+            setFirstSchemesOptionsList(schemeOptionRename)
+        } else {
+            setFirstSchemesOptionsList([])
+        }
+    }, [schemeitems])
+
+    // Static Option For Gander Radio Box , Payment Mode Option & Medical issue
+    const genderOption = [
         {
-            field: 'order',
-            headerName: 'ORDER NO',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
+            label: 'Male',
+            value: 'MALE',
         },
         {
-            field: 'enq',
-            headerName: 'ENQ NO',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'status',
-            headerName: 'Status',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'name',
-            headerName: 'NAME',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'city',
-            headerName: 'CITY',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'pincode',
-            headerName: 'PINCODE',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'phone',
-            headerName: 'PHONE',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'disposition',
-            headerName: 'DISPOSITION',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'scheme',
-            headerName: 'SCHEME',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'shippingCharge',
-            headerName: 'SHIPPING CHARGE',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'discount',
-            headerName: 'DISCOUNT',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'amount',
-            headerName: 'AMOUNT',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'remarks',
-            headerName: 'REMARKS',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
-        },
-        {
-            field: 'compl',
-            headerName: 'COMPL',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-white',
+            label: 'Female',
+            value: 'FEMALE',
         },
     ]
+
+    const paymentModeOptions = [
+        {
+            label: 'COD',
+            value: 'COD',
+        },
+        {
+            label: 'Online (UPI only)',
+            value: 'UPI/ONLINE',
+        },
+    ]
+
+    // const medicalOptions = [
+    //     {
+    //         label: 'Online (UPI only)',
+    //         value: 'UPI',
+    //     },
+    // ]
+
+    useEffect(() => {
+        setSchemeDetails((prevSchemeDetails) => ({
+            ...prevSchemeDetails,
+            quantity: quantity,
+            totalAmount:
+                quantity * prevSchemeDetails.price +
+                prevSchemeDetails.deliveryCharges,
+        }))
+    }, [quantity])
+
+    // console.log('from state details => ', dropdownOptions)
 
     return (
         <div className="bg-white px-4 h-[2000px]">
@@ -181,28 +331,31 @@ const CallerPage: React.FC<Props> = ({
 
             <Navbar />
 
-            <div className="flex items-center mt-1 px-2">
-                <div className="mt-2 text-sm font-semibold">
+            <div className="grid grid-cols-12 mt-1 px-2">
+                <div className="col-span-1 items-center mt-2 text-sm font-semibold">
                     Search By Scheme
                 </div>
-                <div className="px-2 flex">
+                <div className="col-span-5 px-2">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
-                            // isSubmitting
-                            // label="Zonal Manager"
                             size="xs"
-                            name=""
-                            value={''}
-                            options={[
-                                { label: 'one', value: 'one' },
-                                { label: 'two', value: 'two' },
-                            ]}
+                            name="productGroupId"
+                            value={values.productGroupId}
+                            // isSubmitting
+                            options={firstSchemesOptionsList || []}
                             onChange={(e) => {
-                                // setFieldValue('zonalManagerId', e)
+                                setFieldValue('schemeId', e)
+                                setFieldValue('productGroupId', e)
+                                setSchemeDetails((prevSchemeDetails) => ({
+                                    ...prevSchemeDetails,
+                                    quantity: 1,
+                                }))
+                                setQuantity(1)
                             }}
                         />
                     </div>
-
+                </div>
+                <div className="col-span-5 px-2 hidden">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
                             // isSubmitting
@@ -222,88 +375,102 @@ const CallerPage: React.FC<Props> = ({
                 </div>
             </div>
 
-            <div className="bg-[#87527C] mt-2">
-                <div className="grid grid-cols-12 p-2">
-                    <div className="col-span-4">
-                        <h2 className="text-[15px] font-bold text-white">
-                            SCHEME
-                        </h2>
-                    </div>
-                    <div className="col-span-2">
-                        <h2 className="text-[15px] font-bold text-white">
-                            PRICE
-                        </h2>
-                    </div>
-                    <div className="col-span-2">
-                        <h2 className="text-[15px] font-bold text-white pl-3">
-                            QTY
-                        </h2>
-                    </div>
-                    <div className="col-span-2">
-                        <h2 className="text-[15px] font-bold text-white">
-                            DELIVERY CHARGES
-                        </h2>
-                    </div>
-                    <div className="col-span-2">
-                        <h2 className="text-[15px] font-bold text-white">
-                            TOTAL AMOUNT
-                        </h2>
-                    </div>
-                </div>
+            {Object.keys(schemeDetails || '').length ? (
+                <React.Fragment>
+                    <div className="bg-[#87527C] mt-2">
+                        <div className="grid grid-cols-12 p-2">
+                            <div className="col-span-4">
+                                <h2 className="text-[15px] font-bold text-white">
+                                    SCHEME
+                                </h2>
+                            </div>
+                            <div className="col-span-2">
+                                <h2 className="text-[15px] font-bold text-white">
+                                    PRICE
+                                </h2>
+                            </div>
+                            <div className="col-span-2">
+                                <h2 className="text-[15px] font-bold text-white pl-3">
+                                    QTY
+                                </h2>
+                            </div>
+                            <div className="col-span-2">
+                                <h2 className="text-[15px] font-bold text-white">
+                                    DELIVERY CHARGES
+                                </h2>
+                            </div>
+                            <div className="col-span-2">
+                                <h2 className="text-[15px] font-bold text-white">
+                                    TOTAL AMOUNT
+                                </h2>
+                            </div>
+                        </div>
 
-                <div className="bg-yellow-500">
-                    <div className="grid grid-cols-12 p-2">
-                        <div className="col-span-4">
-                            <h2 className="text-[15px] font-bold text-white">
-                                DHUN AADHAR PLUS US 3700
-                            </h2>
-                        </div>
-                        <div className="col-span-2">
-                            <h2 className="text-[15px] font-bold text-white">
-                                3700.00
-                            </h2>
-                        </div>
-                        <div className="col-span-2">
-                            <h2 className="text-[15px] font-bold text-white">
-                                <button
-                                    className="mr-4 text-[18px]"
-                                    onClick={() => {
-                                        if (quantity <= 0) {
-                                            alert(
-                                                'Quantity Can Not Be In Nagetive Value'
-                                            )
-                                        } else {
-                                            setQuantity((pre) => quantity - 1)
-                                        }
-                                    }}
-                                >
-                                    {' '}
-                                    -{' '}
-                                </button>
-                                {quantity}
-                                <button
-                                    className="ml-4 text-[18px]"
-                                    onClick={() =>
-                                        setQuantity((pre) => quantity + 1)
-                                    }
-                                >
-                                    +
-                                </button>
-                            </h2>
-                        </div>
-                        <div className="col-span-2">
-                            <h2 className="text-[15px] font-bold text-white">
-                                0.00
-                            </h2>
-                        </div>
-                        <div className="col-span-2">
-                            <h2 className="text-[15px] font-bold text-white">
-                                3700
-                            </h2>
+                        <div className="bg-yellow-500">
+                            <div className="grid grid-cols-12 p-2">
+                                <div className="col-span-4">
+                                    <h2 className="text-[15px] font-bold text-white">
+                                        {schemeDetails?.schemeName}
+                                    </h2>
+                                </div>
+                                <div className="col-span-2">
+                                    <h2 className="text-[15px] font-bold text-white">
+                                        {schemeDetails?.price}.00
+                                    </h2>
+                                </div>
+                                <div className="col-span-2">
+                                    <h2 className="relative flex items-center justify-start text-[15px] font-bold text-white">
+                                        <button
+                                            disabled={
+                                                schemeDetails.quantity > 1
+                                                    ? false
+                                                    : true
+                                            }
+                                            className={`w-[28px] h-[28px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full mr-4 text-[18px]  ${
+                                                schemeDetails.quantity > 1
+                                                    ? 'text-[black]'
+                                                    : 'text-[#c2c2c2]'
+                                            }`}
+                                            onClick={() => {
+                                                if (quantity <= 1) {
+                                                    alert(
+                                                        'Quantity Can Not Be Zero'
+                                                    )
+                                                } else {
+                                                    setQuantity(quantity - 1)
+                                                }
+                                            }}
+                                        >
+                                            -
+                                        </button>
+                                        <span className="absolute left-10">
+                                            {schemeDetails.quantity}
+                                        </span>
+                                        <button
+                                            className="w-[28px] h-[28px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full ml-4 text-[18px] text-black "
+                                            onClick={() =>
+                                                setQuantity(quantity + 1)
+                                            }
+                                        >
+                                            +
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div className="col-span-2">
+                                    <h2 className="text-[15px] font-bold text-white">
+                                        {schemeDetails?.deliveryCharges}.00
+                                    </h2>
+                                </div>
+                                <div className="col-span-2">
+                                    <h2 className="text-[15px] font-bold text-white">
+                                        {schemeDetails?.totalAmount}.00
+                                    </h2>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </React.Fragment>
+            ) : null}
 
             <div className="bg-[#87527C] p-2 mt-1">
                 <h2 className="text-[15px] font-bold text-white">
@@ -325,11 +492,11 @@ const CallerPage: React.FC<Props> = ({
                                 labelSpan="col-span-6"
                                 inputSpan="col-span-6"
                                 // isSubmitting
-                                name=""
-                                value={''}
+                                name="pincodeId"
+                                value={values.pincodeId || ''}
                                 options={dropdownOptions.pincodeOptions || []}
                                 onChange={(e) => {
-                                    // setFieldValue('zonalManagerId', e)
+                                    setFieldValue('pincodeId', e)
                                 }}
                             />
                         </div>
@@ -337,16 +504,11 @@ const CallerPage: React.FC<Props> = ({
                             <ATMSelectSearchable
                                 componentClass="mt-2"
                                 size="xs"
-                                name=""
-                                value={''}
-                                options={[
-                                    { label: 'one', value: 'one' },
-                                    { label: 'two', value: 'two' },
-                                    { label: 'three', value: 'three' },
-                                    { label: 'four', value: 'four' },
-                                ]}
+                                name="pincodeSecondId"
+                                value={values.pincodeSecondId}
+                                options={dropdownOptions.pincodeOptions || []}
                                 onChange={(e) => {
-                                    // setFieldValue('zonalManagerId', e)
+                                    setFieldValue('pincodeSecondId', e)
                                 }}
                             />
                         </div>
@@ -357,12 +519,12 @@ const CallerPage: React.FC<Props> = ({
                         size="xs"
                         LabelDirection="horizontal"
                         classDirection="grid grid-cols-3"
+                        name="stateId"
+                        value={values.stateId || ''}
                         // isSubmitting
-                        name=""
-                        value={''}
                         options={dropdownOptions.stateOptions || []}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('stateId', e)
                         }}
                     />
                     <ATMSelectSearchable
@@ -388,11 +550,11 @@ const CallerPage: React.FC<Props> = ({
                         LabelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
+                        name="areaId"
+                        value={values.areaId || ''}
                         options={dropdownOptions.areaOptions || []}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('areaId', e)
                         }}
                     />
                     <ATMSelectSearchable
@@ -402,11 +564,11 @@ const CallerPage: React.FC<Props> = ({
                         LabelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
+                        name="districtId"
+                        value={values.districtId || ''}
                         options={dropdownOptions.districtOptions || []}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('districtId', e)
                         }}
                     />{' '}
                     <ATMSelectSearchable
@@ -416,11 +578,11 @@ const CallerPage: React.FC<Props> = ({
                         LabelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
+                        name="tehsilId"
+                        value={values.tehsilId}
                         options={dropdownOptions.tehsilOptions || []}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('tehsilId', e)
                         }}
                     />
                 </div>
@@ -446,16 +608,14 @@ const CallerPage: React.FC<Props> = ({
                         LabelDirection="horizontal"
                         label="Type of Address"
                         size="xs"
-                        name=""
-                        value={''}
+                        name="typeOfAddress"
+                        value={values.typeOfAddress || ''}
                         options={[
-                            { label: 'one', value: 'one' },
-                            { label: 'two', value: 'two' },
-                            { label: 'three', value: 'three' },
-                            { label: 'four', value: 'four' },
+                            { label: 'landmark', value: 'one' },
+                            { label: 'street', value: 'two' },
                         ]}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('typeOfAddress', e)
                         }}
                     />
                     <ATMSelectSearchable
@@ -465,16 +625,11 @@ const CallerPage: React.FC<Props> = ({
                         LabelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
-                        options={[
-                            { label: 'indore', value: 'one' },
-                            { label: 'betul', value: 'two' },
-                            { label: 'bhanwarkua', value: 'three' },
-                            { label: 'mumbai', value: 'four' },
-                        ]}
+                        name="reciversName"
+                        value={values.reciversName || ''}
+                        options={[{ label: 'redio', value: 'one' }]}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('reciversName', e)
                         }}
                     />
                     <ATMSelectSearchable
@@ -502,12 +657,15 @@ const CallerPage: React.FC<Props> = ({
                         label="House/Flat/Shop/Office No."
                         size="xs"
                         LabelDirection="horizontal"
-                        // classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
+                        name="houseNumber"
+                        value={values.houseNumber || ''}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('houseNumber', e.target.value)
+                            setFieldValue(
+                                'autoFillingShippingAddress',
+                                e.target.value
+                            )
                         }}
                     />
                     <ATMTextField
@@ -515,12 +673,15 @@ const CallerPage: React.FC<Props> = ({
                         label="Street/Sector/Building/Appartment"
                         size="xs"
                         LabelDirection="horizontal"
-                        // classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
+                        name="streetNumber"
+                        value={values.streetNumber || ''}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('streetNumber', e.target.value)
+                            setFieldValue(
+                                'autoFillingShippingAddress',
+                                `${values.houseNumber}\n${e.target.value}`
+                            )
                         }}
                     />
                     <ATMTextField
@@ -528,25 +689,31 @@ const CallerPage: React.FC<Props> = ({
                         label="Landmark"
                         size="xs"
                         LabelDirection="horizontal"
-                        // classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
+                        name="landmark"
+                        value={values.landmark}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('landmark', e.target.value)
+                            setFieldValue(
+                                'autoFillingShippingAddress',
+                                `${values.houseNumber}\n${values.streetNumber}\n${values.landmark}`
+                            )
                         }}
                     />
 
                     <ATMTextField
                         extraClassField="mt-0"
                         label="Alternate Mobile No"
-                        value={''}
+                        value={values.alternateNo}
                         size="xs"
                         LabelDirection="horizontal"
-                        name=""
+                        name="alternateNo"
                         // isSubmitting
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            const inputValue = e.target.value
+                            if (!isNaN(Number(inputValue))) {
+                                setFieldValue('alternateNo', e.target.value)
+                            }
                         }}
                     />
 
@@ -567,40 +734,47 @@ const CallerPage: React.FC<Props> = ({
                     <ATMTextField
                         extraClassField="mt-0"
                         label="WhatsApp Number"
-                        value={''}
+                        value={values.whatsappNo}
                         size="xs"
                         LabelDirection="horizontal"
-                        name=""
-                        // classDirection="grid grid-cols-3"
+                        name="whatsappNo"
                         // isSubmitting
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            const inputValue = e.target.value
+                            if (!isNaN(Number(inputValue))) {
+                                setFieldValue('whatsappNo', e.target.value)
+                            }
                         }}
                     />
                 </div>
                 <div className="col-span-6 py-2 px-8 border-r-[1px]">
                     <div className="-mt-2">
                         <ATMTextArea
-                            name=""
-                            value={''}
+                            name="autoFillingShippingAddress"
+                            value={values.autoFillingShippingAddress || ''}
                             placeholder="AUTOFILL SHIPPING ADDRESS"
                             minRows={9}
-                            onChange={(value) => {}}
+                            onChange={(value) =>
+                                setFieldValue(
+                                    'autoFillingShippingAddress',
+                                    value
+                                )
+                            }
                         />
                     </div>
 
-                    <div className="-mt-4">
+                    {/* <div className="-mt-4">
                         <ATMSwitchButton
                             label="Recording"
-                            name=""
-                            value={true}
+                            name="isRecording"
+                            value={values.isRecording || false}
                             title1="ON"
                             title2="OFF"
                             onChange={(e) => {
-                                // console.log(e)
+                                setFieldValue('isRecording', e)
                             }}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
@@ -620,20 +794,11 @@ const CallerPage: React.FC<Props> = ({
                         <div className="col-span-4">
                             <div className="-mt-5">
                                 <ATMRadioButton
-                                    name=""
-                                    value={'MALE'}
-                                    options={[
-                                        {
-                                            label: 'MALE (MR.)',
-                                            value: 'MALE',
-                                        },
-                                        {
-                                            label: 'FEMALE (Ms.)',
-                                            value: 'FEMALE',
-                                        },
-                                    ]}
+                                    name="gender"
+                                    value={values.gender}
+                                    options={genderOption || []}
                                     onChange={(e) => {
-                                        // setFieldValue('type', e)
+                                        setFieldValue('gender', e)
                                     }}
                                 />
                             </div>
@@ -647,8 +812,8 @@ const CallerPage: React.FC<Props> = ({
                         LabelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
+                        name="orderFor"
+                        value={values.orderFor}
                         options={[
                             { label: 'indore', value: 'one' },
                             { label: 'betul', value: 'two' },
@@ -656,18 +821,18 @@ const CallerPage: React.FC<Props> = ({
                             { label: 'mumbai', value: 'four' },
                         ]}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('orderFor', e)
                         }}
                     />
                     <ATMSelectSearchable
-                        componentClass="  mt-2"
+                        componentClass="mt-2"
                         label="Age Group"
                         size="xs"
                         LabelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
+                        name="ageGroup"
+                        value={values.ageGroup}
                         options={[
                             { label: 'indore', value: 'one' },
                             { label: 'betul', value: 'two' },
@@ -675,7 +840,7 @@ const CallerPage: React.FC<Props> = ({
                             { label: 'mumbai', value: 'four' },
                         ]}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('ageGroup', e)
                         }}
                     />
 
@@ -685,67 +850,93 @@ const CallerPage: React.FC<Props> = ({
                         size="xs"
                         labelSize="small"
                         LabelDirection="horizontal"
-                        // classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
+                        name="emailId"
+                        value={values.emailId}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('emailId', e.target.value)
                         }}
                     />
 
                     <div className="grid grid-cols-12">
-                        <div className="col-span-4">Social Media</div>
+                        <div className="col-span-4 pt-3">Social Media</div>
                         <div className="col-span-8 flex gap-x-4 px-1 items-center">
                             <ATMCheckbox
                                 extraClasses="mt-2"
                                 required
                                 label="Facebook"
-                                name=""
                                 // labelClass="font-semibold text-sm"
-                                checked={true}
-                                onChange={(e) => {
-                                    // setFieldValue('personalInformation.prepaid', e)
-                                }}
+                                checked={isFacebookId}
+                                onChange={(e) => setFacebookId(e)}
                             />
+
+                            {isFacebookId && (
+                                <div className="ml-1">
+                                    <ATMTextField
+                                        extraClassField="mt-2"
+                                        size="xs"
+                                        placeholder="Name ID"
+                                        // LabelDirection="horizontal"
+                                        // isSubmitting
+                                        name="socialMedia.facebook"
+                                        value={
+                                            values.socialMedia?.facebook || ''
+                                        }
+                                        onChange={(e) =>
+                                            setFieldValue(
+                                                'socialMedia.facebook',
+                                                e.target.value
+                                            )
+                                        }
+                                    />
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="col-span-4"></div>
+                        <div className="col-span-8 flex gap-x-4 px-1 items-center">
                             <ATMCheckbox
                                 extraClasses="mt-2"
                                 required
                                 label="Instagram"
-                                name=""
                                 // labelClass="font-semibold text-sm"
-                                checked={false}
+                                checked={isInstagramId}
                                 onChange={(e) => {
-                                    // setFieldValue('personalInformation.prepaid', e)
+                                    setInstagramId(e)
                                 }}
                             />
 
-                            <ATMTextField
-                                extraClassField="mt-2"
-                                size="xs"
-                                // LabelDirection="horizontal"
-                                // classDirection="grid grid-cols-3"
-                                placeholder="Name id"
-                                // isSubmitting
-                                name=""
-                                value={''}
-                                onChange={(e) => {
-                                    // setFieldValue('zonalManagerId', e)
-                                }}
-                            />
+                            {isInstagramId && (
+                                <ATMTextField
+                                    extraClassField="mt-2"
+                                    size="xs"
+                                    // LabelDirection="horizontal"
+                                    // classDirection="grid grid-cols-3"
+                                    placeholder="Name ID"
+                                    // isSubmitting
+                                    name="socialMedia.instagram"
+                                    value={values.socialMedia?.instagram || ''}
+                                    onChange={(e) => {
+                                        setFieldValue(
+                                            'socialMedia.instagram',
+                                            e.target.value
+                                        )
+                                    }}
+                                />
+                            )}
                         </div>
                     </div>
 
                     <ATMSelectSearchable
-                        isMenuOpen
+                        // isMenuOpen
                         isMulti
-                        name={``}
-                        value={multiSelect}
+                        name="medicalIssue"
+                        value={values.medicalIssue}
                         LabelDirection="horizontal"
                         size="small"
+                        // isMulti={true}
                         onChange={(value) => {
-                            // setFieldValue(`details[${index}].pincodes`, value)
-                            setMultiSelect(value)
+                            setFieldValue(`medicalIssue`, value)
                         }}
                         options={[
                             {
@@ -764,21 +955,8 @@ const CallerPage: React.FC<Props> = ({
                                 label: 'Online (UPI only)',
                                 value: 'ewrrwe',
                             },
-                            {
-                                label: 'Online (UPI only)',
-                                value: 'rwewerwer',
-                            },
-                            {
-                                label: 'Online (UPI only)',
-                                value: 'fdgdfgh',
-                            },
-                            {
-                                label: 'Online (UPI only)',
-                                value: 'sdg',
-                            },
                         ]}
                         label="Any Other Medical Issue"
-                        // isMulti={true}
                         selectClass={'-mt-4 select-margin'}
                     />
                 </div>
@@ -790,21 +968,12 @@ const CallerPage: React.FC<Props> = ({
                             <div className="-mt-6 p-4">
                                 <ATMRadioButton
                                     label="Payment Mode :"
-                                    name=""
-                                    value={'COD'}
+                                    name="paymentMode"
+                                    value={values.paymentMode || ''}
                                     className="mt-1"
-                                    options={[
-                                        {
-                                            label: 'COD',
-                                            value: 'COD',
-                                        },
-                                        {
-                                            label: 'Online (UPI only)',
-                                            value: 'UPI',
-                                        },
-                                    ]}
+                                    options={paymentModeOptions}
                                     onChange={(e) => {
-                                        // setFieldValue('type', e)
+                                        setFieldValue('paymentMode', e)
                                     }}
                                 />
                             </div>
@@ -813,11 +982,13 @@ const CallerPage: React.FC<Props> = ({
 
                     <div className="-mt-2">
                         <ATMTextArea
-                            name=""
-                            value={''}
+                            name="remark"
+                            value={values.remark}
                             placeholder="Other Remarks"
-                            minRows={6}
-                            onChange={(value) => {}}
+                            minRows={7}
+                            onChange={(value) => {
+                                setFieldValue('remark', value)
+                            }}
                         />
                     </div>
                 </div>
@@ -831,12 +1002,12 @@ const CallerPage: React.FC<Props> = ({
                         label="Disposition Level 1"
                         componentClass="mt-2"
                         size="xs"
-                        name=""
-                        value={''}
+                        name="dispositionLevelTwoId"
+                        value={values.dispositionLevelTwoId}
                         // isSubmitting
                         options={dropdownOptions.dispositionTwoOptions || []}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('dispositionLevelTwoId', e)
                         }}
                     />
                 </div>
@@ -846,17 +1017,22 @@ const CallerPage: React.FC<Props> = ({
                         label="Disposition Level 2"
                         componentClass="mt-2"
                         size="xs"
-                        name=""
-                        value={''}
+                        name="dispositionLevelThreeId"
+                        value={values.dispositionLevelThreeId}
                         // isSubmitting
                         options={dropdownOptions.dispositionThreeOptions || []}
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
+                            setFieldValue('dispositionLevelThreeId', e)
                         }}
                     />
                 </div>
                 <div className="col-span-1 px-3 pt-6">
-                    <CallerButton text="Save" className="py-2" />
+                    <CallerButton
+                        text="Save"
+                        type="submit"
+                        className="py-2"
+                        onClick={() => formikProps.handleSubmit()}
+                    />
                 </div>
             </div>
 
@@ -865,7 +1041,7 @@ const CallerPage: React.FC<Props> = ({
             <div className="border-[1px] pb-2 mt-1 border-grey-700">
                 <ATMTable
                     headerClassName="bg-[#87527c]"
-                    columns={columns}
+                    columns={column}
                     rows={[]}
                 />
             </div>

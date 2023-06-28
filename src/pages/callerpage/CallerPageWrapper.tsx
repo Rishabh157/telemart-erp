@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from 'react-router-dom'
-import { number, object, string } from 'yup'
+import { array, boolean, number, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
@@ -37,127 +37,156 @@ import {
 } from 'src/redux/slices/media/inboundCallerSlice'
 import CallerPage from './CallerPage'
 
+import { useAddCallerFormMutation } from 'src/services/CallerService'
+import { CallerResponse } from 'src/models'
+
 export type FormInitialValues = {
-    generalInformation: {
-        didNo: string
-        inOutBound: string
-        incomingCallerNo: string
-        mobileNo: string
-    }
-    addressInformation: {
-        deliveryCharges: number
-        discount: number
-        total: number
-        countryId: string | null
-        stateId: string | null
-        districtId: string | null
-        tehsilId: string | null
-        areaId: string | null
-        pincodeId: string | null
-        expectedDeliveryDate: string
-        profileDeliveredBy: string
-        complaintDetails: string
-        complaintNo: string
-    }
-    personalInformation: {
-        agentName: string
-        name: string
-        age: number
-        address: string
-        relation: string
-        agentDistrictId: string | null
-        landmark: string
-        whatsappNo: string
-        gender: string
-        prepaid: boolean
-        emailId: string
-        channel: string
-        remark: string
-    }
-    dispositionLevelTwoId: string | null
-    dispositionLevelThreeId: string | null
-    schemeId: string | null
+    didNo: string
+    ageGroup: string
+    mobileNo: string
     alternateNo: string
+    autoFillingShippingAddress: string
+    callType: string
+    campaign: string
+    customerName: string
+    deliveryTimeAndDate: string
+    countryId: string
+    stateId: string
+    districtId: string
+    tehsilId: string
+    schemeId: string
+    schemeName: string
+    pincodeId: string
+    pincodeSecondId: string
+    // villageId?: string | null
+    areaId: null
+    emailId: string
+    flagStatus: string
+    gender: string
+    houseNumber: string
+    incomingCallerNo: string
+    landmark: string
+    medicalIssue: string[]
+    orderFor: string
+    paymentMode: string
+    productGroupId: string
+    // isRecording?: boolean
+    reciversName: string
+    remark: string
+    shcemeQuantity: number
+    socialMedia: {
+        facebook: string
+        instagram: string
+    }
+    streetNumber: string
+    typeOfAddress: string
+    whatsappNo: string
+    price: number
+    deliveryCharges: number
+    totalAmount: number
+    dispositionLevelTwoId: string
+    dispositionLevelThreeId: string
 }
 
 const CallerPageWrapper = () => {
     const columns: columnTypes[] = [
         {
-            field: 'schemeName',
-            headerName: '',
-            flex: 'flex-[2_2_0%]',
-            renderCell: (row: SchemeListResponse) => (
-                <span> {row.schemeName} </span>
-            ),
-            extraClasses: 'p-0 m-0 ',
+            field: 'order',
+            headerName: 'ORDER NO',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
         },
         {
-            field: 'schemePrice',
-            headerName: '',
-            flex: 'flex-[0.3_0.3_0%]',
-            renderCell: (row: SchemeListResponse) => {
-                return <span> {row?.schemePrice} </span>
-            },
-            extraClasses: 'p-0 m-0 ',
-        },
-    ]
-
-    const column: columnTypes[] = [
-        {
-            field: 'didNo',
-            headerName: 'DID No',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.didNo} </span>
-            ),
+            field: 'enq',
+            headerName: 'ENQ NO',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
         },
         {
-            field: 'generalInformation.incomingCallerNo',
-            headerName: 'Incoming Caller No',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.incomingCallerNo} </span>
-            ),
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
         },
         {
-            field: 'dispositionTwoLabel',
-            headerName: 'Disposition Two',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span>
-                    {' '}
-                    {row.dispositionTwoLabel ? row.dispositionTwoLabel : 'NA'}
-                </span>
-            ),
+            field: 'name',
+            headerName: 'NAME',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
         },
         {
-            field: 'dispositionThreeLabel',
-            headerName: 'Disposition Three Label',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span>
-                    {' '}
-                    {row.dispositionThreeLabel
-                        ? row.dispositionThreeLabel
-                        : 'NA'}{' '}
-                </span>
-            ),
+            field: 'city',
+            headerName: 'CITY',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
         },
         {
-            field: 'schemeLabel',
-            headerName: 'Scheme',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.schemeLabel} </span>
-            ),
+            field: 'pincode',
+            headerName: 'PINCODE',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
         },
         {
-            field: 'channelId',
-            headerName: 'Channel',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.channel} </span>
-            ),
+            field: 'phone',
+            headerName: 'PHONE',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
+        },
+        {
+            field: 'disposition',
+            headerName: 'DISPOSITION',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
+        },
+        {
+            field: 'scheme',
+            headerName: 'SCHEME',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
+        },
+        {
+            field: 'shippingCharge',
+            headerName: 'SHIPPING CHARGE',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
+        },
+        {
+            field: 'discount',
+            headerName: 'DISCOUNT',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
+        },
+        {
+            field: 'amount',
+            headerName: 'AMOUNT',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
+        },
+        {
+            field: 'remarks',
+            headerName: 'REMARKS',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
+        },
+        {
+            field: 'compl',
+            headerName: 'COMPL',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-white',
         },
     ]
 
@@ -199,175 +228,169 @@ const CallerPageWrapper = () => {
     }, [callisLoading, callisFetching, Calldata])
 
     // const navigate = useNavigate()
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [AddInbopundCaller] = useAddInboundCallerMutation()
-    const [UpdateInbopundCaller] = useUpdateInboundCallerMutation()
+    // const [AddInbopundCaller] = useAddInboundCallerMutation()
+    // const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const [AddCallerForm] = useAddCallerFormMutation()
     let DidNO = '452001'
     let MobileNO = '9893432611'
 
     const initialValues: FormInitialValues = {
-        generalInformation: {
-            didNo: DidNO,
-            inOutBound: 'Manual',
-            incomingCallerNo: MobileNO,
-            mobileNo: MobileNO,
-        },
-        addressInformation: {
-            deliveryCharges: 0,
-            discount: 0,
-            total: 0,
-            countryId: null,
-            stateId: null,
-            districtId: null,
-            tehsilId: null,
-            areaId: null,
-            pincodeId: null,
-            expectedDeliveryDate: '',
-            profileDeliveredBy: '',
-            complaintDetails: '',
-            complaintNo: '',
-        },
-        personalInformation: {
-            agentName: '',
-            name: '',
-            age: 0,
-            address: '',
-            relation: '',
-            agentDistrictId: null,
-            landmark: '',
-            whatsappNo: '',
-            gender: 'OTHER',
-            prepaid: false,
-            emailId: '',
-            channel: 'Sony',
-            remark: '',
-        },
+        campaign: 'DHUANDHAAR',
+        callType: 'INBOUND',
+        incomingCallerNo: '9988776655',
+        customerName: 'AJAY CHORE',
+        didNo: '111.',
+        flagStatus: 'STATUS',
+        productGroupId: '',
+        schemeId: '',
+        schemeName: '',
+        shcemeQuantity: 1,
+        price: 0,
+        deliveryCharges: 0,
+        totalAmount: 0,
+        // DELEVERY ADDRESS SELECT OPTIONS
+        countryId: '646b2f49f8ba85987b718ad8',
+        pincodeId: '',
+        pincodeSecondId: '',
+        stateId: '',
+        // villageId: '' || null,
+        areaId: '' || null,
+        districtId: '',
+        tehsilId: '',
 
+        // DELEVERY ADDRESS SELECT OPTIONS BOTTOM FIELDS
+        typeOfAddress: '',
+        reciversName: '',
+        deliveryTimeAndDate: '',
+        houseNumber: '',
+        streetNumber: '',
+        landmark: '',
+        mobileNo: '9667865476',
+        whatsappNo: '',
+        autoFillingShippingAddress: '',
+        // isRecording: false,
+        gender: '',
+        orderFor: '',
+        ageGroup: '',
+        emailId: '',
+        socialMedia: {
+            facebook: '',
+            instagram: '',
+        },
+        medicalIssue: [],
+        paymentMode: '',
+        remark: '',
+        dispositionLevelTwoId: '',
+        dispositionLevelThreeId: '',
         alternateNo: '',
-        dispositionLevelTwoId: null,
-        dispositionLevelThreeId: null,
-        schemeId: null,
     }
 
     // Form Validation Schema
-    const validationSchema = object({
-        generalInformation: object().shape({
-            didNo: string().required('Required !'),
-            inOutBound: string().required('Required !'),
-            incomingCallerNo: string().required('Required !'),
-            mobileNo: string().required('Required !'),
-        }),
-        addressInformation: object().shape({
-            deliveryCharges: number().required('Required !'),
-            discount: number().required('Required !'),
-            total: number().required('Required !'),
-            countryId: string().required('Required !'),
-            stateId: string().required('Required !'),
-            districtId: string().required('Required !'),
-            tehsilId: string().required('Required !'),
-            pincodeId: string().required('Required !'),
-            areaId: string().required('Required !'),
-        }),
-        personalInformation: object().shape({
-            // agentName: string().required('Required !'),
-            // name: string().required('Required !'),
-            age: number().required('Required !'),
-            // address: string().required('Required !'),
-            relation: string().required('Required !'),
-            agentDistrictId: string().required('Required !'),
-            // landmark: string().required('Required !'),
-            // alternateNo: string().required('Required !'),
-            gender: string().required('Required !'),
-            // emailId: string().required('Required !'),
-            // channel: string().required('Required !'),
-            // remark: string().required('Required !'),
-        }),
-        dispositionLevelTwoId: string().required('Required'),
-        dispositionLevelThreeId: string().required('Required'),
-        schemeId: string().required('Please select scheme'),
-    })
+    // const validationSchema = object({
+    //     // DELEVERY ADDRESS SELECT OPTIONS
+    //     countryId: string(),
+    //     pincodeId: string(),
+    //     pincodeSecondId: string(),
+    //     stateId: string(),
+    //     areaId: string(),
+    //     districtId: string(),
+    //     tehsilId: string(),
+
+    //     // DELEVERY ADDRESS SELECT OPTIONS BOTTOM FIELDS
+    //     typeOfAddress: string(),
+    //     reciversName: string(),
+    //     deliveryTimeAndDate: string(),
+    //     houseNumber: string(),
+    //     streetNumber: string(),
+    //     landmark: string(),
+    //     mobileNo: string(),
+    //     whatsappNo: string()
+    //         .min(10, 'mobile number is not valid')
+    //         .max(10, 'mobile number is not valid'),
+    //     autoFillingShippingAddress: string(),
+    //     isRecording: boolean(),
+    //     gender: string(),
+    //     orderFor: string(),
+    //     ageGroup: string(),
+    //     emailId: string(),
+    //     medicalIssue: array().of(string()),
+    //     remark: string(),
+    //     dispositionLevelTwoId: string(),
+    //     dispositionLevelThreeId: string(),
+    //     alternateNo: string()
+    //         .min(10, 'mobile number is not valid')
+    //         .max(10, 'mobile number is not valid'),
+    // })
 
     const onSubmitHandler = (values: FormInitialValues) => {
-        const callDetails: any = localStorage.getItem('callerData')
-        let callDataItem = JSON.parse(callDetails)
 
-        const valuesInbound = {
-            ...values.generalInformation,
-            ...values.addressInformation,
-            ...values.personalInformation,
-        }
-        setApiStatus(true)
-        setTimeout(() => {
-            UpdateInbopundCaller({
-                body: {
-                    ...valuesInbound,
-                    alternateNo1: values.alternateNo,
-                    schemeId: values.schemeId,
-                    dispositionLevelTwoId: values.dispositionLevelTwoId,
-                    dispositionLevelThreeId: values.dispositionLevelThreeId,
-                },
-                id: callDataItem?.orderID,
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'InboundCaller added successfully!'
-                        )
-                        localStorage.removeItem('callerData')
-                        // navigate('/media/inbound')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-                setApiStatus(false)
-            })
-        }, 1000)
+      
+        console.log('Submit Form', values)
+
+        AddCallerForm({
+            ...values,
+        }).then((res: any) => {
+            console.log(res)
+            // if ('data' in res) {
+            //     if (res?.data?.status) {
+            //         showToast(
+            //             'success',
+            //             'InboundCaller added successfully!'
+            //         )
+            //         localStorage.removeItem('callerData')
+            //         // navigate('/media/inbound')
+            //     } else {
+            //         showToast('error', res?.data?.message)
+            //     }
+            // } else {
+            //     showToast('error', 'Something went wrong')
+            // }
+            // setApiStatus(false)
+        })
+
+        // setApiStatus(true)
     }
-    useEffect(() => {
-        const callDetails: any = localStorage.getItem('callerData')
-        let callDataItem = JSON.parse(callDetails)
-        if (!callDataItem) {
-            const valuesInbound = {
-                ...initialValues.generalInformation,
-                ...initialValues.addressInformation,
-                ...initialValues.personalInformation,
-            }
-            // setApiStatus(true)
 
-            AddInbopundCaller({
-                ...valuesInbound,
-                alternateNo1: initialValues.alternateNo,
-                schemeId: initialValues.schemeId,
-                dispositionLevelTwoId: initialValues.dispositionLevelTwoId,
-                dispositionLevelThreeId: initialValues.dispositionLevelThreeId,
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        if (res?.data?.data?._id) {
-                            let CallData = {
-                                orderID: res?.data?.data?._id,
-                                MobileNO: MobileNO,
-                                DidNO: DidNO,
-                            }
-                            localStorage.setItem(
-                                'callerData',
-                                JSON.stringify(CallData)
-                            )
-                        }
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-                // setApiStatus(false)
-            })
-        }
-        // eslint-disable-next-line
-    }, [])
+    // useEffect(() => {
+    //     const callDetails: any = localStorage.getItem('callerData')
+    //     let callDataItem = JSON.parse(callDetails)
+    //     if (!callDataItem) {
+    //         const valuesInbound = {
+    //             ...initialValues,
+    //         }
+    //         setApiStatus(true)
+
+    //         AddInbopundCaller({
+    //             ...valuesInbound,
+    //             alternateNo1: initialValues.alternateNo,
+    //             schemeId: initialValues.schemeId,
+    //             dispositionLevelTwoId: initialValues.dispositionLevelTwoId,
+    //             dispositionLevelThreeId: initialValues.dispositionLevelThreeId,
+    //         }).then((res: any) => {
+    //             if ('data' in res) {
+    //                 if (res?.data?.status) {
+    //                     if (res?.data?.data?._id) {
+    //                         let CallData = {
+    //                             orderID: res?.data?.data?._id,
+    //                             MobileNO: MobileNO,
+    //                             DidNO: DidNO,
+    //                         }
+    //                         localStorage.setItem(
+    //                             'callerData',
+    //                             JSON.stringify(CallData)
+    //                         )
+    //                     }
+    //                 } else {
+    //                     showToast('error', res?.data?.message)
+    //                 }
+    //             } else {
+    //                 showToast('error', 'Something went wrong')
+    //             }
+    //             // setApiStatus(false)
+    //         })
+    //     }
+    //     // eslint-disable-next-line
+    // }, [])
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -475,18 +498,18 @@ const CallerPageWrapper = () => {
     return (
         <Formik
             initialValues={initialValues}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => {
                 return (
                     <CallerPage
-                        apiStatus={apiStatus}
+                        // apiStatus={apiStatus}
                         formikProps={formikProps}
                         dropdownOptions={dropdownOptions}
                         schemeColumn={columns}
                         didItems={didItems}
-                        column={column}
+                        column={columns}
                         rows={items}
                     />
                 )
