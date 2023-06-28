@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,7 +26,6 @@ import {
     setSearchValue,
 } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {
@@ -53,17 +52,13 @@ const WarehouseListing = ({
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         warehouseState
 
-    
-
     return (
         <div className="h-full">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
                 <button
-                    onClick={() =>
-                        navigate(`${AddpathName}`)
-                    }
+                    onClick={() => navigate(`${AddpathName}`)}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
                     {' '}

@@ -132,7 +132,7 @@ const steps = [
     },
 ]
 
-const AddWarehouseWrapper = () => {    
+const AddWarehouseWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const navigate = useNavigate()
@@ -156,7 +156,7 @@ const AddWarehouseWrapper = () => {
         warehouseCode: '',
         warehouseName: '',
         country: '',
-        email: '',        
+        email: '',
         regd_address: {
             phone: '',
             address: '',
@@ -232,16 +232,15 @@ const AddWarehouseWrapper = () => {
                     },
                     contactInformation: values.contact_informations,
 
-                    companyId: userData?.companyId || '',                    
+                    companyId: userData?.companyId || '',
                 }).then((res: any) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast(
                                 'success',
                                 'warehouse added successfully!'
-                            )                           
+                            )
                             navigate('/warehouse')
-                           
                         } else {
                             showToast('error', res?.data?.message)
                         }

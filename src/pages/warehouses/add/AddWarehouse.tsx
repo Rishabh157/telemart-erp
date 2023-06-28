@@ -44,11 +44,11 @@ const AddWarehouse = ({
     const dispatch = useDispatch<AppDispatch>()
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
-    }    
-    
+    }
+
     const breadcrumbs = [
         {
-            label: "Warehouse",
+            label: 'Warehouse',
             path: `/warehouse`,
         },
         {

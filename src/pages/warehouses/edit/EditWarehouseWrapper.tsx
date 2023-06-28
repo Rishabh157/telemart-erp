@@ -7,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, {  useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
@@ -146,10 +146,10 @@ const steps = [
     },
 ]
 
-const EditWarehouseWrapper = () => {   
+const EditWarehouseWrapper = () => {
     const params = useParams()
     const Id = params.id
-    
+
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
 
@@ -203,7 +203,7 @@ const EditWarehouseWrapper = () => {
             district: selectedItem?.billingAddress?.districtId || '',
             pincode: selectedItem?.billingAddress?.pincodeId || '',
         },
-        contact_informations: selectedItem?.contactInformation || '',        
+        contact_informations: selectedItem?.contactInformation || '',
     }
 
     // Form validation schema based on the active step
@@ -260,9 +260,8 @@ const EditWarehouseWrapper = () => {
                             showToast(
                                 'success',
                                 'Warehouse Upated successfully!'
-                            )                          
+                            )
                             navigate('/warehouse')
-                            
                         } else {
                             showToast('error', res?.data?.message)
                         }
