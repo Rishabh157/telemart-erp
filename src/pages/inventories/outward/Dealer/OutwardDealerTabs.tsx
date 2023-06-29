@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:OutwardRequestListing.tsx
+// Filename:OutwardDealerTabs.tsx
 // Type: List Component
 // Last Updated: JUNE 27, 2023
 // Project: TELIMART - Front End
@@ -12,12 +12,10 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import { Tabs } from './OutwardRequestListingWrapper'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Redux --|
@@ -28,10 +26,9 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
-    tabs: Tabs[]
 }
 
-const OutwardRequestListing = ({ columns, rows, tabs }: Props) => {
+const OutwardDealerTabs = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const outwardRequestState: any = useSelector(
         (state: RootState) => state.outwardRequest
@@ -39,25 +36,30 @@ const OutwardRequestListing = ({ columns, rows, tabs }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-    // const [activeTab, setActiveTab] = useState('Dealer')
 
     const { page, rowsPerPage, isTableLoading } = outwardRequestState
 
     return (
         // <div className="px-4 h-full flex flex-col gap-2 w-full">
-        <div className="px-4 h-[calc(100vh-55px)] pt-2 bg-white ">
+        <div className=" h-[calc(100vh-55px)]  bg-white ">
             {/* Page Header */}
-            <div className="flex justify-between items-center ">
+            {/* <div className="flex justify-between items-center ">
                 <ATMPageHeading> Outward Requests </ATMPageHeading>
                 <button className="bg-primary-main text-white rounded p px-3">
                     + Assign Courier
                 </button>
-            </div>
+            </div> */}
 
             {/* Tabs */}
-            <div className="h-[45px] border flex gap-4 items-center   shadow rounded ">
-                <TabScrollable tabs={tabs} />
-            </div>
+            {/* <div className="h-[40px] border flex gap-2 items-center   shadow rounded ">
+                {/* <TabScrollable tabs={tabs} />
+                 */}
+               {/*  <TabScrollable
+                    tabs={tabs}
+                    // setActiveTabHandle={setActiveTabHandle}
+                    active={activeTab}
+                />
+            </div> */}
 
             {/* <div className="flex shadow rounded items-center gap-3 bg-white w-full overflow-auto px-3 ">
                 {tabs.map((tab, tabIndex) => {
@@ -127,4 +129,4 @@ const OutwardRequestListing = ({ columns, rows, tabs }: Props) => {
     )
 }
 
-export default OutwardRequestListing
+export default OutwardDealerTabs

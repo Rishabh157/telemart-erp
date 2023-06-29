@@ -28,7 +28,7 @@ const SideNavLayout = ({ children }: Props) => {
     const currentPath = `/${location.pathname?.split('/')[1]}`
     const bgColorLocal = localStorage.getItem('themeColor') as string
     const bgColor = JSON.parse(bgColorLocal) as string | null
-
+console.log(currentPath,"currentPath")
     return (
         <div
             className={`flex h-screen w-screen ${

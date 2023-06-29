@@ -34,7 +34,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: 'Inventory',
-        path: '/inventories',
+        path: '/inventories/all',
     },
     {
         label: 'Inward Inventory',
