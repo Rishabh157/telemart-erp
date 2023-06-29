@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:Auth.tsx
+// Type: Auth Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { useLocation, useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import LoginPage from './LoginPage'
 
 const Auth = () => {

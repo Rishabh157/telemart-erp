@@ -1,13 +1,29 @@
+/// ==============================================
+// Filename:StepEditAddress.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditDealerWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
     stateOptions: SelectOption[]
@@ -19,6 +35,7 @@ type DropdownOptions = {
     billingPincodeOptions: SelectOption[]
 }
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     formFields: {
@@ -47,7 +64,11 @@ const StepEditAddress = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             {formFields?.map((formField, index) => {
@@ -103,13 +124,13 @@ const StepEditAddress = ({
                                                                 )
                                                             )
                                                         ) {
-                                                            setFieldValue(
+                                                            handleSetFieldValue(
                                                                 name,
                                                                 e.target.value
                                                             )
                                                         }
                                                     } else {
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             name,
                                                             e.target.value
                                                         )
@@ -147,7 +168,10 @@ const StepEditAddress = ({
                                                         ]
                                                     }
                                                     onChange={(e) => {
-                                                        setFieldValue(name, e)
+                                                        handleSetFieldValue(
+                                                            name,
+                                                            e
+                                                        )
                                                     }}
                                                     selectClass="shadow mt-2"
                                                 />
@@ -161,7 +185,7 @@ const StepEditAddress = ({
                                                 label={label}
                                                 checked={Boolean(values[name])}
                                                 onChange={(e) => {
-                                                    setFieldValue(name, e)
+                                                    handleSetFieldValue(name, e)
                                                     if (e) {
                                                         const {
                                                             address,
@@ -172,52 +196,52 @@ const StepEditAddress = ({
                                                             stateId,
                                                         } =
                                                             values.registrationAddress
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.phone',
                                                             phone
                                                         )
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.address',
                                                             address
                                                         )
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.countryId',
                                                             countryId
                                                         )
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.districtId',
                                                             districtId
                                                         )
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.pincodeId',
                                                             pincodeId
                                                         )
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.stateId',
                                                             stateId
                                                         )
                                                     } else {
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.address',
                                                             ''
                                                         )
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.countryId',
                                                             ''
                                                         )
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.districtId',
                                                             ''
                                                         )
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.phone',
                                                             ''
                                                         )
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.pincodeId',
                                                             ''
                                                         )
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             'billingAddress.stateId',
                                                             ''
                                                         )

@@ -7,8 +7,9 @@ interface MouseOverPopoverProps {
     title: string
     children: React.ReactNode
     isIcon?: false
-    buttonName?: string
+    buttonName?: string | React.ReactNode
     isbuttonName?: boolean
+    extraClasses?: string
 }
 
 const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
@@ -17,6 +18,7 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
     isIcon = false,
     buttonName = 'name',
     isbuttonName = false,
+    extraClasses,
 }) => {
     // const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -48,7 +50,7 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
                 // onMouseEnter={handlePopoverOpen}
                 // onMouseLeave={handlePopoverClose}
                 onClick={handleClick}
-                // className="text-xs font-bold  font-sans p-1 "
+                className={`${extraClasses}`}
             >
                 {isIcon && <BsInfoCircle color="blue" />}
                 {isbuttonName && (
@@ -77,12 +79,14 @@ const MouseOverPopover: React.FC<MouseOverPopoverProps> = ({
                 // disableRestoreFocus
                 className="w-full p-2"
             >
-                <div
-                    style={{ padding: '10px' }}
-                    className="font-bold text-center  text-sm "
-                >
-                    {title}
-                </div>
+                {title ? (
+                    <div
+                        style={{ padding: '10px' }}
+                        className="font-bold text-center  text-sm "
+                    >
+                        {title}
+                    </div>
+                ) : null}
                 <div>{children}</div>
             </Popover>
         </div>

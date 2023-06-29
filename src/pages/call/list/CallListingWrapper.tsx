@@ -1,7 +1,18 @@
+/// ==============================================
+// Filename:CallListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import CallListing from './CallListing'
 import {
     setIsTableLoading,
@@ -11,7 +22,9 @@ import {
 import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
 import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const CallListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

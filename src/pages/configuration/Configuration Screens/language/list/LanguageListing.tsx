@@ -1,9 +1,21 @@
+/// ==============================================
+// Filename:LanguageListing.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import { useNavigate } from 'react-router-dom'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -13,9 +25,13 @@ import {
     setPage,
     setSearchValue,
 } from 'src/redux/slices/languageSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
@@ -30,7 +46,8 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue, isTableLoading } = languageState
+    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
+        languageState
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -65,7 +82,7 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMTableHeader
                     searchValue={searchValue}
                     page={page}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -81,7 +98,7 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -93,10 +110,10 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </div>
 
                 {/* Pagination */}
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}

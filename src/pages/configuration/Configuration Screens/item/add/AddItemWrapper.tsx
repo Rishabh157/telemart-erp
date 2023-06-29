@@ -1,14 +1,30 @@
+/// ==============================================
+// Filename:AddItemWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddItem from './AddItem'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useAddItemsMutation } from 'src/services/ItemService'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -19,6 +35,7 @@ export type FormInitialValues = {
 
 const AddItemWrapper = (props: Props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [addItem] = useAddItemsMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -38,6 +55,7 @@ const AddItemWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
+        dispatch(setFieldCustomized(true))
         addItem({
             itemCode: values.itemCode,
             itemName: values.itemName,

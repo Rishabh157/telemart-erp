@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:ChangePassword.tsx
+// Type: Password Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { useChangePasswordMutation } from 'src/services/UserServices'
 

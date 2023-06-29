@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:AddLanguageWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -7,7 +19,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddLanguageWrapper'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -26,7 +41,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddLanguage = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
@@ -70,7 +89,7 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
                                 label="Language Name"
                                 placeholder="Language Name"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'languageName',
                                         e.target.value
                                     )

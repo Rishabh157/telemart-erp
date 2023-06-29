@@ -1,26 +1,39 @@
+/// ==============================================
+// Filename:ListDealerSchemeTabWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import Stack from '@mui/material/Stack'
+import Chip from '@mui/material/Chip'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { DealersSchemeListResponse } from 'src/models/DealerScheme.model'
 import DealerSchemeListing from './DealerSchemeListing'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/dealerSchemeSlice'
-import { AppDispatch } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
 import {
     useGetDealerSchemeQuery,
     useDeleteDealerSchemeMutation,
     useDeactiveDealerSchemeMutation,
 } from 'src/services/DealerSchemeService'
-import { RootState } from 'src/redux/store'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import Stack from '@mui/material/Stack'
-import Chip from '@mui/material/Chip'
+
+// |-- Redux --|
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/dealerSchemeSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const ListDealerSchemeTabWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)

@@ -1,8 +1,22 @@
+/// ==============================================
+// Filename:AreaListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AreaListing from './AreaListing'
 import { useGetAreaQuery } from 'src/services/AreaService'
-import { useDispatch, useSelector } from 'react-redux'
 import { setItems } from 'src/redux/slices/areaSlice'
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 
 const AreaListingWrapper = () => {

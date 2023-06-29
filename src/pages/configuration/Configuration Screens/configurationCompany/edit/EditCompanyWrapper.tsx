@@ -1,23 +1,41 @@
+/// ==============================================
+// Filename:EditCompanyWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
 import { array, object, string } from 'yup'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import EditCompany from './EditCompany'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import StepEditCompanyDetailsWrapper from './FormSteps/StepEditCompanyDetails/StepEditCompanyDetailsWrapper'
 import StepEditBankDetailsWrapper from './FormSteps/StepEditBankDetails/StepEditBankDetailsWrapper'
 // import { useEditCompanyMutation } from "src/services/CompanyServices";
-import { useNavigate, useParams } from 'react-router-dom'
 import {
     useGetCompanyByIdQuery,
     useUpdateCompanyMutation,
 } from 'src/services/CompanyServices'
-import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedCompany } from 'src/redux/slices/companySlice'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { showToast, validationofGst } from 'src/utils'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
+// |-- Redux --|
+import { setSelectedCompany } from 'src/redux/slices/companySlice'
+import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Types --|
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
     companyName: string
@@ -131,6 +149,7 @@ const EditCompanyWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 const bankDetail = values.bankDetails.map((ele) => {
                     const { _id, ...rest } = ele // use object destructuring to remove the _id property

@@ -14,6 +14,7 @@ import {
 import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 import { setAllItems } from 'src/redux/slices/configuration/initialCallerOneSlice'
 import { setSelectedInitialCallerThree } from 'src/redux/slices/configuration/initialCallerThreeSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     initialCallName: string
@@ -80,6 +81,7 @@ const EditInitialCallThreeWrapper = () => {
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             editInitialCallThree({
                 body: {

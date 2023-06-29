@@ -1,17 +1,33 @@
+/// ==============================================
+// Filename:AddCbWrapper.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+import { showToast } from 'src/utils'
 // import { v4 as uuidv4 } from "uuid";
 import { useGetAllCartonBoxQuery } from 'src/services/CartonBoxService'
 // import { useAddCartonBoxBarcodeMutation } from "src/services/CartonBoxBarcodeService";
 import AddCbBarcode from './AddCbBarcode'
 import { setAllItems } from 'src/redux/slices/cartonBoxSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -54,6 +70,7 @@ const AddCbBarcodeWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = async (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         // const uniqueGroupId = uuidv4();
         // const promises = [];
         // for (let i = 0; i < Number(values?.quantity); i++) {

@@ -1,21 +1,36 @@
+/// ==============================================
+// Filename:OutwardRequestListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { IconType } from 'react-icons'
 // import { HiDotsHorizontal } from 'react-icons/hi'
 import { MdOutbond } from 'react-icons/md'
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
+
+// |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { OutwardRequestListResponse } from 'src/models/OutwardRequest.model'
+// import { useGetVendorsQuery } from "src/services/VendorServices";
+import OutwardRequestListing from './OutwardRequestListing'
+
+// |-- Redux --|
 // import {
 //   setIsTableLoading,
 //   setItems,
 //   setTotalItems,
 // } from "src/redux/slices/OutwardRequestSlice";
 // import { AppDispatch, RootState } from "src/redux/store";
-// import { useGetVendorsQuery } from "src/services/VendorServices";
-import OutwardRequestListing from './OutwardRequestListing'
 
+// |-- Types --|
 export type Tabs = {
     label: string
     icon: IconType

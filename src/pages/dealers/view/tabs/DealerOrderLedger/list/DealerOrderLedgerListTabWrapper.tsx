@@ -1,19 +1,33 @@
+/// ==============================================
+// Filename:DealerOrderLedgerListTabWrapper.tsx
+// Type: Tab List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { format } from 'date-fns'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { LedgerListResponse } from 'src/models/Ledger.model'
+import DealerOrderLedgerListing from './DealerOrderLedgerListing'
+// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { useGetDealerOrderLedgerQuery } from 'src/services/DealerOrderLedgerService'
+import { ledgerNoteType } from 'src/utils'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/dealerOrderLedgerSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { RootState, AppDispatch } from 'src/redux/store'
-import DealerOrderLedgerListing from './DealerOrderLedgerListing'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { format } from 'date-fns'
-import { useGetDealerOrderLedgerQuery } from 'src/services/DealerOrderLedgerService'
-import { ledgerNoteType } from 'src/utils'
 
 const DealerOrderLedgerTabWrapper = () => {
     const params = useParams()

@@ -1,16 +1,31 @@
+/// ==============================================
+// Filename:StepAddBankDetails.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FieldArray, FormikProps } from 'formik'
+import { MdDeleteOutline } from 'react-icons/md'
+import { HiPlus } from 'react-icons/hi'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddCompanyWrapper'
-import { MdDeleteOutline } from 'react-icons/md'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
-import { useSelector } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 
-import { HiPlus } from 'react-icons/hi'
-
+// |-- Types --|
 type FieldType = Field<'accountTypeOptions'>
 
 type Props = {
@@ -30,6 +45,11 @@ const StepAddBankDetails = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="">
@@ -127,13 +147,13 @@ const StepAddBankDetails = ({
                                                                                                         )
                                                                                                     )
                                                                                                 ) {
-                                                                                                    setFieldValue(
+                                                                                                    handleSetFieldValue(
                                                                                                         `bankDetails[${bankInformationIndex}].${name}`,
                                                                                                         newValue
                                                                                                     )
                                                                                                 }
                                                                                             } else {
-                                                                                                setFieldValue(
+                                                                                                handleSetFieldValue(
                                                                                                     `bankDetails[${bankInformationIndex}].${name}`,
                                                                                                     e
                                                                                                         .target
@@ -170,7 +190,7 @@ const StepAddBankDetails = ({
                                                                                             onChange={(
                                                                                                 e
                                                                                             ) => {
-                                                                                                setFieldValue(
+                                                                                                handleSetFieldValue(
                                                                                                     `bankDetails[${bankInformationIndex}].${name}`,
                                                                                                     e
                                                                                                         .target
@@ -209,7 +229,7 @@ const StepAddBankDetails = ({
                                                                                         onSelect={(
                                                                                             newFile
                                                                                         ) =>
-                                                                                            setFieldValue(
+                                                                                            handleSetFieldValue(
                                                                                                 `bankDetails[${bankInformationIndex}].${name}`,
                                                                                                 newFile
                                                                                             )

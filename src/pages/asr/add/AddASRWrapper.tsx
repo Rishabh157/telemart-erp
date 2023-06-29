@@ -24,6 +24,7 @@ import { setItems } from 'src/redux/slices/productGroupSlice'
 // |-- Redux --|
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {}
@@ -72,6 +73,7 @@ const AddASRWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         addAsr({
             asrDetails: values.asrDetails,
             companyId: userData?.companyId || '',

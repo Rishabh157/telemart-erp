@@ -1,23 +1,37 @@
-import React, { useEffect, useState } from 'react'
+/// ==============================================
+// Filename:EditDealerSchemeWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Formik } from 'formik'
+import { object, array, string } from 'yup'
+import { useSelector, useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import {
     useGetDealerSchemeByIdQuery,
     useUpdateDealerSchemeMutation,
 } from 'src/services/DealerSchemeService'
-import { object, array, string } from 'yup'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { Formik } from 'formik'
 import EditDealerScheme from './EditDealerScheme'
 import { useGetAllPincodeByDealerQuery } from 'src/services/DealerPincodeService'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
 import {
     UpdateDealerSchemeInitialValues,
     DealerSchemeByIdResponse,
 } from 'src/models/DealerScheme.model'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
 
 const EditDealerSchemeWrapper = () => {
     const params = useParams()

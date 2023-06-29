@@ -1,4 +1,18 @@
+/// ==============================================
+// Filename:InquiryListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -9,7 +23,10 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import { InquiryListResponse } from 'src/models'
 import { useGetInquiryQuery } from 'src/services/InquiryService'
-import { useDispatch, useSelector } from 'react-redux'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+//import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setRowsPerPage,
@@ -20,9 +37,6 @@ import {
     setTotalItems,
     //setFilterValue,
 } from 'src/redux/slices/inquirySlice'
-import { useNavigate } from 'react-router-dom'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-//import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 const InquiryListingWrapper = () => {
     // Hooks
@@ -184,7 +198,7 @@ const InquiryListingWrapper = () => {
     return (
         <SideNavLayout>
             <div className="px-4 h-[calc(100vh-55px)] ">
-                <div className="flex justify-between items-center h-[55px]">
+                <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Inquiry</ATMPageHeading>
                 </div>
 
@@ -212,7 +226,7 @@ const InquiryListingWrapper = () => {
                         <ATMTable
                             columns={columns}
                             rows={items}
-                            isCheckbox={true}
+                            // isCheckbox={true}
                             selectedRows={selectedRows}
                             onRowSelect={(selectedRows) =>
                                 setSelectedRows(selectedRows)
@@ -221,7 +235,7 @@ const InquiryListingWrapper = () => {
                         />
                     </div>
 
-                    <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                    <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                         <ATMPagination
                             page={page}
                             rowCount={totalItems}

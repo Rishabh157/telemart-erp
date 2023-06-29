@@ -1,14 +1,29 @@
+/// ==============================================
+// Filename:EditDealerWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React from 'react'
+
+// |-- External Dependencies --|
 import { Step, StepLabel, Stepper } from '@mui/material'
 import { FormikProps } from 'formik'
-import React from 'react'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormInitialValues } from './EditDealerWrapper'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from 'src/redux/store'
-import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
+//import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
+// |-- Redux --|
+import { AppDispatch } from 'src/redux/store'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     activeStep: number
@@ -49,8 +64,7 @@ const EditDealers = ({
     ]
 
     return (
-        // <div className="h-[calc(100vh-55px)] overflow-auto">
-        <MainLayout>
+        <div className="h-[calc(100vh-55px)] overflow-auto px-4 mt-3">
             <div className="flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -127,7 +141,7 @@ const EditDealers = ({
                     </div>
                 </div>
             </div>
-        </MainLayout>
+        </div>
     )
 }
 

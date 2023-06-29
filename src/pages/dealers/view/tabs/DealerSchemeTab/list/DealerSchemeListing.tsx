@@ -1,10 +1,24 @@
+/// ==============================================
+// Filename:DealerSchemeListing.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+
+// |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
@@ -13,6 +27,7 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
@@ -33,7 +48,7 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
         schemeState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] ">
+        <div className="px-4 h-[calc(100vh-195px)] ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
@@ -48,7 +63,7 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-35px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
@@ -69,7 +84,7 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -80,7 +95,7 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
                 </div>
 
                 {/* Pagination */}
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}

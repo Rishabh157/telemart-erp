@@ -11,11 +11,14 @@ import { useAddWareHouseMutation } from 'src/services/WareHoouseService'
 import { showToast } from 'src/utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -23,8 +26,6 @@ export type FormInitialValues = {
     warehouseName: string
     country: string
     email: string
-    vendorId: any
-    dealerId: any
     regd_address: {
         phone: string
         address: string
@@ -132,10 +133,6 @@ const steps = [
 ]
 
 const AddWarehouseWrapper = () => {
-    const { state } = useLocation()
-
-    const vendorId = state?.params?.vendorId || null
-    const dealerId = state?.params?.dealerId || null
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const navigate = useNavigate()
@@ -160,8 +157,6 @@ const AddWarehouseWrapper = () => {
         warehouseName: '',
         country: '',
         email: '',
-        vendorId: vendorId,
-        dealerId: dealerId,
         regd_address: {
             phone: '',
             address: '',
@@ -210,6 +205,7 @@ const AddWarehouseWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps?.length - 1) {
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 addWareHouse({
                     wareHouseCode: values.warehouseCode,
@@ -237,8 +233,6 @@ const AddWarehouseWrapper = () => {
                     contactInformation: values.contact_informations,
 
                     companyId: userData?.companyId || '',
-                    dealerId: values.dealerId || null,
-                    vendorId: values.vendorId || null,
                 }).then((res: any) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
@@ -246,13 +240,7 @@ const AddWarehouseWrapper = () => {
                                 'success',
                                 'warehouse added successfully!'
                             )
-                            if (dealerId !== null) {
-                                navigate('/dealers/' + dealerId + '/warehouse')
-                            } else if (vendorId !== null) {
-                                navigate('/vendors/' + vendorId + '/warehouse')
-                            } else {
-                                navigate('/warehouse')
-                            }
+                            navigate('/warehouse')
                         } else {
                             showToast('error', res?.data?.message)
                         }

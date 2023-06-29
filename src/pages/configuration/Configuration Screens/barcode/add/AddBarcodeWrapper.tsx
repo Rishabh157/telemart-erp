@@ -1,17 +1,33 @@
+/// ==============================================
+// Filename:AddBarcodeWrapper.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid'
+
+// |-- Internal Dependencies --|
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import AddBarcode from './AddBarcode'
 import { useAddBarcodeMutation } from 'src/services/BarcodeService'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { v4 as uuidv4 } from 'uuid'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { setAllItems } from 'src/redux/slices/productGroupSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -57,6 +73,8 @@ const AddBarcodeWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = async (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         const uniqueGrouId = uuidv4()
 
         await addBarcode({

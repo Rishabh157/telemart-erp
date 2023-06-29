@@ -8,6 +8,8 @@ import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type DropdownOptions = {
     productCategoryoption: SelectOption[]
@@ -34,7 +36,11 @@ const StepEditScheme = ({
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="py-6 px-7 flex flex-col gap-5">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
@@ -43,7 +49,7 @@ const StepEditScheme = ({
                     name={'schemeCode'}
                     value={values.schemeCode}
                     onChange={(e) => {
-                        setFieldValue('schemeCode', e.target.value)
+                        handleSetFieldValue('schemeCode', e.target.value)
                     }}
                     label="Scheme Code"
                     placeholder="Scheme Code"
@@ -55,7 +61,7 @@ const StepEditScheme = ({
                         name={'category'}
                         value={values.category}
                         onChange={(e) => {
-                            setFieldValue('category', e)
+                            handleSetFieldValue('category', e)
                             setSelectedCategory(e)
                         }}
                         label="Category"
@@ -69,7 +75,7 @@ const StepEditScheme = ({
                         name={'subCategory'}
                         value={values.subCategory}
                         onChange={(e) => {
-                            setFieldValue('subCategory', e)
+                            handleSetFieldValue('subCategory', e)
                         }}
                         label="Sub Category"
                         selectLabel="Select Sub Category"
@@ -81,7 +87,7 @@ const StepEditScheme = ({
                     name={'schemeName'}
                     value={values.schemeName}
                     onChange={(e) => {
-                        setFieldValue('schemeName', e.target.value)
+                        handleSetFieldValue('schemeName', e.target.value)
                     }}
                     label="Scheme Name"
                     placeholder="Scheme Name"
@@ -92,7 +98,7 @@ const StepEditScheme = ({
                     name={'schemePrice'}
                     value={values.schemePrice}
                     onChange={(e) => {
-                        setFieldValue('schemePrice', e.target.value)
+                        handleSetFieldValue('schemePrice', e.target.value)
                     }}
                     label="Scheme Price"
                     placeholder="Scheme Price"
@@ -105,7 +111,10 @@ const StepEditScheme = ({
                     onChange={(e) => {
                         const inputValue = e.target.value
                         if (!isNaN(Number(inputValue))) {
-                            setFieldValue('commission', String(inputValue))
+                            handleSetFieldValue(
+                                'commission',
+                                String(inputValue)
+                            )
                         }
                     }}
                     label="Commission"
@@ -124,7 +133,7 @@ const StepEditScheme = ({
                             name="dimension.height"
                             value={values.dimension.height}
                             onChange={(e) =>
-                                setFieldValue(
+                                handleSetFieldValue(
                                     'dimension.height',
                                     e.target.value
                                 )
@@ -137,7 +146,10 @@ const StepEditScheme = ({
                             name="dimension.width"
                             value={values.dimension.width}
                             onChange={(e) =>
-                                setFieldValue('dimension.width', e.target.value)
+                                handleSetFieldValue(
+                                    'dimension.width',
+                                    e.target.value
+                                )
                             }
                             placeholder="W"
                             className="shadow bg-white rounded -mt-6"
@@ -147,7 +159,10 @@ const StepEditScheme = ({
                             name="dimension.depth"
                             value={values.dimension.depth}
                             onChange={(e) =>
-                                setFieldValue('dimension.depth', e.target.value)
+                                handleSetFieldValue(
+                                    'dimension.depth',
+                                    e.target.value
+                                )
                             }
                             placeholder="D"
                             className="shadow bg-white rounded -mt-6"
@@ -159,7 +174,7 @@ const StepEditScheme = ({
                     name={'weight'}
                     value={values.weight}
                     onChange={(e) => {
-                        setFieldValue('weight', e.target.value)
+                        handleSetFieldValue('weight', e.target.value)
                     }}
                     label="Weight"
                     placeholder="Weight"
@@ -170,7 +185,7 @@ const StepEditScheme = ({
                     name={'deliveryCharges'}
                     value={values.deliveryCharges}
                     onChange={(e) => {
-                        setFieldValue('deliveryCharges', e.target.value)
+                        handleSetFieldValue('deliveryCharges', e.target.value)
                     }}
                     label="Delivery Charges"
                     placeholder="Delivery Charges"
@@ -182,7 +197,7 @@ const StepEditScheme = ({
                         name="comboPacking"
                         value={values.comboPacking}
                         onChange={(newValue) =>
-                            setFieldValue('comboPacking', newValue)
+                            handleSetFieldValue('comboPacking', newValue)
                         }
                         label="Combo Packaging"
                     />
@@ -192,7 +207,7 @@ const StepEditScheme = ({
                     name={'startDate'}
                     value={values.startDate}
                     onChange={(newValue) => {
-                        setFieldValue('startDate', newValue)
+                        handleSetFieldValue('startDate', newValue)
                     }}
                     label="Start Date"
                 />
@@ -201,7 +216,7 @@ const StepEditScheme = ({
                     name={'endDate'}
                     value={values.endDate}
                     onChange={(newValue) => {
-                        setFieldValue('endDate', newValue)
+                        handleSetFieldValue('endDate', newValue)
                     }}
                     label="End Date"
                 />
@@ -212,7 +227,7 @@ const StepEditScheme = ({
                     name={'schemeDescription'}
                     value={values.schemeDescription}
                     onChange={(newValue) => {
-                        setFieldValue('schemeDescription', newValue)
+                        handleSetFieldValue('schemeDescription', newValue)
                     }}
                     label="Scheme Description"
                     placeholder="Scheme Description"

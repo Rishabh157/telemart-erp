@@ -1,20 +1,34 @@
-// import { OpenModelProps } from '../list/DealerLedgerListing'
+/// ==============================================
+// Filename:AddDealerLedgerModelWrapper.tsx
+// Type: Tab Add Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { number, object, string } from 'yup'
-import { useAddDealerLedgerMutation } from 'src/services/DealerLedgerServices'
-import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import { useAddDealerLedgerMutation } from 'src/services/DealerLedgerServices'
+import { showToast } from 'src/utils'
 import { NoteType } from 'src/models/Ledger.model'
 import AddDealerLedgerModel from './AddDealerLedgerModel'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
 
 interface PropsType {
     addType: keyof typeof NoteType
     setIsOpenModel: any
 }
 
+// |-- Types --|
 export type FormInitialValues = {
     noteType: string
     creditAmount: number

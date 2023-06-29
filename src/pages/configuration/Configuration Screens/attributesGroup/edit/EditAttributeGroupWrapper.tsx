@@ -1,13 +1,23 @@
+// Filename:EditAttributeGroupWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { array, object, string } from 'yup'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import EditAttributeGroup from './EditAttributeGroup'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 // import { useEditAttributeGroupMutation } from "src/services/AttributeGroup";
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import {
     useGetattributeGroupByIdQuery,
     useUpdateattributeGroupMutation,
@@ -15,7 +25,12 @@ import {
 import { setSelectedAttGroup } from 'src/redux/slices/attributesGroupSlice'
 import { useGetAllAttributesQuery } from 'src/services/AttributeService'
 import { setAllItems } from 'src/redux/slices/attributesSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -42,8 +57,6 @@ const EditAttributeGroupWrapper = (props: Props) => {
         isLoading: attrLoading,
         isFetching: attrIsFetching,
     } = useGetAllAttributesQuery(userData?.companyId)
-
-    console.log(attributeData)
 
     const [EditAttributeGroups] = useUpdateattributeGroupMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
@@ -73,6 +86,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             EditAttributeGroups({
                 body: {

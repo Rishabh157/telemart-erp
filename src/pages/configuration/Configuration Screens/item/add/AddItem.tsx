@@ -1,13 +1,27 @@
+/// ==============================================
+// Filename:AddItem.tsx
+// Type: Add Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddItemWrapper'
-import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
 }
@@ -25,9 +39,13 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddItem = ({ formikProps }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
-        <MainLayout>
+        <div className=" h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -66,7 +84,10 @@ const AddItem = ({ formikProps }: Props) => {
                                 label="Item Code"
                                 placeholder="Item Code"
                                 onChange={(e) =>
-                                    setFieldValue('itemCode', e.target.value)
+                                    handleSetFieldValue(
+                                        'itemCode',
+                                        e.target.value
+                                    )
                                 }
                             />
                             {/* itemName */}
@@ -76,7 +97,10 @@ const AddItem = ({ formikProps }: Props) => {
                                 label="Item Name"
                                 placeholder="Item Name"
                                 onChange={(e) =>
-                                    setFieldValue('itemName', e.target.value)
+                                    handleSetFieldValue(
+                                        'itemName',
+                                        e.target.value
+                                    )
                                 }
                             />
                             {/* itemWeight */}
@@ -88,7 +112,10 @@ const AddItem = ({ formikProps }: Props) => {
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setFieldValue('itemWeight', inputValue)
+                                        handleSetFieldValue(
+                                            'itemWeight',
+                                            inputValue
+                                        )
                                     }
                                 }}
                             />
@@ -96,7 +123,7 @@ const AddItem = ({ formikProps }: Props) => {
                     </div>
                 </div>
             </div>
-        </MainLayout>
+        </div>
     )
 }
 

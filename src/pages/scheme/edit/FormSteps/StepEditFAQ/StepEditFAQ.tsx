@@ -6,8 +6,9 @@ import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { HiPlus } from 'react-icons/hi'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -18,7 +19,11 @@ const StepEditFAQ = ({ formikProps }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className=" ">
             <FieldArray name="faq">
@@ -60,7 +65,7 @@ const StepEditFAQ = ({ formikProps }: Props) => {
                                                 name={`faq[${FAQIndex}].question`}
                                                 value={question}
                                                 onChange={(e) => {
-                                                    setFieldValue(
+                                                    handleSetFieldValue(
                                                         `faq[${FAQIndex}].question`,
                                                         e.target.value
                                                     )
@@ -76,7 +81,7 @@ const StepEditFAQ = ({ formikProps }: Props) => {
                                                 name={`faq[${FAQIndex}].answer`}
                                                 value={answer}
                                                 onChange={(newValue) => {
-                                                    setFieldValue(
+                                                    handleSetFieldValue(
                                                         `faq[${FAQIndex}].answer`,
                                                         newValue
                                                     )

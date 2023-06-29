@@ -1,16 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:EditProductWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
 import { array, number, object, string } from 'yup'
-import StepEditProductDetailsWrapper from './FormSteps/StepEditProductDetails/StepEditProductDetailsWrapper'
-import EditProduct from './EditProduct'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import StepEditItemsWrapper from './FormSteps/StepEditItems/StepEditItemsWrapper'
-import StepEditFAQsWrapper from './FormSteps/StepEditFAQs/StepEditFAQsWrapper'
-import StepEditVideoWrapper from './FormSteps/StepEditVideo/StepEditVideoWrapper'
-import StepEditCallScriptWrapper from './FormSteps/StepEditCallScript/StepEditCallScriptWrapper'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import {
     ContentState,
     convertFromHTML,
@@ -18,22 +20,36 @@ import {
     EditorState,
 } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
-import { setAllItems } from 'src/redux/slices/itemSlice'
-import { setAllItems as setAllLanguage } from 'src/redux/slices/languageSlice'
+import { useNavigate, useParams } from 'react-router-dom'
 
+// |-- Internal Dependencies --|
+import StepEditProductDetailsWrapper from './FormSteps/StepEditProductDetails/StepEditProductDetailsWrapper'
+import EditProduct from './EditProduct'
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+import StepEditItemsWrapper from './FormSteps/StepEditItems/StepEditItemsWrapper'
+import StepEditFAQsWrapper from './FormSteps/StepEditFAQs/StepEditFAQsWrapper'
+import StepEditVideoWrapper from './FormSteps/StepEditVideo/StepEditVideoWrapper'
+import StepEditCallScriptWrapper from './FormSteps/StepEditCallScript/StepEditCallScriptWrapper'
 import { useGetAllItemsQuery } from 'src/services/ItemService'
 // import { useEditProductMutation } from "src/services/ProductService";
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
 import {
     useGetProductByIdQuery,
     useUpdateProductMutation,
 } from 'src/services/ProductService'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setAllItems } from 'src/redux/slices/itemSlice'
+import { setAllItems as setAllLanguage } from 'src/redux/slices/languageSlice'
 import { setSelectedItem } from 'src/redux/slices/productSlice'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
-// TYPE-  Form Intial Values
+// |-- Types --|
 export type FormInitialValues = {
     product_code: string
     product_name: string
@@ -271,6 +287,8 @@ const EditProductWrapper = () => {
     // On Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps?.length - 1) {
+            dispatch(setFieldCustomized(false))
+
             setApiStatus(true)
             const faqData = values.FAQs.map((ele: any) => {
                 const { _id, ...rest } = ele // use object destructuring to remove the _id property

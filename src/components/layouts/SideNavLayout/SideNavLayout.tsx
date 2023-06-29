@@ -66,7 +66,6 @@ const SideNavLayout = ({ children }: Props) => {
                 </div>
 
                 <div className="grow w-full overflow-auto bg-slate-50  bg-transparent-body ">
-                    
                     {children}
                 </div>
             </div>

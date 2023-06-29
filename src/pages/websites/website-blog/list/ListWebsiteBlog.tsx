@@ -64,7 +64,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMTableHeader
                     page={page}
                     searchValue={searchValue}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -81,7 +81,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -94,7 +94,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
 
                 {/* Pagination */}
 
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}

@@ -1,12 +1,27 @@
+/// ==============================================
+// Filename:AddTehsilWrapper.tsx
+// Type: Add Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-import AddTehsilDialog from './AddTehsilDialog'
-import { useAddTehsilMutation } from 'src/services/TehsilService'
+
+// |-- External Dependencies --|
 import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { showToast } from 'src/utils'
 import { object, string } from 'yup'
 import { Formik } from 'formik'
 
+// |-- Internal Dependencies --|
+import AddTehsilDialog from './AddTehsilDialog'
+import { useAddTehsilMutation } from 'src/services/TehsilService'
+import { showToast } from 'src/utils'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     onClose: () => void
 }

@@ -20,6 +20,7 @@ import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllItem } from 'src/redux/slices/itemSlice'
 import moment from 'moment'
 import { setSelectedItems } from 'src/redux/slices/PurchaseOrderSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -42,7 +43,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     const Id = params.id
 
     const navigate = useNavigate()
-    const disptach = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [UpdatePurchaseOrder] = useUpdatePurchaseOrderMutation()
@@ -59,7 +60,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
 
     useEffect(() => {
         if (!poIsFetching && !poIsLoading) {
-            disptach(setSelectedItems(poData?.data || []))
+            dispatch(setSelectedItems(poData?.data || []))
         }
     }, [poData, poIsLoading, poIsFetching])
 
@@ -131,17 +132,17 @@ const EditPurchaseOrderWrapper = (props: Props) => {
 
     //vendor
     useEffect(() => {
-        disptach(setAllItems(vendorData?.data))
-    }, [vendorData, vendorIsLoading, VendorIsFetching, disptach])
+        dispatch(setAllItems(vendorData?.data))
+    }, [vendorData, vendorIsLoading, VendorIsFetching, dispatch])
 
     //warehouse
     useEffect(() => {
-        disptach(setAllWareHouse(warehouseData?.data))
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, disptach])
+        dispatch(setAllWareHouse(warehouseData?.data))
+    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
 
     useEffect(() => {
-        disptach(setAllItem(itemsData?.data))
-    }, [itemsData, disptach, itemsIsLoading, itemsIsFetching])
+        dispatch(setAllItem(itemsData?.data))
+    }, [itemsData, dispatch, itemsIsLoading, itemsIsFetching])
 
     // Form Validation Schema
     const validationSchema = object({
@@ -164,6 +165,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         //console.log(values?.purchaseOrder?._id, "values")
         let iid = values?.purchaseOrder?.id
 

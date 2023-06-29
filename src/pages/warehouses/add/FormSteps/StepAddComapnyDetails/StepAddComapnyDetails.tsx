@@ -1,12 +1,28 @@
+/// ==============================================
+// Filename:StepAddCompanyDetails.tsx
+// Type: ADD Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddWarehouseWrapper'
 import { DropdownOptions, FieldType } from './StepAddCompanyDetailsWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: DropdownOptions
@@ -23,7 +39,11 @@ const StepAddComapnyDetails = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="py-9 px-7">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
@@ -38,7 +58,10 @@ const StepAddComapnyDetails = ({
                                     name={name}
                                     value={values[name]}
                                     onChange={(e) => {
-                                        setFieldValue(name, e.target.value)
+                                        handleSetFieldValue(
+                                            name,
+                                            e.target.value
+                                        )
                                     }}
                                     label={label}
                                     placeholder={placeholder}
@@ -62,7 +85,7 @@ const StepAddComapnyDetails = ({
                                                 : values[name]
                                         }
                                         onChange={(e: any) => {
-                                            setFieldValue(name, e)
+                                            handleSetFieldValue(name, e)
                                         }}
                                         options={
                                             dropdownOptions[

@@ -1,7 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
+/// ==============================================
+// Filename:DealerSchemeTabWrapper.tsx
+// Type: Tab Add Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { array, object, string } from 'yup'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddDealerScheme from './AddDealerScheme'
 import {
     useAddDealerSchemeMutation,
@@ -9,12 +23,13 @@ import {
 } from 'src/services/DealerSchemeService'
 import { useGetAllPincodeByDealerQuery } from 'src/services/DealerPincodeService'
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
 import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
+
+// |-- Types --|
 type Props = {}
 
 const DealerPinCodeTabWrapper = (props: Props) => {

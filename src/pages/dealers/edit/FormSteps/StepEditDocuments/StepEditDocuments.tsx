@@ -1,16 +1,32 @@
+/// ==============================================
+// Filename:StepEditDocuments.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { FieldArray, FormikProps } from 'formik'
+import { MdDeleteOutline } from 'react-icons/md'
+import { HiPlus } from 'react-icons/hi'
+import { useDispatch, useSelector } from 'react-redux'
+import { CircularProgress } from '@mui/material'
+
+// |-- Internal Dependencies --|
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditDealerWrapper'
 import { FieldType } from './StepEditDocumentsWrapper'
-import { MdDeleteOutline } from 'react-icons/md'
-import { HiPlus } from 'react-icons/hi'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { CircularProgress } from '@mui/material'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     formFields: { sectionName: string; fields: FieldType[] }[]
@@ -26,7 +42,11 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
     const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
     const [loaderState, setLoaderState] = useState<string>('')
     const [fileUploader] = useFileUploaderMutation()
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             {formFields?.map((formField, index) => {
@@ -106,13 +126,13 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                                 formattedValue.length <=
                                                                     14
                                                             ) {
-                                                                setFieldValue(
+                                                                handleSetFieldValue(
                                                                     name,
                                                                     formattedValue
                                                                 )
                                                             }
                                                         } else {
-                                                            setFieldValue(
+                                                            handleSetFieldValue(
                                                                 name,
                                                                 e.target.value
                                                             )
@@ -160,7 +180,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                                 setImageApiStatus(
                                                                     false
                                                                 )
-                                                                setFieldValue(
+                                                                handleSetFieldValue(
                                                                     name,
                                                                     res?.data
                                                                         ?.data
@@ -232,7 +252,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                         otherDocument.documentName
                                                     }
                                                     onChange={(e) => {
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             `otherDocument[${otherDocumentIndex}].documentName`,
                                                             e.target.value
                                                         )
@@ -255,7 +275,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                         otherDocument.documentFile
                                                     }
                                                     onChange={(e) =>
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             `otherDocument[${otherDocumentIndex}].documentFile`,
                                                             e.target.value
                                                         )

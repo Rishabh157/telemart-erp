@@ -6,6 +6,8 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { useDispatch } from 'react-redux'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -25,7 +27,11 @@ const breadcrumbs: BreadcrumbType[] = [
 const EditChannelCategory = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
     //console.log(values?.channelCategory, "values")
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -71,7 +77,7 @@ const EditChannelCategory = ({ formikProps, apiStatus }: Props) => {
                                 label="Category Name"
                                 placeholder="Category Name"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'channelCategory',
                                         e.target.value
                                     )

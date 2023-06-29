@@ -12,6 +12,7 @@ import {
 } from 'src/services/media/ArtistServices'
 import { setSelectedArtist } from 'src/redux/slices/media/artist'
 import MediaLayout from '../../MediaLayout'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -45,6 +46,7 @@ const EditArtistWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         setTimeout(() => {
             editArtists({
                 body: {

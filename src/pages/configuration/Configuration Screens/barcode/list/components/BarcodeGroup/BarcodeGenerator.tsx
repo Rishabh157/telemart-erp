@@ -1,7 +1,19 @@
-import { useBarcode } from '@createnextapp/react-barcode'
+/// ==============================================
+// Filename:ProductGroupBarcodeListing.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import { useEffect } from 'react'
+
+// |-- External Dependencies --|
+import { useBarcode } from '@createnextapp/react-barcode'
 import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 
 function Barcode({ value }: { value: string }) {
@@ -36,7 +48,7 @@ function AllBarcodes() {
 
     return (
         <div>
-            <div className="flex justify-between items-center h-[55px]">
+            <div className="flex justify-between items-center h-[45px]">
                 {/* <ATMPageHeading> Barcode </ATMPageHeading> */}
                 <button
                     onClick={() => {

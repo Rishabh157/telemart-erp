@@ -1,6 +1,15 @@
-// import React, { useState } from "react";
+/// ==============================================
+// Filename:BarcodeListing.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
@@ -9,10 +18,13 @@ import {
     setPage,
     setSearchValue,
 } from 'src/redux/slices/barcodeSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import { BarcodeListResponse } from 'src/models'
 import BarcodeDetailsCard from './components/BarcodeDetailsCard/BarcodeDetailsCard'
 
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     rows: any[]
     selectedBarcodes: BarcodeListResponse[]
@@ -40,7 +52,7 @@ const BarcodeListing = ({
     return (
         <div className="px-4 h-[calc(100%-55px)] flex flex-col gap-3">
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[55px]">
+            <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Barcode </ATMPageHeading>
                 <button
                     onClick={() => {
@@ -80,7 +92,7 @@ const BarcodeListing = ({
                 </div>
 
                 {/* Pagination */}
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}

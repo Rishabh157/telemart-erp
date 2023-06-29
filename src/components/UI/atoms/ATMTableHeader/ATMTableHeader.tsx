@@ -95,17 +95,16 @@ const ATMTableHeader = ({
                 <div className="flex gap-3 items-center">
                     <div className="text-sm"> Rows per page : </div>
                     <select
-                        value={rowsPerPage}
+                        value={rowsPerPage as number}
                         onChange={(e) =>
                             onRowsPerPageChange(parseInt(e.target.value))
                         }
                         className={`rounded-lg p-1 outline-0 bg-slate-100 text-sm `}
                     >
-                        {rowsPerPageOptions.map((option) => {
+                        {rowsPerPageOptions?.map((option) => {
                             return (
                                 <option key={option} value={option}>
-                                    {' '}
-                                    {option}{' '}
+                                    {option}
                                 </option>
                             )
                         })}

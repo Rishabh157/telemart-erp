@@ -1,17 +1,31 @@
+/// ==============================================
+// Filename:index.tsx
+// Type: Index Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
-import ViewLayout from 'src/components/layouts/ViewLayout/ViewLayout'
+
+// |-- External Dependencies --|
 import { BiBlock, BiMessageDetail } from 'react-icons/bi'
 import { AiOutlineRise } from 'react-icons/ai'
 import { BsArrowRepeat } from 'react-icons/bs'
 import { MdOutlinePeopleAlt } from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux'
+import { RiBillLine } from 'react-icons/ri'
+
+// |-- Internal Dependencies --|
+import ViewLayout from 'src/components/layouts/ViewLayout/ViewLayout'
 import DealerInfoCard from '../components/dealerInfoCard/DealerInfoCard'
 import ListItemCard from '../components/listItemCard/ListItemCard'
 import { BreadcrumbType } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import { useDispatch, useSelector } from 'react-redux'
 import { useGetDealersQuery } from 'src/services/DealerServices'
+
+// |-- Redux --|
 import { setItems, setSearchValue } from 'src/redux/slices/dealerSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { RiBillLine } from 'react-icons/ri'
 
 const tabsData = [
     {

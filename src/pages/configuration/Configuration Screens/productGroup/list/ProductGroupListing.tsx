@@ -1,13 +1,27 @@
+/// ==============================================
+// Filename:ProductGroupListing.tsx
+// Type: List Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import { useNavigate } from 'react-router-dom'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+
+// |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
@@ -16,6 +30,7 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
@@ -95,7 +110,7 @@ const ProductGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </div>
 
                 {/* Pagination */}
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}

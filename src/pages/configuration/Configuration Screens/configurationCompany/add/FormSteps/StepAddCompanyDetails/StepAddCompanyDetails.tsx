@@ -1,11 +1,27 @@
+/// ==============================================
+// Filename:StepAddCompanyDetails.tsx
+// Type: ADD Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddCompanyWrapper'
-import { useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 // import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
 }
@@ -15,7 +31,11 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="py-9 px-7">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
@@ -24,7 +44,7 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                     name="companyName"
                     value={values.companyName}
                     onChange={(e) => {
-                        setFieldValue('companyName', e.target.value)
+                        handleSetFieldValue('companyName', e.target.value)
                     }}
                     label="Company Name"
                     placeholder="Company Name"
@@ -37,7 +57,7 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                     name="websiteUrl"
                     value={values.websiteUrl}
                     onChange={(e) => {
-                        setFieldValue('websiteUrl', e.target.value)
+                        handleSetFieldValue('websiteUrl', e.target.value)
                     }}
                     label="Website URL"
                     placeholder="Website URL"
@@ -50,7 +70,7 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                     name="gstNo"
                     value={values.gstNo}
                     onChange={(e) => {
-                        setFieldValue('gstNo', e.target.value)
+                        handleSetFieldValue('gstNo', e.target.value)
                     }}
                     label="GST NO."
                     placeholder="GST NO."
@@ -63,7 +83,7 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                     name="address"
                     value={values.address}
                     onChange={(e) => {
-                        setFieldValue('address', e.target.value)
+                        handleSetFieldValue('address', e.target.value)
                     }}
                     label="Address"
                     placeholder="Address"
@@ -78,7 +98,7 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                     onChange={(e) => {
                         const inputValue = e.target.value
                         if (!isNaN(Number(inputValue))) {
-                            setFieldValue('phoneNo', inputValue)
+                            handleSetFieldValue('phoneNo', inputValue)
                         }
                     }}
                     label="Phone No."

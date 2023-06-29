@@ -1,19 +1,35 @@
+/// ==============================================
+// Filename:EditLanguageWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import EditLanguage from './EditLanguage'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 // import { useEditLanguageMutation } from "src/services/LanguageService";
 import { showToast } from 'src/utils'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { useNavigate, useParams } from 'react-router-dom'
 import {
     useGetLanguageByIdQuery,
     useUpdateLanguageMutation,
 } from 'src/services/LanguageService'
 import { setSelectedItem } from 'src/redux/slices/languageSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
@@ -46,6 +62,8 @@ const EditLanguageWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
+
         editLanguage({
             body: {
                 languageName: values.languageName,

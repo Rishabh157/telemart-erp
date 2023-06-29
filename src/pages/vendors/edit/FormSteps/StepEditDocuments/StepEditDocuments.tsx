@@ -4,8 +4,9 @@ import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUplo
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditVendorWrapper'
 import { Field } from 'src/models/FormField/FormField.model'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type FieldType = Field<''>
 
@@ -20,7 +21,14 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (
+        name: string,
+        value: string | boolean | File
+    ) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             {formFields?.map((formField, index) => {
@@ -48,7 +56,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                 name={name}
                                                 value={values[name]}
                                                 onChange={(e) => {
-                                                    setFieldValue(
+                                                    handleSetFieldValue(
                                                         name,
                                                         e.target.value
                                                     )
@@ -68,7 +76,10 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                 label={label}
                                                 placeholder={placeholder}
                                                 onSelect={(newFile) =>
-                                                    setFieldValue(name, newFile)
+                                                    handleSetFieldValue(
+                                                        name,
+                                                        newFile
+                                                    )
                                                 }
                                                 selectedFile={values[name]}
                                             />

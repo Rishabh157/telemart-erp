@@ -15,6 +15,7 @@ import {
     useUpdatedispositionTwoMutation,
 } from 'src/services/configurations/DispositionTwoServices'
 import { setSelectedDispostion } from 'src/redux/slices/configuration/dispositionTwoSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     dispositionName: string
@@ -76,6 +77,7 @@ const EditDispositionTwoWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         updatedispositionTwo({
             body: {
                 dispositionName: values.dispositionName,

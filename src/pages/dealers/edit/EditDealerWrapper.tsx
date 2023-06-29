@@ -1,7 +1,21 @@
+/// ==============================================
+// Filename:EditDealerWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { array, boolean, mixed, number, object, string } from 'yup'
+
+// |-- Internal Dependencies --|
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import EditDealers from './EditDealers'
 import StepEditDealerDetailsWrapper from './FormSteps/StepEditDealerDetails/StepEditDealerDetailsWrapper'
 import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
@@ -13,16 +27,19 @@ import {
     useUpdateDealerMutation,
 } from 'src/services/DealerServices'
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
+import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
 import { setSelectedItem } from 'src/redux/slices/dealerSlice'
-import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
-import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 
-// TYPE-  Form Intial Values
+// |-- Types --|
 export type FormInitialValues = {
     dealerCode: string
     firmName: string
@@ -277,6 +294,7 @@ const EditDealerWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
             setApiStatus(true)
+            dispatch(setFieldCustomized(false))
             const contactInformation = values.contactInformation.map(
                 (ele: any) => {
                     const { _id, ...rest } = ele // use object destructuring to remove the _id property

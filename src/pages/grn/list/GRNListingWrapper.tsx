@@ -1,11 +1,33 @@
+/// ==============================================
+// Filename:GRNListingWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 // import { useNavigate } from "react-router-dom";
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { GRNListResponse } from 'src/models/GRN.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import GRNListing from './GRNListing'
-import { AppDispatch } from 'src/redux/store'
+import { useGetPaginationGRNQuery } from 'src/services/GRNService'
+// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+    // setFilterValue,
+} from 'src/redux/slices/GRNSlice'
+import { RootState, AppDispatch } from 'src/redux/store'
 // import {
 //   setFilterValue,
 //   setIsTableLoading,
@@ -13,15 +35,6 @@ import { AppDispatch } from 'src/redux/store'
 //   setSearchValue,
 //   setTotalItems,
 // } from "src/redux/slices/GRNSlice";
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-    // setFilterValue,
-} from 'src/redux/slices/GRNSlice'
-import { RootState } from 'src/redux/store'
-import { useGetPaginationGRNQuery } from 'src/services/GRNService'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const columns: columnTypes[] = [
     {

@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:CallListing.tsx
+// Type: ADD Component
+// Last Updated: JUNE 22, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -10,8 +22,10 @@ import {
     setSearchValue,
 } from 'src/redux/slices/media/inboundCallerSlice'
 
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
@@ -31,7 +45,7 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
         // <div className="px-4 h-full overflow-auto pt-3  bg-white ">
         <div className="px-4 h-[calc(100vh-55px)] bg-white ">
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[55px]">
+            <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Call Management </ATMPageHeading>
                 {/* <button
                     type="button"
@@ -62,7 +76,7 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -75,7 +89,7 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
 
                 {/* Pagination */}
 
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}

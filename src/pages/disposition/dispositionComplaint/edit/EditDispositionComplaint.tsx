@@ -1,5 +1,18 @@
+/// ==============================================
+// Filename:EditDispositionComplaint.tsx
+// Type: Edit Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditDispositionComplaintWrapper'
 import ATMBreadCrumbs, {
@@ -9,6 +22,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -35,7 +52,11 @@ const EditDispositionCompliant = ({
             label: 'Edit ',
         },
     ]
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <>
             <div className="">
@@ -80,7 +101,7 @@ const EditDispositionCompliant = ({
                                     label="Disposition Name"
                                     placeholder="Name"
                                     onChange={(e) =>
-                                        setFieldValue(
+                                        handleSetFieldValue(
                                             'dispositionName',
                                             e.target.value
                                         )
@@ -92,7 +113,7 @@ const EditDispositionCompliant = ({
                                     value={values.emailType}
                                     label="Email Type"
                                     onChange={(e) =>
-                                        setFieldValue('emailType', e)
+                                        handleSetFieldValue('emailType', e)
                                     }
                                 />
                                 <ATMSelectSearchable
@@ -101,7 +122,7 @@ const EditDispositionCompliant = ({
                                     value={values.smsType}
                                     label="SMS Type "
                                     onChange={(e) =>
-                                        setFieldValue('smsType', e)
+                                        handleSetFieldValue('smsType', e)
                                     }
                                 />
                                 <ATMSelectSearchable
@@ -112,7 +133,7 @@ const EditDispositionCompliant = ({
                                     value={values.priority}
                                     label="Priority"
                                     onChange={(e) =>
-                                        setFieldValue('priority', e)
+                                        handleSetFieldValue('priority', e)
                                     }
                                 />
                             </div>

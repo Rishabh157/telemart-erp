@@ -1,23 +1,38 @@
+/// ==============================================
+// Filename:DealerWarehouseTabWrapper.tsx
+// Type: Tab Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { HiDotsHorizontal } from 'react-icons/hi'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { WarehousesListResponse } from 'src/models'
 import WarehouseListing from 'src/pages/warehouses/list/WarehousesListing'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import {
+    useDeleteWareHouseMutation,
+    useGetPaginationWareHousesQuery,
+} from 'src/services/WareHoouseService'
+import { showToast } from 'src/utils'
+
+// |-- Redux --|
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/warehouseSlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate, useParams } from 'react-router-dom'
-import {
-    useDeleteWareHouseMutation,
-    useGetPaginationWareHousesQuery,
-} from 'src/services/WareHoouseService'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { showToast } from 'src/utils'
 
+// |-- Types --|
 type Props = {}
 
 const DealerWarehouseTabWrapper = (props: Props) => {

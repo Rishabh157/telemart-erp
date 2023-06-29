@@ -6,6 +6,8 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -22,6 +24,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddChannelCategory = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -32,7 +39,7 @@ const AddChannelCategory = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add Channel Category </ATMPageHeading>
+                    <ATMPageHeading> Add</ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -67,7 +74,7 @@ const AddChannelCategory = ({ formikProps, apiStatus }: Props) => {
                                 label="Category Name"
                                 placeholder="Category Name"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'channelCategory',
                                         e.target.value
                                     )

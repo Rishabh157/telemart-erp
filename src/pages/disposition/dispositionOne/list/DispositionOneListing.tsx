@@ -58,7 +58,7 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </button>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     searchValue={searchValue}
@@ -80,7 +80,7 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={true}
+                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -93,7 +93,7 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
 
                 {/* Pagination */}
 
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}

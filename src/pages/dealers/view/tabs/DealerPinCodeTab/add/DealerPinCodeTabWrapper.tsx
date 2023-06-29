@@ -1,15 +1,30 @@
+/// ==============================================
+// Filename:DealerPincodeTabWrapper.tsx
+// Type: Tab  Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { array, number, object, string } from 'yup'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddDealerPincode from './AddDealerPincode'
 import { useAddDealerPincodeMutation } from 'src/services/DealerPincodeService'
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetAllPincodeQuery } from 'src/services/PinCodeService'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllPincodes as setAllDealerPincodes } from 'src/redux/slices/pincodeSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

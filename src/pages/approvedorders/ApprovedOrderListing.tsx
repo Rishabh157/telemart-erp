@@ -246,8 +246,8 @@ const ApprovedOrderListing = () => {
         <SideNavLayout>
             <div className="px-4 h-[calc(100vh-55px)] ">
                 {/* <div className="mb-5 p-2 text-2xl text-slate-700 font-bold "> */}
-                <div className="flex justify-between items-center h-[55px]">
-                <ATMPageHeading> Purchase Order </ATMPageHeading>
+                <div className="flex justify-between items-center h-[45px]">
+                    <ATMPageHeading> Purchase Order </ATMPageHeading>
                 </div>
                 <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                     {/*Table Header */}
@@ -273,7 +273,7 @@ const ApprovedOrderListing = () => {
                         <ATMTable
                             columns={columns}
                             rows={items}
-                            isCheckbox={true}
+                            // isCheckbox={true}
                             selectedRows={selectedRows}
                             onRowSelect={(selectedRows) =>
                                 setSelectedRows(selectedRows)
@@ -281,7 +281,7 @@ const ApprovedOrderListing = () => {
                         />
                     </div>
 
-                    <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                    <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                         <ATMPagination
                             page={page}
                             rowCount={totalItems}

@@ -4,8 +4,9 @@ import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditVendorWrapper'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -48,7 +49,11 @@ const StepAddAddress = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
     return (
         <div className="">
             {formFields?.map((formField, index) => {
@@ -110,7 +115,7 @@ const StepAddAddress = ({
                                                                 )
                                                             )
                                                         ) {
-                                                            setFieldValue(
+                                                            handleSetFieldValue(
                                                                 name,
                                                                 String(
                                                                     inputValue
@@ -118,7 +123,7 @@ const StepAddAddress = ({
                                                             )
                                                         }
                                                     } else {
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             name,
                                                             e.target.value
                                                         )
@@ -133,7 +138,7 @@ const StepAddAddress = ({
 
                                     case 'select':
                                         return (
-                                            <div key={name} className="-mt-2">
+                                            <div key={name} className="mt-0">
                                                 <ATMSelect
                                                     label={label}
                                                     name={name}
@@ -151,7 +156,7 @@ const StepAddAddress = ({
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
-                                                        setFieldValue(
+                                                        handleSetFieldValue(
                                                             name,
                                                             e.target.value
                                                         )
@@ -159,15 +164,15 @@ const StepAddAddress = ({
                                                             name ===
                                                             'regd_address.country'
                                                         ) {
-                                                            formikProps.setFieldValue(
+                                                            handleSetFieldValue(
                                                                 'regd_address.district',
                                                                 ''
                                                             )
-                                                            formikProps.setFieldValue(
+                                                            handleSetFieldValue(
                                                                 'regd_address.state',
                                                                 ''
                                                             )
-                                                            formikProps.setFieldValue(
+                                                            handleSetFieldValue(
                                                                 'regd_address.pincode',
                                                                 ''
                                                             )
@@ -176,15 +181,15 @@ const StepAddAddress = ({
                                                             name ===
                                                             'billing_address.country'
                                                         ) {
-                                                            formikProps.setFieldValue(
+                                                            handleSetFieldValue(
                                                                 'billing_address.district',
                                                                 ''
                                                             )
-                                                            formikProps.setFieldValue(
+                                                            handleSetFieldValue(
                                                                 'billing_address.state',
                                                                 ''
                                                             )
-                                                            formikProps.setFieldValue(
+                                                            handleSetFieldValue(
                                                                 'billing_address.pincode',
                                                                 ''
                                                             )

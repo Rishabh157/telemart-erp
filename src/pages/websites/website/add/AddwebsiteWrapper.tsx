@@ -4,10 +4,11 @@ import { object, string } from 'yup'
 import AddWebsite from './AddWebsite'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useAddWebsiteMutation } from 'src/services/websites/WebsiteServices'
 import WebsiteLayout from '../../WebsiteLayout'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 type Props = {}
 
@@ -24,6 +25,7 @@ export type FormInitialValues = {
 const AddWebsiteWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addWebsite] = useAddWebsiteMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -52,6 +54,7 @@ const AddWebsiteWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        dispatch(setFieldCustomized(false))
         //console.log(values)
         setTimeout(() => {
             addWebsite({

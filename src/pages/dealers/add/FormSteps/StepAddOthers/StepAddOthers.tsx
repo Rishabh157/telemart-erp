@@ -1,11 +1,24 @@
+/// ==============================================
+// Filename:StepAddOthers.tsx
+// Type: ADD Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import { FormInitialValues } from '../../AddDealerWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { getHierarchyByDept } from 'src/utils/GetHierarchyByDept'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
 }

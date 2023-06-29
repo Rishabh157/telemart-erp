@@ -1,24 +1,36 @@
+/// ==============================================
+// Filename:ListDealerPincodeTabWrapper.tsx
+// Type: Tab List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { DealersPincodeListResponse } from 'src/models/DealerPinCode.model'
 import DealerPincodeListing from './DealerPincodeListing'
+import {
+    useDeleteDealerPincodeMutation,
+    useGetDealerPincodeQuery,
+} from 'src/services/DealerPincodeService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/dealerPincodeSlice'
-import { AppDispatch } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import {
-    useDeleteDealerPincodeMutation,
-    useGetDealerPincodeQuery,
-} from 'src/services/DealerPincodeService'
-import { RootState } from 'src/redux/store'
-import { showToast } from 'src/utils'
-
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const ListDealerPincodeTabWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)

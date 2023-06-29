@@ -1,6 +1,18 @@
+/// ==============================================
+// Filename:DealerOrderTab.tsx
+// Type: Tab Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
 import { BiSearchAlt2 } from 'react-icons/bi'
+
+// |-- Internal Dependencies --|
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -277,7 +289,7 @@ const DealerOrderTab = () => {
             <ATMTable
                 columns={columns}
                 rows={rows}
-                isCheckbox={true}
+                // isCheckbox={true}
                 selectedRows={selectedRows}
                 onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
                 extraClasses={`max-h-[calc(100%-100px)] overflow-auto`}

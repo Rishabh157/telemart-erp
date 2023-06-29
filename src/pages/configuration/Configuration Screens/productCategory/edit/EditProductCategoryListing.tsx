@@ -1,5 +1,18 @@
+/// ==============================================
+// Filename:EditProductCategoryListing.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -7,6 +20,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditProductCategoryWrapper'
 
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -25,6 +42,11 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditProductCategoryListing = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string | File) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="">
@@ -69,7 +91,7 @@ const EditProductCategoryListing = ({ formikProps, apiStatus }: Props) => {
                                 label="Category Code"
                                 placeholder="Category Code"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'categoryCode',
                                         e.target.value
                                     )
@@ -83,7 +105,7 @@ const EditProductCategoryListing = ({ formikProps, apiStatus }: Props) => {
                                 label="Category Name"
                                 placeholder="Category Name"
                                 onChange={(e) =>
-                                    setFieldValue(
+                                    handleSetFieldValue(
                                         'categoryName',
                                         e.target.value
                                     )

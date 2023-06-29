@@ -1,9 +1,21 @@
+/// ==============================================
+// Filename:ListDealerCategory.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import { useNavigate } from 'react-router-dom'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -13,8 +25,11 @@ import {
     setPage,
     setSearchValue,
 } from 'src/redux/slices/dealersCategorySlice'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
@@ -86,7 +101,7 @@ const DealerCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </div>
 
                 {/* Pagination */}
-                <div className="h-[90px] flex items-center justify-end border-t border-slate-300">
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}

@@ -1,10 +1,24 @@
+/// ==============================================
+// Filename:EditDealerScheme.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
+
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { UpdateDealerSchemeInitialValues } from 'src/models/DealerScheme.model'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<UpdateDealerSchemeInitialValues>
     schemeOptions: any

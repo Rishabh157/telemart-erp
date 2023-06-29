@@ -1,13 +1,27 @@
-import { FormikProps } from 'formik'
+/// ==============================================
+// Filename:StepEditDealerDetailsWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 26, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
+import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditDealerWrapper'
 import StepEditComapnyDetails from './StepEditDealerDetails'
 
+// |-- Types --|
 export type DropdownOptions = {
     dealerCategoryOptions: SelectOption[]
 }
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dealerCategoryOptions: any[]
