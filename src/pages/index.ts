@@ -46,6 +46,8 @@ import AddDealerSchemeTabWrapper from './dealers/view/tabs/DealerSchemeTab/add/D
 import ListDealerPincodeTabWrapper from './dealers/view/tabs/DealerPinCodeTab/List/ListDealerPincodeTabWrapper'
 import ListDealerSchemeTabWrapper from './dealers/view/tabs/DealerSchemeTab/list/ListDealerSchemeTabWrapper'
 import DealerOrderLedgerListTabWrapper from './dealers/view/tabs/DealerOrderLedger/list/DealerOrderLedgerListTabWrapper'
+import AddDealerWarehouseWarpper from './dealers/view/tabs/DealerWarehouseTab/Add/AddDealerWarehouseWarpper'
+import EditDealerWarehouseWrapper from './dealers/view/tabs/DealerWarehouseTab/Edit/EditDealerWarehouseWrapper'
 import InwardInventoryWrapper from './inventories/inward-inventory/InwardInventoryWrapper'
 import InventoryListingWrapper from './inventories/list/InventoryListingWrapper'
 import LoginPage from './login/LoginPage'
@@ -234,12 +236,14 @@ export {
     DealerActivityTabWrapper,
     DealerGeneralInformationTabWrapper,
     DealerWarehouseTabWrapper,
+    EditDealerWarehouseWrapper,
     DealerSalesOrderTabWrapper,
     AddDealerPinCodeTabWrapper,
     AddDealerSchemeTabWrapper,
     ListDealerPincodeTabWrapper,
     ListDealerSchemeTabWrapper,
     DealerOrderLedgerListTabWrapper,
+    AddDealerWarehouseWarpper,
     InwardInventoryWrapper,
     InventoryListingWrapper,
     LoginPage,

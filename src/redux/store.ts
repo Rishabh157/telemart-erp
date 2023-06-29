@@ -18,6 +18,7 @@ import dealersCategorySlice from './slices/dealersCategorySlice'
 import dealerPincodeSlice from './slices/dealerPincodeSlice'
 import dealerSchemeSlice from './slices/dealerSchemeSlice'
 import DealerLedgerSlice from './slices/DealerLedgerSlice'
+import DealerWarehouseSlice from './slices/DealerWarehouseSlice'
 import DealerOrderLedgerSlice from './slices/dealerOrderLedgerSlice'
 import DealerSupervisorSlice from './DealerSupervisorSlice'
 import GRNSlice from './slices/GRNSlice'
@@ -91,6 +92,7 @@ const store = configureStore({
         dealerScheme: dealerSchemeSlice,
         dealerSupervisor: DealerSupervisorSlice,
         dealerLedger: DealerLedgerSlice,
+        dealerWarehouse: DealerWarehouseSlice,
         dealerOrderLedger: DealerOrderLedgerSlice,
         vendor: vendorSlice,
         user: userSlice,

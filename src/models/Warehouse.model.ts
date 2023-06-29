@@ -1,3 +1,10 @@
+/// ==============================================
+// Filename:Warehouse.model.ts
+// Type: Model Component
+// Last Updated: JUNE 28, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
 export type WarehousesListResponse = {
     wareHouseCode: string
     wareHouseName: string
@@ -78,9 +85,7 @@ export type AddWarehouse = {
         mobileNumber: string
         landLine: string
     }[]
-    companyId: string
-    dealerId: string
-    vendorId: string
+    companyId: string    
 }
 
 export type UpdateWarehouse = {
@@ -116,8 +121,7 @@ export type UpdateWarehouse = {
             landLine: string
         }[]
         companyId: string
-        dealerId: string
-        vendorId: string
+
     }
     id: string
 }

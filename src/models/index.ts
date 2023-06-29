@@ -14,6 +14,11 @@ export type {
     UpdateDealersPincode,
 } from './DealerPinCode.model'
 export type {
+    AddDealerWarehouse,
+    DealerWarehousesListResponse,
+    UpdateDealerWarehouse,
+} from './DealerWarehouse.model'
+export type {
     VendorsListResponse,
     AddVendor,
     UpdateVendor,

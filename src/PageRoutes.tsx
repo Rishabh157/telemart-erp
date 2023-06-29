@@ -64,6 +64,7 @@ import {
     DealerActivityTabWrapper,
     DealerGeneralInformationTabWrapper,
     DealerWarehouseTabWrapper,
+    EditDealerWarehouseWrapper,
     DealerSalesOrderTabWrapper,
     AddDealerPinCodeTabWrapper,
     AddDealerSchemeTabWrapper,
@@ -187,6 +188,7 @@ import {
     ApprovedOrderViewWrapper,
     EditDealerSchemeWrapper,
     DealerListLedgerTabWrapper,
+    AddDealerWarehouseWarpper,
 } from './pages/index'
 import { useDispatch } from 'react-redux'
 import {
@@ -366,8 +368,13 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="dealers/:dealerId/warehouse/add-warehouse"
-                        element={<AddWarehouseWrapper />}
+                        element={<AddDealerWarehouseWarpper />}
                     />
+
+                    <Route
+                        path="dealers/:dealerId/warehouse/:id"
+                        element={<EditDealerWarehouseWrapper />}
+                    /> 
 
                     <Route path="/dealers/:dealerId" element={<ViewDealer />}>
                         <Route
