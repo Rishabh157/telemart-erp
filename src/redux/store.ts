@@ -96,7 +96,7 @@ const store = configureStore({
         dealerWarehouse: DealerWarehouseSlice,
         dealerOrderLedger: DealerOrderLedgerSlice,
         vendor: vendorSlice,
-        vendorWarehouse:VendorWarehouseSlice,
+        vendorWarehouse: VendorWarehouseSlice,
         user: userSlice,
         newUser: NewUserSlice,
         company: companySlice,

@@ -1,4 +1,3 @@
-
 /// ==============================================
 // Filename:VendorWarehouseTabWrapper.tsx
 // Type: List Component
@@ -13,7 +12,6 @@ import React, { useEffect, useState } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -33,7 +31,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/VendorWarehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {}
@@ -187,12 +184,12 @@ const VendorWarehouseTabWrapper = (props: Props) => {
         filterBy: [
             {
                 fieldName: 'vendorId',
-                value: vendorId
+                value: vendorId,
             },
             {
                 fieldName: 'companyId',
-                value: userData?.companyId
-            }
+                value: userData?.companyId,
+            },
         ],
         dateFilter: {},
         orderBy: 'createdAt',

@@ -50,9 +50,9 @@ const VendorWarehouseListing = ({
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-		vendorWarehouseState
+        vendorWarehouseState
 
-    const params: any = useParams()		
+    const params: any = useParams()
 
     return (
         <div className="h-full">

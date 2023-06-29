@@ -50,7 +50,7 @@ const DealerWarehouseListing = ({
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-    dealerWarehouseState
+        dealerWarehouseState
 
     const params: any = useParams()
 

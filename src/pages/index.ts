@@ -185,9 +185,6 @@ import DealerListLedgerTabWrapper from './dealers/view/tabs/DealerLedgerTap/list
 import AddVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Add/AddVendorWarehouseWrapper'
 import EditVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Edit/EditVendorWarehouseWrapper'
 
-
-
-
 // import asr
 import { ASRListingWrapper, EditASRWrapper, AddASRWrapper } from './asr'
 // import vendors
@@ -389,5 +386,5 @@ export {
     EditDealerSchemeWrapper,
     DealerListLedgerTabWrapper,
     AddVendorWarehouseWrapper,
-    EditVendorWarehouseWrapper
+    EditVendorWarehouseWrapper,
 }

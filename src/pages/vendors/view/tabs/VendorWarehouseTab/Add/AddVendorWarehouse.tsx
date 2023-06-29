@@ -48,10 +48,10 @@ const AddVendorWarehouse = ({
     }
     const { state } = useLocation()
     const vendorId = state?.params?.vendorId || null
-    
-        const redirectLabel = 'Vendor Warehouse'
-        const redirectPath = `vendors/${vendorId}/warehouse`
-    
+
+    const redirectLabel = 'Vendor Warehouse'
+    const redirectPath = `vendors/${vendorId}/warehouse`
+
     const breadcrumbs = [
         {
             label: `${redirectLabel}`,

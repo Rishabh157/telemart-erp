@@ -12,7 +12,6 @@ import apiSlice from './ApiSlice'
 
 export const vendorWarehouseApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-			
         //***** GET PAGINATION DATA *****/
         getVendorWarehouse: builder.query({
             providesTags: ['vendorWarehouse'],
