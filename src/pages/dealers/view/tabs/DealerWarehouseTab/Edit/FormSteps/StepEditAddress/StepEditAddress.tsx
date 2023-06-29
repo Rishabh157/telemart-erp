@@ -1,7 +1,7 @@
 import { FormikProps } from 'formik'
 import React, { useState } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from '../../EditWarehouseWrapper'
+import { FormInitialValues } from '../../EditDealerWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'

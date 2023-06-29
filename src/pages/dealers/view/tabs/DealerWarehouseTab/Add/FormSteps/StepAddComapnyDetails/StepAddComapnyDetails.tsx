@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from '../../AddWarehouseWrapper'
+import { FormInitialValues } from '../../AddDealerWarehouseWarpper'
 import { DropdownOptions, FieldType } from './StepAddCompanyDetailsWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useDispatch, useSelector } from 'react-redux'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormikProps } from 'formik'
-import { FormInitialValues } from '../../AddWarehouseWrapper'
+import { FormInitialValues } from '../../AddDealerWarehouseWarpper'
 import StepAddContact from './StepAddContact'
 import { Field } from 'src/models/FormField/FormField.model'
 

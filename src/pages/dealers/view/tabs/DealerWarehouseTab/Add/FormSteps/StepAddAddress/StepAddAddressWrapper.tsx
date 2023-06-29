@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { FormikProps } from 'formik'
-import { FormInitialValues } from '../../AddWarehouseWrapper'
+import { FormInitialValues } from '../../AddDealerWarehouseWarpper'
 import StepAddAddress from './StepAddAddress'
 import { Field } from 'src/models/FormField/FormField.model'
 

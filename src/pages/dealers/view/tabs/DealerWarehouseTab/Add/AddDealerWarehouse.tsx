@@ -17,7 +17,7 @@ import { useDispatch } from 'react-redux'
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { FormInitialValues } from './AddDealerWarehouseWrapper'
+import { FormInitialValues } from './AddDealerWarehouseWarpper'
 
 // |-- Redux --|
 import { setFormSubmitting } from 'src/redux/slices/authSlice'

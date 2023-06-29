@@ -39,8 +39,7 @@ export type FormInitialValues = {
     warehouseCode: string
     warehouseName: string
     country: string
-    email: string
-    vendorId: any
+    email: string    
     dealerId: any
     regd_address: {
         phone: string

@@ -2,7 +2,7 @@
 import { FormikProps } from 'formik'
 import React from 'react'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
-import { FormInitialValues } from '../../AddWarehouseWrapper'
+import { FormInitialValues } from '../../AddDealerWarehouseWarpper'
 import StepAddComapnyDetails from './StepAddComapnyDetails'
 
 export type DropdownOptions = {

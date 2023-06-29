@@ -183,12 +183,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
         searchValue: searchValue,
         params: [
             'wareHouseCode',
-            'wareHouseName',
-            'country',
-            'email',
-            'registrationAddress',
-            'billingAddress',
-            'contactInformation',
+            'wareHouseName'           
         ],
         page: page,
         filterBy: [
@@ -235,7 +230,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     }
 
     return (
-        <div className="px-2 h-full shadow rounded border ">
+        <div className="px-2 h-full shadow ">
             <DealerWarehouseListing
                 columns={columns}
                 rows={items}

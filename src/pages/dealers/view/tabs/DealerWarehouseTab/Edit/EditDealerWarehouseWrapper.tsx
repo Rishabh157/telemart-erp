@@ -149,7 +149,7 @@ const steps = [
 const EditDealerWarehouseWrapper = () => {
     const { state } = useLocation()
     const params = useParams()
-    const Id = params.id
+    const Id: any = params.id
     const dealerId = state?.params?.dealerId || null
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
