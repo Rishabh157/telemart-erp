@@ -46,6 +46,9 @@ const DealerWarehouseTabWrapper = (props: Props) => {
         (state: RootState) => state.dealerWarehouse
     )
 
+    const { userData } = useSelector((state: RootState) => state?.auth)
+    const companyId = userData?.companyId
+
     const columns: columnTypes[] = [
         {
             field: 'warehouseCode',
@@ -181,15 +184,16 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     const { data, isFetching, isLoading } = useGetDealerWarehouseQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: [
-            'wareHouseCode',
-            'wareHouseName'           
-        ],
+        params: ['wareHouseCode', 'wareHouseName'],
         page: page,
         filterBy: [
             {
                 fieldName: 'dealerId',
                 value: dealerId,
+            },
+            {
+                fieldName: 'companyId',
+                value: companyId,
             },
         ],
         dateFilter: {},
