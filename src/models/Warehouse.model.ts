@@ -85,7 +85,7 @@ export type AddWarehouse = {
         mobileNumber: string
         landLine: string
     }[]
-    companyId: string    
+    companyId: string
 }
 
 export type UpdateWarehouse = {
@@ -121,7 +121,6 @@ export type UpdateWarehouse = {
             landLine: string
         }[]
         companyId: string
-
     }
     id: string
 }

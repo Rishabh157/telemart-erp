@@ -19,11 +19,9 @@ import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumb
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormInitialValues } from './AddDealerWarehouseWrapper'
 
-
 // |-- Redux --|
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {
@@ -48,7 +46,7 @@ const AddDealerWarehouse = ({
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
-    const { state } = useLocation()   
+    const { state } = useLocation()
     const dealerId = state?.params?.dealerId || null
     let redirectPath = 'warehouse'
     let redirectLabel = 'Warehouse'

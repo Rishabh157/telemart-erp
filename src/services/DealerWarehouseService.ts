@@ -12,7 +12,6 @@ import apiSlice from './ApiSlice'
 
 export const dealerWarehouseApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-
         //***** GET PAGINATION DATA *****/
         getDealerWarehouse: builder.query({
             providesTags: ['dealerWarehouse'],
@@ -44,16 +43,16 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
             }),
         }),
 
-       // **** GET BY ID
-			 getDealerWarehouseById: builder.query({
-				providesTags: ['dealerWarehouse'],
-				query: (id: string) => ({
-						url: `/dealer-warehouse/${id}`,
+        // **** GET BY ID
+        getDealerWarehouseById: builder.query({
+            providesTags: ['dealerWarehouse'],
+            query: (id: string) => ({
+                url: `/dealer-warehouse/${id}`,
 
-						method: 'GET',
-				}),
-		}),
-       
+                method: 'GET',
+            }),
+        }),
+
         //****Delete dealer Warehouse ****/
         deleteDealerWarehouse: builder.mutation({
             invalidatesTags: ['dealerWarehouse'],
@@ -68,7 +67,7 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
 export const {
     useGetDealerWarehouseQuery,
     useAddDealerWarehouseMutation,
-    useUpdateDealerWarehouseMutation, 
-		useGetDealerWarehouseByIdQuery,  
+    useUpdateDealerWarehouseMutation,
+    useGetDealerWarehouseByIdQuery,
     useDeleteDealerWarehouseMutation,
 } = dealerWarehouseApi

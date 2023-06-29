@@ -1,14 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FormikProps } from 'formik'
+/// ==============================================
+// Filename:StepEditCompanyDetailsWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
+import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditWarehouseWrapper'
 import StepEditComapnyDetails from './StepEditComapnyDetails'
 
+// |-- Types --|
 export type DropdownOptions = {
     countryOptions: SelectOption[]
 }
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     allCountry: any

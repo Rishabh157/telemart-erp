@@ -1,38 +1,50 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:EditWarehouseWrapper.tsx
+// Type: Edit Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { array, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import StepEditCompanyDetailsWrapper from './FormSteps/StepEditComapnyDetails/StepEditCompanyDetailsWrapper'
 import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
 import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
 import EditWarehouse from './EditWarehouse'
 // import { useEditWareHouseMutation } from "src/services/WareHoouseService";
 import { showToast } from 'src/utils'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import {
     useGetWareHouseByIdQuery,
     useUpdateWareHouseMutation,
 } from 'src/services/WareHoouseService'
-import { setSelectedItem } from 'src/redux/slices/warehouseSlice'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setAllCountry } from 'src/redux/slices/countrySlice'
+import { setSelectedItem } from 'src/redux/slices/warehouseSlice'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
 
-// TYPE-  Form Intial Values
+// |-- Types --|
 export type FormInitialValues = {
     warehouseCode: string
     warehouseName: string
     country: string
     email: string
-    vendorId: any
-    dealerId: any
     regd_address: {
         phone: string
         address: string
@@ -135,11 +147,9 @@ const steps = [
 ]
 
 const EditWarehouseWrapper = () => {
-    const { state } = useLocation()
     const params = useParams()
     const Id = params.id
-    const vendorId = state?.params?.vendorId || null
-    const dealerId = state?.params?.dealerId || null
+
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
 
@@ -194,8 +204,6 @@ const EditWarehouseWrapper = () => {
             pincode: selectedItem?.billingAddress?.pincodeId || '',
         },
         contact_informations: selectedItem?.contactInformation || '',
-        vendorId: selectedItem?.vendorId,
-        dealerId: selectedItem?.dealerId,
     }
 
     // Form validation schema based on the active step
@@ -244,8 +252,6 @@ const EditWarehouseWrapper = () => {
                         contactInformation: contactInformation,
 
                         companyId: userData?.companyId || '',
-                        dealerId: values?.dealerId || null,
-                        vendorId: values?.vendorId || null,
                     },
                     id: Id || '',
                 }).then((res: any) => {
@@ -255,14 +261,7 @@ const EditWarehouseWrapper = () => {
                                 'success',
                                 'Warehouse Upated successfully!'
                             )
-                            if (dealerId !== null) {
-                                navigate('/dealers/' + dealerId + '/warehouse')
-                                // navigate(`/dealers/${Id}/warehouse`)
-                            } else if (vendorId !== null) {
-                                navigate('/vendors/' + vendorId + '/warehouse')
-                            } else {
-                                navigate('/warehouse')
-                            }
+                            navigate('/warehouse')
                         } else {
                             showToast('error', res?.data?.message)
                         }

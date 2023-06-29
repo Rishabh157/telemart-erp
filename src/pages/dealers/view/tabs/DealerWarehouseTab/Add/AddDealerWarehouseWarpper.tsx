@@ -34,7 +34,6 @@ import {
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 export type FormInitialValues = {
     warehouseCode: string
@@ -152,7 +151,6 @@ const steps = [
 const AddDealerWarehouseWrapper = () => {
     const { state } = useLocation()
 
-    
     const dealerId = state?.params?.dealerId || null
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -177,7 +175,7 @@ const AddDealerWarehouseWrapper = () => {
         warehouseCode: '',
         warehouseName: '',
         country: '',
-        email: '',        
+        email: '',
         dealerId: dealerId,
         regd_address: {
             phone: '',
@@ -229,7 +227,7 @@ const AddDealerWarehouseWrapper = () => {
             setApiStatus(true)
             dispatch(setFieldCustomized(false))
             setTimeout(() => {
-							addDealerWarehouse({
+                addDealerWarehouse({
                     wareHouseCode: values.warehouseCode,
                     wareHouseName: values.warehouseName,
                     country: values.country,
@@ -254,7 +252,7 @@ const AddDealerWarehouseWrapper = () => {
                     },
                     contactInformation: values.contact_informations,
                     companyId: userData?.companyId || '',
-                    dealerId: values.dealerId || null,                    
+                    dealerId: values.dealerId || null,
                 }).then((res: any) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
@@ -263,7 +261,6 @@ const AddDealerWarehouseWrapper = () => {
                                 'warehouse added successfully!'
                             )
                             navigate(`/dealers/${dealerId}/warehouse`)
-                            
                         } else {
                             showToast('error', res?.data?.message)
                         }

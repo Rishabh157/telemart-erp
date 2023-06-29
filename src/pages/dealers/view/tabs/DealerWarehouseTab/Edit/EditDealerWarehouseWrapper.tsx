@@ -9,7 +9,6 @@
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
-
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
 import { array, object, string } from 'yup'
@@ -24,12 +23,11 @@ import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactW
 import EditDealerWarehouse from './EditDealerWarehouse'
 import { showToast } from 'src/utils'
 import {
-	useGetDealerWarehouseByIdQuery,
-  useUpdateDealerWarehouseMutation,
+    useGetDealerWarehouseByIdQuery,
+    useUpdateDealerWarehouseMutation,
 } from 'src/services/DealerWarehouseService'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
-
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -39,7 +37,6 @@ import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
-
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -152,7 +149,7 @@ const steps = [
 const EditDealerWarehouseWrapper = () => {
     const { state } = useLocation()
     const params = useParams()
-    const Id = params.id    
+    const Id = params.id
     const dealerId = state?.params?.dealerId || null
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
@@ -207,7 +204,7 @@ const EditDealerWarehouseWrapper = () => {
             district: selectedItem?.billingAddress?.districtId || '',
             pincode: selectedItem?.billingAddress?.pincodeId || '',
         },
-        contact_informations: selectedItem?.contactInformation || '',       
+        contact_informations: selectedItem?.contactInformation || '',
         dealerId: selectedItem?.dealerId,
     }
 
@@ -229,7 +226,7 @@ const EditDealerWarehouseWrapper = () => {
             setApiStatus(true)
             dispatch(setFieldCustomized(false))
             setTimeout(() => {
-							updateDealerWarehouse({
+                updateDealerWarehouse({
                     body: {
                         wareHouseCode: values.warehouseCode,
                         wareHouseName: values.warehouseName,
@@ -245,7 +242,8 @@ const EditDealerWarehouseWrapper = () => {
                         },
                         billingAddress: {
                             gstNumber: values.billing_address.gstNumber,
-                            gstCertificate: values.billing_address.gstCertificate,
+                            gstCertificate:
+                                values.billing_address.gstCertificate,
                             phone: values.billing_address.phone,
                             address: values.billing_address.address,
                             countryId: values.billing_address.country,
@@ -256,7 +254,7 @@ const EditDealerWarehouseWrapper = () => {
                         contactInformation: contactInformation,
 
                         companyId: userData?.companyId || '',
-                        dealerId: values?.dealerId || null,                       
+                        dealerId: values?.dealerId || null,
                     },
                     id: Id || '',
                 }).then((res: any) => {
@@ -267,7 +265,6 @@ const EditDealerWarehouseWrapper = () => {
                                 'Warehouse Upated successfully!'
                             )
                             navigate('/dealers/' + dealerId + '/warehouse')
-                                
                         } else {
                             showToast('error', res?.data?.message)
                         }

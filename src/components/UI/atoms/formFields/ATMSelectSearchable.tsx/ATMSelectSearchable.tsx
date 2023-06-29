@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:ATMSelectSearchable.tsx
+// Type: Select Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import Select from 'react-select'
 import { ErrorMessage } from 'formik'
 import { twMerge } from 'tailwind-merge'
@@ -58,7 +68,7 @@ const ATMSelectSearchable = ({
             height: size === 'xs' ? '28px' : '',
             display: 'flex',
             alignItems: 'center',
-            paddingTop: size === 'xs' ? '1px' : '6px',
+            paddingTop: size === 'xs' ? '1px' : '7px',
         }),
         valueContainer: (provided: any) => ({
             ...provided,
@@ -66,7 +76,7 @@ const ATMSelectSearchable = ({
             paddingTop: '0px',
             alignItems: 'start',
             overflow: 'scroll',
-            maxHeight: '67px',
+            maxHeight: '32px',
         }),
         indicator: (provided: any) => ({
             ...provided,

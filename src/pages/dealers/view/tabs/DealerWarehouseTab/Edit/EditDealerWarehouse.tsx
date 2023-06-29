@@ -47,12 +47,12 @@ const EditDealerWarehouse = ({
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
 
-		const { state } = useLocation()   
+    const { state } = useLocation()
     const dealerId = state?.params?.dealerId || null
 
     const breadcrumbs = [
         {
-            label: 'Warehouse',           
+            label: 'Warehouse',
             path: `dealers/${dealerId}/warehouse`,
         },
         {

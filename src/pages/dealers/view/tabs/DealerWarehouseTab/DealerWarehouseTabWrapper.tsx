@@ -18,8 +18,8 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { WarehousesListResponse } from 'src/models'
 import DealerWarehouseListing from './DealerWarehouseListing'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { 
-    useDeleteDealerWarehouseMutation,  
+import {
+    useDeleteDealerWarehouseMutation,
     useGetDealerWarehouseQuery,
 } from 'src/services/DealerWarehouseService'
 import { showToast } from 'src/utils'
@@ -38,10 +38,10 @@ type Props = {}
 const DealerWarehouseTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
-    const dealerId: any = params.dealerId    
+    const dealerId: any = params.dealerId
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const [deleteDealerWarehouse] = useDeleteDealerWarehouseMutation();
+    const [deleteDealerWarehouse] = useDeleteDealerWarehouseMutation()
     const dealerWarehouseState: any = useSelector(
         (state: RootState) => state.dealerWarehouse
     )
@@ -139,9 +139,12 @@ const DealerWarehouseTabWrapper = (props: Props) => {
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
-                                    navigate(`/dealers/${dealerId}/warehouse/${currentId}`, {
-                                        state: { params },
-                                    })
+                                    navigate(
+                                        `/dealers/${dealerId}/warehouse/${currentId}`,
+                                        {
+                                            state: { params },
+                                        }
+                                    )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
@@ -179,13 +182,13 @@ const DealerWarehouseTabWrapper = (props: Props) => {
         limit: rowsPerPage,
         searchValue: searchValue,
         params: [
-            "wareHouseCode",
-            "wareHouseName",
-            "country",
-            "email",
-            "registrationAddress",
-            "billingAddress",
-            "contactInformation"
+            'wareHouseCode',
+            'wareHouseName',
+            'country',
+            'email',
+            'registrationAddress',
+            'billingAddress',
+            'contactInformation',
         ],
         page: page,
         filterBy: [
@@ -213,7 +216,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     }, [isLoading, isFetching, data])
 
     const handleDelete = () => {
-        const id = currentId;            
+        const id = currentId
         setShowDropdown(false)
         deleteDealerWarehouse(id).then((res) => {
             if ('data' in res) {

@@ -374,7 +374,7 @@ const PageRoutes = () => {
                     <Route
                         path="dealers/:dealerId/warehouse/:id"
                         element={<EditDealerWarehouseWrapper />}
-                    /> 
+                    />
 
                     <Route path="/dealers/:dealerId" element={<ViewDealer />}>
                         <Route
