@@ -153,4 +153,8 @@ export type {
     UpdateAssetsCategory,
 } from './assets/AssetsCategory.modal'
 
-export type { CallerResponse, CallerFormBody } from './Caller.model'
+export type {
+    CallerResponse,
+    CallerFormBody,
+    UpdateCallerForm,
+} from './Caller.model'

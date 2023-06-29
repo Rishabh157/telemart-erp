@@ -1,6 +1,7 @@
-// import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
-import { CallerFormBody } from 'src/models'
+// import { PaginationType } from 'src/models/common/paginationType'
+// import { UpdateCartonBoxBarcode } from 'src/models/CartonBoxBarcode.model'
+// import { CallerFormBody, UpdateCallerForm } from 'src/models'
 
 export const callerPageApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -14,19 +15,9 @@ export const callerPageApi = apiSlice.injectEndpoints({
         //     }),
         // }),
 
-        //***** GET *****/
-        // getAllCartonBoxBarcode: builder.query({
-        //     providesTags: ['CartonBoxBarcode'],
-        //     query: () => ({
-        //         url: '/cartonbox-barcode',
-        //         method: 'GET',
-        //         // body,
-        //     }),
-        // }),
-
         //***** ADD *****/
         addCallerForm: builder.mutation({
-            // invalidatesTags: ['CartonBoxBarcode'],
+            // invalidatesTags: ['callerForm'],
             query: (body: any) => ({
                 url: '/call/add',
                 method: 'POST',
@@ -34,16 +25,15 @@ export const callerPageApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // //***** Update *****/
-        // updateCartonBoxBarcode: builder.mutation({
-        //     invalidatesTags: ['CartonBoxBarcode'],
-        //     query: ({ body, id }: UpdateCartonBoxBarcode) => ({
-        //         url: `/cartonbox-barcode/${id}`,
-
-        //         method: 'PUT',
-        //         body,
-        //     }),
-        // }),
+        //***** Update *****/
+        updateCallerForm: builder.mutation({
+            // invalidatesTags: ['callerForm'],
+            query: ({ body, id }) => ({
+                url: `/call/${id}`,
+                method: 'PUT',
+                body,
+            }),
+        }),
 
         // // **** Delete
         // deleteCartonBoxBarcode: builder.mutation({
@@ -54,23 +44,7 @@ export const callerPageApi = apiSlice.injectEndpoints({
         //         method: 'DELETE',
         //     }),
         // }),
-
-        // getByCartonBoxBarcode: builder.query({
-        //     providesTags: ['CartonBoxBarcode'],
-        //     query: (cartonBoxId) => ({
-        //         url: `/cartonbox-barcode/get-by-box/${cartonBoxId}`,
-        //         method: 'GET',
-        //     }),
-        // }),
     }),
 })
-export const {
-    useAddCallerFormMutation,
-    //     useAddCartonBoxBarcodeMutation,
-    //     useUpdateCartonBoxBarcodeMutation,
-    //     useGetCartonBoxBarcodeByIdQuery,
-    //     useExportCartonBoxBarcodeDataMutation,
-    //     useDeleteCartonBoxBarcodeMutation,
-    //     useGetAllCartonBoxBarcodeQuery,
-    //     useGetByCartonBoxBarcodeQuery,
-} = callerPageApi
+export const { useAddCallerFormMutation, useUpdateCallerFormMutation } =
+    callerPageApi

@@ -1,44 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from 'react-router-dom'
-import { array, boolean, number, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
-import {
-    useAddInboundCallerMutation,
-    useGetPaginationInboundCallerQuery,
-    useUpdateInboundCallerMutation,
-} from 'src/services/media/InboundCallerServices'
 import { useGetAllTehsilUnauthQuery } from 'src/services/TehsilService'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
 import { setAllTehsils } from 'src/redux/slices/tehsilSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { useGetAllDistrictUnauthQuery } from 'src/services/DistricService'
-
-import { SchemeListResponse } from 'src/models/scheme.model'
+// import { SchemeListResponse } from 'src/models/scheme.model'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { CountryListResponse } from 'src/models/Country.model'
 import { StateListResponse } from 'src/models/State.model'
 import { DistrictListResponse } from 'src/models/District.model'
 import { TehsilListResponse } from 'src/models/Tehsil.model'
-// import { AreaListResponse } from 'src/models/Area.model'
 import { setItems } from 'src/redux/slices/media/channelManagementSlice'
-import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
-import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
-import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
-import {
-    setIsTableLoading,
-    setTotalItems,
-    setItems as setCallItems,
-} from 'src/redux/slices/media/inboundCallerSlice'
+// import { AreaListResponse } from 'src/models/Area.model'
+// import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
+// import { useGetAllAreaQuery } from 'src/services/AreaService'
 import CallerPage from './CallerPage'
 
-import { useAddCallerFormMutation } from 'src/services/CallerService'
+import {
+    useAddCallerFormMutation,
+    useUpdateCallerFormMutation,
+} from 'src/services/CallerService'
 import { CallerResponse } from 'src/models'
+import { setItems as setAllAreaItems } from 'src/redux/slices/areaSlice'
 
 export type FormInitialValues = {
     didNo: string
@@ -50,16 +41,16 @@ export type FormInitialValues = {
     campaign: string
     customerName: string
     deliveryTimeAndDate: string
-    countryId: string
-    stateId: string
-    districtId: string
-    tehsilId: string
-    schemeId: string
+    countryId: string | null
+    stateId: string | null
+    districtId: string | null
+    tehsilId: string | null
+    schemeId: string | null
     schemeName: string
-    pincodeId: string
-    pincodeSecondId: string
+    pincodeId: string | null
+    pincodeSecondId: string | null
     // villageId?: string | null
-    areaId: null
+    areaId: string | null
     emailId: string
     flagStatus: string
     gender: string
@@ -69,7 +60,7 @@ export type FormInitialValues = {
     medicalIssue: string[]
     orderFor: string
     paymentMode: string
-    productGroupId: string
+    productGroupId: string | null
     // isRecording?: boolean
     reciversName: string
     remark: string
@@ -84,8 +75,8 @@ export type FormInitialValues = {
     price: number
     deliveryCharges: number
     totalAmount: number
-    dispositionLevelTwoId: string
-    dispositionLevelThreeId: string
+    dispositionLevelTwoId: string | null
+    dispositionLevelThreeId: string | null
 }
 
 const CallerPageWrapper = () => {
@@ -193,70 +184,73 @@ const CallerPageWrapper = () => {
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.inboundCaller
     )
+
     const { page, rowsPerPage, searchValue, items } = inboundCallerState
-    const {
-        data: Calldata,
-        isFetching: callisFetching,
-        isLoading: callisLoading,
-    } = useGetPaginationInboundCallerQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'mobileNo',
-                value: ['9893432611'],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
 
-    useEffect(() => {
-        if (!callisFetching && !callisLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setCallItems(Calldata?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
+    // const {
+    //     data: Calldata,
+    //     isFetching: callisFetching,
+    //     isLoading: callisLoading,
+    // } = useGetPaginationInboundCallerQuery({
+    //     limit: rowsPerPage,
+    //     searchValue: searchValue,
+    //     params: ['didNo'],
+    //     page: page,
+    //     filterBy: [
+    //         {
+    //             fieldName: 'mobileNo',
+    //             value: ['9893432611'],
+    //         },
+    //     ],
+    //     dateFilter: {},
+    //     orderBy: 'createdAt',
+    //     orderByValue: -1,
+    //     isPaginationRequired: true,
+    // })
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [callisLoading, callisFetching, Calldata])
+    // useEffect(() => {
+    //     if (!callisFetching && !callisLoading) {
+    //         dispatch(setIsTableLoading(false))
+    //         dispatch(setCallItems(Calldata?.data || []))
+    //         dispatch(setTotalItems(data?.totalItem || 4))
+    //     } else {
+    //         dispatch(setIsTableLoading(true))
+    //     }
+
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [callisLoading, callisFetching, Calldata])
 
     // const navigate = useNavigate()
     // const [AddInbopundCaller] = useAddInboundCallerMutation()
     // const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddCallerForm] = useAddCallerFormMutation()
-    let DidNO = '452001'
-    let MobileNO = '9893432611'
+    const [UpdateCallerForm] = useUpdateCallerFormMutation()
+    // let DidNO = '452001'
+    // let MobileNO = '9893432611'
 
     const initialValues: FormInitialValues = {
         campaign: 'DHUANDHAAR',
         callType: 'INBOUND',
-        incomingCallerNo: '9988776655',
+        incomingCallerNo: '',
         customerName: 'AJAY CHORE',
-        didNo: '111.',
+        didNo: '111',
         flagStatus: 'STATUS',
-        productGroupId: '',
-        schemeId: '',
+        productGroupId: null,
+        schemeId: null,
         schemeName: '',
         shcemeQuantity: 1,
         price: 0,
         deliveryCharges: 0,
         totalAmount: 0,
         // DELEVERY ADDRESS SELECT OPTIONS
-        countryId: '646b2f49f8ba85987b718ad8',
-        pincodeId: '',
-        pincodeSecondId: '',
-        stateId: '',
-        // villageId: '' || null,
-        areaId: '' || null,
-        districtId: '',
-        tehsilId: '',
+        countryId: null,
+        pincodeId: null,
+        pincodeSecondId: null,
+        stateId: null,
+        // villageId: null,
+        areaId: null,
+        districtId: null,
+        tehsilId: null,
 
         // DELEVERY ADDRESS SELECT OPTIONS BOTTOM FIELDS
         typeOfAddress: '',
@@ -269,7 +263,7 @@ const CallerPageWrapper = () => {
         whatsappNo: '',
         autoFillingShippingAddress: '',
         // isRecording: false,
-        gender: '',
+        gender: 'MALE',
         orderFor: '',
         ageGroup: '',
         emailId: '',
@@ -280,8 +274,8 @@ const CallerPageWrapper = () => {
         medicalIssue: [],
         paymentMode: '',
         remark: '',
-        dispositionLevelTwoId: '',
-        dispositionLevelThreeId: '',
+        dispositionLevelTwoId: null,
+        dispositionLevelThreeId: null,
         alternateNo: '',
     }
 
@@ -322,76 +316,6 @@ const CallerPageWrapper = () => {
     //         .max(10, 'mobile number is not valid'),
     // })
 
-    const onSubmitHandler = (values: FormInitialValues) => {
-
-      
-        console.log('Submit Form', values)
-
-        AddCallerForm({
-            ...values,
-        }).then((res: any) => {
-            console.log(res)
-            // if ('data' in res) {
-            //     if (res?.data?.status) {
-            //         showToast(
-            //             'success',
-            //             'InboundCaller added successfully!'
-            //         )
-            //         localStorage.removeItem('callerData')
-            //         // navigate('/media/inbound')
-            //     } else {
-            //         showToast('error', res?.data?.message)
-            //     }
-            // } else {
-            //     showToast('error', 'Something went wrong')
-            // }
-            // setApiStatus(false)
-        })
-
-        // setApiStatus(true)
-    }
-
-    // useEffect(() => {
-    //     const callDetails: any = localStorage.getItem('callerData')
-    //     let callDataItem = JSON.parse(callDetails)
-    //     if (!callDataItem) {
-    //         const valuesInbound = {
-    //             ...initialValues,
-    //         }
-    //         setApiStatus(true)
-
-    //         AddInbopundCaller({
-    //             ...valuesInbound,
-    //             alternateNo1: initialValues.alternateNo,
-    //             schemeId: initialValues.schemeId,
-    //             dispositionLevelTwoId: initialValues.dispositionLevelTwoId,
-    //             dispositionLevelThreeId: initialValues.dispositionLevelThreeId,
-    //         }).then((res: any) => {
-    //             if ('data' in res) {
-    //                 if (res?.data?.status) {
-    //                     if (res?.data?.data?._id) {
-    //                         let CallData = {
-    //                             orderID: res?.data?.data?._id,
-    //                             MobileNO: MobileNO,
-    //                             DidNO: DidNO,
-    //                         }
-    //                         localStorage.setItem(
-    //                             'callerData',
-    //                             JSON.stringify(CallData)
-    //                         )
-    //                     }
-    //                 } else {
-    //                     showToast('error', res?.data?.message)
-    //                 }
-    //             } else {
-    //                 showToast('error', 'Something went wrong')
-    //             }
-    //             // setApiStatus(false)
-    //         })
-    //     }
-    //     // eslint-disable-next-line
-    // }, [])
-
     const dispatch = useDispatch<AppDispatch>()
 
     const { data, isLoading, isFetching } = useGetAllCountryUnauthQuery('')
@@ -408,23 +332,27 @@ const CallerPageWrapper = () => {
     const { selectedItem: didItems }: any = useSelector(
         (state: RootState) => state.didManagement
     )
+
+    // Set Countries
     useEffect(() => {
-        if (!isLoading && !isFetching) dispatch(setAllCountry(data?.data))
+        if (!isLoading && !isFetching) {
+            dispatch(setAllCountry(data?.data))
+        }
     }, [data, isLoading, isFetching, dispatch])
-    // did
-    //state
-    const {
-        data: didData,
-        isLoading: didIsLoading,
-        isFetching: didIsFetching,
-    } = useGetByDidNumberQuery(DidNO)
 
-    useEffect(() => {
-        if (!didIsLoading && !didIsFetching)
-            dispatch(setDidItems(didData?.data))
-    }, [didData, didIsLoading, didIsFetching, dispatch])
+    // Set did Number
+    // const {
+    //     data: didData,
+    //     isLoading: didIsLoading,
+    //     isFetching: didIsFetching,
+    // } = useGetByDidNumberQuery(DidNO)
 
-    //state
+    // useEffect(() => {
+    //     if (!didIsLoading && !didIsFetching)
+    //         dispatch(setDidItems(didData?.data))
+    // }, [didData, didIsLoading, didIsFetching, dispatch])
+
+    // Set States
     const {
         data: stateData,
         isLoading: stateIsLoading,
@@ -436,7 +364,7 @@ const CallerPageWrapper = () => {
             dispatch(setAllStates(stateData?.data))
     }, [stateData, stateIsLoading, stateIsFetching, dispatch])
 
-    // district
+    // Set Districts
     const {
         data: districtData,
         isLoading: districtIsLoading,
@@ -447,7 +375,7 @@ const CallerPageWrapper = () => {
         dispatch(setAllDistrict(districtData?.data))
     }, [districtData, districtIsLoading, districtIsFetching, dispatch])
 
-    // tehsil
+    // Set Tehsil
     const {
         data: tehsilData,
         isFetching: tehsilIsFetching,
@@ -460,7 +388,20 @@ const CallerPageWrapper = () => {
         }
     }, [tehsilData, dispatch, tehsilIsFetching, tehsilIsLoading])
 
-    //channel
+    // Set Area
+    const {
+        data: areaListData,
+        isFetching: areaIsFetching,
+        isLoading: areaIsLoading,
+    } = useGetAllTehsilUnauthQuery('')
+
+    useEffect(() => {
+        if (!areaIsFetching && !areaIsLoading) {
+            dispatch(setAllTehsils(areaListData?.data))
+        }
+    }, [areaListData, dispatch, areaIsFetching, areaIsLoading])
+
+    // Set Channels
     const {
         data: channelData,
         isFetching: channelIsFetching,
@@ -474,7 +415,6 @@ const CallerPageWrapper = () => {
     }, [channelData, channelIsLoading, channelIsFetching, dispatch])
 
     //registration
-
     const dropdownOptions = {
         counrtyOptions: allCountry?.map((ele: CountryListResponse) => {
             return { label: ele?.countryName, value: ele?._id }
@@ -489,11 +429,67 @@ const CallerPageWrapper = () => {
         tehsilOptions: allTehsils?.map((ele: TehsilListResponse) => {
             return { label: ele?.tehsilName, value: ele?._id }
         }),
-
         channelOptions: allDistricts?.map((ele: DistrictListResponse) => {
             return { label: ele?.districtName, value: ele?._id }
         }),
     }
+
+    // Caller Page Save Button Form Updation
+    const onSubmitHandler = (values: FormInitialValues) => {
+        const callerDetails: any = localStorage.getItem('callerPageData')
+        let callerDataItem = JSON.parse(callerDetails)
+
+        // setApiStatus(true)
+        setTimeout(() => {
+            UpdateCallerForm({
+                body: {
+                    ...values,
+                    countryId: '646b2f49f8ba85987b718ad8',
+                    areaId: '646b2fc7f8ba85987b718bde',
+                },
+                id: callerDataItem?.orderID,
+            }).then((res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'caller added successfully!')
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
+                } else {
+                    showToast('error', 'Something went wrong')
+                }
+                // setApiStatus(false)
+            })
+        }, 1000)
+    }
+
+    //  Add Form when page load & Save _id in LocalStorage
+    useEffect(() => {
+        AddCallerForm({
+            ...initialValues,
+        }).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    if (res?.data?.data?._id) {
+                        let callerData = {
+                            orderID: res?.data?.data?._id,
+                            mobileNo: initialValues.mobileNo,
+                            didNo: initialValues.didNo,
+                        }
+                        localStorage.setItem(
+                            'callerPageData',
+                            JSON.stringify(callerData)
+                        )
+                    }
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+        })
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <Formik

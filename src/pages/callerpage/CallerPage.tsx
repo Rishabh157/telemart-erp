@@ -5,13 +5,10 @@ import Navbar from './components/Navbar'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
-import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
-// import ATMOtpInput from 'src/components/UI/atoms/ATMOtpInput/ATMOtpInput'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-
 import { FormInitialValues } from './CallerPageWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormikProps } from 'formik'
@@ -27,13 +24,14 @@ import {
 } from 'src/services/SchemeService'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 import { setTotalItems } from 'src/redux/slices/schemeSlice'
-// import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
 import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
 import { AreaListResponse } from 'src/models/Area.model'
-// import { useNavigate } from 'react-router-dom'
 import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
-import { showToast } from 'src/utils'
+// import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
+// import ATMOtpInput from 'src/components/UI/atoms/ATMOtpInput/ATMOtpInput'
+// import { useNavigate } from 'react-router-dom'
+// import { showToast } from 'src/utils'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -63,6 +61,44 @@ interface SchemeDetailsPropTypes {
     totalAmount: number
 }
 
+// Static Option For Gander Radio Box , Payment Mode Option & Medical issue
+const genderOption: SelectOption[] = [
+    {
+        label: 'Male',
+        value: 'MALE',
+    },
+    {
+        label: 'Female',
+        value: 'FEMALE',
+    },
+]
+
+const paymentModeOptions: SelectOption[] = [
+    {
+        label: 'COD',
+        value: 'COD',
+    },
+    {
+        label: 'Online (UPI only)',
+        value: 'UPI/ONLINE',
+    },
+]
+
+const medicalOptions: SelectOption[] = [
+    {
+        label: 'diabetes',
+        value: 'diabetes',
+    },
+    {
+        label: 'cancer',
+        value: 'cancer',
+    },
+    {
+        label: 'joint pain',
+        value: 'jointPain',
+    },
+]
+
 const CallerPage: React.FC<Props> = ({
     formikProps,
     apiStatus,
@@ -72,7 +108,6 @@ const CallerPage: React.FC<Props> = ({
     column,
     rows,
 }) => {
-    const [quantity, setQuantity] = useState<number>(1)
     const [isFacebookId, setFacebookId] = useState(false)
     const [isInstagramId, setInstagramId] = useState(false)
     const [schemeDetails, setSchemeDetails] = useState<SchemeDetailsPropTypes>({
@@ -242,7 +277,7 @@ const CallerPage: React.FC<Props> = ({
         }),
     }
 
-    function handleClick(newValue: string) {
+    function handlePinCode(newValue: string) {
         var newarray = allPincodes?.find((ele: any) => {
             return ele._id === newValue
         })
@@ -252,6 +287,17 @@ const CallerPage: React.FC<Props> = ({
         setFieldValue('stateId', newarray?.stateId)
         setFieldValue('countryId', newarray?.countryId)
     }
+
+    // function handleClick(newValue: string) {
+    //     var newarray = allPincodes?.find((ele: any) => {
+    //         return ele._id === newValue
+    //     })
+    //     setFieldValue('addressInformation.pincodeId', newarray?._id)
+    //     setFieldValue('addressInformation.tehsilId', newarray?.tehsilId)
+    //     setFieldValue('addressInformation.districtId', newarray?.districtId)
+    //     setFieldValue('addressInformation.stateId', newarray?.stateId)
+    //     setFieldValue('addressInformation.countryId', newarray?.countryId)
+    // }
 
     useEffect(() => {
         if (Array.isArray(schemeitems)) {
@@ -267,47 +313,36 @@ const CallerPage: React.FC<Props> = ({
         }
     }, [schemeitems])
 
-    // Static Option For Gander Radio Box , Payment Mode Option & Medical issue
-    const genderOption = [
-        {
-            label: 'Male',
-            value: 'MALE',
-        },
-        {
-            label: 'Female',
-            value: 'FEMALE',
-        },
-    ]
-
-    const paymentModeOptions = [
-        {
-            label: 'COD',
-            value: 'COD',
-        },
-        {
-            label: 'Online (UPI only)',
-            value: 'UPI/ONLINE',
-        },
-    ]
-
-    // const medicalOptions = [
-    //     {
-    //         label: 'Online (UPI only)',
-    //         value: 'UPI',
-    //     },
-    // ]
-
     useEffect(() => {
-        setSchemeDetails((prevSchemeDetails) => ({
-            ...prevSchemeDetails,
-            quantity: quantity,
-            totalAmount:
-                quantity * prevSchemeDetails.price +
-                prevSchemeDetails.deliveryCharges,
-        }))
-    }, [quantity])
+        setFieldValue('totalAmount', schemeDetails.totalAmount)
+        setFieldValue('shcemeQuantity', schemeDetails.quantity)
+        // eslint-disable-next-line
+    }, [schemeDetails.quantity])
 
-    // console.log('from state details => ', dropdownOptions)
+    const handleQuantity = (type: string) => {
+        switch (type) {
+            case '+':
+                setSchemeDetails((prevSchemeDetails) => ({
+                    ...prevSchemeDetails,
+                    quantity: prevSchemeDetails.quantity + 1,
+                    totalAmount:
+                        (prevSchemeDetails.quantity + 1) *
+                            prevSchemeDetails.price +
+                        prevSchemeDetails.deliveryCharges,
+                }))
+                break
+            case '-':
+                setSchemeDetails((prevSchemeDetails) => ({
+                    ...prevSchemeDetails,
+                    quantity: prevSchemeDetails.quantity - 1,
+                    totalAmount:
+                        (prevSchemeDetails.quantity - 1) *
+                            prevSchemeDetails.price +
+                        prevSchemeDetails.deliveryCharges,
+                }))
+                break
+        }
+    }
 
     return (
         <div className="bg-white px-4 h-[2000px]">
@@ -340,17 +375,34 @@ const CallerPage: React.FC<Props> = ({
                         <ATMSelectSearchable
                             size="xs"
                             name="productGroupId"
-                            value={values.productGroupId}
+                            value={values.productGroupId || ''}
                             // isSubmitting
                             options={firstSchemesOptionsList || []}
                             onChange={(e) => {
                                 setFieldValue('schemeId', e)
                                 setFieldValue('productGroupId', e)
+                                setFieldValue(
+                                    'schemeName',
+                                    schemeDetails.schemeName
+                                )
+                                setFieldValue('price', schemeDetails.price)
+                                setFieldValue(
+                                    'shcemeQuantity',
+                                    schemeDetails.quantity
+                                )
+                                setFieldValue(
+                                    'deliveryCharges',
+                                    schemeDetails.deliveryCharges
+                                )
+                                setFieldValue(
+                                    'totalAmount',
+                                    schemeDetails.totalAmount
+                                )
                                 setSchemeDetails((prevSchemeDetails) => ({
                                     ...prevSchemeDetails,
                                     quantity: 1,
                                 }))
-                                setQuantity(1)
+                                // setQuantity(1)
                             }}
                         />
                     </div>
@@ -431,15 +483,7 @@ const CallerPage: React.FC<Props> = ({
                                                     ? 'text-[black]'
                                                     : 'text-[#c2c2c2]'
                                             }`}
-                                            onClick={() => {
-                                                if (quantity <= 1) {
-                                                    alert(
-                                                        'Quantity Can Not Be Zero'
-                                                    )
-                                                } else {
-                                                    setQuantity(quantity - 1)
-                                                }
-                                            }}
+                                            onClick={() => handleQuantity('-')}
                                         >
                                             -
                                         </button>
@@ -448,9 +492,7 @@ const CallerPage: React.FC<Props> = ({
                                         </span>
                                         <button
                                             className="w-[28px] h-[28px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full ml-4 text-[18px] text-black "
-                                            onClick={() =>
-                                                setQuantity(quantity + 1)
-                                            }
+                                            onClick={() => handleQuantity('+')}
                                         >
                                             +
                                         </button>
@@ -496,7 +538,7 @@ const CallerPage: React.FC<Props> = ({
                                 value={values.pincodeId || ''}
                                 options={dropdownOptions.pincodeOptions || []}
                                 onChange={(e) => {
-                                    setFieldValue('pincodeId', e)
+                                    handlePinCode(e)
                                 }}
                             />
                         </div>
@@ -505,7 +547,7 @@ const CallerPage: React.FC<Props> = ({
                                 componentClass="mt-2"
                                 size="xs"
                                 name="pincodeSecondId"
-                                value={values.pincodeSecondId}
+                                value={values.pincodeSecondId || ''}
                                 options={dropdownOptions.pincodeOptions || []}
                                 onChange={(e) => {
                                     setFieldValue('pincodeSecondId', e)
@@ -536,7 +578,7 @@ const CallerPage: React.FC<Props> = ({
                         // isSubmitting
                         name=""
                         value={''}
-                        options={dropdownOptions.areaOptions || []}
+                        options={[]}
                         onChange={(e) => {
                             // setFieldValue('zonalManagerId', e)
                         }}
@@ -579,7 +621,7 @@ const CallerPage: React.FC<Props> = ({
                         classDirection="grid grid-cols-3"
                         // isSubmitting
                         name="tehsilId"
-                        value={values.tehsilId}
+                        value={values.tehsilId || ''}
                         options={dropdownOptions.tehsilOptions || []}
                         onChange={(e) => {
                             setFieldValue('tehsilId', e)
@@ -938,24 +980,7 @@ const CallerPage: React.FC<Props> = ({
                         onChange={(value) => {
                             setFieldValue(`medicalIssue`, value)
                         }}
-                        options={[
-                            {
-                                label: 'COD',
-                                value: 'COD',
-                            },
-                            {
-                                label: 'Online (UPI only)',
-                                value: 'UPI',
-                            },
-                            {
-                                label: 'Online (UPI only)',
-                                value: 'edfrest',
-                            },
-                            {
-                                label: 'Online (UPI only)',
-                                value: 'ewrrwe',
-                            },
-                        ]}
+                        options={medicalOptions || []}
                         label="Any Other Medical Issue"
                         selectClass={'-mt-4 select-margin'}
                     />
@@ -1003,7 +1028,7 @@ const CallerPage: React.FC<Props> = ({
                         componentClass="mt-2"
                         size="xs"
                         name="dispositionLevelTwoId"
-                        value={values.dispositionLevelTwoId}
+                        value={values.dispositionLevelTwoId || ''}
                         // isSubmitting
                         options={dropdownOptions.dispositionTwoOptions || []}
                         onChange={(e) => {
@@ -1018,7 +1043,7 @@ const CallerPage: React.FC<Props> = ({
                         componentClass="mt-2"
                         size="xs"
                         name="dispositionLevelThreeId"
-                        value={values.dispositionLevelThreeId}
+                        value={values.dispositionLevelThreeId || ''}
                         // isSubmitting
                         options={dropdownOptions.dispositionThreeOptions || []}
                         onChange={(e) => {
