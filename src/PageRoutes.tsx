@@ -189,6 +189,8 @@ import {
     EditDealerSchemeWrapper,
     DealerListLedgerTabWrapper,
     AddDealerWarehouseWarpper,
+    AddVendorWarehouseWrapper,
+    EditVendorWarehouseWrapper
 } from './pages/index'
 import { useDispatch } from 'react-redux'
 import {
@@ -319,10 +321,14 @@ const PageRoutes = () => {
                         path="/warehouse/view/:id"
                         element={<ViewWarehouseWrapper />}
                     />
-
+    
                     <Route
-                        path="/warehouse/add-warehouse"
-                        element={<AddWarehouseWrapper />}
+                        path="/vendors/:vendorId/warehouse/add"
+                        element={<AddVendorWarehouseWrapper />}
+                    />
+                    <Route
+                        path="/vendors/:vendorId/warehouse/:id"
+                        element={<EditVendorWarehouseWrapper />}
                     />
                     <Route
                         path="/inventories"

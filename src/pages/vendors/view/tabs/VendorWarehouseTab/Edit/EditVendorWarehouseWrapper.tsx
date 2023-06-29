@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
-// Filename:EditDealerWarehouseWrapper.tsx
+// Filename:EditVendorWarehouseWrapper.tsx
 // Type: Edit Component
 // Last Updated: JUNE 29, 2023
 // Project: TELIMART - Front End
@@ -20,19 +20,19 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import StepEditCompanyDetailsWrapper from './FormSteps/StepEditComapnyDetails/StepEditCompanyDetailsWrapper'
 import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
 import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
-import EditDealerWarehouse from './EditDealerWarehouse'
+import EditVendorWarehouse from './EditVendorWarehouse'
 import { showToast } from 'src/utils'
 import {
-    useGetDealerWarehouseByIdQuery,
-    useUpdateDealerWarehouseMutation,
-} from 'src/services/DealerWarehouseService'
+    useGetVendorWarehouseByIdQuery,
+    useUpdateVendorWarehouseMutation,
+} from 'src/services/VendorWarehouseService'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
-import { setSelectedItem } from 'src/redux/slices/DealerWarehouseSlice'
+import { setSelectedItem } from 'src/redux/slices/VendorWarehouseSlice'
 import {
     setFieldCustomized,
     setFormSubmitting,
@@ -44,7 +44,7 @@ export type FormInitialValues = {
     warehouseName: string
     country: string
     email: string
-    dealerId: any
+    vendorId: any
     regd_address: {
         phone: string
         address: string
@@ -146,23 +146,23 @@ const steps = [
     },
 ]
 
-const EditDealerWarehouseWrapper = () => {
+const EditVendorWarehouseWrapper = () => {
     const { state } = useLocation()
     const params = useParams()
     const Id: any = params.id
-    const dealerId = state?.params?.dealerId || null
+    const vendorId = state?.params?.vendorId || null
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isLoading, isFetching } = useGetDealerWarehouseByIdQuery(Id)
-    const [updateDealerWarehouse] = useUpdateDealerWarehouseMutation()
+    const { data, isLoading, isFetching } = useGetVendorWarehouseByIdQuery(Id)
+    const [updateVendorWarehouse] = useUpdateVendorWarehouseMutation()
 
     // States
     const { allCountry }: any = useSelector((state: RootState) => state.country)
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.dealerWarehouse
+        (state: RootState) => state?.vendorWarehouse
     )
 
     const [apiStatus, setApiStatus] = useState(false)
@@ -205,7 +205,7 @@ const EditDealerWarehouseWrapper = () => {
             pincode: selectedItem?.billingAddress?.pincodeId || '',
         },
         contact_informations: selectedItem?.contactInformation || '',
-        dealerId: selectedItem?.dealerId,
+        vendorId: vendorId,
     }
 
     // Form validation schema based on the active step
@@ -226,7 +226,7 @@ const EditDealerWarehouseWrapper = () => {
             setApiStatus(true)
             dispatch(setFieldCustomized(false))
             setTimeout(() => {
-                updateDealerWarehouse({
+                updateVendorWarehouse({
                     body: {
                         wareHouseCode: values.warehouseCode,
                         wareHouseName: values.warehouseName,
@@ -254,7 +254,7 @@ const EditDealerWarehouseWrapper = () => {
                         contactInformation: contactInformation,
 
                         companyId: userData?.companyId || '',
-                        dealerId: values?.dealerId || null,
+                        vendorId: values?.vendorId || null,
                     },
                     id: Id || '',
                 }).then((res: any) => {
@@ -264,7 +264,7 @@ const EditDealerWarehouseWrapper = () => {
                                 'success',
                                 'Warehouse Upated successfully!'
                             )
-                            navigate('/dealers/' + dealerId + '/warehouse')
+                            navigate('/vendors/' + vendorId + '/warehouse')
                         } else {
                             showToast('error', res?.data?.message)
                         }
@@ -294,7 +294,7 @@ const EditDealerWarehouseWrapper = () => {
             >
                 {(formikProps: FormikProps<FormInitialValues>) => (
                     <Form className="">
-                        <EditDealerWarehouse
+                        <EditVendorWarehouse
                             formikProps={formikProps}
                             steps={steps}
                             activeStep={activeStep}
@@ -309,4 +309,4 @@ const EditDealerWarehouseWrapper = () => {
     )
 }
 
-export default EditDealerWarehouseWrapper
+export default EditVendorWarehouseWrapper

@@ -182,6 +182,11 @@ import ApprovedOrderListing from './approvedorders/ApprovedOrderListing'
 import ApprovedOrderViewWrapper from './approvedorders/view/ApprovedOrderViewWrapper'
 import EditDealerSchemeWrapper from './dealers/view/tabs/DealerSchemeTab/edit/EditDealerSchemeWrapper'
 import DealerListLedgerTabWrapper from './dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
+import AddVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Add/AddVendorWarehouseWrapper'
+import EditVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Edit/EditVendorWarehouseWrapper'
+
+
+
 
 // import asr
 import { ASRListingWrapper, EditASRWrapper, AddASRWrapper } from './asr'
@@ -383,4 +388,6 @@ export {
     ApprovedOrderViewWrapper,
     EditDealerSchemeWrapper,
     DealerListLedgerTabWrapper,
+    AddVendorWarehouseWrapper,
+    EditVendorWarehouseWrapper
 }

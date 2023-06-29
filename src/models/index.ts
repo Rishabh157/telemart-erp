@@ -19,6 +19,11 @@ export type {
     UpdateDealerWarehouse,
 } from './DealerWarehouse.model'
 export type {
+    AddVendorWarehouse,
+    VendorWarehousesListResponse,
+    UpdateVendorWarehouse,
+} from './VendorWarehouse.model'
+export type {
     VendorsListResponse,
     AddVendor,
     UpdateVendor,

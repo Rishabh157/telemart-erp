@@ -24,7 +24,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/warehouseSlice'
+} from 'src/redux/slices/DealerWarehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -43,14 +43,14 @@ const DealerWarehouseListing = ({
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const warehouseState: any = useSelector(
-        (state: RootState) => state.warehouse
+    const dealerWarehouseState: any = useSelector(
+        (state: RootState) => state.dealerWarehouse
     )
     // const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        warehouseState
+    dealerWarehouseState
 
     const params: any = useParams()
 
