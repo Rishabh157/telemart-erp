@@ -3,7 +3,7 @@
 /// ==============================================
 // Filename:InwardInventory.tsx
 // Type: Add Component
-// Last Updated: JUNE 27, 2023
+// Last Updated: JUNE 30, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -133,7 +133,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
         }
     }, [itemCount, filterBarcode])
     return (
-        <div className="p-2  h-[calc(100vh-55px)] overflow-auto">
+        <div className="p-4 h-[calc(100vh-95px)] overflow-auto ">
             <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
 
             {/* Page Header */}
