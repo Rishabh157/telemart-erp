@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:DealerPincodeService.ts
+// Type: Service Component
+// Last Updated: JUNE 28, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Internal Dependencies --|
 import { DealersPincodeAdd, UpdateDealersPincode } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'

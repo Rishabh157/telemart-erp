@@ -96,7 +96,7 @@ const MediaLayout = ({ children }: Props) => {
                     isCollapsed={isCollapsed}
                     navigation={mediaNavigation}
                     isPathEqualtoNavItem={(navItem: any) =>
-                        navItem.path=== currentPath
+                        navItem.path === currentPath
                     }
                 />
             </div>

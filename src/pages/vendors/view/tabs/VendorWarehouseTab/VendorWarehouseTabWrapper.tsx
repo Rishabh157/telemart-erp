@@ -1,34 +1,49 @@
+/// ==============================================
+// Filename:VendorWarehouseTabWrapper.tsx
+// Type: List Component
+// Last Updated: JUNE 29, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { HiDotsHorizontal } from 'react-icons/hi'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { WarehousesListResponse } from 'src/models'
-import WarehouseListing from 'src/pages/warehouses/list/WarehousesListing'
+import { VendorWarehousesListResponse } from 'src/models'
+import VendorWarehouseListing from './VendorWarehouseListing'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import {
+    useDeleteVendorWarehouseMutation,
+    useGetVendorWarehouseQuery,
+} from 'src/services/VendorWarehouseService'
+import { showToast } from 'src/utils'
+
+// |-- Redux --|
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/warehouseSlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate, useParams } from 'react-router-dom'
-import {
-    useDeleteWareHouseMutation,
-    useGetPaginationWareHousesQuery,
-} from 'src/services/WareHoouseService'
+} from 'src/redux/slices/VendorWarehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { showToast } from 'src/utils'
 
+// |-- Types --|
 type Props = {}
 
 const VendorWarehouseTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const vendorId: any = params.vendorId
-    const [deleteWareHouse] = useDeleteWareHouseMutation()
+    const [deleteVendorWarehouse] = useDeleteVendorWarehouseMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const wareHouseState: any = useSelector(
-        (state: RootState) => state.warehouse
+    const vendorWarehouseState: any = useSelector(
+        (state: RootState) => state.vendorWarehouse
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -37,7 +52,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             field: 'warehouseCode',
             headerName: 'Warehouse Code',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: WarehousesListResponse) => (
+            renderCell: (row: VendorWarehousesListResponse) => (
                 <span> {row.wareHouseCode} </span>
             ),
         },
@@ -45,7 +60,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             field: 'warehouseName',
             headerName: 'Warehouse Name',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: WarehousesListResponse) => {
+            renderCell: (row: VendorWarehousesListResponse) => {
                 return (
                     <span className="text-primary-main ">
                         {' '}
@@ -58,7 +73,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             field: 'country',
             headerName: 'Country',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: WarehousesListResponse) => (
+            renderCell: (row: VendorWarehousesListResponse) => (
                 <span className="text-primary-main ">
                     {' '}
                     {row.wareHouseCountryName}{' '}
@@ -69,7 +84,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             field: 'state',
             headerName: 'State',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: WarehousesListResponse) => {
+            renderCell: (row: VendorWarehousesListResponse) => {
                 return (
                     <span className="text-primary-main ">
                         {' '}
@@ -82,7 +97,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             field: 'district',
             headerName: 'District',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: WarehousesListResponse) => {
+            renderCell: (row: VendorWarehousesListResponse) => {
                 return (
                     <span className="text-primary-main ">
                         {' '}
@@ -95,7 +110,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             field: 'pincode',
             headerName: 'Pincode',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: WarehousesListResponse) => {
+            renderCell: (row: VendorWarehousesListResponse) => {
                 return (
                     <span className="text-primary-main ">
                         {' '}
@@ -125,7 +140,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
-                                    navigate(`/warehouse/${currentId}`, {
+                                    navigate(`${currentId}`, {
                                         state: { params },
                                     })
                                 }}
@@ -158,10 +173,10 @@ const VendorWarehouseTabWrapper = (props: Props) => {
         },
     ]
 
-    const { page, rowsPerPage, searchValue, items } = wareHouseState
+    const { page, rowsPerPage, searchValue, items } = vendorWarehouseState
     const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isFetching, isLoading } = useGetPaginationWareHousesQuery({
+    const { data, isFetching, isLoading } = useGetVendorWarehouseQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['wareHouseName', 'country'],
@@ -196,7 +211,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteWareHouse(currentId).then((res) => {
+        deleteVendorWarehouse(currentId).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Warehouse deleted successfully!')
@@ -213,12 +228,12 @@ const VendorWarehouseTabWrapper = (props: Props) => {
     }
 
     return (
-        <div className="px-2 h-full shadow rounded border ">
-            <WarehouseListing
+        <div className="px-2 h-full  ">
+            <VendorWarehouseListing
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
-                AddpathName={`add-warehouse`}
+                AddpathName={`add`}
             />
         </div>
     )

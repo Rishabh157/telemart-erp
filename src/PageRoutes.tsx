@@ -64,6 +64,7 @@ import {
     DealerActivityTabWrapper,
     DealerGeneralInformationTabWrapper,
     DealerWarehouseTabWrapper,
+    EditDealerWarehouseWrapper,
     DealerSalesOrderTabWrapper,
     AddDealerPinCodeTabWrapper,
     AddDealerSchemeTabWrapper,
@@ -164,6 +165,8 @@ import {
     ViewDispositionThreeWrappper,
     ViewInitialCallThreeWrappper,
     OrderViewWrapper,
+    Order,
+    DummyOrderTab,
     InquiryViewWrapper,
     InquiryListingWrapper,
     InfluencerListingWrapper,
@@ -186,6 +189,9 @@ import {
     ApprovedOrderViewWrapper,
     EditDealerSchemeWrapper,
     DealerListLedgerTabWrapper,
+    AddDealerWarehouseWarpper,
+    AddVendorWarehouseWrapper,
+    EditVendorWarehouseWrapper,
 } from './pages/index'
 import CallerPageWrapper from './pages/callerpage/CallerPageWrapper';
 
@@ -329,15 +335,48 @@ const PageRoutes = () => {
                     <Route path="media/caller-page" element={<CallerPageWrapper />} />
                     <Route path="/orders" element={<OrderListing />} />
 
-                    <Route
-                        path="/orders/view/:id"
-                        element={<OrderViewWrapper />}
-                    />
-                    <Route path="/orders/add-order" element={<AddOrder />} />
-                    <Route
-                        path="/approved-orders"
-                        element={<ApprovedOrderListing />}
-                    />
+                    <Route path="/orders" element={<Order />}>
+                        <Route path="/orders/all" element={<OrderListing />} />
+                        <Route
+                            path="/orders/all/view/:id"
+                            element={<OrderViewWrapper />}
+                        />
+                        <Route
+                            path="/orders/add-order"
+                            element={<AddOrder />}
+                        />
+                        <Route
+                            path="/orders/approved-orders"
+                            element={<ApprovedOrderListing />}
+                        />
+                        <Route
+                            path="/orders/fresh-orders"
+                            element={<DummyOrderTab />}
+                        />
+                        <Route
+                            path="/orders/delivered"
+                            element={<DummyOrderTab />}
+                        />
+                        <Route
+                            path="/orders/door-cancled"
+                            element={<DummyOrderTab />}
+                        />
+                        <Route
+                            path="/orders/hold"
+                            element={<DummyOrderTab />}
+                        />
+                        <Route path="/orders/psc" element={<DummyOrderTab />} />
+                        <Route path="/orders/una" element={<DummyOrderTab />} />
+                        <Route path="/orders/pnd" element={<DummyOrderTab />} />
+                        <Route
+                            path="/orders/urgent"
+                            element={<DummyOrderTab />}
+                        />
+                        <Route
+                            path="/orders/non-actions"
+                            element={<DummyOrderTab />}
+                        />
+                    </Route>
                     <Route
                         path="/approved-orders/view/:id"
                         element={<ApprovedOrderViewWrapper />}
@@ -410,8 +449,12 @@ const PageRoutes = () => {
                     />
 
                     <Route
-                        path="/warehouse/add-warehouse"
-                        element={<AddWarehouseWrapper />}
+                        path="/vendors/:vendorId/warehouse/add"
+                        element={<AddVendorWarehouseWrapper />}
+                    />
+                    <Route
+                        path="/vendors/:vendorId/warehouse/:id"
+                        element={<EditVendorWarehouseWrapper />}
                     />
 
                     <Route
@@ -438,7 +481,12 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="dealers/:dealerId/warehouse/add-warehouse"
-                        element={<AddWarehouseWrapper />}
+                        element={<AddDealerWarehouseWarpper />}
+                    />
+
+                    <Route
+                        path="dealers/:dealerId/warehouse/:id"
+                        element={<EditDealerWarehouseWrapper />}
                     />
 
                     <Route path="/dealers/:dealerId" element={<ViewDealer />}>
