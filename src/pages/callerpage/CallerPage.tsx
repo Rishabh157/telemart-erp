@@ -132,7 +132,6 @@ const CallerPage: React.FC<Props> = ({
     const { items: allArea }: any = useSelector(
         (state: RootState) => state.areas
     )
-
     const { allPincodes }: any = useSelector(
         (state: RootState) => state.pincode
     )
@@ -185,24 +184,29 @@ const CallerPage: React.FC<Props> = ({
         data: singleSchemeData,
         isFetching: isSingleSchemeFetching,
         isLoading: isSingleSchemeLoading,
-    } = useGetSchemeByIdQuery(
-        values.productGroupId || '64967b613d01c87837235507'
-    )
+    } = useGetSchemeByIdQuery(values.productGroupId, {
+        skip: !formikProps.values.productGroupId,
+    })
 
     useEffect(() => {
         if (!isSingleSchemeLoading && !isSingleSchemeFetching) {
             setSchemeDetails((prevSchemeDetails) => ({
                 ...prevSchemeDetails,
-                schemeName: singleSchemeData?.data?.schemeName,
-                price: singleSchemeData?.data?.schemePrice,
+                schemeName: singleSchemeData?.data?.schemeName || '',
+                price: singleSchemeData?.data?.schemePrice || 0,
                 quantity: 1,
-                deliveryCharges: singleSchemeData?.data?.deliveryCharges,
+                deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                    singleSchemeData?.data?.deliveryCharges,
+                        singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
-    }, [singleSchemeData, isSingleSchemeLoading, isSingleSchemeFetching])
+    }, [
+        singleSchemeData,
+        isSingleSchemeLoading,
+        isSingleSchemeFetching,
+        values.productGroupId,
+    ])
 
     const {
         data: dispositionThreedata,
@@ -288,17 +292,6 @@ const CallerPage: React.FC<Props> = ({
         setFieldValue('countryId', newarray?.countryId)
     }
 
-    // function handleClick(newValue: string) {
-    //     var newarray = allPincodes?.find((ele: any) => {
-    //         return ele._id === newValue
-    //     })
-    //     setFieldValue('addressInformation.pincodeId', newarray?._id)
-    //     setFieldValue('addressInformation.tehsilId', newarray?.tehsilId)
-    //     setFieldValue('addressInformation.districtId', newarray?.districtId)
-    //     setFieldValue('addressInformation.stateId', newarray?.stateId)
-    //     setFieldValue('addressInformation.countryId', newarray?.countryId)
-    // }
-
     useEffect(() => {
         if (Array.isArray(schemeitems)) {
             const schemeOptionRename = schemeitems?.map((ele) => {
@@ -316,8 +309,12 @@ const CallerPage: React.FC<Props> = ({
     useEffect(() => {
         setFieldValue('totalAmount', schemeDetails.totalAmount)
         setFieldValue('shcemeQuantity', schemeDetails.quantity)
+        setFieldValue('schemeName', schemeDetails.schemeName)
+        setFieldValue('price', schemeDetails.price)
+        setFieldValue('deliveryCharges', schemeDetails.deliveryCharges)
+
         // eslint-disable-next-line
-    }, [schemeDetails.quantity])
+    }, [schemeDetails])
 
     const handleQuantity = (type: string) => {
         switch (type) {
@@ -381,28 +378,10 @@ const CallerPage: React.FC<Props> = ({
                             onChange={(e) => {
                                 setFieldValue('schemeId', e)
                                 setFieldValue('productGroupId', e)
-                                setFieldValue(
-                                    'schemeName',
-                                    schemeDetails.schemeName
-                                )
-                                setFieldValue('price', schemeDetails.price)
-                                setFieldValue(
-                                    'shcemeQuantity',
-                                    schemeDetails.quantity
-                                )
-                                setFieldValue(
-                                    'deliveryCharges',
-                                    schemeDetails.deliveryCharges
-                                )
-                                setFieldValue(
-                                    'totalAmount',
-                                    schemeDetails.totalAmount
-                                )
                                 setSchemeDetails((prevSchemeDetails) => ({
                                     ...prevSchemeDetails,
                                     quantity: 1,
                                 }))
-                                // setQuantity(1)
                             }}
                         />
                     </div>
@@ -427,7 +406,7 @@ const CallerPage: React.FC<Props> = ({
                 </div>
             </div>
 
-            {Object.keys(schemeDetails || '').length ? (
+            {values.schemeId ? (
                 <React.Fragment>
                     <div className="bg-[#87527C] mt-2">
                         <div className="grid grid-cols-12 p-2">
@@ -523,38 +502,21 @@ const CallerPage: React.FC<Props> = ({
             {/* Delivery Address Section */}
             <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700   ">
                 <div className="col-span-4 py-2  gap-x-4 border-r-[1px] px-6 border-grey-800">
-                    <div className="grid grid-cols-12 gap-2 ">
-                        <div className="col-span-8  ">
-                            <ATMSelectSearchable
-                                componentClass="  mt-2"
-                                label="Pincode"
-                                size="xs"
-                                LabelDirection="horizontal"
-                                classDirection="grid grid-cols-12"
-                                labelSpan="col-span-6"
-                                inputSpan="col-span-6"
-                                // isSubmitting
-                                name="pincodeId"
-                                value={values.pincodeId || ''}
-                                options={dropdownOptions.pincodeOptions || []}
-                                onChange={(e) => {
-                                    handlePinCode(e)
-                                }}
-                            />
-                        </div>
-                        <div className="col-span-4 ">
-                            <ATMSelectSearchable
-                                componentClass="mt-2"
-                                size="xs"
-                                name="pincodeSecondId"
-                                value={values.pincodeSecondId || ''}
-                                options={dropdownOptions.pincodeOptions || []}
-                                onChange={(e) => {
-                                    setFieldValue('pincodeSecondId', e)
-                                }}
-                            />
-                        </div>
-                    </div>
+                    <ATMSelectSearchable
+                        componentClass="mt-2"
+                        label="Pincode"
+                        size="xs"
+                        LabelDirection="horizontal"
+                        classDirection="grid grid-cols-3"
+                        // isSubmitting
+                        name="pincodeId"
+                        value={values.pincodeId || ''}
+                        options={dropdownOptions.pincodeOptions || []}
+                        onChange={(e) => {
+                            handlePinCode(e)
+                        }}
+                    />
+
                     <ATMSelectSearchable
                         componentClass="mt-2"
                         label="State"
@@ -570,7 +532,7 @@ const CallerPage: React.FC<Props> = ({
                         }}
                     />
                     <ATMSelectSearchable
-                        componentClass="  mt-2"
+                        componentClass="mt-2"
                         label="City/Village"
                         size="xs"
                         LabelDirection="horizontal"
@@ -600,7 +562,7 @@ const CallerPage: React.FC<Props> = ({
                         }}
                     />
                     <ATMSelectSearchable
-                        componentClass="  mt-2"
+                        componentClass="mt-2"
                         label="District"
                         size="xs"
                         LabelDirection="horizontal"
@@ -614,7 +576,7 @@ const CallerPage: React.FC<Props> = ({
                         }}
                     />{' '}
                     <ATMSelectSearchable
-                        componentClass="  mt-2"
+                        componentClass="mt-2"
                         label="Tehsil/Taluka"
                         size="xs"
                         LabelDirection="horizontal"
@@ -661,7 +623,7 @@ const CallerPage: React.FC<Props> = ({
                         }}
                     />
                     <ATMSelectSearchable
-                        componentClass="  mt-2"
+                        componentClass="mt-2"
                         label="Recivers Name"
                         size="xs"
                         LabelDirection="horizontal"
@@ -675,7 +637,7 @@ const CallerPage: React.FC<Props> = ({
                         }}
                     />
                     <ATMSelectSearchable
-                        componentClass="  mt-2"
+                        componentClass="mt-2"
                         label="Prefferred Delivery Time & Date"
                         size="xs"
                         LabelDirection="horizontal"
@@ -722,7 +684,7 @@ const CallerPage: React.FC<Props> = ({
                             setFieldValue('streetNumber', e.target.value)
                             setFieldValue(
                                 'autoFillingShippingAddress',
-                                `${values.houseNumber}\n${e.target.value}`
+                                `${values.houseNumber}\,${e.target.value}`
                             )
                         }}
                     />
@@ -738,7 +700,7 @@ const CallerPage: React.FC<Props> = ({
                             setFieldValue('landmark', e.target.value)
                             setFieldValue(
                                 'autoFillingShippingAddress',
-                                `${values.houseNumber}\n${values.streetNumber}\n${values.landmark}`
+                                `${values.houseNumber}\,${values.streetNumber}\,${e.target.value}`
                             )
                         }}
                     />
@@ -768,7 +730,7 @@ const CallerPage: React.FC<Props> = ({
                                 length={10}
                                 values={otp}
                                 setValues={setotp}
-                                onChange={(e) => console.log(e)}
+                                onChange={(e) =>  e}
                             />
                         </div>
                     </div> */}
@@ -805,6 +767,7 @@ const CallerPage: React.FC<Props> = ({
                         />
                     </div>
 
+                    {/* FOR MOBILE INPUT FIELD */}
                     {/* <div className="-mt-4">
                         <ATMSwitchButton
                             label="Recording"
@@ -876,10 +839,10 @@ const CallerPage: React.FC<Props> = ({
                         name="ageGroup"
                         value={values.ageGroup}
                         options={[
-                            { label: 'indore', value: 'one' },
-                            { label: 'betul', value: 'two' },
-                            { label: 'bhanwarkua', value: 'three' },
-                            { label: 'mumbai', value: 'four' },
+                            { label: '18-24', value: '18-24' },
+                            { label: '25-29', value: '25-29' },
+                            { label: '30-44', value: '30-44' },
+                            { label: '45-55', value: '45-55' },
                         ]}
                         onChange={(e) => {
                             setFieldValue('ageGroup', e)
@@ -968,22 +931,23 @@ const CallerPage: React.FC<Props> = ({
                             )}
                         </div>
                     </div>
-
-                    <ATMSelectSearchable
-                        // isMenuOpen
-                        isMulti
-                        name="medicalIssue"
-                        value={values.medicalIssue}
-                        LabelDirection="horizontal"
-                        size="small"
-                        // isMulti={true}
-                        onChange={(value) => {
-                            setFieldValue(`medicalIssue`, value)
-                        }}
-                        options={medicalOptions || []}
-                        label="Any Other Medical Issue"
-                        selectClass={'-mt-4 select-margin'}
-                    />
+                    <div className="h-[180px]">
+                        <ATMSelectSearchable
+                            isMenuOpen
+                            isMulti
+                            name="medicalIssue"
+                            value={values.medicalIssue}
+                            LabelDirection="horizontal"
+                            size="small"
+                            // isMulti={true}
+                            onChange={(value) => {
+                                setFieldValue(`medicalIssue`, value)
+                            }}
+                            options={medicalOptions || []}
+                            label="Any Other Medical Issue"
+                            selectClass={'-mt-4 select-margin'}
+                        />
+                    </div>
                 </div>
 
                 <div className="col-span-6 py-2 px-8 border-r-[1px]">
@@ -1067,7 +1031,7 @@ const CallerPage: React.FC<Props> = ({
                 <ATMTable
                     headerClassName="bg-[#87527c]"
                     columns={column}
-                    rows={[]}
+                    rows={rows}
                 />
             </div>
         </div>

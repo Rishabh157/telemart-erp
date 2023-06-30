@@ -1,4 +1,4 @@
- /// ==============================================
+/// ==============================================
 // Filename:ATMSelectSearchable.tsx
 // Type: Select Component
 // Last Updated: JUNE 29, 2023
@@ -70,7 +70,7 @@ const ATMSelectSearchable = ({
     inputSpan = 'col-span-2',
     componentClass = '  mt-6',
     labelSize = 'small',
-    isMenuOpen = false,
+    isMenuOpen = undefined,
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -111,6 +111,10 @@ const ATMSelectSearchable = ({
         indicatorSeparator: (provided: any) => ({
             ...provided,
             display: 'none',
+        }),
+        option: (provided: any) => ({
+            ...provided,
+            padding: '6px 12px',
         }),
     }
 
@@ -203,8 +207,8 @@ const ATMSelectSearchable = ({
                     )}
                 </div>
                 <Select
-                    defaultMenuIsOpen={isMenuOpen}
-                    maxMenuHeight={isMenuOpen ? 150 : 300}
+                    menuIsOpen={isMenuOpen}
+                    maxMenuHeight={isMenuOpen ? 110 : 300}
                     className={twMerge(
                         `border rounded border-slate-400 ${
                             LabelDirection === 'horizontal'

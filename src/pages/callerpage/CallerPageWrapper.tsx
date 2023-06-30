@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from 'react-router-dom'
+import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,26 +13,28 @@ import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
 import { setAllTehsils } from 'src/redux/slices/tehsilSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { useGetAllDistrictUnauthQuery } from 'src/services/DistricService'
-// import { SchemeListResponse } from 'src/models/scheme.model'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { CountryListResponse } from 'src/models/Country.model'
 import { StateListResponse } from 'src/models/State.model'
 import { DistrictListResponse } from 'src/models/District.model'
 import { TehsilListResponse } from 'src/models/Tehsil.model'
-import { setItems } from 'src/redux/slices/media/channelManagementSlice'
-// import { AreaListResponse } from 'src/models/Area.model'
-// import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
-// import { useGetAllAreaQuery } from 'src/services/AreaService'
 import CallerPage from './CallerPage'
-
 import {
     useAddCallerFormMutation,
     useUpdateCallerFormMutation,
 } from 'src/services/CallerService'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/media/inboundCallerSlice'
+import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
 import { CallerResponse } from 'src/models'
-import { setItems as setAllAreaItems } from 'src/redux/slices/areaSlice'
 
 export type FormInitialValues = {
+    agentName: string | null
+    comanyId: string | null
+    agentId: string | null
     didNo: string
     ageGroup: string
     mobileNo: string
@@ -86,98 +89,108 @@ const CallerPageWrapper = () => {
             headerName: 'ORDER NO',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => <span> {row._id} </span>,
         },
         {
             field: 'enq',
             headerName: 'ENQ NO',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => <span> {row.emailId} </span>,
         },
         {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => <span> {row.emailId} </span>,
         },
         {
             field: 'name',
             headerName: 'NAME',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => <span> {row.emailId} </span>,
         },
         {
             field: 'city',
             headerName: 'CITY',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => <span> {row.countryId} </span>,
         },
         {
             field: 'pincode',
             headerName: 'PINCODE',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => <span> {row.pincodeId} </span>,
         },
         {
             field: 'phone',
             headerName: 'PHONE',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => (
+                <span> {row.alternateNo} </span>
+            ),
         },
         {
             field: 'disposition',
             headerName: 'DISPOSITION',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => (
+                <span> {row.dispositionLevelTwoId} </span>
+            ),
         },
         {
             field: 'scheme',
             headerName: 'SCHEME',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => (
+                <span> {row.schemeName} </span>
+            ),
         },
         {
             field: 'shippingCharge',
             headerName: 'SHIPPING CHARGE',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => (
+                <span> {row.deliveryCharges} </span>
+            ),
         },
         {
             field: 'discount',
             headerName: 'DISCOUNT',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => (
+                <span> {row.deliveryCharges} </span>
+            ),
         },
         {
             field: 'amount',
             headerName: 'AMOUNT',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => <span> {row.price} </span>,
         },
         {
             field: 'remarks',
             headerName: 'REMARKS',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => <span> {row.remark} </span>,
         },
         {
             field: 'compl',
             headerName: 'COMPL',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            extraClasses: 'text-white',
+            renderCell: (row: CallerResponse) => <span> {row.remark} </span>,
         },
     ]
 
@@ -187,48 +200,50 @@ const CallerPageWrapper = () => {
 
     const { page, rowsPerPage, searchValue, items } = inboundCallerState
 
-    // const {
-    //     data: Calldata,
-    //     isFetching: callisFetching,
-    //     isLoading: callisLoading,
-    // } = useGetPaginationInboundCallerQuery({
-    //     limit: rowsPerPage,
-    //     searchValue: searchValue,
-    //     params: ['didNo'],
-    //     page: page,
-    //     filterBy: [
-    //         {
-    //             fieldName: 'mobileNo',
-    //             value: ['9893432611'],
-    //         },
-    //     ],
-    //     dateFilter: {},
-    //     orderBy: 'createdAt',
-    //     orderByValue: -1,
-    //     isPaginationRequired: true,
-    // })
+    // Table Data with MobileNo filtered
+    const {
+        data: callerListingData,
+        isFetching: isCallerFetching,
+        isLoading: isCallerLoading,
+    } = useGetPaginationInboundCallerQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: ['didNo'],
+        page: page,
+        filterBy: [
+            {
+                fieldName: 'mobileNo',
+                value: ['9669598715'],
+            },
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: true,
+    })
 
-    // useEffect(() => {
-    //     if (!callisFetching && !callisLoading) {
-    //         dispatch(setIsTableLoading(false))
-    //         dispatch(setCallItems(Calldata?.data || []))
-    //         dispatch(setTotalItems(data?.totalItem || 4))
-    //     } else {
-    //         dispatch(setIsTableLoading(true))
-    //     }
+    useEffect(() => {
+        if (!isCallerFetching && !isCallerLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setItems(callerListingData?.data || []))
+            dispatch(setTotalItems(callerListingData?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isCallerLoading, isCallerFetching, callerListingData])
 
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [callisLoading, callisFetching, Calldata])
 
-    // const navigate = useNavigate()
-    // const [AddInbopundCaller] = useAddInboundCallerMutation()
-    // const [apiStatus, setApiStatus] = useState<boolean>(false)
+
     const [AddCallerForm] = useAddCallerFormMutation()
     const [UpdateCallerForm] = useUpdateCallerFormMutation()
     // let DidNO = '452001'
     // let MobileNO = '9893432611'
 
     const initialValues: FormInitialValues = {
+        agentName: 'Vinod',
+        comanyId: '642e718eaf73c70b82389d6e',
+        agentId: '642e718eaf73c70b82389d6e',
         campaign: 'DHUANDHAAR',
         callType: 'INBOUND',
         incomingCallerNo: '',
@@ -259,7 +274,7 @@ const CallerPageWrapper = () => {
         houseNumber: '',
         streetNumber: '',
         landmark: '',
-        mobileNo: '9667865476',
+        mobileNo: '9669598715',
         whatsappNo: '',
         autoFillingShippingAddress: '',
         // isRecording: false,
@@ -280,41 +295,41 @@ const CallerPageWrapper = () => {
     }
 
     // Form Validation Schema
-    // const validationSchema = object({
-    //     // DELEVERY ADDRESS SELECT OPTIONS
-    //     countryId: string(),
-    //     pincodeId: string(),
-    //     pincodeSecondId: string(),
-    //     stateId: string(),
-    //     areaId: string(),
-    //     districtId: string(),
-    //     tehsilId: string(),
+    const validationSchema = object({
+        // DELEVERY ADDRESS SELECT OPTIONS
+        countryId: string(),
+        pincodeId: string(),
+        pincodeSecondId: string(),
+        stateId: string(),
+        areaId: string(),
+        districtId: string(),
+        tehsilId: string(),
 
-    //     // DELEVERY ADDRESS SELECT OPTIONS BOTTOM FIELDS
-    //     typeOfAddress: string(),
-    //     reciversName: string(),
-    //     deliveryTimeAndDate: string(),
-    //     houseNumber: string(),
-    //     streetNumber: string(),
-    //     landmark: string(),
-    //     mobileNo: string(),
-    //     whatsappNo: string()
-    //         .min(10, 'mobile number is not valid')
-    //         .max(10, 'mobile number is not valid'),
-    //     autoFillingShippingAddress: string(),
-    //     isRecording: boolean(),
-    //     gender: string(),
-    //     orderFor: string(),
-    //     ageGroup: string(),
-    //     emailId: string(),
-    //     medicalIssue: array().of(string()),
-    //     remark: string(),
-    //     dispositionLevelTwoId: string(),
-    //     dispositionLevelThreeId: string(),
-    //     alternateNo: string()
-    //         .min(10, 'mobile number is not valid')
-    //         .max(10, 'mobile number is not valid'),
-    // })
+        // DELEVERY ADDRESS SELECT OPTIONS BOTTOM FIELDS
+        typeOfAddress: string(),
+        reciversName: string(),
+        deliveryTimeAndDate: string(),
+        houseNumber: string(),
+        streetNumber: string(),
+        landmark: string(),
+        mobileNo: string(),
+        whatsappNo: string()
+            .min(10, 'mobile number is not valid')
+            .max(10, 'mobile number is not valid'),
+        autoFillingShippingAddress: string(),
+        // isRecording: boolean(),
+        gender: string(),
+        orderFor: string(),
+        ageGroup: string(),
+        emailId: string().required('email is required'),
+        // medicalIssue: array().of(string()),
+        remark: string(),
+        dispositionLevelTwoId: string(),
+        dispositionLevelThreeId: string(),
+        alternateNo: string()
+            .min(10, 'mobile number is not valid')
+            .max(10, 'mobile number is not valid'),
+    })
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -351,6 +366,8 @@ const CallerPageWrapper = () => {
     //     if (!didIsLoading && !didIsFetching)
     //         dispatch(setDidItems(didData?.data))
     // }, [didData, didIsLoading, didIsFetching, dispatch])
+
+    // Set States
 
     // Set States
     const {
@@ -401,20 +418,7 @@ const CallerPageWrapper = () => {
         }
     }, [areaListData, dispatch, areaIsFetching, areaIsLoading])
 
-    // Set Channels
-    const {
-        data: channelData,
-        isFetching: channelIsFetching,
-        isLoading: channelIsLoading,
-    } = useGetAllTehsilUnauthQuery('')
-
-    useEffect(() => {
-        if (!channelIsFetching && !channelIsLoading) {
-            dispatch(setItems(channelData?.data))
-        }
-    }, [channelData, channelIsLoading, channelIsFetching, dispatch])
-
-    //registration
+    //  selected option dropdowns options
     const dropdownOptions = {
         counrtyOptions: allCountry?.map((ele: CountryListResponse) => {
             return { label: ele?.countryName, value: ele?._id }
@@ -422,7 +426,6 @@ const CallerPageWrapper = () => {
         stateOptions: allStates?.map((ele: StateListResponse) => {
             return { label: ele?.stateName, value: ele?._id }
         }),
-
         districtOptions: allDistricts?.map((ele: DistrictListResponse) => {
             return { label: ele?.districtName, value: ele?._id }
         }),
@@ -438,7 +441,6 @@ const CallerPageWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         const callerDetails: any = localStorage.getItem('callerPageData')
         let callerDataItem = JSON.parse(callerDetails)
-
         // setApiStatus(true)
         setTimeout(() => {
             UpdateCallerForm({
@@ -463,54 +465,61 @@ const CallerPageWrapper = () => {
         }, 1000)
     }
 
-    //  Add Form when page load & Save _id in LocalStorage
+    //  Add Form when page loaded & set 'callerPageData' key in LocalStorage
     useEffect(() => {
-        AddCallerForm({
-            ...initialValues,
-        }).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    if (res?.data?.data?._id) {
-                        let callerData = {
-                            orderID: res?.data?.data?._id,
-                            mobileNo: initialValues.mobileNo,
-                            didNo: initialValues.didNo,
+        const callDetails: any = localStorage.getItem('callerPageData')
+        let callDataItem = JSON.parse(callDetails)
+        if (!callDataItem) {
+            AddCallerForm({
+                ...initialValues,
+            }).then((res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        if (res?.data?.data?._id) {
+                            let callerData = {
+                                orderID: res?.data?.data?._id,
+                                mobileNo: initialValues.mobileNo,
+                                didNo: initialValues.didNo,
+                            }
+                            localStorage.setItem(
+                                'callerPageData',
+                                JSON.stringify(callerData)
+                            )
                         }
-                        localStorage.setItem(
-                            'callerPageData',
-                            JSON.stringify(callerData)
-                        )
+                    } else {
+                        showToast('error', res?.data?.message)
                     }
                 } else {
-                    showToast('error', res?.data?.message)
+                    showToast('error', 'Something went wrong')
                 }
-            } else {
-                showToast('error', 'Something went wrong')
-            }
-        })
+            })
+        }
+        // setApiCalled(true)
         // eslint-disable-next-line
     }, [])
 
     return (
-        <Formik
-            initialValues={initialValues}
-            // validationSchema={validationSchema}
-            onSubmit={onSubmitHandler}
-        >
-            {(formikProps: FormikProps<FormInitialValues>) => {
-                return (
-                    <CallerPage
-                        // apiStatus={apiStatus}
-                        formikProps={formikProps}
-                        dropdownOptions={dropdownOptions}
-                        schemeColumn={columns}
-                        didItems={didItems}
-                        column={columns}
-                        rows={items}
-                    />
-                )
-            }}
-        </Formik>
+        <>
+            <Formik
+                initialValues={initialValues}
+                // validationSchema={validationSchema}
+                onSubmit={onSubmitHandler}
+            >
+                {(formikProps: FormikProps<FormInitialValues>) => {
+                    return (
+                        <CallerPage
+                            // apiStatus={apiStatus}
+                            formikProps={formikProps}
+                            dropdownOptions={dropdownOptions}
+                            schemeColumn={columns}
+                            didItems={didItems}
+                            column={columns}
+                            rows={items}
+                        />
+                    )
+                }}
+            </Formik>
+        </>
     )
 }
 
