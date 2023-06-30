@@ -16,12 +16,12 @@ import { useDispatch, useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { WarehousesListResponse } from 'src/models'
-import WarehouseListing from 'src/pages/warehouses/list/WarehousesListing'
+import DealerWarehouseListing from './DealerWarehouseListing'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import {
-    useDeleteWareHouseMutation,
-    useGetPaginationWareHousesQuery,
-} from 'src/services/WareHoouseService'
+    useDeleteDealerWarehouseMutation,
+    useGetDealerWarehouseQuery,
+} from 'src/services/DealerWarehouseService'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
@@ -29,7 +29,7 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/warehouseSlice'
+} from 'src/redux/slices/DealerWarehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -39,12 +39,15 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const dealerId: any = params.dealerId
-    const [deleteWareHouse] = useDeleteWareHouseMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const wareHouseState: any = useSelector(
-        (state: RootState) => state.warehouse
+    const [deleteDealerWarehouse] = useDeleteDealerWarehouseMutation()
+    const dealerWarehouseState: any = useSelector(
+        (state: RootState) => state.dealerWarehouse
     )
+
+    const { userData } = useSelector((state: RootState) => state?.auth)
+    const companyId = userData?.companyId
 
     const columns: columnTypes[] = [
         {
@@ -139,9 +142,12 @@ const DealerWarehouseTabWrapper = (props: Props) => {
                         <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                             <button
                                 onClick={() => {
-                                    navigate(`/warehouse/${currentId}`, {
-                                        state: { params },
-                                    })
+                                    navigate(
+                                        `/dealers/${dealerId}/warehouse/${currentId}`,
+                                        {
+                                            state: { params },
+                                        }
+                                    )
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
@@ -172,18 +178,22 @@ const DealerWarehouseTabWrapper = (props: Props) => {
         },
     ]
 
-    const { page, rowsPerPage, searchValue, items } = wareHouseState
+    const { page, rowsPerPage, searchValue, items } = dealerWarehouseState
     const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isFetching, isLoading } = useGetPaginationWareHousesQuery({
+    const { data, isFetching, isLoading } = useGetDealerWarehouseQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['wareHouseName', 'country'],
+        params: ['wareHouseCode', 'wareHouseName'],
         page: page,
         filterBy: [
             {
                 fieldName: 'dealerId',
                 value: dealerId,
+            },
+            {
+                fieldName: 'companyId',
+                value: companyId,
             },
         ],
         dateFilter: {},
@@ -205,8 +215,9 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     }, [isLoading, isFetching, data])
 
     const handleDelete = () => {
+        const id = currentId
         setShowDropdown(false)
-        deleteWareHouse(currentId).then((res) => {
+        deleteDealerWarehouse(id).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Warehouse deleted successfully!')
@@ -223,8 +234,8 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     }
 
     return (
-        <div className="px-2 h-full shadow rounded border ">
-            <WarehouseListing
+        <div className="px-2 h-full shadow ">
+            <DealerWarehouseListing
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}

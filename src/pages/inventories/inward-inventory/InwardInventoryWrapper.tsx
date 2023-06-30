@@ -72,10 +72,10 @@ const InwardInventoryWrapper = (props: Props) => {
         }
     }, [whData, whIsLoading, whIsFetching])
     return (
-            <InwardInventory
-                cartonBoxOption={cartonBoxOption}
-                wareHouseOption={wareHouseOption}
-            />
+        <InwardInventory
+            cartonBoxOption={cartonBoxOption}
+            wareHouseOption={wareHouseOption}
+        />
     )
 }
 
