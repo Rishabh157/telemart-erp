@@ -8,9 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 document.title = process.env?.REACT_APP_APP_NAME || ''
 
-root.render(
-        <App />
-)
+root.render(<App />)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
