@@ -160,7 +160,7 @@ import EditInitialCallThreeWrapper from './disposition/icInitialCaller/edit/Edit
 import AddInitialCallThreeWrappper from './disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
 import ViewDispositionThreeWrappper from './disposition/dispositionThree/View/ViewDispositionThreeWrapper'
 import ViewInitialCallThreeWrappper from './disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
-import OrderViewWrapper from './orders/view/OrderViewWrapper'
+import OrderViewWrapper from './orders/tabs/orderTab/view/OrderViewWrapper'
 import InquiryViewWrapper from './inquiry/view/InquiryViewWrapper'
 import InquiryListingWrapper from './inquiry/list/InquiryListingWrapper'
 import InfluencerListingWrapper from './websites/influencerManagement/list/InfluencerListingWrapper'

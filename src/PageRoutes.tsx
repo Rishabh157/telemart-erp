@@ -334,7 +334,7 @@ const PageRoutes = () => {
                     <Route path="/orders" element={<Order />}>
                         <Route path="/orders/all" element={<OrderListing />} />
                         <Route
-                            path="/orders/view/:id"
+                            path="/orders/all/view/:id"
                             element={<OrderViewWrapper />}
                         />
                         <Route

@@ -141,10 +141,10 @@ const OrderListing = () => {
                         setCurrentId(row?._id)
                     }}
                     handleViewActionButton={() => {
-                        navigate(`/orders/view/${currentId}`)
+                        navigate(`view/${currentId}`)
                     }}
                     handleEditActionButton={() => {
-                        navigate(`/orders/${currentId}`)
+                        navigate(`${currentId}`)
                     }}
                 />
             ),
