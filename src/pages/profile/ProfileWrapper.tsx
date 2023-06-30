@@ -13,8 +13,8 @@ import { MdOutbond } from 'react-icons/md'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import { Tabs } from 'src/models/common/paginationType'
 import Profile from './Profile'
-import { Tabs } from '../outwardRequest/list/OutwardRequestListingWrapper'
 
 // |-- Types --|
 type Props = {}

@@ -47,11 +47,10 @@ import ListDealerPincodeTabWrapper from './dealers/view/tabs/DealerPinCodeTab/Li
 import ListDealerSchemeTabWrapper from './dealers/view/tabs/DealerSchemeTab/list/ListDealerSchemeTabWrapper'
 import DealerOrderLedgerListTabWrapper from './dealers/view/tabs/DealerOrderLedger/list/DealerOrderLedgerListTabWrapper'
 import InwardInventoryWrapper from './inventories/inward-inventory/InwardInventoryWrapper'
-import InventoryListingWrapper from './inventories/list/InventoryListingWrapper'
+import InventoryListingWrapper from './inventories/inventory/list/InventoryListingWrapper'
 import LoginPage from './login/LoginPage'
 import AddOrder from './orders/add/AddOrder'
 import OrderListing from './orders/OrderListing'
-import OutwardRequestListingWrapper from './outwardRequest/list/OutwardRequestListingWrapper'
 import AddSaleOrderWrapper from './saleOrder/add/AddSaleOrderWrapper'
 import EditSaleOrderWrapper from './saleOrder/edit/EditSaleOrderWrapper'
 import SaleOrderListingWrapper from './saleOrder/list/SaleOrderListingWrapper'
@@ -245,7 +244,6 @@ export {
     LoginPage,
     AddOrder,
     OrderListing,
-    OutwardRequestListingWrapper,
     AddSaleOrderWrapper,
     EditSaleOrderWrapper,
     SaleOrderListingWrapper,

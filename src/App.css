@@ -95,6 +95,7 @@ body {
 .rts___nav___btn:hover {
     background-color: white !important;
     color: rgb(6, 6, 255);
+    padding: 6px 6px !important;
 }
 .rts___nav___btn___container {
     margin: 20px 5px;
@@ -105,7 +106,7 @@ body {
     padding: 0px !important;
 }
 .rts___tab {
-    padding: 10px 10px !important;
+    padding: 6px 6px !important;
     border-radius: 4px !important;
 }
 .rts___tabs {
@@ -117,6 +118,6 @@ body {
     font-size: 10px !important;
 }
 .rts___tab___selected {
-    background-color: #0a66b7 !important;
+    background-color: #03314e !important;
 }
 /* scroll tabs css */
