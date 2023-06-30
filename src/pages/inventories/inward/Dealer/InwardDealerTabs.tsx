@@ -36,7 +36,6 @@ const InwardDealerTabs = ({ columns, rows }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-
     const { page, rowsPerPage, isTableLoading } = outwardRequestState
 
     return (
@@ -54,7 +53,7 @@ const InwardDealerTabs = ({ columns, rows }: Props) => {
             {/* <div className="h-[40px] border flex gap-2 items-center   shadow rounded ">
                 {/* <TabScrollable tabs={tabs} />
                  */}
-               {/*  <TabScrollable
+            {/*  <TabScrollable
                     tabs={tabs}
                     // setActiveTabHandle={setActiveTabHandle}
                     active={activeTab}

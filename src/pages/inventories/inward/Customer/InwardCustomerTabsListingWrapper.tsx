@@ -156,8 +156,6 @@ const rows = [
     },
 ]
 
-
-
 const InwardCustomerTabsListingWrapper = () => {
     // const vendorState: any = useSelector((state: RootState) => state.vendor);
 
@@ -201,10 +199,7 @@ const InwardCustomerTabsListingWrapper = () => {
     return (
         <>
             {/* <SideNavLayout> */}
-                <OutwardRequestListing
-                    columns={columns}
-                    rows={rows}
-                />
+            <OutwardRequestListing columns={columns} rows={rows} />
             {/* </SideNavLayout> */}
         </>
     )

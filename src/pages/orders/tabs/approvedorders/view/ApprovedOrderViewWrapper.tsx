@@ -21,11 +21,7 @@ const ApprovedOrderViewWrapper = () => {
         (state: RootState) => state?.order
     )
 
-    return (
-    
-            <OrderView items={selectedItem} />
-       
-    )
+    return <OrderView items={selectedItem} />
 }
 
 export default ApprovedOrderViewWrapper

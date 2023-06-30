@@ -130,7 +130,7 @@ const InventoryListingWrapper = () => {
 
     return (
         <>
-                <InventoryListing columns={columns} rows={items} tabs={tabs} />
+            <InventoryListing columns={columns} rows={items} tabs={tabs} />
         </>
     )
 }

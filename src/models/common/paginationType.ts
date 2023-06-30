@@ -1,4 +1,4 @@
-import { IconType } from "react-icons"
+import { IconType } from 'react-icons'
 
 export type PaginationType = {
     limit: number
@@ -18,7 +18,6 @@ export type PaginationType = {
     orderByValue: number
     isPaginationRequired?: boolean
 }
-
 
 // |-- Types --|
 export type Tabs = {

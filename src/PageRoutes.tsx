@@ -331,56 +331,47 @@ const PageRoutes = () => {
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
 
-                    <Route path="/orders" element={<Order />} >
-                    <Route path="/orders/all" element={<OrderListing />} />
-                    <Route
-                        path="/orders/view/:id"
-                        element={<OrderViewWrapper />}
-                    />
-                    <Route path="/orders/add-order" element={<AddOrder />} />
-                    <Route
-                        path="/orders/approved-orders"
-                        element={<ApprovedOrderListing />}
-                    />
-                     <Route
-                        path="/orders/fresh-orders"
-                        element={<DummyOrderTab />}
-                    />
-                    <Route
-                        path="/orders/delivered"
-                        element={<DummyOrderTab />}
-                    />
-                    <Route
-                        path="/orders/door-cancled"
-                        element={<DummyOrderTab />}
-                    /> 
-                    <Route
-                        path="/orders/hold"
-                        element={<DummyOrderTab />}
-                    /> 
-                    <Route
-                        path="/orders/psc"
-                        element={<DummyOrderTab />}
-                    /> 
-                    <Route
-                        path="/orders/una"
-                        element={<DummyOrderTab />}
-                    /> 
-                    <Route
-                        path="/orders/pnd"
-                        element={<DummyOrderTab />}
-                    /> 
-                    <Route
-                        path="/orders/urgent"
-                        element={<DummyOrderTab />}
-                    />
-                    <Route
-                        path="/orders/non-actions"
-                        element={<DummyOrderTab />}
-                    />
-                    
-
-
+                    <Route path="/orders" element={<Order />}>
+                        <Route path="/orders/all" element={<OrderListing />} />
+                        <Route
+                            path="/orders/view/:id"
+                            element={<OrderViewWrapper />}
+                        />
+                        <Route
+                            path="/orders/add-order"
+                            element={<AddOrder />}
+                        />
+                        <Route
+                            path="/orders/approved-orders"
+                            element={<ApprovedOrderListing />}
+                        />
+                        <Route
+                            path="/orders/fresh-orders"
+                            element={<DummyOrderTab />}
+                        />
+                        <Route
+                            path="/orders/delivered"
+                            element={<DummyOrderTab />}
+                        />
+                        <Route
+                            path="/orders/door-cancled"
+                            element={<DummyOrderTab />}
+                        />
+                        <Route
+                            path="/orders/hold"
+                            element={<DummyOrderTab />}
+                        />
+                        <Route path="/orders/psc" element={<DummyOrderTab />} />
+                        <Route path="/orders/una" element={<DummyOrderTab />} />
+                        <Route path="/orders/pnd" element={<DummyOrderTab />} />
+                        <Route
+                            path="/orders/urgent"
+                            element={<DummyOrderTab />}
+                        />
+                        <Route
+                            path="/orders/non-actions"
+                            element={<DummyOrderTab />}
+                        />
                     </Route>
                     <Route
                         path="/approved-orders/view/:id"

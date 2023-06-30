@@ -23,7 +23,6 @@ import { useGetOrderQuery } from 'src/services/OrderService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
-
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -35,7 +34,6 @@ import {
     setTotalItems,
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
-
 
 const OrderListing = () => {
     // Hooks
@@ -155,60 +153,53 @@ const OrderListing = () => {
     ]
 
     return (
-       
-        
-            <div className="px-4 h-[calc(100vh-55px)]  ">
-                <div className="flex justify-between items-center h-[45px]">
-                    <ATMPageHeading> Order </ATMPageHeading>
-                </div>                
+        <div className="px-4 h-[calc(100vh-55px)]  ">
+            <div className="flex justify-between items-center h-[45px]">
+                <ATMPageHeading> Order </ATMPageHeading>
+            </div>
 
-                <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
-                    {/*Table Header */}
-                    <ATMTableHeader
-                        searchValue={searchValue}
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+                {/*Table Header */}
+                <ATMTableHeader
+                    searchValue={searchValue}
+                    page={page}
+                    rowCount={totalItems}
+                    rowsPerPage={rowsPerPage}
+                    rows={items}
+                    onRowsPerPageChange={(newValue) =>
+                        dispatch(setRowsPerPage(newValue))
+                    }
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    isFilter
+                    isRefresh
+                    onFilterDispatch={() => dispatch(setFilterValue([]))}
+                />
+
+                {/* Table */}
+                <div className="grow overflow-auto  ">
+                    <ATMTable
+                        columns={columns}
+                        rows={items}
+                        // isCheckbox={true}
+                        selectedRows={selectedRows}
+                        onRowSelect={(selectedRows) =>
+                            setSelectedRows(selectedRows)
+                        }
+                        isLoading={isTableLoading}
+                    />
+                </div>
+
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
+                    <ATMPagination
                         page={page}
                         rowCount={totalItems}
-                        rowsPerPage={rowsPerPage}
                         rows={items}
-                        onRowsPerPageChange={(newValue) =>
-                            dispatch(setRowsPerPage(newValue))
-                        }
-                        onSearch={(newValue) =>
-                            dispatch(setSearchValue(newValue))
-                        }
-                        isFilter
-                        isRefresh
-                        onFilterDispatch={() => dispatch(setFilterValue([]))}
+                        rowsPerPage={rowsPerPage}
+                        onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />
-
-                    {/* Table */}
-                    <div className="grow overflow-auto  ">
-                        <ATMTable
-                            columns={columns}
-                            rows={items}
-                            // isCheckbox={true}
-                            selectedRows={selectedRows}
-                            onRowSelect={(selectedRows) =>
-                                setSelectedRows(selectedRows)
-                            }
-                            isLoading={isTableLoading}
-                        />
-                    </div>
-
-                    <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
-                        <ATMPagination
-                            page={page}
-                            rowCount={totalItems}
-                            rows={items}
-                            rowsPerPage={rowsPerPage}
-                            onPageChange={(newPage) =>
-                                dispatch(setPage(newPage))
-                            }
-                        />
-                    </div>
                 </div>
             </div>
-        
+        </div>
     )
 }
 

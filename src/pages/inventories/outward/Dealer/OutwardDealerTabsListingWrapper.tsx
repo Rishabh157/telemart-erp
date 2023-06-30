@@ -155,8 +155,6 @@ const rows = [
     },
 ]
 
-
-
 const OutwardDealerTabsListingWrapper = () => {
     // const vendorState: any = useSelector((state: RootState) => state.vendor);
 
@@ -200,10 +198,7 @@ const OutwardDealerTabsListingWrapper = () => {
     return (
         <>
             {/* <SideNavLayout> */}
-                <OutwardRequestListing
-                    columns={columns}
-                    rows={rows}
-                />
+            <OutwardRequestListing columns={columns} rows={rows} />
             {/* </SideNavLayout> */}
         </>
     )
