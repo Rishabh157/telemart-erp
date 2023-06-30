@@ -984,7 +984,7 @@ const CallerPage: React.FC<Props> = ({
             </div>
 
             {/* Disposition Section  */}
-            <div className="grid grid-cols-12 items-center border-[1px] px-3 pb-2 mt-1 border-grey-700 z-50">
+            <div className="grid grid-cols-12 items-center border-[1px] px-3 pb-6 mt-1 border-grey-700 z-50">
                 <div className="col-span-2 px-3">
                     <ATMSelectSearchable
                         required
@@ -1029,7 +1029,7 @@ const CallerPage: React.FC<Props> = ({
 
             <div className="border-[1px] pb-2 mt-1 border-grey-700">
                 <ATMTable
-                    headerClassName="bg-[#87527c]"
+                    headerClassName="bg-[#87527c] py-2 text-white"
                     columns={column}
                     rows={rows}
                 />

@@ -88,52 +88,56 @@ const CallerPageWrapper = () => {
             field: 'order',
             headerName: 'ORDER NO',
             flex: 'flex-[3_3_0%]',
-            align: 'center',
-            renderCell: (row: CallerResponse) => <span> {row._id} </span>,
+            align: 'start',
+            renderCell: (row: CallerResponse) => <span> {row.orderFor} </span>,
         },
         {
             field: 'enq',
             headerName: 'ENQ NO',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            renderCell: (row: CallerResponse) => <span> {row.emailId} </span>,
+            renderCell: (row: CallerResponse) => <span> {row.didNo} </span>,
         },
         {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            renderCell: (row: CallerResponse) => <span> {row.emailId} </span>,
+            renderCell: (row: CallerResponse) => (
+                <span> {row.flagStatus} </span>
+            ),
         },
         {
             field: 'name',
             headerName: 'NAME',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            renderCell: (row: CallerResponse) => <span> {row.emailId} </span>,
+            renderCell: (row: CallerResponse) => <span> {row.agentName} </span>,
         },
         {
             field: 'city',
             headerName: 'CITY',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            renderCell: (row: CallerResponse) => <span> {row.countryId} </span>,
+            renderCell: (row: CallerResponse) => (
+                <span> {row.districtLabel} </span>
+            ),
         },
         {
             field: 'pincode',
             headerName: 'PINCODE',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            renderCell: (row: CallerResponse) => <span> {row.pincodeId} </span>,
+            renderCell: (row: CallerResponse) => (
+                <span> {row.pincodeLabel} </span>
+            ),
         },
         {
-            field: 'phone',
+            field: 'alternateNo',
             headerName: 'PHONE',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            renderCell: (row: CallerResponse) => (
-                <span> {row.alternateNo} </span>
-            ),
+            renderCell: (row: CallerResponse) => <span> {row.mobileNo} </span>,
         },
         {
             field: 'disposition',
@@ -141,7 +145,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             renderCell: (row: CallerResponse) => (
-                <span> {row.dispositionLevelTwoId} </span>
+                <span> {row.dispositionLevelTwoLabel} </span>
             ),
         },
         {
@@ -156,7 +160,7 @@ const CallerPageWrapper = () => {
         {
             field: 'shippingCharge',
             headerName: 'SHIPPING CHARGE',
-            flex: 'flex-[3_3_0%]',
+            flex: 'flex-[4_4_0%]',
             align: 'center',
             renderCell: (row: CallerResponse) => (
                 <span> {row.deliveryCharges} </span>
@@ -167,16 +171,16 @@ const CallerPageWrapper = () => {
             headerName: 'DISCOUNT',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            renderCell: (row: CallerResponse) => (
-                <span> {row.deliveryCharges} </span>
-            ),
+            renderCell: (row: CallerResponse) => <span> null </span>,
         },
         {
             field: 'amount',
             headerName: 'AMOUNT',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            renderCell: (row: CallerResponse) => <span> {row.price} </span>,
+            renderCell: (row: CallerResponse) => (
+                <span> {row.totalAmount} </span>
+            ),
         },
         {
             field: 'remarks',
@@ -233,12 +237,8 @@ const CallerPageWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isCallerLoading, isCallerFetching, callerListingData])
 
-
-
     const [AddCallerForm] = useAddCallerFormMutation()
     const [UpdateCallerForm] = useUpdateCallerFormMutation()
-    // let DidNO = '452001'
-    // let MobileNO = '9893432611'
 
     const initialValues: FormInitialValues = {
         agentName: 'Vinod',
@@ -324,8 +324,12 @@ const CallerPageWrapper = () => {
         emailId: string().required('email is required'),
         // medicalIssue: array().of(string()),
         remark: string(),
-        dispositionLevelTwoId: string(),
-        dispositionLevelThreeId: string(),
+        dispositionLevelTwoId: string().required(
+            'disposition level one is required'
+        ),
+        dispositionLevelThreeId: string().required(
+            'disposition level two is required'
+        ),
         alternateNo: string()
             .min(10, 'mobile number is not valid')
             .max(10, 'mobile number is not valid'),

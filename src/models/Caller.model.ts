@@ -1,6 +1,10 @@
 export type CallerResponse = {
+    _id: string
     didNo: string
     ageGroup: string
+    agentId: string
+    agentName: string
+    comanyId: string
     alternateNo: string
     mobileNo: string
     autoFillingShippingAddress: string
@@ -15,8 +19,9 @@ export type CallerResponse = {
     schemeId: string
     schemeName: string
     pincodeId: string
-    pincodeSecondId: string
-    areaId: null
+    pincodeName: string
+    pincodeSecondId: null
+    areaId: string
     emailId: string
     flagStatus: string
     gender: string
@@ -43,12 +48,21 @@ export type CallerResponse = {
     totalAmount: number
     dispositionLevelTwoId: string
     dispositionLevelThreeId: string
-    isDeleted: boolean
-    isActive: boolean
-    _id: string
+    isDeleted: false
+    isActive: true
     createdAt: string
     updatedAt: string
     __v: number
+    dispositionLevelTwoLabel: string
+    dispositionLevelThreeLabel: string
+    countryLabel: string
+    stateLabel: string
+    schemeLabel: string
+    districtLabel: string
+    tehsilLabel: string
+    pincodeLabel: string
+    areaLabel: string
+    agentDistrictLabel: string
 }
 
 export type CallerFormBody = {
