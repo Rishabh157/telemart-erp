@@ -74,7 +74,6 @@ import {
     InventoryListingWrapper,
     AddOrder,
     OrderListing,
-    OutwardRequestListingWrapper,
     AddSaleOrderWrapper,
     EditSaleOrderWrapper,
     SaleOrderListingWrapper,
@@ -200,6 +199,13 @@ import {
     setUserData,
 } from './redux/slices/authSlice'
 import { v4 as uuidv4 } from 'uuid'
+import InventorisTabsLayout from './pages/inventories/tabs'
+import OutwardDealerTabsListingWrapper from './pages/inventories/outward/Dealer/OutwardDealerTabsListingWrapper'
+import OutwardTabs from './pages/inventories/outward'
+import OutwardCustomerTabsListingWrapper from './pages/inventories/outward/Customer/OutwardCustomerTabsListingWrapper'
+import InwardsTabs from './pages/inventories/inward'
+import InwardDealerTabsListingWrapper from './pages/inventories/inward/Dealer/InwardDealerTabsListingWrapper'
+import InwardCustomerTabsListingWrapper from './pages/inventories/inward/Customer/InwardCustomerTabsListingWrapper'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -237,6 +243,88 @@ const PageRoutes = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="*" element={<PageNotFound />} />
+                    <Route
+                        path="/inventories"
+                        element={<InventorisTabsLayout />}
+                    >
+                        <Route
+                            index
+                            // path=""
+                            element={<InventoryListingWrapper />}
+                        />
+                        <Route
+                            path="outward-inventories"
+                            element={<OutwardTabs />}
+                        >
+                            <Route
+                                path="dealer"
+                                element={<OutwardDealerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="customer"
+                                element={<OutwardCustomerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="rtv"
+                                element={<OutwardDealerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="warehoue"
+                                element={<OutwardDealerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="sample"
+                                element={<OutwardDealerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="ecom"
+                                element={<OutwardDealerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="replacement"
+                                element={<OutwardDealerTabsListingWrapper />}
+                            />
+                        </Route>
+                        <Route
+                            path="inward-inventories"
+                            element={<InwardsTabs />}
+                        >
+                            <Route
+                                path="dealer"
+                                element={<InwardDealerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="customer"
+                                element={<InwardCustomerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="rtv"
+                                element={<InwardDealerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="warehoue"
+                                element={<InwardDealerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="sample"
+                                element={<InwardDealerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="ecom"
+                                element={<InwardDealerTabsListingWrapper />}
+                            />
+                            <Route
+                                path="replacement"
+                                element={<InwardDealerTabsListingWrapper />}
+                            />
+                        </Route>
+
+                        <Route
+                            path="inward-inventory/add"
+                            element={<InwardInventoryWrapper />}
+                        />
+                    </Route>
+
                     <Route path="/" element={<Auth />} />
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
@@ -330,14 +418,7 @@ const PageRoutes = () => {
                         path="/vendors/:vendorId/warehouse/:id"
                         element={<EditVendorWarehouseWrapper />}
                     />
-                    <Route
-                        path="/inventories"
-                        element={<InventoryListingWrapper />}
-                    />
-                    <Route
-                        path="/inventories/inward-inventory"
-                        element={<InwardInventoryWrapper />}
-                    />
+
                     <Route
                         path="/sale-order"
                         element={<SaleOrderListingWrapper />}
@@ -356,18 +437,6 @@ const PageRoutes = () => {
                         element={<EditSaleOrderWrapper />}
                     />
 
-                    <Route
-                        path="/outward-request"
-                        element={<OutwardRequestListingWrapper />}
-                    />
-                    {/* <Route
-                        path="dealers/add-warehouse"
-                        element={<AddWarehouseWrapper />}
-                    /> */}
-                    {/* <Route
-                        path="vendors/add-warehouse"
-                        element={<AddWarehouseWrapper />}
-                    /> */}
                     <Route
                         path="vendors/:dealerId/warehouse/add-warehouse"
                         element={<AddWarehouseWrapper />}
@@ -438,6 +507,7 @@ const PageRoutes = () => {
                             element={<DealerSupervisorTabWrapper />}
                         />
                     </Route>
+
                     <Route path="users" element={<UsersListingWrapper />} />
                     <Route
                         path="/users/add-user"

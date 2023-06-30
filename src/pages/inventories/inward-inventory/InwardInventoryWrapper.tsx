@@ -12,7 +12,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+// import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import InwardInventory from './InwardInventory'
 import { useGetAllCartonBoxQuery } from 'src/services/CartonBoxService'
 import { CartonBoxListResponse, WarehousesListResponse } from 'src/models'
@@ -72,12 +72,10 @@ const InwardInventoryWrapper = (props: Props) => {
         }
     }, [whData, whIsLoading, whIsFetching])
     return (
-        <SideNavLayout>
             <InwardInventory
                 cartonBoxOption={cartonBoxOption}
                 wareHouseOption={wareHouseOption}
             />
-        </SideNavLayout>
     )
 }
 

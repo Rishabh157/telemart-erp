@@ -19,7 +19,8 @@ const Header = () => {
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
         useState(true)
     const [company, setCompany] = useState(userData?.companyId)
-    const themeColor = JSON.parse(localStorage.getItem('themeColor') || '')
+    const color = localStorage.getItem('themeColor')
+    const themeColor = color ? JSON.parse(color) : ''
     const [siteMode, setSiteMode] = useState(themeColor)
     const { data } = useGetAllCompaniesQuery('')
     const [updaeCompany] = useUpdateCompanyByAdminMutation()

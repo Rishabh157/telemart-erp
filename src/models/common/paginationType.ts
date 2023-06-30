@@ -1,3 +1,5 @@
+import { IconType } from "react-icons"
+
 export type PaginationType = {
     limit: number
     searchValue: string
@@ -15,4 +17,12 @@ export type PaginationType = {
     orderBy: string
     orderByValue: number
     isPaginationRequired?: boolean
+}
+
+
+// |-- Types --|
+export type Tabs = {
+    label: string
+    icon: IconType
+    path?: string
 }
