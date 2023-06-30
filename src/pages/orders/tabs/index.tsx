@@ -9,9 +9,6 @@
 import React from 'react'
 
 // |-- External Dependencies --|
-import { BiBlock, BiMessageDetail } from 'react-icons/bi'
-import { useDispatch, useSelector } from 'react-redux'
-//import { IconType } from 'react-icons'
 import { MdOutbond } from 'react-icons/md'
 
 
@@ -19,9 +16,7 @@ import { MdOutbond } from 'react-icons/md'
 import ViewLayout from 'src/components/layouts/ViewLayout/ViewLayout'
 import { BreadcrumbType } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 
-// |-- Redux --|
-import {  setSearchValue } from 'src/redux/slices/orderSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
+
 
 const tabsData: any = [
 	{
@@ -32,7 +27,7 @@ const tabsData: any = [
 	{
 			label: 'Fresh Order',
 			icon: MdOutbond,
-			// path:'dealer'
+			 path:'fresh-orders'
 	},
 	{
 			label: 'Order Approval',
@@ -42,42 +37,42 @@ const tabsData: any = [
 	{
 			label: 'Delivered',
 			icon: MdOutbond,
-			// path:'/dealer'
+			path:'delivered'
 	},
 	{
-			label: 'Door Canceled',
+			label: 'Door Cancled',
 			icon: MdOutbond,
-			// path:'/dealer'
+			path:'door-cancled'
 	},
 	{
 			label: 'Hold',
 			icon: MdOutbond,
-			// path:'/dealer'
+			path:'hold'
 	},
 	{
 			label: 'PSC',
 			icon: MdOutbond,
-			// path:'/dealer'
+			path:'psc'
 	},
 	{
 			label: 'UNA',
 			icon: MdOutbond,
-			// path:'/dealer'
+			path:'una'
 	},
 	{
 			label: 'PND',
 			icon: MdOutbond,
-			// path:'/dealer'
+			path:'pnd'
 	},
 	{
 			label: 'Urgent',
 			icon: MdOutbond,
-			// path:'/dealer'
+			path:'urgent'
 	},
 	{
 			label: 'Non Actions',
 			icon: MdOutbond,
-			// path:'/dealer'
+			path:'non-actions'
 	},
 ]
 
@@ -91,13 +86,7 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const ViewOrder = () => {
-    const dispatch = useDispatch<AppDispatch>()
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const orderState: any = useSelector((state: RootState) => state.order)
-    const { page, rowsPerPage, items } = orderState
-    const { searchValue }: any = useSelector((state: RootState) => state.order)
-    
+const ViewOrder = () => {   
     return (
         <ViewLayout           
             tabs={tabsData} 

@@ -52,8 +52,9 @@ import InwardInventoryWrapper from './inventories/inward-inventory/InwardInvento
 import InventoryListingWrapper from './inventories/inventory/list/InventoryListingWrapper'
 import LoginPage from './login/LoginPage'
 import AddOrder from './orders/add/AddOrder'
-import Order from './orders'
-import OrderListing from './orders/OrderListing'
+import Order from './orders/tabs'
+import OrderListing from './orders/tabs/all/OrderListing'
+import DummyOrderTab from './orders/tabs/orderTab/DummyOrderTab'
 import AddSaleOrderWrapper from './saleOrder/add/AddSaleOrderWrapper'
 import EditSaleOrderWrapper from './saleOrder/edit/EditSaleOrderWrapper'
 import SaleOrderListingWrapper from './saleOrder/list/SaleOrderListingWrapper'
@@ -178,8 +179,8 @@ import ViewWebsiteTagsWrapper from './websites/website-tags/view/ViewWebsiteTags
 import ListDealerSupervisorTabWrapper from './dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
 import UserAccessWrapper from './userAccess/UserAccessWrapper'
-import ApprovedOrderListing from './approvedorders/ApprovedOrderListing'
-import ApprovedOrderViewWrapper from './approvedorders/view/ApprovedOrderViewWrapper'
+import ApprovedOrderListing from './orders/tabs/approvedorders/ApprovedOrderListing'
+import ApprovedOrderViewWrapper from './orders/tabs/approvedorders/view/ApprovedOrderViewWrapper'
 import EditDealerSchemeWrapper from './dealers/view/tabs/DealerSchemeTab/edit/EditDealerSchemeWrapper'
 import DealerListLedgerTabWrapper from './dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
 import AddVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Add/AddVendorWarehouseWrapper'
@@ -363,6 +364,7 @@ export {
     ViewInitialCallThreeWrappper,
     OrderViewWrapper,
     Order,
+    DummyOrderTab,
     InquiryViewWrapper,
     InquiryListingWrapper,
     InfluencerListingWrapper,

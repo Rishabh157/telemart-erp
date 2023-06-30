@@ -16,7 +16,6 @@ import { useNavigate } from 'react-router-dom'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import { OrderListResponse } from 'src/models'
@@ -156,7 +155,8 @@ const OrderListing = () => {
     ]
 
     return (
-        <SideNavLayout>
+       
+        
             <div className="px-4 h-[calc(100vh-55px)]  ">
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Order </ATMPageHeading>
@@ -208,7 +208,7 @@ const OrderListing = () => {
                     </div>
                 </div>
             </div>
-        </SideNavLayout>
+        
     )
 }
 
