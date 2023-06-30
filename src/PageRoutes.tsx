@@ -316,7 +316,7 @@ const PageRoutes = () => {
                         </Route>
 
                         <Route
-                            path="all/inward-inventory/add"
+                            path="inward-inventory/add"
                             element={<InwardInventoryWrapper />}
                         />
                     </Route>
