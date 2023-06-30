@@ -24,6 +24,7 @@ import { useGetOrderQuery } from 'src/services/OrderService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
+
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -35,6 +36,7 @@ import {
     setTotalItems,
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
+
 
 const OrderListing = () => {
     // Hooks
@@ -158,7 +160,7 @@ const OrderListing = () => {
             <div className="px-4 h-[calc(100vh-55px)]  ">
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Order </ATMPageHeading>
-                </div>
+                </div>                
 
                 <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                     {/*Table Header */}

@@ -52,6 +52,7 @@ import InwardInventoryWrapper from './inventories/inward-inventory/InwardInvento
 import InventoryListingWrapper from './inventories/list/InventoryListingWrapper'
 import LoginPage from './login/LoginPage'
 import AddOrder from './orders/add/AddOrder'
+import Order from './orders'
 import OrderListing from './orders/OrderListing'
 import OutwardRequestListingWrapper from './outwardRequest/list/OutwardRequestListingWrapper'
 import AddSaleOrderWrapper from './saleOrder/add/AddSaleOrderWrapper'
@@ -363,6 +364,7 @@ export {
     ViewDispositionThreeWrappper,
     ViewInitialCallThreeWrappper,
     OrderViewWrapper,
+    Order,
     InquiryViewWrapper,
     InquiryListingWrapper,
     InfluencerListingWrapper,

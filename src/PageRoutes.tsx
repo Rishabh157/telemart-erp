@@ -166,6 +166,7 @@ import {
     ViewDispositionThreeWrappper,
     ViewInitialCallThreeWrappper,
     OrderViewWrapper,
+    Order,
     InquiryViewWrapper,
     InquiryListingWrapper,
     InfluencerListingWrapper,
@@ -240,17 +241,30 @@ const PageRoutes = () => {
                     <Route path="/" element={<Auth />} />
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
-                    <Route path="/orders" element={<OrderListing />} />
-
+                    <Route path="/orders" element={<Order />} />
+                    <Route path="/orders/all" element={<OrderListing />} />
                     <Route
                         path="/orders/view/:id"
                         element={<OrderViewWrapper />}
                     />
                     <Route path="/orders/add-order" element={<AddOrder />} />
                     <Route
-                        path="/approved-orders"
+                        path="/orders/approved-orders"
                         element={<ApprovedOrderListing />}
                     />
+                    {/* <Route
+                        path="/orders/approved-orders"
+                        element={<ApprovedOrderListing />}
+                    />
+                    <Route
+                        path="/orders/approved-orders"
+                        element={<ApprovedOrderListing />}
+                    />
+                    <Route
+                        path="/orders/approved-orders"
+                        element={<ApprovedOrderListing />}
+                    /> */}
+
                     <Route
                         path="/approved-orders/view/:id"
                         element={<ApprovedOrderViewWrapper />}
