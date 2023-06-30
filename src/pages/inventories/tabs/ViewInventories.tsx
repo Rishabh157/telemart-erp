@@ -15,7 +15,7 @@ const tabs = [
     {
         label: 'Inventories',
         icon: BsArrowRepeat,
-        path: '/',
+        path: '/inventories',
     },
     {
         label: 'Outward Inventories',
