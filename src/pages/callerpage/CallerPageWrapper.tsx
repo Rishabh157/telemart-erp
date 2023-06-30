@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, {  useEffect } from 'react'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from 'react-router-dom'
 import { object, string } from 'yup'
@@ -296,6 +296,7 @@ const CallerPageWrapper = () => {
 
     // Form Validation Schema
     const validationSchema = object({
+        productGroupId: string().required('product group id is required'),
         // DELEVERY ADDRESS SELECT OPTIONS
         countryId: string(),
         pincodeId: string(),
@@ -321,7 +322,7 @@ const CallerPageWrapper = () => {
         gender: string(),
         orderFor: string(),
         ageGroup: string(),
-        emailId: string().required('email is required'),
+        emailId: string().email('invalid email'),
         // medicalIssue: array().of(string()),
         remark: string(),
         dispositionLevelTwoId: string().required(

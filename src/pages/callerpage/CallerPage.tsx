@@ -364,16 +364,15 @@ const CallerPage: React.FC<Props> = ({
             <Navbar />
 
             <div className="grid grid-cols-12 mt-1 px-2">
-                <div className="col-span-1 items-center mt-2 text-sm font-semibold">
+                <div className="col-span-2 items-center mt-3 text-sm font-semibold">
                     Search By Scheme
                 </div>
-                <div className="col-span-5 px-2">
+                <div className="col-span-5 px-2 pb-6">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
                             size="xs"
                             name="productGroupId"
                             value={values.productGroupId || ''}
-                            // isSubmitting
                             options={firstSchemesOptionsList || []}
                             onChange={(e) => {
                                 setFieldValue('schemeId', e)
@@ -383,6 +382,7 @@ const CallerPage: React.FC<Props> = ({
                                     quantity: 1,
                                 }))
                             }}
+                            // isSubmitting
                         />
                     </div>
                 </div>
@@ -674,7 +674,7 @@ const CallerPage: React.FC<Props> = ({
                     />
                     <ATMTextField
                         extraClassField="mt-0"
-                        label="Street/Sector/Building/Appartment"
+                        label="Street/Sector/Building/ Appartment"
                         size="xs"
                         LabelDirection="horizontal"
                         // isSubmitting
@@ -952,8 +952,8 @@ const CallerPage: React.FC<Props> = ({
 
                 <div className="col-span-6 py-2 px-8 border-r-[1px]">
                     <div className="grid grid-cols-12">
-                        <div className="col-span-6"></div>
-                        <div className="col-span-6 bg-slate-300 px-6 border-[1px]">
+                        <div className="col-span-3"></div>
+                        <div className="col-span-9 bg-slate-300 px-6 border-[1px]">
                             <div className="-mt-6 p-4">
                                 <ATMRadioButton
                                     label="Payment Mode :"
