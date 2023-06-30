@@ -10,7 +10,7 @@ import React, { useState } from 'react'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { Tabs } from '../outwardRequest/list/OutwardRequestListingWrapper'
+import { Tabs } from 'src/models/common/paginationType'
 import ChangePassword from './ChangePassword'
 import ProfileDetails from './ProfileDetails'
 

@@ -12,7 +12,7 @@ import {
     MdWeb,
 } from 'react-icons/md'
 import { GrCompliance, GrNotes } from 'react-icons/gr'
-import { IoCallOutline, IoDocumentTextOutline } from 'react-icons/io5'
+import { IoCallOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { BiBox, BiPurchaseTagAlt } from 'react-icons/bi'
 import { IconType } from 'react-icons'
@@ -62,11 +62,11 @@ export const navigation: NavItemType[] = [
         icon: CgNotes,
         path: '/sale-order',
     },
-    {
-        label: 'Outward Request',
-        icon: IoDocumentTextOutline,
-        path: '/outward-request',
-    },
+    // {
+    //     label: 'Outward Request',
+    //     icon: IoDocumentTextOutline,
+    //     path: '/outward-request',
+    // },
     {
         label: 'ASR',
         icon: GrCompliance,

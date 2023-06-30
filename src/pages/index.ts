@@ -49,12 +49,11 @@ import DealerOrderLedgerListTabWrapper from './dealers/view/tabs/DealerOrderLedg
 import AddDealerWarehouseWarpper from './dealers/view/tabs/DealerWarehouseTab/Add/AddDealerWarehouseWarpper'
 import EditDealerWarehouseWrapper from './dealers/view/tabs/DealerWarehouseTab/Edit/EditDealerWarehouseWrapper'
 import InwardInventoryWrapper from './inventories/inward-inventory/InwardInventoryWrapper'
-import InventoryListingWrapper from './inventories/list/InventoryListingWrapper'
+import InventoryListingWrapper from './inventories/inventory/list/InventoryListingWrapper'
 import LoginPage from './login/LoginPage'
 import AddOrder from './orders/add/AddOrder'
 import Order from './orders'
 import OrderListing from './orders/OrderListing'
-import OutwardRequestListingWrapper from './outwardRequest/list/OutwardRequestListingWrapper'
 import AddSaleOrderWrapper from './saleOrder/add/AddSaleOrderWrapper'
 import EditSaleOrderWrapper from './saleOrder/edit/EditSaleOrderWrapper'
 import SaleOrderListingWrapper from './saleOrder/list/SaleOrderListingWrapper'
@@ -252,7 +251,6 @@ export {
     LoginPage,
     AddOrder,
     OrderListing,
-    OutwardRequestListingWrapper,
     AddSaleOrderWrapper,
     EditSaleOrderWrapper,
     SaleOrderListingWrapper,

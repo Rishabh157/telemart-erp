@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:OutwardRequestListingWrapper.tsx
+// Filename:OutwardDealerTabsListingWrapper.tsx
 // Type: List Component
 // Last Updated: JUNE 27, 2023
 // Project: TELIMART - Front End
@@ -11,16 +11,15 @@ import React from 'react'
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
 // import { HiDotsHorizontal } from 'react-icons/hi'
-import { MdOutbond } from 'react-icons/md'
+// import { MdOutbond } from 'react-icons/md'
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { OutwardRequestListResponse } from 'src/models/OutwardRequest.model'
 // import { useGetVendorsQuery } from "src/services/VendorServices";
-import OutwardRequestListing from './OutwardRequestListing'
+import OutwardRequestListing from './OutwardCustomerTabs'
 
 // |-- Redux --|
 // import {
@@ -157,45 +156,9 @@ const rows = [
     },
 ]
 
-const tabs: Tabs[] = [
-    {
-        label: 'Dealer',
-        icon: MdOutbond,
-        // path:'/dealer'
-    },
-    {
-        label: 'Customer',
-        icon: MdOutbond,
-        // path:'/dealer'
-    },
-    {
-        label: 'RTV',
-        icon: MdOutbond,
-        // path:'/dealer'
-    },
-    {
-        label: 'Warehouse',
-        icon: MdOutbond,
-        // path:'/dealer'
-    },
-    {
-        label: 'Sample',
-        icon: MdOutbond,
-        // path:'/dealer'
-    },
-    {
-        label: 'E-comm',
-        icon: MdOutbond,
-        // path:'/dealer'
-    },
-    {
-        label: 'Replacements/Repackaging',
-        icon: MdOutbond,
-        // path:'/dealer'
-    },
-]
 
-const OutwardRequestListingWrapper = () => {
+
+const OutwardCustomerTabsListingWrapper = () => {
     // const vendorState: any = useSelector((state: RootState) => state.vendor);
 
     // const {  page, rowsPerPage } = vendorState;
@@ -237,15 +200,14 @@ const OutwardRequestListingWrapper = () => {
 
     return (
         <>
-            <SideNavLayout>
+            {/* <SideNavLayout> */}
                 <OutwardRequestListing
                     columns={columns}
                     rows={rows}
-                    tabs={tabs}
                 />
-            </SideNavLayout>
+            {/* </SideNavLayout> */}
         </>
     )
 }
 
-export default OutwardRequestListingWrapper
+export default OutwardCustomerTabsListingWrapper
