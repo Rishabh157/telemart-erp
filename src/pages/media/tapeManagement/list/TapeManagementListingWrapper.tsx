@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, {  useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,7 +24,6 @@ import {
 } from 'src/services/media/TapeManagementServices'
 import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'

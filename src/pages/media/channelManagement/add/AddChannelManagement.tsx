@@ -12,7 +12,6 @@ import React, { useEffect } from 'react'
 import { FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 
-
 // |-- Internal Dependencies --|
 import { FormInitialValues } from './AddChannelManagementWrapper'
 import ATMBreadCrumbs, {
@@ -26,13 +25,11 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { useGetAllStateByCountryQuery } from 'src/services/StateService'
 import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-
 
 // |-- Types --|
 type Props = {

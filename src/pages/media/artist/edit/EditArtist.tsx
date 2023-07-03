@@ -20,7 +20,6 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditArtistWrapper'
 
-
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 

@@ -24,7 +24,6 @@ import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServi
 import { SchemeListResponse } from 'src/models/scheme.model'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
 
-
 // |-- Redux--|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

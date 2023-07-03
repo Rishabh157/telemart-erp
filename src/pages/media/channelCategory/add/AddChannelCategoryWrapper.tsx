@@ -6,8 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState }  from 'react'
-
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,11 +20,9 @@ import MediaLayout from '../../MediaLayout'
 import AddChannelGroup from './AddChannelCategory'
 import { useAddChannelCategoryMutation } from 'src/services/media/ChannelCategoriesServices'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-
 
 // |-- Types --|
 export type FormInitialValues = {

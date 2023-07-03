@@ -24,7 +24,6 @@ import AddChannelGroup from './AddChannelGroup'
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 export type FormInitialValues = {
     groupName: string

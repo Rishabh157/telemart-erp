@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 // import { useNavigate } from 'react-router-dom'
@@ -49,7 +49,6 @@ import {
     setTotalItems,
     setItems as setCallItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
-
 
 // |-- Types --|
 export type FormInitialValues = {

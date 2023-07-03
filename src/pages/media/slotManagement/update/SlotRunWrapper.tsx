@@ -7,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
@@ -26,7 +26,6 @@ import {
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
-
 
 // |-- Types --|
 type FormInitialValues = {

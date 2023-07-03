@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom'
 import { object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
-
 // |-- Internal Dependencies --|
 import MediaLayout from '../../MediaLayout'
 import { useAddChannelMutation } from 'src/services/media/ChannelManagementServices'
@@ -28,7 +27,6 @@ import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 import { LanguageListResponse } from 'src/models'
 import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
-
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

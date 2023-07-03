@@ -24,7 +24,6 @@ import {
 import { setSelectedArtist } from 'src/redux/slices/media/artist'
 import MediaLayout from '../../MediaLayout'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

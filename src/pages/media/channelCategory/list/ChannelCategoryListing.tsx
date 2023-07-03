@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,7 +28,6 @@ import {
     setSearchValue,
 } from 'src/redux/slices/media/channelCategorySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {

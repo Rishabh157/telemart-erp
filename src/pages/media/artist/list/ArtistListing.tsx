@@ -12,7 +12,6 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -29,7 +28,6 @@ import {
     setSearchValue,
 } from 'src/redux/slices/media/artist'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {

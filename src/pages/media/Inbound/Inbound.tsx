@@ -1,4 +1,3 @@
-
 /// ==============================================
 // Filename:Inbound.tsx
 // Type: List Component
@@ -7,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Divider } from '@mui/material'
@@ -34,14 +33,12 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
 import { AreaListResponse } from 'src/models/Area.model'
 
-
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
 import { setTotalItems, setSearchValue } from 'src/redux/slices/schemeSlice'
 import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
-
 
 // |-- Types --|
 type Props = {

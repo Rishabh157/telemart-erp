@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, {  useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -38,7 +38,6 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/media/tapeManagementSlice'
 import { setLanguage } from 'src/redux/slices/languageSlice'
 import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
-
 
 // |-- Types --|
 export type FormInitialValues = {

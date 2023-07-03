@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'

@@ -33,7 +33,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/artist'
 
-
 const ArtistListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()

@@ -29,7 +29,6 @@ import {
 } from 'src/redux/slices/media/channelGroupSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 // |-- Types --|
 type Props = {
     columns: any[]

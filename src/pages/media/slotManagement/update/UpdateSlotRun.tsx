@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, {  useState }  from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Divider } from '@mui/material'
@@ -22,7 +22,6 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
-
 
 const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
     //const [switch, setSwitch] = useState<boolean>(false)

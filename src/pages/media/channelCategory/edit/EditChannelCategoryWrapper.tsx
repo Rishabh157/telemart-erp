@@ -6,8 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect  }  from 'react'
-
+import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useSelector, useDispatch } from 'react-redux'
@@ -23,7 +22,6 @@ import {
     useGetChannelCategoryByIdQuery,
     useUpdateChannelCategoryMutation,
 } from 'src/services/media/ChannelCategoriesServices'
-
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'

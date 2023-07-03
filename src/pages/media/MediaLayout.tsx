@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, {  useState }  from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { BsPersonHeart } from 'react-icons/bs'
@@ -18,7 +18,6 @@ import { SiGoogletagmanager } from 'react-icons/si'
 import { MdEmojiEvents, MdViewTimeline } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineSetting } from 'react-icons/ai'
-
 
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
