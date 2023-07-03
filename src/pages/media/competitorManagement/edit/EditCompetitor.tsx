@@ -1,5 +1,18 @@
+/// ==============================================
+// Filename:EditCompitor.tsx
+// Type: Edit Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,9 +22,11 @@ import { FormInitialValues } from './EditCompetitorWrapper'
 import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
 
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean

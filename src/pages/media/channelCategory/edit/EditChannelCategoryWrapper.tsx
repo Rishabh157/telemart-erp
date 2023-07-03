@@ -1,19 +1,36 @@
-import React, { useState, useEffect } from 'react'
-import MediaLayout from '../../MediaLayout'
+/// ==============================================
+// Filename:EditChannelCategoryWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useState, useEffect  }  from 'react'
+
+
+// |-- External Dependencies --|
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
+import { Formik, FormikProps } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 import { object, string } from 'yup'
+
+// |-- Internal Dependencies --|
+import MediaLayout from '../../MediaLayout'
 import { showToast } from 'src/utils'
-import { Formik, FormikProps } from 'formik'
 import EditChannelGroup from './EditChannelCategory'
 import {
     useGetChannelCategoryByIdQuery,
     useUpdateChannelCategoryMutation,
 } from 'src/services/media/ChannelCategoriesServices'
+
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/media/channelCategorySlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 export type FormInitialValues = {
     channelCategory: string
     companyId: string

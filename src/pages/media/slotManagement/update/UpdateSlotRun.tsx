@@ -1,15 +1,28 @@
-import React, { useState } from 'react'
+/// ==============================================
+// Filename:UpdateSlotRun.tsx
+// Type: Update Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, {  useState }  from 'react'
+
+// |-- External Dependencies --|
+import { Divider } from '@mui/material'
+import { CircularProgress } from '@mui/material'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
-import { Divider } from '@mui/material'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
-import { CircularProgress } from '@mui/material'
+
 
 const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
     //const [switch, setSwitch] = useState<boolean>(false)

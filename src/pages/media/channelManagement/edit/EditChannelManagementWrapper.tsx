@@ -1,18 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:EditChannelManagementWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+
+// |-- External Dependencies --|
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { object, string } from 'yup'
+import { Formik, FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import MediaLayout from '../../MediaLayout'
 import {
     useGetChannelByIdQuery,
     useUpdateChannelMutation,
 } from 'src/services/media/ChannelManagementServices'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { useNavigate, useParams } from 'react-router-dom'
-import { object, string } from 'yup'
 import { showToast } from 'src/utils'
-import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { CountryListResponse } from 'src/models/Country.model'
@@ -21,8 +32,14 @@ import { LanguageListResponse } from 'src/models'
 import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import EditChannelManagement from './EditChannelManagement'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { setSelectedItem } from 'src/redux/slices/media/channelManagementSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 export type FormInitialValues = {
     channelName: string
     address: string

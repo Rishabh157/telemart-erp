@@ -1,5 +1,20 @@
+/// ==============================================
+// Filename:AddTapeManagement.tsx
+// Type: Add Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, {  useState }  from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
-import React, { useState } from 'react'
+import { HiPlus } from 'react-icons/hi'
+import { useSelector, useDispatch } from 'react-redux'
+import { MdDeleteOutline } from 'react-icons/md'
+
+// |-- Internal Dependencies --|
 import { FormInitialValues } from './AddTapeManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -9,15 +24,16 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { HiPlus } from 'react-icons/hi'
+
+
+// |-- Redux --|
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
-import { useSelector, useDispatch } from 'react-redux'
-import { MdDeleteOutline } from 'react-icons/md'
 import { RootState, AppDispatch } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean

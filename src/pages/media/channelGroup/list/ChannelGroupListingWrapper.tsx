@@ -1,15 +1,22 @@
+/// ==============================================
+// Filename:ChannelGroupListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ChannelGroupListResponse } from 'src/models/ChannelGroup.model'
 import ChannelGroupListing from './ChannelGroupListing'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/media/channelGroupSlice'
 import {
     useDeleteChannelGroupMutation,
     useGetPaginationChannelGroupQuery,
@@ -18,6 +25,14 @@ import MediaLayout from 'src/pages/media/MediaLayout'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/media/channelGroupSlice'
 
 const ChannelGroupListingWrapper = () => {
     const navigate = useNavigate()

@@ -1,15 +1,31 @@
+/// ==============================================
+// Filename:AddChannelGroupWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Formik, FormikProps } from 'formik'
+import { object, string } from 'yup'
+
+// |-- Internal Dependencies --|
 import MediaLayout from '../../MediaLayout'
 import { useAddChannelGroupMutation } from 'src/services/media/ChannelGroupServices'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
-import { object, string } from 'yup'
 import { showToast } from 'src/utils'
-import { Formik, FormikProps } from 'formik'
 import AddChannelGroup from './AddChannelGroup'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+
+// |-- Types --|
 export type FormInitialValues = {
     groupName: string
     companyId: string

@@ -1,6 +1,19 @@
-import React from 'react'
-import { FormikProps } from 'formik'
+/// ==============================================
+// Filename:EditSlotManagement.tsx
+// Type: Edit Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
 
+// |-- Built-in Dependencies --|
+import React from 'react'
+
+// |-- External Dependencies --|
+import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
+
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -13,9 +26,11 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { FormInitialValues } from './EditSlotManagementWrapper'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
 
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean

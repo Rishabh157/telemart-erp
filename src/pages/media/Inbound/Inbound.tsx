@@ -1,5 +1,21 @@
+
+/// ==============================================
+// Filename:Inbound.tsx
+// Type: List Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useEffect, useState }  from 'react'
+
+// |-- External Dependencies --|
 import { Divider } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
@@ -7,25 +23,27 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { FormikProps } from 'formik'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './InboundWrapper'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
 import { setAllItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
 import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
-import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
 import { useGetAllPincodeUnauthQuery } from 'src/services/PinCodeService'
 import { useInboundSchemeQuery } from 'src/services/SchemeService'
-import { setTotalItems, setSearchValue } from 'src/redux/slices/schemeSlice'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
-import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
 import { AreaListResponse } from 'src/models/Area.model'
-import { useNavigate } from 'react-router-dom'
 
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
+import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
+import { setTotalItems, setSearchValue } from 'src/redux/slices/schemeSlice'
+import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
+
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     column: any[]

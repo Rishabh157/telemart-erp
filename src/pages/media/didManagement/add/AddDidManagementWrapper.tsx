@@ -1,19 +1,35 @@
+/// ==============================================
+// Filename:AddDidManagementWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import MediaLayout from '../../MediaLayout'
-import { useAddDidMutation } from 'src/services/media/DidManagementServices'
-import { RootState } from 'src/redux/store'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
 import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import MediaLayout from '../../MediaLayout'
+import { useAddDidMutation } from 'src/services/media/DidManagementServices'
+import { showToast } from 'src/utils'
 import AddDidManagements from './AddDidManagement'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
-import { useDispatch, useSelector } from 'react-redux'
 import { SchemeListResponse } from 'src/models/scheme.model'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
+
+
+// |-- Redux--|
+import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types--|
 export type FormInitialValues = {
     didNumber: string
     companyId: string

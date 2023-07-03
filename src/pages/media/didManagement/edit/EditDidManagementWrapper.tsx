@@ -1,14 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:EditDidManagementWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import MediaLayout from '../../MediaLayout'
-import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- External Dependencies --|
 import { useNavigate, useParams } from 'react-router-dom'
 import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+
+// |-- Internal Dependencies --|
+import MediaLayout from '../../MediaLayout'
+import { showToast } from 'src/utils'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
-import { useDispatch, useSelector } from 'react-redux'
 import { SchemeListResponse } from 'src/models/scheme.model'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import EditDidManagements from './EditDidManagement'
@@ -16,9 +28,14 @@ import {
     useGetDidByIdQuery,
     useUpdateDidMutation,
 } from 'src/services/media/DidManagementServices'
+
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/media/didManagementSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 export type FormInitialValues = {
     didNumber: string
     companyId: string

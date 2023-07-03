@@ -1,30 +1,43 @@
-import React, { useEffect, useState } from 'react'
+/// ==============================================
+// Filename:SlotManagementListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useEffect, useState }  from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { FaTimes } from 'react-icons/fa'
+import moment from 'moment'
+import { useNavigate } from 'react-router-dom'
+import { FaExclamation } from 'react-icons/fa'
+import { TiTick } from 'react-icons/ti'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SlotManagementListResponse } from 'src/models/Slot.model'
 import SlotManagementListing from './SlotManagementListing'
-import { useDispatch, useSelector } from 'react-redux'
-import { FaTimes } from 'react-icons/fa'
-import { AppDispatch, RootState } from 'src/redux/store'
-// import { useNavigate } from "react-router-dom";
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/media/slotManagementSlice'
 import {
     useDeleteSlotMangementMutation,
     useGetPaginationSlotQuery,
 } from 'src/services/media/SlotManagementServices'
 import MediaLayout from 'src/pages/media/MediaLayout'
-import moment from 'moment'
-import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import SlotRunWrapper from '../update/SlotRunWrapper'
-import { FaExclamation } from 'react-icons/fa'
-import { TiTick } from 'react-icons/ti'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/media/slotManagementSlice'
 
 const SlotManagementListingWrapper = () => {
     const navigate = useNavigate()

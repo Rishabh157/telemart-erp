@@ -1,5 +1,20 @@
-import React, { useState } from 'react'
+/// ==============================================
+// Filename:AddSlotManagement.tsx
+// Type: Add Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, {  useState }  from 'react'
+
+// |-- External Dependencies --|
 import { FieldArray, FormikProps } from 'formik'
+import { MdDeleteOutline } from 'react-icons/md'
+import moment from 'moment'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import { FormInitialValues } from './AddSlotManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -12,11 +27,11 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-import { MdDeleteOutline } from 'react-icons/md'
-import moment from 'moment'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
 
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean

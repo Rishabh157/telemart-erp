@@ -1,6 +1,18 @@
-import React, { useState } from 'react'
+/// ==============================================
+// Filename:ChannelCategoryListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useState }  from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -8,14 +20,17 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+
+// |-- Redux --|
 import {
     setPage,
     setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/media/channelCategorySlice'
-
 import { AppDispatch, RootState } from 'src/redux/store'
 
+
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
