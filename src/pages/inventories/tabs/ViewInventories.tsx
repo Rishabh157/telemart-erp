@@ -15,7 +15,7 @@ const tabs = [
     {
         label: 'Inventories',
         icon: BsArrowRepeat,
-        path: '/inventories',
+        path: 'inventories',
     },
     {
         label: 'Outward Inventories',
@@ -27,11 +27,16 @@ const tabs = [
         icon: BsArrowRepeat,
         path: 'inward-inventories/dealer',
     },
+    {
+        label: 'warehouse-details',
+        icon: BsArrowRepeat,
+        path: 'warehouse-details',
+    },
 ]
 const ViewInventories = (props: Props) => {
     const [activeTab, setActiveTab] = useState<number>()
     useEffect(() => {
-        const activeTab = window.location.pathname.split('/')[2]
+        const activeTab = window.location.pathname.split('/')[4]
         let activeIndex = tabs?.findIndex(
             (tab: tabsProps) => tab.path.split('/')[0] === activeTab
         )

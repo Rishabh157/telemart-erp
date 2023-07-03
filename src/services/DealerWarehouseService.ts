@@ -28,7 +28,6 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
             query: (body: AddDealerWarehouse) => ({
                 url: '/dealer-warehouse/add',
                 method: 'POST',
-
                 body,
             }),
         }),

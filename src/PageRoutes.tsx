@@ -244,12 +244,13 @@ const PageRoutes = () => {
                 <Routes>
                     <Route path="*" element={<PageNotFound />} />
                     <Route
-                        path="/inventories"
+                        path="warehouse/view/:id"
                         element={<InventorisTabsLayout />}
                     >
+
                         <Route
-                            index
-                            // path=""
+                            // index
+                            path="inventories"
                             element={<InventoryListingWrapper />}
                         />
                         <Route
@@ -320,9 +321,13 @@ const PageRoutes = () => {
                         </Route>
 
                         <Route
-                            path="inward-inventory/add"
+                            path="inventories/inward-inventory/add"
                             element={<InwardInventoryWrapper />}
                         />
+                           <Route
+                        path="warehouse-details"
+                        element={<ViewWarehouseWrapper />}
+                    />
                     </Route>
 
                     <Route path="/" element={<Auth />} />
@@ -405,10 +410,10 @@ const PageRoutes = () => {
                         path="/warehouse/:id"
                         element={<EditWarehouseWrapper />}
                     />
-                    <Route
+                    {/* <Route
                         path="/warehouse/view/:id"
                         element={<ViewWarehouseWrapper />}
-                    />
+                    /> */}
 
                     <Route
                         path="/vendors/:vendorId/warehouse/add"

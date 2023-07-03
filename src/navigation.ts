@@ -3,7 +3,6 @@ import { FiUsers } from 'react-icons/fi'
 import { TbBuildingWarehouse } from 'react-icons/tb'
 import { HiOutlineTruck } from 'react-icons/hi'
 import { FaRegHandshake } from 'react-icons/fa'
-import { CiBoxes } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
 import {
     MdCallReceived,
@@ -52,21 +51,13 @@ export const navigation: NavItemType[] = [
         icon: TbBuildingWarehouse,
         path: '/warehouse',
     },
-    {
-        label: 'Inventories',
-        icon: CiBoxes,
-        path: '/inventories',
-    },
+
     {
         label: 'Sale Order',
         icon: CgNotes,
         path: '/sale-order',
     },
-    // {
-    //     label: 'Outward Request',
-    //     icon: IoDocumentTextOutline,
-    //     path: '/outward-request',
-    // },
+
     {
         label: 'ASR',
         icon: GrCompliance,

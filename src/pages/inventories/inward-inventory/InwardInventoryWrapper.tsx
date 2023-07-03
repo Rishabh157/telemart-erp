@@ -41,6 +41,7 @@ const InwardInventoryWrapper = (props: Props) => {
     const { data, isLoading, isFetching } = useGetAllCartonBoxQuery(
         userData?.companyId
     )
+
     const {
         data: whData,
         isLoading: whIsLoading,

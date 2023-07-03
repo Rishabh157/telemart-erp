@@ -47,7 +47,7 @@ const OutwardTabs = (props: Props) => {
     const [activeTab, setActiveTab] = useState(0)
 
     useEffect(() => {
-        const activeTabIndex = window.location.pathname.split('/')[3]
+        const activeTabIndex = window.location.pathname.split('/')[5]
         const tabindex = tabs.findIndex((tab) => tab.path === activeTabIndex)
 
         setActiveTab(tabindex)
