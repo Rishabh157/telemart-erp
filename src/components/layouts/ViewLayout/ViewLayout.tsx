@@ -17,30 +17,34 @@ import ATMBreadCrumbs, {
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 
 type ViewLayoutPropTypes = {
+    leftbar?: boolean
     infoCard?: React.ReactNode
     actionIcons?: {
         icon: IconType
         onClick: () => void
     }[]
     listData?: any[]
-    renderListItem: (item: any) => React.ReactNode
+    renderListItem?: (item: any) => React.ReactNode
     tabs: {
         label: string
         icon: IconType
         path: string
     }[]
-    searchValue: string
-    onSearch: (value: string) => void
+    searchValue?: string
+    onSearch?: (value: string) => void
     breadcrumbs: BreadcrumbType[]
 }
 
 const ViewLayout = ({
+    leftbar = true,
     infoCard,
     listData,
-    renderListItem,
+    renderListItem = () => {
+        return <div></div>
+    },
     tabs,
-    searchValue,
-    onSearch,
+    searchValue = '',
+    onSearch = () => {},
     breadcrumbs,
 }: ViewLayoutPropTypes) => {
     // const navigate = useNavigate()
@@ -49,7 +53,9 @@ const ViewLayout = ({
     const dispatch = useDispatch<AppDispatch>()
 
     useEffect(() => {
-        dispatch(setIsCollapsed(true))
+        if (leftbar === true) {
+            dispatch(setIsCollapsed(true))
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -59,40 +65,47 @@ const ViewLayout = ({
                 <div className="h-[calc(100vh-55px)]">
                     <div className="w-full flex  h-[calc(100%)] bg-white">
                         {/* Left Section Side Bar */}
-                        <div className="w-[250px]  h-full flex flex-col  border-b  border-l rounded-l  ">
-                            {/* Info Card */}
-                            <div className=" w-full">{infoCard}</div>
+                        {leftbar === true && (
+                            <div className="w-[250px]  h-full flex flex-col  border-b  border-l rounded-l  ">
+                                {/* Info Card */}
+                                <div className=" w-full">{infoCard}</div>
 
-                            {/* Search Bar */}
-                            <div className="px-2 py-2 flex items-center justify-center ">
-                                <ATMInputAdormant
-                                    name=""
-                                    value={searchValue}
-                                    onChange={(e) => {
-                                        onSearch(e.target.value)
-                                    }}
-                                    placeholder="Search here..."
-                                    className="h-[30px] border-slate-100 shadow"
-                                    adormant={
-                                        <BiSearchAlt2 className="text-slate-400 text-xl " />
-                                    }
-                                    adormantProps={{
-                                        position: 'start',
-                                        extraClasses: 'bg-white border-0 ',
-                                    }}
-                                />
-                            </div>
+                                {/* Search Bar */}
 
-                            {/* List */}
-                            <div className="grow overflow-auto ">
-                                {listData?.map((item) => {
-                                    return renderListItem(item)
-                                })}
+                                <div className="px-2 py-2 flex items-center justify-center ">
+                                    <ATMInputAdormant
+                                        name=""
+                                        value={searchValue}
+                                        onChange={(e) => {
+                                            onSearch(e.target.value)
+                                        }}
+                                        placeholder="Search here..."
+                                        className="h-[30px] border-slate-100 shadow"
+                                        adormant={
+                                            <BiSearchAlt2 className="text-slate-400 text-xl " />
+                                        }
+                                        adormantProps={{
+                                            position: 'start',
+                                            extraClasses: 'bg-white border-0 ',
+                                        }}
+                                    />
+                                </div>
+
+                                {/* List */}
+                                <div className="grow overflow-auto ">
+                                    {listData?.map((item) => {
+                                        return renderListItem(item)
+                                    })}
+                                </div>
                             </div>
-                        </div>
+                        )}
 
                         {/* Right Section */}
-                        <div className="w-[83%] border-b border-r border-l rounded-r h-full p-3">
+                        <div
+                            className={`${
+                                leftbar === true ? 'w-[83%]' : 'w-[100%]'
+                            } border-b border-r border-l rounded-r h-full p-3`}
+                        >
                             {/* BreadCrumbs */}
                             <div className="h-[40px]">
                                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />

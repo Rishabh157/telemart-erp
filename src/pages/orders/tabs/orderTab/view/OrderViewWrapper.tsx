@@ -14,7 +14,6 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useGetOrderByIdQuery } from 'src/services/OrderService'
 import OrderView from './OrderView'
 
@@ -37,9 +36,9 @@ const OrderViewWrapper = () => {
     )
 
     return (
-        <SideNavLayout>
+        <>
             <OrderView items={selectedItem} />
-        </SideNavLayout>
+        </>
     )
 }
 
