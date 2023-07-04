@@ -47,14 +47,14 @@ const OutwardTabs = (props: Props) => {
     const [activeTab, setActiveTab] = useState(0)
 
     useEffect(() => {
-        const activeTabIndex = window.location.pathname.split('/')[3]
+        const activeTabIndex = window.location.pathname.split('/')[5]
         const tabindex = tabs.findIndex((tab) => tab.path === activeTabIndex)
 
         setActiveTab(tabindex)
     }, [])
 
     return (
-        <div className="w-full flex  h-[calc(100%)] bg-white">
+        <div className="w-full flex  h-[calc(100vh-95px)] bg-white">
             {/* Right Section */}
             <div className="w-[100%] border-b border-r border-l rounded-r h-full p-1  ">
                 <div className="py-1">
@@ -64,7 +64,7 @@ const OutwardTabs = (props: Props) => {
                 </div>
 
                 {/* Children */}
-                <div className="h-[calc(100%-95px)] w-full ">
+                <div className="h-[calc(100vh-150px)] w-full ">
                     <Outlet />
                 </div>
             </div>
