@@ -86,7 +86,6 @@ const ViewOrder = () => {
     const [activeTabIndex, setActiveTab] = useState<number>()
     const [activelabel, setActiveTabLabel] = useState<string>()
     const { search } = useLocation()
-    // console.log(search, 'param')
     const activeTab = search.split('=')[1]
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -98,7 +97,6 @@ const ViewOrder = () => {
         },
     ]
     useEffect(() => {
-        console.log(activeTab, 'activeTab')
         let activeIndex = tabs?.findIndex(
             (tab: tabsProps) => tab.path.split('=')[1] === activeTab
         )

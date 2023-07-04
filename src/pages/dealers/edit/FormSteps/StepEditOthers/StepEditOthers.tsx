@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:StepEditOthers.tsx
 // Type: Edit Component
-// Last Updated: JUNE 26, 2023
+// Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -15,7 +15,6 @@ import { useDispatch } from 'react-redux'
 // |-- Internal Dependencies --|
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import { FormInitialValues } from '../../EditDealerWrapper'
-import { getHierarchyByDept } from 'src/utils/GetHierarchyByDept'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
@@ -25,9 +24,13 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
+    dropDownOption: {
+        executiveOption: SelectOption[]
+        managerOption: SelectOption[]
+    }
 }
 
-const StepEditOthers = ({ formikProps }: Props) => {
+const StepEditOthers = ({ formikProps, dropDownOption }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
     const dispatch = useDispatch()
@@ -43,11 +46,7 @@ const StepEditOthers = ({ formikProps }: Props) => {
                         <ATMSelectSearchable
                             name="zonalManagerId"
                             value={values.zonalManagerId}
-                            options={
-                                (getHierarchyByDept({
-                                    department: 'DISTRIBUTION_DEPARTMENT',
-                                }) as SelectOption[]) || []
-                            }
+                            options={dropDownOption.managerOption || []}
                             label="Zonal Manager"
                             onChange={(e) => {
                                 handleSetFieldValue('zonalManagerId', e)
@@ -58,11 +57,7 @@ const StepEditOthers = ({ formikProps }: Props) => {
                         <ATMSelectSearchable
                             name="zonalExecutiveId"
                             value={values.zonalExecutiveId}
-                            options={
-                                (getHierarchyByDept({
-                                    department: 'DISTRIBUTION_DEPARTMENT',
-                                }) as SelectOption[]) || []
-                            }
+                            options={dropDownOption.executiveOption || []}
                             label="Zonal Executive"
                             onChange={(e) => {
                                 handleSetFieldValue('zonalExecutiveId', e)

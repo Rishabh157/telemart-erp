@@ -10,7 +10,7 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router'
+// import { useNavigate, useParams } from 'react-router'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -34,15 +34,15 @@ type Props = {
 }
 
 const DealerSupervisorListing = ({ columns, rows }: Props) => {
-    const params = useParams()
-    const dealerId: any = params.dealerId
+    // const params = useParams()
+    // const dealerId: any = params.dealerId
 
     const dispatch = useDispatch<AppDispatch>()
     const dealerSupervisorState: any = useSelector(
         (state: RootState) => state.dealerSupervisor
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
@@ -53,14 +53,14 @@ const DealerSupervisorListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Supervisor</ATMPageHeading>
-                <button
+                {/* <button
                     onClick={() =>
                         navigate('/dealers/' + dealerId + '/supervisor/add')
                     }
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
                     + Add
-                </button>
+                </button> */}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-35px)] rounded bg-white">
