@@ -18,7 +18,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import PurchaseOrderListing from './PurchaseOrderListing'
 
-
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetPurchaseOrderQuery } from 'src/services/PurchaseOrderService'

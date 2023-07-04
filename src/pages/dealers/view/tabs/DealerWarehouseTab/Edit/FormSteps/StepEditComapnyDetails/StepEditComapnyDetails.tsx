@@ -19,8 +19,6 @@ import { FormInitialValues } from '../../EditDealerWarehouseWrapper'
 import { DropdownOptions, FieldType } from './StepEditCompanyDetailsWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
-
-
 // |-- External DependenciesrEDUX --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

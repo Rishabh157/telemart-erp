@@ -25,7 +25,6 @@ import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |--Types --|
 type FieldType = Field<'accountTypeOptions'>
 

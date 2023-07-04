@@ -23,7 +23,6 @@ import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { useAddSalesOrderMutation } from 'src/services/SalesOrderService'
 
-
 // |-- Redux--|
 import { setAllItems } from 'src/redux/slices/dealerSlice'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'

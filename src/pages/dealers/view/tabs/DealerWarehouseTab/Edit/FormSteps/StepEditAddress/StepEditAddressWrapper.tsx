@@ -9,7 +9,6 @@
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
-
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,7 +26,6 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
-
 
 // |-- Types --|
 type Props = {

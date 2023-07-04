@@ -25,7 +25,6 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 type DropdownOptions = {
     counrtyOptions: SelectOption[]

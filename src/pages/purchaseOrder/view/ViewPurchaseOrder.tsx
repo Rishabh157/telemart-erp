@@ -22,7 +22,6 @@ import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMD
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 
-
 // |-- Types --|'
 type Props = {
     formikProps: FormikProps<FormInitialValues>

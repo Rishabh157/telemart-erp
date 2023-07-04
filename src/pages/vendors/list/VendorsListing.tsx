@@ -27,7 +27,6 @@ import {
 } from 'src/redux/slices/vendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 // |-- Types --|
 type Props = {
     columns: any[]

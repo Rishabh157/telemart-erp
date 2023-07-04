@@ -19,7 +19,6 @@ import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumb
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormInitialValues } from './EditSchemeWrapper'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

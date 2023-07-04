@@ -7,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect }  from 'react'
+import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -27,7 +27,6 @@ import { showToast } from 'src/utils'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
 import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
 import { useGetAllItemsQuery } from 'src/services/ItemService'
-
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'

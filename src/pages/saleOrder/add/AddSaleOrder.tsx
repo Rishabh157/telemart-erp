@@ -31,7 +31,6 @@ import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

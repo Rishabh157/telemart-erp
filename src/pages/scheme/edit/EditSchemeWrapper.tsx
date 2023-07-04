@@ -38,7 +38,6 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllItems } from 'src/redux/slices/productGroupSlice'
 import { setAllItems as setAllSubCategory } from 'src/redux/slices/productSubCategorySlice'
 
-
 // |-- Types --|
 export type FormInitialValues = {
     schemeCode: string

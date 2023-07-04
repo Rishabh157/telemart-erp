@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect }  from 'react'
+import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
@@ -27,7 +27,6 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'

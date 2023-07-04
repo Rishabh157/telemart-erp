@@ -23,7 +23,6 @@ import ListItemCard from '../components/listItemCard/ListItemCard'
 import { BreadcrumbType } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import { useGetPaginationVendorsQuery } from 'src/services/VendorServices'
 
-
 // |-- Redux --|
 import { setAllItems } from 'src/redux/slices/vendorSlice'
 import { RootState, AppDispatch } from 'src/redux/store'

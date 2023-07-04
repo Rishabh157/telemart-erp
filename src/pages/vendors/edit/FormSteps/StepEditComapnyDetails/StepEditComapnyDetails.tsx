@@ -22,7 +22,6 @@ import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |-- ITypes --|
 type DropdownOptions = {
     companyTypeOptions: SelectOption[]

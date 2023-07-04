@@ -38,7 +38,7 @@ const ViewWarehouseWrapper = () => {
 
     return (
         // <SideNavLayout>
-            <ViewWarehouse items={selectedItem} />
+        <ViewWarehouse items={selectedItem} />
         // </SideNavLayout>
     )
 }

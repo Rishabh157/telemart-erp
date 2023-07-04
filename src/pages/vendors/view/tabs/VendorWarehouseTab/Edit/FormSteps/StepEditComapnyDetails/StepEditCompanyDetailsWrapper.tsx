@@ -17,7 +17,6 @@ import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditVendorWarehouseWrapper'
 import StepEditComapnyDetails from './StepEditComapnyDetails'
 
-
 // |-- Types --|
 export type DropdownOptions = {
     countryOptions: SelectOption[]

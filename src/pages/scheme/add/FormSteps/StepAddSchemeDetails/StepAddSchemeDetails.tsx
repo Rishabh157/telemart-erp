@@ -25,7 +25,6 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 type DropdownOptions = {
     productCategoryoption: SelectOption[]

@@ -18,7 +18,6 @@ import { FormInitialValues } from '../../AddDealerWarehouseWarpper'
 import { DropdownOptions, FieldType } from './StepAddCompanyDetailsWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

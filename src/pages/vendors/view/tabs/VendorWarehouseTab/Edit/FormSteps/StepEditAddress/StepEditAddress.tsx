@@ -21,7 +21,6 @@ import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUplo
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

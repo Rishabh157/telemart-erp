@@ -110,7 +110,6 @@ const EditDealers = ({
                                 {activeStep === steps.length - 1
                                     ? 'Submit'
                                     : 'Next'}
-                                
                             </button>
                         </div>
                     </div>

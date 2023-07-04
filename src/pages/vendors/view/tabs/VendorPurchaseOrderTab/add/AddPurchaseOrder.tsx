@@ -24,7 +24,6 @@ import { FormInitialValues } from './AddPurchaseOrderTabWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

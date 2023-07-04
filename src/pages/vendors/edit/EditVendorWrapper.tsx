@@ -29,7 +29,6 @@ import {
     useUpdateVendorMutation,
 } from 'src/services/VendorServices'
 
-
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/vendorSlice'

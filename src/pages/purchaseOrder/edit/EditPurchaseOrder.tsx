@@ -28,7 +28,6 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 //import { HiPlus } from 'react-icons/hi'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

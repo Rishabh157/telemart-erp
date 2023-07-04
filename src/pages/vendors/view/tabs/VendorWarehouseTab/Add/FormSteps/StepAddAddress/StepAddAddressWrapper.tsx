@@ -27,7 +27,6 @@ import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, {  useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -33,7 +33,6 @@ import {
 } from 'src/redux/slices/schemeSlice'
 import { AppDispatch } from 'src/redux/store'
 import { RootState } from 'src/redux/store'
-
 
 const SchemeListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
