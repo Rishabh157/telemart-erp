@@ -1,18 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:SlotRunWrapper.tsx
+// Type: Update Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
 import { object, string, boolean } from 'yup'
-import UpdateSlotRun from './UpdateSlotRun'
-import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import UpdateSlotRun from './UpdateSlotRun'
+import { showToast } from 'src/utils'
 import {
     useGetSlotMangementByIdQuery,
     useUpdateSlotMutation,
 } from 'src/services/media/SlotManagementServices'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
 
+// |-- Types --|
 type FormInitialValues = {
     slotName: string
     channelGroupId: string

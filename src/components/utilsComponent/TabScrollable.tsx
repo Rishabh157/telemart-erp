@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Tabs, Tab } from 'react-tabs-scrollable'
 import 'react-tabs-scrollable/dist/rts.css'
 type Props = {
+    navBtnContainerClassName?: string
     active?: number
     setActiveTabHandle?: any
     tabs: {
@@ -12,7 +13,11 @@ type Props = {
         path?: string
     }[]
 }
-const TabScrollable: React.FC<Props> = ({ tabs, active = 0 }) => {
+const TabScrollable: React.FC<Props> = ({
+    tabs,
+    active = 0,
+    navBtnContainerClassName = '',
+}) => {
     // define state with initial value to let the tabs start with that value
     const [activeTab, setActiveTab] = React.useState<number>(0)
     const navigate = useNavigate()
@@ -34,7 +39,7 @@ const TabScrollable: React.FC<Props> = ({ tabs, active = 0 }) => {
             <Tabs
                 activeTab={activeTab as number}
                 onTabClick={onTabClick}
-                navBtnClassName={'text-[30px]'}
+                navBtnClassName={'text-[30px] bg-black'}
                 // rightBtnIcon={<FaChevronCircleRight size={26} fill="blue" />}
                 // leftBtnIcon={<FaChevronCircleLeft size={26} fill="blue" />}
                 rightBtnIcon={<span className="select-none">&#x22D9; </span>}
@@ -42,7 +47,6 @@ const TabScrollable: React.FC<Props> = ({ tabs, active = 0 }) => {
                 leftNavBtnClassName={
                     'bg-inherit border-0 hover:bg-white p-0 m-0  font-bold'
                 }
-                navBtnContainerClassName={''}
                 hideNavBtns={false}
             >
                 {/* generating an array to loop through it  */}
