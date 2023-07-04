@@ -1,21 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:EditChannelGroupWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { object, string } from 'yup'
+import { Formik, FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import MediaLayout from '../../MediaLayout'
 // import { useEditChannelGroupMutation } from 'src/services/media/ChannelGroupServices'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { useNavigate, useParams } from 'react-router-dom'
-import { object, string } from 'yup'
 import { showToast } from 'src/utils'
-import { Formik, FormikProps } from 'formik'
 import EditChannelGroup from './EditChannelGroup'
 import {
     useGetChannelGroupByIdQuery,
     useUpdateChannelGroupMutation,
 } from 'src/services/media/ChannelGroupServices'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/media/channelGroupSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 export type FormInitialValues = {
     groupName: string
     companyId: string

@@ -1,5 +1,18 @@
-import { FormikProps } from 'formik'
+/// ==============================================
+// Filename:AddChannelGroup.tsx
+// Type: Add Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
+import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import { FormInitialValues } from './AddChannelManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -9,14 +22,16 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { useDispatch, useSelector } from 'react-redux'
 import { useGetAllStateByCountryQuery } from 'src/services/StateService'
+import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
-import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean

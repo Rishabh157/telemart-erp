@@ -1,28 +1,43 @@
+/// ==============================================
+// Filename:AddTapeManagementWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import MediaLayout from '../../MediaLayout'
-import { useAddTapeMutation } from 'src/services/media/TapeManagementServices'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
 import { object, string, array } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
+import MediaLayout from '../../MediaLayout'
+import { useAddTapeMutation } from 'src/services/media/TapeManagementServices'
+import { showToast } from 'src/utils'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import AddTapeManagement from './AddTapeManagement'
 import { SchemeListResponse } from 'src/models/scheme.model'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { setLanguage } from 'src/redux/slices/languageSlice'
 import { LanguageListResponse } from 'src/models'
-import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
 import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
+import { setLanguage } from 'src/redux/slices/languageSlice'
+import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 
+// |-- Types--|
 export type FormInitialValues = {
     tapeName: string
     tapeType: string

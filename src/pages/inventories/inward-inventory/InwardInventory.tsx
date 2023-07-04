@@ -21,6 +21,7 @@ import MoveToCartonDrawer from './MoveToCartonDrawer/MoveToCartonDrawer'
 import { SelectBoxOption } from './InwardInventoryWrapper'
 import { useGetAllBarcodeQuery } from 'src/services/BarcodeService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { useParams } from 'react-router-dom'
 // import { useSelector } from 'react-redux'
 // import { RootState } from 'src/redux/store'
 // import { showToast } from "src/utils";
@@ -31,15 +32,7 @@ type Props = {
     wareHouseOption: SelectOption[] | []
 }
 
-const breadcrumbs: BreadcrumbType[] = [
-    {
-        label: 'Inventory',
-        path: '/inventories',
-    },
-    {
-        label: 'Inward Inventory',
-    },
-]
+
 export type renderBarcodType = {
     productGroupLabel: string
     productGroupNumber: string
@@ -48,7 +41,17 @@ export type renderBarcodType = {
 }
 const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [packaging, setPackaging] = React.useState('')
-    const [wareHouse, setWareHouse] = React.useState('')
+    const { id: warehouseId } = useParams()
+    const breadcrumbs: BreadcrumbType[] = [
+        {
+            label: 'Inventory',
+            path: `/warehouse/view/${warehouseId}/inventories`,
+        },
+        {
+            label: 'Inward Inventory',
+        },
+    ]
+    const [wareHouse, setWareHouse] = React.useState(warehouseId)
     const [status, setStatus] = React.useState('AVAILABLE')
     //const [shouldPrint, setShouldPrint] = React.useState(false)
     const [condition, setCondition] = React.useState('GOOD')
@@ -203,7 +206,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     <ATMTextField
                         name=""
                         disabled={
-                            packaging?.length === 0 || wareHouse.length === 0
+                            packaging?.length === 0 || wareHouse?.length === 0
                         }
                         value={barcode}
                         onChange={(e) => {
@@ -244,7 +247,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     productGroupName={filterBarcode[0]?.productGroupLabel}
                     groupBarcodeNumber={filterBarcode[0]?.productGroupNumber}
                     productDetail={dataToSend}
-                    wareHouse={wareHouse}
+                    wareHouse={wareHouse as string}
                     packaging={packaging}
                     onClose={() => setIsOpenMoveToCartonDrawer(false)}
                 />

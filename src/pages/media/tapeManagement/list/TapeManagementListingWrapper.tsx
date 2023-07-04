@@ -1,9 +1,20 @@
+/// ==============================================
+// Filename:TapeManagementListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import TapeManagementListing from './TapeManagementListing'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import MediaLayout from '../../MediaLayout'
@@ -11,13 +22,16 @@ import {
     useGetPaginationTapeQuery,
     useDeleteTapeMutation,
 } from 'src/services/media/TapeManagementServices'
+import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/tapeManagementSlice'
-import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // export type language ={
 //     languageId:string[];
