@@ -1,4 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:ViewPurchaseOrderWrapper.tsx
+// Type: View Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+// |-- External Dependencies --|
+// |-- Internal Dependencies --|
+// |-- Redux --|
+// |-- Types --|
 import React, { useEffect } from 'react'
 import { Formik } from 'formik'
 import { array, date, number, object, string } from 'yup'
