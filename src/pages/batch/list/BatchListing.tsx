@@ -69,6 +69,7 @@ const BatchListing = ({ columns, rows }: Props) => {
                     className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                         apiStatus ? 'opacity-50' : ''
                     }`}
+                    disabled={apiStatus}
                 >
                     {' '}
                     Add Batch{' '}

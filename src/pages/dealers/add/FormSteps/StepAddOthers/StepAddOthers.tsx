@@ -15,15 +15,18 @@ import { FormikProps } from 'formik'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import { FormInitialValues } from '../../AddDealerWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { getHierarchyByDept } from 'src/utils/GetHierarchyByDept'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
+    dropDownOption: {
+        executiveOption: SelectOption[]
+        managerOption: SelectOption[]
+    }
 }
 
-const StepAddOthers = ({ formikProps }: Props) => {
+const StepAddOthers = ({ formikProps, dropDownOption }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
 
@@ -35,11 +38,7 @@ const StepAddOthers = ({ formikProps }: Props) => {
                         <ATMSelectSearchable
                             name="zonalManagerId"
                             value={values.zonalManagerId}
-                            options={
-                                (getHierarchyByDept({
-                                    department: 'DISTRIBUTION_DEPARTMENT',
-                                }) as SelectOption[]) || []
-                            }
+                            options={dropDownOption.managerOption || []}
                             label="Zonal Manager"
                             onChange={(e) => {
                                 setFieldValue('zonalManagerId', e)
@@ -50,11 +49,7 @@ const StepAddOthers = ({ formikProps }: Props) => {
                         <ATMSelectSearchable
                             name="zonalExecutiveId"
                             value={values.zonalExecutiveId}
-                            options={
-                                (getHierarchyByDept({
-                                    department: 'DISTRIBUTION_DEPARTMENT',
-                                }) as SelectOption[]) || []
-                            }
+                            options={dropDownOption.executiveOption || []}
                             label="Zonal Executive"
                             onChange={(e) => {
                                 setFieldValue('zonalExecutiveId', e)

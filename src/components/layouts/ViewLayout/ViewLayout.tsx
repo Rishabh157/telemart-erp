@@ -65,7 +65,7 @@ const ViewLayout = ({
         const tabindex = tabs.findIndex((tab) => tab.path === activeTabIndex)
 
         setActiveTab(tabindex)
-    }, [])
+    }, [tabs])
     return (
         <>
             <SideNavLayout>
