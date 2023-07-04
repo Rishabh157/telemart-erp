@@ -6,16 +6,15 @@ import { BsPersonHeart } from 'react-icons/bs'
 import { BiChevronsLeft, BiCategory } from 'react-icons/bi'
 import { DiDart } from 'react-icons/di'
 import { FaTape } from 'react-icons/fa'
-import { GrChannel } from 'react-icons/gr'
 import { SiGoogletagmanager } from 'react-icons/si'
-import { MdEmojiEvents, MdViewTimeline } from 'react-icons/md'
+import { MdEmojiEvents, MdMonitor, MdViewTimeline } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineSetting } from 'react-icons/ai'
 
 const mediaNavigation: NavItemType[] = [
     {
         label: 'Channel Group',
-        icon: GrChannel,
+        icon: MdMonitor,
         path: '/media/channel-group',
     },
     {
