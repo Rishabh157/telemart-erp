@@ -17,13 +17,12 @@ import {
     BiCategoryAlt,
 } from 'react-icons/bi'
 import { MdOutlineCategory } from 'react-icons/md'
-import { BsBox, BsBoxes, BsBoxFill } from 'react-icons/bs'
+import { BsBox, BsBoxes, BsBoxSeam } from 'react-icons/bs'
 import { TbAppsFilled } from 'react-icons/tb'
 import { FaObjectGroup } from 'react-icons/fa'
 import { HiOutlineReceiptTax } from 'react-icons/hi'
 import { CgOrganisation } from 'react-icons/cg'
-import { CiBarcode, CiLocationOn } from 'react-icons/ci'
-import { GrLanguage } from 'react-icons/gr'
+import { CiBarcode, CiFaceSmile, CiLocationOn } from 'react-icons/ci'
 import { TbBinaryTree2 } from 'react-icons/tb'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -69,7 +68,7 @@ const configurationNavigation: NavItemType[] = [
     },
     {
         label: 'Carton Box',
-        icon: BsBoxFill,
+        icon: BsBoxSeam,
         path: '/configurations/carton-box',
     },
     {
@@ -94,7 +93,7 @@ const configurationNavigation: NavItemType[] = [
     },
     {
         label: 'Language',
-        icon: GrLanguage,
+        icon: CiFaceSmile,
         path: '/configurations/language',
     },
     {
