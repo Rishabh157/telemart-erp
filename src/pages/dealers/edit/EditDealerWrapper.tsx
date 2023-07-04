@@ -263,8 +263,8 @@ const EditDealerWrapper = () => {
             adharCard: selectedItem?.document?.adharCard || '',
         },
         otherDocument: selectedItem?.otherDocument || '',
-        zonalManagerId: null,
-        zonalExecutiveId: null,
+        zonalManagerId: selectedItem?.zonalManagerId,
+        zonalExecutiveId: selectedItem?.zonalExecutiveId,
     }
     const getValidationSchema = (activeStep: number) => {
         return steps.find((_, stepIndex) => stepIndex === activeStep)

@@ -343,7 +343,7 @@ const AddDealerWrapper = () => {
                     otherDocument: values.otherDocument,
                     companyId: userData?.companyId || '',
                     zonalManagerId: values.zonalManagerId || null,
-                        zonalExecutiveId: values.zonalExecutiveId || null,
+                    zonalExecutiveId: values.zonalExecutiveId || null,
                 }).then((res) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
