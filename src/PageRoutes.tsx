@@ -72,7 +72,6 @@ import {
     ListDealerSchemeTabWrapper,
     InwardInventoryWrapper,
     InventoryListingWrapper,
-    AddOrder,
     OrderListing,
     AddSaleOrderWrapper,
     EditSaleOrderWrapper,
@@ -166,7 +165,6 @@ import {
     ViewInitialCallThreeWrappper,
     OrderViewWrapper,
     Order,
-    DummyOrderTab,
     InquiryViewWrapper,
     InquiryListingWrapper,
     InfluencerListingWrapper,
@@ -249,7 +247,6 @@ const PageRoutes = () => {
                         path="warehouse/view/:id"
                         element={<InventorisTabsLayout />}
                     >
-
                         <Route
                             // index
                             path="inventories"
@@ -326,10 +323,10 @@ const PageRoutes = () => {
                             path="inventories/inward-inventory/add"
                             element={<InwardInventoryWrapper />}
                         />
-                           <Route
-                        path="warehouse-details"
-                        element={<ViewWarehouseWrapper />}
-                    />
+                        <Route
+                            path="warehouse-details"
+                            element={<ViewWarehouseWrapper />}
+                        />
                     </Route>
 
                     <Route path="/" element={<Auth />} />
@@ -337,46 +334,16 @@ const PageRoutes = () => {
                     <Route path="/profile" element={<ProfileWrappper />} />
 
                     <Route path="/orders" element={<Order />}>
-                        <Route path="/orders/all" element={<OrderListing />} />
+                        <Route index element={<OrderListing />} />
                         <Route
-                            path="/orders/all/view/:id"
+                            path="view/:id"
                             element={<OrderViewWrapper />}
                         />
                         <Route
-                            path="/orders/add-order"
-                            element={<AddOrder />}
-                        />
-                        <Route
-                            path="/orders/approved-orders"
+                            path="approved-orders"
                             element={<ApprovedOrderListing />}
                         />
-                        <Route
-                            path="/orders/fresh-orders"
-                            element={<DummyOrderTab />}
-                        />
-                        <Route
-                            path="/orders/delivered"
-                            element={<DummyOrderTab />}
-                        />
-                        <Route
-                            path="/orders/door-cancled"
-                            element={<DummyOrderTab />}
-                        />
-                        <Route
-                            path="/orders/hold"
-                            element={<DummyOrderTab />}
-                        />
-                        <Route path="/orders/psc" element={<DummyOrderTab />} />
-                        <Route path="/orders/una" element={<DummyOrderTab />} />
-                        <Route path="/orders/pnd" element={<DummyOrderTab />} />
-                        <Route
-                            path="/orders/urgent"
-                            element={<DummyOrderTab />}
-                        />
-                        <Route
-                            path="/orders/non-actions"
-                            element={<DummyOrderTab />}
-                        />
+                       
                     </Route>
                     <Route
                         path="/approved-orders/view/:id"

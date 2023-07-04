@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SideNavLayout from '../SideNavLayout/SideNavLayout'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import {
@@ -51,6 +51,7 @@ const ViewLayout = ({
     // const location = useLocation()
 
     const dispatch = useDispatch<AppDispatch>()
+    const [activeTab, setActiveTab] = useState(0)
 
     useEffect(() => {
         if (leftbar === true) {
@@ -59,6 +60,12 @@ const ViewLayout = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    useEffect(() => {
+        const activeTabIndex = window.location.pathname.split('/')[3]
+        const tabindex = tabs.findIndex((tab) => tab.path === activeTabIndex)
+
+        setActiveTab(tabindex)
+    }, [])
     return (
         <>
             <SideNavLayout>
@@ -107,7 +114,7 @@ const ViewLayout = ({
                             } border-b border-r border-l rounded-r h-full p-3`}
                         >
                             {/* BreadCrumbs */}
-                            <div className="h-[40px]">
+                            <div className="h-[35px]">
                                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                             </div>
                             {/* Tabs */}
@@ -135,8 +142,8 @@ const ViewLayout = ({
                                     )
                                 })}
                             </div> */}
-                            <div className="h-[45px] border flex gap-4 items-center   shadow rounded ">
-                                <TabScrollable tabs={tabs} />
+                            <div className="h-[40px] border flex gap-4 items-center bg-stone-300 text-white shadow rounded ">
+                                <TabScrollable tabs={tabs} active={activeTab} />
                             </div>
 
                             {/* Children */}

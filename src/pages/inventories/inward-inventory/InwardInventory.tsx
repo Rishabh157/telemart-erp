@@ -32,15 +32,7 @@ type Props = {
     wareHouseOption: SelectOption[] | []
 }
 
-const breadcrumbs: BreadcrumbType[] = [
-    {
-        label: 'Inventory',
-        path: '/inventories',
-    },
-    {
-        label: 'Inward Inventory',
-    },
-]
+
 export type renderBarcodType = {
     productGroupLabel: string
     productGroupNumber: string
@@ -50,6 +42,15 @@ export type renderBarcodType = {
 const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [packaging, setPackaging] = React.useState('')
     const { id: warehouseId } = useParams()
+    const breadcrumbs: BreadcrumbType[] = [
+        {
+            label: 'Inventory',
+            path: `/warehouse/view/${warehouseId}/inventories`,
+        },
+        {
+            label: 'Inward Inventory',
+        },
+    ]
     const [wareHouse, setWareHouse] = React.useState(warehouseId)
     const [status, setStatus] = React.useState('AVAILABLE')
     //const [shouldPrint, setShouldPrint] = React.useState(false)

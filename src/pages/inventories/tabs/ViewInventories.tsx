@@ -28,7 +28,7 @@ const tabs = [
         path: 'inward-inventories/dealer',
     },
     {
-        label: 'warehouse-details',
+        label: 'Warehouse Details',
         icon: BsArrowRepeat,
         path: 'warehouse-details',
     },
@@ -49,8 +49,8 @@ const ViewInventories = (props: Props) => {
                 <div className="w-full flex  h-[calc(100%)] bg-white">
                     {/* Right Section */}
                     <div className="w-[100%] border-b border-r border-l rounded-r h-full ">
-                        <div className="h-[40px] border flex gap-x-4 items-center   shadow rounded ">
-                            <TabScrollable tabs={tabs} active={activeTab} />
+                        <div className="h-[40px] border flex gap-x-4 items-center bg-stone-300 sticky top-0  shadow rounded ">
+                            <TabScrollable tabs={tabs} active={activeTab} navBtnContainerClassName="bg-red-500"/>
                         </div>
 
                         {/* Children */}

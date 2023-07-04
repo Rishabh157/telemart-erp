@@ -4,7 +4,7 @@ import ATMTable, {
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { PrepaidOrderListResponse } from '../../../../models/PrepaidOrder.modal'
+import { PrepaidOrderListResponse } from '../../../models/PrepaidOrder.modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
