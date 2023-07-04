@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:StepAddOthersWrapper.tsx
 // Type: ADD Component
-// Last Updated: JUNE 26, 2023
+// Last Updated: July 04, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -34,6 +34,7 @@ const StepAddOthersWrapper = ({ formikProps }: Props) => {
     const [executive, setExecutive] = useState<any>([])
     const [manger, setManager] = useState<any>([])
 
+    //Get Executive
     useEffect(() => {
         if (userData?.companyId) {
             getRoleForDistribution({
@@ -47,6 +48,7 @@ const StepAddOthersWrapper = ({ formikProps }: Props) => {
         }
     }, [userData?.companyId, getRoleForDistribution])
 
+    //Get Manager
     useEffect(() => {
         if (userData?.companyId) {
             getRoleForDistribution({
