@@ -1,10 +1,21 @@
+/// ==============================================
+// Filename:InboundWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- External Dependencies --|
 // import { useNavigate } from 'react-router-dom'
 import { number, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import Inbound from './Inbound'
 import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
@@ -19,7 +30,6 @@ import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
 import { setAllTehsils } from 'src/redux/slices/tehsilSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { useGetAllDistrictUnauthQuery } from 'src/services/DistricService'
-
 import { SchemeListResponse } from 'src/models/scheme.model'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { CountryListResponse } from 'src/models/Country.model'
@@ -27,16 +37,20 @@ import { StateListResponse } from 'src/models/State.model'
 import { DistrictListResponse } from 'src/models/District.model'
 import { TehsilListResponse } from 'src/models/Tehsil.model'
 // import { AreaListResponse } from 'src/models/Area.model'
-import { setItems } from 'src/redux/slices/media/channelManagementSlice'
-import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
 import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
+
+// |-- Redux --|
+import { setItems } from 'src/redux/slices/media/channelManagementSlice'
+import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setTotalItems,
     setItems as setCallItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
 
+// |-- Types --|
 export type FormInitialValues = {
     generalInformation: {
         didNo: string

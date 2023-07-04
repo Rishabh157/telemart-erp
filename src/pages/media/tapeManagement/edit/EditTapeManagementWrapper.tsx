@@ -1,30 +1,45 @@
+/// ==============================================
+// Filename:EditTapeManagementWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { object, string, array } from 'yup'
+import { Formik, FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import MediaLayout from '../../MediaLayout'
 import {
     useUpdateTapeMutation,
     useGetTapeByIdQuery,
 } from 'src/services/media/TapeManagementServices'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { useNavigate, useParams } from 'react-router-dom'
-import { object, string, array } from 'yup'
 import { showToast } from 'src/utils'
-import { Formik, FormikProps } from 'formik'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
 import EditTapeManagement from './EditTapeManagement'
 import { SchemeListResponse } from 'src/models/scheme.model'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { setLanguage } from 'src/redux/slices/languageSlice'
 import { LanguageListResponse } from 'src/models'
-import { setSelectedItem } from 'src/redux/slices/media/tapeManagementSlice'
 import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
 import { Field } from 'src/models/FormField/FormField.model'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setSelectedItem } from 'src/redux/slices/media/tapeManagementSlice'
+import { setLanguage } from 'src/redux/slices/languageSlice'
+import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
+
+// |-- Types --|
 export type FormInitialValues = {
     tapeName: string
     tapeType: string
