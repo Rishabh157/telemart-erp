@@ -1,17 +1,32 @@
+/// ==============================================
+// Filename:StepAddSchemeDeatilsWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import { Field } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../AddSchemeWrapper'
 import StepAddSchemeDetails from './StepAddSchemeDetails'
 //import { useGetAllProductSubCategoryQuery, useGetProductCategoryIdSubCategoryQuery } from "src/services/ProductSubCategoryService";
 import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
-import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
-//import { useGetAllProductSubCategoryQuery } from "src/services/ProductSubCategoryService";
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
+//import { useGetAllProductSubCategoryQuery } from "src/services/ProductSubCategoryService";
+
+// |-- Redux --|
+import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllItems } from 'src/redux/slices/productSubCategorySlice'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
 }

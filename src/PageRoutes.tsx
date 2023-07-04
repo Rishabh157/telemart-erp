@@ -335,15 +335,11 @@ const PageRoutes = () => {
 
                     <Route path="/orders" element={<Order />}>
                         <Route index element={<OrderListing />} />
-                        <Route
-                            path="view/:id"
-                            element={<OrderViewWrapper />}
-                        />
+                        <Route path="view/:id" element={<OrderViewWrapper />} />
                         <Route
                             path="approved-orders"
                             element={<ApprovedOrderListing />}
                         />
-                       
                     </Route>
                     <Route
                         path="/approved-orders/view/:id"

@@ -1,13 +1,28 @@
+/// ==============================================
+// Filename:StepEditDocuments.tsx
+// Type: Edit Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditVendorWrapper'
 import { Field } from 'src/models/FormField/FormField.model'
-import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type FieldType = Field<''>
 
 type Props = {

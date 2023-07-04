@@ -1,32 +1,44 @@
+/// ==============================================
+// Filename:EditSchemeWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik, Form, FormikProps } from 'formik'
 import { array, boolean, number, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import moment from 'moment'
+
+// |-- Internal Dependencies --|
 import StepEditSchemeDetailsWrapper from './FormSteps/StepEditSchemeDetail/StepEditSchemeDetailsWrapper'
 import StepEditFAQ from './FormSteps/StepEditFAQ/StepEditFAQ'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/productGroupSlice'
-import { setAllItems as setAllSubCategory } from 'src/redux/slices/productSubCategorySlice'
-
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
 import {
     useGetSchemeByIdQuery,
     useUpdateSchemeMutation,
 } from 'src/services/SchemeService'
-import moment from 'moment'
-import { setSelectedItem } from 'src/redux/slices/schemeSlice'
 import EditScheme from './EditScheme'
 import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
-import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
 import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
 import StepEditProductDetailWrapper from './FormSteps/StepEditProductInformationDetails/StepEditProductDetailWrapper'
+
+// |-- Redux --|
+import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
+import { setSelectedItem } from 'src/redux/slices/schemeSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setAllItems } from 'src/redux/slices/productGroupSlice'
+import { setAllItems as setAllSubCategory } from 'src/redux/slices/productSubCategorySlice'
 
-// TYPE-  Form Intial Values
-
+// |-- Types --|
 export type FormInitialValues = {
     schemeCode: string
     category: string

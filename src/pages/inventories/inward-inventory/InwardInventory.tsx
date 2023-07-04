@@ -32,7 +32,6 @@ type Props = {
     wareHouseOption: SelectOption[] | []
 }
 
-
 export type renderBarcodType = {
     productGroupLabel: string
     productGroupNumber: string

@@ -69,7 +69,6 @@ const ATMSelectSearchable = ({
             display: 'flex',
             alignItems: 'center',
             paddingTop: size === 'xs' ? '1px' : '5px',
-           
         }),
         valueContainer: (provided: any) => ({
             ...provided,

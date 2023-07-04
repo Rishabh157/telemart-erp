@@ -211,7 +211,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     })
 
     useEffect(() => {
-        console.log(data,"data")
+        console.log(data, 'data')
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false))
             dispatch(setItems(data?.data || []))

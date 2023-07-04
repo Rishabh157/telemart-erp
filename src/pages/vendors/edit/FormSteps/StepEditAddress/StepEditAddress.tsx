@@ -1,13 +1,28 @@
+/// ==============================================
+// Filename:StepEditAddress.tsx
+// Type: Edit Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditVendorWrapper'
-import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
     stateOptions: SelectOption[]

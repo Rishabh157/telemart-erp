@@ -1,12 +1,27 @@
+/// ==============================================
+// Filename:StepAddAddress.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../AddVendorWrapper'
-import { useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 
+// |-- Types --|
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
     stateOptions: SelectOption[]

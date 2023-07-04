@@ -1,5 +1,18 @@
+/// ==============================================
+// Filename:AddUser.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddUserWrapper'
@@ -13,8 +26,11 @@ import {
     getHierarchyByDept,
 } from 'src/utils/GetHierarchyByDept'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
-import { useDispatch } from 'react-redux'
+
+// |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
@@ -165,7 +181,6 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 label="User Department"
                             />
                             <ATMSelectSearchable
-                        
                                 name="userRole"
                                 required
                                 value={values.userRole}

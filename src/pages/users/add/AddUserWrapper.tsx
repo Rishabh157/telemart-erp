@@ -1,15 +1,30 @@
+/// ==============================================
+// Filename:AddUserWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
 import { object, string } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddUser from './AddUser'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useAddNewUserMutation } from 'src/services/UserServices'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

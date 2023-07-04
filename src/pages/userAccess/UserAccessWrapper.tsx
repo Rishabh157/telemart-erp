@@ -1,21 +1,36 @@
+/// ==============================================
+// Filename:UserAccessWrapper.tsx
+// Type: Access Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { array, date, number, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
+
+// |-- Internal Dependencies --|
 import UserAccess from './UserAcess'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
 import { useAddPurchaseOrderMutation } from 'src/services/PurchaseOrderService'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
 import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
 import { useGetAllItemsQuery } from 'src/services/ItemService'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllItems } from 'src/redux/slices/vendorSlice'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllItem } from 'src/redux/slices/itemSlice'
-import moment from 'moment'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

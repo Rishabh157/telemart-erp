@@ -1,10 +1,24 @@
+/// ==============================================
+// Filename:PurchaseOrderListingr.tsx
+// Type: View-Tab Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+
+// |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
@@ -13,6 +27,7 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]

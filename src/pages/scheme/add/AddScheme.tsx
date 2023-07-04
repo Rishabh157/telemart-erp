@@ -1,16 +1,31 @@
+/// ==============================================
+// Filename:AddScheme.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
+import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
+
+// |-- External Dependencies --|
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { FormikProps } from 'formik'
 import { FormInitialValues } from './AddSchemeWrapper'
-import { setFormSubmitting } from 'src/redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from 'src/redux/store'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
+// |-- Internal Dependencies --|
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import { AppDispatch } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     activeStep: number

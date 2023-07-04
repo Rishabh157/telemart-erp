@@ -1,14 +1,21 @@
+/// ==============================================
+// Filename:VendorListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { VendorsListResponse } from 'src/models'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/vendorSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     useDeleteVendorMutation,
     useGetPaginationVendorsQuery,
@@ -16,9 +23,16 @@ import {
 } from 'src/services/VendorServices'
 import VendorsListing from './VendorsListing'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/vendorSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const VendorsListingWrapper = () => {
     const navigate = useNavigate()

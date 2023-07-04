@@ -1,13 +1,28 @@
+/// ==============================================
+// Filename:StepAddContact.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FieldArray, FormikProps } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
+import { HiPlus } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddVendorWrapper'
 import { FieldType } from './StepAddContactWrapper'
-import { HiPlus } from 'react-icons/hi'
-import { useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     formFields: { sectionName: string; fields: FieldType[] }[]

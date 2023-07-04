@@ -50,7 +50,11 @@ const ViewInventories = (props: Props) => {
                     {/* Right Section */}
                     <div className="w-[100%] border-b border-r border-l rounded-r h-full ">
                         <div className="h-[40px] border flex gap-x-4 items-center bg-stone-400 sticky top-0  shadow rounded ">
-                            <TabScrollable tabs={tabs} active={activeTab} navBtnContainerClassName="bg-red-500"/>
+                            <TabScrollable
+                                tabs={tabs}
+                                active={activeTab}
+                                navBtnContainerClassName="bg-red-500"
+                            />
                         </div>
 
                         {/* Children */}

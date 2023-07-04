@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:Test.tsx
+// Type: Test Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMTagsInput from 'src/components/UI/atoms/formFields/ATMTagsInput/ATMTagsInput'
 

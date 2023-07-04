@@ -33,7 +33,6 @@ const StepEditOthersWrapper = ({ formikProps }: Props) => {
     const [getRoleForDistribution] = useGetDistributionsRoleMutation()
     const [executive, setExecutive] = useState<any>([])
     const [manger, setManager] = useState<any>([])
-   
 
     useEffect(() => {
         if (userData?.companyId) {
