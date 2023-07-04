@@ -54,7 +54,7 @@ const ATMSelectSearchable = ({
     labelClass = ' font-medium',
     isAllSelect = false,
     isLoading = false,
-    selectClass = 'mt-0',
+    selectClass = 'mt-0 ',
     isDisabled = false,
 }: Props) => {
     const selectStyles = {
@@ -68,7 +68,8 @@ const ATMSelectSearchable = ({
             height: size === 'xs' ? '28px' : '',
             display: 'flex',
             alignItems: 'center',
-            paddingTop: size === 'xs' ? '1px' : '4px',
+            paddingTop: size === 'xs' ? '1px' : '5px',
+           
         }),
         valueContainer: (provided: any) => ({
             ...provided,
@@ -97,6 +98,12 @@ const ATMSelectSearchable = ({
         indicatorSeparator: (provided: any) => ({
             ...provided,
             display: 'none',
+        }),
+        menu: (provided: any) => ({
+            ...provided,
+            // backgroundColor:'black',
+            // textColorl:'white',
+            // borderColor: 'border-slate-400  ',
         }),
     }
 
@@ -160,7 +167,7 @@ const ATMSelectSearchable = ({
         }
     }
     return (
-        <div className="relative mt-6">
+        <div className="relative mt-6 bg-slate-50">
             {label && (
                 <label className={`text-slate-700  ${labelClass}`}>
                     {label}

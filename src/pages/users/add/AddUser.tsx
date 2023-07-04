@@ -165,6 +165,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 label="User Department"
                             />
                             <ATMSelectSearchable
+                        
                                 name="userRole"
                                 required
                                 value={values.userRole}
