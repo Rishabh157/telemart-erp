@@ -1,7 +1,19 @@
+/// ==============================================
+// Filename:VendorOrderTab.tsx
+// Type: View-Tab Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { BiSearchAlt2 } from 'react-icons/bi'
+
+// |-- Internal Dependencies --|
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'

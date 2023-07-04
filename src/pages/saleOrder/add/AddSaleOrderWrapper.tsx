@@ -1,21 +1,37 @@
+/// ==============================================
+// Filename:AddSaleOrderWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
 import { array, number, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import AddSaleOrder from './AddSaleOrder'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { showToast } from 'src/utils'
 import { useGetAllDealersQuery } from 'src/services/DealerServices'
 import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
+import { useAddSalesOrderMutation } from 'src/services/SalesOrderService'
+
+
+// |-- Redux--|
 import { setAllItems } from 'src/redux/slices/dealerSlice'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
-import { useAddSalesOrderMutation } from 'src/services/SalesOrderService'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

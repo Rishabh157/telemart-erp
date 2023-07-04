@@ -1,6 +1,18 @@
+/// ==============================================
+// Filename:UserAccess.tsx
+// Type: Access Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
 // import { MdDeleteOutline } from 'react-icons/md'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -18,6 +30,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 // import Typography from '@mui/material/Typography'
 // import Button from '@mui/material/Button'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     vendorOptions: any[]

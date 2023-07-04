@@ -1,5 +1,14 @@
+/// ==============================================
+// Filename:VendorActivityTab.tsx
+// Type: View-Tab Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
 
+// |-- types --|
 type Props = {}
 
 const activitiesList = Array(15).fill(null)

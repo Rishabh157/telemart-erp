@@ -1,26 +1,41 @@
+/// ==============================================
+// Filename:AddSchemeWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik, Form, FormikProps } from 'formik'
 import { array, boolean, number, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
+
+// |-- Internal Dependencies --|
 import AddScheme from './AddScheme'
 import StepAddSchemeDetailsWrapper from './FormSteps/StepAddSchemeDetails/StepAddSchemeDetailsWrapper'
 import StepAddProductsWrapper from './FormSteps/StepAddProducts/StepAddProductsWrapper'
 import StepAddFAQ from './FormSteps/StepAddFAQ/StepAddFAQ'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/productGroupSlice'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
 import { useAddSchemeMutation } from 'src/services/SchemeService'
-import moment from 'moment'
+
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setAllItems } from 'src/redux/slices/productGroupSlice'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
 
-// TYPE-  Form Intial Values
 
+// |-- Types --|
 export type FormInitialValues = {
     schemeCode: string
     category: string

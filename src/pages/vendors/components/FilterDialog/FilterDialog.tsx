@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:FilterDialog.tsx
+// Type: filter Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import {
     Dialog,
     DialogActions,
@@ -6,11 +16,14 @@ import {
     DialogTitle,
 } from '@mui/material'
 import { FormikProps } from 'formik'
+import { CgClose } from 'react-icons/cg'
+
+// |-- Internal Dependencies --|
 import { FormInitalValues } from './FilterDialogWarpper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { CgClose } from 'react-icons/cg'
 
+// |-- Types --|
 type Props = {
     onClose: () => void
     formikProps: FormikProps<FormInitalValues>

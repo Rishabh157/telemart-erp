@@ -1,7 +1,21 @@
+/// ==============================================
+// Filename:AddVendorWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { array, object, string } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import AddVendor from './AddVendor'
 import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
 import StepAddBankDetailsWrapper from './FormSteps/StepAddBankDetails/StepAddBankDetailsWrapper'
@@ -10,15 +24,15 @@ import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrap
 import StepAddDocumentsWrapper from './FormSteps/StepAddDocuments/StepAddDocumentsWrapper'
 import { useAddVendorMutation } from 'src/services/VendorServices'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
 
-// TYPE-  Form Intial Values
+// |-- Types --|
 export type FormInitialValues = {
     company_name: string
     company_type: string

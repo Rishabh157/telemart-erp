@@ -1,24 +1,39 @@
+/// ==============================================
+// Filename:EditSaleOrderWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
 import { number, object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import EditSaleOrder from './EditSaleOrder'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { showToast } from 'src/utils'
 import { useGetAllDealersQuery } from 'src/services/DealerServices'
 import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
-import { setAllItems } from 'src/redux/slices/dealerSlice'
-import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
-import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
 import {
     useGetSalesOrderByIdQuery,
     useUpdateSalesOrderMutation,
 } from 'src/services/SalesOrderService'
+
+// |-- Redux --|
+import { setAllItems } from 'src/redux/slices/dealerSlice'
+import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
+import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
 import { setSelectedItem } from 'src/redux/slices/saleOrderSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

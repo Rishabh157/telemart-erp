@@ -1,17 +1,32 @@
+/// ==============================================
+// Filename:VendorGeneralInformationTabWrapper.tsx
+// Type: View-Tab Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { CircularProgress } from '@mui/material'
+
+// |-- Internal Dependencies --|
 import AccordianAddress from './components/AccordianAddress'
 import AccordianBankDetail from './components/AccordianBankDetail'
 import AccordianContact from './components/AccordianContact'
 import AccordianDocument from './components/AccordianDocument'
 import AccordianGeneralInformation from './components/AccordianGeneralInformation'
 import VendorGeneralInformationTab from './VendorGeneralInformationTab'
-import { useParams } from 'react-router-dom'
 import { useGetVendorByIdQuery } from 'src/services/VendorServices'
-import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Redux --|
 import { setSelectedItem } from 'src/redux/slices/vendorSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { CircularProgress } from '@mui/material'
 
+// |-- Types --|
 type Props = {}
 
 export type AccordianType = {

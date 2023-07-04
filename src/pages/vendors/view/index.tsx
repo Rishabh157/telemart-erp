@@ -1,15 +1,30 @@
+/// ==============================================
+// Filename:index.tsx
+// Type: index Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
-import ViewLayout from 'src/components/layouts/ViewLayout/ViewLayout'
+
+// |-- External Dependencies --|
 import { BiBlock, BiMessageDetail } from 'react-icons/bi'
 import { AiOutlineRise } from 'react-icons/ai'
 import { BsArrowRepeat } from 'react-icons/bs'
 import { MdOutlinePeopleAlt } from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import ViewLayout from 'src/components/layouts/ViewLayout/ViewLayout'
 import VendorInfoCard from '../components/vendorInfoCard/VendorInfoCard'
 import ListItemCard from '../components/listItemCard/ListItemCard'
 // import { useParams } from "react-router-dom";
 import { BreadcrumbType } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import { useGetPaginationVendorsQuery } from 'src/services/VendorServices'
-import { useDispatch, useSelector } from 'react-redux'
+
+
+// |-- Redux --|
 import { setAllItems } from 'src/redux/slices/vendorSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 

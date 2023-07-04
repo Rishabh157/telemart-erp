@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:index.tsx
+// Type: index Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Internal Dependencies --|
 import AddAttributeWrapper from './configuration/Configuration Screens/attributes/add/AddAttributeWrapper'
 import AttributesListingWrapper from './configuration/Configuration Screens/attributes/list/AttributesListingWrapper'
 import AddAttributeGroupWrapper from './configuration/Configuration Screens/attributesGroup/add/AddAttributeGroupWrapper'

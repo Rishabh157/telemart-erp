@@ -1,9 +1,25 @@
+/// ==============================================
+// Filename:VendorPurchaseOrderTabWrapper.tsx
+// Type: View-Tab Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { HiDotsHorizontal } from 'react-icons/hi'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import PurchaseOrderListing from './PurchaseOrderListing'
-import { useDispatch, useSelector } from 'react-redux'
+
+
+// |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useGetPurchaseOrderQuery } from 'src/services/PurchaseOrderService'
 import {
@@ -11,8 +27,8 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/PurchaseOrderSlice'
-import { HiDotsHorizontal } from 'react-icons/hi'
 
+// |-- Types --|
 type Props = {}
 
 const VendorPurchaseOrderTabWrapper = (props: Props) => {

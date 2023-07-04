@@ -1,7 +1,21 @@
+/// ==============================================
+// Filename:EditVendorWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { array, object, string } from 'yup'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import EditVendor from './EditVendor'
 import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
 import StepEditBankDetailsWrapper from './FormSteps/StepEditBankDetails/StepEditBankDetailsWrapper'
@@ -10,20 +24,21 @@ import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactW
 import StepEditDocumentsWrapper from './FormSteps/StepEditDocuments/StepEditDocumentsWrapper'
 // import { useEditVendorMutation } from "src/services/VendorServices";
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/vendorSlice'
 import {
     useGetVendorByIdQuery,
     useUpdateVendorMutation,
 } from 'src/services/VendorServices'
+
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setSelectedItem } from 'src/redux/slices/vendorSlice'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
 
-// TYPE-  Form Intial Values
+// |-- Types --|
 export type FormInitialValues = {
     company_name: string
     company_type: string

@@ -1,10 +1,24 @@
+/// ==============================================
+// Filename:UsersListing.tsx
+// Type: List Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setPage,
@@ -12,6 +26,7 @@ import {
     setSearchValue,
 } from 'src/redux/slices/NewUserSlice'
 
+// |-- Types --|
 export type Props = {
     columns: any[]
     rows: any[] | []

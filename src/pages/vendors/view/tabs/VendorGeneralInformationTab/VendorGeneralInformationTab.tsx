@@ -1,8 +1,22 @@
+/// ==============================================
+// Filename:VendorGeneralInformationTab.tsx
+// Type: View-Tab Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import { MdExpandMore } from 'react-icons/md'
+
+// |-- Internal Dependencies --|
 import { AccordianType } from './VendorGeneralInformationTabWrapper'
 
+
+// |-- Types --|
 type Props = {
     accordians: AccordianType[]
 }
