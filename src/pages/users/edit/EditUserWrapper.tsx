@@ -57,13 +57,11 @@ const EditUserWrapper = (props: Props) => {
 
     const { data, isLoading, isFetching } = useGetUserByIdQuery(Id)
 
-   
-
     useEffect(() => {
-       // if (!isLoading && isFetching) {
-            dispatch(setSelectedItem(data?.data))
+        // if (!isLoading && isFetching) {
+        dispatch(setSelectedItem(data?.data))
         //}
-    }, [ data, isLoading, isFetching])
+    }, [data, isLoading, isFetching])
 
     //console.log(selectedItem)
 
