@@ -7,6 +7,7 @@
 
 // |-- Internal Dependencies --|
 import AddUserWrapper from './add/AddUserWrapper'
+import EditUserWrapper from './edit/EditUserWrapper'
 import UsersListingWrapper from './list/UsersListingWrapper'
 
-export { AddUserWrapper, UsersListingWrapper }
+export { AddUserWrapper, UsersListingWrapper, EditUserWrapper }

@@ -198,7 +198,7 @@ import { ASRListingWrapper, EditASRWrapper, AddASRWrapper } from './asr'
 import { AddVendorWrapper, VendorsListingWrapper, ViewVendor } from './vendors'
 
 // import Users
-import { AddUserWrapper, UsersListingWrapper } from './users'
+import { AddUserWrapper, UsersListingWrapper, EditUserWrapper } from './users'
 
 export {
     AddASRWrapper,
@@ -263,6 +263,7 @@ export {
     Test,
     UsersListingWrapper,
     AddUserWrapper,
+    EditUserWrapper,
     AddVendorWrapper,
     VendorsListingWrapper,
     AddPurchaseOrderTabWrapper,
