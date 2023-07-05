@@ -6,11 +6,12 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
+import {useNavigate} from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -19,8 +20,11 @@ import { useGetNewUsersQuery } from 'src/services/UserServices'
 import UsersListing from './UsersListing'
 import {
     getDepartmentLabel,
-    getUserRoleLabel,
+    //getUserRoleLabel,
 } from 'src/utils/GetHierarchyByDept'
+//import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+//import { showToast } from 'src/utils'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
 import {
@@ -33,7 +37,9 @@ const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { items, page, rowsPerPage, searchValue } = userState
-    // const [showDropdown, setShowDropdown] = useState(false)
+    const [showDropdown, setShowDropdown] = useState(false)
+    //const [currentId, setCurrentId] = useState('')
+    const navigate = useNavigate()
 
     const dispatch = useDispatch<AppDispatch>()
     const { data, isFetching, isLoading } = useGetNewUsersQuery({
@@ -98,37 +104,72 @@ const UsersListingWrapper = () => {
                 return <span> {getDepartmentLabel(row.userDepartment)} </span>
             },
         },
-        {
-            field: 'userRole',
-            headerName: 'User Role',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => {
-                return (
-                    <span>
-                        {' '}
-                        {getUserRoleLabel(
-                            row.userRole,
-                            row.userDepartment
-                        )}{' '}
-                    </span>
-                )
-            },
-        },
         // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     renderCell: (row: any) => (
-        //         <ActionPopup
-        //             handleOnAction={() => {
-        //                 setShowDropdown(!showDropdown)
-        //                 //   setCurrentId(row?._id);
-        //             }}
-        //         />
-        //     ),
-        //     align: 'end',
+        //     field: 'userRole',
+        //     headerName: 'User Role',
+        //     flex: 'flex-[1_1_0%]',
+        //     renderCell: (row: any) => {
+        //         return (
+        //             <span>
+        //                 {' '}
+        //                 {getUserRoleLabel(
+        //                     row.userRole,
+        //                     row.userDepartment
+        //                 )}{' '}
+        //             </span>
+        //         )
+        //     },
         // },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.8_0.8_0%]',
+            renderCell: (row: any) => (                
+                <ActionPopup
+                    isEdit
+                    //isDelete
+                    handleEditActionButton={() => {
+                        navigate(`/users/${row?._id}`)
+                    }}
+                    // handleDeleteActionButton={() => {
+                    //     showConfirmationDialog({
+                    //         title: 'Delete User',
+                    //         text: 'Do you want to delete User?',
+                    //         showCancelButton: true,
+                    //         next: (res: any) => {
+                    //             return res.isConfirmed
+                    //                 ? handleDelete()
+                    //                 : setShowDropdown(false)
+                    //         },
+                    //     })
+                    // }}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        //setCurrentId(row?._id)
+                    }}
+                />
+            ),
+            align: 'end',
+        },
     ]
+
+    // const handleDelete = () => {
+    //     setShowDropdown(false)
+    //     deleteUser(currentId).then((res) => {
+    //         if ('data' in res) {
+    //             if (res?.data?.status) {
+    //                 showToast('success', 'User deleted successfully!')
+    //             } else {
+    //                 showToast('error', res?.data?.message)
+    //             }
+    //         } else {
+    //             showToast(
+    //                 'error',
+    //                 'Something went wrong, Please try again later'
+    //             )
+    //         }
+    //     })
+    // }
 
     return (
         <SideNavLayout>

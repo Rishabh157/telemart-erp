@@ -79,6 +79,7 @@ import {
     Test,
     UsersListingWrapper,
     AddUserWrapper,
+    EditUserWrapper,
     AddVendorWrapper,
     VendorsListingWrapper,
     AddPurchaseOrderTabWrapper,
@@ -514,6 +515,10 @@ const PageRoutes = () => {
                     <Route
                         path="/users/add-user"
                         element={<AddUserWrapper />}
+                    />
+                    <Route
+                        path="/users/:id"
+                        element={<EditUserWrapper />}
                     />
                     <Route path="test" element={<Test />} />
 

@@ -39,7 +39,7 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: 'Add User',
+        label: 'User',
         path: '/users',
     },
     {

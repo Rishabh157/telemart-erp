@@ -4,6 +4,7 @@ import { UsersNewListResponse } from 'src/models'
 
 export interface UserSliceStateType {
     items: UsersNewListResponse[] | []
+    selectedItem: UsersNewListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -16,6 +17,7 @@ export interface UserSliceStateType {
 const initialState: UserSliceStateType = {
     items: [],
     totalItems: 0,
+    selectedItem: null,
     isTableLoading: false,
     page: 1,
     rowsPerPage: 10,
@@ -63,6 +65,12 @@ const userSlice: any = createSlice({
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
+        setSelectedItem: (
+            state,
+            action: PayloadAction<UsersNewListResponse | null>
+        ) => {
+            state.selectedItem = action.payload
+        },
     },
 })
 
@@ -75,5 +83,6 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
+    setSelectedItem,
 } = userSlice.actions
 export default userSlice.reducer
