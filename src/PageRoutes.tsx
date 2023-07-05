@@ -516,10 +516,7 @@ const PageRoutes = () => {
                         path="/users/add-user"
                         element={<AddUserWrapper />}
                     />
-                    <Route
-                        path="/users/:id"
-                        element={<EditUserWrapper />}
-                    />
+                    <Route path="/users/:id" element={<EditUserWrapper />} />
                     <Route path="test" element={<Test />} />
 
                     <Route path="/asr" element={<ASRListingWrapper />} />

@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -124,7 +124,7 @@ const UsersListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.8_0.8_0%]',
-            renderCell: (row: any) => (                
+            renderCell: (row: any) => (
                 <ActionPopup
                     isEdit
                     //isDelete

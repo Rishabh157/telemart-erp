@@ -140,7 +140,7 @@ const EditUser = ({ formikProps, apiStatus }: Props) => {
                                     handleSetFieldValue('email', e.target.value)
                                 }
                             />
-                            
+
                             {/* Mobile */}
                             <ATMTextField
                                 name="mobile"

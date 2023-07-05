@@ -17,9 +17,11 @@ import { useDispatch, useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import EditUser from './EditUser'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { showToast } from 'src/utils' 
-import { useGetUserByIdQuery, useUpdateNewUserMutation } from 'src/services/UserServices'
-
+import { showToast } from 'src/utils'
+import {
+    useGetUserByIdQuery,
+    useUpdateNewUserMutation,
+} from 'src/services/UserServices'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -45,33 +47,32 @@ const EditUserWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-		const params = useParams()
+    const params = useParams()
     const Id: any = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [updateNewUser] = useUpdateNewUserMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-		const { selectedItem }: any = useSelector((state: RootState) => state?.user)
+    const { selectedItem }: any = useSelector((state: RootState) => state?.user)
 
-		const { data, isLoading, isFetching} = useGetUserByIdQuery(Id)
+    const { data, isLoading, isFetching } = useGetUserByIdQuery(Id)
 
-		console.log(data)
+    console.log(data)
 
-		useEffect(() => {
-			if(!isLoading && isFetching){
-				dispatch(setSelectedItem(data?.data))
-			}
-			
-	}, [dispatch, data, isLoading, isFetching])
+    useEffect(() => {
+        if (!isLoading && isFetching) {
+            dispatch(setSelectedItem(data?.data))
+        }
+    }, [dispatch, data, isLoading, isFetching])
 
-	console.log(selectedItem)
+    console.log(selectedItem)
 
     const initialValues: FormInitialValues = {
         firstName: selectedItem?.firstName || '',
-        lastName: selectedItem?.firstName ||  '',
-        mobile: selectedItem?.firstName ||  '',
-        email: selectedItem?.firstName ||  '',       
-        userDepartment: selectedItem?.firstName ||  '',
-        userRole: selectedItem?.firstName ||  '',
+        lastName: selectedItem?.firstName || '',
+        mobile: selectedItem?.firstName || '',
+        email: selectedItem?.firstName || '',
+        userDepartment: selectedItem?.firstName || '',
+        userRole: selectedItem?.firstName || '',
         companyId: userData?.companyId || '',
     }
 
@@ -88,7 +89,6 @@ const EditUserWrapper = (props: Props) => {
         email: string().email('Invalid Email ID').required('Email is required'),
         userDepartment: string().required('User Department is required'),
         userRole: string().required('User Role is required'),
-
     })
 
     //    Form Submit Handler
@@ -96,18 +96,18 @@ const EditUserWrapper = (props: Props) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
-					updateNewUser({
-						body:{
-                firstName: values.firstName || '',
-                lastName: values.lastName || '',
-                mobile: values.mobile || '',
-                email: values.email || '',                
-                userDepartment: values.userDepartment || '',
-                userRole: values.userRole || '',
-                companyId: values.companyId || '',
-            },
-						id: Id
-					}).then((res: any) => {
+            updateNewUser({
+                body: {
+                    firstName: values.firstName || '',
+                    lastName: values.lastName || '',
+                    mobile: values.mobile || '',
+                    email: values.email || '',
+                    userDepartment: values.userDepartment || '',
+                    userRole: values.userRole || '',
+                    companyId: values.companyId || '',
+                },
+                id: Id,
+            }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'User Updated successfully!')
@@ -125,7 +125,7 @@ const EditUserWrapper = (props: Props) => {
     return (
         <SideNavLayout>
             <Formik
-								enableReinitialize
+                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
