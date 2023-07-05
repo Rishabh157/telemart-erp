@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
 // Filename:EditUserWrapper.tsx
 // Type: Edit Component
@@ -56,23 +57,23 @@ const EditUserWrapper = (props: Props) => {
 
     const { data, isLoading, isFetching } = useGetUserByIdQuery(Id)
 
-    console.log(data)
+   
 
     useEffect(() => {
-        if (!isLoading && isFetching) {
+       // if (!isLoading && isFetching) {
             dispatch(setSelectedItem(data?.data))
-        }
-    }, [dispatch, data, isLoading, isFetching])
+        //}
+    }, [ data, isLoading, isFetching])
 
-    console.log(selectedItem)
+    //console.log(selectedItem)
 
     const initialValues: FormInitialValues = {
         firstName: selectedItem?.firstName || '',
-        lastName: selectedItem?.firstName || '',
-        mobile: selectedItem?.firstName || '',
-        email: selectedItem?.firstName || '',
-        userDepartment: selectedItem?.firstName || '',
-        userRole: selectedItem?.firstName || '',
+        lastName: selectedItem?.lastName || '',
+        mobile: selectedItem?.mobile || '',
+        email: selectedItem?.email || '',
+        userDepartment: selectedItem?.userDepartment || '',
+        userRole: selectedItem?.userRole || '',
         companyId: userData?.companyId || '',
     }
 
