@@ -17,6 +17,15 @@ export const productGroupApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET ALL PRODUCTS GROUP *****/
+        getAllProductGroupUnAuth: builder.query({
+            // providesTags: ['scheme'],
+            query: (companyId) => ({
+                url: `/product-group/company/${companyId}/unauth/all-product-group`,
+                method: 'GET',
+            }),
+        }),
+
         //***** GET *****/
         getAllProductGroup: builder.query({
             providesTags: ['productGroup'],
@@ -83,6 +92,7 @@ export const productGroupApi = apiSlice.injectEndpoints({
 })
 export const {
     useGetProductGroupQuery,
+    useGetAllProductGroupUnAuthQuery,
     useGetAllProductGroupQuery,
     useAddProductGroupMutation,
     useUpdateProductGroupMutation,

@@ -13,6 +13,15 @@ export const schemeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET ALL SCHEMES BY PRODUCT GROUP ID *****/
+        getAllSchemeListByPgi: builder.query({
+            // providesTags: ['scheme'],
+            query: ({ companyId, productGroupId }) => ({
+                url: `scheme/company/${companyId}/product-group/${productGroupId}`,
+                method: 'GET',
+            }),
+        }),
+
         //***** GET PAGINATION DATA *****/
         getAllScheme: builder.query({
             providesTags: ['scheme'],
@@ -50,7 +59,6 @@ export const schemeApi = apiSlice.injectEndpoints({
             providesTags: ['scheme'],
             query: (id) => ({
                 url: `/scheme/${id}`,
-
                 method: 'GET',
             }),
         }),
@@ -77,6 +85,7 @@ export const schemeApi = apiSlice.injectEndpoints({
 })
 export const {
     useGetSchemeQuery,
+    useGetAllSchemeListByPgiQuery,
     useAddSchemeMutation,
     useUpdateSchemeMutation,
     useGetSchemeByIdQuery,

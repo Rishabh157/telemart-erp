@@ -1,5 +1,6 @@
 import React, { ComponentProps } from 'react'
 import { twMerge } from 'tailwind-merge'
+import CircularProgress from '@mui/material/CircularProgress'
 
 type Props = {
     text: string
@@ -19,7 +20,7 @@ const CallerButton = ({
         <>
             <button
                 type={type}
-                disabled={isLoading}
+                disabled={disabled}
                 className={twMerge(
                     `border w-full bg-[#15616E] text-white rounded p-2  h-[42px] flex gap-2 justify-center items-center ${className} ${
                         disabled || isLoading ? 'opacity-[.60]' : ''
@@ -28,6 +29,9 @@ const CallerButton = ({
                 {...rest}
             >
                 {text}
+                {isLoading && (
+                    <CircularProgress size={20} sx={{ color: '#ffffff' }} />
+                )}
             </button>
         </>
     )

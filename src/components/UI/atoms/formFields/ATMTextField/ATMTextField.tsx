@@ -25,7 +25,7 @@ export type ATMTextFieldPropTypes = {
     InfoChildren?: React.ReactNode
     InfoTitle?: string
     isPassWordVisible?: boolean
-    LabelDirection?: 'horizontal' | 'vertical'
+    labelDirection?: 'horizontal' | 'vertical'
     classDirection?: string
     labelSize?: 'small' | 'medium' | 'large' | 'xs'
 } & Omit<React.ComponentProps<'input'>, 'size'>
@@ -49,7 +49,7 @@ const ATMTextField = ({
     InfoChildren = null,
     InfoTitle = 'Info',
     labelClass = 'font-medium',
-    LabelDirection = 'vertical',
+    labelDirection = 'vertical',
     classDirection = 'grid grid-cols-12',
     labelSize = 'small',
     ...rest
@@ -59,14 +59,14 @@ const ATMTextField = ({
         <div className={twMerge('relative mt-4', `${extraClassField}`)}>
             <div
                 className={`  ${
-                    LabelDirection === 'horizontal'
+                    labelDirection === 'horizontal'
                         ? `  gap-2 w-full  ${classDirection}`
                         : ' '
                 }`}
             >
                 <div
                     className={`flex gap-1 ${
-                        LabelDirection === 'horizontal'
+                        labelDirection === 'horizontal'
                             ? `  col-span-4 w-full h-full flex items-center `
                             : ' '
                     }`}
@@ -104,9 +104,9 @@ const ATMTextField = ({
                     )}  w-full px-2 text-slate-700 border ${
                         disabled ? 'bg-blue-100' : ''
                     } border-slate-400 outline-blue-400   ${
-                        LabelDirection === 'horizontal' ? 'col-span-8' : ''
+                        labelDirection === 'horizontal' ? 'col-span-8' : ''
                     } ${className}`}
-                    {...rest}
+                    {...rest}   
                     onBlur={onBlur}
                 />
             </div>

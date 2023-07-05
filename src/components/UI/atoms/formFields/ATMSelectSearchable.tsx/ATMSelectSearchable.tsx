@@ -37,13 +37,14 @@ type Props = {
     labelClass?: string
     selectClass?: string
     isDisabled?: boolean
-    LabelDirection?: 'horizontal' | 'vertical'
+    labelDirection?: 'horizontal' | 'vertical'
     classDirection?: string
     labelSpan?: string
     inputSpan?: string
     componentClass?: string
     labelSize?: 'small' | 'medium' | 'large' | 'xs'
     isMenuOpen?: boolean
+    isValueWithLable?: boolean
 }
 
 const ATMSelectSearchable = ({
@@ -64,13 +65,14 @@ const ATMSelectSearchable = ({
     isLoading = false,
     selectClass = 'mt-0',
     isDisabled = false,
-    LabelDirection = 'vertical',
+    labelDirection = 'vertical',
     classDirection = 'grid grid-cols-3',
     labelSpan = 'col-span-1',
     inputSpan = 'col-span-2',
     componentClass = '  mt-6',
     labelSize = 'small',
     isMenuOpen = undefined,
+    isValueWithLable = false,
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -148,7 +150,11 @@ const ATMSelectSearchable = ({
             })
             onChange(values.length ? values : [])
         } else {
-            onChange(selectedOption?.value ? selectedOption?.value : '')
+            if (isValueWithLable) {
+                onChange(selectedOption.value ? selectedOption : '')
+            } else {
+                onChange(selectedOption?.value ? selectedOption?.value : '')
+            }
         }
     }
     // const handleOnInputChange = (valueOp:string) => {
@@ -181,14 +187,14 @@ const ATMSelectSearchable = ({
         <div className={`${componentClass} relative`}>
             <div
                 className={`  ${
-                    LabelDirection === 'horizontal'
+                    labelDirection === 'horizontal'
                         ? `  gap-2 w-full  ${classDirection}`
                         : ' '
                 }`}
             >
                 <div
                     className={`flex gap-1 ${
-                        LabelDirection === 'horizontal'
+                        labelDirection === 'horizontal'
                             ? `  ${labelSpan} w-full h-full flex items-center `
                             : ' '
                     }`}
@@ -211,7 +217,7 @@ const ATMSelectSearchable = ({
                     maxMenuHeight={isMenuOpen ? 110 : 300}
                     className={twMerge(
                         `border rounded border-slate-400 ${
-                            LabelDirection === 'horizontal'
+                            labelDirection === 'horizontal'
                                 ? `${inputSpan}`
                                 : ''
                         }`,

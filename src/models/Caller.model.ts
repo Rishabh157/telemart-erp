@@ -1,5 +1,6 @@
 export type CallerResponse = {
     _id: string
+    rowIndex: number | string
     didNo: string
     ageGroup: string
     agentId: string
@@ -17,9 +18,14 @@ export type CallerResponse = {
     districtId: string
     tehsilId: string
     schemeId: string
-    schemeName: string
     pincodeId: string
-    pincodeName: string
+    countryLabel: string
+    stateLabel: string
+    districtLabel: string
+    tehsilLabel: string
+    pincodeLabel: string
+    areaLabel: string
+    schemeName: string
     pincodeSecondId: null
     areaId: string
     emailId: string
@@ -55,13 +61,6 @@ export type CallerResponse = {
     __v: number
     dispositionLevelTwoLabel: string
     dispositionLevelThreeLabel: string
-    countryLabel: string
-    stateLabel: string
-    schemeLabel: string
-    districtLabel: string
-    tehsilLabel: string
-    pincodeLabel: string
-    areaLabel: string
     agentDistrictLabel: string
 }
 

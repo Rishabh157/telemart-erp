@@ -33,7 +33,7 @@ import { CallerResponse } from 'src/models'
 
 export type FormInitialValues = {
     agentName: string | null
-    comanyId: string | null
+    companyId: string | null
     agentId: string | null
     didNo: string
     ageGroup: string
@@ -43,17 +43,24 @@ export type FormInitialValues = {
     callType: string
     campaign: string
     customerName: string
-    deliveryTimeAndDate: string
+    preffered_delivery_start_time: string
+    preffered_delivery_end_time: string
+    preffered_delivery_date: string
     countryId: string | null
+    countryLabel: string
     stateId: string | null
+    stateLabel: string
     districtId: string | null
+    districtLabel: string
     tehsilId: string | null
+    tehsilLabel: string
     schemeId: string | null
     schemeName: string
     pincodeId: string | null
-    pincodeSecondId: string | null
+    pincodeLabel: string | null
     // villageId?: string | null
     areaId: string | null
+    areaLabel: string
     emailId: string
     flagStatus: string
     gender: string
@@ -89,7 +96,7 @@ const CallerPageWrapper = () => {
             headerName: 'ORDER NO',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            renderCell: (row: CallerResponse) => <span> {row.orderFor} </span>,
+            renderCell: (row) => <span> {row?.index} </span>,
         },
         {
             field: 'enq',
@@ -145,7 +152,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             renderCell: (row: CallerResponse) => (
-                <span> {row.dispositionLevelTwoLabel} </span>
+                <span> {row.dispositionLevelThreeLabel} </span>
             ),
         },
         {
@@ -183,7 +190,7 @@ const CallerPageWrapper = () => {
             ),
         },
         {
-            field: 'remarks',
+            field: 'remark',
             headerName: 'REMARKS',
             flex: 'flex-[3_3_0%]',
             align: 'center',
@@ -194,7 +201,7 @@ const CallerPageWrapper = () => {
             headerName: 'COMPL',
             flex: 'flex-[3_3_0%]',
             align: 'center',
-            renderCell: (row: CallerResponse) => <span> {row.remark} </span>,
+            renderCell: (row: CallerResponse) => <span> </span>,
         },
     ]
 
@@ -238,11 +245,12 @@ const CallerPageWrapper = () => {
     }, [isCallerLoading, isCallerFetching, callerListingData])
 
     const [AddCallerForm] = useAddCallerFormMutation()
-    const [UpdateCallerForm] = useUpdateCallerFormMutation()
+    const [UpdateCallerForm, UpdateCallerFormInfo] =
+        useUpdateCallerFormMutation()
 
     const initialValues: FormInitialValues = {
         agentName: 'Vinod',
-        comanyId: '642e718eaf73c70b82389d6e',
+        companyId: '645b7733266c589640740832',
         agentId: '642e718eaf73c70b82389d6e',
         campaign: 'DHUANDHAAR',
         callType: 'INBOUND',
@@ -259,18 +267,24 @@ const CallerPageWrapper = () => {
         totalAmount: 0,
         // DELEVERY ADDRESS SELECT OPTIONS
         countryId: null,
+        countryLabel: '',
         pincodeId: null,
-        pincodeSecondId: null,
+        pincodeLabel: '',
         stateId: null,
+        stateLabel: '',
         // villageId: null,
         areaId: null,
+        areaLabel: '',
         districtId: null,
+        districtLabel: '',
         tehsilId: null,
-
+        tehsilLabel: '',
         // DELEVERY ADDRESS SELECT OPTIONS BOTTOM FIELDS
         typeOfAddress: '',
         reciversName: '',
-        deliveryTimeAndDate: '',
+        preffered_delivery_start_time: '',
+        preffered_delivery_end_time: '',
+        preffered_delivery_date: '',
         houseNumber: '',
         streetNumber: '',
         landmark: '',
@@ -300,7 +314,6 @@ const CallerPageWrapper = () => {
         // DELEVERY ADDRESS SELECT OPTIONS
         countryId: string(),
         pincodeId: string(),
-        pincodeSecondId: string(),
         stateId: string(),
         areaId: string(),
         districtId: string(),
@@ -340,15 +353,13 @@ const CallerPageWrapper = () => {
 
     const { data, isLoading, isFetching } = useGetAllCountryUnauthQuery('')
 
-    //country
+    // country
     const { allCountry }: any = useSelector((state: RootState) => state.country)
     const { allStates }: any = useSelector((state: RootState) => state.states)
-
     const { allDistricts }: any = useSelector(
         (state: RootState) => state.district
     )
     const { allTehsils }: any = useSelector((state: RootState) => state.tehsils)
-
     const { selectedItem: didItems }: any = useSelector(
         (state: RootState) => state.didManagement
     )
@@ -443,7 +454,7 @@ const CallerPageWrapper = () => {
     }
 
     // Caller Page Save Button Form Updation
-    const onSubmitHandler = (values: FormInitialValues) => {
+    const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
         const callerDetails: any = localStorage.getItem('callerPageData')
         let callerDataItem = JSON.parse(callerDetails)
         // setApiStatus(true)
@@ -452,11 +463,11 @@ const CallerPageWrapper = () => {
                 body: {
                     ...values,
                     countryId: '646b2f49f8ba85987b718ad8',
-                    areaId: '646b2fc7f8ba85987b718bde',
                 },
                 id: callerDataItem?.orderID,
             }).then((res: any) => {
                 if ('data' in res) {
+                    resetForm({ isSubmitting: false, dirty: false })
                     if (res?.data?.status) {
                         showToast('success', 'caller added successfully!')
                     } else {
@@ -514,6 +525,7 @@ const CallerPageWrapper = () => {
                     return (
                         <CallerPage
                             // apiStatus={apiStatus}
+                            isLoading={UpdateCallerFormInfo.isLoading}
                             formikProps={formikProps}
                             dropdownOptions={dropdownOptions}
                             schemeColumn={columns}
