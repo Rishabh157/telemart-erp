@@ -1348,7 +1348,7 @@ const CallerPage: React.FC<Props> = ({
                 </div>
                 <div className="col-span-1 px-3 pt-6">
                     <CallerButton
-                        disabled={!dirty || isSubmitting}
+                        // disabled={!dirty || isSubmitting}
                         isLoading={isLoading}
                         text="Save"
                         type="submit"

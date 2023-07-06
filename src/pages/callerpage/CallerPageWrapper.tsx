@@ -92,14 +92,14 @@ export type FormInitialValues = {
 const CallerPageWrapper = () => {
     const columns: columnTypes[] = [
         {
-            field: 'order',
+            field: 'ageGroup',
             headerName: 'ORDER NO',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            renderCell: (row) => <span> {row?.index} </span>,
+            renderCell: (row: CallerResponse) => <span>{row.ageGroup} </span>,
         },
         {
-            field: 'enq',
+            field: 'didNo',
             headerName: 'ENQ NO',
             flex: 'flex-[3_3_0%]',
             align: 'center',
@@ -467,7 +467,7 @@ const CallerPageWrapper = () => {
                 id: callerDataItem?.orderID,
             }).then((res: any) => {
                 if ('data' in res) {
-                    resetForm({ isSubmitting: false, dirty: false })
+                    // resetForm({ isSubmitting: false, dirty: false })
                     if (res?.data?.status) {
                         showToast('success', 'caller added successfully!')
                     } else {
