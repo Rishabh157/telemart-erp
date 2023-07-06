@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:Order.model.ts
+// Type: Model Component
+// Last Updated: JUNE 28, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Types --|
 export type OrderListResponse = {
     _id: string
     orderNumber: string

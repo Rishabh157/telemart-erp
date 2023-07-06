@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:DispositionThree.model.ts
+// Type: Model Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Types --|
 export type DispositionThreeListResponse = {
     dispositionName: string
     dispostionOneLabel: string

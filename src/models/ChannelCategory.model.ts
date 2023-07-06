@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:ChannelCategory.model.ts
+// Type: Model Component
+// Last Updated: JUNE 28, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Types --|
 export type ChannelCategoryListResponse = {
     channelCategory: string
     _id: string

@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:Ledger.model.ts
+// Type: Model Component
+// Last Updated: JUNE 28, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Types --|
 export enum NoteType {
     CREDIT_NOTE_CREATED = 'CREDIT_NOTE_CREATED',
     DEBIT_NOTE_CREATED = 'DEBIT_NOTE_CREATED',
