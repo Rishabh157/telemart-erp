@@ -109,7 +109,7 @@ export const userApi = apiSlice.injectEndpoints({
         getUserById: builder.query({
             providesTags: ['user'],
             query: (id) => ({
-                url: `/${id}`,
+                url: `/user/${id}`,
                 method: 'GET',
             }),
         }),

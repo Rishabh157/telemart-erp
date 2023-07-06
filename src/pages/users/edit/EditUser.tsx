@@ -1,6 +1,6 @@
 /// ==============================================
-// Filename:AddUser.tsx
-// Type: Add Component
+// Filename:EditUser.tsx
+// Type: Edit Component
 // Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
 // ==============================================
@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux'
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './AddUserWrapper'
+import { FormInitialValues } from './EditUserWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -43,11 +43,11 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/users',
     },
     {
-        label: 'Add User',
+        label: 'Update User',
     },
 ]
 
-const AddUser = ({ formikProps, apiStatus }: Props) => {
+const EditUser = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
     const [userRole, setuserRole] = useState<any[]>([])
 
@@ -58,6 +58,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
 
         setuserRole(departmentroles)
     }, [values])
+
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
@@ -73,7 +74,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add New User </ATMPageHeading>
+                    <ATMPageHeading> Update User </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -139,20 +140,6 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                     handleSetFieldValue('email', e.target.value)
                                 }
                             />
-                            {/* Password */}
-                            <ATMTextField
-                                name="password"
-                                type="password"
-                                value={values.password}
-                                label="Password"
-                                placeholder="Password"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'password',
-                                        e.target.value
-                                    )
-                                }
-                            />
 
                             {/* Mobile */}
                             <ATMTextField
@@ -198,4 +185,4 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
     )
 }
 
-export default AddUser
+export default EditUser
