@@ -23,7 +23,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './EditSaleOrderWrapper'
-import { useGetAllWareHouseByDealerIdQuery } from 'src/services/WareHoouseService'
+import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
 import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'

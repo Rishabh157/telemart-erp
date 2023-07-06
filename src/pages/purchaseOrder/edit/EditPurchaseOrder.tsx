@@ -18,7 +18,6 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditPurchaseOrderWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
@@ -26,6 +25,7 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 //import { HiPlus } from 'react-icons/hi'
 
 // |-- Types --|
@@ -125,40 +125,38 @@ const EditPurchaseOrder = ({
                             />
 
                             {/* Vendor */}
-                            <ATMSelect
-                                name="vendor"
-                                value={values.vendorId}
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'vendorId',
-                                        e.target.value
-                                    )
-                                }
-                                options={dropdownOptions.vendorOptions}
-                                label="Vendor"
-                            />
+                            <div className="-mt-2">
+                                <ATMSelectSearchable
+                                    name="vendorId"
+                                    value={values.vendorId}
+                                    onChange={(e) =>
+                                        handleSetFieldValue('vendorId', e)
+                                    }
+                                    options={dropdownOptions.vendorOptions}
+                                    label="Vendor"
+                                />
+                            </div>
 
                             {/* Warehouse */}
-                            <ATMSelect
-                                name="warehouse"
-                                value={values.wareHouseId}
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'wareHouseId',
-                                        e.target.value
-                                    )
-                                }
-                                options={dropdownOptions.warehouseOptions}
-                                label="Warehouse"
-                            />
-                            <div className="flex-[3_3_0%]">
-                                <ATMSelect
+                            <div className="-mt-2">
+                                <ATMSelectSearchable
+                                    name="wareHouseId"
+                                    value={values.wareHouseId}
+                                    onChange={(e) =>
+                                        handleSetFieldValue('wareHouseId', e)
+                                    }
+                                    options={dropdownOptions.warehouseOptions}
+                                    label="Warehouse"
+                                />
+                            </div>
+                            <div className="flex-[3_3_0%] -mt-2">
+                                <ATMSelectSearchable
                                     name={`purchaseOrder.itemId`}
                                     value={values?.purchaseOrder?.itemId}
                                     onChange={(e) =>
                                         handleSetFieldValue(
                                             `purchaseOrder.itemId`,
-                                            e.target.value
+                                            e
                                         )
                                     }
                                     options={dropdownOptions.itemOptions}

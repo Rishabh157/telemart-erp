@@ -18,11 +18,11 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddBarcodeWrapper'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { useDispatch } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Types --|
 type Props = {
@@ -102,15 +102,12 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 }
                             />
                             {/* Product Group  */}
-                            <ATMSelect
+                            <ATMSelectSearchable
                                 name="productGroup"
                                 value={values.productGroup}
                                 label="Product Group"
                                 onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'productGroup',
-                                        e.target.value
-                                    )
+                                    handleSetFieldValue('productGroup', e)
                                 }
                                 options={productGroupOption}
                             />

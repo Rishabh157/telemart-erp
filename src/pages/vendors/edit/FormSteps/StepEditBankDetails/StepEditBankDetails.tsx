@@ -19,11 +19,11 @@ import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUplo
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../EditVendorWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |--Types --|
 type FieldType = Field<'accountTypeOptions'>
@@ -156,7 +156,7 @@ const StepEditBankDetails = ({
                                                                             case 'select':
                                                                                 return (
                                                                                     <div className="-mt-2">
-                                                                                        <ATMSelect
+                                                                                        <ATMSelectSearchable
                                                                                             name={`bank_informations[${bankInformationIndex}].${name}`}
                                                                                             value={
                                                                                                 bankInformation[
@@ -169,8 +169,6 @@ const StepEditBankDetails = ({
                                                                                                 handleSetFieldValue(
                                                                                                     `bank_informations[${bankInformationIndex}].${name}`,
                                                                                                     e
-                                                                                                        .target
-                                                                                                        .value
                                                                                                 )
                                                                                             }}
                                                                                             options={
