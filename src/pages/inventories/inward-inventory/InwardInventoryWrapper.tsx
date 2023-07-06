@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux'
 import InwardInventory from './InwardInventory'
 import { useGetAllCartonBoxQuery } from 'src/services/CartonBoxService'
 import { CartonBoxListResponse, WarehousesListResponse } from 'src/models'
-import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
 // |-- Redux --|

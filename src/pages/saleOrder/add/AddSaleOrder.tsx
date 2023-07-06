@@ -23,7 +23,7 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './AddSaleOrderWrapper'
-import { useGetAllWareHouseByDealerIdQuery } from 'src/services/WareHoouseService'
+import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
 import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
@@ -166,7 +166,7 @@ const AddSaleOrder = ({
                                     value={values.dealerId}
                                     onChange={(e) => {
                                         handleSetFieldValue('dealerId', e)
-                                        setDealerId(e.target.value)
+                                        setDealerId(e)
                                     }}
                                     options={dropdownOptions.dealerOptions}
                                     label="Dealer"
@@ -246,8 +246,6 @@ const AddSaleOrder = ({
                                                                         setI(0)
                                                                         setProductGroup(
                                                                             e
-                                                                                .target
-                                                                                .value
                                                                         )
                                                                         setI(
                                                                             index

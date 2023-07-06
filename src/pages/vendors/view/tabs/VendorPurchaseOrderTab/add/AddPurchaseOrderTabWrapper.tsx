@@ -21,7 +21,7 @@ import { useAddPurchaseOrderMutation } from 'src/services/PurchaseOrderService'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
-import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllItemsQuery } from 'src/services/ItemService'
 import { setAllItems } from 'src/redux/slices/vendorSlice'
 

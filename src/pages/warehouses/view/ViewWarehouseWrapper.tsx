@@ -15,7 +15,7 @@ import { useParams } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import ViewWarehouse from './ViewWarehouse'
 //import { showToast } from "src/utils";
-import { useGetWareHouseByIdQuery } from 'src/services/WareHoouseService'
+import { useGetWareHouseByIdQuery } from 'src/services/WareHouseService'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'

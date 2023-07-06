@@ -19,7 +19,7 @@ import EditSaleOrder from './EditSaleOrder'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { showToast } from 'src/utils'
 import { useGetAllDealersQuery } from 'src/services/DealerServices'
-import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import {
     useGetSalesOrderByIdQuery,
