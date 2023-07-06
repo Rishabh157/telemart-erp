@@ -8,12 +8,10 @@
 // |-- Built-in Dependencies --|
 import React, { ChangeEvent, ReactNode, useState } from 'react'
 
-
 // |-- External Dependencies --|
 import { twMerge } from 'tailwind-merge'
 import { MdArrowDropDown } from 'react-icons/md'
 import { ClickAwayListener } from '@mui/material'
-
 
 // |-- Types --|
 type Props = {

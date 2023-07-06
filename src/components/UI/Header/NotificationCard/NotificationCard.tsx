@@ -11,7 +11,6 @@ import React from 'react'
 // |-- External Dependencies --|
 import { ClickAwayListener } from '@mui/material'
 
-
 const notications = [
     {
         date: '24 Nov 2022 03:20 PM',

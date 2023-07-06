@@ -25,8 +25,6 @@ import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
 import { RootState } from 'src/redux/store'
 import { setUserData } from 'src/redux/slices/authSlice'
 
-
-
 const Header = () => {
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
     const [isShowNotification, setIsShowNotification] = useState(false)
