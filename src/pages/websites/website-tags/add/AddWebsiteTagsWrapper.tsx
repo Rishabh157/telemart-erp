@@ -1,21 +1,36 @@
+/// ==============================================
+// Filename:AddWebsiteTagsWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import AddWebsiteTag from './AddWebsiteTag'
-import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import AddWebsiteTag from './AddWebsiteTag'
+import { showToast } from 'src/utils'
 import { useAddWebsiteTagsMutation } from 'src/services/websites/WebsiteTagsServices'
 import WebsiteLayout from '../../WebsiteLayout'
 import { useGetAllWebsiteQuery } from 'src/services/websites/WebsiteServices'
 import { useGetAllWebsitePageQuery } from 'src/services/websites/WebsitePageServices'
-import { setAllItems as setAllWebsites } from 'src/redux/slices/website/websiteSlice'
-import { setAllItems as setAllWebsitePage } from 'src/redux/slices/website/websitePageSlice'
 import { WebsiteListResponse } from 'src/models/website/Website.model'
 import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { setAllItems as setAllWebsites } from 'src/redux/slices/website/websiteSlice'
+import { setAllItems as setAllWebsitePage } from 'src/redux/slices/website/websitePageSlice'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

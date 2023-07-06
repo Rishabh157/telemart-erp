@@ -1,11 +1,25 @@
+/// ==============================================
+// Filename:WebsiteBlogViewWrapper.tsx
+// Type: View Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
-import WebsiteBlogView from './WebsiteBlogView'
+
+// |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import WebsiteBlogView from './WebsiteBlogView'
 import { useGetWebsiteBlogByIdQuery } from 'src/services/websites/WebsiteBlogServices'
-import { setSelectedWebsiteBlog } from 'src/redux/slices/website/websiteBlogSlice'
 import WebsiteLayout from '../../WebsiteLayout'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setSelectedWebsiteBlog } from 'src/redux/slices/website/websiteBlogSlice'
 
 const WebsiteBlogViewWrapper = () => {
     // Form Initial Values
