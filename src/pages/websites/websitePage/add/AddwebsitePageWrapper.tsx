@@ -1,15 +1,30 @@
+/// ==============================================
+// Filename:AddWebsitePageWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import { showToast } from 'src/utils'
 import WebsiteLayout from '../../WebsiteLayout'
 import { useAddWebsitePageMutation } from 'src/services/websites/WebsitePageServices'
 import AddWebsitePage from './AddWebsitePage'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

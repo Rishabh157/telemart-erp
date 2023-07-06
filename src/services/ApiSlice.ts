@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:ApiService.tsx
+// Type: Service Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Internal Dependencies --|
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { BASE_URL } from 'src/utils/constants/index'
 const tagTypes = [

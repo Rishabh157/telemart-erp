@@ -1,11 +1,25 @@
+/// ==============================================
+// Filename:ViewWebsiteTagsWrapper.tsx
+// Type: View Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
-import WebsiteTagsView from './WebsiteTagsView'
+
+// |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import WebsiteTagsView from './WebsiteTagsView'
 import { useGetWebsiteTagsByIdQuery } from 'src/services/websites/WebsiteTagsServices'
-import { setSelectedTags } from 'src/redux/slices/website/websiteTagsSlice'
 import WebsiteLayout from '../../WebsiteLayout'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setSelectedTags } from 'src/redux/slices/website/websiteTagsSlice'
 
 const ViewWebsiteTagsWrapper = () => {
     // Form Initial Values

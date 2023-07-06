@@ -1,13 +1,20 @@
+/// ==============================================
+// Filename:WebListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 05, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/website/websiteSlice'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import WebsiteLayout from '../../WebsiteLayout'
 import WebsiteListing from './WebsitetListing'
 import { WebsiteListResponse } from 'src/models/website/Website.model'
@@ -17,9 +24,16 @@ import {
 } from 'src/services/websites/WebsiteServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+
+// |-- Redux --|
 import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
 import { setFilterValue as setPageFilterValue } from 'src/redux/slices/website/websitePageSlice'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { AppDispatch, RootState } from 'src/redux/store'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/website/websiteSlice'
 
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

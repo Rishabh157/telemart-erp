@@ -1,14 +1,20 @@
+/// ==============================================
+// Filename:ListWebsiteBlogWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- Internal Dependencies --|
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/website/websiteBlogSlice'
 import WebsiteLayout from '../../WebsiteLayout'
 import ListWebsiteBlog from './ListWebsiteBlog'
 import { WebsiteBlogListResponse } from 'src/models/website/WebsiteBlog.model'
@@ -18,6 +24,14 @@ import {
 } from 'src/services/websites/WebsiteBlogServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/website/websiteBlogSlice'
 
 const ListWebsiteBlogWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
