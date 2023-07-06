@@ -11,7 +11,6 @@ import React from 'react'
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
 
-
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -21,7 +20,6 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from './AddInfluencerWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-
 
 // |-- Types --|
 type Props = {

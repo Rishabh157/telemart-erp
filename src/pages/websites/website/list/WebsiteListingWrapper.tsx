@@ -25,7 +25,6 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 
-
 // |-- Redux --|
 import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
 import { setFilterValue as setPageFilterValue } from 'src/redux/slices/website/websitePageSlice'
@@ -35,8 +34,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteSlice'
-
-
 
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

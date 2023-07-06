@@ -22,13 +22,11 @@ import {
     useUpdateWebsiteMutation,
 } from 'src/services/websites/WebsiteServices'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setSelectedWebsite } from 'src/redux/slices/website/websiteSlice'
 import WebsitesLayout from '../../WebsiteLayout'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-
 
 // |-- Types --|
 type Props = {}

@@ -20,11 +20,9 @@ import { showToast } from 'src/utils'
 import { useAddWebsiteBlogMutation } from 'src/services/websites/WebsiteBlogServices'
 import WebsiteLayout from '../../WebsiteLayout'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-
 
 // |-- Types --|
 type Props = {}

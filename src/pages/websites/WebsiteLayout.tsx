@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { NavItemType } from 'src/navigation'
@@ -30,8 +30,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
-
-
 
 const websitesNavigation: NavItemType[] = [
     {

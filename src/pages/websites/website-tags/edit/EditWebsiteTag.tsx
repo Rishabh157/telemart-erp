@@ -26,7 +26,6 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

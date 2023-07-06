@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState }   from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,7 +25,6 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsitesLayout from '../../WebsiteLayout'
 import WebsitePageListing from './WebsitePageListing'
 
-
 // |-- Redux --|
 import {
     setIsTableLoading,
@@ -33,7 +32,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/website/websitePageSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 const WebsitePageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

@@ -6,14 +6,13 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React  from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-
 
 // |-- Types --|
 type Props = {
