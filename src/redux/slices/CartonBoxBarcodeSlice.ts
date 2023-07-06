@@ -5,7 +5,6 @@
 // Project: TELIMART - Front End
 // ==============================================
 
-
 // |-- Internal Dependencies --|
 import { CartonBoxBarcodeListResponse } from '../../models/CartonBoxBarcode.model'
 

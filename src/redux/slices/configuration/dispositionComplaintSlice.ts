@@ -5,7 +5,6 @@
 // Project: TELIMART - Front End
 // ==============================================
 
-
 // |-- Internal Dependencies --|
 import { DispositionComplaintListResponse } from 'src/models/configurationModel/DispositionComplaint.model'
 

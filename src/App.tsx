@@ -19,7 +19,6 @@ import { Toaster } from 'react-hot-toast'
 // |-- Redux --|
 import store from './redux/store'
 
-
 function App() {
     return (
         <>

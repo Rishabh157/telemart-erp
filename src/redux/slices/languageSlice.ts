@@ -5,7 +5,6 @@
 // Project: TELIMART - Front End
 // ==============================================
 
-
 // |-- External Dependencies --|
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'

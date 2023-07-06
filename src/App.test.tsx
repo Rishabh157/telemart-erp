@@ -11,7 +11,6 @@ import React from 'react'
 // |-- External Dependencies --|
 import { render, screen } from '@testing-library/react'
 
-
 // |-- Internal Dependencies --|
 import App from './App'
 

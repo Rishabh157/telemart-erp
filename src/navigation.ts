@@ -26,7 +26,6 @@ import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 //import { BsFillCalendarCheckFill } from 'react-icons/bs'
 
-
 // |-- Types --|
 export type NavItemType = {
     label: string

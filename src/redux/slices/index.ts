@@ -5,7 +5,6 @@
 // Project: TELIMART - Front End
 // ==============================================
 
-
 // |-- Internal Dependencies --|
 export { default as dealerSlice } from './dealerSlice'
 export { default as vendorSlice } from './vendorSlice'

@@ -5,7 +5,6 @@
 // Project: TELIMART - Front End
 // ==============================================
 
-
 // |-- Internal Dependencies --|
 import { SlotManagementListResponse } from '../../../models/Slot.model'
 

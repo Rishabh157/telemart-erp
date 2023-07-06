@@ -5,14 +5,12 @@
 // Project: TELIMART - Front End
 // ==============================================
 
-
 // |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 // |-- Internal Dependencies --|
 import { GRNListResponse } from 'src/models/GRN.model'
-
 
 // |-- Types --|
 export type InitialStateType = {
