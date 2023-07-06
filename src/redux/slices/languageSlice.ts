@@ -1,7 +1,18 @@
+/// ==============================================
+// Filename:languageSlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- External Dependencies --|
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+
+// |-- Internal Dependencies --|
 import { LanguageListResponse } from 'src/models/Language.model'
 
+// |-- Types --|
 export type InitialStateType = {
     items: LanguageListResponse[] | []
     allItems: LanguageListResponse[] | []

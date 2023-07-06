@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:DidManagementService.tsx
+// Type: Service Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import { AddDidManagement, UpdateDidManagement } from 'src/models/Media.model'
 import apiSlice from '../ApiSlice'

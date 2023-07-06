@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:tapeManagementSlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Internal Dependencies --|
 import { TapeManagementListResponse } from '../../../models/tapeManagement.model'
+
+// |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 

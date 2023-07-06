@@ -158,10 +158,10 @@ const ATMSelectSearchable = ({
             onChange(values.length ? values : [])
         } else {
             if (isValueWithLable) {
-                console.log("with")
+                console.log('with')
                 onChange(selectedOption?.value ? selectedOption : '')
             } else {
-                console.log("without")
+                console.log('without')
 
                 onChange(selectedOption?.value ? selectedOption?.value : '')
             }
@@ -252,7 +252,7 @@ const ATMSelectSearchable = ({
                         (options.value as string) === ''
                     }
                     placeholder={`${selectLabel}`}
-                
+
                     // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
                 />
             </div>

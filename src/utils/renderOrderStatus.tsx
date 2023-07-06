@@ -1,3 +1,9 @@
+// Filename:srenderOrderStatus.ts
+// Type: Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
 export const orderStatusKey = {
     NOTASSIGNED: {
         bgColor: 'bg-yellow-100',

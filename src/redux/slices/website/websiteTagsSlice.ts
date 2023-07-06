@@ -1,5 +1,15 @@
+/// ==============================================
+// Filename:websiteTagsSlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- External Dependencies --|
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+
+// |-- Internal Dependencies --|
 import { WebsiteTagsListResponse } from 'src/models/website/WebsiteTags.model'
 
 export interface WebsiteTagsSliceStateType {

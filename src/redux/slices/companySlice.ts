@@ -1,5 +1,15 @@
+/// ==============================================
+// Filename:companySlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+
+// |-- Internal Dependencies --|
 import { CompaniesListResponse } from 'src/models'
 import { SelectedCompany } from 'src/models/Company.model'
 

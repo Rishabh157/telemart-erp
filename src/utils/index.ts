@@ -1,7 +1,19 @@
-import { apiSlice } from 'src/services/ApiSlice'
+// Filename:index.ts
+// Type: index Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- External Dependencies --|
 import { toast } from 'react-hot-toast'
+
+// |-- Internal Dependencies --|
+import { apiSlice } from 'src/services/ApiSlice'
+
+// |-- Redux --|
 import { setAccessToken, setRefreshToken } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type ToastType = 'success' | 'error'
 const apiSliceType: any = apiSlice
 
