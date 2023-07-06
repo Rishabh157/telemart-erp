@@ -251,7 +251,7 @@ const CallerPage: React.FC<Props> = ({
 
     const [isRecording, setIsRecording] = useState<boolean>(false)
     const [pinCodeSearch, setPinCodeSearch] = useState<string>('')
-    const { values, setFieldValue, dirty, isSubmitting } = formikProps
+    const { values, setFieldValue } = formikProps
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate()
 
@@ -412,8 +412,22 @@ const CallerPage: React.FC<Props> = ({
         if (!areaIsFetching && !areaIsLoading) {
             dispatch(setAreaItems(areaData?.data))
         }
+        // eslint-disable-next-line
     }, [areaData, areaIsLoading, areaIsFetching, dispatch])
 
+    useEffect(() => {
+        if (formikProps?.values?.pincodeId && areaData?.data) {
+            let v: string[] | string =
+                formikProps?.values?.autoFillingShippingAddress.split('\n')
+            let areaName = areaData?.data[0]?.area
+            v.splice(1, 0, areaName)
+            let cv: string = v.toString()
+            let dv = cv?.replaceAll(',', '\n')
+            setFieldValue('areaId', areaData?.data[0]?._id || '')
+            setFieldValue('autoFillingShippingAddress', dv || '')
+        }
+        // eslint-disable-next-line
+    }, [allArea,formikProps?.values?.pincodeId])
     dropdownOptions = {
         ...dropdownOptions,
 
@@ -460,23 +474,44 @@ const CallerPage: React.FC<Props> = ({
         var newarray = allPincodes?.find((ele: any) => {
             return ele._id === newValue
         })
+
         // set values with id
-        setFieldValue('pincodeId', newarray?._id)
-        setFieldValue('tehsilId', newarray?.tehsilId)
-        setFieldValue('districtId', newarray?.districtId)
-        setFieldValue('stateId', newarray?.stateId)
-        setFieldValue('countryId', newarray?.countryId)
+        setFieldValue('pincodeId', newarray?._id ? newarray?._id : '')
+        setFieldValue('tehsilId', newarray?.tehsilId ? newarray?.tehsilId : '')
+        setFieldValue(
+            'districtId',
+            newarray?.districtId ? newarray?.districtId : ''
+        )
+        if (!newarray) {
+            setFieldValue('areaId', newarray || '')
+        }
+        setFieldValue('stateId', newarray?.stateId ? newarray?.stateId : '')
+        setFieldValue(
+            'countryId',
+            newarray?.countryId ? newarray?.countryId : ''
+        )
 
         // set values with label
-        setFieldValue('pincodeLabel', newarray?.pincode)
-        setFieldValue('stateLabel', newarray?.StateLable)
-        setFieldValue('districtLabel', newarray?.DistrictLable)
-        setFieldValue('stateId', newarray?.stateId)
-        setFieldValue('tehsilLabel', newarray?.tehsilLable)
+        setFieldValue(
+            'pincodeLabel',
+            newarray?.pincode ? newarray?.pincode : ''
+        )
+        setFieldValue('stateLabel', newarray?.StateLable || '')
+        setFieldValue(
+            'districtLabel',
+            newarray?.DistrictLable ? newarray?.DistrictLable : ''
+        )
+        setFieldValue('stateId', newarray?.stateId ? newarray?.stateId : '')
+        setFieldValue(
+            'tehsilLabel',
+            newarray?.tehsilLable ? newarray?.tehsilLable : ''
+        )
 
         setFieldValue(
             'autoFillingShippingAddress',
-            `${newarray?.pincode}\n${newarray?.StateLable}\n${newarray?.areaLable}\n${newarray?.DistrictLable}\n${newarray?.tehsilLable}`
+            newarray?._id
+                ? `${newarray?.pincode}\n${newarray?.StateLable}\n${newarray?.DistrictLable}\n${newarray?.tehsilLable}`
+                : ''
         )
     }
 
@@ -715,10 +750,10 @@ const CallerPage: React.FC<Props> = ({
                                         }
                                         isValueWithLable={true}
                                         onChange={(e) => {
-                                            handlePinCode(e.value)
+                                            handlePinCode(e?.value || '')
                                             setFieldValue(
                                                 'pincodeLabel',
-                                                e.label
+                                                e?.label || ''
                                             )
                                         }}
                                     />
