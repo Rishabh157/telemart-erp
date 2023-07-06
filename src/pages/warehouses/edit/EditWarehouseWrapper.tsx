@@ -26,7 +26,7 @@ import { showToast } from 'src/utils'
 import {
     useGetWareHouseByIdQuery,
     useUpdateWareHouseMutation,
-} from 'src/services/WareHoouseService'
+} from 'src/services/WareHouseService'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
 

@@ -2,8 +2,12 @@ import { ErrorMessage } from 'formik'
 import React, { useState } from 'react'
 // import { BsInfoCircle } from 'react-icons/bs'
 import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
-import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
+import {
+    getInputHeight,
+    getLabelFont,
+} from 'src/utils/formUtils/getInputHeight'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { twMerge } from 'tailwind-merge'
 
 export type ATMTextFieldPropTypes = {
     name: string
@@ -21,8 +25,9 @@ export type ATMTextFieldPropTypes = {
     InfoChildren?: React.ReactNode
     InfoTitle?: string
     isPassWordVisible?: boolean
-    LabelDirection?: 'horizontal' | 'vertical'
+    labelDirection?: 'horizontal' | 'vertical'
     classDirection?: string
+    labelSize?: 'small' | 'medium' | 'large' | 'xs'
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
 const ATMTextField = ({
@@ -44,29 +49,34 @@ const ATMTextField = ({
     InfoChildren = null,
     InfoTitle = 'Info',
     labelClass = 'font-medium',
-    LabelDirection = 'vertical',
-    classDirection = 'grid grid-cols-12 ',
+    labelDirection = 'vertical',
+    classDirection = 'grid grid-cols-12',
+    labelSize = 'small',
     ...rest
 }: ATMTextFieldPropTypes) => {
     const [visibility, setVisibility] = useState(type)
     return (
-        <div className={`relative mt-4 ${extraClassField}`}>
+        <div className={twMerge('relative mt-4', `${extraClassField}`)}>
             <div
                 className={`  ${
-                    LabelDirection === 'horizontal'
+                    labelDirection === 'horizontal'
                         ? `  gap-2 w-full  ${classDirection}`
                         : ' '
                 }`}
             >
                 <div
                     className={`flex gap-1 ${
-                        LabelDirection === 'horizontal'
+                        labelDirection === 'horizontal'
                             ? `  col-span-4 w-full h-full flex items-center `
                             : ' '
                     }`}
                 >
                     {label && (
-                        <label className={`text-slate-700 ${labelClass}`}>
+                        <label
+                            className={`text-slate-700 ${getLabelFont(
+                                labelSize
+                            )} ${labelClass}`}
+                        >
                             {label}{' '}
                             {required && (
                                 <span className="text-red-500"> * </span>
@@ -94,7 +104,7 @@ const ATMTextField = ({
                     )}  w-full px-2 text-slate-700 border ${
                         disabled ? 'bg-blue-100' : ''
                     } border-slate-400 outline-blue-400   ${
-                        LabelDirection === 'horizontal' ? 'col-span-8' : ''
+                        labelDirection === 'horizontal' ? 'col-span-8' : ''
                     } ${className}`}
                     {...rest}
                     onBlur={onBlur}

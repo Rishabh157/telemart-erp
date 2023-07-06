@@ -204,6 +204,8 @@ import {
     AddVendorWarehouseWrapper,
     EditVendorWarehouseWrapper,
 } from './pages/index'
+import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
+
 import { useDispatch } from 'react-redux'
 import {
     setAccessToken,
@@ -242,8 +244,8 @@ const PageRoutes = () => {
                     <Routes>
                         <Route path="*" element={<Auth />} />
                         <Route
-                            path="media/inbound/"
-                            element={<InbouundWrapper />}
+                            path="media/caller-page/"
+                            element={<CallerPageWrapper />}
                         />
                     </Routes>
                 </BrowserRouter>
@@ -345,6 +347,11 @@ const PageRoutes = () => {
                     <Route path="/" element={<Auth />} />
                     <Route path="/dashboard" element={<DashboardWrappper />} />
                     <Route path="/profile" element={<ProfileWrappper />} />
+                    <Route
+                        path="media/caller-page"
+                        element={<CallerPageWrapper />}
+                    />
+                    <Route path="/orders" element={<OrderListing />} />
 
                     <Route path="/orders" element={<Order />}>
                         <Route index element={<OrderListing />} />

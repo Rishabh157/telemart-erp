@@ -21,7 +21,7 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useAddPurchaseOrderMutation } from 'src/services/PurchaseOrderService'
 import { showToast } from 'src/utils'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
-import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllItemsQuery } from 'src/services/ItemService'
 
 // |-- Redux --|

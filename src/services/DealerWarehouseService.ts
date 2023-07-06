@@ -60,6 +60,16 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+        // **** GET ALL BY Dealer ID
+        getAllWareHouseByDealerId: builder.query({
+            providesTags: ['WareHouse'],
+            query: ({ companyId, dealerId }) => ({
+                url: `/dealer-warehouse/company/${companyId}/dealer/${dealerId}`,
+
+                method: 'GET',
+            }),
+        }),
     }),
 })
 
@@ -69,4 +79,5 @@ export const {
     useUpdateDealerWarehouseMutation,
     useGetDealerWarehouseByIdQuery,
     useDeleteDealerWarehouseMutation,
+    useGetAllWareHouseByDealerIdQuery,
 } = dealerWarehouseApi

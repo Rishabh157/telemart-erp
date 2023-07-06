@@ -20,16 +20,16 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './AddSaleOrderWrapper'
-import { useGetAllWareHouseByDealerIdQuery } from 'src/services/WareHoouseService'
+import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
 import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Types --|
 type Props = {
@@ -160,46 +160,48 @@ const AddSaleOrder = ({
                             />
 
                             {/* Dealer */}
-                            <ATMSelect
-                                name="dealerId"
-                                value={values.dealerId}
-                                onChange={(e) => {
-                                    handleSetFieldValue(
-                                        'dealerId',
-                                        e.target.value
-                                    )
-                                    setDealerId(e.target.value)
-                                }}
-                                options={dropdownOptions.dealerOptions}
-                                label="Dealer"
-                            />
-
+                            <div className="-mt-2">
+                                <ATMSelectSearchable
+                                    name="dealerId"
+                                    value={values.dealerId}
+                                    onChange={(e) => {
+                                        handleSetFieldValue('dealerId', e)
+                                        setDealerId(e)
+                                    }}
+                                    options={dropdownOptions.dealerOptions}
+                                    label="Dealer"
+                                />
+                            </div>
                             {/* Dealer Warehouse */}
-                            <ATMSelect
-                                name="dealerWareHouseId"
-                                value={values.dealerWareHouseId}
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'dealerWareHouseId',
-                                        e.target.value
-                                    )
-                                }
-                                options={dealerWarehouseOptions}
-                                label="Dealer Warehouse"
-                            />
+                            <div className="-mt-2">
+                                <ATMSelectSearchable
+                                    name="dealerWareHouseId"
+                                    value={values.dealerWareHouseId}
+                                    onChange={(e) =>
+                                        handleSetFieldValue(
+                                            'dealerWareHouseId',
+                                            e
+                                        )
+                                    }
+                                    options={dealerWarehouseOptions}
+                                    label="Dealer Warehouse"
+                                />
+                            </div>
                             {/* Warehouse */}
-                            <ATMSelect
-                                name="companyWareHouseId"
-                                value={values.companyWareHouseId}
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'companyWareHouseId',
-                                        e.target.value
-                                    )
-                                }
-                                options={dropdownOptions.warehouseOptions}
-                                label="Warehouse"
-                            />
+                            <div className="-mt-2">
+                                <ATMSelectSearchable
+                                    name="companyWareHouseId"
+                                    value={values.companyWareHouseId}
+                                    onChange={(e) =>
+                                        handleSetFieldValue(
+                                            'companyWareHouseId',
+                                            e
+                                        )
+                                    }
+                                    options={dropdownOptions.warehouseOptions}
+                                    label="Warehouse"
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -227,8 +229,8 @@ const AddSaleOrder = ({
                                                             className="flex gap-3 items-end "
                                                         >
                                                             {/* Product Name */}
-                                                            <div className="flex-1">
-                                                                <ATMSelect
+                                                            <div className="flex-1 ">
+                                                                <ATMSelectSearchable
                                                                     name={`productSalesOrder[${index}].productGroupId`}
                                                                     value={
                                                                         productGroupId
@@ -239,15 +241,11 @@ const AddSaleOrder = ({
                                                                         handleSetFieldValue(
                                                                             `productSalesOrder[${index}].productGroupId`,
                                                                             e
-                                                                                .target
-                                                                                .value
                                                                         )
 
                                                                         setI(0)
                                                                         setProductGroup(
                                                                             e
-                                                                                .target
-                                                                                .value
                                                                         )
                                                                         setI(
                                                                             index

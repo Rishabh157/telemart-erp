@@ -7,7 +7,7 @@ import StepAddCompanyDetailsWrapper from './FormSteps/StepAddComapnyDetails/Step
 import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
 import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
 import AddWarehouse from './AddWarehouse'
-import { useAddWareHouseMutation } from 'src/services/WareHoouseService'
+import { useAddWareHouseMutation } from 'src/services/WareHouseService'
 import { showToast } from 'src/utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'

@@ -17,13 +17,13 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './AddProductSubCategoryWrapper'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Types --|
 type Props = {
@@ -121,21 +121,24 @@ const AddProductSubCategory = ({
                                 }
                                 className="mt-0 rounded"
                             />
-
-                            <ATMSelect
-                                name="parentCategoryId"
-                                value={values.parentCategoryId}
-                                onChange={(e) => {
-                                    handleSetFieldValue(
-                                        'parentCategoryId',
-                                        e.target.value
-                                    )
-                                }}
-                                options={dropdownOptions.parentCategoryOptions}
-                                label="Parent Category"
-                            />
-
+                            <div className="-mt-2 ">
+                                <ATMSelectSearchable
+                                    name="parentCategoryId"
+                                    value={values.parentCategoryId}
+                                    onChange={(e) => {
+                                        handleSetFieldValue(
+                                            'parentCategoryId',
+                                            e
+                                        )
+                                    }}
+                                    options={
+                                        dropdownOptions.parentCategoryOptions
+                                    }
+                                    label="Parent Category"
+                                />
+                            </div>
                             {/* Field 3 */}
+
                             <ATMTextField
                                 name="hsnCode"
                                 value={values.hsnCode}

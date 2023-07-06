@@ -19,7 +19,6 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddPurchaseOrderWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
@@ -27,6 +26,7 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Types --|
 type Props = {
@@ -125,32 +125,30 @@ const AddPurchaseOrder = ({
                             />
 
                             {/* Vendor */}
-                            <ATMSelect
-                                name="vendorId"
-                                value={values.vendorId}
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'vendorId',
-                                        e.target.value
-                                    )
-                                }
-                                options={dropdownOptions.vendorOptions}
-                                label="Vendor"
-                            />
+                            <div className="-mt-2">
+                                <ATMSelectSearchable
+                                    name="vendorId"
+                                    value={values.vendorId}
+                                    onChange={(e) =>
+                                        handleSetFieldValue('vendorId', e)
+                                    }
+                                    options={dropdownOptions.vendorOptions}
+                                    label="Vendor"
+                                />
+                            </div>
 
                             {/* Warehouse */}
-                            <ATMSelect
-                                name="wareHouseId"
-                                value={values.wareHouseId}
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'wareHouseId',
-                                        e.target.value
-                                    )
-                                }
-                                options={dropdownOptions.warehouseOptions}
-                                label="Warehouse"
-                            />
+                            <div className="-mt-2">
+                                <ATMSelectSearchable
+                                    name="wareHouseId"
+                                    value={values.wareHouseId}
+                                    onChange={(e) =>
+                                        handleSetFieldValue('wareHouseId', e)
+                                    }
+                                    options={dropdownOptions.warehouseOptions}
+                                    label="Warehouse"
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -180,8 +178,8 @@ const AddPurchaseOrder = ({
                                                             className="flex gap-3 items-end  "
                                                         >
                                                             {/* Item Name */}
-                                                            <div className="flex-[3_3_0%]">
-                                                                <ATMSelect
+                                                            <div className="flex-[3_3_0%] -mt-4">
+                                                                <ATMSelectSearchable
                                                                     name={`purchaseOrder[${itemIndex}].itemId`}
                                                                     value={
                                                                         itemId
@@ -192,8 +190,6 @@ const AddPurchaseOrder = ({
                                                                         handleSetFieldValue(
                                                                             `purchaseOrder[${itemIndex}].itemId`,
                                                                             e
-                                                                                .target
-                                                                                .value
                                                                         )
                                                                     }
                                                                     options={
@@ -204,7 +200,7 @@ const AddPurchaseOrder = ({
                                                             </div>
 
                                                             {/* Rate */}
-                                                            <div className="flex-[2_2_0%]">
+                                                            <div className="flex-[2_2_0%] ">
                                                                 <ATMTextField
                                                                     type="number"
                                                                     min={0}

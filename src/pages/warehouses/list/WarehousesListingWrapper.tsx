@@ -21,7 +21,7 @@ import WarehouseListing from './WarehousesListing'
 import {
     useDeleteWareHouseMutation,
     useGetPaginationWareHousesQuery,
-} from 'src/services/WareHoouseService'
+} from 'src/services/WareHouseService'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
