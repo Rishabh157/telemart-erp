@@ -13,7 +13,6 @@ import { FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditVendorWrapper'
@@ -21,6 +20,7 @@ import { FormInitialValues } from '../../EditVendorWrapper'
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -153,8 +153,8 @@ const StepAddAddress = ({
 
                                     case 'select':
                                         return (
-                                            <div key={name} className="mt-0">
-                                                <ATMSelect
+                                            <div key={name} className="-mt-2">
+                                                <ATMSelectSearchable
                                                     label={label}
                                                     name={name}
                                                     value={
@@ -173,7 +173,7 @@ const StepAddAddress = ({
                                                     onChange={(e) => {
                                                         handleSetFieldValue(
                                                             name,
-                                                            e.target.value
+                                                            e
                                                         )
                                                         if (
                                                             name ===
