@@ -67,7 +67,7 @@ const mediaNavigation: NavItemType[] = [
     {
         label: 'Inbound',
         icon: AiOutlineSetting,
-        path: '/media/inbound',
+        path: '/media/caller-page',
     },
 ]
 

@@ -12,6 +12,7 @@ type Props = {
     name?: string
     isSubmitting?: boolean
     labelClass?: string
+    readOnly?: boolean
 }
 
 const ATMTextArea = ({
@@ -24,6 +25,7 @@ const ATMTextArea = ({
     minRows = 2,
     labelClass = ' font-medium',
     name = '',
+    readOnly = false,
     isSubmitting = true,
 }: Props) => {
     return (
@@ -35,6 +37,7 @@ const ATMTextArea = ({
                 </label>
             )}
             <textarea
+                readOnly={readOnly}
                 name={name}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}

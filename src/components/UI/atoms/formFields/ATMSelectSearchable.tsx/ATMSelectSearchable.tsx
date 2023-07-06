@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:ATMSelectSearchable.tsx
 // Type: Select Component
-// Last Updated: JUNE 27, 2023
+// Last Updated: JUNE 29, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -12,6 +12,7 @@ import React from 'react'
 import Select from 'react-select'
 import { ErrorMessage } from 'formik'
 import { twMerge } from 'tailwind-merge'
+import { getLabelFont } from 'src/utils/formUtils/getInputHeight'
 
 export type SelectOption = {
     label: string
@@ -36,6 +37,14 @@ type Props = {
     labelClass?: string
     selectClass?: string
     isDisabled?: boolean
+    labelDirection?: 'horizontal' | 'vertical'
+    classDirection?: string
+    labelSpan?: string
+    inputSpan?: string
+    componentClass?: string
+    labelSize?: 'small' | 'medium' | 'large' | 'xs'
+    isMenuOpen?: boolean
+    isValueWithLable?: boolean
 }
 
 const ATMSelectSearchable = ({
@@ -56,6 +65,14 @@ const ATMSelectSearchable = ({
     isLoading = false,
     selectClass = 'mt-0 ',
     isDisabled = false,
+    labelDirection = 'vertical',
+    classDirection = 'grid grid-cols-3',
+    labelSpan = 'col-span-1',
+    inputSpan = 'col-span-2',
+    componentClass = '  mt-6',
+    labelSize = 'small',
+    isMenuOpen = undefined,
+    isValueWithLable = false,
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -76,6 +93,7 @@ const ATMSelectSearchable = ({
             paddingTop: '0px',
             alignItems: 'start',
             overflow: 'scroll',
+            // maxHeight: '67px',
             maxHeight: '36px',
         }),
         indicator: (provided: any) => ({
@@ -88,7 +106,6 @@ const ATMSelectSearchable = ({
         }),
         input: (provided: any) => ({
             ...provided,
-
             textColor: 'rgb(51 65 85,0)',
             paddingLeft: '4px',
             paddingTop: '-4px',
@@ -97,6 +114,10 @@ const ATMSelectSearchable = ({
         indicatorSeparator: (provided: any) => ({
             ...provided,
             display: 'none',
+        }),
+        option: (provided: any) => ({
+            ...provided,
+            padding: '6px 12px',
         }),
         menu: (provided: any) => ({
             ...provided,
@@ -136,7 +157,14 @@ const ATMSelectSearchable = ({
             })
             onChange(values.length ? values : [])
         } else {
-            onChange(selectedOption?.value ? selectedOption?.value : '')
+            if (isValueWithLable) {
+                console.log("with")
+                onChange(selectedOption?.value ? selectedOption : '')
+            } else {
+                console.log("without")
+
+                onChange(selectedOption?.value ? selectedOption?.value : '')
+            }
         }
     }
     // const handleOnInputChange = (valueOp:string) => {
@@ -166,37 +194,68 @@ const ATMSelectSearchable = ({
         }
     }
     return (
-        <div className="relative mt-6 bg-slate-50">
-            {label && (
-                <label className={`text-slate-700  ${labelClass}`}>
-                    {label}
-                    {required && <span className="text-red-500"> * </span>}
-                </label>
-            )}
-
-            <Select
-                className={twMerge(
-                    `border rounded border-slate-400 `,
-                    `${selectClass}`
-                )}
-                name={name}
-                defaultValue={selectOptions?.find(
-                    (option) => option.value === defaultValue
-                )}
-                value={handleValue()}
-                onChange={(selectedOption) => handleOnChange(selectedOption)}
-                options={selectOptions}
-                isSearchable={isSearchable}
-                styles={selectStyles}
-                isMulti={isMulti}
-                isDisabled={isDisabled}
-                isClearable
-                isLoading={isLoading}
-                isOptionDisabled={(options) => (options.value as string) === ''}
-                placeholder={`${selectLabel}`}
-                // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
-            />
-
+        <div className={`${componentClass} relative`}>
+            <div
+                className={`  ${
+                    labelDirection === 'horizontal'
+                        ? `  gap-2 w-full  ${classDirection}`
+                        : ' '
+                }`}
+            >
+                <div
+                    className={`flex gap-1 ${
+                        labelDirection === 'horizontal'
+                            ? `  ${labelSpan} w-full h-full flex items-center `
+                            : ' '
+                    }`}
+                >
+                    {label && (
+                        <label
+                            className={`text-slate-700   ${getLabelFont(
+                                labelSize
+                            )}  ${labelClass}`}
+                        >
+                            {label}
+                            {required && (
+                                <span className="text-red-500"> * </span>
+                            )}
+                        </label>
+                    )}
+                </div>
+                <Select
+                    menuIsOpen={isMenuOpen}
+                    maxMenuHeight={isMenuOpen ? 110 : 300}
+                    className={twMerge(
+                        `border rounded border-slate-400 ${
+                            labelDirection === 'horizontal'
+                                ? `${inputSpan}`
+                                : ''
+                        }`,
+                        `${selectClass}`
+                    )}
+                    name={name}
+                    defaultValue={selectOptions?.find(
+                        (option) => option.value === defaultValue
+                    )}
+                    value={handleValue()}
+                    onChange={(selectedOption) =>
+                        handleOnChange(selectedOption)
+                    }
+                    options={selectOptions}
+                    isSearchable={isSearchable}
+                    styles={selectStyles}
+                    isMulti={isMulti}
+                    isDisabled={isDisabled}
+                    isClearable
+                    isLoading={isLoading}
+                    isOptionDisabled={(options) =>
+                        (options.value as string) === ''
+                    }
+                    placeholder={`${selectLabel}`}
+                
+                    // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
+                />
+            </div>
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
