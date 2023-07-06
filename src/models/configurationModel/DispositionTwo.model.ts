@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:DispositionTwo.model.ts
+// Type: Model Component
+// Last Updated: JUNE 28, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Types --|
 export type DispositionTwoListResponse = {
     dispositionName: string
     dispostionOneLabel: string
