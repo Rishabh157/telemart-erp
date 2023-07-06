@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react'
+/// ==============================================
+// Filename:WebsitePageListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useEffect, useState }   from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/website/websitePageSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     useDeleteWebsitePageMutation,
     useGetPaginationWebsitePageQuery,
@@ -18,6 +24,16 @@ import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsitesLayout from '../../WebsiteLayout'
 import WebsitePageListing from './WebsitePageListing'
+
+
+// |-- Redux --|
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/website/websitePageSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+
 
 const WebsitePageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

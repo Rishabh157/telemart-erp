@@ -1,6 +1,14 @@
-import React, { useState } from 'react'
-import Header from 'src/components/UI/Header/Header'
-import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
+/// ==============================================
+// Filename:WebsiteLayout.tsx
+// Type: Layout Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React, { useState }  from 'react'
+
+// |-- External Dependencies --|
 import { NavItemType } from 'src/navigation'
 import {
     BiChevronsLeft,
@@ -18,6 +26,12 @@ import { CgWebsite } from 'react-icons/cg'
 import { RiPagesLine } from 'react-icons/ri'
 import { TbBrandBlogger } from 'react-icons/tb'
 import { useLocation, useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import Header from 'src/components/UI/Header/Header'
+import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
+
+
 
 const websitesNavigation: NavItemType[] = [
     {

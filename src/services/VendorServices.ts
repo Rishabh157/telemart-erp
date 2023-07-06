@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:VendorService.tsx
+// Type: Service Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Internal Dependencies --|
 import { AddVendor, UpdateVendor } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'

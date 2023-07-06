@@ -1,19 +1,34 @@
+/// ==============================================
+// Filename:EditWebsiteBlogWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import EditWebsiteBlog from './EditWebsiteBlog'
-import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import EditWebsiteBlog from './EditWebsiteBlog'
+import { showToast } from 'src/utils'
 import {
     useGetWebsiteBlogByIdQuery,
     useUpdateWebsiteBlogMutation,
 } from 'src/services/websites/WebsiteBlogServices'
-import { setSelectedWebsiteBlog } from 'src/redux/slices/website/websiteBlogSlice'
 import WebsitesLayout from '../../WebsiteLayout'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { setSelectedWebsiteBlog } from 'src/redux/slices/website/websiteBlogSlice'
+
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
