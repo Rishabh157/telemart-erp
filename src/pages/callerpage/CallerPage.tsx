@@ -420,10 +420,11 @@ const CallerPage: React.FC<Props> = ({
             let v: string[] | string =
                 formikProps?.values?.autoFillingShippingAddress.split('\n')
             let areaName = areaData?.data[0]?.area
-            v.splice(1, 0, areaName)
+            v.splice(2, 0, areaName)
             let cv: string = v.toString()
             let dv = cv?.replaceAll(',', '\n')
             setFieldValue('areaId', areaData?.data[0]?._id || '')
+            setFieldValue('areaLabel', areaName || '')
             setFieldValue('autoFillingShippingAddress', dv || '')
         }
         // eslint-disable-next-line
