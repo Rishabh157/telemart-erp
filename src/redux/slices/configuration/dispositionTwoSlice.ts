@@ -1,5 +1,16 @@
+/// ==============================================
+// Filename:dispositionTwoSlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+
+// |-- External Dependencies --|
 import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+
+// |-- Internal Dependencies --|
 import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
 
 export interface DispositionTwoSliceStateType {

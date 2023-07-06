@@ -1,5 +1,16 @@
+/// ==============================================
+// Filename:districtSlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+
+// |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+
+// |-- Internal Dependencies --|
 import { DistrictListResponse } from 'src/models/District.model'
 import { LocationSelectType } from 'src/utils'
 

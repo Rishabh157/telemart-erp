@@ -1,5 +1,16 @@
+/// ==============================================
+// Filename:attributesGroupSlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+
+// |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+
+// |-- Internal Dependencies --|
 import { AttributesGroupListResponse } from 'src/models/AttrbutesGroup.model'
 
 export interface AttributesGroupSliceStateType {

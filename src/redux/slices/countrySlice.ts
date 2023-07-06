@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:countrySlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+
+// |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+
+
+// |-- Internal Dependencies --|
 import { CountryListResponse } from 'src/models/Country.model'
 import { LocationSelectType } from 'src/utils'
 

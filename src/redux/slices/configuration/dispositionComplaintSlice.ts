@@ -1,4 +1,15 @@
+/// ==============================================
+// Filename:dispositionComplaintSlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+
+// |-- Internal Dependencies --|
 import { DispositionComplaintListResponse } from 'src/models/configurationModel/DispositionComplaint.model'
+
+// |-- External Dependencies --|
 import { Slice, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 

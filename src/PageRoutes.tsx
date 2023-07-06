@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:PageRoutes.tsx
+// Type: Route Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import {
     AddArtistWrapper,
     AddASRWrapper,

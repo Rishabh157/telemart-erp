@@ -1,5 +1,13 @@
+// Filename:showConfirmationDialog.ts
+// Type: Dialog Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- External Built Dependencies --|
 import Swal, { SweetAlertIcon, SweetAlertResult } from 'sweetalert2'
 
+// |-- Types --|
 type Props = {
     title: string
     text: string

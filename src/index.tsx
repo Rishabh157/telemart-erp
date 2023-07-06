@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:index.tsx
+// Type: index Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- In - Built Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import ReactDOM from 'react-dom/client'
+
+// |-- Internal Dependencies --|
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'

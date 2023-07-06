@@ -1,5 +1,16 @@
+/// ==============================================
+// Filename:websiteBlogSlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+
+// |-- External Dependencies --|
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+
+// |-- Internal Dependencies --|
 import { WebsiteBlogListResponse } from 'src/models/website/WebsiteBlog.model'
 
 export interface WebsiteBlogSliceStateType {

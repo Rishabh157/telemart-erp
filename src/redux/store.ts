@@ -1,5 +1,16 @@
+/// ==============================================
+// Filename:store.ts
+// Type: Redux Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+
+// |-- External Dependencies --|
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
+
+// |-- Internal Dependencies --|
 import { apiSlice } from 'src/services'
 import {
     barcodeSlice,

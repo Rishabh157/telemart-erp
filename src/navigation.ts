@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:Navigation.tsx
+// Type: Nave Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- External Dependencies --|
 import { RxDashboard } from 'react-icons/rx'
 import { FiUsers } from 'react-icons/fi'
 import { TbBuildingWarehouse } from 'react-icons/tb'
@@ -11,7 +19,6 @@ import {
     MdPermMedia,
     MdWeb,
 } from 'react-icons/md'
-
 import { IoCallOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { BiBox, BiPurchaseTagAlt } from 'react-icons/bi'
@@ -19,6 +26,8 @@ import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 //import { BsFillCalendarCheckFill } from 'react-icons/bs'
 
+
+// |-- Types --|
 export type NavItemType = {
     label: string
     path: string

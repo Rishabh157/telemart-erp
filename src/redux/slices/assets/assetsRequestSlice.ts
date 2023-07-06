@@ -1,5 +1,16 @@
+/// ==============================================
+// Filename:assetsRequestSlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+
+// |-- External Dependencies --|
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+
+// |-- Internal Dependencies --|
 import { AssetsRequestListResponse } from 'src/models/assets/AssetsRequest.model'
 
 export interface AssetsRequestSliceStateType {

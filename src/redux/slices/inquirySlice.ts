@@ -1,7 +1,19 @@
+/// ==============================================
+// Filename:InquirySlice.ts
+// Type: Slice Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+
+// |-- External Dependencies --|
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+
+// |-- Internal Dependencies --|
 import { InquiryListResponse } from 'src/models'
 
+// |-- Types --|
 export type InitialStateType = {
     items: InquiryListResponse[] | []
     allItems: InquiryListResponse[] | []
