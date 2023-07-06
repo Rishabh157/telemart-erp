@@ -18,20 +18,20 @@
         },
         {
             "label": "Sr. Team Leader/Sr.Executive , MIS",
-            "value": "SR_TEAM_LEADER_OR_SR_EXICUTIVE_MIS"
+            "value": "SR_TEAM_LEADER_OR_SR_EXECUTIVE_MIS"
         },
         {
             "label": "Team Leader/Executive , MIS",
-            "value": "TEAM_LEADER_OR_EXICUTIVE_SALES_CENTER"
+            "value": "TEAM_LEADER_OR_EXECUTIVE_SALES_CENTER"
         },
         {
             "label": "SR. Executive, Sales Center ",
-            "value": "SR_EXICUTIVE_SALES_CENTER"
+            "value": "SR_EXECUTIVE_SALES_CENTER"
         },
 
         {
             "label": " Executive,Trainee  ",
-            "value": "EXICUTIVE_TRAINEE"
+            "value": "EXECUTIVE_TRAINEE"
         }
     ],
     "hrDepartment": [
@@ -48,12 +48,12 @@
             "value": "ASST_MANAGER_HR"
         },
         {
-            "label": "SR Exicutive Hr",
-            "value": "SR_EXICUTIVE_HR"
+            "label": "SR EXECUTIVE Hr",
+            "value": "SR_EXECUTIVE_HR"
         },
         {
-            "label": "Exicutive Hr",
-            "value": "EXICUTIVE_HR"
+            "label": "EXECUTIVE Hr",
+            "value": "EXECUTIVE_HR"
         }
     ],
     "distributionDepartment": [
@@ -71,11 +71,11 @@
         },
         {
             "label": " SR. Executive / area",
-            "value": "SR_EXICUTIVE_AREA"
+            "value": "SR_EXECUTIVE_AREA"
         },
         {
             "label": " Executive / area",
-            "value": "EXICUTIVE_AREA"
+            "value": "EXECUTIVE_AREA"
         }
     ],
     "financeDepartment": [
@@ -100,8 +100,8 @@
             "value": "AM_FINANCE"
         },
         {
-            "label": "Exicutive Finance",
-            "value": "EXICUTIVE_FINANCE"
+            "label": "EXECUTIVE Finance",
+            "value": "EXECUTIVE_FINANCE"
         }
     ],
     "mediaDepartment": [
@@ -118,8 +118,8 @@
             "value": "AM_MEDIA"
         },
         {
-            "label": "Exicutive Media",
-            "value": "EXICUTIVE_MEDIA"
+            "label": "EXECUTIVE Media",
+            "value": "EXECUTIVE_MEDIA"
         }
     ],
     "mediaProductionDepartment": [
@@ -166,12 +166,12 @@
             "value": "AM_NETWORK"
         },
         {
-            "label": "Exicutive Network",
-            "value": "EXICUTIVE_NETWORK"
+            "label": "EXECUTIVE Network",
+            "value": "EXECUTIVE_NETWORK"
         },
         {
-            "label": "Exicutive IT",
-            "value": "EXICUTIVE_IT"
+            "label": "EXECUTIVE IT",
+            "value": "EXECUTIVE_IT"
         }
     ],
     "DevelopmentDepartment": [
@@ -218,8 +218,8 @@
             "value": "MANAGER_SEO"
         },
         {
-            "label": "Exicutive SEO",
-            "value": "EXICUTIVE_SEO"
+            "label": "EXECUTIVE SEO",
+            "value": "EXECUTIVE_SEO"
         },
         {
             "label": "Content Creator",
@@ -282,8 +282,8 @@
             "value": "TEAM_LEADER_QUALITY_ANALYST"
         },
         {
-            "label": "Exicutive Quality Analyst",
-            "value": "EXICUTIVE_QUALITY_ANALYST"
+            "label": "EXECUTIVE Quality Analyst",
+            "value": "EXECUTIVE_QUALITY_ANALYST"
         }
     ],
     "logisticDepartment": [
@@ -300,8 +300,8 @@
             "value": "AM_LOGISTICS"
         },
         {
-            "label": "Exicutive Logistics",
-            "value": "EXICUTIVE_LOGISTICS"
+            "label": "EXECUTIVE Logistics",
+            "value": "EXECUTIVE_LOGISTICS"
         }
     ],
     "mapingAndMISDepartment": [
@@ -314,8 +314,8 @@
             "value": "MANAGER_MIS"
         },
         {
-            "label": "Exicutive MIS",
-            "value": "EXICUTIVE_MIS"
+            "label": "EXECUTIVE MIS",
+            "value": "EXECUTIVE_MIS"
         }
     ],
     "adminDepartment": [
@@ -328,12 +328,12 @@
             "value": "MANAGER_ADMIN"
         },
         {
-            "label": "SR Exicutive Admin",
-            "value": "SR_EXICUTIVE_ADMIN"
+            "label": "SR EXECUTIVE Admin",
+            "value": "SR_EXECUTIVE_ADMIN"
         },
         {
-            "label": "Exicutive Admin",
-            "value": "EXICUTIVE_ADMIN"
+            "label": "EXECUTIVE Admin",
+            "value": "EXECUTIVE_ADMIN"
         }
     ]
 }

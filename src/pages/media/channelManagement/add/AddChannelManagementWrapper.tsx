@@ -1,15 +1,25 @@
+/// ==============================================
+// Filename:AddChannelGroup.tsx
+// Type: Add Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import MediaLayout from '../../MediaLayout'
-import { useAddChannelMutation } from 'src/services/media/ChannelManagementServices'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
 import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
+import MediaLayout from '../../MediaLayout'
+import { useAddChannelMutation } from 'src/services/media/ChannelManagementServices'
+import { showToast } from 'src/utils'
 import AddChannelManagement from './AddChannelManagement'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { CountryListResponse } from 'src/models/Country.model'
@@ -17,7 +27,13 @@ import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 import { LanguageListResponse } from 'src/models'
 import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
+
+// |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState } from 'src/redux/store'
+import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
+
+// |-- Types --|
 export type FormInitialValues = {
     channelName: string
     address: string

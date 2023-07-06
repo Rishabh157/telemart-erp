@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { PrepaidOrderListResponse } from '../../models/PrepaidOrder.modal'
+import { PrepaidOrderListResponse } from '../../../models/PrepaidOrder.modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -243,58 +242,52 @@ const ApprovedOrderListing = () => {
     }
 
     return (
-        <SideNavLayout>
-            <div className="px-4 h-[calc(100vh-55px)] ">
-                {/* <div className="mb-5 p-2 text-2xl text-slate-700 font-bold "> */}
-                <div className="flex justify-between items-center h-[45px]">
-                    <ATMPageHeading> Purchase Order </ATMPageHeading>
+        <div className="px-4 h-[calc(100vh-55px)] ">
+            {/* <div className="mb-5 p-2 text-2xl text-slate-700 font-bold "> */}
+            <div className="flex justify-between items-center h-[45px]">
+                <ATMPageHeading> Purchase Order </ATMPageHeading>
+            </div>
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+                {/*Table Header */}
+                <ATMTableHeader
+                    searchValue={searchValue}
+                    page={page}
+                    rowCount={totalItems}
+                    rowsPerPage={rowsPerPage}
+                    rows={items}
+                    onRowsPerPageChange={(newValue) =>
+                        dispatch(setRowsPerPage(newValue))
+                    }
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    isFilter
+                    isRefresh
+                    onFilterDispatch={() => dispatch(setFilterValue([]))}
+                />
+
+                {/* Table */}
+                <div className="grow overflow-auto  ">
+                    <ATMTable
+                        columns={columns}
+                        rows={items}
+                        // isCheckbox={true}
+                        selectedRows={selectedRows}
+                        onRowSelect={(selectedRows) =>
+                            setSelectedRows(selectedRows)
+                        }
+                    />
                 </div>
-                <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
-                    {/*Table Header */}
-                    <ATMTableHeader
-                        searchValue={searchValue}
+
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
+                    <ATMPagination
                         page={page}
                         rowCount={totalItems}
-                        rowsPerPage={rowsPerPage}
                         rows={items}
-                        onRowsPerPageChange={(newValue) =>
-                            dispatch(setRowsPerPage(newValue))
-                        }
-                        onSearch={(newValue) =>
-                            dispatch(setSearchValue(newValue))
-                        }
-                        isFilter
-                        isRefresh
-                        onFilterDispatch={() => dispatch(setFilterValue([]))}
+                        rowsPerPage={rowsPerPage}
+                        onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />
-
-                    {/* Table */}
-                    <div className="grow overflow-auto  ">
-                        <ATMTable
-                            columns={columns}
-                            rows={items}
-                            // isCheckbox={true}
-                            selectedRows={selectedRows}
-                            onRowSelect={(selectedRows) =>
-                                setSelectedRows(selectedRows)
-                            }
-                        />
-                    </div>
-
-                    <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
-                        <ATMPagination
-                            page={page}
-                            rowCount={totalItems}
-                            rows={items}
-                            rowsPerPage={rowsPerPage}
-                            onPageChange={(newPage) =>
-                                dispatch(setPage(newPage))
-                            }
-                        />
-                    </div>
                 </div>
             </div>
-        </SideNavLayout>
+        </div>
     )
 }
 

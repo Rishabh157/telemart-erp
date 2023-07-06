@@ -1,20 +1,35 @@
-import { FieldArray, FormikProps } from 'formik'
+/// ==============================================
+// Filename:EditTapeManagement.tsx
+// Type: Edit Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-import { FormInitialValues } from './EditTapeManagementWrapper'
+
+// |-- External Dependencies --|
+import { FieldArray, FormikProps } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
+import { HiPlus } from 'react-icons/hi'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import { FormInitialValues } from './EditTapeManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import { HiPlus } from 'react-icons/hi'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { FieldType } from './EditTapeManagementWrapper'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
 
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     formFields: { sectionName: string; fields: FieldType[] }[]

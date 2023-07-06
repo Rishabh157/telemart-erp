@@ -1,25 +1,39 @@
+/// ==============================================
+// Filename:SaleOrderListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { Chip, Stack } from '@mui/material'
+
+// |-- Internal Dependencies --|
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SaleOrderListResponse } from 'src/models/SaleOrder.model'
 import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/saleOrderSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-import {
     useDeleteSalesOrderMutation,
     useGetPaginationSaleOrderQuery,
     useUpdateSalesOrderMutation,
 } from 'src/services/SalesOrderService'
 import SaleOrderListing from './SaleOrderListing'
-import { Chip, Stack } from '@mui/material'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/saleOrderSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const SaleOrderListingWrapper = () => {
     const salesOrderState: any = useSelector(

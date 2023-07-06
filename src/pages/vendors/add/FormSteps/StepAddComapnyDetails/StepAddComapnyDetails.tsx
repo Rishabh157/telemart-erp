@@ -1,12 +1,27 @@
+/// ==============================================
+// Filename:StepAddCompanyDetails.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../AddVendorWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
-import { useDispatch } from 'react-redux'
+
+// |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- types --|
 type DropdownOptions = {
     companyTypeOptions: SelectOption[]
     ownershipTypeOptions: SelectOption[]

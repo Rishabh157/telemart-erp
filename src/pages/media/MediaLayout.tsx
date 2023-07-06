@@ -1,21 +1,32 @@
+/// ==============================================
+// Filename:MediaLayout.tsx
+// Type: Layout Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-import Header from 'src/components/UI/Header/Header'
-import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
-import { NavItemType } from 'src/navigation'
+
+// |-- External Dependencies --|
 import { BsPersonHeart } from 'react-icons/bs'
 import { BiChevronsLeft, BiCategory } from 'react-icons/bi'
 import { DiDart } from 'react-icons/di'
 import { FaTape } from 'react-icons/fa'
-import { GrChannel } from 'react-icons/gr'
 import { SiGoogletagmanager } from 'react-icons/si'
-import { MdEmojiEvents, MdViewTimeline } from 'react-icons/md'
+import { MdEmojiEvents, MdMonitor, MdViewTimeline } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineSetting } from 'react-icons/ai'
+
+// |-- Internal Dependencies --|
+import Header from 'src/components/UI/Header/Header'
+import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
+import { NavItemType } from 'src/navigation'
 
 const mediaNavigation: NavItemType[] = [
     {
         label: 'Channel Group',
-        icon: GrChannel,
+        icon: MdMonitor,
         path: '/media/channel-group',
     },
     {

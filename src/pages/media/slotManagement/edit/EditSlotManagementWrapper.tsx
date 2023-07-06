@@ -1,16 +1,26 @@
+/// ==============================================
+// Filename:EditSlotManagementWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import MediaLayout from '../../MediaLayout'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { showToast } from 'src/utils'
+import { Formik, FormikProps } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 import { object, string } from 'yup'
 // import { showToast } from 'src/utils'
-import { Formik, FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
+import MediaLayout from '../../MediaLayout'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
+import { showToast } from 'src/utils'
 import {
     useGetSlotMangementByIdQuery,
     useUpdateSlotMutation,
@@ -20,12 +30,17 @@ import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServi
 import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import { useGetAllTapeMangementQuery } from 'src/services/media/TapeManagementServices'
-import { setSelectedTapManagement } from 'src/redux/slices/media/tapeManagementSlice'
 import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
-import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
 import EditSlotManagement from './EditSlotManagement'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Redux --|
+import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setSelectedTapManagement } from 'src/redux/slices/media/tapeManagementSlice'
+
+// |-- Types --|
 export type FormInitialValues = {
     slotName: string
     channelGroupId: string

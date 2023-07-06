@@ -1,7 +1,20 @@
-import { Formik, Form, FormikProps, FormikHelpers } from 'formik'
+/// ==============================================
+// Filename:FilterDialogWrapper.tsx
+// Type: Filter Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
+import { Formik, Form, FormikProps, FormikHelpers } from 'formik'
+
+// |-- Internal Dependencies --|
 import FilterDialog from './FilterDialog'
 
+// |-- Types --|
 type Props = {
     onClose: () => void
 }

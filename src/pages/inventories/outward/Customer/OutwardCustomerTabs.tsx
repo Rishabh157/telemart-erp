@@ -40,7 +40,7 @@ const OutwardCustomerTabs = ({ columns, rows }: Props) => {
 
     return (
         // <div className="px-4 h-full flex flex-col gap-2 w-full">
-        <div className=" h-[calc(100vh-55px)]  bg-white ">
+        <div className=" h-[calc(100vh-150px)]  bg-white ">
             {/* Page Header */}
             {/* <div className="flex justify-between items-center ">
                 <ATMPageHeading> Outward Requests </ATMPageHeading>
@@ -84,7 +84,7 @@ const OutwardCustomerTabs = ({ columns, rows }: Props) => {
                 })}
             </div> */}
 
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}

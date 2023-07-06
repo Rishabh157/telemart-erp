@@ -1,27 +1,41 @@
+/// ==============================================
+// Filename:PurchaseOrderListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
+import { Chip, Stack } from '@mui/material'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import PurchaseOrderListing from './PurchaseOrderListing'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import {
     useGetPurchaseOrderQuery,
     useUpdatePoLevelMutation,
 } from 'src/services/PurchaseOrderService'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
+
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setFilterValue } from 'src/redux/slices/GRNSlice'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/PurchaseOrderSlice'
-
-import { Chip, Stack } from '@mui/material'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import { setFilterValue } from 'src/redux/slices/GRNSlice'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import moment from 'moment'
 
 const PurchaseOrderListingWrapper = () => {
     const navigate = useNavigate()

@@ -1,8 +1,19 @@
+/// ==============================================
+// Filename:ChannelCategoryListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { showToast } from 'src/utils'
 import MediaLayout from 'src/pages/media/MediaLayout'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
@@ -10,14 +21,17 @@ import {
     useDeleteChannelCategoryMutation,
     useGetPaginationChannelCategoryQuery,
 } from 'src/services/media/ChannelCategoriesServices'
+import ChannelCategoryListing from './ChannelCategoryListing'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/channelCategorySlice'
-import ChannelCategoryListing from './ChannelCategoryListing'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const ChannelCategoryListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)

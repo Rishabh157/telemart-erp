@@ -59,7 +59,7 @@ export const authMiddleware = (store: any) => (next: any) => (action: any) => {
 
     const userData = localStorage.getItem('userData')
 
-    if (result.error && result.payload.status === 401) {
+    if (result.error && result?.payload?.status === 401) {
         store
             .dispatch(
                 apiSliceType.endpoints.refreshToken.initiate({

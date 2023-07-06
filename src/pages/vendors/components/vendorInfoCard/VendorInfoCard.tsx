@@ -1,7 +1,18 @@
-import { Avatar } from '@mui/material'
+/// ==============================================
+// Filename:VendorInfoCard.tsx
+// Type: card Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
+import { Avatar } from '@mui/material'
 import { IconType } from 'react-icons'
 
+// |-- Types --|
 type Props = {
     vendorData: any
     actionIcons?: {

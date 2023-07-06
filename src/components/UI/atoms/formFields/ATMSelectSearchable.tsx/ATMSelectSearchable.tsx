@@ -63,7 +63,7 @@ const ATMSelectSearchable = ({
     labelClass = ' font-medium',
     isAllSelect = false,
     isLoading = false,
-    selectClass = 'mt-0',
+    selectClass = 'mt-0 ',
     isDisabled = false,
     labelDirection = 'vertical',
     classDirection = 'grid grid-cols-3',
@@ -85,7 +85,7 @@ const ATMSelectSearchable = ({
             height: size === 'xs' ? '28px' : '',
             display: 'flex',
             alignItems: 'center',
-            paddingTop: size === 'xs' ? '1px' : '7px',
+            paddingTop: size === 'xs' ? '1px' : '5px',
         }),
         valueContainer: (provided: any) => ({
             ...provided,
@@ -93,7 +93,8 @@ const ATMSelectSearchable = ({
             paddingTop: '0px',
             alignItems: 'start',
             overflow: 'scroll',
-            maxHeight: '67px',
+             // maxHeight: '67px',
+            maxHeight: '36px',
         }),
         indicator: (provided: any) => ({
             ...provided,
@@ -114,9 +115,15 @@ const ATMSelectSearchable = ({
             ...provided,
             display: 'none',
         }),
-        option: (provided: any) => ({
+         option: (provided: any) => ({
             ...provided,
             padding: '6px 12px',
+        }),
+        menu: (provided: any) => ({
+            ...provided,
+            // backgroundColor:'black',
+            // textColorl:'white',
+            // borderColor: 'border-slate-400  ',
         }),
     }
 
@@ -184,7 +191,7 @@ const ATMSelectSearchable = ({
         }
     }
     return (
-        <div className={`${componentClass} relative`}>
+         <div className={`${componentClass} relative`}>
             <div
                 className={`  ${
                     labelDirection === 'horizontal'

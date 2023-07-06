@@ -3,7 +3,7 @@ import { FiUsers } from 'react-icons/fi'
 import { TbBuildingWarehouse } from 'react-icons/tb'
 import { HiOutlineTruck } from 'react-icons/hi'
 import { FaRegHandshake } from 'react-icons/fa'
-import { CiBoxes } from 'react-icons/ci'
+import { CiMemoPad, CiStickyNote } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
 import {
     MdCallReceived,
@@ -11,7 +11,7 @@ import {
     MdPermMedia,
     MdWeb,
 } from 'react-icons/md'
-import { GrCompliance, GrNotes } from 'react-icons/gr'
+
 import { IoCallOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { BiBox, BiPurchaseTagAlt } from 'react-icons/bi'
@@ -52,24 +52,16 @@ export const navigation: NavItemType[] = [
         icon: TbBuildingWarehouse,
         path: '/warehouse',
     },
-    {
-        label: 'Inventories',
-        icon: CiBoxes,
-        path: '/inventories',
-    },
+
     {
         label: 'Sale Order',
         icon: CgNotes,
         path: '/sale-order',
     },
-    // {
-    //     label: 'Outward Request',
-    //     icon: IoDocumentTextOutline,
-    //     path: '/outward-request',
-    // },
+
     {
         label: 'ASR',
-        icon: GrCompliance,
+        icon: CiMemoPad,
         path: '/asr',
     },
     {
@@ -79,7 +71,7 @@ export const navigation: NavItemType[] = [
     },
     {
         label: 'GRN',
-        icon: GrNotes,
+        icon: CiStickyNote,
         path: '/grn',
     },
     {

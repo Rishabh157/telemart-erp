@@ -184,7 +184,15 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     const { data, isFetching, isLoading } = useGetDealerWarehouseQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['wareHouseCode', 'wareHouseName'],
+        params: [
+            'wareHouseCode',
+            'wareHouseName',
+            'country',
+            'email',
+            'registrationAddress',
+            'billingAddress',
+            'contactInformation',
+        ],
         page: page,
         filterBy: [
             {
@@ -203,6 +211,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     })
 
     useEffect(() => {
+        console.log(data, 'data')
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false))
             dispatch(setItems(data?.data || []))

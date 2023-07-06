@@ -1,24 +1,38 @@
+/// ==============================================
+// Filename:SchemeListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SchemeListResponse } from 'src/models/scheme.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import SchemeListing from './SchemeListing'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import {
+    useDeleteSchemeMutation,
+    useGetAllSchemeQuery,
+} from 'src/services/SchemeService'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Types --|
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/schemeSlice'
 import { AppDispatch } from 'src/redux/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import {
-    useDeleteSchemeMutation,
-    useGetAllSchemeQuery,
-} from 'src/services/SchemeService'
 import { RootState } from 'src/redux/store'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const SchemeListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)

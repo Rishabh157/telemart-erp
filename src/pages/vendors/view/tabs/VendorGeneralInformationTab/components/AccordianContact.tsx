@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:AccordianContact.tsx
+// Type: View-Tab Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 
 const AccordianContact = (data: any) => {

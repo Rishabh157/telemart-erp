@@ -105,6 +105,7 @@ const EditDealers = ({
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
+                                disabled={apiStatus}
                             >
                                 {activeStep === steps.length - 1
                                     ? 'Submit'

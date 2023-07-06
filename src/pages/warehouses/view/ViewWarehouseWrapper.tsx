@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ViewWarehouse from './ViewWarehouse'
 //import { showToast } from "src/utils";
 import { useGetWareHouseByIdQuery } from 'src/services/WareHoouseService'
@@ -38,9 +37,9 @@ const ViewWarehouseWrapper = () => {
     )
 
     return (
-        <SideNavLayout>
-            <ViewWarehouse items={selectedItem} />
-        </SideNavLayout>
+        // <SideNavLayout>
+        <ViewWarehouse items={selectedItem} />
+        // </SideNavLayout>
     )
 }
 

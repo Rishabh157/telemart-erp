@@ -1,27 +1,42 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:EditPurchaseOrderWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
-import EditPurchaseOrder from './EditPurchaseOrder'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { date, number, object, string } from 'yup'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
+import { useNavigate, useParams } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import EditPurchaseOrder from './EditPurchaseOrder'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import {
     useGetByIdPurchaseOrderQuery,
     useUpdatePurchaseOrderMutation,
 } from 'src/services/PurchaseOrderService'
 import { showToast } from 'src/utils'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
 import { useGetWareHousesQuery } from 'src/services/WareHoouseService'
 import { useGetAllItemsQuery } from 'src/services/ItemService'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setSelectedItems } from 'src/redux/slices/PurchaseOrderSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { setAllItems } from 'src/redux/slices/vendorSlice'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllItem } from 'src/redux/slices/itemSlice'
-import moment from 'moment'
-import { setSelectedItems } from 'src/redux/slices/PurchaseOrderSlice'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

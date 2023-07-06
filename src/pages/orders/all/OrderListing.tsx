@@ -153,12 +153,12 @@ const OrderListing = () => {
     ]
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)]  ">
+        <div className="px-4 h-[calc(100vh-150px)]  ">
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Order </ATMPageHeading>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-45px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     searchValue={searchValue}

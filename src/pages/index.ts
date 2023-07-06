@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:index.tsx
+// Type: index Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Internal Dependencies --|
 import AddAttributeWrapper from './configuration/Configuration Screens/attributes/add/AddAttributeWrapper'
 import AttributesListingWrapper from './configuration/Configuration Screens/attributes/list/AttributesListingWrapper'
 import AddAttributeGroupWrapper from './configuration/Configuration Screens/attributesGroup/add/AddAttributeGroupWrapper'
@@ -51,10 +59,8 @@ import EditDealerWarehouseWrapper from './dealers/view/tabs/DealerWarehouseTab/E
 import InwardInventoryWrapper from './inventories/inward-inventory/InwardInventoryWrapper'
 import InventoryListingWrapper from './inventories/inventory/list/InventoryListingWrapper'
 import LoginPage from './login/LoginPage'
-import AddOrder from './orders/add/AddOrder'
-import Order from './orders/tabs'
-import OrderListing from './orders/tabs/all/OrderListing'
-import DummyOrderTab from './orders/tabs/orderTab/DummyOrderTab'
+import Order from './orders'
+import OrderListing from './orders/all/OrderListing'
 import AddSaleOrderWrapper from './saleOrder/add/AddSaleOrderWrapper'
 import EditSaleOrderWrapper from './saleOrder/edit/EditSaleOrderWrapper'
 import SaleOrderListingWrapper from './saleOrder/list/SaleOrderListingWrapper'
@@ -160,7 +166,7 @@ import EditInitialCallThreeWrapper from './disposition/icInitialCaller/edit/Edit
 import AddInitialCallThreeWrappper from './disposition/icInitialCaller/add/AddInitialCallThreeWrapper'
 import ViewDispositionThreeWrappper from './disposition/dispositionThree/View/ViewDispositionThreeWrapper'
 import ViewInitialCallThreeWrappper from './disposition/icInitialCaller/View/ViewInitialCallThreeWrapper'
-import OrderViewWrapper from './orders/tabs/orderTab/view/OrderViewWrapper'
+import OrderViewWrapper from './orders/view/OrderViewWrapper'
 import InquiryViewWrapper from './inquiry/view/InquiryViewWrapper'
 import InquiryListingWrapper from './inquiry/list/InquiryListingWrapper'
 import InfluencerListingWrapper from './websites/influencerManagement/list/InfluencerListingWrapper'
@@ -179,8 +185,8 @@ import ViewWebsiteTagsWrapper from './websites/website-tags/view/ViewWebsiteTags
 import ListDealerSupervisorTabWrapper from './dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
 import DealerSupervisorTabWrapper from './dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
 import UserAccessWrapper from './userAccess/UserAccessWrapper'
-import ApprovedOrderListing from './orders/tabs/approvedorders/ApprovedOrderListing'
-import ApprovedOrderViewWrapper from './orders/tabs/approvedorders/view/ApprovedOrderViewWrapper'
+import ApprovedOrderListing from './orders/approvedorders/ApprovedOrderListing'
+import ApprovedOrderViewWrapper from './orders/approvedorders/view/ApprovedOrderViewWrapper'
 import EditDealerSchemeWrapper from './dealers/view/tabs/DealerSchemeTab/edit/EditDealerSchemeWrapper'
 import DealerListLedgerTabWrapper from './dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
 import AddVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Add/AddVendorWarehouseWrapper'
@@ -192,7 +198,7 @@ import { ASRListingWrapper, EditASRWrapper, AddASRWrapper } from './asr'
 import { AddVendorWrapper, VendorsListingWrapper, ViewVendor } from './vendors'
 
 // import Users
-import { AddUserWrapper, UsersListingWrapper } from './users'
+import { AddUserWrapper, UsersListingWrapper, EditUserWrapper } from './users'
 
 export {
     AddASRWrapper,
@@ -250,7 +256,6 @@ export {
     InwardInventoryWrapper,
     InventoryListingWrapper,
     LoginPage,
-    AddOrder,
     OrderListing,
     AddSaleOrderWrapper,
     EditSaleOrderWrapper,
@@ -258,6 +263,7 @@ export {
     Test,
     UsersListingWrapper,
     AddUserWrapper,
+    EditUserWrapper,
     AddVendorWrapper,
     VendorsListingWrapper,
     AddPurchaseOrderTabWrapper,
@@ -364,7 +370,6 @@ export {
     ViewInitialCallThreeWrappper,
     OrderViewWrapper,
     Order,
-    DummyOrderTab,
     InquiryViewWrapper,
     InquiryListingWrapper,
     InfluencerListingWrapper,

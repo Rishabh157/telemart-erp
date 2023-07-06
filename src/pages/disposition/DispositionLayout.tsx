@@ -4,24 +4,24 @@ import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
 import { BsPersonHeart } from 'react-icons/bs'
 import { BiChevronsLeft } from 'react-icons/bi'
-import { GrChannel } from 'react-icons/gr'
 import { MdEmojiEvents } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { CiMonitor } from 'react-icons/ci'
 
 const dispositionNavigation: NavItemType[] = [
     {
         label: 'Disposition One',
-        icon: GrChannel,
+        icon: CiMonitor,
         path: '/dispositions/disposition-one',
     },
     {
         label: 'Disposition Two',
-        icon: GrChannel,
+        icon: CiMonitor,
         path: '/dispositions/disposition-two',
     },
     {
         label: 'Disposition Three',
-        icon: GrChannel,
+        icon: CiMonitor,
         path: '/dispositions/disposition-three',
     },
     {

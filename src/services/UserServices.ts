@@ -101,7 +101,7 @@ export const userApi = apiSlice.injectEndpoints({
         getUserById: builder.query({
             providesTags: ['user'],
             query: (id) => ({
-                url: `/${id}`,
+                url: `/user/${id}`,
                 method: 'GET',
             }),
         }),
@@ -145,6 +145,20 @@ export const userApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        //***** get Manager And Executive via Distribution department   *****/
+        getDistributionsRole: builder.mutation({
+            invalidatesTags: ['user'],
+            query: ({
+                comapnyId,
+                role,
+            }: {
+                comapnyId: string
+                role: string
+            }) => ({
+                url: `user/company/${comapnyId}/distribution/${role}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
@@ -161,4 +175,5 @@ export const {
     useAddNewUserMutation,
     useUpdateNewUserMutation,
     useUpdateCompanyByAdminMutation,
+    useGetDistributionsRoleMutation,
 } = userApi

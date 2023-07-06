@@ -1,19 +1,34 @@
+/// ==============================================
+// Filename:AddCompitorWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import AddCompetitor from './Addcompetitor'
 // import { useAddCompetitorsMutation } from 'src/services/AttributeService'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { useAddcompetitorMutation } from 'src/services/media/CompetitorManagementServices'
 import MediaLayout from '../../MediaLayout'
 import { useGetPaginationchannelQuery } from 'src/services/media/ChannelManagementServices'
-import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

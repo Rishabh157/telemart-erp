@@ -1,15 +1,30 @@
+/// ==============================================
+// Filename:AddChannelCategoryWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 03, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-import MediaLayout from '../../MediaLayout'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { Formik, FormikProps } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import { object, string } from 'yup'
+
+// |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
-import { Formik, FormikProps } from 'formik'
+import MediaLayout from '../../MediaLayout'
 import AddChannelGroup from './AddChannelCategory'
 import { useAddChannelCategoryMutation } from 'src/services/media/ChannelCategoriesServices'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 export type FormInitialValues = {
     channelCategory: string
     companyId: string

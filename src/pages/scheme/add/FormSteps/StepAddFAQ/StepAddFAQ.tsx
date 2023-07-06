@@ -1,14 +1,28 @@
+/// ==============================================
+// Filename:StepAddFaq.tsx
+// Type: Add Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
-import { FormikProps } from 'formik'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from '../../AddSchemeWrapper'
-import { FieldArray } from 'formik'
+
+// |-- External Dependencies --|
+import { FormikProps, FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
-import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { HiPlus } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { FormInitialValues } from '../../AddSchemeWrapper'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+
+// |-- Redux --|
 import { RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
 }
