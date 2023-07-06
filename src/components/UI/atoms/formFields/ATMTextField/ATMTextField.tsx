@@ -106,7 +106,7 @@ const ATMTextField = ({
                     } border-slate-400 outline-blue-400   ${
                         labelDirection === 'horizontal' ? 'col-span-8' : ''
                     } ${className}`}
-                    {...rest}   
+                    {...rest}
                     onBlur={onBlur}
                 />
             </div>

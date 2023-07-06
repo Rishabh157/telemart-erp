@@ -93,7 +93,7 @@ const ATMSelectSearchable = ({
             paddingTop: '0px',
             alignItems: 'start',
             overflow: 'scroll',
-             // maxHeight: '67px',
+            // maxHeight: '67px',
             maxHeight: '36px',
         }),
         indicator: (provided: any) => ({
@@ -115,7 +115,7 @@ const ATMSelectSearchable = ({
             ...provided,
             display: 'none',
         }),
-         option: (provided: any) => ({
+        option: (provided: any) => ({
             ...provided,
             padding: '6px 12px',
         }),
@@ -191,7 +191,7 @@ const ATMSelectSearchable = ({
         }
     }
     return (
-         <div className={`${componentClass} relative`}>
+        <div className={`${componentClass} relative`}>
             <div
                 className={`  ${
                     labelDirection === 'horizontal'

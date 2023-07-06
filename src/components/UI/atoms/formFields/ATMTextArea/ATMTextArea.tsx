@@ -12,7 +12,7 @@ type Props = {
     name?: string
     isSubmitting?: boolean
     labelClass?: string
-    readOnly? : boolean 
+    readOnly?: boolean
 }
 
 const ATMTextArea = ({
@@ -25,7 +25,7 @@ const ATMTextArea = ({
     minRows = 2,
     labelClass = ' font-medium',
     name = '',
-    readOnly= false,
+    readOnly = false,
     isSubmitting = true,
 }: Props) => {
     return (
