@@ -1,19 +1,34 @@
+/// ==============================================
+// Filename:EditWebsitePageWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import { showToast } from 'src/utils'
 import WebsiteLayout from '../../WebsiteLayout'
 import {
     useGetWebsitePageByIdQuery,
     useUpdateWebsitePageMutation,
 } from 'src/services/websites/WebsitePageServices'
 import EditWebsitePage from './EditWebsitePage'
+
+// |-- Redux --|
 import { setSelectedWebsite } from 'src/redux/slices/website/websitePageSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

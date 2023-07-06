@@ -1,14 +1,29 @@
+/// ==============================================
+// Filename:AddInfluencerWrapper.tsx
+// Type: Add Component
+// Last Updated: JULY 05, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+
+// |-- INternal Dependencies --|
+import { showToast } from 'src/utils'
 import WebsiteLayout from '../../WebsiteLayout'
 import AddInfluencer from './AddInfluencer'
 import { useAddInfluencerMutation } from 'src/services/websites/InfluencerServices'
 
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+
+// |-- TYpes --|
 type Props = {}
 
 export type FormInitialValues = {

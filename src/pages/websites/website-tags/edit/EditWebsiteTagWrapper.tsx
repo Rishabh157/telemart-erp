@@ -1,11 +1,22 @@
+/// ==============================================
+// Filename:EditWebsiteTagsWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import EditWebsiteTag from './EditWebsiteTag'
-import { showToast } from 'src/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
+
+// |-- Internal Dependencies --|
+import EditWebsiteTag from './EditWebsiteTag'
+import { showToast } from 'src/utils'
 import {
     useGetWebsiteTagsByIdQuery,
     useUpdateWebsiteTagsMutation,
@@ -17,9 +28,13 @@ import { setAllItems as setAllWebsites } from 'src/redux/slices/website/websiteS
 import { setAllItems as setAllWebsitePage } from 'src/redux/slices/website/websitePageSlice'
 import { WebsiteListResponse } from 'src/models/website/Website.model'
 import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
+
+// |-- Redux --|
+import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedTags } from 'src/redux/slices/website/websiteTagsSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {

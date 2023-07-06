@@ -1,5 +1,18 @@
+/// ==============================================
+// Filename:EditWebsiteTagsWrapper.tsx
+// Type: Edit Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,9 +22,11 @@ import { FormInitialValues } from './EditWebsiteTagWrapper'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { useDispatch } from 'react-redux'
+
+// |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean

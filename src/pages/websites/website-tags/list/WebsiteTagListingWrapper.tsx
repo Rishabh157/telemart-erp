@@ -1,13 +1,19 @@
+/// ==============================================
+// Filename:ListWebsiteTagsListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/website/websiteTagsSlice'
+
+// |-- Internal Dependencies --|
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import WebsiteLayout from '../../WebsiteLayout'
 import WebsiteTagListing from './WebsiteTagListing'
 import { WebsiteTagsListResponse } from 'src/models/website/WebsiteTags.model'
@@ -18,6 +24,14 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+// |-- Redux --|
+import { AppDispatch, RootState } from 'src/redux/store'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/website/websiteTagsSlice'
 
 const WebsiteTagListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

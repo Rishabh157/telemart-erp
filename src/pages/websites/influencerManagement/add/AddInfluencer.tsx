@@ -1,5 +1,17 @@
+/// ==============================================
+// Filename:AddInfluencer.tsx
+// Type: ADD Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,6 +21,7 @@ import { FormInitialValues } from './AddInfluencerWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
