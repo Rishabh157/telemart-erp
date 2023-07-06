@@ -1,5 +1,16 @@
-import { ClickAwayListener } from '@mui/material'
+/// ==============================================
+// Filename:NotificationCard.tsx
+// Type: Utils Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
+import { ClickAwayListener } from '@mui/material'
+
 
 const notications = [
     {

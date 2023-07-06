@@ -1,10 +1,25 @@
+/// ==============================================
+// Filename:VeritcalNavBar.tsx
+// Type: Utils Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { NavItemType } from 'src/navigation'
+
+// |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     toggleCollapse: () => void
     isCollapsed: boolean

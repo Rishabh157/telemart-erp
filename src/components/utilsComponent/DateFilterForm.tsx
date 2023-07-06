@@ -1,7 +1,19 @@
+/// ==============================================
+// Filename:DataFilterForm.tsx
+// Type: Utils Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
+import React from 'react'
+
+// |-- External Dependencies --|
 import { format } from 'date-fns'
 import { Form, Formik, FormikProps } from 'formik'
-import React from 'react'
 import { object } from 'yup'
+
+// |-- Internal Dependencies --|
 import ATMDatePicker from '../UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 
 interface FormInitialValues {

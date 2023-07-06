@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:MouseOverPopover.tsx
+// Type: Utils Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import * as React from 'react'
+
+// |-- External Dependencies --|
 import Popover from '@mui/material/Popover'
 import Typography from '@mui/material/Typography'
 import { BsInfoCircle } from 'react-icons/bs'
