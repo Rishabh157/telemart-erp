@@ -114,8 +114,8 @@ const steps = [
         validationSchema: object({
             FAQs: array().of(
                 object().shape({
-                    question: string().required('Required'),
-                    answer: string().required('Required'),
+                    question: string(),
+                    answer: string(),
                 })
             ),
         }),
@@ -126,10 +126,9 @@ const steps = [
         validationSchema: object({
             videos: array().of(
                 object().shape({
-                    videoName: string().required('Required'),
+                    videoName: string(),
                     videoLink: string()
-                        .url('Must be a valid link')
-                        .required('Required'),
+                        .url('Must be a valid link'),
                 })
             ),
         }),
@@ -145,12 +144,14 @@ const steps = [
                         'Please write script',
                         (value: any) => value.getCurrentContent().hasText()
                     ),
-                    language: string().required('Required'),
+                    language: string().required("Required"),
                 })
             ),
         }),
     },
 ]
+
+
 
 // Breadcrumbs
 const breadcrumbs = [
