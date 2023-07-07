@@ -75,7 +75,7 @@ const ATMPassword = ({
                 <div
                     onClick={() => setIsShowPassword((prev) => !prev)}
                     className={twMerge(
-                        `text-xl text-slate-500 cursor-pointer ${iconProps?.extraClasses}`
+                        `text-xl text-slate-500 cursor-pointer  ${iconProps?.extraClasses}`
                     )}
                 >
                     {isShowPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
