@@ -129,6 +129,19 @@ const EditUser = ({ formikProps, apiStatus }: Props) => {
                                     )
                                 }
                             />
+                            {/* User Name */}
+                            <ATMTextField
+                                name="userName"
+                                value={values.userName}
+                                label="User Name"
+                                placeholder="User Name"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'userName',
+                                        e.target.value
+                                    )
+                                }
+                            />
 
                             {/* Email */}
                             <ATMTextField
@@ -138,6 +151,21 @@ const EditUser = ({ formikProps, apiStatus }: Props) => {
                                 placeholder="Email"
                                 onChange={(e) =>
                                     handleSetFieldValue('email', e.target.value)
+                                }
+                            />
+
+                            {/* Password */}
+                            <ATMTextField
+                                name="password"
+                                type="password"
+                                value={values.password}
+                                label="Password"
+                                placeholder="Password"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'password',
+                                        e.target.value
+                                    )
                                 }
                             />
 

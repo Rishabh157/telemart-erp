@@ -32,11 +32,24 @@ import { setSelectedItem } from 'src/redux/slices/userSlice'
 // |-- Types --|
 type Props = {}
 
+interface UserData {
+    firstName: string
+    lastName: string
+    userName: string
+    mobile: string
+    email: string
+    userDepartment: string
+    userRole: string
+    companyId: string
+    password?: string
+}
 export type FormInitialValues = {
     firstName: string
     lastName: string
+    userName: string
     mobile: string
     email: string
+    password: string
     userDepartment: string
     userRole: string
     companyId: string
@@ -63,13 +76,14 @@ const EditUserWrapper = (props: Props) => {
         //}
     }, [data, isLoading, isFetching])
 
-    //console.log(selectedItem)
-
     const initialValues: FormInitialValues = {
         firstName: selectedItem?.firstName || '',
         lastName: selectedItem?.lastName || '',
+        userName: selectedItem?.userName || '',
+
         mobile: selectedItem?.mobile || '',
         email: selectedItem?.email || '',
+        password: '',
         userDepartment: selectedItem?.userDepartment || '',
         userRole: selectedItem?.userRole || '',
         companyId: userData?.companyId || '',
@@ -79,6 +93,7 @@ const EditUserWrapper = (props: Props) => {
     const validationSchema = object({
         firstName: string().required('First Name is required'),
         lastName: string().required('Last Name is required'),
+        userName: string().required('User Name is required'),
         mobile: string()
             .required('Mobile No is required')
             .max(10, 'Mobile number must be 10 digits')
@@ -86,6 +101,7 @@ const EditUserWrapper = (props: Props) => {
             .trim()
             .matches(regIndiaPhone, 'Invalid Mobile Number'),
         email: string().email('Invalid Email ID').required('Email is required'),
+        password: string(),
         userDepartment: string().required('User Department is required'),
         userRole: string().required('User Role is required'),
     })
@@ -95,21 +111,29 @@ const EditUserWrapper = (props: Props) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
+            const userDataToSend: UserData = {
+                firstName: values.firstName || '',
+                lastName: values.lastName || '',
+                userName: values.userName || '',
+                mobile: values.mobile || '',
+                email: values.email || '',
+                userDepartment: values.userDepartment || '',
+                userRole: values.userRole || '',
+                companyId: values.companyId || '',
+            }
+
+            if (values?.password) {
+                userDataToSend.password = values.password // Corrected line
+            }
+
             updateNewUser({
-                body: {
-                    firstName: values.firstName || '',
-                    lastName: values.lastName || '',
-                    mobile: values.mobile || '',
-                    email: values.email || '',
-                    userDepartment: values.userDepartment || '',
-                    userRole: values.userRole || '',
-                    companyId: values.companyId || '',
-                },
+                body: userDataToSend,
                 id: Id,
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'User Updated successfully!')
+                        dispatch(setSelectedItem(null))
                         navigate('/users')
                     } else {
                         showToast('error', res?.data?.message)
