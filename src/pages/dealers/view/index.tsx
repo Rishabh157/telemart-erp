@@ -68,11 +68,11 @@ const tabsData = [
         icon: MdOutlinePeopleAlt,
         path: 'scheme',
     },
-    {
-        label: 'Supervisor',
-        icon: MdOutlinePeopleAlt,
-        path: 'supervisor',
-    },
+    // {
+    //     label: 'Supervisor',
+    //     icon: MdOutlinePeopleAlt,
+    //     path: 'supervisor',
+    // },
 ]
 
 const actionIcons = [

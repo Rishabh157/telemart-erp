@@ -71,11 +71,11 @@ const configurationNavigation: NavItemType[] = [
         icon: BsBoxSeam,
         path: '/configurations/carton-box',
     },
-    {
-        label: 'Taxes',
-        icon: HiOutlineReceiptTax,
-        path: '/configurations/taxes',
-    },
+    // {
+    //     label: 'Taxes',
+    //     icon: HiOutlineReceiptTax,
+    //     path: '/configurations/taxes',
+    // },
     {
         label: 'Company',
         icon: CgOrganisation,

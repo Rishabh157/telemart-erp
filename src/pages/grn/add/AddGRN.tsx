@@ -26,6 +26,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+    totalreceivedQuantity: number
 }
 
 // Breadcrumbs
@@ -39,7 +40,7 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddItem = ({ formikProps, apiStatus }: Props) => {
+const AddItem = ({ formikProps, apiStatus, totalreceivedQuantity }: Props) => {
     const { state } = useLocation()
     const { poCode, itemName, quantity } = state
     const { values, setFieldValue } = formikProps
@@ -58,13 +59,10 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
-                    <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
+                    <div className="flex justify-between px-3 h-[80px] items-center border-b border-slate-300 py-4">
                         {/* Form Step Label */}
-                        <div className="text-xl font-medium">
-                            <div> PO Details </div>
-                            <div className="text-[13px] font-medium text-primary-main">
-                                PO Code : {poCode}
-                            </div>
+                        <div className="text-xl font-medium py-5">
+                            <div className="py-2"> PO Details </div>
                         </div>
                         {/* BUTTON - Add SO */}
                         <div>
@@ -84,25 +82,42 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                     </div>
 
                     <div className="px-3 py-3">
-                        {/* <Accordion className="grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat">
-                            <AccordionSummary
-                            
-                                expandIcon={<MdExpandMore />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                className="border-b border-slate-300"
-                            > */}
                         <div className="flex justify-between  items-center  w-full">
-                            <div>
-                                Item Name :
-                                <span className="text-primary-main font-medium ">
-                                    {itemName}
-                                </span>
+                            <div className="flex gap-5">
+                                <div className="text-[18px] font-medium text-primary-main">
+                                    PO Code :
+                                    <span className=" text-black px-2">
+                                        {poCode}
+                                    </span>
+                                </div>
+                                <div>|</div>
+                                <div className="text-[18px] font-medium text-primary-main">
+                                    Item Name :
+                                    <span className=" text-black px-2">
+                                        {itemName}
+                                    </span>
+                                </div>
                             </div>
 
-                            <div className="text-primary-main text-md">
-                                Req Qnty : {quantity} | Received Qnty:
+                            <div className="flex gap-5">
+                                <div className="text-[18px] font-medium text-primary-main">
+                                    Requested Qnty :
+                                    <span className=" text-black px-2">
+                                        {quantity}
+                                    </span>
+                                </div>
+                                <div>|</div>
+                                <div className="text-[18px] font-medium text-primary-main">
+                                    Total Received Qnty:
+                                    <span className=" text-black px-2">
+                                        {totalreceivedQuantity | 0}
+                                    </span>
+                                </div>
                             </div>
+
+                            {/* <div className="text-[18px] font-medium text-primary-main">
+                                Req Qnty : {quantity} | Received Qnty:
+                            </div> */}
                         </div>
                         {/* </AccordionSummary>
                             <AccordionDetails> */}
@@ -112,12 +127,14 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                                 type={'text'}
                                 value={values.receivedQuantity}
                                 onChange={(e) => {
-                                    setFieldValue(
-                                        `receivedQuantity`,
-                                        e.target.value
-                                    )
-                                    setFieldValue(`goodQuantity`, '')
-                                    setFieldValue(`defectiveQuantity`, '')
+                                    if (!isNaN(Number(e.target.value))) {
+                                        setFieldValue(
+                                            `receivedQuantity`,
+                                            e.target.value
+                                        )
+                                        setFieldValue(`goodQuantity`, '')
+                                        setFieldValue(`defectiveQuantity`, '')
+                                    }
                                 }}
                                 label="Received Quantity"
                                 placeholder="Received Quantity"
@@ -128,23 +145,25 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                                 type={'text'}
                                 value={values.goodQuantity}
                                 onChange={(e) => {
-                                    setFieldValue(
-                                        `goodQuantity`,
-                                        e.target.value
-                                    )
-                                    if (
-                                        parseInt(e.target.value) <=
-                                        values.receivedQuantity
-                                    ) {
-                                        let value =
-                                            ((values.receivedQuantity as number) -
-                                                parseInt(
-                                                    e.target.value
-                                                )) as number
+                                    if (!isNaN(Number(e.target.value))) {
                                         setFieldValue(
-                                            `defectiveQuantity`,
-                                            value
+                                            `goodQuantity`,
+                                            e.target.value
                                         )
+                                        if (
+                                            parseInt(e.target.value) <=
+                                            values.receivedQuantity
+                                        ) {
+                                            let value =
+                                                ((values.receivedQuantity as number) -
+                                                    parseInt(
+                                                        e.target.value
+                                                    )) as number
+                                            setFieldValue(
+                                                `defectiveQuantity`,
+                                                value
+                                            )
+                                        }
                                     }
                                     //  else if (e.target.value === '') {
                                     //     // setFieldValue(`goodQuantity`, '')
@@ -159,20 +178,22 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                                 name="defectiveQuantity"
                                 value={values.defectiveQuantity}
                                 onChange={(e) => {
-                                    setFieldValue(
-                                        `defectiveQuantity`,
-                                        e.target.value
-                                    )
-                                    if (
-                                        parseInt(e.target.value) <=
-                                        values.receivedQuantity
-                                    ) {
-                                        let value =
-                                            ((values.receivedQuantity as number) -
-                                                parseInt(
-                                                    e.target.value
-                                                )) as number
-                                        setFieldValue(`goodQuantity`, value)
+                                    if (!isNaN(Number(e.target.value))) {
+                                        setFieldValue(
+                                            `defectiveQuantity`,
+                                            e.target.value
+                                        )
+                                        if (
+                                            parseInt(e.target.value) <=
+                                            values.receivedQuantity
+                                        ) {
+                                            let value =
+                                                ((values.receivedQuantity as number) -
+                                                    parseInt(
+                                                        e.target.value
+                                                    )) as number
+                                            setFieldValue(`goodQuantity`, value)
+                                        }
                                     }
                                 }}
                                 label="Defective Quantity"

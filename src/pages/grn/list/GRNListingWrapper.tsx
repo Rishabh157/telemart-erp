@@ -48,7 +48,7 @@ const columns: columnTypes[] = [
         headerName: 'Item Name',
         flex: 'flex-[1.5_1.5_0%]',
         renderCell: (row: GRNListResponse) => {
-            return <span> {row?.poCode} </span>
+            return <span> {row?.itemName} </span>
         },
     },
     {
@@ -103,7 +103,7 @@ const GRNListingWrapper = () => {
     const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['poCode'],
+        params: ['poCode', 'itemName'],
         page: page,
         filterBy: [
             {

@@ -146,7 +146,7 @@ const EditPurchaseOrder = ({
                                         handleSetFieldValue('wareHouseId', e)
                                     }
                                     options={dropdownOptions.warehouseOptions}
-                                    label="Warehouse"
+                                    label=" Inward Warehouse(Company)"
                                 />
                             </div>
                             <div className="flex-[3_3_0%] -mt-2">

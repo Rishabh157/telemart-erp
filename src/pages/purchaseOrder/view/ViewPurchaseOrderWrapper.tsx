@@ -23,6 +23,13 @@ import { useGetPurchaseOrderByIdQuery } from 'src/services/PurchaseOrderService'
 // |-- Redux --|
 import { setSelectedItems } from 'src/redux/slices/PurchaseOrderSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+    // setFilterValue,
+} from 'src/redux/slices/GRNSlice'
+import { useGetPaginationGRNQuery } from 'src/services/GRNService'
 
 // |-- Types --|
 type Props = {}
@@ -54,6 +61,9 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
     const { selectedItems }: any = useSelector(
         (state: RootState) => state?.purchaseOrder
     )
+    const { userData }: any = useSelector((state: RootState) => state.auth)
+    const grnState: any = useSelector((state: RootState) => state.grn)
+    const { page, rowsPerPage, searchValue, items } = grnState
     useEffect(() => {
         dispatch(setSelectedItems(data?.data))
     }, [data, isLoading, isFetching, dispatch])
@@ -65,7 +75,43 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
         purchaseOrder: selectedItems?.purchaseOrder || '',
         approval: selectedItems?.approval || [],
     }
+    const {
+        data: GRNData,
+        isLoading: GRNIsLoading,
+        isFetching: GRNIsFetching,
+    } = useGetPaginationGRNQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: ['itemName'],
+        page: page,
+        filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
+            {
+                fieldName: 'poCode',
+                value: selectedItems?.poCode,
+            },
+            
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: false,
+    })
 
+    useEffect(() => {
+        if (!GRNIsLoading && !GRNIsFetching) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setItems(GRNData?.data || []))
+            dispatch(setTotalItems(GRNData?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [GRNIsLoading, GRNIsFetching, GRNData, dispatch])
     // Form Validation Schema
     const validationSchema = object({
         poCode: string().required('Purchase order code is required'),
@@ -99,7 +145,12 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps) => {
-                    return <ViewPurchaseOrder formikProps={formikProps} />
+                    return (
+                        <ViewPurchaseOrder
+                            formikProps={formikProps}
+                            items={items}
+                        />
+                    )
                 }}
             </Formik>
         </SideNavLayout>

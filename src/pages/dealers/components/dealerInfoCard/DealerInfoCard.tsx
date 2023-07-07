@@ -73,8 +73,7 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
             {/* Chips */}
             <div className="flex gap-2 justify-center">
                 <span className="rounded-full px-3 py-[2px] bg-slate-100 text-[10px]">
-                    {' '}
-                    Dealer{' '}
+                    Dealer
                 </span>
                 <span
                     className={`rounded-full px-3 py-[2px] text-[10px] font-medium flex items-center gap-1 ${
@@ -83,7 +82,6 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
                             : 'bg-red-100 text-red-700'
                     }`}
                 >
-                    {' '}
                     {selectedItem?.isActive ? (
                         <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
                     ) : (
@@ -93,13 +91,33 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
                 </span>
             </div>
 
-            <div className="text-center text-slate-500">
+            <div className="  text-slate-500  ">
                 {/* Dealer Name */}
-                <div className="text-[15px]">{selectedItem?.firstName}</div>
+                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
+                    <h2> Name </h2> <h2>: </h2>
+                    <p className="font-bold text-start">
+                        {selectedItem?.firstName}
+                    </p>
+                </div>
 
                 {/* Mobile */}
-                <div className="text-center text-slate-400 text-[13px]">
-                    {selectedItem?.contactInformation[0].mobileNumber}
+                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
+                    <h2> Mobile No. </h2> <h2>: </h2>
+                    <p className="font-bold text-start">
+                        {selectedItem?.contactInformation[0].mobileNumber}
+                    </p>
+                </div>
+                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
+                    <h2> Zo. Manager </h2> <h2>: </h2>
+                    <p className="font-bold text-start">
+                        {selectedItem?.zonalManagerName}
+                    </p>
+                </div>
+                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4 ">
+                    <h2>Zo. Executive. </h2> <h2>: </h2>
+                    <p className="font-bold text-start">
+                        {selectedItem?.zonalDistribution}
+                    </p>
                 </div>
             </div>
 

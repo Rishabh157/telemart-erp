@@ -21,10 +21,13 @@ import { FormInitialValues } from './ViewPurchaseOrderWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import GRNListing from 'src/pages/grn/list/GRNListing'
+import { GRNListResponse } from 'src/models'
 
 // |-- Types --|'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
+    items: GRNListResponse[]
 }
 
 // Breadcrumbs
@@ -43,7 +46,46 @@ type approval = {
     approvalLevel: number
     time: string
 }
-
+const GRNColumns: columnTypes[] = [
+    {
+        field: 'poCode',
+        headerName: 'PO Code',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: GRNListResponse) => <span> {row.poCode} </span>,
+    },
+    {
+        field: 'itemName',
+        headerName: 'Item Name',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: GRNListResponse) => {
+            return <span> {row?.itemName} </span>
+        },
+    },
+    {
+        field: 'receivingQuantity',
+        headerName: 'Received Qnty.',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: GRNListResponse) => {
+            return <span> {row?.receivedQuantity} </span>
+        },
+    },
+    {
+        field: 'goodQuantity',
+        headerName: 'Good Qnty.',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: GRNListResponse) => {
+            return <span> {row.goodQuantity} </span>
+        },
+    },
+    {
+        field: 'defectiveQuantity',
+        headerName: 'Defective Qnty.',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: GRNListResponse) => {
+            return <span> {row.defectiveQuantity} </span>
+        },
+    },
+]
 const columns: columnTypes[] = [
     {
         field: 'approval[0].approvalByName',
@@ -64,7 +106,7 @@ const columns: columnTypes[] = [
     },
     {
         field: 'time',
-        headerName: 'Time',
+        headerName: ' Date/Time',
         flex: 'flex-[1.5_1.5_0%]',
         renderCell: (row: approval) => {
             return <span className="py-4">{row.time} </span>
@@ -72,7 +114,7 @@ const columns: columnTypes[] = [
     },
 ]
 
-const ViewPurchaseOrder = ({ formikProps }: Props) => {
+const ViewPurchaseOrder = ({ formikProps, items }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
@@ -126,7 +168,7 @@ const ViewPurchaseOrder = ({ formikProps }: Props) => {
                                 name="warehouse"
                                 disabled
                                 value={values?.wareHouse}
-                                label="warehouse"
+                                label=" Inward Warehouse(Company)"
                                 placeholder="warehouse"
                                 onChange={() => {}}
                             />
@@ -231,6 +273,20 @@ const ViewPurchaseOrder = ({ formikProps }: Props) => {
                                 rows={values?.approval}
                                 extraClasses="max-h-full overflow-auto p-6"
                             />
+                        </div>
+                    </div>
+
+                    <div className="px-3">
+                        <div className=" text-lg pb-2 font-medium text-primary-main">
+                            GRN Details
+                        </div>
+                    </div>
+                    {/*Table Header */}
+                    <div className="flex flex-col gap-y-5">
+                        <div className=" h-[80%]  ">
+                         
+                                <GRNListing columns={GRNColumns} rows={items} />
+                       
                         </div>
                     </div>
                 </div>

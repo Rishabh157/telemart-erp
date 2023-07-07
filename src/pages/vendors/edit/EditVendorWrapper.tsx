@@ -207,7 +207,9 @@ const EditVendorWrapper = () => {
     // States
     const [activeStep, setActiveStep] = React.useState(0)
     useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
+        if (!isLoading && !isFetching) {
+            dispatch(setSelectedItem(data?.data))
+        }
     }, [dispatch, data, isLoading, isFetching])
 
     // From Initial Values

@@ -111,7 +111,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                                         className={`py-9 px-7`}
                                                     >
                                                         <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center">
-                                                            ASR #{asrIndex + 1}
+                                                            Product {asrIndex + 1}
                                                             {/* Delete Button */}
                                                             {values.asrDetails
                                                                 ?.length >

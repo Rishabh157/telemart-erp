@@ -135,8 +135,8 @@ const StepAddSchemeDetails = ({
                             )
                         }
                     }}
-                    label="Commission"
-                    placeholder="Commission"
+                    label="Dealer Commission"
+                    placeholder=" Dealer Commission"
                     className="shadow bg-white rounded"
                 />
                 {/* Dimensions */}

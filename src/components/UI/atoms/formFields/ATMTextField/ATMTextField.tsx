@@ -68,6 +68,13 @@ const ATMTextField = ({
     ...rest
 }: ATMTextFieldPropTypes) => {
     const [visibility, setVisibility] = useState(type)
+    function preventSlash(event: any) {
+        var key = event.keyCode || event.which
+        if (key === 47) {
+            // 47 is the key code for "/"
+            event.preventDefault()
+        }
+    }
     return (
         <div className={twMerge('relative mt-4', `${extraClassField}`)}>
             <div
@@ -110,6 +117,7 @@ const ATMTextField = ({
                     value={value}
                     disabled={disabled}
                     onChange={(e) => {
+                        preventSlash(e)
                         onChange(e)
                     }}
                     className={`${getInputHeight(

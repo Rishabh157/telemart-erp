@@ -146,7 +146,7 @@ const AddPurchaseOrder = ({
                                         handleSetFieldValue('wareHouseId', e)
                                     }
                                     options={dropdownOptions.warehouseOptions}
-                                    label="Warehouse"
+                                    label=" Inward Warehouse(Company)"
                                 />
                             </div>
                         </div>
