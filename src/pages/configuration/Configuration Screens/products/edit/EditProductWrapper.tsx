@@ -154,7 +154,7 @@ const steps = [
                         'Please write script',
                         (value: any) => value.getCurrentContent().hasText()
                     ),
-                    language: string(),
+                    language: string().required('Required'),
                 })
             ),
         }),
