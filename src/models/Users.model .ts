@@ -95,6 +95,7 @@ export type UpdateNewUser = {
         firstName: string
         lastName: string
         email: string
+        password?: string
         mobile: string
         userDepartment: string
         userRole: string

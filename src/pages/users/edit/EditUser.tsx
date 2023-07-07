@@ -141,6 +141,21 @@ const EditUser = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
 
+                            {/* Password */}
+                            <ATMTextField
+                                name="password"
+                                type="password"
+                                value={values.password}
+                                label="Password"
+                                placeholder="Password"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'password',
+                                        e.target.value
+                                    )
+                                }
+                            />
+
                             {/* Mobile */}
                             <ATMTextField
                                 name="mobile"

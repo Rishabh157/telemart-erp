@@ -32,11 +32,22 @@ import { setSelectedItem } from 'src/redux/slices/userSlice'
 // |-- Types --|
 type Props = {}
 
+interface UserData {
+    firstName: string
+    lastName: string
+    mobile: string
+    email: string
+    userDepartment: string
+    userRole: string
+    companyId: string
+    password?: string
+}
 export type FormInitialValues = {
     firstName: string
     lastName: string
     mobile: string
     email: string
+    password: string
     userDepartment: string
     userRole: string
     companyId: string
@@ -70,6 +81,7 @@ const EditUserWrapper = (props: Props) => {
         lastName: selectedItem?.lastName || '',
         mobile: selectedItem?.mobile || '',
         email: selectedItem?.email || '',
+        password: '',
         userDepartment: selectedItem?.userDepartment || '',
         userRole: selectedItem?.userRole || '',
         companyId: userData?.companyId || '',
@@ -86,6 +98,7 @@ const EditUserWrapper = (props: Props) => {
             .trim()
             .matches(regIndiaPhone, 'Invalid Mobile Number'),
         email: string().email('Invalid Email ID').required('Email is required'),
+        password: string(),
         userDepartment: string().required('User Department is required'),
         userRole: string().required('User Role is required'),
     })
@@ -95,21 +108,28 @@ const EditUserWrapper = (props: Props) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
+            const userDataToSend: UserData = {
+                firstName: values.firstName || '',
+                lastName: values.lastName || '',
+                mobile: values.mobile || '',
+                email: values.email || '',
+                userDepartment: values.userDepartment || '',
+                userRole: values.userRole || '',
+                companyId: values.companyId || '',
+            }
+
+            if (values?.password) {
+                userDataToSend.password = values.password // Corrected line
+            }
+
             updateNewUser({
-                body: {
-                    firstName: values.firstName || '',
-                    lastName: values.lastName || '',
-                    mobile: values.mobile || '',
-                    email: values.email || '',
-                    userDepartment: values.userDepartment || '',
-                    userRole: values.userRole || '',
-                    companyId: values.companyId || '',
-                },
+                body: userDataToSend,
                 id: Id,
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'User Updated successfully!')
+                        dispatch(setSelectedItem(null))
                         navigate('/users')
                     } else {
                         showToast('error', res?.data?.message)
