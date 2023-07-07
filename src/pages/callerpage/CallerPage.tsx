@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { TbBrandNetflix } from 'react-icons/tb'
 import CallerButton from './components/CallerButton'
-import Navbar from './components/Navbar'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
@@ -70,7 +69,6 @@ type ProductGroupResponse = {
     updatedAt: string
     __v: number
 }
-
 interface SchemeDetailsPropTypes {
     schemeName: string
     price: number
@@ -104,118 +102,86 @@ const paymentModeOptions: SelectOption[] = [
 
 const medicalOptions: SelectOption[] = [
     {
-        label: 'diabetes',
-        value: 'diabetes',
+        label: 'Obesity',
+        value: 'OBESITY',
     },
     {
-        label: 'cancer',
-        value: 'cancer',
+        label: 'Hair Loss',
+        value: 'HAIR_LOSS',
     },
     {
-        label: 'joint pain',
-        value: 'jointPain',
+        label: 'Joint Pain',
+        value: 'JOINT_PAIN',
+    },
+    {
+        label: 'Diabeties',
+        value: 'DIABETIES',
+    },
+    {
+        label: 'Height',
+        value: 'HEIGHT',
+    },
+    {
+        label: 'Gain',
+        value: 'GAIN',
+    },
+    {
+        label: 'Piles',
+        value: 'PILES',
+    },
+    {
+        label: 'Blood Pressure',
+        value: 'BLOOD_PRESSURE',
+    },
+    {
+        label: 'Heart Issues',
+        value: 'HEART_ISSUES',
+    },
+    {
+        label: 'Skin Problem',
+        value: 'SKIN_PROBLEM',
+    },
+    {
+        label: 'Eye Problem',
+        value: 'EYE_PROBLEM',
     },
 ]
 
 const startTimesOptions: SelectOption[] = [
     {
-        label: '1:00',
-        value: '1:00',
+        label: '9 AM',
+        value: '9_AM',
     },
     {
-        label: '2:00',
-        value: '2:00',
+        label: '12 PM',
+        value: '12_PM',
     },
     {
-        label: '3:00',
-        value: '3:00',
+        label: '3 PM',
+        value: '3_PM',
     },
+    {
+        label: '6 PM',
+        value: '6_PM',
+    },
+]
 
+const endTimesOptions: SelectOption[] = [
     {
-        label: '4:00',
-        value: '4:00',
-    },
-
-    {
-        label: '5:00',
-        value: '5:00',
+        label: '12 PM',
+        value: '12_PM',
     },
     {
-        label: '6:00',
-        value: '6:00',
+        label: '3 PM',
+        value: '3_PM',
     },
     {
-        label: '7:00',
-        value: '7:00',
-    },
-
-    {
-        label: '8:00',
-        value: '8:00',
+        label: '6 PM',
+        value: '6_PM',
     },
     {
-        label: '9:00',
-        value: '9:00',
-    },
-    {
-        label: '10:00',
-        value: '10:00',
-    },
-    {
-        label: '11:00',
-        value: '11:00',
-    },
-    {
-        label: '12:00',
-        value: '12:00',
-    },
-    {
-        label: '13:00',
-        value: '13:00',
-    },
-    {
-        label: '14:00',
-        value: '14:00',
-    },
-    {
-        label: '15:00',
-        value: '15:00',
-    },
-    {
-        label: '16:00',
-        value: '16:00',
-    },
-    {
-        label: '17:00',
-        value: '17:00',
-    },
-    {
-        label: '18:00',
-        value: '18:00',
-    },
-    {
-        label: '19:00',
-        value: '19:00',
-    },
-    {
-        label: '20:00',
-        value: '20:00',
-    },
-    {
-        label: '21:00',
-        value: '21:00',
-    },
-    {
-        label: '22:00',
-        value: '22:00',
-    },
-    {
-        label: '23:00',
-        value: '23:00',
-    },
-    {
-        label: '24:00',
-        value: '24:00',
+        label: '9 PM',
+        value: '9_PM',
     },
 ]
 
@@ -232,6 +198,8 @@ const CallerPage: React.FC<Props> = ({
     const companyId = '645b7733266c589640740832'
     const [isFacebookId, setFacebookId] = useState(false)
     const [isInstagramId, setInstagramId] = useState(false)
+    const [isOrderOtherFieldEnable, setIsOrderOtherFieldEnable] =
+        useState(false)
     const [schemeDetails, setSchemeDetails] = useState<SchemeDetailsPropTypes>({
         schemeName: '',
         price: 0,
@@ -245,9 +213,9 @@ const CallerPage: React.FC<Props> = ({
     const [schemeListOptions, setSchemeListOptions] = useState<
         SelectOption[] | []
     >([])
-    const [endTimeOptions, setEndTimeOptions] = useState<SelectOption[] | []>(
-        []
-    )
+    const [endTimeOptionsList, setEndTimeOptionsList] = useState<
+        SelectOption[] | []
+    >([])
 
     const [isRecording, setIsRecording] = useState<boolean>(false)
     const [pinCodeSearch, setPinCodeSearch] = useState<string>('')
@@ -446,31 +414,6 @@ const CallerPage: React.FC<Props> = ({
         }),
     }
 
-    // const handleSetPinCodeName = (id: string) => {
-    //     dropdownOptions?.pincodeOptions?.find((pinCode: any) => {
-    //         if (pinCode?.value === id) {
-    //             setFieldValue('pincodeName', pinCode?.label)
-    //         }
-    //     })
-    // }
-
-    const handleEndTime = (value: string) => {
-        // find the index of value parameter from the startTimesOptions array.
-        const indexOfSelectedTime = startTimesOptions?.findIndex(
-            (option: SelectOption) => option.value === value
-        )
-
-        // check if index is valid then we slice the lefted timeList, after startTime selected.
-        if (indexOfSelectedTime !== -1) {
-            const sliceEndTimeList = startTimesOptions?.slice(
-                indexOfSelectedTime + 1
-            )
-            setEndTimeOptions(sliceEndTimeList)
-        } else {
-            setEndTimeOptions([])
-        }
-    }
-
     function handlePinCode(newValue: string) {
         var newarray = allPincodes?.find((ele: any) => {
             return ele._id === newValue
@@ -514,6 +457,27 @@ const CallerPage: React.FC<Props> = ({
                 ? `${newarray?.pincode}\n${newarray?.StateLable}\n${newarray?.DistrictLable}\n${newarray?.tehsilLable}`
                 : ''
         )
+    }
+
+    // handle endTimeOption list accrdoing to start time
+    const handleEndTime = (value: string) => {
+        switch (value) {
+            case '9_AM':
+                setEndTimeOptionsList(endTimesOptions?.slice(0))
+                break
+            case '12_PM':
+                setEndTimeOptionsList(endTimesOptions?.slice(1))
+                break
+            case '3_PM':
+                setEndTimeOptionsList(endTimesOptions?.slice(2))
+                break
+            case '6_PM':
+                setEndTimeOptionsList(endTimesOptions?.slice(3))
+                break
+            default:
+                setEndTimeOptionsList(endTimesOptions)
+                break
+        }
     }
 
     useEffect(() => {
@@ -572,7 +536,64 @@ const CallerPage: React.FC<Props> = ({
                 </div>
             </div>
 
-            <Navbar />
+            <div className="bg-[#87527C] py-3 px-2">
+            <div className="flex justify-between">
+                <div className="flex justify-evenly gap-x-6">
+                    <div>
+                        <h3 className="text-white font-bold text-[14px]">
+                            CAMPAIGN
+                        </h3>
+                        <div className=" bg-white text-center p-1 rounded bedge text-[#15616E] text-[14px] font-bold">
+                            {values.campaign}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 className="text-white font-extrabold text-[14px]">
+                            CALL TYPE
+                        </h3>
+                        <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
+                            INBOUND
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 className= "text-white font-extrabold text-[14px]">
+                            INCOMING NO.
+                        </h3>
+                        <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
+                           {values.mobileNo}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 className="text-white font-extrabold text-[14px]">
+                            CUSTOMER
+                        </h3>
+                        <div className=" bg-green-500 p-1 text-center rounded bedge text-white text-[14px] font-bold">
+                            {values.agentName}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 className="text-white font-extrabold text-[14px]">
+                            DID NO
+                        </h3>
+                        <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
+                            {values.didNo}
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 className="text-white font-extrabold text-[14px]">
+                        TRUECALLER
+                    </h3>
+                    <div className=" bg-white text-center p-1 rounded bedge text-[#15616E] text-[14px] font-bold">
+                        STATUS
+                    </div>
+                </div>
+            </div>
+        </div>
 
             <div className="grid grid-cols-12 mt-1 px-2">
                 <div className="col-span-2 items-center mt-3 text-sm font-semibold">
@@ -982,7 +1003,7 @@ const CallerPage: React.FC<Props> = ({
                                             values.preffered_delivery_end_time ||
                                             ''
                                         }
-                                        options={endTimeOptions}
+                                        options={endTimeOptionsList}
                                         onChange={(e) => {
                                             setFieldValue(
                                                 'preffered_delivery_end_time',
@@ -1172,28 +1193,57 @@ const CallerPage: React.FC<Props> = ({
                     </div>
 
                     <ATMSelectSearchable
-                        componentClass="  mt-2"
+                        isMulti
+                        componentClass="mt-2"
                         label="Order For"
-                        size="xs"
+                        size="small"
                         selectLabel="select order for"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         // isSubmitting
+                        maxMenuHeight={190}
                         name="orderFor"
                         value={values.orderFor}
                         options={[
-                            { label: 'indore', value: 'one' },
-                            { label: 'betul', value: 'two' },
-                            { label: 'bhanwarkua', value: 'three' },
-                            { label: 'mumbai', value: 'four' },
+                            { label: 'Self', value: 'SELF' },
+                            { label: 'Mother', value: 'MOTHER' },
+                            { label: 'Father', value: 'FATHER' },
+                            { label: 'Daughter', value: 'DAUGHTER' },
+                            { label: 'Son', value: 'SON' },
+                            { label: 'Sister', value: 'SISTER' },
+                            { label: 'Brother', value: 'BROTHER' },
+                            { label: 'Spouse', value: 'SPOUSE' },
+                            { label: 'Others', value: 'OTHERS' },
                         ]}
                         onChange={(e) => {
                             setFieldValue('orderFor', e)
+                            if (e?.includes('OTHERS')) {
+                                setIsOrderOtherFieldEnable(true)
+                            } else {
+                                setIsOrderOtherFieldEnable(false)
+                            }
                         }}
                     />
+
+                    {isOrderOtherFieldEnable && (
+                        <ATMTextField
+                            label=""
+                            labelDirection="horizontal"
+                            extraClassField="mt-2"
+                            size="xs"
+                            placeholder="Other"
+                            name="orderForOther"
+                            value={values.orderForOther || ''}
+                            onChange={(e) =>
+                                setFieldValue('orderForOther', e.target.value)
+                            }
+                        />
+                    )}
+
                     <ATMSelectSearchable
                         componentClass="mt-2"
                         label="Age Group"
+                        maxMenuHeight={150}
                         size="xs"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
@@ -1202,10 +1252,11 @@ const CallerPage: React.FC<Props> = ({
                         name="ageGroup"
                         value={values.ageGroup}
                         options={[
-                            { label: '18-24', value: '18-24' },
-                            { label: '25-29', value: '25-29' },
-                            { label: '30-44', value: '30-44' },
-                            { label: '45-55', value: '45-55' },
+                            { label: '0-17', value: '0-17' },
+                            { label: '18-35', value: '18-35' },
+                            { label: '36-55', value: '36-55' },
+                            { label: '56-75', value: '56-75' },
+                            { label: '76 & Above', value: '76 & above' },
                         ]}
                         onChange={(e) => {
                             setFieldValue('ageGroup', e)
@@ -1297,20 +1348,19 @@ const CallerPage: React.FC<Props> = ({
                     </div>
                     <div className="h-[165px]">
                         <ATMSelectSearchable
-                            isMenuOpen
                             isMulti
+                            isMenuOpen
                             name="medicalIssue"
                             value={values.medicalIssue}
                             labelDirection="horizontal"
                             selectLabel="select medical issue"
                             size="small"
-                            // isMulti={true}
-                            onChange={(value) => {
-                                setFieldValue(`medicalIssue`, value)
-                            }}
                             options={medicalOptions || []}
                             label="Any Other Medical Issue"
                             selectClass={'-mt-4 select-margin'}
+                            onChange={(value) => {
+                                setFieldValue(`medicalIssue`, value)
+                            }}
                         />
                     </div>
                 </div>

@@ -44,6 +44,7 @@ type Props = {
     componentClass?: string
     labelSize?: 'small' | 'medium' | 'large' | 'xs'
     isMenuOpen?: boolean
+    maxMenuHeight? : number
     isValueWithLable?: boolean
 }
 
@@ -73,6 +74,7 @@ const ATMSelectSearchable = ({
     labelSize = 'small',
     isMenuOpen = undefined,
     isValueWithLable = false,
+    maxMenuHeight = 300
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -158,11 +160,8 @@ const ATMSelectSearchable = ({
             onChange(values.length ? values : [])
         } else {
             if (isValueWithLable) {
-                console.log('with')
                 onChange(selectedOption?.value ? selectedOption : '')
             } else {
-                console.log('without')
-
                 onChange(selectedOption?.value ? selectedOption?.value : '')
             }
         }
@@ -224,7 +223,7 @@ const ATMSelectSearchable = ({
                 </div>
                 <Select
                     menuIsOpen={isMenuOpen}
-                    maxMenuHeight={isMenuOpen ? 110 : 300}
+                    maxMenuHeight={isMenuOpen ? 110 : maxMenuHeight}
                     className={twMerge(
                         `border rounded border-slate-400 ${
                             labelDirection === 'horizontal'
