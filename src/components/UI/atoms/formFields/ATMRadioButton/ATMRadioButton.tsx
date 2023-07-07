@@ -1,7 +1,20 @@
-import { ErrorMessage } from 'formik'
+/// ==============================================
+// Filename:ATMRadioButton.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
+import { ErrorMessage } from 'formik'
+
+// |-- Internal Dependencies --|
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
+// |-- Types --|
 export type Props = {
     name: string
     options: SelectOption[]

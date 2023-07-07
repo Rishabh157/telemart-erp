@@ -82,6 +82,7 @@ export type UsersNewListResponse = {
 export type AddNewUser = {
     firstName: string
     lastName: string
+    userName: string
     mobile: string
     email: string
     userDepartment: string
@@ -94,7 +95,9 @@ export type UpdateNewUser = {
     body: {
         firstName: string
         lastName: string
+        userName: string
         email: string
+        password?: string
         mobile: string
         userDepartment: string
         userRole: string

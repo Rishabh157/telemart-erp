@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:ATMMenu.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import * as React from 'react'
+
+// |-- External Dependencies --|
 import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
@@ -6,6 +16,7 @@ import { HiDotsHorizontal, HiDotsVertical } from 'react-icons/hi'
 
 const ITEM_HEIGHT = 48
 
+// |-- Types --|
 type OptionType = {
     label: React.ReactNode
     onClick: () => void

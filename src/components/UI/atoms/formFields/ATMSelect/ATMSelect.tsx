@@ -1,7 +1,18 @@
+/// ==============================================
+// Filename:ATMSelect.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { ErrorMessage } from 'formik'
 
+// |-- Types --|
 type Props = {
     options: any[]
     value: any
@@ -25,9 +36,9 @@ const ATMSelect = ({
 }: Props) => {
     return (
         <>
-            <div className="relative mt-4">
+            <div className="relative mt-3">
                 {label && (
-                    <label className="text-slate-700 font-medium">
+                    <label className="text-slate-700 text-sm font-medium">
                         {label}{' '}
                         {required && <span className="text-red-500"> * </span>}
                     </label>

@@ -1,10 +1,22 @@
-import { ClickAwayListener } from '@mui/material'
+/// ==============================================
+// Filename:UserProfileCard.tsx
+// Type: Utils Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
+import { ClickAwayListener } from '@mui/material'
 import { BsPerson } from 'react-icons/bs'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { MdOutlineLogout } from 'react-icons/md'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import {
     useLogoutFromAllMutation,
     useLogoutMutation,

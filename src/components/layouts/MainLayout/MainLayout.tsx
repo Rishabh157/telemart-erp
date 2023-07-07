@@ -1,5 +1,14 @@
+/// ==============================================
+// Filename:MainLayout.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
 
+// |-- Types --|
 type Props = {
     children?: React.ReactNode
 }

@@ -1,15 +1,29 @@
+/// ==============================================
+// Filename:Header.tsx
+// Type: Utils Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { BsMoon, BsSun } from 'react-icons/bs'
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { IoNotifications } from 'react-icons/io5'
+import { useDispatch, useSelector } from 'react-redux'
+
+// |-- Internal Dependencies --|
 import UserProfileCard from '../UserProfileCard/UserProfileCard'
 import NotificationCard from './NotificationCard/NotificationCard'
 import { useGetAllCompaniesQuery } from 'src/services/CompanyServices'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
-import { setUserData } from 'src/redux/slices/authSlice'
-import { BsMoon, BsSun } from 'react-icons/bs'
 import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
+import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
+
+// |-- Redux --|
+import { RootState } from 'src/redux/store'
+import { setUserData } from 'src/redux/slices/authSlice'
 
 const Header = () => {
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
@@ -23,6 +37,9 @@ const Header = () => {
     const themeColor = color ? JSON.parse(color) : ''
     const [siteMode, setSiteMode] = useState(themeColor)
     const { data } = useGetAllCompaniesQuery('')
+    const companyName = data?.data?.find(
+        (com: any) => com?._id === company
+    ).companyName
     const [updaeCompany] = useUpdateCompanyByAdminMutation()
     const dispatch = useDispatch()
     const handleUpdate = (companyId: string) => {
@@ -152,7 +169,7 @@ const Header = () => {
                         </Select>
                     </FormControl>
                 ) : (
-                    <span> CODIOTIC TECHNOLOGY</span>
+                    <span>{companyName}</span>
                 )}
 
                 <button

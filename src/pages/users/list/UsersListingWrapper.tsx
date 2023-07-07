@@ -63,7 +63,7 @@ const UsersListingWrapper = () => {
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false))
             dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItems || 4))
+            dispatch(setTotalItems(data?.totalItem || 4))
         } else {
             dispatch(setIsTableLoading(true))
         }

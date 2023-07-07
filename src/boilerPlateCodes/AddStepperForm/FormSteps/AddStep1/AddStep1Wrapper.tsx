@@ -1,9 +1,22 @@
+/// ==============================================
+// Filename:AddStep1Wrapper.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import { Field } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../AddStepperFormWrapper'
 import AddStep1 from './AddStep1'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
 }

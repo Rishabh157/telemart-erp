@@ -1,7 +1,18 @@
-import { Breadcrumbs } from '@mui/material'
+/// ==============================================
+// Filename:ATMPageHeader.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
+import { Breadcrumbs } from '@mui/material'
 import { twMerge } from 'tailwind-merge'
 
+// |-- Types --|
 type BreadcrumbsList = {
     label: string
     onClick?: () => void

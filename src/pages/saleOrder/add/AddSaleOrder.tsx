@@ -156,7 +156,7 @@ const AddSaleOrder = ({
                                         e.target.value
                                     )
                                 }
-                                className="mt-0"
+                                className="mt-0 rounded"
                             />
 
                             {/* Dealer */}
@@ -272,6 +272,7 @@ const AddSaleOrder = ({
                                                                     onChange={(
                                                                         e
                                                                     ) => {}}
+                                                                    className="mt-0 rounded"
                                                                 />
                                                             </div>
 
@@ -299,6 +300,7 @@ const AddSaleOrder = ({
                                                                                 .value
                                                                         )
                                                                     }}
+                                                                    className="mt-0 rounded"
                                                                 />
                                                             </div>
 

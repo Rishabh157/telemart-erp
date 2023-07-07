@@ -128,6 +128,19 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                     )
                                 }
                             />
+                            {/* User Name */}
+                            <ATMTextField
+                                name="userName"
+                                value={values.userName}
+                                label="User Name"
+                                placeholder="User Name"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'userName',
+                                        e.target.value
+                                    )
+                                }
+                            />
 
                             {/* Email */}
                             <ATMTextField
@@ -140,20 +153,22 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
                             {/* Password */}
-                            <ATMTextField
-                                name="password"
-                                type="password"
-                                value={values.password}
-                                label="Password"
-                                placeholder="Password"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'password',
-                                        e.target.value
-                                    )
-                                }
-                            />
-
+                            <div className="mt-2">
+                                <ATMTextField
+                                    name="password"
+                                    type="password"
+                                    value={values.password}
+                                    label="Password"
+                                    placeholder="Password"
+                                    className="rounded "
+                                    onChange={(e) =>
+                                        handleSetFieldValue(
+                                            'password',
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
                             {/* Mobile */}
                             <ATMTextField
                                 name="mobile"

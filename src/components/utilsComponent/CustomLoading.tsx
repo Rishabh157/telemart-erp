@@ -1,3 +1,11 @@
+/// ==============================================
+// Filename:CustomLoading.tsx
+// Type: Utils Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
 
 type Props = {}

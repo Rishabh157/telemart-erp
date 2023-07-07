@@ -1,14 +1,27 @@
-import { ErrorMessage } from 'formik'
+/// ==============================================
+// Filename:ATMTextField.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { ErrorMessage } from 'formik'
 // import { BsInfoCircle } from 'react-icons/bs'
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { twMerge } from 'tailwind-merge'
+
+// |-- Internal Dependencies --|
 import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 import {
     getInputHeight,
     getLabelFont,
 } from 'src/utils/formUtils/getInputHeight'
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
-import { twMerge } from 'tailwind-merge'
 
+// |-- Types --|
 export type ATMTextFieldPropTypes = {
     name: string
     value: string | string[] | number
@@ -48,7 +61,7 @@ const ATMTextField = ({
     isInfo = false,
     InfoChildren = null,
     InfoTitle = 'Info',
-    labelClass = 'font-medium',
+    labelClass = 'font-medium mb-1',
     labelDirection = 'vertical',
     classDirection = 'grid grid-cols-12',
     labelSize = 'small',
@@ -56,7 +69,7 @@ const ATMTextField = ({
 }: ATMTextFieldPropTypes) => {
     const [visibility, setVisibility] = useState(type)
     return (
-        <div className={twMerge('relative mt-4', `${extraClassField}`)}>
+        <div className={twMerge('relative mt-3', `${extraClassField}`)}>
             <div
                 className={`  ${
                     labelDirection === 'horizontal'
@@ -111,7 +124,7 @@ const ATMTextField = ({
                 />
             </div>
             {type === 'password' ? (
-                <div className="absolute top-9 right-2 mt-2">
+                <div className="absolute top-[26px] right-2 mt-2">
                     {visibility === 'text' ? (
                         <AiFillEye
                             size={18}

@@ -1,10 +1,23 @@
+/// ==============================================
+// Filename:ATMHTMLEditor.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { getDefaultKeyBinding, RichUtils } from 'draft-js'
 import { ErrorMessage } from 'formik'
+
+// |-- Internal Dependencies --|
 import 'src/App.css'
 
+// |-- Types --|
 type Props = {
     name: string
     value: any
