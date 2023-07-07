@@ -1,6 +1,17 @@
+/// ==============================================
+// Filename:ATMLoadingButton.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { ComponentProps, ReactNode } from 'react'
+
+// |-- External Dependencies --|
 import { twMerge } from 'tailwind-merge'
 
+// |-- Types --|
 type Props = {
     children: ReactNode
     isLoading?: boolean

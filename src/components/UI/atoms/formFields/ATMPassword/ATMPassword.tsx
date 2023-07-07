@@ -1,9 +1,22 @@
-import { ErrorMessage } from 'formik'
-import React, { useState } from 'react'
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
-import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
-import { twMerge } from 'tailwind-merge'
+/// ==============================================
+// Filename:ATMPassword.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
 
+// |-- Built-in Dependencies --|
+import React, { useState } from 'react'
+
+// |-- External Dependencies --|
+import { ErrorMessage } from 'formik'
+import { twMerge } from 'tailwind-merge'
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+
+// |-- Internal Dependencies --|
+import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
+
+// |-- Types --|
 type Props = {
     name: string
     extraClasses?: string

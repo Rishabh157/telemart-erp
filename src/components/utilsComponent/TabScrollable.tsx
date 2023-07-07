@@ -1,8 +1,20 @@
+/// ==============================================
+// Filename:TabScrollable.tsx
+// Type: Utils Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { IconType } from 'react-icons'
 import { useNavigate } from 'react-router-dom'
 import { Tabs, Tab } from 'react-tabs-scrollable'
 import 'react-tabs-scrollable/dist/rts.css'
+
+// |-- Types --|
 type Props = {
     navBtnContainerClassName?: string
     active?: number

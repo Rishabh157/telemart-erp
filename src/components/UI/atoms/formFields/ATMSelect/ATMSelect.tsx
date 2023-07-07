@@ -1,7 +1,18 @@
+/// ==============================================
+// Filename:ATMSelect.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { ErrorMessage } from 'formik'
 
+// |-- Types --|
 type Props = {
     options: any[]
     value: any

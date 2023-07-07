@@ -1,8 +1,21 @@
+/// ==============================================
+// Filename:ATMHTMLEditor.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
-import { Size } from 'src/utils/formUtils/getInputHeight'
+
+// |-- External Dependencies --|
 import ATMFileUploader from './ATMFileUploader'
 import { ErrorMessage } from 'formik'
 
+// |-- Internal Dependencies --|
+import { Size } from 'src/utils/formUtils/getInputHeight'
+
+// |-- Types --|
 type Props = {
     size?: Size
     label?: string

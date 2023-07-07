@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:ATMCheckbox.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
+
+// |-- External Dependencies --|
 import List from '@mui/material/List'
 import Card from '@mui/material/Card'
 import ListItem from '@mui/material/ListItem'

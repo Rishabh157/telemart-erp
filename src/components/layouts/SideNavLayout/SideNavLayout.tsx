@@ -1,12 +1,27 @@
+/// ==============================================
+// Filename:SideNavLayout.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { ReactNode } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import { navigation } from 'src/navigation'
-import { setIsCollapsed } from 'src/redux/slices/SideNavLayout'
-import { AppDispatch, RootState } from 'src/redux/store'
 import Header from '../../UI/Header/Header'
 import VerticalNavBar from '../../UI/VerticalNavBar/VerticalNavBar'
 
+// |-- Redux --|
+import { setIsCollapsed } from 'src/redux/slices/SideNavLayout'
+import { AppDispatch, RootState } from 'src/redux/store'
+
+// |-- Types --|
 type Props = {
     children: ReactNode
 }

@@ -1,8 +1,19 @@
+/// ==============================================
+// Filename:ATMSelectCopy.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { ChangeEvent, ReactNode, useState } from 'react'
+
+// |-- External Dependencies --|
 import { twMerge } from 'tailwind-merge'
 import { MdArrowDropDown } from 'react-icons/md'
 import { ClickAwayListener } from '@mui/material'
 
+// |-- Types --|
 type Props = {
     value: any
     renderValue: (value: any) => string | number | React.ReactNode

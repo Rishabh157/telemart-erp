@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:ActionPopup.tsx
+// Type: Utils Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { ReactNode } from 'react'
+
+// |-- External Dependencies --|
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { Popover } from '@mui/material'
 import { HiDotsHorizontal } from 'react-icons/hi'

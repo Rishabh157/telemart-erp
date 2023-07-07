@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:DialogLogBox.tsx
+// Type: Utils Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import Dialog from '@mui/material/Dialog'
 import { DialogContent } from '@mui/material'
 import { MdCancel } from 'react-icons/md'
