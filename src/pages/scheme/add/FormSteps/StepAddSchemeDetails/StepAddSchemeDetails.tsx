@@ -228,7 +228,7 @@ const StepAddSchemeDetails = ({
                     className="shadow bg-white rounded"
                 />
                 {/* Combo Packaging */}
-                <div className="mt-1">
+                <div className="mt-0">
                     <ATMSwitchButton
                         name="comboPacking"
                         value={values.comboPacking}

@@ -30,6 +30,7 @@ type Props = {}
 export type FormInitialValues = {
     firstName: string
     lastName: string
+    userName: string
     mobile: string
     email: string
     password: string
@@ -51,6 +52,7 @@ const AddUserWrapper = (props: Props) => {
     const initialValues: FormInitialValues = {
         firstName: '',
         lastName: '',
+        userName: '',
         mobile: '',
         email: '',
         password: '',
@@ -63,6 +65,8 @@ const AddUserWrapper = (props: Props) => {
     const validationSchema = object({
         firstName: string().required('First Name is required'),
         lastName: string().required('Last Name is required'),
+        userName: string().required('User Name is required'),
+
         mobile: string()
             .required('Mobile No is required')
             .max(10, 'Mobile number must be 10 digits')
@@ -84,6 +88,7 @@ const AddUserWrapper = (props: Props) => {
             addNewUser({
                 firstName: values.firstName || '',
                 lastName: values.lastName || '',
+                userName: values.userName || '',
                 mobile: values.mobile || '',
                 email: values.email || '',
                 password: values.password || '',

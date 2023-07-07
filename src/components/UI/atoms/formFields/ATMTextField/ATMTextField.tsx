@@ -61,7 +61,7 @@ const ATMTextField = ({
     isInfo = false,
     InfoChildren = null,
     InfoTitle = 'Info',
-    labelClass = 'font-medium',
+    labelClass = 'font-medium mb-1',
     labelDirection = 'vertical',
     classDirection = 'grid grid-cols-12',
     labelSize = 'small',
@@ -76,7 +76,7 @@ const ATMTextField = ({
         }
     }
     return (
-        <div className={twMerge('relative mt-4', `${extraClassField}`)}>
+        <div className={twMerge('relative mt-3', `${extraClassField}`)}>
             <div
                 className={`  ${
                     labelDirection === 'horizontal'
@@ -132,7 +132,7 @@ const ATMTextField = ({
                 />
             </div>
             {type === 'password' ? (
-                <div className="absolute top-9 right-2 mt-2">
+                <div className="absolute top-[26px] right-2 mt-2">
                     {visibility === 'text' ? (
                         <AiFillEye
                             size={18}

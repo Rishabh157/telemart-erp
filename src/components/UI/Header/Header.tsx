@@ -37,6 +37,9 @@ const Header = () => {
     const themeColor = color ? JSON.parse(color) : ''
     const [siteMode, setSiteMode] = useState(themeColor)
     const { data } = useGetAllCompaniesQuery('')
+    const companyName = data?.data?.find(
+        (com: any) => com?._id === company
+    ).companyName
     const [updaeCompany] = useUpdateCompanyByAdminMutation()
     const dispatch = useDispatch()
     const handleUpdate = (companyId: string) => {
@@ -166,7 +169,7 @@ const Header = () => {
                         </Select>
                     </FormControl>
                 ) : (
-                    <span> CODIOTIC TECHNOLOGY</span>
+                    <span>{companyName}</span>
                 )}
 
                 <button

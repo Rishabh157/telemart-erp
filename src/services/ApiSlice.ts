@@ -11,6 +11,7 @@ import { BASE_URL } from 'src/utils/constants/index'
 const tagTypes = [
     'dashboard',
     'user',
+    'newUser',
     'ProductGroup',
     'attributeGroup',
     'attributes',
