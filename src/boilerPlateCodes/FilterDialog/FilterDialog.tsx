@@ -20,7 +20,6 @@ import { FormikProps } from 'formik'
 // |-- Internal Dependencies --|
 import { FormInitalValues } from './FilterDialogWrapper'
 
-
 // |-- Types --|
 type Props = {
     onClose: () => void

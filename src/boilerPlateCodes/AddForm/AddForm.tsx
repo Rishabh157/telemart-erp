@@ -22,7 +22,6 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './AddFormWrapper'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

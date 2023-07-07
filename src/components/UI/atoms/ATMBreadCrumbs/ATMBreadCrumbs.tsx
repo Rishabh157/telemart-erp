@@ -18,8 +18,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
 
-
-
 // |-- Types --|
 export type BreadcrumbType = {
     label: string

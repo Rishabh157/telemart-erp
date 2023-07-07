@@ -30,7 +30,6 @@ import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { AppDispatch } from 'src/redux/store'
 import { setIsCollapsed } from 'src/redux/slices/SideNavLayout'
 
-
 // |-- Types --|
 type ViewLayoutPropTypes = {
     leftbar?: boolean

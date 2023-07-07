@@ -12,7 +12,6 @@ import React from 'react'
 import ATMFileUploader from './ATMFileUploader'
 import { ErrorMessage } from 'formik'
 
-
 // |-- Internal Dependencies --|
 import { Size } from 'src/utils/formUtils/getInputHeight'
 

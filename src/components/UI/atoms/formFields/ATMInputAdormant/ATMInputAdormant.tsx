@@ -15,7 +15,6 @@ import { twMerge } from 'tailwind-merge'
 // |-- Internal Dependencies --|
 import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
 
-
 export interface ATMInputAdormantPropTypes {
     name: string
     value: string

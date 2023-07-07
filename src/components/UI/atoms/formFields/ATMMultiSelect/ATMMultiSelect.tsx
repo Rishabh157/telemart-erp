@@ -15,7 +15,6 @@ import { BiSearchAlt2 } from 'react-icons/bi'
 import { ClickAwayListener } from '@mui/material'
 import { ErrorMessage } from 'formik'
 
-
 // |-- Types --|
 type Props = {
     name: string

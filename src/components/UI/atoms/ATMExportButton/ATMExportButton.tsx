@@ -15,7 +15,6 @@ import { Headers } from 'react-csv/components/CommonPropTypes'
 // |-- Internal Dependencies --|
 import { TbFileExport } from 'react-icons/tb'
 
-
 // |-- Types --|
 type Props = {
     data: any[]
