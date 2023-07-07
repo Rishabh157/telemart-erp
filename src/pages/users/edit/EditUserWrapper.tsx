@@ -35,6 +35,7 @@ type Props = {}
 interface UserData {
     firstName: string
     lastName: string
+    userName: string
     mobile: string
     email: string
     userDepartment: string
@@ -45,6 +46,7 @@ interface UserData {
 export type FormInitialValues = {
     firstName: string
     lastName: string
+    userName: string
     mobile: string
     email: string
     password: string
@@ -74,11 +76,11 @@ const EditUserWrapper = (props: Props) => {
         //}
     }, [data, isLoading, isFetching])
 
-    //console.log(selectedItem)
-
     const initialValues: FormInitialValues = {
         firstName: selectedItem?.firstName || '',
         lastName: selectedItem?.lastName || '',
+        userName: selectedItem?.userName || '',
+
         mobile: selectedItem?.mobile || '',
         email: selectedItem?.email || '',
         password: '',
@@ -91,6 +93,7 @@ const EditUserWrapper = (props: Props) => {
     const validationSchema = object({
         firstName: string().required('First Name is required'),
         lastName: string().required('Last Name is required'),
+        userName: string().required('User Name is required'),
         mobile: string()
             .required('Mobile No is required')
             .max(10, 'Mobile number must be 10 digits')
@@ -111,6 +114,7 @@ const EditUserWrapper = (props: Props) => {
             const userDataToSend: UserData = {
                 firstName: values.firstName || '',
                 lastName: values.lastName || '',
+                userName: values.userName || '',
                 mobile: values.mobile || '',
                 email: values.email || '',
                 userDepartment: values.userDepartment || '',

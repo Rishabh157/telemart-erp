@@ -129,6 +129,19 @@ const EditUser = ({ formikProps, apiStatus }: Props) => {
                                     )
                                 }
                             />
+                            {/* User Name */}
+                            <ATMTextField
+                                name="userName"
+                                value={values.userName}
+                                label="User Name"
+                                placeholder="User Name"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'userName',
+                                        e.target.value
+                                    )
+                                }
+                            />
 
                             {/* Email */}
                             <ATMTextField
