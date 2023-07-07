@@ -223,6 +223,7 @@ const AddPurchaseOrder = ({
                                                                                 .value
                                                                         )
                                                                     }
+                                                                    className="mt-0 rounded"
                                                                 />
                                                             </div>
 

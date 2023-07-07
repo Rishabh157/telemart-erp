@@ -40,7 +40,7 @@ const ATMDatePicker = ({
     size = 'small',
     disabled = false,
     isSubmitting = true,
-    labelClass = 'font-medium',
+    labelClass = 'font-medium text-sm',
     dateTimeFormat = 'MM/DD/YYYY',
     minDate,
 }: Props) => {
