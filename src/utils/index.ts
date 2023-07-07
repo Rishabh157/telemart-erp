@@ -37,6 +37,7 @@ export const showToast = (type: ToastType, message: string) => {
 
 export const ledgerNoteType = {
     DEALER_AMOUNT_CREDITED: 'DEALER AMOUNT CREDITED',
+    VENDOR_AMOUNT_CREDITED: 'VENDOR AMOUNT CREDITED',
     CREDIT_NOTE_CREATED: 'CREDIT',
     DEBIT_NOTE_CREATED: 'DEBIT',
 }

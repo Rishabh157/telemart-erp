@@ -5,21 +5,17 @@
 // Project: TELIMART - Front End
 // ==============================================
 
-// |-- Built-in Dependencies --|
-import React from 'react'
-
-// |-- External Dependencies --|
 import { format } from 'date-fns'
 import { Form, Formik, FormikProps } from 'formik'
-import { object } from 'yup'
-
-// |-- Internal Dependencies --|
+import React from 'react'
+import { object, string } from 'yup'
 import ATMDatePicker from '../UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-
+import * as yup from 'yup'
 interface FormInitialValues {
     startDate: string
     endDate: string
 }
+
 interface Props {
     onSubmitDateHandler: (values: any) => void
     IsDaterFilterLoading: boolean
@@ -29,16 +25,24 @@ const DateFilterForm: React.FC<Props> = ({
     onSubmitDateHandler,
     IsDaterFilterLoading = false,
 }) => {
-    const initialValues = {
+    const initialValues: FormInitialValues = {
         startDate: '',
         endDate: '',
     }
+
     const validationSchema = object({
-        //   startDate: string().required('Required'),
-        //  endDate: string().max(ref(startDate),'Required'),
+        startDate: string().required('Start date is required'),
+        endDate: string().test(
+            'is-valid-end-date',
+            'Should be less then Start Date',
+            function (endDate) {
+                const startDate = this.resolve(yup.ref('startDate')) as string
+                return !startDate || !endDate || startDate <= endDate
+            }
+        ),
     })
 
-    const onSubmitHandler = (values: any) => {
+    const onSubmitHandler = (values: FormInitialValues) => {
         onSubmitDateHandler(values)
     }
 
@@ -50,8 +54,9 @@ const DateFilterForm: React.FC<Props> = ({
         >
             {(formikProps: FormikProps<FormInitialValues>) => {
                 const { setFieldValue, values } = formikProps
+
                 return (
-                    <Form className="flex gap-4 px-3 w-full">
+                    <Form className="flex gap-4 px-3 w-full ">
                         <div className="flex gap-2">
                             <div className="text-center text-xs items-center flex font-bold">
                                 From
@@ -60,7 +65,6 @@ const DateFilterForm: React.FC<Props> = ({
                                 name="startDate"
                                 size="xs"
                                 value={values.startDate}
-                                // label="Date"
                                 dateTimeFormat="DD/MM/YY"
                                 onChange={(e) =>
                                     setFieldValue(
@@ -78,7 +82,6 @@ const DateFilterForm: React.FC<Props> = ({
                                 name="endDate"
                                 size="xs"
                                 value={values.endDate}
-                                // label="Date"
                                 dateTimeFormat="DD/MM/YY "
                                 onChange={(e) =>
                                     setFieldValue(
@@ -88,7 +91,7 @@ const DateFilterForm: React.FC<Props> = ({
                                 }
                             />
                         </div>
-                        <div className="flex justify-end  px-2">
+                        <div className="flex justify-end  ">
                             <button
                                 type="submit"
                                 disabled={
@@ -96,7 +99,7 @@ const DateFilterForm: React.FC<Props> = ({
                                     !(values.endDate && values.startDate)
                                 }
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-2 text-white text-xs border hover:bg-blue-800 cursor border-primary-main ${
+                                className={`bg-primary-main rounded py-1 mt-1 -mb-1 px-2 text-white text-xs border hover:bg-blue-800 cursor border-primary-main ${
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
