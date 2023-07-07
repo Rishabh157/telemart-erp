@@ -1,8 +1,22 @@
+/// ==============================================
+// Filename:ATMExportButton.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useRef } from 'react'
+
+// |-- External Dependencies --|
 import { CSVLink } from 'react-csv'
 import { Headers } from 'react-csv/components/CommonPropTypes'
+
+// |-- Internal Dependencies --|
 import { TbFileExport } from 'react-icons/tb'
 
+
+// |-- Types --|
 type Props = {
     data: any[]
     headers: Headers

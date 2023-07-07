@@ -1,13 +1,27 @@
+/// ==============================================
+// Filename:FilterDialog.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import {
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
 } from '@mui/material'
-import { FormInitalValues } from './FilterDialogWrapper'
 import { FormikProps } from 'formik'
 
+// |-- Internal Dependencies --|
+import { FormInitalValues } from './FilterDialogWrapper'
+
+
+// |-- Types --|
 type Props = {
     onClose: () => void
     onApply: () => void

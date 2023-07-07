@@ -1,11 +1,26 @@
+/// ==============================================
+// Filename:ATMBreadCrumbs.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { Breadcrumbs, Link } from '@mui/material'
 import { FiChevronRight } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { RootState } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState } from 'src/redux/store'
+
+
+
+// |-- Types --|
 export type BreadcrumbType = {
     label: string
     onClick?: () => void

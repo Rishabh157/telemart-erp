@@ -1,8 +1,21 @@
+/// ==============================================
+// Filename:ATMTableHeader.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { BiFilter, BiSearch } from 'react-icons/bi'
 import { IoReload } from 'react-icons/io5'
+
+// |-- Internal Dependencies --|
 import DateFilterForm from 'src/components/utilsComponent/DateFilterForm'
 
+// |-- Types --|
 type Props = {
     rowsPerPage: number
     searchValue?: string

@@ -1,4 +1,14 @@
+/// ==============================================
+// Filename:ATMPagination.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import * as React from 'react'
+
+// |-- External Dependencies --|
 import Pagination from '@mui/material/Pagination'
 
 interface ATMPaginationPropTypes {

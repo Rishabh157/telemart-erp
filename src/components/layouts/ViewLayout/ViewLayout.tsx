@@ -1,21 +1,37 @@
+/// ==============================================
+// Filename:ViewLayout.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
-import SideNavLayout from '../SideNavLayout/SideNavLayout'
+
+// |-- External Dependencies --|
 import { BiSearchAlt2 } from 'react-icons/bi'
 import {
     Outlet,
 
     //, useLocation, useNavigate
 } from 'react-router-dom'
-import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import { IconType } from 'react-icons'
 import { useDispatch } from 'react-redux'
-import { AppDispatch } from 'src/redux/store'
-import { setIsCollapsed } from 'src/redux/slices/SideNavLayout'
+
+// |-- Internal Dependencies --|
+import SideNavLayout from '../SideNavLayout/SideNavLayout'
+import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 
+// |-- Redux --|
+import { AppDispatch } from 'src/redux/store'
+import { setIsCollapsed } from 'src/redux/slices/SideNavLayout'
+
+
+// |-- Types --|
 type ViewLayoutPropTypes = {
     leftbar?: boolean
     infoCard?: React.ReactNode

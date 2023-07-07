@@ -1,10 +1,22 @@
+/// ==============================================
+// Filename:ATMMultiSelect.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { ChangeEvent, useState } from 'react'
+
+// |-- External Dependencies --|
 import { twMerge } from 'tailwind-merge'
 import { MdArrowDropDown } from 'react-icons/md'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import { ClickAwayListener } from '@mui/material'
 import { ErrorMessage } from 'formik'
 
+
+// |-- Types --|
 type Props = {
     name: string
     value: any[]

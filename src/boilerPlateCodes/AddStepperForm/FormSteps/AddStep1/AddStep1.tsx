@@ -1,11 +1,24 @@
+/// ==============================================
+// Filename:AddStep1.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../AddStepperFormWrapper'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import { FieldType } from './AddStep1Wrapper'
 
+// |-- Types --|
 type DropdownOptions = {
     companyTypeOptions: SelectOption[]
     ownershipTypeOptions: SelectOption[]

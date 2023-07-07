@@ -1,7 +1,20 @@
-import { ErrorMessage } from 'formik'
+/// ==============================================
+// Filename:ATMMInputAdormant.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
+
+// |-- External Dependencies --|
+import { ErrorMessage } from 'formik'
 import { twMerge } from 'tailwind-merge'
+
+// |-- Internal Dependencies --|
+import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
+
 
 export interface ATMInputAdormantPropTypes {
     name: string

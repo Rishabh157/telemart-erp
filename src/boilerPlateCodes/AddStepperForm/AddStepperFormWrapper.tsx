@@ -1,11 +1,23 @@
+/// ==============================================
+// Filename:AddStepperFormWrapper.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { object, string } from 'yup'
+
+// |-- Internal Dependencies --|
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import AddStepperForm from './AddStepperForm'
 import AddStep1Wrapper from './FormSteps/AddStep1/AddStep1Wrapper'
 
-// TYPE-  Form Intial Values
+// |-- Types --|
 export type FormInitialValues = {
     company_name: string
     company_type: string

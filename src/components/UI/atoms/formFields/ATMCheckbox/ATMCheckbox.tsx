@@ -1,7 +1,18 @@
-import { ErrorMessage } from 'formik'
+/// ==============================================
+// Filename:ATMCheckbox.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
+import { ErrorMessage } from 'formik'
 import { twMerge } from 'tailwind-merge'
 
+// |-- Types --|
 type Props = {
     name?: string
     checked: boolean

@@ -1,12 +1,25 @@
+/// ==============================================
+// Filename:AddStepperForm.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React from 'react'
+
+// |-- External Dependencies --|
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
+import { FormikProps } from 'formik'
+
+// |-- Internal Dependencies --|
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { FormikProps } from 'formik'
 import { FormInitialValues } from './AddStepperFormWrapper'
 
+// |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     activeStep: number

@@ -1,4 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:ATMOtpInput.tsx
+// Type: UI Component
+// Last Updated: JULY 06, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- Internal Dependencies --|
 import TextInput from './TextInput'
 
 interface OtpInputType {
