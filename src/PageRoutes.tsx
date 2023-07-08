@@ -203,6 +203,7 @@ import {
     AddDealerWarehouseWarpper,
     AddVendorWarehouseWrapper,
     EditVendorWarehouseWrapper,
+    VendorListLedgerTabWrapper,
 } from './pages/index'
 import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
 
@@ -412,7 +413,10 @@ const PageRoutes = () => {
                             path="return-to-vendor"
                             element={'Return To Vendor'}
                         />
-                        <Route path="ledger" element={'ListLedgerTabWrapper'} />
+                        <Route
+                            path="ledger"
+                            element={<VendorListLedgerTabWrapper />}
+                        />
                         <Route
                             path="activities"
                             element={<VendorActivityTabWrapper />}
@@ -545,9 +549,18 @@ const PageRoutes = () => {
                     <Route path="/grn" element={<GRNListingWrapper />} />
                     <Route path="/grn/add" element={<AddGRNWrapper />} />
 
-                    <Route path="/scheme" element={<SchemeListingWrapper />} />
-                    <Route path="/scheme/add" element={<AddSchemeWrapper />} />
-                    <Route path="/scheme/:id" element={<EditSchemeWrapper />} />
+                    <Route
+                        path="/configurations/scheme"
+                        element={<SchemeListingWrapper />}
+                    />
+                    <Route
+                        path="/configurations/scheme/add"
+                        element={<AddSchemeWrapper />}
+                    />
+                    <Route
+                        path="/configurations/scheme/:id"
+                        element={<EditSchemeWrapper />}
+                    />
 
                     <Route
                         path="/purchase-order"

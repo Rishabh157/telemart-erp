@@ -25,6 +25,7 @@ import { CgOrganisation } from 'react-icons/cg'
 import { CiBarcode, CiFaceSmile, CiLocationOn } from 'react-icons/ci'
 import { TbBinaryTree2 } from 'react-icons/tb'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
@@ -55,6 +56,11 @@ const configurationNavigation: NavItemType[] = [
         label: 'Product Group',
         icon: BsBoxes,
         path: '/configurations/product-group',
+    },
+    {
+        label: 'Scheme',
+        icon: TfiLayoutMediaOverlayAlt2,
+        path: '/configurations/scheme',
     },
     {
         label: 'Item',

@@ -49,7 +49,7 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
                 <button
-                    onClick={() => navigate('/scheme/add')}
+                    onClick={() => navigate('/configurations/scheme/add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
                     + Add Scheme

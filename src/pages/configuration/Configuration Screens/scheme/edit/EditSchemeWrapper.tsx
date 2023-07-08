@@ -18,7 +18,7 @@ import moment from 'moment'
 // |-- Internal Dependencies --|
 import StepEditSchemeDetailsWrapper from './FormSteps/StepEditSchemeDetail/StepEditSchemeDetailsWrapper'
 import StepEditFAQ from './FormSteps/StepEditFAQ/StepEditFAQ'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { showToast } from 'src/utils'
 import {
@@ -154,7 +154,7 @@ const EditSchemeWrapper = () => {
             onClick: () => {
                 console.log('Scheme')
             },
-            path: '/scheme',
+            path: '/configurations/scheme',
         },
         {
             label: 'Update Scheme',
@@ -368,7 +368,7 @@ const EditSchemeWrapper = () => {
     }
 
     return (
-        <SideNavLayout>
+        <ConfigurationLayout>
             <Formik
                 enableReinitialize={activeStep === 0}
                 initialValues={initialValues}
@@ -393,7 +393,7 @@ const EditSchemeWrapper = () => {
                     </Form>
                 )}
             </Formik>
-        </SideNavLayout>
+        </ConfigurationLayout>
     )
 }
 

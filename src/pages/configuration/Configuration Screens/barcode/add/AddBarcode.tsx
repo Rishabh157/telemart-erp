@@ -29,6 +29,7 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     productGroupOption: SelectOption[]
+    wareHouseOption: SelectOption[] | []
 }
 
 // Breadcrumbs
@@ -42,7 +43,12 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
+const AddBarcode = ({
+    formikProps,
+    apiStatus,
+    productGroupOption,
+    wareHouseOption,
+}: Props) => {
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch()
@@ -94,12 +100,27 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 value={values.lotNumber}
                                 label="Lot Number"
                                 placeholder="Lot Number"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'lotNumber',
-                                        e.target.value
-                                    )
+                                onChange={(e) =>{
+                                    const inputValue = e.target.value
+                                        if (!isNaN(Number(inputValue))) {
+                                            handleSetFieldValue(
+                                                'lotNumber',
+                                                e.target.value
+                                            )
+                                        }
+                                    }
+                                    
                                 }
+                            />
+                            {/* Warehouse  */}
+                            <ATMSelectSearchable
+                                name="wareHouseId"
+                                value={values.wareHouseId}
+                                label="Warehouse"
+                                onChange={(e) =>
+                                    handleSetFieldValue('wareHouseId', e)
+                                }
+                                options={wareHouseOption}
                             />
                             {/* Product Group  */}
                             <ATMSelectSearchable
@@ -118,11 +139,16 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 value={values.quantity}
                                 label="Quantity"
                                 placeholder="Quantity"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'quantity',
-                                        e.target.value
-                                    )
+                                onChange={(e) =>{
+                                    const inputValue = e.target.value
+                                        if (!isNaN(Number(inputValue))) {
+                                            handleSetFieldValue(
+                                                'quantity',
+                                                e.target.value
+                                            )
+                                        }
+                                    }
+                                   
                                 }
                             />
                         </div>

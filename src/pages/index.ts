@@ -36,8 +36,8 @@ import AddProductSubCategoryWrapper from './configuration/Configuration Screens/
 import ProductSubCategoryListingWrapper from './configuration/Configuration Screens/productSubCategory/list/ProductSubCategoryListingWrapper'
 import AddPurchaseOrderWrapper from './purchaseOrder/add/AddPurchaseOrderWrapper'
 import PurchaseOrderListingWrapper from './purchaseOrder/list/PurchaseOrderListingWrapper'
-import AddSchemeWrapper from './scheme/add/AddSchemeWrapper'
-import SchemeListingWrapper from './scheme/list/SchemeListingWrapper'
+import AddSchemeWrapper from './configuration/Configuration Screens/scheme/add/AddSchemeWrapper'
+import SchemeListingWrapper from './configuration/Configuration Screens/scheme/list/SchemeListingWrapper'
 import AddTaxesWrapper from './configuration/Configuration Screens/taxes/add/AddTaxesWrapper'
 import TaxesListingWrapper from './configuration/Configuration Screens/taxes/list/TaxesListingWrapper'
 import ConfigurationLayout from './configuration/ConfigurationLayout'
@@ -90,7 +90,7 @@ import EditVendorWrapper from './vendors/edit/EditVendorWrapper'
 import EditDealerWrapper from './dealers/edit/EditDealerWrapper'
 import EditWarehouseWrapper from './warehouses/edit/EditWarehouseWrapper'
 import EditProductWrapper from './configuration/Configuration Screens/products/edit/EditProductWrapper'
-import EditSchemeWrapper from './scheme/edit/EditSchemeWrapper'
+import EditSchemeWrapper from './configuration/Configuration Screens/scheme/edit/EditSchemeWrapper'
 import ViewPurchaseOrderWrapper from './purchaseOrder/view/ViewPurchaseOrderWrapper'
 import AddCbBarcodeWrapper from './configuration/Configuration Screens/barcode/AddCb/AddCbWrapper'
 import BarcodeGenerator from './configuration/Configuration Screens/barcode/list/components/BarcodeGroup/BarcodeGenerator'
@@ -191,6 +191,7 @@ import EditDealerSchemeWrapper from './dealers/view/tabs/DealerSchemeTab/edit/Ed
 import DealerListLedgerTabWrapper from './dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
 import AddVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Add/AddVendorWarehouseWrapper'
 import EditVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Edit/EditVendorWarehouseWrapper'
+import VendorListLedgerTabWrapper from './vendors/view/tabs/VendorLedgerTab/list/VendorListLedgerTabWrapper'
 
 // import asr
 import { ASRListingWrapper, EditASRWrapper, AddASRWrapper } from './asr'
@@ -394,4 +395,5 @@ export {
     DealerListLedgerTabWrapper,
     AddVendorWarehouseWrapper,
     EditVendorWarehouseWrapper,
+    VendorListLedgerTabWrapper,
 }

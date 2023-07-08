@@ -15,6 +15,7 @@ import { ErrorMessage } from 'formik'
 // |-- Types --|
 type Props = {
     options: any[]
+    isDisabled?: boolean
     value: any
     onChange: (value: any) => void
     label?: string
@@ -28,6 +29,7 @@ const ATMSelect = ({
     options,
     label,
     required = false,
+    isDisabled = false,
     value,
     onChange,
     size = 'small',
@@ -48,6 +50,7 @@ const ATMSelect = ({
                         name={name}
                         value={value}
                         onChange={onChange}
+                        disabled={isDisabled}
                         size={size}
                         className="shadow "
                         displayEmpty

@@ -51,9 +51,9 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
 
     return (
         <>
-            <div className=" h-[calc(100vh-110px)] px-4 ">
+            <div className="h-[calc(100vh-100px)] px-4">
                 {/* Page Header */}
-                <div className="flex justify-between items-center h-[45px] p-1 ">
+                <div className="flex justify-between items-center h-[78px]  p-1">
                     <ATMPageHeading> Inventories </ATMPageHeading>
                     <button
                         type="button"
