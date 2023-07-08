@@ -50,10 +50,10 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
             label: 'Inward Inventory',
         },
     ]
-    const [wareHouse, setWareHouse] = React.useState(warehouseId)
-    const [status, setStatus] = React.useState('AVAILABLE')
+    const [wareHouse] = React.useState(warehouseId)
+    //const [status, setStatus] = React.useState('AVAILABLE')
     //const [shouldPrint, setShouldPrint] = React.useState(false)
-    const [condition, setCondition] = React.useState('GOOD')
+    //const [condition, setCondition] = React.useState('GOOD')
     const [barcodes, setBarcodes] = React.useState<renderBarcodType[]>([])
     const [filterBarcode, setFilterBarcode] = useState<renderBarcodType[] | []>(
         []
@@ -116,8 +116,8 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
             setFilterBarcode((prevData: any[]) => [...prevData, newObject[0]])
             const dataToSendObject = {
                 barcodeNumber: newObject[0]?.barcodeNumber,
-                status: status,
-                condition: condition,
+                //status: status,
+                //condition: condition,
             }
             setDataToSend((prevData: any[]) => [...prevData, dataToSendObject])
         }
@@ -156,15 +156,16 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
 
             <div className="grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat p-2">
                 <div className="grid grid-cols-4 gap-5 px-3">
-                    <ATMSelect
-                        name=""
+                     <ATMSelect
+                        name="" 
+                        isDisabled={true}                       
                         value={wareHouse}
-                        onChange={(e) => {
-                            setWareHouse(e.target.value)
+                        onChange={() => {
+                            //setWareHouse(e.target.value)
                         }}
                         options={wareHouseOption}
                         label="Warehouse"
-                    />
+                    /> 
                     <ATMSelect
                         name=""
                         value={packaging}
@@ -174,7 +175,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         options={cartonBoxOption}
                         label="Packaging"
                     />
-
+{/* 
                     <ATMSelect
                         name=""
                         value={status}
@@ -200,7 +201,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                             { label: 'Defective', value: 'DEFECTIVE' },
                         ]}
                         label="Condition"
-                    />
+                    /> */}
 
                     <ATMTextField
                         name=""
@@ -213,6 +214,9 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                             //setShouldPrint(true)
                         }}
                         label="Barcode"
+                        placeholder="Barcode"
+                        className="mt-0 rounded" 
+                        
                     />
                 </div>
 

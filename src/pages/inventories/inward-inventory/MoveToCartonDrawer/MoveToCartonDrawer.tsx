@@ -83,7 +83,7 @@ const MoveToCartonDrawer = ({
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Product-category added successfully!')
-                    navigate('/barcodes', { state: { path: '/inventories' } })
+                    navigate('/barcodes', { state: { path: `/warehouse/view/${wareHouse}/inventories` } })
                 } else {
                     showToast('error', res?.data?.message)
                 }

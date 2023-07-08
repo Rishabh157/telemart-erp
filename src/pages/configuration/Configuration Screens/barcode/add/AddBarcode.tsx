@@ -29,6 +29,7 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     productGroupOption: SelectOption[]
+    wareHouseOption: SelectOption[] | []
 }
 
 // Breadcrumbs
@@ -42,7 +43,7 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
+const AddBarcode = ({ formikProps, apiStatus, productGroupOption, wareHouseOption }: Props) => {
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch()
@@ -100,6 +101,16 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                         e.target.value
                                     )
                                 }
+                            />
+                            {/* Warehouse  */}
+                            <ATMSelectSearchable
+                                name="wareHouseId"
+                                value={values.wareHouseId}
+                                label="Warehouse"
+                                onChange={(e) =>
+                                    handleSetFieldValue('wareHouseId', e)
+                                }
+                                options={wareHouseOption}
                             />
                             {/* Product Group  */}
                             <ATMSelectSearchable

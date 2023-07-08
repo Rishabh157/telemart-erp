@@ -124,7 +124,7 @@ const SchemeListingWrapper = () => {
                     isEdit
                     isDelete
                     handleEditActionButton={() => {
-                        navigate(`/scheme/${currentId}`)
+                        navigate(`/configurations/scheme/${currentId}`)
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({

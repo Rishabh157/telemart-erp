@@ -9,6 +9,7 @@
 export type BarcodeListResponse = {
     productGroupId: string
     productGroupLabel: string
+    wareHouseId: string    
     barcodeNumber: string
     barcodeGroupNumber: string
     isUsed: boolean
@@ -31,6 +32,7 @@ export type ProductBarcodeGroupResponse = {
 export type AddBarcode = {
     productGroupId: string
     barcodeGroupNumber: string
+    wareHouseId: string
     lotNumber: string
     quantity: number
     companyId: string
@@ -39,6 +41,7 @@ export type AddBarcode = {
 export type UpdateBarcode = {
     body: {
         productGroupId: string
+        wareHouseId: string
         barcodeGroupNumber: string
         companyId: string
     }

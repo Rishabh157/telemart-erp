@@ -154,7 +154,7 @@ const EditSchemeWrapper = () => {
             onClick: () => {
                 console.log('Scheme')
             },
-            path: '/scheme',
+            path: '/configurations/scheme',
         },
         {
             label: 'Update Scheme',

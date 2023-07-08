@@ -45,6 +45,7 @@ function AllBarcodes() {
             clearInterval(printFunc)
         }
     }, [])
+    
 
     return (
         <div>
