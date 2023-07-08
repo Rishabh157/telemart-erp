@@ -124,7 +124,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                     {' '}
                                     Dimensions{' '}
                                 </label>
-                                <div className="flex gap-2">
+                                <div className="flex gap-2 -mt-1">
                                     {/* Height */}
                                     <ATMTextField
                                         name="dimensions.height"

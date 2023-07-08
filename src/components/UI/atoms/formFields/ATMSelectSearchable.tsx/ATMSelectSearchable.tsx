@@ -60,7 +60,7 @@ const ATMSelectSearchable = ({
     name,
     isMulti = false,
     isSubmitting = true,
-    labelClass = ' font-medium',
+    labelClass = 'text-sm font-medium',
     isAllSelect = false,
     isLoading = false,
     selectClass = 'mt-0 ',
@@ -69,7 +69,7 @@ const ATMSelectSearchable = ({
     classDirection = 'grid grid-cols-3',
     labelSpan = 'col-span-1',
     inputSpan = 'col-span-2',
-    componentClass = '  mt-6',
+    componentClass = '  mt-5',
     labelSize = 'small',
     isMenuOpen = undefined,
     isValueWithLable = false,
@@ -89,16 +89,16 @@ const ATMSelectSearchable = ({
         }),
         valueContainer: (provided: any) => ({
             ...provided,
-            paddingLeft: '4px',
-            paddingTop: '0px',
+            paddingLeft: '5px',
+            paddingTop: '5px',
             alignItems: 'start',
-            overflow: 'scroll',
+            overflow: isMulti? 'scroll': 'unset',
             // maxHeight: '67px',
             maxHeight: '36px',
         }),
         indicator: (provided: any) => ({
             ...provided,
-            padding: '0px',
+            padding: '4px',
         }),
         singleValue: (provided: any) => ({
             ...provided,
@@ -158,10 +158,10 @@ const ATMSelectSearchable = ({
             onChange(values.length ? values : [])
         } else {
             if (isValueWithLable) {
-                console.log('with')
+                //console.log('with')
                 onChange(selectedOption?.value ? selectedOption : '')
             } else {
-                console.log('without')
+                // console.log('without')
 
                 onChange(selectedOption?.value ? selectedOption?.value : '')
             }
@@ -203,7 +203,7 @@ const ATMSelectSearchable = ({
                 }`}
             >
                 <div
-                    className={`flex gap-1 ${
+                    className={`flex gap-1 mb-1 ${
                         labelDirection === 'horizontal'
                             ? `  ${labelSpan} w-full h-full flex items-center `
                             : ' '

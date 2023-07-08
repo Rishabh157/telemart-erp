@@ -260,6 +260,7 @@ const EditSaleOrder = ({
                                                                 e.target.value
                                                             )
                                                         }
+                                                        className="mt-0 rounded"
                                                     />
                                                 </div>
 
@@ -281,6 +282,7 @@ const EditSaleOrder = ({
                                                                 e.target.value
                                                             )
                                                         }}
+                                                        className="mt-0 rounded"
                                                     />
                                                 </div>
                                             </div>
