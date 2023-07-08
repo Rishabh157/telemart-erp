@@ -30,6 +30,7 @@ type Props = {
     setActiveStep: React.Dispatch<React.SetStateAction<number>>
     steps: any[]
     dealerCategoryOptions: any[]
+    apiStatus:boolean
 }
 
 const AddDealers = ({
@@ -38,6 +39,7 @@ const AddDealers = ({
     setActiveStep,
     steps,
     dealerCategoryOptions,
+    apiStatus
 }: Props) => {
     // Handle Previous
     const dispatch = useDispatch<AppDispatch>()
@@ -96,6 +98,7 @@ const AddDealers = ({
 
                             <button
                                 type="button"
+                                disabled={apiStatus}
                                 onClick={() => {
                                     dispatch(setFormSubmitting(true))
                                     formikProps.handleSubmit()

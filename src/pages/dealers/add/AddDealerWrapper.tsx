@@ -209,6 +209,7 @@ const AddDealerWrapper = () => {
     // States
     const navigate = useNavigate()
     const [activeStep, setActiveStep] = React.useState(0)
+    const [apiStatus, setApiStatus] = React.useState<boolean>(false)
     const [addDealer] = useAddDealerMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -301,6 +302,7 @@ const AddDealerWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
             dispatch(setFieldCustomized(false))
+            setApiStatus(true)
             setTimeout(() => {
                 addDealer({
                     dealerCode: values.dealerCode,
@@ -356,6 +358,7 @@ const AddDealerWrapper = () => {
                         showToast('error', 'Something went wrong')
                     }
                 })
+                setApiStatus(false)
             }, 1000)
         } else {
             dispatch(setFormSubmitting(false))
@@ -366,10 +369,12 @@ const AddDealerWrapper = () => {
     return (
         <SideNavLayout>
             <Formik
+            enableReinitialize
                 initialValues={initialValues}
                 validationSchema={getValidationSchema(activeStep)}
                 onSubmit={onSubmitHandler}
                 validateOnChange={true}
+                
             >
                 {(formikProps: FormikProps<FormInitialValues>) => (
                     <Form className="">
@@ -379,6 +384,7 @@ const AddDealerWrapper = () => {
                             activeStep={activeStep}
                             setActiveStep={setActiveStep}
                             dealerCategoryOptions={dealerCategoryOptions}
+                            apiStatus={apiStatus}
                         />
                     </Form>
                 )}

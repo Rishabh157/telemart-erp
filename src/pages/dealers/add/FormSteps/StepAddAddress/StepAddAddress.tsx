@@ -10,7 +10,7 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -21,6 +21,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -57,12 +58,13 @@ const StepAddAddress = ({
     formFields,
     dropdownOptions,
 }: Props) => {
+    const dispatch = useDispatch()
+
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-
     return (
         <div className="">
             {formFields?.map((formField, index) => {
@@ -184,6 +186,12 @@ const StepAddAddress = ({
                                                     label={label}
                                                     onChange={(e) => {
                                                         setFieldValue(name, e)
+                                                        dispatch(
+                                                            setFormSubmitting(
+                                                                false
+                                                            )
+                                                        )
+
                                                         if (e) {
                                                             const {
                                                                 address,

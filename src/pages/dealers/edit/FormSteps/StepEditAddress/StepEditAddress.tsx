@@ -21,7 +21,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { setFieldCustomized, setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -185,6 +185,11 @@ const StepEditAddress = ({
                                                 label={label}
                                                 checked={Boolean(values[name])}
                                                 onChange={(e) => {
+                                                    dispatch(
+                                                        setFormSubmitting(
+                                                            false
+                                                        )
+                                                    )
                                                     handleSetFieldValue(name, e)
                                                     if (e) {
                                                         const {
