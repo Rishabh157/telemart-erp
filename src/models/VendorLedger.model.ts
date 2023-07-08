@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:Ledger.model.ts
+// Filename:VendorLedger.model.ts
 // Type: Model Component
 // Last Updated: JUNE 28, 2023
 // Project: TELIMART - Front End
@@ -12,13 +12,13 @@ export enum NoteType {
     DEALER_AMOUNT_CREDITED = 'DEALER_AMOUNT_CREDITED',
     VENDOR_AMOUNT_CREDITED = 'VENDOR_AMOUNT_CREDITED',
 }
-export type LedgerListResponse = {
+export type VendorLedgerListResponse = {
     noteType: keyof typeof NoteType
     creditAmount: number
     debitAmount: number
     balance: number
     remark: string
-    dealerId: string
+    vendorId: string
     companyId: string
     isActive: boolean
     isDeleted: boolean
@@ -28,24 +28,24 @@ export type LedgerListResponse = {
     __v: number
 }
 
-export type LedgerAdd = {
+export type VendorLedgerAdd = {
     noteType: keyof typeof NoteType
     creditAmount: number
     debitAmount: number
     // price: number
     remark: string
     companyId: string
-    dealerId: string
+    vendorId: string
 }
 
-export type UpdateLedger = {
+export type UpdateVendorLedger = {
     body: {
         noteType: keyof typeof NoteType
         creditAmount: number
         debitAmount: number
         remark: string
         companyId: string
-        dealerId: string
+        vendorId: string
     }
     id: string
 }

@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:DealerLedgerListing.tsx
+// Filename:VendorLedgerListing.tsx
 // Type: Tab List Component
 // Last Updated: JUNE 27, 2023
 // Project: TELIMART - Front End
@@ -17,7 +17,7 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddDealerLedgerModelWrapper from '../add/AddDealerLedgerModelWrapper'
+import AddVendorLedgerModelWrapper from '../add/AddVendorLedgerModelWrapper'
 import { NoteType } from 'src/models/Ledger.model'
 import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 
@@ -27,7 +27,7 @@ import {
     setPage,
     setSearchValue,
     setFilterBy,
-} from 'src/redux/slices/DealerLedgerSlice'
+} from 'src/redux/slices/VendorLedgerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -36,26 +36,26 @@ type Props = {
     rows: any[]
 }
 
-const DealerLedgerListing = ({ columns, rows }: Props) => {
+const VendorLedgerListing = ({ columns, rows }: Props) => {
     const [openModel, setOpenModel] = useState<keyof typeof NoteType>(
         'CREDIT_NOTE_CREATED'
     )
     const [isOpenModel, setIsOpenModel] = useState(false)
     // const [isFilterOpen, setIsFilterOpen] = useState(false)
     const dispatch = useDispatch<AppDispatch>()
-    const dealerLedgerState: any = useSelector(
-        (state: RootState) => state.dealerLedger
+    const vendorLedgerState: any = useSelector(
+        (state: RootState) => state.vendorLedger
     )
 
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
-        dealerLedgerState
+        vendorLedgerState
 
     return (
         <div className="px-4 h-[calc(100vh-200px)] ">
             {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
+            <div className="flex justify-between items-center h-[55px]">
                 <div className="flex gap-6">
                     <ATMPageHeading> Ledger</ATMPageHeading>
                     <div className=" pl-1 p-1 mb-1 hover:outline-blue-400 outline outline-offset-1 outline-blue-200 rounded">
@@ -95,15 +95,15 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    <button
+                    {/* <button
                         onClick={() => {
                             setIsOpenModel(true)
-                            setOpenModel(NoteType.DEALER_AMOUNT_CREDITED)
+                            setOpenModel(NoteType.VENDOR_AMOUNT_CREDITED)
                         }}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
                         + Cr. Amount
-                    </button>
+                    </button> */}
                     <button
                         onClick={() => {
                             setIsOpenModel(true)
@@ -125,8 +125,9 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                 </div>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-35px)]  rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-75px)]  rounded bg-white">
                 {/*Table Header */}
+
                 <ATMTableHeader
                     page={page}
                     searchValue={searchValue}
@@ -183,7 +184,7 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                 maxWidth="sm"
                 handleClose={() => setIsOpenModel(false)}
                 Component={
-                    <AddDealerLedgerModelWrapper
+                    <AddVendorLedgerModelWrapper
                         addType={openModel}
                         setIsOpenModel={setIsOpenModel}
                     />
@@ -193,4 +194,4 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default DealerLedgerListing
+export default VendorLedgerListing

@@ -176,3 +176,9 @@ export type {
     CallerFormBody,
     UpdateCallerForm,
 } from './Caller.model'
+
+export type {
+    VendorLedgerAdd,
+    UpdateVendorLedger,
+    VendorLedgerListResponse,
+} from './VendorLedger.model'

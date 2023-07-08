@@ -52,7 +52,7 @@ const ATMTableHeader = ({
     onSubmitDateHandler,
 }: Props) => {
     return (
-        <div className="p-3 border-b border-slate-300 grid grid-cols-3">
+        <div className="p-3 pb-5 border-b border-slate-300 grid grid-cols-3">
             {/* Left */}
             <div className="flex gap-1  col-span-2">
                 <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
@@ -78,6 +78,7 @@ const ATMTableHeader = ({
                 {isRefresh && (
                     <button
                         onClick={() => {
+                            window.location.reload()
                             onFilterDispatch()
                             setTimeout(
                                 () => (
@@ -94,12 +95,16 @@ const ATMTableHeader = ({
                     </button>
                 )}
                 {isDateFilter && (
-                    <DateFilterForm
-                        IsDaterFilterLoading={IsDaterFilterLoading as boolean}
-                        onSubmitDateHandler={
-                            onSubmitDateHandler as (values: any) => void
-                        }
-                    />
+                    <div className="-mt-1">
+                        <DateFilterForm
+                            IsDaterFilterLoading={
+                                IsDaterFilterLoading as boolean
+                            }
+                            onSubmitDateHandler={
+                                onSubmitDateHandler as (values: any) => void
+                            }
+                        />
+                    </div>
                 )}
             </div>
 
