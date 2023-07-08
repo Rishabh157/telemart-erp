@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
+import { object, string, number } from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
@@ -93,8 +93,12 @@ const AddBarcodeWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         productGroup: string().required('Group Name is required'),
-        quantity: string().required('Quantity is required'),
-        lotNumber: string().required('Lot number is required'),
+        quantity: number()
+        .moreThan(0, 'Quantity must be greater than 0')
+        .required('Quantity is required'),
+        lotNumber: number()
+        .moreThan(0, 'LotNumber must be greater than 0')
+        .required('Lot number is required'),
         wareHouseId: string().required('Warehouse is required'),
     })
 

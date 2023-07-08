@@ -100,11 +100,16 @@ const AddBarcode = ({
                                 value={values.lotNumber}
                                 label="Lot Number"
                                 placeholder="Lot Number"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'lotNumber',
-                                        e.target.value
-                                    )
+                                onChange={(e) =>{
+                                    const inputValue = e.target.value
+                                        if (!isNaN(Number(inputValue))) {
+                                            handleSetFieldValue(
+                                                'lotNumber',
+                                                e.target.value
+                                            )
+                                        }
+                                    }
+                                    
                                 }
                             />
                             {/* Warehouse  */}
@@ -134,11 +139,16 @@ const AddBarcode = ({
                                 value={values.quantity}
                                 label="Quantity"
                                 placeholder="Quantity"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'quantity',
-                                        e.target.value
-                                    )
+                                onChange={(e) =>{
+                                    const inputValue = e.target.value
+                                        if (!isNaN(Number(inputValue))) {
+                                            handleSetFieldValue(
+                                                'quantity',
+                                                e.target.value
+                                            )
+                                        }
+                                    }
+                                   
                                 }
                             />
                         </div>
