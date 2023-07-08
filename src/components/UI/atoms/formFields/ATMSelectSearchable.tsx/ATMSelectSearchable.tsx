@@ -95,8 +95,7 @@ const ATMSelectSearchable = ({
             paddingTop: '5px',
             alignItems: 'start',
             overflow: isMulti? 'scroll': 'unset',
-            // maxHeight: '67px',
-            maxHeight: '36px',
+            maxHeight: '67px',
         }),
         indicator: (provided: any) => ({
             ...provided,

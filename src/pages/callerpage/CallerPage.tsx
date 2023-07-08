@@ -1196,7 +1196,7 @@ const CallerPage: React.FC<Props> = ({
                         isMulti
                         componentClass="mt-2"
                         label="Order For"
-                        size="small"
+                        size="xs"
                         selectLabel="select order for"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
