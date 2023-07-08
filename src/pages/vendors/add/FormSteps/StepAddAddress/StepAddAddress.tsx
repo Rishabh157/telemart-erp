@@ -10,7 +10,7 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
@@ -20,6 +20,8 @@ import { FormInitialValues } from '../../AddVendorWrapper'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -58,6 +60,7 @@ const StepAddAddress = ({
     formFields,
     dropdownOptions,
 }: Props) => {
+    const dispatch = useDispatch()
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
 
@@ -180,7 +183,82 @@ const StepAddAddress = ({
                                                 />
                                             </div>
                                         )
+                                    case 'checkbox':
+                                        return (
+                                            <ATMCheckbox
+                                                key={name}
+                                                name={name}
+                                                label={label}
+                                                checked={Boolean(values[name])}
+                                                onChange={(e) => {
+                                                    dispatch(
+                                                        setFormSubmitting(false)
+                                                    )
 
+                                                    setFieldValue(name, e)
+                                                    console.log(values)
+                                                    if (e) {
+                                                        const {
+                                                            address,
+                                                            country,
+                                                            district,
+                                                            phone,
+                                                            pincode,
+                                                            state,
+                                                        } = values.regd_address
+                                                        setFieldValue(
+                                                            'billing_address.phone',
+                                                            phone
+                                                        )
+                                                        setFieldValue(
+                                                            'billing_address.address',
+                                                            address
+                                                        )
+                                                        setFieldValue(
+                                                            'billing_address.country',
+                                                            country
+                                                        )
+                                                        setFieldValue(
+                                                            'billing_address.district',
+                                                            district
+                                                        )
+                                                        setFieldValue(
+                                                            'billing_address.pincode',
+                                                            pincode
+                                                        )
+                                                        setFieldValue(
+                                                            'billing_address.state',
+                                                            state
+                                                        )
+                                                    } else {
+                                                        setFieldValue(
+                                                            'billing_address.address',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billing_address.country',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billing_address.district',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billing_address.phone',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billing_address.pincode',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billing_address.state',
+                                                            ''
+                                                        )
+                                                    }
+                                                }}
+                                            />
+                                        )
                                     default:
                                         return null
                                 }

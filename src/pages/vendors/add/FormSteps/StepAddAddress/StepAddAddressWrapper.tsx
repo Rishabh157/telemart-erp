@@ -90,6 +90,17 @@ const formFields: {
             },
         ],
     },
+    {
+        sectionName: '',
+        fields: [
+            {
+                name: 'checkbox',
+                label: 'As Above values',
+                type: 'checkbox',
+                placeholder: 'checbox',
+            },
+        ],
+    },
 
     {
         sectionName: 'billing_address',
