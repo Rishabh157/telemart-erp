@@ -43,7 +43,12 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddBarcode = ({ formikProps, apiStatus, productGroupOption, wareHouseOption }: Props) => {
+const AddBarcode = ({
+    formikProps,
+    apiStatus,
+    productGroupOption,
+    wareHouseOption,
+}: Props) => {
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch()

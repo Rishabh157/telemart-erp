@@ -9,7 +9,7 @@
 export type BarcodeListResponse = {
     productGroupId: string
     productGroupLabel: string
-    wareHouseId: string    
+    wareHouseId: string
     barcodeNumber: string
     barcodeGroupNumber: string
     isUsed: boolean

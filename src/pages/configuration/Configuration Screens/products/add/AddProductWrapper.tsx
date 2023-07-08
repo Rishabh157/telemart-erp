@@ -127,8 +127,7 @@ const steps = [
             videos: array().of(
                 object().shape({
                     videoName: string(),
-                    videoLink: string()
-                        .url('Must be a valid link'),
+                    videoLink: string().url('Must be a valid link'),
                 })
             ),
         }),
@@ -144,14 +143,12 @@ const steps = [
                         'Please write script',
                         (value: any) => value.getCurrentContent().hasText()
                     ),
-                    language: string().required("Required"),
+                    language: string().required('Required'),
                 })
             ),
         }),
     },
 ]
-
-
 
 // Breadcrumbs
 const breadcrumbs = [

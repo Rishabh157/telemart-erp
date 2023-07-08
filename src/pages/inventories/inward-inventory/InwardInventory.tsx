@@ -156,16 +156,16 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
 
             <div className="grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat p-2">
                 <div className="grid grid-cols-4 gap-5 px-3">
-                     <ATMSelect
-                        name="" 
-                        isDisabled={true}                       
+                    <ATMSelect
+                        name=""
+                        isDisabled={true}
                         value={wareHouse}
                         onChange={() => {
                             //setWareHouse(e.target.value)
                         }}
                         options={wareHouseOption}
                         label="Warehouse"
-                    /> 
+                    />
                     <ATMSelect
                         name=""
                         value={packaging}
@@ -175,7 +175,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         options={cartonBoxOption}
                         label="Packaging"
                     />
-{/* 
+                    {/* 
                     <ATMSelect
                         name=""
                         value={status}
@@ -215,8 +215,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         }}
                         label="Barcode"
                         placeholder="Barcode"
-                        className="mt-0 rounded" 
-                        
+                        className="mt-0 rounded"
                     />
                 </div>
 

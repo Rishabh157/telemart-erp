@@ -21,10 +21,9 @@ import AddBarcode from './AddBarcode'
 import { useAddBarcodeMutation } from 'src/services/BarcodeService'
 import { showToast } from 'src/utils'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
-import {  WarehousesListResponse } from 'src/models'
+import { WarehousesListResponse } from 'src/models'
 import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -49,7 +48,6 @@ const AddBarcodeWrapper = (props: Props) => {
     const { allItems }: any = useSelector(
         (state: RootState) => state?.productGroup
     )
-   
 
     const [wareHouseOption, setWareHouseOption] = useState<SelectOption[] | []>(
         []
@@ -112,7 +110,7 @@ const AddBarcodeWrapper = (props: Props) => {
             barcodeGroupNumber: uniqueGrouId,
             quantity: Number(values?.quantity),
             lotNumber: values.lotNumber,
-            wareHouseId:values.wareHouseId,
+            wareHouseId: values.wareHouseId,
             companyId: userData?.companyId || '',
         }).then((res) => {
             if ('data' in res) {
