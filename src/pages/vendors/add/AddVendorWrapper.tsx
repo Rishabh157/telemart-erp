@@ -88,9 +88,7 @@ const steps = [
             company_name: string().required('Company name is required'),
             company_type: string().required('Please select company type'),
             ownership_type: string().required('Please select ownership type'),
-            website_address: string()
-                .url('Invalid URL')
-                .required('Website address is required'),
+            website_address: string().url('Invalid URL'),
             vendor_code: string().required('Vendor code is required'),
         }),
     },
@@ -160,9 +158,7 @@ const steps = [
             gst_certificate: string()
                 .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),
-            declaration_form: string()
-                .url('Form must be valid URL')
-                .required('Declaration form is required'),
+            declaration_form: string().url('Form must be valid URL'),
         }),
     },
     {
@@ -185,9 +181,9 @@ const steps = [
                     accountType: string().required(
                         'Please select account type'
                     ),
-                    cancelledCheque: string()
-                        .url('Cancle Cheque must be valid URL')
-                        .required('Cancelled cheque is required'),
+                    cancelledCheque: string().url(
+                        'Cancle Cheque must be valid URL'
+                    ),
                 })
             ),
         }),
