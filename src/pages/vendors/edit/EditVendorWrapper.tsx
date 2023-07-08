@@ -154,9 +154,7 @@ const steps = [
             gst_certificate: string()
                 .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),
-            declaration_form: string()
-                .url('Form must be valid URL')
-                .required('Declaration form is required'),
+            declaration_form: string().url('Form must be valid URL'),
         }),
     },
     {
