@@ -31,6 +31,7 @@ import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import { deleteKeyFromArrayObjects } from '../../../utils'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -267,6 +268,11 @@ const AddVendorWrapper = () => {
         if (activeStep === steps.length - 1) {
             setApiStatus(true)
             dispatch(setFieldCustomized(false))
+            let contactInformation = deleteKeyFromArrayObjects(
+                values.contact_informations,
+                'maskedPhoneNo'
+            )
+
             setTimeout(() => {
                 addVendor({
                     companyName: values.company_name,
@@ -290,7 +296,7 @@ const AddVendorWrapper = () => {
                         districtId: values.billing_address.district,
                         pincodeId: values.billing_address.pincode,
                     },
-                    contactInformation: values.contact_informations,
+                    contactInformation: contactInformation,
                     document: {
                         gstNumber: values.gst_no,
                         gstCertificate: values.gst_certificate,
