@@ -31,6 +31,7 @@ import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import { deleteKeyFromArrayObjects } from '../../../utils'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -88,9 +89,7 @@ const steps = [
             company_name: string().required('Company name is required'),
             company_type: string().required('Please select company type'),
             ownership_type: string().required('Please select ownership type'),
-            website_address: string()
-                .url('Invalid URL')
-                .required('Website address is required'),
+            website_address: string().url('Invalid URL'),
             vendor_code: string().required('Vendor code is required'),
         }),
     },
@@ -160,9 +159,7 @@ const steps = [
             gst_certificate: string()
                 .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),
-            declaration_form: string()
-                .url('Form must be valid URL')
-                .required('Declaration form is required'),
+            declaration_form: string().url('Form must be valid URL'),
         }),
     },
     {
@@ -185,9 +182,9 @@ const steps = [
                     accountType: string().required(
                         'Please select account type'
                     ),
-                    cancelledCheque: string()
-                        .url('Cancle Cheque must be valid URL')
-                        .required('Cancelled cheque is required'),
+                    cancelledCheque: string().url(
+                        'Cancle Cheque must be valid URL'
+                    ),
                 })
             ),
         }),
@@ -271,6 +268,11 @@ const AddVendorWrapper = () => {
         if (activeStep === steps.length - 1) {
             setApiStatus(true)
             dispatch(setFieldCustomized(false))
+            let contactInformation = deleteKeyFromArrayObjects(
+                values.contact_informations,
+                'maskedPhoneNo'
+            )
+
             setTimeout(() => {
                 addVendor({
                     companyName: values.company_name,
@@ -294,7 +296,7 @@ const AddVendorWrapper = () => {
                         districtId: values.billing_address.district,
                         pincodeId: values.billing_address.pincode,
                     },
-                    contactInformation: values.contact_informations,
+                    contactInformation: contactInformation,
                     document: {
                         gstNumber: values.gst_no,
                         gstCertificate: values.gst_certificate,
