@@ -100,17 +100,15 @@ const AddBarcode = ({
                                 value={values.lotNumber}
                                 label="Lot Number"
                                 placeholder="Lot Number"
-                                onChange={(e) =>{
+                                onChange={(e) => {
                                     const inputValue = e.target.value
-                                        if (!isNaN(Number(inputValue))) {
-                                            handleSetFieldValue(
-                                                'lotNumber',
-                                                e.target.value
-                                            )
-                                        }
+                                    if (!isNaN(Number(inputValue))) {
+                                        handleSetFieldValue(
+                                            'lotNumber',
+                                            e.target.value
+                                        )
                                     }
-                                    
-                                }
+                                }}
                             />
                             {/* Warehouse  */}
                             <ATMSelectSearchable
@@ -139,17 +137,15 @@ const AddBarcode = ({
                                 value={values.quantity}
                                 label="Quantity"
                                 placeholder="Quantity"
-                                onChange={(e) =>{
+                                onChange={(e) => {
                                     const inputValue = e.target.value
-                                        if (!isNaN(Number(inputValue))) {
-                                            handleSetFieldValue(
-                                                'quantity',
-                                                e.target.value
-                                            )
-                                        }
+                                    if (!isNaN(Number(inputValue))) {
+                                        handleSetFieldValue(
+                                            'quantity',
+                                            e.target.value
+                                        )
                                     }
-                                   
-                                }
+                                }}
                             />
                         </div>
                     </div>

@@ -94,11 +94,11 @@ const AddBarcodeWrapper = (props: Props) => {
     const validationSchema = object({
         productGroup: string().required('Group Name is required'),
         quantity: number()
-        .moreThan(0, 'Quantity must be greater than 0')
-        .required('Quantity is required'),
+            .moreThan(0, 'Quantity must be greater than 0')
+            .required('Quantity is required'),
         lotNumber: number()
-        .moreThan(0, 'LotNumber must be greater than 0')
-        .required('Lot number is required'),
+            .moreThan(0, 'LotNumber must be greater than 0')
+            .required('Lot number is required'),
         wareHouseId: string().required('Warehouse is required'),
     })
 

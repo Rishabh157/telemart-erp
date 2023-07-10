@@ -44,7 +44,7 @@ type Props = {
     componentClass?: string
     labelSize?: 'small' | 'medium' | 'large' | 'xs'
     isMenuOpen?: boolean
-    maxMenuHeight? : number
+    maxMenuHeight?: number
     isValueWithLable?: boolean
 }
 
@@ -74,7 +74,7 @@ const ATMSelectSearchable = ({
     labelSize = 'small',
     isMenuOpen = undefined,
     isValueWithLable = false,
-    maxMenuHeight = 300
+    maxMenuHeight = 300,
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -94,7 +94,7 @@ const ATMSelectSearchable = ({
             paddingLeft: '5px',
             paddingTop: '5px',
             alignItems: 'start',
-            overflow: isMulti? 'scroll': 'unset',
+            overflow: isMulti ? 'scroll' : 'unset',
             maxHeight: '67px',
         }),
         indicator: (provided: any) => ({

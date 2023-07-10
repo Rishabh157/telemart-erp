@@ -14,7 +14,6 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
-
 // |-- Types --|'
 type Props = {
     items: any
@@ -31,9 +30,7 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-
-
-const ViewPurchaseOrder = ({ items }: Props) => {    
+const ViewPurchaseOrder = ({ items }: Props) => {
     return (
         <div className=" px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
@@ -65,9 +62,7 @@ const ViewPurchaseOrder = ({ items }: Props) => {
                         </div>
                         <div className="grid grid-cols-4 gap-3 pl-6 py-6 border border-l-2">
                             <h1 className="text-gray-800">PO Code </h1>
-                            <p className="text-slate-600">
-                                {items?.poCode}
-                            </p>
+                            <p className="text-slate-600">{items?.poCode}</p>
                             <h1 className="text-gray-800">Vendor </h1>
                             <p className="text-slate-600">
                                 {items?.vendorLabel}
@@ -87,7 +82,7 @@ const ViewPurchaseOrder = ({ items }: Props) => {
                         <div className="grid grid-cols-4 gap-3 pl-6 py-6 border border-l-2">
                             <h1 className="text-gray-800">Item Name </h1>
                             <p className="text-slate-600">
-                                {items?.purchaseOrder?.itemName }
+                                {items?.purchaseOrder?.itemName}
                             </p>
                             <h1 className="text-gray-800">Rate</h1>
                             <p className="text-slate-600">
@@ -97,42 +92,43 @@ const ViewPurchaseOrder = ({ items }: Props) => {
                             <p className="text-slate-600">
                                 {items?.purchaseOrder?.quantity?.toString()}
                             </p>
-                            <h1 className="text-gray-800">Est. Receiving Date</h1>
+                            <h1 className="text-gray-800">
+                                Est. Receiving Date
+                            </h1>
                             <p className="text-slate-600">
                                 {items?.purchaseOrder?.estReceivingDate}
-                            </p>                            
+                            </p>
                         </div>
                     </div>
 
                     {/*  Approval  */}
-                    
+
                     <div className="grow px-3 py-8">
                         <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
                             Approval Details
                         </div>
                         {items?.approval?.map((item: any) => (
-                        <div className="grid grid-cols-4 gap-2 pl-6 py-6 border border-l-2">
-                            <h1 className="text-gray-800">Approval Level </h1>
-                            <p className="text-slate-600">
-                                {item?.approvalLevel}
-                            </p>
-                            <h1 className="text-gray-800">Approval By</h1>
-                            <p className="text-slate-600">
-                                {item?.approvalByName}
-                            </p>
-                            <h1 className="text-gray-800">Approval Time </h1>
-                            <p className="text-slate-600">
-                                {item?.time}
-                            </p>                            
-                        </div>
+                            <div className="grid grid-cols-4 gap-2 pl-6 py-6 border border-l-2">
+                                <h1 className="text-gray-800">
+                                    Approval Level{' '}
+                                </h1>
+                                <p className="text-slate-600">
+                                    {item?.approvalLevel}
+                                </p>
+                                <h1 className="text-gray-800">Approval By</h1>
+                                <p className="text-slate-600">
+                                    {item?.approvalByName}
+                                </p>
+                                <h1 className="text-gray-800">
+                                    Approval Time{' '}
+                                </h1>
+                                <p className="text-slate-600">{item?.time}</p>
+                            </div>
                         ))}
                     </div>
-                    
                 </div>
             </div>
         </div>
-
-       
     )
 }
 
