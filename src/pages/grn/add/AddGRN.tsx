@@ -26,7 +26,6 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
-    totalreceivedQuantity: number
 }
 
 // Breadcrumbs
@@ -40,9 +39,9 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddItem = ({ formikProps, apiStatus, totalreceivedQuantity }: Props) => {
+const AddItem = ({ formikProps, apiStatus }: Props) => {
     const { state } = useLocation()
-    const { poCode, itemName, quantity } = state
+    const { poCode, itemName, quantity,receivedQuantity } = state
     const { values, setFieldValue } = formikProps
 
     return (
@@ -110,7 +109,7 @@ const AddItem = ({ formikProps, apiStatus, totalreceivedQuantity }: Props) => {
                                 <div className="text-[18px] font-medium text-primary-main">
                                     Total Received Qnty:
                                     <span className=" text-black px-2">
-                                        {totalreceivedQuantity | 0}
+                                        {receivedQuantity | 0}
                                     </span>
                                 </div>
                             </div>

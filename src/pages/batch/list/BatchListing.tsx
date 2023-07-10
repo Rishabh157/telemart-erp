@@ -1,20 +1,36 @@
+/// ==============================================
+// Filename:BatchListing.tsx
+// Type: List Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 //import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import { useAddBatchMutation } from 'src/services/BatchService'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
+
+// |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
     setSearchValue,
 } from 'src/redux/slices/BatchSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useAddBatchMutation } from 'src/services/BatchService'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
 
+
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]

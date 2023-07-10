@@ -19,6 +19,7 @@ export type PurchaseOrderListResponse = {
         rate: number
         quantity: number
         estReceivingDate: string
+        receivedQuantity: string
     }
     approval: {
         approvalLevel: number

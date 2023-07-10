@@ -7,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -17,10 +17,7 @@ import { number, object, ref } from 'yup'
 // |-- Internal Dependencies --|
 import AddItem from './AddGRN'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import {
-    useAddGRNMutation,
-    useGetGRNByPOCodeQuery,
-} from 'src/services/GRNService'
+import { useAddGRNMutation } from 'src/services/GRNService'
 import { showToast } from 'src/utils'
 
 // |-- Types --|
@@ -37,29 +34,12 @@ export type FormInitialValues = {
 
 const AddGRNWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const [totalreceivedQuantity, setreceivedQuantity] = useState<number>(0)
     const [addGRN] = useAddGRNMutation()
     const { state } = useLocation()
     const { poCode, companyId, itemId } = state
 
     //const { userData } = useSelector((state: RootState) => state?.auth);
     const [apiStatus, setApiStatus] = useState(false)
-    const { data, isLoading, isFetching } = useGetGRNByPOCodeQuery(
-        {
-            pocode: poCode,
-            itemId: itemId,
-
-            
-        },
-        { skip: !poCode }
-    )
-
-    useEffect(() => {
-        if (data && !isLoading && !isFetching) {
-            console.log(data?.totalRecievedQuantity)
-            setreceivedQuantity(data?.totalRecievedQuantity)
-        }
-    }, [data, isLoading, isFetching])
 
     // const { state } = useLocation()
     // const { poCode, itemName, quantity } = state
@@ -150,7 +130,6 @@ const AddGRNWrapper = (props: Props) => {
                         <AddItem
                             formikProps={formikProps}
                             apiStatus={apiStatus}
-                            totalreceivedQuantity={totalreceivedQuantity}
                         />
                     )
                 }}

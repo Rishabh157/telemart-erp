@@ -10,8 +10,6 @@
 import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
-import { Formik } from 'formik'
-import { array, date, number, object, string } from 'yup'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -31,28 +29,7 @@ import {
 } from 'src/redux/slices/GRNSlice'
 import { useGetPaginationGRNQuery } from 'src/services/GRNService'
 
-// |-- Types --|
-type Props = {}
-
-export type FormInitialValues = {
-    poCode: string
-    vendor: string
-    wareHouse: string
-    purchaseOrder: {
-        itemId: string
-        itemName: string
-        rate: number
-        quantity: number
-        estReceivingDate: string
-    }
-    approval: {
-        approvalByName: string
-        approvalLevel: number
-        time: string
-    }[]
-}
-
-const ViewPurchaseOrderWrapper = (props: Props) => {
+const ViewPurchaseOrderWrapper = () => {
     // Form Initial Values
     const params = useParams()
     const dispatch = useDispatch<AppDispatch>()
@@ -68,13 +45,6 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
         dispatch(setSelectedItems(data?.data))
     }, [data, isLoading, isFetching, dispatch])
 
-    const initialValues: FormInitialValues = {
-        poCode: selectedItems?.poCode || '',
-        vendor: selectedItems?.vendorLabel || '',
-        wareHouse: selectedItems?.warehouseLabel || '',
-        purchaseOrder: selectedItems?.purchaseOrder || '',
-        approval: selectedItems?.approval || [],
-    }
     const {
         data: GRNData,
         isLoading: GRNIsLoading,
@@ -82,7 +52,7 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
     } = useGetPaginationGRNQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['itemName'],
+        params: ['itemName' ,'poCode'],
         page: page,
         filterBy: [
             {
@@ -93,7 +63,6 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
                 fieldName: 'poCode',
                 value: selectedItems?.poCode,
             },
-            
         ],
         dateFilter: {},
         orderBy: 'createdAt',
@@ -112,47 +81,9 @@ const ViewPurchaseOrderWrapper = (props: Props) => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [GRNIsLoading, GRNIsFetching, GRNData, dispatch])
-    // Form Validation Schema
-    const validationSchema = object({
-        poCode: string().required('Purchase order code is required'),
-        vendor: string().required('Please select a vendor'),
-        wareHouse: string().required('Please select a warehouse'),
-        purchaseOrder: array().of(
-            object().shape({
-                itemId: string().required('required'),
-                itemName: string().required('required'),
-
-                rate: number()
-                    .min(0, 'Rate must be greater than 0')
-                    .required('Please enter rate'),
-                quantity: number()
-                    .min(0, 'Quantity must be greater than 0')
-                    .required('Please enter quantity'),
-                estReceivingDate: date().required('Please select date'),
-            })
-        ),
-    })
-
-    //    Form Submit Handler
-    const onSubmitHandler = (values: FormInitialValues) => {}
-
     return (
         <SideNavLayout>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <ViewPurchaseOrder
-                            formikProps={formikProps}
-                            items={items}
-                        />
-                    )
-                }}
-            </Formik>
+            <ViewPurchaseOrder items={selectedItems} grnitems={items} />
         </SideNavLayout>
     )
 }

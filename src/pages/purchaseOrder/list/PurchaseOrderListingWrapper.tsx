@@ -147,6 +147,14 @@ const PurchaseOrderListingWrapper = () => {
             },
         },
         {
+            field: 'receivedQuantity',
+            headerName: 'Recieved Quantity',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: PurchaseOrderListResponse) => {
+                return <span> {row.purchaseOrder.receivedQuantity} </span>
+            },
+        },
+        {
             field: 'rate',
             headerName: 'rate',
             flex: 'flex-[1.5_1.5_0%]',
@@ -185,6 +193,7 @@ const PurchaseOrderListingWrapper = () => {
                 )
             },
         },
+        
         {
             field: 'approval.approvalLevel',
             headerName: 'Approval level',

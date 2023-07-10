@@ -1,20 +1,36 @@
+/// ==============================================
+// Filename:BatchListingWrapper.tsx
+// Type: List Component
+// Last Updated: JULY 04, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
+
+// |-- External Dependencies --|
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
+
+// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { BatchListResponse } from 'src/models/Batch.model'
 import BatchListing from './BatchListing'
-import { useDispatch, useSelector } from 'react-redux'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { useGetBatchQuery } from 'src/services/BatchService'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/BatchSlice'
-import { useGetBatchQuery } from 'src/services/BatchService'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import moment from 'moment'
 import { setFilterValue } from 'src/redux/slices/orderSlice'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
 
 const BatchListingWrapper = () => {
     const batchState: any = useSelector((state: RootState) => state.batch)

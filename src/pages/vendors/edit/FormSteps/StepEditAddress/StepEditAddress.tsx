@@ -19,8 +19,12 @@ import { FormInitialValues } from '../../EditVendorWrapper'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import {
+    setFieldCustomized,
+    setFormSubmitting,
+} from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -219,6 +223,82 @@ const StepAddAddress = ({
                                                     isSubmitting={isSubmitting}
                                                 />
                                             </div>
+                                        )
+                                    case 'checkbox':
+                                        return (
+                                            <ATMCheckbox
+                                                key={name}
+                                                name={name}
+                                                label={label}
+                                                checked={Boolean(values[name])}
+                                                onChange={(e) => {
+                                                    dispatch(
+                                                        setFormSubmitting(false)
+                                                    )
+
+                                                    handleSetFieldValue(name, e)
+                                                    console.log(values)
+                                                    if (e) {
+                                                        const {
+                                                            address,
+                                                            country,
+                                                            district,
+                                                            phone,
+                                                            pincode,
+                                                            state,
+                                                        } = values.regd_address
+                                                        handleSetFieldValue(
+                                                            'billing_address.phone',
+                                                            phone
+                                                        )
+                                                        handleSetFieldValue(
+                                                            'billing_address.address',
+                                                            address
+                                                        )
+                                                        handleSetFieldValue(
+                                                            'billing_address.country',
+                                                            country
+                                                        )
+                                                        handleSetFieldValue(
+                                                            'billing_address.district',
+                                                            district
+                                                        )
+                                                        handleSetFieldValue(
+                                                            'billing_address.pincode',
+                                                            pincode
+                                                        )
+                                                        handleSetFieldValue(
+                                                            'billing_address.state',
+                                                            state
+                                                        )
+                                                    } else {
+                                                        handleSetFieldValue(
+                                                            'billing_address.address',
+                                                            ''
+                                                        )
+                                                        handleSetFieldValue(
+                                                            'billing_address.country',
+                                                            ''
+                                                        )
+                                                        handleSetFieldValue(
+                                                            'billing_address.district',
+                                                            ''
+                                                        )
+                                                        handleSetFieldValue(
+                                                            'billing_address.phone',
+                                                            ''
+                                                        )
+                                                        handleSetFieldValue(
+                                                            'billing_address.pincode',
+                                                            ''
+                                                        )
+                                                        handleSetFieldValue(
+                                                            'billing_address.state',
+                                                            ''
+                                                        )
+                                                    }
+                                                }}
+                                            />
                                         )
 
                                     default:

@@ -93,9 +93,7 @@ const steps = [
             company_name: string().required('Company name is required'),
             company_type: string().required('Please select company type'),
             ownership_type: string().required('Please select ownership type'),
-            website_address: string()
-                .url('Web Address must be valid URL')
-                .required('Website address is required'),
+            website_address: string().url('Web Address must be valid URL'),
             vendor_code: string().required('Vendor code is required'),
         }),
     },
@@ -156,9 +154,7 @@ const steps = [
             gst_certificate: string()
                 .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),
-            declaration_form: string()
-                .url('Form must be valid URL')
-                .required('Declaration form is required'),
+            declaration_form: string().url('Form must be valid URL'),
         }),
     },
     {
@@ -181,9 +177,9 @@ const steps = [
                     accountType: string().required(
                         'Please select account type'
                     ),
-                    cancelledCheque: string()
-                        .url('Cancle Check must be valid URL')
-                        .required('Cancelled cheque is required'),
+                    cancelledCheque: string().url(
+                        'Cancle Check must be valid URL'
+                    ),
                 })
             ),
         }),
@@ -255,7 +251,7 @@ const EditVendorWrapper = () => {
             dispatch(setFieldCustomized(false))
             const contactInformation = values.contact_informations.map(
                 (ele: any) => {
-                    const { _id, ...rest } = ele // use object destructuring to remove the _id property
+                    const { _id, maskedPhoneNo, ...rest } = ele // use object destructuring to remove the _id property
                     return rest // return the new object without the _id property
                 }
             )
