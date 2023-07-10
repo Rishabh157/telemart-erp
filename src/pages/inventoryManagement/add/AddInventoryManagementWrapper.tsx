@@ -170,7 +170,7 @@ const AddInventoryManagementWrapper = (props: Props) => {
         })
 
         setTimeout(() => {
-					addInventoryManagement({
+            addInventoryManagement({
                 dummy1: values.dummy1,
                 dummy2: values.dummy2,
                 dummy3: values.dummy3,
@@ -180,10 +180,7 @@ const AddInventoryManagementWrapper = (props: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Inventory added successfully!'
-                        )
+                        showToast('success', 'Inventory added successfully!')
                         navigate('/inventory-management')
                     } else {
                         showToast('error', res?.data?.message)

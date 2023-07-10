@@ -192,9 +192,7 @@ const AddInventoryManagement = ({
                                                                             e
                                                                         )
                                                                     }
-                                                                    options={
-                                                                        []
-                                                                    }
+                                                                    options={[]}
                                                                     label="Item Name"
                                                                 />
                                                             </div>
@@ -275,8 +273,7 @@ const AddInventoryManagement = ({
                                                             </div>
 
                                                             {/* BUTTON - Delete */}
-                                                            {values
-                                                                .dummy
+                                                            {values.dummy
                                                                 ?.length >
                                                                 1 && (
                                                                 <div>

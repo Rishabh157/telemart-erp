@@ -93,8 +93,7 @@ const EditInventoryManagementWrapper = (props: Props) => {
                 itemId: selectedItems?.dummy?.itemId,
                 rate: selectedItems?.dummy?.rate,
                 quantity: selectedItems?.dummy?.quantity,
-                estReceivingDate:
-                    selectedItems?.dummy?.estReceivingDate,
+                estReceivingDate: selectedItems?.dummy?.estReceivingDate,
             } || {},
     }
 
@@ -189,9 +188,9 @@ const EditInventoryManagementWrapper = (props: Props) => {
             itemId: values?.dummy?.itemId,
             rate: values?.dummy?.rate,
             quantity: values?.dummy?.quantity,
-            estReceivingDate: moment(
-                values?.dummy?.estReceivingDate
-            ).format('YYYY/MM/D'),
+            estReceivingDate: moment(values?.dummy?.estReceivingDate).format(
+                'YYYY/MM/D'
+            ),
         }
 
         setTimeout(() => {
@@ -208,10 +207,7 @@ const EditInventoryManagementWrapper = (props: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Inventory updated successfully!'
-                        )
+                        showToast('success', 'Inventory updated successfully!')
                         navigate('/inventory-management')
                     } else {
                         showToast('error', res?.data?.message)

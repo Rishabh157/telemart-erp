@@ -89,7 +89,10 @@ const EditInventoryManagement = ({
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
-                        <div className="text-xl font-medium"> Inventory Details </div>
+                        <div className="text-xl font-medium">
+                            {' '}
+                            Inventory Details{' '}
+                        </div>
 
                         {/* BUTTON - Add SO */}
                         <div>
@@ -170,10 +173,7 @@ const EditInventoryManagement = ({
                                     type="number"
                                     min={0}
                                     name={`dummy.rate`}
-                                    value={
-                                        values.dummy.rate?.toString() ||
-                                        ''
-                                    }
+                                    value={values.dummy.rate?.toString() || ''}
                                     label="Rate"
                                     placeholder="Rate"
                                     onChange={(e) =>
@@ -193,8 +193,7 @@ const EditInventoryManagement = ({
                                     min={0}
                                     name={`dummy.quantity`}
                                     value={
-                                        values.dummy.quantity?.toString() ||
-                                        ''
+                                        values.dummy.quantity?.toString() || ''
                                     }
                                     label="Quantity"
                                     placeholder="Quantity"
@@ -212,9 +211,7 @@ const EditInventoryManagement = ({
                             <div className="flex-[3_3_0%]">
                                 <ATMDatePicker
                                     name={`purchaseOrder.estReceivingDate`}
-                                    value={
-                                        values.dummy.estReceivingDate
-                                    }
+                                    value={values.dummy.estReceivingDate}
                                     label="Est. Receiving Date"
                                     onChange={(newValue) =>
                                         handleSetFieldValue(

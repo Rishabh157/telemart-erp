@@ -45,8 +45,8 @@ export type FormInitialValues = {
     channelNameId: string
     startTime: string
     endTime: string
-    mobileNumber : string
-    date : string
+    mobileNumber: string
+    date: string
 }
 
 const EditCompetitorWrapper = (props: Props) => {
@@ -112,8 +112,8 @@ const EditCompetitorWrapper = (props: Props) => {
         channelNameId: selectedItem?.channelNameId || '',
         startTime: selectedItem?.startTime || '',
         endTime: selectedItem?.endTime || '',
-        mobileNumber : selectedItem?.mobileNumber || '',
-        date : selectedItem?.date || ''
+        mobileNumber: selectedItem?.mobileNumber || '',
+        date: selectedItem?.date || '',
     }
 
     // Form Validation Schema
@@ -131,8 +131,8 @@ const EditCompetitorWrapper = (props: Props) => {
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),
-        mobileNumber : string().required('Required'),
-        date : string().required('Required')
+        mobileNumber: string().required('Required'),
+        date: string().required('Required'),
     })
 
     const dropdownOptions = {
@@ -163,8 +163,8 @@ const EditCompetitorWrapper = (props: Props) => {
                     channelNameId: values.channelNameId || '',
                     startTime: values.startTime,
                     endTime: values.endTime,
-                    date : values.date,
-                    mobileNumber : values.mobileNumber,
+                    date: values.date,
+                    mobileNumber: values.mobileNumber,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',

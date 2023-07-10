@@ -19,7 +19,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { InventoryManagementListResponse } from 'src/models/InventoryManagement.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import InventoryManagementListing from './InventoryManagementListing'
-import { useGetInventoryManagementQuery  } from 'src/services/InventoryManagementService'
+import { useGetInventoryManagementQuery } from 'src/services/InventoryManagementService'
 //import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 //import { showToast } from 'src/utils'
 
@@ -62,7 +62,6 @@ const InventoryManagementListingWrapper = () => {
         isPaginationRequired: true,
     })
 
-   
     const columns: columnTypes[] = [
         {
             field: 'dummy1',
