@@ -45,6 +45,8 @@ export type FormInitialValues = {
     channelNameId: string
     startTime: string
     endTime: string
+    mobileNumber : string
+    date : string
 }
 
 const EditCompetitorWrapper = (props: Props) => {
@@ -110,6 +112,8 @@ const EditCompetitorWrapper = (props: Props) => {
         channelNameId: selectedItem?.channelNameId || '',
         startTime: selectedItem?.startTime || '',
         endTime: selectedItem?.endTime || '',
+        mobileNumber : selectedItem?.mobileNumber || '',
+        date : selectedItem?.date || ''
     }
 
     // Form Validation Schema
@@ -127,6 +131,8 @@ const EditCompetitorWrapper = (props: Props) => {
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),
+        mobileNumber : string().required('Required'),
+        date : string().required('Required')
     })
 
     const dropdownOptions = {
@@ -148,16 +154,17 @@ const EditCompetitorWrapper = (props: Props) => {
         setTimeout(() => {
             EditCompetitors({
                 body: {
-                    competitorName: values.competitorName,
+                    artist: values.competitorName,
                     companyName: values.companyName,
                     productName: values.productName,
                     websiteLink: values.websiteLink,
-                    youtubeLink: values.youtubeLink,
+                    video: values.youtubeLink,
                     schemePrice: values.schemePrice,
-                    whatsappNumber: values.whatsappNumber,
                     channelNameId: values.channelNameId || '',
                     startTime: values.startTime,
                     endTime: values.endTime,
+                    date : values.date,
+                    mobileNumber : values.mobileNumber,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',

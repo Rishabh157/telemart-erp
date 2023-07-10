@@ -39,11 +39,11 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
             label: 'View Profile',
             icon: BsPerson,
         },
-        {
-            path: '/account-setting',
-            label: 'Account Settings',
-            icon: IoSettingsOutline,
-        },
+        // {
+        //     path: '/account-setting',
+        //     label: 'Account Settings',
+        //     icon: IoSettingsOutline,
+        // },
     ]
 
     const navigate = useNavigate()

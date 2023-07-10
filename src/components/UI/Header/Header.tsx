@@ -179,7 +179,7 @@ const Header = () => {
                         )
                         setIsNewNotificationsAvailable(false)
                     }}
-                    className="relative text-lg text-slate-700 transition-all duration-[800ms] hover:bg-slate-200 p-3 rounded-full"
+                    className="hidden relative text-lg text-slate-700 transition-all duration-[800ms] hover:bg-slate-200 p-3 rounded-full"
                 >
                     <IoNotifications className="" />
                     {isNewNotificationsAvailable ? (
