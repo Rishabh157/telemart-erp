@@ -153,7 +153,6 @@ const EditCompetitorWrapper = (props: Props) => {
             EditCompetitors({
                 body: {
                     artist: values.competitorName,
-                    companyName: values.companyName,
                     productName: values.productName,
                     websiteLink: values.websiteLink,
                     video: values.youtubeLink,

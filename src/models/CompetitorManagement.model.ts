@@ -47,7 +47,6 @@ export type UpdateCompetitorManagement = {
         artist: string
         productName: string
         websiteLink: string
-        companyName: string
         video: string
         mobileNumber: string
         schemePrice: string
