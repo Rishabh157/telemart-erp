@@ -7,50 +7,85 @@
 
 // |-- Types --|
 export type CompetitorManagementListResponse = {
-    competitorName: string
-    companyName: string
+    _id: string
+    date: string
+    artist: string
     productName: string
     websiteLink: string
-    youtubeLink: string
-    schemePrice: string
-    whatsappNo: string
+    video: string
+    mobileNumber: string
+    maskedPhoneNo: string
+    schemePrice: number
     companyId: string
-    count: number
-    _id: string
-    isActive: boolean
-    isDeleted: boolean
+    channelNameId: string
+    startTime: string
+    endTime: string
+    isDeleted: false
+    isActive: true
     createdAt: string
     updatedAt: string
     __v: number
 }
 
 export type AddCompetitorManagement = {
-    competitorName: string
-    companyName: string
+    date: string
+    artist: string
     productName: string
     websiteLink: string
-    youtubeLink: string
+    // companyName: string
+    // maskedPhoneNo?: string
+    // whatsappNumber : string
+    video: string
+    mobileNumber: string
     schemePrice: string
-    whatsappNumber: string
+    companyId: string
     channelNameId: string
     startTime: string
     endTime: string
-    companyId: string
+    // competitorName: string
+    // companyName: string
+    // productName: string
+    // websiteLink: string
+    // youtubeLink: string
+    // schemePrice: string
+    // whatsappNumber: string
+    // channelNameId: string
+    // startTime: string
+    // endTime: string
+    // companyId: string
+    // artist : string
+    // date : string
+    // video: string
+    // mobileNumber: string
 }
 
 export type UpdateCompetitorManagement = {
     body: {
-        competitorName: string
-        companyName: string
+        // competitorName: string
+        // companyName: string
+        // productName: string
+        // websiteLink: string
+        // youtubeLink: string
+        // schemePrice: string
+        // whatsappNumber: string
+        // channelNameId: string
+        // startTime: string
+        // endTime: string
+        // companyId: string
+        date: string
+        artist: string
         productName: string
         websiteLink: string
-        youtubeLink: string
+        companyName: string
+        // whatsappNumber : string
+        // maskedPhoneNo?: string
+        video: string
+        mobileNumber: string
         schemePrice: string
-        whatsappNumber: string
+        companyId: string
         channelNameId: string
         startTime: string
         endTime: string
-        companyId: string
     }
     id: string
 }

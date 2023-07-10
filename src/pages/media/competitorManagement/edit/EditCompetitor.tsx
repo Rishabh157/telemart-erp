@@ -25,6 +25,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 
 // |-- Types --|
 type Props = {
@@ -101,8 +102,8 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 name="competitorName"
                                 required
                                 value={values.competitorName}
-                                label="Competitor Name"
-                                placeholder="Competitor Name"
+                                label="Artist Name"
+                                placeholder="Artist Name"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'competitorName',
@@ -150,7 +151,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 name="schemePrice"
                                 required
                                 value={values.schemePrice}
-                                label="schemePrice"
+                                label="Price/MRP"
                                 placeholder="schemePrice"
                                 onChange={(e) => {
                                     const inputValue = e.target.value
@@ -162,6 +163,24 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     }
                                 }}
                             />
+
+                            <ATMTextField
+                                name="mobileNumber"
+                                required
+                                value={values.mobileNumber}
+                                label="Mobile Number"
+                                placeholder="Mobile Number"
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        handleSetFieldValue(
+                                            'mobileNumber',
+                                            e.target.value
+                                        )
+                                    }
+                                }}
+                            />
+
                             <ATMTextField
                                 name="whatsappNumber"
                                 required
@@ -204,6 +223,19 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     )
                                 }
                             />
+
+                            <div className="mt-3">
+                                <ATMDatePicker
+                                    name={`date`}
+                                    required
+                                    value={values.date}
+                                    label="Date"
+                                    onChange={(newValue) => {
+                                        console.log('date', newValue)
+                                        handleSetFieldValue('date', newValue)
+                                    }}
+                                />
+                            </div>
 
                             <div className="mt-2">
                                 <ATMTimePicker
