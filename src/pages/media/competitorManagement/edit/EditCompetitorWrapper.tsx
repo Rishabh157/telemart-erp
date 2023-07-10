@@ -102,11 +102,11 @@ const EditCompetitorWrapper = (props: Props) => {
     //console.log(data)
 
     const initialValues: FormInitialValues = {
-        competitorName: selectedItem?.competitorName || '',
+        competitorName: selectedItem?.artist || '',
         companyName: selectedItem?.companyName || '',
         productName: selectedItem?.productName || '',
         websiteLink: selectedItem?.websiteLink || '',
-        youtubeLink: selectedItem?.youtubeLink || '',
+        youtubeLink: selectedItem?.video || '',
         schemePrice: selectedItem?.schemePrice || '',
         whatsappNumber: selectedItem?.whatsappNumber || '',
         channelNameId: selectedItem?.channelNameId || '',
