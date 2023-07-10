@@ -64,11 +64,11 @@ const mediaNavigation: NavItemType[] = [
         icon: MdViewTimeline,
         path: '/media/slot',
     },
-    {
-        label: 'Inbound',
-        icon: AiOutlineSetting,
-        path: '/media/caller-page',
-    },
+    // {
+    //     label: 'Inbound',
+    //     icon: AiOutlineSetting,
+    //     path: '/media/caller-page',
+    // },
 ]
 
 type Props = {

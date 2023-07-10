@@ -156,7 +156,7 @@ const EditTapeManagementWrapper = () => {
         }
     }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
 
-    const artist = selectedItem?.artistId.map((ele: any) => {
+    const artist = selectedItem?.artistId?.map((ele: any) => {
         return ele._id
     })
     //console.log(artist)
@@ -164,7 +164,7 @@ const EditTapeManagementWrapper = () => {
 
     let phoneNumber: any = []
 
-    selectedItem?.phone.map((val: any) => {
+    selectedItem?.phone?.map((val: any) => {
         return phoneNumber.push({ phoneNo: val })
     })
 
@@ -250,7 +250,7 @@ const EditTapeManagementWrapper = () => {
         }, 1000)
     }
     const dropdownOptions = {
-        artistOption: allArtist.map((item: any) => {
+        artistOption: allArtist?.map((item: any) => {
             return {
                 label: item.artistName,
                 value: item._id,
