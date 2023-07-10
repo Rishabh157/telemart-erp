@@ -1,64 +1,70 @@
+/// ==============================================
+// Filename:DealerRatioListing.tsx
+// Type: List Component
+// Last Updated: JULY 10, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
+// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
+import { IconType } from 'react-icons'
+
+// |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
+// import { useNavigate } from 'react-router-dom'
+
+// |-- Internal Dependencies --|
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
+import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+// import TabScrollable from 'src/components/utilsComponent/TabScrollable'
+
+// |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/configuration/dispositionThreeSlice'
-import ATMBreadCrumbs, {
-    BreadcrumbType,
-} from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
-import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
-import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { useNavigate } from 'react-router-dom'
+} from 'src/redux/slices/inventorySlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
+// |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
+    tabs: {
+        label: string
+        icon: IconType
+        path: string
+    }[]
 }
 
-const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
-    const navigate = useNavigate()
+const DealerRatioListing = ({ columns, rows, tabs }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const dispositionThreeState: any = useSelector(
-        (state: RootState) => state.dispositionThree
+    const inventoryState: any = useSelector(
+        (state: RootState) => state.inventory
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        dispositionThreeState
-    const breadcrumbs: BreadcrumbType[] = [
-        {
-            label: 'Disposition',
-            path: '/dashboard',
-        },
-        {
-            label: 'Disposition Three',
-        },
-    ]
+        inventoryState
+    // const navigate = useNavigate()
 
     return (
         <>
-            <div className="px-4 h-full overflow-auto pt-3 ">
-                <div className="h-[30px]">
-                    <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-                </div>
+            <div className="h-[calc(100vh-60px)] px-4">
                 {/* Page Header */}
-                <div className="flex justify-between items-center h-[45px]">
-                    <ATMPageHeading> Disposition Three </ATMPageHeading>
-                    <button
+                <div className="flex justify-between items-center h-[45px]  p-1">
+                    <ATMPageHeading> Dealer's Raito </ATMPageHeading>
+                    {/* <button
                         type="button"
-                        onClick={() => navigate('add')}
+                        onClick={() => navigate('inward-inventory/add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
-                        + Add
-                    </button>
+                        + Inward Inventory
+                    </button> */}
                 </div>
 
-                <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
+                <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
                     {/*Table Header */}
                     <ATMTableHeader
                         searchValue={searchValue}
@@ -85,8 +91,7 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                             onRowSelect={(selectedRows) =>
                                 setSelectedRows(selectedRows)
                             }
-                            setShowDropdown={setShowDropdown}
-                            extraClasses="h-full overflow-auto"
+                            extraClasses="max-h-[calc(100%-150px)] overflow-auto"
                             isLoading={isTableLoading}
                         />
                     </div>
@@ -110,4 +115,4 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
 }
 
-export default DispositionThreeListing
+export default DealerRatioListing

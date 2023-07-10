@@ -59,7 +59,7 @@ const AssetsRelocationListing = () => {
                     rows={[]}
                     onRowsPerPageChange={() => {}}
                     onSearch={() => {}}
-                    isFilter
+                   // isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
 

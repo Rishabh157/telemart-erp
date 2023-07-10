@@ -12,6 +12,11 @@ export type {
     UpdateDealer,
 } from './Dealer.model'
 export type {
+    DealersRatioListResponse,
+    // AddDealer,
+    // UpdateDealer,
+} from './DealersRatio.model'
+export type {
     DealersSchemeAdd,
     DealersSchemeListResponse,
     UpdateDealersScheme,

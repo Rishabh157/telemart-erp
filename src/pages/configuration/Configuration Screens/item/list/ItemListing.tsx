@@ -85,7 +85,7 @@ const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    isFilter
+                    // isFilter
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />

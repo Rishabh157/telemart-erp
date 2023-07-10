@@ -47,6 +47,9 @@ const AddGRNWrapper = (props: Props) => {
     const { data, isLoading, isFetching } = useGetGRNByPOCodeQuery(
         {
             pocode: poCode,
+            itemId: itemId,
+
+            
         },
         { skip: !poCode }
     )

@@ -23,6 +23,7 @@ import { IoCallOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { BiBox, BiPurchaseTagAlt } from 'react-icons/bi'
 import { IconType } from 'react-icons'
+import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 //import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 //import { BsFillCalendarCheckFill } from 'react-icons/bs'
 
@@ -49,6 +50,11 @@ export const navigation: NavItemType[] = [
         label: 'Dealers',
         icon: FaRegHandshake,
         path: '/dealers',
+    },
+    {
+        label: 'Dealers-ratio',
+        icon: TfiLayoutMediaOverlayAlt2,
+        path: '/dealers-ratio',
     },
     {
         label: 'Users',

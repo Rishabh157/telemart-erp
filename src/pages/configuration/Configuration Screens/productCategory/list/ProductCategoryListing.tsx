@@ -91,7 +91,7 @@ const ProductCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    isFilter
+                   // isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
 

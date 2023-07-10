@@ -297,7 +297,7 @@ const EditDealerWrapper = () => {
             dispatch(setFieldCustomized(false))
             const contactInformation = values.contactInformation.map(
                 (ele: any) => {
-                    const { _id, ...rest } = ele // use object destructuring to remove the _id property
+                    const { _id, maskedPhoneNo, ...rest } = ele // use object destructuring to remove the _id property
                     return rest // return the new object without the _id property
                 }
             )

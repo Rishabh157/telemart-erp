@@ -126,13 +126,14 @@ export const purchaseOrderApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
-        getByPoCode: builder.query({
-            providesTags: ['PurchaseOrder'],
-            query: (poCode) => ({
-                url: `/purchase-order/get-by-po/${poCode}`,
-                method: 'get',
-            }),
-        }),
+        // getByPoCode: builder.query({
+        //     providesTags: ['PurchaseOrder'],
+        //     query: (poCode) => ({
+        //         url: `/purchase-order/get-by-po/${poCode}`,
+        //         query:{poCode:poCode},
+        //         method: 'get',
+        //     }),
+        // }),
 
         getByIdPurchaseOrder: builder.query({
             providesTags: ['PurchaseOrder'],
@@ -152,7 +153,7 @@ export const {
     useGetPurchaseOrderByVendorIdQuery,
     useDeletePurchaseOrderMutation,
     useExportPurchaseOrderDataMutation,
-    useGetByPoCodeQuery,
+    // useGetByPoCodeQuery,
     useGetByIdPurchaseOrderQuery,
     useUpdatePoLevelMutation,
     //useGetSubCategoryByParentQuery,
