@@ -28,35 +28,17 @@ export type CompetitorManagementListResponse = {
 }
 
 export type AddCompetitorManagement = {
-    date: string
     artist: string
+    companyId: string
     productName: string
+    channelNameId: string
+    schemePrice: string
     websiteLink: string
-    // companyName: string
-    // maskedPhoneNo?: string
-    // whatsappNumber : string
     video: string
     mobileNumber: string
-    schemePrice: string
-    companyId: string
-    channelNameId: string
+    date: string
     startTime: string
     endTime: string
-    // competitorName: string
-    // companyName: string
-    // productName: string
-    // websiteLink: string
-    // youtubeLink: string
-    // schemePrice: string
-    // whatsappNumber: string
-    // channelNameId: string
-    // startTime: string
-    // endTime: string
-    // companyId: string
-    // artist : string
-    // date : string
-    // video: string
-    // mobileNumber: string
 }
 
 export type UpdateCompetitorManagement = {

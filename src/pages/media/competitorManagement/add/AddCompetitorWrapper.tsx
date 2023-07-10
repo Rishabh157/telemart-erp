@@ -32,12 +32,11 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type Props = {}
 
 export type FormInitialValues = {
-    competitorName: string
+    artist: string
     companyName: string
     productName: string
     websiteLink: string
     youtubeLink: string
-    whatsappNumber: string
     schemePrice: string
     channelNameId: string
     startTime: string
@@ -92,12 +91,11 @@ const AddCompetitorWrapper = (props: Props) => {
     }
 
     const initialValues: FormInitialValues = {
-        competitorName: '',
+        artist: '',
         companyName: '',
         productName: '',
         websiteLink: '',
         youtubeLink: '',
-        whatsappNumber: '',
         schemePrice: '',
         channelNameId: '',
         startTime: '',
@@ -108,21 +106,21 @@ const AddCompetitorWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        competitorName: string().required('Required'),
+        artist: string().required('Required'),
         companyName: string().required('Required'),
         productName: string().required('Required'),
         websiteLink: string().url('Invalid URL').required('Required'),
         youtubeLink: string().url('Invalid URL').required('Required'),
-        whatsappNumber: string()
-            .min(10, 'Number should be 10 digits')
-            .max(10, 'maximum 10 digit')
-            .required('Required'),
         schemePrice: string().required('Required'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),
         date: string().required('Required'),
-        mobileNumber: string().required('Required'),
+        mobileNumber: string()
+            .required('Required')
+            .min(10, 'Number should be 10 digits')
+            .max(10, 'maximum 10 digit')
+            .required('Required'),
     })
 
     //    Form Submit Handler
@@ -131,40 +129,17 @@ const AddCompetitorWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addCompetitor({
-                // channelNameId: values.channelNameId || '',
-                // date: values.date || '',
-                // productName: values.productName || '',
-                // websiteLink: values.websiteLink || '',
-                // video : values.youtubeLink || '',
-                // mobileNumber: values.mobileNumber || '',
-                // schemePrice: values.schemePrice || '',
-                // startTime: values.startTime || '',
-                // endTime: values.endTime || '',
-
-                date: values.date || '',
                 artist: values.companyName || '',
-                // companyName: values.companyName || '',
+                companyId: userData?.companyId || '',
+                date: values.date || '',
                 productName: values.productName || '',
+                channelNameId: values.channelNameId || '',
+                schemePrice: values.schemePrice || '',
                 websiteLink: values.websiteLink || '',
                 video: values.youtubeLink || '',
-                schemePrice: values.schemePrice || '',
-                // whatsappNumber: values.whatsappNumber || '',
-                channelNameId: values.channelNameId || '',
+                mobileNumber: values.mobileNumber || '',
                 startTime: values.startTime || '',
                 endTime: values.endTime || '',
-                companyId: userData?.companyId || '',
-                mobileNumber: values.mobileNumber || '',
-
-                // competitorName: values.competitorName,
-                // companyName: values.companyName,
-                // productName: values.productName,
-                // websiteLink: values.websiteLink,
-                // youtubeLink: values.youtubeLink,
-                // whatsappNumber: values.whatsappNumber,
-                // schemePrice: values.schemePrice,
-                // startTime: values.startTime,
-                // endTime: values.endTime,
-                // companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

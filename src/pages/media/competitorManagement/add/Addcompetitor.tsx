@@ -58,8 +58,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-
-    console.log('formik values', values);
+    console.log('formik values', values)
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -100,14 +99,14 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name="competitorName"
+                                name="artist"
                                 required
-                                value={values.competitorName}
+                                value={values.artist}
                                 label="Artist Name"
                                 placeholder="Artist Name"
                                 onChange={(e) =>
                                     handleSetFieldValue(
-                                        'competitorName',
+                                        'artist',
                                         e.target.value
                                     )
                                 }
@@ -203,23 +202,6 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     if (!isNaN(Number(inputValue))) {
                                         handleSetFieldValue(
                                             'mobileNumber',
-                                            e.target.value
-                                        )
-                                    }
-                                }}
-                            />
-
-                            <ATMTextField
-                                name="whatsappNumber"
-                                value={values.whatsappNumber}
-                                required
-                                label="Whatsapp Number"
-                                placeholder="Whatsapp Number"
-                                onChange={(e) => {
-                                    const inputValue = e.target.value
-                                    if (!isNaN(Number(inputValue))) {
-                                        handleSetFieldValue(
-                                            'whatsappNumber',
                                             e.target.value
                                         )
                                     }
