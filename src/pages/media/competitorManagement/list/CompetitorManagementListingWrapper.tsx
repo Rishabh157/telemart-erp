@@ -32,6 +32,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/competitorManagementSlice'
+import moment from 'moment'
 
 const CompetitorManagementListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -47,39 +48,86 @@ const CompetitorManagementListingWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const columns: columnTypes[] = [
         {
-            field: 'competitorName',
-            headerName: 'Competitor Name',
+            field: 'date',
+            headerName: 'Date',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.competitorName} </span>
+                <span> {moment(row.date).format('DD/MM/YYYY')} </span>
             ),
         },
         {
-            field: 'companyName',
-            headerName: 'Company Name',
+            field: 'startTime',
+            headerName: 'Start Time',
             flex: 'flex-[1_1_0%]',
+            align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.companyName} </span>
+                <span> {row.startTime} </span>
+            ),
+        },
+        {
+            field: 'endTime',
+            headerName: 'End Time',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            renderCell: (row: CompetitorManagementListResponse) => (
+                <span> {row.endTime} </span>
             ),
         },
         {
             field: 'productName',
-            headerName: 'Product  Name',
+            headerName: 'Product Name',
             flex: 'flex-[1_1_0%]',
+            align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {row.productName} </span>
             ),
         },
+        {
+            field: 'mobileNo',
+            headerName: 'Mobile No.',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            renderCell: (row: CompetitorManagementListResponse) => (
+                <span> {row.mobileNumber} </span>
+            ),
+        },
+        // {
+        //     field: 'websiteLink',
+        //     headerName: 'Website link',
+        //     flex: 'flex-[1_1_0%]',
+        //     align: 'center',
+        //     renderCell: (row: CompetitorManagementListResponse) => (
+        //         <span> {row.websiteLink} </span>
+        //     ),
+        // },
 
         {
-            field: 'price',
-            headerName: 'Price',
+            field: 'schemePrice',
+            headerName: 'Price/MRP',
             flex: 'flex-[1_1_0%]',
+            align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {row.schemePrice} </span>
             ),
         },
-
+        {
+            field: 'artist',
+            headerName: 'Artist',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            renderCell: (row: CompetitorManagementListResponse) => (
+                <span> {row.artist} </span>
+            ),
+        },
+        // {
+        //     field: 'channelNameId',
+        //     headerName: 'Channel Name',
+        //     flex: 'flex-[1_1_0%]',
+        //     align: 'center',
+        //     renderCell: (row: CompetitorManagementListResponse) => (
+        //         <span>{/* {row.channelNameId}  */}</span>
+        //     ),
+        // },
         {
             field: 'actions',
             headerName: 'Actions',

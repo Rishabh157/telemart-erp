@@ -16,7 +16,7 @@ import { FaTape } from 'react-icons/fa'
 import { SiGoogletagmanager } from 'react-icons/si'
 import { MdEmojiEvents, MdMonitor, MdViewTimeline } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { AiOutlineSetting } from 'react-icons/ai'
+// import { AiOutlineSetting } from 'react-icons/ai'
 
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
@@ -64,11 +64,11 @@ const mediaNavigation: NavItemType[] = [
         icon: MdViewTimeline,
         path: '/media/slot',
     },
-    {
-        label: 'Inbound',
-        icon: AiOutlineSetting,
-        path: '/media/caller-page',
-    },
+    // {
+    //     label: 'Inbound',
+    //     icon: AiOutlineSetting,
+    //     path: '/media/caller-page',
+    // },
 ]
 
 type Props = {

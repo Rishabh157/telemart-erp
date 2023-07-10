@@ -42,6 +42,8 @@ export type FormInitialValues = {
     channelNameId: string
     startTime: string
     endTime: string
+    date: string | null
+    mobileNumber: string
 }
 
 const AddCompetitorWrapper = (props: Props) => {
@@ -100,6 +102,8 @@ const AddCompetitorWrapper = (props: Props) => {
         channelNameId: '',
         startTime: '',
         endTime: '',
+        date: '',
+        mobileNumber: '',
     }
 
     // Form Validation Schema
@@ -117,6 +121,8 @@ const AddCompetitorWrapper = (props: Props) => {
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),
+        date: string().required('Required'),
+        mobileNumber: string().required('Required'),
     })
 
     //    Form Submit Handler
@@ -125,17 +131,40 @@ const AddCompetitorWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addCompetitor({
-                competitorName: values.competitorName,
-                companyName: values.companyName,
-                productName: values.productName,
-                websiteLink: values.websiteLink,
-                youtubeLink: values.youtubeLink,
-                whatsappNumber: values.whatsappNumber,
-                schemePrice: values.schemePrice,
+                // channelNameId: values.channelNameId || '',
+                // date: values.date || '',
+                // productName: values.productName || '',
+                // websiteLink: values.websiteLink || '',
+                // video : values.youtubeLink || '',
+                // mobileNumber: values.mobileNumber || '',
+                // schemePrice: values.schemePrice || '',
+                // startTime: values.startTime || '',
+                // endTime: values.endTime || '',
+
+                date: values.date || '',
+                artist: values.companyName || '',
+                // companyName: values.companyName || '',
+                productName: values.productName || '',
+                websiteLink: values.websiteLink || '',
+                video: values.youtubeLink || '',
+                schemePrice: values.schemePrice || '',
+                // whatsappNumber: values.whatsappNumber || '',
                 channelNameId: values.channelNameId || '',
-                startTime: values.startTime,
-                endTime: values.endTime,
+                startTime: values.startTime || '',
+                endTime: values.endTime || '',
                 companyId: userData?.companyId || '',
+                mobileNumber: values.mobileNumber || '',
+
+                // competitorName: values.competitorName,
+                // companyName: values.companyName,
+                // productName: values.productName,
+                // websiteLink: values.websiteLink,
+                // youtubeLink: values.youtubeLink,
+                // whatsappNumber: values.whatsappNumber,
+                // schemePrice: values.schemePrice,
+                // startTime: values.startTime,
+                // endTime: values.endTime,
+                // companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

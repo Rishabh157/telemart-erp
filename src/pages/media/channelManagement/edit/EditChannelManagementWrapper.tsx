@@ -241,7 +241,7 @@ const EditChannelManagementWrapper = () => {
             }
         ),
         paymentOptions: [
-            { label: 'checque', value: 'CHECQUE' },
+            { label: 'cheque', value: 'CHEQUE' },
             { label: 'netBanking', value: 'NETBANKING' },
             { label: 'cash', value: 'CASH' },
             { label: 'creditCard', value: 'CREDITCARD' },
