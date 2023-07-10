@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { TbBrandNetflix } from 'react-icons/tb'
 import CallerButton from './components/CallerButton'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -29,8 +28,6 @@ import { AreaListResponse } from 'src/models/Area.model'
 import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-// import ATMOtpInput from 'src/components/UI/atoms/ATMOtpInput/ATMOtpInput'
-// import { useNavigate } from 'react-router-dom'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -520,7 +517,7 @@ const CallerPage: React.FC<Props> = ({
         <div className="bg-white px-4 h-[2000px]">
             <div className="flex justify-between py-1">
                 <div className="logo-img">
-                    <TbBrandNetflix size={40} color="red" />
+                    <img height={130} width={130} src='/septel-logo.png' alt='logo' />
                 </div>
                 <div className="flex gap-x-2 items-center">
                     <div className="text-[#6F9EA7] text-[15px]">
