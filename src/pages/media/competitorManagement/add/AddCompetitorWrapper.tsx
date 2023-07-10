@@ -33,15 +33,14 @@ type Props = {}
 
 export type FormInitialValues = {
     artist: string
-    companyName: string
     productName: string
-    websiteLink: string
-    youtubeLink: string
-    schemePrice: string
     channelNameId: string
+    schemePrice: string
+    video: string
+    websiteLink: string
+    date: string | null
     startTime: string
     endTime: string
-    date: string | null
     mobileNumber: string
 }
 
@@ -92,10 +91,9 @@ const AddCompetitorWrapper = (props: Props) => {
 
     const initialValues: FormInitialValues = {
         artist: '',
-        companyName: '',
         productName: '',
         websiteLink: '',
-        youtubeLink: '',
+        video: '',
         schemePrice: '',
         channelNameId: '',
         startTime: '',
@@ -107,10 +105,9 @@ const AddCompetitorWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         artist: string().required('Required'),
-        companyName: string().required('Required'),
         productName: string().required('Required'),
         websiteLink: string().url('Invalid URL').required('Required'),
-        youtubeLink: string().url('Invalid URL').required('Required'),
+        video: string().url('Invalid URL').required('Required'),
         schemePrice: string().required('Required'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
@@ -129,17 +126,18 @@ const AddCompetitorWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addCompetitor({
-                artist: values.companyName || '',
+                artist: values.artist || '',
                 companyId: userData?.companyId || '',
                 date: values.date || '',
                 productName: values.productName || '',
                 channelNameId: values.channelNameId || '',
                 schemePrice: values.schemePrice || '',
                 websiteLink: values.websiteLink || '',
-                video: values.youtubeLink || '',
+                video: values.video || '',
                 mobileNumber: values.mobileNumber || '',
                 startTime: values.startTime || '',
                 endTime: values.endTime || '',
+                // video : values.videoFile || ''
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

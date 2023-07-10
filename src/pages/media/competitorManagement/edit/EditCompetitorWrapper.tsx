@@ -39,7 +39,7 @@ export type FormInitialValues = {
     companyName: string
     productName: string
     websiteLink: string
-    youtubeLink: string
+    video: string
     schemePrice: string
     channelNameId: string
     startTime: string
@@ -98,14 +98,12 @@ const EditCompetitorWrapper = (props: Props) => {
         dispatch(setSelectedCompetitor(data?.data))
     }, [dispatch, data, isLoading, isFetching])
 
-    //console.log(data)
-
     const initialValues: FormInitialValues = {
         competitorName: selectedItem?.artist || '',
         companyName: selectedItem?.channelNameId || '',
         productName: selectedItem?.productName || '',
         websiteLink: selectedItem?.websiteLink || '',
-        youtubeLink: selectedItem?.video || '',
+        video: selectedItem?.video || '',
         schemePrice: selectedItem?.schemePrice || '',
         channelNameId: selectedItem?.channelNameId || '',
         startTime: selectedItem?.startTime || '',
@@ -120,7 +118,7 @@ const EditCompetitorWrapper = (props: Props) => {
         companyName: string().required('Required'),
         productName: string().required('Required'),
         websiteLink: string().url('Invalid URL').required('Required'),
-        youtubeLink: string().url('Invalid URL').required('Required'),
+        video: string().url('Invalid URL').required('Required'),
         schemePrice: string().required('Required'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
@@ -143,8 +141,6 @@ const EditCompetitorWrapper = (props: Props) => {
             }) || [],
     }
 
-    //console.log(dropdownOptions)
-
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -155,7 +151,7 @@ const EditCompetitorWrapper = (props: Props) => {
                     artist: values.competitorName,
                     productName: values.productName,
                     websiteLink: values.websiteLink,
-                    video: values.youtubeLink,
+                    video: values.video,
                     schemePrice: values.schemePrice,
                     channelNameId: values.channelNameId || '',
                     startTime: values.startTime,
@@ -206,3 +202,4 @@ const EditCompetitorWrapper = (props: Props) => {
 }
 
 export default EditCompetitorWrapper
+    
