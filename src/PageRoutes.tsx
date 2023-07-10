@@ -204,6 +204,9 @@ import {
     AddVendorWarehouseWrapper,
     EditVendorWarehouseWrapper,
     VendorListLedgerTabWrapper,
+    AddInventoryManagementWrapper,
+    EditInventoryManagementWrapper,
+    InventoryManagementListingWrapper,
 } from './pages/index'
 import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
 
@@ -577,6 +580,19 @@ const PageRoutes = () => {
                     <Route
                         path="/purchase-order/add"
                         element={<AddPurchaseOrderWrapper />}
+                    />
+
+                    <Route
+                        path="/inventory-management/add"
+                        element={<AddInventoryManagementWrapper />}
+                    />
+                    <Route
+                        path="/inventory-management/edit/:id"
+                        element={<EditInventoryManagementWrapper />}
+                    />
+                    <Route
+                        path="/inventory-management"
+                        element={<InventoryManagementListingWrapper />}
                     />
 
                     <Route
