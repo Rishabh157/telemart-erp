@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SchemeListResponse } from 'src/models/scheme.model'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import SchemeListing from './SchemeListing'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
@@ -124,7 +124,7 @@ const SchemeListingWrapper = () => {
                     isEdit
                     isDelete
                     handleEditActionButton={() => {
-                        navigate(`/scheme/${currentId}`)
+                        navigate(`/configurations/scheme/${currentId}`)
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({
@@ -178,13 +178,13 @@ const SchemeListingWrapper = () => {
     }
 
     return (
-        <SideNavLayout>
+        <ConfigurationLayout>
             <SchemeListing
                 columns={columns || []}
                 rows={items || []}
                 setShowDropdown={setShowDropdown}
             />
-        </SideNavLayout>
+        </ConfigurationLayout>
     )
 }
 

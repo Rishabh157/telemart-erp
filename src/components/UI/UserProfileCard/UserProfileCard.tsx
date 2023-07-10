@@ -11,7 +11,7 @@ import React from 'react'
 // |-- External Dependencies --|
 import { ClickAwayListener } from '@mui/material'
 import { BsPerson } from 'react-icons/bs'
-import { IoSettingsOutline } from 'react-icons/io5'
+// import { IoSettingsOutline } from 'react-icons/io5'
 import { MdOutlineLogout } from 'react-icons/md'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -39,11 +39,11 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
             label: 'View Profile',
             icon: BsPerson,
         },
-        {
-            path: '/account-setting',
-            label: 'Account Settings',
-            icon: IoSettingsOutline,
-        },
+        // {
+        //     path: '/account-setting',
+        //     label: 'Account Settings',
+        //     icon: IoSettingsOutline,
+        // },
     ]
 
     const navigate = useNavigate()

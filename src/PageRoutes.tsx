@@ -549,9 +549,18 @@ const PageRoutes = () => {
                     <Route path="/grn" element={<GRNListingWrapper />} />
                     <Route path="/grn/add" element={<AddGRNWrapper />} />
 
-                    <Route path="/scheme" element={<SchemeListingWrapper />} />
-                    <Route path="/scheme/add" element={<AddSchemeWrapper />} />
-                    <Route path="/scheme/:id" element={<EditSchemeWrapper />} />
+                    <Route
+                        path="/configurations/scheme"
+                        element={<SchemeListingWrapper />}
+                    />
+                    <Route
+                        path="/configurations/scheme/add"
+                        element={<AddSchemeWrapper />}
+                    />
+                    <Route
+                        path="/configurations/scheme/:id"
+                        element={<EditSchemeWrapper />}
+                    />
 
                     <Route
                         path="/purchase-order"

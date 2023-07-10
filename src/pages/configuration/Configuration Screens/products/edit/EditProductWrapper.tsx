@@ -124,8 +124,8 @@ const steps = [
         validationSchema: object({
             FAQs: array().of(
                 object().shape({
-                    question: string().required('Required'),
-                    answer: string().required('Required'),
+                    question: string(),
+                    answer: string(),
                 })
             ),
         }),
@@ -136,10 +136,8 @@ const steps = [
         validationSchema: object({
             videos: array().of(
                 object().shape({
-                    videoName: string().required('Required'),
-                    videoLink: string()
-                        .url('Must be a valid link')
-                        .required('Required'),
+                    videoName: string(),
+                    videoLink: string().url('Must be a valid link'),
                 })
             ),
         }),

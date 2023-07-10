@@ -42,6 +42,17 @@ export const ledgerNoteType = {
     DEBIT_NOTE_CREATED: 'DEBIT',
 }
 
+export const deleteKeyFromArrayObjects = (
+    array: any[],
+    keyToDelete: string
+) => {
+    for (let i = 0; i < array.length; i++) {
+        delete array[i][keyToDelete]
+    }
+    console.log(array)
+    return array
+}
+
 export const userDepartmentOptions = [
     { label: 'Sales Department', value: 'SALES_DEPARTMENT' },
     { label: 'HR Department', value: 'HR_DEPARTMENT' },
