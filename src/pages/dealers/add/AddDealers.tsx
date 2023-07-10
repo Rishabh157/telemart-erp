@@ -30,7 +30,7 @@ type Props = {
     setActiveStep: React.Dispatch<React.SetStateAction<number>>
     steps: any[]
     dealerCategoryOptions: any[]
-    apiStatus:boolean
+    apiStatus: boolean
 }
 
 const AddDealers = ({
@@ -39,7 +39,7 @@ const AddDealers = ({
     setActiveStep,
     steps,
     dealerCategoryOptions,
-    apiStatus
+    apiStatus,
 }: Props) => {
     // Handle Previous
     const dispatch = useDispatch<AppDispatch>()

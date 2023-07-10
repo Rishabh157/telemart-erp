@@ -369,12 +369,11 @@ const AddDealerWrapper = () => {
     return (
         <SideNavLayout>
             <Formik
-            enableReinitialize
+                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={getValidationSchema(activeStep)}
                 onSubmit={onSubmitHandler}
                 validateOnChange={true}
-                
             >
                 {(formikProps: FormikProps<FormInitialValues>) => (
                     <Form className="">

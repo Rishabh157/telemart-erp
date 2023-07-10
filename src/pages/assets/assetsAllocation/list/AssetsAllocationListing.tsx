@@ -59,7 +59,7 @@ const AssetsAllocationListing = () => {
                     rows={[]}
                     onRowsPerPageChange={() => {}}
                     onSearch={() => {}}
-                   // isFilter
+                    // isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
 

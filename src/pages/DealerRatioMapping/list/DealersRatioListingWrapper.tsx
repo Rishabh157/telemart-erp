@@ -1,14 +1,15 @@
 /// ==============================================
 // Filename:InquiryListingWrapper.tsx
 // Type: List Component
-// Last Updated: JUNE 27, 2023
+// Last Updated: JUNE 10, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, 
+import React, {
+    useEffect,
     // useState
- } from 'react'
+} from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -30,15 +31,15 @@ import {
 } from 'src/redux/slices/inquirySlice'
 import DealerRatioListing from './DealerRatioListing'
 import { DealersRatioListResponse } from 'src/models'
-// import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-// import AddDealersRatioWapper from '../add/AddDealersRatioWapper'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import AddDealersRatioWapper from '../add/AddDealersRatioWapper'
 import { FaExclamation } from 'react-icons/fa'
 
 const DealersRatioListingWrapper = () => {
     // Hooks
     // const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    // const [isOpenDialog, setIsOpenDialog] = useState(false)
+    const [isOpenDialog, setIsOpenDialog] = React.useState(false)
 
     // States
     // const [selectedRows, setSelectedRows] = useState([])
@@ -108,7 +109,7 @@ const DealersRatioListingWrapper = () => {
                 <>
                     <div
                         className="relative"
-                        // onClick={() => setIsOpenDialog(true)}
+                        onClick={() => setIsOpenDialog(true)}
                     >
                         <span> {row.dealerCount} </span>
                         <button>
@@ -170,7 +171,7 @@ const DealersRatioListingWrapper = () => {
         <>
             <SideNavLayout>
                 <DealerRatioListing columns={columns} rows={rows} tabs={[]} />
-                {/* <DialogLogBox
+                <DialogLogBox
                     isOpen={isOpenDialog}
                     buttonClass="cursor-pointer"
                     handleClose={() => {
@@ -182,7 +183,7 @@ const DealersRatioListingWrapper = () => {
                             setIsOpenDialog={setIsOpenDialog}
                         />
                     }
-                /> */}
+                />
             </SideNavLayout>
         </>
     )

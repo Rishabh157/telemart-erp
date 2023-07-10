@@ -21,7 +21,6 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { useGetBatchQuery } from 'src/services/BatchService'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
-
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -30,7 +29,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/BatchSlice'
 import { setFilterValue } from 'src/redux/slices/orderSlice'
-
 
 const BatchListingWrapper = () => {
     const batchState: any = useSelector((state: RootState) => state.batch)

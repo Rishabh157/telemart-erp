@@ -75,7 +75,7 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                   // isFilter
+                    // isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
 

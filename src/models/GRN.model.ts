@@ -8,7 +8,7 @@
 // |-- Types --|
 export type GRNListResponse = {
     poCode: string
-    itemName:string
+    itemName: string
     itemId: string
     receivedQuantity: number
     goodQuantity: number

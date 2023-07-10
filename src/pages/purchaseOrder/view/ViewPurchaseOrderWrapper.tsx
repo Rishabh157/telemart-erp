@@ -52,7 +52,7 @@ const ViewPurchaseOrderWrapper = () => {
     } = useGetPaginationGRNQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['itemName' ,'poCode'],
+        params: ['itemName', 'poCode'],
         page: page,
         filterBy: [
             {

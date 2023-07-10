@@ -193,7 +193,7 @@ const PurchaseOrderListingWrapper = () => {
                 )
             },
         },
-        
+
         {
             field: 'approval.approvalLevel',
             headerName: 'Approval level',

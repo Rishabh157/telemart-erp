@@ -41,7 +41,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddItem = ({ formikProps, apiStatus }: Props) => {
     const { state } = useLocation()
-    const { poCode, itemName, quantity,receivedQuantity } = state
+    const { poCode, itemName, quantity, receivedQuantity } = state
     const { values, setFieldValue } = formikProps
 
     return (

@@ -29,7 +29,6 @@ import {
 } from 'src/redux/slices/BatchSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 // |-- Types --|
 type Props = {
     columns: any[]
@@ -104,7 +103,7 @@ const BatchListing = ({ columns, rows }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                   // isFilter
+                    // isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
 

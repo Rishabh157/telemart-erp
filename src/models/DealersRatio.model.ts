@@ -7,8 +7,8 @@
 
 // |-- Types --|
 export type DealersRatioListResponse = {
-   pincode:string
-   dealerCount:number
+    pincode: string
+    dealerCount: number
     // billingAddress: billingAddress
     // contactInformation: contactInformation[]
     // document: document

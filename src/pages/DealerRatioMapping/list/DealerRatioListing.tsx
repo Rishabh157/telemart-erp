@@ -78,7 +78,7 @@ const DealerRatioListing = ({ columns, rows, tabs }: Props) => {
                         onSearch={(newValue) => {
                             dispatch(setSearchValue(newValue))
                         }}
-                      //  isFilter
+                        //  isFilter
                     />
 
                     {/* Table */}

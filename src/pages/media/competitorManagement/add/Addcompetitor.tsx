@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:AddCompitor.tsx
 // Type: Add Component
-// Last Updated: JULY 03, 2023
+// Last Updated: JULY 10, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -58,8 +58,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-
-    console.log('formik values', values);
+    console.log('formik values', values)
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
