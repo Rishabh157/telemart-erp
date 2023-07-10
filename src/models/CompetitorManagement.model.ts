@@ -43,24 +43,11 @@ export type AddCompetitorManagement = {
 
 export type UpdateCompetitorManagement = {
     body: {
-        // competitorName: string
-        // companyName: string
-        // productName: string
-        // websiteLink: string
-        // youtubeLink: string
-        // schemePrice: string
-        // whatsappNumber: string
-        // channelNameId: string
-        // startTime: string
-        // endTime: string
-        // companyId: string
         date: string
         artist: string
         productName: string
         websiteLink: string
         companyName: string
-        // whatsappNumber : string
-        // maskedPhoneNo?: string
         video: string
         mobileNumber: string
         schemePrice: string

@@ -40,13 +40,12 @@ export type FormInitialValues = {
     productName: string
     websiteLink: string
     youtubeLink: string
-    whatsappNumber: string
     schemePrice: string
     channelNameId: string
     startTime: string
     endTime: string
-    mobileNumber : string
-    date : string
+    mobileNumber: string
+    date: string
 }
 
 const EditCompetitorWrapper = (props: Props) => {
@@ -103,17 +102,16 @@ const EditCompetitorWrapper = (props: Props) => {
 
     const initialValues: FormInitialValues = {
         competitorName: selectedItem?.artist || '',
-        companyName: selectedItem?.companyName || '',
+        companyName: selectedItem?.channelNameId || '',
         productName: selectedItem?.productName || '',
         websiteLink: selectedItem?.websiteLink || '',
         youtubeLink: selectedItem?.video || '',
         schemePrice: selectedItem?.schemePrice || '',
-        whatsappNumber: selectedItem?.whatsappNumber || '',
         channelNameId: selectedItem?.channelNameId || '',
         startTime: selectedItem?.startTime || '',
         endTime: selectedItem?.endTime || '',
-        mobileNumber : selectedItem?.mobileNumber || '',
-        date : selectedItem?.date || ''
+        mobileNumber: selectedItem?.mobileNumber || '',
+        date: selectedItem?.date || '',
     }
 
     // Form Validation Schema
@@ -123,16 +121,16 @@ const EditCompetitorWrapper = (props: Props) => {
         productName: string().required('Required'),
         websiteLink: string().url('Invalid URL').required('Required'),
         youtubeLink: string().url('Invalid URL').required('Required'),
-        whatsappNumber: string()
-            .min(10, 'Number should be 10 digits')
-            .max(10, 'maximum 10 digit')
-            .required('Required'),
         schemePrice: string().required('Required'),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),
-        mobileNumber : string().required('Required'),
-        date : string().required('Required')
+        mobileNumber: string()
+            .required('Required')
+            .min(10, 'Number should be 10 digits')
+            .max(10, 'maximum 10 digit')
+            .required('Required'),
+        date: string().required('Required'),
     })
 
     const dropdownOptions = {
@@ -163,8 +161,8 @@ const EditCompetitorWrapper = (props: Props) => {
                     channelNameId: values.channelNameId || '',
                     startTime: values.startTime,
                     endTime: values.endTime,
-                    date : values.date,
-                    mobileNumber : values.mobileNumber,
+                    date: values.date,
+                    mobileNumber: values.mobileNumber,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',
