@@ -93,6 +93,7 @@ const ListDealerSchemeTabWrapper = () => {
                         if (index < 6) {
                             return (
                                 <Chip
+                                    key={index}
                                     label={ele}
                                     color="primary"
                                     variant="outlined"
@@ -103,6 +104,7 @@ const ListDealerSchemeTabWrapper = () => {
                         if (index === 10) {
                             return (
                                 <Chip
+                                    key={index}
                                     label={'...'}
                                     color="primary"
                                     variant="outlined"

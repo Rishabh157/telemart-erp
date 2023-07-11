@@ -124,17 +124,17 @@ const UserAcess = ({
                     </div>
                     <div className="py-5 px-16 border-b border-slate-300">
                         <div className="grid grid-cols-6 gap-3">
-                            {modules?.map((module: any) => {
+                            {modules?.map((i: any, module: any) => {
                                 return (
-                                    <div>
+                                    <div key={i}>
                                         <div className=" font-bold p-1">
                                             {module.label}
                                         </div>
                                         <ul>
                                             {module.moduleAction.map(
-                                                (actions: any) => {
+                                                (index: any, actions: any) => {
                                                     return (
-                                                        <li className=" flex">
+                                                        <li className=" flex" key={index}>
                                                             <div className="-mt-6">
                                                                 <ATMCheckbox
                                                                     name={
