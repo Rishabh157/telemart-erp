@@ -434,6 +434,10 @@ const PageRoutes = () => {
                         path="/warehouse/:id"
                         element={<EditWarehouseWrapper />}
                     />
+                    <Route
+                        path="/warehouse/add"
+                        element={<AddWarehouseWrapper />}
+                    />
                     {/* <Route
                         path="/warehouse/view/:id"
                         element={<ViewWarehouseWrapper />}

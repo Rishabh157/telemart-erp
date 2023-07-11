@@ -30,6 +30,7 @@ import {
 } from 'src/redux/slices/media/inboundCallerSlice'
 import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
 import { CallerResponse } from 'src/models'
+import { useLocation } from 'react-router-dom'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -68,7 +69,8 @@ export type FormInitialValues = {
     incomingCallerNo: string
     landmark: string
     medicalIssue: string[]
-    orderFor: string
+    orderFor: string[]
+    orderForOther?: string | null
     paymentMode: string
     productGroupId: string | null
     // isRecording?: boolean
@@ -90,6 +92,9 @@ export type FormInitialValues = {
 }
 
 const CallerPageWrapper = () => {
+    const locationUrl = useLocation()
+    const queryParams = new URLSearchParams(locationUrl.search)
+
     const columns: columnTypes[] = [
         {
             field: 'ageGroup',
@@ -249,14 +254,14 @@ const CallerPageWrapper = () => {
         useUpdateCallerFormMutation()
 
     const initialValues: FormInitialValues = {
-        agentName: 'Vinod',
+        agentName: '',
         companyId: '645b7733266c589640740832',
         agentId: '642e718eaf73c70b82389d6e',
-        campaign: 'DHUANDHAAR',
+        campaign: '',
         callType: 'INBOUND',
         incomingCallerNo: '',
         customerName: 'AJAY CHORE',
-        didNo: '111',
+        didNo: '',
         flagStatus: 'STATUS',
         productGroupId: null,
         schemeId: null,
@@ -288,12 +293,13 @@ const CallerPageWrapper = () => {
         houseNumber: '',
         streetNumber: '',
         landmark: '',
-        mobileNo: '9669598715',
+        mobileNo: '',
         whatsappNo: '',
         autoFillingShippingAddress: '',
         // isRecording: false,
         gender: 'MALE',
-        orderFor: '',
+        orderFor: [],
+        orderForOther: '',
         ageGroup: '',
         emailId: '',
         socialMedia: {
@@ -308,7 +314,23 @@ const CallerPageWrapper = () => {
         alternateNo: '',
     }
 
-    // Form Validation Schema
+    useEffect(() => {
+        const phoneNumber = queryParams.get('phone')
+        const userName = queryParams.get('userlogin')
+        const verveId = queryParams.get('verve')
+        const campaignId = queryParams.get('campaignId')
+        // const postalCode = queryParams.get('postalcode')
+        // const dstPhone = queryParams.get('dstphone')
+
+        initialValues.mobileNo = phoneNumber || ''
+        initialValues.agentName = userName || ''
+        initialValues.didNo = verveId || ''
+        initialValues.campaign = campaignId || ''
+        // eslint-disable-next-line
+    }, [])
+
+    // Form validation schema
+    // eslint-disable-next-line
     const validationSchema = object({
         productGroupId: string().required('product group id is required'),
         // DELEVERY ADDRESS SELECT OPTIONS
@@ -334,6 +356,7 @@ const CallerPageWrapper = () => {
         // isRecording: boolean(),
         gender: string(),
         orderFor: string(),
+        orderForOtherText: string(),
         ageGroup: string(),
         emailId: string().email('invalid email'),
         // medicalIssue: array().of(string()),
@@ -518,7 +541,7 @@ const CallerPageWrapper = () => {
         <>
             <Formik
                 initialValues={initialValues}
-                validationSchema={validationSchema}
+                // validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {

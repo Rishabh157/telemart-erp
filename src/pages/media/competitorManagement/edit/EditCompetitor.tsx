@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
@@ -26,6 +26,10 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
+import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+// |-- MUI --|
+import { CircularProgress } from '@mui/material'
 
 // |-- Types --|
 type Props = {
@@ -48,6 +52,11 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
+    const [imageApiStatus, setImageApiStatus] = useState(false)
+    // const [videoApiStatus, setVideoApiStatus] = useState(false)
+
+    const [fileUploader] = useFileUploaderMutation()
+
     const { values, setFieldValue } = formikProps
 
     dropdownOptions = {
@@ -111,19 +120,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     )
                                 }
                             />
-                            <ATMTextField
-                                name="companyName"
-                                required
-                                value={values.companyName}
-                                label="Company Name"
-                                placeholder="Company Name"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'companyName',
-                                        e.target.value
-                                    )
-                                }
-                            />
+                           
                             <ATMTextField
                                 name="productName"
                                 required
@@ -182,22 +179,6 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             />
 
                             <ATMTextField
-                                name="whatsappNumber"
-                                required
-                                value={values.whatsappNumber}
-                                label="Whatsapp Number"
-                                placeholder="Whatsapp Number"
-                                onChange={(e) => {
-                                    const inputValue = e.target.value
-                                    if (!isNaN(Number(inputValue))) {
-                                        handleSetFieldValue(
-                                            'whatsappNumber',
-                                            e.target.value
-                                        )
-                                    }
-                                }}
-                            />
-                            <ATMTextField
                                 name="websiteLink"
                                 required
                                 value={values.websiteLink}
@@ -210,19 +191,6 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     )
                                 }
                             />
-                            <ATMTextField
-                                name="youtubeLink"
-                                required
-                                value={values.youtubeLink}
-                                label="Youtube Link"
-                                placeholder="Youtube Link"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'youtubeLink',
-                                        e.target.value
-                                    )
-                                }
-                            />
 
                             <div className="mt-3">
                                 <ATMDatePicker
@@ -231,13 +199,12 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     value={values.date}
                                     label="Date"
                                     onChange={(newValue) => {
-                                        console.log('date', newValue)
                                         handleSetFieldValue('date', newValue)
                                     }}
                                 />
                             </div>
 
-                            <div className="mt-2">
+                            <div className="mt-1">
                                 <ATMTimePicker
                                     required
                                     name={`startTime`}
@@ -251,7 +218,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     }}
                                 />
                             </div>
-                            <div className="mt-2">
+                            <div className="mt-1">
                                 <ATMTimePicker
                                     required
                                     name={`endTime`}
@@ -261,6 +228,44 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                         handleSetFieldValue('endTime', newValue)
                                     }}
                                 />
+                            </div>
+
+                            <div className="mt-4">
+                                <ATMFilePickerWrapper
+                                    name="video"
+                                    label="Video"
+                                    placeholder="video"
+                                    onSelect={(newFile) => {
+                                        const formData = new FormData()
+                                        formData.append('fileType', 'VIDEO')
+                                        formData.append(
+                                            'category',
+                                            'competitor'
+                                        )
+                                        formData.append(
+                                            'fileUrl',
+                                            newFile || ''
+                                        )
+                                        setImageApiStatus(true)
+                                        fileUploader(formData).then((res) => {
+                                            if ('data' in res) {
+                                                setImageApiStatus(false)
+                                                setFieldValue(
+                                                    'video',
+                                                    res?.data?.data?.fileUrl
+                                                )
+                                            }
+                                            setImageApiStatus(false)
+                                        })
+                                    }}
+                                    selectedFile={values.video}
+                                    disabled={false}
+                                />
+                                {imageApiStatus ? (
+                                    <div className="mt-2 flex justify-center items-center">
+                                        <CircularProgress />
+                                    </div>
+                                ) : null}
                             </div>
                         </div>
                     </div>
