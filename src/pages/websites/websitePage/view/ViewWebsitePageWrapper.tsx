@@ -36,7 +36,7 @@ const ViewWebsitePageWrapper = () => {
         }
     }, [isLoading, isFetching, data, dispatch])
 
-    //console.log(selectedItem)
+  
 
     return (
         <WebsiteLayout>

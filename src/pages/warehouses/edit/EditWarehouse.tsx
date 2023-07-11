@@ -50,7 +50,7 @@ const EditWarehouse = ({
         {
             label: 'Warehouse',
             onClick: () => {
-                console.log('Dealers')
+               
             },
             path: '/warehouse',
         },

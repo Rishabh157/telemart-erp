@@ -27,11 +27,10 @@ const AddInitialCallTwoWrapper = () => {
     const { allItems }: any = useSelector(
         (state: RootState) => state?.initialCallerOne
     )
-
-    console.log(allItems)
+  
 
     const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery('')
-    console.log(data)
+ 
 
     useEffect(() => {
         if (!isFetching && !isLoading) {

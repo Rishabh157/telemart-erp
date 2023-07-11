@@ -114,14 +114,14 @@ const EditCompanyWrapper = () => {
         {
             label: 'Company',
             onClick: () => {
-                console.log('company')
+                
             },
             path: '/configurations/company',
         },
         {
             label: 'Update Company',
             onClick: () => {
-                console.log('edit-company')
+                
             },
         },
     ]

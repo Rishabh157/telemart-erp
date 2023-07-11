@@ -168,7 +168,7 @@ const ATMSelectSearchable = ({
     // const handleOnInputChange = (valueOp:string) => {
     //     let inputValue = selectOptions?.find((option) => option.value === valueOp)
     //     if (!inputValue) {
-    //         console.log("herer",valueOp)
+    //         
     //         onChange('')
     //     } else {
     //         onChange(valueOp)

@@ -97,14 +97,14 @@ const AddCompanyWrapper = () => {
         {
             label: 'Company',
             onClick: () => {
-                console.log('company')
+               
             },
             path: '/configurations/company',
         },
         {
             label: 'Add Company',
             onClick: () => {
-                console.log('add-company')
+                
             },
         },
     ]

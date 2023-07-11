@@ -96,7 +96,6 @@ const InventoryListingWrapper = () => {
         (state: RootState) => state.inventory
     )
     const params = useParams()
-    console.log(params)
     const wareHouseId = params.id
     const { page, rowsPerPage, searchValue, items } = inventoriesState
     const { userData } = useSelector((state: RootState) => state?.auth)

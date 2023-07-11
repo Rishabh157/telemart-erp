@@ -63,7 +63,7 @@ const EditWebsitePageWrapper = (props: Props) => {
     }
 
     useEffect(() => {
-        console.log(data?.data)
+        
         dispatch(setSelectedWebsite(data?.data))
     }, [dispatch, data, isLoading, isFetching])
 

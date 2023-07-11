@@ -38,7 +38,7 @@ const ViewWebsiteTagsWrapper = () => {
         }
     }, [isLoading, isFetching, data, dispatch])
 
-    //console.log(selectedItem)
+   
 
     return (
         <WebsiteLayout>

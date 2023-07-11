@@ -49,7 +49,7 @@ export const deleteKeyFromArrayObjects = (
     for (let i = 0; i < array.length; i++) {
         delete array[i][keyToDelete]
     }
-    console.log(array)
+   
     return array
 }
 

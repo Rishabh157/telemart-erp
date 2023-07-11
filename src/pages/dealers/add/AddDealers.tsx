@@ -49,14 +49,14 @@ const AddDealers = ({
         {
             label: 'Dealers',
             onClick: () => {
-                console.log('Dealers')
+                
             },
             path: '/dealers',
         },
         {
             label: 'Add Dealer',
             onClick: () => {
-                console.log('add-dealer')
+                
             },
         },
     ]

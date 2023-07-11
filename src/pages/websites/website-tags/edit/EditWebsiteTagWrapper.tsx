@@ -74,7 +74,7 @@ const EditWebsiteTagWrapper = (props: Props) => {
         }
     }, [isLoading, isFetching, data, dispatch])
 
-    //console.log(selectedItem)
+    
 
     const { allItems: websiteItems }: any = useSelector(
         (state: RootState) => state.website
@@ -134,7 +134,7 @@ const EditWebsiteTagWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
-        //console.log(values)
+        
         setTimeout(() => {
             updateWebsiteTags({
                 body: {

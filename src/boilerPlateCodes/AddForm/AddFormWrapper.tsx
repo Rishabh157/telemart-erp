@@ -61,7 +61,7 @@ const AddFormWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
-        console.log('onSubmitHandler', values)
+        
     }
 
     const dropdownOptions = {

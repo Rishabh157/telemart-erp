@@ -101,7 +101,6 @@ const AddInitialCallThree = ({
                                     type="button"
                                     disabled={apiStatus}
                                     onClick={() => {
-                                        console.log(formikProps)
                                         formikProps.handleSubmit()
                                     }}
                                     className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
@@ -139,7 +138,6 @@ const AddInitialCallThree = ({
                                     value={values.initialCallOneId}
                                     label="Initial Call One"
                                     onChange={(value) => {
-                                        console.log(value)
                                         handleSetFieldValue(
                                             'initialCallOneId',
                                             value

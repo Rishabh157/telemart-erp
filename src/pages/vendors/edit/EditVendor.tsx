@@ -50,14 +50,14 @@ const EditVendor = ({
         {
             label: 'Vendors',
             onClick: () => {
-                console.log('Vendors')
+                
             },
             path: '/vendors',
         },
         {
             label: 'Update vendor',
             onClick: () => {
-                console.log('add-Vendors')
+                
             },
         },
     ]

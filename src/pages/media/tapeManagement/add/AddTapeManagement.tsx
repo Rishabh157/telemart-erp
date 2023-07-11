@@ -332,7 +332,7 @@ const AddTapeManagement = ({
                                                         itemIndex: any
                                                     ) => {
                                                         let { phoneNo } = item
-                                                        console.log(phoneNo)
+                                                       
                                                         return (
                                                             <div
                                                                 key={itemIndex}

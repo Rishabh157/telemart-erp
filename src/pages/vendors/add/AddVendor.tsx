@@ -51,14 +51,14 @@ const AddVendor = ({
         {
             label: 'Vendors',
             onClick: () => {
-                console.log('Vendors')
+                
             },
             path: '/vendors',
         },
         {
             label: 'Add Vendor',
             onClick: () => {
-                console.log('add-Vendors')
+               
             },
         },
     ]

@@ -79,7 +79,7 @@ const EditInventoryManagementWrapper = (props: Props) => {
         }
     }, [imData, imIsLoading, imIsFetching])
 
-    //console.log(selectedItems?.purchaseOrder?._id)
+   
 
     const initialValues: FormInitialValues = {
         dummy1: selectedItems?.dummy1 || 'dummy ',
@@ -180,7 +180,6 @@ const EditInventoryManagementWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
-        //console.log(values?.purchaseOrder?._id, "values")
         let iid = values?.dummy?.id
 
         const dummy0: any = {

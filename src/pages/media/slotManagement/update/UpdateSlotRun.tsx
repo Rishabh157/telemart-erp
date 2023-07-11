@@ -50,7 +50,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             value={values.run}
                             label="Status"
                             onChange={(value: any) => {
-                                console.log(value)
+                                
                                 if (value === false) {
                                     setFieldValue('showOk', false)
                                     setFieldValue('reasonNotShow', null)

@@ -237,7 +237,7 @@ const StepAddAddress = ({
                                                     )
 
                                                     handleSetFieldValue(name, e)
-                                                    console.log(values)
+                                                   
                                                     if (e) {
                                                         const {
                                                             address,

@@ -142,14 +142,14 @@ const AddSchemeWrapper = () => {
         {
             label: 'Outer Scheme',
             onClick: () => {
-                console.log('Scheme')
+               // console.log('Scheme')
             },
             path: '/configurations/scheme',
         },
         {
             label: 'Add Scheme',
             onClick: () => {
-                console.log('add-Scheme')
+                //console.log('add-Scheme')
             },
         },
     ]

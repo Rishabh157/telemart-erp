@@ -69,7 +69,7 @@ const EditAsstesRequest = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => {
-                                    console.log(formikProps)
+                                  
                                     formikProps.handleSubmit()
                                 }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${

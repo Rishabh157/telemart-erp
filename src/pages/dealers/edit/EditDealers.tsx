@@ -51,14 +51,14 @@ const EditDealers = ({
         {
             label: 'Dealers',
             onClick: () => {
-                console.log('Dealers')
+               
             },
             path: '/dealers',
         },
         {
             label: 'Update Dealer',
             onClick: () => {
-                console.log('add-dealer')
+                
             },
         },
     ]

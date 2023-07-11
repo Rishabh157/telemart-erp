@@ -38,7 +38,7 @@ const WebsiteBlogViewWrapper = () => {
         }
     }, [isLoading, isFetching, data, dispatch])
 
-    //console.log(selectedItem)
+    
 
     return (
         <WebsiteLayout>
