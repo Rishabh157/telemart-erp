@@ -49,7 +49,7 @@ const formFields: {
     fields: FieldType[]
 }[] = [
     {
-        sectionName: 'Regd. Address',
+        sectionName: 'Registration Address',
         fields: [
             {
                 name: 'regd_address.phone',
@@ -91,7 +91,17 @@ const formFields: {
             },
         ],
     },
-
+    {
+        sectionName: '',
+        fields: [
+            {
+                name: 'checkbox',
+                label: 'As Above values',
+                type: 'checkbox',
+                placeholder: 'checbox',
+            },
+        ],
+    },
     {
         sectionName: 'Billing Address',
         fields: [
