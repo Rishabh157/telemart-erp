@@ -216,7 +216,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     }}
                                 />
                             </div>
-                            <div className="mt-2">
+                            <div className="mt-1">
                                 <ATMTimePicker
                                     name={`endTime`}
                                     required
@@ -260,7 +260,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     disabled={false}
                                 />
                                 {imageApiStatus ? (
-                                    <div className=" mt-3 flex justify-center  items-center w-full h-full">
+                                    <div className="mt-2 flex justify-center items-center">
                                         <CircularProgress />
                                     </div>
                                 ) : null}

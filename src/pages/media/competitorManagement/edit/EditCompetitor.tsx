@@ -204,7 +204,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 />
                             </div>
 
-                            <div className="mt-2">
+                            <div className="mt-1">
                                 <ATMTimePicker
                                     required
                                     name={`startTime`}
@@ -218,7 +218,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     }}
                                 />
                             </div>
-                            <div className="mt-2">
+                            <div className="mt-1">
                                 <ATMTimePicker
                                     required
                                     name={`endTime`}
@@ -230,7 +230,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 />
                             </div>
 
-                            <div className="mt-6">
+                            <div className="mt-4">
                                 <ATMFilePickerWrapper
                                     name="video"
                                     label="Video"
@@ -262,7 +262,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     disabled={false}
                                 />
                                 {imageApiStatus ? (
-                                    <div className=" mt-3 flex justify-center  items-center w-full h-full">
+                                    <div className="mt-2 flex justify-center items-center">
                                         <CircularProgress />
                                     </div>
                                 ) : null}
