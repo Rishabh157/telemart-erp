@@ -235,7 +235,7 @@ const AddSchemeWrapper = () => {
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast('success', 'Scheme added successfully!')
-                            navigate('/Scheme')
+                            navigate('/configurations/Scheme')
                         } else {
                             showToast('error', res?.data?.message)
                         }

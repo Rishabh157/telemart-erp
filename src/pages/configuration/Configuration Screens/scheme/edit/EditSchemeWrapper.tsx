@@ -352,7 +352,7 @@ const EditSchemeWrapper = () => {
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast('success', 'Scheme Updated successfully!')
-                            navigate('/scheme')
+                            navigate('/configurations/Scheme')
                         } else {
                             showToast('error', res?.data?.message)
                         }
