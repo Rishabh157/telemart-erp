@@ -23,7 +23,7 @@ import { IoCallOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { BiBox, BiPurchaseTagAlt } from 'react-icons/bi'
 import { IconType } from 'react-icons'
-//import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
+import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 //import { BsFillCalendarCheckFill } from 'react-icons/bs'
 
 // |-- Types --|
@@ -82,11 +82,11 @@ export const navigation: NavItemType[] = [
         icon: CiStickyNote,
         path: '/grn',
     },
-    // {
-    //     label: 'Scheme',
-    //     icon: TfiLayoutMediaOverlayAlt2,
-    //     path: '/scheme',
-    // },
+    {
+        label: 'Inventory Management',
+        icon: TfiLayoutMediaOverlayAlt2,
+        path: '/inventory-management',
+    },
     {
         label: 'Inquiry',
         icon: MdCallReceived,

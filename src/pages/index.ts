@@ -192,6 +192,9 @@ import DealerListLedgerTabWrapper from './dealers/view/tabs/DealerLedgerTap/list
 import AddVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Add/AddVendorWarehouseWrapper'
 import EditVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Edit/EditVendorWarehouseWrapper'
 import VendorListLedgerTabWrapper from './vendors/view/tabs/VendorLedgerTab/list/VendorListLedgerTabWrapper'
+import AddInventoryManagementWrapper from './inventoryManagement/add/AddInventoryManagementWrapper'
+import EditInventoryManagementWrapper from './inventoryManagement/edit/EditInventoryManagementWrapper'
+import InventoryManagementListingWrapper from './inventoryManagement/list/InventoryManagementListingWrapper'
 
 // import asr
 import { ASRListingWrapper, EditASRWrapper, AddASRWrapper } from './asr'
@@ -396,4 +399,7 @@ export {
     AddVendorWarehouseWrapper,
     EditVendorWarehouseWrapper,
     VendorListLedgerTabWrapper,
+    AddInventoryManagementWrapper,
+    EditInventoryManagementWrapper,
+    InventoryManagementListingWrapper,
 }
