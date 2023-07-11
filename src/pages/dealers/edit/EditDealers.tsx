@@ -50,16 +50,12 @@ const EditDealers = ({
     const breadcrumbs = [
         {
             label: 'Dealers',
-            onClick: () => {
-               
-            },
+            onClick: () => {},
             path: '/dealers',
         },
         {
             label: 'Update Dealer',
-            onClick: () => {
-                
-            },
+            onClick: () => {},
         },
     ]
 

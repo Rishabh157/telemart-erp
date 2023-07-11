@@ -95,7 +95,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
             (f: any) => f?.barcodeNumber === barcode && f?.isUsed === false
         )
 
-       
         // if (newObject?.length ? newObject[0]?.isUsed === true : barcodes?.length) {
         //   showToast("error", "Barcode already used");
         // }

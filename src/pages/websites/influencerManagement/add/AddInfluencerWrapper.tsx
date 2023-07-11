@@ -58,7 +58,7 @@ const AddInfluencerWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        
+
         setTimeout(() => {
             addInfluencer({
                 name: values.name,

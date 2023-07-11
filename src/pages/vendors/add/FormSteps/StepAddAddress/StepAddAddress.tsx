@@ -196,7 +196,7 @@ const StepAddAddress = ({
                                                     )
 
                                                     setFieldValue(name, e)
-                                                   
+
                                                     if (e) {
                                                         const {
                                                             address,

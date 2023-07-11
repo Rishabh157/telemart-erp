@@ -38,8 +38,6 @@ const ViewWebsiteTagsWrapper = () => {
         }
     }, [isLoading, isFetching, data, dispatch])
 
-   
-
     return (
         <WebsiteLayout>
             <WebsiteTagsView items={selectedItem} />

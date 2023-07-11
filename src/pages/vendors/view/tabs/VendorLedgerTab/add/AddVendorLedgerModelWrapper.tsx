@@ -66,7 +66,6 @@ const AddVendorLedgerModelWrapper: React.FC<PropsType> = ({
     })
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
-       
         setApiStatus(true)
 
         setTimeout(() => {

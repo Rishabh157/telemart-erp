@@ -113,16 +113,12 @@ const EditCompanyWrapper = () => {
     const breadcrumbs = [
         {
             label: 'Company',
-            onClick: () => {
-                
-            },
+            onClick: () => {},
             path: '/configurations/company',
         },
         {
             label: 'Update Company',
-            onClick: () => {
-                
-            },
+            onClick: () => {},
         },
     ]
 

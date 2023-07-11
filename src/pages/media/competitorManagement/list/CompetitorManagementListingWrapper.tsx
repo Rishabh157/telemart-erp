@@ -182,8 +182,6 @@ const CompetitorManagementListingWrapper = () => {
         isPaginationRequired: true,
     })
 
-   
-
     useEffect(() => {
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false))

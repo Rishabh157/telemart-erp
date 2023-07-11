@@ -137,7 +137,6 @@ const EditInitialCallThree = ({
                                     value={values.initialCallOneId}
                                     label="Initial Call One"
                                     onChange={(value) => {
-                                       
                                         handleSetFieldValue(
                                             'initialCallOneId',
                                             value

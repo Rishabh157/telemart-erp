@@ -87,16 +87,12 @@ const AddStepperFormWrapper = () => {
     const breadcrumbs = [
         {
             label: 'Vendors',
-            onClick: () => {
-              
-            },
+            onClick: () => {},
             path: '/vendors',
         },
         {
             label: 'Add Vendor',
-            onClick: () => {
-              
-            },
+            onClick: () => {},
         },
     ]
 
@@ -138,7 +134,6 @@ const AddStepperFormWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
             setTimeout(() => {
-                //console.log(values);
                 setActiveStep(0)
             }, 1000)
         } else {

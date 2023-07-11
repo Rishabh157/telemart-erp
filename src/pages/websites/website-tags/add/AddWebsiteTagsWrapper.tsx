@@ -115,7 +115,7 @@ const AddWebsiteTagsWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
-        
+
         setTimeout(() => {
             addWebsiteTags({
                 websitPageId: values.websitPageId,

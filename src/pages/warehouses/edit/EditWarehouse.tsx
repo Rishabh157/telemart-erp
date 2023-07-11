@@ -49,9 +49,7 @@ const EditWarehouse = ({
     const breadcrumbs = [
         {
             label: 'Warehouse',
-            onClick: () => {
-               
-            },
+            onClick: () => {},
             path: '/warehouse',
         },
         {

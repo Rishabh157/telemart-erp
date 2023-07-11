@@ -38,8 +38,6 @@ const WebsiteBlogViewWrapper = () => {
         }
     }, [isLoading, isFetching, data, dispatch])
 
-    
-
     return (
         <WebsiteLayout>
             <WebsiteBlogView items={selectedItem} />

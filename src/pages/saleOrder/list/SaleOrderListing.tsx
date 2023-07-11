@@ -42,7 +42,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
     const { pathname } = useLocation()
     const path = pathname.split('/')[1]
-  
+
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 

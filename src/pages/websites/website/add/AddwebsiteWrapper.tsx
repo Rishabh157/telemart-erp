@@ -70,7 +70,7 @@ const AddWebsiteWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
-        
+
         setTimeout(() => {
             addWebsite({
                 productName: values.productName,

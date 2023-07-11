@@ -30,7 +30,6 @@ const AddInitialCallThreeWrappper = () => {
     const { allItems }: any = useSelector(
         (state: RootState) => state?.initialCallerOne
     )
-   
 
     const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery('')
 
@@ -86,8 +85,6 @@ const AddInitialCallThreeWrappper = () => {
             })
         }, 1000)
     }
-
-   
 
     const smstype = [
         //    { label:"alcobanSms" ,value:"ALCOBAN SMS"},

@@ -79,8 +79,6 @@ const EditInventoryManagementWrapper = (props: Props) => {
         }
     }, [imData, imIsLoading, imIsFetching])
 
-   
-
     const initialValues: FormInitialValues = {
         dummy1: selectedItems?.dummy1 || 'dummy ',
         dummy2: selectedItems?.dummy2 || '',
