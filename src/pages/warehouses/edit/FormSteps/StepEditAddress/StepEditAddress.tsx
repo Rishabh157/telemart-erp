@@ -245,85 +245,84 @@ const StepEditAddress = ({
                                                 />
                                             </div>
                                         )
-                                        case 'checkbox':
-                                            return (
-                                                <div
-                                                    className="-mt-2"
-                                                    key={name || index}
-                                                >
-                                                    <ATMCheckbox
-                                                        name={name}
-                                                        label={label}
-                                                        onChange={(e) => {
-                                                            setFieldValue(name, e)
-                                                            if (e) {
-                                                                const {
-                                                                    address,
-                                                                    country,
-                                                                    district,
-                                                                    phone,
-                                                                    pincode,
-                                                                    state,
-                                                                } =
-                                                                    values.regd_address
-                                                                setFieldValue(
-                                                                    'billing_address.address',
-                                                                    address
-                                                                )
-                                                                setFieldValue(
-                                                                    'billing_address.country',
-                                                                    country
-                                                                )
-                                                                setFieldValue(
-                                                                    'billing_address.district',
-                                                                    district
-                                                                )
-                                                                setFieldValue(
-                                                                    'billing_address.phone',
-                                                                    phone
-                                                                )
-                                                                setFieldValue(
-                                                                    'billing_address.pincode',
-                                                                    pincode
-                                                                )
-                                                                setFieldValue(
-                                                                    'billing_address.state',
-                                                                    state
-                                                                )
-                                                            } else {
-                                                                setFieldValue(
-                                                                    'billing_address.address',
-                                                                    ''
-                                                                )
-                                                                setFieldValue(
-                                                                    'billing_address.country',
-                                                                    ''
-                                                                )
-                                                                setFieldValue(
-                                                                    'billing_address.district',
-                                                                    ''
-                                                                )
-                                                                setFieldValue(
-                                                                    'billing_address.phone',
-                                                                    ''
-                                                                )
-                                                                setFieldValue(
-                                                                    'billing_address.pincode',
-                                                                    ''
-                                                                )
-                                                                setFieldValue(
-                                                                    'billing_address.state',
-                                                                    ''
-                                                                )
-                                                            }
-                                                        }}
-                                                        checked={Boolean(
-                                                            values[name]
-                                                        )}
-                                                    />
-                                                </div>
-                                            )
-    
+                                    case 'checkbox':
+                                        return (
+                                            <div
+                                                className="-mt-2"
+                                                key={name || index}
+                                            >
+                                                <ATMCheckbox
+                                                    name={name}
+                                                    label={label}
+                                                    onChange={(e) => {
+                                                        setFieldValue(name, e)
+                                                        if (e) {
+                                                            const {
+                                                                address,
+                                                                country,
+                                                                district,
+                                                                phone,
+                                                                pincode,
+                                                                state,
+                                                            } =
+                                                                values.regd_address
+                                                            setFieldValue(
+                                                                'billing_address.address',
+                                                                address
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.country',
+                                                                country
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.district',
+                                                                district
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.phone',
+                                                                phone
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.pincode',
+                                                                pincode
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.state',
+                                                                state
+                                                            )
+                                                        } else {
+                                                            setFieldValue(
+                                                                'billing_address.address',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.country',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.district',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.phone',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.pincode',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.state',
+                                                                ''
+                                                            )
+                                                        }
+                                                    }}
+                                                    checked={Boolean(
+                                                        values[name]
+                                                    )}
+                                                />
+                                            </div>
+                                        )
 
                                     default:
                                         return null
