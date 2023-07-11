@@ -76,7 +76,7 @@ const AttributesGroupListingWrapper = () => {
                                 if (index === 10) {
                                     return (
                                         <Chip
-                                        key={index}
+                                            key={index}
                                             label={'...'}
                                             color="primary"
                                             variant="outlined"

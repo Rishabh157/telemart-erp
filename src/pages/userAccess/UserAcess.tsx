@@ -134,7 +134,10 @@ const UserAcess = ({
                                             {module.moduleAction.map(
                                                 (index: any, actions: any) => {
                                                     return (
-                                                        <li className=" flex" key={index}>
+                                                        <li
+                                                            className=" flex"
+                                                            key={index}
+                                                        >
                                                             <div className="-mt-6">
                                                                 <ATMCheckbox
                                                                     name={

@@ -132,7 +132,10 @@ const ViewPurchaseOrder = ({ items }: Props) => {
                             Approval Details
                         </div>
                         {items?.approval?.map((index: any, item: any) => (
-                            <div className="grid grid-cols-3 gap-2 pl-6 py-6 border border-l-2" key={index}>
+                            <div
+                                className="grid grid-cols-3 gap-2 pl-6 py-6 border border-l-2"
+                                key={index}
+                            >
                                 <h1 className="text-gray-600  font-semibold">
                                     Approval Level{' '}
                                 </h1>
