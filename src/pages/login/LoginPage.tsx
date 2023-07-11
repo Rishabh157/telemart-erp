@@ -97,8 +97,8 @@ const LoginPage = ({ pathName }: any) => {
             </div>
             <div className="flex flex-col h-full w-full justify-center items-center flex-1">
                 <div className="">
-                    <div className="flex flex-col h-[200px] w-[250px] ">
-                        <img src="logoapp.png" alt="" />
+                    <div className="flex flex-col h-[100px] w-[250px] ">
+                        <img src="telemartLogo.png" alt="" />
                     </div>
                     <div className=" text-2xl font-semibold text-center ">
                         Login

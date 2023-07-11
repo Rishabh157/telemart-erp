@@ -110,7 +110,7 @@ const AddWarehouse = ({
                     <div className="py-5 px-16 border-b border-slate-300">
                         {/* Steps */}
                         <Stepper activeStep={activeStep}>
-                            {steps.map((step, index) => {
+                            {steps?.map((step, index) => {
                                 const stepProps: { completed?: boolean } = {}
                                 const labelProps: {
                                     optional?: React.ReactNode
