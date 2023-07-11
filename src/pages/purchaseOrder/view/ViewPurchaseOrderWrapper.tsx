@@ -22,10 +22,6 @@ import { useGetPurchaseOrderByIdQuery } from 'src/services/PurchaseOrderService'
 import { setSelectedItems } from 'src/redux/slices/PurchaseOrderSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 
-
-
-
-
 const ViewPurchaseOrderWrapper = () => {
     // Form Initial Values
     const params = useParams()
@@ -37,11 +33,11 @@ const ViewPurchaseOrderWrapper = () => {
     )
     useEffect(() => {
         dispatch(setSelectedItems(data?.data))
-    }, [data, isLoading, isFetching, dispatch])    
+    }, [data, isLoading, isFetching, dispatch])
 
     return (
         <SideNavLayout>
-             <ViewPurchaseOrder items={selectedItems} />             
+            <ViewPurchaseOrder items={selectedItems} />
         </SideNavLayout>
     )
 }
