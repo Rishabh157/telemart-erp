@@ -202,4 +202,3 @@ const EditCompetitorWrapper = (props: Props) => {
 }
 
 export default EditCompetitorWrapper
-    
