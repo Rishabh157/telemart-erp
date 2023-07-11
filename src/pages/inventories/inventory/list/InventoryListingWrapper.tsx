@@ -28,6 +28,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/inventorySlice'
+import { useParams } from 'react-router-dom'
 // import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 
 const columns: columnTypes[] = [
@@ -47,14 +48,14 @@ const columns: columnTypes[] = [
             <span className="p-1"> {row.count} </span>
         ),
     },
-    {
-        field: 'warehouse',
-        headerName: 'Warehouse',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: InventoryListResponse) => (
-            <span> {row.wareHouse} </span>
-        ),
-    },
+    // {
+    //     field: 'warehouse',
+    //     headerName: 'Warehouse',
+    //     flex: 'flex-[1_1_0%]',
+    //     renderCell: (row: InventoryListResponse) => (
+    //         <span> {row.wareHouse} </span>
+    //     ),
+    // },
     // {
     //     field: 'actions',
     //     headerName: 'Actions',
@@ -94,7 +95,9 @@ const InventoryListingWrapper = () => {
     const inventoriesState: any = useSelector(
         (state: RootState) => state.inventory
     )
-
+    const params = useParams()
+    console.log(params)
+    const wareHouseId = params.id
     const { page, rowsPerPage, searchValue, items } = inventoriesState
     const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
@@ -108,6 +111,10 @@ const InventoryListingWrapper = () => {
             {
                 fieldName: 'companyId',
                 value: userData?.companyId as string,
+            },
+            {
+                fieldName: 'wareHouseId',
+                value: wareHouseId,
             },
         ],
         dateFilter: {},

@@ -62,26 +62,17 @@ const ViewPurchaseOrder = ({ items }: Props) => {
                         </div>
                         <div className="grid grid-cols-3 gap-3 pl-6 py-6 border border-l-2">
                             <h1 className="text-gray-900">PO Code </h1>
-                            <p className=" col-span-1">
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">{items?.poCode}</p>
 
                             <h1 className="text-gray-900">Vendor </h1>
-                            <p className=" col-span-1">
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.vendorLabel}
                             </p>
 
                             <h1 className="text-gray-900">Warehouse </h1>
-                            <p className=" col-span-1">
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.warehouseLabel}
                             </p>
@@ -95,28 +86,19 @@ const ViewPurchaseOrder = ({ items }: Props) => {
                         </div>
                         <div className="grid grid-cols-3 gap-3 pl-6 py-6 border border-l-2">
                             <h1 className="text-gray-900">Item Name </h1>
-                            <p className=" col-span-1">
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.purchaseOrder?.itemName}
                             </p>
 
                             <h1 className="text-gray-900">Rate</h1>
-                            <p className=" col-span-1">
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.purchaseOrder?.rate?.toString()}
                             </p>
 
                             <h1 className="text-gray-900">Quantity </h1>
-                            <p className=" col-span-1">
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.purchaseOrder?.quantity?.toString()}
                             </p>
@@ -124,10 +106,7 @@ const ViewPurchaseOrder = ({ items }: Props) => {
                             <h1 className="text-gray-900">
                                 Est. Receiving Date
                             </h1>
-                            <p className=" col-span-1">
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.purchaseOrder?.estReceivingDate}
                             </p>
@@ -145,19 +124,13 @@ const ViewPurchaseOrder = ({ items }: Props) => {
                                 <h1 className="text-gray-800">
                                     Approval Level{' '}
                                 </h1>
-                                <p className=" col-span-1">
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                <p className=" col-span-1"> - </p>
                                 <p className="text-slate-600">
                                     {item?.approvalLevel}
                                 </p>
 
                                 <h1 className="text-gray-800">Approval By</h1>
-                                <p className=" col-span-1">
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                <p className=" col-span-1"> - </p>
                                 <p className="text-slate-600">
                                     {item?.approvalByName}
                                 </p>
@@ -165,10 +138,7 @@ const ViewPurchaseOrder = ({ items }: Props) => {
                                 <h1 className="text-gray-800">
                                     Approval Time{' '}
                                 </h1>
-                                <p className=" col-span-1">
-                                            {' '}
-                                            -{' '}
-                                        </p>
+                                <p className=" col-span-1"> - </p>
                                 <p className="text-slate-600">{item?.time}</p>
                             </div>
                         ))}

@@ -61,7 +61,7 @@ const CompetitorManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.startTime} </span>
+                <span> {formatTimeTo12Hour(row.startTime)} </span>
             ),
         },
         {
@@ -70,7 +70,7 @@ const CompetitorManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.endTime} </span>
+                <span> {formatTimeTo12Hour(row.endTime)} </span>
             ),
         },
         {
@@ -195,6 +195,11 @@ const CompetitorManagementListingWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
+
+    function formatTimeTo12Hour(timeString: string) {
+        const time = moment(timeString)
+        return time.format('h:mm A')
+    }
 
     const handleDelete = () => {
         setShowDropdown(false)
