@@ -45,7 +45,7 @@ export type FormInitialValues = {
 
 const EditAssetsRequestwrapper = (props: Props) => {
     // Form Initial Values
-    console.log('edit')
+
     const params = useParams()
     const Id = params.id
     const navigate = useNavigate()

@@ -129,7 +129,7 @@ const VendorListLedgerTabWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
-    console.log(items)
+
     return (
         <>
             <VendorLedgerListing columns={columns} rows={items} />

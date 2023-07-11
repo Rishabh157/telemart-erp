@@ -113,7 +113,6 @@ const EditDispositionThreeWrappper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        console.log(values.applicableCriteria)
         updatedispositionThree({
             body: {
                 dispositionName: values.dispositionName,

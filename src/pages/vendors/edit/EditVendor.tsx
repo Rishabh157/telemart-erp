@@ -49,16 +49,12 @@ const EditVendor = ({
     const breadcrumbs = [
         {
             label: 'Vendors',
-            onClick: () => {
-                console.log('Vendors')
-            },
+            onClick: () => {},
             path: '/vendors',
         },
         {
             label: 'Update vendor',
-            onClick: () => {
-                console.log('add-Vendors')
-            },
+            onClick: () => {},
         },
     ]
 

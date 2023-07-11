@@ -96,16 +96,12 @@ const AddCompanyWrapper = () => {
     const breadcrumbs = [
         {
             label: 'Company',
-            onClick: () => {
-                console.log('company')
-            },
+            onClick: () => {},
             path: '/configurations/company',
         },
         {
             label: 'Add Company',
-            onClick: () => {
-                console.log('add-company')
-            },
+            onClick: () => {},
         },
     ]
 

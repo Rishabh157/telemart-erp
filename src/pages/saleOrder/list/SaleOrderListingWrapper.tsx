@@ -97,7 +97,6 @@ const SaleOrderListingWrapper = () => {
         const currentDate = new Date().toLocaleDateString('en-GB')
         const so: any = items?.find((e: any) => e._id === _id)
 
-        //console.log(so?.productSalesOrder, "so")
         const pSO = {
             productGroupId: so?.productSalesOrder?.productGroupId,
             quantity: so?.productSalesOrder?.quantity,
@@ -160,7 +159,6 @@ const SaleOrderListingWrapper = () => {
         const currentDate = new Date().toLocaleDateString('en-GB')
         const so: any = items?.find((e: any) => e._id === _id)
 
-        // console.log(so?.productSalesOrder, "so")
         const pSO = {
             productGroupId: so?.productSalesOrder?.productGroupId,
             quantity: so?.productSalesOrder?.quantity,
@@ -499,7 +497,6 @@ const SaleOrderListingWrapper = () => {
             align: 'end',
         },
     ]
-    //console.log(items)
 
     return (
         <>

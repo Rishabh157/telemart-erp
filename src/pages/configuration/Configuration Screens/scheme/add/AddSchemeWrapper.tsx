@@ -141,16 +141,12 @@ const AddSchemeWrapper = () => {
     const breadcrumbs = [
         {
             label: 'Outer Scheme',
-            onClick: () => {
-                console.log('Scheme')
-            },
+            onClick: () => {},
             path: '/configurations/scheme',
         },
         {
             label: 'Add Scheme',
-            onClick: () => {
-                console.log('add-Scheme')
-            },
+            onClick: () => {},
         },
     ]
 

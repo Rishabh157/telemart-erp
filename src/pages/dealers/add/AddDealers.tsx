@@ -48,16 +48,12 @@ const AddDealers = ({
     const breadcrumbs = [
         {
             label: 'Dealers',
-            onClick: () => {
-                console.log('Dealers')
-            },
+            onClick: () => {},
             path: '/dealers',
         },
         {
             label: 'Add Dealer',
-            onClick: () => {
-                console.log('add-dealer')
-            },
+            onClick: () => {},
         },
     ]
 

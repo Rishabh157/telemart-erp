@@ -68,7 +68,6 @@ const EditInventoryManagement = ({
     const dispatch = useDispatch()
     const { values, setFieldValue } = formikProps
 
-    //console.log(values?.purchaseOrder)
     const handleSetFieldValue = (name: string, value: string | boolean) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))

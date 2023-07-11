@@ -35,7 +35,7 @@ const EditInitialCallTwoWrapper = () => {
         (state: RootState) => state?.initialCallerTwo
     )
     const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery('')
-    //console.log(data)
+
     const {
         data: InitialCallData,
         isFetching: InitialCallIsFetching,
@@ -56,7 +56,6 @@ const EditInitialCallTwoWrapper = () => {
     })
     useEffect(() => {
         if (!InitialCallIsFetching && !InitialCallIsLoading) {
-            //console.log(InitialCallData?.data)
             dispatch(setSelectedInitialCallerTwo(InitialCallData?.data || []))
         }
 

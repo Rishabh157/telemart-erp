@@ -60,8 +60,6 @@ const EditChannelCategoryWrapper = () => {
         channelCategory: string().required('Group Name is required'),
     })
 
-    //console.log(selectedItem?.channelCategory)
-
     const initialValues: FormInitialValues = {
         channelCategory: selectedItem?.channelCategory || '',
         companyId: selectedItem?.companyId || userData?.companyId || '',
