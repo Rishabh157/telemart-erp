@@ -1138,7 +1138,7 @@ const PageRoutes = () => {
                         path="/inquiry/view/:id"
                         element={<InquiryViewWrapper />}
                     />
-                    <Route path="user-access" element={<UserAccessWrapper />} />
+                    <Route path="configurations/user-access" element={<UserAccessWrapper />} />
                 </Routes>
             </BrowserRouter>
         </>

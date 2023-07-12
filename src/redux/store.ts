@@ -86,6 +86,7 @@ import assetsRequestSlice from './slices/assets/assetsRequestSlice'
 import assetsCategorySlice from './slices/assets/assetsCategorySlice'
 import vendorLedgerSlice from './slices/VendorLedgerSlice'
 import dealersRatioSlice from './slices/dealersRatioSlice'
+import userAcessSlice from './slices/access/userAcessSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -99,6 +100,7 @@ import dealersRatioSlice from './slices/dealersRatioSlice'
 const store = configureStore({
     reducer: {
         auth: authSlice,
+        userAccess:userAcessSlice,
         sideNavLayout: sideNavLayoutSlice,
         dealer: dealerSlice,
         dealerRatio: dealersRatioSlice,
