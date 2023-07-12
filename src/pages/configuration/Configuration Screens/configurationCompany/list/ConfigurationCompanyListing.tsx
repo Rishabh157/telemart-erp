@@ -89,7 +89,7 @@ const ConfigurationCompanyListing = ({
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    isFilter
+                    // isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
 

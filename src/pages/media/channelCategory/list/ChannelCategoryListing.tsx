@@ -96,7 +96,7 @@ const ChannelCategoryListing = ({
                         onRowsPerPageChange={(newValue) =>
                             dispatch(setRowsPerPage(newValue))
                         }
-                        isFilter
+                        //  isFilter
                     />
                 )}
 

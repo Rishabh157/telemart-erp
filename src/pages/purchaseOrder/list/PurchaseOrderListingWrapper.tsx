@@ -68,7 +68,13 @@ const PurchaseOrderListingWrapper = () => {
     })
 
     const handleComplete = (_id: string, level: number) => {
-        const currentDate = new Date().toLocaleDateString('en-GB')
+        const currentDate = new Date().toLocaleString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        })
         if (level === 1) {
             updatePoLevel({
                 body: {
@@ -141,6 +147,14 @@ const PurchaseOrderListingWrapper = () => {
             },
         },
         {
+            field: 'receivedQuantity',
+            headerName: 'Recieved Quantity',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: PurchaseOrderListResponse) => {
+                return <span> {row.purchaseOrder.receivedQuantity} </span>
+            },
+        },
+        {
             field: 'rate',
             headerName: 'rate',
             flex: 'flex-[1.5_1.5_0%]',
@@ -179,6 +193,7 @@ const PurchaseOrderListingWrapper = () => {
                 )
             },
         },
+
         {
             field: 'approval.approvalLevel',
             headerName: 'Approval level',
@@ -264,19 +279,6 @@ const PurchaseOrderListingWrapper = () => {
                     </span>
                 )
             },
-            // renderCell: (row: PurchaseOrderListResponse) => {
-            //   const approvalLength = row?.approval?.length;
-            //   return (
-            //     <span>
-            //       {" "}
-            //       {approvalLength === 0
-            //         ? "no lvl"
-            //         : approvalLength
-            //         ? row?.approval[0]?.approvalLevel
-            //         : row?.approval[1]?.approvalLevel}{" "}
-            //     </span>
-            //   );
-            // },
         },
         {
             field: 'actions',
@@ -300,22 +302,29 @@ const PurchaseOrderListingWrapper = () => {
                     }}
                 >
                     <>
-                        <button
-                            onClick={() => {
-                                navigate('/grn/add?', {
-                                    state: {
-                                        poCode: row?.poCode,
-                                        itemId: row?.purchaseOrder.itemId,
-                                        itemName: row?.purchaseOrder.itemName,
-                                        quantity: row?.purchaseOrder.quantity,
-                                        companyId: row?.companyId,
-                                    },
-                                })
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Generate GRN
-                        </button>
+                        {row?.approval?.length > 1 && (
+                            <button
+                                onClick={() => {
+                                    navigate('/grn/add?', {
+                                        state: {
+                                            poCode: row?.poCode,
+                                            itemId: row?.purchaseOrder.itemId,
+                                            itemName:
+                                                row?.purchaseOrder.itemName,
+                                            quantity:
+                                                row?.purchaseOrder.quantity,
+                                            receivedQuantity:
+                                                row?.purchaseOrder
+                                                    .receivedQuantity,
+                                            companyId: row?.companyId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Generate GRN
+                            </button>
+                        )}
                         <button
                             onClick={() => {
                                 dispatch(setFilterValue([row?.poCode]))

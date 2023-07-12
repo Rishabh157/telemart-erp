@@ -68,6 +68,13 @@ const ATMTextField = ({
     ...rest
 }: ATMTextFieldPropTypes) => {
     const [visibility, setVisibility] = useState(type)
+    function preventSlash(event: any) {
+        var key = event.keyCode || event.which
+        if (key === 47) {
+            // 47 is the key code for "/"
+            event.preventDefault()
+        }
+    }
     return (
         <div className={twMerge('relative mt-3', `${extraClassField}`)}>
             <div
@@ -110,6 +117,7 @@ const ATMTextField = ({
                     value={value}
                     disabled={disabled}
                     onChange={(e) => {
+                        preventSlash(e)
                         onChange(e)
                     }}
                     className={`${getInputHeight(
@@ -148,8 +156,7 @@ const ATMTextField = ({
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500 py-1 mb-1">
-                            {' '}
-                            {errMsg}{' '}
+                            {errMsg}
                         </p>
                     )}
                 </ErrorMessage>

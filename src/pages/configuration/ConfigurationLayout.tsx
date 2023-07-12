@@ -20,7 +20,6 @@ import { MdOutlineCategory } from 'react-icons/md'
 import { BsBox, BsBoxes, BsBoxSeam } from 'react-icons/bs'
 import { TbAppsFilled } from 'react-icons/tb'
 import { FaObjectGroup } from 'react-icons/fa'
-import { HiOutlineReceiptTax } from 'react-icons/hi'
 import { CgOrganisation } from 'react-icons/cg'
 import { CiBarcode, CiFaceSmile, CiLocationOn } from 'react-icons/ci'
 import { TbBinaryTree2 } from 'react-icons/tb'
@@ -77,11 +76,11 @@ const configurationNavigation: NavItemType[] = [
         icon: BsBoxSeam,
         path: '/configurations/carton-box',
     },
-    {
-        label: 'Taxes',
-        icon: HiOutlineReceiptTax,
-        path: '/configurations/taxes',
-    },
+    // {
+    //     label: 'Taxes',
+    //     icon: HiOutlineReceiptTax,
+    //     path: '/configurations/taxes',
+    // },
     {
         label: 'Company',
         icon: CgOrganisation,

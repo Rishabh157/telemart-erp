@@ -13,10 +13,14 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { GRNListResponse } from 'src/models'
+import GRNListing from 'src/pages/grn/list/GRNListing'
 
 // |-- Types --|'
 type Props = {
     items: any
+    grnitems: any
 }
 
 // Breadcrumbs
@@ -30,7 +34,48 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const ViewPurchaseOrder = ({ items }: Props) => {
+const GRNColumns: columnTypes[] = [
+    {
+        field: 'poCode',
+        headerName: 'PO Code',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: GRNListResponse) => <span> {row.poCode} </span>,
+    },
+    {
+        field: 'itemName',
+        headerName: 'Item Name',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: GRNListResponse) => {
+            return <span> {row?.itemName} </span>
+        },
+    },
+    {
+        field: 'receivingQuantity',
+        headerName: 'Received Qnty.',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: GRNListResponse) => {
+            return <span> {row?.receivedQuantity} </span>
+        },
+    },
+    {
+        field: 'goodQuantity',
+        headerName: 'Good Qnty.',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: GRNListResponse) => {
+            return <span> {row.goodQuantity} </span>
+        },
+    },
+    {
+        field: 'defectiveQuantity',
+        headerName: 'Defective Qnty.',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: GRNListResponse) => {
+            return <span> {row.defectiveQuantity} </span>
+        },
+    },
+]
+
+const ViewPurchaseOrder = ({ items, grnitems }: Props) => {
     return (
         <div className=" px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
@@ -159,6 +204,18 @@ const ViewPurchaseOrder = ({ items }: Props) => {
                                 <p className="text-slate-600">{item?.time}</p>
                             </div>
                         ))}
+                    </div>
+
+                    <div className="px-3">
+                        <div className=" text-lg pb-2 font-medium text-primary-main">
+                            GRN Details
+                        </div>
+                    </div>
+                    {/*Table Header */}
+                    <div className="flex flex-col gap-y-5">
+                        <div className=" h-[80%]  ">
+                            <GRNListing columns={GRNColumns} rows={grnitems} />
+                        </div>
                     </div>
                 </div>
             </div>

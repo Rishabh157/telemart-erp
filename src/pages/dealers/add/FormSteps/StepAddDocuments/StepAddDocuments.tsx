@@ -187,7 +187,10 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                             )
                                                         })
                                                     }}
-                                                    selectedFile={values[name]}
+                                                    selectedFile={
+                                                        values[name] ||
+                                                        'http://192.168.1.55:3009/api/public/uploads/IMAGE/fileUrl-4d6f7af9-f127-47f0-b360-6bb4bdbcdbcd.jpeg'
+                                                    }
                                                     isSubmitting={isSubmitting}
                                                 />
                                                 {loaderState === name &&

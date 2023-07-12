@@ -22,13 +22,20 @@ import ConfigurationLayout from '../../ConfigurationLayout'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
+import { GetHierarchByDeptProps } from 'src/utils/GetHierarchyByDept'
 
 const StyledNode = ({
     children,
     extraClasses,
+    isMenu=true,
+    dept='',
+    userRole=''
 }: {
     children: ReactNode
     extraClasses?: string
+    isMenu?:boolean
+    dept?:string
+    userRole?:string
 }) => {
     const navigate = useNavigate()
     return (
@@ -39,17 +46,17 @@ const StyledNode = ({
         >
             <div className="flex justify-between gap-3 items-center">
                 <div className="px-4">{children}</div>
-                <ATMMenu
+               {isMenu&& <ATMMenu
                     orientation="vertical"
                     options={[
                         {
                             label: 'Add Policy',
                             onClick: () => {
-                                navigate('/user-access')
+                                navigate(`/configurations/user-access?dept=${dept}&userRole=${userRole}`)
                             },
                         },
                     ]}
-                />
+                />}
             </div>
         </button>
     )
@@ -79,21 +86,21 @@ const OrganisationHierarchy = () => {
                         lineHeight={'40px'}
                         lineColor={'#bbbbcc'}
                         lineBorderRadius={'10px'}
-                        label={<StyledNode extraClasses=" ">Root</StyledNode>}
+                        label={<StyledNode extraClasses=" " isMenu={false} >Root</StyledNode>}
                         // nodePadding={'50px'} // Set the padding between nodes
                         // direction={'horizontal'} // Set the direction to horizontal
                     >
                         {/*  Sales */}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode isMenu={false} dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-bold  font-sans">
                                     Sales Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode userRole='SALE_AVP'  dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                         AVP
                                     </StyledNode>
                                 }
@@ -171,42 +178,43 @@ const OrganisationHierarchy = () => {
                         {/*  HR */}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode extraClasses="text-sm font-bold  font-sans"
+                                dept={GetHierarchByDeptProps.HR_DEPARTMENT}>
                                     HR Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                         AVM
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                             AGM, HR & Statutory Compliance
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                 Asst. Manager,HR
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                     Sr. Executive,HR
                                                 </StyledNode>
                                             }
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                         Executive,HR
                                                     </StyledNode>
                                                 }

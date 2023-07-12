@@ -94,7 +94,7 @@ const OutwardCustomerTabs = ({ columns, rows }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    isFilter
+                    // isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
 

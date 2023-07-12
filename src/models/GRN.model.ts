@@ -8,6 +8,7 @@
 // |-- Types --|
 export type GRNListResponse = {
     poCode: string
+    itemName: string
     itemId: string
     receivedQuantity: number
     goodQuantity: number
@@ -36,7 +37,7 @@ export type UpdateGRN = {
         itemName: string
         defectiveQuantity: number
         goodQuantity: number
-        recievedQuantity: number
+        receivedQuantity: number
         companyId: string
     }
     id: string

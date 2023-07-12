@@ -225,6 +225,7 @@ import OutwardCustomerTabsListingWrapper from './pages/inventories/outward/Custo
 import InwardsTabs from './pages/inventories/inward'
 import InwardDealerTabsListingWrapper from './pages/inventories/inward/Dealer/InwardDealerTabsListingWrapper'
 import InwardCustomerTabsListingWrapper from './pages/inventories/inward/Customer/InwardCustomerTabsListingWrapper'
+import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -372,6 +373,10 @@ const PageRoutes = () => {
                     <Route
                         path="/dealers"
                         element={<DealersListingWrapper />}
+                    />
+                    <Route
+                        path="/dealers-ratio"
+                        element={<DealersRatioListingWrapper />}
                     />
                     <Route
                         path="/dealers/add-dealer"
@@ -1149,7 +1154,7 @@ const PageRoutes = () => {
                         path="/inquiry/view/:id"
                         element={<InquiryViewWrapper />}
                     />
-                    <Route path="user-access" element={<UserAccessWrapper />} />
+                    <Route path="configurations/user-access" element={<UserAccessWrapper />} />
                 </Routes>
             </BrowserRouter>
         </>

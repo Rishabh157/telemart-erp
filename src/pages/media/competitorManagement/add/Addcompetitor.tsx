@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:AddCompitor.tsx
 // Type: Add Component
-// Last Updated: JULY 03, 2023
+// Last Updated: JULY 10, 2023
 // Project: TELIMART - Front End
 // ==============================================
 

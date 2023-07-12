@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -33,6 +34,8 @@ type Props = {
 }
 
 const GRNListing = ({ columns, rows }: Props) => {
+    const location = useLocation()
+    const route: boolean = location?.pathname?.split('/')[1] === 'grn' || false
     const [selectedRows, setSelectedRows] = useState([])
 
     const dispatch = useDispatch<AppDispatch>()
@@ -43,7 +46,11 @@ const GRNListing = ({ columns, rows }: Props) => {
         grnState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)]  ">
+        <div
+            className={`px-4 ${
+                route ? ' h-[calc(100vh-55px)]' : 'h-[calc(50%)] pb-2'
+            } `}
+        >
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> GRN (Goods Received Note) </ATMPageHeading>

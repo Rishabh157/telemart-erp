@@ -34,13 +34,13 @@ export type FormInitialValues = {
 
 const AddGRNWrapper = (props: Props) => {
     const navigate = useNavigate()
-
     const [addGRN] = useAddGRNMutation()
     const { state } = useLocation()
     const { poCode, companyId, itemId } = state
 
     //const { userData } = useSelector((state: RootState) => state?.auth);
     const [apiStatus, setApiStatus] = useState(false)
+
     // const { state } = useLocation()
     // const { poCode, itemName, quantity } = state
     // Form Initial Values

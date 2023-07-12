@@ -6,181 +6,55 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react' //  { useState, useEffect } // ,
+import { useLocation, useNavigate } from 'react-router-dom'
+import queryString from 'query-string'
+import ConfigurationLayout from '../configuration/ConfigurationLayout'
 
 // |-- External Dependencies --|
-import { Formik } from 'formik'
-import { array, date, number, object, string } from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import moment from 'moment'
 
 // |-- Internal Dependencies --|
 import UserAccess from './UserAcess'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { useAddPurchaseOrderMutation } from 'src/services/PurchaseOrderService'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    useAddUserAccessMutation,
+    useGetUserAccessQuery,
+} from 'src/services/useraccess/UserAccessServices'
+import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
-import { useGetVendorsQuery } from 'src/services/VendorServices'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
-import { useGetAllItemsQuery } from 'src/services/ItemService'
-
-// |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/vendorSlice'
-import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
-import { setAllItems as setAllItem } from 'src/redux/slices/itemSlice'
-
-// |-- Types --|
-type Props = {}
-
-export type FormInitialValues = {
-    poCode: string
-    vendorId: string
-    wareHouseId: string
-    isEditable: boolean
-    purchaseOrder: {
-        itemId: string
-        rate: number
-        quantity: number
-        estReceivingDate: string
-    }[]
-}
-
-// export type DropdownOptions = {
-// vendorOptions : SelectOption[]
-// warehouseOptions : SelectOption[]
-// itemOptions : SelectOption[]
-// }
-
-const UserAccessWrapper = (props: Props) => {
+import { setUserAccess } from 'src/redux/slices/access/userAcessSlice'
+const UserAccessWrapper = () => {
+    const [apiStatus, setApiStatus] = useState(false)
+    const location = useLocation()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
-    const disptach = useDispatch<AppDispatch>()
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const [addPurchaseOrder] = useAddPurchaseOrderMutation()
-    const {
-        data: vendorData,
-        isLoading: vendorIsLoading,
-        isFetching: VendorIsFetching,
-    } = useGetVendorsQuery(userData?.companyId)
-    const { allItems }: any = useSelector((state: RootState) => state.vendor)
+    const param = queryString.parse(location.search)
+    const { dept, userRole } = param
 
-    const {
-        data: warehouseData,
-        isLoading: warehouseIsLoading,
-        isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery(userData?.companyId)
-    const { allItems: warehouseItems }: any = useSelector(
-        (state: RootState) => state?.warehouse
-    )
-    const {
-        data: itemsData,
-        isLoading: itemsIsLoading,
-        isFetching: itemsIsFetching,
-    } = useGetAllItemsQuery(userData?.companyId)
-    const { allItems: itemsList }: any = useSelector(
-        (state: RootState) => state.item
+    const [addUserAccess] = useAddUserAccessMutation()
+    const { data, isLoading, isFetching } = useGetUserAccessQuery({userRole:userRole as string},{
+        skip:!userRole
+    })
+    const { userAccessItems } = useSelector(
+        (state: RootState) => state.userAccess
     )
 
-    const vendorOptions = allItems?.map((ele: any) => {
-        return {
-            label: ele.companyName,
-            value: ele._id,
-        }
-    })
-
-    const warehouseOptions = warehouseItems?.map((ele: any) => {
-        return {
-            label: ele.wareHouseName,
-            value: ele._id,
-        }
-    })
-
-    const itemOptions = itemsList?.map((ele: any) => {
-        return {
-            label: ele.itemName,
-            value: ele._id,
-        }
-    })
-
-    //vendor
-    useEffect(() => {
-        disptach(setAllItems(vendorData?.data))
-    }, [vendorData, vendorIsLoading, VendorIsFetching, disptach])
-
-    //warehouse
-    useEffect(() => {
-        disptach(setAllWareHouse(warehouseData?.data))
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, disptach])
-
-    useEffect(() => {
-        disptach(setAllItem(itemsData?.data))
-    }, [itemsData, disptach, itemsIsLoading, itemsIsFetching])
-    //itemOption
-
-    // Form Initial Values
-    const initialValues: FormInitialValues = {
-        poCode: '',
-        vendorId: '',
-        wareHouseId: '',
-        isEditable: true,
-        purchaseOrder: [
-            {
-                itemId: '',
-                rate: 0,
-                quantity: 0,
-                estReceivingDate: '',
-            },
-        ],
-    }
-
-    // Form Validation Schema
-    const validationSchema = object({
-        poCode: string().required('Purchase order code is required'),
-        vendorId: string().required('Please select a vendor'),
-        wareHouseId: string().required('Please select a warehouse'),
-        purchaseOrder: array().of(
-            object().shape({
-                itemId: string().required('Please select a Item'),
-                rate: number()
-                    .min(1, 'Rate must be greater than 0')
-                    .required('Please enter rate'),
-                quantity: number()
-                    .min(1, 'Quantity must be greater than 0')
-                    .required('Please enter quantity'),
-                estReceivingDate: date().required('Please select date'),
-            })
-        ),
-    })
-
-    //    Form Submit Handler
-    const onSubmitHandler = (values: FormInitialValues) => {
+    const handleUserAccessSubmit = () => {
         setApiStatus(true)
-        const purchaseOrder = values.purchaseOrder.map((ele: any) => {
-            return {
-                ...ele,
-                estReceivingDate: moment(ele.estReceivingDate).format(
-                    'YYYY/MM/D'
-                ),
-            }
-        })
-
         setTimeout(() => {
-            addPurchaseOrder({
-                poCode: values.poCode,
-                vendorId: values.vendorId,
-                wareHouseId: values.wareHouseId,
-                isEditable: values.isEditable,
-                purchaseOrder: purchaseOrder,
-                companyId: userData?.companyId || '',
-            }).then((res: any) => {
+            addUserAccess({
+                departmentId: dept,
+                departmentName: dept,
+                userRoleId: userRole,
+                userRoleName: userRole || '',
+                module: [...userAccessItems.modules],
+            }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'purchase-order added successfully!'
+                        showToast('success', 'User Access successfully!')
+                        navigate(
+                            `/configurations/user-access?dept=${dept}&userRole=${userRole}`
                         )
-                        navigate('/purchase-order')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -192,32 +66,23 @@ const UserAccessWrapper = (props: Props) => {
         }, 1000)
     }
 
-    // const dropdownOptions : DropdownOptions = {
-    //   vendorOptions,
-    //   warehouseOptions,
-    //   itemOptions,
-    // }
+    useEffect(() => {
+        if (!isLoading && !isFetching && data) {
+            console.log(data?.data)
+            dispatch(setUserAccess(data?.data[1].module))
+        }
+        // eslint-disable-next-line
+    }, [data, isLoading, isFetching])
 
     return (
-        <SideNavLayout>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <UserAccess
-                            formikProps={formikProps}
-                            vendorOptions={vendorOptions}
-                            warehouseOptions={warehouseOptions}
-                            itemOptions={itemOptions}
-                            apiStatus={apiStatus}
-                        />
-                    )
-                }}
-            </Formik>
-        </SideNavLayout>
+        <ConfigurationLayout>
+            <UserAccess
+                department={(dept as string) || ''}
+                userRole={(userRole as string) || ''}
+                handleUserAccessSubmit={handleUserAccessSubmit}
+                apiStatus={apiStatus}
+            />
+        </ConfigurationLayout>
     )
 }
 export default UserAccessWrapper

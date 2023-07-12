@@ -41,6 +41,22 @@ export const grnApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** get Grn With PoCODE *****/
+        getGRNByPOCode: builder.query({
+            providesTags: ['GRN-Pocode'],
+            query: ({
+                pocode,
+                itemId,
+            }: {
+                pocode: string
+                itemId: string
+            }) => ({
+                url: `/grn/pocode`,
+                params: { pocode: pocode, itemid: itemId },
+                method: 'GET',
+            }),
+        }),
     }),
 })
 
@@ -48,4 +64,5 @@ export const {
     useAddGRNMutation,
     useUpdateGRNMutation,
     useGetPaginationGRNQuery,
+    useGetGRNByPOCodeQuery,
 } = grnApi
