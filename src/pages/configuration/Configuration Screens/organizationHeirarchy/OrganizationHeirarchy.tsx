@@ -52,7 +52,10 @@ const StyledNode = ({
                         {
                             label: 'Add Policy',
                             onClick: () => {
-                                navigate(`/configurations/user-access?dept=${dept}&userRole=${userRole}`)
+                                navigate(`/configurations/user-access`,{state:{
+                                    dept:dept,
+                                    userRole:userRole
+                                }})
                             },
                         },
                     ]}
@@ -107,28 +110,28 @@ const OrganisationHierarchy = () => {
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode userRole='SALE_AGM_SALES'  dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                             AGM Sales
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode userRole='MANAGER_SALES_CENTER'  dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                 Manager, Sales Center
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode userRole='ASST_MANAGER_SALES_CENTER'  dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                     Asst. Manager, Sales Center
                                                 </StyledNode>
                                             }
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode userRole='SR_TEAM_LEADER_OR_SR_EXECUTIVE_MIS'  dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                         Sr. Team
                                                         Leader/Sr.Executive, MIS
                                                     </StyledNode>
@@ -136,7 +139,7 @@ const OrganisationHierarchy = () => {
                                             >
                                                 <TreeNode
                                                     label={
-                                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                        <StyledNode userRole='TEAM_LEADER_OR_EXECUTIVE_SALES_CENTER'  dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                             Team Leader/
                                                             Executive, MIS
                                                         </StyledNode>
@@ -144,7 +147,7 @@ const OrganisationHierarchy = () => {
                                                 >
                                                     <TreeNode
                                                         label={
-                                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                            <StyledNode userRole='SR_EXECUTIVE_SALES_CENTER'  dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                                 Sr. Executive,
                                                                 Sales Center
                                                             </StyledNode>
@@ -152,7 +155,7 @@ const OrganisationHierarchy = () => {
                                                     >
                                                         <TreeNode
                                                             label={
-                                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                <StyledNode userRole='EXECUTIVE_TRAINEE'  dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                                     Executive,
                                                                     Sales Center
                                                                 </StyledNode>
@@ -160,7 +163,7 @@ const OrganisationHierarchy = () => {
                                                         >
                                                             <TreeNode
                                                                 label={
-                                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                    <StyledNode userRole='SALE_AVP'  dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                                         Executive,Trainee
                                                                     </StyledNode>
                                                                 }
@@ -186,35 +189,35 @@ const OrganisationHierarchy = () => {
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode userRole='EXECUTIVE_TRAINEE'  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                         AVM
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode userRole='EXECUTIVE_TRAINEE'  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                             AGM, HR & Statutory Compliance
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode userRole='EXECUTIVE_TRAINEE'  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                 Asst. Manager,HR
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode userRole='EXECUTIVE_TRAINEE'  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                     Sr. Executive,HR
                                                 </StyledNode>
                                             }
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode userRole='EXECUTIVE_TRAINEE'  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
                                                         Executive,HR
                                                     </StyledNode>
                                                 }

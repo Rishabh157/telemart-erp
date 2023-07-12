@@ -8,7 +8,6 @@
         {
             "moduleId": "vendorId",
             "moduleName": "vendores",
-            "moduleRoute": "/vendors",
             "moduleAction": [
                 {
                     "actionId": "vendoreActionAdd",
@@ -39,7 +38,6 @@
         {
             "moduleId": "dealerId",
             "moduleName": "Dealers",
-            "moduleRoute": "/dealer",
             "moduleAction": [
                 {
                     "actionId": "dealerActionAdd",
@@ -70,7 +68,6 @@
         {
             "moduleId": "usersId",
             "moduleName": "users",
-            "moduleRoute": "/users",
             "moduleAction": [
                 {
                     "actionId": "userActionAdd",
@@ -101,7 +98,6 @@
         {
             "moduleId": "warehouseId",
             "moduleName": "warehouses",
-            "moduleRoute": "/warehouse",
             "moduleAction": [
                 {
                     "actionId": "warehouseActionAdd",
@@ -132,7 +128,6 @@
         {
             "moduleId": "saleOrderId",
             "moduleName": "saleOrder",
-            "moduleRoute": "/sale-order",
             "moduleAction": [
                 {
                     "actionId": "saleOrderActionAdd",
@@ -163,7 +158,6 @@
         {
             "moduleId": "asrId",
             "moduleName": "asr",
-            "moduleRoute": "/asr",
             "moduleAction": [
                 {
                     "actionId": "asrActionAdd",
@@ -194,7 +188,6 @@
         {
             "moduleId": "purchaseOrderId",
             "moduleName": "purchaseOrder",
-            "moduleRoute": "/purchase-order",
             "moduleAction": [
                 {
                     "actionId": "purchaseOrderActionAdd",
@@ -225,7 +218,6 @@
         {
             "moduleId": "grnId",
             "moduleName": "grn",
-            "moduleRoute": "/grn",
             "moduleAction": [
                 {
                     "actionId": "grnActionAdd",
@@ -256,7 +248,6 @@
         {
             "moduleId": "inquiryId",
             "moduleName": "inquiry",
-            "moduleRoute": "/inquiry",
             "moduleAction": [
                 {
                     "actionId": "inquiryActionAdd",
@@ -287,7 +278,6 @@
         {
             "moduleId": "ordersId",
             "moduleName": "orders",
-            "moduleRoute": "/orders",
             "moduleAction": [
                 {
                     "actionId": "ordersActionAdd",
@@ -324,7 +314,6 @@
         {
             "moduleId": "callId",
             "moduleName": "call",
-            "moduleRoute": "/call",
             "moduleAction": [
                 {
                     "actionId": "callActionAdd",
@@ -355,7 +344,6 @@
         {
             "moduleId": "AttributesId",
             "moduleName": "Attributes",
-            "moduleRoute": "/configurations/attributes",
             "moduleAction": [
                 {
                     "actionId": "AttributesActionAdd",
@@ -386,7 +374,6 @@
         {
             "moduleId": "attributesGroupId",
             "moduleName": "attributesGroup",
-            "moduleRoute": "/configurations/attributes-group",
             "moduleAction": [
                 {
                     "actionId": "attributesGroupActionAdd",
@@ -417,7 +404,6 @@
         {
             "moduleId": "productCategoryId",
             "moduleName": "productCategory",
-            "moduleRoute": "/configurations/product-category",
             "moduleAction": [
                 {
                     "actionId": "productCategoryActionAdd",
@@ -448,7 +434,6 @@
         {
             "moduleId": "productSubCategoryId",
             "moduleName": "productSubCategory",
-            "moduleRoute": "/configurations/product-category",
             "moduleAction": [
                 {
                     "actionId": "productSubCategoryActionAdd",
@@ -479,7 +464,6 @@
         {
             "moduleId": "productGroupId",
             "moduleName": "productGroup",
-            "moduleRoute": "/configurations/product-group",
             "moduleAction": [
                 {
                     "actionId": "productGroupActionAdd",
@@ -510,7 +494,6 @@
         {
             "moduleId": "schemeId",
             "moduleName": "scheme",
-            "moduleRoute": "/configurations/scheme",
             "moduleAction": [
                 {
                     "actionId": "schemeActionAdd",
@@ -541,7 +524,6 @@
         {
             "moduleId": "itemId",
             "moduleName": "item",
-            "moduleRoute": "/configurations/item",
             "moduleAction": [
                 {
                     "actionId": "itemActionAdd",
@@ -572,7 +554,6 @@
         {
             "moduleId": "productsId",
             "moduleName": "products",
-            "moduleRoute": "/configurations/products",
             "moduleAction": [
                 {
                     "actionId": "productsActionAdd",
@@ -603,7 +584,6 @@
         {
             "moduleId": "cartonBoxId",
             "moduleName": "cartonBox",
-            "moduleRoute": "/configurations/carton-box",
             "moduleAction": [
                 {
                     "actionId": "cartonBoxActionAdd",
@@ -634,7 +614,6 @@
         {
             "moduleId": "taxesId",
             "moduleName": "taxes",
-            "moduleRoute": "/configurations/taxes",
             "moduleAction": [
                 {
                     "actionId": "taxesActionAdd",
@@ -665,7 +644,6 @@
         {
             "moduleId": "companyId",
             "moduleName": "company",
-            "moduleRoute": "/configurations/company",
             "moduleAction": [
                 {
                     "actionId": "companyActionAdd",
@@ -696,7 +674,6 @@
         {
             "moduleId": "barcodeId",
             "moduleName": "barcode",
-            "moduleRoute": "/configurations/barcode",
             "moduleAction": [
                 {
                     "actionId": "barcodeActionAdd",
@@ -727,7 +704,6 @@
         {
             "moduleId": "locationId",
             "moduleName": "location",
-            "moduleRoute": "/configurations/location",
             "moduleAction": [
                 {
                     "actionId": "locationActionAdd",
@@ -758,7 +734,6 @@
         {
             "moduleId": "languageId",
             "moduleName": "language",
-            "moduleRoute": "/configurations/language",
             "moduleAction": [
                 {
                     "actionId": "languageActionAdd",
@@ -789,7 +764,6 @@
         {
             "moduleId": "dealersCategoryId",
             "moduleName": "dealersCategory",
-            "moduleRoute": "/configurations/dealers-category",
             "moduleAction": [
                 {
                     "actionId": "dealersCategoryActionAdd",
@@ -820,7 +794,6 @@
         {
             "moduleId": "hierarchyId",
             "moduleName": "hierarchy",
-            "moduleRoute": "/configurations/hierarchy",
             "moduleAction": [
                 {
                     "actionId": "hierarchyActionAdd",
@@ -851,7 +824,6 @@
         {
             "moduleId": "channelGroupId",
             "moduleName": "channelGroup",
-            "moduleRoute": "/media/channel-group",
             "moduleAction": [
                 {
                     "actionId": "channelGroupActionAdd",
@@ -882,7 +854,6 @@
         {
             "moduleId": "channelCategoryId",
             "moduleName": "channelCategory",
-            "moduleRoute": "/media/channel-category",
             "moduleAction": [
                 {
                     "actionId": "channelCategoryActionAdd",
@@ -913,7 +884,6 @@
         {
             "moduleId": "channelId",
             "moduleName": "channel",
-            "moduleRoute": "/media/channel",
             "moduleAction": [
                 {
                     "actionId": "channelActionAdd",
@@ -944,7 +914,6 @@
         {
             "moduleId": "didId",
             "moduleName": "did",
-            "moduleRoute": "/media/did",
             "moduleAction": [
                 {
                     "actionId": "didActionAdd",
@@ -975,7 +944,6 @@
         {
             "moduleId": "artistId",
             "moduleName": "artist",
-            "moduleRoute": "/media/artist",
             "moduleAction": [
                 {
                     "actionId": "artistActionAdd",
@@ -1006,7 +974,6 @@
         {
             "moduleId": "tapeId",
             "moduleName": "tape",
-            "moduleRoute": "/media/tape",
             "moduleAction": [
                 {
                     "actionId": "tapeActionAdd",
@@ -1037,7 +1004,6 @@
         {
             "moduleId": "competitorId",
             "moduleName": "competitor",
-            "moduleRoute": "/media/competitor",
             "moduleAction": [
                 {
                     "actionId": "competitorActionAdd",
@@ -1068,7 +1034,6 @@
         {
             "moduleId": "slotId",
             "moduleName": "slot",
-            "moduleRoute": "/media/slot",
             "moduleAction": [
                 {
                     "actionId": "slotActionAdd",
@@ -1099,7 +1064,6 @@
         {
             "moduleId": "callerPageId",
             "moduleName": "callerPage",
-            "moduleRoute": "/media/caller-page",
             "moduleAction": [
                 {
                     "actionId": "callerPageActionAdd",
@@ -1130,7 +1094,6 @@
         {
             "moduleId": "callerPageId",
             "moduleName": "callerPage",
-            "moduleRoute": "/media/caller-page",
             "moduleAction": [
                 {
                     "actionId": "callerPageActionAdd",
@@ -1161,7 +1124,6 @@
         {
             "moduleId": "assetsManagementId",
             "moduleName": "assetsManagement",
-            "moduleRoute": "/assets/assets-management",
             "moduleAction": [
                 {
                     "actionId": "assetsManagementActionAdd",
@@ -1192,7 +1154,6 @@
         {
             "moduleId": "assetsCategoryId",
             "moduleName": "assetsCategory",
-            "moduleRoute": "/assets/assets-management",
             "moduleAction": [
                 {
                     "actionId": "assetsCategoryActionAdd",
@@ -1223,7 +1184,6 @@
         {
             "moduleId": "assetsLocationId",
             "moduleName": "assetsLocation",
-            "moduleRoute": "/assets/assets-location",
             "moduleAction": [
                 {
                     "actionId": "assetsLocationActionAdd",
@@ -1254,7 +1214,6 @@
         {
             "moduleId": "assetsRelocationId",
             "moduleName": "assetsRelocation",
-            "moduleRoute": "/assets/assets-relocation",
             "moduleAction": [
                 {
                     "actionId": "assetsRelocationActionAdd",
@@ -1285,7 +1244,6 @@
         {
             "moduleId": "assetsAllocationId",
             "moduleName": "assetsAllocation",
-            "moduleRoute": "/assets/assets-allocation",
             "moduleAction": [
                 {
                     "actionId": "assetsAllocationActionAdd",
@@ -1316,7 +1274,6 @@
         {
             "moduleId": "dispositionOneId",
             "moduleName": "dispositionOne",
-            "moduleRoute": "/dispositions/disposition-one",
             "moduleAction": [
                 {
                     "actionId": "dispositionOneActionAdd",
@@ -1347,7 +1304,6 @@
         {
             "moduleId": "dispositionTwoId",
             "moduleName": "dispositionTwo",
-            "moduleRoute": "/dispositions/disposition-two",
             "moduleAction": [
                 {
                     "actionId": "dispositionTwoActionAdd",
@@ -1378,7 +1334,6 @@
         {
             "moduleId": "dispositionThreeId",
             "moduleName": "dispositionThree",
-            "moduleRoute": "/dispositions/disposition-three",
             "moduleAction": [
                 {
                     "actionId": "dispositionThreeActionAdd",
@@ -1409,7 +1364,6 @@
         {
             "moduleId": "initialcallOneId",
             "moduleName": "initialcallOne",
-            "moduleRoute": "/dispositions/initialcall-one",
             "moduleAction": [
                 {
                     "actionId": "initialcallOneActionAdd",
@@ -1440,7 +1394,6 @@
         {
             "moduleId": "initialcallTwoId",
             "moduleName": "initialcallTwo",
-            "moduleRoute": "/dispositions/initialcall-two",
             "moduleAction": [
                 {
                     "actionId": "initialcallTwoActionAdd",
@@ -1471,7 +1424,6 @@
         {
             "moduleId": "initialcallThreeId",
             "moduleName": "initialcallThree",
-            "moduleRoute": "/dispositions/initialcall-three",
             "moduleAction": [
                 {
                     "actionId": "initialcallThreeActionAdd",
@@ -1502,7 +1454,6 @@
         {
             "moduleId": "dispositionComplaintId",
             "moduleName": "dispositionComplaint",
-            "moduleRoute": "/dispositions/disposition-complaint",
             "moduleAction": [
                 {
                     "actionId": "dispositionComplaintActionAdd",
@@ -1533,7 +1484,6 @@
         {
             "moduleId": "websiteId",
             "moduleName": "website",
-            "moduleRoute": "/all-websites/website",
             "moduleAction": [
                 {
                     "actionId": "websiteActionAdd",
@@ -1564,7 +1514,6 @@
         {
             "moduleId": "websiteBlogId",
             "moduleName": "websiteBlog",
-            "moduleRoute": "/all-websites/website-blog",
             "moduleAction": [
                 {
                     "actionId": "websiteBlogActionAdd",
@@ -1595,7 +1544,6 @@
         {
             "moduleId": "websitePageId",
             "moduleName": "websitePage",
-            "moduleRoute": "/all-websites/website-page",
             "moduleAction": [
                 {
                     "actionId": "websitePageActionAdd",
@@ -1626,7 +1574,6 @@
         {
             "moduleId": "websiteTagsId",
             "moduleName": "websiteTags",
-            "moduleRoute": "/all-websites/website-tags",
             "moduleAction": [
                 {
                     "actionId": "websiteTagsActionAdd",

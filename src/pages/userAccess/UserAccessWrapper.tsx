@@ -8,7 +8,7 @@
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react' //  { useState, useEffect } // ,
 import { useLocation, useNavigate } from 'react-router-dom'
-import queryString from 'query-string'
+
 import ConfigurationLayout from '../configuration/ConfigurationLayout'
 
 // |-- External Dependencies --|
@@ -19,22 +19,28 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     useAddUserAccessMutation,
     useGetUserAccessQuery,
+    useUpdateUserAccessMutation,
 } from 'src/services/useraccess/UserAccessServices'
 import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
 import { setUserAccess } from 'src/redux/slices/access/userAcessSlice'
 const UserAccessWrapper = () => {
     const [apiStatus, setApiStatus] = useState(false)
-    const location = useLocation()
+    const { state } = useLocation()
+    const { dept, userRole } = state
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const param = queryString.parse(location.search)
-    const { dept, userRole } = param
+    const [buttonValue, setButtonValue] = useState('save')
+
 
     const [addUserAccess] = useAddUserAccessMutation()
-    const { data, isLoading, isFetching } = useGetUserAccessQuery({userRole:userRole as string},{
-        skip:!userRole
-    })
+    const [updateUserAccess] = useUpdateUserAccessMutation()
+    const { data, isLoading, isFetching } = useGetUserAccessQuery(
+        { userRole: userRole as string },
+        {
+            skip: !userRole,
+        }
+    )
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
@@ -42,35 +48,74 @@ const UserAccessWrapper = () => {
     const handleUserAccessSubmit = () => {
         setApiStatus(true)
         setTimeout(() => {
-            addUserAccess({
-                departmentId: dept,
-                departmentName: dept,
-                userRoleId: userRole,
-                userRoleName: userRole || '',
-                module: [...userAccessItems.modules],
-            }).then((res) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'User Access successfully!')
-                        navigate(
-                            `/configurations/user-access?dept=${dept}&userRole=${userRole}`
-                        )
+            if (buttonValue === 'save') {
+                addUserAccess({
+                    departmentId: dept,
+                    departmentName: dept,
+                    userRoleId: userRole,
+                    userRoleName: userRole || '',
+                    module: [...userAccessItems.modules],
+                }).then((res) => {
+                    if ('data' in res) {
+                        if (res?.data?.status) {
+                            showToast('success', 'User Access successfully!')
+                            navigate(`/configurations/user-access`, {
+                                state: {
+                                    dept: dept,
+                                    userRole: userRole,
+                                },
+                            })
+                        } else {
+                            showToast('error', res?.data?.message)
+                        }
                     } else {
-                        showToast('error', res?.data?.message)
+                        showToast('error', 'Something went wrong')
                     }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-                setApiStatus(false)
-            })
+                    setApiStatus(false)
+                })
+            } else {
+                updateUserAccess({
+                    body: {
+                        departmentId: dept,
+                        departmentName: dept,
+                        userRoleId: userRole,
+                        userRoleName: userRole || '',
+                        module: [...userAccessItems.modules],
+                    },
+                    userRole: userRole,
+                }).then((res) => {
+                    if ('data' in res) {
+                        if (res?.data?.status) {
+                            showToast('success', 'User Access successfully!')
+                            navigate(`/configurations/user-access`, {
+                                state: {
+                                    dept: dept,
+                                    userRole: userRole,
+                                },
+                            })
+                        } else {
+                            showToast('error', res?.data?.message)
+                        }
+                    } else {
+                        showToast('error', 'Something went wrong')
+                    }
+                    setApiStatus(false)
+                })
+            }
         }, 1000)
     }
 
     useEffect(() => {
         if (!isLoading && !isFetching && data) {
-            console.log(data?.data)
-            dispatch(setUserAccess(data?.data[1].module))
+            if (data?.data) {
+                setButtonValue('update')
+                dispatch(setUserAccess(data?.data[0]?.module))
+            } else {
+                setButtonValue('save')
+                dispatch(setUserAccess([]))
+            }
         }
+
         // eslint-disable-next-line
     }, [data, isLoading, isFetching])
 
