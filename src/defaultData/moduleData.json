@@ -7,30 +7,30 @@
     "modules": [
         {
             "moduleId": "vendorId",
-            "moduleName": "vendores",
+            "moduleName": "Vendors",
             "moduleRoute": "/vendors",
             "moduleAction": [
                 {
-                    "actionId": "vendoreActionAdd",
-                    "actionUrl": "/add-vendor",
-                    "actionName": "add",
+                    "actionId": "vendorsActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "vendoreActionEdit",
-                    "actionUrl": "vendoreActionEdit",
+                    "actionId": "vendorsActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "vendoreActionList",
-                    "actionUrl": "vendoreActionList",
+                    "actionId": "vendorsActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "vendoreActionDelete",
-                    "actionUrl": "vendoreActionDelete",
+                    "actionId": "vendorsActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -39,29 +39,29 @@
         {
             "moduleId": "dealerId",
             "moduleName": "Dealers",
-            "moduleRoute": "/dealer",
+            "moduleRoute": "/dealers",
             "moduleAction": [
                 {
-                    "actionId": "dealerActionAdd",
-                    "actionUrl": "dealerActionAdd",
-                    "actionName": "add",
+                    "actionId": "dealerActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "dealerActionEdit",
-                    "actionUrl": "dealerActionEdit",
+                    "actionId": "dealerActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "dealerActionList",
-                    "actionUrl": "dealerActionList",
+                    "actionId": "dealerActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "dealerActionDelete",
-                    "actionUrl": "dealerActionDelete",
+                    "actionId": "dealerActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -69,30 +69,30 @@
         },
         {
             "moduleId": "usersId",
-            "moduleName": "users",
+            "moduleName": "Users",
             "moduleRoute": "/users",
             "moduleAction": [
                 {
-                    "actionId": "userActionAdd",
-                    "actionUrl": "userActionAdd",
-                    "actionName": "add",
+                    "actionId": "userActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "userActionEdit",
-                    "actionUrl": "userActionEdit",
+                    "actionId": "userActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "userActionList",
-                    "actionUrl": "userActionList",
+                    "actionId": "userActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "userActionDelete",
-                    "actionUrl": "userActionDelete",
+                    "actionId": "userActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -100,30 +100,30 @@
         },
         {
             "moduleId": "warehouseId",
-            "moduleName": "warehouses",
+            "moduleName": "Warehouses",
             "moduleRoute": "/warehouse",
             "moduleAction": [
                 {
-                    "actionId": "warehouseActionAdd",
-                    "actionUrl": "warehouseActionAdd",
-                    "actionName": "add",
+                    "actionId": "warehouseActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "warehouseActionEdit",
-                    "actionUrl": "warehouseActionEdit",
+                    "actionId": "warehouseActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "warehouseActionList",
-                    "actionUrl": "warehouseActionList",
+                    "actionId": "warehouseActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "warehouseActionDelete",
-                    "actionUrl": "warehouseActionDelete",
+                    "actionId": "warehouseActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -131,30 +131,30 @@
         },
         {
             "moduleId": "saleOrderId",
-            "moduleName": "saleOrder",
+            "moduleName": "Sale Order",
             "moduleRoute": "/sale-order",
             "moduleAction": [
                 {
-                    "actionId": "saleOrderActionAdd",
-                    "actionUrl": "add-sale-order",
-                    "actionName": "add",
+                    "actionId": "saleOrderActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "saleOrderActionEdit",
-                    "actionUrl": "edit-sale-order",
+                    "actionId": "saleOrderActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "saleOrderActionList",
-                    "actionUrl": "saleOrderActionList",
+                    "actionId": "saleOrderActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "saleOrderActionDelete",
-                    "actionUrl": "saleOrderActionDelete",
+                    "actionId": "saleOrderActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -162,30 +162,30 @@
         },
         {
             "moduleId": "asrId",
-            "moduleName": "asr",
+            "moduleName": "ASR",
             "moduleRoute": "/asr",
             "moduleAction": [
                 {
-                    "actionId": "asrActionAdd",
-                    "actionUrl": "add",
-                    "actionName": "add",
+                    "actionId": "asrActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "asrActionEdit",
-                    "actionUrl": "asr/649170f54867ff021eff7739",
+                    "actionId": "asrActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "asrActionList",
-                    "actionUrl": "asrActionList",
+                    "actionId": "asrActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "asrActionDelete",
-                    "actionUrl": "asrActionDelete",
+                    "actionId": "asrActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -193,30 +193,30 @@
         },
         {
             "moduleId": "purchaseOrderId",
-            "moduleName": "purchaseOrder",
+            "moduleName": "Purchase Order",
             "moduleRoute": "/purchase-order",
             "moduleAction": [
                 {
-                    "actionId": "purchaseOrderActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "purchaseOrderActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "purchaseOrderActionEdit",
-                    "actionUrl": "purchaseOrder/649170f54867ff021eff7739",
+                    "actionId": "purchaseOrderActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "purchaseOrderActionList",
-                    "actionUrl": "purchaseOrderActionList",
+                    "actionId": "purchaseOrderActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "purchaseOrderActionDelete",
-                    "actionUrl": "purchaseOrderActionDelete",
+                    "actionId": "purchaseOrderActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -224,30 +224,30 @@
         },
         {
             "moduleId": "grnId",
-            "moduleName": "grn",
+            "moduleName": "Grn",
             "moduleRoute": "/grn",
             "moduleAction": [
                 {
-                    "actionId": "grnActionAdd",
-                    "actionUrl": "add",
-                    "actionName": "add",
+                    "actionId": "grnActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "grnActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "grnActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "grnActionList",
-                    "actionUrl": "grnActionList",
+                    "actionId": "grnActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "grnActionDelete",
-                    "actionUrl": "grnActionDelete",
+                    "actionId": "grnActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -255,30 +255,30 @@
         },
         {
             "moduleId": "inquiryId",
-            "moduleName": "inquiry",
+            "moduleName": "Inquiry",
             "moduleRoute": "/inquiry",
             "moduleAction": [
                 {
-                    "actionId": "inquiryActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "inquiryActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "inquiryActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "inquiryActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "inquiryActionList",
-                    "actionUrl": "inquiryActionList",
+                    "actionId": "inquiryActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "inquiryActionDelete",
-                    "actionUrl": "inquiryActionDelete",
+                    "actionId": "inquiryActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -286,36 +286,36 @@
         },
         {
             "moduleId": "ordersId",
-            "moduleName": "orders",
+            "moduleName": "Orders",
             "moduleRoute": "/orders",
             "moduleAction": [
                 {
-                    "actionId": "ordersActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "ordersActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "ordersActionView",
-                    "actionUrl": "/view",
-                    "actionName": "view",
+                    "actionId": "ordersActionViewId",
+                    "actionUrl": "",
+                    "actionName": "View",
                     "fields": []
                 },
                 {
-                    "actionId": "ordersActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "ordersActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "ordersActionList",
-                    "actionUrl": "ordersActionList",
+                    "actionId": "ordersActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "ordersActionDelete",
-                    "actionUrl": "ordersActionDelete",
+                    "actionId": "ordersActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -323,30 +323,30 @@
         },
         {
             "moduleId": "callId",
-            "moduleName": "call",
+            "moduleName": "Call",
             "moduleRoute": "/call",
             "moduleAction": [
                 {
-                    "actionId": "callActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "callActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "callActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "callActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "callActionList",
-                    "actionUrl": "callActionList",
+                    "actionId": "callActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "callActionDelete",
-                    "actionUrl": "callActionDelete",
+                    "actionId": "callActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -358,26 +358,26 @@
             "moduleRoute": "/configurations/attributes",
             "moduleAction": [
                 {
-                    "actionId": "AttributesActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "AttributesActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "AttributesActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "AttributesActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "AttributesActionList",
-                    "actionUrl": "AttributesActionList",
+                    "actionId": "AttributesActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "AttributesActionDelete",
-                    "actionUrl": "AttributesActionDelete",
+                    "actionId": "AttributesActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -385,30 +385,30 @@
         },
         {
             "moduleId": "attributesGroupId",
-            "moduleName": "attributesGroup",
+            "moduleName": "Attributes Group",
             "moduleRoute": "/configurations/attributes-group",
             "moduleAction": [
                 {
-                    "actionId": "attributesGroupActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "attributesGroupActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "attributesGroupActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "attributesGroupActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "attributesGroupActionList",
-                    "actionUrl": "attributesGroupActionList",
+                    "actionId": "attributesGroupActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "attributesGroupActionDelete",
-                    "actionUrl": "attributesGroupActionDelete",
+                    "actionId": "attributesGroupActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -416,30 +416,30 @@
         },
         {
             "moduleId": "productCategoryId",
-            "moduleName": "productCategory",
+            "moduleName": "Product Category",
             "moduleRoute": "/configurations/product-category",
             "moduleAction": [
                 {
-                    "actionId": "productCategoryActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "productCategoryActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "productCategoryActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "productCategoryActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "productCategoryActionList",
-                    "actionUrl": "productCategoryActionList",
+                    "actionId": "productCategoryActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "productCategoryActionDelete",
-                    "actionUrl": "productCategoryActionDelete",
+                    "actionId": "productCategoryActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -447,30 +447,30 @@
         },
         {
             "moduleId": "productSubCategoryId",
-            "moduleName": "productSubCategory",
+            "moduleName": "Product Subcategory",
             "moduleRoute": "/configurations/product-category",
             "moduleAction": [
                 {
-                    "actionId": "productSubCategoryActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "productSubCategoryActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "productSubCategoryActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "productSubCategoryActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "productSubCategoryActionList",
-                    "actionUrl": "/productSubCategoryActionList",
+                    "actionId": "productSubCategoryActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "productSubCategoryActionDelete",
-                    "actionUrl": "/productSubCategoryActionDelete",
+                    "actionId": "productSubCategoryActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -478,30 +478,30 @@
         },
         {
             "moduleId": "productGroupId",
-            "moduleName": "productGroup",
+            "moduleName": "Product Group",
             "moduleRoute": "/configurations/product-group",
             "moduleAction": [
                 {
-                    "actionId": "productGroupActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "productGroupActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "productGroupActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "productGroupActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "productGroupActionList",
-                    "actionUrl": "productGroupActionList",
+                    "actionId": "productGroupActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "productGroupActionDelete",
-                    "actionUrl": "productGroupActionDelete",
+                    "actionId": "productGroupActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -509,30 +509,30 @@
         },
         {
             "moduleId": "schemeId",
-            "moduleName": "scheme",
+            "moduleName": "Scheme",
             "moduleRoute": "/configurations/scheme",
             "moduleAction": [
                 {
-                    "actionId": "schemeActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "schemeActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "schemeActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "schemeActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "schemeActionList",
-                    "actionUrl": "schemeActionList",
+                    "actionId": "schemeActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "schemeActionDelete",
-                    "actionUrl": "schemeActionDelete",
+                    "actionId": "schemeActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -540,30 +540,30 @@
         },
         {
             "moduleId": "itemId",
-            "moduleName": "item",
+            "moduleName": "Item",
             "moduleRoute": "/configurations/item",
             "moduleAction": [
                 {
-                    "actionId": "itemActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "itemActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "itemActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "itemActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "itemActionList",
-                    "actionUrl": "itemActionList",
+                    "actionId": "itemActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "itemActionDelete",
-                    "actionUrl": "itemActionDelete",
+                    "actionId": "itemActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -571,30 +571,30 @@
         },
         {
             "moduleId": "productsId",
-            "moduleName": "products",
+            "moduleName": "Products",
             "moduleRoute": "/configurations/products",
             "moduleAction": [
                 {
-                    "actionId": "productsActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "productsActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "productsActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "productsActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "productsActionList",
-                    "actionUrl": "productsActionList",
+                    "actionId": "productsActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "productsActionDelete",
-                    "actionUrl": "productsActionDelete",
+                    "actionId": "productsActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -602,30 +602,30 @@
         },
         {
             "moduleId": "cartonBoxId",
-            "moduleName": "cartonBox",
+            "moduleName": "Carton Box",
             "moduleRoute": "/configurations/carton-box",
             "moduleAction": [
                 {
-                    "actionId": "cartonBoxActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "cartonBoxActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "cartonBoxActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "cartonBoxActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "cartonBoxActionList",
-                    "actionUrl": "cartonBoxActionList",
+                    "actionId": "cartonBoxActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "cartonBoxActionDelete",
-                    "actionUrl": "cartonBoxActionDelete",
+                    "actionId": "cartonBoxActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -633,30 +633,30 @@
         },
         {
             "moduleId": "taxesId",
-            "moduleName": "taxes",
+            "moduleName": "Taxes",
             "moduleRoute": "/configurations/taxes",
             "moduleAction": [
                 {
-                    "actionId": "taxesActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "taxesActionId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "taxesActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "taxesActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "taxesActionList",
-                    "actionUrl": "taxesActionList",
+                    "actionId": "taxesActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "taxesActionDelete",
-                    "actionUrl": "taxesActionDelete",
+                    "actionId": "taxesActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -664,30 +664,30 @@
         },
         {
             "moduleId": "companyId",
-            "moduleName": "company",
+            "moduleName": "Company",
             "moduleRoute": "/configurations/company",
             "moduleAction": [
                 {
-                    "actionId": "companyActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "companyActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "companyActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "companyActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "companyActionList",
-                    "actionUrl": "companyActionList",
+                    "actionId": "companyActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "companyActionDelete",
-                    "actionUrl": "companyActionDelete",
+                    "actionId": "companyActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -695,30 +695,30 @@
         },
         {
             "moduleId": "barcodeId",
-            "moduleName": "barcode",
+            "moduleName": "Barcode",
             "moduleRoute": "/configurations/barcode",
             "moduleAction": [
                 {
-                    "actionId": "barcodeActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "barcodeActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "barcodeActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "barcodeActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "barcodeActionList",
-                    "actionUrl": "barcodeActionList",
+                    "actionId": "barcodeActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "barcodeActionDelete",
-                    "actionUrl": "barcodeActionDelete",
+                    "actionId": "barcodeActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -726,30 +726,30 @@
         },
         {
             "moduleId": "locationId",
-            "moduleName": "location",
+            "moduleName": "Location",
             "moduleRoute": "/configurations/location",
             "moduleAction": [
                 {
-                    "actionId": "locationActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "locationActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "locationActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "locationActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "locationActionList",
-                    "actionUrl": "locationActionList",
+                    "actionId": "locationActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "locationActionDelete",
-                    "actionUrl": "locationActionDelete",
+                    "actionId": "locationActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -757,30 +757,30 @@
         },
         {
             "moduleId": "languageId",
-            "moduleName": "language",
+            "moduleName": "Language",
             "moduleRoute": "/configurations/language",
             "moduleAction": [
                 {
-                    "actionId": "languageActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "languageActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "languageActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "languageActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "languageActionList",
-                    "actionUrl": "languageActionList",
+                    "actionId": "languageActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "languageActionDelete",
-                    "actionUrl": "languageActionDelete",
+                    "actionId": "languageActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -788,30 +788,30 @@
         },
         {
             "moduleId": "dealersCategoryId",
-            "moduleName": "dealersCategory",
+            "moduleName": "Dealers Category",
             "moduleRoute": "/configurations/dealers-category",
             "moduleAction": [
                 {
-                    "actionId": "dealersCategoryActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "dealersCategoryActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "dealersCategoryActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "dealersCategoryActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "dealersCategoryActionList",
-                    "actionUrl": "dealersCategoryActionList",
+                    "actionId": "dealersCategoryActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "dealersCategoryActionDelete",
-                    "actionUrl": "dealersCategoryActionDelete",
+                    "actionId": "dealersCategoryActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -819,30 +819,30 @@
         },
         {
             "moduleId": "hierarchyId",
-            "moduleName": "hierarchy",
+            "moduleName": "Hierarchy",
             "moduleRoute": "/configurations/hierarchy",
             "moduleAction": [
                 {
-                    "actionId": "hierarchyActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "hierarchyActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "hierarchyActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "hierarchyActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "hierarchyActionList",
-                    "actionUrl": "hierarchyActionList",
+                    "actionId": "hierarchyActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "hierarchyActionDelete",
-                    "actionUrl": "hierarchyActionDelete",
+                    "actionId": "hierarchyActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -850,30 +850,30 @@
         },
         {
             "moduleId": "channelGroupId",
-            "moduleName": "channelGroup",
+            "moduleName": "Channel Group",
             "moduleRoute": "/media/channel-group",
             "moduleAction": [
                 {
-                    "actionId": "channelGroupActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "channelGroupActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "channelGroupActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "channelGroupActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "channelGroupActionList",
-                    "actionUrl": "channelGroupActionList",
+                    "actionId": "channelGroupActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "channelGroupActionDelete",
-                    "actionUrl": "channelGroupActionDelete",
+                    "actionId": "channelGroupActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -881,30 +881,30 @@
         },
         {
             "moduleId": "channelCategoryId",
-            "moduleName": "channelCategory",
+            "moduleName": "Channel Category",
             "moduleRoute": "/media/channel-category",
             "moduleAction": [
                 {
-                    "actionId": "channelCategoryActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "channelCategoryActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "channelCategoryActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "channelCategoryActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "channelCategoryActionList",
-                    "actionUrl": "channelCategoryActionList",
+                    "actionId": "channelCategoryActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "channelCategoryActionDelete",
-                    "actionUrl": "channelCategoryActionDelete",
+                    "actionId": "channelCategoryActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -912,30 +912,30 @@
         },
         {
             "moduleId": "channelId",
-            "moduleName": "channel",
+            "moduleName": "Channel",
             "moduleRoute": "/media/channel",
             "moduleAction": [
                 {
-                    "actionId": "channelActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "channelActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "channelActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "channelActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "channelActionList",
-                    "actionUrl": "channelActionList",
+                    "actionId": "channelActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "channelActionDelete",
-                    "actionUrl": "channelActionDelete",
+                    "actionId": "channelActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -943,30 +943,30 @@
         },
         {
             "moduleId": "didId",
-            "moduleName": "did",
+            "moduleName": "DID Number",
             "moduleRoute": "/media/did",
             "moduleAction": [
                 {
-                    "actionId": "didActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "didActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "didActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "didActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "didActionList",
-                    "actionUrl": "didActionList",
+                    "actionId": "didActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "didActionDelete",
-                    "actionUrl": "didActionDelete",
+                    "actionId": "didActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -974,30 +974,30 @@
         },
         {
             "moduleId": "artistId",
-            "moduleName": "artist",
+            "moduleName": "Artist",
             "moduleRoute": "/media/artist",
             "moduleAction": [
                 {
-                    "actionId": "artistActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "artistActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "artistActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "artistActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "artistActionList",
-                    "actionUrl": "artistActionList",
+                    "actionId": "artistActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "artistActionDelete",
-                    "actionUrl": "artistActionDelete",
+                    "actionId": "artistActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1005,30 +1005,30 @@
         },
         {
             "moduleId": "tapeId",
-            "moduleName": "tape",
+            "moduleName": "Tape",
             "moduleRoute": "/media/tape",
             "moduleAction": [
                 {
-                    "actionId": "tapeActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "tapeActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "tapeActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "tapeActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "tapeActionList",
-                    "actionUrl": "tapeActionList",
+                    "actionId": "tapeActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "tapeActionDelete",
-                    "actionUrl": "tapeActionDelete",
+                    "actionId": "tapeActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1036,30 +1036,30 @@
         },
         {
             "moduleId": "competitorId",
-            "moduleName": "competitor",
+            "moduleName": "Competitor",
             "moduleRoute": "/media/competitor",
             "moduleAction": [
                 {
-                    "actionId": "competitorActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "competitorActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "competitorActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "competitorActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "competitorActionList",
-                    "actionUrl": "competitorActionList",
+                    "actionId": "competitorActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "competitorActionDelete",
-                    "actionUrl": "competitorActionDelete",
+                    "actionId": "competitorActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1067,30 +1067,30 @@
         },
         {
             "moduleId": "slotId",
-            "moduleName": "slot",
+            "moduleName": "Slot",
             "moduleRoute": "/media/slot",
             "moduleAction": [
                 {
-                    "actionId": "slotActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "slotActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "slotActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "slotActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "slotActionList",
-                    "actionUrl": "slotActionList",
+                    "actionId": "slotActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "slotActionDelete",
-                    "actionUrl": "slotActionDelete",
+                    "actionId": "slotActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1098,61 +1098,30 @@
         },
         {
             "moduleId": "callerPageId",
-            "moduleName": "callerPage",
+            "moduleName": "Caller Page",
             "moduleRoute": "/media/caller-page",
             "moduleAction": [
                 {
-                    "actionId": "callerPageActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "callerPageActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "callerPageActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "callerPageActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "callerPageActionList",
-                    "actionUrl": "callerPageActionList",
+                    "actionId": "callerPageActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "callerPageActionDelete",
-                    "actionUrl": "callerPageActionDelete",
-                    "actionName": "Delete",
-                    "fields": []
-                }
-            ]
-        },
-        {
-            "moduleId": "callerPageId",
-            "moduleName": "callerPage",
-            "moduleRoute": "/media/caller-page",
-            "moduleAction": [
-                {
-                    "actionId": "callerPageActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
-                    "fields": []
-                },
-                {
-                    "actionId": "callerPageActionEdit",
-                    "actionUrl": "/edit",
-                    "actionName": "Edit",
-                    "fields": []
-                },
-                {
-                    "actionId": "callerPageActionList",
-                    "actionUrl": "callerPageActionList",
-                    "actionName": "List",
-                    "fields": []
-                },
-                {
-                    "actionId": "callerPageActionDelete",
-                    "actionUrl": "callerPageActionDelete",
+                    "actionId": "callerPageActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1160,30 +1129,30 @@
         },
         {
             "moduleId": "assetsManagementId",
-            "moduleName": "assetsManagement",
+            "moduleName": "Assets Management",
             "moduleRoute": "/assets/assets-management",
             "moduleAction": [
                 {
-                    "actionId": "assetsManagementActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "assetsManagementActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsManagementActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "assetsManagementActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsManagementActionList",
-                    "actionUrl": "assetsManagementActionList",
+                    "actionId": "assetsManagementActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsManagementActionDelete",
-                    "actionUrl": "assetsManagementActionDelete",
+                    "actionId": "assetsManagementActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1191,30 +1160,30 @@
         },
         {
             "moduleId": "assetsCategoryId",
-            "moduleName": "assetsCategory",
+            "moduleName": "Assets Category",
             "moduleRoute": "/assets/assets-management",
             "moduleAction": [
                 {
-                    "actionId": "assetsCategoryActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "assetsCategoryActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsCategoryActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "assetsCategoryActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsCategoryActionList",
-                    "actionUrl": "assetsCategoryActionList",
+                    "actionId": "assetsCategoryActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsCategoryActionDelete",
-                    "actionUrl": "assetsCategoryActionDelete",
+                    "actionId": "assetsCategoryActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1222,30 +1191,30 @@
         },
         {
             "moduleId": "assetsLocationId",
-            "moduleName": "assetsLocation",
+            "moduleName": "Assets Location",
             "moduleRoute": "/assets/assets-location",
             "moduleAction": [
                 {
-                    "actionId": "assetsLocationActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "assetsLocationActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsLocationActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "assetsLocationActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsLocationActionList",
-                    "actionUrl": "assetsLocationActionList",
+                    "actionId": "assetsLocationActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsLocationActionDelete",
-                    "actionUrl": "assetsLocationActionDelete",
+                    "actionId": "assetsLocationActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1253,30 +1222,30 @@
         },
         {
             "moduleId": "assetsRelocationId",
-            "moduleName": "assetsRelocation",
+            "moduleName": "Assets Relocation",
             "moduleRoute": "/assets/assets-relocation",
             "moduleAction": [
                 {
-                    "actionId": "assetsRelocationActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "assetsRelocationActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsRelocationActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "assetsRelocationActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsRelocationActionList",
-                    "actionUrl": "assetsRelocationActionList",
+                    "actionId": "assetsRelocationActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsRelocationActionDelete",
-                    "actionUrl": "assetsRelocationActionDelete",
+                    "actionId": "assetsRelocationActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1284,30 +1253,30 @@
         },
         {
             "moduleId": "assetsAllocationId",
-            "moduleName": "assetsAllocation",
+            "moduleName": "Assets Allocation",
             "moduleRoute": "/assets/assets-allocation",
             "moduleAction": [
                 {
-                    "actionId": "assetsAllocationActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "assetsAllocationActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsAllocationActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "assetsAllocationActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsAllocationActionList",
-                    "actionUrl": "assetsAllocationActionList",
+                    "actionId": "assetsAllocationActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "assetsAllocationActionDelete",
-                    "actionUrl": "assetsAllocationActionDelete",
+                    "actionId": "assetsAllocationActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1315,30 +1284,30 @@
         },
         {
             "moduleId": "dispositionOneId",
-            "moduleName": "dispositionOne",
+            "moduleName": "Disposition One",
             "moduleRoute": "/dispositions/disposition-one",
             "moduleAction": [
                 {
-                    "actionId": "dispositionOneActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "dispositionOneActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionOneActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "dispositionOneActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionOneActionList",
-                    "actionUrl": "dispositionOneActionList",
+                    "actionId": "dispositionOneActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionOneActionDelete",
-                    "actionUrl": "dispositionOneActionDelete",
+                    "actionId": "dispositionOneActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1346,30 +1315,30 @@
         },
         {
             "moduleId": "dispositionTwoId",
-            "moduleName": "dispositionTwo",
+            "moduleName": "Disposition Two",
             "moduleRoute": "/dispositions/disposition-two",
             "moduleAction": [
                 {
-                    "actionId": "dispositionTwoActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "dispositionTwoActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionTwoActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "dispositionTwoActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionTwoActionList",
-                    "actionUrl": "dispositionTwoActionList",
+                    "actionId": "dispositionTwoActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionTwoActionDelete",
-                    "actionUrl": "dispositionTwoActionDelete",
+                    "actionId": "dispositionTwoActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1377,30 +1346,30 @@
         },
         {
             "moduleId": "dispositionThreeId",
-            "moduleName": "dispositionThree",
+            "moduleName": "Disposition Three",
             "moduleRoute": "/dispositions/disposition-three",
             "moduleAction": [
                 {
-                    "actionId": "dispositionThreeActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "dispositionThreeActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionThreeActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "dispositionThreeActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionThreeActionList",
-                    "actionUrl": "dispositionThreeActionList",
+                    "actionId": "dispositionThreeActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionThreeActionDelete",
-                    "actionUrl": "dispositionThreeActionDelete",
+                    "actionId": "dispositionThreeActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1408,30 +1377,30 @@
         },
         {
             "moduleId": "initialcallOneId",
-            "moduleName": "initialcallOne",
+            "moduleName": "Initialcall One",
             "moduleRoute": "/dispositions/initialcall-one",
             "moduleAction": [
                 {
-                    "actionId": "initialcallOneActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "initialcallOneActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "initialcallOneActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "initialcallOneActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "initialcallOneActionList",
-                    "actionUrl": "initialcallOneActionList",
+                    "actionId": "initialcallOneActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "initialcallOneActionDelete",
-                    "actionUrl": "initialcallOneActionDelete",
+                    "actionId": "initialcallOneActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1439,30 +1408,30 @@
         },
         {
             "moduleId": "initialcallTwoId",
-            "moduleName": "initialcallTwo",
+            "moduleName": "Initialcall Two",
             "moduleRoute": "/dispositions/initialcall-two",
             "moduleAction": [
                 {
-                    "actionId": "initialcallTwoActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "initialcallTwoActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "initialcallTwoActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "initialcallTwoActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "initialcallTwoActionList",
-                    "actionUrl": "initialcallTwoActionList",
+                    "actionId": "initialcallTwoActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "initialcallTwoActionDelete",
-                    "actionUrl": "initialcallTwoActionDelete",
+                    "actionId": "initialcallTwoActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1470,30 +1439,30 @@
         },
         {
             "moduleId": "initialcallThreeId",
-            "moduleName": "initialcallThree",
+            "moduleName": "Initialcall Three",
             "moduleRoute": "/dispositions/initialcall-three",
             "moduleAction": [
                 {
-                    "actionId": "initialcallThreeActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "initialcallThreeActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "initialcallThreeActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "initialcallThreeActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "initialcallThreeActionList",
-                    "actionUrl": "initialcallThreeActionList",
+                    "actionId": "initialcallThreeActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "initialcallThreeActionDelete",
-                    "actionUrl": "initialcallThreeActionDelete",
+                    "actionId": "initialcallThreeActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1501,30 +1470,30 @@
         },
         {
             "moduleId": "dispositionComplaintId",
-            "moduleName": "dispositionComplaint",
+            "moduleName": "Disposition Complaint",
             "moduleRoute": "/dispositions/disposition-complaint",
             "moduleAction": [
                 {
-                    "actionId": "dispositionComplaintActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "dispositionComplaintActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionComplaintActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "dispositionComplaintActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionComplaintActionList",
-                    "actionUrl": "dispositionComplaintActionList",
+                    "actionId": "dispositionComplaintActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "dispositionComplaintActionDelete",
-                    "actionUrl": "dispositionComplaintActionDelete",
+                    "actionId": "dispositionComplaintActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1532,30 +1501,30 @@
         },
         {
             "moduleId": "websiteId",
-            "moduleName": "website",
+            "moduleName": "Website",
             "moduleRoute": "/all-websites/website",
             "moduleAction": [
                 {
-                    "actionId": "websiteActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "websiteActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "websiteActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "websiteActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "websiteActionList",
-                    "actionUrl": "websiteActionList",
+                    "actionId": "websiteActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "websiteActionDelete",
-                    "actionUrl": "websiteActionDelete",
+                    "actionId": "websiteActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1563,30 +1532,30 @@
         },
         {
             "moduleId": "websiteBlogId",
-            "moduleName": "websiteBlog",
+            "moduleName": "Website Blog",
             "moduleRoute": "/all-websites/website-blog",
             "moduleAction": [
                 {
-                    "actionId": "websiteBlogActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "websiteBlogActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "websiteBlogActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "websiteBlogActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "websiteBlogActionList",
-                    "actionUrl": "websiteBlogActionList",
+                    "actionId": "websiteBlogActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "websiteBlogActionDelete",
-                    "actionUrl": "websiteBlogActionDelete",
+                    "actionId": "websiteBlogActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1594,30 +1563,30 @@
         },
         {
             "moduleId": "websitePageId",
-            "moduleName": "websitePage",
+            "moduleName": "Website Page",
             "moduleRoute": "/all-websites/website-page",
             "moduleAction": [
                 {
-                    "actionId": "websitePageActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "websitePageActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "websitePageActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "websitePageActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "websitePageActionList",
-                    "actionUrl": "websitePageActionList",
+                    "actionId": "websitePageActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "websitePageActionDelete",
-                    "actionUrl": "websitePageActionDelete",
+                    "actionId": "websitePageActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }
@@ -1625,30 +1594,30 @@
         },
         {
             "moduleId": "websiteTagsId",
-            "moduleName": "websiteTags",
+            "moduleName": "Website Tags",
             "moduleRoute": "/all-websites/website-tags",
             "moduleAction": [
                 {
-                    "actionId": "websiteTagsActionAdd",
-                    "actionUrl": "/add",
-                    "actionName": "add",
+                    "actionId": "websiteTagsActionAddId",
+                    "actionUrl": "",
+                    "actionName": "Add",
                     "fields": []
                 },
                 {
-                    "actionId": "websiteTagsActionEdit",
-                    "actionUrl": "/edit",
+                    "actionId": "websiteTagsActionEditId",
+                    "actionUrl": "",
                     "actionName": "Edit",
                     "fields": []
                 },
                 {
-                    "actionId": "websiteTagsActionList",
-                    "actionUrl": "websiteTagsActionList",
+                    "actionId": "websiteTagsActionListId",
+                    "actionUrl": "",
                     "actionName": "List",
                     "fields": []
                 },
                 {
-                    "actionId": "websiteTagsActionDelete",
-                    "actionUrl": "websiteTagsActionDelete",
+                    "actionId": "websiteTagsActionDeleteId",
+                    "actionUrl": "",
                     "actionName": "Delete",
                     "fields": []
                 }

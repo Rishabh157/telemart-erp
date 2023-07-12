@@ -27,15 +27,15 @@ import { GetHierarchByDeptProps } from 'src/utils/GetHierarchyByDept'
 const StyledNode = ({
     children,
     extraClasses,
-    isMenu=true,
-    dept='',
-    userRole=''
+    isMenu = true,
+    dept = '',
+    userRole = '',
 }: {
     children: ReactNode
     extraClasses?: string
-    isMenu?:boolean
-    dept?:string
-    userRole?:string
+    isMenu?: boolean
+    dept?: string
+    userRole?: string
 }) => {
     const navigate = useNavigate()
     return (
@@ -46,17 +46,24 @@ const StyledNode = ({
         >
             <div className="flex justify-between gap-3 items-center">
                 <div className="px-4">{children}</div>
-               {isMenu&& <ATMMenu
-                    orientation="vertical"
-                    options={[
-                        {
-                            label: 'Add Policy',
-                            onClick: () => {
-                                navigate(`/configurations/user-access?dept=${dept}&userRole=${userRole}`)
+                {isMenu && (
+                    <ATMMenu
+                        orientation="vertical"
+                        options={[
+                            {
+                                label: 'Add Policy',
+                                onClick: () => {
+                                    navigate(`/configurations/user-access`, {
+                                        state: {
+                                            dept: dept,
+                                            userRole: userRole,
+                                        },
+                                    })
+                                },
                             },
-                        },
-                    ]}
-                />}
+                        ]}
+                    />
+                )}
             </div>
         </button>
     )
@@ -86,49 +93,85 @@ const OrganisationHierarchy = () => {
                         lineHeight={'40px'}
                         lineColor={'#bbbbcc'}
                         lineBorderRadius={'10px'}
-                        label={<StyledNode extraClasses=" " isMenu={false} >Root</StyledNode>}
+                        label={
+                            <StyledNode extraClasses="" isMenu={false}>
+                                Root
+                            </StyledNode>
+                        }
                         // nodePadding={'50px'} // Set the padding between nodes
                         // direction={'horizontal'} // Set the direction to horizontal
                     >
                         {/*  Sales */}
                         <TreeNode
                             label={
-                                <StyledNode isMenu={false} dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.SALES_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Sales Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode userRole='SALE_AVP'  dept={GetHierarchByDeptProps.SALES_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        userRole="SALE_AVP"
+                                        dept={
+                                            GetHierarchByDeptProps.SALES_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.SALES_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             AGM Sales
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.SALES_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Manager, Sales Center
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.SALES_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Asst. Manager, Sales Center
                                                 </StyledNode>
                                             }
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode
+                                                        dept={
+                                                            GetHierarchByDeptProps.SALES_DEPARTMENT
+                                                        }
+                                                        extraClasses="text-sm font-normal font-sans"
+                                                    >
                                                         Sr. Team
                                                         Leader/Sr.Executive, MIS
                                                     </StyledNode>
@@ -136,7 +179,12 @@ const OrganisationHierarchy = () => {
                                             >
                                                 <TreeNode
                                                     label={
-                                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                        <StyledNode
+                                                            dept={
+                                                                GetHierarchByDeptProps.SALES_DEPARTMENT
+                                                            }
+                                                            extraClasses="text-sm font-normal font-sans"
+                                                        >
                                                             Team Leader/
                                                             Executive, MIS
                                                         </StyledNode>
@@ -144,7 +192,12 @@ const OrganisationHierarchy = () => {
                                                 >
                                                     <TreeNode
                                                         label={
-                                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                            <StyledNode
+                                                                dept={
+                                                                    GetHierarchByDeptProps.SALES_DEPARTMENT
+                                                                }
+                                                                extraClasses="text-sm font-normal font-sans"
+                                                            >
                                                                 Sr. Executive,
                                                                 Sales Center
                                                             </StyledNode>
@@ -152,7 +205,12 @@ const OrganisationHierarchy = () => {
                                                     >
                                                         <TreeNode
                                                             label={
-                                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                <StyledNode
+                                                                    dept={
+                                                                        GetHierarchByDeptProps.SALES_DEPARTMENT
+                                                                    }
+                                                                    extraClasses="text-sm font-normal font-sans"
+                                                                >
                                                                     Executive,
                                                                     Sales Center
                                                                 </StyledNode>
@@ -160,7 +218,12 @@ const OrganisationHierarchy = () => {
                                                         >
                                                             <TreeNode
                                                                 label={
-                                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                    <StyledNode
+                                                                        dept={
+                                                                            GetHierarchByDeptProps.SALES_DEPARTMENT
+                                                                        }
+                                                                        extraClasses="text-sm font-normal font-sans"
+                                                                    >
                                                                         Executive,Trainee
                                                                     </StyledNode>
                                                                 }
@@ -178,43 +241,71 @@ const OrganisationHierarchy = () => {
                         {/*  HR */}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans"
-                                dept={GetHierarchByDeptProps.HR_DEPARTMENT}>
+                                <StyledNode
+                                    isMenu={false}
+                                    extraClasses="text-sm font-bold  font-sans"
+                                    dept={GetHierarchByDeptProps.HR_DEPARTMENT}
+                                >
                                     HR Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.HR_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVM
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.HR_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             AGM, HR & Statutory Compliance
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.HR_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Asst. Manager,HR
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.HR_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Sr. Executive,HR
                                                 </StyledNode>
                                             }
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode  dept={GetHierarchByDeptProps.HR_DEPARTMENT} extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode
+                                                        dept={
+                                                            GetHierarchByDeptProps.HR_DEPARTMENT
+                                                        }
+                                                        extraClasses="text-sm font-normal font-sans"
+                                                    >
                                                         Executive,HR
                                                     </StyledNode>
                                                 }
@@ -227,42 +318,73 @@ const OrganisationHierarchy = () => {
                         {/* Distribution */}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Distribution Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVM
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             Sr. Manager, Distribution
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Manager,Area
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Sr. Executive,Area
                                                 </StyledNode>
                                             }
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode
+                                                        dept={
+                                                            GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT
+                                                        }
+                                                        extraClasses="text-sm font-normal font-sans"
+                                                    >
                                                         Executive,Area
                                                     </StyledNode>
                                                 }
@@ -274,49 +396,85 @@ const OrganisationHierarchy = () => {
                         </TreeNode>
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.FINANCE_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Finance Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.FINANCE_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.FINANCE_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             AGM ,Finance
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.FINANCE_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Sr. Manager, Finance
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.FINANCE_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Manager, Finance
                                                 </StyledNode>
                                             }
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode
+                                                        dept={
+                                                            GetHierarchByDeptProps.FINANCE_DEPARTMENT
+                                                        }
+                                                        extraClasses="text-sm font-normal font-sans"
+                                                    >
                                                         AM, Finance
                                                     </StyledNode>
                                                 }
                                             >
                                                 <TreeNode
                                                     label={
-                                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                        <StyledNode
+                                                            dept={
+                                                                GetHierarchByDeptProps.FINANCE_DEPARTMENT
+                                                            }
+                                                            extraClasses="text-sm font-normal font-sans"
+                                                        >
                                                             Executive,Finance
                                                         </StyledNode>
                                                     }
@@ -330,35 +488,61 @@ const OrganisationHierarchy = () => {
                         {/* MEDIA */}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.MEDIA_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Media Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.MEDIA_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.MEDIA_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             AGM, Media Planning and Procurement
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.MEDIA_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 AM ,Media
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.MEDIA_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Executive,Media
                                                 </StyledNode>
                                             }
@@ -367,46 +551,76 @@ const OrganisationHierarchy = () => {
                                 </TreeNode>
                             </TreeNode>
                         </TreeNode>
-
                         {/* MEDIA Production*/}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.MEDIA_PRODUCTION_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Media (Production) Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.MEDIA_PRODUCTION_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.MEDIA_PRODUCTION_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             Sr. Manager, Media Production
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.MEDIA_PRODUCTION_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Sr. Editor
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.MEDIA_PRODUCTION_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Video Editor
                                                 </StyledNode>
                                             }
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode
+                                                        dept={
+                                                            GetHierarchByDeptProps.MEDIA_PRODUCTION_DEPARTMENT
+                                                        }
+                                                        extraClasses="text-sm font-normal font-sans"
+                                                    >
                                                         Associate Editor
                                                     </StyledNode>
                                                 }
@@ -419,35 +633,59 @@ const OrganisationHierarchy = () => {
                         {/*  Information Technology*/}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={GetHierarchByDeptProps.IT_DEPARTMENT}
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Information Technology Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.IT_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.IT_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             Manager, Systems & Network
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.IT_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Manager, Server & IT
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.IT_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Manager,Telecom and
                                                     Technology
                                                 </StyledNode>
@@ -455,21 +693,36 @@ const OrganisationHierarchy = () => {
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode
+                                                        dept={
+                                                            GetHierarchByDeptProps.IT_DEPARTMENT
+                                                        }
+                                                        extraClasses="text-sm font-normal font-sans"
+                                                    >
                                                         AM, Network
                                                     </StyledNode>
                                                 }
                                             >
                                                 <TreeNode
                                                     label={
-                                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                        <StyledNode
+                                                            dept={
+                                                                GetHierarchByDeptProps.IT_DEPARTMENT
+                                                            }
+                                                            extraClasses="text-sm font-normal font-sans"
+                                                        >
                                                             Executive,Network
                                                         </StyledNode>
                                                     }
                                                 >
                                                     <TreeNode
                                                         label={
-                                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                            <StyledNode
+                                                                dept={
+                                                                    GetHierarchByDeptProps.IT_DEPARTMENT
+                                                                }
+                                                                extraClasses="text-sm font-normal font-sans"
+                                                            >
                                                                 Executive,IT
                                                             </StyledNode>
                                                         }
@@ -484,49 +737,85 @@ const OrganisationHierarchy = () => {
                         {/* Development*/}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Development Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             Graphic Designer
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Product Development & Research
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Sr. 3-D Artist
                                                 </StyledNode>
                                             }
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode
+                                                        dept={
+                                                            GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT
+                                                        }
+                                                        extraClasses="text-sm font-normal font-sans"
+                                                    >
                                                         Sr. VFx Artist
                                                     </StyledNode>
                                                 }
                                             >
                                                 <TreeNode
                                                     label={
-                                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                        <StyledNode
+                                                            dept={
+                                                                GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT
+                                                            }
+                                                            extraClasses="text-sm font-normal font-sans"
+                                                        >
                                                             Sr. Visualize
                                                         </StyledNode>
                                                     }
@@ -537,67 +826,110 @@ const OrganisationHierarchy = () => {
                                 </TreeNode>
                             </TreeNode>
                         </TreeNode>
-
                         {/*  Web Development*/}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={GetHierarchByDeptProps.WEB_DEPARTMENT}
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Web Development Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.WEB_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.WEB_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             Sr. Manager, Digital Sales
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Sr. Manager,SEO
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Manager,SEO
                                                 </StyledNode>
                                             }
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                    <StyledNode
+                                                        dept={
+                                                            GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                        }
+                                                        extraClasses="text-sm font-normal font-sans"
+                                                    >
                                                         Executive,SEO
                                                     </StyledNode>
                                                 }
                                             >
                                                 <TreeNode
                                                     label={
-                                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                        <StyledNode
+                                                            dept={
+                                                                GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                            }
+                                                            extraClasses="text-sm font-normal font-sans"
+                                                        >
                                                             Content Creator
                                                         </StyledNode>
                                                     }
                                                 >
                                                     <TreeNode
                                                         label={
-                                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                            <StyledNode
+                                                                dept={
+                                                                    GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                                }
+                                                                extraClasses="text-sm font-normal font-sans"
+                                                            >
                                                                 Content Writer
                                                             </StyledNode>
                                                         }
                                                     >
                                                         <TreeNode
                                                             label={
-                                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                <StyledNode
+                                                                    dept={
+                                                                        GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                                    }
+                                                                    extraClasses="text-sm font-normal font-sans"
+                                                                >
                                                                     Frontend
                                                                     Developer
                                                                 </StyledNode>
@@ -605,7 +937,12 @@ const OrganisationHierarchy = () => {
                                                         >
                                                             <TreeNode
                                                                 label={
-                                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                    <StyledNode
+                                                                        dept={
+                                                                            GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                                        }
+                                                                        extraClasses="text-sm font-normal font-sans"
+                                                                    >
                                                                         Graphic
                                                                         Designer
                                                                     </StyledNode>
@@ -613,7 +950,12 @@ const OrganisationHierarchy = () => {
                                                             >
                                                                 <TreeNode
                                                                     label={
-                                                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                        <StyledNode
+                                                                            dept={
+                                                                                GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                                            }
+                                                                            extraClasses="text-sm font-normal font-sans"
+                                                                        >
                                                                             Jr.
                                                                             Web
                                                                             Developer
@@ -622,7 +964,12 @@ const OrganisationHierarchy = () => {
                                                                 >
                                                                     <TreeNode
                                                                         label={
-                                                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                            <StyledNode
+                                                                                dept={
+                                                                                    GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                                                }
+                                                                                extraClasses="text-sm font-normal font-sans"
+                                                                            >
                                                                                 Sr.
                                                                                 Manager,
                                                                                 Digital
@@ -632,7 +979,12 @@ const OrganisationHierarchy = () => {
                                                                     >
                                                                         <TreeNode
                                                                             label={
-                                                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                                <StyledNode
+                                                                                    dept={
+                                                                                        GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                                                    }
+                                                                                    extraClasses="text-sm font-normal font-sans"
+                                                                                >
                                                                                     Sr.
                                                                                     Web
                                                                                     Developer
@@ -641,7 +993,12 @@ const OrganisationHierarchy = () => {
                                                                         >
                                                                             <TreeNode
                                                                                 label={
-                                                                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                                                    <StyledNode
+                                                                                        dept={
+                                                                                            GetHierarchByDeptProps.WEB_DEPARTMENT
+                                                                                        }
+                                                                                        extraClasses="text-sm font-normal font-sans"
+                                                                                    >
                                                                                         Web
                                                                                         Developer
                                                                                     </StyledNode>
@@ -663,35 +1020,61 @@ const OrganisationHierarchy = () => {
                         {/* Operations*/}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.OPERATION_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Operations Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.OPERATION_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.OPERATION_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             VP,Operations
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.OPERATION_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 AGM, Compliance
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.OPERATION_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     AGM, Operations
                                                 </StyledNode>
                                             }
@@ -703,35 +1086,61 @@ const OrganisationHierarchy = () => {
                         {/* Quality Analyst*/}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.QUALITY_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Quality Analyst Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.QUALITY_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.QUALITY_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             AM,Quality Analyst
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.QUALITY_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Team Leader,Quality Analyst
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.QUALITY_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Executive,Quality Analyst
                                                 </StyledNode>
                                             }
@@ -743,35 +1152,61 @@ const OrganisationHierarchy = () => {
                         {/* Logistics */}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.LOGISTIC_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Logistics Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.LOGISTIC_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.LOGISTIC_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             Manager, Logistics
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.LOGISTIC_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 AM, Logistics
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.LOGISTIC_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Executive,Logistics
                                                 </StyledNode>
                                             }
@@ -783,28 +1218,49 @@ const OrganisationHierarchy = () => {
                         {/* Mapping & MIS */}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.MAPPING_AND_MIS_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Mapping & MIS Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.MAPPING_AND_MIS_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.MAPPING_AND_MIS_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             Manager, MIS
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.MAPPING_AND_MIS_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Executive,MIS
                                             </StyledNode>
                                         }
@@ -815,35 +1271,61 @@ const OrganisationHierarchy = () => {
                         {/* Admin */}
                         <TreeNode
                             label={
-                                <StyledNode extraClasses="text-sm font-bold  font-sans">
+                                <StyledNode
+                                    isMenu={false}
+                                    dept={
+                                        GetHierarchByDeptProps.ADMIN_DEPARTMENT
+                                    }
+                                    extraClasses="text-sm font-bold  font-sans"
+                                >
                                     Admin Dept. Head
                                 </StyledNode>
                             }
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode extraClasses="text-sm font-normal font-sans">
+                                    <StyledNode
+                                        dept={
+                                            GetHierarchByDeptProps.ADMIN_DEPARTMENT
+                                        }
+                                        extraClasses="text-sm font-normal font-sans"
+                                    >
                                         AVP
                                     </StyledNode>
                                 }
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode extraClasses="text-sm font-normal font-sans">
+                                        <StyledNode
+                                            dept={
+                                                GetHierarchByDeptProps.ADMIN_DEPARTMENT
+                                            }
+                                            extraClasses="text-sm font-normal font-sans"
+                                        >
                                             Manager, Admin
                                         </StyledNode>
                                     }
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode extraClasses="text-sm font-normal font-sans">
+                                            <StyledNode
+                                                dept={
+                                                    GetHierarchByDeptProps.ADMIN_DEPARTMENT
+                                                }
+                                                extraClasses="text-sm font-normal font-sans"
+                                            >
                                                 Sr. Executive,Admin
                                             </StyledNode>
                                         }
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode extraClasses="text-sm font-normal font-sans">
+                                                <StyledNode
+                                                    dept={
+                                                        GetHierarchByDeptProps.ADMIN_DEPARTMENT
+                                                    }
+                                                    extraClasses="text-sm font-normal font-sans"
+                                                >
                                                     Executive,Admin
                                                 </StyledNode>
                                             }

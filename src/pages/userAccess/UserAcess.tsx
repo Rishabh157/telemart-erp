@@ -201,7 +201,7 @@ const UserAcess = ({
                                 (module: ModulesTypes, ind: number) => {
                                     return (
                                         <div className="" key={ind}>
-                                            <div className=" font-bold text-medium  gap-2 flex">
+                                            <div className="font-bold text-medium  gap-2 flex">
                                                 <input
                                                     type={'checkbox'}
                                                     checked={isCheckedModule(
@@ -228,14 +228,11 @@ const UserAcess = ({
                                                                     actionsItems.actionId
                                                                 }
                                                             >
-                                                                <div className="gap-2 flex px-3  ">
+                                                                <div className="gap-2 flex px-3">
                                                                     <input
                                                                         type={
                                                                             'checkbox'
                                                                         }
-                                                                        // name={
-                                                                        //     actionsItems.actionName
-                                                                        // }
                                                                         checked={isCheckedModuleAction(
                                                                             module,
                                                                             actionsItems

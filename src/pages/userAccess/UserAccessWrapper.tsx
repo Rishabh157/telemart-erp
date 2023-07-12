@@ -25,11 +25,11 @@ import { showToast } from 'src/utils'
 import { setUserAccess } from 'src/redux/slices/access/userAcessSlice'
 const UserAccessWrapper = () => {
     const [apiStatus, setApiStatus] = useState(false)
-    const location = useLocation()
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const param = queryString.parse(location.search)
-    const { dept, userRole } = param
+    
+    const { state } = useLocation()
+    const { dept, userRole } = state
 
     const [addUserAccess] = useAddUserAccessMutation()
     const { data, isLoading, isFetching } = useGetUserAccessQuery({userRole:userRole as string},{
