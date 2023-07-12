@@ -88,11 +88,11 @@ export const navigation: NavItemType[] = [
         icon: CiStickyNote,
         path: '/grn',
     },
-    // {
-    //     label: 'Scheme',
-    //     icon: TfiLayoutMediaOverlayAlt2,
-    //     path: '/scheme',
-    // },
+    {
+        label: 'Inventory Management',
+        icon: TfiLayoutMediaOverlayAlt2,
+        path: '/inventory-management',
+    },
     {
         label: 'Inquiry',
         icon: MdCallReceived,

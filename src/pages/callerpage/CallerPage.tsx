@@ -517,7 +517,12 @@ const CallerPage: React.FC<Props> = ({
         <div className="bg-white px-4 h-[2000px]">
             <div className="flex justify-between py-1">
                 <div className="logo-img">
-                    <img height={130} width={130} src='/septel-logo.png' alt='logo' />
+                    <img
+                        height={130}
+                        width={130}
+                        src="/septel-logo.png"
+                        alt="logo"
+                    />
                 </div>
                 <div className="flex gap-x-2 items-center">
                     <div className="text-[#6F9EA7] text-[15px]">

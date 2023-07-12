@@ -173,7 +173,6 @@ const AddSaleOrderWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
-        //console.log(values)
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {

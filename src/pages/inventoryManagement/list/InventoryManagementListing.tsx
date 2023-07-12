@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:SaleOrderListing.tsx
+// Filename:InevntoryManagementListing.tsx
 // Type: List Component
 // Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
@@ -10,7 +10,7 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -23,7 +23,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/saleOrderSlice'
+} from 'src/redux/slices/InventoryManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -31,71 +31,54 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
+    //setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+const InevntoryManagementListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const saleOrderState: any = useSelector(
-        (state: RootState) => state.saleOrder
-    )
-    const { pathname } = useLocation()
-    const path = pathname.split('/')[1]
-
-    const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
+    const inventoryManagementState: any = useSelector(
+        (state: RootState) => state.inventoryManagement
+    )
+    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+    const navigate = useNavigate()
+
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
-        saleOrderState
+        inventoryManagementState
 
     return (
-        <div
-            className={`px-4 ${
-                path === 'dealers'
-                    ? 'h-[calc(100vh-185px)]'
-                    : 'h-[calc(100vh-55px)]'
-            }`}
-        >
+        <div className="px-4 h-[calc(100vh-55px)]  ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Sale Orders </ATMPageHeading>
+                <ATMPageHeading> Inventory Management </ATMPageHeading>
                 <button
-                    onClick={() => navigate('add-sale-order')}
+                    onClick={() => navigate('/inventory-management/add')}
                     className="bg-primary-main text-white rounded py-1 px-3"
                 >
-                    + Add Sale Order
+                    + Add Inventory{' '}
                 </button>
             </div>
 
-            <div
-                className={` border flex flex-col  rounded bg-white ${
-                    path === 'dealers'
-                        ? 'h-[calc(100%-50px)]'
-                        : 'h-[calc(100%-75px)]'
-                }`}
-            >
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
-                    searchValue={searchValue}
                     page={page}
+                    searchValue={searchValue}
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    onSearch={(newValue) => {
-                        dispatch(setSearchValue(newValue))
-                    }}
-                    // isFilter
+                    isFilter
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
-                <div className="grow overflow-auto">
+                <div className="grow overflow-auto  ">
                     <ATMTable
-                        isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
                         // isCheckbox={true}
@@ -103,11 +86,11 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full overflow-auto"
-                        setShowDropdown={setShowDropdown}
+                        extraClasses="max-h-full overflow-auto"
+                        //setShowDropdown={setShowDropdown}
+                        isLoading={isTableLoading}
                     />
                 </div>
-
                 {/* Pagination */}
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
@@ -119,8 +102,14 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     />
                 </div>
             </div>
+
+            {/* {isFilterOpen && (
+       <FilterDialogWarpper
+       onClose={()=> setIsFilterOpen(false)}
+       />
+      )} */}
         </div>
     )
 }
 
-export default SaleOrderListing
+export default InevntoryManagementListing

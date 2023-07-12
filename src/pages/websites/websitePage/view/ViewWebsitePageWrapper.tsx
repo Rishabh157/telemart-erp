@@ -36,8 +36,6 @@ const ViewWebsitePageWrapper = () => {
         }
     }, [isLoading, isFetching, data, dispatch])
 
-    //console.log(selectedItem)
-
     return (
         <WebsiteLayout>
             <ViewWebsitePage items={selectedItem} />

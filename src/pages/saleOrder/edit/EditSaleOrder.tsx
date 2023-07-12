@@ -63,8 +63,6 @@ const EditSaleOrder = ({
         ...dropdownOptions,
     }
 
-    //console.log(productPriceOptions)
-
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch<AppDispatch>()

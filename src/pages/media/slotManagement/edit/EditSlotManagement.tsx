@@ -155,7 +155,6 @@ const EditSlotManagement = ({
                                 required
                                 placeholder="Slot Name"
                                 onChange={(e) => {
-                                    //console.log(e.target.value)
                                     handleSetFieldValue(
                                         'slotName',
                                         e.target.value

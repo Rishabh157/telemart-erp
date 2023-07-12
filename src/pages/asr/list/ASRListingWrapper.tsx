@@ -56,6 +56,7 @@ const ASRListingWrapper = () => {
                             if (index < 4) {
                                 return (
                                     <Chip
+                                        key={index}
                                         label={ele?.productName}
                                         color="primary"
                                         variant="outlined"
@@ -66,6 +67,7 @@ const ASRListingWrapper = () => {
                             if (index === 5) {
                                 return (
                                     <Chip
+                                        key={index}
                                         label={'...'}
                                         color="primary"
                                         variant="outlined"
@@ -92,6 +94,7 @@ const ASRListingWrapper = () => {
                             if (index < 4) {
                                 return (
                                     <Chip
+                                        key={index}
                                         label={ele?.quantity}
                                         color="primary"
                                         variant="outlined"

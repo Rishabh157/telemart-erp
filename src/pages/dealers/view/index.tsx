@@ -126,7 +126,6 @@ const ViewDealer = () => {
     })
 
     useEffect(() => {
-        // console.log(data?.data)
         dispatch(setItems(data?.data || []))
     }, [isFetching, isLoading, data, dispatch])
 

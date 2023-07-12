@@ -120,7 +120,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     )
                                 }
                             />
-                           
+
                             <ATMTextField
                                 name="productName"
                                 required

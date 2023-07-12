@@ -79,8 +79,6 @@ const EditPurchaseOrderWrapper = (props: Props) => {
         }
     }, [poData, poIsLoading, poIsFetching])
 
-    //console.log(selectedItems?.purchaseOrder?._id)
-
     const initialValues: FormInitialValues = {
         poCode: selectedItems?.poCode || '',
         vendorId: selectedItems?.vendorId || '',
@@ -181,7 +179,7 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
-        //console.log(values?.purchaseOrder?._id, "values")
+
         let iid = values?.purchaseOrder?.id
 
         const purchaseOrder: any = {

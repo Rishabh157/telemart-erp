@@ -187,3 +187,9 @@ export type {
     UpdateVendorLedger,
     VendorLedgerListResponse,
 } from './VendorLedger.model'
+
+export type {
+    InventoryManagementListResponse,
+    addInventoryManagement,
+    UpdateInventoryManagement,
+} from './InventoryManagement.model'

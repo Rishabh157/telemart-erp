@@ -30,7 +30,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/purchase-order',
     },
     {
-        label: 'View Purchase Order',
+        label: 'View',
     },
 ]
 
@@ -86,7 +86,7 @@ const ViewPurchaseOrder = ({ items, grnitems }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1 ">
-                    <ATMPageHeading>View Purchase Order</ATMPageHeading>
+                    <ATMPageHeading>Purchase Order</ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -105,14 +105,25 @@ const ViewPurchaseOrder = ({ items, grnitems }: Props) => {
                         <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
                             PO Details
                         </div>
-                        <div className="grid grid-cols-4 gap-3 pl-6 py-6 border border-l-2">
-                            <h1 className="text-gray-800">PO Code </h1>
+                        <div className="grid grid-cols-3 gap-3 pl-6 py-6 border border-l-2">
+                            <h1 className="text-gray-600  font-semibold">
+                                PO Code{' '}
+                            </h1>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">{items?.poCode}</p>
-                            <h1 className="text-gray-800">Vendor </h1>
+
+                            <h1 className="text-gray-600  font-semibold">
+                                Vendor{' '}
+                            </h1>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.vendorLabel}
                             </p>
-                            <h1 className="text-gray-800">Warehouse </h1>
+
+                            <h1 className="text-gray-600  font-semibold">
+                                Warehouse{' '}
+                            </h1>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.warehouseLabel}
                             </p>
@@ -124,22 +135,35 @@ const ViewPurchaseOrder = ({ items, grnitems }: Props) => {
                         <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
                             Items Details
                         </div>
-                        <div className="grid grid-cols-4 gap-3 pl-6 py-6 border border-l-2">
-                            <h1 className="text-gray-800">Item Name </h1>
+                        <div className="grid grid-cols-3 gap-3 pl-6 py-6 border border-l-2">
+                            <h1 className="text-gray-600  font-semibold">
+                                Item Name{' '}
+                            </h1>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.purchaseOrder?.itemName}
                             </p>
-                            <h1 className="text-gray-800">Rate</h1>
+
+                            <h1 className="text-gray-600  font-semibold">
+                                Rate
+                            </h1>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.purchaseOrder?.rate?.toString()}
                             </p>
-                            <h1 className="text-gray-800">Quantity </h1>
+
+                            <h1 className="text-gray-600  font-semibold">
+                                Quantity{' '}
+                            </h1>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.purchaseOrder?.quantity?.toString()}
                             </p>
-                            <h1 className="text-gray-800">
+
+                            <h1 className="text-gray-600  font-semibold">
                                 Est. Receiving Date
                             </h1>
+                            <p className=" col-span-1"> - </p>
                             <p className="text-slate-600">
                                 {items?.purchaseOrder?.estReceivingDate}
                             </p>
@@ -152,21 +176,31 @@ const ViewPurchaseOrder = ({ items, grnitems }: Props) => {
                         <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
                             Approval Details
                         </div>
-                        {items?.approval?.map((item: any) => (
-                            <div className="grid grid-cols-4 gap-2 pl-6 py-6 border border-l-2">
-                                <h1 className="text-gray-800">
+                        {items?.approval?.map((index: any, item: any) => (
+                            <div
+                                className="grid grid-cols-3 gap-2 pl-6 py-6 border border-l-2"
+                                key={index}
+                            >
+                                <h1 className="text-gray-600  font-semibold">
                                     Approval Level{' '}
                                 </h1>
+                                <p className=" col-span-1"> - </p>
                                 <p className="text-slate-600">
                                     {item?.approvalLevel}
                                 </p>
-                                <h1 className="text-gray-800">Approval By</h1>
+
+                                <h1 className="text-gray-600  font-semibold">
+                                    Approval By
+                                </h1>
+                                <p className=" col-span-1"> - </p>
                                 <p className="text-slate-600">
                                     {item?.approvalByName}
                                 </p>
-                                <h1 className="text-gray-800">
+
+                                <h1 className="text-gray-600  font-semibold">
                                     Approval Time{' '}
                                 </h1>
+                                <p className=" col-span-1"> - </p>
                                 <p className="text-slate-600">{item?.time}</p>
                             </div>
                         ))}

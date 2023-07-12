@@ -39,7 +39,7 @@ const ChannelCategoryListingWrapper = () => {
     const channelCategoryState: any = useSelector(
         (state: RootState) => state.channelCategory
     )
-    //console.log(channelCategoryState)
+
     const { page, rowsPerPage, searchValue, items } = channelCategoryState
     const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()

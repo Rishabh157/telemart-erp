@@ -50,7 +50,6 @@ const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
         return { label: ele.attributeName, value: ele._id }
     })
     useEffect(() => {
-        console.log(attributeOptions)
         if (attributeOptions?.length) setFlag(true)
     }, [attributeOptions])
 

@@ -50,16 +50,12 @@ const AddVendor = ({
     const breadcrumbs = [
         {
             label: 'Vendors',
-            onClick: () => {
-                console.log('Vendors')
-            },
+            onClick: () => {},
             path: '/vendors',
         },
         {
             label: 'Add Vendor',
-            onClick: () => {
-                console.log('add-Vendors')
-            },
+            onClick: () => {},
         },
     ]
 

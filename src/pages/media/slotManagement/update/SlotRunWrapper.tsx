@@ -80,8 +80,6 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         }
     }, [dispatch])
 
-    //console.log(selectedItems)
-
     const initialValues: FormInitialValues = {
         slotName: selectedItems?.slotName || '',
         channelGroupId: selectedItems?.channelGroupId || '',
@@ -119,7 +117,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         if (values?.runStartTime !== '' && values?.runEndTime !== '') {
             newRunStatus = true
         }
-        //console.log(newRunStatus);
+
         setTimeout(() => {
             updateSlot({
                 body: {

@@ -159,7 +159,7 @@ const EditTapeManagementWrapper = () => {
     const artist = selectedItem?.artistId?.map((ele: any) => {
         return ele._id
     })
-    //console.log(artist)
+
     const newDuration = selectedItem?.duration?.split(':')
 
     let phoneNumber: any = []
@@ -212,7 +212,6 @@ const EditTapeManagementWrapper = () => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
 
-        //console.log(values.artistId)
         let duration = `${values.hour}:${values.minute}:${values.second}`
         let newPhoneNo = values?.phone?.map((ele) => {
             return ele.phoneNo

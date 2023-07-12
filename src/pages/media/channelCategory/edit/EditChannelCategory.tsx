@@ -41,7 +41,6 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditChannelCategory = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-    //console.log(values?.channelCategory, "values")
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)

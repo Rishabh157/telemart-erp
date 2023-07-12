@@ -41,7 +41,7 @@ const AddWebsiteBlogWrapper = (props: Props) => {
     const dispatch = useDispatch()
     const { state } = useLocation()
     const { siteId } = state
-    //console.log(siteId)
+
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addWebsiteBlog] = useAddWebsiteBlogMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -67,7 +67,7 @@ const AddWebsiteBlogWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
-        //console.log(values)
+
         setTimeout(() => {
             addWebsiteBlog({
                 blogName: values.blogName,

@@ -41,6 +41,7 @@ import productCategorySlice from './slices/productCategorySlice'
 import productSlice from './slices/productSlice'
 import productSubCategorySlice from './slices/productSubCategorySlice'
 import PurchaseOrderSlice from './slices/PurchaseOrderSlice'
+import InventoryManagementSlice from './slices/InventoryManagementSlice'
 import saleOrderSlice from './slices/saleOrderSlice'
 import schemeSlice from './slices/schemeSlice'
 import warehouseSlice from './slices/warehouseSlice'
@@ -124,6 +125,7 @@ const store = configureStore({
         cartonBox: cartonBoxSlice,
         scheme: schemeSlice,
         purchaseOrder: PurchaseOrderSlice,
+        inventoryManagement: InventoryManagementSlice,
         grn: GRNSlice,
         productSubCategory: productSubCategorySlice,
         productGroup: productGroupSlice,

@@ -151,16 +151,12 @@ const EditSchemeWrapper = () => {
     const breadcrumbs = [
         {
             label: 'Scheme',
-            onClick: () => {
-                console.log('Scheme')
-            },
+            onClick: () => {},
             path: '/configurations/scheme',
         },
         {
             label: 'Update Scheme',
-            onClick: () => {
-                console.log('Update Scheme')
-            },
+            onClick: () => {},
         },
     ]
 
