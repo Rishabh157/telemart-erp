@@ -41,9 +41,18 @@ export interface userAccesTypes {
 }
 export type InitialStateType = {
   userAccessItems: userAccesTypes
+  checkUserAccess: userAccesTypes
 }
 
 const initialState: InitialStateType = {
+  checkUserAccess: {
+    userId: null,
+    departmentId: "",
+    departmentName: "",
+    userRole: "",
+    userName: "",
+    modules: []
+  },
   userAccessItems: {
     userId: null,
     departmentId: "",
@@ -71,6 +80,13 @@ const userAccesSlice: Slice<InitialStateType> = createSlice({
       state.userAccessItems.modules = action.payload
     },
 
+    setCheckUserAccess: (
+      state,
+      action: PayloadAction<ModulesTypes[]>
+    ) => {
+      console.log(action.payload,"action.payload")
+      state.checkUserAccess.modules = action.payload
+    },
 
 
   }
@@ -78,6 +94,7 @@ const userAccesSlice: Slice<InitialStateType> = createSlice({
 
 export const {
   setUserModule,
-  setUserAccess
+  setUserAccess,
+  setCheckUserAccess
 } = userAccesSlice.actions
 export default userAccesSlice.reducer
