@@ -78,7 +78,7 @@ const userAccesSlice: Slice<InitialStateType> = createSlice({
       state,
       action: PayloadAction<ModulesTypes[]>
     ) => {
-      console.log(action.payload, "action.payload")
+      //console.log(action.payload, "action.payload")
       state.checkUserAccess.modules = action.payload
     },
   },

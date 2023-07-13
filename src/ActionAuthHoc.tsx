@@ -18,7 +18,7 @@ const ActionAuthHOC = ({
     isRedirect=false
 }: Props) => {
   const navigate=useNavigate()
-    // console.log(actionName, 'actionNameactionNameactionNameactionName')
+
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
