@@ -15,29 +15,27 @@ export interface fieldTypes {
   fieldid: string
   fieldName: string
   fieldValue: string
-
 }
 export interface moduleActionTypes {
-  actionId: string;
-  actionUrl: string;
-  actionName: string;
+  actionId: string
+  actionUrl: string
+  actionName: string
   fields: fieldTypes[]
 }
 
 export interface ModulesTypes {
-  moduleId: string;
-  moduleName: string;
+  moduleId: string
+  moduleName: string
   moduleAction: moduleActionTypes[]
 }
 
 export interface userAccesTypes {
-  userId: string | null,
-  departmentId: string,
-  departmentName: string,
-  userRole: string,
-  userName: string,
+  userId: string | null
+  departmentId: string
+  departmentName: string
+  userRole: string
+  userName: string
   modules: ModulesTypes[]
-
 }
 export type InitialStateType = {
   userAccessItems: userAccesTypes
@@ -67,29 +65,23 @@ const userAccesSlice: Slice<InitialStateType> = createSlice({
   name: 'userAcces',
   initialState,
   reducers: {
-    setUserModule: (
-      state,
-      action: PayloadAction<ModulesTypes[] | []>
-    ) => {
-      state.userAccessItems = { ...state.userAccessItems, modules: [...action.payload] }
+    setUserModule: (state, action: PayloadAction<ModulesTypes[] | []>) => {
+      state.userAccessItems = {
+        ...state.userAccessItems,
+        modules: [...action.payload],
+      }
     },
-    setUserAccess: (
-      state,
-      action: PayloadAction<ModulesTypes[]>
-    ) => {
+    setUserAccess: (state, action: PayloadAction<ModulesTypes[]>) => {
       state.userAccessItems.modules = action.payload
     },
-
     setCheckUserAccess: (
       state,
       action: PayloadAction<ModulesTypes[]>
     ) => {
-      console.log(action.payload,"action.payload")
+      console.log(action.payload, "action.payload")
       state.checkUserAccess.modules = action.payload
     },
-
-
-  }
+  },
 })
 
 export const {
@@ -97,4 +89,6 @@ export const {
   setUserAccess,
   setCheckUserAccess
 } = userAccesSlice.actions
+
+
 export default userAccesSlice.reducer

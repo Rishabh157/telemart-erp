@@ -45,7 +45,7 @@ const VendorsListingWrapper = () => {
 
     const dispatch = useDispatch<AppDispatch>()
 
-     const columns: columnTypes[] = [
+    const columns: columnTypes[] = [
         {
             field: 'vendorCode',
             headerName: 'Vendor Code',

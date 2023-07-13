@@ -35,7 +35,6 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
     const { selectedItem }: any = useSelector(
         (state: RootState) => state.dealer
     )
-    console.log(selectedItem,"selectedItem")
     const changeStatus = () => {
         showConfirmationDialog({
             title: 'Activate Dealer',

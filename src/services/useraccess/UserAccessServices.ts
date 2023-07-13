@@ -5,8 +5,6 @@ import apiSlice from '../ApiSlice'
 
 export const callerPageApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-
-
         //***** ADD *****/
         addUserAccess: builder.mutation({
             // invalidatesTags: ['callerForm'],
@@ -24,14 +22,13 @@ export const callerPageApi = apiSlice.injectEndpoints({
                 url: `/user-access`,
                 params: { userRoleId: userRole },
                 method: 'GET',
-
             }),
         }),
 
         //***** Update *****/
         updateUserAccess: builder.mutation({
             // invalidatesTags: ['callerForm'],
-            query: ({ body, userRole }: { body: any, userRole: string }) => ({
+            query: ({ body, userRole }: { body: any; userRole: string }) => ({
                 url: `user-access/user-role/${userRole}`,
                 method: 'PUT',
                 body,
@@ -49,5 +46,8 @@ export const callerPageApi = apiSlice.injectEndpoints({
         // }),
     }),
 })
-export const { useAddUserAccessMutation, useGetUserAccessQuery, useUpdateUserAccessMutation } =
-    callerPageApi
+export const {
+    useAddUserAccessMutation,
+    useGetUserAccessQuery,
+    useUpdateUserAccessMutation,
+} = callerPageApi
