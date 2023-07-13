@@ -12,7 +12,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 // |-- Internal Dependencies --|
 
 export interface fieldTypes {
-    fieldid: string
+    fieldId: string
     fieldName: string
     fieldValue: string
 }
