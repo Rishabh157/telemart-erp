@@ -130,10 +130,11 @@ const OrganisationHierarchy = () => {
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode
+                                         <StyledNode
                                             dept={
                                                 GetHierarchByDeptProps.SALES_DEPARTMENT
                                             }
+                                            userRole="SALE_AGM_SALES"
                                             extraClasses="text-sm font-normal font-sans"
                                         >
                                             AGM Sales
@@ -142,7 +143,8 @@ const OrganisationHierarchy = () => {
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode
+                                             <StyledNode
+                                                userRole="MANAGER_SALES_CENTER"
                                                 dept={
                                                     GetHierarchByDeptProps.SALES_DEPARTMENT
                                                 }
@@ -154,7 +156,8 @@ const OrganisationHierarchy = () => {
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode
+                                                 <StyledNode
+                                                    userRole="ASST_MANAGER_SALES_CENTER"
                                                     dept={
                                                         GetHierarchByDeptProps.SALES_DEPARTMENT
                                                     }
@@ -166,7 +169,8 @@ const OrganisationHierarchy = () => {
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode
+                                                     <StyledNode
+                                                        userRole="SR_TEAM_LEADER_OR_SR_EXECUTIVE_MIS"
                                                         dept={
                                                             GetHierarchByDeptProps.SALES_DEPARTMENT
                                                         }
@@ -179,7 +183,8 @@ const OrganisationHierarchy = () => {
                                             >
                                                 <TreeNode
                                                     label={
-                                                        <StyledNode
+                                                         <StyledNode
+                                                            userRole="TEAM_LEADER_OR_EXECUTIVE_SALES_CENTER"
                                                             dept={
                                                                 GetHierarchByDeptProps.SALES_DEPARTMENT
                                                             }
@@ -192,7 +197,8 @@ const OrganisationHierarchy = () => {
                                                 >
                                                     <TreeNode
                                                         label={
-                                                            <StyledNode
+                                                             <StyledNode
+                                                                userRole="SR_EXECUTIVE_SALES_CENTER"
                                                                 dept={
                                                                     GetHierarchByDeptProps.SALES_DEPARTMENT
                                                                 }
@@ -205,7 +211,8 @@ const OrganisationHierarchy = () => {
                                                     >
                                                         <TreeNode
                                                             label={
-                                                                <StyledNode
+                                                                 <StyledNode
+                                                                    userRole="EXECUTIVE_TRAINEE"
                                                                     dept={
                                                                         GetHierarchByDeptProps.SALES_DEPARTMENT
                                                                     }
@@ -218,7 +225,8 @@ const OrganisationHierarchy = () => {
                                                         >
                                                             <TreeNode
                                                                 label={
-                                                                    <StyledNode
+                                                                     <StyledNode
+                                                                        userRole="SALE_AVP"
                                                                         dept={
                                                                             GetHierarchByDeptProps.SALES_DEPARTMENT
                                                                         }
@@ -252,7 +260,8 @@ const OrganisationHierarchy = () => {
                         >
                             <TreeNode
                                 label={
-                                    <StyledNode
+                                     <StyledNode
+                                        userRole="EXECUTIVE_TRAINEE"
                                         dept={
                                             GetHierarchByDeptProps.HR_DEPARTMENT
                                         }
@@ -264,7 +273,8 @@ const OrganisationHierarchy = () => {
                             >
                                 <TreeNode
                                     label={
-                                        <StyledNode
+                                         <StyledNode
+                                            userRole="EXECUTIVE_TRAINEE"
                                             dept={
                                                 GetHierarchByDeptProps.HR_DEPARTMENT
                                             }
@@ -276,7 +286,8 @@ const OrganisationHierarchy = () => {
                                 >
                                     <TreeNode
                                         label={
-                                            <StyledNode
+                                             <StyledNode
+                                                userRole="EXECUTIVE_TRAINEE"
                                                 dept={
                                                     GetHierarchByDeptProps.HR_DEPARTMENT
                                                 }
@@ -288,7 +299,8 @@ const OrganisationHierarchy = () => {
                                     >
                                         <TreeNode
                                             label={
-                                                <StyledNode
+                                                 <StyledNode
+                                                    userRole="EXECUTIVE_TRAINEE"
                                                     dept={
                                                         GetHierarchByDeptProps.HR_DEPARTMENT
                                                     }
@@ -300,7 +312,8 @@ const OrganisationHierarchy = () => {
                                         >
                                             <TreeNode
                                                 label={
-                                                    <StyledNode
+                                                     <StyledNode
+                                                        userRole="EXECUTIVE_TRAINEE"
                                                         dept={
                                                             GetHierarchByDeptProps.HR_DEPARTMENT
                                                         }

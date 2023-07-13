@@ -22,9 +22,19 @@ export const callerPageApi = apiSlice.injectEndpoints({
             // invalidatesTags: ['callerForm'],
             query: ({ userRole }: { userRole: string }) => ({
                 url: `/user-access`,
-                params:{userRoleId:userRole},
+                params: { userRoleId: userRole },
                 method: 'GET',
 
+            }),
+        }),
+
+        //***** Update *****/
+        updateUserAccess: builder.mutation({
+            // invalidatesTags: ['callerForm'],
+            query: ({ body, userRole }: { body: any, userRole: string }) => ({
+                url: `user-access/user-role/${userRole}`,
+                method: 'PUT',
+                body,
             }),
         }),
 
@@ -39,5 +49,5 @@ export const callerPageApi = apiSlice.injectEndpoints({
         // }),
     }),
 })
-export const { useAddUserAccessMutation, useGetUserAccessQuery } =
+export const { useAddUserAccessMutation, useGetUserAccessQuery, useUpdateUserAccessMutation } =
     callerPageApi

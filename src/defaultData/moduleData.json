@@ -355,7 +355,6 @@
         {
             "moduleId": "AttributesId",
             "moduleName": "Attributes",
-            "moduleRoute": "/configurations/attributes",
             "moduleAction": [
                 {
                     "actionId": "AttributesActionAddId",

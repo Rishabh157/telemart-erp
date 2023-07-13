@@ -72,16 +72,18 @@ const UserAcess = ({
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
-    console.log(userAccessItems, 'userAccessItems')
+   const { modules:moduleList } =userAccessItems
     const handleUserModuleAccess = (
         module: ModulesTypes,
         moduleValue: boolean
     ) => {
-        const moduleAccess = modules.find(
+        const moduleAccess = modules?.find(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
         if (moduleAccess) {
-            let value = [...userAccessItems?.modules]
+            
+            let value = moduleList? [...moduleList]:[]
+           
             if (moduleValue) {
                 value.push(moduleAccess)
             } else {
@@ -130,7 +132,7 @@ const UserAcess = ({
     // }
 
     const isCheckedModule = (module: ModulesTypes) => {
-        const isExistMoule = userAccessItems.modules.some(
+        const isExistMoule = userAccessItems?.modules?.some(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
         return isExistMoule || false
@@ -139,11 +141,11 @@ const UserAcess = ({
         module: ModulesTypes,
         actions: moduleActionTypes
     ) => {
-        const isExistMoule = userAccessItems.modules.find(
+        const isExistMoule = userAccessItems.modules?.find(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
         return (
-            isExistMoule?.moduleAction.some(
+            isExistMoule?.moduleAction?.some(
                 (actionItems) => actionItems.actionId === actions.actionId
             ) || false
         )
