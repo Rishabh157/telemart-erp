@@ -11,6 +11,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -59,17 +60,23 @@ const VendorWarehouseListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
-                <button
-                    onClick={() =>
-                        navigate(`${AddpathName}`, {
-                            state: { params },
-                        })
+                <ActionAuthHOC
+                    moduleName="WAREHOUSE"
+                    actionName='ADD'
+                    Component={
+                        <button
+                            onClick={() =>
+                                navigate(`${AddpathName}`, {
+                                    state: { params },
+                                })
+                            }
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            {' '}
+                            + Add Warehouse{' '}
+                        </button>
                     }
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    {' '}
-                    + Add Warehouse{' '}
-                </button>
+                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

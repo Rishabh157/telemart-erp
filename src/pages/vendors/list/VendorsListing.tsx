@@ -26,6 +26,7 @@ import {
     setSearchValue,
 } from 'src/redux/slices/vendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Types --|
 type Props = {
@@ -48,15 +49,21 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Vendors </ATMPageHeading>
-                <button
-                    onClick={() => {
-                        navigate('add-vendor')
-                    }}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    {' '}
-                    + Add Vendor{' '}
-                </button>
+                <ActionAuthHOC
+                    moduleName="VENDOR"
+                    actionName="ADD"
+                    Component={
+                        <button
+                            onClick={() => {
+                                navigate('add-vendor')
+                            }}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            {' '}
+                            + Add Vendor{' '}
+                        </button>
+                    }
+                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

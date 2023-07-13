@@ -230,6 +230,7 @@ import AuthHOC from './AuthHOC'
 import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
 import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
 import { RootState } from './redux/store'
+import ActionAuthHOC from './ActionAuthHoc'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -249,9 +250,14 @@ const PageRoutes = () => {
         (state: RootState) => state.userAccess
     )
     console.log(checkUserAccess, 'checkUserAccess')
-    const { data, isLoading, isFetching } = useGetUserAccessQuery({
-        userRole: 'SALE_AVP' as string,
-    })
+    const { data, isLoading, isFetching } = useGetUserAccessQuery(
+        {
+            userRole: userData.userRole as string,
+        },
+        {
+            skip: !userData.userRole,
+        }
+    )
 
     useEffect(() => {
         console.log(!isLoading, !isFetching)
@@ -265,13 +271,6 @@ const PageRoutes = () => {
 
         // eslint-disable-next-line
     }, [data, isLoading, isFetching])
-
-    // let moduleRouteAuthorised = ['Vendore', 'Dealer']
-
-    // const handleAuthorised = (type: string) => {
-    //     return moduleRouteAuthorised.some((module: string) => module === type)
-    //     // return false
-    // }
 
     if (!accessToken && window.location.pathname !== '/') {
         return (
@@ -410,7 +409,7 @@ const PageRoutes = () => {
                         element={
                             <AuthHOC
                                 Component={<DealersListingWrapper />}
-                                moduleName="Dealer"
+                                moduleName={'DEALER'}
                             />
                         }
                     />
@@ -429,11 +428,23 @@ const PageRoutes = () => {
 
                     <Route
                         path="/vendors"
-                        element={<VendorsListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<VendorsListingWrapper />}
+                                moduleName="VENDOR"
+                            />
+                        }
                     />
                     <Route
                         path="/vendors/add-vendor"
-                        element={<AddVendorWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddVendorWrapper />}
+                                moduleName="VENDOR"
+                                actionName="ADD"
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/vendors/edit-vendor/:id"

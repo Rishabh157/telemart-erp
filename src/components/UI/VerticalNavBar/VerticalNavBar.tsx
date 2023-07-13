@@ -18,6 +18,7 @@ import { NavItemType } from 'src/navigation'
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
+import { isCheckAuthorizedModule } from 'src/userAccess/getAuthorizedModules'
 
 // |-- Types --|
 type Props = {
@@ -35,7 +36,10 @@ const VerticalNavBar = ({
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const userAccessSiedeBar = ['Dealer', 'Vendore']
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+    // const userAccessSiedeBar =
 
     const { customized } = useSelector((state: RootState) => state?.auth)
     const AlertText =
@@ -106,8 +110,11 @@ const VerticalNavBar = ({
             {/* Navigations */}
             <div className="px-3 py-5 flex flex-col gap-1">
                 {navigation
-                    ?.filter((naveItemAuthenticate:NavItemType) => {
-                        return userAccessSiedeBar.includes(naveItemAuthenticate.name as string)
+                    ?.filter((naveItemAuthenticate: NavItemType) => {
+                        return isCheckAuthorizedModule(
+                            checkUserAccess,
+                            naveItemAuthenticate.name as string
+                        )
                     })
                     .map((navItem, navIndex) => {
                         return (
