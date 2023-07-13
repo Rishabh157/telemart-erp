@@ -15,27 +15,27 @@
                     "actionName": "List",
                     "fields": [
                         {
-                            "fieldId": "1",
+                            "fieldId": "vendorId1",
                             "fieldName": "Vendor Code",
                             "fieldValue": "vendorCode"
                         },
                         {
-                            "fieldId": "2",
+                            "fieldId": "vendorId2",
                             "fieldName": "Company Name",
                             "fieldValue": "companyName"
                         },
                         {
-                            "fieldId": "3",
+                            "fieldId": "vendorId3",
                             "fieldName": "Company Type",
                             "fieldValue": "companyType"
                         },
                         {
-                            "fieldId": "4",
+                            "fieldId": "vendorId4",
                             "fieldName": "District",
                             "fieldValue": "registrationDistrictName"
                         },
                         {
-                            "fieldId": "5",
+                            "fieldId": "vendorId5",
                             "fieldName": "State",
                             "fieldValue": "registrationStateName"
                         }
@@ -45,13 +45,7 @@
                     "actionId": "vendorsActionAddId",
                     "actionUrl": "/vendors/add-vendor",
                     "actionName": "Add",
-                    "fields": [
-                        {
-                            "fieldId": "1",
-                            "fieldName": "State",
-                            "fieldValue": "registrationStateName"
-                        }
-                    ]
+                    "fields": []
                 },
                 {
                     "actionId": "vendorsActionEditId",

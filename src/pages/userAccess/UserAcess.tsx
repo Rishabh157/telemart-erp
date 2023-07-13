@@ -76,7 +76,6 @@ const UserAcess = ({
         (state: RootState) => state.userAccess
     )
     const { modules: moduleList } = userAccessItems
-
     const handleUserModuleAccess = (
         module: ModulesTypes,
         moduleValue: boolean
@@ -97,7 +96,6 @@ const UserAcess = ({
                 value = valueRemove
             }
 
-            console.log('TOP-PARENT', value)
             dispatch(setUserModule(value))
         }
     }
@@ -126,27 +124,44 @@ const UserAcess = ({
                 ...moduleValue[moduleIndex],
                 moduleAction: moduleAction,
             }
-            console.log('moduleValue', moduleValue)
             dispatch(setUserModule(moduleValue))
         }
     }
 
     const isCheckedModule = (module: ModulesTypes) => {
-        const isExistMoule = userAccessItems?.modules?.some(
+        const isExistModule = userAccessItems?.modules?.some(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
-        return isExistMoule || false
+        return isExistModule || false
     }
     const isCheckedModuleAction = (
         module: ModulesTypes,
         actions: moduleActionTypes
     ) => {
-        const isExistMoule = userAccessItems.modules?.find(
+        const isExistModule = userAccessItems.modules?.find(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
         return (
-            isExistMoule?.moduleAction?.some(
+            isExistModule?.moduleAction?.some(
                 (actionItems) => actionItems.actionId === actions.actionId
+            ) || false
+        )
+    }
+    const isCheckedModuleActionField = (
+        module: ModulesTypes,
+        actions: moduleActionTypes,
+        field: fieldTypes
+    ) => {
+        const isExistModule = userAccessItems.modules?.find(
+            (moduleitem) => moduleitem.moduleId === module.moduleId
+        )
+        const isExistModuleAction = isExistModule?.moduleAction?.find(
+            (actionItems) => actionItems.actionId === actions.actionId
+        )
+
+        return (
+            isExistModuleAction?.fields?.some(
+                (fieldItem) => fieldItem.fieldId === field.fieldId
             ) || false
         )
     }
@@ -162,28 +177,53 @@ const UserAcess = ({
         }
     }
 
-    // const isCheckedFieldAction = (
-    //     fields: ModulesTypes,
-    //     actions: moduleActionTypes
-    // ) => {
-    //     console.log('module fields', module)
-    //     const isExistMoule = userAccessItems.modules?.find(
-    //         (moduleitem) => moduleitem.moduleId === module.moduleId
-    //     )
-    //     return (
-    //         isExistMoule?.moduleAction?.some(
-    //             (actionItems) => actionItems.actionId === actions.actionId
-    //         ) || false
-    //     )
-    // }
+    const handleUserFieldAccess = (
+        module: ModulesTypes,
+        actions: moduleActionTypes,
+        field: fieldTypes,
+        fieldValue: boolean
+    ) => {
+        let clonedUserAccessItems = JSON.parse(JSON.stringify(userAccessItems))
 
-    // const handleUserFieldAccess = (
-    //     module: ModulesTypes
-    //     action: string,
-    //     fieldValue: boolean
-    // ) => {
-    //     console.log('first', module, action, fieldValue, actionField)
-    // }
+        const moduleIndex = clonedUserAccessItems.modules?.findIndex(
+            (moduleitem: ModulesTypes) =>
+                moduleitem.moduleId === module.moduleId
+        )
+        const moduleActionIndex = clonedUserAccessItems.modules[
+            moduleIndex
+        ].moduleAction.findIndex(
+            (actionItem: moduleActionTypes) =>
+                actionItem.actionId === actions.actionId
+        )
+
+        if (moduleIndex >= 0) {
+            let moduleValue = [...clonedUserAccessItems.modules]
+            let moduleActionField = [
+                ...moduleValue[moduleIndex].moduleAction[moduleActionIndex]
+                    .fields,
+            ]
+
+            if (fieldValue) {
+                moduleActionField.push(field)
+            } else {
+                let valueRemove = moduleActionField?.filter(
+                    (fieldItem) => fieldItem.fieldId !== field.fieldId
+                )
+                moduleActionField = valueRemove
+            }
+
+            moduleValue[moduleIndex].moduleAction[moduleActionIndex] = {
+                ...moduleValue[moduleIndex].moduleAction[moduleActionIndex],
+                fields: moduleActionField,
+            }
+
+            dispatch(setUserModule(moduleValue))
+        }
+    }
+
+    const getReplaceUnderScoreToSpace = (name: string) =>
+        name?.replaceAll('_', ' ')
+
     return (
         <div className="h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
@@ -256,7 +296,9 @@ const UserAcess = ({
                                                     htmlFor={`${module?.moduleId}`}
                                                 >
                                                     {' '}
-                                                    {module.moduleName}
+                                                    {getReplaceUnderScoreToSpace(
+                                                        module.moduleName
+                                                    )}
                                                 </label>
                                             </div>
                                             <ul className="pt-2">
@@ -273,6 +315,12 @@ const UserAcess = ({
                                                             >
                                                                 <div className="gap-2 flex px-3">
                                                                     <input
+                                                                        disabled={
+                                                                            actionsItems.actionName ===
+                                                                            'List'
+                                                                                ? true
+                                                                                : false
+                                                                        }
                                                                         id={`${actionsItems?.actionId}`}
                                                                         type={
                                                                             'checkbox'
@@ -330,7 +378,11 @@ const UserAcess = ({
                                                                                                         field
                                                                                                     ) => {
                                                                                                         return (
-                                                                                                            <ul>
+                                                                                                            <ul
+                                                                                                                key={
+                                                                                                                    field.fieldId
+                                                                                                                }
+                                                                                                            >
                                                                                                                 <li
                                                                                                                     className=""
                                                                                                                     key={
@@ -343,21 +395,23 @@ const UserAcess = ({
                                                                                                                             type={
                                                                                                                                 'checkbox'
                                                                                                                             }
-                                                                                                                            // checked={isCheckedModuleAction(
-                                                                                                                            //     module,
-                                                                                                                            //     actionsItems
-                                                                                                                            // )}
-                                                                                                                            // onChange={(
-                                                                                                                            //     e
-                                                                                                                            // ) =>
-                                                                                                                            //     handleUserActionAccess(
-                                                                                                                            //         module,
-                                                                                                                            //         actionsItems,
-                                                                                                                            //         e
-                                                                                                                            //             .target
-                                                                                                                            //             .checked
-                                                                                                                            //     )
-                                                                                                                            // }
+                                                                                                                            checked={isCheckedModuleActionField(
+                                                                                                                                module,
+                                                                                                                                actionsItems,
+                                                                                                                                field
+                                                                                                                            )}
+                                                                                                                            onChange={(
+                                                                                                                                e
+                                                                                                                            ) =>
+                                                                                                                                handleUserFieldAccess(
+                                                                                                                                    module,
+                                                                                                                                    actionsItems,
+                                                                                                                                    field,
+                                                                                                                                    e
+                                                                                                                                        .target
+                                                                                                                                        .checked
+                                                                                                                                )
+                                                                                                                            }
                                                                                                                         />
                                                                                                                         <label
                                                                                                                             className="select-none"

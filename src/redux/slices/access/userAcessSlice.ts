@@ -74,11 +74,11 @@ const userAccesSlice: Slice<InitialStateType> = createSlice({
     setUserAccess: (state, action: PayloadAction<ModulesTypes[]>) => {
       state.userAccessItems.modules = action.payload
     },
+  
     setCheckUserAccess: (
       state,
       action: PayloadAction<ModulesTypes[]>
     ) => {
-      console.log(action.payload, "action.payload")
       state.checkUserAccess.modules = action.payload
     },
   },
