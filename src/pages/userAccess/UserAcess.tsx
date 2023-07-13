@@ -72,7 +72,7 @@ const UserAcess = ({
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
-   const { modules:moduleList } =userAccessItems
+    const { modules: moduleList } = userAccessItems
     const handleUserModuleAccess = (
         module: ModulesTypes,
         moduleValue: boolean
@@ -81,9 +81,8 @@ const UserAcess = ({
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
         if (moduleAccess) {
-            
-            let value = moduleList? [...moduleList]:[]
-           
+            let value = moduleList ? [...moduleList] : []
+
             if (moduleValue) {
                 value.push(moduleAccess)
             } else {
