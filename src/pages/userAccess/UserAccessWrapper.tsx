@@ -32,7 +32,6 @@ const UserAccessWrapper = () => {
     const navigate = useNavigate()
     const [buttonValue, setButtonValue] = useState('save')
 
-
     const [addUserAccess] = useAddUserAccessMutation()
     const [updateUserAccess] = useUpdateUserAccessMutation()
     const { data, isLoading, isFetching } = useGetUserAccessQuery(

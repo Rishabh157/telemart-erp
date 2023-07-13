@@ -101,7 +101,7 @@ import userAcessSlice from './slices/access/userAcessSlice'
 const store = configureStore({
     reducer: {
         auth: authSlice,
-        userAccess:userAcessSlice,
+        userAccess: userAcessSlice,
         sideNavLayout: sideNavLayoutSlice,
         dealer: dealerSlice,
         dealerRatio: dealersRatioSlice,

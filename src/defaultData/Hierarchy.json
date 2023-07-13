@@ -246,6 +246,10 @@
             "value": "SR_WEB_DEVELOPER"
         },
         {
+            "label": "SR Manager Digital Sales",
+            "value": "SR_WEB_DEVELOPER"
+        },
+        {
             "label": "WebDeveloper",
             "value": "WEB_DEVELOPER"
         }
