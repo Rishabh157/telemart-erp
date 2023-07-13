@@ -8,27 +8,39 @@ type Props = {
     Component: React.ReactNode
     moduleName?: string
     actionName?: string
-    isRedirect?:boolean
+    isRedirect?: boolean
 }
 
 const ActionAuthHOC = ({
     Component,
     moduleName = '',
     actionName = '',
-    isRedirect=false
+    isRedirect = false,
 }: Props) => {
-  const navigate=useNavigate()
+    const navigate = useNavigate()
     // console.log(actionName, 'actionNameactionNameactionNameactionName')
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    let isAuthorized = isCheckAuthorizedModuleAction(
-        checkUserAccess,
-        moduleName,
-        actionName
-    )
+    const { userData } = useSelector((state: RootState) => state.auth)
+    let isAuthorized =
+        userData?.userRole === 'ADMIN'
+            ? true
+            : isCheckAuthorizedModuleAction(
+                  checkUserAccess,
+                  moduleName,
+                  actionName
+              )
 
-    return <>{isAuthorized ? <>{Component}</> : isRedirect? navigate('/dashboard') : null}</>
+    return (
+        <>
+            {isAuthorized ? (
+                <>{Component}</>
+            ) : isRedirect ? (
+                navigate('/dashboard')
+            ) : null}
+        </>
+    )
 }
 
 export default ActionAuthHOC
