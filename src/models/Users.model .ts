@@ -58,6 +58,7 @@ export type userData = {
     userId: string
     userName: string
     role: string
+    userRole: string
 }
 
 export type ChangeCompany = {

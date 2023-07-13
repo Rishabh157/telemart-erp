@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -210,7 +210,7 @@ import {
 } from './pages/index'
 import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     setAccessToken,
     setDeviceId,
@@ -226,6 +226,11 @@ import InwardsTabs from './pages/inventories/inward'
 import InwardDealerTabsListingWrapper from './pages/inventories/inward/Dealer/InwardDealerTabsListingWrapper'
 import InwardCustomerTabsListingWrapper from './pages/inventories/inward/Customer/InwardCustomerTabsListingWrapper'
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
+import AuthHOC from './AuthHOC'
+import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
+import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
+import { RootState } from './redux/store'
+import ActionAuthHOC from './ActionAuthHoc'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -241,6 +246,31 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData))
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+    console.log(checkUserAccess, 'checkUserAccess')
+    const { data, isLoading, isFetching } = useGetUserAccessQuery(
+        {
+            userRole: userData.userRole as string,
+        },
+        {
+            skip: !userData.userRole,
+        }
+    )
+
+    useEffect(() => {
+        console.log(!isLoading, !isFetching)
+        if (!isLoading && !isFetching && data) {
+            if (data?.data !== null) {
+                dispatch(setCheckUserAccess(data?.data?.module))
+            } else {
+                dispatch(setCheckUserAccess([]))
+            }
+        }
+
+        // eslint-disable-next-line
+    }, [data, isLoading, isFetching])
 
     if (!accessToken && window.location.pathname !== '/') {
         return (
@@ -370,9 +400,18 @@ const PageRoutes = () => {
                         path="/approved-orders/view/:id"
                         element={<ApprovedOrderViewWrapper />}
                     />
-                    <Route
+                    {/* <Route
                         path="/dealers"
                         element={<DealersListingWrapper />}
+                    /> */}
+                    <Route
+                        path="/dealers"
+                        element={
+                            <AuthHOC
+                                Component={<DealersListingWrapper />}
+                                moduleName={'DEALER'}
+                            />
+                        }
                     />
                     <Route
                         path="/dealers-ratio"
@@ -389,11 +428,23 @@ const PageRoutes = () => {
 
                     <Route
                         path="/vendors"
-                        element={<VendorsListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<VendorsListingWrapper />}
+                                moduleName="VENDOR"
+                            />
+                        }
                     />
                     <Route
                         path="/vendors/add-vendor"
-                        element={<AddVendorWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddVendorWrapper />}
+                                moduleName="VENDOR"
+                                actionName="ADD"
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/vendors/edit-vendor/:id"
@@ -545,7 +596,6 @@ const PageRoutes = () => {
                             element={<DealerSupervisorTabWrapper />}
                         />
                     </Route>
-
                     <Route path="users" element={<UsersListingWrapper />} />
                     <Route
                         path="/users/add-user"
@@ -553,14 +603,11 @@ const PageRoutes = () => {
                     />
                     <Route path="/users/:id" element={<EditUserWrapper />} />
                     <Route path="test" element={<Test />} />
-
                     <Route path="/asr" element={<ASRListingWrapper />} />
                     <Route path="/asr/add" element={<AddASRWrapper />} />
                     <Route path="/asr/:id" element={<EditASRWrapper />} />
-
                     <Route path="/grn" element={<GRNListingWrapper />} />
                     <Route path="/grn/add" element={<AddGRNWrapper />} />
-
                     <Route
                         path="/configurations/scheme"
                         element={<SchemeListingWrapper />}

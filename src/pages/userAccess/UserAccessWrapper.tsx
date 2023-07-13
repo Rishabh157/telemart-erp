@@ -108,7 +108,7 @@ const UserAccessWrapper = () => {
         if (!isLoading && !isFetching && data) {
             if (data?.data) {
                 setButtonValue('update')
-                dispatch(setUserAccess(data?.data[0]?.module))
+                dispatch(setUserAccess(data?.data?.module))
             } else {
                 setButtonValue('save')
                 dispatch(setUserAccess([]))

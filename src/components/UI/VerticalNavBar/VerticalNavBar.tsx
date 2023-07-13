@@ -18,6 +18,7 @@ import { NavItemType } from 'src/navigation'
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
+import { isCheckAuthorizedModule } from 'src/userAccess/getAuthorizedModules'
 
 // |-- Types --|
 type Props = {
@@ -35,9 +36,14 @@ const VerticalNavBar = ({
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const { pathname } = useLocation()
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+    // const userAccessSiedeBar =
 
-    const { customized } = useSelector((state: RootState) => state?.auth)
+    const { customized, userData } = useSelector(
+        (state: RootState) => state?.auth
+    )
     const AlertText =
         'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
     useEffect(() => {
@@ -105,23 +111,32 @@ const VerticalNavBar = ({
 
             {/* Navigations */}
             <div className="px-3 py-5 flex flex-col gap-1">
-                {navigation?.map((navItem, navIndex) => {
-                    return (
-                        <div
-                            key={navIndex}
-                            onClick={() => {
-                                if (customized) {
-                                    const confirmValue: boolean =
-                                        window.confirm(AlertText)
-                                    if (confirmValue) {
-                                        dispatch(setFieldCustomized(false))
+                {navigation
+                    ?.filter((permissionRoute: NavItemType) => {
+                        return userData?.userRole === 'ADMIN'
+                            ? true
+                            : isCheckAuthorizedModule(
+                                  checkUserAccess,
+                                  permissionRoute.name as string
+                              )
+                    })
+                    .map((navItem, navIndex) => {
+                        return (
+                            <div
+                                key={navIndex}
+                                onClick={() => {
+                                    if (customized) {
+                                        const confirmValue: boolean =
+                                            window.confirm(AlertText)
+                                        if (confirmValue) {
+                                            dispatch(setFieldCustomized(false))
+                                            navigate(navItem.path)
+                                        }
+                                    } else {
                                         navigate(navItem.path)
                                     }
-                                } else {
-                                    navigate(navItem.path)
-                                }
-                            }}
-                            className={`
+                                }}
+                                className={`
                 flex
                 gap-3
                 items-center 
@@ -141,16 +156,16 @@ const VerticalNavBar = ({
                         : 'text-slate-500'
                 } 
                 `}
-                        >
-                            <div className="py-1">
-                                <navItem.icon />
+                            >
+                                <div className="py-1">
+                                    <navItem.icon />
+                                </div>
+                                {!isCollapsed && (
+                                    <div className=""> {navItem.label} </div>
+                                )}
                             </div>
-                            {!isCollapsed && (
-                                <div className=""> {navItem.label} </div>
-                            )}
-                        </div>
-                    )
-                })}
+                        )
+                    })}
             </div>
         </div>
     )
