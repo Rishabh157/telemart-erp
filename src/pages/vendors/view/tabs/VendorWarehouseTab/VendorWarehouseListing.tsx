@@ -62,7 +62,7 @@ const VendorWarehouseListing = ({
                 <ATMPageHeading> Warehouse </ATMPageHeading>
                 <ActionAuthHOC
                     moduleName="WAREHOUSE"
-                    actionName='ADD'
+                    actionName="ADD"
                     Component={
                         <button
                             onClick={() =>

@@ -39,6 +39,7 @@ const VerticalNavBar = ({
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
     // const userAccessSiedeBar =
 
     const { customized } = useSelector((state: RootState) => state?.auth)
@@ -109,12 +110,14 @@ const VerticalNavBar = ({
 
             {/* Navigations */}
             <div className="px-3 py-5 flex flex-col gap-1">
-                {navigation
-                    ?.filter((naveItemAuthenticate: NavItemType) => {
-                        return isCheckAuthorizedModule(
-                            checkUserAccess,
-                            naveItemAuthenticate.name as string
-                        )
+            {navigation
+                    ?.filter((permissionRoute: NavItemType) => {
+                        return userData?.userRole === 'ADMIN'
+                            ? true
+                            : isCheckAuthorizedModule(
+                                  checkUserAccess,
+                                  permissionRoute.name as string
+                              )
                     })
                     .map((navItem, navIndex) => {
                         return (

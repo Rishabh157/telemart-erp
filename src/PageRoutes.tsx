@@ -400,10 +400,7 @@ const PageRoutes = () => {
                         path="/approved-orders/view/:id"
                         element={<ApprovedOrderViewWrapper />}
                     />
-                    {/* <Route
-                        path="/dealers"
-                        element={<DealersListingWrapper />}
-                    /> */}
+                  
                     <Route
                         path="/dealers"
                         element={

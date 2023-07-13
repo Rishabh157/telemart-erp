@@ -127,7 +127,7 @@ const UserAcess = ({
     //     action: string,
     //     fieldValue: boolean
     // ) => {
-    //     
+    //
     // }
 
     const isCheckedModule = (module: ModulesTypes) => {
