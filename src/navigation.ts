@@ -47,13 +47,13 @@ export const navigation: NavItemType[] = [
         label: 'Vendors',
         icon: HiOutlineTruck,
         path: '/vendors',
-        name: 'Vendore'
+        name: 'VENDOR'
     },
     {
         label: 'Dealers',
         icon: FaRegHandshake,
         path: '/dealers',
-        name: 'Dealer'
+        name: 'DEALER'
     },
     {
         label: 'Dealers-ratio',
@@ -65,20 +65,20 @@ export const navigation: NavItemType[] = [
         label: 'Users',
         icon: FiUsers,
         path: '/users',
-        name: 'Users'
+        name: 'USER'
     },
     {
         label: 'Warehouse',
         icon: TbBuildingWarehouse,
         path: '/warehouse',
-        name: 'Warehouse'
+        name: 'WAREHOUSE'
     },
 
     {
         label: 'Sale Order',
         icon: CgNotes,
         path: '/sale-order',
-        name: 'SaleOrder'
+        name: 'SALE_ORDER'
     },
 
     {
