@@ -249,7 +249,6 @@ const PageRoutes = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    console.log(checkUserAccess, 'checkUserAccess')
     const { data, isLoading, isFetching } = useGetUserAccessQuery(
         {
             userRole: userData.userRole as string,
@@ -260,7 +259,6 @@ const PageRoutes = () => {
     )
 
     useEffect(() => {
-        console.log(!isLoading, !isFetching)
         if (!isLoading && !isFetching && data) {
             if (data?.data !== null) {
                 dispatch(setCheckUserAccess(data?.data?.module))

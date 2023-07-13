@@ -7,6 +7,7 @@
 
 // |-- Built-in Dependencies --|
 import React from 'react'
+import { FcInfo } from 'react-icons/fc'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- External Dependencies --|
@@ -18,6 +19,7 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 // import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 // import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 // import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
@@ -29,6 +31,7 @@ import {
     moduleActionTypes,
     ModulesTypes,
     setUserModule,
+    fieldTypes,
 } from 'src/redux/slices/access/userAcessSlice'
 import { RootState } from 'src/redux/store'
 import {
@@ -80,6 +83,7 @@ const UserAcess = ({
         const moduleAccess = modules?.find(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
+
         if (moduleAccess) {
             let value = moduleList ? [...moduleList] : []
 
@@ -91,6 +95,7 @@ const UserAcess = ({
                 )
                 value = valueRemove
             }
+
             dispatch(setUserModule(value))
         }
     }
@@ -99,7 +104,7 @@ const UserAcess = ({
         action: moduleActionTypes,
         actionValue: boolean
     ) => {
-        const moduleIndex = userAccessItems.modules.findIndex(
+        const moduleIndex = userAccessItems.modules?.findIndex(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
         if (moduleIndex >= 0) {
@@ -110,7 +115,7 @@ const UserAcess = ({
             if (actionValue) {
                 moduleAction.push(action)
             } else {
-                let valueRemove = moduleAction.filter(
+                let valueRemove = moduleAction?.filter(
                     (actionitem) => actionitem.actionId !== action.actionId
                 )
                 moduleAction = valueRemove
@@ -122,33 +127,103 @@ const UserAcess = ({
             dispatch(setUserModule(moduleValue))
         }
     }
-    // const handleUserFieldAccess = (
-    //     module: ModulesTypes
-    //     action: string,
-    //     fieldValue: boolean
-    // ) => {
-    //     console.log('first', module, action, fieldValue, actionField)
-    // }
 
     const isCheckedModule = (module: ModulesTypes) => {
-        const isExistMoule = userAccessItems?.modules?.some(
+        const isExistModule = userAccessItems?.modules?.some(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
-        return isExistMoule || false
+        return isExistModule || false
     }
     const isCheckedModuleAction = (
         module: ModulesTypes,
         actions: moduleActionTypes
     ) => {
-        const isExistMoule = userAccessItems.modules?.find(
+        const isExistModule = userAccessItems.modules?.find(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
         return (
-            isExistMoule?.moduleAction?.some(
+            isExistModule?.moduleAction?.some(
                 (actionItems) => actionItems.actionId === actions.actionId
             ) || false
         )
     }
+    const isCheckedModuleActionField = (
+        module: ModulesTypes,
+        actions: moduleActionTypes,
+        field: fieldTypes
+    ) => {
+        const isExistModule = userAccessItems.modules?.find(
+            (moduleitem) => moduleitem.moduleId === module.moduleId
+        )
+        const isExistModuleAction = isExistModule?.moduleAction?.find(
+            (actionItems) => actionItems.actionId === actions.actionId
+        )
+
+        return (
+            isExistModuleAction?.fields?.some(
+                (fieldItem) => fieldItem.fieldId === field.fieldId
+            ) || false
+        )
+    }
+
+    const HandleShowFiledValueModal = (actionName: string) => {
+        switch (actionName) {
+            case 'EDIT':
+                return false
+            case 'DELETE':
+                return false
+            default:
+                return true
+        }
+    }
+
+    const handleUserFieldAccess = (
+        module: ModulesTypes,
+        actions: moduleActionTypes,
+        field: fieldTypes,
+        fieldValue: boolean
+    ) => {
+        let clonedUserAccessItems = JSON.parse(JSON.stringify(userAccessItems))
+
+        const moduleIndex = clonedUserAccessItems.modules?.findIndex(
+            (moduleitem: ModulesTypes) =>
+                moduleitem.moduleId === module.moduleId
+        )
+        const moduleActionIndex = clonedUserAccessItems.modules[
+            moduleIndex
+        ].moduleAction.findIndex(
+            (actionItem: moduleActionTypes) =>
+                actionItem.actionId === actions.actionId
+        )
+
+        if (moduleIndex >= 0) {
+            let moduleValue = [...clonedUserAccessItems.modules]
+            let moduleActionField = [
+                ...moduleValue[moduleIndex].moduleAction[moduleActionIndex]
+                    .fields,
+            ]
+
+            if (fieldValue) {
+                moduleActionField.push(field)
+            } else {
+                let valueRemove = moduleActionField?.filter(
+                    (fieldItem) => fieldItem.fieldId !== field.fieldId
+                )
+                moduleActionField = valueRemove
+            }
+
+            moduleValue[moduleIndex].moduleAction[moduleActionIndex] = {
+                ...moduleValue[moduleIndex].moduleAction[moduleActionIndex],
+                fields: moduleActionField,
+            }
+
+            dispatch(setUserModule(moduleValue))
+        }
+    }
+
+    const getReplaceUnderScoreToSpace = (name: string) =>
+        name?.replaceAll('_', ' ')
+
     return (
         <div className="h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
@@ -204,6 +279,7 @@ const UserAcess = ({
                                         <div className="" key={ind}>
                                             <div className="font-bold text-medium  gap-2 flex">
                                                 <input
+                                                    id={`${module?.moduleId}`}
                                                     type={'checkbox'}
                                                     checked={isCheckedModule(
                                                         module
@@ -215,7 +291,15 @@ const UserAcess = ({
                                                         )
                                                     }
                                                 />
-                                                <div> {module.moduleName}</div>
+                                                <label
+                                                    className="select-none"
+                                                    htmlFor={`${module?.moduleId}`}
+                                                >
+                                                    {' '}
+                                                    {getReplaceUnderScoreToSpace(
+                                                        module.moduleName
+                                                    )}
+                                                </label>
                                             </div>
                                             <ul className="pt-2">
                                                 {module?.moduleAction.map(
@@ -224,13 +308,20 @@ const UserAcess = ({
                                                     ) => {
                                                         return (
                                                             <li
-                                                                className=" flex"
+                                                                className=""
                                                                 key={
                                                                     actionsItems.actionId
                                                                 }
                                                             >
                                                                 <div className="gap-2 flex px-3">
                                                                     <input
+                                                                        disabled={
+                                                                            actionsItems.actionName ===
+                                                                            'List'
+                                                                                ? true
+                                                                                : false
+                                                                        }
+                                                                        id={`${actionsItems?.actionId}`}
                                                                         type={
                                                                             'checkbox'
                                                                         }
@@ -250,10 +341,98 @@ const UserAcess = ({
                                                                             )
                                                                         }
                                                                     />
-                                                                    <div>
-                                                                        {
+                                                                    <div className="flex justify-around">
+                                                                        <label
+                                                                            className="select-none"
+                                                                            htmlFor={`${actionsItems?.actionId}`}
+                                                                        >
+                                                                            {
+                                                                                actionsItems.actionName
+                                                                            }
+                                                                        </label>
+                                                                        {HandleShowFiledValueModal(
                                                                             actionsItems.actionName
-                                                                        }
+                                                                        ) &&
+                                                                        actionsItems
+                                                                            ?.fields
+                                                                            .length ? (
+                                                                            <div className="pl-4">
+                                                                                <MouseOverPopover
+                                                                                    title={
+                                                                                        actionsItems.actionName
+                                                                                    }
+                                                                                    buttonName={
+                                                                                        <FcInfo
+                                                                                            fill="red"
+                                                                                            size={
+                                                                                                18
+                                                                                            }
+                                                                                        />
+                                                                                    }
+                                                                                    isbuttonName
+                                                                                    children={
+                                                                                        <>
+                                                                                            <div className="px-4 py-1 border flex flex-col justify-between">
+                                                                                                {actionsItems?.fields?.map(
+                                                                                                    (
+                                                                                                        field
+                                                                                                    ) => {
+                                                                                                        return (
+                                                                                                            <ul
+                                                                                                                key={
+                                                                                                                    field.fieldId
+                                                                                                                }
+                                                                                                            >
+                                                                                                                <li
+                                                                                                                    className=""
+                                                                                                                    key={
+                                                                                                                        field.fieldId
+                                                                                                                    }
+                                                                                                                >
+                                                                                                                    <div className="gap-2 flex px-3">
+                                                                                                                        <input
+                                                                                                                            id={`${field?.fieldId}`}
+                                                                                                                            type={
+                                                                                                                                'checkbox'
+                                                                                                                            }
+                                                                                                                            checked={isCheckedModuleActionField(
+                                                                                                                                module,
+                                                                                                                                actionsItems,
+                                                                                                                                field
+                                                                                                                            )}
+                                                                                                                            onChange={(
+                                                                                                                                e
+                                                                                                                            ) =>
+                                                                                                                                handleUserFieldAccess(
+                                                                                                                                    module,
+                                                                                                                                    actionsItems,
+                                                                                                                                    field,
+                                                                                                                                    e
+                                                                                                                                        .target
+                                                                                                                                        .checked
+                                                                                                                                )
+                                                                                                                            }
+                                                                                                                        />
+                                                                                                                        <label
+                                                                                                                            className="select-none"
+                                                                                                                            htmlFor={`${field?.fieldId}`}
+                                                                                                                        >
+                                                                                                                            {
+                                                                                                                                field?.fieldName
+                                                                                                                            }
+                                                                                                                        </label>
+                                                                                                                    </div>
+                                                                                                                </li>
+                                                                                                            </ul>
+                                                                                                        )
+                                                                                                    }
+                                                                                                )}
+                                                                                            </div>
+                                                                                        </>
+                                                                                    }
+                                                                                />
+                                                                            </div>
+                                                                        ) : null}
                                                                     </div>
                                                                 </div>
                                                             </li>

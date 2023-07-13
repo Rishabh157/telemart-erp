@@ -12,9 +12,9 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 // |-- Internal Dependencies --|
 
 export interface fieldTypes {
-  fieldid: string
-  fieldName: string
-  fieldValue: string
+    fieldId: string
+    fieldName: string
+    fieldValue: string
 }
 export interface moduleActionTypes {
   actionId: string
@@ -74,11 +74,11 @@ const userAccesSlice: Slice<InitialStateType> = createSlice({
     setUserAccess: (state, action: PayloadAction<ModulesTypes[]>) => {
       state.userAccessItems.modules = action.payload
     },
+  
     setCheckUserAccess: (
       state,
       action: PayloadAction<ModulesTypes[]>
     ) => {
-      console.log(action.payload, "action.payload")
       state.checkUserAccess.modules = action.payload
     },
   },
