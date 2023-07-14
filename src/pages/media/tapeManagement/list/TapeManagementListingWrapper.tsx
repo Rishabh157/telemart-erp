@@ -24,7 +24,11 @@ import {
 } from 'src/services/media/TapeManagementServices'
 import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -32,7 +36,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/tapeManagementSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+
 
 // export type language ={
 //     languageId:string[];
@@ -47,7 +51,9 @@ const TapeManagementListingWrapper = () => {
     const tapeManagementState: any = useSelector(
         (state: RootState) => state.tapeManagement
     )
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { page, rowsPerPage, searchValue, items } = tapeManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -181,7 +187,12 @@ const TapeManagementListingWrapper = () => {
             <MediaLayout>
                 <div className="h-full">
                     <TapeManagementListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.tapeManangement,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

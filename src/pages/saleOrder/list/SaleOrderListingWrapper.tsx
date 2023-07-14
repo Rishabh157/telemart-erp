@@ -26,6 +26,11 @@ import {
 } from 'src/services/SalesOrderService'
 import SaleOrderListing from './SaleOrderListing'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -34,7 +39,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const SaleOrderListingWrapper = () => {
     const salesOrderState: any = useSelector(
@@ -48,6 +52,9 @@ const SaleOrderListingWrapper = () => {
     const [deleteSaleOrder] = useDeleteSalesOrderMutation()
     const [updateSalesOrder] = useUpdateSalesOrderMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
 
     //useUpdateSoLevelMutation
     const { data, isFetching, isLoading } = useGetPaginationSaleOrderQuery({
@@ -504,7 +511,12 @@ const SaleOrderListingWrapper = () => {
         <>
             <SideNavLayout>
                 <SaleOrderListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.saleOrder,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

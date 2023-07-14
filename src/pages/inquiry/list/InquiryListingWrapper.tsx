@@ -24,6 +24,11 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import { InquiryListResponse } from 'src/models'
 import { useGetInquiryQuery } from 'src/services/InquiryService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 //import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 // |-- Redux --|
@@ -37,7 +42,6 @@ import {
     setTotalItems,
     //setFilterValue,
 } from 'src/redux/slices/inquirySlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const InquiryListingWrapper = () => {
     // Hooks
@@ -51,6 +55,9 @@ const InquiryListingWrapper = () => {
 
     const inquiryState: any = useSelector((state: RootState) => state.inquiry)
     const { userData }: any = useSelector((state: RootState) => state.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
 
     const {
         page,
@@ -226,7 +233,12 @@ const InquiryListingWrapper = () => {
                     {/* Table */}
                     <div className="grow overflow-auto  ">
                         <ATMTable
-                            columns={columns}
+                            columns={getAllowedAuthorizedColumns(
+                                checkUserAccess,
+                                columns,
+                                UserModuleNameTypes.inquiry,
+                                UserModuleActionTypes.List
+                            )}
                             rows={items}
                             // isCheckbox={true}
                             selectedRows={selectedRows}

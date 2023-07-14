@@ -24,7 +24,11 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -32,7 +36,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/artist'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ArtistListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -41,7 +44,9 @@ const ArtistListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const ArtistState: any = useSelector((state: RootState) => state.artist)
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { page, rowsPerPage, searchValue, items } = ArtistState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -143,7 +148,12 @@ const ArtistListingWrapper = () => {
         <>
             <MediaLayout>
                 <ArtistListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.artist,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

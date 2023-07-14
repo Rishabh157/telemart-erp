@@ -18,6 +18,11 @@ import { GRNListResponse } from 'src/models/GRN.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import GRNListing from './GRNListing'
 import { useGetPaginationGRNQuery } from 'src/services/GRNService'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
@@ -100,6 +105,9 @@ const GRNListingWrapper = () => {
     const grnState: any = useSelector((state: RootState) => state.grn)
     const { page, rowsPerPage, searchValue, items, filterValue } = grnState
     const { userData }: any = useSelector((state: RootState) => state.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -143,7 +151,15 @@ const GRNListingWrapper = () => {
     return (
         <>
             <SideNavLayout>
-                <GRNListing columns={columns} rows={items} />
+                <GRNListing
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.grn,
+                        UserModuleActionTypes.List
+                    )}
+                    rows={items}
+                />
             </SideNavLayout>
         </>
     )

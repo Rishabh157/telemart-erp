@@ -18,7 +18,11 @@ import { useNavigate } from 'react-router-dom'
 import DispositionTwoListing from './DispositionTwoListing'
 import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 const DispositionTwoListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -28,7 +32,9 @@ const DispositionTwoListingWrapper = () => {
     const { items }: any = useSelector(
         (state: RootState) => state.dispositionTwo
     )
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const [deleteDispositonTwo] = useDeletedispositionTwoMutation()
 
     const { searchValue, filterValue }: any = useSelector(
@@ -144,7 +150,12 @@ const DispositionTwoListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <DispositionTwoListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.dispositionTwo,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

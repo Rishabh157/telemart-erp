@@ -37,7 +37,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+
 
 const DealersListingWrapper = () => {
     const dealerState: any = useSelector((state: RootState) => state.dealer)

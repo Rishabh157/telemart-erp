@@ -37,7 +37,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/NewUserSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)

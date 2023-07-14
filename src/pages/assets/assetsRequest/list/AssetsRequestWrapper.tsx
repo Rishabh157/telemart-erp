@@ -29,10 +29,14 @@ import {
 import { AssetsRequestListResponse } from 'src/models'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+
 
 const AssetsRequestWrapper = () => {
     const navigate = useNavigate()
@@ -40,6 +44,9 @@ const AssetsRequestWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteAsset] = useDeleteAssetsRequestMutation()
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const columns: columnTypes[] = [
         {
             field: 'assetName',
@@ -163,7 +170,12 @@ const AssetsRequestWrapper = () => {
         <>
             <AsstesLayout>
                 <AssetsRequestListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.assetRequest,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

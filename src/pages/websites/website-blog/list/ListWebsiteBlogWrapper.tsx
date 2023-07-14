@@ -32,7 +32,11 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteBlogSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 const ListWebsiteBlogWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -44,6 +48,9 @@ const ListWebsiteBlogWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsiteBlogState: any = useSelector(
         (state: RootState) => state.websiteBlog
+    )
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -168,7 +175,12 @@ const ListWebsiteBlogWrapper = () => {
         <>
             <WebsiteLayout>
                 <ListWebsiteBlog
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.websiteBlog,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

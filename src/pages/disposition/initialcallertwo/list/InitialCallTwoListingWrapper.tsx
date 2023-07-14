@@ -19,7 +19,11 @@ import {
 import { InitialCallerTwoListResponse } from 'src/models/configurationModel/InitialCallerTwo.model'
 import DispositionLayout from '../../DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // export type language ={
 //     languageId:string[];
@@ -34,7 +38,9 @@ const InitialCallTwoListingWrapper = () => {
     const initialCallTwoState: any = useSelector(
         (state: RootState) => state.initialCallerTwo
     )
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { page, rowsPerPage, searchValue, items } = initialCallTwoState
 
     const dispatch = useDispatch<AppDispatch>()
@@ -143,7 +149,12 @@ const InitialCallTwoListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <InitialCallTwoListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.initialCallerTwo,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

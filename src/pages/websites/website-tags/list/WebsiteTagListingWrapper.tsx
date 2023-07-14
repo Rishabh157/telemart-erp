@@ -32,7 +32,11 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteTagsSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 const WebsiteTagListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -44,6 +48,9 @@ const WebsiteTagListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsiteTagsState: any = useSelector(
         (state: RootState) => state.websiteTags
+    )
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -175,7 +182,12 @@ const WebsiteTagListingWrapper = () => {
         <>
             <WebsiteLayout>
                 <WebsiteTagListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.websiteTags,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

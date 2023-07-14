@@ -40,76 +40,76 @@ export const navigation: NavItemType[] = [
         label: 'Dashboard',
         icon: RxDashboard,
         path: '/dashboard',
-        name: 'Dashboard'
+        name: 'Dashboard',
     },
 
     {
         label: 'Vendors',
         icon: HiOutlineTruck,
         path: '/vendors',
-        name: 'VENDOR'
+        name: 'VENDOR',
     },
     {
         label: 'Dealers',
         icon: FaRegHandshake,
         path: '/dealers',
-        name: 'DEALER'
+        name: 'DEALER',
     },
-    {
-        label: 'Dealers-ratio',
-        icon: TfiLayoutMediaOverlayAlt2,
-        path: '/dealers-ratio',
-        name: 'DealerRatio'
-    },
+    // {
+    //     label: 'Dealers-ratio',
+    //     icon: TfiLayoutMediaOverlayAlt2,
+    //     path: '/dealers-ratio',
+    //     name: 'DealerRatio'
+    // },
     {
         label: 'Users',
         icon: FiUsers,
         path: '/users',
-        name: 'USER'
+        name: 'USER',
     },
     {
         label: 'Warehouse',
         icon: TbBuildingWarehouse,
         path: '/warehouse',
-        name: 'WAREHOUSE'
+        name: 'WAREHOUSE',
     },
 
     {
         label: 'Sale Order',
         icon: CgNotes,
         path: '/sale-order',
-        name: 'SALE_ORDER'
+        name: 'SALE_ORDER',
     },
 
     {
         label: 'ASR',
         icon: CiMemoPad,
         path: '/asr',
-        name: 'Asr'
+        name: 'Asr',
     },
     {
         label: 'PO',
         icon: BiPurchaseTagAlt,
         path: '/purchase-order',
-        name: 'PurchaseOrder'
+        name: 'PurchaseOrder',
     },
     {
         label: 'GRN',
         icon: CiStickyNote,
         path: '/grn',
-        name: 'GRN'
+        name: 'GRN',
     },
-    {
-        label: 'Inventory Management',
-        icon: TfiLayoutMediaOverlayAlt2,
-        path: '/inventory-management',
-        name: 'InventoryManagement'
-    },
+    // {
+    //     label: 'Inventory Management',
+    //     icon: TfiLayoutMediaOverlayAlt2,
+    //     path: '/inventory-management',
+    //     name: 'InventoryManagement'
+    // },
     {
         label: 'Inquiry',
         icon: MdCallReceived,
         path: '/inquiry',
-        name: 'Inquiry'
+        name: 'Inquiry',
     },
     // {
     //     label: 'Batch',
@@ -121,13 +121,13 @@ export const navigation: NavItemType[] = [
         label: 'Orders',
         icon: MdOutlineBorderColor,
         path: '/orders',
-        name: 'Orders'
+        name: 'Orders',
     },
     {
         label: 'Call',
         icon: IoCallOutline,
         path: '/call',
-        name: 'Call'
+        name: 'Call',
     },
     // {
     //     label: 'Batch',
@@ -140,31 +140,31 @@ export const navigation: NavItemType[] = [
         label: 'Configurations',
         icon: AiOutlineSetting,
         path: '/configurations/attributes',
-        name: 'Configurations'
+        name: 'Configurations',
     },
     {
         label: 'Media',
         icon: MdPermMedia,
         path: '/media/channel-group',
-        name: 'Media'
+        name: 'Media',
     },
     {
         label: 'Assets',
         icon: BiBox,
         path: '/assets/assets-management',
-        name: 'Assets'
+        name: 'Assets',
     },
 
     {
         label: 'Dispositions',
         icon: AiOutlineSetting,
         path: '/dispositions/disposition-one    ',
-        name: 'Dispositions'
+        name: 'Dispositions',
     },
     {
         label: 'All Website',
         icon: MdWeb,
         path: '/all-websites/website',
-        name: 'AllWebsite'
+        name: 'AllWebsite',
     },
 ]

@@ -24,7 +24,11 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import {
     setIsTableLoading,
@@ -32,7 +36,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/productCategorySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ProductCategoryListingWrapper = () => {
     const productCategoryState: any = useSelector(
@@ -43,6 +46,9 @@ const ProductCategoryListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const columns: columnTypes[] = [
@@ -68,8 +74,7 @@ const ProductCategoryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.productCategory}
-
+                    moduleName={UserModuleNameTypes.productCategory}
                     isEdit
                     isDelete
                     handleOnAction={() => {
@@ -148,7 +153,12 @@ const ProductCategoryListingWrapper = () => {
         <>
             <ConfigurationLayout>
                 <ProductCategoryListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.productCategory,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

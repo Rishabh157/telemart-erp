@@ -24,7 +24,11 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -33,7 +37,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/competitorManagementSlice'
 import moment from 'moment'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+
 
 const CompetitorManagementListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -44,7 +48,9 @@ const CompetitorManagementListingWrapper = () => {
     const competitorManagementState: any = useSelector(
         (state: RootState) => state.competitor
     )
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { page, rowsPerPage, searchValue, items } = competitorManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
     const columns: columnTypes[] = [
@@ -222,7 +228,12 @@ const CompetitorManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <CompetitorManagementListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.competitor,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

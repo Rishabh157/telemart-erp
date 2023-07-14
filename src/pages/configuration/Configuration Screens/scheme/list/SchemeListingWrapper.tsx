@@ -24,7 +24,11 @@ import {
     useGetAllSchemeQuery,
 } from 'src/services/SchemeService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Types --|
 import {
     setIsTableLoading,
@@ -33,7 +37,6 @@ import {
 } from 'src/redux/slices/schemeSlice'
 import { AppDispatch } from 'src/redux/store'
 import { RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const SchemeListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -42,6 +45,9 @@ const SchemeListingWrapper = () => {
     const schemeState: any = useSelector((state: RootState) => state.scheme)
     const { page, rowsPerPage, items, searchValue } = schemeState
     const { userData }: any = useSelector((state: RootState) => state.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
 
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -182,7 +188,12 @@ const SchemeListingWrapper = () => {
     return (
         <ConfigurationLayout>
             <SchemeListing
-                columns={columns || []}
+                columns={getAllowedAuthorizedColumns(
+                    checkUserAccess,
+                    columns,
+                    UserModuleNameTypes.scheme,
+                    UserModuleActionTypes.List
+                )}
                 rows={items || []}
                 setShowDropdown={setShowDropdown}
             />
