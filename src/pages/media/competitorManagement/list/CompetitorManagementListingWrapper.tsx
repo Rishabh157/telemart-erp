@@ -90,7 +90,7 @@ const CompetitorManagementListingWrapper = () => {
             ),
         },
         {
-            field: 'mobileNo',
+            field: 'mobileNumber',
             headerName: 'Mobile No.',
             flex: 'flex-[1_1_0%]',
             align: 'center',

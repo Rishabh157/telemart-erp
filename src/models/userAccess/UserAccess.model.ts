@@ -6,8 +6,10 @@ export enum UserModuleActionTypes {
     'View' = 'VIEW',
 }
 export enum UserModuleNameTypes {
+    dashboard = 'DASHBOARD',
     vendor = 'VENDOR',
     dealer = 'DEALER',
+    dealerRatio = 'DEALER_RATIO',
     user = 'USER',
     wareHouse = 'WAREHOUSE',
     saleOrder = 'SALE_ORDER',

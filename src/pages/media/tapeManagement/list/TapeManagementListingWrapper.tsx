@@ -118,7 +118,7 @@ const TapeManagementListingWrapper = () => {
             ),
         },
         {
-            field: 'languageName',
+            field: 'languageId',
             headerName: 'Language',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => {

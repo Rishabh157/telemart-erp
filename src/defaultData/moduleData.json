@@ -6,6 +6,18 @@
     "userName": "",
     "modules": [
         {
+            "moduleId": "dashboardId",
+            "moduleName": "DASHBOARD",
+            "moduleAction": [
+                {
+                    "actionId": "dashboardActionListId",
+                    "actionUrl": "/dashboard",
+                    "actionName": "LIST",
+                    "fields": []
+                }
+            ]
+        },
+        {
             "moduleId": "vendorId",
             "moduleName": "VENDOR",
             "moduleAction": [
@@ -128,6 +140,18 @@
                     "actionId": "dealerActionDeleteId",
                     "actionUrl": "dealers/delete",
                     "actionName": "DELETE",
+                    "fields": []
+                }
+            ]
+        },
+        {
+            "moduleId": "dealerRatioId",
+            "moduleName": "DEALER_RATIO",
+            "moduleAction": [
+                {
+                    "actionId": "dealerRatioActionListId",
+                    "actionUrl": "/dealers-ratio",
+                    "actionName": "LIST",
                     "fields": []
                 }
             ]
@@ -618,10 +642,10 @@
         },
         {
             "moduleId": "callId",
-            "moduleName": "ORDER",
+            "moduleName": "CALLER_PAGE",
             "moduleAction": [
                 {
-                    "actionId": "callId",
+                    "actionId": "callActionListId",
                     "actionUrl": "/call",
                     "actionName": "LIST",
                     "fields": [
@@ -1186,38 +1210,7 @@
                     "actionId": "barcodeActionListId",
                     "actionUrl": "/configurations/barcode",
                     "actionName": "LIST",
-                    "fields": [
-                        {
-                            "fieldId": "barcodeId1",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "barcodeId2",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "barcodeId3",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "barcodeId4",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "barcodeId5",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "barcodeId6",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        }
-                    ]
+                    "fields": []
                 },
                 {
                     "actionId": "barcodeActionAddId",
@@ -1247,38 +1240,7 @@
                     "actionId": "locationActionListId",
                     "actionUrl": "/configurations/location",
                     "actionName": "LIST",
-                    "fields": [
-                        {
-                            "fieldId": "locationId1",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "locationId2",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "locationId3",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "locationId4",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "locationId5",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "locationId6",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        }
-                    ]
+                    "fields": []
                 },
                 {
                     "actionId": "locationActionAddId",
@@ -1491,7 +1453,7 @@
                         {
                             "fieldId": "channelId5",
                             "fieldName": "Email",
-                            "fieldValue": ""
+                            "fieldValue": "email"
                         }
                     ]
                 },
@@ -1609,22 +1571,22 @@
                         {
                             "fieldId": "tapeId1",
                             "fieldName": "Tabe Name",
-                            "fieldValue": ""
+                            "fieldValue": "tapeName"
                         },
                         {
                             "fieldId": "tapeId2",
                             "fieldName": "Tape Type",
-                            "fieldValue": ""
+                            "fieldValue": "tapeType"
                         },
                         {
                             "fieldId": "tapeId3",
                             "fieldName": "Scheme",
-                            "fieldValue": ""
+                            "fieldValue": "schemeLabel"
                         },
                         {
                             "fieldId": "tapeId4",
                             "fieldName": "Language",
-                            "fieldValue": ""
+                            "fieldValue": "languageId"
                         }
                     ]
                 },
@@ -1660,37 +1622,37 @@
                         {
                             "fieldId": "competitorId1",
                             "fieldName": "Date",
-                            "fieldValue": ""
+                            "fieldValue": "date"
                         },
                         {
                             "fieldId": "competitorId2",
                             "fieldName": "Start Time",
-                            "fieldValue": ""
+                            "fieldValue": "startTime"
                         },
                         {
                             "fieldId": "competitorId3",
                             "fieldName": "End Time",
-                            "fieldValue": ""
+                            "fieldValue": "endTime"
                         },
                         {
                             "fieldId": "competitorId4",
                             "fieldName": "Product Name",
-                            "fieldValue": ""
+                            "fieldValue": "productName"
                         },
                         {
                             "fieldId": "competitorId5",
                             "fieldName": "Mobile No.",
-                            "fieldValue": ""
+                            "fieldValue": "mobileNumber"
                         },
                         {
                             "fieldId": "competitorId6",
                             "fieldName": "Price/MRP",
-                            "fieldValue": ""
+                            "fieldValue": "schemePrice"
                         },
                         {
                             "fieldId": "competitorId7",
                             "fieldName": "Artist",
-                            "fieldValue": ""
+                            "fieldValue": "artist"
                         }
                     ]
                 },
@@ -1752,6 +1714,11 @@
                             "fieldId": "slotId6",
                             "fieldName": "End Time",
                             "fieldValue": "slotEndTime"
+                        },
+                        {
+                            "fieldId": "slotId7",
+                            "fieldName": "Slot Run",
+                            "fieldValue": "slotRun"
                         }
                     ]
                 },

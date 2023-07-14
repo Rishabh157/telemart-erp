@@ -41,7 +41,7 @@ export const navigation: NavItemType[] = [
         label: 'Dashboard',
         icon: RxDashboard,
         path: '/dashboard',
-        name: 'Dashboard',
+        name:  UserModuleNameTypes.dashboard,
     },
 
     {
@@ -60,7 +60,7 @@ export const navigation: NavItemType[] = [
         label: 'Dealers-ratio',
         icon: TfiLayoutMediaOverlayAlt2,
         path: '/dealers-ratio',
-        name: 'DealerRatio',
+        name: UserModuleNameTypes.dealerRatio,
     },
     {
         label: 'Users',

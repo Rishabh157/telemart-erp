@@ -103,7 +103,7 @@ const SlotManagementListingWrapper = () => {
             ),
         },
         {
-            field: 'channelGroup',
+            field: 'groupNameLabel',
             headerName: 'Channel Group',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
@@ -143,7 +143,7 @@ const SlotManagementListingWrapper = () => {
             ),
         },
         {
-            field: 'SlotRun',
+            field: 'slotRun',
             headerName: 'Run Status',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
