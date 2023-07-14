@@ -23,6 +23,7 @@ import {
     setSearchValue,
     setSelectedLocationPincode,
 } from 'src/redux/slices/pincodeSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 type Props = {
@@ -55,6 +56,7 @@ const PincodeListing = ({ pincodes }: Props) => {
     return (
         <>
             <LocationListView
+                moduleName={UserModuleNameTypes.pincode}
                 listHeading="Pincodes"
                 OnSearchChange={(newValue) =>
                     dispatch(setSearchValue(newValue))

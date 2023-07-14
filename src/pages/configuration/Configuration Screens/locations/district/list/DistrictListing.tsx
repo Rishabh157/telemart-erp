@@ -29,6 +29,7 @@ import {
 import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
 import { setFilterValue as setPincodeFilterValue } from 'src/redux/slices/pincodeSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 type Props = {
@@ -65,6 +66,7 @@ const DistrictListing = ({ districts }: Props) => {
     return (
         <>
             <LocationListView
+                moduleName={UserModuleNameTypes.district}
                 listHeading="Districts"
                 searchValue={searchValue}
                 OnSearchChange={(newValue) =>
