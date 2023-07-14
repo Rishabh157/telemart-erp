@@ -36,6 +36,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/PurchaseOrderSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const PurchaseOrderListingWrapper = () => {
     const navigate = useNavigate()
@@ -286,6 +287,7 @@ const PurchaseOrderListingWrapper = () => {
             flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.purchaseOrder}
                     isView
                     isEdit
                     handleViewActionButton={() => {

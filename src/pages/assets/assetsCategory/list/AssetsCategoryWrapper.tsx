@@ -32,6 +32,7 @@ import { AssetsCategoryListResponse } from 'src/models'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const AssetsCategoryWrapper = () => {
     const navigate = useNavigate()
@@ -56,6 +57,8 @@ const AssetsCategoryWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                moduleName={UserModuleNameTypes.assetCategory}
+
                     isEdit
                     isDelete
                     handleOnAction={() => {

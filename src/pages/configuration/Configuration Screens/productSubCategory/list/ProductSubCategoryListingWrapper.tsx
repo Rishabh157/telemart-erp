@@ -38,6 +38,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/productSubCategorySlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ProductSubCategoryListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -89,6 +90,8 @@ const ProductSubCategoryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                moduleName={UserModuleNameTypes.productSubCategory}
+
                     isEdit
                     isDelete
                     handleOnAction={() => {

@@ -32,6 +32,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/channelCategorySlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ChannelCategoryListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -95,6 +96,7 @@ const ChannelCategoryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.channelCategory}
                     isEdit
                     isDelete
                     handleOnAction={() => {

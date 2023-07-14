@@ -38,8 +38,8 @@ import AddPurchaseOrderWrapper from './purchaseOrder/add/AddPurchaseOrderWrapper
 import PurchaseOrderListingWrapper from './purchaseOrder/list/PurchaseOrderListingWrapper'
 import AddSchemeWrapper from './configuration/Configuration Screens/scheme/add/AddSchemeWrapper'
 import SchemeListingWrapper from './configuration/Configuration Screens/scheme/list/SchemeListingWrapper'
-import AddTaxesWrapper from './configuration/Configuration Screens/taxes/add/AddTaxesWrapper'
-import TaxesListingWrapper from './configuration/Configuration Screens/taxes/list/TaxesListingWrapper'
+// import AddTaxesWrapper from './configuration/Configuration Screens/taxes/add/AddTaxesWrapper'
+// import TaxesListingWrapper from './configuration/Configuration Screens/taxes/list/TaxesListingWrapper'
 import ConfigurationLayout from './configuration/ConfigurationLayout'
 import DashboardWrappper from './Dashboard/DashboardWrappper'
 import AddDealerWrapper from './dealers/add/AddDealerWrapper'
@@ -82,7 +82,7 @@ import EditAttributeGroupWrapper from './configuration/Configuration Screens/att
 import EditProductGroupWrapper from './configuration/Configuration Screens/productGroup/edit/EditProductGroupWrapper'
 import EditItemWrapper from './configuration/Configuration Screens/item/edit/EditItemWrapper'
 import EditCartonBoxWrapper from './configuration/Configuration Screens/cartonBox/edit/EditCartonBoxWrapper'
-import EditTaxesWrapper from './configuration/Configuration Screens/taxes/edit/EditTaxesWrapper'
+// import EditTaxesWrapper from './configuration/Configuration Screens/taxes/edit/EditTaxesWrapper'
 import EditLanguageWrapper from './configuration/Configuration Screens/language/edit/EditLanguageWrapper'
 import EditDealersCategoryWrapper from './configuration/Configuration Screens/dealersCategory/edit/EditDealersCategoryWrapper'
 import EditProductSubCategoryWrapper from './configuration/Configuration Screens/productSubCategory/edit/EditProductSubCategoryWrapper'
@@ -239,8 +239,8 @@ export {
     PurchaseOrderListingWrapper,
     AddSchemeWrapper,
     SchemeListingWrapper,
-    AddTaxesWrapper,
-    TaxesListingWrapper,
+    // AddTaxesWrapper,
+    // TaxesListingWrapper,
     ConfigurationLayout,
     DashboardWrappper,
     AddDealerWrapper,
@@ -288,7 +288,7 @@ export {
     EditItemWrapper,
     EditCartonBoxWrapper,
     EditASRWrapper,
-    EditTaxesWrapper,
+    // EditTaxesWrapper,
     EditLanguageWrapper,
     EditDealersCategoryWrapper,
     EditProductSubCategoryWrapper,

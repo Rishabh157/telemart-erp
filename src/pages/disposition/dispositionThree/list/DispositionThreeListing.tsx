@@ -57,7 +57,7 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ActionAuthHOC
                         moduleName={UserModuleNameTypes.dispositionThree}
                         actionName={UserModuleActionTypes.Add}
-                        Component={
+                        component={
                             <button
                                 type="button"
                                 onClick={() => navigate('add')}

@@ -62,7 +62,7 @@ const BarcodeListing = ({
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.barcode}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() => {
                                 navigate('add')

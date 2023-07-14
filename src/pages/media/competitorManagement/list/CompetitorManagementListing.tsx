@@ -75,7 +75,7 @@ const CompetitorManagementListing = ({
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.competitor}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             type="button"
                             onClick={() => navigate('add')}

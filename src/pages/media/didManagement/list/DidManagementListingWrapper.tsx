@@ -32,6 +32,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/didManagementSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const DidManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -76,6 +77,7 @@ const DidManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.didManagement}
                     isEdit
                     isDelete
                     handleOnAction={() => {

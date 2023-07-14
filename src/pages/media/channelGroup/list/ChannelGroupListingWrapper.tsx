@@ -32,6 +32,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/channelGroupSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ChannelGroupListingWrapper = () => {
     const navigate = useNavigate()
@@ -60,6 +61,7 @@ const ChannelGroupListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.channelGroup}
                     isEdit
                     isDelete
                     handleOnAction={() => {

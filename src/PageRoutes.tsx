@@ -66,8 +66,8 @@ import {
     PurchaseOrderListingWrapper,
     AddSchemeWrapper,
     SchemeListingWrapper,
-    AddTaxesWrapper,
-    TaxesListingWrapper,
+    // AddTaxesWrapper,
+    // TaxesListingWrapper,
     ConfigurationLayout,
     DashboardWrappper,
     AddDealerWrapper,
@@ -112,7 +112,7 @@ import {
     EditItemWrapper,
     EditCartonBoxWrapper,
     EditASRWrapper,
-    EditTaxesWrapper,
+    // EditTaxesWrapper,
     EditLanguageWrapper,
     EditDealersCategoryWrapper,
     EditProductSubCategoryWrapper,
@@ -245,7 +245,6 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData))
-
     const { data, isLoading, isFetching } = useGetUserAccessQuery(
         {
             userRole: userData.userRole as string,
@@ -403,7 +402,7 @@ const PageRoutes = () => {
                         path="/dealers"
                         element={
                             <AuthHOC
-                                Component={<DealersListingWrapper />}
+                                component={<DealersListingWrapper />}
                                 moduleName={'DEALER'}
                             />
                         }
@@ -425,7 +424,7 @@ const PageRoutes = () => {
                         path="/vendors"
                         element={
                             <AuthHOC
-                                Component={<VendorsListingWrapper />}
+                                component={<VendorsListingWrapper />}
                                 moduleName="VENDOR"
                             />
                         }
@@ -434,7 +433,7 @@ const PageRoutes = () => {
                         path="/vendors/add-vendor"
                         element={
                             <ActionAuthHOC
-                                Component={<AddVendorWrapper />}
+                                component={<AddVendorWrapper />}
                                 moduleName="VENDOR"
                                 actionName="ADD"
                                 isRedirect
@@ -762,7 +761,7 @@ const PageRoutes = () => {
                         element={<EditCartonBoxWrapper />}
                     />
 
-                    <Route
+                    {/* <Route
                         path="/configurations/taxes/add"
                         element={<AddTaxesWrapper />}
                     />
@@ -775,7 +774,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/taxes/:id"
                         element={<EditTaxesWrapper />}
-                    />
+                    /> */}
 
                     <Route
                         path="/configurations/barcode"

@@ -20,6 +20,7 @@ import { renderorderStatus } from 'src/utils/renderOrderStatus'
 import ATMInputAdormant from 'src/components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const columns: columnTypes[] = [
     {
@@ -71,6 +72,7 @@ const columns: columnTypes[] = [
         flex: 'flex-[0.5_0.5_0%]',
         renderCell: (row: any) => (
             <ActionPopup
+                moduleName={UserModuleNameTypes.dealer}
                 handleOnAction={() => {
                     // setShowDropdown(!showDropdown)
                     // setCurrentId(row?._id)

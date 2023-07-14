@@ -177,7 +177,7 @@ const DealersRatioListingWrapper = () => {
                     handleClose={() => {
                         setIsOpenDialog(false)
                     }}
-                    Component={
+                    component={
                         <AddDealersRatioWapper
                             id={'runState'}
                             setIsOpenDialog={setIsOpenDialog}
