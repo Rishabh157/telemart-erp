@@ -42,7 +42,7 @@ import {
     AttributesListingWrapper,
     AddAttributeGroupWrapper,
     AttributesGroupListingWrapper,
-   // AddBarcodeWrapper,
+    // AddBarcodeWrapper,
     //BarcodeListingWrapper,
     ViewBarcodeWrapper,
     AddCartonBoxWrapper,

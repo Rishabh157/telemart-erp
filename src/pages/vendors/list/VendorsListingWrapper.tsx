@@ -79,7 +79,7 @@ const VendorsListingWrapper = () => {
             ),
         },
         {
-            field: 'district',
+            field: 'registrationDistrictName',
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: VendorsListResponse) => (
@@ -87,7 +87,7 @@ const VendorsListingWrapper = () => {
             ),
         },
         {
-            field: 'state',
+            field: 'registrationStateName',
             headerName: 'State',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: VendorsListResponse) => (

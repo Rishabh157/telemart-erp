@@ -24,6 +24,7 @@ import { AiOutlineSetting } from 'react-icons/ai'
 import { BiBox, BiPurchaseTagAlt } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
+import { UserModuleNameTypes } from './models/userAccess/UserAccess.model'
 //import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 //import { BsFillCalendarCheckFill } from 'react-icons/bs'
 
@@ -32,7 +33,7 @@ export type NavItemType = {
     label: string
     path: string
     icon: IconType
-    name?: string
+    name: string
 }
 
 export const navigation: NavItemType[] = [
@@ -47,13 +48,13 @@ export const navigation: NavItemType[] = [
         label: 'Vendors',
         icon: HiOutlineTruck,
         path: '/vendors',
-        name: 'VENDOR',
+        name: UserModuleNameTypes.vendor,
     },
     {
         label: 'Dealers',
         icon: FaRegHandshake,
         path: '/dealers',
-        name: 'DEALER',
+        name: UserModuleNameTypes.dealer,
     },
     {
         label: 'Dealers-ratio',
@@ -65,39 +66,39 @@ export const navigation: NavItemType[] = [
         label: 'Users',
         icon: FiUsers,
         path: '/users',
-        name: 'USER',
+        name: UserModuleNameTypes.user,
     },
     {
         label: 'Warehouse',
         icon: TbBuildingWarehouse,
         path: '/warehouse',
-        name: 'WAREHOUSE',
+        name: UserModuleNameTypes.wareHouse,
     },
 
     {
         label: 'Sale Order',
         icon: CgNotes,
         path: '/sale-order',
-        name: 'SALE_ORDER',
+        name: UserModuleNameTypes.saleOrder,
     },
 
     {
         label: 'ASR',
         icon: CiMemoPad,
         path: '/asr',
-        name: 'Asr',
+        name: UserModuleNameTypes.asr,
     },
     {
         label: 'PO',
         icon: BiPurchaseTagAlt,
         path: '/purchase-order',
-        name: 'PurchaseOrder',
+        name: UserModuleNameTypes.purchaseOrder,
     },
     {
         label: 'GRN',
         icon: CiStickyNote,
         path: '/grn',
-        name: 'GRN',
+        name: UserModuleNameTypes.grn,
     },
     {
         label: 'Inventory Management',
@@ -109,7 +110,7 @@ export const navigation: NavItemType[] = [
         label: 'Inquiry',
         icon: MdCallReceived,
         path: '/inquiry',
-        name: 'Inquiry',
+        name: UserModuleNameTypes.inquiry,
     },
     // {
     //     label: 'Batch',
@@ -121,13 +122,13 @@ export const navigation: NavItemType[] = [
         label: 'Orders',
         icon: MdOutlineBorderColor,
         path: '/orders',
-        name: 'Orders',
+        name: UserModuleNameTypes.order,
     },
     {
         label: 'Call',
         icon: IoCallOutline,
         path: '/call',
-        name: 'Call',
+        name: UserModuleNameTypes.callerPage,
     },
     // {
     //     label: 'Batch',
@@ -140,31 +141,31 @@ export const navigation: NavItemType[] = [
         label: 'Configurations',
         icon: AiOutlineSetting,
         path: '/configurations/attributes',
-        name: 'Configurations',
+        name: UserModuleNameTypes.configuration,
     },
     {
         label: 'Media',
         icon: MdPermMedia,
         path: '/media/channel-group',
-        name: 'Media',
+        name: UserModuleNameTypes.media,
     },
     {
         label: 'Assets',
         icon: BiBox,
         path: '/assets/assets-management',
-        name: 'Assets',
+        name: UserModuleNameTypes.assets,
     },
 
     {
         label: 'Dispositions',
         icon: AiOutlineSetting,
         path: '/dispositions/disposition-one    ',
-        name: 'Dispositions',
+        name: UserModuleNameTypes.disposition,
     },
     {
         label: 'All Website',
         icon: MdWeb,
         path: '/all-websites/website',
-        name: 'AllWebsite',
+        name: UserModuleNameTypes.allWebsite,
     },
 ]
