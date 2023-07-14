@@ -11,12 +11,17 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -60,12 +65,18 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Sale Orders </ATMPageHeading>
-                <button
-                    onClick={() => navigate('add-sale-order')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add Sale Order
-                </button>
+                <ActionAuthHOC
+                    moduleName={UserModuleNameTypes.saleOrder}
+                    actionName={UserModuleActionTypes.Add}
+                    Component={
+                        <button
+                            onClick={() => navigate('add-sale-order')}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Add Sale Order
+                        </button>
+                    }
+                />
             </div>
 
             <div

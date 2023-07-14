@@ -11,12 +11,17 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Redux --|
@@ -57,13 +62,19 @@ const WarehouseListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
-                <button
-                    onClick={() => navigate(`${AddpathName}`)}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    {' '}
-                    + Add Warehouse{' '}
-                </button>
+                <ActionAuthHOC
+                    moduleName={UserModuleNameTypes.wareHouse}
+                    actionName={UserModuleActionTypes.Add}
+                    Component={
+                        <button
+                            onClick={() => navigate(`${AddpathName}`)}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            {' '}
+                            + Add Warehouse{' '}
+                        </button>
+                    }
+                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

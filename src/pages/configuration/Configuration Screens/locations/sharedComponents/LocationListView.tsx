@@ -10,9 +10,11 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { UserModuleActionTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -26,6 +28,7 @@ type Props = {
     OnSearchChange?: (newValue: string) => void
     onListItemClick?: (item: any) => void
     disabled: boolean
+    moduleName?: string
 }
 
 const LocationListView = ({
@@ -36,6 +39,7 @@ const LocationListView = ({
     OnSearchChange = (newValue: string) => {},
     onListItemClick = (item: any) => {},
     disabled = false,
+    moduleName = '',
 }: Props) => {
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state.country
@@ -60,17 +64,23 @@ const LocationListView = ({
         <div className="border h-full w-full flex flex-col gap-1 rounded bg-white shadow-lg ">
             <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">
                 {listHeading}
-                <button
-                    type="button"
-                    disabled={disabled}
-                    className="flex items-center gap-2 text-primary-main  text-sm h-[33px] px-4 rounded hover:bg-slate-100"
-                    onClick={() => {
-                        onAddClick()
-                    }}
-                >
-                    {' '}
-                    + Add{' '}
-                </button>
+                <ActionAuthHOC
+                    moduleName={moduleName}
+                    actionName={UserModuleActionTypes.Add}
+                    Component={
+                        <button
+                            type="button"
+                            disabled={disabled}
+                            className="flex items-center gap-2 text-primary-main  text-sm h-[33px] px-4 rounded hover:bg-slate-100"
+                            onClick={() => {
+                                onAddClick()
+                            }}
+                        >
+                            {' '}
+                            + Add{' '}
+                        </button>
+                    }
+                />
             </div>
 
             <div className="px-2 border-b">
