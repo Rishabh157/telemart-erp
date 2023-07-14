@@ -71,7 +71,7 @@ const DealerCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.dealerCategory}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() =>
                                 navigate('/configurations/dealers-category/add')

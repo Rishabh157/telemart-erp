@@ -75,7 +75,7 @@ const ChannelManagementListing = ({
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.channelManagement}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             type="button"
                             onClick={() => navigate('add')}

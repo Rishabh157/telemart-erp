@@ -19,6 +19,7 @@ import DispositionThreeListing from './DispositionThreeListing'
 import { useNavigate } from 'react-router-dom'
 import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const DispositionThreeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -84,6 +85,7 @@ const DispositionThreeListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.dispositionThree}
                     isView
                     isEdit
                     isDelete

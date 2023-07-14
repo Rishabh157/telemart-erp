@@ -33,6 +33,7 @@ import {
 } from 'src/redux/slices/schemeSlice'
 import { AppDispatch } from 'src/redux/store'
 import { RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const SchemeListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -121,6 +122,7 @@ const SchemeListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.scheme}
                     isEdit
                     isDelete
                     handleEditActionButton={() => {

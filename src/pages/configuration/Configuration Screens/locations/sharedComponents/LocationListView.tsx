@@ -67,7 +67,7 @@ const LocationListView = ({
                 <ActionAuthHOC
                     moduleName={moduleName}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             type="button"
                             disabled={disabled}

@@ -34,6 +34,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const SaleOrderListingWrapper = () => {
     const salesOrderState: any = useSelector(
@@ -471,6 +472,7 @@ const SaleOrderListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.saleOrder}
                     isEdit
                     isDelete
                     handleEditActionButton={() => {

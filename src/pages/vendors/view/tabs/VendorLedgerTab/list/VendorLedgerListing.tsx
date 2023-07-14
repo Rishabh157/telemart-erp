@@ -183,7 +183,7 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                 isOpen={isOpenModel}
                 maxWidth="sm"
                 handleClose={() => setIsOpenModel(false)}
-                Component={
+                component={
                     <AddVendorLedgerModelWrapper
                         addType={openModel}
                         setIsOpenModel={setIsOpenModel}

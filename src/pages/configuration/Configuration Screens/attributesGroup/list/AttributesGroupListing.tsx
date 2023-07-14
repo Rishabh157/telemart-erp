@@ -74,7 +74,7 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.attributeGroup}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() => {
                                 navigate('/configurations/attributes-group/add')

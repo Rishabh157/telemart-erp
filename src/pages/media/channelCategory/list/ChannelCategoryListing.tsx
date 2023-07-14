@@ -80,7 +80,7 @@ const ChannelCategoryListing = ({
                     <ActionAuthHOC
                         moduleName={UserModuleNameTypes.channelCategory}
                         actionName={UserModuleActionTypes.Add}
-                        Component={
+                        component={
                             <button
                                 type="button"
                                 onClick={() => navigate('add')}

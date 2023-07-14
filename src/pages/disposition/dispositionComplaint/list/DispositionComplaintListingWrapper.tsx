@@ -32,6 +32,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/dispositionComplaintSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // export type language ={
 //     languageId:string[];
@@ -96,6 +97,7 @@ const DispositionComplaintListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.dispositionComplaint}
                     isEdit
                     isDelete
                     handleOnAction={() => {

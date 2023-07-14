@@ -182,7 +182,7 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                 isOpen={isOpenModel}
                 maxWidth="sm"
                 handleClose={() => setIsOpenModel(false)}
-                Component={
+                component={
                     <AddDealerLedgerModelWrapper
                         addType={openModel}
                         setIsOpenModel={setIsOpenModel}

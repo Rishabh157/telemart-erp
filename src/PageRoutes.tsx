@@ -1,6 +1,6 @@
 /// ==============================================
 // Filename:PageRoutes.tsx
-// Type: Route Component
+// Type: Route component
 // Last Updated: JULY 06, 2023
 // Project: TELIMART - Front End
 // ==============================================
@@ -70,8 +70,8 @@ import {
     PurchaseOrderListingWrapper,
     AddSchemeWrapper,
     SchemeListingWrapper,
-    AddTaxesWrapper,
-    TaxesListingWrapper,
+    // AddTaxesWrapper,
+    // TaxesListingWrapper,
     ConfigurationLayout,
     DashboardWrappper,
     AddDealerWrapper,
@@ -116,7 +116,7 @@ import {
     EditItemWrapper,
     EditCartonBoxWrapper,
     EditASRWrapper,
-    EditTaxesWrapper,
+    // EditTaxesWrapper,
     EditLanguageWrapper,
     EditDealersCategoryWrapper,
     EditProductSubCategoryWrapper,
@@ -249,7 +249,6 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData))
-
     const { data, isLoading, isFetching } = useGetUserAccessQuery(
         {
             userRole: userData.userRole as string,
@@ -376,9 +375,9 @@ const PageRoutes = () => {
                             path="warehouse-details"
                             element={
                                 <ActionAuthHOC
-                                    Component={<ViewWarehouseWrapper />}
+                                    component={<ViewWarehouseWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
-                                    actionName={UserModuleActionTypes.VIew}
+                                    actionName={UserModuleActionTypes.View}
                                     isRedirect
                                 />
                             }
@@ -396,7 +395,7 @@ const PageRoutes = () => {
                         path="/orders"
                         element={
                             <ActionAuthHOC
-                                Component={<OrderListing />}
+                                component={<OrderListing />}
                                 moduleName={UserModuleNameTypes.order}
                             />
                         }
@@ -406,7 +405,7 @@ const PageRoutes = () => {
                         path="/orders"
                         element={
                             <ActionAuthHOC
-                                Component={<Order />}
+                                component={<Order />}
                                 moduleName={UserModuleNameTypes.order}
                             />
                         }
@@ -427,7 +426,7 @@ const PageRoutes = () => {
                         path="/dealers"
                         element={
                             <AuthHOC
-                                Component={<DealersListingWrapper />}
+                                component={<DealersListingWrapper />}
                                 moduleName={'DEALER'}
                             />
                         }
@@ -436,7 +435,7 @@ const PageRoutes = () => {
                         path="/dealers-ratio"
                         element={
                             <AuthHOC
-                                Component={<DealersRatioListingWrapper />}
+                                component={<DealersRatioListingWrapper />}
                                 moduleName={UserModuleNameTypes.dealer}
                             />
                         }
@@ -445,7 +444,7 @@ const PageRoutes = () => {
                         path="/dealers/add-dealer"
                         element={
                             <ActionAuthHOC
-                                Component={<AddDealerWrapper />}
+                                component={<AddDealerWrapper />}
                                 moduleName={UserModuleNameTypes.dealer}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -456,7 +455,7 @@ const PageRoutes = () => {
                         path="/dealers/edit-dealer/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditDealerWrapper />}
+                                component={<EditDealerWrapper />}
                                 moduleName={UserModuleNameTypes.dealer}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -468,7 +467,7 @@ const PageRoutes = () => {
                         path="/vendors"
                         element={
                             <AuthHOC
-                                Component={<VendorsListingWrapper />}
+                                component={<VendorsListingWrapper />}
                                 moduleName={UserModuleNameTypes.vendor}
                             />
                         }
@@ -477,7 +476,7 @@ const PageRoutes = () => {
                         path="/vendors/add-vendor"
                         element={
                             <ActionAuthHOC
-                                Component={<AddVendorWrapper />}
+                                component={<AddVendorWrapper />}
                                 moduleName={UserModuleNameTypes.vendor}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -488,7 +487,7 @@ const PageRoutes = () => {
                         path="/vendors/edit-vendor/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditVendorWrapper />}
+                                component={<EditVendorWrapper />}
                                 moduleName={UserModuleNameTypes.vendor}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -500,7 +499,7 @@ const PageRoutes = () => {
                         path="/vendors/:vendorId"
                         element={
                             <ActionAuthHOC
-                                Component={<ViewVendor />}
+                                component={<ViewVendor />}
                                 moduleName={UserModuleNameTypes.vendor}
                                 actionName={UserModuleActionTypes.View}
                                 isRedirect
@@ -541,7 +540,7 @@ const PageRoutes = () => {
                         path="/warehouse"
                         element={
                             <AuthHOC
-                                Component={<WarehousesListingWrapper />}
+                                component={<WarehousesListingWrapper />}
                                 moduleName={UserModuleNameTypes.wareHouse}
                             />
                         }
@@ -550,7 +549,7 @@ const PageRoutes = () => {
                         path="/warehouse/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditWarehouseWrapper />}
+                                component={<EditWarehouseWrapper />}
                                 moduleName={UserModuleNameTypes.wareHouse}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -561,7 +560,7 @@ const PageRoutes = () => {
                         path="/warehouse/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddWarehouseWrapper />}
+                                component={<AddWarehouseWrapper />}
                                 moduleName={UserModuleNameTypes.wareHouse}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -577,7 +576,7 @@ const PageRoutes = () => {
                         path="/vendors/:vendorId/warehouse/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddVendorWarehouseWrapper />}
+                                component={<AddVendorWarehouseWrapper />}
                                 moduleName={UserModuleNameTypes.vendor}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -588,7 +587,7 @@ const PageRoutes = () => {
                         path="/vendors/:vendorId/warehouse/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditVendorWarehouseWrapper />}
+                                component={<EditVendorWarehouseWrapper />}
                                 moduleName={UserModuleNameTypes.vendor}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -600,7 +599,7 @@ const PageRoutes = () => {
                         path="/sale-order"
                         element={
                             <AuthHOC
-                                Component={<SaleOrderListingWrapper />}
+                                component={<SaleOrderListingWrapper />}
                                 moduleName={UserModuleNameTypes.saleOrder}
                             />
                         }
@@ -609,7 +608,7 @@ const PageRoutes = () => {
                         path="/sale-order/add-sale-order"
                         element={
                             <ActionAuthHOC
-                                Component={<AddSaleOrderWrapper />}
+                                component={<AddSaleOrderWrapper />}
                                 moduleName={UserModuleNameTypes.saleOrder}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -620,7 +619,7 @@ const PageRoutes = () => {
                         path="/dealers/:dealerId/sale-order/add-sale-order"
                         element={
                             <ActionAuthHOC
-                                Component={<AddSaleOrderWrapper />}
+                                component={<AddSaleOrderWrapper />}
                                 moduleName={UserModuleNameTypes.dealer}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -632,7 +631,7 @@ const PageRoutes = () => {
                         path="/sale-order/edit-sale-order/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditSaleOrderWrapper />}
+                                component={<EditSaleOrderWrapper />}
                                 moduleName={UserModuleNameTypes.saleOrder}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -644,7 +643,7 @@ const PageRoutes = () => {
                         path="vendors/:dealerId/warehouse/add-warehouse"
                         element={
                             <ActionAuthHOC
-                                Component={<AddWarehouseWrapper />}
+                                component={<AddWarehouseWrapper />}
                                 moduleName={UserModuleNameTypes.vendor}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -655,7 +654,7 @@ const PageRoutes = () => {
                         path="dealers/:dealerId/warehouse/add-warehouse"
                         element={
                             <ActionAuthHOC
-                                Component={<AddDealerWarehouseWarpper />}
+                                component={<AddDealerWarehouseWarpper />}
                                 moduleName={UserModuleNameTypes.dealer}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -667,7 +666,7 @@ const PageRoutes = () => {
                         path="dealers/:dealerId/warehouse/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditDealerWarehouseWrapper />}
+                                component={<EditDealerWarehouseWrapper />}
                                 moduleName={UserModuleNameTypes.dealer}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -679,7 +678,7 @@ const PageRoutes = () => {
                         path="/dealers/:dealerId"
                         element={
                             <ActionAuthHOC
-                                Component={<ViewDealer />}
+                                component={<ViewDealer />}
                                 moduleName={UserModuleNameTypes.dealer}
                                 actionName={UserModuleActionTypes.View}
                                 isRedirect
@@ -746,7 +745,7 @@ const PageRoutes = () => {
                         path="users"
                         element={
                             <AuthHOC
-                                Component={<UsersListingWrapper />}
+                                component={<UsersListingWrapper />}
                                 moduleName={UserModuleNameTypes.user}
                             />
                         }
@@ -755,7 +754,7 @@ const PageRoutes = () => {
                         path="/users/add-user"
                         element={
                             <ActionAuthHOC
-                                Component={<AddUserWrapper />}
+                                component={<AddUserWrapper />}
                                 moduleName={UserModuleNameTypes.user}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -766,7 +765,7 @@ const PageRoutes = () => {
                         path="/users/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditUserWrapper />}
+                                component={<EditUserWrapper />}
                                 moduleName={UserModuleNameTypes.user}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -779,7 +778,7 @@ const PageRoutes = () => {
                         path="/asr"
                         element={
                             <AuthHOC
-                                Component={<ASRListingWrapper />}
+                                component={<ASRListingWrapper />}
                                 moduleName={UserModuleNameTypes.asr}
                             />
                         }
@@ -788,7 +787,7 @@ const PageRoutes = () => {
                         path="/asr/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddASRWrapper />}
+                                component={<AddASRWrapper />}
                                 moduleName={UserModuleNameTypes.asr}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -799,7 +798,7 @@ const PageRoutes = () => {
                         path="/asr/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditASRWrapper />}
+                                component={<EditASRWrapper />}
                                 moduleName={UserModuleNameTypes.asr}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -810,7 +809,7 @@ const PageRoutes = () => {
                         path="/grn"
                         element={
                             <AuthHOC
-                                Component={<GRNListingWrapper />}
+                                component={<GRNListingWrapper />}
                                 moduleName={UserModuleNameTypes.grn}
                             />
                         }
@@ -819,7 +818,7 @@ const PageRoutes = () => {
                         path="/grn/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddGRNWrapper />}
+                                component={<AddGRNWrapper />}
                                 moduleName={UserModuleNameTypes.grn}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -830,7 +829,7 @@ const PageRoutes = () => {
                         path="/configurations/scheme"
                         element={
                             <AuthHOC
-                                Component={<SchemeListingWrapper />}
+                                component={<SchemeListingWrapper />}
                                 moduleName={UserModuleNameTypes.scheme}
                             />
                         }
@@ -839,7 +838,7 @@ const PageRoutes = () => {
                         path="/configurations/scheme/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddSchemeWrapper />}
+                                component={<AddSchemeWrapper />}
                                 moduleName={UserModuleNameTypes.scheme}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -850,7 +849,7 @@ const PageRoutes = () => {
                         path="/configurations/scheme/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditSchemeWrapper />}
+                                component={<EditSchemeWrapper />}
                                 moduleName={UserModuleNameTypes.scheme}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -862,7 +861,7 @@ const PageRoutes = () => {
                         path="/purchase-order"
                         element={
                             <AuthHOC
-                                Component={<PurchaseOrderListingWrapper />}
+                                component={<PurchaseOrderListingWrapper />}
                                 moduleName={UserModuleNameTypes.purchaseOrder}
                             />
                         }
@@ -871,7 +870,7 @@ const PageRoutes = () => {
                         path="/purchase-order/view/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<ViewPurchaseOrderWrapper />}
+                                component={<ViewPurchaseOrderWrapper />}
                                 moduleName={UserModuleNameTypes.purchaseOrder}
                                 actionName={UserModuleActionTypes.View}
                                 isRedirect
@@ -882,7 +881,7 @@ const PageRoutes = () => {
                         path="/purchase-order/edit/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditPurchaseOrderWrapper />}
+                                component={<EditPurchaseOrderWrapper />}
                                 moduleName={UserModuleNameTypes.purchaseOrder}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -893,7 +892,7 @@ const PageRoutes = () => {
                         path="/purchase-order/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddPurchaseOrderWrapper />}
+                                component={<AddPurchaseOrderWrapper />}
                                 moduleName={UserModuleNameTypes.purchaseOrder}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -923,7 +922,7 @@ const PageRoutes = () => {
                         path="/configurations/attributes"
                         element={
                             <AuthHOC
-                                Component={<AttributesListingWrapper />}
+                                component={<AttributesListingWrapper />}
                                 moduleName={UserModuleNameTypes.attribute}
                             />
                         }
@@ -933,7 +932,7 @@ const PageRoutes = () => {
                         path="/configurations/attributes/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddAttributeWrapper />}
+                                component={<AddAttributeWrapper />}
                                 moduleName={UserModuleNameTypes.attribute}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -944,7 +943,7 @@ const PageRoutes = () => {
                         path="/configurations/attributes/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditAttributeWrapper />}
+                                component={<EditAttributeWrapper />}
                                 moduleName={UserModuleNameTypes.attribute}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -956,7 +955,7 @@ const PageRoutes = () => {
                         path="/configurations/product-group"
                         element={
                             <AuthHOC
-                                Component={<ProductGroupListingWrapper />}
+                                component={<ProductGroupListingWrapper />}
                                 moduleName={UserModuleNameTypes.productGroup}
                             />
                         }
@@ -966,7 +965,7 @@ const PageRoutes = () => {
                         path="/configurations/product-group/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddProductGroupWrapper />}
+                                component={<AddProductGroupWrapper />}
                                 moduleName={UserModuleNameTypes.productGroup}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -978,7 +977,7 @@ const PageRoutes = () => {
                         path="/configurations/product-group/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditProductGroupWrapper />}
+                                component={<EditProductGroupWrapper />}
                                 moduleName={UserModuleNameTypes.productGroup}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -989,7 +988,7 @@ const PageRoutes = () => {
                         path="/configurations/attributes-group"
                         element={
                             <AuthHOC
-                                Component={<AttributesGroupListingWrapper />}
+                                component={<AttributesGroupListingWrapper />}
                                 moduleName={UserModuleNameTypes.attributeGroup}
                             />
                         }
@@ -999,7 +998,7 @@ const PageRoutes = () => {
                         path="/configurations/attributes-group/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddAttributeGroupWrapper />}
+                                component={<AddAttributeGroupWrapper />}
                                 moduleName={UserModuleNameTypes.attributeGroup}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1010,7 +1009,7 @@ const PageRoutes = () => {
                         path="/configurations/attributes-group/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditAttributeGroupWrapper />}
+                                component={<EditAttributeGroupWrapper />}
                                 moduleName={UserModuleNameTypes.attributeGroup}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1021,7 +1020,7 @@ const PageRoutes = () => {
                         path="/configurations/product-category"
                         element={
                             <AuthHOC
-                                Component={<ProductCategoryListingWrapper />}
+                                component={<ProductCategoryListingWrapper />}
                                 moduleName={UserModuleNameTypes.productCategory}
                             />
                         }
@@ -1030,7 +1029,7 @@ const PageRoutes = () => {
                         path="/configurations/product-category/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddProductCategoryWrapper />}
+                                component={<AddProductCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.productCategory}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1041,7 +1040,7 @@ const PageRoutes = () => {
                         path="/configurations/product-category/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditProductCategoryWrapper />}
+                                component={<EditProductCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.productCategory}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1053,7 +1052,7 @@ const PageRoutes = () => {
                         path="/configurations/product-sub-category"
                         element={
                             <AuthHOC
-                                Component={<ProductSubCategoryListingWrapper />}
+                                component={<ProductSubCategoryListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.productSubCategory
                                 }
@@ -1064,7 +1063,7 @@ const PageRoutes = () => {
                         path="/configurations/product-sub-category/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddProductSubCategoryWrapper />}
+                                component={<AddProductSubCategoryWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.productSubCategory
                                 }
@@ -1077,7 +1076,7 @@ const PageRoutes = () => {
                         path="/configurations/product-sub-category/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditProductSubCategoryWrapper />}
+                                component={<EditProductSubCategoryWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.productSubCategory
                                 }
@@ -1091,7 +1090,7 @@ const PageRoutes = () => {
                         path="/configurations/item"
                         element={
                             <AuthHOC
-                                Component={<ItemListingWrapper />}
+                                component={<ItemListingWrapper />}
                                 moduleName={UserModuleNameTypes.item}
                             />
                         }
@@ -1100,7 +1099,7 @@ const PageRoutes = () => {
                         path="/configurations/item/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddItemWrapper />}
+                                component={<AddItemWrapper />}
                                 moduleName={UserModuleNameTypes.item}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1111,9 +1110,9 @@ const PageRoutes = () => {
                         path="/configurations/item/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditItemWrapper />}
+                                component={<EditItemWrapper />}
                                 moduleName={
-                                    UserModuleNameTypes.attributeGitemroup
+                                    UserModuleNameTypes.attributeGroup
                                 }
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1125,7 +1124,7 @@ const PageRoutes = () => {
                         path="/configurations/products"
                         element={
                             <AuthHOC
-                                Component={<ProductsListingWrapper />}
+                                component={<ProductsListingWrapper />}
                                 moduleName={UserModuleNameTypes.product}
                             />
                         }
@@ -1135,7 +1134,7 @@ const PageRoutes = () => {
                         path="/configurations/products/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddProductWrapper />}
+                                component={<AddProductWrapper />}
                                 moduleName={UserModuleNameTypes.product}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1146,7 +1145,7 @@ const PageRoutes = () => {
                         path="/configurations/product/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditProductWrapper />}
+                                component={<EditProductWrapper />}
                                 moduleName={UserModuleNameTypes.product}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1157,7 +1156,7 @@ const PageRoutes = () => {
                         path="/configurations/carton-box"
                         element={
                             <AuthHOC
-                                Component={<CartonBoxListingWrapper />}
+                                component={<CartonBoxListingWrapper />}
                                 moduleName={UserModuleNameTypes.cartonBox}
                             />
                         }
@@ -1166,7 +1165,7 @@ const PageRoutes = () => {
                         path="/configurations/carton-box/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddCartonBoxWrapper />}
+                                component={<AddCartonBoxWrapper />}
                                 moduleName={UserModuleNameTypes.cartonBox}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1177,7 +1176,7 @@ const PageRoutes = () => {
                         path="/configurations/barcode/carton-box-items/:cartonboxcode"
                         element={
                             <ActionAuthHOC
-                                Component={<ViewBarcodeWrapper />}
+                                component={<ViewBarcodeWrapper />}
                                 moduleName={UserModuleNameTypes.barcode}
                                 actionName={UserModuleActionTypes.View}
                                 isRedirect
@@ -1189,7 +1188,7 @@ const PageRoutes = () => {
                         path="/configurations/carton-box/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditCartonBoxWrapper />}
+                                component={<EditCartonBoxWrapper />}
                                 moduleName={UserModuleNameTypes.cartonBox}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1197,11 +1196,11 @@ const PageRoutes = () => {
                         }
                     />
 
-                    <Route
+                    {/* <Route
                         path="/configurations/taxes/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddTaxesWrapper />}
+                                component={<AddTaxesWrapper />}
                                 moduleName={UserModuleNameTypes.tax}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1213,7 +1212,7 @@ const PageRoutes = () => {
                         path="/configurations/taxes"
                         element={
                             <AuthHOC
-                                Component={<TaxesListingWrapper />}
+                                component={<TaxesListingWrapper />}
                                 moduleName={UserModuleNameTypes.tax}
                             />
                         }
@@ -1223,7 +1222,7 @@ const PageRoutes = () => {
                         path="/configurations/taxes/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditTaxesWrapper />}
+                                component={<EditTaxesWrapper />}
                                 moduleName={UserModuleNameTypes.tax}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1235,7 +1234,7 @@ const PageRoutes = () => {
                         path="/configurations/barcode"
                         element={
                             <AuthHOC
-                                Component={<BarcodeListingWrapper />}
+                                component={<BarcodeListingWrapper />}
                                 moduleName={UserModuleNameTypes.barcode}
                             />
                         }
@@ -1245,7 +1244,7 @@ const PageRoutes = () => {
                         path="/configurations/barcode/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddBarcodeWrapper />}
+                                component={<AddBarcodeWrapper />}
                                 moduleName={UserModuleNameTypes.barcode}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1256,7 +1255,7 @@ const PageRoutes = () => {
                         path="/configurations/barcode/carton-box/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddCbBarcodeWrapper />}
+                                component={<AddCbBarcodeWrapper />}
                                 moduleName={UserModuleNameTypes.barcode}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1268,7 +1267,7 @@ const PageRoutes = () => {
                         path="/configurations/barcode/:barcodeId"
                         element={
                             <ActionAuthHOC
-                                Component={<ViewBarcodeWrapper />}
+                                component={<ViewBarcodeWrapper />}
                                 moduleName={UserModuleNameTypes.barcode}
                                 actionName={UserModuleActionTypes.View}
                                 isRedirect
@@ -1279,7 +1278,7 @@ const PageRoutes = () => {
                         path="/configurations/company"
                         element={
                             <AuthHOC
-                                Component={
+                                component={
                                     <ConfigurationCompanyListingWrapper />
                                 }
                                 moduleName={UserModuleNameTypes.company}
@@ -1290,7 +1289,7 @@ const PageRoutes = () => {
                         path="/configurations/dealers-category/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddDealersCategoryWrapper />}
+                                component={<AddDealersCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.dealerCategory}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1301,7 +1300,7 @@ const PageRoutes = () => {
                         path="/configurations/dealers-category/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditDealersCategoryWrapper />}
+                                component={<EditDealersCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.dealerCategory}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1313,7 +1312,7 @@ const PageRoutes = () => {
                         path="/configurations/company/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddCompanyWrapper />}
+                                component={<AddCompanyWrapper />}
                                 moduleName={UserModuleNameTypes.company}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1324,7 +1323,7 @@ const PageRoutes = () => {
                         path="/configurations/company/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditCompanyWrapper />}
+                                component={<EditCompanyWrapper />}
                                 moduleName={UserModuleNameTypes.company}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1335,7 +1334,7 @@ const PageRoutes = () => {
                         path="/configurations/language/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddLanguageWrapper />}
+                                component={<AddLanguageWrapper />}
                                 moduleName={UserModuleNameTypes.language}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1346,7 +1345,7 @@ const PageRoutes = () => {
                         path="/configurations/language/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditLanguageWrapper />}
+                                component={<EditLanguageWrapper />}
                                 moduleName={UserModuleNameTypes.language}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1363,7 +1362,7 @@ const PageRoutes = () => {
                         path="/configurations/dealers-category"
                         element={
                             <AuthHOC
-                                Component={<DealersCategoryListingWrapper />}
+                                component={<DealersCategoryListingWrapper />}
                                 moduleName={UserModuleNameTypes.dealerCategory}
                             />
                         }
@@ -1372,7 +1371,7 @@ const PageRoutes = () => {
                         path="/configurations/language"
                         element={
                             <AuthHOC
-                                Component={<LanguageListingWrapper />}
+                                component={<LanguageListingWrapper />}
                                 moduleName={UserModuleNameTypes.language}
                             />
                         }
@@ -1389,7 +1388,7 @@ const PageRoutes = () => {
                         path="media/did"
                         element={
                             <AuthHOC
-                                Component={<DidManagementListingWrapper />}
+                                component={<DidManagementListingWrapper />}
                                 moduleName={UserModuleNameTypes.didManagement}
                             />
                         }
@@ -1398,7 +1397,7 @@ const PageRoutes = () => {
                         path="media/did/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddDidManagementWrapper />}
+                                component={<AddDidManagementWrapper />}
                                 moduleName={UserModuleNameTypes.didManagement}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1409,7 +1408,7 @@ const PageRoutes = () => {
                         path="media/did/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditDidManagementWrapper />}
+                                component={<EditDidManagementWrapper />}
                                 moduleName={UserModuleNameTypes.didManagement}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1420,7 +1419,7 @@ const PageRoutes = () => {
                         path="media/channel-group"
                         element={
                             <AuthHOC
-                                Component={<ChannelGroupListingWrapper />}
+                                component={<ChannelGroupListingWrapper />}
                                 moduleName={UserModuleNameTypes.channelGroup}
                             />
                         }
@@ -1429,7 +1428,7 @@ const PageRoutes = () => {
                         path="media/channel-group/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddChannelGroupWrapper />}
+                                component={<AddChannelGroupWrapper />}
                                 moduleName={UserModuleNameTypes.channelGroup}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1440,7 +1439,7 @@ const PageRoutes = () => {
                         path="media/channel-group/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditChannelGroupWrapper />}
+                                component={<EditChannelGroupWrapper />}
                                 moduleName={UserModuleNameTypes.channelGroup}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1451,7 +1450,7 @@ const PageRoutes = () => {
                         path="media/channel"
                         element={
                             <AuthHOC
-                                Component={<ChannelManagementListingWrapper />}
+                                component={<ChannelManagementListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.channelManagement
                                 }
@@ -1462,7 +1461,7 @@ const PageRoutes = () => {
                         path="media/channel/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddChannelManagementWrapper />}
+                                component={<AddChannelManagementWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.channelManagement
                                 }
@@ -1475,7 +1474,7 @@ const PageRoutes = () => {
                         path="media/channel/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditChannelManagementWrapper />}
+                                component={<EditChannelManagementWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.channelManagement
                                 }
@@ -1489,7 +1488,7 @@ const PageRoutes = () => {
                         path="media/tape"
                         element={
                             <AuthHOC
-                                Component={<TapeManagementListingWrapper />}
+                                component={<TapeManagementListingWrapper />}
                                 moduleName={UserModuleNameTypes.tapeManangement}
                             />
                         }
@@ -1498,7 +1497,7 @@ const PageRoutes = () => {
                         path="media/tape/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddTapeManagementWrapper />}
+                                component={<AddTapeManagementWrapper />}
                                 moduleName={UserModuleNameTypes.tapeManangement}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1509,7 +1508,7 @@ const PageRoutes = () => {
                         path="media/tape/edit/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditTapeManagementWrapper />}
+                                component={<EditTapeManagementWrapper />}
                                 moduleName={UserModuleNameTypes.tapeManangement}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1520,7 +1519,7 @@ const PageRoutes = () => {
                         path="media/slot"
                         element={
                             <AuthHOC
-                                Component={<SlotManagementListingWrapper />}
+                                component={<SlotManagementListingWrapper />}
                                 moduleName={UserModuleNameTypes.slotManagement}
                             />
                         }
@@ -1529,7 +1528,7 @@ const PageRoutes = () => {
                         path="media/slot/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddSlotManagementWrapper />}
+                                component={<AddSlotManagementWrapper />}
                                 moduleName={UserModuleNameTypes.slotManagement}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1540,7 +1539,7 @@ const PageRoutes = () => {
                         path="media/slot/edit/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditSlotManagementWrapper />}
+                                component={<EditSlotManagementWrapper />}
                                 moduleName={UserModuleNameTypes.slotManagement}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1551,7 +1550,7 @@ const PageRoutes = () => {
                         path="media/competitor"
                         element={
                             <AuthHOC
-                                Component={
+                                component={
                                     <CompetitorManagementListingWrapper />
                                 }
                                 moduleName={UserModuleNameTypes.competitor}
@@ -1562,7 +1561,7 @@ const PageRoutes = () => {
                         path="media/competitor/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddCompetitorWrapper />}
+                                component={<AddCompetitorWrapper />}
                                 moduleName={UserModuleNameTypes.competitor}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1573,7 +1572,7 @@ const PageRoutes = () => {
                         path="media/competitor/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditCompetitorWraper />}
+                                component={<EditCompetitorWraper />}
                                 moduleName={UserModuleNameTypes.competitor}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1584,7 +1583,7 @@ const PageRoutes = () => {
                         path="media/channel-category"
                         element={
                             <AuthHOC
-                                Component={<ChannelCategoryListingWrapper />}
+                                component={<ChannelCategoryListingWrapper />}
                                 moduleName={UserModuleNameTypes.channelCategory}
                             />
                         }
@@ -1593,7 +1592,7 @@ const PageRoutes = () => {
                         path="media/channel-category/edit/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditChannelCategoryWrapper />}
+                                component={<EditChannelCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.channelCategory}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1604,7 +1603,7 @@ const PageRoutes = () => {
                         path="media/channel-category/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddChannelCategoryWrapper />}
+                                component={<AddChannelCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.channelCategory}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1616,7 +1615,7 @@ const PageRoutes = () => {
                         path="media/artist"
                         element={
                             <ActionAuthHOC
-                                Component={<ArtistListingWrapper />}
+                                component={<ArtistListingWrapper />}
                                 moduleName={UserModuleNameTypes.artist}
                             />
                         }
@@ -1625,7 +1624,7 @@ const PageRoutes = () => {
                         path="media/artist/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditArtistWrapper />}
+                                component={<EditArtistWrapper />}
                                 moduleName={UserModuleNameTypes.artist}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1636,7 +1635,7 @@ const PageRoutes = () => {
                         path="media/artist/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddArtistWrapper />}
+                                component={<AddArtistWrapper />}
                                 moduleName={UserModuleNameTypes.artist}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1655,7 +1654,7 @@ const PageRoutes = () => {
                         path="assets/assets-management"
                         element={
                             <AuthHOC
-                                Component={<AssetsRequestWrapper />}
+                                component={<AssetsRequestWrapper />}
                                 moduleName={UserModuleNameTypes.assetRequest}
                             />
                         }
@@ -1664,7 +1663,7 @@ const PageRoutes = () => {
                         path="assets/assets-management/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditAssetsRequestwrapper />}
+                                component={<EditAssetsRequestwrapper />}
                                 moduleName={UserModuleNameTypes.assetRequest}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1675,7 +1674,7 @@ const PageRoutes = () => {
                         path="assets/assets-management/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddAssetsRequestWrapper />}
+                                component={<AddAssetsRequestWrapper />}
                                 moduleName={UserModuleNameTypes.assetRequest}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1687,7 +1686,7 @@ const PageRoutes = () => {
                         path="/assets/assets-location"
                         element={
                             <AuthHOC
-                                Component={<AssetsLocationWrapper />}
+                                component={<AssetsLocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetLocation}
                             />
                         }
@@ -1696,7 +1695,7 @@ const PageRoutes = () => {
                         path="/assets/assets-location/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditAssetsLocatonWrapper />}
+                                component={<EditAssetsLocatonWrapper />}
                                 moduleName={UserModuleNameTypes.assetLocation}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1707,7 +1706,7 @@ const PageRoutes = () => {
                         path="/assets/assets-category"
                         element={
                             <AuthHOC
-                                Component={<AssetsCategoryWrapper />}
+                                component={<AssetsCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.assetCategory}
                             />
                         }
@@ -1716,7 +1715,7 @@ const PageRoutes = () => {
                         path="/assets/assets-category/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddAssetsCategoryWrapper />}
+                                component={<AddAssetsCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.assetCategory}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1727,7 +1726,7 @@ const PageRoutes = () => {
                         path="/assets/assets-category/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditAssetsCategoryWrapper />}
+                                component={<EditAssetsCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.assetCategory}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1738,7 +1737,7 @@ const PageRoutes = () => {
                         path="/assets/assets-location/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddAssetsLocationWrapper />}
+                                component={<AddAssetsLocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetLocation}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1750,7 +1749,7 @@ const PageRoutes = () => {
                         path="assets/assets-relocation"
                         element={
                             <AuthHOC
-                                Component={<AssetsRelocationWrapper />}
+                                component={<AssetsRelocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetRelocation}
                             />
                         }
@@ -1759,7 +1758,7 @@ const PageRoutes = () => {
                         path="assets/assets-allocation"
                         element={
                             <AuthHOC
-                                Component={<AssetsAllocationWrapper />}
+                                component={<AssetsAllocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetAllocation}
                             />
                         }
@@ -1768,7 +1767,7 @@ const PageRoutes = () => {
                         path="assets/assets-relocation/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddAssetsRelocationWrapper />}
+                                component={<AddAssetsRelocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetRelocation}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1779,7 +1778,7 @@ const PageRoutes = () => {
                         path="assets/assets-allocation/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddAssetsAllocationWrapper />}
+                                component={<AddAssetsAllocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetAllocation}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1793,7 +1792,7 @@ const PageRoutes = () => {
                         path="all-websites/website"
                         element={
                             <AuthHOC
-                                Component={<WebstieListingWrapper />}
+                                component={<WebstieListingWrapper />}
                                 moduleName={UserModuleNameTypes.website}
                             />
                         }
@@ -1803,7 +1802,7 @@ const PageRoutes = () => {
                         path="all-websites/website/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddWebsiteWrapper />}
+                                component={<AddWebsiteWrapper />}
                                 moduleName={UserModuleNameTypes.website}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1814,7 +1813,7 @@ const PageRoutes = () => {
                         path="all-websites/website-page"
                         element={
                             <AuthHOC
-                                Component={<WebsitePageListingWrapper />}
+                                component={<WebsitePageListingWrapper />}
                                 moduleName={UserModuleNameTypes.websitePage}
                             />
                         }
@@ -1823,7 +1822,7 @@ const PageRoutes = () => {
                         path="all-websites/website-page/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddWebsitePageWrapper />}
+                                component={<AddWebsitePageWrapper />}
                                 moduleName={UserModuleNameTypes.websitePage}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1834,7 +1833,7 @@ const PageRoutes = () => {
                         path="all-websites/website-page/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditWebsitePageWrapper />}
+                                component={<EditWebsitePageWrapper />}
                                 moduleName={UserModuleNameTypes.websitePage}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1845,7 +1844,7 @@ const PageRoutes = () => {
                         path="all-websites/website-page/view/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<ViewWebsitePageWrapper />}
+                                component={<ViewWebsitePageWrapper />}
                                 moduleName={UserModuleNameTypes.websitePage}
                                 actionName={UserModuleActionTypes.View}
                                 isRedirect
@@ -1857,7 +1856,7 @@ const PageRoutes = () => {
                         path="all-websites/website/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditWebsiteWrapper />}
+                                component={<EditWebsiteWrapper />}
                                 moduleName={UserModuleNameTypes.website}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1870,7 +1869,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-one"
                         element={
                             <AuthHOC
-                                Component={<DispositionOneListingWrapper />}
+                                component={<DispositionOneListingWrapper />}
                                 moduleName={UserModuleNameTypes.dispositionOne}
                             />
                         }
@@ -1879,7 +1878,7 @@ const PageRoutes = () => {
                         path="dispositions/initialcall-one"
                         element={
                             <AuthHOC
-                                Component={<InitialCallOneListingWrapper />}
+                                component={<InitialCallOneListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerOne
                                 }
@@ -1890,7 +1889,7 @@ const PageRoutes = () => {
                         path="dispositions/initialcall-one/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddInitialCallOneWrapper />}
+                                component={<AddInitialCallOneWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerOne
                                 }
@@ -1903,7 +1902,7 @@ const PageRoutes = () => {
                         path="dispositions/initialcall-one/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditInitialCallOneWrapper />}
+                                component={<EditInitialCallOneWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerOne
                                 }
@@ -1916,7 +1915,7 @@ const PageRoutes = () => {
                         path="dispositions/initialcall-two"
                         element={
                             <AuthHOC
-                                Component={<InitialCallTwoListingWrapper />}
+                                component={<InitialCallTwoListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerTwo
                                 }
@@ -1927,7 +1926,7 @@ const PageRoutes = () => {
                         path="dispositions/initialcall-two/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddInitialCallTwoWrapper />}
+                                component={<AddInitialCallTwoWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerTwo
                                 }
@@ -1940,7 +1939,7 @@ const PageRoutes = () => {
                         path="dispositions/initialcall-two/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditInitialCallTwoWrapper />}
+                                component={<EditInitialCallTwoWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerTwo
                                 }
@@ -1953,7 +1952,7 @@ const PageRoutes = () => {
                         path="dispositions/initialcall-three"
                         element={
                             <AuthHOC
-                                Component={<InitialCallThreeListingWrapper />}
+                                component={<InitialCallThreeListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerThree
                                 }
@@ -1964,7 +1963,7 @@ const PageRoutes = () => {
                         path="dispositions/initialcall-three/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditInitialCallThreeWrapper />}
+                                component={<EditInitialCallThreeWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerThree
                                 }
@@ -1977,7 +1976,7 @@ const PageRoutes = () => {
                         path="dispositions/initialcall-three/view/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<ViewInitialCallThreeWrappper />}
+                                component={<ViewInitialCallThreeWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerThree
                                 }
@@ -1990,7 +1989,7 @@ const PageRoutes = () => {
                         path="dispositions/initialcall-three/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddInitialCallThreeWrappper />}
+                                component={<AddInitialCallThreeWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerThree
                                 }
@@ -2003,7 +2002,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-one/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddDispositionOneWrappper />}
+                                component={<AddDispositionOneWrappper />}
                                 moduleName={UserModuleNameTypes.dispositionOne}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -2014,7 +2013,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-one/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditDispositionOneWrappper />}
+                                component={<EditDispositionOneWrappper />}
                                 moduleName={UserModuleNameTypes.dispositionOne}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -2025,7 +2024,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-two"
                         element={
                             <AuthHOC
-                                Component={<DispositionTwoListingWrapper />}
+                                component={<DispositionTwoListingWrapper />}
                                 moduleName={UserModuleNameTypes.dispositionTwo}
                             />
                         }
@@ -2034,7 +2033,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-three"
                         element={
                             <AuthHOC
-                                Component={<DispositionThreeListingWrapper />}
+                                component={<DispositionThreeListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionThree
                                 }
@@ -2045,7 +2044,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-three/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddDispositionThreeWrappper />}
+                                component={<AddDispositionThreeWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionThree
                                 }
@@ -2058,7 +2057,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-three/edit/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditDispositionThreeWrapper />}
+                                component={<EditDispositionThreeWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionThree
                                 }
@@ -2071,7 +2070,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-three/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<ViewDispositionThreeWrappper />}
+                                component={<ViewDispositionThreeWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionThree
                                 }
@@ -2084,7 +2083,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-two/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddDispositionTwoWrapper />}
+                                component={<AddDispositionTwoWrapper />}
                                 moduleName={UserModuleNameTypes.dispositionTwo}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -2095,7 +2094,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-two/edit/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditDispositionTwoWrapper />}
+                                component={<EditDispositionTwoWrapper />}
                                 moduleName={UserModuleNameTypes.dispositionTwo}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -2106,7 +2105,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-complaint"
                         element={
                             <AuthHOC
-                                Component={
+                                component={
                                     <DispositionComplaintListingWrapper />
                                 }
                                 moduleName={
@@ -2119,7 +2118,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-complaint/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddDispositionComplaintWrappper />}
+                                component={<AddDispositionComplaintWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionComplaint
                                 }
@@ -2132,7 +2131,7 @@ const PageRoutes = () => {
                         path="dispositions/disposition-complaint/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditDispositionComplaintWrappper />}
+                                component={<EditDispositionComplaintWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionComplaint
                                 }
@@ -2147,7 +2146,7 @@ const PageRoutes = () => {
                         path="all-websites/website-blog"
                         element={
                             <AuthHOC
-                                Component={<ListWebstieBlogWrapper />}
+                                component={<ListWebstieBlogWrapper />}
                                 moduleName={UserModuleNameTypes.websiteBlog}
                             />
                         }
@@ -2156,7 +2155,7 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddWebsiteBlogWrapper />}
+                                component={<AddWebsiteBlogWrapper />}
                                 moduleName={UserModuleNameTypes.websiteBlog}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -2167,7 +2166,7 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditWebsiteBlogWrapper />}
+                                component={<EditWebsiteBlogWrapper />}
                                 moduleName={UserModuleNameTypes.websiteBlog}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -2178,7 +2177,7 @@ const PageRoutes = () => {
                         path="all-websites/website-blog/view/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<WebsiteBlogViewWrapper />}
+                                component={<WebsiteBlogViewWrapper />}
                                 moduleName={UserModuleNameTypes.websiteBlog}
                                 actionName={UserModuleActionTypes.View}
                                 isRedirect
@@ -2206,7 +2205,7 @@ const PageRoutes = () => {
                         path="/all-websites/website-tags"
                         element={
                             <ActionAuthHOC
-                                Component={<WebsiteTagListingWrapper />}
+                                component={<WebsiteTagListingWrapper />}
                                 moduleName={UserModuleNameTypes.websiteTags}
                             />
                         }
@@ -2215,7 +2214,7 @@ const PageRoutes = () => {
                         path="/all-websites/website-tags/add"
                         element={
                             <ActionAuthHOC
-                                Component={<AddWebsiteTagsWrapper />}
+                                component={<AddWebsiteTagsWrapper />}
                                 moduleName={UserModuleNameTypes.websiteTags}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -2226,7 +2225,7 @@ const PageRoutes = () => {
                         path="/all-websites/website-tags/edit/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<EditWebsiteTagWrapper />}
+                                component={<EditWebsiteTagWrapper />}
                                 moduleName={UserModuleNameTypes.websiteTags}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -2237,7 +2236,7 @@ const PageRoutes = () => {
                         path="/all-websites/website-tags/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<ViewWebsiteTagsWrapper />}
+                                component={<ViewWebsiteTagsWrapper />}
                                 moduleName={UserModuleNameTypes.websiteTags}
                                 actionName={UserModuleActionTypes.View}
                                 isRedirect
@@ -2248,7 +2247,7 @@ const PageRoutes = () => {
                         path="/inquiry"
                         element={
                             <AuthHOC
-                                Component={<InquiryListingWrapper />}
+                                component={<InquiryListingWrapper />}
                                 moduleName={UserModuleNameTypes.inquiry}
                             />
                         }
@@ -2258,7 +2257,7 @@ const PageRoutes = () => {
                         path="/inquiry/view/:id"
                         element={
                             <ActionAuthHOC
-                                Component={<InquiryViewWrapper />}
+                                component={<InquiryViewWrapper />}
                                 moduleName={UserModuleNameTypes.inquiry}
                                 actionName={UserModuleActionTypes.View}
                                 isRedirect

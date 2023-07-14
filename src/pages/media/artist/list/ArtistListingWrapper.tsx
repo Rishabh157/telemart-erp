@@ -32,6 +32,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/artist'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ArtistListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -60,6 +61,7 @@ const ArtistListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.artist}
                     isEdit
                     isDelete
                     handleOnAction={() => {

@@ -12,6 +12,11 @@ import React, { ReactNode } from 'react'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { Popover } from '@mui/material'
 import { HiDotsHorizontal } from 'react-icons/hi'
+import ActionAuthHOC from 'src/ActionAuthHoc'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 interface ActionPopupProps {
     handleOnAction: () => void
@@ -23,9 +28,11 @@ interface ActionPopupProps {
     isDelete?: boolean
     isEdit?: boolean
     className?: string
+    moduleName: UserModuleNameTypes
 }
 
 const ActionPopup: React.FC<ActionPopupProps> = ({
+    moduleName = '',
     handleOnAction,
     children,
     handleViewActionButton,
@@ -60,34 +67,56 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                         >
                             <>
                                 {isView && (
-                                    <button
-                                        onClick={handleViewActionButton}
-                                        className={className}
-                                    >
-                                        View
-                                    </button>
+                                    <ActionAuthHOC
+                                        moduleName={moduleName as string}
+                                        actionName={UserModuleActionTypes.View}
+                                        component={
+                                            <button
+                                                onClick={handleViewActionButton}
+                                                className={className}
+                                            >
+                                                View
+                                            </button>
+                                        }
+                                    />
                                 )}
                                 {isEdit && (
-                                    <button
-                                        onClick={handleEditActionButton}
-                                        className={className}
-                                    >
-                                        Edit
-                                    </button>
+                                    <ActionAuthHOC
+                                        moduleName={moduleName}
+                                        actionName={UserModuleActionTypes.Edit}
+                                        component={
+                                            <button
+                                                onClick={handleEditActionButton}
+                                                className={className}
+                                            >
+                                                Edit
+                                            </button>
+                                        }
+                                    />
                                 )}
                                 {children}
                                 {isDelete && (
-                                    <button
-                                        onClick={popupState.close}
-                                        className="block w-full text-left  hover:bg-gray-100"
-                                    >
-                                        <div
-                                            className="block px-4 py-2"
-                                            onClick={handleDeleteActionButton}
-                                        >
-                                            Delete
-                                        </div>
-                                    </button>
+                                    <ActionAuthHOC
+                                        moduleName={moduleName}
+                                        actionName={
+                                            UserModuleActionTypes.Delete
+                                        }
+                                        component={
+                                            <button
+                                                onClick={popupState.close}
+                                                className="block w-full text-left  hover:bg-gray-100"
+                                            >
+                                                <div
+                                                    className="block px-4 py-2"
+                                                    onClick={
+                                                        handleDeleteActionButton
+                                                    }
+                                                >
+                                                    Delete
+                                                </div>
+                                            </button>
+                                        }
+                                    />
                                 )}
                             </>
                         </Popover>

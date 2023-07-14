@@ -37,6 +37,7 @@ import {
     setTotalItems,
     //setFilterValue,
 } from 'src/redux/slices/inquirySlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const InquiryListingWrapper = () => {
     // Hooks
@@ -163,6 +164,7 @@ const InquiryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.inquiry}
                     isView
                     handleViewActionButton={() => {
                         navigate(`/inquiry/view/${currentId}`)
