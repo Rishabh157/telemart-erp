@@ -52,7 +52,7 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName="VENDOR"
                     actionName="ADD"
-                    Component={
+                    component={
                         <button
                             onClick={() => {
                                 navigate('add-vendor')

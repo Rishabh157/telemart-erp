@@ -33,6 +33,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/website/websiteSlice'
 import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const InfluencerListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -77,6 +78,7 @@ const InfluencerListingWrapper = () => {
                 // </div>
 
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.website}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

@@ -33,6 +33,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/channelManagementSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ChannelManagementListingWrapper = () => {
     const channelManagementState: any = useSelector(
@@ -96,6 +97,7 @@ const ChannelManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.channelManagement}
                     isEdit
                     isDelete
                     handleOnAction={() => {

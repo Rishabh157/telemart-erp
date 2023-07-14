@@ -33,6 +33,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/productSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ProductsListingWrapper = () => {
     const productState: any = useSelector((state: RootState) => state.products)
@@ -91,6 +92,7 @@ const ProductsListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                moduleName={UserModuleNameTypes.product}
                     isEdit
                     isDelete
                     handleOnAction={() => {

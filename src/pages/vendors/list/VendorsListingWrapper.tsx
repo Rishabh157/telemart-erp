@@ -33,6 +33,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/vendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const VendorsListingWrapper = () => {
     const navigate = useNavigate()
@@ -92,6 +93,7 @@ const VendorsListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.vendor}
                     isView
                     isEdit
                     isDelete

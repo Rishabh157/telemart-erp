@@ -29,6 +29,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/BatchSlice'
 import { setFilterValue } from 'src/redux/slices/orderSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const BatchListingWrapper = () => {
     const batchState: any = useSelector((state: RootState) => state.batch)
@@ -102,6 +103,8 @@ const BatchListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                moduleName={UserModuleNameTypes.attributeGroup}
+
                     handleOnAction={() => {
                         // e.stopPropagation()
                         setShowDropdown(!showDropdown)
