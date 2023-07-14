@@ -18,15 +18,19 @@ const ActionAuthHOC = ({
     isRedirect = false,
 }: Props) => {
     const navigate = useNavigate()
-
+    // console.log(actionName, 'actionNameactionNameactionNameactionName')
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    let isAuthorized = isCheckAuthorizedModuleAction(
-        checkUserAccess,
-        moduleName,
-        actionName
-    )
+    const { userData } = useSelector((state: RootState) => state.auth)
+    let isAuthorized =
+        userData?.userRole === 'ADMIN'
+            ? true
+            : isCheckAuthorizedModuleAction(
+                  checkUserAccess,
+                  moduleName,
+                  actionName
+              )
 
     return (
         <>

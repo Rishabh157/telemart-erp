@@ -14,7 +14,11 @@ const AuthHOC = ({ Component, moduleName = '' }: Props) => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    let isAuthorized = isCheckAuthorizedModule(checkUserAccess, moduleName)
+    const { userData } = useSelector((state: RootState) => state.auth)
+    let isAuthorized =
+        userData?.userRole === 'ADMIN'
+            ? true
+            : isCheckAuthorizedModule(checkUserAccess, moduleName)
 
     return (
         <>

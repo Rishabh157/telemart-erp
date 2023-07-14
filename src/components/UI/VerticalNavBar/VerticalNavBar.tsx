@@ -39,10 +39,12 @@ const VerticalNavBar = ({
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    //const { userData } = useSelector((state: RootState) => state?.auth)
     // const userAccessSiedeBar =
 
-    const { customized } = useSelector((state: RootState) => state?.auth)
+    const { customized, userData } = useSelector(
+        (state: RootState) => state?.auth
+    )
     const AlertText =
         'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
     useEffect(() => {
@@ -110,7 +112,8 @@ const VerticalNavBar = ({
 
             {/* Navigations */}
             <div className="px-3 py-5 flex flex-col gap-1">
-            {navigation
+            
+                {navigation
                     ?.filter((permissionRoute: NavItemType) => {
                         return userData?.userRole === 'ADMIN'
                             ? true
