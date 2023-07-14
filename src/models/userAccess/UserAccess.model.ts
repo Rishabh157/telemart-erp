@@ -28,6 +28,7 @@ export enum UserModuleNameTypes {
     cartonBox = 'CARTON_BOX',
     company = 'COMPANY',
     barcode = 'BARCODE',
+    //
     country = 'COUNTRY',
     state = 'STATE',
     district = 'DISTRICT',

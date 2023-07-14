@@ -23,6 +23,11 @@ import {
     useDeleteDealerMutation,
     useGetDealersQuery,
 } from 'src/services/DealerServices'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
@@ -38,6 +43,9 @@ const DealersListingWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
 
     const navigate = useNavigate()
     const [deletedealer] = useDeleteDealerMutation()
@@ -208,7 +216,12 @@ const DealersListingWrapper = () => {
         <>
             <SideNavLayout>
                 <DealersListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.dealer,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

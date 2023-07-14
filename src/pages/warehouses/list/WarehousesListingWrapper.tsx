@@ -25,6 +25,11 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -41,6 +46,9 @@ const DealersListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const wareHouseState: any = useSelector(
         (state: RootState) => state.warehouse
+    )
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
     )
 
     const columns: columnTypes[] = [
@@ -186,7 +194,12 @@ const DealersListingWrapper = () => {
             <SideNavLayout>
                 <div className="px-4 h-[calc(100vh-55px)]">
                     <WarehouseListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.wareHouse,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                         AddpathName="/warehouse/add"

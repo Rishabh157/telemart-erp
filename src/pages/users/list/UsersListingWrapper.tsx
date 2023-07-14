@@ -22,6 +22,11 @@ import {
     getDepartmentLabel,
     //getUserRoleLabel,
 } from 'src/utils/GetHierarchyByDept'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 //import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 //import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
@@ -36,6 +41,9 @@ import {
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { items, page, rowsPerPage, searchValue } = userState
     const [showDropdown, setShowDropdown] = useState(false)
     //const [currentId, setCurrentId] = useState('')
@@ -174,7 +182,12 @@ const UsersListingWrapper = () => {
     return (
         <SideNavLayout>
             <UsersListing
-                columns={columns}
+                columns={getAllowedAuthorizedColumns(
+                    checkUserAccess,
+                    columns,
+                    UserModuleNameTypes.user,
+                    UserModuleActionTypes.List
+                )}
                 rows={items}
                 setShowDropdown={() => {}}
             />
