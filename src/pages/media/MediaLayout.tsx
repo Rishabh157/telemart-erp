@@ -22,52 +22,62 @@ import { AiOutlineSetting } from 'react-icons/ai'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const mediaNavigation: NavItemType[] = [
     {
         label: 'Channel Group',
         icon: MdMonitor,
         path: '/media/channel-group',
+        name: UserModuleNameTypes.channelGroup,
     },
     {
         label: 'Channel Category',
         icon: BiCategory,
         path: '/media/channel-category',
+        name: UserModuleNameTypes.channelCategory,
     },
     {
         label: 'Channel Management',
         icon: SiGoogletagmanager,
         path: '/media/channel',
+        name: UserModuleNameTypes.channelManagement,
     },
     {
         label: 'DID Management',
         icon: DiDart,
         path: '/media/did',
+        name: UserModuleNameTypes.didManagement,
     },
     {
         label: 'Artist',
         icon: BsPersonHeart,
         path: '/media/artist',
+        name: UserModuleNameTypes.artist,
     },
     {
         label: 'Tape Management',
         icon: FaTape,
         path: '/media/tape',
+        name: UserModuleNameTypes.tapeManangement,
     },
     {
         label: 'Competitor',
         icon: MdEmojiEvents,
         path: '/media/competitor',
+        name: UserModuleNameTypes.competitor,
     },
     {
         label: 'Slot Management',
         icon: MdViewTimeline,
         path: '/media/slot',
+        name: UserModuleNameTypes.slotManagement,
     },
     {
         label: 'Inbound',
         icon: AiOutlineSetting,
         path: '/media/caller-page?phone=9009648665&userlogin=Vinod&postalcode=456734&verve=111&dstphone=8987898789&campaignId=DHUANDHAAR',
+        name: 'INBOUND',
     },
 ]
 

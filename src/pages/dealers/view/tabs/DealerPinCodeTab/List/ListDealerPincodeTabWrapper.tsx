@@ -86,8 +86,7 @@ const ListDealerPincodeTabWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.dealer}
-
+                    moduleName={UserModuleNameTypes.dealer}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                     }}

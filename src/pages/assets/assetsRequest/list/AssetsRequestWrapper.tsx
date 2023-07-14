@@ -86,8 +86,7 @@ const AssetsRequestWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.assetRequest}
-
+                    moduleName={UserModuleNameTypes.assetRequest}
                     isEdit
                     isDelete
                     handleOnAction={() => {
