@@ -217,8 +217,7 @@ const SlotManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.slotManagement}
-
+                    moduleName={UserModuleNameTypes.slotManagement}
                     isEdit
                     isDelete
                     handleOnAction={() => {

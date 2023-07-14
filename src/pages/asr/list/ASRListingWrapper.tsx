@@ -172,8 +172,7 @@ const ASRListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.asr}
-
+                    moduleName={UserModuleNameTypes.asr}
                     isEdit
                     isDelete
                     handleEditActionButton={() => {

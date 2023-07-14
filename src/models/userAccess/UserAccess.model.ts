@@ -5,7 +5,6 @@ export enum UserModuleActionTypes {
     'Delete' = 'DELETE',
     'View' = 'VIEW',
 }
-
 export enum UserModuleNameTypes {
     vendor = 'VENDOR',
     dealer = 'DEALER',
@@ -23,6 +22,7 @@ export enum UserModuleNameTypes {
     productSubCategory = 'PRODUCT_SUB_CATEGORY',
     productGroup = 'PRODUCT_GROUP',
     scheme = 'SCHEME',
+    tax = 'TAX',
     item = 'ITEM',
     product = 'PRODUCT',
     cartonBox = 'CARTON_BOX',

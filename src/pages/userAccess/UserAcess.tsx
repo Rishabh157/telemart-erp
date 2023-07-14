@@ -76,7 +76,7 @@ const UserAcess = ({
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
-    console.log(userAccessItems,"userAccessItems")
+    console.log(userAccessItems, 'userAccessItems')
     const { modules: moduleList } = userAccessItems
     const handleUserModuleAccess = (
         module: ModulesTypes,
@@ -129,6 +129,13 @@ const UserAcess = ({
             dispatch(setUserModule(moduleValue))
         }
     }
+    // const handleUserFieldAccess = (
+    //     module: ModulesTypes
+    //     action: string,
+    //     fieldValue: boolean
+    // ) => {
+    //
+    // }
 
     const isCheckedModule = (module: ModulesTypes) => {
         const isExistModule = userAccessItems?.modules?.some(

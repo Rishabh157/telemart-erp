@@ -57,8 +57,7 @@ const AssetsLocationWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.assetLocation}
-
+                    moduleName={UserModuleNameTypes.assetLocation}
                     isDelete
                     isEdit
                     handleOnAction={() => {
