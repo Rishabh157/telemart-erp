@@ -19,32 +19,38 @@ import { CiLocationOn } from 'react-icons/ci'
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const asstesNavigation: NavItemType[] = [
     {
         label: 'Assets Request ',
         icon: MdOutlineWebAsset,
         path: '/assets/assets-management',
+        name: UserModuleNameTypes.assetRequest,
     },
     {
         label: 'Assets Category ',
         icon: TbCategory2,
         path: '/assets/assets-category',
+        name: UserModuleNameTypes.assetCategory,
     },
     {
         label: 'Assets Location ',
         icon: CiLocationOn,
         path: '/assets/assets-location',
+        name: UserModuleNameTypes.assetLocation,
     },
     {
         label: 'Assets Relocation',
         icon: MdShareLocation,
         path: '/assets/assets-relocation',
+        name: UserModuleNameTypes.assetRelocation,
     },
     {
         label: 'Assets Allocation',
         icon: TbLayoutDistributeHorizontal,
         path: '/assets/assets-allocation',
+        name: UserModuleNameTypes.assetAllocation,
     },
 ]
 

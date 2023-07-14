@@ -29,52 +29,62 @@ import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const configurationNavigation: NavItemType[] = [
     {
         label: 'Attributes',
         icon: TbAppsFilled,
         path: '/configurations/attributes',
+        name: UserModuleNameTypes.attribute,
     },
     {
         label: 'Attributes Group',
         icon: FaObjectGroup,
         path: '/configurations/attributes-group',
+        name: UserModuleNameTypes.attributeGroup,
     },
     {
         label: 'Product Category',
         icon: BiCategory,
         path: '/configurations/product-category',
+        name: UserModuleNameTypes.productCategory,
     },
     {
         label: 'Product Sub Category',
         icon: MdOutlineCategory,
         path: '/configurations/product-sub-category',
+        name: UserModuleNameTypes.productSubCategory,
     },
     {
         label: 'Product Group',
         icon: BsBoxes,
         path: '/configurations/product-group',
+        name: UserModuleNameTypes.productGroup,
     },
     {
         label: 'Scheme',
         icon: TfiLayoutMediaOverlayAlt2,
         path: '/configurations/scheme',
+        name: UserModuleNameTypes.scheme,
     },
     {
         label: 'Item',
         icon: BiCheckboxSquare,
         path: '/configurations/item',
+        name: UserModuleNameTypes.item,
     },
     {
         label: 'Products',
         icon: BsBox,
         path: '/configurations/products',
+        name: UserModuleNameTypes.product,
     },
     {
         label: 'Carton Box',
         icon: BsBoxSeam,
         path: '/configurations/carton-box',
+        name: UserModuleNameTypes.cartonBox,
     },
     // {
     //     label: 'Taxes',
@@ -85,41 +95,38 @@ const configurationNavigation: NavItemType[] = [
         label: 'Company',
         icon: CgOrganisation,
         path: '/configurations/company',
+        name: UserModuleNameTypes.company,
     },
     {
         label: 'Barcode',
         icon: CiBarcode,
         path: '/configurations/barcode',
+        name: UserModuleNameTypes.barcode,
     },
     {
         label: 'Location',
         icon: CiLocationOn,
         path: '/configurations/location',
+        name: UserModuleNameTypes.locations,
     },
     {
         label: 'Language',
         icon: CiFaceSmile,
         path: '/configurations/language',
+        name: UserModuleNameTypes.language,
     },
     {
         label: 'Dealers Category',
         icon: BiCategoryAlt,
         path: '/configurations/dealers-category',
+        name: UserModuleNameTypes.dealerCategory,
     },
-    // {
-    //     label: 'Disposition One',
-    //     icon: AiOutlineSetting,
-    //     path: '/configurations/disposition-one',
-    // },
-    // {
-    //     label: 'Disposition Two',
-    //     icon: AiOutlineSetting,
-    //     path: '/configurations/disposition-two',
-    // },
+
     {
         label: 'Hierarchy (Org..*)',
         icon: TbBinaryTree2,
         path: '/configurations/hierarchy',
+        name: 'HIERARCHY',
     },
 ]
 

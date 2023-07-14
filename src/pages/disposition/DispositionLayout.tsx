@@ -7,42 +7,50 @@ import { BiChevronsLeft } from 'react-icons/bi'
 import { MdEmojiEvents } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CiMonitor } from 'react-icons/ci'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const dispositionNavigation: NavItemType[] = [
     {
         label: 'Disposition One',
         icon: CiMonitor,
         path: '/dispositions/disposition-one',
+        name: UserModuleNameTypes.dispositionOne,
     },
     {
         label: 'Disposition Two',
         icon: CiMonitor,
         path: '/dispositions/disposition-two',
+        name: UserModuleNameTypes.dispositionTwo,
     },
     {
         label: 'Disposition Three',
         icon: CiMonitor,
         path: '/dispositions/disposition-three',
+        name: UserModuleNameTypes.dispositionThree,
     },
     {
         label: 'IC-One',
         icon: BsPersonHeart,
         path: '/dispositions/initialcall-one',
+        name: UserModuleNameTypes.initialCallerOne,
     },
     {
         label: 'IC-Two',
         icon: BsPersonHeart,
         path: '/dispositions/initialcall-two',
+        name: UserModuleNameTypes.initialCallerTwo,
     },
     {
         label: 'IC-Three',
         icon: BsPersonHeart,
         path: '/dispositions/initialcall-three',
+        name: UserModuleNameTypes.initialCallerThree,
     },
     {
         label: 'Disposition Complaint',
         icon: MdEmojiEvents,
         path: '/dispositions/disposition-complaint',
+        name: UserModuleNameTypes.dispositionComplaint,
     },
 ]
 

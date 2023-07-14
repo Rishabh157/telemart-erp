@@ -17,6 +17,7 @@ export enum UserModuleNameTypes {
     grn = 'GRN',
     inquiry = 'INQUIRY',
     order = 'ORDER',
+    callerPage = 'CALLER_PAGE',
     attribute = 'ATTRIBUTE',
     attributeGroup = 'ATTRIBUTE_GROUP',
     productCategory = 'PRODUCT_CATEGORY',
@@ -60,4 +61,10 @@ export enum UserModuleNameTypes {
     websiteBlog = 'WEBSITE_BLOG',
     websitePage = 'WEBSITE_PAGE',
     websiteTags = 'WEBSITE_TAGS',
+    configuration = 'CONFIGURATION',
+    media = 'MEDIA',
+    assets = 'ASSETS',
+    allWebsite = 'ALL_WEBSITES',
+    disposition = 'DISPOSITION',
+    locations = 'LOCATIONS',
 }
