@@ -90,7 +90,7 @@ const SchemeListingWrapper = () => {
         },
 
         {
-            field: 'category',
+            field: 'productCategoryLabel',
             headerName: 'Category',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SchemeListResponse) => {
@@ -99,7 +99,7 @@ const SchemeListingWrapper = () => {
         },
 
         {
-            field: 'subCategory',
+            field: 'ProductSubCategoryLabel',
             headerName: 'Sub Category',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SchemeListResponse) => {
@@ -107,7 +107,7 @@ const SchemeListingWrapper = () => {
             },
         },
         {
-            field: 'price',
+            field: 'schemePrice',
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SchemeListResponse) => {

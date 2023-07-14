@@ -81,15 +81,10 @@ const UsersListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'UserName',
+            field: 'userName',
             headerName: 'User Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => (
-                <span>
-                    {' '}
-                    {row.firstName} {row.lastName}{' '}
-                </span>
-            ),
+            renderCell: (row: any) => <span> {row.userName}</span>,
         },
         {
             field: 'email',

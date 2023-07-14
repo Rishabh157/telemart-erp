@@ -144,7 +144,7 @@
                         {
                             "fieldId": "1",
                             "fieldName": "User Name",
-                            "fieldValue": "firstName"
+                            "fieldValue": "userName"
                         },
                         {
                             "fieldId": "2",
@@ -1537,7 +1537,7 @@
                         {
                             "fieldId": "didId3",
                             "fieldName": "Channel Name",
-                            "fieldValue": "channelName"
+                            "fieldValue": "channelLabel"
                         }
                     ]
                 },
@@ -1736,7 +1736,7 @@
                         {
                             "fieldId": "slotId3",
                             "fieldName": "Channel Name",
-                            "fieldValue": ""
+                            "fieldValue": "channelLabel"
                         },
                         {
                             "fieldId": "slotId4",
@@ -2298,17 +2298,17 @@
                         {
                             "fieldId": "websiteBlogId1",
                             "fieldName": "Blog Name",
-                            "fieldValue": ""
+                            "fieldValue": "blogName"
                         },
                         {
                             "fieldId": "websiteBlogId2",
                             "fieldName": "Blog Title",
-                            "fieldValue": ""
+                            "fieldValue": "blogTitle"
                         },
                         {
                             "fieldId": "websiteBlogId3",
                             "fieldName": "Blog Subtitle",
-                            "fieldValue": ""
+                            "fieldValue": "blogSubtitle"
                         }
                     ]
                 },

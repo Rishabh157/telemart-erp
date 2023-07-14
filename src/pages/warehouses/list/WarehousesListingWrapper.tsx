@@ -53,7 +53,7 @@ const DealersListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'warehouseCode',
+            field: 'wareHouseCode',
             headerName: 'Warehouse Code',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: WarehousesListResponse) => (
@@ -61,7 +61,7 @@ const DealersListingWrapper = () => {
             ),
         },
         {
-            field: 'warehouseName',
+            field: 'wareHouseName',
             headerName: 'Warehouse Name',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
@@ -69,7 +69,7 @@ const DealersListingWrapper = () => {
             },
         },
         {
-            field: 'country',
+            field: 'wareHouseCountryName',
             headerName: 'Country',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: WarehousesListResponse) => (
@@ -77,7 +77,7 @@ const DealersListingWrapper = () => {
             ),
         },
         {
-            field: 'state',
+            field: 'registrationStateName',
             headerName: 'State',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
@@ -85,7 +85,7 @@ const DealersListingWrapper = () => {
             },
         },
         {
-            field: 'district',
+            field: 'registrationDistrictName',
             headerName: 'District',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
@@ -93,7 +93,7 @@ const DealersListingWrapper = () => {
             },
         },
         {
-            field: 'pincode',
+            field: 'registrationPincodeName',
             headerName: 'Pincode',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {

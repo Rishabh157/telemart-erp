@@ -38,7 +38,6 @@ import {
 } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 const DealersListingWrapper = () => {
     const dealerState: any = useSelector((state: RootState) => state.dealer)
     const { userData } = useSelector((state: RootState) => state?.auth)
