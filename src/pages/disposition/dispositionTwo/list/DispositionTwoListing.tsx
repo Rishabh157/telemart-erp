@@ -15,6 +15,11 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
+import ActionAuthHOC from 'src/ActionAuthHoc'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 type Props = {
     columns: any[]
@@ -58,13 +63,19 @@ const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Disposition Two </ATMPageHeading>
-                    <button
-                        type="button"
-                        onClick={() => navigate('add')}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + Add
-                    </button>
+                    <ActionAuthHOC
+                        moduleName={UserModuleNameTypes.dispositionTwo}
+                        actionName={UserModuleActionTypes.Add}
+                        Component={
+                            <button
+                                type="button"
+                                onClick={() => navigate('add')}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Add
+                            </button>
+                        }
+                    />
                 </div>
 
                 <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

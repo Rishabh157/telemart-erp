@@ -29,6 +29,11 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { setRowsPerPage, setPage } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setSearchValue } from 'src/redux/slices/dealerSlice'
+import ActionAuthHOC from 'src/ActionAuthHoc'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 type Props = {
@@ -52,14 +57,20 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Dealers </ATMPageHeading>
-                <button
-                    onClick={() => {
-                        navigate('add-dealer')
-                    }}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add Dealers
-                </button>
+                <ActionAuthHOC
+                    moduleName={UserModuleNameTypes.dealer}
+                    actionName={UserModuleActionTypes.Add}
+                    Component={
+                        <button
+                            onClick={() => {
+                                navigate('add-dealer')
+                            }}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Add Dealers
+                        </button>
+                    }
+                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

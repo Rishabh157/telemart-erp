@@ -27,6 +27,10 @@ import {
 } from 'src/redux/slices/vendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import ActionAuthHOC from 'src/ActionAuthHoc'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 type Props = {
@@ -50,8 +54,8 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Vendors </ATMPageHeading>
                 <ActionAuthHOC
-                    moduleName="VENDOR"
-                    actionName="ADD"
+                    moduleName={UserModuleNameTypes.vendor}
+                    actionName={UserModuleActionTypes.Add}
                     Component={
                         <button
                             onClick={() => {

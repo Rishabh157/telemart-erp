@@ -14,6 +14,11 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { useNavigate } from 'react-router-dom'
+import ActionAuthHOC from 'src/ActionAuthHoc'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 type Props = {
     columns: any[]
@@ -49,13 +54,19 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Disposition Three </ATMPageHeading>
-                    <button
-                        type="button"
-                        onClick={() => navigate('add')}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + Add
-                    </button>
+                    <ActionAuthHOC
+                        moduleName={UserModuleNameTypes.dispositionThree}
+                        actionName={UserModuleActionTypes.Add}
+                        Component={
+                            <button
+                                type="button"
+                                onClick={() => navigate('add')}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Add
+                            </button>
+                        }
+                    />
                 </div>
 
                 <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

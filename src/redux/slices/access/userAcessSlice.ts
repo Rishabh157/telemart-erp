@@ -8,11 +8,15 @@
 // |-- External Dependencies --|
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+// import {
+//     UserModuleActionTypes,
+//     UserModuleNameTypes,
+// } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Internal Dependencies --|
 
 export interface fieldTypes {
-    fieldid: string
+    fieldId: string
     fieldName: string
     fieldValue: string
 }
@@ -74,8 +78,8 @@ const userAccesSlice: Slice<InitialStateType> = createSlice({
         setUserAccess: (state, action: PayloadAction<ModulesTypes[]>) => {
             state.userAccessItems.modules = action.payload
         },
+
         setCheckUserAccess: (state, action: PayloadAction<ModulesTypes[]>) => {
-            //console.log(action.payload, "action.payload")
             state.checkUserAccess.modules = action.payload
         },
     },

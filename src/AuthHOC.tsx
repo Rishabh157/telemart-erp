@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux'
 import PageNotFound from './PageNotFound'
 import { RootState } from './redux/store'
 import { isCheckAuthorizedModule } from './userAccess/getAuthorizedModules'
-import {UserModuleNameTypes, UserModuleActionTypes} from 'src/models/userAccess/UserAccess.model'
+import {
+    UserModuleNameTypes,
+    UserModuleActionTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 type Props = {
     Component: React.ReactNode
