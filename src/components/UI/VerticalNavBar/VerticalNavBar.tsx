@@ -77,6 +77,11 @@ const VerticalNavBar = ({
 
     const getDefaultRouteFunction = (name: string, path: string) => {
         let currentModules: string[] = []
+        let userRole = userData?.userRole
+
+        if (userRole === 'ADMIN') {
+            return path
+        }
         switch (name) {
             case UserModuleNameTypes.configuration:
                 currentModules = configurationModules
@@ -175,7 +180,12 @@ const VerticalNavBar = ({
                                             window.confirm(AlertText)
                                         if (confirmValue) {
                                             dispatch(setFieldCustomized(false))
-                                            navigate(navItem.path)
+                                            navigate(
+                                                getDefaultRouteFunction(
+                                                    navItem.name as string,
+                                                    navItem.path
+                                                )
+                                            )
                                         }
                                     } else {
                                         navigate(

@@ -136,6 +136,11 @@ export const getAllowedAuthorizedColumns = (
     moduleName: string,
     actionName: string
 ) => {
+    let userData = localStorage.getItem('userData')
+    let parseUserData = JSON.parse(userData as string)
+    if (parseUserData?.userRole === 'ADMIN') {
+        return columns
+    }
     let modules = userAccessData?.modules?.find(
         (modules: ModulesTypes) => modules.moduleName === moduleName
     )
