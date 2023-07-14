@@ -34,6 +34,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/dealerSchemeSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ListDealerSchemeTabWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -181,6 +182,8 @@ const ListDealerSchemeTabWrapper = () => {
             flex: 'flex-[0.25_0.25_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                moduleName={UserModuleNameTypes.dealer}
+
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

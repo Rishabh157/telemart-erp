@@ -57,7 +57,7 @@ const InitialCalloneListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.initialCallerOne}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             type="button"
                             onClick={() => navigate('add')}

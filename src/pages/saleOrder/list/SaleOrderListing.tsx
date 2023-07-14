@@ -68,7 +68,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.saleOrder}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() => navigate('add-sale-order')}
                             className="bg-primary-main text-white rounded py-1 px-3"

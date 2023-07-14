@@ -34,6 +34,7 @@ import {
     setTotalItems,
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const OrderListing = () => {
     // Hooks
@@ -134,6 +135,7 @@ const OrderListing = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.order}
                     isView
                     isEdit
                     handleOnAction={() => {

@@ -76,7 +76,7 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.language}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() =>
                                 navigate('/configurations/language/add')

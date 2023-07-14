@@ -76,6 +76,7 @@ const UserAcess = ({
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
+    console.log(userAccessItems,"userAccessItems")
     const { modules: moduleList } = userAccessItems
     const handleUserModuleAccess = (
         module: ModulesTypes,

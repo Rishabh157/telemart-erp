@@ -63,7 +63,7 @@ const VendorWarehouseListing = ({
                 <ActionAuthHOC
                     moduleName="WAREHOUSE"
                     actionName='ADD'
-                    Component={
+                    component={
                         <button
                             onClick={() =>
                                 navigate(`${AddpathName}`, {

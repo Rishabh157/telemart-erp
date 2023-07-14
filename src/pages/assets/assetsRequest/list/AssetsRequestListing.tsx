@@ -68,7 +68,7 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.assetRequest}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() => navigate('add')}
                             className="bg-primary-main text-white rounded py-1 px-3"

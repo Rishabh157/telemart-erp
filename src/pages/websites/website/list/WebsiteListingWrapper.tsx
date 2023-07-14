@@ -34,6 +34,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -74,6 +75,7 @@ const WebstieListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.website}
                     isEdit
                     isDelete
                     handleOnAction={() => {

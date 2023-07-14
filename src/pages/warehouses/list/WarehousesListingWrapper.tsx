@@ -38,6 +38,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const DealersListingWrapper = () => {
     const navigate = useNavigate()
@@ -106,6 +107,7 @@ const DealersListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.wareHouse}
                     isView
                     isEdit
                     isDelete

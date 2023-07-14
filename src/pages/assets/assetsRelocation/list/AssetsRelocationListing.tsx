@@ -49,7 +49,7 @@ const AssetsRelocationListing = () => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.assetRelocation}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() => navigate('add')}
                             className="bg-primary-main text-white rounded py-1 px-3"

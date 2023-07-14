@@ -32,6 +32,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteTagsSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const WebsiteTagListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -88,6 +89,7 @@ const WebsiteTagListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.websiteTags}
                     isView
                     isEdit
                     isDelete

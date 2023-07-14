@@ -60,7 +60,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.purchaseOrder}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() => navigate('/purchase-order/add')}
                             className="bg-primary-main text-white rounded py-1 px-3"
