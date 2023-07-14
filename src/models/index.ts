@@ -149,7 +149,6 @@ export type {
 export type { OrderListResponse } from './Order.model'
 export type { OrderLedgerResponse } from './OrderLedger.modal'
 export type { InquiryListResponse } from './Inquiry.model'
-export type { BatchListResponse, AddBatch } from './Batch.model'
 export type {
     DealersSupervisorListResponse,
     DealersSupervisorAdd,

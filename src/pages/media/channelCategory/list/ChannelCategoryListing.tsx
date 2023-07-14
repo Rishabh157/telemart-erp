@@ -11,6 +11,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -20,6 +21,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -72,13 +77,19 @@ const ChannelCategoryListing = ({
             {isHeader && (
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Channel Category</ATMPageHeading>
-                    <button
-                        type="button"
-                        onClick={() => navigate('add')}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + Add Channel Category
-                    </button>
+                    <ActionAuthHOC
+                        moduleName={UserModuleNameTypes.channelCategory}
+                        actionName={UserModuleActionTypes.Add}
+                        Component={
+                            <button
+                                type="button"
+                                onClick={() => navigate('add')}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Add Channel Category
+                            </button>
+                        }
+                    />
                 </div>
             )}
 

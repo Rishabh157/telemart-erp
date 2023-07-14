@@ -25,6 +25,11 @@ import {
     setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/NewUserSlice'
+import ActionAuthHOC from 'src/ActionAuthHoc'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 export type Props = {
@@ -52,13 +57,19 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Users </ATMPageHeading>
-                <button
-                    onClick={() => navigate('add-user')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    {' '}
-                    + Add User{' '}
-                </button>
+                <ActionAuthHOC
+                    moduleName={UserModuleNameTypes.user}
+                    actionName={UserModuleActionTypes.Add}
+                    Component={
+                        <button
+                            onClick={() => navigate('add-user')}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            {' '}
+                            + Add User{' '}
+                        </button>
+                    }
+                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

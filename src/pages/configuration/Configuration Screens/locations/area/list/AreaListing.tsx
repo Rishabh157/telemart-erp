@@ -22,6 +22,7 @@ import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 type Props = {
@@ -50,6 +51,7 @@ const AreaListing = ({ areas }: Props) => {
     return (
         <>
             <LocationListView
+                moduleName={UserModuleNameTypes.area}
                 listHeading="Area"
                 searchValue={searchValue}
                 OnSearchChange={(newValue) => {

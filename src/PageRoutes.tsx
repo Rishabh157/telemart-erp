@@ -245,7 +245,6 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData))
- 
     const { data, isLoading, isFetching } = useGetUserAccessQuery(
         {
             userRole: userData.userRole as string,

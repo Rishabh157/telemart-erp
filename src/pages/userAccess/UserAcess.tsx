@@ -26,6 +26,7 @@ import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 // import { SelectOption } from 'src/models/FormField/FormField.model'
 // import { HiPlus } from 'react-icons/hi'
 import { default as modulesData } from 'src/defaultData/moduleData.json'
+import { UserModuleActionTypes } from 'src/models/userAccess/UserAccess.model'
 // import { default as user } from 'src/defaultData/user.json'
 import {
     moduleActionTypes,
@@ -317,7 +318,7 @@ const UserAcess = ({
                                                                     <input
                                                                         disabled={
                                                                             actionsItems.actionName ===
-                                                                            'List'
+                                                                            UserModuleActionTypes.List
                                                                                 ? true
                                                                                 : false
                                                                         }

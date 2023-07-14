@@ -29,6 +29,11 @@ import {
 } from 'src/redux/slices/productSubCategorySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setSearchValue } from 'src/redux/slices/productSubCategorySlice'
+import ActionAuthHOC from 'src/ActionAuthHoc'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Types --|
@@ -72,15 +77,23 @@ const ProductSubCategoryListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Product Sub Categories </ATMPageHeading>
-                <button
-                    onClick={() =>
-                        navigate('/configurations/product-sub-category/add')
+                <ActionAuthHOC
+                    moduleName={UserModuleNameTypes.productSubCategory}
+                    actionName={UserModuleActionTypes.Add}
+                    Component={
+                        <button
+                            onClick={() =>
+                                navigate(
+                                    '/configurations/product-sub-category/add'
+                                )
+                            }
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            {' '}
+                            + Add{' '}
+                        </button>
                     }
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    {' '}
-                    + Add{' '}
-                </button>
+                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
