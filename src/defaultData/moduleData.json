@@ -144,7 +144,7 @@
                         {
                             "fieldId": "1",
                             "fieldName": "User Name",
-                            "fieldValue": "dealerCode"
+                            "fieldValue": "firstName"
                         },
                         {
                             "fieldId": "2",
@@ -484,67 +484,6 @@
             ]
         },
         {
-            "moduleId": "inventoryManagementId",
-            "moduleName": "inventoryManagement",
-            "moduleAction": [
-                {
-                    "actionId": "inventoryManagementActionListId",
-                    "actionUrl": "/inventory-management",
-                    "actionName": "LIST",
-                    "fields": [
-                        {
-                            "fieldId": "1",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "2",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "3",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "4",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "5",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "6",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        }
-                    ]
-                },
-                {
-                    "actionId": "inventoryManagementActionAddId",
-                    "actionUrl": "/inventory-management/add",
-                    "actionName": "ADD",
-                    "fields": []
-                },
-                {
-                    "actionId": "inventoryManagementActionEditId",
-                    "actionUrl": "/inventory-management/edit/:id",
-                    "actionName": "EDIT",
-                    "fields": []
-                },
-                {
-                    "actionId": "inventoryManagementActionDeleteId",
-                    "actionUrl": "/inventory-management/delete",
-                    "actionName": "DELETE",
-                    "fields": []
-                }
-            ]
-        },
-        {
             "moduleId": "inquiryId",
             "moduleName": "INQUIRY",
             "moduleAction": [
@@ -679,10 +618,10 @@
         },
         {
             "moduleId": "callId",
-            "moduleName": "CALLER_PAGE",
+            "moduleName": "ORDER",
             "moduleAction": [
                 {
-                    "actionId": "callActionListId",
+                    "actionId": "callId",
                     "actionUrl": "/call",
                     "actionName": "LIST",
                     "fields": [
@@ -719,20 +658,26 @@
                     ]
                 },
                 {
-                    "actionId": "callActionAddId",
+                    "actionId": "ordersActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
                     "fields": []
                 },
                 {
-                    "actionId": "callActionEditId",
+                    "actionId": "ordersActionViewId",
+                    "actionUrl": "/view/:id",
+                    "actionName": "View",
+                    "fields": []
+                },
+                {
+                    "actionId": "ordersActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
                     "fields": []
                 },
                 {
-                    "actionId": "callActionDeleteId",
-                    "actionUrl": "",
+                    "actionId": "ordersActionDeleteId",
+                    "actionUrl": "/orders/delete",
                     "actionName": "DELETE",
                     "fields": []
                 }
@@ -740,7 +685,7 @@
         },
         {
             "moduleId": "attributesId",
-            "moduleName": "Attributes",
+            "moduleName": "ATTRIBUTE",
             "moduleAction": [
                 {
                     "actionId": "AttributesActionListId",
@@ -776,7 +721,7 @@
         },
         {
             "moduleId": "attributesGroupId",
-            "moduleName": "Attributes Group",
+            "moduleName": "ATTRIBUTE_GROUP",
             "moduleAction": [
                 {
                     "actionId": "attributesGroupActionListId",
@@ -817,7 +762,7 @@
         },
         {
             "moduleId": "productCategoryId",
-            "moduleName": "Product Category",
+            "moduleName": "PRODUCT_CATEGORY",
             "moduleAction": [
                 {
                     "actionId": "productCategoryActionListId",
@@ -858,7 +803,7 @@
         },
         {
             "moduleId": "productSubCategoryId",
-            "moduleName": "Product Subcategory",
+            "moduleName": "PRODUCT_SUB_CATEGORY",
             "moduleAction": [
                 {
                     "actionId": "productSubCategoryActionListId",
@@ -909,7 +854,7 @@
         },
         {
             "moduleId": "productGroupId",
-            "moduleName": "Product Group",
+            "moduleName": "PRODUCT_GROUP",
             "moduleAction": [
                 {
                     "actionId": "productGroupActionListId",
@@ -970,7 +915,7 @@
         },
         {
             "moduleId": "schemeId",
-            "moduleName": "Scheme",
+            "moduleName": "SCHEME",
             "moduleAction": [
                 {
                     "actionId": "schemeActionListId",
@@ -1026,7 +971,7 @@
         },
         {
             "moduleId": "itemId",
-            "moduleName": "Item",
+            "moduleName": "ITEM",
             "moduleAction": [
                 {
                     "actionId": "itemActionListId",
@@ -1072,7 +1017,7 @@
         },
         {
             "moduleId": "productsId",
-            "moduleName": "Products",
+            "moduleName": "PRODUCT",
             "moduleAction": [
                 {
                     "actionId": "productsActionListId",
@@ -1128,7 +1073,7 @@
         },
         {
             "moduleId": "cartonBoxId",
-            "moduleName": "Carton Box",
+            "moduleName": "CARTON_BOX",
             "moduleAction": [
                 {
                     "actionId": "cartonBoxActionListId",
@@ -1178,64 +1123,8 @@
             ]
         },
         {
-            "moduleId": "taxesId",
-            "moduleName": "Taxes",
-            "moduleAction": [
-                {
-                    "actionId": "taxesActionListId",
-                    "actionUrl": "",
-                    "actionName": "LIST",
-                    "fields": [
-                        {
-                            "fieldId": "1",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "2",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "3",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "4",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "5",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        }
-                    ]
-                },
-                {
-                    "actionId": "taxesActionId",
-                    "actionUrl": "",
-                    "actionName": "ADD",
-                    "fields": []
-                },
-                {
-                    "actionId": "taxesActionEditId",
-                    "actionUrl": "",
-                    "actionName": "EDIT",
-                    "fields": []
-                },
-                {
-                    "actionId": "taxesActionDeleteId",
-                    "actionUrl": "",
-                    "actionName": "DELETE",
-                    "fields": []
-                }
-            ]
-        },
-        {
             "moduleId": "companyId",
-            "moduleName": "Company",
+            "moduleName": "COMPANY",
             "moduleAction": [
                 {
                     "actionId": "companyActionListId",
@@ -1291,7 +1180,7 @@
         },
         {
             "moduleId": "barcodeId",
-            "moduleName": "Barcode",
+            "moduleName": "BARCODE",
             "moduleAction": [
                 {
                     "actionId": "barcodeActionListId",
@@ -1413,7 +1302,7 @@
         },
         {
             "moduleId": "languageId",
-            "moduleName": "Language",
+            "moduleName": "LANGUAGE",
             "moduleAction": [
                 {
                     "actionId": "languageActionListId",
@@ -1449,11 +1338,11 @@
         },
         {
             "moduleId": "dealersCategoryId",
-            "moduleName": "Dealers Category",
+            "moduleName": "DEALER_CATEGORY",
             "moduleAction": [
                 {
                     "actionId": "dealersCategoryActionListId",
-                    "actionUrl": "",
+                    "actionUrl": "/configurations/dealers-category",
                     "actionName": "LIST",
                     "fields": [
                         {
@@ -1499,69 +1388,8 @@
             ]
         },
         {
-            "moduleId": "hierarchyId",
-            "moduleName": "Hierarchy",
-            "moduleAction": [
-                {
-                    "actionId": "hierarchyActionListId",
-                    "actionUrl": "/configurations/hierarchy",
-                    "actionName": "LIST",
-                    "fields": [
-                        {
-                            "fieldId": "1",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "2",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "3",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "4",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "5",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        },
-                        {
-                            "fieldId": "6",
-                            "fieldName": "",
-                            "fieldValue": ""
-                        }
-                    ]
-                },
-                {
-                    "actionId": "hierarchyActionAddId",
-                    "actionUrl": "",
-                    "actionName": "ADD",
-                    "fields": []
-                },
-                {
-                    "actionId": "hierarchyActionEditId",
-                    "actionUrl": "",
-                    "actionName": "EDIT",
-                    "fields": []
-                },
-                {
-                    "actionId": "hierarchyActionDeleteId",
-                    "actionUrl": "",
-                    "actionName": "DELETE",
-                    "fields": []
-                }
-            ]
-        },
-        {
             "moduleId": "channelGroupId",
-            "moduleName": "Channel Group",
+            "moduleName": "CHANNEL_GROUP",
             "moduleAction": [
                 {
                     "actionId": "channelGroupActionListId",
@@ -1597,7 +1425,7 @@
         },
         {
             "moduleId": "channelCategoryId",
-            "moduleName": "Channel Category",
+            "moduleName": "CHANNEL_CATEGORY",
             "moduleAction": [
                 {
                     "actionId": "channelCategoryActionListId",
@@ -1633,7 +1461,7 @@
         },
         {
             "moduleId": "channelId",
-            "moduleName": "Channel",
+            "moduleName": "CHANNEL_MANAGEMENT",
             "moduleAction": [
                 {
                     "actionId": "channelActionListId",
@@ -1689,7 +1517,7 @@
         },
         {
             "moduleId": "didId",
-            "moduleName": "DID Number",
+            "moduleName": "DID_MANAGEMENT",
             "moduleAction": [
                 {
                     "actionId": "didActionListId",
@@ -1735,7 +1563,7 @@
         },
         {
             "moduleId": "artistId",
-            "moduleName": "Artist",
+            "moduleName": "ARTIST",
             "moduleAction": [
                 {
                     "actionId": "artistActionListId",
@@ -1771,7 +1599,7 @@
         },
         {
             "moduleId": "tapeId",
-            "moduleName": "Tape",
+            "moduleName": "TAPE_MANAGEMENT",
             "moduleAction": [
                 {
                     "actionId": "tapeActionListId",
@@ -1822,7 +1650,7 @@
         },
         {
             "moduleId": "competitorId",
-            "moduleName": "Competitor",
+            "moduleName": "COMPETITOR",
             "moduleAction": [
                 {
                     "actionId": "competitorActionListId",
@@ -1888,7 +1716,7 @@
         },
         {
             "moduleId": "slotId",
-            "moduleName": "Slot",
+            "moduleName": "SLOT_MANAGEMENT",
             "moduleAction": [
                 {
                     "actionId": "slotActionListId",
@@ -1948,38 +1776,8 @@
             ]
         },
         {
-            "moduleId": "callerPageId",
-            "moduleName": "Caller Page",
-            "moduleAction": [
-                {
-                    "actionId": "callerPageActionListId",
-                    "actionUrl": "/media/caller-page",
-                    "actionName": "LIST",
-                    "fields": []
-                },
-                {
-                    "actionId": "callerPageActionAddId",
-                    "actionUrl": "",
-                    "actionName": "ADD",
-                    "fields": []
-                },
-                {
-                    "actionId": "callerPageActionEditId",
-                    "actionUrl": "",
-                    "actionName": "EDIT",
-                    "fields": []
-                },
-                {
-                    "actionId": "callerPageActionDeleteId",
-                    "actionUrl": "",
-                    "actionName": "DELETE",
-                    "fields": []
-                }
-            ]
-        },
-        {
             "moduleId": "assetsManagementId",
-            "moduleName": "Assets Management",
+            "moduleName": "ASSET_REQUEST",
             "moduleAction": [
                 {
                     "actionId": "assetsManagementActionListId",
@@ -2030,7 +1828,7 @@
         },
         {
             "moduleId": "assetsCategoryId",
-            "moduleName": "Assets Category",
+            "moduleName": "ASSET_CATEGORY",
             "moduleAction": [
                 {
                     "actionId": "assetsCategoryActionListId",
@@ -2066,7 +1864,7 @@
         },
         {
             "moduleId": "assetsLocationId",
-            "moduleName": "Assets Location",
+            "moduleName": "ASSET_LOCATION",
             "moduleAction": [
                 {
                     "actionId": "assetsLocationActionListId",
@@ -2102,7 +1900,7 @@
         },
         {
             "moduleId": "assetsRelocationId",
-            "moduleName": "Assets Relocation",
+            "moduleName": "ASSET_RELOCATION",
             "moduleAction": [
                 {
                     "actionId": "assetsRelocationActionListId",
@@ -2132,7 +1930,7 @@
         },
         {
             "moduleId": "assetsAllocationId",
-            "moduleName": "Assets Allocation",
+            "moduleName": "ASSET_ALLOCATION",
             "moduleAction": [
                 {
                     "actionId": "assetsAllocationActionListId",
@@ -2162,7 +1960,7 @@
         },
         {
             "moduleId": "dispositionOneId",
-            "moduleName": "Disposition One",
+            "moduleName": "DISPOSITION_ONE",
             "moduleAction": [
                 {
                     "actionId": "dispositionOneActionListId",
@@ -2198,7 +1996,7 @@
         },
         {
             "moduleId": "dispositionTwoId",
-            "moduleName": "Disposition Two",
+            "moduleName": "DISPOSITION_TWO",
             "moduleAction": [
                 {
                     "actionId": "dispositionTwoActionListId",
@@ -2239,7 +2037,7 @@
         },
         {
             "moduleId": "dispositionThreeId",
-            "moduleName": "Disposition Three",
+            "moduleName": "DISPOSITION_THREE",
             "moduleAction": [
                 {
                     "actionId": "dispositionThreeActionListId",
@@ -2285,7 +2083,7 @@
         },
         {
             "moduleId": "initialcallOneId",
-            "moduleName": "Initialcall One",
+            "moduleName": "INITIAL_CALLER_ONE",
             "moduleAction": [
                 {
                     "actionId": "initialcallOneActionListId",
@@ -2321,7 +2119,7 @@
         },
         {
             "moduleId": "initialcallTwoId",
-            "moduleName": "Initialcall Two",
+            "moduleName": "INITIAL_CALLER_TWO",
             "moduleAction": [
                 {
                     "actionId": "initialcallTwoActionListId",
@@ -2362,7 +2160,7 @@
         },
         {
             "moduleId": "initialcallThreeId",
-            "moduleName": "Initialcall Three",
+            "moduleName": "INITIAL_CALLER_THREE",
             "moduleAction": [
                 {
                     "actionId": "initialcallThreeActionListId",
@@ -2408,7 +2206,7 @@
         },
         {
             "moduleId": "dispositionComplaintId",
-            "moduleName": "Disposition Complaint",
+            "moduleName": "DISPOSITION_COMPLAINT",
             "moduleAction": [
                 {
                     "actionId": "dispositionComplaintActionListId",
@@ -2444,7 +2242,7 @@
         },
         {
             "moduleId": "websiteId",
-            "moduleName": "Website",
+            "moduleName": "WEBSITE",
             "moduleAction": [
                 {
                     "actionId": "websiteActionListId",
@@ -2490,7 +2288,7 @@
         },
         {
             "moduleId": "websiteBlogId",
-            "moduleName": "Website Blog",
+            "moduleName": "WEBSITE_BLOG",
             "moduleAction": [
                 {
                     "actionId": "websiteBlogActionListId",
@@ -2536,7 +2334,7 @@
         },
         {
             "moduleId": "websitePageId",
-            "moduleName": "Website Page",
+            "moduleName": "WEBSITE_PAGE",
             "moduleAction": [
                 {
                     "actionId": "websitePageActionListId",
@@ -2577,7 +2375,7 @@
         },
         {
             "moduleId": "websiteTagsId",
-            "moduleName": "Website Tags",
+            "moduleName": "WEBSITE_TAGS",
             "moduleAction": [
                 {
                     "actionId": "websiteTagsActionListId",
