@@ -80,7 +80,7 @@ const ProductSubCategoryListing = ({
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.productSubCategory}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() =>
                                 navigate(

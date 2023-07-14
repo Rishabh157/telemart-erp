@@ -279,7 +279,7 @@ const SlotManagementListingWrapper = () => {
                         handleClose={() => {
                             setIsOpenDialog(false)
                         }}
-                        Component={
+                        component={
                             <SlotRunWrapper
                                 id={runState}
                                 setIsOpenDialog={setIsOpenDialog}

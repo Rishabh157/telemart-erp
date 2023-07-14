@@ -21,7 +21,7 @@ enum ButtonPosition {
 type DialogLogBoxType = {
     handleClose: () => void
     isOpen: boolean
-    Component: React.ReactNode
+    component: React.ReactNode
     closeButtonPosition?: ButtonPosition
     buttonClass?: string
     fullScreen?: boolean
@@ -33,7 +33,7 @@ type DialogLogBoxType = {
 const DialogLogBox: React.FC<DialogLogBoxType> = ({
     handleClose,
     isOpen,
-    Component,
+    component,
     closeButtonPosition = 'right',
     buttonClass = 'rounded',
     fullScreen = false,
@@ -68,7 +68,7 @@ const DialogLogBox: React.FC<DialogLogBoxType> = ({
                 <MdCancel size="30" color="red" className="cursor-pointer" />
             </div>
             <DialogContent style={{ margin: '0px', padding: '0px' }}>
-                {Component}
+                {component}
             </DialogContent>
         </Dialog>
     )

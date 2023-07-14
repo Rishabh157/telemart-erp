@@ -70,7 +70,7 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.assetLocation}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() => navigate('add')}
                             className="bg-primary-main text-white rounded py-1 px-3"

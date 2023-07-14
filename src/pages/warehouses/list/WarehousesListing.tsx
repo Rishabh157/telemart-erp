@@ -65,7 +65,7 @@ const WarehouseListing = ({
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.wareHouse}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() => navigate(`${AddpathName}`)}
                             className="bg-primary-main text-white rounded py-1 px-3"
