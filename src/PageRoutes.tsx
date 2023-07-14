@@ -12,6 +12,7 @@ import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import { UserModuleNameTypes, UserModuleActionTypes } from 'src/models/userAccess/UserAccess.model'
 import {
     AddArtistWrapper,
     AddASRWrapper,
@@ -375,7 +376,14 @@ const PageRoutes = () => {
                         />
                         <Route
                             path="warehouse-details"
-                            element={<ViewWarehouseWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    Component={<ViewWarehouseWrapper />}
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={UserModuleActionTypes.VIew}
+                                    isRedirect
+                                />
+                            }
                         />
                     </Route>
 
@@ -386,10 +394,24 @@ const PageRoutes = () => {
                         path="media/caller-page"
                         element={<CallerPageWrapper />}
                     />
-                    <Route path="/orders" element={<OrderListing />} />
+                    <Route path="/orders"
+                         element={
+                            <ActionAuthHOC
+                                Component={<OrderListing />}
+                                moduleName={UserModuleNameTypes.order}
+                            />
+                        }
+                     />
 
-                    <Route path="/orders" element={<Order />}>
-                        <Route index element={<OrderListing />} />
+                    <Route path="/orders"
+                         element={
+                            <ActionAuthHOC
+                                Component={<Order />}
+                                moduleName={UserModuleNameTypes.order}
+                            />
+                        }
+                    >
+                    <Route index element={<OrderListing />} />
                         <Route path="view/:id" element={<OrderViewWrapper />} />
                         <Route
                             path="approved-orders"
@@ -412,15 +434,34 @@ const PageRoutes = () => {
                     />
                     <Route
                         path="/dealers-ratio"
-                        element={<DealersRatioListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<DealersRatioListingWrapper />}
+                                moduleName={UserModuleNameTypes.dealer}
+                            />
+                        }
                     />
                     <Route
                         path="/dealers/add-dealer"
-                        element={<AddDealerWrapper />}
+                        element={                            
+                            <ActionAuthHOC
+                                Component={<AddDealerWrapper />}
+                                moduleName={UserModuleNameTypes.dealer}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/dealers/edit-dealer/:id"
-                        element={<EditDealerWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditDealerWrapper />}
+                                moduleName={UserModuleNameTypes.dealer}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
@@ -428,7 +469,7 @@ const PageRoutes = () => {
                         element={
                             <AuthHOC
                                 Component={<VendorsListingWrapper />}
-                                moduleName="VENDOR"
+                                moduleName={UserModuleNameTypes.vendor}
                             />
                         }
                     />
@@ -437,18 +478,34 @@ const PageRoutes = () => {
                         element={
                             <ActionAuthHOC
                                 Component={<AddVendorWrapper />}
-                                moduleName="VENDOR"
-                                actionName="ADD"
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleActionTypes.Add}
                                 isRedirect
                             />
                         }
                     />
                     <Route
                         path="/vendors/edit-vendor/:id"
-                        element={<EditVendorWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditVendorWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
-                    <Route path="/vendors/:vendorId" element={<ViewVendor />}>
+                    <Route path="/vendors/:vendorId" 
+                    element={
+                        <ActionAuthHOC
+                            Component={<ViewVendor />}
+                            moduleName={UserModuleNameTypes.vendor}
+                            actionName={UserModuleActionTypes.View}
+                            isRedirect
+                        />
+                    }
+                    >
                         <Route
                             path="general-information"
                             element={<VendorGeneralInformationTabWrapper />}
@@ -481,15 +538,34 @@ const PageRoutes = () => {
 
                     <Route
                         path="/warehouse"
-                        element={<WarehousesListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<WarehousesListingWrapper />}
+                                moduleName={UserModuleNameTypes.wareHouse}
+                            />
+                        }
                     />
                     <Route
                         path="/warehouse/:id"
-                        element={<EditWarehouseWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditWarehouseWrapper />}
+                                moduleName={UserModuleNameTypes.wareHouse}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/warehouse/add"
-                        element={<AddWarehouseWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddWarehouseWrapper />}
+                                moduleName={UserModuleNameTypes.wareHouse}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     {/* <Route
                         path="/warehouse/view/:id"
@@ -498,46 +574,116 @@ const PageRoutes = () => {
 
                     <Route
                         path="/vendors/:vendorId/warehouse/add"
-                        element={<AddVendorWarehouseWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddVendorWarehouseWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/vendors/:vendorId/warehouse/:id"
-                        element={<EditVendorWarehouseWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditVendorWarehouseWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/sale-order"
-                        element={<SaleOrderListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<SaleOrderListingWrapper />}
+                                moduleName={UserModuleNameTypes.saleOrder}
+                                />
+                            }
                     />
                     <Route
                         path="/sale-order/add-sale-order"
-                        element={<AddSaleOrderWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddSaleOrderWrapper />}
+                                moduleName={UserModuleNameTypes.saleOrder}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/dealers/:dealerId/sale-order/add-sale-order"
-                        element={<AddSaleOrderWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddSaleOrderWrapper />}
+                                moduleName={UserModuleNameTypes.dealer}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/sale-order/edit-sale-order/:id"
-                        element={<EditSaleOrderWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditSaleOrderWrapper />}
+                                moduleName={UserModuleNameTypes.saleOrder}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="vendors/:dealerId/warehouse/add-warehouse"
-                        element={<AddWarehouseWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddWarehouseWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dealers/:dealerId/warehouse/add-warehouse"
-                        element={<AddDealerWarehouseWarpper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddDealerWarehouseWarpper />}
+                                moduleName={UserModuleNameTypes.dealer}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="dealers/:dealerId/warehouse/:id"
-                        element={<EditDealerWarehouseWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditDealerWarehouseWrapper />}
+                                moduleName={UserModuleNameTypes.dealer}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
-                    <Route path="/dealers/:dealerId" element={<ViewDealer />}>
+                    <Route path="/dealers/:dealerId" 
+                        element={
+                            <ActionAuthHOC
+                                Component={<ViewDealer />}
+                                moduleName={UserModuleNameTypes.dealer}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                            }
+                    >
                         <Route
                             path="general-information"
                             element={<DealerGeneralInformationTabWrapper />}
@@ -593,46 +739,164 @@ const PageRoutes = () => {
                             element={<DealerSupervisorTabWrapper />}
                         />
                     </Route>
-                    <Route path="users" element={<UsersListingWrapper />} />
+
+                    <Route 
+                        path="users" 
+                        element={
+                            <AuthHOC
+                                Component={<UsersListingWrapper />}
+                                moduleName={UserModuleNameTypes.user}
+                            />
+                            }
+                        />
                     <Route
                         path="/users/add-user"
-                        element={<AddUserWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddUserWrapper />}
+                                moduleName={UserModuleNameTypes.user}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                           />
+                        }
                     />
-                    <Route path="/users/:id" element={<EditUserWrapper />} />
+                    <Route 
+                        path="/users/:id" 
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditUserWrapper />}
+                                moduleName={UserModuleNameTypes.user}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                       } 
+                    />
                     <Route path="test" element={<Test />} />
-                    <Route path="/asr" element={<ASRListingWrapper />} />
-                    <Route path="/asr/add" element={<AddASRWrapper />} />
-                    <Route path="/asr/:id" element={<EditASRWrapper />} />
-                    <Route path="/grn" element={<GRNListingWrapper />} />
-                    <Route path="/grn/add" element={<AddGRNWrapper />} />
+
+                    <Route 
+                        path="/asr" 
+                        element={
+                            <AuthHOC
+                                Component={<ASRListingWrapper />}
+                                moduleName={UserModuleNameTypes.asr}
+                            />
+                        }
+                    />
+                    <Route 
+                        path="/asr/add"
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddASRWrapper />}
+                                moduleName={UserModuleNameTypes.asr}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        } 
+                    />
+                    <Route 
+                        path="/asr/:id" 
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditASRWrapper />}
+                                moduleName={UserModuleNameTypes.asr}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route 
+                        path="/grn" 
+                        element={
+                            <AuthHOC
+                                Component={<GRNListingWrapper />}
+                                moduleName={UserModuleNameTypes.grn}
+                            />
+                        }
+                    />
+                    <Route 
+                        path="/grn/add" 
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddGRNWrapper />}
+                                moduleName={UserModuleNameTypes.grn}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
+                    />
                     <Route
                         path="/configurations/scheme"
-                        element={<SchemeListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<SchemeListingWrapper />}
+                                moduleName={UserModuleNameTypes.scheme}
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/scheme/add"
-                        element={<AddSchemeWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddSchemeWrapper />}
+                                moduleName={UserModuleNameTypes.scheme}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/scheme/:id"
-                        element={<EditSchemeWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditSchemeWrapper />}
+                                moduleName={UserModuleNameTypes.scheme}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/purchase-order"
-                        element={<PurchaseOrderListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<PurchaseOrderListingWrapper />}
+                                moduleName={UserModuleNameTypes.purchaseOrder}
+                            />
+                        }
                     />
                     <Route
                         path="/purchase-order/view/:id"
-                        element={<ViewPurchaseOrderWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<ViewPurchaseOrderWrapper />}
+                                moduleName={UserModuleNameTypes.purchaseOrder}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/purchase-order/edit/:id"
-                        element={<EditPurchaseOrderWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditPurchaseOrderWrapper />}
+                                moduleName={UserModuleNameTypes.purchaseOrder}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/purchase-order/add"
-                        element={<AddPurchaseOrderWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddPurchaseOrderWrapper />}
+                                moduleName={UserModuleNameTypes.purchaseOrder}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
@@ -655,176 +919,427 @@ const PageRoutes = () => {
 
                     <Route
                         path="/configurations/attributes"
-                        element={<AttributesListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<AttributesListingWrapper />}
+                                moduleName={UserModuleNameTypes.attribute}                            
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/attributes/add"
-                        element={<AddAttributeWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddAttributeWrapper />}
+                                moduleName={UserModuleNameTypes.attribute}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/attributes/:id"
-                        element={<EditAttributeWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditAttributeWrapper />}
+                                moduleName={UserModuleNameTypes.attribute}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/product-group"
-                        element={<ProductGroupListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<ProductGroupListingWrapper />}
+                                moduleName={UserModuleNameTypes.productGroup}                            
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/product-group/add"
-                        element={<AddProductGroupWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddProductGroupWrapper />}
+                                moduleName={UserModuleNameTypes.productGroup}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/product-group/:id"
-                        element={<EditProductGroupWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditProductGroupWrapper />}
+                                moduleName={UserModuleNameTypes.productGroup}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/attributes-group"
-                        element={<AttributesGroupListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<AttributesGroupListingWrapper />}
+                                moduleName={UserModuleNameTypes.attributeGroup}                                
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/attributes-group/add"
-                        element={<AddAttributeGroupWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddAttributeGroupWrapper />}
+                                moduleName={UserModuleNameTypes.attributeGroup}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/attributes-group/:id"
-                        element={<EditAttributeGroupWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditAttributeGroupWrapper />}
+                                moduleName={UserModuleNameTypes.attributeGroup}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/product-category"
-                        element={<ProductCategoryListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<ProductCategoryListingWrapper />}
+                                moduleName={UserModuleNameTypes.productCategory}
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/product-category/add"
-                        element={<AddProductCategoryWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddProductCategoryWrapper />}
+                                moduleName={UserModuleNameTypes.productCategory}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/product-category/:id"
-                        element={<EditProductCategoryWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditProductCategoryWrapper />}
+                                moduleName={UserModuleNameTypes.productCategory}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/product-sub-category"
-                        element={<ProductSubCategoryListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<ProductSubCategoryListingWrapper />}
+                                moduleName={UserModuleNameTypes.productSubCategory}
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/product-sub-category/add"
-                        element={<AddProductSubCategoryWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddProductSubCategoryWrapper />}
+                                moduleName={UserModuleNameTypes.productSubCategory}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/product-sub-category/:id"
-                        element={<EditProductSubCategoryWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditProductSubCategoryWrapper />}
+                                moduleName={UserModuleNameTypes.productSubCategory}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/item"
-                        element={<ItemListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<ItemListingWrapper />}
+                                moduleName={UserModuleNameTypes.item}
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/item/add"
-                        element={<AddItemWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddItemWrapper />}
+                                moduleName={UserModuleNameTypes.item}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/item/:id"
-                        element={<EditItemWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditItemWrapper />}
+                                moduleName={UserModuleNameTypes.attributeGitemroup}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/products"
-                        element={<ProductsListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<ProductsListingWrapper />}
+                                moduleName={UserModuleNameTypes.product}
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/products/add"
-                        element={<AddProductWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddProductWrapper />}
+                                moduleName={UserModuleNameTypes.product}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/product/:id"
-                        element={<EditProductWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditProductWrapper />}
+                                moduleName={UserModuleNameTypes.product}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/carton-box"
-                        element={<CartonBoxListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<CartonBoxListingWrapper />}
+                                moduleName={UserModuleNameTypes.cartonBox}
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/carton-box/add"
-                        element={<AddCartonBoxWrapper />}
+                        element={
+                                <ActionAuthHOC
+                                Component={<AddCartonBoxWrapper />}
+                                moduleName={UserModuleNameTypes.cartonBox}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/barcode/carton-box-items/:cartonboxcode"
-                        element={<ViewBarcodeWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<ViewBarcodeWrapper />}
+                                moduleName={UserModuleNameTypes.barcode}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/carton-box/:id"
-                        element={<EditCartonBoxWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditCartonBoxWrapper />}
+                                moduleName={UserModuleNameTypes.cartonBox}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/taxes/add"
-                        element={<AddTaxesWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddTaxesWrapper />}
+                                moduleName={UserModuleNameTypes.tax}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/taxes"
-                        element={<TaxesListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<TaxesListingWrapper />}
+                                moduleName={UserModuleNameTypes.tax}
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/taxes/:id"
-                        element={<EditTaxesWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditTaxesWrapper />}
+                                moduleName={UserModuleNameTypes.tax}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/barcode"
-                        element={<BarcodeListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<BarcodeListingWrapper />}
+                                moduleName={UserModuleNameTypes.barcode}
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/barcode/add"
-                        element={<AddBarcodeWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddBarcodeWrapper />}
+                                moduleName={UserModuleNameTypes.barcode}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/barcode/carton-box/add"
-                        element={<AddCbBarcodeWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddCbBarcodeWrapper />}
+                                moduleName={UserModuleNameTypes.barcode}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/barcode/:barcodeId"
-                        element={<ViewBarcodeWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<ViewBarcodeWrapper />}
+                                moduleName={UserModuleNameTypes.barcode}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/company"
-                        element={<ConfigurationCompanyListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<ConfigurationCompanyListingWrapper />}
+                                moduleName={UserModuleNameTypes.company}
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/dealers-category/add"
-                        element={<AddDealersCategoryWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddDealersCategoryWrapper />}
+                                moduleName={UserModuleNameTypes.dealerCategory}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/dealers-category/:id"
-                        element={<EditDealersCategoryWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditDealersCategoryWrapper />}
+                                moduleName={UserModuleNameTypes.dealerCategory}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/configurations/company/add"
-                        element={<AddCompanyWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddCompanyWrapper />}
+                                moduleName={UserModuleNameTypes.company}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/company/:id"
-                        element={<EditCompanyWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditCompanyWrapper />}
+                                moduleName={UserModuleNameTypes.company}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/language/add"
-                        element={<AddLanguageWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddLanguageWrapper />}
+                                moduleName={UserModuleNameTypes.language}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/language/:id"
-                        element={<EditLanguageWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditLanguageWrapper />}
+                                moduleName={UserModuleNameTypes.language}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
@@ -834,11 +1349,21 @@ const PageRoutes = () => {
                     {/* <Route path="/disposition" element={<Disposition />} /> */}
                     <Route
                         path="/configurations/dealers-category"
-                        element={<DealersCategoryListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<DealersCategoryListingWrapper />}
+                                moduleName={UserModuleNameTypes.dealerCategory}
+                            />
+                        }
                     />
                     <Route
                         path="/configurations/language"
-                        element={<LanguageListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<LanguageListingWrapper />}
+                                moduleName={UserModuleNameTypes.language}
+                            />
+                        }
                     />
 
                     <Route
@@ -850,104 +1375,253 @@ const PageRoutes = () => {
                     {/* Media Module Routes */}
                     <Route
                         path="media/did"
-                        element={<DidManagementListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<DidManagementListingWrapper />}
+                                moduleName={UserModuleNameTypes.didManagement}
+                            />
+                        }
                     />
                     <Route
                         path="media/did/add"
-                        element={<AddDidManagementWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddDidManagementWrapper />}
+                                moduleName={UserModuleNameTypes.didManagement}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/did/:id"
-                        element={<EditDidManagementWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditDidManagementWrapper />}
+                                moduleName={UserModuleNameTypes.didManagement}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/channel-group"
-                        element={<ChannelGroupListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<ChannelGroupListingWrapper />}
+                                moduleName={UserModuleNameTypes.channelGroup}
+                            />
+                        }
                     />
                     <Route
                         path="media/channel-group/add"
-                        element={<AddChannelGroupWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddChannelGroupWrapper />}
+                                moduleName={UserModuleNameTypes.channelGroup}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/channel-group/:id"
-                        element={<EditChannelGroupWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditChannelGroupWrapper />}
+                                moduleName={UserModuleNameTypes.channelGroup}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/channel"
-                        element={<ChannelManagementListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<ChannelManagementListingWrapper />}
+                                moduleName={UserModuleNameTypes.channelManagement}
+                            />
+                        }
                     />
                     <Route
                         path="media/channel/add"
-                        element={<AddChannelManagementWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddChannelManagementWrapper />}
+                                moduleName={UserModuleNameTypes.channelManagement}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/channel/:id"
-                        element={<EditChannelManagementWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditChannelManagementWrapper />}
+                                moduleName={UserModuleNameTypes.channelManagement}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="media/tape"
-                        element={<TapeManagementListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<TapeManagementListingWrapper />}
+                                moduleName={UserModuleNameTypes.tapeManangement}
+                            />
+                        }
                     />
                     <Route
                         path="media/tape/add"
-                        element={<AddTapeManagementWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddTapeManagementWrapper />}
+                                moduleName={UserModuleNameTypes.tapeManangement}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/tape/edit/:id"
-                        element={<EditTapeManagementWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditTapeManagementWrapper />}
+                                moduleName={UserModuleNameTypes.tapeManangement}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/slot"
-                        element={<SlotManagementListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<SlotManagementListingWrapper />}
+                                moduleName={UserModuleNameTypes.slotManagement}
+                            />
+                        }
                     />
                     <Route
                         path="media/slot/add"
-                        element={<AddSlotManagementWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddSlotManagementWrapper />}
+                                moduleName={UserModuleNameTypes.slotManagement}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/slot/edit/:id"
-                        element={<EditSlotManagementWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditSlotManagementWrapper />}
+                                moduleName={UserModuleNameTypes.slotManagement}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/competitor"
-                        element={<CompetitorManagementListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<CompetitorManagementListingWrapper />}
+                                moduleName={UserModuleNameTypes.competitor}
+                            />
+                        }
                     />
                     <Route
                         path="media/competitor/add"
-                        element={<AddCompetitorWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddCompetitorWrapper />}
+                                moduleName={UserModuleNameTypes.competitor}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/competitor/:id"
-                        element={<EditCompetitorWraper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditCompetitorWraper />}
+                                moduleName={UserModuleNameTypes.competitor}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/channel-category"
-                        element={<ChannelCategoryListingWrapper />}
-                    />
-                    <Route
-                        path="media/channel-category/add"
-                        element={<AddChannelCategoryWrapper />}
-                    />
+                        element={
+                            <AuthHOC
+                                Component={<ChannelCategoryListingWrapper />}
+                                moduleName={UserModuleNameTypes.channelCategory}
+                            />
+                        }
+                    />                    
                     <Route
                         path="media/channel-category/edit/:id"
-                        element={<EditChannelCategoryWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditChannelCategoryWrapper />}
+                                moduleName={UserModuleNameTypes.channelCategory}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/channel-category/add"
-                        element={<AddCompetitorWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddChannelCategoryWrapper/>}
+                                moduleName={UserModuleNameTypes.channelCategory}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
+                    {/* <AddCompetitorWrapper /> */}
                     <Route
                         path="media/artist"
-                        element={<ArtistListingWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<ArtistListingWrapper />}
+                                moduleName={UserModuleNameTypes.artist}
+                            />
+                        }
                     />
                     <Route
                         path="media/artist/:id"
-                        element={<EditArtistWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditArtistWrapper />}
+                                moduleName={UserModuleNameTypes.artist}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/artist/add"
-                        element={<AddArtistWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddArtistWrapper />}
+                                moduleName={UserModuleNameTypes.artist}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="media/inbound/"
@@ -959,202 +1633,499 @@ const PageRoutes = () => {
                     {/* start Assets mangement */}
                     <Route
                         path="assets/assets-management"
-                        element={<AssetsRequestWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<AssetsRequestWrapper />}
+                                moduleName={UserModuleNameTypes.assetRequest}
+                            />
+                        }
                     />
                     <Route
                         path="assets/assets-management/:id"
-                        element={<EditAssetsRequestwrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditAssetsRequestwrapper />}
+                                moduleName={UserModuleNameTypes.assetRequest}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="assets/assets-management/add"
-                        element={<AddAssetsRequestWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddAssetsRequestWrapper />}
+                                moduleName={UserModuleNameTypes.assetRequest}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="/assets/assets-location"
-                        element={<AssetsLocationWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<AssetsLocationWrapper />}
+                                moduleName={UserModuleNameTypes.assetLocation}
+                            />
+                        }
                     />
                     <Route
                         path="/assets/assets-location/:id"
-                        element={<EditAssetsLocatonWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditAssetsLocatonWrapper />}
+                                moduleName={UserModuleNameTypes.assetLocation}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/assets/assets-category"
-                        element={<AssetsCategoryWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<AssetsCategoryWrapper />}
+                                moduleName={UserModuleNameTypes.assetCategory}
+                            />
+                        }
                     />
                     <Route
                         path="/assets/assets-category/add"
-                        element={<AddAssetsCategoryWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddAssetsCategoryWrapper />}
+                                moduleName={UserModuleNameTypes.assetCategory}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/assets/assets-category/:id"
-                        element={<EditAssetsCategoryWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditAssetsCategoryWrapper />}
+                                moduleName={UserModuleNameTypes.assetCategory}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/assets/assets-location/add"
-                        element={<AddAssetsLocationWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddAssetsLocationWrapper />}
+                                moduleName={UserModuleNameTypes.assetLocation}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="assets/assets-relocation"
-                        element={<AssetsRelocationWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<AssetsRelocationWrapper />}
+                                moduleName={UserModuleNameTypes.assetRelocation}
+                            />
+                        }
                     />
                     <Route
                         path="assets/assets-allocation"
-                        element={<AssetsAllocationWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<AssetsAllocationWrapper />}
+                                moduleName={UserModuleNameTypes.assetAllocation}
+                            />
+                        }
                     />
                     <Route
                         path="assets/assets-relocation/add"
-                        element={<AddAssetsRelocationWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddAssetsRelocationWrapper />}
+                                moduleName={UserModuleNameTypes.assetRelocation}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="assets/assets-allocation/add"
-                        element={<AddAssetsAllocationWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddAssetsAllocationWrapper />}
+                                moduleName={UserModuleNameTypes.assetAllocation}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
 
                     {/* end Assets mangement */}
 
                     <Route
                         path="all-websites/website"
-                        element={<WebstieListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<WebstieListingWrapper />}
+                                moduleName={UserModuleNameTypes.website}
+                            />
+                        }
                     />
 
                     <Route
                         path="all-websites/website/add"
-                        element={<AddWebsiteWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddWebsiteWrapper />}
+                                moduleName={UserModuleNameTypes.website}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="all-websites/website-page"
-                        element={<WebsitePageListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<WebsitePageListingWrapper />}
+                                moduleName={UserModuleNameTypes.websitePage}
+                            />
+                        }
                     />
                     <Route
                         path="all-websites/website-page/add"
-                        element={<AddWebsitePageWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddWebsitePageWrapper />}
+                                moduleName={UserModuleNameTypes.websitePage}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="all-websites/website-page/:id"
-                        element={<EditWebsitePageWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditWebsitePageWrapper />}
+                                moduleName={UserModuleNameTypes.websitePage}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="all-websites/website-page/view/:id"
-                        element={<ViewWebsitePageWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<ViewWebsitePageWrapper />}
+                                moduleName={UserModuleNameTypes.websitePage}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                        }
                     />
 
                     <Route
                         path="all-websites/website/:id"
-                        element={<EditWebsiteWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditWebsiteWrapper />}
+                                moduleName={UserModuleNameTypes.website}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     {/* disposition */}
                     <Route
                         path="dispositions/disposition-one"
-                        element={<DispositionOneListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<DispositionOneListingWrapper />}
+                                moduleName={UserModuleNameTypes.dispositionOne}
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/initialcall-one"
-                        element={<InitialCallOneListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<InitialCallOneListingWrapper />}
+                                moduleName={UserModuleNameTypes.initialCallerOne}
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/initialcall-one/add"
-                        element={<AddInitialCallOneWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddInitialCallOneWrapper />}
+                                moduleName={UserModuleNameTypes.initialCallerOne}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/initialcall-one/:id"
-                        element={<EditInitialCallOneWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditInitialCallOneWrapper />}
+                                moduleName={UserModuleNameTypes.initialCallerOne}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/initialcall-two"
-                        element={<InitialCallTwoListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<InitialCallTwoListingWrapper />}
+                                moduleName={UserModuleNameTypes.initialCallerTwo}
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/initialcall-two/add"
-                        element={<AddInitialCallTwoWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddInitialCallTwoWrapper />}
+                                moduleName={UserModuleNameTypes.initialCallerTwo}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/initialcall-two/:id"
-                        element={<EditInitialCallTwoWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditInitialCallTwoWrapper />}
+                                moduleName={UserModuleNameTypes.initialCallerTwo}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/initialcall-three"
-                        element={<InitialCallThreeListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<InitialCallThreeListingWrapper />}
+                                moduleName={UserModuleNameTypes.initialCallerThree}
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/initialcall-three/:id"
-                        element={<EditInitialCallThreeWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditInitialCallThreeWrapper />}
+                                moduleName={UserModuleNameTypes.initialCallerThree}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/initialcall-three/view/:id"
-                        element={<ViewInitialCallThreeWrappper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<ViewInitialCallThreeWrappper />}
+                                moduleName={UserModuleNameTypes.initialCallerThree}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/initialcall-three/add"
-                        element={<AddInitialCallThreeWrappper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddInitialCallThreeWrappper />}
+                                moduleName={UserModuleNameTypes.initialCallerThree}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-one/add"
-                        element={<AddDispositionOneWrappper />}
+                        element={<ActionAuthHOC
+                                Component={<AddDispositionOneWrappper />}
+                                moduleName={UserModuleNameTypes.dispositionOne}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-one/:id"
-                        element={<EditDispositionOneWrappper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditDispositionOneWrappper />}
+                                moduleName={UserModuleNameTypes.dispositionOne}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-two"
-                        element={<DispositionTwoListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<DispositionTwoListingWrapper />}
+                                moduleName={UserModuleNameTypes.dispositionTwo}                                
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-three"
-                        element={<DispositionThreeListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<DispositionThreeListingWrapper />}
+                                moduleName={UserModuleNameTypes.dispositionThree}
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-three/add"
-                        element={<AddDispositionThreeWrappper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddDispositionThreeWrappper />}
+                                moduleName={UserModuleNameTypes.dispositionThree}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-three/edit/:id"
-                        element={<EditDispositionThreeWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditDispositionThreeWrapper />}
+                                moduleName={UserModuleNameTypes.dispositionThree}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-three/:id"
-                        element={<ViewDispositionThreeWrappper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<ViewDispositionThreeWrappper />}
+                                moduleName={UserModuleNameTypes.dispositionThree}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-two/add"
-                        element={<AddDispositionTwoWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddDispositionTwoWrapper />}
+                                moduleName={UserModuleNameTypes.dispositionTwo}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-two/edit/:id"
-                        element={<EditDispositionTwoWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditDispositionTwoWrapper />}
+                                moduleName={UserModuleNameTypes.dispositionTwo}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-complaint"
-                        element={<DispositionComplaintListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<DispositionComplaintListingWrapper />}
+                                moduleName={UserModuleNameTypes.dispositionComplaint}                                
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-complaint/add"
-                        element={<AddDispositionComplaintWrappper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddDispositionComplaintWrappper />}
+                                moduleName={UserModuleNameTypes.dispositionComplaint}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="dispositions/disposition-complaint/:id"
-                        element={<EditDispositionComplaintWrappper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditDispositionComplaintWrappper />}
+                                moduleName={UserModuleNameTypes.dispositionComplaint}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
 
                     {/* Website Blog route */}
                     <Route
                         path="all-websites/website-blog"
-                        element={<ListWebstieBlogWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<ListWebstieBlogWrapper />}
+                                moduleName={UserModuleNameTypes.websiteBlog}                                
+                            />
+                        }
                     />
                     <Route
                         path="all-websites/website-blog/add"
-                        element={<AddWebsiteBlogWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddWebsiteBlogWrapper />}
+                                moduleName={UserModuleNameTypes.websiteBlog}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="all-websites/website-blog/:id"
-                        element={<EditWebsiteBlogWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditWebsiteBlogWrapper />}
+                                moduleName={UserModuleNameTypes.websiteBlog}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="all-websites/website-blog/view/:id"
-                        element={<WebsiteBlogViewWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<WebsiteBlogViewWrapper />}
+                                moduleName={UserModuleNameTypes.websiteBlog}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />}
                     />
                     {/* Website Blog route */}
 
@@ -1175,28 +2146,66 @@ const PageRoutes = () => {
                     {/* <Route path="batch" element={<BatchListingWrapper />} /> */}
                     <Route
                         path="/all-websites/website-tags"
-                        element={<WebsiteTagListingWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<WebsiteTagListingWrapper />}
+                                moduleName={UserModuleNameTypes.websiteTags}                                
+                            />
+                        }
                     />
                     <Route
                         path="/all-websites/website-tags/add"
-                        element={<AddWebsiteTagsWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<AddWebsiteTagsWrapper />}
+                                moduleName={UserModuleNameTypes.websiteTags}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/all-websites/website-tags/edit/:id"
-                        element={<EditWebsiteTagWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<EditWebsiteTagWrapper />}
+                                moduleName={UserModuleNameTypes.websiteTags}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/all-websites/website-tags/:id"
-                        element={<ViewWebsiteTagsWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<ViewWebsiteTagsWrapper />}
+                                moduleName={UserModuleNameTypes.websiteTags}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="/inquiry"
-                        element={<InquiryListingWrapper />}
+                        element={
+                            <AuthHOC
+                                Component={<InquiryListingWrapper />}
+                                moduleName={UserModuleNameTypes.inquiry}                                
+                            />
+                        }
                     />
 
                     <Route
                         path="/inquiry/view/:id"
-                        element={<InquiryViewWrapper />}
+                        element={
+                            <ActionAuthHOC
+                                Component={<InquiryViewWrapper />}
+                                moduleName={UserModuleNameTypes.inquiry}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                        }
                     />
                     <Route
                         path="configurations/user-access"
