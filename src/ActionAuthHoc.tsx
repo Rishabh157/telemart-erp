@@ -3,16 +3,20 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { RootState } from './redux/store'
 import { isCheckAuthorizedModuleAction } from './userAccess/getAuthorizedModules'
+// import {
+//     UserModuleNameTypes,
+//     UserModuleActionTypes,
+// } from 'src/models/userAccess/UserAccess.model'
 
 type Props = {
-    Component: React.ReactNode
+    component: React.ReactNode
     moduleName?: string
     actionName?: string
     isRedirect?: boolean
 }
 
 const ActionAuthHOC = ({
-    Component,
+    component,
     moduleName = '',
     actionName = '',
     isRedirect = false,
@@ -35,7 +39,7 @@ const ActionAuthHOC = ({
     return (
         <>
             {isAuthorized ? (
-                <>{Component}</>
+                <>{component}</>
             ) : isRedirect ? (
                 navigate('/dashboard')
             ) : null}

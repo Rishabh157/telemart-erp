@@ -32,6 +32,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/website/websitePageSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const WebsitePageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -70,6 +71,7 @@ const WebsitePageListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.websitePage}
                     isView
                     isEdit
                     isDelete

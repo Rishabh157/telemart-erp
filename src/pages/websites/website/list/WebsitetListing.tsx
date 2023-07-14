@@ -69,7 +69,7 @@ const WebsiteListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.website}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             type="button"
                             onClick={() => navigate('add')}

@@ -32,6 +32,7 @@ import { AssetsLocationListResponse } from 'src/models'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const AssetsLocationWrapper = () => {
     const navigate = useNavigate()
@@ -56,6 +57,7 @@ const AssetsLocationWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.assetLocation}
                     isDelete
                     isEdit
                     handleOnAction={() => {

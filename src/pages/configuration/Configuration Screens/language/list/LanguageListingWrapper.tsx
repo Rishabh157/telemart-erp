@@ -32,6 +32,7 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const LanguageListingWrapper = () => {
     const navigate = useNavigate()
@@ -57,6 +58,7 @@ const LanguageListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.language}
                     isEdit
                     isDelete
                     handleOnAction={() => {

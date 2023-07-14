@@ -32,6 +32,7 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const CartonBoxListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -90,6 +91,7 @@ const CartonBoxListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.cartonBox}
                     isEdit
                     isDelete
                     handleOnAction={() => {

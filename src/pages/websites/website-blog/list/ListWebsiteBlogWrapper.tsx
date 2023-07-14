@@ -32,6 +32,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteBlogSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ListWebsiteBlogWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -81,6 +82,7 @@ const ListWebsiteBlogWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.websiteBlog}
                     isEdit
                     isView
                     isDelete

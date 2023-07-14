@@ -57,7 +57,7 @@ const InitialCallTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.initialCallerTwo}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             type="button"
                             onClick={() => navigate('add')}

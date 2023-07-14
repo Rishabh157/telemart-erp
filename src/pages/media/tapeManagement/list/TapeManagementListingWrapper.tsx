@@ -32,6 +32,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/tapeManagementSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // export type language ={
 //     languageId:string[];
@@ -129,6 +130,7 @@ const TapeManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.tapeManangement}
                     isEdit
                     isDelete
                     handleOnAction={() => {

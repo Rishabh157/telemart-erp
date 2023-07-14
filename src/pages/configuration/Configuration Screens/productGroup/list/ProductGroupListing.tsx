@@ -74,7 +74,7 @@ const ProductGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.productGroup}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() =>
                                 navigate('/configurations/product-group/add')

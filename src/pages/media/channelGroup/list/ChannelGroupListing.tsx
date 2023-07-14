@@ -70,7 +70,7 @@ const ChannelGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.channelGroup}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             type="button"
                             onClick={() => navigate('add')}

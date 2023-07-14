@@ -18,6 +18,7 @@ import { showToast } from 'src/utils'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const InitialCallThreeListingWrapper = () => {
     const navigate = useNavigate()
@@ -93,6 +94,7 @@ const InitialCallThreeListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.initialCallerThree}
                     isView
                     isEdit
                     isDelete

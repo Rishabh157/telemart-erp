@@ -50,6 +50,7 @@ const VerticalNavBar = ({
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
+    //const { userData } = useSelector((state: RootState) => state?.auth)
     // const userAccessSiedeBar =
 
     const { customized, userData } = useSelector(

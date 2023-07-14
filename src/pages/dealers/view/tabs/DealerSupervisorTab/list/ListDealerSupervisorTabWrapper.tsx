@@ -26,6 +26,7 @@ import {
     setTotalItems,
 } from 'src/redux/DealerSupervisorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ListDealerSupervisorTabWrapper = () => {
     // const [showDropdown, setShowDropdown] = useState(false)
@@ -76,6 +77,7 @@ const ListDealerSupervisorTabWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.dealer}
                     handleOnAction={() => {
                         // setShowDropdown(!showDropdown)
                         // setCurrentId(row?._id)

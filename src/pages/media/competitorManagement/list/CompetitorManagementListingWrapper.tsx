@@ -33,6 +33,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/competitorManagementSlice'
 import moment from 'moment'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const CompetitorManagementListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -134,6 +135,7 @@ const CompetitorManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.competitor}
                     isEdit
                     isDelete
                     handleOnAction={() => {

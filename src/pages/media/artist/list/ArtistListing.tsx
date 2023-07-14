@@ -69,7 +69,7 @@ const ArtistListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.artist}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             type="button"
                             onClick={() => navigate('add')}

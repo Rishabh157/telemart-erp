@@ -19,6 +19,7 @@ import {
 import { InitialCallerOneListResponse } from 'src/models/configurationModel/InitialCallerOne.model'
 import DispositionLayout from '../../DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // export type language ={
 //     languageId:string[];
@@ -83,6 +84,7 @@ const InitialCallOneListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.initialCallerOne}
                     isEdit
                     isDelete
                     handleOnAction={() => {

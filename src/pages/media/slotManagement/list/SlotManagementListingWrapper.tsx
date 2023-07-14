@@ -38,6 +38,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/slotManagementSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const SlotManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -216,6 +217,7 @@ const SlotManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.slotManagement}
                     isEdit
                     isDelete
                     handleOnAction={() => {
@@ -276,7 +278,7 @@ const SlotManagementListingWrapper = () => {
                         handleClose={() => {
                             setIsOpenDialog(false)
                         }}
-                        Component={
+                        component={
                             <SlotRunWrapper
                                 id={runState}
                                 setIsOpenDialog={setIsOpenDialog}

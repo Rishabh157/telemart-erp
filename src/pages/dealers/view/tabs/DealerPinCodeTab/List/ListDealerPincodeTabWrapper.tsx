@@ -31,6 +31,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/dealerPincodeSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ListDealerPincodeTabWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -85,6 +86,7 @@ const ListDealerPincodeTabWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.dealer}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                     }}

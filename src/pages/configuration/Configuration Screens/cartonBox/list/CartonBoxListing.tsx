@@ -74,7 +74,7 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.cartonBox}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() =>
                                 navigate('/configurations/carton-box/add')

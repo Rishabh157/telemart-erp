@@ -26,6 +26,7 @@ import {
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ApprovedOrderListing = () => {
     // Hooks
@@ -192,6 +193,7 @@ const ApprovedOrderListing = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.order}
                     isView
                     isEdit
                     isDelete

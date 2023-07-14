@@ -32,6 +32,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/productGroupSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ProductGroupListingWrapper = () => {
     const productGroupState: any = useSelector(
@@ -102,6 +103,7 @@ const ProductGroupListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
+                    moduleName={UserModuleNameTypes.productSubCategory}
                     isEdit
                     isDelete
                     handleOnAction={() => {

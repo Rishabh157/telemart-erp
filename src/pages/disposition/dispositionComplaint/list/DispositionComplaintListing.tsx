@@ -76,7 +76,7 @@ const DispositionComplaintListing = ({
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.dispositionComplaint}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             type="button"
                             onClick={() => navigate('add')}

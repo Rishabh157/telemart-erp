@@ -74,7 +74,7 @@ const ConfigurationCompanyListing = ({
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.company}
                     actionName={UserModuleActionTypes.Add}
-                    Component={
+                    component={
                         <button
                             onClick={() =>
                                 navigate('/configurations/company/add')
