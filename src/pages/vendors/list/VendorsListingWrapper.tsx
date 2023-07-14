@@ -33,10 +33,18 @@ import {
     setTotalItems,
 } from 'src/redux/slices/vendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 const VendorsListingWrapper = () => {
     const navigate = useNavigate()
     const vendorState: any = useSelector((state: RootState) => state.vendor)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { page, rowsPerPage, searchValue, items } = vendorState
     const [currentId, setCurrentId] = useState('')
@@ -172,7 +180,12 @@ const VendorsListingWrapper = () => {
     return (
         <SideNavLayout>
             <VendorsListing
-                columns={columns}
+                columns={getAllowedAuthorizedColumns(
+                    checkUserAccess,
+                    columns,
+                    UserModuleNameTypes.vendor,
+                    UserModuleActionTypes.List
+                )}
                 rows={items}
                 setShowDropdown={setShowDropdown}
             />
