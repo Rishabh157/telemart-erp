@@ -18,7 +18,7 @@ type Props = {
 const ActionAuthHOC = ({
     Component,
     moduleName = '',
-    actionName = '',
+    actionName =  '',
     isRedirect = false,
 }: Props) => {
     const navigate = useNavigate()
