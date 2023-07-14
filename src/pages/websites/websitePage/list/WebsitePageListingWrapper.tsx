@@ -32,13 +32,20 @@ import {
     setTotalItems,
 } from 'src/redux/slices/website/websitePageSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 const WebsitePageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deletePage] = useDeleteWebsitePageMutation()
     const [currentId, setCurrentId] = useState('')
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsitePageState = useSelector(
         (state: RootState) => state.websitePage
@@ -157,7 +164,12 @@ const WebsitePageListingWrapper = () => {
         <>
             <WebsitesLayout>
                 <WebsitePageListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.websitePage,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

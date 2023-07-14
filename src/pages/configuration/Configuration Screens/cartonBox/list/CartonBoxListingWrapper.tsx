@@ -29,10 +29,13 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const CartonBoxListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -41,10 +44,13 @@ const CartonBoxListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
-
     const cartonBoxState: any = useSelector(
         (state: RootState) => state.cartonBox
     )
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+
     const columns: columnTypes[] = [
         {
             field: 'boxName',
@@ -172,7 +178,12 @@ const CartonBoxListingWrapper = () => {
         <>
             <ConfigurationLayout>
                 <CartonBoxListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.cartonBox,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

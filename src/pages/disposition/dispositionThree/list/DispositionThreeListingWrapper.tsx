@@ -19,7 +19,11 @@ import DispositionThreeListing from './DispositionThreeListing'
 import { useNavigate } from 'react-router-dom'
 import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 const DispositionThreeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -27,7 +31,9 @@ const DispositionThreeListingWrapper = () => {
     const { searchValue, filterValue, items }: any = useSelector(
         (state: RootState) => state.dispositionThree
     )
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const [deleteDispositonThree] = useDeletedispositionThreeMutation()
 
     const [showDropdown, setShowDropdown] = useState(false)
@@ -153,7 +159,12 @@ const DispositionThreeListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <DispositionThreeListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.dispositionThree,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

@@ -45,7 +45,7 @@ const CallListingWrapper = () => {
             ),
         },
         {
-            field: 'generalInformation.incomingCallerNo',
+            field: 'incomingCallerNo',
             headerName: 'Incoming Caller No',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InbooundCallerListResponse) => (

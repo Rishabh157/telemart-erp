@@ -29,10 +29,13 @@ import {
     setTotalItems,
 } from 'src/redux/slices/assets/assetsCategorySlice'
 import { AssetsCategoryListResponse } from 'src/models'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const AssetsCategoryWrapper = () => {
     const navigate = useNavigate()
@@ -40,7 +43,9 @@ const AssetsCategoryWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const columns: columnTypes[] = [
         {
             field: 'assetCategoryName',
@@ -142,7 +147,12 @@ const AssetsCategoryWrapper = () => {
         <>
             <AsstesLayout>
                 <AssetsCategoryListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.assetCategory,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

@@ -34,7 +34,11 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -44,7 +48,9 @@ const WebstieListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsiteState: any = useSelector((state: RootState) => state.website)
     const { userData } = useSelector((state: RootState) => state?.auth)
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { page, rowsPerPage, searchValue, items } = WebsiteState
     const columns: columnTypes[] = [
         {
@@ -210,7 +216,12 @@ const WebstieListingWrapper = () => {
         <>
             <WebsiteLayout>
                 <WebsiteListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.website,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

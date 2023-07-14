@@ -31,14 +31,22 @@ import {
 } from 'src/redux/slices/ASRSlice'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ASRListingWrapper = () => {
     const navigate = useNavigate()
     const AsrState: any = useSelector((state: RootState) => state.asr)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+
     const [deleteAsr] = useDeleteAsrMutation()
     const [updateAsrStatus] = useUpdateAsrStatusMutation()
     const [showDropdown, setShowDropdown] = useState(false)
@@ -275,7 +283,12 @@ const ASRListingWrapper = () => {
         <>
             <SideNavLayout>
                 <ASRListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.asr,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

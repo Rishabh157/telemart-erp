@@ -24,7 +24,11 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -32,7 +36,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/didManagementSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const DidManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -44,6 +47,10 @@ const DidManagementListingWrapper = () => {
     const [deleteDid] = useDeleteDidMutation()
     const { page, rowsPerPage, searchValue, items } = didManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+
     const dispatch = useDispatch<AppDispatch>()
 
     const columns: columnTypes[] = [
@@ -160,7 +167,12 @@ const DidManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <DidManagementListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.didManagement,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

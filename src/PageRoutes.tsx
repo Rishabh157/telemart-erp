@@ -42,22 +42,22 @@ import {
     AttributesListingWrapper,
     AddAttributeGroupWrapper,
     AttributesGroupListingWrapper,
-    // AddBarcodeWrapper,
-    //BarcodeListingWrapper,
+    AddBarcodeWrapper,
+    BarcodeListingWrapper,
     ViewBarcodeWrapper,
     AddCartonBoxWrapper,
     CartonBoxListingWrapper,
-    //AddCompanyWrapper,
-    //ConfigurationCompanyListingWrapper,
-    //AddDealersCategoryWrapper,
+    AddCompanyWrapper,
+    ConfigurationCompanyListingWrapper,
+    AddDealersCategoryWrapper,
     DealersCategoryListingWrapper,
     AddGRNWrapper,
     GRNListingWrapper,
     AddItemWrapper,
     ItemListingWrapper,
-    //AddLanguageWrapper,
+    AddLanguageWrapper,
     LanguageListingWrapper,
-    //Locations,
+    Locations,
     AddProductCategoryWrapper,
     ProductCategoryListingWrapper,
     AddProductGroupWrapper,
@@ -108,7 +108,7 @@ import {
     WarehousesListingWrapper,
     ViewWarehouseWrapper,
     ProfileWrappper,
-    //EditCompanyWrapper,
+    EditCompanyWrapper,
     EditAttributeWrapper,
     EditProductCategoryWrapper,
     EditAttributeGroupWrapper,
@@ -116,9 +116,8 @@ import {
     EditItemWrapper,
     EditCartonBoxWrapper,
     EditASRWrapper,
-    // EditTaxesWrapper,
-    //EditLanguageWrapper,
-    //EditDealersCategoryWrapper,
+    EditLanguageWrapper,
+    EditDealersCategoryWrapper,
     EditProductSubCategoryWrapper,
     EditVendorWrapper,
     EditDealerWrapper,
@@ -126,7 +125,7 @@ import {
     EditProductWrapper,
     EditSchemeWrapper,
     ViewPurchaseOrderWrapper,
-    //AddCbBarcodeWrapper,
+    AddCbBarcodeWrapper,
     DidManagementListingWrapper,
     OrganisationHierarchy,
     ChannelManagementListingWrapper,
@@ -1193,41 +1192,6 @@ const PageRoutes = () => {
                             />
                         }
                     />
-
-                    {/* <Route
-                        path="/configurations/taxes/add"
-                        element={
-                            <ActionAuthHOC
-                                component={<AddTaxesWrapper />}
-                                moduleName={UserModuleNameTypes.tax}
-                                actionName={UserModuleActionTypes.Add}
-                                isRedirect
-                            />
-                        }
-                    />
-
-                    <Route
-                        path="/configurations/taxes"
-                        element={
-                            <AuthHOC
-                                component={<TaxesListingWrapper />}
-                                moduleName={UserModuleNameTypes.tax}
-                            />
-                        }
-                    />
-
-                    <Route
-                        path="/configurations/taxes/:id"
-                        element={
-                            <ActionAuthHOC
-                                component={<EditTaxesWrapper />}
-                                moduleName={UserModuleNameTypes.tax}
-                                actionName={UserModuleActionTypes.Edit}
-                                isRedirect
-                            />
-                        }
-                    />
-
                     <Route
                         path="/configurations/barcode"
                         element={
@@ -1249,6 +1213,7 @@ const PageRoutes = () => {
                             />
                         }
                     />
+
                     <Route
                         path="/configurations/barcode/carton-box/add"
                         element={
@@ -1355,7 +1320,7 @@ const PageRoutes = () => {
                         path="/configurations/location"
                         element={<Locations />}
                     />
-                    {/* <Route path="/disposition" element={<Disposition />} /> */}
+                    
                     <Route
                         path="/configurations/dealers-category"
                         element={

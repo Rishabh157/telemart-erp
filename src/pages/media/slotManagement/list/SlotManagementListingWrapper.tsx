@@ -30,7 +30,11 @@ import { showToast } from 'src/utils'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import SlotRunWrapper from '../update/SlotRunWrapper'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -38,7 +42,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/slotManagementSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const SlotManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -51,7 +54,9 @@ const SlotManagementListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const { page, rowsPerPage, searchValue, items } = slotManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const [deleteSlotMangement] = useDeleteSlotMangementMutation()
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -98,7 +103,7 @@ const SlotManagementListingWrapper = () => {
             ),
         },
         {
-            field: 'channelGroup',
+            field: 'groupNameLabel',
             headerName: 'Channel Group',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
@@ -138,7 +143,7 @@ const SlotManagementListingWrapper = () => {
             ),
         },
         {
-            field: 'SlotRun',
+            field: 'slotRun',
             headerName: 'Run Status',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
@@ -268,7 +273,12 @@ const SlotManagementListingWrapper = () => {
             <MediaLayout>
                 <div className="h-full">
                     <SlotManagementListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.slotManagement,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

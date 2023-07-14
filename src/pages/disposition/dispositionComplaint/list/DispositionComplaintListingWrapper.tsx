@@ -32,7 +32,11 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/dispositionComplaintSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // export type language ={
 //     languageId:string[];
@@ -47,7 +51,9 @@ const DispositionComplaintListingWrapper = () => {
     const dispositionComplaintState: any = useSelector(
         (state: RootState) => state.dispositionComplaint
     )
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { page, rowsPerPage, searchValue, items } = dispositionComplaintState
 
     const dispatch = useDispatch<AppDispatch>()
@@ -148,7 +154,12 @@ const DispositionComplaintListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <DispositionComplaintListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.dispositionComplaint,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

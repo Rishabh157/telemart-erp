@@ -22,7 +22,11 @@ import { OrderListResponse } from 'src/models'
 import { useGetOrderQuery } from 'src/services/OrderService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -34,7 +38,6 @@ import {
     setTotalItems,
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const OrderListing = () => {
     // Hooks
@@ -46,6 +49,9 @@ const OrderListing = () => {
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const orderState: any = useSelector((state: RootState) => state.order)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const {
         page,
         rowsPerPage,
@@ -180,7 +186,12 @@ const OrderListing = () => {
                 {/* Table */}
                 <div className="grow overflow-auto  ">
                     <ATMTable
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.order,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         // isCheckbox={true}
                         selectedRows={selectedRows}

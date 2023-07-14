@@ -6,8 +6,10 @@ export enum UserModuleActionTypes {
     'View' = 'VIEW',
 }
 export enum UserModuleNameTypes {
+    dashboard = 'DASHBOARD',
     vendor = 'VENDOR',
     dealer = 'DEALER',
+    dealerRatio = 'DEALER_RATIO',
     user = 'USER',
     wareHouse = 'WAREHOUSE',
     saleOrder = 'SALE_ORDER',
@@ -29,6 +31,7 @@ export enum UserModuleNameTypes {
     cartonBox = 'CARTON_BOX',
     company = 'COMPANY',
     barcode = 'BARCODE',
+    //
     country = 'COUNTRY',
     state = 'STATE',
     district = 'DISTRICT',
@@ -42,9 +45,9 @@ export enum UserModuleNameTypes {
     channelManagement = 'CHANNEL_MANAGEMENT',
     didManagement = 'DID_MANAGEMENT',
     artist = 'ARTIST',
+    tapeManangement = 'TAPE_MANAGEMENT',
     competitor = 'COMPETITOR',
     slotManagement = 'SLOT_MANAGEMENT',
-    tapeManangement = 'TAPE_MANAGEMENT',
     assetRequest = 'ASSET_REQUEST',
     assetCategory = 'ASSET_CATEGORY',
     assetLocation = 'ASSET_LOCATION',

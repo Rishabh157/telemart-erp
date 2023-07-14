@@ -41,7 +41,7 @@ export const navigation: NavItemType[] = [
         label: 'Dashboard',
         icon: RxDashboard,
         path: '/dashboard',
-        name: 'Dashboard',
+        name:  UserModuleNameTypes.dashboard,
     },
 
     {
@@ -60,7 +60,7 @@ export const navigation: NavItemType[] = [
         label: 'Dealers-ratio',
         icon: TfiLayoutMediaOverlayAlt2,
         path: '/dealers-ratio',
-        name: 'DealerRatio',
+        name: UserModuleNameTypes.dealerRatio,
     },
     {
         label: 'Users',
@@ -100,24 +100,18 @@ export const navigation: NavItemType[] = [
         path: '/grn',
         name: UserModuleNameTypes.grn,
     },
-    {
-        label: 'Inventory Management',
-        icon: TfiLayoutMediaOverlayAlt2,
-        path: '/inventory-management',
-        name: 'InventoryManagement',
-    },
+    // {
+    //     label: 'Inventory Management',
+    //     icon: TfiLayoutMediaOverlayAlt2,
+    //     path: '/inventory-management',
+    //     name: 'InventoryManagement'
+    // },
     {
         label: 'Inquiry',
         icon: MdCallReceived,
         path: '/inquiry',
         name: UserModuleNameTypes.inquiry,
     },
-    // {
-    //     label: 'Batch',
-    //     icon: MdOutlineBatchPrediction,
-    //     path: '/batch',
-    //  name:'Batch'
-    // },
     {
         label: 'Orders',
         icon: MdOutlineBorderColor,
@@ -130,13 +124,6 @@ export const navigation: NavItemType[] = [
         path: '/call',
         name: UserModuleNameTypes.callerPage,
     },
-    // {
-    //     label: 'Batch',
-    //     icon: MdOutlineBatchPrediction,
-    //     path: '/batch',
-    //  name:'dealer'
-    // },
-
     {
         label: 'Configurations',
         icon: AiOutlineSetting,
