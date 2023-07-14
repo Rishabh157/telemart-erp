@@ -124,12 +124,6 @@ export const navigation: NavItemType[] = [
         path: '/inquiry',
         name: UserModuleNameTypes.inquiry,
     },
-    // {
-    //     label: 'Batch',
-    //     icon: MdOutlineBatchPrediction,
-    //     path: '/batch',
-    //  name:'Batch'
-    // },
     {
         label: 'Orders',
         icon: MdOutlineBorderColor,
@@ -142,13 +136,6 @@ export const navigation: NavItemType[] = [
         path: '/call',
         name: UserModuleNameTypes.callerPage,
     },
-    // {
-    //     label: 'Batch',
-    //     icon: MdOutlineBatchPrediction,
-    //     path: '/batch',
-    //  name:'dealer'
-    // },
-
     {
         label: 'Configurations',
         icon: AiOutlineSetting,
