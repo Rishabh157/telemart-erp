@@ -31,6 +31,7 @@ import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
 import { setFilterValue as setPincodeFilterValue } from 'src/redux/slices/pincodeSlice'
 import { setFilterValue as setTehsilFilterValue } from 'src/redux/slices/tehsilSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 type Props = {
@@ -67,6 +68,7 @@ const StateListing = ({ states }: Props) => {
     return (
         <>
             <LocationListView
+                moduleName={UserModuleNameTypes.state}
                 searchValue={searchValue}
                 OnSearchChange={(newValue) =>
                     dispatch(setSearchValue(newValue))

@@ -29,6 +29,7 @@ import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice
 import { setFilterValue as setPincodeFilterValue } from 'src/redux/slices/pincodeSlice'
 import { setFilterValue as setTehsilFilterValue } from 'src/redux/slices/tehsilSlice'
 import { setFilterValue as setDistrictFilterValue } from 'src/redux/slices/districtSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 type Props = {
@@ -64,6 +65,7 @@ const CountryListing = ({ contries, items }: Props) => {
     return (
         <>
             <LocationListView
+                moduleName={UserModuleNameTypes.country}
                 listHeading="Country"
                 listData={contries}
                 onAddClick={() => {

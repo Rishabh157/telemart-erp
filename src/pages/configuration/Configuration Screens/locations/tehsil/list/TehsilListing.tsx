@@ -27,6 +27,7 @@ import {
     setSelectedLocationPincode,
 } from 'src/redux/slices/pincodeSlice'
 import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 type Props = {
@@ -62,6 +63,7 @@ const TehsilListing = ({ tehsils }: Props) => {
     return (
         <>
             <LocationListView
+                moduleName={UserModuleNameTypes.tehsil}
                 listHeading="Tehsils"
                 searchValue={searchValue}
                 OnSearchChange={(newValue) => {

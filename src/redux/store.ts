@@ -79,7 +79,6 @@ import websiteTagsSlice from './slices/website/websiteTagsSlice'
 import orderSlice from './slices/orderSlice'
 import inquirySlice from './slices/inquirySlice'
 import dispositionComplaintSlice from './slices/configuration/dispositionComplaintSlice'
-import batchSlice from './slices/BatchSlice'
 import influencerSlice from './slices/website/influencerSlice'
 import inboundCallerSlice from './slices/media/inboundCallerSlice'
 import assetLocationSlice from './slices/assets/assetsLocationSlice'
@@ -166,7 +165,6 @@ const store = configureStore({
         dispositionTwo: dispositionTwoSlice,
         order: orderSlice,
         inquiry: inquirySlice,
-        batch: batchSlice,
         dispositionComplaint: dispositionComplaintSlice,
         influencer: influencerSlice,
         inboundCaller: inboundCallerSlice,
