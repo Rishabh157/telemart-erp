@@ -62,12 +62,6 @@ export const navigation: NavItemType[] = [
         path: '/dealers-ratio',
         name: 'DealerRatio',
     },
-    // {
-    //     label: 'Dealers-ratio',
-    //     icon: TfiLayoutMediaOverlayAlt2,
-    //     path: '/dealers-ratio',
-    //     name: 'DealerRatio'
-    // },
     {
         label: 'Users',
         icon: FiUsers,
@@ -105,12 +99,6 @@ export const navigation: NavItemType[] = [
         icon: CiStickyNote,
         path: '/grn',
         name: UserModuleNameTypes.grn,
-    },
-    {
-        label: 'Inventory Management',
-        icon: TfiLayoutMediaOverlayAlt2,
-        path: '/inventory-management',
-        name: 'InventoryManagement',
     },
     // {
     //     label: 'Inventory Management',
