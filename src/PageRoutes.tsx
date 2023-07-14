@@ -42,22 +42,22 @@ import {
     AttributesListingWrapper,
     AddAttributeGroupWrapper,
     AttributesGroupListingWrapper,
-    AddBarcodeWrapper,
-    BarcodeListingWrapper,
+   // AddBarcodeWrapper,
+    //BarcodeListingWrapper,
     ViewBarcodeWrapper,
     AddCartonBoxWrapper,
     CartonBoxListingWrapper,
-    AddCompanyWrapper,
-    ConfigurationCompanyListingWrapper,
-    AddDealersCategoryWrapper,
+    //AddCompanyWrapper,
+    //ConfigurationCompanyListingWrapper,
+    //AddDealersCategoryWrapper,
     DealersCategoryListingWrapper,
     AddGRNWrapper,
     GRNListingWrapper,
     AddItemWrapper,
     ItemListingWrapper,
-    AddLanguageWrapper,
+    //AddLanguageWrapper,
     LanguageListingWrapper,
-    Locations,
+    //Locations,
     AddProductCategoryWrapper,
     ProductCategoryListingWrapper,
     AddProductGroupWrapper,
@@ -108,7 +108,7 @@ import {
     WarehousesListingWrapper,
     ViewWarehouseWrapper,
     ProfileWrappper,
-    EditCompanyWrapper,
+    //EditCompanyWrapper,
     EditAttributeWrapper,
     EditProductCategoryWrapper,
     EditAttributeGroupWrapper,
@@ -117,8 +117,8 @@ import {
     EditCartonBoxWrapper,
     EditASRWrapper,
     // EditTaxesWrapper,
-    EditLanguageWrapper,
-    EditDealersCategoryWrapper,
+    //EditLanguageWrapper,
+    //EditDealersCategoryWrapper,
     EditProductSubCategoryWrapper,
     EditVendorWrapper,
     EditDealerWrapper,
@@ -126,7 +126,7 @@ import {
     EditProductWrapper,
     EditSchemeWrapper,
     ViewPurchaseOrderWrapper,
-    AddCbBarcodeWrapper,
+    //AddCbBarcodeWrapper,
     DidManagementListingWrapper,
     OrganisationHierarchy,
     ChannelManagementListingWrapper,
@@ -1111,9 +1111,7 @@ const PageRoutes = () => {
                         element={
                             <ActionAuthHOC
                                 component={<EditItemWrapper />}
-                                moduleName={
-                                    UserModuleNameTypes.attributeGroup
-                                }
+                                moduleName={UserModuleNameTypes.attributeGroup}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
                             />

@@ -58,8 +58,7 @@ const LanguageListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.language}
-
+                    moduleName={UserModuleNameTypes.language}
                     isEdit
                     isDelete
                     handleOnAction={() => {

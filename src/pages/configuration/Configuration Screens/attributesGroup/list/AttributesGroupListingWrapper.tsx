@@ -99,8 +99,7 @@ const AttributesGroupListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.attributeGroup}
-
+                    moduleName={UserModuleNameTypes.attributeGroup}
                     isEdit
                     isDelete
                     handleOnAction={() => {

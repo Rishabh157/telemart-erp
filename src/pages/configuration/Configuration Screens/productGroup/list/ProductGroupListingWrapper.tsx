@@ -103,8 +103,7 @@ const ProductGroupListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.productSubCategory}
-
+                    moduleName={UserModuleNameTypes.productSubCategory}
                     isEdit
                     isDelete
                     handleOnAction={() => {

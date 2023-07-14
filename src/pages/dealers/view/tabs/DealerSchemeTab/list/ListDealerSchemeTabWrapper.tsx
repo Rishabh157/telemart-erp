@@ -182,8 +182,7 @@ const ListDealerSchemeTabWrapper = () => {
             flex: 'flex-[0.25_0.25_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.dealer}
-
+                    moduleName={UserModuleNameTypes.dealer}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

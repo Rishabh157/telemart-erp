@@ -88,8 +88,7 @@ const ConfigurationCompanyListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.company}
-
+                    moduleName={UserModuleNameTypes.company}
                     isEdit
                     isDelete
                     handleOnAction={() => {

@@ -33,10 +33,9 @@ const AuthHOC = ({ component, moduleName = '' }: Props) => {
                 <>{component}</>
             ) : (
                 <>
-                <div className='h-[100vh] w-full flex items-center justify-center bg-white'>
-
-                    <CircularProgress />
-                </div>
+                    <div className="h-[100vh] w-full flex items-center justify-center bg-white">
+                        <CircularProgress />
+                    </div>
                 </>
             )}
         </>

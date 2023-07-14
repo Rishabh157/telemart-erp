@@ -91,8 +91,7 @@ const CartonBoxListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.cartonBox}
-
+                    moduleName={UserModuleNameTypes.cartonBox}
                     isEdit
                     isDelete
                     handleOnAction={() => {

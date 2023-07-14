@@ -57,8 +57,7 @@ const AssetsCategoryWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                moduleName={UserModuleNameTypes.assetCategory}
-
+                    moduleName={UserModuleNameTypes.assetCategory}
                     isEdit
                     isDelete
                     handleOnAction={() => {
