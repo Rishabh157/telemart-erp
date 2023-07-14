@@ -12,7 +12,7 @@
                 {
                     "actionId": "vendorsActionListId",
                     "actionUrl": "/vendors",
-                    "actionName": "List",
+                    "actionName": "LIST",
                     "fields": [
                         {
                             "fieldId": "vendorId1",
@@ -44,7 +44,7 @@
                 {
                     "actionId": "vendorsActionAddId",
                     "actionUrl": "/vendors/add-vendor",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -68,7 +68,7 @@
                 {
                     "actionId": "dealerActionListId",
                     "actionUrl": "/dealers",
-                    "actionName": "List",
+                    "actionName": "LIST",
                     "fields": [
                         {
                             "fieldId": "1",
@@ -115,7 +115,7 @@
                 {
                     "actionId": "dealerActionAddId",
                     "actionUrl": "/dealers/add-dealer",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -139,7 +139,7 @@
                 {
                     "actionId": "userActionListId",
                     "actionUrl": "/users",
-                    "actionName": "List",
+                    "actionName": "LIST",
                     "fields": [
                         {
                             "fieldId": "1",
@@ -166,7 +166,7 @@
                 {
                     "actionId": "userActionAddId",
                     "actionUrl": "/users/add-user",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -190,13 +190,44 @@
                 {
                     "actionId": "warehouseActionListId",
                     "actionUrl": "/warehouse",
-                    "actionName": "List",
-                    "fields": []
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "warehouseId1",
+                            "fieldName": "Warehouse Code",
+                            "fieldValue": "wareHouseCode"
+                        },
+                        {
+                            "fieldId": "warehouseId2",
+                            "fieldName": "Warehouse Name",
+                            "fieldValue": "wareHouseName"
+                        },
+                        {
+                            "fieldId": "warehouseId3",
+                            "fieldName": "Country",
+                            "fieldValue": "wareHouseCountryName"
+                        },
+                        {
+                            "fieldId": "warehouseId4",
+                            "fieldName": "State",
+                            "fieldValue": "registrationStateName"
+                        },
+                        {
+                            "fieldId": "warehouseId5",
+                            "fieldName": "District",
+                            "fieldValue": "billingAddressDistrictName"
+                        },
+                        {
+                            "fieldId": "warehouseId6",
+                            "fieldName": "Pincode",
+                            "fieldValue": "registrationPincodeName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "warehouseActionAddId",
                     "actionUrl": "/warehouse/add",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -220,13 +251,44 @@
                 {
                     "actionId": "saleOrderActionListId",
                     "actionUrl": "/sale-order",
-                    "actionName": "List",
-                    "fields": []
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "saleOrder1",
+                            "fieldName": "So Number",
+                            "fieldValue": "soNumber"
+                        },
+                        {
+                            "fieldId": "saleOrder2",
+                            "fieldName": "Dealer",
+                            "fieldValue": "dealerLabel"
+                        },
+                        {
+                            "fieldId": "saleOrder3",
+                            "fieldName": "DH Approved Status",
+                            "fieldValue": "dhApproved"
+                        },
+                        {
+                            "fieldId": "saleOrder4",
+                            "fieldName": "DH Approved By",
+                            "fieldValue": "dhApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "saleOrder5",
+                            "fieldName": "Acc Approved Status",
+                            "fieldValue": "accApproved"
+                        },
+                        {
+                            "fieldId": "saleOrder6",
+                            "fieldName": "Acc Approved By",
+                            "fieldValue": "accApprovedActionBy"
+                        }
+                    ]
                 },
                 {
                     "actionId": "saleOrderActionAddId",
                     "actionUrl": "/sale-order/add-sale-order",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -250,13 +312,29 @@
                 {
                     "actionId": "asrActionListId",
                     "actionUrl": "/asr",
-                    "actionName": "List",
-                    "fields": []
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "asrId1",
+                            "fieldName": "Name",
+                            "fieldValue": "productName"
+                        },
+                        {
+                            "fieldId": "asrId2",
+                            "fieldName": "Quantity",
+                            "fieldValue": "quantity"
+                        },
+                        {
+                            "fieldId": "asrId3",
+                            "fieldName": "Status",
+                            "fieldValue": "completed"
+                        }
+                    ]
                 },
                 {
                     "actionId": "asrActionAddId",
                     "actionUrl": "/asr/add",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -280,13 +358,59 @@
                 {
                     "actionId": "purchaseOrderActionListId",
                     "actionUrl": "/purchase-order",
-                    "actionName": "List",
-                    "fields": []
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "purchaseOrderId1",
+                            "fieldName": "PO Code",
+                            "fieldValue": "poCode"
+                        },
+                        {
+                            "fieldId": "purchaseOrderId2",
+                            "fieldName": "Item Name",
+                            "fieldValue": "purchaseOrder"
+                        },
+                        {
+                            "fieldId": "purchaseOrderId3",
+                            "fieldName": "Quantity",
+                            "fieldValue": "purchaseOrder"
+                        },
+                        {
+                            "fieldId": "purchaseOrderId4",
+                            "fieldName": "Recieved Quantity",
+                            "fieldValue": "purchaseOrder"
+                        },
+                        {
+                            "fieldId": "purchaseOrderId5",
+                            "fieldName": "rate",
+                            "fieldValue": "purchaseOrder"
+                        },
+                        {
+                            "fieldId": "purchaseOrderId6",
+                            "fieldName": "Vendor",
+                            "fieldValue": "vendorLabel"
+                        },
+                        {
+                            "fieldId": "purchaseOrderId7",
+                            "fieldName": "ware house",
+                            "fieldValue": "warehouseLabel"
+                        },
+                        {
+                            "fieldId": "purchaseOrderId8",
+                            "fieldName": "Est. Delivery Date",
+                            "fieldValue": "purchaseOrder"
+                        },
+                        {
+                            "fieldId": "purchaseOrderId9",
+                            "fieldName": "Approval level",
+                            "fieldValue": "isConfirmed"
+                        }
+                    ]
                 },
                 {
                     "actionId": "purchaseOrderActionAddId",
                     "actionUrl": "/purchase-order/add",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -310,13 +434,39 @@
                 {
                     "actionId": "grnActionListId",
                     "actionUrl": "/grn",
-                    "actionName": "List",
-                    "fields": []
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "grnId1",
+                            "fieldName": "PO Code",
+                            "fieldValue": "poCode"
+                        },
+                        {
+                            "fieldId": "grnId2",
+                            "fieldName": "Item Name",
+                            "fieldValue": "itemName"
+                        },
+                        {
+                            "fieldId": "grnId3",
+                            "fieldName": "Received Qnty.",
+                            "fieldValue": "receivedQuantity"
+                        },
+                        {
+                            "fieldId": "grnId4",
+                            "fieldName": "Good Qnty.",
+                            "fieldValue": "goodQuantity"
+                        },
+                        {
+                            "fieldId": "grnId5",
+                            "fieldName": "Defective Qnty.",
+                            "fieldValue": "defectiveQuantity"
+                        }
+                    ]
                 },
                 {
                     "actionId": "grnActionAddId",
                     "actionUrl": "/grn/add",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -340,13 +490,44 @@
                 {
                     "actionId": "inventoryManagementActionListId",
                     "actionUrl": "/inventory-management",
-                    "actionName": "List",
-                    "fields": []
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "1",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "2",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "3",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "4",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "5",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "6",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        }
+                    ]
                 },
                 {
                     "actionId": "inventoryManagementActionAddId",
                     "actionUrl": "/inventory-management/add",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -370,13 +551,49 @@
                 {
                     "actionId": "inquiryActionListId",
                     "actionUrl": "/inquiry",
-                    "actionName": "List",
-                    "fields": []
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "inquiryId1",
+                            "fieldName": "Inquiry No",
+                            "fieldValue": "inquiryNumber"
+                        },
+                        {
+                            "fieldId": "inquiryId2",
+                            "fieldName": "DID No",
+                            "fieldValue": "didNo"
+                        },
+                        {
+                            "fieldId": "inquiryId3",
+                            "fieldName": "Mobile No",
+                            "fieldValue": "mobileNo"
+                        },
+                        {
+                            "fieldId": "inquiryId4",
+                            "fieldName": "Batch Assigned",
+                            "fieldValue": "batchNo"
+                        },
+                        {
+                            "fieldId": "inquiryId5",
+                            "fieldName": "Delivery Charges",
+                            "fieldValue": "deliveryCharges"
+                        },
+                        {
+                            "fieldId": "inquiryId6",
+                            "fieldName": "Discount",
+                            "fieldValue": "discount"
+                        },
+                        {
+                            "fieldId": "inquiryId7",
+                            "fieldName": "Total",
+                            "fieldValue": "total"
+                        }
+                    ]
                 },
                 {
                     "actionId": "inquiryActionAddId",
                     "actionUrl": "/inquiry/add",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -400,13 +617,44 @@
                 {
                     "actionId": "ordersActionListId",
                     "actionUrl": "/orders",
-                    "actionName": "List",
-                    "fields": []
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "ordersActionListId1",
+                            "fieldName": "Order No",
+                            "fieldValue": "orderNumber"
+                        },
+                        {
+                            "fieldId": "ordersActionListId2",
+                            "fieldName": "DID No",
+                            "fieldValue": "didNo"
+                        },
+                        {
+                            "fieldId": "ordersActionListId3",
+                            "fieldName": "Mobile No",
+                            "fieldValue": "mobileNo"
+                        },
+                        {
+                            "fieldId": "ordersActionListId4",
+                            "fieldName": "Delivery Charges",
+                            "fieldValue": "deliveryCharges"
+                        },
+                        {
+                            "fieldId": "ordersActionListId5",
+                            "fieldName": "Discount",
+                            "fieldValue": "discount"
+                        },
+                        {
+                            "fieldId": "ordersActionListId6",
+                            "fieldName": "Total",
+                            "fieldValue": "total"
+                        }
+                    ]
                 },
                 {
                     "actionId": "ordersActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -435,14 +683,45 @@
             "moduleAction": [
                 {
                     "actionId": "callActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/call",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "callId1",
+                            "fieldName": "DID No",
+                            "fieldValue": "didNo"
+                        },
+                        {
+                            "fieldId": "callId2",
+                            "fieldName": "Incoming Caller No",
+                            "fieldValue": "incomingCallerNo"
+                        },
+                        {
+                            "fieldId": "callId3",
+                            "fieldName": "Disposition Two",
+                            "fieldValue": "dispositionTwoLabel"
+                        },
+                        {
+                            "fieldId": "callId4",
+                            "fieldName": "Disposition Three Label",
+                            "fieldValue": "dispositionThreeLabel"
+                        },
+                        {
+                            "fieldId": "callId5",
+                            "fieldName": "Scheme",
+                            "fieldValue": "schemeLabel"
+                        },
+                        {
+                            "fieldId": "callId6",
+                            "fieldName": "Channel",
+                            "fieldValue": "channel"
+                        }
+                    ]
                 },
                 {
                     "actionId": "callActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -460,19 +739,25 @@
             ]
         },
         {
-            "moduleId": "AttributesId",
+            "moduleId": "attributesId",
             "moduleName": "Attributes",
             "moduleAction": [
                 {
                     "actionId": "AttributesActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/attributes",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "attributesId1",
+                            "fieldName": "Attribute Name",
+                            "fieldValue": "attributeName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "AttributesActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -495,14 +780,25 @@
             "moduleAction": [
                 {
                     "actionId": "attributesGroupActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/attributes-group",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "attributesGroupId1",
+                            "fieldName": "Group Name",
+                            "fieldValue": "groupName"
+                        },
+                        {
+                            "fieldId": "attributesGroupId2",
+                            "fieldName": "Attributes",
+                            "fieldValue": "attributes"
+                        }
+                    ]
                 },
                 {
                     "actionId": "attributesGroupActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -525,14 +821,25 @@
             "moduleAction": [
                 {
                     "actionId": "productCategoryActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/product-category",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "productCategoryId1",
+                            "fieldName": "Category Code",
+                            "fieldValue": "categoryCode"
+                        },
+                        {
+                            "fieldId": "productCategoryId2",
+                            "fieldName": "Category Name",
+                            "fieldValue": "categoryName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "productCategoryActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -555,14 +862,35 @@
             "moduleAction": [
                 {
                     "actionId": "productSubCategoryActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/product-sub-category",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "productSubCategoryId1",
+                            "fieldName": "Sub Category Code",
+                            "fieldValue": "subCategoryCode"
+                        },
+                        {
+                            "fieldId": "productSubCategoryId2",
+                            "fieldName": "Sub Category Name",
+                            "fieldValue": "subCategoryName"
+                        },
+                        {
+                            "fieldId": "productSubCategoryId3",
+                            "fieldName": "Parent Category",
+                            "fieldValue": "parentCategoryLabel"
+                        },
+                        {
+                            "fieldId": "productSubCategoryId4",
+                            "fieldName": "HSN Code",
+                            "fieldValue": "hsnCode"
+                        }
+                    ]
                 },
                 {
                     "actionId": "productSubCategoryActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -585,14 +913,45 @@
             "moduleAction": [
                 {
                     "actionId": "productGroupActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/product-group",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "productGroupId1",
+                            "fieldName": "Group Name",
+                            "fieldValue": "groupName"
+                        },
+                        {
+                            "fieldId": "productGroupId2",
+                            "fieldName": "Dealer Sale Price",
+                            "fieldValue": "dealerSalePrice"
+                        },
+                        {
+                            "fieldId": "productGroupId3",
+                            "fieldName": "Sate GST",
+                            "fieldValue": "sgst"
+                        },
+                        {
+                            "fieldId": "productGroupId4",
+                            "fieldName": "Center GST",
+                            "fieldValue": "cgst"
+                        },
+                        {
+                            "fieldId": "productGroupId5",
+                            "fieldName": "Integated GST",
+                            "fieldValue": "igst"
+                        },
+                        {
+                            "fieldId": "productGroupId6",
+                            "fieldName": "Union Territory",
+                            "fieldValue": "utgst"
+                        }
+                    ]
                 },
                 {
                     "actionId": "productGroupActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -615,14 +974,40 @@
             "moduleAction": [
                 {
                     "actionId": "schemeActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/scheme",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "schemeActionListId1",
+                            "fieldName": "Scheme Code",
+                            "fieldValue": "schemeCode"
+                        },
+                        {
+                            "fieldId": "schemeActionListId2",
+                            "fieldName": "Scheme Name",
+                            "fieldValue": "schemeName"
+                        },
+                        {
+                            "fieldId": "schemeActionListId3",
+                            "fieldName": "Category",
+                            "fieldValue": "productCategoryLabel"
+                        },
+                        {
+                            "fieldId": "schemeActionListId4",
+                            "fieldName": "Sub Category",
+                            "fieldValue": "ProductSubCategoryLabel"
+                        },
+                        {
+                            "fieldId": "schemeActionListId5",
+                            "fieldName": "Price",
+                            "fieldValue": "schemePrice"
+                        }
+                    ]
                 },
                 {
                     "actionId": "schemeActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -645,14 +1030,30 @@
             "moduleAction": [
                 {
                     "actionId": "itemActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/item",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "itemId1",
+                            "fieldName": "Item Code",
+                            "fieldValue": "itemCode"
+                        },
+                        {
+                            "fieldId": "itemId2",
+                            "fieldName": "Item Name",
+                            "fieldValue": "itemName"
+                        },
+                        {
+                            "fieldId": "itemId3",
+                            "fieldName": "Weight (in gms.)",
+                            "fieldValue": "itemWeight"
+                        }
+                    ]
                 },
                 {
                     "actionId": "itemActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -675,14 +1076,40 @@
             "moduleAction": [
                 {
                     "actionId": "productsActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/products",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "productsId1",
+                            "fieldName": "Product Code",
+                            "fieldValue": "productCode"
+                        },
+                        {
+                            "fieldId": "productsId2",
+                            "fieldName": "Product Name",
+                            "fieldValue": "productName"
+                        },
+                        {
+                            "fieldId": "productsId3",
+                            "fieldName": "Category",
+                            "fieldValue": "productCategoryLabel"
+                        },
+                        {
+                            "fieldId": "productsId4",
+                            "fieldName": "Sub Category",
+                            "fieldValue": "productSubCategoryLabel"
+                        },
+                        {
+                            "fieldId": "productsId5",
+                            "fieldName": "Product Group",
+                            "fieldValue": "productGroupLabel"
+                        }
+                    ]
                 },
                 {
                     "actionId": "productsActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -705,14 +1132,35 @@
             "moduleAction": [
                 {
                     "actionId": "cartonBoxActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/carton-box",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "cartonBoxId1",
+                            "fieldName": "Box Name",
+                            "fieldValue": "boxName"
+                        },
+                        {
+                            "fieldId": "cartonBoxId2",
+                            "fieldName": "Inner Items Count",
+                            "fieldValue": "innerItemCount"
+                        },
+                        {
+                            "fieldId": "cartonBoxId3",
+                            "fieldName": "Dimensions",
+                            "fieldValue": "dimension"
+                        },
+                        {
+                            "fieldId": "cartonBoxId4",
+                            "fieldName": "Box Weight (in gm's)",
+                            "fieldValue": "boxWeight"
+                        }
+                    ]
                 },
                 {
                     "actionId": "cartonBoxActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -736,13 +1184,39 @@
                 {
                     "actionId": "taxesActionListId",
                     "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "1",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "2",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "3",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "4",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "5",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        }
+                    ]
                 },
                 {
                     "actionId": "taxesActionId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -765,14 +1239,40 @@
             "moduleAction": [
                 {
                     "actionId": "companyActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/company",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "companyId1",
+                            "fieldName": "Company Name",
+                            "fieldValue": "companyName"
+                        },
+                        {
+                            "fieldId": "companyId2",
+                            "fieldName": "Website URL",
+                            "fieldValue": "websiteUrl"
+                        },
+                        {
+                            "fieldId": "companyId3",
+                            "fieldName": "Address",
+                            "fieldValue": "address"
+                        },
+                        {
+                            "fieldId": "companyId4",
+                            "fieldName": "GST no.",
+                            "fieldValue": "gstNo"
+                        },
+                        {
+                            "fieldId": "companyId5",
+                            "fieldName": "Phone no.",
+                            "fieldValue": "phoneNo"
+                        }
+                    ]
                 },
                 {
                     "actionId": "companyActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -795,14 +1295,45 @@
             "moduleAction": [
                 {
                     "actionId": "barcodeActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/barcode",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "barcodeId1",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "barcodeId2",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "barcodeId3",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "barcodeId4",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "barcodeId5",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "barcodeId6",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        }
+                    ]
                 },
                 {
                     "actionId": "barcodeActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -825,14 +1356,45 @@
             "moduleAction": [
                 {
                     "actionId": "locationActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/location",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "locationId1",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "locationId2",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "locationId3",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "locationId4",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "locationId5",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "locationId6",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        }
+                    ]
                 },
                 {
                     "actionId": "locationActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -855,14 +1417,20 @@
             "moduleAction": [
                 {
                     "actionId": "languageActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/language",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "1",
+                            "fieldName": "Language",
+                            "fieldValue": "languageName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "languageActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -886,13 +1454,34 @@
                 {
                     "actionId": "dealersCategoryActionListId",
                     "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "dealersCategoryId1",
+                            "fieldName": "Dealers Category",
+                            "fieldValue": "dealersCategory"
+                        },
+                        {
+                            "fieldId": "dealersCategoryId2",
+                            "fieldName": "Invest Amount",
+                            "fieldValue": "investAmount"
+                        },
+                        {
+                            "fieldId": "dealersCategoryId3",
+                            "fieldName": "Number Of Orders",
+                            "fieldValue": "numberOfOrders"
+                        },
+                        {
+                            "fieldId": "dealersCategoryId4",
+                            "fieldName": "Delivery Percentage",
+                            "fieldValue": "deliveryPercentage"
+                        }
+                    ]
                 },
                 {
                     "actionId": "dealersCategoryActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -915,14 +1504,45 @@
             "moduleAction": [
                 {
                     "actionId": "hierarchyActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/configurations/hierarchy",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "1",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "2",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "3",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "4",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "5",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "6",
+                            "fieldName": "",
+                            "fieldValue": ""
+                        }
+                    ]
                 },
                 {
                     "actionId": "hierarchyActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -945,14 +1565,20 @@
             "moduleAction": [
                 {
                     "actionId": "channelGroupActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/media/channel-group",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "1",
+                            "fieldName": "Channel Group Name",
+                            "fieldValue": "groupName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "channelGroupActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -975,14 +1601,20 @@
             "moduleAction": [
                 {
                     "actionId": "channelCategoryActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/media/channel-category",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "channelCategoryId1",
+                            "fieldName": "Channel Category Name",
+                            "fieldValue": "channelCategory"
+                        }
+                    ]
                 },
                 {
                     "actionId": "channelCategoryActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1005,14 +1637,40 @@
             "moduleAction": [
                 {
                     "actionId": "channelActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/media/channel",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "channelId1",
+                            "fieldName": "Channel Name",
+                            "fieldValue": "channelName"
+                        },
+                        {
+                            "fieldId": "channelId2",
+                            "fieldName": "Channel Group",
+                            "fieldValue": "channelGroupLabel"
+                        },
+                        {
+                            "fieldId": "channelId3",
+                            "fieldName": "Contact Person",
+                            "fieldValue": "contactPerson"
+                        },
+                        {
+                            "fieldId": "channelId4",
+                            "fieldName": "Mobile",
+                            "fieldValue": "mobile"
+                        },
+                        {
+                            "fieldId": "channelId5",
+                            "fieldName": "Email",
+                            "fieldValue": ""
+                        }
+                    ]
                 },
                 {
                     "actionId": "channelActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1035,14 +1693,30 @@
             "moduleAction": [
                 {
                     "actionId": "didActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/media/did",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "didId1",
+                            "fieldName": "DID Number",
+                            "fieldValue": "didNumber"
+                        },
+                        {
+                            "fieldId": "didId2",
+                            "fieldName": "Scheme Name",
+                            "fieldValue": "schemeLabel"
+                        },
+                        {
+                            "fieldId": "didId3",
+                            "fieldName": "Channel Name",
+                            "fieldValue": "channelName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "didActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1065,14 +1739,20 @@
             "moduleAction": [
                 {
                     "actionId": "artistActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/media/artist",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "artistId1",
+                            "fieldName": "Artist Name",
+                            "fieldValue": "artistName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "artistActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1095,14 +1775,35 @@
             "moduleAction": [
                 {
                     "actionId": "tapeActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/media/tape",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "tapeId1",
+                            "fieldName": "Tabe Name",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "tapeId2",
+                            "fieldName": "Tape Type",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "tapeId3",
+                            "fieldName": "Scheme",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "tapeId4",
+                            "fieldName": "Language",
+                            "fieldValue": ""
+                        }
+                    ]
                 },
                 {
                     "actionId": "tapeActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1125,14 +1826,50 @@
             "moduleAction": [
                 {
                     "actionId": "competitorActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/media/competitor",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "competitorId1",
+                            "fieldName": "Date",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "competitorId2",
+                            "fieldName": "Start Time",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "competitorId3",
+                            "fieldName": "End Time",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "competitorId4",
+                            "fieldName": "Product Name",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "competitorId5",
+                            "fieldName": "Mobile No.",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "competitorId6",
+                            "fieldName": "Price/MRP",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "competitorId7",
+                            "fieldName": "Artist",
+                            "fieldValue": ""
+                        }
+                    ]
                 },
                 {
                     "actionId": "competitorActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1155,14 +1892,45 @@
             "moduleAction": [
                 {
                     "actionId": "slotActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/media/slot",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "slotId1",
+                            "fieldName": "Slot Name",
+                            "fieldValue": "slotName"
+                        },
+                        {
+                            "fieldId": "slotId2",
+                            "fieldName": "Channel Group",
+                            "fieldValue": "groupNameLabel"
+                        },
+                        {
+                            "fieldId": "slotId3",
+                            "fieldName": "Channel Name",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "slotId4",
+                            "fieldName": "Tape Name",
+                            "fieldValue": "tapeLabel"
+                        },
+                        {
+                            "fieldId": "slotId5",
+                            "fieldName": "Start Time",
+                            "fieldValue": "slotStartTime"
+                        },
+                        {
+                            "fieldId": "slotId6",
+                            "fieldName": "End Time",
+                            "fieldValue": "slotEndTime"
+                        }
+                    ]
                 },
                 {
                     "actionId": "slotActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1185,14 +1953,14 @@
             "moduleAction": [
                 {
                     "actionId": "callerPageActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
+                    "actionUrl": "/media/caller-page",
+                    "actionName": "LIST",
                     "fields": []
                 },
                 {
                     "actionId": "callerPageActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1215,14 +1983,35 @@
             "moduleAction": [
                 {
                     "actionId": "assetsManagementActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/assets/assets-management",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "assetsManagementId1",
+                            "fieldName": "Asset Name",
+                            "fieldValue": "assetName"
+                        },
+                        {
+                            "fieldId": "assetsManagementId2",
+                            "fieldName": "Asset Category",
+                            "fieldValue": "assetcategorieLabel"
+                        },
+                        {
+                            "fieldId": "assetsManagementId3",
+                            "fieldName": "Quantity",
+                            "fieldValue": "quantity"
+                        },
+                        {
+                            "fieldId": "assetsManagementId4",
+                            "fieldName": "Price",
+                            "fieldValue": "price"
+                        }
+                    ]
                 },
                 {
                     "actionId": "assetsManagementActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1245,14 +2034,20 @@
             "moduleAction": [
                 {
                     "actionId": "assetsCategoryActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/assets/assets-category",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "assetsCategoryId1",
+                            "fieldName": "Category Name",
+                            "fieldValue": "assetCategoryName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "assetsCategoryActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1275,14 +2070,20 @@
             "moduleAction": [
                 {
                     "actionId": "assetsLocationActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/assets/assets-location",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "assetsLocationId1",
+                            "fieldName": "Location Name",
+                            "fieldValue": "locationName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "assetsLocationActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1305,14 +2106,14 @@
             "moduleAction": [
                 {
                     "actionId": "assetsRelocationActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
+                    "actionUrl": "/assets/assets-relocation",
+                    "actionName": "LIST",
                     "fields": []
                 },
                 {
                     "actionId": "assetsRelocationActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1335,14 +2136,14 @@
             "moduleAction": [
                 {
                     "actionId": "assetsAllocationActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
+                    "actionUrl": "/assets/assets-allocation",
+                    "actionName": "LIST",
                     "fields": []
                 },
                 {
                     "actionId": "assetsAllocationActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1365,14 +2166,20 @@
             "moduleAction": [
                 {
                     "actionId": "dispositionOneActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/dispositions/disposition-one",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "dispositionOneId1",
+                            "fieldName": "Disposition Name",
+                            "fieldValue": "dispositionName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "dispositionOneActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1395,14 +2202,25 @@
             "moduleAction": [
                 {
                     "actionId": "dispositionTwoActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/dispositions/disposition-two",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "dispositionTwoId1",
+                            "fieldName": "Disposition Name",
+                            "fieldValue": "dispositionName"
+                        },
+                        {
+                            "fieldId": "dispositionTwoId2",
+                            "fieldName": "Disposition One Name",
+                            "fieldValue": "dispostionOneLabel"
+                        }
+                    ]
                 },
                 {
                     "actionId": "dispositionTwoActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1425,14 +2243,30 @@
             "moduleAction": [
                 {
                     "actionId": "dispositionThreeActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/dispositions/disposition-three",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "dispositionThreeId1",
+                            "fieldName": "Disposition Name",
+                            "fieldValue": "dispositionName"
+                        },
+                        {
+                            "fieldId": "dispositionThreeId2",
+                            "fieldName": "Disposition One Name",
+                            "fieldValue": "dispostionOneLabel"
+                        },
+                        {
+                            "fieldId": "dispositionThreeId3",
+                            "fieldName": "Disposition Two Name",
+                            "fieldValue": "dispostionTwoLabel"
+                        }
+                    ]
                 },
                 {
                     "actionId": "dispositionThreeActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1455,14 +2289,20 @@
             "moduleAction": [
                 {
                     "actionId": "initialcallOneActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/dispositions/initialcall-one",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "initialcallOneId1",
+                            "fieldName": "Initial Call One",
+                            "fieldValue": "initialCallName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "initialcallOneActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1485,14 +2325,25 @@
             "moduleAction": [
                 {
                     "actionId": "initialcallTwoActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/dispositions/initialcall-two",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "initialcallTwoId1",
+                            "fieldName": "Initial Call Two",
+                            "fieldValue": "initialCallName"
+                        },
+                        {
+                            "fieldId": "initialcallTwoId2",
+                            "fieldName": "Initial Call One",
+                            "fieldValue": "initialCallOneLabel"
+                        }
+                    ]
                 },
                 {
                     "actionId": "initialcallTwoActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1515,14 +2366,30 @@
             "moduleAction": [
                 {
                     "actionId": "initialcallThreeActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/dispositions/initialcall-three",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "initialcallThreeId1",
+                            "fieldName": "Initial Call Three",
+                            "fieldValue": "initialCallName"
+                        },
+                        {
+                            "fieldId": "initialcallThreeId2",
+                            "fieldName": "Initial Call One",
+                            "fieldValue": "initialCallOneLabel"
+                        },
+                        {
+                            "fieldId": "initialcallThreeId3",
+                            "fieldName": "Initial Call Two",
+                            "fieldValue": "initialCallTwoLabel"
+                        }
+                    ]
                 },
                 {
                     "actionId": "initialcallThreeActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1545,14 +2412,20 @@
             "moduleAction": [
                 {
                     "actionId": "dispositionComplaintActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/dispositions/disposition-complaint",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "dispositionComplaintId1",
+                            "fieldName": "Disposition Complaint",
+                            "fieldValue": "dispositionName"
+                        }
+                    ]
                 },
                 {
                     "actionId": "dispositionComplaintActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1575,14 +2448,30 @@
             "moduleAction": [
                 {
                     "actionId": "websiteActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/all-websites/website",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "websiteId1",
+                            "fieldName": "Website Name",
+                            "fieldValue": "productName"
+                        },
+                        {
+                            "fieldId": "websiteId2",
+                            "fieldName": "GA Tag",
+                            "fieldValue": "gaTagIp"
+                        },
+                        {
+                            "fieldId": "websiteId3",
+                            "fieldName": "URL",
+                            "fieldValue": "url"
+                        }
+                    ]
                 },
                 {
                     "actionId": "websiteActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1605,14 +2494,30 @@
             "moduleAction": [
                 {
                     "actionId": "websiteBlogActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/all-websites/website-blog",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "websiteBlogId1",
+                            "fieldName": "Blog Name",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "websiteBlogId2",
+                            "fieldName": "Blog Title",
+                            "fieldValue": ""
+                        },
+                        {
+                            "fieldId": "websiteBlogId3",
+                            "fieldName": "Blog Subtitle",
+                            "fieldValue": ""
+                        }
+                    ]
                 },
                 {
                     "actionId": "websiteBlogActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1635,14 +2540,25 @@
             "moduleAction": [
                 {
                     "actionId": "websitePageActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/all-websites/website-page",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "websitePageId1",
+                            "fieldName": "Page Name",
+                            "fieldValue": "pageName"
+                        },
+                        {
+                            "fieldId": "websitePageId2",
+                            "fieldName": "Page Url",
+                            "fieldValue": "pageUrl"
+                        }
+                    ]
                 },
                 {
                     "actionId": "websitePageActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
@@ -1665,14 +2581,35 @@
             "moduleAction": [
                 {
                     "actionId": "websiteTagsActionListId",
-                    "actionUrl": "",
-                    "actionName": "List",
-                    "fields": []
+                    "actionUrl": "/all-websites/website-tags",
+                    "actionName": "LIST",
+                    "fields": [
+                        {
+                            "fieldId": "websiteTagsId1",
+                            "fieldName": "Meta Keyword",
+                            "fieldValue": "metaKeyword"
+                        },
+                        {
+                            "fieldId": "websiteTagsId2",
+                            "fieldName": "Meta OG Type",
+                            "fieldValue": "metaOgType"
+                        },
+                        {
+                            "fieldId": "websiteTagsId3",
+                            "fieldName": "Meta Twitter Title",
+                            "fieldValue": "metaTwitterTitle"
+                        },
+                        {
+                            "fieldId": "websiteTagsId4",
+                            "fieldName": "Meta Twitter Card",
+                            "fieldValue": "metaTwitterCard"
+                        }
+                    ]
                 },
                 {
                     "actionId": "websiteTagsActionAddId",
                     "actionUrl": "",
-                    "actionName": "Add",
+                    "actionName": "ADD",
                     "fields": []
                 },
                 {
