@@ -133,7 +133,7 @@ const ATMTextField = ({
                 />
             </div>
             {type === 'password' ? (
-                <div className="absolute top-[26px] right-2 mt-2">
+                <div className="absolute top-[26px] right-2 mt-4">
                     {visibility === 'text' ? (
                         <AiFillEye
                             size={18}
