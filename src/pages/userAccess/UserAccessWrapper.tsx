@@ -57,6 +57,7 @@ const UserAccessWrapper = () => {
                 }).then((res) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
+                            setButtonValue('update')
                             showToast('success', 'User Access successfully!')
                             navigate(`/configurations/user-access`, {
                                 state: {
