@@ -54,7 +54,7 @@ const VerticalNavBar = ({
     )
     const { data, isLoading, isFetching } = useGetUserAccessQuery(
         {
-            userRole: userData?.userRole as string ,
+            userRole: userData?.userRole as string,
         },
         {
             skip: !userData?.userRole,
@@ -193,7 +193,9 @@ const VerticalNavBar = ({
                 {navigation
                     ?.filter((permissionRoute: NavItemType) => {
                         console.log(permissionRoute, 'permissionRoute')
-                        return userData?.userRole === 'ADMIN'
+                        return userData?.userRole === 'ADMIN' ||
+                            permissionRoute.name ===
+                                UserModuleNameTypes.dashboard
                             ? true
                             : isCheckAuthorizedModule(
                                   checkUserAccess,
