@@ -817,7 +817,6 @@ const CallerPage: React.FC<Props> = ({
                         options={dropdownOptions.stateOptions || []}
                         isValueWithLable
                         onChange={(e) => {
-                            console.log(e, 'e')
                             setFieldValue('stateId', e?.value || '')
                             setFieldValue('stateLabel', e?.label || '')
                             setFieldValue(
@@ -865,7 +864,7 @@ const CallerPage: React.FC<Props> = ({
                         options={dropdownOptions.areaOptions || []}
                         isValueWithLable
                         onChange={(e) => {
-                            setFieldValue('areaId', e?.value || '' )
+                            setFieldValue('areaId', e?.value || '')
                             setFieldValue('areaLabel', e?.label || '')
                             setFieldValue(
                                 'autoFillingShippingAddress',
@@ -887,7 +886,7 @@ const CallerPage: React.FC<Props> = ({
                         options={dropdownOptions.districtOptions || []}
                         isValueWithLable
                         onChange={(e) => {
-                            setFieldValue('districtId', e?.value || '' )
+                            setFieldValue('districtId', e?.value || '')
                             setFieldValue('districtLabel', e?.label || '')
                             setFieldValue(
                                 'autoFillingShippingAddress',
@@ -910,7 +909,7 @@ const CallerPage: React.FC<Props> = ({
                         options={dropdownOptions.tehsilOptions || []}
                         isValueWithLable
                         onChange={(e) => {
-                            setFieldValue('tehsilId', e?.value || '' )
+                            setFieldValue('tehsilId', e?.value || '')
                             setFieldValue('tehsilLabel', e?.label || '')
                             setFieldValue(
                                 'autoFillingShippingAddress',
