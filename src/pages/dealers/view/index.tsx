@@ -26,47 +26,57 @@ import { useGetDealersQuery } from 'src/services/DealerServices'
 // |-- Redux --|
 import { setItems, setSearchValue } from 'src/redux/slices/dealerSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
+import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const tabsData = [
     {
         label: 'General Information',
         icon: BsArrowRepeat,
         path: 'general-information',
+        name: 'GENERAL_INFORMATION',
     },
     {
         label: 'Warehouse',
         icon: MdOutlinePeopleAlt,
         path: 'warehouse',
+        name: 'DEALER_WAREHOUSE',
     },
     {
         label: 'Sale Order',
         icon: AiOutlineRise,
         path: 'sale-order',
+        name: 'DEALER_SALE_ORDER',
     },
     {
         label: 'Ledger',
         icon: MdOutlinePeopleAlt,
         path: 'ledger',
+        name: 'DEALER_LEDGER',
     },
     {
         label: 'Orders Ledger',
         icon: RiBillLine,
         path: 'order-ledger',
+        name: 'DEALER_ORDER_LEDGER',
     },
     {
         label: 'Activity',
         icon: MdOutlinePeopleAlt,
         path: 'activities',
+        name: 'DEALER_ACTIVITY',
     },
     {
         label: 'PinCode',
         icon: MdOutlinePeopleAlt,
         path: 'pincode',
+        name: 'DEALER_PINCODE',
     },
     {
         label: 'Schemes',
         icon: MdOutlinePeopleAlt,
         path: 'scheme',
+        name: 'DEALER_SCHEME',
     },
     // {
     //     label: 'Supervisor',
@@ -105,6 +115,16 @@ const breadcrumbs: BreadcrumbType[] = [
 const ViewDealer = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+
+    const allowedTabs = showAllowedTabs(
+        checkUserAccess,
+        UserModuleNameTypes.dealer,
+        tabsData
+    )
+
     const dealerState: any = useSelector((state: RootState) => state.dealer)
     const { page, rowsPerPage, items } = dealerState
     const { searchValue }: any = useSelector((state: RootState) => state.dealer)
@@ -150,7 +170,7 @@ const ViewDealer = () => {
                 />
             }
             listData={listData}
-            tabs={tabsData}
+            tabs={allowedTabs}
             renderListItem={(item: any) => (
                 <ListItemCard item={item} key={item._id} />
             )}
