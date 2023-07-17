@@ -30,7 +30,11 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import {
@@ -38,7 +42,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/productSubCategorySlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ProductSubCategoryListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -50,6 +53,9 @@ const ProductSubCategoryListingWrapper = () => {
         (state: RootState) => state.productSubCategory
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
 
     const columns: columnTypes[] = [
         {
@@ -177,7 +183,12 @@ const ProductSubCategoryListingWrapper = () => {
         <>
             <ConfigurationLayout>
                 <ProductSubCategoryListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.productSubCategory,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

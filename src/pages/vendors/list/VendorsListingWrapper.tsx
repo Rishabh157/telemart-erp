@@ -25,6 +25,11 @@ import VendorsListing from './VendorsListing'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -33,11 +38,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/vendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
 
 const VendorsListingWrapper = () => {
     const navigate = useNavigate()
@@ -79,7 +79,7 @@ const VendorsListingWrapper = () => {
             ),
         },
         {
-            field: 'district',
+            field: 'registrationDistrictName',
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: VendorsListResponse) => (
@@ -87,7 +87,7 @@ const VendorsListingWrapper = () => {
             ),
         },
         {
-            field: 'state',
+            field: 'registrationStateName',
             headerName: 'State',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: VendorsListResponse) => (

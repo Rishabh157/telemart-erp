@@ -1,13 +1,12 @@
 /// ==============================================
 // Filename:UserAccess.tsx
 // Type: Access Component
-// Last Updated: JULY 04, 2023
+// Last Updated: JULY 14, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
 // |-- Built-in Dependencies --|
 import React from 'react'
-import { FcInfo } from 'react-icons/fc'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- External Dependencies --|
@@ -25,6 +24,7 @@ import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 // import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 // import { SelectOption } from 'src/models/FormField/FormField.model'
 // import { HiPlus } from 'react-icons/hi'
+import { BsFillExclamationCircleFill } from 'react-icons/bs'
 import { default as modulesData } from 'src/defaultData/moduleData.json'
 import { UserModuleActionTypes } from 'src/models/userAccess/UserAccess.model'
 // import { default as user } from 'src/defaultData/user.json'
@@ -371,8 +371,8 @@ const UserAcess = ({
                                                                                         actionsItems.actionName
                                                                                     }
                                                                                     buttonName={
-                                                                                        <FcInfo
-                                                                                            fill="red"
+                                                                                        <BsFillExclamationCircleFill
+                                                                                            fill="#1A1110"
                                                                                             size={
                                                                                                 18
                                                                                             }

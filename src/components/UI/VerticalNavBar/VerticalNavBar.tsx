@@ -11,6 +11,10 @@ import React, { useEffect } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Internal Dependencies --|
 import { NavItemType } from 'src/navigation'
@@ -20,7 +24,14 @@ import { setCheckUserAccess } from 'src/redux/slices/access/userAcessSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
 import { useGetUserAccessQuery } from 'src/services/useraccess/UserAccessServices'
-import { isCheckAuthorizedModule } from 'src/userAccess/getAuthorizedModules'
+import {
+    allWebsiteModule,
+    assetModules,
+    configurationModules,
+    dispositionModule,
+    isCheckAuthorizedModule,
+    mediaModules,
+} from 'src/userAccess/getAuthorizedModules'
 
 // |-- Types --|
 type Props = {
@@ -92,6 +103,44 @@ const VerticalNavBar = ({
         e.returnValue = message
         return message
     }
+
+    const getDefaultRouteFunction = (name: string, path: string) => {
+        let currentModules: string[] = []
+        let userRole = userData?.userRole
+
+        if (userRole === 'ADMIN') {
+            return path
+        }
+        switch (name) {
+            case UserModuleNameTypes.configuration:
+                currentModules = configurationModules
+                break
+            case UserModuleNameTypes.assets:
+                currentModules = assetModules
+                break
+            case UserModuleNameTypes.disposition:
+                currentModules = dispositionModule
+                break
+            case UserModuleNameTypes.allWebsite:
+                currentModules = allWebsiteModule
+                break
+            case UserModuleNameTypes.media:
+                currentModules = mediaModules
+                break
+            default:
+                break
+        }
+        let isEditDeleteViewAccess = checkUserAccess?.modules?.filter(
+            (mod: any) => {
+                return currentModules.includes(mod?.moduleName)
+            }
+        )
+        let moduleAction = isEditDeleteViewAccess[0]?.moduleAction
+        let paginationRoute = moduleAction?.find(
+            (ele: any) => ele?.actionName === UserModuleActionTypes.List
+        )?.actionUrl
+        return paginationRoute || path
+    }
     return (
         <div className="h-full  overflow-auto bg-white ">
             {/* Logo & Menu Icon */}
@@ -162,10 +211,20 @@ const VerticalNavBar = ({
                                             window.confirm(AlertText)
                                         if (confirmValue) {
                                             dispatch(setFieldCustomized(false))
-                                            navigate(navItem.path)
+                                            navigate(
+                                                getDefaultRouteFunction(
+                                                    navItem.name as string,
+                                                    navItem.path
+                                                )
+                                            )
                                         }
                                     } else {
-                                        navigate(navItem.path)
+                                        navigate(
+                                            getDefaultRouteFunction(
+                                                navItem.name as string,
+                                                navItem.path
+                                            )
+                                        )
                                     }
                                 }}
                                 className={`

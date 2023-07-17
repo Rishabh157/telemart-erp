@@ -19,7 +19,11 @@ import {
 import { InitialCallerOneListResponse } from 'src/models/configurationModel/InitialCallerOne.model'
 import DispositionLayout from '../../DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // export type language ={
 //     languageId:string[];
@@ -34,7 +38,9 @@ const InitialCallOneListingWrapper = () => {
     const initialCallOneState: any = useSelector(
         (state: RootState) => state.initialCallerOne
     )
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { page, rowsPerPage, searchValue, items } = initialCallOneState
 
     const dispatch = useDispatch<AppDispatch>()
@@ -135,7 +141,12 @@ const InitialCallOneListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <InitialCallOneListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.initialCallerOne,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

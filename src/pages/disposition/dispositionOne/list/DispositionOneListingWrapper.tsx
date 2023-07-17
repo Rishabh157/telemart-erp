@@ -19,7 +19,11 @@ import {
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
 import DispositionLayout from '../../DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // export type language ={
 //     languageId:string[];
@@ -34,7 +38,9 @@ const DispositionOneListingWrapper = () => {
     const dispositionOneState: any = useSelector(
         (state: RootState) => state.dispositionOne
     )
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { page, rowsPerPage, searchValue, items } = dispositionOneState
 
     const dispatch = useDispatch<AppDispatch>()
@@ -135,7 +141,12 @@ const DispositionOneListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <DispositionOneListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.dispositionOne,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

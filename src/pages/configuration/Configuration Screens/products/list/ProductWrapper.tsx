@@ -25,7 +25,11 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -33,7 +37,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/productSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ProductsListingWrapper = () => {
     const productState: any = useSelector((state: RootState) => state.products)
@@ -44,7 +47,10 @@ const ProductsListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteProduct] = useDeleteProductMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+    
     const columns: columnTypes[] = [
         {
             field: 'productCode',
@@ -169,7 +175,12 @@ const ProductsListingWrapper = () => {
         <>
             <ConfigurationLayout>
                 <ProductsListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.product,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

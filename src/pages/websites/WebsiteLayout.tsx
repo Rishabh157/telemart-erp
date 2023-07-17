@@ -30,32 +30,38 @@ import { useLocation, useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const websitesNavigation: NavItemType[] = [
     {
         label: 'Websites',
         icon: CgWebsite,
         path: '/all-websites/website',
+        name: UserModuleNameTypes.website,
     },
     {
         label: 'Website Blog',
         icon: TbBrandBlogger,
         path: '/all-websites/website-blog',
+        name: UserModuleNameTypes.websiteBlog,
     },
     {
         label: 'Websites Page',
         icon: RiPagesLine,
         path: '/all-websites/website-page',
+        name: UserModuleNameTypes.websitePage,
     },
     // {
     //     label: 'Influencers Management',
     //     icon: RiPagesLine,
     //     path: '/all-websites/influencers-management'
+
     // },
     {
         label: 'Websites Tags',
         icon: RiPagesLine,
         path: '/all-websites/website-tags',
+        name: UserModuleNameTypes.websiteTags,
     },
 ]
 

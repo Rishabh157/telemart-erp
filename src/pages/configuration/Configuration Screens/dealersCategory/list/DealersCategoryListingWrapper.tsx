@@ -29,10 +29,13 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const DealersCategoryListingWrapper = () => {
     const navigate = useNavigate()
@@ -41,6 +44,9 @@ const DealersCategoryListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const dealersCategoryState: any = useSelector(
         (state: RootState) => state.dealersCategory
+    )
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
     )
 
     const columns: columnTypes[] = [
@@ -170,7 +176,12 @@ const DealersCategoryListingWrapper = () => {
         <>
             <ConfigurationLayout>
                 <DealersCategoryListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.dealerCategory,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

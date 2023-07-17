@@ -25,8 +25,12 @@ import {
 } from 'src/services/PurchaseOrderService'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -36,7 +40,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/PurchaseOrderSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const PurchaseOrderListingWrapper = () => {
     const navigate = useNavigate()
@@ -45,6 +48,9 @@ const PurchaseOrderListingWrapper = () => {
     const [updatePoLevel] = useUpdatePoLevelMutation()
     const productOrderState: any = useSelector(
         (state: RootState) => state.purchaseOrder
+    )
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
     )
     const { page, rowsPerPage, searchValue, items } = productOrderState
     const { userData }: any = useSelector((state: RootState) => state.auth)
@@ -367,7 +373,12 @@ const PurchaseOrderListingWrapper = () => {
         <>
             <SideNavLayout>
                 <PurchaseOrderListing
-                    columns={columns}
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.purchaseOrder,
+                        UserModuleActionTypes.List
+                    )}
                     rows={items || []}
                     setShowDropdown={setShowDropdown}
                 />

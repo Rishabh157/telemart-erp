@@ -24,7 +24,11 @@ import {
 import ChannelCategoryListing from './ChannelCategoryListing'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -32,7 +36,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/channelCategorySlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ChannelCategoryListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -40,7 +43,9 @@ const ChannelCategoryListingWrapper = () => {
     const channelCategoryState: any = useSelector(
         (state: RootState) => state.channelCategory
     )
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { page, rowsPerPage, searchValue, items } = channelCategoryState
     const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
@@ -151,7 +156,12 @@ const ChannelCategoryListingWrapper = () => {
             <MediaLayout>
                 <div className="h-full">
                     <ChannelCategoryListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.channelCategory,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

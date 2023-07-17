@@ -22,6 +22,11 @@ import {
     getDepartmentLabel,
     //getUserRoleLabel,
 } from 'src/utils/GetHierarchyByDept'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 //import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 //import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
@@ -32,11 +37,13 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/NewUserSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const { items, page, rowsPerPage, searchValue } = userState
     const [showDropdown, setShowDropdown] = useState(false)
     //const [currentId, setCurrentId] = useState('')
@@ -74,15 +81,10 @@ const UsersListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'UserName',
+            field: 'userName',
             headerName: 'User Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => (
-                <span>
-                    {' '}
-                    {row.firstName} {row.lastName}{' '}
-                </span>
-            ),
+            renderCell: (row: any) => <span> {row.userName}</span>,
         },
         {
             field: 'email',
@@ -176,7 +178,12 @@ const UsersListingWrapper = () => {
     return (
         <SideNavLayout>
             <UsersListing
-                columns={columns}
+                columns={getAllowedAuthorizedColumns(
+                    checkUserAccess,
+                    columns,
+                    UserModuleNameTypes.user,
+                    UserModuleActionTypes.List
+                )}
                 rows={items}
                 setShowDropdown={() => {}}
             />

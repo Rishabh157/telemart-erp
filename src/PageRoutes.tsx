@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -42,22 +42,22 @@ import {
     AttributesListingWrapper,
     AddAttributeGroupWrapper,
     AttributesGroupListingWrapper,
-    // AddBarcodeWrapper,
-    //BarcodeListingWrapper,
+    AddBarcodeWrapper,
+    BarcodeListingWrapper,
     ViewBarcodeWrapper,
     AddCartonBoxWrapper,
     CartonBoxListingWrapper,
-    //AddCompanyWrapper,
-    //ConfigurationCompanyListingWrapper,
-    //AddDealersCategoryWrapper,
+    AddCompanyWrapper,
+    ConfigurationCompanyListingWrapper,
+    AddDealersCategoryWrapper,
     DealersCategoryListingWrapper,
     AddGRNWrapper,
     GRNListingWrapper,
     AddItemWrapper,
     ItemListingWrapper,
-    //AddLanguageWrapper,
+    AddLanguageWrapper,
     LanguageListingWrapper,
-    //Locations,
+    Locations,
     AddProductCategoryWrapper,
     ProductCategoryListingWrapper,
     AddProductGroupWrapper,
@@ -108,7 +108,7 @@ import {
     WarehousesListingWrapper,
     ViewWarehouseWrapper,
     ProfileWrappper,
-    //EditCompanyWrapper,
+    EditCompanyWrapper,
     EditAttributeWrapper,
     EditProductCategoryWrapper,
     EditAttributeGroupWrapper,
@@ -116,9 +116,8 @@ import {
     EditItemWrapper,
     EditCartonBoxWrapper,
     EditASRWrapper,
-    // EditTaxesWrapper,
-    //EditLanguageWrapper,
-    //EditDealersCategoryWrapper,
+    EditLanguageWrapper,
+    EditDealersCategoryWrapper,
     EditProductSubCategoryWrapper,
     EditVendorWrapper,
     EditDealerWrapper,
@@ -126,7 +125,7 @@ import {
     EditProductWrapper,
     EditSchemeWrapper,
     ViewPurchaseOrderWrapper,
-    //AddCbBarcodeWrapper,
+    AddCbBarcodeWrapper,
     DidManagementListingWrapper,
     OrganisationHierarchy,
     ChannelManagementListingWrapper,
@@ -214,7 +213,7 @@ import {
 } from './pages/index'
 import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
     setAccessToken,
     setDeviceId,
@@ -231,10 +230,10 @@ import InwardDealerTabsListingWrapper from './pages/inventories/inward/Dealer/In
 import InwardCustomerTabsListingWrapper from './pages/inventories/inward/Customer/InwardCustomerTabsListingWrapper'
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
 import AuthHOC from './AuthHOC'
-import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
-import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
+// import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
+// import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
 import ActionAuthHOC from './ActionAuthHoc'
-import { RootState } from './redux/store'
+// import { RootState } from './redux/store'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -250,31 +249,31 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData))
-    const { data, isLoading, isFetching } = useGetUserAccessQuery(
-        {
-            userRole: userData.userRole as string,
-        },
-        {
-            skip: !userData.userRole,
-        }
-    )
+    // const { data, isLoading, isFetching } = useGetUserAccessQuery(
+    //     {
+    //         userRole: userData.userRole as string,
+    //     },
+    //     {
+    //         skip: !userData.userRole,
+    //     }
+    // )
 
-    useEffect(() => {
-        if (!isLoading && !isFetching && data) {
-            if (data?.data !== null) {
-                dispatch(setCheckUserAccess(data?.data?.module))
-            } else {
-                dispatch(setCheckUserAccess([]))
-            }
-        }
+    // useEffect(() => {
+    //     if (!isLoading && !isFetching && data) {
+    //         if (data?.data !== null) {
+    //             dispatch(setCheckUserAccess(data?.data?.module))
+    //         } else {
+    //             dispatch(setCheckUserAccess([]))
+    //         }
+    //     }
 
-        // eslint-disable-next-line
-    }, [data, isLoading, isFetching])
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
-    
-    console.log(checkUserAccess,"checkUserAccess")
+    //     // eslint-disable-next-line
+    // }, [data, isLoading, isFetching])
+    // const { checkUserAccess } = useSelector(
+    //     (state: RootState) => state.userAccess
+    // )
+
+    // console.log(checkUserAccess,"checkUserAccess")
 
     // if (!accessToken) {
     //     return (
@@ -1200,41 +1199,6 @@ const PageRoutes = () => {
                             />
                         }
                     />
-
-                    {/* <Route
-                        path="/configurations/taxes/add"
-                        element={
-                            <ActionAuthHOC
-                                component={<AddTaxesWrapper />}
-                                moduleName={UserModuleNameTypes.tax}
-                                actionName={UserModuleActionTypes.Add}
-                                isRedirect
-                            />
-                        }
-                    />
-
-                    <Route
-                        path="/configurations/taxes"
-                        element={
-                            <AuthHOC
-                                component={<TaxesListingWrapper />}
-                                moduleName={UserModuleNameTypes.tax}
-                            />
-                        }
-                    />
-
-                    <Route
-                        path="/configurations/taxes/:id"
-                        element={
-                            <ActionAuthHOC
-                                component={<EditTaxesWrapper />}
-                                moduleName={UserModuleNameTypes.tax}
-                                actionName={UserModuleActionTypes.Edit}
-                                isRedirect
-                            />
-                        }
-                    />
-
                     <Route
                         path="/configurations/barcode"
                         element={
@@ -1256,6 +1220,7 @@ const PageRoutes = () => {
                             />
                         }
                     />
+
                     <Route
                         path="/configurations/barcode/carton-box/add"
                         element={
@@ -1362,7 +1327,7 @@ const PageRoutes = () => {
                         path="/configurations/location"
                         element={<Locations />}
                     />
-                    {/* <Route path="/disposition" element={<Disposition />} /> */}
+
                     <Route
                         path="/configurations/dealers-category"
                         element={

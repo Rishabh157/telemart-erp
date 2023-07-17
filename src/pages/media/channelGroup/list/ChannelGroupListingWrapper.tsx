@@ -24,7 +24,11 @@ import MediaLayout from 'src/pages/media/MediaLayout'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -32,7 +36,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/channelGroupSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const ChannelGroupListingWrapper = () => {
     const navigate = useNavigate()
@@ -45,6 +48,9 @@ const ChannelGroupListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const { page, rowsPerPage, searchValue, items } = channelGroupState
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     const dispatch = useDispatch<AppDispatch>()
     const columns: columnTypes[] = [
         {
@@ -139,7 +145,12 @@ const ChannelGroupListingWrapper = () => {
             <MediaLayout>
                 <div className="h-full">
                     <ChannelGroupListing
-                        columns={columns}
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.channelGroup,
+                            UserModuleActionTypes.List
+                        )}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />
