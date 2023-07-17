@@ -25,13 +25,13 @@ const ActionAuthHOC = ({
     const navigate = useNavigate()
     const accessToken = localStorage.getItem('authToken')
 
-    const navigation = useNavigate()
+    // const navigate = useNavigate()
     const { pathname } = useLocation()
     useEffect(() => {
         if (accessToken) {
-            navigation(`${pathname ? pathname : '/dashboard'}`)
+            navigate(`${pathname ? pathname : '/dashboard'}`)
         }
-    }, [accessToken, navigation, pathname])
+    }, [accessToken, navigate, pathname])
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
