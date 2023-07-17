@@ -295,6 +295,10 @@ const PageRoutes = () => {
         <>
             <BrowserRouter>
                 <Routes>
+                    <Route
+                        path="media/caller-page/"
+                        element={<CallerPageWrapper />}
+                    />
                     <Route path="/" element={<Auth />} />
                     <Route path="*" element={<PageNotFound />} />
                     <Route
