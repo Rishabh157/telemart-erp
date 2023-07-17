@@ -153,14 +153,13 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
                             {/* Password */}
-                            <div className="mt-2">
                                 <ATMTextField
                                     name="password"
                                     type="password"
                                     value={values.password}
                                     label="Password"
                                     placeholder="Password"
-                                    className="rounded "
+                                    className="rounded mt-2"
                                     onChange={(e) =>
                                         handleSetFieldValue(
                                             'password',
@@ -168,7 +167,6 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                         )
                                     }
                                 />
-                            </div>
                             {/* Mobile */}
                             <ATMTextField
                                 name="mobile"

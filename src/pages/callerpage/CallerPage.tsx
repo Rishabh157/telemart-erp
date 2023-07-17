@@ -777,7 +777,7 @@ const CallerPage: React.FC<Props> = ({
                                             handlePinCode(e?.value || '')
                                             setFieldValue(
                                                 'pincodeLabel',
-                                                e?.label || ''
+                                                e?.label || '' || ''
                                             )
                                         }}
                                     />
@@ -817,11 +817,12 @@ const CallerPage: React.FC<Props> = ({
                         options={dropdownOptions.stateOptions || []}
                         isValueWithLable
                         onChange={(e) => {
-                            setFieldValue('stateId', e.value)
-                            setFieldValue('stateLabel', e.label)
+                            console.log(e, 'e')
+                            setFieldValue('stateId', e?.value || '')
+                            setFieldValue('stateLabel', e?.label || '')
                             setFieldValue(
                                 'autoFillingShippingAddress',
-                                `${values.pincodeLabel}\n${e.label}`
+                                `${values?.pincodeLabel}\n${e?.label || ''}`
                             )
                         }}
                     />
@@ -841,11 +842,11 @@ const CallerPage: React.FC<Props> = ({
                             // setFieldValue('zonalManagerId', e)
                             // setFieldValue(
                             //     'stateLabel',
-                            //     e.label
+                            //     e?.label|| ''
                             // )
                             // setFieldValue(
                             //     'autoFillingShippingAddress',
-                            //     `${values.pincodeLabel}\n${values.stateLabel}\n${e.label}`
+                            //     `${values.pincodeLabel}\n${values.stateLabel}\n${e?.label|| ''}`
                             // )
                         }}
                     />
@@ -864,11 +865,13 @@ const CallerPage: React.FC<Props> = ({
                         options={dropdownOptions.areaOptions || []}
                         isValueWithLable
                         onChange={(e) => {
-                            setFieldValue('areaId', e.value)
-                            setFieldValue('areaLabel', e.label)
+                            setFieldValue('areaId', e?.value || '' )
+                            setFieldValue('areaLabel', e?.label || '')
                             setFieldValue(
                                 'autoFillingShippingAddress',
-                                `${values.pincodeLabel}\n${values.stateLabel}\n${e.label}`
+                                `${values.pincodeLabel}\n${
+                                    values.stateLabel
+                                }\n${e?.label || ''}`
                             )
                         }}
                     />
@@ -884,11 +887,13 @@ const CallerPage: React.FC<Props> = ({
                         options={dropdownOptions.districtOptions || []}
                         isValueWithLable
                         onChange={(e) => {
-                            setFieldValue('districtId', e.value)
-                            setFieldValue('districtLabel', e.label)
+                            setFieldValue('districtId', e?.value || '' )
+                            setFieldValue('districtLabel', e?.label || '')
                             setFieldValue(
                                 'autoFillingShippingAddress',
-                                `${values.pincodeLabel}\n${values.stateLabel}\n${values.areaLabel}\n${e.label}`
+                                `${values.pincodeLabel}\n${
+                                    values.stateLabel
+                                }\n${values.areaLabel}\n${e?.label || ''}`
                             )
                         }}
                     />
@@ -905,11 +910,15 @@ const CallerPage: React.FC<Props> = ({
                         options={dropdownOptions.tehsilOptions || []}
                         isValueWithLable
                         onChange={(e) => {
-                            setFieldValue('tehsilId', e.value)
-                            setFieldValue('tehsilLabel', e.label)
+                            setFieldValue('tehsilId', e?.value || '' )
+                            setFieldValue('tehsilLabel', e?.label || '')
                             setFieldValue(
                                 'autoFillingShippingAddress',
-                                `${values.pincodeLabel}\n${values.stateLabel}\n${values.areaLabel}\n${values.districtLabel}\n${e.label}`
+                                `${values.pincodeLabel}\n${
+                                    values.stateLabel
+                                }\n${values.areaLabel}\n${
+                                    values.districtLabel
+                                }\n${e?.label || ''}`
                             )
                         }}
                     />
