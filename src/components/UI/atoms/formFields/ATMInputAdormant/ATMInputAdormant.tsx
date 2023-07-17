@@ -33,6 +33,7 @@ export interface ATMInputAdormantPropTypes {
     disabled?: boolean
     readonly?: boolean
     size?: 'small' | 'medium' | 'large'
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
 const ATMInputAdormant = ({
@@ -51,6 +52,7 @@ const ATMInputAdormant = ({
         position: 'start',
     },
     size = 'small',
+    onKeyDown,
 }: ATMInputAdormantPropTypes) => {
     const [isFocus, setIsFocus] = useState(false)
 
@@ -103,6 +105,7 @@ const ATMInputAdormant = ({
                     onBlur={() => {
                         setIsFocus(false)
                     }}
+                    onKeyDown={onKeyDown}
                 />
 
                 {adormantProps.position === 'end' && (

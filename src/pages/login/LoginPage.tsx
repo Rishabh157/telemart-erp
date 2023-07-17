@@ -131,6 +131,12 @@ const LoginPage = ({ pathName }: any) => {
                                 onChange={(e) => {
                                     setPassword(e.target.value)
                                 }}
+                                onKeyDown={(e) => {
+                                    if(e?.key === 'Enter'){
+                                        setErrorInitiate(true)
+                                        handleLogin()
+                                    }
+                                }}
                                 label="Password"
                                 className="bg-slate-100 focus:bg-white h-[50px]"
                                 adormant={
