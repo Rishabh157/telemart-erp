@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
@@ -128,6 +129,22 @@ export const isCheckAuthorizedModuleAction = (
         return modulesActionkey?.actionName
     })
     return moduleAction?.includes(actionName)
+}
+
+export const showAllowedTabs = (
+    checkUserAccess: userAccesTypes,
+    moduleName: string,
+    allTabs: any
+) => {
+    let modules = checkUserAccess?.modules?.find(
+        (modules: ModulesTypes) => modules.moduleName === moduleName
+    )
+
+    const commonObjects = allTabs.filter((objA: any) =>
+        modules?.moduleAction.some((objB: any) => objB.actionName === objA.name)
+    )
+
+    return commonObjects
 }
 
 export const getAllowedAuthorizedColumns = (
