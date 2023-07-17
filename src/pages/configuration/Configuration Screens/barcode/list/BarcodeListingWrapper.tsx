@@ -46,6 +46,8 @@ import ProductGroupListing from './components/BarcodeGroup/ProductGroupBarcodeLi
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 export type Tabs = {
@@ -53,6 +55,7 @@ export type Tabs = {
     icon: IconType
     active?: boolean
     index: number
+    name?: string
 }
 export type barcodecardType = {
     _id?: string
@@ -68,7 +71,9 @@ const BarcodeListingWrapper = () => {
         barcodeState
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
-
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
     // const navigate = useNavigate()
 
     const { data, isFetching, isLoading } = useGetBarcodeQuery({
@@ -265,23 +270,32 @@ const BarcodeListingWrapper = () => {
             index: 0,
             label: 'Product Barcode',
             icon: MdOutbond,
+            name: 'PRODUCT_BARCODE',
         },
         {
             label: 'Carton Box Barcode',
             icon: MdOutbond,
             index: 1,
+            name: 'CARTON_BOX_BARCODE',
         },
         {
             label: 'Barcode Group',
             icon: MdOutbond,
             index: 2,
+            name: 'BARCODE_GROUP',
         },
     ]
+
+    const allowedTabs = showAllowedTabs(
+        checkUserAccess,
+        UserModuleNameTypes.barcode,
+        tabs
+    )
     return (
         <>
             <ConfigurationLayout>
                 <div className="flex shadow rounded h-[45px] items-center gap-3 bg-white w-full overflow-auto px-3 ">
-                    {tabs.map((tab, tabIndex) => {
+                    {allowedTabs?.map((tab: any, tabIndex: number) => {
                         const { label, index } = tab
                         return (
                             <button

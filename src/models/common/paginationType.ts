@@ -32,4 +32,5 @@ export type Tabs = {
     label: string
     icon: IconType
     path?: string
+    name?: string
 }

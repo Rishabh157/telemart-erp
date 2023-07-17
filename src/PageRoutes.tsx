@@ -397,7 +397,7 @@ const PageRoutes = () => {
                         path="media/caller-page"
                         element={<CallerPageWrapper />}
                     />
-                    <Route
+                    {/* <Route
                         path="/orders"
                         element={
                             <ActionAuthHOC
@@ -405,7 +405,7 @@ const PageRoutes = () => {
                                 moduleName={UserModuleNameTypes.order}
                             />
                         }
-                    />
+                    /> */}
 
                     <Route
                         path="/orders"
@@ -413,6 +413,8 @@ const PageRoutes = () => {
                             <ActionAuthHOC
                                 component={<Order />}
                                 moduleName={UserModuleNameTypes.order}
+                                actionName={UserModuleActionTypes.List}
+                                isRedirect
                             />
                         }
                     >
