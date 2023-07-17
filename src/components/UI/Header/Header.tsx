@@ -59,6 +59,7 @@ const Header = () => {
                         userName,
                         companyId,
                         userType,
+                        userRole,
                     } = updateCompanyInfo?.data?.data
                     let userData = {
                         userId: _id,
@@ -68,6 +69,7 @@ const Header = () => {
                         userName: userName,
                         companyId: companyId,
                         role: userType,
+                        userRole:userRole,
                     }
                     localStorage.setItem('userData', JSON.stringify(userData))
                     dispatch(setUserData(userData))

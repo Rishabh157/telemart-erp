@@ -1,6 +1,7 @@
-import { CircularProgress } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { LoginPage } from './pages'
 import { RootState } from './redux/store'
 import { isCheckAuthorizedModule } from './userAccess/getAuthorizedModules'
 // import {
@@ -18,6 +19,15 @@ type Props = {
 }
 
 const AuthHOC = ({ component, moduleName = '' }: Props) => {
+    const accessToken = localStorage.getItem('authToken')
+    const navigate = useNavigate()
+    const { pathname } = useLocation()
+    useEffect(() => {
+        if (accessToken) {
+            navigate(`${pathname ? pathname : '/dashboard'}`)
+        }
+    }, [accessToken, navigate, pathname])
+
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
@@ -29,14 +39,18 @@ const AuthHOC = ({ component, moduleName = '' }: Props) => {
 
     return (
         <>
-            {isAuthorized ? (
-                <>{component}</>
+            {accessToken ? (
+                isAuthorized ? (
+                    <>{component}</>
+                ) : (
+                    <>
+                        {/* <div className="h-[100vh] w-full flex items-center justify-center bg-white"> */}
+                        {navigate(`/dashboard`)}
+                        {/* </div> */}
+                    </>
+                )
             ) : (
-                <>
-                    <div className="h-[100vh] w-full flex items-center justify-center bg-white">
-                        <CircularProgress />
-                    </div>
-                </>
+                <LoginPage pathName={pathname} />
             )}
         </>
     )
