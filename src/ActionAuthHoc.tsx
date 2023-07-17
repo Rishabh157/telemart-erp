@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { LoginPage } from './pages'
 import { RootState } from './redux/store'
 import { isCheckAuthorizedModuleAction } from './userAccess/getAuthorizedModules'
 // import {
@@ -22,7 +23,15 @@ const ActionAuthHOC = ({
     isRedirect = false,
 }: Props) => {
     const navigate = useNavigate()
-    // console.log(actionName, 'actionNameactionNameactionNameactionName')
+    const accessToken = localStorage.getItem('authToken')
+
+    const navigation = useNavigate()
+    const { pathname } = useLocation()
+    useEffect(() => {
+        if (accessToken) {
+            navigation(`${pathname ? pathname : '/dashboard'}`)
+        }
+    }, [accessToken, navigation, pathname])
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
@@ -38,11 +47,15 @@ const ActionAuthHOC = ({
 
     return (
         <>
-            {isAuthorized ? (
-                <>{component}</>
-            ) : isRedirect ? (
-                navigate('/dashboard')
-            ) : null}
+            {accessToken ? (
+                isAuthorized ? (
+                    <>{component}</>
+                ) : isRedirect ? (
+                    navigate('/dashboard')
+                ) : null
+            ) : (
+                <LoginPage pathName={pathname} />
+            )}
         </>
     )
 }

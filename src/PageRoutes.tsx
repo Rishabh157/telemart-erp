@@ -42,7 +42,7 @@ import {
     AttributesListingWrapper,
     AddAttributeGroupWrapper,
     AttributesGroupListingWrapper,
-   // AddBarcodeWrapper,
+    // AddBarcodeWrapper,
     //BarcodeListingWrapper,
     ViewBarcodeWrapper,
     AddCartonBoxWrapper,
@@ -214,7 +214,7 @@ import {
 } from './pages/index'
 import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     setAccessToken,
     setDeviceId,
@@ -234,6 +234,7 @@ import AuthHOC from './AuthHOC'
 import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
 import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
 import ActionAuthHOC from './ActionAuthHoc'
+import { RootState } from './redux/store'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -269,27 +270,33 @@ const PageRoutes = () => {
 
         // eslint-disable-next-line
     }, [data, isLoading, isFetching])
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+    
+    console.log(checkUserAccess,"checkUserAccess")
 
-    if (!accessToken && window.location.pathname !== '/') {
-        return (
-            <>
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="*" element={<Auth />} />
-                        <Route
-                            path="media/caller-page/"
-                            element={<CallerPageWrapper />}
-                        />
-                    </Routes>
-                </BrowserRouter>
-            </>
-        )
-    }
+    // if (!accessToken) {
+    //     return (
+    //         <>
+    //             <BrowserRouter>
+    //                 <Routes>
+    //                     {/* <Route path="*" element={<Auth />} /> */}
+    //                     <Route
+    //                         path="media/caller-page/"
+    //                         element={<CallerPageWrapper />}
+    //                     />
+    //                 </Routes>
+    //             </BrowserRouter>
+    //         </>
+    //     )
+    // }
 
     return (
         <>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/" element={<Auth />} />
                     <Route path="*" element={<PageNotFound />} />
                     <Route
                         path="warehouse/view/:id"

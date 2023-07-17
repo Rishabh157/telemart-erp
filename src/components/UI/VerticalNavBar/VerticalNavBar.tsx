@@ -14,10 +14,12 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { NavItemType } from 'src/navigation'
+import { setCheckUserAccess } from 'src/redux/slices/access/userAcessSlice'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
+import { useGetUserAccessQuery } from 'src/services/useraccess/UserAccessServices'
 import { isCheckAuthorizedModule } from 'src/userAccess/getAuthorizedModules'
 
 // |-- Types --|
@@ -36,15 +38,42 @@ const VerticalNavBar = ({
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { customized, userData } = useSelector(
+        (state: RootState) => state?.auth
+    )
+    const { data, isLoading, isFetching } = useGetUserAccessQuery(
+        {
+            userRole: userData?.userRole as string ,
+        },
+        {
+            skip: !userData?.userRole,
+        }
+    )
+
+    useEffect(() => {
+        if (!isLoading && !isFetching && data) {
+            if (data?.data !== null) {
+                dispatch(setCheckUserAccess(data?.data?.module))
+            } else {
+                dispatch(setCheckUserAccess([]))
+            }
+        }
+
+        // eslint-disable-next-line
+    }, [data, isLoading, isFetching])
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
+    )
+    console.log(
+        checkUserAccess,
+        'checkUserAccesscheckUserAccesscheckUserAccess'
     )
     //const { userData } = useSelector((state: RootState) => state?.auth)
     // const userAccessSiedeBar =
 
-    const { customized, userData } = useSelector(
-        (state: RootState) => state?.auth
-    )
+    // const { customized, userData } = useSelector(
+    //     (state: RootState) => state?.auth
+    // )
     const AlertText =
         'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
     useEffect(() => {
@@ -114,6 +143,7 @@ const VerticalNavBar = ({
             <div className="px-3 py-5 flex flex-col gap-1">
                 {navigation
                     ?.filter((permissionRoute: NavItemType) => {
+                        console.log(permissionRoute, 'permissionRoute')
                         return userData?.userRole === 'ADMIN'
                             ? true
                             : isCheckAuthorizedModule(
@@ -122,6 +152,7 @@ const VerticalNavBar = ({
                               )
                     })
                     .map((navItem, navIndex) => {
+                        console.log('first')
                         return (
                             <div
                                 key={navIndex}
