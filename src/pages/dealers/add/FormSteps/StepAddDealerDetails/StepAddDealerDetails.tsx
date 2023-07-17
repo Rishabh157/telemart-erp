@@ -118,6 +118,7 @@ const StepAddDealerDetails = ({
                                         key={name}
                                         name={name}
                                         value={values[name]}
+                                       
                                         onChange={(e) => {
                                             handleSetFieldValue(
                                                 name,
@@ -126,7 +127,7 @@ const StepAddDealerDetails = ({
                                         }}
                                         label={label}
                                         placeholder={placeholder}
-                                        className="shadow bg-white rounded"
+                                        className="shadow bg-white rounded mt-2"
                                         isSubmitting={isSubmitting}
                                     />
                                 </div>

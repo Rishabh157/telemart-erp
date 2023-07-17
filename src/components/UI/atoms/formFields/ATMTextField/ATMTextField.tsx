@@ -51,7 +51,7 @@ const ATMTextField = ({
     className = `shadow bg-white rounded ${label && 'mt-2'} `,
     required,
     onBlur,
-    autoFocus,
+    autoFocus = false,
     onInput,
     size = 'small',
     type = 'text',
@@ -112,6 +112,7 @@ const ATMTextField = ({
                 </div>
 
                 <input
+                    autoFocus={autoFocus}
                     name={name}
                     type={visibility}
                     value={value}
@@ -132,7 +133,7 @@ const ATMTextField = ({
                 />
             </div>
             {type === 'password' ? (
-                <div className="absolute top-[26px] right-2 mt-2">
+                <div className="absolute top-[26px] right-2 mt-4">
                     {visibility === 'text' ? (
                         <AiFillEye
                             size={18}

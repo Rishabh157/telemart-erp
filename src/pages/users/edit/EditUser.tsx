@@ -161,6 +161,7 @@ const EditUser = ({ formikProps, apiStatus }: Props) => {
                                 value={values.password}
                                 label="Password"
                                 placeholder="Password"
+                                className="rounded mt-2"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'password',
