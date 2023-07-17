@@ -26,37 +26,45 @@ import { useGetPaginationVendorsQuery } from 'src/services/VendorServices'
 // |-- Redux --|
 import { setAllItems } from 'src/redux/slices/vendorSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
+import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const tabsData = [
     {
         label: 'General Information',
         icon: BsArrowRepeat,
         path: 'general-information',
+        name: 'GENERAL_INFORMATION',
     },
     {
         label: 'PO',
         icon: AiOutlineRise,
         path: 'purchase-order',
+        name: 'PURCHASE_ORDER',
     },
     {
         label: 'Warehouse',
         icon: MdOutlinePeopleAlt,
         path: 'warehouse',
+        name: 'VENDOR_WAREHOUSE',
     },
     {
         label: "RTV's",
         icon: MdOutlinePeopleAlt,
         path: 'return-to-vendor',
+        name: 'RETURN_TO_VENDOR',
     },
     {
         label: 'Ledger',
         icon: MdOutlinePeopleAlt,
         path: 'ledger',
+        name: 'VENDOR_LEDGER',
     },
     {
         label: 'Activity',
         icon: MdOutlinePeopleAlt,
         path: 'activities',
+        name: 'VENDOR_ACTIVITY',
     },
 ]
 
@@ -93,6 +101,15 @@ const ViewVendor = () => {
     const [searchValue, setSearchValue] = useState('')
     const { allItems, selectedItem }: any = useSelector(
         (state: RootState) => state?.vendor
+    )
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+
+    const allowedTabs = showAllowedTabs(
+        checkUserAccess,
+        UserModuleNameTypes.vendor,
+        tabsData
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
@@ -136,7 +153,7 @@ const ViewVendor = () => {
                 />
             }
             listData={listData}
-            tabs={tabsData}
+            tabs={allowedTabs}
             renderListItem={(item: any) => (
                 <ListItemCard item={item} key={item._id} />
             )}
