@@ -31,7 +31,6 @@ interface tabsProps {
 }
 
 const ViewOrder = () => {
-    console.log('call')
     const tabs: tabsProps[] = [
         {
             label: 'All',
@@ -113,7 +112,6 @@ const ViewOrder = () => {
         UserModuleNameTypes.order,
         tabs
     )
-    console.log(allowedTabs)
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Orders',
