@@ -54,6 +54,72 @@
                     ]
                 },
                 {
+                    "actionId": "vendorsActionViewId",
+                    "actionUrl": "/vendors/:id/general-information",
+                    "actionName": "VIEW",
+                    "fields": []
+                },
+                {
+                    "actionId": "vendorGenrealInformationId",
+                    "actionUrl": "/vendors/:id/general-information",
+                    "actionName": "GENERAL_INFORMATION",
+                    "fields": []
+                },
+                {
+                    "actionId": "vendorPurchaseOrderId",
+                    "actionUrl": "/vendors/:id/purchase-order",
+                    "actionName": "PURCHASE_ORDER",
+                    "fields": []
+                },
+                {
+                    "actionId": "vendorPurchaseOrderActionAddId",
+                    "actionUrl": "/vendors/:id/purchase-order/add",
+                    "actionName": "PURCHASE_ORDER_ADD",
+                    "fields": []
+                },
+                {
+                    "actionId": "vendorWareHouseId",
+                    "actionUrl": "/vendors/:id/warehouse",
+                    "actionName": "VENDOR_WAREHOUSE",
+                    "fields": []
+                },
+                {
+                    "actionId": "vendorWareHouseActionAddId",
+                    "actionUrl": "/vendors/:id/warehouse/add",
+                    "actionName": "VENDOR_WAREHOUSE_ADD",
+                    "fields": []
+                },
+                {
+                    "actionId": "vendorReturnToVendorId",
+                    "actionUrl": "/vendors/:id/return-to-vendor",
+                    "actionName": "RETURN_TO_VENDOR",
+                    "fields": []
+                },
+                {
+                    "actionId": "vendorLedgerId",
+                    "actionUrl": "/vendors/:id/ledger",
+                    "actionName": "VENDOR_LEDGER",
+                    "fields": []
+                },
+                {
+                    "actionId": "vendorLedgerActionCrAddId",
+                    "actionUrl": "",
+                    "actionName": "VENDOR_LEDGER_CREDIT_ADD",
+                    "fields": []
+                },
+                {
+                    "actionId": "vendorLedgerActionDrAddId",
+                    "actionUrl": "",
+                    "actionName": "VENDOR_LEDGER_DEBIT_ADD",
+                    "fields": []
+                },
+                {
+                    "actionId": "vendorActivityId",
+                    "actionUrl": "/vendors/:id/activities",
+                    "actionName": "VENDOR_ACTIVITY",
+                    "fields": []
+                },
+                {
                     "actionId": "vendorsActionAddId",
                     "actionUrl": "/vendors/add-vendor",
                     "actionName": "ADD",
@@ -123,6 +189,66 @@
                             "fieldValue": "isActive"
                         }
                     ]
+                },
+                {
+                    "actionId": "dealerActionViewId",
+                    "actionUrl": "/dealers/:id",
+                    "actionName": "VIEW",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerActionGeneralInformationId",
+                    "actionUrl": "/dealers/:id/general-information",
+                    "actionName": "GENERAL_INFORMATION",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerActionDealerWarehouseId",
+                    "actionUrl": "/dealers/:id/warehouse",
+                    "actionName": "DEALER_WAREHOUSE",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerWarehouseActionAddId",
+                    "actionUrl": "",
+                    "actionName": "DEALER WAREHOUSE ADD",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerActionSaleOrderId",
+                    "actionUrl": "/dealers/:id/sale-order",
+                    "actionName": "DEALER_SALE_ORDER",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerActionLedgerId",
+                    "actionUrl": "/dealers/:id/ledger",
+                    "actionName": "DEALER_LEDGER",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerActionOrderLedgerId",
+                    "actionUrl": "/dealers/:id/order-ledger",
+                    "actionName": "DEALER_ORDER_LEDGER",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerActionActivityId",
+                    "actionUrl": "/dealers/:id/activities",
+                    "actionName": "DEALER_ACTIVITY",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerActionPinCodeId",
+                    "actionUrl": "/dealers/:id/pincode",
+                    "actionName": "DEALER_PINCODE",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerActionScheme",
+                    "actionUrl": "/dealers/:id/scheme",
+                    "actionName": "DEALER_SCHEME",
+                    "fields": []
                 },
                 {
                     "actionId": "dealerActionAddId",
@@ -248,6 +374,13 @@
                         }
                     ]
                 },
+                {
+                    "actionId": "warehouseActionViewId",
+                    "actionUrl": "/view/:id/inventories",
+                    "actionName": "VIEW",
+                    "fields": []
+                },
+
                 {
                     "actionId": "warehouseActionAddId",
                     "actionUrl": "/warehouse/add",

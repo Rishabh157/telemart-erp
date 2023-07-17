@@ -75,10 +75,7 @@ const VerticalNavBar = ({
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    console.log(
-        checkUserAccess,
-        'checkUserAccesscheckUserAccesscheckUserAccess'
-    )
+
     //const { userData } = useSelector((state: RootState) => state?.auth)
     // const userAccessSiedeBar =
 
@@ -192,7 +189,6 @@ const VerticalNavBar = ({
             <div className="px-3 py-5 flex flex-col gap-1">
                 {navigation
                     ?.filter((permissionRoute: NavItemType) => {
-                        console.log(permissionRoute, 'permissionRoute')
                         return userData?.userRole === 'ADMIN' ||
                             permissionRoute.name ===
                                 UserModuleNameTypes.dashboard
@@ -203,7 +199,6 @@ const VerticalNavBar = ({
                               )
                     })
                     .map((navItem, navIndex) => {
-                        console.log('first')
                         return (
                             <div
                                 key={navIndex}
