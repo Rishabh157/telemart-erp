@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -230,9 +230,10 @@ import InwardDealerTabsListingWrapper from './pages/inventories/inward/Dealer/In
 import InwardCustomerTabsListingWrapper from './pages/inventories/inward/Customer/InwardCustomerTabsListingWrapper'
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
 import AuthHOC from './AuthHOC'
-import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
-import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
+// import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
+// import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
 import ActionAuthHOC from './ActionAuthHoc'
+// import { RootState } from './redux/store'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -248,47 +249,53 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData))
-    const { data, isLoading, isFetching } = useGetUserAccessQuery(
-        {
-            userRole: userData.userRole as string,
-        },
-        {
-            skip: !userData.userRole,
-        }
-    )
+    // const { data, isLoading, isFetching } = useGetUserAccessQuery(
+    //     {
+    //         userRole: userData.userRole as string,
+    //     },
+    //     {
+    //         skip: !userData.userRole,
+    //     }
+    // )
 
-    useEffect(() => {
-        if (!isLoading && !isFetching && data) {
-            if (data?.data !== null) {
-                dispatch(setCheckUserAccess(data?.data?.module))
-            } else {
-                dispatch(setCheckUserAccess([]))
-            }
-        }
+    // useEffect(() => {
+    //     if (!isLoading && !isFetching && data) {
+    //         if (data?.data !== null) {
+    //             dispatch(setCheckUserAccess(data?.data?.module))
+    //         } else {
+    //             dispatch(setCheckUserAccess([]))
+    //         }
+    //     }
 
-        // eslint-disable-next-line
-    }, [data, isLoading, isFetching])
+    //     // eslint-disable-next-line
+    // }, [data, isLoading, isFetching])
+    // const { checkUserAccess } = useSelector(
+    //     (state: RootState) => state.userAccess
+    // )
 
-    if (!accessToken && window.location.pathname !== '/') {
-        return (
-            <>
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="*" element={<Auth />} />
-                        <Route
-                            path="media/caller-page/"
-                            element={<CallerPageWrapper />}
-                        />
-                    </Routes>
-                </BrowserRouter>
-            </>
-        )
-    }
+    // console.log(checkUserAccess,"checkUserAccess")
+
+    // if (!accessToken) {
+    //     return (
+    //         <>
+    //             <BrowserRouter>
+    //                 <Routes>
+    //                     {/* <Route path="*" element={<Auth />} /> */}
+    //                     <Route
+    //                         path="media/caller-page/"
+    //                         element={<CallerPageWrapper />}
+    //                     />
+    //                 </Routes>
+    //             </BrowserRouter>
+    //         </>
+    //     )
+    // }
 
     return (
         <>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/" element={<Auth />} />
                     <Route path="*" element={<PageNotFound />} />
                     <Route
                         path="warehouse/view/:id"
@@ -1320,7 +1327,7 @@ const PageRoutes = () => {
                         path="/configurations/location"
                         element={<Locations />}
                     />
-                    
+
                     <Route
                         path="/configurations/dealers-category"
                         element={

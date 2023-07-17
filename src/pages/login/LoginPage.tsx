@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { BiShow, BiHide } from 'react-icons/bi'
 import { useDispatch } from 'react-redux'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMInputAdormant from '../../components/UI/atoms/formFields/ATMInputAdormant/ATMInputAdormant'
@@ -34,7 +34,7 @@ const LoginPage = ({ pathName }: any) => {
     const [apiError, setApiError] = useState('')
     const [errorInitiate, setErrorInitiate] = useState(false)
     const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const [login, loginInfo] = useLoginMutation()
     const handleLogin = () => {
         if (userName && password) {
@@ -73,7 +73,8 @@ const LoginPage = ({ pathName }: any) => {
                                 res?.data?.data?.refreshToken
                             )
 
-                            window.location.pathname = `${pathName}`
+                            // window.location.pathname = `${pathName}`
+                            navigate(`${pathName}`)
                             showToast('success', 'Login successfull')
                         } else {
                             setApiError(res?.data?.message)
