@@ -76,7 +76,6 @@ const UserAcess = ({
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
-    console.log(userAccessItems, 'userAccessItems')
     const { modules: moduleList } = userAccessItems
     const handleUserModuleAccess = (
         module: ModulesTypes,
@@ -355,9 +354,9 @@ const UserAcess = ({
                                                                             className="select-none"
                                                                             htmlFor={`${actionsItems?.actionId}`}
                                                                         >
-                                                                            {
+                                                                            {getReplaceUnderScoreToSpace(
                                                                                 actionsItems.actionName
-                                                                            }
+                                                                            )}
                                                                         </label>
                                                                         {HandleShowFiledValueModal(
                                                                             actionsItems.actionName
@@ -374,7 +373,7 @@ const UserAcess = ({
                                                                                         <BsFillExclamationCircleFill
                                                                                             fill="#1A1110"
                                                                                             size={
-                                                                                                18
+                                                                                                16
                                                                                             }
                                                                                         />
                                                                                     }

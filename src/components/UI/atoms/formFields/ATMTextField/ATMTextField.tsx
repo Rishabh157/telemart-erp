@@ -51,7 +51,7 @@ const ATMTextField = ({
     className = `shadow bg-white rounded ${label && 'mt-2'} `,
     required,
     onBlur,
-    autoFocus,
+    autoFocus = false,
     onInput,
     size = 'small',
     type = 'text',
@@ -112,6 +112,7 @@ const ATMTextField = ({
                 </div>
 
                 <input
+                    autoFocus={autoFocus}
                     name={name}
                     type={visibility}
                     value={value}

@@ -107,6 +107,7 @@ const LoginPage = ({ pathName }: any) => {
                     <div className="mt-5 flex flex-col gap-7">
                         <div className="">
                             <ATMTextField
+                                autoFocus
                                 name=""
                                 value={userName}
                                 onChange={(e) => {
