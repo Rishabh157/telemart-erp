@@ -18,6 +18,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import {
+    UserModuleNameTypes,
+    UserModuleOtherActionTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Redux --|
@@ -61,8 +65,8 @@ const VendorWarehouseListing = ({
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
                 <ActionAuthHOC
-                    moduleName="WAREHOUSE"
-                    actionName="ADD"
+                    moduleName={UserModuleNameTypes.vendor}
+                    actionName={UserModuleOtherActionTypes.vendorWarehouseAdd}
                     component={
                         <button
                             onClick={() =>

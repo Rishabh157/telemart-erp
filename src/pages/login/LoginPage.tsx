@@ -50,8 +50,6 @@ const LoginPage = ({ pathName }: any) => {
                     .then(async (res) => {
                         if ('data' in res) {
                             if (res?.data?.status) {
-                                console.log(res?.data?.status)
-
                                 let userData = {
                                     userId: res?.data?.data?.userId,
                                     fullName: res?.data?.data?.fullName,
@@ -101,12 +99,6 @@ const LoginPage = ({ pathName }: any) => {
                         // Handle any error that occurs during login request
                     })
 
-                //   const userDataLs = localStorage.getItem('userData');
-                //   const userData = userDataLs ? JSON.parse(userDataLs) : null;
-                //   if (userData) {
-                //     console.log('324354354');
-                // navigate('/dashboard'); // Navigating to "/dashboard" if userData exists in localStorage
-                //   }
             } catch (error) {
                 // Handle any other errors that occur
             }

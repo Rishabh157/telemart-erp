@@ -247,9 +247,9 @@ const PageRoutes = () => {
     const refreshToken = localStorage.getItem('refreshToken')
     const userDataLs = localStorage.getItem('userData')
     const userData = JSON?.parse(userDataLs as string)
-    dispatch(setAccessToken(accessToken ? accessToken : ''))
-    dispatch(setRefreshToken(refreshToken ? refreshToken : ''))
-    dispatch(setDeviceId(deviceId ? deviceId : ''))
+    dispatch(setAccessToken(accessToken))
+    dispatch(setRefreshToken(refreshToken))
+    dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData ? userData : null))
 
     // const { data, isLoading, isFetching } = useGetUserAccessQuery(
@@ -408,22 +408,14 @@ const PageRoutes = () => {
                         />
                     </Route>
 
-                    {/* <Route
-                        path="/orders"
-                        element={
-                            <ActionAuthHOC
-                                component={<OrderListing />}
-                                moduleName={UserModuleNameTypes.order}
-                            />
-                        }
-                    /> */}
-
                     <Route
                         path="/orders"
                         element={
                             <ActionAuthHOC
                                 component={<Order />}
                                 moduleName={UserModuleNameTypes.order}
+                                actionName={UserModuleActionTypes.List}
+                                isRedirect
                             />
                         }
                     >

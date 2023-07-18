@@ -22,14 +22,22 @@ import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
-import { setUserData } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { setDeviceId, setUserData } from 'src/redux/slices/authSlice'
 
 const Header = () => {
+    const dispatch = useDispatch<AppDispatch>()
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
     const [isShowNotification, setIsShowNotification] = useState(false)
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    const deviceIditem = localStorage.getItem('device-id') || ''
 
+    useEffect(() => {
+        dispatch(setDeviceId(deviceIditem))
+    }, [deviceIditem, dispatch])
+    const { userData, deviceId } = useSelector(
+        (state: RootState) => state?.auth
+    )
+    console.log(deviceId, 'deviceId')
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
         useState(true)
     const [company, setCompany] = useState(userData?.companyId || '')
@@ -38,10 +46,10 @@ const Header = () => {
     const [siteMode, setSiteMode] = useState(themeColor)
     const [companyName, setCompanyName] = useState('')
     const { data, isFetching, isLoading } = useGetAllCompaniesQuery('', {
-        skip: !userData?.companyId,
+        skip: !deviceId,
     })
     useEffect(() => {
-        if (!isLoading && !isFetching ) {
+        if (!isLoading && !isFetching) {
             if (data?.data?.status) {
                 const companyName = data?.data?.find(
                     (com: any) => com?._id === company
@@ -54,7 +62,7 @@ const Header = () => {
     }, [data, isLoading, isFetching])
 
     const [updaeCompany] = useUpdateCompanyByAdminMutation()
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const handleUpdate = (companyId: string) => {
         if (!companyId) return
         const update = {
@@ -91,7 +99,7 @@ const Header = () => {
             }
         )
     }
-    
+
     return (
         <div
             className={`rid grid-cols-2 w-full h-full shadow-lg borde bg-white`}

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
 import { BsArrowRepeat } from 'react-icons/bs'
+import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { RootState } from 'src/redux/store'
+import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
 
 type Props = {}
 interface tabsProps {
@@ -11,38 +15,54 @@ interface tabsProps {
     icon: IconType
     path: string
 }
-const tabs = [
-    {
-        label: 'Inventories',
-        icon: BsArrowRepeat,
-        path: 'inventories',
-    },
-    {
-        label: 'Outward Inventories',
-        icon: BsArrowRepeat,
-        path: 'outward-inventories/dealer',
-    },
-    {
-        label: 'Inward Inventories',
-        icon: BsArrowRepeat,
-        path: 'inward-inventories/dealer',
-    },
-    {
-        label: 'Warehouse Details',
-        icon: BsArrowRepeat,
-        path: 'warehouse-details',
-    },
-]
+
 const ViewInventories = (props: Props) => {
+    const tabs = [
+        {
+            label: 'Inventories',
+            icon: BsArrowRepeat,
+            path: 'inventories',
+            name: 'TAB_WAREHOUSE_INVENTORIES',
+        },
+        {
+            label: 'Outward Inventories',
+            icon: BsArrowRepeat,
+            path: 'outward-inventories/dealer',
+            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES',
+        },
+        {
+            label: 'Inward Inventories',
+            icon: BsArrowRepeat,
+            path: 'inward-inventories/dealer',
+            name: 'TAB_WAREHOUSE_INWARD_INVENTORIES',
+        },
+        {
+            label: 'Warehouse Details',
+            icon: BsArrowRepeat,
+            path: 'warehouse-details',
+            name: 'TAB_WAREHOUSE_DETAILS',
+        },
+    ]
     const [activeTab, setActiveTab] = useState<number>()
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
+    const allowedTabs = showAllowedTabs(
+        checkUserAccess,
+        UserModuleNameTypes.wareHouse,
+        tabs,
+        userData?.userRole || 'ADMIN'
+    )
     useEffect(() => {
         const activeTab = window.location.pathname.split('/')[4]
-        let activeIndex = tabs?.findIndex(
+        let activeIndex = allowedTabs?.findIndex(
             (tab: tabsProps) => tab.path.split('/')[0] === activeTab
         )
         activeIndex = activeIndex < 0 ? 0 : activeIndex
         setActiveTab(activeIndex)
-    }, [])
+    }, [activeTab, allowedTabs])
     return (
         <SideNavLayout>
             <div className="h-[calc(100vh-55px)]">
@@ -51,7 +71,7 @@ const ViewInventories = (props: Props) => {
                     <div className="w-[100%] border-b border-r border-l rounded-r h-full ">
                         <div className="h-[40px] border flex gap-x-4 items-center bg-stone-400 sticky top-0  shadow rounded ">
                             <TabScrollable
-                                tabs={tabs}
+                                tabs={allowedTabs}
                                 active={activeTab}
                                 navBtnContainerClassName="bg-red-500"
                             />
