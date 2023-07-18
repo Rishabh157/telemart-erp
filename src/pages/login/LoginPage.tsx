@@ -26,6 +26,7 @@ import {
     setUserData,
 } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
+// import { navigation } from 'src/navigation'
 
 const LoginPage = ({ pathName }: any) => {
     const [isShowPassword, setIsShowPassword] = useState(false)
@@ -33,60 +34,82 @@ const LoginPage = ({ pathName }: any) => {
     const [password, setPassword] = useState('')
     const [apiError, setApiError] = useState('')
     const [errorInitiate, setErrorInitiate] = useState(false)
-    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const [login, loginInfo] = useLoginMutation()
-    const handleLogin = () => {
-        if (userName && password) {
-            login({
-                userName: userName,
-                password: password,
-            })
-                .then((res) => {
-                    if ('data' in res) {
-                        if (res?.data?.status) {
-                            let userData = {
-                                userId: res?.data?.data?.userId,
-                                fullName: res?.data?.data?.fullName,
-                                email: res?.data?.data?.email,
-                                mobile: res?.data?.data?.mobile,
-                                userName: res?.data?.data?.userName,
-                                companyId: res?.data?.data?.companyId,
-                                role: res?.data?.data?.userType,
-                                userRole: res?.data?.data?.userRole,
-                            }
-                            dispatch(setAccessToken(res?.data?.data?.token))
-                            dispatch(
-                                setRefreshToken(res?.data?.data?.refreshToken)
-                            )
-                            dispatch(setUserData(userData))
-                            localStorage.setItem(
-                                'userData',
-                                JSON.stringify(userData)
-                            )
-                            localStorage.setItem(
-                                'authToken',
-                                res?.data?.data?.token
-                            )
-                            localStorage.setItem(
-                                'refreshToken',
-                                res?.data?.data?.refreshToken
-                            )
 
-                            // window.location.pathname = `${pathName}`
-                            navigate(`${pathName}`)
-                            showToast('success', 'Login successfull')
-                        } else {
-                            setApiError(res?.data?.message)
-                        }
-                    } else {
-                        showToast(
-                            'error',
-                            'Something went wrong please try again later'
-                        )
-                    }
+    const dispatch = useDispatch<AppDispatch>()
+
+    const [login, loginInfo] = useLoginMutation()
+
+    const handleLogin = async () => {
+        if (userName && password) {
+            try {
+                await login({
+                    userName: userName,
+                    password: password,
                 })
-                .catch((err) => {})
+                    .then(async (res) => {
+                        if ('data' in res) {
+                            if (res?.data?.status) {
+                                console.log(res?.data?.status)
+
+                                let userData = {
+                                    userId: res?.data?.data?.userId,
+                                    fullName: res?.data?.data?.fullName,
+                                    email: res?.data?.data?.email,
+                                    mobile: res?.data?.data?.mobile,
+                                    userName: res?.data?.data?.userName,
+                                    companyId: res?.data?.data?.companyId,
+                                    role: res?.data?.data?.userType,
+                                    userRole: res?.data?.data?.userRole,
+                                }
+                                dispatch(setAccessToken(res?.data?.data?.token))
+                                dispatch(
+                                    setRefreshToken(
+                                        res?.data?.data?.refreshToken
+                                    )
+                                )
+                                dispatch(setUserData(userData))
+                                localStorage.setItem(
+                                    'userData',
+                                    JSON.stringify(userData)
+                                )
+                                localStorage.setItem(
+                                    'authToken',
+                                    res?.data?.data?.token
+                                )
+                                localStorage.setItem(
+                                    'refreshToken',
+                                    res?.data?.data?.refreshToken
+                                )
+
+                                showToast('success', 'Login successful')
+                                setTimeout(() => {
+                                    // window.location.pathname = `${pathName}`
+                                    navigate('/dealers') // Navigating to "/dashboard" after setting localStorage
+                                }, 3000)
+                            } else {
+                                setApiError(res?.data?.message)
+                            }
+                        } else {
+                            showToast(
+                                'error',
+                                'Something went wrong. Please try again later'
+                            )
+                        }
+                    })
+                    .catch((err) => {
+                        // Handle any error that occurs during login request
+                    })
+
+                //   const userDataLs = localStorage.getItem('userData');
+                //   const userData = userDataLs ? JSON.parse(userDataLs) : null;
+                //   if (userData) {
+                //     console.log('324354354');
+                // navigate('/dashboard'); // Navigating to "/dashboard" if userData exists in localStorage
+                //   }
+            } catch (error) {
+                // Handle any other errors that occur
+            }
         }
     }
 

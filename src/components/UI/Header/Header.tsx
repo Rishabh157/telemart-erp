@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { BsMoon, BsSun } from 'react-icons/bs'
@@ -32,14 +32,27 @@ const Header = () => {
 
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
         useState(true)
-    const [company, setCompany] = useState(userData?.companyId)
+    const [company, setCompany] = useState(userData?.companyId || '')
     const color = localStorage.getItem('themeColor')
     const themeColor = color ? JSON.parse(color) : ''
     const [siteMode, setSiteMode] = useState(themeColor)
-    const { data } = useGetAllCompaniesQuery('')
-    const companyName = data?.data?.find(
-        (com: any) => com?._id === company
-    ).companyName
+    const [companyName, setCompanyName] = useState('')
+    const { data, isFetching, isLoading } = useGetAllCompaniesQuery('', {
+        skip: !userData?.companyId,
+    })
+    useEffect(() => {
+        if (!isLoading && !isFetching ) {
+            if (data?.data?.status) {
+                const companyName = data?.data?.find(
+                    (com: any) => com?._id === company
+                ).companyName
+                setCompanyName(companyName)
+            }
+        }
+
+        // eslint-disable-next-line
+    }, [data, isLoading, isFetching])
+
     const [updaeCompany] = useUpdateCompanyByAdminMutation()
     const dispatch = useDispatch()
     const handleUpdate = (companyId: string) => {
@@ -69,7 +82,7 @@ const Header = () => {
                         userName: userName,
                         companyId: companyId,
                         role: userType,
-                        userRole:userRole,
+                        userRole: userRole,
                     }
                     localStorage.setItem('userData', JSON.stringify(userData))
                     dispatch(setUserData(userData))
@@ -78,7 +91,7 @@ const Header = () => {
             }
         )
     }
-
+    
     return (
         <div
             className={`rid grid-cols-2 w-full h-full shadow-lg borde bg-white`}
@@ -201,7 +214,9 @@ const Header = () => {
                     className="flex gap-5"
                 >
                     <div className="h-[35px] w-[35px] flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
-                        {userData?.fullName[0].toUpperCase() || ''}
+                        {!(userData === null)
+                            ? userData?.fullName[0].toUpperCase()
+                            : ''}
                     </div>
 
                     {/* <div className='flex flex-col gap-1 justify-start items-start' >

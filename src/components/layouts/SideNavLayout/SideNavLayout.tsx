@@ -39,10 +39,9 @@ const SideNavLayout = ({ children }: Props) => {
     }
 
     const location = useLocation()
-
     const currentPath = `/${location.pathname?.split('/')[1]}`
-    const bgColorLocal = localStorage.getItem('themeColor') as string
-    const bgColor = JSON.parse(bgColorLocal) as string | null
+    const bgColorLocal = localStorage.getItem('themeColor')
+    const bgColor = bgColorLocal ? JSON.parse(bgColorLocal) : ''
     return (
         <div
             className={`flex h-screen w-screen ${

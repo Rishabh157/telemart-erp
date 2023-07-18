@@ -15,7 +15,7 @@ export const callerPageApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Update *****/
+        //***** get *****/
         getUserAccess: builder.query({
             // invalidatesTags: ['callerForm'],
             query: ({ userRole }: { userRole: string }) => ({
