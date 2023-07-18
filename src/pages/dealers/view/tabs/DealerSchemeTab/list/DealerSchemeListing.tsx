@@ -11,12 +11,17 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import {
+    UserModuleNameTypes,
+    UserModuleOtherActionTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -52,15 +57,21 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
-                <button
-                    onClick={() =>
-                        navigate('/dealers/' + dealerId + '/scheme/add')
+                <ActionAuthHOC
+                    moduleName={UserModuleNameTypes.dealer}
+                    actionName={UserModuleOtherActionTypes.dealerSchemeAdd}
+                    component={
+                        <button
+                            onClick={() =>
+                                navigate('/dealers/' + dealerId + '/scheme/add')
+                            }
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            {' '}
+                            + Add Scheme{' '}
+                        </button>
                     }
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    {' '}
-                    + Add Scheme{' '}
-                </button>
+                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-35px)] rounded bg-white">
