@@ -25,7 +25,7 @@ export const apiSlice = createApi({
 
         prepareHeaders: (headers, { getState, endpoint }) => {
             const authToken = (getState() as any)?.auth?.accessToken
-            const deviceId = (getState() as any)?.auth?.deviceId
+            const deviceId = localStorage.getItem("device-id")
 
             if (authToken) {
                 headers.set('x-access-token', authToken)
