@@ -66,7 +66,6 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
             providesTags: ['WareHouse'],
             query: ({ companyId, dealerId }) => ({
                 url: `/dealer-warehouse/company/${companyId}/dealer/${dealerId}`,
-
                 method: 'GET',
             }),
         }),

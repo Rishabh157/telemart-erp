@@ -62,6 +62,8 @@ export type UpdateSaleOrder = {
         accApproved?: boolean | null
         accApprovedById?: string
         accApprovedAt?: string
+        dhApprovedActionBy?:string
+        accApprovedActionBy?:string
     }
     id: string
 }

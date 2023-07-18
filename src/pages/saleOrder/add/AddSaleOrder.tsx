@@ -73,10 +73,15 @@ const AddSaleOrder = ({
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId = userData?.companyId
 
-    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery({
-        companyId,
-        dealerId,
-    })
+    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
+        {
+            companyId,
+            dealerId,
+        },
+        {
+            skip: !dealerId,
+        }
+    )
 
     useEffect(() => {
         if (dealerId !== '' && !isLoading && !isFetching) {
