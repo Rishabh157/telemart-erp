@@ -122,6 +122,7 @@ const SaleOrderListingWrapper = () => {
                     dhApproved: true,
                     dhApprovedById: userData?.userId,
                     dhApprovedAt: currentDate,
+                    dhApprovedActionBy : userData?.userName,
                 },
                 id: _id,
             }).then((res: any) => {
@@ -184,6 +185,7 @@ const SaleOrderListingWrapper = () => {
                     accApproved: true,
                     accApprovedById: userData?.userId,
                     accApprovedAt: currentDate,
+                    accApprovedActionBy : userData?.userName
                 },
                 id: _id,
             }).then((res: any) => {
