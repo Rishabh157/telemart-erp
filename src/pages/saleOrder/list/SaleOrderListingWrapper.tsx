@@ -237,7 +237,7 @@ const SaleOrderListingWrapper = () => {
             ),
         },
         {
-            field: 'dealer',
+            field: 'dealerLabel',
             headerName: 'Dealer',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SaleOrderListResponse) => (
