@@ -289,7 +289,8 @@ const BarcodeListingWrapper = () => {
     const allowedTabs = showAllowedTabs(
         checkUserAccess,
         UserModuleNameTypes.barcode,
-        tabs
+        tabs,
+        userData?.userRole || 'ADMIN'
     )
     return (
         <>

@@ -105,13 +105,14 @@ const ViewVendor = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const allowedTabs = showAllowedTabs(
         checkUserAccess,
         UserModuleNameTypes.vendor,
-        tabsData
+        tabsData,
+        userData?.userRole || 'ADMIN'
     )
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
         limit: 100,
         searchValue: searchValue,

@@ -122,7 +122,8 @@ const ViewDealer = () => {
     const allowedTabs = showAllowedTabs(
         checkUserAccess,
         UserModuleNameTypes.dealer,
-        tabsData
+        tabsData,
+        userData?.userRole || 'ADMIN'
     )
 
     const dealerState: any = useSelector((state: RootState) => state.dealer)
