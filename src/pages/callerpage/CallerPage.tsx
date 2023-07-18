@@ -764,7 +764,7 @@ const CallerPage: React.FC<Props> = ({
                             <div className="grid grid-cols-12 gap-x-2">
                                 <div className="col-span-5">
                                     <ATMSelectSearchable
-                                        componentClass="mt-2"
+                                        componentClass="mt-1"
                                         size="xs"
                                         name="pincodeId"
                                         selectLabel="select pincode"
