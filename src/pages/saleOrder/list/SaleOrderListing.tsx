@@ -21,6 +21,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
+    UserModuleOtherActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
@@ -41,13 +42,14 @@ type Props = {
 
 const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+
     const dispatch = useDispatch<AppDispatch>()
     const saleOrderState: any = useSelector(
         (state: RootState) => state.saleOrder
     )
     const { pathname } = useLocation()
     const path = pathname.split('/')[1]
-
+    const isDealerPath = path === 'dealers'
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
@@ -66,8 +68,16 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Sale Orders </ATMPageHeading>
                 <ActionAuthHOC
-                    moduleName={UserModuleNameTypes.saleOrder}
-                    actionName={UserModuleActionTypes.Add}
+                    moduleName={
+                        isDealerPath
+                            ? UserModuleNameTypes.dealer
+                            : UserModuleNameTypes.saleOrder
+                    }
+                    actionName={
+                        isDealerPath
+                            ? UserModuleOtherActionTypes.dealerSalesOrderAdd
+                            : UserModuleActionTypes.Add
+                    }
                     component={
                         <button
                             onClick={() => navigate('add-sale-order')}

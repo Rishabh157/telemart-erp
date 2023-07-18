@@ -12,12 +12,17 @@ import { IconType } from 'react-icons'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import {
+    UserModuleNameTypes,
+    UserModuleOtherActionTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 
 // |-- Redux --|
@@ -55,13 +60,21 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[78px]  p-1">
                     <ATMPageHeading> Inventories </ATMPageHeading>
-                    <button
-                        type="button"
-                        onClick={() => navigate('inward-inventory/add')}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + Inward Inventory
-                    </button>
+                    <ActionAuthHOC
+                        moduleName={UserModuleNameTypes.wareHouse}
+                        actionName={
+                            UserModuleOtherActionTypes.tabWarehouseInventoryAdd
+                        }
+                        component={
+                            <button
+                                type="button"
+                                onClick={() => navigate('inward-inventory/add')}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Inward Inventory
+                            </button>
+                        }
+                    />
                 </div>
 
                 <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">

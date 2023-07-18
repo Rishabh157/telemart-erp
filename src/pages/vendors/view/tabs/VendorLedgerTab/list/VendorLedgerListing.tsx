@@ -29,6 +29,11 @@ import {
     setFilterBy,
 } from 'src/redux/slices/VendorLedgerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import ActionAuthHOC from 'src/ActionAuthHoc'
+import {
+    UserModuleNameTypes,
+    UserModuleOtherActionTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 type Props = {
@@ -104,24 +109,40 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                     >
                         + Cr. Amount
                     </button> */}
-                    <button
-                        onClick={() => {
-                            setIsOpenModel(true)
-                            setOpenModel(NoteType.CREDIT_NOTE_CREATED)
-                        }}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + Cr. Note
-                    </button>
-                    <button
-                        onClick={() => {
-                            setIsOpenModel(true)
-                            setOpenModel(NoteType.DEBIT_NOTE_CREATED)
-                        }}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + Db. Note
-                    </button>
+                    <ActionAuthHOC
+                        moduleName={UserModuleNameTypes.vendor}
+                        actionName={
+                            UserModuleOtherActionTypes.vendorLedgerCreditNote
+                        }
+                        component={
+                            <button
+                                onClick={() => {
+                                    setIsOpenModel(true)
+                                    setOpenModel(NoteType.CREDIT_NOTE_CREATED)
+                                }}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Cr. Note
+                            </button>
+                        }
+                    />
+                    <ActionAuthHOC
+                        moduleName={UserModuleNameTypes.vendor}
+                        actionName={
+                            UserModuleOtherActionTypes.vendorLedgerDebitNote
+                        }
+                        component={
+                            <button
+                                onClick={() => {
+                                    setIsOpenModel(true)
+                                    setOpenModel(NoteType.DEBIT_NOTE_CREATED)
+                                }}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Db. Note
+                            </button>
+                        }
+                    />
                 </div>
             </div>
 
