@@ -37,7 +37,6 @@ const Header = () => {
     const { userData, deviceId } = useSelector(
         (state: RootState) => state?.auth
     )
-    console.log(deviceId, 'deviceId')
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
         useState(true)
     const [company, setCompany] = useState(userData?.companyId || '')

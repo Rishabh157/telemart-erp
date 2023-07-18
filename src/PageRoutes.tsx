@@ -276,7 +276,6 @@ const PageRoutes = () => {
     //     (state: RootState) => state.userAccess
     // )
 
-    // console.log(checkUserAccess,"checkUserAccess")
 
     // if (!accessToken && window.location.pathname==='/') {
     //     return (
