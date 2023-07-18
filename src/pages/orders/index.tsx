@@ -99,6 +99,8 @@ const ViewOrder = () => {
             name: 'ORDER_NON_ACTION_TAB',
         },
     ]
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const [activeTabIndex, setActiveTab] = useState<number>()
     const [activelabel, setActiveTabLabel] = useState<string>()
     const { search } = useLocation()
@@ -110,7 +112,8 @@ const ViewOrder = () => {
     const allowedTabs = showAllowedTabs(
         checkUserAccess,
         UserModuleNameTypes.order,
-        tabs
+        tabs,
+        userData?.userRole || 'ADMIN'
     )
     const breadcrumbs: BreadcrumbType[] = [
         {

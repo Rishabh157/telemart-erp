@@ -134,8 +134,12 @@ export const isCheckAuthorizedModuleAction = (
 export const showAllowedTabs = (
     checkUserAccess: userAccesTypes,
     moduleName: string,
-    allTabs: any
+    allTabs: any,
+    userRole: string
 ) => {
+    if (userRole === 'ADMIN') {
+        return allTabs
+    }
     let modules = checkUserAccess?.modules?.find(
         (modules: ModulesTypes) => modules.moduleName === moduleName
     )

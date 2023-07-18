@@ -56,6 +56,7 @@ const tabs: Tabs[] = [
 ]
 const InwardsTabs = (props: Props) => {
     const [activeTab, setActiveTab] = useState(0)
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
@@ -64,7 +65,8 @@ const InwardsTabs = (props: Props) => {
     const allowedTabs = showAllowedTabs(
         checkUserAccess,
         UserModuleNameTypes.wareHouse,
-        tabs
+        tabs,
+        userData?.userRole || 'ADMIN'
     )
     useEffect(() => {
         const activeTabIndex = window.location.pathname.split('/')[5]
