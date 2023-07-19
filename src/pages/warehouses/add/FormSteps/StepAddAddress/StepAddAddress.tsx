@@ -98,6 +98,7 @@ const StepAddAddress = ({
                                     case 'text':
                                         return (
                                             <ATMTextField
+                                                key={name}
                                                 maxLength={
                                                     name ===
                                                         'regd_address.phone' ||
@@ -106,7 +107,6 @@ const StepAddAddress = ({
                                                         ? 10
                                                         : 100
                                                 }
-                                                key={name}
                                                 name={name}
                                                 value={
                                                     name.includes('.')
@@ -153,7 +153,7 @@ const StepAddAddress = ({
                                         )
                                     case 'file-picker':
                                         return (
-                                            <div className="mt-4">
+                                            <div className="mt-4" key={name}>
                                                 <ATMFilePickerWrapper
                                                     name={name}
                                                     label={label}
@@ -208,7 +208,7 @@ const StepAddAddress = ({
                                         )
                                     case 'select':
                                         return (
-                                            <div className="-mt-2">
+                                            <div className="-mt-2" key={name}>
                                                 <ATMSelectSearchable
                                                     label={label}
                                                     selectLabel={label}

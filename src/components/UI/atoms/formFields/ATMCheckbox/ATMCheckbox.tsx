@@ -23,6 +23,7 @@ type Props = {
     required?: boolean
     extraClasses?: string
     inputClasses?: string
+    labelClasses?: string
 }
 
 const ATMCheckbox = ({
@@ -35,6 +36,7 @@ const ATMCheckbox = ({
     required = false,
     extraClasses = '',
     inputClasses = '',
+    labelClasses = '',
 }: Props) => {
     return (
         <div className={twMerge(`relative mt-8 ${extraClasses}`)}>
@@ -52,7 +54,8 @@ const ATMCheckbox = ({
                         className={twMerge(
                             `ml-2  ${
                                 disabled ? 'text-slate-300' : 'text-slate-600'
-                            }`
+                            }`,
+                            `${labelClasses}`
                         )}
                     >
                         {label}
