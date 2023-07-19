@@ -53,7 +53,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
         purchaseOrderState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)]  ">
+        <div className="px-4 h-full ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Purchase Order </ATMPageHeading>
