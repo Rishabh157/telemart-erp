@@ -530,6 +530,18 @@ const PageRoutes = () => {
                             path="warehouse"
                             element={<VendorWarehouseTabWrapper />}
                         />
+                        
+                    <Route
+                        path="warehouse/add"
+                        element={
+                            <ActionAuthHOC
+                                component={<AddVendorWarehouseWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
+                    />
                         <Route
                             path="return-to-vendor"
                             element={'Return To Vendor'}
