@@ -15,6 +15,8 @@ import { CircularProgress } from '@mui/material'
 
 // |-- Internal Dependencies --|
 // |-- Redux --|
+import { useDispatch } from 'react-redux'
+import { setFormSubmitting } from 'src/redux/slices/authSlice'
 // |-- Types --|
 
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -25,6 +27,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { RootState } from 'src/redux/store'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -67,6 +70,7 @@ const StepAddAddress = ({
     )
     const [imageApiStatus, setImageApiStatus] = useState(false)
     const [fileUploader] = useFileUploaderMutation()
+    const dispatch = useDispatch()
 
     return (
         <div className="">
@@ -96,6 +100,7 @@ const StepAddAddress = ({
                                     case 'text':
                                         return (
                                             <ATMTextField
+                                                key={name}
                                                 maxLength={
                                                     name ===
                                                         'regd_address.phone' ||
@@ -104,7 +109,6 @@ const StepAddAddress = ({
                                                         ? 10
                                                         : 100
                                                 }
-                                                key={name}
                                                 name={name}
                                                 value={
                                                     name.includes('.')
@@ -151,7 +155,7 @@ const StepAddAddress = ({
                                         )
                                     case 'file-picker':
                                         return (
-                                            <div className="mt-4">
+                                            <div className="mt-4" key={name}>
                                                 <ATMFilePickerWrapper
                                                     name={name}
                                                     label={label}
@@ -206,7 +210,7 @@ const StepAddAddress = ({
                                         )
                                     case 'select':
                                         return (
-                                            <div className="-mt-2">
+                                            <div className="-mt-2" key={name}>
                                                 <ATMSelectSearchable
                                                     label={label}
                                                     selectLabel={label}
@@ -238,6 +242,90 @@ const StepAddAddress = ({
                                             </div>
                                         )
 
+                                    case 'checkbox':
+                                        return (
+                                            <div
+                                                className="-mt-2"
+                                                key={name || index}
+                                            >
+                                                <ATMCheckbox
+                                                    name={name}
+                                                    label={label}
+                                                    onChange={(e) => {
+                                                        setFieldValue(name, e)
+                                                        dispatch(
+                                                            setFormSubmitting(
+                                                                false
+                                                            )
+                                                        )
+
+                                                        if (e) {
+                                                            const {
+                                                                address,
+                                                                country,
+                                                                district,
+                                                                phone,
+                                                                pincode,
+                                                                state,
+                                                            } =
+                                                                values.regd_address
+                                                            setFieldValue(
+                                                                'billing_address.address',
+                                                                address
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.country',
+                                                                country
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.district',
+                                                                district
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.phone',
+                                                                phone
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.pincode',
+                                                                pincode
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.state',
+                                                                state
+                                                            )
+                                                        } else {
+                                                            setFieldValue(
+                                                                'billing_address.address',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.country',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.district',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.phone',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.pincode',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.state',
+                                                                ''
+                                                            )
+                                                        }
+                                                    }}
+                                                    checked={Boolean(
+                                                        values[name]
+                                                    )}
+                                                />
+                                            </div>
+                                        )
                                     default:
                                         return null
                                 }

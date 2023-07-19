@@ -21,7 +21,7 @@ import { NavItemType } from 'src/navigation'
 import { setCheckUserAccess } from 'src/redux/slices/access/userAcessSlice'
 
 // |-- Redux --|
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { setDeviceId, setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
 import { useGetUserAccessQuery } from 'src/services/useraccess/UserAccessServices'
 import {
@@ -49,7 +49,12 @@ const VerticalNavBar = ({
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { customized, userData } = useSelector(
+    const deviceIditem = localStorage.getItem('device-id') || ''
+
+    useEffect(() => {
+        dispatch(setDeviceId(deviceIditem))
+    }, [deviceIditem, dispatch])
+    const { customized, userData, deviceId } = useSelector(
         (state: RootState) => state?.auth
     )
     const { data, isLoading, isFetching } = useGetUserAccessQuery(
@@ -57,7 +62,7 @@ const VerticalNavBar = ({
             userRole: userData?.userRole as string,
         },
         {
-            skip: !userData?.userRole,
+            skip: !deviceId,
         }
     )
 

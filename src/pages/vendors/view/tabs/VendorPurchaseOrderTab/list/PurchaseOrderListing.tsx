@@ -11,12 +11,17 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import {
+    UserModuleNameTypes,
+    UserModuleOtherActionTypes,
+} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -48,16 +53,22 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
         purchaseOrderState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)]  ">
+        <div className="px-4 h-[calc(100vh-190px)]  ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Purchase Order </ATMPageHeading>
-                <button
-                    onClick={() => navigate('add')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add PO{' '}
-                </button>
+                <ActionAuthHOC
+                    moduleName={UserModuleNameTypes.vendor}
+                    actionName={UserModuleOtherActionTypes.vendorPoAdd}
+                    component={
+                        <button
+                            onClick={() => navigate('add')}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Add PO{' '}
+                        </button>
+                    }
+                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

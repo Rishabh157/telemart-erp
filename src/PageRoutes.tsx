@@ -233,6 +233,8 @@ import AuthHOC from './AuthHOC'
 // import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
 // import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
 import ActionAuthHOC from './ActionAuthHoc'
+// import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
+// import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
 // import { RootState } from './redux/store'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -243,18 +245,19 @@ const PageRoutes = () => {
     const dispatch = useDispatch()
     const accessToken = localStorage.getItem('authToken')
     const refreshToken = localStorage.getItem('refreshToken')
-    const userDataLs = localStorage.getItem('userData') || '{}'
-    const userData = JSON.parse(userDataLs)
+    const userDataLs = localStorage.getItem('userData')
+    const userData = JSON?.parse(userDataLs as string)
     dispatch(setAccessToken(accessToken))
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
-    dispatch(setUserData(userData))
+    dispatch(setUserData(userData ? userData : null))
+
     // const { data, isLoading, isFetching } = useGetUserAccessQuery(
     //     {
-    //         userRole: userData.userRole as string,
+    //         userRole: userData?.userRole as string,
     //     },
     //     {
-    //         skip: !userData.userRole,
+    //         skip: !userData?.userRole,
     //     }
     // )
 
@@ -268,19 +271,18 @@ const PageRoutes = () => {
     //     }
 
     //     // eslint-disable-next-line
-    // }, [data, isLoading, isFetching])
-    // const { checkUserAccess } = useSelector(
+    // }, [data, isLoading, isFetching ])
+    // // const { checkUserAccess } = useSelector(
     //     (state: RootState) => state.userAccess
     // )
 
-    // console.log(checkUserAccess,"checkUserAccess")
 
-    // if (!accessToken) {
+    // if (!accessToken && window.location.pathname==='/') {
     //     return (
     //         <>
     //             <BrowserRouter>
     //                 <Routes>
-    //                     {/* <Route path="*" element={<Auth />} /> */}
+    //                     <Route path="*" element={<Auth />} />
     //                     <Route
     //                         path="media/caller-page/"
     //                         element={<CallerPageWrapper />}
@@ -295,12 +297,23 @@ const PageRoutes = () => {
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route
-                        path="media/caller-page/"
-                        element={<CallerPageWrapper />}
-                    />
                     <Route path="/" element={<Auth />} />
                     <Route path="*" element={<PageNotFound />} />
+                    <Route
+                        path="/dashboard"
+                        element={
+                            <DashboardWrappper />
+                            // <AuthHOC
+                            //     component={<DashboardWrappper />}
+                            //     moduleName={UserModuleNameTypes.dashboard}
+                            // />
+                        }
+                    />
+                    <Route path="/profile" element={<ProfileWrappper />} />
+                    <Route
+                        path="media/caller-page"
+                        element={<CallerPageWrapper />}
+                    />
                     <Route
                         path="warehouse/view/:id"
                         element={<InventorisTabsLayout />}
@@ -393,23 +406,6 @@ const PageRoutes = () => {
                             }
                         />
                     </Route>
-
-                    <Route path="/" element={<Auth />} />
-                    <Route path="/dashboard" element={<DashboardWrappper />} />
-                    <Route path="/profile" element={<ProfileWrappper />} />
-                    <Route
-                        path="media/caller-page"
-                        element={<CallerPageWrapper />}
-                    />
-                    {/* <Route
-                        path="/orders"
-                        element={
-                            <ActionAuthHOC
-                                component={<OrderListing />}
-                                moduleName={UserModuleNameTypes.order}
-                            />
-                        }
-                    /> */}
 
                     <Route
                         path="/orders"
@@ -534,6 +530,18 @@ const PageRoutes = () => {
                             path="warehouse"
                             element={<VendorWarehouseTabWrapper />}
                         />
+                        
+                    <Route
+                        path="warehouse/add"
+                        element={
+                            <ActionAuthHOC
+                                component={<AddVendorWarehouseWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
+                    />
                         <Route
                             path="return-to-vendor"
                             element={'Return To Vendor'}
@@ -579,10 +587,6 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                    {/* <Route
-                        path="/warehouse/view/:id"
-                        element={<ViewWarehouseWrapper />}
-                    /> */}
 
                     <Route
                         path="/vendors/:vendorId/warehouse/add"
@@ -651,7 +655,7 @@ const PageRoutes = () => {
                         }
                     />
 
-                    <Route
+                    {/* <Route
                         path="vendors/:dealerId/warehouse/add-warehouse"
                         element={
                             <ActionAuthHOC
@@ -661,7 +665,7 @@ const PageRoutes = () => {
                                 isRedirect
                             />
                         }
-                    />
+                    /> */}
                     <Route
                         path="dealers/:dealerId/warehouse/add-warehouse"
                         element={

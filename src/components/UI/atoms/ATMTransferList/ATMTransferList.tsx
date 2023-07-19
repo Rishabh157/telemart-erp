@@ -101,9 +101,9 @@ const ATMTransferList = ({
         items: { label: string; value: string }[],
         listType: 'left' | 'right'
     ) => (
-        <Card className="h-full">
-            <div className="px-7 py-2 flex justify-between items-center">
-                <div className="flex flex-col">
+        <Card className="h-full ">
+            <div className="px-7 py-2 flex justify-between items-center ">
+                <div className="flex flex-col ">
                     <div className="text-lg font-medium">{title}</div>
                     <div>{`${numberOfChecked(items)}/${
                         items.length
@@ -131,7 +131,7 @@ const ATMTransferList = ({
             <List
                 sx={{
                     width: '100%',
-                    height: '100%',
+                    height: '80%',
                     bgcolor: 'background.paper',
                     overflow: 'auto',
                 }}
@@ -173,8 +173,8 @@ const ATMTransferList = ({
 
     return (
         <div className="relative h-full">
-            <div className="flex gap-5 h-full items-center ">
-                <div className="flex-1 h-full">
+            <div className="flex gap-5 h-full items-center  ">
+                <div className="flex-1 h-full ">
                     {customList(leftSideTitle, left, 'left')}
                 </div>
                 <div>

@@ -11,7 +11,7 @@ import React from 'react'
 // |-- External Dependencies --|
 import { Step, StepLabel, Stepper } from '@mui/material'
 import { FormikProps } from 'formik'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -47,13 +47,13 @@ const EditVendorWarehouse = ({
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
 
-    const { state } = useLocation()
-    const vendorId = state?.params?.vendorId || null
+    const state = useParams()
+    const vendorId = state?.vendorId
 
     const breadcrumbs = [
         {
-            label: 'Warehouse',
-            path: `vendors/${vendorId}/warehouse`,
+            label: 'Vendore Warehouse',
+            path: `/vendors/${vendorId}/warehouse`,
         },
         {
             label: 'Update Warehouse',

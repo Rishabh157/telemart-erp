@@ -13,10 +13,9 @@ import React, { useState, useEffect } from 'react'
 import { Form, Formik, FormikProps } from 'formik'
 import { array, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import StepAddCompanyDetailsWrapper from './FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper'
 import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
 import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
@@ -126,21 +125,17 @@ const steps = [
         validationSchema: object({
             contact_informations: array().of(
                 object().shape({
-                    name: string().required('Name is required'),
-                    department: string().required('Department is required'),
-                    designation: string().required('Designation is required'),
-                    email: string()
-                        .email('Invalid email')
-                        .required('Email is required'),
+                    name: string(),
+                    department: string(),
+                    designation: string(),
+                    email: string().email('Invalid email'),
                     mobileNumber: string()
                         .max(10, 'Mobile Number must be 10 characters')
                         .min(10, 'Mobile Number must be 10 digits')
-                        .required('Mobile Number is required')
                         .matches(regIndiaPhone, 'Invalid Mobile Number'),
                     landLine: string()
                         .max(10, 'Mobile Number must be 10 characters')
-                        .min(10, 'Mobile Number must be 10 digits')
-                        .required('Landline is required'),
+                        .min(10, 'Mobile Number must be 10 digits'),
                 })
             ),
         }),
@@ -148,9 +143,8 @@ const steps = [
 ]
 
 const AddVendorWarehouseWrapper = () => {
-    const { state } = useLocation()
-
-    const vendorId = state?.params?.vendorId || null
+    const state = useParams()
+    const vendorId = state?.vendorId
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const navigate = useNavigate()
@@ -275,26 +269,24 @@ const AddVendorWarehouseWrapper = () => {
         }
     }
     return (
-        <SideNavLayout>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={getValidationSchema(activeStep)}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
-                        <AddVendorWarehouse
-                            formikProps={formikProps}
-                            steps={steps}
-                            activeStep={activeStep}
-                            setActiveStep={setActiveStep}
-                            apiStatus={apiStatus}
-                            allCountry={allCountry}
-                        />
-                    </Form>
-                )}
-            </Formik>
-        </SideNavLayout>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={getValidationSchema(activeStep)}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => (
+                <Form className="">
+                    <AddVendorWarehouse
+                        formikProps={formikProps}
+                        steps={steps}
+                        activeStep={activeStep}
+                        setActiveStep={setActiveStep}
+                        apiStatus={apiStatus}
+                        allCountry={allCountry}
+                    />
+                </Form>
+            )}
+        </Formik>
     )
 }
 

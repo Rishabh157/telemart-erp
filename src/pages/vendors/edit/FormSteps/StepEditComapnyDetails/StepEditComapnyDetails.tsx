@@ -60,6 +60,7 @@ const StepEditComapnyDetails = ({
                     switch (type) {
                         case 'text':
                             return (
+                                <React.Fragment key={name}>
                                 <ATMTextField
                                     key={name}
                                     name={name}
@@ -75,11 +76,12 @@ const StepEditComapnyDetails = ({
                                     className="shadow bg-white rounded"
                                     isSubmitting={isSubmitting}
                                 />
+                                </React.Fragment>
                             )
 
                         case 'select':
                             return (
-                                <div className="mt-0">
+                                <div className="mt-0"   key={name}>
                                     <ATMSelect
                                         key={name}
                                         name={name}

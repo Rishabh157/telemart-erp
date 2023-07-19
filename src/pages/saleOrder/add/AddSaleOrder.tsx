@@ -30,6 +30,7 @@ import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useParams } from 'react-router-dom'
 
 // |-- Types --|
 type Props = {
@@ -43,23 +44,28 @@ type Props = {
     apiStatus: boolean
 }
 
-// Breadcrumbs
-const breadcrumbs: BreadcrumbType[] = [
-    {
-        label: 'Sale Order',
-        path: '/sale-order',
-    },
-    {
-        label: 'Add Sale Order',
-    },
-]
-
 const AddSaleOrder = ({
     formikProps,
     dropdownOptions,
     apiStatus,
     productPriceOptions,
 }: Props) => {
+    const params = useParams()
+    // Breadcrumbs
+    const breadcrumbs: BreadcrumbType[] = [
+        {
+            label: `${params.dealerId ? ' Dealers Sale Order' : 'Sale Order'}`,
+            path: `${
+                params.dealerId
+                    ? `/dealers/${params.dealerId}/sale-order`
+                    : '/sale-order'
+            }`,
+        },
+        {
+            label: 'Add Sale Order',
+        },
+    ]
+
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch<AppDispatch>()
@@ -73,10 +79,15 @@ const AddSaleOrder = ({
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId = userData?.companyId
 
-    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery({
-        companyId,
-        dealerId,
-    })
+    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
+        {
+            companyId,
+            dealerId,
+        },
+        {
+            skip: !dealerId,
+        }
+    )
 
     useEffect(() => {
         if (dealerId !== '' && !isLoading && !isFetching) {

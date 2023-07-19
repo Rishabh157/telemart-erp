@@ -211,7 +211,7 @@
                 {
                     "actionId": "dealerWarehouseActionAddId",
                     "actionUrl": "",
-                    "actionName": "DEALER WAREHOUSE ADD",
+                    "actionName": "DEALER_WAREHOUSE_ADD",
                     "fields": []
                 },
                 {
@@ -221,9 +221,33 @@
                     "fields": []
                 },
                 {
+                    "actionId": "dealerSaleOrderActionAddId",
+                    "actionUrl": "",
+                    "actionName": "DEALER_SALE_ORDER_ADD",
+                    "fields": []
+                },
+                {
                     "actionId": "dealerActionLedgerId",
                     "actionUrl": "/dealers/:id/ledger",
                     "actionName": "DEALER_LEDGER",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerLedgerCreditAmountActionAddId",
+                    "actionUrl": "",
+                    "actionName": "DEALER_LEDGER_CREDIT_AMOUNT_ADD",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerLedgerCreditAmountNoteActionAddId",
+                    "actionUrl": "",
+                    "actionName": "DEALER_LEDGER_CREDIT_NOTE_ADD",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerLedgerDebitNoteActionAddId",
+                    "actionUrl": "",
+                    "actionName": "DEALER_LEDGER_DEBIT_NOTE_ADD",
                     "fields": []
                 },
                 {
@@ -239,15 +263,27 @@
                     "fields": []
                 },
                 {
-                    "actionId": "dealerActionPinCodeId",
+                    "actionId": "dealerPinCodeActionId",
                     "actionUrl": "/dealers/:id/pincode",
                     "actionName": "DEALER_PINCODE",
                     "fields": []
                 },
                 {
-                    "actionId": "dealerActionScheme",
+                    "actionId": "dealerPinCodeActionAddId",
+                    "actionUrl": "",
+                    "actionName": "DEALER_PINCODE_ADD",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerSchemeActionId",
                     "actionUrl": "/dealers/:id/scheme",
                     "actionName": "DEALER_SCHEME",
+                    "fields": []
+                },
+                {
+                    "actionId": "dealerSchemesActionAddId",
+                    "actionUrl": "",
+                    "actionName": "DEALER_SCHEME_ADD",
                     "fields": []
                 },
                 {
@@ -385,6 +421,12 @@
                     "actionId": "warehouseActionInventoriesId",
                     "actionUrl": "/warehouse/view/:id/inventories",
                     "actionName": "TAB_WAREHOUSE_INVENTORIES",
+                    "fields": []
+                },
+                {
+                    "actionId": "warehouseActionInventoriesAddId",
+                    "actionUrl": "",
+                    "actionName": "TAB_WAREHOUSE_INVENTORIES_ADD",
                     "fields": []
                 },
                 {

@@ -28,6 +28,8 @@ import { AreaListResponse } from 'src/models/Area.model'
 import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import CallerHeader from './components/CallerHeader'
+import CallerPageTopNav from './components/CallerPageTopNav'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -515,87 +517,16 @@ const CallerPage: React.FC<Props> = ({
 
     return (
         <div className="bg-white px-4 h-[2000px]">
-            <div className="flex justify-between py-1">
-                <div className="logo-img">
-                    <img
-                        height={130}
-                        width={130}
-                        src="/septel-logo.png"
-                        alt="logo"
-                    />
-                </div>
-                <div className="flex gap-x-2 items-center">
-                    <div className="text-[#6F9EA7] text-[15px]">
-                        Logged in ID : Sandeep
-                    </div>
-                    <div>
-                        <CallerButton
-                            text="Sales"
-                            type="button"
-                            onClick={() => alert('Sales...')}
-                        />
-                    </div>
-                </div>
-            </div>
+            <CallerPageTopNav />
 
-            <div className="bg-[#87527C] py-3 px-2">
-                <div className="flex justify-between">
-                    <div className="flex justify-evenly gap-x-6">
-                        <div>
-                            <h3 className="text-white font-bold text-[14px]">
-                                CAMPAIGN
-                            </h3>
-                            <div className=" bg-white text-center p-1 rounded bedge text-[#15616E] text-[14px] font-bold">
-                                {values.campaign}
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-white font-extrabold text-[14px]">
-                                CALL TYPE
-                            </h3>
-                            <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
-                                INBOUND
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-white font-extrabold text-[14px]">
-                                INCOMING NO.
-                            </h3>
-                            <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
-                                {values.mobileNo}
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-white font-extrabold text-[14px]">
-                                CUSTOMER
-                            </h3>
-                            <div className=" bg-green-500 p-1 text-center rounded bedge text-white text-[14px] font-bold">
-                                {values.agentName}
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-white font-extrabold text-[14px]">
-                                DID NO
-                            </h3>
-                            <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
-                                {values.didNo}
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 className="text-white font-extrabold text-[14px]">
-                            TRUECALLER
-                        </h3>
-                        <div className=" bg-white text-center p-1 rounded bedge text-[#15616E] text-[14px] font-bold">
-                            STATUS
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <CallerHeader
+                CampaignName={values.campaign || ''}
+                CallType="INBOUND"
+                IncomingNo={values.mobileNo}
+                CustomerName={values.agentName || ''}
+                DidNumber={values.didNo}
+                Status="Status"
+            />
 
             <div className="grid grid-cols-12 mt-1 px-2">
                 <div className="col-span-2 items-center mt-3 text-sm font-semibold">
@@ -616,7 +547,7 @@ const CallerPage: React.FC<Props> = ({
                         />
                     </div>
                 </div>
-                <div className="col-span-3 px-2 pb-4">
+                <div className="col-span-3 px-2 pb-2">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
                             size="xs"
@@ -639,7 +570,7 @@ const CallerPage: React.FC<Props> = ({
 
             {values.schemeId ? (
                 <React.Fragment>
-                    <div className="bg-[#87527C] mt-2">
+                    <div className="bg-[#87527C] mt-1">
                         <div className="grid grid-cols-12 p-2">
                             <div className="col-span-4">
                                 <h2 className="text-[15px] font-bold text-white">
@@ -724,7 +655,7 @@ const CallerPage: React.FC<Props> = ({
                 </React.Fragment>
             ) : null}
 
-            <div className="bg-[#87527C] p-2 mt-1">
+            <div className="bg-[#87527C] p-2">
                 <h2 className="text-[15px] font-bold text-white">
                     DELEVERY ADDRESS
                 </h2>
@@ -764,7 +695,7 @@ const CallerPage: React.FC<Props> = ({
                             <div className="grid grid-cols-12 gap-x-2">
                                 <div className="col-span-5">
                                     <ATMSelectSearchable
-                                        componentClass="mt-2"
+                                        componentClass="mt-1"
                                         size="xs"
                                         name="pincodeId"
                                         selectLabel="select pincode"
@@ -940,7 +871,7 @@ const CallerPage: React.FC<Props> = ({
             <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700">
                 <div className="col-span-6 py-2  gap-x-4 border-r-[1px] px-6 border-grey-800">
                     <ATMSelectSearchable
-                        componentClass="mt-2"
+                        componentClass="mt-1"
                         labelDirection="horizontal"
                         label="Type of Address"
                         size="xs"
@@ -970,7 +901,7 @@ const CallerPage: React.FC<Props> = ({
                         }}
                     />
 
-                    <div className="grid grid-cols-12 mt-1">
+                    <div className="grid grid-cols-12">
                         <div className="col-span-4 pt-2">
                             <label className="text-slate-700 text-sm font-medium">
                                 Prefferred Delivery Time And Date
@@ -1141,7 +1072,7 @@ const CallerPage: React.FC<Props> = ({
                     />
                 </div>
                 <div className="col-span-6 py-2 px-8 border-r-[1px]">
-                    <div className="-mt-2">
+                    <div className="-mt-3">
                         <ATMTextArea
                             name="autoFillingShippingAddress"
                             value={values.autoFillingShippingAddress || ''}
@@ -1295,6 +1226,7 @@ const CallerPage: React.FC<Props> = ({
                                 extraClasses="mt-2"
                                 required
                                 label="Facebook"
+                                labelClasses="text-slate-700 text-[15px] pt-1 font-medium mb-1 select-none"
                                 // labelClass="font-semibold text-sm"
                                 checked={isFacebookId}
                                 onChange={(e) => setFacebookId(e)}
@@ -1329,7 +1261,7 @@ const CallerPage: React.FC<Props> = ({
                                 extraClasses="mt-2"
                                 required
                                 label="Instagram"
-                                // labelClass="font-semibold text-sm"
+                                labelClasses="text-slate-700 text-[15px] pt-1 font-medium mb-1 select-none"
                                 checked={isInstagramId}
                                 onChange={(e) => {
                                     setInstagramId(e)

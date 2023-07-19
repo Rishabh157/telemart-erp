@@ -73,7 +73,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
 
     return (
         <div className="h-[calc(100%-55px)]">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="p-4 h-[calc(100%-55px)] flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -84,7 +84,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                     <ATMPageHeading> Attributes Group </ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat py-2">
+                <div className="grow h-[100%] bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat py-2">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium"> Details </div>

@@ -11,12 +11,17 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import {
+    UserModuleNameTypes,
+    UserModuleOtherActionTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Redux --|
@@ -52,15 +57,23 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Pincode</ATMPageHeading>
-                <button
-                    onClick={() =>
-                        navigate('/dealers/' + dealerId + '/pincode/add')
+                <ActionAuthHOC
+                    moduleName={UserModuleNameTypes.dealer}
+                    actionName={UserModuleOtherActionTypes.dealerPincodeAdd}
+                    component={
+                        <button
+                            onClick={() =>
+                                navigate(
+                                    '/dealers/' + dealerId + '/pincode/add'
+                                )
+                            }
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            {' '}
+                            + Add Pincode{' '}
+                        </button>
                     }
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    {' '}
-                    + Add Pincode{' '}
-                </button>
+                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-35px)] rounded bg-white">

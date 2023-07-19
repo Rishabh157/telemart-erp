@@ -48,16 +48,19 @@ const ATMBreadCrumbs = ({ breadcrumbs }: Props) => {
                     color="inherit"
                     onClick={() => {
                         breadcrumb.onClick && breadcrumb.onClick()
-                        if (customized) {
-                            const confirmValue: boolean =
-                                window.confirm(AlertText)
-                            if (confirmValue) {
-                                dispatch(setFieldCustomized(false))
+                        if(breadcrumb?.path){
+                            if (customized) {
+                                const confirmValue: boolean =
+                                    window.confirm(AlertText)
+                                if (confirmValue) {
+                                    dispatch(setFieldCustomized(false))
+                                    navigate(breadcrumb.path || '')
+                                }
+                            } else {
                                 navigate(breadcrumb.path || '')
                             }
-                        } else {
-                            navigate(breadcrumb.path || '')
                         }
+                         
                     }}
                     className={`${
                         breadcrumb.path && 'cursor-pointer'
