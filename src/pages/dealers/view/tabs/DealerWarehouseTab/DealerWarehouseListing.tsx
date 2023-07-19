@@ -76,8 +76,7 @@ const DealerWarehouseListing = ({
                             }
                             className="bg-primary-main text-white rounded py-1 px-3"
                         >
-                            {' '}
-                            + Add Warehouse{' '}
+                            + Add
                         </button>
                     }
                 />

@@ -40,7 +40,7 @@ const ATMSelect = ({
         <>
             <div className="relative mt-3">
                 {label && (
-                    <label className="text-slate-700 text-sm font-medium">
+                    <label className="text-slate-700 text-sm font-medium ">
                         {label}{' '}
                         {required && <span className="text-red-500"> * </span>}
                     </label>

@@ -11,7 +11,6 @@ import React from 'react'
 // |-- External Dependencies --|
 import { Step, StepLabel, Stepper } from '@mui/material'
 import { FormikProps } from 'formik'
-import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -22,6 +21,7 @@ import { FormInitialValues } from './AddDealerWarehouseWarpper'
 // |-- Redux --|
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
+import { useParams } from 'react-router-dom'
 
 // |-- Types --|
 type Props = {
@@ -46,24 +46,17 @@ const AddDealerWarehouse = ({
     const handlePrevious = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1)
     }
-    const { state } = useLocation()
-    const dealerId = state?.params?.dealerId || null
-    let redirectPath = 'warehouse'
-    let redirectLabel = 'Warehouse'
-    if (dealerId) {
-        redirectLabel = 'Dealer Warehouse'
-        redirectPath = `dealers/${dealerId}/warehouse`
-    }
+    const state = useParams()
+    const dealerId = state?.dealerId
     const breadcrumbs = [
         {
-            label: `${redirectLabel}`,
-            path: `/${redirectPath}`,
+            label: 'Dealer Warehouse',
+            path: `/dealers/${dealerId}/warehouse`,
         },
         {
             label: 'Add Warehouse',
         },
     ]
-
     return (
         <div className=" h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
