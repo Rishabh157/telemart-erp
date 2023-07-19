@@ -147,7 +147,12 @@ const StepAddBankDetails = ({
 
                                                                             case 'select':
                                                                                 return (
-                                                                                    <div className="-mt-2">
+                                                                                    <div
+                                                                                        className="-mt-2"
+                                                                                        key={
+                                                                                            name
+                                                                                        }
+                                                                                    >
                                                                                         <ATMSelect
                                                                                             name={`bank_informations[${bankInformationIndex}].${name}`}
                                                                                             value={
@@ -184,10 +189,10 @@ const StepAddBankDetails = ({
                                                                             case 'file-picker':
                                                                                 return (
                                                                                     <ATMFilePickerWrapper
-                                                                                        name={`bank_informations[${bankInformationIndex}].${name}`}
                                                                                         key={
                                                                                             name
                                                                                         }
+                                                                                        name={`bank_informations[${bankInformationIndex}].${name}`}
                                                                                         label={
                                                                                             label
                                                                                         }
