@@ -18,11 +18,13 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
+// import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddPurchaseOrderTabWrapper'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { useParams } from 'react-router-dom'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Types --|
 type Props = {
@@ -40,16 +42,6 @@ export type DropdownOptions = {
 
 // Breadcrumbs
 
-const breadcrumbs: BreadcrumbType[] = [
-    {
-        label: 'Purchase-order',
-        path: '/purchase-order',
-    },
-    {
-        label: 'Add Purchase Order',
-    },
-]
-
 const AddPurchaseOrder = ({
     formikProps,
     vendorOptions,
@@ -64,7 +56,17 @@ const AddPurchaseOrder = ({
     }
 
     const { values, setFieldValue } = formikProps
-
+    const parmas = useParams()
+    console.log(parmas, 'parmas')
+    const breadcrumbs: BreadcrumbType[] = [
+        {
+            label: 'Vendore Purchase-order',
+            path: `${`/vendors/${parmas.vendorId}/purchase-order`}`,
+        },
+        {
+            label: 'Add Purchase Order',
+        },
+    ]
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -111,24 +113,22 @@ const AddPurchaseOrder = ({
                                     setFieldValue('poCode', e.target.value)
                                 }
                             />
-
                             {/* Vendor */}
-                            <ATMSelect
+                            <ATMSelectSearchable
                                 name="vendorId"
+                                isDisabled
                                 value={values.vendorId}
-                                onChange={(e) => e}
-                                //setFieldValue('vendorId', e.target.value)
-
+                                onChange={(e) => setFieldValue('vendorId', e)}
                                 options={dropdownOptions.vendorOptions}
                                 label="Vendor"
                             />
 
                             {/* Warehouse */}
-                            <ATMSelect
+                            <ATMSelectSearchable
                                 name="wareHouseId"
                                 value={values.wareHouseId}
                                 onChange={(e) =>
-                                    setFieldValue('wareHouseId', e.target.value)
+                                    setFieldValue('wareHouseId', e)
                                 }
                                 options={dropdownOptions.warehouseOptions}
                                 label="Warehouse"
@@ -163,7 +163,7 @@ const AddPurchaseOrder = ({
                                                         >
                                                             {/* Item Name */}
                                                             <div className="flex-[3_3_0%]">
-                                                                <ATMSelect
+                                                                <ATMSelectSearchable
                                                                     name={`purchaseOrder[${itemIndex}].itemId`}
                                                                     value={
                                                                         itemId
@@ -174,8 +174,6 @@ const AddPurchaseOrder = ({
                                                                         setFieldValue(
                                                                             `purchaseOrder[${itemIndex}].itemId`,
                                                                             e
-                                                                                .target
-                                                                                .value
                                                                         )
                                                                     }
                                                                     options={

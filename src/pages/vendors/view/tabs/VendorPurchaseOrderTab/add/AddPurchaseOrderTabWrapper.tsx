@@ -195,12 +195,7 @@ const AddPurchaseOrderTabWrapper = (props: Props) => {
         }, 1000)
     }
 
-    // const dropdownOptions : DropdownOptions = {
-    //   vendorOptions,
-    //   warehouseOptions,
-    //   itemOptions,
-    // }
-
+  
     return (
         <Formik
             initialValues={initialValues}

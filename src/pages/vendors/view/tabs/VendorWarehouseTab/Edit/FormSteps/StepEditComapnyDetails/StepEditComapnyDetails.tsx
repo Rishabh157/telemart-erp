@@ -53,26 +53,28 @@ const StepEditComapnyDetails = ({
                     switch (type) {
                         case 'text':
                             return (
-                                <ATMTextField
-                                    key={name}
-                                    name={name}
-                                    value={values[name]}
-                                    onChange={(e) => {
-                                        handleSetFieldValue(
-                                            name,
-                                            e.target.value
-                                        )
-                                    }}
-                                    label={label}
-                                    placeholder={placeholder}
-                                    className="shadow bg-white rounded"
-                                    isSubmitting={isSubmitting}
-                                />
+                                <React.Fragment key={name}>
+                                    <ATMTextField
+                                        key={name}
+                                        name={name}
+                                        value={values[name]}
+                                        onChange={(e) => {
+                                            handleSetFieldValue(
+                                                name,
+                                                e.target.value
+                                            )
+                                        }}
+                                        label={label}
+                                        placeholder={placeholder}
+                                        className="shadow bg-white rounded"
+                                        isSubmitting={isSubmitting}
+                                    />
+                                </React.Fragment>
                             )
 
                         case 'select':
                             return (
-                                <div className="-mt-2">
+                                <div className="-mt-2" key={name}>
                                     <ATMSelectSearchable
                                         selectLabel={label}
                                         label={label}

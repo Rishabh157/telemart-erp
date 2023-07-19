@@ -530,6 +530,18 @@ const PageRoutes = () => {
                             path="warehouse"
                             element={<VendorWarehouseTabWrapper />}
                         />
+                        
+                    <Route
+                        path="warehouse/add"
+                        element={
+                            <ActionAuthHOC
+                                component={<AddVendorWarehouseWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
+                    />
                         <Route
                             path="return-to-vendor"
                             element={'Return To Vendor'}
@@ -643,7 +655,7 @@ const PageRoutes = () => {
                         }
                     />
 
-                    <Route
+                    {/* <Route
                         path="vendors/:dealerId/warehouse/add-warehouse"
                         element={
                             <ActionAuthHOC
@@ -653,7 +665,7 @@ const PageRoutes = () => {
                                 isRedirect
                             />
                         }
-                    />
+                    /> */}
                     <Route
                         path="dealers/:dealerId/warehouse/add-warehouse"
                         element={
