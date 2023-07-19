@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:StepAddCompanyDetails.tsx
 // Type: View-Tab Component
-// Last Updated: JULY 04, 2023
+// Last Updated: JULY 19, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -72,7 +72,7 @@ const StepAddComapnyDetails = ({
 
                         case 'select':
                             return (
-                                <div className="-mt-2">
+                                <div className="-mt-2" key={name}>
                                     <ATMSelectSearchable
                                         selectLabel={label}
                                         label={label}

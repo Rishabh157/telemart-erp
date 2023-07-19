@@ -126,21 +126,17 @@ const steps = [
         validationSchema: object({
             contact_informations: array().of(
                 object().shape({
-                    name: string().required('Name is required'),
-                    department: string().required('Department is required'),
-                    designation: string().required('Designation is required'),
-                    email: string()
-                        .email('Invalid email')
-                        .required('Email is required'),
+                    name: string(),
+                    department: string(),
+                    designation: string(),
+                    email: string().email('Invalid email'),
                     mobileNumber: string()
                         .max(10, 'Mobile Number must be 10 characters')
                         .min(10, 'Mobile Number must be 10 digits')
-                        .required('Mobile Number is required')
                         .matches(regIndiaPhone, 'Invalid Mobile Number'),
                     landLine: string()
                         .max(10, 'Mobile Number must be 10 characters')
-                        .min(10, 'Mobile Number must be 10 digits')
-                        .required('Landline is required'),
+                        .min(10, 'Mobile Number must be 10 digits'),
                 })
             ),
         }),

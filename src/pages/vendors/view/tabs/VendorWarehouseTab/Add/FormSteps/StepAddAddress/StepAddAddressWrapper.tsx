@@ -2,7 +2,7 @@
 /// ==============================================
 // Filename:StepAddAddressWrapper.tsx
 // Type: View-Tab Component
-// Last Updated: JULY 04, 2023
+// Last Updated: JULY 19, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -91,7 +91,17 @@ const formFields: {
             },
         ],
     },
-
+    {
+        sectionName: '',
+        fields: [
+            {
+                name: 'checkbox',
+                label: 'As Above values',
+                type: 'checkbox',
+                placeholder: 'checbox',
+            },
+        ],
+    },
     {
         sectionName: 'Billing Address',
         fields: [

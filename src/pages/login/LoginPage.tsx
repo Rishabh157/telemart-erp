@@ -98,7 +98,6 @@ const LoginPage = ({ pathName }: any) => {
                     .catch((err) => {
                         // Handle any error that occurs during login request
                     })
-
             } catch (error) {
                 // Handle any other errors that occur
             }
@@ -145,6 +144,12 @@ const LoginPage = ({ pathName }: any) => {
                                 value={password}
                                 onChange={(e) => {
                                     setPassword(e.target.value)
+                                }}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        setErrorInitiate(true)
+                                        handleLogin()
+                                    }
                                 }}
                                 label="Password"
                                 className="bg-slate-100 focus:bg-white h-[50px]"
