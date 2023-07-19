@@ -72,7 +72,7 @@ const StepAddComapnyDetails = ({
 
                         case 'select':
                             return (
-                                <div className="-mt-2">
+                                <div className="-mt-2" key={name}>
                                     <ATMSelectSearchable
                                         selectLabel={label}
                                         label={label}
