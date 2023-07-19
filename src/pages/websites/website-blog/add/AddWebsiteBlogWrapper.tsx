@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -39,9 +39,10 @@ const AddWebsiteBlogWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { state } = useLocation()
-    const { siteId } = state
-
+    const WebsiteBlogState: any = useSelector(
+        (state: RootState) => state.websiteBlog
+    )
+    const { filterValue } = WebsiteBlogState
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addWebsiteBlog] = useAddWebsiteBlogMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -75,7 +76,7 @@ const AddWebsiteBlogWrapper = (props: Props) => {
                 blogSubtitle: values.blogSubtitle || '',
                 image: values.image || '',
                 blogDescription: values.blogDescription || '',
-                websiteId: siteId,
+                websiteId: filterValue,
                 companyId: userData?.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
