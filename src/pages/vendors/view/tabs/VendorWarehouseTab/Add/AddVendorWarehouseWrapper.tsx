@@ -13,7 +13,7 @@ import React, { useState, useEffect } from 'react'
 import { Form, Formik, FormikProps } from 'formik'
 import { array, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate,  useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
@@ -148,9 +148,8 @@ const steps = [
 ]
 
 const AddVendorWarehouseWrapper = () => {
-    const { state } = useLocation()
-
-    const vendorId = state?.params?.vendorId || null
+    const state = useParams()
+    const vendorId = state?.vendorId
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const navigate = useNavigate()

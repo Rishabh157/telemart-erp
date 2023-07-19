@@ -643,7 +643,7 @@ const PageRoutes = () => {
                         }
                     />
 
-                    <Route
+                    {/* <Route
                         path="vendors/:dealerId/warehouse/add-warehouse"
                         element={
                             <ActionAuthHOC
@@ -653,7 +653,7 @@ const PageRoutes = () => {
                                 isRedirect
                             />
                         }
-                    />
+                    /> */}
                     <Route
                         path="dealers/:dealerId/warehouse/add-warehouse"
                         element={
