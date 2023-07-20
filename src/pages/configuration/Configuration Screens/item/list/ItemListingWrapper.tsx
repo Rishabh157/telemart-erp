@@ -70,7 +70,7 @@ const ItemListingWrapper = () => {
         },
 
         {
-            field: 'weight',
+            field: 'itemWeight',
             headerName: 'Weight (in gms.)',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: ItemListResponse) => {

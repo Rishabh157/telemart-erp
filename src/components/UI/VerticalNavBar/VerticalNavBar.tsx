@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:VeritcalNavBar.tsx
 // Type: Utils Component
-// Last Updated: JULY 06, 2023
+// Last Updated: JULY 20, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -57,14 +57,10 @@ const VerticalNavBar = ({
     const { customized, userData } = useSelector(
         (state: RootState) => state?.auth
     )
-    const { data, isLoading, isFetching } = useGetUserAccessQuery(
-        {
-            userRole: userData?.userRole as string,
-        },
-        {
-            skip: !userData?.userRole,
-        }
-    )
+    const { data, isLoading, isFetching } = useGetUserAccessQuery({
+        userId: userData?.userId ? (userData?.userId as string) : null,
+        userRole: userData?.userRole as string,
+    })
 
     useEffect(() => {
         if (!isLoading && !isFetching && data) {

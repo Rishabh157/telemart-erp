@@ -51,7 +51,7 @@ const DealersCategoryListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'dealersCategoryName',
+            field: 'dealersCategory',
             headerName: 'Dealers Category',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DealersCategoryListResponse) => (

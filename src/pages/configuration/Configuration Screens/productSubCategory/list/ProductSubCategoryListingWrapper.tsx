@@ -75,7 +75,7 @@ const ProductSubCategoryListingWrapper = () => {
             },
         },
         {
-            field: 'parentCategory',
+            field: 'parentCategoryLabel',
             headerName: 'Parent Category ',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: ProductSubCategoryListResponse) => {

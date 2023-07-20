@@ -504,7 +504,7 @@
                         {
                             "fieldId": "warehouseId5",
                             "fieldName": "District",
-                            "fieldValue": "billingAddressDistrictName"
+                            "fieldValue": "registrationDistrictName"
                         },
                         {
                             "fieldId": "warehouseId6",

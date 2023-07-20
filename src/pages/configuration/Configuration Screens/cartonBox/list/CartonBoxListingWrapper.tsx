@@ -69,7 +69,7 @@ const CartonBoxListingWrapper = () => {
             ),
         },
         {
-            field: 'dimensions',
+            field: 'dimension',
             headerName: 'Dimensions',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: CartonBoxListResponse) => {

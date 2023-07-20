@@ -107,6 +107,28 @@ const UsersListingWrapper = () => {
                 return <span> {getDepartmentLabel(row.userDepartment)} </span>
             },
         },
+        {
+            field: 'userRole',
+            headerName: 'User Role',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: any) => (
+                <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() =>
+                        navigate(`/configurations/user-access`, {
+                            state: {
+                                dept: row?.userDepartment,
+                                userRole: row?.userRole,
+                                userId: row?._id,
+                            },
+                        })
+                    }
+                >
+                    {' '}
+                    {row.userRole.replaceAll('_', ' ')}
+                </span>
+            ),
+        },
         // {
         //     field: 'userRole',
         //     headerName: 'User Role',

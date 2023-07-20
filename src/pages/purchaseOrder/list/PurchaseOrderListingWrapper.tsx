@@ -138,7 +138,7 @@ const PurchaseOrderListingWrapper = () => {
             ),
         },
         {
-            field: 'itemName',
+            field: 'purchaseOrder',
             headerName: 'Item Name',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -146,7 +146,7 @@ const PurchaseOrderListingWrapper = () => {
             },
         },
         {
-            field: 'quantity',
+            field: 'purchaseOrder',
             headerName: 'Quantity',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -154,7 +154,7 @@ const PurchaseOrderListingWrapper = () => {
             },
         },
         {
-            field: 'receivedQuantity',
+            field: 'purchaseOrder',
             headerName: 'Recieved Quantity',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -162,7 +162,7 @@ const PurchaseOrderListingWrapper = () => {
             },
         },
         {
-            field: 'rate',
+            field: 'purchaseOrder',
             headerName: 'rate',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -170,7 +170,7 @@ const PurchaseOrderListingWrapper = () => {
             },
         },
         {
-            field: 'vendor',
+            field: 'vendorLabel',
             headerName: 'Vendor',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -186,7 +186,7 @@ const PurchaseOrderListingWrapper = () => {
             },
         },
         {
-            field: 'estimateDeliveryDate',
+            field: 'purchaseOrder',
             headerName: 'Est. Delivery Date',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -202,7 +202,7 @@ const PurchaseOrderListingWrapper = () => {
         },
 
         {
-            field: 'approval.approvalLevel',
+            field: 'isConfirmed',
             headerName: 'Approval level',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
