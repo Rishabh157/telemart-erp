@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react'
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
 import { array, object, string } from 'yup'
-import {  useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -149,7 +149,7 @@ const steps = [
 const EditVendorWarehouseWrapper = () => {
     const params = useParams()
     const Id: any = params.id
-    const vendorId = params?.vendorId 
+    const vendorId = params?.vendorId
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
 

@@ -164,7 +164,7 @@ const UserAcess = ({
             ) || false
         )
     }
-    const isCheckedModuleActionField = (        
+    const isCheckedModuleActionField = (
         module: ModulesTypes,
         actions: moduleActionTypes,
         field: fieldTypes
@@ -203,7 +203,7 @@ const UserAcess = ({
     ) => {
         console.log(2)
         let clonedUserAccessItems = JSON.parse(JSON.stringify(userAccessItems))
-        
+
         const moduleIndex = clonedUserAccessItems.modules?.findIndex(
             (moduleitem: ModulesTypes) =>
                 moduleitem.moduleId === module.moduleId
@@ -256,7 +256,6 @@ const UserAcess = ({
             setExpanded0(isExpanded0 ? panel : false)
         }
 
-
     const getReplaceUnderScoreToSpace = (name: string) =>
         name?.replaceAll('_', ' ')
 
@@ -308,15 +307,12 @@ const UserAcess = ({
                         </div>
                     </div>
 
-
                     <div className="py-3 px-2 border-b border-slate-300">
                         <div className="grid grid-cols-1 gap-1">
-                            
-                                <div className="flex flex-col gap-3">
-                                    {modules?.map(
-                                        (module: ModulesTypes, ind: number) => {
-                                            return (
-                                        
+                            <div className="flex flex-col gap-3">
+                                {modules?.map(
+                                    (module: ModulesTypes, ind: number) => {
+                                        return (
                                             <Accordion
                                                 key={ind}
                                                 className="shadow-lg border "
@@ -324,7 +320,9 @@ const UserAcess = ({
                                                 onChange={handleChange(ind)}
                                             >
                                                 <AccordionSummary
-                                                    expandIcon={<MdExpandMore />}
+                                                    expandIcon={
+                                                        <MdExpandMore />
+                                                    }
                                                     aria-controls={`panel-${ind}`}
                                                     id={`panel-${ind}`}
                                                 >
@@ -332,14 +330,17 @@ const UserAcess = ({
                                                         <div className="font-bold text-medium  gap-2 flex">
                                                             <input
                                                                 id={`${module?.moduleId}`}
-                                                                type={'checkbox'}
+                                                                type={
+                                                                    'checkbox'
+                                                                }
                                                                 checked={isCheckedModule(
                                                                     module
                                                                 )}
                                                                 onChange={(e) =>
                                                                     handleUserModuleAccess(
                                                                         module,
-                                                                        e.target.checked
+                                                                        e.target
+                                                                            .checked
                                                                     )
                                                                 }
                                                             />
@@ -361,7 +362,8 @@ const UserAcess = ({
                                                         <ul className="pt-2  grid grid-cols-4 gap-1">
                                                             {module?.moduleAction.map(
                                                                 (
-                                                                    actionsItems: moduleActionTypes, index
+                                                                    actionsItems: moduleActionTypes,
+                                                                    index
                                                                 ) => {
                                                                     return (
                                                                         <li
@@ -401,103 +403,111 @@ const UserAcess = ({
                                                                                 <div className="flex flex-cols-1 justify-around">
                                                                                     {actionsItems
                                                                                         ?.fields
-                                                                                        .length ?(
-                                                                                            <Accordion
-                                                                                                key={index}
-                                                                                                className="shadow-lg border "
-                                                                                                expanded={expanded0 === index}
-                                                                                                onChange={handleChange0(index)}
+                                                                                        .length ? (
+                                                                                        <Accordion
+                                                                                            key={
+                                                                                                index
+                                                                                            }
+                                                                                            className="shadow-lg border "
+                                                                                            expanded={
+                                                                                                expanded0 ===
+                                                                                                index
+                                                                                            }
+                                                                                            onChange={handleChange0(
+                                                                                                index
+                                                                                            )}
+                                                                                        >
+                                                                                            <AccordionSummary
+                                                                                                expandIcon={
+                                                                                                    <MdExpandMore />
+                                                                                                }
+                                                                                                aria-controls={`panel-${index}`}
+                                                                                                id={`panel-${index}`}
                                                                                             >
-                                                                                                <AccordionSummary
-                                                                                                    expandIcon={<MdExpandMore />}
-                                                                                                    aria-controls={`panel-${index}`}
-                                                                                                    id={`panel-${index}`}
-                                                                                                >
-                                                                                                    <span className="text-primary-main font-medium">
-                                                                                                        <label
-                                                                                                            className="select-none mb-1"
-                                                                                                            htmlFor={`${actionsItems?.actionId}`}
-                                                                                                        >
-                                                                                                            {getReplaceUnderScoreToSpace(
-                                                                                                                actionsItems.actionName
-                                                                                                            )}
-                                                                                                        </label>
-                                                                                                    </span>
-                                                                                                </AccordionSummary>
+                                                                                                <span className="text-primary-main font-medium">
+                                                                                                    <label
+                                                                                                        className="select-none mb-1"
+                                                                                                        htmlFor={`${actionsItems?.actionId}`}
+                                                                                                    >
+                                                                                                        {getReplaceUnderScoreToSpace(
+                                                                                                            actionsItems.actionName
+                                                                                                        )}
+                                                                                                    </label>
+                                                                                                </span>
+                                                                                            </AccordionSummary>
 
-                                                                                                <AccordionDetails className="border-t border-slate-300 ">
-                                                                                                    <div className="py-3 ">
+                                                                                            <AccordionDetails className="border-t border-slate-300 ">
+                                                                                                <div className="py-3 ">
                                                                                                     <div className="px-4 py-1 border flex flex-col justify-between">
-                                                                                                            {actionsItems?.fields?.map(
-                                                                                                                (
-                                                                                                                    field, index
-                                                                                                                ) => {
-                                                                                                                    return (
-                                                                                                                        <ul
+                                                                                                        {actionsItems?.fields?.map(
+                                                                                                            (
+                                                                                                                field,
+                                                                                                                index
+                                                                                                            ) => {
+                                                                                                                return (
+                                                                                                                    <ul
+                                                                                                                        key={
+                                                                                                                            field.fieldId
+                                                                                                                        }
+                                                                                                                    >
+                                                                                                                        <li
+                                                                                                                            className=""
                                                                                                                             key={
-                                                                                                                                field.fieldId
-                                                                                                                            }                                                                                                                            
+                                                                                                                                index
+                                                                                                                            }
                                                                                                                         >
-                                                                                                                            <li
-                                                                                                                                className=""
-                                                                                                                                key={
-                                                                                                                                    index
-                                                                                                                                }
-                                                                                                                            >
-                                                                                                                                <div className="gap-2 flex px-3">
-                                                                                                                                    <input
-                                                                                                                                        id={`${field?.fieldId}`}
-                                                                                                                                        type={
-                                                                                                                                            'checkbox'
-                                                                                                                                        }
-                                                                                                                                        checked={isCheckedModuleActionField(
+                                                                                                                            <div className="gap-2 flex px-3">
+                                                                                                                                <input
+                                                                                                                                    id={`${field?.fieldId}`}
+                                                                                                                                    type={
+                                                                                                                                        'checkbox'
+                                                                                                                                    }
+                                                                                                                                    checked={isCheckedModuleActionField(
+                                                                                                                                        module,
+                                                                                                                                        actionsItems,
+                                                                                                                                        field
+                                                                                                                                    )}
+                                                                                                                                    onChange={(
+                                                                                                                                        e
+                                                                                                                                    ) =>
+                                                                                                                                        handleUserFieldAccess(
                                                                                                                                             module,
                                                                                                                                             actionsItems,
-                                                                                                                                            field
-                                                                                                                                        )}
-                                                                                                                                        onChange={(
+                                                                                                                                            field,
                                                                                                                                             e
-                                                                                                                                        ) =>
-                                                                                                                                            handleUserFieldAccess(
-                                                                                                                                                module,
-                                                                                                                                                actionsItems,
-                                                                                                                                                field,
-                                                                                                                                                e.target.checked
-                                                                                                                                            )
-                                                                                                                                        }
-                                                                                                                                    />
-                                                                                                                                    <label
-                                                                                                                                        className="select-none"
-                                                                                                                                        htmlFor={`${field?.fieldId}`}
-                                                                                                                                    >
-                                                                                                                                        {
-                                                                                                                                            field?.fieldName
-                                                                                                                                        }
-                                                                                                                                    </label>
-                                                                                                                                </div>
-                                                                                                                            </li>
-                                                                                                                        </ul>
-                                                                                                                    )
-                                                                                                                }
-                                                                                                            )}
-                                                                                                        </div>        
+                                                                                                                                                .target
+                                                                                                                                                .checked
+                                                                                                                                        )
+                                                                                                                                    }
+                                                                                                                                />
+                                                                                                                                <label
+                                                                                                                                    className="select-none"
+                                                                                                                                    htmlFor={`${field?.fieldId}`}
+                                                                                                                                >
+                                                                                                                                    {
+                                                                                                                                        field?.fieldName
+                                                                                                                                    }
+                                                                                                                                </label>
+                                                                                                                            </div>
+                                                                                                                        </li>
+                                                                                                                    </ul>
+                                                                                                                )
+                                                                                                            }
+                                                                                                        )}
                                                                                                     </div>
-                                                                                                </AccordionDetails>
-                                                                                            </Accordion>
-                                                                                        ) : (
-                                                                                            
-                                                                                                <label
-                                                                                                    className="select-none"
-                                                                                                    htmlFor={`${actionsItems?.actionId}`}
-                                                                                                >
-                                                                                                    
-                                                                                                    {getReplaceUnderScoreToSpace(
-                                                                                                        actionsItems.actionName
-                                                                                                    )}
-                                                                                                    
-                                                                                                </label>
-                                                                                            
-                                                                                        )}
+                                                                                                </div>
+                                                                                            </AccordionDetails>
+                                                                                        </Accordion>
+                                                                                    ) : (
+                                                                                        <label
+                                                                                            className="select-none"
+                                                                                            htmlFor={`${actionsItems?.actionId}`}
+                                                                                        >
+                                                                                            {getReplaceUnderScoreToSpace(
+                                                                                                actionsItems.actionName
+                                                                                            )}
+                                                                                        </label>
+                                                                                    )}
                                                                                     {/* <label
                                                                                         className="select-none"
                                                                                         htmlFor={`${actionsItems?.actionId}`}
@@ -599,17 +609,15 @@ const UserAcess = ({
                                                     </div>
                                                 </AccordionDetails>
                                             </Accordion>
-                                        )})}
-                                    </div>
-
-                                </div>
-                           
+                                        )
+                                    }
+                                )}
+                            </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
+        </div>
         // </div>
     )
 }

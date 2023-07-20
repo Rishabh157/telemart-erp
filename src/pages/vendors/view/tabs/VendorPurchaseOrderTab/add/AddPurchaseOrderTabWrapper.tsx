@@ -195,7 +195,6 @@ const AddPurchaseOrderTabWrapper = (props: Props) => {
         }, 1000)
     }
 
-  
     return (
         <Formik
             initialValues={initialValues}

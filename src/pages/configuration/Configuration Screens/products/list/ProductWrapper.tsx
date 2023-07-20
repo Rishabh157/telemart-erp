@@ -50,7 +50,7 @@ const ProductsListingWrapper = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    
+
     const columns: columnTypes[] = [
         {
             field: 'productCode',
