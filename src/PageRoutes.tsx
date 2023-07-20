@@ -819,10 +819,10 @@ const PageRoutes = () => {
                     >
                         <Route index element={<OrderListing />} />
                         <Route path="view/:id" element={<OrderViewWrapper />} />
-                        <Route
+                        {/* <Route
                             path="approved-orders"
                             element={<ApprovedOrderListing />}
-                        />
+                        /> */}
                     </Route>
 
                     {/* Call */}
