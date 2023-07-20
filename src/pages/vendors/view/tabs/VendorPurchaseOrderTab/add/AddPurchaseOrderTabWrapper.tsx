@@ -21,7 +21,6 @@ import { useAddPurchaseOrderMutation } from 'src/services/PurchaseOrderService'
 import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllItemsQuery } from 'src/services/ItemService'
 import { setAllItems } from 'src/redux/slices/vendorSlice'
 
@@ -29,6 +28,7 @@ import { setAllItems } from 'src/redux/slices/vendorSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllItem } from 'src/redux/slices/itemSlice'
+import { useGetVendorWarehouseByVendorIdQuery } from 'src/services/VendorWarehouseService'
 
 // |-- Types --|
 type Props = {}
@@ -68,11 +68,16 @@ const AddPurchaseOrderTabWrapper = (props: Props) => {
     } = useGetVendorsQuery(userData?.companyId)
     const { allItems }: any = useSelector((state: RootState) => state.vendor)
 
+    // Get Warehouse by CompanyId & VendorId
     const {
-        data: warehouseData,
-        isLoading: warehouseIsLoading,
-        isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery(userData?.companyId)
+        data: vendorWarehouseData,
+        isLoading: vendorWarehouseIsLoading,
+        isFetching: vendorWarehouseIsFetching,
+    } = useGetVendorWarehouseByVendorIdQuery({
+        companyId: userData?.companyId,
+        vendorId: vendorId,
+    })
+
     const { allItems: warehouseItems }: any = useSelector(
         (state: RootState) => state?.warehouse
     )
@@ -113,8 +118,13 @@ const AddPurchaseOrderTabWrapper = (props: Props) => {
 
     //warehouse
     useEffect(() => {
-        disptach(setAllWareHouse(warehouseData?.data))
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, disptach])
+        disptach(setAllWareHouse(vendorWarehouseData?.data))
+    }, [
+        vendorWarehouseData,
+        vendorWarehouseIsLoading,
+        vendorWarehouseIsFetching,
+        disptach,
+    ])
 
     useEffect(() => {
         disptach(setAllItem(itemsData?.data))

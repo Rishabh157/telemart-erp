@@ -64,7 +64,6 @@ import OrderListing from './orders/all/OrderListing'
 import AddSaleOrderWrapper from './saleOrder/add/AddSaleOrderWrapper'
 import EditSaleOrderWrapper from './saleOrder/edit/EditSaleOrderWrapper'
 import SaleOrderListingWrapper from './saleOrder/list/SaleOrderListingWrapper'
-import Test from './test/Test'
 
 import VendorActivityTabWrapper from './vendors/view/tabs/VendorActivityTab/VendorActivityTabWrapper'
 import VendorGeneralInformationTabWrapper from './vendors/view/tabs/VendorGeneralInformationTab/VendorGeneralInformationTabWrapper'
@@ -264,7 +263,6 @@ export {
     AddSaleOrderWrapper,
     EditSaleOrderWrapper,
     SaleOrderListingWrapper,
-    Test,
     UsersListingWrapper,
     AddUserWrapper,
     EditUserWrapper,

@@ -89,7 +89,7 @@ const WebstieListingWrapper = () => {
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
-                        navigate(`/all-websites/Website/${currentId}`)
+                        navigate(`/all-websites/website/${currentId}`)
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({
