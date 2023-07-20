@@ -107,9 +107,10 @@ const WebstieListingWrapper = () => {
                     <>
                         <button
                             onClick={() => {
+                                dispatch(setFilterValue(currentId))
                                 navigate('/all-websites/website-blog/add', {
                                     state: {
-                                        siteId: currentId,
+                                        websiteId: currentId,
                                     },
                                 })
                             }}
@@ -132,6 +133,7 @@ const WebstieListingWrapper = () => {
                         </button>
                         <button
                             onClick={() => {
+                                dispatch(setFilterValue(currentId))
                                 navigate('/all-websites/website-page/add', {
                                     state: {
                                         siteId: currentId,
