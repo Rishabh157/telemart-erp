@@ -24,7 +24,6 @@ import {
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
 
-
 const InitialCallThreeListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteIniticallthree] = useDeleteInitialCallerThreeMutation()

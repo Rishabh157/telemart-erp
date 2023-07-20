@@ -38,7 +38,6 @@ import {
 } from 'src/redux/slices/media/competitorManagementSlice'
 import moment from 'moment'
 
-
 const CompetitorManagementListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()

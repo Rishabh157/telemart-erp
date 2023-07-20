@@ -533,7 +533,7 @@
                     "fields": []
                 },
                 {
-                    "actionId": "warehouseActionViewId",
+                    "actionId": "warehouseActionInventoriesViewId",
                     "actionUrl": "/view/:id/inventories",
                     "actionName": "VIEW",
                     "fields": []

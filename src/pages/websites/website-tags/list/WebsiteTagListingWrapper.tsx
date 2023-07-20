@@ -108,7 +108,7 @@ const WebsiteTagListingWrapper = () => {
                         navigate(`/all-websites/website-tags/${currentId}`)
                     }}
                     handleEditActionButton={() => {
-                        navigate(`/all-websites/website-tags/${currentId}`)
+                        navigate(`/all-websites/website-tags/edit/${currentId}`)
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({

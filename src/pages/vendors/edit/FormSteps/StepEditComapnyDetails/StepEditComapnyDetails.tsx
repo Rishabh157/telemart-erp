@@ -61,27 +61,27 @@ const StepEditComapnyDetails = ({
                         case 'text':
                             return (
                                 <React.Fragment key={name}>
-                                <ATMTextField
-                                    key={name}
-                                    name={name}
-                                    value={values[name]}
-                                    onChange={(e) => {
-                                        handleSetFieldValue(
-                                            name,
-                                            e.target.value
-                                        )
-                                    }}
-                                    label={label}
-                                    placeholder={placeholder}
-                                    className="shadow bg-white rounded"
-                                    isSubmitting={isSubmitting}
-                                />
+                                    <ATMTextField
+                                        key={name}
+                                        name={name}
+                                        value={values[name]}
+                                        onChange={(e) => {
+                                            handleSetFieldValue(
+                                                name,
+                                                e.target.value
+                                            )
+                                        }}
+                                        label={label}
+                                        placeholder={placeholder}
+                                        className="shadow bg-white rounded"
+                                        isSubmitting={isSubmitting}
+                                    />
                                 </React.Fragment>
                             )
 
                         case 'select':
                             return (
-                                <div className="mt-0"   key={name}>
+                                <div className="mt-0" key={name}>
                                     <ATMSelect
                                         key={name}
                                         name={name}

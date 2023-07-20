@@ -143,7 +143,7 @@ const OrderListing = () => {
                 <ActionPopup
                     moduleName={UserModuleNameTypes.order}
                     isView
-                    isEdit
+                    // isEdit
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -151,9 +151,9 @@ const OrderListing = () => {
                     handleViewActionButton={() => {
                         navigate(`view/${currentId}`)
                     }}
-                    handleEditActionButton={() => {
-                        navigate(`${currentId}`)
-                    }}
+                    // handleEditActionButton={() => {
+                    //     navigate(`${currentId}`)
+                    // }}
                 />
             ),
             align: 'end',

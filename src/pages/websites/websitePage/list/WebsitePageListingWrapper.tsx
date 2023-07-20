@@ -87,10 +87,10 @@ const WebsitePageListingWrapper = () => {
                         setCurrentId(row?._id)
                     }}
                     handleViewActionButton={() => {
-                        navigate(`/all-websites/website-Page/view/${currentId}`)
+                        navigate(`/all-websites/website-page/view/${currentId}`)
                     }}
                     handleEditActionButton={() => {
-                        navigate(`/all-websites/website-Page/${currentId}`)
+                        navigate(`/all-websites/website-page/${currentId}`)
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({

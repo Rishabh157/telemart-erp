@@ -41,7 +41,7 @@ export const navigation: NavItemType[] = [
         label: 'Dashboard',
         icon: RxDashboard,
         path: '/dashboard',
-        name:  UserModuleNameTypes.dashboard,
+        name: UserModuleNameTypes.dashboard,
     },
 
     {
