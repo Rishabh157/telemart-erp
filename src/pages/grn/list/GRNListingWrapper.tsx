@@ -57,7 +57,7 @@ const columns: columnTypes[] = [
         },
     },
     {
-        field: 'receivingQuantity',
+        field: 'receivedQuantity',
         headerName: 'Received Qnty.',
         flex: 'flex-[1.5_1.5_0%]',
         renderCell: (row: GRNListResponse) => {

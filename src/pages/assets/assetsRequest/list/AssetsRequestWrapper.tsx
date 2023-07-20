@@ -37,7 +37,6 @@ import {
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 const AssetsRequestWrapper = () => {
     const navigate = useNavigate()
     const assetsRequest = useSelector((state: RootState) => state.assetsRequest)
@@ -57,7 +56,7 @@ const AssetsRequestWrapper = () => {
             ),
         },
         {
-            field: 'assetCategory',
+            field: 'assetcategorieLabel',
             headerName: 'Asset Category',
             flex: 'flex-[1.8_1.8_0%]',
             renderCell: (row: AssetsRequestListResponse) => (

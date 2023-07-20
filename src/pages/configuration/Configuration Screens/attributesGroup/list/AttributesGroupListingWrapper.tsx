@@ -50,7 +50,7 @@ const AttributesGroupListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'groupeName',
+            field: 'groupName',
             headerName: 'Group Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: AttributesGroupListResponse) => (

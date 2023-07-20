@@ -54,7 +54,7 @@ const ASRListingWrapper = () => {
     const [isDisabled, setIsDisabled] = useState(false)
     const columns: columnTypes[] = [
         {
-            field: 'itemName',
+            field: 'productName',
             headerName: 'Item Name',
             flex: 'flex-[3_3_0%]',
             renderCell: (row: ASRListResponse) => (
@@ -129,7 +129,7 @@ const ASRListingWrapper = () => {
             ),
         },
         {
-            field: 'status',
+            field: 'completed',
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: ASRListResponse) => (

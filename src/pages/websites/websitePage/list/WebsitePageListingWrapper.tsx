@@ -56,7 +56,7 @@ const WebsitePageListingWrapper = () => {
         WebsitePageState
     const columns: columnTypes[] = [
         {
-            field: 'pagerName',
+            field: 'pageName',
             headerName: 'Page Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: WebsitePageListResponse) => (
