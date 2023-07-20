@@ -16,7 +16,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import StepEditCompanyDetailsWrapper from './FormSteps/StepEditComapnyDetails/StepEditCompanyDetailsWrapper'
 import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
 import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
@@ -284,27 +283,25 @@ const EditVendorWarehouseWrapper = () => {
         dispatch(setSelectedItem(data?.data))
     }, [data, isLoading, isFetching])
     return (
-        <SideNavLayout>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={getValidationSchema(activeStep)}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
-                        <EditVendorWarehouse
-                            formikProps={formikProps}
-                            steps={steps}
-                            activeStep={activeStep}
-                            setActiveStep={setActiveStep}
-                            apiStatus={apiStatus}
-                            allCountry={allCountry}
-                        />
-                    </Form>
-                )}
-            </Formik>
-        </SideNavLayout>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={getValidationSchema(activeStep)}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => (
+                <Form className="">
+                    <EditVendorWarehouse
+                        formikProps={formikProps}
+                        steps={steps}
+                        activeStep={activeStep}
+                        setActiveStep={setActiveStep}
+                        apiStatus={apiStatus}
+                        allCountry={allCountry}
+                    />
+                </Form>
+            )}
+        </Formik>
     )
 }
 
