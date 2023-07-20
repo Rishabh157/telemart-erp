@@ -358,7 +358,7 @@ const UserAcess = ({
 
                                                 <AccordionDetails className="border-t border-slate-300 ">
                                                     <div className="py-3">
-                                                        <ul className="pt-2">
+                                                        <ul className="pt-2  grid grid-cols-4 gap-1">
                                                             {module?.moduleAction.map(
                                                                 (
                                                                     actionsItems: moduleActionTypes, index
@@ -370,7 +370,7 @@ const UserAcess = ({
                                                                                 actionsItems.actionId
                                                                             }
                                                                         >
-                                                                            <div className="gap-2 flex px-3">
+                                                                            <div className="gap-2 flex px-3 py-1">
                                                                                 <input
                                                                                     disabled={
                                                                                         actionsItems.actionName ===
@@ -426,7 +426,7 @@ const UserAcess = ({
                                                                                                 </AccordionSummary>
 
                                                                                                 <AccordionDetails className="border-t border-slate-300 ">
-                                                                                                    <div className="py-3">
+                                                                                                    <div className="py-3 ">
                                                                                                     <div className="px-4 py-1 border flex flex-col justify-between">
                                                                                                             {actionsItems?.fields?.map(
                                                                                                                 (
@@ -436,7 +436,7 @@ const UserAcess = ({
                                                                                                                         <ul
                                                                                                                             key={
                                                                                                                                 field.fieldId
-                                                                                                                            }
+                                                                                                                            }                                                                                                                            
                                                                                                                         >
                                                                                                                             <li
                                                                                                                                 className=""
@@ -485,14 +485,18 @@ const UserAcess = ({
                                                                                                 </AccordionDetails>
                                                                                             </Accordion>
                                                                                         ) : (
-                                                                                            <label
-                                                                                                className="select-none"
-                                                                                                htmlFor={`${actionsItems?.actionId}`}
-                                                                                            >
-                                                                                                {getReplaceUnderScoreToSpace(
-                                                                                                    actionsItems.actionName
-                                                                                                )}
-                                                                                            </label>
+                                                                                            
+                                                                                                <label
+                                                                                                    className="select-none"
+                                                                                                    htmlFor={`${actionsItems?.actionId}`}
+                                                                                                >
+                                                                                                    
+                                                                                                    {getReplaceUnderScoreToSpace(
+                                                                                                        actionsItems.actionName
+                                                                                                    )}
+                                                                                                    
+                                                                                                </label>
+                                                                                            
                                                                                         )}
                                                                                     {/* <label
                                                                                         className="select-none"
