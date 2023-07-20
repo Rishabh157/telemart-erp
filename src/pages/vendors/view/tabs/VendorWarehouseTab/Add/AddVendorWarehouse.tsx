@@ -11,7 +11,7 @@ import React from 'react'
 // |-- External Dependencies --|
 import { Step, StepLabel, Stepper } from '@mui/material'
 import { FormikProps } from 'formik'
-import {  useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|

@@ -53,6 +53,15 @@ export const vendorWarehouseApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        // **** GET BY  Company ID & Vendor Id
+        getVendorWarehouseByVendorId: builder.query({
+            providesTags: ['vendorWarehouse'],
+            query: ({ companyId, vendorId }) => ({
+                url: `/vendor-warehouse/company/${companyId}/vendor/${vendorId}`,
+                method: 'GET',
+            }),
+        }),
+
         //****Delete vendor Warehouse ****/
         deleteVendorWarehouse: builder.mutation({
             invalidatesTags: ['vendorWarehouse'],
@@ -69,5 +78,6 @@ export const {
     useAddVendorWarehouseMutation,
     useUpdateVendorWarehouseMutation,
     useGetVendorWarehouseByIdQuery,
+    useGetVendorWarehouseByVendorIdQuery,
     useDeleteVendorWarehouseMutation,
 } = vendorWarehouseApi

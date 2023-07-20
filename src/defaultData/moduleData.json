@@ -59,9 +59,7 @@
                     "actionId": "vendorsActionViewId",
                     "actionUrl": "/vendors/:id/general-information",
                     "actionName": "VIEW",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
@@ -87,7 +85,8 @@
                     "actionUrl": "/vendors/:id/purchase-order/add",
                     "actionName": "PURCHASE_ORDER_ADD",
                     "parentGroup": [
-                        "VIEW"
+                        "VIEW",
+                        "PURCHASE_ORDER"
                     ],
                     "fields": []
                 },
@@ -97,7 +96,6 @@
                     "actionName": "VENDOR_WAREHOUSE",
                     "parentGroup": [
                         "VIEW"
-                       
                     ],
                     "fields": []
                 },
@@ -134,7 +132,8 @@
                     "actionUrl": "",
                     "actionName": "VENDOR_LEDGER_CREDIT_ADD",
                     "parentGroup": [
-                        "VIEW"
+                        "VIEW",
+                        "VENDOR_LEDGER"
                     ],
                     "fields": []
                 },
@@ -143,7 +142,8 @@
                     "actionUrl": "",
                     "actionName": "VENDOR_LEDGER_DEBIT_ADD",
                     "parentGroup": [
-                        "VIEW"
+                        "VIEW",
+                        "VENDOR_LEDGER"
                     ],
                     "fields": []
                 },
@@ -160,27 +160,21 @@
                     "actionId": "vendorsActionAddId",
                     "actionUrl": "/vendors/add-vendor",
                     "actionName": "ADD",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "vendorsActionEditId",
                     "actionUrl": "/vendors/edit-vendor/:id",
                     "actionName": "EDIT",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "vendorsActionDeleteId",
                     "actionUrl": "/vendors/delete",
                     "actionName": "DELETE",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -248,105 +242,142 @@
                     "actionId": "dealerActionGeneralInformationId",
                     "actionUrl": "/dealers/:id/general-information",
                     "actionName": "GENERAL_INFORMATION",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionDealerWarehouseId",
                     "actionUrl": "/dealers/:id/warehouse",
                     "actionName": "DEALER_WAREHOUSE",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerWarehouseActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_WAREHOUSE_ADD",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW",
+                        "DEALER_WAREHOUSE"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionSaleOrderId",
                     "actionUrl": "/dealers/:id/sale-order",
                     "actionName": "DEALER_SALE_ORDER",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerSaleOrderActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_SALE_ORDER_ADD",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW",
+                        "DEALER_SALE_ORDER"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionLedgerId",
                     "actionUrl": "/dealers/:id/ledger",
                     "actionName": "DEALER_LEDGER",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerLedgerCreditAmountActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_LEDGER_CREDIT_AMOUNT_ADD",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW",
+                        "DEALER_LEDGER"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerLedgerCreditAmountNoteActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_LEDGER_CREDIT_NOTE_ADD",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW",
+                        "DEALER_LEDGER"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerLedgerDebitNoteActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_LEDGER_DEBIT_NOTE_ADD",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW",
+                        "DEALER_LEDGER"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionOrderLedgerId",
                     "actionUrl": "/dealers/:id/order-ledger",
                     "actionName": "DEALER_ORDER_LEDGER",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionActivityId",
                     "actionUrl": "/dealers/:id/activities",
                     "actionName": "DEALER_ACTIVITY",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerPinCodeActionId",
                     "actionUrl": "/dealers/:id/pincode",
                     "actionName": "DEALER_PINCODE",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerPinCodeActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_PINCODE_ADD",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW",
+                        "DEALER_PINCODE"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerSchemeActionId",
                     "actionUrl": "/dealers/:id/scheme",
                     "actionName": "DEALER_SCHEME",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "dealerSchemesActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_SCHEME_ADD",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "VIEW",
+                        "DEALER_SCHEME"
+                    ],
                     "fields": []
                 },
                 {
@@ -623,7 +654,7 @@
                     "fields": []
                 },
                 {
-                    "actionId": "warehouseActionViewId",
+                    "actionId": "warehouseActionInventoriesViewId",
                     "actionUrl": "/view/:id/inventories",
                     "actionName": "VIEW",
                     "parentGroup": [],

@@ -34,7 +34,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: 'Website',
-        path: '/all-websites/Website',
+        path: '/all-websites/website',
     },
     {
         label: 'Update Website',

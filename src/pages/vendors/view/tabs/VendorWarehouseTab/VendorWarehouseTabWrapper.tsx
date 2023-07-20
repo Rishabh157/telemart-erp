@@ -38,7 +38,7 @@ type Props = {}
 const VendorWarehouseTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
-    console.log(params,"params")
+    console.log(params, 'params')
     const vendorId = params.vendorId
     const [deleteVendorWarehouse] = useDeleteVendorWarehouseMutation()
     const [currentId, setCurrentId] = useState('')
@@ -62,12 +62,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             headerName: 'Warehouse Name',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: VendorWarehousesListResponse) => {
-                return (
-                    <span className=" ">
-                        {' '}
-                        {row.wareHouseName}{' '}
-                    </span>
-                )
+                return <span>{row.wareHouseName}</span>
             },
         },
         {
@@ -75,10 +70,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             headerName: 'Country',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: VendorWarehousesListResponse) => (
-                <span className=" ">
-                    {' '}
-                    {row.wareHouseCountryName}{' '}
-                </span>
+                <span> {row.wareHouseCountryName} </span>
             ),
         },
         {
@@ -86,12 +78,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             headerName: 'State',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: VendorWarehousesListResponse) => {
-                return (
-                    <span className=" ">
-                        {' '}
-                        {row.registrationStateName}{' '}
-                    </span>
-                )
+                return <span> {row.registrationStateName} </span>
             },
         },
         {
@@ -99,12 +86,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             headerName: 'District',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: VendorWarehousesListResponse) => {
-                return (
-                    <span className=" ">
-                        {' '}
-                        {row.registrationDistrictName}{' '}
-                    </span>
-                )
+                return <span> {row.registrationDistrictName} </span>
             },
         },
         {
@@ -112,12 +94,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             headerName: 'Pincode',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: VendorWarehousesListResponse) => {
-                return (
-                    <span className=" ">
-                        {' '}
-                        {row.registrationPincodeName}{' '}
-                    </span>
-                )
+                return <span> {row.registrationPincodeName} </span>
             },
         },
         {
