@@ -204,7 +204,7 @@ import {
     DealerListLedgerTabWrapper,
     AddDealerWarehouseWarpper,
     AddVendorWarehouseWrapper,
-    //EditVendorWarehouseWrapper,
+    EditVendorWarehouseWrapper,
     VendorListLedgerTabWrapper,
     AddInventoryManagementWrapper,
     EditInventoryManagementWrapper,
@@ -246,49 +246,6 @@ const PageRoutes = () => {
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData ? userData : null))
 
-<<<<<<< HEAD
-    // const { data, isLoading, isFetching } = useGetUserAccessQuery(
-    //     {
-    //         userRole: userData?.userRole as string,
-    //     },
-    //     {
-    //         skip: !userData?.userRole,
-    //     }
-    // )
-
-    // useEffect(() => {
-    //     if (!isLoading && !isFetching && data) {
-    //         if (data?.data !== null) {
-    //             dispatch(setCheckUserAccess(data?.data?.module))
-    //         } else {
-    //             dispatch(setCheckUserAccess([]))
-    //         }
-    //     }
-
-    //     // eslint-disable-next-line
-    // }, [data, isLoading, isFetching ])
-    // // const { checkUserAccess } = useSelector(
-    //     (state: RootState) => state.userAccess
-    // )
-
-    // if (!accessToken && window.location.pathname==='/') {
-    //     return (
-    //         <>
-    //             <BrowserRouter>
-    //                 <Routes>
-    //                     <Route path="*" element={<Auth />} />
-    //                     <Route
-    //                         path="media/caller-page/"
-    //                         element={<CallerPageWrapper />}
-    //                     />
-    //                 </Routes>
-    //             </BrowserRouter>
-    //         </>
-    //     )
-    // }
-
-=======
->>>>>>> 570d6fd62f85d6e58cd9ebae8a97bfef8951497c
     return (
         <>
             <BrowserRouter>
@@ -362,10 +319,6 @@ const PageRoutes = () => {
                             path="warehouse"
                             element={<VendorWarehouseTabWrapper />}
                         />
-<<<<<<< HEAD
-
-=======
->>>>>>> 570d6fd62f85d6e58cd9ebae8a97bfef8951497c
                         <Route
                             path="warehouse/add"
                             element={
@@ -377,8 +330,6 @@ const PageRoutes = () => {
                                 />
                             }
                         />
-<<<<<<< HEAD
-=======
                         <Route
                             path="warehouse/:id"
                             element={
@@ -390,7 +341,6 @@ const PageRoutes = () => {
                                 />
                             }
                         />
->>>>>>> 570d6fd62f85d6e58cd9ebae8a97bfef8951497c
                         <Route
                             path="return-to-vendor"
                             element={'Return To Vendor'}
