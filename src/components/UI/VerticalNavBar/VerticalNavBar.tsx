@@ -54,17 +54,13 @@ const VerticalNavBar = ({
     useEffect(() => {
         dispatch(setDeviceId(deviceIditem))
     }, [deviceIditem, dispatch])
-    const { customized, userData, deviceId } = useSelector(
+    const { customized, userData } = useSelector(
         (state: RootState) => state?.auth
     )
-    const { data, isLoading, isFetching } = useGetUserAccessQuery(
-        {
-            userRole: userData?.userRole as string,
-        },
-        {
-            skip: !deviceId,
-        }
-    )
+    const { data, isLoading, isFetching } = useGetUserAccessQuery({
+        userId: userData?.userId ? (userData?.userId as string) : null,
+        userRole: userData?.userRole as string,
+    })
 
     useEffect(() => {
         if (!isLoading && !isFetching && data) {

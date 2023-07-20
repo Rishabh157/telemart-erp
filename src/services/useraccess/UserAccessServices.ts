@@ -18,11 +18,26 @@ export const callerPageApi = apiSlice.injectEndpoints({
         //***** get *****/
         getUserAccess: builder.query({
             // invalidatesTags: ['callerForm'],
-            query: ({ userRole }: { userRole: string }) => ({
-                url: `/user-access`,
-                params: { userRoleId: userRole },
-                method: 'GET',
-            }),
+            query: ({
+                userId,
+                userRole,
+            }: {
+                userId: string | null
+                userRole: string
+            }) => {
+                console.log(userId, 'userId')
+                let params: any = { userRoleId: userRole }
+
+                if (userId !== null) {
+                    params.userId = userId
+                }
+
+                return {
+                    url: `/user-access`,
+                    params,
+                    method: 'GET',
+                }
+            },
         }),
 
         //***** Update *****/
@@ -32,6 +47,25 @@ export const callerPageApi = apiSlice.injectEndpoints({
                 url: `user-access/user-role/${userRole}`,
                 method: 'PUT',
                 body,
+            }),
+        }),
+
+        //***** Update by userId *****/
+        updateUserAccessByUserId: builder.mutation({
+            // invalidatesTags: ['callerForm'],
+            query: ({ id, body }) => ({
+                url: `user-access/${id}`,
+                method: 'PUT',
+                body: body,
+            }),
+        }),
+
+        //***** user access already added *****/
+        isUserExists: builder.query({
+            // invalidatesTags: ['callerForm'],
+            query: (id) => ({
+                url: `user-access/user-exists/${id}`,
+                method: 'GET',
             }),
         }),
 
@@ -50,4 +84,6 @@ export const {
     useAddUserAccessMutation,
     useGetUserAccessQuery,
     useUpdateUserAccessMutation,
+    useIsUserExistsQuery,
+    useUpdateUserAccessByUserIdMutation,
 } = callerPageApi
