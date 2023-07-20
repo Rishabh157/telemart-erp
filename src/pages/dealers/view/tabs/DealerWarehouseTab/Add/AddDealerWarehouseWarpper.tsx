@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import StepAddCompanyDetailsWrapper from './FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper'
 import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
 import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
@@ -271,26 +270,24 @@ const AddDealerWarehouseWrapper = () => {
         }
     }
     return (
-        <SideNavLayout>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={getValidationSchema(activeStep)}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
-                        <AddDealerWarehouse
-                            formikProps={formikProps}
-                            steps={steps}
-                            activeStep={activeStep}
-                            setActiveStep={setActiveStep}
-                            apiStatus={apiStatus}
-                            allCountry={allCountry}
-                        />
-                    </Form>
-                )}
-            </Formik>
-        </SideNavLayout>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={getValidationSchema(activeStep)}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => (
+                <Form className="">
+                    <AddDealerWarehouse
+                        formikProps={formikProps}
+                        steps={steps}
+                        activeStep={activeStep}
+                        setActiveStep={setActiveStep}
+                        apiStatus={apiStatus}
+                        allCountry={allCountry}
+                    />
+                </Form>
+            )}
+        </Formik>
     )
 }
 
