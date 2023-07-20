@@ -198,7 +198,7 @@ import {
     // ListDealerSupervisorTabWrapper,
     // DealerSupervisorTabWrapper,
     UserAccessWrapper,
-    ApprovedOrderListing,
+    // ApprovedOrderListing,
     ApprovedOrderViewWrapper,
     EditDealerSchemeWrapper,
     DealerListLedgerTabWrapper,
