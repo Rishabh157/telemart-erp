@@ -19,6 +19,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     useAddUserAccessMutation,
     useGetUserAccessQuery,
+    useIsUserExistsQuery,
+    useUpdateUserAccessByUserIdMutation,
     useUpdateUserAccessMutation,
 } from 'src/services/useraccess/UserAccessServices'
 import { RootState } from 'src/redux/store'
@@ -28,18 +30,25 @@ const UserAccessWrapper = () => {
     const [apiStatus, setApiStatus] = useState(false)
     const { state } = useLocation()
     const { dept, userRole } = state
+    const userId = state?.userId
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [buttonValue, setButtonValue] = useState('save')
-
+    const [isUserExists, setIsUserIxists] = useState(false)
     const [addUserAccess] = useAddUserAccessMutation()
     const [updateUserAccess] = useUpdateUserAccessMutation()
-    const { data, isLoading, isFetching } = useGetUserAccessQuery(
-        { userRole: userRole as string },
-        {
-            skip: !userRole,
-        }
-    )
+    const [updateByUserId] = useUpdateUserAccessByUserIdMutation()
+
+    const { data, isLoading, isFetching } = useGetUserAccessQuery({
+        userId: userId ? (userId as string) : null,
+        userRole: userRole as string,
+    })
+    // iue => is user exists
+    const {
+        data: iueData,
+        isLoading: iueIsLoading,
+        isFetching: iueIsFetching,
+    } = useIsUserExistsQuery(userId, { skip: !userId })
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
@@ -47,8 +56,9 @@ const UserAccessWrapper = () => {
     const handleUserAccessSubmit = () => {
         setApiStatus(true)
         setTimeout(() => {
-            if (buttonValue === 'save') {
+            if ((userId && isUserExists === false) || buttonValue === 'save') {
                 addUserAccess({
+                    userId: userId ? userId : null,
                     departmentId: dept,
                     departmentName: dept,
                     userRoleId: userRole,
@@ -63,6 +73,40 @@ const UserAccessWrapper = () => {
                                 state: {
                                     dept: dept,
                                     userRole: userRole,
+                                    userId: userId,
+                                },
+                            })
+                        } else {
+                            showToast('error', res?.data?.message)
+                        }
+                    } else {
+                        showToast('error', 'Something went wrong')
+                    }
+                    setApiStatus(false)
+                })
+            } else if (userId && isUserExists === true) {
+                updateByUserId({
+                    body: {
+                        userId: userId,
+                        departmentId: dept,
+                        departmentName: dept,
+                        userRoleId: userRole,
+                        userRoleName: userRole || '',
+                        module: [...userAccessItems.modules],
+                    },
+                    id: userId,
+                }).then((res) => {
+                    if ('data' in res) {
+                        if (res?.data?.status) {
+                            showToast(
+                                'success',
+                                'User Access updated successfully!'
+                            )
+                            navigate(`/configurations/user-access`, {
+                                state: {
+                                    dept: dept,
+                                    userRole: userRole,
+                                    userId: userId,
                                 },
                             })
                         } else {
@@ -86,11 +130,15 @@ const UserAccessWrapper = () => {
                 }).then((res) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
-                            showToast('success', 'User Access successfully!')
+                            showToast(
+                                'success',
+                                'User Access updated successfully!'
+                            )
                             navigate(`/configurations/user-access`, {
                                 state: {
                                     dept: dept,
                                     userRole: userRole,
+                                    userId: userId,
                                 },
                             })
                         } else {
@@ -104,7 +152,11 @@ const UserAccessWrapper = () => {
             }
         }, 1000)
     }
-
+    useEffect(() => {
+        if (iueData?.data) {
+            setIsUserIxists(iueData?.data)
+        }
+    }, [iueData, iueIsLoading, iueIsFetching])
     useEffect(() => {
         if (!isLoading && !isFetching && data) {
             if (data?.data) {
