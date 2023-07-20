@@ -118,7 +118,6 @@ const StepAddDealerDetails = ({
                                         key={name}
                                         name={name}
                                         value={values[name]}
-                                       
                                         onChange={(e) => {
                                             handleSetFieldValue(
                                                 name,

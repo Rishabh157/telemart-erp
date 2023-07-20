@@ -148,7 +148,7 @@ const steps = [
 const EditVendorWarehouseWrapper = () => {
     const params = useParams()
     const Id: any = params.id
-    const vendorId = params?.vendorId 
+    const vendorId = params?.vendorId
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
 

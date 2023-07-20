@@ -37,7 +37,6 @@ import {
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 
-
 const AssetsRequestWrapper = () => {
     const navigate = useNavigate()
     const assetsRequest = useSelector((state: RootState) => state.assetsRequest)
