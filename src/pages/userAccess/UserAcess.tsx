@@ -164,11 +164,12 @@ const UserAcess = ({
             ) || false
         )
     }
-    const isCheckedModuleActionField = (
+    const isCheckedModuleActionField = (        
         module: ModulesTypes,
         actions: moduleActionTypes,
         field: fieldTypes
     ) => {
+        console.log(1)
         const isExistModule = userAccessItems.modules?.find(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
@@ -200,15 +201,17 @@ const UserAcess = ({
         field: fieldTypes,
         fieldValue: boolean
     ) => {
+        console.log(2)
         let clonedUserAccessItems = JSON.parse(JSON.stringify(userAccessItems))
-
+        
         const moduleIndex = clonedUserAccessItems.modules?.findIndex(
             (moduleitem: ModulesTypes) =>
                 moduleitem.moduleId === module.moduleId
         )
+        console.log(clonedUserAccessItems)
         const moduleActionIndex = clonedUserAccessItems.modules[
             moduleIndex
-        ].moduleAction.findIndex(
+        ]?.moduleAction.findIndex(
             (actionItem: moduleActionTypes) =>
                 actionItem.actionId === actions.actionId
         )
@@ -427,7 +430,7 @@ const UserAcess = ({
                                                                                                     <div className="px-4 py-1 border flex flex-col justify-between">
                                                                                                             {actionsItems?.fields?.map(
                                                                                                                 (
-                                                                                                                    field
+                                                                                                                    field, index
                                                                                                                 ) => {
                                                                                                                     return (
                                                                                                                         <ul
@@ -438,7 +441,7 @@ const UserAcess = ({
                                                                                                                             <li
                                                                                                                                 className=""
                                                                                                                                 key={
-                                                                                                                                    field.fieldId
+                                                                                                                                    index
                                                                                                                                 }
                                                                                                                             >
                                                                                                                                 <div className="gap-2 flex px-3">
@@ -459,9 +462,7 @@ const UserAcess = ({
                                                                                                                                                 module,
                                                                                                                                                 actionsItems,
                                                                                                                                                 field,
-                                                                                                                                                e
-                                                                                                                                                    .target
-                                                                                                                                                    .checked
+                                                                                                                                                e.target.checked
                                                                                                                                             )
                                                                                                                                         }
                                                                                                                                     />
