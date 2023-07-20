@@ -56,7 +56,7 @@ const AssetsRequestWrapper = () => {
             ),
         },
         {
-            field: 'assetCategory',
+            field: 'assetcategorieLabel',
             headerName: 'Asset Category',
             flex: 'flex-[1.8_1.8_0%]',
             renderCell: (row: AssetsRequestListResponse) => (

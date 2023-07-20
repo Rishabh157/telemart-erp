@@ -88,7 +88,7 @@ const DealersListingWrapper = () => {
             },
         },
         {
-            field: 'mobile',
+            field: 'billingAddress',
             headerName: 'Phone',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => {
@@ -96,7 +96,7 @@ const DealersListingWrapper = () => {
             },
         },
         {
-            field: 'district',
+            field: 'billingAddress',
             headerName: 'District',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: DealersListResponse) => {
@@ -104,7 +104,7 @@ const DealersListingWrapper = () => {
             },
         },
         {
-            field: 'state',
+            field: 'billingAddress',
             headerName: 'State',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: DealersListResponse) => {

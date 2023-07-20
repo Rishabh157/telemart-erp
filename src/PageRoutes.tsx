@@ -1456,6 +1456,7 @@ const PageRoutes = () => {
                             <ActionAuthHOC
                                 component={<ArtistListingWrapper />}
                                 moduleName={UserModuleNameTypes.artist}
+                                actionName={UserModuleActionTypes.List}
                             />
                         }
                     />
@@ -2150,6 +2151,7 @@ const PageRoutes = () => {
                             <ActionAuthHOC
                                 component={<WebsiteTagListingWrapper />}
                                 moduleName={UserModuleNameTypes.websiteTags}
+                                actionName={UserModuleActionTypes.List}
                             />
                         }
                     />
