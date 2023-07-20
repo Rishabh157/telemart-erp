@@ -34,9 +34,7 @@ const Header = () => {
     useEffect(() => {
         dispatch(setDeviceId(deviceIditem))
     }, [deviceIditem, dispatch])
-    const { userData, deviceId } = useSelector(
-        (state: RootState) => state?.auth
-    )
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
         useState(true)
     const [company, setCompany] = useState(userData?.companyId || '')
@@ -44,9 +42,7 @@ const Header = () => {
     const themeColor = color ? JSON.parse(color) : ''
     const [siteMode, setSiteMode] = useState(themeColor)
     const [companyName, setCompanyName] = useState('')
-    const { data, isFetching, isLoading } = useGetAllCompaniesQuery('', {
-        skip: !deviceId,
-    })
+    const { data, isFetching, isLoading } = useGetAllCompaniesQuery('')
     useEffect(() => {
         if (!isLoading && !isFetching) {
             if (data?.data?.status) {
@@ -66,6 +62,13 @@ const Header = () => {
         if (!companyId) return
         const update = {
             companyId: companyId,
+            firstName: userData?.firstName,
+            lastName: userData?.lastName,
+            userName: userData?.userName,
+            email: userData?.email,
+            mobile: userData?.mobile,
+            userDepartment: 'ADMIN',
+            userRole: userData?.userRole,
         }
         updaeCompany({ body: update, id: userData?.userId || '' }).then(
             (updateCompanyInfo: any) => {
@@ -84,6 +87,8 @@ const Header = () => {
                     let userData = {
                         userId: _id,
                         fullName: firstName + lastName,
+                        firstName: firstName,
+                        lastName: lastName,
                         email: email,
                         mobile: mobile,
                         userName: userName,
@@ -166,7 +171,7 @@ const Header = () => {
                     </div>
                 </div>
 
-                {userData?.role === 'ADMIN' ? (
+                {userData?.userRole === 'ADMIN' ? (
                     <FormControl sx={{ width: 150 }}>
                         <Select
                             value={company}

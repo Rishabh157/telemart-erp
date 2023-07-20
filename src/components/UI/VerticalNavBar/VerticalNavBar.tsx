@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:VeritcalNavBar.tsx
 // Type: Utils Component
-// Last Updated: JULY 06, 2023
+// Last Updated: JULY 20, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
