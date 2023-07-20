@@ -64,7 +64,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
                 return (
-                    <span className="text-primary-main ">
+                    <span className=" ">
                         {' '}
                         {row.wareHouseName}{' '}
                     </span>
@@ -76,7 +76,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             headerName: 'Country',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: WarehousesListResponse) => (
-                <span className="text-primary-main ">
+                <span className=" ">
                     {' '}
                     {row.wareHouseCountryName}{' '}
                 </span>
@@ -88,7 +88,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
                 return (
-                    <span className="text-primary-main ">
+                    <span className=" ">
                         {' '}
                         {row.registrationCountryName}{' '}
                     </span>
@@ -101,7 +101,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
                 return (
-                    <span className="text-primary-main ">
+                    <span className=" ">
                         {' '}
                         {row.registrationDistrictName}{' '}
                     </span>
@@ -114,7 +114,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
                 return (
-                    <span className="text-primary-main ">
+                    <span className=" ">
                         {' '}
                         {row.registrationPincodeName}{' '}
                     </span>

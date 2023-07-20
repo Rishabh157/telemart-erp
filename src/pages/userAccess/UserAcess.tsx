@@ -113,14 +113,46 @@ const UserAcess = ({
             let moduleAction = [
                 ...userAccessItems?.modules[moduleIndex].moduleAction,
             ]
+
             if (actionValue) {
+                action.parentGroup.forEach((groupName) => {
+                    let isParent = moduleAction?.find(
+                        (actionitem) => actionitem.actionName === groupName
+                    )
+                    if (!isParent) {
+                        const ActiveModule = modules?.find(
+                            (moduleitem) =>
+                                moduleitem.moduleId === module.moduleId
+                        )
+                        let ViewAction = ActiveModule?.moduleAction?.find(
+                            (actionitem: moduleActionTypes) =>
+                                actionitem.actionName === groupName
+                        )
+                        if (ViewAction) {
+                            moduleAction.push(ViewAction)
+                        }
+                    }
+                })
+
                 moduleAction.push(action)
             } else {
-                let valueRemove = moduleAction?.filter(
-                    (actionitem) => actionitem.actionId !== action.actionId
+                let isChildRemove = moduleAction?.filter(
+                    (actionitem: moduleActionTypes) => {
+                        if (
+                            !actionitem.parentGroup.includes(
+                                action.actionName
+                            ) &&
+                            actionitem.actionId !== action.actionId
+                        ) {
+                            return actionitem
+                        }
+                        return false
+                    }
                 )
-                moduleAction = valueRemove
+
+                moduleAction = isChildRemove
             }
+
             moduleValue[moduleIndex] = {
                 ...moduleValue[moduleIndex],
                 moduleAction: moduleAction,
@@ -128,13 +160,6 @@ const UserAcess = ({
             dispatch(setUserModule(moduleValue))
         }
     }
-    // const handleUserFieldAccess = (
-    //     module: ModulesTypes
-    //     action: string,
-    //     fieldValue: boolean
-    // ) => {
-    //
-    // }
 
     const isCheckedModule = (module: ModulesTypes) => {
         const isExistModule = userAccessItems?.modules?.some(

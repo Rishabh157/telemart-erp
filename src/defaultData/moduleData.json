@@ -13,6 +13,7 @@
                     "actionId": "dashboardActionListId",
                     "actionUrl": "/dashboard",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -25,6 +26,7 @@
                     "actionId": "vendorsActionListId",
                     "actionUrl": "/vendors",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "vendorId1",
@@ -57,84 +59,128 @@
                     "actionId": "vendorsActionViewId",
                     "actionUrl": "/vendors/:id/general-information",
                     "actionName": "VIEW",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorGenrealInformationId",
                     "actionUrl": "/vendors/:id/general-information",
                     "actionName": "GENERAL_INFORMATION",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorPurchaseOrderId",
                     "actionUrl": "/vendors/:id/purchase-order",
                     "actionName": "PURCHASE_ORDER",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorPurchaseOrderActionAddId",
                     "actionUrl": "/vendors/:id/purchase-order/add",
                     "actionName": "PURCHASE_ORDER_ADD",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorWareHouseId",
                     "actionUrl": "/vendors/:id/warehouse",
                     "actionName": "VENDOR_WAREHOUSE",
+                    "parentGroup": [
+                        "VIEW"
+                       
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorWareHouseActionAddId",
                     "actionUrl": "/vendors/:id/warehouse/add",
                     "actionName": "VENDOR_WAREHOUSE_ADD",
+                    "parentGroup": [
+                        "VIEW",
+                        "VENDOR_WAREHOUSE"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorReturnToVendorId",
                     "actionUrl": "/vendors/:id/return-to-vendor",
                     "actionName": "RETURN_TO_VENDOR",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorLedgerId",
                     "actionUrl": "/vendors/:id/ledger",
                     "actionName": "VENDOR_LEDGER",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorLedgerActionCrAddId",
                     "actionUrl": "",
                     "actionName": "VENDOR_LEDGER_CREDIT_ADD",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorLedgerActionDrAddId",
                     "actionUrl": "",
                     "actionName": "VENDOR_LEDGER_DEBIT_ADD",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorActivityId",
                     "actionUrl": "/vendors/:id/activities",
                     "actionName": "VENDOR_ACTIVITY",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorsActionAddId",
                     "actionUrl": "/vendors/add-vendor",
                     "actionName": "ADD",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorsActionEditId",
                     "actionUrl": "/vendors/edit-vendor/:id",
                     "actionName": "EDIT",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "vendorsActionDeleteId",
                     "actionUrl": "/vendors/delete",
                     "actionName": "DELETE",
+                    "parentGroup": [
+                        "VIEW"
+                    ],
                     "fields": []
                 }
             ]
@@ -147,6 +193,7 @@
                     "actionId": "dealerActionListId",
                     "actionUrl": "/dealers",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "1",
@@ -194,114 +241,133 @@
                     "actionId": "dealerActionViewId",
                     "actionUrl": "/dealers/:id",
                     "actionName": "VIEW",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionGeneralInformationId",
                     "actionUrl": "/dealers/:id/general-information",
                     "actionName": "GENERAL_INFORMATION",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionDealerWarehouseId",
                     "actionUrl": "/dealers/:id/warehouse",
                     "actionName": "DEALER_WAREHOUSE",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerWarehouseActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_WAREHOUSE_ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionSaleOrderId",
                     "actionUrl": "/dealers/:id/sale-order",
                     "actionName": "DEALER_SALE_ORDER",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerSaleOrderActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_SALE_ORDER_ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionLedgerId",
                     "actionUrl": "/dealers/:id/ledger",
                     "actionName": "DEALER_LEDGER",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerLedgerCreditAmountActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_LEDGER_CREDIT_AMOUNT_ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerLedgerCreditAmountNoteActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_LEDGER_CREDIT_NOTE_ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerLedgerDebitNoteActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_LEDGER_DEBIT_NOTE_ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionOrderLedgerId",
                     "actionUrl": "/dealers/:id/order-ledger",
                     "actionName": "DEALER_ORDER_LEDGER",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionActivityId",
                     "actionUrl": "/dealers/:id/activities",
                     "actionName": "DEALER_ACTIVITY",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerPinCodeActionId",
                     "actionUrl": "/dealers/:id/pincode",
                     "actionName": "DEALER_PINCODE",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerPinCodeActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_PINCODE_ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerSchemeActionId",
                     "actionUrl": "/dealers/:id/scheme",
                     "actionName": "DEALER_SCHEME",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerSchemesActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_SCHEME_ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionAddId",
                     "actionUrl": "/dealers/add-dealer",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionEditId",
                     "actionUrl": "/dealers/edit-dealer/:id",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionDeleteId",
                     "actionUrl": "dealers/delete",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -314,6 +380,7 @@
                     "actionId": "dealerRatioActionListId",
                     "actionUrl": "/dealers-ratio",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -326,6 +393,7 @@
                     "actionId": "userActionListId",
                     "actionUrl": "/users",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "1",
@@ -353,18 +421,21 @@
                     "actionId": "userActionAddId",
                     "actionUrl": "/users/add-user",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "userActionEditId",
                     "actionUrl": "/users/:id",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "userActionDeleteId",
                     "actionUrl": "/users/delete",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -377,6 +448,7 @@
                     "actionId": "warehouseActionListId",
                     "actionUrl": "/warehouse",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "warehouseId1",
@@ -414,146 +486,168 @@
                     "actionId": "warehouseActionViewId",
                     "actionUrl": "/view/:id/inventories",
                     "actionName": "VIEW",
+                    "parentGroup": [],
                     "fields": []
                 },
-
                 {
                     "actionId": "warehouseActionInventoriesId",
                     "actionUrl": "/warehouse/view/:id/inventories",
                     "actionName": "TAB_WAREHOUSE_INVENTORIES",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInventoriesAddId",
                     "actionUrl": "",
                     "actionName": "TAB_WAREHOUSE_INVENTORIES_ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionOutwardInventoriesId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES",
+                    "parentGroup": [],
                     "fields": []
                 },
-
                 {
                     "actionId": "warehouseActionOutwardInventoriesDealerId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionOutwardInventoriesCustomerId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/customer",
                     "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionOutwardInventoriesRtvId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/rtv",
                     "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionOutwardInventoriesWarehouseId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/warehoue",
                     "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionOutwardInventoriesSampleId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/sample",
                     "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionOutwardInventoriesEcomId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/ecom",
                     "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_Commerce",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionOutwardInventoriesReplacementsId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/replacement",
                     "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_REPLACEMENTS",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesDealerId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesCustomerId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/customer",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesRtvId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/rtv",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_RTV",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesWarehouseId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/warehoue",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesSampleId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/sample",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesEcomId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/ecom",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_E_Commerce",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesReplacementsId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/replacement",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_REPLACEMENTS",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionDetailsId",
                     "actionUrl": "/warehouse/view/:id/warehouse-details",
                     "actionName": "TAB_WAREHOUSE_DETAILS",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionViewId",
                     "actionUrl": "/view/:id/inventories",
                     "actionName": "VIEW",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionAddId",
                     "actionUrl": "/warehouse/add",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionEditId",
                     "actionUrl": "/warehouse/:id",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionDeleteId",
                     "actionUrl": "/warehouse/delete",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -566,6 +660,7 @@
                     "actionId": "saleOrderActionListId",
                     "actionUrl": "/sale-order",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "saleOrder1",
@@ -603,18 +698,21 @@
                     "actionId": "saleOrderActionAddId",
                     "actionUrl": "/sale-order/add-sale-order",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "saleOrderActionEditId",
                     "actionUrl": "/sale-order/edit-sale-order/:id",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "saleOrderActionDeleteId",
                     "actionUrl": "/sale-order/delete",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -627,6 +725,7 @@
                     "actionId": "asrActionListId",
                     "actionUrl": "/asr",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "asrId1",
@@ -649,18 +748,21 @@
                     "actionId": "asrActionAddId",
                     "actionUrl": "/asr/add",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "asrActionEditId",
                     "actionUrl": "/asr/:id",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "asrActionDeleteId",
                     "actionUrl": "/asr/delete",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -673,6 +775,7 @@
                     "actionId": "purchaseOrderActionListId",
                     "actionUrl": "/purchase-order",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "purchaseOrderId1",
@@ -725,30 +828,35 @@
                     "actionId": "purchaseOrderActionViewId",
                     "actionUrl": "/purchase-order/view/:id",
                     "actionName": "VIEW",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "purchaseOrderActionViewGrnId",
                     "actionUrl": "/grn",
                     "actionName": "VIEW_GRN",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "purchaseOrderActionAddId",
                     "actionUrl": "/purchase-order/add",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "purchaseOrderActionEditId",
                     "actionUrl": "/purchase-order/edit/:id",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "purchaseOrderActionDeleteId",
                     "actionUrl": "/purchase-order/delete",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -761,6 +869,7 @@
                     "actionId": "grnActionListId",
                     "actionUrl": "/grn",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "grnId1",
@@ -793,18 +902,21 @@
                     "actionId": "grnActionAddId",
                     "actionUrl": "/grn/add",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "grnActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "grnActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -817,6 +929,7 @@
                     "actionId": "inquiryActionListId",
                     "actionUrl": "/inquiry",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "inquiryId1",
@@ -859,18 +972,21 @@
                     "actionId": "inquiryActionAddId",
                     "actionUrl": "/inquiry/add",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "inquiryActionEditId",
                     "actionUrl": "/inquiry/edit/:id",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "inquiryActionDeleteId",
                     "actionUrl": "/inquiry/delete",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -883,6 +999,7 @@
                     "actionId": "ordersActionListId",
                     "actionUrl": "/orders?orderStaus=all",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "ordersActionListId1",
@@ -920,92 +1037,105 @@
                     "actionId": "ordersActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionViewId",
                     "actionUrl": "/view/:id",
                     "actionName": "View",
+                    "parentGroup": [],
                     "fields": []
                 },
-
                 {
                     "actionId": "ordersActionAllId",
                     "actionUrl": "/orders?orderStaus=all",
                     "actionName": "ORDER_ALL_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionFreshOrderId",
                     "actionUrl": "/orders?orderStaus=fresh",
                     "actionName": "ORDER_FRESH_ORDER_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionOrderApprovalId",
                     "actionUrl": "/orders?orderStaus=approved",
                     "actionName": "ORDER_APPROVAL_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionDeliveredId",
                     "actionUrl": "/orders?orderStaus=delivered",
                     "actionName": "ORDER_DELIVERED_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionDoorCancelledId",
                     "actionUrl": "/orders?orderStaus=doorCancelled",
                     "actionName": "ORDER_DOOR_CANCELLED_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionHoldId",
                     "actionUrl": "/orders?orderStaus=hold",
                     "actionName": "ORDER_HOLD_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionPSCId",
                     "actionUrl": "/orders?orderStaus=psc",
                     "actionName": "ORDER_PSC_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionUNAId",
                     "actionUrl": "/orders?orderStaus=una",
                     "actionName": "ORDER_UNA_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionPNDd",
                     "actionUrl": "/orders?orderStaus=pnd",
                     "actionName": "ORDER_PND_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionUrgentId",
                     "actionUrl": "/orders?orderStaus=urgent",
                     "actionName": "ORDER_URGENT_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionNonActionsId",
                     "actionUrl": "/orders?orderStaus=non-action",
                     "actionName": "ORDER_NON_ACTION_TAB",
+                    "parentGroup": [],
                     "fields": []
                 },
-
                 {
                     "actionId": "ordersActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionDeleteId",
                     "actionUrl": "/orders/delete",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1018,6 +1148,7 @@
                     "actionId": "callActionListId",
                     "actionUrl": "/call",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "callId1",
@@ -1055,24 +1186,28 @@
                     "actionId": "ordersActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionViewId",
                     "actionUrl": "/view/:id",
                     "actionName": "View",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "ordersActionDeleteId",
                     "actionUrl": "/orders/delete",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1085,6 +1220,7 @@
                     "actionId": "AttributesActionListId",
                     "actionUrl": "/configurations/attributes",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "attributesId1",
@@ -1097,18 +1233,21 @@
                     "actionId": "AttributesActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "AttributesActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "AttributesActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1121,6 +1260,7 @@
                     "actionId": "attributesGroupActionListId",
                     "actionUrl": "/configurations/attributes-group",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "attributesGroupId1",
@@ -1138,18 +1278,21 @@
                     "actionId": "attributesGroupActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "attributesGroupActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "attributesGroupActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1162,6 +1305,7 @@
                     "actionId": "productCategoryActionListId",
                     "actionUrl": "/configurations/product-category",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "productCategoryId1",
@@ -1179,18 +1323,21 @@
                     "actionId": "productCategoryActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "productCategoryActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "productCategoryActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1203,6 +1350,7 @@
                     "actionId": "productSubCategoryActionListId",
                     "actionUrl": "/configurations/product-sub-category",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "productSubCategoryId1",
@@ -1230,18 +1378,21 @@
                     "actionId": "productSubCategoryActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "productSubCategoryActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "productSubCategoryActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1254,6 +1405,7 @@
                     "actionId": "productGroupActionListId",
                     "actionUrl": "/configurations/product-group",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "productGroupId1",
@@ -1291,18 +1443,21 @@
                     "actionId": "productGroupActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "productGroupActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "productGroupActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1315,6 +1470,7 @@
                     "actionId": "schemeActionListId",
                     "actionUrl": "/configurations/scheme",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "schemeActionListId1",
@@ -1347,18 +1503,21 @@
                     "actionId": "schemeActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "schemeActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "schemeActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1371,6 +1530,7 @@
                     "actionId": "itemActionListId",
                     "actionUrl": "/configurations/item",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "itemId1",
@@ -1393,18 +1553,21 @@
                     "actionId": "itemActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "itemActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "itemActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1417,6 +1580,7 @@
                     "actionId": "productsActionListId",
                     "actionUrl": "/configurations/products",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "productsId1",
@@ -1449,18 +1613,21 @@
                     "actionId": "productsActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "productsActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "productsActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1473,6 +1640,7 @@
                     "actionId": "cartonBoxActionListId",
                     "actionUrl": "/configurations/carton-box",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "cartonBoxId1",
@@ -1500,18 +1668,21 @@
                     "actionId": "cartonBoxActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "cartonBoxActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "cartonBoxActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1524,6 +1695,7 @@
                     "actionId": "companyActionListId",
                     "actionUrl": "/configurations/company",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "companyId1",
@@ -1556,18 +1728,21 @@
                     "actionId": "companyActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "companyActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "companyActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1580,30 +1755,35 @@
                     "actionId": "barcodeActionListId",
                     "actionUrl": "/configurations/barcode",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "barcodeActionAddId",
                     "actionUrl": "/configurations/barcode/add",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "barcodeActionProductBarCodeId",
                     "actionUrl": "",
                     "actionName": "PRODUCT_BARCODE",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "barcodeActionCartonBoxBarCodeId",
                     "actionUrl": "",
                     "actionName": "CARTON_BOX_BARCODE",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "barcodeActionBarCodeGroupId",
                     "actionUrl": "",
                     "actionName": "BARCODE_GROUP",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1616,24 +1796,28 @@
                     "actionId": "locationActionListId",
                     "actionUrl": "/configurations/location",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "locationActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "locationActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "locationActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1646,6 +1830,7 @@
                     "actionId": "languageActionListId",
                     "actionUrl": "/configurations/language",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "1",
@@ -1658,18 +1843,21 @@
                     "actionId": "languageActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "languageActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "languageActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1682,6 +1870,7 @@
                     "actionId": "dealersCategoryActionListId",
                     "actionUrl": "/configurations/dealers-category",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "dealersCategoryId1",
@@ -1709,18 +1898,21 @@
                     "actionId": "dealersCategoryActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealersCategoryActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dealersCategoryActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1733,6 +1925,7 @@
                     "actionId": "channelGroupActionListId",
                     "actionUrl": "/media/channel-group",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "1",
@@ -1745,18 +1938,21 @@
                     "actionId": "channelGroupActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "channelGroupActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "channelGroupActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1769,6 +1965,7 @@
                     "actionId": "channelCategoryActionListId",
                     "actionUrl": "/media/channel-category",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "channelCategoryId1",
@@ -1781,18 +1978,21 @@
                     "actionId": "channelCategoryActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "channelCategoryActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "channelCategoryActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1805,6 +2005,7 @@
                     "actionId": "channelActionListId",
                     "actionUrl": "/media/channel",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "channelId1",
@@ -1837,18 +2038,21 @@
                     "actionId": "channelActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "channelActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "channelActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1861,6 +2065,7 @@
                     "actionId": "didActionListId",
                     "actionUrl": "/media/did",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "didId1",
@@ -1883,18 +2088,21 @@
                     "actionId": "didActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "didActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "didActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1907,6 +2115,7 @@
                     "actionId": "artistActionListId",
                     "actionUrl": "/media/artist",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "artistId1",
@@ -1919,18 +2128,21 @@
                     "actionId": "artistActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "artistActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "artistActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1943,6 +2155,7 @@
                     "actionId": "tapeActionListId",
                     "actionUrl": "/media/tape",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "tapeId1",
@@ -1970,18 +2183,21 @@
                     "actionId": "tapeActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "tapeActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "tapeActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -1994,6 +2210,7 @@
                     "actionId": "competitorActionListId",
                     "actionUrl": "/media/competitor",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "competitorId1",
@@ -2036,18 +2253,21 @@
                     "actionId": "competitorActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "competitorActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "competitorActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2060,6 +2280,7 @@
                     "actionId": "slotActionListId",
                     "actionUrl": "/media/slot",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "slotId1",
@@ -2102,18 +2323,21 @@
                     "actionId": "slotActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "slotActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "slotActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2126,6 +2350,7 @@
                     "actionId": "assetsManagementActionListId",
                     "actionUrl": "/assets/assets-management",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "assetsManagementId1",
@@ -2153,18 +2378,21 @@
                     "actionId": "assetsManagementActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsManagementActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsManagementActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2177,6 +2405,7 @@
                     "actionId": "assetsCategoryActionListId",
                     "actionUrl": "/assets/assets-category",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "assetsCategoryId1",
@@ -2189,18 +2418,21 @@
                     "actionId": "assetsCategoryActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsCategoryActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsCategoryActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2213,6 +2445,7 @@
                     "actionId": "assetsLocationActionListId",
                     "actionUrl": "/assets/assets-location",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "assetsLocationId1",
@@ -2225,18 +2458,21 @@
                     "actionId": "assetsLocationActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsLocationActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsLocationActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2249,24 +2485,28 @@
                     "actionId": "assetsRelocationActionListId",
                     "actionUrl": "/assets/assets-relocation",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsRelocationActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsRelocationActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsRelocationActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2279,24 +2519,28 @@
                     "actionId": "assetsAllocationActionListId",
                     "actionUrl": "/assets/assets-allocation",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsAllocationActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsAllocationActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "assetsAllocationActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2309,6 +2553,7 @@
                     "actionId": "dispositionOneActionListId",
                     "actionUrl": "/dispositions/disposition-one",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "dispositionOneId1",
@@ -2321,18 +2566,21 @@
                     "actionId": "dispositionOneActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dispositionOneActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dispositionOneActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2345,6 +2593,7 @@
                     "actionId": "dispositionTwoActionListId",
                     "actionUrl": "/dispositions/disposition-two",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "dispositionTwoId1",
@@ -2362,18 +2611,21 @@
                     "actionId": "dispositionTwoActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dispositionTwoActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dispositionTwoActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2386,6 +2638,7 @@
                     "actionId": "dispositionThreeActionListId",
                     "actionUrl": "/dispositions/disposition-three",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "dispositionThreeId1",
@@ -2408,18 +2661,21 @@
                     "actionId": "dispositionThreeActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dispositionThreeActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dispositionThreeActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2432,6 +2688,7 @@
                     "actionId": "initialcallOneActionListId",
                     "actionUrl": "/dispositions/initialcall-one",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "initialcallOneId1",
@@ -2444,18 +2701,21 @@
                     "actionId": "initialcallOneActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "initialcallOneActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "initialcallOneActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2468,6 +2728,7 @@
                     "actionId": "initialcallTwoActionListId",
                     "actionUrl": "/dispositions/initialcall-two",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "initialcallTwoId1",
@@ -2485,18 +2746,21 @@
                     "actionId": "initialcallTwoActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "initialcallTwoActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "initialcallTwoActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2509,6 +2773,7 @@
                     "actionId": "initialcallThreeActionListId",
                     "actionUrl": "/dispositions/initialcall-three",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "initialcallThreeId1",
@@ -2531,18 +2796,21 @@
                     "actionId": "initialcallThreeActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "initialcallThreeActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "initialcallThreeActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2555,6 +2823,7 @@
                     "actionId": "dispositionComplaintActionListId",
                     "actionUrl": "/dispositions/disposition-complaint",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "dispositionComplaintId1",
@@ -2567,18 +2836,21 @@
                     "actionId": "dispositionComplaintActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dispositionComplaintActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "dispositionComplaintActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2591,6 +2863,7 @@
                     "actionId": "websiteActionListId",
                     "actionUrl": "/all-websites/website",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "websiteId1",
@@ -2613,18 +2886,21 @@
                     "actionId": "websiteActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "websiteActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "websiteActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2637,6 +2913,7 @@
                     "actionId": "websiteBlogActionListId",
                     "actionUrl": "/all-websites/website-blog",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "websiteBlogId1",
@@ -2659,18 +2936,21 @@
                     "actionId": "websiteBlogActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "websiteBlogActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "websiteBlogActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2683,6 +2963,7 @@
                     "actionId": "websitePageActionListId",
                     "actionUrl": "/all-websites/website-page",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "websitePageId1",
@@ -2700,18 +2981,21 @@
                     "actionId": "websitePageActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "websitePageActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "websitePageActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]
@@ -2724,6 +3008,7 @@
                     "actionId": "websiteTagsActionListId",
                     "actionUrl": "/all-websites/website-tags",
                     "actionName": "LIST",
+                    "parentGroup": [],
                     "fields": [
                         {
                             "fieldId": "websiteTagsId1",
@@ -2751,18 +3036,21 @@
                     "actionId": "websiteTagsActionAddId",
                     "actionUrl": "",
                     "actionName": "ADD",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "websiteTagsActionEditId",
                     "actionUrl": "",
                     "actionName": "EDIT",
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
                     "actionId": "websiteTagsActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
                     "fields": []
                 }
             ]

@@ -63,7 +63,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: VendorWarehousesListResponse) => {
                 return (
-                    <span className="text-primary-main ">
+                    <span className=" ">
                         {' '}
                         {row.wareHouseName}{' '}
                     </span>
@@ -75,7 +75,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             headerName: 'Country',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: VendorWarehousesListResponse) => (
-                <span className="text-primary-main ">
+                <span className=" ">
                     {' '}
                     {row.wareHouseCountryName}{' '}
                 </span>
@@ -87,7 +87,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: VendorWarehousesListResponse) => {
                 return (
-                    <span className="text-primary-main ">
+                    <span className=" ">
                         {' '}
                         {row.registrationStateName}{' '}
                     </span>
@@ -100,7 +100,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: VendorWarehousesListResponse) => {
                 return (
-                    <span className="text-primary-main ">
+                    <span className=" ">
                         {' '}
                         {row.registrationDistrictName}{' '}
                     </span>
@@ -113,7 +113,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: VendorWarehousesListResponse) => {
                 return (
-                    <span className="text-primary-main ">
+                    <span className=" ">
                         {' '}
                         {row.registrationPincodeName}{' '}
                     </span>
