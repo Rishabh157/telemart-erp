@@ -76,7 +76,7 @@ const ActionAuthHOC = ({
     return (
         <>
             {accessToken ? (
-                isAuthorized && !isLoading ? (
+                isAuthorized ? (
                     <>{component}</>
                 ) : isRedirect ? (
                     <AccessDenied/>
