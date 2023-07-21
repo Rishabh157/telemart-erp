@@ -36,7 +36,8 @@ import GRNSlice from './slices/GRNSlice'
 import inventorySlice from './slices/inventorySlice'
 import itemSlice from './slices/itemSlice'
 import languageSlice from './slices/languageSlice'
-import outwardRequestSlice from './slices/outwardRequestSlice'
+import outwardRequestSlice from './slices/warehouseOutwardSlice/outwardRequestDealerSlice'
+import inwardRequestSlice from './slices/warehouseInwardSlice/inwardRequestDealerSlice'
 import productCategorySlice from './slices/productCategorySlice'
 import productSlice from './slices/productSlice'
 import productSubCategorySlice from './slices/productSubCategorySlice'
@@ -118,6 +119,7 @@ const store = configureStore({
         warehouse: warehouseSlice,
         inventory: inventorySlice,
         outwardRequest: outwardRequestSlice,
+        inwardRequest: inwardRequestSlice,
         saleOrder: saleOrderSlice,
         attributesGroup: attributesGroupSlice,
         productCategory: productCategorySlice,
