@@ -231,6 +231,16 @@ import InwardCustomerTabsListingWrapper from './pages/inventories/inward/Custome
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
 import AuthHOC from './AuthHOC'
 import ActionAuthHOC from './ActionAuthHoc'
+import OutwardRTVTabsListingWrapper from './pages/inventories/outward/Rtv/OutwardRTVTabsListingWrapper'
+import OutwardWarehouseTabsListingWrapper from './pages/inventories/outward/Warehouse/OutwardWarehouseTabsListingWrapper'
+import OutwardSampleTabsListingWrapper from './pages/inventories/outward/Sample/OutwardSampleTabsListingWrapper'
+import OutwardEcomTabsListingWrapper from './pages/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
+import OutwardReplacementTabsListingWrapper from './pages/inventories/outward/Replacement/OutwardReplacementTabsListingWrapper'
+import InwardEcomTabsListingWrapper from './pages/inventories/inward/Ecom/InwardEcomTabsListingWrapper'
+import InwardReplacementTabsListingWrapper from './pages/inventories/inward/Replacement/InwardReplacementTabsListingWrapper'
+import InwardRTVTabsListingWrapper from './pages/inventories/inward/Rtv/InwardRTVTabsListingWrapper'
+import InwardSampleTabsListingWrapper from './pages/inventories/inward/Sample/InwardSampleTabsListingWrapper'
+import InwardWarehouseTabsListingWrapper from './pages/inventories/inward/Warehouse/InwardWarehouseTabsListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -645,23 +655,25 @@ const PageRoutes = () => {
                             />
                             <Route
                                 path="rtv"
-                                element={<OutwardDealerTabsListingWrapper />}
+                                element={<OutwardRTVTabsListingWrapper />}
                             />
                             <Route
                                 path="warehoue"
-                                element={<OutwardDealerTabsListingWrapper />}
+                                element={<OutwardWarehouseTabsListingWrapper />}
                             />
                             <Route
                                 path="sample"
-                                element={<OutwardDealerTabsListingWrapper />}
+                                element={<OutwardSampleTabsListingWrapper />}
                             />
                             <Route
                                 path="ecom"
-                                element={<OutwardDealerTabsListingWrapper />}
+                                element={<OutwardEcomTabsListingWrapper />}
                             />
                             <Route
                                 path="replacement"
-                                element={<OutwardDealerTabsListingWrapper />}
+                                element={
+                                    <OutwardReplacementTabsListingWrapper />
+                                }
                             />
                         </Route>
                         <Route
@@ -678,23 +690,25 @@ const PageRoutes = () => {
                             />
                             <Route
                                 path="rtv"
-                                element={<InwardDealerTabsListingWrapper />}
+                                element={<InwardRTVTabsListingWrapper />}
                             />
                             <Route
                                 path="warehoue"
-                                element={<InwardDealerTabsListingWrapper />}
+                                element={<InwardWarehouseTabsListingWrapper />}
                             />
                             <Route
                                 path="sample"
-                                element={<InwardDealerTabsListingWrapper />}
+                                element={<InwardSampleTabsListingWrapper />}
                             />
                             <Route
                                 path="ecom"
-                                element={<InwardDealerTabsListingWrapper />}
+                                element={<InwardEcomTabsListingWrapper />}
                             />
                             <Route
                                 path="replacement"
-                                element={<InwardDealerTabsListingWrapper />}
+                                element={
+                                    <InwardReplacementTabsListingWrapper />
+                                }
                             />
                         </Route>
 

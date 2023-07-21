@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:OutwardDealerTabs.tsx
+// Filename:InwardWarehouseTabs.tsx
 // Type: List Component
 // Last Updated: JUNE 27, 2023
 // Project: TELIMART - Front End
@@ -22,7 +22,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
-} from 'src/redux/slices/warehouseOutwardSlice/outwardRequestDealerSlice'
+} from 'src/redux/slices/warehouseInwardSlice/inwardRequestDealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -31,22 +31,22 @@ type Props = {
     rows: any[]
 }
 
-const InwardDealerTabs = ({ columns, rows }: Props) => {
+const InwardWarehouseTabs = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const outwardRequestState: any = useSelector(
-        (state: RootState) => state.outwardRequest
+    const inwardRequestState: any = useSelector(
+        (state: RootState) => state.inwardRequest
     )
     const [selectedRows, setSelectedRows] = useState([])
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-    const { page, rowsPerPage, isTableLoading } = outwardRequestState
+    const { page, rowsPerPage, isTableLoading } = inwardRequestState
 
     return (
         // <div className="px-4 h-full flex flex-col gap-2 w-full">
-        <div className=" h-[calc(100vh-150px)]  bg-white ">
+        <div className=" h-[calc(100vh-160px)]  bg-white ">
             {/* Page Header */}
             {/* <div className="flex justify-between items-center ">
-                <ATMPageHeading> Outward Requests </ATMPageHeading>
+                <ATMPageHeading> Inward Requests </ATMPageHeading>
                 <button className="bg-primary-main text-white rounded p px-3">
                     + Assign Courier
                 </button>
@@ -131,4 +131,4 @@ const InwardDealerTabs = ({ columns, rows }: Props) => {
     )
 }
 
-export default InwardDealerTabs
+export default InwardWarehouseTabs

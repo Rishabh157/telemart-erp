@@ -16,9 +16,10 @@ import { IconType } from 'react-icons'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { OutwardRequestListResponse } from 'src/models/OutwardRequest.model'
+import { OutwardRequestDealerListResponse } from 'src/models/OutwardRequest.model'
 // import { useGetVendorsQuery } from "src/services/VendorServices";
 import OutwardRequestListing from './OutwardDealerTabs'
+import { HiDotsHorizontal } from 'react-icons/hi'
 
 // |-- Redux --|
 // import {
@@ -37,10 +38,18 @@ export type Tabs = {
 
 const columns: columnTypes[] = [
     {
+        field: 'dealerName',
+        headerName: 'Dealer Name',
+        flex: 'flex-[1_1_0%]',
+        renderCell: (row: OutwardRequestDealerListResponse) => (
+            <span> {row.dealerName} </span>
+        ),
+    },
+    {
         field: 'productName',
         headerName: 'Product Name',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: OutwardRequestListResponse) => (
+        renderCell: (row: OutwardRequestDealerListResponse) => (
             <span> {row.productName} </span>
         ),
     },
@@ -48,7 +57,7 @@ const columns: columnTypes[] = [
         field: 'quantity',
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: OutwardRequestListResponse) => (
+        renderCell: (row: OutwardRequestDealerListResponse) => (
             <span> {row.quantity} </span>
         ),
     },
@@ -56,101 +65,119 @@ const columns: columnTypes[] = [
         field: 'address',
         headerName: 'Address',
         flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: OutwardRequestListResponse) => {
+        renderCell: (row: OutwardRequestDealerListResponse) => {
             return <span> {row.address} </span>
         },
     },
-    // {
-    //     field: 'actions',
-    //     headerName: 'Actions',
-    //     flex: 'flex-[0.5_0.5_0%]',
-    //     renderCell: (row: any) => (
-    //         <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-    //             {' '}
-    //             <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-    //         </button>
-    //     ),
-    //     align: 'end',
-    // },
+    {
+        field: 'creationDate',
+        headerName: 'Creation Date',
+        flex: 'flex-[1.5_1.5_0%]',
+        renderCell: (row: OutwardRequestDealerListResponse) => {
+            return <span> {row.creationDate} </span>
+        },
+    },
+    {
+        field: 'actions',
+        headerName: 'Actions',
+        flex: 'flex-[0.5_0.5_0%]',
+        renderCell: (row: any) => (
+            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
+                {' '}
+                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+            </button>
+        ),
+        align: 'end',
+    },
 ]
 
 const rows = [
     {
-        productName: 'Slim24',
+        dealerName: 'Akash Gupta',
+        productName: 'Alco ban',
         quantity: '1000',
         address: '123 Warehouse, Indore',
-        mobile: '8574859685',
+        creationDate: '21-07-2023',
         _id: 1,
     },
 
     {
-        productName: 'Slim24',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        mobile: '8574859685',
+        dealerName: '',
+        productName: 'Herbal Black Oil',
+        quantity: '500',
+        address: '',
+        creationDate: '',
         _id: 2,
     },
 
     {
-        productName: 'Slim24',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        mobile: '8574859685',
+        dealerName: '',
+        productName: 'Har jod',
+        quantity: '200',
+        address: '',
+        creationDate: '',
         _id: 3,
     },
 
     {
-        productName: 'Slim24',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        mobile: '8574859685',
+        dealerName: '',
+        productName: 'tribal oil',
+        quantity: '400',
+        address: '',
+        creationDate: '',
         _id: 4,
     },
     {
-        productName: 'Slim24',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        mobile: '8574859685',
+        dealerName: '',
+        productName: 'Dhua Dhar',
+        quantity: '600',
+        address: '',
+        creationDate: '',
         _id: 5,
     },
 
     {
-        productName: 'Slim24',
+        dealerName: 'Prateek lahoti',
+        productName: 'Alco ban',
         quantity: '1000',
         address: '123 Warehouse, Indore',
-        mobile: '8574859685',
+        creationDate: '21-07-2023',
         _id: 6,
     },
 
     {
-        productName: 'Slim24',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        mobile: '8574859685',
+        dealerName: '',
+        productName: 'Dhua Dhar',
+        quantity: '456',
+        address: '',
+        creationDate: '',
         _id: 7,
     },
 
     {
-        productName: 'Slim24',
-        quantity: '1000',
+        dealerName: 'Rajesh Sharma',
+        productName: 'Alco ban',
+        quantity: '468',
         address: '123 Warehouse, Indore',
-        mobile: '8574859685',
+        creationDate: '21-07-2023',
         _id: 8,
     },
 
     {
-        productName: 'Slim24',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        mobile: '8574859685',
+        dealerName: '',
+        productName: 'Herbal oil',
+        quantity: '100',
+        address: '',
+        creationDate: '',
         _id: 9,
     },
 
     {
-        productName: 'Slim24',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        mobile: '8574859685',
+        dealerName: 'Tribal Black Oil',
+        productName: '',
+        quantity: '70',
+        address: '',
+        creationDate: '',
         _id: 10,
     },
 ]
@@ -165,7 +192,7 @@ const OutwardDealerTabsListingWrapper = () => {
     // const { data, isFetching, isLoading } = useGetVendorsQuery({
     //   limit: rowsPerPage,
     //   searchValue: "",
-    //   params: ["quantityName", "quantityCode", "mobile"],
+    //   params: ["quantityName", "quantityCode", "creationDate"21-07-2023
     //   page: page,
     //   filterBy: [
     //     {

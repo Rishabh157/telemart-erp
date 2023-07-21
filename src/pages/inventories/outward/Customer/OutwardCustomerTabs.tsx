@@ -19,7 +19,10 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Redux --|
-import { setRowsPerPage, setPage } from 'src/redux/slices/outwardRequestSlice'
+import {
+    setRowsPerPage,
+    setPage,
+} from 'src/redux/slices/warehouseOutwardSlice/outwardRequestDealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
