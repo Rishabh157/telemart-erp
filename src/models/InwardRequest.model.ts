@@ -1,12 +1,12 @@
 /// ==============================================
-// Filename:OutwardRequest.model.ts
+// Filename:InwardRequest.model.ts
 // Type: Model Component
 // Last Updated: JUNE 28, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
 // |-- Types --|
-export type OutwardRequestDealerListResponse = {
+export type InwardRequestDealerListResponse = {
     dealerName: string
     productName: string
     quantity: string
@@ -20,7 +20,7 @@ export type OutwardRequestDealerListResponse = {
     __v: number
 }
 
-export type OutwardRequestCustomerListResponse = {
+export type InwardRequestCustomerListResponse = {
     customerName: string
     productName: string
     quantity: string
@@ -34,7 +34,7 @@ export type OutwardRequestCustomerListResponse = {
     __v: number
 }
 
-export type OutwardRequestRTVListResponse = {
+export type InwardRequestRTVListResponse = {
     vendorName: string
     productName: string
     quantity: string
@@ -48,7 +48,7 @@ export type OutwardRequestRTVListResponse = {
     __v: number
 }
 
-export type OutwardRequestWarehouseListResponse = {
+export type InwardRequestWarehouseListResponse = {
     warehouseName: string
     productName: string
     quantity: string
@@ -62,7 +62,7 @@ export type OutwardRequestWarehouseListResponse = {
     __v: number
 }
 
-export type OutwardRequestSampleListResponse = {
+export type InwardRequestSampleListResponse = {
     requestedBy: string
     productName: string
     quantity: string
@@ -76,7 +76,7 @@ export type OutwardRequestSampleListResponse = {
     __v: number
 }
 
-export type OutwardRequestEcomListResponse = {
+export type InwardRequestEcomListResponse = {
     ecomName: string
     productName: string
     quantity: string
@@ -90,7 +90,7 @@ export type OutwardRequestEcomListResponse = {
     __v: number
 }
 
-export type OutwardRequestReplacementListResponse = {
+export type InwardRequestReplacementListResponse = {
     vendorName: string
     productName: string
     quantity: string
@@ -103,7 +103,7 @@ export type OutwardRequestReplacementListResponse = {
     _id: string
     __v: number
 }
-export type AddOutwardRequest = {
+export type AddInwardRequest = {
     productName: string
     quantity: string
     address: string
@@ -113,7 +113,7 @@ export type AddOutwardRequest = {
     confirm_password: string
 }
 
-export type UpdateOutwardRequest = {
+export type UpdateInwardRequest = {
     body: {
         productName: string
         quantity: string

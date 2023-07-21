@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:OutwardDealerTabsListingWrapper.tsx
+// Filename:InwardRTVTabsListingWrapper.tsx
 // Type: List Component
 // Last Updated: JUNE 27, 2023
 // Project: TELIMART - Front End
@@ -11,15 +11,14 @@ import React from 'react'
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
 // import { HiDotsHorizontal } from 'react-icons/hi'
-// import { MdOutbond } from 'react-icons/md'
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { OutwardRequestDealerListResponse } from 'src/models/OutwardRequest.model'
+import { InwardRequestRTVListResponse } from 'src/models/InwardRequest.model'
 // import { useGetVendorsQuery } from "src/services/VendorServices";
-import OutwardRequestListing from './InwardDealerTabs'
+import InwardRequestListing from './InwardRTVTabs'
 import { HiDotsHorizontal } from 'react-icons/hi'
 
 // |-- Redux --|
@@ -27,7 +26,7 @@ import { HiDotsHorizontal } from 'react-icons/hi'
 //   setIsTableLoading,
 //   setItems,
 //   setTotalItems,
-// } from "src/redux/slices/OutwardRequestSlice";
+// } from "src/redux/slices/InwardRequestSlice";
 // import { AppDispatch, RootState } from "src/redux/store";
 
 // |-- Types --|
@@ -39,18 +38,18 @@ export type Tabs = {
 
 const columns: columnTypes[] = [
     {
-        field: 'dealerName',
-        headerName: 'Dealer Name',
+        field: 'vendorName',
+        headerName: 'Vendor Name',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: OutwardRequestDealerListResponse) => (
-            <span> {row.dealerName} </span>
+        renderCell: (row: InwardRequestRTVListResponse) => (
+            <span> {row.vendorName} </span>
         ),
     },
     {
         field: 'productName',
         headerName: 'Product Name',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: OutwardRequestDealerListResponse) => (
+        renderCell: (row: InwardRequestRTVListResponse) => (
             <span> {row.productName} </span>
         ),
     },
@@ -58,7 +57,7 @@ const columns: columnTypes[] = [
         field: 'quantity',
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: OutwardRequestDealerListResponse) => (
+        renderCell: (row: InwardRequestRTVListResponse) => (
             <span> {row.quantity} </span>
         ),
     },
@@ -66,7 +65,7 @@ const columns: columnTypes[] = [
         field: 'address',
         headerName: 'Address',
         flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: OutwardRequestDealerListResponse) => {
+        renderCell: (row: InwardRequestRTVListResponse) => {
             return <span> {row.address} </span>
         },
     },
@@ -74,7 +73,7 @@ const columns: columnTypes[] = [
         field: 'creationDate',
         headerName: 'Creation Date',
         flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: OutwardRequestDealerListResponse) => {
+        renderCell: (row: InwardRequestRTVListResponse) => {
             return <span> {row.creationDate} </span>
         },
     },
@@ -94,7 +93,7 @@ const columns: columnTypes[] = [
 
 const rows = [
     {
-        dealerName: 'Akash Gupta',
+        vendorName: 'Abhishek mehta',
         productName: 'Alco ban',
         quantity: '1000',
         address: '123 Warehouse, Indore',
@@ -103,42 +102,42 @@ const rows = [
     },
 
     {
-        dealerName: '',
-        productName: 'Herbal Black Oil',
-        quantity: '500',
-        address: '',
-        creationDate: '',
+        vendorName: 'Abhishek mehta',
+        productName: 'Alco ban',
+        quantity: '1000',
+        address: '123 Warehouse, Indore',
+        creationDate: '21-07-2023',
         _id: 2,
     },
 
     {
-        dealerName: '',
-        productName: 'Har jod',
-        quantity: '200',
-        address: '',
-        creationDate: '',
+        vendorName: 'Abhishek mehta',
+        productName: 'Alco ban',
+        quantity: '1000',
+        address: '123 Warehouse, Indore',
+        creationDate: '21-07-2023',
         _id: 3,
     },
 
     {
-        dealerName: '',
-        productName: 'tribal oil',
-        quantity: '400',
-        address: '',
-        creationDate: '',
+        vendorName: 'Abhishek mehta',
+        productName: 'Alco ban',
+        quantity: '1000',
+        address: '123 Warehouse, Indore',
+        creationDate: '21-07-2023',
         _id: 4,
     },
     {
-        dealerName: '',
-        productName: 'Dhua Dhar',
-        quantity: '600',
-        address: '',
-        creationDate: '',
+        vendorName: 'Abhishek mehta',
+        productName: 'Alco ban',
+        quantity: '1000',
+        address: '123 Warehouse, Indore',
+        creationDate: '21-07-2023',
         _id: 5,
     },
 
     {
-        dealerName: 'Prateek lahoti',
+        vendorName: 'Abhishek mehta',
         productName: 'Alco ban',
         quantity: '1000',
         address: '123 Warehouse, Indore',
@@ -147,43 +146,43 @@ const rows = [
     },
 
     {
-        dealerName: '',
-        productName: 'Dhua Dhar',
-        quantity: '456',
-        address: '',
-        creationDate: '',
+        vendorName: 'Abhishek mehta',
+        productName: 'Alco ban',
+        quantity: '1000',
+        address: '123 Warehouse, Indore',
+        creationDate: '21-07-2023',
         _id: 7,
     },
 
     {
-        dealerName: 'Rajesh Sharma',
+        vendorName: 'Abhishek mehta',
         productName: 'Alco ban',
-        quantity: '468',
+        quantity: '1000',
         address: '123 Warehouse, Indore',
         creationDate: '21-07-2023',
         _id: 8,
     },
 
     {
-        dealerName: '',
-        productName: 'Herbal oil',
-        quantity: '100',
-        address: '',
-        creationDate: '',
+        vendorName: 'Abhishek mehta',
+        productName: 'Alco ban',
+        quantity: '1000',
+        address: '123 Warehouse, Indore',
+        creationDate: '21-07-2023',
         _id: 9,
     },
 
     {
-        dealerName: 'Tribal Black Oil',
-        productName: '',
-        quantity: '70',
-        address: '',
-        creationDate: '',
+        vendorName: 'Abhishek mehta',
+        productName: 'Alco ban',
+        quantity: '1000',
+        address: '123 Warehouse, Indore',
+        creationDate: '21-07-2023',
         _id: 10,
     },
 ]
 
-const InwardDealerTabsListingWrapper = () => {
+const InwardRTVTabsListingWrapper = () => {
     // const vendorState: any = useSelector((state: RootState) => state.vendor);
 
     // const {  page, rowsPerPage } = vendorState;
@@ -193,7 +192,7 @@ const InwardDealerTabsListingWrapper = () => {
     // const { data, isFetching, isLoading } = useGetVendorsQuery({
     //   limit: rowsPerPage,
     //   searchValue: "",
-    //   params: ["quantityName", "quantityCode", "mobile"],
+    //   params: ["quantityName", "quantityCode", "creationDate"21-07-2023
     //   page: page,
     //   filterBy: [
     //     {
@@ -226,10 +225,10 @@ const InwardDealerTabsListingWrapper = () => {
     return (
         <>
             {/* <SideNavLayout> */}
-            <OutwardRequestListing columns={columns} rows={rows} />
+            <InwardRequestListing columns={columns} rows={rows} />
             {/* </SideNavLayout> */}
         </>
     )
 }
 
-export default InwardDealerTabsListingWrapper
+export default InwardRTVTabsListingWrapper

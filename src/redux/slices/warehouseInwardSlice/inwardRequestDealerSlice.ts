@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:outwardRequestSlice.ts
+// Filename:InwardRequestSlice.ts
 // Type: Slice Component
 // Last Updated: JULY 06, 2023
 // Project: TELIMART - Front End
@@ -10,10 +10,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 // |-- Internal Dependencies --|
-import { OutwardRequestListResponse } from 'src/models/OutwardRequest.model'
+import { InwardRequestDealerListResponse } from 'src/models/InwardRequest.model'
 
-export interface OutwardRequestSliceStateType {
-    items: OutwardRequestListResponse[] | []
+export interface InwardRequestSliceStateType {
+    items: InwardRequestDealerListResponse[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -23,7 +23,7 @@ export interface OutwardRequestSliceStateType {
     selectedId: string
 }
 
-const initialState: OutwardRequestSliceStateType = {
+const initialState: InwardRequestSliceStateType = {
     items: [],
     totalItems: 0,
     isTableLoading: false,
@@ -34,13 +34,13 @@ const initialState: OutwardRequestSliceStateType = {
     selectedId: '',
 }
 
-const outwardRequestSlice: any = createSlice({
-    name: 'outwardRequest',
+const InwardRequestSlice: any = createSlice({
+    name: 'InwardRequest',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<OutwardRequestListResponse[] | []>
+            action: PayloadAction<InwardRequestDealerListResponse[] | []>
         ) => {
             state.items = action.payload
         },
@@ -85,5 +85,5 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
-} = outwardRequestSlice.actions
-export default outwardRequestSlice.reducer
+} = InwardRequestSlice.actions
+export default InwardRequestSlice.reducer

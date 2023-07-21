@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:OutwardDealerTabs.tsx
+// Filename:OutwardWarehouseTabs.tsx
 // Type: List Component
 // Last Updated: JUNE 27, 2023
 // Project: TELIMART - Front End
@@ -31,7 +31,7 @@ type Props = {
     rows: any[]
 }
 
-const InwardDealerTabs = ({ columns, rows }: Props) => {
+const OutwardWarehouseTabs = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const outwardRequestState: any = useSelector(
         (state: RootState) => state.outwardRequest
@@ -43,7 +43,7 @@ const InwardDealerTabs = ({ columns, rows }: Props) => {
 
     return (
         // <div className="px-4 h-full flex flex-col gap-2 w-full">
-        <div className=" h-[calc(100vh-150px)]  bg-white ">
+        <div className=" h-[calc(100vh-160px)]  bg-white ">
             {/* Page Header */}
             {/* <div className="flex justify-between items-center ">
                 <ATMPageHeading> Outward Requests </ATMPageHeading>
@@ -131,4 +131,4 @@ const InwardDealerTabs = ({ columns, rows }: Props) => {
     )
 }
 
-export default InwardDealerTabs
+export default OutwardWarehouseTabs
