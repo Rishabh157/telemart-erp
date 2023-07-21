@@ -21,7 +21,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
-    UserModuleOtherActionTypes,
+    UserModuleAddActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
@@ -75,7 +75,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }
                     actionName={
                         isDealerPath
-                            ? UserModuleOtherActionTypes.dealerSalesOrderAdd
+                            ? UserModuleAddActionTypes.dealerSalesOrderAdd
                             : UserModuleActionTypes.Add
                     }
                     component={

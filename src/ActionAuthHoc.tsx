@@ -1,8 +1,12 @@
+import CircularProgress from '@mui/material/CircularProgress'
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
+import AccessDenied from './AccessDenied'
 import { LoginPage } from './pages'
+import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
 import { RootState } from './redux/store'
+import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
 import { isCheckAuthorizedModuleAction } from './userAccess/getAuthorizedModules'
 // import {
 //     UserModuleNameTypes,
@@ -36,6 +40,24 @@ const ActionAuthHOC = ({
         (state: RootState) => state.userAccess
     )
     const { userData } = useSelector((state: RootState) => state.auth)
+
+    const { data, isLoading, isFetching } = useGetUserAccessQuery({
+        userId: userData?.userId ? (userData?.userId as string) : null,
+        userRole: userData?.userRole as string,
+    })
+    const dispatch = useDispatch()
+    useEffect(() => {
+        console.log('dddd')
+        if (!isLoading && !isFetching && data) {
+            if (data?.data !== null) {
+                dispatch(setCheckUserAccess(data?.data?.module))
+            } else {
+                dispatch(setCheckUserAccess([]))
+            }
+        }
+
+        // eslint-disable-next-line
+    }, [data, isLoading, isFetching])
     let isAuthorized =
         userData?.userRole === 'ADMIN'
             ? true
@@ -44,14 +66,20 @@ const ActionAuthHOC = ({
                   moduleName,
                   actionName
               )
+    if (!checkUserAccess.modules.length && userData?.userRole !== 'ADMIN')
+        return (
+            <div className="flex justify-center  items-center w-screen h-screen bg-white">
+                <CircularProgress />
+            </div>
+        )
 
     return (
         <>
             {accessToken ? (
-                isAuthorized ? (
+                isAuthorized && !isLoading ? (
                     <>{component}</>
                 ) : isRedirect ? (
-                    navigate('/dashboard')
+                    <AccessDenied/>
                 ) : null
             ) : (
                 <LoginPage pathName={pathname} />

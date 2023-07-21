@@ -32,7 +32,7 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import ActionAuthHOC from 'src/ActionAuthHoc'
 import {
     UserModuleNameTypes,
-    UserModuleOtherActionTypes,
+    UserModuleAddActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
@@ -112,7 +112,7 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                     <ActionAuthHOC
                         moduleName={UserModuleNameTypes.vendor}
                         actionName={
-                            UserModuleOtherActionTypes.vendorLedgerCreditNote
+                            UserModuleAddActionTypes.vendorLedgerCreditNote
                         }
                         component={
                             <button
@@ -129,7 +129,7 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                     <ActionAuthHOC
                         moduleName={UserModuleNameTypes.vendor}
                         actionName={
-                            UserModuleOtherActionTypes.vendorLedgerDebitNote
+                            UserModuleAddActionTypes.vendorLedgerDebitNote
                         }
                         component={
                             <button

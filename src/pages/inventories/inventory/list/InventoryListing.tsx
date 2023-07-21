@@ -21,7 +21,7 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import {
     UserModuleNameTypes,
-    UserModuleOtherActionTypes,
+    UserModuleAddActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 // import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 
@@ -63,7 +63,7 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                     <ActionAuthHOC
                         moduleName={UserModuleNameTypes.wareHouse}
                         actionName={
-                            UserModuleOtherActionTypes.tabWarehouseInventoryAdd
+                            UserModuleAddActionTypes.tabWarehouseInventoryAdd
                         }
                         component={
                             <button
