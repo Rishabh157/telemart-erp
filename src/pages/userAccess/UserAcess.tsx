@@ -194,7 +194,6 @@ const UserAcess = ({
         actions: moduleActionTypes,
         field: fieldTypes
     ) => {
-        console.log(1)
         const isExistModule = userAccessItems.modules?.find(
             (moduleitem) => moduleitem.moduleId === module.moduleId
         )
