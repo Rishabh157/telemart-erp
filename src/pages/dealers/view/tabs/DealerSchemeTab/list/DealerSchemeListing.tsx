@@ -20,7 +20,7 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import {
     UserModuleNameTypes,
-    UserModuleOtherActionTypes,
+    UserModuleAddActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
@@ -59,7 +59,7 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
                 <ATMPageHeading> Schemes</ATMPageHeading>
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.dealer}
-                    actionName={UserModuleOtherActionTypes.dealerSchemeAdd}
+                    actionName={UserModuleAddActionTypes.dealerSchemeAdd}
                     component={
                         <button
                             onClick={() =>

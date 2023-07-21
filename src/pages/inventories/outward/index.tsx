@@ -46,7 +46,7 @@ const OutwardTabs = (props: Props) => {
             label: 'E-comm',
             icon: MdOutbond,
             path: 'ecom',
-            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_Commerce',
+            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE',
         },
         {
             label: 'Replacements/Repackaging',

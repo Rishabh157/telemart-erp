@@ -20,7 +20,7 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import {
     UserModuleNameTypes,
-    UserModuleOtherActionTypes,
+    UserModuleAddActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -66,7 +66,7 @@ const VendorWarehouseListing = ({
                 <ATMPageHeading> Warehouse </ATMPageHeading>
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.vendor}
-                    actionName={UserModuleOtherActionTypes.vendorWarehouseAdd}
+                    actionName={UserModuleAddActionTypes.vendorWarehouseAdd}
                     component={
                         <button
                             onClick={() =>

@@ -45,7 +45,7 @@ const tabs: Tabs[] = [
         label: 'E-comm',
         icon: MdOutbond,
         path: 'ecom',
-        name: 'TAB_WAREHOUSE_INWARD_INVENTORIES_E_Commerce',
+        name: 'TAB_WAREHOUSE_INWARD_INVENTORIES_E_COMMERCE',
     },
     {
         label: 'Replacements/Repackaging',

@@ -15,6 +15,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
     UserModuleNameTypes,
     UserModuleActionTypes,
+    UserModuleTabsTypes,
+    UserModuleAddActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 import {
     AddArtistWrapper,
@@ -305,19 +307,59 @@ const PageRoutes = () => {
                     >
                         <Route
                             path="general-information"
-                            element={<VendorGeneralInformationTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={
+                                        <VendorGeneralInformationTabWrapper />
+                                    }
+                                    moduleName={UserModuleNameTypes.vendor}
+                                    actionName={
+                                        UserModuleTabsTypes.generalInformation
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="purchase-order"
-                            element={<VendorPurchaseOrderTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={
+                                        <VendorPurchaseOrderTabWrapper />
+                                    }
+                                    moduleName={UserModuleNameTypes.vendor}
+                                    actionName={
+                                        UserModuleTabsTypes.purchaseOrder
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="purchase-order/add"
-                            element={<AddPurchaseOrderTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<AddPurchaseOrderTabWrapper />}
+                                    moduleName={UserModuleNameTypes.vendor}
+                                    actionName={
+                                        UserModuleAddActionTypes.vendorPoAdd
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="warehouse"
-                            element={<VendorWarehouseTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<VendorWarehouseTabWrapper />}
+                                    moduleName={UserModuleNameTypes.vendor}
+                                    actionName={
+                                        UserModuleTabsTypes.vendoreWarehouse
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="warehouse/add"
@@ -325,7 +367,9 @@ const PageRoutes = () => {
                                 <ActionAuthHOC
                                     component={<AddVendorWarehouseWrapper />}
                                     moduleName={UserModuleNameTypes.vendor}
-                                    actionName={UserModuleActionTypes.Add}
+                                    actionName={
+                                        UserModuleAddActionTypes.vendorWarehouseAdd
+                                    }
                                     isRedirect
                                 />
                             }
@@ -347,11 +391,29 @@ const PageRoutes = () => {
                         />
                         <Route
                             path="ledger"
-                            element={<VendorListLedgerTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<VendorListLedgerTabWrapper />}
+                                    moduleName={UserModuleNameTypes.vendor}
+                                    actionName={
+                                        UserModuleTabsTypes.vendorLedger
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="activities"
-                            element={<VendorActivityTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<VendorActivityTabWrapper />}
+                                    moduleName={UserModuleNameTypes.vendor}
+                                    actionName={
+                                        UserModuleTabsTypes.vendorActivity
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                     </Route>
 
@@ -641,7 +703,7 @@ const PageRoutes = () => {
                             element={
                                 <ActionAuthHOC
                                     component={<ViewWarehouseWrapper />}
-                                    moduleName={UserModuleNameTypes.dealer}
+                                    moduleName={UserModuleNameTypes.wareHouse}
                                     actionName={UserModuleActionTypes.View}
                                     isRedirect
                                 />

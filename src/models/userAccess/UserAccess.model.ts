@@ -4,20 +4,30 @@ export enum UserModuleActionTypes {
     'List' = 'LIST',
     'Delete' = 'DELETE',
     'View' = 'VIEW',
+
 }
-export enum UserModuleOtherActionTypes {
-    'vendorPoAdd' = 'PURCHASE_ORDER_ADD',
-    'vendorWarehouseAdd' = 'VENDOR_WAREHOUSE_ADD',
-    'vendorLedgerCreditNote' = 'VENDOR_LEDGER_CREDIT_ADD',
-    'vendorLedgerDebitNote' = 'VENDOR_LEDGER_DEBIT_ADD',
-    'dealerWareHouseAdd' = 'DEALER_WAREHOUSE_ADD',
-    'dealerSalesOrderAdd' = 'DEALER_SALE_ORDER_ADD',
-    'dealerLedgerCreditAmout' = 'DEALER_LEDGER_CREDIT_AMOUNT_ADD',
-    'dealerLedgerCreditNote' = 'DEALER_LEDGER_CREDIT_NOTE_ADD',
-    'dealerLedgerDebitNote' = 'DEALER_LEDGER_DEBIT_NOTE_ADD',
-    'dealerPincodeAdd' = 'DEALER_PINCODE_ADD',
-    'dealerSchemeAdd' = 'DEALER_SCHEME_ADD',
-    'tabWarehouseInventoryAdd' = 'TAB_WAREHOUSE_INVENTORIES_ADD',
+export enum UserModuleTabsTypes {
+    generalInformation = 'GENERAL_INFORMATION',
+    purchaseOrder = 'PURCHASE_ORDER',
+    vendoreWarehouse = 'VENDOR_WAREHOUSE',
+    returnToVendor = 'RETURN_TO_VENDOR',
+    vendorLedger = 'VENDOR_LEDGER',
+    vendorActivity = 'VENDOR_ACTIVITY',
+
+}
+export enum UserModuleAddActionTypes {
+    vendorPoAdd = 'PURCHASE_ORDER_ADD',
+    vendorWarehouseAdd = 'VENDOR_WAREHOUSE_ADD',
+    vendorLedgerCreditNote = 'VENDOR_LEDGER_CREDIT_ADD',
+    vendorLedgerDebitNote = 'VENDOR_LEDGER_DEBIT_ADD',
+    dealerWareHouseAdd = 'DEALER_WAREHOUSE_ADD',
+    dealerSalesOrderAdd = 'DEALER_SALE_ORDER_ADD',
+    dealerLedgerCreditAmout = 'DEALER_LEDGER_CREDIT_AMOUNT_ADD',
+    dealerLedgerCreditNote = 'DEALER_LEDGER_CREDIT_NOTE_ADD',
+    dealerLedgerDebitNote = 'DEALER_LEDGER_DEBIT_NOTE_ADD',
+    dealerPincodeAdd = 'DEALER_PINCODE_ADD',
+    dealerSchemeAdd = 'DEALER_SCHEME_ADD',
+    tabWarehouseInventoryAdd = 'TAB_WAREHOUSE_INVENTORIES_ADD',
 }
 export enum UserModuleNameTypes {
     dashboard = 'DASHBOARD',

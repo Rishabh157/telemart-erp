@@ -20,7 +20,7 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import {
     UserModuleNameTypes,
-    UserModuleOtherActionTypes,
+    UserModuleAddActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
@@ -59,7 +59,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMPageHeading> Purchase Order </ATMPageHeading>
                 <ActionAuthHOC
                     moduleName={UserModuleNameTypes.vendor}
-                    actionName={UserModuleOtherActionTypes.vendorPoAdd}
+                    actionName={UserModuleAddActionTypes.vendorPoAdd}
                     component={
                         <button
                             onClick={() => navigate('add')}

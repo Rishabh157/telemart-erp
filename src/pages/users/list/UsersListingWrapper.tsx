@@ -113,6 +113,7 @@ const UsersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => (
                 <span
+                className='underline text-primary-main'
                     style={{ cursor: 'pointer' }}
                     onClick={() =>
                         navigate(`/configurations/user-access`, {
