@@ -551,6 +551,16 @@
                     "fields": []
                 },
                 {
+                    "actionId": "warehouseActionOutwardInventoriesCompanyId",
+                    "actionUrl": "/warehouse/view/:id/outward-inventories/company",
+                    "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY",
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_OUTWARD_INVENTORIES"
+                    ],
+                    "fields": []
+                },
+                {
                     "actionId": "warehouseActionInwardInventoriesId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES",
@@ -603,6 +613,13 @@
                     "actionId": "warehouseActionInwardInventoriesReplacementsId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/replacement",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_REPLACEMENTS",
+                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
+                    "fields": []
+                },
+                {
+                    "actionId": "warehouseActionInwardInventoriesCompanyId",
+                    "actionUrl": "/warehouse/view/:id/inward-inventories/company",
+                    "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY",
                     "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
                     "fields": []
                 },
