@@ -103,6 +103,20 @@ export type OutwardRequestReplacementListResponse = {
     _id: string
     __v: number
 }
+
+export type OutwardRequestCompanyListResponse = {
+    companyName: string
+    productName: string
+    quantity: string
+    address: string
+    creationDate: string
+    is_active: boolean
+    is_deleted: boolean
+    createdAt: string
+    updatedAt: string
+    _id: string
+    __v: number
+}
 export type AddOutwardRequest = {
     productName: string
     quantity: string
