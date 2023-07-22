@@ -5,7 +5,10 @@ import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import {
+    UserModuleNameTypes,
+    UserModuleWarehouseTabsTypes,
+} from 'src/models/userAccess/UserAccess.model'
 import { RootState } from 'src/redux/store'
 import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
 
@@ -19,28 +22,28 @@ interface tabsProps {
 const ViewInventories = (props: Props) => {
     const tabs = [
         {
+            label: 'Warehouse Details',
+            icon: BsArrowRepeat,
+            path: 'warehouse-details',
+            name: UserModuleWarehouseTabsTypes.warehouseDetails,
+        },
+        {
             label: 'Inventories',
             icon: BsArrowRepeat,
             path: 'inventories',
-            name: 'TAB_WAREHOUSE_INVENTORIES',
+            name: UserModuleWarehouseTabsTypes.inventories,
         },
         {
             label: 'Outward Inventories',
             icon: BsArrowRepeat,
             path: 'outward-inventories/dealer',
-            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES',
+            name: UserModuleWarehouseTabsTypes.outwardInventories,
         },
         {
             label: 'Inward Inventories',
             icon: BsArrowRepeat,
             path: 'inward-inventories/dealer',
-            name: 'TAB_WAREHOUSE_INWARD_INVENTORIES',
-        },
-        {
-            label: 'Warehouse Details',
-            icon: BsArrowRepeat,
-            path: 'warehouse-details',
-            name: 'TAB_WAREHOUSE_DETAILS',
+            name: UserModuleWarehouseTabsTypes.inwardInventories,
         },
     ]
     const [activeTab, setActiveTab] = useState<number>()

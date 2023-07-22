@@ -78,7 +78,7 @@ const ActionAuthHOC = ({
                 isAuthorized ? (
                     <>{component}</>
                 ) : isRedirect ? (
-                    <AccessDenied/>
+                    <AccessDenied />
                 ) : null
             ) : (
                 <LoginPage pathName={pathname} />

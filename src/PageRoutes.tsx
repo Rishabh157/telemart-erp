@@ -17,6 +17,7 @@ import {
     UserModuleActionTypes,
     UserModuleTabsTypes,
     UserModuleAddActionTypes,
+    UserModuleWarehouseTabsTypes,
 } from 'src/models/userAccess/UserAccess.model'
 import {
     AddArtistWrapper,
@@ -633,19 +634,54 @@ const PageRoutes = () => {
                     {/* warehouse view */}
                     <Route
                         path="warehouse/view/:id"
-                        element={<InventorisTabsLayout />}
+                        element={
+                            <ActionAuthHOC
+                                component={<InventorisTabsLayout />}
+                                moduleName={UserModuleNameTypes.wareHouse}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                        }
                     >
                         <Route
                             path="inventories"
-                            element={<InventoryListingWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<InventoryListingWrapper />}
+                                    moduleName={UserModuleNameTypes.wareHouse}
+                                    actionName={
+                                        UserModuleWarehouseTabsTypes.inventories
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="inventories/inward-inventory/add"
-                            element={<InwardInventoryWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<InwardInventoryWrapper />}
+                                    moduleName={UserModuleNameTypes.wareHouse}
+                                    actionName={
+                                        UserModuleAddActionTypes.tabWarehouseInventoryAdd
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
+
                         <Route
                             path="outward-inventories"
-                            element={<OutwardTabs />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<OutwardTabs />}
+                                    moduleName={UserModuleNameTypes.wareHouse}
+                                    actionName={
+                                        UserModuleWarehouseTabsTypes.outwardInventories
+                                    }
+                                    isRedirect
+                                />
+                            }
                         >
                             <Route
                                 path="dealer"

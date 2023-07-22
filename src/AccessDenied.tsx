@@ -1,29 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const AccessDenied = () => {
-  return (
-    <>
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href={`/assets/css/bootstrap.min.css`}
-      ></link>
-      <div className="flex justify-center mt-5 pt-5">
-        <div className="w-1/3 text-center">
-          <h2>Access Denied (IP Restriction)</h2>
-          <p className="mb-5">
-            You don't have permission to access this page. Contact an
-            administrator to get permissions or go to the home page and browse
-            other pages
-          </p>
-          <Link to={"/dashboard"} className="px-3 py-1 rounded bg-green-600 text-white mt-5 shadow">
-            Go to Dashboard
-          </Link>
+    return (
+        <div className="h-[100vh] bg-white flex justify-center bg-transparent-body ">
+            <link
+                rel="stylesheet"
+                type="text/css"
+                href={`/assets/css/bootstrap.min.css`}
+            ></link>
+            <div className="flex justify-center items-center mt-5 pt-5">
+                <div className="w-1/3 text-center">
+                    <h2>Access Denied (IP Restriction)</h2>
+                    <p className="mb-5">
+                        You don't have permission to access this page. Contact
+                        an administrator to get permissions or go to the home
+                        page and browse other pages
+                    </p>
+                    <Link
+                        to={'/dashboard'}
+                        className="px-3 py-1 rounded bg-green-600 text-white mt-5 shadow"
+                    >
+                        Go to Dashboard
+                    </Link>
+                </div>
+            </div>
         </div>
-      </div>
-    </>
-  );
-};
+    )
+}
 
-export default AccessDenied;
+export default AccessDenied
