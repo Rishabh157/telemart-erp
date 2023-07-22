@@ -241,6 +241,8 @@ import InwardReplacementTabsListingWrapper from './pages/inventories/inward/Repl
 import InwardRTVTabsListingWrapper from './pages/inventories/inward/Rtv/InwardRTVTabsListingWrapper'
 import InwardSampleTabsListingWrapper from './pages/inventories/inward/Sample/InwardSampleTabsListingWrapper'
 import InwardWarehouseTabsListingWrapper from './pages/inventories/inward/Warehouse/InwardWarehouseTabsListingWrapper'
+import OutwardCompanyTabsListingWrapper from './pages/inventories/outward/Company/OutwardCompanyTabsListingWrapper'
+import InwardCompanyTabsListingWrapper from './pages/inventories/inward/Company/InwardCompanyTabsListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -257,7 +259,6 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData ? userData : null))
-console.log("first")
     return (
         <>
             <BrowserRouter>
@@ -675,6 +676,10 @@ console.log("first")
                                     <OutwardReplacementTabsListingWrapper />
                                 }
                             />
+                            <Route
+                                path="company"
+                                element={<OutwardCompanyTabsListingWrapper />}
+                            />
                         </Route>
                         <Route
                             path="inward-inventories"
@@ -709,6 +714,10 @@ console.log("first")
                                 element={
                                     <InwardReplacementTabsListingWrapper />
                                 }
+                            />
+                            <Route
+                                path="company"
+                                element={<InwardCompanyTabsListingWrapper />}
                             />
                         </Route>
 

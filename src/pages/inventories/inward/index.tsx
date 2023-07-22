@@ -53,6 +53,12 @@ const tabs: Tabs[] = [
         path: 'replacement',
         name: 'TAB_WAREHOUSE_INWARD_INVENTORIES_REPLACEMENTS',
     },
+    {
+        label: 'Company',
+        icon: MdOutbond,
+        path: 'company',
+        name: 'TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY',
+    },
 ]
 const InwardsTabs = (props: Props) => {
     const [activeTab, setActiveTab] = useState(0)

@@ -1,10 +1,9 @@
 export enum UserModuleActionTypes {
-    'Add' = 'ADD',
-    'Edit' = 'EDIT',
-    'List' = 'LIST',
-    'Delete' = 'DELETE',
-    'View' = 'VIEW',
-
+    Add = 'ADD',
+    Edit = 'EDIT',
+    List = 'LIST',
+    Delete = 'DELETE',
+    View = 'VIEW',
 }
 export enum UserModuleTabsTypes {
     generalInformation = 'GENERAL_INFORMATION',
@@ -13,7 +12,6 @@ export enum UserModuleTabsTypes {
     returnToVendor = 'RETURN_TO_VENDOR',
     vendorLedger = 'VENDOR_LEDGER',
     vendorActivity = 'VENDOR_ACTIVITY',
-
 }
 export enum UserModuleAddActionTypes {
     vendorPoAdd = 'PURCHASE_ORDER_ADD',
@@ -55,7 +53,7 @@ export enum UserModuleNameTypes {
     cartonBox = 'CARTON_BOX',
     company = 'COMPANY',
     barcode = 'BARCODE',
-    //
+
     country = 'COUNTRY',
     state = 'STATE',
     district = 'DISTRICT',
@@ -95,3 +93,11 @@ export enum UserModuleNameTypes {
     disposition = 'DISPOSITION',
     locations = 'LOCATIONS',
 }
+
+
+
+//  export const myMove = {
+//     ...UserModuleActionTypes,
+//     ...UserModuleTabsTypes,
+//     ...UserModuleAddActionTypes,
+//   }

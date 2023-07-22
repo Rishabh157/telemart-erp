@@ -66,7 +66,7 @@ const DistrictListing = ({ districts }: Props) => {
     return (
         <>
             <LocationListView
-                moduleName={UserModuleNameTypes.district}
+                actionName={UserModuleNameTypes.district}
                 listHeading="Districts"
                 searchValue={searchValue}
                 OnSearchChange={(newValue) =>

@@ -91,7 +91,6 @@ const ActionAuthHOC = ({
         )
     }
 
-
     return (
         <>
             {accessToken ? (
