@@ -6,11 +6,11 @@ export enum UserModuleWarehouseTabsTypes {
 }
 
 export enum UserModuleActionTypes {
-    'Add' = 'ADD',
-    'Edit' = 'EDIT',
-    'List' = 'LIST',
-    'Delete' = 'DELETE',
-    'View' = 'VIEW',
+    Add = 'ADD',
+    Edit = 'EDIT',
+    List = 'LIST',
+    Delete = 'DELETE',
+    View = 'VIEW',
 }
 export enum UserModuleTabsTypes {
     generalInformation = 'GENERAL_INFORMATION',
@@ -100,3 +100,11 @@ export enum UserModuleNameTypes {
     disposition = 'DISPOSITION',
     locations = 'LOCATIONS',
 }
+
+
+
+//  export const myMove = {
+//     ...UserModuleActionTypes,
+//     ...UserModuleTabsTypes,
+//     ...UserModuleAddActionTypes,
+//   }
