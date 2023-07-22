@@ -17,7 +17,6 @@ import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { renderorderStatus } from 'src/utils/renderOrderStatus'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
@@ -130,14 +129,7 @@ const InquiryListingWrapper = () => {
                 <span> {row.mobileNo} </span>
             ),
         },
-        {
-            field: 'batchNo',
-            headerName: 'Batch Assigned',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: InquiryListResponse) => {
-                return renderorderStatus(row.batchNo?.length)
-            },
-        },
+
         {
             field: 'deliveryCharges',
             headerName: 'Delivery Charges',
