@@ -2,7 +2,7 @@ export enum UserModuleWarehouseTabsTypes {
     inventories = 'TAB_WAREHOUSE_INVENTORIES',
     outwardInventories = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES',
     inwardInventories = 'TAB_WAREHOUSE_INWARD_INVENTORIES',
-    warehouseDetails = 'TAB_WAREHOUSE_DETAILS'
+    warehouseDetails = 'TAB_WAREHOUSE_DETAILS',
 }
 
 export enum UserModuleActionTypes {

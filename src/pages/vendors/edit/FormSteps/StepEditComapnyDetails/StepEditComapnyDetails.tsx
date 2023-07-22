@@ -1,3 +1,4 @@
+
 /// ==============================================
 // Filename:StepEditCompanyDeatils.tsx
 // Type: Edit Component
@@ -56,13 +57,12 @@ const StepEditComapnyDetails = ({
             <div className="grid grid-cols-4 gap-4 gap-y-5">
                 {formFields?.map((field: FieldType) => {
                     const { type = 'text', name, label, placeholder } = field
-
+                    console.log('name', name)
                     switch (type) {
                         case 'text':
                             return (
                                 <React.Fragment key={name}>
                                     <ATMTextField
-                                        key={name}
                                         name={name}
                                         value={values[name]}
                                         onChange={(e) => {
@@ -81,9 +81,9 @@ const StepEditComapnyDetails = ({
 
                         case 'select':
                             return (
+                                
                                 <div className="mt-0" key={name}>
                                     <ATMSelect
-                                        key={name}
                                         name={name}
                                         value={values[name]}
                                         onChange={(e) => {

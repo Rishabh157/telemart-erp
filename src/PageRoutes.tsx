@@ -647,21 +647,41 @@ const PageRoutes = () => {
                             path="inventories"
                             element={
                                 <ActionAuthHOC
-                                component={<InventoryListingWrapper />}
-                                moduleName={UserModuleNameTypes.wareHouse}
-                                actionName={UserModuleWarehouseTabsTypes.inventories}
-                                isRedirect
-                            />
+                                    component={<InventoryListingWrapper />}
+                                    moduleName={UserModuleNameTypes.wareHouse}
+                                    actionName={
+                                        UserModuleWarehouseTabsTypes.inventories
+                                    }
+                                    isRedirect
+                                />
                             }
                         />
                         <Route
                             path="inventories/inward-inventory/add"
-                            element={<InwardInventoryWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<InwardInventoryWrapper />}
+                                    moduleName={UserModuleNameTypes.wareHouse}
+                                    actionName={
+                                        UserModuleAddActionTypes.tabWarehouseInventoryAdd
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
-                        
+
                         <Route
                             path="outward-inventories"
-                            element={<OutwardTabs />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<OutwardTabs />}
+                                    moduleName={UserModuleNameTypes.wareHouse}
+                                    actionName={
+                                        UserModuleWarehouseTabsTypes.outwardInventories
+                                    }
+                                    isRedirect
+                                />
+                            }
                         >
                             <Route
                                 path="dealer"
