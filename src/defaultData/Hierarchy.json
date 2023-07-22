@@ -36,8 +36,8 @@
     ],
     "hrDepartment": [
         {
-            "label": "HR AVM",
-            "value": "HR_AVM"
+            "label": "HR AVP",
+            "value": "HR_AVP"
         },
         {
             "label": "AMG Hr And Statutory Compliance",
@@ -58,8 +58,8 @@
     ],
     "distributionDepartment": [
         {
-            "label": "AVM Distribution",
-            "value": "DISTRIBUTION_AVM"
+            "label": "AVP Distribution",
+            "value": "DISTRIBUTION_AVP"
         },
         {
             "label": "SR. Manager / Distribution",
