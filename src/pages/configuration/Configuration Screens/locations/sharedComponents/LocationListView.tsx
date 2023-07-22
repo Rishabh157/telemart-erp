@@ -14,7 +14,7 @@ import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { UserModuleActionTypes } from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -28,7 +28,7 @@ type Props = {
     OnSearchChange?: (newValue: string) => void
     onListItemClick?: (item: any) => void
     disabled: boolean
-    moduleName?: string
+    actionName?: string
 }
 
 const LocationListView = ({
@@ -39,7 +39,7 @@ const LocationListView = ({
     OnSearchChange = (newValue: string) => {},
     onListItemClick = (item: any) => {},
     disabled = false,
-    moduleName = '',
+    actionName = '',
 }: Props) => {
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state.country
@@ -65,8 +65,8 @@ const LocationListView = ({
             <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">
                 {listHeading}
                 <ActionAuthHOC
-                    moduleName={moduleName}
-                    actionName={UserModuleActionTypes.Add}
+                    moduleName={UserModuleNameTypes.locations}
+                    actionName={actionName}
                     component={
                         <button
                             type="button"

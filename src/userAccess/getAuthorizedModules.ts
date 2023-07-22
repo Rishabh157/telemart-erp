@@ -16,6 +16,7 @@ export const configurationModules = [
     UserModuleNameTypes.productGroup,
     UserModuleNameTypes.scheme,
     UserModuleNameTypes.item,
+    UserModuleNameTypes.locations,
     UserModuleNameTypes.product,
     UserModuleNameTypes.cartonBox,
     UserModuleNameTypes.company,
@@ -65,19 +66,20 @@ export const isCheckAuthorizedModule = (
     let modules = checkUserAccess?.modules?.map((modules) => {
         return modules?.moduleName
     })
-    if (
-        modules.includes(
-            UserModuleNameTypes.country ||
-                UserModuleNameTypes.state ||
-                UserModuleNameTypes.district ||
-                UserModuleNameTypes.pincode ||
-                UserModuleNameTypes.tehsil ||
-                UserModuleNameTypes.area
-        ) &&
-        !configurationModules.includes(UserModuleNameTypes.locations)
-    ) {
-        configurationModules.push(UserModuleNameTypes.locations)
-    }
+
+    // if (
+    //     modules.includes(
+    //         UserModuleNameTypes.country ||
+    //             UserModuleNameTypes.state ||
+    //             UserModuleNameTypes.district ||
+    //             UserModuleNameTypes.pincode ||
+    //             UserModuleNameTypes.tehsil ||
+    //             UserModuleNameTypes.area
+    //     ) &&
+    //     !configurationModules.includes(UserModuleNameTypes.locations)
+    // ) {
+    //     configurationModules.push(UserModuleNameTypes.locations)
+    // }
 
     // FOR CONFIGURATION
     if (UserModuleNameTypes.configuration === moduleName) {

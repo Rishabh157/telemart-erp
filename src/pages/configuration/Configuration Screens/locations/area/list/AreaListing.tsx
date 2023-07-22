@@ -51,7 +51,7 @@ const AreaListing = ({ areas }: Props) => {
     return (
         <>
             <LocationListView
-                moduleName={UserModuleNameTypes.area}
+                actionName={UserModuleNameTypes.area}
                 listHeading="Area"
                 searchValue={searchValue}
                 OnSearchChange={(newValue) => {
