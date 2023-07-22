@@ -54,6 +54,12 @@ const OutwardTabs = (props: Props) => {
             path: 'replacement',
             name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_REPLACEMENTS',
         },
+        {
+            label: 'Company',
+            icon: MdOutbond,
+            path: 'company',
+            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY',
+        },
     ]
     const [activeTab, setActiveTab] = useState(0)
     const { checkUserAccess } = useSelector(
