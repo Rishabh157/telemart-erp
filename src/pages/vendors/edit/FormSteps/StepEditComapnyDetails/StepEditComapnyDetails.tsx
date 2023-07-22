@@ -1,4 +1,3 @@
-
 /// ==============================================
 // Filename:StepEditCompanyDeatils.tsx
 // Type: Edit Component
@@ -81,7 +80,6 @@ const StepEditComapnyDetails = ({
 
                         case 'select':
                             return (
-                                
                                 <div className="mt-0" key={name}>
                                     <ATMSelect
                                         name={name}

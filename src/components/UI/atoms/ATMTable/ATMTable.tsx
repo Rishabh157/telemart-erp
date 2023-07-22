@@ -170,7 +170,7 @@ const ATMTable = <T extends {}>({
                         {columns.map((column, index) => {
                             return (
                                 <div
-                                    key={column.field+index}
+                                    key={column.field + index}
                                     className={`${
                                         column.flex
                                     } text-sm text-slate-600 px-2 flex justify-${

@@ -5,7 +5,10 @@ import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import { UserModuleNameTypes, UserModuleWarehouseTabsTypes } from 'src/models/userAccess/UserAccess.model'
+import {
+    UserModuleNameTypes,
+    UserModuleWarehouseTabsTypes,
+} from 'src/models/userAccess/UserAccess.model'
 import { RootState } from 'src/redux/store'
 import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
 

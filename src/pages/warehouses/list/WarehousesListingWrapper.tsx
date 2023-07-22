@@ -111,7 +111,9 @@ const DealersListingWrapper = () => {
                     isEdit
                     isDelete
                     handleViewActionButton={() => {
-                        navigate(`/warehouse/view/${currentId}/warehouse-details`)
+                        navigate(
+                            `/warehouse/view/${currentId}/warehouse-details`
+                        )
                     }}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)

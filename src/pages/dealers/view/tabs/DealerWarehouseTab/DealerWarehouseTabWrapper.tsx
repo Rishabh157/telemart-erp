@@ -63,12 +63,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             headerName: 'Warehouse Name',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
-                return (
-                    <span className=" ">
-                        {' '}
-                        {row.wareHouseName}{' '}
-                    </span>
-                )
+                return <span className=" "> {row.wareHouseName} </span>
             },
         },
         {
@@ -76,10 +71,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             headerName: 'Country',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: WarehousesListResponse) => (
-                <span className=" ">
-                    {' '}
-                    {row.wareHouseCountryName}{' '}
-                </span>
+                <span className=" "> {row.wareHouseCountryName} </span>
             ),
         },
         {
@@ -88,10 +80,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
                 return (
-                    <span className=" ">
-                        {' '}
-                        {row.registrationCountryName}{' '}
-                    </span>
+                    <span className=" "> {row.registrationCountryName} </span>
                 )
             },
         },
@@ -101,10 +90,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
                 return (
-                    <span className=" ">
-                        {' '}
-                        {row.registrationDistrictName}{' '}
-                    </span>
+                    <span className=" "> {row.registrationDistrictName} </span>
                 )
             },
         },
@@ -114,10 +100,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
                 return (
-                    <span className=" ">
-                        {' '}
-                        {row.registrationPincodeName}{' '}
-                    </span>
+                    <span className=" "> {row.registrationPincodeName} </span>
                 )
             },
         },
