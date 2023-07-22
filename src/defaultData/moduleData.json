@@ -823,6 +823,13 @@
                     "fields": []
                 },
                 {
+                    "actionId": "purchaseOrderActionGenerateGrnId",
+                    "actionUrl": "/grn/add",
+                    "actionName": "GENERATE_GRN",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
                     "actionId": "purchaseOrderActionAddId",
                     "actionUrl": "/purchase-order/add",
                     "actionName": "ADD",
