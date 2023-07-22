@@ -521,7 +521,9 @@
                     "actionId": "warehouseActionViewId",
                     "actionUrl": "/view/:id/inventories",
                     "actionName": "VIEW",
-                    "parentGroup": [],
+                    "parentGroup": [
+                        "TAB_WAREHOUSE_DETAILS"
+                    ],
                     "fields": []
                 },
                 {
