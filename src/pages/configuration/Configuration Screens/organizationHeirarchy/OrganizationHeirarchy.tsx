@@ -111,7 +111,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Sales Dept. Head
+                                    Sales Dept
                                 </StyledNode>
                             }
                         >
@@ -255,7 +255,7 @@ const OrganisationHierarchy = () => {
                                     dept={GetHierarchByDeptProps.HR_DEPARTMENT}
                                     userRole=""
                                 >
-                                    HR Dept. Head
+                                    HR Dept
                                 </StyledNode>
                             }
                         >
@@ -339,7 +339,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Distribution Dept. Head
+                                    Distribution Dept
                                 </StyledNode>
                             }
                         >
@@ -422,7 +422,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Finance Dept. Head
+                                    Finance Dept
                                 </StyledNode>
                             }
                         >
@@ -520,7 +520,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Media Dept. Head
+                                    Media Dept
                                 </StyledNode>
                             }
                         >
@@ -590,7 +590,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Media (Production) Dept. Head
+                                    Media (Production) Dept
                                 </StyledNode>
                             }
                         >
@@ -672,7 +672,7 @@ const OrganisationHierarchy = () => {
                                     dept={GetHierarchByDeptProps.IT_DEPARTMENT}
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Information Technology Dept. Head
+                                    Information Technology Dept
                                 </StyledNode>
                             }
                         >
@@ -785,7 +785,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Development Dept. Head
+                                    Development Dept
                                 </StyledNode>
                             }
                         >
@@ -881,7 +881,7 @@ const OrganisationHierarchy = () => {
                                     dept={GetHierarchByDeptProps.WEB_DEPARTMENT}
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Web Development Dept. Head
+                                    Web Development Dept
                                 </StyledNode>
                             }
                         >
@@ -1087,7 +1087,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Operations Dept. Head
+                                    Operations Dept
                                 </StyledNode>
                             }
                         >
@@ -1157,7 +1157,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Quality Analyst Dept. Head
+                                    Quality Analyst Dept
                                 </StyledNode>
                             }
                         >
@@ -1227,7 +1227,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Logistics Dept. Head
+                                    Logistics Dept
                                 </StyledNode>
                             }
                         >
@@ -1297,7 +1297,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Mapping & MIS Dept. Head
+                                    Mapping & MIS Dept
                                 </StyledNode>
                             }
                         >
@@ -1353,7 +1353,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                    Admin Dept. Head
+                                    Admin Dept
                                 </StyledNode>
                             }
                         >

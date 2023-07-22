@@ -46,6 +46,8 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                 <div className="grid grid-cols-2 gap-4">
                     <div className="py-1  mt-3">
                         <ATMSwitchButton
+                            title1="Run"
+                            title2="Not Run"
                             name="run"
                             value={values.run}
                             label="Status"
