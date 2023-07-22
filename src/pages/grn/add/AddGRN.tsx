@@ -41,7 +41,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddItem = ({ formikProps, apiStatus }: Props) => {
     const { state } = useLocation()
-    const { poCode, itemName, quantity, receivedQuantity } = state
+    const { poCode, itemName, quantity, receivedQuantity } = state || {}
     const { values, setFieldValue } = formikProps
 
     return (
@@ -86,7 +86,7 @@ const AddItem = ({ formikProps, apiStatus }: Props) => {
                                 <div className="text-[18px] font-medium text-primary-main">
                                     PO Code :
                                     <span className=" text-black px-2">
-                                        {poCode}
+                                        {poCode ? poCode : 'sd'}
                                     </span>
                                 </div>
                                 <div>|</div>

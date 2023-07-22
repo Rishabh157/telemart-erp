@@ -53,7 +53,7 @@ import {
     ConfigurationCompanyListingWrapper,
     AddDealersCategoryWrapper,
     DealersCategoryListingWrapper,
-    // AddGRNWrapper,
+    AddGRNWrapper,
     GRNListingWrapper,
     AddItemWrapper,
     ItemListingWrapper,
@@ -257,7 +257,7 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData ? userData : null))
-
+console.log("first")
     return (
         <>
             <BrowserRouter>
@@ -846,17 +846,18 @@ const PageRoutes = () => {
                         }
                     />
 
-                    {/* <Route
+                    <Route
                         path="/grn/add"
                         element={
-                            <ActionAuthHOC
-                                component={<AddGRNWrapper />}
-                                moduleName={UserModuleNameTypes.grn}
-                                actionName={UserModuleActionTypes.Add}
-                                isRedirect
-                            />
+                    
+                             <ActionAuthHOC
+                                 component={<AddGRNWrapper />}
+                                 moduleName={UserModuleNameTypes.purchaseOrder}
+                                 actionName={UserModuleActionTypes.Add}
+                                 isRedirect
+                             />
                         }
-                    /> */}
+                    />
 
                     {/* Inquiry */}
                     <Route
