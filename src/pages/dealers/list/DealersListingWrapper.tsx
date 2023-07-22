@@ -96,7 +96,7 @@ const DealersListingWrapper = () => {
             },
         },
         {
-            field: 'billingAddress',
+            field: 'billingAddressDistrictName',
             headerName: 'District',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: DealersListResponse) => {
@@ -104,7 +104,7 @@ const DealersListingWrapper = () => {
             },
         },
         {
-            field: 'billingAddress',
+            field: 'billingAddressStateName',
             headerName: 'State',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: DealersListResponse) => {

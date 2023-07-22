@@ -57,7 +57,6 @@ const AddPurchaseOrder = ({
 
     const { values, setFieldValue } = formikProps
     const parmas = useParams()
-    console.log(parmas, 'parmas')
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Vendore Purchase-order',
