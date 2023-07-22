@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:ATMTable.tsx
 // Type: UI Component
-// Last Updated: JULY 06, 2023
+// Last Updated: JULY 22, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -92,7 +92,7 @@ const ATMTable = <T extends {}>({
                 {columns.map((column, index) => {
                     return (
                         <div
-                            key={column.field}
+                            key={column.field + index}
                             className={`${
                                 column.flex
                             } text-sm text-black  font-semibold px-2 flex justify-${
@@ -170,7 +170,7 @@ const ATMTable = <T extends {}>({
                         {columns.map((column, index) => {
                             return (
                                 <div
-                                    key={column.field}
+                                    key={column.field + index}
                                     className={`${
                                         column.flex
                                     } text-sm text-slate-600 px-2 flex justify-${

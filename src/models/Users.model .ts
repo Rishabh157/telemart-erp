@@ -59,8 +59,8 @@ export type userData = {
     userName: string
     role: string
     userRole: string
-    firstName:string
-    lastName:string
+    firstName: string
+    lastName: string
 }
 
 export type ChangeCompany = {

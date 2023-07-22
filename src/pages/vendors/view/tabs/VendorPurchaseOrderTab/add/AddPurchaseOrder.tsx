@@ -57,7 +57,6 @@ const AddPurchaseOrder = ({
 
     const { values, setFieldValue } = formikProps
     const parmas = useParams()
-    console.log(parmas, 'parmas')
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Vendore Purchase-order',
@@ -105,8 +104,8 @@ const AddPurchaseOrder = ({
                         <div className="grid grid-cols-3 gap-4">
                             {/* PO Code */}
                             <ATMTextField
-                                extraClassField='mt-1'
-                                labelClass='pt-1 text-slate-700 text-sm font-medium'
+                                extraClassField="mt-1"
+                                labelClass="pt-1 text-slate-700 text-sm font-medium"
                                 name="poCode"
                                 value={values.poCode}
                                 label="PO Code"

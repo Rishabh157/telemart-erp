@@ -24,7 +24,7 @@ export interface moduleActionTypes {
     actionId: string
     actionUrl: string
     actionName: string
-    parentGroup:string[]
+    parentGroup: string[]
     fields: fieldTypes[]
 }
 

@@ -38,7 +38,6 @@ type Props = {}
 const VendorWarehouseTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
-    console.log(params, 'params')
     const vendorId = params.vendorId
     const [deleteVendorWarehouse] = useDeleteVendorWarehouseMutation()
     const [currentId, setCurrentId] = useState('')

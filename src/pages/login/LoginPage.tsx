@@ -59,7 +59,7 @@ const LoginPage = ({ pathName }: any) => {
                                     companyId: res?.data?.data?.companyId,
                                     role: res?.data?.data?.userType,
                                     userRole: res?.data?.data?.userRole,
-                                    firstName:res?.data?.data?.firstName,
+                                    firstName: res?.data?.data?.firstName,
                                     lastName: res?.data?.data?.lastName,
                                 }
                                 dispatch(setAccessToken(res?.data?.data?.token))
