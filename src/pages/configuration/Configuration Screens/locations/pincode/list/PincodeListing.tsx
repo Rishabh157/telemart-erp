@@ -56,7 +56,7 @@ const PincodeListing = ({ pincodes }: Props) => {
     return (
         <>
             <LocationListView
-                moduleName={UserModuleNameTypes.pincode}
+                actionName={UserModuleNameTypes.pincode}
                 listHeading="Pincodes"
                 OnSearchChange={(newValue) =>
                     dispatch(setSearchValue(newValue))

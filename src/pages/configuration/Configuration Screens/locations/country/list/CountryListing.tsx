@@ -65,7 +65,7 @@ const CountryListing = ({ contries, items }: Props) => {
     return (
         <>
             <LocationListView
-                moduleName={UserModuleNameTypes.country}
+                actionName={UserModuleNameTypes.country}
                 listHeading="Country"
                 listData={contries}
                 onAddClick={() => {

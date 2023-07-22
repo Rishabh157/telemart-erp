@@ -68,7 +68,7 @@ const StateListing = ({ states }: Props) => {
     return (
         <>
             <LocationListView
-                moduleName={UserModuleNameTypes.state}
+                actionName={UserModuleNameTypes.state}
                 searchValue={searchValue}
                 OnSearchChange={(newValue) =>
                     dispatch(setSearchValue(newValue))

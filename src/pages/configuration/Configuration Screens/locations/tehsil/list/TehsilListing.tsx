@@ -63,7 +63,7 @@ const TehsilListing = ({ tehsils }: Props) => {
     return (
         <>
             <LocationListView
-                moduleName={UserModuleNameTypes.tehsil}
+                actionName={UserModuleNameTypes.tehsil}
                 listHeading="Tehsils"
                 searchValue={searchValue}
                 OnSearchChange={(newValue) => {
