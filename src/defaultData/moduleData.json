@@ -59,103 +59,77 @@
                     "actionId": "vendorsActionViewId",
                     "actionUrl": "/vendors/:id/general-information",
                     "actionName": "VIEW",
-                    "parentGroup": [
-                        "GENERAL_INFORMATION"
-                    ],
+                    "parentGroup": ["GENERAL_INFORMATION"],
                     "fields": []
                 },
                 {
                     "actionId": "vendorGenrealInformationId",
                     "actionUrl": "/vendors/:id/general-information",
                     "actionName": "GENERAL_INFORMATION",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "vendorPurchaseOrderId",
                     "actionUrl": "/vendors/:id/purchase-order",
                     "actionName": "PURCHASE_ORDER",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "vendorPurchaseOrderActionAddId",
                     "actionUrl": "/vendors/:id/purchase-order/add",
                     "actionName": "PURCHASE_ORDER_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "PURCHASE_ORDER"
-                    ],
+                    "parentGroup": ["VIEW", "PURCHASE_ORDER"],
                     "fields": []
                 },
                 {
                     "actionId": "vendorWareHouseId",
                     "actionUrl": "/vendors/:id/warehouse",
                     "actionName": "VENDOR_WAREHOUSE",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "vendorWareHouseActionAddId",
                     "actionUrl": "/vendors/:id/warehouse/add",
                     "actionName": "VENDOR_WAREHOUSE_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "VENDOR_WAREHOUSE"
-                    ],
+                    "parentGroup": ["VIEW", "VENDOR_WAREHOUSE"],
                     "fields": []
                 },
                 {
                     "actionId": "vendorReturnToVendorId",
                     "actionUrl": "/vendors/:id/return-to-vendor",
                     "actionName": "RETURN_TO_VENDOR",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "vendorLedgerId",
                     "actionUrl": "/vendors/:id/ledger",
                     "actionName": "VENDOR_LEDGER",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "vendorLedgerActionCrAddId",
                     "actionUrl": "",
                     "actionName": "VENDOR_LEDGER_CREDIT_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "VENDOR_LEDGER"
-                    ],
+                    "parentGroup": ["VIEW", "VENDOR_LEDGER"],
                     "fields": []
                 },
                 {
                     "actionId": "vendorLedgerActionDrAddId",
                     "actionUrl": "",
                     "actionName": "VENDOR_LEDGER_DEBIT_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "VENDOR_LEDGER"
-                    ],
+                    "parentGroup": ["VIEW", "VENDOR_LEDGER"],
                     "fields": []
                 },
                 {
                     "actionId": "vendorActivityId",
                     "actionUrl": "/vendors/:id/activities",
                     "actionName": "VENDOR_ACTIVITY",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
@@ -237,151 +211,112 @@
                     "actionId": "dealerActionViewId",
                     "actionUrl": "/dealers/:id",
                     "actionName": "VIEW",
-                    "parentGroup": [
-                        "GENERAL_INFORMATION"
-                    ],
+                    "parentGroup": ["GENERAL_INFORMATION"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionGeneralInformationId",
                     "actionUrl": "/dealers/:id/general-information",
                     "actionName": "GENERAL_INFORMATION",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionDealerWarehouseId",
                     "actionUrl": "/dealers/:id/warehouse",
                     "actionName": "DEALER_WAREHOUSE",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerWarehouseActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_WAREHOUSE_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "DEALER_WAREHOUSE"
-                    ],
+                    "parentGroup": ["VIEW", "DEALER_WAREHOUSE"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionSaleOrderId",
                     "actionUrl": "/dealers/:id/sale-order",
                     "actionName": "DEALER_SALE_ORDER",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerSaleOrderActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_SALE_ORDER_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "DEALER_SALE_ORDER"
-                    ],
+                    "parentGroup": ["VIEW", "DEALER_SALE_ORDER"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionLedgerId",
                     "actionUrl": "/dealers/:id/ledger",
                     "actionName": "DEALER_LEDGER",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerLedgerCreditAmountActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_LEDGER_CREDIT_AMOUNT_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "DEALER_LEDGER"
-                    ],
+                    "parentGroup": ["VIEW", "DEALER_LEDGER"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerLedgerCreditAmountNoteActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_LEDGER_CREDIT_NOTE_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "DEALER_LEDGER"
-                    ],
+                    "parentGroup": ["VIEW", "DEALER_LEDGER"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerLedgerDebitNoteActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_LEDGER_DEBIT_NOTE_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "DEALER_LEDGER"
-                    ],
+                    "parentGroup": ["VIEW", "DEALER_LEDGER"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionOrderLedgerId",
                     "actionUrl": "/dealers/:id/order-ledger",
                     "actionName": "DEALER_ORDER_LEDGER",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerActionActivityId",
                     "actionUrl": "/dealers/:id/activities",
                     "actionName": "DEALER_ACTIVITY",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerPinCodeActionId",
                     "actionUrl": "/dealers/:id/pincode",
                     "actionName": "DEALER_PINCODE",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerPinCodeActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_PINCODE_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "DEALER_PINCODE"
-                    ],
+                    "parentGroup": ["VIEW", "DEALER_PINCODE"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerSchemeActionId",
                     "actionUrl": "/dealers/:id/scheme",
                     "actionName": "DEALER_SCHEME",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "dealerSchemesActionAddId",
                     "actionUrl": "",
                     "actionName": "DEALER_SCHEME_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "DEALER_SCHEME"
-                    ],
+                    "parentGroup": ["VIEW", "DEALER_SCHEME"],
                     "fields": []
                 },
                 {
@@ -528,28 +463,21 @@
                     "actionId": "warehouseActionInventoriesId",
                     "actionUrl": "/warehouse/view/:id/inventories",
                     "actionName": "TAB_WAREHOUSE_INVENTORIES",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInventoriesAddId",
                     "actionUrl": "",
                     "actionName": "TAB_WAREHOUSE_INVENTORIES_ADD",
-                    "parentGroup": [
-                        "VIEW",
-                        "TAB_WAREHOUSE_INVENTORIES"
-                    ],
+                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_INVENTORIES"],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionOutwardInventoriesId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
@@ -626,88 +554,63 @@
                     "actionId": "warehouseActionInwardInventoriesId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesDealerId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER",
-                    "parentGroup": [
-                        "VIEW",
-                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
-                    ],
+                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesCustomerId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/customer",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER",
-                    "parentGroup": [
-                        "VIEW",
-                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
-                    ],
+                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesRtvId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/rtv",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_RTV",
-                    "parentGroup": [
-                        "VIEW",
-                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
-                    ],
+                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesWarehouseId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/warehoue",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE",
-                    "parentGroup": [
-                        "VIEW",
-                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
-                    ],
+                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesSampleId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/sample",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE",
-                    "parentGroup": [
-                        "VIEW",
-                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
-                    ],
+                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesEcomId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/ecom",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_E_COMMERCE",
-                    "parentGroup": [
-                        "VIEW",
-                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
-                    ],
+                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesReplacementsId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/replacement",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_REPLACEMENTS",
-                    "parentGroup": [
-                        "VIEW",
-                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
-                    ],
+                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionDetailsId",
                     "actionUrl": "/warehouse/view/:id/warehouse-details",
                     "actionName": "TAB_WAREHOUSE_DETAILS",
-                    "parentGroup": [
-                        "VIEW"
-                    ],
+                    "parentGroup": ["VIEW"],
                     "fields": []
                 },
                 {
@@ -1871,7 +1774,7 @@
         },
         {
             "moduleId": "locationId",
-            "moduleName": "Location",
+            "moduleName": "LOCATIONS",
             "moduleAction": [
                 {
                     "actionId": "locationActionListId",
@@ -1880,29 +1783,58 @@
                     "parentGroup": [],
                     "fields": []
                 },
+
                 {
-                    "actionId": "locationActionAddId",
+                    "actionId": "countryId",
                     "actionUrl": "",
-                    "actionName": "ADD",
+                    "actionName": "COUNTRY",
                     "parentGroup": [],
                     "fields": []
                 },
                 {
-                    "actionId": "locationActionEditId",
+                    "actionId": "stateId",
                     "actionUrl": "",
-                    "actionName": "EDIT",
-                    "parentGroup": [],
+                    "actionName": "STATE",
+                    "parentGroup": ["COUNTRY"],
                     "fields": []
                 },
                 {
-                    "actionId": "locationActionDeleteId",
+                    "actionId": "districtId",
                     "actionUrl": "",
-                    "actionName": "DELETE",
-                    "parentGroup": [],
+                    "actionName": "DISTRICT",
+                    "parentGroup": ["COUNTRY", "STATE"],
+                    "fields": []
+                },
+                {
+                    "actionId": "pincodeId",
+                    "actionUrl": "",
+                    "actionName": "PINCODE",
+                    "parentGroup": ["COUNTRY", "STATE", "DISTRICT"],
+                    "fields": []
+                },
+                {
+                    "actionId": "tehsilId",
+                    "actionUrl": "",
+                    "actionName": "TEHSIL",
+                    "parentGroup": ["COUNTRY", "STATE", "DISTRICT", "PINCODE"],
+                    "fields": []
+                },
+                {
+                    "actionId": "areaId",
+                    "actionUrl": "",
+                    "actionName": "AREA",
+                    "parentGroup": [
+                        "COUNTRY",
+                        "STATE",
+                        "DISTRICT",
+                        "PINCODE",
+                        "TEHSIL"
+                    ],
                     "fields": []
                 }
             ]
         },
+
         {
             "moduleId": "languageId",
             "moduleName": "LANGUAGE",
