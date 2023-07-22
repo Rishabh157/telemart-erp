@@ -262,13 +262,13 @@ const OrganisationHierarchy = () => {
                             <TreeNode
                                 label={
                                     <StyledNode
-                                        userRole="HR_AVM"
+                                        userRole="HR_AVP"
                                         dept={
                                             GetHierarchByDeptProps.HR_DEPARTMENT
                                         }
                                         extraClasses="text-sm font-normal font-sans"
                                     >
-                                        AVM
+                                        AVP
                                     </StyledNode>
                                 }
                             >
@@ -346,13 +346,13 @@ const OrganisationHierarchy = () => {
                             <TreeNode
                                 label={
                                     <StyledNode
-                                        userRole="DISTRIBUTION_AVM"
+                                        userRole="DISTRIBUTION_AVP"
                                         dept={
                                             GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT
                                         }
                                         extraClasses="text-sm font-normal font-sans"
                                     >
-                                        AVM
+                                        AVP
                                     </StyledNode>
                                 }
                             >
