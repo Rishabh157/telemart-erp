@@ -47,7 +47,6 @@ const ActionAuthHOC = ({
     })
     const dispatch = useDispatch()
     useEffect(() => {
-        console.log('dddd')
         if (!isLoading && !isFetching && data) {
             if (data?.data !== null) {
                 dispatch(setCheckUserAccess(data?.data?.module))

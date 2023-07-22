@@ -25,7 +25,6 @@ export const callerPageApi = apiSlice.injectEndpoints({
                 userId: string | null
                 userRole: string
             }) => {
-                console.log(userId, 'userId')
                 let params: any = { userRoleId: userRole }
 
                 if (userId !== null) {
