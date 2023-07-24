@@ -37,6 +37,7 @@ export type FormInitialValues = {
     userDepartment: string
     userRole: string
     companyId: string
+    allowedIps: { allowedIp: string }[]
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -59,6 +60,11 @@ const AddUserWrapper = (props: Props) => {
         userDepartment: '',
         userRole: '',
         companyId: userData?.companyId || '',
+        allowedIps: [
+            {
+                allowedIp: '',
+            },
+        ],
     }
 
     // Form Validation Schema
@@ -82,6 +88,11 @@ const AddUserWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
+        console.log(values)
+        let newAllowedIp = values?.allowedIps.map((ele) => {
+            return ele.allowedIp
+        })
+
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
@@ -95,6 +106,7 @@ const AddUserWrapper = (props: Props) => {
                 userDepartment: values.userDepartment || '',
                 userRole: values.userRole || '',
                 companyId: values.companyId || '',
+                allowedIp: newAllowedIp[0]?.length ? newAllowedIp : [],
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
