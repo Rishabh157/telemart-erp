@@ -117,12 +117,12 @@ const CompetitorManagementListingWrapper = () => {
             ),
         },
         {
-            field: 'artist',
-            headerName: 'Artist',
+            field: 'competitorName',
+            headerName: 'Competitor Name',
             flex: 'flex-[1_1_0%]',
             align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.artist} </span>
+                <span> {row.competitorName} </span>
             ),
         },
         // {

@@ -32,7 +32,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type Props = {}
 
 export type FormInitialValues = {
-    artist: string
+    competitorName: string
     productName: string
     channelNameId: string
     schemePrice: string
@@ -90,7 +90,7 @@ const AddCompetitorWrapper = (props: Props) => {
     }
 
     const initialValues: FormInitialValues = {
-        artist: '',
+        competitorName: '',
         productName: '',
         websiteLink: '',
         video: '',
@@ -104,7 +104,7 @@ const AddCompetitorWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        artist: string().required('Required'),
+        competitorName: string().required('Required'),
         productName: string().required('Required'),
         websiteLink: string().url('Invalid URL').required('Required'),
         video: string().url('Invalid URL').required('Required'),
@@ -126,7 +126,7 @@ const AddCompetitorWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addCompetitor({
-                artist: values.artist || '',
+                competitorName: values.competitorName || '',
                 companyId: userData?.companyId || '',
                 date: values.date || '',
                 productName: values.productName || '',
