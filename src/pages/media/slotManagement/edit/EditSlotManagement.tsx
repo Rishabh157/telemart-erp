@@ -23,11 +23,11 @@ import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMT
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
-import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { FormInitialValues } from './EditSlotManagementWrapper'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 
 // |-- Types --|
 type Props = {
@@ -57,40 +57,8 @@ const EditSlotManagement = ({
 }: Props) => {
     const { values, setFieldValue } = formikProps
 
-    // const {
-    //     data: stateData,
-    //     isLoading: stateIsLoading,
-    //     isFetching: stateIsFetching,
-    // } = useGetAllStateByCountryQuery(formikProps.values.country, {
-    //     skip: !formikProps.values.country,
-    // })
-    // const {
-    //     data: districtData,
-    //     isLoading: districtIsLoading,
-    //     isFetching: districtIsFetching,
-    // } = useGetAllDistrictByStateQuery(formikProps.values.state, {
-    //     skip: !formikProps.values.state,
-    // })
-    // useEffect(() => {
-    //     dispatch(setAllStates(stateData?.data))
-    // }, [stateData, stateIsLoading, stateIsFetching, dispatch])
-
-    //district
-    // useEffect(() => {
-    //     dispatch(setAllDistrict(districtData?.data))
-    // }, [districtData, districtIsLoading, districtIsFetching, dispatch])
-
     dropdownOptions = {
         ...dropdownOptions,
-        // stateOption: allStates?.map((schemeItem: any) => {
-        //     return {
-        //         label: schemeItem?.stateName,
-        //         value: schemeItem?._id,
-        //     }
-        // }),
-        // districtOptions: allDistricts?.map((ele: any) => {
-        //     return { label: ele?.districtName, value: ele?._id }
-        // }),
     }
 
     // const options = ['FIXED', 'FLEXIBLE']
@@ -105,7 +73,7 @@ const EditSlotManagement = ({
         },
     ]
     const dispatch = useDispatch()
-    const handleSetFieldValue = (name: string, value: string) => {
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
@@ -228,41 +196,72 @@ const EditSlotManagement = ({
                         </div>
                         <div className="px-3 pt-5">
                             <div className=" text-lg pb-2 font-medium text-primary-main">
-                                Slot Details
+                                Add Slot Details
                             </div>
-                            <div className="grid grid-cols-3 gap-2 items-end  pb-5">
-                                <div className="flex-[3_3_0%]">
-                                    <ATMDatePicker
-                                        name="slotDate"
-                                        value={values.slotDate}
-                                        label="Date"
-                                        dateTimeFormat="MM/DD/YY ddd"
-                                        onChange={(newValue) =>
+
+                            <div className="grid grid-cols-5 gap-2 items-end  pb-5">
+                                <div className="mt-0">
+                                    <ATMSelectSearchable
+                                        name={'slotDay'}
+                                        value={values.slotDay}
+                                        onChange={(e) => {
+                                            handleSetFieldValue('slotDay', e)
+                                        }}
+                                        size="small"
+                                        label={'Slot Days'}
+                                        isMulti={true}
+                                        options={[
+                                            {
+                                                label: 'Monday',
+                                                value: 'MONDAY',
+                                            },
+                                            {
+                                                label: 'Tuesday',
+                                                value: 'TUESDAY',
+                                            },
+                                            {
+                                                label: 'Wednesday',
+                                                value: 'WEDNESDAY',
+                                            },
+                                            {
+                                                label: 'Thursdya',
+                                                value: 'THURSDAY',
+                                            },
+                                            {
+                                                label: 'Friday',
+                                                value: 'FRIDAY',
+                                            },
+                                            {
+                                                label: 'Saturday',
+                                                value: 'SATURDAY',
+                                            },
+                                            {
+                                                label: 'Sunday',
+                                                value: 'SUNDAY',
+                                            },
+                                        ]}
+                                    />
+                                </div>
+                                <div>
+                                    <ATMTextField
+                                        name="slotPrice"
+                                        required
+                                        value={values.slotPrice}
+                                        label="Slot Price"
+                                        placeholder="Slot Price"
+                                        onChange={(e) =>
                                             handleSetFieldValue(
-                                                'slotDate',
-                                                newValue
+                                                'slotPrice',
+                                                e.target.value
                                             )
                                         }
                                     />
                                 </div>
-                                <div className="flex-[3_3_0%]">
+                                <div className="">
                                     <ATMTimePicker
-                                        name="slotEndTime"
-                                        value={values.slotEndTime || null}
-                                        label="Enddate Time"
-                                        onChange={(newValue) => {
-                                            handleSetFieldValue(
-                                                'slotEndTime',
-                                                newValue
-                                            )
-                                        }}
-                                    />
-                                </div>
-                                <div className="flex-[3_3_0%]">
-                                    <ATMTimePicker
-                                        name={'slotStartTime'}
+                                        name={`slotStartTime`}
                                         value={values.slotStartTime || null}
-                                        label="Startdate Time"
+                                        label="Start Time"
                                         onChange={(newValue) => {
                                             handleSetFieldValue(
                                                 'slotStartTime',
@@ -271,6 +270,55 @@ const EditSlotManagement = ({
                                         }}
                                     />
                                 </div>
+                                <div className="">
+                                    <ATMTimePicker
+                                        name={`slotEndTime`}
+                                        value={values.slotEndTime || null}
+                                        label="End Time"
+                                        onChange={(newValue) => {
+                                            handleSetFieldValue(
+                                                'slotEndTime',
+                                                newValue
+                                            )
+                                        }}
+                                    />
+                                </div>
+                                <div>
+                                    <ATMSwitchButton
+                                        name="slotContinueStatus"
+                                        required
+                                        value={values.slotContinueStatus}
+                                        label="Continue slot"
+                                        onChange={(value) =>
+                                            handleSetFieldValue(
+                                                'slotContinueStatus',
+                                                value
+                                            )
+                                        }
+                                    />
+                                </div>
+                                {/* <button
+                                    type="button"
+                                    disabled={
+                                        !slotStartDate ||
+                                        !slotEndDate ||
+                                        !slotStartTime ||
+                                        !slotEndTime
+                                    }
+                                    onClick={() => {
+                                        handleConfirm()
+                                    }}
+                                    className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                        !slotStartDate ||
+                                        !slotEndDate ||
+                                        !slotStartTime ||
+                                        !slotEndTime
+                                            ? 'opacity-50'
+                                            : ''
+                                    }`}
+                                >
+                                    Confirm
+                                </button> */}
                             </div>
                         </div>
                     </div>

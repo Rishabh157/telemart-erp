@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { array, object, string } from 'yup'
+import { array, boolean, number, object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
@@ -40,12 +40,11 @@ export type FormInitialValues = {
     slotName: string
     channelGroup: string
     type: string
-    channelSlot: {
-        date: string
-        startTime: string
-        endTime: string
-    }[]
-
+    slotPrice: number
+    slotDay: string[]
+    slotStartTime: string
+    slotEndTime: string
+    slotContinueStatus: boolean
     tapeName: string
     channelName: string
     channelTrp: string
@@ -127,13 +126,11 @@ const AddSlotManagementWrapper = () => {
         slotName: '',
         channelGroup: '',
         type: '',
-        channelSlot: [
-            {
-                date: '',
-                startTime: '',
-                endTime: '',
-            },
-        ],
+        slotPrice: 0,
+        slotDay: [''],
+        slotStartTime: '',
+        slotEndTime: '',
+        slotContinueStatus: true,
         tapeName: '',
         channelName: '',
         channelTrp: '',
@@ -147,13 +144,11 @@ const AddSlotManagementWrapper = () => {
         slotName: string().required('Required'),
         channelGroup: string().required('Required'),
         type: string().required('Required'),
-        channelSlot: array().of(
-            object().shape({
-                date: string().required('Date is required'),
-                startTime: string().required('Start time is required'),
-                endTime: string().required('End time is required'),
-            })
-        ),
+        slotPrice: number().required('Slot price is required'),
+        slotDay: array().of(string()).required('Slot Days are required'),
+        slotStartTime: string().required('Required'),
+        slotEndTime: string().required('Required'),
+        slotContinueStatus: boolean().required('Required'),
         tapeName: string().required('Required'),
         channelName: string().required('Required'),
         channelTrp: string(),
@@ -171,7 +166,11 @@ const AddSlotManagementWrapper = () => {
             channelNameId: values.channelName,
             channelTrp: values.channelTrp,
             remarks: values.remarks,
-            channelSlots: values.channelSlot,
+            slotPrice: values.slotPrice,
+            slotDay: values.slotDay,
+            slotStartTime: values.slotStartTime,
+            slotEndTime: values.slotEndTime,
+            slotContinueStatus: values.slotContinueStatus,
             runYoutubeLink: '',
             run: false,
             showOk: false,

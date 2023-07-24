@@ -6,12 +6,11 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
-import { FieldArray, FormikProps } from 'formik'
-import { MdDeleteOutline } from 'react-icons/md'
-import moment from 'moment'
+import { FormikProps } from 'formik'
+
 import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -26,10 +25,10 @@ import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMT
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
-import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 
 // |-- Types --|
 type Props = {
@@ -63,11 +62,7 @@ const AddSlotManagement = ({
         ...dropdownOptions,
     }
 
-    const [slotStartDate, setSlotStartDate] = useState('')
-    const [slotEndDate, setSlotEndDate] = useState('')
-    const [slotStartTime, setSlotStartTime] = useState('')
-    const [slotEndTime, setSlotEndTime] = useState('')
-    const [showSlots, setShowSlots] = useState(false)
+    // const [showSlots, setShowSlots] = useState(false)
 
     // const options = ['FIXED', 'FLEXIBLE']
     const options = [
@@ -81,30 +76,30 @@ const AddSlotManagement = ({
         },
     ]
 
-    const getDates = (startDate: any, endDate: any) => {
-        const dateArray = []
-        const currentDate = moment(startDate, 'MM/DD/YYYY')
-        const finalDate = moment(endDate, 'MM/DD/YYYY')
-        while (moment(currentDate).isSameOrBefore(finalDate)) {
-            dateArray.push(currentDate.format('MM/DD/YYYY'))
-            currentDate.add(1, 'days')
-        }
+    // const getDates = (startDate: any, endDate: any) => {
+    //     const dateArray = []
+    //     const currentDate = moment(startDate, 'MM/DD/YYYY')
+    //     const finalDate = moment(endDate, 'MM/DD/YYYY')
+    //     while (moment(currentDate).isSameOrBefore(finalDate)) {
+    //         dateArray.push(currentDate.format('MM/DD/YYYY'))
+    //         currentDate.add(1, 'days')
+    //     }
 
-        return dateArray
-    }
+    //     return dateArray
+    // }
 
-    const handleConfirm = () => {
-        setShowSlots(true)
-        const startDate = moment(slotStartDate).format('MM/DD/YYYY')
-        const endDate = moment(slotEndDate).format('MM/DD/YYYY')
-        const datesBetween = getDates(startDate, endDate)
-        const newData = datesBetween?.map((ele) => {
-            return { date: ele, startTime: slotStartTime, endTime: slotEndTime }
-        })
-        setFieldValue('channelSlot', newData)
-    }
+    // const handleConfirm = () => {
+    //     setShowSlots(true)
+    //     const startDate = moment(slotStartDate).format('MM/DD/YYYY')
+    //     const endDate = moment(slotEndDate).format('MM/DD/YYYY')
+    //     const datesBetween = getDates(startDate, endDate)
+    //     const newData = datesBetween?.map((ele) => {
+    //         return { date: ele, startTime: slotStartTime, endTime: slotEndTime }
+    //     })
+    //     setFieldValue('channelSlot', newData)
+    // }
     const dispatch = useDispatch()
-    const handleSetFieldValue = (name: string, value: string) => {
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
@@ -232,52 +227,104 @@ const AddSlotManagement = ({
                             </div>
 
                             <div className="grid grid-cols-5 gap-2 items-end  pb-5">
-                                {/* Est. Receiving Date */}
-                                <div className="flex-[3_3_0%]">
-                                    <ATMDatePicker
-                                        name={`date`}
-                                        value={slotStartDate}
-                                        minDate={new Date()}
-                                        label="Slot Start Date"
-                                        dateTimeFormat="MM/DD/YY ddd"
-                                        onChange={(newValue) =>
-                                            setSlotStartDate(newValue)
-                                        }
+                                <div className="mt-0">
+                                    <ATMSelectSearchable
+                                        name={'slotDay'}
+                                        value={values.slotDay}
+                                        onChange={(e) => {
+                                            handleSetFieldValue('slotDay', e)
+                                        }}
+                                        size="small"
+                                        label={'Slot Days'}
+                                        isMulti={true}
+                                        options={[
+                                            {
+                                                label: 'Monday',
+                                                value: 'MONDAY',
+                                            },
+                                            {
+                                                label: 'Tuesday',
+                                                value: 'TUESDAY',
+                                            },
+                                            {
+                                                label: 'Wednesday',
+                                                value: 'WEDNESDAY',
+                                            },
+                                            {
+                                                label: 'Thursdya',
+                                                value: 'THURSDAY',
+                                            },
+                                            {
+                                                label: 'Friday',
+                                                value: 'FRIDAY',
+                                            },
+                                            {
+                                                label: 'Saturday',
+                                                value: 'SATURDAY',
+                                            },
+                                            {
+                                                label: 'Sunday',
+                                                value: 'SUNDAY',
+                                            },
+                                        ]}
                                     />
                                 </div>
-                                <div className="flex-[3_3_0%]">
-                                    <ATMDatePicker
-                                        name={`endDate`}
-                                        minDate={new Date()}
-                                        value={slotEndDate}
-                                        label="Slot End Date"
-                                        dateTimeFormat="MM/DD/YY ddd"
-                                        onChange={(newValue) =>
-                                            setSlotEndDate(newValue)
+                                <div>
+                                    <ATMTextField
+                                        name="slotPrice"
+                                        required
+                                        value={values.slotPrice}
+                                        label="Slot Price"
+                                        placeholder="Slot Price"
+                                        onChange={(e) =>
+                                            handleSetFieldValue(
+                                                'slotPrice',
+                                                e.target.value
+                                            )
                                         }
                                     />
                                 </div>
                                 <div className="">
                                     <ATMTimePicker
-                                        name={`startTime`}
-                                        value={slotStartTime}
+                                        name={`slotStartTime`}
+                                        value={values.slotStartTime}
                                         label="Start Time"
                                         onChange={(newValue) => {
-                                            setSlotStartTime(newValue)
+                                            handleSetFieldValue(
+                                                'slotStartTime',
+                                                newValue
+                                            )
                                         }}
                                     />
                                 </div>
                                 <div className="">
                                     <ATMTimePicker
-                                        name={`endTime`}
-                                        value={slotEndTime}
+                                        name={`slotEndTime`}
+                                        value={values.slotEndTime}
                                         label="End Time"
                                         onChange={(newValue) => {
-                                            setSlotEndTime(newValue)
+                                            handleSetFieldValue(
+                                                'slotEndTime',
+                                                newValue
+                                            )
                                         }}
                                     />
                                 </div>
-                                <button
+                                <div>
+                                    <ATMSwitchButton
+                                        name="slotContinueStatus"
+                                        required
+                                        value={values.slotContinueStatus}
+                                        label="Continue slot"
+                                        onChange={(value) =>
+                                            handleSetFieldValue(
+                                                'slotContinueStatus',
+                                                value
+                                            )
+                                        }
+                                    />
+                                </div>
+                                {/* <button
                                     type="button"
                                     disabled={
                                         !slotStartDate ||
@@ -298,130 +345,8 @@ const AddSlotManagement = ({
                                     }`}
                                 >
                                     Confirm
-                                </button>
+                                </button> */}
                             </div>
-
-                            {showSlots ? (
-                                <FieldArray name="channelSlot">
-                                    {({ push, remove }) => {
-                                        return (
-                                            <>
-                                                <div className="flex flex-col gap-y-9">
-                                                    {values.channelSlot?.map(
-                                                        (item, itemIndex) => {
-                                                            const {
-                                                                date,
-                                                                startTime,
-                                                                endTime,
-                                                            } = item
-
-                                                            return (
-                                                                <div
-                                                                    key={
-                                                                        itemIndex
-                                                                    }
-                                                                    className="flex gap-5 items-end  "
-                                                                >
-                                                                    {/* Est. Receiving Date */}
-                                                                    <div className="flex-[3_3_0%]">
-                                                                        <ATMDatePicker
-                                                                            name={`channelSlot[${itemIndex}].date`}
-                                                                            value={
-                                                                                date
-                                                                            }
-                                                                            dateTimeFormat="MM/DD/YY ddd"
-                                                                            label="Date"
-                                                                            onChange={(
-                                                                                newValue
-                                                                            ) =>
-                                                                                handleSetFieldValue(
-                                                                                    `channelSlot[${itemIndex}].date`,
-                                                                                    newValue
-                                                                                )
-                                                                            }
-                                                                        />
-                                                                    </div>
-                                                                    <div className="flex-[3_3_0%]">
-                                                                        <ATMTimePicker
-                                                                            name={`channelSlot[${itemIndex}].startTime`}
-                                                                            value={
-                                                                                startTime
-                                                                            }
-                                                                            label="Start Time"
-                                                                            onChange={(
-                                                                                newValue
-                                                                            ) => {
-                                                                                handleSetFieldValue(
-                                                                                    `channelSlot[${itemIndex}].startTime`,
-                                                                                    newValue
-                                                                                )
-                                                                            }}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="flex-[3_3_0%]">
-                                                                        <ATMTimePicker
-                                                                            name={`channelSlot[${itemIndex}].endTime`}
-                                                                            value={
-                                                                                endTime
-                                                                            }
-                                                                            label="End Time"
-                                                                            onChange={(
-                                                                                newValue
-                                                                            ) => {
-                                                                                handleSetFieldValue(
-                                                                                    `channelSlot[${itemIndex}].endTime`,
-                                                                                    newValue
-                                                                                )
-                                                                            }}
-                                                                        />
-                                                                    </div>
-
-                                                                    {/* BUTTON - Delete */}
-                                                                    {values
-                                                                        .channelSlot
-                                                                        ?.length >
-                                                                        1 && (
-                                                                        <div>
-                                                                            <button
-                                                                                type="button"
-                                                                                onClick={() => {
-                                                                                    remove(
-                                                                                        itemIndex
-                                                                                    )
-                                                                                }}
-                                                                                className="p-2 bg-red-500 text-white rounded"
-                                                                            >
-                                                                                <MdDeleteOutline className="text-2xl" />
-                                                                            </button>
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-                                                            )
-                                                        }
-                                                    )}
-                                                </div>
-
-                                                {/* BUTTON - Add More Product */}
-                                                {/* <div className="flex justify-self-start py-7">
-                                                <button
-                                                    type="button"
-                                                    onClick={() =>
-                                                        push({
-                                                            date: '',
-                                                            startTime: '',
-                                                            endTime: '',
-                                                        })
-                                                    }
-                                                    className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
-                                                >
-                                                    <HiPlus size="20" />
-                                                </button>
-                                            </div> */}
-                                            </>
-                                        )
-                                    }}
-                                </FieldArray>
-                            ) : null}
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@
 import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { FormikProps } from 'formik'
+import { FormikProps, FieldArray } from 'formik'
 import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -29,6 +29,8 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { HiPlus } from 'react-icons/hi'
+import { MdDeleteOutline } from 'react-icons/md'
 
 // |-- Types --|
 type Props = {
@@ -207,6 +209,85 @@ const EditUser = ({ formikProps, apiStatus }: Props) => {
                                 label="User Role"
                             />
                         </div>
+                        <FieldArray name="allowedIps">
+                            {({ push, remove }) => {
+                                return (
+                                    <>
+                                        <div className="grid grid-cols-3 gap-9 ">
+                                            {values?.allowedIps?.map(
+                                                (item: any, itemIndex: any) => {
+                                                    let { allowedIp } = item
+
+                                                    return (
+                                                        <div
+                                                            key={itemIndex}
+                                                            className="flex "
+                                                        >
+                                                            {/* Phone */}
+                                                            <div className="flex">
+                                                                <ATMTextField
+                                                                    type="text"
+                                                                    required
+                                                                    name={`allowedIps[${itemIndex}].allowedIp`}
+                                                                    value={
+                                                                        allowedIp
+                                                                    }
+                                                                    label="Allowed Ips"
+                                                                    placeholder="Allowed Ips"
+                                                                    onChange={(
+                                                                        e
+                                                                    ) => {
+                                                                        handleSetFieldValue(
+                                                                            `allowedIps[${itemIndex}].allowedIp`,
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        )
+                                                                    }}
+                                                                />
+
+                                                                {/* BUTTON - Delete */}
+                                                                {values
+                                                                    .allowedIps
+                                                                    ?.length >
+                                                                    1 && (
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => {
+                                                                            remove(
+                                                                                itemIndex
+                                                                            )
+                                                                        }}
+                                                                        className="p-2 bg-red-500 text-white rounded my-[48px] mx-[10px]"
+                                                                    >
+                                                                        <MdDeleteOutline className="text-2xl" />
+                                                                    </button>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+
+                                        {/* BUTTON - Add More Product */}
+                                        <div className="flex justify-self-start py-7">
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    push({
+                                                        allowedIp: '',
+                                                    })
+                                                }
+                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                            >
+                                                <HiPlus size="20" /> Add More
+                                            </button>
+                                        </div>
+                                    </>
+                                )
+                            }}
+                        </FieldArray>
                     </div>
                 </div>
             </div>

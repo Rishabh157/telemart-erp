@@ -42,6 +42,7 @@ interface UserData {
     userRole: string
     companyId: string
     password?: string
+    allowedIp: string[]
 }
 export type FormInitialValues = {
     firstName: string
@@ -53,6 +54,7 @@ export type FormInitialValues = {
     userDepartment: string
     userRole: string
     companyId: string
+    allowedIps: { allowedIp: string }[]
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -75,7 +77,11 @@ const EditUserWrapper = (props: Props) => {
         dispatch(setSelectedItem(data?.data))
         //}
     }, [data, isLoading, isFetching])
+    let allowedIps: any = []
 
+    selectedItem?.allowedIp?.map((val: any) => {
+        return allowedIps.push({ allowedIp: val })
+    })
     const initialValues: FormInitialValues = {
         firstName: selectedItem?.firstName || '',
         lastName: selectedItem?.lastName || '',
@@ -86,6 +92,7 @@ const EditUserWrapper = (props: Props) => {
         password: '',
         userDepartment: selectedItem?.userDepartment || '',
         userRole: selectedItem?.userRole || '',
+        allowedIps: allowedIps || [],
         companyId: userData?.companyId || '',
     }
 
@@ -108,6 +115,9 @@ const EditUserWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
+        let newAllowedIp = values?.allowedIps.map((ele) => {
+            return ele.allowedIp
+        })
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
@@ -120,6 +130,7 @@ const EditUserWrapper = (props: Props) => {
                 userDepartment: values.userDepartment || '',
                 userRole: values.userRole || '',
                 companyId: values.companyId || '',
+                allowedIp: newAllowedIp[0]?.length ? newAllowedIp : [],
             }
 
             if (values?.password) {
