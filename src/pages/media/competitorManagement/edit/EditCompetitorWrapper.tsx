@@ -30,6 +30,9 @@ import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { LanguageListResponse } from 'src/models'
+import { useGetAllLanguageQuery } from 'src/services/LanguageService'
+import { setLanguage } from 'src/redux/slices/languageSlice'
 
 // |-- Types --|
 type Props = {}
@@ -39,13 +42,16 @@ export type FormInitialValues = {
     companyName: string
     productName: string
     websiteLink: string
-    video: string
     schemePrice: string
     channelNameId: string
     startTime: string
     endTime: string
     mobileNumber: string
     date: string
+    ytLink: string
+    languageId: string
+    productCategory: string
+    image: string[]
 }
 
 const EditCompetitorWrapper = (props: Props) => {
@@ -63,6 +69,8 @@ const EditCompetitorWrapper = (props: Props) => {
     const { channelMgt } = useSelector(
         (state: RootState) => state?.channelManagement
     )
+
+    const { language } = useSelector((state: RootState) => state?.language)
 
     const {
         data: channelData,
@@ -91,6 +99,17 @@ const EditCompetitorWrapper = (props: Props) => {
         }
     }, [dispatch, channelData, channelIsLoading, channelIsFetching])
 
+    const {
+        isLoading: isLanguageLoading,
+        isFetching: isLanguageFetching,
+        data: languageDataApi,
+    } = useGetAllLanguageQuery('')
+    useEffect(() => {
+        if (!isLanguageLoading && !isLanguageFetching) {
+            dispatch(setLanguage(languageDataApi?.data || []))
+        }
+    }, [isLanguageLoading, isLanguageFetching, languageDataApi, dispatch])
+
     const [EditCompetitors] = useUpdatecompetitorMutation()
     const { data, isLoading, isFetching } = useGetCompetitorByIdQuery(Id)
 
@@ -103,13 +122,16 @@ const EditCompetitorWrapper = (props: Props) => {
         companyName: selectedItem?.channelNameId || '',
         productName: selectedItem?.productName || '',
         websiteLink: selectedItem?.websiteLink || '',
-        video: selectedItem?.video || '',
+        ytLink: selectedItem?.ytLink || '',
         schemePrice: selectedItem?.schemePrice || '',
         channelNameId: selectedItem?.channelNameId || '',
         startTime: selectedItem?.startTime || '',
         endTime: selectedItem?.endTime || '',
         mobileNumber: selectedItem?.mobileNumber || '',
         date: selectedItem?.date || '',
+        languageId: selectedItem?.languageId ? selectedItem?.languageId : '',
+        productCategory: selectedItem?.productCategory,
+        image: selectedItem?.image || [],
     }
 
     // Form Validation Schema
@@ -117,9 +139,9 @@ const EditCompetitorWrapper = (props: Props) => {
         competitorName: string().required('Required'),
         companyName: string().required('Required'),
         productName: string().required('Required'),
-        websiteLink: string().url('Invalid URL').required('Required'),
-        video: string().url('Invalid URL').required('Required'),
-        schemePrice: string().required('Required'),
+        websiteLink: string(),
+        ytLink: string().url('Invalid URL'),
+        schemePrice: string(),
         channelNameId: string().required('Required'),
         startTime: string().required('Required'),
         endTime: string().required('Required'),
@@ -139,6 +161,12 @@ const EditCompetitorWrapper = (props: Props) => {
                     value: ele._id,
                 }
             }) || [],
+        languageOptions: language?.map((languageItem: LanguageListResponse) => {
+            return {
+                label: languageItem?.languageName,
+                value: languageItem?._id,
+            }
+        }),
     }
 
     //    Form Submit Handler
@@ -151,13 +179,16 @@ const EditCompetitorWrapper = (props: Props) => {
                     competitorName: values.competitorName,
                     productName: values.productName,
                     websiteLink: values.websiteLink,
-                    video: values.video,
+                    ytLink: values.ytLink,
+                    productCategory: values.productCategory,
                     schemePrice: values.schemePrice,
                     channelNameId: values.channelNameId || '',
                     startTime: values.startTime,
                     endTime: values.endTime,
                     date: values.date,
+                    image: values.image,
                     mobileNumber: values.mobileNumber,
+                    languageId: values.languageId,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',

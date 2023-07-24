@@ -200,7 +200,7 @@ const AddSlotManagement = ({
                             />
                             <ATMTextField
                                 name="channelTrp"
-                                required
+                                // required
                                 value={values.channelTrp}
                                 label="Channel Trp   "
                                 placeholder="Channel Trp "
