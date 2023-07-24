@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik, FormikProps } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
-import { object, string } from 'yup'
+import { array, boolean, number, object, string } from 'yup'
 // import { showToast } from 'src/utils'
 
 // |-- Internal Dependencies --|
@@ -44,9 +44,11 @@ import { setSelectedTapManagement } from 'src/redux/slices/media/tapeManagementS
 export type FormInitialValues = {
     slotName: string
     channelGroupId: string
+    slotPrice: number
+    slotDay: string[]
     slotStartTime: string
-    slotDate: string
     slotEndTime: string
+    slotContinueStatus: boolean
     type: string
     tapeNameId: string
     channelNameId: string
@@ -179,12 +181,14 @@ const EditSlotManagementWrapper = () => {
     const initialValues: FormInitialValues = {
         slotName: selectedItems?.slotName || '',
         channelGroupId: selectedItems?.channelGroupId || '',
-        slotStartTime: selectedItems?.slotStartTime || '',
         type: selectedItems?.type || '',
         tapeNameId: selectedItems?.tapeNameId || '',
         channelNameId: selectedItems?.channelNameId || '',
-        slotDate: selectedItems?.slotDate || '',
+        slotPrice: selectedItems?.slotPrice || 0,
+        slotDay: selectedItems?.slotDay || [''],
+        slotStartTime: selectedItems?.slotStartTime || '',
         slotEndTime: selectedItems?.slotEndTime || '',
+        slotContinueStatus: selectedItems?.slotContinueStatus || false,
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.remarks || '',
         runYoutubeLink: selectedItems?.runYoutubeLink || '',
@@ -204,12 +208,14 @@ const EditSlotManagementWrapper = () => {
     const validationSchema = object({
         slotName: string().required('Required'),
         channelGroupId: string().required('Required'),
+        type: string().required('Required'),
+        slotPrice: number().required('Slot price is required'),
+        slotDay: array().of(string()).required('Slot Days are required'),
         slotStartTime: string().required('Required'),
         slotEndTime: string().required('Required'),
-        type: string().required('Required'),
+        slotContinueStatus: boolean().required('Required'),
         tapeNameId: string().required('Required'),
         channelNameId: string().required('Required'),
-        slotDate: string().required('Required'),
         channelTrp: string().required('Required'),
         remarks: string(),
     })
@@ -227,9 +233,11 @@ const EditSlotManagementWrapper = () => {
                     channelNameId: values?.channelNameId,
                     channelTrp: values?.channelTrp,
                     remarks: values?.remarks,
-                    slotDate: values?.slotDate,
-                    slotStartTime: values?.slotStartTime,
-                    slotEndTime: values?.slotEndTime,
+                    slotPrice: values.slotPrice,
+                    slotDay: values.slotDay,
+                    slotStartTime: values.slotStartTime,
+                    slotEndTime: values.slotEndTime,
+                    slotContinueStatus: values.slotContinueStatus,
                     runYoutubeLink: values?.runYoutubeLink,
                     runStatus: values?.runStatus,
                     run: values?.run,

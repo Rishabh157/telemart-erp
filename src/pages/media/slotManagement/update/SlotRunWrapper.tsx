@@ -11,7 +11,6 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { object, string, boolean } from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -36,9 +35,11 @@ type FormInitialValues = {
     channelNameId: string
     channelTrp: string
     remarks: string
-    slotDate: string
+    slotPrice: number
+    slotDay: string[]
     slotStartTime: string
     slotEndTime: string
+    slotContinueStatus: boolean
     runYoutubeLink: string
     runStatus: boolean
     run: boolean
@@ -88,9 +89,11 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         channelNameId: selectedItems?.channelNameId || '',
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.reamrks || '',
-        slotDate: selectedItems?.slotDate || '',
+        slotPrice: selectedItems?.slotPrice || 0,
+        slotDay: selectedItems?.slotDay || [''],
         slotStartTime: selectedItems?.slotStartTime || '',
         slotEndTime: selectedItems?.slotEndTime || '',
+        slotContinueStatus: selectedItems?.slotContinueStatus || false,
         runYoutubeLink: selectedItems?.runYoutubeLink || '',
         runStatus: selectedItems?.runStatus || false,
         run: selectedItems?.run || false,
@@ -103,11 +106,19 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         runRemark: selectedItems?.runRemark || '',
         companyId: selectedItems?.companyId || '',
     }
+    const { object, boolean, string } = require('yup')
+
     const validationSchema = object({
         run: boolean(),
-        //reasonNotShow:string().required('Required'),
-        runStartTime: string().required('Required'),
-        runEndTime: string().required('Required'),
+        //reasonNotShow: string().required('Required'),
+        runStartTime: string().when('run', {
+            is: true,
+            then: string().required('Required'),
+        }),
+        runEndTime: string().when('run', {
+            is: true,
+            then: string().required('Required'),
+        }),
         runRemark: string().required('Required'),
     })
 
@@ -128,9 +139,11 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     channelNameId: values?.channelNameId,
                     channelTrp: values?.channelTrp,
                     remarks: values?.remarks,
-                    slotDate: values?.slotDate,
-                    slotStartTime: values?.slotStartTime,
-                    slotEndTime: values?.slotEndTime,
+                    slotPrice: values.slotPrice,
+                    slotDay: values.slotDay,
+                    slotStartTime: values.slotStartTime,
+                    slotEndTime: values.slotEndTime,
+                    slotContinueStatus: values.slotContinueStatus,
                     runYoutubeLink: values?.runYoutubeLink || '',
                     runStatus: newRunStatus,
                     run: values?.run,

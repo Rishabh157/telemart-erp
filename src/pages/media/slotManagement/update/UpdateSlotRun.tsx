@@ -221,7 +221,9 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                 <button
                     type="button"
                     disabled={apiStatus || imageApiStatus || videoApiStatus}
-                    onClick={() => formikProps.handleSubmit()}
+                    onClick={() => {
+                        formikProps.handleSubmit()
+                    }}
                     className={`bg-primary-main rounded py-1 px-5 item-center text-white border border-primary-main
                     ${
                         apiStatus || imageApiStatus || videoApiStatus
