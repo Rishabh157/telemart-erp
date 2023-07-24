@@ -33,6 +33,7 @@ export type AddUser = {
     userType: string
     password: string
     companyId: string
+    allowedIp: string[]
 }
 
 export type UpdateUser = {
@@ -46,6 +47,7 @@ export type UpdateUser = {
         userType: string
         password: string
         companyId: string
+        allowedIp: string[]
     }
     id: string
 }
@@ -61,6 +63,7 @@ export type userData = {
     userRole: string
     firstName: string
     lastName: string
+    allowedIp: string[]
 }
 
 export type ChangeCompany = {
@@ -92,6 +95,7 @@ export type AddNewUser = {
     userRole: string
     password: string
     companyId: string
+    allowedIp: string[]
 }
 
 export type UpdateNewUser = {
@@ -105,6 +109,7 @@ export type UpdateNewUser = {
         userDepartment: string
         userRole: string
         companyId: string
+        allowedIp: string[]
     }
     id: string
 }
