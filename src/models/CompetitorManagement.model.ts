@@ -9,7 +9,7 @@
 export type CompetitorManagementListResponse = {
     _id: string
     date: string
-    artist: string
+    competitorName: string
     productName: string
     websiteLink: string
     video: string
@@ -28,7 +28,7 @@ export type CompetitorManagementListResponse = {
 }
 
 export type AddCompetitorManagement = {
-    artist: string
+    competitorName: string
     companyId: string
     productName: string
     channelNameId: string
@@ -44,7 +44,7 @@ export type AddCompetitorManagement = {
 export type UpdateCompetitorManagement = {
     body: {
         date: string
-        artist: string
+        competitorName: string
         productName: string
         websiteLink: string
         video: string

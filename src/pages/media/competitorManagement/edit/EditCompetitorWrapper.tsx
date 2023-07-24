@@ -99,7 +99,7 @@ const EditCompetitorWrapper = (props: Props) => {
     }, [dispatch, data, isLoading, isFetching])
 
     const initialValues: FormInitialValues = {
-        competitorName: selectedItem?.artist || '',
+        competitorName: selectedItem?.competitorName || '',
         companyName: selectedItem?.channelNameId || '',
         productName: selectedItem?.productName || '',
         websiteLink: selectedItem?.websiteLink || '',
@@ -148,7 +148,7 @@ const EditCompetitorWrapper = (props: Props) => {
         setTimeout(() => {
             EditCompetitors({
                 body: {
-                    artist: values.competitorName,
+                    competitorName: values.competitorName,
                     productName: values.productName,
                     websiteLink: values.websiteLink,
                     video: values.video,
