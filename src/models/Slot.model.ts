@@ -12,8 +12,11 @@ export type SlotManagementListResponse = {
     type: string
     tapeNameId: String
     channelNameId: string
+    slotPrice: number
+    slotDay: string[]
     slotStartTime: string
     slotEndTime: string
+    slotContinueStatus: boolean
     channelTrp: string
     remarks: string
     runYoutubeLink: string | ''
@@ -59,11 +62,11 @@ export type AddSlotManagement = {
     channelNameId: string
     channelTrp: string
     remarks: string
-    channelSlots: {
-        date: string
-        startTime: string
-        endTime: string
-    }[]
+    slotPrice: number
+    slotDay: string[]
+    slotStartTime: string
+    slotEndTime: string
+    slotContinueStatus: boolean
     runYoutubeLink: string | ''
     run: boolean
     slotRunImage: string
@@ -85,9 +88,11 @@ export type UpdateSlotManagement = {
         channelNameId: string
         channelTrp: string
         remarks: string
-        slotDate: string
+        slotPrice: number
+        slotDay: string[]
         slotStartTime: string
         slotEndTime: string
+        slotContinueStatus: boolean
         runYoutubeLink: string | ''
         runStatus: boolean
         run: boolean
