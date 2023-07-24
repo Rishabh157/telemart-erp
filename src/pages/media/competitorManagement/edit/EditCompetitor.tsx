@@ -26,10 +26,12 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
-// |-- MUI --|
 import { CircularProgress } from '@mui/material'
+import { FieldArray } from 'formik'
+import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+import { MdDeleteOutline } from 'react-icons/md'
+import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
+import { HiPlus } from 'react-icons/hi'
 
 // |-- Types --|
 type Props = {
@@ -37,6 +39,7 @@ type Props = {
     apiStatus: boolean
     dropdownOptions: {
         channelOptions: SelectOption[] | []
+        languageOptions: SelectOption[]
     }
 }
 
@@ -52,11 +55,6 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
-    const [imageApiStatus, setImageApiStatus] = useState(false)
-    // const [videoApiStatus, setVideoApiStatus] = useState(false)
-
-    const [fileUploader] = useFileUploaderMutation()
-
     const { values, setFieldValue } = formikProps
 
     dropdownOptions = {
@@ -68,6 +66,27 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+    const [fileUploader] = useFileUploaderMutation()
+
+    const productCategoryOption = [
+        {
+            label: 'Herbal',
+            value: 'HERBAL',
+        },
+        {
+            label: 'Education',
+            value: 'EDUCATION',
+        },
+        {
+            label: 'Spiritual',
+            value: 'SPIRITUAL',
+        },
+        {
+            label: 'Other',
+            value: 'OTHER',
+        },
+    ]
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -134,6 +153,18 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     )
                                 }
                             />
+
+                            <ATMSelectSearchable
+                                name="productCategory"
+                                required
+                                value={values.productCategory}
+                                label="Product Category"
+                                // placeholder="Product Category"
+                                options={productCategoryOption}
+                                onChange={(e) =>
+                                    handleSetFieldValue('productCategory', e)
+                                }
+                            />
                             <ATMSelectSearchable
                                 name="channelNameId"
                                 required
@@ -144,12 +175,23 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 options={dropdownOptions.channelOptions}
                                 label="Channel Name"
                             />
+                            <ATMSelectSearchable
+                                name="languageId"
+                                required
+                                // isMulti={true}
+                                value={values.languageId}
+                                onChange={(value) =>
+                                    handleSetFieldValue('languageId', value)
+                                }
+                                options={dropdownOptions.languageOptions}
+                                label="Language"
+                            />
                             <ATMTextField
                                 name="schemePrice"
-                                required
+                                type={'text'}
                                 value={values.schemePrice}
                                 label="Price/MRP"
-                                placeholder="schemePrice"
+                                placeholder="Scheme Price"
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
@@ -160,11 +202,24 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     }
                                 }}
                             />
+                            <ATMTextField
+                                name="websiteLink"
+                                value={values.websiteLink}
+                                required
+                                label="Website Link"
+                                placeholder="Website Link"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'websiteLink',
+                                        e.target.value
+                                    )
+                                }
+                            />
 
                             <ATMTextField
                                 name="mobileNumber"
-                                required
                                 value={values.mobileNumber}
+                                required
                                 label="Mobile Number"
                                 placeholder="Mobile Number"
                                 onChange={(e) => {
@@ -176,20 +231,6 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                         )
                                     }
                                 }}
-                            />
-
-                            <ATMTextField
-                                name="websiteLink"
-                                required
-                                value={values.websiteLink}
-                                label="Website Link"
-                                placeholder="Website Link"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'websiteLink',
-                                        e.target.value
-                                    )
-                                }
                             />
 
                             <div className="mt-3">
@@ -206,8 +247,8 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             <div className="mt-1">
                                 <ATMTimePicker
-                                    required
                                     name={`startTime`}
+                                    required
                                     value={values.startTime}
                                     label="Start Time"
                                     onChange={(newValue) => {
@@ -220,8 +261,8 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             </div>
                             <div className="mt-1">
                                 <ATMTimePicker
-                                    required
                                     name={`endTime`}
+                                    required
                                     value={values.endTime}
                                     label="End Time"
                                     onChange={(newValue) => {
@@ -230,44 +271,134 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 />
                             </div>
 
-                            <div className="mt-4">
-                                <ATMFilePickerWrapper
-                                    name="video"
-                                    label="Video"
-                                    placeholder="video"
-                                    onSelect={(newFile) => {
-                                        const formData = new FormData()
-                                        formData.append('fileType', 'VIDEO')
-                                        formData.append(
-                                            'category',
-                                            'competitor'
-                                        )
-                                        formData.append(
-                                            'fileUrl',
-                                            newFile || ''
-                                        )
-                                        setImageApiStatus(true)
-                                        fileUploader(formData).then((res) => {
-                                            if ('data' in res) {
-                                                setImageApiStatus(false)
-                                                setFieldValue(
-                                                    'video',
-                                                    res?.data?.data?.fileUrl
-                                                )
-                                            }
-                                            setImageApiStatus(false)
-                                        })
-                                    }}
-                                    selectedFile={values.video}
-                                    disabled={false}
-                                />
-                                {imageApiStatus ? (
-                                    <div className="mt-2 flex justify-center items-center">
-                                        <CircularProgress />
-                                    </div>
-                                ) : null}
-                            </div>
+                            <ATMTextField
+                                name="ytLink"
+                                value={values.ytLink}
+                                label="Youtube Link"
+                                placeholder="Youtube Link"
+                                onChange={(e) => {
+                                    handleSetFieldValue(
+                                        'ytLink',
+                                        e.target.value
+                                    )
+                                }}
+                            />
                         </div>
+                        <FieldArray name="image">
+                            {({ push, remove }) => (
+                                <div className="">
+                                    {values.image?.map((img, ind) => {
+                                        return (
+                                            <div
+                                                key={ind}
+                                                className={`flex flex-col gap-2 py-6 px-7 ${
+                                                    ind !==
+                                                        values.image.length -
+                                                            1 && 'border-b'
+                                                }  border-slate-300 `}
+                                            >
+                                                <div className="flex justify-between items-center">
+                                                    <div className="text-primary-main text-lg pb-2 font-medium ">
+                                                       image #{ind + 1}
+                                                    </div>
+                                                    {/* Delete Button */}
+                                                    {values.image?.length >
+                                                        1 && (
+                                                        <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                remove(ind)
+                                                            }
+                                                            className="p-1 bg-red-500 text-white rounded"
+                                                        >
+                                                            <MdDeleteOutline className="text-2xl" />
+                                                        </button>
+                                                    )}
+                                                </div>
+
+                                                <div className="grid grid-cols-4 gap-4 gap-y-5 my-3">
+                                                    <div className="mt-4">
+                                                        <ATMFilePickerWrapper
+                                                            name={`image[${ind}]`}
+                                                            label="Image"
+                                                            placeholder="Image"
+                                                            onSelect={(
+                                                                newFile
+                                                            ) => {
+                                                                const formData =
+                                                                    new FormData()
+                                                                formData.append(
+                                                                    'fileType',
+                                                                    'IMAGE'
+                                                                )
+                                                                formData.append(
+                                                                    'category',
+                                                                    'COMPITITOR'
+                                                                )
+                                                                formData.append(
+                                                                    'fileUrl',
+                                                                    newFile ||
+                                                                        ''
+                                                                )
+                                                                setImageApiStatus(
+                                                                    true
+                                                                )
+                                                                fileUploader(
+                                                                    formData
+                                                                ).then(
+                                                                    (res) => {
+                                                                        if (
+                                                                            'data' in
+                                                                            res
+                                                                        ) {
+                                                                            setImageApiStatus(
+                                                                                false
+                                                                            )
+                                                                            setFieldValue(
+                                                                                `image[${ind}]`,
+                                                                                res
+                                                                                    ?.data
+                                                                                    ?.data
+                                                                                    ?.fileUrl
+                                                                            )
+                                                                        }
+                                                                        setImageApiStatus(
+                                                                            false
+                                                                        )
+                                                                    }
+                                                                )
+                                                            }}
+                                                            selectedFile={
+                                                                values.image[
+                                                                    ind
+                                                                ]
+                                                            }
+                                                            disabled={false}
+                                                        />
+                                                        {imageApiStatus ? (
+                                                            <div className=" mt-3 flex justify-center  items-center w-full h-full">
+                                                                <CircularProgress />
+                                                            </div>
+                                                        ) : null}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+
+                                    {/* BUTTON- Edit More Script */}
+                                    <div className="flex justify-end p-5">
+                                        <button
+                                            type="button"
+                                            onClick={() => push('')}
+                                            className="bg-primary-main px-3 py-1 text-white rounded"
+                                        >
+                                            <HiPlus />
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </FieldArray>
                     </div>
                 </div>
             </div>

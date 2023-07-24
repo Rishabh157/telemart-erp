@@ -156,7 +156,7 @@ const AddSlotManagementWrapper = () => {
         ),
         tapeName: string().required('Required'),
         channelName: string().required('Required'),
-        channelTrp: string().required('Required'),
+        channelTrp: string(),
         remarks: string(),
     })
 

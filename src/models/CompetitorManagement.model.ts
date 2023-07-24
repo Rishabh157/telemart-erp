@@ -12,7 +12,8 @@ export type CompetitorManagementListResponse = {
     competitorName: string
     productName: string
     websiteLink: string
-    video: string
+    ytLink: string
+    productCategory: string
     mobileNumber: string
     maskedPhoneNo: string
     schemePrice: number
@@ -24,6 +25,8 @@ export type CompetitorManagementListResponse = {
     isActive: true
     createdAt: string
     updatedAt: string
+    image: string[]
+
     __v: number
 }
 
@@ -34,11 +37,14 @@ export type AddCompetitorManagement = {
     channelNameId: string
     schemePrice: string
     websiteLink: string
-    video: string
+    ytLink: string
+    productCategory: string
     mobileNumber: string
     date: string
     startTime: string
     endTime: string
+    languageId: string
+    image: string[]
 }
 
 export type UpdateCompetitorManagement = {
@@ -47,13 +53,17 @@ export type UpdateCompetitorManagement = {
         competitorName: string
         productName: string
         websiteLink: string
-        video: string
+        ytLink: string
+        productCategory: string
         mobileNumber: string
         schemePrice: string
         companyId: string
         channelNameId: string
         startTime: string
         endTime: string
+        languageId:string
+        image: string[]
+
     }
     id: string
 }

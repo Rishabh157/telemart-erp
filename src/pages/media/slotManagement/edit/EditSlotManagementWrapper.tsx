@@ -210,7 +210,7 @@ const EditSlotManagementWrapper = () => {
         tapeNameId: string().required('Required'),
         channelNameId: string().required('Required'),
         slotDate: string().required('Required'),
-        channelTrp: string().required('Required'),
+        channelTrp: string(),
         remarks: string(),
     })
 
