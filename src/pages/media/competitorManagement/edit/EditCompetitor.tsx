@@ -111,8 +111,8 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 name="competitorName"
                                 required
                                 value={values.competitorName}
-                                label="Artist Name"
-                                placeholder="Artist Name"
+                                label="Competitor Name"
+                                placeholder="Competitor Name"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'competitorName',

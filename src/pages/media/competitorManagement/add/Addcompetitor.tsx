@@ -106,14 +106,14 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
-                                name="artist"
+                                name="competitorName"
                                 required
-                                value={values.artist}
-                                label="Artist Name"
-                                placeholder="Artist Name"
+                                value={values.competitorName}
+                                label="Competitor Name"
+                                placeholder="Competitor Name"
                                 onChange={(e) =>
                                     handleSetFieldValue(
-                                        'artist',
+                                        'competitorName',
                                         e.target.value
                                     )
                                 }
