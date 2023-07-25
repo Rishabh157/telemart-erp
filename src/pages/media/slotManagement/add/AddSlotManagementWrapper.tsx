@@ -44,6 +44,7 @@ export type FormInitialValues = {
     slotStartTime: string
     slotEndTime: string
     slotStartDate: string
+    slotRenewal: string
     slotContinueStatus: boolean
     tapeName: string
     channelName: string
@@ -130,6 +131,7 @@ const AddSlotManagementWrapper = () => {
         slotDay: [''],
         slotStartTime: '',
         slotStartDate: '',
+        slotRenewal: '',
         slotEndTime: '',
         slotContinueStatus: true,
         tapeName: '',
@@ -172,9 +174,10 @@ const AddSlotManagementWrapper = () => {
             slotDay: values.slotDay,
             slotStartTime: values.slotStartTime,
             slotStartDate: values.slotStartDate,
+            slotRenewal: values.slotRenewal,
             slotEndTime: values.slotEndTime,
             slotContinueStatus: values.slotContinueStatus,
-           
+
             companyId: values.companyId || '',
         }).then((res: any) => {
             if ('data' in res) {

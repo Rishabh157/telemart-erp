@@ -39,17 +39,17 @@ type FormInitialValues = {
     slotDay: string[]
     slotStartTime: string
     slotEndTime: string
-    slotStartDate: string
+    // slotStartDate: string
     slotContinueStatus: boolean
     runYoutubeLink: string
     runStatus: boolean
     run: boolean
     showOk: boolean
     slotRunImage: string
-    slotRunVideo: string
+    // slotRunVideo: string
     reasonNotShow: string | null
-    runStartTime: string
-    runEndTime: string
+    // runStartTime: string
+    // runEndTime: string
     runRemark: string
     companyId: string
 }
@@ -92,7 +92,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         remarks: selectedItems?.reamrks || '',
         slotPrice: selectedItems?.slotPrice || 0,
         slotDay: selectedItems?.slotDay || [''],
-        slotStartDate: selectedItems?.slotStartDate || '',
+        // slotStartDate: selectedItems?.slotStartDate || '',
         slotStartTime: selectedItems?.slotStartTime || '',
         slotEndTime: selectedItems?.slotEndTime || '',
         slotContinueStatus: selectedItems?.slotContinueStatus || false,
@@ -100,11 +100,11 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         runStatus: selectedItems?.runStatus || false,
         run: selectedItems?.run || false,
         slotRunImage: selectedItems?.slotRunImage || '',
-        slotRunVideo: selectedItems?.slotRunVideo || '',
-        showOk: selectedItems?.showOk || true,
+        // slotRunVideo: selectedItems?.slotRunVideo || '',
+        showOk: selectedItems?.showOk,
         reasonNotShow: selectedItems?.reasonNotShow || '',
-        runStartTime: selectedItems?.runStartTime || '',
-        runEndTime: selectedItems?.runEndTime || '',
+        // runStartTime: selectedItems?.runStartTime || '',
+        // runEndTime: selectedItems?.runEndTime || '',
         runRemark: selectedItems?.runRemark || '',
         companyId: selectedItems?.companyId || '',
     }
@@ -113,23 +113,14 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
     const validationSchema = object({
         run: boolean(),
         //reasonNotShow: string().required('Required'),
-        runStartTime: string().when('run', {
-            is: true,
-            then: string().required('Required'),
-        }),
-        runEndTime: string().when('run', {
-            is: true,
-            then: string().required('Required'),
-        }),
-        runRemark: string().required('Required'),
+
+        runRemark: string(),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-        var newRunStatus: boolean = false
-        if (values?.runStartTime !== '' && values?.runEndTime !== '') {
-            newRunStatus = true
-        }
+
+        console.log(values)
 
         setTimeout(() => {
             updateSlot({
@@ -144,18 +135,18 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     slotPrice: values.slotPrice,
                     slotDay: values.slotDay,
                     slotStartTime: values.slotStartTime,
-                    slotStartDate: values.slotStartDate,
+                    // slotStartDate: values.slotStartDate,
                     slotEndTime: values.slotEndTime,
                     slotContinueStatus: values.slotContinueStatus,
                     runYoutubeLink: values?.runYoutubeLink || '',
-                    runStatus: newRunStatus,
+                    runStatus: values?.run,
                     run: values?.run,
                     slotRunImage: values?.slotRunImage || '',
-                    slotRunVideo: values?.slotRunVideo || '',
-                    showOk: values?.showOk || true,
+                    // slotRunVideo: values?.slotRunVideo || '',
+                    showOk: values?.showOk,
                     reasonNotShow: values?.reasonNotShow || null,
-                    runStartTime: values?.runStartTime || '',
-                    runEndTime: values?.runEndTime || '',
+                    // runStartTime: values?.runStartTime || '',
+                    // runEndTime: values?.runEndTime || '',
                     runRemark: values?.runRemark,
                     companyId: values?.companyId,
                 },
@@ -165,7 +156,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     if (res?.data?.status) {
                         showToast('success', 'Status Updated successfully!')
                         setIsOpenDialog(false)
-                        navigate('/media/slot')
+                        navigate('/media/slot/run-slots')
                     } else {
                         showToast('error', res?.data?.message)
                     }
