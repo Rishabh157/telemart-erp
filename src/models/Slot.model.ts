@@ -24,9 +24,9 @@ export type SlotManagementListResponse = {
     reasonNotShow: string | null
     run: boolean
     slotRunImage: string
-    slotRunVideo: string
-    runStartTime: string
-    runEndTime: string
+    // slotRunVideo: string
+    // runStartTime: string
+    // runEndTime: string
     runRemark: string
     groupNameLabel: string
     tapeLabel: string
@@ -103,13 +103,13 @@ export type AddSlotManagement = {
     slotStartTime: string
     slotEndTime: string
     slotContinueStatus: boolean
-    slotStartDate: string
+    // slotStartDate: string
     runYoutubeLink: string | ''
     run: boolean
     slotRunImage: string
-    slotRunVideo: string
-    runStartTime: string
-    runEndTime: string
+    // slotRunVideo: string
+    // runStartTime: string
+    // runEndTime: string
     showOk: boolean
     reasonNotShow: string | null
     runRemark: string
@@ -130,16 +130,16 @@ export type UpdateSlotManagement = {
         slotStartTime: string
         slotEndTime: string
         slotContinueStatus: boolean
-        slotStartDate: string
+        // slotStartDate: string
         runYoutubeLink: string | ''
         runStatus: boolean
         run: boolean
         slotRunImage: string
-        slotRunVideo: string
+        // slotRunVideo: string
         showOk: boolean
         reasonNotShow: string | null
-        runStartTime: string
-        runEndTime: string
+        // runStartTime: string
+        // runEndTime: string
         runRemark: string
         companyId: string
     }

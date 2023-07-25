@@ -148,70 +148,69 @@ const SlotRunViewsListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <div className="relative">
-                    {moment(row?.slotStartTime).format('hh:mm:ss') <
+                    {/* {moment(row?.slotStartTime).format('hh:mm:ss') <
                         moment(new Date()).format('hh:mm:ss') &&
                     moment(new Date()).format('hh:mm:ss') <
-                        moment(row?.slotEndTime).format('hh:mm:ss') ? (
-                        <button
-                            disabled={true}
-                            className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
-                                row.runStatus === true && row.run === true
-                                    ? 'hover:bg-green-100'
-                                    : row.runStatus === true &&
-                                      row.run === false
-                                    ? 'hover:bg-red-100'
-                                    : 'hover:bg-orange-100'
-                            } p-2 rounded-full border
+                        moment(row?.slotEndTime).format('hh:mm:ss') ? ( */}
+                    {/* <button
+                        onClick={(e) => {
+                            setRunState(row._id)
+                            setIsOpenDialog(true)
+                        }}
+                        disabled={true}
+                        className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
+                            row.runStatus === true
+                                ? 'hover:bg-green-100'
+                                : row.runStatus === false
+                                ? 'hover:bg-red-100'
+                                : 'hover:bg-orange-100'
+                        } p-2 rounded-full border
                             ${
-                                row.runStatus === true && row.run === true
+                                row.runStatus === true
                                     ? 'border-green-500'
-                                    : row.runStatus === true &&
-                                      row.run === false
+                                    : row.runStatus === false
                                     ? 'border-red-500'
                                     : 'border-orange-500'
                             }
                             `}
-                        >
-                            {row.runStatus === true && row.run === true ? (
-                                <TiTick />
-                            ) : (row.runStatus === true && row.run === false) ||
-                              (row.runStatus === false && row.run === true) ? (
-                                <FaTimes />
-                            ) : (
-                                <FaExclamation />
-                            )}
-                        </button>
-                    ) : (
-                        <button
-                            onClick={(e) => {
-                                setRunState(row._id)
-                                setIsOpenDialog(true)
-                            }}
-                            className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
-                                row.runStatus === true && row.run === true
-                                    ? 'hover:bg-green-100'
-                                    : row.runStatus === true &&
-                                      row.run === false
-                                    ? 'hover:bg-red-100'
-                                    : 'hover:bg-orange-100'
-                            } p-2 rounded-full border  ${
-                                row.runStatus === true && row.run === true
-                                    ? 'border-green-500'
-                                    : row.runStatus === true &&
-                                      row.run === false
-                                    ? 'border-red-500'
-                                    : 'border-orange-500'
-                            }`}
-                        >
-                            {row.runStatus === true && row.run === true ? (
-                                <TiTick />
-                            ) : row.runStatus === true && row.run === false ? (
-                                <FaTimes />
-                            ) : (
-                                <FaExclamation />
-                            )}
-                        </button>
-                    )}
+                    >
+                        {row.runStatus ? (
+                            <TiTick />
+                        ) : row.runStatus === false ? (
+                            <FaTimes />
+                        ) : (
+                            <FaExclamation />
+                        )}
+                    </button> */}
+
+                    <button
+                        onClick={(e) => {
+                            setRunState(row._id)
+                            setIsOpenDialog(true)
+                        }}
+                        className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
+                            row.runStatus === true
+                                ? 'hover:bg-green-100'
+                                : row.runStatus === false
+                                ? 'hover:bg-red-100'
+                                : 'hover:bg-orange-100'
+                        } p-2 rounded-full border  ${
+                            row.runStatus === true
+                                ? 'border-green-500'
+                                : row.runStatus === false
+                                ? 'border-red-500'
+                                : 'border-orange-500'
+                        }`}
+                    >
+                        {row.runStatus === true ? (
+                            <TiTick />
+                        ) : row.runStatus === false ? (
+                            <FaTimes />
+                        ) : (
+                            <FaExclamation />
+                        )}
+                    </button>
+                    {/* )} */}
                 </div>
             ),
             align: 'end',
