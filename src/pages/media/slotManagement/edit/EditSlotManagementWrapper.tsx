@@ -47,6 +47,7 @@ export type FormInitialValues = {
     slotDay: string[]
     slotStartTime: string
     slotEndTime: string
+    slotRenewal: string
     slotContinueStatus: boolean
     type: string
     tapeNameId: string
@@ -178,6 +179,7 @@ const EditSlotManagementWrapper = () => {
         slotDay: selectedItems?.slotDay || [''],
         slotStartTime: selectedItems?.slotStartTime || '',
         slotEndTime: selectedItems?.slotEndTime || '',
+        slotRenewal: selectedItems?.slotRenewal || '',
         slotContinueStatus: selectedItems?.slotContinueStatus || false,
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.remarks || '',
@@ -219,6 +221,7 @@ const EditSlotManagementWrapper = () => {
                     slotDay: values.slotDay,
                     slotStartTime: values.slotStartTime,
                     slotEndTime: values.slotEndTime,
+                    slotRenewal: values.slotRenewal,
                     slotContinueStatus: values.slotContinueStatus,
                     slotStartDate: values.slotStartDate,
                     companyId: values?.companyId,

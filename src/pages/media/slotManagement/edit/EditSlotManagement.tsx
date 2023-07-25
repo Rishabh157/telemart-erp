@@ -200,7 +200,7 @@ const EditSlotManagement = ({
                                 Add Slot Details
                             </div>
 
-                            <div className="grid grid-cols-3 gap-2 items-end  pb-5">
+                            <div className="grid grid-cols-4 gap-2 items-end  pb-5">
                                 <div className="mt-0">
                                     <ATMSelectSearchable
                                         name={'slotDay'}
@@ -266,6 +266,19 @@ const EditSlotManagement = ({
                                         onChange={(newValue) => {
                                             handleSetFieldValue(
                                                 'slotStartDate',
+                                                newValue
+                                            )
+                                        }}
+                                    />
+                                </div>
+                                <div className="">
+                                    <ATMDatePicker
+                                        name={`slotRenewal`}
+                                        value={values.slotRenewal}
+                                        label="Slot Renewal"
+                                        onChange={(newValue) => {
+                                            handleSetFieldValue(
+                                                'slotRenewal',
                                                 newValue
                                             )
                                         }}

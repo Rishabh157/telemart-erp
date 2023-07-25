@@ -164,17 +164,23 @@ const SlotManagementListingWrapper = () => {
                 <span>
                     {' '}
                     {row.slotContinueStatus ? (
-                        <CiPlay1
-                            onClick={() => handlePausePlay(row?._id)}
-                            size={30}
-                            className="cursor-pointer"
-                        />
+                        <span>
+                            <CiPause1
+                                onClick={() => handlePausePlay(row?._id)}
+                                size={30}
+                                className="cursor-pointer"
+                            />{' '}
+                            PLAYING
+                        </span>
                     ) : (
-                        <CiPause1
-                            onClick={() => handlePausePlay(row?._id)}
-                            size={30}
-                            className="cursor-pointer"
-                        />
+                        <span>
+                            <CiPlay1
+                                onClick={() => handlePausePlay(row?._id)}
+                                size={30}
+                                className="cursor-pointer"
+                            />
+                            STOPED
+                        </span>
                     )}{' '}
                 </span>
             ),

@@ -24,6 +24,7 @@ export type SlotManagementListResponse = {
     reasonNotShow: string | null
     run: boolean
     slotRunImage: string
+    slotRenewal: string
     // slotRunVideo: string
     // runStartTime: string
     // runEndTime: string
@@ -64,6 +65,7 @@ export type AddSlotDefinition = {
     remarks: string
     slotPrice: number
     slotDay: string[]
+    slotRenewal: string
     slotStartTime: string
     slotEndTime: string
     slotContinueStatus: boolean
@@ -80,6 +82,7 @@ export type UpdateSlotDefinition = {
         channelTrp: string
         remarks: string
         slotPrice: number
+        slotRenewal: string
         slotDay: string[]
         slotStartTime: string
         slotStartDate: string
