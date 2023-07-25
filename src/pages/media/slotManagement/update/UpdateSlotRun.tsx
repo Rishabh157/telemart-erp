@@ -16,7 +16,7 @@ import { CircularProgress } from '@mui/material'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
+// import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMTimePicker'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { SelectOption } from 'src/models/FormField/FormField.model'
@@ -26,7 +26,7 @@ import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServic
 const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
     //const [switch, setSwitch] = useState<boolean>(false)
     const [imageApiStatus, setImageApiStatus] = useState(false)
-    const [videoApiStatus, setVideoApiStatus] = useState(false)
+    // const [videoApiStatus, setVideoApiStatus] = useState(false)
 
     const { values, setFieldValue } = formikProps
     const [fileUploader] = useFileUploaderMutation()
@@ -52,6 +52,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             value={values.run}
                             label="Status"
                             onChange={(value: any) => {
+                                console.log(value, 'run ki val')
                                 if (value === false) {
                                     setFieldValue('showOk', false)
                                     setFieldValue('reasonNotShow', null)
@@ -62,7 +63,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             }}
                         />
                     </div>
-                    <div className="">
+                    <div className="py-1  mt-3">
                         <ATMTextField
                             name="runYoutubeLink"
                             value={values.runYoutubeLink}
@@ -78,29 +79,40 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                     {values.run ? (
                         <div className="py-1  mt-3">
                             <ATMSwitchButton
+                                title1="Ok"
+                                title2="Not Ok"
                                 name="showOk"
                                 value={values.showOk}
-                                label="Show Ok"
+                                label="Show Properly"
                                 onChange={(value: any) => {
+                                    console.log('me hi hu', value)
                                     setFieldValue('showOk', value)
+                                    if (value === true) {
+                                        setFieldValue('reasonNotShow', '')
+                                    }
                                 }}
                             />
                         </div>
                     ) : null}
                     {!values.showOk && values.run ? (
-                        <ATMSelectSearchable
-                            required
-                            name="reasonNotShow"
-                            value={values.reasonNotShow}
-                            onChange={(e) => {
-                                setFieldValue('reasonNotShow', e)
-                            }}
-                            options={reasonNotShowOption}
-                            label="Reason Not Show"
-                        />
+                        <div className="py-1  mt-3">
+                            <ATMSelectSearchable
+                                required
+                                name="reasonNotShow"
+                                value={values.reasonNotShow}
+                                onChange={(e) => {
+                                    console.log(e)
+                                    setFieldValue('reasonNotShow', e)
+                                }}
+                                options={reasonNotShowOption}
+                                label="Reason Not Show"
+                            />
+                        </div>
                     ) : null}
 
-                    {!values.showOk && values.reasonNotShow === '' ? (
+                    {!values.showOk &&
+                    values.reasonNotShow === '' &&
+                    values.run ? (
                         <>
                             <p className="text-right -my-4"></p>
                             <p className="text-left -my-4 text-red-500">
@@ -109,7 +121,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                         </>
                     ) : null}
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                {/* <div className="grid grid-cols-2 gap-4">
                     {values.run ? (
                         <>
                             <div className="">
@@ -138,8 +150,8 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             </div>
                         </>
                     ) : null}
-                </div>
-                <div className="grid grid-cols-3 gap-4">
+                </div> */}
+                <div className="grid grid-cols-2 gap-4">
                     <div className="  ">
                         <ATMTextArea
                             minRows={5}
@@ -151,7 +163,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             }
                         />
                     </div>
-                    <div className="mt-4">
+                    <div className="mt-6">
                         <ATMFilePickerWrapper
                             name="slotRunImage"
                             label="Slot Run Image"
@@ -182,7 +194,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             </div>
                         ) : null}
                     </div>
-                    <div className=" mt-4">
+                    {/* <div className=" mt-4">
                         <ATMFilePickerWrapper
                             name="slotRunVideo"
                             label="Slot Run Video"
@@ -213,20 +225,27 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                                 <CircularProgress />
                             </div>
                         ) : null}
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <Divider />
-            <div className="flex justify-center mt-2 ml-12">
+            <div className="flex justify-center mt-3 mb-3 ml-12">
                 <button
                     type="button"
-                    disabled={apiStatus || imageApiStatus || videoApiStatus}
+                    disabled={
+                        apiStatus ||
+                        imageApiStatus ||
+                        (!values.showOk && !values.reasonNotShow && values.run)
+                    }
                     onClick={() => {
+                        console.log(formikProps)
                         formikProps.handleSubmit()
                     }}
                     className={`bg-primary-main rounded py-1 px-5 item-center text-white border border-primary-main
                     ${
-                        apiStatus || imageApiStatus || videoApiStatus
+                        apiStatus ||
+                        imageApiStatus ||
+                        (!values.showOk && !values.reasonNotShow && values.run)
                             ? 'opacity-50'
                             : ''
                     }

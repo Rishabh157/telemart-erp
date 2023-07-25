@@ -456,9 +456,14 @@
                     "actionId": "warehouseActionViewId",
                     "actionUrl": "/view/:id/inventories",
                     "actionName": "VIEW",
-                    "parentGroup": [
-                        "TAB_WAREHOUSE_DETAILS"
-                    ],
+                    "parentGroup": ["TAB_WAREHOUSE_DETAILS"],
+                    "fields": []
+                },
+                {
+                    "actionId": "warehouseActionDetailsId",
+                    "actionUrl": "/warehouse/view/:id/warehouse-details",
+                    "actionName": "TAB_WAREHOUSE_DETAILS",
+                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_DETAILS"],
                     "fields": []
                 },
                 {
@@ -479,9 +484,14 @@
                     "actionId": "warehouseActionOutwardInventoriesId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES",
-                    "parentGroup": ["VIEW","TAB_WAREHOUSE_DETAILS"],
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_DETAILS",
+                        "TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER"
+                    ],
                     "fields": []
                 },
+
                 {
                     "actionId": "warehouseActionOutwardInventoriesDealerId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/dealer",
@@ -574,70 +584,99 @@
                     "actionId": "warehouseActionInwardInventoriesId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES",
-                    "parentGroup": ["VIEW","TAB_WAREHOUSE_DETAILS"],
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_DETAILS",
+                        "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesDealerId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/dealer",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER",
-                    "parentGroup": ["VIEW","TAB_WAREHOUSE_DETAILS", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_DETAILS",
+                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesCustomerId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/customer",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER",
-                    "parentGroup": ["VIEW","TAB_WAREHOUSE_DETAILS", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_DETAILS",
+                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesRtvId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/rtv",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_RTV",
-                    "parentGroup": ["VIEW","TAB_WAREHOUSE_DETAILS", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_DETAILS",
+                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesWarehouseId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/warehoue",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE",
-                    "parentGroup": ["VIEW","TAB_WAREHOUSE_DETAILS", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_DETAILS",
+                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesSampleId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/sample",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE",
-                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_DETAILS","TAB_WAREHOUSE_INWARD_INVENTORIES"],
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_DETAILS",
+                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesEcomId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/ecom",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_E_COMMERCE",
-                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_DETAILS", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_DETAILS",
+                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesReplacementsId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/replacement",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_REPLACEMENTS",
-                    "parentGroup": ["VIEW", "TAB_WAREHOUSE_DETAILS","TAB_WAREHOUSE_INWARD_INVENTORIES"],
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_DETAILS",
+                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
+                    ],
                     "fields": []
                 },
                 {
                     "actionId": "warehouseActionInwardInventoriesCompanyId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/company",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY",
-                    "parentGroup": ["VIEW","TAB_WAREHOUSE_DETAILS", "TAB_WAREHOUSE_INWARD_INVENTORIES"],
-                    "fields": []
-                },
-                {
-                    "actionId": "warehouseActionDetailsId",
-                    "actionUrl": "/warehouse/view/:id/warehouse-details",
-                    "actionName": "TAB_WAREHOUSE_DETAILS",
-                    "parentGroup": ["VIEW","TAB_WAREHOUSE_DETAILS"],
+                    "parentGroup": [
+                        "VIEW",
+                        "TAB_WAREHOUSE_DETAILS",
+                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
+                    ],
                     "fields": []
                 },
                 {
@@ -839,13 +878,6 @@
                     "actionId": "purchaseOrderActionViewId",
                     "actionUrl": "/purchase-order/view/:id",
                     "actionName": "VIEW",
-                    "parentGroup": [],
-                    "fields": []
-                },
-                {
-                    "actionId": "purchaseOrderActionViewGrnId",
-                    "actionUrl": "/grn",
-                    "actionName": "VIEW_GRN",
                     "parentGroup": [],
                     "fields": []
                 },

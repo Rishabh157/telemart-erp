@@ -38,7 +38,13 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-
+        getSlotMangement: builder.query({
+            providesTags: ['slot'],
+            query: (companyid) => ({
+                url: `/slot-definition/company/${companyid}`,
+                method: 'GET',
+            }),
+        }),
         //***** Update *****/
         updateSlot: builder.mutation({
             invalidatesTags: ['slot'],
@@ -46,6 +52,14 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 url: `/slot-definition/${id}`,
                 method: 'PUT',
                 body,
+            }),
+        }),
+        //***** Update play pause *****/
+        updateSlotContinueStatus: builder.mutation({
+            invalidatesTags: ['slot'],
+            query: (id) => ({
+                url: `/slot-definition/pause-play/${id}`,
+                method: 'PUT',
             }),
         }),
 
@@ -74,4 +88,6 @@ export const {
     useGetSlotMangementByIdQuery,
     useDeleteSlotMangementMutation,
     useFileUploaderMutation,
+    useUpdateSlotContinueStatusMutation,
+    useGetSlotMangementQuery,
 } = slotManagementApi

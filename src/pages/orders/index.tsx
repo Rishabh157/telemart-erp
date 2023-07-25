@@ -20,9 +20,13 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import {
+    UserModuleNameTypes,
+    UserModuleOrderTabsTypes,
+} from 'src/models/userAccess/UserAccess.model'
 import { RootState } from 'src/redux/store'
 import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
+import OrderListing from './all/OrderListing'
 interface tabsProps {
     label: string
     icon: IconType
@@ -35,73 +39,73 @@ const ViewOrder = () => {
         {
             label: 'All',
             icon: MdOutbond,
-            path: '?orderStaus=all',
-            name: 'ORDER_ALL_TAB',
+            path: `?orderStatus=all`,
+            name: UserModuleOrderTabsTypes.orderAllTab,
         },
         {
             label: 'Fresh Order',
             icon: MdOutbond,
-            path: '?orderStaus=fresh',
-            name: 'ORDER_FRESH_ORDER_TAB',
+            path: '?orderStatus=fresh',
+            name: UserModuleOrderTabsTypes.orderFreshTab,
         },
         {
             label: 'Order Approval',
             icon: MdOutbond,
-            path: '?orderStaus=approved',
-            name: 'ORDER_APPROVAL_TAB',
+            path: '?orderStatus=approved',
+            name: UserModuleOrderTabsTypes.orderApprovedTab,
         },
         {
             label: 'Delivered',
             icon: MdOutbond,
-            path: '?orderStaus=delivered',
-            name: 'ORDER_DELIVERED_TAB',
+            path: '?orderStatus=delivered',
+            name: UserModuleOrderTabsTypes.orderDeliveredTab,
         },
         {
             label: 'Door Cancelled',
             icon: MdOutbond,
-            path: '?orderStaus=doorCancelled',
-            name: 'ORDER_DOOR_CANCELLED_TAB',
+            path: '?orderStatus=doorCancelled',
+            name: UserModuleOrderTabsTypes.orderDoorCancelledTab,
         },
         {
             label: 'Hold',
             icon: MdOutbond,
-            path: '?orderStaus=hold',
-            name: 'ORDER_HOLD_TAB',
+            path: '?orderStatus=hold',
+            name: UserModuleOrderTabsTypes.orderHoldTab,
         },
         {
             label: 'PSC',
             icon: MdOutbond,
-            path: '?orderStaus=psc',
-            name: 'ORDER_PSC_TAB',
+            path: '?orderStatus=psc',
+            name: UserModuleOrderTabsTypes.orderPscTab,
         },
         {
             label: 'UNA',
             icon: MdOutbond,
-            path: '?orderStaus=una',
-            name: 'ORDER_UNA_TAB',
+            path: '?orderStatus=una',
+            name: UserModuleOrderTabsTypes.orderUnaTab,
         },
         {
             label: 'PND',
             icon: MdOutbond,
-            path: '?orderStaus=pnd',
-            name: 'ORDER_PND_TAB',
+            path: '?orderStatus=pnd',
+            name: UserModuleOrderTabsTypes.orderPndTab,
         },
         {
             label: 'Urgent',
             icon: MdOutbond,
-            path: '?orderStaus=urgent',
-            name: 'ORDER_URGENT_TAB',
+            path: '?orderStatus=urgent',
+            name: UserModuleOrderTabsTypes.orderUrgentTab,
         },
         {
             label: 'Non Actions',
             icon: MdOutbond,
-            path: '?orderStaus=non-action',
-            name: 'ORDER_NON_ACTION_TAB',
+            path: '?orderStatus=non-action',
+            name: UserModuleOrderTabsTypes.orderNonActionTab,
         },
     ]
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const [activeTabIndex, setActiveTab] = useState<number>()
+    const [activeTabIndex, setActiveTab] = useState<number>(0)
     const [activelabel, setActiveTabLabel] = useState<string>()
     const { search } = useLocation()
     const activeTab = search.split('=')[1]
@@ -118,7 +122,7 @@ const ViewOrder = () => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Orders',
-            path: '/orders?orderStaus=all',
+            path: '/orders?orderStatus=all',
         },
         {
             label: `${activelabel}`,
@@ -130,7 +134,7 @@ const ViewOrder = () => {
         )
         activeIndex = activeIndex < 0 ? 0 : activeIndex
         setActiveTab(activeIndex)
-        const labelTab: string = allowedTabs[activeIndex].label
+        const labelTab: string = allowedTabs[activeIndex]?.label || ''
         setActiveTabLabel(labelTab)
     }, [activeTab, allowedTabs])
     return (
@@ -152,7 +156,9 @@ const ViewOrder = () => {
 
                         {/* Children */}
                         <div className="h-[calc(100vh-155px)] w-full ">
-                            <Outlet />
+                            <OrderListing
+                                tabName={allowedTabs[activeTabIndex].name}
+                            />
                         </div>
                     </div>
                 </div>

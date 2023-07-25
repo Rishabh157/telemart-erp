@@ -24,7 +24,7 @@ export const grnApi = apiSlice.injectEndpoints({
 
         //***** ADD *****/
         addGRN: builder.mutation({
-            invalidatesTags: ['GRN'],
+            invalidatesTags: ['GRN', 'PurchaseOrder'],
             query: (body: AddGRN) => ({
                 url: '/grn/add',
                 method: 'POST',

@@ -24,9 +24,10 @@ export type SlotManagementListResponse = {
     reasonNotShow: string | null
     run: boolean
     slotRunImage: string
-    slotRunVideo: string
-    runStartTime: string
-    runEndTime: string
+    slotRenewal: string
+    // slotRunVideo: string
+    // runStartTime: string
+    // runEndTime: string
     runRemark: string
     groupNameLabel: string
     tapeLabel: string
@@ -64,6 +65,7 @@ export type AddSlotDefinition = {
     remarks: string
     slotPrice: number
     slotDay: string[]
+    slotRenewal: string
     slotStartTime: string
     slotEndTime: string
     slotContinueStatus: boolean
@@ -80,6 +82,7 @@ export type UpdateSlotDefinition = {
         channelTrp: string
         remarks: string
         slotPrice: number
+        slotRenewal: string
         slotDay: string[]
         slotStartTime: string
         slotStartDate: string
@@ -90,6 +93,7 @@ export type UpdateSlotDefinition = {
     }
     id: string
 }
+
 export type AddSlotManagement = {
     slotName: string
     channelGroupId: string
@@ -103,13 +107,13 @@ export type AddSlotManagement = {
     slotStartTime: string
     slotEndTime: string
     slotContinueStatus: boolean
-    slotStartDate: string
+    // slotStartDate: string
     runYoutubeLink: string | ''
     run: boolean
     slotRunImage: string
-    slotRunVideo: string
-    runStartTime: string
-    runEndTime: string
+    // slotRunVideo: string
+    // runStartTime: string
+    // runEndTime: string
     showOk: boolean
     reasonNotShow: string | null
     runRemark: string
@@ -130,16 +134,16 @@ export type UpdateSlotManagement = {
         slotStartTime: string
         slotEndTime: string
         slotContinueStatus: boolean
-        slotStartDate: string
+        // slotStartDate: string
         runYoutubeLink: string | ''
         runStatus: boolean
         run: boolean
         slotRunImage: string
-        slotRunVideo: string
+        // slotRunVideo: string
         showOk: boolean
         reasonNotShow: string | null
-        runStartTime: string
-        runEndTime: string
+        // runStartTime: string
+        // runEndTime: string
         runRemark: string
         companyId: string
     }

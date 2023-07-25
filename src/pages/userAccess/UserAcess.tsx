@@ -235,8 +235,7 @@ const UserAcess = ({
         if (moduleIndex >= 0) {
             let moduleValue = [...clonedUserAccessItems.modules]
             let moduleActionField = [
-                ...moduleValue[moduleIndex].moduleAction[moduleActionIndex]
-                    .fields,
+                ...moduleValue[moduleIndex]?.moduleAction[moduleActionIndex]?.fields,
             ]
 
             if (fieldValue) {

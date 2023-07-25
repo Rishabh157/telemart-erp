@@ -1,7 +1,40 @@
+// Order Module Tabs
+export enum UserModuleOrderTabsTypes {
+    'orderAllTab' = 'ORDER_ALL_TAB',
+    'orderFreshTab' = 'ORDER_FRESH_ORDER_TAB',
+    'orderApprovedTab' = 'ORDER_APPROVAL_TAB',
+    'orderDeliveredTab' = 'ORDER_DELIVERED_TAB',
+    'orderDoorCancelledTab' = 'ORDER_DOOR_CANCELLED_TAB',
+    'orderHoldTab' = 'ORDER_HOLD_TAB',
+    'orderPscTab' = 'ORDER_PSC_TAB',
+    'orderUnaTab' = 'ORDER_UNA_TAB',
+    'orderPndTab' = 'ORDER_PND_TAB',
+    'orderUrgentTab' = 'ORDER_URGENT_TAB',
+    'orderNonActionTab' = 'ORDER_NON_ACTION_TAB',
+}
+
 export enum UserModuleWarehouseTabsTypes {
     inventories = 'TAB_WAREHOUSE_INVENTORIES',
+    //OUTWARD-INVENTORIES Sub Tabs
     outwardInventories = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES',
+    outwardInventoriesDealer = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER',
+    outwardInventoriesCustomer = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER',
+    outwardInventoriesRTV = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV',
+    outwardInventoriesWareHouse = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE',
+    outwardInventoriesSample = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE',
+    outwardInventoriesECommerce = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE',
+    outwardInventoriesReplaceMents = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_REPLACEMENTS',
+    outwardInventoriesCompany = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY',
+    //INWARD-INVENTORIES Sub Tabs
     inwardInventories = 'TAB_WAREHOUSE_INWARD_INVENTORIES',
+    inwardInventoriesDealer = 'TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER',
+    inwardInventoriesCustomer = 'TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER',
+    inwardInventoriesRTV = 'TAB_WAREHOUSE_INWARD_INVENTORIES_RTV',
+    inwardInventoriesWareHouse = 'TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE',
+    inwardInventoriesSample = 'TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE',
+    inwardInventoriesECommerce = 'TAB_WAREHOUSE_INWARD_INVENTORIES_E_COMMERCE',
+    inwardInventoriesReplaceMents = 'TAB_WAREHOUSE_INWARD_INVENTORIES_REPLACEMENTS',
+    inwardInventoriesCompany = 'TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY',
     warehouseDetails = 'TAB_WAREHOUSE_DETAILS',
 }
 
@@ -11,6 +44,7 @@ export enum UserModuleActionTypes {
     List = 'LIST',
     Delete = 'DELETE',
     View = 'VIEW',
+    genrateGrn = 'GENERATE_GRN',
 }
 export enum UserModuleTabsTypes {
     generalInformation = 'GENERAL_INFORMATION',
@@ -100,8 +134,6 @@ export enum UserModuleNameTypes {
     disposition = 'DISPOSITION',
     locations = 'LOCATIONS',
 }
-
-
 
 //  export const myMove = {
 //     ...UserModuleActionTypes,

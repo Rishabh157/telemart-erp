@@ -79,6 +79,14 @@ const DidManagementListingWrapper = () => {
             ),
         },
         {
+            field: 'slotLabel',
+            headerName: 'Slot Name',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: DidManagementListResponse) => (
+                <span> {row.slotLabel} </span>
+            ),
+        },
+        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
