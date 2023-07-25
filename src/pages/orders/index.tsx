@@ -12,7 +12,7 @@ import { IconType } from 'react-icons'
 // |-- External Dependencies --|
 import { MdOutbond } from 'react-icons/md'
 import { useSelector } from 'react-redux'
-import { Outlet, useLocation } from 'react-router-dom'
+import {  useLocation } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 // |-- Internal Dependencies --|

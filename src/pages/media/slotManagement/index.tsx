@@ -12,7 +12,7 @@ import { IconType } from 'react-icons'
 // |-- External Dependencies --|
 import { MdOutbond } from 'react-icons/md'
 import { useSelector } from 'react-redux'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 // import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 // |-- Internal Dependencies --|
@@ -49,9 +49,7 @@ const ViewSlot = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const [activeTabIndex, setActiveTab] = useState<number>()
-    // const [activelabel, setActiveTabLabel] = useState<string>()
-    const { search } = useLocation()
-    const activeTab = search.split('=')[1]
+
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
@@ -62,24 +60,15 @@ const ViewSlot = () => {
         tabs,
         userData?.userRole || 'ADMIN'
     )
-    // const breadcrumbs: BreadcrumbType[] = [
-    //     {
-    //         label: 'Orders',
-    //         path: '/orders?orderStaus=all',
-    //     },
-    //     {
-    //         label: `${activelabel}`,
-    //     },
-    // ]
+
     useEffect(() => {
+        const activeTabIndex = window.location.pathname.split('/')[3]
         let activeIndex = allowedTabs?.findIndex(
-            (tab: tabsProps) => tab.path.split('=')[1] === activeTab
+            (tab: tabsProps) => tab.path.split('/')[3] === activeTabIndex
         )
         activeIndex = activeIndex < 0 ? 0 : activeIndex
         setActiveTab(activeIndex)
-        // const labelTab: string = allowedTabs[activeIndex].label
-        // setActiveTabLabel(labelTab)
-    }, [activeTab, allowedTabs])
+    }, [allowedTabs])
     return (
         <MediaLayout>
             <div className="h-[calc(100vh-55px)]">
@@ -93,9 +82,6 @@ const ViewSlot = () => {
                                 navBtnContainerClassName="bg-red-500"
                             />
                         </div>
-                        {/* <div className="py-2 px-4">
-                            <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-                        </div> */}
 
                         {/* Children */}
                         <div className="h-[calc(100vh-155px)] w-full ">

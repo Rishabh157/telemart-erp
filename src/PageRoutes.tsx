@@ -91,7 +91,6 @@ import {
     ListDealerSchemeTabWrapper,
     InwardInventoryWrapper,
     InventoryListingWrapper,
-    OrderListing,
     AddSaleOrderWrapper,
     EditSaleOrderWrapper,
     SaleOrderListingWrapper,
