@@ -90,6 +90,7 @@ export type UpdateSlotDefinition = {
     }
     id: string
 }
+
 export type AddSlotManagement = {
     slotName: string
     channelGroupId: string

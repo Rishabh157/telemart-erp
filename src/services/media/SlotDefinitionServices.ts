@@ -48,6 +48,14 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        //***** Update play pause *****/
+        updateSlotContinueStatus: builder.mutation({
+            invalidatesTags: ['slot'],
+            query: (id) => ({
+                url: `/slot-definition/pause-play/${id}`,
+                method: 'PUT',
+            }),
+        }),
 
         deleteSlotMangement: builder.mutation({
             invalidatesTags: ['slot'],
@@ -74,4 +82,5 @@ export const {
     useGetSlotMangementByIdQuery,
     useDeleteSlotMangementMutation,
     useFileUploaderMutation,
+    useUpdateSlotContinueStatusMutation,
 } = slotManagementApi
