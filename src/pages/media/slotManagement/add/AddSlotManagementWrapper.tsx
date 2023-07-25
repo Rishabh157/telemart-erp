@@ -153,7 +153,7 @@ const AddSlotManagementWrapper = () => {
         slotContinueStatus: boolean().required('Required'),
         tapeName: string().required('Required'),
         channelName: string().required('Required'),
-        channelTrp: string().required('Required'),
+        channelTrp: string(),
         remarks: string(),
     })
 
