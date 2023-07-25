@@ -225,7 +225,7 @@ const EditSlotManagement = ({
                                                 value: 'WEDNESDAY',
                                             },
                                             {
-                                                label: 'Thursdya',
+                                                label: 'Thursday',
                                                 value: 'THURSDAY',
                                             },
                                             {

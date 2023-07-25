@@ -252,7 +252,7 @@ const AddSlotManagement = ({
                                                 value: 'WEDNESDAY',
                                             },
                                             {
-                                                label: 'Thursdya',
+                                                label: 'Thursday',
                                                 value: 'THURSDAY',
                                             },
                                             {
