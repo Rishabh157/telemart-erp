@@ -30,8 +30,9 @@ import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
 import { CircularProgress } from '@mui/material'
+import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
+
 
 // |-- Types --|
 type Props = {

@@ -8,7 +8,7 @@
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
-import { AddSlotManagement, UpdateSlotManagement } from 'src/models/Slot.model'
+import { AddSlotDefinition, UpdateSlotDefinition } from 'src/models/Slot.model'
 
 export const slotManagementApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -16,7 +16,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
         getPaginationSlot: builder.query({
             providesTags: ['slot'],
             query: (body: PaginationType) => ({
-                url: '/slot-master',
+                url: '/slot-definition',
                 method: 'POST',
                 body,
             }),
@@ -25,8 +25,8 @@ export const slotManagementApi = apiSlice.injectEndpoints({
         //***** ADD *****/
         addSlot: builder.mutation({
             invalidatesTags: ['slot'],
-            query: (body: AddSlotManagement) => ({
-                url: '/slot-master/add',
+            query: (body: AddSlotDefinition) => ({
+                url: '/slot-definition/add',
                 method: 'POST',
                 body,
             }),
@@ -34,7 +34,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
         getSlotMangementById: builder.query({
             providesTags: ['slot'],
             query: (id: string) => ({
-                url: `/slot-master/${id}`,
+                url: `/slot-definition/${id}`,
                 method: 'GET',
             }),
         }),
@@ -42,8 +42,8 @@ export const slotManagementApi = apiSlice.injectEndpoints({
         //***** Update *****/
         updateSlot: builder.mutation({
             invalidatesTags: ['slot'],
-            query: ({ body, id }: UpdateSlotManagement) => ({
-                url: `/slot-master/${id}`,
+            query: ({ body, id }: UpdateSlotDefinition) => ({
+                url: `/slot-definition/${id}`,
                 method: 'PUT',
                 body,
             }),
@@ -52,7 +52,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
         deleteSlotMangement: builder.mutation({
             invalidatesTags: ['slot'],
             query: (id: string) => ({
-                url: `/slot-master/${id}`,
+                url: `/slot-definition/${id}`,
                 method: 'DELETE',
             }),
         }),
