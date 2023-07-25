@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:SlotManagementListing.tsx
+// Filename:SlotRunViewtListing.tsx
 // Type: List Component
 // Last Updated: JULY 03, 2023
 // Project: TELIMART - Front End
@@ -10,8 +10,8 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+// import { useNavigate } from 'react-router-dom'
+// import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -21,10 +21,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+// import {
+//     UserModuleActionTypes,
+//     UserModuleNameTypes,
+// } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -38,10 +38,10 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
+    // setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
+const SlotRunViewtListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const slotManagementState: any = useSelector(
         (state: RootState) => state.slotManagement
@@ -49,14 +49,14 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         slotManagementState
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Media',
             path: '/dashboard',
         },
         {
-            label: 'Slot Defination',
+            label: 'Slot Run',
         },
     ]
 
@@ -68,7 +68,7 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center py-1">
                 <ATMPageHeading> Slot Management </ATMPageHeading>
-                <ActionAuthHOC
+                {/* <ActionAuthHOC
                     moduleName={UserModuleNameTypes.slotManagement}
                     actionName={UserModuleActionTypes.Add}
                     component={
@@ -80,7 +80,7 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                             + Add Slot
                         </button>
                     }
-                />
+                /> */}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -108,7 +108,7 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        setShowDropdown={setShowDropdown}
+                        // setShowDropdown={setShowDropdown}
                         extraClasses="max-h-full overflow-auto"
                         isLoading={isTableLoading}
                     />
@@ -130,4 +130,4 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
 }
 
-export default SlotManagementListing
+export default SlotRunViewtListing

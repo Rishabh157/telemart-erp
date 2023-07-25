@@ -16,7 +16,6 @@ import { array, boolean, number, object, string } from 'yup'
 // import { showToast } from 'src/utils'
 
 // |-- Internal Dependencies --|
-import MediaLayout from '../../MediaLayout'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
@@ -24,7 +23,7 @@ import { showToast } from 'src/utils'
 import {
     useGetSlotMangementByIdQuery,
     useUpdateSlotMutation,
-} from 'src/services/media/SlotManagementServices'
+} from 'src/services/media/SlotDefinitionServices'
 import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
 import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
@@ -48,6 +47,7 @@ export type FormInitialValues = {
     slotDay: string[]
     slotStartTime: string
     slotEndTime: string
+    slotRenewal: string
     slotContinueStatus: boolean
     type: string
     tapeNameId: string
@@ -55,16 +55,7 @@ export type FormInitialValues = {
     channelTrp: string
     remarks: string
     companyId: string
-    runYoutubeLink: string
-    runStatus: boolean
-    run: boolean
-    slotRunImage: string
-    slotRunVideo: string
-    showOk: boolean
-    reasonNotShow: string | null
-    runStartTime: string
-    runEndTime: string
-    runRemark: string
+    slotStartDate: string
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -188,19 +179,11 @@ const EditSlotManagementWrapper = () => {
         slotDay: selectedItems?.slotDay || [''],
         slotStartTime: selectedItems?.slotStartTime || '',
         slotEndTime: selectedItems?.slotEndTime || '',
+        slotRenewal: selectedItems?.slotRenewal || '',
         slotContinueStatus: selectedItems?.slotContinueStatus || false,
         channelTrp: selectedItems?.channelTrp || '',
         remarks: selectedItems?.remarks || '',
-        runYoutubeLink: selectedItems?.runYoutubeLink || '',
-        runStatus: selectedItems?.runStatus,
-        run: selectedItems?.run,
-        showOk: false,
-        reasonNotShow: null,
-        slotRunImage: '',
-        slotRunVideo: '',
-        runStartTime: selectedItems?.runStartTime || '',
-        runEndTime: selectedItems?.runEndTime || '',
-        runRemark: selectedItems?.runRemark || '',
+        slotStartDate: selectedItems?.slotStartDate || '',
         companyId: userData?.companyId || '',
     }
 
@@ -216,7 +199,7 @@ const EditSlotManagementWrapper = () => {
         slotContinueStatus: boolean().required('Required'),
         tapeNameId: string().required('Required'),
         channelNameId: string().required('Required'),
-        slotDate: string().required('Required'),
+        slotStartDate: string().required('Required'),
         channelTrp: string(),
         remarks: string(),
     })
@@ -238,17 +221,9 @@ const EditSlotManagementWrapper = () => {
                     slotDay: values.slotDay,
                     slotStartTime: values.slotStartTime,
                     slotEndTime: values.slotEndTime,
+                    slotRenewal: values.slotRenewal,
                     slotContinueStatus: values.slotContinueStatus,
-                    runYoutubeLink: values?.runYoutubeLink,
-                    runStatus: values?.runStatus,
-                    run: values?.run,
-                    slotRunImage: values?.slotRunImage,
-                    slotRunVideo: values?.slotRunVideo,
-                    showOk: values?.showOk,
-                    reasonNotShow: values?.reasonNotShow,
-                    runStartTime: values?.runStartTime,
-                    runEndTime: values?.runEndTime,
-                    runRemark: values?.runRemark,
+                    slotStartDate: values.slotStartDate,
                     companyId: values?.companyId,
                 },
                 id: Id || '',
@@ -325,7 +300,7 @@ const EditSlotManagementWrapper = () => {
     }
 
     return (
-        <MediaLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -342,7 +317,7 @@ const EditSlotManagementWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

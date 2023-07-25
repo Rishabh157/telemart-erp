@@ -32,6 +32,7 @@ type Props = {
     dropdownOptions: {
         channelOptions: SelectOption[]
         schemeDataOption: SelectOption[]
+        slotOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -123,6 +124,15 @@ const EditDidManagements = ({
                                 }
                                 options={dropdownOptions.channelOptions}
                                 label="Channel Name"
+                            />
+                            <ATMSelectSearchable
+                                name="slotId"
+                                value={values.slotId}
+                                onChange={(value) =>
+                                    handleSetFieldValue('slotId', value)
+                                }
+                                options={dropdownOptions.slotOptions}
+                                label="Slot Name"
                             />
                         </div>
                     </div>

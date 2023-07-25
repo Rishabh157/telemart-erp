@@ -28,6 +28,7 @@ import { FormInitialValues } from './EditSlotManagementWrapper'
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 
 // |-- Types --|
 type Props = {
@@ -199,7 +200,7 @@ const EditSlotManagement = ({
                                 Add Slot Details
                             </div>
 
-                            <div className="grid grid-cols-5 gap-2 items-end  pb-5">
+                            <div className="grid grid-cols-4 gap-2 items-end  pb-5">
                                 <div className="mt-0">
                                     <ATMSelectSearchable
                                         name={'slotDay'}
@@ -255,6 +256,32 @@ const EditSlotManagement = ({
                                                 e.target.value
                                             )
                                         }
+                                    />
+                                </div>
+                                <div className="">
+                                    <ATMDatePicker
+                                        name={`slotStartDate`}
+                                        value={values.slotStartDate}
+                                        label="Start Date"
+                                        onChange={(newValue) => {
+                                            handleSetFieldValue(
+                                                'slotStartDate',
+                                                newValue
+                                            )
+                                        }}
+                                    />
+                                </div>
+                                <div className="">
+                                    <ATMDatePicker
+                                        name={`slotRenewal`}
+                                        value={values.slotRenewal}
+                                        label="Slot Renewal"
+                                        onChange={(newValue) => {
+                                            handleSetFieldValue(
+                                                'slotRenewal',
+                                                newValue
+                                            )
+                                        }}
                                     />
                                 </div>
                                 <div className="">

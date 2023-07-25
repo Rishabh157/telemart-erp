@@ -244,6 +244,8 @@ import InwardSampleTabsListingWrapper from './pages/inventories/inward/Sample/In
 import InwardWarehouseTabsListingWrapper from './pages/inventories/inward/Warehouse/InwardWarehouseTabsListingWrapper'
 import OutwardCompanyTabsListingWrapper from './pages/inventories/outward/Company/OutwardCompanyTabsListingWrapper'
 import InwardCompanyTabsListingWrapper from './pages/inventories/inward/Company/InwardCompanyTabsListingWrapper'
+import ViewSlot from './pages/media/slotManagement'
+import SlotRunViewsListingWrapper from './pages/media/slotManagement/slotRunView/SlotRunViewsListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1887,7 +1889,59 @@ const PageRoutes = () => {
                     />
 
                     {/* Media -> Slot */}
+                    {/* Orders */}
                     <Route
+                        path="media/slot"
+                        element={
+                            <ActionAuthHOC
+                                component={<ViewSlot />}
+                                moduleName={UserModuleNameTypes.order}
+                                actionName={UserModuleActionTypes.List}
+                                isRedirect
+                            />
+                        }
+                    >
+                        <Route
+                            index
+                            element={<SlotManagementListingWrapper />}
+                        />
+                        <Route
+                            path="add"
+                            element={
+                                <ActionAuthHOC
+                                    component={<AddSlotManagementWrapper />}
+                                    moduleName={
+                                        UserModuleNameTypes.slotManagement
+                                    }
+                                    actionName={UserModuleActionTypes.Add}
+                                    isRedirect
+                                />
+                            }
+                        />
+                        <Route
+                            path="edit/:id"
+                            element={
+                                <ActionAuthHOC
+                                    component={<EditSlotManagementWrapper />}
+                                    moduleName={
+                                        UserModuleNameTypes.slotManagement
+                                    }
+                                    actionName={UserModuleActionTypes.Edit}
+                                    isRedirect
+                                />
+                            }
+                        />
+                        <Route path="view/:id" element={<OrderViewWrapper />} />
+                        <Route
+                            path="run-slots"
+                            element={<SlotRunViewsListingWrapper />}
+                        />
+                        {/* <Route
+                            path="approved-orders"
+                            element={<ApprovedOrderListing />}
+                        /> */}
+                    </Route>
+                    {/* <Route
                         path="media/slot"
                         element={
                             <AuthHOC
@@ -1895,8 +1949,8 @@ const PageRoutes = () => {
                                 moduleName={UserModuleNameTypes.slotManagement}
                             />
                         }
-                    />
-                    <Route
+                    /> */}
+                    {/* <Route
                         path="media/slot/add"
                         element={
                             <ActionAuthHOC
@@ -1906,18 +1960,7 @@ const PageRoutes = () => {
                                 isRedirect
                             />
                         }
-                    />
-                    <Route
-                        path="media/slot/edit/:id"
-                        element={
-                            <ActionAuthHOC
-                                component={<EditSlotManagementWrapper />}
-                                moduleName={UserModuleNameTypes.slotManagement}
-                                actionName={UserModuleActionTypes.Edit}
-                                isRedirect
-                            />
-                        }
-                    />
+                    /> */}
 
                     {/* Media -> Inbound Or Caller Page */}
                     <Route

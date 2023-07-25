@@ -16,12 +16,11 @@ import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
-import MediaLayout from '../../MediaLayout'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import AddSlotManagement from './AddSlotManagement'
-import { useAddSlotMutation } from 'src/services/media/SlotManagementServices'
+import { useAddSlotMutation } from 'src/services/media/SlotDefinitionServices'
 import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
@@ -44,6 +43,8 @@ export type FormInitialValues = {
     slotDay: string[]
     slotStartTime: string
     slotEndTime: string
+    slotStartDate: string
+    slotRenewal: string
     slotContinueStatus: boolean
     tapeName: string
     channelName: string
@@ -129,6 +130,8 @@ const AddSlotManagementWrapper = () => {
         slotPrice: 0,
         slotDay: [''],
         slotStartTime: '',
+        slotStartDate: '',
+        slotRenewal: '',
         slotEndTime: '',
         slotContinueStatus: true,
         tapeName: '',
@@ -144,8 +147,9 @@ const AddSlotManagementWrapper = () => {
         slotName: string().required('Required'),
         channelGroup: string().required('Required'),
         type: string().required('Required'),
-        slotPrice: number().required('Slot price is required'),
-        slotDay: array().of(string()).required('Slot Days are required'),
+        slotPrice: number().required('Required'),
+        slotStartDate: string().required('Required'),
+        slotDay: array().of(string()).required('Required'),
         slotStartTime: string().required('Required'),
         slotEndTime: string().required('Required'),
         slotContinueStatus: boolean().required('Required'),
@@ -169,17 +173,11 @@ const AddSlotManagementWrapper = () => {
             slotPrice: values.slotPrice,
             slotDay: values.slotDay,
             slotStartTime: values.slotStartTime,
+            slotStartDate: values.slotStartDate,
+            slotRenewal: values.slotRenewal,
             slotEndTime: values.slotEndTime,
             slotContinueStatus: values.slotContinueStatus,
-            runYoutubeLink: '',
-            run: false,
-            showOk: false,
-            slotRunImage: '',
-            slotRunVideo: '',
-            reasonNotShow: null,
-            runStartTime: '',
-            runEndTime: '',
-            runRemark: '',
+
             companyId: values.companyId || '',
         }).then((res: any) => {
             if ('data' in res) {
@@ -241,7 +239,8 @@ const AddSlotManagementWrapper = () => {
         // ],
     }
     return (
-        <MediaLayout>
+        <>
+            {/* // <MediaLayout> */}
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -257,7 +256,8 @@ const AddSlotManagementWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+            {/* </MediaLayout> */}
+        </>
     )
 }
 
