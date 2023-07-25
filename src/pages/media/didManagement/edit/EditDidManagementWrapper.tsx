@@ -27,15 +27,18 @@ import {
     useGetDidByIdQuery,
     useUpdateDidMutation,
 } from 'src/services/media/DidManagementServices'
+import { useGetSlotMangementQuery } from 'src/services/media/SlotDefinitionServices'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/media/didManagementSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { SlotManagementListResponse } from 'src/models/Slot.model'
 
 // |-- Types --|
 export type FormInitialValues = {
     didNumber: string
+    slotId: string
     companyId: string
     schemeId: string
     channelId: string
@@ -59,9 +62,11 @@ const EditDidManagementWrapper = () => {
     )
     const [channel, setChannel] = useState([])
     const [schemeData, setSchemeData] = useState([])
+    const [slot, setSlot] = useState([])
 
     const initialValues: FormInitialValues = {
         didNumber: selectedItem?.didNumber || '',
+        slotId: selectedItem?.slotId || '',
         schemeId: selectedItem?.schemeId || '',
         channelId: selectedItem?.channelId || '',
         companyId: userData?.companyId || '',
@@ -70,6 +75,7 @@ const EditDidManagementWrapper = () => {
     // Form Validation Schema
     const validationSchema = object({
         didNumber: string().required('Did number is required'),
+        slotId: string().required('Did number is required'),
         schemeId: string().required('Scheme is required'),
         channelId: string().required('Cahnnel name is required'),
     })
@@ -81,6 +87,7 @@ const EditDidManagementWrapper = () => {
             EditDidManagement({
                 body: {
                     didNumber: values.didNumber,
+                    slotId: values.slotId,
                     schemeId: values.schemeId,
                     channelId: values.channelId,
                     companyId: values.companyId || '',
@@ -112,11 +119,23 @@ const EditDidManagementWrapper = () => {
         isFetching,
         data: channelData,
     } = useGetAllChannelQuery(userData?.companyId)
+    const {
+        isLoading: isSlotLoading,
+        isFetching: isSlotFetching,
+        data: slotDataApi,
+    } = useGetSlotMangementQuery(userData?.companyId)
+
     useEffect(() => {
         if (!isLoading && !isFetching) {
             setChannel(channelData?.data)
         }
     }, [isLoading, isFetching, channelData])
+
+    useEffect(() => {
+        if (!isSlotLoading && !isSlotFetching) {
+            setSlot(slotDataApi?.data)
+        }
+    }, [isSlotLoading, isSlotFetching, slotDataApi])
 
     useEffect(() => {
         if (!isSchemeLoading && !isSchemeFetching) {
@@ -139,6 +158,12 @@ const EditDidManagementWrapper = () => {
                 }
             }
         ),
+        slotOptions: slot?.map((slotItem: SlotManagementListResponse) => {
+            return {
+                label: slotItem.slotName,
+                value: slotItem._id,
+            }
+        }),
 
         schemeDataOption: schemeData?.map((schemeItem: SchemeListResponse) => {
             return {

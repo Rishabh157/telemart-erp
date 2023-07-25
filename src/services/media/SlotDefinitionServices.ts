@@ -38,7 +38,13 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-
+        getSlotMangement: builder.query({
+            providesTags: ['slot'],
+            query: (companyid) => ({
+                url: `/slot-definition/company/${companyid}`,
+                method: 'GET',
+            }),
+        }),
         //***** Update *****/
         updateSlot: builder.mutation({
             invalidatesTags: ['slot'],
@@ -83,4 +89,5 @@ export const {
     useDeleteSlotMangementMutation,
     useFileUploaderMutation,
     useUpdateSlotContinueStatusMutation,
+    useGetSlotMangementQuery,
 } = slotManagementApi
