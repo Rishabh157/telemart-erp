@@ -40,6 +40,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/PurchaseOrderSlice'
+import ActionAuthHOC from 'src/ActionAuthHoc'
 
 const PurchaseOrderListingWrapper = () => {
     const navigate = useNavigate()
@@ -310,48 +311,61 @@ const PurchaseOrderListingWrapper = () => {
                     }}
                 >
                     <>
-                        {console.log(row?.poCode,"row?.poCode")}
                         {row?.approval?.length > 1 && (
-                            <button
-                                onClick={() => {
-                                    navigate('/grn/add?', {
-                                        state: {
-                                            poCode: row?.poCode,
-                                            itemId: row?.purchaseOrder.itemId,
-                                            itemName:
-                                                row?.purchaseOrder.itemName,
-                                            quantity:
-                                                row?.purchaseOrder.quantity,
-                                            receivedQuantity:
-                                                row?.purchaseOrder
-                                                    .receivedQuantity,
-                                            companyId: row?.companyId,
-                                        },
-                                        
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Generate GRN
-                            </button>
+                            <ActionAuthHOC
+                                moduleName={UserModuleNameTypes.purchaseOrder}
+                                actionName={UserModuleActionTypes.genrateGrn}
+                                component={
+                                    <button
+                                        onClick={() => {
+                                            navigate('/grn/add?', {
+                                                state: {
+                                                    poCode: row?.poCode,
+                                                    itemId: row?.purchaseOrder
+                                                        .itemId,
+                                                    itemName:
+                                                        row?.purchaseOrder
+                                                            .itemName,
+                                                    quantity:
+                                                        row?.purchaseOrder
+                                                            .quantity,
+                                                    receivedQuantity:
+                                                        row?.purchaseOrder
+                                                            .receivedQuantity,
+                                                    companyId: row?.companyId,
+                                                },
+                                            })
+                                        }}
+                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                    >
+                                        Generate GRN
+                                    </button>
+                                }
+                            />
                         )}
-                        <button
-                            onClick={() => {
-                                dispatch(setFilterValue([row?.poCode]))
-                                navigate('/grn', {
-                                    state: {
-                                        poCode: row?.poCode,
-                                        // itemId: row?.purchaseOrder.itemId,
-                                        // itemName: row?.purchaseOrder.itemName,
-                                        // quantity: row?.purchaseOrder.quantity,
-                                        // companyId: row?.companyId,
-                                    },
-                                })
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            View GRN
-                        </button>
+                        <ActionAuthHOC
+                            moduleName={UserModuleNameTypes.grn}
+                            actionName={UserModuleActionTypes.List}
+                            component={
+                                <button
+                                    onClick={() => {
+                                        dispatch(setFilterValue([row?.poCode]))
+                                        navigate('/grn', {
+                                            state: {
+                                                poCode: row?.poCode,
+                                                // itemId: row?.purchaseOrder.itemId,
+                                                // itemName: row?.purchaseOrder.itemName,
+                                                // quantity: row?.purchaseOrder.quantity,
+                                                // companyId: row?.companyId,
+                                            },
+                                        })
+                                    }}
+                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                >
+                                    View GRN
+                                </button>
+                            }
+                        />
                     </>
                 </ActionPopup>
             ),

@@ -686,76 +686,289 @@ const PageRoutes = () => {
                         >
                             <Route
                                 path="dealer"
-                                element={<OutwardDealerTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <OutwardDealerTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.outwardInventoriesDealer
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="customer"
-                                element={<OutwardCustomerTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <OutwardCustomerTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.outwardInventoriesCustomer
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="rtv"
-                                element={<OutwardRTVTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <OutwardRTVTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.outwardInventoriesRTV
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="warehoue"
-                                element={<OutwardWarehouseTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <OutwardWarehouseTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.outwardInventoriesWareHouse
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="sample"
-                                element={<OutwardSampleTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <OutwardSampleTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.outwardInventoriesSample
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="ecom"
-                                element={<OutwardEcomTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <OutwardEcomTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.outwardInventoriesECommerce
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="replacement"
                                 element={
-                                    <OutwardReplacementTabsListingWrapper />
+                                    <ActionAuthHOC
+                                        component={
+                                            <OutwardReplacementTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.outwardInventoriesReplaceMents
+                                        }
+                                        isRedirect
+                                    />
                                 }
                             />
                             <Route
                                 path="company"
-                                element={<OutwardCompanyTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <OutwardCompanyTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.outwardInventoriesCompany
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                         </Route>
                         <Route
                             path="inward-inventories"
-                            element={<InwardsTabs />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<InwardsTabs />}
+                                    moduleName={UserModuleNameTypes.wareHouse}
+                                    actionName={
+                                        UserModuleWarehouseTabsTypes.inwardInventories
+                                    }
+                                    isRedirect
+                                />
+                            }
                         >
                             <Route
                                 path="dealer"
-                                element={<InwardDealerTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <InwardDealerTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.inwardInventoriesDealer
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="customer"
-                                element={<InwardCustomerTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <InwardCustomerTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.inwardInventoriesCustomer
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="rtv"
-                                element={<InwardRTVTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <InwardRTVTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.inwardInventoriesRTV
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="warehoue"
-                                element={<InwardWarehouseTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <InwardWarehouseTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.inwardInventoriesWareHouse
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="sample"
-                                element={<InwardSampleTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <InwardSampleTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.inwardInventoriesSample
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="ecom"
-                                element={<InwardEcomTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <InwardEcomTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.inwardInventoriesECommerce
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                             <Route
                                 path="replacement"
                                 element={
-                                    <InwardReplacementTabsListingWrapper />
+                                    <ActionAuthHOC
+                                        component={
+                                            <InwardReplacementTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.inwardInventoriesReplaceMents
+                                        }
+                                        isRedirect
+                                    />
                                 }
                             />
                             <Route
                                 path="company"
-                                element={<InwardCompanyTabsListingWrapper />}
+                                element={
+                                    <ActionAuthHOC
+                                        component={
+                                            <InwardCompanyTabsListingWrapper />
+                                        }
+                                        moduleName={
+                                            UserModuleNameTypes.wareHouse
+                                        }
+                                        actionName={
+                                            UserModuleWarehouseTabsTypes.inwardInventoriesCompany
+                                        }
+                                        isRedirect
+                                    />
+                                }
                             />
                         </Route>
 
@@ -899,7 +1112,7 @@ const PageRoutes = () => {
                             <ActionAuthHOC
                                 component={<AddGRNWrapper />}
                                 moduleName={UserModuleNameTypes.purchaseOrder}
-                                actionName={UserModuleActionTypes.Add}
+                                actionName={UserModuleActionTypes.genrateGrn}
                                 isRedirect
                             />
                         }
