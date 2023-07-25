@@ -23,6 +23,7 @@ import SlotManagementListing from './SlotManagementListing'
 import {
     useDeleteSlotMangementMutation,
     useGetPaginationSlotQuery,
+    useUpdateSlotContinueStatusMutation,
 } from 'src/services/media/SlotDefinitionServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
@@ -41,6 +42,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/slotManagementSlice'
+import { CiPause1, CiPlay1 } from 'react-icons/ci'
 
 const SlotManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -56,6 +58,8 @@ const SlotManagementListingWrapper = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
+    const [updatePausePlay] = useUpdateSlotContinueStatusMutation()
+
     const [deleteSlotMangement] = useDeleteSlotMangementMutation()
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -91,6 +95,17 @@ const SlotManagementListingWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
+
+    const handlePausePlay = (id: string) => {
+        updatePausePlay(id).then((res: any) => {
+            if (res?.data?.status) {
+                showToast('success', 'Slot Updated successfully!')
+                navigate('/media/slot')
+            } else {
+                showToast('error', res?.data?.message)
+            }
+        })
+    }
 
     const columns: columnTypes[] = [
         {
@@ -139,6 +154,29 @@ const SlotManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
                 <span> {moment(row.slotEndTime).format('hh:mm:ss a')} </span>
+            ),
+        },
+        {
+            field: 'pausePlay',
+            headerName: 'Pause / Play',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: SlotManagementListResponse) => (
+                <span>
+                    {' '}
+                    {row.slotContinueStatus ? (
+                        <CiPlay1
+                            onClick={() => handlePausePlay(row?._id)}
+                            size={30}
+                            className="cursor-pointer"
+                        />
+                    ) : (
+                        <CiPause1
+                            onClick={() => handlePausePlay(row?._id)}
+                            size={30}
+                            className="cursor-pointer"
+                        />
+                    )}{' '}
+                </span>
             ),
         },
         // {
