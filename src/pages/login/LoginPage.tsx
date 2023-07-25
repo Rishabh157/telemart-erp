@@ -81,12 +81,8 @@ const LoginPage = ({ pathName }: any) => {
                                     'refreshToken',
                                     res?.data?.data?.refreshToken
                                 )
-
                                 showToast('success', 'Login successful')
-                                setTimeout(() => {
-                                    // window.location.pathname = `${pathName}`
-                                    navigate('/dealers') // Navigating to "/dashboard" after setting localStorage
-                                }, 3000)
+                                navigate('/dashboard') // Navigating to "/dashboard" after setting localStorage
                             } else {
                                 setApiError(res?.data?.message)
                             }
