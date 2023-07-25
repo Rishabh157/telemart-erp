@@ -19,7 +19,7 @@ import { FormInitialValues } from '../../AddWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 // |-- Redux --|

@@ -27,7 +27,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 // |-- MUI --|
 import { CircularProgress } from '@mui/material'
 

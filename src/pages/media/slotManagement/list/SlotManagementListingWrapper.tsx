@@ -10,11 +10,11 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { FaTimes } from 'react-icons/fa'
+// import { FaTimes } from 'react-icons/fa'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
-import { FaExclamation } from 'react-icons/fa'
-import { TiTick } from 'react-icons/ti'
+// import { FaExclamation } from 'react-icons/fa'
+// import { TiTick } from 'react-icons/ti'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -23,12 +23,11 @@ import SlotManagementListing from './SlotManagementListing'
 import {
     useDeleteSlotMangementMutation,
     useGetPaginationSlotQuery,
-} from 'src/services/media/SlotManagementServices'
-import MediaLayout from 'src/pages/media/MediaLayout'
+} from 'src/services/media/SlotDefinitionServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import SlotRunWrapper from '../update/SlotRunWrapper'
+// import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+// import SlotRunWrapper from '../update/SlotRunWrapper'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
@@ -45,12 +44,12 @@ import {
 
 const SlotManagementListingWrapper = () => {
     const navigate = useNavigate()
-    const [isOpenDialog, setIsOpenDialog] = useState(false)
+    // const [isOpenDialog, setIsOpenDialog] = useState(false)
     const slotManagementState: any = useSelector(
         (state: RootState) => state.slotManagement
     )
     const [showDropdown, setShowDropdown] = useState(false)
-    const [runState, setRunState] = useState('')
+    // const [runState, setRunState] = useState('')
     const [currentId, setCurrentId] = useState('')
     const { page, rowsPerPage, searchValue, items } = slotManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -142,80 +141,80 @@ const SlotManagementListingWrapper = () => {
                 <span> {moment(row.slotEndTime).format('hh:mm:ss a')} </span>
             ),
         },
-        {
-            field: 'slotRun',
-            headerName: 'Run Status',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <div className="relative">
-                    {moment(row?.slotStartTime).format('hh:mm:ss') <
-                        moment(new Date()).format('hh:mm:ss') &&
-                    moment(new Date()).format('hh:mm:ss') <
-                        moment(row?.slotEndTime).format('hh:mm:ss') ? (
-                        <button
-                            disabled={true}
-                            className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
-                                row.runStatus === true && row.run === true
-                                    ? 'hover:bg-green-100'
-                                    : row.runStatus === true &&
-                                      row.run === false
-                                    ? 'hover:bg-red-100'
-                                    : 'hover:bg-orange-100'
-                            } p-2 rounded-full border
-                            ${
-                                row.runStatus === true && row.run === true
-                                    ? 'border-green-500'
-                                    : row.runStatus === true &&
-                                      row.run === false
-                                    ? 'border-red-500'
-                                    : 'border-orange-500'
-                            }
-                            `}
-                        >
-                            {row.runStatus === true && row.run === true ? (
-                                <TiTick />
-                            ) : (row.runStatus === true && row.run === false) ||
-                              (row.runStatus === false && row.run === true) ? (
-                                <FaTimes />
-                            ) : (
-                                <FaExclamation />
-                            )}
-                        </button>
-                    ) : (
-                        <button
-                            onClick={(e) => {
-                                setRunState(row._id)
-                                setIsOpenDialog(true)
-                            }}
-                            className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
-                                row.runStatus === true && row.run === true
-                                    ? 'hover:bg-green-100'
-                                    : row.runStatus === true &&
-                                      row.run === false
-                                    ? 'hover:bg-red-100'
-                                    : 'hover:bg-orange-100'
-                            } p-2 rounded-full border  ${
-                                row.runStatus === true && row.run === true
-                                    ? 'border-green-500'
-                                    : row.runStatus === true &&
-                                      row.run === false
-                                    ? 'border-red-500'
-                                    : 'border-orange-500'
-                            }`}
-                        >
-                            {row.runStatus === true && row.run === true ? (
-                                <TiTick />
-                            ) : row.runStatus === true && row.run === false ? (
-                                <FaTimes />
-                            ) : (
-                                <FaExclamation />
-                            )}
-                        </button>
-                    )}
-                </div>
-            ),
-            align: 'end',
-        },
+        // {
+        //     field: 'slotRun',
+        //     headerName: 'Run Status',
+        //     flex: 'flex-[0.5_0.5_0%]',
+        //     renderCell: (row: any) => (
+        //         <div className="relative">
+        //             {moment(row?.slotStartTime).format('hh:mm:ss') <
+        //                 moment(new Date()).format('hh:mm:ss') &&
+        //             moment(new Date()).format('hh:mm:ss') <
+        //                 moment(row?.slotEndTime).format('hh:mm:ss') ? (
+        //                 <button
+        //                     disabled={true}
+        //                     className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
+        //                         row.runStatus === true && row.run === true
+        //                             ? 'hover:bg-green-100'
+        //                             : row.runStatus === true &&
+        //                               row.run === false
+        //                             ? 'hover:bg-red-100'
+        //                             : 'hover:bg-orange-100'
+        //                     } p-2 rounded-full border
+        //                     ${
+        //                         row.runStatus === true && row.run === true
+        //                             ? 'border-green-500'
+        //                             : row.runStatus === true &&
+        //                               row.run === false
+        //                             ? 'border-red-500'
+        //                             : 'border-orange-500'
+        //                     }
+        //                     `}
+        //                 >
+        //                     {row.runStatus === true && row.run === true ? (
+        //                         <TiTick />
+        //                     ) : (row.runStatus === true && row.run === false) ||
+        //                       (row.runStatus === false && row.run === true) ? (
+        //                         <FaTimes />
+        //                     ) : (
+        //                         <FaExclamation />
+        //                     )}
+        //                 </button>
+        //             ) : (
+        //                 <button
+        //                     onClick={(e) => {
+        //                         setRunState(row._id)
+        //                         setIsOpenDialog(true)
+        //                     }}
+        //                     className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
+        //                         row.runStatus === true && row.run === true
+        //                             ? 'hover:bg-green-100'
+        //                             : row.runStatus === true &&
+        //                               row.run === false
+        //                             ? 'hover:bg-red-100'
+        //                             : 'hover:bg-orange-100'
+        //                     } p-2 rounded-full border  ${
+        //                         row.runStatus === true && row.run === true
+        //                             ? 'border-green-500'
+        //                             : row.runStatus === true &&
+        //                               row.run === false
+        //                             ? 'border-red-500'
+        //                             : 'border-orange-500'
+        //                     }`}
+        //                 >
+        //                     {row.runStatus === true && row.run === true ? (
+        //                         <TiTick />
+        //                     ) : row.runStatus === true && row.run === false ? (
+        //                         <FaTimes />
+        //                     ) : (
+        //                         <FaExclamation />
+        //                     )}
+        //                 </button>
+        //             )}
+        //         </div>
+        //     ),
+        //     align: 'end',
+        // },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -270,33 +269,33 @@ const SlotManagementListingWrapper = () => {
 
     return (
         <>
-            <MediaLayout>
-                <div className="h-full">
-                    <SlotManagementListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.slotManagement,
-                            UserModuleActionTypes.List
-                        )}
-                        rows={items}
-                        setShowDropdown={setShowDropdown}
-                    />
-                    <DialogLogBox
-                        isOpen={isOpenDialog}
-                        buttonClass="cursor-pointer"
-                        handleClose={() => {
-                            setIsOpenDialog(false)
-                        }}
-                        component={
-                            <SlotRunWrapper
-                                id={runState}
-                                setIsOpenDialog={setIsOpenDialog}
-                            />
-                        }
-                    />
-                </div>
-            </MediaLayout>
+            {/* <MediaLayout> */}
+            <div className="h-full">
+                <SlotManagementListing
+                    columns={getAllowedAuthorizedColumns(
+                        checkUserAccess,
+                        columns,
+                        UserModuleNameTypes.slotManagement,
+                        UserModuleActionTypes.List
+                    )}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
+                {/* <DialogLogBox
+                    isOpen={isOpenDialog}
+                    buttonClass="cursor-pointer"
+                    handleClose={() => {
+                        setIsOpenDialog(false)
+                    }}
+                    component={
+                        <SlotRunWrapper
+                            id={runState}
+                            setIsOpenDialog={setIsOpenDialog}
+                        />
+                    }
+                /> */}
+            </div>
+            {/* </MediaLayout> */}
         </>
     )
 }

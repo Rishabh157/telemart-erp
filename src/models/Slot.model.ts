@@ -54,6 +54,42 @@ export type SlotManagementListResponse = {
 // FLEXIBLE="FLEXIBLE"
 // }
 
+export type AddSlotDefinition = {
+    slotName: string
+    channelGroupId: string
+    type: string
+    tapeNameId: String
+    channelNameId: string
+    channelTrp: string
+    remarks: string
+    slotPrice: number
+    slotDay: string[]
+    slotStartTime: string
+    slotEndTime: string
+    slotContinueStatus: boolean
+    slotStartDate: string
+    companyId: string
+}
+export type UpdateSlotDefinition = {
+    body: {
+        slotName: string
+        channelGroupId: string
+        type: string
+        tapeNameId: String
+        channelNameId: string
+        channelTrp: string
+        remarks: string
+        slotPrice: number
+        slotDay: string[]
+        slotStartTime: string
+        slotStartDate: string
+        slotEndTime: string
+        slotContinueStatus: boolean
+
+        companyId: string
+    }
+    id: string
+}
 export type AddSlotManagement = {
     slotName: string
     channelGroupId: string
@@ -67,6 +103,7 @@ export type AddSlotManagement = {
     slotStartTime: string
     slotEndTime: string
     slotContinueStatus: boolean
+    slotStartDate: string
     runYoutubeLink: string | ''
     run: boolean
     slotRunImage: string
@@ -93,6 +130,7 @@ export type UpdateSlotManagement = {
         slotStartTime: string
         slotEndTime: string
         slotContinueStatus: boolean
+        slotStartDate: string
         runYoutubeLink: string | ''
         runStatus: boolean
         run: boolean

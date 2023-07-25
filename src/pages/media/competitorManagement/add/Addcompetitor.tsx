@@ -28,7 +28,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { CircularProgress } from '@mui/material'
-import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 
 // |-- Types --|
 type Props = {

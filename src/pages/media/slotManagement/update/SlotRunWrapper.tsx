@@ -17,14 +17,14 @@ import { useDispatch, useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import UpdateSlotRun from './UpdateSlotRun'
 import { showToast } from 'src/utils'
-import {
-    useGetSlotMangementByIdQuery,
-    useUpdateSlotMutation,
-} from 'src/services/media/SlotManagementServices'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
+import {
+    useGetSlotViewByIdQuery,
+    useUpdateSlotViewMutation,
+} from 'src/services/media/SlotsViewServices'
 
 // |-- Types --|
 type FormInitialValues = {
@@ -39,6 +39,7 @@ type FormInitialValues = {
     slotDay: string[]
     slotStartTime: string
     slotEndTime: string
+    slotStartDate: string
     slotContinueStatus: boolean
     runYoutubeLink: string
     runStatus: boolean
@@ -63,11 +64,11 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [updateSlot] = useUpdateSlotMutation()
+    const [updateSlot] = useUpdateSlotViewMutation()
     const { selectedItems }: any = useSelector(
         (state: RootState) => state.slotManagement
     )
-    const { data, isLoading, isFetching } = useGetSlotMangementByIdQuery(id)
+    const { data, isLoading, isFetching } = useGetSlotViewByIdQuery(id)
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
@@ -91,6 +92,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
         remarks: selectedItems?.reamrks || '',
         slotPrice: selectedItems?.slotPrice || 0,
         slotDay: selectedItems?.slotDay || [''],
+        slotStartDate: selectedItems?.slotStartDate || '',
         slotStartTime: selectedItems?.slotStartTime || '',
         slotEndTime: selectedItems?.slotEndTime || '',
         slotContinueStatus: selectedItems?.slotContinueStatus || false,
@@ -142,6 +144,7 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     slotPrice: values.slotPrice,
                     slotDay: values.slotDay,
                     slotStartTime: values.slotStartTime,
+                    slotStartDate: values.slotStartDate,
                     slotEndTime: values.slotEndTime,
                     slotContinueStatus: values.slotContinueStatus,
                     runYoutubeLink: values?.runYoutubeLink || '',

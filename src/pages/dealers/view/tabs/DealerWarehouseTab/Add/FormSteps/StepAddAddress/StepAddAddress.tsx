@@ -26,7 +26,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 
 import { RootState } from 'src/redux/store'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { useFileUploaderMutation } from 'src/services/media/SlotManagementServices'
+import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 type DropdownOptions = {
