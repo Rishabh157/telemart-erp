@@ -12,6 +12,8 @@ export type DidManagementListResponse = {
     schemeId: string
     channelId: string
     companyId: string
+    slotLabel: string
+    slotId: string
     isDeleted: boolean
     isActive: boolean
     createdAt: string
@@ -25,6 +27,7 @@ export type DidManagementListResponse = {
 export type AddDidManagement = {
     didNumber: string
     companyId: string
+    slotId: string
     schemeId: string
     channelId: string
 }
@@ -33,6 +36,7 @@ export type UpdateDidManagement = {
     body: {
         didNumber: string
         companyId: string
+        slotId: string
         schemeId: string
         channelId: string
     }
