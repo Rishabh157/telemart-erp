@@ -26,6 +26,7 @@ import {
 } from 'src/models/userAccess/UserAccess.model'
 import { RootState } from 'src/redux/store'
 import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
+import OrderListing from './all/OrderListing'
 interface tabsProps {
     label: string
     icon: IconType
@@ -38,73 +39,73 @@ const ViewOrder = () => {
         {
             label: 'All',
             icon: MdOutbond,
-            path: '?orderStaus=all',
+            path: `?orderStatus=all`,
             name: UserModuleOrderTabsTypes.orderAllTab,
         },
         {
             label: 'Fresh Order',
             icon: MdOutbond,
-            path: '?orderStaus=fresh',
+            path: '?orderStatus=fresh',
             name: UserModuleOrderTabsTypes.orderFreshTab,
         },
         {
             label: 'Order Approval',
             icon: MdOutbond,
-            path: '?orderStaus=approved',
+            path: '?orderStatus=approved',
             name: UserModuleOrderTabsTypes.orderApprovedTab,
         },
         {
             label: 'Delivered',
             icon: MdOutbond,
-            path: '?orderStaus=delivered',
+            path: '?orderStatus=delivered',
             name: UserModuleOrderTabsTypes.orderDeliveredTab,
         },
         {
             label: 'Door Cancelled',
             icon: MdOutbond,
-            path: '?orderStaus=doorCancelled',
+            path: '?orderStatus=doorCancelled',
             name: UserModuleOrderTabsTypes.orderDoorCancelledTab,
         },
         {
             label: 'Hold',
             icon: MdOutbond,
-            path: '?orderStaus=hold',
+            path: '?orderStatus=hold',
             name: UserModuleOrderTabsTypes.orderHoldTab,
         },
         {
             label: 'PSC',
             icon: MdOutbond,
-            path: '?orderStaus=psc',
+            path: '?orderStatus=psc',
             name: UserModuleOrderTabsTypes.orderPscTab,
         },
         {
             label: 'UNA',
             icon: MdOutbond,
-            path: '?orderStaus=una',
+            path: '?orderStatus=una',
             name: UserModuleOrderTabsTypes.orderUnaTab,
         },
         {
             label: 'PND',
             icon: MdOutbond,
-            path: '?orderStaus=pnd',
+            path: '?orderStatus=pnd',
             name: UserModuleOrderTabsTypes.orderPndTab,
         },
         {
             label: 'Urgent',
             icon: MdOutbond,
-            path: '?orderStaus=urgent',
+            path: '?orderStatus=urgent',
             name: UserModuleOrderTabsTypes.orderUrgentTab,
         },
         {
             label: 'Non Actions',
             icon: MdOutbond,
-            path: '?orderStaus=non-action',
+            path: '?orderStatus=non-action',
             name: UserModuleOrderTabsTypes.orderNonActionTab,
         },
     ]
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const [activeTabIndex, setActiveTab] = useState<number>()
+    const [activeTabIndex, setActiveTab] = useState<number>(0)
     const [activelabel, setActiveTabLabel] = useState<string>()
     const { search } = useLocation()
     const activeTab = search.split('=')[1]
@@ -121,7 +122,7 @@ const ViewOrder = () => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Orders',
-            path: '/orders?orderStaus=all',
+            path: '/orders?orderStatus=all',
         },
         {
             label: `${activelabel}`,
@@ -155,7 +156,9 @@ const ViewOrder = () => {
 
                         {/* Children */}
                         <div className="h-[calc(100vh-155px)] w-full ">
-                            <Outlet />
+                            <OrderListing
+                                tabName={allowedTabs[activeTabIndex].name}
+                            />
                         </div>
                     </div>
                 </div>

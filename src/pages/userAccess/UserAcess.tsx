@@ -42,6 +42,7 @@ import {
     getDepartmentLabel,
     getUserRoleLabel,
 } from 'src/utils/GetHierarchyByDept'
+import { showToast } from 'src/utils'
 // import { BsInfoCircle } from 'react-icons/bs'
 // import Popover from '@mui/material/Popover'
 // import Typography from '@mui/material/Typography'
@@ -161,6 +162,10 @@ const UserAcess = ({
 
                 moduleAction = isChildRemove
             }
+            if (moduleAction.length === 0) {
+                showToast('error', 'Please Select atleast one action')
+                return
+            }
 
             moduleValue[moduleIndex] = {
                 ...moduleValue[moduleIndex],
@@ -208,31 +213,18 @@ const UserAcess = ({
         )
     }
 
-    // const HandleShowFiledValueModal = (actionName: string) => {
-    //     switch (actionName) {
-    //         case 'EDIT':
-    //             return false
-    //         case 'DELETE':
-    //             return false
-    //         default:
-    //             return true
-    //     }
-    // }
-
     const handleUserFieldAccess = (
         module: ModulesTypes,
         actions: moduleActionTypes,
         field: fieldTypes,
         fieldValue: boolean
     ) => {
-        console.log(2)
         let clonedUserAccessItems = JSON.parse(JSON.stringify(userAccessItems))
 
         const moduleIndex = clonedUserAccessItems.modules?.findIndex(
             (moduleitem: ModulesTypes) =>
                 moduleitem.moduleId === module.moduleId
         )
-        console.log(clonedUserAccessItems)
         const moduleActionIndex = clonedUserAccessItems.modules[
             moduleIndex
         ]?.moduleAction.findIndex(
@@ -243,8 +235,7 @@ const UserAcess = ({
         if (moduleIndex >= 0) {
             let moduleValue = [...clonedUserAccessItems.modules]
             let moduleActionField = [
-                ...moduleValue[moduleIndex].moduleAction[moduleActionIndex]
-                    .fields,
+                ...moduleValue[moduleIndex]?.moduleAction[moduleActionIndex]?.fields,
             ]
 
             if (fieldValue) {

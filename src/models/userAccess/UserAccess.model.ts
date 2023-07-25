@@ -1,16 +1,16 @@
 // Order Module Tabs
 export enum UserModuleOrderTabsTypes {
-    orderAllTab = 'ORDER_ALL_TAB',
-    orderFreshTab = 'ORDER_FRESH_ORDER_TAB',
-    orderApprovedTab = 'ORDER_APPROVAL_TAB',
-    orderDeliveredTab = 'ORDER_DELIVERED_TAB',
-    orderDoorCancelledTab = 'ORDER_DOOR_CANCELLED_TAB',
-    orderHoldTab = 'ORDER_HOLD_TAB',
-    orderPscTab = 'ORDER_PSC_TAB',
-    orderUnaTab = 'ORDER_UNA_TAB',
-    orderPndTab = 'ORDER_PND_TAB',
-    orderUrgentTab = 'ORDER_URGENT_TAB',
-    orderNonActionTab = 'ORDER_NON_ACTION_TAB',
+    'orderAllTab' = 'ORDER_ALL_TAB',
+    'orderFreshTab' = 'ORDER_FRESH_ORDER_TAB',
+    'orderApprovedTab' = 'ORDER_APPROVAL_TAB',
+    'orderDeliveredTab' = 'ORDER_DELIVERED_TAB',
+    'orderDoorCancelledTab' = 'ORDER_DOOR_CANCELLED_TAB',
+    'orderHoldTab' = 'ORDER_HOLD_TAB',
+    'orderPscTab' = 'ORDER_PSC_TAB',
+    'orderUnaTab' = 'ORDER_UNA_TAB',
+    'orderPndTab' = 'ORDER_PND_TAB',
+    'orderUrgentTab' = 'ORDER_URGENT_TAB',
+    'orderNonActionTab' = 'ORDER_NON_ACTION_TAB',
 }
 
 export enum UserModuleWarehouseTabsTypes {
