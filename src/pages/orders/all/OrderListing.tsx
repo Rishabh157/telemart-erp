@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMTable, {
@@ -26,6 +26,7 @@ import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
+    UserModuleOrderTabsTypes,
 } from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -39,7 +40,7 @@ import {
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
 
-const OrderListing = () => {
+const OrderListing = ({ tabName }: { tabName: string }) => {
     // Hooks
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
@@ -190,7 +191,7 @@ const OrderListing = () => {
                             checkUserAccess,
                             columns,
                             UserModuleNameTypes.order,
-                            UserModuleActionTypes.List
+                            tabName
                         )}
                         rows={items}
                         // isCheckbox={true}
