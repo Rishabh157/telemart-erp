@@ -932,20 +932,14 @@ const PageRoutes = () => {
                     <Route
                         path="/orders"
                         element={
-                            <ActionAuthHOC
+                            <AuthHOC
                                 component={<Order />}
                                 moduleName={UserModuleNameTypes.order}
-                                actionName={UserModuleActionTypes.List}
-                                isRedirect
                             />
                         }
                     >
                         <Route index element={<OrderListing />} />
-                        <Route path="view/:id" element={<OrderViewWrapper />} />
-                        {/* <Route
-                            path="approved-orders"
-                            element={<ApprovedOrderListing />}
-                        /> */}
+                        {/* <Route path="view/:id" element={<OrderViewWrapper />} /> */}
                     </Route>
 
                     {/* Call */}

@@ -190,7 +190,9 @@ const OrderListing = () => {
                             checkUserAccess,
                             columns,
                             UserModuleNameTypes.order,
-                            UserModuleActionTypes.List
+                            UserModuleActionTypes[
+                                'Add ' as keyof typeof UserModuleActionTypes
+                            ]
                         )}
                         rows={items}
                         // isCheckbox={true}
