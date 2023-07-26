@@ -176,7 +176,7 @@ const EditSlotManagementWrapper = () => {
         tapeNameId: selectedItems?.tapeNameId || '',
         channelNameId: selectedItems?.channelNameId || '',
         slotPrice: selectedItems?.slotPrice || 0,
-        slotDay: selectedItems?.slotDay || [''],
+        slotDay: selectedItems?.slotDay || [],
         slotStartTime: selectedItems?.slotStartTime || '',
         slotEndTime: selectedItems?.slotEndTime || '',
         slotRenewal: selectedItems?.slotRenewal || '',
@@ -192,8 +192,11 @@ const EditSlotManagementWrapper = () => {
         slotName: string().required('Required'),
         channelGroupId: string().required('Required'),
         type: string().required('Required'),
-        slotPrice: number().required('Slot price is required'),
-        slotDay: array().of(string()).required('Slot Days are required'),
+        slotPrice: number().required('Required'),
+        slotDay: array()
+            .of(string().required('Required'))
+            .min(1, 'At least one slot day is required')
+            .required('Required'),
         slotStartTime: string().required('Required'),
         slotEndTime: string().required('Required'),
         slotContinueStatus: boolean().required('Required'),

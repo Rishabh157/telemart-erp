@@ -204,6 +204,7 @@ const EditSlotManagement = ({
                                 <div className="mt-0">
                                     <ATMSelectSearchable
                                         name={'slotDay'}
+                                        required
                                         value={values.slotDay}
                                         onChange={(e) => {
                                             handleSetFieldValue('slotDay', e)
@@ -225,7 +226,7 @@ const EditSlotManagement = ({
                                                 value: 'WEDNESDAY',
                                             },
                                             {
-                                                label: 'Thursdya',
+                                                label: 'Thursday',
                                                 value: 'THURSDAY',
                                             },
                                             {
@@ -260,6 +261,7 @@ const EditSlotManagement = ({
                                 </div>
                                 <div className="">
                                     <ATMDatePicker
+                                        required
                                         name={`slotStartDate`}
                                         value={values.slotStartDate}
                                         label="Start Date"
@@ -286,6 +288,7 @@ const EditSlotManagement = ({
                                 </div>
                                 <div className="">
                                     <ATMTimePicker
+                                        required
                                         name={`slotStartTime`}
                                         value={values.slotStartTime || null}
                                         label="Start Time"
@@ -299,6 +302,7 @@ const EditSlotManagement = ({
                                 </div>
                                 <div className="">
                                     <ATMTimePicker
+                                        required
                                         name={`slotEndTime`}
                                         value={values.slotEndTime || null}
                                         label="End Time"

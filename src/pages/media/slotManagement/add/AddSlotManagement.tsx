@@ -232,6 +232,7 @@ const AddSlotManagement = ({
                                     <ATMSelectSearchable
                                         name={'slotDay'}
                                         value={values.slotDay}
+                                        required
                                         onChange={(e) => {
                                             handleSetFieldValue('slotDay', e)
                                         }}
@@ -252,7 +253,7 @@ const AddSlotManagement = ({
                                                 value: 'WEDNESDAY',
                                             },
                                             {
-                                                label: 'Thursdya',
+                                                label: 'Thursday',
                                                 value: 'THURSDAY',
                                             },
                                             {
@@ -287,6 +288,7 @@ const AddSlotManagement = ({
                                 </div>
                                 <div className="">
                                     <ATMDatePicker
+                                        required
                                         name={`slotStartDate`}
                                         value={values.slotStartDate}
                                         label="Start Date"
@@ -313,6 +315,7 @@ const AddSlotManagement = ({
                                 </div>
                                 <div className="">
                                     <ATMTimePicker
+                                        required
                                         name={`slotStartTime`}
                                         value={values.slotStartTime}
                                         label="Start Time"
@@ -326,6 +329,7 @@ const AddSlotManagement = ({
                                 </div>
                                 <div className="">
                                     <ATMTimePicker
+                                        required
                                         name={`slotEndTime`}
                                         value={values.slotEndTime}
                                         label="End Time"
