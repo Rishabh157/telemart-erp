@@ -146,7 +146,7 @@ export const navigation: NavItemType[] = [
     {
         label: 'Dispositions',
         icon: AiOutlineSetting,
-        path: '/dispositions/disposition-one    ',
+        path: '/dispositions/disposition-one',
         name: UserModuleNameTypes.disposition,
     },
     {

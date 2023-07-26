@@ -32,8 +32,8 @@ import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
     UserModuleNameTypes,
+    UserModuleOtherActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -320,7 +320,7 @@ const SlotManagementListingWrapper = () => {
                         checkUserAccess,
                         columns,
                         UserModuleNameTypes.slotManagement,
-                        UserModuleActionTypes.List
+                        UserModuleOtherActionTypes.slotDefinition
                     )}
                     rows={items}
                     setShowDropdown={setShowDropdown}

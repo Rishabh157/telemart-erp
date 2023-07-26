@@ -2631,9 +2631,53 @@
             "moduleName": "SLOT_MANAGEMENT",
             "moduleAction": [
                 {
-                    "actionId": "slotActionListId",
+                    "actionId": "slotActionSlotDefinitionId",
                     "actionUrl": "/media/slot",
-                    "actionName": "LIST",
+                    "actionName": "SLOT_DEFINITION",
+                    "parentGroup": [],
+                    "fields": [
+                        {
+                            "fieldId": "slotDefinitionId1",
+                            "fieldName": "Slot Name",
+                            "fieldValue": "slotName"
+                        },
+                        {
+                            "fieldId": "slotDefinitionId2",
+                            "fieldName": "Channel Group",
+                            "fieldValue": "groupNameLabel"
+                        },
+                        {
+                            "fieldId": "slotDefinitionId3",
+                            "fieldName": "Channel Name",
+                            "fieldValue": "channelLabel"
+                        },
+                        {
+                            "fieldId": "slotDefinitionId4",
+                            "fieldName": "Tape Name",
+                            "fieldValue": "tapeLabel"
+                        },
+                        {
+                            "fieldId": "slotDefinitionId5",
+                            "fieldName": "Start Time",
+                            "fieldValue": "slotStartTime"
+                        },
+                        {
+                            "fieldId": "slotDefinitionId6",
+                            "fieldName": "End Time",
+                            "fieldValue": "slotEndTime"
+                        },
+                        {
+                            "fieldId": "slotDefinitionId7",
+                            "fieldName": "Slot Play Pause",
+                            "fieldValue": "pausePlay"
+                        }
+                    ]
+                },
+
+                {
+                    "actionId": "slotActionSlotsId",
+                    "actionUrl": "/media/slot/run-slots",
+                    "actionName": "SLOTS",
                     "parentGroup": [],
                     "fields": [
                         {
@@ -2668,7 +2712,7 @@
                         },
                         {
                             "fieldId": "slotId7",
-                            "fieldName": "Slot Run",
+                            "fieldName": "Run Status",
                             "fieldValue": "slotRun"
                         }
                     ]

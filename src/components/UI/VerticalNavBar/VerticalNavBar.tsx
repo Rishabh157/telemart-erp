@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
+    UserModuleOtherActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Internal Dependencies --|
@@ -128,15 +129,26 @@ const VerticalNavBar = ({
             default:
                 break
         }
+
         let isEditDeleteViewAccess = checkUserAccess?.modules?.filter(
             (mod: any) => {
                 return currentModules.includes(mod?.moduleName)
             }
         )
-        let moduleAction = isEditDeleteViewAccess[0]?.moduleAction
+        let moduleAction: any = isEditDeleteViewAccess[0]?.moduleAction
+
+        let slotRoute = moduleAction?.find(
+            (ele: any) =>
+                ele?.actionName === UserModuleOtherActionTypes.slotDefinition ||
+                ele?.actionName === UserModuleOtherActionTypes.slots
+        )?.actionUrl
+        if (slotRoute) {
+            return slotRoute
+        }
         let paginationRoute = moduleAction?.find(
             (ele: any) => ele?.actionName === UserModuleActionTypes.List
         )?.actionUrl
+
         return paginationRoute || path
     }
     return (
