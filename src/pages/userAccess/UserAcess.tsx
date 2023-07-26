@@ -29,7 +29,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 // import { HiPlus } from 'react-icons/hi'
 //import { BsFillExclamationCircleFill } from 'react-icons/bs'
 import { default as modulesData } from 'src/defaultData/moduleData.json'
-import { UserModuleActionTypes } from 'src/models/userAccess/UserAccess.model'
+import {
+    UserModuleActionTypes,
+    UserModuleOrderTabsTypes,
+} from 'src/models/userAccess/UserAccess.model'
 // import { default as user } from 'src/defaultData/user.json'
 import {
     moduleActionTypes,
@@ -235,7 +238,8 @@ const UserAcess = ({
         if (moduleIndex >= 0) {
             let moduleValue = [...clonedUserAccessItems.modules]
             let moduleActionField = [
-                ...moduleValue[moduleIndex]?.moduleAction[moduleActionIndex]?.fields,
+                ...moduleValue[moduleIndex]?.moduleAction[moduleActionIndex]
+                    ?.fields,
             ]
 
             if (fieldValue) {
@@ -391,7 +395,29 @@ const UserAcess = ({
                                                                                 <input
                                                                                     disabled={
                                                                                         actionsItems.actionName ===
-                                                                                        UserModuleActionTypes.List
+                                                                                            UserModuleActionTypes.List ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderAllTab ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderApprovedTab ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderDeliveredTab ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderDoorCancelledTab ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderFreshTab ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderHoldTab ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderNonActionTab ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderPndTab ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderPscTab ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderUnaTab ||
+                                                                                        actionsItems.actionName ===
+                                                                                            UserModuleOrderTabsTypes.orderUrgentTab
                                                                                             ? true
                                                                                             : false
                                                                                     }
