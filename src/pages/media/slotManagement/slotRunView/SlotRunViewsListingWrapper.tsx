@@ -31,8 +31,8 @@ import SlotRunWrapper from '../update/SlotRunWrapper'
 // import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
     UserModuleNameTypes,
+    UserModuleOtherActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -276,7 +276,7 @@ const SlotRunViewsListingWrapper = () => {
                         checkUserAccess,
                         columns,
                         UserModuleNameTypes.slotManagement,
-                        UserModuleActionTypes.List
+                        UserModuleOtherActionTypes.slots
                     )}
                     rows={items}
                     // setShowDropdown={setShowDropdown}

@@ -34,16 +34,16 @@ interface tabsProps {
 const ViewSlot = () => {
     const tabs: tabsProps[] = [
         {
-            label: 'Slot Defination',
+            label: 'Slot Definition',
             icon: MdOutbond,
             path: '/media/slot',
-            name: 'SLOT_DEFINATION',
+            name: 'SLOT_DEFINITION',
         },
         {
             label: 'Slots',
             icon: MdOutbond,
             path: '/media/slot/run-slots',
-            name: 'SLOT_VIEW',
+            name: 'SLOTS',
         },
     ]
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -56,7 +56,7 @@ const ViewSlot = () => {
 
     const allowedTabs = showAllowedTabs(
         checkUserAccess,
-        UserModuleNameTypes.order,
+        UserModuleNameTypes.slotManagement,
         tabs,
         userData?.userRole || 'ADMIN'
     )
@@ -69,6 +69,7 @@ const ViewSlot = () => {
         activeIndex = activeIndex < 0 ? 0 : activeIndex
         setActiveTab(activeIndex)
     }, [allowedTabs])
+
     return (
         <MediaLayout>
             <div className="h-[calc(100vh-55px)]">

@@ -1884,12 +1884,12 @@ const PageRoutes = () => {
                     <Route
                         path="media/slot"
                         element={
-                            <ActionAuthHOC
-                                component={<ViewSlot />}
-                                moduleName={UserModuleNameTypes.order}
-                                actionName={UserModuleActionTypes.List}
-                                isRedirect
-                            />
+                            // <ActionAuthHOC
+                            //     component={
+                            <ViewSlot />
+                            // }
+                            //     moduleName={UserModuleNameTypes.slotManagement}
+                            // />
                         }
                     >
                         <Route
