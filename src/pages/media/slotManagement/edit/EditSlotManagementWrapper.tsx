@@ -193,7 +193,10 @@ const EditSlotManagementWrapper = () => {
         channelGroupId: string().required('Required'),
         type: string().required('Required'),
         slotPrice: number().required('Required'),
-        slotDay: array().of(string().required('Required')).required('Required'),
+        slotDay: array()
+            .of(string().required('Required'))
+            .min(1, 'At least one slot day is required')
+            .required('Required'),
         slotStartTime: string().required('Required'),
         slotEndTime: string().required('Required'),
         slotContinueStatus: boolean().required('Required'),
