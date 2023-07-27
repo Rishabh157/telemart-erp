@@ -131,7 +131,7 @@ const SlotRunViewsListingWrapper = () => {
             headerName: 'Start Time',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {moment(row.slotStartTime).format('hh:mm:ss a')} </span>
+                <span> {moment(row.slotStartTime).format('hh:mm a')} </span>
             ),
         },
         {
@@ -139,7 +139,7 @@ const SlotRunViewsListingWrapper = () => {
             headerName: 'End Time',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {moment(row.slotEndTime).format('hh:mm:ss a')} </span>
+                <span> {moment(row.slotEndTime).format('hh:mm a')} </span>
             ),
         },
         {

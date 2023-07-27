@@ -230,6 +230,7 @@ const AddSlotManagement = ({
                             <div className="grid grid-cols-4 gap-2 items-end  pb-5">
                                 <div className="mt-0">
                                     <ATMSelectSearchable
+                                        isAllSelect
                                         name={'slotDay'}
                                         value={values.slotDay}
                                         required
