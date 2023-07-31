@@ -300,7 +300,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                             >
                                                 <div className="flex justify-between items-center">
                                                     <div className="text-primary-main text-lg pb-2 font-medium ">
-                                                       image #{ind + 1}
+                                                        image #{ind + 1}
                                                     </div>
                                                     {/* Delete Button */}
                                                     {values.image?.length >
