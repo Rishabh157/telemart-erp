@@ -61,9 +61,8 @@ export type UpdateCompetitorManagement = {
         channelNameId: string
         startTime: string
         endTime: string
-        languageId:string
+        languageId: string
         image: string[]
-
     }
     id: string
 }

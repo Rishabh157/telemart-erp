@@ -92,7 +92,7 @@ const ATMSelectSearchable = ({
         valueContainer: (provided: any) => ({
             ...provided,
             paddingLeft: '5px',
-            paddingTop: '5px',
+            paddingTop: '3px',
             alignItems: 'start',
             overflow: isMulti ? 'scroll' : 'unset',
             maxHeight: '67px',

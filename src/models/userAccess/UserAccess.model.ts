@@ -58,6 +58,20 @@ export enum UserModuleTabsTypes {
     returnToVendor = 'RETURN_TO_VENDOR',
     vendorLedger = 'VENDOR_LEDGER',
     vendorActivity = 'VENDOR_ACTIVITY',
+    dealerWarehouse = 'DEALER_WAREHOUSE',
+    dealerWarehouseAdd = 'DEALER_WAREHOUSE_ADD',
+    dealerSaleOrder = 'DEALER_SALE_ORDER',
+    dealerSalesOrderAdd = 'DEALER_SALE_ORDER_ADD',
+    dealerLedger = 'DEALER_LEDGER',
+    dealerLedgerCreditAmountAdd = 'DEALER_LEDGER_CREDIT_AMOUNT_ADD',
+    dealerLedgerCreditNoteAdd = 'DEALER_LEDGER_CREDIT_NOTE_ADD',
+    dealerLedgerDebitNoteAdd = 'DEALER_LEDGER_DEBIT_NOTE_ADD',
+    dealerOrderLedger = 'DEALER_ORDER_LEDGER',
+    dealerActivity = 'DEALER_ACTIVITY',
+    dealerPincode = 'DEALER_PINCODE',
+    dealerPincodeAdd = 'DEALER_PINCODE_ADD',
+    dealerScheme = 'DEALER_SCHEME',
+    dealerSchemeAdd = 'DEALER_SCHEME_ADD',
 }
 export enum UserModuleAddActionTypes {
     vendorPoAdd = 'PURCHASE_ORDER_ADD',
@@ -99,7 +113,6 @@ export enum UserModuleNameTypes {
     cartonBox = 'CARTON_BOX',
     company = 'COMPANY',
     barcode = 'BARCODE',
-
     country = 'COUNTRY',
     state = 'STATE',
     district = 'DISTRICT',

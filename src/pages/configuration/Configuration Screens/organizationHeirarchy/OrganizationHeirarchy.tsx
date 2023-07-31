@@ -785,7 +785,7 @@ const OrganisationHierarchy = () => {
                                     }
                                     extraClasses="text-sm font-bold  font-sans"
                                 >
-                                  Creative Production Dept.
+                                    Creative Production Dept.
                                 </StyledNode>
                             }
                         >
