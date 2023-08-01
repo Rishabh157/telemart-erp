@@ -68,7 +68,7 @@ const CallerHeader = ({
                 </div>
                 <div>
                     <h3 className="text-white font-extrabold text-[14px]">
-                        TRUECALLER
+                        Whatsapp
                     </h3>
                     <div className=" bg-white text-center p-1 rounded bedge text-[#15616E] text-[14px] font-bold">
                         {Status}
