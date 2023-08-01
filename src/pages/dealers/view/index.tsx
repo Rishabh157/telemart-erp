@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
 // Filename:index.tsx
 // Type: Index Component
@@ -15,6 +16,7 @@ import { BsArrowRepeat } from 'react-icons/bs'
 import { MdOutlinePeopleAlt } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { RiBillLine } from 'react-icons/ri'
+import {useParams, useNavigate} from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ViewLayout from 'src/components/layouts/ViewLayout/ViewLayout'
@@ -33,49 +35,49 @@ const tabsData = [
     {
         label: 'General Information',
         icon: BsArrowRepeat,
-        path: 'general-information',
+        path: `general-information`,
         name: 'GENERAL_INFORMATION',
     },
     {
         label: 'Warehouse',
         icon: MdOutlinePeopleAlt,
-        path: 'warehouse',
+        path: `warehouse`,
         name: 'DEALER_WAREHOUSE',
     },
     {
         label: 'Sale Order',
         icon: AiOutlineRise,
-        path: 'sale-order',
+        path: `sale-order`,
         name: 'DEALER_SALE_ORDER',
     },
     {
         label: 'Ledger',
         icon: MdOutlinePeopleAlt,
-        path: 'ledger',
+        path: `ledger`,
         name: 'DEALER_LEDGER',
     },
     {
         label: 'Orders Ledger',
         icon: RiBillLine,
-        path: 'order-ledger',
+        path: `order-ledger`,
         name: 'DEALER_ORDER_LEDGER',
     },
     {
         label: 'Activity',
         icon: MdOutlinePeopleAlt,
-        path: 'activities',
+        path: `activities`,
         name: 'DEALER_ACTIVITY',
     },
     {
         label: 'PinCode',
         icon: MdOutlinePeopleAlt,
-        path: 'pincode',
+        path: `pincode`,
         name: 'DEALER_PINCODE',
     },
     {
         label: 'Schemes',
         icon: MdOutlinePeopleAlt,
-        path: 'scheme',
+        path: `scheme`,
         name: 'DEALER_SCHEME',
     },
     // {
@@ -84,6 +86,7 @@ const tabsData = [
     //     path: 'supervisor',
     // },
 ]
+
 
 const actionIcons = [
     {
@@ -118,6 +121,15 @@ const ViewDealer = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
+    const navigate = useNavigate();
+    const {dealerId} = useParams();  
+    
+
+    useEffect(() => {
+        const activeTab = window.location.pathname.split('/')[3]
+        navigate(`/dealers/${dealerId}/${activeTab}`)        
+    }, [dealerId])
+
 
     const allowedTabs = showAllowedTabs(
         checkUserAccess,

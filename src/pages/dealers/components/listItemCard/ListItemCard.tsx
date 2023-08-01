@@ -20,7 +20,7 @@ const ListItemCard = ({ item }: { item: any }) => {
     return (
         <div
             id={item._id}
-            onClick={() => {
+            onClick={() => {                
                 navigate(`/dealers/${item._id}/${pathValue}`)
             }}
             key={item._id}

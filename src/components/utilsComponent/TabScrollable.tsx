@@ -37,8 +37,15 @@ const TabScrollable: React.FC<Props> = ({
 
     // define a onClick function to bind the value on tab click
     const onTabClick = (e: any, index: number) => {
-        navigate(tabs[index]?.path as string)
-        setActiveTab(index)
+        
+        if(window.location.pathname.split('/')[1] === "dealers"){            
+            const id = window.location.pathname.split('/')[2]
+            navigate(`/dealers/${id}/${tabs[index]?.path as string}`) 
+            setActiveTab(index)
+        }else{                 
+            navigate(tabs[index]?.path as string)
+            setActiveTab(index)
+        }
         // setActiveTabHandle(index)
     }
     React.useEffect(() => {

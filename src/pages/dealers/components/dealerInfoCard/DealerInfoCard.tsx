@@ -93,14 +93,33 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
 
             <div className="  text-slate-500  ">
                 {/* Dealer Name */}
-                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
-                    <h2> Name </h2> <h2>: </h2>
-                    <p className="font-bold text-start">
+                <div className=" text-black text-[13px] grid grid-flow-col grid-cols-3 justify-stretch  px-4  ">
+                    <h2 className="grid-cols-1"> Name </h2> <h2 className="grid-cols-1 text-center">: </h2>
+                    <p className="font-bold text-start grid-cols-1">
                         {selectedItem?.firstName}
                     </p>
                 </div>
 
                 {/* Mobile */}
+                <div className=" text-black text-[13px] grid grid-cols-3 grid-flow-col justify-stretch  px-4  ">
+                    <h2 className="grid-cols-1"> Mobile No. </h2> <h2 className="grid-cols-1 text-center ">: </h2>
+                    <p className="font-bold text-start grid-cols-1">
+                        {selectedItem?.registrationAddress.phone}
+                    </p>
+                </div>
+                <div className=" text-black text-[13px] grid grid-cols-3 grid-flow-col justify-stretch  px-4  ">
+                    <h2 className="grid-cols-1"> Zo. Manager </h2> <h2 className="grid-cols-1 text-center">: </h2>
+                    <p className="font-bold text-start grid-cols-1">
+                        {selectedItem?.zonalManagerLabel}
+                    </p>
+                </div>
+                <div className=" text-black text-[13px] grid grid-cols-3 grid-flow-col justify-stretch  px-4 ">
+                    <h2 className="grid-cols-1">Zo. Executive. </h2> <h2 className="grid-cols-1 text-center">: </h2>
+                    <p className="font-bold text-start grid-cols-1">
+                        {selectedItem?.zonalExecutiveLabel}
+                        </p>
+                </div>
+{/*                 
                 <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
                     <h2> Mobile No. </h2> <h2>: </h2>
                     <p className="font-bold text-start">
@@ -118,7 +137,8 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
                     <p className="font-bold text-start">
                         {selectedItem?.zonalExecutiveLabel}
                     </p>
-                </div>
+                </div> */}
+                
             </div>
 
             {/* Action Icon */}
