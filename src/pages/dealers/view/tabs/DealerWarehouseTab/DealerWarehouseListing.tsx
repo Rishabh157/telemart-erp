@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
 // Filename:DealerWarehouseListing.tsx
 // Type: Tab List Component
@@ -6,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -58,6 +59,12 @@ const DealerWarehouseListing = ({
         dealerWarehouseState
 
     const params: any = useParams()
+
+    useEffect(() => {
+        return () => {
+            dispatch(setSearchValue(''))
+        }
+    }, [])
 
     return (
         <div className="h-full">
