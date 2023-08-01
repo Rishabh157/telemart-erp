@@ -104,21 +104,41 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
                 <div className=" text-black text-[13px] grid grid-cols-3 grid-flow-col justify-stretch  px-4  ">
                     <h2 className="grid-cols-1"> Mobile No. </h2> <h2 className="grid-cols-1 text-center ">: </h2>
                     <p className="font-bold text-start grid-cols-1">
-                        {selectedItem?.contactInformation[0].mobileNumber}
+                        {selectedItem?.registrationAddress.phone}
                     </p>
                 </div>
                 <div className=" text-black text-[13px] grid grid-cols-3 grid-flow-col justify-stretch  px-4  ">
                     <h2 className="grid-cols-1"> Zo. Manager </h2> <h2 className="grid-cols-1 text-center">: </h2>
                     <p className="font-bold text-start grid-cols-1">
-                        {selectedItem?.zonalManagerName}
+                        {selectedItem?.zonalManagerLabel}
                     </p>
                 </div>
                 <div className=" text-black text-[13px] grid grid-cols-3 grid-flow-col justify-stretch  px-4 ">
                     <h2 className="grid-cols-1">Zo. Executive. </h2> <h2 className="grid-cols-1 text-center">: </h2>
                     <p className="font-bold text-start grid-cols-1">
-                        {selectedItem?.zonalDistribution}
+                        {selectedItem?.zonalExecutiveLabel}
+                        </p>
+                </div>
+{/*                 
+                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
+                    <h2> Mobile No. </h2> <h2>: </h2>
+                    <p className="font-bold text-start">
+                        {selectedItem?.registrationAddress.phone}
                     </p>
                 </div>
+                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
+                    <h2> Zo. Manager </h2> <h2>: </h2>
+                    <p className="font-bold text-start">
+                        {selectedItem?.zonalManagerLabel}
+                    </p>
+                </div>
+                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4 ">
+                    <h2>Zo. Executive. </h2> <h2>: </h2>
+                    <p className="font-bold text-start">
+                        {selectedItem?.zonalExecutiveLabel}
+                    </p>
+                </div> */}
+                
             </div>
 
             {/* Action Icon */}

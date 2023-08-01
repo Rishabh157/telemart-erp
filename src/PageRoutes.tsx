@@ -75,7 +75,7 @@ import {
     SchemeListingWrapper,
     // AddTaxesWrapper,
     // TaxesListingWrapper,
-    ConfigurationLayout,
+    // ConfigurationLayout,
     DashboardWrappper,
     AddDealerWrapper,
     DealersListingWrapper,
@@ -401,7 +401,16 @@ const PageRoutes = () => {
                         />
                         <Route
                             path="return-to-vendor"
-                            element={'Return To Vendor'}
+                            element={
+                                <ActionAuthHOC
+                                    component={<>'return to vendoe'</>}
+                                    moduleName={UserModuleNameTypes.vendor}
+                                    actionName={
+                                        UserModuleTabsTypes.vendorLedger
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="ledger"
@@ -477,11 +486,31 @@ const PageRoutes = () => {
                     >
                         <Route
                             path="general-information"
-                            element={<DealerGeneralInformationTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={
+                                        <DealerGeneralInformationTabWrapper />
+                                    }
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={
+                                        UserModuleTabsTypes.generalInformation
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="warehouse"
-                            element={<DealerWarehouseTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<DealerWarehouseTabWrapper />}
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={
+                                        UserModuleTabsTypes.dealerWarehouse
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="warehouse/add-warehouse"
@@ -489,7 +518,9 @@ const PageRoutes = () => {
                                 <ActionAuthHOC
                                     component={<AddDealerWarehouseWarpper />}
                                     moduleName={UserModuleNameTypes.dealer}
-                                    actionName={UserModuleActionTypes.Add}
+                                    actionName={
+                                        UserModuleTabsTypes.dealerWarehouseAdd
+                                    }
                                     isRedirect
                                 />
                             }
@@ -507,43 +538,124 @@ const PageRoutes = () => {
                         />
                         <Route
                             path="sale-order"
-                            element={<DealerSalesOrderTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<DealerSalesOrderTabWrapper />}
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={
+                                        UserModuleTabsTypes.dealerSaleOrder
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
 
                         {/* #########################################  should add sale order*/}
 
                         <Route
                             path="ledger"
-                            element={<DealerListLedgerTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<DealerListLedgerTabWrapper />}
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={
+                                        UserModuleTabsTypes.dealerLedger
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="order-ledger"
-                            element={<DealerOrderLedgerListTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={
+                                        <DealerOrderLedgerListTabWrapper />
+                                    }
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={
+                                        UserModuleTabsTypes.dealerOrderLedger
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
 
                         <Route
                             path="activities"
-                            element={<DealerActivityTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<DealerActivityTabWrapper />}
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={
+                                        UserModuleTabsTypes.dealerActivity
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="pincode"
-                            element={<ListDealerPincodeTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<ListDealerPincodeTabWrapper />}
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={
+                                        UserModuleTabsTypes.dealerPincode
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="pincode/add"
-                            element={<AddDealerPinCodeTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<AddDealerPinCodeTabWrapper />}
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={
+                                        UserModuleTabsTypes.dealerPincodeAdd
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="scheme"
-                            element={<ListDealerSchemeTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<ListDealerSchemeTabWrapper />}
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={
+                                        UserModuleTabsTypes.dealerScheme
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="scheme/add"
-                            element={<AddDealerSchemeTabWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<AddDealerSchemeTabWrapper />}
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={
+                                        UserModuleTabsTypes.dealerSchemeAdd
+                                    }
+                                    isRedirect
+                                />
+                            }
                         />
                         <Route
                             path="scheme/edit/:schemeId"
-                            element={<EditDealerSchemeWrapper />}
+                            element={
+                                <ActionAuthHOC
+                                    component={<EditDealerSchemeWrapper />}
+                                    moduleName={UserModuleNameTypes.dealer}
+                                    actionName={UserModuleActionTypes.Edit}
+                                    isRedirect
+                                />
+                            }
                         />
                         {/* not use */}
                         {/* <Route
@@ -1153,13 +1265,23 @@ const PageRoutes = () => {
                     ></Route>
 
                     {/* Call */}
-                    <Route path="/call" element={<CallListingWrapper />} />
+                    <Route
+                        path="/call"
+                        element={
+                            <ActionAuthHOC
+                                component={<CallListingWrapper />}
+                                moduleName={UserModuleNameTypes.callerPage}
+                                actionName={UserModuleActionTypes.List}
+                                isRedirect
+                            />
+                        }
+                    />
 
-                    {/* CONFIGURATIONS */}
+                    {/* CONFIGURATIONS
                     <Route
                         path="/configurations"
                         element={<ConfigurationLayout />}
-                    />
+                    /> */}
 
                     {/* Configurations -> Attributes */}
                     <Route

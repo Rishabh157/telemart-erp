@@ -19,7 +19,10 @@ import { useParams } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SaleOrderListResponse } from 'src/models/SaleOrder.model'
-import { useGetSalesOrderByDealerIdQuery } from 'src/services/SalesOrderService'
+import {
+    useGetPaginationSaleOrderQuery,
+    // useGetSalesOrderByDealerIdQuery,
+} from 'src/services/SalesOrderService'
 import SaleOrderListing from 'src/pages/saleOrder/list/SaleOrderListing'
 
 // |-- Redux --|
@@ -34,46 +37,61 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {}
 
 const DealerSaleOrderTabWrapper = (props: Props) => {
-    const salesOrderState: any = useSelector(
-        (state: RootState) => state.saleOrder
-    )
     const params = useParams()
     const dealerId: any = params.dealerId
     const dispatch = useDispatch<AppDispatch>()
     // const { page, rowsPerPage, searchValue, items } = salesOrderState;
-    const { items } = salesOrderState
+
     //const navigate = useNavigate();
     //const [currentId, setCurrentId] = useState("");
     const [showDropdown, setShowDropdown] = useState(false)
     //const [deleteSaleOrder] = useDeleteSalesOrderMutation();
+    const salesOrderState: any = useSelector(
+        (state: RootState) => state.saleOrder
+    )
+    const { page, rowsPerPage, searchValue, items } = salesOrderState
+    // const { data, isFetching, isLoading } =
+    //     useGetSalesOrderByDealerIdQuery(dealerId)
 
-    const { data, isFetching, isLoading } =
-        useGetSalesOrderByDealerIdQuery(dealerId)
+    // useEffect(() => {
+    //     if (!isFetching && !isLoading) {
+    //         dispatch(setIsTableLoading(false))
+    //         dispatch(setItems(data?.data || []))
+    //         dispatch(setTotalItems(data?.totalItems || 4))
+    //     } else {
+    //         dispatch(setIsTableLoading(true))
+    //     }
+    // }, [isLoading, isFetching, data, dispatch])
 
+    const {
+        data: soData,
+        isFetching: soIsFetching,
+        isLoading: soIsLoading,
+    } = useGetPaginationSaleOrderQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: ['soNumber', 'dealerLabel'],
+        page: page,
+        filterBy: [
+            {
+                fieldName: 'dealerId',
+                value: dealerId,
+            },
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: true,
+    })
     useEffect(() => {
-        if (!isFetching && !isLoading) {
+        if (!soIsFetching && !soIsLoading) {
             dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItems || 4))
+            dispatch(setItems(soData?.data || []))
+            dispatch(setTotalItems(soData?.totalItem || 4))
         } else {
             dispatch(setIsTableLoading(true))
         }
-    }, [isLoading, isFetching, data, dispatch])
-
-    // const handleDelete = () => {
-    //   setShowDropdown(false);
-    //   deleteSaleOrder(currentId).then((res) => {
-    //     if ("data" in res) {
-    //       if (res?.data?.status) {
-    //         showToast("success", "Sale Order deleted successfully!");
-    //       } else {
-    //         showToast("error", res?.data?.message);
-    //       }
-    //     } else {
-    //       showToast("error", "Something went wrong, Please try again later");
-    //     }
-    //   });
-    // };
+    }, [soIsLoading, soIsFetching, soData, dispatch])
 
     const columns: columnTypes[] = [
         {

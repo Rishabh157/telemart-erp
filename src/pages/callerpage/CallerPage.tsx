@@ -1117,7 +1117,7 @@ const CallerPage: React.FC<Props> = ({
                 <div className="col-span-6 py-2  gap-x-4 border-r-[1px] px-6 border-grey-800">
                     <div className="grid grid-cols-12">
                         <div className="col-span-4 pt-1">
-                            Gander <span className="text-red-500"> * </span>
+                            Gender <span className="text-red-500"> * </span>
                         </div>
                         <div className="col-span-4">
                             <div className="-mt-5">
