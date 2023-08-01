@@ -33,7 +33,6 @@ import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUplo
 import { CircularProgress } from '@mui/material'
 import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 
-
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>

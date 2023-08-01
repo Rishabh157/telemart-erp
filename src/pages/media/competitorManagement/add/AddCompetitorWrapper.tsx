@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import {  object, string } from 'yup'
+import { object, string } from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 

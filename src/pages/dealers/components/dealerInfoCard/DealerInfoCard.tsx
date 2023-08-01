@@ -104,19 +104,19 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
                 <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
                     <h2> Mobile No. </h2> <h2>: </h2>
                     <p className="font-bold text-start">
-                        {selectedItem?.contactInformation[0].mobileNumber}
+                        {selectedItem?.registrationAddress.phone}
                     </p>
                 </div>
                 <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
                     <h2> Zo. Manager </h2> <h2>: </h2>
                     <p className="font-bold text-start">
-                        {selectedItem?.zonalManagerName}
+                        {selectedItem?.zonalManagerLabel}
                     </p>
                 </div>
                 <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4 ">
                     <h2>Zo. Executive. </h2> <h2>: </h2>
                     <p className="font-bold text-start">
-                        {selectedItem?.zonalDistribution}
+                        {selectedItem?.zonalExecutiveLabel}
                     </p>
                 </div>
             </div>

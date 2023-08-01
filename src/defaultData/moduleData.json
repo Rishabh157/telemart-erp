@@ -59,7 +59,7 @@
                     "actionId": "vendorsActionViewId",
                     "actionUrl": "/vendors/:id/general-information",
                     "actionName": "VIEW",
-                    "parentGroup": ["GENERAL_INFORMATION"],
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
@@ -211,7 +211,7 @@
                     "actionId": "dealerActionViewId",
                     "actionUrl": "/dealers/:id",
                     "actionName": "VIEW",
-                    "parentGroup": ["GENERAL_INFORMATION"],
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
@@ -456,7 +456,7 @@
                     "actionId": "warehouseActionViewId",
                     "actionUrl": "/view/:id/inventories",
                     "actionName": "VIEW",
-                    "parentGroup": ["TAB_WAREHOUSE_DETAILS"],
+                    "parentGroup": [],
                     "fields": []
                 },
                 {
@@ -491,7 +491,6 @@
                     ],
                     "fields": []
                 },
-
                 {
                     "actionId": "warehouseActionOutwardInventoriesDealerId",
                     "actionUrl": "/warehouse/view/:id/outward-inventories/dealer",
@@ -2124,7 +2123,6 @@
                     "parentGroup": [],
                     "fields": []
                 },
-
                 {
                     "actionId": "countryId",
                     "actionUrl": "",
@@ -2175,7 +2173,6 @@
                 }
             ]
         },
-
         {
             "moduleId": "languageId",
             "moduleName": "LANGUAGE",
@@ -2673,7 +2670,6 @@
                         }
                     ]
                 },
-
                 {
                     "actionId": "slotActionSlotsId",
                     "actionUrl": "/media/slot/run-slots",
