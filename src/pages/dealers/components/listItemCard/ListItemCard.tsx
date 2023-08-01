@@ -17,14 +17,10 @@ const ListItemCard = ({ item }: { item: any }) => {
     const location = useLocation()
     const pathValue = location.pathname.split('/')[3] || 'general-information'
 
-    //console.log(pathValue)
-    console.log(dealerId)
-
-    //console.log(item._id)
     return (
         <div
             id={item._id}
-            onClick={() => {
+            onClick={() => {                
                 navigate(`/dealers/${item._id}/${pathValue}`)
             }}
             key={item._id}

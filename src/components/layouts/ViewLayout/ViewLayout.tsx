@@ -77,8 +77,7 @@ const ViewLayout = ({
 
     useEffect(() => {
         const activeTabIndex = window.location.pathname.split('/')[3]
-        const tabindex = tabs.findIndex((tab) => tab.path === activeTabIndex)
-
+        const tabindex = tabs.findIndex((tab) => tab.path === activeTabIndex)        
         setActiveTab(tabindex)
     }, [tabs])
     return (
