@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
 // Filename:SaleOrderListing.tsx
 // Type: List Component
@@ -6,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -55,7 +56,11 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         saleOrderState
-
+    useEffect(() => {
+        return () => {
+            dispatch(setSearchValue(''))
+        }
+    }, [])
     return (
         <div
             className={`px-4 ${

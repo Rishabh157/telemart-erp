@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
 // Filename:WarehouseListing.tsx
 // Type: List Component
@@ -6,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -57,6 +58,11 @@ const WarehouseListing = ({
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         warehouseState
 
+    useEffect(() => {
+        return () => {
+            dispatch(setSearchValue(''))
+        }
+    }, [])
     return (
         <div className="h-full">
             {/* Page Header */}
