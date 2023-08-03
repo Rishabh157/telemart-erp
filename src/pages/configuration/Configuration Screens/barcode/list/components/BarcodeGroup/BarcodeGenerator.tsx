@@ -47,7 +47,7 @@ function AllBarcodes() {
     }, [])
 
     return (
-        <div>
+        <div className=" bg-white">
             <div className="flex justify-between items-center h-[45px]">
                 {/* <ATMPageHeading> Barcode </ATMPageHeading> */}
                 <button
