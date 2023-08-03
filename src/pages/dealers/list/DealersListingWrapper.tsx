@@ -169,7 +169,7 @@ const DealersListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetDealersQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['firstName', 'dealerCode'],
+        params: ['firstName', 'firmName', 'dealerCode'],
         page: page,
         filterBy: [
             {
