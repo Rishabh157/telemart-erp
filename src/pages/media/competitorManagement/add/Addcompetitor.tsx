@@ -204,7 +204,6 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                             <ATMTextField
                                 name="websiteLink"
                                 value={values.websiteLink}
-                                required
                                 label="Website Link"
                                 placeholder="Website Link"
                                 onChange={(e) =>

@@ -89,6 +89,7 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
                             {/* Field 3 */}
                             <ATMTextField
                                 name="pageName"
+                                required
                                 value={values.pageName}
                                 label="Page Name "
                                 placeholder="Name"
@@ -102,6 +103,7 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
 
                             <ATMTextField
                                 name="pageUrl"
+                                required
                                 value={values.pageUrl}
                                 label="Page Url"
                                 placeholder="Url"
@@ -113,9 +115,10 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
                         </div>
-                        <div className="grid grid-cols-3 gap-4 px-5">
+                        <div className="grid grid-cols-3 gap-4 px-5 py-5">
                             <ATMTextArea
                                 name="headerSpace"
+                                required
                                 value={values.headerSpace}
                                 label="Subtitle Name"
                                 onChange={(e: any) =>
@@ -125,6 +128,7 @@ const AddWebsitePage = ({ formikProps, apiStatus }: Props) => {
                             />
                             <ATMTextArea
                                 name="footerSpace"
+                                required
                                 value={values.footerSpace}
                                 label="footer Space"
                                 onChange={(e: any) =>

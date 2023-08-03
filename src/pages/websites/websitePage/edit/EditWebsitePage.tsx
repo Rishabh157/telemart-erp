@@ -89,6 +89,7 @@ const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
                             {/* Field 3 */}
                             <ATMTextField
                                 name="pageUrl"
+                                required
                                 value={values.pageUrl}
                                 label="Page Url"
                                 placeholder="Url"
@@ -102,6 +103,7 @@ const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
 
                             <ATMTextField
                                 name="pageName"
+                                required
                                 value={values.pageName}
                                 label="Page Name "
                                 placeholder="Name"
@@ -113,10 +115,11 @@ const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
                         </div>
-                        <div className="grid grid-cols-3 gap-9 px-5">
+                        <div className="grid grid-cols-3 gap-9 px-5 py-5">
                             <ATMTextArea
                                 name="headerSpace"
                                 value={values.headerSpace}
+                                required
                                 label="Subtitle Name"
                                 onChange={(e: any) =>
                                     handleSetFieldValue('headerSpace', e)
@@ -126,6 +129,7 @@ const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextArea
                                 name="footerSpace"
                                 value={values.footerSpace}
+                                required
                                 label="footer Space"
                                 onChange={(e: any) =>
                                     handleSetFieldValue('footerSpace', e)

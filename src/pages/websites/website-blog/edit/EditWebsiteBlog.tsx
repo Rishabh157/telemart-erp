@@ -90,6 +90,7 @@ const EditWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 name="blogName"
                                 value={values.blogName}
+                                required
                                 label="Blog Name"
                                 placeholder="Blog Name"
                                 onChange={(e) =>
@@ -103,6 +104,7 @@ const EditWebsiteBlog = ({ formikProps, apiStatus }: Props) => {
                             {/* Field 3 */}
                             <ATMTextField
                                 name="blogTitle"
+                                required
                                 value={values.blogTitle}
                                 label="Blog Title"
                                 placeholder="Blog Title"

@@ -89,6 +89,7 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
                             {/* Field 3 */}
                             <ATMTextField
                                 name="productName"
+                                required
                                 value={values.productName}
                                 label="Product Name"
                                 placeholder="Product Name"
@@ -103,6 +104,7 @@ const AddWebsite = ({ formikProps, apiStatus }: Props) => {
                             {/* Field 3 */}
                             <ATMTextField
                                 name="url"
+                                required
                                 value={values.url}
                                 label="URL"
                                 placeholder="URL"

@@ -118,6 +118,7 @@ const AddInitialCallThree = ({
                                 {/* languageName */}
                                 <ATMTextField
                                     name="initialCallName"
+                                    required
                                     value={values.initialCallName}
                                     label="Initial Call Name"
                                     placeholder="Name"
@@ -186,6 +187,7 @@ const AddInitialCallThree = ({
                                 <ATMSelectSearchable
                                     options={dropdownoptions.emailTypeOptions}
                                     name="emailType"
+                                    required
                                     value={values.emailType}
                                     label="Email Type"
                                     onChange={(e) =>
@@ -196,6 +198,7 @@ const AddInitialCallThree = ({
                                     options={
                                         dropdownoptions.complainttypeOptions
                                     }
+                                    required
                                     name="complaintType"
                                     value={values.complaintType}
                                     label="Complaint Type"
