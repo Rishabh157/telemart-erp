@@ -94,7 +94,7 @@ const TapeManagementListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'tapeName',
-            headerName: 'Tabe Name',
+            headerName: 'Tape Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: TapeManagementListResponse) => (
                 <span> {row.tapeName} </span>

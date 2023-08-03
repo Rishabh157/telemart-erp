@@ -144,7 +144,9 @@ const AddTapeManagementWrapper = () => {
     const validationSchema = object({
         tapeName: string().required('Required'),
         tapeType: string().required('Required'),
-        languageId: array().of(string().required('Required')),
+        languageId: array()
+            .of(string().required('Required'))
+            .min(1, 'Please select atleast one language'),
         hour: string().required('Required'),
         minute: string().required('Required'),
         second: string().required('Required'),
