@@ -147,48 +147,13 @@ const SlotRunViewsListingWrapper = () => {
             headerName: 'Run Status',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
-                    {/* {moment(row?.slotStartTime).format('hh:mm:ss') <
-                        moment(new Date()).format('hh:mm:ss') &&
-                    moment(new Date()).format('hh:mm:ss') <
-                        moment(row?.slotEndTime).format('hh:mm:ss') ? ( */}
-                    {/* <button
-                        onClick={(e) => {
-                            setRunState(row._id)
-                            setIsOpenDialog(true)
-                        }}
-                        disabled={true}
-                        className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
-                            row.runStatus === true
-                                ? 'hover:bg-green-100'
-                                : row.runStatus === false
-                                ? 'hover:bg-red-100'
-                                : 'hover:bg-orange-100'
-                        } p-2 rounded-full border
-                            ${
-                                row.runStatus === true
-                                    ? 'border-green-500'
-                                    : row.runStatus === false
-                                    ? 'border-red-500'
-                                    : 'border-orange-500'
-                            }
-                            `}
-                    >
-                        {row.runStatus ? (
-                            <TiTick />
-                        ) : row.runStatus === false ? (
-                            <FaTimes />
-                        ) : (
-                            <FaExclamation />
-                        )}
-                    </button> */}
-
+                <div className="">
                     <button
                         onClick={(e) => {
                             setRunState(row._id)
                             setIsOpenDialog(true)
                         }}
-                        className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
+                        className={`text-slate-600 font-bold m-1  transition-all duration-[600ms] ${
                             row.runStatus === true
                                 ? 'hover:bg-green-100'
                                 : row.runStatus === false
@@ -215,57 +180,7 @@ const SlotRunViewsListingWrapper = () => {
             ),
             align: 'end',
         },
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     renderCell: (row: any) => (
-        //         <ActionPopup
-        //             moduleName={UserModuleNameTypes.slotManagement}
-        //             isEdit
-        //             isDelete
-        //             handleOnAction={() => {
-        //                 setShowDropdown(!showDropdown)
-        //                 setCurrentId(row?._id)
-        //             }}
-        //             handleEditActionButton={() => {
-        //                 navigate(`edit/${row?._id}`)
-        //             }}
-        //             handleDeleteActionButton={() => {
-        //                 showConfirmationDialog({
-        //                     title: 'Delete Slot ',
-        //                     text: 'Do you want to delete Slot ?',
-        //                     showCancelButton: true,
-        //                     next: (res: any) => {
-        //                         return res.isConfirmed
-        //                             ? handleDelete()
-        //                             : setShowDropdown(false)
-        //                     },
-        //                 })
-        //             }}
-        //         />
-        //     ),
-        //     align: 'end',
-        // },
     ]
-    // const handleDelete = () => {
-    //     setShowDropdown(false)
-    //     //alert(currentId)
-    //     deleteSlotMangement(currentId).then((res: any) => {
-    //         if ('data' in res) {
-    //             if (res?.data?.status) {
-    //                 showToast('success', 'Slot deleted successfully!')
-    //             } else {
-    //                 showToast('error', res?.data?.message)
-    //             }
-    //         } else {
-    //             showToast(
-    //                 'error',
-    //                 'Something went wrong, Please try again later'
-    //             )
-    //         }
-    //     })
-    // }
 
     return (
         <>
