@@ -142,6 +142,7 @@ const AddDealerPincode = ({
                                                             {/* Item Name */}
                                                             <div className="flex-[3_3_0%]">
                                                                 <ATMSelectSearchable
+                                                                    size="small"
                                                                     isMulti
                                                                     name={`pincodeDetail[${itemIndex}].pincode`}
                                                                     value={
@@ -180,6 +181,7 @@ const AddDealerPincode = ({
                                                             {/* Rate */}
                                                             <div className="flex-[1_1_0%]">
                                                                 <ATMTextField
+                                                                    size="small"
                                                                     type="number"
                                                                     min={0}
                                                                     name={`pincodeDetail[${itemIndex}].estTime`}
@@ -215,7 +217,7 @@ const AddDealerPincode = ({
                                                                                 itemIndex
                                                                             )
                                                                         }}
-                                                                        className="p-2 bg-red-500 text-white rounded"
+                                                                        className="p-2  bg-red-500 text-white rounded"
                                                                     >
                                                                         <MdDeleteOutline className="text-2xl" />
                                                                     </button>
@@ -237,7 +239,7 @@ const AddDealerPincode = ({
                                                         estTime: 0,
                                                     })
                                                 }
-                                                className="bg-primary-main px-3 py-1 text-white rounded"
+                                                className="bg-primary-main px-3 mt-5 py-1 text-white rounded"
                                             >
                                                 <HiPlus size="20" />
                                             </button>
