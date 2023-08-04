@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
 // Filename:DealerPincodeTabWrapper.tsx
 // Type: Tab  Component
@@ -23,6 +24,7 @@ import { useGetAllPincodeQuery } from 'src/services/PinCodeService'
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllPincodes as setAllDealerPincodes } from 'src/redux/slices/pincodeSlice'
+import { useGetAllDistrictQuery } from 'src/services/DistricService'
 
 // |-- Types --|
 type Props = {}
@@ -31,7 +33,8 @@ export type FormInitialValues = {
     companyId: string
     dealerId: string
     pincodeDetail: {
-        pincode: string
+        district: string
+        pincode: string[]
         estTime: number | 0
     }[]
 }
@@ -44,7 +47,12 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
     const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const [allDistricts, setAllDistricts] = useState([])
     const [addDealerPincode] = useAddDealerPincodeMutation()
+    const dealerPincodeState: any = useSelector(
+        (state: RootState) => state.dealerPincode
+    )
+    const { items } = dealerPincodeState
 
     const {
         data: pinCodeData,
@@ -52,9 +60,26 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         isFetching: pinCodeIsFetching,
     } = useGetAllPincodeQuery('')
 
+    const {
+        data: districtData,
+        isLoading: districtIsLoading,
+        isFetching: districtIsFetching,
+    } = useGetAllDistrictQuery('')
+
     useEffect(() => {
-        dispatch(setAllDealerPincodes(pinCodeData?.data))
+        const unmatchedObjects = pinCodeData?.data.filter(
+            (item2: any) =>
+                !items.some((item1: any) => item1.pincode === item2.pincode)
+        )
+
+        dispatch(setAllDealerPincodes(unmatchedObjects))
     }, [pinCodeData, pinCodeIsLoading, pinCodeIsFetching, dispatch])
+
+    useEffect(() => {
+        if (!districtIsLoading && !districtIsFetching) {
+            setAllDistricts(districtData?.data)
+        }
+    }, [districtData, districtIsLoading, districtIsFetching])
 
     const { allPincodes: pincodeItems }: any = useSelector(
         (state: RootState) => state?.pincode
@@ -67,12 +92,20 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         }
     })
 
+    const DistrictOptions = allDistricts?.map((ele: any) => {
+        return {
+            label: ele.districtName,
+            value: ele._id,
+        }
+    })
+
     const initialValues: FormInitialValues = {
         companyId: companyId,
         dealerId: dealerId,
         pincodeDetail: [
             {
-                pincode: '',
+                district: '',
+                pincode: [],
                 estTime: 0,
             },
         ],
@@ -84,7 +117,9 @@ const DealerPinCodeTabWrapper = (props: Props) => {
                 estTime: number()
                     .min(1, 'Please enter estimated time')
                     .required('Please enter estimated time'),
-                pincode: string().required('Please select any pincode'),
+                pincode: array()
+                    .of(string().required('Required'))
+                    .min(1, 'Required'),
             })
         ),
     })
@@ -92,11 +127,14 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-
+        const newPincodeDetail = values.pincodeDetail.map((ele: any) => {
+            const { district, ...rest } = ele // use object destructuring to remove the _id property
+            return rest // return the new object without the _id property
+        })
         setTimeout(() => {
             addDealerPincode({
                 dealerId: values.dealerId || '',
-                pincodeDetail: values.pincodeDetail,
+                pincodeDetail: newPincodeDetail,
                 companyId: values.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
@@ -127,6 +165,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
                             apiStatus={apiStatus}
                             formikProps={formikProps}
                             pincodeOptions={pincodeOptions}
+                            DistrictOptions={DistrictOptions}
                         />
                     )
                 }}

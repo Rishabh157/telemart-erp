@@ -19,7 +19,7 @@ export type DealersPincodeListResponse = {
 }
 
 export type pincodeDetail = {
-    pincode: string
+    pincode: string[]
     estTime: number
 }
 

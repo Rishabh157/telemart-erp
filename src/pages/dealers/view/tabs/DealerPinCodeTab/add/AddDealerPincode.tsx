@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
 // Filename:AddDealerPincode.tsx
 // Type: Tab Add Component
@@ -6,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
@@ -14,20 +15,23 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 
 // |-- Internal Dependencies --|
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './DealerPinCodeTabWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { showToast } from 'src/utils'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useGetPincodesByDistrictQuery } from 'src/services/DealerPincodeService'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     pincodeOptions: any[]
+    DistrictOptions: any[]
     apiStatus: boolean
 }
 export type DropdownOptions = {
     pincodeOptions: SelectOption[]
+    DistrictOptions: SelectOption[]
 }
 
 // Breadcrumbs
@@ -35,13 +39,36 @@ export type DropdownOptions = {
 const AddDealerPincode = ({
     formikProps,
     pincodeOptions,
+    DistrictOptions,
     apiStatus,
 }: Props) => {
     const dropdownOptions: DropdownOptions = {
         pincodeOptions,
+        DistrictOptions,
     }
+    const [districtPincodes, setDistrictPincodes] = useState([])
+    const [selectedDistrict, setDistrict] = useState()
+    const [itemIndex, setitemIndex] = useState()
 
+    const { data, isLoading, isFetching } = useGetPincodesByDistrictQuery(
+        selectedDistrict,
+        { skip: !selectedDistrict }
+    )
     const { values, setFieldValue } = formikProps
+
+    useEffect(() => {
+        if (!isLoading && !isFetching) {
+            let pincodes = data?.data?.map((ele: any) => {
+                return ele?.pincode
+            })
+
+            setDistrictPincodes(pincodes)
+        }
+    }, [data, isLoading, isFetching])
+
+    useEffect(() => {
+        setFieldValue(`pincodeDetail[${itemIndex}].pincode`, districtPincodes)
+    }, [districtPincodes])
 
     return (
         <div className="">
@@ -75,17 +102,47 @@ const AddDealerPincode = ({
                                         <div className="flex flex-col gap-y-5">
                                             {values.pincodeDetail?.map(
                                                 (item: any, itemIndex: any) => {
-                                                    const { pincode, estTime } =
-                                                        item
+                                                    const {
+                                                        pincode,
+                                                        estTime,
+                                                        district,
+                                                    } = item
 
                                                     return (
                                                         <div
                                                             key={itemIndex}
                                                             className="flex gap-3 items-end "
                                                         >
+                                                            <div className="flex-[1_1_0%]">
+                                                                <ATMSelectSearchable
+                                                                    name={`pincodeDetail[${itemIndex}].district`}
+                                                                    value={
+                                                                        district
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) => {
+                                                                        setitemIndex(
+                                                                            itemIndex
+                                                                        )
+                                                                        setDistrict(
+                                                                            e
+                                                                        )
+                                                                        setFieldValue(
+                                                                            `pincodeDetail[${itemIndex}].district`,
+                                                                            e
+                                                                        )
+                                                                    }}
+                                                                    options={
+                                                                        dropdownOptions.DistrictOptions
+                                                                    }
+                                                                    label="District"
+                                                                />
+                                                            </div>
                                                             {/* Item Name */}
                                                             <div className="flex-[3_3_0%]">
-                                                                <ATMSelect
+                                                                <ATMSelectSearchable
+                                                                    isMulti
                                                                     name={`pincodeDetail[${itemIndex}].pincode`}
                                                                     value={
                                                                         pincode
@@ -100,15 +157,11 @@ const AddDealerPincode = ({
                                                                                 ) =>
                                                                                     f.pincode ===
                                                                                     e
-                                                                                        .target
-                                                                                        .value
                                                                             )
                                                                         ) {
                                                                             setFieldValue(
                                                                                 `pincodeDetail[${itemIndex}].pincode`,
                                                                                 e
-                                                                                    .target
-                                                                                    .value
                                                                             )
                                                                         } else {
                                                                             showToast(
@@ -125,7 +178,7 @@ const AddDealerPincode = ({
                                                             </div>
 
                                                             {/* Rate */}
-                                                            <div className="flex-[2_2_0%]">
+                                                            <div className="flex-[1_1_0%]">
                                                                 <ATMTextField
                                                                     type="number"
                                                                     min={0}
