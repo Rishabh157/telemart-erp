@@ -29,7 +29,7 @@ export enum UserModuleWarehouseTabsTypes {
     inwardInventories = 'TAB_WAREHOUSE_INWARD_INVENTORIES',
     inwardInventoriesDealer = 'TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER',
     inwardInventoriesCustomer = 'TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER',
-    inwardInventoriesRTV = 'TAB_WAREHOUSE_INWARD_INVENTORIES_RTV',
+    // inwardInventoriesRTV = 'TAB_WAREHOUSE_INWARD_INVENTORIES_RTV',
     inwardInventoriesWareHouse = 'TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE',
     inwardInventoriesSample = 'TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE',
     inwardInventoriesECommerce = 'TAB_WAREHOUSE_INWARD_INVENTORIES_E_COMMERCE',

@@ -239,7 +239,6 @@ import OutwardEcomTabsListingWrapper from './pages/inventories/outward/Ecom/Outw
 import OutwardReplacementTabsListingWrapper from './pages/inventories/outward/Replacement/OutwardReplacementTabsListingWrapper'
 import InwardEcomTabsListingWrapper from './pages/inventories/inward/Ecom/InwardEcomTabsListingWrapper'
 import InwardReplacementTabsListingWrapper from './pages/inventories/inward/Replacement/InwardReplacementTabsListingWrapper'
-import InwardRTVTabsListingWrapper from './pages/inventories/inward/Rtv/InwardRTVTabsListingWrapper'
 import InwardSampleTabsListingWrapper from './pages/inventories/inward/Sample/InwardSampleTabsListingWrapper'
 import InwardWarehouseTabsListingWrapper from './pages/inventories/inward/Warehouse/InwardWarehouseTabsListingWrapper'
 import OutwardCompanyTabsListingWrapper from './pages/inventories/outward/Company/OutwardCompanyTabsListingWrapper'
@@ -980,23 +979,7 @@ const PageRoutes = () => {
                                     />
                                 }
                             />
-                            <Route
-                                path="rtv"
-                                element={
-                                    <ActionAuthHOC
-                                        component={
-                                            <InwardRTVTabsListingWrapper />
-                                        }
-                                        moduleName={
-                                            UserModuleNameTypes.wareHouse
-                                        }
-                                        actionName={
-                                            UserModuleWarehouseTabsTypes.inwardInventoriesRTV
-                                        }
-                                        isRedirect
-                                    />
-                                }
-                            />
+
                             <Route
                                 path="warehoue"
                                 element={

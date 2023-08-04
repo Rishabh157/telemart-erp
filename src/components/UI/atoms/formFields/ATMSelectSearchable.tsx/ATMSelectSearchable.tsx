@@ -84,10 +84,11 @@ const ATMSelectSearchable = ({
             borderWidth: 0,
             boxShadow: 'none',
             minHeight: 'unset',
-            height: size === 'xs' ? '28px' : '',
+            height: size === 'xs' ? '28px' : size === 'small' ? '35px' : '',
             display: 'flex',
             alignItems: 'center',
-            paddingTop: size === 'xs' ? '1px' : '2px',
+            paddingTop:
+                size === 'xs' ? '1px' : size === 'small' ? '1.5px' : '2px',
         }),
         valueContainer: (provided: any) => ({
             ...provided,

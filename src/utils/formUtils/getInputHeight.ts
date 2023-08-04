@@ -5,7 +5,7 @@ export const getInputHeight = (size: Size, inNumber?: boolean) => {
         case 'xs':
             return inNumber ? 28 : 'h-[30px]'
         case 'small':
-            return inNumber ? 40 : 'h-[40px]'
+            return inNumber ? 40 : 'h-[37px]'
         case 'medium':
             return inNumber ? 55 : 'h-[55px]'
         case 'large':

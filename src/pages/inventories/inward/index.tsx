@@ -23,12 +23,7 @@ const tabs: Tabs[] = [
         path: 'customer',
         name: 'TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER',
     },
-    {
-        label: 'RTV',
-        icon: MdOutbond,
-        path: 'rtv',
-        name: 'TAB_WAREHOUSE_INWARD_INVENTORIES_RTV',
-    },
+
     {
         label: 'Warehouse',
         icon: MdOutbond,
