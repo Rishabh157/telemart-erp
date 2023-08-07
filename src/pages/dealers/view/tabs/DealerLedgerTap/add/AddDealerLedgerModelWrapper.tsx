@@ -36,6 +36,7 @@ export type FormInitialValues = {
     remark: string
     dealerId: string
     companyId: string
+    taxAmount: number
 }
 
 const AddDealerLedgerModelWrapper: React.FC<PropsType> = ({
@@ -57,6 +58,7 @@ const AddDealerLedgerModelWrapper: React.FC<PropsType> = ({
         remark: '',
         dealerId: '',
         companyId: '',
+        taxAmount: 0,
     }
 
     const validationSchema = object({
@@ -76,6 +78,7 @@ const AddDealerLedgerModelWrapper: React.FC<PropsType> = ({
                 remark: values?.remark,
                 companyId: companyId || '',
                 dealerId: dealerId,
+                taxAmount: values.taxAmount,
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

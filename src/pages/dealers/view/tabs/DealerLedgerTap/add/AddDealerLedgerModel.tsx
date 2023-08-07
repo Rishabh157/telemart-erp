@@ -77,6 +77,23 @@ const AddDealerLedgerModel = ({ formikProps, apiStatus, addType }: Props) => {
                         />
                     </div>
                     <div>
+                        <ATMTextField
+                            name={'taxAmount'}
+                            value={values.taxAmount}
+                            label="Tax Amount"
+                            placeholder="Tax Amount"
+                            onChange={(e) => {
+                                const inputValue = e.target.value
+                                if (!isNaN(Number(inputValue))) {
+                                    setFieldValue(
+                                        'taxAmount',
+                                        e.target.value
+                                    )
+                                }
+                            }}
+                        />
+                    </div>
+                    <div>
                         <ATMTextArea
                             name={'remark'}
                             value={values.remark}
@@ -96,9 +113,8 @@ const AddDealerLedgerModel = ({ formikProps, apiStatus, addType }: Props) => {
                     type="button"
                     disabled={apiStatus}
                     onClick={() => formikProps.handleSubmit()}
-                    className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                        true ? 'disabled:opacity-25' : ''
-                    }`}
+                    className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
+                        }`}
                 >
                     Submit
                 </button>

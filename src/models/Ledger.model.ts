@@ -36,6 +36,7 @@ export type LedgerAdd = {
     remark: string
     companyId: string
     dealerId: string
+    taxAmount: number
 }
 
 export type UpdateLedger = {
