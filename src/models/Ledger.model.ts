@@ -24,6 +24,7 @@ export type LedgerListResponse = {
     isDeleted: boolean
     createdAt: Date | number
     updatedAt: Date | number
+    taxAmount: number
     _id: string
     __v: number
 }
