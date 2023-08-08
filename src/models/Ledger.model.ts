@@ -24,6 +24,7 @@ export type LedgerListResponse = {
     isDeleted: boolean
     createdAt: Date | number
     updatedAt: Date | number
+    taxAmount: number
     _id: string
     __v: number
 }
@@ -36,6 +37,7 @@ export type LedgerAdd = {
     remark: string
     companyId: string
     dealerId: string
+    taxAmount: number
 }
 
 export type UpdateLedger = {
