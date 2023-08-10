@@ -101,6 +101,14 @@ const DealerListLedgerTabWrapper = () => {
             ),
         },
         {
+            field: 'taxAmount',
+            headerName: 'Tax Amount',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: LedgerListResponse) => (
+                <span>{row.taxAmount} </span>
+            ),
+        },
+        {
             field: 'balance',
             headerName: 'Balance',
             flex: 'flex-[1.5_1.5_0%]',
@@ -108,20 +116,13 @@ const DealerListLedgerTabWrapper = () => {
                 <span> {row.balance} </span>
             ),
         },
+
         {
             field: 'noteType',
             headerName: 'Note Type',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
                 <span> {ledgerNoteType[row.noteType]} </span>
-            ),
-        },
-        {
-            field: 'taxAmount',
-            headerName: 'Tax Amount',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: LedgerListResponse) => (
-                <span>{row.taxAmount} </span>
             ),
         },
     ]

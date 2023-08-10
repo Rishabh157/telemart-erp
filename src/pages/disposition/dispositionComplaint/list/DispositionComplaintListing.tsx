@@ -102,7 +102,7 @@ const DispositionComplaintListing = ({
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    isFilter
+                    // isFilter
                 />
 
                 {/* Table */}

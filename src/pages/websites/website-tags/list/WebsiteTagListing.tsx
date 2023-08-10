@@ -86,7 +86,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    isFilter
+                    // isFilter
                     isRefresh
                     onFilterDispatch={() => dispatch(setFilterValue([]))}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}

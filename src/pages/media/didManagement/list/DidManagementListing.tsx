@@ -93,7 +93,7 @@ const DidManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    isFilter
+                    // isFilter
                 />
 
                 {/* Table */}

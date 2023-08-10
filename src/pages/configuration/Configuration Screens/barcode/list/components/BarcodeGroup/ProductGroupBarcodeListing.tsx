@@ -67,7 +67,7 @@ const ProductGroupListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onFilterClick={() => {}}
-                    isFilter
+                    // isFilter
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                 />
 
