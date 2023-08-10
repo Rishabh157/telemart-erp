@@ -546,16 +546,18 @@ const CallerPageWrapper = () => {
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
-                        <CallerPage
-                            // apiStatus={apiStatus}
-                            isLoading={UpdateCallerFormInfo.isLoading}
-                            formikProps={formikProps}
-                            dropdownOptions={dropdownOptions}
-                            schemeColumn={columns}
-                            didItems={didItems}
-                            column={columns}
-                            rows={items}
-                        />
+                        <form autoComplete="off">
+                            <CallerPage
+                                // apiStatus={apiStatus}
+                                isLoading={UpdateCallerFormInfo.isLoading}
+                                formikProps={formikProps}
+                                dropdownOptions={dropdownOptions}
+                                schemeColumn={columns}
+                                didItems={didItems}
+                                column={columns}
+                                rows={items}
+                            />
+                        </form>
                     )
                 }}
             </Formik>

@@ -251,6 +251,7 @@ const ATMSelectSearchable = ({
                         (options.value as string) === ''
                     }
                     placeholder={`${selectLabel}`}
+                    autoFocus={false}
 
                     // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
                 />

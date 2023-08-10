@@ -130,6 +130,7 @@ const ATMTextField = ({
                     } ${className}`}
                     {...rest}
                     onBlur={onBlur}
+                    autoComplete="off"
                 />
             </div>
             {type === 'password' ? (
