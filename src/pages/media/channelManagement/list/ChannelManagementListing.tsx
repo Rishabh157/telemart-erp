@@ -99,7 +99,7 @@ const ChannelManagementListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    isFilter
+                    // isFilter
                 />
 
                 {/* Table */}

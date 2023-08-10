@@ -175,7 +175,7 @@ const OrderListing = ({ tabName }: { tabName: string }) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    isFilter
+                    // isFilter
                     isRefresh
                     onFilterDispatch={() => dispatch(setFilterValue([]))}
                 />

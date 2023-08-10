@@ -67,7 +67,7 @@ const GRNListing = ({ columns, rows }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    isFilter
+                    // isFilter
                     isRefresh
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     onFilterDispatch={() => dispatch(setFilterValue([]))}

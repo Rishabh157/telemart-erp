@@ -217,7 +217,7 @@ const InquiryListingWrapper = () => {
                         onSearch={(newValue) =>
                             dispatch(setSearchValue(newValue))
                         }
-                        isFilter
+                        // isFilter
                         // isRefresh
                         // onFilterDispatch={() => dispatch(setFilterValue([]))}
                     />
