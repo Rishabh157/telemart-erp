@@ -83,7 +83,7 @@ const WebsitePageListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    isFilter
+                    // isFilter
                     isRefresh
                     onFilterDispatch={() => dispatch(setFilterValue([]))}
                 />

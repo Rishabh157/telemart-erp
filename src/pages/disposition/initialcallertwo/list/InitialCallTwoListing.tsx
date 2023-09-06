@@ -83,7 +83,7 @@ const InitialCallTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    isFilter
+                    // isFilter
                 />
 
                 {/* Table */}

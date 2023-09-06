@@ -80,7 +80,7 @@ const CartonBoxBarcodeListing = ({
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    isFilter
+                    // isFilter
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                 />
 
