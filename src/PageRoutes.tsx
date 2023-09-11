@@ -245,6 +245,9 @@ import OutwardCompanyTabsListingWrapper from './pages/inventories/outward/Compan
 import InwardCompanyTabsListingWrapper from './pages/inventories/inward/Company/InwardCompanyTabsListingWrapper'
 import ViewSlot from './pages/media/slotManagement'
 import SlotRunViewsListingWrapper from './pages/media/slotManagement/slotRunView/SlotRunViewsListingWrapper'
+import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScreens/companyBranch/list/CompanyBranchListingWrapper'
+import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
+import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1602,6 +1605,41 @@ const PageRoutes = () => {
                             <ActionAuthHOC
                                 component={<EditCompanyWrapper />}
                                 moduleName={UserModuleNameTypes.company}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
+                    />
+
+                    {/* Configurations -> CompanyBranch */}
+                    <Route
+                        path="/configurations/company-branch"
+                        element={
+                            <AuthHOC
+                                component={
+                                    <CompanyBranchListingWrapper />
+                                }
+                                moduleName={UserModuleNameTypes.companyBranch}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/configurations/company-branch/add"
+                        element={
+                            <ActionAuthHOC
+                                component={<AddCompanyBranchWrapper />}
+                                moduleName={UserModuleNameTypes.companyBranch}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="/configurations/company-branch/:id"
+                        element={
+                            <ActionAuthHOC
+                                component={<EditCompanyBranchWrapper />}
+                                moduleName={UserModuleNameTypes.companyBranch}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
                             />

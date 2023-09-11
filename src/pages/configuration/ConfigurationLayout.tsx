@@ -98,6 +98,12 @@ const configurationNavigation: NavItemType[] = [
         name: UserModuleNameTypes.company,
     },
     {
+        label: 'Company Branch',
+        icon: CgOrganisation,
+        path: '/configurations/company-branch',
+        name: UserModuleNameTypes.company,
+    },
+    {
         label: 'Barcode',
         icon: CiBarcode,
         path: '/configurations/barcode',

@@ -56,6 +56,11 @@ export type {
     UpdateCompany,
 } from './Company.model'
 export type {
+    CompanyBranchListResponse,
+    AddCompanyBranch,
+    UpdateCompanyBranch,
+} from './CompanyBranch.model'
+export type {
     WarehousesListResponse,
     AddWarehouse,
     UpdateWarehouse,

@@ -41,6 +41,7 @@ interface UserData {
     userDepartment: string
     userRole: string
     companyId: string
+    branchId: string
     password?: string
     allowedIp: string[]
 }
@@ -50,6 +51,7 @@ export type FormInitialValues = {
     userName: string
     mobile: string
     email: string
+    branchId: string
     password: string
     userDepartment: string
     userRole: string
@@ -89,6 +91,7 @@ const EditUserWrapper = (props: Props) => {
 
         mobile: selectedItem?.mobile || '',
         email: selectedItem?.email || '',
+        branchId: selectedItem?.branchId || '',
         password: '',
         userDepartment: selectedItem?.userDepartment || '',
         userRole: selectedItem?.userRole || '',
@@ -108,6 +111,7 @@ const EditUserWrapper = (props: Props) => {
             .trim()
             .matches(regIndiaPhone, 'Invalid Mobile Number'),
         email: string().email('Invalid Email ID').required('Email is required'),
+        branchId: string().required('branch name is required'),
         password: string(),
         userDepartment: string().required('User Department is required'),
         userRole: string().required('User Role is required'),
@@ -127,6 +131,7 @@ const EditUserWrapper = (props: Props) => {
                 userName: values.userName || '',
                 mobile: values.mobile || '',
                 email: values.email || '',
+                branchId: values.branchId || '',
                 userDepartment: values.userDepartment || '',
                 userRole: values.userRole || '',
                 companyId: values.companyId || '',

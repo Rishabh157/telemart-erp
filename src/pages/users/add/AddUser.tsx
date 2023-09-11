@@ -31,6 +31,8 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { HiPlus } from 'react-icons/hi'
 import { MdDeleteOutline } from 'react-icons/md'
+import { CompanyBranchListResponse } from 'src/models'
+import { useGetAllCompaniesBranchQuery } from 'src/services/CompanyBranchService'
 
 // |-- Types --|
 type Props = {
@@ -52,6 +54,25 @@ const breadcrumbs: BreadcrumbType[] = [
 const AddUser = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
     const [userRole, setuserRole] = useState<any[]>([])
+
+    const [branchOptionList, setBranchOptionList] = useState([])
+
+    const { data, isFetching, isLoading } = useGetAllCompaniesBranchQuery('')
+
+    useEffect(() => {
+        if (!isFetching && !isLoading) {
+            const companyBranchList = data?.data?.map(
+                (ele: CompanyBranchListResponse) => {
+                    return {
+                        label: ele?.branchName,
+                        value: ele?._id,
+                    }
+                }
+            )
+            setBranchOptionList(companyBranchList)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading, isFetching, data])
 
     useEffect(() => {
         const departmentroles = getHierarchyByDept({
@@ -154,6 +175,19 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                     handleSetFieldValue('email', e.target.value)
                                 }
                             />
+
+                            {/* Branch Name */}
+                            <ATMSelectSearchable
+                                required
+                                name="branchId"
+                                value={values.branchId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('branchId', e)
+                                }
+                                options={branchOptionList}
+                                label="Branch Name"
+                            />
+
                             {/* Password */}
                             <ATMTextField
                                 name="password"

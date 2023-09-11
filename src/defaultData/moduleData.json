@@ -382,8 +382,18 @@
                         },
                         {
                             "fieldId": "4",
+                            "fieldName": "Branch Name",
+                            "fieldValue": "branchLabel"
+                        },
+                        {
+                            "fieldId": "5",
                             "fieldName": "User Department",
                             "fieldValue": "userDepartment"
+                        },
+                        {
+                            "fieldId": "6",
+                            "fieldName": "User Role",
+                            "fieldValue": "userRole"
                         }
                     ]
                 },
@@ -2064,6 +2074,51 @@
                 },
                 {
                     "actionId": "companyActionDeleteId",
+                    "actionUrl": "",
+                    "actionName": "DELETE",
+                    "parentGroup": [],
+                    "fields": []
+                }
+            ]
+        },
+        {
+            "moduleId": "companyBranchId",
+            "moduleName": "COMPANY_BRANCH",
+            "moduleAction": [
+                {
+                    "actionId": "companyBranchActionListId",
+                    "actionUrl": "/configurations/company-branch",
+                    "actionName": "LIST",
+                    "parentGroup": [],
+                    "fields": [
+                        {
+                            "fieldId": "1",
+                            "fieldName": "Company Name",
+                            "fieldValue": "companyLabel"
+                        },
+                        {
+                            "fieldId": "2",
+                            "fieldName": "Branch Name",
+                            "fieldValue": "branchName"
+                        }
+                    ]
+                },
+                {
+                    "actionId": "companyBranchActionAddId",
+                    "actionUrl": "",
+                    "actionName": "ADD",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "companyBranchActionEditId",
+                    "actionUrl": "",
+                    "actionName": "EDIT",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "companyBranchActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
                     "parentGroup": [],
