@@ -33,6 +33,7 @@ export type FormInitialValues = {
     userName: string
     mobile: string
     email: string
+    branchId: string
     password: string
     userDepartment: string
     userRole: string
@@ -56,6 +57,7 @@ const AddUserWrapper = (props: Props) => {
         userName: '',
         mobile: '',
         email: '',
+        branchId: '',
         password: '',
         userDepartment: '',
         userRole: '',
@@ -80,15 +82,14 @@ const AddUserWrapper = (props: Props) => {
             .trim()
             .matches(regIndiaPhone, 'Invalid Mobile Number'),
         email: string().email('Invalid Email ID').required('Email is required'),
+        branchId: string().required('branch name is required'),
         userDepartment: string().required('User Department is required'),
         userRole: string().required('User Role is required'),
-
         password: string().required('Password is required'),
     })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
-        console.log(values)
         let newAllowedIp = values?.allowedIps.map((ele) => {
             return ele.allowedIp
         })
@@ -102,6 +103,7 @@ const AddUserWrapper = (props: Props) => {
                 userName: values.userName || '',
                 mobile: values.mobile || '',
                 email: values.email || '',
+                branchId: values.branchId || '',
                 password: values.password || '',
                 userDepartment: values.userDepartment || '',
                 userRole: values.userRole || '',

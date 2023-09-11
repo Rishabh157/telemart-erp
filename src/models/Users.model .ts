@@ -91,6 +91,7 @@ export type AddNewUser = {
     userName: string
     mobile: string
     email: string
+    branchId: string
     userDepartment: string
     userRole: string
     password: string

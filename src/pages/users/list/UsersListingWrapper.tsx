@@ -100,6 +100,11 @@ const UsersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
         },
         {
+            field: 'branchLabel',
+            headerName: 'Branch Name',
+            flex: 'flex-[1_1_0%]',
+        },
+        {
             field: 'userDepartment',
             headerName: 'User Department',
             flex: 'flex-[1_1_0%]',
