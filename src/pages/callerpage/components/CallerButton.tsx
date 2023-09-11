@@ -14,12 +14,15 @@ const CallerButton = ({
     isLoading = false,
     type = 'button',
     disabled,
+
+    onClick,
     ...rest
 }: Props) => {
     return (
         <>
             <button
-                type={type}
+                onClick={onClick}
+                type={"button"}
                 disabled={disabled}
                 className={twMerge(
                     `border w-full bg-[#15616E] text-white rounded p-2  h-[42px] flex gap-2 justify-center items-center ${className} ${

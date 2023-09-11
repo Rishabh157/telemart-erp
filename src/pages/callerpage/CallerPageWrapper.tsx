@@ -283,7 +283,7 @@ const CallerPageWrapper = () => {
             instagram: '',
         },
         medicalIssue: [],
-        paymentMode: '',
+        paymentMode: 'COD',
         remark: '',
         dispositionLevelTwoId: null,
         dispositionLevelThreeId: null,
@@ -466,6 +466,7 @@ const CallerPageWrapper = () => {
 
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
+        console.log("first")
         const callerDetails: any = localStorage.getItem('callerPageData')
         let callerDataItem = JSON.parse(callerDetails)
         // setApiStatus(true)
@@ -473,7 +474,8 @@ const CallerPageWrapper = () => {
             UpdateCallerForm({
                 body: {
                     ...values,
-                    countryId: callerDataItem?.companyId,
+                    companyId: callerDataItem?.companyId,
+                    agentId: callerDataItem?.agentId,
                 },
                 id: callerDataItem?.orderID,
             }).then((res: any) => {
@@ -512,6 +514,7 @@ const CallerPageWrapper = () => {
                                 mobileNo: initialValues.mobileNo,
                                 didNo: initialValues.didNo,
                                 companyId: res?.data?.data?.companyId,
+                                agentId: res?.data?.data?.agentId,
                             }
                             localStorage.setItem(
                                 'callerPageData',

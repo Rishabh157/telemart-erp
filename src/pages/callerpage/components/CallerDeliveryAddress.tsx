@@ -102,6 +102,11 @@ const CallerDeliveryAddress = ({
                 break
         }
     }
+    const addressOptions =[
+        { label: 'Home', value: 'home' },
+        { label: 'Office', value: 'office' },
+        { label: 'Other', value: 'other' },
+    ]
     return (
         <>
             <div className="bg-[#87527C] p-2">
@@ -329,11 +334,7 @@ const CallerDeliveryAddress = ({
                         selectLabel="select address"
                         name="typeOfAddress"
                         value={values.typeOfAddress || ''}
-                        options={[
-                            { label: 'Home', value: 'home' },
-                            { label: 'Office', value: 'office' },
-                            { label: 'Other', value: 'other' },
-                        ]}
+                        options={addressOptions}
                         onChange={(e) => {
                             setFieldValue('typeOfAddress', e)
                         }}
