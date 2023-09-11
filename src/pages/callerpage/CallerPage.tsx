@@ -30,7 +30,7 @@ import CallerScheme from './components/CallerScheme'
 import CallerDeliveryAddress from './components/CallerDeliveryAddress'
 import CallerOtherDetails from './components/CallerOtherDetails'
 export type dropdownOptions = {
-    counrtyOptions: SelectOption[]
+    // counrtyOptions: SelectOption[]
     stateOptions?: SelectOption[] | []
     districtOptions?: SelectOption[] | []
     pincodeOptions?: SelectOption[] | []
@@ -85,7 +85,9 @@ const CallerPage: React.FC<Props> = ({
     rows,
     isLoading,
 }) => {
-    const companyId = '645b7733266c589640740832'
+    const callerDetails: any = localStorage.getItem('callerPageData')
+    let callerDataItem = JSON.parse(callerDetails)
+    const companyId = callerDataItem?.companyId || ''
 
     const [schemeDetails, setSchemeDetails] = useState<SchemeDetailsPropTypes>({
         schemeName: '',
@@ -132,7 +134,9 @@ const CallerPage: React.FC<Props> = ({
         data: productGroupData,
         isLoading: isProductGroupLoading,
         isFetching: isProductGroupFetching,
-    } = useGetAllProductGroupUnAuthQuery(companyId)
+    } = useGetAllProductGroupUnAuthQuery(companyId,{
+        skip:!companyId
+    })
 
     useEffect(() => {
         if (!isProductGroupLoading && !isProductGroupFetching) {
@@ -309,14 +313,13 @@ const CallerPage: React.FC<Props> = ({
 
     return (
         <div className="bg-white px-4 h-[2000px]">
-            <CallerPageTopNav />
+            <CallerPageTopNav agentName={values.agentName as string} />
             <CallerHeader
                 CampaignName={values.campaign || ''}
-                CallType="INBOUND"
+                CallType={values.callType}
                 IncomingNo={values.mobileNo}
-                CustomerName={values.agentName || ''}
+                CustomerName={'' || ''}
                 DidNumber={values.didNo}
-                Status="Status"
             />
             <CallerScheme
                 values={values}

@@ -6,7 +6,7 @@ interface CallerHeaderPropsTypes {
     IncomingNo: string
     CustomerName: string
     DidNumber: string
-    Status: String
+    Status?: String
 }
 
 const CallerHeader = ({
@@ -15,7 +15,7 @@ const CallerHeader = ({
     IncomingNo,
     CustomerName,
     DidNumber,
-    Status,
+    // Status,
 }: CallerHeaderPropsTypes) => {
     return (
         <div className="bg-[#87527C] py-3 px-2">
@@ -67,12 +67,12 @@ const CallerHeader = ({
                     </div>
                 </div>
                 <div>
-                    <h3 className="text-white font-extrabold text-[14px]">
+                    {/* <h3 className="text-white font-extrabold text-[14px]">
                         Whatsapp
                     </h3>
                     <div className=" bg-white text-center p-1 rounded bedge text-[#15616E] text-[14px] font-bold">
                         {Status}
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

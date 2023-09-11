@@ -205,7 +205,29 @@ const CallerDeliveryAddress = ({
                             )
                         }}
                     />
-                    <ATMSelectSearchable
+                       <ATMSelectSearchable
+                        componentClass="mt-2"
+                        label="District"
+                        size="xs"
+                        selectLabel="select district"
+                        labelDirection="horizontal"
+                        classDirection="grid grid-cols-3"
+                        name="districtId"
+                        value={values.districtId || ''}
+                        options={dropdownOptions.districtOptions || []}
+                        isValueWithLable
+                        onChange={(e) => {
+                            setFieldValue('districtId', e?.value || '')
+                            setFieldValue('districtLabel', e?.label || '')
+                            setFieldValue(
+                                'autoFillingShippingAddress',
+                                `${values.pincodeLabel}\n${
+                                    values.stateLabel
+                                }\n${values.areaLabel}\n${e?.label || ''}`
+                            )
+                        }}
+                    />
+                    {/* <ATMSelectSearchable
                         componentClass="mt-2"
                         label="City/Village"
                         size="xs"
@@ -228,54 +250,12 @@ const CallerDeliveryAddress = ({
                             //     `${values.pincodeLabel}\n${values.stateLabel}\n${e?.label|| ''}`
                             // )
                         }}
-                    />
+                    /> */}
                 </div>
 
                 <div className="col-span-4 py-2 px-8   border-r-[1px]">
-                    <ATMSelectSearchable
-                        componentClass="  mt-2"
-                        label="Area"
-                        size="xs"
-                        selectLabel="select area"
-                        labelDirection="horizontal"
-                        classDirection="grid grid-cols-3"
-                        name="areaId"
-                        value={values.areaId || ''}
-                        options={dropdownOptions.areaOptions || []}
-                        isValueWithLable
-                        onChange={(e) => {
-                            setFieldValue('areaId', e?.value || '')
-                            setFieldValue('areaLabel', e?.label || '')
-                            setFieldValue(
-                                'autoFillingShippingAddress',
-                                `${values.pincodeLabel}\n${
-                                    values.stateLabel
-                                }\n${e?.label || ''}`
-                            )
-                        }}
-                    />
-                    <ATMSelectSearchable
-                        componentClass="mt-2"
-                        label="District"
-                        size="xs"
-                        selectLabel="select district"
-                        labelDirection="horizontal"
-                        classDirection="grid grid-cols-3"
-                        name="districtId"
-                        value={values.districtId || ''}
-                        options={dropdownOptions.districtOptions || []}
-                        isValueWithLable
-                        onChange={(e) => {
-                            setFieldValue('districtId', e?.value || '')
-                            setFieldValue('districtLabel', e?.label || '')
-                            setFieldValue(
-                                'autoFillingShippingAddress',
-                                `${values.pincodeLabel}\n${
-                                    values.stateLabel
-                                }\n${values.areaLabel}\n${e?.label || ''}`
-                            )
-                        }}
-                    />
+                   
+                 
                     <ATMSelectSearchable
                         componentClass="mt-2"
                         label="Tehsil/Taluka"
@@ -297,6 +277,28 @@ const CallerDeliveryAddress = ({
                                     values.stateLabel
                                 }\n${values.areaLabel}\n${
                                     values.districtLabel
+                                }\n${e?.label || ''}`
+                            )
+                        }}
+                    />
+                     <ATMSelectSearchable
+                        componentClass="  mt-2"
+                        label="Area"
+                        size="xs"
+                        selectLabel="select area"
+                        labelDirection="horizontal"
+                        classDirection="grid grid-cols-3"
+                        name="areaId"
+                        value={values.areaId || ''}
+                        options={dropdownOptions.areaOptions || []}
+                        isValueWithLable
+                        onChange={(e) => {
+                            setFieldValue('areaId', e?.value || '')
+                            setFieldValue('areaLabel', e?.label || '')
+                            setFieldValue(
+                                'autoFillingShippingAddress',
+                                `${values.pincodeLabel}\n${
+                                    values.stateLabel
                                 }\n${e?.label || ''}`
                             )
                         }}
