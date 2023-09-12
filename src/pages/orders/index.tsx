@@ -12,7 +12,7 @@ import { IconType } from 'react-icons'
 // |-- External Dependencies --|
 import { MdOutbond } from 'react-icons/md'
 import { useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 // |-- Internal Dependencies --|
@@ -107,11 +107,29 @@ const ViewOrder = () => {
 
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     const [activelabel, setActiveTabLabel] = useState<string>()
-    const { search } = useLocation()
-    const activeTab = search.split('=')[1]
+    const { search, state, pathname } = useLocation()
+    const queryParams = new URLSearchParams(search)
+
+    // Access specific query parameters by their names
+    const activeTab = queryParams.get('orderStatus')
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!activeTab) return
+
+        navigate(`${pathname}?orderStatus=${activeTab}`, {
+            state: state,
+        })
+        return () => {
+            if (state !== null)
+                navigate(`${pathname}`, {
+                    state: state,
+                })
+        }
+        //eslint-disable-next-line
+    }, [activeTab])
 
     const allowedTabs = showAllowedTabs(
         checkUserAccess,
@@ -129,6 +147,8 @@ const ViewOrder = () => {
         },
     ]
     useEffect(() => {
+        if (!activeTab) return
+
         let activeIndex = allowedTabs?.findIndex(
             (tab: tabsProps) => tab.path.split('=')[1] === activeTab
         )
@@ -137,6 +157,7 @@ const ViewOrder = () => {
         const labelTab: string = allowedTabs[activeIndex]?.label || ''
         setActiveTabLabel(labelTab)
     }, [activeTab, allowedTabs])
+
     return (
         <SideNavLayout>
             <div className="h-[calc(100vh-55px)]">
@@ -158,6 +179,7 @@ const ViewOrder = () => {
                         <div className="h-[calc(100vh-155px)] w-full ">
                             <OrderListing
                                 tabName={allowedTabs[activeTabIndex].name}
+                                orderStatus={activeTab as string}
                             />
                         </div>
                     </div>

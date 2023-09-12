@@ -202,7 +202,7 @@ import {
     // DealerSupervisorTabWrapper,
     UserAccessWrapper,
     // ApprovedOrderListing,
-    ApprovedOrderViewWrapper,
+    // ApprovedOrderViewWrapper,
     EditDealerSchemeWrapper,
     DealerListLedgerTabWrapper,
     AddDealerWarehouseWarpper,
@@ -261,6 +261,8 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData ? userData : null))
+ 
+
     return (
         <>
             <BrowserRouter>
@@ -2663,10 +2665,10 @@ const PageRoutes = () => {
                     />
 
                     {/* ############# NOT FOR USE ############# */}
-                    <Route
+                    {/* <Route
                         path="/approved-orders/view/:id"
                         element={<ApprovedOrderViewWrapper />}
-                    />
+                    /> */}
                     <Route
                         path="/vendors/:vendorId/warehouse/add"
                         element={

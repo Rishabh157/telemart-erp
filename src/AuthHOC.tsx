@@ -22,26 +22,44 @@ const AuthHOC = ({ component, moduleName = '' }: Props) => {
     const accessToken = localStorage.getItem('authToken')
     const navigate = useNavigate()
     const { pathname } = useLocation()
+    const location = useLocation()
+    const { userData } = useSelector((state: RootState) => state.auth)
+
+
     useEffect(() => {
         if (accessToken) {
             navigate(`${pathname ? pathname : '/dashboard'}`)
         }
-    }, [accessToken, navigate, pathname])
+        // Create a new location object with updated state and search
+        const updatedLocation = {
+          ...location,
+          state: { ...location.state },
+          search: location?.search,
+        };
+    
+        // Use the navigate function to navigate to the updated location
+        navigate(updatedLocation);
+        //eslint-disable-next-line
+      }, [accessToken]);
+  
 
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const { userData } = useSelector((state: RootState) => state.auth)
     let isAuthorized =
         userData?.userRole === 'ADMIN'
             ? true
             : isCheckAuthorizedModule(checkUserAccess, moduleName)
-
+  
     return (
         <>
             {accessToken ? (
                 isAuthorized ? (
-                    <>{component}</>
+                    <>
+                        {React.cloneElement(component as React.ReactElement, {
+                            location: location.state || null,
+                        })}
+                    </>
                 ) : (
                     <>
                         {/* <div className="h-[100vh] w-full flex items-center justify-center bg-white"> */}
