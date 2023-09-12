@@ -10,7 +10,7 @@ export enum UserModuleOrderTabsTypes {
     'orderUnaTab' = 'ORDER_UNA_TAB',
     'orderPndTab' = 'ORDER_PND_TAB',
     'orderUrgentTab' = 'ORDER_URGENT_TAB',
-    'orderNonActionTab' = 'ORDER_NON_ACTION_TAB',
+    'orderNonActionTab' =   'ORDER_NON_ACTION_TAB',
 }
 
 export enum UserModuleWarehouseTabsTypes {
@@ -112,6 +112,7 @@ export enum UserModuleNameTypes {
     product = 'PRODUCT',
     cartonBox = 'CARTON_BOX',
     company = 'COMPANY',
+    companyBranch = 'COMPANY_BRANCH',
     barcode = 'BARCODE',
     country = 'COUNTRY',
     state = 'STATE',

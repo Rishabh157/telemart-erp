@@ -88,6 +88,7 @@ import assetsCategorySlice from './slices/assets/assetsCategorySlice'
 import vendorLedgerSlice from './slices/VendorLedgerSlice'
 import dealersRatioSlice from './slices/dealersRatioSlice'
 import userAcessSlice from './slices/access/userAcessSlice'
+import companyBranchSlice from './slices/companyBranchSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -144,6 +145,7 @@ const store = configureStore({
         asr: ASRSlice,
         country: countrySlice,
         configurationCompany: configurationCompanySlice,
+        companybranch: companyBranchSlice,
         barcode: barcodeSlice,
         cartonBoxBarcode: CartonBoxBarcodeSlice,
         productGroupBarcode: ProductGroupBarcodeSlice,

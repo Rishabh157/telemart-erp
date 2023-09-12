@@ -16,6 +16,7 @@ const tagTypes = [
     'attributeGroup',
     'attributes',
     'dealerSchemePincode',
+    'companyBranch'
 ]
 
 export const apiSlice = createApi({

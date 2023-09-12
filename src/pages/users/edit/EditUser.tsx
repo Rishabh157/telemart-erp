@@ -31,6 +31,8 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { HiPlus } from 'react-icons/hi'
 import { MdDeleteOutline } from 'react-icons/md'
+import { useGetAllCompaniesBranchQuery } from 'src/services/CompanyBranchService'
+import { CompanyBranchListResponse } from 'src/models'
 
 // |-- Types --|
 type Props = {
@@ -52,6 +54,25 @@ const breadcrumbs: BreadcrumbType[] = [
 const EditUser = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
     const [userRole, setuserRole] = useState<any[]>([])
+
+    const [branchOptionList, setBranchOptionList] = useState([])
+
+    const { data, isFetching, isLoading } = useGetAllCompaniesBranchQuery('')
+
+    useEffect(() => {
+        if (!isFetching && !isLoading) {
+            const companyBranchList = data?.data?.map(
+                (ele: CompanyBranchListResponse) => {
+                    return {
+                        label: ele?.branchName,
+                        value: ele?._id,
+                    }
+                }
+            )
+            setBranchOptionList(companyBranchList)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading, isFetching, data])
 
     useEffect(() => {
         const departmentroles = getHierarchyByDept({
@@ -156,7 +177,18 @@ const EditUser = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
 
-                            {/* Password */}
+                            {/* Branch Name */}
+                            <ATMSelectSearchable
+                                required
+                                name="branchId"
+                                value={values.branchId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('branchId', e)
+                                }
+                                options={branchOptionList}
+                                label="Branch Name"
+                            />
+
                             <ATMTextField
                                 name="password"
                                 type="password"
