@@ -46,7 +46,6 @@ const EditCompanyBranchWrapper = (props: Props) => {
     const { selectedItem }: any = useSelector(
         (state: RootState) => state?.companybranch
     )
-    console.log('selectedItem', selectedItem)
 
     const { data, isLoading, isFetching } = useGetCompanyBranchByIdQuery(Id)
     const [updateCompanyBranch] = useUpdateCompanyBranchMutation()
@@ -64,8 +63,6 @@ const EditCompanyBranchWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
-        console.log('update ,', )
-        console.log('update ,', )
         updateCompanyBranch({
             body: {
                 branchName: values.branchName,

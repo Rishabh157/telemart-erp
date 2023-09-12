@@ -31,7 +31,6 @@ const TabScrollable: React.FC<Props> = ({
     active = 0,
     navBtnContainerClassName = '',
 }) => {
-    // console.log(tabs,active,"tabs")
     // define state with initial value to let the tabs start with that value
     const [activeTab, setActiveTab] = React.useState<number>(0)
     const navigate = useNavigate()

@@ -394,7 +394,6 @@ const CallerPageWrapper = () => {
         skip: !didNumber,
     })
 
-    console.log(didNumber, 'didNumber')
     useEffect(() => {
         if (!didIsLoading && !didIsFetching)
             dispatch(setDidItems(didData?.data))
@@ -466,7 +465,6 @@ const CallerPageWrapper = () => {
 
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
-        console.log("first")
         const callerDetails: any = localStorage.getItem('callerPageData')
         let callerDataItem = JSON.parse(callerDetails)
         // setApiStatus(true)

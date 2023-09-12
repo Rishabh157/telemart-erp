@@ -119,9 +119,6 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-
-        console.log(values)
-
         setTimeout(() => {
             updateSlot({
                 body: {
