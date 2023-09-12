@@ -73,12 +73,12 @@ const mediaNavigation: NavItemType[] = [
         path: '/media/slot',
         name: UserModuleNameTypes.slotManagement,
     },
-    // {
-    //     label: 'Inbound',
-    //     icon: AiOutlineSetting,
-    //     path: '/media/caller-page?phone=9009648665&userlogin=Vinod&postalcode=456734&verve=111&dstphone=8987898789&campaignId=DHUANDHAAR',
-    //     name: 'INBOUND',
-    // },
+    {
+        label: 'Inbound',
+        icon: MdViewTimeline,
+        path: '/media/caller-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
+        name: 'INBOUND',
+    },
 ]
 
 type Props = {

@@ -2,10 +2,10 @@ import React from 'react'
 import CallerButton from './CallerButton'
 import { Link } from 'react-router-dom'
 
-const CallerPageTopNav = () => {
+const CallerPageTopNav = ({agentName=''}:{agentName:string}) => {
     return (
         <div className="flex justify-between py-1">
-            <Link to="/">
+            <Link to="#">
                 <div className="logo-img ">
                     <img
                         height={130}
@@ -17,7 +17,7 @@ const CallerPageTopNav = () => {
             </Link>
             <div className="flex gap-x-2 items-center">
                 <div className="text-[#6F9EA7] text-[15px]">
-                    Logged in ID : Sandeep
+                    Logged in ID : {agentName}
                 </div>
                 <div>
                     <CallerButton

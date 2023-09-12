@@ -70,7 +70,7 @@ const ATMSelectSearchable = ({
     classDirection = 'grid grid-cols-3',
     labelSpan = 'col-span-1',
     inputSpan = 'col-span-2',
-    componentClass = '  mt-5',
+    componentClass = 'mt-5',
     labelSize = 'small',
     isMenuOpen = undefined,
     isValueWithLable = false,
@@ -83,19 +83,21 @@ const ATMSelectSearchable = ({
             borderColor: 'border-slate-400  ',
             borderWidth: 0,
             boxShadow: 'none',
-            minHeight: 'unset',
+            // minHeight: 'unset',
             height: size === 'xs' ? '28px' : size === 'small' ? '35px' : '',
             display: 'flex',
             alignItems: 'center',
-            paddingTop:
-                size === 'xs' ? '1px' : size === 'small' ? '1.5px' : '2px',
+            overflow: isMulti ? 'scroll' : 'unset',
+
+            // paddingTop:
+            //     size === 'xs' ? '1px' : size === 'small' ? '1.5px' : '2px',
         }),
         valueContainer: (provided: any) => ({
             ...provided,
-            paddingLeft: '5px',
-            paddingTop: '3px',
+            // paddingLeft: '5px',
+            // paddingTop: '3px',
             alignItems: 'start',
-            overflow: isMulti ? 'scroll' : 'unset',
+            // overflow: isMulti ? 'scroll' : 'unset',
             maxHeight: '67px',
         }),
         indicator: (provided: any) => ({
@@ -225,7 +227,7 @@ const ATMSelectSearchable = ({
                     menuIsOpen={isMenuOpen}
                     maxMenuHeight={isMenuOpen ? 110 : maxMenuHeight}
                     className={twMerge(
-                        `border rounded border-slate-400 ${
+                        `border rounded border-slate-400  ${
                             labelDirection === 'horizontal'
                                 ? `${inputSpan}`
                                 : ''
@@ -251,6 +253,7 @@ const ATMSelectSearchable = ({
                         (options.value as string) === ''
                     }
                     placeholder={`${selectLabel}`}
+                    autoFocus={false}
 
                     // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
                 />

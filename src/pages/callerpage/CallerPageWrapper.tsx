@@ -5,8 +5,8 @@ import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
+// import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
+// import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { useGetAllTehsilUnauthQuery } from 'src/services/TehsilService'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
@@ -14,7 +14,7 @@ import { setAllTehsils } from 'src/redux/slices/tehsilSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { useGetAllDistrictUnauthQuery } from 'src/services/DistricService'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { CountryListResponse } from 'src/models/Country.model'
+// import { CountryListResponse } from 'src/models/Country.model'
 import { StateListResponse } from 'src/models/State.model'
 import { DistrictListResponse } from 'src/models/District.model'
 import { TehsilListResponse } from 'src/models/Tehsil.model'
@@ -28,14 +28,17 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
+
+import { setItems as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
 import { CallerResponse } from 'src/models'
 import { useLocation } from 'react-router-dom'
+import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
 
 export type FormInitialValues = {
     agentName: string | null
-    companyId: string | null
-    agentId: string | null
+    // companyId: string | null
+    // agentId: string | null
     didNo: string
     ageGroup: string
     mobileNo: string
@@ -94,6 +97,11 @@ export type FormInitialValues = {
 const CallerPageWrapper = () => {
     const locationUrl = useLocation()
     const queryParams = new URLSearchParams(locationUrl.search)
+    const phoneNumber = queryParams.get('phone')
+    const agentName = queryParams.get('username')
+    const didNumber = queryParams.get('didnumber')
+    const campaignId = queryParams.get('campaign')
+    const calltype = queryParams.get('calltype')
 
     const columns: columnTypes[] = [
         {
@@ -217,52 +225,20 @@ const CallerPageWrapper = () => {
     const { page, rowsPerPage, searchValue, items } = inboundCallerState
 
     // Table Data with MobileNo filtered
-    const {
-        data: callerListingData,
-        isFetching: isCallerFetching,
-        isLoading: isCallerLoading,
-    } = useGetPaginationInboundCallerQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'mobileNo',
-                value: ['9669598715'],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isCallerFetching && !isCallerLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(callerListingData?.data || []))
-            dispatch(setTotalItems(callerListingData?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isCallerLoading, isCallerFetching, callerListingData])
 
     const [AddCallerForm] = useAddCallerFormMutation()
     const [UpdateCallerForm, UpdateCallerFormInfo] =
         useUpdateCallerFormMutation()
 
+    
     const initialValues: FormInitialValues = {
-        agentName: '',
-        companyId: '645b7733266c589640740832',
-        agentId: '642e718eaf73c70b82389d6e',
-        campaign: '',
-        callType: 'INBOUND',
+        agentName: agentName,
+        campaign:campaignId as string,
+        callType:calltype as string,
         incomingCallerNo: '',
-        customerName: 'AJAY CHORE',
-        didNo: '',
-        flagStatus: 'STATUS',
+        customerName: '',
+        didNo: didNumber as string,
+        flagStatus: '',
         productGroupId: null,
         schemeId: null,
         schemeName: '',
@@ -293,7 +269,7 @@ const CallerPageWrapper = () => {
         houseNumber: '',
         streetNumber: '',
         landmark: '',
-        mobileNo: '',
+        mobileNo: phoneNumber as string,
         whatsappNo: '',
         autoFillingShippingAddress: '',
         // isRecording: false,
@@ -307,27 +283,12 @@ const CallerPageWrapper = () => {
             instagram: '',
         },
         medicalIssue: [],
-        paymentMode: '',
+        paymentMode: 'COD',
         remark: '',
         dispositionLevelTwoId: null,
         dispositionLevelThreeId: null,
         alternateNo: '',
     }
-
-    useEffect(() => {
-        const phoneNumber = queryParams.get('phone')
-        const userName = queryParams.get('userlogin')
-        const verveId = queryParams.get('verve')
-        const campaignId = queryParams.get('campaignId')
-        // const postalCode = queryParams.get('postalcode')
-        // const dstPhone = queryParams.get('dstphone')
-
-        initialValues.mobileNo = phoneNumber || ''
-        initialValues.agentName = userName || ''
-        initialValues.didNo = verveId || ''
-        initialValues.campaign = campaignId || ''
-        // eslint-disable-next-line
-    }, [])
 
     // Form validation schema
     // eslint-disable-next-line
@@ -372,12 +333,42 @@ const CallerPageWrapper = () => {
             .max(10, 'mobile number is not valid'),
     })
 
+    const {
+        data: callerListingData,
+        isFetching: isCallerFetching,
+        isLoading: isCallerLoading,
+    } = useGetPaginationInboundCallerQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: ['didNo'],
+        page: page,
+        filterBy: [
+            {
+                fieldName: 'mobileNo',
+                value: phoneNumber,
+            },
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: true,
+    })
+
+    useEffect(() => {
+        if (!isCallerFetching && !isCallerLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setItems(callerListingData?.data || []))
+            dispatch(setTotalItems(callerListingData?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isCallerLoading, isCallerFetching, callerListingData])
     const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isLoading, isFetching } = useGetAllCountryUnauthQuery('')
+    // const { data, isLoading, isFetching } = useGetAllCountryUnauthQuery('')
 
     // country
-    const { allCountry }: any = useSelector((state: RootState) => state.country)
     const { allStates }: any = useSelector((state: RootState) => state.states)
     const { allDistricts }: any = useSelector(
         (state: RootState) => state.district
@@ -387,24 +378,27 @@ const CallerPageWrapper = () => {
         (state: RootState) => state.didManagement
     )
 
-    // Set Countries
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setAllCountry(data?.data))
-        }
-    }, [data, isLoading, isFetching, dispatch])
+    // // Set Countries
+    // useEffect(() => {
+    //     if (!isLoading && !isFetching) {
+    //         dispatch(setAllCountry(data?.data))
+    //     }
+    // }, [data, isLoading, isFetching, dispatch])
 
     // Set did Number
-    // const {
-    //     data: didData,
-    //     isLoading: didIsLoading,
-    //     isFetching: didIsFetching,
-    // } = useGetByDidNumberQuery(DidNO)
+    const {
+        data: didData,
+        isLoading: didIsLoading,
+        isFetching: didIsFetching,
+    } = useGetByDidNumberQuery(didNumber, {
+        skip: !didNumber,
+    })
 
-    // useEffect(() => {
-    //     if (!didIsLoading && !didIsFetching)
-    //         dispatch(setDidItems(didData?.data))
-    // }, [didData, didIsLoading, didIsFetching, dispatch])
+    console.log(didNumber, 'didNumber')
+    useEffect(() => {
+        if (!didIsLoading && !didIsFetching)
+            dispatch(setDidItems(didData?.data))
+    }, [didData, didIsLoading, didIsFetching, dispatch])
 
     // Set States
 
@@ -459,9 +453,6 @@ const CallerPageWrapper = () => {
 
     //  selected option dropdowns options
     const dropdownOptions = {
-        counrtyOptions: allCountry?.map((ele: CountryListResponse) => {
-            return { label: ele?.countryName, value: ele?._id }
-        }),
         stateOptions: allStates?.map((ele: StateListResponse) => {
             return { label: ele?.stateName, value: ele?._id }
         }),
@@ -471,13 +462,11 @@ const CallerPageWrapper = () => {
         tehsilOptions: allTehsils?.map((ele: TehsilListResponse) => {
             return { label: ele?.tehsilName, value: ele?._id }
         }),
-        channelOptions: allDistricts?.map((ele: DistrictListResponse) => {
-            return { label: ele?.districtName, value: ele?._id }
-        }),
     }
 
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
+        console.log("first")
         const callerDetails: any = localStorage.getItem('callerPageData')
         let callerDataItem = JSON.parse(callerDetails)
         // setApiStatus(true)
@@ -485,7 +474,8 @@ const CallerPageWrapper = () => {
             UpdateCallerForm({
                 body: {
                     ...values,
-                    countryId: '646b2f49f8ba85987b718ad8',
+                    companyId: callerDataItem?.companyId,
+                    agentId: callerDataItem?.agentId,
                 },
                 id: callerDataItem?.orderID,
             }).then((res: any) => {
@@ -508,9 +498,13 @@ const CallerPageWrapper = () => {
     useEffect(() => {
         const callDetails: any = localStorage.getItem('callerPageData')
         let callDataItem = JSON.parse(callDetails)
+
+        const { ...rest } = initialValues
+        // use object destructuring to remove the _id property
+
         if (!callDataItem) {
             AddCallerForm({
-                ...initialValues,
+                ...rest,
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -519,6 +513,8 @@ const CallerPageWrapper = () => {
                                 orderID: res?.data?.data?._id,
                                 mobileNo: initialValues.mobileNo,
                                 didNo: initialValues.didNo,
+                                companyId: res?.data?.data?.companyId,
+                                agentId: res?.data?.data?.agentId,
                             }
                             localStorage.setItem(
                                 'callerPageData',
@@ -540,22 +536,25 @@ const CallerPageWrapper = () => {
     return (
         <>
             <Formik
+                enableReinitialize
                 initialValues={initialValues}
                 // validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
-                        <CallerPage
-                            // apiStatus={apiStatus}
-                            isLoading={UpdateCallerFormInfo.isLoading}
-                            formikProps={formikProps}
-                            dropdownOptions={dropdownOptions}
-                            schemeColumn={columns}
-                            didItems={didItems}
-                            column={columns}
-                            rows={items}
-                        />
+                        <form autoComplete="off">
+                            <CallerPage
+                                // apiStatus={apiStatus}
+                                isLoading={UpdateCallerFormInfo.isLoading}
+                                formikProps={formikProps}
+                                dropdownOptions={dropdownOptions}
+                                schemeColumn={columns}
+                                didItems={didItems}
+                                column={columns}
+                                rows={items}
+                            />
+                        </form>
                     )
                 }}
             </Formik>

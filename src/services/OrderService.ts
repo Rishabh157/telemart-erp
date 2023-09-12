@@ -15,7 +15,7 @@ export const OrderApi = apiSlice.injectEndpoints({
         getOrder: builder.query({
             providesTags: ['order'],
             query: (body: PaginationType) => ({
-                url: '/order',
+                url: '/order-inquiry',
                 method: 'POST',
                 body,
             }),
@@ -25,7 +25,7 @@ export const OrderApi = apiSlice.injectEndpoints({
         getAllOrder: builder.query({
             providesTags: ['order'],
             query: () => ({
-                url: '/order',
+                url: '/order-inquiry',
                 method: 'GET',
                 // body,
             }),
@@ -35,7 +35,7 @@ export const OrderApi = apiSlice.injectEndpoints({
         // updateOrder: builder.mutation({
         //     invalidatesTags: ['order'],
         //     query: ({ body, id }: UpdateOrder) => ({
-        //         url: `/order/${id}`,
+        //         url: `/order-inquiry/${id}`,
 
         //         method: 'PUT',
         //         body,
@@ -46,7 +46,7 @@ export const OrderApi = apiSlice.injectEndpoints({
         getOrderById: builder.query({
             providesTags: ['order'],
             query: (id) => ({
-                url: `/order/${id}`,
+                url: `/order-inquiry/${id}`,
 
                 method: 'GET',
             }),
@@ -70,7 +70,7 @@ export const OrderApi = apiSlice.injectEndpoints({
         updateOrderStatus: builder.mutation({
             invalidatesTags: ['order'],
             query: (id) => ({
-                url: `/order/completed/${id}`,
+                url: `/order-inquiry/completed/${id}`,
 
                 method: 'PUT',
             }),
@@ -80,7 +80,7 @@ export const OrderApi = apiSlice.injectEndpoints({
         deleteOrder: builder.mutation({
             invalidatesTags: ['order'],
             query: (id) => ({
-                url: `/order/${id}`,
+                url: `/order-inquiry/${id}`,
 
                 method: 'DELETE',
             }),

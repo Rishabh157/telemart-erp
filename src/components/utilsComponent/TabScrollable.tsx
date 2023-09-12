@@ -31,18 +31,24 @@ const TabScrollable: React.FC<Props> = ({
     active = 0,
     navBtnContainerClassName = '',
 }) => {
+    // console.log(tabs,active,"tabs")
     // define state with initial value to let the tabs start with that value
     const [activeTab, setActiveTab] = React.useState<number>(0)
     const navigate = useNavigate()
 
     // define a onClick function to bind the value on tab click
     const onTabClick = (e: any, index: number) => {
-        
-        if(window.location.pathname.split('/')[1] === "dealers"){            
+        if (window.location.pathname.split('/')[1] === 'dealers') {
             const id = window.location.pathname.split('/')[2]
-            navigate(`/dealers/${id}/${tabs[index]?.path as string}`) 
+            navigate(`/dealers/${id}/${tabs[index]?.path as string}`)
             setActiveTab(index)
-        }else{                 
+        } 
+        else if (window.location.pathname.split('/')[1] === 'orders') {
+            // const id = window.location.pathname.split('/')[2]
+            navigate(`/orders${tabs[index]?.path as string}`)
+            setActiveTab(index)
+        } 
+        else {
             navigate(tabs[index]?.path as string)
             setActiveTab(index)
         }

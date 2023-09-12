@@ -36,7 +36,7 @@ import {
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
 
-const OrderListing = ({ tabName }: { tabName: string }) => {
+const OrderListing = ({ tabName ,orderStatus}: { tabName: string,orderStatus:string }) => {
     // Hooks
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
@@ -62,7 +62,10 @@ const OrderListing = ({ tabName }: { tabName: string }) => {
         searchValue: searchValue,
         params: ['didNo', 'mobileNo'],
         page: page,
-        filterBy: [],
+        filterBy: [{
+            fieldName:'approved',
+            value:orderStatus==='approved'?true:false
+        }],
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,
