@@ -52,7 +52,6 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             value={values.run}
                             label="Status"
                             onChange={(value: any) => {
-                                console.log(value, 'run ki val')
                                 if (value === false) {
                                     setFieldValue('showOk', false)
                                     setFieldValue('reasonNotShow', null)
@@ -85,7 +84,6 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                                 value={values.showOk}
                                 label="Show Properly"
                                 onChange={(value: any) => {
-                                    console.log('me hi hu', value)
                                     setFieldValue('showOk', value)
                                     if (value === true) {
                                         setFieldValue('reasonNotShow', '')
@@ -101,7 +99,6 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                                 name="reasonNotShow"
                                 value={values.reasonNotShow}
                                 onChange={(e) => {
-                                    console.log(e)
                                     setFieldValue('reasonNotShow', e)
                                 }}
                                 options={reasonNotShowOption}
@@ -238,7 +235,6 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                         (!values.showOk && !values.reasonNotShow && values.run)
                     }
                     onClick={() => {
-                        console.log(formikProps)
                         formikProps.handleSubmit()
                     }}
                     className={`bg-primary-main rounded py-1 px-5 item-center text-white border border-primary-main
