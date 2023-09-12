@@ -71,8 +71,19 @@ export const OrderApi = apiSlice.injectEndpoints({
             invalidatesTags: ['order'],
             query: (id) => ({
                 url: `/order-inquiry/completed/${id}`,
-
                 method: 'PUT',
+            }),
+        }),
+
+        //**** Get Single Order Flow
+        getOrderFlow: builder.query({
+            providesTags: ['order'],
+            query: (id) => ({
+                url: `/order-inquiry-flow/`,
+                method: 'GET',
+                params: {
+                    orderId: id,
+                },
             }),
         }),
 
@@ -81,7 +92,6 @@ export const OrderApi = apiSlice.injectEndpoints({
             invalidatesTags: ['order'],
             query: (id) => ({
                 url: `/order-inquiry/${id}`,
-
                 method: 'DELETE',
             }),
         }),
@@ -93,5 +103,6 @@ export const {
     useGetOrderByIdQuery,
     useExportOrderDataMutation,
     useDeleteOrderMutation,
+    useGetOrderFlowQuery,
     useGetAllOrderQuery,
 } = OrderApi
