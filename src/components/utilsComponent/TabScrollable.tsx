@@ -41,13 +41,11 @@ const TabScrollable: React.FC<Props> = ({
             const id = window.location.pathname.split('/')[2]
             navigate(`/dealers/${id}/${tabs[index]?.path as string}`)
             setActiveTab(index)
-        } 
-        else if (window.location.pathname.split('/')[1] === 'orders') {
+        } else if (window.location.pathname.split('/')[1] === 'orders') {
             // const id = window.location.pathname.split('/')[2]
             navigate(`/orders${tabs[index]?.path as string}`)
             setActiveTab(index)
-        } 
-        else {
+        } else {
             navigate(tabs[index]?.path as string)
             setActiveTab(index)
         }

@@ -102,7 +102,7 @@ const CallerDeliveryAddress = ({
                 break
         }
     }
-    const addressOptions =[
+    const addressOptions = [
         { label: 'Home', value: 'home' },
         { label: 'Office', value: 'office' },
         { label: 'Other', value: 'other' },
@@ -210,7 +210,7 @@ const CallerDeliveryAddress = ({
                             )
                         }}
                     />
-                       <ATMSelectSearchable
+                    <ATMSelectSearchable
                         componentClass="mt-2"
                         label="District"
                         size="xs"
@@ -259,8 +259,6 @@ const CallerDeliveryAddress = ({
                 </div>
 
                 <div className="col-span-4 py-2 px-8   border-r-[1px]">
-                   
-                 
                     <ATMSelectSearchable
                         componentClass="mt-2"
                         label="Tehsil/Taluka"
@@ -286,7 +284,7 @@ const CallerDeliveryAddress = ({
                             )
                         }}
                     />
-                     <ATMSelectSearchable
+                    <ATMSelectSearchable
                         componentClass="  mt-2"
                         label="Area"
                         size="xs"

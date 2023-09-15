@@ -134,8 +134,8 @@ const CallerPage: React.FC<Props> = ({
         data: productGroupData,
         isLoading: isProductGroupLoading,
         isFetching: isProductGroupFetching,
-    } = useGetAllProductGroupUnAuthQuery(companyId,{
-        skip:!companyId
+    } = useGetAllProductGroupUnAuthQuery(companyId, {
+        skip: !companyId,
     })
 
     useEffect(() => {

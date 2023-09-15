@@ -264,7 +264,6 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData ? userData : null))
- 
 
     return (
         <>
@@ -1618,9 +1617,7 @@ const PageRoutes = () => {
                         path="/configurations/company-branch"
                         element={
                             <AuthHOC
-                                component={
-                                    <CompanyBranchListingWrapper />
-                                }
+                                component={<CompanyBranchListingWrapper />}
                                 moduleName={UserModuleNameTypes.companyBranch}
                             />
                         }

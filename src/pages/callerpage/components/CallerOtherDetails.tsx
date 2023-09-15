@@ -242,11 +242,18 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                         setFieldValue('paymentMode', e)
                                     }}
                                 />
-                                 <div>
-                                {values.paymentMode==='ONLINE'? <a href={'media/caller-page'} className="underline"> Send Payment Link</a>:null}
+                                <div>
+                                    {values.paymentMode === 'ONLINE' ? (
+                                        <a
+                                            href={'media/caller-page'}
+                                            className="underline"
+                                        >
+                                            {' '}
+                                            Send Payment Link
+                                        </a>
+                                    ) : null}
+                                </div>
                             </div>
-                            </div>
-                           
                         </div>
                     </div>
 

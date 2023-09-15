@@ -230,11 +230,10 @@ const CallerPageWrapper = () => {
     const [UpdateCallerForm, UpdateCallerFormInfo] =
         useUpdateCallerFormMutation()
 
-    
     const initialValues: FormInitialValues = {
         agentName: agentName,
-        campaign:campaignId as string,
-        callType:calltype as string,
+        campaign: campaignId as string,
+        callType: calltype as string,
         incomingCallerNo: '',
         customerName: '',
         didNo: didNumber as string,
