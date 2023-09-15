@@ -1,4 +1,4 @@
-import { SelectOption } from "src/models/FormField/FormField.model"
+import { SelectOption } from 'src/models/FormField/FormField.model'
 
 // Static Option For Gander Radio Box , Payment Mode Option & Medical issue
 export const genderOption: SelectOption[] = [
@@ -13,7 +13,6 @@ export const genderOption: SelectOption[] = [
 ]
 
 export const paymentModeOptions: SelectOption[] = [
-
     {
         label: 'Online (UPI only)',
         value: 'ONLINE',

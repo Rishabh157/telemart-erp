@@ -2,7 +2,7 @@ import React from 'react'
 import CallerButton from './CallerButton'
 import { Link } from 'react-router-dom'
 
-const CallerPageTopNav = ({agentName=''}:{agentName:string}) => {
+const CallerPageTopNav = ({ agentName = '' }: { agentName: string }) => {
     return (
         <div className="flex justify-between py-1">
             <Link to="#">

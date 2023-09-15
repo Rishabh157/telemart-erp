@@ -153,10 +153,8 @@ const OrderListing = ({
                         title: formatDateString(ele.createdAt),
                         cardTitle: 'Dunkirk',
                         // url: 'http://www.history.com',
-                        cardSubtitle:
-                            ' ',
-                        cardDetailedText:
-                            ' ',
+                        cardSubtitle: ' ',
+                        cardDetailedText: ' ',
                         // media: {
                         //     type: 'IMAGE',
                         //     source: {
@@ -256,7 +254,6 @@ const OrderListing = ({
             align: 'end',
         },
     ]
-
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]  ">

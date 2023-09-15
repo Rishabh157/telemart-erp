@@ -16,7 +16,7 @@ import { BsArrowRepeat } from 'react-icons/bs'
 import { MdOutlinePeopleAlt } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { RiBillLine } from 'react-icons/ri'
-import {useParams, useNavigate} from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ViewLayout from 'src/components/layouts/ViewLayout/ViewLayout'
@@ -87,7 +87,6 @@ const tabsData = [
     // },
 ]
 
-
 const actionIcons = [
     {
         icon: BiMessageDetail,
@@ -121,15 +120,13 @@ const ViewDealer = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const navigate = useNavigate();
-    const {dealerId} = useParams();  
-    
+    const navigate = useNavigate()
+    const { dealerId } = useParams()
 
     useEffect(() => {
         const activeTab = window.location.pathname.split('/')[3]
-        navigate(`/dealers/${dealerId}/${activeTab}`)        
+        navigate(`/dealers/${dealerId}/${activeTab}`)
     }, [dealerId])
-
 
     const allowedTabs = showAllowedTabs(
         checkUserAccess,

@@ -63,18 +63,17 @@ const ActionAuthHOC = ({
         //eslint-disable-next-line
     }, [data, isLoading, isFetching, dispatch, userData?.userRole])
     useEffect(() => {
-      
         // Create a new location object with updated state and search
         const updatedLocation = {
-          ...location,
-          state: { ...location.state },
-          search: location?.search,
-        };
-    
+            ...location,
+            state: { ...location.state },
+            search: location?.search,
+        }
+
         // Use the navigate function to navigate to the updated location
-        navigate(updatedLocation);
+        navigate(updatedLocation)
         //eslint-disable-next-line
-      }, []);
+    }, [])
 
     // Determine if the user is authorized based on their role and module/action
     let isAuthorized =

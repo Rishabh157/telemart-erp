@@ -20,7 +20,7 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import { showToast } from 'src/utils'
 import {
     useGetCompanyBranchByIdQuery,
-    useUpdateCompanyBranchMutation
+    useUpdateCompanyBranchMutation,
 } from 'src/services/CompanyBranchService'
 import { setSelectedItem } from 'src/redux/slices/companyBranchSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

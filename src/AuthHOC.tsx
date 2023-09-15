@@ -25,23 +25,21 @@ const AuthHOC = ({ component, moduleName = '' }: Props) => {
     const location = useLocation()
     const { userData } = useSelector((state: RootState) => state.auth)
 
-
     useEffect(() => {
         if (accessToken) {
             navigate(`${pathname ? pathname : '/dashboard'}`)
         }
         // Create a new location object with updated state and search
         const updatedLocation = {
-          ...location,
-          state: { ...location.state },
-          search: location?.search,
-        };
-    
+            ...location,
+            state: { ...location.state },
+            search: location?.search,
+        }
+
         // Use the navigate function to navigate to the updated location
-        navigate(updatedLocation);
+        navigate(updatedLocation)
         //eslint-disable-next-line
-      }, [accessToken]);
-  
+    }, [accessToken])
 
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
@@ -50,7 +48,7 @@ const AuthHOC = ({ component, moduleName = '' }: Props) => {
         userData?.userRole === 'ADMIN'
             ? true
             : isCheckAuthorizedModule(checkUserAccess, moduleName)
-  
+
     return (
         <>
             {accessToken ? (
