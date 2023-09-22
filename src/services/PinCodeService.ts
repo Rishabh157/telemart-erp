@@ -44,8 +44,8 @@ export const pincodeApi = apiSlice.injectEndpoints({
 
         getAllPincodeUnauth: builder.query({
             providesTags: ['pincode'],
-            query: () => ({
-                url: `/pincode/inbound`,
+            query: (id: string) => ({
+                url: `/pincode/get-tehsil-pincode/unauth/${id}`,
                 method: 'GET',
                 // body,
             }),
@@ -79,6 +79,15 @@ export const pincodeApi = apiSlice.injectEndpoints({
             query: (id) => ({
                 url: `/pincode/${id}`,
 
+                method: 'GET',
+            }),
+        }),
+
+        // **** GET BY Pincode
+        getAllInfoByPincode: builder.mutation({
+            invalidatesTags: ['pincode'],
+            query: (pincode: string) => ({
+                url: `/state/get-all-by-pincode/unauth/${pincode}`,
                 method: 'GET',
             }),
         }),
@@ -118,4 +127,5 @@ export const {
     useGetAllPincodeQuery,
     useGetAllPincodeByDistrictQuery,
     useGetAllPincodeUnauthQuery,
+    useGetAllInfoByPincodeMutation,
 } = pincodeApi

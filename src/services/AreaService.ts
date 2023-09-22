@@ -34,7 +34,7 @@ export const areaApi = apiSlice.injectEndpoints({
         getAllAreaUnauth: builder.query({
             providesTags: ['Area'],
             query: (id) => ({
-                url: `area/get-area-by-pincode/inbound/${id}`,
+                url: `area/get-area-by-pincode/unauth/${id}`,
                 method: 'GET',
                 // body,
             }),

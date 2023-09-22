@@ -145,7 +145,6 @@ import {
     Auth,
     AddSlotManagementWrapper,
     EditSlotManagementWrapper,
-    InbouundWrapper,
     WebstieListingWrapper,
     AddWebsiteWrapper,
     EditWebsiteWrapper,
@@ -2742,10 +2741,10 @@ const PageRoutes = () => {
                     <Route path="/barcodes" element={<BarcodeGenerator />} />
 
                     {/* <AddCompetitorWrapper /> */}
-                    <Route
+                    {/* <Route
                         path="media/inbound/"
                         element={<InbouundWrapper />}
-                    />
+                    /> */}
                     {/* start Influencer routing */}
                     <Route
                         path="all-websites/influencers-management"

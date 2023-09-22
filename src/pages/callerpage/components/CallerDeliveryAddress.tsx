@@ -1,19 +1,53 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { RootState } from 'src/redux/store'
 import CallerButton from './CallerButton'
 import { FormInitialValues } from '../CallerPageWrapper'
-import { dropdownOptions } from '../CallerPage'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { endTimesOptions, startTimesOptions } from './constants'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import AddressDialog from './AddressDialog'
+import { useDispatch, useSelector } from 'react-redux'
+
+//  Country
+// import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
+// import { CountryListResponse } from 'src/models/Country.model'
+// import { setAllCountry } from 'src/redux/slices/countrySlice'
+
+//  State
+import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
+import { StateListResponse } from 'src/models/State.model'
+import { setAllStates } from 'src/redux/slices/statesSlice'
+
+//  District
+import { useGetAllDistrictUnauthQuery } from 'src/services/DistricService'
+import { DistrictListResponse } from 'src/models/District.model'
+import { setAllDistrict } from 'src/redux/slices/districtSlice'
+
+// Taluka/Tehsil
+import { useGetAllTehsilUnauthQuery } from 'src/services/TehsilService'
+import { TehsilListResponse } from 'src/models/Tehsil.model'
+import { setAllTehsils } from 'src/redux/slices/tehsilSlice'
+
+// Pincode
+import { useGetAllPincodeUnauthQuery } from 'src/services/PinCodeService'
+import { PincodeListResponse } from 'src/models/Pincode.model'
+import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
+
+// Area
+import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
+import { AreaListResponse } from 'src/models/Area.model'
+import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
+
+// Get All Info By Pincode
+import { useGetAllInfoByPincodeMutation } from 'src/services/PinCodeService'
+import { showToast } from 'src/utils'
 
 type Props = {
-    dropdownOptions: dropdownOptions
+    // dropdownOptions: dropdownOptions
     values: FormInitialValues
     setFieldValue: (
         field: string,
@@ -22,20 +56,182 @@ type Props = {
     ) => void
 }
 
+const addressOptions = [
+    { label: 'Home', value: 'home' },
+    { label: 'Office', value: 'office' },
+    { label: 'Other', value: 'other' },
+]
+
 const CallerDeliveryAddress = ({
-    dropdownOptions,
+    // dropdownOptions,
     setFieldValue,
     values,
 }: Props) => {
+    const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false)
     const [pinCodeSearch, setPinCodeSearch] = React.useState<string>('')
     const [endTimeOptionsList, setEndTimeOptionsList] = React.useState<
         SelectOption[] | []
     >([])
 
     const [isRecording, setIsRecording] = React.useState<boolean>(false)
+
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const dispatch = useDispatch()
+    const { allStates }: any = useSelector((state: RootState) => state.states)
+    const { allDistricts }: any = useSelector(
+        (state: RootState) => state.district
+    )
+    const { allTehsils }: any = useSelector((state: RootState) => state.tehsils)
     const { allPincodes }: any = useSelector(
         (state: RootState) => state.pincode
     )
+    const { items: allArea }: any = useSelector(
+        (state: RootState) => state.areas
+    )
+
+    // set State
+    const {
+        data: stateData,
+        isLoading: stateIsLoading,
+        isFetching: stateIsFetching,
+    } = useGetByAllStateUnauthQuery('')
+
+    useEffect(() => {
+        if (!stateIsLoading && !stateIsFetching)
+            dispatch(setAllStates(stateData?.data))
+    }, [stateData, stateIsLoading, stateIsFetching, dispatch])
+
+    // set Districts
+    const {
+        data: districtData,
+        isLoading: districtIsLoading,
+        isFetching: districtIsFetching,
+    } = useGetAllDistrictUnauthQuery(values.stateId || '', {
+        skip: !values.stateId,
+    })
+
+    useEffect(() => {
+        dispatch(setAllDistrict(districtData?.data))
+    }, [districtData, districtIsLoading, districtIsFetching, dispatch])
+
+    // set Tehsil
+    const {
+        data: tehsilData,
+        isFetching: tehsilIsFetching,
+        isLoading: tehsilIsLoading,
+    } = useGetAllTehsilUnauthQuery(values.districtId || '', {
+        skip: !values.districtId,
+    })
+
+    useEffect(() => {
+        if (!tehsilIsFetching && !tehsilIsLoading) {
+            dispatch(setAllTehsils(tehsilData?.data))
+        }
+    }, [tehsilData, dispatch, tehsilIsFetching, tehsilIsLoading])
+
+    // set Pincode
+    const {
+        data: pinCodeData,
+        isFetching: pinCodeFetching,
+        isLoading: pinCodeLoading,
+    } = useGetAllPincodeUnauthQuery(values.tehsilId || '', {
+        skip: !values.tehsilId,
+    })
+
+    useEffect(() => {
+        if (!pinCodeLoading && !pinCodeFetching) {
+            dispatch(setAllPincodes(pinCodeData?.data))
+        }
+    }, [pinCodeData, dispatch, pinCodeFetching, pinCodeLoading])
+
+    // Area Options
+    const {
+        data: areaData,
+        isLoading: areaIsLoading,
+        isFetching: areaIsFetching,
+    } = useGetAllAreaUnauthQuery(values?.pincodeId || '', {
+        skip: !values?.pincodeId,
+    })
+
+    useEffect(() => {
+        if (!areaIsFetching && !areaIsLoading) {
+            dispatch(setAreaItems(areaData?.data))
+        }
+        // eslint-disable-next-line
+    }, [areaData, areaIsLoading, areaIsFetching, dispatch])
+
+    // All Option By Pincode
+
+    const [getAllInfoByPincode] = useGetAllInfoByPincodeMutation()
+
+    const handlePincodeSearch = () => {
+        getAllInfoByPincode(pinCodeSearch)
+            .then((res: any) => {
+                if (res?.data?.status) {
+                    setFieldValue('stateId', res?.data?.stateData[0]?._id)
+                    setFieldValue('districtId', res?.data?.districtData[0]?._id)
+                    setFieldValue('tehsilId', res?.data?.tehsilData[0]?._id)
+                    setFieldValue('pincodeId', res?.data?.pincodeData?._id)
+                    setFieldValue('areaId', res?.data?.areaData[0]?._id)
+                } else {
+                    showToast('error', res?.data?.message)
+                    setFieldValue('stateId', '')
+                    setFieldValue('districtId', '')
+                    setFieldValue('tehsilId', '')
+                    setFieldValue('pincodeId', '')
+                    setFieldValue('areaId', '')
+                }
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+    }
+
+    // handle address related fields
+
+    const handleRemoveAddressRelated = (type: string) => {
+        switch (type) {
+            case 'stateId':
+                setFieldValue('districtId', '')
+                setFieldValue('tehsilId', '')
+                setFieldValue('pincodeId', '')
+                setFieldValue('areaId', '')
+                break
+            case 'districtId':
+                setFieldValue('tehsilId', '')
+                setFieldValue('pincodeId', '')
+                setFieldValue('areaId', '')
+                break
+            case 'tehsilId':
+                setFieldValue('pincodeId', '')
+                setFieldValue('areaId', '')
+                break
+            case 'pincodeId':
+                setFieldValue('areaId', '')
+                break
+            default:
+                break
+        }
+    }
+
+    //  selected option dropdowns options
+    const dropdownOptions = {
+        stateOptions: allStates?.map((ele: StateListResponse) => {
+            return { label: ele?.stateName, value: ele?._id }
+        }),
+        districtOptions: allDistricts?.map((ele: DistrictListResponse) => {
+            return { label: ele?.districtName, value: ele?._id }
+        }),
+        tehsilOptions: allTehsils?.map((ele: TehsilListResponse) => {
+            return { label: ele?.tehsilName, value: ele?._id }
+        }),
+        pincodeOptions: allPincodes?.map((ele: PincodeListResponse) => {
+            return { label: ele?.pincode, value: ele?._id }
+        }),
+        areaOptions: allArea?.map((ele: AreaListResponse) => {
+            return { label: ele?.area, value: ele?._id }
+        }),
+    }
 
     function handlePinCode(newValue: string) {
         var newarray = allPincodes?.find((ele: any) => {
@@ -102,11 +298,7 @@ const CallerDeliveryAddress = ({
                 break
         }
     }
-    const addressOptions = [
-        { label: 'Home', value: 'home' },
-        { label: 'Office', value: 'office' },
-        { label: 'Other', value: 'other' },
-    ]
+
     return (
         <>
             <div className="bg-[#87527C] p-2">
@@ -121,6 +313,73 @@ const CallerDeliveryAddress = ({
                 {/*  */}
 
                 <div className="col-span-6 py-2  gap-x-4 border-r-[1px] px-6 border-grey-800">
+                    <div className="grid grid-cols-12">
+                        <div className="col-span-4 pt-2">
+                            <span className="text-slate-700 text-sm font-medium">
+                                Pincode
+                            </span>
+                        </div>
+                        <div className="col-span-8 pr-1">
+                            <div className="grid grid-cols-12 gap-x-2">
+                                <div className="col-span-7">
+                                    <ATMSelectSearchable
+                                        componentClass="mt-1"
+                                        size="xs"
+                                        name="pincodeId"
+                                        selectLabel="select pincode"
+                                        value={values.pincodeId || ''}
+                                        options={
+                                            dropdownOptions.pincodeOptions || []
+                                        }
+                                        isValueWithLable={true}
+                                        onChange={(e) => {
+                                            handlePinCode(e?.value || '')
+                                            setFieldValue(
+                                                'pincodeLabel',
+                                                e?.label || '' || ''
+                                            )
+                                            if (!e.value) {
+                                                handleRemoveAddressRelated(
+                                                    'pincodeId'
+                                                )
+                                            }
+                                        }}
+                                    />
+                                </div>
+                                <div className="col-span-3">
+                                    <ATMTextField
+                                        maxLength={6}
+                                        minLength={6}
+                                        size="small"
+                                        extraClassField="mt-2"
+                                        placeholder="Search pincode"
+                                        name=""
+                                        value={pinCodeSearch}
+                                        onChange={(e) =>
+                                            setPinCodeSearch(e.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div className="col-span-2 pt-2">
+                                    <CallerButton
+                                        text="Search"
+                                        type="button"
+                                        className="text-[12px] py-2"
+                                        onClick={() =>
+                                            pinCodeSearch === ''
+                                                ? setIsOpenDialog(true)
+                                                : handlePincodeSearch()
+                                        }
+                                    />
+                                </div>
+                                <AddressDialog
+                                    isShow={isOpenDialog}
+                                    onClose={() => setIsOpenDialog(false)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
                     {/* FOR SINGLE PINCODE SELECT FIELD */}
                     {/* <ATMSelectSearchable
                         required
@@ -139,7 +398,7 @@ const CallerDeliveryAddress = ({
                         }}
                     /> */}
 
-                    <div className="grid grid-cols-12">
+                    {/* <div className="grid grid-cols-12">
                         <div className="col-span-4 pt-2">
                             <span className="text-slate-700 text-sm font-medium">
                                 Pincode
@@ -188,7 +447,7 @@ const CallerDeliveryAddress = ({
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <ATMSelectSearchable
                         componentClass="mt-2"
@@ -208,6 +467,9 @@ const CallerDeliveryAddress = ({
                                 'autoFillingShippingAddress',
                                 `${values?.pincodeLabel}\n${e?.label || ''}`
                             )
+                            if (!e.value) {
+                                handleRemoveAddressRelated('stateId')
+                            }
                         }}
                     />
                     <ATMSelectSearchable
@@ -230,30 +492,38 @@ const CallerDeliveryAddress = ({
                                     values.stateLabel
                                 }\n${values.areaLabel}\n${e?.label || ''}`
                             )
+                            if (!e.value) {
+                                handleRemoveAddressRelated('districtId')
+                            }
                         }}
                     />
+
                     {/* <ATMSelectSearchable
                         componentClass="mt-2"
-                        label="City/Village"
+                        label="Tehsil/Taluka"
                         size="xs"
-                        selectLabel="select city/village"
+                        selectLabel="select tehsil/taluka"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         // isSubmitting
-                        name=""
-                        value={''}
-                        options={[]}
+                        name="tehsilId"
+                        value={values.tehsilId || ''}
+                        options={dropdownOptions.tehsilOptions || []}
                         isValueWithLable
                         onChange={(e) => {
-                            // setFieldValue('zonalManagerId', e)
-                            // setFieldValue(
-                            //     'stateLabel',
-                            //     e?.label|| ''
-                            // )
-                            // setFieldValue(
-                            //     'autoFillingShippingAddress',
-                            //     `${values.pincodeLabel}\n${values.stateLabel}\n${e?.label|| ''}`
-                            // )
+                            setFieldValue('tehsilId', e?.value || '')
+                            setFieldValue('tehsilLabel', e?.label || '')
+                            setFieldValue(
+                                'autoFillingShippingAddress',
+                                `${values.pincodeLabel}\n${
+                                    values.stateLabel
+                                }\n${values.areaLabel}\n${
+                                    values.districtLabel
+                                }\n${e?.label || ''}`
+                            )
+                            if (!e.value) {
+                                handleRemoveAddressRelated('tehsilId')
+                            }
                         }}
                     /> */}
                 </div>
@@ -282,8 +552,12 @@ const CallerDeliveryAddress = ({
                                     values.districtLabel
                                 }\n${e?.label || ''}`
                             )
+                            if (!e.value) {
+                                handleRemoveAddressRelated('tehsilId')
+                            }
                         }}
                     />
+
                     <ATMSelectSearchable
                         componentClass="  mt-2"
                         label="Area"
