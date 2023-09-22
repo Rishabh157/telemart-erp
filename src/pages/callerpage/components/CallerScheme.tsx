@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { useGetAllSchemeListByPgiQuery } from 'src/services/SchemeService'
 import { SchemeDetailsPropTypes } from '../CallerPage'
 import { FormInitialValues } from '../CallerPageWrapper'
 
@@ -12,21 +13,26 @@ type Props = {
         shouldValidate?: boolean | undefined
     ) => void
     productsGroupOptions: SelectOption[] | []
-    schemeListOptions: SelectOption[] | []
+    // schemeListOptions: SelectOption[] | []
     setSchemeDetails: React.Dispatch<
         React.SetStateAction<SchemeDetailsPropTypes>
     >
     schemeDetails: SchemeDetailsPropTypes
+    companyId: string
 }
 
 const CallerScheme = ({
     values,
     setFieldValue,
     productsGroupOptions,
-    schemeListOptions,
+    // schemeListOptions,
     setSchemeDetails,
     schemeDetails,
+    companyId,
 }: Props) => {
+    const [schemeListOptions, setSchemeListOptions] = React.useState<
+        SelectOption[] | []
+    >([])
     // handle change function that increase & decrease product quantity
     const handleQuantity = (type: string) => {
         switch (type) {
@@ -52,6 +58,35 @@ const CallerScheme = ({
                 break
         }
     }
+
+    // GET SCHEME LIST BY companyId AND productsGroupId
+    const {
+        data: schemeListData,
+        isFetching: isSchemeListFetching,
+        isLoading: isSchemeListLoading,
+    } = useGetAllSchemeListByPgiQuery(
+        {
+            companyId: companyId,
+            productGroupId: values?.productGroupId,
+        },
+        {
+            skip: !values?.productGroupId,
+        }
+    )
+    useEffect(() => {
+        if (!isSchemeListFetching && !isSchemeListLoading) {
+            const schemeList = schemeListData?.data?.map((products: any) => {
+                return {
+                    label: products?.schemeName,
+                    value: products?._id,
+                }
+            })
+            console.log(schemeList, 'schemeList')
+            setSchemeListOptions(schemeList)
+        }
+    }, [schemeListData, isSchemeListFetching, isSchemeListLoading])
+
+    console.log('values?.schemeId', values?.schemeId)
     return (
         <>
             <div className="grid grid-cols-12 mt-1 px-2">
@@ -68,7 +103,13 @@ const CallerScheme = ({
                             value={values?.productGroupId || ''}
                             options={productsGroupOptions || []}
                             onChange={(e) => {
+                                setSchemeListOptions([])
+                                setFieldValue('schemeId', '')
                                 setFieldValue('productGroupId', e)
+                                setSchemeDetails({
+                                    ...schemeDetails,
+                                    schemeName: '',
+                                })
                             }}
                         />
                     </div>
@@ -79,6 +120,7 @@ const CallerScheme = ({
                             size="xs"
                             name="schemeId"
                             selectLabel="select scheme"
+                            defaultValue=""
                             value={values?.schemeId || ''}
                             options={schemeListOptions || []}
                             onChange={(e) => {
@@ -150,7 +192,12 @@ const CallerScheme = ({
                                                     ? 'text-[black]'
                                                     : 'text-[#c2c2c2]'
                                             }`}
-                                            onClick={() => handleQuantity('-')}
+                                            type="button"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                e.stopPropagation()
+                                                handleQuantity('-')
+                                            }}
                                         >
                                             -
                                         </button>
@@ -158,8 +205,13 @@ const CallerScheme = ({
                                             {schemeDetails.quantity}
                                         </span>
                                         <button
+                                            type="button"
                                             className="w-[28px] h-[28px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full ml-4 text-[18px] text-black "
-                                            onClick={() => handleQuantity('+')}
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                e.stopPropagation()
+                                                handleQuantity('+')
+                                            }}
                                         >
                                             +
                                         </button>

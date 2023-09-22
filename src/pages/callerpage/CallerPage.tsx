@@ -14,7 +14,6 @@ import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/
 import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
 import { useGetAllPincodeUnauthQuery } from 'src/services/PinCodeService'
 import {
-    useGetAllSchemeListByPgiQuery,
     useGetSchemeByIdQuery,
 } from 'src/services/SchemeService'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
@@ -99,9 +98,7 @@ const CallerPage: React.FC<Props> = ({
     const [productsGroupOptions, setProductsGroupOptions] = useState<
         SelectOption[] | []
     >([])
-    const [schemeListOptions, setSchemeListOptions] = useState<
-        SelectOption[] | []
-    >([])
+
 
     const { values, setFieldValue } = formikProps
     const dispatch = useDispatch<AppDispatch>()
@@ -139,6 +136,16 @@ const CallerPage: React.FC<Props> = ({
     })
 
     useEffect(() => {
+        if (didItems) {
+            setFieldValue(
+                'productGroupId',
+                didItems.schemeProductGroup[0].productGroup
+            )
+            setFieldValue('schemeId', didItems?.schemeId)
+        }
+        //eslint-disable-next-line
+    }, [didItems])
+    useEffect(() => {
         if (!isProductGroupLoading && !isProductGroupFetching) {
             if (productGroupData?.status) {
                 const productGroupOptionsList = productGroupData?.data?.map(
@@ -154,32 +161,7 @@ const CallerPage: React.FC<Props> = ({
         }
     }, [productGroupData, isProductGroupLoading, isProductGroupFetching])
 
-    // GET SCHEME LIST BY companyId AND productsGroupId
-    const {
-        data: schemeListData,
-        isFetching: isSchemeListFetching,
-        isLoading: isSchemeListLoading,
-    } = useGetAllSchemeListByPgiQuery(
-        {
-            companyId: companyId,
-            productGroupId: formikProps?.values?.productGroupId,
-        },
-        {
-            skip: !formikProps?.values?.productGroupId,
-        }
-    )
 
-    useEffect(() => {
-        if (!isSchemeListFetching && !isSchemeListLoading) {
-            const schemeList = schemeListData?.data?.map((products: any) => {
-                return {
-                    label: products?.schemeName,
-                    value: products?._id,
-                }
-            })
-            setSchemeListOptions(schemeList)
-        }
-    }, [schemeListData, isSchemeListFetching, isSchemeListLoading])
 
     // GET SINGLE SCHEME BY ID
     const {
@@ -325,9 +307,10 @@ const CallerPage: React.FC<Props> = ({
                 values={values}
                 setFieldValue={setFieldValue}
                 productsGroupOptions={productsGroupOptions}
-                schemeListOptions={schemeListOptions}
+                // schemeListOptions={schemeListOptions}
                 setSchemeDetails={setSchemeDetails}
                 schemeDetails={schemeDetails}
+                companyId={companyId}
             />
             <CallerDeliveryAddress
                 dropdownOptions={dropdownOptions}

@@ -13,10 +13,10 @@ export const genderOption: SelectOption[] = [
 ]
 
 export const paymentModeOptions: SelectOption[] = [
-    {
-        label: 'Online (UPI only)',
-        value: 'ONLINE',
-    },
+    // {
+    //     label: 'Online (UPI only)',
+    //     value: 'ONLINE',
+    // },
     {
         label: 'COD',
         value: 'COD',
@@ -106,4 +106,16 @@ export const endTimesOptions: SelectOption[] = [
         label: '9 PM',
         value: '9_PM',
     },
+]
+
+export const relationOptionns :SelectOption[]=[
+    { label: 'Self', value: 'SELF' },
+    { label: 'Mother', value: 'MOTHER' },
+    { label: 'Father', value: 'FATHER' },
+    { label: 'Daughter', value: 'DAUGHTER' },
+    { label: 'Son', value: 'SON' },
+    { label: 'Sister', value: 'SISTER' },
+    { label: 'Brother', value: 'BROTHER' },
+    { label: 'Spouse', value: 'SPOUSE' },
+    { label: 'Others', value: 'OTHERS' },
 ]
