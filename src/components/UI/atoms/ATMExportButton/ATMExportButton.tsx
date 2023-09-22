@@ -10,7 +10,7 @@ import React, { useRef } from 'react'
 
 // |-- External Dependencies --|
 import { CSVLink } from 'react-csv'
-import { Headers } from 'react-csv/components/CommonPropTypes'
+// import { Headers } from 'react-csv/components/CommonPropTypes'
 
 // |-- Internal Dependencies --|
 import { TbFileExport } from 'react-icons/tb'
@@ -18,7 +18,7 @@ import { TbFileExport } from 'react-icons/tb'
 // |-- Types --|
 type Props = {
     data: any[]
-    headers: Headers
+    headers: any
     fileName: string
     isLoading: boolean
     onClick: (done: () => void) => void
