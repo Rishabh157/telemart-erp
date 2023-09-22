@@ -168,15 +168,7 @@ const ATMSelectSearchable = ({
             }
         }
     }
-    // const handleOnInputChange = (valueOp:string) => {
-    //     let inputValue = selectOptions?.find((option) => option.value === valueOp)
-    //     if (!inputValue) {
-    //
-    //         onChange('')
-    //     } else {
-    //         onChange(valueOp)
-    //     }
-    // }
+
     const handleValue = () => {
         if (isMulti) {
             let selectedValues: SelectOption[] = []
@@ -191,7 +183,7 @@ const ATMSelectSearchable = ({
             })
             return selectedValues
         } else {
-            return selectOptions?.find((option) => option.value === value)
+            return selectOptions?.find((option) => option.value === value) || ''
         }
     }
     return (
@@ -238,7 +230,7 @@ const ATMSelectSearchable = ({
                     defaultValue={selectOptions?.find(
                         (option) => option.value === defaultValue
                     )}
-                    value={handleValue()}
+                    value={handleValue() || ''}
                     onChange={(selectedOption) =>
                         handleOnChange(selectedOption)
                     }
@@ -249,9 +241,7 @@ const ATMSelectSearchable = ({
                     isDisabled={isDisabled}
                     isClearable
                     isLoading={isLoading}
-                    isOptionDisabled={(options) =>
-                        (options.value as string) === ''
-                    }
+                    isOptionDisabled={(options: any) => options.value === ''}
                     placeholder={`${selectLabel}`}
                     autoFocus={false}
 
