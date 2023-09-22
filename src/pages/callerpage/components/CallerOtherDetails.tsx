@@ -9,6 +9,7 @@ import {
     genderOption,
     medicalOptions,
     paymentModeOptions,
+    relationOptionns,
 } from '../components/constants'
 type Props = {
     values: FormInitialValues
@@ -65,17 +66,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                         maxMenuHeight={190}
                         name="orderFor"
                         value={values.orderFor}
-                        options={[
-                            { label: 'Self', value: 'SELF' },
-                            { label: 'Mother', value: 'MOTHER' },
-                            { label: 'Father', value: 'FATHER' },
-                            { label: 'Daughter', value: 'DAUGHTER' },
-                            { label: 'Son', value: 'SON' },
-                            { label: 'Sister', value: 'SISTER' },
-                            { label: 'Brother', value: 'BROTHER' },
-                            { label: 'Spouse', value: 'SPOUSE' },
-                            { label: 'Others', value: 'OTHERS' },
-                        ]}
+                        options={relationOptionns}
                         onChange={(e) => {
                             setFieldValue('orderFor', e)
                             if (e?.includes('OTHERS')) {

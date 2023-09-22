@@ -29,7 +29,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
 
-import { setItems as setDidItems } from 'src/redux/slices/media/didManagementSlice'
+import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
 import { CallerResponse } from 'src/models'
 import { useLocation } from 'react-router-dom'
@@ -37,8 +37,6 @@ import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices
 
 export type FormInitialValues = {
     agentName: string | null
-    // companyId: string | null
-    // agentId: string | null
     didNo: string
     ageGroup: string
     mobileNo: string
@@ -62,7 +60,6 @@ export type FormInitialValues = {
     schemeName: string
     pincodeId: string | null
     pincodeLabel: string | null
-    // villageId?: string | null
     areaId: string | null
     areaLabel: string
     emailId: string
@@ -76,7 +73,6 @@ export type FormInitialValues = {
     orderForOther?: string | null
     paymentMode: string
     productGroupId: string | null
-    // isRecording?: boolean
     reciversName: string
     remark: string
     shcemeQuantity: number
@@ -368,9 +364,6 @@ const CallerPageWrapper = () => {
     }, [isCallerLoading, isCallerFetching, callerListingData])
     const dispatch = useDispatch<AppDispatch>()
 
-    // const { data, isLoading, isFetching } = useGetAllCountryUnauthQuery('')
-
-    // country
     const { allStates }: any = useSelector((state: RootState) => state.states)
     const { allDistricts }: any = useSelector(
         (state: RootState) => state.district
@@ -379,13 +372,7 @@ const CallerPageWrapper = () => {
     const { selectedItem: didItems }: any = useSelector(
         (state: RootState) => state.didManagement
     )
-
-    // // Set Countries
-    // useEffect(() => {
-    //     if (!isLoading && !isFetching) {
-    //         dispatch(setAllCountry(data?.data))
-    //     }
-    // }, [data, isLoading, isFetching, dispatch])
+    const refValue = React.useRef<FormikProps<FormInitialValues> | null>(null)
 
     console.log('initialValues', initialValues)
 
@@ -397,15 +384,13 @@ const CallerPageWrapper = () => {
     } = useGetByDidNumberQuery(didNumber, {
         skip: !didNumber,
     })
-
     useEffect(() => {
-        if (!didIsLoading && !didIsFetching)
+        if (!didIsLoading && !didIsFetching) {
             dispatch(setDidItems(didData?.data))
+        }
     }, [didData, didIsLoading, didIsFetching, dispatch])
 
-    // Set States
-
-    // Set States
+    // set State
     const {
         data: stateData,
         isLoading: stateIsLoading,
@@ -539,6 +524,7 @@ const CallerPageWrapper = () => {
         // eslint-disable-next-line
     }, [])
 
+    console.log(refValue, 'refValue')
     return (
         <>
             <Formik
@@ -547,6 +533,8 @@ const CallerPageWrapper = () => {
                 initialValues={initialValues}
                 // validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
+                // ref={refValue}
+                innerRef={refValue}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
