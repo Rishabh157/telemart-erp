@@ -129,7 +129,6 @@ import EditAssetsRequestwrapper from './assets/assetsRequest/edit/EditAssetsRequ
 import Auth from './login/Auth'
 import AddSlotManagementWrapper from './media/slotManagement/add/AddSlotManagementWrapper'
 import EditSlotManagementWrapper from './media/slotManagement/edit/EditSlotManagementWrapper'
-import InbouundWrapper from './media/Inbound/InboundWrapper'
 import WebstieListingWrapper from './websites/website/list/WebsiteListingWrapper'
 import AddWebsiteWrapper from './websites/website/add/AddwebsiteWrapper'
 import EditWebsiteWrapper from './websites/website/edit/EditWebsiteWrapper'
@@ -334,7 +333,6 @@ export {
     Auth,
     AddSlotManagementWrapper,
     EditSlotManagementWrapper,
-    InbouundWrapper,
     WebstieListingWrapper,
     AddWebsiteWrapper,
     EditWebsiteWrapper,

@@ -33,8 +33,8 @@ export const districtApi = apiSlice.injectEndpoints({
 
         getAllDistrictUnauth: builder.query({
             providesTags: ['District'],
-            query: () => ({
-                url: '/district/inbound',
+            query: (id: string) => ({
+                url: `/district/get-state-district/unauth/${id}`,
                 method: 'GET',
                 // body,
             }),

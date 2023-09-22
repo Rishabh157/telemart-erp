@@ -11,6 +11,7 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { endTimesOptions, startTimesOptions } from './constants'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import AddressDialog from './AddressDialog'
 
 type Props = {
     dropdownOptions: dropdownOptions
@@ -27,6 +28,7 @@ const CallerDeliveryAddress = ({
     setFieldValue,
     values,
 }: Props) => {
+    const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false)
     const [pinCodeSearch, setPinCodeSearch] = React.useState<string>('')
     const [endTimeOptionsList, setEndTimeOptionsList] = React.useState<
         SelectOption[] | []
@@ -139,7 +141,7 @@ const CallerDeliveryAddress = ({
                         }}
                     /> */}
 
-                    <div className="grid grid-cols-12">
+                    {/* <div className="grid grid-cols-12">
                         <div className="col-span-4 pt-2">
                             <span className="text-slate-700 text-sm font-medium">
                                 Pincode
@@ -188,7 +190,7 @@ const CallerDeliveryAddress = ({
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <ATMSelectSearchable
                         componentClass="mt-2"
@@ -232,6 +234,32 @@ const CallerDeliveryAddress = ({
                             )
                         }}
                     />
+
+                    <ATMSelectSearchable
+                        componentClass="mt-2"
+                        label="Tehsil/Taluka"
+                        size="xs"
+                        selectLabel="select tehsil/taluka"
+                        labelDirection="horizontal"
+                        classDirection="grid grid-cols-3"
+                        // isSubmitting
+                        name="tehsilId"
+                        value={values.tehsilId || ''}
+                        options={dropdownOptions.tehsilOptions || []}
+                        isValueWithLable
+                        onChange={(e) => {
+                            setFieldValue('tehsilId', e?.value || '')
+                            setFieldValue('tehsilLabel', e?.label || '')
+                            setFieldValue(
+                                'autoFillingShippingAddress',
+                                `${values.pincodeLabel}\n${
+                                    values.stateLabel
+                                }\n${values.areaLabel}\n${
+                                    values.districtLabel
+                                }\n${e?.label || ''}`
+                            )
+                        }}
+                    />
                     {/* <ATMSelectSearchable
                         componentClass="mt-2"
                         label="City/Village"
@@ -259,7 +287,7 @@ const CallerDeliveryAddress = ({
                 </div>
 
                 <div className="col-span-4 py-2 px-8   border-r-[1px]">
-                    <ATMSelectSearchable
+                    {/* <ATMSelectSearchable
                         componentClass="mt-2"
                         label="Tehsil/Taluka"
                         size="xs"
@@ -283,7 +311,68 @@ const CallerDeliveryAddress = ({
                                 }\n${e?.label || ''}`
                             )
                         }}
-                    />
+                    /> */}
+
+                    <div className="grid grid-cols-12">
+                        <div className="col-span-4 pt-2">
+                            <span className="text-slate-700 text-sm font-medium">
+                                Pincode
+                            </span>
+                        </div>
+                        <div className="col-span-8 pr-1">
+                            <div className="grid grid-cols-12 gap-x-2">
+                                <div className="col-span-7">
+                                    <ATMSelectSearchable
+                                        componentClass="mt-1"
+                                        size="xs"
+                                        name="pincodeId"
+                                        selectLabel="select pincode"
+                                        value={values.pincodeId || ''}
+                                        options={
+                                            dropdownOptions.pincodeOptions || []
+                                        }
+                                        isValueWithLable={true}
+                                        onChange={(e) => {
+                                            handlePinCode(e?.value || '')
+                                            setFieldValue(
+                                                'pincodeLabel',
+                                                e?.label || '' || ''
+                                            )
+                                        }}
+                                    />
+                                </div>
+                                <div className="col-span-3">
+                                    <ATMTextField
+                                        size="small"
+                                        extraClassField="mt-2"
+                                        placeholder="Search pincode"
+                                        name=""
+                                        value={pinCodeSearch}
+                                        onChange={(e) =>
+                                            setPinCodeSearch(e.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div className="col-span-2 pt-2">
+                                    <CallerButton
+                                        text="Search"
+                                        type="button"
+                                        className="text-[12px] h-[30px]"
+                                        onClick={() =>
+                                            pinCodeSearch === ''
+                                                ? setIsOpenDialog(true)
+                                                : setIsOpenDialog(false)
+                                        }
+                                    />
+                                </div>
+                                <AddressDialog
+                                    isShow={isOpenDialog}
+                                    onClose={() => setIsOpenDialog(false)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
                     <ATMSelectSearchable
                         componentClass="  mt-2"
                         label="Area"

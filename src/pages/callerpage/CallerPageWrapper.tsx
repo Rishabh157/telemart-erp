@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from 'react-router-dom'
 import { object, string } from 'yup'
@@ -102,6 +102,9 @@ const CallerPageWrapper = () => {
     const didNumber = queryParams.get('didnumber')
     const campaignId = queryParams.get('campaign')
     const calltype = queryParams.get('calltype')
+    const formikRef = useRef(null)
+
+    console.log('formikRef', formikRef)
 
     const columns: columnTypes[] = [
         {
@@ -384,6 +387,8 @@ const CallerPageWrapper = () => {
     //     }
     // }, [data, isLoading, isFetching, dispatch])
 
+    console.log('initialValues', initialValues)
+
     // Set did Number
     const {
         data: didData,
@@ -418,6 +423,10 @@ const CallerPageWrapper = () => {
         isLoading: districtIsLoading,
         isFetching: districtIsFetching,
     } = useGetAllDistrictUnauthQuery('')
+
+    console.log('')
+
+    // console.log('districtData', districtData)
 
     useEffect(() => {
         dispatch(setAllDistrict(districtData?.data))
@@ -534,6 +543,7 @@ const CallerPageWrapper = () => {
         <>
             <Formik
                 enableReinitialize
+                innerRef={formikRef}
                 initialValues={initialValues}
                 // validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
