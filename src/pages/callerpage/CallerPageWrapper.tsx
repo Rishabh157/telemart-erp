@@ -1,23 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import { useNavigate } from 'react-router-dom'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-// import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
-// import { setAllCountry } from 'src/redux/slices/countrySlice'
-import { useGetAllTehsilUnauthQuery } from 'src/services/TehsilService'
-import { setAllStates } from 'src/redux/slices/statesSlice'
-import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
-import { setAllTehsils } from 'src/redux/slices/tehsilSlice'
-import { setAllDistrict } from 'src/redux/slices/districtSlice'
-import { useGetAllDistrictUnauthQuery } from 'src/services/DistricService'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-// import { CountryListResponse } from 'src/models/Country.model'
-import { StateListResponse } from 'src/models/State.model'
-import { DistrictListResponse } from 'src/models/District.model'
-import { TehsilListResponse } from 'src/models/Tehsil.model'
 import CallerPage from './CallerPage'
 import {
     useAddCallerFormMutation,
@@ -28,7 +16,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
-
 import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
 import { CallerResponse } from 'src/models'
@@ -88,6 +75,7 @@ export type FormInitialValues = {
     totalAmount: number
     dispositionLevelTwoId: string | null
     dispositionLevelThreeId: string | null
+    status: string
 }
 
 const CallerPageWrapper = () => {
@@ -98,10 +86,6 @@ const CallerPageWrapper = () => {
     const didNumber = queryParams.get('didnumber')
     const campaignId = queryParams.get('campaign')
     const calltype = queryParams.get('calltype')
-    const formikRef = useRef(null)
-
-    console.log('formikRef', formikRef)
-
     const columns: columnTypes[] = [
         {
             field: 'ageGroup',
@@ -258,7 +242,6 @@ const CallerPageWrapper = () => {
         districtLabel: '',
         tehsilId: null,
         tehsilLabel: '',
-        // DELEVERY ADDRESS SELECT OPTIONS BOTTOM FIELDS
         typeOfAddress: '',
         reciversName: '',
         preffered_delivery_start_time: '',
@@ -286,6 +269,7 @@ const CallerPageWrapper = () => {
         dispositionLevelTwoId: null,
         dispositionLevelThreeId: null,
         alternateNo: '',
+        status: 'FRESH',
     }
 
     // Form validation schema
@@ -299,8 +283,6 @@ const CallerPageWrapper = () => {
         areaId: string(),
         districtId: string(),
         tehsilId: string(),
-
-        // DELEVERY ADDRESS SELECT OPTIONS BOTTOM FIELDS
         typeOfAddress: string(),
         reciversName: string(),
         deliveryTimeAndDate: string(),
@@ -364,17 +346,9 @@ const CallerPageWrapper = () => {
     }, [isCallerLoading, isCallerFetching, callerListingData])
     const dispatch = useDispatch<AppDispatch>()
 
-    const { allStates }: any = useSelector((state: RootState) => state.states)
-    const { allDistricts }: any = useSelector(
-        (state: RootState) => state.district
-    )
-    const { allTehsils }: any = useSelector((state: RootState) => state.tehsils)
     const { selectedItem: didItems }: any = useSelector(
         (state: RootState) => state.didManagement
     )
-    const refValue = React.useRef<FormikProps<FormInitialValues> | null>(null)
-
-    console.log('initialValues', initialValues)
 
     // Set did Number
     const {
@@ -389,72 +363,6 @@ const CallerPageWrapper = () => {
             dispatch(setDidItems(didData?.data))
         }
     }, [didData, didIsLoading, didIsFetching, dispatch])
-
-    // set State
-    const {
-        data: stateData,
-        isLoading: stateIsLoading,
-        isFetching: stateIsFetching,
-    } = useGetByAllStateUnauthQuery('')
-
-    useEffect(() => {
-        if (!stateIsLoading && !stateIsFetching)
-            dispatch(setAllStates(stateData?.data))
-    }, [stateData, stateIsLoading, stateIsFetching, dispatch])
-
-    // Set Districts
-    const {
-        data: districtData,
-        isLoading: districtIsLoading,
-        isFetching: districtIsFetching,
-    } = useGetAllDistrictUnauthQuery('')
-
-    console.log('')
-
-    // console.log('districtData', districtData)
-
-    useEffect(() => {
-        dispatch(setAllDistrict(districtData?.data))
-    }, [districtData, districtIsLoading, districtIsFetching, dispatch])
-
-    // Set Tehsil
-    const {
-        data: tehsilData,
-        isFetching: tehsilIsFetching,
-        isLoading: tehsilIsLoading,
-    } = useGetAllTehsilUnauthQuery('')
-
-    useEffect(() => {
-        if (!tehsilIsFetching && !tehsilIsLoading) {
-            dispatch(setAllTehsils(tehsilData?.data))
-        }
-    }, [tehsilData, dispatch, tehsilIsFetching, tehsilIsLoading])
-
-    // Set Area
-    const {
-        data: areaListData,
-        isFetching: areaIsFetching,
-        isLoading: areaIsLoading,
-    } = useGetAllTehsilUnauthQuery('')
-
-    useEffect(() => {
-        if (!areaIsFetching && !areaIsLoading) {
-            dispatch(setAllTehsils(areaListData?.data))
-        }
-    }, [areaListData, dispatch, areaIsFetching, areaIsLoading])
-
-    //  selected option dropdowns options
-    const dropdownOptions = {
-        stateOptions: allStates?.map((ele: StateListResponse) => {
-            return { label: ele?.stateName, value: ele?._id }
-        }),
-        districtOptions: allDistricts?.map((ele: DistrictListResponse) => {
-            return { label: ele?.districtName, value: ele?._id }
-        }),
-        tehsilOptions: allTehsils?.map((ele: TehsilListResponse) => {
-            return { label: ele?.tehsilName, value: ele?._id }
-        }),
-    }
 
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
@@ -524,27 +432,20 @@ const CallerPageWrapper = () => {
         // eslint-disable-next-line
     }, [])
 
-    console.log(refValue, 'refValue')
     return (
         <>
             <Formik
                 enableReinitialize
-                innerRef={formikRef}
                 initialValues={initialValues}
                 // validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
-                // ref={refValue}
-                innerRef={refValue}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
                         <form autoComplete="off">
                             <CallerPage
-                                // apiStatus={apiStatus}
                                 isLoading={UpdateCallerFormInfo.isLoading}
                                 formikProps={formikProps}
-                                dropdownOptions={dropdownOptions}
-                                schemeColumn={columns}
                                 didItems={didItems}
                                 column={columns}
                                 rows={items}

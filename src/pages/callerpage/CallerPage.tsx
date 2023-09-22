@@ -1,9 +1,7 @@
-   import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import CallerButton from './components/CallerButton'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { FormInitialValues } from './CallerPageWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormikProps } from 'formik'
@@ -12,24 +10,15 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import { setAllItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
 import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
 import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
-import { useGetAllPincodeUnauthQuery } from 'src/services/PinCodeService'
-import {
-    useGetSchemeByIdQuery,
-} from 'src/services/SchemeService'
+import { useGetSchemeByIdQuery } from 'src/services/SchemeService'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
-import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
-import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
-import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
-import { AreaListResponse } from 'src/models/Area.model'
 import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
 import CallerHeader from './components/CallerHeader'
 import CallerPageTopNav from './components/CallerPageTopNav'
-
 import CallerScheme from './components/CallerScheme'
 import CallerDeliveryAddress from './components/CallerDeliveryAddress'
 import CallerOtherDetails from './components/CallerOtherDetails'
 export type dropdownOptions = {
-    // counrtyOptions: SelectOption[]
     stateOptions?: SelectOption[] | []
     districtOptions?: SelectOption[] | []
     pincodeOptions?: SelectOption[] | []
@@ -43,9 +32,6 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     column: any[]
     rows: any[]
-    apiStatus?: boolean
-    schemeColumn: columnTypes[] | []
-    dropdownOptions: dropdownOptions
     didItems: any
     isLoading: boolean
 }
@@ -76,9 +62,6 @@ export interface SchemeDetailsPropTypes {
 
 const CallerPage: React.FC<Props> = ({
     formikProps,
-    apiStatus,
-    dropdownOptions,
-    schemeColumn,
     didItems,
     column,
     rows,
@@ -99,7 +82,6 @@ const CallerPage: React.FC<Props> = ({
         SelectOption[] | []
     >([])
 
-
     const { values, setFieldValue } = formikProps
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate()
@@ -107,24 +89,6 @@ const CallerPage: React.FC<Props> = ({
     const { allItems: allDispositionItems }: any = useSelector(
         (state: RootState) => state.dispositionThree
     )
-    const { items: allArea }: any = useSelector(
-        (state: RootState) => state.areas
-    )
-    const { allPincodes }: any = useSelector(
-        (state: RootState) => state.pincode
-    )
-
-    const {
-        data: PCdata,
-        isFetching: PCisFetching,
-        isLoading: PCisLoading,
-    } = useGetAllPincodeUnauthQuery('')
-
-    useEffect(() => {
-        if (!PCisLoading && !PCisFetching) {
-            dispatch(setAllPincodes(PCdata?.data))
-        }
-    }, [PCdata, dispatch, PCisLoading, PCisFetching])
 
     // Get Product Group Data
     const {
@@ -139,7 +103,7 @@ const CallerPage: React.FC<Props> = ({
         if (didItems) {
             setFieldValue(
                 'productGroupId',
-                didItems.schemeProductGroup[0].productGroup
+                didItems?.schemeProductGroup[0]?.productGroup || ''
             )
             setFieldValue('schemeId', didItems?.schemeId)
         }
@@ -160,8 +124,6 @@ const CallerPage: React.FC<Props> = ({
             }
         }
     }, [productGroupData, isProductGroupLoading, isProductGroupFetching])
-
-
 
     // GET SINGLE SCHEME BY ID
     const {
@@ -235,37 +197,6 @@ const CallerPage: React.FC<Props> = ({
         dispositionTwoIsFetching,
     ])
 
-    // Area Options
-    const {
-        data: areaData,
-        isLoading: areaIsLoading,
-        isFetching: areaIsFetching,
-    } = useGetAllAreaUnauthQuery(formikProps?.values?.pincodeId, {
-        skip: !formikProps?.values?.pincodeId,
-    })
-
-    useEffect(() => {
-        if (!areaIsFetching && !areaIsLoading) {
-            dispatch(setAreaItems(areaData?.data))
-        }
-        // eslint-disable-next-line
-    }, [areaData, areaIsLoading, areaIsFetching, dispatch])
-
-    useEffect(() => {
-        if (formikProps?.values?.pincodeId && areaData?.data) {
-            let v: string[] | string =
-                formikProps?.values?.autoFillingShippingAddress.split('\n')
-            let areaName = areaData?.data[0]?.area
-            v.splice(2, 0, areaName)
-            let cv: string = v.toString()
-            let dv = cv?.replaceAll(',', '\n')
-            setFieldValue('areaId', areaData?.data[0]?._id || '')
-            setFieldValue('areaLabel', areaName || '')
-            setFieldValue('autoFillingShippingAddress', dv || '')
-        }
-        // eslint-disable-next-line
-    }, [allArea, formikProps?.values?.pincodeId])
-
     useEffect(() => {
         setFieldValue('totalAmount', schemeDetails.totalAmount)
         setFieldValue('shcemeQuantity', schemeDetails.quantity)
@@ -276,20 +207,12 @@ const CallerPage: React.FC<Props> = ({
         // eslint-disable-next-line
     }, [schemeDetails])
 
-    dropdownOptions = {
-        ...dropdownOptions,
-
+    const dropdownOptions = {
         dispositionThreeOptions: allDispositionItems?.map((ele: any) => {
             return { label: ele?.dispositionName, value: ele?._id }
         }),
         dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
             return { label: ele?.dispositionName, value: ele?._id }
-        }),
-        pincodeOptions: allPincodes?.map((ele: any) => {
-            return { label: ele?.pincode, value: ele?._id }
-        }),
-        areaOptions: allArea?.map((ele: AreaListResponse) => {
-            return { label: ele?.area, value: ele?._id }
         }),
     }
 
@@ -307,13 +230,11 @@ const CallerPage: React.FC<Props> = ({
                 values={values}
                 setFieldValue={setFieldValue}
                 productsGroupOptions={productsGroupOptions}
-                // schemeListOptions={schemeListOptions}
                 setSchemeDetails={setSchemeDetails}
                 schemeDetails={schemeDetails}
                 companyId={companyId}
             />
             <CallerDeliveryAddress
-                dropdownOptions={dropdownOptions}
                 setFieldValue={setFieldValue}
                 values={values}
             />
@@ -367,7 +288,6 @@ const CallerPage: React.FC<Props> = ({
             </div>
 
             {/* Data Table  */}
-
             <div className="border-[1px] pb-2 mt-1 border-grey-700 pt-2">
                 <ATMTable
                     headerClassName="bg-[#87527c] py-2 text-white"

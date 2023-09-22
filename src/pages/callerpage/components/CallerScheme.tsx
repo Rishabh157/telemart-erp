@@ -70,7 +70,7 @@ const CallerScheme = ({
             productGroupId: values?.productGroupId,
         },
         {
-            skip: !values?.productGroupId,
+            skip: !values?.productGroupId || !companyId,
         }
     )
     useEffect(() => {
@@ -81,12 +81,10 @@ const CallerScheme = ({
                     value: products?._id,
                 }
             })
-            console.log(schemeList, 'schemeList')
             setSchemeListOptions(schemeList)
         }
     }, [schemeListData, isSchemeListFetching, isSchemeListLoading])
 
-    console.log('values?.schemeId', values?.schemeId)
     return (
         <>
             <div className="grid grid-cols-12 mt-1 px-2">

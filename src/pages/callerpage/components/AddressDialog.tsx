@@ -28,7 +28,7 @@ import {
 } from 'src/redux/slices/inquirySlice'
 import { DealersRatioListResponse } from 'src/models'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import { FaExclamation } from 'react-icons/fa'
+// import { FaExclamation } from 'react-icons/fa'
 import CallerButton from './CallerButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 
@@ -204,10 +204,10 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                             </div>
                             <div className="col-span-6">
                                 <ATMTextField
-                                    label="City"
+                                    label="District"
                                     placeholder="Enter City"
                                     size="small"
-                                    name="city"
+                                    name="district"
                                     value={''}
                                     onChange={(e) => {
                                         // setPinCodeSearch(e.target.value)
@@ -216,7 +216,7 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                             </div>
                             <div className="col-span-6">
                                 <ATMTextField
-                                    label="Taluk"
+                                    label="Taluk/Tehsil"
                                     placeholder="Enter Taluk"
                                     size="small"
                                     name="taluk"
@@ -228,10 +228,10 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                             </div>
                             <div className="col-span-6">
                                 <ATMTextField
-                                    label="Post"
-                                    placeholder="Enter Post"
+                                    label="Area"
+                                    placeholder="Enter Area"
                                     size="small"
-                                    name="post"
+                                    name="area"
                                     value={''}
                                     onChange={(e) => {
                                         // setPinCodeSearch(e.target.value)

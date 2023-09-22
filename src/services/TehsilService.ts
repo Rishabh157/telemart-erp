@@ -34,8 +34,8 @@ export const tehsilApi = apiSlice.injectEndpoints({
 
         getAllTehsilUnauth: builder.query({
             providesTags: ['Tehsil'],
-            query: (id) => ({
-                url: '/tehsil/inbound',
+            query: (id: string) => ({
+                url: `/tehsil/get-district-tehsil/unauth/${id}`,
                 method: 'GET',
                 // body,
             }),
