@@ -253,7 +253,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                             name="remark"
                             value={values.remark}
                             placeholder="Other Remarks"
-                            minRows={11}
+                            minRows={8}
                             onChange={(value) => {
                                 setFieldValue('remark', value)
                             }}

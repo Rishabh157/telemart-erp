@@ -278,11 +278,11 @@ const CallerPageWrapper = () => {
         productGroupId: string().required('product group id is required'),
         // DELEVERY ADDRESS SELECT OPTIONS
         countryId: string(),
-        pincodeId: string(),
-        stateId: string(),
-        areaId: string(),
-        districtId: string(),
-        tehsilId: string(),
+        // pincodeId: string(),
+        // stateId: string(),
+        // areaId: string(),
+        // districtId: string(),
+        // tehsilId: string(),
         typeOfAddress: string(),
         reciversName: string(),
         deliveryTimeAndDate: string(),
@@ -296,7 +296,7 @@ const CallerPageWrapper = () => {
         autoFillingShippingAddress: string(),
         // isRecording: boolean(),
         gender: string(),
-        orderFor: string(),
+        // orderFor: string(),
         orderForOtherText: string(),
         ageGroup: string(),
         emailId: string().email('invalid email'),
@@ -437,7 +437,7 @@ const CallerPageWrapper = () => {
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
-                // validationSchema={validationSchema}
+                validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {

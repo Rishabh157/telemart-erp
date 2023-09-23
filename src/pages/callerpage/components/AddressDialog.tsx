@@ -102,8 +102,8 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
             ),
         },
         {
-            field: 'city',
-            headerName: 'City',
+            field: 'district',
+            headerName: 'District',
             flex: 'flex-[1_5_0%]',
             renderCell: (row: DealersRatioListResponse) => (
                 <span className="text-primary-main ">{row.pincode}</span>
