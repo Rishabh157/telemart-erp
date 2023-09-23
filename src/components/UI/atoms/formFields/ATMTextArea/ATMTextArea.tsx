@@ -24,6 +24,7 @@ type Props = {
     isSubmitting?: boolean
     labelClass?: string
     readOnly?: boolean
+    isDisable?: boolean
 }
 
 const ATMTextArea = ({
@@ -38,6 +39,7 @@ const ATMTextArea = ({
     name = '',
     readOnly = false,
     isSubmitting = true,
+    isDisable = false,
 }: Props) => {
     return (
         <div className=" mt-4">
@@ -48,6 +50,7 @@ const ATMTextArea = ({
                 </label>
             )}
             <textarea
+                disabled={isDisable}
                 readOnly={readOnly}
                 name={name}
                 value={value}

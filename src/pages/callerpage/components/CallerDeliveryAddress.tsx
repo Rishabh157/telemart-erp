@@ -168,11 +168,30 @@ const CallerDeliveryAddress = ({
         getAllInfoByPincode(pinCodeSearch)
             .then((res: any) => {
                 if (res?.data?.status) {
+                    // value id
                     setFieldValue('stateId', res?.data?.stateData[0]?._id)
                     setFieldValue('districtId', res?.data?.districtData[0]?._id)
                     setFieldValue('tehsilId', res?.data?.tehsilData[0]?._id)
                     setFieldValue('pincodeId', res?.data?.pincodeData?._id)
                     setFieldValue('areaId', res?.data?.areaData[0]?._id)
+                    // lable
+                    setFieldValue(
+                        'stateLabel',
+                        res?.data?.stateData[0]?.stateName
+                    )
+                    setFieldValue(
+                        'districtLabel',
+                        res?.data?.districtData[0]?.districtName
+                    )
+                    setFieldValue(
+                        'tehsilLabel',
+                        res?.data?.tehsilData[0]?.tehsilName
+                    )
+                    setFieldValue(
+                        'pincodeLabel',
+                        res?.data?.pincodeData?.pincode
+                    )
+                    setFieldValue('areaLabel', res?.data?.areaData[0]?.area)
                 } else {
                     showToast('error', res?.data?.message)
                     setFieldValue('stateId', '')
@@ -187,27 +206,82 @@ const CallerDeliveryAddress = ({
             })
     }
 
+    const handleAutoFillShippingAddress = (values: FormInitialValues) => {
+        const addressLabels = `${
+            values.stateLabel ? values.stateLabel + '\n' : ''
+        }${values.districtLabel ? values.districtLabel + '\n' : ''}${
+            values.tehsilLabel ? values.tehsilLabel + '\n' : ''
+        }${values.pincodeLabel ? values.pincodeLabel + '\n' : ''}${
+            values.areaLabel ? values.areaLabel + '\n' : ''
+        }${values.houseNumber ? values.houseNumber + '\n' : ''}${
+            values.streetNumber ? values.streetNumber + '\n' : ''
+        }${values.landmark ? values.landmark + '\n' : ''}`
+        return addressLabels
+    }
+
     // handle address related fields
 
     const handleRemoveAddressRelated = (type: string) => {
         switch (type) {
             case 'stateId':
+                // id's
                 setFieldValue('districtId', '')
                 setFieldValue('tehsilId', '')
                 setFieldValue('pincodeId', '')
                 setFieldValue('areaId', '')
+                // labels
+                setFieldValue('stateLabel', '')
+                setFieldValue('districtLabel', '')
+                setFieldValue('tehsilLabel', '')
+                setFieldValue('pincodeLabel', '')
+                setFieldValue('areaLabel', '')
+
+                // dispatch
+                dispatch(setAllDistrict([]))
+                dispatch(setAllTehsils([]))
+                dispatch(setAllPincodes([]))
+                dispatch(setAreaItems([]))
+
                 break
             case 'districtId':
+                // id's
                 setFieldValue('tehsilId', '')
                 setFieldValue('pincodeId', '')
                 setFieldValue('areaId', '')
+                // lables
+                setFieldValue('districtLabel', '')
+                setFieldValue('tehsilLabel', '')
+                setFieldValue('pincodeLabel', '')
+                setFieldValue('areaLabel', '')
+
+                // dispatch
+                dispatch(setAllTehsils([]))
+                dispatch(setAllPincodes([]))
+                dispatch(setAreaItems([]))
                 break
             case 'tehsilId':
+                // id's
                 setFieldValue('pincodeId', '')
                 setFieldValue('areaId', '')
+                // lables
+                setFieldValue('tehsilLabel', '')
+                setFieldValue('pincodeLabel', '')
+                setFieldValue('areaLabel', '')
+
+                // dispatch
+                dispatch(setAllPincodes([]))
+                dispatch(setAreaItems([]))
+
                 break
             case 'pincodeId':
+                // id's
                 setFieldValue('areaId', '')
+                // lables
+                setFieldValue('pincodeLabel', '')
+                setFieldValue('areaLabel', '')
+
+                // dispatch
+                dispatch(setAreaItems([]))
                 break
             default:
                 break
@@ -231,51 +305,6 @@ const CallerDeliveryAddress = ({
         areaOptions: allArea?.map((ele: AreaListResponse) => {
             return { label: ele?.area, value: ele?._id }
         }),
-    }
-
-    function handlePinCode(newValue: string) {
-        var newarray = allPincodes?.find((ele: any) => {
-            return ele._id === newValue
-        })
-
-        // set values with id
-        setFieldValue('pincodeId', newarray?._id ? newarray?._id : '')
-        setFieldValue('tehsilId', newarray?.tehsilId ? newarray?.tehsilId : '')
-        setFieldValue(
-            'districtId',
-            newarray?.districtId ? newarray?.districtId : ''
-        )
-        if (!newarray) {
-            setFieldValue('areaId', newarray || '')
-        }
-        setFieldValue('stateId', newarray?.stateId ? newarray?.stateId : '')
-        setFieldValue(
-            'countryId',
-            newarray?.countryId ? newarray?.countryId : ''
-        )
-
-        // set values with label
-        setFieldValue(
-            'pincodeLabel',
-            newarray?.pincode ? newarray?.pincode : ''
-        )
-        setFieldValue('stateLabel', newarray?.StateLable || '')
-        setFieldValue(
-            'districtLabel',
-            newarray?.DistrictLable ? newarray?.DistrictLable : ''
-        )
-        setFieldValue('stateId', newarray?.stateId ? newarray?.stateId : '')
-        setFieldValue(
-            'tehsilLabel',
-            newarray?.tehsilLable ? newarray?.tehsilLable : ''
-        )
-
-        setFieldValue(
-            'autoFillingShippingAddress',
-            newarray?._id
-                ? `${newarray?.pincode}\n${newarray?.StateLable}\n${newarray?.DistrictLable}\n${newarray?.tehsilLable}`
-                : ''
-        )
     }
 
     // handle endTimeOption list accrdoing to start time
@@ -321,22 +350,26 @@ const CallerDeliveryAddress = ({
                         </div>
                         <div className="col-span-8 pr-1">
                             <div className="grid grid-cols-12 gap-x-2">
-                                <div className="col-span-7">
+                                <div className="col-span-6">
                                     <ATMSelectSearchable
                                         componentClass="mt-1"
                                         size="xs"
                                         name="pincodeId"
                                         selectLabel="select pincode"
                                         value={values.pincodeId || ''}
+                                        isValueWithLable={true}
                                         options={
                                             dropdownOptions.pincodeOptions || []
                                         }
-                                        isValueWithLable={true}
                                         onChange={(e) => {
-                                            handlePinCode(e?.value || '')
+                                            // handlePinCode(e?.value || '')
+                                            setFieldValue(
+                                                'pincodeId',
+                                                e?.value || ''
+                                            )
                                             setFieldValue(
                                                 'pincodeLabel',
-                                                e?.label || '' || ''
+                                                e?.label || ''
                                             )
                                             if (!e.value) {
                                                 handleRemoveAddressRelated(
@@ -346,12 +379,13 @@ const CallerDeliveryAddress = ({
                                         }}
                                     />
                                 </div>
-                                <div className="col-span-3">
+                                <div className="col-span-4">
                                     <ATMTextField
                                         maxLength={6}
                                         minLength={6}
                                         size="small"
                                         extraClassField="mt-2"
+                                        className='py-[18px] rounded'
                                         placeholder="Search pincode"
                                         name=""
                                         value={pinCodeSearch}
@@ -360,11 +394,11 @@ const CallerDeliveryAddress = ({
                                         }
                                     />
                                 </div>
-                                <div className="col-span-2 pt-2">
+                                <div className="col-span-2 mt-2">
                                     <CallerButton
                                         text="Search"
                                         type="button"
-                                        className="text-[12px] py-2"
+                                        className="text-[14px] py-2"
                                         onClick={() =>
                                             pinCodeSearch === ''
                                                 ? setIsOpenDialog(true)
@@ -393,7 +427,7 @@ const CallerDeliveryAddress = ({
                         value={values.pincodeId || ''}
                         options={dropdownOptions.pincodeOptions || []}
                         onChange={(e) => {
-                            handlePinCode(e)
+                            // handlePinCode(e)
                             handleSetPinCodeName(e)
                         }}
                     /> */}
@@ -418,7 +452,7 @@ const CallerDeliveryAddress = ({
                                         }
                                         isValueWithLable={true}
                                         onChange={(e) => {
-                                            handlePinCode(e?.value || '')
+                                            // handlePinCode(e?.value || '')
                                             setFieldValue(
                                                 'pincodeLabel',
                                                 e?.label || '' || ''
@@ -463,10 +497,6 @@ const CallerDeliveryAddress = ({
                         onChange={(e) => {
                             setFieldValue('stateId', e?.value || '')
                             setFieldValue('stateLabel', e?.label || '')
-                            setFieldValue(
-                                'autoFillingShippingAddress',
-                                `${values?.pincodeLabel}\n${e?.label || ''}`
-                            )
                             if (!e.value) {
                                 handleRemoveAddressRelated('stateId')
                             }
@@ -486,12 +516,6 @@ const CallerDeliveryAddress = ({
                         onChange={(e) => {
                             setFieldValue('districtId', e?.value || '')
                             setFieldValue('districtLabel', e?.label || '')
-                            setFieldValue(
-                                'autoFillingShippingAddress',
-                                `${values.pincodeLabel}\n${
-                                    values.stateLabel
-                                }\n${values.areaLabel}\n${e?.label || ''}`
-                            )
                             if (!e.value) {
                                 handleRemoveAddressRelated('districtId')
                             }
@@ -513,14 +537,6 @@ const CallerDeliveryAddress = ({
                         onChange={(e) => {
                             setFieldValue('tehsilId', e?.value || '')
                             setFieldValue('tehsilLabel', e?.label || '')
-                            setFieldValue(
-                                'autoFillingShippingAddress',
-                                `${values.pincodeLabel}\n${
-                                    values.stateLabel
-                                }\n${values.areaLabel}\n${
-                                    values.districtLabel
-                                }\n${e?.label || ''}`
-                            )
                             if (!e.value) {
                                 handleRemoveAddressRelated('tehsilId')
                             }
@@ -544,14 +560,6 @@ const CallerDeliveryAddress = ({
                         onChange={(e) => {
                             setFieldValue('tehsilId', e?.value || '')
                             setFieldValue('tehsilLabel', e?.label || '')
-                            setFieldValue(
-                                'autoFillingShippingAddress',
-                                `${values.pincodeLabel}\n${
-                                    values.stateLabel
-                                }\n${values.areaLabel}\n${
-                                    values.districtLabel
-                                }\n${e?.label || ''}`
-                            )
                             if (!e.value) {
                                 handleRemoveAddressRelated('tehsilId')
                             }
@@ -572,12 +580,6 @@ const CallerDeliveryAddress = ({
                         onChange={(e) => {
                             setFieldValue('areaId', e?.value || '')
                             setFieldValue('areaLabel', e?.label || '')
-                            setFieldValue(
-                                'autoFillingShippingAddress',
-                                `${values.pincodeLabel}\n${
-                                    values.stateLabel
-                                }\n${e?.label || ''}`
-                            )
                         }}
                     />
                 </div>
@@ -613,12 +615,12 @@ const CallerDeliveryAddress = ({
                     />
 
                     <ATMTextField
-                        label="Recivers Name"
+                        label="Customer Name"
                         size="xs"
                         extraClassField="mt-0"
                         labelDirection="horizontal"
                         name="reciversName"
-                        placeholder="recivers name"
+                        placeholder="enter customer name"
                         value={values.reciversName || ''}
                         onChange={(e) => {
                             setFieldValue('reciversName', e.target.value)
@@ -798,8 +800,9 @@ const CallerDeliveryAddress = ({
                 <div className="col-span-6 py-2 px-8 border-r-[1px]">
                     <div className="-mt-3">
                         <ATMTextArea
+                            isDisable={true}
                             name="autoFillingShippingAddress"
-                            value={values.autoFillingShippingAddress || ''}
+                            value={handleAutoFillShippingAddress(values) || ''}
                             placeholder="AUTOFILL SHIPPING ADDRESS"
                             minRows={9}
                             readOnly={true}
