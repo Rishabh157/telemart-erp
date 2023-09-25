@@ -165,7 +165,6 @@ const OrderListing = ({
                 }
             )
             setOrderFlowList(filterdOrderFlow)
-            // console.log('items to show', filterdOrderFlow)
         }
     }, [isOrderFlowLoading, isOrderFlowFetching, orderFlowData])
 
