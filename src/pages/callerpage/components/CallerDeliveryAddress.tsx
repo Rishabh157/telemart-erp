@@ -414,75 +414,6 @@ const CallerDeliveryAddress = ({
                         </div>
                     </div>
 
-                    {/* FOR SINGLE PINCODE SELECT FIELD */}
-                    {/* <ATMSelectSearchable
-                        required
-                        componentClass="mt-2"
-                        label="Pincode"
-                        size="xs"
-                        labelDirection="horizontal"
-                        classDirection="grid grid-cols-3"
-                        // isSubmitting
-                        name="pincodeId"
-                        value={values.pincodeId || ''}
-                        options={dropdownOptions.pincodeOptions || []}
-                        onChange={(e) => {
-                            // handlePinCode(e)
-                            handleSetPinCodeName(e)
-                        }}
-                    /> */}
-
-                    {/* <div className="grid grid-cols-12">
-                        <div className="col-span-4 pt-2">
-                            <span className="text-slate-700 text-sm font-medium">
-                                Pincode
-                            </span>
-                        </div>
-                        <div className="col-span-8 pr-1">
-                            <div className="grid grid-cols-12 gap-x-2">
-                                <div className="col-span-5">
-                                    <ATMSelectSearchable
-                                        componentClass="mt-1"
-                                        size="xs"
-                                        name="pincodeId"
-                                        selectLabel="select pincode"
-                                        value={values.pincodeId || ''}
-                                        options={
-                                            dropdownOptions.pincodeOptions || []
-                                        }
-                                        isValueWithLable={true}
-                                        onChange={(e) => {
-                                            // handlePinCode(e?.value || '')
-                                            setFieldValue(
-                                                'pincodeLabel',
-                                                e?.label || '' || ''
-                                            )
-                                        }}
-                                    />
-                                </div>
-                                <div className="col-span-5">
-                                    <ATMTextField
-                                        size="xs"
-                                        extraClassField="mt-2"
-                                        placeholder="Search pincode"
-                                        name=""
-                                        value={pinCodeSearch}
-                                        onChange={(e) =>
-                                            setPinCodeSearch(e.target.value)
-                                        }
-                                    />
-                                </div>
-                                <div className="col-span-2 pt-2">
-                                    <CallerButton
-                                        text="Search"
-                                        type="button"
-                                        className="text-[12px] h-[30px]"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
-
                     <ATMSelectSearchable
                         componentClass="mt-2"
                         label="State"
@@ -521,27 +452,6 @@ const CallerDeliveryAddress = ({
                             }
                         }}
                     />
-
-                    {/* <ATMSelectSearchable
-                        componentClass="mt-2"
-                        label="Tehsil/Taluka"
-                        size="xs"
-                        selectLabel="select tehsil/taluka"
-                        labelDirection="horizontal"
-                        classDirection="grid grid-cols-3"
-                        // isSubmitting
-                        name="tehsilId"
-                        value={values.tehsilId || ''}
-                        options={dropdownOptions.tehsilOptions || []}
-                        isValueWithLable
-                        onChange={(e) => {
-                            setFieldValue('tehsilId', e?.value || '')
-                            setFieldValue('tehsilLabel', e?.label || '')
-                            if (!e.value) {
-                                handleRemoveAddressRelated('tehsilId')
-                            }
-                        }}
-                    /> */}
                 </div>
 
                 <div className="col-span-4 py-2 px-8   border-r-[1px]">

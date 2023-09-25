@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:AddressDialog.tsx
 // Type: List Component
-// Last Updated: SEPTEMBER 22, 2023
+// Last Updated: SEPTEMBER 25, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -28,7 +28,6 @@ import {
 } from 'src/redux/slices/inquirySlice'
 import { DealersRatioListResponse } from 'src/models'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-// import { FaExclamation } from 'react-icons/fa'
 import CallerButton from './CallerButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 
@@ -250,11 +249,11 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                     }}
                                 />
                             </div>
-                            <div className="col-span-2 pt-2 flex justify-center items-end mb-1">
+                            <div className="col-span-2 pt-2 flex justify-center items-end">
                                 <CallerButton
                                     text="Search"
                                     type="button"
-                                    className="text-[12px] h-[30px]"
+                                    className="text-[12px] py-[9px]"
                                     onClick={onClose}
                                 />
                             </div>

@@ -65,23 +65,6 @@ CallerHeaderPropsTypes) => {
                         {DidNumber}
                     </div>
                 </div>
-                {/* <div className="w-full">
-                        <h3 className="text-white font-extrabold text-[14px]">
-                            DID NO
-                        </h3>
-                        <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
-                            {DidNumber}
-                        </div>
-                    </div> */}
-                {/* </div> */}
-                {/* <div> */}
-                {/* <h3 className="text-white font-extrabold text-[14px]">
-                        Whatsapp
-                    </h3>
-                    <div className=" bg-white text-center p-1 rounded bedge text-[#15616E] text-[14px] font-bold">
-                        {Status}
-                    </div> */}
-                {/* </div> */}
             </div>
         </div>
     )
