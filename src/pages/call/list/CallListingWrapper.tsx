@@ -20,7 +20,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
 import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
-import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
+import { useGetPaginationInboundCallerQuery } from 'src/services/CallerService'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 // |-- Redux --|

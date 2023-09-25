@@ -49,7 +49,7 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
         getAllUnAuthdispositionTwo: builder.query({
             providesTags: ['dispositionTwo'],
             query: (Id) => ({
-                url: `/disposition-two/unauth/`,
+                url: `/disposition-two/unauth-dp2`,
                 method: 'GET',
                 // body,
             }),

@@ -21,9 +21,9 @@ import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import {
     useAddInboundCallerMutation,
-    useGetPaginationInboundCallerQuery,
     useUpdateInboundCallerMutation,
 } from 'src/services/media/InboundCallerServices'
+import { useGetPaginationInboundCallerQuery } from 'src/services/CallerService'
 import { useGetAllTehsilUnauthQuery } from 'src/services/TehsilService'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { useGetByAllStateUnauthQuery } from 'src/services/StateService'

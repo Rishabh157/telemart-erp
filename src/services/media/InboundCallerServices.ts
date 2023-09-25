@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Internal Dependencies --|
-import { PaginationType } from 'src/models/common/paginationType'
+// import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
 import {
     AddInboundCaller,
@@ -15,15 +15,6 @@ import {
 
 export const inboundCallerManagementApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        //***** GET PAGINATION DATA *****/
-        getPaginationInboundCaller: builder.query({
-            providesTags: ['call'],
-            query: (body: PaginationType) => ({
-                url: '/call',
-                method: 'POST',
-                body,
-            }),
-        }),
         //***** GET Without PAGINATION DATA *****/
         getAllInboundCaller: builder.query({
             providesTags: ['call'],
@@ -72,7 +63,6 @@ export const inboundCallerManagementApi = apiSlice.injectEndpoints({
 
 export const {
     useAddInboundCallerMutation,
-    useGetPaginationInboundCallerQuery,
     useUpdateInboundCallerMutation,
     useGetAllInboundCallerQuery,
     useGetInboundCallerByIdQuery,

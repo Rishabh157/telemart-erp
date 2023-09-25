@@ -16,7 +16,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
 import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
-import { useGetPaginationInboundCallerQuery } from 'src/services/media/InboundCallerServices'
+import { useGetPaginationInboundCallerQuery } from 'src/services/CallerService'
 import { CallerResponse } from 'src/models'
 import { useLocation } from 'react-router-dom'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'

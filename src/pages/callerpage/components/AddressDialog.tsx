@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { useGetInquiryQuery } from 'src/services/InquiryService'
+import { useGetInquiryUnAuthQuery } from 'src/services/InquiryService'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -58,7 +58,7 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
         // isTableLoading,
     } = inquiryState
 
-    const { data, isLoading, isFetching } = useGetInquiryQuery({
+    const { data, isLoading, isFetching } = useGetInquiryUnAuthQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['inquiryNumber'],
