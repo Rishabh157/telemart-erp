@@ -45,7 +45,7 @@ export const stateApi = apiSlice.injectEndpoints({
         getByAllStateUnauth: builder.query({
             providesTags: ['State'],
             query: () => ({
-                url: `/state/inbound`,
+                url: `/state/unauth-state`,
                 method: 'GET',
                 // body,
             }),

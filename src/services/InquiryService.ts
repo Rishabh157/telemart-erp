@@ -21,6 +21,16 @@ export const InquiryApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET UnAuth *****/
+        getInquiryUnAuth: builder.query({
+            providesTags: ['inquiry'],
+            query: (body: PaginationType) => ({
+                url: '/inquiry/unauth-inquiry',
+                method: 'POST',
+                body,
+            }),
+        }),
+
         //***** GET *****/
         getAllInquiry: builder.query({
             providesTags: ['inquiry'],
@@ -78,6 +88,7 @@ export const InquiryApi = apiSlice.injectEndpoints({
 })
 export const {
     useGetInquiryQuery,
+    useGetInquiryUnAuthQuery,
     useUpdateInquiryStatusMutation,
     useGetInquiryByIdQuery,
     useExportInquiryDataMutation,

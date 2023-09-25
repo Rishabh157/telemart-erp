@@ -10,7 +10,7 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import { setAllItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
 import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
 import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
-import { useGetSchemeByIdQuery } from 'src/services/SchemeService'
+import { useGetSchemeByIdUnAuthQuery } from 'src/services/SchemeService'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
 import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
 import CallerHeader from './components/CallerHeader'
@@ -130,7 +130,7 @@ const CallerPage: React.FC<Props> = ({
         data: singleSchemeData,
         isFetching: isSingleSchemeFetching,
         isLoading: isSingleSchemeLoading,
-    } = useGetSchemeByIdQuery(values.schemeId, {
+    } = useGetSchemeByIdUnAuthQuery(values.schemeId, {
         skip: !formikProps?.values?.schemeId,
     })
 

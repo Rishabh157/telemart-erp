@@ -1,19 +1,19 @@
 import apiSlice from './ApiSlice'
-// import { PaginationType } from 'src/models/common/paginationType'
+import { PaginationType } from 'src/models/common/paginationType'
 // import { UpdateCartonBoxBarcode } from 'src/models/CartonBoxBarcode.model'
 // import { CallerFormBody, UpdateCallerForm } from 'src/models'
 
 export const callerPageApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        //***** GET *****/
-        // getCartonBoxBarcode: builder.query({
-        //     providesTags: ['CartonBoxBarcode'],
-        //     query: (body: PaginationType) => ({
-        //         url: '/cartonbox-barcode',
-        //         method: 'POST',
-        //         body,
-        //     }),
-        // }),
+        //***** GET PAGINATION DATA *****/
+        getPaginationInboundCaller: builder.query({
+            providesTags: ['call'],
+            query: (body: PaginationType) => ({
+                url: 'call/unauth-call',
+                method: 'POST',
+                body,
+            }),
+        }),
 
         //***** ADD *****/
         addCallerForm: builder.mutation({
@@ -46,5 +46,8 @@ export const callerPageApi = apiSlice.injectEndpoints({
         // }),
     }),
 })
-export const { useAddCallerFormMutation, useUpdateCallerFormMutation } =
-    callerPageApi
+export const {
+    useGetPaginationInboundCallerQuery,
+    useAddCallerFormMutation,
+    useUpdateCallerFormMutation,
+} = callerPageApi

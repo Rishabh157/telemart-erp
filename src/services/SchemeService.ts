@@ -56,7 +56,6 @@ export const schemeApi = apiSlice.injectEndpoints({
             invalidatesTags: ['scheme'],
             query: ({ body, id }: UpdateScheme) => ({
                 url: `/scheme/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -67,6 +66,15 @@ export const schemeApi = apiSlice.injectEndpoints({
             providesTags: ['scheme'],
             query: (id) => ({
                 url: `/scheme/${id}`,
+                method: 'GET',
+            }),
+        }),
+
+        // **** GET BY ID UnAuth
+        getSchemeByIdUnAuth: builder.query({
+            providesTags: ['scheme'],
+            query: (id) => ({
+                url: `/scheme/unauth/${id}`,
                 method: 'GET',
             }),
         }),
@@ -97,6 +105,7 @@ export const {
     useAddSchemeMutation,
     useUpdateSchemeMutation,
     useGetSchemeByIdQuery,
+    useGetSchemeByIdUnAuthQuery,
     useGetAllSchemeQuery,
     useDeleteSchemeMutation,
     useInboundSchemeQuery,
