@@ -13,6 +13,7 @@ import {
 } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
+import { UpdateSaleOrderApproval } from 'src/models/SaleOrder.model'
 
 export const SalesOrderApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -55,6 +56,16 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** Update *****/
+        updateSalesOrderApproval: builder.mutation({
+            invalidatesTags: ['SalesOrder'],
+            query: ({ body, id }: UpdateSaleOrderApproval) => ({
+                url: `/sales-order/approval-level/${id}`,
+                method: 'PUT',
+                body,
+            }),
+        }),
         //***** Update *****/
         updateSoLevel: builder.mutation({
             invalidatesTags: ['SalesOrder'],
@@ -91,6 +102,7 @@ export const {
     useGetSalesOrderByDealerIdQuery,
     useAddSalesOrderMutation,
     useUpdateSalesOrderMutation,
+    useUpdateSalesOrderApprovalMutation,
     useGetSalesOrderByIdQuery,
     useDeleteSalesOrderMutation,
     useUpdateSoLevelMutation,

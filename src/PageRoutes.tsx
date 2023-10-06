@@ -247,6 +247,7 @@ import SlotRunViewsListingWrapper from './pages/media/slotManagement/slotRunView
 import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScreens/companyBranch/list/CompanyBranchListingWrapper'
 import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
 import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
+import DispatchedInvoice from './pages/inventories/outward/Dealer/components/DispatchedInvoice'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -283,6 +284,15 @@ const PageRoutes = () => {
                         element={
                             <AuthHOC
                                 component={<VendorsListingWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/so-order/dispatched-invoice"
+                        element={
+                            <AuthHOC
+                                component={<DispatchedInvoice />}
                                 moduleName={UserModuleNameTypes.vendor}
                             />
                         }

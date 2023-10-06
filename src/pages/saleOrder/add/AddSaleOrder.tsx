@@ -31,6 +31,7 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useParams } from 'react-router-dom'
+import { showToast } from 'src/utils'
 
 // |-- Types --|
 type Props = {
@@ -249,18 +250,45 @@ const AddSaleOrder = ({
                                                                     onChange={(
                                                                         e
                                                                     ) => {
-                                                                        handleSetFieldValue(
-                                                                            `productSalesOrder[${index}].productGroupId`,
-                                                                            e
-                                                                        )
-
-                                                                        setI(0)
-                                                                        setProductGroup(
-                                                                            e
-                                                                        )
-                                                                        setI(
-                                                                            index
-                                                                        )
+                                                                        if (
+                                                                            !values?.productSalesOrder?.find(
+                                                                                (
+                                                                                    f
+                                                                                ) =>
+                                                                                    f.productGroupId ===
+                                                                                    e
+                                                                            )
+                                                                        ) {
+                                                                            setFieldValue(
+                                                                                `productSalesOrder[${index}].productGroupId`,
+                                                                                e
+                                                                            )
+                                                                            setI(
+                                                                                0
+                                                                            )
+                                                                            setProductGroup(
+                                                                                e
+                                                                            )
+                                                                            setI(
+                                                                                index
+                                                                            )
+                                                                        } else {
+                                                                            showToast(
+                                                                                'error',
+                                                                                'Product group Already Added!'
+                                                                            )
+                                                                        }
+                                                                        // handleSetFieldValue(
+                                                                        //     `productSalesOrder[${index}].productGroupId`,
+                                                                        //     e
+                                                                        // )
+                                                                        // setI(0)
+                                                                        // setProductGroup(
+                                                                        //     e
+                                                                        // )
+                                                                        // setI(
+                                                                        //     index
+                                                                        // )
                                                                     }}
                                                                     options={
                                                                         dropdownOptions.productGroupOptions

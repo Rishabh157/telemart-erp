@@ -39,6 +39,7 @@ type Props = {
     rows: any[]
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
     AddpathName: string
+    isShowAddWarehouseButton: boolean
 }
 
 const DealerWarehouseListing = ({
@@ -46,6 +47,7 @@ const DealerWarehouseListing = ({
     rows,
     setShowDropdown,
     AddpathName,
+    isShowAddWarehouseButton,
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
@@ -71,22 +73,24 @@ const DealerWarehouseListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
-                <ActionAuthHOC
-                    moduleName={UserModuleNameTypes.dealer}
-                    actionName={UserModuleAddActionTypes.dealerWareHouseAdd}
-                    component={
-                        <button
-                            onClick={() =>
-                                navigate(`${AddpathName}`, {
-                                    state: { params },
-                                })
-                            }
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add
-                        </button>
-                    }
-                />
+                {isShowAddWarehouseButton && (
+                    <ActionAuthHOC
+                        moduleName={UserModuleNameTypes.dealer}
+                        actionName={UserModuleAddActionTypes.dealerWareHouseAdd}
+                        component={
+                            <button
+                                onClick={() =>
+                                    navigate(`${AddpathName}`, {
+                                        state: { params },
+                                    })
+                                }
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Add
+                            </button>
+                        }
+                    />
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:DealerWarehouseService.ts
 // Type: Service Component
-// Last Updated: JUNE 28, 2023
+// Last Updated: OCTOBER 5, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -16,7 +16,7 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
         getDealerWarehouse: builder.query({
             providesTags: ['dealerWarehouse'],
             query: (body: PaginationType) => ({
-                url: '/dealer-warehouse',
+                url: '/warehouse',
                 method: 'POST',
                 body,
             }),
@@ -26,7 +26,7 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
         addDealerWarehouse: builder.mutation({
             invalidatesTags: ['dealerWarehouse'],
             query: (body: AddDealerWarehouse) => ({
-                url: '/dealer-warehouse/add',
+                url: '/warehouse/add',
                 method: 'POST',
                 body,
             }),
@@ -36,7 +36,7 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
         updateDealerWarehouse: builder.mutation({
             invalidatesTags: ['dealerWarehouse'],
             query: ({ body, id }: UpdateDealerWarehouse) => ({
-                url: `/dealer-warehouse/${id}`,
+                url: `/warehouse/${id}`,
                 method: 'PUT',
                 body,
             }),
@@ -46,8 +46,7 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
         getDealerWarehouseById: builder.query({
             providesTags: ['dealerWarehouse'],
             query: (id: string) => ({
-                url: `/dealer-warehouse/${id}`,
-
+                url: `/warehouse/${id}`,
                 method: 'GET',
             }),
         }),
@@ -56,7 +55,7 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
         deleteDealerWarehouse: builder.mutation({
             invalidatesTags: ['dealerWarehouse'],
             query: (id: string) => ({
-                url: `/dealer-warehouse/${id}`,
+                url: `/warehouse/${id}`,
                 method: 'DELETE',
             }),
         }),
@@ -65,7 +64,7 @@ export const dealerWarehouseApi = apiSlice.injectEndpoints({
         getAllWareHouseByDealerId: builder.query({
             providesTags: ['WareHouse'],
             query: ({ companyId, dealerId }) => ({
-                url: `/dealer-warehouse/company/${companyId}/dealer/${dealerId}`,
+                url: `/warehouse/company/${companyId}/dealer/${dealerId}`,
                 method: 'GET',
             }),
         }),

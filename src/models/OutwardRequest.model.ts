@@ -6,6 +6,37 @@
 // ==============================================
 
 // |-- Types --|
+
+export type soApprovedListResponseType = {
+    _id: string
+    soNumber: string
+    dealerId: string
+    dealerWareHouseId: string
+    companyWareHouseId: string
+    dhApprovedById: string
+    dhApproved: boolean
+    dhApprovedActionBy: string
+    dhApprovedAt: string
+    accApprovedById: string
+    accApproved: boolean
+    accApprovedActionBy: string
+    accApprovedAt: string
+    productSalesOrder: {
+        productGroupId: string
+        rate: number
+        quantity: number
+        _id: string
+        groupName: string
+    }
+    companyId: string
+    isDeleted: boolean
+    isActive: boolean
+    __v: number
+    createdAt: string
+    updatedAt: string
+    dealerLabel: string
+}
+
 export type OutwardRequestDealerListResponse = {
     dealerName: string
     productName: string

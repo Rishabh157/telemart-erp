@@ -223,7 +223,6 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             }
         })
     }
-
     return (
         <div className="px-2 h-full shadow ">
             <DealerWarehouseListing
@@ -231,6 +230,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
                 rows={items}
                 setShowDropdown={setShowDropdown}
                 AddpathName={`add-warehouse`}
+                isShowAddWarehouseButton={items?.length ? false : true}
             />
         </div>
     )

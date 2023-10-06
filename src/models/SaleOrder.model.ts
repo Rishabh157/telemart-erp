@@ -67,6 +67,19 @@ export type UpdateSaleOrder = {
     }
     id: string
 }
+
+export type UpdateSaleOrderApproval = {
+    body: {
+        type: 'DH' | 'ACC'
+        dhApprovedAt?: string
+        accApprovedAt?: string
+        accApprovedById?: string
+        dhApprovedById?: string
+        dhApprovedActionBy?: string
+        accApprovedActionBy?: string
+    }
+    id: string
+}
 export type UpdateSOApprovalLevel = {
     body: {
         approval: {

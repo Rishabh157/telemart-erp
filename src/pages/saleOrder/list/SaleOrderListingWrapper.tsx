@@ -22,7 +22,7 @@ import { SaleOrderListResponse } from 'src/models/SaleOrder.model'
 import {
     useDeleteSalesOrderMutation,
     useGetPaginationSaleOrderQuery,
-    useUpdateSalesOrderMutation,
+    useUpdateSalesOrderApprovalMutation,
 } from 'src/services/SalesOrderService'
 import SaleOrderListing from './SaleOrderListing'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
@@ -50,7 +50,7 @@ const SaleOrderListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const [deleteSaleOrder] = useDeleteSalesOrderMutation()
-    const [updateSalesOrder] = useUpdateSalesOrderMutation()
+    const [updateSalesOrder] = useUpdateSalesOrderApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
@@ -113,13 +113,14 @@ const SaleOrderListingWrapper = () => {
         if (level === 1) {
             updateSalesOrder({
                 body: {
-                    soNumber: so?.soNumber,
-                    dealerId: so?.dealerId,
-                    dealerWareHouseId: so?.dealerWareHouseId,
-                    companyWareHouseId: so?.companyWareHouseId,
-                    productSalesOrder: pSO,
-                    companyId: userData?.companyId || '',
-                    dhApproved: true,
+                    // soNumber: so?.soNumber,
+                    // dealerId: so?.dealerId,
+                    // dealerWareHouseId: so?.dealerWareHouseId,
+                    // companyWareHouseId: so?.companyWareHouseId,
+                    // productSalesOrder: pSO,
+                    // companyId: userData?.companyId || '',
+                    // dhApproved: true,
+                    type: 'DH',
                     dhApprovedById: userData?.userId,
                     dhApprovedAt: currentDate,
                     dhApprovedActionBy: userData?.userName,
@@ -139,13 +140,14 @@ const SaleOrderListingWrapper = () => {
         } else {
             updateSalesOrder({
                 body: {
-                    soNumber: so?.soNumber,
-                    dealerId: so?.dealerId,
-                    dealerWareHouseId: so?.dealerWareHouseId,
-                    companyWareHouseId: so?.companyWareHouseId,
-                    productSalesOrder: pSO,
-                    companyId: userData?.companyId || '',
-                    dhApproved: false,
+                    // soNumber: so?.soNumber,
+                    // dealerId: so?.dealerId,
+                    // dealerWareHouseId: so?.dealerWareHouseId,
+                    // companyWareHouseId: so?.companyWareHouseId,
+                    // productSalesOrder: pSO,
+                    // companyId: userData?.companyId || '',
+                    // dhApproved: false,
+                    type: 'DH',
                     dhApprovedById: userData?.userId,
                     dhApprovedAt: currentDate,
                 },
@@ -176,13 +178,14 @@ const SaleOrderListingWrapper = () => {
         if (level === 1) {
             updateSalesOrder({
                 body: {
-                    soNumber: so?.soNumber,
-                    dealerId: so?.dealerId,
-                    dealerWareHouseId: so?.dealerWareHouseId,
-                    companyWareHouseId: so?.companyWareHouseId,
-                    productSalesOrder: pSO,
-                    companyId: userData?.companyId || '',
-                    accApproved: true,
+                    // soNumber: so?.soNumber,
+                    // dealerId: so?.dealerId,
+                    // dealerWareHouseId: so?.dealerWareHouseId,
+                    // companyWareHouseId: so?.companyWareHouseId,
+                    // productSalesOrder: pSO,
+                    // companyId: userData?.companyId || '',
+                    // accApproved: true,
+                    type: 'ACC',
                     accApprovedById: userData?.userId,
                     accApprovedAt: currentDate,
                     accApprovedActionBy: userData?.userName,
@@ -202,13 +205,14 @@ const SaleOrderListingWrapper = () => {
         } else {
             updateSalesOrder({
                 body: {
-                    soNumber: so?.soNumber,
-                    dealerId: so?.dealerId,
-                    dealerWareHouseId: so?.dealerWareHouseId,
-                    companyWareHouseId: so?.companyWareHouseId,
-                    productSalesOrder: pSO,
-                    companyId: userData?.companyId || '',
-                    accApproved: false,
+                    // soNumber: so?.soNumber,
+                    // dealerId: so?.dealerId,
+                    // dealerWareHouseId: so?.dealerWareHouseId,
+                    // companyWareHouseId: so?.companyWareHouseId,
+                    // productSalesOrder: pSO,
+                    // companyId: userData?.companyId || '',
+                    // accApproved: false,
+                    type: 'ACC',
                     accApprovedById: userData?.userId,
                     accApprovedAt: currentDate,
                 },
