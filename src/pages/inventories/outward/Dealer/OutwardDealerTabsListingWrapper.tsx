@@ -14,11 +14,11 @@ import { IconType } from 'react-icons'
 // import { HiDotsHorizontal } from 'react-icons/hi'
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
-import { HiDotsVertical } from 'react-icons/hi'
+import { IoRemoveCircle } from 'react-icons/io5'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { soApprovedListResponseType } from 'src/models/OutwardRequest.model'
+import { soApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
 import OutwardRequestListing from './OutwardDealerTabs'
 import { useParams } from 'react-router-dom'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
@@ -32,12 +32,14 @@ import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadin
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetPaginationSaleOrderQuery } from 'src/services/SalesOrderService'
+import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
+import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
+import { showToast } from 'src/utils'
 
 // |-- Redux --|F
 // import {
@@ -54,15 +56,36 @@ export type Tabs = {
     path?: string
 }
 
+type BarcodeListResponseType = {
+    _id: string
+    productGroupId: string
+    barcodeNumber: string
+    barcodeGroupNumber: string
+    lotNumber: string
+    isUsed: boolean
+    wareHouseId: string
+    dealerId: string | null
+    status: string
+    companyId: string
+    isDeleted: boolean
+    isActive: boolean
+    __v: number
+    createdAt: string
+    updatedAt: string
+}
+
 const OutwardDealerTabsListingWrapper = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<string>('')
-    const [barcodeList, setBarcodeList] = useState<string[]>([])
+    const [barcodeList, setBarcodeList] = useState<BarcodeListResponseType[]>(
+        []
+    )
 
-    const [soNumber, setSoNumber] = useState<string>('')
-    const [dealerName, seetDealerName] = useState<string>('')
-    const [quantity, setQuantity] = useState<string[]>([])
-    const [productItems, setProductItems] = useState<string[]>([])
+    const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] = useState<
+        soApprovedGroupListResponseType[]
+    >([])
+    // const [quantity, setQuantity] = useState<string[]>([])
+    // const [productItems, setProductItems] = useState<string[]>([])
 
     const params = useParams()
     const dispatch = useDispatch<AppDispatch>()
@@ -76,7 +99,7 @@ const OutwardDealerTabsListingWrapper = () => {
         data: soData,
         isFetching: soIsFetching,
         isLoading: soIsLoading,
-    } = useGetPaginationSaleOrderQuery({
+    } = useGetPaginationSaleOrderByGroupQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['soNumber', 'dealerLabel'],
@@ -100,6 +123,9 @@ const OutwardDealerTabsListingWrapper = () => {
         orderByValue: -1,
         isPaginationRequired: true,
     })
+
+    const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
+
     useEffect(() => {
         if (!soIsFetching && !soIsLoading) {
             dispatch(setIsTableLoading(false))
@@ -115,39 +141,59 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'soNumber',
             headerName: 'So Number',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: soApprovedListResponseType) => (
-                <span> {row?.soNumber} </span>
+            renderCell: (row: soApprovedGroupListResponseType) => (
+                <span> {row?._id} </span>
             ),
         },
         {
             field: 'dealerLabel',
             headerName: 'Dealer Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: soApprovedListResponseType) => (
-                <span> {row?.dealerLabel} </span>
+            renderCell: (row: soApprovedGroupListResponseType) => (
+                <span> {row?.dealerName} </span>
             ),
         },
         {
             field: 'items',
             headerName: 'items',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: soApprovedListResponseType) => {
-                return <span> {row?.productSalesOrder?.groupName} </span>
+            renderCell: (row: soApprovedGroupListResponseType) => {
+                return (
+                    <span>
+                        {row?.documents?.map((item) => {
+                            return (
+                                <>
+                                    {item?.productSalesOrder?.groupName} <br />
+                                </>
+                            )
+                        })}
+                    </span>
+                )
             },
         },
         {
-            field: 'items',
+            field: 'quantity',
             headerName: 'quantity',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: soApprovedListResponseType) => {
-                return <span> {row.productSalesOrder?.quantity} </span>
+            renderCell: (row: soApprovedGroupListResponseType) => {
+                return (
+                    <span>
+                        {row?.documents?.map((item) => {
+                            return (
+                                <>
+                                    {item?.productSalesOrder?.quantity} <br />
+                                </>
+                            )
+                        })}
+                    </span>
+                )
             },
         },
         {
             field: 'actions',
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: soApprovedListResponseType) => (
+            renderCell: (row: soApprovedGroupListResponseType) => (
                 <ActionPopup
                     handleOnAction={() => {}}
                     moduleName={UserModuleNameTypes.saleOrder}
@@ -156,8 +202,7 @@ const OutwardDealerTabsListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     setIsShow(true)
-                                    setSoNumber(row.soNumber)
-                                    seetDealerName(row.dealerLabel)
+                                    setSelectedItemsTobeDispatch([row])
                                 }}
                                 className="block w-full text-left  hover:bg-gray-100"
                             >
@@ -176,20 +221,26 @@ const OutwardDealerTabsListingWrapper = () => {
         },
     ]
 
+    const handleBarcodeSubmit = () => {
+        getBarCode(barcodeNumber)
+            .then((res: any) => {
+                if (res?.data?.status) {
+                    setBarcodeList((pre) => [...pre, ...res?.data?.data])
+                }
+                // else {
+                //     showToast('error', 'barcode number is not matched')
+                // }
+            })
+            .catch((err) => console.error(err))
+    }
+
     useEffect(() => {
-        if (barcodeNumber.length === 8) {
-            barcodeList.length !== 10 &&
-                setBarcodeList((pre) => [...pre, barcodeNumber])
+        if (barcodeNumber?.length >= 6) {
+            handleBarcodeSubmit()
         }
     }, [barcodeNumber])
 
-    // const groupSoNumber = items?.filter(
-    //     (product: soApprovedListResponseType) => {
-    //         if (product.soNumber === product.soNumber) {
-    //             console.log('console.log')
-    //         }
-    //     }
-    // )
+    console.log('selectedItemsTobeDispatch', barcodeList)
 
     return (
         <>
@@ -198,114 +249,193 @@ const OutwardDealerTabsListingWrapper = () => {
                 isOpen={isShow}
                 buttonClass="cursor-pointer"
                 maxWidth="lg"
-                handleClose={() => setIsShow(!isShow)}
+                handleClose={() => {
+                    setIsShow(!isShow)
+                    setSelectedItemsTobeDispatch([])
+                }}
                 component={
-                    <div className="p-4 pb-6">
-                        <div className="grid grid-cols-2">
-                            <div>
-                                <div className="flex gap-4 items-center">
-                                    <div className="font-bold">So Number</div>
-                                    {':'}
-                                    <div className="font-bold">{soNumber}</div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className="flex gap-4 items-center">
-                                    <div className="font-bold">Item</div>
-                                    {':'}
-                                    <div className="font-bold">KKK</div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className="flex gap-4 items-center">
-                                    <div className="font-bold">Dealer Name</div>
-                                    {':'}
-                                    <div className="font-bold">
-                                        {dealerName}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className="flex gap-4 items-center">
-                                    <div className="font-bold">Quantity</div>
-                                    {':'}
-                                    <div className="font-bold">
-                                        10 / {barcodeList.length}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="mt-4">
-                                <ATMTextField
-                                    name=""
-                                    value={barcodeNumber}
-                                    maxLength={8}
-                                    label="Barcode Number"
-                                    placeholder="enter barcode number"
-                                    className="shadow bg-white rounded w-[50%] "
-                                    onChange={(e) => {
-                                        setBarcodeNumber(e.target.value)
-                                    }}
-                                />
-                            </div>
-                            {barcodeList?.length === 10 && (
-                                <div className="flex items-end ml-4">
-                                    <ATMLoadingButton
-                                        isLoading={false}
-                                        loadingText="Applying"
-                                        onClick={() => {}}
-                                        className="w-[20%] bg-primary-main text-white flex items-center py-1 px-4 rounded"
-                                    >
-                                        Save
-                                    </ATMLoadingButton>
-                                </div>
-                            )}
-                        </div>
-
-                        <div className="grid grid-cols-4 gap-x-4">
-                            {barcodeList.map(
-                                (barcode: any, barcodeIndex: number) => {
-                                    return (
-                                        <div
-                                            key={barcode._id}
-                                            onClick={() => {
-                                                // onBarcodeClick(barcode)
-                                            }}
-                                            className={`flex flex-col gap-2 my-4 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${
-                                                barcode?.isUsed
-                                                    ? ' border-red-500'
-                                                    : 'border-slate-200'
-                                            }`}
-                                        >
-                                            <div className="flex justify-between">
-                                                <div>
-                                                    {/* Used Chip */}
-                                                    {true && (
-                                                        <span className="text-white bg-red-500 px-2 text-[11px] rounded-full inline-flex items-center py-[1px] font-medium">
-                                                            Used
-                                                        </span>
-                                                    )}
-                                                    <div className="text-[12px] text-slate-500">
-                                                        Barcode No.
+                    <div className="px-4 pt-2 pb-6">
+                        {selectedItemsTobeDispatch?.map(
+                            (
+                                ele: soApprovedGroupListResponseType,
+                                ind: number
+                            ) => {
+                                return (
+                                    <>
+                                        {/* SO NO. & DEALER NAME */}
+                                        <div className="grid grid-cols-4 border-b-[1px] border-black">
+                                            <div>
+                                                <div className="flex gap-4 items-center">
+                                                    <div className="font-bold">
+                                                        So Number
                                                     </div>
-                                                    <div>{barcode}</div>
-                                                </div>
-                                                <div>
-                                                    <HiDotsVertical />
+                                                    {':'}
+                                                    <div className="font-bold">
+                                                        {ele?._id}
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div className="text-primary-main font-medium grow flex items-end">
-                                                {barcode?.productGroupLabel}
+                                            <div>
+                                                <div className="flex gap-4 items-center">
+                                                    <div className="font-bold">
+                                                        Dealer Name
+                                                    </div>
+                                                    {':'}
+                                                    <div className="font-bold">
+                                                        {ele?.dealerName}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    )
-                                }
-                            )}
-                        </div>
+
+                                        {ele?.documents?.map(
+                                            (document, docIndex) => {
+                                                return (
+                                                    <div
+                                                        className="pb-6 border-b-[1px] border-black last:border-none"
+                                                        key={docIndex}
+                                                    >
+                                                        <div className="grid grid-cols-4 mt-2">
+                                                            <div>
+                                                                <div className="flex gap-4 items-center">
+                                                                    <div className="font-bold">
+                                                                        Item
+                                                                    </div>
+                                                                    {':'}
+                                                                    <div className="font-bold">
+                                                                        {
+                                                                            document
+                                                                                ?.productSalesOrder
+                                                                                ?.groupName
+                                                                        }
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="flex gap-4 items-center">
+                                                                    <div className="font-bold">
+                                                                        Quantity
+                                                                    </div>
+                                                                    {':'}
+                                                                    <div className="font-bold">
+                                                                        {
+                                                                            document
+                                                                                ?.productSalesOrder
+                                                                                ?.quantity
+                                                                        }{' '}
+                                                                        /{' '}
+                                                                        {
+                                                                            barcodeList.length
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="mt-4 grid grid-cols-12 gap-x-4">
+                                                            <div className="col-span-3">
+                                                                <ATMTextField
+                                                                    name=""
+                                                                    value={
+                                                                        barcodeNumber
+                                                                    }
+                                                                    maxLength={
+                                                                        8
+                                                                    }
+                                                                    label="Barcode Number"
+                                                                    placeholder="enter barcode number"
+                                                                    className="shadow bg-white rounded w-[50%] "
+                                                                    onChange={(
+                                                                        e
+                                                                    ) => {
+                                                                        setBarcodeNumber(
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        )
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                            <div className="col-span-2 flex items-end">
+                                                                <ATMLoadingButton
+                                                                    isLoading={
+                                                                        false
+                                                                    }
+                                                                    loadingText="Dispatching"
+                                                                    onClick={() => {}}
+                                                                    className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
+                                                                >
+                                                                    Save
+                                                                </ATMLoadingButton>
+                                                            </div>
+                                                        </div>
+                                                        <div className="grid grid-cols-4 gap-x-4">
+                                                            {barcodeList?.map(
+                                                                (
+                                                                    barcode: BarcodeListResponseType,
+                                                                    barcodeIndex: number
+                                                                ) => {
+                                                                    return (
+                                                                        <div
+                                                                            key={
+                                                                                barcodeIndex
+                                                                            }
+                                                                            onClick={() => {
+                                                                                // onBarcodeClick(barcode)
+                                                                            }}
+                                                                            className={`flex flex-col gap-2 my-4 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${
+                                                                                barcode?.isUsed
+                                                                                    ? ' border-red-500'
+                                                                                    : 'border-slate-200'
+                                                                            }`}
+                                                                        >
+                                                                            <div className="flex justify-between">
+                                                                                <div>
+                                                                                    {/* Used Chip */}
+                                                                                    {/* {true && (
+                                                                                        <span className="text-white bg-red-500 px-2 text-[11px] rounded-full inline-flex items-center py-[1px] font-medium">
+                                                                                            Used
+                                                                                        </span>
+                                                                                    )} */}
+                                                                                    <div className="text-[12px] text-slate-500">
+                                                                                        Barcode
+                                                                                        No.
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        {
+                                                                                            barcode?.barcodeNumber
+                                                                                        }
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="absolute -top-2 -right-2">
+                                                                                    <IoRemoveCircle
+                                                                                        fill="red"
+                                                                                        size={
+                                                                                            20
+                                                                                        }
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="text-primary-main font-medium grow flex items-end">
+                                                                                {/* {
+                                                                                    barcode?.productGroupLabel
+                                                                                } */}
+                                                                            </div>
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
+                                        )}
+                                    </>
+                                )
+                            }
+                        )}
+
+                        {/*  */}
                     </div>
                 }
             />

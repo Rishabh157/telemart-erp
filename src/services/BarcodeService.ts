@@ -42,6 +42,16 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET DEALER OUTWARD DISPATCHED BARCODE *****/
+        getAllBarcodeOfDealerOutWardDispatch: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: (id: string) => ({
+                url: `/bar-code/barcode/${id}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
         //***** GET *****/
         getAllByGroup: builder.query({
             providesTags: ['Barcode'],
@@ -115,6 +125,7 @@ export const {
     useGetBarcodeByIdQuery,
     useExportBarcodeDataMutation,
     useDeleteBarcodeMutation,
+    useGetAllBarcodeOfDealerOutWardDispatchMutation,
     useGetAllBarcodeQuery,
     useGetProductGroupBarcodeQuery,
     useGetAllByGroupQuery,

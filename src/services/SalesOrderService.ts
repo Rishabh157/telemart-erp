@@ -28,6 +28,17 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET PAGINATION DATA WITH PRODUCT GROUP *****/
+
+        getPaginationSaleOrderByGroup: builder.query({
+            providesTags: ['SalesOrder'],
+            query: (body: PaginationType) => ({
+                url: '/sales-order/groupby',
+                method: 'POST',
+                body,
+            }),
+        }),
+
         //***** GET SALESORDER BY DEALER-ID DATA *****/
         getSalesOrderByDealerId: builder.query({
             providesTags: ['SalesOrder'],
@@ -99,6 +110,7 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
 
 export const {
     useGetPaginationSaleOrderQuery,
+    useGetPaginationSaleOrderByGroupQuery,
     useGetSalesOrderByDealerIdQuery,
     useAddSalesOrderMutation,
     useUpdateSalesOrderMutation,
