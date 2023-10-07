@@ -11,6 +11,32 @@ import { InwardInventoryBarcode } from 'src/models/Barcode.model'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
+type DispatchBarcodeBody = {
+    barcodedata: {
+        _id: string
+        productGroupId: string
+        barcodeGroupNumber: string
+        cartonBoxId: string
+        lotNumber: string
+        isUsed: string
+        wareHouseId: string
+        dealerId: string
+        companyId: string
+        outerBoxbarCodeNumber: string
+        barcodeNumber: string
+        // status: string
+    }[]
+    soId: string[]
+}
+
+
+
+
+
+
+
+
+
 export const barcodeApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET *****/
@@ -38,6 +64,16 @@ export const barcodeApi = apiSlice.injectEndpoints({
             providesTags: ['Barcode'],
             query: () => ({
                 url: `/bar-code`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** GET DEALER OUTWARD DISPATCHED BARCODE *****/
+        getAllBarcodeOfDealerOutWardDispatch: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: ({ id, groupId }: { id: string; groupId: string }) => ({
+                url: `/bar-code/barcode/${id}/productgroupid/${groupId}`,
                 method: 'GET',
                 // body,
             }),
@@ -107,9 +143,6 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
-
-
-        //***** GET by Barcode*****/
         getByBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: (barcodeId: string) => ({
@@ -141,7 +174,17 @@ export const barcodeApi = apiSlice.injectEndpoints({
 
             }),
         }),
+        dispatchDealerBarcode: builder.mutation({
+            invalidatesTags: ['Barcode', 'bar-codeGroup'],
+            query: (body: DispatchBarcodeBody) => ({
+                url: `/bar-code/outwardinventory`,
+                method: 'PUT',
+                body,
+            }),
+
+        }),
     }),
+
 })
 export const {
     useGetBarcodeQuery,
@@ -150,10 +193,12 @@ export const {
     useGetBarcodeByIdQuery,
     useExportBarcodeDataMutation,
     useDeleteBarcodeMutation,
+    useGetAllBarcodeOfDealerOutWardDispatchMutation,
     useGetAllBarcodeQuery,
     useGetProductGroupBarcodeQuery,
     useGetAllByGroupQuery,
     useGetByBarcodeMutation,
     useInwardInventoryBarcodeMutation,
-    useGetInventoriesByBarcodeQuery
+    useGetInventoriesByBarcodeQuery,
+    useDispatchDealerBarcodeMutation,
 } = barcodeApi

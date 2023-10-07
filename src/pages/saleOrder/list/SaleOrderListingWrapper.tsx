@@ -103,13 +103,12 @@ const SaleOrderListingWrapper = () => {
 
     const handleDHComplete = (_id: string, level: number) => {
         const currentDate = new Date().toLocaleDateString('en-GB')
-        const so: any = items?.find((e: any) => e._id === _id)
-
-        const pSO = {
-            productGroupId: so?.productSalesOrder?.productGroupId,
-            quantity: so?.productSalesOrder?.quantity,
-            rate: so?.productSalesOrder?.rate,
-        }
+        // const so: any = items?.find((e: any) => e._id === _id)
+        // const pSO = {
+        //     productGroupId: so?.productSalesOrder?.productGroupId,
+        //     quantity: so?.productSalesOrder?.quantity,
+        //     rate: so?.productSalesOrder?.rate,
+        // }
         if (level === 1) {
             updateSalesOrder({
                 body: {
@@ -168,13 +167,13 @@ const SaleOrderListingWrapper = () => {
 
     const handleAccComplete = (_id: string, level: number) => {
         const currentDate = new Date().toLocaleDateString('en-GB')
-        const so: any = items?.find((e: any) => e._id === _id)
+        // const so: any = items?.find((e: any) => e._id === _id)
 
-        const pSO = {
-            productGroupId: so?.productSalesOrder?.productGroupId,
-            quantity: so?.productSalesOrder?.quantity,
-            rate: so?.productSalesOrder?.rate,
-        }
+        // const pSO = {
+        //     productGroupId: so?.productSalesOrder?.productGroupId,
+        //     quantity: so?.productSalesOrder?.quantity,
+        //     rate: so?.productSalesOrder?.rate,
+        // }
         if (level === 1) {
             updateSalesOrder({
                 body: {
