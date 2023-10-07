@@ -18,10 +18,10 @@ import { IoRemoveCircle } from 'react-icons/io5'
 
 // |-- Internal Dependencies --|
 // import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { soApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
-import OutwardRequestListing from './OutwardDealerTabs'
 import { useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import { soApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
+import OutwardRequestListing from './OutwardDealerTabs'
 // import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
@@ -34,20 +34,20 @@ import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
-import {
-    useGetAllBarcodeOfDealerOutWardDispatchMutation,
-    useDispatchDealerBarcodeMutation,
-} from 'src/services/BarcodeService'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { AlertText } from 'src/pages/callerpage/components/constants'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { AlertText } from 'src/pages/callerpage/components/constants'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import {
+    useDispatchDealerBarcodeMutation,
+    useGetAllBarcodeOfDealerOutWardDispatchMutation,
+} from 'src/services/BarcodeService'
+import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
 
 // |-- Redux --|F
 // import {
@@ -98,7 +98,7 @@ const OutwardDealerTabsListingWrapper = () => {
     const params = useParams()
     const dispatch = useDispatch<AppDispatch>()
     const dealerId = params.dealerId
-    console.log("dealerIddealerIddealerId",dealerId)
+    console.log('dealerIddealerIddealerId', dealerId)
     const salesOrderState: any = useSelector(
         (state: RootState) => state.saleOrder
     )
@@ -265,6 +265,7 @@ const OutwardDealerTabsListingWrapper = () => {
 
     // remove barcode
     const handleRemoveBarcode = (barcodeNumber: string, ind: number) => {
+        // eslint-disable-next-line array-callback-return
         const filteredObj = barcodeList[ind]?.filter((item: any) => {
             if (item?.barcodeNumber !== barcodeNumber) {
                 return item

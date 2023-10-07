@@ -29,14 +29,6 @@ type DispatchBarcodeBody = {
     soId: string[]
 }
 
-
-
-
-
-
-
-
-
 export const barcodeApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET *****/
@@ -152,7 +144,6 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-
         //***** Update *****/
         inwardInventoryBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
@@ -160,18 +151,25 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 url: `/bar-code/inwardinventory`,
                 method: 'PUT',
                 body,
-
             }),
         }),
 
         getInventoriesByBarcode: builder.query({
             providesTags: ['Barcode'],
-            query: ({ body, companyId, warehouseId, status }: { body: PaginationType, companyId: string, warehouseId: string, status: string }) => ({
+            query: ({
+                body,
+                companyId,
+                warehouseId,
+                status,
+            }: {
+                body: PaginationType
+                companyId: string
+                warehouseId: string
+                status: string
+            }) => ({
                 url: `bar-code/inventory/companyid/${companyId}/warehouseid/${warehouseId}/status/${status}`,
                 method: 'Post',
-                body
-
-
+                body,
             }),
         }),
         dispatchDealerBarcode: builder.mutation({
@@ -181,10 +179,8 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 method: 'PUT',
                 body,
             }),
-
         }),
     }),
-
 })
 export const {
     useGetBarcodeQuery,

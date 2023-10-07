@@ -20,12 +20,12 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { SaleOrderListResponse } from 'src/models/SaleOrder.model'
 import {
     UserModuleActionTypes,
-    UserModuleNameTypes
+    UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
 import {
     useDeleteSalesOrderMutation,
     useGetPaginationSaleOrderQuery,
-    useUpdateSalesOrderApprovalMutation
+    useUpdateSalesOrderApprovalMutation,
 } from 'src/services/SalesOrderService'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
@@ -36,7 +36,7 @@ import SaleOrderListing from './SaleOrderListing'
 import {
     setIsTableLoading,
     setItems,
-    setTotalItems
+    setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 

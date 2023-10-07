@@ -17,9 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 // import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import {
-    WareHouseInventory
-} from 'src/models/Inventory.model'
+import { WareHouseInventory } from 'src/models/Inventory.model'
 import InventoryListing from './InventoryListing'
 // import { useGetPaginationInventoriesQuery } from 'src/services/InventoriesService'
 
@@ -29,7 +27,7 @@ import { useParams } from 'react-router-dom'
 import {
     setIsTableLoading,
     setItems,
-    setTotalItems
+    setTotalItems,
 } from 'src/redux/slices/inventorySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetInventoriesByBarcodeQuery } from 'src/services/BarcodeService'

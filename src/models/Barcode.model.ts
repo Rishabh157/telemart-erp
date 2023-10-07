@@ -48,20 +48,16 @@ export type UpdateBarcode = {
     id: string
 }
 
-
-
 export type InwardInventoryBarcode = {
     barcodedata: {
-        productGroupId: string;
-        barcodeGroupNumber: string;
-        lotNumber: string;
-        isUsed: string;
-        wareHouseId: string;
-        dealerId: string;
-        companyId: string;
-        cartonBoxId: string;
-        _id: string;
+        productGroupId: string
+        barcodeGroupNumber: string
+        lotNumber: string
+        isUsed: string
+        wareHouseId: string
+        dealerId: string
+        companyId: string
+        cartonBoxId: string
+        _id: string
     }[]
-
-
 }

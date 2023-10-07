@@ -13,7 +13,7 @@ import React from 'react'
 // |-- Internal Dependencies --|
 import { useParams } from 'react-router-dom'
 import ATMBreadCrumbs, {
-    BreadcrumbType
+    BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'

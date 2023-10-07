@@ -49,7 +49,6 @@ const VerticalNavBar = ({
     navigation,
     isPathEqualtoNavItem = (navItem) => false,
 }: Props) => {
-
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const deviceIditem = localStorage.getItem('device-id') || ''
@@ -104,7 +103,6 @@ const VerticalNavBar = ({
         e.returnValue = message
         return message
     }
-
 
     const getDefaultRouteFunction = (name: string, path: string) => {
         let currentModules: string[] = []

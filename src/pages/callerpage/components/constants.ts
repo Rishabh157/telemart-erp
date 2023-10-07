@@ -108,7 +108,7 @@ export const endTimesOptions: SelectOption[] = [
     },
 ]
 
-export const relationOptionns :SelectOption[]=[
+export const relationOptionns: SelectOption[] = [
     { label: 'Self', value: 'SELF' },
     { label: 'Mother', value: 'MOTHER' },
     { label: 'Father', value: 'FATHER' },
@@ -120,4 +120,4 @@ export const relationOptionns :SelectOption[]=[
     { label: 'Others', value: 'OTHERS' },
 ]
 export const AlertText =
-'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
+    'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'

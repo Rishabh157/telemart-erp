@@ -47,11 +47,10 @@ export type UpdateInventory = {
     id: string
 }
 
-
 export type WareHouseInventory = {
-    count: string;
+    count: string
     firstDocument: {
-        barcodeGroupNumber: string;
+        barcodeGroupNumber: string
         barcodeNumber: string
         cartonBoxId: string
         companyId: string
