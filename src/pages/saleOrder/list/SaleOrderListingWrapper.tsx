@@ -6,37 +6,37 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
+import { Chip, Stack } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Chip, Stack } from '@mui/material'
 
 // |-- Internal Dependencies --|
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { SaleOrderListResponse } from 'src/models/SaleOrder.model'
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     useDeleteSalesOrderMutation,
     useGetPaginationSaleOrderQuery,
-    useUpdateSalesOrderApprovalMutation,
+    useUpdateSalesOrderApprovalMutation
 } from 'src/services/SalesOrderService'
-import SaleOrderListing from './SaleOrderListing'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import SaleOrderListing from './SaleOrderListing'
 
 // |-- Redux --|
 import {
     setIsTableLoading,
     setItems,
-    setTotalItems,
+    setTotalItems
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 

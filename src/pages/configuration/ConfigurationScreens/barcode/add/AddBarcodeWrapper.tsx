@@ -35,7 +35,7 @@ type Props = {}
 
 export type FormInitialValues = {
     productGroup: string
-    wareHouseId: string
+    // wareHouseId: string
     quantity: string
     lotNumber: string
 }
@@ -85,7 +85,7 @@ const AddBarcodeWrapper = (props: Props) => {
     // Form Initial Values
     const initialValues: FormInitialValues = {
         productGroup: '',
-        wareHouseId: '',
+        // wareHouseId: '',
         quantity: '',
         lotNumber: '',
     }
@@ -99,7 +99,7 @@ const AddBarcodeWrapper = (props: Props) => {
         lotNumber: number()
             .moreThan(0, 'LotNumber must be greater than 0')
             .required('Lot number is required'),
-        wareHouseId: string().required('Warehouse is required'),
+        // wareHouseId: string().required('Warehouse is required'),
     })
 
     //    Form Submit Handler
@@ -114,7 +114,7 @@ const AddBarcodeWrapper = (props: Props) => {
             barcodeGroupNumber: uniqueGrouId,
             quantity: Number(values?.quantity),
             lotNumber: values.lotNumber,
-            wareHouseId: values.wareHouseId,
+            // wareHouseId: null,
             companyId: userData?.companyId || '',
         }).then((res) => {
             if ('data' in res) {

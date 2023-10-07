@@ -7,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
@@ -17,27 +17,27 @@ import { IconType } from 'react-icons'
 import { HiDotsVertical } from 'react-icons/hi'
 
 // |-- Internal Dependencies --|
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { soApprovedListResponseType } from 'src/models/OutwardRequest.model'
-import OutwardRequestListing from './OutwardDealerTabs'
 import { useParams } from 'react-router-dom'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import { soApprovedListResponseType } from 'src/models/OutwardRequest.model'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import OutwardRequestListing from './OutwardDealerTabs'
 
 // |-- Internal Dependencies --|
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetPaginationSaleOrderQuery } from 'src/services/SalesOrderService'
 import {
     setIsTableLoading,
     setItems,
-    setTotalItems,
+    setTotalItems
 } from 'src/redux/slices/saleOrderSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { useGetPaginationSaleOrderQuery } from 'src/services/SalesOrderService'
 
 // |-- Redux --|F
 // import {
@@ -61,8 +61,8 @@ const OutwardDealerTabsListingWrapper = () => {
 
     const [soNumber, setSoNumber] = useState<string>('')
     const [dealerName, seetDealerName] = useState<string>('')
-    const [quantity, setQuantity] = useState<string[]>([])
-    const [productItems, setProductItems] = useState<string[]>([])
+    // const [quantity, setQuantity] = useState<string[]>([])
+    // const [productItems, setProductItems] = useState<string[]>([])
 
     const params = useParams()
     const dispatch = useDispatch<AppDispatch>()

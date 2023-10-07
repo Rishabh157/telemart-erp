@@ -8,20 +8,20 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 // |-- Internal Dependencies --|
+import { useParams } from 'react-router-dom'
 import ATMBreadCrumbs, {
-    BreadcrumbType,
+    BreadcrumbType
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import MoveToCartonDrawer from './MoveToCartonDrawer/MoveToCartonDrawer'
-import { SelectBoxOption } from './InwardInventoryWrapper'
-import { useGetAllBarcodeQuery } from 'src/services/BarcodeService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-import { useParams } from 'react-router-dom'
+import { useGetByBarcodeMutation } from 'src/services/BarcodeService'
+import { SelectBoxOption } from './InwardInventoryWrapper'
+import MoveToCartonDrawer from './MoveToCartonDrawer/MoveToCartonDrawer'
 // import { useSelector } from 'react-redux'
 // import { RootState } from 'src/redux/store'
 // import { showToast } from "src/utils";
@@ -55,72 +55,90 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     //const [shouldPrint, setShouldPrint] = React.useState(false)
     //const [condition, setCondition] = React.useState('GOOD')
     const [barcodes, setBarcodes] = React.useState<renderBarcodType[]>([])
-    const [filterBarcode, setFilterBarcode] = useState<renderBarcodType[] | []>(
-        []
-    )
-    const [dataToSend, setDataToSend] = useState<any[]>([])
-    const [itemCount, setItemCount] = React.useState(0)
+    // const [filterBarcode, setFilterBarcode] = useState<renderBarcodType[] | []>(
+    //     []
+    // )
+    console.log(barcodes, 'barcodes')
+    // const [dataToSend, setDataToSend] = useState<any[]>([])
+    // console.log(dataToSend, 'dataToSend')
+    // const [itemCount, setItemCount] = React.useState(0)
     const [barcode, setBarcode] = React.useState('')
     const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] =
         React.useState(false)
-    const { data, isLoading, isFetching } = useGetAllBarcodeQuery('')
-    useEffect(() => {
-        const count =
-            (cartonBoxOption?.find((e) => e?.value === packaging)
-                ?.itemCount as number) || 0
-        if (count) {
-            setItemCount(count - 1)
-        }
-        setFilterBarcode([])
-    }, [packaging])
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            const dataToSet = data?.data?.map((e: any) => {
-                if (e?.isDeleted === false) {
-                    return {
-                        productGroupLabel: e.productGroupLabel,
-                        productGroupNumber: e?.barcodeGroupNumber,
-                        barcodeNumber: e?.barcodeNumber,
-                        isUsed: e?.isUsed,
-                    }
+    // const { data, isLoading, isFetching } = useGetAllBarcodeQuery('')
+    const [getBarcodeById] = useGetByBarcodeMutation()
+    const handleBarCode = (barcodeId: string) => {
+        getBarcodeById(barcodeId).then((res: any) => {
+            if (res?.data?.data) {
+                const barc = [...barcodes]
+                const isExist = barc.find(
+                    (ele) => ele.barcodeNumber === res?.data?.data.barcodeNumber
+                )
+                if (!isExist) {
+                    barc.push(res?.data?.data)
                 }
-            })
-            setBarcodes(dataToSet)
-        }
-    }, [data, isLoading, isFetching])
-
-    useEffect(() => {
-        const newObject = barcodes?.filter(
-            (f: any) => f?.barcodeNumber === barcode && f?.isUsed === false
-        )
-
-        // if (newObject?.length ? newObject[0]?.isUsed === true : barcodes?.length) {
-        //   showToast("error", "Barcode already used");
-        // }
-        const alreadyExist = filterBarcode?.find(
-            (f) => f.barcodeNumber === newObject[0]?.barcodeNumber
-        )
-        const validBarcode = filterBarcode?.length
-            ? filterBarcode[0]?.productGroupLabel ===
-              newObject[0]?.productGroupLabel
-            : true
-
-        if (
-            newObject?.length &&
-            filterBarcode?.length <= itemCount &&
-            !alreadyExist &&
-            validBarcode
-        ) {
-            setFilterBarcode((prevData: any[]) => [...prevData, newObject[0]])
-            const dataToSendObject = {
-                barcodeNumber: newObject[0]?.barcodeNumber,
-                //status: status,
-                //condition: condition,
+                // console.log(barc, 'barc')
+                setBarcodes([...barc])
             }
-            setDataToSend((prevData: any[]) => [...prevData, dataToSendObject])
-        }
-    }, [barcode])
+        })
+    }
+    // useEffect(() => {
+    //     const count =
+    //         (cartonBoxOption?.find((e) => e?.value === packaging)
+    //             ?.itemCount as number) || 0
+    //     if (count) {
+    //         setItemCount(count - 1)
+    //     }
+    //     setFilterBarcode([])
+    // }, [packaging])
+
+    // useEffect(() => {
+    //     if (!isLoading && !isFetching) {
+    //         const dataToSet = data?.data?.map((e: any) => {
+    //             if (e?.isDeleted === false) {
+    //                 return {
+    //                     productGroupLabel: e.productGroupLabel,
+    //                     productGroupNumber: e?.barcodeGroupNumber,
+    //                     barcodeNumber: e?.barcodeNumber,
+    //                     isUsed: e?.isUsed,
+    //                 }
+    //             }
+    //         })
+    //         // setBarcodes(dataToSet)
+    //     }
+    // }, [data, isLoading, isFetching])
+
+    // useEffect(() => {
+    //     const newObject = barcodes?.filter(
+    //         (f: any) => f?.barcodeNumber === barcode && f?.isUsed === false
+    //     )
+
+    //     // if (newObject?.length ? newObject[0]?.isUsed === true : barcodes?.length) {
+    //     //   showToast("error", "Barcode already used");
+    //     // }
+    //     const alreadyExist = filterBarcode?.find(
+    //         (f) => f.barcodeNumber === newObject[0]?.barcodeNumber
+    //     )
+    //     const validBarcode = filterBarcode?.length
+    //         ? filterBarcode[0]?.productGroupLabel ===
+    //           newObject[0]?.productGroupLabel
+    //         : true
+
+    //     if (
+    //         newObject?.length &&
+    //         filterBarcode?.length <= itemCount &&
+    //         !alreadyExist &&
+    //         validBarcode
+    //     ) {
+    //         setFilterBarcode((prevData: any[]) => [...prevData, newObject[0]])
+    //         const dataToSendObject = {
+    //             barcodeNumber: newObject[0]?.barcodeNumber,
+    //             //status: status,
+    //             //condition: condition,
+    //         }
+    //         setDataToSend((prevData: any[]) => [...prevData, dataToSendObject])
+    //     }
+    // }, [barcode, barcodes])
 
     // useEffect(() => {
     //     if (barcode?.length === 6) {
@@ -128,11 +146,12 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     //     }
     // }, [barcode])
 
-    useEffect(() => {
-        if (itemCount && itemCount + 1 === filterBarcode?.length) {
-            setIsOpenMoveToCartonDrawer(true)
-        }
-    }, [itemCount, filterBarcode])
+    // useEffect(() => {
+    //     if (itemCount && itemCount + 1 === filterBarcode?.length) {
+    //         setIsOpenMoveToCartonDrawer(true)
+    //     }
+    // }, [itemCount, filterBarcode])
+
     return (
         <div className="p-4 h-[calc(100vh-95px)] overflow-auto ">
             <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -140,7 +159,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Inventories </ATMPageHeading>
-                {barcode && (
+                {barcodes.length ? (
                     <button
                         type="button"
                         onClick={() => {
@@ -150,7 +169,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     >
                         + Move to Carton
                     </button>
-                )}
+                ) : null}
             </div>
 
             <div className="grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat p-2">
@@ -210,6 +229,9 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         value={barcode}
                         onChange={(e) => {
                             setBarcode(e.target.value)
+                            if (e.target.value.length > 6) {
+                                handleBarCode(e.target.value)
+                            }
                             //setShouldPrint(true)
                         }}
                         label="Barcode"
@@ -219,7 +241,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                 </div>
 
                 <div className="mt-5 py-3 grid grid-cols-6 gap-4  ">
-                    {filterBarcode?.map((barcode, index) => {
+                    {barcodes?.map((barcode, index) => {
                         return (
                             <div
                                 key={index}
@@ -245,9 +267,9 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
 
             {isOpenMoveToCartonDrawer && (
                 <MoveToCartonDrawer
-                    productGroupName={filterBarcode[0]?.productGroupLabel}
-                    groupBarcodeNumber={filterBarcode[0]?.productGroupNumber}
-                    productDetail={dataToSend}
+                    // productGroupName={filterBarcode[0]?.productGroupLabel}
+                    // groupBarcodeNumber={filterBarcode[0]?.productGroupNumber}
+                    productDetail={barcodes}
                     wareHouse={wareHouse as string}
                     packaging={packaging}
                     onClose={() => setIsOpenMoveToCartonDrawer(false)}

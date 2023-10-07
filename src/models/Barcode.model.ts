@@ -32,7 +32,7 @@ export type ProductBarcodeGroupResponse = {
 export type AddBarcode = {
     productGroupId: string
     barcodeGroupNumber: string
-    wareHouseId: string
+    // wareHouseId: string | null
     lotNumber: string
     quantity: number
     companyId: string
@@ -46,4 +46,22 @@ export type UpdateBarcode = {
         companyId: string
     }
     id: string
+}
+
+
+
+export type InwardInventoryBarcode = {
+    barcodedata: {
+        productGroupId: string;
+        barcodeGroupNumber: string;
+        lotNumber: string;
+        isUsed: string;
+        wareHouseId: string;
+        dealerId: string;
+        companyId: string;
+        cartonBoxId: string;
+        _id: string;
+    }[]
+
+
 }

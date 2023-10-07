@@ -7,6 +7,7 @@
 
 // |-- Internal Dependencies --|
 import { AddBarcode, UpdateBarcode } from 'src/models'
+import { InwardInventoryBarcode } from 'src/models/Barcode.model'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
@@ -106,6 +107,40 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+
+        //***** GET by Barcode*****/
+        getByBarcode: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: (barcodeId: string) => ({
+                url: `/bar-code/getby-barcode/${barcodeId}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+
+        //***** Update *****/
+        inwardInventoryBarcode: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: (body: InwardInventoryBarcode) => ({
+                url: `/bar-code/inwardinventory`,
+                method: 'PUT',
+                body,
+
+            }),
+        }),
+
+        getInventoriesByBarcode: builder.query({
+            providesTags: ['Barcode'],
+            query: ({ body, companyId, warehouseId, status }: { body: PaginationType, companyId: string, warehouseId: string, status: string }) => ({
+                url: `bar-code/inventory/companyid/${companyId}/warehouseid/${warehouseId}/status/${status}`,
+                method: 'Post',
+                body
+
+
+            }),
+        }),
     }),
 })
 export const {
@@ -118,4 +153,7 @@ export const {
     useGetAllBarcodeQuery,
     useGetProductGroupBarcodeQuery,
     useGetAllByGroupQuery,
+    useGetByBarcodeMutation,
+    useInwardInventoryBarcodeMutation,
+    useGetInventoriesByBarcodeQuery
 } = barcodeApi

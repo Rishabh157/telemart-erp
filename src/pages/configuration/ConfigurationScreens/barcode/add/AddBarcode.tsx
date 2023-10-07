@@ -110,7 +110,7 @@ const AddBarcode = ({
                                     }
                                 }}
                             />
-                            {/* Warehouse  */}
+                            {/* Warehouse 
                             <ATMSelectSearchable
                                 name="wareHouseId"
                                 value={values.wareHouseId}
@@ -119,7 +119,7 @@ const AddBarcode = ({
                                     handleSetFieldValue('wareHouseId', e)
                                 }
                                 options={wareHouseOption}
-                            />
+                            /> */}
                             {/* Product Group  */}
                             <ATMSelectSearchable
                                 name="productGroup"

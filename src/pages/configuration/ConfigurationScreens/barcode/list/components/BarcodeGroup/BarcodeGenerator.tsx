@@ -31,11 +31,11 @@ function Barcode({ value }: { value: string }) {
 function AllBarcodes() {
     const navigate = useNavigate()
     const location = useLocation()
-    const { path } = location.state
-    const { barcodesToPrint, cartonBoxBarcode }: any = useSelector(
+    const { path, outerBoxCode } = location.state
+    const { barcodesToPrint }: any = useSelector(
         (state: RootState) => state?.barcode
     )
-
+    console.log(outerBoxCode, 'outerBoxCode')
     const barcodeValues = barcodesToPrint
     useEffect(() => {
         const printFunc = setTimeout(() => {
@@ -59,11 +59,11 @@ function AllBarcodes() {
                     Back
                 </button>
             </div>
-            {cartonBoxBarcode !== null ? (
+            {outerBoxCode !== null ? (
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1  gap-5 py-2 px-3">
                     <div className={`flex flex-col gap-2 shadow relative   `}>
-                        <Barcode value={cartonBoxBarcode} />
-                        <span>{cartonBoxBarcode}</span>
+                        <Barcode value={outerBoxCode} />
+                        <span>{outerBoxCode}</span>
                     </div>
                 </div>
             ) : null}
