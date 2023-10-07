@@ -33,13 +33,17 @@ import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadin
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
-import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
+import {
+    useGetAllBarcodeOfDealerOutWardDispatchMutation,
+    useDispatchDealerBarcodeMutation,
+} from 'src/services/BarcodeService'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
-import { showToast } from 'src/utils'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AlertText } from 'src/pages/callerpage/components/constants'
 
 // |-- Redux --|F
 // import {
@@ -74,19 +78,19 @@ type BarcodeListResponseType = {
     updatedAt: string
 }
 
+// type BarcodeListDocumentsType = {
+//     _id: string
+//     groupName: string
+//     quantity: number
+//     barcodes: BarcodeListResponseType[]
+// }
+
 const OutwardDealerTabsListingWrapper = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
-    const [barcodeNumber, setBarcodeNumber] = useState<string>('')
-    const [barcodeList, setBarcodeList] = useState<BarcodeListResponseType[]>(
-        []
-    )
-
-    const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] = useState<
-        soApprovedGroupListResponseType[]
-    >([])
-    // const [quantity, setQuantity] = useState<string[]>([])
-    // const [productItems, setProductItems] = useState<string[]>([])
-
+    const [barcodeNumber, setBarcodeNumber] = useState<any>([])
+    const [barcodeList, setBarcodeList] = useState<any>([])
+    const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
+        useState<soApprovedGroupListResponseType | null>(null)
     const params = useParams()
     const dispatch = useDispatch<AppDispatch>()
     const dealerId = params.dealerId
@@ -94,6 +98,7 @@ const OutwardDealerTabsListingWrapper = () => {
         (state: RootState) => state.saleOrder
     )
     const { page, rowsPerPage, searchValue, items } = salesOrderState
+    const { customized } = useSelector((state: RootState) => state?.auth)
 
     const {
         data: soData,
@@ -125,6 +130,8 @@ const OutwardDealerTabsListingWrapper = () => {
     })
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
+    const [barcodeDispatch, barcodeDispatchInfo] =
+        useDispatchDealerBarcodeMutation()
 
     useEffect(() => {
         if (!soIsFetching && !soIsLoading) {
@@ -202,7 +209,7 @@ const OutwardDealerTabsListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     setIsShow(true)
-                                    setSelectedItemsTobeDispatch([row])
+                                    setSelectedItemsTobeDispatch(row)
                                 }}
                                 className="block w-full text-left  hover:bg-gray-100"
                             >
@@ -221,26 +228,110 @@ const OutwardDealerTabsListingWrapper = () => {
         },
     ]
 
-    const handleBarcodeSubmit = () => {
-        getBarCode(barcodeNumber)
+    const handleReload = () => {
+        if (customized) {
+            const confirmValue: boolean = window.confirm(AlertText)
+            if (confirmValue) {
+                dispatch(setFieldCustomized(false))
+                setIsShow(!isShow)
+                setSelectedItemsTobeDispatch(null)
+            }
+        } else {
+            setIsShow(!isShow)
+            setSelectedItemsTobeDispatch(null)
+        }
+    }
+
+    // remove barcode
+    const handleRemoveBarcode = (barcodeNumber: string, ind: number) => {
+        const filteredObj = barcodeList[ind]?.filter((item: any) => {
+            if (item?.barcodeNumber !== barcodeNumber) {
+                return item
+            }
+        })
+        let barcode = [...barcodeList]
+        barcode[ind] = [...filteredObj]
+
+        setBarcodeList(barcode)
+    }
+
+    const handleBarcodeSubmit = (
+        barcodeNumber: string,
+        index: number,
+        productGroupId: string
+    ) => {
+        dispatch(setFieldCustomized(true))
+        getBarCode({ id: barcodeNumber, groupId: productGroupId })
             .then((res: any) => {
                 if (res?.data?.status) {
-                    setBarcodeList((pre) => [...pre, ...res?.data?.data])
+                    if (res?.data?.data) {
+                        let newBarc = [...barcodeList]
+                        if (!newBarc[index]) {
+                            newBarc[index] = [...res?.data?.data]
+                        } else {
+                            newBarc[index] = [
+                                ...newBarc[index],
+                                ...res?.data?.data,
+                            ]
+                            const uniqueArray = Array.from(
+                                new Set(
+                                    newBarc[index].map((obj: any) => obj._id)
+                                )
+                            ).map((id) =>
+                                newBarc[index].find(
+                                    (obj: any) => obj._id === id
+                                )
+                            )
+                            newBarc[index] = [...uniqueArray]
+                        }
+
+                        setBarcodeList([...newBarc])
+                    }
+                } else {
+                    // showToast('error', 'barcode number is not matched')
                 }
-                // else {
-                //     showToast('error', 'barcode number is not matched')
-                // }
             })
             .catch((err) => console.error(err))
     }
 
-    useEffect(() => {
-        if (barcodeNumber?.length >= 6) {
-            handleBarcodeSubmit()
-        }
-    }, [barcodeNumber])
+    const handleDispatchBarcode = () => {
+        const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
+            const {
+                // barcodeNumber,
+                createdAt,
+                isActive,
+                isDeleted,
+                updatedAt,
+                cartonBoxId,
+                status,
+                __v,
+                ...rest
+            } = ele
+            return rest
+        })
 
-    console.log('selectedItemsTobeDispatch', barcodeList)
+        barcodeDispatch({
+            barcodedata: [...filterValue],
+        })
+            .then((res) => {
+                console.log('barcodeDispatch res => ', res)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+    }
+
+    useEffect(() => {
+        if (selectedItemsTobeDispatch?.documents.length) {
+            const barcode = Array(
+                selectedItemsTobeDispatch?.documents.length
+            ).fill(null)
+            setBarcodeList(barcode)
+            setBarcodeNumber(barcode)
+        }
+    }, [selectedItemsTobeDispatch?.documents])
+
+    console.log('barcode list =>', barcodeList)
 
     return (
         <>
@@ -250,192 +341,195 @@ const OutwardDealerTabsListingWrapper = () => {
                 buttonClass="cursor-pointer"
                 maxWidth="lg"
                 handleClose={() => {
-                    setIsShow(!isShow)
-                    setSelectedItemsTobeDispatch([])
+                    handleReload()
                 }}
                 component={
                     <div className="px-4 pt-2 pb-6">
-                        {selectedItemsTobeDispatch?.map(
-                            (
-                                ele: soApprovedGroupListResponseType,
-                                ind: number
-                            ) => {
-                                return (
-                                    <>
-                                        {/* SO NO. & DEALER NAME */}
-                                        <div className="grid grid-cols-4 border-b-[1px] border-black">
-                                            <div>
-                                                <div className="flex gap-4 items-center">
-                                                    <div className="font-bold">
-                                                        So Number
-                                                    </div>
-                                                    {':'}
-                                                    <div className="font-bold">
-                                                        {ele?._id}
-                                                    </div>
-                                                </div>
-                                            </div>
+                        {/* SO NO. & DEALER NAME */}
+                        <div className="grid grid-cols-4 border-b-[1px] pb-2 border-black">
+                            <div>
+                                <div className="flex gap-1 items-center">
+                                    <div className="font-bold">So Number</div>
+                                    {':'}
+                                    <div className="">
+                                        {selectedItemsTobeDispatch?._id}
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div>
+                                <div className="flex gap-1 items-center">
+                                    <div className="font-bold">Dealer Name</div>
+                                    {':'}
+                                    <div className="">
+                                        {selectedItemsTobeDispatch?.dealerName}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {selectedItemsTobeDispatch?.documents?.map(
+                            (document, docIndex) => {
+                                return (
+                                    <div
+                                        className="pb-6 border-b-[1px] border-black last:border-none"
+                                        key={docIndex}
+                                    >
+                                        <div className="grid grid-cols-4 mt-2">
                                             <div>
-                                                <div className="flex gap-4 items-center">
-                                                    <div className="font-bold">
-                                                        Dealer Name
-                                                    </div>
-                                                    {':'}
-                                                    <div className="font-bold">
-                                                        {ele?.dealerName}
-                                                    </div>
+                                                <div>
+                                                    <span className="font-bold">
+                                                        Item
+                                                    </span>
+                                                    <span>:</span>
+                                                    <span className="font-bold">
+                                                        {
+                                                            document
+                                                                ?.productSalesOrder
+                                                                ?.groupName
+                                                        }
+                                                    </span>
+                                                </div>
+
+                                                <div>
+                                                    <span className="font-bold">
+                                                        Quantity
+                                                    </span>
+                                                    <span>:</span>
+                                                    <span className="font-bold">
+                                                        {
+                                                            document
+                                                                ?.productSalesOrder
+                                                                ?.quantity
+                                                        }
+                                                        {barcodeList[docIndex]
+                                                            ?.length ? (
+                                                            <> / </>
+                                                        ) : (
+                                                            ''
+                                                        )}
+                                                        {
+                                                            barcodeList[
+                                                                docIndex
+                                                            ]?.length
+                                                        }
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        {ele?.documents?.map(
-                                            (document, docIndex) => {
-                                                return (
-                                                    <div
-                                                        className="pb-6 border-b-[1px] border-black last:border-none"
-                                                        key={docIndex}
-                                                    >
-                                                        <div className="grid grid-cols-4 mt-2">
-                                                            <div>
-                                                                <div className="flex gap-4 items-center">
-                                                                    <div className="font-bold">
-                                                                        Item
-                                                                    </div>
-                                                                    {':'}
-                                                                    <div className="font-bold">
-                                                                        {
-                                                                            document
-                                                                                ?.productSalesOrder
-                                                                                ?.groupName
-                                                                        }
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className="flex gap-4 items-center">
-                                                                    <div className="font-bold">
-                                                                        Quantity
-                                                                    </div>
-                                                                    {':'}
-                                                                    <div className="font-bold">
-                                                                        {
-                                                                            document
-                                                                                ?.productSalesOrder
-                                                                                ?.quantity
-                                                                        }{' '}
-                                                                        /{' '}
-                                                                        {
-                                                                            barcodeList.length
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="mt-4 grid grid-cols-12 gap-x-4">
-                                                            <div className="col-span-3">
-                                                                <ATMTextField
-                                                                    name=""
-                                                                    value={
-                                                                        barcodeNumber
-                                                                    }
-                                                                    maxLength={
-                                                                        8
-                                                                    }
-                                                                    label="Barcode Number"
-                                                                    placeholder="enter barcode number"
-                                                                    className="shadow bg-white rounded w-[50%] "
-                                                                    onChange={(
-                                                                        e
-                                                                    ) => {
-                                                                        setBarcodeNumber(
-                                                                            e
-                                                                                .target
-                                                                                .value
-                                                                        )
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                            <div className="col-span-2 flex items-end">
-                                                                <ATMLoadingButton
-                                                                    isLoading={
-                                                                        false
-                                                                    }
-                                                                    loadingText="Dispatching"
-                                                                    onClick={() => {}}
-                                                                    className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
-                                                                >
-                                                                    Save
-                                                                </ATMLoadingButton>
-                                                            </div>
-                                                        </div>
-                                                        <div className="grid grid-cols-4 gap-x-4">
-                                                            {barcodeList?.map(
-                                                                (
-                                                                    barcode: BarcodeListResponseType,
-                                                                    barcodeIndex: number
-                                                                ) => {
-                                                                    return (
-                                                                        <div
-                                                                            key={
-                                                                                barcodeIndex
-                                                                            }
-                                                                            onClick={() => {
-                                                                                // onBarcodeClick(barcode)
-                                                                            }}
-                                                                            className={`flex flex-col gap-2 my-4 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${
-                                                                                barcode?.isUsed
-                                                                                    ? ' border-red-500'
-                                                                                    : 'border-slate-200'
-                                                                            }`}
-                                                                        >
-                                                                            <div className="flex justify-between">
-                                                                                <div>
-                                                                                    {/* Used Chip */}
-                                                                                    {/* {true && (
+                                        <div className="mt-4 grid grid-cols-12 gap-x-4">
+                                            <div className="col-span-3">
+                                                <ATMTextField
+                                                    name=""
+                                                    value={
+                                                        barcodeNumber[docIndex]
+                                                    }
+                                                    label="Barcode Number"
+                                                    placeholder="enter barcode number"
+                                                    className="shadow bg-white rounded w-[50%] "
+                                                    onChange={(e) => {
+                                                        if (
+                                                            e.target.value
+                                                                ?.length > 6
+                                                        ) {
+                                                            handleBarcodeSubmit(
+                                                                e.target.value,
+                                                                docIndex,
+                                                                document
+                                                                    ?.productSalesOrder
+                                                                    ?.productGroupId
+                                                            )
+                                                        }
+                                                        setBarcodeNumber(
+                                                            (prev: any) => {
+                                                                const updatedArray =
+                                                                    [...prev] // Create a copy of the previous array
+                                                                updatedArray[
+                                                                    docIndex
+                                                                ] =
+                                                                    e.target.value // Set the value at the desired index
+                                                                return updatedArray // Return the updated array
+                                                            }
+                                                        )
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-cols-4 gap-x-4">
+                                            {barcodeList[docIndex]?.map(
+                                                (
+                                                    barcode: BarcodeListResponseType,
+                                                    barcodeIndex: number
+                                                ) => {
+                                                    return (
+                                                        <div
+                                                            key={barcodeIndex}
+                                                            onClick={() => {
+                                                                // onBarcodeClick(barcode)
+                                                            }}
+                                                            className={`flex flex-col gap-2 my-4 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer`}
+                                                        >
+                                                            <div className="flex justify-between">
+                                                                <div>
+                                                                    {/* Used Chip */}
+                                                                    {/* {true && (
                                                                                         <span className="text-white bg-red-500 px-2 text-[11px] rounded-full inline-flex items-center py-[1px] font-medium">
                                                                                             Used
                                                                                         </span>
                                                                                     )} */}
-                                                                                    <div className="text-[12px] text-slate-500">
-                                                                                        Barcode
-                                                                                        No.
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        {
-                                                                                            barcode?.barcodeNumber
-                                                                                        }
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="absolute -top-2 -right-2">
-                                                                                    <IoRemoveCircle
-                                                                                        fill="red"
-                                                                                        size={
-                                                                                            20
-                                                                                        }
-                                                                                    />
-                                                                                </div>
-                                                                            </div>
+                                                                    <div className="text-[12px] text-slate-500">
+                                                                        Barcode
+                                                                        No.
+                                                                    </div>
+                                                                    <div>
+                                                                        {
+                                                                            barcode?.barcodeNumber
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                                <div className="absolute -top-2 -right-2">
+                                                                    <IoRemoveCircle
+                                                                        onClick={() => {
+                                                                            handleRemoveBarcode(
+                                                                                barcode?.barcodeNumber,
+                                                                                docIndex
+                                                                            )
+                                                                        }}
+                                                                        fill="red"
+                                                                        size={
+                                                                            20
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            </div>
 
-                                                                            <div className="text-primary-main font-medium grow flex items-end">
-                                                                                {/* {
+                                                            <div className="text-primary-main font-medium grow flex items-end">
+                                                                {/* {
                                                                                     barcode?.productGroupLabel
                                                                                 } */}
-                                                                            </div>
-                                                                        </div>
-                                                                    )
-                                                                }
-                                                            )}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )
-                                            }
-                                        )}
-                                    </>
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
                                 )
                             }
                         )}
 
-                        {/*  */}
+                        <div className="flex justify-end">
+                            <div className="flex items-end">
+                                <ATMLoadingButton
+                                    isLoading={barcodeDispatchInfo?.isLoading}
+                                    loadingText="Dispatching"
+                                    onClick={() => handleDispatchBarcode()}
+                                    className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
+                                >
+                                    Save
+                                </ATMLoadingButton>
+                            </div>
+                        </div>
                     </div>
                 }
             />

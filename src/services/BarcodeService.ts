@@ -10,6 +10,31 @@ import { AddBarcode, UpdateBarcode } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
+type DispatchBarcodeBody = {
+    barcodedata: {
+        _id: string
+        productGroupId: string
+        barcodeGroupNumber: string
+        cartonBoxId: string
+        lotNumber: string
+        isUsed: string
+        wareHouseId: string
+        dealerId: string
+        companyId: string
+        outerBoxbarCodeNumber: string
+        barcodeNumber:string
+        // status: string
+    }[]
+}
+
+
+
+
+
+
+
+
+
 export const barcodeApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET *****/
@@ -45,8 +70,8 @@ export const barcodeApi = apiSlice.injectEndpoints({
         //***** GET DEALER OUTWARD DISPATCHED BARCODE *****/
         getAllBarcodeOfDealerOutWardDispatch: builder.mutation({
             invalidatesTags: ['Barcode'],
-            query: (id: string) => ({
-                url: `/bar-code/barcode/${id}`,
+            query: ({ id, groupId }: { id: string; groupId: string }) => ({
+                url: `/bar-code/barcode/${id}/productgroupid/${groupId}`,
                 method: 'GET',
                 // body,
             }),
@@ -116,6 +141,15 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+        dispatchDealerBarcode: builder.mutation({
+            invalidatesTags: ['Barcode', 'bar-codeGroup'],
+            query: (body: DispatchBarcodeBody) => ({
+                url: `/bar-code/outwardinventory`,
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 })
 export const {
@@ -129,4 +163,5 @@ export const {
     useGetAllBarcodeQuery,
     useGetProductGroupBarcodeQuery,
     useGetAllByGroupQuery,
+    useDispatchDealerBarcodeMutation,
 } = barcodeApi
