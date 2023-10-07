@@ -13,6 +13,7 @@ import {
 } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
+import { UpdateSaleOrderApproval } from 'src/models/SaleOrder.model'
 
 export const SalesOrderApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -22,6 +23,17 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
             providesTags: ['SalesOrder'],
             query: (body: PaginationType) => ({
                 url: '/sales-order',
+                method: 'POST',
+                body,
+            }),
+        }),
+
+        //***** GET PAGINATION DATA WITH PRODUCT GROUP *****/
+
+        getPaginationSaleOrderByGroup: builder.query({
+            providesTags: ['SalesOrder'],
+            query: (body: PaginationType) => ({
+                url: '/sales-order/groupby',
                 method: 'POST',
                 body,
             }),
@@ -51,6 +63,16 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
             invalidatesTags: ['SalesOrder'],
             query: ({ body, id }: UpdateSaleOrder) => ({
                 url: `/sales-order/${id}`,
+                method: 'PUT',
+                body,
+            }),
+        }),
+
+        //***** Update *****/
+        updateSalesOrderApproval: builder.mutation({
+            invalidatesTags: ['SalesOrder'],
+            query: ({ body, id }: UpdateSaleOrderApproval) => ({
+                url: `/sales-order/approval-level/${id}`,
                 method: 'PUT',
                 body,
             }),
@@ -88,9 +110,11 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
 
 export const {
     useGetPaginationSaleOrderQuery,
+    useGetPaginationSaleOrderByGroupQuery,
     useGetSalesOrderByDealerIdQuery,
     useAddSalesOrderMutation,
     useUpdateSalesOrderMutation,
+    useUpdateSalesOrderApprovalMutation,
     useGetSalesOrderByIdQuery,
     useDeleteSalesOrderMutation,
     useUpdateSoLevelMutation,

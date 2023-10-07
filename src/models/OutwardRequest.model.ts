@@ -6,6 +6,44 @@
 // ==============================================
 
 // |-- Types --|
+
+export type soApprovedGroupListResponseType = {
+    _id: string
+    dealerName: string
+    documents: {
+        _id: string
+        soNumber: string
+        dealerId: string
+        dealerWareHouseId: string
+        companyWareHouseId: string
+        dhApprovedById: string
+        dhApproved: boolean
+        dhApprovedActionBy: string
+        dhApprovedAt: string
+        accApprovedById: string
+        accApproved: boolean
+        accApprovedActionBy: string
+        accApprovedAt: string
+        productSalesOrder: {
+            productGroupId: string
+            rate: number
+            quantity: number
+            _id: string
+            groupName: string
+        }
+        status: 'DISPATCHED' | 'NOT_DISPATCHED'
+        companyId: string
+        isDeleted: boolean
+        isActive: boolean
+        __v: number
+        createdAt: string
+        updatedAt: string
+        dealerLabel: string
+        companyWarehouseLabel: string
+        warehouseLabel: string
+    }[]
+}
+
 export type OutwardRequestDealerListResponse = {
     dealerName: string
     productName: string

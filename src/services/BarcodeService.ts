@@ -7,8 +7,27 @@
 
 // |-- Internal Dependencies --|
 import { AddBarcode, UpdateBarcode } from 'src/models'
+import { InwardInventoryBarcode } from 'src/models/Barcode.model'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
+
+type DispatchBarcodeBody = {
+    barcodedata: {
+        _id: string
+        productGroupId: string
+        barcodeGroupNumber: string
+        cartonBoxId: string
+        lotNumber: string
+        isUsed: string
+        wareHouseId: string
+        dealerId: string
+        companyId: string
+        outerBoxbarCodeNumber: string
+        barcodeNumber: string
+        // status: string
+    }[]
+    soId: string[]
+}
 
 export const barcodeApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -37,6 +56,16 @@ export const barcodeApi = apiSlice.injectEndpoints({
             providesTags: ['Barcode'],
             query: () => ({
                 url: `/bar-code`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** GET DEALER OUTWARD DISPATCHED BARCODE *****/
+        getAllBarcodeOfDealerOutWardDispatch: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: ({ id, groupId }: { id: string; groupId: string }) => ({
+                url: `/bar-code/barcode/${id}/productgroupid/${groupId}`,
                 method: 'GET',
                 // body,
             }),
@@ -106,6 +135,51 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+        getByBarcode: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: (barcodeId: string) => ({
+                url: `/bar-code/getby-barcode/${barcodeId}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** Update *****/
+        inwardInventoryBarcode: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: (body: InwardInventoryBarcode) => ({
+                url: `/bar-code/inwardinventory`,
+                method: 'PUT',
+                body,
+            }),
+        }),
+
+        getInventoriesByBarcode: builder.query({
+            providesTags: ['Barcode'],
+            query: ({
+                body,
+                companyId,
+                warehouseId,
+                status,
+            }: {
+                body: PaginationType
+                companyId: string
+                warehouseId: string
+                status: string
+            }) => ({
+                url: `bar-code/inventory/companyid/${companyId}/warehouseid/${warehouseId}/status/${status}`,
+                method: 'Post',
+                body,
+            }),
+        }),
+        dispatchDealerBarcode: builder.mutation({
+            invalidatesTags: ['Barcode', 'bar-codeGroup'],
+            query: (body: DispatchBarcodeBody) => ({
+                url: `/bar-code/outwardinventory`,
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 })
 export const {
@@ -115,7 +189,12 @@ export const {
     useGetBarcodeByIdQuery,
     useExportBarcodeDataMutation,
     useDeleteBarcodeMutation,
+    useGetAllBarcodeOfDealerOutWardDispatchMutation,
     useGetAllBarcodeQuery,
     useGetProductGroupBarcodeQuery,
     useGetAllByGroupQuery,
+    useGetByBarcodeMutation,
+    useInwardInventoryBarcodeMutation,
+    useGetInventoriesByBarcodeQuery,
+    useDispatchDealerBarcodeMutation,
 } = barcodeApi

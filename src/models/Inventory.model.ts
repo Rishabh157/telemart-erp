@@ -46,3 +46,29 @@ export type UpdateInventory = {
     }
     id: string
 }
+
+export type WareHouseInventory = {
+    count: string
+    firstDocument: {
+        barcodeGroupNumber: string
+        barcodeNumber: string
+        cartonBoxId: string
+        companyId: string
+        createdAt: string
+        dealerId: string
+        isActive: string
+        isDeleted: string
+        isUsed: string
+        lotNumber: string
+        outerBoxbarCodeNumber: string
+        productGroupId: string
+        productGroupLabel: string
+        status: string
+        updatedAt: string
+        wareHouseId: string
+        wareHouseLabel: string
+        __v: string
+        _id: string
+    }
+    productGroupId: string
+}

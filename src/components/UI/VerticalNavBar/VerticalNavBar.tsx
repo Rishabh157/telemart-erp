@@ -19,6 +19,7 @@ import {
 
 // |-- Internal Dependencies --|
 import { NavItemType } from 'src/navigation'
+import { AlertText } from 'src/pages/callerpage/components/constants'
 import { setCheckUserAccess } from 'src/redux/slices/access/userAcessSlice'
 
 // |-- Redux --|
@@ -84,8 +85,8 @@ const VerticalNavBar = ({
     // const { customized, userData } = useSelector(
     //     (state: RootState) => state?.auth
     // )
-    const AlertText =
-        'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
+    // const AlertText =
+    //     'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
     useEffect(() => {
         if (customized) {
             window.addEventListener('beforeunload', handleBeforeUnload)
