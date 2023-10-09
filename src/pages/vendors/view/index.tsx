@@ -42,12 +42,12 @@ const tabsData = [
         path: 'purchase-order',
         name: 'PURCHASE_ORDER',
     },
-    {
-        label: 'Warehouse',
-        icon: MdOutlinePeopleAlt,
-        path: 'warehouse',
-        name: 'VENDOR_WAREHOUSE',
-    },
+    // {
+    //     label: 'Warehouse',
+    //     icon: MdOutlinePeopleAlt,
+    //     path: 'warehouse',
+    //     name: 'VENDOR_WAREHOUSE',
+    // },
     {
         label: "RTV's",
         icon: MdOutlinePeopleAlt,
