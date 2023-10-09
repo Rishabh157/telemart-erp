@@ -37,8 +37,12 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
     )
     const changeStatus = () => {
         showConfirmationDialog({
-            title: 'Activate Dealer',
-            text: 'Do you want to Activate Dealer ?',
+            title: selectedItem?.isActive
+                ? 'Deactivate Dealer'
+                : 'Activate Dealer',
+            text: selectedItem?.isActive
+                ? 'Do you want to Deactivate Dealer ?'
+                : 'Do you want to Activate Dealer ?',
             showCancelButton: true,
             next: (res: any) => {
                 return res.isConfirmed ? DealerStatus() : false

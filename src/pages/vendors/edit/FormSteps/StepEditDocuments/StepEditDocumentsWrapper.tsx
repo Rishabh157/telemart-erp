@@ -31,16 +31,16 @@ const formFields: { sectionName: string; fields: Field<''>[] }[] = [
                 placeholder: 'GST No.',
             },
             {
-                name: 'gst_certificate',
-                label: 'GST Certificate',
-                placeholder: 'GST Certificate',
-                // type: "file-picker",
-            },
-            {
                 name: 'declaration_form',
                 label: 'Declaration Form',
                 placeholder: 'Declaration Form',
                 // type: "file-picker",
+            },
+            {
+                name: 'gst_certificate',
+                label: 'GST Certificate',
+                placeholder: 'GST Certificate',
+                type: 'file-picker',
             },
         ],
     },

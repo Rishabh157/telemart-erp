@@ -6,11 +6,12 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
+import { CircularProgress } from '@mui/material'
 
 // |-- Internal Dependencies --|
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
@@ -21,6 +22,7 @@ import { Field } from 'src/models/FormField/FormField.model'
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 
 // |-- Types --|
 type FieldType = Field<''>
@@ -31,6 +33,11 @@ type Props = {
 }
 
 const StepEditDocuments = ({ formikProps, formFields }: Props) => {
+    const [loaderState, setLoaderState] = useState<string>('')
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+
+    const [fileUploader] = useFileUploaderMutation()
+
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
     const { formSubmitting: isSubmitting } = useSelector(
@@ -85,19 +92,59 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
 
                                     case 'file-picker':
                                         return (
-                                            <ATMFilePickerWrapper
-                                                name={name}
-                                                key={name}
-                                                label={label}
-                                                placeholder={placeholder}
-                                                onSelect={(newFile) =>
-                                                    handleSetFieldValue(
-                                                        name,
-                                                        newFile
-                                                    )
-                                                }
-                                                selectedFile={values[name]}
-                                            />
+                                            <div className="mt-3">
+                                                <ATMFilePickerWrapper
+                                                    name={name}
+                                                    key={name}
+                                                    label={label}
+                                                    placeholder={placeholder}
+                                                    onSelect={(newFile) => {
+                                                        setLoaderState(name)
+                                                        const formData =
+                                                            new FormData()
+                                                        formData.append(
+                                                            'fileType',
+                                                            'IMAGE'
+                                                        )
+                                                        formData.append(
+                                                            'category',
+                                                            'Dealer'
+                                                        )
+                                                        formData.append(
+                                                            'fileUrl',
+                                                            newFile || ''
+                                                        )
+                                                        setImageApiStatus(true)
+                                                        fileUploader(
+                                                            formData
+                                                        ).then((res: any) => {
+                                                            if ('data' in res) {
+                                                                setImageApiStatus(
+                                                                    false
+                                                                )
+                                                                handleSetFieldValue(
+                                                                    name,
+                                                                    res?.data
+                                                                        ?.data
+                                                                        ?.fileUrl
+                                                                )
+                                                            }
+                                                            setImageApiStatus(
+                                                                false
+                                                            )
+                                                        })
+                                                    }}
+                                                    selectedFile={values[name]}
+                                                />
+                                                {loaderState === name &&
+                                                imageApiStatus ? (
+                                                    <div className="mt-3 text-center">
+                                                        <CircularProgress
+                                                            size={21}
+                                                        />
+                                                    </div>
+                                                ) : null}
+                                            </div>
                                         )
 
                                     default:

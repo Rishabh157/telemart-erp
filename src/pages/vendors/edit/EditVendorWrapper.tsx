@@ -131,17 +131,14 @@ const steps = [
         validationSchema: object({
             contact_informations: array().of(
                 object().shape({
-                    name: string().required('Name is required'),
-                    department: string().required('Department is required'),
-                    designation: string().required('Designation is required'),
-                    email: string()
-                        .required('Required!')
-                        .email('Invalid  Email'),
+                    name: string(),
+                    department: string(),
+                    designation: string(),
+                    email: string().email('Invalid  Email'),
                     mobileNumber: string()
                         .trim()
-                        .matches(regIndiaPhone, 'Invalid Mobile Number')
-                        .required('Required!'),
-                    landLine: string().required('LandLine is required'),
+                        .matches(regIndiaPhone, 'Invalid Mobile Number'),
+                    landLine: string(),
                 })
             ),
         }),
@@ -152,7 +149,7 @@ const steps = [
         validationSchema: object({
             gst_no: string().required('GST number is required'),
             gst_certificate: string()
-                .url('GST Certificate must be valid URL')
+                // .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),
             declaration_form: string().url('Form must be valid URL'),
         }),
