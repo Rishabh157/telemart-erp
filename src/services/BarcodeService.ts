@@ -172,8 +172,10 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        // Diapatch Dealer Outward Barcode
         dispatchDealerBarcode: builder.mutation({
-            invalidatesTags: ['Barcode', 'bar-codeGroup'],
+            invalidatesTags: ['Barcode', 'bar-codeGroup', 'SalesOrder'],
             query: (body: DispatchBarcodeBody) => ({
                 url: `/bar-code/outwardinventory`,
                 method: 'PUT',

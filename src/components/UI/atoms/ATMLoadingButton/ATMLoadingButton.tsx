@@ -32,7 +32,7 @@ const ATMLoadingButton = ({
         <>
             <button
                 type={type}
-                disabled={isLoading}
+                disabled={isLoading || disabled}
                 className={twMerge(
                     `border w-full bg-primary-main text-white rounded p-2  h-[42px] flex gap-2 justify-center items-center ${className} ${
                         disabled || isLoading ? 'opacity-[.60]' : ''
