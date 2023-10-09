@@ -42,12 +42,12 @@ const tabsData = [
         path: 'purchase-order',
         name: 'PURCHASE_ORDER',
     },
-    {
-        label: 'Warehouse',
-        icon: MdOutlinePeopleAlt,
-        path: 'warehouse',
-        name: 'VENDOR_WAREHOUSE',
-    },
+    // {
+    //     label: 'Warehouse',
+    //     icon: MdOutlinePeopleAlt,
+    //     path: 'warehouse',
+    //     name: 'VENDOR_WAREHOUSE',
+    // },
     {
         label: "RTV's",
         icon: MdOutlinePeopleAlt,
@@ -99,9 +99,7 @@ const ViewVendor = () => {
     //   const { vendorId } = useParams();
     const dispatch = useDispatch<AppDispatch>()
     const [searchValue, setSearchValue] = useState('')
-    const { allItems, selectedItem }: any = useSelector(
-        (state: RootState) => state?.vendor
-    )
+    const { allItems }: any = useSelector((state: RootState) => state?.vendor)
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
@@ -113,6 +111,7 @@ const ViewVendor = () => {
         tabsData,
         userData?.userRole || 'ADMIN'
     )
+
     const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
         limit: 100,
         searchValue: searchValue,
@@ -145,10 +144,10 @@ const ViewVendor = () => {
             infoCard={
                 <VendorInfoCard
                     vendorData={{
-                        isActive: selectedItem?.isActive,
-                        vendorName: selectedItem?.contactInformation[0]?.name,
-                        mobile: selectedItem?.registrationAddress?.phone,
-                        firmName: selectedItem?.companyName,
+                        isActive: true,
+                        vendorName: '',
+                        mobile: '',
+                        firmName: '',
                     }}
                     actionIcons={actionIcons}
                 />

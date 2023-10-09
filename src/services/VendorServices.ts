@@ -74,6 +74,15 @@ export const vendorApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+
+         //***** deactive *****/
+         deactivateVendor: builder.mutation({
+            invalidatesTags: ['vendor'],
+            query: (id: string) => ({
+                url: `/vendor/status-change/${id}`,
+                method: 'PUT',
+            }),
+        }),
     }),
 })
 export const {
@@ -83,4 +92,5 @@ export const {
     useGetVendorByIdQuery,
     useGetPaginationVendorsQuery,
     useDeleteVendorMutation,
+    useDeactivateVendorMutation,
 } = vendorApi
