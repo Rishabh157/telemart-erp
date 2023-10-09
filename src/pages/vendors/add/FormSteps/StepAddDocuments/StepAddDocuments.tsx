@@ -6,11 +6,12 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { CircularProgress } from '@mui/material'
 
 // |-- Internal Dependencies --|
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
@@ -20,6 +21,8 @@ import { Field } from 'src/models/FormField/FormField.model'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
+import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type FieldType = Field<''>
@@ -30,11 +33,21 @@ type Props = {
 }
 
 const StepAddDocuments = ({ formikProps, formFields }: Props) => {
+    const [loaderState, setLoaderState] = useState<string>('')
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+
+    const [fileUploader] = useFileUploaderMutation()
+
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    const dispatch = useDispatch()
+    const handleSetFieldValue = (name: string, value: string) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     return (
         <div className="">
@@ -46,7 +59,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                             {sectionName}
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4 gap-y-5">
+                        <div className="grid grid-cols-2 gap-4 gap-y-5">
                             {fields?.map((field: FieldType) => {
                                 const {
                                     type = 'text',
@@ -77,16 +90,58 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
 
                                     case 'file-picker':
                                         return (
-                                            <ATMFilePickerWrapper
-                                                name={name}
-                                                key={name}
-                                                label={label}
-                                                placeholder={placeholder}
-                                                onSelect={(newFile) =>
-                                                    setFieldValue(name, newFile)
-                                                }
-                                                selectedFile={values[name]}
-                                            />
+                                            <div className="mt-3">
+                                                <ATMFilePickerWrapper
+                                                    name={name}
+                                                    label={label}
+                                                    placeholder={placeholder}
+                                                    onSelect={(newFile) => {
+                                                        setLoaderState(name)
+                                                        const formData =
+                                                            new FormData()
+                                                        formData.append(
+                                                            'fileType',
+                                                            'IMAGE'
+                                                        )
+                                                        formData.append(
+                                                            'category',
+                                                            'Dealer'
+                                                        )
+                                                        formData.append(
+                                                            'fileUrl',
+                                                            newFile || ''
+                                                        )
+                                                        setImageApiStatus(true)
+                                                        fileUploader(
+                                                            formData
+                                                        ).then((res: any) => {
+                                                            if ('data' in res) {
+                                                                setImageApiStatus(
+                                                                    false
+                                                                )
+                                                                handleSetFieldValue(
+                                                                    name,
+                                                                    res?.data
+                                                                        ?.data
+                                                                        ?.fileUrl
+                                                                )
+                                                            }
+                                                            setImageApiStatus(
+                                                                false
+                                                            )
+                                                        })
+                                                    }}
+                                                    selectedFile={values[name]}
+                                                />
+                                                {loaderState === name &&
+                                                imageApiStatus ? (
+                                                    <div className="mt-3 text-center">
+                                                        <CircularProgress
+                                                            size={21}
+                                                        />
+                                                    </div>
+                                                ) : null}
+                                            </div>
                                         )
 
                                     default:

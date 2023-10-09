@@ -11,31 +11,27 @@ import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
-// import { HiDotsHorizontal } from 'react-icons/hi'
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import { IoRemoveCircle } from 'react-icons/io5'
 
 // |-- Internal Dependencies --|
-// import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import { soApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
 import OutwardRequestListing from './OutwardDealerTabs'
-// import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-// import { soApprovedListResponseType } from 'src/models/OutwardRequest.model'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
-// import OutwardRequestListing from './OutwardDealerTabs'
 
 // |-- Internal Dependencies --|
+import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import { useDispatch, useSelector } from 'react-redux'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { AlertText } from 'src/pages/callerpage/components/constants'
+
+// |-- Redux --|F
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import {
     setIsTableLoading,
@@ -48,15 +44,7 @@ import {
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
 } from 'src/services/BarcodeService'
 import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
-import { showToast } from 'src/utils'
 
-// |-- Redux --|F
-// import {
-//   setIsTableLoading,
-//   setItems,
-//   setTotalItems,
-// } from "src/redux/slices/OutwardRequestSlice";
-// import { AppDispatch, RootState } from "src/redux/store";
 
 // |-- Types --|
 export type Tabs = {
@@ -82,13 +70,6 @@ type BarcodeListResponseType = {
     createdAt: string
     updatedAt: string
 }
-
-// type BarcodeListDocumentsType = {
-//     _id: string
-//     groupName: string
-//     quantity: number
-//     barcodes: BarcodeListResponseType[]
-// }
 
 const OutwardDealerTabsListingWrapper = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
@@ -222,37 +203,43 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'actions',
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: soApprovedGroupListResponseType) => (
-                <ActionPopup
-                    handleOnAction={() => {}}
-                    moduleName={UserModuleNameTypes.saleOrder}
-                    children={
-                        <>
-                            <button
-                                onClick={() => {
-                                    setIsShow(true)
-                                    const totalQuantity =
-                                        row?.documents?.reduce((sum, ele) => {
-                                            return (sum +=
-                                                ele?.productSalesOrder
-                                                    ?.quantity)
-                                        }, 0)
-                                    setBarcodeQuantity(totalQuantity)
-                                    setSelectedItemsTobeDispatch(row)
-                                }}
-                                className="block w-full text-left  hover:bg-gray-100"
-                            >
-                                <div
-                                    className="block px-4 py-2"
-                                    onClick={() => {}}
+            renderCell: (row: soApprovedGroupListResponseType) =>
+                row?.documents[0].status === 'COMPLETE' ? (
+                    'Dispatched'
+                ) : (
+                    <ActionPopup
+                        handleOnAction={() => {}}
+                        moduleName={UserModuleNameTypes.saleOrder}
+                        children={
+                            <>
+                                <button
+                                    onClick={() => {
+                                        setIsShow(true)
+                                        const totalQuantity =
+                                            row?.documents?.reduce(
+                                                (sum, ele) => {
+                                                    return (sum +=
+                                                        ele?.productSalesOrder
+                                                            ?.quantity)
+                                                },
+                                                0
+                                            )
+                                        setBarcodeQuantity(totalQuantity)
+                                        setSelectedItemsTobeDispatch(row)
+                                    }}
+                                    className="block w-full text-left  hover:bg-gray-100"
                                 >
-                                    Dispatch
-                                </div>
-                            </button>
-                        </>
-                    }
-                />
-            ),
+                                    <div
+                                        className="block px-4 py-2"
+                                        onClick={() => {}}
+                                    >
+                                        Dispatch
+                                    </div>
+                                </button>
+                            </>
+                        }
+                    />
+                ),
             align: 'end',
         },
     ]
