@@ -48,6 +48,7 @@ import {
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
 } from 'src/services/BarcodeService'
 import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
+import { showToast } from 'src/utils'
 
 // |-- Redux --|F
 // import {
@@ -92,13 +93,13 @@ type BarcodeListResponseType = {
 const OutwardDealerTabsListingWrapper = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
+    const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
         useState<soApprovedGroupListResponseType | null>(null)
     const params = useParams()
     const dispatch = useDispatch<AppDispatch>()
     const dealerId = params.dealerId
-    console.log('dealerIddealerIddealerId', dealerId)
     const salesOrderState: any = useSelector(
         (state: RootState) => state.saleOrder
     )
@@ -230,6 +231,13 @@ const OutwardDealerTabsListingWrapper = () => {
                             <button
                                 onClick={() => {
                                     setIsShow(true)
+                                    const totalQuantity =
+                                        row?.documents?.reduce((sum, ele) => {
+                                            return (sum +=
+                                                ele?.productSalesOrder
+                                                    ?.quantity)
+                                        }, 0)
+                                    setBarcodeQuantity(totalQuantity)
                                     setSelectedItemsTobeDispatch(row)
                                 }}
                                 className="block w-full text-left  hover:bg-gray-100"
@@ -287,27 +295,27 @@ const OutwardDealerTabsListingWrapper = () => {
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
-                        let newBarc = [...barcodeList]
-                        if (!newBarc[index]) {
-                            newBarc[index] = [...res?.data?.data]
+                        let newBarcode = [...barcodeList]
+                        if (!newBarcode[index]) {
+                            newBarcode[index] = [...res?.data?.data]
                         } else {
-                            newBarc[index] = [
-                                ...newBarc[index],
+                            newBarcode[index] = [
+                                ...newBarcode[index],
                                 ...res?.data?.data,
                             ]
                             const uniqueArray = Array.from(
                                 new Set(
-                                    newBarc[index].map((obj: any) => obj._id)
+                                    newBarcode[index].map((obj: any) => obj._id)
                                 )
                             ).map((id) =>
-                                newBarc[index].find(
+                                newBarcode[index].find(
                                     (obj: any) => obj._id === id
                                 )
                             )
-                            newBarc[index] = [...uniqueArray]
+                            newBarcode[index] = [...uniqueArray]
                         }
 
-                        setBarcodeList([...newBarc])
+                        setBarcodeList([...newBarcode])
                     }
                 } else {
                     // showToast('error', 'barcode number is not matched')
@@ -342,11 +350,21 @@ const OutwardDealerTabsListingWrapper = () => {
             soId: [...(soid as string[])] as string[],
         })
             .then((res: any) => {
-                console.log('barcodeDispatch res => ', res)
+                if (res?.data?.status) {
+                    showToast('success', 'dispatched successfully')
+                    setIsShow(false)
+                    dispatch(setFieldCustomized(false))
+                } else {
+                    showToast('error', res?.data?.message)
+                }
             })
             .catch((err: any) => {
                 console.error(err)
             })
+    }
+
+    const handleDisableDispatchButton = () => {
+        return barcodeQuantity === barcodeList?.flat(1)?.length
     }
 
     useEffect(() => {
@@ -358,8 +376,6 @@ const OutwardDealerTabsListingWrapper = () => {
             setBarcodeNumber(barcode)
         }
     }, [selectedItemsTobeDispatch?.documents])
-
-    console.log('barcode list =>', barcodeList)
 
     return (
         <>
@@ -431,17 +447,9 @@ const OutwardDealerTabsListingWrapper = () => {
                                                                 ?.productSalesOrder
                                                                 ?.quantity
                                                         }
+                                                        <> / </>
                                                         {barcodeList[docIndex]
-                                                            ?.length ? (
-                                                            <> / </>
-                                                        ) : (
-                                                            ''
-                                                        )}
-                                                        {
-                                                            barcodeList[
-                                                                docIndex
-                                                            ]?.length
-                                                        }
+                                                            ?.length || 0}
                                                     </span>
                                                 </div>
                                             </div>
@@ -449,6 +457,13 @@ const OutwardDealerTabsListingWrapper = () => {
                                         <div className="mt-4 grid grid-cols-12 gap-x-4">
                                             <div className="col-span-3">
                                                 <ATMTextField
+                                                    disabled={
+                                                        barcodeList[docIndex]
+                                                            ?.length ===
+                                                        document
+                                                            ?.productSalesOrder
+                                                            ?.quantity
+                                                    }
                                                     name=""
                                                     value={
                                                         barcodeNumber[docIndex]
@@ -550,12 +565,13 @@ const OutwardDealerTabsListingWrapper = () => {
                         <div className="flex justify-end">
                             <div className="flex items-end">
                                 <ATMLoadingButton
+                                    disabled={!handleDisableDispatchButton()}
                                     isLoading={barcodeDispatchInfo?.isLoading}
                                     loadingText="Dispatching"
                                     onClick={() => handleDispatchBarcode()}
                                     className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
                                 >
-                                    Save
+                                    Dispatch
                                 </ATMLoadingButton>
                             </div>
                         </div>
