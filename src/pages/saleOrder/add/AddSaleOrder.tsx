@@ -278,17 +278,6 @@ const AddSaleOrder = ({
                                                                                 'Product group Already Added!'
                                                                             )
                                                                         }
-                                                                        // handleSetFieldValue(
-                                                                        //     `productSalesOrder[${index}].productGroupId`,
-                                                                        //     e
-                                                                        // )
-                                                                        // setI(0)
-                                                                        // setProductGroup(
-                                                                        //     e
-                                                                        // )
-                                                                        // setI(
-                                                                        //     index
-                                                                        // )
                                                                     }}
                                                                     options={
                                                                         dropdownOptions.productGroupOptions

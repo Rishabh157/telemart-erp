@@ -15,6 +15,7 @@ import { HiPlus } from 'react-icons/hi'
 import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
+import { showToast } from 'src/utils'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -186,12 +187,27 @@ const AddPurchaseOrder = ({
                                                                     }
                                                                     onChange={(
                                                                         e
-                                                                    ) =>
-                                                                        handleSetFieldValue(
-                                                                            `purchaseOrder[${itemIndex}].itemId`,
-                                                                            e
-                                                                        )
-                                                                    }
+                                                                    ) => {
+                                                                        if (
+                                                                            !values?.purchaseOrder?.find(
+                                                                                (
+                                                                                    f
+                                                                                ) =>
+                                                                                    f.itemId ===
+                                                                                    e
+                                                                            )
+                                                                        ) {
+                                                                            setFieldValue(
+                                                                                `purchaseOrder[${itemIndex}].itemId`,
+                                                                                e
+                                                                            )
+                                                                        } else {
+                                                                            showToast(
+                                                                                'error',
+                                                                                'Item is Already Selected!'
+                                                                            )
+                                                                        }
+                                                                    }}
                                                                     options={
                                                                         dropdownOptions.itemOptions
                                                                     }

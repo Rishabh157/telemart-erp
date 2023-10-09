@@ -31,7 +31,7 @@ export type soApprovedGroupListResponseType = {
             _id: string
             groupName: string
         }
-        status: 'DISPATCHED' | 'NOT_DISPATCHED'
+        status: 'DISPATCHED' | 'COMPLETE' | 'NOT_DISPATCHED'
         companyId: string
         isDeleted: boolean
         isActive: boolean
