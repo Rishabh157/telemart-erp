@@ -17,20 +17,21 @@ import { useNavigate } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { SaleOrderListResponse } from 'src/models/SaleOrder.model'
+import { GroupBySaleOrderResponseTypes } from 'src/models/SaleOrder.model'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
 import {
     useDeleteSalesOrderMutation,
-    useGetPaginationSaleOrderQuery,
+    useGetPaginationSaleOrderByGroupQuery,
     useUpdateSalesOrderApprovalMutation,
 } from 'src/services/SalesOrderService'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import SaleOrderListing from './SaleOrderListing'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 // |-- Redux --|
 import {
@@ -39,7 +40,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
+import { SoApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
 
 const SaleOrderListingWrapper = () => {
     const salesOrderState: any = useSelector(
@@ -57,23 +58,19 @@ const SaleOrderListingWrapper = () => {
         (state: RootState) => state.userAccess
     )
 
-    //useUpdateSoLevelMutation
-    const { data, isFetching, isLoading } = useGetPaginationSaleOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['soNumber', 'dealerLabel'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: '',
-                value: [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    const { data, isFetching, isLoading } =
+        useGetPaginationSaleOrderByGroupQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['soNumber', 'dealerLabel'],
+            page: page,
+            filterBy: [],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+
     useEffect(() => {
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false))
@@ -102,133 +99,59 @@ const SaleOrderListingWrapper = () => {
         })
     }
 
-    const handleDHComplete = (_id: string, level: number) => {
+    const handleDHComplete = (_id: string, value: boolean, message: string) => {
         const currentDate = new Date().toLocaleDateString('en-GB')
-        // const so: any = items?.find((e: any) => e._id === _id)
-        // const pSO = {
-        //     productGroupId: so?.productSalesOrder?.productGroupId,
-        //     quantity: so?.productSalesOrder?.quantity,
-        //     rate: so?.productSalesOrder?.rate,
-        // }
-        if (level === 1) {
-            updateSalesOrder({
-                body: {
-                    // soNumber: so?.soNumber,
-                    // dealerId: so?.dealerId,
-                    // dealerWareHouseId: so?.dealerWareHouseId,
-                    // companyWareHouseId: so?.companyWareHouseId,
-                    // productSalesOrder: pSO,
-                    // companyId: userData?.companyId || '',
-                    // dhApproved: true,
-                    type: 'DH',
-                    dhApprovedById: userData?.userId,
-                    dhApprovedAt: currentDate,
-                    dhApprovedActionBy: userData?.userName,
-                },
-                id: _id,
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'Approved successfully!')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
+        updateSalesOrder({
+            body: {
+                dhApproved: value,
+                type: 'DH',
+                dhApprovedById: userData?.userId,
+                dhApprovedAt: currentDate,
+                dhApprovedActionBy: userData?.userName,
+            },
+            id: _id,
+        }).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast(
+                        'success',
+                        `Distributor Head ${message} is successfully!`
+                    )
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.data?.message)
                 }
-            })
-        } else {
-            updateSalesOrder({
-                body: {
-                    // soNumber: so?.soNumber,
-                    // dealerId: so?.dealerId,
-                    // dealerWareHouseId: so?.dealerWareHouseId,
-                    // companyWareHouseId: so?.companyWareHouseId,
-                    // productSalesOrder: pSO,
-                    // companyId: userData?.companyId || '',
-                    // dhApproved: false,
-                    type: 'DH',
-                    dhApprovedById: userData?.userId,
-                    dhApprovedAt: currentDate,
-                },
-                id: _id,
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'Rejected successfully!')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-            })
-        }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+        })
     }
 
-    const handleAccComplete = (_id: string, level: number) => {
+    const handleAccComplete = (
+        _id: string,
+        value: boolean,
+        message: string
+    ) => {
         const currentDate = new Date().toLocaleDateString('en-GB')
-        // const so: any = items?.find((e: any) => e._id === _id)
-
-        // const pSO = {
-        //     productGroupId: so?.productSalesOrder?.productGroupId,
-        //     quantity: so?.productSalesOrder?.quantity,
-        //     rate: so?.productSalesOrder?.rate,
-        // }
-        if (level === 1) {
-            updateSalesOrder({
-                body: {
-                    // soNumber: so?.soNumber,
-                    // dealerId: so?.dealerId,
-                    // dealerWareHouseId: so?.dealerWareHouseId,
-                    // companyWareHouseId: so?.companyWareHouseId,
-                    // productSalesOrder: pSO,
-                    // companyId: userData?.companyId || '',
-                    // accApproved: true,
-                    type: 'ACC',
-                    accApprovedById: userData?.userId,
-                    accApprovedAt: currentDate,
-                    accApprovedActionBy: userData?.userName,
-                },
-                id: _id,
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'Approved successfully!')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
+        updateSalesOrder({
+            body: {
+                accApproved: value,
+                type: 'ACC',
+                accApprovedById: userData?.userId,
+                accApprovedAt: currentDate,
+                accApprovedActionBy: userData?.userName,
+            },
+            id: _id,
+        }).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', `Account ${message} is successfully!`)
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.data?.message)
                 }
-            })
-        } else {
-            updateSalesOrder({
-                body: {
-                    // soNumber: so?.soNumber,
-                    // dealerId: so?.dealerId,
-                    // dealerWareHouseId: so?.dealerWareHouseId,
-                    // companyWareHouseId: so?.companyWareHouseId,
-                    // productSalesOrder: pSO,
-                    // companyId: userData?.companyId || '',
-                    // accApproved: false,
-                    type: 'ACC',
-                    accApprovedById: userData?.userId,
-                    accApprovedAt: currentDate,
-                },
-                id: _id,
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'Rejected successfully!')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-            })
-        }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+        })
     }
 
     const columns: columnTypes[] = [
@@ -236,116 +159,56 @@ const SaleOrderListingWrapper = () => {
             field: 'soNumber',
             headerName: 'So Number',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: SaleOrderListResponse) => (
-                <span> {row?.soNumber} </span>
+            renderCell: (row: SoApprovedGroupListResponseType) => (
+                <span> {row?._id} </span>
             ),
         },
         {
             field: 'dealerLabel',
-            headerName: 'Dealer',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: SaleOrderListResponse) => (
-                <a
-                    href={`/dealers/${row?.dealerLabel}/general-information`}
-                    className="underline"
-                >
-                    {' '}
-                    {row?.dealerLabel}{' '}
-                </a>
+            headerName: 'Dealer Name',
+            flex: 'flex-[0.8_0.8_0%]',
+            align: 'center',
+            renderCell: (row: SoApprovedGroupListResponseType) => (
+                <span> {row?.dealerName} </span>
             ),
         },
         {
-            field: 'dhApproved',
-            headerName: 'DH Approved Status',
-            flex: 'flex-[1.0_1.0_0%]',
-            renderCell: (row: SaleOrderListResponse) => {
+            field: 'items',
+            headerName: 'Items / Quantity',
+            flex: 'flex-[1.5_1.5_0%]',
+            align: 'center',
+            renderCell: (row: SoApprovedGroupListResponseType) => {
                 return (
-                    <span className="z-10">
-                        {' '}
-                        <Stack direction="row" spacing={1}>
-                            {row?.dhApproved === null ? (
-                                <button
-                                    id="btn"
-                                    className=" overflow-hidden cursor-pointer z-0"
-                                    onClick={() => {
-                                        showConfirmationDialog({
-                                            title: 'Approve',
-                                            text: 'Do you want to Approve ?',
-                                            showCancelButton: true,
-                                            showDenyButton: true,
-                                            denyButtonText: 'Reject',
-                                            next: (res) => {
-                                                if (res.isConfirmed) {
-                                                    return handleDHComplete(
-                                                        row?._id,
-                                                        1
-                                                    )
-                                                } else if (res.isDenied) {
-                                                    return handleDHComplete(
-                                                        row?._id,
-                                                        2
-                                                    )
-                                                } else {
-                                                    return false
-                                                }
-                                            },
-                                        })
-                                    }}
-                                >
-                                    <Chip
-                                        label="!"
-                                        color="warning"
-                                        variant="outlined"
-                                        size="small"
-                                        clickable={true}
-                                    />
-                                </button>
-                            ) : row?.dhApproved === true ? (
-                                <button
-                                    id="btn"
-                                    className="cursor-pointer"
-                                    onClick={() => {
-                                        showConfirmationDialog({
-                                            title: '<span className="text-red-700">Reject</span>',
-                                            text: 'Do you want to Reject ?',
-                                            icon: 'error',
-                                            confirmButtonColor: '#dc3741',
-                                            showCancelButton: true,
-                                            next: (res) => {
-                                                return res.isConfirmed
-                                                    ? handleDHComplete(
-                                                          row?._id,
-                                                          2
-                                                      )
-                                                    : false
-                                            },
-                                        })
-                                    }}
-                                >
-                                    <Chip
-                                        label="Approved"
-                                        color="success"
-                                        variant="outlined"
-                                        size="small"
-                                        clickable={true}
-                                    />
-                                </button>
-                            ) : (
-                                <button
-                                    id="btn"
-                                    disabled={true}
-                                    className="cursor-pointer"
-                                >
-                                    <Chip
-                                        label="Rejected"
-                                        color="error"
-                                        variant="outlined"
-                                        size="small"
-                                        clickable={true}
-                                    />
-                                </button>
-                            )}
-                        </Stack>{' '}
+                    <div className="w-full">
+                        {row?.documents?.map((item) => {
+                            return (
+                                <div className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center">
+                                    <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
+                                        {item?.productSalesOrder?.groupName}
+                                    </div>
+                                    <div className="col-span-1 py-1 px-2">
+                                        {item?.productSalesOrder?.quantity}
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                )
+            },
+        },
+        {
+            field: 'dhApprovedActionStatus',
+            headerName: 'DH Status',
+            flex: 'flex-[0.5_0.5_0%]',
+            align: 'center',
+            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+                return (
+                    <span>
+                        {row?.dhApproved
+                            ? 'Done'
+                            : row?.dhApproved === null
+                            ? 'Pending'
+                            : 'Rejected'}{' '}
                     </span>
                 )
             },
@@ -353,29 +216,148 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApprovedActionBy',
             headerName: 'DH Approved By',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: SaleOrderListResponse) => {
+            flex: 'flex-[0.5_0.5_0%]',
+            align: 'center',
+            renderCell: (row: GroupBySaleOrderResponseTypes) => {
                 return <span> {row?.dhApprovedActionBy} </span>
             },
         },
-
         {
-            field: 'accApproved',
-            headerName: 'Acc Approved Status',
+            field: 'dhApprovedAt',
+            headerName: 'DH Approved Date',
+            flex: 'flex-[0.5_0.5_0%]',
+            align: 'center',
+            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+                return <span> {row?.dhApprovedAt} </span>
+            },
+        },
+        {
+            field: 'accApprovedActionByStatus',
+            headerName: 'Account Status',
+            flex: 'flex-[0.5_0.5_0%]',
+            align: 'center',
+            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+                return (
+                    <span>
+                        {' '}
+                        {row?.accApproved
+                            ? 'Done'
+                            : row?.accApproved === null
+                            ? 'Pending'
+                            : 'Rejected'}
+                    </span>
+                )
+            },
+        },
+        {
+            field: 'accApprovedActionBy',
+            headerName: 'Account Approved By',
+            flex: 'flex-[0.5_0.5_0%]',
+            align: 'center',
+            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+                return <span> {row?.accApprovedActionBy} </span>
+            },
+        },
+        {
+            field: 'accApprovedAt',
+            headerName: 'Account Approved Date',
+            flex: 'flex-[0.5_0.5_0%]',
+            align: 'center',
+            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+                return <span> {row?.accApprovedAt} </span>
+            },
+        },
+        {
+            field: 'createdAt',
+            headerName: 'Inserted Date',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+                return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
+            },
+        },
+        {
+            field: 'updatedAt',
+            headerName: 'Updated Date',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+                return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
+            },
+        },
+        {
+            field: 'Approved',
+            headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
-            renderCell: (row: SaleOrderListResponse) => {
+            align: 'center',
+            renderCell: (row: GroupBySaleOrderResponseTypes) => {
                 return (
                     <span className="z-10">
-                        {' '}
-                        <Stack direction="row" spacing={1}>
-                            {row?.dhApproved === true ? (
-                                row?.accApproved === null ? (
+                        {!row?.dhApproved ? (
+                            <Stack direction="row" spacing={1}>
+                                {row?.dhApproved === null ? (
                                     <button
                                         id="btn"
                                         className=" overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
                                             showConfirmationDialog({
-                                                title: 'Approve',
+                                                title: 'DH Approve',
+                                                text: 'Do you want to Approve ?',
+                                                showCancelButton: true,
+                                                showDenyButton: true,
+                                                denyButtonText: 'Reject',
+                                                next: (res) => {
+                                                    if (res.isConfirmed) {
+                                                        return handleDHComplete(
+                                                            row?._id,
+                                                            res?.isConfirmed,
+                                                            'Approval'
+                                                        )
+                                                    }
+                                                    if (res.isDenied) {
+                                                        return handleDHComplete(
+                                                            row?._id,
+                                                            !res.isDenied,
+                                                            'Rejected'
+                                                        )
+                                                    }
+                                                },
+                                            })
+                                        }}
+                                    >
+                                        <Chip
+                                            label="DH Pending"
+                                            color="warning"
+                                            variant="outlined"
+                                            size="small"
+                                            clickable={true}
+                                        />
+                                    </button>
+                                ) : (
+                                    <button
+                                        id="btn"
+                                        disabled={true}
+                                        className="cursor-pointer"
+                                    >
+                                        <Chip
+                                            label="DH Rejected"
+                                            color="error"
+                                            variant="outlined"
+                                            size="small"
+                                            clickable={true}
+                                        />
+                                    </button>
+                                )}
+                            </Stack>
+                        ) : (
+                            <Stack direction="row" spacing={1}>
+                                {row?.accApproved === null ? (
+                                    <button
+                                        id="btn"
+                                        className=" overflow-hidden cursor-pointer z-0"
+                                        onClick={() => {
+                                            showConfirmationDialog({
+                                                title: 'Account Approval',
                                                 text: 'Do you want to Approve ?',
                                                 showCancelButton: true,
                                                 showDenyButton: true,
@@ -384,52 +366,37 @@ const SaleOrderListingWrapper = () => {
                                                     if (res.isConfirmed) {
                                                         return handleAccComplete(
                                                             row?._id,
-                                                            1
+                                                            res?.isConfirmed,
+                                                            'Approval'
                                                         )
-                                                    } else if (res.isDenied) {
+                                                    }
+                                                    if (res.isDenied) {
                                                         return handleAccComplete(
                                                             row?._id,
-                                                            2
+                                                            !res.isDenied,
+                                                            'Rejected'
                                                         )
-                                                    } else {
-                                                        return false
                                                     }
                                                 },
                                             })
                                         }}
                                     >
                                         <Chip
-                                            label="!"
+                                            label="ACC Pending "
                                             color="warning"
                                             variant="outlined"
                                             size="small"
                                             clickable={true}
                                         />
                                     </button>
-                                ) : row?.accApproved === true ? (
+                                ) : row?.accApproved ? (
                                     <button
                                         id="btn"
+                                        disabled={true}
                                         className="cursor-pointer"
-                                        onClick={() => {
-                                            showConfirmationDialog({
-                                                title: '<span className="text-red-700">Reject</span>',
-                                                text: 'Do you want to Reject ?',
-                                                icon: 'error',
-                                                confirmButtonColor: '#dc3741',
-                                                showCancelButton: true,
-                                                next: (res) => {
-                                                    return res.isConfirmed
-                                                        ? handleAccComplete(
-                                                              row?._id,
-                                                              2
-                                                          )
-                                                        : false
-                                                },
-                                            })
-                                        }}
                                     >
                                         <Chip
-                                            label="Approved"
+                                            label="Acc  Approved"
                                             color="success"
                                             variant="outlined"
                                             size="small"
@@ -443,58 +410,28 @@ const SaleOrderListingWrapper = () => {
                                         className="cursor-pointer"
                                     >
                                         <Chip
-                                            label="Rejected"
+                                            label=" Acc Rejected"
                                             color="error"
                                             variant="outlined"
                                             size="small"
                                             clickable={true}
                                         />
                                     </button>
-                                )
-                            ) : (
-                                <button
-                                    id="btn"
-                                    disabled={true}
-                                    className="cursor-pointer"
-                                >
-                                    <Chip
-                                        label="!"
-                                        color="warning"
-                                        variant="outlined"
-                                        size="small"
-                                        clickable={true}
-                                    />
-                                </button>
-                            )}
-                        </Stack>{' '}
+                                )}
+                            </Stack>
+                        )}
                     </span>
                 )
-            },
-        },
-        {
-            field: 'accApprovedActionBy',
-            headerName: 'Acc Approved By',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: SaleOrderListResponse) => {
-                return <span> {row?.accApprovedActionBy} </span>
-            },
-        },
-        {
-            field: 'status',
-            headerName: 'Status',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: SaleOrderListResponse) => {
-                return <span> {row?.status} </span>
             },
         },
         {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: SaleOrderListResponse) => (
+            renderCell: (row: GroupBySaleOrderResponseTypes) => (
                 <ActionPopup
                     moduleName={UserModuleNameTypes.saleOrder}
-                    isEdit={row?.status === SaleOrderStatus.not_dispatched}
+                    // isEdit={row?.status === SaleOrderStatus.not_dispatched}
                     isDelete
                     handleEditActionButton={() => {
                         navigate(`/sale-order/edit-sale-order/${row?._id}`)

@@ -5,13 +5,60 @@
 // Project: TELIMART - Front End
 // ==============================================
 
-import { SaleOrderStatus } from "./OutwardRequest.model"
+// import { SaleOrderStatus } from "./OutwardRequest.model"
 
 // |-- Types --|
 export type productSalesOrder = {
     productGroupId: string
     rate: number
     quantity: number
+}
+
+type GroupBySaleOrderDocumnentObjResponse = {
+    _id: string
+    soNumber: string
+    dealerId: string
+    dealerWareHouseId: string
+    companyWareHouseId: string
+    dhApprovedById: string
+    dhApproved: boolean
+    dhApprovedActionBy: string
+    dhApprovedAt: string
+    accApprovedById: string
+    accApproved: boolean
+    accApprovedActionBy: string
+    accApprovedAt: string
+    productSalesOrder: {
+        productGroupId: string
+        rate: number
+        quantity: number
+        _id: string
+        groupName: string
+    }
+    status: string
+    companyId: string
+    isDeleted: boolean
+    isActive: boolean
+    __v: number
+    createdAt: string
+    updatedAt: string
+    dealerLabel: string
+    companyWarehouseLabel: string
+    warehouseLabel: string
+}
+
+export type GroupBySaleOrderResponseTypes = {
+    _id: string
+    dealerName: string
+    dhApproved: boolean
+    dhApprovedActionBy: string
+    dhApprovedAt: string
+    accApprovedActionBy: string
+    accApprovedAt: string
+    accApproved: boolean
+    createdAt: string
+    updatedAt: string
+    documents: GroupBySaleOrderDocumnentObjResponse[]
 }
 
 export type SaleOrderListResponse = {
@@ -33,7 +80,7 @@ export type SaleOrderListResponse = {
     accApproved: boolean | null
     accApprovedActionBy: string
     accApprovedAt: string
-    status:string
+    status: string
     isActive: boolean
     isDeleted: boolean
     createdAt: string
@@ -80,6 +127,8 @@ export type UpdateSaleOrderApproval = {
         dhApprovedById?: string
         dhApprovedActionBy?: string
         accApprovedActionBy?: string
+        dhApproved?: boolean | null
+        accApproved?: boolean | null
     }
     id: string
 }
