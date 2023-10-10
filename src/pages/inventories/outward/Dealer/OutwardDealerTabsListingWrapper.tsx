@@ -16,7 +16,7 @@ import { IoRemoveCircle } from 'react-icons/io5'
 // |-- Internal Dependencies --|
 import { useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { soApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
+import { SoApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
 import OutwardRequestListing from './OutwardDealerTabs'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
@@ -44,7 +44,6 @@ import {
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
 } from 'src/services/BarcodeService'
 import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
-
 
 // |-- Types --|
 export type Tabs = {
@@ -77,7 +76,7 @@ const OutwardDealerTabsListingWrapper = () => {
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
-        useState<soApprovedGroupListResponseType | null>(null)
+        useState<SoApprovedGroupListResponseType | null>(null)
     const params = useParams()
     const dispatch = useDispatch<AppDispatch>()
     const dealerId = params.dealerId
@@ -135,7 +134,7 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'soNumber',
             headerName: 'So Number',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: soApprovedGroupListResponseType) => (
+            renderCell: (row: SoApprovedGroupListResponseType) => (
                 <span> {row?._id} </span>
             ),
         },
@@ -143,7 +142,7 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'dealerLabel',
             headerName: 'Dealer Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: soApprovedGroupListResponseType) => (
+            renderCell: (row: SoApprovedGroupListResponseType) => (
                 <span> {row?.dealerName} </span>
             ),
         },
@@ -151,7 +150,7 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'items',
             headerName: 'items',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: soApprovedGroupListResponseType) => {
+            renderCell: (row: SoApprovedGroupListResponseType) => {
                 return (
                     <span>
                         {row?.documents?.map((item) => {
@@ -169,7 +168,7 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'quantity',
             headerName: 'quantity',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: soApprovedGroupListResponseType) => {
+            renderCell: (row: SoApprovedGroupListResponseType) => {
                 return (
                     <span>
                         {row?.documents?.map((item) => {
@@ -187,7 +186,7 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'status',
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: soApprovedGroupListResponseType) => (
+            renderCell: (row: SoApprovedGroupListResponseType) => (
                 <span>
                     {row?.documents?.map((item) => {
                         return (
@@ -203,8 +202,8 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'actions',
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: soApprovedGroupListResponseType) =>
-                row?.documents[0].status === 'COMPLETE' ? (
+            renderCell: (row: SoApprovedGroupListResponseType) =>
+                row?.documents?.find((ele) => ele.status === 'COMPLETE') ? (
                     'Dispatched'
                 ) : (
                     <ActionPopup

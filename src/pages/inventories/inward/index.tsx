@@ -42,12 +42,12 @@ const tabs: Tabs[] = [
         path: 'ecom',
         name: 'TAB_WAREHOUSE_INWARD_INVENTORIES_E_COMMERCE',
     },
-    {
-        label: 'Replacements/Repackaging',
-        icon: MdOutbond,
-        path: 'replacement',
-        name: 'TAB_WAREHOUSE_INWARD_INVENTORIES_REPLACEMENTS',
-    },
+    // {
+    //     label: 'Replacements/Repackaging',
+    //     icon: MdOutbond,
+    //     path: 'replacement',
+    //     name: 'TAB_WAREHOUSE_INWARD_INVENTORIES_REPLACEMENTS',
+    // },
     {
         label: 'Company',
         icon: MdOutbond,

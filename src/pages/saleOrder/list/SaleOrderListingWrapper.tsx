@@ -39,6 +39,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
 
 const SaleOrderListingWrapper = () => {
     const salesOrderState: any = useSelector(
@@ -479,13 +480,21 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: SaleOrderListResponse) => {
+                return <span> {row?.status} </span>
+            },
+        },
+        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
+            renderCell: (row: SaleOrderListResponse) => (
                 <ActionPopup
                     moduleName={UserModuleNameTypes.saleOrder}
-                    isEdit
+                    isEdit={row?.status === SaleOrderStatus.not_dispatched}
                     isDelete
                     handleEditActionButton={() => {
                         navigate(`/sale-order/edit-sale-order/${row?._id}`)
