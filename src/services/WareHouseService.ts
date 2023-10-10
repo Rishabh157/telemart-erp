@@ -13,21 +13,33 @@ import apiSlice from './ApiSlice'
 export const wareHouseApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET *****/
+
+        //dealer warehouse
+        getDealerWareHouses: builder.query({
+            providesTags: ['WareHouse'],
+            query: (companyId) => ({
+                url: `/warehouse/company/${companyId}/dealer-warehouse`,
+
+                method: 'GET',
+                // body,
+            }),
+        }),
+        // company warehouse 
         getWareHouses: builder.query({
             providesTags: ['WareHouse'],
             query: (companyId) => ({
-                url: `/warehouse/company/${companyId}`,
+                url: `/warehouse/company/${companyId}/warehouse`,
 
                 method: 'GET',
                 // body,
             }),
         }),
 
-        //***** GET PAGINATION DATA *****/
+        //***** GET PAGINATION DATA company *****/
         getPaginationWareHouses: builder.query({
             providesTags: ['WareHouse'],
             query: (body: PaginationType) => ({
-                url: '/warehouse',
+                url: '/warehouse/all-warehouse',
                 method: 'POST',
                 body,
             }),
@@ -82,4 +94,5 @@ export const {
     useGetWareHouseByIdQuery,
     useGetPaginationWareHousesQuery,
     useDeleteWareHouseMutation,
+    useGetDealerWareHousesQuery
 } = wareHouseApi
