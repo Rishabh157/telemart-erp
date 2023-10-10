@@ -204,7 +204,7 @@ const OutwardDealerTabsListingWrapper = () => {
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: soApprovedGroupListResponseType) =>
-                row?.documents[0].status === 'COMPLETE' ? (
+                row?.documents[0]?.status === 'COMPLETE' ? (
                     'Dispatched'
                 ) : (
                     <ActionPopup
