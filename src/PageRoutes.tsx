@@ -289,7 +289,7 @@ const PageRoutes = () => {
                         }
                     />
                     <Route
-                        path="/so-order/dispatched-invoice"
+                        path="warehouse/so-order/dispatched-invoice"
                         element={
                             <AuthHOC
                                 component={<DispatchedInvoice />}
