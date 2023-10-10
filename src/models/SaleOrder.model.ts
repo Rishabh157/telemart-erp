@@ -5,6 +5,8 @@
 // Project: TELIMART - Front End
 // ==============================================
 
+import { SaleOrderStatus } from "./OutwardRequest.model"
+
 // |-- Types --|
 export type productSalesOrder = {
     productGroupId: string
@@ -31,6 +33,7 @@ export type SaleOrderListResponse = {
     accApproved: boolean | null
     accApprovedActionBy: string
     accApprovedAt: string
+    status:string
     isActive: boolean
     isDeleted: boolean
     createdAt: string

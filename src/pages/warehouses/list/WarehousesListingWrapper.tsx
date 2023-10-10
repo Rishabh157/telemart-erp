@@ -151,6 +151,7 @@ const DealersListingWrapper = () => {
         params: ['wareHouseName', 'country'],
         page: page,
         filterBy: [
+           
             {
                 fieldName: 'companyId',
                 value: userData?.companyId as string,

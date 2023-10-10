@@ -6,8 +6,12 @@
 // ==============================================
 
 // |-- Types --|
-
-export type soApprovedGroupListResponseType = {
+export enum SaleOrderStatus {
+    dispatched = 'DISPATCHED',
+    complete = 'COMPLETE',
+    not_dispatched = 'NOT_DISPATCHED'
+}
+export type SoApprovedGroupListResponseType = {
     _id: string
     dealerName: string
     documents: {
@@ -31,7 +35,7 @@ export type soApprovedGroupListResponseType = {
             _id: string
             groupName: string
         }
-        status: 'DISPATCHED' | 'COMPLETE' | 'NOT_DISPATCHED'
+        status: string
         companyId: string
         isDeleted: boolean
         isActive: boolean
