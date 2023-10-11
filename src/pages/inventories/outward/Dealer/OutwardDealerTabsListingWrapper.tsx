@@ -44,6 +44,7 @@ import {
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
 } from 'src/services/BarcodeService'
 import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 // |-- Types --|
 export type Tabs = {
@@ -133,7 +134,7 @@ const OutwardDealerTabsListingWrapper = () => {
         {
             field: 'soNumber',
             headerName: 'So Number',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: SoApprovedGroupListResponseType) => (
                 <span> {row?._id} </span>
             ),
@@ -141,61 +142,61 @@ const OutwardDealerTabsListingWrapper = () => {
         {
             field: 'dealerLabel',
             headerName: 'Dealer Name',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.6_0.6_0%]',
+            align: 'center',
             renderCell: (row: SoApprovedGroupListResponseType) => (
                 <span> {row?.dealerName} </span>
             ),
         },
         {
             field: 'items',
-            headerName: 'items',
-            flex: 'flex-[1.5_1.5_0%]',
+            headerName: 'Items / Quantity',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
             renderCell: (row: SoApprovedGroupListResponseType) => {
                 return (
-                    <span>
+                    <div className="w-full">
                         {row?.documents?.map((item) => {
                             return (
-                                <>
-                                    {item?.productSalesOrder?.groupName} <br />
-                                </>
+                                <div className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center">
+                                    <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
+                                        {item?.productSalesOrder?.groupName}
+                                    </div>
+                                    <div className="col-span-1 py-1 px-2">
+                                        {item?.productSalesOrder?.quantity}
+                                    </div>
+                                </div>
                             )
                         })}
-                    </span>
+                    </div>
                 )
             },
         },
         {
-            field: 'quantity',
-            headerName: 'quantity',
-            flex: 'flex-[1.5_1.5_0%]',
+            field: 'createdAt',
+            headerName: 'Inserted Date',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
             renderCell: (row: SoApprovedGroupListResponseType) => {
-                return (
-                    <span>
-                        {row?.documents?.map((item) => {
-                            return (
-                                <>
-                                    {item?.productSalesOrder?.quantity} <br />
-                                </>
-                            )
-                        })}
-                    </span>
-                )
+                return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
+            },
+        },
+        {
+            field: 'updatedAt',
+            headerName: 'Updated Date',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            renderCell: (row: SoApprovedGroupListResponseType) => {
+                return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
         {
             field: 'status',
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
+            align: 'center',
             renderCell: (row: SoApprovedGroupListResponseType) => (
-                <span>
-                    {row?.documents?.map((item) => {
-                        return (
-                            <>
-                                {item?.status} <br />
-                            </>
-                        )
-                    })}
-                </span>
+                <span>{row?.documents[0]?.status}</span>
             ),
         },
         {
@@ -410,10 +411,12 @@ const OutwardDealerTabsListingWrapper = () => {
                                             <div>
                                                 <div>
                                                     <span className="font-bold">
-                                                        Item
+                                                        Item Name
                                                     </span>
-                                                    <span>:</span>
-                                                    <span className="font-bold">
+                                                    <span className="px-4">
+                                                        :
+                                                    </span>
+                                                    <span>
                                                         {
                                                             document
                                                                 ?.productSalesOrder
@@ -426,16 +429,26 @@ const OutwardDealerTabsListingWrapper = () => {
                                                     <span className="font-bold">
                                                         Quantity
                                                     </span>
-                                                    <span>:</span>
-                                                    <span className="font-bold">
+                                                    <span className="pl-[2.23rem] pr-[1rem]">
+                                                        :
+                                                    </span>
+                                                    <span>
                                                         {
                                                             document
                                                                 ?.productSalesOrder
                                                                 ?.quantity
                                                         }
-                                                        <> / </>
                                                         {barcodeList[docIndex]
-                                                            ?.length || 0}
+                                                            ?.length ? (
+                                                            <> / </>
+                                                        ) : (
+                                                            ''
+                                                        )}
+                                                        {
+                                                            barcodeList[
+                                                                docIndex
+                                                            ]?.length
+                                                        }
                                                     </span>
                                                 </div>
                                             </div>

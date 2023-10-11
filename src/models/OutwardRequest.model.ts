@@ -9,11 +9,19 @@
 export enum SaleOrderStatus {
     dispatched = 'DISPATCHED',
     complete = 'COMPLETE',
-    not_dispatched = 'NOT_DISPATCHED'
+    not_dispatched = 'NOT_DISPATCHED',
 }
 export type SoApprovedGroupListResponseType = {
     _id: string
     dealerName: string
+    dhApproved: boolean
+    dhApprovedActionBy: string
+    dhApprovedAt: string
+    accApprovedActionBy: string
+    accApprovedAt: string
+    accApproved: boolean
+    createdAt: string
+    updatedAt: string
     documents: {
         _id: string
         soNumber: string

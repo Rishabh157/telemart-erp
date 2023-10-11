@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
-// Filename:AddSaleOrder.tsx
-// Type: Add Component
+// Filename:EditRTVendor.tsx
+// Type: Edit Component
 // Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
 // ==============================================
@@ -11,27 +11,27 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
-import { MdDeleteOutline } from 'react-icons/md'
-import { HiPlus } from 'react-icons/hi'
+// import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux'
+import { HiPlus } from 'react-icons/hi'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-import { FormInitialValues } from './AddSaleOrderWrapper'
+import { FormInitialValues } from './EditRTVendorWrapper'
 import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
 import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { useParams } from 'react-router-dom'
 import { showToast } from 'src/utils'
+import { MdDeleteOutline } from 'react-icons/md'
 
 // |-- Types --|
 type Props = {
@@ -45,34 +45,32 @@ type Props = {
     apiStatus: boolean
 }
 
-const AddSaleOrder = ({
+// Breadcrumbs
+const breadcrumbs: BreadcrumbType[] = [
+    {
+        label: 'Return To Vendor',
+        path: '/return-to-vendor',
+    },
+    {
+        label: 'Update Return To Vendor',
+    },
+]
+
+const EditRTVendor = ({
     formikProps,
     dropdownOptions,
     apiStatus,
     productPriceOptions,
 }: Props) => {
-    const params = useParams()
-    // Breadcrumbs
-    const breadcrumbs: BreadcrumbType[] = [
-        {
-            label: `${params.dealerId ? ' Dealers Sale Order' : 'Sale Order'}`,
-            path: `${
-                params.dealerId
-                    ? `/dealers/${params.dealerId}/sale-order`
-                    : '/sale-order'
-            }`,
-        },
-        {
-            label: 'Add Sale Order',
-        },
-    ]
+    dropdownOptions = {
+        ...dropdownOptions,
+    }
 
     const { values, setFieldValue } = formikProps
-
-    const dispatch = useDispatch<AppDispatch>()
-    const [dealerId, setDealerId] = useState('')
-    const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
+    const dispatch = useDispatch<AppDispatch>()
+    // const [dealerId, setDealerId] = useState('')
+    const [productGroup, setProductGroup] = useState('')
 
     const dealerWarehouse: any = useSelector(
         (state: RootState) => state.warehouse
@@ -83,19 +81,18 @@ const AddSaleOrder = ({
     const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
         {
             companyId,
-            dealerId,
+            dealerId: values?.dealerId,
         },
         {
-            skip: !dealerId,
+            skip: !values.dealerId,
         }
     )
 
-    
     useEffect(() => {
-        if ( !isLoading && !isFetching) {
+        if (!isLoading && !isFetching) {
             dispatch(setDealerWarehouse(data?.data))
         }
-    }, [data, isLoading, isFetching, dealerId, dispatch])
+    }, [data, isLoading, isFetching, dispatch])
 
     const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
         (ele: any) => {
@@ -122,8 +119,9 @@ const AddSaleOrder = ({
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
-        <div className=" h-[calc(100vh-55px)] overflow-auto">
+        <div className="px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -132,7 +130,7 @@ const AddSaleOrder = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Sale Order </ATMPageHeading>
+                    <ATMPageHeading> Add New Sale Order </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -149,7 +147,7 @@ const AddSaleOrder = ({
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Submit
+                                Update SO
                             </button>
                         </div>
                     </div>
@@ -169,59 +167,50 @@ const AddSaleOrder = ({
                                         e.target.value
                                     )
                                 }
-                                className="mt-0 rounded"
                             />
 
                             {/* Dealer */}
-                            <div className="-mt-2">
-                                <ATMSelectSearchable
-                                    name="dealerId"
-                                    value={values.dealerId}
-                                    onChange={(e) => {
-                                        handleSetFieldValue('dealerId', e)
-                                        setDealerId(e)
-                                    }}
-                                    options={dropdownOptions.dealerOptions}
-                                    label="Dealer"
-                                />
-                            </div>
+                            <ATMSelectSearchable
+                                name="dealerId"
+                                value={values?.dealerId}
+                                onChange={(e) => {
+                                    handleSetFieldValue('dealerId', e)
+                                    // setDealerId(e)
+                                }}
+                                options={dropdownOptions.dealerOptions}
+                                label="Dealer"
+                                selectLabel="Select Dealer"
+                            />
+
                             {/* Dealer Warehouse */}
-                            <div className="-mt-2">
-                                <ATMSelectSearchable
-                                    name="dealerWareHouseId"
-                                    value={values.dealerWareHouseId}
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'dealerWareHouseId',
-                                            e
-                                        )
-                                    }
-                                    options={dealerWarehouseOptions}
-                                    label="Dealer Warehouse"
-                                />
-                            </div>
+                            <ATMSelectSearchable
+                                name="dealerWareHouseId"
+                                value={values.dealerWareHouseId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('dealerWareHouseId', e)
+                                }
+                                options={dealerWarehouseOptions}
+                                label="Dealer Warehouse"
+                                selectLabel="Select Dealer Warehouse"
+                            />
                             {/* Warehouse */}
-                            <div className="-mt-2">
-                                <ATMSelectSearchable
-                                    name="companyWareHouseId"
-                                    value={values.companyWareHouseId}
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'companyWareHouseId',
-                                            e
-                                        )
-                                    }
-                                    options={dropdownOptions.warehouseOptions}
-                                    label="Warehouse"
-                                />
-                            </div>
+                            <ATMSelectSearchable
+                                name="companyWareHouseId"
+                                value={values.companyWareHouseId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('companyWareHouseId', e)
+                                }
+                                options={dropdownOptions.warehouseOptions}
+                                label="Warehouse"
+                                selectLabel="Select Warehouse"
+                            />
                         </div>
                     </div>
 
                     {/*  Sales Order  */}
                     <div className="px-3">
                         <div className=" text-lg pb-2 font-medium text-primary-main">
-                            Add ProductGroup to sale order
+                            Update ProductGroup to sale order
                         </div>
 
                         <FieldArray name="productSalesOrder">
@@ -385,4 +374,4 @@ const AddSaleOrder = ({
     )
 }
 
-export default AddSaleOrder
+export default EditRTVendor

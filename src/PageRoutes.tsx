@@ -231,7 +231,7 @@ import InwardCustomerTabsListingWrapper from './pages/inventories/inward/Custome
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
 import AuthHOC from './AuthHOC'
 import ActionAuthHOC from './ActionAuthHoc'
-import OutwardRTVTabsListingWrapper from './pages/inventories/outward/Rtv/OutwardRTVTabsListingWrapper'
+import OutwardRTVTabsListingWrapper from './pages/inventories/outward/Rtv/list/OutwardRTVTabsListingWrapper'
 import OutwardWarehouseTabsListingWrapper from './pages/inventories/outward/Warehouse/OutwardWarehouseTabsListingWrapper'
 import OutwardSampleTabsListingWrapper from './pages/inventories/outward/Sample/OutwardSampleTabsListingWrapper'
 import OutwardEcomTabsListingWrapper from './pages/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
@@ -248,6 +248,9 @@ import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScre
 import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
 import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
 import DispatchedInvoice from './pages/inventories/outward/Dealer/components/DispatchedInvoice'
+import RTVListingWrapper from './pages/returnToVendor/list/RTVListingWrapper'
+import AddRTVendorWrapper from './pages/returnToVendor/add/AddRTVendorWrapper'
+import EditRTVendorWrapper from './pages/returnToVendor/edit/EditRTVendorWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -858,7 +861,8 @@ const PageRoutes = () => {
                                         isRedirect
                                     />
                                 }
-                            />
+                            ></Route>
+
                             <Route
                                 path="warehoue"
                                 element={
@@ -1121,6 +1125,47 @@ const PageRoutes = () => {
                                 component={<EditSaleOrderWrapper />}
                                 moduleName={UserModuleNameTypes.saleOrder}
                                 actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
+                    />
+
+                    {/* RETURN TO VENDOR */}
+                    <Route
+                        path="/return-to-vendor"
+                        element={
+                            <ActionAuthHOC
+                                component={<RTVListingWrapper />}
+                                moduleName={UserModuleNameTypes.wareHouse}
+                                actionName={
+                                    UserModuleWarehouseTabsTypes.outwardInventoriesRTV
+                                }
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="/return-to-vendor/add"
+                        element={
+                            <ActionAuthHOC
+                                component={<AddRTVendorWrapper />}
+                                moduleName={UserModuleNameTypes.wareHouse}
+                                actionName={
+                                    UserModuleWarehouseTabsTypes.outwardInventoriesRTV
+                                }
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="/return-to-vendor/edit/:id"
+                        element={
+                            <ActionAuthHOC
+                                component={<EditRTVendorWrapper />}
+                                moduleName={UserModuleNameTypes.wareHouse}
+                                actionName={
+                                    UserModuleWarehouseTabsTypes.outwardInventoriesRTV
+                                }
                                 isRedirect
                             />
                         }

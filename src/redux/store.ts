@@ -89,6 +89,7 @@ import vendorLedgerSlice from './slices/VendorLedgerSlice'
 import dealersRatioSlice from './slices/dealersRatioSlice'
 import userAcessSlice from './slices/access/userAcessSlice'
 import companyBranchSlice from './slices/companyBranchSlice'
+import returnToVendorSlice from './slices/returnToVendorSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -176,6 +177,7 @@ const store = configureStore({
         assetsRequest: assetsRequestSlice,
         assetsCategory: assetsCategorySlice,
         vendorLedger: vendorLedgerSlice,
+        returnToVendor: returnToVendorSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
