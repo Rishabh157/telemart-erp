@@ -151,7 +151,8 @@ const steps = [
             gst_certificate: string()
                 // .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),
-            declaration_form: string().url('Form must be valid URL'),
+            declaration_form: string(),
+            // .url('Form must be valid URL'),
         }),
     },
     {
@@ -174,9 +175,8 @@ const steps = [
                     accountType: string().required(
                         'Please select account type'
                     ),
-                    cancelledCheque: string().url(
-                        'Cancle Check must be valid URL'
-                    ),
+                    cancelledCheque: string(),
+                    // .url('Cancle Check must be valid URL'),
                 })
             ),
         }),

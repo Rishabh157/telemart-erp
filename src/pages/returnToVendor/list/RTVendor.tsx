@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
-// Filename:SaleOrderListing.tsx
+// Filename:RTVendor.tsx
 // Type: List Component
 // Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
@@ -30,7 +30,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/saleOrderSlice'
+} from 'src/redux/slices/returnToVendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -41,12 +41,12 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
+const RTVendor = ({ columns, rows, setShowDropdown }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const dispatch = useDispatch<AppDispatch>()
     const saleOrderState: any = useSelector(
-        (state: RootState) => state.saleOrder
+        (state: RootState) => state.returnToVendor
     )
     const { pathname } = useLocation()
     const path = pathname.split('/')[1]
@@ -71,7 +71,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
         >
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Sale Orders </ATMPageHeading>
+                <ATMPageHeading> Return To Vendor </ATMPageHeading>
                 <ActionAuthHOC
                     moduleName={
                         isDealerPath
@@ -85,10 +85,10 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }
                     component={
                         <button
-                            onClick={() => navigate('add-sale-order')}
+                            onClick={() => navigate('/return-to-vendor/add')}
                             className="bg-primary-main text-white rounded py-1 px-3"
                         >
-                            + Add Sale Order
+                            + Add Retrun To Vendor
                         </button>
                     }
                 />
@@ -119,7 +119,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 />
 
                 {/* Table */}
-                <div className="grow">
+                <div className="grow overflow-auto">
                     <ATMTable
                         isLoading={isTableLoading}
                         columns={columns}
@@ -129,7 +129,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full"
+                        extraClasses="h-full overflow-auto"
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
@@ -149,4 +149,4 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     )
 }
 
-export default SaleOrderListing
+export default RTVendor

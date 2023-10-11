@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { GroupBySaleOrderResponseTypes } from 'src/models/SaleOrder.model'
@@ -30,7 +29,7 @@ import {
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import SaleOrderListing from './SaleOrderListing'
+import OutwardRTVTabs from './OutwardRTVTabs'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 // |-- Redux --|
@@ -42,7 +41,7 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { SoApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
 
-const SaleOrderListingWrapper = () => {
+const OutwardRTVTabsListingWrapper = () => {
     const salesOrderState: any = useSelector(
         (state: RootState) => state.saleOrder
     )
@@ -292,7 +291,7 @@ const SaleOrderListingWrapper = () => {
             align: 'center',
             renderCell: (row: GroupBySaleOrderResponseTypes) => {
                 return (
-                    <div>
+                    <div className="">
                         {!row?.dhApproved ? (
                             <Stack direction="row" spacing={1}>
                                 {row?.dhApproved === null ? (
@@ -428,54 +427,54 @@ const SaleOrderListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: GroupBySaleOrderResponseTypes) =>
-                row?.dhApproved === null &&
-                row?.accApproved === null && (
-                    <ActionPopup
-                        moduleName={UserModuleNameTypes.saleOrder}
-                        isEdit
-                        isDelete
-                        handleEditActionButton={() => {
-                            navigate(`/sale-order/edit-sale-order/${row?._id}`)
-                        }}
-                        handleDeleteActionButton={() => {
-                            showConfirmationDialog({
-                                title: 'Delete SaleOrder',
-                                text: 'Do you want to delete SaleOrder?',
-                                showCancelButton: true,
-                                next: (res: any) => {
-                                    return res.isConfirmed
-                                        ? handleDelete()
-                                        : setShowDropdown(false)
-                                },
-                            })
-                        }}
-                        handleOnAction={() => {
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                    />
-                ),
+            renderCell: (row: GroupBySaleOrderResponseTypes) => (
+                <ActionPopup
+                    moduleName={UserModuleNameTypes.saleOrder}
+                    isEdit={true}
+                    isDelete={
+                        row.dhApproved === null && row.accApproved === null
+                            ? true
+                            : false
+                    }
+                    handleEditActionButton={() => {
+                        navigate(`/sale-order/edit-sale-order/${row?._id}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete SaleOrder',
+                            text: 'Do you want to delete SaleOrder?',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                />
+            ),
             align: 'end',
         },
     ]
 
     return (
         <>
-            <SideNavLayout>
-                <SaleOrderListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.saleOrder,
-                        UserModuleActionTypes.List
-                    )}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </SideNavLayout>
+            <OutwardRTVTabs
+                columns={getAllowedAuthorizedColumns(
+                    checkUserAccess,
+                    columns,
+                    UserModuleNameTypes.saleOrder,
+                    UserModuleActionTypes.List
+                )}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }
 
-export default SaleOrderListingWrapper
+export default OutwardRTVTabsListingWrapper

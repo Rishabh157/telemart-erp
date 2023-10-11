@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
-// Filename:AddSaleOrder.tsx
+// Filename:AddRTVendor.tsx
 // Type: Add Component
 // Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
@@ -22,7 +22,7 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-import { FormInitialValues } from './AddSaleOrderWrapper'
+// import { any } from './AddSaleOrderWrapper'
 import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
@@ -35,7 +35,7 @@ import { showToast } from 'src/utils'
 
 // |-- Types --|
 type Props = {
-    formikProps: FormikProps<FormInitialValues>
+    formikProps: FormikProps<any>
     dropdownOptions: {
         dealerOptions: SelectOption[]
         warehouseOptions: SelectOption[]
@@ -45,7 +45,7 @@ type Props = {
     apiStatus: boolean
 }
 
-const AddSaleOrder = ({
+const AddRTVendor = ({
     formikProps,
     dropdownOptions,
     apiStatus,
@@ -55,15 +55,11 @@ const AddSaleOrder = ({
     // Breadcrumbs
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: `${params.dealerId ? ' Dealers Sale Order' : 'Sale Order'}`,
-            path: `${
-                params.dealerId
-                    ? `/dealers/${params.dealerId}/sale-order`
-                    : '/sale-order'
-            }`,
+            label: 'Return To Vendor',
+            path: 'return-to-vendor',
         },
         {
-            label: 'Add Sale Order',
+            label: 'Add Return To Vendor',
         },
     ]
 
@@ -90,9 +86,8 @@ const AddSaleOrder = ({
         }
     )
 
-    
     useEffect(() => {
-        if ( !isLoading && !isFetching) {
+        if (!isLoading && !isFetching) {
             dispatch(setDealerWarehouse(data?.data))
         }
     }, [data, isLoading, isFetching, dealerId, dispatch])
@@ -131,21 +126,24 @@ const AddSaleOrder = ({
                 </div>
 
                 {/* Page Heading */}
-                <div className="pt-1">
-                    <ATMPageHeading> Sale Order </ATMPageHeading>
-                </div>
+                {/* <div className="pt-1">
+                    <ATMPageHeading> Return To Vendor </ATMPageHeading>
+                </div> */}
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
-                        <div className="text-xl font-medium"> SO Details </div>
+                        <div className="text-xl font-medium">
+                            {' '}
+                            Return To Vendor{' '}
+                        </div>
                         {/* BUTTON - Add SO */}
                         <div>
                             <button
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                className={`bg-primary-main rounzded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
@@ -159,9 +157,9 @@ const AddSaleOrder = ({
                         <div className="grid grid-cols-4 gap-4">
                             {/* SO Number */}
                             <ATMTextField
-                                name="soNumber"
+                                name="return to vendor"
                                 value={values.soNumber}
-                                label="SO Number"
+                                label="RTV No."
                                 placeholder="SO Number"
                                 onChange={(e) =>
                                     handleSetFieldValue(
@@ -175,18 +173,18 @@ const AddSaleOrder = ({
                             {/* Dealer */}
                             <div className="-mt-2">
                                 <ATMSelectSearchable
-                                    name="dealerId"
-                                    value={values.dealerId}
+                                    name="vendorId"
+                                    value={values.vendorId}
                                     onChange={(e) => {
                                         handleSetFieldValue('dealerId', e)
                                         setDealerId(e)
                                     }}
                                     options={dropdownOptions.dealerOptions}
-                                    label="Dealer"
+                                    label="Vendor"
                                 />
                             </div>
                             {/* Dealer Warehouse */}
-                            <div className="-mt-2">
+                            {/* <div className="-mt-2">
                                 <ATMSelectSearchable
                                     name="dealerWareHouseId"
                                     value={values.dealerWareHouseId}
@@ -199,7 +197,7 @@ const AddSaleOrder = ({
                                     options={dealerWarehouseOptions}
                                     label="Dealer Warehouse"
                                 />
-                            </div>
+                            </div> */}
                             {/* Warehouse */}
                             <div className="-mt-2">
                                 <ATMSelectSearchable
@@ -230,7 +228,7 @@ const AddSaleOrder = ({
                                     <>
                                         <div className="flex flex-col gap-y-5">
                                             {values.productSalesOrder?.map(
-                                                (item, index) => {
+                                                (item: any, index: any) => {
                                                     const {
                                                         productGroupId,
                                                         rate,
@@ -254,7 +252,7 @@ const AddSaleOrder = ({
                                                                         if (
                                                                             !values?.productSalesOrder?.find(
                                                                                 (
-                                                                                    f
+                                                                                    f: any
                                                                                 ) =>
                                                                                     f.productGroupId ===
                                                                                     e
@@ -385,4 +383,4 @@ const AddSaleOrder = ({
     )
 }
 
-export default AddSaleOrder
+export default AddRTVendor

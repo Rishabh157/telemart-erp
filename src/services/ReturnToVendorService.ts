@@ -1,37 +1,44 @@
 /// ==============================================
-// Filename:SalesOrderService.tsx
+// Filename:ReturnToVendorService.tsx
 // Type: Service Component
-// Last Updated: JULY 04, 2023
+// Last Updated: OCOTOBER 11, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
 // |-- Internal Dependencies --|
 import {
-    AddSaleOrder,
+    // AddReturnToVendor,
     UpdateSaleOrder,
     UpdateSOApprovalLevel,
-} from 'src/models'
+} from 'src/models/ReturnToVendor.model'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
-import { UpdateSaleOrderApproval } from 'src/models/SaleOrder.model'
+import { UpdateSaleOrderApproval } from 'src/models/ReturnToVendor.model'
 
-export const SalesOrderApi = apiSlice.injectEndpoints({
+// type AddReturnToVendor = {
+//     soNumber: string
+//     dealerId: string
+//     dealerWareHouseId: string
+//     companyWareHouseId: string
+//     companyId: string
+//     productSalesOrder:
+// }
+
+export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
-
         getPaginationSaleOrder: builder.query({
-            providesTags: ['SalesOrder'],
+            providesTags: ['rtv-master'],
             query: (body: PaginationType) => ({
-                url: '/sales-order',
+                url: 'rtv-master/sales-order',
                 method: 'POST',
                 body,
             }),
         }),
 
         //***** GET PAGINATION DATA WITH PRODUCT GROUP *****/
-
         getPaginationSaleOrderByGroup: builder.query({
-            providesTags: ['SalesOrder'],
+            providesTags: ['rtv-master'],
             query: (body: PaginationType) => ({
                 url: '/sales-order/groupby',
                 method: 'POST',
@@ -41,7 +48,7 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
 
         //***** GET SALESORDER BY DEALER-ID DATA *****/
         getSalesOrderByDealerId: builder.query({
-            providesTags: ['SalesOrder'],
+            providesTags: ['rtv-master'],
             query: (dealerId) => ({
                 url: `/sales-order/get-by-dealer/${dealerId}`,
                 method: 'GET',
@@ -49,10 +56,10 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
         }),
 
         //***** ADD *****/
-        addSalesOrder: builder.mutation({
-            invalidatesTags: ['SalesOrder'],
-            query: (body: AddSaleOrder) => ({
-                url: '/sales-order/add',
+        addReturnToVendor: builder.mutation({
+            invalidatesTags: ['rtv-master'],
+            query: (body: any) => ({
+                url: 'rtv-master/add',
                 method: 'POST',
                 body,
             }),
@@ -60,7 +67,7 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
 
         //***** Update *****/
         updateSalesOrder: builder.mutation({
-            invalidatesTags: ['SalesOrder'],
+            invalidatesTags: ['rtv-master'],
             query: ({ body, id }: UpdateSaleOrder) => ({
                 url: `/sales-order/update-so`,
                 method: 'PUT',
@@ -70,7 +77,7 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
 
         //***** Update *****/
         updateSalesOrderApproval: builder.mutation({
-            invalidatesTags: ['SalesOrder'],
+            invalidatesTags: ['rtv-master'],
             query: ({ body, id }: UpdateSaleOrderApproval) => ({
                 url: `/sales-order/approval-level/${id}`,
                 method: 'PUT',
@@ -79,7 +86,7 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
         }),
         //***** Update *****/
         updateSoLevel: builder.mutation({
-            invalidatesTags: ['SalesOrder'],
+            invalidatesTags: ['rtv-master'],
             query: ({ body, id }: UpdateSOApprovalLevel) => ({
                 url: `/sales-order/approval-level/${id}`,
 
@@ -90,7 +97,7 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
 
         //***** Delete *****/
         deleteSalesOrder: builder.mutation({
-            invalidatesTags: ['SalesOrder'],
+            invalidatesTags: ['rtv-master'],
             query: (id) => ({
                 url: `/sales-order/${id}`,
                 method: 'DELETE',
@@ -99,7 +106,7 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
 
         // **** GET BY ID
         getSalesOrderById: builder.query({
-            providesTags: ['SalesOrder'],
+            providesTags: ['rtv-master'],
             query: (id) => ({
                 url: `/sales-order/${id}`,
                 method: 'GET',
@@ -112,10 +119,10 @@ export const {
     useGetPaginationSaleOrderQuery,
     useGetPaginationSaleOrderByGroupQuery,
     useGetSalesOrderByDealerIdQuery,
-    useAddSalesOrderMutation,
+    useAddReturnToVendorMutation,
     useUpdateSalesOrderMutation,
     useUpdateSalesOrderApprovalMutation,
     useGetSalesOrderByIdQuery,
     useDeleteSalesOrderMutation,
     useUpdateSoLevelMutation,
-} = SalesOrderApi
+} = ReturnToVendorServiceApi

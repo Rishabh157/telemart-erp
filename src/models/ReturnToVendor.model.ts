@@ -1,11 +1,9 @@
 /// ==============================================
-// Filename:SaleOrder.model.ts
+// Filename:ReturnToVendor.model.ts
 // Type: Model Component
-// Last Updated: JUNE 28, 2023
+// Last Updated: OCOTOBER 11, 2023
 // Project: TELIMART - Front End
 // ==============================================
-
-// import { SaleOrderStatus } from "./OutwardRequest.model"
 
 // |-- Types --|
 export type productSalesOrder = {

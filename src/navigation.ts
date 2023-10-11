@@ -74,14 +74,6 @@ export const navigation: NavItemType[] = [
         path: '/warehouse',
         name: UserModuleNameTypes.wareHouse,
     },
-
-    {
-        label: 'Sale Order',
-        icon: CgNotes,
-        path: '/sale-order',
-        name: UserModuleNameTypes.saleOrder,
-    },
-
     {
         label: 'ASR',
         icon: CiMemoPad,
@@ -99,6 +91,18 @@ export const navigation: NavItemType[] = [
         icon: CiStickyNote,
         path: '/grn',
         name: UserModuleNameTypes.grn,
+    },
+    {
+        label: 'Sale Order',
+        icon: CgNotes,
+        path: '/sale-order',
+        name: UserModuleNameTypes.saleOrder,
+    },
+    {
+        label: 'RTV',
+        icon: FiUsers,
+        path: '/return-to-vendor',
+        name: UserModuleNameTypes.saleOrder,
     },
     // {
     //     label: 'Inventory Management',

@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:EditSaleOrderWrapper.tsx
+// Filename:EditRTVendorWrapper.tsx
 // Type: Edit Component
 // Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
@@ -10,12 +10,12 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { array, number, object, string } from 'yup'
+import { number, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import EditSaleOrder from './EditSaleOrder'
+import EditRTVendor from './EditRTVendor'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { showToast } from 'src/utils'
 import { useGetAllDealersQuery } from 'src/services/DealerServices'
@@ -31,45 +31,45 @@ import { setAllItems } from 'src/redux/slices/dealerSlice'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/saleOrderSlice'
+import { setSelectedItem } from 'src/redux/slices/returnToVendorSlice'
 
 // |-- Types --|
 type Props = {}
 
-// interface ProductSalesOrder {
-//     productGroupId: string
-//     rate: number
-//     quantity: number
-//     _id: string
-//     groupName: string
-// }
+interface ProductSalesOrder {
+    productGroupId: string
+    rate: number
+    quantity: number
+    _id: string
+    groupName: string
+}
 
-// interface ProductSalesOrderListResponseType {
-//     _id: string
-//     soNumber: string
-//     dealerId: string
-//     dealerWareHouseId: string
-//     companyWareHouseId: string
-//     dhApprovedById: string | null
-//     dhApproved: boolean | null
-//     dhApprovedActionBy: string
-//     dhApprovedAt: string
-//     accApprovedById: string | null
-//     accApproved: boolean | null
-//     accApprovedActionBy: string
-//     accApprovedAt: string
-//     productSalesOrder: ProductSalesOrder
-//     status: string
-//     companyId: string
-//     isDeleted: boolean
-//     isActive: boolean
-//     __v: number
-//     createdAt: string
-//     updatedAt: string
-//     dealerLabel: string
-//     companyWarehouseLabel: string
-//     warehouseLabel: string
-// }
+interface ProductSalesOrderListResponseType {
+    _id: string
+    soNumber: string
+    dealerId: string
+    dealerWareHouseId: string
+    companyWareHouseId: string
+    dhApprovedById: string | null
+    dhApproved: boolean | null
+    dhApprovedActionBy: string
+    dhApprovedAt: string
+    accApprovedById: string | null
+    accApproved: boolean | null
+    accApprovedActionBy: string
+    accApprovedAt: string
+    productSalesOrder: ProductSalesOrder
+    status: string
+    companyId: string
+    isDeleted: boolean
+    isActive: boolean
+    __v: number
+    createdAt: string
+    updatedAt: string
+    dealerLabel: string
+    companyWarehouseLabel: string
+    warehouseLabel: string
+}
 
 export type FormInitialValues = {
     soNumber: string | ''
@@ -94,7 +94,7 @@ export type FormInitialValues = {
     accApprovedById: string
 }
 
-const EditSaleOrderWrapper = (props: Props) => {
+const EditRTVendorWrapper = (props: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
@@ -280,27 +280,25 @@ const EditSaleOrderWrapper = (props: Props) => {
     }
 
     // Form Validation Schema
-    const validationSchema = object({
-        soNumber: string().required('Sale order number is required'),
-        dealerId: string().required('Please select a dealer'),
-        dealerWareHouseId: string().required(
-            'Please select a  Dealer Warehouse'
-        ),
-        companyWareHouseId: string().required('Please select a warehouse'),
-        productSalesOrder: array().of(
-            object().shape({
-                productGroupId: string().required(
-                    'Please select a product name'
-                ),
-                rate: number()
-                    .min(1, 'Rate must be greater than 0')
-                    .required('Please enter rate'),
-                quantity: number()
-                    .min(1, 'Quantity must be greater than 0')
-                    .required('Please enter quantity'),
-            })
-        ),
-    })
+    // const validationSchema = object({
+    //     soNumber: string().required('Sale order number is required'),
+    //     dealerId: string().required('Please select a dealer'),
+    //     dealerWareHouseId: string().required(
+    //         'Please select a dealer warehouse'
+    //     ),
+    //     companyWareHouseId: string().required('Please select a warehouse'),
+    //     productSalesOrder: object().shape({
+    //         productGroupId: string().required('Please select a product name'),
+    //         rate: number()
+    //             .min(0, 'Rate must be greater than 0')
+    //             .required('Please enter rate')
+    //             .nullable(),
+    //         quantity: number()
+    //             .min(0, 'Quantity must be greater than 0')
+    //             .required('Please enter quantity')
+    //             .nullable(),
+    //     }),
+    // })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -367,12 +365,12 @@ const EditSaleOrderWrapper = (props: Props) => {
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
-                validationSchema={validationSchema}
+                // validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
-                        <EditSaleOrder
+                        <EditRTVendor
                             formikProps={formikProps}
                             dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
@@ -385,4 +383,4 @@ const EditSaleOrderWrapper = (props: Props) => {
     )
 }
 
-export default EditSaleOrderWrapper
+export default EditRTVendorWrapper

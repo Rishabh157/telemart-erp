@@ -1,7 +1,7 @@
 /// ==============================================
-// Filename:AddSaleOrderWrapper.tsx
+// Filename:AddRTVendorWrapper.tsx
 // Type: Add Component
-// Last Updated: JULY 30, 2023
+// Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -15,13 +15,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import AddSaleOrder from './AddSaleOrder'
+import AddRTVendor from './AddRTVendor'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { showToast } from 'src/utils'
 import { useGetAllDealersQuery } from 'src/services/DealerServices'
 import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
-import { useAddSalesOrderMutation } from 'src/services/SalesOrderService'
+import { useAddReturnToVendorMutation } from 'src/services/ReturnToVendorService'
 
 // |-- Redux--|
 import { setAllItems } from 'src/redux/slices/dealerSlice'
@@ -46,12 +46,12 @@ export type FormInitialValues = {
     }[]
 }
 
-const AddSaleOrderWrapper = (props: Props) => {
+const AddRTVendorWrapper = (props: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const [addSalesOrder] = useAddSalesOrderMutation()
+    const [addReturnToVendor] = useAddReturnToVendorMutation()
 
     const {
         data: dealerData,
@@ -176,7 +176,7 @@ const AddSaleOrderWrapper = (props: Props) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
-            addSalesOrder({
+            addReturnToVendor({
                 soNumber: values.soNumber,
                 dealerId: values.dealerId,
                 dealerWareHouseId: values.dealerWareHouseId,
@@ -186,7 +186,10 @@ const AddSaleOrderWrapper = (props: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Sale-Order added successfully!')
+                        showToast(
+                            'success',
+                            'Return To Vendor Added Successfully!'
+                        )
                         navigate('/sale-order')
                     } else {
                         showToast('error', res?.data?.message)
@@ -208,7 +211,7 @@ const AddSaleOrderWrapper = (props: Props) => {
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
-                        <AddSaleOrder
+                        <AddRTVendor
                             formikProps={formikProps}
                             dropdownOptions={dropdownOptions}
                             apiStatus={apiStatus}
@@ -221,4 +224,4 @@ const AddSaleOrderWrapper = (props: Props) => {
     )
 }
 
-export default AddSaleOrderWrapper
+export default AddRTVendorWrapper

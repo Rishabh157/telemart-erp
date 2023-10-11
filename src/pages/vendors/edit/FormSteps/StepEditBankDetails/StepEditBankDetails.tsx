@@ -6,13 +6,14 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { FieldArray, FormikProps } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
+import { CircularProgress } from '@mui/material'
 
 // |-- Internal Dependencies --|
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
@@ -24,6 +25,7 @@ import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 
 // |--Types --|
 type FieldType = Field<'accountTypeOptions'>
@@ -39,6 +41,11 @@ const StepEditBankDetails = ({
     formFields,
     dropdownOptions,
 }: Props) => {
+    const [loaderState, setLoaderState] = useState<string>('')
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+
+    const [fileUploader] = useFileUploaderMutation()
+
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
     const { formSubmitting: isSubmitting } = useSelector(
@@ -164,12 +171,60 @@ const StepEditBankDetails = ({
                                                                                                 ]
                                                                                             }
                                                                                             onChange={(
-                                                                                                e
+                                                                                                newFile
                                                                                             ) => {
-                                                                                                handleSetFieldValue(
-                                                                                                    `bank_informations[${bankInformationIndex}].${name}`,
-                                                                                                    e
+                                                                                                setLoaderState(
+                                                                                                    name
                                                                                                 )
+                                                                                                const formData =
+                                                                                                    new FormData()
+                                                                                                formData.append(
+                                                                                                    'fileType',
+                                                                                                    'IMAGE'
+                                                                                                )
+                                                                                                formData.append(
+                                                                                                    'category',
+                                                                                                    'Dealer'
+                                                                                                )
+                                                                                                formData.append(
+                                                                                                    'fileUrl',
+                                                                                                    newFile ||
+                                                                                                        ''
+                                                                                                )
+                                                                                                setImageApiStatus(
+                                                                                                    true
+                                                                                                )
+                                                                                                fileUploader(
+                                                                                                    formData
+                                                                                                ).then(
+                                                                                                    (
+                                                                                                        res: any
+                                                                                                    ) => {
+                                                                                                        if (
+                                                                                                            'data' in
+                                                                                                            res
+                                                                                                        ) {
+                                                                                                            setImageApiStatus(
+                                                                                                                false
+                                                                                                            )
+                                                                                                            handleSetFieldValue(
+                                                                                                                `bank_informations[${bankInformationIndex}].${name}`,
+                                                                                                                res
+                                                                                                                    ?.data
+                                                                                                                    ?.data
+                                                                                                                    ?.fileUrl
+                                                                                                            )
+                                                                                                        }
+                                                                                                        setImageApiStatus(
+                                                                                                            false
+                                                                                                        )
+                                                                                                    }
+                                                                                                )
+
+                                                                                                // handleSetFieldValue(
+                                                                                                //     `bank_informations[${bankInformationIndex}].${name}`,
+                                                                                                //     e
+                                                                                                // )
                                                                                             }}
                                                                                             options={
                                                                                                 dropdownOptions[
@@ -189,31 +244,91 @@ const StepEditBankDetails = ({
 
                                                                             case 'file-picker':
                                                                                 return (
-                                                                                    <ATMFilePickerWrapper
-                                                                                        name={`bank_informations[${bankInformationIndex}].${name}`}
-                                                                                        key={
-                                                                                            name
-                                                                                        }
-                                                                                        label={
-                                                                                            label
-                                                                                        }
-                                                                                        placeholder={
-                                                                                            placeholder
-                                                                                        }
-                                                                                        onSelect={(
-                                                                                            newFile
-                                                                                        ) =>
-                                                                                            handleSetFieldValue(
-                                                                                                `bank_informations[${bankInformationIndex}].${name}`,
-                                                                                                newFile
-                                                                                            )
-                                                                                        }
-                                                                                        selectedFile={
-                                                                                            bankInformation[
+                                                                                    <div>
+                                                                                        <ATMFilePickerWrapper
+                                                                                            name={`bank_informations[${bankInformationIndex}].${name}`}
+                                                                                            key={
                                                                                                 name
-                                                                                            ]
-                                                                                        }
-                                                                                    />
+                                                                                            }
+                                                                                            label={
+                                                                                                label
+                                                                                            }
+                                                                                            placeholder={
+                                                                                                placeholder
+                                                                                            }
+                                                                                            onSelect={(
+                                                                                                newFile
+                                                                                            ) => {
+                                                                                                setLoaderState(
+                                                                                                    name
+                                                                                                )
+                                                                                                const formData =
+                                                                                                    new FormData()
+                                                                                                formData.append(
+                                                                                                    'fileType',
+                                                                                                    'IMAGE'
+                                                                                                )
+                                                                                                formData.append(
+                                                                                                    'category',
+                                                                                                    'Dealer'
+                                                                                                )
+                                                                                                formData.append(
+                                                                                                    'fileUrl',
+                                                                                                    newFile ||
+                                                                                                        ''
+                                                                                                )
+                                                                                                setImageApiStatus(
+                                                                                                    true
+                                                                                                )
+                                                                                                fileUploader(
+                                                                                                    formData
+                                                                                                ).then(
+                                                                                                    (
+                                                                                                        res: any
+                                                                                                    ) => {
+                                                                                                        if (
+                                                                                                            'data' in
+                                                                                                            res
+                                                                                                        ) {
+                                                                                                            setImageApiStatus(
+                                                                                                                false
+                                                                                                            )
+                                                                                                            handleSetFieldValue(
+                                                                                                                `bank_informations[${bankInformationIndex}].${name}`,
+                                                                                                                res
+                                                                                                                    ?.data
+                                                                                                                    ?.data
+                                                                                                                    ?.fileUrl
+                                                                                                            )
+                                                                                                        }
+                                                                                                        setImageApiStatus(
+                                                                                                            false
+                                                                                                        )
+                                                                                                    }
+                                                                                                )
+                                                                                                // handleSetFieldValue(
+                                                                                                //     `bank_informations[${bankInformationIndex}].${name}`,
+                                                                                                //     newFile
+                                                                                                // )
+                                                                                            }}
+                                                                                            selectedFile={
+                                                                                                bankInformation[
+                                                                                                    name
+                                                                                                ]
+                                                                                            }
+                                                                                        />
+                                                                                        {loaderState ===
+                                                                                            name &&
+                                                                                        imageApiStatus ? (
+                                                                                            <div className="mt-3 text-center">
+                                                                                                <CircularProgress
+                                                                                                    size={
+                                                                                                        21
+                                                                                                    }
+                                                                                                />
+                                                                                            </div>
+                                                                                        ) : null}
+                                                                                    </div>
                                                                                 )
 
                                                                             default:

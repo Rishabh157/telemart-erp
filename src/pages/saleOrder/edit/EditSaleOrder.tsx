@@ -13,6 +13,7 @@ import React, { useEffect, useState } from 'react'
 import { FormikProps, FieldArray } from 'formik'
 // import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux'
+import { HiPlus } from 'react-icons/hi'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -29,6 +30,8 @@ import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseS
 import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { showToast } from 'src/utils'
+import { MdDeleteOutline } from 'react-icons/md'
 
 // |-- Types --|
 type Props = {
@@ -64,9 +67,9 @@ const EditSaleOrder = ({
     }
 
     const { values, setFieldValue } = formikProps
-
+    const [i, setI] = useState(0)
     const dispatch = useDispatch<AppDispatch>()
-    const [dealerId, setDealerId] = useState('')
+    // const [dealerId, setDealerId] = useState('')
     const [productGroup, setProductGroup] = useState('')
 
     const dealerWarehouse: any = useSelector(
@@ -75,16 +78,21 @@ const EditSaleOrder = ({
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId = userData?.companyId
 
-    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery({
-        companyId,
-        dealerId,
-    })
+    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
+        {
+            companyId,
+            dealerId:values?.dealerId
+        },
+        {
+            skip: !values.dealerId,
+        }
+    )
 
     useEffect(() => {
-        if (dealerId !== '' && !isLoading && !isFetching) {
+        if (!isLoading && !isFetching) {
             dispatch(setDealerWarehouse(data?.data))
         }
-    }, [data, isLoading, isFetching, dealerId, dispatch])
+    }, [data, isLoading, isFetching, dispatch])
 
     const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
         (ele: any) => {
@@ -96,10 +104,14 @@ const EditSaleOrder = ({
     )
 
     useEffect(() => {
-        const val = productPriceOptions?.find((e) => e['key'] === productGroup)
+        const val: any = productPriceOptions?.find(
+            (e) => e['key'] === productGroup
+        )
 
         if (val) {
-            setFieldValue(`productSalesOrder.rate`, val['value'])
+            setFieldValue(`productSalesOrder[${i}].rate`, val['value'])
+        } else {
+            setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
     }, [productGroup])
 
@@ -163,7 +175,7 @@ const EditSaleOrder = ({
                                 value={values?.dealerId}
                                 onChange={(e) => {
                                     handleSetFieldValue('dealerId', e)
-                                    setDealerId(e)
+                                    // setDealerId(e)
                                 }}
                                 options={dropdownOptions.dealerOptions}
                                 label="Dealer"
@@ -205,85 +217,151 @@ const EditSaleOrder = ({
                             {({ push, remove }) => {
                                 return (
                                     <>
-                                        <div className="flex flex-col gap-y-5 py-3">
-                                            {/* {values.productSalesOrder?.map(
-                                            (item: any, index: number) => { */}
-                                            {/* const { productGroupId, rate, quantity } = item; */}
-                                            {/* // return ( */}
-                                            <div className="flex gap-3 items-end pb-5">
-                                                {/* Product Name */}
-                                                <div className="flex-1">
-                                                    <ATMSelectSearchable
-                                                        name={`productSalesOrder.productGroupId`}
-                                                        value={
-                                                            values
-                                                                ?.productSalesOrder
-                                                                ?.productGroupId ||
-                                                            ''
-                                                        }
-                                                        onChange={(e) => {
-                                                            handleSetFieldValue(
-                                                                `productSalesOrder.productGroupId`,
-                                                                e
-                                                            )
-                                                            handleSetFieldValue(
-                                                                `productSalesOrder.rate`,
-                                                                ''
-                                                            )
-                                                            setProductGroup(e)
-                                                        }}
-                                                        selectLabel=" Select Product Group"
-                                                        options={
-                                                            dropdownOptions.productGroupOptions
-                                                        }
-                                                        label="Product Group"
-                                                    />
-                                                </div>
+                                        <div className="flex flex-col gap-y-5">
+                                            {values.productSalesOrder?.map(
+                                                (item, index) => {
+                                                    const {
+                                                        productGroupId,
+                                                        rate,
+                                                        quantity,
+                                                    } = item
+                                                    return (
+                                                        <div
+                                                            key={index}
+                                                            className="flex gap-3 items-end "
+                                                        >
+                                                            {/* Product Name */}
+                                                            <div className="flex-1 ">
+                                                                <ATMSelectSearchable
+                                                                    name={`productSalesOrder[${index}].productGroupId`}
+                                                                    value={
+                                                                        productGroupId
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) => {
+                                                                        if (
+                                                                            !values?.productSalesOrder?.find(
+                                                                                (
+                                                                                    f
+                                                                                ) =>
+                                                                                    f.productGroupId ===
+                                                                                    e
+                                                                            )
+                                                                        ) {
+                                                                            setFieldValue(
+                                                                                `productSalesOrder[${index}].productGroupId`,
+                                                                                e
+                                                                            )
+                                                                            setI(
+                                                                                0
+                                                                            )
+                                                                            setProductGroup(
+                                                                                e
+                                                                            )
+                                                                            setI(
+                                                                                index
+                                                                            )
+                                                                        } else {
+                                                                            showToast(
+                                                                                'error',
+                                                                                'Product group Already Added!'
+                                                                            )
+                                                                        }
+                                                                    }}
+                                                                    options={
+                                                                        dropdownOptions.productGroupOptions
+                                                                    }
+                                                                    label="Product Group"
+                                                                />
+                                                            </div>
 
-                                                {/* Rate */}
-                                                <div className="flex-1">
-                                                    <ATMTextField
-                                                        type="number"
-                                                        disabled={true}
-                                                        name={`productSalesOrder.rate`}
-                                                        value={
-                                                            values?.productSalesOrder?.rate?.toString() ||
-                                                            ''
-                                                        }
-                                                        label="Rate"
-                                                        placeholder="Rate"
-                                                        onChange={(e) =>
-                                                            handleSetFieldValue(
-                                                                `productSalesOrder.rate`,
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                        className="mt-0 rounded"
-                                                    />
-                                                </div>
+                                                            {/* Rate */}
+                                                            <div className="flex-1">
+                                                                <ATMTextField
+                                                                    type="number"
+                                                                    disabled={
+                                                                        true
+                                                                    }
+                                                                    name={`productSalesOrder[${index}].rate`}
+                                                                    value={rate}
+                                                                    label="Rate"
+                                                                    placeholder="Rate"
+                                                                    onChange={(
+                                                                        e
+                                                                    ) => {}}
+                                                                    className="mt-0 rounded"
+                                                                />
+                                                            </div>
 
-                                                {/* Quantity */}
-                                                <div className="flex-1 ">
-                                                    <ATMTextField
-                                                        type="number"
-                                                        min={0}
-                                                        name={`productSalesOrder.quantity`}
-                                                        value={
-                                                            values?.productSalesOrder?.quantity?.toString() ||
-                                                            ''
-                                                        }
-                                                        label="Quantity"
-                                                        placeholder="Quantity"
-                                                        onChange={(e) => {
-                                                            handleSetFieldValue(
-                                                                `productSalesOrder.quantity`,
-                                                                e.target.value
-                                                            )
-                                                        }}
-                                                        className="mt-0 rounded"
-                                                    />
-                                                </div>
-                                            </div>
+                                                            {/* Quantity */}
+                                                            <div className="flex-1">
+                                                                <ATMTextField
+                                                                    type="number"
+                                                                    min={0}
+                                                                    name={`productSalesOrder[${index}].quantity`}
+                                                                    value={
+                                                                        quantity ===
+                                                                        0
+                                                                            ? ''
+                                                                            : quantity?.toString()
+                                                                    }
+                                                                    label="Quantity"
+                                                                    placeholder="Quantity"
+                                                                    onChange={(
+                                                                        e
+                                                                    ) => {
+                                                                        handleSetFieldValue(
+                                                                            `productSalesOrder[${index}].quantity`,
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        )
+                                                                    }}
+                                                                    className="mt-0 rounded"
+                                                                />
+                                                            </div>
+
+                                                            {/* BUTTON - Delete */}
+                                                            {values
+                                                                .productSalesOrder
+                                                                ?.length >
+                                                                1 && (
+                                                                <div>
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => {
+                                                                            remove(
+                                                                                index
+                                                                            )
+                                                                        }}
+                                                                        className="p-2 bg-red-500 text-white rounded"
+                                                                    >
+                                                                        <MdDeleteOutline className="text-2xl" />
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+
+                                        {/* BUTTON - Add More Product */}
+                                        <div className="flex justify-self-start py-9">
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    push({
+                                                        productGroupId: '',
+                                                        rate: null,
+                                                        quantity: null,
+                                                    })
+                                                }
+                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                            >
+                                                <HiPlus size="20" /> Add More
+                                            </button>
                                         </div>
                                     </>
                                 )
