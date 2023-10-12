@@ -111,7 +111,7 @@ const OutwardSampleTabs = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                        extraClasses="overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>

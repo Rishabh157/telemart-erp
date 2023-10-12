@@ -18,6 +18,7 @@ const tagTypes = [
     'dealerSchemePincode',
     'companyBranch',
     'rtv-master',
+    'wts-master',
 ]
 
 export const apiSlice = createApi({

@@ -21,7 +21,7 @@ import {
 } from 'react-icons/md'
 import { IoCallOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
-import { BiBox, BiPurchaseTagAlt } from 'react-icons/bi'
+import { BiBox, BiPurchaseTagAlt, BiTestTube } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 import { UserModuleNameTypes } from './models/userAccess/UserAccess.model'
@@ -114,6 +114,12 @@ export const navigation: NavItemType[] = [
         label: 'Warehouse Transfer',
         icon: TbBuildingWarehouse,
         path: '/warehouse-transfer',
+        name: UserModuleNameTypes.WarehouseTransfer,
+    },
+    {
+        label: 'Sample Transfer',
+        icon: BiTestTube,
+        path: '/warehouse-to-sample',
         name: UserModuleNameTypes.WarehouseTransfer,
     },
     {

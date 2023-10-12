@@ -232,7 +232,6 @@ import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersR
 import AuthHOC from './AuthHOC'
 import ActionAuthHOC from './ActionAuthHoc'
 import OutwardRTVTabsListingWrapper from './pages/inventories/outward/Rtv/list/OutwardRTVTabsListingWrapper'
-import OutwardWarehouseTabsListingWrapper from './pages/inventories/outward/Warehouse/OutwardWarehouseTabsListingWrapper'
 import OutwardSampleTabsListingWrapper from './pages/inventories/outward/Sample/OutwardSampleTabsListingWrapper'
 import OutwardEcomTabsListingWrapper from './pages/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
 import OutwardReplacementTabsListingWrapper from './pages/inventories/outward/Replacement/OutwardReplacementTabsListingWrapper'
@@ -251,11 +250,13 @@ import DispatchedInvoice from './pages/inventories/outward/Dealer/components/Dis
 import RTVListingWrapper from './pages/returnToVendor/list/RTVListingWrapper'
 import AddRTVendorWrapper from './pages/returnToVendor/add/AddRTVendorWrapper'
 import EditRTVendorWrapper from './pages/returnToVendor/edit/EditRTVendorWrapper'
-import AddWarehouseTransfer from './pages/transferToWarehouse/add/AddWarehouseTransfer'
 import EditWarehouseTransferWrapper from './pages/transferToWarehouse/edit/EditWarehouseTransferWrapper'
 import WarehouseTransferListingWrapper from './pages/transferToWarehouse/list/WarehouseTransferListingWrapper'
 import AddWarehouseTransferWrapper from './pages/transferToWarehouse/add/AddWarehouseTransferWrapper'
 import OutwardWarehouseTransferListingWrapper from './pages/inventories/outward/Warehouse/list/OutwardWarehouseTransferListingWrapper'
+import WarehouseToSampleListingWrapper from './pages/warehouseToSample/list/WarehouseToSampleListingWrapper'
+import AddWarehouseToSampleWrapper from './pages/warehouseToSample/add/AddWarehouseToSampleWrapper'
+import EditWarehouseToSampleWrapper from './pages/warehouseToSample/edit/EditWarehouseToSampleWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1208,6 +1209,41 @@ const PageRoutes = () => {
                                 actionName={
                                     UserModuleWarehouseTabsTypes.outwardInventoriesRTV
                                 }
+                                isRedirect
+                            />
+                        }
+                    />
+
+                    {/* WAREHOUSE TO SAMPLE */}
+                    <Route
+                        path="/warehouse-to-sample"
+                        element={
+                            <ActionAuthHOC
+                                component={<WarehouseToSampleListingWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleTabsTypes.vendorLedger}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="/warehouse-to-sample/add"
+                        element={
+                            <ActionAuthHOC
+                                component={<AddWarehouseToSampleWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleTabsTypes.vendorLedger}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="/warehouse-to-sample/edit/:id"
+                        element={
+                            <ActionAuthHOC
+                                component={<EditWarehouseToSampleWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleTabsTypes.vendorLedger}
                                 isRedirect
                             />
                         }

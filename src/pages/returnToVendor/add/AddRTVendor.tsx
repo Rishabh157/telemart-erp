@@ -32,6 +32,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 // import { useParams } from 'react-router-dom'
 import { showToast } from 'src/utils'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Types --|
 type Props = {
@@ -180,19 +181,17 @@ const AddRTVendor = ({
                                     label="Warehouse"
                                 />
                             </div>
-                            <div>
-                                <ATMTextField
-                                    name="remark"
-                                    value={values?.remark}
+                            <div className="-mt-3">
+                                <ATMTextArea
                                     label="Remark"
+                                    name="remark"
                                     placeholder="enter remark"
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'remark',
-                                            e.target.value
-                                        )
-                                    }
-                                    className="mt-0 rounded"
+                                    value={values.remark}
+                                    minRows={1}
+                                    className="rounded"
+                                    onChange={(e) => {
+                                        handleSetFieldValue('remark', e)
+                                    }}
                                 />
                             </div>
                         </div>

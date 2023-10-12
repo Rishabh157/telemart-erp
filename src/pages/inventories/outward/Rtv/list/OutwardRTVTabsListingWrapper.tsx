@@ -16,7 +16,6 @@ import { IoRemoveCircle } from 'react-icons/io5'
 // |-- Internal Dependencies --|
 // import { useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { SoApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
@@ -36,12 +35,13 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/saleOrderSlice'
+} from 'src/redux/slices/returnToVendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    useDispatchDealerBarcodeMutation,
+    // useDispatchReturnToVendorBarcodeMutation,
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
 } from 'src/services/BarcodeService'
+import { useDispatchReturnToVendorBarcodeMutation } from 'src/services/ReturnToVendorService'
 import { useGetPaginationReturnToVendorByGroupQuery } from 'src/services/ReturnToVendorService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import OutwardRTVTabs from './OutwardRTVTabs'
@@ -71,21 +71,68 @@ type BarcodeListResponseType = {
     updatedAt: string
 }
 
+type OutwardRTVListingResponseTypes = {
+    _id: string
+    warehouseLabel: string
+    vendorLabel: string
+    firstApproved: boolean
+    firstApprovedActionBy: string
+    firstApprovedAt: string
+    secondApprovedActionBy: string
+    secondApprovedAt: string
+    secondApproved: boolean
+    createdAt: string
+    updatedAt: string
+    documents: {
+        _id: string
+        rtvNumber: string
+        vendorId: string
+        warehouseId: string
+        firstApprovedById: string
+        firstApproved: boolean
+        firstApprovedActionBy: string
+        firstApprovedAt: string
+        secondApprovedById: string
+        secondApproved: boolean
+        secondApprovedActionBy: string
+        secondApprovedAt: string
+        productSalesOrder: {
+            productGroupId: string
+            rate: number
+            quantity: number
+            _id: string
+            groupName: string
+        }
+        remark: string
+        status: string
+        companyId: string
+        isDeleted: boolean
+        isActive: boolean
+        __v: number
+        createdAt: string
+        updatedAt: string
+        vendorLabel: string
+        warehouseLabel: string
+    }[]
+}
+
 const OutwardRTVTabsListingWrapper = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
-        useState<SoApprovedGroupListResponseType | null>(null)
+        useState<OutwardRTVListingResponseTypes | null>(null)
     // const params = useParams()
     const dispatch = useDispatch<AppDispatch>()
     // const dealerId = params.dealerId
-    const salesOrderState: any = useSelector(
-        (state: RootState) => state.saleOrder
+    const returnToVendorState: any = useSelector(
+        (state: RootState) => state.returnToVendor
     )
-    const { page, rowsPerPage, searchValue, items } = salesOrderState
-    const { customized } = useSelector((state: RootState) => state?.auth)
+    const { page, rowsPerPage, searchValue, items } = returnToVendorState
+    const { customized, userData } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     const {
         data: soData,
@@ -101,6 +148,10 @@ const OutwardRTVTabsListingWrapper = () => {
             //     fieldName: 'dealerId',
             //     value: dealerId,
             // },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: 'firstApproved',
                 value: true,
@@ -118,7 +169,7 @@ const OutwardRTVTabsListingWrapper = () => {
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
-        useDispatchDealerBarcodeMutation()
+        useDispatchReturnToVendorBarcodeMutation()
 
     useEffect(() => {
         if (!soIsFetching && !soIsLoading) {
@@ -132,20 +183,20 @@ const OutwardRTVTabsListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'soNumber',
-            headerName: 'So Number',
+            field: 'rtvNumber',
+            headerName: 'RTV Number',
             flex: 'flex-[0.6_0.6_0%]',
-            renderCell: (row: SoApprovedGroupListResponseType) => (
+            renderCell: (row: OutwardRTVListingResponseTypes) => (
                 <span> {row?._id} </span>
             ),
         },
         {
-            field: 'dealerLabel',
-            headerName: 'Dealer Name',
+            field: 'vendorLabel',
+            headerName: 'Vendor Name',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => (
-                <span> {row?.dealerName} </span>
+            renderCell: (row: OutwardRTVListingResponseTypes) => (
+                <span> {row?.vendorLabel} </span>
             ),
         },
         {
@@ -153,7 +204,7 @@ const OutwardRTVTabsListingWrapper = () => {
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => {
+            renderCell: (row: OutwardRTVListingResponseTypes) => {
                 return (
                     <div className="w-full">
                         {row?.documents?.map((item) => {
@@ -177,7 +228,7 @@ const OutwardRTVTabsListingWrapper = () => {
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => {
+            renderCell: (row: OutwardRTVListingResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
             },
         },
@@ -186,7 +237,7 @@ const OutwardRTVTabsListingWrapper = () => {
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => {
+            renderCell: (row: OutwardRTVListingResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
@@ -195,7 +246,7 @@ const OutwardRTVTabsListingWrapper = () => {
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => (
+            renderCell: (row: OutwardRTVListingResponseTypes) => (
                 <span>{row?.documents[0]?.status}</span>
             ),
         },
@@ -203,7 +254,7 @@ const OutwardRTVTabsListingWrapper = () => {
             field: 'actions',
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: SoApprovedGroupListResponseType) =>
+            renderCell: (row: OutwardRTVListingResponseTypes) =>
                 row?.documents?.find((ele) => ele?.status === 'COMPLETE') ? (
                     'Dispatched'
                 ) : (
@@ -334,7 +385,7 @@ const OutwardRTVTabsListingWrapper = () => {
         )
         barcodeDispatch({
             barcodedata: [...filterValue],
-            soId: [...(soid as string[])] as string[],
+            rtvId: [...(soid as string[])] as string[],
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -391,10 +442,10 @@ const OutwardRTVTabsListingWrapper = () => {
 
                             <div>
                                 <div className="flex gap-1 items-center">
-                                    <div className="font-bold">Dealer Name</div>
+                                    <div className="font-bold">Vendor Name</div>
                                     {':'}
                                     <div className="">
-                                        {selectedItemsTobeDispatch?.dealerName}
+                                        {selectedItemsTobeDispatch?.vendorLabel}
                                     </div>
                                 </div>
                             </div>

@@ -42,16 +42,6 @@ type UpdateReturnToVendorApproval = {
 
 export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        //***** GET PAGINATION DATA *****/
-        // getPaginationSaleOrder: builder.query({
-        //     providesTags: ['rtv-master'],
-        //     query: (body: PaginationType) => ({
-        //         url: 'rtv-master/',
-        //         method: 'POST',
-        //         body,
-        //     }),
-        // }),
-
         //***** GET PAGINATION DATA WITH PRODUCT GROUP *****/
         getPaginationReturnToVendorByGroup: builder.query({
             providesTags: ['rtv-master'],
@@ -59,15 +49,6 @@ export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
                 url: '/rtv-master/groupby',
                 method: 'POST',
                 body,
-            }),
-        }),
-
-        //***** GET SALESORDER BY DEALER-ID DATA *****/
-        getSalesOrderByDealerId: builder.query({
-            providesTags: ['rtv-master'],
-            query: (dealerId) => ({
-                url: `/sales-order/get-by-dealer/${dealerId}`,
-                method: 'GET',
             }),
         }),
 
@@ -91,13 +72,22 @@ export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Update *****/
+        //***** Update Aproval *****/
         updateReturnToVendorApproval: builder.mutation({
             invalidatesTags: ['rtv-master'],
             query: ({ body, id }: UpdateReturnToVendorApproval) => ({
                 url: `/rtv-master/approval-level/${id}`,
                 method: 'PUT',
                 body,
+            }),
+        }),
+
+        // **** GET BY ID
+        getReturnToOrderById: builder.query({
+            providesTags: ['rtv-master'],
+            query: (id) => ({
+                url: `/rtv-master/${id}`,
+                method: 'GET',
             }),
         }),
 
@@ -110,24 +100,32 @@ export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // **** GET BY ID
-        getReturnToOrderById: builder.query({
-            providesTags: ['rtv-master'],
-            query: (id) => ({
-                url: `/rtv-master/${id}`,
-                method: 'GET',
+        //*****  DISPATCHED BARCODE *****/
+        // getAllBarcodeOfRTVOutWardDispatch: builder.mutation({
+        //     invalidatesTags: ['Barcode'],
+        //     query: ({ id, groupId }: { id: string; groupId: string }) => ({
+        //         url: `/bar-code/barcode/${id}/productgroupid/${groupId}`,
+        //         method: 'GET',
+        //         // body,
+        //     }),
+        // }),
+        dispatchReturnToVendorBarcode: builder.mutation({
+            invalidatesTags: ['rtv-master'],
+            query: (body: any) => ({
+                url: `bar-code/rtv/outwardinventory`,
+                method: 'PUT',
+                body,
             }),
         }),
     }),
 })
 
 export const {
-    // useGetPaginationSaleOrderQuery,
     useGetPaginationReturnToVendorByGroupQuery, // get group by data
-    useGetSalesOrderByDealerIdQuery,
     useAddReturnToVendorMutation, // add return to vendor
     useUpdateReturnToVendorOrderMutation, // update or edit for return to vendor
     useUpdateReturnToVendorApprovalMutation, // first and second level approveed
     useGetReturnToOrderByIdQuery, // find by rtv no.
     useDeleteReturnToVendorOrderMutation, // delete
+    useDispatchReturnToVendorBarcodeMutation, // dispatch
 } = ReturnToVendorServiceApi
