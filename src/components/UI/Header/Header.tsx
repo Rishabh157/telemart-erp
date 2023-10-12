@@ -69,6 +69,7 @@ const Header = () => {
             mobile: userData?.mobile,
             userDepartment: 'ADMIN',
             userRole: userData?.userRole,
+            branchId: userData?.branchId
         }
         updaeCompany({ body: update, id: userData?.userId || '' }).then(
             (updateCompanyInfo: any) => {
@@ -83,6 +84,7 @@ const Header = () => {
                         companyId,
                         userType,
                         userRole,
+                        branchId,
                     } = updateCompanyInfo?.data?.data
                     let userData = {
                         userId: _id,
@@ -95,6 +97,7 @@ const Header = () => {
                         companyId: companyId,
                         role: userType,
                         userRole: userRole,
+                        branchId: branchId,
                     }
                     localStorage.setItem('userData', JSON.stringify(userData))
                     dispatch(setUserData(userData))

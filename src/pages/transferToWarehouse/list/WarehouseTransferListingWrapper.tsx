@@ -66,7 +66,12 @@ const WarehouseTransferListingWrapper = () => {
             searchValue: searchValue,
             params: ['wtNumber'],
             page: page,
-            filterBy: [],
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,

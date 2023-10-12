@@ -153,6 +153,7 @@ export enum UserModuleNameTypes {
     disposition = 'DISPOSITION',
     locations = 'LOCATIONS',
     WarehouseTransfer='WAREHOUSETRANSFER',
+    warehouseToComapny='WAREHOUSETOCOMPANY'
 }
 
 //  export const myMove = {

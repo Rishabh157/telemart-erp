@@ -170,7 +170,7 @@ const EditWarehouseTransfer = ({
                                 placeholder="WT Number"
                                 onChange={(e) =>
                                     handleSetFieldValue(
-                                        'soNumber',
+                                        'wtNumber',
                                         e.target.value
                                     )
                                 }
@@ -229,7 +229,7 @@ const EditWarehouseTransfer = ({
                     {/*  Sales Order  */}
                     <div className="px-3">
                         <div className=" text-lg pb-2 font-medium text-primary-main">
-                            Update ProductGroup to sale order
+                            Product details 
                         </div>
 
                         <FieldArray name="productSalesOrder">
