@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /// ==============================================
 // Filename:EditRTVendorWrapper.tsx
 // Type: Edit Component
@@ -18,80 +19,45 @@ import { useNavigate, useParams } from 'react-router-dom'
 import EditRTVendor from './EditRTVendor'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { showToast } from 'src/utils'
-import { useGetAllDealersQuery } from 'src/services/DealerServices'
 import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import {
-    useGetSalesOrderByIdQuery,
-    useUpdateSalesOrderMutation,
-} from 'src/services/SalesOrderService'
+    useGetReturnToOrderByIdQuery,
+    useUpdateReturnToVendorOrderMutation,
+} from 'src/services/ReturnToVendorService'
 
 // |-- Redux --|
-import { setAllItems } from 'src/redux/slices/dealerSlice'
+import { setAllItems as setAllVendor } from 'src/redux/slices/vendorSlice'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/returnToVendorSlice'
+import { useGetVendorsQuery } from 'src/services/VendorServices'
 
 // |-- Types --|
 type Props = {}
 
-interface ProductSalesOrder {
-    productGroupId: string
-    rate: number
-    quantity: number
-    _id: string
-    groupName: string
-}
-
-interface ProductSalesOrderListResponseType {
-    _id: string
-    soNumber: string
-    dealerId: string
-    dealerWareHouseId: string
-    companyWareHouseId: string
-    dhApprovedById: string | null
-    dhApproved: boolean | null
-    dhApprovedActionBy: string
-    dhApprovedAt: string
-    accApprovedById: string | null
-    accApproved: boolean | null
-    accApprovedActionBy: string
-    accApprovedAt: string
-    productSalesOrder: ProductSalesOrder
-    status: string
-    companyId: string
-    isDeleted: boolean
-    isActive: boolean
-    __v: number
-    createdAt: string
-    updatedAt: string
-    dealerLabel: string
-    companyWarehouseLabel: string
-    warehouseLabel: string
-}
-
 export type FormInitialValues = {
-    soNumber: string | ''
-    dealerId: string | ''
-    dealerWareHouseId: string | ''
-    companyWareHouseId: string | ''
-    companyId: string | ''
+    rtvNo: string
+    vendorId: string
+    warehouseId: string
+    remark: string
+    companyId: string
     productSalesOrder: {
         soId: string
         productGroupId: string
-        rate: number | 0
-        quantity: number | 0
+        rate: number
+        quantity: number
     }[]
     id: string
-    dhApproved: string
-    dhApprovedActionBy: string
-    dhApprovedAt: string
-    accApproved: string
-    accApprovedActionBy: string
-    accApprovedAt: string
-    dhApprovedById: string
-    accApprovedById: string
+    firstApproved: boolean
+    firstApprovedActionBy: string
+    firstApprovedAt: string
+    firstApprovedById: string
+    secondApproved: boolean | null
+    secondApprovedActionBy: string
+    secondApprovedById: string | null
+    secondApprovedAt: string
 }
 
 const EditRTVendorWrapper = (props: Props) => {
@@ -99,31 +65,35 @@ const EditRTVendorWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const [editSaleOrder, setEditSaleOrder] = useState<FormInitialValues>({
-        soNumber: '',
-        dealerId: '',
-        dealerWareHouseId: '',
-        companyWareHouseId: '',
+        rtvNo: '',
+        vendorId: '',
+        warehouseId: '',
+        remark: '',
         productSalesOrder: [],
         companyId: '',
         id: '',
-        dhApproved: '',
-        dhApprovedActionBy: '',
-        dhApprovedAt: '',
-        accApproved: '',
-        accApprovedActionBy: '',
-        accApprovedAt: '',
-        dhApprovedById: '',
-        accApprovedById: '',
+        firstApproved: false,
+        firstApprovedActionBy: '',
+        firstApprovedAt: '',
+        firstApprovedById: '',
+        secondApproved: false,
+        secondApprovedActionBy: '',
+        secondApprovedById: '',
+        secondApprovedAt: '',
     })
     const Id = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [updateSaleOrder] = useUpdateSalesOrderMutation()
+    const [updateReturnToVendor] = useUpdateReturnToVendorOrderMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.saleOrder
+        (state: RootState) => state?.returnToVendor
+    )
+    // all vendor query
+    const { allItems: allVendor }: any = useSelector(
+        (state: RootState) => state.vendor
     )
 
-    const { data, isLoading, isFetching } = useGetSalesOrderByIdQuery(Id)
+    const { data, isLoading, isFetching } = useGetReturnToOrderByIdQuery(Id)
     useEffect(() => {
         if (!isLoading && !isFetching) {
             dispatch(setSelectedItem(data?.data))
@@ -131,11 +101,17 @@ const EditRTVendorWrapper = (props: Props) => {
     }, [dispatch, data, isLoading, isFetching])
 
     const {
-        data: dealerData,
-        isLoading: dealerIsLoading,
-        isFetching: dealerIsFetching,
-    } = useGetAllDealersQuery(userData?.companyId)
-    const { allItems }: any = useSelector((state: RootState) => state?.dealer)
+        data: vendorData,
+        isLoading: vendorIsLoading,
+        isFetching: VendorIsFetching,
+    } = useGetVendorsQuery(userData?.companyId)
+
+    //vendor
+    useEffect(() => {
+        if (!vendorIsLoading && !VendorIsFetching) {
+            dispatch(setAllVendor(vendorData?.data))
+        }
+    }, [vendorData, vendorIsLoading, VendorIsFetching, dispatch])
 
     const {
         data: warehouseData,
@@ -154,10 +130,11 @@ const EditRTVendorWrapper = (props: Props) => {
     const { allItems: productGroupItems }: any = useSelector(
         (state: RootState) => state?.productGroup
     )
-    const dealerOptions = allItems?.map((ele: any) => {
+
+    const vendorOptions = allVendor?.map((ele: any) => {
         return {
-            label: ele.firstName + ' ' + ele.lastName,
-            value: ele._id,
+            label: ele?.companyName,
+            value: ele?._id,
         }
     })
 
@@ -181,19 +158,18 @@ const EditRTVendorWrapper = (props: Props) => {
         }
     })
 
-    //Dealer
-    useEffect(() => {
-        dispatch(setAllItems(dealerData?.data))
-    }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
-
     //Warehouse
     useEffect(() => {
-        dispatch(setAllWareHouse(warehouseData?.data))
+        if (!warehouseIsLoading && !warehouseIsFetching) {
+            dispatch(setAllWareHouse(warehouseData?.data))
+        }
     }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
 
     //ProductGroup
     useEffect(() => {
-        dispatch(setAllProductGroups(productGroupData?.data))
+        if (!productGroupIsLoading && !productGroupIsFetching) {
+            dispatch(setAllProductGroups(productGroupData?.data))
+        }
     }, [
         productGroupData,
         productGroupIsLoading,
@@ -202,47 +178,47 @@ const EditRTVendorWrapper = (props: Props) => {
     ])
 
     const dropdownOptions = {
-        dealerOptions: dealerOptions,
         warehouseOptions: warehouseOptions,
         productGroupOptions: productGroupOptions,
+        vendorOptions: vendorOptions,
     }
 
     useEffect(() => {
         if (selectedItem?.length) {
             let product: FormInitialValues = {
-                soNumber: '',
-                dealerId: '',
-                dealerWareHouseId: '',
-                companyWareHouseId: '',
+                rtvNo: '',
+                remark: '',
+                vendorId: '',
+                warehouseId: '',
                 productSalesOrder: [],
                 companyId: '',
                 id: '',
-                dhApproved: '',
-                dhApprovedActionBy: '',
-                dhApprovedAt: '',
-                accApproved: '',
-                accApprovedActionBy: '',
-                accApprovedAt: '',
-                dhApprovedById: '',
-                accApprovedById: '',
+                firstApproved: false,
+                firstApprovedActionBy: '',
+                firstApprovedAt: '',
+                firstApprovedById: '',
+                secondApproved: false,
+                secondApprovedActionBy: '',
+                secondApprovedById: '',
+                secondApprovedAt: '',
             }
 
             selectedItem?.map((ele: any) => {
                 product = {
                     ...product,
-                    soNumber: ele?.soNumber,
-                    dealerId: ele?.dealerId,
-                    dealerWareHouseId: ele?.dealerWareHouseId,
-                    companyWareHouseId: ele?.companyWareHouseId,
+                    rtvNo: ele?.rtvNumber,
+                    vendorId: ele?.vendorId,
+                    warehouseId: ele?.warehouseId,
+                    remark: ele?.remark,
                     companyId: ele?.companyId,
-                    dhApproved: ele?.dhApproved,
-                    dhApprovedActionBy: ele?.dhApprovedActionBy,
-                    dhApprovedAt: ele?.dhApprovedAt,
-                    accApproved: ele?.accApproved,
-                    accApprovedActionBy: ele?.accApprovedActionBy,
-                    accApprovedAt: ele?.accApprovedAt,
-                    dhApprovedById: ele?.dhApprovedById,
-                    accApprovedById: ele?.accApprovedById,
+                    firstApproved: ele?.firstApproved,
+                    firstApprovedActionBy: ele?.firstApprovedActionBy,
+                    firstApprovedAt: ele?.firstApprovedAt,
+                    firstApprovedById: ele?.firstApprovedById,
+                    secondApproved: ele?.secondApproved,
+                    secondApprovedActionBy: ele?.secondApprovedActionBy,
+                    secondApprovedById: ele?.secondApprovedById,
+                    secondApprovedAt: ele?.secondApprovedAt,
                     productSalesOrder: [
                         ...product.productSalesOrder,
                         {
@@ -255,72 +231,70 @@ const EditRTVendorWrapper = (props: Props) => {
                     ],
                 }
             })
-            console.log('productproductproduct', product)
             setEditSaleOrder(product)
         }
     }, [selectedItem])
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        soNumber: editSaleOrder?.soNumber || '',
-        dealerId: editSaleOrder?.dealerId || '',
-        dealerWareHouseId: editSaleOrder?.dealerWareHouseId || '',
-        companyWareHouseId: editSaleOrder?.companyWareHouseId || '',
+        rtvNo: editSaleOrder?.rtvNo || '',
+        vendorId: editSaleOrder?.vendorId || '',
+        warehouseId: editSaleOrder?.warehouseId || '',
         companyId: editSaleOrder?.companyId || '',
+        remark: editSaleOrder?.remark,
         productSalesOrder: editSaleOrder.productSalesOrder,
         id: '',
-        dhApproved: editSaleOrder.dhApproved,
-        dhApprovedActionBy: editSaleOrder.dhApprovedActionBy,
-        dhApprovedAt: editSaleOrder.dhApprovedAt,
-        accApproved: editSaleOrder.accApproved,
-        accApprovedActionBy: editSaleOrder.accApprovedActionBy,
-        accApprovedAt: editSaleOrder.accApprovedAt,
-        dhApprovedById: editSaleOrder.dhApprovedById,
-        accApprovedById: editSaleOrder.accApprovedById,
+        firstApproved: editSaleOrder.firstApproved,
+        firstApprovedActionBy: editSaleOrder.firstApprovedActionBy,
+        firstApprovedAt: editSaleOrder.firstApprovedAt,
+        firstApprovedById: editSaleOrder.firstApprovedById,
+        secondApproved: editSaleOrder.secondApproved,
+        secondApprovedActionBy: editSaleOrder.secondApprovedActionBy,
+        secondApprovedById: editSaleOrder.secondApprovedById,
+        secondApprovedAt: editSaleOrder.secondApprovedAt,
     }
 
     // Form Validation Schema
-    // const validationSchema = object({
-    //     soNumber: string().required('Sale order number is required'),
-    //     dealerId: string().required('Please select a dealer'),
-    //     dealerWareHouseId: string().required(
-    //         'Please select a dealer warehouse'
-    //     ),
-    //     companyWareHouseId: string().required('Please select a warehouse'),
-    //     productSalesOrder: object().shape({
-    //         productGroupId: string().required('Please select a product name'),
-    //         rate: number()
-    //             .min(0, 'Rate must be greater than 0')
-    //             .required('Please enter rate')
-    //             .nullable(),
-    //         quantity: number()
-    //             .min(0, 'Quantity must be greater than 0')
-    //             .required('Please enter quantity')
-    //             .nullable(),
-    //     }),
-    // })
+    const validationSchema = object({
+        rtvNo: string().required('Sale order number is required'),
+        vendorId: string().required('please select a vendor'),
+        remark: string(),
+        warehouseId: string().required('please select a warehouse'),
+        productSalesOrder: object().shape({
+            productGroupId: string().required('Please select a product name'),
+            rate: number()
+                .min(0, 'Rate must be greater than 0')
+                .required('Please enter rate')
+                .nullable(),
+            quantity: number()
+                .min(0, 'Quantity must be greater than 0')
+                .required('Please enter quantity')
+                .nullable(),
+        }),
+    })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         let newValues = {
-            soNumber: values?.soNumber || '',
-            dealerId: values?.dealerId || '',
-            dealerWareHouseId: values?.dealerWareHouseId || '',
-            companyWareHouseId: values?.companyWareHouseId || '',
+            rtvNumber: values?.rtvNo || '',
+            vendorId: values?.vendorId || '',
+            warehouseId: values?.warehouseId || '',
+            remark: values?.remark,
             companyId: values?.companyId || '',
             productSalesOrder: {},
             id: '',
-            dhApproved: values.dhApproved,
-            dhApprovedActionBy: values.dhApprovedActionBy,
-            dhApprovedAt: values.dhApprovedAt,
-            accApproved: values.accApproved,
-            accApprovedActionBy: values.accApprovedActionBy,
-            accApprovedAt: values.accApprovedAt,
-            dhApprovedById: values.dhApprovedById,
-            accApprovedById: values.accApprovedById,
+            firstApproved: values.firstApproved,
+            firstApprovedActionBy: values.firstApprovedActionBy,
+            firstApprovedAt: values.firstApprovedAt,
+            firstApprovedById: values.firstApprovedById,
+            secondApproved: values.secondApproved,
+            secondApprovedActionBy: values.secondApprovedActionBy,
+            secondApprovedById: values.secondApprovedById,
+            secondApprovedAt: values.secondApprovedAt,
         }
 
         const finalValues: any = []
+
         values.productSalesOrder.map((ele) => {
             finalValues.push({
                 ...newValues,
@@ -332,23 +306,22 @@ const EditRTVendorWrapper = (props: Props) => {
                 },
             })
         })
-        console.log('finalValues', finalValues)
-        //     // const productSalesOrder = {
-        //     //     productGroupId: values.productSalesOrder.productGroupId,
-        //     //     rate: values.productSalesOrder.rate,
-        //     //     quantity: values.productSalesOrder.quantity,
-        //     // }
+
+        console.log('finalValues of return to vendor', finalValues)
 
         setApiStatus(true)
         setTimeout(() => {
-            updateSaleOrder({
+            updateReturnToVendor({
                 body: finalValues,
                 id: Id || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Sale-Order Updated successfully!')
-                        navigate('/sale-order')
+                        showToast(
+                            'success',
+                            'Return To Vendor Updated successfully!'
+                        )
+                        navigate('/return-to-vendor')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -365,7 +338,7 @@ const EditRTVendorWrapper = (props: Props) => {
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
-                // validationSchema={validationSchema}
+                validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {

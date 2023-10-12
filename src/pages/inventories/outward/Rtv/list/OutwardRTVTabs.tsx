@@ -11,20 +11,15 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import {
+    //  useNavigate,
+    useLocation,
+} from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-    UserModuleAddActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
-
 // |-- Redux --|
 import {
     setRowsPerPage,
@@ -38,10 +33,9 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OutwardRTVTabs = ({ columns, rows, setShowDropdown }: Props) => {
+const OutwardRTVTabs = ({ columns, rows }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const dispatch = useDispatch<AppDispatch>()
@@ -50,8 +44,8 @@ const OutwardRTVTabs = ({ columns, rows, setShowDropdown }: Props) => {
     )
     const { pathname } = useLocation()
     const path = pathname.split('/')[1]
-    const isDealerPath = path === 'dealers'
-    const navigate = useNavigate()
+    // const isDealerPath = path === 'dealers'
+    // const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
@@ -69,31 +63,6 @@ const OutwardRTVTabs = ({ columns, rows, setShowDropdown }: Props) => {
                     : 'h-[calc(100vh-55px)]'
             }`}
         >
-            {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Return To Vendor </ATMPageHeading>
-                <ActionAuthHOC
-                    moduleName={
-                        isDealerPath
-                            ? UserModuleNameTypes.dealer
-                            : UserModuleNameTypes.saleOrder
-                    }
-                    actionName={
-                        isDealerPath
-                            ? UserModuleAddActionTypes.dealerSalesOrderAdd
-                            : UserModuleActionTypes.Add
-                    }
-                    component={
-                        <button
-                            onClick={() => navigate('add-rtv')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add Retrun To Vendor
-                        </button>
-                    }
-                />
-            </div>
-
             <div
                 className={` border flex flex-col  rounded bg-white ${
                     path === 'dealers'
@@ -130,7 +99,7 @@ const OutwardRTVTabs = ({ columns, rows, setShowDropdown }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="h-full overflow-auto"
-                        setShowDropdown={setShowDropdown}
+                        // setShowDropdown={setShowDropdown}
                     />
                 </div>
 

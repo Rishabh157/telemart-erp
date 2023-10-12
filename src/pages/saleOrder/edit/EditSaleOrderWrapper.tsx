@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /// ==============================================
 // Filename:EditSaleOrderWrapper.tsx
 // Type: Edit Component

@@ -9,11 +9,11 @@
 import {
     // AddReturnToVendor,
     UpdateSaleOrder,
-    UpdateSOApprovalLevel,
+    // UpdateSOApprovalLevel,
 } from 'src/models/ReturnToVendor.model'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
-import { UpdateSaleOrderApproval } from 'src/models/ReturnToVendor.model'
+// import { UpdateSaleOrderApproval } from 'src/models/ReturnToVendor.model'
 
 // type AddReturnToVendor = {
 //     soNumber: string
@@ -24,23 +24,39 @@ import { UpdateSaleOrderApproval } from 'src/models/ReturnToVendor.model'
 //     productSalesOrder:
 // }
 
+// APPROVEL UPDATE TYPE
+type UpdateReturnToVendorApproval = {
+    body: {
+        type: 'FIRST' | 'SECOND'
+        firstApprovedById?: string
+        firstApproved?: string | boolean
+        firstApprovedActionBy?: string
+        firstApprovedAt?: string
+        secondApprovedById?: string
+        secondApproved?: string | boolean
+        secondApprovedActionBy?: boolean | null
+        secondApprovedAt?: string | null
+    }
+    id: string
+}
+
 export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
-        getPaginationSaleOrder: builder.query({
-            providesTags: ['rtv-master'],
-            query: (body: PaginationType) => ({
-                url: 'rtv-master/sales-order',
-                method: 'POST',
-                body,
-            }),
-        }),
+        // getPaginationSaleOrder: builder.query({
+        //     providesTags: ['rtv-master'],
+        //     query: (body: PaginationType) => ({
+        //         url: 'rtv-master/',
+        //         method: 'POST',
+        //         body,
+        //     }),
+        // }),
 
         //***** GET PAGINATION DATA WITH PRODUCT GROUP *****/
-        getPaginationSaleOrderByGroup: builder.query({
+        getPaginationReturnToVendorByGroup: builder.query({
             providesTags: ['rtv-master'],
             query: (body: PaginationType) => ({
-                url: '/sales-order/groupby',
+                url: '/rtv-master/groupby',
                 method: 'POST',
                 body,
             }),
@@ -66,49 +82,39 @@ export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
         }),
 
         //***** Update *****/
-        updateSalesOrder: builder.mutation({
+        updateReturnToVendorOrder: builder.mutation({
             invalidatesTags: ['rtv-master'],
             query: ({ body, id }: UpdateSaleOrder) => ({
-                url: `/sales-order/update-so`,
+                url: `/rtv-master/update-rtv`,
                 method: 'PUT',
-                body: { soData: [...body] },
+                body: { rtvData: [...body] },
             }),
         }),
 
         //***** Update *****/
-        updateSalesOrderApproval: builder.mutation({
+        updateReturnToVendorApproval: builder.mutation({
             invalidatesTags: ['rtv-master'],
-            query: ({ body, id }: UpdateSaleOrderApproval) => ({
-                url: `/sales-order/approval-level/${id}`,
-                method: 'PUT',
-                body,
-            }),
-        }),
-        //***** Update *****/
-        updateSoLevel: builder.mutation({
-            invalidatesTags: ['rtv-master'],
-            query: ({ body, id }: UpdateSOApprovalLevel) => ({
-                url: `/sales-order/approval-level/${id}`,
-
+            query: ({ body, id }: UpdateReturnToVendorApproval) => ({
+                url: `/rtv-master/approval-level/${id}`,
                 method: 'PUT',
                 body,
             }),
         }),
 
         //***** Delete *****/
-        deleteSalesOrder: builder.mutation({
+        deleteReturnToVendorOrder: builder.mutation({
             invalidatesTags: ['rtv-master'],
             query: (id) => ({
-                url: `/sales-order/${id}`,
+                url: `/rtv-master/${id}`,
                 method: 'DELETE',
             }),
         }),
 
         // **** GET BY ID
-        getSalesOrderById: builder.query({
+        getReturnToOrderById: builder.query({
             providesTags: ['rtv-master'],
             query: (id) => ({
-                url: `/sales-order/${id}`,
+                url: `/rtv-master/${id}`,
                 method: 'GET',
             }),
         }),
@@ -116,13 +122,12 @@ export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetPaginationSaleOrderQuery,
-    useGetPaginationSaleOrderByGroupQuery,
+    // useGetPaginationSaleOrderQuery,
+    useGetPaginationReturnToVendorByGroupQuery, // get group by data
     useGetSalesOrderByDealerIdQuery,
-    useAddReturnToVendorMutation,
-    useUpdateSalesOrderMutation,
-    useUpdateSalesOrderApprovalMutation,
-    useGetSalesOrderByIdQuery,
-    useDeleteSalesOrderMutation,
-    useUpdateSoLevelMutation,
+    useAddReturnToVendorMutation, // add return to vendor
+    useUpdateReturnToVendorOrderMutation, // update or edit for return to vendor
+    useUpdateReturnToVendorApprovalMutation, // first and second level approveed
+    useGetReturnToOrderByIdQuery, // find by rtv no.
+    useDeleteReturnToVendorOrderMutation, // delete
 } = ReturnToVendorServiceApi
