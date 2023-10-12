@@ -67,7 +67,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
             page: page,
             filterBy: [
                 {
-                    fieldName: 'warehouseId',
+                    fieldName: 'fromWarehouseId',
                     value: warehouseId,
                 },
                 {
