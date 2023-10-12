@@ -18,26 +18,26 @@ import { useNavigate } from 'react-router-dom'
 import AddRTVendor from './AddRTVendor'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { showToast } from 'src/utils'
-import { useGetAllDealersQuery } from 'src/services/DealerServices'
 import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { useAddReturnToVendorMutation } from 'src/services/ReturnToVendorService'
 
 // |-- Redux--|
-import { setAllItems } from 'src/redux/slices/dealerSlice'
 import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
 import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
+import { setAllItems as setAllVendor } from 'src/redux/slices/vendorSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetVendorsQuery } from 'src/services/VendorServices'
 
 // |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
-    soNumber: string
-    dealerId: string
-    dealerWareHouseId: string
-    companyWareHouseId: string
+    rtvNo: string
+    vendorId: string
+    remark: string
+    warehouseId: string
     companyId: string
     productSalesOrder: {
         productGroupId: string
@@ -50,16 +50,10 @@ const AddRTVendorWrapper = (props: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    const { userData }: any = useSelector((state: RootState) => state?.auth)
     const [addReturnToVendor] = useAddReturnToVendorMutation()
 
-    const {
-        data: dealerData,
-        isLoading: dealerIsLoading,
-        isFetching: dealerIsFetching,
-    } = useGetAllDealersQuery(userData?.companyId)
-    const { allItems }: any = useSelector((state: RootState) => state?.dealer)
-
+    // all warehouse query
     const {
         data: warehouseData,
         isLoading: warehouseIsLoading,
@@ -68,6 +62,23 @@ const AddRTVendorWrapper = (props: Props) => {
     const { allItems: warehouseItems }: any = useSelector(
         (state: RootState) => state?.warehouse
     )
+    // all vendor query
+    const { allItems: allVendor }: any = useSelector(
+        (state: RootState) => state.vendor
+    )
+
+    const {
+        data: vendorData,
+        isLoading: vendorIsLoading,
+        isFetching: VendorIsFetching,
+    } = useGetVendorsQuery(userData?.companyId)
+
+    //vendor
+    useEffect(() => {
+        if (!vendorIsLoading && !VendorIsFetching) {
+            dispatch(setAllVendor(vendorData?.data))
+        }
+    }, [vendorData, vendorIsLoading, VendorIsFetching, dispatch])
 
     const {
         data: productGroupData,
@@ -77,13 +88,6 @@ const AddRTVendorWrapper = (props: Props) => {
     const { allItems: productGroupItems }: any = useSelector(
         (state: RootState) => state?.productGroup
     )
-
-    const dealerOptions = allItems?.map((ele: any) => {
-        return {
-            label: ele.firstName + ' ' + ele.lastName,
-            value: ele._id,
-        }
-    })
 
     const warehouseOptions = warehouseItems?.map((ele: any) => {
         return {
@@ -106,10 +110,18 @@ const AddRTVendorWrapper = (props: Props) => {
         }
     })
 
-    //Dealer
-    useEffect(() => {
-        dispatch(setAllItems(dealerData?.data))
-    }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
+    const vendorOptions = allVendor?.map((ele: any) => {
+        return {
+            label: ele?.companyName,
+            value: ele?._id,
+        }
+    })
+
+    const dropdownOptions = {
+        warehouseOptions: warehouseOptions,
+        productGroupOptions: productGroupOptions,
+        vendorOptions: vendorOptions,
+    }
 
     //Warehouse
     useEffect(() => {
@@ -126,18 +138,13 @@ const AddRTVendorWrapper = (props: Props) => {
         dispatch,
     ])
 
-    const dropdownOptions = {
-        dealerOptions: dealerOptions,
-        warehouseOptions: warehouseOptions,
-        productGroupOptions: productGroupOptions,
-    }
-
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        soNumber: '',
-        dealerId: '',
-        dealerWareHouseId: '',
-        companyWareHouseId: '',
+        rtvNo: '',
+        vendorId: '',
+        warehouseId: '',
+        remark: '',
+        companyId: '',
         productSalesOrder: [
             {
                 productGroupId: '',
@@ -145,17 +152,14 @@ const AddRTVendorWrapper = (props: Props) => {
                 quantity: 0,
             },
         ],
-        companyId: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        soNumber: string().required('Sale order number is required'),
-        dealerId: string().required('Please select a dealer'),
-        dealerWareHouseId: string().required(
-            'Please select a  Dealer Warehouse'
-        ),
-        companyWareHouseId: string().required('Please select a warehouse'),
+        rtvNo: string().required('return to vendor number is required'),
+        remark: string(),
+        vendorId: string().required('please select a vendor'),
+        warehouseId: string().required('please select warehouse'),
         productSalesOrder: array().of(
             object().shape({
                 productGroupId: string().required(
@@ -177,11 +181,11 @@ const AddRTVendorWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addReturnToVendor({
-                soNumber: values.soNumber,
-                dealerId: values.dealerId,
-                dealerWareHouseId: values.dealerWareHouseId,
-                companyWareHouseId: values.companyWareHouseId,
-                productSalesOrder: values.productSalesOrder,
+                rtvNumber: values?.rtvNo,
+                remark: values?.remark,
+                vendorId: values?.vendorId,
+                warehouseId: values?.warehouseId,
+                productSalesOrder: values?.productSalesOrder,
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
@@ -190,7 +194,7 @@ const AddRTVendorWrapper = (props: Props) => {
                             'success',
                             'Return To Vendor Added Successfully!'
                         )
-                        navigate('/sale-order')
+                        navigate('/return-to-vendor')
                     } else {
                         showToast('error', res?.data?.message)
                     }

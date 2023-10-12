@@ -15,22 +15,21 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import RTVendor from './RTVendor'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { GroupBySaleOrderResponseTypes } from 'src/models/SaleOrder.model'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
 import {
-    useDeleteSalesOrderMutation,
-    useGetPaginationSaleOrderByGroupQuery,
-    useUpdateSalesOrderApprovalMutation,
-} from 'src/services/SalesOrderService'
+    useGetPaginationReturnToVendorByGroupQuery,
+    useUpdateReturnToVendorApprovalMutation,
+    useDeleteReturnToVendorOrderMutation,
+} from 'src/services/ReturnToVendorService'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import RTVendor from './RTVendor'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 // |-- Redux --|
@@ -40,29 +39,77 @@ import {
     setTotalItems,
 } from 'src/redux/slices/returnToVendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { SoApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
+
+interface ProductSalesOrder {
+    productGroupId: string
+    rate: number
+    quantity: number
+    _id: string
+    groupName: string
+}
+
+interface ReturnToVendorDocument {
+    _id: string
+    rtvNumber: string
+    vendorId: string
+    warehouseId: string
+    firstApprovedById: string | null
+    firstApproved: boolean | null
+    firstApprovedActionBy: string
+    firstApprovedAt: string
+    secondApprovedById: string | null
+    secondApproved: boolean | null
+    secondApprovedActionBy: string
+    secondApprovedAt: string
+    productSalesOrder: ProductSalesOrder
+    remark: string
+    status: string
+    companyId: string
+    isDeleted: boolean
+    isActive: boolean
+    __v: number
+    createdAt: string
+    updatedAt: string
+    vendorLabel: string
+    warehouseLabel: string
+}
+
+interface ReturnToVendorListResponse {
+    _id: string
+    warehouseLabel: string
+    vendorLabel: string
+    firstApproved: boolean | null
+    firstApprovedActionBy: string
+    firstApprovedAt: string
+    secondApprovedActionBy: string
+    secondApprovedAt: string
+    secondApproved: boolean | null
+    createdAt: string
+    updatedAt: string
+    documents: ReturnToVendorDocument[]
+}
 
 const RTVListingWrapper = () => {
-    const salesOrderState: any = useSelector(
+    const returnToVendorState: any = useSelector(
         (state: RootState) => state.returnToVendor
     )
     const dispatch = useDispatch<AppDispatch>()
-    const { page, rowsPerPage, searchValue, items } = salesOrderState
+    const { page, rowsPerPage, searchValue, items } = returnToVendorState
     const navigate = useNavigate()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const [deleteSaleOrder] = useDeleteSalesOrderMutation()
-    const [updateSalesOrder] = useUpdateSalesOrderApprovalMutation()
+    const [deleteReturnToVendor] = useDeleteReturnToVendorOrderMutation()
+    const [updateReturnToVendor] = useUpdateReturnToVendorApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
 
     const { data, isFetching, isLoading } =
-        useGetPaginationSaleOrderByGroupQuery({
+        useGetPaginationReturnToVendorByGroupQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['soNumber', 'dealerLabel'],
+            params: ['rtvNumber'],
             page: page,
             filterBy: [],
             dateFilter: {},
@@ -71,6 +118,7 @@ const RTVListingWrapper = () => {
             isPaginationRequired: true,
         })
 
+    // listing of return to vendor
     useEffect(() => {
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false))
@@ -83,10 +131,10 @@ const RTVListingWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteSaleOrder(currentId).then((res) => {
+        deleteReturnToVendor(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Sale Order deleted successfully!')
+                    showToast('success', 'Order deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -99,15 +147,19 @@ const RTVListingWrapper = () => {
         })
     }
 
-    const handleDHComplete = (_id: string, value: boolean, message: string) => {
+    const handleFirstLevelomplete = (
+        _id: string,
+        value: boolean,
+        message: string
+    ) => {
         const currentDate = new Date().toLocaleDateString('en-GB')
-        updateSalesOrder({
+        updateReturnToVendor({
             body: {
-                dhApproved: value,
-                type: 'DH',
-                dhApprovedById: userData?.userId,
-                dhApprovedAt: currentDate,
-                dhApprovedActionBy: userData?.userName,
+                firstApprovedById: userData?.userId,
+                firstApproved: value,
+                firstApprovedActionBy: userData?.userName,
+                type: 'FIRST',
+                firstApprovedAt: currentDate,
             },
             id: _id,
         }).then((res: any) => {
@@ -115,7 +167,7 @@ const RTVListingWrapper = () => {
                 if (res?.data?.status) {
                     showToast(
                         'success',
-                        `Distributor Head ${message} is successfully!`
+                        `First Level ${message} is successfully!`
                     )
                 } else {
                     showToast('error', res?.data?.message)
@@ -126,25 +178,28 @@ const RTVListingWrapper = () => {
         })
     }
 
-    const handleAccComplete = (
+    const handleSecondLevelComplete = (
         _id: string,
         value: boolean,
         message: string
     ) => {
         const currentDate = new Date().toLocaleDateString('en-GB')
-        updateSalesOrder({
+        updateReturnToVendor({
             body: {
-                accApproved: value,
-                type: 'ACC',
-                accApprovedById: userData?.userId,
-                accApprovedAt: currentDate,
-                accApprovedActionBy: userData?.userName,
+                secondApprovedById: userData?.userId,
+                secondApproved: value,
+                secondApprovedAt: currentDate,
+                secondApprovedActionBy: userData?.userName,
+                type: 'SECOND',
             },
             id: _id,
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', `Account ${message} is successfully!`)
+                    showToast(
+                        'success',
+                        `Second Level ${message} is successfully!`
+                    )
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -159,17 +214,8 @@ const RTVListingWrapper = () => {
             field: 'rtvNo',
             headerName: 'RTV No.',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: SoApprovedGroupListResponseType) => (
+            renderCell: (row: ReturnToVendorListResponse) => (
                 <span> {row?._id} </span>
-            ),
-        },
-        {
-            field: 'dealerLabel',
-            headerName: 'Dealer Name',
-            flex: 'flex-[0.8_0.8_0%]',
-            align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => (
-                <span> {row?.dealerName} </span>
             ),
         },
         {
@@ -177,7 +223,7 @@ const RTVListingWrapper = () => {
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => {
+            renderCell: (row: ReturnToVendorListResponse) => {
                 return (
                     <div className="w-full">
                         {row?.documents?.map((item) => {
@@ -197,16 +243,25 @@ const RTVListingWrapper = () => {
             },
         },
         {
-            field: 'dhApprovedActionStatus',
-            headerName: 'DH Status',
+            field: 'remark',
+            headerName: 'Remark.',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            renderCell: (row: ReturnToVendorListResponse) => (
+                <span> {row?.documents[0]?.remark} </span>
+            ),
+        },
+        {
+            field: 'firstApproved',
+            headerName: 'First level Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: ReturnToVendorListResponse) => {
                 return (
                     <span>
-                        {row?.dhApproved
+                        {row?.firstApproved
                             ? 'Done'
-                            : row?.dhApproved === null
+                            : row?.firstApproved === null
                             ? 'Pending'
                             : 'Rejected'}{' '}
                     </span>
@@ -215,34 +270,34 @@ const RTVListingWrapper = () => {
         },
         {
             field: 'dhApprovedActionBy',
-            headerName: 'DH Approved By',
+            headerName: 'Level first Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
-                return <span> {row?.dhApprovedActionBy} </span>
+            renderCell: (row: ReturnToVendorListResponse) => {
+                return <span> {row?.firstApprovedActionBy} </span>
             },
         },
         {
-            field: 'dhApprovedAt',
-            headerName: 'DH Approved Date',
+            field: 'firstApprovedAt',
+            headerName: 'First Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
-                return <span> {row?.dhApprovedAt} </span>
+            renderCell: (row: ReturnToVendorListResponse) => {
+                return <span> {row?.firstApprovedAt} </span>
             },
         },
         {
-            field: 'accApprovedActionByStatus',
-            headerName: 'Account Status',
+            field: 'secondApproved',
+            headerName: 'Second Level Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: ReturnToVendorListResponse) => {
                 return (
                     <span>
                         {' '}
-                        {row?.accApproved
+                        {row?.secondApproved
                             ? 'Done'
-                            : row?.accApproved === null
+                            : row?.secondApproved === null
                             ? 'Pending'
                             : 'Rejected'}
                     </span>
@@ -251,20 +306,20 @@ const RTVListingWrapper = () => {
         },
         {
             field: 'accApprovedActionBy',
-            headerName: 'Account Approved By',
+            headerName: 'Level Second Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
-                return <span> {row?.accApprovedActionBy} </span>
+            renderCell: (row: ReturnToVendorListResponse) => {
+                return <span> {row?.secondApprovedActionBy} </span>
             },
         },
         {
             field: 'accApprovedAt',
-            headerName: 'Account Approved Date',
+            headerName: 'Second Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
-                return <span> {row?.accApprovedAt} </span>
+            renderCell: (row: ReturnToVendorListResponse) => {
+                return <span> {row?.secondApprovedAt} </span>
             },
         },
         {
@@ -272,7 +327,7 @@ const RTVListingWrapper = () => {
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: ReturnToVendorListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
             },
         },
@@ -281,41 +336,41 @@ const RTVListingWrapper = () => {
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: ReturnToVendorListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
         {
             field: 'Approved',
-            headerName: 'Approval',
+            headerName: 'Approval Level',
             flex: 'flex-[1.0_1.0_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: ReturnToVendorListResponse) => {
                 return (
                     <div className="">
-                        {!row?.dhApproved ? (
+                        {!row?.firstApproved ? (
                             <Stack direction="row" spacing={1}>
-                                {row?.dhApproved === null ? (
+                                {row?.firstApproved === null ? (
                                     <button
                                         id="btn"
-                                        className=" overflow-hidden cursor-pointer z-0"
+                                        className="overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
                                             showConfirmationDialog({
-                                                title: 'DH Approve',
-                                                text: 'Do you want to Approve ?',
+                                                title: 'First Approve',
+                                                text: 'Do you want to Approve First Level ?',
                                                 showCancelButton: true,
                                                 showDenyButton: true,
                                                 denyButtonText: 'Reject',
                                                 next: (res) => {
                                                     if (res.isConfirmed) {
-                                                        return handleDHComplete(
+                                                        return handleFirstLevelomplete(
                                                             row?._id,
                                                             res?.isConfirmed,
                                                             'Approval'
                                                         )
                                                     }
                                                     if (res.isDenied) {
-                                                        return handleDHComplete(
+                                                        return handleFirstLevelomplete(
                                                             row?._id,
                                                             !res.isDenied,
                                                             'Rejected'
@@ -326,7 +381,7 @@ const RTVListingWrapper = () => {
                                         }}
                                     >
                                         <Chip
-                                            label="DH Pending"
+                                            label="First Pending"
                                             color="warning"
                                             variant="outlined"
                                             size="small"
@@ -340,7 +395,7 @@ const RTVListingWrapper = () => {
                                         className="cursor-pointer"
                                     >
                                         <Chip
-                                            label="DH Rejected"
+                                            label="First Rejected"
                                             color="error"
                                             variant="outlined"
                                             size="small"
@@ -351,27 +406,27 @@ const RTVListingWrapper = () => {
                             </Stack>
                         ) : (
                             <Stack direction="row" spacing={1}>
-                                {row?.accApproved === null ? (
+                                {row?.secondApproved === null ? (
                                     <button
                                         id="btn"
-                                        className=" overflow-hidden cursor-pointer z-0"
+                                        className="overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
                                             showConfirmationDialog({
-                                                title: 'Account Approval',
-                                                text: 'Do you want to Approve ?',
+                                                title: 'Second Approval',
+                                                text: 'Do you want to Approve Second Level ?',
                                                 showCancelButton: true,
                                                 showDenyButton: true,
                                                 denyButtonText: 'Reject',
                                                 next: (res) => {
                                                     if (res.isConfirmed) {
-                                                        return handleAccComplete(
+                                                        return handleSecondLevelComplete(
                                                             row?._id,
                                                             res?.isConfirmed,
                                                             'Approval'
                                                         )
                                                     }
                                                     if (res.isDenied) {
-                                                        return handleAccComplete(
+                                                        return handleSecondLevelComplete(
                                                             row?._id,
                                                             !res.isDenied,
                                                             'Rejected'
@@ -382,21 +437,21 @@ const RTVListingWrapper = () => {
                                         }}
                                     >
                                         <Chip
-                                            label="ACC Pending "
+                                            label="Second Pending "
                                             color="warning"
                                             variant="outlined"
                                             size="small"
                                             clickable={true}
                                         />
                                     </button>
-                                ) : row?.accApproved ? (
+                                ) : row?.secondApproved ? (
                                     <button
                                         id="btn"
                                         disabled={true}
                                         className="cursor-pointer"
                                     >
                                         <Chip
-                                            label="Acc  Approved"
+                                            label="Second Approved"
                                             color="success"
                                             variant="outlined"
                                             size="small"
@@ -410,7 +465,7 @@ const RTVListingWrapper = () => {
                                         className="cursor-pointer"
                                     >
                                         <Chip
-                                            label=" Acc Rejected"
+                                            label="Second Rejected"
                                             color="error"
                                             variant="outlined"
                                             size="small"
@@ -428,36 +483,39 @@ const RTVListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => (
-                <ActionPopup
-                    moduleName={UserModuleNameTypes.saleOrder}
-                    isEdit={true}
-                    isDelete={
-                        row.dhApproved === null && row.accApproved === null
-                            ? true
-                            : false
-                    }
-                    handleEditActionButton={() => {
-                        navigate(`/return-to-vendor/edit/${row?._id}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete SaleOrder',
-                            text: 'Do you want to delete SaleOrder?',
-                            showCancelButton: true,
-                            next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                />
-            ),
+            renderCell: (row: ReturnToVendorListResponse) =>
+                row?.firstApproved === null &&
+                row?.secondApproved === null && (
+                    <ActionPopup
+                        moduleName={UserModuleNameTypes.saleOrder}
+                        isEdit={true}
+                        isDelete={
+                            row.firstApproved === null &&
+                            row.secondApproved === null
+                                ? true
+                                : false
+                        }
+                        handleEditActionButton={() => {
+                            navigate(`/return-to-vendor/edit/${row?._id}`)
+                        }}
+                        handleDeleteActionButton={() => {
+                            showConfirmationDialog({
+                                title: 'Delete RTV',
+                                text: 'Do you want to delete Return To Vendor?',
+                                showCancelButton: true,
+                                next: (res: any) => {
+                                    return res.isConfirmed
+                                        ? handleDelete()
+                                        : setShowDropdown(false)
+                                },
+                            })
+                        }}
+                        handleOnAction={() => {
+                            setShowDropdown(!showDropdown)
+                            setCurrentId(row?._id)
+                        }}
+                    />
+                ),
             align: 'end',
         },
     ]

@@ -2,7 +2,7 @@
 /// ==============================================
 // Filename:AddRTVendor.tsx
 // Type: Add Component
-// Last Updated: JULY 04, 2023
+// Last Updated: JULY 30, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 // import { any } from './AddSaleOrderWrapper'
@@ -30,14 +30,14 @@ import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 import { showToast } from 'src/utils'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<any>
     dropdownOptions: {
-        dealerOptions: SelectOption[]
+        vendorOptions: SelectOption[]
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
@@ -51,7 +51,7 @@ const AddRTVendor = ({
     apiStatus,
     productPriceOptions,
 }: Props) => {
-    const params = useParams()
+    // const params = useParams()
     // Breadcrumbs
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -70,9 +70,6 @@ const AddRTVendor = ({
     const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
 
-    const dealerWarehouse: any = useSelector(
-        (state: RootState) => state.warehouse
-    )
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId = userData?.companyId
 
@@ -91,15 +88,6 @@ const AddRTVendor = ({
             dispatch(setDealerWarehouse(data?.data))
         }
     }, [data, isLoading, isFetching, dealerId, dispatch])
-
-    const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
-        (ele: any) => {
-            return {
-                label: ele.wareHouseName,
-                value: ele._id,
-            }
-        }
-    )
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
@@ -157,15 +145,12 @@ const AddRTVendor = ({
                         <div className="grid grid-cols-4 gap-4">
                             {/* SO Number */}
                             <ATMTextField
-                                name="return to vendor"
-                                value={values.soNumber}
+                                name="rtvNo"
+                                value={values.rtvNo}
                                 label="RTV No."
-                                placeholder="SO Number"
+                                placeholder="enter rtv number"
                                 onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'soNumber',
-                                        e.target.value
-                                    )
+                                    handleSetFieldValue('rtvNo', e.target.value)
                                 }
                                 className="mt-0 rounded"
                             />
@@ -176,41 +161,38 @@ const AddRTVendor = ({
                                     name="vendorId"
                                     value={values.vendorId}
                                     onChange={(e) => {
-                                        handleSetFieldValue('dealerId', e)
+                                        handleSetFieldValue('vendorId', e)
                                         setDealerId(e)
                                     }}
-                                    options={dropdownOptions.dealerOptions}
+                                    options={dropdownOptions?.vendorOptions}
                                     label="Vendor"
                                 />
                             </div>
-                            {/* Dealer Warehouse */}
-                            {/* <div className="-mt-2">
-                                <ATMSelectSearchable
-                                    name="dealerWareHouseId"
-                                    value={values.dealerWareHouseId}
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'dealerWareHouseId',
-                                            e
-                                        )
-                                    }
-                                    options={dealerWarehouseOptions}
-                                    label="Dealer Warehouse"
-                                />
-                            </div> */}
                             {/* Warehouse */}
                             <div className="-mt-2">
                                 <ATMSelectSearchable
-                                    name="companyWareHouseId"
-                                    value={values.companyWareHouseId}
+                                    name="warehouseId"
+                                    value={values?.warehouseId}
                                     onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'companyWareHouseId',
-                                            e
-                                        )
+                                        handleSetFieldValue('warehouseId', e)
                                     }
                                     options={dropdownOptions.warehouseOptions}
                                     label="Warehouse"
+                                />
+                            </div>
+                            <div>
+                                <ATMTextField
+                                    name="remark"
+                                    value={values?.remark}
+                                    label="Remark"
+                                    placeholder="enter remark"
+                                    onChange={(e) =>
+                                        handleSetFieldValue(
+                                            'remark',
+                                            e.target.value
+                                        )
+                                    }
+                                    className="mt-0 rounded"
                                 />
                             </div>
                         </div>
