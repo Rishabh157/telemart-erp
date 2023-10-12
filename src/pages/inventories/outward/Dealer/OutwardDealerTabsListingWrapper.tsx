@@ -78,9 +78,10 @@ const OutwardDealerTabsListingWrapper = () => {
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
         useState<SoApprovedGroupListResponseType | null>(null)
-    const params = useParams()
     const dispatch = useDispatch<AppDispatch>()
-    const dealerId = params.dealerId
+    const params = useParams()
+    const warehouseId = params.id
+    // console.log("dealerId",dealerId)
     const salesOrderState: any = useSelector(
         (state: RootState) => state.saleOrder
     )
@@ -98,8 +99,8 @@ const OutwardDealerTabsListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: 'dealerId',
-                value: dealerId,
+                fieldName: 'warehouseId',
+                value: warehouseId,
             },
             {
                 fieldName: 'dhApproved',

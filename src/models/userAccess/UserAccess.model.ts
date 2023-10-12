@@ -152,6 +152,7 @@ export enum UserModuleNameTypes {
     allWebsite = 'ALL_WEBSITES',
     disposition = 'DISPOSITION',
     locations = 'LOCATIONS',
+    WarehouseTransfer='WAREHOUSETRANSFER',
 }
 
 //  export const myMove = {

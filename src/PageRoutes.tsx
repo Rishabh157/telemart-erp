@@ -251,6 +251,11 @@ import DispatchedInvoice from './pages/inventories/outward/Dealer/components/Dis
 import RTVListingWrapper from './pages/returnToVendor/list/RTVListingWrapper'
 import AddRTVendorWrapper from './pages/returnToVendor/add/AddRTVendorWrapper'
 import EditRTVendorWrapper from './pages/returnToVendor/edit/EditRTVendorWrapper'
+import AddWarehouseTransfer from './pages/transferToWarehouse/add/AddWarehouseTransfer'
+import EditWarehouseTransferWrapper from './pages/transferToWarehouse/edit/EditWarehouseTransferWrapper'
+import WarehouseTransferListingWrapper from './pages/transferToWarehouse/list/WarehouseTransferListingWrapper'
+import AddWarehouseTransferWrapper from './pages/transferToWarehouse/add/AddWarehouseTransferWrapper'
+import OutwardWarehouseTransferListingWrapper from './pages/inventories/outward/Warehouse/list/OutwardWarehouseTransferListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -868,10 +873,10 @@ const PageRoutes = () => {
                                 element={
                                     <ActionAuthHOC
                                         component={
-                                            <OutwardWarehouseTabsListingWrapper />
+                                            <OutwardWarehouseTransferListingWrapper />
                                         }
                                         moduleName={
-                                            UserModuleNameTypes.wareHouse
+                                            UserModuleNameTypes.WarehouseTransfer
                                         }
                                         actionName={
                                             UserModuleWarehouseTabsTypes.outwardInventoriesWareHouse
@@ -1130,6 +1135,43 @@ const PageRoutes = () => {
                         }
                     />
 
+                    <Route
+                        path="/warehouse-transfer"
+                        element={
+                            <AuthHOC
+                                component={<WarehouseTransferListingWrapper />}
+                                moduleName={
+                                    UserModuleNameTypes.WarehouseTransfer
+                                }
+                            />
+                        }
+                    ></Route>
+                    <Route
+                        path="warehouse-transfer/add"
+                        element={
+                            <ActionAuthHOC
+                                component={<AddWarehouseTransferWrapper />}
+                                moduleName={
+                                    UserModuleNameTypes.WarehouseTransfer
+                                }
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="warehouse-transfer/edit/:id"
+                        element={
+                            <ActionAuthHOC
+                                component={<EditWarehouseTransferWrapper />}
+                                moduleName={
+                                    UserModuleNameTypes.WarehouseTransfer
+                                }
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
+                    />
                     {/* RETURN TO VENDOR */}
                     <Route
                         path="/return-to-vendor"

@@ -111,6 +111,12 @@ export const navigation: NavItemType[] = [
     //     name: 'InventoryManagement'
     // },
     {
+        label: 'Warehouse Transfer',
+        icon: TbBuildingWarehouse,
+        path: '/warehouse-transfer',
+        name: UserModuleNameTypes.WarehouseTransfer,
+    },
+    {
         label: 'Inquiry',
         icon: MdCallReceived,
         path: '/inquiry',
