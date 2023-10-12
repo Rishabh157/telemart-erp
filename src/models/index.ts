@@ -120,6 +120,12 @@ export type {
     UpdateSaleOrder,
 } from './SaleOrder.model'
 export type {
+    UpdateWTApprovalLevel,
+    WarehouseTransferListResponse,
+    AddWarehouseTransfer,
+    UpdateWarehouseTransfer,
+} from './WarehouseTransfer.model'
+export type {
     InventoryListResponse,
     AddInventory,
     UpdateInventory,
