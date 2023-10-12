@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:RTVListingWrapper.tsx
+// Filename:OutwardWarehouseToComapnyListingWrapper.tsx
 // Type: List Component
 // Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
@@ -11,216 +11,61 @@ import { useEffect, useState } from 'react'
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import RTVendor from './RTVendor'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { GroupByWarehouseToComapnyResponseTypes } from 'src/models/WarehouseToComapny.model'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
 import {
-    useGetPaginationReturnToVendorByGroupQuery,
-    useUpdateReturnToVendorApprovalMutation,
-    useDeleteReturnToVendorOrderMutation,
-} from 'src/services/ReturnToVendorService'
+    useDeleteWarehouseToComapnyMutation,
+    useGetPaginationWarehouseToComapnyByGroupQuery,
+    useUpdateWarehouseToComapnyApprovalMutation,
+} from 'src/services/WarehouseToComapnyService'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import WarehouseToComapnyListing from './OutwardWarehouseToComapnyListing'
 
 // |-- Redux --|
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/returnToVendorSlice'
+} from 'src/redux/slices/WarehouseToComapnySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-interface ProductSalesOrder {
-    productGroupId: string
-    rate: number
-    quantity: number
-    _id: string
-    groupName: string
-}
-
-interface ReturnToVendorDocument {
-    _id: string
-    rtvNumber: string
-    vendorId: string
-    warehouseId: string
-    firstApprovedById: string | null
-    firstApproved: boolean | null
-    firstApprovedActionBy: string
-    firstApprovedAt: string
-    secondApprovedById: string | null
-    secondApproved: boolean | null
-    secondApprovedActionBy: string
-    secondApprovedAt: string
-    productSalesOrder: ProductSalesOrder
-    remark: string
-    status: string
-    companyId: string
-    isDeleted: boolean
-    isActive: boolean
-    __v: number
-    createdAt: string
-    updatedAt: string
-    vendorLabel: string
-    warehouseLabel: string
-}
-
-interface ReturnToVendorListResponse {
-    _id: string
-    warehouseLabel: string
-    vendorLabel: string
-    firstApproved: boolean | null
-    firstApprovedActionBy: string
-    firstApprovedAt: string
-    secondApprovedActionBy: string
-    secondApprovedAt: string
-    secondApproved: boolean | null
-    createdAt: string
-    updatedAt: string
-    documents: ReturnToVendorDocument[]
-}
-
-const RTVListingWrapper = () => {
-    const returnToVendorState: any = useSelector(
-        (state: RootState) => state.returnToVendor
-    )
-    const dispatch = useDispatch<AppDispatch>()
-    const { page, rowsPerPage, searchValue, items } = returnToVendorState
-    const navigate = useNavigate()
-    const [currentId, setCurrentId] = useState('')
-    const [showDropdown, setShowDropdown] = useState(false)
-    const [deleteReturnToVendor] = useDeleteReturnToVendorOrderMutation()
-    const [updateReturnToVendor] = useUpdateReturnToVendorApprovalMutation()
-    const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
-
-    const { data, isFetching, isLoading } =
-        useGetPaginationReturnToVendorByGroupQuery({
-            limit: rowsPerPage,
-            searchValue: searchValue,
-            params: ['rtvNumber'],
-            page: page,
-            filterBy: [
-                {
-                    fieldName: 'companyId',
-                    value: userData?.companyId as string,
-                },
-            ],
-            dateFilter: {},
-            orderBy: 'createdAt',
-            orderByValue: -1,
-            isPaginationRequired: true,
-        })
-
-    // listing of return to vendor
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [isLoading, isFetching, data, dispatch])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteReturnToVendor(currentId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Order deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
-
-    const handleFirstLevelomplete = (
-        _id: string,
-        value: boolean,
-        message: string
-    ) => {
-        const currentDate = new Date().toLocaleDateString('en-GB')
-        updateReturnToVendor({
-            body: {
-                firstApprovedById: userData?.userId,
-                firstApproved: value,
-                firstApprovedActionBy: userData?.userName,
-                type: 'FIRST',
-                firstApprovedAt: currentDate,
-            },
-            id: _id,
-        }).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        `First Level ${message} is successfully!`
-                    )
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast('error', 'Something went wrong')
-            }
-        })
-    }
-
-    const handleSecondLevelComplete = (
-        _id: string,
-        value: boolean,
-        message: string
-    ) => {
-        const currentDate = new Date().toLocaleDateString('en-GB')
-        updateReturnToVendor({
-            body: {
-                secondApprovedById: userData?.userId,
-                secondApproved: value,
-                secondApprovedAt: currentDate,
-                secondApprovedActionBy: userData?.userName,
-                type: 'SECOND',
-            },
-            id: _id,
-        }).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        `Second Level ${message} is successfully!`
-                    )
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast('error', 'Something went wrong')
-            }
-        })
-    }
-
+const OutwardWarehouseToComapnyListingWrapper = () => {
     const columns: columnTypes[] = [
         {
-            field: 'rtvNo',
-            headerName: 'RTV No.',
+            field: 'wtcNumber',
+            headerName: 'WTC Number',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: ReturnToVendorListResponse) => (
-                <span> {row?._id} </span>
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => (
+                <span> {row?._id} </span> // this is a wtNumber we have to transform in _id
+            ),
+        },
+        {
+            field: 'fromWarehouseLabel',
+            headerName: 'From Warehouse',
+            flex: 'flex-[0.8_0.8_0%]',
+            align: 'center',
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => (
+                <span> {row?.fromWarehouseLabel} </span>
+            ),
+        },
+        {
+            field: 'toWarehouseLabel',
+            headerName: 'To Warehouse',
+            flex: 'flex-[0.8_0.8_0%]',
+            align: 'center',
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => (
+                <span> {row?.toWarehouseLabel} </span>
             ),
         },
         {
@@ -228,7 +73,7 @@ const RTVListingWrapper = () => {
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
                 return (
                     <div className="w-full">
                         {row?.documents?.map((item) => {
@@ -248,37 +93,28 @@ const RTVListingWrapper = () => {
             },
         },
         {
-            field: 'remark',
-            headerName: 'Remark.',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => (
-                <span> {row?.documents[0]?.remark} </span>
-            ),
-        },
-        {
-            field: 'firstApproved',
-            headerName: 'First level Status',
+            field: 'firstApprovedActionStatus',
+            headerName: 'First Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
                 return (
                     <span>
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
                             ? 'Pending'
-                            : 'Rejected'}{' '}
+                            : 'Rejected'}
                     </span>
                 )
             },
         },
         {
-            field: 'dhApprovedActionBy',
-            headerName: 'Level first Approved By',
+            field: 'firstApprovedActionBy',
+            headerName: 'First Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
                 return <span> {row?.firstApprovedActionBy} </span>
             },
         },
@@ -287,16 +123,16 @@ const RTVListingWrapper = () => {
             headerName: 'First Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
                 return <span> {row?.firstApprovedAt} </span>
             },
         },
         {
-            field: 'secondApproved',
-            headerName: 'Second Level Status',
+            field: 'secondApprovedActionByStatus',
+            headerName: 'Second Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
                 return (
                     <span>
                         {' '}
@@ -310,20 +146,20 @@ const RTVListingWrapper = () => {
             },
         },
         {
-            field: 'accApprovedActionBy',
-            headerName: 'Level Second Approved By',
+            field: 'secondApprovedActionBy',
+            headerName: 'Second Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
                 return <span> {row?.secondApprovedActionBy} </span>
             },
         },
         {
-            field: 'accApprovedAt',
+            field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
                 return <span> {row?.secondApprovedAt} </span>
             },
         },
@@ -332,7 +168,7 @@ const RTVListingWrapper = () => {
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
             },
         },
@@ -341,41 +177,41 @@ const RTVListingWrapper = () => {
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
         {
             field: 'Approved',
-            headerName: 'Approval Level',
+            headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
                 return (
-                    <div className="">
+                    <div>
                         {!row?.firstApproved ? (
                             <Stack direction="row" spacing={1}>
                                 {row?.firstApproved === null ? (
                                     <button
                                         id="btn"
-                                        className="overflow-hidden cursor-pointer z-0"
+                                        className=" overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
                                             showConfirmationDialog({
                                                 title: 'First Approve',
-                                                text: 'Do you want to Approve First Level ?',
+                                                text: 'Do you want to Approve ?',
                                                 showCancelButton: true,
                                                 showDenyButton: true,
                                                 denyButtonText: 'Reject',
                                                 next: (res) => {
                                                     if (res.isConfirmed) {
-                                                        return handleFirstLevelomplete(
+                                                        return handleFirstComplete(
                                                             row?._id,
                                                             res?.isConfirmed,
                                                             'Approval'
                                                         )
                                                     }
                                                     if (res.isDenied) {
-                                                        return handleFirstLevelomplete(
+                                                        return handleFirstComplete(
                                                             row?._id,
                                                             !res.isDenied,
                                                             'Rejected'
@@ -414,24 +250,24 @@ const RTVListingWrapper = () => {
                                 {row?.secondApproved === null ? (
                                     <button
                                         id="btn"
-                                        className="overflow-hidden cursor-pointer z-0"
+                                        className=" overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
                                             showConfirmationDialog({
-                                                title: 'Second Approval',
-                                                text: 'Do you want to Approve Second Level ?',
+                                                title: 'Account Approval',
+                                                text: 'Do you want to Approve ?',
                                                 showCancelButton: true,
                                                 showDenyButton: true,
                                                 denyButtonText: 'Reject',
                                                 next: (res) => {
                                                     if (res.isConfirmed) {
-                                                        return handleSecondLevelComplete(
+                                                        return handleAccComplete(
                                                             row?._id,
                                                             res?.isConfirmed,
                                                             'Approval'
                                                         )
                                                     }
                                                     if (res.isDenied) {
-                                                        return handleSecondLevelComplete(
+                                                        return handleAccComplete(
                                                             row?._id,
                                                             !res.isDenied,
                                                             'Rejected'
@@ -442,7 +278,7 @@ const RTVListingWrapper = () => {
                                         }}
                                     >
                                         <Chip
-                                            label="Second Pending "
+                                            label="ACC Pending "
                                             color="warning"
                                             variant="outlined"
                                             size="small"
@@ -456,7 +292,7 @@ const RTVListingWrapper = () => {
                                         className="cursor-pointer"
                                     >
                                         <Chip
-                                            label="Second Approved"
+                                            label="Acc  Approved"
                                             color="success"
                                             variant="outlined"
                                             size="small"
@@ -470,7 +306,7 @@ const RTVListingWrapper = () => {
                                         className="cursor-pointer"
                                     >
                                         <Chip
-                                            label="Second Rejected"
+                                            label=" Acc Rejected"
                                             color="error"
                                             variant="outlined"
                                             size="small"
@@ -488,25 +324,20 @@ const RTVListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: ReturnToVendorListResponse) =>
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) =>
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        moduleName={UserModuleNameTypes.saleOrder}
-                        isEdit={true}
-                        isDelete={
-                            row.firstApproved === null &&
-                            row.secondApproved === null
-                                ? true
-                                : false
-                        }
+                        moduleName={UserModuleNameTypes.warehouseToComapny}
+                        isEdit
+                        isDelete
                         handleEditActionButton={() => {
-                            navigate(`/return-to-vendor/edit/${row?._id}`)
+                            navigate(`/warehouse-to-company/edit/${row?._id}`)
                         }}
                         handleDeleteActionButton={() => {
                             showConfirmationDialog({
-                                title: 'Delete RTV',
-                                text: 'Do you want to delete Return To Vendor?',
+                                title: 'Delete WarehouseToComapny',
+                                text: 'Do you want to delete WarehouseToComapny?',
                                 showCancelButton: true,
                                 next: (res: any) => {
                                     return res.isConfirmed
@@ -525,22 +356,153 @@ const RTVListingWrapper = () => {
         },
     ]
 
+    const WarehouseToComapnyState: any = useSelector(
+        (state: RootState) => state.warehouseToComapny
+    )
+    const dispatch = useDispatch<AppDispatch>()
+    const { page, rowsPerPage, searchValue, items } = WarehouseToComapnyState
+    const navigate = useNavigate()
+    const [currentId, setCurrentId] = useState('')
+    const [showDropdown, setShowDropdown] = useState(false)
+    const [deleteWarehouseToComapny] = useDeleteWarehouseToComapnyMutation()
+    const [updateWarehouseToComapny] =
+        useUpdateWarehouseToComapnyApprovalMutation()
+    const { userData }: any = useSelector((state: RootState) => state.auth)
+    const { checkUserAccess } = useSelector(
+        (state: RootState) => state.userAccess
+    )
+    const params = useParams()
+    const warehouseId = params.id
+
+    const { data, isFetching, isLoading } =
+        useGetPaginationWarehouseToComapnyByGroupQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['wtcNumber'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+              
+                {
+                    fieldName: 'fromWarehouseId',
+                    value: warehouseId,
+                },
+                {
+                    fieldName: 'firstApproved',
+                    value: true,
+                },
+                {
+                    fieldName: 'secondApproved',
+                    value: true,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+
+    useEffect(() => {
+        if (!isFetching && !isLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setItems(data?.data || []))
+            dispatch(setTotalItems(data?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+    }, [isLoading, isFetching, data, dispatch])
+
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteWarehouseToComapny(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', ' deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+
+    const handleFirstComplete = (
+        _id: string,
+        value: boolean,
+        message: string
+    ) => {
+        const currentDate = new Date().toLocaleDateString('en-GB')
+        updateWarehouseToComapny({
+            body: {
+                firstApproved: value,
+                type: 'FIRST',
+                firstApprovedById: userData?.userId,
+                firstApprovedAt: currentDate,
+                firstApprovedActionBy: userData?.userName,
+            },
+            id: _id,
+        }).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', ` ${message} is successfully!`)
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+        })
+    }
+
+    const handleAccComplete = (
+        _id: string,
+        value: boolean,
+        message: string
+    ) => {
+        const currentDate = new Date().toLocaleDateString('en-GB')
+        updateWarehouseToComapny({
+            body: {
+                secondApproved: value,
+                type: 'SECOND',
+                secondApprovedById: userData?.userId,
+                secondApprovedAt: currentDate,
+                secondApprovedActionBy: userData?.userName,
+            },
+            id: _id,
+        }).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', ` ${message} is successfully!`)
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+        })
+    }
+
     return (
         <>
-            <SideNavLayout>
-                <RTVendor
+                <WarehouseToComapnyListing
                     columns={getAllowedAuthorizedColumns(
                         checkUserAccess,
                         columns,
-                        UserModuleNameTypes.saleOrder,
+                        UserModuleNameTypes.warehouseToComapny,
                         UserModuleActionTypes.List
                     )}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </SideNavLayout>
         </>
     )
 }
 
-export default RTVListingWrapper
+export default OutwardWarehouseToComapnyListingWrapper

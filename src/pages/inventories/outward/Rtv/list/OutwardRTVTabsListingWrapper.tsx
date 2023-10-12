@@ -45,6 +45,7 @@ import {
 import { useGetPaginationReturnToVendorByGroupQuery } from 'src/services/ReturnToVendorService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import OutwardRTVTabs from './OutwardRTVTabs'
+import { useParams } from 'react-router-dom'
 
 // |-- Types --|
 export type Tabs = {
@@ -87,6 +88,9 @@ const OutwardRTVTabsListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items } = salesOrderState
     const { customized } = useSelector((state: RootState) => state?.auth)
 
+    const { userData }: any = useSelector((state: RootState) => state.auth)
+    const params = useParams()
+    const warehouseId = params.id
     const {
         data: soData,
         isFetching: soIsFetching,
@@ -97,10 +101,15 @@ const OutwardRTVTabsListingWrapper = () => {
         params: ['rtvNumber'],
         page: page,
         filterBy: [
-            // {
-            //     fieldName: 'dealerId',
-            //     value: dealerId,
-            // },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
+
+            {
+                fieldName: 'warehouseId',
+                value: warehouseId,
+            },
             {
                 fieldName: 'firstApproved',
                 value: true,

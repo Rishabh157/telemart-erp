@@ -78,6 +78,10 @@ const OutwardWarehouseTransferListingWrapper = () => {
                     fieldName: 'secondApproved',
                     value: true,
                 },
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
             ],
             dateFilter: {},
             orderBy: 'createdAt',

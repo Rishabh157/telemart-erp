@@ -61,6 +61,7 @@ const LoginPage = ({ pathName }: any) => {
                                     userRole: res?.data?.data?.userRole,
                                     firstName: res?.data?.data?.firstName,
                                     lastName: res?.data?.data?.lastName,
+                                    branchId: res?.data?.data?.branchId,
                                 }
                                 dispatch(setAccessToken(res?.data?.data?.token))
                                 dispatch(

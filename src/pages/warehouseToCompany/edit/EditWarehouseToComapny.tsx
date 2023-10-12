@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
-// Filename:AddWarehouseTransfer.tsx
+// Filename:EditWarehouseToComapny.tsx
 // Type: Add Component
 // Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
@@ -15,6 +15,7 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import {
     useDispatch,
+    useSelector,
     //  useSelector
 } from 'react-redux'
 
@@ -25,13 +26,15 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-import { FormInitialValues } from './AddWarehouseTransferWrapper'
+import { FormInitialValues } from './EditWarehouseToComapnyWrapper'
 // import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
 // import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
+import { setItems as setAnotherComanyWareHouse } from 'src/redux/slices/warehouseSlice'
 import {
     AppDispatch,
+    RootState,
     //  RootState
 } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
@@ -39,12 +42,13 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { useParams } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: {
-        // dealerOptions: SelectOption[]
+        companyOption: SelectOption[]
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
@@ -52,7 +56,7 @@ type Props = {
     apiStatus: boolean
 }
 
-const AddWarehouseTransfer = ({
+const EditWarehouseToComapny = ({
     formikProps,
     dropdownOptions,
     apiStatus,
@@ -62,11 +66,11 @@ const AddWarehouseTransfer = ({
     // Breadcrumbs
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: `${params.dealerId ? ' Dealers Sale Order' : 'Sale Order'}`,
+            label: `${params.dealerId ? 'WTC transfer' : 'WTC  Transfer'}`,
             path: `${
                 params.dealerId
-                    ? `/dealers/${params.dealerId}/warehouse-transfer`
-                    : '/warehouse-transfer'
+                    ? `/dealers/${params.dealerId}/warehouse-to-company`
+                    : '/warehouse-to-company'
             }`,
         },
         {
@@ -81,9 +85,7 @@ const AddWarehouseTransfer = ({
     const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
 
-    // const dealerWarehouse: any = useSelector(
-    //     (state: RootState) => state.warehouse
-    // )
+    const { items }: any = useSelector((state: RootState) => state.warehouse)
     // const { userData } = useSelector((state: RootState) => state?.auth)
     // const companyId = userData?.companyId
 
@@ -103,14 +105,28 @@ const AddWarehouseTransfer = ({
     //     }
     // }, [data, isLoading, isFetching, dealerId, dispatch])
 
-    // const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
-    //     (ele: any) => {
-    //         return {
-    //             label: ele.wareHouseName,
-    //             value: ele._id,
-    //         }
-    //     }
-    // )
+    const selectedCompanyWarehouseOption: SelectOption[] = items?.map(
+        (ele: any) => {
+            return {
+                label: ele.wareHouseName,
+                value: ele._id,
+            }
+        }
+    )
+
+    const {
+        data: warehouseData,
+        isLoading: warehouseIsLoading,
+        isFetching: warehouseIsFetching,
+    } = useGetWareHousesQuery(values?.toCompanyId, {
+        skip: !values?.toCompanyId,
+    })
+    //Warehouse
+    useEffect(() => {
+        if (!warehouseIsLoading && !warehouseIsFetching) {
+            dispatch(setAnotherComanyWareHouse(warehouseData?.data))
+        }
+    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
@@ -168,13 +184,15 @@ const AddWarehouseTransfer = ({
                         <div className="grid grid-cols-4 gap-4">
                             {/* SO Number */}
                             <ATMTextField
-                                name="wtNumber"
-                                value={values.wtNumber}
+                                name="wtcNumber"
+                                value={values.wtcNumber}
                                 label="Warehouse transfer No."
+                                readOnly
+                                disabled
                                 placeholder="WT Number"
                                 onChange={(e) =>
                                     handleSetFieldValue(
-                                        'wtNumber',
+                                        'wtcNumber',
                                         e.target.value
                                     )
                                 }
@@ -199,6 +217,16 @@ const AddWarehouseTransfer = ({
                                 label="From warehouse (company)"
                                 selectLabel="Select Warehouse"
                             />
+                            <ATMSelectSearchable
+                                name="toCompanyId"
+                                value={values.toCompanyId}
+                                onChange={(e) => {
+                                    handleSetFieldValue('toCompanyId', e)
+                                }}
+                                options={dropdownOptions.companyOption}
+                                label="to Company"
+                                selectLabel="Select company"
+                            />
                             {/* to Warehouse */}
                             <ATMSelectSearchable
                                 name="toWarehouseId"
@@ -213,7 +241,7 @@ const AddWarehouseTransfer = ({
                                     }
                                     handleSetFieldValue('toWarehouseId', e)
                                 }}
-                                options={dropdownOptions.warehouseOptions}
+                                options={selectedCompanyWarehouseOption}
                                 label="To Warehouse"
                                 selectLabel="Select Warehouse"
                             />
@@ -251,7 +279,7 @@ const AddWarehouseTransfer = ({
                 {/*  Sales Order  */}
                 <div className="px-3">
                     <div className=" text-lg pb-2 font-medium text-primary-main">
-                        Add ProductGroup to Warehouse Transfer
+                        Add ProductGroup to Warehouse company
                     </div>
 
                     <FieldArray name="productSalesOrder">
@@ -409,4 +437,4 @@ const AddWarehouseTransfer = ({
     )
 }
 
-export default AddWarehouseTransfer
+export default EditWarehouseToComapny

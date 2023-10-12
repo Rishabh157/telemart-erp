@@ -203,3 +203,9 @@ export type {
     addInventoryManagement,
     UpdateInventoryManagement,
 } from './InventoryManagement.model'
+
+export type {
+    AddWarehouseToComapny,
+    UpdateWTCApprovalLevel,
+    UpdateWarehouseToComapny,
+} from './WarehouseToComapny.model'
