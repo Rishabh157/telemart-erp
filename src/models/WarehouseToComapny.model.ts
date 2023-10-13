@@ -20,8 +20,8 @@ interface ProductSalesOrder {
     quantity: number
 }
 export type AddWarehouseToComapny = {
-    wtcNumber:string
-    toCompanyId:string
+    wtcNumber: string
+    toCompanyId: string
     fromWarehouseId: string
     toWarehouseId: string
     productSalesOrder: ProductSalesOrder[]
@@ -31,8 +31,8 @@ export type AddWarehouseToComapny = {
 
 export type UpdateWarehouseToComapny = {
     body: {
-      wtcNumber:string
-      toCompanyId:string
+        wtcNumber: string
+        toCompanyId: string
         fromWarehouseId: string
         toWarehouseId: string
         productSalesOrder: ProductSalesOrder[]
@@ -85,8 +85,9 @@ export type UpdateWTCApprovalLevel = {
 
 export type GroupByWarehouseToComapnyResponseTypes = {
     _id: string
-    wtcNumber:string
-    toCompanyId:string
+    wtcNumber: string
+    toCompanyId: string
+    toCompanyLabel: string
     fromWarehouseId: string
     toWarehouseId: string
     firstApproved: boolean | null
@@ -104,8 +105,8 @@ export type GroupByWarehouseToComapnyResponseTypes = {
 
 export type WarehouseToComapnyListResponse = {
     _id: string
-    wtcNumber:string
-    toCompanyId:string
+    wtcNumber: string
+    toCompanyId: string
     fromWarehouseId: string
     toWarehouseId: string
     firstApprovedById: string | null

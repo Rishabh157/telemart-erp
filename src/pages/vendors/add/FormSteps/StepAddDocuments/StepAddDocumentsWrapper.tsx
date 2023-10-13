@@ -34,7 +34,7 @@ const formFields: { sectionName: string; fields: Field<''>[] }[] = [
                 name: 'declaration_form',
                 label: 'Declaration Form',
                 placeholder: 'Declaration Form',
-                type: "file-picker",
+                type: 'file-picker',
             },
             {
                 name: 'gst_certificate',

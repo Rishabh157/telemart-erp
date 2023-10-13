@@ -569,16 +569,9 @@ const OutwardWarehouseTransferListingWrapper = () => {
                                                     barcode: BarcodeListResponseType,
                                                     barcodeIndex: number
                                                 ) => {
-                                                    console.log(
-                                                        'barcode',
-                                                        barcode
-                                                    )
                                                     return (
                                                         <div
                                                             key={barcodeIndex}
-                                                            onClick={() => {
-                                                                // onBarcodeClick(barcode)
-                                                            }}
                                                             className={`flex flex-col gap-2 my-4 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer`}
                                                         >
                                                             <div className="flex justify-between">

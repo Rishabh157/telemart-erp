@@ -65,12 +65,10 @@ const EditRTVendor = ({
         ...dropdownOptions,
     }
 
-    const { values, setFieldValue, errors } = formikProps
+    const { values, setFieldValue } = formikProps
     const [i, setI] = useState(0)
     const dispatch = useDispatch<AppDispatch>()
     const [productGroup, setProductGroup] = useState('')
-
-    console.log('errors', errors)
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(

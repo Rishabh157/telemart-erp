@@ -69,7 +69,7 @@ const Header = () => {
             mobile: userData?.mobile,
             userDepartment: 'ADMIN',
             userRole: userData?.userRole,
-            branchId: userData?.branchId
+            branchId: userData?.branchId,
         }
         updaeCompany({ body: update, id: userData?.userId || '' }).then(
             (updateCompanyInfo: any) => {

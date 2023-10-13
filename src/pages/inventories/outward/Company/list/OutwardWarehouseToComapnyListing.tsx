@@ -1,125 +1,65 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
 // Filename:OutwardWarehouseToComapnyListing.tsx
 // Type: List Component
-// Last Updated: JULY 04, 2023
+// Last Updated: JUNE 27, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Redux --|
 import {
-    setPage,
     setRowsPerPage,
-    setSearchValue,
+    setPage,
 } from 'src/redux/slices/WarehouseToComapnySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OutwardWarehouseToComapnyListing = ({
-    columns,
-    rows,
-    setShowDropdown,
-}: Props) => {
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-
+const OutwardWarehouseToComapnyListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const WarehouseToComapnyState: any = useSelector(
+    const warehouseToCompanyState: any = useSelector(
         (state: RootState) => state.warehouseToComapny
     )
-    const { pathname } = useLocation()
-    const path = pathname.split('/')[1]
-    // const isDealerPath = path === 'dealers'
-    // const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
+    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
-    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
-        WarehouseToComapnyState
-    useEffect(() => {
-        return () => {
-            dispatch(setSearchValue(''))
-        }
-    }, [])
+    const { page, rowsPerPage, isTableLoading } = warehouseToCompanyState
+
     return (
-        <div
-            className={`px-4 ${
-                path === 'dealers'
-                    ? 'h-[calc(100vh-185px)]'
-                    : 'h-[calc(100vh-55px)]'
-            }`}
-        >
-            {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Warehouse Transfer </ATMPageHeading>
-                {/* <ActionAuthHOC
-                    moduleName={
-                        isDealerPath
-                            ? UserModuleNameTypes.dealer
-                            : UserModuleNameTypes.warehouseToComapny
-                    }
-                    actionName={
-                        isDealerPath
-                            ? UserModuleAddActionTypes.dealerSalesOrderAdd
-                            : UserModuleActionTypes.Add
-                    }
-                    component={
-                        <button
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + warehouse-transfer
-                        </button>
-                    }
-                /> */}
-            </div>
-
-            <div
-                className={` border flex flex-col  rounded bg-white ${
-                    path === 'dealers'
-                        ? 'h-[calc(100%-50px)]'
-                        : 'h-[calc(100%-75px)]'
-                }`}
-            >
+        <div className=" h-[calc(100vh-160px)]  bg-white ">
+            <div className="border flex flex-col h-[calc(100%)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
-                    searchValue={searchValue}
                     page={page}
-                    rowCount={totalItems}
+                    rowCount={rows.length}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    onSearch={(newValue) => {
-                        dispatch(setSearchValue(newValue))
-                    }}
                     // isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
-                <div className="grow">
+                <div className="grow overflow-auto  ">
                     <ATMTable
-                        isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
                         // isCheckbox={true}
@@ -127,8 +67,8 @@ const OutwardWarehouseToComapnyListing = ({
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full"
-                        setShowDropdown={setShowDropdown}
+                        extraClasses="overflow-auto"
+                        isLoading={isTableLoading}
                     />
                 </div>
 
@@ -136,7 +76,7 @@ const OutwardWarehouseToComapnyListing = ({
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={totalItems}
+                        rowCount={rows.length}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}

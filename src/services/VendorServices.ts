@@ -75,8 +75,8 @@ export const vendorApi = apiSlice.injectEndpoints({
             }),
         }),
 
-         //***** deactive *****/
-         deactivateVendor: builder.mutation({
+        //***** deactive *****/
+        deactivateVendor: builder.mutation({
             invalidatesTags: ['vendor'],
             query: (id: string) => ({
                 url: `/vendor/status-change/${id}`,

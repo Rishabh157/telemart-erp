@@ -187,14 +187,14 @@ const AddWarehouseToComapnyTransfer = ({
                                 name="wtcNumber"
                                 value={values.wtcNumber}
                                 label="Warehouse transfer No."
-                                placeholder="WT Number"
+                                placeholder="WTC Number"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'wtcNumber',
                                         e.target.value
                                     )
                                 }
-                                className="mt-0 rounded"
+                                className="mt-2 rounded"
                             />
 
                             {/* from Warehouse */}
@@ -239,15 +239,16 @@ const AddWarehouseToComapnyTransfer = ({
                                     }
                                     handleSetFieldValue('toWarehouseId', e)
                                 }}
-                                options={
-                                    selectedCompanyWarehouseOption
-                                }
+                                options={selectedCompanyWarehouseOption}
                                 label="To Warehouse"
                                 selectLabel="Select Warehouse"
                             />
 
                             <div className="-mt-2">
                                 <ATMTextArea
+                                    label="Remark"
+                                    placeholder="enter remark"
+                                    className="rounded"
                                     minRows={1}
                                     name="remark"
                                     value={values.remark}
@@ -255,7 +256,6 @@ const AddWarehouseToComapnyTransfer = ({
                                         handleSetFieldValue('remark', e)
                                     }
                                     // options={dropdownOptions.warehouseOptions}
-                                    label="remark"
                                 />
                             </div>
                             {/* Warehouse

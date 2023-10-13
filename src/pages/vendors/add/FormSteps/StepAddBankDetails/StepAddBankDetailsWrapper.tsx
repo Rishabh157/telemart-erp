@@ -64,7 +64,7 @@ const formFields: {
                 name: 'cancelledCheque',
                 label: 'Cancelled Cheque',
                 placeholder: 'Cancelled Cheque',
-                type: "file-picker",
+                type: 'file-picker',
             },
         ],
     },

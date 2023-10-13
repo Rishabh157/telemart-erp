@@ -22,9 +22,6 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useGetByBarcodeMutation } from 'src/services/BarcodeService'
 import { SelectBoxOption } from './InwardInventoryWrapper'
 import MoveToCartonDrawer from './MoveToCartonDrawer/MoveToCartonDrawer'
-// import { useSelector } from 'react-redux'
-// import { RootState } from 'src/redux/store'
-// import { showToast } from "src/utils";
 
 // |-- Types --|
 type Props = {
@@ -51,17 +48,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
         },
     ]
     const [wareHouse] = React.useState(warehouseId)
-    //const [status, setStatus] = React.useState('AVAILABLE')
-    //const [shouldPrint, setShouldPrint] = React.useState(false)
-    //const [condition, setCondition] = React.useState('GOOD')
     const [barcodes, setBarcodes] = React.useState<renderBarcodType[]>([])
-    // const [filterBarcode, setFilterBarcode] = useState<renderBarcodType[] | []>(
-    //     []
-    // )
-    console.log(barcodes, 'barcodes')
-    // const [dataToSend, setDataToSend] = useState<any[]>([])
-    // console.log(dataToSend, 'dataToSend')
-    // const [itemCount, setItemCount] = React.useState(0)
     const [barcode, setBarcode] = React.useState('')
     const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] =
         React.useState(false)
@@ -77,80 +64,10 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                 if (!isExist) {
                     barc.push(res?.data?.data)
                 }
-                // console.log(barc, 'barc')
                 setBarcodes([...barc])
             }
         })
     }
-    // useEffect(() => {
-    //     const count =
-    //         (cartonBoxOption?.find((e) => e?.value === packaging)
-    //             ?.itemCount as number) || 0
-    //     if (count) {
-    //         setItemCount(count - 1)
-    //     }
-    //     setFilterBarcode([])
-    // }, [packaging])
-
-    // useEffect(() => {
-    //     if (!isLoading && !isFetching) {
-    //         const dataToSet = data?.data?.map((e: any) => {
-    //             if (e?.isDeleted === false) {
-    //                 return {
-    //                     productGroupLabel: e.productGroupLabel,
-    //                     productGroupNumber: e?.barcodeGroupNumber,
-    //                     barcodeNumber: e?.barcodeNumber,
-    //                     isUsed: e?.isUsed,
-    //                 }
-    //             }
-    //         })
-    //         // setBarcodes(dataToSet)
-    //     }
-    // }, [data, isLoading, isFetching])
-
-    // useEffect(() => {
-    //     const newObject = barcodes?.filter(
-    //         (f: any) => f?.barcodeNumber === barcode && f?.isUsed === false
-    //     )
-
-    //     // if (newObject?.length ? newObject[0]?.isUsed === true : barcodes?.length) {
-    //     //   showToast("error", "Barcode already used");
-    //     // }
-    //     const alreadyExist = filterBarcode?.find(
-    //         (f) => f.barcodeNumber === newObject[0]?.barcodeNumber
-    //     )
-    //     const validBarcode = filterBarcode?.length
-    //         ? filterBarcode[0]?.productGroupLabel ===
-    //           newObject[0]?.productGroupLabel
-    //         : true
-
-    //     if (
-    //         newObject?.length &&
-    //         filterBarcode?.length <= itemCount &&
-    //         !alreadyExist &&
-    //         validBarcode
-    //     ) {
-    //         setFilterBarcode((prevData: any[]) => [...prevData, newObject[0]])
-    //         const dataToSendObject = {
-    //             barcodeNumber: newObject[0]?.barcodeNumber,
-    //             //status: status,
-    //             //condition: condition,
-    //         }
-    //         setDataToSend((prevData: any[]) => [...prevData, dataToSendObject])
-    //     }
-    // }, [barcode, barcodes])
-
-    // useEffect(() => {
-    //     if (barcode?.length === 6) {
-    //         setBarcode('')
-    //     }
-    // }, [barcode])
-
-    // useEffect(() => {
-    //     if (itemCount && itemCount + 1 === filterBarcode?.length) {
-    //         setIsOpenMoveToCartonDrawer(true)
-    //     }
-    // }, [itemCount, filterBarcode])
 
     return (
         <div className="p-4 h-[calc(100vh-95px)] overflow-auto ">

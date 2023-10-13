@@ -14,8 +14,6 @@ export type productSalesOrder = {
     quantity: number
 }
 
-
-
 interface ProductSalesOrder {
     productGroupId: string
     rate: number

@@ -41,7 +41,11 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const WarehouseTransferListing = ({ columns, rows, setShowDropdown }: Props) => {
+const WarehouseTransferListing = ({
+    columns,
+    rows,
+    setShowDropdown,
+}: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const dispatch = useDispatch<AppDispatch>()
