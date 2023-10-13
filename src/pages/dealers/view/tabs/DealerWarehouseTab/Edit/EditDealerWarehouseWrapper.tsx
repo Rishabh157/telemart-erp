@@ -2,7 +2,7 @@
 /// ==============================================
 // Filename:EditDealerWarehouseWrapper.tsx
 // Type: Edit Component
-// Last Updated: JUNE 29, 2023
+// Last Updated: OCTOBER 13, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react'
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
 import { array, object, string } from 'yup'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -146,26 +146,25 @@ const steps = [
 ]
 
 const EditDealerWarehouseWrapper = () => {
-    const { state } = useLocation()
-    const params = useParams()
-    const Id: any = params.id
-    const dealerId = state?.params?.dealerId || null
-    const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
+    // Local State
+    const [apiStatus, setApiStatus] = useState(false)
+    const [activeStep, setActiveStep] = React.useState(0)
 
-    const { data, isLoading, isFetching } = useGetDealerWarehouseByIdQuery(Id)
-    const [updateDealerWarehouse] = useUpdateDealerWarehouseMutation()
-
-    // States
+    // Redux States
     const { allCountry }: any = useSelector((state: RootState) => state.country)
-
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedItem }: any = useSelector(
         (state: RootState) => state?.dealerWarehouse
     )
 
-    const [apiStatus, setApiStatus] = useState(false)
-    const [activeStep, setActiveStep] = React.useState(0)
+    const { dealerId, id: Id } = useParams()
+    const { data, isLoading, isFetching } = useGetDealerWarehouseByIdQuery(
+        Id || ''
+    )
+    const dispatch = useDispatch<AppDispatch>()
+    const navigate = useNavigate()
+    const [updateDealerWarehouse] = useUpdateDealerWarehouseMutation()
+
     const {
         data: countryData,
         isLoading: countryIsLoading,
@@ -218,7 +217,7 @@ const EditDealerWarehouseWrapper = () => {
         if (activeStep === steps?.length - 1) {
             const contactInformation = values.contact_informations.map(
                 (ele: any) => {
-                    const { _id, ...rest } = ele // use object destructuring to remove the _id property
+                    const { _id, maskedPhoneNo, ...rest } = ele // use object destructuring to remove the _id property
                     return rest // return the new object without the _id property
                 }
             )
@@ -263,7 +262,7 @@ const EditDealerWarehouseWrapper = () => {
                                 'success',
                                 'Warehouse Upated successfully!'
                             )
-                            navigate('/dealers/' + dealerId + '/warehouse')
+                            navigate(`/dealers/${dealerId}/warehouse`)
                         } else {
                             showToast('error', res?.data?.message)
                         }
@@ -283,6 +282,7 @@ const EditDealerWarehouseWrapper = () => {
     useEffect(() => {
         dispatch(setSelectedItem(data?.data))
     }, [data, isLoading, isFetching])
+
     return (
         <Formik
             enableReinitialize

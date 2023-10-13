@@ -115,7 +115,7 @@ const ATMTableHeader = ({
                     <select
                         value={rowsPerPage as number}
                         onChange={(e) =>
-                            onRowsPerPageChange(parseInt(e.target.value))
+                            onRowsPerPageChange(parseInt(e?.target?.value))
                         }
                         className={`rounded-lg p-1 outline-0 bg-slate-100 text-sm `}
                     >
@@ -130,7 +130,7 @@ const ATMTableHeader = ({
 
                     <div className="text-sm bg-slate-100 py-1 px-2 rounded-lg text-slate-600">
                         Showing &nbsp; {rowsPerPage * (page - 1) + 1} -{' '}
-                        {rowsPerPage * (page - 1) + rows.length} of {rowCount}
+                        {rowsPerPage * (page - 1) + rows?.length} of {rowCount}
                     </div>
                 </div>
             </div>

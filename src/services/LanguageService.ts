@@ -66,9 +66,9 @@ export const languageApi = apiSlice.injectEndpoints({
 
         //**** Export
         exportLanguageData: builder.mutation({
+            invalidatesTags: ['Language'],
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
@@ -83,7 +83,6 @@ export const languageApi = apiSlice.injectEndpoints({
             invalidatesTags: ['Language'],
             query: (id) => ({
                 url: `/language/${id}`,
-
                 method: 'DELETE',
             }),
         }),

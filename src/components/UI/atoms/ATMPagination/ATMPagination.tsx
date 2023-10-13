@@ -31,7 +31,7 @@ const ATMPagination = ({
 }: ATMPaginationPropTypes) => {
     return (
         <>
-            {rows.length ? (
+            {rows?.length ? (
                 <div className="flex justify-between items-center py-2 ">
                     {/* Out of */}
                     <div>

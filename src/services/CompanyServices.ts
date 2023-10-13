@@ -59,7 +59,6 @@ export const companyApi = apiSlice.injectEndpoints({
             providesTags: ['company'],
             query: (id) => ({
                 url: `/company/${id}`,
-
                 method: 'GET',
             }),
         }),

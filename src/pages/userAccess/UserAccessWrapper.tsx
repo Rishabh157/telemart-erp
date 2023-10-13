@@ -38,11 +38,17 @@ const UserAccessWrapper = () => {
     const [addUserAccess] = useAddUserAccessMutation()
     const [updateUserAccess] = useUpdateUserAccessMutation()
     const [updateByUserId] = useUpdateUserAccessByUserIdMutation()
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { data, isLoading, isFetching } = useGetUserAccessQuery({
-        userId: userId ? (userId as string) : null,
-        userRole: userRole as string,
-    })
+    const { data, isLoading, isFetching } = useGetUserAccessQuery(
+        {
+            userId: userId ? (userId as string) : null,
+            userRole: userRole as string,
+        },
+        {
+            skip: !userData?.companyId,
+        }
+    )
     // iue => is user exists
     const {
         data: iueData,

@@ -239,7 +239,9 @@ const EditWarehouseToComapnyWrapper = (props: Props) => {
         data: companyData,
         isFetching: isComapnyFetching,
         isLoading: isCompanyLoading,
-    } = useGetAllCompaniesQuery('')
+    } = useGetAllCompaniesQuery('', {
+        skip: !userData?.companyId,
+    })
     useEffect(() => {
         if (!isComapnyFetching && !isCompanyLoading) {
             dispatch(setAllCompany(companyData?.data))

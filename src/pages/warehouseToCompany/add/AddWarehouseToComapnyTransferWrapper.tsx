@@ -145,7 +145,9 @@ const AddWarehouseToComapnyTransferWrapper = (props: Props) => {
         data: companyData,
         isFetching,
         isLoading,
-    } = useGetAllCompaniesQuery('')
+    } = useGetAllCompaniesQuery('', {
+        skip: !userData?.companyId,
+    })
     useEffect(() => {
         if (!isLoading && !isFetching) {
             dispatch(setAllCompany(companyData?.data))

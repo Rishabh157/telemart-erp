@@ -198,14 +198,6 @@ const AddDealerWarehouseWrapper = () => {
                 mobileNumber: '',
                 landLine: '',
             },
-            {
-                name: '',
-                department: '',
-                designation: '',
-                email: '',
-                mobileNumber: '',
-                landLine: '',
-            },
         ],
     }
 
