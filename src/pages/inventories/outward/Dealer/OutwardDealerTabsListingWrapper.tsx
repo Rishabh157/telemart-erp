@@ -14,7 +14,7 @@ import { IconType } from 'react-icons'
 import { IoRemoveCircle } from 'react-icons/io5'
 
 // |-- Internal Dependencies --|
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import { SoApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
 import OutwardRequestListing from './OutwardDealerTabs'
@@ -72,6 +72,71 @@ type BarcodeListResponseType = {
 }
 
 const OutwardDealerTabsListingWrapper = () => {
+    const [isShow, setIsShow] = useState<boolean>(false)
+    const [barcodeNumber, setBarcodeNumber] = useState<any>([])
+    const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
+    const [barcodeList, setBarcodeList] = useState<any>([])
+    const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
+        useState<SoApprovedGroupListResponseType | null>(null)
+    const dispatch = useDispatch<AppDispatch>()
+    // const params = useParams()
+    // const warehouseId = params.id
+    // console.log("dealerId",dealerId)
+    const salesOrderState: any = useSelector(
+        (state: RootState) => state.saleOrder
+    )
+    const { page, rowsPerPage, searchValue, items } = salesOrderState
+    const { customized, userData } = useSelector(
+        (state: RootState) => state?.auth
+    )
+
+    const {
+        data: soData,
+        isFetching: soIsFetching,
+        isLoading: soIsLoading,
+    } = useGetPaginationSaleOrderByGroupQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: ['soNumber', 'dealerLabel'],
+        page: page,
+        filterBy: [
+            // {
+            //     fieldName: 'warehouseId',
+            //     value: warehouseId,
+            // },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
+            {
+                fieldName: 'dhApproved',
+                value: true,
+            },
+            {
+                fieldName: 'accApproved',
+                value: true,
+            },
+        ],
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: true,
+    })
+
+    const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
+    const [barcodeDispatch, barcodeDispatchInfo] =
+        useDispatchDealerBarcodeMutation()
+
+    useEffect(() => {
+        if (!soIsFetching && !soIsLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setItems(soData?.data || []))
+            dispatch(setTotalItems(soData?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+    }, [soIsLoading, soIsFetching, soData, dispatch])
+
     const columns: columnTypes[] = [
         {
             field: 'soNumber',
@@ -146,8 +211,10 @@ const OutwardDealerTabsListingWrapper = () => {
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: SoApprovedGroupListResponseType) =>
-                row?.documents?.find((ele) => ele?.status === 'COMPLETE') ? (
+                row?.documents[0]?.status === 'COMPLETE' ? (
                     'Dispatched'
+                ) : row?.documents[0]?.status === 'DISPATCHED' ? (
+                    ''
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
@@ -185,72 +252,6 @@ const OutwardDealerTabsListingWrapper = () => {
             align: 'end',
         },
     ]
-    const [isShow, setIsShow] = useState<boolean>(false)
-    const [barcodeNumber, setBarcodeNumber] = useState<any>([])
-    const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
-    const [barcodeList, setBarcodeList] = useState<any>([])
-    const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
-        useState<SoApprovedGroupListResponseType | null>(null)
-    const dispatch = useDispatch<AppDispatch>()
-    const params = useParams()
-    const warehouseId = params.id
-    // console.log("dealerId",dealerId)
-    const salesOrderState: any = useSelector(
-        (state: RootState) => state.saleOrder
-    )
-    const { page, rowsPerPage, searchValue, items } = salesOrderState
-    const { customized, userData } = useSelector(
-        (state: RootState) => state?.auth
-    )
-
-    const {
-        data: soData,
-        isFetching: soIsFetching,
-        isLoading: soIsLoading,
-    } = useGetPaginationSaleOrderByGroupQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['soNumber', 'dealerLabel'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: 'companyWareHouseId',
-                value: warehouseId,
-            },
-            {
-                fieldName: 'dhApproved',
-                value: true,
-            },
-            {
-                fieldName: 'accApproved',
-                value: true,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
-    const [barcodeDispatch, barcodeDispatchInfo] =
-        useDispatchDealerBarcodeMutation()
-
-    useEffect(() => {
-        if (!soIsFetching && !soIsLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(soData?.data || []))
-            dispatch(setTotalItems(soData?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [soIsLoading, soIsFetching, soData, dispatch])
-
-
 
     const handleReload = () => {
         if (customized) {

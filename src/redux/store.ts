@@ -91,6 +91,7 @@ import userAcessSlice from './slices/access/userAcessSlice'
 import companyBranchSlice from './slices/companyBranchSlice'
 import returnToVendorSlice from './slices/returnToVendorSlice'
 import warehouseTransferSlice from './slices/warehouseTransferSlice'
+import warehouseToSampleSlice from './slices/warehouseToSampleSlice'
 import warehouseToComapnySlice from './slices/WarehouseToComapnySlice'
 
 // Middleware for handling 401 Error
@@ -180,8 +181,9 @@ const store = configureStore({
         assetsCategory: assetsCategorySlice,
         vendorLedger: vendorLedgerSlice,
         returnToVendor: returnToVendorSlice,
-        warehouseTransfer:warehouseTransferSlice,
-        warehouseToComapny:warehouseToComapnySlice,
+        warehouseTransfer: warehouseTransferSlice,
+        warehouseToSample: warehouseToSampleSlice,
+        warehouseToComapny: warehouseToComapnySlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

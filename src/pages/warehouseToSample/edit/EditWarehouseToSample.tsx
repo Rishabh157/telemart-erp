@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
-// Filename:AddRTVendor.tsx
-// Type: Add Component
-// Last Updated: JULY 30, 2023
+// Filename:EditWarehouseToSample.tsx
+// Type: Edit Component
+// Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -11,34 +11,40 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
-import { MdDeleteOutline } from 'react-icons/md'
+// import { MdDeleteOutline } from "react-icons/md";
+import {
+    useDispatch,
+    //  useSelector
+} from 'react-redux'
 import { HiPlus } from 'react-icons/hi'
-import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-// import { any } from './AddSaleOrderWrapper'
-import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
+import { FormInitialValues } from './EditWarehouseToSampleWrapper'
+// import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
-import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+// import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
+import {
+    AppDispatch,
+    //  RootState
+} from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-// import { useParams } from 'react-router-dom'
 import { showToast } from 'src/utils'
+import { MdDeleteOutline } from 'react-icons/md'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Types --|
 type Props = {
-    formikProps: FormikProps<any>
+    formikProps: FormikProps<FormInitialValues>
     dropdownOptions: {
-        vendorOptions: SelectOption[]
+        dealerOptions: SelectOption[]
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
@@ -46,49 +52,63 @@ type Props = {
     apiStatus: boolean
 }
 
-const AddRTVendor = ({
+// Breadcrumbs
+const breadcrumbs: BreadcrumbType[] = [
+    {
+        label: 'Sample Transfer',
+        path: '/warehouse-to-sample',
+    },
+    {
+        label: 'Edit',
+    },
+]
+
+const EditWarehouseToSample = ({
     formikProps,
     dropdownOptions,
     apiStatus,
     productPriceOptions,
 }: Props) => {
-    // const params = useParams()
-    // Breadcrumbs
-    const breadcrumbs: BreadcrumbType[] = [
-        {
-            label: 'Return To Vendor',
-            path: 'return-to-vendor',
-        },
-        {
-            label: 'Add Return To Vendor',
-        },
-    ]
+    dropdownOptions = {
+        ...dropdownOptions,
+    }
 
     const { values, setFieldValue } = formikProps
-
-    const dispatch = useDispatch<AppDispatch>()
-    const [dealerId, setDealerId] = useState('')
-    const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
+    const dispatch = useDispatch<AppDispatch>()
+    // const [dealerId, setDealerId] = useState('')
+    const [productGroup, setProductGroup] = useState('')
 
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const companyId = userData?.companyId
+    // const dealerWarehouse: any = useSelector(
+    //     (state: RootState) => state.warehouse
+    // )
+    // // const { userData } = useSelector((state: RootState) => state?.auth)
+    // const companyId = userData?.companyId
 
-    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
-        {
-            companyId,
-            dealerId,
-        },
-        {
-            skip: !dealerId,
-        }
-    )
+    // const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
+    //     {
+    //         companyId,
+    //         dealerId: values?.dealerId,
+    //     },
+    //     {
+    //         skip: !values.dealerId,
+    //     }
+    // )
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setDealerWarehouse(data?.data))
-        }
-    }, [data, isLoading, isFetching, dealerId, dispatch])
+    // useEffect(() => {
+    //     if (!isLoading && !isFetching) {
+    //         dispatch(setDealerWarehouse(data?.data))
+    //     }
+    // }, [data, isLoading, isFetching, dispatch])
+
+    // const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
+    //     (ele: any) => {
+    //         return {
+    //             label: ele.wareHouseName,
+    //             value: ele._id,
+    //         }
+    //     }
+    // )
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
@@ -106,8 +126,9 @@ const AddRTVendor = ({
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
-        <div className=" h-[calc(100vh-55px)] overflow-auto">
+        <div className="px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -115,16 +136,16 @@ const AddRTVendor = ({
                 </div>
 
                 {/* Page Heading */}
-                {/* <div className="pt-1">
-                    <ATMPageHeading> Return To Vendor </ATMPageHeading>
-                </div> */}
+                <div className="pt-1">
+                    <ATMPageHeading> Sample Transfer </ATMPageHeading>
+                </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
                         <div className="text-xl font-medium">
                             {' '}
-                            Return To Vendor{' '}
+                            Sample Details{' '}
                         </div>
                         {/* BUTTON - Add SO */}
                         <div>
@@ -132,11 +153,11 @@ const AddRTVendor = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounzded py-1 px-5 text-white border border-primary-main ${
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Submit
+                                Update
                             </button>
                         </div>
                     </div>
@@ -146,52 +167,57 @@ const AddRTVendor = ({
                         <div className="grid grid-cols-4 gap-4">
                             {/* SO Number */}
                             <ATMTextField
-                                name="rtvNo"
-                                value={values.rtvNo}
-                                label="RTV No."
-                                placeholder="enter rtv number"
+                                disabled={true}
+                                readOnly={true}
+                                name="wtsNumber"
+                                value={values.wtsNumber}
+                                label="Warehouse Transfer Number"
+                                placeholder="WT Number"
                                 onChange={(e) =>
-                                    handleSetFieldValue('rtvNo', e.target.value)
+                                    handleSetFieldValue(
+                                        'wtsNumber',
+                                        e.target.value
+                                    )
                                 }
-                                className="mt-0 rounded"
                             />
 
-                            {/* Dealer */}
-                            <div className="-mt-2">
-                                <ATMSelectSearchable
-                                    name="vendorId"
-                                    value={values.vendorId}
-                                    onChange={(e) => {
-                                        handleSetFieldValue('vendorId', e)
-                                        setDealerId(e)
-                                    }}
-                                    options={dropdownOptions?.vendorOptions}
-                                    label="Vendor"
-                                />
-                            </div>
-                            {/* Warehouse */}
-                            <div className="-mt-2">
-                                <ATMSelectSearchable
-                                    name="warehouseId"
-                                    value={values?.warehouseId}
-                                    onChange={(e) =>
-                                        handleSetFieldValue('warehouseId', e)
-                                    }
-                                    options={dropdownOptions.warehouseOptions}
-                                    label="Warehouse"
-                                />
-                            </div>
-                            <div className="-mt-3">
+                            {/* from Warehouse */}
+                            <ATMSelectSearchable
+                                name="fromWarehouseId"
+                                value={values.fromWarehouseId}
+                                onChange={(e) => {
+                                    handleSetFieldValue('fromWarehouseId', e)
+                                }}
+                                options={dropdownOptions.warehouseOptions}
+                                label="From warehouse (company)"
+                                selectLabel="Select Warehouse"
+                            />
+                            {/* to Warehouse */}
+                            <ATMTextField
+                                name="toName"
+                                value={values.toName}
+                                label="Receiver Name"
+                                placeholder="enter a reciver name"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'toName',
+                                        e.target.value
+                                    )
+                                }
+                                className="mt-3 rounded"
+                            />
+
+                            <div className="-mt-1">
                                 <ATMTextArea
                                     label="Remark"
-                                    name="remark"
-                                    placeholder="enter remark"
-                                    value={values.remark}
                                     minRows={1}
+                                    placeholder="enter remark"
+                                    name="remark"
+                                    value={values.remark}
                                     className="rounded"
-                                    onChange={(e) => {
+                                    onChange={(e) =>
                                         handleSetFieldValue('remark', e)
-                                    }}
+                                    }
                                 />
                             </div>
                         </div>
@@ -200,7 +226,7 @@ const AddRTVendor = ({
                     {/*  Sales Order  */}
                     <div className="px-3">
                         <div className=" text-lg pb-2 font-medium text-primary-main">
-                            Add ProductGroup to sale order
+                            Update ProductGroup to sale order
                         </div>
 
                         <FieldArray name="productSalesOrder">
@@ -209,7 +235,7 @@ const AddRTVendor = ({
                                     <>
                                         <div className="flex flex-col gap-y-5">
                                             {values.productSalesOrder?.map(
-                                                (item: any, index: any) => {
+                                                (item, index) => {
                                                     const {
                                                         productGroupId,
                                                         rate,
@@ -233,7 +259,7 @@ const AddRTVendor = ({
                                                                         if (
                                                                             !values?.productSalesOrder?.find(
                                                                                 (
-                                                                                    f: any
+                                                                                    f
                                                                                 ) =>
                                                                                     f.productGroupId ===
                                                                                     e
@@ -364,4 +390,4 @@ const AddRTVendor = ({
     )
 }
 
-export default AddRTVendor
+export default EditWarehouseToSample

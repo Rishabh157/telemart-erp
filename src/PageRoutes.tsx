@@ -256,6 +256,9 @@ import {
     setRefreshToken,
     setUserData,
 } from './redux/slices/authSlice'
+import WarehouseToSampleListingWrapper from './pages/warehouseToSample/list/WarehouseToSampleListingWrapper'
+import AddWarehouseToSampleWrapper from './pages/warehouseToSample/add/AddWarehouseToSampleWrapper'
+import EditWarehouseToSampleWrapper from './pages/warehouseToSample/edit/EditWarehouseToSampleWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1248,6 +1251,41 @@ const PageRoutes = () => {
                                 actionName={
                                     UserModuleWarehouseTabsTypes.outwardInventoriesRTV
                                 }
+                                isRedirect
+                            />
+                        }
+                    />
+
+                    {/* WAREHOUSE TO SAMPLE */}
+                    <Route
+                        path="/warehouse-to-sample"
+                        element={
+                            <ActionAuthHOC
+                                component={<WarehouseToSampleListingWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleTabsTypes.vendorLedger}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="/warehouse-to-sample/add"
+                        element={
+                            <ActionAuthHOC
+                                component={<AddWarehouseToSampleWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleTabsTypes.vendorLedger}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="/warehouse-to-sample/edit/:id"
+                        element={
+                            <ActionAuthHOC
+                                component={<EditWarehouseToSampleWrapper />}
+                                moduleName={UserModuleNameTypes.vendor}
+                                actionName={UserModuleTabsTypes.vendorLedger}
                                 isRedirect
                             />
                         }

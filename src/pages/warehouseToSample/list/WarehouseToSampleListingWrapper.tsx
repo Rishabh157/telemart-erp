@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:RTVListingWrapper.tsx
+// Filename:WarehouseToSampleListingWrapper.tsx
 // Type: List Component
 // Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
@@ -15,7 +15,6 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import RTVendor from './RTVendor'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import {
@@ -23,13 +22,14 @@ import {
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
 import {
-    useGetPaginationReturnToVendorByGroupQuery,
-    useUpdateReturnToVendorApprovalMutation,
-    useDeleteReturnToVendorOrderMutation,
-} from 'src/services/ReturnToVendorService'
+    useGetPaginationWarehouseToSampleByGroupQuery,
+    useUpdateWarehouseToSampleApprovalMutation,
+    useDeleteWarehouseToSampleOrderMutation,
+} from 'src/services/WarehouseToSampleService'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import WarehouseTransferListing from './WarehouseToSampleListing'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 // |-- Redux --|
@@ -37,79 +37,74 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/returnToVendorSlice'
+} from 'src/redux/slices/warehouseToSampleSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-interface ProductSalesOrder {
-    productGroupId: string
-    rate: number
-    quantity: number
+interface WarehouseToSampleListResponseTypes {
     _id: string
-    groupName: string
-}
-
-interface ReturnToVendorDocument {
-    _id: string
-    rtvNumber: string
-    vendorId: string
-    warehouseId: string
-    firstApprovedById: string | null
-    firstApproved: boolean | null
-    firstApprovedActionBy: string
-    firstApprovedAt: string
-    secondApprovedById: string | null
-    secondApproved: boolean | null
-    secondApprovedActionBy: string
-    secondApprovedAt: string
-    productSalesOrder: ProductSalesOrder
-    remark: string
-    status: string
-    companyId: string
-    isDeleted: boolean
-    isActive: boolean
-    __v: number
-    createdAt: string
-    updatedAt: string
-    vendorLabel: string
-    warehouseLabel: string
-}
-
-interface ReturnToVendorListResponse {
-    _id: string
-    warehouseLabel: string
-    vendorLabel: string
-    firstApproved: boolean | null
+    fromWarehouseLabel: string
+    firstApproved: null
     firstApprovedActionBy: string
     firstApprovedAt: string
     secondApprovedActionBy: string
     secondApprovedAt: string
-    secondApproved: boolean | null
+    secondApproved: null
     createdAt: string
     updatedAt: string
-    documents: ReturnToVendorDocument[]
+    documents: {
+        _id: string
+        wtsNumber: string
+        fromWarehouseId: string
+        toName: string
+        firstApprovedById: null
+        firstApproved: null
+        firstApprovedActionBy: string
+        firstApprovedAt: string
+        secondApprovedById: null
+        secondApproved: null
+        secondApprovedActionBy: string
+        secondApprovedAt: string
+        productSalesOrder: {
+            productGroupId: string
+            rate: number
+            quantity: number
+            _id: string
+            groupName: string
+        }
+        status: string
+        remark: string
+        companyId: string
+        isDeleted: boolean
+        isActive: boolean
+        __v: number
+        createdAt: string
+        updatedAt: string
+        fromWarehouseLabel: string
+    }[]
 }
 
-const RTVListingWrapper = () => {
-    const returnToVendorState: any = useSelector(
-        (state: RootState) => state.returnToVendor
+const WarehouseToSampleListingWrapper = () => {
+    const WarehouseToSampleState: any = useSelector(
+        (state: RootState) => state.warehouseToSample
     )
     const dispatch = useDispatch<AppDispatch>()
-    const { page, rowsPerPage, searchValue, items } = returnToVendorState
+    const { page, rowsPerPage, searchValue, items } = WarehouseToSampleState
     const navigate = useNavigate()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const [deleteReturnToVendor] = useDeleteReturnToVendorOrderMutation()
-    const [updateReturnToVendor] = useUpdateReturnToVendorApprovalMutation()
+    const [deleteWarehouseTransfer] = useDeleteWarehouseToSampleOrderMutation()
+    const [updateWarehouseTransfer] =
+        useUpdateWarehouseToSampleApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
 
     const { data, isFetching, isLoading } =
-        useGetPaginationReturnToVendorByGroupQuery({
+        useGetPaginationWarehouseToSampleByGroupQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['rtvNumber'],
+            params: ['wtsNumber'],
             page: page,
             filterBy: [
                 {
@@ -123,7 +118,6 @@ const RTVListingWrapper = () => {
             isPaginationRequired: true,
         })
 
-    // listing of return to vendor
     useEffect(() => {
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false))
@@ -136,10 +130,10 @@ const RTVListingWrapper = () => {
 
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteReturnToVendor(currentId).then((res: any) => {
+        deleteWarehouseTransfer(currentId).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast('success', 'Order deleted successfully!')
+                    showToast('success', 'Sale Order deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -152,28 +146,25 @@ const RTVListingWrapper = () => {
         })
     }
 
-    const handleFirstLevelomplete = (
+    const handleFirstComplete = (
         _id: string,
         value: boolean,
         message: string
     ) => {
         const currentDate = new Date().toLocaleDateString('en-GB')
-        updateReturnToVendor({
+        updateWarehouseTransfer({
             body: {
-                firstApprovedById: userData?.userId,
                 firstApproved: value,
-                firstApprovedActionBy: userData?.userName,
                 type: 'FIRST',
+                firstApprovedById: userData?.userId,
                 firstApprovedAt: currentDate,
+                firstApprovedActionBy: userData?.userName,
             },
             id: _id,
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        `First Level ${message} is successfully!`
-                    )
+                    showToast('success', `${message} is successfully!`)
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -183,28 +174,25 @@ const RTVListingWrapper = () => {
         })
     }
 
-    const handleSecondLevelComplete = (
+    const handleAccComplete = (
         _id: string,
         value: boolean,
         message: string
     ) => {
         const currentDate = new Date().toLocaleDateString('en-GB')
-        updateReturnToVendor({
+        updateWarehouseTransfer({
             body: {
-                secondApprovedById: userData?.userId,
                 secondApproved: value,
+                type: 'SECOND',
+                secondApprovedById: userData?.userId,
                 secondApprovedAt: currentDate,
                 secondApprovedActionBy: userData?.userName,
-                type: 'SECOND',
             },
             id: _id,
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        `Second Level ${message} is successfully!`
-                    )
+                    showToast('success', ` ${message} is successfully!`)
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -216,11 +204,29 @@ const RTVListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'rtvNo',
-            headerName: 'RTV No.',
+            field: 'wtsNumber',
+            headerName: 'WTS Number',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: ReturnToVendorListResponse) => (
-                <span> {row?._id} </span>
+            renderCell: (row: WarehouseToSampleListResponseTypes) => (
+                <span> {row?._id} </span> // this is a wtNumber we have to transform in _id
+            ),
+        },
+        {
+            field: 'fromWarehouseLabel',
+            headerName: 'From Warehouse',
+            flex: 'flex-[0.8_0.8_0%]',
+            align: 'center',
+            renderCell: (row: WarehouseToSampleListResponseTypes) => (
+                <span> {row?.fromWarehouseLabel} </span>
+            ),
+        },
+        {
+            field: 'toName',
+            headerName: 'Receiver Name',
+            flex: 'flex-[0.8_0.8_0%]',
+            align: 'center',
+            renderCell: (row: WarehouseToSampleListResponseTypes) => (
+                <span> {row?.documents[0]?.toName} </span>
             ),
         },
         {
@@ -228,7 +234,7 @@ const RTVListingWrapper = () => {
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: WarehouseToSampleListResponseTypes) => {
                 return (
                     <div className="w-full">
                         {row?.documents?.map((item) => {
@@ -247,38 +253,29 @@ const RTVListingWrapper = () => {
                 )
             },
         },
-        // {
-        //     field: 'remark',
-        //     headerName: 'Remark.',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'center',
-        //     renderCell: (row: ReturnToVendorListResponse) => (
-        //         <span> {row?.documents[0]?.remark} </span>
-        //     ),
-        // },
         {
-            field: 'firstApproved',
-            headerName: 'First level Status',
+            field: 'firstApprovedActionStatus',
+            headerName: 'First Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: WarehouseToSampleListResponseTypes) => {
                 return (
                     <span>
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
                             ? 'Pending'
-                            : 'Rejected'}{' '}
+                            : 'Rejected'}
                     </span>
                 )
             },
         },
         {
-            field: 'dhApprovedActionBy',
-            headerName: 'Level first Approved By',
+            field: 'firstApprovedActionBy',
+            headerName: 'First Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: WarehouseToSampleListResponseTypes) => {
                 return <span> {row?.firstApprovedActionBy} </span>
             },
         },
@@ -287,16 +284,16 @@ const RTVListingWrapper = () => {
             headerName: 'First Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: WarehouseToSampleListResponseTypes) => {
                 return <span> {row?.firstApprovedAt} </span>
             },
         },
         {
-            field: 'secondApproved',
-            headerName: 'Second Level Status',
+            field: 'secondApprovedActionByStatus',
+            headerName: 'Second Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: WarehouseToSampleListResponseTypes) => {
                 return (
                     <span>
                         {' '}
@@ -310,20 +307,20 @@ const RTVListingWrapper = () => {
             },
         },
         {
-            field: 'accApprovedActionBy',
-            headerName: 'Level Second Approved By',
+            field: 'secondApprovedActionBy',
+            headerName: 'Second Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: WarehouseToSampleListResponseTypes) => {
                 return <span> {row?.secondApprovedActionBy} </span>
             },
         },
         {
-            field: 'accApprovedAt',
+            field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: WarehouseToSampleListResponseTypes) => {
                 return <span> {row?.secondApprovedAt} </span>
             },
         },
@@ -332,7 +329,7 @@ const RTVListingWrapper = () => {
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: WarehouseToSampleListResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
             },
         },
@@ -341,41 +338,41 @@ const RTVListingWrapper = () => {
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: WarehouseToSampleListResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
         {
             field: 'Approved',
-            headerName: 'Approval Level',
+            headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
+            renderCell: (row: WarehouseToSampleListResponseTypes) => {
                 return (
-                    <div className="">
+                    <div>
                         {!row?.firstApproved ? (
                             <Stack direction="row" spacing={1}>
                                 {row?.firstApproved === null ? (
                                     <button
                                         id="btn"
-                                        className="overflow-hidden cursor-pointer z-0"
+                                        className=" overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
                                             showConfirmationDialog({
                                                 title: 'First Approve',
-                                                text: 'Do you want to Approve First Level ?',
+                                                text: 'Do you want to Approve ?',
                                                 showCancelButton: true,
                                                 showDenyButton: true,
                                                 denyButtonText: 'Reject',
                                                 next: (res) => {
                                                     if (res.isConfirmed) {
-                                                        return handleFirstLevelomplete(
+                                                        return handleFirstComplete(
                                                             row?._id,
                                                             res?.isConfirmed,
                                                             'Approval'
                                                         )
                                                     }
                                                     if (res.isDenied) {
-                                                        return handleFirstLevelomplete(
+                                                        return handleFirstComplete(
                                                             row?._id,
                                                             !res.isDenied,
                                                             'Rejected'
@@ -414,24 +411,24 @@ const RTVListingWrapper = () => {
                                 {row?.secondApproved === null ? (
                                     <button
                                         id="btn"
-                                        className="overflow-hidden cursor-pointer z-0"
+                                        className=" overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
                                             showConfirmationDialog({
                                                 title: 'Second Approval',
-                                                text: 'Do you want to Approve Second Level ?',
+                                                text: 'Do you want to Approve ?',
                                                 showCancelButton: true,
                                                 showDenyButton: true,
                                                 denyButtonText: 'Reject',
                                                 next: (res) => {
                                                     if (res.isConfirmed) {
-                                                        return handleSecondLevelComplete(
+                                                        return handleAccComplete(
                                                             row?._id,
                                                             res?.isConfirmed,
                                                             'Approval'
                                                         )
                                                     }
                                                     if (res.isDenied) {
-                                                        return handleSecondLevelComplete(
+                                                        return handleAccComplete(
                                                             row?._id,
                                                             !res.isDenied,
                                                             'Rejected'
@@ -488,25 +485,20 @@ const RTVListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: ReturnToVendorListResponse) =>
+            renderCell: (row: WarehouseToSampleListResponseTypes) =>
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        moduleName={UserModuleNameTypes.saleOrder}
-                        isEdit={true}
-                        isDelete={
-                            row.firstApproved === null &&
-                            row.secondApproved === null
-                                ? true
-                                : false
-                        }
+                        moduleName={UserModuleNameTypes.WarehouseTransfer}
+                        isEdit
+                        isDelete
                         handleEditActionButton={() => {
-                            navigate(`/return-to-vendor/edit/${row?._id}`)
+                            navigate(`/warehouse-to-sample/edit/${row?._id}`)
                         }}
                         handleDeleteActionButton={() => {
                             showConfirmationDialog({
-                                title: 'Delete RTV',
-                                text: 'Do you want to delete Return To Vendor?',
+                                title: 'Delete Sample',
+                                text: 'Do you want to delete this sample order ?',
                                 showCancelButton: true,
                                 next: (res: any) => {
                                     return res.isConfirmed
@@ -528,11 +520,11 @@ const RTVListingWrapper = () => {
     return (
         <>
             <SideNavLayout>
-                <RTVendor
+                <WarehouseTransferListing
                     columns={getAllowedAuthorizedColumns(
                         checkUserAccess,
                         columns,
-                        UserModuleNameTypes.saleOrder,
+                        UserModuleNameTypes.WarehouseTransfer,
                         UserModuleActionTypes.List
                     )}
                     rows={items}
@@ -543,4 +535,4 @@ const RTVListingWrapper = () => {
     )
 }
 
-export default RTVListingWrapper
+export default WarehouseToSampleListingWrapper

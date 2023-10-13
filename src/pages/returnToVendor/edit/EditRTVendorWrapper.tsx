@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { number, object, string } from 'yup'
+// import { number, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -255,23 +255,23 @@ const EditRTVendorWrapper = (props: Props) => {
     }
 
     // Form Validation Schema
-    const validationSchema = object({
-        rtvNo: string().required('Sale order number is required'),
-        vendorId: string().required('please select a vendor'),
-        remark: string(),
-        warehouseId: string().required('please select a warehouse'),
-        productSalesOrder: object().shape({
-            productGroupId: string().required('Please select a product name'),
-            rate: number()
-                .min(0, 'Rate must be greater than 0')
-                .required('Please enter rate')
-                .nullable(),
-            quantity: number()
-                .min(0, 'Quantity must be greater than 0')
-                .required('Please enter quantity')
-                .nullable(),
-        }),
-    })
+    // const validationSchema = object({
+    //     rtvNo: string().required('Sale order number is required'),
+    //     vendorId: string().required('please select a vendor'),
+    //     remark: string(),
+    //     warehouseId: string().required('please select a warehouse'),
+    //     productSalesOrder: object().shape({
+    //         productGroupId: string().required('Please select a product name'),
+    //         rate: number()
+    //             .min(0, 'Rate must be greater than 0')
+    //             .required('Please enter rate')
+    //             .nullable(),
+    //         quantity: number()
+    //             .min(0, 'Quantity must be greater than 0')
+    //             .required('Please enter quantity')
+    //             .nullable(),
+    //     }),
+    // })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -307,8 +307,6 @@ const EditRTVendorWrapper = (props: Props) => {
             })
         })
 
-        console.log('finalValues of return to vendor', finalValues)
-
         setApiStatus(true)
         setTimeout(() => {
             updateReturnToVendor({
@@ -338,7 +336,7 @@ const EditRTVendorWrapper = (props: Props) => {
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
-                validationSchema={validationSchema}
+                // validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
