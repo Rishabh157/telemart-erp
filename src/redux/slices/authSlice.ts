@@ -19,7 +19,6 @@ export interface AuthStateType {
     userData: userData | null
     formSubmitting: boolean
     customized: boolean
-    
 }
 
 const initialState: AuthStateType = {

@@ -229,7 +229,7 @@ const EditWarehouseTransfer = ({
                     {/*  Sales Order  */}
                     <div className="px-3">
                         <div className=" text-lg pb-2 font-medium text-primary-main">
-                            Product details 
+                            Product details
                         </div>
 
                         <FieldArray name="productSalesOrder">

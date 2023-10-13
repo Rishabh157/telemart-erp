@@ -61,6 +61,15 @@ const WarehouseToComapnyListingWrapper = () => {
             ),
         },
         {
+            field: 'toCompanyLabel',
+            headerName: 'Company Name',
+            flex: 'flex-[0.8_0.8_0%]',
+            align: 'center',
+            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => (
+                <span> {row?.toCompanyLabel} </span>
+            ),
+        },
+        {
             field: 'toWarehouseLabel',
             headerName: 'To Warehouse',
             flex: 'flex-[0.8_0.8_0%]',
@@ -254,7 +263,7 @@ const WarehouseToComapnyListingWrapper = () => {
                                         className=" overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
                                             showConfirmationDialog({
-                                                title: 'Account Approval',
+                                                title: 'Second Approval',
                                                 text: 'Do you want to Approve ?',
                                                 showCancelButton: true,
                                                 showDenyButton: true,
@@ -279,7 +288,7 @@ const WarehouseToComapnyListingWrapper = () => {
                                         }}
                                     >
                                         <Chip
-                                            label="ACC Pending "
+                                            label="Second Pending "
                                             color="warning"
                                             variant="outlined"
                                             size="small"
@@ -293,7 +302,7 @@ const WarehouseToComapnyListingWrapper = () => {
                                         className="cursor-pointer"
                                     >
                                         <Chip
-                                            label="Acc  Approved"
+                                            label="Second Approved"
                                             color="success"
                                             variant="outlined"
                                             size="small"
@@ -307,7 +316,7 @@ const WarehouseToComapnyListingWrapper = () => {
                                         className="cursor-pointer"
                                     >
                                         <Chip
-                                            label=" Acc Rejected"
+                                            label=" Second Rejected"
                                             color="error"
                                             variant="outlined"
                                             size="small"

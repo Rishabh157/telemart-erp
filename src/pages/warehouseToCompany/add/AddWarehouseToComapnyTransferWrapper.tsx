@@ -84,13 +84,13 @@ const AddWarehouseToComapnyTransferWrapper = (props: Props) => {
         (state: RootState) => state?.company
     )
     const companyOption = companyAllItems
-    ?.filter((ele: any) => ele._id !== userData?.companyId)
-    ?.map((ele: any) => {
-        return {
-            label: ele.companyName,
-            value: ele._id,
-        }
-    })
+        ?.filter((ele: any) => ele._id !== userData?.companyId)
+        ?.map((ele: any) => {
+            return {
+                label: ele.companyName,
+                value: ele._id,
+            }
+        })
     const {
         data: productGroupData,
         isLoading: productGroupIsLoading,
@@ -99,8 +99,6 @@ const AddWarehouseToComapnyTransferWrapper = (props: Props) => {
     const { allItems: productGroupItems }: any = useSelector(
         (state: RootState) => state?.productGroup
     )
-
-
 
     const warehouseOptions = warehouseItems?.map((ele: any) => {
         return {

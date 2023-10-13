@@ -81,7 +81,7 @@ const EditSaleOrder = ({
     const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
         {
             companyId,
-            dealerId:values?.dealerId
+            dealerId: values?.dealerId,
         },
         {
             skip: !values.dealerId,

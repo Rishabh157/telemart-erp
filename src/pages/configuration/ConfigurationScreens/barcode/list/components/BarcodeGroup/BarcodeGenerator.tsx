@@ -35,7 +35,6 @@ function AllBarcodes() {
     const { barcodesToPrint }: any = useSelector(
         (state: RootState) => state?.barcode
     )
-    console.log(outerBoxCode, 'outerBoxCode')
     const barcodeValues = barcodesToPrint
     useEffect(() => {
         const printFunc = setTimeout(() => {

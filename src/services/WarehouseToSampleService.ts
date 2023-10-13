@@ -132,6 +132,16 @@ export const WarehouseToSampleService = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+        //***** Dispached Barcode *****/
+        dispatchWarehouseToSampleBarcode: builder.mutation({
+            invalidatesTags: ['wts-master'],
+            query: (body: any) => ({
+                url: `bar-code/wts/outwardinventory`,
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 })
 
@@ -143,4 +153,5 @@ export const {
     useUpdateWarehouseToSampleApprovalMutation, // first and second level approveed
     useGetWarehouseToSampleByIdQuery, // find by warehouse to sample no.
     useDeleteWarehouseToSampleOrderMutation, // delete
+    useDispatchWarehouseToSampleBarcodeMutation, // barcode dispatced
 } = WarehouseToSampleService

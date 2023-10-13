@@ -90,9 +90,8 @@ const AddSaleOrder = ({
         }
     )
 
-    
     useEffect(() => {
-        if ( !isLoading && !isFetching) {
+        if (!isLoading && !isFetching) {
             dispatch(setDealerWarehouse(data?.data))
         }
     }, [data, isLoading, isFetching, dealerId, dispatch])

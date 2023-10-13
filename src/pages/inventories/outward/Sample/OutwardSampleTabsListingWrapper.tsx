@@ -14,9 +14,9 @@ import { IconType } from 'react-icons'
 import { IoRemoveCircle } from 'react-icons/io5'
 
 // |-- Internal Dependencies --|
-// import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { SoApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
+// import { WarehouseToSampleTransferResponseTypes } from 'src/models/OutwardRequest.model'
 // import OutwardRequestListing from './OutwardDealerTabs'
 import OutwardSampleTabs from './OutwardSampleTabs'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -40,12 +40,12 @@ import {
     setTotalItems,
 } from 'src/redux/slices/warehouseToSampleSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import {
-    useDispatchDealerBarcodeMutation,
-    useGetAllBarcodeOfDealerOutWardDispatchMutation,
-} from 'src/services/BarcodeService'
+import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-import { useGetPaginationWarehouseToSampleByGroupQuery } from 'src/services/WarehouseToSampleService'
+import {
+    useGetPaginationWarehouseToSampleByGroupQuery,
+    useDispatchWarehouseToSampleBarcodeMutation,
+} from 'src/services/WarehouseToSampleService'
 
 // |-- Types --|
 export type Tabs = {
@@ -72,17 +72,59 @@ type BarcodeListResponseType = {
     updatedAt: string
 }
 
+interface WarehouseToSampleTransferResponseTypes {
+    _id: string
+    fromWarehouseLabel: string
+    firstApproved: boolean
+    firstApprovedActionBy: string
+    firstApprovedAt: string
+    secondApprovedActionBy: string
+    secondApprovedAt: string
+    secondApproved: boolean
+    createdAt: string
+    updatedAt: string
+    documents: {
+        _id: string
+        wtsNumber: string
+        fromWarehouseId: string
+        toName: string
+        firstApprovedById: string
+        firstApproved: boolean
+        firstApprovedActionBy: string
+        firstApprovedAt: string
+        secondApprovedById: string
+        secondApproved: boolean
+        secondApprovedActionBy: string
+        secondApprovedAt: string
+        productSalesOrder: {
+            productGroupId: string
+            rate: number
+            quantity: number
+            _id: string
+            groupName: string
+        }
+        status: string
+        remark: string
+        companyId: string
+        isDeleted: boolean
+        isActive: boolean
+        __v: number
+        createdAt: string
+        updatedAt: string
+        fromWarehouseLabel: string
+    }[]
+}
+
 const OutwardSampleTabsListingWrapper = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
-        useState<SoApprovedGroupListResponseType | null>(null)
+        useState<WarehouseToSampleTransferResponseTypes | null>(null)
     const dispatch = useDispatch<AppDispatch>()
-    // const params = useParams()
-    // const warehouseId = params.id
-    // console.log("dealerId",dealerId)
+    const params = useParams()
+    const warehouseId = params.id
     const salesOrderState: any = useSelector(
         (state: RootState) => state.warehouseToSample
     )
@@ -105,10 +147,10 @@ const OutwardSampleTabsListingWrapper = () => {
                 fieldName: 'companyId',
                 value: userData?.companyId as string,
             },
-            // {
-            //     fieldName: 'warehouseId',
-            //     value: warehouseId,
-            // },
+            {
+                fieldName: 'fromWarehouseId',
+                value: warehouseId,
+            },
             {
                 fieldName: 'firstApproved',
                 value: true,
@@ -126,7 +168,7 @@ const OutwardSampleTabsListingWrapper = () => {
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
-        useDispatchDealerBarcodeMutation()
+        useDispatchWarehouseToSampleBarcodeMutation()
 
     useEffect(() => {
         if (!sampleIsFetching && !sampleIsLoading) {
@@ -140,20 +182,20 @@ const OutwardSampleTabsListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'soNumber',
-            headerName: 'So Number',
+            field: 'wtsNumber',
+            headerName: 'WTS Number',
             flex: 'flex-[0.6_0.6_0%]',
-            renderCell: (row: SoApprovedGroupListResponseType) => (
+            renderCell: (row: WarehouseToSampleTransferResponseTypes) => (
                 <span> {row?._id} </span>
             ),
         },
         {
             field: 'dealerLabel',
-            headerName: 'Dealer Name',
+            headerName: 'Receiver Name',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => (
-                <span> {row?.dealerName} </span>
+            renderCell: (row: WarehouseToSampleTransferResponseTypes) => (
+                <span> {row?.documents[0]?.toName} </span>
             ),
         },
         {
@@ -161,7 +203,7 @@ const OutwardSampleTabsListingWrapper = () => {
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => {
+            renderCell: (row: WarehouseToSampleTransferResponseTypes) => {
                 return (
                     <div className="w-full">
                         {row?.documents?.map((item) => {
@@ -185,7 +227,7 @@ const OutwardSampleTabsListingWrapper = () => {
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => {
+            renderCell: (row: WarehouseToSampleTransferResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
             },
         },
@@ -194,7 +236,7 @@ const OutwardSampleTabsListingWrapper = () => {
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => {
+            renderCell: (row: WarehouseToSampleTransferResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
@@ -203,7 +245,7 @@ const OutwardSampleTabsListingWrapper = () => {
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => (
+            renderCell: (row: WarehouseToSampleTransferResponseTypes) => (
                 <span>{row?.documents[0]?.status}</span>
             ),
         },
@@ -211,9 +253,11 @@ const OutwardSampleTabsListingWrapper = () => {
             field: 'actions',
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: SoApprovedGroupListResponseType) =>
-                row?.documents?.find((ele) => ele?.status === 'COMPLETE') ? (
+            renderCell: (row: WarehouseToSampleTransferResponseTypes) =>
+                row?.documents[0]?.status === 'COMPLETE' ? (
                     'Dispatched'
+                ) : row?.documents[0]?.status === 'DISPATCHED' ? (
+                    ''
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
@@ -342,7 +386,7 @@ const OutwardSampleTabsListingWrapper = () => {
         )
         barcodeDispatch({
             barcodedata: [...filterValue],
-            soId: [...(soid as string[])] as string[],
+            wtsId: [...(soid as string[])] as string[],
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -389,7 +433,7 @@ const OutwardSampleTabsListingWrapper = () => {
                         <div className="grid grid-cols-4 border-b-[1px] pb-2 border-black">
                             <div>
                                 <div className="flex gap-1 items-center">
-                                    <div className="font-bold">So Number</div>
+                                    <div className="font-bold">WTS Number</div>
                                     {':'}
                                     <div className="">
                                         {selectedItemsTobeDispatch?._id}
@@ -399,10 +443,15 @@ const OutwardSampleTabsListingWrapper = () => {
 
                             <div>
                                 <div className="flex gap-1 items-center">
-                                    <div className="font-bold">Dealer Name</div>
+                                    <div className="font-bold">
+                                        Receiver Name
+                                    </div>
                                     {':'}
                                     <div className="">
-                                        {selectedItemsTobeDispatch?.dealerName}
+                                        {
+                                            selectedItemsTobeDispatch
+                                                ?.documents[0]?.toName
+                                        }
                                     </div>
                                 </div>
                             </div>

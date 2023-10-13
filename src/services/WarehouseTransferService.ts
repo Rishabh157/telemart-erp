@@ -105,6 +105,16 @@ export const WarehouseTransferApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+
+        //***** Dispached Barcode *****/
+        dispatchWarehouseToWarehouseBarcode: builder.mutation({
+            invalidatesTags: ['WarehouseTransfer'],
+            query: (body: any) => ({
+                url: `bar-code/wtw/outwardinventory`,
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 })
 
@@ -118,4 +128,5 @@ export const {
     useGetWarehouseTransferByIdQuery,
     useDeleteWarehouseTransferMutation,
     useUpdateSoLevelMutation,
+    useDispatchWarehouseToWarehouseBarcodeMutation,
 } = WarehouseTransferApi

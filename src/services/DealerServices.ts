@@ -22,7 +22,6 @@ export const dealerApi = apiSlice.injectEndpoints({
             }),
         }),
 
-
         //***** GET PAGINATION DATA *****/
         getDealers: builder.query({
             providesTags: ['dealer'],

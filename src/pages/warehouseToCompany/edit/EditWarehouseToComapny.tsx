@@ -196,7 +196,7 @@ const EditWarehouseToComapny = ({
                                         e.target.value
                                     )
                                 }
-                                className="mt-0 rounded"
+                                className="mt-2 rounded"
                             />
 
                             {/* from Warehouse */}
@@ -248,6 +248,8 @@ const EditWarehouseToComapny = ({
 
                             <div className="-mt-2">
                                 <ATMTextArea
+                                    label="Remark"
+                                    placeholder="enter remark"
                                     minRows={1}
                                     name="remark"
                                     value={values.remark}
@@ -255,7 +257,6 @@ const EditWarehouseToComapny = ({
                                         handleSetFieldValue('remark', e)
                                     }
                                     // options={dropdownOptions.warehouseOptions}
-                                    label="remark"
                                 />
                             </div>
                             {/* Warehouse

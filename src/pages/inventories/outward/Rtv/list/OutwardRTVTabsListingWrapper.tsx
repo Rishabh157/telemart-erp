@@ -37,12 +37,11 @@ import {
     setTotalItems,
 } from 'src/redux/slices/returnToVendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import {
-    // useDispatchReturnToVendorBarcodeMutation,
-    useGetAllBarcodeOfDealerOutWardDispatchMutation,
-} from 'src/services/BarcodeService'
-import { useDispatchReturnToVendorBarcodeMutation } from 'src/services/ReturnToVendorService'
-import { useGetPaginationReturnToVendorByGroupQuery } from 'src/services/ReturnToVendorService'
+    useGetPaginationReturnToVendorByGroupQuery,
+    useDispatchReturnToVendorBarcodeMutation,
+} from 'src/services/ReturnToVendorService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import OutwardRTVTabs from './OutwardRTVTabs'
 import { useParams } from 'react-router-dom'
@@ -131,7 +130,7 @@ const OutwardRTVTabsListingWrapper = () => {
         (state: RootState) => state.returnToVendor
     )
     const { page, rowsPerPage, searchValue, items } = returnToVendorState
-    const { customized, userData } = useSelector(
+    const { customized, userData }: any = useSelector(
         (state: RootState) => state?.auth
     )
 
@@ -155,10 +154,6 @@ const OutwardRTVTabsListingWrapper = () => {
             {
                 fieldName: 'warehouseId',
                 value: warehouseId,
-            },
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
             },
             {
                 fieldName: 'firstApproved',

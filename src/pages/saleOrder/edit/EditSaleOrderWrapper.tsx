@@ -256,7 +256,6 @@ const EditSaleOrderWrapper = (props: Props) => {
                     ],
                 }
             })
-            console.log('productproductproduct', product)
             setEditSaleOrder(product)
         }
     }, [selectedItem])
@@ -335,12 +334,6 @@ const EditSaleOrderWrapper = (props: Props) => {
                 },
             })
         })
-        console.log('finalValues', finalValues)
-        //     // const productSalesOrder = {
-        //     //     productGroupId: values.productSalesOrder.productGroupId,
-        //     //     rate: values.productSalesOrder.rate,
-        //     //     quantity: values.productSalesOrder.quantity,
-        //     // }
 
         setApiStatus(true)
         setTimeout(() => {

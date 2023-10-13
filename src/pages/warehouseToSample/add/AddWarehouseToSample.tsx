@@ -7,16 +7,13 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { FormikProps, FieldArray } from 'formik'
-import { MdDeleteOutline } from 'react-icons/md'
+import { FieldArray, FormikProps } from 'formik'
 import { HiPlus } from 'react-icons/hi'
-import {
-    useDispatch,
-    //  useSelector
-} from 'react-redux'
+import { MdDeleteOutline } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -30,15 +27,12 @@ import { FormInitialValues } from './AddWarehouseToSampleWrapper'
 
 // |-- Redux --|
 // import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
-import {
-    AppDispatch,
-    //  RootState
-} from 'src/redux/store'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch } from 'src/redux/store'
 // import { useParams } from 'react-router-dom'
-import { showToast } from 'src/utils'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { showToast } from 'src/utils'
 
 // |-- Types --|
 type Props = {
@@ -70,7 +64,7 @@ const AddWarehouseToSample = ({
         },
     ]
 
-    const { values, setFieldValue, errors } = formikProps
+    const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch<AppDispatch>()
     // const [dealerId, setDealerId] = useState('')
@@ -93,9 +87,6 @@ const AddWarehouseToSample = ({
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
-
-    console.log('errors', errors)
-    console.log('values', values)
 
     return (
         <div className=" h-[calc(100vh-55px)] overflow-auto">

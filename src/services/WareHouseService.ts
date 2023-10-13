@@ -24,7 +24,7 @@ export const wareHouseApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
-        // company warehouse 
+        // company warehouse
         getWareHouses: builder.query({
             providesTags: ['WareHouse'],
             query: (companyId) => ({
@@ -94,5 +94,5 @@ export const {
     useGetWareHouseByIdQuery,
     useGetPaginationWareHousesQuery,
     useDeleteWareHouseMutation,
-    useGetDealerWareHousesQuery
+    useGetDealerWareHousesQuery,
 } = wareHouseApi

@@ -63,7 +63,7 @@ export type userData = {
     userRole: string
     firstName: string
     lastName: string
-    branchId:string
+    branchId: string
     allowedIp: string[]
 }
 
