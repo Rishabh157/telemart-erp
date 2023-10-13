@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
-// Filename:OutwardWarehouseTransferListing.tsx
+// Filename:SaleOrderListing.tsx
 // Type: List Component
 // Last Updated: JULY 04, 2023
 // Project: TELIMART - Front End
@@ -11,15 +11,15 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-
+import {
+    //  useNavigate,
+    useLocation,
+} from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-
-
 // |-- Redux --|
 import {
     setRowsPerPage,
@@ -33,28 +33,23 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OutwardWarehouseTransferListing = ({
-    columns,
-    rows,
-    setShowDropdown,
-}: Props) => {
+const OutwardWarehouseTransferListing = ({ columns, rows }: Props) => {
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const dispatch = useDispatch<AppDispatch>()
-    const WarehouseTransferState: any = useSelector(
+    const warehouseTransferState: any = useSelector(
         (state: RootState) => state.warehouseTransfer
     )
-    // const { pathname } = useLocation()
-    // const path = pathname.split('/')[1]
+    const { pathname } = useLocation()
+    const path = pathname.split('/')[1]
     // const isDealerPath = path === 'dealers'
     // const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
-        WarehouseTransferState
+        warehouseTransferState
     useEffect(() => {
         return () => {
             dispatch(setSearchValue(''))
@@ -62,37 +57,18 @@ const OutwardWarehouseTransferListing = ({
     }, [])
     return (
         <div
-            className={`px-4 
-             h-[calc(100vh-55px)]
-            `}
+            className={`px-4 ${
+                path === 'dealers'
+                    ? 'h-[calc(100vh-185px)]'
+                    : 'h-[calc(100vh-55px)]'
+            }`}
         >
-            {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Warehouse Transfer </ATMPageHeading>
-                {/* <ActionAuthHOC
-                    moduleName={
-                        isDealerPath
-                            ? UserModuleNameTypes.dealer
-                            : UserModuleNameTypes.WarehouseTransfer
-                    }
-                    actionName={
-                        isDealerPath
-                            ? UserModuleAddActionTypes.dealerSalesOrderAdd
-                            : UserModuleActionTypes.Add
-                    }
-                    component={
-                        <button
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + warehouse-transfer
-                        </button>
-                    }
-                /> */}
-            </div>
-
             <div
-                className={` border flex flex-col  rounded bg-white h-[calc(100%-75px)] `}
+                className={` border flex flex-col  rounded bg-white ${
+                    path === 'dealers'
+                        ? 'h-[calc(100%-50px)]'
+                        : 'h-[calc(100%-75px)]'
+                }`}
             >
                 {/*Table Header */}
                 <ATMTableHeader
@@ -112,7 +88,7 @@ const OutwardWarehouseTransferListing = ({
                 />
 
                 {/* Table */}
-                <div className="grow">
+                <div className="grow overflow-auto">
                     <ATMTable
                         isLoading={isTableLoading}
                         columns={columns}
@@ -122,8 +98,8 @@ const OutwardWarehouseTransferListing = ({
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full"
-                        setShowDropdown={setShowDropdown}
+                        extraClasses="h-full overflow-auto"
+                        // setShowDropdown={setShowDropdown}
                     />
                 </div>
 

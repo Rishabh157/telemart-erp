@@ -17,9 +17,7 @@ import { useNavigate } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import {
-    GroupByWarehouseTransferResponseTypes,
-} from 'src/models/WarehouseTransfer.model'
+import { GroupByWarehouseTransferResponseTypes } from 'src/models/WarehouseTransfer.model'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
@@ -124,10 +122,7 @@ const WarehouseTransferListingWrapper = () => {
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        ` ${message} is successfully!`
-                    )
+                    showToast('success', ` ${message} is successfully!`)
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -318,7 +313,7 @@ const WarehouseTransferListingWrapper = () => {
                                 {row?.firstApproved === null ? (
                                     <button
                                         id="btn"
-                                        className=" overflow-hidden cursor-pointer z-0"
+                                        className="overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
                                             showConfirmationDialog({
                                                 title: 'First Approve',
@@ -377,7 +372,7 @@ const WarehouseTransferListingWrapper = () => {
                                         className=" overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
                                             showConfirmationDialog({
-                                                title: 'Account Approval',
+                                                title: 'Second Approval',
                                                 text: 'Do you want to Approve ?',
                                                 showCancelButton: true,
                                                 showDenyButton: true,
@@ -402,7 +397,7 @@ const WarehouseTransferListingWrapper = () => {
                                         }}
                                     >
                                         <Chip
-                                            label="ACC Pending "
+                                            label="Second Pending "
                                             color="warning"
                                             variant="outlined"
                                             size="small"
@@ -416,7 +411,7 @@ const WarehouseTransferListingWrapper = () => {
                                         className="cursor-pointer"
                                     >
                                         <Chip
-                                            label="Acc  Approved"
+                                            label="Second  Approved"
                                             color="success"
                                             variant="outlined"
                                             size="small"
@@ -430,7 +425,7 @@ const WarehouseTransferListingWrapper = () => {
                                         className="cursor-pointer"
                                     >
                                         <Chip
-                                            label=" Acc Rejected"
+                                            label=" Second Rejected"
                                             color="error"
                                             variant="outlined"
                                             size="small"

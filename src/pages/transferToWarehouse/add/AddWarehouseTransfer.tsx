@@ -220,30 +220,17 @@ const AddWarehouseTransfer = ({
 
                             <div className="-mt-2">
                                 <ATMTextArea
+                                    label="Remark"
                                     minRows={1}
                                     name="remark"
                                     value={values.remark}
+                                    placeholder="enter remark"
+                                    className="rounded"
                                     onChange={(e) =>
                                         handleSetFieldValue('remark', e)
                                     }
-                                    // options={dropdownOptions.warehouseOptions}
-                                    label="remark"
                                 />
                             </div>
-                            {/* Warehouse
-                            <div className="-mt-2">
-                                <ATMSelectSearchable
-                                    name="companyWareHouseId"
-                                    value={values.companyWareHouseId}
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'companyWareHouseId',
-                                            e
-                                        )
-                                    }
-                                    options={dropdownOptions.warehouseOptions}
-                                    label="Warehouse"
-                                /> */}
                         </div>
                     </div>
                 </div>
