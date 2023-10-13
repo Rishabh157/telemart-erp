@@ -14,7 +14,7 @@ import { IconType } from 'react-icons'
 import { IoRemoveCircle } from 'react-icons/io5'
 
 // |-- Internal Dependencies --|
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 // import { WarehouseToSampleTransferResponseTypes } from 'src/models/OutwardRequest.model'
 // import OutwardRequestListing from './OutwardDealerTabs'
@@ -123,8 +123,8 @@ const OutwardSampleTabsListingWrapper = () => {
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
         useState<WarehouseToSampleTransferResponseTypes | null>(null)
     const dispatch = useDispatch<AppDispatch>()
-    const params = useParams()
-    const warehouseId = params.id
+    // const params = useParams()
+    // const warehouseId = params.id
     // console.log("dealerId",dealerId)
     const salesOrderState: any = useSelector(
         (state: RootState) => state.warehouseToSample
