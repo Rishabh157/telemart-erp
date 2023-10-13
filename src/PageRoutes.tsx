@@ -6,254 +6,256 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React from 'react'
 
 // |-- External Dependencies --|
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import { useDispatch } from 'react-redux'
 import {
-    UserModuleNameTypes,
     UserModuleActionTypes,
-    UserModuleTabsTypes,
     UserModuleAddActionTypes,
+    UserModuleNameTypes,
+    UserModuleTabsTypes,
     UserModuleWarehouseTabsTypes,
 } from 'src/models/userAccess/UserAccess.model'
+import { v4 as uuidv4 } from 'uuid'
+import ActionAuthHOC from './ActionAuthHoc'
+import AuthHOC from './AuthHOC'
+import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
+import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
+import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
+import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
+import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScreens/companyBranch/list/CompanyBranchListingWrapper'
 import {
-    AddArtistWrapper,
+    ASRListingWrapper,
     AddASRWrapper,
+    AddArtistWrapper,
+    AddAssetsAllocationWrapper,
     AddAssetsCategoryWrapper,
     AddAssetsLocationWrapper,
+    AddAssetsRelocationWrapper,
+    AddAssetsRequestWrapper,
+    AddAttributeGroupWrapper,
+    AddAttributeWrapper,
+    AddBarcodeWrapper,
+    AddCartonBoxWrapper,
+    AddCbBarcodeWrapper,
+    AddChannelCategoryWrapper,
+    AddChannelGroupWrapper,
+    AddChannelManagementWrapper,
+    AddCompanyWrapper,
     AddCompetitorWrapper,
+    AddDealerPinCodeTabWrapper,
+    AddDealerSchemeTabWrapper,
+    AddDealerWarehouseWarpper,
+    AddDealerWrapper,
+    AddDealersCategoryWrapper,
     AddDidManagementWrapper,
+    AddDispositionComplaintWrappper,
+    AddDispositionOneWrappper,
+    AddDispositionThreeWrappper,
+    AddDispositionTwoWrapper,
+    AddGRNWrapper,
+    AddInfluencerWrapper,
+    AddInitialCallOneWrapper,
+    AddInitialCallThreeWrappper,
+    AddInitialCallTwoWrapper,
+    AddInventoryManagementWrapper,
+    AddItemWrapper,
+    AddLanguageWrapper,
+    AddProductCategoryWrapper,
+    AddProductGroupWrapper,
+    AddProductSubCategoryWrapper,
+    AddProductWrapper,
+    AddPurchaseOrderTabWrapper,
+    AddPurchaseOrderWrapper,
+    // OrderListing,
+    AddSaleOrderWrapper,
+    AddSchemeWrapper,
+    AddSlotManagementWrapper,
+    AddTapeManagementWrapper,
+    AddUserWrapper,
+    AddVendorWarehouseWrapper,
+    AddVendorWrapper,
+    AddWarehouseWrapper,
+    AddWebsiteBlogWrapper,
+    AddWebsitePageWrapper,
+    AddWebsiteTagsWrapper,
+    AddWebsiteWrapper,
     ArtistListingWrapper,
-    ASRListingWrapper,
+    AssetsAllocationWrapper,
     AssetsCategoryWrapper,
     AssetsLocationWrapper,
-    BarcodeGenerator,
-    CompetitorManagementListingWrapper,
-    DealerOrderLedgerListTabWrapper,
-    EditArtistWrapper,
-    EditAssetsCategoryWrapper,
-    EditAssetsLocatonWrapper,
-    EditAssetsRequestwrapper,
-    EditChannelManagementWrapper,
-    EditCompetitorWraper,
-    EditDidManagementWrapper,
-    EditPurchaseOrderWrapper,
-    AddAttributeWrapper,
-    AttributesListingWrapper,
-    AddAttributeGroupWrapper,
+    AssetsRelocationWrapper,
+    AssetsRequestWrapper,
     AttributesGroupListingWrapper,
-    AddBarcodeWrapper,
+    AttributesListingWrapper,
+    Auth,
+    BarcodeGenerator,
     BarcodeListingWrapper,
-    ViewBarcodeWrapper,
-    AddCartonBoxWrapper,
+    CallListingWrapper,
     CartonBoxListingWrapper,
-    AddCompanyWrapper,
+    ChannelCategoryListingWrapper,
+    ChannelGroupListingWrapper,
+    ChannelManagementListingWrapper,
+    CompetitorManagementListingWrapper,
     ConfigurationCompanyListingWrapper,
-    AddDealersCategoryWrapper,
-    DealersCategoryListingWrapper,
-    AddGRNWrapper,
-    GRNListingWrapper,
-    AddItemWrapper,
-    ItemListingWrapper,
-    AddLanguageWrapper,
-    LanguageListingWrapper,
-    Locations,
-    AddProductCategoryWrapper,
-    ProductCategoryListingWrapper,
-    AddProductGroupWrapper,
-    ProductGroupListingWrapper,
-    AddProductWrapper,
-    ProductsListingWrapper,
-    AddProductSubCategoryWrapper,
-    ProductSubCategoryListingWrapper,
-    AddPurchaseOrderWrapper,
-    PurchaseOrderListingWrapper,
-    AddSchemeWrapper,
-    SchemeListingWrapper,
     // AddTaxesWrapper,
     // TaxesListingWrapper,
     // ConfigurationLayout,
     DashboardWrappper,
-    AddDealerWrapper,
-    DealersListingWrapper,
-    ViewDealer,
     DealerActivityTabWrapper,
     DealerGeneralInformationTabWrapper,
-    DealerWarehouseTabWrapper,
-    EditDealerWarehouseWrapper,
+    DealerListLedgerTabWrapper,
+    DealerOrderLedgerListTabWrapper,
     DealerSalesOrderTabWrapper,
-    AddDealerPinCodeTabWrapper,
-    AddDealerSchemeTabWrapper,
-    ListDealerPincodeTabWrapper,
-    ListDealerSchemeTabWrapper,
-    InwardInventoryWrapper,
-    InventoryListingWrapper,
-    // OrderListing,
-    AddSaleOrderWrapper,
-    EditSaleOrderWrapper,
-    SaleOrderListingWrapper,
-    UsersListingWrapper,
-    AddUserWrapper,
-    EditUserWrapper,
-    AddVendorWrapper,
-    VendorsListingWrapper,
-    AddPurchaseOrderTabWrapper,
-    ViewVendor,
-    VendorActivityTabWrapper,
-    VendorGeneralInformationTabWrapper,
-    VendorWarehouseTabWrapper,
-    VendorPurchaseOrderTabWrapper,
-    AddWarehouseWrapper,
-    WarehousesListingWrapper,
-    ViewWarehouseWrapper,
-    ProfileWrappper,
-    EditCompanyWrapper,
-    EditAttributeWrapper,
-    EditProductCategoryWrapper,
-    EditAttributeGroupWrapper,
-    EditProductGroupWrapper,
-    EditItemWrapper,
-    EditCartonBoxWrapper,
-    EditASRWrapper,
-    EditLanguageWrapper,
-    EditDealersCategoryWrapper,
-    EditProductSubCategoryWrapper,
-    EditVendorWrapper,
-    EditDealerWrapper,
-    EditWarehouseWrapper,
-    EditProductWrapper,
-    EditSchemeWrapper,
-    ViewPurchaseOrderWrapper,
-    AddCbBarcodeWrapper,
+    DealerWarehouseTabWrapper,
+    DealersCategoryListingWrapper,
+    DealersListingWrapper,
     DidManagementListingWrapper,
-    OrganisationHierarchy,
-    ChannelManagementListingWrapper,
-    SlotManagementListingWrapper,
-    AddTapeManagementWrapper,
-    TapeManagementListingWrapper,
-    ChannelGroupListingWrapper,
-    AddChannelGroupWrapper,
-    EditChannelGroupWrapper,
-    AddChannelManagementWrapper,
-    ChannelCategoryListingWrapper,
-    AddChannelCategoryWrapper,
-    EditTapeManagementWrapper,
-    EditChannelCategoryWrapper,
-    Auth,
-    AddSlotManagementWrapper,
-    EditSlotManagementWrapper,
-    WebstieListingWrapper,
-    AddWebsiteWrapper,
-    EditWebsiteWrapper,
-    DispositionOneListingWrapper,
-    ListWebstieBlogWrapper,
-    AddWebsiteBlogWrapper,
-    EditWebsiteBlogWrapper,
-    WebsiteBlogViewWrapper,
-    WebsitePageListingWrapper,
-    AddWebsitePageWrapper,
-    EditWebsitePageWrapper,
-    ViewWebsitePageWrapper,
-    InitialCallOneListingWrapper,
-    InitialCallTwoListingWrapper,
-    DispositionTwoListingWrapper,
-    DispositionThreeListingWrapper,
-    AddDispositionOneWrappper,
-    PageNotFound,
-    AddDispositionThreeWrappper,
-    EditDispositionThreeWrapper,
-    AddDispositionTwoWrapper,
-    EditDispositionTwoWrapper,
-    EditDispositionOneWrappper,
-    AddInitialCallOneWrapper,
-    AddInitialCallTwoWrapper,
-    EditInitialCallOneWrapper,
-    EditInitialCallTwoWrapper,
     DispositionComplaintListingWrapper,
-    AddDispositionComplaintWrappper,
-    EditDispositionComplaintWrappper,
-    InitialCallThreeListingWrapper,
-    EditInitialCallThreeWrapper,
-    AddInitialCallThreeWrappper,
-    ViewDispositionThreeWrappper,
-    ViewInitialCallThreeWrappper,
-    OrderViewWrapper,
-    Order,
-    InquiryViewWrapper,
-    InquiryListingWrapper,
-    InfluencerListingWrapper,
-    AddAssetsRequestWrapper,
-    AddAssetsRelocationWrapper,
-    AssetsRelocationWrapper,
-    AssetsRequestWrapper,
-    AssetsAllocationWrapper,
-    AddAssetsAllocationWrapper,
-    AddInfluencerWrapper,
-    CallListingWrapper,
-    WebsiteTagListingWrapper,
-    AddWebsiteTagsWrapper,
-    EditWebsiteTagWrapper,
-    ViewWebsiteTagsWrapper,
-    // ListDealerSupervisorTabWrapper,
-    // DealerSupervisorTabWrapper,
-    UserAccessWrapper,
+    DispositionOneListingWrapper,
+    DispositionThreeListingWrapper,
+    DispositionTwoListingWrapper,
+    EditASRWrapper,
+    EditArtistWrapper,
+    EditAssetsCategoryWrapper,
+    EditAssetsLocatonWrapper,
+    EditAssetsRequestwrapper,
+    EditAttributeGroupWrapper,
+    EditAttributeWrapper,
+    EditCartonBoxWrapper,
+    EditChannelCategoryWrapper,
+    EditChannelGroupWrapper,
+    EditChannelManagementWrapper,
+    EditCompanyWrapper,
+    EditCompetitorWraper,
     // ApprovedOrderListing,
     // ApprovedOrderViewWrapper,
     EditDealerSchemeWrapper,
-    DealerListLedgerTabWrapper,
-    AddDealerWarehouseWarpper,
-    AddVendorWarehouseWrapper,
-    EditVendorWarehouseWrapper,
-    VendorListLedgerTabWrapper,
-    AddInventoryManagementWrapper,
+    EditDealerWarehouseWrapper,
+    EditDealerWrapper,
+    EditDealersCategoryWrapper,
+    EditDidManagementWrapper,
+    EditDispositionComplaintWrappper,
+    EditDispositionOneWrappper,
+    EditDispositionThreeWrapper,
+    EditDispositionTwoWrapper,
+    EditInitialCallOneWrapper,
+    EditInitialCallThreeWrapper,
+    EditInitialCallTwoWrapper,
     EditInventoryManagementWrapper,
+    EditItemWrapper,
+    EditLanguageWrapper,
+    EditProductCategoryWrapper,
+    EditProductGroupWrapper,
+    EditProductSubCategoryWrapper,
+    EditProductWrapper,
+    EditPurchaseOrderWrapper,
+    EditSaleOrderWrapper,
+    EditSchemeWrapper,
+    EditSlotManagementWrapper,
+    EditTapeManagementWrapper,
+    EditUserWrapper,
+    EditVendorWarehouseWrapper,
+    EditVendorWrapper,
+    EditWarehouseWrapper,
+    EditWebsiteBlogWrapper,
+    EditWebsitePageWrapper,
+    EditWebsiteTagWrapper,
+    EditWebsiteWrapper,
+    GRNListingWrapper,
+    InfluencerListingWrapper,
+    InitialCallOneListingWrapper,
+    InitialCallThreeListingWrapper,
+    InitialCallTwoListingWrapper,
+    InquiryListingWrapper,
+    InquiryViewWrapper,
+    InventoryListingWrapper,
     InventoryManagementListingWrapper,
+    InwardInventoryWrapper,
+    ItemListingWrapper,
+    LanguageListingWrapper,
+    ListDealerPincodeTabWrapper,
+    ListDealerSchemeTabWrapper,
+    ListWebstieBlogWrapper,
+    Locations,
+    Order,
+    OrderViewWrapper,
+    OrganisationHierarchy,
+    PageNotFound,
+    ProductCategoryListingWrapper,
+    ProductGroupListingWrapper,
+    ProductSubCategoryListingWrapper,
+    ProductsListingWrapper,
+    ProfileWrappper,
+    PurchaseOrderListingWrapper,
+    SaleOrderListingWrapper,
+    SchemeListingWrapper,
+    SlotManagementListingWrapper,
+    TapeManagementListingWrapper,
+    // ListDealerSupervisorTabWrapper,
+    // DealerSupervisorTabWrapper,
+    UserAccessWrapper,
+    UsersListingWrapper,
+    VendorActivityTabWrapper,
+    VendorGeneralInformationTabWrapper,
+    VendorListLedgerTabWrapper,
+    VendorPurchaseOrderTabWrapper,
+    VendorWarehouseTabWrapper,
+    VendorsListingWrapper,
+    ViewBarcodeWrapper,
+    ViewDealer,
+    ViewDispositionThreeWrappper,
+    ViewInitialCallThreeWrappper,
+    ViewPurchaseOrderWrapper,
+    ViewVendor,
+    ViewWarehouseWrapper,
+    ViewWebsitePageWrapper,
+    ViewWebsiteTagsWrapper,
+    WarehousesListingWrapper,
+    WebsiteBlogViewWrapper,
+    WebsitePageListingWrapper,
+    WebsiteTagListingWrapper,
+    WebstieListingWrapper,
 } from './pages/index'
-import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
-import { useDispatch } from 'react-redux'
+import InwardsTabs from './pages/inventories/inward'
+import InwardCompanyTabsListingWrapper from './pages/inventories/inward/Company/InwardCompanyTabsListingWrapper'
+import InwardCustomerTabsListingWrapper from './pages/inventories/inward/Customer/InwardCustomerTabsListingWrapper'
+import InwardDealerTabsListingWrapper from './pages/inventories/inward/Dealer/InwardDealerTabsListingWrapper'
+import InwardEcomTabsListingWrapper from './pages/inventories/inward/Ecom/InwardEcomTabsListingWrapper'
+import InwardReplacementTabsListingWrapper from './pages/inventories/inward/Replacement/InwardReplacementTabsListingWrapper'
+import InwardSampleTabsListingWrapper from './pages/inventories/inward/Sample/InwardSampleTabsListingWrapper'
+import InwardWarehouseTabsListingWrapper from './pages/inventories/inward/Warehouse/InwardWarehouseTabsListingWrapper'
+import OutwardTabs from './pages/inventories/outward'
+import OutwardWarehouseToComapnyListingWrapper from './pages/inventories/outward/Company/list/OutwardWarehouseToComapnyListingWrapper'
+import OutwardCustomerTabsListingWrapper from './pages/inventories/outward/Customer/OutwardCustomerTabsListingWrapper'
+import OutwardDealerTabsListingWrapper from './pages/inventories/outward/Dealer/OutwardDealerTabsListingWrapper'
+import DispatchedInvoice from './pages/inventories/outward/Dealer/components/DispatchedInvoice'
+import OutwardEcomTabsListingWrapper from './pages/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
+import OutwardReplacementTabsListingWrapper from './pages/inventories/outward/Replacement/OutwardReplacementTabsListingWrapper'
+import OutwardRTVTabsListingWrapper from './pages/inventories/outward/Rtv/list/OutwardRTVTabsListingWrapper'
+import OutwardSampleTabsListingWrapper from './pages/inventories/outward/Sample/OutwardSampleTabsListingWrapper'
+import OutwardWarehouseTransferListingWrapper from './pages/inventories/outward/Warehouse/list/OutwardWarehouseTransferListingWrapper'
+import InventorisTabsLayout from './pages/inventories/tabs'
+import ViewSlot from './pages/media/slotManagement'
+import SlotRunViewsListingWrapper from './pages/media/slotManagement/slotRunView/SlotRunViewsListingWrapper'
+import AddRTVendorWrapper from './pages/returnToVendor/add/AddRTVendorWrapper'
+import EditRTVendorWrapper from './pages/returnToVendor/edit/EditRTVendorWrapper'
+import RTVListingWrapper from './pages/returnToVendor/list/RTVListingWrapper'
+import AddWarehouseTransferWrapper from './pages/transferToWarehouse/add/AddWarehouseTransferWrapper'
+import EditWarehouseTransferWrapper from './pages/transferToWarehouse/edit/EditWarehouseTransferWrapper'
+import WarehouseTransferListingWrapper from './pages/transferToWarehouse/list/WarehouseTransferListingWrapper'
+import AddWarehouseToComapnyTransferWrapper from './pages/warehouseToCompany/add/AddWarehouseToComapnyTransferWrapper'
+import EditWarehouseToComapnyWrapper from './pages/warehouseToCompany/edit/EditWarehouseToComapnyWrapper'
+import WarehouseToComapnyListingWrapper from './pages/warehouseToCompany/list/WarehouseToComapnyListingWrapper'
 import {
     setAccessToken,
     setDeviceId,
     setRefreshToken,
     setUserData,
 } from './redux/slices/authSlice'
-import { v4 as uuidv4 } from 'uuid'
-import InventorisTabsLayout from './pages/inventories/tabs'
-import OutwardDealerTabsListingWrapper from './pages/inventories/outward/Dealer/OutwardDealerTabsListingWrapper'
-import OutwardTabs from './pages/inventories/outward'
-import OutwardCustomerTabsListingWrapper from './pages/inventories/outward/Customer/OutwardCustomerTabsListingWrapper'
-import InwardsTabs from './pages/inventories/inward'
-import InwardDealerTabsListingWrapper from './pages/inventories/inward/Dealer/InwardDealerTabsListingWrapper'
-import InwardCustomerTabsListingWrapper from './pages/inventories/inward/Customer/InwardCustomerTabsListingWrapper'
-import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
-import AuthHOC from './AuthHOC'
-import ActionAuthHOC from './ActionAuthHoc'
-import OutwardRTVTabsListingWrapper from './pages/inventories/outward/Rtv/list/OutwardRTVTabsListingWrapper'
-import OutwardSampleTabsListingWrapper from './pages/inventories/outward/Sample/OutwardSampleTabsListingWrapper'
-import OutwardEcomTabsListingWrapper from './pages/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
-import OutwardReplacementTabsListingWrapper from './pages/inventories/outward/Replacement/OutwardReplacementTabsListingWrapper'
-import InwardEcomTabsListingWrapper from './pages/inventories/inward/Ecom/InwardEcomTabsListingWrapper'
-import InwardReplacementTabsListingWrapper from './pages/inventories/inward/Replacement/InwardReplacementTabsListingWrapper'
-import InwardSampleTabsListingWrapper from './pages/inventories/inward/Sample/InwardSampleTabsListingWrapper'
-import InwardWarehouseTabsListingWrapper from './pages/inventories/inward/Warehouse/InwardWarehouseTabsListingWrapper'
-import OutwardCompanyTabsListingWrapper from './pages/inventories/outward/Company/OutwardCompanyTabsListingWrapper'
-import InwardCompanyTabsListingWrapper from './pages/inventories/inward/Company/InwardCompanyTabsListingWrapper'
-import ViewSlot from './pages/media/slotManagement'
-import SlotRunViewsListingWrapper from './pages/media/slotManagement/slotRunView/SlotRunViewsListingWrapper'
-import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScreens/companyBranch/list/CompanyBranchListingWrapper'
-import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
-import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
-import DispatchedInvoice from './pages/inventories/outward/Dealer/components/DispatchedInvoice'
-import RTVListingWrapper from './pages/returnToVendor/list/RTVListingWrapper'
-import AddRTVendorWrapper from './pages/returnToVendor/add/AddRTVendorWrapper'
-import EditRTVendorWrapper from './pages/returnToVendor/edit/EditRTVendorWrapper'
-import EditWarehouseTransferWrapper from './pages/transferToWarehouse/edit/EditWarehouseTransferWrapper'
-import WarehouseTransferListingWrapper from './pages/transferToWarehouse/list/WarehouseTransferListingWrapper'
-import AddWarehouseTransferWrapper from './pages/transferToWarehouse/add/AddWarehouseTransferWrapper'
-import OutwardWarehouseTransferListingWrapper from './pages/inventories/outward/Warehouse/list/OutwardWarehouseTransferListingWrapper'
 import WarehouseToSampleListingWrapper from './pages/warehouseToSample/list/WarehouseToSampleListingWrapper'
 import AddWarehouseToSampleWrapper from './pages/warehouseToSample/add/AddWarehouseToSampleWrapper'
 import EditWarehouseToSampleWrapper from './pages/warehouseToSample/edit/EditWarehouseToSampleWrapper'
@@ -942,10 +944,10 @@ const PageRoutes = () => {
                                 element={
                                     <ActionAuthHOC
                                         component={
-                                            <OutwardCompanyTabsListingWrapper />
+                                            <OutwardWarehouseToComapnyListingWrapper />
                                         }
                                         moduleName={
-                                            UserModuleNameTypes.wareHouse
+                                            UserModuleNameTypes.warehouseToComapny
                                         }
                                         actionName={
                                             UserModuleWarehouseTabsTypes.outwardInventoriesCompany
@@ -1167,6 +1169,46 @@ const PageRoutes = () => {
                                 component={<EditWarehouseTransferWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.WarehouseTransfer
+                                }
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
+                    />
+
+                    <Route
+                        path="/warehouse-to-company"
+                        element={
+                            <AuthHOC
+                                component={<WarehouseToComapnyListingWrapper />}
+                                moduleName={
+                                    UserModuleNameTypes.warehouseToComapny
+                                }
+                            />
+                        }
+                    ></Route>
+                    <Route
+                        path="warehouse-to-company/add"
+                        element={
+                            <ActionAuthHOC
+                                component={
+                                    <AddWarehouseToComapnyTransferWrapper />
+                                }
+                                moduleName={
+                                    UserModuleNameTypes.warehouseToComapny
+                                }
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="warehouse-to-company/edit/:id"
+                        element={
+                            <ActionAuthHOC
+                                component={<EditWarehouseToComapnyWrapper />}
+                                moduleName={
+                                    UserModuleNameTypes.warehouseToComapny
                                 }
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect

@@ -51,7 +51,7 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/return-to-vendor',
     },
     {
-        label: 'Update Return To Vendor',
+        label: 'Edit Return To Vendor',
     },
 ]
 
@@ -65,7 +65,7 @@ const EditRTVendor = ({
         ...dropdownOptions,
     }
 
-    const { values, setFieldValue , errors } = formikProps
+    const { values, setFieldValue, errors } = formikProps
     const [i, setI] = useState(0)
     const dispatch = useDispatch<AppDispatch>()
     const [productGroup, setProductGroup] = useState('')
@@ -99,7 +99,7 @@ const EditRTVendor = ({
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Edit Return To Vendor </ATMPageHeading>
+                    <ATMPageHeading> Update Return To Vendor </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -119,7 +119,7 @@ const EditRTVendor = ({
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
                             >
-                                Update RTV
+                                Update
                             </button>
                         </div>
                     </div>

@@ -123,6 +123,12 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.WarehouseTransfer,
     },
     {
+        label: 'WTC Transfer',
+        icon: TbBuildingWarehouse,
+        path: '/warehouse-to-company',
+        name: UserModuleNameTypes.warehouseToComapny,
+    },
+    {
         label: 'Inquiry',
         icon: MdCallReceived,
         path: '/inquiry',

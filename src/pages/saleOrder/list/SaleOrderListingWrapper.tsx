@@ -64,7 +64,12 @@ const SaleOrderListingWrapper = () => {
             searchValue: searchValue,
             params: ['soNumber', 'dealerLabel'],
             page: page,
-            filterBy: [],
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,

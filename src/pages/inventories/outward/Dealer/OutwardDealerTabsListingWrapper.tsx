@@ -86,7 +86,9 @@ const OutwardDealerTabsListingWrapper = () => {
         (state: RootState) => state.saleOrder
     )
     const { page, rowsPerPage, searchValue, items } = salesOrderState
-    const { customized } = useSelector((state: RootState) => state?.auth)
+    const { customized, userData } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     const {
         data: soData,
@@ -102,6 +104,10 @@ const OutwardDealerTabsListingWrapper = () => {
             //     fieldName: 'warehouseId',
             //     value: warehouseId,
             // },
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId as string,
+            },
             {
                 fieldName: 'dhApproved',
                 value: true,
@@ -205,8 +211,10 @@ const OutwardDealerTabsListingWrapper = () => {
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: SoApprovedGroupListResponseType) =>
-                row?.documents?.find((ele) => ele?.status === 'COMPLETE') ? (
+                row?.documents[0]?.status === 'COMPLETE' ? (
                     'Dispatched'
+                ) : row?.documents[0]?.status === 'DISPATCHED' ? (
+                    ''
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
