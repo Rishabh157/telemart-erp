@@ -19,6 +19,7 @@ export type StateListResponse = {
 }
 
 export type AddState = {
+    isUnion: boolean
     stateName: string
     companyId: string
     countryId: string

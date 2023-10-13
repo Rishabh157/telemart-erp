@@ -42,7 +42,9 @@ const Header = () => {
     const themeColor = color ? JSON.parse(color) : ''
     const [siteMode, setSiteMode] = useState(themeColor)
     const [companyName, setCompanyName] = useState('')
-    const { data, isFetching, isLoading } = useGetAllCompaniesQuery('')
+    const { data, isFetching, isLoading } = useGetAllCompaniesQuery('', {
+        skip: !userData?.companyId,
+    })
     useEffect(() => {
         if (!isLoading && !isFetching) {
             if (data?.data?.status) {

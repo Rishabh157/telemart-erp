@@ -28,6 +28,7 @@ type Props = {
 
 export type FormInitialValues = {
     stateName: string
+    isUnion: boolean
 }
 
 const AddStateWrapper = ({ onClose }: Props) => {
@@ -40,6 +41,7 @@ const AddStateWrapper = ({ onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
     const initialValues: FormInitialValues = {
         stateName: '',
+        isUnion: false,
     }
     const validationSchema = object({
         stateName: string().required('State Name is required'),
@@ -49,6 +51,7 @@ const AddStateWrapper = ({ onClose }: Props) => {
         setTimeout(() => {
             AddState({
                 stateName: values.stateName,
+                isUnion: values.isUnion,
                 countryId: selectedLocationCountries?.value || '',
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
@@ -56,13 +59,15 @@ const AddStateWrapper = ({ onClose }: Props) => {
                     if (res?.data?.status) {
                         showToast('success', 'State added successfully!')
                         onClose()
+                        setApiStatus(false)
                     } else {
                         showToast('error', res?.data?.message)
+                        setApiStatus(false)
                     }
                 } else {
                     showToast('error', 'Something went wrong')
+                    setApiStatus(false)
                 }
-                setApiStatus(false)
             })
         }, 1000)
     }

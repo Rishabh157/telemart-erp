@@ -59,10 +59,15 @@ const VerticalNavBar = ({
     const { customized, userData } = useSelector(
         (state: RootState) => state?.auth
     )
-    const { data, isLoading, isFetching } = useGetUserAccessQuery({
-        userId: userData?.userId ? (userData?.userId as string) : null,
-        userRole: userData?.userRole as string,
-    })
+    const { data, isLoading, isFetching } = useGetUserAccessQuery(
+        {
+            userId: userData?.userId ? (userData?.userId as string) : null,
+            userRole: userData?.userRole as string,
+        },
+        {
+            skip: !userData?.companyId,
+        }
+    )
 
     useEffect(() => {
         if (!isLoading && !isFetching && data) {

@@ -57,7 +57,7 @@ const steps = [
             companyName: string().required('Company name is required'),
             websiteUrl: string().url().required('Website url is required'),
             gstNo: string()
-                .matches(validationofGst, 'Invalid Gst Number')
+                .matches(validationofGst, 'gst number must be 15 digit')
                 .required('GST number is required'),
             address: string().required('Address is required'),
             phoneNo: string()
@@ -150,6 +150,7 @@ const AddCompanyWrapper = () => {
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast('success', 'Added successfully!')
+                            navigate('/configurations/company')
                         } else {
                             showToast('error', res?.data?.message)
                         }
@@ -157,7 +158,6 @@ const AddCompanyWrapper = () => {
                         showToast('error', 'Something went wrong')
                     }
                 })
-                navigate('/configurations/company')
             }, 1000)
         } else {
             dispatch(setFormSubmitting(false))

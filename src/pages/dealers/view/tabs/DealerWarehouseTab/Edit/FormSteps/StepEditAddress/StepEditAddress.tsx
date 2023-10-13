@@ -196,7 +196,8 @@ const StepEditAddress = ({
                                                         })
                                                     }}
                                                     selectedFile={
-                                                        values.gstCertificate
+                                                        values?.billing_address
+                                                            ?.gstCertificate
                                                     }
                                                     disabled={false}
                                                 />
