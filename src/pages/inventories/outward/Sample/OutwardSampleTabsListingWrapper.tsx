@@ -373,6 +373,7 @@ const OutwardSampleTabsListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                vendorId,
                 createdAt,
                 isActive,
                 isDeleted,

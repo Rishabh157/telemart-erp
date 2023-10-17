@@ -118,7 +118,11 @@ export const WarehouseTransferApi = apiSlice.injectEndpoints({
 
         //***** Inward Warehouse *****/
         inwardWarehouseToWarehouseBarcode: builder.mutation({
-            invalidatesTags: ['barcode'],
+            invalidatesTags: [
+                'WarehouseTransfer',
+                'WarehouseToComapny',
+                'wts-master',
+            ],
             query: (body) => ({
                 url: `/bar-code/warehouse/inwardinventory`,
                 method: 'PUT',

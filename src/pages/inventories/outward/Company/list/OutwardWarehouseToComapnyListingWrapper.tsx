@@ -344,6 +344,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                vendorId,
                 createdAt,
                 isActive,
                 isDeleted,

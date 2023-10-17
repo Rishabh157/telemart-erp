@@ -42,6 +42,7 @@ const CompanyBranchListingWrapper = () => {
     const companyBranchState: any = useSelector(
         (state: RootState) => state.companybranch
     )
+    const { userData } = useSelector((state: RootState) => state.auth)
     const { page, rowsPerPage, items, searchValue } = companyBranchState
 
     const [deleteCompanyBranch] = useDeleteCompanyBranchMutation()
@@ -108,8 +109,8 @@ const CompanyBranchListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'companyId',
+                value: userData?.companyId,
             },
         ],
         dateFilter: {},
