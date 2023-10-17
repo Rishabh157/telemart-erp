@@ -119,6 +119,24 @@ export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** Barcode Rtv *****/
+        getVendorRTVByBarcodeStatus: builder.query({
+            providesTags: ['Barcode'],
+            query: ({
+                body,
+                companyId,
+                status,
+            }: {
+                body: PaginationType
+                companyId: string
+                status: string
+            }) => ({
+                url: `bar-code/inventory/companyid/${companyId}/status/${status}`,
+                method: 'Post',
+                body,
+            }),
+        }),
     }),
 })
 
@@ -130,4 +148,5 @@ export const {
     useGetReturnToOrderByIdQuery, // find by rtv no.
     useDeleteReturnToVendorOrderMutation, // delete
     useDispatchReturnToVendorBarcodeMutation, // dispatch
+    useGetVendorRTVByBarcodeStatusQuery,
 } = ReturnToVendorServiceApi

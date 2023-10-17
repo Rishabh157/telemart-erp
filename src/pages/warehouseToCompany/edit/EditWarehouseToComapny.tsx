@@ -184,11 +184,11 @@ const EditWarehouseToComapny = ({
                         <div className="grid grid-cols-4 gap-4">
                             {/* SO Number */}
                             <ATMTextField
+                                readOnly={true}
+                                disabled={true}
                                 name="wtcNumber"
                                 value={values.wtcNumber}
                                 label="Warehouse transfer No."
-                                readOnly
-                                disabled
                                 placeholder="WT Number"
                                 onChange={(e) =>
                                     handleSetFieldValue(

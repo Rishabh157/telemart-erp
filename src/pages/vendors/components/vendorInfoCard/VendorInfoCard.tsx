@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:VendorInfoCard.tsx
 // Type: card Component
-// Last Updated: JULY 04, 2023
+// Last Updated: OCTOBER 16, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -31,6 +31,7 @@ const VendorInfoCard = ({ vendorData, actionIcons }: Props) => {
     const { selectedItem }: any = useSelector(
         (state: RootState) => state.vendor
     )
+
     const [changeVendorStatus] = useDeactivateVendorMutation()
 
     const handleVendorStatus = () => {

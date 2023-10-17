@@ -315,10 +315,7 @@ const EditRTVendorWrapper = (props: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast(
-                            'success',
-                            'Return To Vendor Updated successfully!'
-                        )
+                        showToast('success', 'Updated successfully!')
                         navigate('/return-to-vendor')
                     } else {
                         showToast('error', res?.data?.message)

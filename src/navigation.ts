@@ -99,7 +99,7 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.saleOrder,
     },
     {
-        label: 'RTV',
+        label: 'RTV Transfer',
         icon: FiUsers,
         path: '/return-to-vendor',
         name: UserModuleNameTypes.saleOrder,

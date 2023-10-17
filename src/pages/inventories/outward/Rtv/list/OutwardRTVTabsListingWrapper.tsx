@@ -334,7 +334,11 @@ const OutwardRTVTabsListingWrapper = () => {
         productGroupId: string
     ) => {
         dispatch(setFieldCustomized(true))
-        getBarCode({ id: barcodeNumber, groupId: productGroupId })
+        getBarCode({
+            id: barcodeNumber,
+            groupId: productGroupId,
+            status: 'AT_WAREHOUSE',
+        })
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
@@ -382,12 +386,16 @@ const OutwardRTVTabsListingWrapper = () => {
                 __v,
                 ...rest
             } = ele
-            return rest
+            return {
+                ...rest,
+                vendorId: selectedItemsTobeDispatch?.documents[0]?.vendorId,
+            }
         })
 
         const soid = selectedItemsTobeDispatch?.documents?.map(
             (ele: any) => ele?._id as string
         )
+
         barcodeDispatch({
             barcodedata: [...filterValue],
             rtvId: [...(soid as string[])] as string[],

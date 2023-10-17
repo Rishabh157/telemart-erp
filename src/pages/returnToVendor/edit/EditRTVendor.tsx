@@ -127,6 +127,8 @@ const EditRTVendor = ({
                         <div className="grid grid-cols-4 gap-4">
                             {/* SO Number */}
                             <ATMTextField
+                                disabled={true}
+                                readOnly={true}
                                 name="rtvNo"
                                 value={values.rtvNo || ''}
                                 label="RTV No."
