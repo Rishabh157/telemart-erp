@@ -66,7 +66,7 @@ const EditCompanyBranchWrapper = (props: Props) => {
         updateCompanyBranch({
             body: {
                 branchName: values.branchName,
-                company: userData?.companyId || '',
+                companyId: userData?.companyId || '',
             },
             id: Id || '',
         }).then((res: any) => {

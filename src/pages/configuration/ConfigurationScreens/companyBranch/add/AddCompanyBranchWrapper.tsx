@@ -54,7 +54,7 @@ const AddCompanyBranchWrapper = (props: Props) => {
 
         addCompanyBranch({
             branchName: values.branchName,
-            company: userData?.companyId || '',
+            companyId: userData?.companyId || '',
         }).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {

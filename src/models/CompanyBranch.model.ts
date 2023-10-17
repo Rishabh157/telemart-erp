@@ -8,7 +8,7 @@
 // |-- Types --|
 export type CompanyBranchListResponse = {
     branchName: string
-    company: string
+    companyId: string
     companyLabel: string
     createdAt: string
     isActive: boolean
@@ -20,13 +20,13 @@ export type CompanyBranchListResponse = {
 
 export type AddCompanyBranch = {
     branchName: string
-    company: string
+    companyId: string
 }
 
 export type UpdateCompanyBranch = {
     body: {
         branchName: string
-        company: string
+        companyId: string
     }
     id: string
 }

@@ -136,8 +136,6 @@ const InwardWarehouseTabsListingWrapper = () => {
     const params = useParams()
     const warehouseId = params.id
 
-    console.log('selectedItemsTobeDispatch', selectedItemsTobeDispatch)
-
     const { data, isFetching, isLoading } =
         useGetPaginationWarehouseTransferByGroupQuery({
             limit: rowsPerPage,
@@ -266,7 +264,7 @@ const InwardWarehouseTabsListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: OutwardRTVListingResponseTypes) =>
                 row?.documents[0].status === 'COMPLETE' ? (
-                    'Dispatched'
+                    'At Warehouse'
                 ) : row?.documents[0].status !== 'DISPATCHED' ? (
                     ''
                 ) : (
@@ -405,8 +403,13 @@ const InwardWarehouseTabsListingWrapper = () => {
             }
         })
 
+        const wId = selectedItemsTobeDispatch?.documents?.map(
+            (ele: any) => ele?._id as string
+        )
         barcodeDispatch({
             barcodedata: [...filterValue],
+            wId: [...(wId as string[])],
+            from: 'WTW',
         })
             .then((res: any) => {
                 if (res?.data?.status) {

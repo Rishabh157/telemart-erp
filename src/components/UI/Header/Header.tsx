@@ -103,7 +103,7 @@ const Header = () => {
                     }
                     localStorage.setItem('userData', JSON.stringify(userData))
                     dispatch(setUserData(userData))
-                    window.location.reload()
+                    window.location.href = '/dashboard'
                 }
             }
         )
