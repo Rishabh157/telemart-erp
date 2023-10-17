@@ -286,7 +286,7 @@ const OutwardDealerTabsListingWrapper = () => {
         productGroupId: string
     ) => {
         dispatch(setFieldCustomized(true))
-        getBarCode({ id: barcodeNumber, groupId: productGroupId })
+        getBarCode({ id: barcodeNumber, groupId: productGroupId, status: 'AT_WAREHOUSE' })
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {

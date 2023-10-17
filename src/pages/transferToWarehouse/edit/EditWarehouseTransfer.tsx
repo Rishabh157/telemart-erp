@@ -164,6 +164,8 @@ const EditWarehouseTransfer = ({
                         <div className="grid grid-cols-4 gap-4">
                             {/* SO Number */}
                             <ATMTextField
+                                readOnly={true}
+                                disabled={true}
                                 name="wtNumber"
                                 value={values.wtNumber}
                                 label="Warehouse Transfer Number"

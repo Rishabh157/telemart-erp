@@ -339,7 +339,11 @@ const OutwardWarehouseTransferListingWrapper = () => {
         productGroupId: string
     ) => {
         dispatch(setFieldCustomized(true))
-        getBarCode({ id: barcodeNumber, groupId: productGroupId })
+        getBarCode({
+            id: barcodeNumber,
+            groupId: productGroupId,
+            status: 'AT_WAREHOUSE',
+        })
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
@@ -378,6 +382,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                vendorId,
                 createdAt,
                 isActive,
                 isDeleted,
@@ -389,7 +394,6 @@ const OutwardWarehouseTransferListingWrapper = () => {
             } = ele
             return rest
         })
-
         const soid = selectedItemsTobeDispatch?.documents?.map(
             (ele: any) => ele?._id as string
         )
@@ -442,7 +446,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
                         <div className="grid grid-cols-4 border-b-[1px] pb-2 border-black">
                             <div>
                                 <div className="flex gap-1 items-center">
-                                    <div className="font-bold">RTV Number</div>
+                                    <div className="font-bold">WTW Number</div>
                                     {':'}
                                     <div className="">
                                         {selectedItemsTobeDispatch?._id}

@@ -259,6 +259,7 @@ import {
 import WarehouseToSampleListingWrapper from './pages/warehouseToSample/list/WarehouseToSampleListingWrapper'
 import AddWarehouseToSampleWrapper from './pages/warehouseToSample/add/AddWarehouseToSampleWrapper'
 import EditWarehouseToSampleWrapper from './pages/warehouseToSample/edit/EditWarehouseToSampleWrapper'
+import VendorRtvListingWrapper from './pages/vendors/view/tabs/ReturnToVendorTab/list/VendorRtvListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -426,10 +427,10 @@ const PageRoutes = () => {
                             path="return-to-vendor"
                             element={
                                 <ActionAuthHOC
-                                    component={<>'return to vendoe'</>}
+                                    component={<VendorRtvListingWrapper />}
                                     moduleName={UserModuleNameTypes.vendor}
                                     actionName={
-                                        UserModuleTabsTypes.vendorLedger
+                                        UserModuleTabsTypes.returnToVendor
                                     }
                                     isRedirect
                                 />
