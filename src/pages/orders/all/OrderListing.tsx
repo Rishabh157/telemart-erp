@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMTable, {
@@ -22,6 +22,7 @@ import { OrderListResponse, SingleOrderFlowResponse } from 'src/models'
 import {
     useGetOrderQuery,
     useGetOrderFlowQuery,
+    useDispatchedOrderBarcodeMutation,
 } from 'src/services/OrderService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -42,6 +43,34 @@ import {
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import { Chrono } from 'react-chrono'
 
+// Dispatching imports
+import { showToast } from 'src/utils'
+import { IoRemoveCircle } from 'react-icons/io5'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { AlertText } from 'src/pages/callerpage/components/constants'
+
+// Types
+type BarcodeListResponseType = {
+    _id: string
+    productGroupId: string
+    barcodeNumber: string
+    barcodeGroupNumber: string
+    lotNumber: string
+    isUsed: boolean
+    wareHouseId: string
+    dealerId: string | null
+    status: string
+    companyId: string
+    isDeleted: boolean
+    isActive: boolean
+    __v: number
+    createdAt: string
+    updatedAt: string
+}
+
 const OrderListing = ({
     tabName,
     orderStatus,
@@ -50,8 +79,17 @@ const OrderListing = ({
     orderStatus: string
 }) => {
     // Hooks
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
+
+    // Dispatching State
+    const [isShow, setIsShow] = useState<boolean>(false)
+    const [barcodeNumber, setBarcodeNumber] = useState<any>([])
+    const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
+    const [barcodeList, setBarcodeList] = useState<any>([])
+    const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
+        useState<OrderListResponse | null>(null)
+    const { customized }: any = useSelector((state: RootState) => state?.auth)
 
     // States
     const [selectedRows, setSelectedRows] = useState([])
@@ -63,6 +101,7 @@ const OrderListing = ({
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
+
     const {
         page,
         rowsPerPage,
@@ -172,7 +211,7 @@ const OrderListing = ({
         {
             field: 'orderNumber',
             headerName: 'Order No',
-            flex: 'flex-[1.5_1.5_0%]',
+            flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber} </span>
             ),
@@ -181,13 +220,57 @@ const OrderListing = ({
             field: 'didNo',
             headerName: 'DID No',
             flex: 'flex-[1_1_0%]',
+            align: 'center',
             renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
         },
-
+        {
+            field: 'schemeName',
+            headerName: 'Scheme Name',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.schemeName} </span>
+            ),
+        },
+        {
+            field: 'shcemeQuantity',
+            headerName: 'Quantity',
+            flex: 'flex-[0.5_0.5_0%]',
+            align: 'center',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.shcemeQuantity} </span>
+            ),
+        },
+        {
+            field: 'gender',
+            headerName: 'Gender',
+            flex: 'flex-[0.6_0.6_0%]',
+            align: 'center',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.gender} </span>
+            ),
+        },
+        // {
+        //     field: 'emailId',
+        //     headerName: 'Delivery Charges',
+        //     flex: 'flex-[1.2_1.2_0%]',
+        //     align: 'center',
+        //     renderCell: (row: OrderListResponse) => (
+        //         <span> {row?.emailId} </span>
+        //     ),
+        // },
+        {
+            field: 'price',
+            headerName: 'Price',
+            flex: 'flex-[0.7_0.7_0%]',
+            align: 'center',
+            renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
+        },
         {
             field: 'mobileNo',
             headerName: 'Mobile No',
-            flex: 'flex-[1.5_1.5_0%]',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
             renderCell: (row: OrderListResponse) => (
                 <span> {row.mobileNo} </span>
             ),
@@ -195,67 +278,202 @@ const OrderListing = ({
         {
             field: 'deliveryCharges',
             headerName: 'Delivery Charges',
-            flex: 'flex-[2_2_0%]',
+            flex: 'flex-[0.6_0.6_0%]',
+            align: 'center',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main ">
-                    {' '}
-                    {row.deliveryCharges}{' '}
+                    &#8377; {row.deliveryCharges}
                 </span>
             ),
         },
         {
             field: 'discount',
             headerName: 'Discount',
-            flex: 'flex-[2_2_0%]',
-            renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "> {row.discount} </span>
-            ),
+            flex: 'flex-[0.6_0.6_0%]',
+            align: 'center',
+            // renderCell: (row: OrderListResponse) => (
+            //     <span className="text-primary-main "> {row?.dis} </span>
+            // ),
         },
         {
             field: 'total',
             headerName: 'Total',
-            flex: 'flex-[1.5_1.5_0%]',
+            flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-slate-800"> &#8377; {row.total} </span>
+                <span className="text-slate-800">
+                    &#8377; {row?.totalAmount}
+                </span>
+            ),
+        },
+        {
+            field: 'orderStatus',
+            headerName: 'Status',
+            flex: 'flex-[0.6_0.6_0%]',
+            renderCell: (row: OrderListResponse) => (
+                <span className="text-slate-800">{row?.orderStatus}</span>
             ),
         },
         {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    moduleName={UserModuleNameTypes.order}
-                    isView
-                    // isEdit
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    handleViewActionButton={() => {
-                        navigate(`view/${currentId}`)
-                    }}
-                    children={
-                        <button
-                            onClick={() => {
-                                setIsFlowDialogShow(true)
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        >
-                            Flow
-                        </button>
-                    }
-                    // handleEditActionButton={() => {
-                    //     navigate(`${currentId}`)
-                    // }}
-                />
-            ),
+            renderCell: (row: OrderListResponse) =>
+                row?.orderStatus !== 'DISPATCHED' || 'COMPLETED' ? (
+                    ''
+                ) : (
+                    <ActionPopup
+                        moduleName={UserModuleNameTypes.order}
+                        handleOnAction={() => {
+                            setShowDropdown(!showDropdown)
+                            setCurrentId(row?._id)
+                        }}
+                        children={
+                            <>
+                                <button
+                                    onClick={() => {
+                                        setIsFlowDialogShow(true)
+                                    }}
+                                    className="w-full text-left px-4 py-2 hover:bg-gray-100 hidden"
+                                >
+                                    Flow
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        setIsShow(true)
+                                        // const totalQuantity =
+                                        //     row?.documents?.reduce(
+                                        //         (sum: number, ele: any) => {
+                                        //             return (sum +=
+                                        //                 ele?.productSalesOrder
+                                        //                     ?.quantity)
+                                        //         },
+                                        //         0
+                                        //     )
+                                        setBarcodeQuantity(row?.shcemeQuantity)
+                                        setSelectedItemsTobeDispatch(row)
+                                    }}
+                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                >
+                                    Dispatch
+                                </button>
+                            </>
+                        }
+                    />
+                ),
             align: 'end',
         },
     ]
 
+    // Dispatching Methods
+    const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
+    const [barcodeDispatch, barcodeDispatchInfo] =
+        useDispatchedOrderBarcodeMutation<any>()
+
+    const handleReload = () => {
+        if (customized) {
+            const confirmValue: boolean = window.confirm(AlertText)
+            if (confirmValue) {
+                dispatch(setFieldCustomized(false))
+                setIsShow(!isShow)
+                setSelectedItemsTobeDispatch(null)
+            }
+        } else {
+            setIsShow(!isShow)
+            setSelectedItemsTobeDispatch(null)
+        }
+    }
+
+    // remove barcode
+    const handleRemoveBarcode = (barcodeNumber: string) => {
+        // eslint-disable-next-line array-callback-return
+        const filteredObj = barcodeList?.filter((item: any) => {
+            if (item?.barcodeNumber !== barcodeNumber) {
+                return item
+            }
+        })
+        setBarcodeList(filteredObj)
+    }
+
+    // barcode calling api
+    const handleBarcodeSubmit = (
+        barcodeNumber: string,
+        productGroupId: string
+    ) => {
+        dispatch(setFieldCustomized(true))
+        getBarCode({
+            id: barcodeNumber,
+            groupId: productGroupId,
+            status: 'AT_WAREHOUSE',
+        })
+            .then((res: any) => {
+                if (res?.data?.status) {
+                    if (res?.data?.data) {
+                        let newBarcode = [...barcodeList]
+                        if (!newBarcode.length) {
+                            newBarcode = [...res?.data?.data]
+                        } else {
+                            newBarcode = [...newBarcode, ...res?.data?.data]
+                            const uniqueArray = Array.from(
+                                new Set(newBarcode?.map((obj: any) => obj._id))
+                            ).map((id) =>
+                                newBarcode?.find((obj: any) => obj._id === id)
+                            )
+                            newBarcode = [...uniqueArray]
+                        }
+                        setBarcodeList([...newBarcode])
+                    }
+                }
+            })
+            .catch((err) => console.error(err))
+    }
+
+    // Dispatching order
+    const handleDispatchBarcode = () => {
+        const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
+            if (!ele) return ele
+
+            const {
+                cartonBoxId,
+                outerBoxbarCodeNumber,
+                vendorId,
+                createdAt,
+                isActive,
+                isDeleted,
+                updatedAt,
+                status,
+                __v,
+                ...rest
+            } = ele
+            return {
+                ...rest,
+                // vendorId: selectedItemsTobeDispatch?.documents[0]?.vendorId,
+            }
+        })
+
+        barcodeDispatch({
+            barcodedata: [...filterValue],
+            orderId: selectedItemsTobeDispatch?._id,
+        })
+            .then((res: any) => {
+                if (res?.data?.status) {
+                    showToast('success', 'dispatched successfully')
+                    setIsShow(false)
+                    dispatch(setFieldCustomized(false))
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            })
+            .catch((err: any) => {
+                console.error(err)
+            })
+    }
+
+    const handleDisableDispatchButton = () => {
+        return barcodeQuantity === barcodeList?.length
+    }
+
     return (
-        <div className="px-4 h-[calc(100vh-150px)]  ">
+        <div className="px-4 h-[calc(100vh-150px)]">
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Order </ATMPageHeading>
             </div>
@@ -316,6 +534,171 @@ const OrderListing = ({
                     />
                 </div>
             </div>
+
+            {/* Dispatch Order */}
+            <DialogLogBox
+                isOpen={isShow}
+                fullScreen={true}
+                buttonClass="cursor-pointer"
+                maxWidth="lg"
+                handleClose={() => {
+                    handleReload()
+                }}
+                component={
+                    <div className="px-4 pt-2 pb-6">
+                        {/* SO NO. & DEALER NAME */}
+                        <div className="grid grid-cols-4 border-b-[1px] pb-2 border-black">
+                            <div>
+                                <div className="flex gap-1 items-center">
+                                    <div className="font-bold">
+                                        Order Number
+                                    </div>
+                                    {':'}
+                                    <div className="text-primary-main">
+                                        {selectedItemsTobeDispatch?.orderNumber}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="flex gap-1 items-center">
+                                    <div className="font-bold">DID No.</div>
+                                    {':'}
+                                    <div>
+                                        {selectedItemsTobeDispatch?.didNo}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="pb-6 border-b-[1px] border-black last:border-none">
+                            <div className="grid grid-cols-4 mt-2">
+                                <div>
+                                    <div>
+                                        <span className="font-bold">
+                                            Scheme Name
+                                        </span>
+                                        <span className="px-4">:</span>
+                                        <span>
+                                            {
+                                                selectedItemsTobeDispatch?.schemeLabel
+                                            }
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <span className="font-bold">
+                                            Scheme Quantity
+                                        </span>
+                                        <span className="pl-[2.23rem] pr-[1rem]">
+                                            :
+                                        </span>
+                                        <span>
+                                            {
+                                                selectedItemsTobeDispatch?.shcemeQuantity
+                                            }
+                                            {barcodeList?.length ? (
+                                                <> / </>
+                                            ) : (
+                                                ''
+                                            )}
+                                            {barcodeList?.length
+                                                ? barcodeList?.length
+                                                : ''}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="mt-4 grid grid-cols-12 gap-x-4">
+                                <div className="col-span-3">
+                                    <ATMTextField
+                                        disabled={
+                                            barcodeList?.length ===
+                                            selectedItemsTobeDispatch?.shcemeQuantity
+                                        }
+                                        name=""
+                                        value={barcodeNumber}
+                                        label="Barcode Number"
+                                        placeholder="enter barcode number"
+                                        className="shadow bg-white rounded w-[50%] "
+                                        onChange={(e) => {
+                                            if (e.target.value?.length > 6) {
+                                                handleBarcodeSubmit(
+                                                    e.target.value,
+                                                    selectedItemsTobeDispatch?.productGroupId ||
+                                                        ''
+                                                )
+                                            }
+                                            setBarcodeNumber(e.target.value)
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-4 gap-x-4">
+                                {barcodeList?.map(
+                                    (
+                                        barcode: BarcodeListResponseType,
+                                        barcodeIndex: number
+                                    ) => {
+                                        return (
+                                            <div
+                                                key={barcodeIndex}
+                                                onClick={() => {
+                                                    // onBarcodeClick(barcode)
+                                                }}
+                                                className={`flex flex-col gap-2 my-4 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer`}
+                                            >
+                                                <div className="flex justify-between">
+                                                    <div>
+                                                        <div className="text-[12px] text-slate-500">
+                                                            Barcode No.
+                                                        </div>
+                                                        <div>
+                                                            {
+                                                                barcode?.barcodeNumber
+                                                            }
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="absolute -top-2 -right-2">
+                                                        <IoRemoveCircle
+                                                            onClick={() => {
+                                                                handleRemoveBarcode(
+                                                                    barcode?.barcodeNumber
+                                                                )
+                                                            }}
+                                                            fill="red"
+                                                            size={20}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="text-primary-main font-medium grow flex items-end">
+                                                    {/* {barcode?.productGroupLabel} */}
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="flex justify-end">
+                            <div className="flex items-end">
+                                <ATMLoadingButton
+                                    disabled={!handleDisableDispatchButton()}
+                                    isLoading={barcodeDispatchInfo?.isLoading}
+                                    loadingText="Dispatching"
+                                    onClick={() => handleDispatchBarcode()}
+                                    className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
+                                >
+                                    Dispatch
+                                </ATMLoadingButton>
+                            </div>
+                        </div>
+                    </div>
+                }
+            />
         </div>
     )
 }

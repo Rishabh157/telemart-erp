@@ -78,7 +78,7 @@ const DispositionTwoListingWrapper = () => {
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DispositionTwoListResponse) => (
-                <span> {row.dispositionName} </span>
+                <span> {row?.dispositionName} </span>
             ),
         },
         {
@@ -86,7 +86,7 @@ const DispositionTwoListingWrapper = () => {
             headerName: 'Disposition One Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DispositionTwoListResponse) => (
-                <span> {row.dispostionOneLabel} </span>
+                <span> {row?.dispostionOneLabel} </span>
             ),
         },
 

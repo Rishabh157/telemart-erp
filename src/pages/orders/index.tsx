@@ -39,7 +39,7 @@ const ViewOrder = () => {
         {
             label: 'All',
             icon: MdOutbond,
-            path: `?orderStatus=all`,
+            path: '?orderStatus=all',
             name: UserModuleOrderTabsTypes.orderAllTab,
         },
         {

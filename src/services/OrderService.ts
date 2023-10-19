@@ -95,6 +95,16 @@ export const OrderApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+        //***** Dispached Order Barcode *****/
+        dispatchedOrderBarcode: builder.mutation({
+            invalidatesTags: ['order'],
+            query: (body: any) => ({
+                url: 'bar-code/order-dispatch',
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 })
 export const {
@@ -105,4 +115,5 @@ export const {
     useDeleteOrderMutation,
     useGetOrderFlowQuery,
     useGetAllOrderQuery,
+    useDispatchedOrderBarcodeMutation,
 } = OrderApi
