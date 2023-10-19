@@ -67,7 +67,6 @@ export const barcodeApi = apiSlice.injectEndpoints({
             query: ({
                 id,
                 groupId,
-
                 status,
             }: {
                 id: string

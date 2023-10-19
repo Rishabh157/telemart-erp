@@ -75,9 +75,9 @@ const EditUserWrapper = (props: Props) => {
     const { data, isLoading, isFetching } = useGetUserByIdQuery(Id)
 
     useEffect(() => {
-        // if (!isLoading && isFetching) {
-        dispatch(setSelectedItem(data?.data))
-        //}
+        if (!isLoading && !isFetching) {
+            dispatch(setSelectedItem(data?.data[0]))
+        }
     }, [data, isLoading, isFetching])
     let allowedIps: any = []
 
