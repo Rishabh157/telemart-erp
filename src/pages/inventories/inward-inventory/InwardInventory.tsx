@@ -3,7 +3,7 @@
 /// ==============================================
 // Filename:InwardInventory.tsx
 // Type: Add Component
-// Last Updated: JUNE 30, 2023
+// Last Updated: OCTOBER 20, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -157,7 +157,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     />
                 </div>
 
-                <div className="mt-5 py-3 grid grid-cols-6 gap-4  ">
+                <div className="mt-5 py-3 px-3 grid grid-cols-6 gap-4  ">
                     {barcodes?.map((barcode, index) => {
                         return (
                             <div
