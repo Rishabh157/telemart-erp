@@ -60,7 +60,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
-        
+
         //***** GET DEALER OUTWARD DISPATCHED BARCODE *****/
         getAllBarcodeOfDealerOutWardDispatch: builder.mutation({
             invalidatesTags: ['Barcode'],
@@ -68,12 +68,14 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 id,
                 groupId,
                 status,
+                companyId,
             }: {
                 id: string
                 groupId: string
                 status: string
+                companyId: string
             }) => ({
-                url: `/bar-code/barcode/${id}/productgroupid/${groupId}/status/${status}`,
+                url: `/bar-code/companyid/${companyId}/productgroupid/${groupId}/barcode/${id}/status/${status}`,
                 method: 'GET',
                 // body,
             }),

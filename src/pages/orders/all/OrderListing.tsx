@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMTable, {
@@ -79,7 +79,7 @@ const OrderListing = ({
     orderStatus: string
 }) => {
     // Hooks
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
 
     // Dispatching State
@@ -89,7 +89,9 @@ const OrderListing = ({
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
         useState<OrderListResponse | null>(null)
-    const { customized }: any = useSelector((state: RootState) => state?.auth)
+    const { customized, userData } = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     // States
     const [selectedRows, setSelectedRows] = useState([])
@@ -318,7 +320,7 @@ const OrderListing = ({
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: OrderListResponse) =>
-                row?.orderStatus !== 'DISPATCHED' || 'COMPLETED' ? (
+                row?.orderStatus !== 'NOT_DISPATCHED' ? (
                     ''
                 ) : (
                     <ActionPopup
@@ -340,15 +342,6 @@ const OrderListing = ({
                                 <button
                                     onClick={() => {
                                         setIsShow(true)
-                                        // const totalQuantity =
-                                        //     row?.documents?.reduce(
-                                        //         (sum: number, ele: any) => {
-                                        //             return (sum +=
-                                        //                 ele?.productSalesOrder
-                                        //                     ?.quantity)
-                                        //         },
-                                        //         0
-                                        //     )
                                         setBarcodeQuantity(row?.shcemeQuantity)
                                         setSelectedItemsTobeDispatch(row)
                                     }}
@@ -404,6 +397,7 @@ const OrderListing = ({
             id: barcodeNumber,
             groupId: productGroupId,
             status: 'AT_WAREHOUSE',
+            companyId: userData?.companyId as string,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -433,6 +427,8 @@ const OrderListing = ({
             if (!ele) return ele
 
             const {
+                wareHouseLabel,
+                productGroupLabel,
                 cartonBoxId,
                 outerBoxbarCodeNumber,
                 vendorId,
@@ -471,6 +467,10 @@ const OrderListing = ({
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.length
     }
+
+    useEffect(() => {
+        navigate('/orders?orderStatus=all')
+    }, [navigate])
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">

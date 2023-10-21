@@ -342,6 +342,7 @@ const InwardCompanyTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: 'WTC',
+            companyId: userData?.companyId,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -382,6 +383,7 @@ const InwardCompanyTabsListingWrapper = () => {
             const {
                 wtwId,
                 companyId,
+                productGroupLabel,
                 // wareHouseId,
                 vendorId,
                 outerBoxbarCodeNumber,

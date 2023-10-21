@@ -343,6 +343,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: 'AT_WAREHOUSE',
+            companyId: userData?.companyId,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -382,6 +383,8 @@ const OutwardWarehouseTransferListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                wareHouseLabel,
+                productGroupLabel,
                 vendorId,
                 createdAt,
                 isActive,
