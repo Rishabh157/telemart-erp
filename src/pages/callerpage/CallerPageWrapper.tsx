@@ -381,6 +381,7 @@ const CallerPageWrapper = () => {
                     // resetForm({ isSubmitting: false, dirty: false })
                     if (res?.data?.status) {
                         showToast('success', 'caller added successfully!')
+                        localStorage.removeItem('callerPageData')
                     } else {
                         showToast('error', res?.data?.message)
                     }

@@ -343,6 +343,7 @@ const InwardWarehouseTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: 'WTW',
+            companyId: userData?.companyId as string,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -381,6 +382,7 @@ const InwardWarehouseTabsListingWrapper = () => {
             if (!ele) return ele
 
             const {
+                productGroupLabel,
                 wtwId,
                 companyId,
                 // wareHouseId,
@@ -410,6 +412,7 @@ const InwardWarehouseTabsListingWrapper = () => {
             barcodedata: [...filterValue],
             wId: [...(wId as string[])],
             from: 'WTW',
+            //     companyId: userData?.companyId as string,
         })
             .then((res: any) => {
                 if (res?.data?.status) {

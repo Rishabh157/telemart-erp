@@ -334,6 +334,7 @@ const OutwardSampleTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: 'AT_WAREHOUSE',
+            companyId: userData?.companyId as string,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -373,6 +374,8 @@ const OutwardSampleTabsListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                wareHouseLabel,
+                productGroupLabel,
                 vendorId,
                 createdAt,
                 isActive,
