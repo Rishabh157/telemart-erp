@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:SalesOrderService.tsx
 // Type: Service Component
-// Last Updated: JULY 04, 2023
+// Last Updated: OCTOBER 25, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -18,7 +18,6 @@ import { UpdateSaleOrderApproval } from 'src/models/SaleOrder.model'
 export const SalesOrderApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
-
         getPaginationSaleOrder: builder.query({
             providesTags: ['SalesOrder'],
             query: (body: PaginationType) => ({
@@ -29,7 +28,6 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
         }),
 
         //***** GET PAGINATION DATA WITH PRODUCT GROUP *****/
-
         getPaginationSaleOrderByGroup: builder.query({
             providesTags: ['SalesOrder'],
             query: (body: PaginationType) => ({
@@ -77,12 +75,12 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
         //***** Update *****/
         updateSoLevel: builder.mutation({
             invalidatesTags: ['SalesOrder'],
             query: ({ body, id }: UpdateSOApprovalLevel) => ({
                 url: `/sales-order/approval-level/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -91,7 +89,7 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
         //***** Delete *****/
         deleteSalesOrder: builder.mutation({
             invalidatesTags: ['SalesOrder'],
-            query: (id) => ({
+            query: (id: string) => ({
                 url: `/sales-order/${id}`,
                 method: 'DELETE',
             }),
@@ -100,7 +98,7 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
         // **** GET BY ID
         getSalesOrderById: builder.query({
             providesTags: ['SalesOrder'],
-            query: (id) => ({
+            query: (id: string) => ({
                 url: `/sales-order/${id}`,
                 method: 'GET',
             }),

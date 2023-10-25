@@ -66,7 +66,7 @@ export type {
     UpdateWarehouse,
 } from './Warehouse.model'
 export type {
-    BarcodeListResponse,
+    BarcodeListResponseType,
     AddBarcode,
     UpdateBarcode,
     ProductBarcodeGroupResponse,
@@ -209,3 +209,21 @@ export type {
     UpdateWTCApprovalLevel,
     UpdateWarehouseToComapny,
 } from './WarehouseToComapny.model'
+
+// outward & inward warehouse tabs
+export type {
+    // O/I  DEALER TAB
+    OutwardRequestDealerListResponse,
+
+    // O/I  RTV TAB
+    OutwardRequestRTVListResponse,
+
+    // O/I  WTW TAB
+    OutwardRequestWarehouseListResponse,
+
+    // O/I  WTS TAB
+    OutwardRequestWarehouseToSampleListResponse,
+
+    // O/I  WTC TAB
+    OutwardRequestWarehouseToCompanyListResponse,
+} from './OutwardRequest.model'

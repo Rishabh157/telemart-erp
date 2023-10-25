@@ -24,9 +24,12 @@ interface ActionPopupProps {
     handleViewActionButton?: () => void
     handleEditActionButton?: () => void
     handleDeleteActionButton?: () => void
+    handleCustomActionButton?: () => void
     isView?: boolean
     isDelete?: boolean
     isEdit?: boolean
+    isCustomBtn?: boolean
+    customBtnText?: string
     className?: string
     moduleName: UserModuleNameTypes
 }
@@ -38,9 +41,12 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
     handleViewActionButton,
     handleEditActionButton,
     handleDeleteActionButton,
+    handleCustomActionButton,
     isView = false,
     isEdit = false,
     isDelete = false,
+    isCustomBtn = false,
+    customBtnText = 'Button',
     className = 'block w-full text-left px-4 py-2 hover:bg-gray-100',
 }) => {
     return (
@@ -95,6 +101,19 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                                     />
                                 )}
                                 {children}
+                                {isCustomBtn && (
+                                    <button
+                                        onClick={popupState.close}
+                                        className="block w-full text-left  hover:bg-gray-100"
+                                    >
+                                        <div
+                                            className="block px-4 py-2"
+                                            onClick={handleCustomActionButton}
+                                        >
+                                            {customBtnText}
+                                        </div>
+                                    </button>
+                                )}
                                 {isDelete && (
                                     <ActionAuthHOC
                                         moduleName={moduleName}

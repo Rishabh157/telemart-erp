@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:WarehouseToSampleListingWrapper.tsx
 // Type: List Component
-// Last Updated: JULY 04, 2023
+// Last Updated: OCTOBER 25, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -17,6 +17,20 @@ import { useNavigate } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import WarehouseTransferListing from './WarehouseToSampleListing'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { OutwardRequestWarehouseToSampleListResponse } from 'src/models'
+
+// |-- Redux --|
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/warehouseToSampleSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
@@ -26,62 +40,6 @@ import {
     useUpdateWarehouseToSampleApprovalMutation,
     useDeleteWarehouseToSampleOrderMutation,
 } from 'src/services/WarehouseToSampleService'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import { showToast } from 'src/utils'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import WarehouseTransferListing from './WarehouseToSampleListing'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-
-// |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/warehouseToSampleSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-
-interface WarehouseToSampleListResponseTypes {
-    _id: string
-    fromWarehouseLabel: string
-    firstApproved: null
-    firstApprovedActionBy: string
-    firstApprovedAt: string
-    secondApprovedActionBy: string
-    secondApprovedAt: string
-    secondApproved: null
-    createdAt: string
-    updatedAt: string
-    documents: {
-        _id: string
-        wtsNumber: string
-        fromWarehouseId: string
-        toName: string
-        firstApprovedById: null
-        firstApproved: null
-        firstApprovedActionBy: string
-        firstApprovedAt: string
-        secondApprovedById: null
-        secondApproved: null
-        secondApprovedActionBy: string
-        secondApprovedAt: string
-        productSalesOrder: {
-            productGroupId: string
-            rate: number
-            quantity: number
-            _id: string
-            groupName: string
-        }
-        status: string
-        remark: string
-        companyId: string
-        isDeleted: boolean
-        isActive: boolean
-        __v: number
-        createdAt: string
-        updatedAt: string
-        fromWarehouseLabel: string
-    }[]
-}
 
 const WarehouseToSampleListingWrapper = () => {
     const WarehouseToSampleState: any = useSelector(
@@ -207,7 +165,7 @@ const WarehouseToSampleListingWrapper = () => {
             field: 'wtsNumber',
             headerName: 'WTS Number',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => (
                 <span> {row?._id} </span> // this is a wtNumber we have to transform in _id
             ),
         },
@@ -216,7 +174,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'From Warehouse',
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => (
                 <span> {row?.fromWarehouseLabel} </span>
             ),
         },
@@ -225,7 +183,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'Receiver Name',
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => (
                 <span> {row?.documents[0]?.toName} </span>
             ),
         },
@@ -234,7 +192,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return (
                     <div className="w-full">
                         {row?.documents?.map((item) => {
@@ -258,7 +216,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'First Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return (
                     <span>
                         {row?.firstApproved
@@ -275,7 +233,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'First Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return <span> {row?.firstApprovedActionBy} </span>
             },
         },
@@ -284,7 +242,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'First Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return <span> {row?.firstApprovedAt} </span>
             },
         },
@@ -293,7 +251,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'Second Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return (
                     <span>
                         {' '}
@@ -311,7 +269,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'Second Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return <span> {row?.secondApprovedActionBy} </span>
             },
         },
@@ -320,7 +278,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'Second Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return <span> {row?.secondApprovedAt} </span>
             },
         },
@@ -329,7 +287,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
             },
         },
@@ -338,7 +296,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
@@ -347,7 +305,7 @@ const WarehouseToSampleListingWrapper = () => {
             headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleListResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return (
                     <div>
                         {!row?.firstApproved ? (
@@ -485,7 +443,7 @@ const WarehouseToSampleListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: WarehouseToSampleListResponseTypes) =>
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) =>
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup

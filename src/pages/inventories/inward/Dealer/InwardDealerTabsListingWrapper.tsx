@@ -51,7 +51,7 @@ const columns: columnTypes[] = [
         headerName: 'Product Name',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: OutwardRequestDealerListResponse) => (
-            <span> {row.productName} </span>
+            <span> {row.accApproved} </span>
         ),
     },
     {
@@ -59,7 +59,7 @@ const columns: columnTypes[] = [
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: OutwardRequestDealerListResponse) => (
-            <span> {row.quantity} </span>
+            <span> {row.accApprovedAt} </span>
         ),
     },
     {
@@ -67,7 +67,7 @@ const columns: columnTypes[] = [
         headerName: 'Address',
         flex: 'flex-[1.5_1.5_0%]',
         renderCell: (row: OutwardRequestDealerListResponse) => {
-            return <span> {row.address} </span>
+            return <span> {row.accApproved} </span>
         },
     },
     {
@@ -75,7 +75,7 @@ const columns: columnTypes[] = [
         headerName: 'Creation Date',
         flex: 'flex-[1.5_1.5_0%]',
         renderCell: (row: OutwardRequestDealerListResponse) => {
-            return <span> {row.creationDate} </span>
+            return <span> {row.createdAt} </span>
         },
     },
     {

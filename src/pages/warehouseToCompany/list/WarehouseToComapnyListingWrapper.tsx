@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:WarehouseToComapnyListingWrapper.tsx
 // Type: List Component
-// Last Updated: JULY 04, 2023
+// Last Updated: OCTOBER 25, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -17,7 +17,21 @@ import { useNavigate } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { GroupByWarehouseToComapnyResponseTypes } from 'src/models/WarehouseToComapny.model'
+
+import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import WarehouseToComapnyListing from './WarehouseToComapnyListing'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { OutwardRequestWarehouseToCompanyListResponse } from 'src/models'
+
+// |-- Redux --|
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/WarehouseToComapnySlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
@@ -27,19 +41,6 @@ import {
     useGetPaginationWarehouseToComapnyByGroupQuery,
     useUpdateWarehouseToComapnyApprovalMutation,
 } from 'src/services/WarehouseToComapnyService'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import { showToast } from 'src/utils'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import WarehouseToComapnyListing from './WarehouseToComapnyListing'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-
-// |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/WarehouseToComapnySlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 
 const WarehouseToComapnyListingWrapper = () => {
     const columns: columnTypes[] = [
@@ -47,8 +48,8 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'wtcNumber',
             headerName: 'WTC Number',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => (
-                <span> {row?._id} </span> // this is a wtNumber we have to transform in _id
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
+                <span> {row?._id} </span>
             ),
         },
         {
@@ -56,7 +57,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'From Warehouse',
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span> {row?.fromWarehouseLabel} </span>
             ),
         },
@@ -65,7 +66,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'Company Name',
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span> {row?.toCompanyLabel} </span>
             ),
         },
@@ -74,7 +75,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'To Warehouse',
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span> {row?.toWarehouseLabel} </span>
             ),
         },
@@ -83,12 +84,15 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
                     <div className="w-full">
-                        {row?.documents?.map((item) => {
+                        {row?.documents?.map((item, ind) => {
                             return (
-                                <div className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center">
+                                <div
+                                    key={ind}
+                                    className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center"
+                                >
                                     <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
                                         {item?.productSalesOrder?.groupName}
                                     </div>
@@ -107,7 +111,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'First Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
                     <span>
                         {row?.firstApproved
@@ -124,7 +128,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'First Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {row?.firstApprovedActionBy} </span>
             },
         },
@@ -133,7 +137,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'First Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {row?.firstApprovedAt} </span>
             },
         },
@@ -142,7 +146,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'Second Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
                     <span>
                         {' '}
@@ -160,7 +164,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'Second Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {row?.secondApprovedActionBy} </span>
             },
         },
@@ -169,7 +173,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'Second Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {row?.secondApprovedAt} </span>
             },
         },
@@ -178,7 +182,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
             },
         },
@@ -187,7 +191,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
@@ -196,7 +200,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
             align: 'center',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
                     <div>
                         {!row?.firstApproved ? (
@@ -334,7 +338,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: GroupByWarehouseToComapnyResponseTypes) =>
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) =>
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup

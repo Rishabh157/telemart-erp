@@ -17,7 +17,7 @@ import { MdOutbond } from 'react-icons/md'
 import { BiFilter } from 'react-icons/bi'
 
 // |-- Internal Dependencies --|
-import { BarcodeListResponse, ProductBarcodeGroupResponse } from 'src/models'
+import { BarcodeListResponseType, ProductBarcodeGroupResponse } from 'src/models'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import {
     setActiveTabIndex,
@@ -200,7 +200,7 @@ const BarcodeListingWrapper = () => {
     }, [cbisLoading, cbisFetching, cbdata])
 
     const [selectedBarcodes, setSelectedBarcodes] = React.useState<
-        BarcodeListResponse[]
+        BarcodeListResponseType[]
     >([])
 
     const [selectedCartonBoxBarcodes, setSelectedCartonBoxBarcodes] =
@@ -249,14 +249,14 @@ const BarcodeListingWrapper = () => {
     // Handle Barcode Select
     const onBarcodeSelect = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-        barcode: BarcodeListResponse,
+        barcode: BarcodeListResponseType,
         isBarcodeSeleted: boolean
     ) => {
         e.stopPropagation()
         let newValue = []
         if (isBarcodeSeleted) {
             newValue = selectedBarcodes.filter(
-                (seleted: BarcodeListResponse) => seleted._id !== barcode._id
+                (seleted: BarcodeListResponseType) => seleted._id !== barcode._id
             )
         } else {
             newValue = [...selectedBarcodes, barcode]
@@ -337,7 +337,7 @@ const BarcodeListingWrapper = () => {
                         selectedBarcodes={selectedBarcodes}
                         onBarcodeSelect={onBarcodeSelect}
                         onBarcodeClick={() => {}}
-                        // onBarcodeClick={(barcode: BarcodeListResponse) =>
+                        // onBarcodeClick={(barcode: BarcodeListResponseType) =>
                         //     navigate(`${barcode._id}`)
                         //}
                     />

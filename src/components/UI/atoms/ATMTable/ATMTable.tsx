@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:ATMTable.tsx
 // Type: UI Component
-// Last Updated: JULY 22, 2023
+// Last Updated: OCTOBER 25, 2023
 // Project: TELIMART - Front End
 // ==============================================
 

@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:SaleOrder.model.ts
 // Type: Model Component
-// Last Updated: JUNE 28, 2023
+// Last Updated: OCTOBER 23, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -14,40 +14,13 @@ export type productSalesOrder = {
     quantity: number
 }
 
-type GroupBySaleOrderDocumnentObjResponse = {
-    _id: string
-    soNumber: string
-    dealerId: string
-    dealerWareHouseId: string
-    companyWareHouseId: string
-    dhApprovedById: string
-    dhApproved: boolean
-    dhApprovedActionBy: string
-    dhApprovedAt: string
-    accApprovedById: string
-    accApproved: boolean
-    accApprovedActionBy: string
-    accApprovedAt: string
-    productSalesOrder: {
-        productGroupId: string
-        rate: number
-        quantity: number
-        _id: string
-        groupName: string
-    }
-    status: string
-    companyId: string
-    isDeleted: boolean
-    isActive: boolean
-    __v: number
-    createdAt: string
-    updatedAt: string
-    dealerLabel: string
-    companyWarehouseLabel: string
-    warehouseLabel: string
+enum SaleOrderStatus {
+    not_dispatched = 'NOT_DISPATCHED',
+    dispatched = 'DISPATCHED',
+    complete = 'COMPLETE',
 }
 
-export type GroupBySaleOrderResponseTypes = {
+export type SaleOrderListResponseTypes = {
     _id: string
     dealerName: string
     dhApproved: boolean
@@ -58,7 +31,38 @@ export type GroupBySaleOrderResponseTypes = {
     accApproved: boolean
     createdAt: string
     updatedAt: string
-    documents: GroupBySaleOrderDocumnentObjResponse[]
+    documents: {
+        _id: string
+        soNumber: string
+        dealerId: string
+        dealerWareHouseId: string
+        companyWareHouseId: string
+        dhApprovedById: string
+        dhApproved: boolean
+        dhApprovedActionBy: string
+        dhApprovedAt: string
+        accApprovedById: string
+        accApproved: boolean
+        accApprovedActionBy: string
+        accApprovedAt: string
+        productSalesOrder: {
+            productGroupId: string
+            rate: number
+            quantity: number
+            _id: string
+            groupName: string
+        }
+        status: SaleOrderStatus
+        companyId: string
+        isDeleted: boolean
+        isActive: boolean
+        __v: number
+        createdAt: string
+        updatedAt: string
+        dealerLabel: string
+        companyWarehouseLabel: string
+        warehouseLabel: string
+    }[]
 }
 
 export type SaleOrderListResponse = {
@@ -132,6 +136,7 @@ export type UpdateSaleOrderApproval = {
     }
     id: string
 }
+
 export type UpdateSOApprovalLevel = {
     body: {
         approval: {
