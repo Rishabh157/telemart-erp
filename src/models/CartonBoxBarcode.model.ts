@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Types --|
-export type CartonBoxBarcodeListResponse = {
+export type CartonBoxBarcodeListResponseType = {
     cartonBoxId: string
     cartonboxLabel: string
     barcodeNumber: string

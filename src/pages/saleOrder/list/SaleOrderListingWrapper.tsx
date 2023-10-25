@@ -17,11 +17,11 @@ import { useNavigate } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { GroupBySaleOrderResponseTypes } from 'src/models/SaleOrder.model'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
+import { SaleOrderListResponseTypes } from 'src/models/SaleOrder.model'
 import {
     useDeleteSalesOrderMutation,
     useGetPaginationSaleOrderByGroupQuery,
@@ -30,8 +30,8 @@ import {
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import SaleOrderListing from './SaleOrderListing'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import SaleOrderListing from './SaleOrderListing'
 
 // |-- Redux --|
 import {
@@ -40,7 +40,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { SoApprovedGroupListResponseType } from 'src/models/OutwardRequest.model'
 
 const SaleOrderListingWrapper = () => {
     const salesOrderState: any = useSelector(
@@ -164,7 +163,7 @@ const SaleOrderListingWrapper = () => {
             field: 'soNumber',
             headerName: 'So Number',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: SoApprovedGroupListResponseType) => (
+            renderCell: (row: SaleOrderListResponseTypes) => (
                 <span> {row?._id} </span>
             ),
         },
@@ -173,7 +172,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Dealer Name',
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => (
+            renderCell: (row: SaleOrderListResponseTypes) => (
                 <span> {row?.dealerName} </span>
             ),
         },
@@ -182,7 +181,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
             align: 'center',
-            renderCell: (row: SoApprovedGroupListResponseType) => {
+            renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
                     <div className="w-full">
                         {row?.documents?.map((item) => {
@@ -206,7 +205,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'DH Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
                     <span>
                         {row?.dhApproved
@@ -223,7 +222,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'DH Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> {row?.dhApprovedActionBy} </span>
             },
         },
@@ -232,7 +231,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'DH Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> {row?.dhApprovedAt} </span>
             },
         },
@@ -241,7 +240,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Account Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
                     <span>
                         {' '}
@@ -259,7 +258,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Account Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> {row?.accApprovedActionBy} </span>
             },
         },
@@ -268,7 +267,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Account Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> {row?.accApprovedAt} </span>
             },
         },
@@ -277,7 +276,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
             },
         },
@@ -286,7 +285,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
@@ -295,7 +294,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
             align: 'center',
-            renderCell: (row: GroupBySaleOrderResponseTypes) => {
+            renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
                     <div>
                         {!row?.dhApproved ? (
@@ -433,7 +432,7 @@ const SaleOrderListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: GroupBySaleOrderResponseTypes) =>
+            renderCell: (row: SaleOrderListResponseTypes) =>
                 row?.dhApproved === null &&
                 row?.accApproved === null && (
                     <ActionPopup

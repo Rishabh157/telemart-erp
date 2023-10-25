@@ -8,18 +8,18 @@
 // |-- External Dependencies --|
 import { BiCheck } from 'react-icons/bi'
 import { HiDotsVertical } from 'react-icons/hi'
-import { BarcodeListResponse } from 'src/models'
+import { BarcodeListResponseType } from 'src/models'
 
 // |-- Types --|
 type BarcodeCardProps = {
-    barcodeList: BarcodeListResponse[]
-    selectedBarcodes: BarcodeListResponse[]
+    barcodeList: BarcodeListResponseType[]
+    selectedBarcodes: BarcodeListResponseType[]
     onBarcodeSelect: (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-        barcode: BarcodeListResponse,
+        barcode: BarcodeListResponseType,
         isBarcodeSeleted: boolean
     ) => void
-    onBarcodeClick: (barcode: BarcodeListResponse) => void
+    onBarcodeClick: (barcode: BarcodeListResponseType) => void
 }
 
 const BarcodeDetailsCard = ({
@@ -31,7 +31,7 @@ const BarcodeDetailsCard = ({
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-5 py-3 px-3">
             {barcodeList.map(
-                (barcode: BarcodeListResponse, barcodeIndex: number) => {
+                (barcode: BarcodeListResponseType, barcodeIndex: number) => {
                     const isBarcodeSeleted =
                         selectedBarcodes.findIndex(
                             (selected) => selected._id === barcode._id

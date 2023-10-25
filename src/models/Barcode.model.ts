@@ -6,21 +6,41 @@
 // ==============================================
 
 // |-- Types --|
-export type BarcodeListResponse = {
+
+export type BarcodeListResponseType = {
+    _id: string
     productGroupId: string
     productGroupLabel: string
-    wareHouseId: string
     barcodeNumber: string
     barcodeGroupNumber: string
+    lotNumber: string
     isUsed: boolean
+    wareHouseId: string
+    dealerId: string | null
+    status: string
     companyId: string
-    isActive: boolean
     isDeleted: boolean
+    isActive: boolean
+    __v: number
     createdAt: string
     updatedAt: string
-    _id: string
-    __v: number
 }
+
+// export type BarcodeListResponseType = {
+//     productGroupId: string
+//     productGroupLabel: string
+//     wareHouseId: string
+//     barcodeNumber: string
+//     barcodeGroupNumber: string
+//     isUsed: boolean
+//     companyId: string
+//     isActive: boolean
+//     isDeleted: boolean
+//     createdAt: string
+//     updatedAt: string
+//     _id: string
+//     __v: number
+// }
 
 export type ProductBarcodeGroupResponse = {
     _id: string

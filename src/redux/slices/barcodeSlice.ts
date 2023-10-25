@@ -10,10 +10,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 // |-- Internal Dependencies --|
-import { BarcodeListResponse } from 'src/models'
+import { BarcodeListResponseType } from 'src/models'
 
 export interface BarcodeSliceStateType {
-    items: BarcodeListResponse[] | []
+    items: BarcodeListResponseType[] | []
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -46,7 +46,7 @@ const barcodeSlice: any = createSlice({
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<BarcodeListResponse[] | []>
+            action: PayloadAction<BarcodeListResponseType[] | []>
         ) => {
             state.items = action.payload
         },

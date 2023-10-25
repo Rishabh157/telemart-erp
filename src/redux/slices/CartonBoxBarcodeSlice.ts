@@ -6,15 +6,15 @@
 // ==============================================
 
 // |-- Internal Dependencies --|
-import { CartonBoxBarcodeListResponse } from '../../models/CartonBoxBarcode.model'
+import { CartonBoxBarcodeListResponseType } from '../../models/CartonBoxBarcode.model'
 
 // |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export type InitialStateType = {
-    items: CartonBoxBarcodeListResponse[] | []
-    selectedItem: CartonBoxBarcodeListResponse | null
+    items: CartonBoxBarcodeListResponseType[] | []
+    selectedItem: CartonBoxBarcodeListResponseType | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -42,7 +42,7 @@ const cartonBoxBarcodeSlice: any = createSlice({
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<CartonBoxBarcodeListResponse[] | []>
+            action: PayloadAction<CartonBoxBarcodeListResponseType[] | []>
         ) => {
             state.items = action.payload
         },
@@ -77,7 +77,7 @@ const cartonBoxBarcodeSlice: any = createSlice({
         },
         setSelectedItem: (
             state,
-            action: PayloadAction<CartonBoxBarcodeListResponse | null>
+            action: PayloadAction<CartonBoxBarcodeListResponseType | null>
         ) => {
             state.selectedItem = action.payload
         },

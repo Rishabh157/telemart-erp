@@ -124,7 +124,7 @@ const EditSaleOrderWrapper = (props: Props) => {
         (state: RootState) => state?.saleOrder
     )
 
-    const { data, isLoading, isFetching } = useGetSalesOrderByIdQuery(Id)
+    const { data, isLoading, isFetching } = useGetSalesOrderByIdQuery(Id || '')
     useEffect(() => {
         if (!isLoading && !isFetching) {
             dispatch(setSelectedItem(data?.data))
@@ -256,6 +256,7 @@ const EditSaleOrderWrapper = (props: Props) => {
                     ],
                 }
             })
+            
             setEditSaleOrder(product)
         }
     }, [selectedItem])

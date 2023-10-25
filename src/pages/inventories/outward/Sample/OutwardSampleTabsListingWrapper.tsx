@@ -2,7 +2,7 @@
 /// ==============================================
 // Filename:OutwardSampleTabsListingWrapper.tsx
 // Type: List Component
-// Last Updated: JUNE 27, 2023
+// Last Updated: OCTOBER 25, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -11,12 +11,11 @@ import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
-import { IoRemoveCircle } from 'react-icons/io5'
 
 // |-- Internal Dependencies --|
 import { useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-// import { WarehouseToSampleTransferResponseTypes } from 'src/models/OutwardRequest.model'
+// import { OutwardRequestWarehouseToSampleListResponse } from 'src/models/OutwardRequest.model'
 // import OutwardRequestListing from './OutwardDealerTabs'
 import OutwardSampleTabs from './OutwardSampleTabs'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -26,13 +25,19 @@ import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
+import {
+    OutwardRequestWarehouseToSampleListResponse,
+    BarcodeListResponseType,
+} from 'src/models'
+import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
+import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
 
 // |-- Redux --|
 import { useDispatch, useSelector } from 'react-redux'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { AlertText } from 'src/pages/callerpage/components/constants'
-
-// |-- Redux --|F
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import {
     setIsTableLoading,
@@ -41,7 +46,6 @@ import {
 } from 'src/redux/slices/warehouseToSampleSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import {
     useGetPaginationWarehouseToSampleByGroupQuery,
     useDispatchWarehouseToSampleBarcodeMutation,
@@ -54,74 +58,13 @@ export type Tabs = {
     path?: string
 }
 
-type BarcodeListResponseType = {
-    _id: string
-    productGroupId: string
-    barcodeNumber: string
-    barcodeGroupNumber: string
-    lotNumber: string
-    isUsed: boolean
-    wareHouseId: string
-    dealerId: string | null
-    status: string
-    companyId: string
-    isDeleted: boolean
-    isActive: boolean
-    __v: number
-    createdAt: string
-    updatedAt: string
-}
-
-interface WarehouseToSampleTransferResponseTypes {
-    _id: string
-    fromWarehouseLabel: string
-    firstApproved: boolean
-    firstApprovedActionBy: string
-    firstApprovedAt: string
-    secondApprovedActionBy: string
-    secondApprovedAt: string
-    secondApproved: boolean
-    createdAt: string
-    updatedAt: string
-    documents: {
-        _id: string
-        wtsNumber: string
-        fromWarehouseId: string
-        toName: string
-        firstApprovedById: string
-        firstApproved: boolean
-        firstApprovedActionBy: string
-        firstApprovedAt: string
-        secondApprovedById: string
-        secondApproved: boolean
-        secondApprovedActionBy: string
-        secondApprovedAt: string
-        productSalesOrder: {
-            productGroupId: string
-            rate: number
-            quantity: number
-            _id: string
-            groupName: string
-        }
-        status: string
-        remark: string
-        companyId: string
-        isDeleted: boolean
-        isActive: boolean
-        __v: number
-        createdAt: string
-        updatedAt: string
-        fromWarehouseLabel: string
-    }[]
-}
-
 const OutwardSampleTabsListingWrapper = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
-        useState<WarehouseToSampleTransferResponseTypes | null>(null)
+        useState<OutwardRequestWarehouseToSampleListResponse | null>(null)
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const warehouseId = params.id
@@ -185,7 +128,7 @@ const OutwardSampleTabsListingWrapper = () => {
             field: 'wtsNumber',
             headerName: 'WTS Number',
             flex: 'flex-[0.6_0.6_0%]',
-            renderCell: (row: WarehouseToSampleTransferResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => (
                 <span> {row?._id} </span>
             ),
         },
@@ -194,7 +137,7 @@ const OutwardSampleTabsListingWrapper = () => {
             headerName: 'Receiver Name',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleTransferResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => (
                 <span> {row?.documents[0]?.toName} </span>
             ),
         },
@@ -203,12 +146,15 @@ const OutwardSampleTabsListingWrapper = () => {
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleTransferResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return (
                     <div className="w-full">
-                        {row?.documents?.map((item) => {
+                        {row?.documents?.map((item, ind) => {
                             return (
-                                <div className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center">
+                                <div
+                                    key={ind}
+                                    className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center"
+                                >
                                     <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
                                         {item?.productSalesOrder?.groupName}
                                     </div>
@@ -227,7 +173,7 @@ const OutwardSampleTabsListingWrapper = () => {
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleTransferResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
             },
         },
@@ -236,7 +182,7 @@ const OutwardSampleTabsListingWrapper = () => {
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleTransferResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
@@ -245,7 +191,7 @@ const OutwardSampleTabsListingWrapper = () => {
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: WarehouseToSampleTransferResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => (
                 <span>{row?.documents[0]?.status}</span>
             ),
         },
@@ -253,43 +199,29 @@ const OutwardSampleTabsListingWrapper = () => {
             field: 'actions',
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: WarehouseToSampleTransferResponseTypes) =>
-                row?.documents[0]?.status === 'COMPLETE' ? (
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) =>
+                row?.documents[0]?.status === SaleOrderStatus.complete ? (
                     'Dispatched'
-                ) : row?.documents[0]?.status === 'DISPATCHED' ? (
+                ) : row?.documents[0]?.status === SaleOrderStatus.dispatched ? (
                     ''
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
                         moduleName={UserModuleNameTypes.saleOrder}
-                        children={
-                            <>
-                                <button
-                                    onClick={() => {
-                                        setIsShow(true)
-                                        const totalQuantity =
-                                            row?.documents?.reduce(
-                                                (sum, ele) => {
-                                                    return (sum +=
-                                                        ele?.productSalesOrder
-                                                            ?.quantity)
-                                                },
-                                                0
-                                            )
-                                        setBarcodeQuantity(totalQuantity)
-                                        setSelectedItemsTobeDispatch(row)
-                                    }}
-                                    className="block w-full text-left  hover:bg-gray-100"
-                                >
-                                    <div
-                                        className="block px-4 py-2"
-                                        onClick={() => {}}
-                                    >
-                                        Dispatch
-                                    </div>
-                                </button>
-                            </>
-                        }
+                        isCustomBtn={true}
+                        customBtnText="Dispatch"
+                        handleCustomActionButton={() => {
+                            setIsShow(true)
+                            const totalQuantity = row?.documents?.reduce(
+                                (sum, ele) => {
+                                    return (sum +=
+                                        ele?.productSalesOrder?.quantity)
+                                },
+                                0
+                            )
+                            setBarcodeQuantity(totalQuantity)
+                            setSelectedItemsTobeDispatch(row)
+                        }}
                     />
                 ),
             align: 'end',
@@ -414,16 +346,6 @@ const OutwardSampleTabsListingWrapper = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
 
-    useEffect(() => {
-        if (selectedItemsTobeDispatch?.documents.length) {
-            const barcode = Array(
-                selectedItemsTobeDispatch?.documents.length
-            ).fill(null)
-            setBarcodeList(barcode)
-            setBarcodeNumber(barcode)
-        }
-    }, [selectedItemsTobeDispatch?.documents])
-
     return (
         <>
             <OutwardSampleTabs columns={columns} rows={items} />
@@ -438,7 +360,7 @@ const OutwardSampleTabsListingWrapper = () => {
                 component={
                     <div className="px-4 pt-2 pb-6">
                         {/* SO NO. & DEALER NAME */}
-                        <div className="grid grid-cols-4 border-b-[1px] pb-2 border-black">
+                        <div className="grid grid-cols-4 pb-2 border-slate-300 border-b-[1px]">
                             <div>
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">WTS Number</div>
@@ -469,7 +391,7 @@ const OutwardSampleTabsListingWrapper = () => {
                             (document, docIndex) => {
                                 return (
                                     <div
-                                        className="pb-6 border-b-[1px] border-black last:border-none"
+                                        className="pb-6 border-b-slate-300 border-[1px] shadow p-4 my-4 rounded"
                                         key={docIndex}
                                     >
                                         <div className="grid grid-cols-4 mt-2">
@@ -505,120 +427,84 @@ const OutwardSampleTabsListingWrapper = () => {
                                                         }
                                                         {barcodeList[docIndex]
                                                             ?.length ? (
-                                                            <> / </>
+                                                            <>
+                                                                {' '}
+                                                                /{' '}
+                                                                {
+                                                                    barcodeList[
+                                                                        docIndex
+                                                                    ]?.length
+                                                                }
+                                                            </>
                                                         ) : (
                                                             ''
                                                         )}
-                                                        {
-                                                            barcodeList[
-                                                                docIndex
-                                                            ]?.length
-                                                        }
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="mt-4 grid grid-cols-12 gap-x-4">
-                                            <div className="col-span-3">
-                                                <ATMTextField
-                                                    disabled={
-                                                        barcodeList[docIndex]
-                                                            ?.length ===
-                                                        document
-                                                            ?.productSalesOrder
-                                                            ?.quantity
-                                                    }
-                                                    name=""
-                                                    value={
-                                                        barcodeNumber[docIndex]
-                                                    }
-                                                    label="Barcode Number"
-                                                    placeholder="enter barcode number"
-                                                    className="shadow bg-white rounded w-[50%] "
-                                                    onChange={(e) => {
-                                                        if (
-                                                            e.target.value
-                                                                ?.length > 6
-                                                        ) {
-                                                            handleBarcodeSubmit(
-                                                                e.target.value,
-                                                                docIndex,
-                                                                document
-                                                                    ?.productSalesOrder
-                                                                    ?.productGroupId
-                                                            )
-                                                        }
-                                                        setBarcodeNumber(
-                                                            (prev: any) => {
-                                                                const updatedArray =
-                                                                    [...prev] // Create a copy of the previous array
-                                                                updatedArray[
-                                                                    docIndex
-                                                                ] =
-                                                                    e.target.value // Set the value at the desired index
-                                                                return updatedArray // Return the updated array
-                                                            }
+                                        <div className="mt-2 grid grid-cols-4 gap-x-4">
+                                            <ATMTextField
+                                                disabled={
+                                                    barcodeList[docIndex]
+                                                        ?.length ===
+                                                    document?.productSalesOrder
+                                                        ?.quantity
+                                                }
+                                                name=""
+                                                value={barcodeNumber[docIndex]}
+                                                label="Barcode Number"
+                                                placeholder="enter barcode number"
+                                                className="shadow bg-white rounded w-[50%] "
+                                                onChange={(e) => {
+                                                    if (
+                                                        e.target.value?.length >
+                                                        6
+                                                    ) {
+                                                        handleBarcodeSubmit(
+                                                            e.target.value,
+                                                            docIndex,
+                                                            document
+                                                                ?.productSalesOrder
+                                                                ?.productGroupId
                                                         )
-                                                    }}
-                                                />
-                                            </div>
+                                                    }
+                                                    setBarcodeNumber(
+                                                        (prev: any) => {
+                                                            const updatedArray =
+                                                                [...prev] // Create a copy of the previous array
+                                                            updatedArray[
+                                                                docIndex
+                                                            ] = e.target.value // Set the value at the desired index
+                                                            return updatedArray // Return the updated array
+                                                        }
+                                                    )
+                                                }}
+                                            />
                                         </div>
                                         <div className="grid grid-cols-4 gap-x-4">
                                             {barcodeList[docIndex]?.map(
                                                 (
                                                     barcode: BarcodeListResponseType,
                                                     barcodeIndex: number
-                                                ) => {
-                                                    return (
-                                                        <div
-                                                            key={barcodeIndex}
-                                                            onClick={() => {
-                                                                // onBarcodeClick(barcode)
-                                                            }}
-                                                            className={`flex flex-col gap-2 my-4 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer`}
-                                                        >
-                                                            <div className="flex justify-between">
-                                                                <div>
-                                                                    {/* Used Chip */}
-                                                                    {/* {true && (
-                                                                                        <span className="text-white bg-red-500 px-2 text-[11px] rounded-full inline-flex items-center py-[1px] font-medium">
-                                                                                            Used
-                                                                                        </span>
-                                                                                    )} */}
-                                                                    <div className="text-[12px] text-slate-500">
-                                                                        Barcode
-                                                                        No.
-                                                                    </div>
-                                                                    <div>
-                                                                        {
-                                                                            barcode?.barcodeNumber
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                                <div className="absolute -top-2 -right-2">
-                                                                    <IoRemoveCircle
-                                                                        onClick={() => {
-                                                                            handleRemoveBarcode(
-                                                                                barcode?.barcodeNumber,
-                                                                                docIndex
-                                                                            )
-                                                                        }}
-                                                                        fill="red"
-                                                                        size={
-                                                                            20
-                                                                        }
-                                                                    />
-                                                                </div>
-                                                            </div>
-
-                                                            <div className="text-primary-main font-medium grow flex items-end">
-                                                                {/* {
-                                                                                    barcode?.productGroupLabel
-                                                                                } */}
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                }
+                                                ) => (
+                                                    <BarcodeCard
+                                                        key={barcodeIndex}
+                                                        barcodeNumber={
+                                                            barcode?.barcodeNumber
+                                                        }
+                                                        productGroupLabel={capitalizeFirstLetter(
+                                                            barcode?.productGroupLabel ||
+                                                                ''
+                                                        )}
+                                                        handleRemoveBarcode={() => {
+                                                            handleRemoveBarcode(
+                                                                barcode?.barcodeNumber,
+                                                                docIndex
+                                                            )
+                                                        }}
+                                                    />
+                                                )
                                             )}
                                         </div>
                                     </div>
@@ -626,8 +512,8 @@ const OutwardSampleTabsListingWrapper = () => {
                             }
                         )}
 
-                        <div className="flex justify-end">
-                            <div className="flex items-end">
+                        <div className="flex justify-end items-end ">
+                            <div>
                                 <ATMLoadingButton
                                     disabled={!handleDisableDispatchButton()}
                                     isLoading={barcodeDispatchInfo?.isLoading}

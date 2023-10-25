@@ -18,7 +18,7 @@ import {
     setPage,
     setSearchValue,
 } from 'src/redux/slices/barcodeSlice'
-import { BarcodeListResponse } from 'src/models'
+import { BarcodeListResponseType } from 'src/models'
 import BarcodeDetailsCard from './components/BarcodeDetailsCard/BarcodeDetailsCard'
 
 // |-- Redux --|
@@ -32,13 +32,13 @@ import {
 // |-- Types --|
 type Props = {
     rows: any[]
-    selectedBarcodes: BarcodeListResponse[]
+    selectedBarcodes: BarcodeListResponseType[]
     onBarcodeSelect: (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-        barcode: BarcodeListResponse,
+        barcode: BarcodeListResponseType,
         isBarcodeSeleted: boolean
     ) => void
-    onBarcodeClick: (barcode: BarcodeListResponse) => void
+    onBarcodeClick: (barcode: BarcodeListResponseType) => void
 }
 
 const BarcodeListing = ({

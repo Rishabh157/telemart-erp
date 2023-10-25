@@ -12,24 +12,28 @@ import { useEffect, useState } from 'react'
 // |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
 import { IconType } from 'react-icons'
-import { IoRemoveCircle } from 'react-icons/io5'
+import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
+import { showToast } from 'src/utils'
+import {
+    OutwardRequestWarehouseToCompanyListResponse,
+    BarcodeListResponseType,
+} from 'src/models'
+import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
-
-// |-- Internal Dependencies --|
-import { showToast } from 'src/utils'
-
-// |-- Redux --|
-import { useDispatch, useSelector } from 'react-redux'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { AlertText } from 'src/pages/callerpage/components/constants'
+import InwardCompanyTabs from './InwardCompanyTabs'
+import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
+import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
-// |-- Redux --|F
+// |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import {
     setIsTableLoading,
@@ -39,9 +43,7 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import { useInwardWarehouseToWarehouseBarcodeMutation } from 'src/services/WarehouseTransferService'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import { useGetPaginationWarehouseToComapnyByGroupQuery } from 'src/services/WarehouseToComapnyService'
-import InwardCompanyTabs from './InwardCompanyTabs'
 
 // |-- Types --|
 export type Tabs = {
@@ -50,79 +52,14 @@ export type Tabs = {
     path?: string
 }
 
-type BarcodeListResponseType = {
-    _id: string
-    productGroupId: string
-    barcodeNumber: string
-    barcodeGroupNumber: string
-    lotNumber: string
-    isUsed: boolean
-    wareHouseId: string
-    dealerId: string | null
-    status: string
-    companyId: string
-    isDeleted: boolean
-    isActive: boolean
-    __v: number
-    createdAt: string
-    updatedAt: string
-}
-
-type OutwardRTVListingResponseTypes = {
-    _id: string
-    fromWarehouseLabel: string
-    toWarehouseLabel: string
-    firstApproved: boolean
-    firstApprovedActionBy: string
-    firstApprovedAt: string
-    secondApprovedActionBy: string
-    secondApprovedAt: string
-    secondApproved: boolean
-    createdAt: string
-    updatedAt: string
-    documents: {
-        _id: string
-        wtNumber: string
-        fromWarehouseId: string
-        toWarehouseId: string
-        firstApprovedById: string
-        firstApproved: boolean
-        firstApprovedActionBy: string
-        firstApprovedAt: string
-        secondApprovedById: string
-        secondApproved: boolean
-        secondApprovedActionBy: string
-        secondApprovedAt: string
-        productSalesOrder: {
-            productGroupId: string
-            rate: number
-            quantity: number
-            _id: string
-            groupName: string
-        }
-        status: string
-        remark: string
-        companyId: string
-        isDeleted: boolean
-        isActive: boolean
-        __v: number
-        createdAt: string
-        updatedAt: string
-        fromWarehouseLabel: string
-        toWarehouseLabel: string
-    }[]
-}
-
 const InwardCompanyTabsListingWrapper = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
-        useState<OutwardRTVListingResponseTypes | null>(null)
-    // const params = useParams()
+        useState<OutwardRequestWarehouseToCompanyListResponse | null>(null)
     const dispatch = useDispatch<AppDispatch>()
-    // const dealerId = params.dealerId
     const warehouseTransferState: any = useSelector(
         (state: RootState) => state.warehouseTransfer
     )
@@ -182,9 +119,9 @@ const InwardCompanyTabsListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'wtNumber',
-            headerName: 'WT Number',
+            headerName: 'WTC Number',
             flex: 'flex-[0.6_0.6_0%]',
-            renderCell: (row: OutwardRTVListingResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span> {row?._id} </span>
             ),
         },
@@ -193,7 +130,7 @@ const InwardCompanyTabsListingWrapper = () => {
             headerName: 'From Warehouse',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
-            renderCell: (row: OutwardRTVListingResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span> {row?.fromWarehouseLabel} </span>
             ),
         },
@@ -202,7 +139,7 @@ const InwardCompanyTabsListingWrapper = () => {
             headerName: 'To Warehouse',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
-            renderCell: (row: OutwardRTVListingResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span> {row?.toWarehouseLabel} </span>
             ),
         },
@@ -211,12 +148,15 @@ const InwardCompanyTabsListingWrapper = () => {
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: OutwardRTVListingResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
                     <div className="w-full">
-                        {row?.documents?.map((item) => {
+                        {row?.documents?.map((item, ind) => {
                             return (
-                                <div className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center">
+                                <div
+                                    key={ind}
+                                    className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center"
+                                >
                                     <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
                                         {item?.productSalesOrder?.groupName}
                                     </div>
@@ -235,7 +175,7 @@ const InwardCompanyTabsListingWrapper = () => {
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: OutwardRTVListingResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
             },
         },
@@ -244,7 +184,7 @@ const InwardCompanyTabsListingWrapper = () => {
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: OutwardRTVListingResponseTypes) => {
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
@@ -253,7 +193,7 @@ const InwardCompanyTabsListingWrapper = () => {
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            renderCell: (row: OutwardRTVListingResponseTypes) => (
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span>{row?.documents[0]?.status}</span>
             ),
         },
@@ -261,43 +201,29 @@ const InwardCompanyTabsListingWrapper = () => {
             field: 'actions',
             headerName: 'Action',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: OutwardRTVListingResponseTypes) =>
-                row?.documents[0].status === 'COMPLETE' ? (
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) =>
+                row?.documents[0].status === SaleOrderStatus.complete ? (
                     'At Warehouse'
-                ) : row?.documents[0].status !== 'DISPATCHED' ? (
+                ) : row?.documents[0].status !== SaleOrderStatus.dispatched ? (
                     ''
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
                         moduleName={UserModuleNameTypes.saleOrder}
-                        children={
-                            <>
-                                <button
-                                    onClick={() => {
-                                        setIsShow(true)
-                                        const totalQuantity =
-                                            row?.documents?.reduce(
-                                                (sum, ele) => {
-                                                    return (sum +=
-                                                        ele?.productSalesOrder
-                                                            ?.quantity)
-                                                },
-                                                0
-                                            )
-                                        setBarcodeQuantity(totalQuantity)
-                                        setSelectedItemsTobeDispatch(row)
-                                    }}
-                                    className="block w-full text-left  hover:bg-gray-100"
-                                >
-                                    <div
-                                        className="block px-4 py-2"
-                                        onClick={() => {}}
-                                    >
-                                        Inward
-                                    </div>
-                                </button>
-                            </>
-                        }
+                        isCustomBtn={true}
+                        customBtnText="Inward"
+                        handleCustomActionButton={() => {
+                            setIsShow(true)
+                            const totalQuantity = row?.documents?.reduce(
+                                (sum, ele) => {
+                                    return (sum +=
+                                        ele?.productSalesOrder?.quantity)
+                                },
+                                0
+                            )
+                            setBarcodeQuantity(totalQuantity)
+                            setSelectedItemsTobeDispatch(row)
+                        }}
                     />
                 ),
             align: 'end',
@@ -430,16 +356,6 @@ const InwardCompanyTabsListingWrapper = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
 
-    useEffect(() => {
-        if (selectedItemsTobeDispatch?.documents.length) {
-            const barcode = Array(
-                selectedItemsTobeDispatch?.documents.length
-            ).fill(null)
-            setBarcodeList(barcode)
-            setBarcodeNumber(barcode)
-        }
-    }, [selectedItemsTobeDispatch?.documents])
-
     return (
         <>
             <InwardCompanyTabs columns={columns} rows={items} />
@@ -454,10 +370,10 @@ const InwardCompanyTabsListingWrapper = () => {
                 component={
                     <div className="px-4 pt-2 pb-6">
                         {/* SO NO. & DEALER NAME */}
-                        <div className="grid grid-cols-4 border-b-[1px] pb-2 border-black">
+                        <div className="grid grid-cols-4 pb-2 border-slate-300 border-b-[1px] ">
                             <div>
                                 <div className="flex gap-1 items-center">
-                                    <div className="font-bold">WTW Number</div>
+                                    <div className="font-bold">WTC Number</div>
                                     {':'}
                                     <div className="">
                                         {selectedItemsTobeDispatch?._id}
@@ -468,13 +384,14 @@ const InwardCompanyTabsListingWrapper = () => {
                             <div>
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">
-                                        To Warehouse Name
+                                        From Warehouse Name
                                     </div>
                                     {':'}
                                     <div className="">
-                                        {
-                                            selectedItemsTobeDispatch?.toWarehouseLabel
-                                        }
+                                        {capitalizeFirstLetter(
+                                            selectedItemsTobeDispatch?.fromWarehouseLabel ||
+                                                ''
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -484,7 +401,7 @@ const InwardCompanyTabsListingWrapper = () => {
                             (document, docIndex) => {
                                 return (
                                     <div
-                                        className="pb-6 border-b-[1px] border-black last:border-none"
+                                        className="pb-6 border-b-slate-300 border-[1px] shadow p-4 my-4 rounded"
                                         key={docIndex}
                                     >
                                         <div className="grid grid-cols-4 mt-2">
@@ -520,125 +437,92 @@ const InwardCompanyTabsListingWrapper = () => {
                                                         }
                                                         {barcodeList[docIndex]
                                                             ?.length ? (
-                                                            <> / </>
+                                                            <>
+                                                                {' '}
+                                                                /{' '}
+                                                                {
+                                                                    barcodeList[
+                                                                        docIndex
+                                                                    ]?.length
+                                                                }
+                                                            </>
                                                         ) : (
                                                             ''
                                                         )}
-                                                        {
-                                                            barcodeList[
-                                                                docIndex
-                                                            ]?.length
-                                                        }
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="mt-4 grid grid-cols-12 gap-x-4">
-                                            <div className="col-span-3">
-                                                <ATMTextField
-                                                    disabled={
-                                                        barcodeList[docIndex]
-                                                            ?.length ===
-                                                        document
-                                                            ?.productSalesOrder
-                                                            ?.quantity
-                                                    }
-                                                    name=""
-                                                    value={
-                                                        barcodeNumber[docIndex]
-                                                    }
-                                                    label="Barcode Number"
-                                                    placeholder="enter barcode number"
-                                                    className="shadow bg-white rounded w-[50%] "
-                                                    onChange={(e) => {
-                                                        if (
-                                                            e.target.value
-                                                                ?.length > 6
-                                                        ) {
-                                                            handleBarcodeSubmit(
-                                                                e.target.value,
-                                                                docIndex,
-                                                                document
-                                                                    ?.productSalesOrder
-                                                                    ?.productGroupId
-                                                            )
-                                                        }
-                                                        setBarcodeNumber(
-                                                            (prev: any) => {
-                                                                const updatedArray =
-                                                                    [...prev] // Create a copy of the previous array
-                                                                updatedArray[
-                                                                    docIndex
-                                                                ] =
-                                                                    e.target.value // Set the value at the desired index
-                                                                return updatedArray // Return the updated array
-                                                            }
+                                        <div className="mt-2 grid grid-cols-4 gap-x-4">
+                                            <ATMTextField
+                                                disabled={
+                                                    barcodeList[docIndex]
+                                                        ?.length ===
+                                                    document?.productSalesOrder
+                                                        ?.quantity
+                                                }
+                                                name=""
+                                                value={barcodeNumber[docIndex]}
+                                                label="Barcode Number"
+                                                placeholder="enter barcode number"
+                                                className="shadow bg-white rounded w-[50%] "
+                                                onChange={(e) => {
+                                                    if (
+                                                        e.target.value?.length >
+                                                        6
+                                                    ) {
+                                                        handleBarcodeSubmit(
+                                                            e.target.value,
+                                                            docIndex,
+                                                            document
+                                                                ?.productSalesOrder
+                                                                ?.productGroupId
                                                         )
-                                                    }}
-                                                />
-                                            </div>
+                                                    }
+                                                    setBarcodeNumber(
+                                                        (prev: any) => {
+                                                            const updatedArray =
+                                                                [...prev] // Create a copy of the previous array
+                                                            updatedArray[
+                                                                docIndex
+                                                            ] = e.target.value // Set the value at the desired index
+                                                            return updatedArray // Return the updated array
+                                                        }
+                                                    )
+                                                }}
+                                            />
                                         </div>
                                         <div className="grid grid-cols-4 gap-x-4">
                                             {barcodeList[docIndex]?.map(
                                                 (
                                                     barcode: BarcodeListResponseType,
                                                     barcodeIndex: number
-                                                ) => {
-                                                    return (
-                                                        <div
-                                                            key={barcodeIndex}
-                                                            className={`flex flex-col gap-2 my-4 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer`}
-                                                        >
-                                                            <div className="flex justify-between">
-                                                                <div>
-                                                                    {/* Used Chip */}
-                                                                    {/* {true && (
-                                                                                        <span className="text-white bg-red-500 px-2 text-[11px] rounded-full inline-flex items-center py-[1px] font-medium">
-                                                                                            Used
-                                                                                        </span>
-                                                                                    )} */}
-                                                                    <div className="text-[12px] text-slate-500">
-                                                                        Barcode
-                                                                        No.
-                                                                    </div>
-                                                                    <div>
-                                                                        {
-                                                                            barcode?.barcodeNumber
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                                <div className="absolute -top-2 -right-2">
-                                                                    <IoRemoveCircle
-                                                                        onClick={() => {
-                                                                            handleRemoveBarcode(
-                                                                                barcode?.barcodeNumber,
-                                                                                docIndex
-                                                                            )
-                                                                        }}
-                                                                        fill="red"
-                                                                        size={
-                                                                            20
-                                                                        }
-                                                                    />
-                                                                </div>
-                                                            </div>
-
-                                                            <div className="text-primary-main font-medium grow flex items-end">
-                                                                {/* {
-                                                                    barcode?.productGroupLabel
-                                                                } */}
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                }
+                                                ) => (
+                                                    <BarcodeCard
+                                                        key={barcodeIndex}
+                                                        barcodeNumber={
+                                                            barcode?.barcodeNumber
+                                                        }
+                                                        productGroupLabel={capitalizeFirstLetter(
+                                                            barcode?.productGroupLabel ||
+                                                                ''
+                                                        )}
+                                                        handleRemoveBarcode={() => {
+                                                            handleRemoveBarcode(
+                                                                barcode?.barcodeNumber,
+                                                                docIndex
+                                                            )
+                                                        }}
+                                                    />
+                                                )
                                             )}
                                         </div>
                                     </div>
                                 )
                             }
                         )}
-                        <div className="flex justify-end">
-                            <div className="flex items-end">
+                        <div className="flex justify-end items-end ">
+                            <div>
                                 <ATMLoadingButton
                                     disabled={!handleDisableDispatchButton()}
                                     isLoading={barcodeDispatchInfo?.isLoading}
