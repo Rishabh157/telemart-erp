@@ -41,7 +41,6 @@ import {
 } from 'src/redux/slices/orderSlice'
 // import ActionAuthHOC from 'src/ActionAuthHoc'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import { Chrono } from 'react-chrono'
 
 // Dispatching imports
 import { showToast } from 'src/utils'
@@ -252,15 +251,6 @@ const OrderListing = ({
                 <span> {row?.gender} </span>
             ),
         },
-        // {
-        //     field: 'emailId',
-        //     headerName: 'Delivery Charges',
-        //     flex: 'flex-[1.2_1.2_0%]',
-        //     align: 'center',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <span> {row?.emailId} </span>
-        //     ),
-        // },
         {
             field: 'price',
             headerName: 'Price',
@@ -513,15 +503,13 @@ const OrderListing = ({
                         isLoading={isTableLoading}
                     />
                 </div>
+
+                {/* Flow */}
                 <DialogLogBox
                     maxWidth="sm"
                     handleClose={() => setIsFlowDialogShow(false)}
                     isOpen={isFlowDialogShow}
-                    component={
-                        <div className="py-4 flex justify-center">
-                            <Chrono items={orderFlowList} mode="VERTICAL" />
-                        </div>
-                    }
+                    component={<div className="py-4 flex justify-center"></div>}
                 />
 
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">

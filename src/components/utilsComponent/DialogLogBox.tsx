@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:DialogLogBox.tsx
 // Type: Utils Component
-// Last Updated: JULY 06, 2023
+// Last Updated: JULY 30, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -27,7 +27,7 @@ type DialogLogBoxType = {
     fullScreen?: boolean
     fullWidth?: boolean
     width?: string
-    maxWidth?: 'lg' | 'sm'
+    maxWidth?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
 const DialogLogBox: React.FC<DialogLogBoxType> = ({

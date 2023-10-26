@@ -61,7 +61,7 @@ import {
     AddInitialCallOneWrapper,
     AddInitialCallThreeWrappper,
     AddInitialCallTwoWrapper,
-    AddInventoryManagementWrapper,
+    // AddInventoryManagementWrapper,
     AddItemWrapper,
     AddLanguageWrapper,
     AddProductCategoryWrapper,
@@ -145,7 +145,7 @@ import {
     EditInitialCallOneWrapper,
     EditInitialCallThreeWrapper,
     EditInitialCallTwoWrapper,
-    EditInventoryManagementWrapper,
+    // EditInventoryManagementWrapper,
     EditItemWrapper,
     EditLanguageWrapper,
     EditProductCategoryWrapper,
@@ -173,7 +173,7 @@ import {
     InquiryListingWrapper,
     InquiryViewWrapper,
     InventoryListingWrapper,
-    InventoryManagementListingWrapper,
+    // InventoryManagementListingWrapper,
     InwardInventoryWrapper,
     ItemListingWrapper,
     LanguageListingWrapper,
@@ -260,6 +260,7 @@ import WarehouseToSampleListingWrapper from './pages/warehouseToSample/list/Ware
 import AddWarehouseToSampleWrapper from './pages/warehouseToSample/add/AddWarehouseToSampleWrapper'
 import EditWarehouseToSampleWrapper from './pages/warehouseToSample/edit/EditWarehouseToSampleWrapper'
 import VendorRtvListingWrapper from './pages/vendors/view/tabs/ReturnToVendorTab/list/VendorRtvListingWrapper'
+import InventoryFlowListingWrapper from './pages/inventoryFlow/list/InventoryFlowListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -574,7 +575,7 @@ const PageRoutes = () => {
                             }
                         />
 
-                        {/* #########################################  should add sale order*/}
+                        {/* #######  should add sale order ####### */}
 
                         <Route
                             path="ledger"
@@ -1105,6 +1106,12 @@ const PageRoutes = () => {
                             }
                         />
                     </Route>
+
+                    {/* Inventory Flow */}
+                    <Route
+                        path="/inventory-flow"
+                        element={<InventoryFlowListingWrapper />}
+                    />
 
                     {/* Sale Order */}
                     <Route
@@ -2901,18 +2908,20 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                    <Route
-                        path="/inventory-management/add"
-                        element={<AddInventoryManagementWrapper />}
-                    />
-                    <Route
-                        path="/inventory-management/edit/:id"
-                        element={<EditInventoryManagementWrapper />}
-                    />
-                    <Route
+
+                    {/* INVENTORY MENAGEMENT */}
+                    {/* <Route
                         path="/inventory-management"
                         element={<InventoryManagementListingWrapper />}
-                    />
+                    /> */}
+                    {/* <Route
+                        path="/inventory-management/add"
+                        element={<AddInventoryManagementWrapper />}
+                    /> */}
+                    {/* <Route
+                        path="/inventory-management/edit/:id"
+                        element={<EditInventoryManagementWrapper />}
+                    /> */}
 
                     <Route path="/barcodes" element={<BarcodeGenerator />} />
 
