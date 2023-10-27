@@ -36,10 +36,15 @@ const InventoryFlowListingWrapper = () => {
         searchValue: searchValue,
         params: ['barcodeNumber', 'productGroupLabel'],
         page: page,
-        filterBy: [],
+        filterBy: [
+            // {
+            //     fieldName: 'companyId',
+            //     value: userData?.companyId,
+            // },
+        ],
         dateFilter: {
-            // start_date: '23-10-2023',
-            // end_date: '25-10-2023',
+            // startDate: '23-10-2023',
+            // endDate: '25-10-2023',
             //     dateFilterKey: "",
         },
         orderBy: 'createdAt',

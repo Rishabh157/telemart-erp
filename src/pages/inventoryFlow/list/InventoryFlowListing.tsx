@@ -71,26 +71,38 @@ const InventoryFlowListing = ({
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         inventoryFlowState
 
-    const showBarcodeStatusText = (status: string, wareHouseLabel: string) => {
+    const showBarcodeStatusText = (
+        status: string,
+        wareHouseLabel: string,
+        companyLabel: string
+    ) => {
         switch (status) {
             case BarcodeStatusEnum.atWarehouse:
-                return `Barcode is in (${wareHouseLabel}) warehouse`
+                return `Barcode is Inwarding in ${capitalizeFirstLetter(
+                    wareHouseLabel
+                )} warehouse of ${capitalizeFirstLetter(companyLabel)} company`
             case BarcodeStatusEnum.atDealerWarehouse:
-                return `Barcode is in dealer warehouse (${wareHouseLabel})`
+                return `Barcode is in dealer ${capitalizeFirstLetter(
+                    wareHouseLabel
+                )} warehouse`
             case BarcodeStatusEnum.inTransit:
-                return 'Barcode is in Transit'
+                return 'Barcode is in In Transit'
             case BarcodeStatusEnum.delivered:
                 return 'Barcode is delivered'
             case BarcodeStatusEnum.rtv:
                 return 'Barcode is in return to vendor'
             case BarcodeStatusEnum.wtc:
-                return 'Barcode is warehouse to company'
+                return `Barcode is transfer to ${capitalizeFirstLetter(
+                    companyLabel
+                )} company`
             case BarcodeStatusEnum.wts:
                 return `Barcode is in warehouse and go to Sample`
             case BarcodeStatusEnum.wtw:
-                return 'Barcode is warehouse to warehouse'
+                return 'Barcode is WTW outward'
             default:
-                return 'Barcode is created'
+                return `Barcode is created in ${capitalizeFirstLetter(
+                    companyLabel
+                )} company`
         }
     }
 
@@ -160,12 +172,14 @@ const InventoryFlowListing = ({
                                             </div>
                                             {' : '}
                                             <div className="">
-                                                {
-                                                    barcode?.data[
-                                                        barcode?.data?.length -
-                                                            1
-                                                    ]?.status
-                                                }
+                                                {barcode?.data[
+                                                    barcode?.data?.length - 1
+                                                ]?.status === ''
+                                                    ? 'Created'
+                                                    : barcode?.data[
+                                                          barcode?.data
+                                                              ?.length - 1
+                                                      ]?.status}
                                             </div>
                                         </div>
 
@@ -215,7 +229,8 @@ const InventoryFlowListing = ({
                                                     {showBarcodeStatusText(
                                                         ele?.status,
                                                         ele?.wareHouseLabel ||
-                                                            ''
+                                                            '',
+                                                        ele?.companyLabel
                                                     )}
                                                 </div>
                                             </Timeline.Item>

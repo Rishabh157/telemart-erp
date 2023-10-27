@@ -49,7 +49,8 @@ const UserAccessWrapper = () => {
             skip: !userData?.companyId,
         }
     )
-    // iue => is user exists
+
+    // iue => if user exists
     const {
         data: iueData,
         isLoading: iueIsLoading,
@@ -58,6 +59,13 @@ const UserAccessWrapper = () => {
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
+
+    useEffect(() => {
+        if (iueData?.data) {
+            setIsUserIxists(iueData?.data)
+            console.log(iueData)
+        }
+    }, [iueData, iueIsLoading, iueIsFetching])
 
     const handleUserAccessSubmit = () => {
         setApiStatus(true)
@@ -91,6 +99,7 @@ const UserAccessWrapper = () => {
                     setApiStatus(false)
                 })
             } else if (userId && isUserExists === true) {
+                console.log('UPDATE ', isUserExists, userId)
                 updateByUserId({
                     body: {
                         userId: userId,
@@ -158,11 +167,7 @@ const UserAccessWrapper = () => {
             }
         }, 1000)
     }
-    useEffect(() => {
-        if (iueData?.data) {
-            setIsUserIxists(iueData?.data)
-        }
-    }, [iueData, iueIsLoading, iueIsFetching])
+
     useEffect(() => {
         if (!isLoading && !isFetching && data) {
             if (data?.data) {

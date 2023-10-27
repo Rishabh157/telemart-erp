@@ -44,7 +44,6 @@ export const navigation: NavItemType[] = [
         path: '/dashboard',
         name: UserModuleNameTypes.dashboard,
     },
-
     {
         label: 'Vendors',
         icon: HiOutlineTruck,
@@ -97,7 +96,7 @@ export const navigation: NavItemType[] = [
         label: 'Inventory Flow',
         icon: TiFlowSwitch,
         path: '/inventory-flow',
-        name: 'InventoryFlow',
+        name: UserModuleNameTypes.inventoryFlow,
     },
     {
         label: 'Sale Order',
@@ -109,7 +108,7 @@ export const navigation: NavItemType[] = [
         label: 'RTV Transfer',
         icon: FiUsers,
         path: '/return-to-vendor',
-        name: UserModuleNameTypes.saleOrder,
+        name: UserModuleNameTypes.rtvTransfer,   // check
     },
     // {
     //     label: 'Inventory Management',

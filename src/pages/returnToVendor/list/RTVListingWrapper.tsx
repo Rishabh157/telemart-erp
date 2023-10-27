@@ -247,15 +247,6 @@ const RTVListingWrapper = () => {
                 )
             },
         },
-        // {
-        //     field: 'remark',
-        //     headerName: 'Remark.',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'center',
-        //     renderCell: (row: ReturnToVendorListResponse) => (
-        //         <span> {row?.documents[0]?.remark} </span>
-        //     ),
-        // },
         {
             field: 'firstApproved',
             headerName: 'First level Status',
@@ -274,7 +265,7 @@ const RTVListingWrapper = () => {
             },
         },
         {
-            field: 'dhApprovedActionBy',
+            field: 'firstApprovedActionBy',
             headerName: 'Level first Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
@@ -310,7 +301,7 @@ const RTVListingWrapper = () => {
             },
         },
         {
-            field: 'accApprovedActionBy',
+            field: 'secondApprovedActionBy',
             headerName: 'Level Second Approved By',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
@@ -319,7 +310,7 @@ const RTVListingWrapper = () => {
             },
         },
         {
-            field: 'accApprovedAt',
+            field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
@@ -492,7 +483,7 @@ const RTVListingWrapper = () => {
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        moduleName={UserModuleNameTypes.saleOrder}
+                        moduleName={UserModuleNameTypes.rtvTransfer}
                         isEdit={true}
                         isDelete={
                             row.firstApproved === null &&
@@ -532,7 +523,7 @@ const RTVListingWrapper = () => {
                     columns={getAllowedAuthorizedColumns(
                         checkUserAccess,
                         columns,
-                        UserModuleNameTypes.saleOrder,
+                        UserModuleNameTypes.rtvTransfer,
                         UserModuleActionTypes.List
                     )}
                     rows={items}
