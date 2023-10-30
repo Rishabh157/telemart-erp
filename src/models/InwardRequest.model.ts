@@ -6,18 +6,50 @@
 // ==============================================
 
 // |-- Types --|
-export type InwardRequestDealerListResponse = {
-    dealerName: string
-    productName: string
-    quantity: string
-    address: string
-    creationDate: string
-    is_active: boolean
-    is_deleted: boolean
+// Warehouse Transfer list
+export interface InwardDealerRequstListResponse {
+    _id: string
+    fromWarehouseLabel: string
+    toWarehouseLabel: string
+    firstApproved: boolean | null
+    firstApprovedActionBy: string
+    firstApprovedAt: string
+    secondApprovedActionBy: string
+    secondApprovedAt: string
+    secondApproved: boolean | null
     createdAt: string
     updatedAt: string
-    _id: string
-    __v: number
+    documents: {
+        _id: string
+        dtwNumber: string
+        fromWarehouseId: string
+        toWarehouseId: string
+        firstApprovedById: string | null
+        firstApproved: boolean | null
+        firstApprovedActionBy: string
+        firstApprovedAt: string
+        secondApprovedById: string | null
+        secondApproved: boolean | null
+        secondApprovedActionBy: string
+        secondApprovedAt: string
+        productSalesOrder: {
+            productGroupId: string
+            rate: number
+            quantity: number
+            _id: string
+            groupName: string
+        }
+        status: string
+        remark: string
+        companyId: string
+        isDeleted: boolean
+        isActive: boolean
+        __v: number
+        createdAt: string
+        updatedAt: string
+        fromWarehouseLabel: string
+        toWarehouseLabel: string
+    }[]
 }
 
 export type InwardRequestCustomerListResponse = {

@@ -228,6 +228,12 @@ export type {
     OutwardRequestWarehouseToCompanyListResponse,
 } from './OutwardRequest.model'
 
+// Inward Tabs
+export type {
+    // O/I DEALER TAB
+    InwardDealerRequstListResponse,
+} from './InwardRequest.model'
+
 // InventoryFlow.modal
 export type {
     BarcodeFlowListResponse,
