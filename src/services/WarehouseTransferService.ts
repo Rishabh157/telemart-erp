@@ -68,7 +68,7 @@ export const WarehouseTransferApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Update *****/
+        //***** Update Approval level *****/
         updateWarehouseTransferApproval: builder.mutation({
             invalidatesTags: ['WarehouseTransfer'],
             query: ({ body, id }: UpdateWarehouseTransferApproval) => ({

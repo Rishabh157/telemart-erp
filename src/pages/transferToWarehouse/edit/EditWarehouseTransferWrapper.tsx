@@ -36,41 +36,6 @@ import { setSelectedItem } from 'src/redux/slices/warehouseTransferSlice'
 // |-- Types --|
 type Props = {}
 
-// interface ProductSalesOrder {
-//     productGroupId: string
-//     rate: number
-//     quantity: number
-//     _id: string
-//     groupName: string
-// }
-
-// interface ProductSalesOrderListResponseType {
-//     _id: string
-//     soNumber: string
-//     dealerId: string
-//     dealerWareHouseId: string
-//     companyWareHouseId: string
-//     dhApprovedById: string | null
-//     dhApproved: ''
-//     dhApprovedActionBy: string
-//     dhApprovedAt: string
-//     accApprovedById: string | null
-//     accApproved: boolean | null
-//     accApprovedActionBy: string
-//     accApprovedAt: string
-//     productSalesOrder: ProductSalesOrder
-//     status: string
-//     companyId: string
-//     isDeleted: boolean
-//     isActive: boolean
-//     __v: number
-//     createdAt: string
-//     updatedAt: string
-//     dealerLabel: string
-//     companyWarehouseLabel: string
-//     warehouseLabel: string
-// }
-
 interface ProductSalesOrder {
     productGroupId: string
     rate: number
@@ -276,22 +241,6 @@ const EditWarehouseTransferWrapper = (props: Props) => {
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        // soNumber: editWarehouseTransfer?.soNumber || '',
-        // dealerId: editWarehouseTransfer?.dealerId || '',
-        // dealerWareHouseId: editWarehouseTransfer?.dealerWareHouseId || '',
-        // companyWareHouseId: editWarehouseTransfer?.companyWareHouseId || '',
-        // companyId: editWarehouseTransfer?.companyId || '',
-        // productSalesOrder: editWarehouseTransfer.productSalesOrder,
-        // id: '',
-        // dhApproved: editWarehouseTransfer.dhApproved,
-        // dhApprovedActionBy: editWarehouseTransfer.dhApprovedActionBy,
-        // dhApprovedAt: editWarehouseTransfer.dhApprovedAt,
-        // accApproved: editWarehouseTransfer.accApproved,
-        // accApprovedActionBy: editWarehouseTransfer.accApprovedActionBy,
-        // accApprovedAt: editWarehouseTransfer.accApprovedAt,
-        // dhApprovedById: editWarehouseTransfer.dhApprovedById,
-        // accApprovedById: editWarehouseTransfer.accApprovedById,
-
         wtNumber: editWarehouseTransfer.wtNumber,
         fromWarehouseId: editWarehouseTransfer.fromWarehouseId,
         toWarehouseId: editWarehouseTransfer.toWarehouseId,
