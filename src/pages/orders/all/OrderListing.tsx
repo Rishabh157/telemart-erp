@@ -18,7 +18,7 @@ import ATMTable, {
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { OrderListResponse, SingleOrderFlowResponse } from 'src/models'
+import { OrderListResponse } from 'src/models'
 import {
     useGetOrderQuery,
     useGetOrderFlowQuery,
@@ -41,7 +41,6 @@ import {
 } from 'src/redux/slices/orderSlice'
 // import ActionAuthHOC from 'src/ActionAuthHoc'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import { Chrono } from 'react-chrono'
 
 // Dispatching imports
 import { showToast } from 'src/utils'
@@ -98,7 +97,6 @@ const OrderListing = ({
     const [currentId, setCurrentId] = useState<string>('')
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
     const [isFlowDialogShow, setIsFlowDialogShow] = useState<boolean>(false)
-    const [orderFlowList, setOrderFlowList] = useState([])
     const orderState: any = useSelector((state: RootState) => state.order)
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
@@ -148,64 +146,9 @@ const OrderListing = ({
         isFetching: isOrderFlowFetching,
     } = useGetOrderFlowQuery(currentId, { skip: !currentId })
 
-    function formatDateString(inputDateStr: string) {
-        const months = [
-            'Jan',
-            'Feb',
-            'March',
-            'Apr',
-            'May',
-            'June',
-            'July',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec',
-        ]
-
-        const inputDate = new Date(inputDateStr)
-
-        if (isNaN(inputDate as any)) {
-            return 'Invalid Date'
-        }
-
-        const year = inputDate.getUTCFullYear()
-        const month = months[inputDate.getUTCMonth()]
-        const day = inputDate.getUTCDate()
-        const hours = inputDate.getUTCHours()
-        const minutes = inputDate.getUTCMinutes()
-        const seconds = inputDate.getUTCSeconds()
-
-        const formattedDate = `${
-            day < 10 ? '0' : ''
-        }${day} ${month} ${year} : ${hours < 10 ? '0' : ''}${hours}-${
-            minutes < 10 ? '0' : ''
-        }${minutes}-${seconds < 10 ? '0' : ''}${seconds}`
-
-        return formattedDate
-    }
-
     useEffect(() => {
         if (!isOrderFlowFetching && !isOrderFlowLoading) {
-            const filterdOrderFlow = orderFlowData?.data?.map(
-                (ele: SingleOrderFlowResponse) => {
-                    return {
-                        title: formatDateString(ele.createdAt),
-                        cardTitle: 'Dunkirk',
-                        // url: 'http://www.history.com',
-                        cardSubtitle: ' ',
-                        cardDetailedText: ' ',
-                        // media: {
-                        //     type: 'IMAGE',
-                        //     source: {
-                        //         url: '',
-                        //     },
-                        // },
-                    }
-                }
-            )
-            setOrderFlowList(filterdOrderFlow)
+            return orderFlowData
         }
     }, [isOrderFlowLoading, isOrderFlowFetching, orderFlowData])
 
@@ -252,15 +195,6 @@ const OrderListing = ({
                 <span> {row?.gender} </span>
             ),
         },
-        // {
-        //     field: 'emailId',
-        //     headerName: 'Delivery Charges',
-        //     flex: 'flex-[1.2_1.2_0%]',
-        //     align: 'center',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <span> {row?.emailId} </span>
-        //     ),
-        // },
         {
             field: 'price',
             headerName: 'Price',
@@ -513,15 +447,13 @@ const OrderListing = ({
                         isLoading={isTableLoading}
                     />
                 </div>
+
+                {/* Flow */}
                 <DialogLogBox
                     maxWidth="sm"
                     handleClose={() => setIsFlowDialogShow(false)}
                     isOpen={isFlowDialogShow}
-                    component={
-                        <div className="py-4 flex justify-center">
-                            <Chrono items={orderFlowList} mode="VERTICAL" />
-                        </div>
-                    }
+                    component={<div className="py-4 flex justify-center"></div>}
                 />
 
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">

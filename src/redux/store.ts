@@ -93,7 +93,8 @@ import returnToVendorSlice from './slices/returnToVendorSlice'
 import warehouseTransferSlice from './slices/warehouseTransferSlice'
 import warehouseToSampleSlice from './slices/warehouseToSampleSlice'
 import warehouseToComapnySlice from './slices/WarehouseToComapnySlice'
-
+import InventoryFlowSlice from './slices/InventoryFlowSlice'
+import InwardDealerSlice from './slices/InwardDealerSlice'
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
 //     if (action.type.includes("rejected") && action.payload.status === 401) {
@@ -184,6 +185,8 @@ const store = configureStore({
         warehouseTransfer: warehouseTransferSlice,
         warehouseToSample: warehouseToSampleSlice,
         warehouseToComapny: warehouseToComapnySlice,
+        inventoryFlow: InventoryFlowSlice,
+        inwardDealer: InwardDealerSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

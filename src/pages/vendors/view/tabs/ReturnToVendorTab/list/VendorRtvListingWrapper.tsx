@@ -15,15 +15,16 @@ import { useParams } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import VendorRtvListing from './VendorRtvListing'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+// import {
+//     UserModuleActionTypes,
+//     UserModuleNameTypes,
+//     UserModuleTabsTypes,
+// } from 'src/models/userAccess/UserAccess.model'
 import {
     useGetPaginationReturnToVendorByGroupQuery,
     // useGetVendorRTVByBarcodeStatusQuery,
 } from 'src/services/ReturnToVendorService'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+// import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 
 // |-- Redux --|
 import {
@@ -92,9 +93,9 @@ const VendorRtvListingWrapper = () => {
     const { vendorId } = useParams()
 
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+    // const { checkUserAccess } = useSelector(
+    //     (state: RootState) => state.userAccess
+    // )
 
     const { data, isFetching, isLoading } =
         useGetPaginationReturnToVendorByGroupQuery({
@@ -195,17 +196,7 @@ const VendorRtvListingWrapper = () => {
         },
     ]
 
-    return (
-        <VendorRtvListing
-            columns={getAllowedAuthorizedColumns(
-                checkUserAccess,
-                columns,
-                UserModuleNameTypes.saleOrder,
-                UserModuleActionTypes.List
-            )}
-            rows={items}
-        />
-    )
+    return <VendorRtvListing columns={columns} rows={items} />
 }
 
 export default VendorRtvListingWrapper

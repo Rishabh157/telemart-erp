@@ -1,29 +1,29 @@
 /// ==============================================
-// Filename:InwardRequestSlice.ts
+// Filename:InventoryFlowSlice.ts
 // Type: Slice Component
-// Last Updated: JULY 06, 2023
+// Last Updated: OCTOBER 26, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
 // |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { BarcodeFlowListResponse } from 'src/models'
 
 // |-- Internal Dependencies --|
-import { InwardDealerRequstListResponse } from 'src/models'
-
-export interface InwardRequestSliceStateType {
-    items: InwardDealerRequstListResponse[] | []
+export type InitialStateType = {
+    items: BarcodeFlowListResponse[]
+    selectedItems: BarcodeFlowListResponse | null
     totalItems: number
     isTableLoading: boolean
     page: number
     rowsPerPage: number
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
-    selectedId: string
+    selectedDealerId: string
 }
 
-const initialState: InwardRequestSliceStateType = {
+const initialState: InitialStateType = {
     items: [],
     totalItems: 0,
     isTableLoading: false,
@@ -31,16 +31,17 @@ const initialState: InwardRequestSliceStateType = {
     rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
-    selectedId: '',
+    selectedDealerId: '',
+    selectedItems: null,
 }
 
-const InwardRequestSlice: any = createSlice({
-    name: 'InwardRequest',
+const InventoryFlowSlice: any = createSlice({
+    name: 'inventoryFlow',
     initialState,
     reducers: {
         setItems: (
             state,
-            action: PayloadAction<InwardDealerRequstListResponse[] | []>
+            action: PayloadAction<BarcodeFlowListResponse[] | []>
         ) => {
             state.items = action.payload
         },
@@ -70,8 +71,14 @@ const InwardRequestSlice: any = createSlice({
         setIsTableLoading: (state, action: PayloadAction<boolean>) => {
             state.isTableLoading = action.payload
         },
-        setSelectedId: (state, action: PayloadAction<string>) => {
-            state.selectedId = action.payload
+        setSelectedDealerId: (state, action: PayloadAction<string>) => {
+            state.selectedDealerId = action.payload
+        },
+        setSelectedItems: (
+            state,
+            action: PayloadAction<BarcodeFlowListResponse | null>
+        ) => {
+            state.selectedItems = action.payload
         },
     },
 })
@@ -84,6 +91,7 @@ export const {
     setSortValue,
     setTotalItems,
     setIsTableLoading,
-    setSelectedId,
-} = InwardRequestSlice.actions
-export default InwardRequestSlice.reducer
+    setSelectedDealerId,
+    setSelectedItems,
+} = InventoryFlowSlice.actions
+export default InventoryFlowSlice.reducer

@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:InwardRequestSlice.ts
+// Filename:InwardDealerSlice.ts
 // Type: Slice Component
 // Last Updated: JULY 06, 2023
 // Project: TELIMART - Front End
@@ -8,12 +8,16 @@
 // |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-
-// |-- Internal Dependencies --|
+// import { WarehouseTransferListResponse } from '../../models/WarehouseTransfer.model'
 import { InwardDealerRequstListResponse } from 'src/models'
 
-export interface InwardRequestSliceStateType {
+// |-- Internal Dependencies --|
+// import { any } from 'src/models/WarehouseTransfer.model'
+
+export interface WarehouseTransferSliceStateType {
     items: InwardDealerRequstListResponse[] | []
+    allItems: any[] | []
+    selectedItem: any | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -23,8 +27,10 @@ export interface InwardRequestSliceStateType {
     selectedId: string
 }
 
-const initialState: InwardRequestSliceStateType = {
+const initialState: WarehouseTransferSliceStateType = {
     items: [],
+    allItems: [],
+    selectedItem: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -34,8 +40,8 @@ const initialState: InwardRequestSliceStateType = {
     selectedId: '',
 }
 
-const InwardRequestSlice: any = createSlice({
-    name: 'InwardRequest',
+export const InwardDealerSlice: any = createSlice({
+    name: 'inwardDealer',
     initialState,
     reducers: {
         setItems: (
@@ -73,6 +79,12 @@ const InwardRequestSlice: any = createSlice({
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
+        setAllItems: (state, action: PayloadAction<any[] | []>) => {
+            state.allItems = action.payload
+        },
+        setSelectedItem: (state, action: PayloadAction<any | null>) => {
+            state.selectedItem = action.payload
+        },
     },
 })
 
@@ -85,5 +97,7 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
-} = InwardRequestSlice.actions
-export default InwardRequestSlice.reducer
+    setAllItems,
+    setSelectedItem,
+} = InwardDealerSlice.actions
+export default InwardDealerSlice.reducer

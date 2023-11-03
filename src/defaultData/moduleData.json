@@ -84,20 +84,6 @@
                     "fields": []
                 },
                 {
-                    "actionId": "vendorWareHouseId",
-                    "actionUrl": "/vendors/:id/warehouse",
-                    "actionName": "VENDOR_WAREHOUSE",
-                    "parentGroup": ["VIEW"],
-                    "fields": []
-                },
-                {
-                    "actionId": "vendorWareHouseActionAddId",
-                    "actionUrl": "/vendors/:id/warehouse/add",
-                    "actionName": "VENDOR_WAREHOUSE_ADD",
-                    "parentGroup": ["VIEW", "VENDOR_WAREHOUSE"],
-                    "fields": []
-                },
-                {
                     "actionId": "vendorReturnToVendorId",
                     "actionUrl": "/vendors/:id/return-to-vendor",
                     "actionName": "RETURN_TO_VENDOR",
@@ -777,6 +763,96 @@
             ]
         },
         {
+            "moduleId": "rtvTransferOrderId",
+            "moduleName": "RTV_TRANSFER",
+            "moduleAction": [
+                {
+                    "actionId": "rtvTransferActionListId",
+                    "actionUrl": "/sale-order",
+                    "actionName": "LIST",
+                    "parentGroup": [],
+                    "fields": [
+                        {
+                            "fieldId": "rtvNo1",
+                            "fieldName": "RTV No",
+                            "fieldValue": "rtvNo"
+                        },
+                        {
+                            "fieldId": "items",
+                            "fieldName": "Items / Quantity",
+                            "fieldValue": "items"
+                        },
+                        {
+                            "fieldId": "rtvNo3",
+                            "fieldName": "First level Status",
+                            "fieldValue": "firstApproved"
+                        },
+                        {
+                            "fieldId": "rtvNo4",
+                            "fieldName": "Level first Approved By",
+                            "fieldValue": "firstApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "rtvNo5",
+                            "fieldName": "First Approved Date",
+                            "fieldValue": "firstApprovedAt"
+                        },
+                        {
+                            "fieldId": "rtvNo6",
+                            "fieldName": "Second Level Status",
+                            "fieldValue": "secondApproved"
+                        },
+                        {
+                            "fieldId": "rtvNo7",
+                            "fieldName": "Level Second Approved By",
+                            "fieldValue": "secondApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "rtvNo8",
+                            "fieldName": "Second Approved Date",
+                            "fieldValue": "secondApprovedAt"
+                        },
+                        {
+                            "fieldId": "rtvNo9",
+                            "fieldName": "Inserted Date",
+                            "fieldValue": "createdAt"
+                        },
+                        {
+                            "fieldId": "rtvNo10",
+                            "fieldName": "Updated Date",
+                            "fieldValue": "updatedAt"
+                        },
+                        {
+                            "fieldId": "rtvNo11",
+                            "fieldName": "Approval Level",
+                            "fieldValue": "Approved"
+                        }
+                    ]
+                },
+                {
+                    "actionId": "saleOrderActionAddId",
+                    "actionUrl": "/sale-order/add-sale-order",
+                    "actionName": "ADD",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "saleOrderActionEditId",
+                    "actionUrl": "/sale-order/edit-sale-order/:id",
+                    "actionName": "EDIT",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "saleOrderActionDeleteId",
+                    "actionUrl": "/sale-order/delete",
+                    "actionName": "DELETE",
+                    "parentGroup": [],
+                    "fields": []
+                }
+            ]
+        },
+        {
             "moduleId": "asrId",
             "moduleName": "ASR",
             "moduleAction": [
@@ -975,6 +1051,19 @@
                     "actionId": "grnActionDeleteId",
                     "actionUrl": "",
                     "actionName": "DELETE",
+                    "parentGroup": [],
+                    "fields": []
+                }
+            ]
+        },
+        {
+            "moduleId": "inventoryFlowId",
+            "moduleName": "INVENTORY_FLOW",
+            "moduleAction": [
+                {
+                    "actionId": "inventoryFlowListId",
+                    "actionUrl": "/inventory-flow",
+                    "actionName": "VIEW",
                     "parentGroup": [],
                     "fields": []
                 }

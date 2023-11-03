@@ -61,7 +61,7 @@ import {
     AddInitialCallOneWrapper,
     AddInitialCallThreeWrappper,
     AddInitialCallTwoWrapper,
-    AddInventoryManagementWrapper,
+    // AddInventoryManagementWrapper,
     AddItemWrapper,
     AddLanguageWrapper,
     AddProductCategoryWrapper,
@@ -145,7 +145,7 @@ import {
     EditInitialCallOneWrapper,
     EditInitialCallThreeWrapper,
     EditInitialCallTwoWrapper,
-    EditInventoryManagementWrapper,
+    // EditInventoryManagementWrapper,
     EditItemWrapper,
     EditLanguageWrapper,
     EditProductCategoryWrapper,
@@ -158,7 +158,7 @@ import {
     EditSlotManagementWrapper,
     EditTapeManagementWrapper,
     EditUserWrapper,
-    EditVendorWarehouseWrapper,
+    // EditVendorWarehouseWrapper,
     EditVendorWrapper,
     EditWarehouseWrapper,
     EditWebsiteBlogWrapper,
@@ -173,7 +173,7 @@ import {
     InquiryListingWrapper,
     InquiryViewWrapper,
     InventoryListingWrapper,
-    InventoryManagementListingWrapper,
+    // InventoryManagementListingWrapper,
     InwardInventoryWrapper,
     ItemListingWrapper,
     LanguageListingWrapper,
@@ -203,7 +203,7 @@ import {
     VendorGeneralInformationTabWrapper,
     VendorListLedgerTabWrapper,
     VendorPurchaseOrderTabWrapper,
-    VendorWarehouseTabWrapper,
+    // VendorWarehouseTabWrapper,
     VendorsListingWrapper,
     ViewBarcodeWrapper,
     ViewDealer,
@@ -260,6 +260,7 @@ import WarehouseToSampleListingWrapper from './pages/warehouseToSample/list/Ware
 import AddWarehouseToSampleWrapper from './pages/warehouseToSample/add/AddWarehouseToSampleWrapper'
 import EditWarehouseToSampleWrapper from './pages/warehouseToSample/edit/EditWarehouseToSampleWrapper'
 import VendorRtvListingWrapper from './pages/vendors/view/tabs/ReturnToVendorTab/list/VendorRtvListingWrapper'
+import InventoryFlowListingWrapper from './pages/inventoryFlow/list/InventoryFlowListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -386,7 +387,7 @@ const PageRoutes = () => {
                                 />
                             }
                         />
-                        <Route
+                        {/* <Route
                             path="warehouse"
                             element={
                                 <ActionAuthHOC
@@ -398,8 +399,8 @@ const PageRoutes = () => {
                                     isRedirect
                                 />
                             }
-                        />
-                        <Route
+                        /> */}
+                        {/* <Route
                             path="warehouse/add"
                             element={
                                 <ActionAuthHOC
@@ -411,8 +412,8 @@ const PageRoutes = () => {
                                     isRedirect
                                 />
                             }
-                        />
-                        <Route
+                        /> */}
+                        {/* <Route
                             path="warehouse/:id"
                             element={
                                 <ActionAuthHOC
@@ -422,7 +423,7 @@ const PageRoutes = () => {
                                     isRedirect
                                 />
                             }
-                        />
+                        /> */}
                         <Route
                             path="return-to-vendor"
                             element={
@@ -574,7 +575,7 @@ const PageRoutes = () => {
                             }
                         />
 
-                        {/* #########################################  should add sale order*/}
+                        {/* #######  should add sale order ####### */}
 
                         <Route
                             path="ledger"
@@ -1106,6 +1107,19 @@ const PageRoutes = () => {
                         />
                     </Route>
 
+                    {/* Inventory Flow */}
+                    <Route
+                        path="/inventory-flow"
+                        element={
+                            <ActionAuthHOC
+                                component={<InventoryFlowListingWrapper />}
+                                moduleName={UserModuleNameTypes.inventoryFlow}
+                                actionName={UserModuleActionTypes.View}
+                                isRedirect
+                            />
+                        }
+                    />
+
                     {/* Sale Order */}
                     <Route
                         path="/sale-order"
@@ -1139,6 +1153,44 @@ const PageRoutes = () => {
                         }
                     />
 
+                    {/* RETURN TO VENDOR */}
+                    <Route
+                        path="/return-to-vendor"
+                        element={
+                            <AuthHOC
+                                component={<RTVListingWrapper />}
+                                moduleName={UserModuleNameTypes.rtvTransfer}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/return-to-vendor/add"
+                        element={
+                            <ActionAuthHOC
+                                component={<AddRTVendorWrapper />}
+                                moduleName={UserModuleNameTypes.wareHouse}
+                                actionName={
+                                    UserModuleWarehouseTabsTypes.outwardInventoriesRTV
+                                }
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="/return-to-vendor/edit/:id"
+                        element={
+                            <ActionAuthHOC
+                                component={<EditRTVendorWrapper />}
+                                moduleName={UserModuleNameTypes.wareHouse}
+                                actionName={
+                                    UserModuleWarehouseTabsTypes.outwardInventoriesRTV
+                                }
+                                isRedirect
+                            />
+                        }
+                    />
+
+                    {/* Warehouse To Warehouse Transfere */}
                     <Route
                         path="/warehouse-transfer"
                         element={
@@ -1212,46 +1264,6 @@ const PageRoutes = () => {
                                     UserModuleNameTypes.warehouseToComapny
                                 }
                                 actionName={UserModuleActionTypes.Edit}
-                                isRedirect
-                            />
-                        }
-                    />
-                    {/* RETURN TO VENDOR */}
-                    <Route
-                        path="/return-to-vendor"
-                        element={
-                            <ActionAuthHOC
-                                component={<RTVListingWrapper />}
-                                moduleName={UserModuleNameTypes.wareHouse}
-                                actionName={
-                                    UserModuleWarehouseTabsTypes.outwardInventoriesRTV
-                                }
-                                isRedirect
-                            />
-                        }
-                    />
-                    <Route
-                        path="/return-to-vendor/add"
-                        element={
-                            <ActionAuthHOC
-                                component={<AddRTVendorWrapper />}
-                                moduleName={UserModuleNameTypes.wareHouse}
-                                actionName={
-                                    UserModuleWarehouseTabsTypes.outwardInventoriesRTV
-                                }
-                                isRedirect
-                            />
-                        }
-                    />
-                    <Route
-                        path="/return-to-vendor/edit/:id"
-                        element={
-                            <ActionAuthHOC
-                                component={<EditRTVendorWrapper />}
-                                moduleName={UserModuleNameTypes.wareHouse}
-                                actionName={
-                                    UserModuleWarehouseTabsTypes.outwardInventoriesRTV
-                                }
                                 isRedirect
                             />
                         }
@@ -2901,18 +2913,20 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                    <Route
-                        path="/inventory-management/add"
-                        element={<AddInventoryManagementWrapper />}
-                    />
-                    <Route
-                        path="/inventory-management/edit/:id"
-                        element={<EditInventoryManagementWrapper />}
-                    />
-                    <Route
+
+                    {/* INVENTORY MENAGEMENT */}
+                    {/* <Route
                         path="/inventory-management"
                         element={<InventoryManagementListingWrapper />}
-                    />
+                    /> */}
+                    {/* <Route
+                        path="/inventory-management/add"
+                        element={<AddInventoryManagementWrapper />}
+                    /> */}
+                    {/* <Route
+                        path="/inventory-management/edit/:id"
+                        element={<EditInventoryManagementWrapper />}
+                    /> */}
 
                     <Route path="/barcodes" element={<BarcodeGenerator />} />
 
