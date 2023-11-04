@@ -63,7 +63,6 @@ const UserAccessWrapper = () => {
     useEffect(() => {
         if (iueData?.data) {
             setIsUserIxists(iueData?.data)
-            console.log(iueData)
         }
     }, [iueData, iueIsLoading, iueIsFetching])
 
@@ -99,7 +98,6 @@ const UserAccessWrapper = () => {
                     setApiStatus(false)
                 })
             } else if (userId && isUserExists === true) {
-                console.log('UPDATE ', isUserExists, userId)
                 updateByUserId({
                     body: {
                         userId: userId,
